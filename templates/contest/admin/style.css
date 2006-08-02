@@ -1,0 +1,354 @@
+/* *****************************
+   MAIN Selectors 
+ * *****************************/
+
+body {
+    font-size: 10pt;
+    margin: 0;
+    background-color: #FFFFFF;
+    font-size: 10px;
+    font-family: luxi sans, trebuchet ms, bitstream vera sans, verdana, arial, helvetica, sans-serif;
+    direction: ltr;
+}
+
+a, input, textarea, p, td, th, div, span {
+    font-family: luxi sans, "Trebuchet ms", bitstream vera sans, verdana, arial, helvetica, sans-serif;
+}
+
+h4,h3 {
+    margin: 0;
+}
+
+a:link,
+a:visited,
+a:active {
+    color: #011a7c;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #011a7c;
+    text-decoration: underline;
+}
+
+td, th {
+    font-size: 0.8em;
+}
+
+input, select, textarea {
+    background: #f4f4f4;
+    font-family: Verdana;
+    font-size: 0.9em;
+    border: 1px solid #011a7c;
+}
+
+/* *****************************
+   GENERAL PAGE Selectors
+ * *****************************/
+
+#serendipity_admin_page {
+    text-align: center;
+}
+
+#serendipityAdminBodyImageSelector {
+    background: #FFF;
+    font-size: 10pt;
+}
+
+#serendipityAdminFrame {
+    text-align: left;
+    width: 100%;
+    margin: auto;
+    background: #FFF;
+    border: 0px;
+}
+
+
+#serendipityAdminMainpane {
+    background: #FFF;
+    border: 2px solid #0F3353;
+    border-top: inherit;
+    padding: 5px;
+}
+
+.serendipityAdminContent {
+    font-size: 0.8em;
+    padding: 10px 25px 20px 25px;
+    width: 80%;
+    z-index: 1;
+}
+
+#serendipityAdminFooter {
+    font-size: 0.7em;
+    text-align: center;
+    color: #FFF;
+}
+
+/* *****************************
+   HEADER Selectors 
+ * *****************************/
+
+#serendipityAdminBanner {
+    height: 145px;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    background-image: url({TEMPLATE_PATH}img/header_logo.png);
+    background-repeat: no-repeat;
+    width: 770px;
+}
+
+#serendipityAdminFrame {
+    background-image: url({TEMPLATE_PATH}img/header_bar.png);
+    background-repeat: repeat-x;
+    background-color: white;
+}
+
+#serendipityAdminBanner h1 {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding: 78px 0px 0px 131px;
+    font-size: 2.4em;
+    letter-spacing: 0.05em;
+    margin: 0px;
+    overflow: hidden;
+    color: #011b7c;
+    z-index: 0;
+}
+
+#serendipityAdminBanner h2 {
+    position: absolute;
+    top: 108px;
+    left: 131px;
+    font-size: 1.3em;
+    margin: 0px;
+    letter-spacing: 0.03em;
+    color: #011b7c;
+}
+
+#serendipityAdminInfopane {
+    font-size: 10px;
+    padding: 5px;
+    vertical-align: middle;
+    text-align: right;
+    color: #011b7c;
+    height: 27px;
+}
+
+
+/* *****************************
+   MENU Selectors 
+ * *****************************/
+
+#serendipitySideBar {
+}
+
+#serendipitySideBar br {
+    display: none;
+}
+
+ul.serendipitySideBarMenu {
+    padding: 0px 0px 2px 0px;
+    margin: 0px 0px 5px 22px;
+    display: block;
+    width: 190px;
+    list-style: none;
+}
+
+ul.serendipitySideBarMenu li {
+    display: block;
+    list-style: none;
+    font-size: x-small;
+}
+
+ul.serendipitySideBarMenu {
+    background-color: #ffffff;
+}
+
+ul.serendipitySideBarMenu li.serendipitySideBarMenuHead {
+    background-color: #011c7e;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 5px 0px 0px 5px;
+    background: url({TEMPLATE_PATH}img/sidebar_left.jpg) no-repeat;
+    border: 1px solid #011a7c;
+    height: 20px;
+    font-size: 0.9em;
+    margin: 0px 0px 5px 0px;
+    
+}
+
+ul.serendipitySideBarMenu li {
+    display: block;
+    border: 0px;
+    border-left: 1px solid #011c7e;
+    border-bottom: 1px solid #011c7e;
+    margin: 0px 5px 5px 5px;
+    background-color: #ffffff;
+}
+
+ul.serendipitySideBarMenu li a {
+    padding-left: 5px;
+    text-decoration: none;
+    display: block;
+}
+
+ul.serendipitySideBarMenu li a:hover {
+    background-color: #011c7e;
+    color: white;
+    background: url({TEMPLATE_PATH}img/sidebar_left.jpg) no-repeat;
+}
+
+
+/* *****************************
+   OTHER Selectors 
+ * *****************************/
+
+.serendipity_admin_title {
+    font-size: 2em;
+    margin-bottom: 5px;
+}
+
+.serendipity_admin_list_item.serendipity_admin_list_item_uneven {
+    border: 1px solid #294366;
+    background: #F8F9FA;
+    margin-bottom: 5px;
+}
+
+.serendipity_admin_list_item.serendipity_admin_list_item_even {
+    border: 1px solid #294366;
+    background: #F2F3F2;
+    margin: 0 0 5px 0;
+}
+
+.serendipityAdminMsgError {
+    color: #F00;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.serendipityAdminMsgSuccess {
+    color: #0B0;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.serendipityAdminMsgNote {
+    background: #FFFF9D;
+    border: 1px solid #F70;
+    padding: 3px;
+    text-align: center;
+    margin: 10px;
+}
+
+#serendipity_iframe {
+    border: 1px solid #294366;
+    text-align: center;
+    margin: auto;
+}
+
+.serendipityImageButton {
+    cursor: pointer;
+}
+
+a:link.serendipityIconLink,
+a:visited.serendipityIconLink {
+    border: 0;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 4px;
+}
+
+.serendipityIconLink img {
+    margin-right: 2px;
+    vertical-align: bottom;
+    border: 0;
+}
+
+a:link.serendipityIconLinkRight,
+a:visited.serendipityIconLinkRight {
+    border: 0;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 4px;
+}
+.serendipityIconLinkRight img {
+    margin-left: 2px;
+    vertical-align: bottom;
+    border: 0;
+}
+
+a:link.serendipityPrettyButton,
+a:visited.serendipityPrettyButton,
+a:hover.serendipityPrettyButton {
+    text-decoration: none;
+    color: white;
+}
+
+.serendipityPrettyButton {
+    padding: 1px;
+    background: url({TEMPLATE_PATH}img/button_background.png) repeat-x top;
+    background-color: #011b7c;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 0.9em;
+    border: 1px outset #000;
+    margin: 2px;
+}
+
+a.serendipityPrettyButton {
+    padding: 2px 4px 2px 4px;
+    cursor: default;
+}
+
+
+.direction_ltr {
+    direction: ltr;
+}
+
+.direction_rtl {
+    direction: rtl;
+}
+
+.serendipity_pluginlist_header {
+    height: 30px; 
+    background-color: white; 
+    color: black; 
+    vertical-align: middle; 
+    padding: 10px 0px 5px 10px;
+}
+
+.serendipity_pluginlist_section {
+    height: 50px; 
+    border: 1px solid black; 
+    background-color: #E0E0E0; 
+    color: black; 
+    vertical-align: middle; 
+    padding: 10px 0px 5px 10px;
+}
+
+table#serendipity_customfields {
+    width: 100%;
+}
+
+table#serendipity_customfields .customfield_name {
+    background-color: #FAFAFA;
+    width: 25%;
+    padding-left: 5px;
+}
+
+table#serendipity_customfields .customfield_value {
+    background-color: #FFFFFF;
+    width: 75%;
+}
+
+table#serendipity_customfields .customfield_value textarea {
+    width: 100%;
+    height: 100px;
+}
+
+

@@ -1,0 +1,29 @@
+<?php # $Id$
+
+/**
+ *  @version $Revision$
+ *  @author Translator Name <yourmail@example.com>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
+
+@define('PLUGIN_REMOTERSS_TITLE', 'Remote RSS/OPML-Blogroll Feed');
+@define('PLUGIN_REMOTERSS_BLAHBLAH', 'Show items of a remote RSS/OPML feed (e.g. Blogroll)');
+@define('PLUGIN_REMOTERSS_NUMBER', 'Number of entries');
+@define('PLUGIN_REMOTERSS_NUMBER_BLAHBLAH', 'How many entries should be displayed? (Default: every entry of the feed)');
+@define('PLUGIN_REMOTERSS_SIDEBARTITLE', 'Feed-Title');
+@define('PLUGIN_REMOTERSS_SIDEBARTITLE_BLAHBLAH', 'Title of the feed in the blog sidebar');
+@define('PLUGIN_REMOTERSS_RSSURI', 'RSS/OPML URI');
+@define('PLUGIN_REMOTERSS_RSSURI_BLAHBLAH', 'URI of the RSS/OPML feed which you want to display');
+@define('PLUGIN_REMOTERSS_NOURI', 'No RSS/OPML feed selected');
+@define('PLUGIN_REMOTERSS_RSSTARGET', 'RSS/OPML linktarget');
+@define('PLUGIN_REMOTERSS_RSSTARGET_BLAHBLAH', 'Target of the link to one of the displayed RSS items (Default: _blank)');
+@define('PLUGIN_REMOTERSS_CACHETIME', 'When to update the feed?');
+@define('PLUGIN_REMOTERSS_CACHETIME_BLAHBLAH', 'The contents of a feed are stored in a cache which will be updated as soon as its older than X seconds (Default: 3 hours)');
+@define('PLUGIN_REMOTERSS_FEEDTYPE', 'Feedtype');
+@define('PLUGIN_REMOTERSS_FEEDTYPE_BLAHBLAH', 'Choose the format of the remote Feed');
+@define('PLUGIN_REMOTERSS_BULLETIMG', 'Bullet Image');
+@define('PLUGIN_REMOTERSS_BULLETIMG_BLAHBLAH', 'Image to display before each headline.');
+@define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Display Date');
+@define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Display the date below the headline?');
+
+?>

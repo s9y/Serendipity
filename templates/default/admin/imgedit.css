@@ -1,0 +1,173 @@
+#zoomslider {
+    position: relative;
+    display: block;
+    width: 10px;    /* If you change the width of this, also change the JavaScript variable "slider_width"!!! */
+    height: 100px;
+    border: 1px solid yellow;
+    background-color: yellow;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#zoombutton {
+    position: absolute;
+    display: inline;
+    background-color: red;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    cursor: move;
+    z-index: 4;
+    visibility: hidden;
+}
+
+.smallcaps {
+    font-family: Verdana;
+    font-size: 7pt;
+    color: white;
+}
+
+.nospace {
+    margin: 0px;
+    padding: 0px;
+}
+
+.button {
+    border: 1px solid gray;
+    font-family: Verdana;
+    font-size: 7pt;
+    color: white;
+    background-color: #303030;
+    padding: 3px;
+}
+
+.specialbutton {
+    border: 1px solid gray;
+    font-family: Verdana;
+    font-size: 8pt;
+    color: white;
+    background-color: red;
+    padding: 3px;
+
+    margin: 5px;
+}
+
+.small {
+    width: 25px;
+    margin-top: 5px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.center span {
+    position: relative;
+    top: -5px;
+}
+
+#imgedit {
+    position: absolute;
+    left: 10px;
+    top: 25px;
+    margin: 15px;
+    padding: 5px;
+}
+
+#outer {
+    display: block;
+    position: absolute;
+    z-index: 1;
+}
+
+#backdrop {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=55);
+    -moz-opacity: 0.55;
+}
+
+#overlay {
+    position: absolute;
+    display: block;
+    z-index: 3;
+    cursor: move;
+    overflow: hidden;
+}
+
+#harea {
+    position: absolute;
+    display: block;
+    z-index: 4;
+}
+
+#varea {
+    position: absolute;
+    display: block;
+    z-index: 4;
+}
+
+#zoom {
+    display: block;
+    float: left;
+    height: 140px;
+    border: 1px solid red;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    position: absolute;
+}
+
+#scaletext {
+    display: inline;
+}
+
+
+#cropimage {
+    overflow:                    hidden;
+    display:                     block;
+    position:                    absolute;
+    top:                         1px;
+}
+
+.info {
+    display:                     block;
+    position:                    relative;
+    border:                      1px solid black;
+    color:                       black;
+    background-color:            #A0A0A0;
+    margin:                      20px;
+    padding:                     10px;
+}
+
+legend {
+    background-color:            #A0A0A0;
+    font-family:                 Verdana;
+    font-size:                   12pt;
+    font-weight:                 bold;
+    -moz-border-radius-topleft:  10px;
+    -moz-border-radius-topright: 10px;
+    border-left:                 1px solid black;
+    border-right:                1px solid black;
+    padding:                     3px;
+    color:                       white;
+}
+
+.error {
+    color:                       red;
+}
+
+code {
+    color:                       white;
+    font-size:                   8pt;
+}
+

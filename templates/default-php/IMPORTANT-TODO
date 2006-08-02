@@ -1,0 +1,19 @@
+CONVERTED FILES:
+
+100% index.tpl
+100% content.tpl
+100% entries.tpl
+100% plugin_calendar.tpl
+100% sidebar.tpl
+
+UNFINISHED:
+
+plugin_categories.tpl
+preview_iframe.tpl
+entries_summary.tpl
+entries_archives.tpl
+comments.tpl
+commentpopup.tpl
+commentform.tpl
+trackbacks.tpl
+feed*.tpl

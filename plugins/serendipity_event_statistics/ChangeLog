@@ -1,0 +1,12 @@
+Version 1.40:
+-------------
+
+(By Shrikee / Arnan)
+
+- added a database table which holds daily stats.
+- 2 graphs which use the data in the above table
+- rewrote the bots filter
+- added a config option to show only visitor stats or show everything (post counts and such)
+- option to enable or disable the bot filter
+- fixed the referer register. They werent added in the database, now they are
+- if either $useragent, $referer or $remote_addr is empty or unknown its set to unknown.

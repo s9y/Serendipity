@@ -1,0 +1,12 @@
+<?php # $Id$
+
+/**
+ *  @version $Revision$
+ *  @author Ivan Cenov jwalker@abv.bg
+ *  EN-Revision: 690
+ */
+
+@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'Creative Commons');
+@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'ѕоказва извест€ване от creative commons в странични€ панел.');
+
+?>

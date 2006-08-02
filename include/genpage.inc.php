@@ -1,0 +1,118 @@
+<?php # $Id$
+# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
+# All rights reserved.  See LICENSE file for licensing details
+
+if (!defined('S9Y_FRAMEWORK')) {
+    include('serendipity_config.inc.php');
+}
+
+if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
+    include(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
+}
+
+if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
+    include(S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php');
+}
+
+$uri_addData = array(
+    'startpage' => false,
+    'uriargs'   => implode('/', serendipity_getUriArguments($uri, true)),
+    'view'      => $serendipity['view']
+);
+if ((empty($uri_addData['uriargs']) || trim($uri_addData['uriargs']) == $serendipity['indexFile']) && empty($serendipity['GET']['subpage'])) {
+    $uri_addData['startpage'] = true;
+}
+
+$serendipity['plugindata']['smartyvars'] = $uri_addData; // Plugins can change this global variable
+serendipity_plugin_api::hook_event('genpage', $uri, $uri_addData);
+serendipity_smarty_init($serendipity['plugindata']['smartyvars']);
+
+$leftSidebarElements  = serendipity_plugin_api::count_plugins('left');
+$rightSidebarElements = serendipity_plugin_api::count_plugins('right');
+$serendipity['smarty']->assign_by_ref('leftSidebarElements', $leftSidebarElements);
+$serendipity['smarty']->assign_by_ref('rightSidebarElements', $rightSidebarElements);
+
+if ($serendipity['smarty_raw_mode']) {
+    /* For BC reasons, we have to ask for layout.php */
+    @include(serendipity_getTemplateFile('layout.php', 'serendipityPath'));
+} else {
+    switch ($serendipity['GET']['action']) {
+        // User wants to read the diary
+        case 'read':
+            if (isset($serendipity['GET']['id'])) {
+                $entry = array(serendipity_fetchEntry('id', $serendipity['GET']['id']));
+                if (!is_array($entry) || count($entry) < 1) {
+                    unset($serendipity['GET']['id']);
+                    $entry = array(array());
+                }
+
+                serendipity_printEntries($entry, 1);
+            } else {
+                serendipity_printEntries(serendipity_fetchEntries($serendipity['range'], true, $serendipity['fetchLimit']));
+            }
+            break;
+
+        // User searches
+        case 'search':
+            $r = serendipity_searchEntries($serendipity['GET']['searchTerm']);
+            if (strlen($serendipity['GET']['searchTerm']) <= 3) {
+                $serendipity['smarty']->assign(
+                    array(
+                        'content_message'       => SEARCH_TOO_SHORT,
+                        'searchresult_tooShort' => true
+                    )
+                );
+                break;
+            }
+
+            if (is_string($r) && $r !== true) {
+                $serendipity['smarty']->assign(
+                    array(
+                        'content_message'    => sprintf(SEARCH_ERROR, $serendipity['dbPrefix'], $r),
+                        'searchresult_error' => true
+                    )
+                );
+                break;
+            } elseif ($r === true) {
+                $serendipity['smarty']->assign(
+                    array(
+                        'content_message'        => sprintf(NO_ENTRIES_BLAHBLAH, '<span class="searchterm">' . $serendipity['GET']['searchTerm'] . '</span>'),
+                        'searchresult_noEntries' => true
+                    )
+                );
+                break;
+            }
+
+            $serendipity['smarty']->assign(
+                array(
+                    'content_message'      => sprintf(YOUR_SEARCH_RETURNED_BLAHBLAH, '<span class="searchterm">' . $serendipity['GET']['searchTerm'] . '</span>', '<span class="searchresults">' . serendipity_getTotalEntries() . '</span>'),
+                    'searchresult_results' => true
+                )
+            );
+
+            serendipity_printEntries($r);
+            break;
+
+        // Show the comments
+        case 'comments':
+            serendipity_printCommentsByAuthor();
+            // use 'content_message' for pagination?
+            
+            break;
+
+        // Show the archive
+        case 'archives':
+            serendipity_printArchives();
+            break;
+
+        // Welcome screen or whatever
+        default:
+            serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
+            break;
+    }
+
+    serendipity_smarty_fetch('CONTENT', 'content.tpl');
+    $serendipity['smarty']->assign('ENTRIES', '');
+}
+
+/* vim: set sts=4 ts=4 expandtab : */
