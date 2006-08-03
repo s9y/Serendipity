@@ -37,7 +37,7 @@ function serendipity_deleteCategory($category_range, $admin_category) {
 function serendipity_fetchCategoryRange($categoryid) {
     global $serendipity;
 
-    $res = serendipity_db_query("SELECT category_left, category_right FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
+    $res =& serendipity_db_query("SELECT category_left, category_right FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
     if (!is_array($res) || !isset($res[0]['category_left']) || !isset($res[0]['category_right'])) {
         $res = array(array('category_left' => 0, 'category_right' => 0));
     }
@@ -94,7 +94,7 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE category_name = '" . serendipity_db_escape_string($categoryname) . "'";
 
-        $ret = serendipity_db_query($query);
+        $ret =& serendipity_db_query($query);
         return $ret[0];
     } else {
         $query = "SELECT
@@ -107,7 +107,7 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE categoryid = " . (int)$categoryid;
 
-        $ret = serendipity_db_query($query);
+        $ret =& serendipity_db_query($query);
         return $ret[0];
     }
 }
@@ -119,7 +119,7 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
  * @param   int     The ID of the entry
  * @return  array   The array of associated categories to that entry
  */
-function serendipity_fetchEntryCategories($entryid) {
+function &serendipity_fetchEntryCategories($entryid) {
   global $serendipity;
 
     if (is_numeric($entryid)) {
@@ -134,9 +134,10 @@ function serendipity_fetchEntryCategories($entryid) {
                       ON ec.categoryid = c.categoryid
                    WHERE ec.entryid = {$entryid}";
 
-        $cat = serendipity_db_query($query);
+        $cat =& serendipity_db_query($query);
         if (!is_array($cat)) {
-            return array();
+            $arr = array();
+            return $arr;
         } else {
             return $cat;
         }
@@ -189,7 +190,7 @@ function serendipity_fetchEntryCategories($entryid) {
  * @param   string      If set to "array", the array of entries will be returned. "flat-array" will only return the articles without their entryproperties. "single" will only return a 1-dimensional array. "query" will only return the used SQL.
  * @return  array       Holds the super-array of all entries with all additional information
  */
-function serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array') {
+function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array') {
     global $serendipity;
 
     $cond = array();
@@ -382,7 +383,7 @@ function serendipity_fetchEntries($range = null, $full = true, $limit = '', $fet
         return $query;
     }
 
-    $ret = serendipity_db_query($query, $fetch_single, 'assoc');
+    $ret =& serendipity_db_query($query, $fetch_single, 'assoc');
 
     if (is_string($ret)) {
         die("Query failed: $ret");
@@ -438,7 +439,7 @@ function serendipity_fetchEntryData(&$ret) {
                   ON ec.categoryid = c.categoryid
                WHERE " . serendipity_db_in_sql('ec.entryid', $search_ids);
 
-    $search_ret = serendipity_db_query($query, false, 'assoc');
+    $search_ret =& serendipity_db_query($query, false, 'assoc');
 
     if (is_array($search_ret)) {
         foreach($search_ret AS $i => $entry) {
@@ -457,7 +458,7 @@ function serendipity_fetchEntryData(&$ret) {
  * @param   string      Indicates whether drafts should be fetched
  * @return
  */
-function serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false') {
+function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false') {
     global $serendipity;
 
     $cond = array();
@@ -501,11 +502,11 @@ function serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false'
                             {$cond['and']}
                      LIMIT  1";
 
-    $ret = serendipity_db_query($querystring, true, 'assoc');
+    $ret =& serendipity_db_query($querystring, true, 'assoc');
 
     if (is_array($ret)) {
-        $ret['categories'] = serendipity_fetchEntryCategories($ret['id']);
-        $ret['properties'] = serendipity_fetchEntryProperties($ret['id']);
+        $ret['categories'] =& serendipity_fetchEntryCategories($ret['id']);
+        $ret['properties'] =& serendipity_fetchEntryProperties($ret['id']);
     }
 
     return $ret;
@@ -518,20 +519,22 @@ function serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false'
  * @param   int     The ID of the entry to fetch additonal data for
  * @return  array   The array of given properties to an entry
  */
-function serendipity_fetchEntryProperties($id) {
+function &serendipity_fetchEntryProperties($id) {
     global $serendipity;
 
     $parts = array();
     serendipity_plugin_api::hook_event('frontend_entryproperties_query', $parts);
 
-    $properties = serendipity_db_query("SELECT property, value FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$id . " " . $parts['and']);
-    if (!is_array($properties)) {
+    $_properties =& serendipity_db_query("SELECT property, value FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$id . " " . $parts['and']);
+    if (!is_array($_properties)) {
         $properties = array();
+    } else {
+        $properties =& $_properties;
     }
 
     $property = array();
     foreach($properties AS $idx => $row) {
-        $property[$row['property']] = $row['value'];
+        $property[$row['property']] =& $row['value'];
     }
 
     return $property;
@@ -547,7 +550,7 @@ function serendipity_fetchEntryProperties($id) {
  * @param   string  The ACL artifact condition. If set to "write" only categories will be shown that the author can write to. If set to "read", only categories will be show that the author can read or write to.
  * @return  array   Returns the array of categories
  */
-function serendipity_fetchCategories($authorid = null, $name = null, $order = null, $artifact_mode = 'write') {
+function &serendipity_fetchCategories($authorid = null, $name = null, $order = null, $artifact_mode = 'write') {
     global $serendipity;
 
     if ($name === null) {
@@ -631,7 +634,7 @@ function serendipity_fetchCategories($authorid = null, $name = null, $order = nu
         $querystring .= "\n ORDER BY $order";
     }
 
-    $ret = serendipity_db_query($querystring);
+    $ret =& serendipity_db_query($querystring);
     if (is_string($ret)) {
         echo "Query failed: $ret";
     }
@@ -673,7 +676,7 @@ function serendipity_rebuildCategoryTree($parent = 0, $left = 0) {
  * @param   int         Restrict the number of results [also uses $serendipity['GET']['page'] for pagination]
  * @return  array       Returns the superarray of entries found
  */
-function serendipity_searchEntries($term, $limit = '') {
+function &serendipity_searchEntries($term, $limit = '') {
     global $serendipity;
 
     if ($limit == '') {
@@ -746,7 +749,7 @@ function serendipity_searchEntries($term, $limit = '') {
                   ORDER BY  timestamp DESC
                     $limit";
 
-    $search = serendipity_db_query($querystring);
+    $search =& serendipity_db_query($querystring);
 
     if (is_array($search)) {
         serendipity_fetchEntryData($search);
@@ -823,7 +826,7 @@ function serendipity_getTotalEntries() {
         $querystring  = "SELECT count(distinct e.id) {$serendipity['fullCountQuery']}";
     }
 
-    $query = serendipity_db_query($querystring);
+    $query =& serendipity_db_query($querystring);
 
     if (is_array($query) && isset($query[0])) {
         if ($serendipity['dbType'] == 'sqlite') {
@@ -872,6 +875,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             return; // no display of this item
         }
     }
+
 
     // We shouldn't return here, because we want Smarty to handle the output
     if (!is_array($entries) || $entries[0] == false || !isset($entries[0]['timestamp'])) {
@@ -1013,7 +1017,6 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 );
 
                 $serendipity['smarty']->assign($comment_add_data);
-
                 serendipity_displayCommentForm(
                     $entry['id'],
                     $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?url=' . $entry['commURL'],
@@ -1434,7 +1437,7 @@ function serendipity_printArchives() {
                     break;
             }
 
-            $entries = serendipity_db_query("SELECT count(id)
+            $entries =& serendipity_db_query("SELECT count(id)
                                                FROM {$serendipity['dbPrefix']}entries e
                                           LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
                                                  ON e.id = ec.entryid
