@@ -22,7 +22,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking/Tadashi Jokagi/Judebert');
-        $propbag->add('version',       '1.9');
+        $propbag->add('version',       '1.10');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -121,9 +121,9 @@ class serendipity_plugin_comments extends serendipity_plugin
         }
 
         $viewtype = '';
-        if ($this->get_config('viewtype') == 'comments') {
+        if ($this->get_config('viewmode') == 'comments') {
             $viewtype .= ' AND c.type = \'NORMAL\'';
-        } elseif ($this->get_config('viewtype') == 'trackbacks') {
+        } elseif ($this->get_config('viewmode') == 'trackbacks') {
             $viewtype .= ' AND c.type = \'TRACKBACK\'';
         }
 
