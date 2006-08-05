@@ -1380,7 +1380,9 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 		}
 		unset($aResultSet[$sKey]);
 	}
-	//sort($paths);
+
+    usort($paths, 'serendipity_sortPath');
+
 	if ($debug) echo "<p>Got files: <pre>" . print_r($aFilesOnDisk, true) . "</pre></p>";
 	$serendipity['current_image_hash'] = md5(serialize($aFilesOnDisk));
 
@@ -1712,6 +1714,18 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     }
 
     return $files;
+}
+
+/**
+ * Custom usort() function that properly sorts a path
+ *
+ * @access public
+ * @param   array      First array
+ * @param   array      Second array
+ * @return
+ */
+function serendipity_sortPath($a, $b) {
+    return strcasecmp($a['relpath'], $b['relpath']);
 }
 
 /**
@@ -2139,7 +2153,7 @@ function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_ed
         'keywords'          => $keywords,
         'dprops'            => $dprops
     );
-    
+
     return serendipity_showMedia(
         $show,
         $mirror,
@@ -2407,12 +2421,12 @@ function serendipity_parsePropertyForm() {
             'authorid' => $serendipity['authorid']
         );
         serendipity_insertMediaProperty('base_hidden', '', $media['image_id'], $s9y_img['hidden']);
-        
+
         if ($serendipity['POST']['oldDir'][$id] != $serendipity['POST']['newDir'][$id]) {
             serendipity_moveMediaDirectory(
-                serendipity_uploadSecure($serendipity['POST']['oldDir'][$id]), 
-                serendipity_uploadSecure($serendipity['POST']['newDir'][$id]), 
-                'filedir', 
+                serendipity_uploadSecure($serendipity['POST']['oldDir'][$id]),
+                serendipity_uploadSecure($serendipity['POST']['newDir'][$id]),
+                'filedir',
                 $media['image_id']);
         }
     }
@@ -3057,7 +3071,7 @@ function serendipity_checkMediaSize($file) {
  * @param  string   The new directory
  * @param  string   The type of what to remove (dir|file|filedir)
  * @param  string   An item id of a file
- * @return boolean  
+ * @return boolean
  *
  */
 function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_id = null, $file = null) {
@@ -3071,42 +3085,42 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             printf(ERROR_FILE_NOT_EXISTS . '<br />', $oldDir);
             return false;
         }
-    
+
         if (is_dir($real_newDir)) {
             printf(ERROR_FILE_EXISTS . '<br />', $newDir);
             return false;
         }
-    
+
         if (!rename($real_oldDir, $real_newDir)) {
             printf(MEDIA_DIRECTORY_MOVE_ERROR . '<br />', $newDir);
             return false;
         }
-    
+
         printf(MEDIA_DIRECTORY_MOVED . '<br />', $newDir);
-    
-        $dirs = serendipity_db_query("SELECT id, path 
-                                        FROM {$serendipity['dbPrefix']}images 
+
+        $dirs = serendipity_db_query("SELECT id, path
+                                        FROM {$serendipity['dbPrefix']}images
                                        WHERE path LIKE '" . serendipity_db_escape_string($oldDir) . "%'", false, 'assoc');
         if (is_array($dirs)) {
             foreach($dirs AS $dir) {
                 $old = $dir['path'];
                 $new = preg_replace('@^(' . preg_quote($oldDir) . ')@i', $newDir, $old);
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images 
-                                         SET path = '" . serendipity_db_escape_string($new) . "' 
+                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
+                                         SET path = '" . serendipity_db_escape_string($new) . "'
                                        WHERE id = {$dir['id']}");
             }
         }
-    
+
         $dirs = serendipity_db_query("SELECT groupid, artifact_id, artifact_type, artifact_mode, artifact_index
-                                        FROM {$serendipity['dbPrefix']}access 
-                                       WHERE artifact_type = 'directory' 
+                                        FROM {$serendipity['dbPrefix']}access
+                                       WHERE artifact_type = 'directory'
                                          AND artifact_index LIKE '" . serendipity_db_escape_string($oldDir) . "%'", false, 'assoc');
         if (is_array($dirs)) {
             foreach($dirs AS $dir) {
                 $old = $dir['artifact_index'];
                 $new = preg_replace('@^(' . preg_quote($oldDir) . ')@i', $newDir, $old);
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}access 
-                                         SET artifact_index = '" . serendipity_db_escape_string($new) . "' 
+                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}access
+                                         SET artifact_index = '" . serendipity_db_escape_string($new) . "'
                                        WHERE groupid        = '" . serendipity_db_escape_string($dir['groupid']) . "'
                                          AND artifact_id    = '" . serendipity_db_escape_string($dir['artifact_id']) . "'
                                          AND artifact_type  = '" . serendipity_db_escape_string($dir['artifact_type']) . "'
@@ -3115,7 +3129,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             }
         }
     }
-    
+
     if ($type == 'file') {
         if (serendipity_isActiveFile(basename($newDir))) {
             printf(ERROR_FILE_FORBIDDEN, htmlspecialchars($newDir));
@@ -3170,10 +3184,10 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     }
 
     if ($type == 'filedir') {
-        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images 
+        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
                                  SET path = '" . serendipity_db_escape_string($newDir) . "'
                                WHERE id   = " . (int)$item_id);
-        $pick = serendipity_db_query("SELECT * FROM  {$serendipity['dbPrefix']}images 
+        $pick = serendipity_db_query("SELECT * FROM  {$serendipity['dbPrefix']}images
                                WHERE id   = " . (int)$item_id, true, 'assoc');
 
         // Move thumbs
@@ -3209,18 +3223,18 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     }
 
     $q = "SELECT id, body, extended
-            FROM {$serendipity['dbPrefix']}entries 
+            FROM {$serendipity['dbPrefix']}entries
            WHERE body     REGEXP '(src|href)=(\'|\")" . serendipity_db_escape_string($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . "'
               OR extended REGEXP '(src|href)=(\'|\")" . serendipity_db_escape_string($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . "'
     ";
-    
+
     $dirs = serendipity_db_query($q);
     if (is_array($dirs)) {
         foreach($dirs AS $dir) {
             $dir['body']     = preg_replace('@(src|href)=(\'|")' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . '@', '\1=\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDir, $dir['body']);
             $dir['extended'] = preg_replace('@(src|href)=(\'|")' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . '@', '\1=\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDir, $dir['extended']);
 
-            $uq = "UPDATE {$serendipity['dbPrefix']}entries 
+            $uq = "UPDATE {$serendipity['dbPrefix']}entries
                                      SET body     = '" . serendipity_db_escape_string($dir['body']) . "' ,
                                          extended = '" . serendipity_db_escape_string($dir['extended']) . "'
                                    WHERE id       = " . serendipity_db_escape_string($dir['id']);
@@ -3229,19 +3243,19 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         printf(MEDIA_DIRECTORY_MOVE_ENTRIES . '<br />', count($dirs));
     }
-    
+
     return true;
 }
 
 /**
  * Gets all available media directories
  *
- * @return array 
+ * @return array
  *
  */
 function &serendipity_getMediaPaths() {
     global $serendipity;
-    
+
 	$aExclude = array("CVS" => true, ".svn" => true);
 	serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
 	$paths        = array();
@@ -3264,5 +3278,8 @@ function &serendipity_getMediaPaths() {
 		unset($aResultSet[$sKey]);
 	}
     serendipity_directoryACL($paths, 'read');
+
+    usort($paths, 'serendipity_sortPath');
+
     return $paths;
 }
