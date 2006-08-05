@@ -81,7 +81,7 @@ switch ($_GET['type']) {
 case 'comments_and_trackbacks':
 case 'trackbacks':
 case 'comments':
-    $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, $serendipity['RSSfetchLimit'], 'desc', $_GET['type']);
+    $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, $serendipity['RSSfetchLimit'], 'desc', false, $_GET['type']);
     $description = $title . ' - ' . $description;
     if (isset($_GET['cid'])) {
         $title       = $title . ' - ' . COMMENTS_FROM . ' "' . $latest_entry[0]['title'] . '"';
