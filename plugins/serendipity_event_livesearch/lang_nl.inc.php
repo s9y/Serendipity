@@ -7,5 +7,5 @@
  */
     
 @define('PLUGIN_EVENT_LIVESEARCH_NAME', 'Livezoeken');
-@define('PLUGIN_EVENT_LIVESEARCH_DESC', 'Veranderd de zoekfunctie door te zoeken zodra er getypt word (Javascript)');
-@define('PLUGIN_EVENT_LIVESEARCH_WAIT', 'Wacht AUB, bezig met verzenden....');
+@define('PLUGIN_EVENT_LIVESEARCH_DESC', 'Verandert de zoekfunctie door te zoeken zodra er getypt word (Javascript)');
+@define('PLUGIN_EVENT_LIVESEARCH_WAIT', 'Wacht aub, bezig met verzenden....');
