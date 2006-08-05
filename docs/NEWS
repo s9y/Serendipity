@@ -241,6 +241,9 @@ Version 1.1-alpha5()
 Version 1.0.1 ()
 ------------------------------------------------------------------------
 
+   * Fix utf8 iconv conversion failing on some older PHP setups.
+     Thanks to Matthias Leisi!
+
    * Fix multi-authors view only showing first author (garvinhicking)
 
    * Fix bug sending comment-notification mails to subscribed users 

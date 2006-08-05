@@ -537,7 +537,12 @@ function serendipity_fetchReferences($id) {
 function serendipity_utf8_encode($string) {
     if (strtolower(LANG_CHARSET) != 'utf-8') {
         if (function_exists('iconv')) {
-            return iconv(LANG_CHARSET, 'UTF-8', $string);
+            $new = iconv(LANG_CHARSET, 'UTF-8', $string);
+            if ($new !== false) {
+                return $new;
+            } else {
+                return utf8_encode($string);
+            }
         } else if (function_exists('mb_convert_encoding')) {
             return mb_convert_encoding($string, 'UTF-8', LANG_CHARSET);
         } else {
