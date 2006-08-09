@@ -422,7 +422,7 @@
 @define('USERCONF_PASSWORD', 'パスワード');
 @define('USERCONF_PASSWORD_DESC', 'ブログにログインするときに使うパスワードを指定します。');
 @define('USERCONF_EMAIL', '電子メールアドレス');
-@define('USERCONF_EMAIL_DESC', '個人の電子メールアドレスをしていします。');
+@define('USERCONF_EMAIL_DESC', '個人の電子メールアドレスを指定します。');
 @define('USERCONF_SENDCOMMENTS', 'コメントの通知を送信しますか?');
 @define('USERCONF_SENDCOMMENTS_DESC', 'コメントをあなたのエントリが受けたとき、電子メールを受信しますか?');
 @define('USERCONF_SENDTRACKBACKS', 'トラックバックの通知を送信しますか?');
@@ -806,7 +806,7 @@
 @define('INSTALL_TRACKREF_DESC', 'Enabling the referrer tracking will show you which sites refer to your articles. Today this is often abused for spamming, so you can disable it if you want.');
 @define('CATEGORIES_HIDE_PARENT', '選択された親カテゴリを隠しますか?');
 @define('CATEGORIES_HIDE_PARENT_DESC', 'If you restrict the listing of categories to a specific category, by default you will see that parent category within the output listing. If you disable this option, the parent category name will not be displayed.');
-@define('WARNING_NO_GROUPS_SELECTED', 'Warning: You did not select any group memberships. This would effectively log you out of the usergroup management, and thus your group memberships werde not changed.');
+@define('WARNING_NO_GROUPS_SELECTED', '警告: いくつかのグループメンバーを選択していません。This would effectively log you out of the usergroup management, and thus your group memberships werde not changed.');
 @define('INSTALL_RSSFETCHLIMIT', 'フィードに表示するエントリ数');
 @define('INSTALL_RSSFETCHLIMIT_DESC', '各ページでRSSフィードに表示するエントリの数です。');
 @define('INSTAL_DB_UTF8', 'データベース文字エンコード変換を有効にする');
@@ -820,64 +820,65 @@
 @define('FURTHER_LINKS_S9Y_BLOG', 'オフィシャルブログ');
 @define('FURTHER_LINKS_S9Y_FORUMS', 'フォーラム');
 @define('FURTHER_LINKS_S9Y_SPARTACUS', 'Spartacus');
-@define('COMMENT_IS_DELETED', '(Comment removed)');
+@define('COMMENT_IS_DELETED', '(コメントは削除されました)');
 
-@define('CURRENT_AUTHOR', 'Current author');
+@define('CURRENT_AUTHOR', '現在の著者');
 
-@define('WORD_NEW', 'New');
-@define('SHOW_MEDIA_TOOLBAR', 'Show toolbar within media selector popup?');
-@define('MEDIA_KEYWORDS', 'Media keywords');
+@define('WORD_NEW', '新規');
+@define('SHOW_MEDIA_TOOLBAR', 'メディア選択ポップアップでツールバーを表示しますか?');
+@define('MEDIA_KEYWORDS', 'メディアキーワード');
 @define('MEDIA_KEYWORDS_DESC', 'Enter a list of ";" separated words that you want to use as pre-defined keywords for media items.');
-@define('MEDIA_EXIF', 'Import EXIF/JPEG image data');
+@define('MEDIA_EXIF', 'EXIF/JPEG 画像データをインポートする');
 @define('MEDIA_EXIF_DESC', 'If enabled, existing EXIF/JPEG metadata of images will be parsed and stored in the database for display in the media gallery.');
-@define('MEDIA_PROP', 'Media properties');
+@define('MEDIA_PROP', 'メディアプロパティ');
 
 
 @define('GO_ADD_PROPERTIES', 'Go & enter properties');
 @define('MEDIA_PROPERTY_DPI', 'DPI');
 @define('MEDIA_PROPERTY_COPYRIGHT', 'Copyright');
-@define('MEDIA_PROPERTY_COMMENT1', 'Short Comment');
-@define('MEDIA_PROPERTY_COMMENT2', 'Long Comment');
-@define('MEDIA_PROPERTY_TITLE', 'Title');
-@define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
+@define('MEDIA_PROPERTY_COMMENT1', '短いコメント');
+@define('MEDIA_PROPERTY_COMMENT2', '長いコメント');
+@define('MEDIA_PROPERTY_TITLE', '件名');
+@define('MEDIA_PROP_DESC', '各メディアファイルに定義したいプロパティ項目を「;」で分割した一覧で入力します');
 @define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
 
-@define('STYLE_OPTIONS_NONE', 'This theme/style has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Theme/Style options');
+@define('STYLE_OPTIONS_NONE', 'このテーマ・スタイルは指定オプションがありません。To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
+@define('STYLE_OPTIONS', 'テーマスタイルオプション');
 
-@define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
+@define('PLUGIN_AVAILABLE_COUNT', '合計: %d プラグインです。');
 
-@define('SYNDICATION_RFC2616', 'Activate strict RFC2616 RSS-Feed compliance');
-@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also vioaltes RFC2616. So if you set this option to "TRUE" you will compliy with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. Reference: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
-@define('MEDIA_PROPERTY_DATE', 'Associated Date');
+@define('SYNDICATION_RFC2616', '厳密に RFC2616 に準拠した RSS フィードを動作させる');
+@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also vioaltes RFC2616. So if you set this option to "TRUE" you will compliy with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. リファレンス: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
+@define('MEDIA_PROPERTY_DATE', '関連した日付');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
-@define('FILENAME_REASSIGNED', 'Automagically assigned new file name: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Max. file upload size');
+@define('FILENAME_REASSIGNED', '次の新規ファイル名が自動割当されました: %s');
+@define('MEDIA_UPLOAD_SIZE', 'ファイルアップロードの最大容量');
 @define('MEDIA_UPLOAD_SIZE_DESC', 'Enter the maximum filesize for uploaded files in bytes. This setting can be overruled by server-side settings in PHP.ini: upload_max_filesize, post_max_size, max_input_time all take precedence over this option. An empty string means to only use the server-side limits.');
-@define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
-@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. width of image files for upload');
-@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Enter the maximum image width in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. height of image files for upload');
-@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Enter the maximum image height in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_UPLOAD_SIZEERROR', 'エラー: %s バイトより大きなファイルはアップロードできません!');
+@define('MEDIA_UPLOAD_MAXWIDTH', 'アップロードされたファイルの最大幅');
+@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'アップロードされた画像の最大幅をピクセル単位で入力します。');
+@define('MEDIA_UPLOAD_MAXHEIGHT', 'アップロードされたファイルの最大高');
+@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'アップロードされた画像の最大の高さをピクセル単位で入力します。');
+@define('MEDIA_UPLOAD_DIMERROR', 'エラー: %s x %s ピクセルより大きな画像はアップロードできません!');
 
-@define('MEDIA_TARGET', 'Target for this link');
-@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
+@define('MEDIA_TARGET', 'このリンクのターゲット');
+@define('MEDIA_TARGET_JS', 'ポップアップウィンドウ (via JavaScript, adaptive size)');
 @define('MEDIA_ENTRY', 'Isolated Entry');
-@define('MEDIA_TARGET_BLANK', 'Popup window (via target=_blank)');
+@define('MEDIA_TARGET_BLANK', 'ポップアップウィンドウ (「target=_blank」による)');
 
-@define('MEDIA_DYN_RESIZE', 'Allow dynamic image resizing?');
+@define('MEDIA_DYN_RESIZE', '動的な画像のサイズ変更を許可しますか?');
 @define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
 
-@define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
+@define('MEDIA_DIRECTORY_MOVED', 'ディレクトリとファイルを「%s」に移動することに成功しました。');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリとファイルを「%s」に移動できませんでした!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');@define('PLUGIN_ACTIVE', 'Active');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
+@define('PLUGIN_ACTIVE', 'Active');
 @define('PLUGIN_INACTIVE', 'Inactive');
-@define('PREFERENCE_USE_JS', 'Enable advanced JS usage?');
+@define('PREFERENCE_USE_JS', '高度な JS の使用を有効にしますか?');
 @define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
+@define('PREFERENCE_USE_JS_WARNING', '(このページは高度な JavaScript を使用しています。もし機能に問題がある場合、個人プリファレンスの高度な JS の使用を無効にするか、ブラウザーの JavaScript を無効にしてください)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
