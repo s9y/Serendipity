@@ -872,8 +872,7 @@
 @define('MEDIA_DIRECTORY_MOVED', 'ディレクトリとファイルを「%s」に移動することに成功しました。');
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリとファイルを「%s」に移動できませんでした!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
-@define('PLUGIN_ACTIVE', 'Active');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');@define('PLUGIN_ACTIVE', 'Active');
 @define('PLUGIN_INACTIVE', 'Inactive');
 @define('PREFERENCE_USE_JS', '高度な JS の使用を有効にしますか?');
 @define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
