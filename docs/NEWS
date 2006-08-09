@@ -243,6 +243,10 @@ Version 1.1-alpha5()
 Version 1.0.1 ()
 ------------------------------------------------------------------------
 
+   * Fix problem on newer Firefox versions, where insertion of images
+     in the WYSIWYG editor did not work. It might be necessary to
+     purge your browsers cache for this to properly work. (Jay Bertrandt)
+
    * Fix utf8 iconv conversion failing on some older PHP setups.
      Thanks to Matthias Leisi!
 

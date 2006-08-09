@@ -268,7 +268,7 @@ function serendipity_imageSelector_done(textarea)
         } else if (targetval == '_blank') {
             itarget = ' target="_blank"';
         } else if (targetval == 'plugin') {
-            itarget = ' id="s9yisphref' + imgID + '"';
+            itarget = ' id="s9yisphref' + imgID + '" onclick="javascript:this.href = this.href + \'&amp;serendipity[from]=\' + self.location.href;"';
             prepend = '<a title="' + ilink + '" id="s9yisp' + imgID + '"></a>';
             ilink   = baseURL + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
         }
@@ -288,10 +288,11 @@ function serendipity_imageSelector_done(textarea)
         block = insert;
     }
 
-    if (parent.self.opener.editorref) {
+    if (typeof(parent.self.opener.htmlarea_editors) != 'undefined' && typeof(parent.self.opener.htmlarea_editors[textarea] != 'undefined')) {
+        parent.self.opener.htmlarea_editors[textarea].surroundHTML(block, '');
+    } else if (parent.self.opener.editorref) {
         parent.self.opener.editorref.surroundHTML(block, '');
     } else {
-
         parent.self.opener.serendipity_imageSelector_addToBody(block, textarea);
     }
 

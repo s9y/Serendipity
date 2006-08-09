@@ -515,6 +515,7 @@ switch ($serendipity['GET']['adminAction']) {
             NULL,
             'write'
         );
+        usort($folders, 'serendipity_sortPath');
 ?>
     <div class="image_directory_create"><strong><?php echo CREATE_DIRECTORY ?></strong></div>
     <div class="image_directory_create_desc"><?php echo CREATE_DIRECTORY_DESC ?></div>
@@ -557,7 +558,7 @@ switch ($serendipity['GET']['adminAction']) {
             NULL,
             'write'
         );
-
+        usort($folders, 'serendipity_sortPath');
 ?>
     <div class="image_directory_list"><?php echo DIRECTORIES_AVAILABLE; ?></div>
     <br />
@@ -594,6 +595,7 @@ switch ($serendipity['GET']['adminAction']) {
             NULL,
             'write'
         );
+        usort($folders, 'serendipity_sortPath');
 
         $form_hidden = '';
         if (isset($image_selector_addvars) && is_array($image_selector_addvars)) {

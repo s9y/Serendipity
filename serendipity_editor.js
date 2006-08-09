@@ -288,10 +288,11 @@ function serendipity_imageSelector_done(textarea)
         block = insert;
     }
 
-    if (parent.self.opener.editorref) {
+    if (typeof(parent.self.opener.htmlarea_editors) != 'undefined' && typeof(parent.self.opener.htmlarea_editors[textarea] != 'undefined')) {
+        parent.self.opener.htmlarea_editors[textarea].surroundHTML(block, '');
+    } else if (parent.self.opener.editorref) {
         parent.self.opener.editorref.surroundHTML(block, '');
     } else {
-
         parent.self.opener.serendipity_imageSelector_addToBody(block, textarea);
     }
 
