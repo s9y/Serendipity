@@ -806,7 +806,8 @@
 @define('INSTALL_TRACKREF_DESC', '开启记录来源会显示那个网站引用了你的文章。你可以关闭这个功能如果你收到太多垃圾广告。');
 @define('CATEGORIES_HIDE_PARENT', '隐藏选择的类别');
 @define('CATEGORIES_HIDE_PARENT_DESC', '当你限制类别显示的列表，预设是会显示主类别的名称。如果开启这个功能，主类别的名称将不会显示。');
-@define('WARNING_NO_GROUPS_SELECTED', '警告：你没有选择会员群组。这会将你登出群组的管理，会员的群组不会被改变。');@define('INSTALL_RSSFETCHLIMIT', 'Entries to display in Feeds');
+@define('WARNING_NO_GROUPS_SELECTED', '警告：你没有选择会员群组。这会将你登出群组的管理，会员的群组不会被改变。');
+@define('INSTALL_RSSFETCHLIMIT', 'Entries to display in Feeds');
 @define('INSTALL_RSSFETCHLIMIT_DESC', 'RSS Feed 页面里显示的文章数量。');
 @define('INSTAL_DB_UTF8', '开启数据库编码转换');
 @define('INSTAL_DB_UTF8_DESC', '使用 MySQL 的 "SET NAMES" 查询来设定编码。如果文章出现乱码可以将这设定打开或关闭。');
