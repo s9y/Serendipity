@@ -389,7 +389,7 @@
 @define('INSTALL_BLOCKREF', 'Geblockte Referer');
 @define('INSTALL_BLOCKREF_DESC', 'Sollen spezielle Hosts aus der Referrer-Liste gesperrt werden? Hostnamen getrennt mit ";" eingeben. Jeder Hostname wird als Teilstring überprüft, so dass "goo" sowohl "google.com" als auch "googlegroups.com" sperren würde.');
 @define('INSTALL_REWRITE', 'URL-Formung');
-@define('INSTALL_REWRITE_DESC', 'Wählen Sie die Methode zur Erzeugung der URLs. Wenn diese aktiviert werden, können sprechende Namen für jeden Artikel verwendet werden und somit besser von Suchmaschinen indiziert Der Webserver muss entweder mod_rewrite oder die "AllowOverride All"-Direktive unterstützen. Der Standardwert wird automagisch bestimmt');
+@define('INSTALL_REWRITE_DESC', 'Wählen Sie die Methode zur Erzeugung der URLs. Wenn diese aktiviert werden, können sprechende Namen für jeden Artikel verwendet werden und somit besser von Suchmaschinen indiziert Der Webserver muss entweder mod_rewrite oder die "AllowOverride All"-Direktive unterstützen. Der Standardwert wird automagisch bestimmt.');
 
 /* Imageconversion Settings */
 @define('INSTALL_CAT_IMAGECONV', 'Bildkonvertierung');
@@ -565,7 +565,7 @@
 @define('INSTALL_SHOWFUTURE', 'Zukünftige Einträge zeigen');
 @define('INSTALL_SHOWFUTURE_DESC', 'Falls aktiviert, werden Einträge deren Datum in der Zukunft liegt angezeigt. Standardmäßig werden solche Einträge versteckt und erst angezeigt, wenn das eingetragene Datum erreicht wird.');
 @define('INSTALL_DBPERSISTENT', 'Persistente Verbindungen nutzen');
-@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
+@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
 @define('NO_IMAGES_FOUND', 'Keine Bilder gefunden');
 @define('PERSONAL_SETTINGS', 'Eigene Einstellungen');
 @define('REFERER', 'Referer');
@@ -652,7 +652,7 @@
 @define('AUTOLANG', 'Sprache des Browsers eines Besuchers verwenden');
 @define('AUTOLANG_DESC', 'Falls aktiviert wird die im Browser des Besuchers eingestellte Sprache als Standardsprache für Einträge und die Serendipity Oberfläche benutzt.');
 @define('INSTALL_AUTODETECT_URL', 'HTTP-Hostnamen automatisch erkennen');
-@define('INSTALL_AUTODETECT_URL_DESC', 'Falls aktiviert wird Serendipity sicherstellen, dass der vom Besucher gewählte HTTP-Hostname als BaseURL variable verwendet wird. Sofern diese Option aktiviert ist, ist es möglich, mehrere Domainnamen für das Weblog zu verwenden. Alle Links werden dann mit dem HTTP-Hostnamen umgeschrieben, der vom Besucher gewählt wurde.');
+@define('INSTALL_AUTODETECT_URL_DESC', 'Falls aktiviert wird Serendipity sicherstellen, dass der vom Besucher gewählte HTTP-Hostname als BaseURL-Variable verwendet wird. Sofern diese Option aktiviert ist, ist es möglich, mehrere Domainnamen für das Weblog zu verwenden. Alle Links werden dann mit dem HTTP-Hostnamen umgeschrieben, der vom Besucher gewählt wurde.');
 @define('CONVERT_HTMLENTITIES', 'Try to auto-convert HTML entities?');
 @define('EMPTY_SETTING', 'You did not specify a valid value for "%s"!');
 @define('USERCONF_REALNAME', 'Voller Name');
@@ -685,11 +685,11 @@
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Pfad zu den Einträgen');
 @define('INSTALL_PERMALINK_ARCHIVEPATH', 'Pfad zu den Archiven');
 @define('INSTALL_PERMALINK_CATEGORIESPATH', 'Pfad zu den Kategorien');
-@define('INSTALL_PERMALINK_UNSUBSCRIBEPATH', 'Pfad zum Path abbestellen von Kommentaren');
+@define('INSTALL_PERMALINK_UNSUBSCRIBEPATH', 'Pfad zum Abbestellen von Kommentaren');
 @define('INSTALL_PERMALINK_DELETEPATH', 'Pfad zum Löschen von Kommentaren');
-@define('INSTALL_PERMALINK_APPROVEPATH', 'Pfad zum genehmigen von Kommentaren');
+@define('INSTALL_PERMALINK_APPROVEPATH', 'Pfad zum Genehmigen von Kommentaren');
 @define('INSTALL_PERMALINK_FEEDSPATH', 'Pfad zu den RSS-Feeds');
-@define('INSTALL_PERMALINK_PLUGINPATH', 'Path zu einem externen Plugin');
+@define('INSTALL_PERMALINK_PLUGINPATH', 'Pfad zu einem externen Plugin');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Pfad zur Administration');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Pfad zur Suche');
 @define('USERCONF_CREATE', 'Erstellung von Einträgen verbieten?');
@@ -809,7 +809,7 @@
 @define('INSTAL_DB_UTF8', 'Datenbank-Zeichensatzkonvertierung aktivieren');
 @define('INSTAL_DB_UTF8_DESC', 'Sendet einen MySQL "SET NAMES" Befehl, um den verwendeten Zeichensatz der Datenbank mitzuteilen. Falls sich merkwürdige Zeichen im Blog zeigen, ist es einen Versuch wert, diese Option zu (de)aktivieren.');
 @define('ONTHEFLYSYNCH', 'Automagische Synchronisation der Mediendatenbank');
-@define('ONTHEFLYSYNCH_DESC', 'Falls diese Option aktivier ist, wird Serendipity den Inhalt der Mediendatenbank mit dem echten Inhalt im Dateisystem abgleichen.');
+@define('ONTHEFLYSYNCH_DESC', 'Falls diese Option aktiviert ist, wird Serendipity den Inhalt der Mediendatenbank mit dem echten Inhalt im Dateisystem abgleichen.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Der Benutzername darf nicht leer gelassen werden.');
 @define('FURTHER_LINKS', 'Weitere Links');
 @define('FURTHER_LINKS_S9Y', 'Serendipity Homepage');
@@ -850,7 +850,7 @@
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Laufzeit');
 @define('FILENAME_REASSIGNED', 'Automagisch zugewiesener Dateiname: %s');
 @define('MEDIA_UPLOAD_SIZE', 'Maximale Dateigröße für den Upload');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Geben Sie die maximale Dateigröße für hochgeladene Dateien in Bytes an. Diese Option kann jedoch auch durch Server-seitige Optionen der PHP.ini beschränkt sein PHP.ini: upload_max_filesize, post_max_size, max_input_time. Wenn Sie diese Option leerlassen, werden nur die Server-seitigen Einschränkungen angewandt.');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'Geben Sie die maximale Dateigröße für hochgeladene Dateien in Bytes an. Diese Option kann jedoch auch durch serverseitige Optionen der PHP.ini beschränkt sein. PHP.ini: upload_max_filesize, post_max_size, max_input_time. Wenn Sie diese Option leerlassen, werden nur die serverseitigen Einschränkungen angewandt.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Fehler: Sie können keine Datei größer als %s Bytes hochladen!');
 @define('MEDIA_UPLOAD_MAXWIDTH', 'Maximale Breite eines hochgeladenen Bildes');
 @define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Geben sie die maximale Breite eines hochgeladenen Bildes in Pixeln an.');
@@ -874,4 +874,4 @@
 @define('PREFERENCE_USE_JS', 'Fortgeschrittene JavaScripts einsetzen?');
 @define('PREFERENCE_USE_JS_DESC', 'Falls aktiviert, werden erweiterte JavaScript Funktionalitäten in einigen Bereichen freigeschaltet. Z.B. in der Plugin-Konfiguration kann Drag+Drop benutzt werden, um leichter Änderungen vorzunehmen.');
 @define('PREFERENCE_USE_JS_WARNING', '(Diese Seite setzt fortgeschrittene JavaScripts ein. Falls dabei Probleme in der Benutzbarkeit auftreten, deaktivieren Sie bitte die Option zum Einsatz dieser JavaScripts im Menüpunkt "Eigene Einstellungen", oder deaktivieren Sie JavaScript in Ihrem Browser.)');
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Pfad zu Kommentaren');
