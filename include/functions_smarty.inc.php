@@ -678,82 +678,82 @@ function serendipity_smarty_init($vars = array()) {
 
             $serendipity['smarty']->register_prefilter('serendipity_replaceSmartyVars');
         }
-    }
 
-    if (!isset($serendipity['smarty_raw_mode'])) {
-        if (file_exists($serendipity['smarty']->config_dir . '/layout.php') && $serendipity['template'] != 'default') {
-            $serendipity['smarty_raw_mode'] = true;
-        } else {
-            $serendipity['smarty_raw_mode'] = false;
+        if (!isset($serendipity['smarty_raw_mode'])) {
+            if (file_exists($serendipity['smarty']->config_dir . '/layout.php') && $serendipity['template'] != 'default') {
+                $serendipity['smarty_raw_mode'] = true;
+            } else {
+                $serendipity['smarty_raw_mode'] = false;
+            }
         }
-    }
-
-    if (!isset($serendipity['smarty_file'])) {
-        $serendipity['smarty_file'] = 'index.tpl';
-    }
-
-    $category      = false;
-    $category_info = array();
-    if (isset($serendipity['GET']['category'])) {
-        $category = (int)$serendipity['GET']['category'];
-        if (isset($GLOBALS['cInfo'])) {
-            $category_info = $GLOBALS['cInfo'];
-        } else {
-            $category_info = serendipity_fetchCategoryInfo($category);
+    
+        if (!isset($serendipity['smarty_file'])) {
+            $serendipity['smarty_file'] = 'index.tpl';
         }
-    }
-
-    if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
-        $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
-    }
-
-    $serendipity['smarty']->assign(
-        array(
-            'head_charset'              => LANG_CHARSET,
-            'head_version'              => $serendipity['version'],
-            'head_title'                => $serendipity['head_title'],
-            'head_subtitle'             => $serendipity['head_subtitle'],
-            'head_link_stylesheet'      => $serendipity['smarty_vars']['head_link_stylesheet'],
-
-            'is_xhtml'                  => true,
-            'use_popups'                => $serendipity['enablePopup'],
-            'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
-            'is_raw_mode'               => $serendipity['smarty_raw_mode'],
-            'is_logged_in'              => serendipity_userLoggedIn(),
-
-            'entry_id'                  => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) ? $serendipity['GET']['id'] : false,
-            'is_single_entry'           => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])),
-
-            'blogTitle'                 => htmlspecialchars($serendipity['blogTitle']),
-            'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? htmlspecialchars($serendipity['blogSubTitle']) : ''),
-            'blogDescription'           => htmlspecialchars($serendipity['blogDescription']),
-
-            'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
-            'serendipityBaseURL'        => $serendipity['baseURL'],
-            'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
-            'serendipityIndexFile'      => $serendipity['indexFile'],
-            'serendipityVersion'        => $serendipity['version'],
-
-            'lang'                      => $serendipity['lang'],
-            'category'                  => $category,
-            'category_info'             => $category_info,
-            'template'                  => $serendipity['template'],
-
-            'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
-        )
-    );
-
-    if (count($vars) > 0) {
-        $serendipity['smarty']->assign($vars);
-    }
-
-    // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
-    // setup custom smarty variables, modifiers etc. to use in their templates.
-    @include $serendipity['smarty']->config_dir . '/config.inc.php';
-
-    if (is_array($template_config)) {
-        $template_vars =& serendipity_loadThemeOptions($template_config);
-        $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
+    
+        $category      = false;
+        $category_info = array();
+        if (isset($serendipity['GET']['category'])) {
+            $category = (int)$serendipity['GET']['category'];
+            if (isset($GLOBALS['cInfo'])) {
+                $category_info = $GLOBALS['cInfo'];
+            } else {
+                $category_info = serendipity_fetchCategoryInfo($category);
+            }
+        }
+    
+        if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
+            $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
+        }
+    
+        $serendipity['smarty']->assign(
+            array(
+                'head_charset'              => LANG_CHARSET,
+                'head_version'              => $serendipity['version'],
+                'head_title'                => $serendipity['head_title'],
+                'head_subtitle'             => $serendipity['head_subtitle'],
+                'head_link_stylesheet'      => $serendipity['smarty_vars']['head_link_stylesheet'],
+    
+                'is_xhtml'                  => true,
+                'use_popups'                => $serendipity['enablePopup'],
+                'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
+                'is_raw_mode'               => $serendipity['smarty_raw_mode'],
+                'is_logged_in'              => serendipity_userLoggedIn(),
+    
+                'entry_id'                  => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) ? $serendipity['GET']['id'] : false,
+                'is_single_entry'           => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])),
+    
+                'blogTitle'                 => htmlspecialchars($serendipity['blogTitle']),
+                'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? htmlspecialchars($serendipity['blogSubTitle']) : ''),
+                'blogDescription'           => htmlspecialchars($serendipity['blogDescription']),
+    
+                'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
+                'serendipityBaseURL'        => $serendipity['baseURL'],
+                'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
+                'serendipityIndexFile'      => $serendipity['indexFile'],
+                'serendipityVersion'        => $serendipity['version'],
+    
+                'lang'                      => $serendipity['lang'],
+                'category'                  => $category,
+                'category_info'             => $category_info,
+                'template'                  => $serendipity['template'],
+    
+                'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
+            )
+        );
+    
+        if (count($vars) > 0) {
+            $serendipity['smarty']->assign($vars);
+        }
+    
+        // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
+        // setup custom smarty variables, modifiers etc. to use in their templates.
+        @include_once $serendipity['smarty']->config_dir . '/config.inc.php';
+    
+        if (is_array($template_config)) {
+            $template_vars =& serendipity_loadThemeOptions($template_config);
+            $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
+        }
     }
 
     return true;
