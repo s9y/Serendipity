@@ -438,7 +438,7 @@ function serendipity_fetchEntryData(&$ret) {
            LEFT JOIN {$serendipity['dbPrefix']}entrycat AS ec
                   ON ec.categoryid = c.categoryid
                WHERE " . serendipity_db_in_sql('ec.entryid', $search_ids) . "
-            ORDER BY c.category_name DESC";
+            ORDER BY c.category_name ASC";
 
     $search_ret =& serendipity_db_query($query, false, 'assoc');
 
