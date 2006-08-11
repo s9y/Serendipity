@@ -559,7 +559,7 @@
 
                                     array('var'         => 'mediaProperties',
                                           'title'       => MEDIA_PROP,
-                                          'description' => MEDIA_PROP_DESC . MEDIA_PROP_MULTI_DESC,
+                                          'description' => MEDIA_PROP_DESC . MEDIA_PROP_MULTIDESC,
                                           'type'        => 'string',
                                           'permission'  => 'blogConfiguration',
                                           'default'     => 'DPI:IMAGE;RUN_LENGTH:VIDEO:AUDIO;DATE;COPYRIGHT;TITLE;COMMENT1:MULTI;COMMENT2:MULTI'),
