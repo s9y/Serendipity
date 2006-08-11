@@ -245,7 +245,7 @@
 @define('PUBLISH', 'Publică');
 @define('PREVIEW', 'Previzualizare');
 @define('DATE', 'Data');
-@define('DATE_FORMAT_2', 'd-m-Y H:i'); // Needs to be ISO 8601 compliant for date conversion!
+@define('DATE_FORMAT_2', 'Y-m-d H:i'); // Needs to be ISO 8601 compliant for date conversion!
 @define('DATE_INVALID', 'Avertisment: Data specificată de tine este invalidă. Trebuie să fie în format YYYY-MM-DD HH:MM.');
 @define('CATEGORY_PLUGIN_DESC', 'Arată o listă cu categoriile.');
 @define('ALL_AUTHORS', 'Toţi autorii');
