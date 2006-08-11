@@ -3,6 +3,10 @@
 Version 1.1-alpha7()
 ------------------------------------------------------------------------
 
+    * Fix multiple loading of $serendipity['smarty'] theme options when
+      calling serendipity_smarty_init() more than once. Many thanks to
+      Sven Ediger for reporting this. (garvinhicking)
+
     * Properly sort media directories (garvinhicking)
 
     * Better use of "return by references" in some vital areas.
