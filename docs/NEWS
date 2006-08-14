@@ -1,6 +1,6 @@
 # $Id$
 
-Version 1.1-alpha7()
+Version 1.1-beta1 (August 14th, 2006)
 ------------------------------------------------------------------------
 
     * Fix multiple loading of $serendipity['smarty'] theme options when
