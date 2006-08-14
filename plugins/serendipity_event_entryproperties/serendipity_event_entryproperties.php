@@ -429,7 +429,7 @@ class serendipity_event_entryproperties extends serendipity_event
                                 <tr>
                                     <td class="customfield_<?php echo $fieldname; ?> customfield_name"><strong><?php echo $fieldname; ?></strong></td>
                                     <td class="customfield_<?php echo $fieldname; ?> customfield_value"><textarea id="prop<?php echo htmlspecialchars($fieldname); ?>" name="serendipity[properties][<?php echo htmlspecialchars($fieldname); ?>]"><?php echo htmlspecialchars($value); ?></textarea></td>
-                                    <td valign="top"><script type="text/javascript" language="JavaScript">document.write('<input type="button" name="insImage" value="<?php echo IMAGE ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo htmlspecialchars($fieldname); ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />');</script></td>
+                                    <td valign="top"><script type="text/javascript" language="JavaScript">document.write('<input type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo htmlspecialchars($fieldname); ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />');</script></td>
                                 </tr>
                             <?php
                                     }
