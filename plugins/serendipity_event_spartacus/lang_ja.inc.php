@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 690
+ *  EN-Revision: 1325
  */
 
 @define('PLUGIN_EVENT_SPARTACUS_NAME', 'Spartacus');
@@ -24,4 +24,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissions downloaded directories');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Here you can enter the octal mode (like "0777") of the directory permissions for directories (FTP/Shell) downloaded by Spartacus. If empty, the default permission mask of the system are used. Note that not all servers allow changing/setting permissions. Pay attention that the applied permissions allow reading and writing for the webserver user. Else spartacus/Serendipity cannot overwrite existing directories.');
 
+@define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Check for new sidebar plugins');
+@define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Check for new event plugins');
+@define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Hint: You can upgrade multiple plugins at once by clicking the upgrade-link with your middle mouse button, so that it opens in a new window/tab of your browser. Note that upgrading all plugins automatically could lead to network timeouts and garbaged files, thus this functionality does not exist intentionally.');
 ?>
