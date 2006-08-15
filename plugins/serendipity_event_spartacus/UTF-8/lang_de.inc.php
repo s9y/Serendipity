@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_spartacus.php 326 2005-07-29 10:01:30Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_SPARTACUS_NAME', 'Spartacus');
         @define('PLUGIN_EVENT_SPARTACUS_DESC', '[S]erendipity [P]lugin [A]ccess [R]epository [T]ool [A]nd [C]ustomization/[U]nification [S]ystem - Installiert Plugins direkt aus dem Netz.');

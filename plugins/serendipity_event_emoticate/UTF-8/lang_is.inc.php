@@ -1,4 +1,4 @@
-<?php # $Id: lang_is.inc.php 742 2005-12-02 12:00:34Z flotsam $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_EMOTICATE_NAME', 'Textabreyting: Tilfinningavæða');
         @define('PLUGIN_EVENT_EMOTICATE_DESC', 'Breyta venjulegum textabroskörlum í grafískar myndir');

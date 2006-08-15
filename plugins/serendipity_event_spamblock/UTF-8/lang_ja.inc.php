@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php 889 2006-01-30 04:43:04Z elf2000 $
+<?php # $Id$
 
 /**
  *  @version $Revision$

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_mailer.php 283 2005-07-22 08:56:47Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_MAILER_NAME', 'Artikel mailen');
         @define('PLUGIN_EVENT_MAILER_DESC', 'Verschickt jeden neuen Artikel im Blog via E-Mail');

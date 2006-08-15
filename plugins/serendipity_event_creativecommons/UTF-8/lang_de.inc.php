@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_creativecommons.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_CREATIVECOMMONS_NAME',        'Creative Commons Lizenz');
         @define('PLUGIN_CREATIVECOMMONS_DESC',        'Wählen Sie eine Lizenz für den Inhalt');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_spamblock.php 335 2005-07-31 18:03:12Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'Spamschutz');
         @define('PLUGIN_EVENT_SPAMBLOCK_DESC', 'Mehrere Möglichkeiten, um Kommentarspam einzudämmen');

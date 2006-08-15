@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_eventwrapper.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_WRAPPER_NAME', 'Event-Ausgabe Wrapper');
         @define('PLUGIN_EVENT_WRAPPER_DESC', 'Zeigt die Ausgabedaten eines Event-Plugins an');

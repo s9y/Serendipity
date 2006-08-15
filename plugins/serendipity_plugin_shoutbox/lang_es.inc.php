@@ -1,7 +1,7 @@
 <?php # $Id$
 
 /**
- *  @version $Revision: 690 $
+ *  @version $Revision$
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */

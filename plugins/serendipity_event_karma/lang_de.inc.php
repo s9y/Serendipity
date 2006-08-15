@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_karma.php 340 2005-07-31 21:17:16Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_KARMA_VERSION', '1.3');
         @define('PLUGIN_KARMA_NAME', 'Karma');

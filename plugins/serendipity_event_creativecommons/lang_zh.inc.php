@@ -1,4 +1,4 @@
-<?php # $Id: $
+<?php # $Id$
 
 ##########################################################################
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #

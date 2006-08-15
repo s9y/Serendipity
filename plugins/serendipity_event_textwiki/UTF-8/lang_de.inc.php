@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_textwiki.php 271 2005-07-14 09:39:01Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_TEXTWIKI_NAME',     'Textformatierung: Wiki');
         @define('PLUGIN_EVENT_TEXTWIKI_DESC',     'Wiki-Formatierung durchführen');
