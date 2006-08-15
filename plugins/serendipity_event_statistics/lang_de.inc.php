@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_statistics.php 310 2005-07-28 01:10:43Z wesley $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_STATISTICS_NAME', 'Statistiken');
         @define('PLUGIN_EVENT_STATISTICS_DESC', 'Zeigt einen Link zu Statistiken in der Autorenoberfläche');

@@ -1,4 +1,4 @@
-<?php # $Id: lang_is.inc.php 7 2005-04-16 06:39:31Z s_bergmann $
+<?php # $Id$
 
         @define('PLUGIN_COMMENTS_BLAHBLAH', 'Sýnir síðustu athugasemdir á færslurnar þínar');
         @define('PLUGIN_COMMENTS_WORDWRAP', 'Línuskil');

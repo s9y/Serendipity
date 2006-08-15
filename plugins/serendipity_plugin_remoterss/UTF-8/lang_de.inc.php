@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_shoutbox.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_REMOTERSS_TITLE', 'Fremder RSS/OPML-Blogroll Feed');
         @define('PLUGIN_REMOTERSS_BLAHBLAH', 'Zeigt Einträge eines externen RSS/OPML-Feeds an (z.B. Blogroll)');

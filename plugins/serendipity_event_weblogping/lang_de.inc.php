@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_weblogping.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_WEBLOGPING_PING', 'Einträge ankündigen (via XML-RPC ping) bei:');
         @define('PLUGIN_EVENT_WEBLOGPING_SENDINGPING', 'Sende XML-RPC ping zu %s');

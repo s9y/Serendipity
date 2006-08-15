@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php 742 2005-12-02 12:00:34Z flotsam $
+<?php # $Id$
 
 /**
  *  @version $Revision$

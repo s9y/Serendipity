@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_history.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_HISTORY_NAME', 'Geschichte');
         @define('PLUGIN_HISTORY_DESC', 'Zeigt Einträge eines einstellbaren Alters an.');

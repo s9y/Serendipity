@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_shoutbox.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_RECENTENTRIES_TITLE', 'Aktuelle Einträge');
         @define('PLUGIN_RECENTENTRIES_BLAHBLAH', 'Zeigt die Titel der aktuellsten Einträge mit Datum');

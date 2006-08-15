@@ -1,7 +1,7 @@
-<?php # $Id: lang_en.inc.php 817 2005-12-30 20:32:23Z jwalker $
+<?php # $Id$
 
 /**
- *  @version $Revision: 817 $
+ *  @version $Revision$
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */

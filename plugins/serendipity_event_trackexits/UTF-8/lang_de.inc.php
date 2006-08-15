@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_trackexits.php 308 2005-07-27 15:25:35Z wesley $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_TRACKBACK_NAME', 'Textformatierung: Externe Links zählen');
         @define('PLUGIN_EVENT_TRACKBACK_DESC', 'Click auf Externe Links verfolgen');

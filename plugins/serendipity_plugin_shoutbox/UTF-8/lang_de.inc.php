@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_shoutbox.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_SHOUTBOX_NAME', 'Shoutbox');
         @define('PLUGIN_SHOUTBOX_BLAHBLAH', 'Zeigt eine Shoutbox für beliebige Kommentare');

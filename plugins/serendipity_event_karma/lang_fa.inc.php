@@ -1,7 +1,7 @@
-<?php # $Id: lang_en.inc.php 690 2005-11-13 04:49:04Z elf2000 $
+<?php # $Id$
 
 /**
- *  @version $Revision: 1 $
+ *  @version $Revision$
  *  @author Omid Mottaghi <webmaster@oxygenws.com>
  *  EN-Revision: Revision of lang_fa.inc.php
  */

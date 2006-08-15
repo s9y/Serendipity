@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_entrylinks.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_ENTRYLINKS_NAME', 'Links des Artikels');
         @define('PLUGIN_ENTRYLINKS_BLAHBLAH', 'Zeigt alle referenzierten Links eines Artikels');

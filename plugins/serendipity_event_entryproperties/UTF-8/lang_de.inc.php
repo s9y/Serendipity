@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_entryproperties.php 341 2005-07-31 21:17:40Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Erweiterte Eigenschaften von Artikeln');
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(Cache, nicht-öffentliche Artikel, dauerhafte Artikel)');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_plugin_comments.php 264 2005-07-13 16:59:13Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_COMMENTS_BLAHBLAH', 'Zeigt die letzten Kommentare');
         @define('PLUGIN_COMMENTS_WORDWRAP', 'Zeilenumbruch');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_spamblock.php,v 1.54 2005/04/11 08:52:42 garvinhicking Exp $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'Spammvörn');
         @define('PLUGIN_EVENT_SPAMBLOCK_DESC', 'Fjöldamargar leiðir til að hindra spamm í athugasemdir');

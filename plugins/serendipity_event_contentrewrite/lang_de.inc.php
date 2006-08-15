@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_contentrewrite.php 235 2005-07-08 13:29:39Z garvinhicking $
+<?php # $Id$
 
         @define('PLUGIN_EVENT_CONTENTREWRITE_FROM', 'quelle');
         @define('PLUGIN_EVENT_CONTENTREWRITE_TO', 'ziel');

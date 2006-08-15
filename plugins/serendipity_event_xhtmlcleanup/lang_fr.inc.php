@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php # $Id$
 
 ##########################################################################
 # serendipity - another blogger...                                       #
