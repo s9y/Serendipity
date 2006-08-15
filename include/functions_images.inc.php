@@ -2431,8 +2431,10 @@ function serendipity_parsePropertyForm() {
         }
     }
 
-    foreach($serendipity['POST']['mediaKeywords'] AS $id => $keywords) {
-        serendipity_insertMediaProperty('base_keyword', '', $serendipity['POST']['mediaProperties'][$id]['image_id'], $keywords);
+    if (is_array($serendipity['POST']['mediaKeywords'])) {
+        foreach($serendipity['POST']['mediaKeywords'] AS $id => $keywords) {
+            serendipity_insertMediaProperty('base_keyword', '', $serendipity['POST']['mediaProperties'][$id]['image_id'], $keywords);
+        }
     }
 
     $array = array(
