@@ -1,7 +1,7 @@
 <?php # $Id$
 
         @define('PLUGIN_EVENT_STATISTICS_NAME', 'Statistiken');
-        @define('PLUGIN_EVENT_STATISTICS_DESC', 'Zeigt einen Link zu Statistiken in der Autorenoberfläche');
+        @define('PLUGIN_EVENT_STATISTICS_DESC', 'Zeigt einen Link zu informativen Statistiken (inkl. Besucherzähler) in der Administrationsoberfläche an.');
         @define('PLUGIN_EVENT_STATISTICS_OUT_STATISTICS', 'Statistik');
         @define('PLUGIN_EVENT_STATISTICS_OUT_FIRST_ENTRY', 'Erster Eintrag');
         @define('PLUGIN_EVENT_STATISTICS_OUT_LAST_ENTRY', 'Letzter Eintrag');
@@ -9,6 +9,7 @@
         @define('PLUGIN_EVENT_STATISTICS_OUT_ENTRIES', 'Artikel');
         @define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_PUBLIC', ' ... davon öffentlich');
         @define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_DRAFTS', ' ... davon Entwürfe');
+        @define('PLUGIN_EVENT_STATISTICS_OUT_PER_AUTHOR', 'Artikel pro Benutzer');
         @define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES', 'Vorhandene Kategorien');
         @define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES2', 'Kategorie(n)');
         @define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_CATEGORIES', 'Verteilung der Artikel auf Kategorien');
@@ -41,10 +42,43 @@
         @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_DAY2', 'Artikel/Tag');
         @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_WEEK2', 'Artikel/Woche');
         @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_MONTH2', 'Artikel/Monat');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS', 'Menge der verfassten Zeichen');
+        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS', 'Menge der geschriebenen Zeichen');
         @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS2', 'Zeichen');
         @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE', 'Zeichen pro Artikel');
         @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE2', 'Zeichen/Artikel');
         @define('PLUGIN_EVENT_STATISTICS_OUT_LONGEST_ARTICLES', 'Die %s längsten Artikel');
         @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS', 'Anzahl Einträge');
-        @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC', 'Wieviele Einträge sollen pro Wert dargestellt werden? (Standard: 20)');
+        @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC', 'Wie viele Einträge sollen pro statistischem Wert angezeigt werden (Standard: 20)?');
+
+        //Language constants for the Extended Visitors feature
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ADD', 'Erweiterte Besucherstatistiken');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ADD_DESC', 'Erweiterte Besucherstatistiken anzeigen (Standard: nein)?');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', 'Nein!');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'Ja, am unteren Ende der Seite.');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'Ja, oben auf der Seite.');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Anzahl der Besucher');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Anzahl der Besucher heute');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', 'Besucher gesamt');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISSINCE', 'Die erweiterte Besucherstatistik hat seit folgendem Zeitpunkt Daten gesammelt:');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISLATEST', 'Letzte Besucher');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS', 'Top-Referrer');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE', 'Bisher wurden keine Referrer registriert.');
+        @define('PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS', 'Erweiterte Besucherstatistik');
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Browser von der Zählung ausschließen');
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Fügen Sie hier Browser ein, die von der Zählung ausgeschlossen werden sollen, getrennt durch "|".');
+
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_LASTENTRY', 'Datum des letzten Artikels anzeigen');
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Anzahl der Artikel anzeigen');
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_COMMENTCOUNT', 'Anzahl der Kommentare anzeigen');
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_MONTHVISITORS', 'Besucher dieses Monats anzeigen');
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT', 'Cache-Zeitlimit');
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT_DESC', 'Gibt an (in Minuten), wie lange die Statistik angezeigt wird, bevor sie aktualisiert wird. Ein höheres Zeitlimit führt zu besserer Leistung, stellt jedoch nicht sicher, dass die Statistiken immer aktuell sind.');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT', 'Textformatierung');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_DESC', 'Bitte %s als Platzhalter für die Zahl/den Text benutzen');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_LASTENTRY', 'Letzter Artikel: %s');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_ENTRYCOUNT', '%s Artikel wurden geschrieben');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_COMMENTCOUNT', '%s Kommentare wurden abgegeben');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_MONTHVISITORS', '%s Besucher in diesem Monat');
+
+        @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Anzahl momentaner Besucher (inkl. ca. der letzten 15 Minuten) anzeigen');
+        @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s Besucher online');
