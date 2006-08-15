@@ -506,8 +506,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         } elseif ($v == 'trackbacks' || $v == 'comments_and_trackbacks' || $v == 'comments') {
             $serendipity['GET']['commentMode'] = $v;
         } elseif (!empty($v)) {
-            echo "XX: $v<br />\n";
-            $serendipity['GET']['viewCommentAuthor'] = urldecode($v);
+            $serendipity['GET']['viewCommentAuthor'] .= urldecode($v);
         }
     }
 
