@@ -188,7 +188,7 @@
 @define('FILE_WRITE_ERROR', 'Cannot write to file %s.');
 @define('FILE_CREATE_YOURSELF', 'Please create the file yourself or check permissions');
 @define('COPY_CODE_BELOW', '<br />* Just copy the code below and place it in %s in your %s folder:<b><pre>%s</pre></b>' . "\n");
-@define('WWW_USER', 'Change www to the user apache runs as (e.g. nobody).');
+@define('WWW_USER', 'Change \'www\' to the user apache runs as (e.g. \'nobody\').');
 @define('BROWSER_RELOAD', 'Once you have done this, hit your browser\'s "reload" button.');
 @define('DIAGNOSTIC_ERROR', 'We detected some errors while running some diagnostics on your entered information:');
 @define('SERENDIPITY_NOT_INSTALLED', 'Serendipity is not yet installed. Please <a href="%s">install</a> it now.');
@@ -797,7 +797,7 @@
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'If this option is enabled, the number of articles by this author is shown next to the authors name in parentheses.');
 @define('CUSTOM_ADMIN_INTERFACE', 'Custom admin interface available');
 
-@define('COMMENT_NOT_ADDED', 'Your comment could not be added, because comments for this entry have either been disabled, you entered invalid data, or your comment was caught by anti-spam measurements.');
+@define('COMMENT_NOT_ADDED', 'Your comment could not be added because comments for this entry have either been disabled, you entered invalid data, or your comment was caught by anti-spam measurements.');
 @define('INSTALL_TRACKREF', 'Enable referrer tracking?');
 @define('INSTALL_TRACKREF_DESC', 'Enabling the referrer tracking will show you which sites refer to your articles. Today this is often abused for spamming, so you can disable it if you want.');
 @define('CATEGORIES_HIDE_PARENT', 'Hide the selected parent category?');
