@@ -1,5 +1,20 @@
 # $Id$
 
+Version 1.1-beta2 ()
+------------------------------------------------------------------------
+
+    * Added ability to use HTTP Authentication to the blog. Can be 
+      triggered by submitting HTTP Auth credentials [only supported when 
+      the server runs with mod_php, not as CGI]. Authentication can be 
+      forced URLs with the "?http_auth=true" parameter, which
+      will then send a "401 Unauthorized" header.
+      If your server does not support mod_php, you can submit REQUEST
+      variables: ?http_auth_user=XXX&http_auth_pw=YYY.
+      Note that specifying username and password in the URI will lead
+      to password disclosure in HTTP logfiles. 
+      This feature is most importantly meant for RSS-feeds, to make
+      RSS readers able to submit login credentials. (garvinhicking)
+
 Version 1.1-beta1 (August 14th, 2006)
 ------------------------------------------------------------------------
 
