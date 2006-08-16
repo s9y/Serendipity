@@ -3,6 +3,9 @@
 Version 1.1-beta2 ()
 ------------------------------------------------------------------------
 
+    * Fix a bug in the HTTP 304 Conditional GET RSS-Feed caching when
+      the server timezone offset was not set to zero. Thanks to dand!
+
     * Added ability to use HTTP Authentication to the blog. Can be 
       triggered by submitting HTTP Auth credentials [only supported when 
       the server runs with mod_php, not as CGI]. Authentication can be 
