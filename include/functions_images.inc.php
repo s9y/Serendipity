@@ -36,9 +36,11 @@ function serendipity_isActiveFile($file) {
  * @param   string  Only fetch files from a specific directory
  * @param   string  Only fetch specific filenames
  * @param   string  Only fetch media with specific keyword
+ * @param   array   An array of restricting filter sets
+ * @param   boolean Apply strict directory checks, or include subdirectories?
  * @return  array   Resultset of images
  */
-function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total, $order = false, $ordermode = false, $directory = '', $filename = '', $keywords = '', $filter = array()) {
+function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total, $order = false, $ordermode = false, $directory = '', $filename = '', $keywords = '', $filter = array(), $strict_directory = false) {
     global $serendipity;
 
     $cond = array(
@@ -68,7 +70,11 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total, $order
     }
 
     if (!empty($directory)) {
-        $cond['parts']['directory'] = " AND i.path LIKE '" . serendipity_db_escape_string($directory) . "%'\n";
+        if ($strict_directory) {
+            $cond['parts']['directory'] = " AND i.path = '" . serendipity_db_escape_string($directory) . "'\n";
+        } else {
+            $cond['parts']['directory'] = " AND i.path LIKE '" . serendipity_db_escape_string($directory) . "%'\n";
+        }
     }
 
     if (!empty($filename)) {
