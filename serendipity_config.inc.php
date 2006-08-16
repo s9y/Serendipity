@@ -27,7 +27,7 @@ if (IS_installed === true && !defined('IN_serendipity')) {
 include(S9Y_INCLUDE_PATH . 'include/compat.inc.php');
 
 // The version string
-$serendipity['version']         = '1.1-beta1';
+$serendipity['version']         = '1.1-beta2';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
@@ -77,6 +77,10 @@ if (!isset($serendipity['mediaProperties'])) {
 
 if (!isset($serendipity['use_PEAR'])) {
     $serendipity['use_PEAR'] = true;
+}
+
+if (!isset($serendipity['useHTTP-Auth'])) {
+    $serendipity['useHTTP-Auth'] = true;
 }
 
 // Should IFRAMEs be used for previewing entries and sending trackbacks?
@@ -245,6 +249,21 @@ serendipity_load_configuration();
  */
 
 if (IS_installed === true) {
+    // Import HTTP auth (mostly used for RSS feeds)
+    if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Feed Login\"");
+            header("HTTP/1.0 401 Unauthorized");
+            exit;
+        } else {
+            $serendipity['POST']['user'] = $_SERVER['PHP_AUTH_USER'];
+            $serendipity['POST']['pass'] = $_SERVER['PHP_AUTH_PW'];
+        }
+    } elseif (isset($_REQUEST['http_auth_user']) && isset($_REQUEST['http_auth_pw'])) {
+        $serendipity['POST']['user'] = $_REQUEST['http_auth_user'];
+        $serendipity['POST']['pass'] = $_REQUEST['http_auth_pw'];
+    }
+
     serendipity_login(false);
 }
 

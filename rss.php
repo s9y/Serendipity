@@ -4,6 +4,7 @@
 
 header('Content-Type: text/xml; charset=utf-8');
 session_cache_limiter('public');
+
 include('serendipity_config.inc.php');
 include(S9Y_INCLUDE_PATH . 'include/functions_rss.inc.php');
 
@@ -99,6 +100,10 @@ default:
         $entries = serendipity_fetchEntries(null, true, $serendipity['RSSfetchLimit'], false, (isset($modified_since) ? $modified_since : false), 'timestamp DESC', '', false, true);
     }
     break;
+}
+
+if (isset($serendipity['serendipityRealname'])) {
+    $title .= ' (' . LOGIN . ': ' . $serendipity['serendipityRealname'] . ')';
 }
 
 if (!empty($serendipity['GET']['category'])) {

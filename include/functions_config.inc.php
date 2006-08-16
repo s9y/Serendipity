@@ -477,7 +477,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
         if (is_array($row)) {
             serendipity_setCookie('old_session', session_id());
             $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
-            $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $$row['realname'];
+            $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
             $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword']     = $password;
             $_SESSION['serendipityEmail']       = $serendipity['serendipityEmail']        = $row['email'];
             $_SESSION['serendipityAuthorid']    = $serendipity['authorid']                = $row['authorid'];
