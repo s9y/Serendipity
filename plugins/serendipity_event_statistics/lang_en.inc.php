@@ -62,16 +62,27 @@
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', 'No!');
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'Yes, at the bottom of the page');
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'Yes, at the top of the page');
-@define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Nr of vistors');
-@define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Nr of vistors today');
-@define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', 'Total nr of vistors');
-@define('PLUGIN_EVENT_STATISTICS_EXT_VISSINCE', 'The extended visitors statistic feature has collected data since');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Set to \'no\' to show only visitor stats');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Show everything? (default: no)');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'No, hide everything but the counter.');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Yes, show me all statistics!');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Individual counters');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Vistors today');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', 'Vistors ever');
+@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY', 'Hits today');
+@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL', 'Hits ever');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISSINCE', 'Collecting stats since');
+@define('PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC','The hits can go quite high and are purely for indication of pageviews. The hits are updated on EVERY pageview or refresh. This number is NOT a actual visit count.');
 @define('PLUGIN_EVENT_STATISTICS_EXT_VISLATEST', 'Latest Visitors');
 @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS', 'Top Referrers');
 @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE', 'No referrers have yet been registered.');
+@define('PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH', 'Visits based on day');
+@define('PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH', 'Visits based on month');
 @define('PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS', 'Extended Visitor Statistics');
-@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Ban browsers from beeing counted');
-@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Insert browsers that should be excluded from counting, separated by "|".');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', 'Enable, do not count bots');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', 'Disable, please count bots');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Robot count protection');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Set to \'yes\' to not count robots. set to \'no\' to count robots. Currently over 25 bots are banned.');
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_LASTENTRY', 'Show date of last entry');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Show number of entries');
@@ -88,15 +99,3 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Show number of current visitors (aggregate past 15 minutes)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s visitor(s) online');
-
-@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY', 'Hits today');
-@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL', 'Hits ever');
-@define('PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH', 'Visits based on day');
-@define('PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH', 'Visits based on month');
-@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', 'Enable, do not count bots');
-@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', 'Disable, please count bots');
-@define('PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC','The hits can go quite high and are purely for indication of pageviews. The hits are updated on EVERY pageview or refresh. This number is NOT a actual visit count.');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Set to \'no\' to show only visitor stats');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Show everything? (default: no)');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'No, hide everything but the counter.');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Yes, show me all statistics!');
