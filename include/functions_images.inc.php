@@ -1955,9 +1955,10 @@ function serendipity_directoryACL(&$paths, $type = 'read') {
     }
 
     $startCount = count($paths);
-    if (serendipity_userLoggedIn() && (!isset($serendipity['enableACL']) || $serendipity['enableACL'] == true)) {
+    if (!isset($serendipity['enableACL']) || $serendipity['enableACL'] == true) {
         // Check if we are a cool superuser. Bail out if we are.
-        if (serendipity_checkPermission('adminImagesMaintainOthers') && serendipity_checkPermission('adminImagesDirectories')) {
+        $logged_in = serendipity_userLoggedIn();
+        if ($logged_in && serendipity_checkPermission('adminImagesMaintainOthers') && serendipity_checkPermission('adminImagesDirectories')) {
             if (!$debug) {
                 return true;
             }
@@ -1975,13 +1976,18 @@ function serendipity_directoryACL(&$paths, $type = 'read') {
         }
 
         // Get a list of all the groups for this user. Pipe it into a usable array.
-        $my_groups =& serendipity_getGroups($serendipity['authorid']);
-        $acl_allowed_groups = array();
-        foreach($my_groups AS $my_group) {
-            $acl_allowed_groups[$my_group['id']] = true;
+        if ($logged_in) {
+            $my_groups =& serendipity_getGroups($serendipity['authorid']);
+            $acl_allowed_groups = array();
+            foreach($my_groups AS $my_group) {
+                $acl_allowed_groups[$my_group['id']] = true;
+            }
+        } else {
+            // Only the 'ALL AUTHORS' group is valid for non-logged in authors.
+            $acl_allowed_groups = array(0 => true);
         }
 
-        // Iterate every ACL and check if we are allowed to use it.
+        // Iterate every ACL and check if we are allowed to use it. Parse that data into a workable array.
         $acl_allowed = array();
         foreach($allowed AS $row) {
             $acl_allowed[$row['directory']][$row['groupid']] = true;
