@@ -136,7 +136,7 @@
 {if $media.case == 'external'}
 
     <!-- EXTERNAL MEDIA START -->
-    {if $media.is_created}
+    {if $media.is_created OR $media.is_deleted}
     <script type="text/javascript">
     if (parent.frames['tree']) {ldelim}
         parent.frames['tree'].location.href  = parent.frames['tree'].location.href;
