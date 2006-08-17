@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 911
+ *  EN-Revision: 1381
  */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'スパムプロテクター');
@@ -19,8 +19,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_IPFLOOD', 'IP ブロックの間隔');
 @define('PLUGIN_EVENT_SPAMBLOCK_IPFLOOD_DESC', '1 つの IP アドレスからのコメント送信を n 分間隔でのみ許可します。コメントの氾濫を防ぐのに有用です。');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS', 'Captcha を有効にする');
-@define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_DESC', '
-特別に作られた画像に表示された任意の文字列を入力することをユーザーに強いるでしょう。これは、ブログへの自動投稿を無効にするでしょう。それらの captcha を読むために、視力の減退した人々がそれを一生懸命見分けなければいけないであろうことを覚えておいてください。');
+@define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_DESC', '特別に作られた画像に表示された任意の文字列を入力することをユーザーに強いるでしょう。これは、ブログへの自動投稿を無効にするでしょう。視力の減退した人々が、captcha を読むために、懸命に見分けなければいけないであろうことを覚えておいてください。');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC', 'ロボットからの自動的なコメントスパムを防ぐために、画像の下の入力ボックスに適切な文字列を入力してください。文字列が一致する場合のみ、コメントが送信されるでしょう。ブラウザーが Cookie をサポートし、受け入れることを確認してください。さもなければ、コメントを正確に確認することができません。');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2', '入力ボックスにここに見える文字列を入力してください!');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC3', '上のスパム防止画像から文字列を入力してください: ');
@@ -49,7 +48,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPFLOOD', 'IP ブロック');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_RBL', 'RBL ブロック');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_SURBL', 'SURBL ブロック');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_CAPTCHAS', '無効な captcha (入力値: %s, 期待値: %s)');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_CAPTCHAS', '無効な captcha (入力値: [%s] 期待値: [%s])');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION', 'X 日後に自動モデレートする');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL', 'コメントしたユーザーの電子メールアドレスを隠す');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_DESC', 'コメントユーザーの電子メールアドレスを表示しなくなるでしょう。');
@@ -103,3 +102,13 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE', '著者のスパムブロックを無効にする');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', '次のユーザーグループ中の著者はスパムブロックプラグインによっるチェックをせずにコメントを記入することを許可できます。');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET', 'Akismet API キー');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is a central anti-spam and blacklisting server. It can analyze your incoming comments and check if that comment has been listed as Spam. Akismet was developed for WordPress specifically, but can be used by other systems. You just need an API Key from http://www.akismet.com by registering an account at http://www.wordpress.com/. If you leave this API key empty, Akismet will not be used.');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'How to treat Akismet-reported spam');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Filtered by Akismet.com Blacklist');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_TREAT', 'What to do with comments when being auto-moderated?');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'What to do with trackbacks when being auto-moderated?');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Force trackback moderation after how many days');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'You can automatically set all trackbacks for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');

@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 911
+ *  EN-Revision: 1381
  */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'スパムプロテクター');
@@ -102,3 +102,13 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE', '著者のスパムブロックを無効にする');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', '次のユーザーグループ中の著者はスパムブロックプラグインによっるチェックをせずにコメントを記入することを許可できます。');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET', 'Akismet API キー');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is a central anti-spam and blacklisting server. It can analyze your incoming comments and check if that comment has been listed as Spam. Akismet was developed for WordPress specifically, but can be used by other systems. You just need an API Key from http://www.akismet.com by registering an account at http://www.wordpress.com/. If you leave this API key empty, Akismet will not be used.');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'How to treat Akismet-reported spam');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Filtered by Akismet.com Blacklist');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_TREAT', 'What to do with comments when being auto-moderated?');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'What to do with trackbacks when being auto-moderated?');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Force trackback moderation after how many days');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'You can automatically set all trackbacks for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');
