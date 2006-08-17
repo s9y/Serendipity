@@ -128,15 +128,20 @@ switch ($serendipity['GET']['step']) {
         }
         break;
 
-    case 'directoryDoCreate':
-        $is_created = true;
-    case 'directoryCreate':
+    case 'directoryDoCreate':    
+    case 'directoryDoDelete':        
+        $is_created = true;        
+        if ($serendipity['GET']['step'] == 'directoryDoDelete') {
+            $is_deleted = true;        
+        }
+    case 'directoryCreate':    
         $serendipity['GET']['adminAction'] = $serendipity['GET']['step'];
         $media['case'] = 'external';
         ob_start();
         include S9Y_INCLUDE_PATH . 'include/admin/images.inc.php';
-        if ($is_created) {
+        if ($is_created || $is_deleted) {
             $media['is_created'] = $is_created;
+            $media['is_deleted'] = $is_deleted;
             $media['new_dir']    = $new_dir;
         }
         $media['external'] = ob_get_contents();
