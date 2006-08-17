@@ -466,11 +466,12 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     exit;
 } else if (preg_match(PAT_COMMENTS, $uri, $matches)) {
     $serendipity['view'] = 'comments';
-    $_args = $serendipity['uriArguments'];
+    $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
     $timedesc = array();
 
     /* Attempt to locate hidden variables within the URI */
     $search = array();
+    print_r($_args);
     foreach ($_args as $k => $v){
         if ($v == PATH_COMMENTS) {
             continue;
