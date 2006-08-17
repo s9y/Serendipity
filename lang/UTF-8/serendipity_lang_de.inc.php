@@ -4,12 +4,12 @@
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
 /* vim: set sts=4 ts=4 expandtab : */
 
-@define('LANG_CHARSET', 'ISO-8859-1');
-@define('SQL_CHARSET', 'latin1');
-@define('DATE_LOCALES', 'de_DE.ISO-8859-1, de_DE.ISO8859-1, german, de_DE, de_DE@euro, de');
+@define('LANG_CHARSET', 'UTF-8');
+@define('SQL_CHARSET', 'utf8');
+@define('DATE_LOCALES', 'de_DE.UTF-8, de_DE.UTF8, german, de_DE, de_DE@euro, de');
 @define('DATE_FORMAT_ENTRY', '%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT', '%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'de');
+@define('WYSIWYG_LANG', 'de-utf');
 @define('NUMBER_FORMAT_DECIMALS', '2');
 @define('NUMBER_FORMAT_DECPOINT', ',');
 @define('NUMBER_FORMAT_THOUSANDS', '.');
