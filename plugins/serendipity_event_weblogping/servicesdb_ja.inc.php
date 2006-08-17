@@ -141,6 +141,34 @@
               'host'        => 'rpc.technorati.jp',
               'path'        => '/rpc/ping',
               'extended' => false
+            ),
+
+            array(
+              'name'        => 'livedoor reader',
+              'host'        => 'rpc.reader.livedoor.com',
+              'path'        => '/ping',
+              'extended' => false
+            ),
+
+            array(
+              'name'        => 'ドリコム',
+              'host'        => 'ping.rss.drecom.jp',
+              'path'        => '/',
+              'extended' => false
+            ),
+
+            array(
+              'name'        => 'Ask jp',
+              'host'        => 'ping.ask.jp',
+              'path'        => '/xmlrpc.m',
+              'extended' => false
+            ),
+
+            array(
+              'name'        => 'livedoor Reader',
+              'host'        => 'rpc.reader.livedoor.com',
+              'path'        => '/ping',
+              'extended' => false
             )
 
         );
