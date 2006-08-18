@@ -3,7 +3,6 @@
 /**
  *  @version $Revision$
  *  @author Ivan Cenov imc@okto7.com
- *  EN-Revision: 690
  */
 
 @define('PLUGIN_EVENT_NL2BR_NAME',     'Форматиране на текст: NL2BR');

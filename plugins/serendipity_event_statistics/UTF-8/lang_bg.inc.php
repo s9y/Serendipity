@@ -3,7 +3,6 @@
 /**
  *  @version $Revision$
  *  @author Ivan Cenov jwalker@abv.bg
- *  EN-Revision: 1009
  */
 
     @define('PLUGIN_EVENT_STATISTICS_NAME', 'Статистика');

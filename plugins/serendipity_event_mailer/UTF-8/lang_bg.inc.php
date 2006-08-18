@@ -3,7 +3,6 @@
 /**
  *  @version $Revision$
  *  @author Ivan Cenov jwalker@abv.bg
- *  EN-Revision: 791
  */
 
     @define('PLUGIN_EVENT_MAILER_NAME', 'Изпращане на статии по e-mail');
