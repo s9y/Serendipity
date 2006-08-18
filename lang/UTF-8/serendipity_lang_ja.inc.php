@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 1342 2006-07-28 11:07:54Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 1367 2006-08-09 08:10:18Z elf2000 $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
@@ -881,3 +881,4 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

@@ -797,3 +797,4 @@
 @define('AUTHORS_SHOW_ARTICLE_COUNT', 'ÃÚÑÖ ÚÏÏ דזÇÖםÚ Çב‗ÇÊÈ ÈÌÇהÈ ÃÓדו¿');
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'Ýם ÍÇב ÊÔÛםב וÐÇ ÇבÎםÇÑ ÝÅה ÚÏÏ ÇבדזÇÖםÚ ÇבÎÇÕÉ ÈוÐÇ Çב‗ÇÊÈ ÓזÝ םÊד ÚÑÖוÇ ÈÌÇהÈ ÅÓדו');
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

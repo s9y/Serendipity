@@ -3,6 +3,9 @@
 Version 1.1-beta2 ()
 ------------------------------------------------------------------------
 
+    * Allow to apply current permissions of a directory to all sub-
+      directories (Matthew Groeninger)
+
     * Fix a bug in the HTTP 304 Conditional GET RSS-Feed caching when
       the server timezone offset was not set to zero. Thanks to dand!
 

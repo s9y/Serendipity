@@ -383,6 +383,15 @@ switch ($serendipity['GET']['adminAction']) {
         $groups = serendipity_getAllGroups();
         $read_groups  = serendipity_ACLGet(0, 'directory', 'read', $use_dir);
         $write_groups = serendipity_ACLGet(0, 'directory', 'write', $use_dir);
+
+        if (!empty($serendipity['POST']['update_children'])) {
+            $dir_list = serendipity_traversePath($serendipity['serendipityPath'] . $serendipity['uploadPath'], $use_dir, true, NULL, 1, NULL, 'write', NULL);
+            foreach($dir_list AS $f => $dir) {
+                // Apply parent ACL to children.
+                serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'], $dir['relpath']);
+                serendipity_ACLGrant(0, 'directory', 'write', $serendipity['POST']['write_authors'], $dir['relpath']);
+            }
+        }
 ?>
 
     <div class="image_directory_edit"><strong><?php echo MANAGE_DIRECTORIES ?></strong></div>
@@ -421,6 +430,11 @@ switch ($serendipity['GET']['adminAction']) {
 ?>
                 </select>
             </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="setchild" value="true" type="checkbox" name="serendipity[update_children]" <?php echo (!empty($serendipity['POST']['update_children']) == 'on' ? 'checked="checked"' : ''); ?> /> <label for="setchild"><?php echo PERM_SET_CHILD; ?></label>
+            <td>
         </tr>
     </table>
     <br />

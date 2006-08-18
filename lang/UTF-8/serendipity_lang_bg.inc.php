@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_bg.inc.php 1344 2006-07-30 13:03:20Z jwalker $
+<?php # $Id: serendipity_lang_bg.inc.php 1345 2006-07-30 13:03:45Z jwalker $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) 2004 Bogomil Shopov <bogomil@spisanie.com>
@@ -866,3 +866,4 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Път до коментарите');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
