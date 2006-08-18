@@ -5,6 +5,7 @@
  *  @author Ivan Cenov jwalker@abv.bg
  */
 
+
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Допълнителни свойства за постингите');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(Кеширане, не публични постинги, sticky постинги)');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Маркиране на този постинг като sticky');
@@ -22,7 +23,6 @@
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE', 'Кеширането завърши.');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_ABORTED', 'Кеширането е прекратено.');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL', ' (общо %d постинга)...');
-    @define('PLUGIN_EVENT_ENTRYPROPERTIES_NL2BR', 'Забрана на nl2br');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_NO_FRONTPAGE', 'Постингът да не се вижда на главната страница и в списъците');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS', 'Използване на групово-базираните рестрикции');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS_DESC', 'Когато е активирано, Вие можете да дефинирате кои потребителски групи да имат възможност за четене на постингите. Тази опция има голямо влияние върху производителността на блога. Позволете я, само ако наистина ще я използвате.');

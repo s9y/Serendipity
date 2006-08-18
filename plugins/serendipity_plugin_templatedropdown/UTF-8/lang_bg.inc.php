@@ -2,8 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov imc@okto7.com
- *  EN-Revision: 
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
 @define('PLUGIN_TEMPLATEDROPDOWN_NAME',     'Избор на теми');
