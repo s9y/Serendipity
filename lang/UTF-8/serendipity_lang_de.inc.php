@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 974 2006-02-23 09:42:48Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 1385 2006-08-15 13:02:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -875,3 +875,4 @@
 @define('PREFERENCE_USE_JS_DESC', 'Falls aktiviert, werden erweiterte JavaScript Funktionalitäten in einigen Bereichen freigeschaltet. Z.B. in der Plugin-Konfiguration kann Drag+Drop benutzt werden, um leichter Änderungen vorzunehmen.');
 @define('PREFERENCE_USE_JS_WARNING', '(Diese Seite setzt fortgeschrittene JavaScripts ein. Falls dabei Probleme in der Benutzbarkeit auftreten, deaktivieren Sie bitte die Option zum Einsatz dieser JavaScripts im Menüpunkt "Eigene Einstellungen", oder deaktivieren Sie JavaScript in Ihrem Browser.)');
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Pfad zu Kommentaren');
+@define('PERM_SET_CHILD', 'Identische Rechte auch auf alle Unterverzeichnisse anwenden');

@@ -882,3 +882,4 @@ $i18n_unknown = 'tw';
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

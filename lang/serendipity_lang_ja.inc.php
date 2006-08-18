@@ -881,3 +881,4 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

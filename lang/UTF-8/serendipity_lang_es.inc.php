@@ -888,3 +888,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 /*RLAZO [20060722] spell checked*/
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

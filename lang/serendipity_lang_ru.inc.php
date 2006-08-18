@@ -882,3 +882,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

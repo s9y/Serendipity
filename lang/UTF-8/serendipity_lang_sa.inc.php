@@ -797,3 +797,4 @@
 @define('AUTHORS_SHOW_ARTICLE_COUNT', 'أعرض عدد مواضيع الكاتب بجانب أسمه؟');
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'في حال تشغيل هذا الخيار فإن عدد المواضيع الخاصة بهذا الكاتب سوف يتم عرضها بجانب إسمه');
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

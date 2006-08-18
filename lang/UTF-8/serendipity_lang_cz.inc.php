@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cz.inc.php 1342 2006-07-28 11:07:54Z garvinhicking $
+<?php # $Id: serendipity_lang_cz.inc.php 1365 2006-08-09 07:35:18Z elf2000 $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -892,3 +892,4 @@ $i18n_filename_to = array (
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');

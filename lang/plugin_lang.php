@@ -79,3 +79,4 @@ foreach($const['missing'] AS $file => $constants) {
     }
     echo "---------------------------\n";
 }
+@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
