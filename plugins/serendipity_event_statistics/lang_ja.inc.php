@@ -60,8 +60,8 @@
 @define('PLUGIN_EVENT_STATISTICS_EXT_ADD', '訪問者の拡張統計');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ADD_DESC', '拡張された訪問者統計機能を追加しますか? (デフォルト: いいえ)');
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', 'いいえ!');
-@define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'はい, ぺーじの下に');
-@define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'はい, ページの上に');
+@define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'はい、ページの下に');
+@define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'はい、ページの上に');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ALL', '訪問者統計のみを表示するには「いいえ」で設定します');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'すべて表示しますか? (デフォルト: いいえ)');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'いいえ、カウンター以外を隠します。');
