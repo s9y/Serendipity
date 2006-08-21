@@ -729,7 +729,7 @@ function serendipity_currentURL($strict = false) {
         $url); // Kill possible looped repitions and bad characters which could occur
 
     if ($strict) {
-        $url = preg_replace('@(//+), '/', $url);
+        $url = preg_replace('@(//+)@', '/', $url);
     }
 
     return $url;
