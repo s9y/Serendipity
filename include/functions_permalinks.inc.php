@@ -247,10 +247,11 @@ function serendipity_initPermalinks() {
      * If you add new patterns, remember to add the new rules to the *.tpl files and
      * function serendipity_installFiles().
      */
-    @define('PAT_FILENAME',   '0-9a-z\.\_!;,\+\-');
-    @define('PAT_CSS',        '@/(serendipity\.css|serendipity_admin\.css)@');
-    @define('PAT_FEED',       '@/(index|atom[0-9]*|rss|b2rss|b2rdf).(rss|rdf|rss2|xml)@');
-    @define('PAT_COMMENTSUB', '@/([0-9]+)[_\-][' . PAT_FILENAME . ']*\.html@i');
+    @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-%');
+    @define('PAT_FILENAME_MATCH', '[' . PAT_FILENAME . ']+');
+    @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)@');
+    @define('PAT_FEED',           '@/(index|atom[0-9]*|rss|b2rss|b2rdf).(rss|rdf|rss2|xml)@');
+    @define('PAT_COMMENTSUB',     '@/([0-9]+)[_\-][' . PAT_FILENAME . ']*\.html@i');
 
     return true;
 }
@@ -558,13 +559,13 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
  */
 function serendipity_makePermalinkRegex($format, $type = 'entry') {
     static $entryKeys           = array('%id%',     '%title%',              '%day%',      '%month%',    '%year%');
-    static $entryRegexValues    = array('([0-9]+)', '[0-9a-z\.\_!;,\+\-]+', '[0-9]{1,2}', '[0-9]{1,2}', '[0-9]{4}');
+    static $entryRegexValues    = array('([0-9]+)', PAT_FILENAME_MATCH, '[0-9]{1,2}', '[0-9]{1,2}', '[0-9]{4}');
 
     static $authorKeys          = array('%id%',     '%username%',           '%realname%',           '%email%');
-    static $authorRegexValues   = array('([0-9]+)', '[0-9a-z\.\_!;,\+\-]+', '[0-9a-z\.\_!;,\+\-]+', '[0-9a-z\.\_!;,\+\-]+');
+    static $authorRegexValues   = array('([0-9]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH, PAT_FILENAME_MATCH);
 
     static $categoryKeys        = array('%id%',     '%name%',               '%description%');
-    static $categoryRegexValues = array('([0-9;]+)', '[0-9a-z\.\_!;,\+\-]+', '[0-9a-z\.\_!;,\+\-]+');
+    static $categoryRegexValues = array('([0-9;]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH);
 
     switch($type) {
         case 'entry':
@@ -692,7 +693,7 @@ function serendipity_archiveDateUrl($range, $summary=false, $key='baseURL') {
  * @access public
  * @return string   the current URL
  */
-function serendipity_currentURL() {
+function serendipity_currentURL($strict = false) {
     global $serendipity;
 
     // All that URL getting humpty-dumpty is necessary to allow a user to change the template in the
@@ -704,7 +705,7 @@ function serendipity_currentURL() {
     if (!empty($uri['query'])) {
         $qst = '&amp;' . str_replace('&', '&amp;', $uri['query']);
     }
-    $uri['path'] = preg_replace('@^' . preg_quote($serendipity['serendipityHTTPPath']) . '@i', '', $uri['path']);
+    $uri['path'] = preg_replace('@^' . preg_quote($serendipity['serendipityHTTPPath']) . '@i', ($strict ? '/' : ''), $uri['path']);
     $uri['path'] = preg_replace('@^(&amp;)?' . preg_quote($serendipity['indexFile']) . '(&amp;)@i', '', $uri['path']);
     $url = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?' . $uri['path'] . $qst;
     $url = str_replace(
@@ -726,6 +727,10 @@ function serendipity_currentURL() {
         ),
 
         $url); // Kill possible looped repitions and bad characters which could occur
+
+    if ($strict) {
+        $url = preg_replace('@(//+), '/', $url);
+    }
 
     return $url;
 }

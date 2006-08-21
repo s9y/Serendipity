@@ -953,9 +953,10 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             $entry['html_title']= $entry['title'];
             $entry['title']     = htmlspecialchars($entry['title']);
 
-            $entry['title_rdf']          = preg_replace('@-{2,}@', '-', $entry['title']);
+            $entry['title_rdf']          = preg_replace('@-{2,}@', '-', $entry['html_title']);
             $entry['rdf_ident']          = serendipity_archiveURL($entry['id'], $entry['title_rdf'], 'baseURL', true, array('timestamp' => $entry['timestamp']));
             $entry['link_rdf']           = serendipity_rewriteURL(PATH_FEEDS . '/ei_'. $entry['id'] .'.rdf');
+            $entry['title_rdf']          = htmlspecialchars($entry['title_rdf']);
 
             $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'];
             $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'];
