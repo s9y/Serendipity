@@ -1356,125 +1356,125 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     }
     $start   = ($page-1) * $perPage;
 
-	## SYNCH START ##
-	$aExclude = array("CVS" => true, ".svn" => true);
-	serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
-	$paths        = array();
-	$aFilesOnDisk = array();
+    if ($manage && $limit_path == NULL) {
+        ## SYNCH START ##
+        $aExclude = array("CVS" => true, ".svn" => true);
+        serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
+        $paths        = array();
+        $aFilesOnDisk = array();
 
-	$aResultSet   = serendipity_traversePath(
-	    $serendipity['serendipityPath'] . $serendipity['uploadPath']. $limit_path,
-	    '',
-	    false,
-	    NULL,
-	    1,
-	    NULL,
-	    FALSE,
-	    $aExclude
-	);
+        $aResultSet   = serendipity_traversePath(
+            $serendipity['serendipityPath'] . $serendipity['uploadPath']. $limit_path,
+            '',
+            false,
+            NULL,
+            1,
+            NULL,
+            FALSE,
+            $aExclude
+        );
+        foreach ($aResultSet AS $sKey => $sFile) {
+                if ($sFile['directory']) {
+                    if ($debug) echo "{$sFile['relpath']} is a directory.<br />";
+                    array_push($paths, $sFile);
+                } else {
+                    if ($debug) echo "{$sFile['relpath']} is a file.<br />";
+                    // Store the file in our array, remove any ending slashes
+                    $aFilesOnDisk[$sFile['relpath']] = 1;
+                }
+                unset($aResultSet[$sKey]);
+        }
 
-	foreach ($aResultSet AS $sKey => $sFile) {
-		if ($sFile['directory']) {
-		    if ($debug) echo "{$sFile['relpath']} is a directory.<br />";
-			array_push($paths, $sFile);
-		} else {
-		    if ($debug) echo "{$sFile['relpath']} is a file.<br />";
-		    // Store the file in our array, remove any ending slashes
-			$aFilesOnDisk[$sFile['relpath']] = 1;
-		}
-		unset($aResultSet[$sKey]);
-	}
+        usort($paths, 'serendipity_sortPath');
 
-    usort($paths, 'serendipity_sortPath');
+        if ($debug) echo "<p>Got files: <pre>" . print_r($aFilesOnDisk, true) . "</pre></p>";
+        $serendipity['current_image_hash'] = md5(serialize($aFilesOnDisk));
 
-	if ($debug) echo "<p>Got files: <pre>" . print_r($aFilesOnDisk, true) . "</pre></p>";
-	$serendipity['current_image_hash'] = md5(serialize($aFilesOnDisk));
+        $nTimeStart = microtime_float();
+        // MTG 21/01/06: request all images from the database, delete any which don't exist
+        // on the filesystem, and mark off files from the file list which are already
+        // in the database
 
-	$nTimeStart = microtime_float();
-	// MTG 21/01/06: request all images from the database, delete any which don't exist
-	// on the filesystem, and mark off files from the file list which are already
-	// in the database
+        $nCount = 0;
+        if ($serendipity['onTheFlySynch'] && serendipity_checkPermission('adminImagesSync') && $serendipity['current_image_hash'] != $serendipity['last_image_hash']) {
+            $aResultSet = serendipity_db_query("SELECT path, name, extension, thumbnail_name, id
+                                                FROM {$serendipity['dbPrefix']}images", false, 'assoc');
+            if ($debug) echo "<p>Got images: <pre>" . print_r($aResultSet, true) . "</pre></p>";
+            if (is_array($aResultSet)) {
+                foreach ($aResultSet AS $sKey => $sFile) {
+                    serendipity_plugin_api::hook_event('backend_thumbnail_filename_select', $sFile);
+                    $sThumbNailFile = '';
+                    if (isset($sFile['thumbnail_filename'])) {
+                        $sThumbNailFile = $sFile['thumbnail_filename'];
+                    } else {
+                        $sThumbNailFile = $sFile['path'] . $sFile['name'] . '.' . $sFile['thumbnail_name'] . '.' . $sFile['extension'];
+                    }
 
-	$nCount = 0;
-	if ($serendipity['onTheFlySynch'] && serendipity_checkPermission('adminImagesSync') && $serendipity['current_image_hash'] != $serendipity['last_image_hash']) {
-		$aResultSet = serendipity_db_query("SELECT path, name, extension, thumbnail_name, id
-		                                      FROM {$serendipity['dbPrefix']}images", false, 'assoc');
-    	if ($debug) echo "<p>Got images: <pre>" . print_r($aResultSet, true) . "</pre></p>";
-		if (is_array($aResultSet)) {
-			foreach ($aResultSet AS $sKey => $sFile) {
-				serendipity_plugin_api::hook_event('backend_thumbnail_filename_select', $sFile);
-				$sThumbNailFile = '';
-				if (isset($sFile['thumbnail_filename'])) {
-					$sThumbNailFile = $sFile['thumbnail_filename'];
-				} else {
-					$sThumbNailFile = $sFile['path'] . $sFile['name'] . '.' . $sFile['thumbnail_name'] . '.' . $sFile['extension'];
-				}
+                    $sFileName = $sFile['path'] . $sFile['name'] . '.' . $sFile['extension'];
+                    if ($debug) echo "<p>File name is $sFileName,<br />thumbnail is $sThumbNailFile</p>";
+                    unset($aResultSet[$sKey]);
 
-				$sFileName = $sFile['path'] . $sFile['name'] . '.' . $sFile['extension'];
-				if ($debug) echo "<p>File name is $sFileName,<br />thumbnail is $sThumbNailFile</p>";
-				unset($aResultSet[$sKey]);
+                    if (isset($aFilesOnDisk[$sFileName])){
+                        unset($aFilesOnDisk[$sFileName]);
+                    } else {
+                        if ($debug) "Deleting Image {$sFile['id']}<br />\n";
+                        serendipity_deleteImage($sFile['id']);
+                        ++$nCount;
+                    }
+                    unset($aFilesOnDisk[$sThumbNailFile]);
+                }
+            }
 
-				if (isset($aFilesOnDisk[$sFileName])){
-					unset($aFilesOnDisk[$sFileName]);
-				} else {
-                    if ($debug) "Deleting Image {$sFile['id']}<br />\n";
-                    serendipity_deleteImage($sFile['id']);
-					++$nCount;
-				}
+            if ($nCount > 0){
+                if ($debug) echo "<p>Cleaned up ".$nCount." database entries</p>";
+            }
 
-				unset($aFilesOnDisk[$sThumbNailFile]);
-			}
-		}
+            serendipity_set_config_var('last_image_hash', $serendipity['current_image_hash'], 0);
+            $aUnmatchedOnDisk = array_keys($aFilesOnDisk);
+            if ($debug) echo "<p>Got unmatched files: <pre>" . print_r($aUnmatchedOnDisk, true) . "</pre></p>";
+            $nCount = 0;
+            foreach ($aUnmatchedOnDisk AS $sFile) {
+                if (preg_match('@\.' . $serendipity['thumbSuffix'] . '\.@', $sFile)) {
+                    if ($debug) echo "<p>Skipping thumbnailed file $sFile</p>";
+                    continue;
+                } else {
+                    if ($debug) echo "<p>Checking $sFile</p>";
+                }
 
-		if ($nCount > 0){
-			if ($debug) echo "<p>Cleaned up ".$nCount." database entries</p>";
-		}
+                // MTG: 21/01/06: put files which have just 'turned up' into the database
+                $aImageData = serendipity_getImageData($sFile);
+                if (serendipity_isImage($aImageData)) {
+                    $nPos = strrpos($sFile, "/");
+                    if (is_bool($nPos) && !$nPos) {
+                       $sFileName  = $sFile;
+                       $sDirectory = "";
+                    } else {
+                       ++$nPos;
+                       $sFileName  = substr($sFile, $nPos);
+                       $sDirectory = substr($sFile, 0, $nPos);
+                    }
+                    if ($debug) echo "<p>Inserting image $sFileName from $sDirectory <pre>" . print_r($aImageData, true) . "</pre> into database</p>";
+                    # TODO: Check if the thumbnail generation goes fine with Marty's code
+                    serendipity_makeThumbnail($sFileName, $sDirectory);
+                    serendipity_insertImageInDatabase($sFileName, $sDirectory);
+                    ++$nCount;
+                }
+            }
 
-		serendipity_set_config_var('last_image_hash', $serendipity['current_image_hash'], 0);
-		$aUnmatchedOnDisk = array_keys($aFilesOnDisk);
-    	if ($debug) echo "<p>Got unmatched files: <pre>" . print_r($aUnmatchedOnDisk, true) . "</pre></p>";
-		$nCount = 0;
-		foreach ($aUnmatchedOnDisk AS $sFile) {
-		    if (preg_match('@\.' . $serendipity['thumbSuffix'] . '\.@', $sFile)) {
-		        if ($debug) echo "<p>Skipping thumbnailed file $sFile</p>";
-		        continue;
-		    } else {
-		        if ($debug) echo "<p>Checking $sFile</p>";
-		    }
+            if ($nCount > 0) {
+                if ($debug) echo "<p>Inserted ".$nCount." images into the database</p>";
+            }
+        } else {
+            if ($debug) echo "<p>Media Gallery database is up to date</p>";
+        }
 
-			// MTG: 21/01/06: put files which have just 'turned up' into the database
-			$aImageData = serendipity_getImageData($sFile);
-			if (serendipity_isImage($aImageData)) {
-				$nPos = strrpos($sFile, "/");
-				if (is_bool($nPos) && !$nPos) {
-					$sFileName  = $sFile;
-					$sDirectory = "";
-				} else {
-					++$nPos;
-					$sFileName  = substr($sFile, $nPos);
-					$sDirectory = substr($sFile, 0, $nPos);
-				}
-				if ($debug) echo "<p>Inserting image $sFileName from $sDirectory <pre>" . print_r($aImageData, true) . "</pre> into database</p>";
-				# TODO: Check if the thumbnail generation goes fine with Marty's code
-                serendipity_makeThumbnail($sFileName, $sDirectory);
-				serendipity_insertImageInDatabase($sFileName, $sDirectory);
-				++$nCount;
-			}
-		}
-
-		if ($nCount > 0) {
-			if ($debug) echo "<p>Inserted ".$nCount." images into the database</p>";
-		}
-	} else {
-		if ($debug) echo "<p>Media Gallery database is up to date</p>";
-	}
-
-	/*
-	$nTimeEnd = microtime_float ( );
-	$nDifference = $nTimeEnd - $nTimeStart;
-	echo "<p> total time taken was " . $nDifference . "</p>";
-	*/
-	## SYNCH FINISHED ##
+         /*
+         $nTimeEnd = microtime_float ( );
+         $nDifference = $nTimeEnd - $nTimeStart;
+         echo "<p> total time taken was " . $nDifference . "</p>";
+        */
+        ## SYNCH FINISHED ##
+    }
 
     ## Aply ACL afterwards:
     serendipity_directoryACL($paths, 'read');
