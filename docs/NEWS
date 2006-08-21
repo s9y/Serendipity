@@ -3,6 +3,10 @@
 Version 1.1-beta2 ()
 ------------------------------------------------------------------------
 
+    * Change permalinks to allow "%" in URLS. Fix templatedropdown
+      plugin to remove double "//". Fix bad htmlspecialchars of the
+      RDF ident link.
+
     * Allow to apply current permissions of a directory to all sub-
       directories (Matthew Groeninger)
 
