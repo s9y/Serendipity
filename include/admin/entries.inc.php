@@ -442,8 +442,10 @@ switch($serendipity['GET']['adminAction']) {
         if (!serendipity_checkFormToken()) {
             break;
         }
+
+        $entry = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
         serendipity_deleteEntry((int)$serendipity['GET']['id']);
-        printf(RIP_ENTRY, (int)$serendipity['GET']['id']);
+        printf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
         echo '<br />';
 
     case 'editSelect':
@@ -455,7 +457,9 @@ switch($serendipity['GET']['adminAction']) {
             break;
         }
         $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doDelete&amp;serendipity[id]=' . (int)$serendipity['GET']['id'];
-        printf(DELETE_SURE, (int)$serendipity['GET']['id']);
+
+        $entry = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
+        printf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
 ?>
 <br />
 <br />
