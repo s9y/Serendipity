@@ -866,4 +866,4 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Път до коментарите');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
+@define('PERM_SET_CHILD', 'Установяване на същите разрешения за всички поддиректории');
