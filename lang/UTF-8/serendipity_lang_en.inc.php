@@ -876,3 +876,7 @@
 @define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
 @define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
