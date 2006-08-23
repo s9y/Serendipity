@@ -990,7 +990,11 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
     }
 
     if ($returnMyGroups) {
-        return $group[$authorid]['membership'];
+        if ($returnMyGroups === 'all') {
+            return $group[$authorid];
+        } else {
+            return $group[$authorid]['membership'];
+        }
     }
 
     if ($authorid == $serendipity['authorid'] && $serendipity['no_create']) {
@@ -1322,9 +1326,11 @@ function serendipity_intersectGroup($checkuser = null, $myself = null) {
  * @param   array   The associative array of permission names
  * @param   array   The associative array of new values for the permissions. Needs the same associative keys like the $perms array.
  * @param   bool    Indicates if an all new privilege should be inserted (true) or if an existing privilege is going to be checked
+ * @param   array   The associative array of plugin permission names
+ * @param   array   The associative array of plugin permission hooks
  * @return true
  */
-function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv = false) {
+function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv = false, $forbidden_plugins = null, $forbidden_hooks = null) {
     global $serendipity;
 
     if (!serendipity_checkPermission('adminUsersGroups')) {
@@ -1343,6 +1349,10 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}groupconfig WHERE id = " . (int)$groupid);
     foreach ($perms AS $perm => $userlevels) {
+        if (substr($perm, 0, 2) == 'f_') {
+            continue;
+        }
+
         if (isset($values[$perm]) && $values[$perm] == 'true') {
             $value = 'true';
         } elseif (isset($values[$perm]) && $values[$perm] === 'false') {
@@ -1368,6 +1378,28 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
                 serendipity_db_escape_string($value)
             )
         );
+    }
+
+    if (is_array($forbidden_plugins)) {
+        foreach($forbidden_plugins AS $plugid) {
+            serendipity_db_query(
+                sprintf("INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (%d, '%s', 'true')",
+                    (int)$groupid,
+                    serendipity_db_escape_string('f_' . urldecode($plugid))
+                )
+            );
+        }
+    }
+
+    if (is_array($forbidden_hooks)) {
+        foreach($forbidden_hooks AS $hook) {
+            serendipity_db_query(
+                sprintf("INSERT INTO {$serendipity['dbPrefix']}groupconfig (id, property, value) VALUES (%d, '%s', 'true')",
+                    (int)$groupid,
+                    serendipity_db_escape_string('f_' . urldecode($hook))
+                )
+            );
+        }
     }
 
     serendipity_db_query("UPDATE {$serendipity['dbPrefix']}groups SET name = '" . serendipity_db_escape_string($values['name']) . "' WHERE id = " . (int)$groupid);
@@ -1824,4 +1856,35 @@ function &serendipity_loadThemeOptions(&$template_config) {
 
     return $template_vars;
 }
+
+function serendipity_hasPluginPermissions($plugin) {
+    static $forbidden = null;
+    global $serendipity;
+    
+    if (empty($serendipity['authorid'])) {
+        return true;
+    }
+
+    if ($forbidden === null) {
+        $forbidden = array();
+        $groups =& serendipity_checkPermission(null, null, 'all');
+        foreach($groups AS $idx => $group) {
+            if ($idx == 'membership') {
+                continue;
+            }
+            foreach($group AS $key => $val) {
+                if (substr($key, 0, 2) == 'f_') {
+                    $forbidden[$key] = true;
+                }
+            }
+        }
+    }
+
+    if (isset($forbidden['f_' . $plugin])) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 /* vim: set sts=4 ts=4 expandtab : */

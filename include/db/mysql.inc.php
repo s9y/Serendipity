@@ -88,7 +88,6 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
         echo "[bench: " . ($end-$start) . "s] $sql<br />\n";
     }
 
-
     if (!$expectError && mysql_error($serendipity['dbConn']) != '') {
         $msg = '<pre>' . $sql . '</pre> / ' . mysql_error($serendipity['dbConn']);
         return $msg;

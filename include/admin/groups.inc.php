@@ -21,7 +21,7 @@ if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
 if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     $serendipity['POST']['group'] = serendipity_addGroup($serendipity['POST']['name']);
     $perms = serendipity_getAllPermissionNames();
-    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST']);
+    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
     printf('<div class="serendipityAdminMsgSuccess">' . CREATED_GROUP . '</div>', '#' . $serendipity['POST']['group'] . ', ' . $serendipity['POST']['name']);
 }
 
@@ -29,7 +29,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
 /* Edit a group */
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
-    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST']);
+    serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
     printf('<div class="serendipityAdminMsgSuccess">' . MODIFIED_GROUP . '</div>', $serendipity['POST']['name']);
 }
 
@@ -135,6 +135,10 @@ foreach($allusers AS $user) {
     $perms = serendipity_getAllPermissionNames();
     ksort($perms);
     foreach($perms AS $perm => $userlevels) {
+        if (substr($perm, 0, 2) == 'f_') {
+            continue;
+        }
+
         if (isset($from[$perm]) && $from[$perm] === 'true') {
             $selected = 'checked="checked"';
         } else {
@@ -171,6 +175,58 @@ foreach($allusers AS $user) {
             echo '<td>' . $indentB . '<input id="' . htmlspecialchars($perm) . '" type="checkbox" name="serendipity[' . htmlspecialchars($perm) . ']" value="true" ' . $selected . ' /></td>' . "\n";
             echo "</tr>\n";
         }
+    }
+
+    if ($serendipity['enablePluginACL']) {
+        $allplugins =& serendipity_plugin_api::get_event_plugins();
+        $allhooks   = array();
+?>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"><?php echo PERMISSION_FORBIDDEN_PLUGINS; ?></td>
+        <td>
+            <select name="serendipity[forbidden_plugins][]" multiple="multiple" size="5">
+            <?php
+                foreach($allplugins AS $plugid => $currentplugin) {
+                    foreach($currentplugin['b']->properties['event_hooks'] AS $hook => $set) {
+                        $allhooks[$hook] = true;
+                    }
+                    echo '<option value="' . urlencode($plugid) . '" ' . (serendipity_hasPluginPermissions($plugid) ? '' : 'selected="selected"') . '>' . htmlspecialchars($currentplugin['b']->properties['name']) . '</option>' . "\n";
+                }
+                ksort($allhooks);
+            ?>
+            </select>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+        <td valign="top"><?php echo PERMISSION_FORBIDDEN_HOOKS; ?></td>
+        <td>
+            <select name="serendipity[forbidden_hooks][]" multiple="multiple" size="5">
+            <?php
+                foreach($allhooks AS $hook => $set) {
+                    echo '<option value="' . urlencode($hook) . '" ' . (serendipity_hasPluginPermissions($hook) ? '' : 'selected="selected"') . '>' . htmlspecialchars($hook) . '</option>' . "\n";
+                }
+            ?>
+            </select>
+        </td>
+    </tr>
+<?php
+    } else {
+?>
+    <tr>
+        <td colspan="2">&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td colspan="2"><?php echo PERMISSION_FORBIDDEN_ENABLE_DESC; ?></td>
+    </tr>
+<?php
     }
 ?>
 </table>

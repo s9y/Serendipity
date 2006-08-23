@@ -972,6 +972,10 @@ class serendipity_plugin_api {
             return false;
         }
 
+        if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($event_name)) {
+            return false;
+        }
+
         // We can NOT use a "return by reference" here, because then when
         // a plugin executes another event_hook, the referenced variable within
         // that call will overwrite the previous original plugin listing and
@@ -985,6 +989,7 @@ class serendipity_plugin_api {
                 $bag    = &$plugin_data['b'];
                 $phooks = &$bag->get('event_hooks');
                 if (isset($phooks[$event_name])) {
+
                     // Check for cachable events.
                     if (isset($eventData['is_cached']) && $eventData['is_cached']) {
                         $chooks = &$bag->get('cachable_events');
@@ -993,6 +998,9 @@ class serendipity_plugin_api {
                         }
                     }
 
+                    if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($plugin)) {
+                        continue;
+                    }
                     $plugin_data['p']->event_hook($event_name, $bag, $eventData, $addData);
                 }
             }
