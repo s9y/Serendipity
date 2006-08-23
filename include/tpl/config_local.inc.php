@@ -377,6 +377,13 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
+
+                                    array('var'         => 'enablePluginACL',
+                                          'title'       => PERMISSION_FORBIDDEN_ENABLE,
+                                          'description' => PERMISSION_FORBIDDEN_ENABLE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'blogConfiguration'),
                             ));
 
     $res['display'] =
