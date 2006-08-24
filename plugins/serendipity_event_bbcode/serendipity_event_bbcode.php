@@ -19,7 +19,7 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_BBCODE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Jez Hancock, Garvin Hicking');
-        $propbag->add('version',       '2.04');
+        $propbag->add('version',       '2.05');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -50,6 +50,7 @@ class serendipity_event_bbcode extends serendipity_event
 
         $conf_array = array();
         $conf_array[] = 'info';
+        $cond_array[] = 'target';
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
@@ -115,6 +116,12 @@ class serendipity_event_bbcode extends serendipity_event
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+            case 'target':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_BBCODE_TARGET);
+                $propbag->add('default', 'false');
+                break;
+
             case 'info':
                 $propbag->add('type',        'info');
                 $propbag->add('description',  PLUGIN_EVENT_BBCODE_TRANSFORM);
@@ -154,6 +161,12 @@ class serendipity_event_bbcode extends serendipity_event
         // Disallow possibly evil HTML characters which may lead to Javascript XSS: '"();
         static $pattern_query = '([^"\'\(\);]+?)';
 
+        static $target = null;
+        
+        if ($target === null) {
+            $target = serendipity_db_bool($this->get_config('target'));
+        }
+
         // Note:
         //  * Anything between <xxx>...</xxx> tags will be caught by htmlspecialchars() and disallows custom HTML tags.
         //  * (?::\w+)? means "non capturing" match on any word character.
@@ -176,10 +189,10 @@ class serendipity_event_bbcode extends serendipity_event
               '/(?<!\\\\)\[email(?::\w+)?='  . $pattern_mail . '\](.*?)\[\/email(?::\w+)?\]/si'               => "<a href=\"mailto:\\1\" class=\"bb-email\">\\2</a>",
 
               // [url]
-              '/(?<!\\\\)\[(google|search)\]'   . $pattern_query . '\[\/(google|search)\]/si'                 => "<a href=\"http://www.google.com/search?q=\\2\" target=\"_blank\" class=\"bb-url\">\\2</a>",
-              '/(?<!\\\\)\[url(?::\w+)?\]www\.' . $pattern_url   . '\[\/url(?::\w+)?\]/si'                    => "<a href=\"http://www.\\1\" target=\"_blank\" class=\"bb-url\">\\1</a>",
-              '/(?<!\\\\)\[url(?::\w+)?\]'      . $pattern_url   . '\[\/url(?::\w+)?\]/si'                    => "<a href=\"\\1\" target=\"_blank\" class=\"bb-url\">\\1</a>",
-              '/(?<!\\\\)\[url(?::\w+)?='       . $pattern_url   . '?\](.*?)\[\/url(?::\w+)?\]/si'            => "<a href=\"\\1\" target=\"_blank\" class=\"bb-url\">\\2</a>",
+              '/(?<!\\\\)\[(google|search)\]'   . $pattern_query . '\[\/(google|search)\]/si'                 => "<a href=\"http://www.google.com/search?q=\\2\" " . ($target ? "target=\"_blank\"" : "") . " class=\"bb-url\">\\2</a>",
+              '/(?<!\\\\)\[url(?::\w+)?\]www\.' . $pattern_url   . '\[\/url(?::\w+)?\]/si'                    => "<a href=\"http://www.\\1\" " . ($target ? "target=\"_blank\"" : "") . " class=\"bb-url\">\\1</a>",
+              '/(?<!\\\\)\[url(?::\w+)?\]'      . $pattern_url   . '\[\/url(?::\w+)?\]/si'                    => "<a href=\"\\1\" " . ($target ? "target=\"_blank\"" : "") . " class=\"bb-url\">\\1</a>",
+              '/(?<!\\\\)\[url(?::\w+)?='       . $pattern_url   . '?\](.*?)\[\/url(?::\w+)?\]/si'            => "<a href=\"\\1\" " . ($target ? "target=\"_blank\"" : "") . " class=\"bb-url\">\\2</a>",
 
               // [img]
               '/(?<!\\\\)\[img(?::\w+)?\]' . $pattern_url . '\[\/img(?::\w+)?\]/si'                           => "<img src=\"\\1\" alt=\"\\1\" class=\"bb-image\" />",
