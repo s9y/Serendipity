@@ -50,7 +50,7 @@ if (!isset($_GET['nocache'])) {
     // See if the client has provided the required headers.
     // Always convert the provided header into GMT timezone to allow comparing to the server-side last-modified header
     $modified_since = !empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-                    ? gmdate('D, d M Y H:i:s \G\M\T', strtotime(stripslashes($_SERVER['HTTP_IF_MODIFIED_SINCE'])), true)
+                    ? gmdate('D, d M Y H:i:s \G\M\T', strtotime(stripslashes($_SERVER['HTTP_IF_MODIFIED_SINCE'])))
                     : false;
     $none_match     = !empty($_SERVER['HTTP_IF_NONE_MATCH'])
                     ? str_replace('"', '', stripslashes($_SERVER['HTTP_IF_NONE_MATCH']))
