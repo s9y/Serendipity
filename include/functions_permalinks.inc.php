@@ -247,7 +247,7 @@ function serendipity_initPermalinks() {
      * If you add new patterns, remember to add the new rules to the *.tpl files and
      * function serendipity_installFiles().
      */
-    @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-%');
+    @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-\%');
     @define('PAT_FILENAME_MATCH', '[' . PAT_FILENAME . ']+');
     @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)@');
     @define('PAT_FEED',           '@/(index|atom[0-9]*|rss|b2rss|b2rdf).(rss|rdf|rss2|xml)@');
