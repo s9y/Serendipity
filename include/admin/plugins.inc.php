@@ -351,16 +351,33 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 } else {
     /* show general plugin list */
 
+    /* get sidebar locations */
+    serendipity_smarty_init();
+
+    if (is_array($template_config)) {
+        $template_vars =& serendipity_loadThemeOptions($template_config);
+    }
+
+    $col_assoc = array(
+        'event_col'  => 'event',
+        'eventh_col' => 'eventh'
+    );
+    if (isset($template_vars['sidebars'])) {
+        $sidebars = explode(',', $template_vars['sidebars']);
+    } elseif (isset($serendipity['sidebars'])) {
+        $sidebars = $serendipity['sidebars'];
+    } else {
+        $sidebars = array('left', 'hide', 'right');
+    }
+
+    foreach($sidebars AS $sidebar) {
+        $col_assoc[$sidebar . '_col'] = $sidebar;
+    }
+
     /* preparse Javascript-generated input */
     if (isset($_POST['SAVE']) && !empty($_POST['serendipity']['pluginorder'])) {
         $parts = explode(':', $_POST['serendipity']['pluginorder']);
-        $col_assoc = array(
-            'left_col'   => 'left',
-            'right_col'  => 'right',
-            'hide_col'   => 'hide',
-            'event_col'  => 'event',
-            'eventh_col' => 'eventh'
-        );
+
         foreach($parts AS $sidepart) {
             preg_match('@^(.+)\((.*)\)$@imsU', $sidepart, $matches);
             if (!isset($col_assoc[$matches[1]])) {
@@ -375,7 +392,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 }
                 $serendipity['POST']['placement'][$pluginname] = $col_assoc[$matches[1]];
                 $new_order[] = $pluginname;
-                
+
             }
         }
 
@@ -466,7 +483,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     <h3><?php echo SIDEBAR_PLUGINS ?></h3>
     <a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/install.png') ?>" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" /><?php echo sprintf(CLICK_HERE_TO_INSTALL_PLUGIN, SIDEBAR_PLUGIN) ?></a>
     <?php serendipity_plugin_api::hook_event('backend_plugins_sidebar_header', $serendipity); ?>
-    <?php show_plugins(false); ?>
+    <?php show_plugins(false, $sidebars); ?>
 
     <br />
     <br />

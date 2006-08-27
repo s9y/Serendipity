@@ -49,23 +49,46 @@ function serendipity_pluginListSort($x, $y) {
  * @param  boolean  Indicates if event plugins (TRUE) or sidebar plugins (FALSE) shall be shown
  * @return null
  */
-function show_plugins($event_only = false)
+function show_plugins($event_only = false, $sidebars = null)
 {
     static $opts = array(
-                    'left'   => LEFT,
-                    'right'  => RIGHT,
-                    'hide'   => HIDDEN,
                     'event'  => PLUGIN_ACTIVE,
                     'eventh' => PLUGIN_INACTIVE
     );
 
     global $serendipity;
 
+    if (is_array($sidebars)) {
+        foreach($sidebars AS $sidebar) {
+            $up = strtoupper($sidebar);
+            if ($sidebar == 'hide') {
+                $opts[$sidebar] = HIDDEN;
+            } elseif (defined('SIDEBAR_' . $up)) {
+                $opts[$sidebar] = constant('SIDEBAR_' . $up);
+            } elseif (defined($up)) {
+                $opts[$sidebar] = constant($up);
+            } else {
+                $opts[$sidebar] = $up;
+            }
+        }
+    }
+
     $eyecandy = !isset($serendipity['eyecandy']) || serendipity_db_bool($serendipity['eyecandy']);
     if (!$eyecandy) {
         echo '    <form action="?serendipity[adminModule]=plugins" method="post">';
     } elseif (!$event_only) {
-        echo '<script type="text/javascript">addLoadEvent(pluginMoverInit);</script>';
+        echo '<script type="text/javascript"> function templatePluginMoverInit() { ';
+        $is_first = true;
+        foreach($sidebars AS $sidebar) {
+?>
+    <?php echo ($is_first ? 'var ' : ''); ?> list = document.getElementById("<?php echo $sidebar; ?>_col");
+    DragDrop.makeListContainer(list, 'g1');
+    list.onDragOver = function() { this.style["border"] = "1px solid #4d759b"; };
+    list.onDragOut = function() { this.style["border"] = "none"; };
+<?php
+            $is_first = false;
+        }
+        echo ' } addLoadEvent(templatePluginMoverInit);</script>';
         echo '    <form action="?serendipity[adminModule]=plugins" method="post" onsubmit="pluginMovergetSort(); return true">';
         echo '        <input type="hidden" name="serendipity[pluginorder]" id="order" value="" />';
 
@@ -86,7 +109,7 @@ function show_plugins($event_only = false)
     if ($event_only) {
         $plugin_placements = array('event', 'eventh');
     } else {
-        $plugin_placements = array('left', 'hide', 'right');
+        $plugin_placements = $sidebars;
     }
 
     $total = 0;
@@ -133,10 +156,10 @@ function show_plugins($event_only = false)
             }
 
             if ($event_only) {
-                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable, true);
+                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable, true, $opts);
                 $event_only_uri = '&amp;serendipity[event_plugin]=true';
             } else {
-                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable);
+                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable, false, $opts);
                 $event_only_uri = '';
             }
 
@@ -257,13 +280,15 @@ function ownership($authorid, $name, $is_plugin_owner = false) {
  * @param  boolean  Toggle whether a plugin is an event plugin
  * @return string   HTML code for placement select box
  */
-function placement_box($name, $val, $is_plugin_editable = false, $is_event = false)
+function placement_box($name, $val, $is_plugin_editable = false, $is_event = false, $opts = null)
 {
-    static $opts = array(
-                    'left'  => LEFT,
-                    'right' => RIGHT,
-                    'hide'  => HIDDEN
-    );
+    if ($opts === null) {
+        $opts = array(
+            'left'  => LEFT,
+            'right' => RIGHT,
+            'hide'  => HIDDEN
+        );
+    }
 
     static $event_opts = array(
                     'event'     => PLUGIN_ACTIVE,
@@ -273,7 +298,7 @@ function placement_box($name, $val, $is_plugin_editable = false, $is_event = fal
     if ($is_event) {
         $gopts =& $event_opts;
     } else {
-        $gopts = &$opts;
+        $gopts =& $opts;
     }
 
     $x = "\n<select name=\"$name\">\n";

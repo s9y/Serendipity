@@ -3,11 +3,29 @@
 Version 1.1-beta4 ()
 ------------------------------------------------------------------------
 
+    * Added possibility for templates to define the sidebars they use.
+      The template specifies this via the $template_config array in
+      the config.inc.php file of a template. It looks like this:
+       $template_config = array(
+         array(
+           'var'     => 'sidebars',
+           'title'   => 'Sidebars',
+           'type'    => 'string',
+           'default' => 'left,hide,right'
+         )
+       );
+      Note some things: Seperate the sidebar keys with a "," only -
+      do not use spaces. Also never use more than 6 characters for
+      the descriptors.
+      If you do not want to make it configurable, you can also use
+      the $serendipity['sidebars'] array to define the sidebars
+      that are available.
+
     * Made category-recursion show orphaned categories because of
       permission restrictions (garvinhicking)
 
     * Fix some markup functions in textile plugin (Matthias Leisi)
-    
+
     * Add Smarty function to show commentform (garvinhicking)
 
     * Group management now allows to disallow certain plugins or even
@@ -26,15 +44,15 @@ Version 1.1-beta3 ()
     * Fix a bug in the HTTP 304 Conditional GET RSS-Feed caching when
       the server timezone offset was not set to zero. Thanks to dand!
 
-    * Added ability to use HTTP Authentication to the blog. Can be 
-      triggered by submitting HTTP Auth credentials [only supported when 
-      the server runs with mod_php, not as CGI]. Authentication can be 
+    * Added ability to use HTTP Authentication to the blog. Can be
+      triggered by submitting HTTP Auth credentials [only supported when
+      the server runs with mod_php, not as CGI]. Authentication can be
       forced URLs with the "?http_auth=true" parameter, which
       will then send a "401 Unauthorized" header.
       If your server does not support mod_php, you can submit REQUEST
       variables: ?http_auth_user=XXX&http_auth_pw=YYY.
       Note that specifying username and password in the URI will lead
-      to password disclosure in HTTP logfiles. 
+      to password disclosure in HTTP logfiles.
       This feature is most importantly meant for RSS-feeds, to make
       RSS readers able to submit login credentials. (garvinhicking)
 
@@ -55,7 +73,7 @@ Version 1.1-beta1 (August 14th, 2006)
       by authors. New permalink structure:
        "/comments/[AUTHORNAME]/comments|trackbacks|comments_and_trackbacks/P[PAGENUMBER]/FROM [YYYY-MM-DD]/TO [YYYY-MM-DD]"
       Instead of /FROM and /TO you can also use /F and /T.
-      Instead of /FROM and /TO you can also specify /last_X, where X 
+      Instead of /FROM and /TO you can also specify /last_X, where X
       is the amount of past days to show comments for.
       (garvinhicking)
 
@@ -91,7 +109,7 @@ Version 1.1-beta1 (August 14th, 2006)
       Bottom line: Plugins that use "*plugin*.tpl" filenames or check
       via file_exists() on the returned variable are safe.
       (garvinhicking)
-      
+
     * Added arabic (sa) language by Way
 
     * Add patch to allow entryproperties plugin to define passwords for
@@ -123,14 +141,14 @@ Version 1.1-beta1 (August 14th, 2006)
 
     * Added experimental PHP-engine templating support, bypassing
       Smarty. Work in progress, mostly proof-of-concept. Might
-      be changed completely. Read instructions in the 
+      be changed completely. Read instructions in the
       include/template_api.inc.php file. Dedicated to Davey. ;)
       (garvinhicking)
 
     * Support to crop images from within the media database. Pick a
       picture in the MDB, go to the property section of that image
       and click on the "EDIT" link. (garvinhicking)
-      
+
         TODO:
             - Operate also on PNG, TIFF etc. (currently only JPEG!)
             - Support image magick (currently ony gdlib!)
@@ -139,14 +157,14 @@ Version 1.1-beta1 (August 14th, 2006)
             - Add options to only affect the images thumbnail instead
               of always saving the whole picture.
             - Internationalization!
-        
+
     * Move the DB charset option to serendipity_config_local.inc.php to
       issue propper DB connections instantly. (garvinhicking)
 
 Version 1.1-alpha6()
 ------------------------------------------------------------------------
 
-    * Use possibly existing local PEAR by default. Patch by Davey 
+    * Use possibly existing local PEAR by default. Patch by Davey
       (garvinhicking)
 
     * Add missing indices for the statistics visitor DB tables
@@ -160,7 +178,7 @@ Version 1.1-alpha6()
 
     * Fix bug #1494653: Non-Unique index constraint for 'exits' table.
       Thanks to Markus Brueckner! (garvinhicking)
-      
+
 Version 1.1-alpha5()
 ------------------------------------------------------------------------
 
@@ -294,7 +312,7 @@ Version 1.0.1 ()
 
    * Fix multi-authors view only showing first author (garvinhicking)
 
-   * Fix bug sending comment-notification mails to subscribed users 
+   * Fix bug sending comment-notification mails to subscribed users
      without an email address (garvinhicking)
 
    * Fixed icelandic language bug preventing upgrade (garvinhicking)
@@ -305,7 +323,7 @@ Version 1.0 (June 15th, 2006)
    * Insert logic for saving an entry that prevents the iframe for
      trackbacks/xml-rpc pings to save an entry multiple times upon
      failure. Many thanks to tharos from the Forums! (garvinhicking)
-             
+
    * Add smarty parameter $view which can be used to detect what kind
      of page is being displayed. One of: archives, entry, feed, admin,
      archives, plugin, categories, authors, search, css, start, 404
