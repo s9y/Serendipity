@@ -168,6 +168,9 @@ Applying Attributes:
 
 */
 
+    function myglobals() {
+      global $textile_hlgn, $textile_vlgn, $textile_clas, $textile_lnge, $textile_styl,
+          $textile_cspn, $textile_rspn, $textile_a, $textile_s, $textile_c, $textile_pnct;
         $textile_hlgn = "(?:\<(?!>)|(?<!<)\>|\<\>|\=|[()]+)";
         $textile_vlgn = "[\-^~]";
         $textile_clas = "(?:\([^)]+\))";
@@ -179,6 +182,9 @@ Applying Attributes:
         $textile_s = "(?:$textile_cspn?$textile_rspn?|$textile_rspn?$textile_cspn?)";
         $textile_c = "(?:$textile_clas?$textile_styl?$textile_lnge?|$textile_styl?$textile_lnge?$textile_clas?|$textile_lnge?$textile_styl?$textile_clas?)";
         $textile_pnct = '[\!"#\$%&\'()\*\+,\-\./:;<=>\?@\[\\\]\^_`{\|}\~]';
+    }
+
+    myglobals();
 
     function textile($text,$lite='') {
 
@@ -299,7 +305,7 @@ Applying Attributes:
 
            foreach(preg_split("/\|$/m",$matches[2],-1,PREG_SPLIT_NO_EMPTY) as $row){
             if (preg_match("/^($textile_a$textile_c\. )(.*)/m",$row,$rmtch)) {
-                $ratts = pba($rmtch[1],'tr');
+                $ratts = textile_pba($rmtch[1],'tr');
                 $row = $rmtch[2];
             } else $ratts = '';
 
@@ -307,7 +313,7 @@ Applying Attributes:
                 $textile_ctyp = "d";
                 if (preg_match("/^_/",$textile_cell)) $textile_ctyp = "h";
                 if (preg_match("/^(_?$textile_s$textile_a$textile_c\. )(.*)/",$textile_cell,$textile_cmtch)) {
-                    $textile_catts = pba($textile_cmtch[1],'td');
+                    $textile_catts = textile_pba($textile_cmtch[1],'td');
                     $textile_cell = $textile_cmtch[2];
                 } else $textile_catts = '';
 
