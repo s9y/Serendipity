@@ -322,6 +322,70 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
 }
 
 /**
+ * Smarty Function: Shows a commentform
+ *
+ * @access public
+ * @param   array       Smarty parameter input array:
+ *                          id: An entryid to show the commentform for
+ *                          url: an optional HTML target link for the form
+ *                          comments: Optional array of containing comments
+ *                          data: possible pre-submitted values to the input values
+ *                          showToolbar: Toggle whether to show extended options of the comment form
+ *                          moderate_comments: Toggle whether comments to this entry are allowed
+ * @param   object  Smarty object
+ * @return  void
+ */
+function serendipity_smarty_showCommentForm($params, &$smarty) {
+    global $serendipity;
+
+    if (!isset($params['id']) || !isset($params['entry'])) {
+        $smarty->trigger_error(__FUNCTION__ .": missing 'id' or 'entry' parameter");
+        return;
+    }
+
+    if (empty($params['url'])) {
+        $params['url'] = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?url=' . $params['entry']['commURL'];
+    }
+
+    if (!isset($params['comments'])) {
+        $params['comments'] = NULL;
+    }
+
+    if (!isset($params['data'])) {
+        $params['data'] = $serendipity['POST'];
+    }
+  
+    if (!isset($params['showToolbar'])) {
+        $params['showToolbar'] = true;
+    }
+
+    if (!isset($params['moderate_comments'])) {
+        $params['moderate_comments'] = serendipity_db_bool($params['entry']['moderate_comments']);
+    }
+
+
+    $comment_add_data = array(
+        'comments_messagestack' => (isset($serendipity['messagestack']['comments']) ? (array)$serendipity['messagestack']['comments'] : array()),
+        'is_comment_added'      => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'true' ? true: false),
+        'is_comment_moderate'   => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'moderate' ? true: false)
+    );
+
+    $smarty->assign($comment_add_data);
+
+    serendipity_displayCommentForm(
+        $params['id'],
+        $params['url'],
+        $params['comments'],
+        $params['data'],
+        $params['showToolbar'],
+        $params['moderate_comments'],
+        $params['entry']
+    );
+
+    return true;
+}
+
+/**
  * Smarty Function: Be able to include the output of a sidebar plugin within a smarty template
  *
  * @access public
@@ -675,7 +739,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->register_function('serendipity_fetchPrintEntries', 'serendipity_smarty_fetchPrintEntries');
             $serendipity['smarty']->register_function('serendipity_getTotalCount', 'serendipity_smarty_getTotalCount');
             $serendipity['smarty']->register_function('pickKey', 'serendipity_smarty_pickKey');
-
+            $serendipity['smarty']->register_function('serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
             $serendipity['smarty']->register_prefilter('serendipity_replaceSmartyVars');
         }
 
@@ -686,11 +750,11 @@ function serendipity_smarty_init($vars = array()) {
                 $serendipity['smarty_raw_mode'] = false;
             }
         }
-    
+
         if (!isset($serendipity['smarty_file'])) {
             $serendipity['smarty_file'] = 'index.tpl';
         }
-    
+
         $category      = false;
         $category_info = array();
         if (isset($serendipity['GET']['category'])) {
@@ -701,11 +765,11 @@ function serendipity_smarty_init($vars = array()) {
                 $category_info = serendipity_fetchCategoryInfo($category);
             }
         }
-    
+
         if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
             $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
         }
-    
+
         $serendipity['smarty']->assign(
             array(
                 'head_charset'              => LANG_CHARSET,
@@ -713,43 +777,43 @@ function serendipity_smarty_init($vars = array()) {
                 'head_title'                => $serendipity['head_title'],
                 'head_subtitle'             => $serendipity['head_subtitle'],
                 'head_link_stylesheet'      => $serendipity['smarty_vars']['head_link_stylesheet'],
-    
+
                 'is_xhtml'                  => true,
                 'use_popups'                => $serendipity['enablePopup'],
                 'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
                 'is_raw_mode'               => $serendipity['smarty_raw_mode'],
                 'is_logged_in'              => serendipity_userLoggedIn(),
-    
+
                 'entry_id'                  => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) ? $serendipity['GET']['id'] : false,
                 'is_single_entry'           => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])),
-    
+
                 'blogTitle'                 => htmlspecialchars($serendipity['blogTitle']),
                 'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? htmlspecialchars($serendipity['blogSubTitle']) : ''),
                 'blogDescription'           => htmlspecialchars($serendipity['blogDescription']),
-    
+
                 'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
                 'serendipityBaseURL'        => $serendipity['baseURL'],
                 'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
                 'serendipityIndexFile'      => $serendipity['indexFile'],
                 'serendipityVersion'        => $serendipity['version'],
-    
+
                 'lang'                      => $serendipity['lang'],
                 'category'                  => $category,
                 'category_info'             => $category_info,
                 'template'                  => $serendipity['template'],
-    
+
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
             )
         );
-    
+
         if (count($vars) > 0) {
             $serendipity['smarty']->assign($vars);
         }
-    
+
         // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
         // setup custom smarty variables, modifiers etc. to use in their templates.
         @include_once $serendipity['smarty']->config_dir . '/config.inc.php';
-    
+
         if (is_array($template_config)) {
             $template_vars =& serendipity_loadThemeOptions($template_config);
             $serendipity['smarty']->assign_by_ref('template_option', $template_vars);

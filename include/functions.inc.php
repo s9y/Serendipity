@@ -293,8 +293,9 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
 function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'parent_id', $parentid = 0, $depth = 0) {
     global $serendipity;
     static $_resArray;
+    static $_remain;
 
-    if ( sizeof($ary) == 0 ) {
+    if (sizeof($ary) == 0) {
         return array();
     }
 
@@ -302,14 +303,16 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
         $parentid = 0;
     }
 
-    if ( $depth == 0 ) {
+    if ($depth == 0) {
         $_resArray = array();
+        $_remain   = $ary;
     }
 
-    foreach ($ary as $data) {
+    foreach($ary AS $key => $data) {
         if ($parentid === VIEWMODE_LINEAR || !isset($data[$parent_name]) || $data[$parent_name] == $parentid) {
             $data['depth'] = $depth;
-            $_resArray[] = $data;
+            $_resArray[]   = $data;
+            unset($_remain[$key]);
             if ($data[$child_name] && $parentid !== VIEWMODE_LINEAR ) {
                 serendipity_walkRecursive($ary, $child_name, $parent_name, $data[$child_name], ($depth+1));
             }
@@ -319,6 +322,14 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
     /* We are inside a recusive child, and we need to break out */
     if ($depth !== 0) {
         return true;
+    }
+    
+    if (count($_remain) > 0) {
+        // Remaining items need to be appended
+        foreach($_remain AS $key => $data) {
+            $data['depth'] = 0;
+            $_resArray[]   = $data;
+        }
     }
 
     return $_resArray;

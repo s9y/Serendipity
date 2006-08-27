@@ -22,7 +22,7 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -228,4 +228,3 @@ class serendipity_event_textile extends serendipity_event
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>

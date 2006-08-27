@@ -3,6 +3,13 @@
 Version 1.1-beta4 ()
 ------------------------------------------------------------------------
 
+    * Made category-recursion show orphaned categories because of
+      permission restrictions (garvinhicking)
+
+    * Fix some markup functions in textile plugin (Matthias Leisi)
+    
+    * Add Smarty function to show commentform (garvinhicking)
+
     * Group management now allows to disallow certain plugins or even
       specific plugin hooks per usergroup (garvinhicking)
 
