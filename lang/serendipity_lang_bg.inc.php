@@ -867,7 +867,7 @@
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'Път до коментарите');
 @define('PERM_SET_CHILD', 'Установяване на същите разрешения за всички поддиректории');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Забранени приставки');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Забранени събития');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Разрешаване на Plugin ACL за потребителски групи ?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Ако опцията "Plugin ACL за потребителски групи" е позволена, ще можете да указвате кои потребителски групи имат позволението да изпълняват дадени събитийни и странични приставки.');
