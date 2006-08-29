@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
     @define('PLUGIN_ENTRYLINKS_NAME', 'Връзките в постинга');
@@ -18,5 +18,3 @@
     @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', 'В какъв ред референтните връзки да бъдат подредени (по подразбиране: брой на връзките)');
     @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Дата');
     @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Брой на връзките');
-
-?>

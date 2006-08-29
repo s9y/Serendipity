@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
     @define('PLUGIN_EVENT_MAILER_NAME', 'Изпращане на статии по e-mail');
@@ -19,5 +19,3 @@
     @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', 'Статията не беше изпратена по e-mail, понеже вие отменихте това действие.');
     @define('PLUGIN_EVENT_MAILER_SENDING', 'Изпращане');
     @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Изпращане на тази статия по e-mail');
-
-?>

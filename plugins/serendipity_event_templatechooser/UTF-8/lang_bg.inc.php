@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME',     'Селектор на шаблони');
