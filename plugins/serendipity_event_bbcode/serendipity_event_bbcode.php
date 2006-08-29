@@ -19,7 +19,7 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_BBCODE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Jez Hancock, Garvin Hicking');
-        $propbag->add('version',       '2.05');
+        $propbag->add('version',       '2.06');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -50,7 +50,7 @@ class serendipity_event_bbcode extends serendipity_event
 
         $conf_array = array();
         $conf_array[] = 'info';
-        $cond_array[] = 'target';
+        $conf_array[] = 'target';
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
