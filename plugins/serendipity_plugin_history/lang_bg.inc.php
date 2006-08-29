@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
     @define('PLUGIN_HISTORY_NAME', 'История');
@@ -30,5 +30,3 @@
     @define('PLUGIN_HISTORY_OYA', 'Една година назад');
     @define('PLUGIN_HISTORY_MYSELF', 'По избор');
     @define('PLUGIN_HISTORY_DISPLAYAUTHOR', 'Показване на името на автора');
-
-?>

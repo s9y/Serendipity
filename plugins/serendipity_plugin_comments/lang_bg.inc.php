@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
     @define('PLUGIN_COMMENTS_BLAHBLAH', 'Показва последните коментари на Вашите постинги');
@@ -14,5 +14,3 @@
     @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Колко коментара най-много да бъдат показани (по подразбиране: 15)');
     @define('PLUGIN_COMMENTS_ABOUT', '%s за%s');
     @define('PLUGIN_COMMENTS_ANONYMOUS', 'anon');
-
-?>

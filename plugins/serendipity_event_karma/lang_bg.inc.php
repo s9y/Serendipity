@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov imc@okto7.com
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
 @define('PLUGIN_KARMA_NAME', 'Карма');
@@ -45,5 +45,3 @@
 @define('PLUGIN_KARMA_STATISTICS_VISITS_NO', 'посещения');
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'гласувания');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'точки');
-
-?>

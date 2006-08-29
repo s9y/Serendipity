@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
 
@@ -37,4 +37,3 @@
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'Списъкът на достъпните допълнителни полета може да бъде редактиран в <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">конфигурацията</a> на приставка serendipity_event_entryproperties.');
 
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'Забранени текстови форматирания за тази статия:');
-?>

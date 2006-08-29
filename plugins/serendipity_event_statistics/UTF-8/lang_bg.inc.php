@@ -2,7 +2,7 @@
 
 /**
  *  @version $Revision$
- *  @author Ivan Cenov jwalker@abv.bg
+ *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
     @define('PLUGIN_EVENT_STATISTICS_NAME', 'Статистика');
@@ -98,5 +98,3 @@
 
     @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Показване на броя на текущите посетители (били онлайн през последните 15 минути)');
     @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s посетители онлайн');
-
-?>
