@@ -1533,7 +1533,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
             $html .= sprintf(
                 '<div class="category_link_all"><br /><a href="%s" title="%s">%s</a></div>',
 
-                $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'],
+                $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage',
                 ALL_CATEGORIES,
                 ALL_CATEGORIES
             );
