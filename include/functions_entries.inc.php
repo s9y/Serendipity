@@ -1199,7 +1199,7 @@ function serendipity_updertEntry($entry) {
             }
         }
 
-        if ($entry['isdraft'] === 'false' && $_entry['isdraft'] === 'false') {
+        if (!serendipity_db_bool($entry['isdraft']) && !serendipity_db_bool($_entry['isdraft'])) {
             $entry['last_modified'] = time();
         }
 
