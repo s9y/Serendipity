@@ -87,6 +87,10 @@ if (!isset($serendipity['useHTTP-Auth'])) {
     $serendipity['useHTTP-Auth'] = true;
 }
 
+if (!isset($serendipity['CacheControl'])) {
+    $serendipity['CacheControl'] = false;
+}
+
 // Should IFRAMEs be used for previewing entries and sending trackbacks?
 $serendipity['use_iframe'] = true;
 
