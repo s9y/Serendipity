@@ -3,6 +3,9 @@
 Version 1.1-beta4 ()
 ------------------------------------------------------------------------
 
+    * Allow to set $serendipity['CacheControl'] to make serendipity emit
+      Cache-Control: HTTP headers. Thanks to annonymous from the forums!
+      
     * Use seperate PHP session ID when using HTTPS login. Set 'secure'
       cookie parameters when using HTTPS. Thanks to lynoure!
 
