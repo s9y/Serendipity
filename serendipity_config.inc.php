@@ -9,6 +9,10 @@ if (defined('S9Y_FRAMEWORK')) {
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
+    if (!empty($_SERVER['HTTPS'])) {
+        @ini_set('session.name', 'SSLSID');
+        @ini_set('session.cookie_secure', '1');
+    }
     session_start();
 }
 

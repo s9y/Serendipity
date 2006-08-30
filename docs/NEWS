@@ -3,6 +3,9 @@
 Version 1.1-beta4 ()
 ------------------------------------------------------------------------
 
+    * Use seperate PHP session ID when using HTTPS login. Set 'secure'
+      cookie parameters when using HTTPS. Thanks to lynoure!
+
     * Added possibility for templates to define the sidebars they use.
       The template specifies this via the $template_config array in
       the config.inc.php file of a template. It looks like this:
