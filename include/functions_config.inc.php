@@ -559,7 +559,8 @@ function serendipity_JSsetCookie($name, $value) {
 function serendipity_setCookie($name,$value) {
     global $serendipity;
 
-    setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath']);
+    $secure = !empty($_SERVER['HTTPS']) ? true : false;
+    setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $_SERVER['HTTP_HOST'], $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
@@ -1860,7 +1861,7 @@ function &serendipity_loadThemeOptions(&$template_config) {
 function serendipity_hasPluginPermissions($plugin) {
     static $forbidden = null;
     global $serendipity;
-    
+
     if (empty($serendipity['authorid'])) {
         return true;
     }
