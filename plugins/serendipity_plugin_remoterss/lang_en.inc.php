@@ -26,4 +26,11 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Display Date');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Display the date below the headline?');
 
+@define('PLUGIN_REMOTERSS_RSSLINK', 'Use RSS-Link?');
+@define('PLUGIN_REMOTERSS_RSSLINK_DESC', 'Shall a link be set to the link specified in the RSS feed?');
+@define('PLUGIN_REMOTERSS_RSSFIELD', 'RSS display element');
+@define('PLUGIN_REMOTERSS_RSSFIELD_DESC', 'Whic element of the RSS feed should be displayed? (i.e.: "title", "content:encoded", "description", ...)');
+@define('PLUGIN_REMOTERSS_RSSESCAPE', 'Escape HTML output');
+@define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', 'If enabled, HTML in RSS-feeds will be escaped and no XSS is possible. If this option is disabled, HTML in the feeds can be interpretated. This is a possible security issue, if the embedded feed is not yours!');
+
 ?>
