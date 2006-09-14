@@ -98,6 +98,7 @@ switch ($serendipity['GET']['step']) {
                     $media['external'] = ob_get_contents();
                     ob_end_clean();
                     if (isset($created_thumbnail) && isset($image_id)) {
+                        $media['is_uploaded'] = true;
                         $serendipity['GET']['image'] = $media['imgID'] = (int)$image_id; // $image_id is passed from images.inc.php
                         break;
                     } else {

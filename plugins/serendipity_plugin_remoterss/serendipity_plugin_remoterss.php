@@ -257,18 +257,40 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('configuration', array('number', 'displaydate', 'dateformat', 'sidebartitle', 'rssuri', 'charset', 'target', 'cachetime', 'feedtype', 'bulletimg', 'markup'));
+        $propbag->add('configuration', array('number', 'use_rss_link', 'show_rss_element', 'escape_rss', 'displaydate', 'dateformat', 'sidebartitle', 'rssuri', 'charset', 'target', 'cachetime', 'feedtype', 'bulletimg', 'markup'));
         $propbag->add('groups', array('FRONTEND_EXTERNAL_SERVICES'));
     }
 
     function introspect_config_item($name, &$propbag) {
         switch($name) {
+
+            case 'use_rss_link':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_REMOTERSS_RSSLINK);
+                $propbag->add('description', PLUGIN_REMOTERSS_RSSLINK_DESC);
+                $propbag->add('default', 'false');
+                break;
+
+            case 'escape_rss':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_REMOTERSS_RSSESCAPE);
+                $propbag->add('description', PLUGIN_REMOTERSS_RSSESCAPE_DESC);
+                $propbag->add('default', 'true');
+                break;
+
+            case 'show_rss_element':
+                $propbag->add('type', 'string');
+                $propbag->add('name', PLUGIN_REMOTERSS_RSSFIELD);
+                $propbag->add('description', PLUGIN_REMOTERSS_RSSFIELD_DESC);
+                $propbag->add('default', 'title');
+                break;
+
             case 'markup':
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', DO_MARKUP);
@@ -380,7 +402,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         serendipity_request_start();
         $req = &new HTTP_Request($uri);
-        
+
         if (PEAR::isError($req->sendRequest()) || !preg_match('@^[23]..@', $req->getResponseCode())) {
             serendipity_request_end();
             return false;
@@ -392,11 +414,11 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
 
     function debug($msg) {
         static $debug = false;
-        
+
         if ($debug === false) {
             return false;
         }
-        
+
         $fp = fopen('rss.log', 'a');
         fwrite($fp, '[' . date('Y-m-d H:i') . '] ' . $msg . "\n");
         fclose($fp);
@@ -448,17 +470,35 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                     $c->parse($rssuri);
                     $this->encoding = $c->rss['encoding'];
 
+                    $use_rss_link = serendipity_db_bool($this->get_config('use_rss_link'));
+                    $rss_element  = $this->get_config('show_rss_element');
+                    $escape_rss   = serendipity_db_bool($this->get_config('escape_rss'));
                     $i = 0;
                     $content = '';
                     while (($showAll || ($i < $number)) && ($item = $c->getNextItem())) {
                         if (empty($item['title'])) {
                             continue;
                         }
-                        $content .= '<a href="' . $this->decode($item['link']) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
+
+                        if ($use_rss_link) {
+                            $content .= '<a href="' . $this->decode($item['link']) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
+                        }
+
                         if (!empty($bulletimg)) {
                             $content .= '<img src="' . $bulletimg . '" border="0" alt="*" /> ';
                         }
-                        $content .= $this->decode($item['title']) . "</a><br />\n";
+
+                        if ($escape_rss) {
+                            $content .= $this->decode($item[$rss_element]);
+                        } else {
+                            $content .= htmlspecialchars($this->decode($item[$rss_element]));
+                        }
+
+                        if ($use_rss_link) {
+                            $content .= '</a>';
+                        }
+
+                        $content .= "<br />\n";
                         $item['timestamp'] = @strtotime(isset($item['pubdate']) ? $item['pubdate'] : $item['dc:date']);
                         if (!($item['timestamp'] == -1) AND ($displaydate == 'true')) {
                             $content .= '<div class="serendipitySideBarDate">'
@@ -594,9 +634,9 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                 } else {
                     return $string;
                 }
-                
+
                 return $out;
-            
+
             case 'UTF-8':
             default:
                 $out = utf8_decode($string);

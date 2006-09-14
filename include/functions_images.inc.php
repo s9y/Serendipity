@@ -256,8 +256,10 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
         $cond['distinct'] = '';
     }
 
-    serendipity_ACL_SQL($cond, false, 'directory', $mode);
-
+    if ($mode != 'discard') {        
+        serendipity_ACL_SQL($cond, false, 'directory', $mode);    
+    }
+    
     $rs = serendipity_db_query("SELECT {$cond['distinct']} i.id, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname
                                   FROM {$serendipity['dbPrefix']}images AS i
                                        {$cond['joins']}
