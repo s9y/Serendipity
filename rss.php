@@ -57,7 +57,7 @@ if (!isset($_GET['nocache'])) {
                     : false;
 
     if (is_array($latest_entry) && isset($latest_entry[0]['last_modified'])) {
-        $last_modified = gmdate('D, d M Y H:i:s \G\M\T', serendipity_serverOffsetHour($latest_entry[0]['last_modified'], true));
+        $last_modified = gmdate('D, d M Y H:i:s \G\M\T', serendipity_serverOffsetHour($latest_entry[0]['last_modified'], false));
         $etag          = '"' . $last_modified . '"';
 
         header('Last-Modified: ' . $last_modified);
