@@ -669,7 +669,7 @@
 @define('FETCH_METHOD_HOTLINK', 'Lien vers le serveur');
 @define('DELETE_HOTLINK_FILE', 'Suppression du fichier lié nommé <b>%s</b>');
 @define('SYNDICATION_PLUGIN_SHOW_MAIL', 'Montrer l\'adresse E-Mail ?');
-@define('IMAGE_MORE_INPUT', 'Ajouter d\'autres images');
+@define('IMAGE_MORE_INPUT', 'Ajouter plusieurs images');
 @define('BACKEND_TITLE', 'Informations complémentaires dans le plugin de l\'écran de configuration');
 @define('BACKEND_TITLE_FOR_NUGGET', 'Ici vous pouvez définir une chaine personnalisée qui sera affichée dans le plugin de l\'écran de configuration avec la description HTML du plugin Nugget. Si vous avez plusieurs nuggets HTML sans titre cela vous permettra de les distinguer les uns des autres.');
 @define('CATEGORIES_ALLOW_SELECT', 'Permettre aux visiteurs d\'afficher plusieurs catégories à la fois ?');
