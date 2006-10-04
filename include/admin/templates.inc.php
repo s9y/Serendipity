@@ -67,6 +67,8 @@ if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] .
 }
 
 if (is_array($template_config)) {
+    serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
+
     if ($serendipity['POST']['adminAction'] == 'configure') {
         foreach($serendipity['POST']['template'] AS $option => $value) {
             template_option::set_config($option, $value);
@@ -98,8 +100,10 @@ if (is_array($template_config)) {
         'template'
     );
     echo '</form><br />';
+    serendipity_plugin_api::hook_event('backend_templates_configuration_bottom', $template_config);
 } else {
     echo '<p>' . STYLE_OPTIONS_NONE . '</p>';
+    serendipity_plugin_api::hook_event('backend_templates_configuration_none', $template_config);
 }
 
 echo '<h3>' . SELECT_TEMPLATE . '</h3>';
