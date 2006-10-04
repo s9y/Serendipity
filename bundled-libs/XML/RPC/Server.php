@@ -394,7 +394,7 @@ class XML_RPC_Server
             $this->server_headers = explode("\n", $this->server_headers);
         }
         foreach($this->server_headers AS $header) {
-            header($this->header);
+            header($header);
         }
         print $this->server_payload;
     }
