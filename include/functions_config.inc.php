@@ -542,10 +542,10 @@ function serendipity_restoreVar(&$source, &$target) {
  * @return  null
  */
 function serendipity_JSsetCookie($name, $value) {
-    $name  = strtr($name, array('\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/'));
-    $value = strtr($value, array('\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/'));
+    $name  = htmlentities($name);
+    $value = urlencode($value);
 
-    echo '<script type="text/javascript">SetCookie("' . $name . '", "' . $value . '")</script>' . "\n";
+    echo '<script type="text/javascript">SetCookie("' . $name . '", unescape("' . $value . '"))</script>' . "\n";
 }
 
 /**
