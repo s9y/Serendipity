@@ -542,8 +542,8 @@ function serendipity_restoreVar(&$source, &$target) {
  * @return  null
  */
 function serendipity_JSsetCookie($name, $value) {
-    $name  = str_replace('"', '\"', $name);
-    $value = str_replace('"', '\"', $value);
+    $name  = strtr($name, array('\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/'));
+    $value = strtr($value, array('\\'=>'\\\\',"'"=>"\\'",'"'=>'\\"',"\r"=>'\\r',"\n"=>'\\n','</'=>'<\/'));
 
     echo '<script type="text/javascript">SetCookie("' . $name . '", "' . $value . '")</script>' . "\n";
 }
