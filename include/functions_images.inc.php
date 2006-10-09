@@ -256,10 +256,10 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
         $cond['distinct'] = '';
     }
 
-    if ($mode != 'discard') {        
-        serendipity_ACL_SQL($cond, false, 'directory', $mode);    
+    if ($mode != 'discard') {
+        serendipity_ACL_SQL($cond, false, 'directory', $mode);
     }
-    
+
     $rs = serendipity_db_query("SELECT {$cond['distinct']} i.id, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname
                                   FROM {$serendipity['dbPrefix']}images AS i
                                        {$cond['joins']}
@@ -698,7 +698,7 @@ function serendipity_scaleImg($id, $width, $height) {
         unset($output, $result);
     }
 
-    serendipity_updateImageInDatabase(array('dimensions_width' => $width, 'dimensions_height' => $height), $id);
+    serendipity_updateImageInDatabase(array('dimensions_width' => $width, 'dimensions_height' => $height, 'size' => @filesize($outfile)), $id);
     return true;
 }
 
