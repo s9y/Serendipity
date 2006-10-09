@@ -871,7 +871,14 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         serendipity_plugin_api::hook_event('entry_display', $entries, $addData);
 
         if (isset($entries['clean_page']) && $entries['clean_page'] === true) {
-            $serendipity['smarty']->assign('plugin_clean_page', true);
+            if ($serendipity['view'] == '404') {
+                $serendipity['view'] = 'plugin';
+            }
+
+            $serendipity['smarty']->assign(array(
+                'plugin_clean_page' => true,
+                'view'              => $serendipity['view'])
+            );
             serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
             return; // no display of this item
         }
@@ -1127,7 +1134,7 @@ function serendipity_updertEntry($entry) {
     if (isset($entry['properties'])) {
         unset($entry['properties']);
     }
-    
+
     if (!is_numeric($entry['timestamp'])) {
         $entry['timestamp'] = time();
     }
