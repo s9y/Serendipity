@@ -58,6 +58,7 @@ function show_plugins($event_only = false, $sidebars = null)
 
     global $serendipity;
 
+    $sql_filter = '';
     if (is_array($sidebars)) {
         foreach($sidebars AS $sidebar) {
             $up = strtoupper($sidebar);
@@ -70,6 +71,19 @@ function show_plugins($event_only = false, $sidebars = null)
             } else {
                 $opts[$sidebar] = $up;
             }
+            $sql_filter .= "AND placement != '" . serendipity_db_escape_string($sidebar) . "' ";
+        }
+    }
+
+    if (!$event_only) {
+        $sql   = "SELECT * from {$serendipity['dbPrefix']}plugins
+                   WHERE placement != 'event'
+                     AND placement != 'eventh'
+                         " . $sql_filter;
+        $invisible_plugins = serendipity_db_query($sql);
+        if (is_array($invisible_plugins)) {
+            $sidebars[]   = 'NONE';
+            $opts['NONE'] = NONE;
         }
     }
 
@@ -114,10 +128,22 @@ function show_plugins($event_only = false, $sidebars = null)
 
     $total = 0;
     foreach ($plugin_placements as $plugin_placement) {
+        if (!$event_only && $plugin_placement == 'NONE') {
+            $is_invisible     = true;
+        } else {
+            $is_invisible     = false;
+        }
+        $ptitle = $opts[$plugin_placement];
+        $pid    = $plugin_placement;
+
         echo '<td class="pluginmanager_side">';
-        echo '<div class="heading">' . $opts[$plugin_placement] . '</div>';
-        echo '<ol id="' . $plugin_placement . '_col" class="pluginmanager_container">';
-        $plugins = serendipity_plugin_api::enum_plugins($plugin_placement);
+        echo '<div class="heading">' . $ptitle . '</div>';
+        echo '<ol id="' . $pid . '_col" class="pluginmanager_container">';
+        if ($is_invisible) {
+            $plugins = $invisible_plugins;
+        } else {
+            $plugins = serendipity_plugin_api::enum_plugins($plugin_placement);
+        }
 
         if (!is_array($plugins)) {
             continue;
