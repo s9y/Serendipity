@@ -223,6 +223,10 @@ function serendipity_drawList() {
                 $entry_pre = '';
             }
 
+            if (serendipity_db_bool($entry['properties']['ep_is_sticky'])) {
+                $entry_pre .= ' ' . STICKY_POSTINGS . ': ';
+            }
+
             if (serendipity_db_bool($entry['isdraft'])) {
                 $entry_pre .= ' ' . DRAFT . ': ';
             }
