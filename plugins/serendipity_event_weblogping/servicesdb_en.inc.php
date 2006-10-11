@@ -58,6 +58,12 @@
             array(
               'name' => 'Blogbot.dk',
               'host' => 'blogbot.dk',
-              'path' => '/io/xml-rpc.php')
+              'path' => '/io/xml-rpc.php'),
+            array(
+              'name' => 'Google',
+              'host' => 'blogsearch.google.com',
+              'path' => '/ping/RPC2'
+            ),
+                                                                  
         );
 ?>

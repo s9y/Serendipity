@@ -48,12 +48,6 @@
             ),
 
             array(
-              'name' => 'blogg.de',
-              'host' => 'xmlrpc.blogg.de',
-              'path' => '/'
-            ),
-
-            array(
               'name' => 'Yahoo!',
               'host' => 'api.my.yahoo.com',
               'path' => '/RPC2'

@@ -101,7 +101,7 @@ if (!isset($_SERVER)) {
     $_SERVER = &$HTTP_SERVER_VARS;
 }
 
-if (extension_loaded('filter') && input_name_to_filter(ini_get('filter.default')) !== FILTER_UNSAFE_RAW) {
+if (extension_loaded('filter') && function_exists('input_name_to_filter') && input_name_to_filter(ini_get('filter.default')) !== FILTER_UNSAFE_RAW) {
     foreach ($_POST as $key => $value) {
         $_POST[$key] = input_get(INPUT_POST, $key, FILTER_UNSAFE_RAW);
     }
