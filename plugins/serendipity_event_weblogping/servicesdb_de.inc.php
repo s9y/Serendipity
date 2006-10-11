@@ -54,5 +54,11 @@
               'host' => 'api.my.yahoo.com',
               'path' => '/RPC2'
             ),
+            
+            array(
+              'name' => 'Google',
+              'host' => 'blogsearch.google.com',
+              'path' => '/ping/RPC2'
+            ),
         );
 ?>
