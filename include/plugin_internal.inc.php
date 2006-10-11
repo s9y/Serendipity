@@ -661,8 +661,9 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('configuration', array(
+                                        'title',
                                         'fullfeed',
                                         'show_0.91',
                                         'show_1.0',
@@ -695,6 +696,13 @@ class serendipity_syndication_plugin extends serendipity_plugin {
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+            case 'title':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        TITLE);
+                $propbag->add('description', TITLE_FOR_NUGGET);
+                $propbag->add('default',     SYNDICATE_THIS_BLOG);
+                break;
+
             case 'fullfeed':
                 $radio['value'][] = 'false';
                 $radio['desc'][]  = NO;
@@ -880,7 +888,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
     {
         global $serendipity;
 
-        $title = $this->title;
+        $title = $this->get_config('title');
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
