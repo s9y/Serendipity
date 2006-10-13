@@ -389,7 +389,7 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             break;
 
         case 'multilist':
-            echo '<select name="'. $name .'[]" multiple="multiple">';
+            echo '<select name="'. $name .'[]" multiple="multiple" size="5">';
             foreach ((array)$default as $k => $v) {
                 print_r($v);
                 $selected = false;
