@@ -367,13 +367,20 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
         $propbag->add('version',       '1.0');
-        $propbag->add('configuration', array('frequency', 'count', 'show_count'));
+        $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+            case 'title':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        TITLE);
+                $propbag->add('description', TITLE_FOR_NUGGET);
+                $propbag->add('default',     ARCHIVES);
+                break;
+
             case 'count' :
                 $propbag->add('type', 'string');
                 $propbag->add('name', ARCHIVE_COUNT);
@@ -406,7 +413,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
     {
         global $serendipity;
 
-        $title = $this->title;
+        $title = $this->get_config('title', $this->title);
 
         $ts = mktime(0, 0, 0, date('m'), 1);
 
