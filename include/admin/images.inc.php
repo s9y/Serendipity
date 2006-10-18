@@ -305,7 +305,7 @@ switch ($serendipity['GET']['adminAction']) {
 
                 // Insert into database
                 $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
-                serendipity_plugin_api::hook_event('backend_image_add', $target);
+                serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
                 $new_media[] = array(
                     'image_id'          => $image_id,
                     'target'            => $target,

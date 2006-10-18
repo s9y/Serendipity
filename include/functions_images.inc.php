@@ -620,6 +620,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
     } else {
         $outfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $directory . $f . '.' . $thumbname . '.' . $suf;
     }
+    $serendipity['last_outfile'] = $outfile;
 #    echo 'To: ' . $outfile . '<br />';
 
     $fdim    = @serendipity_getimagesize($infile, '', $suf);
@@ -1417,7 +1418,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
                     if ($debug) echo "<p>File name is $sFileName,<br />thumbnail is $sThumbNailFile</p>";
                     unset($aResultSet[$sKey]);
 
-                    if (isset($aFilesOnDisk[$sFileName])){
+                    if (isset($aFilesOnDisk[$sFileName])) {
                         unset($aFilesOnDisk[$sFileName]);
                     } else {
                         if ($debug) "Deleting Image {$sFile['id']}<br />\n";
