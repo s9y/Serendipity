@@ -164,10 +164,9 @@ class Serendipity_Import {
     function &nativeQuery($query, $db = false) {
         global $serendipity;
 
-        mysql_select_db($this->data['name']);
+        mysql_select_db($this->data['name'], $db);
         $return = &mysql_query($query, $db);
-        // print_r($return);
-        mysql_select_db($serendipity['dbName']);
+        mysql_select_db($serendipity['dbName'], $serendipity['dbConn']);        $return = &mysql_query($query, $db);
         return $return;
     }
 }
