@@ -78,6 +78,7 @@
             {/if}
             </div>
         {/foreach}
+        {if  NOT $file.hotlink}
             <label for="newDir{$mediakey}">{$CONST.FILTER_DIRECTORY}</label><br />
             <div>
                 <input type="hidden" name="serendipity[oldDir][{$mediakey}]" value="{$file.path|@escape}" />
@@ -88,6 +89,7 @@
                 {/foreach}
                 </select>
             </div>
+        {/if}
             {if $file.is_image}
             <div>
                 <br /><a target="_blank" class="serendipityPrettyButton" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
