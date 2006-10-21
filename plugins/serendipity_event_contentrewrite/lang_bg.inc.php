@@ -1,7 +1,7 @@
 <?php # $Id$
 
 /**
- *  @version $Revision: 1381 $
+ *  @version $Revision$
  *  @author Ivan Cenov jwalker@hotmail.bg
  *  EN-Revision: 1381
  */
