@@ -311,6 +311,7 @@ foreach ($sql as $rs) {
         'referer'   => $rs['referer'],
         'url'       => $rs['url'],
         'ip'        => $rs['ip'],
+        'entry_url' => serendipity_archiveURL($rs['entry_id'], $rs['title']),
         'email'     => $rs['email'],
         'author'    => (empty($rs['author']) ? ANONYMOUS : $rs['author']),
         'entry_id'  => $rs['entry_id']
@@ -336,7 +337,7 @@ foreach ($sql as $rs) {
 ?>
 <tr>
     <td class="<?php echo $header_class; ?>"><a name="c<?php echo $comment['id'] ?>"></a>
-        <?php echo ($comment['type'] == 'NORMAL' ? COMMENT : TRACKBACK) . ' #'. $comment['id'] .', '. IN_REPLY_TO .' <strong>'. $comment['title'] .'</strong>, '. ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime('%b %e %Y, %H:%M', $comment['timestamp']))?>
+        <?php echo ($comment['type'] == 'NORMAL' ? COMMENT : TRACKBACK) . ' #'. $comment['id'] .', '. IN_REPLY_TO .' <strong><a href="' . $comment['entry_url'] . '">'. $comment['title'] .'</a></strong>, '. ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime('%b %e %Y, %H:%M', $comment['timestamp']))?>
     </td>
 </tr>
 <tr>

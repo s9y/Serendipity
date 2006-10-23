@@ -1,5 +1,12 @@
 # $Id$
 
+Version 1.1 ()
+------------------------------------------------------------------------
+
+    * Fix possible integer wraparound in comment count leading to
+      a gazillion counter state. Also now show links to the entries
+      within the administration comment panel. Thanks to Julian Finn!
+
 Version 1.1-beta5 (October 18th, 2006)
 ------------------------------------------------------------------------
 
