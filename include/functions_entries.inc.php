@@ -1208,7 +1208,7 @@ function serendipity_updertEntry($entry) {
         }
 
         if (!$_SESSION['serendipityRightPublish']) {
-            unset($entry['isdraft']);
+            $entry['isdraft'] = 'true';
         }
 
         if (is_array($categories)) {
