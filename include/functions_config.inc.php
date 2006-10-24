@@ -804,16 +804,16 @@ function serendipity_getSessionLanguage() {
     }
 
     if (isset($serendipity['COOKIE']['serendipityLanguage'])) {
-        serendipity_header('X-Serendipity-InterfaceLangSource: Cookie');
+        if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Cookie');
         $lang = $serendipity['COOKIE']['serendipityLanguage'];
     } elseif (!empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
-        serendipity_header('X-Serendipity-InterfaceLangSource: GET');
+        if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: GET');
         $lang = $serendipity['GET']['lang_selected'];
     } elseif (serendipity_db_bool($serendipity['lang_content_negotiation'])) {
-        serendipity_header('X-Serendipity-InterfaceLangSource: Content-Negotiation');
+        if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Content-Negotiation');
         $lang = serendipity_detectLang();
     } elseif ($_SESSION['serendipityAuthedUser']) {
-        serendipity_header('X-Serendipity-InterfaceLangSource: Database');
+        if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Database');
         $lang = $serendipity['lang'];
     }
 
@@ -821,7 +821,7 @@ function serendipity_getSessionLanguage() {
         $lang = $serendipity['lang'];
     }
 
-    serendipity_header('X-Serendipity-InterfaceLang: ' . $lang);
+    if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLang: ' . $lang);
 
     if ($lang != $serendipity['lang']) {
         $serendipity['content_lang'] = $lang;

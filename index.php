@@ -17,7 +17,10 @@ if ($global_debug) {
 // We need to set this to return a 200 since we use .htaccess ErrorDocument
 // rules to handle archives.
 header('HTTP/1.0 200');
-header('X-Blog: Serendipity'); // Used for installer detection
+
+if ($serendipity['expose_s9y']) {
+    header('X-Blog: Serendipity'); // Used for installer detection
+}
 
 // Session are needed to also remember an autologin user on the frontend
 ob_start();
@@ -30,7 +33,7 @@ if ($serendipity['CacheControl']) {
         header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
     }
     header('Expires: 0');
-    header('Pragma: no-cache'); 
+    header('Pragma: no-cache');
 }
 $track_referer = true;
 $uri = $_SERVER['REQUEST_URI'];
@@ -505,7 +508,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
             if ($date < 1) {
                 continue;
             }
-            
+
             if ($m[1] == 'f' || $m[1] == 'from') {
                 $serendipity['GET']['commentStartTime'] = $date;
                 $timedesc['start'] = serendipity_strftime(DATE_FORMAT_SHORT, $date);
