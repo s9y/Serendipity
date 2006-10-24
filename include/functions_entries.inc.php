@@ -350,6 +350,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                     e.last_modified,
 
                     a.realname AS author,
+                    a.username AS loginname,
                     a.email";
     }
 
@@ -962,7 +963,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
             $authorData = array(
                             'authorid' => $entry['authorid'],
-                            'username' => $entry['author'],
+                            'username' => $entry['loginname'],
                             'email'    => $entry['email'],
                             'realname' => $entry['author']
             );
