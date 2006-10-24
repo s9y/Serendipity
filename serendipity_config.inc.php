@@ -91,6 +91,10 @@ if (!isset($serendipity['CacheControl'])) {
     $serendipity['CacheControl'] = false;
 }
 
+if (!isset($serendipity['expose_s9y'])) {
+    $serendipity['expose_s9y'] = true;
+}
+
 // Should IFRAMEs be used for previewing entries and sending trackbacks?
 $serendipity['use_iframe'] = true;
 
