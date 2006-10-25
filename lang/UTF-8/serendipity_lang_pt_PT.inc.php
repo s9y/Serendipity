@@ -890,3 +890,4 @@
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
+@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');

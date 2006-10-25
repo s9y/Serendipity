@@ -90,7 +90,7 @@ function serendipity_drawList() {
                  false,
                  serendipity_db_limit(
                    $offSet,
-                   $perPage
+                   $perPage + 1
                  ),
                  true,
                  false,
@@ -98,8 +98,8 @@ function serendipity_drawList() {
                  $filter_sql
                );
 ?>
-<form action="?" method="get">
 <div class="serendipity_admin_list">
+<form action="?" method="get">
     <input type="hidden" name="serendipity[action]"      value="admin"      />
     <input type="hidden" name="serendipity[adminModule]" value="entries"    />
     <input type="hidden" name="serendipity[adminAction]" value="editSelect" />
@@ -178,6 +178,8 @@ function serendipity_drawList() {
             <td align="right" colspan="6"><input type="submit" name="go" value="<?php echo GO ?>" class="serendipityPrettyButton" /></td>
         </tr>
     </table>
+    </form>
+
     <table class="serendipity_admin_list" cellpadding="5" width="100%">
 <?php
     if (is_array($entries)) {
@@ -199,17 +201,35 @@ function serendipity_drawList() {
                 <?php } ?>
             </td>
             <td align="right">
-                <?php if ($count == $perPage) { ?>
+                <?php if ($count > $perPage) { ?>
                     <a href="<?php echo $linkNext ?>" class="serendipityIconLinkRight"><?php echo NEXT ?><img src="<?php echo serendipity_getTemplateFile('admin/img/next.png') ?>" /></a>
                 <?php } ?>
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+    function invertSelection() {
+        var f = document.formMultiDelete;
+        for (var i = 0; i < f.elements.length; i++) {
+            if (f.elements[i].type == 'checkbox') {
+                f.elements[i].checked = !(f.elements[i].checked);
+            }
+        }
+    }
+    </script>
+    <form action="?" method="post" name="formMultiDelete" id="formMultiDelete">
+        <?php echo serendipity_setFormToken(); ?>
+        <input type="hidden" name="serendipity[action]" value="admin" />
+        <input type="hidden" name="serendipity[adminModule]" value="entries" />
+        <input type="hidden" name="serendipity[adminAction]" value="multidelete" />
 <?php
         // Print the entries
         $rows = 0;
         foreach ($entries as $entry) {
             $rows++;
+            if ($rows > $perPage) {
+                continue;
+            }
             // Find out if the entry has been modified later than 30 minutes after creation
             if ($entry['timestamp'] <= ($entry['last_modified'] - 60*30)) {
                 $lm = '<a href="#" title="' . LAST_UPDATED . ': ' . serendipity_formatTime(DATE_FORMAT_SHORT, $entry['last_modified']) . '" onclick="alert(this.title)"><img src="'. serendipity_getTemplateFile('admin/img/clock.png') .'" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a>';
@@ -262,14 +282,14 @@ function serendipity_drawList() {
                             <a target="_blank" href="<?php echo $entry['link']; ?>" title="<?php echo VIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo VIEW; ?>" /><?php echo VIEW ?></a>
                             <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo EDIT . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT; ?>" /><?php echo EDIT ?></a>
                             <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo DELETE . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE; ?>" /><?php echo DELETE ?></a>
+                            <input type="checkbox" name="serendipity[multiDelete][]" value="<?php echo $entry['id']; ?>" />
                         </td>
                     </tr>
                 </table>
-        </div>
+            </div>
 <?php
         } // end entries output
 ?>
-
         <table class="serendipity_admin_list" cellpadding="5" width="100%">
             <tr>
                 <td>
@@ -278,18 +298,33 @@ function serendipity_drawList() {
                     <?php } ?>
                 </td>
                 <td align="right">
-                    <?php if ($count == $perPage) { ?>
+                    <?php if ($count > $perPage) { ?>
                         <a href="<?php echo $linkNext ?>" class="serendipityIconLinkRight"><?php echo NEXT ?><img src="<?php echo serendipity_getTemplateFile('admin/img/next.png') ?>" /></a>
                     <?php } ?>
                 </td>
             </tr>
         </table>
 
+        <table class="serendipity_admin_list" cellpadding="0" width="100%">
+            <tr>
+                <td align="right">
+                    <input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton" />
+                    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" class="serendipityPrettyButton" />
+                </td>
+            </tr>
+        </table>
+        </form>
+
         <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo (($rows+1) % 2 ? 'even' : 'uneven'); ?>">
             <table width="100%" cellspacing="0" cellpadding="3">
                     <tr>
                         <td>
+                            <form action="?" method="get">
+                                <input type="hidden" name="serendipity[action]"      value="admin"      />
+                                <input type="hidden" name="serendipity[adminModule]" value="entries"    />
+                                <input type="hidden" name="serendipity[adminAction]" value="editSelect" />
                             <?php echo EDIT_ENTRY ?>: #<input type="text" size="3" name="serendipity[id]" /> <input type="submit" name="serendipity[editSubmit]" value="<?php echo GO ?>" class="serendipityPrettyButton" />
+                            </form>
                         </td>
                     </tr>
             </table>
@@ -303,7 +338,6 @@ function serendipity_drawList() {
     }
 ?>
 </div>
-</form>
 <?php
 } // End function serendipity_drawList()
 
@@ -451,6 +485,25 @@ switch($serendipity['GET']['adminAction']) {
         serendipity_deleteEntry((int)$serendipity['GET']['id']);
         printf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
         echo '<br />';
+        $cont_draw = true;
+
+    case 'doMultiDelete':
+        if (!isset($cont_draw)) {
+            if (!serendipity_checkFormToken() || !isset($serendipity['GET']['id'])) {
+                break;
+            }
+
+            $parts = explode(',', $serendipity['GET']['id']);
+            foreach($parts AS $id) {
+                $id = (int)$id;
+                if ($id > 0) {
+                    $entry = serendipity_fetchEntry('id', $id, 1, 1);
+                    serendipity_deleteEntry((int)$id);
+                    printf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+                    echo '<br />';
+                }
+            }
+        }
 
     case 'editSelect':
         serendipity_drawList();
@@ -464,6 +517,30 @@ switch($serendipity['GET']['adminAction']) {
 
         $entry = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
         printf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+?>
+<br />
+<br />
+<div>
+    <a href="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]); ?>" class="serendipityPrettyButton"><?php echo NOT_REALLY; ?></a>
+    <?php echo str_repeat('&nbsp;', 10); ?>
+    <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton"><?php echo DUMP_IT; ?></a>
+</div>
+<?php
+        break;
+
+    case 'multidelete':
+        if (!serendipity_checkFormToken() || !is_array($serendipity['POST']['multiDelete'])) {
+            break;
+        }
+
+        $ids = '';
+        foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
+            $ids .= (int)$id . ',';
+            $entry = serendipity_fetchEntry('id', $id, 1, 1);
+            printf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+            echo '<br />';
+        }
+        $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
 ?>
 <br />
 <br />

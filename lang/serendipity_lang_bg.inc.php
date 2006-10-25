@@ -871,3 +871,4 @@
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Забранени събития');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Разрешаване на Plugin ACL за потребителски групи ?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Ако опцията "Plugin ACL за потребителски групи" е позволена, ще можете да указвате кои потребителски групи имат позволението да изпълняват дадени събитийни и странични приставки.');
+@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
