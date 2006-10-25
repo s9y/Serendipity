@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ru.inc.php 1399 2006-08-18 12:01:25Z garvinhicking $
+<?php # $Id: serendipity_lang_ru.inc.php 1408 2006-08-23 13:47:50Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Nightly <nightly@reys.net>
@@ -887,3 +887,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
+@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');

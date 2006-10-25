@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Support to delete multiple entries at once via checkboxes in the
+      entry admin panel, fix admin entry pagination to not show
+      next pages, if that next page were empty. (garvinhicking)
+
     * Fix bug with using %username% in author permalinks, thanks to oeli
       from the forums! (garvinhicking)
 
