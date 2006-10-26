@@ -612,7 +612,7 @@
 @define('PROBLEM_PERMISSIONS_HOWTO', 'Toegansrechten kunnen gezet worden met de volgende commando: `<em>%s</em>` op de mislukte map, of door het wijzigen via een FTP programma');
 @define('WARNING_TEMPLATE_DEPRECATED', 'Waarschuwing: Uw huidige template gebruikte een oude template methode. U wordt geadviseerd om indien mogelijk te upgraden.');
 @define('ENTRY_PUBLISHED_FUTURE', 'Dit interessegebied is nog niet gepubliceerd');
-@define('ENTRIES_BY', 'Interessegebieden naar %s');
+@define('ENTRIES_BY', 'Blog posts van %s');
 @define('PREVIOUS', 'Vorige');
 @define('NEXT', 'Volgende');
 @define('APPROVE', 'Goedkeuren');
