@@ -881,3 +881,4 @@
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Sollen persönliche Plugin-Rechte für Benutzergruppen aktiviert werden?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Falls diese Option aktiviert ist, können Sie bei jeder Benutzergruppe definieren, welche Plugins/Ereignisse diese Gruppe ausführen darf.');
 @define('DELETE_SELECTED_ENTRIES', 'Markierte Einträge löschen');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');

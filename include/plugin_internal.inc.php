@@ -1583,8 +1583,8 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $propbag->add('description', AUTHOR_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.0');
-        $propbag->add('configuration', array('image', 'allow_select', 'title', 'showartcount'));
+        $propbag->add('version',       '2.01');
+        $propbag->add('configuration', array('image', 'allow_select', 'title', 'showartcount', 'mincount'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -1620,6 +1620,13 @@ class serendipity_authors_plugin extends serendipity_plugin {
                 $propbag->add('default',      false);
                 break;
 
+            case 'mincount':
+                $propbag->add('type',         'string');
+                $propbag->add('name',         PLUGIN_AUTHORS_MINCOUNT);
+                $propbag->add('description',  '');
+                $propbag->add('default',      '');
+                break;
+
             default:
                 return false;
         }
@@ -1639,8 +1646,8 @@ class serendipity_authors_plugin extends serendipity_plugin {
         }
         $is_form  = serendipity_db_bool($this->get_config('allow_select'));
         $is_count = serendipity_db_bool($this->get_config('showartcount'));
+        $mincount = (int)$this->get_config('mincount');
         $authors  = serendipity_fetchUsers(null, null, $is_count);
-
         $html       = '';
 
         if ($is_form) {
@@ -1654,6 +1661,9 @@ class serendipity_authors_plugin extends serendipity_plugin {
             foreach ($authors as $auth) {
 
                 if ($is_count) {
+                    if ($auth['artcount'] < $mincount) {
+                        continue;
+                    }
                     $entrycount = " ({$auth['artcount']})";
                 } else {
                     $entrycount = "";

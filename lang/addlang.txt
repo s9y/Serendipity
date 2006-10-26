@@ -1,1 +1,1 @@
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
