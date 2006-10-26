@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 1408 2006-08-23 13:47:50Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 1456 2006-10-25 08:27:16Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -881,3 +881,4 @@
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Sollen persönliche Plugin-Rechte für Benutzergruppen aktiviert werden?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Falls diese Option aktiviert ist, können Sie bei jeder Benutzergruppe definieren, welche Plugins/Ereignisse diese Gruppe ausführen darf.');
 @define('DELETE_SELECTED_ENTRIES', 'Markierte Einträge löschen');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
