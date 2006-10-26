@@ -34,7 +34,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.53');
+        $propbag->add('version',       '1.60');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -49,6 +49,7 @@ var $filter_defaults;
             'bodyclone',
             'entrytitle',
             'ipflood',
+            'csrf',
             'captchas',
             'captchas_ttl',
             'captcha_color',
@@ -111,6 +112,13 @@ var $filter_defaults;
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_DESC);
                 $propbag->add('default', false);
+                break;
+
+            case 'csrf':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_CSRF);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC);
+                $propbag->add('default', true);
                 break;
 
             case 'entrytitle':
@@ -596,6 +604,15 @@ var $filter_defaults;
                         $logfile = $this->logfile = $this->get_config('logfile', $serendipity['serendipityPath'] . 'spamblock.log');
                         $required_fields = $this->get_config('required_fields', '');
 
+                        // Check CSRF [comments only, cannot be applied to trackbacks]
+                        if ($addData['type'] == 'NORMAL' && serendipity_db_bool($this->get_config('csrf', true))) {
+                            if (!serendipity_checkFormToken(false)) {
+                                $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON, $addData);
+                                $eventData = array('allow_comments' => false);
+                                $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON;
+                            }
+                        }
+
                         // Check required fields
                         if ($addData['type'] == 'NORMAL' && !empty($required_fields)) {
                             $required_field_list = explode(',', $required_fields);
@@ -905,6 +922,10 @@ var $filter_defaults;
                         echo '<div class="serendipity_commentDirection serendipity_comment_spamblock">' . PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE . '</div>';
                     }
 
+                    if (serendipity_db_bool($this->get_config('csrf', true))) {
+                        echo serendipity_setFormToken('form');
+                    }
+                    
                     // Check whether to allow comments from registered authors
                     if (serendipity_userLoggedIn() && $this->inGroup()) {
                         return true;

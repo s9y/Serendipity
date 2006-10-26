@@ -1786,7 +1786,7 @@ function serendipity_reportXSRF($type = 0, $reset = true, $use_config = false) {
  * @see serendipity_setFormToken()
  * @return  boolean     Returns true, if XSRF attempt was found and the token was missing
  */
-function serendipity_checkFormToken() {
+function serendipity_checkFormToken($output = true) {
     global $serendipity;
 
     $token = '';
@@ -1797,13 +1797,13 @@ function serendipity_checkFormToken() {
     }
 
     if (empty($token)) {
-        echo serendipity_reportXSRF('token', false);
+        if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
 
     if ($token != md5(session_id()) &&
         $token != md5($serendipity['COOKIE']['old_session'])) {
-        echo serendipity_reportXSRF('token', false);
+        if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
 
