@@ -170,7 +170,7 @@ $filters = array('author', 'email', 'ip', 'url', 'body', 'referer');
 /* Compress the filters into an "AND" SQL query, and a querystring */
 foreach ($filters as $filter) {
     $and          .= (!empty($serendipity['GET']['filter'][$filter]) ? "AND c.". $filter ." LIKE '%". serendipity_db_escape_string($serendipity['GET']['filter'][$filter]) ."%'" : "");
-    $searchString .= (!empty($serendipity['GET']['filter'][$filter]) ? "&amp;serendipity[filter][". $filter ."]=". $serendipity['GET']['filter'][$filter] : "");
+    $searchString .= (!empty($serendipity['GET']['filter'][$filter]) ? "&amp;serendipity[filter][". $filter ."]=". htmlspecialchars($serendipity['GET']['filter'][$filter]) : "");
 }
 
 if ($serendipity['GET']['filter']['show'] == 'approved') {
@@ -277,19 +277,19 @@ function highlightComment(id, checkvalue) {
     </tr>
     <tr>
         <td><?php echo AUTHOR ?>:</td>
-        <td><input type="text" name="serendipity[filter][author]" size="15" value="<?php echo $serendipity['GET']['filter']['author'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][author]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['author']) ?>" /></td>
         <td><?php echo EMAIL ?>:</td>
-        <td><input type="text" name="serendipity[filter][email]" size="15" value="<?php echo $serendipity['GET']['filter']['email'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][email]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['email']) ?>" /></td>
         <td><?php echo URL ?>:</td>
-        <td><input type="text" name="serendipity[filter][url]" size="15" value="<?php echo $serendipity['GET']['filter']['url'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][url]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['url']) ?>" /></td>
     </tr>
     <tr>
         <td>IP:</td>
-        <td><input type="text" name="serendipity[filter][ip]" size="15" value="<?php echo $serendipity['GET']['filter']['ip'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][ip]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['ip']) ?>" /></td>
         <td><?php echo CONTENT ?>:</td>
-        <td><input type="text" name="serendipity[filter][body]" size="15" value="<?php echo $serendipity['GET']['filter']['body'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][body]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['body']) ?>" /></td>
         <td><?php echo REFERER ?>:</td>
-        <td><input type="text" name="serendipity[filter][referer]" size="15" value="<?php echo $serendipity['GET']['filter']['referer'] ?>" /></td>
+        <td><input type="text" name="serendipity[filter][referer]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['referer']) ?>" /></td>
     </tr>
     <tr>
         <td><?php echo COMMENTS; ?>:</td>
