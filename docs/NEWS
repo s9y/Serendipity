@@ -3,6 +3,14 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Added functionality to reply to comments in the admin interface
+      (garvinhicking)
+
+    * Enhance spamblock plugin with session hash check, to prevent
+      automatted comment posting. Also prevents possible CSRF for
+      tricking you into submitting comments to your own blog. Thanks
+      to Stefan Esser! (garvinhicking)
+
     * Support to delete multiple entries at once via checkboxes in the
       entry admin panel, fix admin entry pagination to not show
       next pages, if that next page were empty. (garvinhicking)

@@ -87,6 +87,7 @@ if (serendipity_is_iframe()) {
     </head>
     <body id="serendipity_admin_page" onload="spawn()">
         <table cellspacing="0" cellpadding="0" border="0" id="serendipityAdminFrame">
+        <?php if (!isset($serendipity['GET']['noBanner']) && !isset($serendipity['POST']['noBanner'])) { ?>
             <tr>
                 <td colspan="2" id="serendipityAdminBanner">
                 <?php if ( IS_installed === true && IS_up2date === true ) { ?>
@@ -104,6 +105,7 @@ if (serendipity_is_iframe()) {
                     <?php } ?>
                 </td>
             </tr>
+        <?php } ?>
             <tr valign="top">
 <?php
 if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false ) {
@@ -159,6 +161,7 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
 
 } else {
 ?>
+<?php if (!isset($serendipity['GET']['noSidebar']) && !isset($serendipity['POST']['noSidebar'])) { ?>
                 <td id="serendipitySideBar">
                     <ul class="serendipitySideBarMenu">
                         <li><a href="serendipity_admin.php"><?php echo ADMIN_FRONTPAGE; ?></a></li>
@@ -241,6 +244,7 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
                     </ul>
 
                 </td>
+<?php } ?>
                 <td class="serendipityAdminContent">
 <?php
     if (!isset($serendipity['GET']['adminModule'])) {
