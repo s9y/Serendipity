@@ -4,12 +4,13 @@
 # Translation (c) 2004 Bogomil Shopov <bogomil@spisanie.com>
 # http://www.purplerain.org/nb/
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2005
-# Ivan Cenov <JWalker@av.bg>, 2005-2006
+# Ivan Cenov <JWalker@hotmail.bg>, 2005-2006
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'UTF-8');
 @define('SQL_CHARSET', 'utf8');
-@define('DATE_LOCALES', 'bg_BG');
+//@define('DATE_LOCALES', 'bg_BG');
+@define('DATE_LOCALES', 'bulgarian, bg, bg_BG');
 @define('DATE_FORMAT_ENTRY', '%A, %e %B %Y');
 @define('WYSIWYG_LANG', 'en');
 @define('LANG_DIRECTION', 'ltr');
@@ -871,5 +872,5 @@
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Забранени събития');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Разрешаване на Plugin ACL за потребителски групи ?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Ако опцията "Plugin ACL за потребителски групи" е позволена, ще можете да указвате кои потребителски групи имат позволението да изпълняват дадени събитийни и странични приставки.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('DELETE_SELECTED_ENTRIES', 'Изтриване на избраните статии');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Показване само на автори с най-малко X статии');
