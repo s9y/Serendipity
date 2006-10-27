@@ -8,6 +8,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
     var $info        = array('software' => IMPORT_GENERIC_RSS);
     var $data        = array();
     var $inputFields = array();
+    var $force_recode = false;
 
     function Serendipity_Import_Generic($data) {
         $this->data = $data;

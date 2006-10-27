@@ -17,8 +17,8 @@ if (function_exists('set_time_limit')) {
 
 /* Class construct. Each importer plugin must extend this class. */
 class Serendipity_Import {
-    var $trans_table = '';
-
+    var $trans_table  = '';
+    var $force_recode = true;
 /**
  * Return textual notes of an importer plugin
  *
@@ -68,8 +68,8 @@ class Serendipity_Import {
  * @return string   converted string
  */
     function &decode($string) {
-        // xml_parser_* functions to recoding from ISO-8859-1/UTF-8
-        if (LANG_CHARSET == 'ISO-8859-1' || LANG_CHARSET == 'UTF-8') {
+        // xml_parser_* functions do recoding from ISO-8859-1/UTF-8
+        if (!$this->force_recode && (LANG_CHARSET == 'ISO-8859-1' || LANG_CHARSET == 'UTF-8')) {
             return $string;
         }
 
@@ -84,6 +84,8 @@ class Serendipity_Import {
                     $out = iconv('ISO-8859-1', LANG_CHARSET, $string);
                 } elseif (function_exists('recode')) {
                     $out = recode('iso-8859-1..' . LANG_CHARSET, $string);
+                } elseif (LANG_CHARSET == 'UTF-8') {
+                    return utf8_encode($string);
                 } else {
                     return $string;
                 }

@@ -8,6 +8,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
     var $info        = array('software' => 'LiveJournal XML');
     var $data        = array();
     var $inputFields = array();
+    var $force_recode = false;
 
     function Serendipity_Import_LiveJournalXML($data) {
         global $serendipity;
