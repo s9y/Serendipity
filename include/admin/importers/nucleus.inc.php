@@ -154,6 +154,11 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
             $entries[$x] = mysql_fetch_assoc($res);
 
+
+            echo "BODY: " . $entries[$x]['ibody'] . "<br />\n";
+            echo "DECODED BODY: " . $this->strtr($entries[$x]['ibody']) . "<br />\n";
+            die('done');
+
             $entry = array('title'          => $this->decode($entries[$x]['ititle']),
                            'isdraft'        => ($entries[$x]['idraft'] != '1') ? 'false' : 'true',
                            'allow_comments' => ($entries[$x]['iclosed'] == '1' ) ? 'false' : 'true',

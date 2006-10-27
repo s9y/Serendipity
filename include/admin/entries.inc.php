@@ -309,7 +309,7 @@ function serendipity_drawList() {
             <tr>
                 <td align="right">
                     <input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton" />
-                    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" class="serendipityPrettyButton" />
+                    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_ENTRIES ?>" class="serendipityPrettyButton" />
                 </td>
             </tr>
         </table>

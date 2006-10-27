@@ -38,6 +38,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
     var $info        = array('software' => 'VoodooPad');
     var $data        = array();
     var $inputFields = array();
+    var $force_recode = false;
     
     function Serendipity_Import_VoodooPad($data) {
         $this->data = $data;
