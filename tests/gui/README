@@ -1,0 +1,21 @@
+Test setup instructions
+=======================
+
+0.) Optionally Install VMWare Server
+
+1.) Install Java from http://java.sun.com/
+
+2.) Get Selenium RC from http://www.openqa.org/selenium-rc/download.action
+
+3.) Install PHPUnit:
+    # pear install -f http://pear.phpunit.de/get/PHPUnit-3.0.0beta2.tgz
+
+4.) Install PHP Selenium Bindings: 
+    # pear install -f Testing_Selenium
+
+5.) Change TestConfiguration.php to reflect your configuration.
+
+6.) Run Tests
+    $ phpunit SeleniumTestSuite.php
+
+-- end of file
