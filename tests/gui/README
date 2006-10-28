@@ -13,7 +13,9 @@ Test setup instructions
 4.) Install PHP Selenium Bindings: 
     # pear install -f Testing_Selenium
 
-5.) Change TestConfiguration.php to reflect your configuration.
+5.) Copy TestConfiguration.php.dist to TestConfiguration.php and
+    change TestConfiguration.php to reflect your Selenium RC
+    configuration.
 
 6.) Run Tests
     $ phpunit SeleniumTestSuite.php
