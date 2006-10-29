@@ -7,4 +7,5 @@ define('SELENIUM_HOST',    '172.16.177.130');
 define('SELENIUM_PORT',    4444);
 define('SELENIUM_BROWSER', '*firefox');
 define('S9Y_INSTALLDIR',   'http://example.com/serendipity/');
+define('S9Y_LANG',         'en');
 ?>
