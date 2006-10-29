@@ -10,6 +10,7 @@ require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
 require_once 'TestConfiguration.php';
 
 require_once '../../lang/serendipity_lang_'.S9Y_LANG.'.inc.php';
+require_once '../../plugins/serendipity_event_spamblock/lang_'.S9Y_LANG.'.inc.php';
 
 class SerendipityTestSuite extends PHPUnit_Extensions_SeleniumTestCase
 {
@@ -173,6 +174,50 @@ class SerendipityTestSuite extends PHPUnit_Extensions_SeleniumTestCase
         $this->assertTitleEquals('Test Entry 001 - s9y Testsuite Testblog');
         $this->assertTextPresent('Test Body');
         $this->clickAndWait('link='.EDIT_ENTRY);
+
+        $this->assertTextPresent(ENTRY_BODY);
+        $this->type('serendipity[body]', 'New Test Body');
+        $this->clickAndWait("//input[@value='- ".SAVE." -']");
+
+        $this->assertTextPresent(IFRAME_SAVE);
+        $this->clickAndWait('link='.VIEW);
+
+        $this->assertTitleEquals('Test Entry 001 - s9y Testsuite Testblog');
+        $this->assertTextPresent('New Test Body');
+    }
+
+    public function testComment() {
+        $this->open(S9Y_INSTALLDIR);
+
+        $this->assertTitleEquals('s9y Testsuite Testblog');
+        $this->assertTextPresent('Test Entry 001');
+        $this->clickAndWait('link=Test Entry 001');
+
+        $this->assertTitleEquals('Test Entry 001 - s9y Testsuite Testblog');
+        $this->assertTextPresent('New Test Body');
+        $this->assertTextPresent(ADD_COMMENT);
+        $this->clickAndWait("//input[@value='".SUBMIT_COMMENT."']");
+
+        $this->assertTextPresent(sprintf(EMPTY_COMMENT, '', ''));
+        $this->type('serendipity[name]', 'Test Commenter 001');
+        $this->clickAndWait("//input[@value='".SUBMIT_COMMENT."']");
+
+        $this->assertTextPresent(sprintf(EMPTY_COMMENT, '', ''));
+        $this->type('serendipity[comment]', 'Test Comment 001');
+        $this->clickAndWait("//input[@value='".SUBMIT_COMMENT."']");
+        
+        $this->assertTextPresent(COMMENT_ADDED);
+        $this->assertTextPresent('Test Commenter 001');
+        $this->assertTextPresent('Test Comment 001');
+        $this->clickAndWait('link='.ADMIN_FRONTPAGE);
+
+        $this->clickAndWait('link=Test Entry 001');
+
+        $this->type('serendipity[name]', 'Test Commenter 001');
+        $this->type('serendipity[comment]', 'Test Comment 002');
+        $this->clickAndWait("//input[@value='".SUBMIT_COMMENT."']");
+
+        $this->assertTextPresent(PLUGIN_EVENT_SPAMBLOCK_ERROR_IP);
     }
 }
 ?>
