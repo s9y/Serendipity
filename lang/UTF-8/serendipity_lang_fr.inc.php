@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_fr.inc.php 1456 2006-10-25 08:27:16Z garvinhicking $
+<?php # $Id: serendipity_lang_fr.inc.php 1460 2006-10-26 20:05:04Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Sebastian Mordziol <argh@php-tools.net>
