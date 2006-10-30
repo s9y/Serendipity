@@ -19,33 +19,33 @@
 @define('LANG_DIRECTION', 'ltr');
 
 @define('SERENDIPITY_ADMIN_SUITE', 'Painel de Administração do Serendipity');
-@define('HAVE_TO_BE_LOGGED_ON', 'Tem que entrar no sistema para ver esta página');
-@define('WRONG_USERNAME_OR_PASSWORD', 'Deve ter fornecido nome de utilizador ou senha inválidos');
+@define('HAVE_TO_BE_LOGGED_ON', 'Tem que efectuar login no sistema para visualizar esta página');
+@define('WRONG_USERNAME_OR_PASSWORD', 'Deve ter fornecido um nome de utilizador, senha ou dados inválidos');
 @define('APPEARANCE', 'Aparência');
 @define('MANAGE_STYLES', 'Gerir estilos');
 @define('CONFIGURE_PLUGINS', 'Configurar Plugins');
 @define('CONFIGURATION', 'Configuração');
-@define('BACK_TO_BLOG', 'De volta ao Weblog');
+@define('BACK_TO_BLOG', 'Regressar ao Weblog');
 @define('LOGIN', 'Login'); //
 @define('LOGOUT', 'Sair'); // Verify
 @define('LOGGEDOUT', 'Saída completada.'); // Verify
 @define('CREATE', 'Criar');
 @define('SAVE', 'Guardar');
 @define('NAME', 'Nome');
-@define('CREATE_NEW_CAT', 'Criar nova categoria');
+@define('CREATE_NEW_CAT', 'Criar uma nova categoria');
 @define('I_WANT_THUMB', 'Quero usar miniaturas no meu artigo.');
 @define('I_WANT_BIG_IMAGE', 'Quero usar a maior imagem no meu artigo.');
 @define('I_WANT_NO_LINK', ' Quero mostrá-la como imagem');
-@define('I_WANT_IT_TO_LINK', 'Quero mostrá-la como uma ligação para esta URL:');
+@define('I_WANT_IT_TO_LINK', 'Quero mostrá-la como uma ligação para este URL:');
 @define('BACK', 'Volta');
-@define('FORWARD', 'Encaminha');
+@define('FORWARD', 'Encaminhar');
 @define('ANONYMOUS', 'Anónimo');
 @define('NEW_TRACKBACK_TO', 'Novo trackback feito para');
 @define('NEW_COMMENT_TO', 'Novo comentário enviado para');
 @define('RECENT', 'Recentes...');
 @define('OLDER', 'Mais antigos...');
 @define('DONE', 'Pronto');
-@define('WELCOME_BACK', 'Bem-vindo de volta,');
+@define('WELCOME_BACK', 'Bem vindo de volta,');
 @define('TITLE', 'Título');
 @define('DESCRIPTION', 'Descrição');
 @define('PLACEMENT', 'Localização');
@@ -58,7 +58,7 @@
 @define('EDIT_ENTRIES', 'Editar artigos');
 @define('CATEGORIES', 'Categorias');
 @define('WARNING_THIS_BLAHBLAH', "ATENÇÃO:\\nIsso pode demorar muito tempo se existirem muitas imagens sem miniaturas.");
-@define('CREATE_THUMBS', 'Reconstruir Miniaturas');
+@define('CREATE_THUMBS', 'Reconstruir miniaturas');
 @define('MANAGE_IMAGES', 'Gerir imagens');
 @define('NAME', 'Nome');
 @define('EMAIL', 'E-mail');
@@ -87,29 +87,29 @@
 @define('ERROR_SOMETHING', 'Erro: Problema desconhecido.');
 @define('ADDING_IMAGE', 'Adicionando imagem...');
 @define('THUMB_CREATED_DONE', 'Miniatura criada.<br/>Pronto.');
-@define('ERROR_FILE_EXISTS_ALREADY', 'Erro: O ficheiro já existe na sua máquina!');
+@define('ERROR_FILE_EXISTS_ALREADY', 'Erro: O ficheiro já existe no seu servidor!');
 @define('GO', 'Vamos!');
 @define('NEWSIZE', 'Novo tamanho: ');
 @define('RESIZE_BLAHBLAH', '<b>Redimensionar %s</b><p>');
 @define('ORIGINAL_SIZE', 'Tamanho original: <i>%sx%s</i> pixéis');
-@define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Aqui pode ajustar o novo tamanho das imagens. Se pretender manter as proporções, preencha apenas um valor e pressione a tecla TAB de maneira a ser automaticamente calculado o novo tamanho de modo às proporções não ficarem erradas:');
+@define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Aqui pode ajustar o novo tamanho das suas imagens. Se pretender manter as proporções, preencha apenas um valor e pressione a tecla TAB de maneira a ser automaticamente calculado o novo tamanho de modo às proporções não ficarem erradas:');
 @define('QUICKJUMP_CALENDAR', 'Calendário de acesso rápido');
 @define('QUICKSEARCH', 'Pesquisa rápida');
 @define('SEARCH_FOR_ENTRY', 'Procure um artigo');
 @define('ARCHIVES', 'Arquivos');
 @define('BROWSE_ARCHIVES', 'Navegar nos arquivos por mês');
 @define('TOP_REFERRER', 'Referidores mais importantes');
-@define('SHOWS_TOP_SITES', 'Exibe os links de entrada mais utilizados para entrar no seu blog');
-@define('TOP_EXITS', 'Maiores Saídas');
-@define('SHOWS_TOP_EXIT', 'Exibe os links de saída mais requisitados de seu blog');
+@define('SHOWS_TOP_SITES', 'Exibe os links de entrada mais utilizados para aceder no seu blogue');
+@define('TOP_EXITS', 'Saídas Maiores');
+@define('SHOWS_TOP_EXIT', 'Exibe os links de saída mais requisitados de seu blogue');
 @define('SYNDICATION', 'Sindicalização');
 @define('SHOWS_RSS_BLAHBLAH', 'Mostrar ligações de sindicalização RSS');
-@define('ADVERTISES_BLAHBLAH', 'Publicita a origem do seu blog');
+@define('ADVERTISES_BLAHBLAH', 'Publicita a origem do seu blogue');
 @define('HTML_NUGGET', 'Fragmento de HTML');
 @define('HOLDS_A_BLAHBLAH', 'Apresenta um fragmento de HTML na sua barra lateral');
 @define('TITLE_FOR_NUGGET', 'Título para o fragmento de HTML');
 @define('THE_NUGGET', 'Fragmento de HTML!');
-@define('SYNDICATE_THIS_BLOG', 'Sindicalizar este Blog');
+@define('SYNDICATE_THIS_BLOG', 'Sindicalizar este Blogue');
 @define('YOU_CHOSE', 'Escolheu %s');
 @define('IMAGE_SIZE', 'Tamanho da imagem');
 @define('IMAGE_AS_A_LINK', 'Inserção de imagem');
@@ -130,16 +130,16 @@
 @define('IP_ADDRESS', 'Endereço IP');
 @define('USER', 'Utilizador');
 @define('THUMBNAIL_USING_OWN', 'Usando %s como a sua própria miniatura devido ao seu pequeno tamanho.');
-@define('THUMBNAIL_FAILED_COPY', 'A tentativa de usar %s como a sua própria miniatura falhou devido a um erro de cópia!');
+@define('THUMBNAIL_FAILED_COPY', 'A tentativa de usar %s como a sua própria miniatura falhou devido a um erro na cópia!');
 @define('AUTHOR', 'Autor');
 @define('LAST_UPDATED', 'Última actualização');
 @define('TRACKBACK_SPECIFIC', 'URI específica do trackback para este artigo');
 @define('DIRECT_LINK', 'Ligação directa para este artigo');
-@define('COMMENT_ADDED', 'O seu comentário foi adicionado corretamente. ');
+@define('COMMENT_ADDED', 'O seu comentário foi adicionado correctamente.');
 @define('COMMENT_ADDED_CLICK', 'Clique %saqui para retornar%s aos comentários, ou %saqui para fechar%s esta janela.');
 @define('COMMENT_NOT_ADDED_CLICK', 'Clique %saqui para retornar%s aos comentários, ou %saqui para fechar%s esta janela.');
-@define('COMMENTS_DISABLE', 'Permitem-se comentários deste artigo');
-@define('COMMENTS_ENABLE', 'Comentários deste artigo são permitidos');
+@define('COMMENTS_DISABLE', 'Não são permitidos comentários neste artigo');
+@define('COMMENTS_ENABLE', 'São permitidos comentários neste artigo');
 @define('COMMENTS_CLOSED', 'O autor não autorizou comentários deste artigo');
 @define('EMPTY_COMMENT', 'O seu comentário está vazio, por favor, %svolte%s e tente novamente');
 @define('ENTRIES_FOR', 'Artigos para %s');
@@ -158,12 +158,12 @@
 @define('ENTRY_SAVED', 'Artigo guardado');
 @define('DELETE_SURE', 'Tem a certeza que deseja excluir #%s definitivamente?');
 @define('NOT_REALLY', 'Não mesmo...');
-@define('DUMP_IT', 'Deite-o fora!');
+@define('DUMP_IT', 'Eliminá-lo!');
 @define('RIP_ENTRY', 'Destruir artigo #%s');
 @define('CATEGORY_DELETED', 'Categoria #%s apagada. Os artigos antigos foram movidos para a categoria #%s');
 @define('INVALID_CATEGORY', 'Nenhuma categoria fornecida para exclusão');
 @define('CATEGORY_SAVED', 'Categoria guardada');
-@define('SELECT_TEMPLATE', 'Selecione o modelo pretendido para o seu Blog');
+@define('SELECT_TEMPLATE', 'Selecione o modelo pretendido para o seu Blogue');
 @define('ENTRIES_NOT_SUCCESSFULLY_INSERTED', 'Artigos não adicionados!');
 @define('YES', 'Sim');
 @define('NO', 'Não');
@@ -176,17 +176,17 @@
 @define('FILE_WRITE_ERROR', 'Não foi possível editar o ficheiro %s.');
 @define('FILE_CREATE_YOURSELF', 'Por favor, crie você mesmo o ficheiro ou verifique as suas permissões');
 @define('COPY_CODE_BELOW', '<br />* Copie o código abaixo e o coloque em %s na sua %s directoria:<b><pre>%s</pre></b>' . "\n");
-@define('WWW_USER', 'Altere www para o utilizador com o qual o apache é executado (ex.: nobody).');
+@define('WWW_USER', 'Altere www para o utilizador com o qual o apache é executado (ex.: ninguêm).');
 @define('BROWSER_RELOAD', 'Uma vez feito isso, pressione o botão "actualizar" ("reload") do seu navegador.');
 @define('DIAGNOSTIC_ERROR', 'Detectámos alguns erros quando verificámos as informações que forneceu:');
-@define('SERENDIPITY_NOT_INSTALLED', 'Serendipity ainda não está instalado. Por favor <a href="%s">instale-o</a> agora.');
-@define('INCLUDE_ERROR', 'erro do serendipity: não foi possível incluir %s - abortando.');
-@define('DATABASE_ERROR', 'erro do serendipity: não foi possível conectar à base de dados - abortando.');
+@define('SERENDIPITY_NOT_INSTALLED', 'Serendipity não se encontra instalado. Por favor <a href="%s">instale-o</a> agora.');
+@define('INCLUDE_ERROR', 'Erro do Serendipity: não foi possível incluir %s - abortando.');
+@define('DATABASE_ERROR', 'Erro do Serendipity: não foi possível conectar-se à base de dados - abortando.');
 @define('CREATE_DATABASE', 'Criando a instalação padrão da base de dados...');
 @define('ATTEMPT_WRITE_FILE', 'Tentando editar o ficheiro %s...');
 @define('WRITTEN_N_SAVED', 'Configuração escrita &amp; guardada');
 @define('IMAGE_ALIGNMENT', 'Alinhamento de imagem');
-@define('ENTER_NEW_NAME', 'Indique o novo nome: ');
+@define('ENTER_NEW_NAME', 'Indique um nome novo: ');
 @define('RESIZING', 'Redimensionando');
 @define('RESIZE_DONE', 'Pronto (%s imagens redimensionadas).');
 @define('SYNCING', 'Sincronizando a base de dados com a directoria de imagens');
@@ -195,21 +195,21 @@
 @define('DELETE_THUMBNAIL', 'Excluir a miniatura da imagem entitulada <b>%s</b>');
 @define('FILE_NOT_FOUND', 'Não foi possível localizar o ficheiro entitulado <b>%s</b>, será que foi apagado?');
 @define('ABORT_NOW', 'Cancelar agora');
-@define('REMOTE_FILE_NOT_FOUND', 'O arquivo não foi localizado no servidor, tem a certeza que a URL: <b>%s</b> está correta?');
+@define('REMOTE_FILE_NOT_FOUND', 'O arquivo não foi localizado no servidor, tem a certeza que a URL: <b>%s</b> está correcta?');
 @define('FILE_FETCHED', '%s obtido como %s');
-@define('FILE_UPLOADED', 'O arquivo %s foi transferido corretamente: %s');
+@define('FILE_UPLOADED', 'O arquivo %s foi transferido correctamente: %s');
 @define('WORD_OR', 'Ou');
 @define('SCALING_IMAGE', 'Redimensionando %s para %s x %s px');
 @define('KEEP_PROPORTIONS', 'Manter proporções');
 @define('REALLY_SCALE_IMAGE', 'Quer mesmo redimensionar a imagem? Não é possível desfazer!!');
 @define('TOGGLE_ALL', 'Alternar para expandir tudo');
 @define('TOGGLE_OPTION', 'Opção para alternar');
-@define('SUBSCRIBE_TO_THIS_ENTRY', 'Subscrever este artigo');
+@define('SUBSCRIBE_TO_THIS_ENTRY', 'Subscrever a este artigo');
 @define('UNSUBSCRIBE_OK', "%s teve a subscrição deste artigo cancelada");
-@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Novo comentário do artigo subscrito "%s"');
+@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Novo comentário no artigo subscrito "%s"');
 @define('SUBSCRIPTION_MAIL', "Olá %s,\n\nUm novo comentário foi acrescentado a um artigo que você está seguindo em \"%s\", intitulado \"%s\"\nO comentário foi enviado por: %s\n\nO artigo a que nos referimos pode ser encontrado em: %s\n\nPode cancelar sua subscrição clicando esta ligação: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Olá %s,\n\nUm novo trackback foi adicionado num artigo que você está seguindo em \"%s\", intitulado \"%s\"\nO comentário foi enviado por: %s\n\nO artigo a que nos referimos pode ser encontrada em: %s\n\nPode cancelar a sua subscrição clicando nesta ligação: %s\n");
-@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blog que existe, e você também pode usá-lo.\nConsulte <http://s9y.org> para descobrir como.");
+@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blogue que existe, e você também pode usá-lo.\nConsulte <http://s9y.org> para descobrir como.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -220,13 +220,13 @@
 @define('SYNDICATION_PLUGIN_BANNERURL', 'Imagem para o RSS feed');
 @define('SYNDICATION_PLUGIN_BANNERWIDTH', 'Largura da imagem');
 @define('SYNDICATION_PLUGIN_BANNERHEIGHT', 'Altura da imagem');
-@define('SYNDICATION_PLUGIN_WEBMASTER_DESC',  'E-Mail do webmaster, se disponível. (vazio: oculto) [RSS 2.0]');
-@define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-Mail do editor, se disponível. (vazio: oculto) [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_WEBMASTER_DESC',  'E-mail do webmaster, se disponível. (vazio: oculto) [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC', 'E-mail do editor, se disponível. (vazio: oculto) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_BANNERURL_DESC', 'URL de uma imagem no formato GIF/JPEG/PNG, se disponível. (vazio: logotipo do serendipity)');
 @define('SYNDICATION_PLUGIN_BANNERWIDTH_DESC', 'em pixéis, max. 144');
 @define('SYNDICATION_PLUGIN_BANNERHEIGHT_DESC', 'em pixéis, max. 400');
 @define('SYNDICATION_PLUGIN_TTL', 'Campo "ttl" (tempo de vida)');
-@define('SYNDICATION_PLUGIN_TTL_DESC', 'Quantidade de minutos depois do qual o seu blog não deverá ser mais "cacheado" por sítios ou aplicações (vazio: oculto) [RSS 2.0]');
+@define('SYNDICATION_PLUGIN_TTL_DESC', 'Quantidade de minutos depois do qual o seu blogue não deverá ser mais "cacheado" por sítios ou aplicações (vazio: oculto) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_PUBDATE', 'Campo "pubDate"');
 @define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'O campo "pubDate" deve ser empacotado para o canal RSS, para mostrar a data do último artigo?');
 @define('CONTENT', 'Conteúdo');
@@ -236,11 +236,11 @@
 @define('PREVIEW', 'Pré-visualização');
 @define('DATE', 'Data');
 @define('DATE_FORMAT_2', 'Y-m-d H:i'); // Needs to be ISO 8601 compliant for date conversion!
-@define('DATE_INVALID', 'Atenção: A data que você especificou é inválida. Deve ser fornecida no formato DD/MM/AAAA HH:MM.');
-@define('CATEGORY_PLUGIN_DESC', 'Mostra a lista de categorias.');
-@define('ALL_AUTHORS', 'Todos os autores');
+@define('DATE_INVALID', 'ATENÇÃO: A data que você especificou é inválida. Deve ser fornecida no formato DD/MM/AAAA HH:MM.');
+@define('CATEGORY_PLUGIN_DESC', 'Mostra a listagem de categorias.');
+@define('ALL_AUTHORS', 'Todos os Autores');
 @define('CATEGORIES_TO_FETCH', 'Categorias para trazer');
-@define('CATEGORIES_TO_FETCH_DESC', 'Trazer categorias de que autor?');
+@define('CATEGORIES_TO_FETCH_DESC', 'Trazer categorias de que Autor?');
 @define('PAGE_BROWSE_ENTRIES', 'Página %s de %s, totalizando %s artigos');
 @define('PREVIOUS_PAGE', 'página anterior');
 @define('NEXT_PAGE', 'página seguinte');
@@ -248,10 +248,10 @@
 @define('DO_MARKUP', 'Executar transformações de marcação');
 @define('GENERAL_PLUGIN_DATEFORMAT', 'Formatação de data');
 @define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Formato da data actual do artigo, usando a mesma formatação da função strftime() do PHP. (Padrão: "%s")');
-@define('ERROR_TEMPLATE_FILE', 'Não foi possível abrir o ficheiro modelo, por favor atualize o serendipity!');
+@define('ERROR_TEMPLATE_FILE', 'Não foi possível abrir o ficheiro modelo, por favor actualize o Serendipity!');
 @define('ADVANCED_OPTIONS', 'Opções avançadas');
 @define('EDIT_ENTRY', 'Editar artigo');
-@define('HTACCESS_ERROR', 'Para verificar a intalação do servidor web, serendipity precisa ter poder para criar o arquivo ".htaccess". Isso não foi possível devido a erros de permissões. Por favor, ajuste as permissões para isso: <br />&nbsp;&nbsp;%s<br />e recarregue esta página.');
+@define('HTACCESS_ERROR', 'Para verificar a instalação do servidor web, Serendipity necessita ter o poder para criar o arquivo ".htaccess". Isso não foi possível devido a erros nas permissões. Por favor, ajuste as permissões para: <br />&nbsp;&nbsp;%s<br />e recarregue esta página.');
 @define('SIDEBAR_PLUGINS', 'Plugins da barra lateral');
 @define('EVENT_PLUGINS', 'Plugins de eventos');
 @define('SORT_ORDER', 'Ordenação');
@@ -267,22 +267,22 @@
 @define('ORIGINAL_SHORT', 'Orig.');
 @define('APPLY_MARKUP_TO', 'Aplicar código a %s');
 @define('CALENDAR_BEGINNING_OF_WEEK', 'Começo da semana');
-@define('SERENDIPITY_NEEDS_UPGRADE', 'O serendipity detectou que a sua configuração está de acordo com a versão %s, embora a versão %s de serendipity esteja instalada. Precisa de atualizar o serendipity! <a href="%s">Clique aqui</a>');
-@define('SERENDIPITY_UPGRADER_WELCOME', 'Olá, e bem-vindo ao agente de atualização do Serendipity.');
-@define('SERENDIPITY_UPGRADER_PURPOSE', 'Estou aqui para ajudá-lo a atualizar a instalação %s do seu Serendipity.');
+@define('SERENDIPITY_NEEDS_UPGRADE', 'O Serendipity detectou que a configuração está de acordo com a versão %s, embora a versão %s de Serendipity esteja instalada. Precisa de actualizar o Serendipity! <a href="%s">Clique aqui</a>');
+@define('SERENDIPITY_UPGRADER_WELCOME', 'Olá, e bem-vindo ao agente de actualização do Serendipity.');
+@define('SERENDIPITY_UPGRADER_PURPOSE', 'Estou aqui para ajudá-lo a actualizar na instalação %s do seu Serendipity.');
 @define('SERENDIPITY_UPGRADER_WHY', 'Você está a ver esta mensagem porque acabou de instalar o Serendipity %s, mas ainda não actualizou a instalação da base de dados para compatibilizar com esta versão');
-@define('SERENDIPITY_UPGRADER_DATABASE_UPDATES', 'Atualização da base de dados (%s)');
+@define('SERENDIPITY_UPGRADER_DATABASE_UPDATES', 'Actualização da base de dados (%s)');
 @define('SERENDIPITY_UPGRADER_FOUND_SQL_FILES', 'Encontrei os seguintes arquivos .sql u]que precisam ser executados antes que você prossiga com a utilização normal do Serendipity');
 @define('SERENDIPITY_UPGRADER_VERSION_SPECIFIC',  'Tarefas específicas da versão');
 @define('SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC', 'Nenhuma tarefa específica da versão foi encontrada');
 @define('SERENDIPITY_UPGRADER_PROCEED_QUESTION', 'Quer realizar as tarefas acima?');
 @define('SERENDIPITY_UPGRADER_PROCEED_ABORT', 'Não, eu as executarei manualmente');
 @define('SERENDIPITY_UPGRADER_PROCEED_DOIT', 'Por favor, faça isso');
-@define('SERENDIPITY_UPGRADER_NO_UPGRADES', 'Parece que que você não precisa executar nenhuma atualização');
-@define('SERENDIPITY_UPGRADER_CONSIDER_DONE', 'Considere a atualização do Serendipity');
-@define('SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED', 'Você ignorou a fase de atualização do Serendipity, certifique-se de que a base de dados está instalada corretamente e que as funções necessárias foram executadas');
-@define('SERENDIPITY_UPGRADER_NOW_UPGRADED', 'A sua instalação do Serendipity foi atualizada para a versão %s');
-@define('SERENDIPITY_UPGRADER_RETURN_HERE', 'Pode retornar ao seu blog clicando %saqui%s');
+@define('SERENDIPITY_UPGRADER_NO_UPGRADES', 'Parece que que você não precisa executar nenhuma actualização');
+@define('SERENDIPITY_UPGRADER_CONSIDER_DONE', 'Considere a actualização do Serendipity');
+@define('SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED', 'Você ignorou a fase de actualização do Serendipity, certifique-se de que a base de dados está instalada correctamente e que as funções necessárias foram executadas');
+@define('SERENDIPITY_UPGRADER_NOW_UPGRADED', 'A sua instalação do Serendipity foi actualizada para a versão %s');
+@define('SERENDIPITY_UPGRADER_RETURN_HERE', 'Pode retornar ao seu Blogue clicando %saqui%s');
 
 @define('MANAGE_USERS', 'Gerir utilizadores');
 @define('CREATE_NEW_USER', 'Criar novo utilizador');
@@ -298,18 +298,18 @@
 @define('XML_IMAGE_TO_DISPLAY', 'Botão XML');
 @define('XML_IMAGE_TO_DISPLAY_DESC','Links para XML Feeds serão exibidos por esta imagem. Deixe em branco para padrão, digite \'none\' para tornar inactivo.');
 
-@define('DIRECTORIES_AVAILABLE', 'Na lista de subdirectorias disponíveis você pode clicar em qualquer nome de subdirectoria para criar uma nova diretoria dentro daquela estrutura.');
+@define('DIRECTORIES_AVAILABLE', 'Na lista de subdirectorias disponíveis, você pode clicar em qualquer nome de subdirectoria para criar uma nova directoria dentro daquela estrutura.');
 @define('ALL_DIRECTORIES', 'todas as directorias');
 @define('MANAGE_DIRECTORIES', 'Gerir directorias');
 @define('DIRECTORY_CREATED', 'Directoria <strong>%s</strong> foi criada.');
 @define('PARENT_DIRECTORY', 'Directoria superior');
 @define('CONFIRM_DELETE_DIRECTORY', 'Tem a certeza que quer apagar todo o conteúdo da directoria %s?');
-@define('ERROR_NO_DIRECTORY', 'Erro: Directoria %s não existente');
+@define('ERROR_NO_DIRECTORY', 'Erro: A Directoria %s não existente');
 @define('CHECKING_DIRECTORY', 'Verificando arquivos na directoria %s');
 @define('DELETING_FILE', 'Apagando ficheiro %s...');
 @define('ERROR_DIRECTORY_NOT_EMPTY', 'Não foi possível remover uma directoria que não está vazia. Marque a opção "forçar apagar" se também deseja remover os ficheiros nela contidos, e volte a dar o comando. Os ficheiros existentes são:');
-@define('DIRECTORY_DELETE_FAILED', 'A remoção da directoria %s falhou. Verifique permissões ou as mensagens acima.');
-@define('DIRECTORY_DELETE_SUCCESS', 'Directoria %s removida corretamente.');
+@define('DIRECTORY_DELETE_FAILED', 'A remoção da directoria %s falhou. Verifique as permissões ou as mensagens acima.');
+@define('DIRECTORY_DELETE_SUCCESS', 'Directoria %s removida correctamente.');
 @define('SKIPPING_FILE_EXTENSION', 'Ignorando ficheiro: Falta extensão em %s.');
 @define('SKIPPING_FILE_UNREADABLE', 'Ignorando ficheiro: %s ilegível.');
 @define('FOUND_FILE', 'Encontrado ficheiro novo/modificado: %s.');
@@ -322,8 +322,8 @@
 @define('SETTINGS_SAVED_AT', 'As novas preferências foram guardadas em %s');
 
 /* DATABASE SETTINGS */
-@define('INSTALL_CAT_DB', 'Configurações de base de dados');
-@define('INSTALL_CAT_DB_DESC', 'Aqui você pode inserir toda a informação à cerca da sua base de dados. O Serendipity precisa dessa informação para funcionar.');
+@define('INSTALL_CAT_DB', 'Configurações da base de dados');
+@define('INSTALL_CAT_DB_DESC', 'Aqui você pode inserir toda a informação acerca da sua base de dados. O Serendipity requer esta informação para funcionar correctamente.');
 @define('INSTALL_DBTYPE', 'Tipo de base de dados');
 @define('INSTALL_DBTYPE_DESC', 'Tipo de base de dados');
 @define('INSTALL_DBHOST', 'Servidor de base de dados');
@@ -341,39 +341,39 @@
 @define('INSTALL_CAT_PATHS', 'Caminhos');
 @define('INSTALL_CAT_PATHS_DESC', 'Os vários caminhos para directorias e ficheiros essenciais. Não se esqueça de terminar com barras no caso das directorias');
 @define('INSTALL_FULLPATH', 'Caminho completo');
-@define('INSTALL_FULLPATH_DESC', 'O caminho completo e absoluto para a sua instalação de serendipity');
+@define('INSTALL_FULLPATH_DESC', 'O caminho completo e absoluto para a sua instalação de Serendipity');
 @define('INSTALL_UPLOADPATH', 'Caminho para o Upload');
 @define('INSTALL_UPLOADPATH_DESC', 'Todos os arquivos transferidos irão parar aí, relativo ao \'Caminho completo\' - geralmente \'uploads/\'');
 @define('INSTALL_RELPATH', 'Caminho relativo');
-@define('INSTALL_RELPATH_DESC', 'Caminho para o serendipity no seu navegador, geralmente \'/serendipity/\'');
+@define('INSTALL_RELPATH_DESC', 'Caminho para o Serendipity no seu navegador, geralmente \'/serendipity/\'');
 @define('INSTALL_RELTEMPLPATH', 'Caminho relativo do padrão');
 @define('INSTALL_RELTEMPLPATH_DESC', 'Caminho para a directoria onde estão os seus padrões - Relativo ao \'caminho relativo\'');
 @define('INSTALL_RELUPLOADPATH', 'Caminho relativo do Upload');
 @define('INSTALL_RELUPLOADPATH_DESC', 'Caminho para o \'uploads\' em seu navegador - Relativo ao \'caminho relativo\'');
-@define('INSTALL_URL', 'URL do blog');
-@define('INSTALL_URL_DESC', 'URL base para a instalação do serendipity');
+@define('INSTALL_URL', 'URL do blogue');
+@define('INSTALL_URL_DESC', 'URL base para a instalação do Serendipity');
 @define('INSTALL_INDEXFILE', 'Arquivo inicial');
-@define('INSTALL_INDEXFILE_DESC', 'Nome do arquivo inicial do serendipity');
+@define('INSTALL_INDEXFILE_DESC', 'Nome do arquivo inicial do Serendipity');
 
 /* Generel settings */
 @define('INSTALL_CAT_SETTINGS', 'Configurações gerais');
-@define('INSTALL_CAT_SETTINGS_DESC', 'Padrão de como o Serendipity deve se comportar');
-@define('INSTALL_USERNAME', 'Nome de utilizador do administrador');
-@define('INSTALL_USERNAME_DESC', 'Nome de utilizador do utilizador para o login do administrador');
-@define('INSTALL_PASSWORD', 'Senha do administrador');
-@define('INSTALL_PASSWORD_DESC', 'Senha para o login do administrador');
-@define('INSTALL_EMAIL', 'E-mail do administrador');
-@define('INSTALL_EMAIL_DESC', 'E-mail do administrador do blog');
-@define('INSTALL_SENDMAIL', 'Enviar e-mails ao administrador?');
-@define('INSTALL_SENDMAIL_DESC', 'Você deseja receber notificações via e-mail quando novos comentários forem incluídos em seus artigos?');
-@define('INSTALL_SUBSCRIBE', 'Permitir que utilizadores se inscrevam nos artigos?');
+@define('INSTALL_CAT_SETTINGS_DESC', 'Padrão de como o Serendipity se deve comportar');
+@define('INSTALL_USERNAME', 'Nome de utilizador do Administrador');
+@define('INSTALL_USERNAME_DESC', 'Nome de utilizador do utilizador para o login do Administrador');
+@define('INSTALL_PASSWORD', 'Senha do Administrador');
+@define('INSTALL_PASSWORD_DESC', 'Senha de acesso do Administrador');
+@define('INSTALL_EMAIL', 'E-mail do Administrador');
+@define('INSTALL_EMAIL_DESC', 'E-mail do Administrador do blogue');
+@define('INSTALL_SENDMAIL', 'Enviar e-mails ao Administrador?');
+@define('INSTALL_SENDMAIL_DESC', 'Você deseja receber notificações via e-mail quando novos comentários forem incluídos nos seus artigos?');
+@define('INSTALL_SUBSCRIBE', 'Permitir que os utilizadores se inscrevam nos artigos?');
 @define('INSTALL_SUBSCRIBE_DESC', 'Permitir que utilizadores se inscrevam nos artigos e com isso, recebam notificações via e-mail quando novos comentários forem adicionados?');
-@define('INSTALL_BLOGNAME', 'Nome do Blog');
-@define('INSTALL_BLOGNAME_DESC', 'Título do Blog');
-@define('INSTALL_BLOGDESC', 'Descrição do Blog');
+@define('INSTALL_BLOGNAME', 'Nome do Blogue');
+@define('INSTALL_BLOGNAME_DESC', 'Título do Blogue');
+@define('INSTALL_BLOGDESC', 'Descrição do Blogue');
 @define('INSTALL_BLOGDESC_DESC', 'Descrição');
 @define('INSTALL_LANG', 'Idioma');
-@define('INSTALL_LANG_DESC', 'Selecione o idioma para o seu blog');
+@define('INSTALL_LANG_DESC', 'Seleccione o idioma para o seu blogue');
 
 /* Appearance and options */
 @define('INSTALL_CAT_DISPLAY', 'Aparência e opções');
@@ -384,17 +384,17 @@
 @define('INSTALL_XHTML11_DESC', 'Quer forçar compatibilidade com o standard XHTML 1.1 (pode causar problemas de formatação nos navegadores de 4ª geração (4.x))');
 @define('INSTALL_POPUP', 'Permitir o uso de janelas popups');
 @define('INSTALL_POPUP_DESC', 'Quer que o weblog utilize janelas popups para comentários, trackbacks, etc?');
-@define('INSTALL_EMBED', 'O serendipity está integrado?');
-@define('INSTALL_EMBED_DESC', 'Se quiser arquivar o conteúdo do serendipity dum website, mude para verdadeiro para descartar quaisquer cabeçalhos e apenas imprimir o conteúdo. Pode fazer uso da opção \'Arquivo inicial\' para usar uma classe mais abrangente aonde colocaria os cabeçalhos normais de sua página. Veja o ficheiro README para mais informações!');
+@define('INSTALL_EMBED', 'O Serendipity está integrado?');
+@define('INSTALL_EMBED_DESC', 'Se quiser arquivar o conteúdo do Serendipity dum website, mude para verdadeiro para descartar quaisquer cabeçalhos e apenas imprimir o conteúdo. Pode fazer uso da opção \'Arquivo inicial\' para usar uma classe mais abrangente aonde colocaria os cabeçalhos normais de sua página. Veja o ficheiro README para mais informações!');
 @define('INSTALL_BLOCKREF', 'Referências bloqueadas');
 @define('INSTALL_BLOCKREF_DESC', 'Existem servidores especiais que você não gostaria de listar na sua lista de referências? Separe a lista dos servidores com \';\' e note que o servidor será bloqueado por uma busca parcial em sua string!');
 @define('INSTALL_REWRITE', 'Reescrita de URL');
-@define('INSTALL_REWRITE_DESC', 'Selecione as regras que você gostaria de usar na geração de URLs. A habilitação da reescrita de URL criará URLS bem formatadas para o seu blog e o deixará melhor indexável para bots como o do google. O servidor web precisa de ter suporte para o mod_rewrite ou para o "AllowOverride All" para a directoria do seu serendipity. A configuração padrão é auto detectada');
+@define('INSTALL_REWRITE_DESC', 'Selecione as regras que você gostaria de usar na geração de URLs. A habilitação da reescrita de URL criará URLS bem formatadas para o seu blogue e o deixará indexável de um melhor modo para os bots como o do Google. O servidor web precisa de ter suporte para o mod_rewrite ou para o "AllowOverride All" para a directoria do seu Serendipity. A configuração padrão é auto detectada');
 
 /* Imageconversion Settings */
 @define('INSTALL_CAT_IMAGECONV', 'Configurações da conversão de imagens');
-@define('INSTALL_CAT_IMAGECONV_DESC', 'Informações gerais sobre como o serendipity deve lidar com imagens');
-@define('INSTALL_IMAGEMAGICK', 'Usar Imagemagick');
+@define('INSTALL_CAT_IMAGECONV_DESC', 'Informações gerais sobre como o Serendipity deve lidar com imagens');
+@define('INSTALL_IMAGEMAGICK', 'Usar Image magick');
 @define('INSTALL_IMAGEMAGICK_DESC', 'Você tem o \'image magick\' instalado e quer utilizá-lo para redimensionar imagens?');
 @define('INSTALL_IMAGEMAGICKPATH', 'Caminho para o executável do conversor');
 @define('INSTALL_IMAGEMAGICKPATH_DESC', 'Caminho completo e nome do executável do image magick');
@@ -407,9 +407,9 @@
 @define('USERCONF_CAT_PERSONAL', 'Detalhes pessoais');
 @define('USERCONF_CAT_PERSONAL_DESC', 'Altere os seus detalhes pessoais');
 @define('USERCONF_USERNAME', 'O seu nome de utilizador');
-@define('USERCONF_USERNAME_DESC', 'O nome de utilizador que você usa para se identificar no blog');
+@define('USERCONF_USERNAME_DESC', 'O nome de utilizador que você usa para se identificar no blogue');
 @define('USERCONF_PASSWORD', 'A sua senha');
-@define('USERCONF_PASSWORD_DESC', 'A senha que você quer usar para se identificar no blog');
+@define('USERCONF_PASSWORD_DESC', 'A senha que você quer usar para se identificar no blogue');
 @define('USERCONF_EMAIL', 'O seu endereço de e-mail');
 @define('USERCONF_EMAIL_DESC', 'O seu endereço de e-mail pessoal');
 @define('USERCONF_SENDCOMMENTS', 'Enviar notificação dos comentários?');
@@ -444,7 +444,7 @@
 @define('COMMENT_EDITED', 'O comentário selecionado foi editado');
 @define('HIDE', 'Ocultar');
 @define('VIEW_EXTENDED_ENTRY', 'Continuar lendo "%s"');
-@define('TRACKBACK_SPECIFIC_ON_CLICK', 'Este link não deve ser clicado. Contém a URI de trackback para este artigo. Use esse URI para enviar ping- & trackbacks do seu weblog para este artigo. Para copiar o link, clique com o botão direito e selecione "Copiar Atalho" no Internet Explorer ou "Copiar localização do link" no Mozilla.');
+@define('TRACKBACK_SPECIFIC_ON_CLICK', 'Este link não deve ser clicado. Contém a URL de trackback para este artigo. Use esse URL para enviar ping - & trackbacks do seu weblog para este artigo. Para copiar o link, clique com o botão direito e selecione "Copiar Atalho" no Internet Explorer ou "Copiar localização do link" no Mozilla.');
 @define('THIS_TRACKBACK_NEEDS_REVIEW', 'Atenção: Esse trackback precisa de aprovação antes que seja exibido');
 @define('DELETE_TRACKBACK', 'Excluir trackback');
 @define('APPROVE_TRACKBACK', 'Aprovar trackback');
@@ -452,9 +452,9 @@
 @define('TRACKBACK_DELETED', 'O trackback #%s foi excluído corretamente');
 @define('COMMENTS_MODERATE', 'Comentários & trackbacks para este artigo requerem moderação');
 @define('PLUGIN_SUPERUSER_HTTPS', 'Usar https para login');
-@define('PLUGIN_SUPERUSER_HTTPS_DESC', 'Permitir o link de login aponte para uma link https. seu servidor web precisa ter suporte a isso!');
+@define('PLUGIN_SUPERUSER_HTTPS_DESC', 'Permitir que o link de login aponte para uma link https. O seu servidor web necessita de suportar esta opção!');
 @define('INSTALL_SHOW_EXTERNAL_LINKS', 'Tornar clicáveis os links externos?');
-@define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"não": Links externos não marcados (Maiores saídas, Maiores referências, Comentários de usuários) não são exibidos como puro texto para evitar spam do google (recomendado). "sim": Links externos não marcados são exibidos como links. Podem ser sobrescritos pela configuração da barra lateral!');
+@define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"não": Links externos não marcados (Maiores saídas, Maiores referências, Comentários de usuários) não são exibidos como puro texto para evitar spam do Google (recomendado). "sim": Links externos não marcados são exibidos como links. Podem ser sobrescritos pela configuração da barra lateral!');
 @define('PAGE_BROWSE_COMMENTS', 'Página %s de %s, totalizando %s comentários');
 @define('FILTERS', 'Filtros');
 @define('FIND_ENTRIES', 'Encontrar artigos');
@@ -467,7 +467,7 @@
 @define('MEDIA_LIBRARY', 'Biblioteca de multimédia');
 @define('ADD_MEDIA', 'Adicionar multimédia');
 @define('ENTER_MEDIA_URL', 'Introduza a URL de um ficheiro para ir buscá-lo:');
-@define('ENTER_MEDIA_UPLOAD', 'Selecione o ficheiro que deseja transferir:');
+@define('ENTER_MEDIA_UPLOAD', 'Seleccione o ficheiro que deseja transferir:');
 @define('SAVE_FILE_AS', 'Guardar ficheiro como:');
 @define('STORE_IN_DIRECTORY', 'Guardar na seguinte directoria: ');
 @define('MEDIA_RENAME', 'Renomear este ficheiro');
@@ -477,28 +477,28 @@
 @define('CLICK_FILE_TO_INSERT', 'Clique no ficheiro que deseja inserir:');
 @define('SELECT_FILE', 'Seleccione arquivo para inserir');
 @define('MEDIA_FULLSIZE', 'Tamanho total');
-@define('CALENDAR_BOW_DESC', 'Dia da semana que deve ser considerado o início da semana. Padrão é segunda-feira');
+@define('CALENDAR_BOW_DESC', 'Dia da semana que deve ser considerado o início da semana. O padrão é segunda-feira');
 @define('SUPERUSER', 'Administração do weblog');
 @define('ALLOWS_YOU_BLAHBLAH', 'Fornece um link para a administração do weblog na barra lateral ');
 @define('CALENDAR', 'Calendário');
-@define('SUPERUSER_OPEN_ADMIN', 'Abrir administração');
+@define('SUPERUSER_OPEN_ADMIN', 'Abrir Administração');
 @define('SUPERUSER_OPEN_LOGIN', 'Abrir painel de login');
 @define('INVERT_SELECTIONS', 'Inverter Seleção');
 @define('COMMENTS_DELETE_CONFIRM', 'Tem a certeza de que deseja excluir os comentários selecionados?');
 @define('COMMENT_DELETE_CONFIRM', 'Tem a certeza de que deseja excluir o comentário #%d, escrito por %s?');
-@define('DELETE_SELECTED_COMMENTS', 'Excluir comentários selecionados');
+@define('DELETE_SELECTED_COMMENTS', 'Excluir comentários seleccionados');
 @define('VIEW_COMMENT', 'Exibir comentário');
 @define('VIEW_ENTRY', 'Exibir artigo');
 @define('DELETE_FILE', 'Excluir o campo entitulado <b>%s</b>');
 @define('ABOUT_TO_DELETE_FILE', 'Você está prestes a apagar <b>%s</b><br />Se estiver utilizando esse arquivo em algum dos seus artigos, vai resultar em ligações ou imagens perdidas<br />Deseja realmente prosseguir com a exclusão?<br /><br />');
-@define('TRACKBACK_SENDING', 'Enviando trackback para a URI %s...');
+@define('TRACKBACK_SENDING', 'Enviando trackback para o URL %s...');
 @define('TRACKBACK_SENT', 'Trackback enviada com sucesso');
 @define('TRACKBACK_FAILED', 'Trackback falhou: %s');
 @define('TRACKBACK_NOT_FOUND', 'Nenhum URI de trackback foi encontrado.');
-@define('TRACKBACK_URI_MISMATCH', 'A URI de trackback descoberta não com é semelhante à URI alvo.');
+@define('TRACKBACK_URI_MISMATCH', 'A URI de trackback descoberta não com é semelhante ao URL alvo.');
 @define('TRACKBACK_CHECKING', 'Verificando <u>%s</u> para possíveis trackbacks...');
 @define('TRACKBACK_NO_DATA', 'O alvo não contém dados');
-@define('TRACKBACK_SIZE', 'URI alvo excedeu o tamanho máximo de %s bytes para um arquivo.');
+@define('TRACKBACK_SIZE', 'URL alvo excedeu o tamanho máximo de %s bytes para um arquivo.');
 @define('VIEWMODE_THREADED', 'Alternar para exibição por discussão');
 @define('COMMENTS_VIEWMODE_THREADED', 'Discussão');
 @define('COMMENTS_VIEWMODE_LINEAR', 'Sequencial');
@@ -545,26 +545,26 @@
 @define('ALREADY_INSTALLED', 'Já instalado');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Seleccione o plugin que pretende instalar');
 @define('INSTALL_OFFSET', 'Offset temporal no servidor');
-@define('STICKY_POSTINGS', 'Sticky Postings'); // Translate ?
+@define('STICKY_POSTINGS', 'Postagens fixas'); // Translate ?
 @define('INSTALL_FETCHLIMIT', 'Entradas a mostrar na primeira página');
-@define('INSTALL_FETCHLIMIT_DESC', 'Número de entradas a mostrar por cada página do frontend'); // Translate frontend?
+@define('INSTALL_FETCHLIMIT_DESC', 'Número de entradas a mostrar por cada página do página principal'); // Translate frontend?
 @define('IMPORT_ENTRIES', 'Importar dados');
 @define('EXPORT_ENTRIES', 'Exportar entradas');
 @define('IMPORT_WELCOME', 'Bem vindo ao utilitário de importação do Serendipity');
 @define('IMPORT_WHAT_CAN', 'Aqui podemos importar entradas de outro software gestor de weblogs');
-@define('IMPORT_SELECT', 'Por favor seleccione o software de onde quer importar');
+@define('IMPORT_SELECT', 'Por favor, seleccione o software de onde quer importar');
 @define('IMPORT_PLEASE_ENTER', 'Por favor introduza os dados como pedido abaixo');
 @define('IMPORT_NOW', 'Importar agora!');
 @define('IMPORT_STARTING', 'Começando o procedimento de importação...');
 @define('IMPORT_FAILED', 'Importação falhou');
 @define('IMPORT_DONE', 'Importação completada com sucesso');
-@define('IMPORT_WEBLOG_APP', 'Aplicação de Weblog');
+@define('IMPORT_WEBLOG_APP', 'Aplicação do Weblog');
 @define('EXPORT_FEED', 'Exportar RSS feed completo'); // Verify
 @define('STATUS', 'Status depois da importação');
 @define('IMPORT_GENERIC_RSS', 'Importação de RSS genérica');
 @define('ACTIVATE_AUTODISCOVERY', 'Enviar Trackbacks de ligações encontradas na entrada'); // Verify
-@define('WELCOME_TO_ADMIN', 'Bem vindo à suite administrativa do Serendipity.');
-@define('PLEASE_ENTER_CREDENTIALS', 'Por favor introduza as suas credenciais abaixo.');
+@define('WELCOME_TO_ADMIN', 'Bem vindo à Suite Administrativa do Serendipity.');
+@define('PLEASE_ENTER_CREDENTIALS', 'Por favor, introduza as suas credenciais abaixo.');
 @define('ADMIN_FOOTER_POWERED_BY', 'Equipado com Serendipity %s e PHP %s');
 @define('INSTALL_USEGZIP', 'Use páginas comprimidas com gzip');
 @define('INSTALL_USEGZIP_DESC', 'Para acelerar o acesso às páginas, podemos comprimi-las, desde que o navegador do visitante o suporte. Isto é recomendado');
@@ -572,48 +572,48 @@
 @define('INSTALL_SHOWFUTURE_DESC', 'Se escolhido, isto mostrará todas as entradas futuras do seu blogue. Por omissão escondemos tais entradas e só são mostradas quando a data de publicação chega.');
 @define('INSTALL_DBPERSISTENT', 'Usar conexões persistentes');
 @define('INSTALL_DBPERSISTENT_DESC', 'Permitir a utilização de conexões permanentes à base de dados, ver leitura adicional em <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">aqui</a>. Isto normalmente não é recomendado.');
-@define('NO_IMAGES_FOUND', 'Nenhumas imagens encontradas');
+@define('NO_IMAGES_FOUND', 'Nenhuma das imagens foi encontrada');
 @define('PERSONAL_SETTINGS', 'Preferências pessoais');
 @define('REFERER', 'Referenciador');
 @define('NOT_FOUND', 'Não encontrado');
-@define('NOT_WRITABLE', 'Não alterável');
-@define('WRITABLE', 'Alterável');
+@define('NOT_WRITABLE', 'Escrita negada');
+@define('WRITABLE', 'Escrita permitida');
 @define('PROBLEM_DIAGNOSTIC', 'Devido a um diagnóstico problemático, não se pode continuar a instalação sem que os erros acima sejam corrigidos');
-@define('SELECT_INSTALLATION_TYPE', 'Seleccione que tipo de instalação deseja efectuar');
+@define('SELECT_INSTALLATION_TYPE', 'Seleccione que tipo de instalação que deseja efectuar');
 @define('WELCOME_TO_INSTALLATION', 'Bem vindo à Instalação do Serendipity');
 @define('FIRST_WE_TAKE_A_LOOK', 'Primeiro examinamos a sua instalação corrente e tentamos diagnosticar quaisquer problemas de compatibilidade');
-@define('ERRORS_ARE_DISPLAYED_IN', 'Erros são mostrados a %s, recommendações a %s e sucesso a %s');
+@define('ERRORS_ARE_DISPLAYED_IN', 'Erros são mostrados a %s, recomendações a %s e sucesso a %s');
 @define('RED', 'vermelho');
 @define('YELLOW', 'amarelo');
 @define('GREEN', 'verde');
 @define('PRE_INSTALLATION_REPORT', 'Relatório de pré-instalação do Serendipity v%s');
 @define('RECOMMENDED', 'Recomendado');
-@define('ACTUAL', 'Efectivo'); // Verify
+@define('ACTUAL', 'Actual'); // Verify
 @define('PHPINI_CONFIGURATION', 'configuração em php.ini');
 @define('PHP_INSTALLATION', 'instalação de PHP installation');
-@define('THEY_DO', 'they do'); // Translate
-@define('THEY_DONT', 'they don\'t'); // Translate
+@define('THEY_DO', 'eles fazem'); // Translate
+@define('THEY_DONT', 'eles não'); // Translate
 @define('SIMPLE_INSTALLATION', 'Instalação simples');
 @define('EXPERT_INSTALLATION', 'Instalação para especialistas');
 @define('COMPLETE_INSTALLATION', 'Instalação completa');
-@define('WONT_INSTALL_DB_AGAIN', 'não instalaremos a base de dados de novo'); // Verify
-@define('CHECK_DATABASE_EXISTS', 'Verificando se a base de dados e as tabelas já existem');
+@define('WONT_INSTALL_DB_AGAIN', 'não instalaremos a base de dados novamente'); // Verify
+@define('CHECK_DATABASE_EXISTS', 'Verificando se a base de dados ou se as tabelas já existem');
 @define('CREATING_PRIMARY_AUTHOR', 'Criando autor primário \'%s\'');
 @define('SETTING_DEFAULT_TEMPLATE', 'Definindo modelo por omissão'); // Verify
 @define('INSTALLING_DEFAULT_PLUGINS', 'Instalando plugins por omissão'); // Verify
 @define('SERENDIPITY_INSTALLED', 'Serendipity foi instalado com sucesso');
-@define('VISIT_BLOG_HERE', 'Visite o seu novo blog aqui');
+@define('VISIT_BLOG_HERE', 'Visite o seu novo blogue aqui');
 @define('THANK_YOU_FOR_CHOOSING', 'Obrigado por escolher Serendipity');
 @define('ERROR_DETECTED_IN_INSTALL', 'Erro detectado na instalação');
-@define('OPERATING_SYSTEM', 'Sistema operativo');
+@define('OPERATING_SYSTEM', 'Sistema Operativo');
 @define('WEBSERVER_SAPI', 'Servidor web SAPI');
 @define('IMAGE_ROTATE_LEFT', 'Rodar a imagem 90º no sentido directo');
 @define('IMAGE_ROTATE_RIGHT', 'Rodar a imagem 90º no sentido retrógado');
 @define('TEMPLATE_SET', '\'%s\' foi definido como o seu modelo activo');
-@define('SEARCH_ERROR', 'A função de busca não se comportou como esperado. Nota para o administrador deste blog: isto pode acontecer por falta de chaves de índice na sua base de dados. Em sistemas com MySQL a sua conta de utilizador da base de dados precisa de privilégios para executar o seguinte comando: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> O exacto erro devolvido pela base de dados foi: <pre>%s</pre>'); // Verify
+@define('SEARCH_ERROR', 'A função de busca não se comportou como esperado. Nota para o Administrador deste blogue: isto pode acontecer por falta de chaves no índice na sua base de dados. Em sistemas de MySQL, a sua conta de utilizador da base de dados precisa de privilégios para executar o seguinte comando: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> O erro exacto reportado pela base de dados foi: <pre>%s</pre>'); // Verify
 @define('EDIT_THIS_CAT', 'Editar "%s"');
 @define('CATEGORY_REMAINING', 'Apague esta categoria e mova as entradas para esta outra');
-@define('CATEGORY_INDEX', 'Abaixo encontra uma lista de categorias disponíveis para as suas entradas');
+@define('CATEGORY_INDEX', 'Abaixo encontra uma listagem de categorias disponíveis para as suas entradas');
 @define('NO_CATEGORIES', 'Sem categorias'); // Verify
 @define('RESET_DATE', 'Reinicializar a data');
 @define('RESET_DATE_DESC', 'Clique aqui para reinicializar a data para o valor corrente');
@@ -624,14 +624,14 @@
 @define('PREVIOUS', 'Anterior');
 @define('NEXT', 'Seguinte');
 @define('APPROVE', 'Aprovar');
-@define('DO_MARKUP_DESCRIPTION', 'Aplicar transformações aos códigos no texto (smilies, abreviaturas via *, /, _, ...). Desligando isto preservará qualquer código HTML no texto.');
+@define('DO_MARKUP_DESCRIPTION', 'Aplicar transformações nos códigos do texto (smilies, abreviaturas via *, /, _, ...). Desligando esta função irá preservará qualquer código HTML no texto.');
 @define('CATEGORY_ALREADY_EXIST', 'Uma categoria com o nome "%s" já existe');
 @define('IMPORT_NOTES', 'Nota:');
-@define('ERROR_FILE_FORBIDDEN', 'Não é autorizado a fazer upload de ficheiros com conteúdo activo'); // Verify
+@define('ERROR_FILE_FORBIDDEN', 'Não é permitido fazer upload de ficheiros com conteúdo activo'); // Verify
 @define('ADMIN', 'Administração');
 @define('ADMIN_FRONTPAGE', 'Primeira página');
 @define('QUOTE', 'Citar'); // Verify
-@define('IFRAME_SAVE', 'Serendipity está guardando a sua entrada, creando trackbacks e realizando possíveis chamadas de XML-RPC. Isto pode demorar um pouco...');
+@define('IFRAME_SAVE', 'Serendipity está guardando a sua entrada, criando trackbacks e realizando possíveis chamadas de XML-RPC. Isto pode demorar um pouco...');
 @define('IFRAME_SAVE_DRAFT', 'Um rascunho desta entrada foi guardado');
 @define('IFRAME_PREVIEW', 'Serendipity está agora a criar uma previsão da sua entrada...');
 @define('IFRAME_WARNING', 'O seu navegador não suporta o conceito de iframes. Por favor abra o seu ficheiro serendipity_config.inc.php e defina a variável $serendipity[\'use_iframe\'] como FALSE.'); // Verify
@@ -641,16 +641,16 @@
 @define('UPGRADE_TO_VERSION', 'Actualizar para a versão %s');
 @define('DELETE_DIRECTORY', 'Apagar directoria');
 @define('DELETE_DIRECTORY_DESC', 'Está prestes a apagar o conteúdo duma directoria que contém ficheiros de multimédia que podem ser usados por outras das suas entradas.'); // Verify
-@define('FORCE_DELETE', 'Apagar TODOS os ficheiros nesta directoria, incluindo os não conhecidos do Serendipity');
+@define('FORCE_DELETE', 'Apagar TODOS os ficheiros nesta directoria, incluindo os desconhecidos pelo Serendipity');
 @define('CREATE_DIRECTORY', 'Criar directoria');
 @define('CREATE_NEW_DIRECTORY', 'Criar nova directoria');
 @define('CREATE_DIRECTORY_DESC', 'Aqui pode criar uma nova directoria aonde colocar ficheiros multimédia. Escolha o nome para a nova directoria e seleccione se necessário a directoria onde aquela é colocada.'); // Verify
 @define('BASE_DIRECTORY', 'Directoria base');
 @define('USERLEVEL_EDITOR_DESC', 'Editor');
-@define('USERLEVEL_CHIEF_DESC', 'Editor em chefe');
+@define('USERLEVEL_CHIEF_DESC', 'Editor Chefe');
 @define('USERLEVEL_ADMIN_DESC', 'Administrador');
 @define('USERCONF_USERLEVEL', 'Nível de acesso');
-@define('USERCONF_USERLEVEL_DESC', 'Este nível é usado para determinar que tipo de acesso ao blog tem este utilizador');
+@define('USERCONF_USERLEVEL_DESC', 'Este nível é usado para determinar que tipo de acesso ao blogue tem este utilizador');
 @define('USER_SELF_INFO', 'Conectado como %s (%s)'); // Verify
 @define('ADMIN_ENTRIES', 'Entradas');
 @define('RECHECK_INSTALLATION', 'Volte a verificar a instalação');
@@ -673,23 +673,23 @@
 @define('FETCH_METHOD_IMAGE', 'Download da imagem para o seu servidor');
 @define('FETCH_METHOD_HOTLINK', 'Hotlink para servidor'); // Verify
 @define('DELETE_HOTLINK_FILE', 'Apagado o ficheiro hotlinked intitulado <b>%s</b>'); // Verify
-@define('SYNDICATION_PLUGIN_SHOW_MAIL', 'Mostrar endereços de email?');
+@define('SYNDICATION_PLUGIN_SHOW_MAIL', 'Mostrar endereços de e-mail?');
 @define('IMAGE_MORE_INPUT', 'Adicionar imagens');
 @define('BACKEND_TITLE', 'Informação adicional no écrã de configuração de plugins');
 @define('BACKEND_TITLE_FOR_NUGGET', 'Aqui pode definir um pedaço de texto personalizado que é mostrado no écrã de configuração de plugins juntamente com a descrição do plugin HTML Nugget. Se tiver múltiplos HTML nuggets com um título por preencher, isto permite distinguir os plugins entre si.');
-@define('CATEGORIES_ALLOW_SELECT', 'Permitir aos visitantes mostrar múltiplas catgorias simultaneamente?');
+@define('CATEGORIES_ALLOW_SELECT', 'Permitir aos visitantes mostrar múltiplas categorias simultaneamente?');
 @define('CATEGORIES_ALLOW_SELECT_DESC', 'Se esta opção for activada, uma caixa de marcação será posta ao lado de cada categoria no plugin da barra lateral. Os utilizadores podem marcar estas caixas e depois ver as entradas correspondendo à sua selecção.'); // Verify
 @define('PAGE_BROWSE_PLUGINS', 'Página %s de %s, totalizando %s plugins.');
-@define('INSTALL_CAT_PERMALINKS', 'Permalinks'); // Translate ?
+@define('INSTALL_CAT_PERMALINKS', 'Links Pernamentes'); // Translate ?
 @define('INSTALL_CAT_PERMALINKS_DESC', 'Define vários padrões de URLs para definir ligações permanentes no seu blogue. É sugerido que use as escolhas por omissão; caso contrário, deverá tentar usar o valor da %id% sempre que possível para evitar que o Serendipity pergunte à base de dados pela URL alvo.'); // Verify
-@define('INSTALL_PERMALINK', 'Estrutura de introdução de URL de Permalink'); // Verify
-@define('INSTALL_PERMALINK_DESC', 'Aqui pode definir a estrura relativa de URLs da sua URL de base até onde as entradas estão disponíveis. Pode usar as variáveis %id%, %title%, %day%, %month%, %year% e quaisquer outros caracteres..'); // Verify
-@define('INSTALL_PERMALINK_AUTHOR', 'Estrutura de URL de Permalink de Autor'); // Verify
-@define('INSTALL_PERMALINK_AUTHOR_DESC', 'Aqui pode definir a estrura relativa de URLs da sua URL de base até onde entradas para certos autores ficam disponíveis. Pode usar as variáveis %id%, %realname%, %username%, %email% e quaisquer outros caracteres.'); // Verify
-@define('INSTALL_PERMALINK_CATEGORY', 'Estrutura de URL de Permalink de Categoria'); // Verify
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui pode definir a estrura relativa de URLs da sua URL de base até onde entradas para certas categorias ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
-@define('INSTALL_PERMALINK_FEEDCATEGORY', 'Estrutura de URL de Permalink de Categria de RSS-Feed'); // Verify
-@define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Aqui pode definir a estrura relativa de URLs da sua URL de base até onde entradas para certas categorias de RSS-Feed ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
+@define('INSTALL_PERMALINK', 'Estrutura de introdução do URL de Links Pernamentes'); // Verify
+@define('INSTALL_PERMALINK_DESC', 'Aqui pode definir a estrura relativa de URLs do seu URL base até onde as entradas estão disponíveis. Pode usar as variáveis %id%, %title%, %day%, %month%, %year% e quaisquer outros caracteres..'); // Verify
+@define('INSTALL_PERMALINK_AUTHOR', 'Estrutura de URL de Links Pernamentes do Autor'); // Verify
+@define('INSTALL_PERMALINK_AUTHOR_DESC', 'Aqui pode definir a estrura relativa dos URLs do seu URL base até onde entradas para certos autores ficam disponíveis. Pode usar as variáveis %id%, %realname%, %username%, %email% e quaisquer outros caracteres.'); // Verify
+@define('INSTALL_PERMALINK_CATEGORY', 'Estrutura do URL para Links Pernamentes por Categoria'); // Verify
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui pode definir a estrura relativa dos URLs do seu URL base até onde entradas para certas categorias ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
+@define('INSTALL_PERMALINK_FEEDCATEGORY', 'Estrutura do URL para Links Permanentes por Categoria de RSS-Feed'); // Verify
+@define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Aqui pode definir a estrutura relativa dos URLs d seu URL base até onde entradas para certas categorias de RSS-Feed ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Caminho para arquivos');
 @define('INSTALL_PERMALINK_ARCHIVEPATH', 'Caminho para arquivo');
 @define('INSTALL_PERMALINK_CATEGORIESPATH', 'Caminho para categorias');
@@ -698,11 +698,11 @@
 @define('INSTALL_PERMALINK_APPROVEPATH', 'Caminho para aprovar comentários');
 @define('INSTALL_PERMALINK_FEEDSPATH', 'Caminho para RSS Feeds');
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Caminho para plugin único'); //Verify
-@define('INSTALL_PERMALINK_ADMINPATH', 'Caminho para administração');
-@define('INSTALL_PERMALINK_SEARCHPATH', 'Caminho para a busca'); //Verify
+@define('INSTALL_PERMALINK_ADMINPATH', 'Caminho para Administração');
+@define('INSTALL_PERMALINK_SEARCHPATH', 'Caminho para a pesquisa'); //Verify
 @define('USERCONF_CREATE', 'Proibir criar entradas?');
 @define('USERCONF_CREATE_DESC', 'Se seleccionado, o utilizador não pode criar novas entradas');
-@define('INSTALL_CAL', 'Tipo de calendário');
+@define('INSTALL_CAL', 'Género de calendário');
 @define('INSTALL_CAL_DESC', 'Escolha o formato de calendário desejado');
 @define('REPLY', 'Responder');
 @define('USERCONF_GROUPS', 'Inscrições em grupos');
@@ -716,14 +716,14 @@
 @define('DELETE_GROUP', 'Está prestes a apagar o grupo #%d %s. Tem a certeza?');
 @define('USERLEVEL_OBSOLETE', 'AVISO: O atributo de nível de utilizador é agora só usado para compatibilidade com plugins ou como método de autorização substituto. Privilégios de utilizador são geridos por inscrição em grupos!'); //Verify
 @define('SYNDICATION_PLUGIN_FEEDBURNERID', 'ID do FeedBurner');
-@define('SYNDICATION_PLUGIN_FEEDBURNERID_DESC', 'A ID do feed que quer publicar');
+@define('SYNDICATION_PLUGIN_FEEDBURNERID_DESC', 'O ID do feed que deseja publicar');
 @define('SYNDICATION_PLUGIN_FEEDBURNERIMG', 'Imagem do FeedBurner');
 @define('SYNDICATION_PLUGIN_FEEDBURNERIMG_DESC', 'Nome da imagem a mostrar (ou deixe em branco para contador), localizada em feedburner.com, ex: fbapix.gif');
 @define('SYNDICATION_PLUGIN_FEEDBURNERTITLE', 'Título do FeedBurner');
 @define('SYNDICATION_PLUGIN_FEEDBURNERTITLE_DESC', 'Título (se pretendido) a mostrar ao lado da imagem');
 @define('SYNDICATION_PLUGIN_FEEDBURNERALT', 'Texto da imagem do FeedBurner');
-@define('SYNDICATION_PLUGIN_FEEDBURNERALT_DESC', 'Texto (se pretendido) a mostrar quando se paira sobre a imagem');
-@define('SEARCH_TOO_SHORT', 'O texto a procurar deverá ter mais que 3 caracteres. Pode usar * como sufixo, por exemplo s9y*, para forçar a busca por palavras mais pequenas.');
+@define('SYNDICATION_PLUGIN_FEEDBURNERALT_DESC', 'Texto (se pretendido) a mostrar quando se pairao cursor sobre a imagem');
+@define('SEARCH_TOO_SHORT', 'O texto a procurar deverá ter mais que 3 caracteres. Pode usar * como sufixo, por exemplo s9y*, para forçar a pesquisa por palavras mais pequenas.');
 @define('INSTALL_DBPORT', 'Porto da base de dados'); //Verify
 @define('INSTALL_DBPORT_DESC', 'Porto usado para ligar ao servidor da base de dados');
 @define('PLUGIN_GROUP_FRONTEND_EXTERNAL_SERVICES', 'Frontend: Serviços Externos');
@@ -737,12 +737,12 @@
 @define('PLUGIN_GROUP_BACKEND_TEMPLATES', 'Backend: Modelos');
 @define('PLUGIN_GROUP_BACKEND_FEATURES', 'Backend: Características');
 @define('PLUGIN_GROUP_IMAGES', 'Imagens');
-@define('PLUGIN_GROUP_ANTISPAM', 'Antispam');
+@define('PLUGIN_GROUP_ANTISPAM', 'Anti-Spam');
 @define('PLUGIN_GROUP_MARKUP', 'Código');
 @define('PLUGIN_GROUP_STATISTICS', 'Estatísticas');
 @define('PERMISSION_PERSONALCONFIGURATION', 'personalConfiguration: Aceder à configuração pessoal');
 @define('PERMISSION_PERSONALCONFIGURATIONUSERLEVEL', 'personalConfigurationUserlevel: Modificar níveis de utilizador');
-@define('PERMISSION_PERSONALCONFIGURATIONNOCREATE', 'personalConfigurationNoCreate: Mudar "proibir criar entradas"');
+@define('PERMISSION_PERSONALCONFIGURATIONNOCREATE', 'personalConfigurationNoCreate: Mudar "proibir criação de entradas"');
 @define('PERMISSION_PERSONALCONFIGURATIONRIGHTPUBLISH', 'personalConfigurationRightPublish: Mudar direito de publicar entradas');
 @define('PERMISSION_SITECONFIGURATION', 'siteConfiguration: Aceder à configuração de sistema');
 @define('PERMISSION_BLOGCONFIGURATION', 'blogConfiguration: Aceder à configuração blogo-cêntrica');
@@ -750,7 +750,7 @@
 @define('PERMISSION_ADMINENTRIESMAINTAINOTHERS', 'adminEntriesMaintainOthers: Administrar entradas de outros utilizadores');
 @define('PERMISSION_ADMINIMPORT', 'adminImport: Importar entradas');
 @define('PERMISSION_ADMINCATEGORIES', 'adminCategories: Administrar categorias');
-@define('PERMISSION_ADMINCATEGORIESMAINTAINOTHERS', 'adminCategoriesMaintainOthers: Administrar outras categorias de utilizadores');
+@define('PERMISSION_ADMINCATEGORIESMAINTAINOTHERS', 'adminCategoriesMaintainOthers: Administrar outras categorias dos utilizadores');
 @define('PERMISSION_ADMINCATEGORIESDELETE', 'adminCategoriesDelete: Apagar categorias');
 @define('PERMISSION_ADMINUSERS', 'adminUsers: Administrar utilizadores');
 @define('PERMISSION_ADMINUSERSDELETE', 'adminUsersDelete: Apagar utilizadores');
@@ -770,8 +770,8 @@
 @define('PERMISSION_ADMINIMAGESSYNC', 'adminImagesSync: Sincronizar thumbnails');
 @define('PERMISSION_ADMINCOMMENTS', 'adminComments: Administrar comentários');
 @define('PERMISSION_ADMINTEMPLATES', 'adminTemplates: Administrar modelos');
-@define('INSTALL_BLOG_EMAIL', 'Endereço de Email do Blogue');
-@define('INSTALL_BLOG_EMAIL_DESC', 'Isto configura o endereço de Email que é usado na linha de "From" de mail que segue para o exterior. Certifique-se que isto é um endereço de email que é reconhecido pelo servidor de mail usado na sua máquina - muitos servidores de mail rejeitam mensagens com um endereço de From desconhecido.');
+@define('INSTALL_BLOG_EMAIL', 'Endereço de E-mail do Blogue');
+@define('INSTALL_BLOG_EMAIL_DESC', 'Isto configura o endereço de E-mail que é usado na linha de "From" de e-mail que segue para o exterior. Certifique-se que isto é um endereço de e-mail que é reconhecido pelo servidor de mail configurado no seu servidor - muitos servidores de mail rejeitam mensagens com um endereço de "From"" desconhecido.');
 @define('CATEGORIES_PARENT_BASE', 'Mostre só categorias abaixo...');
 @define('CATEGORIES_PARENT_BASE_DESC', 'Pode escolher uma categoria antecessora para que só as categorias descendentes sejam vistas.');
 @define('CATEGORIES_HIDE_PARALLEL', 'Esconder categorias que não fazem parte da árvore de categorias');
@@ -788,7 +788,7 @@
 
 @define('PERM_DENIED', 'Permissão negada.');
 @define('INSTALL_ACL', 'Aplicar permissões de leitura às categorias');
-@define('INSTALL_ACL_DESC', 'Se accionado, as preferências de permissões de grupos de utilizadores que definir para categorias serão aplicadas quando utilizadores que fizeram login virem o seu blogue. Se inactivo, as permissões de leitura das categorias NÃO são aplicadas, mas o efeito positivo é uma ligeira velocidade adicional no seu blogue. Assim se não precisar de permissões de leitura multi-utilizador para o seu blogue, inactive esta preferência.');
+@define('INSTALL_ACL_DESC', 'Se accionado, as preferências de permissões de grupos de utilizadores que definir para categorias serão aplicadas quando utilizadores que fizeram login virem o seu blogue. Se inactivo, as permissões de leitura das categorias NÃO serão aplicadas, mas o efeito positivo é uma ligeira velocidade adicional no seu blogue. Assim se não precisar de permissões de leitura multi-utilizador para o seu blogue, inactive esta preferência.');
 @define('PLUGIN_API_VALIDATE_ERROR', 'Sintaxe de configuração errada para a opção "%s". Precisa de conteúdo do tipo "%s".');
 @define('USERCONF_CHECK_PASSWORD', 'Senha antiga');
 @define('USERCONF_CHECK_PASSWORD_DESC', 'Se mudar a senha no campo acima, precisa de inserir a senha corrente neste campo.');
@@ -803,8 +803,8 @@
 @define('CATEGORY_PLUGIN_TEMPLATE_DESC', 'Se esta opção estiver activada, o plugin usará propriedades de Smarty-Templating para mostrar a lista de categorias. Se activar isto, pode mudar a formatação via o ficheiro modelo "plugin_categories.tpl". A activação desta opção terá um impacto na performance, de maneira que se não precisar de fazer adaptações, deixe-a inactiva.');
 @define('CATEGORY_PLUGIN_SHOWCOUNT', 'Mostrar número de entradas por categoria?');
 @define('AUTHORS_SHOW_ARTICLE_COUNT', 'Mostrar número de artigos ao lado do nome nome do autor?');
-@define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'Se esta opção for activada, o número de artigos deste autor será mostrado entre parêntesis junto ao nome do autor.');
-@define('CUSTOM_ADMIN_INTERFACE', 'Interface administrativa ad hoc disponível');
+@define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'Se esta opção for activada, o número de artigos deste autor será mostrado entre parêntesis junto ao nome do Autor.');
+@define('CUSTOM_ADMIN_INTERFACE', 'Interface Administrativa ad hoc disponível');
 @define('COMMENT_NOT_ADDED', 'Os seus comentários não foram adicionados, porque ou comentários para este artigo não estão autorizados, ou introduziu dados inválidos, ou os seus comentários foram interceptados por medidas anti-spam. ');
 @define('INSTALL_TRACKREF', 'Activar localização do referenciador?');
 @define('INSTALL_TRACKREF_DESC', 'A activação da localização do referenciador permite mostrar que sítios se referem aos seus artigos. Hoje em dia esta possibilidade é abusada para inserção de spam, de maneira que pode desligá-la se quiser.');
@@ -826,69 +826,72 @@
 @define('FURTHER_LINKS_S9Y_SPARTACUS', 'Spartacus');
 @define('COMMENT_IS_DELETED', '(Comentário removido)');
 
-@define('CURRENT_AUTHOR', 'Current author');
-
-@define('WORD_NEW', 'New');
-@define('SHOW_MEDIA_TOOLBAR', 'Show toolbar within media selector popup?');
-@define('MEDIA_KEYWORDS', 'Media keywords');
-@define('MEDIA_KEYWORDS_DESC', 'Enter a list of ";" separated words that you want to use as pre-defined keywords for media items.');
-@define('MEDIA_EXIF', 'Import EXIF/JPEG image data');
-@define('MEDIA_EXIF_DESC', 'If enabled, existing EXIF/JPEG metadata of images will be parsed and stored in the database for display in the media gallery.');
-@define('MEDIA_PROP', 'Media properties');
 
 
-@define('GO_ADD_PROPERTIES', 'Go & enter properties');
+// I translated in full this part of the language file, from english to portuguese, word by word,making use of Microsoft´s Word as addictional verification and PHP Designer 2007 Professional Editor as editor. --- $Angel
+@define('CURRENT_AUTHOR', 'Autor currente');
+
+@define('WORD_NEW', 'Novo');
+@define('SHOW_MEDIA_TOOLBAR', 'Mostrar barra dentro do seleccionador media-popup?');
+@define('MEDIA_KEYWORDS', 'Palavras-chave para o Media');
+@define('MEDIA_KEYWORDS_DESC', 'Entre uma listage, de palavras separadas por ";" pelas quais deseja pré-definir como palavras-chave para os seus itens media.');
+@define('MEDIA_EXIF', 'Importar imagens EXIF/JPEG');
+@define('MEDIA_EXIF_DESC', 'Uma vez activado, as imagens EXIF/JPEG existentes serão separadas e arquivadas na base de dados para exposição na galeria de media.');
+@define('MEDIA_PROP', 'Propriedades do Media');
+
+
+@define('GO_ADD_PROPERTIES', 'Ir & entrar propriedades');
 @define('MEDIA_PROPERTY_DPI', 'DPI');
-@define('MEDIA_PROPERTY_COPYRIGHT', 'Copyright');
-@define('MEDIA_PROPERTY_COMMENT1', 'Short Comment');
-@define('MEDIA_PROPERTY_COMMENT2', 'Long Comment');
-@define('MEDIA_PROPERTY_TITLE', 'Title');
-@define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
-@define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
+@define('MEDIA_PROPERTY_COPYRIGHT', 'Direitos de Autor');
+@define('MEDIA_PROPERTY_COMMENT1', 'Comentário Breve');
+@define('MEDIA_PROPERTY_COMMENT2', 'Comentário Longo');
+@define('MEDIA_PROPERTY_TITLE', 'Título');
+@define('MEDIA_PROP_DESC', 'Entre uma listagem separada por ";" nos campos de propriedade, do modo que desejar definir cada um dos seus ficheiros Media');
+@define('MEDIA_PROP_MULTIDESC', '(Você pode colocar ":MULTI" após algum item para indicar que o mesmo irá conter texto longo no lugar de apenas alguns caracteres)');
 
-@define('STYLE_OPTIONS_NONE', 'This theme/style has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Theme/Style options');
+@define('STYLE_OPTIONS_NONE', 'Este tema/estilo não tem opções especificas. Para visualizar como o seu "template" pode expecificar opções, leia a Documentação Técnica disponível em www.s9y.org acerca de "Configuration of Theme options".');
+@define('STYLE_OPTIONS', 'Opções de Tema/Estilo');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
-@define('SYNDICATION_RFC2616', 'Activate strict RFC2616 RSS-Feed compliance');
-@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also vioaltes RFC2616. So if you set this option to "TRUE" you will compliy with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. Reference: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
-@define('MEDIA_PROPERTY_DATE', 'Associated Date');
-@define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
-@define('FILENAME_REASSIGNED', 'Automagically assigned new file name: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Max. file upload size');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Enter the maximum filesize for uploaded files in bytes. This setting can be overruled by server-side settings in PHP.ini: upload_max_filesize, post_max_size, max_input_time all take precedence over this option. An empty string means to only use the server-side limits.');
-@define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
-@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. width of image files for upload');
-@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Enter the maximum image width in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. height of image files for upload');
-@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Enter the maximum image height in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('SYNDICATION_RFC2616', 'Activar strict RFC2616 RSS-Feed compliance');
+@define('SYNDICATION_RFC2616_DESC', 'NÃO forçando o RFC2616 significa que todos os "Conditional GETs" pelo Serendipity irão retornar com as últimas entradas modificadas deste o seu último pedido. Uma vez colocando a configuração para "false", os seus visitantes irão obtêr todos os artigos pedidos no seu último pedido, o que é um bom resultado. No entanto, alguns Agentes tal como Planet irão agir estranhamente, se tal aconteçer, também irá violar o RFC2616. Se colocar esta opção para "TRUE", você irá seguir com aquele RFC, mas os leitores do seu RSS Feed talvés irão perder alguns itens nas suas férias. No entanto, e para todo o caso, ou adora Agredadores como o Planet, ou fere os leitores actuais do seu Blogue. Se você está a enfrentar queixas de ambos os lados, poderá manobrar esta opção. Referência: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
+@define('MEDIA_PROPERTY_DATE', 'Data Associada');
+@define('MEDIA_PROPERTY_RUN_LENGTH', 'Cumprimento');
+@define('FILENAME_REASSIGNED', 'Associa um novo ficheiro automáticamente: %s');
+@define('MEDIA_UPLOAD_SIZE', 'Max. do tamanho no ficheiro carregado');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'Entre o tamanho máximo para upload de um ficheiro em bytes. Esta configuração poderá ser reescrita pelas definições incluidas no server-side do PHP.ini: upload_max_filesize, post_max_size, max_input_time em todos os precedentes acima desta opção. Um string vazio significa que apenas será utilizado  pelos limites do server-side.');
+@define('MEDIA_UPLOAD_SIZEERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s bytes!');
+@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. de largura para imagens aquando upload');
+@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Entre o máximo de largura permitido por upload em pixels.');
+@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. de altura para imagens aquando upload');
+@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Entre o máximo de altura permitido por upload em pixels.');
+@define('MEDIA_UPLOAD_DIMERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s x %s pixels!');
 
-@define('MEDIA_TARGET', 'Target for this link');
+@define('MEDIA_TARGET', 'Alvo para esta link');
 @define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
 @define('MEDIA_ENTRY', 'Isolated Entry');
-@define('MEDIA_TARGET_BLANK', 'Popup window (via target=_blank)');
+@define('MEDIA_TARGET_BLANK', 'Janela Popup (via target=_blank)');
 
-@define('MEDIA_DYN_RESIZE', 'Allow dynamic image resizing?');
-@define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
+@define('MEDIA_DYN_RESIZE', 'Permitir redimencionamento dinãmico de images?');
+@define('MEDIA_DYN_RESIZE_DESC', 'Se activado, o seleccionador de media pode retornar as imagens em qualquer tamanho pretendido via a variante GET. Os resultados são cacheados, e assim, pode criar uma larga base de ficheiros se você fizer uso em extensividade.');
 
-@define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
-@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');@define('PLUGIN_ACTIVE', 'Active');
-@define('PLUGIN_INACTIVE', 'Inactive');
-@define('PREFERENCE_USE_JS', 'Enable advanced JS usage?');
-@define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
+@define('MEDIA_DIRECTORY_MOVED', 'O Directório tal como os ficheiros foram movidos com sucesso para %s');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'O Directório tal como os ficheiros não poderão ser movidos para %s!');
+@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'Em bases de dados sem MySQL, intervindo através de cada artigo para substituir o directório antigo dos URLs com um novo directório não é possível. Será necessário editar as suas entradas manualmente para corrigir novos URLs. Você pode ainda mover o seu antigo directório de volta para onde ele se encontrava, se isso for muito incómodo para si.');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moveu-se o URL do directório alterado para estas %s entradas..');@define('PLUGIN_ACTIVE', 'Activo');
+@define('PLUGIN_INACTIVE', 'Inactivo');
+@define('PREFERENCE_USE_JS', 'Activar utilização de JS Avançado?');
+@define('PREFERENCE_USE_JS_DESC', 'Se activado, as secções com JavaScript avançado irão ser activadas para melhor utilização, tal como a secção do plugin de configuração, "Plugin Configuration", poderá ser usada por si para arrastar e colar plugins reorganizados.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
+@define('PREFERENCE_USE_JS_WARNING', '(Esta página usa JavaScripting avançado. Se você está a deparar-se com problemas funcionais, por favor, desactive a utilização de JS avançad nas suas preferencias pessoais ou desactive a função de JavaScript do seu Navegador.)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path para comentários');
+@define('PERM_SET_CHILD', 'Configure as mesmas permissões para todos os directórios child');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Plugins proibidos');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Eventos proibidos');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Activar Plugin ACL para os grupos?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Se a opção "Plugin ACL for usergroups" está activada na configuração, você pode especificar que grupo estão autorizados a executar certos plugins/eventos.');
+@define('DELETE_SELECTED_ENTRIES', 'Eliminar entradas seleccionadas');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Mostar apenas Autores com apenas X artigos');

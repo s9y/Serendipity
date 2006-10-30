@@ -3,6 +3,8 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Portuguese translation update by Angel
+
     * Fixed bug that prevented native imports from other blog system
       to recode ISO-charsets into UTF-8. Major thanks to Jan of
       blog.salid.de. (garvinhicking)
