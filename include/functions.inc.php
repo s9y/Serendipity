@@ -295,7 +295,7 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
     static $_resArray;
     static $_remain;
 
-    if (sizeof($ary) == 0) {
+    if (!is_array($ary) || sizeof($ary) == 0) {
         return array();
     }
 
