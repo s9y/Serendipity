@@ -4,7 +4,7 @@
 # Translation for european portuguese (c) by J P Matos <jmatos@math.ist.utl.pt>
 # based on work (c) by Ranulfo Netto <rcnetto@yahoo.com>
 # and compairison with the work (c) by Agner Olson <agner@agner.net>
-
+# and even more work from Angel pticore@users.sourceforge.net
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'UTF-8');
