@@ -28,6 +28,7 @@ if (isset($_GET['viewAuthor'])) {
 if (!isset($_GET['type'])) {
     $_GET['type'] = 'content';
 }
+$serendipity['view'] = 'feed';
 
 switch ($_GET['type']) {
     case 'comments_and_trackbacks':
