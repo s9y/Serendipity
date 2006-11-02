@@ -28,6 +28,11 @@ if (isset($_GET['viewAuthor'])) {
 if (!isset($_GET['type'])) {
     $_GET['type'] = 'content';
 }
+
+if (!empty($_SERVER['HTTP_USER_AGENT']) && stristr($_SERVER['HTTP_USER_AGENT'], 'feedburner')) {
+    $_GET['nocache'] = true;    
+}
+
 $serendipity['view'] = 'feed';
 
 switch ($_GET['type']) {
