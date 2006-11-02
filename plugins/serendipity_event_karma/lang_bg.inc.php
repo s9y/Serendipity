@@ -45,3 +45,5 @@
 @define('PLUGIN_KARMA_STATISTICS_VISITS_NO', 'посещения');
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'гласувания');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'точки');
+
+@define('PLUGIN_KARMA_STARRATING', 'Разрешаване на индивидуална оценка на тази статия?');

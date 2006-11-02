@@ -3,6 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Ivan Cenov jwalker@hotmail.bg
+ * EN-revision: 1475 
  */
 
 @define('PLUGIN_KARMA_NAME', 'Карма');
@@ -45,3 +46,5 @@
 @define('PLUGIN_KARMA_STATISTICS_VISITS_NO', 'посещения');
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'гласувания');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'точки');
+
+@define('PLUGIN_KARMA_STARRATING', 'Разрешаване на индивидуална оценка на тази статия?');
