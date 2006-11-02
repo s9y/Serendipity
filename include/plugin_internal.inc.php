@@ -1455,7 +1455,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
         $html       = '';
 
         if (!$smarty && $is_form) {
-            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '" method="post">
+            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage" method="post">
               <div id="serendipity_category_form_content">';
         }
         if (!$smarty) {
@@ -1564,7 +1564,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
             $plugin_categories_data = array(
                 'is_form'           => $is_form,
                 'category_image'    => $image,
-                'form_url'          => $serendipity['baseURL'] . $serendipity['indexFile'],
+                'form_url'          => $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage',
                 'categories'        => is_array($categories) ? $categories : array()
             );
             $serendipity['smarty']->assign($plugin_categories_data);
@@ -1651,7 +1651,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $html       = '';
 
         if ($is_form) {
-            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '" method="post"><div>';
+            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage" method="post"><div>';
         }
 
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
