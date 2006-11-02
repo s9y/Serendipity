@@ -3299,3 +3299,41 @@ function &serendipity_getMediaPaths() {
 
     return $paths;
 }
+
+/**
+ * Checks whether a user has access to write into a directory
+ *
+ * @access public
+ * @param   string Directory to check
+ * @return  boolean
+ */
+function serendipity_checkDirUpload($dir) {
+    global $serendipity;
+
+    /*
+    if (serendipity_checkPermission('adminImagesMaintainOthers')) {
+        return true;
+    }
+    */
+    
+    $allowed  = serendipity_ACLGet(0, 'directory', 'write', $dir);
+    $mygroups = serendipity_checkPermission(null, null, true);
+    
+    // Usergroup "0" always means that access is granted. If no array exists, no ACL restrictions have been set and all is fine.
+    if (!is_array($allowed) || isset($allowed[0])) {
+        return true;
+    }
+    
+    if (!is_array($mygroups)) {
+        return true;
+    }
+
+    foreach($mygroups AS $grpid => $grp) {
+        if (isset($allowed[$grpid])) {
+            return true;
+            break;
+        }
+    }
+    
+    return false;
+}

@@ -189,6 +189,11 @@ switch ($serendipity['GET']['adminAction']) {
         $serendipity['POST']['target_directory'][$tindex] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$tindex], true, true);
         $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex] . $tfile;
 
+        if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$tindex])) {
+            echo PERM_DENIED;
+            return;
+        }
+
         $realname = $tfile;
         if (file_exists($target)) {
             echo '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY . '<br />';
@@ -276,6 +281,12 @@ switch ($serendipity['GET']['adminAction']) {
             }
 
             $serendipity['POST']['target_directory'][$idx] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$idx], true, true);
+
+            if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$idx])) {
+                echo PERM_DENIED;
+                continue;
+            }
+
             $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx] . $tfile;
 
             $realname = $tfile;

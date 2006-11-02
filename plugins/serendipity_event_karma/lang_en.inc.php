@@ -47,4 +47,5 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'votes');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'points');
 
+@define('PLUGIN_KARMA_STARRATING', 'Enable individual rating on this entry?');
 ?>
