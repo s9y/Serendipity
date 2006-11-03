@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Move trackback sending logic to the end when saving an entry.
+      Should get rid of event plugins not operating when trackbacks
+      painfully fail. Thanks to isotopp (garvinhicking)
+
     * Portuguese translation update by Angel
 
     * Fixed bug that prevented native imports from other blog system
