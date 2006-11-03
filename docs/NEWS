@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Fix a problem where spartacus did not properly assign configured
+      permissions to downloaded directories, thanks to danilo from
+      the forums!
+
     * Move trackback sending logic to the end when saving an entry.
       Should get rid of event plugins not operating when trackbacks
       painfully fail. Thanks to isotopp (garvinhicking)

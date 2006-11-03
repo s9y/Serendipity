@@ -34,7 +34,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.7');
+        $propbag->add('version',       '2.8');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -726,6 +726,7 @@ class serendipity_event_spartacus extends serendipity_event
             $url    = $mirror . '/' . $sfloc . '/' . $file . '?rev=1.9999';
             $target = $pdir . $file;
             @mkdir($pdir . $plugin_to_install);
+            $this->fileperm($pdir . $plugin_to_install, true);
             $this->fetchfile($url, $target);
             if (!isset($baseDir)) {
                 $baseDirs = explode('/', $file);
