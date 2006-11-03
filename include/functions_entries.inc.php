@@ -1237,7 +1237,6 @@ function serendipity_updertEntry($entry) {
 
     if (!serendipity_db_bool($entry['isdraft'])) {
         serendipity_plugin_api::hook_event('frontend_display', $entry, array('no_scramble' => true, 'from' => 'functions_entries:updertEntry'));
-        serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $entry['title'], $entry['body'] . $entry['extended'], $newEntry);
     }
 
     serendipity_purgeEntry($entry['id'], $entry['timestamp']);
@@ -1249,6 +1248,10 @@ function serendipity_updertEntry($entry) {
         serendipity_plugin_api::hook_event('backend_publish', $entry, $newEntry);
     } else {
         serendipity_plugin_api::hook_event('backend_save', $entry, $newEntry);
+    }
+
+    if (!serendipity_db_bool($entry['isdraft'])) {
+        serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $entry['title'], $entry['body'] . $entry['extended'], $newEntry);
     }
 
     return (int)$entry['id'];
