@@ -3,19 +3,7 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
-    * Fix a problem where spartacus did not properly assign configured
-      permissions to downloaded directories, thanks to danilo from
-      the forums!
-
-    * Move trackback sending logic to the end when saving an entry.
-      Should get rid of event plugins not operating when trackbacks
-      painfully fail. Thanks to isotopp (garvinhicking)
-
     * Portuguese translation update by Angel
-
-    * Fixed bug that prevented native imports from other blog system
-      to recode ISO-charsets into UTF-8. Major thanks to Jan of
-      blog.salid.de. (garvinhicking)
 
     * Added functionality to reply to comments in the admin interface
       (garvinhicking)
@@ -28,13 +16,6 @@ Version 1.1 ()
     * Support to delete multiple entries at once via checkboxes in the
       entry admin panel, fix admin entry pagination to not show
       next pages, if that next page were empty. (garvinhicking)
-
-    * Fix bug with using %username% in author permalinks, thanks to oeli
-      from the forums! (garvinhicking)
-
-    * Fix possible integer wraparound in comment count leading to
-      a gazillion counter state. Also now show links to the entries
-      within the administration comment panel. Thanks to Julian Finn!
 
 Version 1.1-beta5 (October 18th, 2006)
 ------------------------------------------------------------------------
@@ -348,7 +329,50 @@ Version 1.1-alpha5()
    * Removed config option "XHTML11 compliance" and enabled by default
      now (garvinhicking)
 
-Version 1.0.1 ()
+Version 1.0.3 ()
+------------------------------------------------------------------------
+
+   * Fix PHP 5.2.0 compatibility issue. (garvinhicking)
+
+   * Add testsuite (nohn)
+
+   * Some minor 1.1 bug backports:
+
+     - Fix a problem where spartacus did not properly assign configured
+       permissions to downloaded directories, thanks to danilo from
+       the forums! (garvinhicking)
+
+     - "View Article" in "Save Entry" dialog (nohn)
+
+     - Fix possible integer wraparound in comment count leading to
+      a gazillion counter state. Also now show links to the entries
+      within the administration comment panel. Thanks to Julian Finn!
+
+     - Fix bug with using %username% in author permalinks, thanks to oeli
+      from the forums! (garvinhicking)
+
+     - Fix a problem where spartacus did not properly assign configured
+      permissions to downloaded directories, thanks to danilo from
+      the forums!
+
+     - Move trackback sending logic to the end when saving an entry.
+      Should get rid of event plugins not operating when trackbacks
+      painfully fail. Thanks to isotopp (garvinhicking)
+
+     - Fixed bug that prevented native imports from other blog system
+      to recode ISO-charsets into UTF-8. Major thanks to Jan of
+      blog.salid.de. (garvinhicking)
+
+     - Added $serendipity['expose_s9y'] variable to optionall prevent s9y
+       from emitting any s9y-specific HTTP headers (garvinhicking)
+
+Version 1.0.2 (October 18th, 2006)
+------------------------------------------------------------------------
+
+   * Fix a security issue with XSS on the admin backend for registered
+     authors. Many thanks to Stefan Esser! (garvinhicking)
+
+Version 1.0.1 (August 14th, 2006)
 ------------------------------------------------------------------------
 
    * Fix problem on newer Firefox versions, where insertion of images
