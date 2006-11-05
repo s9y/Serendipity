@@ -116,6 +116,21 @@ if (extension_loaded('filter') && function_exists('input_name_to_filter') && inp
     }
 }
 
+if (extension_loaded('filter') && function_exists('filter_id') && filter_id(ini_get('filter.default')) !== FILTER_UNSAFE_RAW) {
+    foreach ($_POST as $key => $value) {
+        $_POST[$key] = filter_input(INPUT_POST, $key, FILTER_UNSAFE_RAW);
+    }
+    foreach ($_GET as $key => $value) {
+        $_GET[$key] = filter_input(INPUT_GET, $key, FILTER_UNSAFE_RAW);
+    }
+    foreach ($_COOKIE as $key => $value) {
+        $_COOKIE[$key] = filter_input(INPUT_COOKIE, $key, FILTER_UNSAFE_RAW);
+    }
+    foreach ($_SESSION as $key => $value) {
+        $_SESSION[$key] = filter_input(INPUT_SESSION, $key, FILTER_UNSAFE_RAW);
+    }
+}
+
 /*
  *  Avoid magic_quotes_gpc issues
  *  courtesy of iliaa@php.net
