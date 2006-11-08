@@ -279,6 +279,8 @@ function &serendipity_permalinkPatterns($return = false) {
     $PAT['PLUGIN']                   = '@/('  . $serendipity['permalinkPluginPath'] . '|plugin)/(.*)@';
     $PAT['SEARCH']                   = '@/'  . $serendipity['permalinkSearchPath'] . '/(.*)@';
     $PAT['COMMENTS']                 = '@/'  . $serendipity['permalinkCommentsPath'] . '/(.*)@';
+    // PATCH FOR UPCOMING 1.2:
+    // $PAT['PERMALINK']             = '@('   . serendipity_makePermalinkRegex($serendipity['permalinkStructure'], 'entry') . ')/?@i';
     $PAT['PERMALINK']                = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkStructure'], 'entry') . '@i';
     $PAT['PERMALINK_CATEGORIES']     = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkCategoryStructure'], 'category') . '@i';
     $PAT['PERMALINK_FEEDCATEGORIES'] = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkFeedCategoryStructure'], 'category') . '@i';
@@ -315,11 +317,15 @@ function serendipity_searchPermalink($struct, $url, $default, $type = 'entry') {
 
     if (stristr($struct, '%id%') === FALSE) {
         $url = preg_replace('@^(' . preg_quote($serendipity['serendipityHTTPPath'], '@') . '(' . preg_quote($serendipity['indexFile'], '@') . ')?\??(url=)?/?)([^&?]+).*@', '\4', $url);
-
         // If no entryid is submitted, we rely on a new DB call to fetch the permalink.
         $pq = "SELECT entry_id, data
                  FROM {$serendipity['dbPrefix']}permalinks
-                WHERE permalink = '" . serendipity_db_escape_string($url) . "'
+                WHERE (permalink = '" . serendipity_db_escape_string($url) . "'
+                       "
+                       // PATCH FOR 1.2:
+                       // . "OR permalink = '" . serendipity_db_escape_string($default) . "'"
+                       . "
+                      )
                   AND type      = '" . serendipity_db_escape_string($type) . "'
                   AND entry_id  > 0
                 LIMIT 1";
