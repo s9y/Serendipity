@@ -219,5 +219,82 @@ class SerendipityTestSuite extends PHPUnit_Extensions_SeleniumTestCase
 
         $this->assertTextPresent(PLUGIN_EVENT_SPAMBLOCK_ERROR_IP);
     }
+
+    public function testCreateUser() {
+        $this->open(S9Y_INSTALLDIR);
+
+        $this->assertTitleEquals('s9y Testsuite Testblog');
+        $this->assertTextPresent(SUPERUSER);
+        $this->clickAndWait('link='.SUPERUSER_OPEN_LOGIN);
+
+        $this->assertTextPresent(PLEASE_ENTER_CREDENTIALS);
+        $this->type('serendipity[user]', 'Test User');
+        $this->type('serendipity[pass]', 'Test Password');
+        $this->clickAndWait('submit');
+
+        $this->assertTitleEquals(SERENDIPITY_ADMIN_SUITE);
+        $this->assertTextPresent(WELCOME_BACK.' John Doe');
+        $this->clickAndWait('link='.MANAGE_USERS);
+
+        $this->assertTextPresent(USER_LEVEL);
+        $this->assertTextPresent('John Doe');
+        $this->clickAndWait("//input[@value='".CREATE_NEW_USER."']");
+
+        $this->assertTextPresent(USERCONF_CAT_PERSONAL);
+        $this->assertTextPresent(USERCONF_USERNAME);
+        $this->assertTextPresent(USERCONF_PASSWORD);
+        $this->assertTextPresent(USERCONF_EMAIL);
+        $this->assertTextPresent(USERCONF_SENDCOMMENTS);
+        $this->assertTextPresent(USERCONF_SENDTRACKBACKS);
+        $this->assertTextPresent(USERCONF_ALLOWPUBLISH);
+        $this->assertTextPresent(USERCONF_USERLEVEL);
+        $this->assertTextPresent(USERCONF_REALNAME);
+        $this->assertTextPresent(USERCONF_CREATE);
+        $this->assertTextPresent(USERCONF_GROUPS);
+        $this->assertTextPresent(USERCONF_CHECK_PASSWORD);
+        $this->type('username', 'New Test User');
+        $this->type('password', 'New Test Password');
+        $this->type('realname', 'Tester Test');
+        $this->select('userlevel', USERLEVEL_EDITOR_DESC);
+        $this->type('email', 'tester@example.com');
+        $this->clickAndWait("//input[@value='".CREATE_NEW_USER."']");
+
+        $this->assertTextPresent(USER_LEVEL);
+        $this->assertTextPresent('John Doe');
+        $this->assertTextPresent('Tester Test');
+        $this->clickAndWait('link='.LOGOUT);
+
+        $this->assertTextPresent(PLEASE_ENTER_CREDENTIALS);
+        $this->type('serendipity[user]', 'New Test User');
+        $this->type('serendipity[pass]', 'New Test Password');
+        $this->clickAndWait('submit');
+
+        $this->assertTextPresent(WELCOME_BACK.' Tester Test');
+        $this->assertTextPresent(ADMIN_FRONTPAGE);
+        $this->assertTextPresent(PERSONAL_SETTINGS);
+        $this->assertTextPresent(NEW_ENTRY);
+        $this->assertTextPresent(EDIT_ENTRIES);
+        $this->assertTextPresent(CATEGORIES);
+        $this->assertTextPresent(ADD_MEDIA);
+        $this->assertTextPresent(MEDIA_LIBRARY);
+        $this->assertTextNotPresent(COMMENTS);
+        $this->assertTextNotPresent(MANAGE_DIRECTORIES);
+        $this->assertTextNotPresent(MANAGE_DIRECTORIES);
+        $this->assertTextNotPresent(MANAGE_STYLES);
+        $this->assertTextNotPresent(CONFIGURE_PLUGINS);
+        $this->assertTextNotPresent(CONFIGURATION);
+        $this->assertTextNotPresent(MANAGE_USERS);
+        $this->assertTextNotPresent(MANAGE_GROUPS);
+        $this->assertTextNotPresent(IMPORT_ENTRIES);
+        $this->assertTextNotPresent(EXPORT_ENTRIES);
+        $this->clickAndWait('link='.NEW_ENTRY);
+        
+        $this->assertTextPresent(ENTRY_BODY);
+        $this->type('entryTitle', 'Test Entry 002');
+        $this->type('serendipity[body]', 'Test Body');
+        $this->clickAndWait("//input[@value='- ".SAVE." -']");
+        
+        $this->assertTextPresent(IFRAME_SAVE_DRAFT);
+    }
 }
 ?>
