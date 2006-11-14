@@ -170,7 +170,7 @@ function fillInput(source, target) {ldelim}
 {rdelim}
 </script>
 
-<form action="?" method="POST" id="uploadform" enctype="multipart/form-data" onsubmit="rememberOptions()">
+<form target="_blank" action="?" method="POST" id="uploadform" enctype="multipart/form-data" onsubmit="rememberOptions()">
     <div>
         {if $media.max_file_size}
         <input type="hidden" name="MAX_FILE_SIZE" value="{$max_file_size}" />

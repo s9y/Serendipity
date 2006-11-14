@@ -610,7 +610,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
 
 
     $infile  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $directory . $file;
-#    echo 'From: ' . $infile . '<br />';
+    echo 'From: ' . $infile . '<br />';
     if ($is_temporary) {
         $temppath = dirname($thumbname);
         if (!is_dir($temppath)) {
@@ -621,7 +621,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
         $outfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $directory . $f . '.' . $thumbname . '.' . $suf;
     }
     $serendipity['last_outfile'] = $outfile;
-#    echo 'To: ' . $outfile . '<br />';
+    echo 'To: ' . $outfile . '<br />';
 
     $fdim    = @serendipity_getimagesize($infile, '', $suf);
     if (isset($fdim['noimage'])) {
