@@ -93,12 +93,12 @@ class serendipity_event_nl2br extends serendipity_event
         if($regexp) return preg_replace_callback($regexp, array($this, 'isolate'), $src);
         global $_buf;
         $_buf[] = $src[0];
-        return "\\001" . (count($_buf) - 1);
+        return "\001" . (count($_buf) - 1);
     }
 
     function restore($text) {
         global $_buf;
-        return preg_replace('~\\001(\\d+)~e', '$_buf[$1]', $text);
+        return preg_replace('~\001(\d+)~e', '$_buf[$1]', $text);
     }
 
     function event_hook($event, &$bag, &$eventData) {
@@ -135,11 +135,11 @@ class serendipity_event_nl2br extends serendipity_event
 
                         $element = $temp['element'];
                         if ($isolate) {
-                            $eventData[$element] = $this->isolate($eventData[$element], '~[<\\[](' . implode('|', $isolate) . ').*?[>\\]].*?[<\\[]/\\1[>\\]]~si');
-                        }
-                        $eventData[$element] = nl2br($eventData[$element]);
-                        if ($isolate) {
-                            $eventData[$element] = $this->restore($eventData[$element]);
+                                $eventData[$element] = $this->isolate($eventData[$element], '~[<\[](' . implode('|', $isolate) . ').*?[>\]].*?[<\[]/\1[>\]]~si');
+                                $eventData[$element] = nl2br($eventData[$element]);
+                                $eventData[$element] = $this->restore($eventData[$element]);
+                        } else {
+                                $eventData[$element] = nl2br($eventData[$element]);
                         }
                     }
                 }
@@ -157,4 +157,3 @@ class serendipity_event_nl2br extends serendipity_event
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>
