@@ -20,7 +20,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -50,6 +50,7 @@ class serendipity_event_nl2br extends serendipity_event
         );
 
         $conf_array = array();
+        $conf_array[] = 'isolate';
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
@@ -71,21 +72,59 @@ class serendipity_event_nl2br extends serendipity_event
 
     function introspect_config_item($name, &$propbag)
     {
-        $propbag->add('type',        'boolean');
-        $propbag->add('name',        constant($name));
-        $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-        $propbag->add('default', 'true');
+        switch($name) {
+            case 'isolate':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_NL2BR_ISOLATE_TAGS);
+                $propbag->add('description', PLUGIN_EVENT_NL2BR_ISOLATE_TAGS_DESC);
+                $propbag->add('default',     '');
+                break;
+
+            default:
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        constant($name));
+                $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
+                $propbag->add('default', 'true');
+        }
         return true;
+    }
+
+    function isolate($src, $regexp = NULL) {
+        if($regexp) return preg_replace_callback($regexp, array($this, 'isolate'), $src);
+        global $_buf;
+        $_buf[] = $src[0];
+        return "\\001" . (count($_buf) - 1);
+    }
+
+    function restore($text) {
+        global $_buf;
+        return preg_replace('~\\001(\\d+)~e', '$_buf[$1]', $text);
     }
 
     function event_hook($event, &$bag, &$eventData) {
         global $serendipity;
+        static $isolate = null;
+        global $_buf;
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
             switch($event) {
               case 'frontend_display':
+                if ($isolate === null) {
+                    $isolate = $this->get_config('isolate');
+                    $tags    = (array)explode(',', $isolate);
+                    $isolate = array();
+                    foreach($tags AS $tag) {
+                        $tag = trim($tag);
+                        if (!empty($tag)) {
+                            $isolate[] = $tag;
+                        }
+                    }
+                    if (count($isolate) < 1) {
+                        $isolate = false;
+                    }
+                }
 
                 foreach ($this->markup_elements as $temp) {
                     if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
@@ -95,7 +134,13 @@ class serendipity_event_nl2br extends serendipity_event
                             !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
 
                         $element = $temp['element'];
+                        if ($isolate) {
+                            $eventData[$element] = $this->isolate($eventData[$element], '~[<\\[](' . implode('|', $isolate) . ').*?[>\\]].*?[<\\[]/\\1[>\\]]~si');
+                        }
                         $eventData[$element] = nl2br($eventData[$element]);
+                        if ($isolate) {
+                            $eventData[$element] = $this->restore($eventData[$element]);
+                        }
                     }
                 }
                 return true;

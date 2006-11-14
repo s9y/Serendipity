@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Enhanced nl2br plugin so that it will NOT put breaks into pre-
+      defined tags like <pre>, <code> etc. Not enabled by default.
+      Thanks to Brendon K from the forums!
+
     * Portuguese translation update by Angel
 
     * Added functionality to reply to comments in the admin interface
