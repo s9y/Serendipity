@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_es.inc.php 1460 2006-10-26 20:05:04Z garvinhicking $
+<?php # $Id: serendipity_lang_es.inc.php 1505 2006-11-15 12:34:59Z rlazo $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Luis Cervantes <LuisCervantes@ono.com>,
@@ -16,6 +16,13 @@
 @define('WYSIWYG_LANG', 'es-utf');
 @define('LANG_DIRECTION', 'ltr');
 
+/* rlazo[20061114]: dado que el español tiene varias traducciones para ciertas
+ * palabras sería bueno mantener una misma traducción para ciertas
+ * palabras comunes (tratando de seguir http://es.tldp.org/ORCA/glosario.html):
+ *
+ * password -> contraseña
+ * file -> fichero¿? (se podría utilizar archivo para referirse a las entradas pasadas)
+ */
 @define('SERENDIPITY_ADMIN_SUITE', 'Suite de Administración de Serendipity');
 @define('HAVE_TO_BE_LOGGED_ON', 'Debes identificarte para ver esta página');
 @define('APPEARANCE', 'Apariencia');
@@ -800,7 +807,7 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('PLUGIN_API_VALIDATE_ERROR', 'Sintaxis errónea en la configuración de la opción "%s". Se requiere contenido de tipo "%s".');
 @define('USERCONF_CHECK_PASSWORD', 'Contraseña actual');
 @define('USERCONF_CHECK_PASSWORD_DESC', 'Si cambias la contraseña en el campo de arriba, debes escribir la contraseña actual en este campo.');
-@define('USERCONF_CHECK_PASSWORD_ERROR', 'No especificaste una clave actual correcta, por lo tanto no estas autorizado para establecer una nueva clave. Tus cambios no fueron guardados.');
+@define('USERCONF_CHECK_PASSWORD_ERROR', 'No especificaste correctamente la contraseña actual, por lo tanto no estas autorizado para establecer una nueva. Tus cambios no fueron guardados.');
 @define('ERROR_XSRF', 'Tu navegador no envió una cadena válida de HTTP-Referrer. Esto puede deberse a una mala configuración del navegador/proxy o por un "Cross Site Request Forgery (XSRF)" dirigido a ti. La acción solicitada no pudo ser completada.');
 @define('INSTALL_PERMALINK_FEEDAUTHOR_DESC', 'Aquí puedes definir la estructura relativa de URLs comenzando por tu URL base hasta incluso las sindicaciones RSS de usuarios específicos que puedan ser vistos. Puedes usar las variables %id%, %realname%, %username%, %email% y cualquier otro carácter.');
 @define('INSTALL_PERMALINK_FEEDAUTHOR', 'Estructura de los Enlaces Permanentes para las sindicaciones RSS de autores');
@@ -810,7 +817,7 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('AUTHORS_ALLOW_SELECT_DESC', 'Si esta opción es activada, un checkbox estará al lado de cada autor en en la extensión lateral. Los usuarios pueden seleccionar estas casillas para ver las entradas de acuerdo a su selección.');
 @define('AUTHOR_PLUGIN_DESC', 'Muestra una lista de autores');
 @define('CATEGORY_PLUGIN_TEMPLATE', 'Activar Smarty-Templates?');
-@define('CATEGORY_PLUGIN_TEMPLATE_DESC', 'Si esta opción es activada, la extensión utiliza las características de Smarty-Templating para producir el contenido del listado de las categorías. Si activas esto, puedes cambiar el diseño a través del archivo "plugin_categories.tpl". Toma en cuenta que esta opción tendrá un impacto en el desempeño, si no necesitas diseños particulares, déjalo deshabilitado.');
+@define('CATEGORY_PLUGIN_TEMPLATE_DESC', 'Si esta opción es activada, la extensión utiliza las características de Smarty-Templating para producir el contenido del listado de las categorías. Si activas esto, puedes cambiar el diseño a través del fichero "plugin_categories.tpl". Toma en cuenta que esta opción tendrá un impacto en el desempeño, si no necesitas diseños particulares, déjalo deshabilitado.');
 @define('CATEGORY_PLUGIN_SHOWCOUNT', 'Mostrar número de entradas por categoría?');
 @define('AUTHORS_SHOW_ARTICLE_COUNT', 'Mostrar número de artículos del autor?');
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'Si esta opción es activada, el número de artículos del autor se muestra al lado del nombre del autor en paréntesis.');
@@ -861,10 +868,10 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 /*Translate*/
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
 /**/
-@define('FILENAME_REASSIGNED', 'Nombre asignado automágicamente al nuevo archivo: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Tamaño máximo de los archivos');//'upload' removed [rlazo]
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Ingresa el tamaño máximo en bytes de los archivos que puedes subir al servidor. Esta opción puede ser sobreescrita por la configuración en el servidor en PHP.ini: upload_max_filesize, post_max_size, max_input_time, todas las anteriores tiene precedencia sobre esta opción. Si la dejas en blanco se usarán sólo los límites definidos en el servidor.');
-@define('MEDIA_UPLOAD_SIZEERROR', 'Error: ¡No puedes subir archivos de más de %s bytes!');
+@define('FILENAME_REASSIGNED', 'Nombre asignado automágicamente al nuevo fichero: %s');
+@define('MEDIA_UPLOAD_SIZE', 'Tamaño máximo de los ficheros');//'upload' removed [rlazo]
+@define('MEDIA_UPLOAD_SIZE_DESC', 'Ingresa el tamaño máximo en bytes de los ficheros que puedes subir al servidor. Esta opción puede ser sobreescrita por la configuración en el servidor en PHP.ini: upload_max_filesize, post_max_size, max_input_time, todas las anteriores tiene precedencia sobre esta opción. Si la dejas en blanco se usarán sólo los límites definidos en el servidor.');
+@define('MEDIA_UPLOAD_SIZEERROR', 'Error: ¡No puedes subir ficheros de más de %s bytes!');
 @define('MEDIA_UPLOAD_MAXWIDTH', 'Ancho máximo de las imágenes'); //'upload' removed [rlazo]
 @define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Ingresa la anchura máxima de las imágenes que se pueden subir al servidor en pixels.');
 @define('MEDIA_UPLOAD_MAXHEIGHT', 'Altura máxima de las imágenes');//'upload' removed [rlazo]
@@ -875,23 +882,24 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('MEDIA_ENTRY', 'Entrada aislada');
 @define('MEDIA_TARGET_BLANK', 'Ventana emergente (a través de target=_blank)');
 @define('MEDIA_DYN_RESIZE', '¿Permitir redimensionar dinámicamente las imágenes?');
-@define('MEDIA_DYN_RESIZE_DESC', 'Si lo activas, el selector de medios puede regresar imágenes en cualquier tamaño solicitado a través de una variable GET. Los resultados se colocan en la caché, de esta manera puedes crear una base de archivos muy grande si es que haces un uso intensivo de esta característica.');
-@define('MEDIA_DIRECTORY_MOVED', 'El directorio y los archivos fueron exitosamente movidos a %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', '¡El directorio y los archivos no pudieron ser movidos a %s!');
+@define('MEDIA_DYN_RESIZE_DESC', 'Si lo activas, el selector de medios puede regresar imágenes en cualquier tamaño solicitado a través de una variable GET. Los resultados se colocan en la caché, de esta manera puedes crear una base de ficheros muy grande si es que haces un uso intensivo de esta característica.');
+@define('MEDIA_DIRECTORY_MOVED', 'El directorio y los ficheros fueron exitosamente movidos a %s');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', '¡El directorio y los ficheros no pudieron ser movidos a %s!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'En bases de datos distintas a MySQL, iterar sobre cada artículo para reemplazar el URL del directorio antiguo con la nueva dirección no es posible. Necesitarás que arreglar tus entradas de manera manual. También puedes regresar tu directorio a su ubicación original si hacer todo aquello te resulta muy incómodo.');
+/*translate*/
 @define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
 @define('PLUGIN_ACTIVE', 'Activa');
 @define('PLUGIN_INACTIVE', 'Inactiva');
 @define('PREFERENCE_USE_JS', '¿Activar el uso avanzado de JS?');
 @define('PREFERENCE_USE_JS_DESC', 'Si lo activas, las secciones de JavaScript avanzado serán activadas para una mejor usabilidad, como la extensión de configuración donde puedes utilizar el método de arrastrar y soltar para reordenar las extensiones.');
 @define('PREFERENCE_USE_JS_WARNING', '(Esta página hace uso de JavaScripting avanzado. Si estás teniendo problemas de funcionalidad, por favor desactiva el uso de JS avanzado en tus preferencias personales o desactiva el soporte para JavaScript de tu navegador)');
-/*RLAZO [20060722] spell checked*/
+/*rlazo [20060722] spell checked*/
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Ruta a los comentarios');
+@define('PERM_SET_CHILD', 'Define los mismos permisos en todos los directorios hijos');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Extensiones prohibidas');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Eventos prohibidos');
+@define('PERMISSION_FORBIDDEN_ENABLE', '¿Activar la extesión ACL para grupos de usuarios?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Si la opción "Extensión ACL para grupos de usuarios" es activada en la configuración, puedes especificar que grupos de usuarios son capaces de ejecutar ciertas extensiones/eventos.');
+@define('DELETE_SELECTED_ENTRIES', 'Eliminar las entradas seleccionadas');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Sólo mostrar aquellos autores con al menos X artículos');
