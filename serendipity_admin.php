@@ -377,7 +377,15 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
             </tr>
         </table>
         <br />
-        <div id="serendipityAdminFooter"><?php echo sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion()); ?></div>
+        <div id="serendipityAdminFooter">
+            <?php 
+            if ($serendipity['expose_s9y']) {
+                echo sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
+            } else {
+                echo sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
+            }
+            ?>
+        </div>
     </body>
 </html>
 <?php
