@@ -1138,5 +1138,22 @@ function &serendipity_pickKey(&$array, $key, $default) {
     return $default;
 }
 
+/* Retrieves the current timestamp but only deals with minutes to optimize Database caching
+ * @access public
+ * @return timestamp
+ * @author Matthew Groeninger
+ */
+function serendipity_db_time() {
+    static $ts    = null;
+    static $cache = 300; // Seconds to cache
+    
+    if ($ts === null) {
+        $now = time();
+        $ts = $now - ($now % $cache) + $cache;
+    }
+
+    return $ts;
+}
+
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */

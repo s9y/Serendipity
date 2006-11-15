@@ -270,7 +270,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $_GET['serendipity']['action'] = 'read';
     $_GET['serendipity']['id']     = $id;
 
-    $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . time() : ''), true);
+    $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : ''), true);
     if (is_array($title)) {
         $serendipity['head_title']    = htmlspecialchars($title[0]);
         $serendipity['head_subtitle'] = htmlspecialchars($serendipity['blogTitle']);

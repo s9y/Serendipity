@@ -181,7 +181,7 @@ class serendipity_calendar_plugin extends serendipity_plugin {
         $cond = array();
         $cond['and']     = "WHERE e.timestamp  >= " . serendipity_serverOffsetHour($firstts, true) . "
                               AND e.timestamp  <= " . serendipity_serverOffsetHour($endts, true) . "
-                                  " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . time() : '') . "
+                                  " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . serendipity_db_time() : '') . "
                               AND e.isdraft     = 'false'";
 
         serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => false, 'noSticky' => false, 'source' => 'calendar'));
@@ -1440,7 +1440,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
                                             WHERE ec.categoryid = c.categoryid
                                               AND ec.entryid = e.id
                                               AND e.isdraft = 'false'
-                                                  " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . time() : '') . "
+                                                  " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . serendipity_db_time() : '') . "
                                             GROUP BY c.categoryid, c.category_name
                                             ORDER BY postings DESC";
             $category_rows  = serendipity_db_query($cat_sql);

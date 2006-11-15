@@ -3,6 +3,12 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Huge SQL improvement by "caching" the current timestamp for
+      5 minutes, so that an SQL string for the central logic will
+      stay the same for a 5 minute window, thus relying on the DB-Server
+      to cache query results more efficiently. Major thanks to
+      Matthew Groeninger.
+
     * Enhanced nl2br plugin so that it will NOT put breaks into pre-
       defined tags like <pre>, <code> etc. Not enabled by default.
       Thanks to Brendon K from the forums!
