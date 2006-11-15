@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_da.inc.php 1399 2006-08-18 12:01:25Z garvinhicking $
+<?php # $Id: serendipity_lang_da.inc.php 1475 2006-11-02 11:26:10Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Tom Sommer, <ts@dreamcoder.dk>
@@ -770,7 +770,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Vis andre brugeres media filer');
 @define('CHARSET_NATIVE', 'Native');
 @define('INSTALL_CHARSET', 'Karaktersæt valg');
-@define('INSTALL_CHARSET_DESC', 'Her kan du vælge mellem UTF-8 eller \'native\' (lokalt,  f.eks. ISO-8859-1) karaktersæt. Nogle sprog har kun UTF-8 oversættelsen, så at sætte valget til \'native\' vil ikke have nogen effekt. UTF-8 anbefales til nyinstallationer. Lad være med at ændre denne indstilling hvis du allerede har lavet artikler med special karakterer - det kan medføre dine artikler vises forkert. Læs mere om alt dette på <a href="http://www.s9y.org/index.php?node=46">http://www.s9y.org/index.php?node=46</a>');
+@define('INSTALL_CHARSET_DESC', 'Her kan du vælge mellem UTF-8 eller \'native\' (lokalt,  f.eks. UTF-8) karaktersæt. Nogle sprog har kun UTF-8 oversættelsen, så at sætte valget til \'native\' vil ikke have nogen effekt. UTF-8 anbefales til nyinstallationer. Lad være med at ændre denne indstilling hvis du allerede har lavet artikler med special karakterer - det kan medføre dine artikler vises forkert. Læs mere om alt dette på <a href="http://www.s9y.org/index.php?node=46">http://www.s9y.org/index.php?node=46</a>');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Aktiver Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'Hvis aktiveret kan plugins "hægte" sig på kalenderen og fremhæve deres egne events. Aktiver kun hvis du har installeret plugins der kræver dette, da det forringer performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Serendipity\'s XML-RPC API interface leveres ikke længere sammen med Serendipity på grund af gentagne sikkerhedsproblemer med dette API. Du er derfor nødt til at installere XML-RPC pluginet for at kunne bruge XML-RPC API. URL\'en i dine programmer ændres IKKE - så snart pluginet er installeret vil du igen være istand til at bruge dette API.');
