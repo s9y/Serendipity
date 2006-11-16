@@ -20,7 +20,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -129,7 +129,7 @@ class serendipity_event_nl2br extends serendipity_event
                 foreach ($this->markup_elements as $temp) {
                     if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
                             !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                            !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance]) &&
+                            !in_array($this->instance, (array)$serendipity['POST']['properties']['disable_markups']) &&
                             !$eventData['properties']['ep_no_nl2br'] &&
                             !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
 
