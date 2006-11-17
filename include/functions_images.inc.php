@@ -308,7 +308,7 @@ function serendipity_deleteImage($id) {
 
     $file   = serendipity_fetchImageFromDatabase($id);
 
-    if (!is_array($file) || !isset($file['path'])) {
+    if (!is_array($file)) {
         printf(FILE_NOT_FOUND . '<br />', $id);
         return false;
     }
