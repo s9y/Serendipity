@@ -13,7 +13,7 @@
 @define('WYSIWYG_LANG', 'en');
 @define('NUMBER_FORMAT_DECIMALS', '2');
 @define('NUMBER_FORMAT_DECPOINT', '.');
-@define('NUMBER_FORMAT_THOUSANDS', ',');
+@define('NUMBER_FORMAT_THOUSANDS', '٫');
 @define('LANG_DIRECTION', 'rtl');
 
 @define('SERENDIPITY_ADMIN_SUITE', 'بخش مدیریت سرندیپیتی');
@@ -392,8 +392,8 @@
 @define('INSTALL_WYSIWYG_DESC', 'آیا می خواهید از ویراشگر WYSIWYG استفاده کنید؟ (در IE5+، و مقداری در Mozilla 1.3+ قابل مشاهده می باشد)');
 @define('INSTALL_XHTML11', 'قبول کردن اجباری XHTML 1.1');
 @define('INSTALL_XHTML11_DESC', 'آیا تمایل دارید XHTML 1.1 را به صورت اجباری اعمال کنید (احتمال وجود اشکال در برخی از مرورگر های قدیمی وجود دارد)');
-@define('INSTALL_POPUP', 'توانایی استفاده از پنجره های popup');
-@define('INSTALL_POPUP_DESC', 'آیا تمایل دارید که برای نظرات و دنبالک ها از پنجره های popup استفاده شود؟');
+@define('INSTALL_POPUP', 'توانایی استفاده از پنجره های بازشونده');
+@define('INSTALL_POPUP_DESC', 'آیا تمایل دارید که برای نظرات و دنبالک ها از پنجره های بازشونده استفاده شود؟');
 @define('INSTALL_EMBED', 'آیا سرندیپیتی جاسازی شده است؟');
 @define('INSTALL_EMBED_DESC', 'اگر می خواهید سرندیپیتی را در صفحه ای دیگر جاسازی کنید، مقدار این گزینه را "بله" وارد کنید تا فقط محتویات صفحه چاپ شوند.!');
 @define('INSTALL_TOP_AS_LINKS', 'نمایش بیشترین بینندگان و بیشترین خروج ها به صورت لینک؟');
@@ -823,12 +823,12 @@
 @define('CURRENT_AUTHOR', 'نویسنده فعلی');
 
 @define('WORD_NEW', 'جدید');
-@define('SHOW_MEDIA_TOOLBAR', 'Show toolbar within media selector popup?');
-@define('MEDIA_KEYWORDS', 'Media keywords');
-@define('MEDIA_KEYWORDS_DESC', 'Enter a list of ";" separated words that you want to use as pre-defined keywords for media items.');
+@define('SHOW_MEDIA_TOOLBAR', 'نوار ابزار در صفحهء باز شوندهء رسانه ها نمایش داده شود؟');
+@define('MEDIA_KEYWORDS', 'کلمات کلیدی');
+@define('MEDIA_KEYWORDS_DESC', 'لیستی از کلمات را وارد کنید و در بین کلمات از علامت ";" استفاده کنید.');
 @define('MEDIA_EXIF', 'خواندن اطلاعات EXIF/JPEG تصویر');
-@define('MEDIA_EXIF_DESC', 'If enabled, existing EXIF/JPEG metadata of images will be parsed and stored in the database for display in the media gallery.');
-@define('MEDIA_PROP', 'Media properties');
+@define('MEDIA_EXIF_DESC', 'در صورت فعال بودن، لیست اطلاعات موجود در EXIF/JPEG تصاویر، برای نمایش داده شدن در بخش گالری، در پایگاه داده ذخیره می شود.');
+@define('MEDIA_PROP', 'اطلاعات رسانه');
 
 
 @define('GO_ADD_PROPERTIES', 'اطلاعات را وارد کن');
@@ -837,53 +837,53 @@
 @define('MEDIA_PROPERTY_COMMENT1', 'نظر کوتاه');
 @define('MEDIA_PROPERTY_COMMENT2', 'نظر بلند');
 @define('MEDIA_PROPERTY_TITLE', 'تیتر');
-@define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
-@define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
+@define('MEDIA_PROP_DESC', 'لیستی از مشخصات را وارد کرده و هر مشخصه را با ";" جدا کنید');
+@define('MEDIA_PROP_MULTIDESC', '(شما می توانید با افزودن عبارت ":MULTI" بعد از هر گزینه مشخص کنید گه این گزینه شامل متنی طولانی می باشد)');
 
-@define('STYLE_OPTIONS_NONE', 'This theme/style has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Theme/Style options');
+@define('STYLE_OPTIONS_NONE', 'این پوسته تنظیماتی ندارد. برای تغییر تنظیمات این پوسته، راهنمای تکنیکی مربوط به این بخش رو در سایت www.s9y.org مطالعه کنید.');
+@define('STYLE_OPTIONS', 'انتخابات پوسته');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'تعداد کل: %d افزونه.');
 
-@define('SYNDICATION_RFC2616', 'Activate strict RFC2616 RSS-Feed compliance');
+@define('SYNDICATION_RFC2616', 'فعال کردن RSS-Feed طبق استاندارد RFC2616');
 @define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also vioaltes RFC2616. So if you set this option to "TRUE" you will compliy with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. Reference: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
-@define('MEDIA_PROPERTY_DATE', 'Associated Date');
-@define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
-@define('FILENAME_REASSIGNED', 'Automagically assigned new file name: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Max. file upload size');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Enter the maximum filesize for uploaded files in bytes. This setting can be overruled by server-side settings in PHP.ini: upload_max_filesize, post_max_size, max_input_time all take precedence over this option. An empty string means to only use the server-side limits.');
-@define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
-@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. width of image files for upload');
-@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Enter the maximum image width in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. height of image files for upload');
-@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Enter the maximum image height in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('MEDIA_PROPERTY_DATE', 'تاریخ صعودی');
+@define('MEDIA_PROPERTY_RUN_LENGTH', 'طول اجرا');
+@define('FILENAME_REASSIGNED', 'نامگذاری خودکار: %s');
+@define('MEDIA_UPLOAD_SIZE', 'بیشترین حجم فایل ارسالی');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'بیشترین حجم فایل ارسالی را به بایت وارد کنید. این گزینه می تواند توسط متغیر های موجود فایل php.ini بازنویسی شود، مثل: upload_max_filesize، post_max_size، max_input_time. مقدار تهی برای این گزینه به مفهوم تبعیت از انتخاب های موجود در php.ini می باشد.');
+@define('MEDIA_UPLOAD_SIZEERROR', 'خطا: شما نمی توانید فایلی با حجمی بیشتر از %s بایت ارسال کنید!');
+@define('MEDIA_UPLOAD_MAXWIDTH', 'بیشترین طول تصویر');
+@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'بیشترین طول تصویر برای بالاگذاری را بر اساس پیکسل وارد کنید.');
+@define('MEDIA_UPLOAD_MAXHEIGHT', 'بیشترین عرض تصویر');
+@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'بیشترین عرض تصویر برای بالاگذاری را بر اساس پیکسل وارد کنید.');
+@define('MEDIA_UPLOAD_DIMERROR', 'خطا: شما نمی توانید تصویری با  ابعاد بیشتر از %s x %s پیکسل ارسال کنید!');
 
-@define('MEDIA_TARGET', 'Target for this link');
-@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
-@define('MEDIA_ENTRY', 'Isolated Entry');
-@define('MEDIA_TARGET_BLANK', 'Popup window (via target=_blank)');
+@define('MEDIA_TARGET', 'هدف این لینک (target)');
+@define('MEDIA_TARGET_JS', 'پنجره بازشونده (از طریق جاوا اسکریپت، با ابعاد مورد نیاز)');
+@define('MEDIA_ENTRY', 'ارسال مجزا شده');
+@define('MEDIA_TARGET_BLANK', 'پنجره بازشونده (از طریق target=_blank)');
 
-@define('MEDIA_DYN_RESIZE', 'Allow dynamic image resizing?');
-@define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
+@define('MEDIA_DYN_RESIZE', 'اجازه تغییر خودکار تصویر؟');
+@define('MEDIA_DYN_RESIZE_DESC', 'در صورت فعال بودن، ابعاد ارسال شده را برای ابعاد تصویر در نظر گرفته می شود. نتیجهء کار نکهداری می شود، پس شما می توانید آرشیو کامل تری ایجاد کنید.');
 
-@define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
-@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
-@define('PLUGIN_ACTIVE', 'Active');
-@define('PLUGIN_INACTIVE', 'Inactive');
-@define('PREFERENCE_USE_JS', 'Enable advanced JS usage?');
-@define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
+@define('MEDIA_DIRECTORY_MOVED', 'شاخه و فایل ها با موفقیت به %s جابجا شدند!');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'شاخه و فایل ها نمی توانند به شاخه %s جابجا شوند!');
+@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'در پایگاه داده هایی غیر از MySQL مرور ارسال ها برای تغییر آدرس های قدیمی و تبدیلشون به آدرس های جدید ممکن نیست. و شما باید این عمل را خودتان انجام دهید. در عین حال می توانید آدرس شاخه را به نام قبلی تغییر دهید.');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'آدرس تغییر یافته در %s مطلب های شما پیدا و جایگزین شد.');
+@define('PLUGIN_ACTIVE', 'فعال');
+@define('PLUGIN_INACTIVE', 'غیرفعال');
+@define('PREFERENCE_USE_JS', 'استفاده پیشرفته از جاوا اسکریپت؟');
+@define('PREFERENCE_USE_JS_DESC', 'در صورت فعال بودن قسمت هایی که از جاوا اسکریپت پیشرفته استفاده می کنند فعال می شود، مانند بخش مدیریت افزونه ها که می توانید از drag and drop برای مرتب سازی افزونه ها کمک بگیرید.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
+@define('PREFERENCE_USE_JS_WARNING', '(این صفحه از جاوا اسکریپت پیشرفته استفاده می کند. اگر با این صفحه مشکل پیدا کردید، از بخش تنظیمات شخصی، استفاده پیشرفته از جاوا اسکریپت را غیر فعال کنید یا اینکه فعالیت جاوا اسکریپت را داخل مرورگر خود غیر فعال کنید)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'مسیر نظرات');
+@define('PERM_SET_CHILD', 'این سطح دسترسی برای تمامی زیر شاخه ها هم تنظیم شود');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'افزونه ها ممنوع شده');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'واقعه های ممنوع شده');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'فعال کردن افزونه مدیریت دسترسی ها برای گروه های کاربری؟');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'اگر این گزینه فعال باشد، شما می توانید به گروه های کاربری امکان مشاهده و کار کردن با افزونه های مختلف را ارایه دهید.');
+@define('DELETE_SELECTED_ENTRIES', 'حذف مطالب انتخاب شده');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'به نویسندگان حداقل X مطلب نشان داده شود');
