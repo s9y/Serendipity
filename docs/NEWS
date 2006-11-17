@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Fixed a bug in lowercased DB key names in the plugin API table,
+      which prevented postgresql for properly printing a plugin list
+      in some setups (garvinhicking)
+
     * Huge SQL improvement by "caching" the current timestamp for
       5 minutes, so that an SQL string for the central logic will
       stay the same for a 5 minute window, thus relying on the DB-Server

@@ -431,7 +431,7 @@ class serendipity_plugin_api {
         if (empty($pluginPath)) {
             $pluginPath = $name;
         }
-        
+
         $file = false;
 
         // Security constraint
@@ -593,6 +593,9 @@ class serendipity_plugin_api {
                                                  p.plugintype     = '" . serendipity_db_escape_string($type) . "'");
             if (is_array($data)) {
                 foreach($data AS $p) {
+                    if (isset($p['pluginpath'])) {
+                        $p['pluginPath'] = $p['pluginpath'];
+                    }
                     if (!isset($pluginlist[$p['plugin_file']])) {
                         $pluginlist[$p['plugin_file']] = $p;
                     }
@@ -683,6 +686,9 @@ class serendipity_plugin_api {
             unset($data['true_name']);
             unset($data['customURI']);
             unset($data['groups']);
+            if (isset($data['pluginpath'])) {
+                $data['pluginPath'] = $data['pluginpath'];
+            }
             $data['requirements'] = serialize($data['requirements']);
         }
 
@@ -751,7 +757,7 @@ class serendipity_plugin_api {
         }
 
         $sql .= "WHERE name='$name' $admin";
-        
+
         return serendipity_db_query($sql);
     }
 
