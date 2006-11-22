@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_fa.inc.php 1460 2006-10-26 20:05:04Z garvinhicking $
+<?php # $Id: serendipity_lang_fa.inc.php 1514 2006-11-17 20:57:15Z omidmottaghi $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved. See LICENSE file for licensing details
 # this translation, translated by Omid Mottaghi <http://oxygenws.com>
@@ -887,3 +887,5 @@
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'اگر این گزینه فعال باشد، شما می توانید به گروه های کاربری امکان مشاهده و کار کردن با افزونه های مختلف را ارایه دهید.');
 @define('DELETE_SELECTED_ENTRIES', 'حذف مطالب انتخاب شده');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'به نویسندگان حداقل X مطلب نشان داده شود');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');

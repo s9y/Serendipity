@@ -884,3 +884,5 @@
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Aktiver plugin adgangskontrol for grupper?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Mulighed for at bestemme hvilke grupper der må anvende hvilke plugins.');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');

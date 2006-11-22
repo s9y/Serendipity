@@ -3,6 +3,9 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Added bookmarklet to Serendipity core, added to the "Further links"
+      welcome screen. Thanks to stm999999999! (garvinhicking)
+
     * Fixed a bug in lowercased DB key names in the plugin API table,
       which prevented postgresql for properly printing a plugin list
       in some setups (garvinhicking)
