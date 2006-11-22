@@ -895,3 +895,5 @@
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Se a opção "Plugin ACL for usergroups" está activada na configuração, você pode especificar que grupo estão autorizados a executar certos plugins/eventos.');
 @define('DELETE_SELECTED_ENTRIES', 'Eliminar entradas seleccionadas');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Mostar apenas Autores com apenas X artigos');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');

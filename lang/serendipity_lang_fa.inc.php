@@ -887,3 +887,5 @@
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'اگر این گزینه فعال باشد، شما می توانید به گروه های کاربری امکان مشاهده و کار کردن با افزونه های مختلف را ارایه دهید.');
 @define('DELETE_SELECTED_ENTRIES', 'حذف مطالب انتخاب شده');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'به نویسندگان حداقل X مطلب نشان داده شود');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');

@@ -903,3 +903,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Si la opción "Extensión ACL para grupos de usuarios" es activada en la configuración, puedes especificar que grupos de usuarios son capaces de ejecutar ciertas extensiones/eventos.');
 @define('DELETE_SELECTED_ENTRIES', 'Eliminar las entradas seleccionadas');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Sólo mostrar aquellos autores con al menos X artículos');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');

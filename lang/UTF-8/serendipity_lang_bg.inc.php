@@ -874,3 +874,5 @@
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Ако опцията "Plugin ACL за потребителски групи" е позволена, ще можете да указвате кои потребителски групи имат позволението да изпълняват дадени събитийни и странични приставки.');
 @define('DELETE_SELECTED_ENTRIES', 'Изтриване на избраните статии');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Показване само на автори с най-малко X статии');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
