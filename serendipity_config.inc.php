@@ -268,8 +268,12 @@ if (IS_installed === true) {
             header("HTTP/1.0 401 Unauthorized");
             exit;
         } else {
-            $serendipity['POST']['user'] = $_SERVER['PHP_AUTH_USER'];
-            $serendipity['POST']['pass'] = $_SERVER['PHP_AUTH_PW'];
+            if (!isset($serendipity['POST']['user'])) {
+                $serendipity['POST']['user'] = $_SERVER['PHP_AUTH_USER'];
+            }
+            if (!isset($serendipity['POST']['pass'])) {
+                $serendipity['POST']['pass'] = $_SERVER['PHP_AUTH_PW'];
+            }
         }
     } elseif (isset($_REQUEST['http_auth_user']) && isset($_REQUEST['http_auth_pw'])) {
         $serendipity['POST']['user'] = $_REQUEST['http_auth_user'];

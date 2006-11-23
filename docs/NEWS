@@ -3,6 +3,10 @@
 Version 1.1 ()
 ------------------------------------------------------------------------
 
+    * Small bugfixes: Allow to use different login credentials than the
+      current HTTP Basic-Auth, if used. Order categories by name in
+      single entry view (garvinhicking)
+
     * Added bookmarklet to Serendipity core, added to the "Further links"
       welcome screen. Thanks to stm999999999! (garvinhicking)
 

@@ -132,7 +132,8 @@ function &serendipity_fetchEntryCategories($entryid) {
                     FROM {$serendipity['dbPrefix']}category AS c
               INNER JOIN {$serendipity['dbPrefix']}entrycat AS ec
                       ON ec.categoryid = c.categoryid
-                   WHERE ec.entryid = {$entryid}";
+                   WHERE ec.entryid = {$entryid}
+                ORDER BY c.category_name ASC";
 
         $cat =& serendipity_db_query($query);
         if (!is_array($cat)) {
