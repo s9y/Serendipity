@@ -26,7 +26,7 @@ header('Content-Type: text/html; charset='. LANG_CHARSET);
 if ($serendipity['expose_s9y']) {
     header('X-Blog: Serendipity'); // Used for installer detection
 }
-    
+
 if ($serendipity['CacheControl']) {
     if (!empty($HTTP_SERVER_VARS['SERVER_SOFTWARE']) && strstr($HTTP_SERVER_VARS['SERVER_SOFTWARE'], 'Apache/2')) {
         header('Cache-Control: no-cache, pre-check=0, post-check=0');
@@ -335,7 +335,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     header("Location: {$base}serendipity_admin.php");
     exit;
 } else if (preg_match(PAT_ARCHIVE, $uri)) {
-    $serendipity['view'] = 'archives';
+    $serendipity['view'] = 'archive';
     $serendipity['GET']['action'] = 'archives';
     $_args = $serendipity['uriArguments'];
     /* Attempt to locate hidden variables within the URI */
