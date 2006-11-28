@@ -484,7 +484,6 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     /* Attempt to locate hidden variables within the URI */
     $search = array();
-    print_r($_args);
     foreach ($_args as $k => $v){
         if ($v == PATH_COMMENTS) {
             continue;
