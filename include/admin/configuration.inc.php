@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 umask(0000);
 $umask = 0775;
 @define('IN_installer', true);
@@ -47,7 +51,7 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
                         $permalinkNew[] = $serendipity[$permitem['var']];
                     }
                 }
-            }            
+            }
 
             if (serendipity_checkPermission('siteConfiguration') && serialize($permalinkOld) != serialize($permalinkNew)) {
                 printf(ATTEMPT_WRITE_FILE, $serendipity['serendipityPath'] . '.htaccess');

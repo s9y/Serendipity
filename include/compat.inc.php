@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (defined('S9Y_FRAMEWORK_COMPAT')) {
     return;
 }
@@ -38,11 +42,11 @@ function memSnap($tshow = '') {
     static $avail    = null;
     static $show     = true;
     static $memUsage = 0;
-    
+
     if (!$show) {
         return false;
     }
-    
+
     if ($avail === false) {
         return true;
     } elseif ($avail === null) {
@@ -53,11 +57,11 @@ function memSnap($tshow = '') {
             return false;
         }
     }
-    
+
     if ($memUsage === 0) {
         $memUsage = $avail;
     }
-    
+
     $current = memory_get_usage();
     echo '[' . date('d.m.Y H:i') . '] ' . number_format($current - $memUsage, 2, ',', '.') . ' label "' . $tshow . '", totalling ' . number_format($current, 2, ',', '.') . '<br />' . "\n";
     $memUsage = $current;
@@ -222,7 +226,7 @@ function serendipity_getCharset() {
             $charset = '';
         }
     }
-    
+
     if (!empty($serendipity['POST']['charset'])) {
         if ($serendipity['POST']['charset'] == 'UTF-8/') {
             $charset = 'UTF-8/';

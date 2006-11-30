@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 umask(0000);
 $umask = 0775;
 @define('IN_installer', true);

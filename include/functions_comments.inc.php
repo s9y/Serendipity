@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (defined('S9Y_FRAMEWORK_COMMENTS')) {
     return;
 }
@@ -126,7 +130,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
     } else {
         $limit = '';
     }
-    
+
     if ($type == 'comments' || empty($type)) {
         $type = 'NORMAL';
     } elseif ($type == 'trackbacks') {
@@ -142,7 +146,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
     if (!$showAll) {
         $and .= ' AND co.status = \'approved\'';
     }
-    
+
     $and .= $where;
 
     if ($serendipity['dbType'] == 'postgres') {
@@ -332,7 +336,7 @@ function serendipity_printCommentsByAuthor() {
     }
     $sql_limit = $serendipity['fetchLimit'] * ($serendipity['GET']['page']-1) . ',' . $serendipity['fetchLimit'];
     $c = serendipity_fetchComments(null, $sql_limit, 'co.entry_id DESC, co.id ASC', false, $type, $sql_where);
-    
+
     $entry_comments = array();
     foreach($c as $i => $comment) {
         if (!isset($entry_comments[$comment['entry_id']])) {
@@ -341,7 +345,7 @@ function serendipity_printCommentsByAuthor() {
         }
         $entry_comments[$comment['entry_id']]['comments'][] = $comment;
     }
-    
+
     foreach($entry_comments AS $entry_id => $_data) {
         $entry_comments[$entry_id]['tpl_comments'] =& serendipity_printComments($_data['comments'], VIEWMODE_LINEAR, 0, null, 'COMMENTS', 'comments.tpl');
     }
@@ -356,10 +360,10 @@ function serendipity_printCommentsByAuthor() {
         $and .= ' AND co.status = \'approved\'';
     }
 
-    $cc = serendipity_db_query("SELECT count(co.id) AS counter 
+    $cc = serendipity_db_query("SELECT count(co.id) AS counter
                                   FROM {$serendipity['dbPrefix']}comments AS co
-                                 WHERE co.entry_id > 0 
-                                   AND co.type LIKE '" . $type . "' 
+                                 WHERE co.entry_id > 0
+                                   AND co.type LIKE '" . $type . "'
                                    AND co.status = 'approved' " . $sql_where . "
                               GROUP BY co.author", true, 'assoc');
     if (!isset($cc['counter'])) {

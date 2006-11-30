@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (defined('S9Y_FRAMEWORK_IMAGES')) {
     return;
 }
@@ -3315,15 +3319,15 @@ function serendipity_checkDirUpload($dir) {
         return true;
     }
     */
-    
+
     $allowed  = serendipity_ACLGet(0, 'directory', 'write', $dir);
     $mygroups = serendipity_checkPermission(null, null, true);
-    
+
     // Usergroup "0" always means that access is granted. If no array exists, no ACL restrictions have been set and all is fine.
     if (!is_array($allowed) || isset($allowed[0])) {
         return true;
     }
-    
+
     if (!is_array($mygroups)) {
         return true;
     }
@@ -3334,6 +3338,6 @@ function serendipity_checkDirUpload($dir) {
             break;
         }
     }
-    
+
     return false;
 }
