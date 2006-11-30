@@ -2,11 +2,15 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
- if (defined('S9Y_FRAMEWORK_CALENDARS')) {
-     return;
- }
- @define('S9Y_FRAMEWORK_CALENDARS', true);
- 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+if (defined('S9Y_FRAMEWORK_CALENDARS')) {
+    return;
+}
+@define('S9Y_FRAMEWORK_CALENDARS', true);
+
 /**
  * Gregorian to Persian Convertor
  *
@@ -20,42 +24,42 @@
 function g2p($g_y, $g_m, $g_d){
     $g_days_in_month = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
     $j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
-    
+
     $gy = $g_y-1600;
     $gm = $g_m-1;
     $gd = $g_d-1;
-    
+
     $g_day_no = 365*$gy+floor(($gy+3)/4)-floor(($gy+99)/100)+floor(($gy+399)/400);
-    
+
     for ($i=0; $i < $gm; ++$i){
         $g_day_no += $g_days_in_month[$i];
     }
-        
+
     if ($gm>1 && (($gy%4==0 && $gy%100!=0) || ($gy%400==0))){
         /* leap and after Feb */
         ++$g_day_no;
     }
-        
+
     $g_day_no += $gd;
     $j_day_no = $g_day_no-79;
     $j_np = floor($j_day_no/12053);
     $j_day_no %= 12053;
     $jy = 979+33*$j_np+4*floor($j_day_no/1461);
     $j_day_no %= 1461;
-    
+
     if ($j_day_no >= 366) {
         $jy += floor(($j_day_no-1)/365);
         $j_day_no = ($j_day_no-1)%365;
     }
     $j_all_days = $j_day_no+1;
-    
+
     for ($i = 0; $i < 11 && $j_day_no >= $j_days_in_month[$i]; ++$i) {
         $j_day_no -= $j_days_in_month[$i];
     }
-    
+
     $jm = $i+1;
     $jd = $j_day_no+1;
-    
+
     return array($jy, $jm, $jd, $j_all_days);
 }
 
@@ -107,10 +111,10 @@ function p2g($j_y, $j_m, $j_d){
     }
     $gm = $i+1;
     $gd = $g_day_no+1;
-        
+
     return array($gy, $gm, $gd);
 }
-    
+
 /**
  * Format a string according to Persian calendar (UTF)
  *
@@ -121,11 +125,11 @@ function p2g($j_y, $j_m, $j_d){
  * @return  string  Formatted local time/date according to locale settings
  */
 function persian_strftime_utf($format, $timestamp='') {
-    
+
 	if($timestamp==''){
     	$timestamp = mktime();
     }
-    
+
     $g_d=date('j', $timestamp);
     $g_m=date('n', $timestamp);
     $g_y=date('Y', $timestamp);
@@ -155,12 +159,12 @@ function persian_strftime_utf($format, $timestamp='') {
                            'Wed' => '5',
                            'Thu' => '6',
                            'Fri' => '7');
-    
+
     // calculate string
     $output_str='';
-    
+
     for ($i=0; $i<strlen($format); $i++){
-        
+
         if($format[$i]=='%'){
             $i++;
             switch($format[$i]){
@@ -256,7 +260,7 @@ function persian_strftime_utf($format, $timestamp='') {
             $output_str.=$format[$i];
         }
     }
-    
+
     return $output_str;
 }
 
@@ -270,24 +274,24 @@ function persian_strftime_utf($format, $timestamp='') {
  * @return  string  Formatted local time/date
  */
 function persian_date_utf($format, $timestamp='') {
-    
+
     if($timestamp==''){
     	$timestamp = mktime();
     }
-	
+
 	$g_d=date('j', $timestamp);
     $g_m=date('n', $timestamp);
     $g_y=date('Y', $timestamp);
-    
+
     list($jy, $jm, $jd, $j_all_days) = g2p($g_y, $g_m, $g_d);
-    
+
     $j_days_in_month = array(0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
     $leap = 0;
     if ($g_m>1 && (($g_y%4==0 && $g_y%100!=0) || ($g_y%400==0))){
     	$j_days_in_month[12]++;
     	$leap = 1;
     }
-    
+
     $j_month_name = array('', 'فروردین', 'اردیبهشت', 'خرداد', 'تیر',
             'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند');
     $j_week_name = array('Saturday' => 'شنبه',
@@ -311,12 +315,12 @@ function persian_date_utf($format, $timestamp='') {
                            'Wed' => '5',
                            'Thu' => '6',
                            'Fri' => '7');
-    
+
     // calculate string
     $output_str='';
-    
+
     for ($i=0; $i<strlen($format); $i++){
-        
+
         if($format[$i]!='\\'){
             switch($format[$i]){
                 case 'd':
@@ -355,7 +359,7 @@ function persian_date_utf($format, $timestamp='') {
                 case 't':
                     $output_str.=$j_days_in_month[$jm];
                     break;
-                case 'L': 
+                case 'L':
                 	$output_str.=$leap;
                     break;
                 case 'o':
@@ -420,7 +424,7 @@ function persian_date_utf($format, $timestamp='') {
             $output_str.=$format[$i];
         }
     }
-    
+
     return $output_str;
 }
 
@@ -441,24 +445,24 @@ function persian_date_utf($format, $timestamp='') {
  */
 function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', $is_dst=-1){
 	$j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
-	
+
 	if ( (string) $hour == '') { $hour = persian_date_utf('H'); }
 	if ( (string) $min  == '') { $min  = persian_date_utf('i'); }
 	if ( (string) $sec  == '') { $sec  = persian_date_utf('s'); }
 	if ( (string) $day  == '') { $day  = persian_date_utf('j'); }
 	if ( (string) $mon  == '') { $mon  = persian_date_utf('n'); }
 	if ( (string) $year == '') { $year = persian_date_utf('Y'); }
-	
-	/* 
+
+	/*
 	   an ugly, beta code snippet to support days <= zero!
 	   it should work, but days in one or more months should calculate!
 	*/
-	
+
 	/*
 	if($day <= 0){
 		// change sign
 		$day = abs($day);
-		
+
 		// calculate months and days that shall decrease
 		// this do-while has a lot of errors!!!
 		do{
@@ -466,7 +470,7 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
 			$months  = floor($day/30);
 			$days = $day % 30;
 		}while();
-		
+
 		$mon -= $months;
 		$day -= $days;
 		if ($day < 1) {
@@ -478,11 +482,11 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
 	if($mon <= 0){
 		// change sign
 		$mon = abs($mon);
-		
+
 		// calculate years and months that shall decrease
 		$years  = floor($mon/12);
 		$months = $mon % 12;
-		
+
 		$year -= $years;
 		$mon  -= $months;
 		if ($mon < 1) {
@@ -490,7 +494,7 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
 			$mon += 12;
 		}
 	}
-	
+
 	if ($day < 1) {
 		$temp_month = $mon-1;
 		$temp_year  = $year;
@@ -505,7 +509,7 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
     	}
 		$day += $j_days_in_month[$temp_month];
 	}
-	
+
     list($year, $mon, $day)=p2g($year, $mon, $day);
     return mktime($hour, $min, $sec, $mon, $day, $year, $is_dst);
 }

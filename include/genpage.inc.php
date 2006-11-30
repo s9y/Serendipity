@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (!defined('S9Y_FRAMEWORK')) {
     include('serendipity_config.inc.php');
 }
@@ -97,7 +101,7 @@ if ($serendipity['smarty_raw_mode']) {
         case 'comments':
             serendipity_printCommentsByAuthor();
             // use 'content_message' for pagination?
-            
+
             break;
 
         // Show the archive

@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (defined('S9Y_FRAMEWORK_UPGRADER')) {
     return;
 }
@@ -89,7 +93,7 @@ function serendipity_fixPlugins($case) {
                 'serendipity_event_searchhighlight',
                 'serendipity_event_textile'
             );
-            
+
             $elements = array(
                 'ENTRY_BODY',
                 'EXTENDED_BODY',
@@ -102,24 +106,24 @@ function serendipity_fixPlugins($case) {
                 $where[] = "name LIKE '$plugin:%'";
             }
 
-            $rows = serendipity_db_query("SELECT name, value, authorid 
-                                            FROM {$serendipity['dbPrefix']}config  
+            $rows = serendipity_db_query("SELECT name, value, authorid
+                                            FROM {$serendipity['dbPrefix']}config
                                            WHERE " . implode(' OR ', $where));
             if (!is_array($rows)) {
                 return false;
             }
-            
+
             foreach($rows AS $row) {
                 if (preg_match('@^(serendipity_event_.+):([a-z0-9]+)/(.+)@i', $row['name'], $plugin_data)) {
                     foreach($elements AS $element) {
                         if ($plugin_data[3] != constant($element)) {
                             continue;
                         }
-                        
+
                         $new = $plugin_data[1] . ':' . $plugin_data[2] . '/' . $element;
                         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}config
                                                  SET name     = '$new'
-                                               WHERE name     = '{$row['name']}' 
+                                               WHERE name     = '{$row['name']}'
                                                  AND value    = '{$row['value']}'
                                                  AND authorid = '{$row['authorid']}'");
                     }

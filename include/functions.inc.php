@@ -2,6 +2,10 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 if (defined('S9Y_FRAMEWORK_FUNCTIONS')) {
     return;
 }
@@ -323,7 +327,7 @@ function serendipity_walkRecursive($ary, $child_name = 'id', $parent_name = 'par
     if ($depth !== 0) {
         return true;
     }
-    
+
     if (count($_remain) > 0) {
         // Remaining items need to be appended
         foreach($_remain AS $key => $data) {
@@ -1146,7 +1150,7 @@ function &serendipity_pickKey(&$array, $key, $default) {
 function serendipity_db_time() {
     static $ts    = null;
     static $cache = 300; // Seconds to cache
-    
+
     if ($ts === null) {
         $now = time();
         $ts = $now - ($now % $cache) + $cache;

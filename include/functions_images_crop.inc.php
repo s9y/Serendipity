@@ -258,7 +258,7 @@ class imgedit {
             $this->slice_to_x = $this->slice_from_x + $this->slice_width;
             $this->slice_to_y = $this->slice_from_y + $this->slice_height;
 
-            // TODO: 
+            // TODO:
             // - Operate also on PNG, TIFF etc.
             // - Support image magick
             // - Save file as new image!
@@ -283,7 +283,7 @@ class imgedit {
             rename($new_img_name, $this->img_name);
             $http_new_file = preg_replace('@^' . preg_quote($serendipity['serendipityPath'] . $serendipity['uploadPath']) . '@', '', $this->img_name);
             serendipity_makeThumbnail(basename($http_new_file), dirname($http_new_file) . '/');
-            
+
             $this->img_name   = $new_img_name;
             $this->img_width  = $new_img_width;
             $this->img_height = $new_img_height;
@@ -295,9 +295,9 @@ class imgedit {
     function increment($fullfile) {
         $d = dirname($fullfile) . '/';
         $f = basename($fullfile);
-        
+
         $f = time() . '.' . $f;
-        
+
         return $d . $f;
     }
 
@@ -391,7 +391,7 @@ class imgedit {
 
     // Set the template variables
     function setVars() {
-        
+
         $this->imgedit_smarty['zoombox_width'] =       $this->zoombox_width;
         $this->imgedit_smarty['zoombox_padding'] =     $this->zoombox_width + 20;
         $this->imgedit_smarty['area_width'] =          $this->area_width;
@@ -448,4 +448,3 @@ class imgedit {
         return true;
     }
 }
-?>
