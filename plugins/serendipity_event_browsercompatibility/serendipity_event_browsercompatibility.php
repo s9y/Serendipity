@@ -1,5 +1,10 @@
 <?php # $Id$
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -25,7 +30,7 @@ class serendipity_event_browsercompatibility extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('event_hooks',    array(
             'css' => true,
             'css_backend' => true,

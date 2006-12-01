@@ -1,5 +1,10 @@
 <?php # $Id: serendipity_plugin_comments.php 691 2005-11-13 06:58:40Z elf2000 $
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -22,7 +27,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_NAME);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -150,11 +155,11 @@ class serendipity_plugin_statistics extends serendipity_plugin
         $title       = $this->get_config('title', $this->title);
         $cachetime   = $this->get_config('cachetimeout', 60) * 60; // turn to seconds
         $cachef      = $serendipity['serendipityPath'] . 'templates_c/statistics_cache.html';
-        
+
         if (!file_exists($cachef) || filesize($cachef) == 0 || filemtime($cachef) < (time() - $cachetime)) {
             // Create statistics
-	 	   	list($year, $month, $day) = split('-', date('Y-m-d'));	        
-            
+	 	   	list($year, $month, $day) = split('-', date('Y-m-d'));
+
             $content = '';
             if (serendipity_db_bool($this->get_config('show_lastentry'))) {
                 $res = serendipity_db_query("SELECT timestamp FROM {$serendipity['dbPrefix']}entries WHERE isdraft = 'false' AND timestamp <= " . time() . " ORDER BY timestamp DESC LIMIT 1", true, 'assoc');

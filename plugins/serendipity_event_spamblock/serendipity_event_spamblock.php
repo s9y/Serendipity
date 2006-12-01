@@ -1,5 +1,10 @@
 <?php # $Id$
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -34,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.60');
+        $propbag->add('version',       '1.61');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -925,7 +930,7 @@ var $filter_defaults;
                     if (serendipity_db_bool($this->get_config('csrf', true))) {
                         echo serendipity_setFormToken('form');
                     }
-                    
+
                     // Check whether to allow comments from registered authors
                     if (serendipity_userLoggedIn() && $this->inGroup()) {
                         return true;

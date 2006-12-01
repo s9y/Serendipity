@@ -1,5 +1,10 @@
 <?php # $Id$
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -21,7 +26,7 @@ class serendipity_event_templatechooser extends serendipity_event
         $propbag->add('description', PLUGIN_EVENT_TEMPLATECHOOSER_DESC);
         $propbag->add('stackable',   false);
         $propbag->add('author',      'Evan Nemerson');
-        $propbag->add('version',     '1.3');
+        $propbag->add('version',     '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',

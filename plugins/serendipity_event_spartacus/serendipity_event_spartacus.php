@@ -8,6 +8,11 @@
 
  ***********/
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -34,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.8');
+        $propbag->add('version',       '2.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -46,7 +51,7 @@ class serendipity_event_spartacus extends serendipity_event
 
             'backend_templates_fetchlist'        => true,
             'backend_templates_fetchtemplate'    => true,
-            
+
             'backend_pluginlisting_header'         => true,
             'backend_pluginlisting_header_upgrade' => true
         ));

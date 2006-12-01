@@ -4,6 +4,11 @@
 /*  Authored by Tom Sommer, 2004  */
 /**********************************/
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -24,7 +29,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tom Sommer');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -196,7 +201,7 @@ class serendipity_event_searchhighlight extends serendipity_event
                     isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                     continue;
                 }
-                                
+
                 $element = &$eventData[$temp['element']];
 
                 foreach ( $queries as $word ) {
