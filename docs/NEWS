@@ -350,7 +350,7 @@ Version 1.1-alpha5()
    * Removed config option "XHTML11 compliance" and enabled by default
      now (garvinhicking)
 
-Version 1.0.4 ()
+Version 1.0.4 (December 1st, 2006)
 ------------------------------------------------------------------------
 
    * Fix local file inclusion bug on systems with two conditions:
