@@ -24,7 +24,7 @@ define('S9Y_CONFIG_USERTEMPLATE', S9Y_INCLUDE_PATH . 'include/tpl/config_persona
 
 define('IS_installed', file_exists('serendipity_config_local.inc.php') && (filesize('serendipity_config_local.inc.php') > 0));
 
-if (IS_installed === true && !defined('IN_serendipity')) {
+if (!defined('IN_serendipity')) {
     define('IN_serendipity', true);
 }
 
