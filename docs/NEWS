@@ -357,6 +357,9 @@ Version 1.0.4 (December 1st, 2006)
      register_globals=on AND missing .htaccess for restricting access to
      .inc.php files. (garvinhicking)
 
+   * Fixed problem in trackbacks using a formatted link (like through
+     trackexits plugin) to trackback to instead of the real one
+        
 Version 1.0.3 (November 7th, 2006)
 ------------------------------------------------------------------------
 
