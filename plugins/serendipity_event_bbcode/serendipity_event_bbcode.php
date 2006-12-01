@@ -1,5 +1,10 @@
 <?php # $Id$
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -19,7 +24,7 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_BBCODE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Jez Hancock, Garvin Hicking');
-        $propbag->add('version',       '2.06');
+        $propbag->add('version',       '2.07');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -162,7 +167,7 @@ class serendipity_event_bbcode extends serendipity_event
         static $pattern_query = '([^"\'\(\);]+?)';
 
         static $target = null;
-        
+
         if ($target === null) {
             $target = serendipity_db_bool($this->get_config('target'));
         }

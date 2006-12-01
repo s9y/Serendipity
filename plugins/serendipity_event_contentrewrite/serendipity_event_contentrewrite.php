@@ -1,5 +1,10 @@
 <?php # $Id$
 
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -30,7 +35,7 @@ class serendipity_event_contentrewrite extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_CONTENTREWRITE_DESCRIPTION);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
