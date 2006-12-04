@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_is.inc.php 1460 2006-10-26 20:05:04Z garvinhicking $
+<?php # $Id: serendipity_lang_is.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Örn Arnarson <orn@arnarson.net>
