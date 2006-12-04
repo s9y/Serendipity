@@ -1,4 +1,5 @@
 <?php
+exit;
 
 function help() {
     echo "This helper application lists all missing constants from plugin translations.\n\n";

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_fa.inc.php 1514 2006-11-17 20:57:15Z omidmottaghi $
+<?php # $Id: serendipity_lang_fa.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved. See LICENSE file for licensing details
 # this translation, translated by Omid Mottaghi <http://oxygenws.com>
