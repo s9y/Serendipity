@@ -1,5 +1,11 @@
 # $Id$
 
+Version 1.2 ()
+------------------------------------------------------------------------
+
+    * Introduce '%lowertitle%' permalink attribute to use lowercase
+      permalinks. (garvinhicking)
+
 Version 1.1 ()
 ------------------------------------------------------------------------
 

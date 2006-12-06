@@ -505,7 +505,7 @@ function serendipity_rewriteURL($path, $key='baseURL', $forceNone = false) {
  */
 function serendipity_makePermalink($format, $data, $type = 'entry') {
     global $serendipity;
-    static $entryKeys    = array('%id%', '%title%', '%day%', '%month%', '%year%');
+    static $entryKeys    = array('%id%', '%lowertitle%', '%title%', '%day%', '%month%', '%year%');
     static $authorKeys   = array('%id%', '%username%', '%realname%', '%email%');
     static $categoryKeys = array('%id%', '%name%', '%description%');
 
@@ -523,10 +523,14 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
 
             $ts = serendipity_serverOffsetHour($data['entry']['timestamp']);
 
+            $ftitle  = serendipity_makeFilename($data['title']),
+            $fltitle = strtolower($ftitle);
+
             $replacements =
                 array(
                     (int)$data['id'],
-                    serendipity_makeFilename($data['title']),
+                    $fltitle,
+                    $ftitle,
                     date('d', $ts),
                     date('m', $ts),
                     date('Y', $ts)
@@ -568,8 +572,8 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
  * @return  string      The regular expression to a permalink URL
  */
 function serendipity_makePermalinkRegex($format, $type = 'entry') {
-    static $entryKeys           = array('%id%',     '%title%',              '%day%',      '%month%',    '%year%');
-    static $entryRegexValues    = array('([0-9]+)', PAT_FILENAME_MATCH, '[0-9]{1,2}', '[0-9]{1,2}', '[0-9]{4}');
+    static $entryKeys           = array('%id%',     '%lowertitle%',     '%title%',          '%day%',      '%month%',    '%year%');
+    static $entryRegexValues    = array('([0-9]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH, '[0-9]{1,2}', '[0-9]{1,2}', '[0-9]{4}');
 
     static $authorKeys          = array('%id%',     '%username%',           '%realname%',           '%email%');
     static $authorRegexValues   = array('([0-9]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH, PAT_FILENAME_MATCH);
