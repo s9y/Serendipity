@@ -5,6 +5,9 @@ Version 1.2 ()
 
     * Introduce '%lowertitle%' permalink attribute to use lowercase
       permalinks. (garvinhicking)
+    
+    * Allow to call permalinks that end with a "/" the same as if not
+      ending with a "/" (garvinhicking)
 
 Version 1.1 ()
 ------------------------------------------------------------------------

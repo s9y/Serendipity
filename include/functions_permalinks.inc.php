@@ -280,12 +280,10 @@ function &serendipity_permalinkPatterns($return = false) {
     $PAT['ADMIN']                    = '@/(' . $serendipity['permalinkAdminPath'] . '|entries)(/.+)?@';
     $PAT['ARCHIVE']                  = '@/'  . $serendipity['permalinkArchivePath'] . '/?@';
     $PAT['CATEGORIES']               = '@/'  . $serendipity['permalinkCategoriesPath'].'/([0-9;]+)@';
-    $PAT['PLUGIN']                   = '@/('  . $serendipity['permalinkPluginPath'] . '|plugin)/(.*)@';
+    $PAT['PLUGIN']                   = '@/(' . $serendipity['permalinkPluginPath'] . '|plugin)/(.*)@';
     $PAT['SEARCH']                   = '@/'  . $serendipity['permalinkSearchPath'] . '/(.*)@';
     $PAT['COMMENTS']                 = '@/'  . $serendipity['permalinkCommentsPath'] . '/(.*)@';
-    // PATCH FOR UPCOMING 1.2:
-    // $PAT['PERMALINK']             = '@('   . serendipity_makePermalinkRegex($serendipity['permalinkStructure'], 'entry') . ')/?@i';
-    $PAT['PERMALINK']                = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkStructure'], 'entry') . '@i';
+    $PAT['PERMALINK']                = '@('  . serendipity_makePermalinkRegex($serendipity['permalinkStructure'], 'entry') . ')/?@i';
     $PAT['PERMALINK_CATEGORIES']     = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkCategoryStructure'], 'category') . '@i';
     $PAT['PERMALINK_FEEDCATEGORIES'] = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkFeedCategoryStructure'], 'category') . '@i';
     $PAT['PERMALINK_FEEDAUTHORS']    = '@'   . serendipity_makePermalinkRegex($serendipity['permalinkFeedAuthorStructure'], 'author') . '@i';
@@ -325,11 +323,7 @@ function serendipity_searchPermalink($struct, $url, $default, $type = 'entry') {
         $pq = "SELECT entry_id, data
                  FROM {$serendipity['dbPrefix']}permalinks
                 WHERE (permalink = '" . serendipity_db_escape_string($url) . "'
-                       "
-                       // PATCH FOR 1.2:
-                       // . "OR permalink = '" . serendipity_db_escape_string($default) . "'"
-                       . "
-                      )
+                   OR permalink = '" . serendipity_db_escape_string($default) . "')
                   AND type      = '" . serendipity_db_escape_string($type) . "'
                   AND entry_id  > 0
                 LIMIT 1";
