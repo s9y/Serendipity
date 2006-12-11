@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.9');
+        $propbag->add('version',       '2.10');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -78,7 +78,7 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         foreach ($files as $file) {
-            printf(DELETING_FILE . '<br />', $file['name']);
+            $this->outputMSG('notice', sprintf(DELETING_FILE . '<br />', $file['name']));
             @unlink($serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/' . $file['name']);
         }
     }
@@ -250,6 +250,23 @@ class serendipity_event_spartacus extends serendipity_event
         return true;
     }
 
+    function outputMSG($status, $msg) {
+        switch($status) {
+            case 'notice':
+                echo '<div class="serendipityAdminMsgNotice">' . $msg . '</div>' . "\n";
+                break;
+
+            case 'error':
+                echo '<div class="serendipityAdminMsgError">' . $msg . '</div>' . "\n";
+                break;
+
+            default:
+            case 'success':
+                echo '<div class="serendipityAdminMsgSuccess">' . $msg . '</div>' . "\n";
+                break;
+        }
+    }
+
     function &fetchfile($url, $target, $cacheTimeout = 0, $decode_utf8 = false, $sub = 'plugins') {
         static $error = false;
 
@@ -264,13 +281,11 @@ class serendipity_event_spartacus extends serendipity_event
         }
         $url_ip = gethostbyname($url_hostname);
 
-        printf(PLUGIN_EVENT_SPARTACUS_FETCHING, '<a href="' . $url . '">' . basename($url) . '</a>');
-        echo '<br />';
+        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHING, '<a href="' . $url . '">' . basename($url) . '</a>'));
 
         if (file_exists($target) && filesize($target) > 0 && filemtime($target) >= (time()-$cacheTimeout)) {
             $data = file_get_contents($target);
-            printf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target);
-            echo '<br />';
+            $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
         } else {
             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
             $options = array();
@@ -280,10 +295,10 @@ class serendipity_event_spartacus extends serendipity_event
 
             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                 $resolved_url = $url . ' (at IP ' . $url_ip . ')';
-                printf(PLUGIN_EVENT_SPARTACUS_FETCHERROR, $resolved_url);
+                $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHERROR, $resolved_url));
                 //--JAM: START FIREWALL DETECTION
                 if ($req->getResponseCode()) {
-                    printf(PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR, $req->getResponseCode());
+                    $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR, $req->getResponseCode()));
                 }
                 $check_health = true;
                 if (function_exists('curl_init')) {
@@ -296,7 +311,7 @@ class serendipity_event_spartacus extends serendipity_event
                     if ($curl_result) {
                         $check_health = false;
                     } else {
-                        echo PLUGIN_EVENT_SPARTACUS_CURLFAIL . "\n";
+                        $this->outputMSG('error', PLUGIN_EVENT_SPARTACUS_CURLFAIL . "\n");
                     }
                 }
             }
@@ -321,7 +336,7 @@ class serendipity_event_spartacus extends serendipity_event
                 {
                     $fp = @fsockopen('www.google.com', 80, $errno, $errstr);
                     if (!$fp) {
-                        printf(PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED, $errno, $errstr);
+                        $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED, $errno, $errstr));
                     } else {
                         echo PLUGIN_EVENT_SPARTACUS_HEALTHDOWN;
                         printf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url);
@@ -336,7 +351,7 @@ class serendipity_event_spartacus extends serendipity_event
                 //--JAM: END FIREWALL DETECTION
                 if (file_exists($target) && filesize($target) > 0) {
                     $data = file_get_contents($target);
-                    printf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target);
+                    $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
                     echo '<br />';
                 }
             } else {
@@ -344,20 +359,18 @@ class serendipity_event_spartacus extends serendipity_event
                 if (!$data) {
                     $data = $req->getResponseBody();
                 }
-                printf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target);
-                echo '<br />';
+                $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target));
+
                 $tdir = dirname($target);
                 if (!is_dir($tdir) && !$this->rmkdir($tdir, $sub)) {
-                    printf(FILE_WRITE_ERROR, $tdir);
-                    echo '<br />';
+                    $this->outputMSG('error', sprintf(FILE_WRITE_ERROR, $tdir));
                     return $error;
                 }
 
                 $fp = @fopen($target, 'w');
 
                 if (!$fp) {
-                    printf(FILE_WRITE_ERROR, $target);
-                    echo '<br />';
+                    $this->outputMSG('error', sprintf(FILE_WRITE_ERROR, $target));
                     return $error;
                 }
 
@@ -371,8 +384,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $this->fileperm($target, false);
 
-                echo PLUGIN_EVENT_SPARTACUS_FETCHED_DONE;
-                echo '<br />';
+                $this->outputMSG('success', PLUGIN_EVENT_SPARTACUS_FETCHED_DONE);
                 $this->purgeCache = true;
             }
             serendipity_request_end();
@@ -740,8 +752,7 @@ class serendipity_event_spartacus extends serendipity_event
 
         $pdir = $serendipity['serendipityPath'] . '/' . $sub . '/';
         if (!is_writable($pdir)) {
-            printf(DIRECTORY_WRITE_ERROR, $pdir);
-            echo '<br />';
+            $this->outputMSG('error', sprintf(DIRECTORY_WRITE_ERROR, $pdir));
             return false;
         }
 
