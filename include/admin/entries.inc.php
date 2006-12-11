@@ -419,7 +419,10 @@ switch($serendipity['GET']['adminAction']) {
                 }
 
                 if (!isset($entry['realname']) || !$entry['realname']) {
-                    if (!empty($serendipity['realname'])) {
+                    if (is_numeric($entry['id'])) {
+                        $_entry = serendipity_fetchEntry('id', $entry['id'], 1, 1);
+                        $entry['realname']   = $_entry['author'];
+                    } elseif (!empty($serendipity['realname'])) {
                         $entry['realname']   = $serendipity['realname'];
                     } else {
                         $entry['realname']   = $serendipity['serendipityUser'];
