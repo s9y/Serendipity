@@ -360,7 +360,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
             if ( is_writable($basedir . PATH_SMARTY_COMPILE) ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
             } else {
-                if ($basewritable) {
+                if ($basewritable && !is_dir($basedir . PATH_SMARTY_COMPILE)) {
                     echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
                     #This directory will be created later in the process
                 } else {
@@ -376,7 +376,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
             if ( is_writable($basedir . 'archives/') ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
             } else {
-                if ($basewritable) {
+                if ($basewritable && !is_dir($basedir . 'archives/')) {
                     echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
                     #This directory will be created later in the process
                 } else {
@@ -393,7 +393,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
             if ( is_writable($basedir . 'uploads/') ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
             } else {
-                if ($basewritable) {
+                if ($basewritable && !is_dir($basedir . 'uploads/')) {
                     echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
                     #This directory will be created later in the process
                 } else {

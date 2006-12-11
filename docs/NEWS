@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improved Spartacus' detection of firewalling/network connection
+      issues (judebert)
+
     * Introduce '%lowertitle%' permalink attribute to use lowercase
       permalinks. (garvinhicking)
     
@@ -11,6 +14,9 @@ Version 1.2 ()
 
 Version 1.1 ()
 ------------------------------------------------------------------------
+
+    * Fix better installer warning messages when directories have no
+      write privileges and already exist. Thanks to wagwag!
 
     * Small bugfixes: Allow to use different login credentials than the
       current HTTP Basic-Auth, if used. Order categories by name in
