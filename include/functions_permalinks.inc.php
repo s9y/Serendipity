@@ -715,7 +715,7 @@ function serendipity_currentURL($strict = false) {
     }
     $uri['path'] = preg_replace('@^' . preg_quote($serendipity['serendipityHTTPPath']) . '@i', ($strict ? '/' : ''), $uri['path']);
     $uri['path'] = preg_replace('@^(&amp;)?' . preg_quote($serendipity['indexFile']) . '(&amp;)@i', '', $uri['path']);
-    $url = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?' . $uri['path'] . $qst;
+    $url = $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?/' . $uri['path'] . $qst;
     $url = str_replace(
         array(
             $serendipity['indexFile'] . '&amp;',
