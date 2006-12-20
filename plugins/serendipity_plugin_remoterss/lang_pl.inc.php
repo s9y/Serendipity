@@ -26,4 +26,11 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Wy¶wietlaæ datê?');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Czy wy¶wietlaæ datê pod ka¿d± lini± z wpisem?');
 
+@define('PLUGIN_REMOTERSS_RSSLINK', 'U¿yæ linku RSS?');
+@define('PLUGIN_REMOTERSS_RSSLINK_DESC', 'Czy ma byæ wy¶wietlony link podany w feedzie RSS?');
+@define('PLUGIN_REMOTERSS_RSSFIELD', 'Wy¶wietlanie elementów RSS');
+@define('PLUGIN_REMOTERSS_RSSFIELD_DESC', 'Który z elementów feeda RSS ma byæ wy¶wietlony? (np. "title", "content:encoded", "description", ...)');
+@define('PLUGIN_REMOTERSS_RSSESCAPE', 'Wy³±cz formatowanie HTML');
+@define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', 'Je¶li ta opcja zostanie w³±czona, kod HTML w feedzie zostanie usuniêty. Je¶li ta opcja zostanie wy³±czona, kod HTML w feedach bêdzie interpretowany. To mo¿e byæ potencjalne ¼ród³o problemów z bezpieczeñstwem bloga je¶li feed nie pochodzi od Ciebie!');
+
 ?>

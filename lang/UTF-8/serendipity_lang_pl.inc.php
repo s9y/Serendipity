@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 1252 2006-06-09 20:17:14Z garvinhicking $
+﻿<?php # $Id: serendipity_lang_en.inc.php 1515 2006-12-13 10:30:13Z CoSTa $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -38,7 +38,7 @@
 @define('ANONYMOUS', 'Anonymous');
 @define('NEW_TRACKBACK_TO', 'Nowy ślad (trackback) do');
 @define('NEW_COMMENT_TO', 'Nowy komentarz do');
-@define('RECENT', 'Ostatnie....');
+@define('RECENT', 'Ostatnie...');
 @define('OLDER', 'Starsze...');
 @define('DONE', 'Zrobione');
 @define('WELCOME_BACK', 'Witaj,');
@@ -192,9 +192,9 @@
 @define('BROWSER_RELOAD', 'Kiedy wykonasz te czynności wciśnij przycisk "reload" (odśwież) w swojej przeglądarce.');
 @define('DIAGNOSTIC_ERROR', 'Stwierdzono istnienie pewnych problemów podczas przeprowadzania procedur diagnostycznych. Upewnij się, że podałeś prawidłowe dane:');
 @define('SERENDIPITY_NOT_INSTALLED', 'Serendipity nie zostało jeszcze zainstalowane. Proszę, <a href="%s">zainstaluj</a> je teraz.');
-@define('INCLUDE_ERROR', 'serendipity error: could not include %s - exiting.');
-@define('DATABASE_ERROR', 'serendipity error: unable to connect to database - exiting.');
-@define('CREATE_DATABASE', 'Creating default database setup...');
+@define('INCLUDE_ERROR', 'błąd Serendipity: nie można było załączyć %s - wyjście.');
+@define('DATABASE_ERROR', 'błąd Serendipity: nie mogę połączyć się z bazą danych - wyjście.');
+@define('CREATE_DATABASE', 'Tworzenie domyślnych ustawień bazy danych...');
 @define('ATTEMPT_WRITE_FILE', 'Próba zapisania pliku %s ...');
 @define('WRITTEN_N_SAVED', 'Konfiguracja zapisana');
 @define('IMAGE_ALIGNMENT', 'Wyrównanie obrazka');
@@ -805,8 +805,8 @@
 @define('WARNING_NO_GROUPS_SELECTED', 'Uwaga: Nie dokonano przydziałów do żadnej grupy. To spowoduje uniemożliwienie dministrowania przydziałami do grup. Twoje dotychczasowe przydziały nie zostały jednak zmienione. W przypadku problemów - skontaktuj się z administratorem.');
 @define('INSTALL_RSSFETCHLIMIT', 'Ilość wpisów wyświetlanych w feedach RSS');
 @define('INSTALL_RSSFETCHLIMIT_DESC', 'Ilość wpisów wyświetlanych na każdej stronie feeda RSS');
-@define('INSTAL_DB_UTF8', 'Enable DB-charset conversion');
-@define('INSTAL_DB_UTF8_DESC', 'Issues a MySQL "SET NAMES" query to indicate the required charset for the database. Turn this on or off, if you see weird characters in your blog.');
+@define('INSTAL_DB_UTF8', 'Włącz konwersję kodowania zaków dla bazy danych');
+@define('INSTAL_DB_UTF8_DESC', 'Rozwiązuje problem z zapytaniem SET NAMES bazy danych aby ustalić prawidłowe kodowanie dla bazy danych. Włącz lub wyłącz tę opcję jeśli widzisz na swojej stronie dziwne znaczki zamiast znaków diakrytycznych.');
 @define('ONTHEFLYSYNCH', 'Włącz synchronizację mediów "w locie"');
 @define('ONTHEFLYSYNCH_DESC', 'Jeśli włączone, Serendipity będzie porównywało zawartość bazy danych mediów z plikami istniejącymi na serwerze i w razie wystąpienia różnic wykona synchronizację bazy z zawartością katalogów na serwerze.');
 @define('USERCONF_CHECK_USERNAME_ERROR', 'Pole nazwy użytkownika nie może być puste.');
@@ -873,17 +873,15 @@
 @define('PLUGIN_INACTIVE', 'Wtyczki nieaktywne');
 @define('PREFERENCE_USE_JS', 'Zezwolić na używanie zaawansowanych skryptów JavaScript?');
 @define('PREFERENCE_USE_JS_DESC', 'Jeśli włączone, zaawansowane skrypty JavaScript będą uruchamiane dla zwiększenia komfortu używalności, np. w module Konfiguracji wtyczek możesz administarować wtyczkami za pomocą myszy przez ich swobodne przesuwanie jak w technologii "drag and drop" (przeciągnij i upuść).');
-
 @define('PREFERENCE_USE_JS_WARNING', '(Ta strona używa zaawansowanych skryptów JavaScript. Jeśli masz problemy z funkcjonowaniem tej strony, wyłącz używanie zaawansowanych skryptów JavaScript w swoich Ustawieniach osobistych lub wyłącz wspracie dla JavaScript w swojej przeglądarce.)');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Ścieżka do komentarzy');
+@define('PERM_SET_CHILD', 'Ustaw te same uprawnienia na wszystkich podkatalogach');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Zabronione wtyczki');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Zabronione zdarzenia');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Włączyć ograniczenia wtyczek (Plugin ACL) dla grup użytkowników?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Jeśli opcja ograniczenia wtyczek jest włączona, możesz określić jakie wtyczki mogą być uruchamiane przez jakie grupy użytkowników.');
 
-
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('DELETE_SELECTED_ENTRIES', 'Usuń wybrane wpisy');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Pokaż tylko autorów mających co najmniej X wpisów');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark (dodaj do Ulubionych) ten link i użyj na dowolnej stronie, o której chcesz blogować, by szybko dostać się do swojego bloga.');

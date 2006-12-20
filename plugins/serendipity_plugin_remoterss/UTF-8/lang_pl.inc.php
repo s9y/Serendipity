@@ -1,4 +1,4 @@
-<?php # $Id$
+﻿<?php # $Id$
 
 /**
  *  @version $Revision$
@@ -25,5 +25,12 @@
 @define('PLUGIN_REMOTERSS_BULLETIMG_BLAHBLAH', 'Możesz tu podać link do obrazka, jaki będzie wyświetlany przed każdym pobranym wpisem.');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Wyświetlać datę?');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Czy wyświetlać datę pod każdą linią z wpisem?');
+
+@define('PLUGIN_REMOTERSS_RSSLINK', 'Użyć linku RSS?');
+@define('PLUGIN_REMOTERSS_RSSLINK_DESC', 'Czy ma być wyświetlony link podany w feedzie RSS?');
+@define('PLUGIN_REMOTERSS_RSSFIELD', 'Wyświetlanie elementów RSS');
+@define('PLUGIN_REMOTERSS_RSSFIELD_DESC', 'Który z elementów feeda RSS ma być wyświetlony? (np. "title", "content:encoded", "description", ...)');
+@define('PLUGIN_REMOTERSS_RSSESCAPE', 'Wyłącz formatowanie HTML');
+@define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', 'Jeśli ta opcja zostanie włączona, kod HTML w feedzie zostanie usunięty. Jeśli ta opcja zostanie wyłączona, kod HTML w feedach będzie interpretowany. To może być potencjalne źródło problemów z bezpieczeństwem bloga jeśli feed nie pochodzi od Ciebie!');
 
 ?>

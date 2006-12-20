@@ -1,8 +1,8 @@
-<?php # $Id$
+﻿<?php # $Id$
 
 /**
  *  @version $Revision$
- *  @author Translator Name <yourmail@example.com>
+ *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
 
