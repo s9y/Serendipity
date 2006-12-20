@@ -25,7 +25,7 @@
 @define('PLUGIN_KARMA_ENTRYTIME_BLAHBLAH', 'Jak d³ugo (w minutach) po publikacji Twojego wpisu bêdzie mo¿liwe g³osowanie bez ograniczeñ? Standardowo: 1440 (jeden dzieñ)');
 @define('PLUGIN_KARMA_VOTINGTIME_BLAHBLAH', 'Czas (w minutach) jaki musi min±æ pomiêdzy g³osowaniami. Stosowane tylko gdy minie okres czasu zdefiniowany powy¿ej. Standardowo: 5');
 @define('PLUGIN_KARMA_TIMEOUT', 'Ochrona przed floodem: Inny u¿ytkownik dopiero co odda³ swój g³os. Proszê odczekaæ %s minut.');
-@define('PLUGIN_KARMA_CURRENT', 'Aktualna karma: %2$s, %3$s g³osów');
+@define('PLUGIN_KARMA_CURRENT', 'Aktualna karma: %2$s, g³osów: %3$s');
 @define('PLUGIN_KARMA_EXTENDEDONLY', 'Tylko przy Rozszerzonej tre¶ci wpisu');
 @define('PLUGIN_KARMA_EXTENDEDONLY_BLAHBLAH', 'Poka¿ g³osowanie Karma po wy¶wietleniu Rozszerzonej tre¶ci wpisu');
 @define('PLUGIN_KARMA_MAXKARMA', 'Czas g³osowania Karma');
@@ -36,7 +36,7 @@
 @define('PLUGIN_KARMA_ACTIVE_BLAHBLAH', 'Czy g³osowanie Karma ma byæ w³±czone?');
 @define('PLUGIN_KARMA_VISITS', 'W³±czyæ ¶ledzenie wizyt?');
 @define('PLUGIN_KARMA_VISITS_BLAHBLAH', 'Czy wy¶wietlenia wpisu maj± byæ zliczane i wy¶wietlane?');
-@define('PLUGIN_KARMA_VISITSCOUNT', ' %4$s wy¶wietleñ');
+@define('PLUGIN_KARMA_VISITSCOUNT', ' wy¶wietleñ: %4$s');
 @define('PLUGIN_KARMA_STATISTICS_VISITS_TOP', 'Najczê¶ciej wy¶wietlane wpisy');
 @define('PLUGIN_KARMA_STATISTICS_VISITS_BOTTOM', 'Najrzadziej wy¶wietlane wpisy');
 @define('PLUGIN_KARMA_STATISTICS_VOTES_TOP', 'Wpisy, na które oddano najwiêcej g³osów');
@@ -47,4 +47,5 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'g³osów');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'punktów');
 
+@define('PLUGIN_KARMA_STARRATING', 'W³±czyæ induwidualne ocenianie w tym wpisie?');
 ?>

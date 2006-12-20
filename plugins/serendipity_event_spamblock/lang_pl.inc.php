@@ -110,3 +110,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Co zrobiæ ze ¦ladami, które bêd± automoderowane?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Wymuszaæ moderowanie ¦ladów po jak wielu dniach');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Mo¿esz wymusiæ moderowanie wszelkich ¦ladów do Twoich wpisów. Wprowad¼ wiek wpisu (w dniach), po którym ka¿dy ¦lad pozostawiany po tym terminie bêdzie musia³ byæ moderowany przed opublikowaniem.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'U¿yæ ochrony CSRF dla komentarzy?');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Po w³±czeniu tej opcji ka¿demu komentarzowi bêdzie przyporz±dkowywana warto¶æ hash, dziêki której bêdzie mo¿na sprawdziæ, czy komentarz zosta³ pozostawiony przez u¿ytkownika z prawid³owym ID sesji. To ustawienie zmniejszy ilosæ spamu i ograniczy mo¿liwo¶æ komentowania przez CSRF ale jednocze¶nie uniemo¿liwi komentowanie u¿ytkownikom nie korzystaj±cym z ciastek (cookies) w ich przegl±darkach.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Twój komentarz nie posiada³ numeru hash sesji. Komentarze mog± byæ pozostawiane na tym blogu tylko gdy Twoja przegl±darka ma w³±czon± obs³ugê ciasteczek (cookies)!');

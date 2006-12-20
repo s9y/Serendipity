@@ -1,4 +1,4 @@
-<?php # $Id$
+﻿<?php # $Id$
 
 /**
  *  @version $Revision$
@@ -110,3 +110,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Co zrobić ze Śladami, które będą automoderowane?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Wymuszać moderowanie Śladów po jak wielu dniach');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Możesz wymusić moderowanie wszelkich Śladów do Twoich wpisów. Wprowadź wiek wpisu (w dniach), po którym każdy Ślad pozostawiany po tym terminie będzie musiał być moderowany przed opublikowaniem.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'Użyć ochrony CSRF dla komentarzy?');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Po włączeniu tej opcji każdemu komentarzowi będzie przyporządkowywana wartość hash, dzięki której będzie można sprawdzić, czy komentarz został pozostawiony przez użytkownika z prawidłowym ID sesji. To ustawienie zmniejszy ilosć spamu i ograniczy możliwość komentowania przez CSRF ale jednocześnie uniemożliwi komentowanie użytkownikom nie korzystającym z ciastek (cookies) w ich przeglądarkach.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Twój komentarz nie posiadał numeru hash sesji. Komentarze mogą być pozostawiane na tym blogu tylko gdy Twoja przeglądarka ma włączoną obsługę ciasteczek (cookies)!');

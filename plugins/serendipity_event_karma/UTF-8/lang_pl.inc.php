@@ -1,4 +1,4 @@
-<?php # $Id$
+﻿<?php # $Id$
 
 /**
  *  @version $Revision$
@@ -25,7 +25,7 @@
 @define('PLUGIN_KARMA_ENTRYTIME_BLAHBLAH', 'Jak długo (w minutach) po publikacji Twojego wpisu będzie możliwe głosowanie bez ograniczeń? Standardowo: 1440 (jeden dzień)');
 @define('PLUGIN_KARMA_VOTINGTIME_BLAHBLAH', 'Czas (w minutach) jaki musi minąć pomiędzy głosowaniami. Stosowane tylko gdy minie okres czasu zdefiniowany powyżej. Standardowo: 5');
 @define('PLUGIN_KARMA_TIMEOUT', 'Ochrona przed floodem: Inny użytkownik dopiero co oddał swój głos. Proszę odczekać %s minut.');
-@define('PLUGIN_KARMA_CURRENT', 'Aktualna karma: %2$s, %3$s głosów');
+@define('PLUGIN_KARMA_CURRENT', 'Aktualna karma: %2$s, głosów: %3$s');
 @define('PLUGIN_KARMA_EXTENDEDONLY', 'Tylko przy Rozszerzonej treści wpisu');
 @define('PLUGIN_KARMA_EXTENDEDONLY_BLAHBLAH', 'Pokaż głosowanie Karma po wyświetleniu Rozszerzonej treści wpisu');
 @define('PLUGIN_KARMA_MAXKARMA', 'Czas głosowania Karma');
@@ -36,7 +36,7 @@
 @define('PLUGIN_KARMA_ACTIVE_BLAHBLAH', 'Czy głosowanie Karma ma być włączone?');
 @define('PLUGIN_KARMA_VISITS', 'Włączyć śledzenie wizyt?');
 @define('PLUGIN_KARMA_VISITS_BLAHBLAH', 'Czy wyświetlenia wpisu mają być zliczane i wyświetlane?');
-@define('PLUGIN_KARMA_VISITSCOUNT', ' %4$s wyświetleń');
+@define('PLUGIN_KARMA_VISITSCOUNT', ' wyświetleń: %4$s');
 @define('PLUGIN_KARMA_STATISTICS_VISITS_TOP', 'Najczęściej wyświetlane wpisy');
 @define('PLUGIN_KARMA_STATISTICS_VISITS_BOTTOM', 'Najrzadziej wyświetlane wpisy');
 @define('PLUGIN_KARMA_STATISTICS_VOTES_TOP', 'Wpisy, na które oddano najwięcej głosów');
@@ -47,4 +47,5 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'głosów');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'punktów');
 
+@define('PLUGIN_KARMA_STARRATING', 'Włączyć induwidualne ocenianie w tym wpisie?');
 ?>
