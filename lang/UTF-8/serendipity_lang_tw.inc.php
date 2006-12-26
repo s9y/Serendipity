@@ -869,25 +869,26 @@ $i18n_unknown = 'tw';
 
 @define('MEDIA_DYN_RESIZE', '允許改變圖片大小？');
 @define('MEDIA_DYN_RESIZE_DESC', '如果開啟，媒體的選擇視窗裡會顯示依照 GET 變數所設定的圖片大小。圖片會儲存於快取的記憶體內，所以常使用會佔用主機的空間。');
-@define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
-@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
-@define('PLUGIN_ACTIVE', 'Active');
-@define('PLUGIN_INACTIVE', 'Inactive');
-@define('PREFERENCE_USE_JS', 'Enable advanced JS usage?');
-@define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
+@define('MEDIA_DIRECTORY_MOVED', '目錄和檔案已成功移動到 %s');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', '目錄和檔案無法移動到 %s！');
+@define('MEDIA_DIRECTORY_MOVE_ENTRY', '在非 MySQL 資料庫內，無法移動文章到新的目錄。您需要自己修改文章的網址。您還是可以將舊目錄回覆到原來的位址。');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', '移動 %s 篇文章的網址到新的目錄。');
+@define('PLUGIN_ACTIVE', '開啟');
+@define('PLUGIN_INACTIVE', '關閉');
+@define('PREFERENCE_USE_JS', '開啟進階的 JS 用法？');
+@define('PREFERENCE_USE_JS_DESC', '如果開啟，進階的 JavaScript 將會提供更好的用途，例如類似外掛設定內的牽曳和移動功能。');
+
+@define('PREFERENCE_USE_JS_WARNING', '(這個頁面使用了進階的 JavaScript。如果您遇到問題，請將進階的 JS 用法或瀏覽器的 JavaScript 關閉。)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
+@define('INSTALL_PERMALINK_COMMENTSPATH', '留言的路徑');
+@define('PERM_SET_CHILD', '將全部的子目錄設為相同權限');
+@define('PERMISSION_FORBIDDEN_PLUGINS', '禁用外掛');
+@define('PERMISSION_FORBIDDEN_HOOKS', '禁用事件');
+@define('PERMISSION_FORBIDDEN_ENABLE', '開啟外掛 ACL 給會員群組？');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', '如果 "外掛 ACL 給會員群組" 是開啟的狀態，您可以指定某些群組來執行外掛和事件。');
+@define('DELETE_SELECTED_ENTRIES', '刪除選擇的文章');
+@define('PLUGIN_AUTHORS_MINCOUNT', '顯示多於 X 文章的作者');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', '書籤');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');
