@@ -348,6 +348,12 @@ div.serendipitySideBarItem {
 .serendipity_comment_author_self .serendipity_comment_source {
     background-color: #EEEEFF;
 }
+
 #serendipity_commentsURL #serendipity_commentsEmail {
     direction: ltr;
+}
+
+.serendipity_comment_captcha_image{
+	direction: ltr;
+	text-align: right;
 }
