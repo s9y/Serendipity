@@ -949,7 +949,7 @@ var $filter_defaults;
                                 $bgcolors = explode(',', $this->get_config('captcha_color', '255,0,255'));
                                 $hexval   = '#' . dechex(trim($bgcolors[0])) . dechex(trim($bgcolors[1])) . dechex(trim($bgcolors[2]));
                                 $this->random_string($max_char, $min_char);
-                                echo '<div style="background-color: ' . $hexval . '">';
+                                echo '<div class="serendipity_comment_captcha_image" style="background-color: ' . $hexval . '">';
                                 for ($i = 1; $i <= $max_char; $i++) {
                                     printf('<img src="%s" title="%s" alt="CAPTCHA ' . $i . '" class="captcha" />',
                                         $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . $i . '_' . md5(time()),
