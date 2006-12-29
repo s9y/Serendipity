@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improved Spamblock plugin to allow filtering email addresses
+      (Boris)
+
     * Improved Spartacus' detection of firewalling/network connection
       issues (judebert)
 
@@ -12,7 +15,7 @@ Version 1.2 ()
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
-Version 1.1 ()
+Version 1.1 (December 28th, 2006)
 ------------------------------------------------------------------------
 
     * Fix better installer warning messages when directories have no
