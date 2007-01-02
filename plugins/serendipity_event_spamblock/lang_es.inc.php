@@ -65,11 +65,12 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC', 'Busca comentarios con ciertas palabras y los marca como spam.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Filtro por palabras para URLs');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Se permiten expresiones regulares, separa las palabras con punto y coma(;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Se permiten expresiones regulares, separa las palabras con punto y coma(;).  Escribe las arrobas (@) por \\@.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Filtro por palabras para nombres de autor');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Se permiten expresiones regulares, separa las palabras con punto y coma(;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'Filtrado por palabras para el cuerpo del comentario');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'Filtrado por palabras para el correo electrónico');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Dirección e-mail inválida');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', '¿Revisar dirección e-mail?');
@@ -80,8 +81,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CONFIG', 'Configura los métodos Anti-Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'Bloquear este autor a través de la extensión Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Bloquear esta URL a través de la extensión Spamblock');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL', 'Bloquear este correo electrónico a través de la extensión Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Desbloquear este autor a través de la extensión Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Desbloquear estea URL a través de la extensión Spamblock');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Desbloquear este correo electrónico a través de la extensión Spamblock');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activar el filtrado de URL através de la lista negra blogg.de');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Filtrado a través de la lista negra blogg.de');

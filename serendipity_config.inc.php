@@ -210,11 +210,11 @@ if (defined('IN_installer') && IS_installed === false) {
  */
 if (file_exists($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php')) {
     $local_config = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php';
-} elseif (file_exists($serendipity['serendipityPath'] . '/serendipity_config_local.inc.php')) {
-    $local_config = $serendipity['serendipityPath'] . '/serendipity_config_local.inc.php';
 } elseif (defined('S9Y_DATA_PATH')) {
     // Shared installation!
     $local_config = S9Y_DATA_PATH . '/serendipity_config_local.inc.php';
+} elseif (file_exists($serendipity['serendipityPath'] . '/serendipity_config_local.inc.php')) {
+    $local_config = $serendipity['serendipityPath'] . '/serendipity_config_local.inc.php';
 } else {
     // Installation fallback
     $local_config = S9Y_INCLUDE_PATH . '/serendipity_config_local.inc.php';
