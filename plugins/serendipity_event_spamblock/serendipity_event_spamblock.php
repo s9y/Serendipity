@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.61');
+        $propbag->add('version',       '1.62');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -70,6 +70,7 @@ var $filter_defaults;
             'contentfilter_urls',
             'contentfilter_authors',
             'contentfilter_words',
+            'contentfilter_emails',
             'bloggdeblacklist',
             'akismet',
             'akismet_filter',
@@ -82,6 +83,7 @@ var $filter_defaults;
 
         $this->filter_defaults = array(
                                    'authors' => 'casino;phentermine;credit;loans;poker',
+                                   'emails'  => '',
                                    'urls'    => '8gold\.com;911easymoney\.com;canadianlabels\.net;condodream\.com;crepesuzette\.com;debt-help-bill-consolidation-elimination\.com;fidelityfunding\.net;flafeber\.com;gb\.com;houseofsevengables\.com;instant-quick-money-cash-advance-personal-loans-until-pay-day\.com;mediavisor\.com;newtruths\.com;oiline\.com;onlinegamingassociation\.com;online\-+poker\.com;popwow\.com;royalmailhotel\.com;spoodles\.com;sportsparent\.com;stmaryonline\.org;thatwhichis\.com;tmsathai\.org;uaeecommerce\.com;learnhowtoplay\.com',
                                    'words'   => 'very good site!;Real good stuff!'
         );
@@ -262,6 +264,13 @@ var $filter_defaults;
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC);
                 $propbag->add('default', $this->filter_defaults['words']);
+                break;
+
+            case 'contentfilter_emails':
+                $propbag->add('type', 'text');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC);
+                $propbag->add('default', $this->filter_defaults['emails']);
                 break;
 
             case 'logfile':
@@ -789,6 +798,29 @@ var $filter_defaults;
                                     }
                                 }
                             }
+
+                            // Filter Emails
+                            $filter_emails = explode(';', $this->get_config('contentfilter_emails', $this->filter_defaults['emails']));
+                            if (is_array($filter_emails)) {
+                                foreach($filter_emails AS $filter_email) {
+                                    if (empty($filter_email)) {
+                                        continue;
+                                    }
+                                    if (preg_match('@' . $filter_email . '@i', $addData['email'])) {
+                                        if ($filter_type == 'moderate') {
+                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS, $addData);
+                                            $eventData['moderate_comments'] = true;
+                                            $serendipity['csuccess']        = 'moderate';
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                        } else {
+                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS, $addData);
+                                            $eventData = array('allow_comments' => false);
+                                            $serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
                         } // Content filtering end
 
                         // Filter Blogg.de Blacklist?
@@ -1078,6 +1110,13 @@ var $filter_defaults;
                         $this->set_config('contentfilter_urls', implode(';', $items));
                     }
 
+                    // Add E-mail to blacklist. If already filtered, it will be removed from the filter. (AKA "Toggle")
+                    if (isset($serendipity['GET']['spamBlockEmail'])) {
+                        $item    = $this->getComment('email', $serendipity['GET']['spamBlockEmail']);
+                        $items   = &$this->checkFilter('emails', $item, true);
+                        $this->set_config('contentfilter_emails', implode(';', $items));
+                    }
+
                     echo ' - ' . WORD_OR . ' - <a class="serendipityPrettyButton" href="serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance . '">' . PLUGIN_EVENT_SPAMBLOCK_CONFIG . '</a>';
                     return true;
                     break;
@@ -1092,6 +1131,11 @@ var $filter_defaults;
                     if (!empty($eventData['url'])) {
                         $url_is_filtered    = $this->checkFilter('urls', $eventData['url']);
                         $eventData['action_url']    .= ' <a id="' . $clink2 . '" class="serendipityIconLink" title="' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockURL]=' . $eventData['id'] . $addData . '#' . $clink2 . '"><img src="' . serendipity_getTemplateFile('admin/img/' . ($url_is_filtered ? 'un' : '') . 'configure.png') . '" /></a>';
+                    }
+
+                    if (!empty($eventData['email'])) {
+                        $email_is_filtered    = $this->checkFilter('emails', $eventData['email']);
+                        $eventData['action_email']    .= ' <a id="' . $clink2 . '" class="serendipityIconLink" title="' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockEmail]=' . $eventData['id'] . $addData . '#' . $clink2 . '"><img src="' . serendipity_getTemplateFile('admin/img/' . ($email_is_filtered ? 'un' : '') . 'configure.png') . '" /></a>';
                     }
 
                     return true;

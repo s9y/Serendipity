@@ -62,9 +62,9 @@
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC', 'Durchsucht Kommentare nach speziellen Zeichenketten und markiert diese als Spam.');
 
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Wortfilter für URLs');
-        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen.');
+        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@ angegeben werden.');
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Wortfilter für Autorennamen');
-        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen.');
+        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 
         @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Ungültige E-Mail-Adresse!');
         @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', 'Auf ungültige E-Mail-Adressen prüfen?');
@@ -75,8 +75,10 @@
         @define('PLUGIN_EVENT_SPAMBLOCK_CONFIG', 'Anti-Spam-Maßnahmen konfigurieren');
         @define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'Diesen Autor via Spamschutz blockieren');
         @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Diese URL via Spamschutz blockieren');
+        @define('PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL', 'Diese E-Mail via Spamschutz blockieren');
         @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Blockade dieses Autors via Spamschutz aufheben');
         @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Blockade dieser URL via Spamschutz aufheben');
+        @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Blockade dieser E-Mail via Spamschutz aufheben');
 
         @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'URL-Filterung anhand der blogg.de Blacklist aktivieren');
         @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Artikeltitel ist derselbe wie der Kommentar!');
@@ -91,11 +93,11 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'Behandlung von Akismet-Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Von Akismet.com gefiltert.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'Wortfilter für Inhalt');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'Wortfilter für E-Mail-Adressen');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL', 'Trackback-URLS prüfen');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC', 'Einen Trackback nur dann zulassen, wenn Ihre URL auch auf der Zielseite genannt wird.');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL', 'Trackback-URL ungültig.');
-
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_TREAT', 'Was soll mit auto-moderierten Kommentaren passieren?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Was soll mit auto-moderierten Trackbacks passieren?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Trackbackmoderation nach wievielen Tagen erzwingen');
@@ -103,5 +105,4 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'CSRF-Schutz aktivieren?');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Falls aktiviert, wird ein spezieller Hash-Wert sicherstellen, dass nur Benutzer Kommentare hinterlassen dürfen , die eine gültige Session-ID haben. Dies wird Spam etwas eindämmen und es unmöglich machen, dass Sie ungewollt Kommentare via CSRF-Angriffen hinterlassen, aber es wird auch dazu führen dass nur Benutzer mit aktivierten Cookies kommentieren können.');
-
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden!');

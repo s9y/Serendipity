@@ -636,6 +636,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 ?>
     <script type="text/javascript">
     function Spawnnugget() {
+    /* blar */
         <?php foreach($htmlnugget AS $htmlnuggetid) { ?>
         Spawnnuggets('<?php echo $htmlnuggetid; ?>');
         <?php } ?>

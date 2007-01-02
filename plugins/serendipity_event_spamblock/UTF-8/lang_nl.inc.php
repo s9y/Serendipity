@@ -68,10 +68,11 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC', 'Zoekt in commentaren naar bepaalde woorden en behandel ze als spam.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Woordfilter voor URLs');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Regular Expressions toegelaten, strings scheiden door puntkommas (;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Regular Expressions toegelaten, strings scheiden door puntkommas (;). In plaats van @ moet \\@ geschreven worden.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Woordfilter voor auteursnamen');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Regular Expressions toegelaten, strings scheiden door puntkommas (;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'Woordfilter voor commentaar inhoud');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'Woordfilter voor E-mail');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Email adres niet correct');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', 'Verifieer emailadressen?');
@@ -82,8 +83,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CONFIG', 'Configureer antispam methoden');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'Blokkeer deze auteur via de Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Blokkeer deze URL via de Spamblock plugin');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL', 'Blokkeer deze E-mail via de Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Deblokkeer deze auteur via de Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Deblokkeer deze URL via deSpamblock plugin');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Deblokkeer deze E-mail via deSpamblock plugin');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activeer url filtering door blogg.de Blacklist');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Gefilterd door blogg.de Blacklist');
@@ -103,4 +106,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET', 'Akismet API Key');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is een centrale antispam en blacklist server. Het kan je inkomende commentaar verifieren op spam. Akismet werd ontwikkeld voor WordPress, maar kan door andere systemen gebruikt worden. Je dient enkel een API sleutel van http://www.akismet.com te verkrijgen door te registeren op http://www.wordpress.com/ Indien deze key leeg is, wordt Askimet niet gebruikt.');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'Hoe Akismet gereporteerde spam behandelen?');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Gefilterd door Akismet.com Blacklist'); 
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Gefilterd door Akismet.com Blacklist');

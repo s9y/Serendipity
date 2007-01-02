@@ -69,10 +69,12 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC', 'Searches comments for certain strings and marks them as spam.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Wordfilter for URLs');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Regular Expressions allowed, separate strings by semicolons (;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Regular Expressions allowed, separate strings by semicolons (;). You have to escape the @-sign with \\@.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Wordfilter for author names');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Regular Expressions allowed, separate strings by semicolons (;).');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'Wordfilter for comment body');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'Wordfilter for comment E-mail');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Invalid e-mail address');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', 'Check e-mail addresses?');
@@ -83,8 +85,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CONFIG', 'Configure Anti-Spam methods');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'Block this author via Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Block this URL via Spamblock plugin');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL', 'Block this E-mail via Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Unblock this author via Spamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Unblock this URL via Spamblock plugin');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Unblock this E-mail via Spamblock plugin');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activate URL filtering by blogg.de Blacklist');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Filtered by blogg.de Blacklist');
