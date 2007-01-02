@@ -15,6 +15,6 @@
         @define('PLUGIN_EVENT_CONTENTREWRITE_OLDDESCRIPTION', 'Beschreibung #%s');
         @define('PLUGIN_EVENT_CONTENTREWRITE_OLDDDESCRIPTION', 'Die Beschreibung des Eintrages ({ziel})');
         @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', 'Umformungsmaske');
-        @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRINGDESC', 'Ein beliebiger Text der zur Ersetzung verwendet werden soll. Fügen Sie {quelle} und {ziel} irgendwo in diesem Text ein.' . "\n" . 'Beispiel: <acronym title="{quelle}">{ziel}</acronym>');
+        @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRINGDESC', 'Ein beliebiger Text der zur Ersetzung verwendet werden soll. Fügen Sie {quelle} und {ziel} irgendwo in diesem Text ein.' . "\n" . 'Beispiel: <acronym title="{ziel}">{quelle}</acronym>');
         @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Rewrite Zeichen');
         @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Falls es ein besonderes Zeichen geben soll, was die Wort-Ersetzung ausführt, geben Sie es hier an. Falls z.B. nur \'serendipity*\' damit ersetzt werden soll, was Sie als Akronym für \'serendipity\' definiert haben, und das \'*\' soll entfernt werden, dann geben Sie dieses Zeichen an.');
