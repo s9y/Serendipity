@@ -15,6 +15,12 @@ Version 1.2 ()
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
+Version 1.1.1 ()
+------------------------------------------------------------------------
+
+    * Fix a bug in sending the right login session cookies on Windows IIS
+      servers. Major thanks to Shadowin from the forums!
+
 Version 1.1 (December 28th, 2006)
 ------------------------------------------------------------------------
 

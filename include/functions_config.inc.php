@@ -563,7 +563,7 @@ function serendipity_JSsetCookie($name, $value) {
 function serendipity_setCookie($name,$value) {
     global $serendipity;
 
-    $secure = !empty($_SERVER['HTTPS']) ? true : false;
+    $secure = (strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
     setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $_SERVER['HTTP_HOST'], $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
