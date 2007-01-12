@@ -20,6 +20,9 @@ Version 1.2 ()
 Version 1.1.1 ()
 ------------------------------------------------------------------------
 
+    * Fixed a bug that prevented some entryproperty-plugins to execute
+      on the entry detail pane. (garvinhicking, Dragonblast)
+
     * Fix a bug in sending the right login session cookies on Windows IIS
       servers. Major thanks to Shadowin from the forums!
 
