@@ -9,7 +9,7 @@ if (defined('S9Y_FRAMEWORK')) {
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
-    if (!empty($_SERVER['HTTPS'])) {
+    if (strtolower($_SERVER['HTTPS']) == 'on') {
         @ini_set('session.name', 'SSLSID');
         @ini_set('session.cookie_secure', '1');
     }
@@ -162,7 +162,7 @@ $serendipity['charsets'] = array(
  *   Kill the script if we are not installed, and not inside the installer
  */
 if ( !defined('IN_installer') && IS_installed === false ) {
-    header('Location: ' . ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
+    header('Location: ' . (strtolower($_SERVER['HTTPS']) == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
     serendipity_die(sprintf(SERENDIPITY_NOT_INSTALLED, 'serendipity_admin.php'));
 }
 
@@ -342,7 +342,7 @@ $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DE
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
 }
 
 /*
