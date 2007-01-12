@@ -13,7 +13,7 @@
 
 create table {PREFIX}authors (
   realname varchar(255) NOT NULL default '',
-  username varchar(20) default null,
+  username varchar(32) default null,
   password varchar(32) default null,
   authorid {AUTOINCREMENT} {PRIMARY},
   mail_comments int(1) default '1',
