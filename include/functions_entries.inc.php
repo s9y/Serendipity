@@ -514,6 +514,10 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
     if (is_array($ret)) {
         $ret['categories'] =& serendipity_fetchEntryCategories($ret['id']);
         $ret['properties'] =& serendipity_fetchEntryProperties($ret['id']);
+        $stack     = array();
+        $stack[0]  = &$ret;
+        $assoc_ids = array($ret['id'] => 0);
+        serendipity_plugin_api::hook_event('frontend_entryproperties', $stack, $assoc_ids);
     }
 
     return $ret;
