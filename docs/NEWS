@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Upgraded DB-scheme to allow longer author usernames
+
     * Improved Spamblock plugin to allow filtering email addresses
       (Boris)
 

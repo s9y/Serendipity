@@ -1,0 +1,1 @@
+ALTER TABLE {PREFIX}authors CHANGE username username VARCHAR(32) NOT NULL;
