@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.10');
+        $propbag->add('version',       '2.11');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -109,6 +109,13 @@ class serendipity_event_spartacus extends serendipity_event
                 'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/',
                 'http://s9y.org/mirror/',
                 'http://svn.berlios.de/viewcvs/serendipity/'
+            ),
+
+            'files_health' => array(
+                'http://netmirror.org/'                 => 'http://netmirror.org/mirror/serendipity/last.txt',
+                'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/serendipity/docs/LICENSE',
+                'http://s9y.org/'                       => 'http://s9y.org/',
+                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/'
             )
         );
 
@@ -291,10 +298,11 @@ class serendipity_event_spartacus extends serendipity_event
             $options = array();
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'spartacus');
             serendipity_request_start();
+
             $req = &new HTTP_Request($url, $options);
 
             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                $resolved_url = $url . ' (at IP ' . $url_ip . ')';
+                $resolved_url = $url . ' (IP ' . $url_ip . ')';
                 $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHERROR, $resolved_url));
                 //--JAM: START FIREWALL DETECTION
                 if ($req->getResponseCode()) {
@@ -302,7 +310,7 @@ class serendipity_event_spartacus extends serendipity_event
                 }
                 $check_health = true;
                 if (function_exists('curl_init')) {
-                    echo PLUGIN_EVENT_SPARTACUS_TRYCURL . "\n";
+                    $this->outputMSG('notice', PLUGIN_EVENT_SPARTACUS_TRYCURL);
                     $curl_handle=curl_init();
                     curl_setopt($curl_handle, CURLOPT_URL, $url);
                     curl_setopt($curl_handle, CURLOPT_HEADER, 0);
@@ -316,43 +324,48 @@ class serendipity_event_spartacus extends serendipity_event
                 }
             }
             if ($check_health) {
-                echo PLUGIN_EVENT_SPARTACUS_HEALTHCHECK . "\n";
                 /*--JAM: Useful for later, when we have a health monitor for SPARTACUS
                 $propbag = new serendipity_property_bag;
                 $this->introspect($propbag);
                 $health_url = 'http://spartacus.s9y.org/spartacus_health.php?version=' . $propbag->get('version');
                 */
+                // Garvin: Temporary health. Better than nothing, eh?
                 $health_url = $url;
                 $matches = array();
                 preg_match('#http://[^/]*/#', $url, $matches);
                 if ($matches[0]) {
                     $health_url = $matches[0];
                 }
+
+                $mirrors = $this->getMirrors('files_health', true);
+                $health_url = $mirrors[$health_url];
+                $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHCHECK, $health_url));
+
                 $health_options = $options;
                 serendipity_plugin_api::hook_event('backend_http_request', $health_options, 'spartacus_health');
                 $health_req = &new HTTP_Request($health_url, $health_options);
                 $health_result = $health_req->sendRequest();
-                if (PEAR::isError($health_result))
-                {
+                if (PEAR::isError($health_result)) {
                     $fp = @fsockopen('www.google.com', 80, $errno, $errstr);
                     if (!$fp) {
                         $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED, $errno, $errstr));
                     } else {
-                        echo PLUGIN_EVENT_SPARTACUS_HEALTHDOWN;
-                        printf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url);
+                        $this->outputMSG('error', PLUGIN_EVENT_SPARTACUS_HEALTHDOWN);
+                        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url));
                         fclose($fp);
                     }
                 } else if ($health_req->getResponseCode() != '200') {
-                    printf(PLUGIN_EVENT_SPARTACUS_HEALTHERROR, $health_req->getResponseCode());
-                    printf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url);
+                    $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHERROR, $health_req->getResponseCode()));
+                    $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url));
                 } else {
+                    $this->outputMSG('error', PLUGIN_EVENT_SPARTACUS_HEALTFIREWALLED);
                     //--JAM: Parse response and display it.
                 }
                 //--JAM: END FIREWALL DETECTION
                 if (file_exists($target) && filesize($target) > 0) {
                     $data = file_get_contents($target);
                     $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
-                    echo '<br />';
+                    echo "<br />\n";
                 }
             } else {
                 // Fetch file

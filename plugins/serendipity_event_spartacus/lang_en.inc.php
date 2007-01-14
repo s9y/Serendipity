@@ -15,7 +15,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE', 'Fetched %s bytes from already existing file on your server. Saving file as %s...');
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_DONE', 'Data successfully fetched.');
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR', '<br />(The repository returned error code %s.)<br />');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<P>Unable to retrieve data from SPARTACUS repository.  Checking for repository availability.</P>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<P>Unable to retrieve data from SPARTACUS repository.  Checking for repository availability on %s.</P>');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<P>The SPARTACUS health site returned an error (HTTP code %s).  This indicates that the SPARTACUS health site is down.  Please try again later.</P>');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<P><a target="_blank" href="%s">Click here to view the SPARTACUS health site</a> and determine if it is responding.</P>');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<P>SPARTACUS attempted to connect to Google and failed (error %d: %s).<br />Your server is blocking outgoing connections.  SPARTACUS will not function because it cannot contact the SPARTACUS repository.  <b>Please contact your website provider and ask them to allow outgoing connections to web sites.</b></P><P>Plugins can still be installed from your local directories.  Simply download the plugin from <a href="http://spartacus.s9y.org">the SPARTACUS web repository</a>, unzip it, and upload the files to your Serendipity plugin directory.</P>');
@@ -33,4 +33,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Check for new sidebar plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Check for new event plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Hint: You can upgrade multiple plugins at once by clicking the upgrade-link with your middle mouse button, so that it opens in a new window/tab of your browser. Note that upgrading all plugins automatically could lead to network timeouts and garbaged files, thus this functionality does not exist intentionally.');
-?>
+
+@define('PLUGIN_EVENT_SPARTACUS_TRYCURL', 'Trying to use cURL library as fallback...');
+@define('PLUGIN_EVENT_SPARTACUS_CURLFAIL', 'cURL library returned a failure, too.');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTFIREWALLED', 'It was not possible to download the required files from the Spartacus repository, but the health of our repository was retrievable. This means your provider uses a content-based firewall and does not allow to fetch PHP code over the web by using mod_security or other reverse proxies. You either need to ask your provider to turn this off, or you cannot use the Spartacus plugin and need to download files manually.');
