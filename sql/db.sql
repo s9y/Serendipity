@@ -217,12 +217,14 @@ CREATE TABLE {PREFIX}category (
   authorid int(11) default NULL,
   category_left int(11) default '0',
   category_right int(11) default '0',
-  parentid int(11) DEFAULT '0' NOT NULL
+  parentid int(11) DEFAULT '0' NOT NULL,
+  sort_order int(11)
 ) {UTF_8};
 
 CREATE INDEX categorya_idx ON {PREFIX}category (authorid);
 CREATE INDEX categoryp_idx ON {PREFIX}category (parentid);
 CREATE INDEX categorylr_idx ON {PREFIX}category (category_left, category_right);
+CREATE INDEX categoryso_idx ON {PREFIX}category (sort_order);
 
 CREATE TABLE {PREFIX}images (
   id {AUTOINCREMENT} {PRIMARY},
