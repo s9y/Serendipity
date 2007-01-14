@@ -52,9 +52,9 @@
 @define('SAVE', 'Opslaan');
 @define('UP', 'OP');
 @define('DOWN', 'NEER');
-@define('ENTRIES', 'bijdrageen');
+@define('ENTRIES', 'bijdragen');
 @define('NEW_ENTRY', 'Nieuwe bijdrage');
-@define('EDIT_ENTRIES', 'Bewerk bijdrageen');
+@define('EDIT_ENTRIES', 'Bewerk bijdragen');
 @define('CATEGORIES', 'Categorieën');
 @define('WARNING_THIS_BLAHBLAH', "WAARSCHUWING:\\nDit kan veel tijd in beslag nemen als er veel grote afbeeldingen zijn, zonder index-afbeelding.");
 @define('CREATE_THUMBS', 'Creëer nieuwe index-afbeeldingen');
@@ -65,7 +65,7 @@
 @define('COMMENT', 'Reactie');
 @define('REMEMBER_INFO', 'Onthoud Informatie? ');
 @define('SUBMIT_COMMENT', 'Reactie plaatsen');
-@define('NO_ENTRIES_TO_PRINT', 'Er zijn geen bijdrageen af te drukken');
+@define('NO_ENTRIES_TO_PRINT', 'Er zijn geen bijdragen af te drukken');
 @define('COMMENTS', 'Reacties');
 @define('ADD_COMMENT', 'Reactie toevoegen');
 @define('NO_COMMENTS', 'Geen reacties');
@@ -78,7 +78,7 @@
 @define('EXTENDED_BODY', 'Uitgebreide bijdrage');
 @define('CATEGORY', 'Categorie');
 @define('EDIT', 'Bewerk');
-@define('NO_ENTRIES_BLAHBLAH', 'Er zijn geen bijdrageen gevonden voor zoekopdracht %s' . "\n");
+@define('NO_ENTRIES_BLAHBLAH', 'Er zijn geen bijdragen gevonden voor zoekopdracht %s' . "\n");
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Uw zoekopdracht naar %s heeft %s zoekresultaten opgeleverd:');
 @define('IMAGE', 'Afbeelding');
 @define('ERROR_FILE_NOT_EXISTS', 'Fout: Oude bestandsnaam bestaat niet!');
@@ -162,9 +162,9 @@
 @define('NOT_REALLY', 'Niet echt...');
 @define('DUMP_IT', 'Verwijder!');
 @define('RIP_ENTRY', 'Inzending #%s is verwijderd');
-@define('CATEGORY_DELETED_ARTICLES_MOVED', 'Categorie #%s is verwijderd. Aanwezige bijdrageen zijn verplaatst naar categorie #%s');
+@define('CATEGORY_DELETED_ARTICLES_MOVED', 'Categorie #%s is verwijderd. Aanwezige bijdragen zijn verplaatst naar categorie #%s');
 @define('CATEGORY_DELETED', 'Categorie #%s is verwijderd.');
-@define('CATEGORY_REMAINING', 'Verwijder deze categorie en verplaats de bijdrageen naar categorie: %s');
+@define('CATEGORY_REMAINING', 'Verwijder deze categorie en verplaats de bijdragen naar categorie: %s');
 @define('INVALID_CATEGORY', 'Er is geen categorie opgegeven om te verwijderen');
 @define('CATEGORY_SAVED', 'Categorie is opgeslagen');
 @define('SELECT_TEMPLATE', 'Selecteer een template dat u wenst te gebruiken voor uw weblog');
@@ -178,7 +178,7 @@
 @define('COULDNT_SELECT_DB', 'Kan de volgende database niet selecteren: %s.');
 @define('COULDNT_SELECT_USER_INFO', 'Kan de volgende gebruikers informatie niet selecteren: %s.');
 @define('COULDNT_SELECT_CATEGORY_INFO', 'Kan de volgende categorie niet selecteren: %s.');
-@define('COULDNT_SELECT_ENTRY_INFO', 'Kan de volgende bijdrageen niet selecteren: %s.');
+@define('COULDNT_SELECT_ENTRY_INFO', 'Kan de volgende bijdragen niet selecteren: %s.');
 @define('COULDNT_SELECT_COMMENT_INFO', 'Kan de volgende reactie niet selecteren: %s.');
 @define('YES', 'Ja');
 @define('NO', 'Nee');
@@ -254,7 +254,7 @@
 @define('ALL_AUTHORS', 'Alle auteurs');
 @define('CATEGORIES_TO_FETCH', 'Op te halen categorieën');
 @define('CATEGORIES_TO_FETCH_DESC', 'Categorieën op van welke auteur inzien?');
-@define('PAGE_BROWSE_ENTRIES', 'Pagina %s van %s, totaal %s bijdrageen');
+@define('PAGE_BROWSE_ENTRIES', 'Pagina %s van %s, totaal %s bijdragen');
 @define('PREVIOUS_PAGE', 'vorige pagina');
 @define('NEXT_PAGE', 'volgende pagina');
 @define('ALL_CATEGORIES', 'Alle categorieën');
@@ -303,10 +303,10 @@
 @define('CREATED_USER', '%s is aangemaakt als nieuwe gebruiker');
 @define('MODIFIED_USER', 'De eigenschappen van gebruiker, %s, zijn gewijzigd');
 @define('USER_LEVEL', 'Gebruikersniveau');
-@define('DELETE_USER', 'U staat op het punt de volgende gebruiker te verwijderen: #%d %s. Weet u zeker dat u deze gebruiker wilt verwijderen? Wanneer u dit doet zullen de bijdrageen van deze gebruiker niet meer worden weergegeven.');
+@define('DELETE_USER', 'U staat op het punt de volgende gebruiker te verwijderen: #%d %s. Weet u zeker dat u deze gebruiker wilt verwijderen? Wanneer u dit doet zullen de bijdragen van deze gebruiker niet meer worden weergegeven.');
 @define('DELETED_USER', 'Gebruiker, #%d %s, is verwijderd.');
 @define('LIMIT_TO_NUMBER', 'Hoeveel items moeten er worden weergegeven?');
-@define('ENTRIES_PER_PAGE', 'bijdrageen per pagina');
+@define('ENTRIES_PER_PAGE', 'bijdragen per pagina');
 @define('XML_IMAGE_TO_DISPLAY', 'XML Button');
 @define('XML_IMAGE_TO_DISPLAY_DESC','Deze afbeelding laat u uw XML Feeds weergeven. Laat het veld leeg voor de standaard instellingen, voer \'none\' in om het uit te schakellen.');
 
@@ -331,7 +331,7 @@
 @define('TOP_LEVEL', 'Top level');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', 'Toegangsrechten');
-@define('SETTINGS_SAVED_AT', 'De instellingen zijn opgeslagen in %s');
+@define('SETTINGS_SAVED_AT', 'De instellingen zijn opgeslagen om %s');
 
 /* DATABASE SETTINGS */
 @define('INSTALL_CAT_DB', 'Database instellingen');
@@ -377,9 +377,9 @@
 @define('INSTALL_EMAIL', 'E-mailadres van beheerder');
 @define('INSTALL_EMAIL_DESC', 'E-mailadres van de beheerder van het weblog');
 @define('INSTALL_SENDMAIL', 'Verstuur e-mails naar beheerder?');
-@define('INSTALL_SENDMAIL_DESC', 'Wilt een e-mail ontvangen wanneer er een reactie geplaatst is op een van uw bijdrageen?');
-@define('INSTALL_SUBSCRIBE', 'Abonneren op bijdrageen?');
-@define('INSTALL_SUBSCRIBE_DESC', 'Maak het mogelijk voor gebruikers om zich te abonneren op uw bijdrageen? Gebruikers zullen dan een e-mail ontvangen wanneer er een reactie geplaatst is op deze bijdrage');
+@define('INSTALL_SENDMAIL_DESC', 'Wilt een e-mail ontvangen wanneer er een reactie geplaatst is op een van uw bijdragen?');
+@define('INSTALL_SUBSCRIBE', 'Abonneren op bijdragen?');
+@define('INSTALL_SUBSCRIBE_DESC', 'Maak het mogelijk voor gebruikers om zich te abonneren op uw bijdragen? Gebruikers zullen dan een e-mail ontvangen wanneer er een reactie geplaatst is op deze bijdrage');
 @define('INSTALL_BLOGNAME', 'Weblog naam');
 @define('INSTALL_BLOGNAME_DESC', 'De naam van uw weblog');
 @define('INSTALL_BLOGDESC', 'Omschrijving weblog');
@@ -427,7 +427,7 @@
 @define('USERCONF_EMAIL', 'Uw e-mailadres');
 @define('USERCONF_EMAIL_DESC', 'Uw eigen e-mailadres');
 @define('USERCONF_SENDCOMMENTS', 'Bericht bij reacties?');
-@define('USERCONF_SENDCOMMENTS_DESC', 'Wilt u een e-mail ontvangen wanneer er reacties geplaatst worden op uw bijdrageen?');
+@define('USERCONF_SENDCOMMENTS_DESC', 'Wilt u een e-mail ontvangen wanneer er reacties geplaatst worden op uw bijdragen?');
 @define('USERCONF_SENDTRACKBACKS', 'Verstuur trackback bericht?');
 @define('USERCONF_SENDTRACKBACKS_DESC', 'Wilt u een e-mail ontvangen wanneer er een trackback naar een van uw berichten is gemaakt?');
 @define('USERCONF_ALLOWPUBLISH', 'Toestaan berichten te plaatsen?');
@@ -438,10 +438,10 @@
 @define('POWERED_BY_SHOW_IMAGE', 'Toon "Serendipity" logo');
 @define('POWERED_BY_SHOW_IMAGE_DESC', 'Toont het Serendipity logo');
 @define('PLUGIN_ITEM_DISPLAY', 'Waar moeten de items worden weergegeven?');
-@define('PLUGIN_ITEM_DISPLAY_EXTENDED', 'Alleen uitgebreide bijdrageen');
+@define('PLUGIN_ITEM_DISPLAY_EXTENDED', 'Alleen uitgebreide bijdragen');
 @define('PLUGIN_ITEM_DISPLAY_OVERVIEW', 'Alleen overzichtspagina');
 @define('PLUGIN_ITEM_DISPLAY_BOTH', 'Altijd');
-@define('RSS_IMPORT_CATEGORY', 'Gebruik deze categorie gebruiken om ongelijke bijdrageen in op te slaan');
+@define('RSS_IMPORT_CATEGORY', 'Gebruik deze categorie gebruiken om ongelijke bijdragen in op te slaan');
 
 @define('COMMENTS_WILL_BE_MODERATED', 'Ingestuurde reacties zullen eerst worden gecontroleerd voor deze geplaatst worden.');
 @define('YOU_HAVE_THESE_OPTIONS', 'U heeft de volgende opties tot uw beschikking:');
@@ -469,7 +469,7 @@
 @define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"nee": Niet gecontroleerde externe links (Top Exits, Top Referrers, User comments) worden niet getoond of getoond als gewone tekst om spam vanuit zoekmachines te voorkomen. (aanbevolen). "ja": Niet gecontroleerde externe links worden gewoon getoond als links. De Sidebar plugin configuratie kan dit beïnvloeden!');
 @define('PAGE_BROWSE_COMMENTS', 'Pagina %s van de %s, in totaal %s reactie(s)');
 @define('FILTERS', 'Filters');
-@define('FIND_ENTRIES', 'Zoek bijdrageen');
+@define('FIND_ENTRIES', 'Zoek bijdragen');
 @define('FIND_COMMENTS', 'Zoek reacties');
 @define('FIND_MEDIA', 'Zoek media');
 @define('FILTER_DIRECTORY', 'Map');
@@ -505,7 +505,7 @@
 @define('DELETE_FILE_FAIL' , 'Kan bestand <b>%s</b> niet verwijderen');
 @define('DELETE_THUMBNAIL', 'Verwijder index-afbeelding <b>%s</b>');
 @define('DELETE_FILE', 'Verwijder bestand genaamd <b>%s</b>');
-@define('ABOUT_TO_DELETE_FILE', 'U staat op het punt om bestand <b>%s</b></p><br/> te verwijderen. Als u dit bestand in een van uw bijdrageen gebruikt, zal dit leiden tot niet werkende links of afbeeldingen.<br />Weet u zeker dat u door wilt gaan?<br /><br />');
+@define('ABOUT_TO_DELETE_FILE', 'U staat op het punt om bestand <b>%s</b></p><br/> te verwijderen. Als u dit bestand in een van uw bijdragen gebruikt, zal dit leiden tot niet werkende links of afbeeldingen.<br />Weet u zeker dat u door wilt gaan?<br /><br />');
 @define('TRACKBACK_SENDING', 'Verstuur een trackback naar %s...');
 @define('TRACKBACK_SENT', 'Trackback succesvol');
 @define('TRACKBACK_FAILED', 'Trackback functioneert niet: %s');
@@ -521,8 +521,8 @@
 @define('COMMENTS_FILTER_ALL', 'Alles');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Alleen geäutoriseerden');
 @define('COMMENTS_FILTER_NEED_APPROVAL', 'Wacht op autorisatie');
-@define('RSS_IMPORT_BODYONLY', 'Voeg alle geïmporteerde teksten in de "verkorte bijdrageen"-sectie en splits deze niet op in de "uitgebreide bijdrageen"-sectie.');
-@define('SYNDICATION_PLUGIN_FULLFEED', 'Geef volledige bijdrageen weer in het RSS feed');
+@define('RSS_IMPORT_BODYONLY', 'Voeg alle geïmporteerde teksten in de "verkorte bijdragen"-sectie en splits deze niet op in de "uitgebreide bijdragen"-sectie.');
+@define('SYNDICATION_PLUGIN_FULLFEED', 'Geef volledige bijdragen weer in het RSS feed');
 @define('WEEK', 'Week');
 @define('WEEKS', 'Weken');
 @define('MONTHS', 'Maanden');
@@ -537,16 +537,16 @@
 @define('CLICK_HERE_TO_INSTALL_PLUGIN', 'Klik hier om een nieuwe %s te installeren');
 @define('VERSION', 'versie');
 @define('INSTALL', 'Installeren');
-@define('ALREADY_INSTALLED', 'Reed geïnstalleerd');
+@define('ALREADY_INSTALLED', 'Reeds geïnstalleerd');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Selecteer welke plugin u wenst te installeren');
 @define('INSTALL_OFFSET', 'Aanpassing servertijd');
 @define('STICKY_POSTINGS', 'Post-it\'s');
 @define('INSTALL_FETCHLIMIT', 'Inzendingen die weergegeven moeten worden');
-@define('INSTALL_FETCHLIMIT_DESC', 'Aantal bijdrageen die weergeven moeten worden voor elke pagina');
-@define('IMPORT_ENTRIES', 'Importeer bijdrageen');
-@define('EXPORT_ENTRIES', 'Exporteer bijdrageen');
+@define('INSTALL_FETCHLIMIT_DESC', 'Aantal bijdragen die weergeven moeten worden voor elke pagina');
+@define('IMPORT_ENTRIES', 'Importeer bijdragen');
+@define('EXPORT_ENTRIES', 'Exporteer bijdragen');
 @define('IMPORT_WELCOME', 'Welkom bij de Serendipity import utility');
-@define('IMPORT_WHAT_CAN', 'Hier kunt u bijdrageen uit andere weblog software importeren');
+@define('IMPORT_WHAT_CAN', 'Hier kunt u bijdragen uit andere weblog software importeren');
 @define('IMPORT_SELECT', 'Selecteer alstublieft uit welk type weblog u de gegevens wilt importeren');
 @define('IMPORT_PLEASE_ENTER', 'Voert u alstublieft de gegevens in die hieronder gevraagd worden');
 @define('IMPORT_NOW', 'Importeer nu!');
@@ -563,8 +563,8 @@
 @define('ADMIN_FOOTER_POWERED_BY', 'Powered by Serendipity %s en PHP %s');
 @define('INSTALL_USEGZIP', 'Maak gebruik van gzip gecomprimeerde paginas');
 @define('INSTALL_USEGZIP_DESC', 'Om de verzending van pagina\'s te versnellen, kunnen de pagina\'s gecomprimeerd worden. Dit is alleen mogelijk als zijn/haar browser dit aan kan. Het word echter aangeraden');
-@define('INSTALL_SHOWFUTURE', 'Bekijk toekomstige bijdrageen');
-@define('INSTALL_SHOWFUTURE_DESC', 'Wanneer dit is ingeschakeld zal het alle toekomstige bijdrageen, reeds aanwezig in uw weblog, weergeven. Standaard staat deze ingesteld om de bijdrageen pas te vertonen wanneer de publicatiedatum bereikt is.');
+@define('INSTALL_SHOWFUTURE', 'Bekijk toekomstige bijdragen');
+@define('INSTALL_SHOWFUTURE_DESC', 'Wanneer dit is ingeschakeld zal het alle toekomstige bijdragen, reeds aanwezig in uw weblog, weergeven. Standaard staat deze ingesteld om de bijdragen pas te vertonen wanneer de publicatiedatum bereikt is.');
 @define('INSTALL_DBPERSISTENT', 'Gebruik altijd openstaande verbindingen');
 @define('INSTALL_DBPERSISTENT_DESC', 'Laat de verbinding met uw database openstaan, hierover kunt u meer lezen op <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">deze pagina</a>. Dit is normaliter niet aangeraden');
 @define('NO_IMAGES_FOUND', 'Geen afbeeldingen gevonden');
@@ -679,7 +679,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permanente link Auteur URL structuur');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Hier kunt u de relatieve URL structuur bepalen, startend van je basis URL tot wanneer de RSS-feeds van bepaalde auteurs kunnen vrijkomen. U kunt gebruik maken van de volgende varibelen %id%, %realname%, %username%, %email% en andere karakters.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permanente link Categorie URL structuur');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hier kunt u de relatieve URL structuur, startend van je basis URL tot wanneer de bijdrageen van bepaalde categorieën beschikbaar worden. U kunt gebruik maken van de volgende variabelen %id%, %name%, %description% en andere karakters.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hier kunt u de relatieve URL structuur, startend van je basis URL tot wanneer de bijdragen van bepaalde categorieën beschikbaar worden. U kunt gebruik maken van de volgende variabelen %id%, %name%, %description% en andere karakters.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permanente link RSS-Feed Categorie URL structuur');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Hier kunt u de relatieve URL structuur bepalen, startend van je basis URL tot wanneer de RSS-feeds van bepaalde categorieën vrijkomen. U kunt gebruik maken van de volgende varibelen %id%, %name%, %description% en andere karakters.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Zoekpad naar archieven');
