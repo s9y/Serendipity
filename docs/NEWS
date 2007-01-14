@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Make spamblock plugin be more verbose in moderation-queue emails.
+      RFE #1626712 (garvinhicking)
+
     * BBCode plugin improvement: Proper DIV-tag nesting, modify CSS
       code to use scrollbars (Jez Hancock)
 
