@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.11');
+        $propbag->add('version',       '2.12');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -56,7 +56,7 @@ class serendipity_event_spartacus extends serendipity_event
             'backend_pluginlisting_header_upgrade' => true
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
-        $propbag->add('configuration', array('mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir'));
+        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir'));
     }
 
     function generate_content(&$title) {
@@ -130,6 +130,20 @@ class serendipity_event_spartacus extends serendipity_event
         global $serendipity;
 
         switch($name) {
+            case 'enable_plugins':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS);
+                $propbag->add('description', '');
+                $propbag->add('default',     'false');
+                break;
+
+            case 'enable_themes':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES);
+                $propbag->add('description', '');
+                $propbag->add('default',     'true');
+                break;
+
             case 'chmod_files':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_CHMOD);
@@ -839,10 +853,12 @@ class serendipity_event_spartacus extends serendipity_event
         if (isset($hooks[$event])) {
             switch($event) {
                 case 'backend_pluginlisting_header':
-                    echo '<br /><div id="upgrade_notice" class="serendipityAdminMsgSuccess">';
-                    echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE" class="serendipityIconLink upgrade_sidebar"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR . '</a> &nbsp; ';
-                    echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event" class="serendipityIconLink upgrade_event"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_EVENT . '</a> ';
-                    echo '</div>';
+                    if (serendipity_db_bool($this->get_config('enable_plugins'))) {
+                        echo '<br /><div id="upgrade_notice" class="serendipityAdminMsgSuccess">';
+                        echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE" class="serendipityIconLink upgrade_sidebar"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR . '</a> &nbsp; ';
+                        echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event" class="serendipityIconLink upgrade_event"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_EVENT . '</a> ';
+                        echo '</div>';
+                    }
 
                     return true;
                     break;
@@ -854,50 +870,58 @@ class serendipity_event_spartacus extends serendipity_event
                     break;
 
                 case 'backend_templates_fetchlist':
-                    $eventData = $this->buildTemplateList($this->fetchOnline('template', true), 'template');
+                    if (serendipity_db_bool($this->get_config('enable_themes'))) {
+                        $eventData = $this->buildTemplateList($this->fetchOnline('template', true), 'template');
+                    }
 
                     return true;
                     break;
 
                 case 'backend_templates_fetchtemplate':
-                    if (!empty($eventData['GET']['spartacus_fetch'])) {
-                        $this->download(
-                            $this->fetchOnline('template', true),
-                            $eventData['GET']['theme'],
-                            'templates'
-                        );
+                    if (serendipity_db_bool($this->get_config('enable_themes'))) {
+                        if (!empty($eventData['GET']['spartacus_fetch'])) {
+                            $this->download(
+                                $this->fetchOnline('template', true),
+                                $eventData['GET']['theme'],
+                                'templates'
+                            );
+                        }
                     }
 
                     return false;
                     break;
 
                 case 'backend_plugins_fetchlist':
-                    $type = (isset($serendipity['GET']['type']) ? $serendipity['GET']['type'] : 'sidebar');
+                    if (serendipity_db_bool($this->get_config('enable_plugins'))) {
+                        $type = (isset($serendipity['GET']['type']) ? $serendipity['GET']['type'] : 'sidebar');
 
-                    $eventData = array(
-                       'pluginstack' => $this->buildList($this->fetchOnline($type), $type),
-                       'errorstack'  => array(),
-                       'upgradeURI'  => '&amp;serendipity[spartacus_upgrade]=true',
-                       'baseURI'     => '&amp;serendipity[spartacus_fetch]=' . $type
-                    );
+                        $eventData = array(
+                           'pluginstack' => $this->buildList($this->fetchOnline($type), $type),
+                           'errorstack'  => array(),
+                           'upgradeURI'  => '&amp;serendipity[spartacus_upgrade]=true',
+                           'baseURI'     => '&amp;serendipity[spartacus_fetch]=' . $type
+                        );
+                    }
 
                     return true;
                     break;
 
                 case 'backend_plugins_fetchplugin':
-                    if (!empty($eventData['GET']['spartacus_fetch'])) {
-                        $baseDir = $this->download($this->fetchOnline($eventData['GET']['spartacus_fetch'], true), $eventData['GET']['install_plugin']);
+                    if (serendipity_db_bool($this->get_config('enable_plugins'))) {
+                        if (!empty($eventData['GET']['spartacus_fetch'])) {
+                            $baseDir = $this->download($this->fetchOnline($eventData['GET']['spartacus_fetch'], true), $eventData['GET']['install_plugin']);
 
-                        if ($baseDir === false) {
-                            $eventData['install'] = false;
-                        } elseif (!empty($baseDir)) {
-                            $eventData['GET']['pluginPath'] = $baseDir;
-                        } else {
-                            $eventData['GET']['pluginPath'] = $eventData['GET']['install_plugin'];
-                        }
+                            if ($baseDir === false) {
+                                $eventData['install'] = false;
+                            } elseif (!empty($baseDir)) {
+                                $eventData['GET']['pluginPath'] = $baseDir;
+                            } else {
+                                $eventData['GET']['pluginPath'] = $eventData['GET']['install_plugin'];
+                            }
 
-                        if ($eventData['GET']['spartacus_upgrade']) {
-                            $eventData['install'] = false;
+                            if ($eventData['GET']['spartacus_upgrade']) {
+                                $eventData['install'] = false;
+                            }
                         }
                     }
 

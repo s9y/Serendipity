@@ -37,3 +37,6 @@
 @define('PLUGIN_EVENT_SPARTACUS_TRYCURL', 'Trying to use cURL library as fallback...');
 @define('PLUGIN_EVENT_SPARTACUS_CURLFAIL', 'cURL library returned a failure, too.');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTFIREWALLED', 'It was not possible to download the required files from the Spartacus repository, but the health of our repository was retrievable. This means your provider uses a content-based firewall and does not allow to fetch PHP code over the web by using mod_security or other reverse proxies. You either need to ask your provider to turn this off, or you cannot use the Spartacus plugin and need to download files manually.');
+
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS', 'Enable the use of Spartacus for fetching plugins?');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES', 'Enable the use of Spartacus for fetching themes?');
