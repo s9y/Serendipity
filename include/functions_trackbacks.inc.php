@@ -415,10 +415,32 @@ FAILURE;
  * @param   string  The author of our entry
  * @param   string  The title of our entry
  * @param   string  The text of our entry
+ * @param   boolean Dry-Run, without performing trackbacks?
  * @return
  */
-function serendipity_handle_references($id, $author, $title, $text) {
+function serendipity_handle_references($id, $author, $title, $text, $dry_run = false) {
     global $serendipity;
+    static $old_references = array();
+
+    if ($dry_run) {
+        // Store the current list of references. We might need to restore them for later user.
+        $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id);
+        echo "Dry-run, saving refs:<br />\n";
+        print_r($old_references);
+        echo "<br />\n";
+    } else {
+        // A dry-run was called previously and restorable references are found. Restore them now.
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$entry['id']);
+
+        if (is_array($old_references) && count($old_references) > 0) {
+            foreach($old_references AS $idx => $old_reference) {
+                $q = serendipity_db_insert('references', $old_reference, 'show');
+                echo $q . "<br />\n";
+                echo serendipity_db_query($q);
+                echo "<br />\n";
+            }
+        }
+    }
 
     if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>(.+?)</a>@i', $text, $matches)) {
         $matches = array(0 => array(), 1 => array());
@@ -433,8 +455,6 @@ function serendipity_handle_references($id, $author, $title, $text) {
     // Add URL references
     $locations = $matches[0];
     $names     = $matches[1];
-
-    $tmpid = serendipity_db_escape_string($id);
 
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
@@ -458,7 +478,7 @@ function serendipity_handle_references($id, $author, $title, $text) {
         }
 
         $query = "SELECT COUNT(id) FROM {$serendipity['dbPrefix']}references
-                                  WHERE entry_id = '". (int)$tmpid ."'
+                                  WHERE entry_id = ". (int)$id ."
                                     AND link = '" . serendipity_db_escape_string($locations[$i]) . "'
                                     AND type = ''";
 
@@ -468,15 +488,17 @@ function serendipity_handle_references($id, $author, $title, $text) {
         }
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
-            serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
+            if (!$dry_run) {
+                serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
+            }
             $checked_locations[$locations[$i]] = true; // Store trackbacked link so that no further trackbacks will be sent to the same link
         }
     }
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id='" . (int)$tmpid . "' AND type = ''");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND type = ''");
 
     for ($i = 0; $i < $j; ++$i) {
         $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
-        $query .= "'" . (int)$tmpid . "', '" . serendipity_db_escape_string(strip_tags($names[$i])) . "', '";
+        $query .= (int)$id . ", '" . serendipity_db_escape_string(strip_tags($names[$i])) . "', '";
         $query .= serendipity_db_escape_string($locations[$i]) . "')";
 
         serendipity_db_query($query);
@@ -487,7 +509,7 @@ function serendipity_handle_references($id, $author, $title, $text) {
 
     foreach ($matches[1] as $citation) {
         $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name) VALUES(";
-        $query .= "'" . (int)$tmpid . "', '" . serendipity_db_escape_string($citation) . "')";
+        $query .= (int)$id . ", '" . serendipity_db_escape_string($citation) . "')";
 
         serendipity_db_query($query);
     }

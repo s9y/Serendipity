@@ -23,6 +23,10 @@ Version 1.2 ()
 Version 1.1.1 ()
 ------------------------------------------------------------------------
 
+    * Change order of trackback execution flow (again) to preserve
+      references for plugins like Track Exits, when used in conjunction
+      with the entryproperties cache (garvinhicking)
+                
     * Fixed a bug that prevented some entryproperty-plugins to execute
       on the entry detail pane. (garvinhicking, Dragonblast)
 

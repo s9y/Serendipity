@@ -1251,6 +1251,14 @@ function serendipity_updertEntry($entry) {
 
     serendipity_purgeEntry($entry['id'], $entry['timestamp']);
 
+    if (!serendipity_db_bool($entry['isdraft'])) {
+        // When saving an entry, first all references need to be gathered. But trackbacks to them
+        // shall only be send at the end of the execution flow. However, certain plugins depend on
+        // the existance of handled references. Thus we store the current references at this point,
+        // execute the plugins and then reset the found references to the original state.
+        serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $drafted_entry['title'], $drafted_entry['body'] . $drafted_entry['extended'], true);
+    }
+
     // Send publish tags if either a new article has been inserted from scratch, or if the entry was previously
     // stored as draft and is now published
     $entry['categories'] =& $categories;
@@ -1261,7 +1269,9 @@ function serendipity_updertEntry($entry) {
     }
 
     if (!serendipity_db_bool($entry['isdraft'])) {
-        serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $drafted_entry['title'], $drafted_entry['body'] . $drafted_entry['extended'], $newEntry);
+        // Now that plugins are executed, we go ahead into the Temple of Doom and send possibly failing trackbacks.
+        // First, original list of references is restored (inside the function call)
+        serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $drafted_entry['title'], $drafted_entry['body'] . $drafted_entry['extended'], false);
     }
 
     return (int)$entry['id'];
