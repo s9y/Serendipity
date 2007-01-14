@@ -56,6 +56,10 @@
         @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', 'Nein!');
         @define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'Ja, am unteren Ende der Seite.');
         @define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'Ja, oben auf der Seite.');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Alles zeigen? (Standard: nein)');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Bei \'nein\' werden nur Besucherstatistiken angezeigt');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'Nein, alles außer dem Zähler verbergen.');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Ja, alle Statistiken anzeigen!');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Anzahl der Besucher');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Anzahl der Besucher heute');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', 'Besucher gesamt');
@@ -64,9 +68,10 @@
         @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS', 'Top-Referrer');
         @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE', 'Bisher wurden keine Referrer registriert.');
         @define('PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS', 'Erweiterte Besucherstatistik');
-        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Browser von der Zählung ausschließen');
-        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Fügen Sie hier Browser ein, die von der Zählung ausgeschlossen werden sollen, getrennt durch "|".');
-
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', 'Aktivieren, keine Robots zählen');
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', 'Nein, Robots bitte mitzählen');
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Robot-Zählung verhindern');
+        @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Bei \'ja\' werden keine Robots gezählt. Bei \'nein\' werden Robots mitgezählt. Bislang können über 25 Bots von der Zählung ausgeschlossen werden.');
         @define('PLUGIN_EVENT_STATISTICS_SHOW_LASTENTRY', 'Datum des letzten Artikels anzeigen');
         @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Anzahl der Artikel anzeigen');
         @define('PLUGIN_EVENT_STATISTICS_SHOW_COMMENTCOUNT', 'Anzahl der Kommentare anzeigen');
