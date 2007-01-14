@@ -59,7 +59,7 @@ if (!defined('serendipity_MB_LOADED') && defined('serendipity_LANG_LOADED')) {
         static $mbstring = null;
 
         if (is_null($mbstring)) {
-            $mbstring = (extension_loaded('mbstring') ? 1 : 0);
+            $mbstring = (extension_loaded('mbstring') && @mb_internal_encoding(LANG_CHARSET) ? 1 : 0);
             if ($mbstring === 1) {
                 if (function_exists('mb_strtoupper')) {
                     $mbstring = 2;
