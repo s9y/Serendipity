@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Stricter mbstring-extension check for special charsets like czech,
+      thanks to mila
+
     * Upgraded DB-scheme to allow longer author usernames
 
     * Improved Spamblock plugin to allow filtering email addresses
