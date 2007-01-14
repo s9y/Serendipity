@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * BBCode plugin improvement: Proper DIV-tag nesting, modify CSS
+      code to use scrollbars (Jez Hancock)
+
     * Stricter mbstring-extension check for special charsets like czech,
       thanks to mila
 
