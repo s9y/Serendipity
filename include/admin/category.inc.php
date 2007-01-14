@@ -117,12 +117,12 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
     if ( $serendipity['GET']['adminAction'] == 'delete' ) {
         $this_cat = serendipity_fetchCategoryInfo($serendipity['GET']['cid']);
         if (   (serendipity_checkPermission('adminCategoriesDelete') && serendipity_checkPermission('adminCategoriesMaintainOthers'))
-            || (serendipity_checkPermission('adminCategoriesDelete') && ($serendipity['authorid'] == $this_cat['authorid'] || $this_cat['authorid'] == '0')) 
-            || (serendipity_checkPermission('adminCategoriesDelete') && serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write'))) { 
+            || (serendipity_checkPermission('adminCategoriesDelete') && ($serendipity['authorid'] == $this_cat['authorid'] || $this_cat['authorid'] == '0'))
+            || (serendipity_checkPermission('adminCategoriesDelete') && serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write'))) {
 ?>
         <form method="POST" name="serendipityCategory" action="?serendipity[adminModule]=category&amp;serendipity[adminAction]=doDelete&amp;serendipity[cid]=<?php echo $serendipity['GET']['cid'] ?>">
         <?php echo serendipity_setFormToken(); ?>
-            <br />
+            <h3><?php echo $this_cat['category_name']; ?></h3>
             <?php echo CATEGORY_REMAINING ?>:
             <select name="serendipity[cat][remaining_catid]">
                 <option value="0">- <?php echo NO_CATEGORY ?> -</option>
