@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Remove "View" option for drafted entries in the "Edit entries"
+      section and replace with a "Preview" option. (garvinhicking)
+
     * Make spamblock plugin be more verbose in moderation-queue emails.
       RFE #1626712 (garvinhicking)
 

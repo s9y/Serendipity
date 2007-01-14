@@ -274,12 +274,17 @@ function serendipity_drawList() {
                     }
                     echo implode(', ', $cats);
                 }
-                $entry['link']      = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
+                $entry['link']         = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
+                $entry['preview_link'] = '?serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;serendipity[id]=' . $entry['id'];
                 ?>
 
                         </td>
                         <td align="right">
+                            <?php if (serendipity_db_bool($entry['isdraft'])) { ?>
+                            <a target="_blank" href="<?php echo $entry['preview_link']; ?>" title="<?php echo PREVIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo PREVIEW; ?>" /><?php echo PREVIEW ?></a>
+                            <?php } else { ?>
                             <a target="_blank" href="<?php echo $entry['link']; ?>" title="<?php echo VIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo VIEW; ?>" /><?php echo VIEW ?></a>
+                            <?php } ?>
                             <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo EDIT . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT; ?>" /><?php echo EDIT ?></a>
                             <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo DELETE . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE; ?>" /><?php echo DELETE ?></a>
                             <input type="checkbox" name="serendipity[multiDelete][]" value="<?php echo $entry['id']; ?>" />
@@ -345,20 +350,29 @@ if (!empty($serendipity['GET']['editSubmit'])) {
     $serendipity['GET']['adminAction'] = 'edit';
 }
 
+$preview_only = false;
+
 switch($serendipity['GET']['adminAction']) {
+    case 'preview':
+        $entry        = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
+        $serendipity['POST']['preview'] = true;
+        $preview_only = true;
+
     case 'save':
-        $entry = array(
-                   'id'                 => $serendipity['POST']['id'],
-                   'title'              => $serendipity['POST']['title'],
-                   'timestamp'          => $serendipity['POST']['timestamp'],
-                   'body'               => $serendipity['POST']['body'],
-                   'extended'           => $serendipity['POST']['extended'],
-                   'categories'         => $serendipity['POST']['categories'],
-                   'isdraft'            => $serendipity['POST']['isdraft'],
-                   'allow_comments'     => $serendipity['POST']['allow_comments'],
-                   'moderate_comments'  => $serendipity['POST']['moderate_comments'],
-                   'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false)
-        );
+        if (!$preview_only) {
+            $entry = array(
+                       'id'                 => $serendipity['POST']['id'],
+                       'title'              => $serendipity['POST']['title'],
+                       'timestamp'          => $serendipity['POST']['timestamp'],
+                       'body'               => $serendipity['POST']['body'],
+                       'extended'           => $serendipity['POST']['extended'],
+                       'categories'         => $serendipity['POST']['categories'],
+                       'isdraft'            => $serendipity['POST']['isdraft'],
+                       'allow_comments'     => $serendipity['POST']['allow_comments'],
+                       'moderate_comments'  => $serendipity['POST']['moderate_comments'],
+                       'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false)
+            );
+        }
 
         if ($entry['allow_comments'] != 'true' && $entry['allow_comments'] !== true) {
             $entry['allow_comments'] = 'false';
@@ -464,18 +478,20 @@ switch($serendipity['GET']['adminAction']) {
             $entry['id'] = $serendipity['lastSavedEntry'];
         }
 
-        include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
-        serendipity_printEntryForm(
-            '?',
-            array(
-              'serendipity[action]'      => 'admin',
-              'serendipity[adminModule]' => 'entries',
-              'serendipity[adminAction]' => 'save',
-              'serendipity[timestamp]'   => $entry['timestamp']
-            ),
+        if (!$preview_only) {
+            include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
+            serendipity_printEntryForm(
+                '?',
+                array(
+                  'serendipity[action]'      => 'admin',
+                  'serendipity[adminModule]' => 'entries',
+                  'serendipity[adminAction]' => 'save',
+                  'serendipity[timestamp]'   => $entry['timestamp']
+                ),
 
-            $entry
-        );
+                $entry
+            );
+        }
 
         break;
 
