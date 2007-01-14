@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Update Spartacus plugin to allow configuring whether to fetch
+      Themes or Plugins, or only one/none of them (garvinhicking)
+   
     * Remove "View" option for drafted entries in the "Edit entries"
       section and replace with a "Preview" option. (garvinhicking)
 
