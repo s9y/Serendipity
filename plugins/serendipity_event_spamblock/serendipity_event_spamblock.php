@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.62');
+        $propbag->add('version',       '1.63');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -688,7 +688,7 @@ var $filter_defaults;
                                     $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST . ': ' . $spam['message'], $addData);
                                     $eventData['moderate_comments'] = true;
                                     $serendipity['csuccess']        = 'moderate';
-                                    $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                    $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (Akismet)';
                                 } else {
                                     $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST . ': ' . $spam['message'], $addData);
                                     $eventData = array('allow_comments' => false);
@@ -742,7 +742,7 @@ var $filter_defaults;
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS, $addData);
                                             $eventData['moderate_comments'] = true;
                                             $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ')';
                                         } else {
                                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS, $addData);
                                             $eventData = array('allow_comments' => false);
@@ -765,7 +765,7 @@ var $filter_defaults;
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS, $addData);
                                             $eventData['moderate_comments'] = true;
                                             $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ')';
                                         } else {
                                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS, $addData);
                                             $eventData = array('allow_comments' => false);
@@ -788,7 +788,7 @@ var $filter_defaults;
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                             $eventData['moderate_comments'] = true;
                                             $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ')';
                                         } else {
                                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                             $eventData = array('allow_comments' => false);
@@ -811,7 +811,7 @@ var $filter_defaults;
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS, $addData);
                                             $eventData['moderate_comments'] = true;
                                             $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ')';
                                         } else {
                                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS, $addData);
                                             $eventData = array('allow_comments' => false);
@@ -839,7 +839,7 @@ var $filter_defaults;
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ': ' . $domain, $addData);
                                             $eventData['moderate_comments'] = true;
                                             $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ')';
                                         } else {
                                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ': ' . $domain, $addData);
                                             $eventData = array('allow_comments' => false);
