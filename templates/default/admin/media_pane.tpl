@@ -169,5 +169,24 @@
     <tr>
     {$MEDIA_ITEMS}
     </tr>
+
+    <tr>
+        <td colspan="{$media.lineBreak}">
+            <table width="100%">
+                <tr>
+                    <td>
+                    {if $media.page != 1 AND $media.page <= $media.pages}
+                        <a href="{$media.linkPrevious}" class="serendipityIconLink"><img src="{$media.prevIMG}"" />{$CONST.PREVIOUS}</a>
+                    {/if}
+                    </td>
+                    <td align="right">
+                    {if $media.page != $media.pages}
+                        <a href="{$media.linkNext}" class="serendipityIconLinkRight">{$CONST.NEXT}<img src="{$media.nextIMG}" /></a>
+                    {/if}
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
 {/if}
