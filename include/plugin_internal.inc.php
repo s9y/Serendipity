@@ -1290,7 +1290,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.01');
+        $propbag->add('version',       '2.02');
         $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -1482,14 +1482,17 @@ class serendipity_categories_plugin extends serendipity_plugin {
                 // Hide parents not wanted
                 if ($use_parent && $use_parent != 'all') {
                     if ($parentdepth == 0 && $cat['parentid'] != $use_parent && $cat['categoryid'] != $use_parent) {
+                        unset($categories[$cid]);
                         continue;
                     } else {
                         if ($hide_parent && $cat['categoryid'] == $use_parent) {
+                            unset($categories[$cid]);
                             continue;
                         }
 
                         if ($cat['depth'] < $parentdepth) {
                             $parentdepth = 0;
+                            unset($categories[$cid]);
                             continue;
                         }
 
@@ -1506,6 +1509,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
                     } else {
                         if ($cat['depth'] < $hidedepth) {
                             $hidedepth = 0;
+                            unset($categories[$cid]);
                             continue;
                         }
 
