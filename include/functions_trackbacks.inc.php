@@ -424,10 +424,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
-        $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id);
-        echo "Dry-run, saving refs:<br />\n";
-        print_r($old_references);
-        echo "<br />\n";
+        $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id, false, 'assoc');
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$entry['id']);
@@ -435,9 +432,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         if (is_array($old_references) && count($old_references) > 0) {
             foreach($old_references AS $idx => $old_reference) {
                 $q = serendipity_db_insert('references', $old_reference, 'show');
-                echo $q . "<br />\n";
                 echo serendipity_db_query($q);
-                echo "<br />\n";
             }
         }
     }
