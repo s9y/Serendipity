@@ -427,12 +427,12 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id, false, 'assoc');
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$entry['id']);
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id);
 
         if (is_array($old_references) && count($old_references) > 0) {
             foreach($old_references AS $idx => $old_reference) {
                 $q = serendipity_db_insert('references', $old_reference, 'show');
-                echo serendipity_db_query($q);
+                serendipity_db_query($q);
             }
         }
     }
