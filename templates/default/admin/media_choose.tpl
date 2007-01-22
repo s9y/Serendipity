@@ -46,12 +46,12 @@
 
 
         </style>
-        <script type="text/javascript" src="bundled-libs/dragdrop.js" ></script>
-        <script type="text/javascript" src="bundled-libs/imgedit.js" ></script>
+        <script type="text/javascript" src="{serendipity_getFile file='dragdrop.js'}" ></script>
+        <script type="text/javascript" src="{serendipity_getFile file='imgedit.js'}" ></script>
         {/if}
 
-        <script type="text/javascript" src="bundled-libs/YahooUI/treeview/YAHOO.js"></script>
-        <script type="text/javascript" src="bundled-libs/YahooUI/treeview/treeview.js" ></script>
+        <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
+        <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
     </head>
 
     <script type="text/javascript">
