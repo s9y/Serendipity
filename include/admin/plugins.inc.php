@@ -472,7 +472,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     <div><?php echo BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS ?></div>
 <?php
     if (!isset($serendipity['eyecandy']) || serendipity_db_bool($serendipity['eyecandy'])) {
-        echo '<script src="bundled-libs/dragdrop.js" type="text/javascript"></script>';
+        echo '<script src="' . serendipity_getTemplateFile('dragdrop.js') . '" type="text/javascript"></script>';
         echo '<div class="warning js_warning"><em>' . PREFERENCE_USE_JS_WARNING . '</em></div>';
     }
 

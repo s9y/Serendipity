@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Moved drag+drop and YahooUI library into templates/default/ to
+      be used in shared installation environments (garvinhicking)
+
     * Improve WP importer by only fetching real posts (attachments/static
       only optional) and splitting a post into extended/normal entry.
       Thanks to jtb!
