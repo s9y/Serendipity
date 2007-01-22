@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improve WP importer by only fetching real posts (attachments/static
+      only optional) and splitting a post into extended/normal entry.
+      Thanks to jtb!
+
     * Update Spartacus plugin to allow configuring whether to fetch
       Themes or Plugins, or only one/none of them (garvinhicking)
    

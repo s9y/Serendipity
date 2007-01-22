@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cs.inc.php 1408 2006-08-23 13:47:50Z garvinhicking $
+<?php # $Id: serendipity_lang_cs.inc.php 1533 2006-12-04 09:20:14Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -897,3 +897,4 @@ $i18n_filename_to = array (
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Zakázané události');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Povolit Plugin ACL pro uživatelské skupiny?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Jestliže je volba "Plugin ACL pro uživatelské skupiny" v konfiguraci povolena, můžete určit, které skupiny uživatelů mohou provádět určité pluginy/události.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

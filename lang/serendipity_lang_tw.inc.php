@@ -891,4 +891,4 @@ $i18n_unknown = 'tw';
 @define('DELETE_SELECTED_ENTRIES', '刪除選擇的文章');
 @define('PLUGIN_AUTHORS_MINCOUNT', '顯示多於 X 文章的作者');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', '書籤');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

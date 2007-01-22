@@ -1,4 +1,4 @@
-﻿<?php # $Id: serendipity_lang_en.inc.php 1515 2006-12-13 10:30:13Z CoSTa $
+<?php # $Id: serendipity_lang_en.inc.php 1515 2006-12-13 10:30:13Z CoSTa $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -885,3 +885,4 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Pokaż tylko autorów mających co najmniej X wpisów');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark (dodaj do Ulubionych) ten link i użyj na dowolnej stronie, o której chcesz blogować, by szybko dostać się do swojego bloga.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_nl.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_nl.inc.php 1584 2007-01-14 16:27:32Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Christiaan Heerze <webmaster@heimp.nl>
@@ -890,3 +890,4 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

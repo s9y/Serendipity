@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tw.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_tw.inc.php 1550 2006-12-26 07:21:10Z capriskye $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
@@ -891,4 +891,4 @@ $i18n_unknown = 'tw';
 @define('DELETE_SELECTED_ENTRIES', '刪除選擇的文章');
 @define('PLUGIN_AUTHORS_MINCOUNT', '顯示多於 X 文章的作者');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', '書籤');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

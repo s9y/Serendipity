@@ -885,3 +885,4 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Poka¿ tylko autorów maj±cych co najmniej X wpisów');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark (dodaj do Ulubionych) ten link i u¿yj na dowolnej stronie, o której chcesz blogowaæ, by szybko dostaæ siê do swojego bloga.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
