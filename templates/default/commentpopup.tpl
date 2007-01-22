@@ -28,7 +28,7 @@
 
 {elseif $is_comment_empty}
 
-    <div class="popup_comments_message popup_comments_message_empty">{$comment_string.0}<a href="#" onclick="history.go(-1)">{$comment_string.1}</a></div>
+    <div class="popup_comments_message popup_comments_message_empty">{$comment_string.0}<a href="#" onclick="history.go(-1)">{$comment_string.1}</a>{$comment_string.2}</div>
 
 {elseif $is_showtrackbacks}
 
