@@ -828,72 +828,75 @@
 
 
 
-// I translated in full this part of the language file, from english to portuguese, word by word,making use of Microsoft´s Word as addictional verification and PHP Designer 2007 Professional Editor as editor. --- $Angel
-@define('CURRENT_AUTHOR', 'Autor currente');
+// I translated in full this part of the language file, from english to portuguese, word by word,making use of Microsoft´s Word as addictional verification and PHP Designer 2007 Professional Editor as editor. --- $Angel (and I hopefully improved it, J P Matos; Obrigado $Angel).
+
+@define('CURRENT_AUTHOR', 'Autor corrente');
 
 @define('WORD_NEW', 'Novo');
-@define('SHOW_MEDIA_TOOLBAR', 'Mostrar barra dentro do seleccionador media-popup?');
-@define('MEDIA_KEYWORDS', 'Palavras-chave para o Media');
-@define('MEDIA_KEYWORDS_DESC', 'Entre uma listage, de palavras separadas por ";" pelas quais deseja pré-definir como palavras-chave para os seus itens media.');
+@define('SHOW_MEDIA_TOOLBAR', 'Mostrar barra dentro do seleccionador de media-popup?');
+@define('MEDIA_KEYWORDS', 'Palavras-chave para a Media');
+@define('MEDIA_KEYWORDS_DESC', 'Entre uma listagem, de palavras separadas por ";" através das quais deseja pré-definir, via palavras-chave, os seus itens de media.');
 @define('MEDIA_EXIF', 'Importar imagens EXIF/JPEG');
 @define('MEDIA_EXIF_DESC', 'Uma vez activado, as imagens EXIF/JPEG existentes serão separadas e arquivadas na base de dados para exposição na galeria de media.');
-@define('MEDIA_PROP', 'Propriedades do Media');
+@define('MEDIA_PROP', 'Propriedades da Media');
 
 
-@define('GO_ADD_PROPERTIES', 'Ir & entrar propriedades');
-@define('MEDIA_PROPERTY_DPI', 'DPI');
+@define('GO_ADD_PROPERTIES', 'Ir & introduzir propriedades');
+@define('MEDIA_PROPERTY_DPI', 'DPI (PPP)');
 @define('MEDIA_PROPERTY_COPYRIGHT', 'Direitos de Autor');
 @define('MEDIA_PROPERTY_COMMENT1', 'Comentário Breve');
 @define('MEDIA_PROPERTY_COMMENT2', 'Comentário Longo');
 @define('MEDIA_PROPERTY_TITLE', 'Título');
-@define('MEDIA_PROP_DESC', 'Entre uma listagem separada por ";" nos campos de propriedade, do modo que desejar definir cada um dos seus ficheiros Media');
-@define('MEDIA_PROP_MULTIDESC', '(Você pode colocar ":MULTI" após algum item para indicar que o mesmo irá conter texto longo no lugar de apenas alguns caracteres)');
+@define('MEDIA_PROP_DESC', 'Entre uma listagem separada por ";" nos campos de propriedade, relativa ao modo como deseja definir cada um dos seus ficheiros Media');
+@define('MEDIA_PROP_MULTIDESC', '(Você pode colocar ":MULTI" após algum item para indicar que o mesmo irá conter texto longo em vez de apenas alguns caracteres)');
 
-@define('STYLE_OPTIONS_NONE', 'Este tema/estilo não tem opções especificas. Para visualizar como o seu "template" pode expecificar opções, leia a Documentação Técnica disponível em www.s9y.org acerca de "Configuration of Theme options".');
+@define('STYLE_OPTIONS_NONE', 'Este tema/estilo não tem opções específicas. Para visualizar como o seu modelo (template) pode expecificar opções, leia a Documentação Técnica disponível em www.s9y.org acerca de "Configuration of Theme options".');
 @define('STYLE_OPTIONS', 'Opções de Tema/Estilo');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
-@define('SYNDICATION_RFC2616', 'Activar strict RFC2616 RSS-Feed compliance');
-@define('SYNDICATION_RFC2616_DESC', 'NÃO forçando o RFC2616 significa que todos os "Conditional GETs" pelo Serendipity irão retornar com as últimas entradas modificadas deste o seu último pedido. Uma vez colocando a configuração para "false", os seus visitantes irão obtêr todos os artigos pedidos no seu último pedido, o que é um bom resultado. No entanto, alguns Agentes tal como Planet irão agir estranhamente, se tal aconteçer, também irá violar o RFC2616. Se colocar esta opção para "TRUE", você irá seguir com aquele RFC, mas os leitores do seu RSS Feed talvés irão perder alguns itens nas suas férias. No entanto, e para todo o caso, ou adora Agredadores como o Planet, ou fere os leitores actuais do seu Blogue. Se você está a enfrentar queixas de ambos os lados, poderá manobrar esta opção. Referência: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
+@define('SYNDICATION_RFC2616', 'Activar obediência estrita ao RFC2616 RSS-Feed');
+@define('SYNDICATION_RFC2616_DESC', 'NÃO forçar o RFC2616 significa que todos os "Conditional GETs" pelo Serendipity irão devolver as últimas entradas modificadas deste o seu último pedido. Uma vez colocada a configuração como "false", os seus visitantes irão obter todos os artigos no seu último pedido, o que é um bom resultado. No entanto, alguns Agentes tal como Planet irão agir de forma estranha, se tal acontecer, violando também o RFC2616. Se colocar esta opção como "TRUE", você irá cumprir aquele RFC, mas os leitores do seu RSS Feed talvez percam alguns itens durante as férias. De qualquer forma, ou adora Agredadores como o Planet, ou fere os leitores actuais do seu Blogue. Se você está a enfrentar queixas de ambos os lados, poderá alterar esta opção. Referência: https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
 @define('MEDIA_PROPERTY_DATE', 'Data Associada');
-@define('MEDIA_PROPERTY_RUN_LENGTH', 'Cumprimento');
-@define('FILENAME_REASSIGNED', 'Associa um novo ficheiro automáticamente: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Max. do tamanho no ficheiro carregado');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Entre o tamanho máximo para upload de um ficheiro em bytes. Esta configuração poderá ser reescrita pelas definições incluidas no server-side do PHP.ini: upload_max_filesize, post_max_size, max_input_time em todos os precedentes acima desta opção. Um string vazio significa que apenas será utilizado  pelos limites do server-side.');
+@define('MEDIA_PROPERTY_RUN_LENGTH', 'Comprimento');
+@define('FILENAME_REASSIGNED', 'Associa um novo ficheiro automaticamente: %s');
+@define('MEDIA_UPLOAD_SIZE', 'Máximo do tamanho do ficheiro carregado');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'Introduza o tamanho máximo para upload de um ficheiro em bytes. Esta configuração poderá ser reescrita pelas definições incluídas no servidor via o ficheiro php.ini: upload_max_filesize, post_max_size, max_input_time em todos os precedentes acima desta opção. Um string vazio significa que apenas serão usado os limites definidos no servidor.');
 @define('MEDIA_UPLOAD_SIZEERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s bytes!');
-@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. de largura para imagens aquando upload');
-@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Entre o máximo de largura permitido por upload em pixels.');
-@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. de altura para imagens aquando upload');
+@define('MEDIA_UPLOAD_MAXWIDTH', 'Máximo de largura de imagens no upload');
+@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Entre o máximo de largura permitido no upload em pixels.');
+@define('MEDIA_UPLOAD_MAXHEIGHT', 'Máximo de altura de imagens no upload');
 @define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Entre o máximo de altura permitido por upload em pixels.');
 @define('MEDIA_UPLOAD_DIMERROR', 'Erro: Você não pode fazer upload de ficheiros maiores que %s x %s pixels!');
 
-@define('MEDIA_TARGET', 'Alvo para esta link');
-@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
-@define('MEDIA_ENTRY', 'Isolated Entry');
-@define('MEDIA_TARGET_BLANK', 'Janela Popup (via target=_blank)');
+@define('MEDIA_TARGET', 'Alvo para esta ligação');
+@define('MEDIA_TARGET_JS', 'Janela de Popup (via JavaScript, tamanho adaptável)');
+@define('MEDIA_ENTRY', 'Entrada isolada');
+@define('MEDIA_TARGET_BLANK', 'Janela de Popup (via target=_blank)');
 
-@define('MEDIA_DYN_RESIZE', 'Permitir redimencionamento dinãmico de images?');
-@define('MEDIA_DYN_RESIZE_DESC', 'Se activado, o seleccionador de media pode retornar as imagens em qualquer tamanho pretendido via a variante GET. Os resultados são cacheados, e assim, pode criar uma larga base de ficheiros se você fizer uso em extensividade.');
+@define('MEDIA_DYN_RESIZE', 'Permitir redimencionamento dinãmico de imagens?');
+@define('MEDIA_DYN_RESIZE_DESC', 'Se activado, o seleccionador de media pode retornar as imagens em qualquer tamanho pretendido via a variante GET. Os resultados são colocados em cache, podendo criar um grande conjunto de ficheiros se fizer uso extensivo desta possibilidade.');
 
 @define('MEDIA_DIRECTORY_MOVED', 'O Directório tal como os ficheiros foram movidos com sucesso para %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'O Directório tal como os ficheiros não poderão ser movidos para %s!');
-@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'Em bases de dados sem MySQL, intervindo através de cada artigo para substituir o directório antigo dos URLs com um novo directório não é possível. Será necessário editar as suas entradas manualmente para corrigir novos URLs. Você pode ainda mover o seu antigo directório de volta para onde ele se encontrava, se isso for muito incómodo para si.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moveu-se o URL do directório alterado para estas %s entradas..');@define('PLUGIN_ACTIVE', 'Activo');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'O Directório tal como os ficheiros não puderam ser movidos para %s!');
+@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'Em bases de dados distintas de MySQL não é possível intervir através de cada artigo para substituir o directório antigo dos URLs com um novo directório. Será necessário editar as suas entradas manualmente para corrigir novos URLs. Você pode ainda repôr o seu antigo directório onde ele se encontrava, se isso for muito incómodo para si.');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moveu-se o URL do directório alterado para estas %s entradas..');
+@define('PLUGIN_ACTIVE', 'Activo');
 @define('PLUGIN_INACTIVE', 'Inactivo');
-@define('PREFERENCE_USE_JS', 'Activar utilização de JS Avançado?');
+@define('PREFERENCE_USE_JS', 'Activar utilização de JavaScript Avançado?');
 @define('PREFERENCE_USE_JS_DESC', 'Se activado, as secções com JavaScript avançado irão ser activadas para melhor utilização, tal como a secção do plugin de configuração, "Plugin Configuration", poderá ser usada por si para arrastar e colar plugins reorganizados.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(Esta página usa JavaScripting avançado. Se você está a deparar-se com problemas funcionais, por favor, desactive a utilização de JS avançad nas suas preferencias pessoais ou desactive a função de JavaScript do seu Navegador.)');
+@define('PREFERENCE_USE_JS_WARNING', '(Esta página usa JavaScript avançado. Se está a deparar-se com problemas de funcionalidade, desactive por favor a utilização de JavaScript avançado nas suas preferências pessoais ou desactive a função de JavaScript do seu Navegador.)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path para comentários');
-@define('PERM_SET_CHILD', 'Configure as mesmas permissões para todos os directórios child');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Caminho para comentários');
+@define('PERM_SET_CHILD', 'Configure as mesmas permissões para todos os subdirectórios recursivamente');
 @define('PERMISSION_FORBIDDEN_PLUGINS', 'Plugins proibidos');
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Eventos proibidos');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Activar Plugin ACL para os grupos?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Se a opção "Plugin ACL for usergroups" está activada na configuração, você pode especificar que grupo estão autorizados a executar certos plugins/eventos.');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Activar Plugin ACL para grupos?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Se a opção "Plugin ACL para grupos" está activada na configuração, você pode especificar que grupos estão autorizados a executar certos plugins/eventos.');
 @define('DELETE_SELECTED_ENTRIES', 'Eliminar entradas seleccionadas');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Mostar apenas Autores com apenas X artigos');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Mostar apenas Autores com um mínimo de X artigos');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Marque esta ligação e use-a em qualquer página em que quiser blogar para aceder rapidamente ao seu blogue Serendipity.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

@@ -48,7 +48,13 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                    array('text'    => ACTIVATE_AUTODISCOVERY,
                                          'type'    => 'bool',
                                          'name'    => 'autodiscovery',
-                                         'default' => 'false')
+                                         'default' => 'false'),
+                                   
+                                   array('text'    => IMPORT_WP_PAGES,
+                                         'type'    => 'bool',
+                                         'name'    => 'import_all',
+                                         'default' => 'false'      
+                                   )
                             );
     }
 
@@ -164,7 +170,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         serendipity_rebuildCategoryTree();
 
         /* Entries */
-        $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}posts ORDER BY post_date;", $wpdb);
+        if (serendipity_db_bool($this->data['import_all'])) {
+            $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}posts WHERE post_status IN ('publish', 'draft') ORDER BY post_date;", $wpdb);
+        } else {
+            $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}posts ORDER BY post_date;", $wpdb);
+        }
         if ( !$res ) {
             return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
         }
@@ -172,11 +182,16 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         for ( $x=0 ; $x<mysql_num_rows($res) ; $x++ ) {
             $entries[$x] = mysql_fetch_assoc($res);
 
+            $content  = explode('<!--more-->', $entries[$x]['post_content'], 2);
+            $body     = $content[0];
+            $extended = $content[1];
+
             $entry = array('title'          => $this->decode($entries[$x]['post_title']), // htmlentities() is called later, so we can leave this.
                            'isdraft'        => ($entries[$x]['post_status'] == 'publish') ? 'false' : 'true',
                            'allow_comments' => ($entries[$x]['comment_status'] == 'open' ) ? 'true' : 'false',
                            'timestamp'      => strtotime($entries[$x]['post_date']),
-                           'body'           => $this->strtr($entries[$x]['post_content']));
+                           'body'           => $this->strtr($body),
+                           'extended'       => $this->strtr($extended));
 
             foreach ( $users as $user ) {
                 if ( $user['ID'] == $entries[$x]['post_author'] ) {

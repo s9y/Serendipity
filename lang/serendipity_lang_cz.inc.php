@@ -897,3 +897,4 @@ $i18n_filename_to = array (
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Zakázané události');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Povolit Plugin ACL pro u¾ivatelské skupiny?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Jestli¾e je volba "Plugin ACL pro u¾ivatelské skupiny" v konfiguraci povolena, mù¾ete urèit, které skupiny u¾ivatelù mohou provádìt urèité pluginy/události.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

@@ -899,3 +899,4 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Mostar apenas Autores com um mínimo de X artigos');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Marque esta ligação e use-a em qualquer página em que quiser blogar para aceder rapidamente ao seu blogue Serendipity.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');

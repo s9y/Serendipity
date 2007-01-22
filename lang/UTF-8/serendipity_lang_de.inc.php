@@ -884,3 +884,4 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Fügen Sie diesen Link als Lesezeichen/Favoriten hinzu. Dann können Sie dieses Lesezeichen auf jeder beliebigen Seite benutzen um so sofort in ihr Serendipity-Blog zu gelangen.');
+@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
