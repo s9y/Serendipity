@@ -204,8 +204,8 @@ class serendipity_event_bbcode extends serendipity_event
               '/(?<!\\\\)\[img(?::\w+)?=([0-9]*?)x([0-9]*?)\]' . $pattern_url . '\[\/img(?::\w+)?\]/si'       => "<img width=\"\\1\" height=\"\\2\" src=\"\\3\" alt=\"\\3\" class=\"bb-image\" />",
 
               // [quote]
-              '/(?<!\\\\)\[quote(?::\w+)?\](.*?)\[\/quote(?::\w+)?\]/si'                                      => "<div class=\"bb-code-title\">QUOTE:</div><div class=\"bb-code\">\\1</div>",
-              '/(?<!\\\\)\[quote(?::\w+)?=(?:&quot;|"|\')?(.*?)["\']?(?:&quot;|"|\')?\](.*?)\[\/quote\]/si'   => "<div class=\"bb-code-title\">QUOTE \\1:</div><div class=\"bb-code\">\\2</div>",
+              '/(?<!\\\\)\[quote(?::\w+)?\](.*?)\[\/quote(?::\w+)?\]/si'                                      => "<div class=\"bb-code-title\">QUOTE:</div><div class=\"bb-quote\">\\1</div>",
+              '/(?<!\\\\)\[quote(?::\w+)?=(?:&quot;|"|\')?(.*?)["\']?(?:&quot;|"|\')?\](.*?)\[\/quote\]/si'   => "<div class=\"bb-code-title\">QUOTE \\1:</div><div class=\"bb-quote\">\\2</div>",
 
               // [list]
               '/(?<!\\\\)(?:\s*<br\s*\/?>\s*)?\[\*(?::\w+)?\](.*?)(?=(?:\s*<br\s*\/?>\s*)?\[\*|(?:\s*<br\s*\/?>\s*)?\[\/?list)/si' => "\n<li class=\"bb-listitem\">\\1</li>",
@@ -268,7 +268,7 @@ class serendipity_event_bbcode extends serendipity_event
                         return true;
                     }
 ?>
-.bb-code, .bb-php, .bb-code-title, .bb-php-title {
+.bb-quote .bb-code, .bb-php, .bb-code-title, .bb-php-title {
     margin-left: 20px;
     margin-right: 20px;
     color: black;
@@ -286,10 +286,16 @@ class serendipity_event_bbcode extends serendipity_event
     font-family: courier, "courier new";
     background-color: #DDDDDD;
     padding: 10px;
-    white-space: nowrap;
+    white-space: pre;
     overflow: auto;
     max-height: 24em;
 }
+
+.bb-quote {
+    background-color: #DDDDDD;
+    padding: 10px;
+}
+
 .bb-list-ordered-d {
     list-style-type: decimal;
 }
