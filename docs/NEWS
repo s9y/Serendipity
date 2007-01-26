@@ -3,6 +3,12 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improve Livesearch-Plugin to abort search on outside-of-box
+      click, fetch proper "not found" message on zero results
+      (Lars Strojny)
+
+    * Change bbCode plugin to use "white-space: pre". Thanks to jtb!
+
     * Moved drag+drop and YahooUI library into templates/default/ to
       be used in shared installation environments (garvinhicking)
 

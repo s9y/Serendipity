@@ -55,7 +55,8 @@ function liveSearchInit() {
         document.getElementById('searchform').setAttribute('autocomplete','off');
         document.getElementById('serendipityQuickSearchTermField').setAttribute('autocomplete','off');
     }
-    document.getElementById('serendipityQuickSearchTermField').style.border = '1px solid green';
+
+	 document.onclick = liveSearchKeyPress
 }
 
 function liveSearchKeyPress(event) {
@@ -87,14 +88,14 @@ function liveSearchKeyPress(event) {
         }
         if (!isIE) { event.preventDefault(); }
     }
-    //ESC
-    else if (event.keyCode == 27) {
+    //ESC or mouse click
+    else if (event.keyCode == 27 || (event.clientX)) {
         highlight = document.getElementById("LSHighlight");
         if (highlight) {
             highlight.removeAttribute("id");
         }
         document.getElementById("LSResult").style.display = "none";
-    } else {
+	 } else {
         liveSearchStart();
     }
 }
@@ -108,7 +109,7 @@ function liveSearchStart() {
 function liveSearchDoSearch() {
     v = document.getElementById('serendipityQuickSearchTermField').value;
     if (liveSearchLast != v && v.length > 3) {
-        if (liveSearchReq && liveSearchReq.readyState < 4) {
+        if (liveSearchReq && liveSearchReq.readyState < 3) {
             liveSearchReq.abort();
         }
 
@@ -142,7 +143,12 @@ function liveSearchProcessReqChange() {
     if (liveSearchReq.readyState == 4) {
         var  res = document.getElementById("LSResult");
         res.style.display = "block";
-        res.firstChild.innerHTML = liveSearchReq.responseText;
+		  rawResult = liveSearchReq.responseText.replace(/<[^>]+>/g, '')
+		  if (parseInt(rawResult) == 1) {
+		      res.firstChild.innerHTML = notfoundtext
+        } else {
+            res.firstChild.innerHTML = liveSearchReq.responseText;
+        }
     }
 }
 
