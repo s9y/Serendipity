@@ -25,7 +25,7 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -177,7 +177,7 @@ class serendipity_event_emoticate extends serendipity_event
                             $element = &$eventData[$temp['element']];
 
                             foreach ($this->getEmoticons() as $key => $value) {
-                                $element = preg_replace("/([\t\s\.\!>]+)" . $key . "([\t\s\!\.\)<]+|\$)/U",
+                                $element = preg_replace("/([\t\s\.\!>]+|^)" . $key . "([\t\s\!\.\)<]+|\$)/U",
                                     "$1<img src=\"$value\" alt=\"" . $this->humanReadableEmoticon($key) . "\" style=\"display: inline; vertical-align: bottom;\" class=\"emoticon\" />$2",
                                     $element);
                             }
