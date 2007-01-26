@@ -61,6 +61,7 @@ class serendipity_event_livesearch extends serendipity_event
     position: absolute;
     margin-left: 4px;
     margin-top: 4px;
+       background-color: #fff7e8;
 }
 
 #LSShadow {
@@ -73,26 +74,25 @@ class serendipity_event_livesearch extends serendipity_event
 }
 
 #LSHighlight {
-    background-color: #80FF80;
+    background-color: #bdd2ec;
     color: black;
 }
 
 .serendipity_livesearch_row {
   margin: 0px;
-  line-height: 1.2em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   text-indent: -1em;
-  padding-left: 1em;
-  line-height: 1.2em;
-  padding-right: 1em;
+  line-height: 1.4em;
 }
 
 .serendipity_livesearch_result {
     position: relative;
     bottom: 2px;
-    right: 2px;
     border: 1px solid black;
+    right: 2px;
     padding: 2px;
 }
 <?php
@@ -108,6 +108,7 @@ class serendipity_event_livesearch extends serendipity_event
                     echo '<script type="text/javascript">
                     lsbase = "' . $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/ls' . ($serendipity['rewrite'] == 'none' ? '_&' : '?') . '";
                     waittext = "' . PLUGIN_EVENT_LIVESEARCH_WAIT . '";
+                    notfoundtext = "' . PLUGIN_EVENT_LIVESEARCH_NOTFOUND . '";
                     addLoadEvent(liveSearchInit);
                     </script>';
                     break;
