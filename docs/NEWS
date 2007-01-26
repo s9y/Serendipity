@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Dutch translation update with many fixes by Sam Geeraerts
+    
     * Improve Livesearch-Plugin to abort search on outside-of-box
       click, fetch proper "not found" message on zero results
       (Lars Strojny)
