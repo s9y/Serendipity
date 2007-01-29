@@ -875,5 +875,5 @@
 @define('DELETE_SELECTED_ENTRIES', 'Изтриване на избраните статии');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Показване само на автори с най-малко X статии');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
-@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Запомняне (отмятане) на тази връзка с възможност след това да бъде използвана, за да може съдържанието на страницата да се появява в съдържанието на статия в блога.');
+@define('IMPORT_WP_PAGES', 'Също приемане на статичните страници като нормални статии ?');
