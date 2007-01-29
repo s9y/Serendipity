@@ -54,7 +54,7 @@
 @define('DOWN', 'NEER');
 @define('ENTRIES', 'artikelen');
 @define('NEW_ENTRY', 'Nieuw artikel');
-@define('EDIT_ENTRIES', 'Bewerk bijdragen');
+@define('EDIT_ENTRIES', 'Bewerk artikelen');
 @define('CATEGORIES', 'Categorieën');
 @define('WARNING_THIS_BLAHBLAH', "WAARSCHUWING:\\nDit kan veel tijd in beslag nemen als er veel grote afbeeldingen zijn zonder miniatuur.");
 @define('CREATE_THUMBS', 'Creëer nieuwe indexafbeeldingen');
@@ -240,7 +240,7 @@
 @define('SYNDICATION_PLUGIN_TTL', 'Veld "ttl" (time-to-live)');
 @define('SYNDICATION_PLUGIN_TTL_DESC', 'Aantal minuten waarna uw weblog niet meer gecached mag worden door externe websites/applicaties (leeg: verborgen) [RSS 2.0]');
 @define('SYNDICATION_PLUGIN_PUBDATE', 'Veld "pubDate"');
-@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'Moet het "pubDate"-veld worden geïntegreerd in uw RSS-toevoer, om zo de dag van de laatste bijdrage te tonen?');
+@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'Moet het "pubDate"-veld worden geïntegreerd in uw RSS-toevoer, om zo de dag van de laatste artikel te tonen?');
 @define('CONTENT', 'Inhoud');
 @define('TYPE', 'Type');
 @define('DRAFT', 'Concept');
