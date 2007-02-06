@@ -185,7 +185,8 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total, $order
                                         ON (hp.mediaid = i.id AND hp.property_group = 'base_hidden')\n";
     }
 
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']    = '';
         $cond['distinct'] = 'DISTINCT';
     } else {
@@ -252,7 +253,8 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
         $assocVal = false;
     }
 
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']    = '';
         $cond['distinct'] = 'DISTINCT';
     } else {

@@ -149,7 +149,8 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
 
     $and .= $where;
 
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $group    = '';
         $distinct = 'DISTINCT';
     } else {
@@ -616,7 +617,8 @@ function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $f
 
     $pgsql_insert = '';
     $mysql_insert = '';
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $pgsql_insert = 'DISTINCT ON (email)';
     } else {
         $mysql_insert = 'GROUP BY email';

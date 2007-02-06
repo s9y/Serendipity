@@ -327,7 +327,8 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
 
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => $noCache, 'noSticky' => $noSticky, 'source' => 'entries'));
 
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $group    = '';
         $distinct = 'DISTINCT';
     } else {
@@ -613,7 +614,8 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
         $where .= " c.category_name = '" . serendipity_db_escape_string($name) . "'";
     }
 
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $group    = '';
         $distinct = 'DISTINCT';
     } else {
@@ -702,7 +704,8 @@ function &serendipity_searchEntries($term, $limit = '') {
 
     $term = serendipity_db_escape_string($term);
     $cond = array();
-    if ($serendipity['dbType'] == 'postgres') {
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
         $group     = '';
         $distinct  = 'DISTINCT';
         $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
