@@ -13,6 +13,8 @@
 @define('NUMBER_FORMAT_DECPOINT', '.');
 @define('NUMBER_FORMAT_THOUSANDS', ',');
 @define('LANG_DIRECTION', 'ltr');
+$i18n_filename_from = array(' ', 'a', 'A', '±', '¡', 'b', 'B', 'c', 'C', 'æ', 'Æ', 'd', 'D', 'e', 'E', 'ê', 'Ê', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', '³', '£', 'm', 'M', 'n', 'N', 'ñ', 'Ñ', 'o', 'O', 'ó', 'Ó', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', '¶', '¦', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z', '¼', '¬', '¿', '¯');
+$i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C', 'd', 'D', 'e', 'E', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i', 'I', 'j', 'J', 'k', 'K', 'l', 'L', 'l', 'L', 'm', 'M', 'n', 'N', 'n', 'N', 'o', 'O', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 's', 'S', 't', 'T', 'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z', 'z', 'Z', 'z', 'Z');
 
 @define('SERENDIPITY_ADMIN_SUITE', 'Panel Administracyjny Serendipity');
 @define('HAVE_TO_BE_LOGGED_ON', 'Musisz siê wpierw zalogowaæ by móc obejrzeæ tê stronê');
@@ -885,4 +887,3 @@
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Poka¿ tylko autorów maj±cych co najmniej X wpisów');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark (dodaj do Ulubionych) ten link i u¿yj na dowolnej stronie, o której chcesz blogowaæ, by szybko dostaæ siê do swojego bloga.');
-@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
