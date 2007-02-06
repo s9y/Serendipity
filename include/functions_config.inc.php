@@ -739,6 +739,10 @@ function serendipity_probeInstallation($item) {
             if (extension_loaded('mysql')) {
                 $res['mysql'] = 'MySQL';
             }
+            if (extension_loaded('PDO') &&
+                in_array('pgsql', PDO::getAvailableDrivers())) {
+                $res['pdo-postgres'] = 'PDO::PostgreSQL';
+            }
             if (extension_loaded('pgsql')) {
                 $res['postgres'] = 'PostgreSQL';
             }

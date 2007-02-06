@@ -182,6 +182,10 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
             if (extension_loaded('mysqli')) {
                 $type = 'mysqli';
             }
+            if (extension_loaded('PDO') &&
+                in_array('pgsql', PDO::getAvailableDrivers())) {
+                $type = 'pdo-postgres';
+            }
             if (extension_loaded('pgsql')) {
                 $type = 'postgres';
             }

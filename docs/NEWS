@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Added PDO:PostgreSQL support (Theo Schlossnagle)
+
     * Dutch translation update with many fixes by Sam Geeraerts
     
     * Improve Livesearch-Plugin to abort search on outside-of-box

@@ -127,6 +127,7 @@ function serendipity_db_get_interval($val, $ival = 900) {
             $ts       = time();
             break;
 
+        case 'pdo-postgres':
         case 'postgres':
             $interval = "interval '$ival'";
             $ts       = 'NOW()';

@@ -367,7 +367,8 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
     }
 
     if ($is_count || $group != null) {
-        if ($serendipity['dbType'] == 'postgres') {
+        if ($serendipity['dbType'] == 'postgres' ||
+            $serendipity['dbType'] == 'pdo-postgres') {
             // Why does PostgreSQL keep doing this to us? :-)
             $query_group    = 'GROUP BY a.authorid, a.realname, a.username, a.password, a.mail_comments, a.mail_trackbacks, a.email, a.userlevel, a.right_publish';
             $query_distinct = 'DISTINCT';
