@@ -231,7 +231,7 @@ switch($version) {
 
     case 'atom1.0':
         // For people wanting extra RFC compliance
-        // header('Content-Type: application/atom+xml; charset=utf8');
+        // header('Content-Type: application/atom+xml; charset=utf-8');
         $namespace_hook = 'frontend_display:atom-1.0:namespace';
         break;
 }

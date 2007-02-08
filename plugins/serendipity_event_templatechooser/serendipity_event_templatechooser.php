@@ -60,7 +60,7 @@ class serendipity_event_templatechooser extends serendipity_event
 
                 if (isset($_REQUEST['user_template']) && (in_array($_REQUEST['user_template'], serendipity_fetchTemplates())) ) {
                     $_SESSION['serendipityUseTemplate'] = $_REQUEST['user_template'];
-                    serendipity_setCookie('user_template', $_REQUEST['user_template']);
+                    serendipity_setCookie('user_template', $_REQUEST['user_template'], false);
                 }
 
                 if (isset($_SESSION['serendipityUseTemplate']) ) {

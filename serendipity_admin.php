@@ -25,9 +25,17 @@ if (IS_installed === false) {
 if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModule'] == 'logout') {
     serendipity_logout();
 } else {
-    if (IS_installed === true && !serendipity_userLoggedIn()) {
-        // Try again to log in, this time with enabled external authentication event hook
-        serendipity_login(true);
+    if (IS_installed === true) {
+        /* Check author token to insure session not hijacked */
+        if (!isset($_SESSION['author_token']) || !isset($serendipity['COOKIE']['author_token']) || 
+            ($_SESSION['author_token'] !== $serendipity['COOKIE']['author_token'])) {
+            $_SESSION['serendipityAuthedUser'] = false;
+            @session_destroy();
+        }
+        if (!serendipity_userLoggedIn()) {
+            // Try again to log in, this time with enabled external authentication event hook
+            serendipity_login(true);
+        }
     }
 }
 
