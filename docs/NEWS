@@ -3,6 +3,11 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Support shared http/https sessions. Performing admin actions will
+      only be allowed (through tokens) on the protocol that was used for
+      login. Patch by Rob Richards
+      (http://board.s9y.org/viewtopic.php?p=49276)
+
     * Added PDO:PostgreSQL support (Theo Schlossnagle)
 
     * Dutch translation update with many fixes by Sam Geeraerts

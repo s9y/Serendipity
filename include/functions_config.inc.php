@@ -436,6 +436,12 @@ function serendipity_checkAutologin($ident, $iv) {
     return $cookie;
 }
 
+function serendipity_setAuthorToken() {
+        $hash = sha1(uniqid(rand(), true));
+        serendipity_setCookie('author_token', $hash);
+        $_SESSION['author_token'] = $hash;
+}
+
 /**
  * Perform user authentication routine
  *
@@ -479,7 +485,10 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
         $row =& serendipity_db_query($query, true, 'assoc');
 
         if (is_array($row)) {
-            serendipity_setCookie('old_session', session_id());
+            serendipity_setCookie('old_session', session_id(), false);
+            if (!$is_md5) {
+                serendipity_setAuthorToken();
+            }
             $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
             $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
             $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword']     = $password;
@@ -560,10 +569,14 @@ function serendipity_JSsetCookie($name, $value) {
  * @param   string      The contents of the cookie variable
  * @return null
  */
-function serendipity_setCookie($name,$value) {
+function serendipity_setCookie($name, $value, $securebyprot = true) {
     global $serendipity;
 
-    $secure = (strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
+    if ($securebyprot) {
+        $secure = (strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
+    } else {
+        $secure = false;
+    }
     setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $_SERVER['HTTP_HOST'], $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
