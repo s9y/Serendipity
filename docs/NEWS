@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Update spamblock plugin to update a .htaccess file with DENY
+      rules based on recent spammer IPs. EXPERIMENTAL.
+
     * Support shared http/https sessions. Performing admin actions will
       only be allowed (through tokens) on the protocol that was used for
       login. Patch by Rob Richards
