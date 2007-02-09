@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.64');
+        $propbag->add('version',       '1.65');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -77,6 +77,7 @@ var $filter_defaults;
             'hide_email',
             'checkmail',
             'required_fields',
+            'automagic_htaccess',
             'logtype',
             'logfile'));
         $propbag->add('groups', array('ANTISPAM'));
@@ -111,6 +112,13 @@ var $filter_defaults;
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC);
+                $propbag->add('default', false);
+                break;
+
+            case 'automagic_htaccess':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_HTACCESS);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC);
                 $propbag->add('default', false);
                 break;
 
@@ -374,6 +382,40 @@ var $filter_defaults;
         return true;
     }
 
+    function htaccess_update($new_ip) {
+        global $serendipity;
+
+        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}spamblock_htaccess (ip, timestamp) VALUES ('" . serendipity_db_escape_string($new_ip) . "', '" . time() . "')");
+
+        $q = "SELECT ip FROM {$serendipity['dbPrefix']}spamblock_htaccess WHERE timestamp > " . (time() - 86400*2) . " GROUP BY ip";
+        $rows = serendipity_db_query($q, false, 'assoc');
+        
+        $deny = array();
+        foreach($rows AS $row) {
+            $deny[] = $row['ip'];
+        }
+        
+        $hta = $serendipity['serendipityPath'] . '.htaccess';
+        if (file_exists($hta) && is_writable($hta)) {
+            $htaccess = file_get_contents($hta);
+            $fp = @fopen($hta, 'w');
+            if (!$fp) {
+                return false;
+            } else {
+                // Check if an old htaccess file existed and try to preserve its contents. Otherwise completely wipe the file.
+                if ($htaccess != '' && preg_match('@^(.*)#SPAMDENY.*Deny From.+#/SPAMDENY(.*)$@imsU', $htaccess, $match)) {
+                    // Code outside from s9y-code was found.
+                    $content = trim($match[1]) . "\n#SPAMDENY\nDeny From " . implode(',', $deny) . "\n#/SPAMDENY\n" . trim($match[2]);
+                } else {
+                    $content = trim($htaccess) . "\n#SPAMDENY\nDeny From " . implode(',', $deny) . "\n#/SPAMDENY\n";
+                }
+                fwrite($fp, $content);
+                fclose($fp);
+                return true;
+            }
+        }
+    }
+    
     function &getBlacklist($where, $api_key = '', &$eventData, &$addData) {
         global $serendipity;
 
@@ -506,9 +548,14 @@ var $filter_defaults;
     function checkScheme($maxVersion) {
         global $serendipity;
 
-        $version = $this->get_config('version', '1.0');
+        $version = $this->get_config('version', '1.1');
 
-        if ($version != $maxVersion) {
+        if ($version != '1.0') {
+            $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblock_htaccess (
+                          timestamp int(10) {UNSIGNED} default null,
+                          ip varchar(15))";
+            $sql = serendipity_db_schema_import($q);
+        } elseif ($version != $maxVersion) {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblocklog (
                           timestamp int(10) {UNSIGNED} default null,
                           type varchar(255),
@@ -532,6 +579,11 @@ var $filter_defaults;
             $q   = "CREATE INDEX kspamentryidx ON {$serendipity['dbPrefix']}spamblocklog (entry_id);";
             $sql = serendipity_db_schema_import($q);
 
+            $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblock_htaccess (
+                          timestamp int(10) {UNSIGNED} default null,
+                          ip varchar(15))";
+            $sql = serendipity_db_schema_import($q);
+
             $this->set_config('version', $maxVersion);
         }
 
@@ -540,6 +592,16 @@ var $filter_defaults;
 
     function generate_content(&$title) {
         $title = $this->title;
+    }
+
+    // This method will be called on "fatal" spam errors that are unlikely to occur accidentally by users.
+    // Their IPs will be constantly blocked.
+    function IsHardcoreSpammer() {
+        global $serendipity;
+        
+        if (serendipity_db_bool($this->get_config('automagic_htaccess'))) {
+            $this->htaccess_update($_SERVER['REMOTE_ADDR']);
+        }
     }
 
     // Checks whether the current author is contained in one of the gorups that need no spam checking
@@ -642,6 +704,14 @@ var $filter_defaults;
                                 }
                             }
                         }
+                        
+                        /*
+                        if ($addData['type'] != 'NORMAL' && empty($addData['name'])) {
+                            $eventData = array('allow_coments' => false);
+                            $this->log($logfile, $eventData['id'], 'INVALIDGARV', 'INVALIDGARV', $addData);
+                            return false;
+                        }
+                        */
 
                         // Check whether to allow comments from registered authors
                         if (serendipity_userLoggedIn() && $this->inGroup()) {
@@ -657,7 +727,7 @@ var $filter_defaults;
                         }
 
                         // Check for global emergency moderation
-                        if ( $this->get_config('killswitch', false) === true ) {
+                        if ($this->get_config('killswitch', false) === true) {
                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_KILLSWITCH, $addData);
                             $eventData = array('allow_comments' => false);
                             $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
@@ -686,6 +756,7 @@ var $filter_defaults;
                         if (!empty($akismet_apikey) && ($akismet == 'moderate' || $akismet == 'reject')) {
                             $spam = $this->getBlacklist('akismet.com', $akismet_apikey, $eventData, $addData);
                             if ($spam['is_spam'] !== false) {
+                                $this->IsHardcoreSpammer();
                                 if ($akismet == 'moderate') {
                                     $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST . ': ' . $spam['message'], $addData);
                                     $eventData['moderate_comments'] = true;
@@ -809,6 +880,7 @@ var $filter_defaults;
                                         continue;
                                     }
                                     if (preg_match('@(' . $filter_email . ')@i', $addData['email'], $wordmatch)) {
+                                        $this->IsHardcoreSpammer();
                                         if ($filter_type == 'moderate') {
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1], $addData);
                                             $eventData['moderate_comments'] = true;
@@ -837,6 +909,7 @@ var $filter_defaults;
                                     }
 
                                     if (preg_match('@' . preg_quote($domain) . '@i', $addData['url'])) {
+                                        $this->IsHardcoreSpammer();
                                         if ($bloggdeblacklist == 'moderate') {
                                             $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ': ' . $domain, $addData);
                                             $eventData['moderate_comments'] = true;
@@ -919,6 +992,7 @@ var $filter_defaults;
                             $query = "SELECT count(id) AS counter FROM {$serendipity['dbPrefix']}comments WHERE body = '" . serendipity_db_escape_string($addData['comment']) . "'";
                             $row   = serendipity_db_query($query, true);
                             if (is_array($row) && $row['counter'] > 0) {
+                                $this->IsHardcoreSpammer();
                                 $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_BODYCLONE, $addData);
                                 $eventData = array('allow_comments' => false);
                                 $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;

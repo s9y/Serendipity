@@ -118,3 +118,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'Use CSRF protection for comments?');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'If enabled, a special hash value will check that only users can submit a comment with a valid session ID. This will decrease spam and prevent users from tricking you into submitting comments via CSRF, but it will also prevent users commenting on your blog without cookies.');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Your comment did not contain a Session-Hash. Comments can only be made on this blog when having cookies enabled!');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'Block bad IPs via HTaccess?');
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Enabling this will add IPs that have sent spam to your blog to your .htaccess file. The .htaccess file will be regenerated regularly with the forbidden IPs of the last month.');
