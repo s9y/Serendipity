@@ -60,6 +60,9 @@ Version 1.2 ()
 Version 1.1.1 ()
 ------------------------------------------------------------------------
 
+    * Patch pingback receiving function to use proper Regexp, thanks to 
+      dhaun from the forums
+      
     * Make categories sidebar plugin properly return evaluated categories
       list to plugin_categories.tpl template. Currently, a hidden
       structure would only be displayed when not using custom
