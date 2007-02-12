@@ -316,7 +316,7 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
 function add_pingback ($id, $postdata) {
     global $serendipity;
 
-    if(preg_match('@<methodcall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<])*</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<])*</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@i', $postdata, $matches)) {
+    if(preg_match('@<methodcall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@i', $postdata, $matches)) {
         $remote             = $matches[1];
         $local              = $matches[2];
         $comment['title']   = '';
