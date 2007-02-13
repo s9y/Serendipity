@@ -1879,7 +1879,7 @@ function &serendipity_loadThemeOptions(&$template_config) {
     return $template_vars;
 }
 
-function serendipity_hasPluginPermissions($plugin) {
+function serendipity_hasPluginPermissions($plugin, $groupid = null) {
     static $forbidden = null;
     global $serendipity;
 
@@ -1887,22 +1887,28 @@ function serendipity_hasPluginPermissions($plugin) {
         return true;
     }
 
-    if ($forbidden === null) {
+    if ($forbidden === null || ($groupid !== null && !isset($forbidden[$groupid]))) {
         $forbidden = array();
-        $groups =& serendipity_checkPermission(null, null, 'all');
+        
+        if ($groupid === null) {
+            $groups =& serendipity_checkPermission(null, null, 'all');
+        } else {
+            $groups = array($groupid => serendipity_fetchGroup($groupid));
+        }
+
         foreach($groups AS $idx => $group) {
             if ($idx == 'membership') {
                 continue;
             }
             foreach($group AS $key => $val) {
                 if (substr($key, 0, 2) == 'f_') {
-                    $forbidden[$key] = true;
+                    $forbidden[$groupid][$key] = true;
                 }
             }
         }
     }
 
-    if (isset($forbidden['f_' . $plugin])) {
+    if (isset($forbidden[$groupid]['f_' . $plugin])) {
         return false;
     } else {
         return true;

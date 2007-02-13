@@ -60,6 +60,11 @@ Version 1.2 ()
 Version 1.1.1 ()
 ------------------------------------------------------------------------
 
+    * Patch plugin permissionship management to properly indicate
+      forbidden plugins/hooks, even if the admin user is not contained
+      within the configured group. Thanks to ICE!
+      (http://board.s9y.org/viewtopic.php?t=8773) (garvinhicking)
+                
     * Patch pingback receiving function to use proper Regexp, thanks to 
       dhaun from the forums
       
