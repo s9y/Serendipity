@@ -183,6 +183,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
     }
 
     serendipity_plugin_api::hook_event('fetchcomments', $comments);
+
     return $comments;
 }
 

@@ -193,7 +193,7 @@ foreach($allusers AS $user) {
                     foreach($currentplugin['b']->properties['event_hooks'] AS $hook => $set) {
                         $allhooks[$hook] = true;
                     }
-                    echo '<option value="' . urlencode($plugid) . '" ' . (serendipity_hasPluginPermissions($plugid) ? '' : 'selected="selected"') . '>' . htmlspecialchars($currentplugin['b']->properties['name']) . '</option>' . "\n";
+                    echo '<option value="' . urlencode($plugid) . '" ' . (serendipity_hasPluginPermissions($plugid, $from['id']) ? '' : 'selected="selected"') . '>' . htmlspecialchars($currentplugin['b']->properties['name']) . '</option>' . "\n";
                 }
                 ksort($allhooks);
             ?>
@@ -210,7 +210,7 @@ foreach($allusers AS $user) {
             <select name="serendipity[forbidden_hooks][]" multiple="multiple" size="5">
             <?php
                 foreach($allhooks AS $hook => $set) {
-                    echo '<option value="' . urlencode($hook) . '" ' . (serendipity_hasPluginPermissions($hook) ? '' : 'selected="selected"') . '>' . htmlspecialchars($hook) . '</option>' . "\n";
+                    echo '<option value="' . urlencode($hook) . '" ' . (serendipity_hasPluginPermissions($hook, $from['id']) ? '' : 'selected="selected"') . '>' . htmlspecialchars($hook) . '</option>' . "\n";
                 }
             ?>
             </select>
