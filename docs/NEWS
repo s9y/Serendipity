@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Do not store an unnecessary config value for check_password
+      and password user properties. Thanks to jenzo from the forums!
+      (garvinhicking)
+      
     * Update spamblock plugin to update a .htaccess file with DENY
       rules based on recent spammer IPs. EXPERIMENTAL.
 

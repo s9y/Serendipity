@@ -97,6 +97,11 @@ function serendipity_set_config_var($name, $val, $authorid = 0) {
     global $serendipity;
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}config where name='" . serendipity_db_escape_string($name) . "' AND authorid = " . (int)$authorid);
+
+    if ($name == 'password' || $name == 'check_password') {
+        return;
+    }
+
     $r = serendipity_db_insert('config', array('name' => $name, 'value' => $val, 'authorid' => $authorid));
 
     if ($authorid === 0 || $authorid === $serendipity['authorid']) {
