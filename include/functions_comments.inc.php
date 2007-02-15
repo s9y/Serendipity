@@ -561,7 +561,9 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
         $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
                  FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
                  WHERE e.id  = '". (int)$id ."'
-                 AND e.authorid = a.authorid";
+                   AND e.isdraft = 'false'
+                   AND e.timestamp <= " . time() . "
+                   AND e.authorid = a.authorid";
         $row = serendipity_db_query($query, true); // Get info on author/entry
         if (!is_array($row) || empty($id)) {
             // No associated entry found.
