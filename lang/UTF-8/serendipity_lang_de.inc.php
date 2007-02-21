@@ -30,7 +30,7 @@
 @define('NAME', 'Name');
 @define('NEW_TRACKBACK_TO', 'Neues Trackback für');
 @define('NEW_COMMENT_TO', 'Neuer Kommentar für');
-@define('RECENT', 'Das neueste ...');
+@define('RECENT', 'Das Neueste ...');
 @define('OLDER', 'Älteres ...');
 @define('ANONYMOUS', 'Anonym');
 @define('CREATE_NEW_CAT', 'Neue Kategorie');
