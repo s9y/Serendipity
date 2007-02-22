@@ -3,6 +3,12 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improve memory usage of WordPress importer, add debug output
+      (garvinhicking)
+      
+    * EXPERIMENTAL: Modify session language fetch function to allow 
+      earlier plugin API calls (Rob Richards)
+
     * No longer accept trackbacks to draft entries.Thanks to j_b_poquelin 
       (garvinhicking)
 
@@ -64,7 +70,13 @@ Version 1.2 ()
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
-Version 1.1.1 ()
+Version 1.1.2 ()
+-----------------------------------------------------------------------
+
+    * Better checks to see if the local PEAR inclusion is required
+      (garvinhicking)
+
+Version 1.1.1 (February 22nd, 2007)
 ------------------------------------------------------------------------
 
     * Patch plugin permissionship management to properly indicate

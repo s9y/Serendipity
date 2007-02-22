@@ -68,6 +68,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
 
     function import() {
         global $serendipity;
+        static $debug = true;
 
         // Save this so we can return it to its original value at the end of this method.
         $noautodiscovery = isset($serendipity['noautodiscovery']) ? $serendipity['noautodiscovery'] : false;
@@ -84,90 +85,121 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         $entries = array();
 
         if ( !extension_loaded('mysql') ) {
-            return MYSQL_REQUIRED;;
+            return MYSQL_REQUIRED;
+        }
+
+        if (function_exists('set_time_limit')) {
+            @set_time_limit(300);
         }
 
         $wpdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if ( !$wpdb ) {
+        if (!$wpdb) {
             return sprintf(COULDNT_CONNECT, $this->data['host']);
         }
 
-        if ( !@mysql_select_db($this->data['name']) ) {
+        if (!@mysql_select_db($this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysql_error($wpdb));
         }
+        
+        // This will hold the s9y <-> WP ID associations.
+        $assoc = array();
 
         /* Users */
         // Fields: ID, user_login, user_pass, user_email, user_level
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}users;", $wpdb);
-        if ( !$res ) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($wpdb));
-        }
-
-        for ( $x=0 ; $x<mysql_num_rows($res) ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
-
-            $data = array('right_publish' => (!isset($users[$x]['user_level']) || $users[$x]['user_level'] >= 1) ? 1 : 0,
-                          'realname'      => $users[$x]['user_login'],
-                          'username'      => $users[$x]['user_login'],
-                          'password'      => $users[$x]['user_pass']); // WP uses md5, too.
-
-            if ( isset($users[$x]['user_level']) && $users[$x]['user_level'] <= 1 ) {
-                $data['userlevel'] = USERLEVEL_EDITOR;
-            } elseif ( isset($users[$x]['user_level']) && $users[$x]['user_level'] < 5 ) {
-                $data['userlevel'] = USERLEVEL_CHIEF;
-            } else {
-                $data['userlevel'] = USERLEVEL_ADMIN;
+        if (!$res) {
+            printf(COULDNT_SELECT_USER_INFO, mysql_error($wpdb));
+        } else {
+            if ($debug) echo "Importing users...<br />\n";
+            for ($x=0, $c = mysql_num_rows($res) ; $x < $c ; $x++) {
+                $users[$x] = mysql_fetch_assoc($res);
+    
+                $data = array('right_publish' => (!isset($users[$x]['user_level']) || $users[$x]['user_level'] >= 1) ? 1 : 0,
+                              'realname'      => $users[$x]['user_login'],
+                              'username'      => $users[$x]['user_login'],
+                              'password'      => $users[$x]['user_pass']); // WP uses md5, too.
+    
+                if (isset($users[$x]['user_level']) && $users[$x]['user_level'] <= 1) {
+                    $data['userlevel'] = USERLEVEL_EDITOR;
+                } elseif (isset($users[$x]['user_level']) && $users[$x]['user_level'] < 5) {
+                    $data['userlevel'] = USERLEVEL_CHIEF;
+                } else {
+                    $data['userlevel'] = USERLEVEL_ADMIN;
+                }
+    
+                if ($serendipity['serendipityUserlevel'] < $data['userlevel']) {
+                    $data['userlevel'] = $serendipity['serendipityUserlevel'];
+                }
+    
+                serendipity_db_insert('authors', $this->strtrRecursive($data));
+                $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
+                
+                // Set association.
+                $assoc['users'][$users[$x]['ID']] = $users[$x]['authorid'];
             }
-
-            if ($serendipity['serendipityUserlevel'] < $data['userlevel']) {
-                $data['userlevel'] = $serendipity['serendipityUserlevel'];
-            }
-
-            serendipity_db_insert('authors', $this->strtrRecursive($data));
-            $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
+            if ($debug) echo "Imported users.<br />\n";
+            
+            // Clean memory
+            unset($users);
         }
 
         /* Categories */
-        $res = @$this->nativeQuery("SELECT cat_ID, cat_name, category_description, category_parent FROM {$this->data['prefix']}categories ORDER BY category_parent, cat_ID;", $wpdb);
-        if ( !$res ) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($wpdb));
-        }
+        $res = @$this->nativeQuery("SELECT cat_ID, cat_name, category_description, category_parent 
+                                      FROM {$this->data['prefix']}categories 
+                                  ORDER BY category_parent, cat_ID;", $wpdb);
+        if (!$res) {
+            printf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($wpdb));
+        } else {
+            if ($debug) echo "Importing categories...<br />\n";
 
-        // Get all the info we need
-        for ( $x=0 ; $x<mysql_num_rows($res) ; $x++ )
-            $categories[] = mysql_fetch_assoc($res);
-
-        // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
-        for ( $x=0 ; $x<sizeof($categories) ; $x++ ) {
-            $cat = array('category_name'        => $categories[$x]['cat_name'],
-                         'category_description' => $categories[$x]['category_description'],
-                         'parentid'             => 0, // <---
-                         'category_left'        => 0,
-                         'category_right'       => 0);
-
-            serendipity_db_insert('category', $this->strtrRecursive($cat));
-            $categories[$x]['categoryid'] = serendipity_db_insert_id('category', 'categoryid');
-        }
-
-        // There has to be a more efficient way of doing this...
-        foreach ( $categories as $cat ) {
-            if ( $cat['category_parent'] != 0 ) {
-                // Find the parent
-                $par_id = 0;
-                foreach ( $categories as $possible_par ) {
-                    if ( $possible_par['cat_ID'] == $cat['category_parent'] ) {
-                        $par_id = $possible_par['categoryid'];
-                        break;
+            // Get all the info we need
+            for ($x=0 ; $x<mysql_num_rows($res) ; $x++) {
+                $categories[] = mysql_fetch_assoc($res);
+            }
+    
+            // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
+            for ($x=0, $c = sizeof($categories) ; $x < $c ; $x++) {
+                $cat = array('category_name'        => $categories[$x]['cat_name'],
+                             'category_description' => $categories[$x]['category_description'],
+                             'parentid'             => 0,
+                             'category_left'        => 0,
+                             'category_right'       => 0);
+    
+                serendipity_db_insert('category', $this->strtrRecursive($cat));
+                $categories[$x]['categoryid'] = serendipity_db_insert_id('category', 'categoryid');
+                
+                // Set association.
+                $assoc['categories'][$categories[$x]['cat_ID']] = $categories[$x]['categoryid'];
+            }
+    
+            foreach ($categories as $cat) {
+                if ($cat['category_parent'] != 0) {
+                    // Find the parent
+                    $par_id = 0;
+                    foreach ($categories as $possible_par) {
+                        if ($possible_par['cat_ID'] == $cat['category_parent']) {
+                            $par_id = $possible_par['categoryid'];
+                            break;
+                        }
+                    }
+    
+                    if ($par_id != 0) {
+                        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}category 
+                                                 SET parentid={$par_id} 
+                                               WHERE categoryid={$cat['categoryid']};");
                     }
                 }
-
-                if ( $par_id != 0 ) {
-                  serendipity_db_query("UPDATE {$serendipity['dbPrefix']}category SET parentid={$par_id} WHERE categoryid={$cat['categoryid']};");
-                } // else { echo "D'oh! " . random_string_of_profanity(); }
             }
+
+            // Clean memory
+            unset($categories);
+
+            if ($debug) echo "Imported categories.<br />\n";
+            if ($debug) echo "Rebuilding category tree...<br />\n";
+            serendipity_rebuildCategoryTree();
+            if ($debug) echo "Rebuilt category tree.<br />\n";
         }
 
-        serendipity_rebuildCategoryTree();
 
         /* Entries */
         if (serendipity_db_bool($this->data['import_all'])) {
@@ -175,86 +207,81 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         } else {
             $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}posts ORDER BY post_date;", $wpdb);
         }
-        if ( !$res ) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
-        }
 
-        for ( $x=0 ; $x<mysql_num_rows($res) ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
-
-            $content  = explode('<!--more-->', $entries[$x]['post_content'], 2);
-            $body     = $content[0];
-            $extended = $content[1];
-
-            $entry = array('title'          => $this->decode($entries[$x]['post_title']), // htmlentities() is called later, so we can leave this.
-                           'isdraft'        => ($entries[$x]['post_status'] == 'publish') ? 'false' : 'true',
-                           'allow_comments' => ($entries[$x]['comment_status'] == 'open' ) ? 'true' : 'false',
-                           'timestamp'      => strtotime($entries[$x]['post_date']),
-                           'body'           => $this->strtr($body),
-                           'extended'       => $this->strtr($extended));
-
-            foreach ( $users as $user ) {
-                if ( $user['ID'] == $entries[$x]['post_author'] ) {
-                    $entry['authorid'] = $user['authorid'];
-                    break;
+        if (!$res) {
+            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+        } else {
+            if ($debug) echo "Importing entries...<br />\n";
+            for ($x=0, $c = mysql_num_rows($res) ; $x < $c ; $x++ ) {
+                $entries[$x] = mysql_fetch_assoc($res);
+    
+                $content  = explode('<!--more-->', $entries[$x]['post_content'], 2);
+                $body     = $content[0];
+                $extended = $content[1];
+    
+                $entry = array('title'          => $this->decode($entries[$x]['post_title']), // htmlentities() is called later, so we can leave this.
+                               'isdraft'        => ($entries[$x]['post_status'] == 'publish') ? 'false' : 'true',
+                               'allow_comments' => ($entries[$x]['comment_status'] == 'open' ) ? 'true' : 'false',
+                               'timestamp'      => strtotime($entries[$x]['post_date']),
+                               'body'           => $this->strtr($body),
+                               'extended'       => $this->strtr($extended),
+                               'authorid'       => $assoc['users'][$entries[$x]['post_author']]);
+    
+                if (!is_int($entries[$x]['entryid'] = serendipity_updertEntry($entry))) {
+                    printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+                    echo "ID: {$entries[$x]['ID']} - {$entry['title']}<br />\n";
+                    return $entries[$x]['entryid'];
                 }
+                
+                $assoc['entries'][$entries[$x]['ID']] = $entries[$x]['entryid'];
             }
+            if ($debug) echo "Imported entries...<br />\n";
 
-            if ( !is_int($entries[$x]['entryid'] = serendipity_updertEntry($entry)) ) {
-                return $entries[$x]['entryid'];
-            }
+            // Clean memory
+            unset($entries);
         }
-
+    
         /* Entry/category */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}post2cat;", $wpdb);
-        if ( !$res ) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
-        }
-
-        while ( $a = mysql_fetch_assoc($res) ) {
-            foreach ( $categories as $category ) {
-                if ( $category['cat_ID'] == $a['category_id'] ) {
-                    foreach ( $entries as $entry ) {
-                        if ( $a['post_id'] == $entry['ID'] ) {
-                            $data = array('entryid' => $entry['entryid'],
-                                          'categoryid' => $category['categoryid']);
-                            serendipity_db_insert('entrycat', $this->strtrRecursive($data));
-                            break;
-                        }
-                    }
-                    break;
-                }
+        if (!$res) {
+            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+        } else {
+            if ($debug) echo "Importing category associations...<br />\n";
+            while ($a = mysql_fetch_assoc($res)) {
+                $data = array('entryid'    => $assoc['entries'][$a['post_id']],
+                              'categoryid' => $assoc['categories'][$a['category_id']]);
+                serendipity_db_insert('entrycat', $this->strtrRecursive($data));
             }
+            if ($debug) echo "Imported category associations.<br />\n";
         }
 
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments;", $wpdb);
-        if ( !$res ) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($wpdb));
-        }
-
-        while ( $a = mysql_fetch_assoc($res) ) {
-            foreach ( $entries as $entry ) {
-                if ( $entry['ID'] == $a['comment_post_ID'] ) {
-                    $comment = array('entry_id ' => $entry['entryid'],
-                                     'parent_id' => 0,
-                                     'timestamp' => strtotime($a['comment_date']),
-                                     'author'    => $a['comment_author'],
-                                     'email'     => $a['comment_author_email'],
-                                     'url'       => $a['comment_author_url'],
-                                     'ip'        => $a['comment_author_IP'],
-                                     'status'    => (empty($a['comment_approved']) || $a['comment_approved'] == '1') ? 'approved' : 'pending',
-                                     'subscribed'=> 'false',
-                                     'body'      => $a['comment_content'],
-                                     'type'      => 'NORMAL');
-
-                    serendipity_db_insert('comments', $this->strtrRecursive($comment));
-                    if ($comment['status'] == 'approved') {
-                        $cid = serendipity_db_insert_id('comments', 'id');
-                        serendipity_approveComment($cid, $entry['entryid'], true);
-                    }
+        if (!$res) {
+            printf(COULDNT_SELECT_COMMENT_INFO, mysql_error($wpdb));
+        } else {
+            $serendipity['allowSubscriptions'] = false;
+            if ($debug) echo "Importing comments...<br />\n";
+            while ($a = mysql_fetch_assoc($res)) {
+                $comment = array('entry_id ' => $assoc['entries'][$a['comment_post_ID']],
+                                 'parent_id' => 0,
+                                 'timestamp' => strtotime($a['comment_date']),
+                                 'author'    => $a['comment_author'],
+                                 'email'     => $a['comment_author_email'],
+                                 'url'       => $a['comment_author_url'],
+                                 'ip'        => $a['comment_author_IP'],
+                                 'status'    => (empty($a['comment_approved']) || $a['comment_approved'] == '1') ? 'approved' : 'pending',
+                                 'subscribed'=> 'false',
+                                 'body'      => $a['comment_content'],
+                                 'type'      => 'NORMAL');
+    
+                serendipity_db_insert('comments', $this->strtrRecursive($comment));
+                if ($comment['status'] == 'approved') {
+                    $cid = serendipity_db_insert_id('comments', 'id');
+                    serendipity_approveComment($cid, $comment['entry_id'], true);
                 }
             }
+            if ($debug) echo "Imported comments.<br />\n";
         }
 
         $serendipity['noautodiscovery'] = $noautodiscovery;
@@ -267,4 +294,3 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
 return 'Serendipity_Import_WordPress';
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>
