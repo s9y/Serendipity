@@ -323,6 +323,9 @@ function serendipity_load_configuration($author = null) {
         }
     }
     $config_loaded[$author] = true;
+
+    // Store default language
+    $serendipity['default_lang'] = $serendipity['lang'];
 }
 
 /**
@@ -471,6 +474,12 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
         $is_md5 = true;
     }
 
+    $is_authenticated = false;
+    serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
+    if ($is_authenticated) {
+        return true;
+    }
+
     if ($username != '') {
         if ($use_external) {
             serendipity_plugin_api::hook_event('backend_auth', $is_md5, array('username' => $username, 'password' => $password));
@@ -503,6 +512,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
             $_SESSION['serendipityAuthedUser']  = $serendipity['serendipityAuthedUser']   = true;
             $_SESSION['serendipityRightPublish']= $serendipity['serendipityRightPublish'] = $row['right_publish'];
             serendipity_load_configuration($serendipity['authorid']);
+            serendipity_setCookie('userDefLang', $serendipity['lang'], false);
             return true;
         } else {
             $_SESSION['serendipityAuthedUser'] = false;
@@ -814,9 +824,6 @@ function serendipity_header($header) {
 function serendipity_getSessionLanguage() {
     global $serendipity;
 
-    // Store default language
-    $serendipity['default_lang'] = $serendipity['lang'];
-
     // DISABLE THIS!
 /*
     if ($_SESSION['serendipityAuthedUser']) {
@@ -826,7 +833,7 @@ function serendipity_getSessionLanguage() {
 */
 
     if (isset($_REQUEST['user_language']) && (!empty($serendipity['languages'][$_REQUEST['user_language']])) && !headers_sent()) {
-        serendipity_setCookie('serendipityLanguage', $_REQUEST['user_language']);
+        serendipity_setCookie('serendipityLanguage', $_REQUEST['user_language'], false);
     }
 
     if (isset($serendipity['COOKIE']['serendipityLanguage'])) {
@@ -838,14 +845,63 @@ function serendipity_getSessionLanguage() {
     } elseif (serendipity_db_bool($serendipity['lang_content_negotiation'])) {
         if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Content-Negotiation');
         $lang = serendipity_detectLang();
-    } elseif ($_SESSION['serendipityAuthedUser']) {
+    }
+
+    if (isset($lang)) {
+        $serendipity['detected_lang'] = $lang;
+    } else {
+        if (! empty($_SESSION['serendipityLanguage'])) {
+            $lang = $_SESSION['serendipityLanguage'];
+        } else {
+            if (isset($serendipity['COOKIE']['userDefLang']) && ! empty($serendipity['COOKIE']['userDefLang'])) {
+                $lang = $serendipity['COOKIE']['userDefLang'];
+            } else {
+                $lang = $serendipity['lang'];
+          	}
+        }
+        $serendipity['detected_lang'] = null;
+    }
+
+    if (!isset($serendipity['languages'][$lang])) {
+        $serendipity['detected_lang'] = null;
+        return $serendipity['lang'];
+    } else {
+        $_SESSION['serendipityLanguage'] = $lang;
+        if (! is_null($serendipity['detected_lang'])) {
+            if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLang: ' . $lang);
+        }
+    }
+
+    return $lang;
+}
+
+/**
+ * Gets the selected language from personal configuration if needed
+ *
+ * This function also sets HTTP Headers and cookies to contain the language for follow-up requests
+ *
+ * @access public
+ * @return  string      Returns the name of the selected language.
+ */
+function serendipity_getPostAuthSessionLanguage() {
+    global $serendipity;
+
+    if (! is_null($serendipity['detected_lang'])) {
+        return $serendipity['detected_lang'];
+    }
+
+    if ($_SESSION['serendipityAuthedUser']) {
         if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Database');
+        $lang = $serendipity['lang'];
+    } else {
+        $lang = (isset($_SESSION['serendipityLanguage']))?$_SESSION['serendipityLanguage']:$serendipity['lang'];
+    }
+
+    if (!isset($serendipity['languages'][$lang])) {
         $lang = $serendipity['lang'];
     }
 
-    if (!isset($lang) || !isset($serendipity['languages'][$lang])) {
-        $lang = $serendipity['lang'];
-    }
+    $_SESSION['serendipityLanguage'] = $lang;
 
     if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLang: ' . $lang);
 

@@ -251,6 +251,7 @@ if (!serendipity_db_connect()) {
  */
 
 serendipity_load_configuration();
+$serendipity['lang'] = serendipity_getSessionLanguage();
 
 /*
  * If a user is logged in, fetch his preferences. He possibly wants to have a different language
@@ -281,9 +282,8 @@ if (IS_installed === true) {
 
 if (isset($_SESSION['serendipityAuthorid'])) {
     serendipity_load_configuration($_SESSION['serendipityAuthorid']);
+    $serendipity['lang'] = serendipity_getPostAuthSessionLanguage();
 }
-
-$serendipity['lang'] = serendipity_getSessionLanguage(); // @see function declaration for todo
 
 // Try to fix some path settings. It seems common users have this setting wrong
 // when s9y is installed into the root directory, especially 0.7.1 upgrade users.
