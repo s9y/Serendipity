@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improve installation on hosts where fsockopen() is disabled
+      (garvinhicking)
+      
     * Improve memory usage of WordPress importer, add debug output
       (garvinhicking)
       

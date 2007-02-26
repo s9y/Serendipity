@@ -780,6 +780,11 @@ function serendipity_installFiles($serendipity_core = '') {
         $htaccess_cgi = '';
     }
 
+    /* If this file exists, a previous install failed painfully. We must consider the safer alternative now */
+    if (file_exists($serendipity_core . '.installer_detection_failsafe')) {
+        $htaccess_cgi = '_cgi';
+        @unlink($serendipity_core . '.htaccess');
+    }
 
     /* Detect comptability with php_value directives */
     if ($htaccess_cgi == '') {
@@ -792,8 +797,10 @@ function serendipity_installFiles($serendipity_core = '') {
         if ($fp) {
             fwrite($fp, 'php_value register_globals off'. "\n" .'php_value session.use_trans_sid 0');
             fclose($fp);
-
-            $sock = @fsockopen($serendipity_host, $_SERVER['SERVER_PORT'], $errorno, $errorstring, 10);
+            
+            $safeFP = @fopen($serendipity_core . '.installer_detection_failsafe', 'w');
+            fclose($safeFP);
+            $sock = fsockopen($serendipity_host, $_SERVER['SERVER_PORT'], $errorno, $errorstring, 10);
             if ($sock) {
                 fputs($sock, "GET {$serendipityHTTPPath} HTTP/1.0\r\n");
                 fputs($sock, "Host: $serendipity_host\r\n");
@@ -806,7 +813,7 @@ function serendipity_installFiles($serendipity_core = '') {
                 fclose($sock);
             }
 
-            /* If we get HTTP 500 Internal Server Error, we have to use the .cgi template */
+            # If we get HTTP 500 Internal Server Error, we have to use the .cgi template
             if (preg_match('@^HTTP/\d\.\d 500@', $response)) {
                 $htaccess_cgi = '_cgi';
             }
@@ -818,6 +825,8 @@ function serendipity_installFiles($serendipity_core = '') {
             } else {
                 @unlink($serendipity_core . '.htaccess');
             }
+
+            @unlink($serendipity_core . '.installer_detection_failsafe');
         }
     }
 
