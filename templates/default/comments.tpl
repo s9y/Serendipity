@@ -1,6 +1,6 @@
 {foreach from=$comments item=comment name="comments"}
     <a id="c{$comment.id}"></a>
-    <div id="serendipity_comment_{$comment.id}" class="serendipity_comment serendipity_comment_author_{$comment.author|@makeFilename} {if $entry.author == $comment.author}serendipity_comment_author_self{/if}{cycle values="comment_oddbox, comment_evenbox"}" style="padding-left: {$comment.depth*20}px">
+    <div id="serendipity_comment_{$comment.id}" class="serendipity_comment serendipity_comment_author_{$comment.author|@makeFilename} {if $entry.author == $comment.author}serendipity_comment_author_self{/if} {cycle values="comment_oddbox, comment_evenbox"}" style="padding-left: {$comment.depth*20}px">
         <div class="serendipity_commentBody">
         {if $comment.body == 'COMMENT_DELETED'}
             {$CONST.COMMENT_IS_DELETED}
