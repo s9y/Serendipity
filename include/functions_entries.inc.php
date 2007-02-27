@@ -1457,6 +1457,25 @@ function serendipity_printArchives() {
         $author_get = '';
     }
 
+    $q = "SELECT e.timestamp
+            FROM {$serendipity['dbPrefix']}entries e
+            " . (!empty($cat_sql) ? "
+       LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
+              ON e.id = ec.entryid
+       LEFT JOIN {$serendipity['dbPrefix']}category c
+              ON ec.categoryid = c.categoryid" : "") . "
+           WHERE isdraft = 'false'"
+                . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
+                . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
+                . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '') 
+                . (!empty($cat_sql) ? " GROUP BY e.id" : '');
+    $entries =& serendipity_db_query($q, false, 'assoc');
+
+    $group = array();
+    foreach($entries AS $entry) {
+        $group[date('Ym', $entry['timestamp'])]++;
+    }
+
     $output = array();
     for ($y = $thisYear; $y >= $lastYear; $y--) {
         $output[$y]['year'] = $y;
@@ -1485,24 +1504,7 @@ function serendipity_printArchives() {
                     break;
             }
 
-            $entries =& serendipity_db_query("SELECT count(id)
-                                               FROM {$serendipity['dbPrefix']}entries e
-                                          LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
-                                                 ON e.id = ec.entryid
-                                          LEFT JOIN {$serendipity['dbPrefix']}category c
-                                                 ON ec.categoryid = c.categoryid
-                                              WHERE isdraft = 'false'
-                                                AND timestamp >= $s
-                                                AND timestamp <= $e "
-                                                    . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
-                                                    . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
-                                                    . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '') . "
-                                           GROUP BY ec.entryid", false, 'assoc');
-            if (is_array($entries)) {
-                $entry_count = count($entries);
-            } else {
-                $entry_count = 0;
-            }
+            $entry_count = (int)$group[$y . (strlen($m) == 1 ? '0' : '') . $m];
 
             /* A silly hack to get the maximum amount of entries per month */
             if ($entry_count > $max) {

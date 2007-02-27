@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Improve performance of displaying the complete archive. Instead
+      of year*months SQL queries, only one query is now used.
+      (garvinhicking)
+ 
     * Improve installation on hosts where fsockopen() is disabled
       (garvinhicking)
       
