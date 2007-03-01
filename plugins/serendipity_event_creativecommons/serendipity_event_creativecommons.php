@@ -23,7 +23,7 @@ class serendipity_event_creativecommons extends serendipity_event {
         $propbag->add('description',   PLUGIN_CREATIVECOMMONS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Evan Nemerson');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -167,8 +167,10 @@ class serendipity_event_creativecommons extends serendipity_event {
 
             case 'frontend_display:rss-1.0:once':
                 $eventData['display_dat'] .= '<cc:License rdf:about="'.$license_uri.'">';
-                foreach ($rdf as $rdf_t => $rdf_v) {
-                  $eventData['display_dat'] .= '<cc:'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
+                if (is_array($rdf)) {
+                    foreach ($rdf as $rdf_t => $rdf_v) {
+                        $eventData['display_dat'] .= '<cc:'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
+                    }
                 }
                 $eventData['display_dat'] .= '</cc:License>';
                 return true;
