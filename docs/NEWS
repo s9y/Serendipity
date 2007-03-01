@@ -80,6 +80,11 @@ Version 1.2 ()
 Version 1.1.2 ()
 -----------------------------------------------------------------------
 
+    * Fix showing SQL error message when an empty category is selected
+      for viewing. Fixes an issue reported by Samenspender that was
+      falsely declard as SQL injection. In fact, no invalid SQL code
+      can be injected. (garvinhicking)
+
     * Better checks to see if the local PEAR inclusion is required
       (garvinhicking)
 
