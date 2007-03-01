@@ -69,6 +69,10 @@ function serendipity_getMultiCategoriesSQL($cats, $invert = false) {
             $cat_sql_array[] = " (c.category_left " . ($invert ? " NOT " : "") . " BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange($categoryid)) . ')';
         }
     }
+    
+    if (count($cat_sql_array) < 1) {
+        return '';
+    }
 
     return '(' . implode(($invert ? ' AND ' : ' OR '), $cat_sql_array) . ')';
 }
