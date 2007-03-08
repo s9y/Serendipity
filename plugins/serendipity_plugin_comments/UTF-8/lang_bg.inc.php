@@ -7,7 +7,7 @@
 
     @define('PLUGIN_COMMENTS_BLAHBLAH', 'Показва последните коментари на Вашите постинги');
     @define('PLUGIN_COMMENTS_WORDWRAP', 'Пренос на нов ред');
-    @define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'Брой думи преди да стработи преносът на нов ред (по подразбиране: 30)');
+    @define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'Брой думи преди да сработи преносът на нов ред (по подразбиране: 30)');
     @define('PLUGIN_COMMENTS_MAXCHARS', 'Максимален брой показвани символи за коментар');
     @define('PLUGIN_COMMENTS_MAXCHARS_BLAHBLAH', 'Максимум колко символа да бъдат показани за всеки коментар (по подразбиране: 120)');
     @define('PLUGIN_COMMENTS_MAXENTRIES', 'Максимален брой на показваните коментари');
