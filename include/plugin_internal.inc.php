@@ -904,7 +904,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>">RSS 0.91 feed</a>
         </div>
 <?php
@@ -913,7 +913,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_1.0', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>">RSS 1.0 feed</a>
         </div>
 <?php
@@ -922,7 +922,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_2.0', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>">RSS 2.0 feed</a>
         </div>
 <?php
@@ -931,7 +931,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_atom0.3', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="ATOM/XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="ATOM/XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>">ATOM 0.3 feed</a>
         </div>
 <?php
@@ -940,7 +940,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_atom1.0', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="ATOM/XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="ATOM/XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>">ATOM 1.0 feed</a>
         </div>
 <?php
@@ -949,7 +949,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_2.0c', true))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><span style="white-space: nowrap">RSS 2.0 <?php echo COMMENTS; ?></span></a>
         </div>
 <?php
@@ -958,7 +958,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_opml1.0', false))) {
 ?>
         <div style="padding-bottom: 2px;">
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo serendipity_getTemplateFile('img/xml.gif'); ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 feed</a>
         </div>
 <?php
@@ -1684,7 +1684,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
                 }
 
                 if ( !empty($image) ) {
-                    $html .= '<a href="'. serendipity_feedAuthorURL($auth, 'serendipityHTTPPath') .'"><img src="'. $image .'" alt="XML" style="border: 0px" /></a> ';
+                    $html .= '<a class="serendipity_xml_icon" href="'. serendipity_feedAuthorURL($auth, 'serendipityHTTPPath') .'"><img src="'. $image .'" alt="XML" style="border: 0px" /></a> ';
                 }
                 $html .= '<a href="'. serendipity_authorURL($auth, 'serendipityHTTPPath') .'" title="'. htmlspecialchars($auth['realname']) .'">'. htmlspecialchars($auth['realname']) . $entrycount . '</a>';
                 $html .= '</div>' . "\n";
