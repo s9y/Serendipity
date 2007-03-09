@@ -598,10 +598,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     break;
 
                 case 'frontend_entryproperties':
-                    if (is_array($eventData[0]['properties'])) {
-                        // Skip fetching entryproperties again, it has already been done in functions_entries::fetchEntry().
-                        return true;
-                    }
                     $and = $this->returnQueryCondition($is_cache);
                     $q = "SELECT entryid, property, value FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid IN (" . implode(', ', array_keys($addData)) . ") $and";
 
