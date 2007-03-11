@@ -257,7 +257,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.7');
+        $propbag->add('version',       '1.8');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -274,7 +274,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_REMOTERSS_RSSLINK);
                 $propbag->add('description', PLUGIN_REMOTERSS_RSSLINK_DESC);
-                $propbag->add('default', 'false');
+                $propbag->add('default', 'true');
                 break;
 
             case 'escape_rss':
