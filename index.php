@@ -107,8 +107,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
                 unset($_args[$k]);
             }
         } elseif ($v{0} == 'A') { /* Author */
-            $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)substr($v, 1);
-            unset($_args[$k]);
+            $url_author = substr($v, 1);
+            if (is_numeric($url_author)) {
+                $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
+                unset($_args[$k]);
+            }
         } elseif ($v{0} == 'W') { /* Week */
             $week = substr($v, 1);
             if (is_numeric($week)) {
@@ -351,8 +354,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
                 unset($_args[$k]);
             }
         } elseif ($v{0} == 'A') { /* Author */
-            $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)substr($v, 1);
-            unset($_args[$k]);
+            $url_author = substr($v, 1);
+            if (is_numeric($url_author)) {
+                $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
+                unset($_args[$k]);
+            }
         }
     }
 
@@ -392,8 +398,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
                 unset($serendipity['uriArguments'][$k]);
             }
         } elseif ($v{0} == 'A') { /* Author */
-            $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)substr($v, 1);
-            unset($_args[$k]);
+            $url_author = substr($v, 1);
+            if (is_numeric($url_author)) {
+                $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
+                unset($_args[$k]);
+            }
         }
     }
 
@@ -463,6 +472,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
                 $serendipity['GET']['page'] = $page;
                 unset($_args[$k]);
                 unset($serendipity['uriArguments'][$k]);
+            } else {
+                $search[] = $v;
             }
         } else {
             $search[] = $v;
