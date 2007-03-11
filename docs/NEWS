@@ -3,26 +3,30 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix permalink patterns for some cases to properly detect
+      pagination variables instead of interpreting search words
+      as those (garvinhicking)
+
     * Improve performance of displaying the complete archive. Instead
       of year*months SQL queries, only one query is now used.
       (garvinhicking)
- 
+
     * Improve installation on hosts where fsockopen() is disabled
       (garvinhicking)
-      
+
     * Improve memory usage of WordPress importer, add debug output
       (garvinhicking)
-      
-    * EXPERIMENTAL: Modify session language fetch function to allow 
+
+    * EXPERIMENTAL: Modify session language fetch function to allow
       earlier plugin API calls (Rob Richards)
 
-    * No longer accept trackbacks to draft entries.Thanks to j_b_poquelin 
+    * No longer accept trackbacks to draft entries.Thanks to j_b_poquelin
       (garvinhicking)
 
     * Do not store an unnecessary config value for check_password
       and password user properties. Thanks to jenzo from the forums!
       (garvinhicking)
-      
+
     * Update spamblock plugin to update a .htaccess file with DENY
       rules based on recent spammer IPs. EXPERIMENTAL.
 
@@ -34,7 +38,7 @@ Version 1.2 ()
     * Added PDO:PostgreSQL support (Theo Schlossnagle)
 
     * Dutch translation update with many fixes by Sam Geeraerts
-    
+
     * Improve Livesearch-Plugin to abort search on outside-of-box
       click, fetch proper "not found" message on zero results
       (Lars Strojny)
@@ -50,7 +54,7 @@ Version 1.2 ()
 
     * Update Spartacus plugin to allow configuring whether to fetch
       Themes or Plugins, or only one/none of them (garvinhicking)
-   
+
     * Remove "View" option for drafted entries in the "Edit entries"
       section and replace with a "Preview" option. (garvinhicking)
 
@@ -73,7 +77,7 @@ Version 1.2 ()
 
     * Introduce '%lowertitle%' permalink attribute to use lowercase
       permalinks. (garvinhicking)
-    
+
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
@@ -95,19 +99,19 @@ Version 1.1.1 (February 22nd, 2007)
       forbidden plugins/hooks, even if the admin user is not contained
       within the configured group. Thanks to ICE!
       (http://board.s9y.org/viewtopic.php?t=8773) (garvinhicking)
-                
-    * Patch pingback receiving function to use proper Regexp, thanks to 
+
+    * Patch pingback receiving function to use proper Regexp, thanks to
       dhaun from the forums
-      
+
     * Make categories sidebar plugin properly return evaluated categories
       list to plugin_categories.tpl template. Currently, a hidden
       structure would only be displayed when not using custom
       template. (garvinhicking)
-                
+
     * Change order of trackback execution flow (again) to preserve
       references for plugins like Track Exits, when used in conjunction
       with the entryproperties cache (garvinhicking)
-                
+
     * Fixed a bug that prevented some entryproperty-plugins to execute
       on the entry detail pane. (garvinhicking, Dragonblast)
 
@@ -476,7 +480,7 @@ Version 1.0.4 (December 1st, 2006)
 
    * Fixed problem in trackbacks using a formatted link (like through
      trackexits plugin) to trackback to instead of the real one
-        
+
 Version 1.0.3 (November 7th, 2006)
 ------------------------------------------------------------------------
 
