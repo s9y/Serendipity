@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 1607 2007-02-01 11:36:16Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
@@ -26,8 +26,8 @@
 @define('LOGIN', 'ログイン');
 @define('LOGOUT', 'ログアウト');
 @define('LOGGEDOUT', 'ログアウトしました。');
-@define('CREATE', '作成');
-@define('SAVE', '保存');
+@define('CREATE', '作成する');
+@define('SAVE', '保存する');
 @define('NAME', '名前');
 @define('CREATE_NEW_CAT', '新規カテゴリを作成する');
 @define('I_WANT_THUMB', 'エントリ中でサムネイルを使用したい');
@@ -249,7 +249,7 @@
 @define('DATE_INVALID', '警告: 指定した日付は無効です。「YYYY-MM-DD HH:MM」の書式を与えなければなりません。');
 @define('CATEGORY_PLUGIN_DESC', 'カテゴリの一覧を表示します。');
 @define('ALL_AUTHORS', 'すべての執筆者');
-@define('CATEGORIES_TO_FETCH', 'カテゴリを取得');
+@define('CATEGORIES_TO_FETCH', 'カテゴリを取得する');
 @define('CATEGORIES_TO_FETCH_DESC', 'どの執筆者のカテゴリを取得しますか?');
 @define('PAGE_BROWSE_ENTRIES', 'ページ %s/%s, 合計 %s エントリ');
 @define('PREVIOUS_PAGE', '前のページ');
@@ -872,7 +872,8 @@
 @define('MEDIA_DIRECTORY_MOVED', 'ディレクトリとファイルを「%s」に移動することに成功しました。');
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリとファイルを「%s」に移動できませんでした!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');@define('PLUGIN_ACTIVE', 'Active');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
+@define('PLUGIN_ACTIVE', 'Active');
 @define('PLUGIN_INACTIVE', 'Inactive');
 @define('PREFERENCE_USE_JS', '高度な JS の使用を有効にしますか?');
 @define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
@@ -881,13 +882,13 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
+@define('PERM_SET_CHILD', 'すべての子ディレクトリに同じパーミッションを設定する');
 @define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'ユーザーグループ用の ACL プラグインを有効にしますか?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
+@define('DELETE_SELECTED_ENTRIES', '選択したエントリを削除する');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'ブックマークレット');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
