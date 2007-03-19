@@ -818,7 +818,10 @@ function serendipity_smarty_init($vars = array()) {
         // setup custom smarty variables, modifiers etc. to use in their templates.
         @include_once $serendipity['smarty']->config_dir . '/config.inc.php';
 
-        if (is_array($template_config)) {
+        if (is_array($template_loaded_config)) {
+            $template_vars =& $template_loaded_config;
+            $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
+        } elseif (is_array($template_config)) {
             $template_vars =& serendipity_loadThemeOptions($template_config);
             $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
         }
