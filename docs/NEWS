@@ -5,8 +5,7 @@ Version 1.2 ()
 
     * Fix permalink patterns for some cases to properly detect
       pagination variables instead of interpreting search words
-      as those, and fix problems when "." appears within permalinks
-      (garvinhicking)
+      as those. (garvinhicking)
 
     * Improve performance of displaying the complete archive. Instead
       of year*months SQL queries, only one query is now used.

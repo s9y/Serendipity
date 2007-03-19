@@ -755,7 +755,7 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
 global $serendipity;
 
     /* Explode the path into sections, to later be able to check for arguments and add our own */
-    preg_match('/^'. preg_quote($serendipity['serendipityHTTPPath'], '/') . '(' . preg_quote($serendipity['indexFile'], '/') . '\?\/)?(' . ($wildcard ? '.+' : '[;,_a-z\.0-9\-*\/%\+]+') . ')/i', $uri, $_res);
+    preg_match('/^'. preg_quote($serendipity['serendipityHTTPPath'], '/') . '(' . preg_quote($serendipity['indexFile'], '/') . '\?\/)?(' . ($wildcard ? '.+' : '[;,_a-z0-9\-*\/%\+]+') . ')/i', $uri, $_res);
     if (strlen($_res[2]) != 0) {
         $args = explode('/', $_res[2]);
         if ($args[0] == 'index') {
