@@ -24,7 +24,7 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_BBCODE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Jez Hancock, Garvin Hicking');
-        $propbag->add('version',       '2.08');
+        $propbag->add('version',       '2.09');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -268,7 +268,7 @@ class serendipity_event_bbcode extends serendipity_event
                         return true;
                     }
 ?>
-.bb-quote .bb-code, .bb-php, .bb-code-title, .bb-php-title {
+.bb-quote, .bb-code, .bb-php, .bb-code-title, .bb-php-title {
     margin-left: 20px;
     margin-right: 20px;
     color: black;
