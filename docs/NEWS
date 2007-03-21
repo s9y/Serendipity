@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix track exit url ids off by one when being used in conjunction
+      with caching plugin (garvinhicking)
+
     * Fix permalink patterns for some cases to properly detect
       pagination variables instead of interpreting search words
       as those. (garvinhicking)

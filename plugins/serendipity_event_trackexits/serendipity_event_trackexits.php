@@ -118,7 +118,9 @@ class serendipity_event_trackexits extends serendipity_event
                     if (empty($serendipity['encodeExitsCallback_entry_id'])) {
                         $this->links = array();
                     } else {
+                        #echo "SELECT id, link FROM {$serendipity['dbPrefix']}references WHERE entry_id = {$serendipity['encodeExitsCallback_entry_id']} AND type = ''<br />\n";
                         $this->links = serendipity_db_query("SELECT id, link FROM {$serendipity['dbPrefix']}references WHERE entry_id = {$serendipity['encodeExitsCallback_entry_id']} AND type = ''", false, 'both', false, 'link', 'id');
+                        #echo "<pre>" . print_r($this->links, true) . "</pre><br />\n";
                     }
 
                     foreach ($this->markup_elements as $temp) {
