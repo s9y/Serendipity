@@ -421,20 +421,35 @@ FAILURE;
 function serendipity_handle_references($id, $author, $title, $text, $dry_run = false) {
     global $serendipity;
     static $old_references = array();
+    static $debug = false;
 
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id, false, 'assoc');
+        if (is_array($old_references) && count($old_references) > 0) {
+            $current_references = array();
+            foreach($old_references AS $idx => $old_reference) {
+                // We need the current reference ID to restore it later.
+                $current_references[$old_reference['link']] = $old_reference;
+            }
+        }
+        if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id);
+        if ($debug) echo "Deleted references.<br />\n";
 
         if (is_array($old_references) && count($old_references) > 0) {
+            $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
+                // We need the current reference ID to restore it later.
+                $current_references[$old_reference['link']] = $old_reference;
                 $q = serendipity_db_insert('references', $old_reference, 'show');
                 serendipity_db_query($q);
             }
         }
+
+        if ($debug) echo "Got references in final run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     }
 
     if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>(.+?)</a>@i', $text, $matches)) {
@@ -490,13 +505,39 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         }
     }
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND type = ''");
+    if ($debug) echo "Deleted references again.<br />\n";
+
+    if (!is_array($old_references)) {
+        $old_references = array();
+    }
 
     for ($i = 0; $i < $j; ++$i) {
-        $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
-        $query .= (int)$id . ", '" . serendipity_db_escape_string(strip_tags($names[$i])) . "', '";
-        $query .= serendipity_db_escape_string($locations[$i]) . "')";
-
-        serendipity_db_query($query);
+        $i_link     = serendipity_db_escape_string(strip_tags($names[$i]));
+        $i_location = serendipity_db_escape_string($locations[$i]);
+        if (isset($current_references[$locations[$i]])) {
+            $query = "INSERT INTO {$serendipity['dbPrefix']}references (id, entry_id, name, link) VALUES(";
+            $query .= (int)$current_references[$locations[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
+            serendipity_db_query($query);
+        } else {
+            $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
+            $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
+            serendipity_db_query($query);
+            $old_references[] = array(
+                'id'       => serendipity_db_insert_id('references', 'id'),
+                'name'     => $i_link,
+                'link'     => $i_location,
+                'entry_id' => (int)$id
+            );
+        }
+        
+        if ($debug) {
+            echo "Current lookup for {$locations[$i]} is <pre>" . print_r($current_references[$locations[$i]], true) . "</pre><br />\n";
+            echo $query . "<br />\n";
+        }
+    }
+    
+    if ($debug) {
+        echo "Old/Saved locations: <pre>" . print_r($old_references, true) . "</pre><br />\n";
     }
 
     // Add citations
