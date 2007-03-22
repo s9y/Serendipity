@@ -257,7 +257,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.8');
+        $propbag->add('version',       '1.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -471,7 +471,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                     $this->encoding = $c->rss['encoding'];
 
                     $use_rss_link = serendipity_db_bool($this->get_config('use_rss_link'));
-                    $rss_element  = $this->get_config('show_rss_element');
+                    $rss_elements = explode(',', $this->get_config('show_rss_element'));
                     $escape_rss   = serendipity_db_bool($this->get_config('escape_rss'));
                     $i = 0;
                     $content = '';
@@ -488,10 +488,13 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             $content .= '<img src="' . $bulletimg . '" border="0" alt="*" /> ';
                         }
 
-                        if ($escape_rss) {
-                            $content .= $this->decode($item[$rss_element]);
-                        } else {
-                            $content .= htmlspecialchars($this->decode($item[$rss_element]));
+                        foreach($rss_elements AS $rss_element) {
+                            $rss_element = trim($rss_element);
+                            if ($escape_rss) {
+                                $content .= $this->decode($item[$rss_element]);
+                            } else {
+                                $content .= htmlspecialchars($this->decode($item[$rss_element]));
+                            }
                         }
 
                         if ($use_rss_link) {
