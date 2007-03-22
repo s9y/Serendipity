@@ -25,9 +25,12 @@ if (!defined('IN_serendipity')) {
 }
 
 include(S9Y_INCLUDE_PATH . 'include/compat.inc.php');
+if (defined('USE_MEMSNAP')) {
+    memSnap('Framework init');
+}
 
 // The version string
-$serendipity['version']         = '1.2-alpha2';
+$serendipity['version']         = '1.2-alpha3';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
@@ -249,6 +252,10 @@ if (!serendipity_db_connect()) {
 /*
  *   Load Configuration options from the database
  */
+
+if (defined('USE_MEMSNAP')) {
+    memSnap('Framework init');
+}
 
 serendipity_load_configuration();
 $serendipity['lang'] = serendipity_getSessionLanguage();

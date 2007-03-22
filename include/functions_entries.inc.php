@@ -41,12 +41,17 @@ function serendipity_deleteCategory($category_range, $admin_category) {
 function serendipity_fetchCategoryRange($categoryid) {
     global $serendipity;
 
-    $res =& serendipity_db_query("SELECT category_left, category_right FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
+    $res =& serendipity_db_query("SELECT category_left, category_right, hide_sub FROM {$serendipity['dbPrefix']}category WHERE categoryid='". (int)$categoryid ."'");
     if (!is_array($res) || !isset($res[0]['category_left']) || !isset($res[0]['category_right'])) {
         $res = array(array('category_left' => 0, 'category_right' => 0));
     }
 
-    return array('category_left' => $res[0]['category_left'], 'category_right' => $res[0]['category_right']);
+    if ($res[0]['hide_sub'] == 1) {
+        // Set ranges only to own category. Patch by netmorix
+        return array('category_left' => $res[0]['category_left'], 'category_right' => $res[0]['category_left']);
+    } else {
+        return array('category_left' => $res[0]['category_left'], 'category_right' => $res[0]['category_right']);
+    }
 }
 
 /**
@@ -98,7 +103,8 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                          c.category_name,
                          c.category_description,
                          c.category_icon,
-                         c.parentid
+                         c.parentid,
+                         c.hide_sub
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE category_name = '" . serendipity_db_escape_string($categoryname) . "'";
 
@@ -111,7 +117,8 @@ function serendipity_fetchCategoryInfo($categoryid, $categoryname = '') {
                          c.category_name,
                          c.category_description,
                          c.category_icon,
-                         c.parentid
+                         c.parentid,
+                         c.hide_sub
                     FROM {$serendipity['dbPrefix']}category AS c
                    WHERE categoryid = " . (int)$categoryid;
 

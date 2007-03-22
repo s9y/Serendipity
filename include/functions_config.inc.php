@@ -733,7 +733,7 @@ function serendipity_iframe_create($mode, &$entry) {
 
     $_SESSION['save_entry']      = $entry;
     $_SESSION['save_entry_POST'] = $serendipity['POST'];
-
+    
     $attr = '';
     switch($mode) {
         case 'save':
