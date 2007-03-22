@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cz.inc.php 1533 2006-12-04 09:20:14Z garvinhicking $
+<?php # $Id: serendipity_lang_cz.inc.php 1593 2007-01-22 10:45:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -703,8 +703,6 @@ $i18n_filename_to = array (
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Cesta k jednotlivému pluginu');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Cesta k adminu');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Cesta k vyhledávání');
-@define('USERCONF_CREATE', 'Zakázat vytváření záznamů?');
-@define('USERCONF_CREATE_DESC', 'Pokud bude vybráno, uživatel nemůže vytvářet nové záznamy');
 @define('INSTALL_CAL', 'Typ kalendáře');
 @define('INSTALL_CAL_DESC', 'Vyberte formát kalendáře');
 @define('REPLY', 'Odpověď');
@@ -898,3 +896,7 @@ $i18n_filename_to = array (
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Povolit Plugin ACL pro uživatelské skupiny?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Jestliže je volba "Plugin ACL pro uživatelské skupiny" v konfiguraci povolena, můžete určit, které skupiny uživatelů mohou provádět určité pluginy/události.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

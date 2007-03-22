@@ -689,8 +689,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Yksittäisen laajennuksen polku');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Ylläpitopolku');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Hakupolku');
-@define('USERCONF_CREATE', 'Kiellä kirjoittaminen blogiin?');
-@define('USERCONF_CREATE_DESC', 'Jos "Kyllä", niin käyttäjä ei saa kirjoittaa blogiin.');
 @define('INSTALL_CAL', 'Kalenterin tyyppi');
 @define('INSTALL_CAL_DESC', 'Valitse käytettävä kalenterimuoto');
 @define('REPLY', 'Reply');
@@ -888,3 +886,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

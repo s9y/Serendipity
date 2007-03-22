@@ -691,8 +691,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', '単一プラグインへのパス');
 @define('INSTALL_PERMALINK_ADMINPATH', '管理へのパス');
 @define('INSTALL_PERMALINK_SEARCHPATH', '検索へのパス');
-@define('USERCONF_CREATE', 'エントリの作成を禁止する');
-@define('USERCONF_CREATE_DESC', '選択した場合、ユーザーは新しいエントリを作成できなくなります。');
 @define('INSTALL_CAL', 'カレンダーの種類');
 @define('INSTALL_CAL_DESC', 'あなたの希望のカレンダーの形式を選びます。');
 @define('REPLY', '返信');
@@ -892,3 +890,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'ブックマークレット');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

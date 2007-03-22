@@ -700,8 +700,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Caminho para plugin único'); //Verify
 @define('INSTALL_PERMALINK_ADMINPATH', 'Caminho para Administração');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Caminho para a pesquisa'); //Verify
-@define('USERCONF_CREATE', 'Proibir criar entradas?');
-@define('USERCONF_CREATE_DESC', 'Se seleccionado, o utilizador não pode criar novas entradas');
 @define('INSTALL_CAL', 'Género de calendário');
 @define('INSTALL_CAL_DESC', 'Escolha o formato de calendário desejado');
 @define('REPLY', 'Responder');
@@ -900,3 +898,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Marque esta ligação e use-a em qualquer página em que quiser blogar para aceder rapidamente ao seu blogue Serendipity.');
 @define('IMPORT_WP_PAGES', 'Ir também buscar ficheiros anexados e páginas estáticas como entradas de blog normais?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

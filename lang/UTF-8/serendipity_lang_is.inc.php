@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_is.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_is.inc.php 1607 2007-02-01 11:36:16Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Örn Arnarson <orn@arnarson.net>
@@ -690,8 +690,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Slóð til stakrar viðbótar');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Slóð til stjórnkerfis');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Slóð til leitar');
-@define('USERCONF_CREATE', 'Banna nýskráningu færsla?');
-@define('USERCONF_CREATE_DESC', 'Ef valið getur notandi ekki skráð nýjar færslur');
 @define('INSTALL_CAL', 'Tegund dagatals');
 @define('INSTALL_CAL_DESC', 'Veldu forsnið óskaðs dagatals');
 @define('REPLY', 'Svara');
@@ -889,3 +887,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

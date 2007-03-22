@@ -692,8 +692,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Pfad zu einem externen Plugin');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Pfad zur Administration');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Pfad zur Suche');
-@define('USERCONF_CREATE', 'Erstellung von Einträgen verbieten?');
-@define('USERCONF_CREATE_DESC', 'Falls diese Option aktiviert ist, darf ein Benutzer keine neuen Einträge erstellen.');
 @define('INSTALL_CAL', 'Kalendertyp');
 @define('INSTALL_CAL_DESC', 'Wählen Sie das gewünschte Kalenderformat');
 @define('REPLY', 'Antwort');
@@ -881,7 +879,11 @@
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Sollen persönliche Plugin-Rechte für Benutzergruppen aktiviert werden?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Falls diese Option aktiviert ist, können Sie bei jeder Benutzergruppe definieren, welche Plugins/Ereignisse diese Gruppe ausführen darf.');
 @define('DELETE_SELECTED_ENTRIES', 'Markierte Einträge löschen');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Nur Autoren mit mindestens X Beiträgen anzeigen');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Fügen Sie diesen Link als Lesezeichen/Favoriten hinzu. Dann können Sie dieses Lesezeichen auf jeder beliebigen Seite benutzen um so sofort in ihr Serendipity-Blog zu gelangen.');
-@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('IMPORT_WP_PAGES', 'Auch attachments und staticpages als normale Blog-Einträge importieren?');
+@define('USERCONF_CREATE', '`Benutzer deaktivieren / Rechte entziehen?');
+@define('USERCONF_CREATE_DESC', 'Wenn diese Option aktiviert ist, wird dieser Benutzer keine Möglichkeit mehr haben Einträge anzulegen oder sonstige Aktionen auszuführen. Wenn er in die Administrations-Oberfläche kommt, wird er nichts anderes tun können als seine Persönlichen Einstellungen zu ändern und sich auszuloggen.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

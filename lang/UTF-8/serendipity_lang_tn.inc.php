@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tn.inc.php 1550 2006-12-26 07:21:10Z capriskye $
+<?php # $Id: serendipity_lang_tn.inc.php 1593 2007-01-22 10:45:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
@@ -693,8 +693,6 @@ $i18n_unknown = 'tw';
 @define('INSTALL_PERMALINK_PLUGINPATH', '單外掛路徑');
 @define('INSTALL_PERMALINK_ADMINPATH', '管理路徑');
 @define('INSTALL_PERMALINK_SEARCHPATH', '搜尋路徑');
-@define('USERCONF_CREATE', '不允許新增文章？');
-@define('USERCONF_CREATE_DESC', '如果選擇，作者將不能發佈新文章。');
 @define('INSTALL_CAL', '日曆類型');
 @define('INSTALL_CAL_DESC', '請選擇您要的日曆類型');
 @define('REPLY', '回覆');
@@ -892,3 +890,7 @@ $i18n_unknown = 'tw';
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', '書籤');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', '將這個連結設為書籤可以讓您快速的進入網誌。');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
