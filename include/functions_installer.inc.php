@@ -451,9 +451,10 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
  * @param   boolean     If true, no HTML FORM container will be emitted
  * @param   boolean     If true, the configuration sections will all be folded
  * @param   boolean     If true, the user can turn config sections on and off
+ * @param   boolean     If true, the user can NOT display possibly dangerous options
  * @return null
  */
-function serendipity_printConfigTemplate($config, $from = false, $noForm = false, $folded = true, $allowToggle = true) {
+function serendipity_printConfigTemplate($config, $from = false, $noForm = false, $folded = true, $allowToggle = true, $showDangerous = false) {
     global $serendipity;
     if ( $allowToggle ) {
 ?>
@@ -518,7 +519,7 @@ function showConfigAll(count) {
 ?>
             <tr>
                 <th align="left" colspan="2" style="padding-left: 15px;">
-<?php if ( $allowToggle ) { ?>
+<?php if ($allowToggle) { ?>
                     <a style="border:0; text-decoration: none;" href="#" onClick="showConfig('el<?php echo $el_count; ?>'); return false" title="<?php echo TOGGLE_OPTION; ?>"><img src="<?php echo serendipity_getTemplateFile('img/'. ($folded === true ? 'plus' : 'minus') .'.png') ?>" id="optionel<?php echo $el_count; ?>" alt="+/-" border="0" />&nbsp;<?php echo $category['title']; ?></a>
 <?php } else { ?>
                     <?php echo $category['title']; ?>
@@ -536,7 +537,7 @@ function showConfigAll(count) {
                         </tr>
 
 <?php
-        foreach ( $category['items'] as $item ) {
+        foreach ($category['items'] as $item) {
 
             $value = $from[$item['var']];
 
@@ -546,12 +547,16 @@ function showConfigAll(count) {
             }
 
             /* Check for installOnly flag */
-            if ( in_array('installOnly', $item['flags']) && IS_installed === true ) {
+            if (in_array('installOnly', $item['flags']) && IS_installed === true) {
                 continue;
             }
 
-            if ( in_array('hideValue', $item['flags']) ) {
+            if (in_array('hideValue', $item['flags'])) {
                 $value = '';
+            }
+            
+            if (!$showDangerous && $item['view'] == 'dangerous') {
+                continue;
             }
 
             if (in_array('config', $item['flags']) && isset($from['authorid'])) {
