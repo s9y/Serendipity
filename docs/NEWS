@@ -3,6 +3,11 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Move possible hazardous personal configuration options ("Rights:
+      Publishing entries", "Forbid creating entries", "Access level";
+      "Group memberships") to the user management section.
+      (garvinhicking)
+
     * Fix track exit url ids off by one when being used in conjunction
       with caching plugin (garvinhicking)
 

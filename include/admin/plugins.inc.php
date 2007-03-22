@@ -493,6 +493,10 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     <?php serendipity_plugin_api::hook_event('backend_plugins_event_header', $serendipity); ?>
     <?php show_plugins(true); ?>
 
+    <h3>Memory Usage</h3>
+    <div>
+        <pre><?php print_r($serendipity['memSnaps']); ?></pre>
+    </div>
 <?php
 }
 /* vim: set sts=4 ts=4 expandtab : */

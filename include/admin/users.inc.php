@@ -201,7 +201,7 @@ foreach($users as $user) {
 <?php /* TODO: Add username to list once tom figures out how to fix uneven rowstyles */ ?>
         <td><img src="<?php echo $img ?>" alt="" style="border: 0px none ; vertical-align: bottom; display: inline;" /> <?php echo htmlspecialchars($user['realname']); ?></td>
         <td width="100" align="center"><?php echo $user['userlevel']; ?></td>
-        <td width="200" align="right"> [<a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>"><?php echo EDIT ?></a>]
+        <td width="200" align="right"> [<a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform"><?php echo EDIT ?></a>]
                                      - [<a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>"><?php echo DELETE ?></a>]</td>
     </tr>
 </table>
@@ -232,12 +232,13 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
 <br />
 <br />
 <hr noshade="noshade">
-<form action="?serendipity[adminModule]=users" method="post">
+<form action="?serendipity[adminModule]=users#editform" method="post">
 <?php echo serendipity_setFormToken(); ?>
     <div>
     <h3>
 <?php
 if ($serendipity['GET']['adminAction'] == 'edit') {
+    echo '<a id="editform"></a>';
     $user = serendipity_fetchUsers($serendipity['GET']['userid']);
     $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
 
@@ -271,7 +272,7 @@ if (!empty($serendipity['GET']['userid'])) {
     $from['groups'] = array();
 }
 
-serendipity_printConfigTemplate($config, $from, true, false);
+serendipity_printConfigTemplate($config, $from, true, false, true, true);
 
 if ($serendipity['GET']['adminAction'] == 'edit') { ?>
         <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton" />

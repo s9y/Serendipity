@@ -41,7 +41,8 @@
                                           'description' => USERCONF_USERLEVEL_DESC . "\n" . USERLEVEL_OBSOLETE,
                                           'type'        => 'list',
                                           'default'     => $serendipity['permissionLevels'],
-                                          'permission'  => 'personalConfigurationUserlevel'),
+                                          'permission'  => 'personalConfigurationUserlevel',
+                                          'view'        => 'dangerous'),
 
                                     array('var'         => 'groups',
                                           'title'       => USERCONF_GROUPS,
@@ -50,7 +51,8 @@
                                           'permission'  => array('adminUsersMaintainOthers', 'adminUsersMaintainSame'),
                                           'perm_mode'   => 'or',
                                           'default'     => serendipity_getAllGroups(),
-                                          'flags'       => array('groups')),
+                                          'flags'       => array('groups'),
+                                          'view'        => 'dangerous'),
 
                                     array('var'         => 'email',
                                           'title'       => USERCONF_EMAIL,
@@ -103,14 +105,16 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'personalConfigurationNoCreate',
-                                          'flags'       => array('config')),
+                                          'flags'       => array('config'),
+                                          'view'        => 'dangerous'),
 
                                     array('var'         => 'right_publish',
                                           'title'       => USERCONF_ALLOWPUBLISH,
                                           'description' => USERCONF_ALLOWPUBLISH_DESC,
                                           'type'        => 'bool',
                                           'default'     => true,
-                                          'permission'  => 'personalConfigurationRightPublish')
+                                          'permission'  => 'personalConfigurationRightPublish',
+                                          'view'        => 'dangerous')
                             ));
 
     $res['defaults'] =
@@ -151,4 +155,3 @@
                             ));
 
     return $res;
-?>
