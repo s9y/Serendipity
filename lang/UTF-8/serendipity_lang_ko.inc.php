@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ko.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_ko.inc.php 1607 2007-02-01 11:36:16Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by: Wesley Hwang-Chung <wesley96@gmail.com>
@@ -692,8 +692,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', '하나의 플러그인으로 가는 경로');
 @define('INSTALL_PERMALINK_ADMINPATH', '관리 화면으로 가는 경로');
 @define('INSTALL_PERMALINK_SEARCHPATH', '검색하기 위한 경로');
-@define('USERCONF_CREATE', '글 생성 금지하기');
-@define('USERCONF_CREATE_DESC', '선택할 경우, 사용자가 새로운 글을 생성하지 못합니다.');
 @define('INSTALL_CAL', '달력 종류');
 @define('INSTALL_CAL_DESC', '원하는 달력의 형태를 고르십시오.');
 @define('REPLY', '답글');
@@ -891,3 +889,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

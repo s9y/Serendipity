@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_zh.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_zh.inc.php 1593 2007-01-22 10:45:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by
@@ -693,8 +693,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', '单外挂路径');
 @define('INSTALL_PERMALINK_ADMINPATH', '管理路径');
 @define('INSTALL_PERMALINK_SEARCHPATH', '搜索路径');
-@define('USERCONF_CREATE', '不允许新增新文章');
-@define('USERCONF_CREATE_DESC', '如果选择，作者将不能发布新文章。');
 @define('INSTALL_CAL', '日历类型');
 @define('INSTALL_CAL_DESC', '请选择你要的日历类型');
 @define('REPLY', '回复');
@@ -889,3 +887,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');

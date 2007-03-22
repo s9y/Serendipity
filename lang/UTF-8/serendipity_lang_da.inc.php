@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_da.inc.php 1515 2006-11-22 10:30:13Z garvinhicking $
+<?php # $Id: serendipity_lang_da.inc.php 1593 2007-01-22 10:45:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Tom Sommer, <ts@dreamcoder.dk>
@@ -691,8 +691,6 @@
 @define('INSTALL_PERMALINK_PLUGINPATH', 'Sti til et plugin');
 @define('INSTALL_PERMALINK_ADMINPATH', 'Sti til admin');
 @define('INSTALL_PERMALINK_SEARCHPATH', 'Sti til søgning');
-@define('USERCONF_CREATE', 'Forbyd oprettelse af artikler?');
-@define('USERCONF_CREATE_DESC', 'Hvis valgt, kan denne bruger ikke oprette nye artikler');
 @define('INSTALL_CAL', 'Kalendar type');
 @define('INSTALL_CAL_DESC', 'Vælg dit kalenderformat');
 @define('REPLY', 'Svar');
@@ -887,3 +885,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
 @define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
+@define('USERCONF_CREATE', 'Disable user / forbid activity?');
+@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
+@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
+@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
