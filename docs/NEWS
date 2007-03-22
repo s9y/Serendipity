@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Add new category property to hide blog postings made into sub-
+      categories from the frontend view, per category. Thanks to
+      netmorix from the forums! (garvinhicking)
+
     * Move possible hazardous personal configuration options ("Rights:
       Publishing entries", "Forbid creating entries", "Access level";
       "Group memberships") to the user management section.

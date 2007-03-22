@@ -7,7 +7,8 @@ CREATE TABLE {PREFIX}tempcategory (
   category_left int(11) default '0',
   category_right int(11) default '0',
   parentid int(11) DEFAULT '0' NOT NULL,
-  sort_order int(11)
+  sort_order int(11),
+  hide_sub int(1)
 ) {UTF_8};
 
 INSERT INTO {PREFIX}tempcategory (categoryid, category_name, category_icon, category_description, authorid, category_left, category_right, parentid) SELECT categoryid, category_name, category_icon, category_description, authorid, category_left, category_right, parentid FROM {PREFIX}category;
@@ -22,7 +23,8 @@ CREATE TABLE {PREFIX}category (
   category_left int(11) default '0',
   category_right int(11) default '0',
   parentid int(11) DEFAULT '0' NOT NULL,
-  sort_order int(11)
+  sort_order int(11),
+  hide_sub int(1)
 ) {UTF_8};
 
 CREATE INDEX categorya_idx ON {PREFIX}category (authorid);
@@ -34,3 +36,4 @@ CREATE INDEX categoryso_idx ON {PREFIX}category (sort_order);
 INSERT INTO {PREFIX}category (categoryid, category_name, category_icon, category_description, authorid, category_left, category_right, parentid) SELECT categoryid, category_name, category_icon, category_description, authorid, category_left, category_right, parentid FROM {PREFIX}tempcategory;
 DROP TABLE {PREFIX}tempcategory;
 
+UPDATE {PREFIX}category SET hide_sub = 

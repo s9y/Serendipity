@@ -1035,9 +1035,11 @@ function serendipity_addCategory($name, $desc, $authorid, $icon, $parentid) {
  * @param   int     The new category owner
  * @param   string  The new category icon
  * @param   int     The new category parent ID
+ * @param   int     The new category sort order
+ * @param   int     The new category subcat hiding
  * @return null
  */
-function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $parentid) {
+function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $parentid, $sort_order = 0, $hide_sub = 0) {
     global $serendipity;
 
     $query = "UPDATE {$serendipity['dbPrefix']}category
@@ -1045,7 +1047,9 @@ function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $paren
                         category_description = '". serendipity_db_escape_string($desc) ."',
                         authorid = ". (int)$authorid .",
                         category_icon = '". serendipity_db_escape_string($icon) ."',
-                        parentid = ". (int)$parentid ."
+                        parentid = ". (int)$parentid .",
+                        sort_order = ". (int)$sort_order . ",
+                        hide_sub = ". (int)$hide_sub . "
                     WHERE categoryid = ". (int)$cid ."
                         $admin_category";
     serendipity_db_query($query);
@@ -1059,7 +1063,6 @@ function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $paren
     );
 
     serendipity_updatePermalink($data, 'category');
-
 }
 
 /**
