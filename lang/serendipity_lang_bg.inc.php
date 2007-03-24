@@ -875,7 +875,7 @@
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Запомняне (отмятане) на тази връзка с възможност след това да бъде използвана, за да може съдържанието на страницата да се появява в съдържанието на статия в блога.');
 @define('IMPORT_WP_PAGES', 'Също приемане на статичните страници като нормални статии ?');
-@define('USERCONF_CREATE', 'Disable user / forbid activity?');
-@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
-@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
-@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
+@define('USERCONF_CREATE', 'Забрана на потребителя / забрана на активността?');
+@define('USERCONF_CREATE_DESC', 'Ако е позволено, потребителят няма да има никакви възможности за редактиране или създаване на каквото и да било в блога. Когато влезе в административната страница, потребителят няма да може да прави нищо друго, освен да излезе или да види своята персонална конфигурация.');
+@define('CATEGORY_HIDE_SUB', 'Скриване на постингите, направени в подкатегории?');
+@define('CATEGORY_HIDE_SUB_DESC', 'По подразбиране когато разглеждате катогерия, статиите от подкатегориите също се показват. Ако тази опция е включена, само статиите от текущо избраната категория ще бъдат показвани.');
