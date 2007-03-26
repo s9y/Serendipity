@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Show current captcha look in the plugin configuration menu
+      (garvinhicking)
+      
     * Add new category property to hide blog postings made into sub-
       categories from the frontend view, per category. Thanks to
       netmorix from the forums! (garvinhicking)

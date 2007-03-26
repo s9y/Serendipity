@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.65');
+        $propbag->add('version',       '1.66');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -389,12 +389,12 @@ var $filter_defaults;
 
         $q = "SELECT ip FROM {$serendipity['dbPrefix']}spamblock_htaccess WHERE timestamp > " . (time() - 86400*2) . " GROUP BY ip";
         $rows = serendipity_db_query($q, false, 'assoc');
-        
+
         $deny = array();
         foreach($rows AS $row) {
             $deny[] = $row['ip'];
         }
-        
+
         $hta = $serendipity['serendipityPath'] . '.htaccess';
         if (file_exists($hta) && is_writable($hta)) {
             $htaccess = file_get_contents($hta);
@@ -415,7 +415,7 @@ var $filter_defaults;
             }
         }
     }
-    
+
     function &getBlacklist($where, $api_key = '', &$eventData, &$addData) {
         global $serendipity;
 
@@ -598,7 +598,7 @@ var $filter_defaults;
     // Their IPs will be constantly blocked.
     function IsHardcoreSpammer() {
         global $serendipity;
-        
+
         if (serendipity_db_bool($this->get_config('automagic_htaccess'))) {
             $this->htaccess_update($_SERVER['REMOTE_ADDR']);
         }
@@ -628,6 +628,44 @@ var $filter_defaults;
         }
 
         return false;
+    }
+
+    function example() {
+        echo '<div id="captchabox" style="margin: 10px; padding: 5px; border: 1px solid black">' . PLUGIN_EVENT_SPAMBLOCK_LOOK . '<br />';
+        $this->show_captcha();
+        echo '</div>';
+    }
+
+    function show_captcha($use_gd = false) {
+        global $serendipity;
+
+        if ($use_gd || (function_exists('imagettftext') && function_exists('imagejpeg'))) {
+            $max_char = 5;
+            $min_char = 3;
+            $use_gd   = true;
+        } else {
+            $max_char = $min_char = 5;
+            $use_gd   = false;
+        }
+
+        if ($use_gd) {
+            printf('<img src="%s" onclick="this.src=this.src + \'1\'" title="%s" alt="CAPTCHA" class="captcha" />',
+                $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . md5(time()),
+                htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
+            );
+        } else {
+            $bgcolors = explode(',', $this->get_config('captcha_color', '255,0,255'));
+            $hexval   = '#' . dechex(trim($bgcolors[0])) . dechex(trim($bgcolors[1])) . dechex(trim($bgcolors[2]));
+            $this->random_string($max_char, $min_char);
+            echo '<div class="serendipity_comment_captcha_image" style="background-color: ' . $hexval . '">';
+            for ($i = 1; $i <= $max_char; $i++) {
+                printf('<img src="%s" title="%s" alt="CAPTCHA ' . $i . '" class="captcha" />',
+                    $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . $i . '_' . md5(time()),
+                    htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
+                );
+            }
+            echo '</div>';
+        }
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
@@ -704,7 +742,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        
+
                         /*
                         if ($addData['type'] != 'NORMAL' && empty($addData['name'])) {
                             $eventData = array('allow_coments' => false);
@@ -1048,24 +1086,7 @@ var $filter_defaults;
                         echo '<div class="serendipity_commentDirection serendipity_comment_captcha">';
                         if (!isset($serendipity['POST']['preview']) || strtolower($serendipity['POST']['captcha'] != strtolower($_SESSION['spamblock']['captcha']))) {
                             echo '<br />' . PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC . '<br />';
-                            if ($use_gd) {
-                                printf('<img src="%s" title="%s" alt="CAPTCHA" class="captcha" />',
-                                    $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . md5(time()),
-                                    htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
-                                );
-                            } else {
-                                $bgcolors = explode(',', $this->get_config('captcha_color', '255,0,255'));
-                                $hexval   = '#' . dechex(trim($bgcolors[0])) . dechex(trim($bgcolors[1])) . dechex(trim($bgcolors[2]));
-                                $this->random_string($max_char, $min_char);
-                                echo '<div class="serendipity_comment_captcha_image" style="background-color: ' . $hexval . '">';
-                                for ($i = 1; $i <= $max_char; $i++) {
-                                    printf('<img src="%s" title="%s" alt="CAPTCHA ' . $i . '" class="captcha" />',
-                                        $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . $i . '_' . md5(time()),
-                                        htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
-                                    );
-                                }
-                                echo '</div>';
-                            }
+                            $this->show_captcha($use_gd);
                             echo '<br />';
                             echo '<label for="captcha">'. PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC3 . '</label><br /><input type="text" size="5" name="serendipity[captcha]" value="" id="captcha" />';
                         } elseif (isset($serendipity['POST']['captcha'])) {
