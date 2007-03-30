@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Allow to specify non-default port when using MySQLi
+      (garvinhicking)
+
     * Show current captcha look in the plugin configuration menu
       (garvinhicking)
       

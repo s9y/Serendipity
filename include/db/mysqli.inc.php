@@ -230,7 +230,14 @@ function serendipity_db_connect() {
 
     $function = 'mysqli_connect';
 
-    $serendipity['dbConn'] = $function($serendipity['dbHost'], $serendipity['dbUser'], $serendipity['dbPass']);
+    $connparts = explode(':', $serendipity['dbHost']);
+    if (!empty($connparts[1])) {
+        // A "hostname:port" connection was specified
+        $serendipity['dbConn'] = $function($connparts[0], $serendipity['dbUser'], $serendipity['dbPass'], $serendipity['dbName'], $connparts[1]);
+    } else {
+        // Connect with default ports
+        $serendipity['dbConn'] = $function($connparts[0], $serendipity['dbUser'], $serendipity['dbPass']);
+    }
     mysqli_select_db($serendipity['dbConn'], $serendipity['dbName']);
     serendipity_db_reconnect();
 
@@ -300,7 +307,17 @@ function serendipity_db_probe($hash, &$errs) {
         return false;
     }
 
-    if (!($c = @mysqli_connect($hash['dbHost'], $hash['dbUser'], $hash['dbPass']))) {
+    $function = 'mysqli_connect';
+    $connparts = explode(':', $hash['dbHost']);
+    if (!empty($connparts[1])) {
+        // A "hostname:port" connection was specified
+        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass'], $hash['dbName'], $connparts[1]);
+    } else {
+        // Connect with default ports
+        $c = @$function($connparts[0], $hash['dbUser'], $hash['dbPass']);
+    }
+
+    if (!$c) {
         $errs[] = 'Could not connect to database; check your settings.';
         $errs[] = 'The mySQL error was: ' . mysqli_connect_error();
         return false;
