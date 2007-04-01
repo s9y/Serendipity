@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix missing %username% permalink pattern in single entry view.
+      Patch by cress_cc
+
     * Allow to specify non-default port when using MySQLi
       (garvinhicking)
 
