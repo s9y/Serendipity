@@ -50,12 +50,12 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
                 $r = serendipity_db_query("SELECT categoryid FROM {$serendipity['dbPrefix']}category c
                                                 WHERE c.categoryid = ". (int)$parentid ."
                                                     AND c.category_left BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange((int)$serendipity['GET']['cid'])));
-                if ( is_array($r) ) {
+                if (is_array($r)) {
                     $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category
                                                         WHERE categoryid = ". (int)$parentid);
                     echo sprintf(ALREADY_SUBCATEGORY, htmlspecialchars($r[0]['category_name']), htmlspecialchars($name));
                 } else {
-                    serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid);
+                    serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid, $serendipity['POST']['cat']['sort_order'], $serendipity['POST']['cat']['hide_sub']);
                     serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'read', $serendipity['POST']['cat']['read_authors']);
                     serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'write', $serendipity['POST']['cat']['write_authors']);
                     echo '<div class="serendipityAdminMsgSuccess">'. CATEGORY_SAVED .'</div>';
@@ -234,6 +234,15 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
             </select>
         </td>
     </tr>
+
+    <tr>
+        <td><?php echo CATEGORY_HIDE_SUB ?><br /><em><?php echo CATEGORY_HIDE_SUB_DESC; ?></em></td>
+        <td valign="top">
+            <input type="radio" name="serendipity[cat][hide_sub]" value="0" <?php echo ($this_cat['hide_sub'] == 0 ? 'checked="checked"' : ''); ?> id="hide_sub_no" /> <label for="hide_sub_no"><?php echo NO; ?></label>
+            <input type="radio" name="serendipity[cat][hide_sub]" value="1" <?php echo ($this_cat['hide_sub'] == 1 ? 'checked="checked"' : ''); ?> id="hide_sub_yes" /> <label for="hide_sub_yes"><?php echo YES; ?></label>
+        </td>
+    </tr>
+
     <?php serendipity_plugin_api::hook_event('backend_category_showForm', $cid, $this_cat); ?>
 </table>
     <div><input type="submit" name="SAVE" value="<?php echo $save; ?>" class="serendipityPrettyButton" /></div>
