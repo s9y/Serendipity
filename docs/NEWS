@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Make plugins be able to emit their own RSS-Feeds using
+      $eventData['template_file'] on the 'frontend_rss' event hook
+      (garvinhicking)
+
     * Fix missing %username% permalink pattern in single entry view.
       Patch by cress_cc
 
@@ -11,7 +15,7 @@ Version 1.2 ()
 
     * Show current captcha look in the plugin configuration menu
       (garvinhicking)
-      
+
     * Add new category property to hide blog postings made into sub-
       categories from the frontend view, per category. Thanks to
       netmorix from the forums! (garvinhicking)

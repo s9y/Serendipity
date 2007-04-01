@@ -30,7 +30,7 @@ if (!isset($_GET['type'])) {
 }
 
 if (!empty($_SERVER['HTTP_USER_AGENT']) && stristr($_SERVER['HTTP_USER_AGENT'], 'feedburner')) {
-    $_GET['nocache'] = true;    
+    $_GET['nocache'] = true;
 }
 
 $serendipity['view'] = 'feed';
@@ -164,10 +164,10 @@ if (is_array($plugins)) {
                 }
             }
 
-            if ($_GET['type']  == 'content' && 
-                !isset($_GET['category']) && 
-                !isset($serendipity['GET']['tag']) && 
-                $plugin->get_config('show_feedburner') === 'force' && 
+            if ($_GET['type']  == 'content' &&
+                !isset($_GET['category']) &&
+                !isset($serendipity['GET']['tag']) &&
+                $plugin->get_config('show_feedburner') === 'force' &&
                 !preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&
                 !(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
                ) {
@@ -181,8 +181,15 @@ if (is_array($plugins)) {
     }
 }
 
+$file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
+$metadata['template_file'] = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');
+
 serendipity_smarty_init();
 serendipity_plugin_api::hook_event('frontend_rss', $metadata);
+
+if (!$metadata['template_file'] || $metadata['template_file'] == 'feed_' . $file_version . '.tpl') {
+    die("Invalid RSS version specified or RSS-template file not found\n");
+}
 
 $self_url = 'http://' . $_SERVER['HTTP_HOST'] . htmlspecialchars($_SERVER['REQUEST_URI']);
 if (!is_array($entries)) {
@@ -193,12 +200,6 @@ if ($entries[0]['last_modified']) {
     $gm_modified = gmdate('Y-m-d\TH:i:s\Z', serendipity_serverOffsetHour($entries[0]['last_modified']));
 } else {
     $gm_modified = gmdate('Y-m-d\TH:i:s\Z', serendipity_serverOffsetHour());
-}
-
-$file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
-$template_file = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');
-if (!$template_file) {
-    die("Invalid RSS version specified\n");
 }
 
 serendipity_printEntries_rss($entries, $version, $comments, $metadata['fullFeed'], $metadata['showMail']);
@@ -252,6 +253,6 @@ $serendipity['smarty']->assign(
         'self_url'              => $self_url,
     )
 );
-$serendipity['smarty']->display($template_file);
+$serendipity['smarty']->display($metadata['template_file']);
 
 /* vim: set sts=4 ts=4 expandtab : */
