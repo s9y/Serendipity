@@ -510,6 +510,7 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
                             e.moderate_comments,
 
                             a.realname AS author,
+                            a.username AS loginname,
                             a.email
                       FROM
                             {$serendipity['dbPrefix']}entries e
@@ -644,6 +645,7 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
                            c.parentid,
 
                            a.username,
+                           a.username AS loginname,
                            a.realname
                       FROM {$serendipity['dbPrefix']}category AS c
            LEFT OUTER JOIN {$serendipity['dbPrefix']}authors AS a
