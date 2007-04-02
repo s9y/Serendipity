@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Upgrade bundled Smarty to 2.6.18 (garvinhicking)
+
     * Make plugins be able to emit their own RSS-Feeds using
       $eventData['template_file'] on the 'frontend_rss' event hook
       (garvinhicking)
