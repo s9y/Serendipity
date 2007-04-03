@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Display theme's preview_fullsize.jpg image when existing. Added
+      screenshots by williamts99.
+
     * Upgrade bundled Smarty to 2.6.18 (garvinhicking)
 
     * Make plugins be able to emit their own RSS-Feeds using

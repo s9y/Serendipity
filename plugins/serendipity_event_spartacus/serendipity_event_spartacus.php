@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.12');
+        $propbag->add('version',       '2.13');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -751,6 +751,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $plugname = $pluginstack[$i]['template'];
                 $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $plugname . '/preview.png?rev=1.9999';
+                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $plugname . '/preview_fullsize.jpg?rev=1.9999';
                 $pluginstack[$i]['customURI']  = '&amp;serendipity[spartacus_fetch]=' . $plugname;
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
