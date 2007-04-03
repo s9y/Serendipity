@@ -127,13 +127,28 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
             continue;
         }
 
+        $preview = '';
+        $preview_link = false;
+        if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg')) {
+            $preview .= '<a href="' . $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg" target="_blank">';
+            $preview_link = true;
+        } elseif (!empty($info['preview_fullsizeURL'])) {
+            $preview .= '<a href="' . $info['preview_fullsizeURL'] . '" target="_blank">';
+            $preview_link = true;
+        } else {
+            echo "No large preview";
+        }
 
         if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
-            $preview = '<img src="' . $serendipity['templatePath'] . $theme . '/preview.png" width="100" style="border: 1px #000000 solid" />';
+            $preview .= '<img src="' . $serendipity['templatePath'] . $theme . '/preview.png" width="100" style="border: 1px #000000 solid" />';
         } elseif (!empty($info['previewURL'])) {
-            $preview = '<img src="' . $info['previewURL'] . '" width="100" style="border: 1px #000000 solid" />';
+            $preview .= '<img src="' . $info['previewURL'] . '" width="100" style="border: 1px #000000 solid" />';
         } else {
-            $preview = '&nbsp;';
+            $preview .= '&nbsp;';
+        }
+        
+        if ($preview_link) {
+            $preview .= '</a>';
         }
 
         if (empty($info['customURI'])) {
