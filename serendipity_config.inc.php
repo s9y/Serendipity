@@ -10,6 +10,16 @@ if (defined('S9Y_FRAMEWORK')) {
 
 if (!headers_sent()) {
     session_start();
+    
+    // Prevent session fixation by only allowing sessions that have been sent by the server.
+    // Any session that does not contain our unique token will be regarded as foreign/fixated
+    // and be regenerated with a system-generated SID.
+    // Patch by David Vieira-Kurz of majorsecurity.de
+    if (!isset($_SESSION['SERVER_GENERATED_SID'])) {
+        session_destroy();
+        session_regenerate_id();
+        $_SESSION['SERVER_GENERATED_SID'] = true;
+    }
 }
 
 if (!defined('S9Y_INCLUDE_PATH')) {

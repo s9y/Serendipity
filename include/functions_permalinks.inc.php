@@ -753,12 +753,18 @@ function serendipity_currentURL($strict = false) {
  */
 function serendipity_getUriArguments($uri, $wildcard = false) {
 global $serendipity;
+static $indexFile = null;
+
+    if ($indexFile === null) {
+        $_indexFile = explode('.', $serendipity['indexFile']);
+        $indexFile = $_indexFile[0];
+    }
 
     /* Explode the path into sections, to later be able to check for arguments and add our own */
     preg_match('/^'. preg_quote($serendipity['serendipityHTTPPath'], '/') . '(' . preg_quote($serendipity['indexFile'], '/') . '\?\/)?(' . ($wildcard ? '.+' : '[;,_a-z0-9\-*\/%\+]+') . ')/i', $uri, $_res);
     if (strlen($_res[2]) != 0) {
         $args = explode('/', $_res[2]);
-        if ($args[0] == 'index') {
+        if ($args[0] == $indexFile || $args[0] == $serendipity['indexFile']) {
             unset($args[0]);
         }
         return $args;
