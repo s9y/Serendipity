@@ -3,6 +3,7 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 $global_debug = false;
+
 if ($global_debug) {
     #apd_set_pprof_trace();
 

@@ -3,6 +3,12 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix wrong next/previous page links when using wrapper.php indexFile
+      option. (garvinhicking)
+
+    * Prevent cookie-based session fixation by regenerationg server-side
+      session ID. Major thanks to David Vieira-Kurz.
+
     * Display theme's preview_fullsize.jpg image when existing. Added
       screenshots by williamts99.
 
