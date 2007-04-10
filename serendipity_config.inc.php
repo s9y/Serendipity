@@ -97,7 +97,7 @@ if (!isset($serendipity['useHTTP-Auth'])) {
 }
 
 if (!isset($serendipity['CacheControl'])) {
-    $serendipity['CacheControl'] = false;
+    $serendipity['CacheControl'] = true;
 }
 
 if (!isset($serendipity['expose_s9y'])) {
