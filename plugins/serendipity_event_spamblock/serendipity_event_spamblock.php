@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.66');
+        $propbag->add('version',       '1.67');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -444,7 +444,8 @@ var $filter_defaults;
                     'http'              => '1.1',
                     'timeout'           => 20,
                     'allowRedirects'    => true,
-                    'maxRedirects'      => 3
+                    'maxRedirects'      => 3,
+                    'readTimeout'       => array(5,0), 
                 );
 
                 $req    = &new HTTP_Request(
@@ -814,7 +815,7 @@ var $filter_defaults;
                             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
 
                             if (function_exists('serendipity_request_start')) serendipity_request_start();
-                            $req     = &new HTTP_Request($addData['url'], array('allowRedirects' => true, 'maxRedirects' => 5));
+                            $req     = &new HTTP_Request($addData['url'], array('allowRedirects' => true, 'maxRedirects' => 5, 'readTimeout' => array(5,0)));
                             $is_valid = false;
                             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                                 $is_valid = false;
