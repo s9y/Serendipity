@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Enabled setting cache-control headers by default.
+    
     * Fix wrong next/previous page links when using wrapper.php indexFile
       option. (garvinhicking)
 
