@@ -18,6 +18,8 @@ if (!headers_sent()) {
     if (!isset($_SESSION['SERVER_GENERATED_SID'])) {
         session_destroy();
         session_regenerate_id();
+        session_start();
+        header('X-Session-Reinit: true');
         $_SESSION['SERVER_GENERATED_SID'] = true;
     }
 }
