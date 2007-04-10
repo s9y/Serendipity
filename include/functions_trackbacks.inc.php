@@ -421,6 +421,7 @@ FAILURE;
 function serendipity_handle_references($id, $author, $title, $text, $dry_run = false) {
     global $serendipity;
     static $old_references = array();
+    static $saved_references = array();
     static $debug = false;
 
     if ($dry_run) {
@@ -430,7 +431,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
-                $current_references[$old_reference['link']] = $old_reference;
+                $saved_references[$old_reference['link']] = $current_references[$old_reference['link']] = $old_reference;
             }
         }
         if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
@@ -469,11 +470,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
     for ($i = 0, $j = count($locations); $i < $j; ++$i) {
+        if ($debug) echo "Checking {$locations[$i]}...<br />\n";
         if ($locations[$i][0] == '/') {
             $locations[$i] = 'http' . (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $locations[$i];
         }
 
         if (isset($checked_locations[$locations[$i]])) {
+            if ($debug) echo "Already checked.<br />\n";
             continue;
         }
 
@@ -493,15 +496,21 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                                     AND type = ''";
 
         $row = serendipity_db_query($query, true, 'num');
-        if ($row[0] > 0) {
+        if ($row[0] > 0 && isset($saved_references[$locations[$i]])) {
+            if ($debug) echo "Found references for $id, skipping rest<br />\n";
             continue;
         }
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
             if (!$dry_run) {
+                if ($debug) echo "Enabling autodiscovery.<br />\n";
                 serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
+            } elseif ($debug) {
+                echo "Skipping autodiscovery<br />\n";
             }
             $checked_locations[$locations[$i]] = true; // Store trackbacked link so that no further trackbacks will be sent to the same link
+        } elseif ($debug) {
+            echo "Skipping full autodiscovery<br />\n";
         }
     }
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND type = ''");
