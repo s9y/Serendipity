@@ -318,7 +318,7 @@ function serendipity_db_probe($hash, &$errs)
         return true;
     }
 
-    $errs[] = "Unable to open \"{$serendipity['serendipityPath']}$dbName.db\" - check permissions (directory needs to be writeable for webserver)!";
+    $errs[] = "Unable to open \"$dbfile\" - check permissions (directory needs to be writeable for webserver)!";
     return false;
 }
 

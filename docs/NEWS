@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Patch #1697590: Proper directory name of SQLite DB-error messages,
+      thanks to Thijs Kinkhorst
+
     * Enabled setting cache-control headers by default.
     
     * Fix wrong next/previous page links when using wrapper.php indexFile
