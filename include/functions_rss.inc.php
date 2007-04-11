@@ -49,6 +49,9 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                     $entry['author'] .= ' - ' . $entry['ctitle'];
                 }
                 $entry['title'] = (!empty($entry['author']) ? $entry['author'] : ANONYMOUS) . ': ' . $entry['title'];
+                
+                // No HTML allowed here:
+                $entry['body'] = strip_tags($entry['body']);
             }
 
             // Embed a link to extended entry, if existing
