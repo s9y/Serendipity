@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Strip tags from comments also in RSS-Feeds for comments, thanks to
+      tmix from the forums (garvinhicking)
+
     * Patch #1697590: Proper directory name of SQLite DB-error messages,
       thanks to Thijs Kinkhorst
 
