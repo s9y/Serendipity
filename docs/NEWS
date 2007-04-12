@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix RSS fullfeed "let client decide" option typo. Previously this
+      always enforced a fullfeed to show, regardless of what the client
+      indicated. Thanks to stm9x9 (garvinhicking)
+      
     * Add proper charset to CSS stylesheet. Thanks to SADtg 
       (garvinhicking)
 

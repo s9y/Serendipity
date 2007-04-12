@@ -156,11 +156,11 @@ if (is_array($plugins)) {
                 }
             }
             $metadata['fullFeed']          = $plugin->get_config('fullfeed', false);
-            if ($metaData['fullFeed'] === 'client') {
+            if ($metadata['fullFeed'] === 'client') {
                 if ($_GET['fullFeed'] || $serendipity['GET']['fullFeed']) {
-                    $metaData['fullFeed'] = true;
+                    $metadata['fullFeed'] = true;
                 } else {
-                    $metaData['fullFeed'] = false;
+                    $metadata['fullFeed'] = false;
                 }
             }
 
