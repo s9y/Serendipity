@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Add proper charset to CSS stylesheet. Thanks to SADtg 
+      (garvinhicking)
+
     * Strip tags from comments also in RSS-Feeds for comments, thanks to
       tmix from the forums (garvinhicking)
 
