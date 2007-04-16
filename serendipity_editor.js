@@ -75,13 +75,13 @@ function wrapSelectionWithLink(txtarea) {
 
     var my_title = prompt("Enter title/tooltip:", "");
 
-	html_title = "";
-    if (my_title != "") {
-		html_title = ' title="' + my_title + '"';
+    html_title = "";
+    if (my_title != "" && my_title != null) {
+        html_title = ' title="' + my_title + '"';
     }
 
     if (my_link != null) {
-        lft = "<a href=\"" + my_link + "\" " + html_title + ">";
+        lft = "<a href=\"" + my_link + "\"" + html_title + ">";
         if (my_desc != null && my_desc != "") {
             rgt = my_desc + "</a>";
         } else {
@@ -143,12 +143,12 @@ function serendipity_insLink (area) {
         return;
     }
 
-	html_title = "";
-    if (my_title != "") {
-		html_title = ' title="' + my_title + '"';
+    html_title = "";
+    if (my_title != "" && my_title != null) {
+        html_title = ' title="' + my_title + '"';
     }
 
-    area.value = area.value + '<a href="' + loc + '" ' + html_title + '>' + (text ? text : loc) + '</a>';
+    area.value = area.value + '<a href="' + loc + '"' + html_title + '>' + (text ? text : loc) + '</a>';
     area.focus();
 }
 

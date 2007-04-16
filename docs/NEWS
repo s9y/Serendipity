@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix redundant space when inserting links through the non-WYSIWYG
+      editor panel. Fix "null" insertion. Thanks to Alp Uckan.
+      
     * Fix RSS fullfeed "let client decide" option typo. Previously this
       always enforced a fullfeed to show, regardless of what the client
       indicated. Thanks to stm9x9 (garvinhicking)
