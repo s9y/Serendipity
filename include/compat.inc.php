@@ -115,9 +115,12 @@ if (extension_loaded('filter') && function_exists('input_name_to_filter') && inp
     foreach ($_COOKIE as $key => $value) {
         $_COOKIE[$key] = input_get(INPUT_COOKIE, $key, FILTER_UNSAFE_RAW);
     }
+    // NOT YET IMPLEMENTED IN PHP:
+    /*
     foreach ($_SESSION as $key => $value) {
         $_SESSION[$key] = input_get(INPUT_SESSION, $key, FILTER_UNSAFE_RAW);
     }
+    */
 }
 
 if (extension_loaded('filter') && function_exists('filter_id') && function_exists('filter_input') && filter_id(ini_get('filter.default')) !== FILTER_UNSAFE_RAW) {
