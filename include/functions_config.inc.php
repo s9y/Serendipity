@@ -1238,14 +1238,15 @@ function &serendipity_getGroups($authorid, $sequence = false) {
     }
 
     if ($sequence) {
-        $_groups = $groups;
-        $groups  = array();
-        foreach($_groups AS $grouprow) {
-            $groups[] = $grouprow['confkey'];
+        $rgroups  = array();
+        foreach($groups AS $grouprow) {
+            $rgroups[] = $grouprow['confkey'];
         }
+    } else {
+        $rgroups =& $groups;
     }
 
-    return $groups;
+    return $rgroups;
 }
 
 /**
