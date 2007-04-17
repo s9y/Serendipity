@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix bug in conjunction with PHP 5.2.1 changed variable-by-reference
+      handling that could result in no groups being listed for author
+      accounts (garvinhicking)
+
     * Fix redundant space when inserting links through the non-WYSIWYG
       editor panel. Fix "null" insertion. Thanks to Alp Uckan.
       
