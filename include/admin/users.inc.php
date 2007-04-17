@@ -185,15 +185,16 @@ if (serendipity_checkPermission('adminUsersMaintainOthers')) {
 }
 
 $i = 0;
-foreach($users as $user) {
-    if ($user['userlevel'] < $serendipity['serendipityUserlevel'] || $user['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
-        if ( $user['userlevel'] >= USERLEVEL_ADMIN ) {
-            $img = serendipity_getTemplateFile('admin/img/user_admin.png');
-        } elseif ( $user['userlevel'] >= USERLEVEL_CHIEF ) {
-            $img = serendipity_getTemplateFile('admin/img/user_chief.png');
-        } else {
-            $img = serendipity_getTemplateFile('admin/img/user_editor.png');
-        }
+if (is_array($users)) {
+    foreach($users as $user) {
+        if ($user['userlevel'] < $serendipity['serendipityUserlevel'] || $user['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
+            if ( $user['userlevel'] >= USERLEVEL_ADMIN ) {
+                $img = serendipity_getTemplateFile('admin/img/user_admin.png');
+            } elseif ( $user['userlevel'] >= USERLEVEL_CHIEF ) {
+                $img = serendipity_getTemplateFile('admin/img/user_chief.png');
+            } else {
+                $img = serendipity_getTemplateFile('admin/img/user_editor.png');
+            }
 ?>
 <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo ($i++ % 2) ? 'even' : 'uneven' ?>">
 <table width="100%">
@@ -207,6 +208,7 @@ foreach($users as $user) {
 </table>
 </div>
 <?php
+        }
     }
 }
 ?>
