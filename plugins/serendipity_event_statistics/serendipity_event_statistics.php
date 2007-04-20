@@ -25,7 +25,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg');
-        $propbag->add('version',       '1.45');
+        $propbag->add('version',       '1.46');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -940,8 +940,8 @@ class serendipity_event_statistics extends serendipity_event
             year int(4) not null,
             month int(2) not null,
             day int(2) not null,
-            visits int(12) not null,
-            hits int(12) not null
+            visits int(11) not null,
+            hits int(11) not null
         )";
 
        serendipity_db_schema_import($q);
