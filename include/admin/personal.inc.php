@@ -51,12 +51,13 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
                     } else {
                         continue;
                     }
-
+/*
                     if (count($_POST[$item['var']]) < 1) {
                         echo '<div class="serendipityAdminMsgError">' . WARNING_NO_GROUPS_SELECTED . '</div>';
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['authorid'], false);
                     }
+*/
                     continue;
                 }
 
