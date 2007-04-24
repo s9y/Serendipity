@@ -707,7 +707,7 @@
 @define('SYNDICATION_PLUGIN_FEEDBURNERID', 'FeedBurner-ID');
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_DESC', 'Het ID van de toevoer die u wilt publiceren');
 @define('SYNDICATION_PLUGIN_FEEDBURNERIMG', 'FeedBurner-afbeelding');
-@define('SYNDICATION_PLUGIN_FEEDBURNERIMG_DESC', 'Naam van de te tonen afbeelding (of laat deze leeg i.v.m. de teller), zoals deze te vinden is op feedburner.com, ex: fbapix.gif');
+@define('SYNDICATION_PLUGIN_FEEDBURNERIMG_DESC', 'Naam van de te tonen afbeelding (of laat deze leeg voor een teller), zoals deze te vinden is op feedburner.com, ex: fbapix.gif');
 @define('SYNDICATION_PLUGIN_FEEDBURNERTITLE', 'FeedBurner-titel');
 @define('SYNDICATION_PLUGIN_FEEDBURNERTITLE_DESC', 'Titel (indien ingevuld) die naast de afbeelding getoond wordt');
 @define('SYNDICATION_PLUGIN_FEEDBURNERALT', 'FeedBurner-afbeeldingtekst');
