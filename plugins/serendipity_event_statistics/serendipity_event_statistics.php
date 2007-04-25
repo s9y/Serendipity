@@ -131,10 +131,10 @@ class serendipity_event_statistics extends serendipity_event
                             $remoteaddr = $_SERVER['REMOTE_ADDR'];
                         }
                         if ($_SERVER['HTTP_USER_AGENT']) {
-                            $useragent = $_SERVER['HTTP_USER_AGENT'];
+                            $useragent = substr($_SERVER['HTTP_USER_AGENT'], 0, 255);
                         }
                         if ($_SERVER['HTTP_REFERER']) {
-                            $referer = $_SERVER['HTTP_REFERER'];
+                            $referer = substr($_SERVER['HTTP_REFERER'], 0, 255);
                         }
                             
                         $found = 0;

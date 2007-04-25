@@ -556,7 +556,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
         $parentid      = (isset($commentInfo['parent_id']) && is_numeric($commentInfo['parent_id'])) ? $commentInfo['parent_id'] : 0;
         $status        = serendipity_db_escape_string(isset($commentInfo['status']) ? $commentInfo['status'] : (serendipity_db_bool($ca['moderate_comments']) ? 'pending' : 'approved'));
         $t             = serendipity_db_escape_string(isset($commentInfo['time']) ? $commentInfo['time'] : time());
-        $referer       = (isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : '');
+        $referer       = substr((isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : ''), 0, 200);
 
         $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
                  FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
