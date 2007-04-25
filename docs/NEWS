@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Make statistics, karma and spamblock plugin only log 255 characters
+      of HTTP User-Agent and Referrer strings to the database, as the 
+      fields are only varchar(255). Thanks to jemm4jemm!
+      
     * Fix bug in conjunction with PHP 5.2.1 changed variable-by-reference
       handling that could result in no groups being listed for author
       accounts (garvinhicking)
