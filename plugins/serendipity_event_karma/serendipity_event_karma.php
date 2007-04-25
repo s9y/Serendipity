@@ -339,7 +339,7 @@ class serendipity_event_karma extends serendipity_event
                           $this->karmaId,
                           $this->karmaVoting,
                           serendipity_db_escape_string($_SERVER['REMOTE_ADDR']),
-                          serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']),
+                          substr(serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']), 0, 255),
                           $now
                         );
                         $sql = serendipity_db_query($q);

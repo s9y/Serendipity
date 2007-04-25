@@ -1356,9 +1356,9 @@ var $filter_defaults;
                            serendipity_db_escape_string($comment['name']),
                            serendipity_db_escape_string($comment['email']),
                            serendipity_db_escape_string($comment['url']),
-                           serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']),
+                           substr(serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']), 0, 255),
                            serendipity_db_escape_string($_SERVER['REMOTE_ADDR']),
-                           serendipity_db_escape_string(isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : $_SERVER['HTTP_REFERER']),
+                           substr(serendipity_db_escape_string(isset($_SESSION['HTTP_REFERER']) ? $_SESSION['HTTP_REFERER'] : $_SERVER['HTTP_REFERER']), 0, 255),
                            serendipity_db_escape_string($comment['comment'])
                 );
 
