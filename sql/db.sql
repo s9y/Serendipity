@@ -71,7 +71,7 @@ create table {PREFIX}comments (
   author varchar(80) default null,
   email varchar(200) default null,
   url varchar(200) default null,
-  ip varchar(15) default null,
+  ip varchar(64) default null,
   body text,
   type varchar(100) default 'regular',
   subscribed {BOOLEAN},
@@ -184,7 +184,7 @@ create table {PREFIX}options (
 CREATE INDEX options_idx ON {PREFIX}options (okey);
 
 CREATE TABLE {PREFIX}suppress (
-  ip varchar(15) default NULL,
+  ip varchar(64) default NULL,
   scheme varchar(5),
   host varchar(128),
   port varchar(5),

@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Change database types for IP addresses to varchar(64) to support
+      IPv6 (garvinhicking)
+
     * Make statistics, karma and spamblock plugin only log 255 characters
       of HTTP User-Agent and Referrer strings to the database, as the 
       fields are only varchar(255). Thanks to jemm4jemm!
