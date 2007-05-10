@@ -426,7 +426,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
-        $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id, false, 'assoc');
+        $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id, false, 'assoc');
         if (is_array($old_references) && count($old_references) > 0) {
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
@@ -437,7 +437,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE type = '' AND entry_id = " . (int)$id);
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id);
         if ($debug) echo "Deleted references.<br />\n";
 
         if (is_array($old_references) && count($old_references) > 0) {
@@ -493,7 +493,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $query = "SELECT COUNT(id) FROM {$serendipity['dbPrefix']}references
                                   WHERE entry_id = ". (int)$id ."
                                     AND link = '" . serendipity_db_escape_string($locations[$i]) . "'
-                                    AND type = ''";
+                                    AND (type = '' OR type IS NULL)";
 
         $row = serendipity_db_query($query, true, 'num');
         if ($row[0] > 0 && isset($saved_references[$locations[$i]])) {
@@ -513,7 +513,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             echo "Skipping full autodiscovery<br />\n";
         }
     }
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND type = ''");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND (type = '' OR type IS NULL)");
     if ($debug) echo "Deleted references again.<br />\n";
 
     if (!is_array($old_references)) {
