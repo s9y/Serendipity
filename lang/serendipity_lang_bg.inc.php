@@ -4,7 +4,7 @@
 # Translation (c) 2004 Bogomil Shopov <bogomil@spisanie.com>
 # http://www.purplerain.org/nb/
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2005
-# Ivan Cenov <JWalker@hotmail.bg>, 2005-2006
+# Ivan Cenov <JWalker@hotmail.bg>, 2005-2007
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'windows-1251');
@@ -69,7 +69,7 @@
 @define('NO_COMMENTS', 'Няма коментари');
 @define('POSTED_BY', 'Публикувано от');
 @define('ON', 'на');
-@define('A_NEW_COMMENT_BLAHBLAH', 'Добавен е нов коментар в блога за статията "%s", озаглавен "%s".');
+@define('A_NEW_COMMENT_BLAHBLAH', 'Добавен е нов коментар във вашия блог "%s", към статията "%s".');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Добавено е ново проследяване на статията "%s".');
 @define('NO_CATEGORY', 'Няма категория');
 @define('ENTRY_BODY', 'Съдържание на статията');
