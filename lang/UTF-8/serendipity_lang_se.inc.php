@@ -6,7 +6,7 @@
 
 @define('LANG_CHARSET', 'UTF-8');
 @define('SQL_CHARSET', 'utf8');
-@define('DATE_LOCALES', 'sv_SV.UTF8, sv_SV.UTF-8, swedish, sv, sv_SV');
+@define('DATE_LOCALES', 'sv_SV.UTF8, sv_SV.UTF-8, swedish, sv, sv_SV, sv_SE.UTF8, sv_SE.UTF-8, sv_SE');
 @define('DATE_FORMAT_ENTRY', '%A, %B %e. %Y');
 @define('DATE_FORMAT_SHORT', '%Y-%m-%d %H:%M');
 @define('WYSIWYG_LANG', 'se-utf');
