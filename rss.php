@@ -5,6 +5,7 @@
 header('Content-Type: text/xml; charset=utf-8');
 session_cache_limiter('public');
 
+@define('IN_RSS', true);
 include('serendipity_config.inc.php');
 include(S9Y_INCLUDE_PATH . 'include/functions_rss.inc.php');
 
