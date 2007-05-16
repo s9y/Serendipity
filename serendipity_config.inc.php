@@ -272,6 +272,10 @@ if (defined('USE_MEMSNAP')) {
 serendipity_load_configuration();
 $serendipity['lang'] = serendipity_getSessionLanguage();
 
+if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
+     (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
+    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+}
 /*
  * If a user is logged in, fetch his preferences. He possibly wants to have a different language
  */
@@ -353,12 +357,6 @@ if (defined('DATE_LOCALES')) {
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
-
-
-if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
-     (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
-}
 
 /*
  *  Check if the installed version is higher than the version of the config
