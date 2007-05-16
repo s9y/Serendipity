@@ -26,7 +26,7 @@ class serendipity_event_trackexits extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TRACKBACK_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.8');
+        $propbag->add('version',       '1.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -119,7 +119,7 @@ class serendipity_event_trackexits extends serendipity_event
                         $this->links = array();
                     } else {
                         #echo "SELECT id, link FROM {$serendipity['dbPrefix']}references WHERE entry_id = {$serendipity['encodeExitsCallback_entry_id']} AND type = ''<br />\n";
-                        $this->links = serendipity_db_query("SELECT id, link FROM {$serendipity['dbPrefix']}references WHERE entry_id = {$serendipity['encodeExitsCallback_entry_id']} AND type = ''", false, 'both', false, 'link', 'id');
+                        $this->links = serendipity_db_query("SELECT id, link FROM {$serendipity['dbPrefix']}references WHERE entry_id = {$serendipity['encodeExitsCallback_entry_id']} AND (type = '' OR type IS NULL)", false, 'both', false, 'link', 'id');
                         #echo "<pre>" . print_r($this->links, true) . "</pre><br />\n";
                     }
 
