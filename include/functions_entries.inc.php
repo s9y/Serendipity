@@ -742,7 +742,6 @@ function &serendipity_searchEntries($term, $limit = '') {
 
     $cond['and'] = " AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '');
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'search', 'term' => $term));
-
     serendipity_ACL_SQL($cond, 'limited');
 
     $serendipity['fullCountQuery'] = "

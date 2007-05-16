@@ -587,12 +587,16 @@ function serendipity_JSsetCookie($name, $value) {
 function serendipity_setCookie($name, $value, $securebyprot = true) {
     global $serendipity;
 
+    $host = $_SERVER['HTTP_HOST'];
     if ($securebyprot) {
         $secure = (strtolower($_SERVER['HTTPS']) == 'on') ? true : false;
+        if ($pos = strpos($host, ":")) {
+            $host = substr($host, 0, $pos);
+        }
     } else {
         $secure = false;
     }
-    setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $_SERVER['HTTP_HOST'], $secure);
+    setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $host, $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
