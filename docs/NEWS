@@ -3,6 +3,9 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Add support for sqlite3 (http://php-sqlite3.sourceforge.net/), by 
+      geekmug
+
     * Change database types for IP addresses to varchar(64) to support
       IPv6 (garvinhicking)
 

@@ -722,7 +722,7 @@ function &serendipity_searchEntries($term, $limit = '') {
         $group     = '';
         $distinct  = 'DISTINCT';
         $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
-    } elseif ($serendipity['dbType'] == 'sqlite') {
+    } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
         // Very extensive SQLite search. There currently seems no other way to perform fulltext search in SQLite
         // But it's better than no search at all :-D
         $group     = 'GROUP BY e.id';
@@ -846,7 +846,7 @@ function serendipity_getTotalEntries() {
     global $serendipity;
 
     // The unique query condition was built previously in serendipity_fetchEntries()
-    if ($serendipity['dbType'] == 'sqlite') {
+    if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
         $querystring  = "SELECT count(e.id) {$serendipity['fullCountQuery']} GROUP BY e.id";
     } else {
         $querystring  = "SELECT count(distinct e.id) {$serendipity['fullCountQuery']}";
@@ -855,7 +855,7 @@ function serendipity_getTotalEntries() {
     $query =& serendipity_db_query($querystring);
 
     if (is_array($query) && isset($query[0])) {
-        if ($serendipity['dbType'] == 'sqlite') {
+        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
             return count($query);
         } else {
             return $query[0][0];

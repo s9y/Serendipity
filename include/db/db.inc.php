@@ -123,6 +123,7 @@ function serendipity_db_get_interval($val, $ival = 900) {
 
     switch($serendipity['dbType']) {
         case 'sqlite':
+        case 'sqlite3':
             $interval = $ival;
             $ts       = time();
             break;

@@ -784,6 +784,9 @@ function serendipity_probeInstallation($item) {
             if (extension_loaded('sqlite')) {
                 $res['sqlite'] = 'SQLite';
             }
+            if (extension_loaded('SQLITE3')) {
+                $res['sqlite3'] = 'SQLite3';
+            }
             break;
 
         case 'rewrite' :

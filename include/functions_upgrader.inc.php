@@ -48,6 +48,7 @@ $obsolete_files = array(
     'serendipity_db_postgres.inc.php',
     'serendipity_db_pdo-postgres.inc.php',
     'serendipity_db_sqlite.inc.php',
+    'serendipity_db_sqlite3.inc.php',
     'htaccess.cgi.errordocs.tpl',
     'htaccess.cgi.normal.tpl',
     'htaccess.cgi.rewrite.tpl',
