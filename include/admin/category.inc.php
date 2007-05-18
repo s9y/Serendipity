@@ -73,7 +73,7 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
         $remaining_cat = (int)$serendipity['POST']['cat']['remaining_catid'];
         $category_ranges = serendipity_fetchCategoryRange((int)$serendipity['GET']['cid']);
         $category_range  = implode(' AND ', $category_ranges);
-        if ($serendipity['dbType'] == 'postgres' || $serendipity['dbType'] == 'sqlite') {
+        if ($serendipity['dbType'] == 'postgres' || $serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
             $query = "UPDATE {$serendipity['dbPrefix']}entrycat
                         SET categoryid={$remaining_cat} WHERE entryid IN
                         (
