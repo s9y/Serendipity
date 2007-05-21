@@ -3171,7 +3171,12 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     'from'   => $oldfile,
                     'to'     => $newfile,
                     'thumb'  => $serendipity['thumbSuffix'],
-                    'fthumb' => $file['thumbnail_name']
+                    'fthumb' => $file['thumbnail_name'],
+                    'oldDir' => $oldDir,
+                    'newDir' => $newDir,
+                    'type'   => $type,
+                    'item_id'=> $item_id,
+                    'file'   => $file
                 ));
 
                 serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
