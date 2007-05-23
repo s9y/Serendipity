@@ -3208,9 +3208,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 return false;
             }
         }
-    }
-
-    if ($type == 'filedir') {
+    } elseif ($type == 'filedir') {
         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
                                  SET path = '" . serendipity_db_escape_string($newDir) . "'
                                WHERE id   = " . (int)$item_id);
@@ -3246,6 +3244,20 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         $oldDir .= $pick['name'];
         $newDir .= $pick['name'];
+    } elseif ($type == 'dir') {
+        $renameValues = array(array(
+            'from'   => $oldfile,
+            'to'     => $newfile,
+            'thumb'  => $serendipity['thumbSuffix'],
+            'fthumb' => $file['thumbnail_name'],
+            'oldDir' => $oldDir,
+            'newDir' => $newDir,
+            'type'   => $type,
+            'item_id'=> $item_id,
+            'file'   => $file
+        ));
+
+        serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
     }
 
     // Only MySQL supported, since I don't know how to use REGEXPs differently.
