@@ -589,6 +589,57 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 ?><tr><td colspan="2"><input class="direction_<?php echo $lang_direction; ?>" type="hidden" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $cbag->get('value'); ?>" /></td></tr><?php
                 break;
 
+	    case 'media':
+                // Output the JavaScript, if we haven't already
+		$mediajs_output = $serendipity['mediajs_output'];
+		if (!$mediajs_output)
+		{
+                    print <<<EOS
+<script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
+<script type="text/javascript">
+function change_preview(id)
+{
+    var text_box = document.getElementById('serendipity[template][' + id + ']');
+    var image_box = document.getElementById(id + '_preview'); 
+    var filename = text_box.value;
+    image_box.style.backgroundImage = 'url(' + filename + ')';
+}
+function choose_media(id)
+{
+    window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+}
+</script>
+
+EOS;
+		    $serendipity['mediajs_output'] = true;
+	        }
+                // Print the HTML to display the popup media selector
+                $preview_width = $cbag->get('preview_width');
+                if (!$preview_width || $preview_width == "") {
+                  $preview_width = '400px';
+                }
+                $preview_height = $cbag->get('preview_height');
+                if (!$preview_height || $preview_height == "") {
+                  $preview_img_height = '100px';
+                }
+                $media_link_text = MEDIA_LIBRARY;
+                print <<<EOS
+<tr><td colspan="2">
+  <strong>$cname</strong>
+  <br /><span style="color: #5E7A94; font-size: 8pt;">$cdesc</span>
+</td> </tr>
+<tr>
+  <td style="border-bottom: 1px solid #000000">
+    <div id="{$config_item}_preview" style="background-image: url($value); width:$preview_width; height: $preview_height;">&nbsp;</div>
+  </td>
+  <td style="border-bottom: 1px solid #000000">
+    <input type="text" id="serendipity[$postKey][$config_item]" name="serendipity[$postKey][$config_item]" value="$value" onchange="change_preview('$config_item')"/>
+    <br /><a href="#" onclick="choose_media('serendipity[$postKey][$config_item]')">$media_link_text</a>
+  </td>
+</tr>
+EOS;
+                break;
+
             default:
                 // Unknown configuration key. Let the plugin handle it.
                 $addData = func_get_args();
