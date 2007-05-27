@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 1607 2007-02-01 11:36:16Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 1655 2007-03-22 11:41:57Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
@@ -851,7 +851,7 @@
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
 @define('FILENAME_REASSIGNED', '次の新規ファイル名が自動割当されました: %s');
 @define('MEDIA_UPLOAD_SIZE', 'ファイルアップロードの最大容量');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Enter the maximum filesize for uploaded files in bytes. This setting can be overruled by server-side settings in PHP.ini: upload_max_filesize, post_max_size, max_input_time all take precedence over this option. An empty string means to only use the server-side limits.');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'バイトでアップロードファイルの最大サイズを入力します。この設定は php.ini のサーバー側設定により上書きされます: upload_max_filesize, post_max_size, max_input_time のすべてはこのオプションを優先します。空文字列はサーバー側の制限のみを使うことを意味します。');
 @define('MEDIA_UPLOAD_SIZEERROR', 'エラー: %s バイトより大きなファイルはアップロードできません!');
 @define('MEDIA_UPLOAD_MAXWIDTH', 'アップロードされたファイルの最大幅');
 @define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'アップロードされた画像の最大幅をピクセル単位で入力します。');
@@ -861,7 +861,7 @@
 
 @define('MEDIA_TARGET', 'このリンクのターゲット');
 @define('MEDIA_TARGET_JS', 'ポップアップウィンドウ (via JavaScript, adaptive size)');
-@define('MEDIA_ENTRY', 'Isolated Entry');
+@define('MEDIA_ENTRY', '単独のエントリ');
 @define('MEDIA_TARGET_BLANK', 'ポップアップウィンドウ (「target=_blank」による)');
 
 @define('MEDIA_DYN_RESIZE', '動的な画像のサイズ変更を許可しますか?');
@@ -871,8 +871,8 @@
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリとファイルを「%s」に移動できませんでした!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
 @define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
-@define('PLUGIN_ACTIVE', 'Active');
-@define('PLUGIN_INACTIVE', 'Inactive');
+@define('PLUGIN_ACTIVE', 'アクティブ');
+@define('PLUGIN_INACTIVE', '非アクティブ');
 @define('PREFERENCE_USE_JS', '高度な JS の使用を有効にしますか?');
 @define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
 
@@ -881,8 +881,8 @@
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
 @define('PERM_SET_CHILD', 'すべての子ディレクトリに同じパーミッションを設定する');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
+@define('PERMISSION_FORBIDDEN_PLUGINS', '禁止プラグイン');
+@define('PERMISSION_FORBIDDEN_HOOKS', '禁止イベント');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'ユーザーグループ用の ACL プラグインを有効にしますか?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
 @define('DELETE_SELECTED_ENTRIES', '選択したエントリを削除する');
