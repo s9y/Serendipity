@@ -134,7 +134,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('LAST_UPDATED', 'Последно обновяване');
 @define('TRACKBACK_SPECIFIC', 'URI за проследяване на тази статия');
 @define('DIRECT_LINK', 'Пряка връзка към тази статия');
-@define('COMMENT_ADDED', 'Коментара Ви беше добавен успешно. ');
+@define('COMMENT_ADDED', 'Коментарът Ви беше добавен успешно. ');
 @define('COMMENT_ADDED_CLICK', 'Щракнете %sтук, за да се върнете%s към коментара, и %sтук, за да затворите%s този прозорец.');
 @define('COMMENT_NOT_ADDED_CLICK', 'Щракнете %sтук, за да се върнете%s към коментара, и %sтук, за да затворите%s този прозорец.');
 @define('COMMENTS_DISABLE', 'Забраняване на коментарите към тази статия');
