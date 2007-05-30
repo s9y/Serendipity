@@ -109,14 +109,14 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
             if (in_array($cat['categoryid'], $selected)) {
                 $cat['is_selected'] = true;
             }
-            
+
             $cat['depth_pad'] = str_repeat('&nbsp;', $cat['depth']);
 
             $template_vars['category_options'][] = $cat;
             $cat_list .= '<option value="'. $cat['categoryid'] .'"'. ($cat['is_selected'] ? ' selected="selected"' : '') .'>'. $cat['depth_pad'] . $cat['category_name'] .'</option>' . "\n";
         }
     }
-    
+
     $cat_list .= '</select>' . $n;
 
     if (!empty($serendipity['GET']['title'])) {
@@ -167,10 +167,13 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                                                         'body'      => 'serendipity[body]',
                                                         'extended'  => 'serendipity[extended]'
                                                       );
+        $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
+
         $serendipity['smarty']->register_modifier('emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
         $serendipity['smarty']->assign('admin_view', 'entryform');
+        serendipity_plugin_api::hook_event('backend_entryform_smarty', $template_vars);
         $serendipity['smarty']->assign_by_ref('entry_vars', $template_vars);
-        $serendipity['smarty']->display(serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath'));
+        $serendipity['smarty']->display($template_vars['entry_template']);
         return true;
     }
 
