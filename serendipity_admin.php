@@ -30,7 +30,7 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
         if (!isset($_SESSION['author_token']) || !isset($serendipity['COOKIE']['author_token']) || 
             ($_SESSION['author_token'] !== $serendipity['COOKIE']['author_token'])) {
             $_SESSION['serendipityAuthedUser'] = false;
-            @session_destroy();
+            serendipity_session_destroy();
         }
         if (!serendipity_userLoggedIn()) {
             // Try again to log in, this time with enabled external authentication event hook
@@ -44,79 +44,41 @@ if (serendipity_is_iframe()) {
     return true;
 }
 
-?>
-<html>
-    <head>
-        <title><?php echo SERENDIPITY_ADMIN_SUITE; ?></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo LANG_CHARSET; ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $css_file; ?>" />
-        <link rel="stylesheet" type="text/css" href="<?php echo serendipity_getTemplateFile('admin/pluginmanager.css'); ?>" />
+if (isset($serendipity['GET']['no_smarty']) || isset($serendipity['no_smarty'])) {
+    $_SESSION['no_smarty'] = true;
+}
 
-        <script type="text/javascript">
-        function spawn() {
-            if (self.Spawnextended) {
-                Spawnextended();
-            }
+$admin_css_file = serendipity_getTemplateFile('admin/pluginmanager.css');
 
-            if (self.Spawnbody) {
-                Spawnbody();
-            }
+if (defined('IS_up2date') && IS_up2date === true && IS_installed === true) {
+    $admin_installed = true;
+} else {
+    $admin_installed = false;
+}
 
-            if (self.Spawnnugget) {
-                Spawnnugget();
-            }
-        }
+$is_logged_in = serendipity_userLoggedIn();
 
-        function SetCookie(name, value) {
-            var today  = new Date();
-            var expire = new Date();
-            expire.setTime(today.getTime() + (60*60*24*30));
-            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
-        }
+if ($is_logged_in) {
+    $self_info = sprintf(USER_SELF_INFO, $serendipity['serendipityUser'], $serendipity['permissionLevels'][$serendipity['serendipityUserlevel']]);
+} else {
+    $self_info = '';
+}
 
-        function addLoadEvent(func) {
-          var oldonload = window.onload;
-          if (typeof window.onload != 'function') {
-            window.onload = func;
-          } else {
-            window.onload = function() {
-              oldonload();
-              func();
-            }
-          }
-        }
+if (isset($serendipity['GET']['noBanner']) || isset($serendipity['POST']['noBanner'])) {
+    $no_banner = true;
+} else {
+    $no_banner = false;
+}
 
-        </script>
-<?php
-    if (defined('IS_up2date') && IS_up2date === true) {
-        serendipity_plugin_api::hook_event('backend_header', $serendipity);
-    }
-?>
-    </head>
-    <body id="serendipity_admin_page" onload="spawn()">
-        <table cellspacing="0" cellpadding="0" border="0" id="serendipityAdminFrame">
-        <?php if (!isset($serendipity['GET']['noBanner']) && !isset($serendipity['POST']['noBanner'])) { ?>
-            <tr>
-                <td colspan="2" id="serendipityAdminBanner">
-                <?php if ( IS_installed === true && IS_up2date === true ) { ?>
-                    <h1><?php echo SERENDIPITY_ADMIN_SUITE ?></h1>
-                    <h2><?php echo $serendipity['blogTitle'] ?></h2>
-                <?php } elseif ( IS_installed === false || IS_up2date === false ) { ?>
-                    <h1><?php echo SERENDIPITY_INSTALLATION ?></h1>
-                <?php } ?>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" id="serendipityAdminInfopane">
-                    <?php if (serendipity_userLoggedIn()) { ?>
-                        <?php echo sprintf(USER_SELF_INFO, $serendipity['serendipityUser'], $serendipity['permissionLevels'][$serendipity['serendipityUserlevel']]) ?>
-                    <?php } ?>
-                </td>
-            </tr>
-        <?php } ?>
-            <tr valign="top">
-<?php
+if (isset($serendipity['GET']['noSidebar']) || isset($serendipity['POST']['noSidebar'])) {
+    $no_sidebar = true;
+} else {
+    $no_sidebar = false;
+}
+
+$file = '';
 if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false ) {
+    $use_installer = true;
     if (IS_installed === false) {
         $file = 'include/admin/installer.inc.php';
     } elseif ( IS_up2date === false ) {
@@ -124,141 +86,19 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
     } else {
         $file = ''; // For register_global, safety
     }
-?>
-                <td class="serendipityAdminContent" colspan="2">
-                    <?php require(S9Y_INCLUDE_PATH . $file); ?>
-<?php
-
-
-} elseif ( serendipity_userLoggedIn() == false ) {
-    $out = array();
-    serendipity_plugin_api::hook_event('backend_login_page', $out);
-?>
-                <td colspan="2" class="serendipityAdminContent">
-                    <div align="center"><?php echo WELCOME_TO_ADMIN ?><br /><?php echo PLEASE_ENTER_CREDENTIALS ?></div>
-                    <?php echo $out['header']; ?>
-                    <br />
-                    <?php if ( isset($serendipity['POST']['action']) && !serendipity_userLoggedIn() ) { ?>
-                    <div class="serendipityAdminMsgError"><?php echo WRONG_USERNAME_OR_PASSWORD; ?></div>
-                    <?php } ?>
-                    <form action="serendipity_admin.php" method="post">
-                        <input type="hidden" name="serendipity[action]" value="admin" />
-                        <table cellspacing="10" cellpadding="0" border="0" align="center">
-                            <tr>
-                                <td><?php echo USERNAME ?></td>
-                                <td><input type="text" name="serendipity[user]" /></td>
-                            </tr>
-                            <tr>
-                                <td><?php echo PASSWORD ?></td>
-                                <td><input type="password" name="serendipity[pass]" /></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><input id="autologin" type="checkbox" name="serendipity[auto]" /><label for="autologin"> <?php echo AUTOMATIC_LOGIN ?></label></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" align="right"><input type="submit" name="submit" value="<?php echo LOGIN ?> &gt;" class="serendipityPrettyButton" /></td>
-                            </tr>
-                            <?php echo $out['table']; ?>
-                        </table>
-                    </form>
-                    <?php echo $out['footer']; ?>
-                    <a href="<?php echo $serendipity['serendipityHTTPPath']; ?>"><?php echo BACK_TO_BLOG;?></a>
-<?php
-
-
-
 } else {
-?>
-<?php if (!isset($serendipity['GET']['noSidebar']) && !isset($serendipity['POST']['noSidebar'])) { ?>
-                <td id="serendipitySideBar">
-                    <ul class="serendipitySideBarMenu">
-                        <li><a href="serendipity_admin.php"><?php echo ADMIN_FRONTPAGE; ?></a></li>
-<?php if (serendipity_checkPermission('personalConfiguration')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=personal"><?php echo PERSONAL_SETTINGS; ?></a></li>
-<?php } ?>
-                    </ul>
-                    <br />
-                    <ul class="serendipitySideBarMenu">
-<?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
-                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN_ENTRIES ?></li>
-<?php if (serendipity_checkPermission('adminEntries')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new"><?php echo NEW_ENTRY; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect"><?php echo EDIT_ENTRIES; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminComments')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=comments"><?php echo COMMENTS; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminCategories')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view"><?php echo CATEGORIES; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
-                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries', $serendipity); ?>
-<?php } ?>
-                    </ul>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminImages')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo MEDIA; ?></li>
-<?php if (serendipity_checkPermission('adminImagesAdd')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect"><?php echo ADD_MEDIA; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminImagesView')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media"><?php echo MEDIA_LIBRARY; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminImagesDirectories')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect"><?php echo MANAGE_DIRECTORIES; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminImagesSync')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('<?php echo WARNING_THIS_BLAHBLAH; ?>');"><?php echo CREATE_THUMBS; ?></a></li>
-<?php } ?>
-                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries_images', $serendipity); ?>
-                    </ul>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminTemplates') || serendipity_checkPermission('adminPlugins')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo APPEARANCE; ?></li>
-<?php if (serendipity_checkPermission('adminTemplates')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=templates"><?php echo MANAGE_STYLES; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminPlugins')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins"><?php echo CONFIGURE_PLUGINS; ?></a></li>
-<?php } ?>
-                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin_appearance', $serendipity); ?>
-                    </ul>
-<?php } ?>
-<?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration') || serendipity_checkPermission('adminUsers') || serendipity_checkPermission('adminUsersGroups') || serendipity_checkPermission('adminImport')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN; ?></li>
-<?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration"><?php echo CONFIGURATION; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminUsers')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=users"><?php echo MANAGE_USERS; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminUsersGroups')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=groups"><?php echo MANAGE_GROUPS; ?></a></li>
-<?php } ?>
-<?php if (serendipity_checkPermission('adminImport')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=import"><?php echo IMPORT_ENTRIES; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=export"><?php echo EXPORT_ENTRIES; ?></a></li>
-<?php } ?>
-                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin', $serendipity); ?>
-                    </ul>
-<?php } ?>
-                    <br />
-                    <ul class="serendipitySideBarMenu">
-                        <li><a href="<?php echo $serendipity['baseURL']; ?>"><?php echo BACK_TO_BLOG; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=logout"><?php echo LOGOUT; ?></a></li>
-                    </ul>
+    $use_installer = false;
+}
 
-                </td>
-<?php } ?>
-                <td class="serendipityAdminContent">
-<?php
+$post_action = $serendipity['POST']['action'];
+
+$main_content = '';
+if (!$use_installer && $is_logged_in) {
     if (!isset($serendipity['GET']['adminModule'])) {
         $serendipity['GET']['adminModule'] = (isset($serendipity['POST']['adminModule']) ? $serendipity['POST']['adminModule'] : '');
     }
 
+    ob_start();
     serendipity_checkXSRF();
 
     switch($serendipity['GET']['adminModule']) {
@@ -379,6 +219,232 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
             include S9Y_INCLUDE_PATH . 'include/admin/overview.inc.php';
             break;
     }
+
+    $main_content = ob_get_contents();
+    ob_end_clean();
+}
+
+if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
+    $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer');
+    $admin_vars = array();
+    foreach($poll_admin_vars AS $poll_admin_var) {
+        $admin_vars[$poll_admin_var] =& $$poll_admin_var;
+    }
+
+    $admin_vars['out']              = array();
+    $admin_vars['no_create']        = $serendipity['no_create'];
+
+    if ($serendipity['expose_s9y']) {
+        $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
+    } else {
+        $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
+    }
+
+    $serendipity['smarty']->assign_by_ref('admin_vars', $admin_vars);
+    $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
+} else {
+?>
+<html>
+    <head>
+        <title><?php echo SERENDIPITY_ADMIN_SUITE; ?></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo LANG_CHARSET; ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $css_file; ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $admin_css_file; ?>" />
+
+        <script type="text/javascript">
+        function spawn() {
+            if (self.Spawnextended) {
+                Spawnextended();
+            }
+
+            if (self.Spawnbody) {
+                Spawnbody();
+            }
+
+            if (self.Spawnnugget) {
+                Spawnnugget();
+            }
+        }
+
+        function SetCookie(name, value) {
+            var today  = new Date();
+            var expire = new Date();
+            expire.setTime(today.getTime() + (60*60*24*30));
+            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
+        }
+
+        function addLoadEvent(func) {
+          var oldonload = window.onload;
+          if (typeof window.onload != 'function') {
+            window.onload = func;
+          } else {
+            window.onload = function() {
+              oldonload();
+              func();
+            }
+          }
+        }
+
+        </script>
+<?php
+    if ($admin_installed) {
+        serendipity_plugin_api::hook_event('backend_header', $serendipity);
+    }
+?>
+    </head>
+    <body id="serendipity_admin_page" onload="spawn()">
+        <table cellspacing="0" cellpadding="0" border="0" id="serendipityAdminFrame">
+        <?php if (!$no_banner) { ?>
+            <tr>
+                <td colspan="2" id="serendipityAdminBanner">
+                <?php if ($admin_installed) { ?>
+                    <h1><?php echo SERENDIPITY_ADMIN_SUITE ?></h1>
+                    <h2><?php echo $serendipity['blogTitle'] ?></h2>
+                <?php } else { ?>
+                    <h1><?php echo SERENDIPITY_INSTALLATION ?></h1>
+                <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="serendipityAdminInfopane">
+                    <?php if ($is_logged_in) { ?>
+                        <?php echo $self_info; ?>
+                    <?php } ?>
+                </td>
+            </tr>
+        <?php } ?>
+            <tr valign="top">
+<?php
+if ($use_installer) {
+?>
+                <td class="serendipityAdminContent" colspan="2">
+                    <?php require(S9Y_INCLUDE_PATH . $file); ?>
+<?php
+
+
+} elseif (!$is_logged_in) {
+    $out = array();
+    serendipity_plugin_api::hook_event('backend_login_page', $out);
+?>
+                <td colspan="2" class="serendipityAdminContent">
+                    <div align="center"><?php echo WELCOME_TO_ADMIN ?><br /><?php echo PLEASE_ENTER_CREDENTIALS ?></div>
+                    <?php echo $out['header']; ?>
+                    <br />
+                    <?php if ($post_action != '' && !$is_logged_in ) { ?>
+                    <div class="serendipityAdminMsgError"><?php echo WRONG_USERNAME_OR_PASSWORD; ?></div>
+                    <?php } ?>
+                    <form action="serendipity_admin.php" method="post">
+                        <input type="hidden" name="serendipity[action]" value="admin" />
+                        <table cellspacing="10" cellpadding="0" border="0" align="center">
+                            <tr>
+                                <td><?php echo USERNAME ?></td>
+                                <td><input type="text" name="serendipity[user]" /></td>
+                            </tr>
+                            <tr>
+                                <td><?php echo PASSWORD ?></td>
+                                <td><input type="password" name="serendipity[pass]" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input id="autologin" type="checkbox" name="serendipity[auto]" /><label for="autologin"> <?php echo AUTOMATIC_LOGIN ?></label></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="right"><input type="submit" name="submit" value="<?php echo LOGIN ?> &gt;" class="serendipityPrettyButton" /></td>
+                            </tr>
+                            <?php echo $out['table']; ?>
+                        </table>
+                    </form>
+                    <?php echo $out['footer']; ?>
+                    <a href="<?php echo $serendipity['serendipityHTTPPath']; ?>"><?php echo BACK_TO_BLOG;?></a>
+<?php
+} else {
+    if (!$no_sidebar) { ?>
+                <td id="serendipitySideBar">
+                    <ul class="serendipitySideBarMenu">
+                        <li><a href="serendipity_admin.php"><?php echo ADMIN_FRONTPAGE; ?></a></li>
+<?php if (serendipity_checkPermission('personalConfiguration')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=personal"><?php echo PERSONAL_SETTINGS; ?></a></li>
+<?php } ?>
+                    </ul>
+                    <br />
+                    <ul class="serendipitySideBarMenu">
+<?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
+                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN_ENTRIES ?></li>
+<?php if (serendipity_checkPermission('adminEntries')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new"><?php echo NEW_ENTRY; ?></a></li>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect"><?php echo EDIT_ENTRIES; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminComments')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=comments"><?php echo COMMENTS; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminCategories')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view"><?php echo CATEGORIES; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
+                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries', $serendipity); ?>
+<?php } ?>
+<?php } ?>
+                    </ul>
+
+<?php if (serendipity_checkPermission('adminImages')) { ?>
+                    <ul class="serendipitySideBarMenu">
+                        <li class="serendipitySideBarMenuHead"><?php echo MEDIA; ?></li>
+<?php if (serendipity_checkPermission('adminImagesAdd')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect"><?php echo ADD_MEDIA; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminImagesView')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media"><?php echo MEDIA_LIBRARY; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminImagesDirectories')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect"><?php echo MANAGE_DIRECTORIES; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminImagesSync')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('<?php echo WARNING_THIS_BLAHBLAH; ?>');"><?php echo CREATE_THUMBS; ?></a></li>
+<?php } ?>
+                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries_images', $serendipity); ?>
+                    </ul>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminTemplates') || serendipity_checkPermission('adminPlugins')) { ?>
+                    <ul class="serendipitySideBarMenu">
+                        <li class="serendipitySideBarMenuHead"><?php echo APPEARANCE; ?></li>
+<?php if (serendipity_checkPermission('adminTemplates')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=templates"><?php echo MANAGE_STYLES; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminPlugins')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins"><?php echo CONFIGURE_PLUGINS; ?></a></li>
+<?php } ?>
+                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin_appearance', $serendipity); ?>
+                    </ul>
+<?php } ?>
+<?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration') || serendipity_checkPermission('adminUsers') || serendipity_checkPermission('adminUsersGroups') || serendipity_checkPermission('adminImport')) { ?>
+                    <ul class="serendipitySideBarMenu">
+                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN; ?></li>
+<?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration"><?php echo CONFIGURATION; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminUsers')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=users"><?php echo MANAGE_USERS; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminUsersGroups')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=groups"><?php echo MANAGE_GROUPS; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('adminImport')) { ?>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=import"><?php echo IMPORT_ENTRIES; ?></a></li>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=export"><?php echo EXPORT_ENTRIES; ?></a></li>
+<?php } ?>
+                        <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin', $serendipity); ?>
+                    </ul>
+<?php } ?>
+                    <br />
+                    <ul class="serendipitySideBarMenu">
+                        <li><a href="<?php echo $serendipity['baseURL']; ?>"><?php echo BACK_TO_BLOG; ?></a></li>
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=logout"><?php echo LOGOUT; ?></a></li>
+                    </ul>
+
+                </td>
+<?php } ?>
+                <td class="serendipityAdminContent">
+<?php
+    echo $main_content;
 }
 ?>
                 </td>
@@ -397,5 +463,4 @@ if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2d
     </body>
 </html>
 <?php
-/* vim: set sts=4 ts=4 expandtab : */
-?>
+}
