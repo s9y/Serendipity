@@ -695,12 +695,20 @@ function serendipity_smarty_init($vars = array()) {
             // Beware: Smarty is used in the Admin backend, despite of this.
             include $template_dir . '/template.inc.php';
         } else {
-            // Default Smarty Engine will be used
+            // Set a session variable if Smarty fails:
+            $prev_smarty = $_SESSION['no_smarty'];
+            $_SESSION['no_smarty'] = true;
 
+            // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
             if (!class_exists('Smarty')) {
-                require SMARTY_DIR . 'Smarty.class.php';
+                include SMARTY_DIR . 'Smarty.class.php';
             }
+            
+            if (!class_exists('Smarty')) {
+                return false;
+            }
+
             $serendipity['smarty'] = new Smarty;
             if ($serendipity['production'] === 'debug') {
                 $serendipity['smarty']->force_compile   = true;
@@ -714,8 +722,12 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->compile_dir   = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE;
 
             if (!is_dir($serendipity['smarty']->compile_dir) || !is_writable($serendipity['smarty']->compile_dir)) {
-                serendipity_die(sprintf(DIRECTORY_WRITE_ERROR, $serendipity['smarty']->compile_dir));
+                printf(DIRECTORY_WRITE_ERROR, $serendipity['smarty']->compile_dir);
+                return false;
             }
+
+            // Hooray for Smarty:
+            $_SESSION['no_smarty'] = $prev_smarty;
 
             $serendipity['smarty']->config_dir    = $template_dir;
             $serendipity['smarty']->secure_dir    = array($serendipity['serendipityPath'] . $serendipity['templatePath']);
@@ -732,6 +744,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->register_modifier('formatTime', 'serendipity_smarty_formatTime');
             $serendipity['smarty']->register_modifier('serendipity_utf8_encode', 'serendipity_utf8_encode');
             $serendipity['smarty']->register_modifier('ifRemember', 'serendipity_ifRemember');
+            $serendipity['smarty']->register_modifier('checkPermission', 'serendipity_checkPermission');
 
             $serendipity['smarty']->register_function('serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->register_function('serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');

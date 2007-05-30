@@ -3,6 +3,13 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Add admin backend templates for main area and the entry editor.
+      Falls back to default PHP output if Smarty cannot be utilized.
+      (garvinhicking)
+
+    * Fix properly reinstantiating sessions and properly deleting cookies
+      when requested (garvinhicking)
+
     * Add support for sqlite3 (http://php-sqlite3.sourceforge.net/), by 
       geekmug
 

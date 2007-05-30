@@ -36,31 +36,41 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $draftP = '';
     $categoryselector_expanded = false;
 
+    $template_vars = array();
+
     serendipity_plugin_api::hook_event('backend_entryform', $entry);
 
     if ( (isset($entry['isdraft']) && serendipity_db_bool($entry['isdraft'])) ||
          (!isset($entry['isdraft']) && $serendipity['publishDefault'] == 'draft') ) {
         $draftD = ' selected="selected"';
+        $template_vars['draft_mode'] = 'draft';
     } else {
         $draftP = ' selected="selected"';
+        $template_vars['draft_mode'] = 'publish';
     }
 
     if (isset($entry['moderate_comments']) && (serendipity_db_bool($entry['moderate_comments']))) {
+        $template_vars['moderate_comments'] = true;
         $moderate_comments = ' checked="checked"';
     } elseif (!isset($entry['moderate_comments']) && ($serendipity['moderateCommentsDefault'] == 'true' || $serendipity['moderateCommentsDefault'] === true)) {
         // This is the default on creation of a new entry and depends on the "moderateCommentsDefault" variable of the configuration.
         $moderate_comments = ' checked="checked"';
+        $template_vars['moderate_comments'] = true;
     } else {
         $moderate_comments = '';
+        $template_vars['moderate_comments'] = false;
     }
 
 
     if (isset($entry['allow_comments']) && (serendipity_db_bool($entry['allow_comments']))) {
+        $template_vars['allow_comments'] = true;
         $allow_comments = ' checked="checked"';
     } elseif ((!isset($entry['allow_comments']) || $entry['allow_comments'] !== 'false') && (!isset($serendipity['allowCommentsDefault']) || $serendipity['allowCommentsDefault'] == 'true' || $serendipity['allowCommentsDefault'] === true)) {
         // This is the default on creation of a new entry and depends on the "allowCommentsDefault" variable of the configuration.
+        $template_vars['allow_comments'] = true;
         $allow_comments = ' checked="checked"';
     } else {
+        $template_vars['allow_comments'] = false;
         $allow_comments = '';
     }
 
@@ -94,10 +104,19 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 
     if (is_array($cats = serendipity_fetchCategories())) {
         $cats = serendipity_walkRecursive($cats, 'categoryid', 'parentid', VIEWMODE_THREADED);
-        foreach ( $cats as $cat ) {
-            $cat_list .= '<option value="'. $cat['categoryid'] .'"'. (in_array($cat['categoryid'], $selected) ? ' selected="selected"' : '') .'>'. str_repeat('&nbsp;', $cat['depth']) . $cat['category_name'] .'</option>' . "\n";
+        foreach ($cats as $cat) {
+
+            if (in_array($cat['categoryid'], $selected)) {
+                $cat['is_selected'] = true;
+            }
+            
+            $cat['depth_pad'] = str_repeat('&nbsp;', $cat['depth']);
+
+            $template_vars['category_options'][] = $cat;
+            $cat_list .= '<option value="'. $cat['categoryid'] .'"'. ($cat['is_selected'] ? ' selected="selected"' : '') .'>'. $cat['depth_pad'] . $cat['category_name'] .'</option>' . "\n";
         }
     }
+    
     $cat_list .= '</select>' . $n;
 
     if (!empty($serendipity['GET']['title'])) {
@@ -120,6 +139,42 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $hidden .= '        <input type="hidden" name="serendipity[timestamp]" value="' . (isset($entry['timestamp']) ? serendipity_serverOffsetHour($entry['timestamp']) : serendipity_serverOffsetHour(time())) . '" />' . $n;
     $hidden .= '        <input type="hidden" name="serendipity[preview]" value="false" />';
     $hidden .= '        ' . serendipity_setFormToken();
+
+    if (is_object($serendipity['smarty'])) {
+        if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation']) {
+            $template_vars['allowDateManipulation'] = true;
+        }
+
+        if ((!empty($entry['extended']) || !empty($serendipity['COOKIE']['toggle_extended'])) && !$serendipity['wysiwyg']) {
+            $template_vars['show_wysiwyg'] = true;
+        }
+
+        if (eregi($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
+            $template_vars['wysiwyg_advanced'] = true;
+        }
+
+        $template_vars['timestamp']                 = serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time());
+        $template_vars['reset_timestamp']           = serendipity_serverOffsetHour(time());
+        $template_vars['hidden']                    = $hidden;
+        $template_vars['errMsG']                    = $errMsg;
+        $template_vars['entry']                     =& $entry;
+        $template_vars['targetURL']                 = $targetURL;
+        $template_vars['cat_count']                 = count($cats)+1;
+        $template_vars['cat_state']                 = $categoryselector_expanded ? 'on' : 'off';
+        $template_vars['wysiwyg']                   = $serendipity['wysiwyg'];
+        $template_vars['serendipityRightPublish']   = $_SESSION['serendipityRightPublish'];
+        $template_vars['wysiwyg_blocks']            = array(
+                                                        'body'      => 'serendipity[body]',
+                                                        'extended'  => 'serendipity[extended]'
+                                                      );
+        $serendipity['smarty']->register_modifier('emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
+        $serendipity['smarty']->assign('admin_view', 'entryform');
+        $serendipity['smarty']->assign_by_ref('entry_vars', $template_vars);
+        $serendipity['smarty']->display(serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath'));
+        return true;
+    }
+
+    /* HTML CODE BELOW IS FOR FALLBACK PORTABILITY ONLY - MODIFY CODE IN TEMPLATE ADMIN/ENTRIES.TPL INSTEAD! */
     if (!empty($errMsg)) {
 ?>
         <div class="serendipityAdminMsgError"><?php echo $errMsg; ?></div>

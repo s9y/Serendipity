@@ -336,8 +336,24 @@ function serendipity_load_configuration($author = null) {
  */
 function serendipity_logout() {
     $_SESSION['serendipityAuthedUser'] = false;
-    @session_destroy();
+    serendipity_session_destroy();
     serendipity_deleteCookie('author_information');
+    serendipity_deleteCookie('author_token');
+}
+
+/**
+ * Destroys a session, keeps important stuff intact.
+ * @access public
+ * @return null
+ */
+function serendipity_session_destroy() {
+    $no_smarty = $_SESSION['no_smarty'];
+    @session_destroy();
+    session_regenerate_id();
+    session_start();
+
+    $_SESSION['SERVER_GENERATED_SID'] = true;
+    $_SESSION['no_smarty']            = $no_smarty;
 }
 
 /**
@@ -437,7 +453,7 @@ function serendipity_checkAutologin($ident, $iv) {
 
     if ($autologin['name'] < (time()-86400)) {
         // Issued autologin cookie has been issued more than 1 day ago. Re-Issue new cookie, invalidate old one to prevent abuse
-        serendipity_header('X-ReIssue-Cookie: +' . (time() - $autologin['name']) . 's');
+        if ($serendipity['expose_s9y']) serendipity_header('X-ReIssue-Cookie: +' . (time() - $autologin['name']) . 's');
         serendipity_issueAutologin($cookie);
     }
 
@@ -445,9 +461,9 @@ function serendipity_checkAutologin($ident, $iv) {
 }
 
 function serendipity_setAuthorToken() {
-        $hash = sha1(uniqid(rand(), true));
-        serendipity_setCookie('author_token', $hash);
-        $_SESSION['author_token'] = $hash;
+    $hash = sha1(uniqid(rand(), true));
+    serendipity_setCookie('author_token', $hash);
+    $_SESSION['author_token'] = $hash;
 }
 
 /**
@@ -516,7 +532,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
             return true;
         } else {
             $_SESSION['serendipityAuthedUser'] = false;
-            @session_destroy();
+            serendipity_session_destroy();
         }
     }
 
@@ -613,7 +629,12 @@ function serendipity_setCookie($name, $value, $securebyprot = true) {
 function serendipity_deleteCookie($name) {
     global $serendipity;
 
-    setcookie("serendipity[$name]", '', time()-4000);
+    $host = $_SERVER['HTTP_HOST'];
+    if ($pos = strpos($host, ":")) {
+        $host = substr($host, 0, $pos);
+    }
+
+    setcookie("serendipity[$name]", '', time()-4000, $serendipity['serendipityHTTPPath'], $host);
     unset($_COOKIE[$name]);
     unset($serendipity['COOKIE'][$name]);
 }
@@ -874,7 +895,7 @@ function serendipity_getSessionLanguage() {
         return $serendipity['lang'];
     } else {
         $_SESSION['serendipityLanguage'] = $lang;
-        if (! is_null($serendipity['detected_lang'])) {
+        if (!is_null($serendipity['detected_lang'])) {
             if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLang: ' . $lang);
         }
     }
