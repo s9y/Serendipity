@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.67');
+        $propbag->add('version',       '1.68');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -682,6 +682,11 @@ var $filter_defaults;
             // Check if the entry is older than the allowed amount of time. Enforce kaptchas if that is true
             // of if kaptchas are activated for every entry
             $show_captcha = ($captchas && isset($eventData['timestamp']) && ($captchas_ttl < 1 || ($eventData['timestamp'] < (time() - ($captchas_ttl*60*60*24)))) ? true : false);
+            
+            // Plugins can override with custom captchas
+            if (isset($serendipity['plugins']['disable_internal_captcha'])) {
+                $show_captcha = false;
+            }
 
             $forcemoderation = $this->get_config('forcemoderation', 60);
             $forcemoderation_treat = $this->get_config('forcemoderation_treat', 'moderate');

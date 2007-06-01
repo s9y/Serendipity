@@ -133,7 +133,7 @@ if (extension_loaded('filter') && function_exists('filter_id') && function_exist
     foreach ($_COOKIE as $key => $value) {
         $_COOKIE[$key] = filter_input(INPUT_COOKIE, $key, FILTER_UNSAFE_RAW);
     }
-    
+
     // NOT YET IMPLEMENTED IN PHP:
     /*
     foreach ($_SESSION as $key => $value) {

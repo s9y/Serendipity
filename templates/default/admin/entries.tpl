@@ -35,7 +35,7 @@
     {*** ENTRY TITLE, DRAFT END ***}
 
     <tr>
-   
+
     {*** ENTRY DATE,CATEGORY START ***}
     {if $entry_vars.allowDateManipulation}
         <td>
@@ -50,7 +50,7 @@
     {else}
         <td align="right" colspan="3">
     {/if}
-            <a style="border:0; text-decoration: none" href="#" onclick="showItem('categoryselector'); return false" title="{$CONST.TOGGLE_OPTION}"><img src="{serendipity_getFile file='img/plus.png'}" id="option_categoryselector" style="border: 20px" alt="" border="0" /></a> <b>{$CONST.CATEGORY}:</b> 
+            <a style="border:0; text-decoration: none" href="#" onclick="showItem('categoryselector'); return false" title="{$CONST.TOGGLE_OPTION}"><img src="{serendipity_getFile file='img/plus.png'}" id="option_categoryselector" style="border: 20px" alt="" border="0" /></a> <b>{$CONST.CATEGORY}:</b>
             <select id="categoryselector" name="serendipity[categories][]" style="vertical-align: middle;" multiple="multiple">
                 <option value="0">[{$CONST.NO_CATEGORY}]</option>
                 {foreach from=$entry_vars.category_options item="entry_cat"}
@@ -66,7 +66,7 @@
             var selector_toggle  = new Array();
             var selector_store   = new Array();
             var selector_restore = new Array();
-        
+
             function checkSave() {
                 {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
                 return true;
@@ -197,9 +197,9 @@
             <br />
             <fieldset>
                 <legend><b>{$CONST.ADVANCED_OPTIONS}</b></legend>
-    {*** EXTERNAL PLUGINS OUTPUT START ***}                
-                {serendipity_hookPlugin hook="backend_display" data=$entry_vars.entry hookAll="true"}
-    {*** EXTERNAL PLUGINS OUTPUT END ***}                
+    {*** EXTERNAL PLUGINS OUTPUT START ***}
+                {$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}
+    {*** EXTERNAL PLUGINS OUTPUT END ***}
             </fieldset>
         </td>
     </tr>
@@ -218,7 +218,7 @@
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
         {$wysiwyg_block_item|emit_htmlarea_code:$wysiwyg_block_jsname}
     {/foreach}
-    {serendipity_hookPlugin hook="backend_wysiwyg_finish" data=$entry_vars.wysiwyg_blocks hookAll="true"}
+    {serendipity_refhookPlugin hook="backend_wysiwyg_finish" data=$entry_vars.wysiwyg_blocks}
 {/if}
 {*** SPAWN WYSIWYG EDITORS END ***}
 
