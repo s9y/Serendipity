@@ -496,6 +496,42 @@ function serendipity_smarty_hookPlugin($params, &$smarty) {
     serendipity_plugin_api::hook_event($params['hook'], $params['data'], $params['addData']);
 }
 
+/**
+ * Smarty Modifier: Be able to execute the hook of an event plugin and return its output, uses a REFERENCED variable.
+ *
+ * Listens to specific serendipity global variables:
+ *  $serendipity['skip_smarty_hooks'] - If TRUE, no plugins will be executed at all
+ *  $serendipity['skip_smarty_hook']  - Can be set to an array of plugin hooks to NOT execute
+ *
+ * @access public
+ * @param   mixed       EventData (referenced)
+ * @param   string      Event hook name
+ * @param   mixed       Additional data
+ * @return null
+ */
+function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
+    global $serendipity;
+
+    if (!isset($hook)) {
+        $smarty->trigger_error(__FUNCTION__ .": missing 'hook' parameter");
+        return;
+    }
+
+    // Smarty hooks can be bypassed via an internal variable (temporarily)
+    if (isset($serendipity['skip_smarty_hooks']) && $serendipity['skip_smarty_hooks']) {
+        return;
+    }
+
+    // A specific hook can also be bypassed by creating an associative array like this:
+    // $serendipity['skip_smarty_hook'] = array('entries_header');
+    // That would only skip the entries_header event hook, but allow all others.
+    // Of course it cannot be used in conjunction with the all-blocking skip_smarty_hooks.
+    if (isset($serendipity['skip_smarty_hook']) && is_array($serendipity['skip_smarty_hook']) && isset($serendipity['skip_smarty_hook'][$params['hook']])) {
+        return;
+    }
+
+    serendipity_plugin_api::hook_event($hook, $eventData, $addData);
+}
 
 /**
  * Smarty Function: Prints a list of sidebar plugins
@@ -704,7 +740,7 @@ function serendipity_smarty_init($vars = array()) {
             if (!class_exists('Smarty')) {
                 include SMARTY_DIR . 'Smarty.class.php';
             }
-            
+
             if (!class_exists('Smarty')) {
                 return false;
             }
@@ -745,6 +781,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->register_modifier('serendipity_utf8_encode', 'serendipity_utf8_encode');
             $serendipity['smarty']->register_modifier('ifRemember', 'serendipity_ifRemember');
             $serendipity['smarty']->register_modifier('checkPermission', 'serendipity_checkPermission');
+            $serendipity['smarty']->register_modifier('serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
 
             $serendipity['smarty']->register_function('serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->register_function('serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');

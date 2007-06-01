@@ -77,7 +77,7 @@
 {if NOT $admin_vars.is_logged_in}
 {*** LOGIN-AREA START ***}
 
-    {serendipity_hookPlugin hook="backend_header" data=$admin_vars.out hookAll="true"}
+    {$admin_vars.out|@serendipity_refhookPlugin:'backend_login_page'}
                 <td colspan="2" class="serendipityAdminContent">
                     <div align="center">{$CONST.WELCOME_TO_ADMIN}<br />
                     {$CONST.PLEASE_ENTER_CREDENTIALS}
@@ -88,7 +88,7 @@
                     {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
                     <div class="serendipityAdminMsgError">{$CONST.WRONG_USERNAME_OR_PASSWORD}</div>
                     {/if}
-                    
+
                     <form action="serendipity_admin.php" method="post">
                         <input type="hidden" name="serendipity[action]" value="admin" />
                         <table cellspacing="10" cellpadding="0" border="0" align="center">
