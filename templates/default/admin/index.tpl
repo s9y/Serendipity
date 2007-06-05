@@ -212,7 +212,7 @@
     {*** LOGOUT START ***}
                     <br />
                     <ul class="serendipitySideBarMenu">
-                        <li><a href="{$baseURL}">{$CONST.BACK_TO_BLOG}</a></li>
+                        <li><a href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a></li>
                         <li><a href="serendipity_admin.php?serendipity[adminModule]=logout">{$CONST.LOGOUT}</a></li>
                     </ul>
     {*** LOGOUT END ***}
