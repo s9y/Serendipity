@@ -111,6 +111,10 @@ class serendipity_plugin_api {
         // Secure Plugin path. No leading slashes, no backslashes, no "up" directories
         $pluginPath = preg_replace('@^(/)@', '', $pluginPath);
         $pluginPath = str_replace(array('..', "\\"), array('', '/'), serendipity_db_escape_string($pluginPath));
+        
+        if ($pluginPath == 'online_repository') {
+            $pluginPath = $key;
+        }
 
         $rs = serendipity_db_query("SELECT MAX(sort_order) as sort_order_max FROM {$serendipity['dbPrefix']}plugins WHERE placement = '$default_placement'", true, 'num');
 
