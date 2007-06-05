@@ -460,6 +460,9 @@ function serendipity_checkAutologin($ident, $iv) {
     return $cookie;
 }
 
+/**
+ * Set a session cookie which can identify a user accross http/https boundaries
+ */
 function serendipity_setAuthorToken() {
     $hash = sha1(uniqid(rand(), true));
     serendipity_setCookie('author_token', $hash);
@@ -1950,6 +1953,13 @@ function serendipity_setFormToken($type = 'form') {
     }
 }
 
+/**
+ * Load available/configured options for a specific theme (through config.inc.php of a template directory)
+ * into an array.
+ *
+ * @param   array   Referenced variable coming from the config.inc.php file, where the config values will be stored in
+ * @return  array   Final return array with default values
+ */
 function &serendipity_loadThemeOptions(&$template_config) {
     global $serendipity;
     $_template_vars =& serendipity_db_query("SELECT name, value FROM {$serendipity['dbPrefix']}options
@@ -1969,6 +1979,13 @@ function &serendipity_loadThemeOptions(&$template_config) {
     return $template_vars;
 }
 
+/**
+ * Check if a member of a group has permissions to execute a plugin
+ *
+ * @param string    Pluginname
+ * @param int       ID of the group of which the members should be checked
+ * @return boolean
+ */
 function serendipity_hasPluginPermissions($plugin, $groupid = null) {
     static $forbidden = null;
     global $serendipity;

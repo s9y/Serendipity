@@ -952,17 +952,15 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $entry['is_cached'] = true;
             }
 
-	    //--JAM: Highlight-span search terms
-	    if ($serendipity['action'] == 'search') {
-	        $searchterms = str_replace('"', '', $serendipity['GET']['searchterms']);
-	        $searchterms = explode($searchterms, ' ');
-		foreach($searchterms as $searchdx => $searchterm) {
-		    $searchclass = "foundterm foundterm".$searchdx;
-		    $entry['body'] = preg_replace('/('.$searchterm.')/mi',
-		        '<span class="'.$searchclass.'">\1</span>',
-			$entry['body']);
-		}
-	    }
+            //--JAM: Highlight-span search terms
+            if ($serendipity['action'] == 'search') {
+                $searchterms = str_replace('"', '', $serendipity['GET']['searchterms']);
+                $searchterms = explode($searchterms, ' ');
+                foreach($searchterms as $searchdx => $searchterm) {
+                    $searchclass = "foundterm foundterm".$searchdx;
+                    $entry['body'] = preg_replace('/('.$searchterm.')/mi', '<span class="'.$searchclass.'">\1</span>', $entry['body']);
+                }
+            }
 
             if (!empty($entry['properties']['ep_cache_extended'])) {
                 $entry['extended']  = &$entry['properties']['ep_cache_extended'];
