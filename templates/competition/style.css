@@ -308,7 +308,7 @@ div.serendipitySideBarItem {
     cursor: pointer;
 }
 .serendipity_entry p {
-    margin: 0px;
+    margin-top: 0px;
     padding-bottom: 0px;
 }
 /** Embedded images with the s9y image manager **/

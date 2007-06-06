@@ -241,7 +241,7 @@ a.homelink2, a.homelink2:hover, a.homelink2:link, a.homelink2:visited, #serendip
 
 /* additional styles used for entry text */
 .serendipity_entry p {
-	margin: 0px;
+	margin-top: 0px;
 	padding-bottom: 0px; }
 
 /* style for extended body */
