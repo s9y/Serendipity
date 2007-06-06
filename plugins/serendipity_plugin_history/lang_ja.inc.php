@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 692
+ *  EN-Revision: 1381
  */
 
 @define('PLUGIN_HISTORY_NAME', '履歴');
@@ -16,20 +16,18 @@
 @define('PLUGIN_HISTORY_MAX_ENTRIES_DESC', '表示するエントリの数');
 @define('PLUGIN_HISTORY_SHOWFULL', '完全なエントリ');
 @define('PLUGIN_HISTORY_SHOWFULL_DESC', 'リンクしたヘッドラインの変わりに完全なエントリを表示します。');
-@define('PLUGIN_HISTORY_INTRO', 'イントロ');
-@define('PLUGIN_HISTORY_INTRO_DESC', 'A short intro like \'One year ago I said:\'.');
-@define('PLUGIN_HISTORY_OUTRO', 'アウトロ');
-@define('PLUGIN_HISTORY_OUTRO_DESC', 'A short Outro like \'Nice, eh?\'.');
+@define('PLUGIN_HISTORY_INTRO', 'まえがき');
+@define('PLUGIN_HISTORY_INTRO_DESC', '「1 年前に私は話した:」のような短いまえがきです。);
+@define('PLUGIN_HISTORY_OUTRO', 'あとがき');
+@define('PLUGIN_HISTORY_OUTRO_DESC', '「これっていいよね?」のようなあとがきです。');
 @define('PLUGIN_HISTORY_DISPLAYDATE', '日付表示をする');
 @define('PLUGIN_HISTORY_DISPLAYDATE_DESC', '各エントリの日付を表示しますか?');
 @define('PLUGIN_HISTORY_MAXLENGTH', '題名の長さ');
-@define('PLUGIN_HISTORY_MAXLENGTH_DESC', 'After how many characters to cut the titles (0 for full titles)?');
+@define('PLUGIN_HISTORY_MAXLENGTH_DESC', '題名を切る文字数は (0 で完全な題名)?');
 @define('PLUGIN_HISTORY_SPECIALAGE', 'Ready-made age?');
 @define('PLUGIN_HISTORY_SPECIALAGE_DESC', 'If you want to define your own timerange instead of a ready-made, select \'I\'ll define one\' here and adjust the two settings below.');
 @define('PLUGIN_HISTORY_SPECIALAGE_YEAR', 'Display items of exactly one year ago');
 @define('PLUGIN_HISTORY_CUSTOMAGE', 'Let me define the age');
 @define('PLUGIN_HISTORY_OYA', '1 年前');
 @define('PLUGIN_HISTORY_MYSELF', 'I\'ll define one');
-
-/* vim: set sts=4 ts=4 expandtab : */
-?>
+@define('PLUGIN_HISTORY_DISPLAYAUTHOR', '著者の名前を表示する');
