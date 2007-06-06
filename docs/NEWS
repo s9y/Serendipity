@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix URL permalink lookup in some cases (garvinhicking, beta2)
+
     * Add admin backend templates for main area and the entry editor.
       Falls back to default PHP output if Smarty cannot be utilized.
       (garvinhicking)
