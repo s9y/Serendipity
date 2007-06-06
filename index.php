@@ -241,7 +241,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
             preg_match(PAT_PERMALINK, $uri, $matches) ) {
     $serendipity['view'] = 'entry';
 
-    $matches[1] = serendipity_searchPermalink($serendipity['permalinkStructure'], $uri, $matches[1], 'entry');
+    $matches[1] = serendipity_searchPermalink($serendipity['permalinkStructure'], $uri, (!empty($matches[2]) ? $matches[2] : $matches[1]), 'entry');
     serendipity_rememberComment();
 
     if (!empty($serendipity['POST']['submit']) && !isset($_REQUEST['serendipity']['csuccess'])) {
