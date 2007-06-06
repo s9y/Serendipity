@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 691
+ *  EN-Revision: 1381
  */
 
 @define('PLUGIN_COMMENTS_BLAHBLAH', 'あなたのエントリへの最後のコメントを表示します。');
@@ -14,5 +14,5 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES', 'コメントの最大数');
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'どれくらいのコメントを表示しますか? (デフォルト: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', 'コメント: %s<br />%s');
-
+@define('PLUGIN_COMMENTS_ANONYMOUS', '匿名');
 ?>

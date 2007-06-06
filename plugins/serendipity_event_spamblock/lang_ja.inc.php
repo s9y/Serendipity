@@ -3,7 +3,7 @@
 /**
  *  @version $Revision$
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
- *  EN-Revision: 1381
+ *  EN-Revision: 1658
  */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'スパムプロテクター');
@@ -72,8 +72,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'URL の単語フィルター');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', '正規表現が許可されており、セミコロン(;)で文字列を区切ります。');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', '著者名の単語フィルター');
-@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', '正規表現が許可されており、セミコロン(;)で文字列を区切ります。');
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'コメント本文の単語フィルター');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'コメントの電子メール単語フィルター');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', '正しくない電子メールアドレスです。');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', '電子メールアドレスの確認をしますか?');
@@ -83,10 +85,12 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_REQUIRED_FIELD', '項目「%s」を指定していません!');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CONFIG', 'Anti-Spam 方法の設定');
-@define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'この著者はスパムブロックプラグインでブロックする');
-@define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'この URL はスパムブロックプラグインでブロックする');
-@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'この著者はスパムブロックプラグインでブロックしない');
-@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'この URL はスパムブロックプラグインでブロックしない');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR', 'この著者はスパムプロテクタープラグインでブロックする');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'この URL はスパムプロテクタープラグインでブロックする');
+@define('PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL', 'この電子メールアドレスはスパムプロテクタープラグインでブロックする');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'この著者はスパムプロテクタープラグインでブロックしない');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'この URL はスパムプロテクタープラグインでブロックしない');
+@define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'この電子メールはスパムプロテクタープラグインでブロックしない');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'blogg.de ブラックリストによる URL フィルタリングを有効にする');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'blogg.de ブラックリストによるフィルタリング');
@@ -100,15 +104,24 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_SCRAMBLE', 'スクランブルされた Captcha');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_HIDE', '著者のスパムブロックを無効にする');
-@define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', '次のユーザーグループ中の著者はスパムブロックプラグインによっるチェックをせずにコメントを記入することを許可できます。');
+@define('PLUGIN_EVENT_SPAMBLOCK_HIDE', '著者のスパム防御を無効にする');
+@define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', '次のユーザーグループ中の著者はスパムプロテクタープラグインによる確認をせずにコメントを記入することを許可できます。');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET', 'Akismet API キー');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is a central anti-spam and blacklisting server. It can analyze your incoming comments and check if that comment has been listed as Spam. Akismet was developed for WordPress specifically, but can be used by other systems. You just need an API Key from http://www.akismet.com by registering an account at http://www.wordpress.com/. If you leave this API key empty, Akismet will not be used.');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'How to treat Akismet-reported spam');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Filtered by Akismet.com Blacklist');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Akismet.com ブラックリストにてフィルタリングしました。');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_TREAT', 'What to do with comments when being auto-moderated?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'What to do with trackbacks when being auto-moderated?');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Force trackback moderation after how many days');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', '何日経過したらトラックバックはモデレートをしますか');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'You can automatically set all trackbacks for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'コメントの CSRF 防御を使いますか?');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'If enabled, a special hash value will check that only users can submit a comment with a valid session ID. This will decrease spam and prevent users from tricking you into submitting comments via CSRF, but it will also prevent users commenting on your blog without cookies.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Your comment did not contain a Session-Hash. Comments can only be made on this blog when having cookies enabled!');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'htaccess による不正 IP ブロックをしますか?');
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Enabling this will add IPs that have sent spam to your blog to your .htaccess file. The .htaccess file will be regenerated regularly with the forbidden IPs of the last month.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'This is how your captcha images currently look like. If you changed and saved settings above and want to refresh the look of your captcha, simply click on it to reload.');
