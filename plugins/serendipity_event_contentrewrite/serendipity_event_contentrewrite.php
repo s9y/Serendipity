@@ -35,7 +35,7 @@ class serendipity_event_contentrewrite extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_CONTENTREWRITE_DESCRIPTION);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.3');
+        $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -151,14 +151,16 @@ class serendipity_event_contentrewrite extends serendipity_event
 
     function introspect_config_item($name, &$propbag)
     {
-        foreach($this->markup_elements as $element) {
-            if ($name==$element['name']) {
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        constant($name));
-                $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-                return true;
+        if (is_array($this->markup_elements)) {
+            foreach($this->markup_elements as $element) {
+                if ($name==$element['name']) {
+                    $propbag->add('type',        'boolean');
+                    $propbag->add('name',        constant($name));
+                    $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
+                    return true;
+                }
             }
-        }
+        }    
 
         preg_match('|^(.+)_([0-9]+)$|msU', $name, $switch);
 
