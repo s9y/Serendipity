@@ -61,6 +61,9 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
                     continue;
                 }
 
+                // Moved to group administration:
+                if ($item['var'] == 'userlevel') continue;
+                
                 if (serendipity_checkConfigItemFlags($item, 'local')) {
                     serendipity_set_user_var($item['var'], $_POST[$item['var']], $serendipity['authorid'], true);
                 }
