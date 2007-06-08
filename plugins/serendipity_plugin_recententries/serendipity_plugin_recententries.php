@@ -1,6 +1,7 @@
 <?php # $Id$
 
 // Contributed by Christian Machmeier <cm@redsplash.de>
+// Randomizing contributed by Christian Brabandt <cb@256bit.org>
 
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
@@ -19,14 +20,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('name',          PLUGIN_RECENTENTRIES_TITLE);
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
-        $propbag->add('author',        'Christian Machmeier');
-        $propbag->add('version',       '1.6');
+        $propbag->add('author',        'Christian Machmeier, Christian Brabandt');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('configuration', array('title', 'number', 'number_from', 'dateformat', 'category'));
+        $propbag->add('configuration', array('title', 'number', 'number_from', 'dateformat', 'category', 'randomize'));
         $propbag->add('groups', array('FRONTEND_VIEWS'));
     }
 
@@ -46,16 +47,27 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                 $propbag->add('default', 10);
                 break;
 
-                case 'number_from':
-                    $propbag->add('type', 'radio');
-                    $propbag->add('name', PLUGIN_RECENTENTRIES_NUMBER_FROM);
-                    $propbag->add('description', PLUGIN_RECENTENTRIES_NUMBER_FROM_DESC);
-                    $propbag->add('radio',  array(
-                        'value' => array('all', 'skip'),
-                        'desc'  => array(PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL, PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT)
-                        ));
-                    $propbag->add('default', 'all');
-                break;
+            case 'number_from':
+                $propbag->add('type', 'radio');
+                $propbag->add('name', PLUGIN_RECENTENTRIES_NUMBER_FROM);
+                $propbag->add('description', PLUGIN_RECENTENTRIES_NUMBER_FROM_DESC);
+                $propbag->add('radio',  array(
+                    'value' => array('all', 'skip'),
+                    'desc'  => array(PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL, PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT)
+                    ));
+                $propbag->add('default', 'all');
+            break;
+                
+            case 'randomize':
+                $propbag->add('type', 'radio');
+                $propbag->add('name', PLUGIN_RECENTENTRIES_RANDOMIZE);
+                $propbag->add('description', PLUGIN_RECENTENTRIES_RANDOMIZE_DESC);
+                $propbag->add('radio',  array(
+                    'value' => array('yes', 'no'),
+                    'desc'  => array(YES, NO)
+                    ));
+                $propbag->add('default', 'no');
+            break;
 
             case 'dateformat':
                 $propbag->add('type', 'string');
@@ -108,6 +120,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $category       = $this->get_config('category', 'none');
         $title          = $this->get_config('title', $this->title);
         $number_from_sw = $this->get_config('number_from');
+        $randomize      = ($this->get_config('randomize') == "yes") ? true : false ;
 
         $sql_join   = '';
         $sql_where  = '';
@@ -135,6 +148,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         }
 
         $sql_number = serendipity_db_limit_sql($number);
+        $db         = $serendipity['dbType'];
 
         switch($number_from_sw) {
             case 'skip':
@@ -145,16 +159,26 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         if (!$dateformat || strlen($dateformat) < 1) {
             $dateformat = '%A, %B %e %Y';
         }
+        if ($randomize)
+            if ($db ==  'mysql' || $db == 'mysqli')) {
+                $sql_order = "ORDER BY RAND()";
+            } else {
+                // SQLite and PostgreSQL support this, hooray.
+                $sql_order = "ORDER BY RANDOM()";
+            }
+        } else {
+            $sql_order = "ORDER BY timestamp DESC ";
+        }
 
         $entries_query = "SELECT DISTINCT id,
-                                                title,
-                                                timestamp
-                                           FROM {$serendipity['dbPrefix']}entries
-                                                $sql_join
-                                          WHERE isdraft = 'false' AND timestamp <= " . time() . "
-                                                $sql_where
-                                       ORDER BY timestamp DESC
-                                                $sql_number";
+                                title,
+                                timestamp
+                           FROM {$serendipity['dbPrefix']}entries
+                                $sql_join
+                          WHERE isdraft = 'false' AND timestamp <= " . time() . "
+                                $sql_where
+                                $sql_order
+                                $sql_number";
         $entries = serendipity_db_query($entries_query);
 
         if (isset($entries) && is_array($entries)) {
@@ -180,5 +204,4 @@ class serendipity_plugin_recententries extends serendipity_plugin {
     }
 }
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>
+/* vim: set sts=4 ts=4 smartindent autoindent : */
