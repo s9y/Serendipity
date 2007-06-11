@@ -2,6 +2,7 @@
     {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
     {foreach from=$entries item="dategroup"}
 	{foreach from=$dategroup.entries item="entry"}
+
     <div class="serendipity_Entry_Date">
         {if $dategroup.is_sticky}
         <h3 class="serendipity_date">{$CONST.STICKY_POSTINGS}</h3>
