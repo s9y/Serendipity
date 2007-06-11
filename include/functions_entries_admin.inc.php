@@ -140,6 +140,12 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $hidden .= '        <input type="hidden" name="serendipity[preview]" value="false" />';
     $hidden .= '        ' . serendipity_setFormToken();
 
+    if (is_object($serendipity['smarty']) || (!$_SESSION['no_smarty'] && serendipity_smarty_init())) {
+        $use_smarty = true;
+    } else {
+        $use_smarty = false;
+    }
+
     if (is_object($serendipity['smarty'])) {
         if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation']) {
             $template_vars['allowDateManipulation'] = true;
@@ -167,6 +173,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                                                         'body'      => 'serendipity[body]',
                                                         'extended'  => 'serendipity[extended]'
                                                       );
+        
         $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
 
         $serendipity['smarty']->register_modifier('emit_htmlarea_code', 'serendipity_emit_htmlarea_code');

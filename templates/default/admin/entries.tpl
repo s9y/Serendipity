@@ -6,7 +6,7 @@
 {*** POSSIBLE ERROR MESSAGES END ***}
 
 {*** MAIN ENTRY FORM START ***}
-<form {$entry_vars.entry.entry_form action="{$entry_vars.targetURL}" method="post" id="serendipityEntry" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px">
+<form {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post" id="serendipityEntry" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px">
 {$entry_vars.hidden}
 
 <table class="serendipityEntryEdit" border="0" width="100%">
@@ -23,7 +23,7 @@
                     <td align="right">
                         <select name="serendipity[isdraft]">
                             {if $entry_vars.serendipityRightPublish}
-                            <option  value="false" {if $entry_vars.draft_mode == 'publish'}selected="selected"{/if}>{CONST.PUBLISH}</option>
+                            <option  value="false" {if $entry_vars.draft_mode == 'publish'}selected="selected"{/if}>{$CONST.PUBLISH}</option>
                             {/if}
                             <option  value="true"  {if $entry_vars.draft_mode == 'draft'}selected="selected"{/if}>{$CONST.DRAFT}</option>
                         </select>
@@ -43,8 +43,8 @@
         </td>
         <td>
             <input type="hidden" name="serendipity[chk_timestamp]" value="{$entry_vars.timestamp}" />
-            <input type="text" name="serendipity[new_timestamp]" id="serendipityNewTimestamp" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2}" />
-            <a href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2}'; return false;" title="{$CONST.RESET_DATE_DESC}"><img src="{serendipity_getFile file='admin/img/clock.png'}" border="0"  style="vertical-align: text-top;" alt="{$CONST.RESET_DATE}" /></a>
+            <input type="text" name="serendipity[new_timestamp]" id="serendipityNewTimestamp" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}" />
+            <a href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}"><img src="{serendipity_getFile file='admin/img/clock.png'}" border="0"  style="vertical-align: text-top;" alt="{$CONST.RESET_DATE}" /></a>
         </td>
         <td align="right">
     {else}
@@ -67,15 +67,17 @@
             var selector_store   = new Array();
             var selector_restore = new Array();
 
-            function checkSave() {
+            function checkSave() {ldelim}
                 {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
                 return true;
-            }
+            {rdelim}
 
             selector_toggle['categoryselector'] = '{$entry_vars.cat_state}';
-            addLoadEvent(showItem);
             </script>
-            <script type="text/javascript" language="JavaScript" src="{serendipity_getFile file='admin/category_selector.js'}">
+            <script type="text/javascript" language="JavaScript" src="{serendipity_getFile file='admin/category_selector.js'}"></script>
+            <script type="text/javascript" language="JavaScript">
+             addLoadEvent(showItem);
+            </script>
         </td>
     </tr>
     {*** ENTRY DATE,CATEGORY END ***}
@@ -128,7 +130,7 @@
             <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                     <td align="left" width="70%">
-                        <input id="checkbox_allow_comments" type="checkbox" name="serendipity[allow_comments]" value="true" {if $entry_vars.allow_comments}checked="checked"{/if} /><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE; ?></label><br />
+                        <input id="checkbox_allow_comments" type="checkbox" name="serendipity[allow_comments]" value="true" {if $entry_vars.allow_comments}checked="checked"{/if} /><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label><br />
                         <input id="checkbox_moderate_comments" type="checkbox" name="serendipity[moderate_comments]" value="true" {if $entry_vars.moderate_comments}checked="checked"{/if} /><label for="checkbox_moderate_comments">{$CONST.COMMENTS_MODERATE}</label>
                     </td>
                     <td align="right" rowspan="2" valign="middle" width="30%">
@@ -218,7 +220,7 @@
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
         {$wysiwyg_block_item|emit_htmlarea_code:$wysiwyg_block_jsname}
     {/foreach}
-    {serendipity_refhookPlugin hook="backend_wysiwyg_finish" data=$entry_vars.wysiwyg_blocks}
+    {$entry_vars.wysiwyg_blocks|@serendipity_refhookPlugin:'backend_wysiwyg_finish'}
 {/if}
 {*** SPAWN WYSIWYG EDITORS END ***}
 
