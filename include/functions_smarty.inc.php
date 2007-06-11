@@ -625,17 +625,18 @@ function serendipity_smarty_rss_getguid($params, &$smarty) {
  * @param   string  The strftime() format options on how to format this string
  * @param   boolean Shall timezone conversions be applied?
  * @param   boolean Try to detect a valid timestamp?
+ * @param   boolean Use strftime or date?
  * @return
  */
-function serendipity_smarty_formatTime($timestamp, $format, $useOffset = true, $detectTimestamp = false) {
+function serendipity_smarty_formatTime($timestamp, $format, $useOffset = true, $detectTimestamp = false, $useDate = false) {
     if ($detectTimestamp !== false && stristr($detectTimestamp, 'date') === false) {
         return $timestamp;
     }
 
     if (defined($format)) {
-        return serendipity_formatTime(constant($format), $timestamp, $useOffset);
+        return serendipity_formatTime(constant($format), $timestamp, $useOffset, $useDate);
     } else {
-        return serendipity_formatTime($format, $timestamp, $useOffset);
+        return serendipity_formatTime($format, $timestamp, $useOffset, $useDate);
     }
 }
 

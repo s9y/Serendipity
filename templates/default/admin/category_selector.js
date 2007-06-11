@@ -15,8 +15,8 @@ function toggle_extended(setCookie) {
         button.src = plus_img;
         if (setCookie == true) {
             document.cookie = 'serendipity[toggle_extended]=;';
-        }}
-    }}
+        }
+    }
 }
 
 function showItem(id) {

@@ -132,9 +132,10 @@ function &serendipity_convertToTimestamp($in) {
  * @param   string      Output format for the timestamp
  * @param   int         Timestamp to use for displaying
  * @param   boolean     Indicates, if timezone calculations shall be used.
+ * @param   boolean     Whether to use strftime or simply date
  * @return  string      The formatted timestamp
  */
-function serendipity_strftime($format, $timestamp = null, $useOffset = true) {
+function serendipity_strftime($format, $timestamp = null, $useOffset = true, $useDate = false) {
     global $serendipity;
     static $is_win_utf = null;
 
@@ -143,27 +144,31 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true) {
         $is_win_utf = (LANG_CHARSET == 'UTF-8' && strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' ? true : false);
     }
 
-    switch($serendipity['calendar']) {
-        default:
-        case 'gregorian':
-            if ($timestamp == null) {
-                $timestamp = serendipity_serverOffsetHour();
-            } elseif ($useOffset) {
-                $timestamp = serendipity_serverOffsetHour($timestamp);
-            }
-            $out = strftime($format, $timestamp);
-            break;
-
-        case 'persian-utf8':
-            if ($timestamp == null) {
-                $timestamp = serendipity_serverOffsetHour();
-            } elseif ($useOffset) {
-                $timestamp = serendipity_serverOffsetHour($timestamp);
-            }
-
-            require_once S9Y_INCLUDE_PATH . 'include/functions_calendars.inc.php';
-            $out = persian_strftime_utf($format, $timestamp);
-            break;
+    if ($useDate) {
+        $out = date($format, $timestamp);
+    } else {
+        switch($serendipity['calendar']) {
+            default:
+            case 'gregorian':
+                if ($timestamp == null) {
+                    $timestamp = serendipity_serverOffsetHour();
+                } elseif ($useOffset) {
+                    $timestamp = serendipity_serverOffsetHour($timestamp);
+                }
+                $out = strftime($format, $timestamp);
+                break;
+    
+            case 'persian-utf8':
+                if ($timestamp == null) {
+                    $timestamp = serendipity_serverOffsetHour();
+                } elseif ($useOffset) {
+                    $timestamp = serendipity_serverOffsetHour($timestamp);
+                }
+    
+                require_once S9Y_INCLUDE_PATH . 'include/functions_calendars.inc.php';
+                $out = persian_strftime_utf($format, $timestamp);
+                break;
+        }
     }
 
     if ($is_win_utf && (empty($serendipity['calendar']) || $serendipity['calendar'] == 'gregorian')) {
@@ -182,9 +187,10 @@ function serendipity_strftime($format, $timestamp = null, $useOffset = true) {
  * @param   string      Output format for the timestamp
  * @param   int         Timestamp to use for displaying
  * @param   boolean     Indicates, if timezone calculations shall be used.
+ * @param   boolean     Whether to use strftime or simply date
  * @return  string      The formatted timestamp
  */
-function serendipity_formatTime($format, $time, $useOffset = true) {
+function serendipity_formatTime($format, $time, $useOffset = true, $useDate = false) {
     static $cache;
     if (!isset($cache)) {
         $cache = array();
@@ -196,7 +202,8 @@ function serendipity_formatTime($format, $time, $useOffset = true) {
             $cache[$format] = str_replace('%e', '%d', $cache[$format]);
         }
     }
-    return serendipity_mb('ucfirst', serendipity_strftime($cache[$format], (int)$time, $useOffset));
+    
+    return serendipity_mb('ucfirst', serendipity_strftime($cache[$format], (int)$time, $useOffset, $useDate));
 }
 
 /**
