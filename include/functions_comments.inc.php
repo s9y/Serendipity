@@ -441,6 +441,10 @@ function serendipity_deleteComment($id, $entry_id, $type='comments') {
 
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments SET parent_id = " . (int)$sql['parent_id'] . " WHERE parent_id = " . $id);
         }
+        
+        $addData = array('cid' => $id, 'entry_id' => $entry_id);
+        serendipity_plugin_api::hook_event('backend_deletecomment', $sql, $addData);
+        
         return true;
     } else {
         return false;
@@ -523,6 +527,8 @@ function serendipity_approveComment($cid, $entry_id, $force = false) {
     if ($serendipity['allowSubscriptions']) {
         serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
     }
+
+    serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
     return true;
 }
 
