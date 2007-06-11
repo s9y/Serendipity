@@ -159,8 +159,8 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         if (!$dateformat || strlen($dateformat) < 1) {
             $dateformat = '%A, %B %e %Y';
         }
-        if ($randomize)
-            if ($db ==  'mysql' || $db == 'mysqli')) {
+        if ($randomize) {
+            if ($db ==  'mysql' || $db == 'mysqli') {
                 $sql_order = "ORDER BY RAND()";
             } else {
                 // SQLite and PostgreSQL support this, hooray.
