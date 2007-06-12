@@ -28,11 +28,12 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
                         author    = '" . serendipity_db_escape_string($serendipity['POST']['name'])    . "',
                         email     = '" . serendipity_db_escape_string($serendipity['POST']['email'])   . "',
                         url       = '" . serendipity_db_escape_string($serendipity['POST']['url'])     . "',
-                        parent_id = '" . serendipity_db_escape_string($serendipity['POST']['replyTo']) . "',
+                        " . ($serendipity['POST']['replyTo'] != $serendipity['GET']['id'] ? "parent_id = '" . serendipity_db_escape_string($serendipity['POST']['replyTo']) . "'," : '') . "
                         body      = '" . serendipity_db_escape_string($serendipity['POST']['comment']) . "'
             WHERE id = " . (int)$serendipity['GET']['id'] . " AND
                   entry_id = " . (int)$serendipity['POST']['entry_id'];
     serendipity_db_query($sql);
+    serendipity_plugin_api::hook_event('backend_updatecomment', $serendipity['POST'], $serendipity['GET']['id']);
     echo COMMENT_EDITED;
 }
 
