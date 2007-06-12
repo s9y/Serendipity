@@ -401,7 +401,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments') {
     if ($_SESSION['serendipityAuthedUser'] === true) {
         $admin = '';
         if (!serendipity_checkPermission('adminEntriesMaintainOthers')) {
-            $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'] ."'";
+            $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
         }
 
         /* We have to figure out if the comment we are about to delete, is awaiting approval,
@@ -465,7 +465,7 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
     if ($_SESSION['serendipityAuthedUser'] === true) {
         $admin = '';
         if (!serendipity_checkPermission('adminEntriesMaintainOthers')) {
-            $admin = " AND authorid = '" . (int)$_SESSION['serendipityAuthorid'] ."'";
+            $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
         }
 
         $query = "UPDATE {$serendipity['dbPrefix']}entries SET allow_comments = '" . ($switch == 'disable' ? 'false' : 'true') . "' WHERE id = '". (int)$entry_id ."' $admin";
