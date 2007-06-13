@@ -615,6 +615,13 @@ function serendipity_setCookie($name, $value, $securebyprot = true) {
     } else {
         $secure = false;
     }
+    
+    // If HTTP-Hosts like "localhost" are used, current browsers reject cookies.
+    // In this case, we disregard the HTTP host to be able to set that cookie.
+    if (substr_count($host, '.') < 2) {
+        $host = '';
+    }
+
     setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $host, $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
