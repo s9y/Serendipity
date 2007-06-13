@@ -673,7 +673,7 @@
 @define('USERCONF_REALNAME_DESC', 'El nombre completo del autor. Este es el nombre que verán los lectores.');
 @define('HOTLINK_DONE', 'Fichero como recurso externo enlazado.<br />Hecho.');
 @define('ENTER_MEDIA_URL_METHOD', 'Método de obtención:');
-@define('ADD_MEDIA_BLAHBLAH_NOTE', 'Nota: Enlazar recursos externos te permite usar imágenes externas sin almacenarlas localmente. Si escoges esto, asegúrate de que tienes permiso para hacerlo en el servidor externo o bien el servidor es tuyo.');
+@define('ADD_MEDIA_BLAHBLAH_NOTE', 'Nota: Enlazar recursos externos te permite usar imágenes externas sin almacenarlas localmente. Si escoges esta opción, asegúrate de poseer los permisos para hacerlo en el servidor externo o bien el servidor es tuyo.');
 @define('MEDIA_HOTLINKED', 'enlazado externamente');
 @define('FETCH_METHOD_IMAGE', 'Descargar imagen a tu servidor');
 @define('FETCH_METHOD_HOTLINK', 'Enlazar externamente al servidor');
@@ -903,8 +903,8 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Sólo mostrar aquellos autores con al menos X artículos');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
-@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
-@define('USERCONF_CREATE', 'Disable user / forbid activity?');
-@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
-@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
-@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
+@define('IMPORT_WP_PAGES', '¿Descargar archivos adjuntos y páginas estáticas como entradas normales del blog?');
+@define('USERCONF_CREATE', '¿Deshabilitar usuario / prohibir actividad?');
+@define('USERCONF_CREATE_DESC', 'Si activas esta opción el usuario ya no podrá crear o editar entradas en el blog. Cuando él vuelva a ingresar al sistema no podrá hacer nada más que desconectarse y ver su configuración personal.');
+@define('CATEGORY_HIDE_SUB', '¿Ocultar las entradas realizadas en sub-categorías?');
+@define('CATEGORY_HIDE_SUB_DESC', 'Por defecto, cuando se navega una categoría también se muestran las entradas hechas en cualquiera de sus sub-categorías. Si activas esta opción, se mostrán unicamente aquellas entradas que pertenezcan a la categoría seleccionada.');
