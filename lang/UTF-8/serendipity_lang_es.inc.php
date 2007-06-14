@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_es.inc.php 1655 2007-03-22 11:41:57Z garvinhicking $
+<?php # $Id: serendipity_lang_es.inc.php 1725 2007-06-13 15:50:38Z rlazo $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Luis Cervantes <LuisCervantes@ono.com>,
@@ -8,12 +8,12 @@
 # Fixed entities by Leandro Lucarella <luca@llucax.hn.org>
 /* vim: set sts=4 ts=4 expandtab : */
 
-@define('LANG_CHARSET', 'ISO-8859-15');
-@define('SQL_CHARSET', 'latin2');
-@define('DATE_LOCALES', 'es_ES.ISO8859-15, es_ES.ISO8859-1, spanish, sp, es, es_ES, es-ES, es_ES.ISO_8859-15, es_ES.ISO_8859-1');
+@define('LANG_CHARSET', 'UTF-8');
+@define('SQL_CHARSET', 'utf8');
+@define('DATE_LOCALES', 'es_ES.UTF8, es_ES.ISO8859-1, spanish, sp, es, es_ES, es-ES, es_ES.ISO_8859-15, es_ES.ISO_8859-1');
 @define('DATE_FORMAT_ENTRY', '%A, %e de %B del %Y');
 @define('DATE_FORMAT_SHORT', '%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'es');
+@define('WYSIWYG_LANG', 'es-utf');
 @define('LANG_DIRECTION', 'ltr');
 
 /* rlazo[20061114]: dado que el español tiene varias traducciones para ciertas
