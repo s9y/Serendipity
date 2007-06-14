@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * When a category or entry does not exist, emit HTTP 404 message 
+      template instead of "No entries to print" and HTTP 200 status.
+      (garvinhicking)
+
     * Fix URL permalink lookup in some cases (garvinhicking, beta2)
 
     * Add admin backend templates for main area and the entry editor.

@@ -278,6 +278,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     if (is_array($title)) {
         $serendipity['head_title']    = htmlspecialchars($title[0]);
         $serendipity['head_subtitle'] = htmlspecialchars($serendipity['blogTitle']);
+    } else {
+        $serendipity['view'] = '404';
+        header('HTTP/1.0 404 Not found');
     }
 
     ob_start();
@@ -413,8 +416,14 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
-    $serendipity['head_title']    = $cInfo['category_name'];
-    $serendipity['head_subtitle'] = $serendipity['blogTitle'];
+
+    if (!is_array($cInfo)) {
+        $serendipity['view'] = '404';
+        header('HTTP/1.0 404 Not found');
+    } else {
+        $serendipity['head_title']    = $cInfo['category_name'];
+        $serendipity['head_subtitle'] = $serendipity['blogTitle'];
+    }
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } else if ($is_multiauth || preg_match(PAT_PERMALINK_AUTHORS, $uri, $matches)) {
@@ -452,8 +461,14 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $uInfo = serendipity_fetchUsers($serendipity['GET']['viewAuthor']);
-    $serendipity['head_title']    = sprintf(ENTRIES_BY, $uInfo[0]['realname']);
-    $serendipity['head_subtitle'] = $serendipity['blogTitle'];
+    
+    if (!is_array($uInfo)) {
+        $serendipity['view'] = '404';
+        header('HTTP/1.0 404 Not found');
+    } else {
+        $serendipity['head_title']    = sprintf(ENTRIES_BY, $uInfo[0]['realname']);
+        $serendipity['head_subtitle'] = $serendipity['blogTitle'];
+    }
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } else if (preg_match(PAT_SEARCH, $uri, $matches)) {
