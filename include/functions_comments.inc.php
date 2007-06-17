@@ -313,7 +313,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 function serendipity_printCommentsByAuthor() {
     global $serendipity;
 
-    $type      = $serendipity['GET']['commentMode'];
+    $type      = serendipity_db_escape_string($serendipity['GET']['commentMode']);
 
     if ($type == 'comments' || empty($type)) {
         $type = 'NORMAL';
@@ -441,10 +441,10 @@ function serendipity_deleteComment($id, $entry_id, $type='comments') {
 
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments SET parent_id = " . (int)$sql['parent_id'] . " WHERE parent_id = " . $id);
         }
-        
+
         $addData = array('cid' => $id, 'entry_id' => $entry_id);
         serendipity_plugin_api::hook_event('backend_deletecomment', $sql, $addData);
-        
+
         return true;
     } else {
         return false;

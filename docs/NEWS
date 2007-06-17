@@ -3,7 +3,7 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
-    * When a category or entry does not exist, emit HTTP 404 message 
+    * When a category or entry does not exist, emit HTTP 404 message
       template instead of "No entries to print" and HTTP 200 status.
       (garvinhicking)
 
@@ -16,28 +16,28 @@ Version 1.2 ()
     * Fix properly reinstantiating sessions and properly deleting cookies
       when requested (garvinhicking)
 
-    * Add support for sqlite3 (http://php-sqlite3.sourceforge.net/), by 
+    * Add support for sqlite3 (http://php-sqlite3.sourceforge.net/), by
       geekmug
 
     * Change database types for IP addresses to varchar(64) to support
       IPv6 (garvinhicking)
 
     * Make statistics, karma and spamblock plugin only log 255 characters
-      of HTTP User-Agent and Referrer strings to the database, as the 
+      of HTTP User-Agent and Referrer strings to the database, as the
       fields are only varchar(255). Thanks to jemm4jemm!
-      
+
     * Fix bug in conjunction with PHP 5.2.1 changed variable-by-reference
       handling that could result in no groups being listed for author
       accounts (garvinhicking)
 
     * Fix redundant space when inserting links through the non-WYSIWYG
       editor panel. Fix "null" insertion. Thanks to Alp Uckan.
-      
+
     * Fix RSS fullfeed "let client decide" option typo. Previously this
       always enforced a fullfeed to show, regardless of what the client
       indicated. Thanks to stm9x9 (garvinhicking)
-      
-    * Add proper charset to CSS stylesheet. Thanks to SADtg 
+
+    * Add proper charset to CSS stylesheet. Thanks to SADtg
       (garvinhicking)
 
     * Strip tags from comments also in RSS-Feeds for comments, thanks to
@@ -47,7 +47,7 @@ Version 1.2 ()
       thanks to Thijs Kinkhorst
 
     * Enabled setting cache-control headers by default.
-    
+
     * Fix wrong next/previous page links when using wrapper.php indexFile
       option. (garvinhicking)
 
@@ -162,7 +162,16 @@ Version 1.2 ()
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
-Version 1.1.2 ()
+Version 1.1.3 (June 17th, 2007)
+------------------------------------------------------------------------
+
+    * Fix SQL injection through 'commentMode' variable. Thanks to
+      Dr. Neal Krawetz
+
+    * Fix missing %username% permalink pattern in single entry view.
+      Patch by cress_cc
+
+Version 1.1.2 (March 1st, 2007)
 -----------------------------------------------------------------------
 
     * Fix showing SQL error message when an empty category is selected
