@@ -137,13 +137,25 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $serendipity['GET']['action']     = 'read';
     $serendipity['GET']['hidefooter'] = true;
 
-    if ( !isset($year) ) {
+    if (!isset($year)) {
         $year = date('Y');
         $month = date('m');
         $day = date('j');
         $serendipity['GET']['action']     = null;
         $serendipity['GET']['hidefooter'] = null;
     }
+
+    if (isset($year) && !is_numeric($year)) {
+        $year = date('Y');
+    }
+
+    if (isset($month) && !is_numeric($month)) {
+        $month = date('m');
+    }
+
+    if (isset($day) && !is_numeric($day)) {
+        $day = date('d');
+    }                
 
     switch($serendipity['calendar']) {
         case 'gregorian':
