@@ -427,26 +427,38 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id, false, 'assoc');
+        
+        if ($debug && is_string($old_references)) {
+            echo $old_references . "<br />\n";
+        }
+
         if (is_array($old_references) && count($old_references) > 0) {
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
-                $saved_references[$old_reference['link']] = $current_references[$old_reference['link']] = $old_reference;
+                $saved_references[$old_reference['link'] . $old_reference['name']] = $current_references[$old_reference['link'] . $old_reference['name']] = $old_reference;
             }
         }
         if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id);
+        $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id);
+        if ($debug && is_string($del)) {
+            echo $del . "<br />\n";
+        }
+
         if ($debug) echo "Deleted references.<br />\n";
 
         if (is_array($old_references) && count($old_references) > 0) {
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
-                $current_references[$old_reference['link']] = $old_reference;
+                $current_references[$old_reference['link'] . $old_reference['name']] = $old_reference;
                 $q = serendipity_db_insert('references', $old_reference, 'show');
-                serendipity_db_query($q);
+                $cr = serendipity_db_query($q);
+                if ($debug && is_string($cr)) {
+                    echo $cr . "<br />\n";
+                }
             }
         }
 
@@ -496,7 +508,11 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                                     AND (type = '' OR type IS NULL)";
 
         $row = serendipity_db_query($query, true, 'num');
-        if ($row[0] > 0 && isset($saved_references[$locations[$i]])) {
+        if ($debug && is_string($row)) {
+            echo $row . "<br />\n";
+        }
+
+        if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
             if ($debug) echo "Found references for $id, skipping rest<br />\n";
             continue;
         }
@@ -513,7 +529,11 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             echo "Skipping full autodiscovery<br />\n";
         }
     }
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND (type = '' OR type IS NULL)");
+    $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND (type = '' OR type IS NULL)");
+    if ($debug && is_string($del)) {
+        echo $del . "<br />\n";
+    }
+
     if ($debug) echo "Deleted references again.<br />\n";
 
     if (!is_array($old_references)) {
@@ -523,14 +543,21 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     for ($i = 0; $i < $j; ++$i) {
         $i_link     = serendipity_db_escape_string(strip_tags($names[$i]));
         $i_location = serendipity_db_escape_string($locations[$i]);
-        if (isset($current_references[$locations[$i]])) {
+        if (isset($current_references[$locations[$i] . $names[$i]])) {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (id, entry_id, name, link) VALUES(";
-            $query .= (int)$current_references[$locations[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
-            serendipity_db_query($query);
+            $query .= (int)$current_references[$locations[$i] . $names[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
+            $ins = serendipity_db_query($query);
+            if ($debug && is_string($ins)) {
+                echo $ins . "<br />\n";
+            }
         } else {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
             $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
-            serendipity_db_query($query);
+            $ins = serendipity_db_query($query);
+            if ($debug && is_string($ins)) {
+                echo $ins . "<br />\n";
+            }
+
             $old_references[] = array(
                 'id'       => serendipity_db_insert_id('references', 'id'),
                 'name'     => $i_link,
@@ -540,7 +567,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         }
         
         if ($debug) {
-            echo "Current lookup for {$locations[$i]} is <pre>" . print_r($current_references[$locations[$i]], true) . "</pre><br />\n";
+            echo "Current lookup for {$locations[$i]}{$names[$i]} is <pre>" . print_r($current_references[$locations[$i] . $names[$i]], true) . "</pre><br />\n";
             echo $query . "<br />\n";
         }
     }
@@ -556,7 +583,10 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name) VALUES(";
         $query .= (int)$id . ", '" . serendipity_db_escape_string($citation) . "')";
 
-        serendipity_db_query($query);
+        $cite = serendipity_db_query($query);
+        if ($debug && is_string($cite)) {
+            echo $cite . "<br />\n";
+        }
     }
 }
 
