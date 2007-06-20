@@ -540,9 +540,16 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $old_references = array();
     }
 
+    $duplicate_check = array();
     for ($i = 0; $i < $j; ++$i) {
         $i_link     = serendipity_db_escape_string(strip_tags($names[$i]));
         $i_location = serendipity_db_escape_string($locations[$i]);
+        
+        // No link with same description AND same text should be inserted.
+        if (isset($duplicate_check[$i_location . $i_link])) {
+            continue;
+        }
+
         if (isset($current_references[$locations[$i] . $names[$i]])) {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (id, entry_id, name, link) VALUES(";
             $query .= (int)$current_references[$locations[$i] . $names[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
@@ -550,6 +557,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             if ($debug && is_string($ins)) {
                 echo $ins . "<br />\n";
             }
+            $duplicate_check[$locations[$i] . $names[$i]] = true;
         } else {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
             $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
@@ -564,6 +572,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                 'link'     => $i_location,
                 'entry_id' => (int)$id
             );
+            $duplicate_check[$i_location . $i_link] = true;
         }
         
         if ($debug) {
