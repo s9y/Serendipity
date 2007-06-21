@@ -25,7 +25,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg');
-        $propbag->add('version',       '1.46');
+        $propbag->add('version',       '1.47');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -186,6 +186,19 @@ class serendipity_event_statistics extends serendipity_event
                                     '41'    =>     "MagpieRSS/0.61 (+http://magpierss.sf.net)",
                                     '42'    =>     "www.google.com/feedfetcher.html)",
                                     '43'    =>     "Sphere Scout&v4.0 (beta)- scout at sphere dot com"
+                                    '44'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
+                                    '45'    =>     "libwww-perl/5.76",
+                                    '46'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
+                                    '48'    =>     "WordPress/2.0.5",
+                                    '49'    =>     "Incutio XML-RPC -- WordPress/2.0.5",
+                                    '50'    =>     "-- WordPress/2.1-alpha3",
+                                    '51'    =>     "WordPress/2.1.1",
+                                    '52'    =>     "WordPress/2.1",
+                                    '53'    =>     "ping.wordblog.de/ping/1.0",
+                                    '54'    =>     "PEAR HTTP_Request class (http://pear.php.net/ )",
+                                    '55'    =>     "Java/1.5.0_07",
+                                    '56'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
+                                    '57'    =>     "BlogPulseLive(support@blogpulse.com)"
                                     );
                                     
                             foreach($banned_array AS $ban) {
