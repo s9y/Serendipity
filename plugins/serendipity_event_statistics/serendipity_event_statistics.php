@@ -185,7 +185,7 @@ class serendipity_event_statistics extends serendipity_event
                                     '40'    =>     "Mediapartners-Google/2.1",
                                     '41'    =>     "MagpieRSS/0.61 (+http://magpierss.sf.net)",
                                     '42'    =>     "www.google.com/feedfetcher.html)",
-                                    '43'    =>     "Sphere Scout&v4.0 (beta)- scout at sphere dot com"
+                                    '43'    =>     "Sphere Scout&v4.0 (beta)- scout at sphere dot com",
                                     '44'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
                                     '45'    =>     "libwww-perl/5.76",
                                     '46'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
