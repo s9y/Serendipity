@@ -3,6 +3,10 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * (beta2) Fix when saving personal configuration the userlevel and 
+      "no_create" flags where not properly saved, thanks to PHPaws!
+      (garvinhicking)
+      
     * When a category or entry does not exist, emit HTTP 404 message
       template instead of "No entries to print" and HTTP 200 status.
       (garvinhicking)
