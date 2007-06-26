@@ -323,7 +323,12 @@ function serendipity_printCommentsByAuthor() {
         $type = '%';
     }
 
-    $sql_where = " AND co.author = '" . serendipity_db_escape_string($serendipity['GET']['viewCommentAuthor']) . "'";
+    if (!empty($serendipity['GET']['viewCommentAuthor'])) {
+        $sql_where = " AND co.author = '" . serendipity_db_escape_string($serendipity['GET']['viewCommentAuthor']) . "'";
+        $group_by  = "GROUP BY co.author";
+    } else {
+        $group_by  = "";
+    }
 
     if (!empty($serendipity['GET']['commentStartTime'])) {
         $sql_where .= " AND co.timestamp >= " . (int)$serendipity['GET']['commentStartTime'];
@@ -362,12 +367,13 @@ function serendipity_printCommentsByAuthor() {
         $and .= ' AND co.status = \'approved\'';
     }
 
-    $cc = serendipity_db_query("SELECT count(co.id) AS counter
+    $fc = "SELECT count(co.id) AS counter
                                   FROM {$serendipity['dbPrefix']}comments AS co
                                  WHERE co.entry_id > 0
                                    AND co.type LIKE '" . $type . "'
-                                   AND co.status = 'approved' " . $sql_where . "
-                              GROUP BY co.author", true, 'assoc');
+                                   AND co.status = 'approved' " . $sql_where . " "
+                                   .  $group_by;
+    $cc = serendipity_db_query($fc, true, 'assoc');
     if (!isset($cc['counter'])) {
         $totalComments = 0;
     } else {
