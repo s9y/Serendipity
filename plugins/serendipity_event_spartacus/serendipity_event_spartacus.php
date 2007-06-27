@@ -134,7 +134,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $propbag->add('type',        'string');
                 $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS);
                 $propbag->add('description', '');
-                $propbag->add('default',     'false');
+                $propbag->add('default',     'true');
                 break;
 
             case 'enable_themes':
