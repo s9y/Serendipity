@@ -885,5 +885,5 @@
 @define('IMPORT_WP_PAGES', 'Auch attachments und staticpages als normale Blog-Einträge importieren?');
 @define('USERCONF_CREATE', '`Benutzer deaktivieren / Rechte entziehen?');
 @define('USERCONF_CREATE_DESC', 'Wenn diese Option aktiviert ist, wird dieser Benutzer keine Möglichkeit mehr haben Einträge anzulegen oder sonstige Aktionen auszuführen. Wenn er in die Administrations-Oberfläche kommt, wird er nichts anderes tun können als seine Persönlichen Einstellungen zu ändern und sich auszuloggen.');
-@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
-@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
+@define('CATEGORY_HIDE_SUB', 'Artikel von Unterkategorien verstecken?');
+@define('CATEGORY_HIDE_SUB_DESC', 'Standardmäßig werden bei der Ansicht einer Kategorie im Frontend alle Artikel der gewählten Kategorie und aller Unterkategorien angezeigt. Wenn diese Option aktiviert wird, werden Artikel von Unterkategorien nicht angezeigt.');
