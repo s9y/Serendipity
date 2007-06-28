@@ -18,10 +18,10 @@ class serendipity_calendar_plugin extends serendipity_plugin {
     {
         $propbag->add('name',        CALENDAR);
         $propbag->add('description', QUICKJUMP_CALENDAR);
-        $propbag->add('configuration', array('beginningOfWeek', 'enableExtEvents'));
+        $propbag->add('configuration', array('beginningOfWeek', 'enableExtEvents', 'category'));
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -46,6 +46,25 @@ class serendipity_calendar_plugin extends serendipity_plugin {
                 $propbag->add('name',        CALENDAR_ENABLE_EXTERNAL_EVENTS);
                 $propbag->add('description', CALENDAR_EXTEVENT_DESC);
                 $propbag->add('default',     false);
+                break;
+
+            // Event Calendar: Support category!
+            case 'category':
+                $categories = array('all' => ALL_CATEGORIES);
+                $cats       = serendipity_fetchCategories();
+
+                if (is_array($cats)) {
+                    $cats = serendipity_walkRecursive($cats, 'categoryid', 'parentid', VIEWMODE_THREADED);
+                    foreach($cats as $cat) {
+                        $categories[$cat['categoryid']] = str_repeat(' . ', $cat['depth']) . $cat['category_name'];
+                    }
+                }
+
+                $propbag->add('type',         'select');
+                $propbag->add('name',         CATEGORIES_PARENT_BASE);
+                $propbag->add('description',  CATEGORIES_PARENT_BASE_DESC);
+                $propbag->add('select_values', $categories);
+                $propbag->add('default',      'all');
                 break;
 
             default:
@@ -190,8 +209,18 @@ class serendipity_calendar_plugin extends serendipity_plugin {
 
         serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => false, 'noSticky' => false, 'source' => 'calendar'));
 
-        if (isset($serendipity['GET']['category'])) {
-            $base_query   = 'C' . (int)$serendipity['GET']['category'];
+        // Event Calendar
+        $cat = $this->get_config('category', 'all');
+        if ($cat != 'all') {
+            $catid = (int)$cat;
+        } elseif (isset($serendipity['GET']['category'])) {
+            $catid = (int)$serendipity['GET']['category'];
+        } else {
+            $catid = false;
+        }
+        
+        if ($catid) {
+            $base_query   = 'C' . $catid;
             $add_query    = '/' . $base_query;
             $querystring = "SELECT timestamp
                               FROM {$serendipity['dbPrefix']}category c,
@@ -201,7 +230,7 @@ class serendipity_calendar_plugin extends serendipity_plugin {
                                    {$cond['and']}
                                AND e.id          = ec.entryid
                                AND c.categoryid  = ec.categoryid
-                               AND (" . serendipity_getMultiCategoriesSQL($serendipity['GET']['category']) . ")";
+                               AND (" . serendipity_getMultiCategoriesSQL($catid) . ")";
         }
 
         if (!isset($querystring)) {
