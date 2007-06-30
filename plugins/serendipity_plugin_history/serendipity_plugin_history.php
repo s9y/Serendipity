@@ -22,7 +22,7 @@ class serendipity_plugin_history extends serendipity_plugin
         $propbag->add('description',   PLUGIN_HISTORY_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Jannis Hermanns');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -191,7 +191,7 @@ class serendipity_plugin_history extends serendipity_plugin
             $t = ($maxlength==0 || strlen($e[$x]['title'])<=$maxlength) ?
                     $e[$x]['title'] :
                     (trim(serendipity_mb('substr', $e[$x]['title'], 0, $maxlength-3)).' [...]');
-            echo $author . $date . "<a href='$url' title='".str_replace("'", '`', $e[$x][title])."'>".$t."</a> " .
+            echo $author . $date . "<a href='$url' title='".str_replace("'", '`', htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) ."</a> " .
                  strip_tags($e[$x]['body']) . '<br />';
         }
         echo $outro;
@@ -199,4 +199,3 @@ class serendipity_plugin_history extends serendipity_plugin
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>
