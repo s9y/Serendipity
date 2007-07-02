@@ -169,12 +169,12 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
                     co.id AS commentid,
                     co.parent_id AS parent_id
               FROM
-                    {$serendipity['dbPrefix']}comments co
-                    LEFT JOIN {$serendipity['dbPrefix']}entries e ON (co.entry_id = e.id)
+                    {$serendipity['dbPrefix']}comments AS co
+                    LEFT JOIN {$serendipity['dbPrefix']}entries AS e ON (co.entry_id = e.id)
               WHERE co.type LIKE '" . $type . "' AND co.entry_id > 0 $and
               $group
               ORDER BY
-                    " . ($where != '' ? '' : 'co.id') . " " . ($order != '' ? $order : '') . "
+                    " . ($where != '' ? '' : 'co.id') . " " . ($where == '' && $order != '' ? ',' : '') . ($order != '' ? $order : '') . "
                     $limit";
     $comments = serendipity_db_query($query, false, 'assoc');
 
