@@ -136,7 +136,7 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
             $preview .= '<a href="' . $info['preview_fullsizeURL'] . '" target="_blank">';
             $preview_link = true;
         } else {
-            echo "No large preview";
+            #echo "No large preview";
         }
 
         if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
