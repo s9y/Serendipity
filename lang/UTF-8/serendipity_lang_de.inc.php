@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 1655 2007-03-22 11:41:57Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 1741 2007-06-28 13:28:01Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -877,13 +877,13 @@
 @define('PERMISSION_FORBIDDEN_PLUGINS', 'Verbotene Plugins');
 @define('PERMISSION_FORBIDDEN_HOOKS', 'Verbotene Ereignisse');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'Sollen persönliche Plugin-Rechte für Benutzergruppen aktiviert werden?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Falls diese Option aktiviert ist, können Sie bei jeder Benutzergruppe definieren, welche Plugins/Ereignisse diese Gruppe ausführen darf.');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Falls die globale Konfigurations-Option "Sollen persönliche Plugin-Rechte für Benutzergruppen aktiviert werden" aktiviert ist, können Sie bei jeder Benutzergruppe definieren, welche Plugins/Ereignisse diese Gruppe ausführen darf.');
 @define('DELETE_SELECTED_ENTRIES', 'Markierte Einträge löschen');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Nur Autoren mit mindestens X Beiträgen anzeigen');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Fügen Sie diesen Link als Lesezeichen/Favoriten hinzu. Dann können Sie dieses Lesezeichen auf jeder beliebigen Seite benutzen um so sofort in ihr Serendipity-Blog zu gelangen.');
 @define('IMPORT_WP_PAGES', 'Auch attachments und staticpages als normale Blog-Einträge importieren?');
-@define('USERCONF_CREATE', '`Benutzer deaktivieren / Rechte entziehen?');
+@define('USERCONF_CREATE', 'Benutzer deaktivieren / Rechte entziehen?');
 @define('USERCONF_CREATE_DESC', 'Wenn diese Option aktiviert ist, wird dieser Benutzer keine Möglichkeit mehr haben Einträge anzulegen oder sonstige Aktionen auszuführen. Wenn er in die Administrations-Oberfläche kommt, wird er nichts anderes tun können als seine Persönlichen Einstellungen zu ändern und sich auszuloggen.');
 @define('CATEGORY_HIDE_SUB', 'Artikel von Unterkategorien verstecken?');
 @define('CATEGORY_HIDE_SUB_DESC', 'Standardmäßig werden bei der Ansicht einer Kategorie im Frontend alle Artikel der gewählten Kategorie und aller Unterkategorien angezeigt. Wenn diese Option aktiviert wird, werden Artikel von Unterkategorien nicht angezeigt.');
