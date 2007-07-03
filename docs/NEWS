@@ -3,6 +3,8 @@
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Fix invalid pingback XML code, by Slim
+    
     * (beta2) Fix when saving personal configuration the userlevel and 
       "no_create" flags where not properly saved, thanks to PHPaws!
       (garvinhicking)
