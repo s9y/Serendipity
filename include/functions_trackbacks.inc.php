@@ -62,6 +62,7 @@ global $serendipity;
       <name>sourceURI</name>
       <value><string>{$serendipity['baseURL']}</string></value>
     </param>
+    <param>
       <name>targetURI</name>
       <value><string>$loc</string></value>
     </param>
