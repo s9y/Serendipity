@@ -257,7 +257,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.9');
+        $propbag->add('version',       '1.10');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -454,7 +454,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         }
 
         if (trim($rssuri)) {
-            $feedcache = $serendipity['serendipityPath'] . 'templates_c/remoterss_cache_' . preg_replace('@[^a-z0-9]*@i', '', $rssuri) . '.dat';
+            $feedcache = $serendipity['serendipityPath'] . 'templates_c/remoterss_cache_' . md5(preg_replace('@[^a-z0-9]*@i', '', $rssuri)) . '.dat';
             if (!file_exists($feedcache) || filesize($feedcache) == 0 || filemtime($feedcache) < (time() - $cachetime)) {
                 $this->debug('Cachefile does not existing.');
                 if (!$this->urlcheck($rssuri)) {
