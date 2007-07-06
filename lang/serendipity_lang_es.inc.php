@@ -908,3 +908,7 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('USERCONF_CREATE_DESC', 'Si activas esta opción el usuario ya no podrá crear o editar entradas en el blog. Cuando él vuelva a ingresar al sistema no podrá hacer nada más que desconectarse y ver su configuración personal.');
 @define('CATEGORY_HIDE_SUB', '¿Ocultar las entradas realizadas en sub-categorías?');
 @define('CATEGORY_HIDE_SUB_DESC', 'Por defecto, cuando se navega una categoría también se muestran las entradas hechas en cualquiera de sus sub-categorías. Si activas esta opción, se mostrán unicamente aquellas entradas que pertenezcan a la categoría seleccionada.');
+@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENT', 'Pingback successful');
+@define('PINGBACK_FAILED', 'Pingback failed: %s');
+@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');

@@ -887,3 +887,7 @@
 @define('USERCONF_CREATE_DESC', 'Wenn diese Option aktiviert ist, wird dieser Benutzer keine Möglichkeit mehr haben Einträge anzulegen oder sonstige Aktionen auszuführen. Wenn er in die Administrations-Oberfläche kommt, wird er nichts anderes tun können als seine Persönlichen Einstellungen zu ändern und sich auszuloggen.');
 @define('CATEGORY_HIDE_SUB', 'Artikel von Unterkategorien verstecken?');
 @define('CATEGORY_HIDE_SUB_DESC', 'Standardmäßig werden bei der Ansicht einer Kategorie im Frontend alle Artikel der gewählten Kategorie und aller Unterkategorien angezeigt. Wenn diese Option aktiviert wird, werden Artikel von Unterkategorien nicht angezeigt.');
+@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENT', 'Pingback successful');
+@define('PINGBACK_FAILED', 'Pingback failed: %s');
+@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');

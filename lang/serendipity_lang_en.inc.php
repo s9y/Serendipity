@@ -888,3 +888,7 @@
 @define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
 @define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
 @define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
+@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENT', 'Pingback successful');
+@define('PINGBACK_FAILED', 'Pingback failed: %s');
+@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');

@@ -35,6 +35,21 @@ function serendipity_trackback_is_success($resp) {
 }
 
 /**
+ * Check a HTTP response if it is a valid XML pingback response
+ *
+ * @access public
+ * @param   string  HTTP Response string
+ * @return  mixed   Boolean or error message
+ */
+function serendipity_pingback_is_success($resp) {
+    // This is very rudimentary, but the fault is printed later, so what..
+    if (preg_match('@<fault>@', $resp, $matches)) {
+        return false;
+    }
+    return true;
+}
+
+/**
  * Perform a HTTP query for autodiscovering a pingback URL
  *
  * @access public
@@ -49,6 +64,7 @@ global $serendipity;
     } elseif (preg_match('@<link rel="pingback" href="([^"]+)" ?/?>@i', $body, $matches)) {
         $pingback = $matches[1];
     } else {
+        echo '<div>&#8226; ' . sprintf(PINGBACK_FAILED, PINGBACK_NOT_FOUND) . '</div>';
         return;
     }
 
@@ -68,8 +84,19 @@ global $serendipity;
     </param>
   </params>
 </methodCall>";
-        _serendipity_send($pingback, $query);
-        return;
+
+    echo '<div>&#8226; ' . sprintf(PINGBACK_SENDING, htmlspecialchars($pingback)) . '</div>';
+    flush();
+    
+    $response =  _serendipity_send($pingback, $query, 'text/html');
+    $success  =   serendipity_pingback_is_success($response);
+
+    if ($success == true) {
+        echo '<div>&#8226; ' . 'PINGBACK: ' . PINGBACK_SENT .'</div>';
+    } else {
+        echo '<div>&#8226; ' . sprintf(PINGBACK_FAILED, $response) . '</div>';
+    }
+   return $success;
 }
 
 /**
@@ -80,7 +107,7 @@ global $serendipity;
  * @param   string  The XML data with the trackback contents
  * @return  string  Reponse
  */
-function _serendipity_send($loc, $data) {
+function _serendipity_send($loc, $data, $contenttype = null) {
     global $serendipity;
 
     $target = parse_url($loc);
@@ -99,6 +126,10 @@ function _serendipity_send($loc, $data) {
     serendipity_request_start();
 
     $req = &new HTTP_Request($uri, $options);
+    if (isset($contenttype)){
+       $req->addHeader('Content-Type', $contenttype);
+    }
+
     $req->addRawPostData($data, true);
     $res = $req->sendRequest();
 
@@ -127,14 +158,26 @@ function _serendipity_send($loc, $data) {
  * @return string   Response
  */
 function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $text, $loc2 = '') {
+    $is_wp    = false;
+    $wp_check = false;
+
+    if (preg_match('@((' . preg_quote($loc, '@') . '|' . preg_quote($loc2, '@') . ')/?trackback/)@i', $res, $wp_loc)) {
+        // We found a WP-blog that may not advertise RDF-Tags!
+        $is_wp = true;
+    }
+
     if (!preg_match('@trackback:ping(\s*rdf:resource)?\s*=\s*["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
         $matches = array();
         serendipity_plugin_api::hook_event('backend_trackback_check', $matches, $loc);
 
         // Plugins may say that a URI is valid, in situations where a blog has no valid RDF metadata
         if (empty($matches[2])) {
-            echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
-            return false;
+            if ($is_wp) {
+                $wp_check = true;
+            } else {
+                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
+                return false;
+            }
         }
     }
 
@@ -142,9 +185,18 @@ function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $
 
     if (preg_match('@dc:identifier\s*=\s*["\'](https?:[^\'"]+)["\']@i', $res, $test)) {
         if ($loc != $test[1] && $loc2 != $test[1]) {
-            echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
-            return false;
+            if ($is_wp) {
+                $wp_check = true;
+            } else {
+                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
+                return false;
+            }
         }
+    }
+
+    // If $wp_check is set it means no RDF metadata was found, and we simply try the /trackback/ url.
+    if ($wp_check) {
+        $trackURI = $wp_loc[0];
     }
 
     $data = 'url='        . rawurlencode($url)
@@ -227,8 +279,10 @@ global $serendipity;
     serendipity_request_end();
 
     if (strlen($fContent) != 0) {
-        serendipity_trackback_autodiscover($fContent, $parsed_loc, $url, $author, $title, $text, $loc);
-        serendipity_pingback_autodiscover($loc, $fContent);
+        $trackback_result = serendipity_trackback_autodiscover($fContent, $parsed_loc, $url, $author, $title, $text, $loc);
+        if ($trackback_result == false) {
+            serendipity_pingback_autodiscover($loc, $fContent);
+        }
     } else {
         echo '<div>&#8226; ' . TRACKBACK_NO_DATA . '</div>';
     }
@@ -428,7 +482,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id, false, 'assoc');
-        
+
         if ($debug && is_string($old_references)) {
             echo $old_references . "<br />\n";
         }
@@ -545,7 +599,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     for ($i = 0; $i < $j; ++$i) {
         $i_link     = serendipity_db_escape_string(strip_tags($names[$i]));
         $i_location = serendipity_db_escape_string($locations[$i]);
-        
+
         // No link with same description AND same text should be inserted.
         if (isset($duplicate_check[$i_location . $i_link])) {
             continue;
@@ -575,13 +629,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             );
             $duplicate_check[$i_location . $i_link] = true;
         }
-        
+
         if ($debug) {
             echo "Current lookup for {$locations[$i]}{$names[$i]} is <pre>" . print_r($current_references[$locations[$i] . $names[$i]], true) . "</pre><br />\n";
             echo $query . "<br />\n";
         }
     }
-    
+
     if ($debug) {
         echo "Old/Saved locations: <pre>" . print_r($old_references, true) . "</pre><br />\n";
     }
