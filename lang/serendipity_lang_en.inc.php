@@ -590,7 +590,7 @@
 @define('EXPERT_INSTALLATION', 'Expert installation');
 @define('COMPLETE_INSTALLATION', 'Complete installation');
 @define('WONT_INSTALL_DB_AGAIN', 'will not install the database again');
-@define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exists');
+@define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exist');
 @define('CREATING_PRIMARY_AUTHOR', 'Creating primary author \'%s\'');
 @define('SETTING_DEFAULT_TEMPLATE', 'Setting default template');
 @define('INSTALLING_DEFAULT_PLUGINS', 'Installing default plugins');

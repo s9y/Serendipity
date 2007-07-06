@@ -584,7 +584,7 @@
 @define('PHPINI_CONFIGURATION', 'Configurazione php.ini');
 @define('PHP_INSTALLATION', 'Installazione PHP');
 @define('THEY_DO', 'fanno');
-@define('THEY_DONT', 'non fanno');
+@define('THEY_DONT', 'non esistono');
 @define('SIMPLE_INSTALLATION', 'Installazione Semplice');
 @define('EXPERT_INSTALLATION', 'Installazione Avanzata');
 @define('COMPLETE_INSTALLATION', 'Installazione Completa');
