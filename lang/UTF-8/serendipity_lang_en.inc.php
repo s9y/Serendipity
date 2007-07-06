@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 1655 2007-03-22 11:41:57Z garvinhicking $
+<?php # $Id: serendipity_lang_en.inc.php 1752 2007-07-06 09:52:31Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -590,7 +590,7 @@
 @define('EXPERT_INSTALLATION', 'Expert installation');
 @define('COMPLETE_INSTALLATION', 'Complete installation');
 @define('WONT_INSTALL_DB_AGAIN', 'will not install the database again');
-@define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exists');
+@define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exist');
 @define('CREATING_PRIMARY_AUTHOR', 'Creating primary author \'%s\'');
 @define('SETTING_DEFAULT_TEMPLATE', 'Setting default template');
 @define('INSTALLING_DEFAULT_PLUGINS', 'Installing default plugins');
@@ -888,3 +888,7 @@
 @define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
 @define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
 @define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
+@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENT', 'Pingback successful');
+@define('PINGBACK_FAILED', 'Pingback failed: %s');
+@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');

@@ -881,3 +881,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('USERCONF_CREATE_DESC', 'Ако е позволено, потребителят няма да има никакви възможности за редактиране или създаване на каквото и да било в блога. Когато влезе в административната страница, потребителят няма да може да прави нищо друго, освен да излезе или да види своята персонална конфигурация.');
 @define('CATEGORY_HIDE_SUB', 'Скриване на постингите, направени в подкатегории?');
 @define('CATEGORY_HIDE_SUB_DESC', 'По подразбиране когато разглеждате катогерия, статиите от подкатегориите също се показват. Ако тази опция е включена, само статиите от текущо избраната категория ще бъдат показвани.');
+@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENT', 'Pingback successful');
+@define('PINGBACK_FAILED', 'Pingback failed: %s');
+@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');

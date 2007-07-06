@@ -1,5 +1,11 @@
 # $Id$
 
+Version 1.3 ()
+------------------------------------------------------------------------
+
+    * Full pingback support, fallback trackback method for WordPress
+      blogs. Thanks to brockha.us!
+
 Version 1.2 ()
 ------------------------------------------------------------------------
 
