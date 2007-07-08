@@ -196,7 +196,8 @@ class serendipity_plugin_comments extends serendipity_plugin
                     $entry['comment'] = preg_replace('@((\[.*)[\n\r]+(.*\]))+@imsU', '\2\3', $entry['comment']);
                     $entry['comment'] = preg_replace('@((\[.+\].*)[\r\n]+(.*\[/.+\]))+@imsU', '\2\3', $entry['comment']);
                 }
-                serendipity_plugin_api::hook_event('frontend_display', $entry);
+                $addData = array('from' => 'serendipity_plugin_comments:generate_content');
+                serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
 
                 printf(
                   '<div class="plugin_comment_wrap">' . PLUGIN_COMMENTS_ABOUT . '</div>',
