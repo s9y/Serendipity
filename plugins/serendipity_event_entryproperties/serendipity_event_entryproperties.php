@@ -134,7 +134,8 @@ class serendipity_event_entryproperties extends serendipity_event
         global $serendipity;
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$entry['id'] . " AND property LIKE 'ep_cache_%'");
-        serendipity_plugin_api::hook_event('frontend_display', $entry);
+        $addData = array('from' => 'serendipity_event_entryproperties:updateCache');
+        serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entryproperties (entryid, property, value) VALUES (" . (int)$entry['id'] . ", 'ep_cache_body', '" . serendipity_db_escape_string($entry['body']) . "')");
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entryproperties (entryid, property, value) VALUES (" . (int)$entry['id'] . ", 'ep_cache_extended', '" . serendipity_db_escape_string($entry['extended']) . "')");
     }

@@ -64,7 +64,8 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                 $ext = '';
             }
 
-            serendipity_plugin_api::hook_event('frontend_display', $entry);
+            $addData = array('from' => 'functions_entries:printEntries_rss');
+            serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
             // Do some relative -> absolute URI replacing magic. Replaces all HREF/SRC (<a>, <img>, ...) references to only the serendipitypath with the full baseURL URI
             // garvin: Could impose some problems. Closely watch this one.
             $entry['body'] = preg_replace('@(href|src)=("|\')(' . preg_quote($serendipity['serendipityHTTPPath']) . ')(.*)("|\')(.*)>@imsU', '\1=\2' . $serendipity['baseURL'] . '\4\2\6>', $entry['body']);

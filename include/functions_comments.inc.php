@@ -274,7 +274,8 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
                 $comment['url'] = htmlspecialchars($comment['url'], ENT_QUOTES);
             }
 
-            serendipity_plugin_api::hook_event('frontend_display', $comment);
+            $addData = array('from' => 'functions_entries:printComments');
+            serendipity_plugin_api::hook_event('frontend_display', $comment, $addData);
 
             if (isset($comment['no_email']) && $comment['no_email']) {
                 $comment['email'] = false;
