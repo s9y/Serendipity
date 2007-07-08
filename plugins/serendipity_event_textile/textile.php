@@ -488,12 +488,12 @@ Applying Attributes:
         global $textile_c;
         return preg_replace_callback('/
             ([\s[{(]|[[:punct:]])?     # $pre
-            "                          # start
+            ("|&quot;)                          # start
             ('.$textile_c.')                   # $textile_atts
             ([^"]+)                  # $text
             \s?
             (?:\(([^)]+)\)(?="))?    # $title
-            ":
+            ("|&quot;):
             (\S+\b)                    # $url
             (\/)?                      # $textile_slash
             ([^\w\/;]*)                # $post
