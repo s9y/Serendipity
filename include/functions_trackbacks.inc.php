@@ -53,22 +53,30 @@ function serendipity_pingback_is_success($resp) {
  * Perform a HTTP query for autodiscovering a pingback URL
  *
  * @access public
- * @param   string  (deprecated) The URL to try autodiscovery
- * @param   string  The response of the original URL
+ * @param   string  The URL to try autodiscovery
+ * @param   string  The HTML of the source URL
+ * @param   string  The URL of our blog article
  * @return
  */
-function serendipity_pingback_autodiscover($loc, $body) {
+function serendipity_pingback_autodiscover($loc, $body, $url=null) {
 global $serendipity;
+
+    // This is the old way, sending pingbacks, for downward compatibility.
+    // But this is wrong, as it does link from the main blog URL instead of the article URL
+    if (!isset($url)) {
+        $url = $serendipity['baseURL'];
+    }
+
     if (!empty($_SERVER['X-PINGBACK'])) {
         $pingback = $_SERVER['X-PINGBACK'];
     } elseif (preg_match('@<link rel="pingback" href="([^"]+)" ?/?>@i', $body, $matches)) {
         $pingback = $matches[1];
     } else {
         echo '<div>&#8226; ' . sprintf(PINGBACK_FAILED, PINGBACK_NOT_FOUND) . '</div>';
-        return;
+        return false;
     }
 
-    // xml-rpc hack
+    // xml-rpc pingback call
     $query = "
 <?xml version=\"1.0\"?>
 <methodCall>
@@ -76,7 +84,7 @@ global $serendipity;
   <params>
     <param>
       <name>sourceURI</name>
-      <value><string>{$serendipity['baseURL']}</string></value>
+      <value><string>$url</string></value>
     </param>
     <param>
       <name>targetURI</name>
@@ -87,16 +95,15 @@ global $serendipity;
 
     echo '<div>&#8226; ' . sprintf(PINGBACK_SENDING, htmlspecialchars($pingback)) . '</div>';
     flush();
-    
+
     $response =  _serendipity_send($pingback, $query, 'text/html');
     $success  =   serendipity_pingback_is_success($response);
-
     if ($success == true) {
-        echo '<div>&#8226; ' . 'PINGBACK: ' . PINGBACK_SENT .'</div>';
+        echo '<div>&#8226; ' . PINGBACK_SENT .'</div>';
     } else {
         echo '<div>&#8226; ' . sprintf(PINGBACK_FAILED, $response) . '</div>';
     }
-   return $success;
+    return $success;
 }
 
 /**
@@ -281,7 +288,7 @@ global $serendipity;
     if (strlen($fContent) != 0) {
         $trackback_result = serendipity_trackback_autodiscover($fContent, $parsed_loc, $url, $author, $title, $text, $loc);
         if ($trackback_result == false) {
-            serendipity_pingback_autodiscover($loc, $fContent);
+            serendipity_pingback_autodiscover($parsed_loc, $fContent, $url);
         }
     } else {
         echo '<div>&#8226; ' . TRACKBACK_NO_DATA . '</div>';
