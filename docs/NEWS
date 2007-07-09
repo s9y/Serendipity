@@ -3,8 +3,11 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+	* serendipity_plugin_comments now also supports Favatars in 
+	  combination with serendipity_event_gravatar instead of
+	  Gravatars only. (brockhaus)
     * Full pingback support, fallback trackback method for WordPress
-      blogs. Thanks to brockha.us!
+      blogs. (brockhaus)
 
 Version 1.2 ()
 ------------------------------------------------------------------------
