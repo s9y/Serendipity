@@ -3,6 +3,12 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Made trackback/pingback functionality independend from link text.
+      Only the link url is relevant now. Now dupe links in entries are
+      not trackbacked/pingbacked twice and images w/o ALT attribute or
+      links with changed text won't be trackbacked again after resaving
+      the article. (brockhaus)
+
     * serendipity_plugin_comments now also supports Favatars in 
       combination with serendipity_event_gravatar instead of
       Gravatars only. (brockhaus)

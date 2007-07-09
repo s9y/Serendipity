@@ -498,7 +498,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
-                $saved_references[$old_reference['link'] . $old_reference['name']] = $current_references[$old_reference['link'] . $old_reference['name']] = $old_reference;
+                $saved_references[$old_reference['link']] = $current_references[$old_reference['link']] = $old_reference;
             }
         }
         if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
@@ -515,7 +515,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $current_references = array();
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
-                $current_references[$old_reference['link'] . $old_reference['name']] = $old_reference;
+                $current_references[$old_reference['link']] = $old_reference;
                 $q = serendipity_db_insert('references', $old_reference, 'show');
                 $cr = serendipity_db_query($q);
                 if ($debug && is_string($cr)) {
@@ -527,8 +527,8 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         if ($debug) echo "Got references in final run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     }
 
-    if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>(.+?)</a>@i', $text, $matches)) {
-        $matches = array(0 => array(), 1 => array());
+    if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>.+?</a>@i', $text, $matches)) {
+        $matches = array(0 => array());
     } else {
         // remove full matches
         array_shift($matches);
@@ -539,7 +539,6 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
     // Add URL references
     $locations = $matches[0];
-    $names     = $matches[1];
 
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
@@ -554,16 +553,6 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             continue;
         }
 
-        if (preg_match_all('@<img[^>]+?alt=["\']?([^\'">]+?)[\'"][^>]+?>@i', $names[$i], $img_alt)) {
-            if (is_array($img_alt) && is_array($img_alt[0])) {
-                foreach($img_alt[0] as $alt_idx => $alt_img) {
-                    // Replace all <img>s within a link with their respective ALT tag, so that references
-                    // can be stored with a title.
-                    $names[$i] = str_replace($alt_img, $img_alt[1][$alt_idx], $names[$i]);
-                }
-            }
-        }
-
         $query = "SELECT COUNT(id) FROM {$serendipity['dbPrefix']}references
                                   WHERE entry_id = ". (int)$id ."
                                     AND link = '" . serendipity_db_escape_string($locations[$i]) . "'
@@ -574,7 +563,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             echo $row . "<br />\n";
         }
 
-        if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
+        if ($row[0] > 0 && isset($saved_references[$locations[$i]])) {
             if ($debug) echo "Found references for $id, skipping rest<br />\n";
             continue;
         }
@@ -604,25 +593,24 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
     $duplicate_check = array();
     for ($i = 0; $i < $j; ++$i) {
-        $i_link     = serendipity_db_escape_string(strip_tags($names[$i]));
         $i_location = serendipity_db_escape_string($locations[$i]);
 
         // No link with same description AND same text should be inserted.
-        if (isset($duplicate_check[$i_location . $i_link])) {
+        if (isset($duplicate_check[$i_location])) {
             continue;
         }
 
-        if (isset($current_references[$locations[$i] . $names[$i]])) {
+        if (isset($current_references[$locations[$i]])) {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (id, entry_id, name, link) VALUES(";
-            $query .= (int)$current_references[$locations[$i] . $names[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
+            $query .= (int)$current_references[$locations[$i]]['id'] . ", " . (int)$id . ", '$title', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if ($debug && is_string($ins)) {
                 echo $ins . "<br />\n";
             }
-            $duplicate_check[$locations[$i] . $names[$i]] = true;
+            $duplicate_check[$locations[$i]] = true;
         } else {
             $query = "INSERT INTO {$serendipity['dbPrefix']}references (entry_id, name, link) VALUES(";
-            $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
+            $query .= (int)$id . ", '$title', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if ($debug && is_string($ins)) {
                 echo $ins . "<br />\n";
@@ -630,15 +618,15 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
             $old_references[] = array(
                 'id'       => serendipity_db_insert_id('references', 'id'),
-                'name'     => $i_link,
+                'name'     => '',
                 'link'     => $i_location,
                 'entry_id' => (int)$id
             );
-            $duplicate_check[$i_location . $i_link] = true;
+            $duplicate_check[$i_location] = true;
         }
 
         if ($debug) {
-            echo "Current lookup for {$locations[$i]}{$names[$i]} is <pre>" . print_r($current_references[$locations[$i] . $names[$i]], true) . "</pre><br />\n";
+            echo "Current lookup for {$locations[$i]} is <pre>" . print_r($current_references[$locations[$i]], true) . "</pre><br />\n";
             echo $query . "<br />\n";
         }
     }
