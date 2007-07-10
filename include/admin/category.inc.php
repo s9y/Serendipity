@@ -274,8 +274,8 @@ if ( $serendipity['GET']['adminAction'] == 'view' ) {
                 foreach ( $categories as $category ) {
 ?>
             <tr>
-                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png') ?>" border="0" alt="<?php echo EDIT ?>" /></a></td>
-                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png') ?>" border="0" alt="<?php echo DELETE ?>" /></a></td>
+                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png') ?>" border="0" title="<?php echo $category['categoryid']; ?>" alt="<?php echo EDIT ?>" /></a></td>
+                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png') ?>" border="0" title="<?php echo $category['categoryid']; ?>" alt="<?php echo DELETE ?>" /></a></td>
                 <td width="16"><?php if ( !empty($category['category_icon']) ) {?><img src="<?php echo serendipity_getTemplateFile('admin/img/thumbnail.png') ?>" alt="" /><?php } else echo '&nbsp;' ?></td>
                 <td width="300" style="padding-left: <?php echo ($category['depth']*15)+20 ?>px"><img src="<?php echo serendipity_getTemplateFile('admin/img/folder.png') ?>" style="vertical-align: bottom;"> <?php echo htmlspecialchars($category['category_name']) ?></td>
                 <td><?php echo htmlspecialchars($category['category_description']) ?></td>
