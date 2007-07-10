@@ -555,7 +555,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
 
         }
 
-        echo '<a href="'. $serendipity['serendipityHTTPPath'] .'">' . RECENT . '</a><br />' . "\n";
+        echo '<a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a><br />' . "\n";
         echo '<a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a>'. "\n";
     }
 }
