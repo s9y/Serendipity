@@ -484,6 +484,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     global $serendipity;
     static $old_references = array();
     static $saved_references = array();
+    static $saved_urls = array();
     static $debug = false;
 
     if ($dry_run) {
@@ -499,6 +500,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             foreach($old_references AS $idx => $old_reference) {
                 // We need the current reference ID to restore it later.
                 $saved_references[$old_reference['link'] . $old_reference['name']] = $current_references[$old_reference['link'] . $old_reference['name']] = $old_reference;
+                $saved_urls[$old_reference['link']] = true;
             }
         }
         if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
@@ -587,10 +589,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
             if (!$dry_run) {
-                if ($debug) echo "Enabling autodiscovery.<br />\n";
-                serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
+                if (!isset($saved_urls[$locations[$i]])){
+                    if ($debug) echo "Enabling autodiscovery.<br />\n";
+                    serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
+                }
+                elseif ($debug) echo "This reference was already used before in $id and therefore will not be trackbacked again.<br/>\n";
             } elseif ($debug) {
-                echo "Skipping autodiscovery<br />\n";
+                echo "Dry run: Skipping autodiscovery<br />\n";
             }
             $checked_locations[$locations[$i]] = true; // Store trackbacked link so that no further trackbacks will be sent to the same link
         } elseif ($debug) {
