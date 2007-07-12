@@ -420,13 +420,15 @@ function serendipity_issueAutologin($array) {
     }
     $package = base64_encode($package);
 
-    $rnd = md5(time() . $_SERVER['REMOTE_ADDR']);
+    $rnd = md5(uniqid(time(), true) . $_SERVER['REMOTE_ADDR']);
 
-    // Delete possible current cookie
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options WHERE okey = '" . serendipity_db_escape_string($serendipity['COOKIE']['author_information']) . "'");
+    // Delete possible current cookie. Also delete any autologin keys that smell like 3-week-old, dead fish.
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options 
+                                WHERE okey = 'l_" . serendipity_db_escape_string($serendipity['COOKIE']['author_information']) . "'
+                                   OR (okey LIKE 'l_%' AND name < " . (time() - 1814400) . ")");
 
     // Issue new autologin cookie
-    serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('" . time() . "', '" . serendipity_db_escape_string($package) . "', '" . $rnd . "')");
+    serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('" . time() . "', '" . serendipity_db_escape_string($package) . "', 'l_" . $rnd . "')");
     serendipity_setCookie('author_information', $rnd);
 }
 
@@ -438,7 +440,7 @@ function serendipity_checkAutologin($ident, $iv) {
     global $serendipity;
 
     // Fetch login data from DB
-    $autologin =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options WHERE okey = '" . serendipity_db_escape_string($ident) . "' LIMIT 1", true, 'assoc');
+    $autologin =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options WHERE okey = 'l_" . serendipity_db_escape_string($ident) . "' LIMIT 1", true, 'assoc');
     if (!is_array($autologin)) {
         return false;
     }
