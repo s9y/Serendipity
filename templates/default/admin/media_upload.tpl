@@ -183,7 +183,7 @@ function fillInput(source, target) {ldelim}
         <table id="foreign_upload" class="image_add_foreign">
             <tr>
                 <td nowrap="nowrap">{$CONST.ENTER_MEDIA_URL}</td>
-                <td><input type="text" id="imageurl" name="serendipity[imageurl]"
+                <td><input class="input_textbox" type="text" id="imageurl" name="serendipity[imageurl]"
                          onchange="checkInputs()"
                           value=""
                            size="40" /></td>
@@ -208,7 +208,7 @@ function fillInput(source, target) {ldelim}
         <table style="margin-top: 35px" id="upload_table" class="image_add_local">
             <tr>
                 <td nowrap='nowrap'>{$CONST.ENTER_MEDIA_UPLOAD}</td>
-                <td><input id="userfile_1" name="serendipity[userfile][1]"
+                <td><input class="input_file" id="userfile_1" name="serendipity[userfile][1]"
                          onchange="checkInputs();"
                            type="file" /></td>
             </tr>
@@ -219,7 +219,7 @@ function fillInput(source, target) {ldelim}
 
             <tr>
                 <td>{$CONST.SAVE_FILE_AS}</td>
-                <td><input type="text" id="target_filename_1" name="serendipity[target_filename][1]" value="" size="40" /></td>
+                <td><input class="input_textbox" type="text" id="target_filename_1" name="serendipity[target_filename][1]" value="" size="40" /></td>
             </tr>
 
             <tr>
@@ -249,13 +249,13 @@ function fillInput(source, target) {ldelim}
 
         <div style="text-align: center; margin-top: 15px; margin-bottom: 15px">
             <script type="text/javascript">
-                document.write('<input class="serendipityPrettyButton" type="button" value="{$CONST.IMAGE_MORE_INPUT}" onclick="hideForeign(); addField()"' + '/><br' + '/>');
+                document.write('<input class="serendipityPrettyButton input_button" type="button" value="{$CONST.IMAGE_MORE_INPUT}" onclick="hideForeign(); addField()"' + '/><br' + '/>');
             </script>
             <input type="hidden" name="serendipity[all_authors]" value="true" checked="checked" id="all_authors" />
             <br />
-            <input onclick="checkInputs();" type="submit" value="{$CONST.GO}" class="serendipityPrettyButton" />
+            <input onclick="checkInputs();" type="submit" value="{$CONST.GO}" class="serendipityPrettyButton input_button" />
             - {$CONST.WORD_OR} -
-            <input onclick="checkInputs();" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}" class="serendipityPrettyButton" />
+            <input onclick="checkInputs();" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}" class="serendipityPrettyButton input_button" />
         </div>
     </div>
     <div class="image_add_note">{$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</div>

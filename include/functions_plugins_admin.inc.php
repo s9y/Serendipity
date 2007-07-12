@@ -210,7 +210,7 @@ function show_plugins($event_only = false, $sidebars = null)
                     <a href="#" id="grab<?php echo $css_key; ?>"></a>
                 </div>
                 <?php if ($is_plugin_editable) { ?>
-                    <input type="checkbox" name="serendipity[plugin_to_remove][]" value="<?php echo $plugin_data['name']; ?>" />
+                    <input class="input_checkbox" type="checkbox" name="serendipity[plugin_to_remove][]" value="<?php echo $plugin_data['name']; ?>" />
                 <?php } ?>
 
                 <?php if ( $can_configure ) { ?>
@@ -245,8 +245,8 @@ function show_plugins($event_only = false, $sidebars = null)
         </table>
         <br />
         <div>
-            <input type="submit" name="REMOVE" title="<?php echo DELETE; ?>"  value="<?php echo REMOVE_TICKED_PLUGINS; ?>" class="serendipityPrettyButton" />
-            <input type="submit" name="SAVE"   title="<?php echo SAVE_CHANGES_TO_LAYOUT; ?>" value="<?php echo SAVE; ?>" class="serendipityPrettyButton" />
+            <input type="submit" name="REMOVE" title="<?php echo DELETE; ?>"  value="<?php echo REMOVE_TICKED_PLUGINS; ?>" class="serendipityPrettyButton input_button" />
+            <input type="submit" name="SAVE"   title="<?php echo SAVE_CHANGES_TO_LAYOUT; ?>" value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
         </div>
 </form>
 <?php
@@ -519,7 +519,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 <?php
                     }
 ?>
-                    <input class="direction_<?php echo $lang_direction; ?>" type="radio" id="serendipity_plugin_<?php echo $id; ?>" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $radio_value; ?>" <?php echo $checked ?> title="<?php echo htmlspecialchars($radio['desc'][$radio_index]); ?>" />
+                    <input class="direction_<?php echo $lang_direction; ?> input_radio" type="radio" id="serendipity_plugin_<?php echo $id; ?>" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $radio_value; ?>" <?php echo $checked ?> title="<?php echo htmlspecialchars($radio['desc'][$radio_index]); ?>" />
                         <label for="serendipity_plugin_<?php echo $id; ?>"><?php echo htmlspecialchars($radio['desc'][$radio_index]); ?></label>
 <?php
                     if ($counter == $per_row) {
@@ -544,7 +544,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             </td>
             <td style="border-bottom: 1px solid #000000" width="250">
                 <div>
-                    <input class="direction_<?php echo $lang_direction; ?>" type="text" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $hvalue; ?>" size="30" />
+                    <input class="direction_<?php echo $lang_direction; ?> input_textbox" type="text" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $hvalue; ?>" size="30" />
                 </div>
             </td>
         </tr>
@@ -633,7 +633,7 @@ EOS;
     <div id="{$config_item}_preview" style="background-image: url($value); width:$preview_width; height: $preview_height;">&nbsp;</div>
   </td>
   <td style="border-bottom: 1px solid #000000">
-    <input type="text" id="serendipity[$postKey][$config_item]" name="serendipity[$postKey][$config_item]" value="$value" onchange="change_preview('$config_item')"/>
+    <input class="input_textbox" type="text" id="serendipity[$postKey][$config_item]" name="serendipity[$postKey][$config_item]" value="$value" onchange="change_preview('$config_item')"/>
     <br /><a href="#" onclick="choose_media('serendipity[$postKey][$config_item]')">$media_link_text</a>
   </td>
 </tr>
@@ -666,7 +666,7 @@ EOS;
     if ($showSubmit) {
 ?>
     <div style="padding-left: 20px">
-        <input type="submit" name="SAVECONF" value="<?php echo SAVE; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVECONF" value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
     </div>
 <?php
     }

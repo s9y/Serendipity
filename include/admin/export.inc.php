@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 
 ?>
   <div>
-    <a href="<?php echo $serendipity['baseURL'] ?>rss.php?version=2.0&all=1" class="serendipityPrettyButton"><?php echo EXPORT_FEED; ?></a>
+    <a href="<?php echo $serendipity['baseURL'] ?>rss.php?version=2.0&all=1" class="serendipityPrettyButton input_button"><?php echo EXPORT_FEED; ?></a>
   </div>
 <?php
 /* vim: set sts=4 ts=4 expandtab : */

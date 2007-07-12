@@ -19,6 +19,9 @@ Version 1.3 ()
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Backend templating changes to insert more classes to input fields
+      etc (Don Chambers)
+
     * Fix invalid pingback XML code, by Slim
     
     * (beta2) Fix when saving personal configuration the userlevel and 

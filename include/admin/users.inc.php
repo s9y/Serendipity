@@ -202,8 +202,8 @@ if (is_array($users)) {
 <?php /* TODO: Add username to list once tom figures out how to fix uneven rowstyles */ ?>
         <td><img src="<?php echo $img ?>" alt="" style="border: 0px none ; vertical-align: bottom; display: inline;" /> <?php echo htmlspecialchars($user['realname']); ?></td>
         <td width="100" align="center"><?php echo $user['userlevel']; ?></td>
-        <td width="200" align="right"> [<a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform"><?php echo EDIT ?></a>]
-                                     - [<a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>"><?php echo DELETE ?></a>]</td>
+        <td width="200" align="right"> <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . $user['realname']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . $user['realname']; ?>" /><?php echo EDIT ?></a>
+                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>" title="<?php echo DELETE . " " . $user['realname']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . $user['realname']; ?>" /><?php echo DELETE ?></a></td>
     </tr>
 </table>
 </div>
@@ -218,7 +218,7 @@ if (is_array($users)) {
         <tr>
             <td colspan="3" align="right">
                 <form action="?serendipity[adminModule]=users" method="post">
-                    <input type="submit" name="NEW"   value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton" />
+                    <input type="submit" name="NEW"   value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton input_button" />
                 </form>
             </td>
         </tr>
@@ -277,9 +277,9 @@ if (!empty($serendipity['GET']['userid'])) {
 serendipity_printConfigTemplate($config, $from, true, false, true, true);
 
 if ($serendipity['GET']['adminAction'] == 'edit') { ?>
-        <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
 <?php } else { ?>
-        <input type="submit" name="SAVE_NEW" value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVE_NEW" value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton input_button" />
 <?php } ?>
 
     </div>
@@ -298,8 +298,8 @@ if ($serendipity['GET']['adminAction'] == 'edit') { ?>
         <br /><br />
         <?php echo serendipity_setFormToken(); ?>
         <input type="hidden" name="serendipity[user]" value="<?php echo $serendipity['GET']['userid']; ?>" />
-        <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton" />
-        <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton input_button" />
+        <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton input_button" />
     </div>
 </form>
 <?php

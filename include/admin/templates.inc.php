@@ -108,7 +108,7 @@ if (is_array($template_config)) {
 
 echo '<h3>' . SELECT_TEMPLATE . '</h3>';
 ?>
-<br /><br />
+<br />
 <?php
     $i = 0;
     $stack = array();
@@ -135,8 +135,9 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
         } elseif (!empty($info['preview_fullsizeURL'])) {
             $preview .= '<a href="' . $info['preview_fullsizeURL'] . '" target="_blank">';
             $preview_link = true;
-        } else {
-            #echo "No large preview";
+
+#        } else {
+#            echo "No large preview";
         }
 
         if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
@@ -162,13 +163,13 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
 
         /* TODO: Smarty versioncheck */
 
-        $class = (($i % 2) ? 'even' : 'uneven');
+        $class = (($i % 2 == 0) ? 'even' : 'uneven');
 
 ?>
 <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo $class ?>">
     <table width="100%" id="serendipity_theme_<?php echo $theme; ?>">
         <tr>
-            <td colspan="2"><strong><?php echo $info['name']; ?></strong></td>
+            <td colspan="2"><span class="serendipityTemplateSelectName"><strong><?php echo $info['name']; ?></strong></span></td>
             <td valign="middle" align="center" width="70" rowspan="2">
 <?php
     if ( $serendipity['template'] != $theme ) {
@@ -176,7 +177,7 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
 ?>
             <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]=<?php echo $theme . $info['customURI']; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/install_now' . $info['customIcon'] . '.png') ?>" alt="<?php echo SET_AS_TEMPLATE ?>" title="<?php echo SET_AS_TEMPLATE ?>" border="0" /></a>
 <?php   } else { ?>
-        <span style="color: #cccccc"><?php echo sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements)); ?></span>
+        <span class="serendipityTemplateSelectUnmetRequirements">style="color: #cccccc"><?php echo sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements)); ?></span>
 <?php
         }
     } ?>
@@ -186,9 +187,9 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
         <tr>
             <td width="100" style="padding-left: 10px"><?php echo $preview; ?></td>
             <td valign="top">
-                <?php echo AUTHOR;       ?>: <?php echo $info['author'];?><br />
-                <?php echo LAST_UPDATED; ?>: <?php echo $info['date'];  ?><br />
-                <?php echo CUSTOM_ADMIN_INTERFACE; ?>: <?php echo $info['custom_admin_interface']; ?><br />
+                <span class="serendipityTemplateSelectDetails"><?php echo AUTHOR;       ?>: <?php echo $info['author'];?></span><br />
+                <span class="serendipityTemplateSelectDetails"><?php echo LAST_UPDATED; ?>: <?php echo $info['date'];  ?></span><br />
+                <span class="serendipityTemplateSelectDetails"><?php echo CUSTOM_ADMIN_INTERFACE; ?>: <?php echo $info['custom_admin_interface']; ?></span><br />
             </td>
         </tr>
     </table>

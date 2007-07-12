@@ -29,8 +29,6 @@ $output = array(
 
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
 
-echo $output['welcome'];
-
 if ($output['show_links']) {
     echo '<div class="' . $output['links_css'] . '">' . "\n";
     echo '<p>' . $output['links_title'] . '</p>' . "\n";
@@ -41,5 +39,5 @@ if ($output['show_links']) {
     echo '</ul>' . "\n";
     echo '</div>' . "\n";
 }
-
+echo '<span class="serendipityWelcomeBack">' . $output['welcome'] . '</span>';
 echo $output['more'];

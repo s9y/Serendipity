@@ -379,20 +379,21 @@ function serendipity_replaceEmbeddedConfigVars ($s) {
  * @param   string  The default value of the configuration item
  * @return null
  */
+
 function serendipity_guessInput($type, $name, $value='', $default='') {
     global $serendipity;
 
     switch ($type) {
         case 'bool':
             $value = serendipity_get_bool($value);
-            echo '<input id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
+            echo '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
             echo (($value == true) ? 'checked="checked"' : ''). ' /><label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>&nbsp;';
-            echo '<input id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
+            echo '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
             echo (($value == true) ? '' : 'checked="checked"'). ' /><label for="radio_cfg_' . $name . '_no"> ' . NO . '</label>';
             break;
 
         case 'protected':
-            echo '<input type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            echo '<input class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
 
         case 'multilist':
@@ -429,7 +430,7 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             break;
 
         case 'file':
-            echo '<input type="file" size="30" name="' . $name . '" />';
+            echo '<input class="input_file" type="file" size="30" name="' . $name . '" />';
             break;
 
         case 'textarea':
@@ -437,7 +438,7 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             break;
 
         default:
-            echo '<input type="text" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            echo '<input class="input_textbox" type="text" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
     }
 }
@@ -605,7 +606,7 @@ function showConfigAll(count) {
 
     if (!$noForm) {
 ?>
-        <input type="submit" value="<?php echo CHECK_N_SAVE; ?>" class="serendipityPrettyButton" />
+        <input type="submit" value="<?php echo CHECK_N_SAVE; ?>" class="serendipityPrettyButton input_button" />
     </div>
 </form>
 <?php

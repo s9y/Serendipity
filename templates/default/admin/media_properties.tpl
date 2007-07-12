@@ -12,7 +12,7 @@
 {$MEDIA_ITEMS}
 
 {if $media.is_edit}
-    <br /><input type="submit" name="submit" value="{$CONST.GO}" class="serendipityPrettyButton" />
+    <br /><input type="submit" name="submit" value="{$CONST.GO}" class="serendipityPrettyButton input_button" />
     </div>
 </form>
 {/if}
