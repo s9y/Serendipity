@@ -92,12 +92,8 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total, $order
         }
     }
 
-    foreach($keywords AS $i => $keyword) {
-        $keywords[$i] = serendipity_db_escape_string($keyword);
-    }
-
     if (count($keywords) > 0) {
-        $cond['parts']['keywords'] = " AND (mk.property IN ('" . implode("', '", $keywords) . "'))\n";
+        $cond['parts']['keywords'] = " AND (mk.property IN ('" . serendipity_db_implode("', '", $keywords, 'string') . "'))\n";
         $cond['joinparts']['keywords'] = true;
     }
 
@@ -239,7 +235,7 @@ function serendipity_fetchImageFromDatabase($id, $mode = 'read') {
 
     if (is_array($id)) {
         $cond = array(
-            'and' => "WHERE i.id IN (" . implode(',', $id) . ")"
+            'and' => "WHERE i.id IN (" . serendipity_db_implode(',', $id) . ")"
         );
         $single   = false;
         $assocKey = 'id';
@@ -2476,7 +2472,7 @@ function &serendipity_fetchMediaProperties($id) {
 
     $sql = "SELECT mediaid, property, property_group, property_subgroup, value
               FROM {$serendipity['dbPrefix']}mediaproperties
-             WHERE mediaid IN (" . (is_array($id) ? implode(',', $id) : (int)$id) . ")";
+             WHERE mediaid IN (" . (is_array($id) ? serendipity_db_implode(',', $id) : (int)$id) . ")";
     $rows  = serendipity_db_query($sql, false, 'assoc');
     $props = array();
     if (is_array($rows)) {

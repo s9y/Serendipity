@@ -19,6 +19,12 @@ Version 1.3 ()
 Version 1.2 ()
 ------------------------------------------------------------------------
 
+    * Stronger autologin cookie encryption, prevent mixup with template
+      options (which could make foreign users delete your configured
+      template option keys). Also use new serendpity_db_implode()
+      function for a safer API on image handling. 
+      All hail Stefan Esser. :)
+
     * Backend templating changes to insert more classes to input fields
       etc (Don Chambers)
 

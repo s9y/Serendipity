@@ -152,4 +152,31 @@ function serendipity_db_get_interval($val, $ival = 900) {
     }
 }
 
+/**
+ * Operates on an array to prepare it for SQL usage.
+ *
+ * @access public
+ * @param   string Concatenation character
+ * @param   array  Input array
+ * @param   string How to convert (int: Only numbers, string: serendipity_db_escape_String)
+ * @return  string Imploded string
+ */
+function serendipity_db_implode($string, &$array, $type = 'int') {
+    $new_array = array();
+    if (!is_array($array)) {
+        return '';
+    }
+    
+    foreach($array AS $idx => $key) {
+        if ($type == 'int') {
+            $new_array[$idx] = (int)$key;
+        } else {
+            $new_array[$idx] = serendipity_db_escape_string($key);
+        }
+    }
+
+    $string = implode($string, $new_array);
+    return $string;
+}
+
 /* vim: set sts=4 ts=4 expandtab : */
