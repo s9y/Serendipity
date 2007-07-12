@@ -248,9 +248,6 @@ global $serendipity;
         return; // Trackbacks to HTTPS URLs can only be performed with openssl activated
     }
 
-    echo '<div>&#8226; '. sprintf(TRACKBACK_CHECKING, $loc) .'</div>';
-    flush();
-
     if (empty($u['port'])) {
         $u['port'] = 80;
         $port      = '';
@@ -265,9 +262,12 @@ global $serendipity;
     $parsed_loc = $u['scheme'] . '://' . $u['host'] . $port . $u['path'];
 
     if (preg_match('@\.(jpe?g|aiff?|gif|png|pdf|doc|rtf|wave?|mp2|mp4|mpe?g3|mpe?g4|divx|xvid|bz2|mpe?g|avi|mp3|xl?|ppt|pps|xslt?|xsd|zip|tar|t?gz|swf|rm|ram?|exe|mov|qt|midi?|qcp|emf|wmf|snd|pmg|w?bmp|gcd|mms|ogg|ogm|rv|wmv|wma|jad|3g?|jar)$@i', $u['path'])) {
-        echo '<div>&#8226; ' . TRACKBACK_NO_DATA . '</div>';
+        // echo '<div>&#8226; ' . TRACKBACK_NO_DATA . '</div>';
         return;
     }
+
+    echo '<div>&#8226; '. sprintf(TRACKBACK_CHECKING, $loc) .'</div>';
+    flush();
 
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'GET');
@@ -572,6 +572,10 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $row = serendipity_db_query($query, true, 'num');
         if ($debug && is_string($row)) {
             echo $row . "<br />\n";
+        }
+        
+        if (empty($names[$i])) {
+            $names[$i] = $locations[$i];
         }
 
         if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
