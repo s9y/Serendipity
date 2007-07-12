@@ -138,7 +138,7 @@ function serendipity_drawList() {
 ?>              </select>
             </td>
             <td valign="top" width="80"><?php echo CONTENT ?></td>
-            <td valign="top"><input size="10" type="text" name="serendipity[filter][body]" value="<?php echo (isset($serendipity['GET']['filter']['body']) ? htmlspecialchars($serendipity['GET']['filter']['body']) : '') ?>" /></td>
+            <td valign="top"><input class="input_textbox" size="10" type="text" name="serendipity[filter][body]" value="<?php echo (isset($serendipity['GET']['filter']['body']) ? htmlspecialchars($serendipity['GET']['filter']['body']) : '') ?>" /></td>
         </tr>
         <tr>
             <td class="serendipity_admin_filters_headline" colspan="6"><strong><?php echo SORT_ORDER ?></strong></td>
@@ -175,7 +175,7 @@ function serendipity_drawList() {
             </td>
         </tr>
         <tr>
-            <td align="right" colspan="6"><input type="submit" name="go" value="<?php echo GO ?>" class="serendipityPrettyButton" /></td>
+            <td align="right" colspan="6"><input type="submit" name="go" value="<?php echo GO ?>" class="serendipityPrettyButton input_button" /></td>
         </tr>
     </table>
     </form>
@@ -251,7 +251,9 @@ function serendipity_drawList() {
                 $entry_pre .= ' ' . DRAFT . ': ';
             }
 ?>
-            <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo ($rows % 2 ? 'even' : 'uneven'); ?>">
+<!--            <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo ($rows % 2 ? 'even' : 'uneven'); ?>"> -->
+            <div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo ($rows % 2) ? 'even' : 'uneven'; ?>">
+
                 <table width="100%" cellspacing="0" cellpadding="3">
                     <tr>
                         <td>
@@ -287,7 +289,7 @@ function serendipity_drawList() {
                             <?php } ?>
                             <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo EDIT . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT; ?>" /><?php echo EDIT ?></a>
                             <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]=<?php echo $entry['id']; ?>" title="<?php echo DELETE . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE; ?>" /><?php echo DELETE ?></a>
-                            <input type="checkbox" name="serendipity[multiDelete][]" value="<?php echo $entry['id']; ?>" />
+                            <input class="input_checkbox" type="checkbox" name="serendipity[multiDelete][]" value="<?php echo $entry['id']; ?>" />
                         </td>
                     </tr>
                 </table>
@@ -313,8 +315,8 @@ function serendipity_drawList() {
         <table class="serendipity_admin_list" cellpadding="0" width="100%">
             <tr>
                 <td align="right">
-                    <input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton" />
-                    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_ENTRIES ?>" class="serendipityPrettyButton" />
+                    <input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton input_button" />
+                    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_ENTRIES ?>" class="serendipityPrettyButton input_button" />
                 </td>
             </tr>
         </table>
@@ -328,7 +330,7 @@ function serendipity_drawList() {
                                 <input type="hidden" name="serendipity[action]"      value="admin"      />
                                 <input type="hidden" name="serendipity[adminModule]" value="entries"    />
                                 <input type="hidden" name="serendipity[adminAction]" value="editSelect" />
-                            <?php echo EDIT_ENTRY ?>: #<input type="text" size="3" name="serendipity[id]" /> <input type="submit" name="serendipity[editSubmit]" value="<?php echo GO ?>" class="serendipityPrettyButton" />
+                            <?php echo EDIT_ENTRY ?>: #<input class="input_textbox" type="text" size="3" name="serendipity[id]" /> <input type="submit" name="serendipity[editSubmit]" value="<?php echo GO ?>" class="serendipityPrettyButton input_button" />
                             </form>
                         </td>
                     </tr>
@@ -540,9 +542,9 @@ switch($serendipity['GET']['adminAction']) {
 <br />
 <br />
 <div>
-    <a href="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]); ?>" class="serendipityPrettyButton"><?php echo NOT_REALLY; ?></a>
+    <a href="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]); ?>" class="serendipityPrettyButton input_button"><?php echo NOT_REALLY; ?></a>
     <?php echo str_repeat('&nbsp;', 10); ?>
-    <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton"><?php echo DUMP_IT; ?></a>
+    <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton input_button"><?php echo DUMP_IT; ?></a>
 </div>
 <?php
         break;
@@ -564,9 +566,9 @@ switch($serendipity['GET']['adminAction']) {
 <br />
 <br />
 <div>
-    <a href="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]); ?>" class="serendipityPrettyButton"><?php echo NOT_REALLY; ?></a>
+    <a href="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]); ?>" class="serendipityPrettyButton input_button "><?php echo NOT_REALLY; ?></a>
     <?php echo str_repeat('&nbsp;', 10); ?>
-    <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton"><?php echo DUMP_IT; ?></a>
+    <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton input_button"><?php echo DUMP_IT; ?></a>
 </div>
 <?php
         break;

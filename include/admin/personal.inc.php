@@ -105,7 +105,7 @@ $from['groups'] = serendipity_getGroups($serendipity['authorid']);
 unset($from['password']);
 serendipity_printConfigTemplate($template, $from, true, false);
 ?>
-    <div align="right"><input type="submit" name="SAVE"   value="<?php echo SAVE; ?>" /></div>
+    <div align="right"><input class="serendipityPrettyButton input_button" type="submit" name="SAVE"   value="<?php echo SAVE; ?>" /></div>
 </form>
 
 <?php

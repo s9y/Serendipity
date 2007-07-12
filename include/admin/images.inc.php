@@ -95,9 +95,9 @@ switch ($serendipity['GET']['adminAction']) {
 ?>
     <form method="get" id="delete_image">
         <div>
-              <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton"><?php echo DUMP_IT ?></a>
+              <a href="<?php echo $newLoc; ?>" class="serendipityPrettyButton input_button"><?php echo DUMP_IT ?></a>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href="<?php echo $abortLoc; ?>" class="serendipityPrettyButton"><?php echo ABORT_NOW ?></a>
+              <a href="<?php echo $abortLoc; ?>" class="serendipityPrettyButton input_button"><?php echo ABORT_NOW ?></a>
         </div>
     </form>
 <?php
@@ -115,7 +115,7 @@ switch ($serendipity['GET']['adminAction']) {
         if (!serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file)) {
     ?>
         <br />
-        <input type="button" onclick="history.go(-1);" value="<?php echo BACK; ?>" class="serendipityPrettyButton" />
+        <input type="button" onclick="history.go(-1);" value="<?php echo BACK; ?>" class="serendipityPrettyButton input_button" />
     <?php
                 break;
         }
@@ -413,7 +413,7 @@ switch ($serendipity['GET']['adminAction']) {
     <table cellpadding="5">
         <tr>
             <td width="100"><strong><?php echo NAME ?></strong></td>
-            <td><input type="text" name="serendipity[newDir]" value="<?php echo $use_dir; ?>" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[newDir]" value="<?php echo $use_dir; ?>" /></td>
         </tr>
         <tr>
             <td><label for="read_authors"><?php echo PERM_READ; ?></label></td>
@@ -444,14 +444,14 @@ switch ($serendipity['GET']['adminAction']) {
         </tr>
         <tr>
             <td>
-                <input id="setchild" value="true" type="checkbox" name="serendipity[update_children]" <?php echo (!empty($serendipity['POST']['update_children']) == 'on' ? 'checked="checked"' : ''); ?> /> <label for="setchild"><?php echo PERM_SET_CHILD; ?></label>
+                <input class="input_checkbox" id="setchild" value="true" type="checkbox" name="serendipity[update_children]" <?php echo (!empty($serendipity['POST']['update_children']) == 'on' ? 'checked="checked"' : ''); ?> /> <label for="setchild"><?php echo PERM_SET_CHILD; ?></label>
             <td>
         </tr>
     </table>
     <br />
     <br />
     <div align="center">
-        <input name="serendipity[save]" value="<?php echo SAVE ?>" class="serendipityPrettyButton" type="submit" />
+        <input name="serendipity[save]" value="<?php echo SAVE ?>" class="serendipityPrettyButton input_button" type="submit" />
     </div>
     </form>
 
@@ -476,14 +476,14 @@ switch ($serendipity['GET']['adminAction']) {
             <td><?php echo basename(htmlspecialchars($serendipity['GET']['dir'])) ?></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="checkbox" name="serendipity[nuke]" value="true" style="margin: 0"> <?php echo FORCE_DELETE ?></td>
+            <td colspan="2"><input class="input_checkbox" type="checkbox" name="serendipity[nuke]" value="true" style="margin: 0"> <?php echo FORCE_DELETE ?></td>
         </tr>
     </table>
     <br />
     <br />
     <div align="center">
         <?php echo sprintf(CONFIRM_DELETE_DIRECTORY, htmlspecialchars($serendipity['GET']['dir'])) ?><br />
-        <input name="SAVE" value="<?php echo DELETE_DIRECTORY ?>" class="serendipityPrettyButton" type="submit" />
+        <input name="SAVE" value="<?php echo DELETE_DIRECTORY ?>" class="serendipityPrettyButton input_button" type="submit" />
     </div>
     </form>
 
@@ -551,7 +551,7 @@ switch ($serendipity['GET']['adminAction']) {
     <table cellpadding="5">
         <tr>
             <td><?php echo NAME ?></td>
-            <td><input type="text" name="serendipity[name]" value="" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[name]" value="" /></td>
         </tr>
         <tr>
             <td><?php echo PARENT_DIRECTORY ?></td>
@@ -564,7 +564,7 @@ switch ($serendipity['GET']['adminAction']) {
             </td>
         </tr>
     </table>
-    <div><input name="SAVE" value="<?php echo CREATE_DIRECTORY ?>" class="serendipityPrettyButton" type="submit"></div>
+    <div><input name="SAVE" value="<?php echo CREATE_DIRECTORY ?>" class="serendipityPrettyButton input_button" type="submit"></div>
     </form>
 <?php
         break;
@@ -600,7 +600,7 @@ switch ($serendipity['GET']['adminAction']) {
         <?php } ?>
     </table>
     <br />
-    <div><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate" class="serendipityPrettyButton"><?php echo CREATE_NEW_DIRECTORY ?></a></div>
+    <div><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate" class="serendipityPrettyButton input_button"><?php echo CREATE_NEW_DIRECTORY ?></a></div>
 
 <?php
         break;
@@ -756,14 +756,14 @@ switch ($serendipity['GET']['adminAction']) {
             <input type="hidden" name="serendipity[adminAction]" value="scale" />
             <input type="hidden" name="serendipity[fid]"         value="<?php echo $serendipity["GET"]["fid"]; ?>" />
 
-            <input type="text" size="4" name="serendipity[width]"   onchange="rescale('width' , value);" value="<?php echo $s[0]; ?>" />x
-            <input type="text" size="4" name="serendipity[height]"  onchange="rescale('height', value);" value="<?php echo $s[1]; ?>" />
+            <input class="input_textbox" type="text" size="4" name="serendipity[width]"   onchange="rescale('width' , value);" value="<?php echo $s[0]; ?>" />x
+            <input class="input_textbox" type="text" size="4" name="serendipity[height]"  onchange="rescale('height', value);" value="<?php echo $s[1]; ?>" />
             <br />
 
             <?php echo KEEP_PROPORTIONS; ?>:
             <!-- <input type='button' value='preview'>-->
-            <input type="checkbox" name="auto"  checked="checked" /><br />
-            <input type="button"   name="scale" value="<?php echo IMAGE_RESIZE; ?>" onclick="if (confirm('<?php echo REALLY_SCALE_IMAGE; ?>')) document.serendipityScaleForm.submit();" class="serendipityPrettyButton" />
+            <input class="input_checkbox" type="checkbox" name="auto"  checked="checked" /><br />
+            <input type="button"   name="scale" value="<?php echo IMAGE_RESIZE; ?>" onclick="if (confirm('<?php echo REALLY_SCALE_IMAGE; ?>')) document.serendipityScaleForm.submit();" class="serendipityPrettyButton input_button" />
         </div>
     </form>
 

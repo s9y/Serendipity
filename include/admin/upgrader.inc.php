@@ -370,10 +370,10 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
     <hr noshade="noshade">
 <?php if ($taskCount > 0 || sizeof($sqlfiles) > 0) { ?>
         <strong><?php echo SERENDIPITY_UPGRADER_PROCEED_QUESTION ?></strong>
-        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton"><?php echo SERENDIPITY_UPGRADER_PROCEED_DOIT ?></a> <?php if ($showAbort) { ?><a href="<?php echo $abortLoc; ?>" class="serendipityPrettyButton"><?php echo SERENDIPITY_UPGRADER_PROCEED_ABORT ?></a><?php } ?>
+        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton input_button"><?php echo SERENDIPITY_UPGRADER_PROCEED_DOIT ?></a> <?php if ($showAbort) { ?><a href="<?php echo $abortLoc; ?>" class="serendipityPrettyButton"><?php echo SERENDIPITY_UPGRADER_PROCEED_ABORT ?></a><?php } ?>
 <?php } else { ?>
         <strong><?php echo SERENDIPITY_UPGRADER_NO_UPGRADES ?></strong>
-        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton"><?php echo SERENDIPITY_UPGRADER_CONSIDER_DONE ?></a>
+        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton input_button"><?php echo SERENDIPITY_UPGRADER_CONSIDER_DONE ?></a>
 <?php }
     }
 }

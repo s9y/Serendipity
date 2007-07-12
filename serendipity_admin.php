@@ -327,57 +327,58 @@ if ($use_installer) {
     serendipity_plugin_api::hook_event('backend_login_page', $out);
 ?>
                 <td colspan="2" class="serendipityAdminContent">
-                    <div align="center"><?php echo WELCOME_TO_ADMIN ?><br /><?php echo PLEASE_ENTER_CREDENTIALS ?></div>
+                    <div id="serendipityAdminWelcome" align="center"><h2><?php echo WELCOME_TO_ADMIN ?></h2>
+                    <h3><?php echo PLEASE_ENTER_CREDENTIALS ?></h3></div>
                     <?php echo $out['header']; ?>
-                    <br />
                     <?php if ($post_action != '' && !$is_logged_in ) { ?>
                     <div class="serendipityAdminMsgError"><?php echo WRONG_USERNAME_OR_PASSWORD; ?></div>
                     <?php } ?>
                     <form action="serendipity_admin.php" method="post">
                         <input type="hidden" name="serendipity[action]" value="admin" />
-                        <table cellspacing="10" cellpadding="0" border="0" align="center">
+                        <table id="serendipityAdminCredentials" cellspacing="10" cellpadding="0" border="0" align="center">
                             <tr>
                                 <td><?php echo USERNAME ?></td>
-                                <td><input type="text" name="serendipity[user]" /></td>
+                                <td><input class="input_textbox" type="text" name="serendipity[user]" /></td>
                             </tr>
                             <tr>
                                 <td><?php echo PASSWORD ?></td>
-                                <td><input type="password" name="serendipity[pass]" /></td>
+                                <td><input class="input_textbox" type="password" name="serendipity[pass]" /></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><input id="autologin" type="checkbox" name="serendipity[auto]" /><label for="autologin"> <?php echo AUTOMATIC_LOGIN ?></label></td>
+                                <td colspan="2"><input class="input_checkbox" id="autologin" type="checkbox" name="serendipity[auto]" /><label for="autologin"> <?php echo AUTOMATIC_LOGIN ?></label></td>
                             </tr>
                             <tr>
-                                <td colspan="2" align="right"><input type="submit" name="submit" value="<?php echo LOGIN ?> &gt;" class="serendipityPrettyButton" /></td>
+                                <td colspan="2" align="right"><input type="submit" name="submit" value="<?php echo LOGIN ?> &gt;" class="input_button serendipityPrettyButton" /></td>
                             </tr>
                             <?php echo $out['table']; ?>
                         </table>
                     </form>
                     <?php echo $out['footer']; ?>
-                    <a href="<?php echo $serendipity['serendipityHTTPPath']; ?>"><?php echo BACK_TO_BLOG;?></a>
+                    <p id="serendipityBackToBlog"><a href="<?php echo $serendipity['serendipityHTTPPath']; ?>"><?php echo BACK_TO_BLOG;?></a></p>
 <?php
 } else {
     if (!$no_sidebar) { ?>
                 <td id="serendipitySideBar">
-                    <ul class="serendipitySideBarMenu">
-                        <li><a href="serendipity_admin.php"><?php echo ADMIN_FRONTPAGE; ?></a></li>
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuMain">
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks"><a href="serendipity_admin.php"><?php echo ADMIN_FRONTPAGE; ?></a></li>
 <?php if (serendipity_checkPermission('personalConfiguration')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=personal"><?php echo PERSONAL_SETTINGS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks"><a href="serendipity_admin.php?serendipity[adminModule]=personal"><?php echo PERSONAL_SETTINGS; ?></a></li>
 <?php } ?>
                     </ul>
-                    <br />
-                    <ul class="serendipitySideBarMenu">
+                    <br class="serendipitySideBarMenuSpacer" />
+
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuEntry">
 <?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
-                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN_ENTRIES ?></li>
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuEntryLinks"><?php echo ADMIN_ENTRIES ?></li>
 <?php if (serendipity_checkPermission('adminEntries')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new"><?php echo NEW_ENTRY; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect"><?php echo EDIT_ENTRIES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new"><?php echo NEW_ENTRY; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect"><?php echo EDIT_ENTRIES; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminComments')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=comments"><?php echo COMMENTS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="serendipity_admin.php?serendipity[adminModule]=comments"><?php echo COMMENTS; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminCategories')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view"><?php echo CATEGORIES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view"><?php echo CATEGORIES; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries', $serendipity); ?>
@@ -386,58 +387,59 @@ if ($use_installer) {
                     </ul>
 
 <?php if (serendipity_checkPermission('adminImages')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo MEDIA; ?></li>
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuMedia">
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuMediaLinks"><?php echo MEDIA; ?></li>
 <?php if (serendipity_checkPermission('adminImagesAdd')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect"><?php echo ADD_MEDIA; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect"><?php echo ADD_MEDIA; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminImagesView')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media"><?php echo MEDIA_LIBRARY; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media"><?php echo MEDIA_LIBRARY; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminImagesDirectories')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect"><?php echo MANAGE_DIRECTORIES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect"><?php echo MANAGE_DIRECTORIES; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminImagesSync')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('<?php echo WARNING_THIS_BLAHBLAH; ?>');"><?php echo CREATE_THUMBS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('<?php echo WARNING_THIS_BLAHBLAH; ?>');"><?php echo CREATE_THUMBS; ?></a></li>
 <?php } ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries_images', $serendipity); ?>
                     </ul>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminTemplates') || serendipity_checkPermission('adminPlugins')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo APPEARANCE; ?></li>
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuAppearance">
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuAppearanceLinks"><?php echo APPEARANCE; ?></li>
 <?php if (serendipity_checkPermission('adminTemplates')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=templates"><?php echo MANAGE_STYLES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuAppearanceLinks"><a href="serendipity_admin.php?serendipity[adminModule]=templates"><?php echo MANAGE_STYLES; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminPlugins')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins"><?php echo CONFIGURE_PLUGINS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuAppearanceLinks"><a href="serendipity_admin.php?serendipity[adminModule]=plugins"><?php echo CONFIGURE_PLUGINS; ?></a></li>
 <?php } ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin_appearance', $serendipity); ?>
                     </ul>
 <?php } ?>
 <?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration') || serendipity_checkPermission('adminUsers') || serendipity_checkPermission('adminUsersGroups') || serendipity_checkPermission('adminImport')) { ?>
-                    <ul class="serendipitySideBarMenu">
-                        <li class="serendipitySideBarMenuHead"><?php echo ADMIN; ?></li>
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuUserManagement">
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuUserManagementLinks"><?php echo ADMIN; ?></li>
 <?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration"><?php echo CONFIGURATION; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=configuration"><?php echo CONFIGURATION; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminUsers')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=users"><?php echo MANAGE_USERS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=users"><?php echo MANAGE_USERS; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminUsersGroups')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=groups"><?php echo MANAGE_GROUPS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=groups"><?php echo MANAGE_GROUPS; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminImport')) { ?>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=import"><?php echo IMPORT_ENTRIES; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=export"><?php echo EXPORT_ENTRIES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=import"><?php echo IMPORT_ENTRIES; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=export"><?php echo EXPORT_ENTRIES; ?></a></li>
 <?php } ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin', $serendipity); ?>
                     </ul>
 <?php } ?>
-                    <br />
-                    <ul class="serendipitySideBarMenu">
-                        <li><a href="<?php echo $serendipity['baseURL']; ?>"><?php echo BACK_TO_BLOG; ?></a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=logout"><?php echo LOGOUT; ?></a></li>
+                    <br class="serendipitySideBarMenuSpacer" />
+
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuLogout">
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks"><a href="<?php echo $serendipity['baseURL']; ?>"><?php echo BACK_TO_BLOG; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks"><a href="serendipity_admin.php?serendipity[adminModule]=logout"><?php echo LOGOUT; ?></a></li>
                     </ul>
 
                 </td>
@@ -450,7 +452,9 @@ if ($use_installer) {
                 </td>
             </tr>
         </table>
-        <br />
+        <div class="serendipityAdminFooterSpacer">
+            <br />
+        </div>
         <div id="serendipityAdminFooter">
             <?php 
             if ($serendipity['expose_s9y']) {

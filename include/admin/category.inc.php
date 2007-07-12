@@ -136,7 +136,7 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
     }
 ?>
             </select>
-            <input type="submit" name="REMOVE" value="<?php echo GO ?>" class="serendipityPrettyButton">
+            <input type="submit" name="REMOVE" value="<?php echo GO ?>" class="serendipityPrettyButton input_button">
         </form>
 <?php
         }
@@ -169,21 +169,21 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
 <table cellpadding="5" width="100%">
     <tr>
         <td><?php echo NAME; ?></td>
-        <td><input type="text" name="serendipity[cat][name]" value="<?php echo isset($this_cat['category_name']) ? htmlspecialchars($this_cat['category_name']) : ''; ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[cat][name]" value="<?php echo isset($this_cat['category_name']) ? htmlspecialchars($this_cat['category_name']) : ''; ?>" /></td>
         <td rowspan="5" align="center" valign="middle" width="200" style="border: 1px solid #ccc"><img src="<?php echo isset($this_cat['category_icon']) ? $this_cat['category_icon'] : '' ?>" id="imagepreview" <?php echo empty($this_cat['category_icon']) ? 'style="display: none"' : '' ?> /></td>
     </tr>
 
     <tr>
         <td><?php echo DESCRIPTION; ?></td>
-        <td><input type="text" name="serendipity[cat][description]" value="<?php echo isset($this_cat['category_description']) ? htmlspecialchars($this_cat['category_description']) : ''; ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[cat][description]" value="<?php echo isset($this_cat['category_description']) ? htmlspecialchars($this_cat['category_description']) : ''; ?>" /></td>
     </tr>
 
     <tr>
         <td><?php echo IMAGE; ?></td>
         <td>
             <script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
-            <input type="text" id="img_icon" name="serendipity[cat][icon]" value="<?php echo isset($this_cat['category_icon']) ? htmlspecialchars($this_cat['category_icon']) : ''; ?>" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';" />
-            <script type="text/javascript" language="JavaScript">document.write('<input type="button" name="insImage" value="<?php echo IMAGE ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=img_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />');</script><!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
+            <input class="input_textbox" type="text" id="img_icon" name="serendipity[cat][icon]" value="<?php echo isset($this_cat['category_icon']) ? htmlspecialchars($this_cat['category_icon']) : ''; ?>" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';" />
+            <script type="text/javascript" language="JavaScript">document.write('<input type="button" name="insImage" value="<?php echo IMAGE ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=img_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton input_button" />');</script><!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
         </td>
     </tr>
 
@@ -238,14 +238,14 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
     <tr>
         <td><?php echo CATEGORY_HIDE_SUB ?><br /><em><?php echo CATEGORY_HIDE_SUB_DESC; ?></em></td>
         <td valign="top">
-            <input type="radio" name="serendipity[cat][hide_sub]" value="0" <?php echo ($this_cat['hide_sub'] == 0 ? 'checked="checked"' : ''); ?> id="hide_sub_no" /> <label for="hide_sub_no"><?php echo NO; ?></label>
-            <input type="radio" name="serendipity[cat][hide_sub]" value="1" <?php echo ($this_cat['hide_sub'] == 1 ? 'checked="checked"' : ''); ?> id="hide_sub_yes" /> <label for="hide_sub_yes"><?php echo YES; ?></label>
+            <input class="input_radio" type="radio" name="serendipity[cat][hide_sub]" value="0" <?php echo ($this_cat['hide_sub'] == 0 ? 'checked="checked"' : ''); ?> id="hide_sub_no" /> <label for="hide_sub_no"><?php echo NO; ?></label>
+            <input class="input_radio" type="radio" name="serendipity[cat][hide_sub]" value="1" <?php echo ($this_cat['hide_sub'] == 1 ? 'checked="checked"' : ''); ?> id="hide_sub_yes" /> <label for="hide_sub_yes"><?php echo YES; ?></label>
         </td>
     </tr>
 
     <?php serendipity_plugin_api::hook_event('backend_category_showForm', $cid, $this_cat); ?>
 </table>
-    <div><input type="submit" name="SAVE" value="<?php echo $save; ?>" class="serendipityPrettyButton" /></div>
+    <div><input type="submit" name="SAVE" value="<?php echo $save; ?>" class="serendipityPrettyButton input_button" /></div>
 </form>
 <?php } ?>
 
@@ -274,8 +274,8 @@ if ( $serendipity['GET']['adminAction'] == 'view' ) {
                 foreach ( $categories as $category ) {
 ?>
             <tr>
-                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png') ?>" border="0" title="<?php echo $category['categoryid']; ?>" alt="<?php echo EDIT ?>" /></a></td>
-                <td width="16"><a href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png') ?>" border="0" title="<?php echo $category['categoryid']; ?>" alt="<?php echo DELETE ?>" /></a></td>
+                <td width="16"><a title="<?php echo EDIT ?>" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png') ?>" border="0" alt="<?php echo EDIT ?>" /></a></td>
+                <td width="16"><a title="<?php echo DELETE ?>" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]=<?php echo $category['categoryid'] ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png') ?>" border="0" alt="<?php echo DELETE ?>" /></a></td>
                 <td width="16"><?php if ( !empty($category['category_icon']) ) {?><img src="<?php echo serendipity_getTemplateFile('admin/img/thumbnail.png') ?>" alt="" /><?php } else echo '&nbsp;' ?></td>
                 <td width="300" style="padding-left: <?php echo ($category['depth']*15)+20 ?>px"><img src="<?php echo serendipity_getTemplateFile('admin/img/folder.png') ?>" style="vertical-align: bottom;"> <?php echo htmlspecialchars($category['category_name']) ?></td>
                 <td><?php echo htmlspecialchars($category['category_description']) ?></td>
@@ -285,7 +285,7 @@ if ( $serendipity['GET']['adminAction'] == 'view' ) {
             } ?>
             <tr>
                 <td colspan="6" align="right">
-                    <a href="?serendipity[adminModule]=category&serendipity[adminAction]=new" class="serendipityPrettyButton"><?php echo CREATE_NEW_CAT ?></a>
+                    <a href="?serendipity[adminModule]=category&serendipity[adminAction]=new" class="serendipityPrettyButton input_button"><?php echo CREATE_NEW_CAT ?></a>
                 </td>
             </tr>
 </table>

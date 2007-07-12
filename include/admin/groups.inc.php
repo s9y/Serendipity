@@ -57,8 +57,8 @@ foreach($groups as $group) {
 <table width="100%">
     <tr>
         <td><?php echo htmlspecialchars($group['name']); ?></td>
-        <td width="200" align="right"> [<a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]=<?php echo $group['id'] ?>"><?php echo EDIT ?></a>]
-                                     - [<a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]=<?php echo $group['id'] ?>"><?php echo DELETE ?></a>]</td>
+        <td width="200" align="right"> <a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo EDIT . " " . $group['name']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . $group['name']; ?>" /><?php echo EDIT ?></a>
+                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo DELETE . " " . $group['name']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . $group['name']; ?>" /><?php echo DELETE ?></a></td>
     </tr>
 </table>
 </div>
@@ -71,7 +71,7 @@ foreach($groups as $group) {
         <tr>
             <td colspan="3" align="right">
                 <form action="?serendipity[adminModule]=groups" method="post">
-                    <input type="submit" name="NEW"   value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton" />
+                    <input type="submit" name="NEW"   value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton input_button" />
                 </form>
             </td>
         </tr>
@@ -103,11 +103,10 @@ if ($serendipity['GET']['adminAction'] == 'edit') {
 }
 ?>
     </h3>
-
 <table>
     <tr>
         <td><?php echo NAME; ?></td>
-        <td><input type="text" name="serendipity[name]" value="<?php echo htmlspecialchars($from['name']); ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[name]" value="<?php echo htmlspecialchars($from['name']); ?>" /></td>
     </tr>
     <tr>
         <td valign="top"><?php echo USERCONF_GROUPS; ?></td>
@@ -172,7 +171,7 @@ foreach($allusers AS $user) {
         } else {
             echo "<tr>\n";
             echo "<td>$indent<label for=\"" . htmlspecialchars($perm) . "\">" . htmlspecialchars($permname) . "</label></td>\n";
-            echo '<td>' . $indentB . '<input id="' . htmlspecialchars($perm) . '" type="checkbox" name="serendipity[' . htmlspecialchars($perm) . ']" value="true" ' . $selected . ' /></td>' . "\n";
+            echo '<td>' . $indentB . '<input class="input_checkbox" id="' . htmlspecialchars($perm) . '" type="checkbox" name="serendipity[' . htmlspecialchars($perm) . ']" value="true" ' . $selected . ' /></td>' . "\n";
             echo "</tr>\n";
         }
     }
@@ -233,11 +232,11 @@ foreach($allusers AS $user) {
 
 <?php
 if ($serendipity['GET']['adminAction'] == 'edit') { ?>
-        <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
         <?php echo ' - ' . WORD_OR . ' - ' ?>
-        <input type="submit" name="SAVE_NEW"   value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVE_NEW"   value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton input_button" />
 <?php } else { ?>
-        <input type="submit" name="SAVE_NEW" value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="SAVE_NEW" value="<?php echo CREATE_NEW_GROUP; ?>" class="serendipityPrettyButton input_button" />
 <?php } ?>
 
     </div>
@@ -252,8 +251,8 @@ if ($serendipity['GET']['adminAction'] == 'edit') { ?>
         <br /><br />
         <?php echo serendipity_setFormToken(); ?>
         <input type="hidden" name="serendipity[group]" value="<?php echo $serendipity['GET']['group']; ?>" />
-        <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton" />
-        <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton" />
+        <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton input_button" />
+        <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton input_button" />
     </div>
 </form>
 <?php

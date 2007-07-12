@@ -445,7 +445,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE, null, array('simpleInstall'));
     serendipity_printConfigTemplate($config, $from, true, false, false);
 ?>
-    <div align="center"><input name="submit" type="submit" value="<?php echo COMPLETE_INSTALLATION ?>" class="serendipityPrettyButton"></div>
+    <div align="center"><input name="submit" type="submit" value="<?php echo COMPLETE_INSTALLATION ?>" class="serendipityPrettyButton input_button"></div>
 </form>
 
 <?php } elseif ( $serendipity['GET']['step'] == '2b' ) { ?>
@@ -456,7 +456,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
     serendipity_printConfigTemplate($config, $from, true, false, false);
 ?>
-    <div align="center"><input name="submit" type="submit" value="<?php echo COMPLETE_INSTALLATION ?>" class="serendipityPrettyButton"></div>
+    <div align="center"><input name="submit" type="submit" value="<?php echo COMPLETE_INSTALLATION ?>" class="serendipityPrettyButton input_button"></div>
 </form>
 
 <?php } elseif ( (int)$serendipity['GET']['step'] == 3 ) { ?>

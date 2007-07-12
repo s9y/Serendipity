@@ -239,7 +239,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                     <option value="ALL" <?php echo ($serendipity['GET']['only_group'] == 'ALL' ? 'selected="selected"' : ''); ?>><?php echo ALL_CATEGORIES; ?>
                     <option value="UPGRADE" <?php echo ($serendipity['GET']['only_group'] == 'UPGRADE' ? 'selected="selected"' : ''); ?>><?php echo WORD_NEW; ?>
                 </select>
-                <input type="submit" value="<?php echo GO; ?>" />
+                <input class="serendipityPrettyButton input_button" type="submit" value="<?php echo GO; ?>" />
             </form>
         </td>
     </tr>

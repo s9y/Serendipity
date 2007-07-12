@@ -220,7 +220,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
     </tr>
     <?php } ?>
     <tr>
-      <td colspan="2" align="right"><input type="submit" value="<?php echo IMPORT_NOW ?>" class="serendipityPrettyButton"></td>
+      <td colspan="2" align="right"><input type="submit" value="<?php echo IMPORT_NOW ?>" class="serendipityPrettyButton input_button"></td>
     </tr>
   </table>
 </form>
@@ -261,7 +261,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
     <option value="<?php echo $v ?>"><?php echo $k ?></option>
     <?php } ?>
   </select>
-  <input type="submit" value="<?php echo GO ?>" class="serendipityPrettyButton">
+  <input type="submit" value="<?php echo GO ?>" class="serendipityPrettyButton input_button">
 </form>
 <?php
 }

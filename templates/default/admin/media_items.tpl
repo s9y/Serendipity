@@ -74,7 +74,7 @@
             {elseif $prop_content.type == 'readonly'}
                 <div>{$prop_content.val|@escape}</div>
             {elseif $prop_content.type == 'input'}
-                <input id="mediaProperty{$prop_fieldname}" type="text" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" value="{$prop_content.val|@escape}" />
+                <input class="input_textbox" id="mediaProperty{$prop_fieldname}" type="text" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" value="{$prop_content.val|@escape}" />
             {/if}
             </div>
         {/foreach}
@@ -92,7 +92,7 @@
         {/if}
             {if $file.is_image}
             <div>
-                <br /><a target="_blank" class="serendipityPrettyButton" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
+                <br /><a target="_blank" class="serendipityPrettyButton input_button" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
             </div>
             {/if}
         </div>
@@ -105,7 +105,7 @@
                 {foreach from=$keyword_cells key="keyword_cell" item="keyword"}
                     <td>
                     {if $keyword.name}
-                        <input id="mediaKeyword{$keyword.name}{$mediakey}" type="checkbox" name="serendipity[mediaKeywords][{$mediakey}][{$keyword.name}]" value="true" {if $keyword.selected}checked="checked"{/if} />&nbsp;<label for="mediaKeyword{$keyword.name}{$mediakey}">{$keyword.name}</label>
+                        <input class="input_checkbox" id="mediaKeyword{$keyword.name}{$mediakey}" type="checkbox" name="serendipity[mediaKeywords][{$mediakey}][{$keyword.name}]" value="true" {if $keyword.selected}checked="checked"{/if} />&nbsp;<label for="mediaKeyword{$keyword.name}{$mediakey}">{$keyword.name}</label>
                     {else}
                         &nbsp;
                     {/if}

@@ -278,19 +278,19 @@ function highlightComment(id, checkvalue) {
     </tr>
     <tr>
         <td><?php echo AUTHOR ?>:</td>
-        <td><input type="text" name="serendipity[filter][author]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['author']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['author']) ?>" /></td>
         <td><?php echo EMAIL ?>:</td>
-        <td><input type="text" name="serendipity[filter][email]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['email']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][email]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['email']) ?>" /></td>
         <td><?php echo URL ?>:</td>
-        <td><input type="text" name="serendipity[filter][url]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['url']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][url]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['url']) ?>" /></td>
     </tr>
     <tr>
         <td>IP:</td>
-        <td><input type="text" name="serendipity[filter][ip]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['ip']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][ip]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['ip']) ?>" /></td>
         <td><?php echo CONTENT ?>:</td>
-        <td><input type="text" name="serendipity[filter][body]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['body']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][body]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['body']) ?>" /></td>
         <td><?php echo REFERER ?>:</td>
-        <td><input type="text" name="serendipity[filter][referer]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['referer']) ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[filter][referer]" size="15" value="<?php echo htmlspecialchars($serendipity['GET']['filter']['referer']) ?>" /></td>
     </tr>
     <tr>
         <td><?php echo COMMENTS; ?>:</td>
@@ -317,7 +317,7 @@ function highlightComment(id, checkvalue) {
             </select></td>
     </tr>
     <tr>
-        <td colspan="6" align="right"><input type="submit" name="submit" value=" - <?php echo GO ?> - " class="serendipityPrettyButton" /> <?php serendipity_plugin_api::hook_event('backend_comments_top', $sql); ?></td>
+        <td colspan="6" align="right"><input type="submit" name="submit" value=" - <?php echo GO ?> - " class="serendipityPrettyButton input_button" /> <?php serendipity_plugin_api::hook_event('backend_comments_top', $sql); ?></td>
     </tr>
 </table>
 </form>
@@ -399,7 +399,7 @@ foreach ($sql as $rs) {
     <td class="serendipity_admin_list_item <?php echo $class ?>" id="comment_<?php echo $comment['id'] ?>">
         <table width="100%" cellspacing="0" cellpadding="3" border="0">
             <tr>
-                <td rowspan="3" width="20" align="center"><input type="checkbox" name="serendipity[delete][<?php echo $comment['id'] ?>]" value="<?php echo $comment['entry_id'] ?>" onclick="highlightComment('comment_<?php echo $comment['id'] ?>', this.checked)" tabindex="<?php echo $i ?>" /></td>
+                <td rowspan="3" width="20" align="center"><input class="input_checkbox" type="checkbox" name="serendipity[delete][<?php echo $comment['id'] ?>]" value="<?php echo $comment['entry_id'] ?>" onclick="highlightComment('comment_<?php echo $comment['id'] ?>', this.checked)" tabindex="<?php echo $i ?>" /></td>
                 <td width="40%"><strong><?php echo AUTHOR ?></strong>: <?php echo htmlspecialchars($comment['author']) . $comment['action_author']; ?></td>
                 <td><strong><?php echo EMAIL ?></strong>:
                     <?php
@@ -471,7 +471,7 @@ foreach ($sql as $rs) {
 </tr>
 <?php } ?>
 <tr>
-    <td><input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton" /> <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" onclick="return confirm('<?php echo COMMENTS_DELETE_CONFIRM ?>')" tabindex="<?php echo ($i+1) ?>" class="serendipityPrettyButton" /></td>
+    <td><input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton input_button" /> <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" onclick="return confirm('<?php echo COMMENTS_DELETE_CONFIRM ?>')" tabindex="<?php echo ($i+1) ?>" class="serendipityPrettyButton input_button" /></td>
 </tr>
 </table>
 </form>

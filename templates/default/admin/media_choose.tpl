@@ -206,29 +206,32 @@
                     {else}
                     <b>{$CONST.IMAGE_SIZE}:</b>
                     <br />
-                    <input id="radio_link_no" type="radio"  name="serendipity[linkThumbnail]" value="no" {'linkThumbnail'|@ifRemember:'no':true} /><label for="radio_link_no">{$CONST.I_WANT_THUMB}</label><br />
-                    <input id="radio_link_yes" type="radio" name="serendipity[linkThumbnail]" value="yes" {'linkThumbnail'|@ifRemember:'yes'} /><label for="radio_link_yes">{$CONST.I_WANT_BIG_IMAGE}</label><br />
+                    <input class="input_radio" id="radio_link_no" type="radio"  name="serendipity[linkThumbnail]" value="no" {'linkThumbnail'|@ifRemember:'no':true} /><label for="radio_link_no">{$CONST.I_WANT_THUMB}</label><br />
+                    <input class="input_radio" id="radio_link_yes" type="radio" name="serendipity[linkThumbnail]" value="yes" {'linkThumbnail'|@ifRemember:'yes'} /><label for="radio_link_yes">{$CONST.I_WANT_BIG_IMAGE}</label><br />
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagesize' eventData=$media.file}
                     <br />
 
                     {if NOT $media.filename_only}
                     <b>{$CONST.IMAGE_ALIGNMENT}:</b>
                     <br />
-                    <input type="radio" name="serendipity[align]" {'align'|@ifRemember:''}           value="" />     <img src="{serendipity_getFile file='img/img_align_top.png'}"   vspace="5" /><br />
-                    <input type="radio" name="serendipity[align]" {'align'|@ifRemember:'left':true}  value="left" /> <img src="{serendipity_getFile file='img/img_align_left.png'}"  vspace="5" /><br />
-                    <input type="radio" name="serendipity[align]" {'align'|@ifRemember:'right'}      value="right" /><img src="{serendipity_getFile file='img/img_align_right.png'}" vspace="5" /><br />
+
+                    <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:''}           value="" />     <img src="{serendipity_getFile file='img/img_align_top.png'}"   vspace="5" /><br />
+                    <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:'left':true}  value="left" /> <img src="{serendipity_getFile file='img/img_align_left.png'}"  vspace="5" /><br />
+                    <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:'right'}      value="right" /><img src="{serendipity_getFile file='img/img_align_right.png'}" vspace="5" /><br />
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagealign' eventData=$media.file}
                     <br />
 
                     <b>{$CONST.IMAGE_AS_A_LINK}:</b>
                     <br />
-                    <input id="radio_islink_yes" type="radio" name="serendipity[isLink]" value="yes" {'isLink'|@ifRemember:'yes':true} /><label for="radio_islink_yes"> {$CONST.I_WANT_NO_LINK}</label><br />
-                    <input id="radio_islink_no"  type="radio" name="serendipity[isLink]" value="no"  {'isLink'|@ifRemember:'no'} /><label for="radio_islink_no"> {$CONST.I_WANT_IT_TO_LINK}</label>
+
+                    <input class="input_radio" type="radio" id="radio_islink_yes" type="radio" name="serendipity[isLink]" value="yes" {'isLink'|@ifRemember:'yes':true} /><label for="radio_islink_yes"> {$CONST.I_WANT_NO_LINK}</label><br />
+                    <input class="input_radio" type="radio" id="radio_islink_no"  type="radio" name="serendipity[isLink]" value="no"  {'isLink'|@ifRemember:'no'} /><label for="radio_islink_no"> {$CONST.I_WANT_IT_TO_LINK}</label>
                     {if $media.file.hotlink}
-                    <input type="text"  name="serendipity[url]" size="30" value="{$media.file.path}" /><br />
+
+                    <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.path}" /><br />
                     {else}
                         {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_link_url' eventData=$media.file.links}
-                        <input type="text"  name="serendipity[url]" size="30" value="{$media.file.links.imagelinkurl}" /><br />
+                        <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.links.imagelinkurl}" /><br />
                     {/if}
 
                     <label id="select_image_target">{$CONST.MEDIA_TARGET}</label>
@@ -251,9 +254,8 @@
                     {/if}
 
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}
-
-                    <input type="button" value="{$CONST.BACK}" onclick="history.go(-1);" />
-                    <input type="button" value="{$CONST.DONE}" onclick="rememberOptions(); {$media.file.origfinishJSFunction}" />
+                    <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.BACK}" onclick="history.go(-1);" />
+                    <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.DONE}" onclick="rememberOptions(); {$media.file.origfinishJSFunction}" />
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' eventData=$media.file}
                 {/if}
             </div>
@@ -294,8 +296,8 @@
 
     <div id="footerContainer">
         <div id="footer">
-            <p><a id="newdirlink" target="media" class="serendipityPrettyButton" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a></p>
-            <p><a id="managedirlink" target="media" class="serendipityPrettyButton" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a></p>
+            <p><a id="newdirlink" target="media" class="serendipityPrettyButton input_button" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a></p>
+            <p><a id="managedirlink" target="media" class="serendipityPrettyButton input_button" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a></p>
         </div>
     </div>
 
