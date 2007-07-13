@@ -400,7 +400,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
         $propbag->add('version',       '1.0');
-        $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count','hide_zero_count'));
+        $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count', 'hide_zero_count'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -564,9 +564,9 @@ class serendipity_archives_plugin extends serendipity_plugin {
                 }
             }
 
-            if (!$hidden_by_zero_count)
+            if (!$hidden_by_zero_count) {
                 echo '<a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a><br />' . "\n";
-
+            }
         }
 
         echo '<a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a><br />' . "\n";

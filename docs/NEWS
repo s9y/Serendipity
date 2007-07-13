@@ -3,9 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
-	* The archive sidebar plugin shiped with s9y now displays numbers
-	  of articles correctly for month, catergories and so on, even
-	  if multicategory articles are used. (brockhaus)
+    * The archive sidebar plugin shiped with s9y now displays numbers
+      of articles correctly for month, catergories and so on, even
+      if multicategory articles are used. (brockhaus)
 
     * Trackbacks to links without a description now get properly
       evaluated. (brockhaus)

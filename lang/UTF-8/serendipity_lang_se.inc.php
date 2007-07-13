@@ -894,3 +894,4 @@
 @define('PINGBACK_SENT', 'Pingback successful');
 @define('PINGBACK_FAILED', 'Pingback failed: %s');
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
+@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
