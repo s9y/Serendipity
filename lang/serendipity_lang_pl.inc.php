@@ -893,3 +893,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('PINGBACK_SENT', 'Pingback successful');
 @define('PINGBACK_FAILED', 'Pingback failed: %s');
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
+@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');

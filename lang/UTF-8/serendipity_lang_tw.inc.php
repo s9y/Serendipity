@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tw.inc.php 1655 2007-03-22 11:41:57Z garvinhicking $
+<?php # $Id: serendipity_lang_tw.inc.php 1754 2007-07-06 10:17:47Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
@@ -898,3 +898,4 @@ $i18n_unknown = 'tw';
 @define('PINGBACK_SENT', 'Pingback successful');
 @define('PINGBACK_FAILED', 'Pingback failed: %s');
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
+@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');

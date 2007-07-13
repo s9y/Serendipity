@@ -204,9 +204,11 @@ function &serendipity_fetchEntryCategories($entryid) {
  * @param   string      Can contain a SQL statement on which keys to select. Plugins can also set this, pay attention!
  * @param   string      Can contain a SQL statement on how to group the query. Plugins can also set this, pay attention!
  * @param   string      If set to "array", the array of entries will be returned. "flat-array" will only return the articles without their entryproperties. "single" will only return a 1-dimensional array. "query" will only return the used SQL.
+ * @param   bool        Should an SQL-join be made to the AUTHORS DB table?
+ * @param   bool        Should an SQL-join be made to the CATEGORIES DB table?
  * @return  array       Holds the super-array of all entries with all additional information
  */
-function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array',$joinauthors = true, $joincategories =true) {
+function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true) {
     global $serendipity;
 
     $cond = array();
@@ -377,16 +379,18 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $serendipity['fullCountQuery'] = "
                 FROM
                     {$serendipity['dbPrefix']}entries AS e";
-    if ($joinauthors)
-        $serendipity['fullCountQuery'] .="
+    if ($joinauthors) {
+        $serendipity['fullCountQuery'] .= "
                     LEFT JOIN {$serendipity['dbPrefix']}authors a
                         ON e.authorid = a.authorid";
-    if ($joincategories)
-        $serendipity['fullCountQuery'] .="
+    }
+    if ($joincategories) {
+        $serendipity['fullCountQuery'] .= "
                     LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
                         ON e.id = ec.entryid
                     LEFT JOIN {$serendipity['dbPrefix']}category c
                         ON ec.categoryid = c.categoryid";
+    }
     $serendipity['fullCountQuery'] .="
                     {$cond['joins']}
                     {$cond['and']}";
