@@ -174,7 +174,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
               WHERE co.type LIKE '" . $type . "' AND co.entry_id > 0 $and
               $group
               ORDER BY
-                    " . ($where != '' ? '' : 'co.id') . " " . ($where == '' && $order != '' ? ',' : '') . ($order != '' ? $order : '') . "
+                    " . ($where != '' ? '' : 'co.id') . " " . ($order != '' ? $order : '') . "
                     $limit";
     $comments = serendipity_db_query($query, false, 'assoc');
 
@@ -328,6 +328,7 @@ function serendipity_printCommentsByAuthor() {
         $sql_where = " AND co.author = '" . serendipity_db_escape_string($serendipity['GET']['viewCommentAuthor']) . "'";
         $group_by  = "GROUP BY co.author";
     } else {
+        $sql_where = " AND 1"; // Required fake 'where' condition
         $group_by  = "";
     }
 
