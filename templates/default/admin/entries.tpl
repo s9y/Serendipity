@@ -107,11 +107,11 @@
                 document.write('<input type="button" class="serendipityPrettyButton input_button" value="Link" onclick="serendipity_insLink(document.forms[\'serendipityEntry\'][\'serendipity[body]\'])">');
             </script>
             {/if}
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
         </td>
         {else}
         <td colspan="2"><b>{$CONST.ENTRY_BODY}</b></td>
-        <td>{serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}</td>
+        <td>{serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}</td>
         {/if}
     </tr>
     {*** ENTRY TOOLBAR END ***}

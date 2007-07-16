@@ -10,26 +10,29 @@ Version 1.3 ()
     * Trackbacks to links without a description now get properly
       evaluated. (brockhaus)
 
-    * serendipity_plugin_comments now also supports Favatars in 
-      combination with serendipity_event_gravatar instead of
-      Gravatars only. (brockhaus)
-
     * Full pingback support, fallback trackback method for WordPress
       blogs. (brockhaus)
 
 Version 1.2 ()
 ------------------------------------------------------------------------
 
-    * Stronger autologin cookie encryption, prevent mixup with template
-      options (which could make foreign users delete your configured
-      template option keys). Also use new serendpity_db_implode()
+    * (beta4) serendipity_plugin_comments now also supports Favatars in 
+      combination with serendipity_event_gravatar instead of
+      Gravatars only. (brockhaus)
+
+    * (beta4) Fix wrong event hook for entry manager to display toolbar
+      for the main body area.
+
+    * (beta4) Stronger autologin cookie encryption, prevent mixup with 
+      template options (which could make foreign users delete your 
+      configured template option keys). Also use new serendpity_db_implode()
       function for a safer API on image handling. 
       All hail Stefan Esser. :)
 
-    * Backend templating changes to insert more classes to input fields
+    * (beta4) Backend templating changes to insert more classes to input fields
       etc (Don Chambers)
 
-    * Fix invalid pingback XML code, by Slim
+    * (beta4) Fix invalid pingback XML code, by Slim
     
     * (beta2) Fix when saving personal configuration the userlevel and 
       "no_create" flags where not properly saved, thanks to PHPaws!
