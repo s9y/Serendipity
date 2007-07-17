@@ -32,6 +32,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
     }
 
     function introspect_config_item($name, &$propbag) {
+        global $serendipity;
         switch($name) {
             case 'title':
                 $propbag->add('type',        'string');
@@ -122,11 +123,13 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $number_from_sw = $this->get_config('number_from');
         $randomize      = ($this->get_config('randomize') == "yes") ? true : false ;
 
-        $sql_join   = '';
-        $sql_where  = '';
+        $sql_condition = array();
+        $sql_condition['joins'] = '';
+        $sql_condition['and']   = '';
         if ($category != 'none') {
-            $sql_join = 'LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid
-                         LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid';
+            $sql_condition['joins'] .= 
+                'LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid
+                 LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid';
                          
             $sql_categories = array();
             if (is_numeric($category)) {
@@ -140,7 +143,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                 $category_parts[] = "\n" . implode(' AND ', serendipity_fetchCategoryRange($sql_category));
             }
 
-            $sql_where = ' AND (c.category_left BETWEEN ' . implode(' OR c.category_left BETWEEN ', $category_parts) . ')';
+            $sql_condition['and'] .= ' AND (c.category_left BETWEEN ' . implode(' OR c.category_left BETWEEN ', $category_parts) . ')';
         }
 
         if (!$number || !is_numeric($number) || $number < 1) {
@@ -170,15 +173,18 @@ class serendipity_plugin_recententries extends serendipity_plugin {
             $sql_order = "ORDER BY timestamp DESC ";
         }
 
+        $sql_condition['and'] = "AND timestamp <= " . time();
+        serendipity_ACL_SQL($sql_condition, $category == 'none');
+
         $entries_query = "SELECT DISTINCT id,
                                 title,
                                 timestamp
-                           FROM {$serendipity['dbPrefix']}entries
-                                $sql_join
-                          WHERE isdraft = 'false' AND timestamp <= " . time() . "
-                                $sql_where
+                           FROM {$serendipity['dbPrefix']}entries AS e
+                                {$sql_condition['joins']}
+                          WHERE isdraft = 'false' {$sql_condition['and']}
                                 $sql_order
                                 $sql_number";
+        
         $entries = serendipity_db_query($entries_query);
 
         if (isset($entries) && is_array($entries)) {
