@@ -50,9 +50,9 @@ class serendipity_event_weblogping extends serendipity_event
 
         $manual_services = explode(',', $this->get_config('manual_services'));
         if (is_array($manual_services)) {
-            foreach($manual_services as $ms_index => $ms_name) {
+            foreach($manual_services AS $ms_index => $ms_name) {
                 if (!empty($ms_name)) {
-                    $is_extended = ($ms_name{0} == '*' ? true : false);
+                    $is_extended = ($ms_name[0] == '*' ? true : false);
                     $ms_name = trim($ms_name, '*');
                     $ms_parts = explode('/', $ms_name);
                     $ms_host = $ms_parts[0];
@@ -151,7 +151,7 @@ class serendipity_event_weblogping extends serendipity_event
                     }
 
                     // First cycle through list of services to remove superseding services which may have been checked
-                    foreach ($this->services as $index => $service) {
+                    foreach ($this->services AS $index => $service) {
                         if (!empty($service['supersedes']) && isset($serendipity['POST']['announce_entries_' . $service['name']])) {
                             $supersedes = explode(', ', $service['supersedes']);
                             foreach($supersedes AS $sid => $servicename) {
@@ -160,7 +160,7 @@ class serendipity_event_weblogping extends serendipity_event
                             }
                         }
                     }
-                    foreach ($this->services as $index => $service) {
+                    foreach ($this->services AS $index => $service) {
                         if (isset($serendipity['POST']['announce_entries_' . $service['name']]) || (defined('SERENDIPITY_IS_XMLRPC') && serendipity_db_bool($this->get_config($service['name'])))) {
                             if (!defined('SERENDIPITY_IS_XMLRPC') || defined('SERENDIPITY_XMLRPC_VERBOSE')) {
                                 printf(PLUGIN_EVENT_WEBLOGPING_SENDINGPING . '...', $service['host']);

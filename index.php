@@ -97,23 +97,23 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $_args = $serendipity['uriArguments'];
 
     /* Attempt to locate hidden variables within the URI */
-    foreach ($_args as $k => $v){
+    foreach ($_args AS $k => $v){
         if ($v == PATH_ARCHIVES) {
             continue;
         }
-        if ($v{0} == 'C') { /* category */
+        if ($v[0] == 'C') { /* category */
             $cat = substr($v, 1);
             if (is_numeric($cat)) {
                 $serendipity['GET']['category'] = $cat;
                 unset($_args[$k]);
             }
-        } elseif ($v{0} == 'A') { /* Author */
+        } elseif ($v[0] == 'A') { /* Author */
             $url_author = substr($v, 1);
             if (is_numeric($url_author)) {
                 $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
                 unset($_args[$k]);
             }
-        } elseif ($v{0} == 'W') { /* Week */
+        } elseif ($v[0] == 'W') { /* Week */
             $week = substr($v, 1);
             if (is_numeric($week)) {
                 unset($_args[$k]);
@@ -121,7 +121,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         } elseif ($v == 'summary') { /* Summary */
             $serendipity['short_archives'] = true;
             unset($_args[$k]);
-        } elseif ($v{0} == 'P') { /* Page */
+        } elseif ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);
             if (is_numeric($page)) {
                 $serendipity['GET']['page'] = $page;
@@ -358,18 +358,18 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $serendipity['GET']['action'] = 'archives';
     $_args = $serendipity['uriArguments'];
     /* Attempt to locate hidden variables within the URI */
-    foreach ($_args as $k => $v){
+    foreach ($_args AS $k => $v){
         if ($v == PATH_ARCHIVE) {
             continue;
         }
 
-        if ($v{0} == 'C') { /* category */
+        if ($v[0] == 'C') { /* category */
             $cat = substr($v, 1);
             if (is_numeric($cat)) {
                 $serendipity['GET']['category'] = $cat;
                 unset($_args[$k]);
             }
-        } elseif ($v{0} == 'A') { /* Author */
+        } elseif ($v[0] == 'A') { /* Author */
             $url_author = substr($v, 1);
             if (is_numeric($url_author)) {
                 $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
@@ -402,18 +402,18 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $_args = $serendipity['uriArguments'];
 
     /* Attempt to locate hidden variables within the URI */
-    foreach ($_args as $k => $v) {
+    foreach ($_args AS $k => $v) {
         if ($v == PATH_CATEGORIES) {
             continue;
         }
-        if ($v{0} == 'P') { /* Page */
+        if ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);
             if (is_numeric($page)) {
                 $serendipity['GET']['page'] = $page;
                 unset($_args[$k]);
                 unset($serendipity['uriArguments'][$k]);
             }
-        } elseif ($v{0} == 'A') { /* Author */
+        } elseif ($v[0] == 'A') { /* Author */
             $url_author = substr($v, 1);
             if (is_numeric($url_author)) {
                 $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
@@ -455,8 +455,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $_args = $serendipity['uriArguments'];
 
     /* Attempt to locate hidden variables within the URI */
-    foreach ($_args as $k => $v){
-        if ($v{0} == 'P') { /* Page */
+    foreach ($_args AS $k => $v){
+        if ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);
             if (is_numeric($page)) {
                 $serendipity['GET']['page'] = $page;
@@ -489,12 +489,12 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     /* Attempt to locate hidden variables within the URI */
     $search = array();
-    foreach ($_args as $k => $v){
+    foreach ($_args AS $k => $v){
         if ($v == PATH_SEARCH) {
             continue;
         }
 
-        if ($v{0} == 'P') { /* Page */
+        if ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);
             if (is_numeric($page)) {
                 $serendipity['GET']['page'] = $page;
@@ -523,12 +523,12 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     /* Attempt to locate hidden variables within the URI */
     $search = array();
-    foreach ($_args as $k => $v){
+    foreach ($_args AS $k => $v){
         if ($v == PATH_COMMENTS) {
             continue;
         }
 
-        if ($v{0} == 'P') { /* Page */
+        if ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);
             if (is_numeric($page)) {
                 $serendipity['GET']['page'] = $page;

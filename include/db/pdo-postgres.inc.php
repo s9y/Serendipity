@@ -158,7 +158,7 @@ function serendipity_db_insert_id($table = '', $id = '') {
         $query = "SELECT currval('{$serendipity['dbPrefix']}{$table}_{$id}_seq'::text) AS {$id}";
         $res = $serendipity['dbConn']->prepare($query);
         $res->execute();
-        foreach($res->fetchAll(PDO::FETCH_ASSOC) as $row) {
+        foreach($res->fetchAll(PDO::FETCH_ASSOC) AS $row) {
             return $row[$id];
         }
         return $serendipity['dbConn']->lastInsertId();
@@ -224,7 +224,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     $n = 0;
 
     $rows = array();
-    foreach($serendipity['dbSth']->fetchAll($result_type) as $row) {
+    foreach($serendipity['dbSth']->fetchAll($result_type) AS $row) {
         if (!empty($assocKey)) {
             // You can fetch a key-associated array via the two function parameters assocKey and assocVal
             if (empty($assocVal)) {
@@ -266,7 +266,7 @@ function serendipity_db_schema_import($query) {
     }
 
     $query = trim(str_replace($search, $replace, $query));
-    if ($query{0} == '@') {
+    if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
         return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
     } else {

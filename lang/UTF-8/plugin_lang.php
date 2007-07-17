@@ -34,7 +34,7 @@ if (!$d) {
 $const = array();
 $const['checked'] = get_defined_constants();
 while(($file = readdir($d)) !== false) {
-    if ($file{0} == '.') {
+    if ($file[0] == '.') {
         continue;
     }
     
