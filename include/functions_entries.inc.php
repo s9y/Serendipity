@@ -384,13 +384,16 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                     LEFT JOIN {$serendipity['dbPrefix']}authors a
                         ON e.authorid = a.authorid";
     }
-    if ($joincategories) {
+
+    if ($joincategories || !isset($serendipity['enableACL']) || $serendipity['enableACL'] == true) {
+        // Category joins are REQUIRED when the ACLs are enabled.
         $serendipity['fullCountQuery'] .= "
                     LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
                         ON e.id = ec.entryid
                     LEFT JOIN {$serendipity['dbPrefix']}category c
                         ON ec.categoryid = c.categoryid";
     }
+
     $serendipity['fullCountQuery'] .="
                     {$cond['joins']}
                     {$cond['and']}";

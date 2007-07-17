@@ -141,6 +141,11 @@ function serendipity_ifRemember($name, $value, $isDefault = false, $att = 'check
  *                          filter_sql       (string)  Can contain any SQL code to inject into the central SQL statement for fetching the entry
  *                          noCache          (boolean) If set to TRUE, all entries will be fetched from scratch and any caching is ignored
  *                          noSticky         (boolean) If set to TRUE, all sticky entries will NOT be fetched.
+ *                          select_key       (string)  Can contain a SQL statement on which keys to select. Plugins can also set this, pay attention!
+ *                          group_by         (string)  Can contain a SQL statement on how to group the query. Plugins can also set this, pay attention!
+ *                          returncode       (string)  If set to "array", the array of entries will be returned. "flat-array" will only return the articles without their entryproperties. "single" will only return a 1-dimensional array. "query" will only return the used SQL.
+ *                          joinauthors      (bool)    Should an SQL-join be made to the AUTHORS DB table?
+ *                          joincategories   (bool)    Should an SQL-join be made to the CATEGORIES DB table?
  *
  *                      [PRINTING]
  *                          template:          (string)  Name of the template file to print entries with
@@ -228,6 +233,26 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
         $params['prevent_reset'] = false;
     }
 
+    if (empty($params['select_key'])) {
+        $params['select_key'] = null;
+    }
+
+    if (empty($params['group_by'])) {
+        $params['group_by'] = null;
+    }
+
+    if (empty($params['returncode'])) {
+        $params['returncode'] = 'array';
+    }
+
+    if (empty($params['joinauthors'])) {
+        $params['joinauthors'] = true;
+    }
+
+    if (empty($params['joincategories'])) {
+        $params['joincategories'] = true;
+    }
+
     // Some functions deal with the $serendipity array. To modify them, we need to store
     // their original contents.
     $old_var = array();
@@ -265,7 +290,12 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
             $params['orderby'],
             $params['filter_sql'],
             $params['noCache'],
-            $params['noSticky']
+            $params['noSticky'],
+            $params['select_key'],
+            $params['group_by'],
+            $params['returncode'],
+            $params['joinauthors'],
+            $params['joincategories']
         );
 
         // Check whether the returned entries shall be grouped specifically
