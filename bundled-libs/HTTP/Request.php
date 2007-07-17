@@ -259,7 +259,7 @@ class HTTP_Request {
         $this->_timeout  = null;
         $this->_response = null;
 
-        foreach ($params as $key => $value) {
+        foreach ($params AS $key => $value) {
             $this->{'_' . $key} = $value;
         }
 
@@ -483,7 +483,7 @@ class HTTP_Request {
             return call_user_func($callback, $value);
         } else {
             $map = array();
-            foreach ($value as $k => $v) {
+            foreach ($value AS $k => $v) {
                 $map[$k] = $this->_arrayMapRecursive($callback, $v);
             }
             return $map;
@@ -507,7 +507,7 @@ class HTTP_Request {
         if (!is_array($fileName) && !is_readable($fileName)) {
             return PEAR::raiseError("File '{$fileName}' is not readable");
         } elseif (is_array($fileName)) {
-            foreach ($fileName as $name) {
+            foreach ($fileName AS $name) {
                 if (!is_readable($name)) {
                     return PEAR::raiseError("File '{$name}' is not readable");
                 }
@@ -653,7 +653,7 @@ class HTTP_Request {
                 $this->_url = &new Net_URL($redirect);
                 $this->addHeader('Host', $this->_generateHostHeader());
             // Absolute path
-            } elseif ($redirect{0} == '/') {
+            } elseif ($redirect[0] == '/') {
                 $this->_url->path = $redirect;
             
             // Relative path
@@ -777,7 +777,7 @@ class HTTP_Request {
 
         // Request Headers
         if (!empty($this->_requestHeaders)) {
-            foreach ($this->_requestHeaders as $name => $value) {
+            foreach ($this->_requestHeaders AS $name => $value) {
                 $canonicalName = implode('-', array_map('ucfirst', explode('-', $name)));
                 $request      .= $canonicalName . ': ' . $value . "\r\n";
             }
@@ -805,20 +805,20 @@ class HTTP_Request {
                 $postdata = '';
                 if (!empty($this->_postData)) {
                     $flatData = $this->_flattenArray('', $this->_postData);
-                    foreach ($flatData as $item) {
+                    foreach ($flatData AS $item) {
                         $postdata .= '--' . $boundary . "\r\n";
                         $postdata .= 'Content-Disposition: form-data; name="' . $item[0] . '"';
                         $postdata .= "\r\n\r\n" . urldecode($item[1]) . "\r\n";
                     }
                 }
-                foreach ($this->_postFiles as $name => $value) {
+                foreach ($this->_postFiles AS $name => $value) {
                     if (is_array($value['name'])) {
                         $varname       = $name . ($this->_useBrackets? '[]': '');
                     } else {
                         $varname       = $name;
                         $value['name'] = array($value['name']);
                     }
-                    foreach ($value['name'] as $key => $filename) {
+                    foreach ($value['name'] AS $key => $filename) {
                         $fp   = fopen($filename, 'r');
                         $data = fread($fp, filesize($filename));
                         fclose($fp);
@@ -860,7 +860,7 @@ class HTTP_Request {
             return array(array($name, $values));
         } else {
             $ret = array();
-            foreach ($values as $k => $v) {
+            foreach ($values AS $k => $v) {
                 if (empty($name)) {
                     $newName = $k;
                 } elseif ($this->_useBrackets) {
@@ -928,7 +928,7 @@ class HTTP_Request {
     */
     function _notify($event, $data = null)
     {
-        foreach (array_keys($this->_listeners) as $id) {
+        foreach (array_keys($this->_listeners) AS $id) {
             $this->_listeners[$id]->update($this, $event, $data);
         }
     }
@@ -1183,7 +1183,7 @@ class HTTP_Response
     */
     function _notify($event, $data = null)
     {
-        foreach (array_keys($this->_listeners) as $id) {
+        foreach (array_keys($this->_listeners) AS $id) {
             $this->_listeners[$id]->update($this, $event, $data);
         }
     }

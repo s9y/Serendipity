@@ -56,7 +56,7 @@ class Text_Wiki_Render_Xhtml_Url extends Text_Wiki_Render {
         } else {
             
             // allow for alternative targets on non-anchor HREFs
-            if ($href{0} == '#') {
+            if ($href[0] == '#') {
                 $target = '';
             } else {
                 $target = $this->getConf('target');

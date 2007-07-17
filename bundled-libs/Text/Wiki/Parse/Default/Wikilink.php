@@ -140,7 +140,7 @@ class Text_Wiki_Parse_Wikilink extends Text_Wiki_Parse {
     {
         // when prefixed with !, it's explicitly not a wiki link.
         // return everything as it was.
-        if ($matches[2]{0} == '!') {
+        if ($matches[2][0] == '!') {
             return $matches[1] . substr($matches[2], 1) . $matches[3];
         }
         

@@ -166,7 +166,7 @@ class Net_URL
             // Default querystring
             $this->querystring = array();
 
-            foreach ($urlinfo as $key => $value) {
+            foreach ($urlinfo AS $key => $value) {
                 switch ($key) {
                     case 'scheme':
                         $this->protocol = $value;
@@ -181,7 +181,7 @@ class Net_URL
                         break;
 
                     case 'path':
-                        if ($value{0} == '/') {
+                        if ($value[0] == '/') {
                             $this->path = $value;
                         } else {
                             $path = dirname($this->path) == DIRECTORY_SEPARATOR ? '' : dirname($this->path);
@@ -272,9 +272,9 @@ class Net_URL
     function getQueryString()
     {
         if (!empty($this->querystring)) {
-            foreach ($this->querystring as $name => $value) {
+            foreach ($this->querystring AS $name => $value) {
                 if (is_array($value)) {
-                    foreach ($value as $k => $v) {
+                    foreach ($value AS $k => $v) {
                         $querystring[] = $this->useBrackets ? sprintf('%s[%s]=%s', $name, $k, $v) : ($name . '=' . $v);
                     }
                 } elseif (!is_null($value)) {
@@ -303,7 +303,7 @@ class Net_URL
         $parts  = preg_split('/[' . preg_quote(ini_get('arg_separator.input'), '/') . ']/', $querystring, -1, PREG_SPLIT_NO_EMPTY);
         $return = array();
 
-        foreach ($parts as $part) {
+        foreach ($parts AS $part) {
             if (strpos($part, '=') !== false) {
                 $value = substr($part, strpos($part, '=') + 1);
                 $key   = substr($part, 0, strpos($part, '='));

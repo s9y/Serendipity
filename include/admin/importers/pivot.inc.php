@@ -31,7 +31,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
         $res = serendipity_fetchCategories('all');
         $ret = array(0 => NO_CATEGORY);
         if (is_array($res)) {
-            foreach ($res as $v) {
+            foreach ($res AS $v) {
                 $ret[$v['categoryid']] = $v['category_name'];
             }
         }
@@ -112,7 +112,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
 
             $i = 0;
             while (false !== ($dir = readdir($root))) {
-                if ($dir{0} == '.') continue;
+                if ($dir[0] == '.') continue;
                 if (substr($dir, 0, 8) == 'standard') {
                     printf('&nbsp;&nbsp;&middot; ' . CHECKING_DIRECTORY . '...<br />', $dir);
                     $data = $this->unserialize($this->data['pivot_path'] . '/' . $dir . '/index-' . $dir . '.php');
@@ -124,7 +124,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                         continue;
                     }
 
-                    foreach($data as $entry) {
+                    foreach($data AS $entry) {
                         $entryid = str_pad($entry['code'], 5, '0', STR_PAD_LEFT);
 
                         if ($i >= $max_import) {
@@ -166,7 +166,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                         $i++;
 
                         if (isset($entrydata['comments']) && count($entrydata['comments']) > 0) {
-                            foreach($entrydata['comments'] as $comment) {
+                            foreach($entrydata['comments'] AS $comment) {
                                 $comment = array('entry_id ' => $entry['id'],
                                                  'parent_id' => 0,
                                                  'timestamp' => $this->toTimestamp($comment['date']),

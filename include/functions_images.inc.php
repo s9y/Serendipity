@@ -288,7 +288,7 @@ function serendipity_updateImageInDatabase($updates, $id) {
 
     $i=0;
     if (sizeof($updates) > 0) {
-        foreach ($updates as $k => $v) {
+        foreach ($updates AS $k => $v) {
             $q[] = $k ." = '" . serendipity_db_escape_string($v) . "'";
         }
         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images SET ". implode($q, ',') ." WHERE id = " . (int)$id . " $admin");
@@ -339,7 +339,7 @@ function serendipity_deleteImage($id) {
             }
 
             serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
-            foreach($dThumb as $thumb) {
+            foreach($dThumb AS $thumb) {
                 $dfnThumb = $file['path'] . $file['name'] . (!empty($thumb['fthumb']) ? '.' . $thumb['fthumb'] : '') . '.' . $file['extension'];
                 $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
@@ -385,7 +385,7 @@ function serendipity_fetchImages($group = false, $start = 0, $end = 20, $images 
 		}
 		@closedir($dir);
 		sort($aTempArray);
-		foreach($aTempArray as $f) {
+		foreach($aTempArray AS $f) {
             if (strpos($f, $serendipity['thumbSuffix']) !== false) {
                 // This is a s9y thumbnail, skip it.
                 continue;
@@ -777,7 +777,7 @@ function serendipity_generateThumbs() {
     $i=0;
     $serendipity['imageList'] = serendipity_fetchImagesFromDatabase(0, 0, $total);
 
-    foreach ($serendipity['imageList'] as $k => $file) {
+    foreach ($serendipity['imageList'] AS $k => $file) {
         $is_image = serendipity_isImage($file);
 
         if ($is_image && !$file['hotlink']) {
@@ -1507,14 +1507,14 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     $dprops = $keywords = array();
     if ($serendipity['parseMediaOverview']) {
         $ids = array();
-        foreach ($serendipity['imageList'] as $k => $file) {
+        foreach ($serendipity['imageList'] AS $k => $file) {
             $ids[] = $file['id'];
         }
         $allprops =& serendipity_fetchMediaProperties($ids);
     }
 
     if (count($serendipity['imageList']) > 0) {
-        foreach ($serendipity['imageList'] as $k => $file) {
+        foreach ($serendipity['imageList'] AS $k => $file) {
             if (!($serendipity['authorid'] == $file['authorid'] || $file['authorid'] == '0' || serendipity_checkPermission('adminImagesViewOthers'))) {
                 // This is a fail-safe continue. Basically a non-matching file should already be filtered in SQL.
                 continue;
@@ -2789,23 +2789,23 @@ function serendipity_getMediaRaw($filename) {
 
     $filedata = fread($f, 2);
 
-    if ($filedata{0} != "\xFF") {
+    if ($filedata[0] != "\xFF") {
         fclose($f);
         return $ret;
     }
 
-    while (!$abort && !feof($f) && $filedata{1} != "\xD9") {
-        if ((ord($filedata{1}) < 0xD0) || (ord($filedata{1}) > 0xD7)) {
+    while (!$abort && !feof($f) && $filedata[1] != "\xD9") {
+        if ((ord($filedata[1]) < 0xD0) || (ord($filedata[1]) > 0xD7)) {
             $ordret   = fread($f, 2);
             $ordstart = ftell($f);
             $int      = unpack('nsize', $ordret);
 
-            if (ord($filedata{1}) == 225) {
+            if (ord($filedata[1]) == 225) {
                 $content  = fread($f, $int['size'] - 2);
 
                 if (substr($content, 0, 24) == 'http://ns.adobe.com/xap/') {
                     $ret[] = array(
-                        'ord'      => ord($filedata{1}),
+                        'ord'      => ord($filedata[1]),
                         'ordstart' => $ordstart,
                         'int'      => $int,
                         'content'  => $content
@@ -2816,11 +2816,11 @@ function serendipity_getMediaRaw($filename) {
             }
         }
 
-        if ($filedata{1} == "\xDA") {
+        if ($filedata[1] == "\xDA") {
             $abort = true;
         } else {
             $filedata = fread($f, 2);
-            if ($filedata{0} != "\xFF") {
+            if ($filedata[0] != "\xFF") {
                 fclose($f);
                 return $ret;
             }
@@ -3180,7 +3180,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 // Rename file
                 rename($renameValues[0]['from'], $renameValues[0]['to']);
 
-                foreach($renameValues as $renameData) {
+                foreach($renameValues AS $renameData) {
                     // Rename thumbnail
                     rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . '.' .  $file['extension'],
                            $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $newDir . '.' . $renameData['thumb'] . '.' . $file['extension']);
@@ -3232,7 +3232,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         // Rename file
         rename($renameValues[0]['from'], $renameValues[0]['to']);
 
-        foreach($renameValues as $renameData) {
+        foreach($renameValues AS $renameData) {
             // Rename thumbnail
             rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . '.' .  $pick['extension'],
                    $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . '.' . $renameData['thumb'] . '.' . $pick['extension']);

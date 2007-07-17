@@ -148,7 +148,7 @@ function serendipity_db_sqlite_fetch_array($res, $type = SQLITE3_BOTH)
     }
 
     /* strip any slashes, correct fieldname */
-    foreach ($row as $i => $v) {
+    foreach ($row AS $i => $v) {
         // TODO: If a query of the format 'SELECT a.id, b.text FROM table' is used,
         //       the sqlite extension will give us key indizes 'a.id' and 'b.text'
         //       instead of just 'id' and 'text' like in mysql/postgresql extension.
@@ -165,7 +165,7 @@ function serendipity_db_sqlite_fetch_array($res, $type = SQLITE3_BOTH)
 
     if ($type != SQLITE3_ASSOC) {
         $i = 0;
-        foreach($row as $k => $v) {
+        foreach($row AS $k => $v) {
             $frow[$i] = $v;
             $i++;
         }
@@ -350,7 +350,7 @@ function serendipity_db_schema_import($query)
     }
 
     $query = trim(str_replace($search, $replace, $query));
-    if ($query{0} == '@') {
+    if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
         return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
     } else {
