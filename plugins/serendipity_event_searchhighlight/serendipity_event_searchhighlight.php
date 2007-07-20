@@ -29,7 +29,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tom Sommer');
-        $propbag->add('version',       '1.3');
+        $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -116,7 +116,10 @@ class serendipity_event_searchhighlight extends serendipity_event
             return PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM;
         }
 
-
+        if (!empty($_SESSION['search_referer']) && $this->uri != $_SESSION['search_referer']) {
+            $this->uri = $_SESSION['search_referer'];
+            return $this->getSearchEngine();
+        }
 
         return false;
     }
@@ -191,6 +194,9 @@ class serendipity_event_searchhighlight extends serendipity_event
             if ( ($queries = $this->getQuery()) === false ) {
                 return;
             }
+
+            $_SESSION['is_searchengine_visitor'] = true;
+            $_SESSION['search_referer'] = $this->uri;
 
             foreach ($this->markup_elements as $temp) {
                 if ( ! (serendipity_db_bool($this->get_config($temp['name'])) && isset($eventData[$temp['element']])) ) {
