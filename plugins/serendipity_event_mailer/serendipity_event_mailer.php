@@ -148,10 +148,10 @@ class serendipity_event_mailer extends serendipity_event
 ?>
                     <fieldset style="margin: 5px">
                         <legend><?php echo PLUGIN_EVENT_MAILER_NAME; ?></legend>
-                            <input type="checkbox" name="serendipity[properties][sendentry]" id="properties_sendentry" value="true" checked="checked" />
+                            <input class="input_checkbox" type="checkbox" name="serendipity[properties][sendentry]" id="properties_sendentry" value="true" checked="checked" />
                             <label title="<?php echo PLUGIN_EVENT_MAILER_SENDING; ?>" for="properties_sendentry">&nbsp;<?php echo PLUGIN_EVENT_MAILER_ISTOSENDIT; ?></label><br />
                             <label title="<?php echo PLUGIN_EVENT_MAILER_RECIPIENT; ?>" for="properties_mailto">&nbsp;<?php echo PLUGIN_EVENT_MAILER_RECIPIENTS; ?>&nbsp;&nbsp;</label>&nbsp;
-                            <input type="text" name="serendipity[properties][mailto]" id="properties_mailto" value="<?php echo htmlspecialchars($mailto); ?>" />
+                            <input class="input_textbox" type="text" name="serendipity[properties][mailto]" id="properties_mailto" value="<?php echo htmlspecialchars($mailto); ?>" />
                     </fieldset>
 <?php
                     break;
