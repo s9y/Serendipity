@@ -94,7 +94,7 @@ else
             echo ""
 
         echo "7. Creating .tgz file $1"
-            tar --owner=$3 --group=$4 -czf "$1" "$2"
+            tar --owner=$3 --group=$4 -cz9f "$1" "$2"
             echo "    [DONE]"
             echo ""
 
