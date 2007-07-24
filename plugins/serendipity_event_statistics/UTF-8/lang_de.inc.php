@@ -61,12 +61,17 @@
         @define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'Nein, alles außer dem Zähler verbergen.');
         @define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Ja, alle Statistiken anzeigen!');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Anzahl der Besucher');
-        @define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Anzahl der Besucher heute');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY', 'Aufrufe heute');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL', 'Aufrufe gesamt');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', 'Besucher heute');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', 'Besucher gesamt');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISSINCE', 'Die erweiterte Besucherstatistik hat seit folgendem Zeitpunkt Daten gesammelt:');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC','Die Zahl der Aufrufe kann sehr groß werden, liefert jedoch einen Wert bezüglich der einzelnen Seitenanfragen. Diese Zahl erhöht sich deshalb mit JEDEM Seitenaufruf sowie jeder Aktualisierung der Seite und kann damit NICHT als Besucherzähler verstanden werden.');
         @define('PLUGIN_EVENT_STATISTICS_EXT_VISLATEST', 'Letzte Besucher');
         @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS', 'Top-Referrer');
         @define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE', 'Bisher wurden keine Referrer registriert.');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH', 'Aufrufe, auf den Tag bezogen');
+        @define('PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH', 'Aufrufe, auf den Monat bezogen');
         @define('PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS', 'Erweiterte Besucherstatistik');
         @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', 'Aktivieren, keine Robots zählen');
         @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', 'Nein, Robots bitte mitzählen');

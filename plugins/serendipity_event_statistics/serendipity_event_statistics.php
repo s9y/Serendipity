@@ -4,7 +4,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-
 // Probe for a language include with constants. Still include defines later on, if some constants were missing
 $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
 if (file_exists($probelang)) {
@@ -24,8 +23,8 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('name',          PLUGIN_EVENT_STATISTICS_NAME);
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg');
-        $propbag->add('version',       '1.47');
+        $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg, kalkin');
+        $propbag->add('version',       '1.48');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -144,7 +143,7 @@ class serendipity_event_statistics extends serendipity_event
                             // excludelist botagents
                             $banned_array = array(
                                     '1'     =>     "unknown",
-                                    '2'     =>     "Yahoo! Slurp",
+                                    '2'     =>     "bot",
                                     '3'     =>     "slurpy",
                                     '4'     =>     "agent 007",
                                     '5'     =>     "ichiro",
@@ -170,39 +169,31 @@ class serendipity_event_statistics extends serendipity_event
                                     '25'    =>     "Dumbot",
                                     '26'    =>     "GeoBot",
                                     '27'    =>     "DigExt",
-                                    '28'    =>     "Feedfetcher-Google",
+                                    '28'    =>     "Jeeves/Teoma",
                                     '29'    =>     "FeedBurner",
-                                    '30'    =>     "Jeeves/Teoma",
-                                    '31'    =>     "FeedBurner/1.0(http://www.FeedBurner.com)",
-                                    '32'    =>     "Technorati Feed Engine/0.01 (Java 1.4.2_07 Sun Microsystems Inc./Linux 2.6.9-22.0.1.ELsmp)",
-                                    '33'    =>     "Java/1.5.0_10",
-                                    '34'    =>     "Java/1.5.0_06",
-                                    '35'    =>     "MarsEdit",
-                                    '36'    =>     "Blogslive (info@blogslive.com)",
-                                    '37'    =>     "XMLRPCCocoa",
-                                    '38'    =>     "Feedfetcher-Google; (+www.google.com/feedfetcher.html)",
-                                    '39'    =>     "YahooFeedSeeker/2.0 (compatible; Mozilla 4.0; MSIE 5.5; http://publisher.yahoo.com/rssguide)",
-                                    '40'    =>     "Mediapartners-Google/2.1",
-                                    '41'    =>     "MagpieRSS/0.61 (+http://magpierss.sf.net)",
-                                    '42'    =>     "www.google.com/feedfetcher.html)",
-                                    '43'    =>     "Sphere Scout&v4.0 (beta)- scout at sphere dot com",
-                                    '44'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
-                                    '45'    =>     "libwww-perl/5.76",
-                                    '46'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
-                                    '48'    =>     "WordPress/2.0.5",
-                                    '49'    =>     "Incutio XML-RPC -- WordPress/2.0.5",
-                                    '50'    =>     "-- WordPress/2.1-alpha3",
-                                    '51'    =>     "WordPress/2.1.1",
-                                    '52'    =>     "WordPress/2.1",
-                                    '53'    =>     "ping.wordblog.de/ping/1.0",
-                                    '54'    =>     "PEAR HTTP_Request class (http://pear.php.net/ )",
-                                    '55'    =>     "Java/1.5.0_07",
-                                    '56'    =>     "Mozilla 5.0(BlogCorpusReader 1.4142)",
-                                    '57'    =>     "BlogPulseLive(support@blogpulse.com)"
+                                    '30'    =>     "Technorati",
+                                    '31'    =>     "Java/1.5.0_10",
+                                    '32'    =>     "Java/1.5.0_06",
+                                    '33'    =>     "MarsEdit",
+                                    '34'    =>     "Blogslive",
+                                    '35'    =>     "XMLRPCCocoa",
+                                    '36'    =>     "Google",
+                                    '37'    =>     "MagpieRSS",
+                                    '38'    =>     "Sphere Scout",
+                                    '39'    =>     "BlogCorpusReader",
+                                    '41'    =>     "libwww-perl",
+                                    '42'    =>     "WordPress",
+                                    '43'    =>     "ping.wordblog.de",
+                                    '44'    =>     "PEAR HTTP_Request",
+                                    '45'    =>     "Java/1.5.0_07",
+                                    '46'    =>     "BlogPulseLive(support@blogpulse.com)",
+                                    '47'    =>     "TrackBack",
+                                    '48'    =>     "Blogdimension",
+                                    '49'    =>     "Yahoo"
                                     );
                                     
                             foreach($banned_array AS $ban) {
-                                if (stristr($useragent, $ban)) {
+                                if (stripos($useragent, $ban) !== false) {
                                     $found = 1;
                                     break;
                                 }
@@ -797,17 +788,19 @@ class serendipity_event_statistics extends serendipity_event
                     }
 
                     $num = $this->statistics_getmonthlystats($i, $visitors_count[0]);
+                    $rep = $num;
+                    rsort($rep);
+                    $maxVisHeigh = 100/$rep[0]*2;
                     echo '<td class="'.$color.'" width="8%" align="center" valign="bottom"><small>' . $num[$i];
-                    $num[$i] = ($num[$i] / 100) * 20 + 1;
                     echo '<br /><img src="plugins/serendipity_event_statistics/'; 
-                    if ($num[$i] < 10) {
+                    if ($num[$i]*$maxVisHeigh/2 <= 33) {
                         echo 'red.png';
-                    } else if ($num[$i] >= 11 && $num[$i] < 30) {
+                    } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
                         echo 'yellow.png';
                     } else {
                         echo 'green.png';
                     }
-                    echo '" width="8" alt="" align="bottom" height="'.$num[$i].'" />';
+                    echo '" width="8" alt="" align="bottom" height="'.round($num[$i]*$maxVisHeigh).'" />';
                     echo '<br /></small></td>';
                 } ?>
         </tr><tr>
@@ -840,17 +833,19 @@ class serendipity_event_statistics extends serendipity_event
                     }
 
                     $num = $this->statistics_getdailystats($i, $visitors_count[0]);
+                    $rep = $num;
+                    rsort($rep);
+                    $maxVisHeigh = 100/$rep[0]*2;
                     echo '<td class="'.$color.'" width="3%" align="center" valign="bottom"><small>' . $num[$i];        
-                    $num[$i] = ($num[$i] / 100) * 40 + 1;
                     echo '<br /><img src="plugins/serendipity_event_statistics/';
-                    if ($num[$i] < 20) {
+                    if ($num[$i]*$maxVisHeigh/2 <= 33) {
                         echo 'red.png';
-                    } else if ($num[$i] >= 21 && $num[$i] < 40) {
+                    } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
                         echo 'yellow.png';
                     } else {
                         echo 'green.png';
                     }
-                    echo '" width="8" alt="" align="bottom" height="'.$num[$i].'" />';
+                    echo '" width="8" alt="" align="bottom" height="'.round($num[$i]*$maxVisHeigh).'" />';
                     echo '<br /></small></td>';
                 }
             ?>
