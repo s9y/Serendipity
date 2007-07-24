@@ -1,4 +1,4 @@
-<?php # $Id$
+﻿<?php # $Id$
 
 /**
  *  @version $Revision$

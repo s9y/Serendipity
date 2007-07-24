@@ -62,8 +62,8 @@
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', 'No!');
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'Yes, at the bottom of the page');
 @define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'Yes, at the top of the page');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Show all statistics?');
-@define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Set to \'no\' to only show visitor stats');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Set to \'no\' to show only visitor stats');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Show everything? (default: no)');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'No, hide everything but the counter.');
 @define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Yes, show me all statistics!');
 @define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Individual counters');
@@ -82,7 +82,7 @@
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', 'Enable, do not count bots');
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', 'Disable, please count bots');
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Robot count protection');
-@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Set to \'yes\' to not count robots. Set to \'no\' to count robots. Currently over 25 bots are banned.');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Set to \'yes\' to not count robots. set to \'no\' to count robots. Currently over 25 bots are banned.');
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_LASTENTRY', 'Show date of last entry');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Show number of entries');

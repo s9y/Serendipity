@@ -61,8 +61,8 @@
     @define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', ' Не');
     @define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', 'Да, долу на страницата');
     @define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', 'Да, горе на страницата');
-    @define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Показване на пълна статистика?');
-    @define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Установете \'не\' за да показвате само статистиката за посетителите');
+    @define('PLUGIN_EVENT_STATISTICS_EXT_ALL', 'Установете \'не\' за да показвате само статистиката за посетителите');
+    @define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', 'Показване на всичко? (по подразбиране: не)');
     @define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', 'Не, скриване на всичко освен броячите');
     @define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', 'Пълна статистика');
     @define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', 'Брой на посетителите');
