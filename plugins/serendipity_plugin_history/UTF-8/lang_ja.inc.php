@@ -17,7 +17,7 @@
 @define('PLUGIN_HISTORY_SHOWFULL', '完全なエントリ');
 @define('PLUGIN_HISTORY_SHOWFULL_DESC', 'リンクしたヘッドラインの変わりに完全なエントリを表示します。');
 @define('PLUGIN_HISTORY_INTRO', 'まえがき');
-@define('PLUGIN_HISTORY_INTRO_DESC', '「1 年前に私は話した:」のような短いまえがきです。);
+@define('PLUGIN_HISTORY_INTRO_DESC', '「1 年前に私は話した:」のような短いまえがきです。');
 @define('PLUGIN_HISTORY_OUTRO', 'あとがき');
 @define('PLUGIN_HISTORY_OUTRO_DESC', '「これっていいよね?」のようなあとがきです。');
 @define('PLUGIN_HISTORY_DISPLAYDATE', '日付表示をする');
