@@ -193,7 +193,7 @@ class serendipity_event_statistics extends serendipity_event
                                     );
                                     
                             foreach($banned_array AS $ban) {
-                                if (stripos($useragent, $ban) !== false) {
+                                if (stristr($useragent, $ban) !== false) {
                                     $found = 1;
                                     break;
                                 }
