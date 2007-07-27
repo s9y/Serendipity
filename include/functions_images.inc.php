@@ -1024,6 +1024,11 @@ function serendipity_guessMime($extension) {
 
         case 'jar':
             $mime = 'application/java-archive';
+            break;
+        
+        case 'ico':
+            $mime = 'image/x-icon';
+            break;
 
         default:
             $mime = 'application/octet-stream';
