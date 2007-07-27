@@ -21,8 +21,8 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('name',          COMMENTS);
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
-        $propbag->add('author',        'Garvin Hicking/Tadashi Jokagi/Judebert');
-        $propbag->add('version',       '1.10');
+        $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
+        $propbag->add('version',       '1.11');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -189,7 +189,8 @@ class serendipity_plugin_comments extends serendipity_plugin
                 }
                 $entry = array('comment' => $comment,
                                'email'   => $row['comment_email'],
-                               'url'     => $row['comment_url']);
+                               'url'     => $row['comment_url'],
+                               'author'  => $row['user']);
                                
                 // Let's help the BBCOde plugin a bit:
                 if (class_exists('serendipity_event_bbcode')) {
