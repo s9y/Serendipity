@@ -64,8 +64,9 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                 $ext = '';
             }
 
-            $addData = array('from' => 'functions_entries:printEntries_rss');
+            $addData = array('from' => 'functions_entries:printEntries_rss','rss_options' => $options);
             serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
+
             // Do some relative -> absolute URI replacing magic. Replaces all HREF/SRC (<a>, <img>, ...) references to only the serendipitypath with the full baseURL URI
             // garvin: Could impose some problems. Closely watch this one.
             $entry['body'] = preg_replace('@(href|src)=("|\')(' . preg_quote($serendipity['serendipityHTTPPath']) . ')(.*)("|\')(.*)>@imsU', '\1=\2' . $serendipity['baseURL'] . '\4\2\6>', $entry['body']);
@@ -132,10 +133,16 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
 
                 case 'atom0.3':
                     $entry_hook = 'frontend_display:atom-0.3:per_entry';
+                    $hrefPattern    = '@(href|src)\s*?="(.*?)"@si';
+                    $entry['feed_body'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_body']);
+                    $entry['feed_ext'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_ext']);
                     break;
 
                 case 'atom1.0':
-                    $entry_hook = 'frontend_display:atom-1.0:per_entry';
+                    $entry_hook     = 'frontend_display:atom-1.0:per_entry';
+                    $hrefPattern    = '@(href|src)\s*?="(.*?)"@si';
+                    $entry['feed_body'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_body']);
+                    $entry['feed_ext'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_ext']);
                     break;
             }
 
@@ -143,4 +150,10 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             $entry['per_entry_display_dat'] = $entry['display_dat'];
         }
     }
+    
 }
+
+function _hrefsrcEntityReplacer($treffer){
+    return $treffer[1] . '="' . htmlspecialchars($treffer[2]) . '"';    
+}
+
