@@ -3,11 +3,6 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
-    * Atom feeds became invalid, if entry has href or src attributes 
-      containing char represented by XML Entities normaly 
-      (like href="test.de?a=1&b=2")
-      (brockhaus)
-
     * The recent entries sidebar plugin shiped with s9y listed entries
       not accessable by the current user because of right restrictions.
       (brockhaus)

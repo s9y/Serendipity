@@ -133,16 +133,10 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
 
                 case 'atom0.3':
                     $entry_hook = 'frontend_display:atom-0.3:per_entry';
-                    $hrefPattern    = '@(href|src)\s*?="(.*?)"@si';
-                    $entry['feed_body'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_body']);
-                    $entry['feed_ext'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_ext']);
                     break;
 
                 case 'atom1.0':
                     $entry_hook     = 'frontend_display:atom-1.0:per_entry';
-                    $hrefPattern    = '@(href|src)\s*?="(.*?)"@si';
-                    $entry['feed_body'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_body']);
-                    $entry['feed_ext'] = preg_replace_callback($hrefPattern, _hrefsrcEntityReplacer, $entry['feed_ext']);
                     break;
             }
 
@@ -152,8 +146,3 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
     }
     
 }
-
-function _hrefsrcEntityReplacer($treffer){
-    return $treffer[1] . '="' . htmlspecialchars($treffer[2]) . '"';    
-}
-
