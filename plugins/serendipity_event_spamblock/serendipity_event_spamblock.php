@@ -33,13 +33,13 @@ var $filter_defaults;
         $propbag->add('name',          PLUGIN_EVENT_SPAMBLOCK_TITLE);
         $propbag->add('description',   PLUGIN_EVENT_SPAMBLOCK_DESC);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Garvin Hicking, Sebastian Nohn');
+        $propbag->add('author',        'Garvin Hicking, Sebastian Nohn, Grischa Brockhaus');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.68');
+        $propbag->add('version',       '1.69');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -51,6 +51,7 @@ var $filter_defaults;
         $propbag->add('configuration', array(
             'killswitch',
             'hide_for_authors',
+            'trackback_ipvalidation' ,
             'bodyclone',
             'entrytitle',
             'ipflood',
@@ -106,6 +107,25 @@ var $filter_defaults;
                 ));
                 $propbag->add('radio_per_row', '1');
 
+                break;
+
+            case 'trackback_ipvalidation':
+            /*
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC);
+                $propbag->add('default', false);
+                */
+
+                $propbag->add('type', 'radio');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC);
+                $propbag->add('default', 'no');
+                $propbag->add('radio', array(
+                    'value' => array('no', 'moderate', 'reject'),
+                    'desc'  => array(NO, PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT)
+                ));
+                $propbag->add('radio_per_row', '1');
                 break;
 
             case 'trackback_check_url':
@@ -671,6 +691,7 @@ var $filter_defaults;
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
+        $debug = true;
 
         $hooks = &$bag->get('event_hooks');
 
@@ -794,6 +815,43 @@ var $filter_defaults;
                             }
                         }
 
+                        // Check if sender ip is matching trackback ip (ip validation)
+                        $trackback_ipvalidation_option = $this->get_config('trackback_ipvalidation','no');
+                        if ($addData['type'] == 'TRACKBACK' && $trackback_ipvalidation_option != 'no') {
+                            $this->IsHardcoreSpammer();
+                            $parts = @parse_url($addData['url']);
+                            $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
+                            // Getting host from url successfully?
+                            if (!is_array($parts)) { // not a valid URL
+                                $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''));
+                                if ($trackback_ipvalidation_option == 'reject') {
+                                    $eventData = array('allow_comments' => false);
+                                    $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                    return false;
+                                } else {
+                                    $eventData['moderate_comments'] = true;
+                                    $serendipity['csuccess']        = 'moderate';
+                                    $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                }
+                            }
+                            $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
+                            $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
+                            $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
+                            // Is host ip and sender ip matching?
+                            if ($trackback_ip != $sender_ip) {
+                                $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
+                                if ($trackback_ipvalidation_option == 'reject') {
+                                    $eventData = array('allow_comments' => false);
+                                    $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                    return false;
+                                } else {
+                                    $eventData['moderate_comments'] = true;
+                                    $serendipity['csuccess']        = 'moderate';
+                                    $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                }
+                            }
+                        }
+                        
                         // Filter Akismet Blacklist?
                         $akismet_apikey = $this->get_config('akismet');
                         $akismet        = $this->get_config('akismet_filter');
@@ -995,7 +1053,7 @@ var $filter_defaults;
 //                            $this->log($logfile, $eventData['id'], 'REJECTED', 'Captcha not needed: ' . $serendipity['POST']['captcha'] . ' / ' . $_SESSION['spamblock']['captcha'] . ' // Source: ' . $_SERVER['REQUEST_URI'], $addData);
                         }
 
-                        // Check for forced comment moderation
+                        // Check for forced comment moderation (X days)
                         if ($addData['type'] == 'NORMAL' && $forcemoderation > 0 && $eventData['timestamp'] < (time() - ($forcemoderation * 60 * 60 * 24))) {
                             $this->log($logfile, $eventData['id'], $forcemoderation_treat, PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION, $addData);
                             if ($forcemoderation_treat == 'reject') {
