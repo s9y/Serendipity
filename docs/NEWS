@@ -3,6 +3,11 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * New spam blocking method for trackbacks: ip validation. The 
+      senders ip is compared with the ip of the host, the trackback is
+      set to. If they don't match, the trackback is rejected/moderated.
+      This should reject most of the trackback spam bots. (brockhaus)
+
     * The recent entries sidebar plugin shiped with s9y listed entries
       not accessable by the current user because of right restrictions.
       (brockhaus)

@@ -106,3 +106,14 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'CSRF-Schutz aktivieren?');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Falls aktiviert, wird ein spezieller Hash-Wert sicherstellen, dass nur Benutzer Kommentare hinterlassen dürfen , die eine gültige Session-ID haben. Dies wird Spam etwas eindämmen und es unmöglich machen, dass Sie ungewollt Kommentare via CSRF-Angriffen hinterlassen, aber es wird auch dazu führen dass nur Benutzer mit aktivierten Cookies kommentieren können.');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden!');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'SPAM IP Adressen via HTaccess blocken?');
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihref .htacces Datei hinzu gefügt. Die .htaccess Datei wird regelmässig mit den abgelehnten IPs des letzten Monats erneuert.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'So sehen Ihre Captchas im Moment aus. Nachdem Sie die Einstellungen geändert und gespeichert haben können Sie durch einen Klick auf diese das Aussehen hier erneuern.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION', 'Trackback IP Validierung');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Soll die IP des Trackback Senders mit der IP des Hosts übereinstimmen, auf den der Trackback gesetzt werden soll? (EMPFOHLEN!)');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'Trackback IP Validierung : %s [%s] != Sender IP [%s]');
+
+?>

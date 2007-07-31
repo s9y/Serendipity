@@ -123,3 +123,9 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Enabling this will add IPs that have sent spam to your blog to your .htaccess file. The .htaccess file will be regenerated regularly with the forbidden IPs of the last month.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'This is how your captcha images currently look like. If you changed and saved settings above and want to refresh the look of your captcha, simply click on it to reload.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION', 'Trackback ip validation');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Should the IP of the sender match the IP of the host, a trackback is set to? (RECOMMENDED!)');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'Trackback ip validation: %s [%s] != sender ip [%s]');
+
+?>
