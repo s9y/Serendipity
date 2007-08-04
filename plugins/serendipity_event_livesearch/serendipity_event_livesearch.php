@@ -132,7 +132,7 @@ class serendipity_event_livesearch extends serendipity_event
                     switch($parts[0]) {
                         case 'ls-js':
                             header('Content-Type: text/javascript');
-                            echo file_get_contents(S9Y_INCLUDE_PATH . 'plugins/serendipity_event_livesearch/serendipity_event_livesearch.js');
+                            echo file_get_contents(dirname(__FILE__) . '/serendipity_event_livesearch.js');
                             break;
 
                         case 'ls':
