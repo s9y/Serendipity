@@ -39,5 +39,5 @@ if ($output['show_links']) {
     echo '</ul>' . "\n";
     echo '</div>' . "\n";
 }
-echo '<span class="serendipityWelcomeBack">' . $output['welcome'] . '</span>';
+echo '<h3 class="serendipityWelcomeBack">' . $output['welcome'] . '</h3>';
 echo $output['more'];

@@ -71,7 +71,7 @@ if ( sizeof($_POST) > 1 && $serendipity['GET']['step'] == 3 ) {
 
     if ( is_array($errors = serendipity_checkInstallation()) ) {
         foreach ( $errors as  $error ) {
-            echo '<div class="serendipityAdminMsgError">'. $error .'</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. $error .'</div>';
         }
 
         $from = $_POST;
@@ -423,12 +423,12 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 </table>
 
 <?php if ( $showWritableNote === true ) { ?>
-    <div class="serendipityAdminMsgNote"><?php echo sprintf(PROBLEM_PERMISSIONS_HOWTO, 'chmod 1777') ?></div>
+    <div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" /><?php echo sprintf(PROBLEM_PERMISSIONS_HOWTO, 'chmod 1777') ?></div>
 <?php } ?>
 
 <div align="center">
 <?php if ( $errorCount > 0 ) { ?>
-    <div class="serendipityAdminMsgError"><?php echo PROBLEM_DIAGNOSTIC ?></div>
+    <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" /><?php echo PROBLEM_DIAGNOSTIC ?></div>
     <h2><a href="serendipity_admin.php"><?php echo RECHECK_INSTALLATION ?></a></h2>
 <?php } else { ?>
     <?php echo SELECT_INSTALLATION_TYPE ?>:
@@ -508,16 +508,16 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     } else {
         echo ' <strong>' . FAILED . '</strong><br />';
         foreach ( $errors as $error ) {
-            echo '<div class="serendipityAdminMsgError">'. $error .'</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $error .'</div>';
         }
     }
 
     if ( serendipity_updateConfiguration() ) {
-        echo '<div class="serendipityAdminMsgSuccess">'. SERENDIPITY_INSTALLED .'</div>';
+        echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png'). '" alt="" />' . SERENDIPITY_INSTALLED .'</div>';
         echo '<div align="center" style="font-size: large"><a href="'. $_POST['serendipityHTTPPath'] .'">'. VISIT_BLOG_HERE .'</a></div>';
         echo '<div align="center">'. THANK_YOU_FOR_CHOOSING .'</div>';
     } else {
-        echo '<div class="serendipityAdminMsgSuccess">'. ERROR_DETECTED_IN_INSTALL .'</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. ERROR_DETECTED_IN_INSTALL .'</div>';
     }
 }
 

@@ -66,7 +66,7 @@
             <tr>
                 <td colspan="2" id="serendipityAdminInfopane">
                     {if $admin_vars.is_logged_in}
-                        {$admin_vars.self_info}
+                        <span>{$admin_vars.self_info}</span>
                     {/if}
                 </td>
             </tr>
@@ -85,7 +85,7 @@
                         {$admin_vars.out.header}
                     </div>
                     {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
-                        <div class="serendipityAdminMsgError">{$CONST.WRONG_USERNAME_OR_PASSWORD}</div>
+                        <div class="serendipityAdminMsgError"><img width="22px" height="22px" style="border: 0px; padding-right: 2px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.WRONG_USERNAME_OR_PASSWORD}</div>
                     {/if}
                     <form action="serendipity_admin.php" method="post">
                         <input type="hidden" name="serendipity[action]" value="admin" />
@@ -117,9 +117,9 @@
 
     {*** MAIN LINKS START ***}
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuMain">
-                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks"><a href="serendipity_admin.php">{$CONST.ADMIN_FRONTPAGE}</a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks serendipitySideBarMenuMainFrontpage"><a href="serendipity_admin.php">{$CONST.ADMIN_FRONTPAGE}</a></li>
                         {if 'personalConfiguration'|checkPermission}
-                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks"><a href="serendipity_admin.php?serendipity[adminModule]=personal">{$CONST.PERSONAL_SETTINGS}</a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks serendipitySideBarMenuMainPersonal"><a href="serendipity_admin.php?serendipity[adminModule]=personal">{$CONST.PERSONAL_SETTINGS}</a></li>
                         {/if}
                     </ul>
                     <br class="serendipitySideBarMenuSpacer" />                                                                                             
@@ -210,8 +210,8 @@
     {*** LOGOUT START ***}
                     <br class="serendipitySideBarMenuSpacer" />                                                                                             
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuLogout">
-                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks"><a href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a></li>
-                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks"><a href="serendipity_admin.php?serendipity[adminModule]=logout">{$CONST.LOGOUT}</a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks serendipitySideBarMenuLogoutWeblog"><a href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks serendipitySideBarMenuLogoutLogout"><a href="serendipity_admin.php?serendipity[adminModule]=logout">{$CONST.LOGOUT}</a></li>
                     </ul>
     {*** LOGOUT END ***}
 
@@ -232,7 +232,7 @@
             <br />
         </div>
         <div id="serendipityAdminFooter">
-            {$admin_vars.version_info}
+            <span>{$admin_vars.version_info}</span>
         </div>                            
     </body>
 <!-- ADMIN-ENTRY TEMPLATE: index.tpl END -->

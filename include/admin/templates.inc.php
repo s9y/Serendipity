@@ -46,18 +46,18 @@ class template_option {
 if ($serendipity['GET']['adminAction'] == 'install' ) {
     serendipity_plugin_api::hook_event('backend_templates_fetchtemplate', $serendipity);
 
-    $themeInfo = serendipity_fetchTemplateInfo($serendipity['GET']['theme']);
+    $themeInfo = serendipity_fetchTemplateInfo(htmlspecialchars($serendipity['GET']['theme']));
 
-    serendipity_set_config_var('template', $serendipity['GET']['theme']);
+    serendipity_set_config_var('template', htmlspecialchars($serendipity['GET']['theme']));
     serendipity_set_config_var('template_engine', isset($themeInfo['engine']) ? $themeInfo['engine'] : 'default');
 
-    echo '<div class="serendipityAdminMsgSuccess">'. sprintf(TEMPLATE_SET, $serendipity['GET']['theme']) .'</div>';
+    echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . sprintf(TEMPLATE_SET, htmlspecialchars($serendipity['GET']['theme'])) .'</div>';
 }
 ?>
 
 <?php
 if ( @file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] .'/layout.php') ) {
-    echo '<div class="serendipityAdminMsgNote">'. WARNING_TEMPLATE_DEPRECATED .'</div>';
+    echo '<div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_note.png') . '" alt="" />'. WARNING_TEMPLATE_DEPRECATED .'</div>';
 }
 
 echo '<h3>' . STYLE_OPTIONS . '</h3>';
@@ -73,7 +73,7 @@ if (is_array($template_config)) {
         foreach($serendipity['POST']['template'] AS $option => $value) {
             template_option::set_config($option, $value);
         }
-        echo '<div class="serendipityAdminMsgSuccess">' . DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')) . '</div>';
+        echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')) . '</div>';
     }
 
     echo '<form method="post" action="serendipity_admin.php">';

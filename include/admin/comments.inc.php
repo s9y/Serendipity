@@ -391,7 +391,11 @@ foreach ($sql as $rs) {
     $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote' : '');
 ?>
 <tr>
-    <td class="<?php echo $header_class; ?>"><a name="c<?php echo $comment['id'] ?>"></a>
+    <td class="<?php echo $header_class; ?>">
+<?php   if ($header_class=='serendipityAdminMsgNote') { ?>
+            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" />
+<?php   }?>
+        <a name="c<?php echo $comment['id'] ?>"></a>
         <?php echo ($comment['type'] == 'NORMAL' ? COMMENT : TRACKBACK) . ' #'. $comment['id'] .', '. IN_REPLY_TO .' <strong><a href="' . $comment['entry_url'] . '">'. $comment['title'] .'</a></strong>, '. ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime('%b %e %Y, %H:%M', $comment['timestamp']))?>
     </td>
 </tr>

@@ -724,7 +724,7 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
                     echo '<script type="text/javascript">parent.document.forms[\'serendipityEntry\'][\'serendipity[id]\'].value = "' . $serendipity['lastSavedEntry'] . '";</script>';
                 }
                 $entrylink = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
-                echo '<div class="serendipityAdminMsgSuccess">' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)</div>';
+                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)></div>';
             }
             echo '<br style="clear: both" />';
 
@@ -1885,7 +1885,7 @@ function serendipity_reportXSRF($type = 0, $reset = true, $use_config = false) {
     // Set this in your serendipity_config_local.inc.php if you want HTTP Referrer blocking:
     // $serendipity['referrerXSRF'] = true;
 
-    $string = '<div class="serendipityAdminMsgError XSRF_' . $type . '">' . ERROR_XSRF . '</div>';
+    $string = '<div class="serendipityAdminMsgError XSRF_' . $type . '"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . ERROR_XSRF . '</div>';
     if ($reset) {
         // Config key "referrerXSRF" can be set to enable blocking based on HTTP Referrer. Recommended for Paranoia.
         if (($use_config && isset($serendipity['referrerXSRF']) && $serendipity['referrerXSRF']) || $use_config === false) {

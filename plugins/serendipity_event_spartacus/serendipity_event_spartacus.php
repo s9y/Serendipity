@@ -274,16 +274,16 @@ class serendipity_event_spartacus extends serendipity_event
     function outputMSG($status, $msg) {
         switch($status) {
             case 'notice':
-                echo '<div class="serendipityAdminMsgNotice">' . $msg . '</div>' . "\n";
+                echo '<div class="serendipityAdminMsgNotice"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_note.png') . '" alt="" />' . $msg . '</div>' . "\n";
                 break;
 
             case 'error':
-                echo '<div class="serendipityAdminMsgError">' . $msg . '</div>' . "\n";
+                echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $msg . '</div>' . "\n";
                 break;
 
             default:
             case 'success':
-                echo '<div class="serendipityAdminMsgSuccess">' . $msg . '</div>' . "\n";
+                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . $msg . '</div>' . "\n";
                 break;
         }
     }

@@ -652,7 +652,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             }
             exec($cmd, $output, $result);
             if ($result != 0) {
-                echo '<div class="serendipityAdminMsgError">'. sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
+                echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
                 $r = false; // return failure
             } else {
                touch($outfile);
@@ -696,7 +696,7 @@ function serendipity_scaleImg($id, $width, $height) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -scale ' .  serendipity_escapeshellarg($width . 'x' . $height) . ' ' . serendipity_escapeshellarg($infile) . ' ' . serendipity_escapeshellarg($outfile);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<div class="serendipityAdminMsgError">'. sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
         }
         unset($output, $result);
     }
@@ -743,7 +743,7 @@ function serendipity_rotateImg($id, $degrees) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infile) . ' ' . serendipity_escapeshellarg($outfile);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<div class="serendipityAdminMsgError">'. sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
         }
         unset($output, $result);
 
@@ -751,7 +751,7 @@ function serendipity_rotateImg($id, $degrees) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infileThumb) . ' ' . serendipity_escapeshellarg($outfileThumb);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<div class="serendipityAdminMsgError">'. sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) .'</div>';
         }
         unset($output, $result);
 
@@ -803,7 +803,7 @@ function serendipity_generateThumbs() {
                 if ($returnsize !== false ) {
                     printf(RESIZE_BLAHBLAH, $filename . ': ' . $returnsize[0] . 'x' . $returnsize[1]);
                     if (!file_exists($newThumb)) {
-                        printf('<span class="serendipityAdminMsgError">' . THUMBNAIL_FAILED_COPY . '</span><br />', $filename);
+                        printf('<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div><br />', $filename);
                     } else {
                         $update = true;
                     }
@@ -814,7 +814,7 @@ function serendipity_generateThumbs() {
                     printf(THUMBNAIL_USING_OWN . '<br />', $filename);
                     $update = true;
                 } else {
-                    printf('<span class="serendipityAdminMsgError">' . THUMBNAIL_FAILED_COPY . '</span><br />', $filename);
+                    printf('<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div><br />', $filename);
                 }
             }
 
@@ -1025,7 +1025,7 @@ function serendipity_guessMime($extension) {
         case 'jar':
             $mime = 'application/java-archive';
             break;
-        
+            
         case 'ico':
             $mime = 'image/x-icon';
             break;

@@ -16,19 +16,19 @@ require_once(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
 if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
     $user = serendipity_fetchUsers($serendipity['POST']['user']);
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersDelete')) {
-        echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED . '</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
     } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
     } else {
         $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
 
         if (serendipity_checkPermission('adminUsersMaintainOthers') ||
             (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
             serendipity_deleteAuthor($user[0]['authorid']);
-            printf('<div class="serendipityAdminMsgSuccess">' . DELETED_USER . '</div>', $serendipity['POST']['user'], $user[0]['realname']);
+            printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_USER . '</div>', $serendipity['POST']['user'], $user[0]['realname']);
             serendipity_plugin_api::hook_event('backend_users_delete', $user[0]);
         } else {
-            echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
         }
     }
 }
@@ -37,7 +37,7 @@ if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
 /* Save new user */
 if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $_POST['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersCreateNew')) {
-        echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED . '</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
     } else {
         $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['pass'], $_POST['realname'], $_POST['email'], $_POST['userlevel']);
 
@@ -72,7 +72,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
                     }
 
                     if (count($_POST[$item['var']]) < 1) {
-                        echo '<div class="serendipityAdminMsgError">' . WARNING_NO_GROUPS_SELECTED . '</div>';
+                        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['POST']['user'], false);
                     }
@@ -90,7 +90,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
         }
 
         serendipity_plugin_api::hook_event('backend_users_add', $serendipity['POST']['user']);
-        printf('<div class="serendipityAdminMsgSuccess">' . CREATED_USER . '</div>', '#' . $serendipity['POST']['user'] . ', ' . $_POST['realname']);
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_USER . '</div>', '#' . $serendipity['POST']['user'] . ', ' . $_POST['realname']);
     }
 }
 
@@ -99,9 +99,9 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $user = serendipity_fetchUsers($serendipity['POST']['user']);
     if (!serendipity_checkPermission('adminUsersMaintainOthers') && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED . '</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
     } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError">' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
     } else {
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
         $config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
@@ -134,7 +134,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
                     }
 
                     if (count($_POST[$item['var']]) < 1) {
-                        echo '<div class="serendipityAdminMsgError">' . WARNING_NO_GROUPS_SELECTED . '</div>';
+                        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['POST']['user'], false);
                     }
@@ -161,7 +161,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
         serendipity_updatePermalink($pl_data, 'author');
 
         serendipity_plugin_api::hook_event('backend_users_edit', $pl_data);
-        printf('<div class="serendipityAdminMsgSuccess">' . MODIFIED_USER . '</div>', $_POST['realname']);
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_USER . '</div>', $_POST['realname']);
     }
 }
 

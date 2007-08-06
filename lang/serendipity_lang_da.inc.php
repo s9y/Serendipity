@@ -844,7 +844,7 @@
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
 @define('SYNDICATION_RFC2616', 'Aktiver RSS-feeds der overholder RFC2616');
-@define('SYNDICATION_RFC2616_DESC', 'Hvis IKKE RFC2616 overholdes vil alle forespørgsler til Serendipity returnere artikler ændret siden  tidspunktet for sidste forespørgsel. Dvs \'nej\' medfører at dine besøgende får alle artikler siden sidst. På den anden side, nogle RSS aggregatorer som f.eks. \'Planet\' opfører sig underligt med denne indstilling da den jo ikke overholder RFC2616. Læs eventuelt mere om problemet her <a href="https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822">https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822</a>');
+@define('SYNDICATION_RFC2616_DESC', 'Hvis IKKE RFC2616 overholdes vil alle forespørgsler til Serendipity returnere artikler ændret siden  tidspunktet for sidste forespørgsel. Dvs \'nej\' medfører at dine besøgende får alle artikler siden sidst. På den anden side, nogle RSS aggregatorer som f.eks. \'Planet\' opfører sig underligt med denne indstilling da den jo ikke overholder RFC2616. Læs eventuelt mere om problemet her <a href="<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>"><a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a></a>');
 @define('MEDIA_PROPERTY_DATE', 'Tilhørende dato');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Spilletid');
 @define('FILENAME_REASSIGNED', 'Nyt filnavn automagisk tildelt: %s');
