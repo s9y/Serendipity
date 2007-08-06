@@ -290,8 +290,6 @@ function serendipity_imageSelector_done(textarea)
 
     if (typeof(parent.self.opener.htmlarea_editors) != 'undefined' && typeof(parent.self.opener.htmlarea_editors[textarea]) != 'undefined') {
         parent.self.opener.htmlarea_editors[textarea].surroundHTML(block, '');
-    } else if (typeof(parent.self.opener.TinyMCE) !='undefined') {
-        parent.self.opener.tinyMCE.execCommand('mceInsertRawHTML', true, block);
     } else if (parent.self.opener.editorref) {
         parent.self.opener.editorref.surroundHTML(block, '');
     } else {
