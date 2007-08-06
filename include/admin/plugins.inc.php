@@ -113,7 +113,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     ?>
     </div>
 <?php } elseif ( isset($_POST['SAVECONF'])) { ?>
-    <div class="serendipityAdminMsgSuccess"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_success'); ?>" alt="" /><?php echo DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')); ?></div>
+    <div class="serendipityAdminMsgSuccess"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_success.png'); ?>" alt="" /><?php echo DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')); ?></div>
 <?php } ?>
 
 <form method="post" name="serendipityPluginConfigure">
