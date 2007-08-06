@@ -24,7 +24,7 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
         $res = serendipity_updateConfiguration();
         if (is_array($res)) {
             echo DIAGNOSTIC_ERROR;
-            echo '<span class="serendipityAdminMsgError">- ' . implode('<br />', $res) . '</span><br /><br />';
+            echo '<div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . implode('<br />', $res) . '</div><br /><br />';
         } else {
             /* If we have new rewrite rules, then install them */
             $permalinkOld = array(
@@ -65,7 +65,7 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
                 serendipity_buildPermalinks();
             }
 
-            echo '<br /><div class="serendipityAdminMsgSuccess">'. WRITTEN_N_SAVED .'</div>';
+            echo '<br /><div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . WRITTEN_N_SAVED .'</div>';
         }
 
         break;

@@ -215,7 +215,7 @@ if ($serendipity['GET']['action'] == 'ignore') {
 
     if (sizeof($errors)) {
         echo DIAGNOSTIC_ERROR . '<br /><br />';
-        echo '<span class="serendipityAdminMsgError">- ' . implode('<br />', $errors) . '</span><br /><br />';
+        echo '<div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . implode('<br />', $errors) . '</div><br /><br />';
     }
 
     /* I don't care what you told me, I will always nuke Smarty cache */
@@ -243,7 +243,7 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
     if ($serendipity['GET']['action'] == 'ignore') {
         echo SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED;
     } elseif ($serendipity['GET']['action'] == 'upgrade') {
-        printf('<div class="serendipityAdminMsgSuccess">'. SERENDIPITY_UPGRADER_NOW_UPGRADED .'</div>', $serendipity['version']);
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . SERENDIPITY_UPGRADER_NOW_UPGRADED .'</div>', $serendipity['version']);
     }
     echo '<br />';
     printf('<div align="center">'. SERENDIPITY_UPGRADER_RETURN_HERE .'</div>', '<a href="'. $serendipity['serendipityHTTPPath'] .'">', '</a>');
@@ -323,12 +323,13 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
 </table>
 </div>
 <?php if ($showWritableNote === true) { ?>
-    <div class="serendipityAdminMsgNote"><?php echo sprintf(PROBLEM_PERMISSIONS_HOWTO, 'chmod 1777') ?></div>
+    <div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" /><?php echo sprintf(PROBLEM_PERMISSIONS_HOWTO, 'chmod 1777') ?></div>
 <?php }
 
     if ($errorCount > 0) { ?>
     <div align="center">
-        <div class="serendipityAdminMsgError"><?php echo PROBLEM_DIAGNOSTIC ?></div>
+        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" />
+<?php echo PROBLEM_DIAGNOSTIC ?></div>
         <h2><a href="serendipity_admin.php"><?php echo RECHECK_INSTALLATION ?></a></h2>
     </div>
 <?php }

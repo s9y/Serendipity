@@ -846,7 +846,7 @@ $i18n_unknown = 'tw';
 @define('PLUGIN_AVAILABLE_COUNT', '總共： %d 個外掛。');
 
 @define('SYNDICATION_RFC2616', '開啟依照嚴格的 RFC2616 RSS-Feed');
-@define('SYNDICATION_RFC2616_DESC', '不強制 RFC2616 表示全部有條件的 GETs 到 Serendipity 只會傳回最後修改的文章。如果設定為 "false" 表示訪客會接收全部的文章。不過，一些網誌的蒐集軟體像 Planet 會出現奇怪現象。如果出現奇怪現象表示它違反了 RFC2616 的標準。所以設定為 "TRUE" 表示你遵從 RFC 的標準，但是訪客可能會讀取不到全部的文章。整體來說，不管怎樣都無法顧到兩方。相關資訊：https://sourceforge.net/tracker/index.php?func=detail&aid=1461728&group_id=75065&atid=542822');
+@define('SYNDICATION_RFC2616_DESC', '不強制 RFC2616 表示全部有條件的 GETs 到 Serendipity 只會傳回最後修改的文章。如果設定為 "false" 表示訪客會接收全部的文章。不過，一些網誌的蒐集軟體像 Planet 會出現奇怪現象。如果出現奇怪現象表示它違反了 RFC2616 的標準。所以設定為 "TRUE" 表示你遵從 RFC 的標準，但是訪客可能會讀取不到全部的文章。整體來說，不管怎樣都無法顧到兩方。相關資訊：<a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
 @define('MEDIA_PROPERTY_DATE', '相關日期');
 @define('MEDIA_PROPERTY_RUN_LENGTH', '長度');
 @define('FILENAME_REASSIGNED', '自動指定新檔案的名稱： %s');

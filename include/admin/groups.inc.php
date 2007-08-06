@@ -14,7 +14,7 @@ if (!serendipity_checkPermission('adminUsersGroups')) {
 if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
     $group = serendipity_fetchGroup($serendipity['POST']['group']);
     serendipity_deleteGroup($serendipity['POST']['group']);
-    printf('<div class="serendipityAdminMsgSuccess">' . DELETED_GROUP . '</div>', $serendipity['POST']['group'], $group['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_GROUP . '</div>', $serendipity['POST']['group'], $group['name']);
 }
 
 /* Save new group */
@@ -22,7 +22,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     $serendipity['POST']['group'] = serendipity_addGroup($serendipity['POST']['name']);
     $perms = serendipity_getAllPermissionNames();
     serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
-    printf('<div class="serendipityAdminMsgSuccess">' . CREATED_GROUP . '</div>', '#' . $serendipity['POST']['group'] . ', ' . $serendipity['POST']['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_GROUP . '</div>', '#' . $serendipity['POST']['group'] . ', ' . $serendipity['POST']['name']);
 }
 
 
@@ -30,7 +30,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
     serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
-    printf('<div class="serendipityAdminMsgSuccess">' . MODIFIED_GROUP . '</div>', $serendipity['POST']['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_GROUP . '</div>', $serendipity['POST']['name']);
 }
 
 if ( $serendipity['GET']['adminAction'] != 'delete' ) {

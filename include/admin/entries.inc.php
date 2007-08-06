@@ -409,11 +409,11 @@ switch($serendipity['GET']['adminAction']) {
             if ($serendipity['POST']['preview'] != 'true') {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
-                    echo '<div class="serendipityAdminMsgSuccess">' . IFRAME_SAVE_DRAFT . '</div><br />';
+                    echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
                     serendipity_updertEntry($entry);
                 } else {
                     if ($serendipity['use_iframe']) {
-                        echo '<div class="serendipityAdminMsgSuccess">' . IFRAME_SAVE . '</div><br />';
+                        echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE . '</div><br />';
                         serendipity_iframe_create('save', $entry);
                     } else {
                         serendipity_iframe($entry, 'save');
@@ -465,7 +465,7 @@ switch($serendipity['GET']['adminAction']) {
                 }
 
                 if ($serendipity['use_iframe']) {
-                    echo '<div class="serendipityAdminMsgSuccess">' . IFRAME_PREVIEW . '</div><br />';
+                    echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_PREVIEW . '</div><br />';
                     serendipity_iframe_create('preview', $entry);
                 } else {
                     serendipity_iframe($entry, 'preview');

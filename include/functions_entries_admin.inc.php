@@ -187,7 +187,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     /* HTML CODE BELOW IS FOR FALLBACK PORTABILITY ONLY - MODIFY CODE IN TEMPLATE ADMIN/ENTRIES.TPL INSTEAD! */
     if (!empty($errMsg)) {
 ?>
-        <div class="serendipityAdminMsgError"><?php echo $errMsg; ?></div>
+        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" /><?php echo $errMsg; ?></div>
 <?php } ?>
         <form <?php echo $entry['entry_form']; ?> action="<?php echo $targetURL; ?>" method="post" id="serendipityEntry" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px">
         <?php echo $hidden; ?>

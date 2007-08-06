@@ -40,11 +40,11 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
         serendipity_ACLGrant($catid, 'category', 'read', $serendipity['POST']['cat']['read_authors']);
         serendipity_ACLGrant($catid, 'category', 'write', $serendipity['POST']['cat']['write_authors']);
 
-        echo '<div class="serendipityAdminMsgSuccess">'. CATEGORY_SAVED .'</div>';
+        echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CATEGORY_SAVED .'</div>';
 
     } elseif ($serendipity['GET']['adminAction'] == 'edit') {
             if (!serendipity_checkPermission('adminCategoriesMaintainOthers') && !serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write')) {
-                echo '<div class="serendipityAdminMsgError">'. PERM_DENIED .'</div>';
+                echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. PERM_DENIED .'</div>';
             } else {
                 /* Check to make sure parent is not a child of self */
                 $r = serendipity_db_query("SELECT categoryid FROM {$serendipity['dbPrefix']}category c
@@ -58,7 +58,7 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
                     serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid, $serendipity['POST']['cat']['sort_order'], $serendipity['POST']['cat']['hide_sub']);
                     serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'read', $serendipity['POST']['cat']['read_authors']);
                     serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'write', $serendipity['POST']['cat']['write_authors']);
-                    echo '<div class="serendipityAdminMsgSuccess">'. CATEGORY_SAVED .'</div>';
+                    echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CATEGORY_SAVED .'</div>';
                 }
             }
     }
@@ -103,12 +103,12 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
                     }
                 }
 
-                echo '<div class="serendipityAdminMsgSuccess">'. ($remaining_cat ? sprintf(CATEGORY_DELETED_ARTICLES_MOVED, (int)$serendipity['GET']['cid'], $remaining_cat) : sprintf(CATEGORY_DELETED,(int)$serendipity['GET']['cid'])) .'</div>';
+                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ($remaining_cat ? sprintf(CATEGORY_DELETED_ARTICLES_MOVED, (int)$serendipity['GET']['cid'], $remaining_cat) : sprintf(CATEGORY_DELETED,(int)$serendipity['GET']['cid'])) .'</div>';
                 $serendipity['GET']['adminAction'] = 'view';
             }
         }
     } else {
-        echo '<div class="serendipityAdminMsgError">'. INVALID_CATEGORY .'</div>';
+        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. INVALID_CATEGORY .'</div>';
     }
 }
 ?>
