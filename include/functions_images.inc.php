@@ -1407,7 +1407,8 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         // in the database
 
         $nCount = 0;
-        if ($serendipity['onTheFlySynch'] && serendipity_checkPermission('adminImagesSync') && $serendipity['current_image_hash'] != $serendipity['last_image_hash']) {
+        if ($debug) echo "<p>Image Sync Right: " . serendipity_checkPermission('adminImagesSync') . " Onthefly Sync: " . $serendipity['onTheFlySynch'] . " Hash: " . $serendipity['current_image_hash'] . "!=" . $serendipity['last_image_hash']. "</p>";
+        if ($serendipity['onTheFlySynch'] && serendipity_checkPermission('adminImagesSync') && ($debug  || ($serendipity['current_image_hash'] != $serendipity['last_image_hash']))) {
             $aResultSet = serendipity_db_query("SELECT path, name, extension, thumbnail_name, id
                                                 FROM {$serendipity['dbPrefix']}images", false, 'assoc');
             if ($debug) echo "<p>Got images: <pre>" . print_r($aResultSet, true) . "</pre></p>";
@@ -1454,7 +1455,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
                 // MTG: 21/01/06: put files which have just 'turned up' into the database
                 $aImageData = serendipity_getImageData($sFile);
-                if (serendipity_isImage($aImageData)) {
+                if (serendipity_isMedia($aImageData)) {
                     $nPos = strrpos($sFile, "/");
                     if (is_bool($nPos) && !$nPos) {
                        $sFileName  = $sFile;
@@ -1585,6 +1586,49 @@ function serendipity_isImage(&$file, $strict = false) {
     }
 
     return (0 === strpos(strtolower($file['displaymime']), 'image/'));
+}
+
+/**
+ * Check if a media item is a video
+ *
+ * @access public
+ * @param   array       File information
+ * @return  boolean     True if the file is a video
+ */
+function serendipity_isVideo($file) {
+    global $serendipity;
+
+    $file['displaymime'] = $file['mime'];
+
+    return (0 === strpos(strtolower($file['displaymime']), 'video/'));
+}
+
+/**
+ * Check if a media item is an audio
+ *
+ * @access public
+ * @param   array       File information
+ * @return  boolean     True if the file is an audio
+ */
+function serendipity_isAudio($file) {
+    global $serendipity;
+
+    $file['displaymime'] = $file['mime'];
+
+    return (0 === strpos(strtolower($file['displaymime']), 'audio/'));
+}
+
+/**
+ * Check if a media item is a media file (image, video or audio)
+ *
+ * @access public
+ * @param   array       File information
+ * @return  boolean     True if the file is an audio
+ */
+function serendipity_isMedia(&$file, $strict = false) {
+    global $serendipity;
+
+    return serendipity_isImage($file, $strict) || serendipity_isVideo($file) || serendipity_isAudio($file);
 }
 
 /**
