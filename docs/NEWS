@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * On the fly update of the media databas: Not only images are added
+      but video and audio, too. (brockhaus)
+
     * New spam blocking method for trackbacks: ip validation. The 
       senders ip is compared with the ip of the host, the trackback is
       set to. If they don't match, the trackback is rejected/moderated.
