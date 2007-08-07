@@ -947,6 +947,7 @@ function serendipity_guessMime($extension) {
             break;
 
         case 'mov':
+        case 'mp4':
         case 'qt':
             $mime = 'video/x-quicktime';
             break;
