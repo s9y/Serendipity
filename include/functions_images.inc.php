@@ -1455,7 +1455,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
                 // MTG: 21/01/06: put files which have just 'turned up' into the database
                 $aImageData = serendipity_getImageData($sFile);
-                if (serendipity_isMedia($aImageData)) {
+                if (serendipity_isImage($aImageData, false, '(image)|(video)|(audio)/')) {
                     $nPos = strrpos($sFile, "/");
                     if (is_bool($nPos) && !$nPos) {
                        $sFileName  = $sFile;
@@ -1571,7 +1571,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
  * @param   boolean     Use a strict check that does not list PDFs as an image?
  * @return  boolean     True if the file is an image
  */
-function serendipity_isImage(&$file, $strict = false) {
+function serendipity_isImage(&$file, $strict = false, $allowed = 'image/') {
     global $serendipity;
 
     $file['displaymime'] = $file['mime'];
@@ -1585,50 +1585,7 @@ function serendipity_isImage(&$file, $strict = false) {
         $file['displaymime'] = 'image/png';
     }
 
-    return (0 === strpos(strtolower($file['displaymime']), 'image/'));
-}
-
-/**
- * Check if a media item is a video
- *
- * @access public
- * @param   array       File information
- * @return  boolean     True if the file is a video
- */
-function serendipity_isVideo($file) {
-    global $serendipity;
-
-    $file['displaymime'] = $file['mime'];
-
-    return (0 === strpos(strtolower($file['displaymime']), 'video/'));
-}
-
-/**
- * Check if a media item is an audio
- *
- * @access public
- * @param   array       File information
- * @return  boolean     True if the file is an audio
- */
-function serendipity_isAudio($file) {
-    global $serendipity;
-
-    $file['displaymime'] = $file['mime'];
-
-    return (0 === strpos(strtolower($file['displaymime']), 'audio/'));
-}
-
-/**
- * Check if a media item is a media file (image, video or audio)
- *
- * @access public
- * @param   array       File information
- * @return  boolean     True if the file is an audio
- */
-function serendipity_isMedia(&$file, $strict = false) {
-    global $serendipity;
-
-    return serendipity_isImage($file, $strict) || serendipity_isVideo($file) || serendipity_isAudio($file);
+    return preg_match('@' . $allowed . '@i', $file['displaymime']);
 }
 
 /**
