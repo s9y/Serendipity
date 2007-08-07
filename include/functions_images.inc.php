@@ -1429,7 +1429,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
                     if (isset($aFilesOnDisk[$sFileName])) {
                         unset($aFilesOnDisk[$sFileName]);
                     } else {
-                        if ($debug) "Deleting Image {$sFile['id']}<br />\n";
+                        if ($debug) echo "Deleting Image {$sFile['id']}<br />\n";
                         serendipity_deleteImage($sFile['id']);
                         ++$nCount;
                     }
