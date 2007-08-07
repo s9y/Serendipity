@@ -265,7 +265,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 <?php
         foreach ($groupstack as $plug) {
             $jsLine = " onmouseout=\"document.getElementById('serendipity_plugin_". $plug['class_name'] ."').className='';\"";
-            $jsLine .= " onmouseover=\"document.getElementById('serendipity_plugin_". $plug['class_name'] ."').className='serendipity_admin_list_item_uneven';\"";
+            $jsLine .= " onmouseover=\"document.getElementById('serendipity_plugin_". $plug['class_name'] ."').className='serendipity_PluginAdminHighlight';\"";
 
             $pluginInfo = $notice = array();
             if (!empty($plug['author'])) {
