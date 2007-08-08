@@ -618,20 +618,11 @@ class serendipity_event_entryproperties extends serendipity_event
                     //     is in the process of being created. This must be done for the extended properties
                     //     to be applied in the preview.
 
-                    if (is_array($serendipity['POST']['properties']) && count($serendipity['POST']['properties']) > 0){
-                        $parr = array();
-                        $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
-                        foreach($supported_properties AS $prop_key) {
-                            if (isset($serendipity['POST']['properties'][$prop_key]))
-                                $eventData[0]['properties']['ep_' . $prop_key] = $serendipity['POST']['properties'][$prop_key];
-                        }
-                    }
-
                     if (isset($serendipity['GET']['id']) && isset($eventData[0]['properties']['ep_entrypassword'])) {
 
-                        if (isset($_SESSION['entrypassword_unlocked'][$serendipity['GET']['id']]) || $eventData[0]['properties']['ep_entrypassword'] == $serendipity['POST']['entrypassword']) {
+                        if ($_SESSION['entrypassword_unlocked'][$serendipity['GET']['id']] == md5($eventData[0]['properties']['ep_entrypassword']) || $eventData[0]['properties']['ep_entrypassword'] == $serendipity['POST']['entrypassword']) {
                             // Do not show login form again, once we have first enabled it.
-                            $_SESSION['entrypassword_unlocked'][$serendipity['GET']['id']] = true;
+                            $_SESSION['entrypassword_unlocked'][$serendipity['GET']['id']] = md5($eventData[0]['properties']['ep_entrypassword']);
                         } else {
                             if (is_array($eventData)) {
                                 $eventData['clean_page'] = true;
@@ -639,6 +630,15 @@ class serendipity_event_entryproperties extends serendipity_event
                                 $eventData = array('clean_page' => true);
                             }
                             $this->showPasswordForm = true;
+                        }
+                    }
+
+                    if ($addData['preview'] && is_array($serendipity['POST']['properties']) && count($serendipity['POST']['properties']) > 0){
+                        $parr = array();
+                        $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
+                        foreach($supported_properties AS $prop_key) {
+                            if (isset($serendipity['POST']['properties'][$prop_key]))
+                                $eventData[0]['properties']['ep_' . $prop_key] = $serendipity['POST']['properties'][$prop_key];
                         }
                     }
 
