@@ -117,17 +117,19 @@
 
     {*** MAIN LINKS START ***}
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuMain">
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuMainLinks" style="display:none"></li>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks serendipitySideBarMenuMainFrontpage"><a href="serendipity_admin.php">{$CONST.ADMIN_FRONTPAGE}</a></li>
                         {if 'personalConfiguration'|checkPermission}
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuMainLinks serendipitySideBarMenuMainPersonal"><a href="serendipity_admin.php?serendipity[adminModule]=personal">{$CONST.PERSONAL_SETTINGS}</a></li>
                         {/if}
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuMainLinks" style="display:none"></li>
                     </ul>
                     <br class="serendipitySideBarMenuSpacer" />                                                                                             
     {*** MAIN LINKS END ***}
 
     {*** ENTRY LINKS START ***}
-                    <ul class="serendipitySideBarMenu serendipitySideBarMenuEntry">
                     {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
+                    <ul class="serendipitySideBarMenu serendipitySideBarMenuEntry">
                         <li class="serendipitySideBarMenuHead serendipitySideBarMenuEntryLinks">{$CONST.ADMIN_ENTRIES}</li>
                         {if 'adminEntries'|checkPermission}
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new">{$CONST.NEW_ENTRY}</a></li>
@@ -145,9 +147,10 @@
                         {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
                         {if $admin_vars.no_create !== true} {serendipity_hookPlugin hook="backend_sidebar_entries" hookAll="true"}{/if}
                         {/if}
-                    {/if}
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuEntryLinks" style="display:none"></li>
                     </ul>
-    {*** ENTRY LINKS END ***}
+                    {/if}
+                    {*** ENTRY LINKS END ***}
 
     {*** MEDIA LINKS START ***}
         {if 'adminImages'|checkPermission}
@@ -166,6 +169,7 @@
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('{$CONST.WARNING_THIS_BLAHBLAH}');">{$CONST.CREATE_THUMBS}</a></li>
                         {/if}
                         {if $admin_vars.no_create !== true} {serendipity_hookPlugin hook="backend_sidebar_entries_images" hookAll="true"}{/if}
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuMediaLinks" style="display:none"></li>
                     </ul>
         {/if}
     {*** MEDIA LINKS END ***}
@@ -181,6 +185,7 @@
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuAppearanceLinks"><a href="serendipity_admin.php?serendipity[adminModule]=plugins">{$CONST.CONFIGURE_PLUGINS}</a></li>
                         {/if}
                         {if $admin_vars.no_create !== true} {serendipity_hookPlugin hook="backend_sidebar_admin_appearance" hookAll="true"}{/if}
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuAppearance" style="display:none"></li>
                     </ul>
         {/if}
     {*** APPEARANCE END ***}
@@ -203,6 +208,7 @@
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=export">{$CONST.EXPORT_ENTRIES}</a></li>
                         {/if}
                         {if $admin_vars.no_create !== true} {serendipity_hookPlugin hook="backend_sidebar_admin" hookAll="true"}{/if}
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuUserManagement" style="display:none"></li>
                     </ul>
         {/if}
     {*** USER MANAGEMENT END ***}
@@ -210,8 +216,10 @@
     {*** LOGOUT START ***}
                     <br class="serendipitySideBarMenuSpacer" />                                                                                             
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuLogout">
+                        <li class="serendipitySideBarMenuHead serendipitySideBarMenuLogoutLinks" style="display:none"></li>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks serendipitySideBarMenuLogoutWeblog"><a href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a></li>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks serendipitySideBarMenuLogoutLogout"><a href="serendipity_admin.php?serendipity[adminModule]=logout">{$CONST.LOGOUT}</a></li>
+                        <li class="serendipitySideBarMenuFoot serendipitySideBarMenuLogoutLinks" style="display:none"></li>
                     </ul>
     {*** LOGOUT END ***}
 
