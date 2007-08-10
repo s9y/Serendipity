@@ -31,12 +31,13 @@ serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
 
 if ($output['show_links']) {
     echo '<div class="' . $output['links_css'] . '">' . "\n";
-    echo '<p>' . $output['links_title'] . '</p>' . "\n";
+    echo '<p class="further_links_head">' . $output['links_title'] . '</p>' . "\n";
     echo '<ul>' . "\n";
     foreach($output['links'] AS $link) {
         echo '<li>' . $link . '</li>' . "\n";
     }
     echo '</ul>' . "\n";
+    echo '<p class="further_links_foot" style="display: none"></p>' . "\n";
     echo '</div>' . "\n";
 }
 echo '<h3 class="serendipityWelcomeBack">' . $output['welcome'] . '</h3>';
