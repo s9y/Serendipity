@@ -724,7 +724,7 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
                     echo '<script type="text/javascript">parent.document.forms[\'serendipityEntry\'][\'serendipity[id]\'].value = "' . $serendipity['lastSavedEntry'] . '";</script>';
                 }
                 $entrylink = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
-                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)></div>';
+                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)</div>';
             }
             echo '<br style="clear: both" />';
 
