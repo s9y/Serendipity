@@ -94,13 +94,13 @@ input, select, textarea {
     padding: 0px;
     margin: 0px;
     border: 0px;
-    background-image: url({TEMPLATE_PATH}img/header_logo.png);
+    background-image: url({TEMPLATE_PATH}../img/header_logo.png);
     background-repeat: no-repeat;
     width: 770px;
 }
 
 #serendipityAdminFrame {
-    background-image: url({TEMPLATE_PATH}img/header_bar.png);
+    background-image: url({TEMPLATE_PATH}../img/header_bar.png);
     background-repeat: repeat-x;
     background-color: white;
 }
@@ -172,7 +172,7 @@ ul.serendipitySideBarMenu li.serendipitySideBarMenuHead {
     color: #FFFFFF;
     font-weight: bold;
     padding: 5px 0px 0px 5px;
-    background: url({TEMPLATE_PATH}img/sidebar_left.jpg) no-repeat;
+    background: url({TEMPLATE_PATH}../img/sidebar_left.jpg) no-repeat;
     border: 1px solid #011a7c;
     height: 20px;
     font-size: 0.9em;
@@ -198,7 +198,7 @@ ul.serendipitySideBarMenu li a {
 ul.serendipitySideBarMenu li a:hover {
     background-color: #011c7e;
     color: white;
-    background: url({TEMPLATE_PATH}img/sidebar_left.jpg) no-repeat;
+    background: url({TEMPLATE_PATH}../img/sidebar_left.jpg) no-repeat;
 }
 
 
