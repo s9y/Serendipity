@@ -519,7 +519,7 @@ var $filter_defaults;
                 } elseif (preg_match('@false@i', $reqdata)) {
                     $ret['is_spam'] = false;
                     $ret['message'] = $reqdata;
-                    $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API verification failed: ' . $reqdata, $addData);
+                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
                 } else {
                     $ret['is_spam'] = false;
                     $ret['message'] = 'Akismet API failure';
