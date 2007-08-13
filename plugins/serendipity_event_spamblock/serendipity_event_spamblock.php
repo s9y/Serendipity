@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.69');
+        $propbag->add('version',       '1.70');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -566,17 +566,12 @@ var $filter_defaults;
         return $ret;
     }
 
-    function checkScheme($maxVersion) {
+    function checkScheme() {
         global $serendipity;
 
-        $version = $this->get_config('version', '1.1');
-
-        if ($version != '1.0') {
-            $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblock_htaccess (
-                          timestamp int(10) {UNSIGNED} default null,
-                          ip varchar(15))";
-            $sql = serendipity_db_schema_import($q);
-        } elseif ($version != $maxVersion) {
+        $dbversion = $this->get_config('dbversion', '1');
+        
+        if ($dbversion == '1') {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblocklog (
                           timestamp int(10) {UNSIGNED} default null,
                           type varchar(255),
@@ -605,7 +600,10 @@ var $filter_defaults;
                           ip varchar(15))";
             $sql = serendipity_db_schema_import($q);
 
-            $this->set_config('version', $maxVersion);
+            $q   = "CREATE INDEX kshtaidx ON {$serendipity['dbPrefix']}spamblock_htaccess (timestamp);";
+            $sql = serendipity_db_schema_import($q);
+
+            $this->set_config('dbversion', '2');
         }
 
         return true;
@@ -739,9 +737,7 @@ var $filter_defaults;
 
                 case 'frontend_saveComment':
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
-                        if ($this->get_config('logtype', 'db') == 'db' && $this->get_config('version') != $bag->get('version')) {
-                            $this->checkScheme($bag->get('version'));
-                        }
+                        $this->checkScheme();
 
                         $serendipity['csuccess'] = 'true';
                         $logfile = $this->logfile = $this->get_config('logfile', $serendipity['serendipityPath'] . 'spamblock.log');
