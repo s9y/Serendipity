@@ -377,19 +377,106 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
  */
 function add_pingback ($id, $postdata) {
     global $serendipity;
+    $sourceURI = getPingbackParam('sourceURI', $postdata);
+    $targetURI = getPingbackParam('targetURI', $postdata);
+    if (isset($sourceURI) && isset($targetURI)) {
+        $path = parse_url($sourceURI);
+        $local              = $targetURI;
+        $comment['title']   = 'PingBack';
+        $comment['url']     = $sourceURI;
+        $comment['comment'] = '';
+        $comment['name']    = $path['host'];
+        fetchPingbackData($comment);
 
-    if(preg_match('@<methodcall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@i', $postdata, $matches)) {
+        serendipity_saveComment($id, $comment, 'PINGBACK');
+        return 1;
+    }
+    if(preg_match('@<methodCall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@is', $postdata, $matches)) {
         $remote             = $matches[1];
         $local              = $matches[2];
-        $comment['title']   = '';
+        $path = parse_url($remote);
+        $comment['title']   = 'PingBack';
         $comment['url']     = $remote;
         $comment['comment'] = '';
-        $comment['name']    = '';
+        $comment['name']    = $path['host'];
+        fetchPingbackData($comment);
 
         serendipity_saveComment($id, $comment, 'PINGBACK');
         return 1;
     }
     return 0;
+}
+
+/**
+ * Gets a XML-RPC pingback.ping value by given parameter name
+ * @access private
+ * @param string Name of the paramameter
+ * @param string Buffer containing the pingback XML
+ */
+function getPingbackParam($paramName, $data) {
+    $pattern = "<methodCall>.*?<methodName>\s*pingback.ping\s*</methodName>.*?<params>.*?<param>\s*((<name>\s*$paramName\s*</name>\s*<value>\s*<string>([^<]*)</string>\s*</value>)|(<value>\s*<string>([^<]*)</string>\s*</value>\s*<name>\s*$paramName\s*</name>))\s*</param>.*?</params>.*?</methodCall>";
+    if (preg_match('@' . $pattern .'@is',$data, $matches)) {
+        return $matches[3];
+    } else {
+        return null;
+    }
+}
+
+/**
+ * Fetches additional comment data from the page that sent the pingback
+ * @access private
+ * @param array comment array to be filled
+ */
+function fetchPingbackData( &$comment) {
+    if (!isset($comment) || !is_array($comment) || !isset($comment['url'])) {
+        return;
+    }
+    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+    $url = $comment['url'];
+    
+    // Allow redirection
+    $request_pars['allowRedirects'] = true;
+    $request_pars['timeout'] = 20;
+    
+    serendipity_request_start();
+    
+    // Request the page
+    $req = &new HTTP_Request($url, $request_pars);
+
+    // code 200: OK, code 30x: REDIRECTION
+    $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
+    if ((PEAR::isError($req->sendRequest()) || preg_match($responses, $req->getResponseCode()))) {
+        // nothing to do,
+    } 
+    else {
+        $fContent = $req->getResponseBody();
+
+        // Get a title
+        if (preg_match('@<head>.*?<title>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
+            $comment['title'] = strip_tags($matches[1]);
+        }
+        
+        // Get a part of the article
+        if (preg_match('@<body[^>]*>(.*?)</body>@is',$fContent,$matches)) {
+            
+            $body = strip_tags($matches[1]);
+
+            //TODO: Serendipity comes into trouble wit html_entity_decode and "Umlaute"
+            $body = str_replace(array("&nbsp;"),array(' '),$body);
+            
+            // replace whitespace with single space            
+            $body = preg_replace('@\s+@s', ' ', $body);
+            
+            // truncate the text to 200 chars
+            $arr = str_split($body, 200);
+            $body = $arr[0];
+
+            $comment['comment'] = $body . '[..]';
+        }
+    }
+    
+    serendipity_request_end();
+    
 }
 
 /**
