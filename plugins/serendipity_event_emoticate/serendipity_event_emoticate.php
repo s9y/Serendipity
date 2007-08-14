@@ -25,7 +25,7 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -102,7 +102,7 @@ class serendipity_event_emoticate extends serendipity_event
 
                 '\:\-?\)'  => serendipity_getTemplateFile('img/emoticons/smile.'.$ext),
 
-                '\:\|'     => serendipity_getTemplateFile('img/emoticons/normal.'.$ext),
+                '\:\-?\|'     => serendipity_getTemplateFile('img/emoticons/normal.'.$ext),
 
                 '\:\-?O'  => serendipity_getTemplateFile('img/emoticons/eek.'.$ext),
 
