@@ -27,7 +27,7 @@ function &serendipity_fetchTrackbacks($id, $limit = null, $showAll = false) {
         $and = "AND status = 'approved'";
     }
 
-    $query = "SELECT * FROM {$serendipity['dbPrefix']}comments WHERE entry_id = '". (int)$id ."' AND type = 'TRACKBACK' $and ORDER BY id";
+    $query = "SELECT * FROM {$serendipity['dbPrefix']}comments WHERE entry_id = '". (int)$id ."' AND (type = 'TRACKBACK' OR type = 'PINGBACK') $and ORDER BY id";
     if (isset($limit)) {
         $limit  = serendipity_db_limit_sql($limit);
         $query .= " $limit";
