@@ -51,7 +51,6 @@ var $filter_defaults;
         $propbag->add('configuration', array(
             'killswitch',
             'hide_for_authors',
-            'trackback_ipvalidation' ,
             'bodyclone',
             'entrytitle',
             'ipflood',
@@ -61,6 +60,7 @@ var $filter_defaults;
             'captcha_color',
             'forcemoderation',
             'forcemoderation_treat',
+            'trackback_ipvalidation' ,
             'forcemoderationt',
             'forcemoderationt_treat',
             'disable_api_comments',
@@ -110,17 +110,10 @@ var $filter_defaults;
                 break;
 
             case 'trackback_ipvalidation':
-            /*
-                $propbag->add('type', 'boolean');
-                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION);
-                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC);
-                $propbag->add('default', false);
-                */
-
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC);
-                $propbag->add('default', 'no');
+                $propbag->add('default', 'moderate');
                 $propbag->add('radio', array(
                     'value' => array('no', 'moderate', 'reject'),
                     'desc'  => array(NO, PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT)
@@ -795,7 +788,7 @@ var $filter_defaults;
                             return false;
                         }
 
-                        // Check for not allowing trackbacks/wfwcomments
+                        // Check for not allowing trackbacks/pingbacks/wfwcomments
                         if ( ($addData['type'] != 'NORMAL' || $addData['source'] == 'API') &&
                              $this->get_config('disable_api_comments', 'none') != 'none') {
                             if ($this->get_config('disable_api_comments') == 'reject') {
@@ -811,9 +804,9 @@ var $filter_defaults;
                             }
                         }
 
-                        // Check if sender ip is matching trackback ip (ip validation)
-                        $trackback_ipvalidation_option = $this->get_config('trackback_ipvalidation','no');
-                        if ($addData['type'] == 'TRACKBACK' && $trackback_ipvalidation_option != 'no') {
+                        // Check if sender ip is matching trackback/pingback ip (ip validation)
+                        $trackback_ipvalidation_option = $this->get_config('trackback_ipvalidation','moderate');
+                        if (($addData['type'] == 'TRACKBACK' || $addData['type'] == 'PINGBACK') && $trackback_ipvalidation_option != 'no') {
                             $this->IsHardcoreSpammer();
                             $parts = @parse_url($addData['url']);
                             $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
@@ -870,7 +863,7 @@ var $filter_defaults;
                         }
 
                         // Check Trackback URLs?
-                        if ($addData['type'] == 'TRACKBACK' && serendipity_db_bool($this->get_config('trackback_check_url'))) {
+                        if (($addData['type'] == 'TRACKBACK' || $addData['type'] == 'PINGBACK') && serendipity_db_bool($this->get_config('trackback_check_url'))) {
                             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
 
                             if (function_exists('serendipity_request_start')) serendipity_request_start();
