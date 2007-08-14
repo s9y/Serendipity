@@ -388,6 +388,12 @@ function add_pingback ($id, $postdata) {
         $comment['name']    = $path['host'];
         fetchPingbackData($comment);
 
+        // if no ID parameter was given, try to get one from targetURI
+        if (!isset($id) || $id==0) {
+            if (preg_match('@/(\d+)_[^/]*$@', $local, $matches)) {
+                $id = (int)$matches[1];
+            }
+        }
         serendipity_saveComment($id, $comment, 'PINGBACK');
         return 1;
     }
@@ -400,6 +406,13 @@ function add_pingback ($id, $postdata) {
         $comment['comment'] = '';
         $comment['name']    = $path['host'];
         fetchPingbackData($comment);
+
+        // if no ID parameter was given, try to get one from targetURI
+        if (!isset($id) || $id==0) {
+            if (preg_match('@/(\d+)_[^/]*$@', $local, $matches)) {
+                $id = (int)$matches[1];
+            }
+        }
 
         serendipity_saveComment($id, $comment, 'PINGBACK');
         return 1;
@@ -434,14 +447,10 @@ function fetchPingbackData( &$comment) {
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
     
-    // Allow redirection
-    $request_pars['allowRedirects'] = true;
-    $request_pars['timeout'] = 20;
-    
-    serendipity_request_start();
+    if (function_exists('serendipity_request_start')) serendipity_request_start();
     
     // Request the page
-    $req = &new HTTP_Request($url, $request_pars);
+    $req = &new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
 
     // code 200: OK, code 30x: REDIRECTION
     $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
@@ -475,7 +484,7 @@ function fetchPingbackData( &$comment) {
         }
     }
     
-    serendipity_request_end();
+    if (function_exists('serendipity_request_end')) serendipity_request_end();
     
 }
 
