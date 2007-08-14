@@ -53,7 +53,7 @@
         @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_NONE', 'Keine Protokollierung');
 
         @define('PLUGIN_EVENT_SPAMBLOCK_API_COMMENTS', 'Behandlung von per API übermittelten Kommentaren');
-        @define('PLUGIN_EVENT_SPAMBLOCK_API_COMMENTS_DESC', 'Diese Einstellung bestimmt, wie per API abgegebene Kommentare (Trackbacks, wfw:commentApi) behandelt werden. Falls diese Einstellung auf "moderieren" gestellt ist, müssen alle solche Kommentare immer bestätigt werden. Falls auf "abweisen" gestellt, werden solche Kommentare global nicht erlaubt. Bei der Einstellung "keine" werden solche Kommentare wie andere behandelt.');
+        @define('PLUGIN_EVENT_SPAMBLOCK_API_COMMENTS_DESC', 'Diese Einstellung bestimmt, wie per API abgegebene Kommentare (Trackbacks, Pingbacks, wfw:commentApi) behandelt werden. Falls diese Einstellung auf "moderieren" gestellt ist, müssen alle solche Kommentare immer bestätigt werden. Falls auf "abweisen" gestellt, werden solche Kommentare global nicht erlaubt. Bei der Einstellung "keine" werden solche Kommentare wie andere behandelt.');
         @define('PLUGIN_EVENT_SPAMBLOCK_API_MODERATE', 'moderieren');
         @define('PLUGIN_EVENT_SPAMBLOCK_API_REJECT', 'abweisen');
         @define('PLUGIN_EVENT_SPAMBLOCK_REASON_API', 'Keine API-erstellten Kommentare (u.a. Trackbacks) erlaubt');
@@ -95,13 +95,13 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS', 'Wortfilter für Inhalt');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS', 'Wortfilter für E-Mail-Adressen');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL', 'Trackback-URLS prüfen');
-@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC', 'Einen Trackback nur dann zulassen, wenn Ihre URL auch auf der Zielseite genannt wird.');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL', 'Trackback-URL ungültig.');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL', 'Trackbacks/Pingbacks: URLS prüfen');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC', 'Einen API Kommentar (Trackback/Pingback) nur dann zulassen, wenn Ihre URL auch auf der Zielseite genannt wird.');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL', 'API-Kommentar - URL ungültig.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_TREAT', 'Was soll mit auto-moderierten Kommentaren passieren?');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Was soll mit auto-moderierten Trackbacks passieren?');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Trackbackmoderation nach wievielen Tagen erzwingen');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Alle Trackbacks zu einem Artikel können abhängig vom Alter des Artikels automatisch moderiert werden. Tragen Sie hier das Minimalalter eines Artikels in Tagen ein, ab dem jedes Trackback erst nach Ihrer Moderation dargestellt wird. 0 bedeutet, dass keine automatische Moderation erzeugt wird.');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Was soll mit auto-moderierten Trackbacks/Pingbacks passieren?');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Trackback/Pingbackmoderation nach wievielen Tagen erzwingen');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Alle Trackbacks/Pingbacks zu einem Artikel können abhängig vom Alter des Artikels automatisch moderiert werden. Tragen Sie hier das Minimalalter eines Artikels in Tagen ein, ab dem jedes Trackback/Pingback erst nach Ihrer Moderation dargestellt wird. 0 bedeutet, dass keine automatische Moderation erzeugt wird.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'CSRF-Schutz aktivieren?');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Falls aktiviert, wird ein spezieller Hash-Wert sicherstellen, dass nur Benutzer Kommentare hinterlassen dürfen , die eine gültige Session-ID haben. Dies wird Spam etwas eindämmen und es unmöglich machen, dass Sie ungewollt Kommentare via CSRF-Angriffen hinterlassen, aber es wird auch dazu führen dass nur Benutzer mit aktivierten Cookies kommentieren können.');
@@ -112,8 +112,8 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'So sehen Ihre Captchas im Moment aus. Nachdem Sie die Einstellungen geändert und gespeichert haben können Sie durch einen Klick auf diese das Aussehen hier erneuern.');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION', 'Trackback IP Validierung');
-@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Soll die IP des Trackback Senders mit der IP des Hosts übereinstimmen, auf den der Trackback gesetzt werden soll? (EMPFOHLEN!)');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'Trackback IP Validierung : %s [%s] != Sender IP [%s]');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION', 'Trackbacks/Pingbacks: IP Validierung');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Soll die IP des Senders bei Trackbacks/Pingbacks mit der IP des Hosts übereinstimmen, auf den der Kommentar gesetzt werden soll? (EMPFOHLEN!)');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'IP Validierung : %s [%s] != Sender IP [%s]');
 
 ?>

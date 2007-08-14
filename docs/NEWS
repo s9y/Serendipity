@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Extended spam blocking plugin to handle pingbacks like trackbacks.
+      (brockhaus)
+
     * Pingback receiving is working now with internal functionality in
       comment.php Smarty trackback loader now loads trackbacks and
       pingbacks (brockhaus)
