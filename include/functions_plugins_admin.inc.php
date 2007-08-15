@@ -620,7 +620,7 @@ EOS;
                 }
                 $preview_height = $cbag->get('preview_height');
                 if (!$preview_height || $preview_height == "") {
-                  $preview_img_height = '100px';
+                  $preview_height = '100px';
                 }
                 $media_link_text = MEDIA_LIBRARY;
                 print <<<EOS
