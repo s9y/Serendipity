@@ -9,7 +9,7 @@
 
 @define('LANG_CHARSET', 'ISO-8859-1');
 @define('SQL_CHARSET', 'latin1');
-@define('DATE_LOCALES', 'pt_PT-ISO-8859-1, pt_PT-ISO8859-1, pt, pt_PT, european portuguese');
+@define('DATE_LOCALES', 'pt_PT.ISO-8859-1, pt_PT.ISO8859-1, pt, pt_PT, european portuguese');
 @define('DATE_FORMAT_ENTRY', '%A, %e de %B de %Y');
 @define('DATE_FORMAT_SHORT', '%Y-%m-%d %H:%M');
 @define('WYSIWYG_LANG', 'pt_pt');
