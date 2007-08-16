@@ -1,11 +1,11 @@
-<?php # $Id: serendipity_lang_en.inc.php 1754 2007-07-06 10:17:47Z garvinhicking $
+<?php # $Id: serendipity_lang_en.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'UTF-8');
 @define('SQL_CHARSET', 'utf8');
-@define('DATE_LOCALES', 'en_US-UTF-8, en_US-UTF8, english, en, en_US');
+@define('DATE_LOCALES', 'en_US.UTF-8, en_US.UTF8, english, en, en_US');
 @define('DATE_FORMAT_ENTRY', '%A, %B %e. %Y');
 @define('DATE_FORMAT_SHORT', '%Y-%m-%d %H:%M');
 @define('WYSIWYG_LANG', 'en');

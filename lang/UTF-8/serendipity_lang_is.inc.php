@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_is.inc.php 1754 2007-07-06 10:17:47Z garvinhicking $
+<?php # $Id: serendipity_lang_is.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Örn Arnarson <orn@arnarson.net>
@@ -6,7 +6,7 @@
 
 @define('LANG_CHARSET', 'UTF-8');
 @define('SQL_CHARSET', 'utf8');
-@define('DATE_LOCALES', 'is_IS-UTF-8, is_IS-UTF8, icelandic, is, is_IS');
+@define('DATE_LOCALES', 'is_IS.UTF-8, is_IS.UTF8, icelandic, is, is_IS');
 @define('DATE_FORMAT_ENTRY', '%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT', '%d.%m.%y %H:%M');
 @define('WYSIWYG_LANG', 'en');

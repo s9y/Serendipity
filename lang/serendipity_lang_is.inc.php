@@ -6,7 +6,7 @@
 
 @define('LANG_CHARSET', 'ISO-8859-1');
 @define('SQL_CHARSET', 'latin1');
-@define('DATE_LOCALES', 'is_IS-ISO-8859-1, is_IS-ISO8859-1, icelandic, is, is_IS');
+@define('DATE_LOCALES', 'is_IS.ISO-8859-1, is_IS.ISO8859-1, icelandic, is, is_IS');
 @define('DATE_FORMAT_ENTRY', '%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT', '%d.%m.%y %H:%M');
 @define('WYSIWYG_LANG', 'en');
