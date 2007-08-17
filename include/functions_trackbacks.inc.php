@@ -386,7 +386,8 @@ function add_pingback ($id, $postdata) {
         $comment['url']     = $sourceURI;
         $comment['comment'] = '';
         $comment['name']    = $path['host'];
-        fetchPingbackData($comment);
+        #Temporarily disabled until made configurable
+        #fetchPingbackData($comment);
 
         // if no ID parameter was given, try to get one from targetURI
         if (!isset($id) || $id==0) {
@@ -405,7 +406,8 @@ function add_pingback ($id, $postdata) {
         $comment['url']     = $remote;
         $comment['comment'] = '';
         $comment['name']    = $path['host'];
-        fetchPingbackData($comment);
+        #Temporarily disabled until made configurable
+        #fetchPingbackData($comment);
 
         // if no ID parameter was given, try to get one from targetURI
         if (!isset($id) || $id==0) {
