@@ -83,11 +83,9 @@ global $serendipity;
   <methodName>pingback.ping</methodName>
   <params>
     <param>
-      <name>sourceURI</name>
       <value><string>$url</string></value>
     </param>
     <param>
-      <name>targetURI</name>
       <value><string>$loc</string></value>
     </param>
   </params>
@@ -377,9 +375,42 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
  */
 function add_pingback ($id, $postdata) {
     global $serendipity;
+    log_pingback("Reached add_pingback. ID:[$id]");
+    
+    // XML-RPC Method call without named parameter. This seems to be the default way using XML-RPC
+    if(preg_match('@<methodCall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@is', $postdata, $matches)) {
+        log_pingback("Pingback wp structure.");
+        $remote             = $matches[1];
+        $local              = $matches[2];
+        log_pingback("remote=$remote, local=$local");
+        $path = parse_url($remote);
+        $comment['title']   = 'PingBack';
+        $comment['url']     = $remote;
+        $comment['comment'] = '';
+        $comment['name']    = $path['host'];
+        #Temporarily disabled until made configurable
+        #fetchPingbackData($comment);
+
+        // if no ID parameter was given, try to get one from targetURI
+        if (!isset($id) || $id==0) {
+            log_pingback("ID not found");
+            $id = evaluateIdByLocalUrl($local);
+            log_pingback("ID set to $id");
+        }
+        
+        if ($id>0) {
+            serendipity_saveComment($id, $comment, 'PINGBACK');
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    // XML-RPC Method call with named parameter. I'm not sure, if XML-RPC supports this, but just to be sure
     $sourceURI = getPingbackParam('sourceURI', $postdata);
     $targetURI = getPingbackParam('targetURI', $postdata);
     if (isset($sourceURI) && isset($targetURI)) {
+        log_pingback("Pingback spec structure.");
         $path = parse_url($sourceURI);
         $local              = $targetURI;
         $comment['title']   = 'PingBack';
@@ -391,35 +422,40 @@ function add_pingback ($id, $postdata) {
 
         // if no ID parameter was given, try to get one from targetURI
         if (!isset($id) || $id==0) {
-            if (preg_match('@/(\d+)_[^/]*$@', $local, $matches)) {
-                $id = (int)$matches[1];
-            }
+            log_pingback("ID not found");
+            $id = evaluateIdByLocalUrl($local);
+            log_pingback("ID set to $id");
         }
-        serendipity_saveComment($id, $comment, 'PINGBACK');
-        return 1;
-    }
-    if(preg_match('@<methodCall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@is', $postdata, $matches)) {
-        $remote             = $matches[1];
-        $local              = $matches[2];
-        $path = parse_url($remote);
-        $comment['title']   = 'PingBack';
-        $comment['url']     = $remote;
-        $comment['comment'] = '';
-        $comment['name']    = $path['host'];
-        #Temporarily disabled until made configurable
-        #fetchPingbackData($comment);
-
-        // if no ID parameter was given, try to get one from targetURI
-        if (!isset($id) || $id==0) {
-            if (preg_match('@/(\d+)_[^/]*$@', $local, $matches)) {
-                $id = (int)$matches[1];
-            }
+        if ($id>0) {
+            serendipity_saveComment($id, $comment, 'PINGBACK');
+            return 1;
+        } else {
+            return 0;
         }
-
-        serendipity_saveComment($id, $comment, 'PINGBACK');
-        return 1;
     }
+
     return 0;
+}
+
+function evaluateIdByLocalUrl($localUrl) {
+    global $serendipity;
+    
+    // Build an ID searchpattern in configured permaling structure:
+    $permalink_article = $serendipity['permalinkStructure'];
+    log_pingback("perma: $permalink_article");
+    $permalink_article = str_replace('.','\.',$permalink_article);
+    $permalink_article = str_replace('+','\+',$permalink_article);
+    $permalink_article = str_replace('?','\?',$permalink_article);
+    $permalink_article = str_replace('%id%','(\d+)',$permalink_article);
+    $permalink_article = str_replace('%title%','[^/]*',$permalink_article);
+    $permalink_article_regex = '@' . $permalink_article . '$@'; 
+    log_pingback("regex: $permalink_article_regex");
+
+    if (preg_match($permalink_article_regex, $localUrl, $matches)) {
+        return (int)$matches[1];
+    } else {
+        return 0;
+    }
 }
 
 /**
@@ -463,7 +499,7 @@ function fetchPingbackData( &$comment) {
         $fContent = $req->getResponseBody();
 
         // Get a title
-        if (preg_match('@<head>.*?<title>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
+        if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
             $comment['title'] = strip_tags($matches[1]);
         }
         
@@ -790,3 +826,4 @@ function is_utf8($string) {
          . '|\xF4[\x80-\x8F][\x80-\xBF]{2}'      # plane 16
          . ')*$%xs', $string);
 }
+
