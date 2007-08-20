@@ -20,11 +20,33 @@ if (isset($serendipity['GET']['switch'], $serendipity['GET']['entry'])) {
 
 serendipity_rememberComment();
 
-if (!($type = @$_REQUEST['type'])) {
-    $type = 'normal';
+// Trackback logging. For developers: can be switched to true!
+$tb_logging = false;
+// Pingback logging. For developers: can be switched to true!
+$pb_logging = false;
+
+if ($pb_logging) {
+    log_pingback('CONTENT_TYPE: ' . $_SERVER['CONTENT_TYPE']);
+    log_pingback('HTTP_RAW_POST_DATA: ' .  $tmp);
 }
 
-$tb_logging = false; // for developers: can be switched to true!
+if (!($type = @$_REQUEST['type'])) {
+    if ($pb_logging) {
+        ob_start();
+        print_r($HTTP_RAW_POST_DATA);
+        $tmp = ob_get_contents();
+        ob_end_clean();
+        log_pingback('NO TYPE HANDED!');
+    }
+    
+    // WordPress pingbacks don't give any parameter. If it is a XML POST asume it's a pigback
+    if ($_SERVER['CONTENT_TYPE'] == 'text/xml' && isset($HTTP_RAW_POST_DATA)) {
+        $type = 'pingback'; 
+    }
+    else {
+        $type = 'normal';
+    }
+}
 
 if ($type == 'trackback') {
     if ($tb_logging) {
@@ -73,9 +95,20 @@ if ($type == 'trackback') {
         fclose($fp);
     }
 } else if ($type == 'pingback') {
+    if ($pb_logging) {
+        log_pingback('RECEIVED PINGBACK');
+        # PHP 4.2.2 way of doing things
+        ob_start();
+        print_r($HTTP_RAW_POST_DATA);
+        $tmp = ob_get_contents();
+        ob_end_clean();
+        log_pingback('HTTP_RAW_POST_DATA: ' .$tmp);
+    }
     if (add_pingback($_REQUEST['entry_id'], $HTTP_RAW_POST_DATA)) {
+        log_pingback('PINGBACK SUCCESS');;
         report_pingback_success();
     } else {
+        log_pingback('PINGBACK FAILURE');;
         report_pingback_failure();
     }
 } else {
@@ -161,6 +194,16 @@ if ($type == 'trackback') {
     }
 
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
+}
+
+// Debug logging for pingback receiving
+function log_pingback($message){
+    global $pb_logging;
+    if ($pb_logging) {
+        $fp = fopen('pingback.log', 'a');
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] ' . $message . "\n");
+        fclose($fp);
+    }
 }
 /* vim: set sts=4 ts=4 expandtab : */
 ?>
