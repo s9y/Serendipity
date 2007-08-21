@@ -1146,7 +1146,7 @@ class serendipity_superuser_plugin extends serendipity_plugin {
 
         $link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
         $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
-        echo '<a href="' . $link . '" title="'. $text .'">'. $text .'</a>';
+        echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
     }
 
     function introspect_config_item($name, &$propbag)
