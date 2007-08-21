@@ -903,7 +903,7 @@ function serendipity_smarty_init($vars = array()) {
             $template_vars =& $template_loaded_config;
             $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
         } elseif (is_array($template_config)) {
-            $template_vars =& serendipity_loadThemeOptions($template_config);
+            $template_vars =& serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option']);
             $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
         }
     }

@@ -1969,10 +1969,15 @@ function serendipity_setFormToken($type = 'form') {
  * @param   array   Referenced variable coming from the config.inc.php file, where the config values will be stored in
  * @return  array   Final return array with default values
  */
-function &serendipity_loadThemeOptions(&$template_config) {
+function &serendipity_loadThemeOptions(&$template_config, $okey = '') {
     global $serendipity;
+    
+    if (empty($okey)) {
+        $okey = $serendipity['template'];
+    }
+
     $_template_vars =& serendipity_db_query("SELECT name, value FROM {$serendipity['dbPrefix']}options
-                                             WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'", false, 'assoc', false, 'name', 'value');
+                                             WHERE okey = 't_" . serendipity_db_escape_string($okey) . "'", false, 'assoc', false, 'name', 'value');
     if (!is_array($_template_vars)) {
         $template_vars = array();
     } else {
@@ -1987,6 +1992,7 @@ function &serendipity_loadThemeOptions(&$template_config) {
 
     return $template_vars;
 }
+
 
 /**
  * Check if a member of a group has permissions to execute a plugin
