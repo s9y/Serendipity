@@ -388,8 +388,7 @@ function add_pingback ($id, $postdata) {
         $comment['url']     = $remote;
         $comment['comment'] = '';
         $comment['name']    = $path['host'];
-        #Temporarily disabled until made configurable
-        #fetchPingbackData($comment);
+        fetchPingbackData($comment);
 
         // if no ID parameter was given, try to get one from targetURI
         if (!isset($id) || $id==0) {
@@ -417,8 +416,7 @@ function add_pingback ($id, $postdata) {
         $comment['url']     = $sourceURI;
         $comment['comment'] = '';
         $comment['name']    = $path['host'];
-        #Temporarily disabled until made configurable
-        #fetchPingbackData($comment);
+        fetchPingbackData($comment);
 
         // if no ID parameter was given, try to get one from targetURI
         if (!isset($id) || $id==0) {
@@ -479,9 +477,18 @@ function getPingbackParam($paramName, $data) {
  * @param array comment array to be filled
  */
 function fetchPingbackData( &$comment) {
+    global $serendipity;
+    
+    // Don't fetch remote page, if not explicitly allowed in serendipity_config_local.php:
+    if (empty($serendipity['pingbackFetchPage'])) {
+        return;
+    }
+    
+    // If we don't have a comment or a commentors url, stop it.
     if (!isset($comment) || !is_array($comment) || !isset($comment['url'])) {
         return;
     }
+    
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
     
