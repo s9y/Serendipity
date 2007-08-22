@@ -510,10 +510,16 @@ function fetchPingbackData( &$comment) {
             $comment['title'] = strip_tags($matches[1]);
         }
         
+        // Try to get content from first <p> tag on:
+        if (preg_match('@<p[^>]*>(.*?)</body>@is',$fContent,$matches)) {
+            $body = $matches[1];
+        }
+        if (empty($body) && preg_match('@<body[^>]*>(.*?)</body>@is',$fContent,$matches)){
+            $body = $matches[1];
+        }
         // Get a part of the article
-        if (preg_match('@<body[^>]*>(.*?)</body>@is',$fContent,$matches)) {
-            
-            $body = strip_tags($matches[1]);
+        if (!empty($body)) {
+            $body = strip_tags($body);
 
             //TODO: Serendipity comes into trouble wit html_entity_decode and "Umlaute"
             $body = str_replace(array("&nbsp;"),array(' '),$body);
