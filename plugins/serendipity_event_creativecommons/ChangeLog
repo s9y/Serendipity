@@ -1,0 +1,12 @@
+# $Id$
+------------------------------------------------------------------------
+Version 1.4 (brockhaus):
+
+    * Changed default cc version to 3.0, respecting old configuration
+      while updating.
+    * BY only version is only valid since 3.0. 2.5 doesn't support this.
+    * Japanese users get a wrong link to the creative common license
+    * Mouseover image title supports Mozilla, too (title attribute)
+
+------------------------------------------------------------------------
+Version 1.3 (Evan Nemerson):
