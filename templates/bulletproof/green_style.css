@@ -1,0 +1,287 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Stylesheet for the colorset 'green'                                */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+
+.serendipity_xml_icon {
+    background: url('img/green_xml.png') center center no-repeat;
+    padding: 10px 0;
+    margin: 0;
+    visibility: visible;
+}
+
+.serendipity_xml_icon img {
+    visibility: hidden;
+}
+
+a {
+    color: #382513;
+    text-decoration: none;
+}
+
+a:hover {
+    color:#6B8F50;
+}
+
+body {
+    background-color: #DFD7C3;
+}
+
+#wrapper {
+    width: 85%;
+    font-family:  verdana, arial, helvetica, sans-serif;
+    font-size: 69%;
+    background-color: #D8CAA8;
+    border-left: 8px solid #6B8F50;
+    border-right: 8px solid #6B8F50;
+    margin: 0px auto;
+}
+
+#serendipity_banner {
+    margin: 0;
+    height: 100px;
+    background: #224c03;
+    border: 0px;
+}
+
+#serendipity_banner h1 {
+    font-family: georgia,"times new roman", serif;
+    font-size: 190%;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    padding: 0.25em;
+}
+
+#serendipity_banner h2 {
+    font-weight: normal;
+    font-size: 140%;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    padding: 0.25em;
+}
+
+#serendipity_banner a { 
+    color: #DFD7C3;
+    text-decoration: none; 
+}
+
+#serendipity_below_banner {
+    /* not used in this template */
+}
+
+#sitenav {
+    background-color: #DFD7C3;
+    border-top: 2px solid #6B8F50;
+    border-bottom: 4px solid #AFA283;
+    margin: 0;
+    padding: 0;
+}
+
+#sitenav ul li {
+    font-family: georgia,"times new roman", serif;
+    font-size: 90%;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    margin: 0;
+    padding: 0; 
+    display: inline;
+}
+
+#sitenav ul a{
+    border-bottom: 4px solid #dfd7c3;
+    margin: 0 2px 0 0;
+    padding: 6px 10px 6px 10px;
+    float: left;
+    overflow: hidden;
+}
+
+#sitenav ul a:hover,
+#sitenav .currentpage a {
+    border-bottom: 4px solid #6B8F50;
+    padding: 6px 10px 6px 10px;
+    background-color: #DFD7C3;
+}
+
+#serendipityLeftSideBar,
+#serendipityLeftSideBarLeft,
+#serendipityRightSideBarLeft,
+#serendipityRightSideBar,
+#serendipityLeftSideBarRight, 
+#serendipityRightSideBarRight {
+    background-color: #D8CAA8;
+    overflow: hidden; 
+}
+
+#content {
+    background-color: #D8CAA8;
+}
+
+#content h3 {
+    font-family: georgia,"times new roman", serif;
+    font-size: 100%;
+    margin: 10px 0 0 0;
+}
+
+#content h4 {
+    font-family: georgia,"times new roman", serif;
+    text-transform: uppercase;
+    font-size: 120%;
+    letter-spacing: 0.2em;
+    margin: 5px 0 15px 0;
+}
+
+.serendipity_entryFooter {
+    font-size: 90%;
+    margin: 5px 0;
+    padding: 8px 0;
+    border-top: 1px solid #AFA283;
+    border-bottom: 1px solid #AFA283;
+}
+
+.serendipity_pageFooter {
+    margin: 5px 0 10px;
+}
+
+.serendipitySideBarItem {
+    margin: 10px;
+    padding: 0;
+    border: 0px none;
+    overflow: hidden;
+    height: 100%; 
+}
+
+.serendipitySideBarTitle {
+    font-family: georgia,"times new roman", serif;
+    text-transform: uppercase;
+    font-size: 95%;
+    letter-spacing: .2em;
+    color: #DFD7C3;
+    background-color: #224c03;
+    padding: 8px 5px;
+    border-left: 4px solid #6B8F50;
+    margin: 0;
+}
+
+.serendipitySideBarContent {
+    font-size: 90%;
+    background-color: #DFD7C3;
+    padding: 10px;
+    border-left: 4px solid #AFA283;
+    margin: 0;
+}
+
+.serendipitySideBarFooter {
+    /* not used in this template */
+}
+
+#sbsitenav {
+    padding: 10px;
+    margin: 0;
+}
+
+#sbsitenav ul{
+    margin: 0;
+    list-style-type: none;
+}
+
+
+#sbsitenav ul a {
+    border-left: 4px solid #AFA283;
+    padding: 8px 0px 8px 10px;
+    display: block;
+}
+
+#sbsitenav ul a:hover,
+#sbsitenav .currentpage a  {
+    border-left: 4px solid #6B8F50;
+}
+
+#sbsitenav li {
+    font-family: georgia,"times new roman", serif; 
+    font-size: 90%;
+    text-transform: uppercase;
+    letter-spacing: .2em;
+    background-color: #DFD7C3;
+    margin: 0 0 2px 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#month,
+.serendipity_weekDayName, 
+#today  {
+    font-family: georgia,"times new roman", serif;
+    font-size: 100%;
+}
+
+#footer {
+    font-size: 80%;
+    background-color: #6B8F50;
+}
+
+#footer a:hover {
+    color: #224c03;
+}
+
+img.serendipity_entryIcon {
+    float: left;
+    border: 0px;
+    margin:0 5px 0px 0;
+}
+
+input#serendipityQuickSearchTermField {
+    border: 1px solid #224c03!important;
+}
+
+#navbarsearchform input {
+    border: 1px solid #224c03;
+}
+
+blockquote {
+    display: list-item;
+    list-style-image: url('img/green_openquote.png');
+    background: transparent url('img/green_closequote.png') 100% 100% no-repeat;
+    color: #000;
+    margin: 0 10%;
+    padding: 10px;
+}
+
+.serendipity_comment_author_self comment_evenbox,
+.comment_evenbox {
+    line-height: 1.2em;   
+    border: 1px dotted #6B8F50;
+    background: #DFD7C3;
+}
+
+.serendipity_comment_author_self comment_oddbox,
+.comment_oddbox {
+    line-height: 1.2em;
+    border: 1px dotted #6B8F50;
+    background: #AFA283;
+}
+
+.serendipity_commentsTitle {
+    font-family: georgia,"times new roman", serif;
+    text-transform: uppercase;
+    font-size: 100%;
+    letter-spacing: 0.2em;
+    margin: 1em 0;
+    padding: 0.5em 0;
+}
+
+.serendipity_freetag_taglist_related {
+    font-family: georgia,"times new roman", serif;
+    font-size: 100%;
+}
+
+.s9y_wrap {
+    font-size: 69%;
+    background: #d8caa8;
+}

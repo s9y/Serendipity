@@ -1,0 +1,392 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Central Stylesheet                                                 */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+
+body {
+    font: 100.01% Verdana, Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #000;
+}
+
+/*** General styles ***/
+p {
+    text-align: left;
+}
+
+#wrapper {
+    font-size: 80%;
+}
+
+#serendipity_banner {
+    margin: 0;
+    padding: 0;
+}
+
+/*** Header styles ***/
+#serendipity_banner h1,
+#serendipity_banner h2 {
+    margin: 0 0 0 10px;
+}
+
+/*** Sitenav styles ***/
+#sitenav {
+    padding: 0.5em 0;
+}
+
+#sitenav ul li {
+    padding: 0 0.5em 0 10px;
+}
+
+/* This is the current page the visitor is viewing */
+#sitenav .currentpage a {
+    background: #ddd;
+}
+
+/* optional nav links in the footer */
+#footer_sitenav {
+    clear: both;
+    text-align: center;
+    padding: 0 0 1em 0;
+}
+
+#footer_sitenav ul {
+    list-style-type: none;
+    display: inline;
+}
+
+#footer_sitenav li {
+    display: inline;
+}
+
+#footer_sitenav a {
+    padding: 0px 5px;
+}
+
+#footer_sitenav .currentpage a {
+    text-decoration: underline;
+}
+
+/* If the sitenav is in one of the sidebars */
+#sbsitenav ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+
+/*** Footer styles ***/
+#footer p {
+    margin-left: 10px;
+    padding: 0;
+}
+
+#serendipity_credit_line {
+    float: left;
+    margin: 5px 0 0 10px;
+    display: inline;
+}
+
+#serendipity_bulletproof_button {
+    float: right;
+    margin: 5px 10px 5px 0;
+    display: inline;
+}
+
+
+/*** Entry styles ***/
+.serendipity_Entry_Date {
+    padding: 0.5em 1em;
+}
+
+.serendipity_entry {
+    margin-bottom: 0.5em;
+}
+
+img.serendipity_entryIcon {
+    border: 0;
+}
+
+
+/*** Sidebar styles ***/
+.serendipitySideBarItem {
+    margin: 0.5em;
+}
+
+.serendipitySideBarTitle {
+    margin: 0;
+}
+
+.serendipitySideBarContent {
+    margin: 0;
+}
+
+div.serendipitySideBarContent form {
+    margin: 0;
+    padding: 0;
+}
+
+
+/*** Archive styles ***/
+ul.archives_row {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+ul.archives_row li {
+    padding-right: 2px;
+    font-size: 80%;
+}
+
+
+/*** s9y image manager ***/
+.serendipity_imageComment_center,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    border: 1px solid #ddd;
+    background-color: #efefef;
+    padding: 0;
+    text-align: center;
+}
+
+.serendipity_imageComment_center {
+    margin: auto;
+}
+
+.serendipity_imageComment_left {
+    float: left;
+    margin: 0 10px 5px 0;
+}
+
+.serendipity_imageComment_right {
+    float: right;
+    margin: 0 0 5px 10px;
+}
+
+.serendipity_imageComment_img,
+.serendipity_imageComment_img img {
+    margin: 0;
+    padding: 0;
+    border: none;
+    text-align: center;
+}
+
+.serendipity_imageComment_txt {
+    border-top: 1px solid #ddd;
+    margin: 0;
+    padding: 1%;
+    clear: both;
+    font-size: 80%;
+    text-align: center;
+}
+
+
+/*** Calendar styles ***/
+table.serendipity_calendar {
+    text-align: center;
+    background-color: transparent;
+    height: 150px;
+    width: 95%;
+}
+
+.serendipity_calendarHeader {
+    background-color: transparent;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+a.day {
+    color: #000;
+    font-weight:  bold;
+}
+
+.serendipity_calendar img {
+    border: 0;
+}
+
+.serendipity_calendar_spacer {
+    border: 0;
+    visibility: hidden;
+}
+
+
+/*** Staticpage styles ***/
+ul.staticpage_navigation {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.staticpage_results {
+    margin: 1em 0;
+    padding: 0 10px;
+}
+
+
+/*** Contact form ***/
+#serendipity_comment_CommentForm fieldset {
+    border: 1px solid #ddd;
+    width: 90%;
+    margin: 2%;
+    padding: 2%;
+}
+
+#serendipity_comment_CommentForm fieldset legend {
+    background: #fafbfc;
+    border: 1px solid #ddd;
+    font-weight: bolder;
+    margin: 0 10px 5px;
+    padding: 0.25em 1em;
+    text-align: center;
+}
+
+.serendipity_commentDirection {
+    width: 90%;
+    margin-top: 1em;
+}
+
+
+/*** Comment form ***/
+#serendipity_comment {
+    font-weight: normal;
+    margin: 0 10px;
+    padding: 0;
+}
+
+.serendipity_commentsTitle {
+    margin: 0;
+    padding: 1em 0;
+}
+
+.serendipity_comment {
+    padding: 0;
+}
+
+.serendipity_comments .serendipity_center {
+    font-size: 90%;
+}
+
+.serendipity_commentBody {
+    padding: 1em 0;
+}
+
+.serendipity_comment_source {
+    margin: 0;
+    padding: 0;
+}
+
+.serendipity_comment_author_self comment_evenbox,
+.comment_evenbox {
+    margin: 0 10px 10px;
+    padding: 1em;
+    line-height: 1.5em;
+}
+
+.serendipity_comment_author_self comment_oddbox,
+.comment_oddbox {
+    margin: 0 10px 10px;
+    padding: 1em;
+    line-height: 1.5em;
+}
+
+.serendipity_commentsValue .frm_check_label,
+.serendipity_commentsValue .frm_radio_label,
+.serendipity_commentsLabel {
+    font-size: 90%;
+}
+
+.serendipity_commentsLabel {
+    font-weight: bold;
+}
+
+.serendipity_commentsValue .frm_check,
+.serendipity_commentsValue .frm_radio,
+.serendipity_commentsValue .frm,
+#serendipity_comment_CommentForm select {
+    background: #fff;
+    color: #000;
+}
+
+.serendipity_commentsValue .frm,
+#serendipity_comment_CommentForm select {
+    border: 1px solid #ccc;
+}
+
+.serendipity_commentsValue .frm,
+#serendipity_comment_CommentForm select {
+    width: 90%;
+    max-width: 400px;
+}
+
+#serendipity_comment_CommentForm select:focus,
+.serendipity_commentsValue .frm:focus {
+    background: #efefef;
+    color: #000;
+}
+
+#serendipity_comment_CommentForm dt {
+    float: left;
+    margin-bottom: 0.5%;
+    margin-right: 1%;
+}
+
+#serendipity_comment_CommentForm dd {
+    padding-left: 0em;
+    margin-left: 20%;
+    margin-bottom: 1%;
+}
+
+#serendipity_comment textarea {
+    margin-bottom: 1%;
+}
+
+.checkbox {
+    display: block;
+}
+
+#serendipity_trackbacklist,
+#serendipity_commentlist {
+    margin-top: 1em;
+}
+
+/*** Plugin styles ***/
+img.serendipity_freeTag_xmlButton {
+    border: none;
+    padding-left: 1%;
+}
+
+.serendipity_freetag_taglist_related {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.serendipitySideBarItem img {
+    border: none;
+}
+
+
+/*** Quicksearch in the navbar ***/
+input#serendipityQuickSearchTermField {
+    background: #ffffff url('{TEMPLATE_PATH}img/quicksearch.png') no-repeat 97% 50%;
+}
+
+#navbarsearchform {
+    margin: 0 10px 0 0;
+}
+
+#navbarsearchform input {
+    width: 165px; 
+    margin-top: 3px;
+    padding-left: 3px;
+    font-size: 100%;
+    background: #ffffff url('{TEMPLATE_PATH}img/quicksearch.png') no-repeat 97% 50%;
+}
+
+/* container for comments when comment pop-up enabled */
+.s9y_wrap {
+    text-align: left;
+    margin-left: 10px;
+}

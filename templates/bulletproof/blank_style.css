@@ -1,0 +1,33 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Stylesheet for the colorset 'blank'                                */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+
+#wrapper,
+#navbarsearchform input {
+    border: 1px solid #ddd;
+/* this is just to outline the wrapper since there are no */
+/* colors in the 'blank' colorset. Same for other borders */
+}
+
+#serendipity_banner,
+#sitenav {
+    border-bottom: 1px solid #ddd;
+}
+
+#footer {
+    border-top: 1px solid #ddd;
+}
+
+input#serendipityQuickSearchTermField {
+    border: 1px solid #ddd!important;
+}
+
+.s9y_wrap {
+    font-size: 69%;
+}
