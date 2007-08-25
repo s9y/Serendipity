@@ -32,8 +32,10 @@ Version 1.3 ()
     * Full pingback support, fallback trackback method for WordPress
       blogs. (brockhaus)
 
-Version 1.2 ()
+Version 1.2 (August 26th, 2007)
 ------------------------------------------------------------------------
+
+    * Added bulletproof template by http://s9y-bulletproof.com
 
     * (beta4) Fix comment-RSS feeds
     
