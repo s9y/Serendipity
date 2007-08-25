@@ -1,0 +1,546 @@
+/**********************************************************************/
+/* Template: Bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Stylesheet for the Bulletproof admin interface by Don Chambers     */
+/* Fluid width design                                                 */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+body {
+    font: 100.01% Verdana, Arial, Helvetica, sans-serif;
+    margin: 5px 0 0 0;
+    text-align: center;
+    background: #888888;
+    direction: {LANG_DIRECTION};
+}
+
+/* body ID */
+/* styles to this ID or body would have the same effect */
+#serendipity_admin_page { 
+}
+
+/* these are a default for headings not styled more specifically through an additional class */
+h1 {font-size: 170%;}
+h2 {font-size: 150%;}
+h3 {font-size: 140%;}
+h4 {font-size: 125%;}
+
+/* all links except those specifically overridden by other class or id further down*/
+a:link, a:visited, a:active {
+   text-decoration: none;
+   color: #055BC6;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #FF6600;
+}
+
+/* approximately equal to frontend #wrapper but does not include footer         */
+#serendipityAdminFrame {
+    text-align: left;
+    margin: 0px auto;
+    border: 0;
+    width: 95%;
+    background: #ffffff;
+}
+
+/* container is a table, so font must be set on tbody to affect td's */
+/* this font size affects everything except #footer                  */
+#serendipityAdminFrame tbody {
+    font-size: 80%;
+}
+
+/* equal to frontend #serendipity_banner */
+#serendipityAdminBanner {
+    color: #ffffff;
+    background: #5792D8 url('{TEMPLATE_PATH}img/bp_admin_banner_fluid.png') top left repeat-x;
+    height: 94px;
+    border: 3px solid #ffffff;
+    padding: 0;
+    line-height: 0.7em;
+}
+
+/* First line in banner, ie 'Serendipity Administration Suite' */
+#serendipityAdminBanner h1 {
+    font-weight: bold;
+    padding: 0;
+    margin: 17px 0 0 5px;
+}
+
+/* Second line in banner, ie blog name */ 
+#serendipityAdminBanner h2 {
+    font-weight: normal;
+    padding: 0;
+    margin-left: 5px;
+}
+
+/* approximately equal to BP frontend #sitenav when located below header */
+#serendipityAdminInfopane {
+    background: #CCCCCC url('{TEMPLATE_PATH}img/bp_admin_infopane_fluid.png') top left repeat-x;
+    border-left: 3px solid #ffffff;
+    border-right: 3px solid #ffffff;
+    text-align: right;
+    font-size: 75%;
+    line-height: 70%;
+    height: 24px;
+    color: #055BC6;
+    padding:0;
+}
+
+/* approximately equal to frontend #content */
+.serendipityAdminContent {
+    padding: 3px 3px 0 8px;    
+    text-align: left;
+}
+
+/* all content identified as a span, notably config descriptions */
+/* !important required to override in-line styles                */
+.serendipityAdminContent span{
+    color: #055BC6 !important;
+}
+
+/* welcome message on sign-on screen, ie */
+/* 'welcome to serendipity admin suite'  */
+/* 'please enter your credentials'       */
+#serendipityAdminWelcome{
+    color: #055BC6;
+}
+
+/* 'back to blog' link in bottom left of sign-on screen */
+#serendipityBackToBlog {
+    padding: 0 0 10px 10px;
+}
+/* welcome back text displayed after successfully logging in */
+.serendipityWelcomeBack {
+    color: #055BC6;
+    margin: 0;
+}
+
+/***** SIDEBAR STYLES *****/
+
+/* s9y v1.2 class between top and bottom menu blocks */
+/* display: none prevents excess space (<br />) from */
+/* appearing between these 2 menu blocks and the     */
+/* menu blocks in between                            */
+.serendipitySideBarMenuSpacer {
+    display: none;
+}
+
+/* Equal to frontend sidebar - positioned left due to table structure */
+#serendipitySideBar {
+    width: 203px;
+    padding: 3px 0 0 0;
+}
+
+/* style certain elements of admin frontpage navigation blocks the same      */
+.further_links,
+/* serendipitySideBarMenu is a combination of sidebaritem and sidebarcontent */
+/* actual width will be sidebar width less side margins and side borders     */
+ul.serendipitySideBarMenu {
+    list-style: none;
+    overflow: hidden; 
+    background: #EEEEEE url('{TEMPLATE_PATH}img/bp_admin_sidebar_body.png') repeat-y;
+    padding: 0;
+    width: 200px;
+    margin: 0 0 3px 3px;
+}
+
+/* just the further links container */
+.further_links {
+/* for width equal to left sidebar links, set width equal to sidebar less */
+/* serendipitySideBarMenu left & right margins plus L&R borders.          */
+/* Width does not need to be uniquely defined if ul.serentipitySideBarMenu*/
+/* has no borders or L&R padding                                          */
+    float: right;
+}
+
+/* navigation within the container of further_links */
+.further_links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* all <li>s -  serendipitySideBarMenuHead then needs to be styled separately    */
+/* this can change when all plugins have been updated to include s9y ver.1.2     */
+/* class of serendipitySideBarMenuLink which applies only to navigational links  */
+/* just as serendipitySideBarMenuHead only applies to the title even though both */
+/* are <li>s. */
+/* Update: All plugins HAVE been modified to include class serendipitySideBarLink*/
+/* The method below, however, works for users not using the most recent plugins. */
+.further_links li,
+.serendipitySideBarMenu li{
+    line-height: 105%
+}
+
+.further_links li a,
+.serendipitySideBarMenu li a {
+    font-size: 90%;
+    padding-left: 5px;
+}
+
+/* these are the titles for each menu block */
+.further_links .further_links_head,
+li.serendipitySideBarMenuHead {
+/* this background is a default in the event additional menu blocks are added in the future, but not presently defined */
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_default.png') no-repeat;
+    font-weight: bold;
+    font-size: 100%;
+    color: #30303f;
+    height: 30px;
+    padding: 0 0 0 5px;
+    line-height: 28px;
+    margin: 0 0 5px 0;
+    overflow: hidden;
+}
+
+/* unique graphics for the middle 4 menu blocks and further_links */
+ul.serendipitySideBarMenuEntry .serendipitySideBarMenuHead {
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_entries.png') no-repeat;
+}
+ul.serendipitySideBarMenuMedia .serendipitySideBarMenuHead {
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_media.png') no-repeat;
+}
+ul.serendipitySideBarMenuAppearance .serendipitySideBarMenuHead {
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_appearance.png') no-repeat;
+}
+ul.serendipitySideBarMenuUserManagement .serendipitySideBarMenuHead {
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_admin.png') no-repeat;
+}
+.further_links .further_links_head {
+    background: #B0BEC0 url('{TEMPLATE_PATH}img/bp_admin_sidebar_further.png') no-repeat;
+}
+
+/* set background for all menu block footers including any added in the future, but not presently defined */
+.further_links .further_links_foot,
+ul.serendipitySideBarMenu .serendipitySideBarMenuFoot {
+background: #EEEEEE url('{TEMPLATE_PATH}img/bp_admin_sidebar_foot.png') no-repeat;
+    display: block !important;
+    height: 8px;
+    margin: 3px 0 0 0;
+    font-size: 0; /* ie6, otherwise item is too tall */
+}
+
+/* main links (top 2) and logout links (bottom 2) are styled to */
+/* look like buttons - each of which has a unique icon          */
+ul.serendipitySideBarMenuLogout,
+ul.serendipitySideBarMenuMain {
+    background: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+ul.serendipitySideBarMenuLogout li,
+ul.serendipitySideBarMenuMain li {
+    margin-bottom: 3px;
+    overflow: hidden;
+}
+
+ul.serendipitySideBarMenuLogout li a,
+ul.serendipitySideBarMenuMain li a,
+ul.serendipitySideBarMenuLogout li a:hover,
+ul.serendipitySideBarMenuMain li a:hover{
+    font-size: 100%;
+    font-weight: bold;
+    margin: 0;
+    padding-left: 5px;
+    line-height: 28px;
+}
+
+ul.serendipitySideBarMenuMain a,
+ul.serendipitySideBarMenuLogout a{
+/* this background is a default in the event additional links are added in the future, but not presently defined */
+/* it is an orange button with a double blue arrow pointing right */
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_default.png') no-repeat;
+    display: block;
+    height: 33px;
+}
+
+/* default button hover and active states */
+ul.serendipitySideBarMenuMain a:hover,
+ul.serendipitySideBarMenuLogout a:hover{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default_h.png') no-repeat;
+}
+
+ul.serendipitySideBarMenuMain a:active,
+ul.serendipitySideBarMenuLogout a:active{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default_a.png') no-repeat;
+    line-height: 30px !important;
+}
+
+/* unique images for each of the main and logout links - normal, hover and active states */
+li.serendipitySideBarMenuMainFrontpage a{
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_frontpage.png') no-repeat;
+}
+
+li.serendipitySideBarMenuMainFrontpage a:hover{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage_h.png') no-repeat;
+}
+
+li.serendipitySideBarMenuMainFrontpage a:active{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage_a.png') no-repeat;
+    line-height: 30px !important;
+}
+
+li.serendipitySideBarMenuMainPersonal a{
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_personal.png') no-repeat;
+}
+
+li.serendipitySideBarMenuMainPersonal a:hover{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal_h.png') no-repeat;
+}
+
+li.serendipitySideBarMenuMainPersonal a:active{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal_a.png') no-repeat;
+    line-height: 30px !important;
+}
+
+li.serendipitySideBarMenuLogoutWeblog a{
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_weblog.png') no-repeat;
+}
+
+li.serendipitySideBarMenuLogoutWeblog a:hover{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog_h.png') no-repeat;
+}
+
+li.serendipitySideBarMenuLogoutWeblog a:active{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog_a.png') no-repeat;
+    line-height: 30px !important;
+}
+
+li.serendipitySideBarMenuLogoutLogout a{
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_logout.png') no-repeat;
+}
+
+li.serendipitySideBarMenuLogoutLogout a:hover{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout_h.png') no-repeat;
+}
+
+li.serendipitySideBarMenuLogoutLogout a:active{
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout_a.png') no-repeat;
+    line-height: 30px !important;
+}
+
+/* do not show MenuFoot for the button type links */
+ul.serendipitySideBarMenuLogout .serendipitySideBarMenuFoot,
+ul.serendipitySideBarMenuMain .serendipitySideBarMenuFoot {
+    display: none !important;
+}
+
+/***** END OF SIDEBAR STYLES *****/
+
+/* Admin items presented consecutively such as entries  */
+/* comments, users, groups, templates etc.              */
+/* first class common to both odd and even items        */
+.serendipity_admin_list_item {
+    border: 1px solid #72878A;
+    margin: 0 0 5px 0;
+}
+/* only the uneven/odd list items */
+.serendipity_admin_list_item_uneven {
+    background: #DFDFDF;
+}
+
+/* only the even list items */
+.serendipity_admin_list_item_even {
+    background: #EEEEEE;
+}
+
+/* admin messages reporting an error */
+.serendipityAdminMsgError {
+    text-align: center; 
+    font-weight: bold;
+    margin: 10px 0;
+    color: red;
+    font-size: 100%;
+}
+
+/* any message indicating no error */
+.serendipityAdminMsgSuccess {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0; 
+    color: green;
+    font-size: 100%;
+}
+
+/* used in spartacus and plugin config*/
+.serendipityAdminMsgNotice,
+.serendipityAdminMsgNote {
+    text-align: center;
+    font-weight: bold;
+    margin: 10px 0;
+    color: blue;
+    font-size: 100%;
+}
+
+/* new input classes available in s9y v1.2 */
+.input_checkbox, .input_radio, .input_file, .input_textbox, .input_button, label, select, textarea{
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+}
+.input_textbox, select, textarea {
+    border: 1px solid #72878A;
+    background: #F8F9FA;
+}
+
+/* style for text of input buttons */
+/* new class of input_button also exists for all input buttons */
+input.serendipityPrettyButton,
+a.serendipityPrettyButton {
+    text-decoration: none;
+    font-weight: bold;
+    padding: 2px;
+    margin: 2px 2px 0px 2px;
+    color: #ffffff;
+    cursor: pointer;
+    background: #055BC6 url('{TEMPLATE_PATH}img/bp_admin_prettybutton.png') 0% 50%;
+    border: 1px solid #055BC6;
+    font-size: 90%;
+}
+
+/* make anchor version look more like the input version */
+a.serendipityPrettyButton {
+    padding: 3px;
+}
+
+/* entry preview window  */
+#serendipity_iframe {
+    border: 1px solid #72878A !important;
+    text-align: left !important;
+    margin: 0; }
+
+
+/* this exists exclusively in /templates/default/admin/media_items.tpl */
+.serendipityImageButton {
+    cursor: pointer; }
+
+/* icon links, such as edit, delete, reply, etc     */
+/* IconLink is used when icon is left of link text  */
+/* IconLinkRight is when icon is right of link text */
+/* Style approx the same except for margin settings */
+/* which provide separation between icon and text   */
+a:link.serendipityIconLink,
+a:visited.serendipityIconLink {
+    border: 0;
+    font-weight: bold;
+    text-decoration: none;
+    margin-right: 4px; }
+
+.serendipityIconLink img {
+    margin-right: 2px;
+    vertical-align: bottom;
+    border: 0; }
+
+a:link.serendipityIconLinkRight,
+a:visited.serendipityIconLinkRight {
+    border: 0;
+    font-weight: bold;
+    text-decoration: none;
+    margin-left: 4px; }
+
+.serendipityIconLinkRight img {
+    margin-left: 2px;
+    vertical-align: bottom;
+    border: 0; }
+
+/* this is not really implemented, but classes do exist in backend code */
+.direction_ltr {direction: ltr;}
+.direction_rtl {direction: rtl;}
+
+/*style for block that appears above list of available plugins available for installation */
+/* usually contains a filter dropdown box */ 
+.serendipity_pluginlist_header form{
+    border: 1px solid #72878A;
+    padding: 10px;
+    margin: 0 0 15px 0;
+    background: #EEEEEE;
+}
+
+/* style for block that appears above each type of plugin (Backend: User management, Frontend: Entry Related, etc)*/
+.serendipity_pluginlist_section {
+    margin:20px 0 20px 0;
+    padding:10px;
+    border:1px solid #72878A;
+    color:#505050;
+    line-height:1.5em;
+    background: #EEEEEE;
+}
+
+/* custom fields within Advanced Options for entries */
+#serendipity_customfields {
+    width: 100%; }
+
+#serendipity_customfields .customfield_name {
+    background-color: #FAFAFA;
+    width: 25%;
+    padding-left: 5px; }
+
+#serendipity_customfields .customfield_value {
+    background-color: #FFFFFF;
+    width: 75%;
+    padding: 0;
+}
+
+#serendipity_customfields .customfield_value textarea {
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    margin:0; }
+
+/* left side window for choosing media to insert into entry */
+#serendipityAdminBodyImageSelectorTree {
+    width: auto;
+    font-size: 73%;
+}
+
+#serendipityAdminBodyImageSelectorTree tbody{
+    font-size: 80%;
+}
+
+/* right side window for choosing media to insert into entry */
+/* will default to body background if not specified */
+#serendipityAdminBodyImageSelector {
+    width: auto;
+    margin: 0px;
+    background: #FFFFFF;
+    font-size: 80%;
+}
+
+#serendipityAdminBodyImageSelector tbody{
+    font-size: 80%;
+}
+
+/* Manage Styles - template name in list of available templates */
+/* !important required to override inline style */
+span.serendipityTemplateSelectName {
+    color: #055BC6 !important;
+}
+
+/* New v1.2 class - a hover effect in the plugin list */
+.serendipity_PluginAdminHighlight {
+    background: #ededed;
+}
+/* Added class in s9y v1.2 */
+/* container between AdminFrame and AdminFooter */
+/* can be used to emulate a footer while allowing */
+/* "powered by" text to fall below everything else in the actual footer */
+.serendipityAdminFooterSpacer {
+    display: none;
+}
+
+/* Equal to frontend #footer but falls below of #serendipityAdminFrame wrapper */
+#serendipityAdminFooter {
+    border: 0;
+/*have to pick up some of the styles from wrapper so they apply to footer div below table*/
+    margin: 0 auto;
+/*    background: #CCCCCC; */
+    width: 95%;
+    height: 24px;
+    font-size: 70%;
+    line-height: 24px;
+    padding: 0;
+}
+

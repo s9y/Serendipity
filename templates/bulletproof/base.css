@@ -1,0 +1,232 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Base stylesheet                                                    */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/* WARNING: Don't edit this stylesheet unless you know what you're    */
+/*          doing! These styles are crucial to the layout, they're    */
+/*          actually the reason this template is called 'bulletproof' */
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+}
+
+#wrapper {
+    overflow: hidden;
+    width: 95%;
+    margin: 1em auto;
+    text-align: left;
+}
+
+#sitenav {
+    float: left;
+    width: 100%;
+}
+
+#sitenav ul {
+    list-style-type: none;
+    display: inline;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#sitenav ul li {
+    display: inline;
+}
+
+#navbarsearchform {
+    float: right;
+    display: inline;
+}
+
+#sbsitenav ul {
+    list-style-type: none;
+}
+
+#serendipityLeftSideBar,
+#serendipityLeftSideBarLeft,
+#serendipityLeftSideBarRight,
+#content {
+    float: left;
+}
+
+#serendipityLeftSideBar,
+#serendipityRightSideBar,
+#serendipityLeftSideBarLeft,
+#serendipityLeftSideBarRight {
+    display: inline;
+}
+
+#serendipityRightSideBar {
+     float: right;
+     clear: right;
+}
+
+/* 3-column widths */
+.threemain {
+    width: 60%;
+}
+.threeside {
+    width: 20%;
+}
+
+/* 2-column widths */
+.twomain {
+    width: 75%;
+}
+.twoside {
+    width: 25%;
+}
+
+/* 1-column widths */
+.onemain {
+    width: 100%;
+}
+.oneside {
+    width: 50%;
+    max-width: 300px;
+}
+.onefull {
+    width: 100%;
+    max-width: 300px;
+}
+
+#footer {
+    position: relative;
+    clear: both;
+    margin: 0;
+    padding: 0!important;
+    width: auto;
+    height: 100%;
+}
+
+/*** Accessibility styles ***/
+#skiplinks {
+    display: none;
+}
+
+#skiplinks ul {
+    list-style-type: none;
+    display: inline;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#skiplinks ul li {
+    display: inline;
+    padding: 0 10px;
+}
+
+/* without this, the navbar wipes out part of the banner */
+/* if the navbar is located above the banner             */
+#serendipity_banner {
+    clear: both;
+}
+
+/* Fahrner Image Replacement for the header */
+.invisible {
+    margin-left: -5000px;
+}
+.visible { /* just a placeholder - don't use this class */
+           /* unless you know what you're doing         */ }
+
+/* this is needed to clear floats from floated images */
+.belowentry,
+.infofooter {
+    clear: both;
+}
+
+/*** Some s9y-specific stuff ***/
+/* centering something     */
+.serendipity_center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* messages from s9y */
+.serendipity_msg_important {
+    color: red;
+    margin-bottom: 1em;
+}
+.serendipity_msg_notice {
+    color: green;
+    margin-bottom: 1em;
+}
+
+.serendipity_entry_extended {
+    clear: both;
+}
+
+/* prevent styling of the extended placeholder, */
+/* otherwise the background image is visible    */
+#extended {
+    background: none;
+    display: none;
+}
+
+/* styling the continue reading byline, needed   */
+/* to stop firefox making the link 100% wide     */
+.continue_reading {
+    display: block;
+    padding-top: 10px;
+}
+
+/* styling the bulletproof button link in footer */
+#serendipity_bulletproof_button img {
+    border: none;
+}
+
+.serendipity_Entry_Date,
+.serendipity_commentBody {
+    overflow: auto;
+}
+
+.serendipitySideBarContent input,
+.serendipitySideBarContent select {
+    width: 95%;
+}
+
+ul.archives_row {
+    list-style-type: none;
+}
+
+ul.archives_row li.archives_graph,
+ul.archives_row li.archives_date,
+ul.archives_row li.archives_count,
+ul.archives_row li.archives_count_link {
+    float: left;
+}
+
+ul.archives_row li.archives_graph,
+ul.archives_row li.archives_date,
+ul.archives_row li.archives_count,
+ul.archives_row li.archives_count_link,
+ul.archives_rowli.archives_link {
+    width: 19.9%;
+}
+
+ul.staticpage_navigation {
+    list-style-type: none;
+    display: inline;
+}
+
+ul.staticpage_navigation li {
+    display: inline;
+}
+
+#theme_chooser select{
+    width: 90%;
+}
