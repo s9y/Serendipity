@@ -86,7 +86,7 @@
 <!-- quicksearch option in the navigational link menu bar only when navbar is    -->
 <!-- above or below the banner                                                   -->
    {if $template_option.sitenav_quicksearch == 'true'}
-       <form id="navbarsearchform" action="{$serendipityBaseURL}" method="get"><input type="hidden" name="serendipity[action]" value="search" /><input alt="Quicksearch" type="text" name="serendipity[searchTerm]" value="{$CONST.QUICKSEARCH}..." onfocus="if(this.value=='{$CONST.QUICKSEARCH}...')value=''" onblur="if(this.value=='')value='{$CONST.QUICKSEARCH}...';" /></form>
+       <form id="navbarsearchform" action="{$serendipityBaseURL}" method="get"><input type="hidden" name="serendipity[action]" value="search" /><input alt="{$CONST.QUICKSEARCH}" type="text" name="serendipity[searchTerm]" value="{$CONST.QUICKSEARCH}..." onfocus="if(this.value=='{$CONST.QUICKSEARCH}...')value=''" onblur="if(this.value=='')value='{$CONST.QUICKSEARCH}...';" /></form>
    {/if}
 </div>
 {/if}
@@ -112,7 +112,7 @@
 <!-- quicksearch option in the navigational link menu bar only when navbar is    -->
 <!-- above or below the banner                                                   -->
    {if $template_option.sitenav_quicksearch == 'true'}
-       <form id="navbarsearchform" action="{$serendipityBaseURL}" method="get"><input type="hidden" name="serendipity[action]" value="search" /><input alt="Quicksearch" type="text" name="serendipity[searchTerm]" value="{$CONST.QUICKSEARCH}..." onfocus="if(this.value=='{$CONST.QUICKSEARCH}...')value=''" onblur="if(this.value=='')value='{$CONST.QUICKSEARCH}...';" /></form>
+       <form id="navbarsearchform" action="{$serendipityBaseURL}" method="get"><input type="hidden" name="serendipity[action]" value="search" /><input alt="{$CONST.QUICKSEARCH}" type="text" name="serendipity[searchTerm]" value="{$CONST.QUICKSEARCH}..." onfocus="if(this.value=='{$CONST.QUICKSEARCH}...')value=''" onblur="if(this.value=='')value='{$CONST.QUICKSEARCH}...';" /></form>
    {/if}
 </div>
 {/if}
