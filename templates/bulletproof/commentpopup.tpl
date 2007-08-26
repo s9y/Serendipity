@@ -21,10 +21,8 @@
    <!--[if IE 7]>
    <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie7.css"}" />
    <![endif]-->
-   {if $template_option.colorset != 'default'}
    <!-- additional colorset stylesheet -->
    <link rel="stylesheet" type="text/css" href="{$serendipityHTTPPath}templates/{$template}/{$template_option.colorset}_style.css" />
-   {/if}
    <link rel="alternate"  type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
    <link rel="alternate"  type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
 </head>

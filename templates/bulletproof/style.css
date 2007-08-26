@@ -390,3 +390,8 @@ input#serendipityQuickSearchTermField {
     text-align: left;
     margin-left: 10px;
 }
+
+/* overide serendipitySideBarItem overflow: hidden just for sidebar quicksearch livesearch_result */
+.container_serendipity_quicksearch_plugin{
+    overflow: visible !important;
+}

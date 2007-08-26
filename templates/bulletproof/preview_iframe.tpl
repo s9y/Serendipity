@@ -4,10 +4,15 @@
         <meta name="Powered-By" content="Serendipity v.{$head_version}" />
         <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="base.css"}" />
         <link rel="stylesheet" type="text/css" href="{$head_link_stylesheet}" />
-{if $template_option.colorset != 'default'}
-<!-- additional colorset stylesheet -->
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie6.css"}" />
+        <![endif]-->
+        <!--[if IE 7]>
+        <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie7.css"}" />
+        <![endif]-->
+        <!-- additional colorset stylesheet -->
         <link rel="stylesheet" type="text/css" href="{$serendipityHTTPPath}templates/{$template}/{$template_option.colorset}_style.css" />
-{/if}
+
         <script type="text/javascript">
            window.onload = function() {ldelim}
              parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
