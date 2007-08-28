@@ -250,10 +250,18 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     echo $data;
 } else if ( preg_match(PAT_COMMENTSUB, $uri, $matches) ||
-            preg_match(PAT_PERMALINK, $uri, $matches) ) {
+            preg_match(PAT_PERMALINK, $uri, $matches) ||
+            isset($serendipity['GET']['id']) ||
+            isset($_GET['p']) ) {
     $serendipity['view'] = 'entry';
 
-    $matches[1] = serendipity_searchPermalink($serendipity['permalinkStructure'], $uri, (!empty($matches[2]) ? $matches[2] : $matches[1]), 'entry');
+    if (isset($serendipity['GET']['id'])) {
+        $matches[1] = (int)$serendipity['GET']['id'];
+    } elseif (isset($_GET['p'])) {
+        $matches[1] = $_GET['p'];
+    } else {
+        $matches[1] = serendipity_searchPermalink($serendipity['permalinkStructure'], $uri, (!empty($matches[2]) ? $matches[2] : $matches[1]), 'entry');
+    }
     serendipity_rememberComment();
 
     if (!empty($serendipity['POST']['submit']) && !isset($_REQUEST['serendipity']['csuccess'])) {
