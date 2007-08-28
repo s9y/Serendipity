@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* $Id$
 Translator: Ivan Cenov (jwalker@hotmail.bg)
 */
 
