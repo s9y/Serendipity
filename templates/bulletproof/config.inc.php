@@ -8,10 +8,27 @@ $probelang = dirname(__FILE__) . '/' . $serendipity['charset'] . 'lang_' . $sere
 if (file_exists($probelang)) {
     include $probelang;
 }
-    
+
 include dirname(__FILE__) . '/lang_en.inc.php';
 
 $serendipity['smarty']->assign(array('currpage'=> "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+
+$colorsets = array(
+    'purple' => BP_COLORSET_OPT1,
+    'blue'   => BP_COLORSET_OPT2,
+    'green'  => BP_COLORSET_OPT3,
+    'blank'  => BP_COLORSET_DEF
+);
+
+if ($serendipity['GET']['adminModule'] == 'templates') {
+    $css_files = glob(dirname(__FILE__) . '/*_style.css');
+    foreach($css_files AS $css_file) {
+        $css_file = str_replace('_style.css', '', basename($css_file));
+        if (!isset($colorsets[$css_file])) {
+            $colorsets[$css_file] = $css_file;
+        }
+    }
+}
 
 $template_config = array(
     array(
@@ -19,10 +36,7 @@ $template_config = array(
         'name'          => THEME_COLORSET,
         'type'          => 'select',
         'default'       => 'purple',
-        'select_values' => array('purple' => BP_COLORSET_OPT1,
-                                 'blue' => BP_COLORSET_OPT2,
-                                 'green' => BP_COLORSET_OPT3,
-                                 'blank' => BP_COLORSET_DEF)
+        'select_values' => $colorsets
     ),
     array(
         'var'           => 'layouttype',
