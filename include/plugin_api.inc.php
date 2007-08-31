@@ -567,6 +567,9 @@ class serendipity_plugin_api
                 $p->serendipity_owner = $owner[0];
             }
         }
+        
+        $p->pluginPath = $pluginPath;
+        $p->pluginFile = $pluginFile;
 
         return $p;
     }
@@ -1141,6 +1144,9 @@ class serendipity_plugin
     var $title_class   = 'serendipitySideBarTitle';
     var $content_class = 'serendipitySideBarContent';
     var $title         = null;
+    var $pluginPath    = null;
+    var $pluginFile    = null;
+    var $serendipity_owner = null;
 
     /**
      * The constructor of a plugin
@@ -1474,6 +1480,31 @@ class serendipity_plugin
 
         return true;
     }
+
+    /**
+     * Parses a smarty template file (which can be stored in either the plugin directory, the user template directory
+     * or the default template directory, and return the parsed output.
+     *
+     * @access public
+     * @param  string    template filename (no directory!)
+     * @return string   Parsed Smarty return
+     */
+    function &parseTemplate($filename) {
+        global $serendipity;
+
+        $filename = basename($filename);
+        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath');
+        if (!$tfile || $tfile == $filename) {
+            $tfile = dirname($this->pluginFile) . '/' . $filename;
+        }
+        $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
+        $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
+        $content = $serendipity['smarty']->fetch('file:'. $tfile, null, null, false);
+        $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+        
+        return $content;    
+    }
+
 }
 
 /**
