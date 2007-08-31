@@ -3,6 +3,10 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * New plugin API method "parseTemplate($filename)" to allow a
+      sidebar- or event-plugin to fetch+display a smarty template.
+      (garvinhicking)
+
     * Made short-urls index.php?serendipity[id]=X or index.php?p=X
       properly show a single entry view (garvinhicking)
 
