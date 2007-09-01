@@ -108,8 +108,9 @@ body {
     clear: both;
     margin: 0;
     padding: 0!important;
-    width: auto;
+    width: 100%;
     height: 100%;
+    float:left;
 }
 
 /*** Accessibility styles ***/
