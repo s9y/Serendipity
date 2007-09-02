@@ -395,6 +395,9 @@ foreach ($sql as $rs) {
 
     serendipity_plugin_api::hook_event('backend_view_comment', $comment, '&amp;serendipity[page]='. $page . $searchString);
     $class = 'serendipity_admin_list_item_' . (($i % 2 == 0 ) ? 'even' : 'uneven');
+    if ($comment['status'] == 'pending') {
+        $class .= ' serendipity_admin_comment_pending'; 
+    }
     $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote' : '');
 ?>
 <tr>
@@ -403,7 +406,7 @@ foreach ($sql as $rs) {
             <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" />
 <?php   }?>
         <a name="c<?php echo $comment['id'] ?>"></a>
-        <?php echo ($comment['type'] == 'NORMAL' ? COMMENT : TRACKBACK) . ' #'. $comment['id'] .', '. IN_REPLY_TO .' <strong><a href="' . $comment['entry_url'] . '">'. $comment['title'] .'</a></strong>, '. ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime('%b %e %Y, %H:%M', $comment['timestamp']))?>
+        <?php echo ($comment['type'] == 'NORMAL' ? COMMENT : ($comment['type'] == 'TRACKBACK' ? TRACKBACK : PINGBACK )) . ' #'. $comment['id'] .', '. IN_REPLY_TO .' <strong><a href="' . $comment['entry_url'] . '">'. $comment['title'] .'</a></strong>, '. ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime('%b %e %Y, %H:%M', $comment['timestamp']))?>
     </td>
 </tr>
 <tr>
