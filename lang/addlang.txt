@@ -1,1 +1,2 @@
-@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
+@define('PINGBACK', 'Pingback');
+@define('PINGBACKS', 'Pingbacks');

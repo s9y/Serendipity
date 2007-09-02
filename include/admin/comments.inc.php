@@ -187,6 +187,9 @@ if ($serendipity['GET']['filter']['show'] == 'approved') {
 if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
     $c_type = 'TRACKBACK';
     $searchString .= "&amp;serendipity[filter][type]=TRACKBACK";
+} elseif ($serendipity['GET']['filter']['type'] == 'PINGBACK') {
+    $c_type = 'PINGBACK';
+    $searchString .= "&amp;serendipity[filter][type]=PINGBACK";
 } elseif ($serendipity['GET']['filter']['type'] == 'NORMAL') {
     $c_type = 'NORMAL';
     $searchString .= "&amp;serendipity[filter][type]=NORMAL";
@@ -197,6 +200,9 @@ if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
 if ($serendipity['GET']['filter']['type'] == 'TRACKBACK') {
     $c_type = 'TRACKBACK';
     $searchString .= "&amp;serendipity[filter][type]=TRACKBACK";
+} elseif ($serendipity['GET']['filter']['type'] == 'PINGBACK') {
+    $c_type = 'PINGBACK';
+    $searchString .= "&amp;serendipity[filter][type]=PINGBACK";
 } elseif ($serendipity['GET']['filter']['type'] == 'NORMAL') {
     $c_type = 'NORMAL';
     $searchString .= "&amp;serendipity[filter][type]=NORMAL";
@@ -314,6 +320,7 @@ function highlightComment(id, checkvalue) {
                 <option value=""><?php echo COMMENTS_FILTER_ALL ?></option>
                 <option value="NORMAL"<?php if ($c_type == 'NORMAL') echo ' selected="selected"' ?>><?php echo COMMENTS; ?></option>
                 <option value="TRACKBACK"<?php if ($c_type == 'TRACKBACK') echo ' selected="selected"' ?>><?php echo TRACKBACKS; ?></option>
+                <option value="PINGBACK"<?php if ($c_type == 'PINGBACK') echo ' selected="selected"' ?>><?php echo PINGBACKS; ?></option>
             </select></td>
     </tr>
     <tr>
