@@ -542,3 +542,7 @@ span.serendipityTemplateSelectName {
     padding: 0;
 }
 
+/* Pending comments in the admins comment list */
+.serendipity_admin_comment_pending {
+    border: 2px solid #FF0000;
+}
