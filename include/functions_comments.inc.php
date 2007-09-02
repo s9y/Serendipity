@@ -135,6 +135,8 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
         $type = 'NORMAL';
     } elseif ($type == 'trackbacks') {
         $type = 'TRACKBACK';
+    } elseif ($type == 'pingbacks') {
+        $type = 'PINGBACK';
     } elseif ($type == 'comments_and_trackbacks') {
         $type = '%';
     }
