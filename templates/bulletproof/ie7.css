@@ -6,6 +6,8 @@
 /*                                                                    */
 /* http://s9y-bulletproof.com                                         */
 /**********************************************************************/
+
+
 #footer {
-    float: none;
+    float: none!important;
 }

@@ -1,10 +1,10 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Colorset');
-@define('BP_COLORSET_DEF', 'Blank');
-@define('BP_COLORSET_OPT1', 'Purple');
-@define('BP_COLORSET_OPT2', 'Blue');
-@define('BP_COLORSET_OPT3', 'Green');
+@define('BP_COLORSET_DEF', 'blank');
+@define('BP_COLORSET_OPT1', 'purple');
+@define('BP_COLORSET_OPT2', 'blue');
+@define('BP_COLORSET_OPT3', 'green');
 // Layout
 @define('LAYOUT_TYPE','Blog layout (B = Blog entriee, S = Sidebar, CF = Content first)');
 @define('LAYOUT_SBS','Three columns S-B-S');
