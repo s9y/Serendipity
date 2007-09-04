@@ -17,7 +17,7 @@ if (!headers_sent()) {
     // Patch by David Vieira-Kurz of majorsecurity.de
     if (!isset($_SESSION['SERVER_GENERATED_SID'])) {
         session_regenerate_id(true);
-        session_start();
+        @session_start();
         header('X-Session-Reinit: true');
         $_SESSION['SERVER_GENERATED_SID'] = true;
     }
