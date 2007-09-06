@@ -80,9 +80,11 @@ p {
 
 
 /*** Footer styles ***/
-#footer p {
+#footer p,
+.counter_code {
     margin-left: 10px;
     padding: 0;
+    clear: both;
 }
 
 #serendipity_credit_line {
@@ -97,6 +99,13 @@ p {
     display: inline;
 }
 
+.serendipity_pageFooter img{
+    vertical-align: middle;
+    margin: 0 2px;
+    height: 12px;
+    width: 12px;
+    border: 0 none;
+}
 
 /*** Entry styles ***/
 .serendipity_Entry_Date {

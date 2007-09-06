@@ -42,6 +42,13 @@
 @define('FOOTER_TIMESTAMP','Zeitstempel im Eintragsfuﬂ anzeigen');
 @define('FOOTER_COMMENTS','Anzahl der Kommentare im Eintragsfuﬂ anzeigen');
 @define('FOOTER_TRACKBACKS','Anzahl der Trackbacks im Eintragsfuﬂ anzeigen');
+@define('SHOW_STICKY_ENTRY_FOOTER','Show entry footer for sticky postings (requires plugin "Extended properties for entries")');
+@define('SHOW_STICKY_ENTRY_HEADING','Show entry heading for sticky postings (requires plugin "Extended properties for entries")');
+// Page footer next page  and previous page links
+@define('PREV_NEXT_STYLE','Show page footer previous page/next page links as');
+@define('PREV_NEXT_TEXT','Text only');
+@define('PREV_NEXT_TEXT_ICON','Text and icon');
+@define('PREV_NEXT_ICON','Icon only');
 // coComment support
 @define('COCOMMENT_ACTIVE','coComment (http://www.cocomment.com) in Kommentarformulare einbinden');
 // Counter code
