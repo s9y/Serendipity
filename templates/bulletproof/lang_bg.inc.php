@@ -47,13 +47,13 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('FOOTER_TIMESTAMP','Показване на дата/час в основата на статията');
 @define('FOOTER_COMMENTS','Показване на броя на коментарите в основата на статията');
 @define('FOOTER_TRACKBACKS','Показване на броя на проследяванията в основата на статията');
-@define('SHOW_STICKY_ENTRY_FOOTER','Show entry footer for sticky postings (requires plugin "Extended properties for entries")');
-@define('SHOW_STICKY_ENTRY_HEADING','Show entry heading for sticky postings (requires plugin "Extended properties for entries")');
+@define('SHOW_STICKY_ENTRY_FOOTER','Показване на основа за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
+@define('SHOW_STICKY_ENTRY_HEADING','Показване на заглавие за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
 // Page footer next page  and previous page links
-@define('PREV_NEXT_STYLE','Show page footer previous page/next page links as');
-@define('PREV_NEXT_TEXT','Text only');
-@define('PREV_NEXT_TEXT_ICON','Text and icon');
-@define('PREV_NEXT_ICON','Icon only');
+@define('PREV_NEXT_STYLE','Показване на връзките към предишна/следваща страница в основата на страницата като');
+@define('PREV_NEXT_TEXT','Само текст');
+@define('PREV_NEXT_TEXT_ICON','Текст и икона');
+@define('PREV_NEXT_ICON','Само икона');
 // coComment support
 @define('COCOMMENT_ACTIVE','Интегриране на coComment (http://www.cocomment.com) във формата на коментарите');
 // Counter code
