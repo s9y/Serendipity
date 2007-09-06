@@ -4,16 +4,16 @@
 @define('BP_COLORSET_DEF', 'leer');
 @define('BP_COLORSET_OPT1', 'violett');
 @define('BP_COLORSET_OPT2', 'blau');
-@define('BP_COLORSET_OPT3', 'grÃ¼n');
+@define('BP_COLORSET_OPT3', 'grün');
 // Layout
-@define('LAYOUT_TYPE','Layout des Blogs (B = BlogeintrÃ¤ge, S = Seitenleiste, CF = Content first)');
+@define('LAYOUT_TYPE','Layout des Blogs (B = Blogeinträge, S = Seitenleiste, CF = Content first)');
 @define('LAYOUT_SBS','Dreispaltig S-B-S');
 @define('LAYOUT_BSS','Dreispaltig, B-S-S, CF');
 @define('LAYOUT_SSB','Dreispaltig, S-S-B');
 @define('LAYOUT_SB','Zweispaltig, Seitenleiste links');
 @define('LAYOUT_BS','Zweispaltig, Seitenleiste rechts, CF');
 @define('LAYOUT_SC','Einspaltig, Seitenleiste(n) unten, CF');
-@define('JAVASCRIPT_COLUMNS','Gleich lange Spalten Ã¼ber Javascript erzeugen (Kann den Seitenaufbau verzÃ¶gern.)');
+@define('JAVASCRIPT_COLUMNS','Gleich lange Spalten über Javascript erzeugen (Kann den Seitenaufbau verzögern.)');
 // Custom header
 @define('BP_CUSTOM_HEADER','Eigene Header-Grafik aus der Mediendatenbank verwenden');
 @define('BP_HEADER_IMAGE','Auswahl der Header-Grafik');
@@ -30,36 +30,44 @@
 // Fahrner Image Replacement
 @define('FIR_BTITLE','Blogtitel im Header anzeigen');
 @define('FIR_BDESCR','Blogbeschreibung im Header anzeigen');
+// Date format
+@define('BP_DATE_FORMAT', 'Datumsformat');
 // Entry footer
-@define('ENTRY_FOOTER_POS','Position des EintragsfuÃŸes');
+@define('ENTRY_FOOTER_POS','Position des Eintragsfußes');
 @define('BELOW_ENTRY','Unter dem Eintrag');
 @define('BELOW_TITLE','Unter dem Titel des Eintrags');
-@define('SPLIT_FOOTER','Aufgeteilter EintragsfuÃŸ');
-@define('FOOTER_AUTHOR','Verfasser im EintragsfuÃŸ anzeigen');
-@define('FOOTER_CATEGORIES','Kategorie(n) im EintragsfuÃŸ anzeigen');
-@define('FOOTER_TIMESTAMP','Zeitstempel im EintragsfuÃŸ anzeigen');
-@define('FOOTER_COMMENTS','Anzahl der Kommentare im EintragsfuÃŸ anzeigen');
-@define('FOOTER_TRACKBACKS','Anzahl der Trackbacks im EintragsfuÃŸ anzeigen');
+@define('SPLIT_FOOTER','Aufgeteilter Eintragsfuß');
+@define('FOOTER_AUTHOR','Verfasser im Eintragsfuß anzeigen');
+@define('FOOTER_CATEGORIES','Kategorie(n) im Eintragsfuß anzeigen');
+@define('FOOTER_TIMESTAMP','Zeitstempel im Eintragsfuß anzeigen');
+@define('FOOTER_COMMENTS','Anzahl der Kommentare im Eintragsfuß anzeigen');
+@define('FOOTER_TRACKBACKS','Anzahl der Trackbacks im Eintragsfuß anzeigen');
+@define('SHOW_STICKY_ENTRY_FOOTER','Show entry footer for sticky postings (requires plugin "Extended properties for entries")');
+@define('SHOW_STICKY_ENTRY_HEADING','Show entry heading for sticky postings (requires plugin "Extended properties for entries")');
+// Page footer next page  and previous page links
+@define('PREV_NEXT_STYLE','Show page footer previous page/next page links as');
+@define('PREV_NEXT_TEXT','Text only');
+@define('PREV_NEXT_TEXT_ICON','Text and icon');
+@define('PREV_NEXT_ICON','Icon only');
 // coComment support
 @define('COCOMMENT_ACTIVE','coComment (http://www.cocomment.com) in Kommentarformulare einbinden');
 // Counter code
-@define('COUNTER_CODE', 'Code fÃ¼r Counter und/oder Statistik-Tools einfÃ¼gen');
+@define('COUNTER_CODE', 'Code für Counter und/oder Statistik-Tools einfügen');
 @define('USE_COUNTER', 'Oben eingegeben Counter-Code in das Blog einbinden');
 // Additional footer text
-@define('FOOTER_TEXT', 'Hier zusÃ¤tzlichen Text, der im Seitenfuss erscheinen soll, einfÃ¼gen.');
+@define('FOOTER_TEXT', 'Hier zusätzlichen Text, der im Seitenfuss erscheinen soll, einfügen.');
 @define('USE_FOOTER_TEXT', 'Oben eingegebenen Text einbinden');
 //Sitenav
 @define('SITENAV_POSITION','Darstellung der Navigationsleiste');
 @define('SITENAV_NONE','Keine Navigationsleiste');
-@define('SITENAV_ABOVE','Ãœber dem Kopfbereich');
+@define('SITENAV_ABOVE','Über dem Kopfbereich');
 @define('SITENAV_BELOW','Unter dem Kopfbereich');
 @define('SITENAV_LEFT','Oben in der linken Seitenleiste');
 @define('SITENAV_RIGHT','Oben in der rechten Seitenleiste');
-@define('SITENAV_FOOTER','Links der Navigationleiste zusÃ¤tzlich im Seitenfuss anzeigen (werden nicht angezeigt, wenn oben "Keine Navigationsleiste" ausgewÃ¤hlt wurde)');
-@define('SITENAV_QUICKSEARCH','Suchfeld in der Navigationsleiste anzeigen (funktioniert nur, wenn Navigationsleiste Ã¼ber oder unter dem Kopfbereich; Anzeige des entsprechenden Seitenleistenplugins wird automatisch unterdrÃ¼ckt)');
-@define('SITENAV_TITLE','Titel des Navigations-MenÃ¼s (nur bei Anzeige in der Seitenleiste');
-@define('SITENAV_TITLE_TEXT','HauptmenÃ¼');
+@define('SITENAV_FOOTER','Links der Navigationleiste zusätzlich im Seitenfuss anzeigen (werden nicht angezeigt, wenn oben "Keine Navigationsleiste" ausgewählt wurde)');
+@define('SITENAV_QUICKSEARCH','Suchfeld in der Navigationsleiste anzeigen (funktioniert nur, wenn Navigationsleiste über oder unter dem Kopfbereich; Anzeige des entsprechenden Seitenleistenplugins wird automatisch unterdrückt)');
+@define('SITENAV_TITLE','Titel des Navigations-Menüs (nur bei Anzeige in der Seitenleiste');
+@define('SITENAV_TITLE_TEXT','Hauptmenü');
 @define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Styles verwalten-Seite muss danach neu geladen werden)');
 @define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
 @define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
-?>

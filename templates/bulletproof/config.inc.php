@@ -179,6 +179,22 @@ $template_config = array(
                                  'desc'  => array(YES, NO)),
         'default'       => 'true',
     ),
+        array(
+        'var'           => 'show_sticky_entry_footer',
+        'name'          => SHOW_STICKY_ENTRY_FOOTER,
+        'type'          => 'radio',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES, NO)),
+        'default'       => 'true',
+    ),
+        array(
+        'var'           => 'show_sticky_entry_heading',
+        'name'          => SHOW_STICKY_ENTRY_HEADING,
+        'type'          => 'radio',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES, NO)),
+        'default'       => 'true',
+    ),
     array(
         'var'           => 'cocommentactive',
         'name'          => COCOMMENT_ACTIVE,
@@ -186,6 +202,15 @@ $template_config = array(
         'radio'         => array('value' => array('active', 'inactive'),
                                  'desc'  => array(YES, NO)),
         'default'       => 'inactive',
+    ),
+        array(
+        'var'           => 'prev_next_style',
+        'name'          => PREV_NEXT_STYLE,
+        'type'          => 'select',
+        'default'       => 'text',
+        'select_values' => array('text' => PREV_NEXT_TEXT,
+                                 'texticon' => PREV_NEXT_TEXT_ICON,
+                                 'icon' => PREV_NEXT_ICON)
     ),
     array(
         'var'           => 'counter_code',

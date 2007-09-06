@@ -2,9 +2,11 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
 
 {foreach from=$entries item="dategroup"}
-<div class="serendipity_Entry_Date">
+<div class="serendipity_Entry_Date{if $dategroup.is_sticky} serendipity_Sticky_Entry{/if}">
     {if $dategroup.is_sticky}
-        <h3 class="serendipity_date">{$CONST.STICKY_POSTINGS}</h3>
+        {if $template_option.show_sticky_entry_heading == 'true'}
+            <h3 class="serendipity_date">{$CONST.STICKY_POSTINGS}</h3>
+        {/if}
     {else}
         <h3 class="serendipity_date">{$dategroup.date|@formatTime:$template_option.date_format}</h3>
     {/if}
@@ -14,76 +16,78 @@
 
         <div class="serendipity_entry serendipity_entry_author_{$entry.author|@makeFilename} {if $entry.is_entry_owner}serendipity_entry_author_self{/if}">
 
-            {if $template_option.entryfooterpos == 'belowtitle'}
-                <div class='serendipity_entryFooter belowtitle'>
-                    {if $template_option.footerauthor == 'true'}
-                        {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
-                    {/if}
-
-                    {if $template_option.footercategories == 'true'}
-                        {if $entry.categories}
-                            {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
+            {if (not $dategroup.is_sticky or ($dategroup.is_sticky and $template_option.show_sticky_entry_footer == 'true'))}
+                {if $template_option.entryfooterpos == 'belowtitle'}
+                    <div class='serendipity_entryFooter belowtitle'>
+                        {if $template_option.footerauthor == 'true'}
+                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertimestamp == 'true'}
-                        {if $dategroup.is_sticky}
-                            {$CONST.ON}
-                        {else}
-                            {$CONST.AT}
-                        {/if}
-                        <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
-                    {/if}
-
-                    {if $template_option.footercomments == 'true'}
-                        {if $entry.has_comments}
-                            {if $use_popups}
-                                | <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
-                            {else}
-                                | <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                        {if $template_option.footercategories == 'true'}
+                            {if $entry.categories}
+                                {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertrackbacks == 'true'}
-                        {if $entry.has_trackbacks}
-                            {if $use_popups}
-                                | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                        {if $template_option.footertimestamp == 'true'}
+                            {if $dategroup.is_sticky}
+                                {$CONST.ON}
                             {else}
-                                | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {$CONST.AT}
+                            {/if}
+                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                        {/if}
+
+                        {if $template_option.footercomments == 'true'}
+                            {if $entry.has_comments}
+                                {if $use_popups}
+                                    | <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
+                                {else}
+                                    | <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                                {/if}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $entry.is_entry_owner and not $is_preview}
+                        {if $template_option.footertrackbacks == 'true'}
+                            {if $entry.has_trackbacks}
+                                {if $use_popups}
+                                    | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {else}
+                                    | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {/if}
+                            {/if}
+                        {/if}
+
+                        {if $entry.is_entry_owner and not $is_preview}
                         <div class="editentrylink"><a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a></div>
-                    {/if}
-
-                    {$entry.add_footer}
-                </div>
-            {/if}
-
-            {if $template_option.entryfooterpos == 'splitfoot'}
-                <div class='serendipity_entryFooter byline'>
-                    {if $template_option.footerauthor == 'true'}
-                        {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
-                    {/if}
-
-                    {if $template_option.footercategories == 'true'}
-                        {if $entry.categories}
-                            {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertimestamp == 'true'}
-                        {if $dategroup.is_sticky}
-                            {$CONST.ON}
-                        {else}
-                            {$CONST.AT}
+                        {$entry.add_footer}
+                    </div>
+                {/if}
+
+                {if $template_option.entryfooterpos == 'splitfoot'}
+                    <div class='serendipity_entryFooter byline'>
+                        {if $template_option.footerauthor == 'true'}
+                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
                         {/if}
-                        <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
-                    {/if}
-                </div>
+
+                        {if $template_option.footercategories == 'true'}
+                            {if $entry.categories}
+                                {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
+                            {/if}
+                        {/if}
+
+                        {if $template_option.footertimestamp == 'true'}
+                            {if $dategroup.is_sticky}
+                                {$CONST.ON}
+                            {else}
+                                {$CONST.AT}
+                            {/if}
+                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                        {/if}
+                    </div>
+                {/if}
             {/if}
 
             {if $entry.categories}
@@ -107,83 +111,85 @@
                 <div class="serendipity_entry_extended"><a id="extended"></a>{$entry.extended}</div>
             {/if}
 
-            {if $template_option.entryfooterpos == 'belowentry'}
-                <div class='serendipity_entryFooter belowentry'>
-                    {if $template_option.footerauthor == 'true'}
-                        {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
-                    {/if}
-
-                    {if $template_option.footercategories == 'true'}
-                        {if $entry.categories}
-                            {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
+            {if (not $dategroup.is_sticky or ($dategroup.is_sticky and $template_option.show_sticky_entry_footer == 'true'))}
+                {if $template_option.entryfooterpos == 'belowentry'}
+                    <div class='serendipity_entryFooter belowentry'>
+                        {if $template_option.footerauthor == 'true'}
+                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertimestamp == 'true'}
-                        {if $dategroup.is_sticky}
-                            {$CONST.ON}
-                        {else}
-                            {$CONST.AT}
-                        {/if}
-                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
-                    {/if}
-
-                    {if $template_option.footercomments == 'true'}
-                        {if $entry.has_comments}
-                            {if $use_popups}
-                                | <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
-                            {else}
-                                | <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                        {if $template_option.footercategories == 'true'}
+                            {if $entry.categories}
+                                {$CONST.IN} {foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertrackbacks == 'true'}
-                        {if $entry.has_trackbacks}
-                            {if $use_popups}
-                                | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                        {if $template_option.footertimestamp == 'true'}
+                            {if $dategroup.is_sticky}
+                                {$CONST.ON}
                             {else}
-                                | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {$CONST.AT}
+                            {/if}
+                                <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                        {/if}
+
+                        {if $template_option.footercomments == 'true'}
+                            {if $entry.has_comments}
+                                {if $use_popups}
+                                    | <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
+                                {else}
+                                    | <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                                {/if}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $entry.is_entry_owner and not $is_preview}
-                        <div class="editentrylink"><a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a></div>
-                    {/if}
-
-                    {$entry.add_footer}
-                </div>
-            {/if}
-
-            {if $template_option.entryfooterpos == 'splitfoot'}
-                <div class='serendipity_entryFooter infofooter'>
-                    {if $template_option.footercomments == 'true'}
-                        {if $entry.has_comments}
-                            {if $use_popups}
-                                <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
-                            {else}
-                                <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                        {if $template_option.footertrackbacks == 'true'}
+                            {if $entry.has_trackbacks}
+                                {if $use_popups}
+                                    | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {else}
+                                    | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {/if}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $template_option.footertrackbacks == 'true'}
-                        {if $entry.has_trackbacks}
-                            {if $use_popups}
-                                | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
-                            {else}
-                                | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                        {if $entry.is_entry_owner and not $is_preview}
+                            <div class="editentrylink"><a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a></div>
+                        {/if}
+
+                        {$entry.add_footer}
+                    </div>
+                {/if}
+
+                {if $template_option.entryfooterpos == 'splitfoot'}
+                    <div class='serendipity_entryFooter infofooter'>
+                        {if $template_option.footercomments == 'true'}
+                            {if $entry.has_comments}
+                                {if $use_popups}
+                                    <a href="{$entry.link_popup_comments}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_comments} ({$entry.comments})</a>
+                                {else}
+                                    <a href="{$entry.link}#comments">{$entry.label_comments} ({$entry.comments})</a>
+                                {/if}
                             {/if}
                         {/if}
-                    {/if}
 
-                    {if $entry.is_entry_owner and not $is_preview}
-                        <div class="editentrylink"><a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a></div>
-                    {/if}
+                        {if $template_option.footertrackbacks == 'true'}
+                            {if $entry.has_trackbacks}
+                                {if $use_popups}
+                                    | <a href="{$entry.link_popup_trackbacks}" onclick="window.open(this.href, 'comments', 'width=600,height=600,scrollbars=yes,resizable=yes'); return false;">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {else}
+                                    | <a href="{$entry.link}#trackbacks">{$entry.label_trackbacks} ({$entry.trackbacks})</a>
+                                {/if}
+                            {/if}
+                        {/if}
 
-                    {$entry.add_footer}
-                </div>
+                        {if $entry.is_entry_owner and not $is_preview}
+                            <div class="editentrylink"><a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a></div>
+                        {/if}
+
+                        {$entry.add_footer}
+                    </div>
+                {/if}
             {/if}
         </div>
 
@@ -286,7 +292,21 @@
 
 <div class='serendipity_pageFooter' style="text-align: center">
     {if $footer_prev_page}
-        <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&laquo; {$CONST.PREVIOUS_PAGE}</a>&#160;&#160;
+        {if $template_option.prev_next_style == 'texticon'}
+            {if $template_option.colorset == 'blank'}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><img alt="{$CONST.PREVIOUS_PAGE}" title="{$CONST.PREVIOUS_PAGE}" src="{serendipity_getFile file="img/back.png"}" />{$CONST.PREVIOUS_PAGE}</a>
+            {else}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><img alt="{$CONST.PREVIOUS_PAGE}" title="{$CONST.PREVIOUS_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_back.png" />{$CONST.PREVIOUS_PAGE}</a>
+            {/if}
+        {elseif  $template_option.prev_next_style == 'icon'}
+            {if $template_option.colorset == 'blank'}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><img alt="{$CONST.PREVIOUS_PAGE}" src="{serendipity_getFile file="img/back.png"}" />{$CONST.PREVIOUS_PAGE}</a>
+            {else}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><img alt="{$CONST.PREVIOUS_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_back.png" /></a>
+            {/if}
+        {else}
+            <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&laquo; {$CONST.PREVIOUS_PAGE}</a>&#160;&#160;
+        {/if}
     {/if}
 
     {if $footer_info}
@@ -294,7 +314,21 @@
     {/if}
 
     {if $footer_next_page}
-        <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE} &raquo;</a>
+        {if $template_option.prev_next_style == 'texticon'}
+            {if $template_option.colorset == 'blank'}
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE}<img alt="{$CONST.NEXT_PAGE}" title="{$CONST.NEXT_PAGE}" src="{serendipity_getFile file="img/forward.png"}" /></a>
+            {else}
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE}<img alt="{$CONST.NEXT_PAGE}" title="{$CONST.NEXT_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_forward.png" /></a>
+            {/if}
+        {elseif $template_option.prev_next_style == 'icon'}
+            {if $template_option.colorset == 'blank'}
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><img alt="{$CONST.NEXT_PAGE}" src="{serendipity_getFile file="img/forward.png"}" /></a>
+            {else}
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><img alt="{$CONST.NEXT_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_forward.png" /></a>
+            {/if}
+        {else}
+             <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE} &raquo;</a>
+        {/if}
     {/if}
 
     {serendipity_hookPlugin hook="entries_footer"}
