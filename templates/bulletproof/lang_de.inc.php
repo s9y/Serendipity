@@ -42,13 +42,13 @@
 @define('FOOTER_TIMESTAMP','Zeitstempel im Eintragsfuß anzeigen');
 @define('FOOTER_COMMENTS','Anzahl der Kommentare im Eintragsfuß anzeigen');
 @define('FOOTER_TRACKBACKS','Anzahl der Trackbacks im Eintragsfuß anzeigen');
-@define('SHOW_STICKY_ENTRY_FOOTER','Show entry footer for sticky postings (requires plugin "Extended properties for entries")');
-@define('SHOW_STICKY_ENTRY_HEADING','Show entry heading for sticky postings (requires plugin "Extended properties for entries")');
+@define('SHOW_STICKY_ENTRY_FOOTER','Eintragsfuß für klebrige Einträge anzeigen (benötigt das Plugin "Erweiterte Eigenschaften von Artikeln")');
+@define('SHOW_STICKY_ENTRY_HEADING','Eintragstitel für klebrige Einträge anzeigen (benötigt das Plugin "Erweiterte Eigenschaften von Artikeln")');
 // Page footer next page  and previous page links
-@define('PREV_NEXT_STYLE','Show page footer previous page/next page links as');
-@define('PREV_NEXT_TEXT','Text only');
-@define('PREV_NEXT_TEXT_ICON','Text and icon');
-@define('PREV_NEXT_ICON','Icon only');
+@define('PREV_NEXT_STYLE','Links zur vorigen/nächsten Seite im Seitenfuß anzeigen als');
+@define('PREV_NEXT_TEXT','Nur Text');
+@define('PREV_NEXT_TEXT_ICON','Text und Icon');
+@define('PREV_NEXT_ICON','Nur Icon');
 // coComment support
 @define('COCOMMENT_ACTIVE','coComment (http://www.cocomment.com) in Kommentarformulare einbinden');
 // Counter code
