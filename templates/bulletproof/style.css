@@ -404,3 +404,7 @@ input#serendipityQuickSearchTermField {
 .container_serendipity_quicksearch_plugin{
     overflow: visible !important;
 }
+
+ul#serendipity_categories_list input{
+    margin-left: 0;
+}
