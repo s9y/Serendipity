@@ -7,7 +7,6 @@
  "http://www.w3.org/TR/html4/loose.dtd">
 {/if}
 
-<!-- <html xmlns="http://www.w3.org/1999/xhtml"> -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang}" lang="{$lang}">
 <head>
    <title>{$head_title|@default:$blogTitle} {if $head_subtitle} - {$head_subtitle}{/if}</title>
@@ -16,7 +15,8 @@
    <link rel="alternate"  type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
    <link rel="alternate"  type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
    {if $entry_id}<link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />{/if}
-   <link rel="shortcut icon" href="{$serendipityBaseURL}favicon.ico" />
+<!-- uncomment the line below if your site uses a favicon -->
+   <!--   <link rel="shortcut icon" href="{$serendipityBaseURL}favicon.ico" /> -->
    <!-- base styles needed for bulletproof -->
    <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="base.css"}" />
    <!-- style.css -->
