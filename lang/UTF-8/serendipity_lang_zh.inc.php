@@ -220,7 +220,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '新回复到订阅的文章 "%s"');
 @define('SUBSCRIPTION_MAIL', "你好 %s,\n\n你订阅的文章有了新的回复在 \"%s\", 标题是 \"%s\"\n回复的发表者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "你好 %s,\n\n你订阅的文章有了新的引用在 \"%s\", 标题是 \"%s\"\n引用的作者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\n 最好的日志程序, 希望你喜欢它.\n 详情 <http://www.cexten.com> 得到更多支持...");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\n 最好的日志程序, 希望你喜欢它.\n 详情 <http://www.s9y.org> 得到更多支持...");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
