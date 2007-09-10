@@ -39,6 +39,14 @@ $template_config = array(
         'select_values' => $colorsets
     ),
     array(
+        'var'           => 'deficons',
+        'name'          => DEF_ICONS,
+        'type'          => 'radio',
+        'default'       => 'false',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES,NO))
+    ),
+    array(
         'var'           => 'layouttype',
         'name'          => LAYOUT_TYPE,
         'type'          => 'select',

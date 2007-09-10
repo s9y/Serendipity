@@ -1,6 +1,7 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Farbwahl');
+@define('DEF_ICONS', 'Unabhängig vom gewählten Farbset immer Standardicons verwenden');
 @define('BP_COLORSET_DEF', 'leer');
 @define('BP_COLORSET_OPT1', 'violett');
 @define('BP_COLORSET_OPT2', 'blau');
