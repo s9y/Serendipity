@@ -340,7 +340,13 @@ function serendipity_drawList() {
     } else {
         // We've got nothing
 ?>
-        <div align="center">- <?php echo NO_ENTRIES_TO_PRINT ?> -</div>
+        <tr>
+            <td align="center" class="serendipityAdminMsgNote">
+                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" />
+                <?php echo NO_ENTRIES_TO_PRINT ?>
+            </td>
+        </tr>
+    </table>
 <?php
     }
 ?>

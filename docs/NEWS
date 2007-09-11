@@ -41,7 +41,11 @@ Version 1.3 ()
 
 Version 1.2.1 ()
 ------------------------------------------------------------------------
+    * Fix admin entry list when no entries exist or meet filter
+      criteria. (Don Chambers)
 
+    * Fix PHP notice about session_start()
+    
     * Bulletproof template can now include custom user stylesheets
       (*_style.css) in the dropdown of a colorset. (garvinhicking)
       
