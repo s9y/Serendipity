@@ -6,10 +6,6 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 
 // Colorsets
 @define('THEME_COLORSET', 'Цветова схема');
-@define('BP_COLORSET_DEF', 'Прозрачна');
-@define('BP_COLORSET_OPT1', 'Виолетова');
-@define('BP_COLORSET_OPT2', 'Синя');
-@define('BP_COLORSET_OPT3', 'Зелена');
 // Layout
 @define('LAYOUT_TYPE','Общо оформление (B = Статия, S = Странична приставка, CF = Първо съдържанието)');
 @define('LAYOUT_SBS','Три колони S-B-S');

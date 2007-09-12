@@ -2,10 +2,6 @@
 // Colorsets
 @define('THEME_COLORSET', 'Colorset');
 @define('DEF_ICONS', 'Always use default icons regardless of colorset chosen');
-@define('BP_COLORSET_DEF', 'blank');
-@define('BP_COLORSET_OPT1', 'purple');
-@define('BP_COLORSET_OPT2', 'blue');
-@define('BP_COLORSET_OPT3', 'green');
 // Layout
 @define('LAYOUT_TYPE','Blog layout (B = Blog entriee, S = Sidebar, CF = Content first)');
 @define('LAYOUT_SBS','Three columns S-B-S');

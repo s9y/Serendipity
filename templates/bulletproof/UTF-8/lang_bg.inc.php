@@ -6,10 +6,6 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 
 // Colorsets
 @define('THEME_COLORSET', 'Öâåòîâà ñõåìà');
-@define('BP_COLORSET_DEF', 'Ïðîçðà÷íà');
-@define('BP_COLORSET_OPT1', 'Âèîëåòîâà');
-@define('BP_COLORSET_OPT2', 'Ñèíÿ');
-@define('BP_COLORSET_OPT3', 'Çåëåíà');
 // Layout
 @define('LAYOUT_TYPE','Îáùî îôîðìëåíèå (B = Ñòàòèÿ, S = Ñòðàíè÷íà ïðèñòàâêà, CF = Ïúðâî ñúäúðæàíèåòî)');
 @define('LAYOUT_SBS','Òðè êîëîíè S-B-S');
