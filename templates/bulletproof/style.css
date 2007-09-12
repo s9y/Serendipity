@@ -367,6 +367,10 @@ img.serendipity_freeTag_xmlButton {
     padding-left: 1%;
 }
 
+.serendipity_freeTag_related {
+    margin-top: 1em;
+}
+
 .serendipity_freetag_taglist_related {
     font-size: 120%;
     font-weight: bold;
