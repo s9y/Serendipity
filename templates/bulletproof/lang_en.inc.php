@@ -39,6 +39,7 @@
 @define('FOOTER_TIMESTAMP','Show timestamp in the entry footer');
 @define('FOOTER_COMMENTS','Show number of comments in the entry footer');
 @define('FOOTER_TRACKBACKS','Show number of trackback in the entry footer');
+@define('ALT_COMMTRACK','Use alternate display for number of comments and trackbacks (i.e. "No comments" or "1 comment" instead of "Comments (0)" or "Comments (1)")');
 @define('SHOW_STICKY_ENTRY_FOOTER','Show entry footer for sticky postings (requires plugin "Extended properties for entries")');
 @define('SHOW_STICKY_ENTRY_HEADING','Show entry heading for sticky postings (requires plugin "Extended properties for entries")');
 // Page footer next page  and previous page links
