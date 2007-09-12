@@ -180,7 +180,15 @@ $template_config = array(
                                  'desc'  => array(YES, NO)),
         'default'       => 'true',
     ),
-        array(
+    array(
+        'var'           => 'altcommtrack',
+        'name'          => ALT_COMMTRACK,
+        'type'          => 'radio',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES, NO)),
+        'default'       => 'false',
+    ),
+    array(
         'var'           => 'show_sticky_entry_footer',
         'name'          => SHOW_STICKY_ENTRY_FOOTER,
         'type'          => 'radio',
@@ -188,7 +196,7 @@ $template_config = array(
                                  'desc'  => array(YES, NO)),
         'default'       => 'true',
     ),
-        array(
+    array(
         'var'           => 'show_sticky_entry_heading',
         'name'          => SHOW_STICKY_ENTRY_HEADING,
         'type'          => 'radio',
@@ -204,7 +212,7 @@ $template_config = array(
                                  'desc'  => array(YES, NO)),
         'default'       => 'inactive',
     ),
-        array(
+    array(
         'var'           => 'prev_next_style',
         'name'          => PREV_NEXT_STYLE,
         'type'          => 'select',

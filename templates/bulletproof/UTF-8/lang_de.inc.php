@@ -39,6 +39,7 @@
 @define('FOOTER_TIMESTAMP','Zeitstempel im Eintragsfuß anzeigen');
 @define('FOOTER_COMMENTS','Anzahl der Kommentare im Eintragsfuß anzeigen');
 @define('FOOTER_TRACKBACKS','Anzahl der Trackbacks im Eintragsfuß anzeigen');
+@define('ALT_COMMTRACK','Alternative Darstellung der Anzahl der Kommentare und Trackbacks benutzen (z.B. "Keine Kommentare" bzw. "1 Kommentar" statt "Kommentare (0)" bzw. "Kommentare(1)")');
 @define('SHOW_STICKY_ENTRY_FOOTER','Eintragsfuß für klebrige Einträge anzeigen (benötigt das Plugin "Erweiterte Eigenschaften von Artikeln")');
 @define('SHOW_STICKY_ENTRY_HEADING','Eintragstitel für klebrige Einträge anzeigen (benötigt das Plugin "Erweiterte Eigenschaften von Artikeln")');
 // Page footer next page  and previous page links
