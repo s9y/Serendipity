@@ -1,7 +1,6 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Colorset');
-@define('DEF_ICONS', 'Always use default icons regardless of colorset chosen');
 // Layout
 @define('LAYOUT_TYPE','Blog layout (B = Blog entriee, S = Sidebar, CF = Content first)');
 @define('LAYOUT_SBS','Three columns S-B-S');

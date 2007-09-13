@@ -1,7 +1,6 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Farbwahl');
-@define('DEF_ICONS', 'Unabhängig vom gewählten Farbset immer Standardicons verwenden');
 // Layout
 @define('LAYOUT_TYPE','Layout des Blogs (B = Blogeinträge, S = Seitenleiste, CF = Content first)');
 @define('LAYOUT_SBS','Dreispaltig S-B-S');
