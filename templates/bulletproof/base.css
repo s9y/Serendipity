@@ -192,7 +192,7 @@ body {
 
 .serendipity_Entry_Date,
 .serendipity_commentBody {
-    overflow: auto;
+    overflow: hidden;
 }
 
 .serendipitySideBarContent input,
