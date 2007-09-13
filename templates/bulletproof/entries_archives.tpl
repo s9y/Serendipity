@@ -6,11 +6,9 @@
       {foreach from=$archive.months item="month"}
       <ul class="archives_row">
          {if $template_option.colorset == 'blank'}
-         <li class="archives_graph"><img src="{serendipity_getFile file="img/graph_bar_horisontal.png"}" alt="bar graph" height="10" width="{math width=100 equation="count * width / max" count=$month.entry_count max=$max_entries format="%d"}" style="border: 1px solid #000000" /></li>
-         {elseif $template_option.deficons == 'true'}
-         <li class="archives_graph"><img src="{serendipity_getFile file="img/graph_bar_horisontal.png"}" alt="bar graph" height="10" width="{math width=100 equation="count * width / max" count=$month.entry_count max=$max_entries format="%d"}" style="border: 1px solid #000000" /></li>
+             <li class="archives_graph"><img src="{serendipity_getFile file="img/graph_bar_horisontal.png"}" alt="bar graph" height="10" width="{math width=100 equation="count * width / max" count=$month.entry_count max=$max_entries format="%d"}" style="border: 1px solid #000000" /></li>
          {else}
-         <li class="archives_graph"><img src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_graph_bar.png" alt="bar graph" height="10" width="{math width=100 equation="count * width / max" count=$month.entry_count max=$max_entries format="%d"}" style="border: 1px solid #000000" /></li>
+             <li class="archives_graph"><img src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_graph_bar.png" alt="bar graph" height="10" width="{math width=100 equation="count * width / max" count=$month.entry_count max=$max_entries format="%d"}" style="border: 1px solid #000000" /></li>
          {/if}
          <li class="archives_date">{$month.date|@formatTime:"%B"}</li>
          <li class="archives_count">{$month.entry_count} {$CONST.ENTRIES}</li>
