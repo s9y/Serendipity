@@ -1,0 +1,24 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Additional IE 5 stylesheet                                         */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+/* stop the footer from extending the page's height */
+#footer {
+    height: auto!important;
+}
+
+/* same for sidebar items, apparently               */
+.serendipitySideBarItem {
+    height: auto!important;
+}
+
+/* stop search box from extending its container     */
+.serendipitySideBarContent input,
+.serendipitySideBarContent select {
+    width: 70%;
+}
