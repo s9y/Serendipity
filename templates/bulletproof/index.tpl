@@ -21,6 +21,9 @@
    <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="base.css"}" />
    <!-- style.css -->
    <link rel="stylesheet" type="text/css" href="{$head_link_stylesheet}" />
+   <!--[if IE 5]>
+   <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie5.css"}" />
+   <![endif]-->
    <!--[if IE 6]>
    <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie6.css"}" />
    <![endif]-->
