@@ -22,3 +22,9 @@
 .serendipitySideBarContent select {
     width: 70%;
 }
+
+/* fix horizontal navbar display                    */
+#sitenav ul li {
+    float: left;
+    width: 10em;
+}
