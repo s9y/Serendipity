@@ -5,70 +5,70 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 */
 
 // Colorsets
-@define('THEME_COLORSET', 'Öâåòîâà ñõåìà');
+@define('THEME_COLORSET', 'Цветова схема');
 // Layout
-@define('LAYOUT_TYPE','Îáùî îôîðìëåíèå (B = Ñòàòèÿ, S = Ñòðàíè÷íà ïðèñòàâêà, CF = Ïúðâî ñúäúðæàíèåòî)');
-@define('LAYOUT_SBS','Òðè êîëîíè S-B-S');
-@define('LAYOUT_BSS','Òðè êîëîíè, B-S-S, CF');
-@define('LAYOUT_SSB','Òðè êîëîíè, S-S-B');
-@define('LAYOUT_SB','Äâå êîëîíè, S-B');
-@define('LAYOUT_BS','Äâå êîëîíè, B-S, CF');
-@define('LAYOUT_SC','Åäíà êîëîíà, ïðèñòàâêèòå îòäîëó, CF');
-@define('JAVASCRIPT_COLUMNS','Ãåíåðèðàíå íà êîëîíè ñ åäíàêâà âèñî÷èíà (èçïîëçâà ñå Javascript, à òîâà ìîæå äà çàáàâè ìàëêî ïîÿâàòà íà ñòðàíèöàòà');
+@define('LAYOUT_TYPE','Общо оформление (B = Статия, S = Странична приставка, CF = Първо съдържанието)');
+@define('LAYOUT_SBS','Три колони S-B-S');
+@define('LAYOUT_BSS','Три колони, B-S-S, CF');
+@define('LAYOUT_SSB','Три колони, S-S-B');
+@define('LAYOUT_SB','Две колони, S-B');
+@define('LAYOUT_BS','Две колони, B-S, CF');
+@define('LAYOUT_SC','Една колона, приставките отдолу, CF');
+@define('JAVASCRIPT_COLUMNS','Генериране на колони с еднаква височина (използва се Javascript, а това може да забави малко появата на страницата');
 // Custom header
-@define('BP_CUSTOM_HEADER','Èçîáðàæåíèå ïî èçáîð íà áàçàòà äàííè çà õåäúðà íà áëîãà');
-@define('BP_HEADER_IMAGE','Èçáîð íà èçîáðàæåíèå');
-@define('BP_HEADER_TYPE','Ìàùàáèðàíå íà èçîáðàæåíèåòî');
-@define('BP_HEADER_BANNER', 'Áàíåð (áåç ìàùàáèðàíå)');
-@define('BP_HEADER_HTILED', 'Õîðèçîíòàëíî ìàùàáèðàíå');
-@define('BP_HEADER_VTILED', 'Âåðòèêàëíî ìàùàáèðàíå');
-@define('BP_HEADER_BTILED', 'Õîðèçîíòàëíî è âåðòèêàëíî ìàùàáèðàíå');
-@define('BP_HEADER_POSHOR', 'Õîðèçîíòàëíî ïîäðàâíÿâàíå');
-@define('BP_HEADER_POSVER', 'Âåðòèêàëíî ïîäðàâíÿâàíå');
-@define('BP_CENTER', 'öåíòðèðàíî');
-@define('BP_TOP', 'ãîðå');
-@define('BP_BOTTOM', 'äîëó');
+@define('BP_CUSTOM_HEADER','Изображение по избор на базата данни за хедъра на блога');
+@define('BP_HEADER_IMAGE','Избор на изображение');
+@define('BP_HEADER_TYPE','Мащабиране на изображението');
+@define('BP_HEADER_BANNER', 'Банер (без мащабиране)');
+@define('BP_HEADER_HTILED', 'Хоризонтално мащабиране');
+@define('BP_HEADER_VTILED', 'Вертикално мащабиране');
+@define('BP_HEADER_BTILED', 'Хоризонтално и вертикално мащабиране');
+@define('BP_HEADER_POSHOR', 'Хоризонтално подравняване');
+@define('BP_HEADER_POSVER', 'Вертикално подравняване');
+@define('BP_CENTER', 'центрирано');
+@define('BP_TOP', 'горе');
+@define('BP_BOTTOM', 'долу');
 // Fahrner Image Replacement
-@define('FIR_BTITLE','Ïîêàçâàíå íà çàãëàâèåòî íà áëîãà â õåäúðà');
-@define('FIR_BDESCR','Ïîêàçâàíå íà îïèñàíèåòî íà áëîãà â õåäúðà');
+@define('FIR_BTITLE','Показване на заглавието на блога в хедъра');
+@define('FIR_BDESCR','Показване на описанието на блога в хедъра');
 // Date format
-@define('BP_DATE_FORMAT', 'Ôîðìàò íà äàòàòà');
+@define('BP_DATE_FORMAT', 'Формат на датата');
 // Entry footer
-@define('ENTRY_FOOTER_POS','Ïîçèöèÿ íà îñíîâàòà íà ñòàòèèòå');
-@define('BELOW_ENTRY','Ïîä ñòàòèÿòà');
-@define('BELOW_TITLE','Ïîä çàãëàâèåòî íà ñòàòèÿòà');
-@define('SPLIT_FOOTER','Ðàçäåëåíà îñíîâà');
-@define('FOOTER_AUTHOR','Ïîêàçâàíå íà àâòîðà â îñíîâàòà íà ñòàòèÿòà');
-@define('FOOTER_CATEGORIES','Ïîêàçâàíå íà êàòåãîðèèòå â îñíîâàòà íà ñòàòèÿòà');
-@define('FOOTER_TIMESTAMP','Ïîêàçâàíå íà äàòà/÷àñ â îñíîâàòà íà ñòàòèÿòà');
-@define('FOOTER_COMMENTS','Ïîêàçâàíå íà áðîÿ íà êîìåíòàðèòå â îñíîâàòà íà ñòàòèÿòà');
-@define('FOOTER_TRACKBACKS','Ïîêàçâàíå íà áðîÿ íà ïðîñëåäÿâàíèÿòà â îñíîâàòà íà ñòàòèÿòà');
-@define('SHOW_STICKY_ENTRY_FOOTER','Ïîêàçâàíå íà îñíîâà çà ëåïêàâèòå ñúîáùåíèÿ (èçèñêâà ïðèñòàâêà "Ðàçøèðåíè ñâîéñòâà íà ñòàòèèòå" ("Extended properties for entries"))');
-@define('SHOW_STICKY_ENTRY_HEADING','Ïîêàçâàíå íà çàãëàâèå çà ëåïêàâèòå ñúîáùåíèÿ (èçèñêâà ïðèñòàâêà "Ðàçøèðåíè ñâîéñòâà íà ñòàòèèòå" ("Extended properties for entries"))');
+@define('ENTRY_FOOTER_POS','Позиция на основата на статиите');
+@define('BELOW_ENTRY','Под статията');
+@define('BELOW_TITLE','Под заглавието на статията');
+@define('SPLIT_FOOTER','Разделена основа');
+@define('FOOTER_AUTHOR','Показване на автора в основата на статията');
+@define('FOOTER_CATEGORIES','Показване на категориите в основата на статията');
+@define('FOOTER_TIMESTAMP','Показване на дата/час в основата на статията');
+@define('FOOTER_COMMENTS','Показване на броя на коментарите в основата на статията');
+@define('FOOTER_TRACKBACKS','Показване на броя на проследяванията в основата на статията');
+@define('SHOW_STICKY_ENTRY_FOOTER','Показване на основа за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
+@define('SHOW_STICKY_ENTRY_HEADING','Показване на заглавие за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
 // Page footer next page  and previous page links
-@define('PREV_NEXT_STYLE','Ïîêàçâàíå íà âðúçêèòå êúì ïðåäèøíà/ñëåäâàùà ñòðàíèöà â îñíîâàòà íà ñòðàíèöàòà êàòî');
-@define('PREV_NEXT_TEXT','Ñàìî òåêñò');
-@define('PREV_NEXT_TEXT_ICON','Òåêñò è èêîíà');
-@define('PREV_NEXT_ICON','Ñàìî èêîíà');
+@define('PREV_NEXT_STYLE','Показване на връзките към предишна/следваща страница в основата на страницата като');
+@define('PREV_NEXT_TEXT','Само текст');
+@define('PREV_NEXT_TEXT_ICON','Текст и икона');
+@define('PREV_NEXT_ICON','Само икона');
 // coComment support
-@define('COCOMMENT_ACTIVE','Èíòåãðèðàíå íà coComment (http://www.cocomment.com) âúâ ôîðìàòà íà êîìåíòàðèòå');
+@define('COCOMMENT_ACTIVE','Интегриране на coComment (http://www.cocomment.com) във формата на коментарите');
 // Counter code
-@define('COUNTER_CODE', 'Êîä çà WEB áðîÿ÷ è/èëè ñòàòèñòèêà');
-@define('USE_COUNTER', 'Èçïîëçâàíå íà áðîÿ÷à, îïðåäåëåí â ãîðíîòî ïîëå');
+@define('COUNTER_CODE', 'Код за WEB брояч и/или статистика');
+@define('USE_COUNTER', 'Използване на брояча, определен в горното поле');
 // Additional footer text
-@define('FOOTER_TEXT', 'Äîïúëíèòåëåí òåêñò â îñíîâàòà íà ñòðàíèöàòà');
-@define('USE_FOOTER_TEXT', 'Èçïîëçâàíå íà äîïúëíèòåëíèÿ òåêñò, âúâåäåí â ãîðíîòî ïîëå');
+@define('FOOTER_TEXT', 'Допълнителен текст в основата на страницата');
+@define('USE_FOOTER_TEXT', 'Използване на допълнителния текст, въведен в горното поле');
 //Sitenav
-@define('SITENAV_POSITION','Ïîçèöèÿ íà íàâèãàöèîííèÿ ðåä');
-@define('SITENAV_NONE','Íÿìà');
-@define('SITENAV_ABOVE','Íàä áàíåðà');
-@define('SITENAV_BELOW','Ïîä áàíåðà');
-@define('SITENAV_LEFT','Íàä ëåâèòå ñòðàíè÷íè ïðèñòàâêè');
-@define('SITENAV_RIGHT','Íàä äåñíèòå ñòðàíè÷íè ïðèñòàâêè');
-@define('SITENAV_FOOTER','Ïîêàçâàíå íà íàâèãàöèîííèòå âðúçêè â îñíîâàòà (íå ñå ïîêàçâàò â ñëó÷àé, ÷å å íàâèãàöèîííèÿò ðåä å çàáðàíåí)');
-@define('SITENAV_QUICKSEARCH','Ïîêàçâàíå íà ïîëå çà áúðçî òúðñåíå â íàâèãàöèîííèÿ ðåä (ðàáîòè, ñàìî àêî íàâèãàöèîííèÿò ðåä å íàä èëè ïîä áàíåðà; áúðçîòî òúðñåíå ñå çàáðàíÿâà àâòîìàòè÷íî àêî íàâèãàöèîííèÿò ðåä å ïîñòàâåí íàä ñòðàíè÷íèòå ïðèñòàâêè)');
-@define('SITENAV_TITLE','Èìå íà íàâèãàöèîííîòî ìåíþ (ïîêàçâà ñå ñàìî àêî å ïîñòàâåíî íàä ñòðàíè÷íèòå ïðèñòàâêè)');
-@define('SITENAV_TITLE_TEXT','Ãëàâíî ìåíþ');
-@define('NAVLINK_AMOUNT', 'áðîé íà âðúçêèòå â íàâèãàöèîííèÿ ðåä (íåîáõîäèìî å ïðåçàðåæäàíå íà ñòðàíèöà "Ïðîìÿíà íà îôîðìëåíèåòî - òàçè ñòðàíèöà îò ìåíþòî íà àäìèíèñòðàòèâíèÿ ïàíåë)');
-@define('NAV_LINK_TEXT', 'Òåêñò íà âðúçêà');
-@define('NAV_LINK_URL', 'Ïúëåí URL íà âðúçêà');
+@define('SITENAV_POSITION','Позиция на навигационния ред');
+@define('SITENAV_NONE','Няма');
+@define('SITENAV_ABOVE','Над банера');
+@define('SITENAV_BELOW','Под банера');
+@define('SITENAV_LEFT','Над левите странични приставки');
+@define('SITENAV_RIGHT','Над десните странични приставки');
+@define('SITENAV_FOOTER','Показване на навигационните връзки в основата (не се показват в случай, че е навигационният ред е забранен)');
+@define('SITENAV_QUICKSEARCH','Показване на поле за бързо търсене в навигационния ред (работи, само ако навигационният ред е над или под банера; бързото търсене се забранява автоматично ако навигационният ред е поставен над страничните приставки)');
+@define('SITENAV_TITLE','Име на навигационното меню (показва се само ако е поставено над страничните приставки)');
+@define('SITENAV_TITLE_TEXT','Главно меню');
+@define('NAVLINK_AMOUNT', 'брой на връзките в навигационния ред (необходимо е презареждане на страница "Промяна на оформлението - тази страница от менюто на административния панел)');
+@define('NAV_LINK_TEXT', 'Текст на връзка');
+@define('NAV_LINK_URL', 'Пълен URL на връзка');
