@@ -43,7 +43,7 @@
     {foreach from=$plugin_calendar_weeks item="week"}
         <tr class="serendipity_calendar {cycle values="row1, row2, row3, row4, row5, row6"}">
         {foreach from=$week.days item="day"}
-            <td class="serendipity_calendarDay {$day.classes}"}"{if isset($day.properties.Title)} title="{$day.properties.Title}"{/if}>{if isset($day.properties.Active) and $day.properties.Active}
+            <td class="serendipity_calendarDay {$day.classes}"{if isset($day.properties.Title)} title="{$day.properties.Title}"{/if}>{if isset($day.properties.Active) and $day.properties.Active}
                 <a href="{$day.properties.Link}">{/if}{$day.name|@default:"&#160;"}{if isset($day.properties.Active) and $day.properties.Active}</a>{/if}</td>
         {/foreach}
         </tr>
