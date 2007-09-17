@@ -22,7 +22,7 @@ class serendipity_plugin_history extends serendipity_plugin
         $propbag->add('description',   PLUGIN_HISTORY_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Jannis Hermanns');
-        $propbag->add('version',       '1.3');
+        $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -164,11 +164,13 @@ class serendipity_plugin_history extends serendipity_plugin
             $dateformat = '%a, %d.%m.%Y %H:%M';
         }
 
+        $oldLim = $serendipity['fetchLimit'];
         $nowts = serendipity_serverOffsetHour();
         $maxts = mktime(23, 59, 59,  date('m', $nowts), date('d', $nowts), date('Y', $nowts));
         $mints = mktime(0, 0, 0, date('m', $nowts), date('d', $nowts), date('Y', $nowts));
         $e     = serendipity_fetchEntries(array(($mints-$max_age*86400),
                                             ($maxts-$min_age*86400)), $full, $max_entries);
+        $serendipity['fetchLimit'] = $oldLim;
         echo (empty($intro)) ? '' : "$intro<br />";
 
         if (!is_array($e)) {
