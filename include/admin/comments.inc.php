@@ -398,11 +398,11 @@ foreach ($sql as $rs) {
     if ($comment['status'] == 'pending') {
         $class .= ' serendipity_admin_comment_pending'; 
     }
-    $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote' : '');
+    $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote serendipity_admin_comment_pending_header' : '');
 ?>
 <tr>
     <td class="<?php echo $header_class; ?>">
-<?php   if ($header_class=='serendipityAdminMsgNote') { ?>
+<?php   if ($header_class=='serendipityAdminMsgNote serendipity_admin_comment_pending_header') { ?>
             <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" />
 <?php   }?>
         <a name="c<?php echo $comment['id'] ?>"></a>
@@ -414,14 +414,14 @@ foreach ($sql as $rs) {
         <table width="100%" cellspacing="0" cellpadding="3" border="0">
             <tr>
                 <td rowspan="3" width="20" align="center"><input class="input_checkbox" type="checkbox" name="serendipity[delete][<?php echo $comment['id'] ?>]" value="<?php echo $comment['entry_id'] ?>" onclick="highlightComment('comment_<?php echo $comment['id'] ?>', this.checked)" tabindex="<?php echo $i ?>" /></td>
-                <td width="40%"><strong><?php echo AUTHOR ?></strong>: <?php echo htmlspecialchars($comment['author']) . $comment['action_author']; ?></td>
+                <td width="40%"><strong><?php echo AUTHOR ?></strong>: <?php echo htmlspecialchars(serendipity_truncateString($comment['author'],30)) . $comment['action_author']; ?></td>
                 <td><strong><?php echo EMAIL ?></strong>:
                     <?php
                         if ( empty($comment['email']) ) {
                             echo 'N/A';
                         } else {
                     ?>
-                            <a href="mailto:<?php echo htmlspecialchars($comment['email']) ?>"><?php echo htmlspecialchars($comment['email']) ?></a>
+                            <a href="mailto:<?php echo htmlspecialchars($comment['email']) ?>" title="<?php echo htmlspecialchars($comment['email']) ?>"><?php echo htmlspecialchars(serendipity_truncateString($comment['email'],30)) ?></a>
                     <?php } ?>
                 <?php echo $comment['action_email']; ?>
                 </td>
@@ -443,7 +443,7 @@ foreach ($sql as $rs) {
                             echo 'N/A';
                         } else {
                     ?>
-                            <a href="<?php echo htmlspecialchars($comment['url']) ?>" target="_blank"><?php echo htmlspecialchars($comment['url']) ?></a>
+                            <a href="<?php echo htmlspecialchars($comment['url']) ?>" title="<?php echo htmlspecialchars($comment['url']) ?>" target="_blank"><?php echo htmlspecialchars(serendipity_truncateString($comment['url'],30)) ?></a>
                     <?php } ?>
                     <?php echo $comment['action_url']; ?>
                     </td>
@@ -456,7 +456,7 @@ foreach ($sql as $rs) {
                             echo 'N/A';
                         } else {
                     ?>
-                          <a href="<?php echo htmlspecialchars($comment['referer']) ?>" title="<?php echo htmlspecialchars($comment['referer']) ?>"><?php echo htmlspecialchars(serendipity_truncateString($comment['referer'],30)) ?></a>
+                          <a href="<?php echo htmlspecialchars($comment['referer']) ?>" title="<?php echo htmlspecialchars($comment['referer']) ?>" target="_blank"><?php echo htmlspecialchars(serendipity_truncateString($comment['referer'],30)) ?></a>
                     <?php } ?>
                     <?php echo $comment['action_referer']; ?>
                     </td>
