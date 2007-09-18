@@ -99,6 +99,7 @@ p {
     display: inline;
 }
 
+.serendipity_calendarHeader img,
 .serendipity_pageFooter img{
     vertical-align: middle;
     margin: 0 2px;

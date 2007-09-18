@@ -6,7 +6,7 @@
            {if $template_option.colorset == 'blank'}
            <a title="{$CONST.BACK}" href="{$plugin_calendar_head.uri_previous}"><img alt="{$CONST.BACK}" src="{serendipity_getFile file="img/back.png"}" width="12" height="12" /></a>
            {else}
-           <a title="{$CONST.BACK}" href="{$plugin_calendar_head.uri_previous}"><img alt="{$CONST.BACK}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_back.png" width="12" height="12" /></a>
+           <a title="{$CONST.BACK}" href="{$plugin_calendar_head.uri_previous}"><img alt="{$CONST.BACK}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_back.png" /></a>
            {/if}
         {else}
            <img alt="" src="{serendipity_getFile file="img/blank.png"}" width="6" height="6" class="serendipity_calender_spacer" />
@@ -22,7 +22,7 @@
             {if $template_option.colorset == 'blank'}
             <a title="{$CONST.FORWARD}" href="{$plugin_calendar_head.uri_next}"><img alt="{$CONST.FORWARD}" src="{serendipity_getFile file="img/forward.png"}" width="12" height="12" /></a>
             {else}
-            <a title="{$CONST.FORWARD}" href="{$plugin_calendar_head.uri_next}"><img alt="{$CONST.FORWARD}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_forward.png" width="12" height="12" /></a>
+            <a title="{$CONST.FORWARD}" href="{$plugin_calendar_head.uri_next}"><img alt="{$CONST.FORWARD}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_forward.png" /></a>
             {/if}
         {else}
             <img alt="" src="{serendipity_getFile file="img/blank.png"}" width="6" height="6" class="serendipity_calender_spacer" />
