@@ -379,6 +379,12 @@ ul.serendipitySideBarMenuMain .serendipitySideBarMenuFoot {
     border: 2px solid #FF0000;
 }
 
+.serendipity_admin_comment_pending_header{
+    background: #FFFF9D;
+    border: 2px solid #FF0000;
+    border-bottom: 0;
+}
+
 /* new input classes available in s9y v1.2 */
 .input_checkbox, .input_radio, .input_file, .input_textbox, .input_button, label, select, textarea{
     font: 100% Verdana, Arial, Helvetica, sans-serif;
@@ -545,9 +551,4 @@ span.serendipityTemplateSelectName {
     font-size: 70%;
     line-height: 30px;
     padding: 0;
-}
-
-/* Pending comments in the admins comment list */
-.serendipity_admin_comment_pending {
-    border: 2px solid #FF0000;
 }
