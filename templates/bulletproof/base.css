@@ -56,22 +56,24 @@ body {
 }
 
 #serendipityLeftSideBar,
-#serendipityLeftSideBarLeft,
-#serendipityLeftSideBarRight,
 #content {
     float: left;
 }
 
 #serendipityLeftSideBar,
 #serendipityRightSideBar,
-#serendipityLeftSideBarLeft,
-#serendipityLeftSideBarRight {
+#content {
     display: inline;
 }
 
 #serendipityRightSideBar {
      float: right;
      clear: right;
+}
+
+#serendipityRightSideBar.layout3ssb_right {
+    float: left;
+    clear: none;
 }
 
 /* 3-column widths */

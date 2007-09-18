@@ -106,11 +106,7 @@ body {
 }
 
 #serendipityLeftSideBar,
-#serendipityLeftSideBarLeft,
-#serendipityRightSideBarLeft,
-#serendipityRightSideBar,
-#serendipityLeftSideBarRight, 
-#serendipityRightSideBarRight {
+#serendipityRightSideBar {
     background-color: #fff;
     color: #505050;
     overflow: hidden; 
