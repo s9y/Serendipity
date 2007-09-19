@@ -19,6 +19,13 @@ p {
     text-align: left;
 }
 
+pre {
+    font-family: Courier, monospace;
+    font-size: 90%;
+    line-height: 1em;
+    white-space: pre;
+}
+
 #wrapper {
     font-size: 80%;
 }
