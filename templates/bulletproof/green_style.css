@@ -177,6 +177,12 @@ body {
     /* not used in this template */
 }
 
+#sbsitenav .serendipitySideBarContent {
+    padding: 0;
+    border: 0;
+    margin: 0;
+}
+
 #sbsitenav {
     padding: 10px;
     margin: 0;
