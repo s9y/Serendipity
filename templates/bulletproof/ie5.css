@@ -8,11 +8,8 @@
 /**********************************************************************/
 
 
-/* IE still seems to produce rounding errors in one */
-/* particular layout (2col s-b) which only appear   */
-/* in higher screen resolutions (> 1280x1024)       */
-#serendipityLeftSideBar.layout2sb_left {
-    width: 24%!important;
+.layout1col_content {
+    float: none !important;
 }
 
 /* stop the footer from extending the page's height */
