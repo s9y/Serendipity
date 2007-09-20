@@ -105,6 +105,10 @@ body {
     max-width: 300px;
 }
 
+.layout2sb_content {
+    clear: right !important;
+}
+
 #footer {
     float: left;
     position: relative;
