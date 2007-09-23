@@ -43,6 +43,7 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('FOOTER_TIMESTAMP','Показване на дата/час в основата на статията');
 @define('FOOTER_COMMENTS','Показване на броя на коментарите в основата на статията');
 @define('FOOTER_TRACKBACKS','Показване на броя на проследяванията в основата на статията');
+@define('ALT_COMMTRACK','Използване на алтернативни текстове за броя на коментарите и проследяванията (например "Няма коментари" или "1 коментар" вместо "Коментари (0)" или "Коментари (1)")');
 @define('SHOW_STICKY_ENTRY_FOOTER','Показване на основа за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
 @define('SHOW_STICKY_ENTRY_HEADING','Показване на заглавие за лепкавите съобщения (изисква приставка "Разширени свойства на статиите" ("Extended properties for entries"))');
 // Page footer next page  and previous page links
