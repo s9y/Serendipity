@@ -145,7 +145,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('DOCUMENT_NOT_FOUND', 'Документът %s не е намерен.');
 @define('USERNAME', 'Потребител');
 @define('PASSWORD', 'Парола');
-@define('AUTOMATIC_LOGIN', 'Запазване на тази информацията.');
+@define('AUTOMATIC_LOGIN', 'Запазване на тази информация.');
 @define('SERENDIPITY_INSTALLATION', 'Инсталиране на Serendipity');
 @define('LEFT', 'отляво');
 @define('RIGHT', 'отдясно');
