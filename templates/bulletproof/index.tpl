@@ -61,11 +61,11 @@
     <!--             hidden using CSS                                                -->
     <div id="skiplinks">
         <ul>
-            <li><a href="skipnav">Skip to site navigation</a></li>
-            <li><a href="skipent">Skip to blog entries</a></li>
+            <li><a href="#skipnav">Skip to site navigation</a></li>
+            <li><a href="#skipent">Skip to blog entries</a></li>
             <li><a href="{$serendipityBaseURL}index.php?/archive">Skip to archive page</a></li>
-            <li><a href="skiplsb">Skip to left sidebar</a></li>
-            <li><a href="skiprsb">Skip to right sidebar</a></li>
+            <li><a href="#skiplsb">Skip to left sidebar</a></li>
+            <li><a href="#skiprsb">Skip to right sidebar</a></li>
         </ul>
     </div>
 
