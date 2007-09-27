@@ -1,0 +1,52 @@
+/**********************************************************************/
+/* Template: bulletproof for Serendipity (http://www.s9y.org)         */
+/* Authors: Matthias Mees, David Cummins and Don Chambers             */
+/*                                                                    */
+/* Stylesheet for print media                                         */
+/*                                                                    */
+/* http://s9y-bulletproof.com                                         */
+/**********************************************************************/
+
+body {
+    background-color: white;
+    color: black;
+    margin: 0;
+}
+
+#wrapper {
+    overflow: visible;
+    width: auto;
+    margin: 0;
+    float: none;
+    border: 0;
+    font-size: 100%;
+}
+
+#sitenav,
+#serendipityLeftSideBar,
+#serendipityRightSideBar,
+.serendipity_section_commentform,
+.serendipity_karmaVoting ,
+.serendipity_findmore {
+    display: none;
+}
+
+#content {
+    width: auto;
+    float: none;
+    overflow: visible;
+    margin: 0;
+}
+
+#footer {
+    float: none;
+}
+
+.serendipity_Entry_Date,
+.serendipity_commentBody {
+    overflow: visible;
+}
+
+.serendipity_entryFooter a{
+/*padding: 0 10px;*/
+}
