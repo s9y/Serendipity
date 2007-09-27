@@ -47,6 +47,8 @@
         </style>
         {/if}
         {if $template_option.jscolumns == 'true'}<script type="text/javascript" src="{$serendipityHTTPPath}templates/{$template}/js/p7_eqCols2_10.js"></script>{/if}
+        <!-- print media stylesheet -->
+        <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="print.css"}" media="print" />
         {serendipity_hookPlugin hook="frontend_header"}
     </head>
 
