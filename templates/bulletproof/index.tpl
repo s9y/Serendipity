@@ -64,7 +64,7 @@
             {if $template_option.sitenavpos != 'none'}<li><a href="#skipnav">Skip to site navigation</a></li>{/if}
             <li><a href="#skipent">Skip to blog entries</a></li>
             <li><a href="{$serendipityBaseURL}index.php?/archive">Skip to archive page</a></li>
-            {if $template_option.layouttype != '2bs'}<li><a href="#skiplsb">Skip to left sidebar</a></li>{/if]
+            {if $template_option.layouttype != '2bs'}<li><a href="#skiplsb">Skip to left sidebar</a></li>{/if}
             {if $template_option.layouttype != '2sb'}<li><a href="#skiprsb">Skip to right sidebar</a></li>{/if}
         </ul>
     </div>
