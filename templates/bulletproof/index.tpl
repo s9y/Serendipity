@@ -79,8 +79,8 @@
         {if $template_option.sitenavpos == 'above'}
             <!-- #sitenav: this holds a list of navigational links which can be customized   -->
             <!--           in the theme configurator                                         -->
+            <a name="skipnav"></a>
             <div id="sitenav" class="snabove">
-                <a name="skipnav"></a>
                 <ul>
                     {foreach from=$navlinks item="navlink" name=navbar}
                         <li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
@@ -105,8 +105,8 @@
         {if $template_option.sitenavpos == 'below'}
             <!-- #sitenav: this holds a list of navigational links which can be customized   -->
             <!--           in the theme configurator                                         -->
+            <a name="skipnav"></a>
             <div id="sitenav" class="snbelow">
-                <a name="skipnav"></a>
                 <ul>
                     {foreach from=$navlinks item="navlink" name="navbar"}
                         <li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
@@ -125,12 +125,12 @@
 
         {if $template_option.layouttype == '3sbs'}
             <!-- case 1: 3 columns, sidebar-content-sidebar -->
+            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3sbs_left">
-                <a name="skiplsb"></a>
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -141,16 +141,16 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
+            <a name="skipent"></a>
             <div id="content" class="threemain layout3sbs_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
+            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3sbs_right">
-                <a name="skiprsb"></a>
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -165,16 +165,16 @@
 
         {if $template_option.layouttype == '3bss'}
             <!-- case 2: 3 columns, content-sidebar-sidebar -->
+            <a name="skipent"></a>
             <div id="content" class="threemain layout3bss_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
+            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3bss_left">
-                <a name="skiplsb"></a>
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -185,12 +185,12 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
+            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3bss_right">
-                <a name="skiprsb"></a>
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -205,12 +205,12 @@
 
         {if $template_option.layouttype == '3ssb'}
             <!-- case 3: 3 columns, sidebar-sidebar-content -->
+            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3ssb_left">
-                <a name="skiplsb"></a>
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -221,12 +221,12 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
+            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3ssb_right">
-                <a name="skiprsb"></a>
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -237,20 +237,20 @@
                 {/if}
                 {serendipity_printSidebar side="right"}
             </div>
+            <a name="skipent"></a>
             <div id="content" class="threemain layout3ssb_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
         {/if}
 
         {if $template_option.layouttype == '2sb'}
             <!-- case 4: 2 columns, left sidebar only -->
+            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="twoside layout2sb_left">
-                <a name="skiplsb"></a>
                 {if $template_option.sitenavpos == 'left' or $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -262,24 +262,24 @@
                 {serendipity_printSidebar side="left"}
                 {serendipity_printSidebar side="right"}
             </div>
+            <a name="skipent"></a>
             <div id="content" class="twomain layout2sb_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
         {/if}
 
         {if $template_option.layouttype == '2bs'}
             <!-- case 5: 2 columns, right sidebar only -->
+            <a name="skipent"></a>
             <div id="content" class="twomain layout2bs_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
+            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="twoside layout2bs_right">
-                <a name="skiprsb"></a>
                 {if $template_option.sitenavpos == 'left' or $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
-                        <a name="skipnav"></a>
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -295,18 +295,18 @@
 
         {if $template_option.layouttype == '1col'}
             <!-- case 6: 1 column, sidebar(s) below -->
+            <a name="skipent"></a>
             <div id="content" class="onemain layout1col_content">
-                <a name="skipent"></a>
                 {$CONTENT}
             </div>
 
             {if $leftSidebarElements > 0}
+                <a name="skiplsb"></a>
                 <div id="serendipityLeftSideBar" class="{if $rightSidebarElements > 0}oneside layout1col_left_side{else}onefull layout_1col_left_full{/if}">
-                    <a name="skiplsb"></a>
                     {if $template_option.sitenavpos == 'left'}
                         <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                        <a name="skipnav"></a>
                         <div id="sbsitenav" class="serendipitySideBarItem">
-                            <a name="skipnav"></a>
                             <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                             <div class="serendipitySideBarContent">
                                 <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
@@ -320,12 +320,12 @@
             {/if}
 
             {if $rightSidebarElements > 0}
+                <a name="skiprsb"></a>
                 <div id="serendipityRightSideBar" class="{if $leftSidebarElements > 0}oneside layout1col_right_side{else}onefull layout1col_right_full{/if}">
-                    <a name="skiprsb"></a>
                     {if $template_option.sitenavpos == 'right'}
                         <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                        <a name="skipnav"></a>
                         <div id="sbsitenav" class="serendipitySideBarItem">
-                            <a name="skipnav"></a>
                             <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                             <div class="serendipitySideBarContent">
                                 <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
