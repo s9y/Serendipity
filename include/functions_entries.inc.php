@@ -970,7 +970,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $searchterms = explode($searchterms, ' ');
                 foreach($searchterms as $searchdx => $searchterm) {
                     $searchclass = "foundterm foundterm".$searchdx;
-                    $entry['body'] = preg_replace('/('.$searchterm.')/mi', '<span class="'.$searchclass.'">\1</span>', $entry['body']);
+                    $entry['body'] = str_replace($searchterm, '<span class="'.$searchclass.'">' . $searchterm . '</span>', $entry['body']);
                 }
             }
 
