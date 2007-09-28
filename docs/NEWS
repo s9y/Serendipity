@@ -3,6 +3,10 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Highlighting searched words in entries now uses str_replace instead
+      of slower and possibly insecure preg_replace(). Thanks to
+      Dietrich Raisin!
+      
     * New plugin API method "parseTemplate($filename)" to allow a
       sidebar- or event-plugin to fetch+display a smarty template.
       (garvinhicking)
