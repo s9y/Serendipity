@@ -35,7 +35,7 @@
                             {else}
                                 {$CONST.AT}
                             {/if}
-                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:$template_option.date_format} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
                         {/if}
 
                         {if $template_option.footercomments == 'true'}
@@ -100,7 +100,7 @@
                             {else}
                                 {$CONST.AT}
                             {/if}
-                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                            <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:$template_option.date_format} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
                         {/if}
                     </div>
                 {/if}
@@ -146,7 +146,7 @@
                             {else}
                                 {$CONST.AT}
                             {/if}
-                                <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
+                                <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:$template_option.date_format} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
                         {/if}
 
                         {if $template_option.footercomments == 'true'}
