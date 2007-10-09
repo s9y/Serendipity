@@ -21,7 +21,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt');
-        $propbag->add('version',       '1.7');
+        $propbag->add('version',       '1.8');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -92,6 +92,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
 
                 $select_cats = array();
                 $select_cats['none'] = ALL_CATEGORIES;
+                $select_cats['_cur'] = PARENT_CATEGORY;
                 foreach($tmp_select_cats as $cidx => $tmp_select_cat) {
                     $select_cat = explode('|||', $tmp_select_cat);
                     if (!empty($select_cat[0]) && !empty($select_cat[1])) {
@@ -119,6 +120,10 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $number         = $this->get_config('number');
         $dateformat     = $this->get_config('dateformat');
         $category       = $this->get_config('category', 'none');
+        
+        if ($category == '_cur') {
+            $category = $serendipity['GET']['category'];
+        }
         $title          = $this->get_config('title', $this->title);
         $number_from_sw = $this->get_config('number_from');
         $randomize      = ($this->get_config('randomize') == "yes") ? true : false ;
