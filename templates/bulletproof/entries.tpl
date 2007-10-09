@@ -2,17 +2,17 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
 
 {foreach from=$entries item="dategroup"}
-<div class="serendipity_Entry_Date{if $dategroup.is_sticky} serendipity_Sticky_Entry{/if}">
+<div class="hentry serendipity_Entry_Date{if $dategroup.is_sticky} serendipity_Sticky_Entry{/if}">
     {if $dategroup.is_sticky}
         {if $template_option.show_sticky_entry_heading == 'true'}
             <h3 class="serendipity_date">{$CONST.STICKY_POSTINGS}</h3>
         {/if}
     {else}
-        <h3 class="serendipity_date">{$dategroup.date|@formatTime:$template_option.date_format}</h3>
+        <h3 class="serendipity_date"><abbr class="published" title="{$dategroup.date|@formatTime:'%Y-%m-%dT%H:%M:%S%Z'}">{$dategroup.date|@formatTime:$template_option.date_format}</abbr></h3>
     {/if}
 
     {foreach from=$dategroup.entries item="entry"}
-        <h4 class="serendipity_title"><a href="{$entry.link}">{$entry.title}</a></h4>
+        <h4 class="entry-title serendipity_title"><a href="{$entry.link}" rel="bookmark">{$entry.title}</a></h4>
 
         <div class="serendipity_entry serendipity_entry_author_{$entry.author|@makeFilename} {if $entry.is_entry_owner}serendipity_entry_author_self{/if}">
 
@@ -20,7 +20,7 @@
                 {if $template_option.entryfooterpos == 'belowtitle'}
                     <div class='serendipity_entryFooter belowtitle'>
                         {if $template_option.footerauthor == 'true'}
-                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
+                            {$CONST.POSTED_BY} <address class="author"><a href="{$entry.link_author}">{$entry.author}</a></address>
                         {/if}
 
                         {if $template_option.footercategories == 'true'}
@@ -85,7 +85,7 @@
                 {if $template_option.entryfooterpos == 'splitfoot'}
                     <div class='serendipity_entryFooter byline'>
                         {if $template_option.footerauthor == 'true'}
-                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
+                            {$CONST.POSTED_BY} <address class="author"><a href="{$entry.link_author}">{$entry.author}</a></address>
                         {/if}
 
                         {if $template_option.footercategories == 'true'}
@@ -116,7 +116,7 @@
                </span>
             {/if}
   
-            <div class="serendipity_entry_body">
+            <div class="entry-content serendipity_entry_body">
                 {$entry.body}
                 {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
                     <span class="continue_reading"><a href="{$entry.link}#extended" title='{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title|truncate:50:" ..."}'>{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title|truncate:50:" ..."} &raquo;</a></span>
@@ -131,7 +131,7 @@
                 {if $template_option.entryfooterpos == 'belowentry'}
                     <div class='serendipity_entryFooter belowentry'>
                         {if $template_option.footerauthor == 'true'}
-                            {$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a>
+                            {$CONST.POSTED_BY} <address class="author"><a href="{$entry.link_author}">{$entry.author}</a></address>
                         {/if}
 
                         {if $template_option.footercategories == 'true'}

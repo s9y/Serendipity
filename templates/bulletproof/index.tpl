@@ -144,7 +144,7 @@
                 {serendipity_printSidebar side="left"}
             </div>
             <a name="skipent"></a>
-            <div id="content" class="threemain layout3sbs_content">
+            <div id="content" class="threemain layout3sbs_content hfeed">
                 {$CONTENT}
             </div>
             <a name="skiprsb"></a>
@@ -168,7 +168,7 @@
         {if $template_option.layouttype == '3bss'}
             <!-- case 2: 3 columns, content-sidebar-sidebar -->
             <a name="skipent"></a>
-            <div id="content" class="threemain layout3bss_content">
+            <div id="content" class="threemain layout3bss_content hfeed">
                 {$CONTENT}
             </div>
             <a name="skiplsb"></a>
@@ -240,7 +240,7 @@
                 {serendipity_printSidebar side="right"}
             </div>
             <a name="skipent"></a>
-            <div id="content" class="threemain layout3ssb_content">
+            <div id="content" class="threemain layout3ssb_content hfeed">
                 {$CONTENT}
             </div>
         {/if}
@@ -265,7 +265,7 @@
                 {serendipity_printSidebar side="right"}
             </div>
             <a name="skipent"></a>
-            <div id="content" class="twomain layout2sb_content">
+            <div id="content" class="twomain layout2sb_content hfeed">
                 {$CONTENT}
             </div>
         {/if}
@@ -273,7 +273,7 @@
         {if $template_option.layouttype == '2bs'}
             <!-- case 5: 2 columns, right sidebar only -->
             <a name="skipent"></a>
-            <div id="content" class="twomain layout2bs_content">
+            <div id="content" class="twomain layout2bs_content hfeed">
                 {$CONTENT}
             </div>
             <a name="skiprsb"></a>
@@ -298,7 +298,7 @@
         {if $template_option.layouttype == '1col'}
             <!-- case 6: 1 column, sidebar(s) below -->
             <a name="skipent"></a>
-            <div id="content" class="onemain layout1col_content">
+            <div id="content" class="onemain layout1col_content hfeed">
                 {$CONTENT}
             </div>
 
