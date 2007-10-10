@@ -237,3 +237,9 @@ ul.staticpage_navigation li {
 #theme_chooser select{
     width: 90%;
 }
+
+/* microformats */
+.author {
+    display: inline;
+    font-style: normal;
+}
