@@ -103,7 +103,7 @@ function generate_resultset($cursor, $result_type = 'sqlr_BOTH') {
     for ($r_row = 0, $max_r = sqlrcur_rowCount($cursor) ; $r_row < $max_r ; $r_row++) {
        for ($r_col=0, $max_rc = sqlrcur_colCount($cursor); $r_col < $max_rc ; $r_col++) {
             if ($result_type == 'sqlr_ASSOC') {
-                $return_row[sqlrcur_getColumnName($cursor,$ r_col)] = sqlrcur_getField($cursor, $r_row, $r_col);
+                $return_row[sqlrcur_getColumnName($cursor, $r_col)] = sqlrcur_getField($cursor, $r_row, $r_col);
             }else{
                 $return_row[$r_row][$r_col] = sqlrcur_getField($cursor, $r_row,$r_col);
                 $return_row[$r_row][sqlrcur_getColumnName($cursor, $r_col)] = $return_row[$r_row][$r_col];
