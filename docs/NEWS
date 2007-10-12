@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Add experimental DB layer for "SQLRelay" database proxy extension, 
+      by Dante Mason
+
     * Highlighting searched words in entries now uses str_replace instead
       of slower and possibly insecure preg_replace(). Thanks to
       Dietrich Raisin!
