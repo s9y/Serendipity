@@ -820,6 +820,9 @@ function serendipity_probeInstallation($item) {
             if (extension_loaded('SQLITE3')) {
                 $res['sqlite3'] = 'SQLite3';
             }
+            if (function_exists('sqlrcon_alloc')) {
+                $res['sqlrelay'] = 'SQLRelay';
+            }
             break;
 
         case 'rewrite' :
