@@ -159,6 +159,13 @@ ul.archives_row li {
     font-size: 80%;
 }
 
+.archive_summary_title {
+    margin: 0;
+}
+
+.archive_summary {
+    margin-bottom: 10px;
+}
 
 /*** s9y image manager ***/
 .serendipity_imageComment_center,
