@@ -162,7 +162,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         $template_vars['timestamp']                 = serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time());
         $template_vars['reset_timestamp']           = serendipity_serverOffsetHour(time());
         $template_vars['hidden']                    = $hidden;
-        $template_vars['errMsG']                    = $errMsg;
+        $template_vars['errMsg']                    = $errMsg;
         $template_vars['entry']                     =& $entry;
         $template_vars['targetURL']                 = $targetURL;
         $template_vars['cat_count']                 = count($cats)+1;
