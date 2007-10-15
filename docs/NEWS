@@ -3,6 +3,8 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Fix wrong entry timestamp used in comment feeds (garvinhicking)
+
     * Add experimental DB layer for "SQLRelay" database proxy extension, 
       by Dante Mason
 
