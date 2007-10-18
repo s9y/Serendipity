@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Patch PEAR.php for better detection, if already included.
+      Thanks to Assen Tchorbadjiev.
+
     * Fix wrong entry timestamp used in comment feeds (garvinhicking)
 
     * Add experimental DB layer for "SQLRelay" database proxy extension, 
