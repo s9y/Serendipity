@@ -22,7 +22,7 @@
 //
 
 // Serendipity-Patch
-if (class_exists('PEAR')) {
+if (defined('PEAR_ERROR_RETURN')) {
     return false;
 }
 // Serendipity-Patch end
@@ -738,7 +738,7 @@ class PEAR
 }
 
 // {{{ _PEAR_call_destructors()
-
+if (!function_exists('_PEAR_call_destructors')) {
 function _PEAR_call_destructors()
 {
     global $_PEAR_destructor_object_list;
@@ -772,6 +772,7 @@ function _PEAR_call_destructors()
             call_user_func_array($value[0], $value[1]);
         }
     }
+}
 }
 
 // }}}
