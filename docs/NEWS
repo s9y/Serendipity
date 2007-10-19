@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Updated WordPress imported to be able to import from a 2.3
+      structure (experimental) (garvinhicking)
+
     * Patch PEAR.php for better detection, if already included.
       Thanks to Assen Tchorbadjiev.
 
