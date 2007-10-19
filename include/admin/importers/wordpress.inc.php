@@ -214,7 +214,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                         ON taxonomy.term_id = terms.term_id
 
                                      WHERE taxonomy.taxonomy = 'category' 
-                                  ORDER BY taxonomy.parent, taxonomy.term_taxonomy", $wpdb);
+                                  ORDER BY taxonomy.parent, taxonomy.term_taxonomy_id", $wpdb);
         if (!$res && !$no_cat) {
             $no_cat = mysql_error($wpdb);
         } elseif ($res) {
@@ -332,8 +332,9 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                            rel.term_taxonomy_id AS category_id 
                                       FROM {$this->data['prefix']}term_relationships AS rel;", $wpdb);
         if (!$res && !$no_entrycat) {
-            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+            $no_entrycat = mysql_error($wpdb);
         } elseif ($res) {
+            $no_entrycat = false;
             if ($debug) echo "Importing category associations (WP 2.3 style)...<br />\n";
             while ($a = mysql_fetch_assoc($res)) {
                 $data = array('entryid'    => $assoc['entries'][$a['post_id']],
@@ -344,7 +345,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         }
 
         if ($no_entrycat) {
-            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+            printf(COULDNT_SELECT_ENTRY_INFO, $no_entrycat);
         }
 
         /* Comments */
@@ -366,11 +367,10 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                  'subscribed'=> 'false',
                                  'body'      => $a['comment_content'],
                                  'type'      => 'NORMAL');
-    
                 serendipity_db_insert('comments', $this->strtrRecursive($comment));
                 if ($comment['status'] == 'approved') {
                     $cid = serendipity_db_insert_id('comments', 'id');
-                    serendipity_approveComment($cid, $comment['entry_id'], true);
+                    serendipity_approveComment($cid, $assoc['entries'][$a['comment_post_ID']], true);
                 }
             }
             if ($debug) echo "Imported comments.<br />\n";

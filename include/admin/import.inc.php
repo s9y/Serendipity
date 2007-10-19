@@ -167,8 +167,31 @@ class Serendipity_Import {
         global $serendipity;
 
         mysql_select_db($this->data['name'], $db);
+        $dbn = false;
+
+        $target = $this->data['charset'];
+
+        switch($target) {
+            case 'native':
+                $dbn = SQL_CHARSET;
+                break;
+
+            case 'ISO-8859-1':
+                $dbn = 'latin1';
+                break;
+            
+            case 'UTF-8':
+                $dbn = 'utf8';
+                break;
+        }
+        
+        if ($dbn && $serendipity['dbNames']) {
+            mysql_query("SET NAMES " . $dbn, $db);
+        }
+       
         $return = &mysql_query($query, $db);
-        mysql_select_db($serendipity['dbName'], $serendipity['dbConn']);        $return = &mysql_query($query, $db);
+        mysql_select_db($serendipity['dbName'], $serendipity['dbConn']);
+        serendipity_db_reconnect();
         return $return;
     }
 }
