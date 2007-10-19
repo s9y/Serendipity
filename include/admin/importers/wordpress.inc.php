@@ -143,14 +143,16 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
             unset($users);
         }
 
-        /* Categories */
+        $no_cat = false;
+
+        /* Categories (WP < 2.3 style) */
         $res = @$this->nativeQuery("SELECT cat_ID, cat_name, category_description, category_parent 
                                       FROM {$this->data['prefix']}categories 
                                   ORDER BY category_parent, cat_ID;", $wpdb);
         if (!$res) {
-            printf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($wpdb));
+            $no_cat = mysql_error($wpdb);
         } else {
-            if ($debug) echo "Importing categories...<br />\n";
+            if ($debug) echo "Importing categories (WP 2.2 style)...<br />\n";
 
             // Get all the info we need
             for ($x=0 ; $x<mysql_num_rows($res) ; $x++) {
@@ -200,6 +202,75 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
             if ($debug) echo "Rebuilt category tree.<br />\n";
         }
 
+        /* Categories (WP >= 2.3 style) */
+        $res = @$this->nativeQuery("SELECT taxonomy.description      AS category_description, 
+                                           taxonomy.parent           AS category_parent, 
+                                           taxonomy.term_taxonomy_id AS cat_ID, 
+                                           terms.name                AS cat_name
+
+                                      FROM {$this->data['prefix']}term_taxonomy AS taxonomy
+
+                                      JOIN {$this->data['prefix']}terms AS terms
+                                        ON taxonomy.term_id = terms.term_id
+
+                                     WHERE taxonomy.taxonomy = 'category' 
+                                  ORDER BY taxonomy.parent, taxonomy.term_taxonomy", $wpdb);
+        if (!$res && !$no_cat) {
+            $no_cat = mysql_error($wpdb);
+        } elseif ($res) {
+            $no_cat = false;
+            if ($debug) echo "Importing categories (WP 2.3 style)...<br />\n";
+
+            // Get all the info we need
+            for ($x=0 ; $x<mysql_num_rows($res) ; $x++) {
+                $categories[] = mysql_fetch_assoc($res);
+            }
+    
+            // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
+            for ($x=0, $c = sizeof($categories) ; $x < $c ; $x++) {
+                $cat = array('category_name'        => $categories[$x]['cat_name'],
+                             'category_description' => $categories[$x]['category_description'],
+                             'parentid'             => 0,
+                             'category_left'        => 0,
+                             'category_right'       => 0);
+    
+                serendipity_db_insert('category', $this->strtrRecursive($cat));
+                $categories[$x]['categoryid'] = serendipity_db_insert_id('category', 'categoryid');
+                
+                // Set association.
+                $assoc['categories'][$categories[$x]['cat_ID']] = $categories[$x]['categoryid'];
+            }
+    
+            foreach ($categories as $cat) {
+                if ($cat['category_parent'] != 0) {
+                    // Find the parent
+                    $par_id = 0;
+                    foreach ($categories as $possible_par) {
+                        if ($possible_par['cat_ID'] == $cat['category_parent']) {
+                            $par_id = $possible_par['categoryid'];
+                            break;
+                        }
+                    }
+    
+                    if ($par_id != 0) {
+                        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}category 
+                                                 SET parentid={$par_id} 
+                                               WHERE categoryid={$cat['categoryid']};");
+                    }
+                }
+            }
+
+            // Clean memory
+            unset($categories);
+
+            if ($debug) echo "Imported categories.<br />\n";
+            if ($debug) echo "Rebuilding category tree...<br />\n";
+            serendipity_rebuildCategoryTree();
+            if ($debug) echo "Rebuilt category tree.<br />\n";
+        }
+        if ($no_cat) {
+            printf(COULDNT_SELECT_CATEGORY_INFO, $no_cat);
+        }
 
         /* Entries */
         if (serendipity_db_bool($this->data['import_all'])) {
@@ -241,18 +312,39 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
             unset($entries);
         }
     
-        /* Entry/category */
+        /* Entry/category (WP < 2.3 style)*/
+        $no_entrycat = false;
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}post2cat;", $wpdb);
         if (!$res) {
-            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+            $no_entrycat = mysql_error($wpdb);
         } else {
-            if ($debug) echo "Importing category associations...<br />\n";
+            if ($debug) echo "Importing category associations (WP 2.2 style)...<br />\n";
             while ($a = mysql_fetch_assoc($res)) {
                 $data = array('entryid'    => $assoc['entries'][$a['post_id']],
                               'categoryid' => $assoc['categories'][$a['category_id']]);
                 serendipity_db_insert('entrycat', $this->strtrRecursive($data));
             }
             if ($debug) echo "Imported category associations.<br />\n";
+        }
+
+        /* Entry/category (WP > 2.3 style)*/
+        $res = @$this->nativeQuery("SELECT rel.object_id        AS post_id, 
+                                           rel.term_taxonomy_id AS category_id 
+                                      FROM {$this->data['prefix']}term_relationships AS rel;", $wpdb);
+        if (!$res && !$no_entrycat) {
+            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+        } elseif ($res) {
+            if ($debug) echo "Importing category associations (WP 2.3 style)...<br />\n";
+            while ($a = mysql_fetch_assoc($res)) {
+                $data = array('entryid'    => $assoc['entries'][$a['post_id']],
+                              'categoryid' => $assoc['categories'][$a['category_id']]);
+                serendipity_db_insert('entrycat', $this->strtrRecursive($data));
+            }
+            if ($debug) echo "Imported category associations.<br />\n";
+        }
+
+        if ($no_entrycat) {
+            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
         }
 
         /* Comments */
