@@ -814,3 +814,4 @@
 @define('PINGBACK_FAILED', 'Pingback failed: %s');
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');

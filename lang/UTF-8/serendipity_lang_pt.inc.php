@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_pt.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
+<?php # $Id: serendipity_lang_pt.inc.php 1854 2007-08-16 13:07:43Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Agner Olson <agner@agner.net>
@@ -900,3 +900,4 @@
 @define('PINGBACK_FAILED', 'Pingback failed: %s');
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');

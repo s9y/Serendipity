@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tn.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
+<?php # $Id: serendipity_lang_tn.inc.php 1970 2007-10-08 06:01:13Z capriskye $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
@@ -899,3 +899,4 @@ $i18n_unknown = 'tw';
 @define('PINGBACK_FAILED', '回測失敗： %s');
 @define('PINGBACK_NOT_FOUND', '沒有回測的網頁。');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', '隱藏歷史的連接如果時間內沒有文章 (需要計算文章數)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
