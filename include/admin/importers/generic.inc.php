@@ -166,7 +166,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         $_s9y_users = serendipity_fetchUsers();
         $s9y_users = array();
         if (is_array($s9y_users)) {
-            foreach ($s9y_users as $v) {
+            foreach ($_s9y_users as $v) {
                 $s9y_users[$v['realname']] = $v;
             }
         }
@@ -175,7 +175,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         $_s9y_cat = serendipity_fetchCategories('all');
         $s9y_cat  = array();
         if (is_array($s9y_cat)) {
-            foreach ($s9y_cat as $v) {
+            foreach ($_s9y_cat as $v) {
                 $s9y_cat[$v['category_name']] = $v['categoryid'];
             }
         }
@@ -220,13 +220,12 @@ class Serendipity_Import_Generic extends Serendipity_Import {
             $entry = array(
                 'title'          => (string)$item->title,
                 'isdraft'        => ((string)$wp_items->status == 'publish' ? 'false' : 'true'),
-                'timestamp'      => strtotime((string)$wp_items->post_date),
                 'allow_comments' => ((string)$wp_items->comment_status == 'open' ? true : false),
                 'categories'     => array(),
-                'body'           => htmlspecialchars(substr((string)$content_items->encoded, 0, 50))
+                'body'           => (string)$content_items->encoded
             );
             
-            if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$wp_items->timestamp, $timematch)) {
+            if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$wp_items->post_date, $timematch)) {
                 $entry['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
             } else {
                 $entry['timestamp'] = time();
@@ -280,7 +279,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                     $c_type2 = 'NORMAL';
                 }
 
-                $comment = array('entry_id ' => $id,
+                $s9y_comment = array('entry_id ' => $id,
                                  'parent_id' => $s9y_cid[$c_pd],
                                  'author'    => (string)$comment->comment_author,
                                  'email'     => (string)$comment->comment_author_email,
@@ -292,24 +291,24 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                                  'type'      => $c_type2);
 
                 if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$comment->comment_date, $timematch)) {
-                    $comment['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
+                    $s9y_comment['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
                 } else {
-                    $comment['timestamp'] = time();
+                    $s9y_comment['timestamp'] = time();
                 }
                 
                 if ($dry_run) {
                     $cid = time();
                 } else {
-                    serendipity_db_insert('comments', $comment);
+                    serendipity_db_insert('comments', $s9y_comment);
                     $cid = serendipity_db_insert_id('comments', 'id');
-                    if ($comment['status'] == 'approved') {
-                        serendipity_approveComment($cid, $assoc['entries'][$a['comment_post_ID']], true);
+                    if ($s9y_comment['status'] == 'approved') {
+                        serendipity_approveComment($cid, $id, true);
                     }
                 }
                 $s9y_cid[$c_id] = $cid;
             }
             
-            echo "Entry '" . htmlspecialchars($entry['title']) . " ($c_i comments) imported.<br />\n";
+            echo "Entry '" . htmlspecialchars($entry['title']) . "' ($c_i comments) imported.<br />\n";
         }
         return true;
     }
