@@ -1,2 +1,1 @@
-@define('PINGBACK', 'Pingback');
-@define('PINGBACKS', 'Pingbacks');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');

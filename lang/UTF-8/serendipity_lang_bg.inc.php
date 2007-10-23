@@ -886,3 +886,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PINGBACK_FAILED', 'Неуспешен pingback: %s');
 @define('PINGBACK_NOT_FOUND', 'Не е намерен pingback-URI.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Скриване на връзката към архивите, когато няма статии в избрания период от време (изисква преброяване на статиите)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');

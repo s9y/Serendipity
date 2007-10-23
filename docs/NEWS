@@ -4,7 +4,8 @@ Version 1.3 ()
 ------------------------------------------------------------------------
 
     * Updated WordPress imported to be able to import from a 2.3
-      structure (experimental) (garvinhicking)
+      structure (experimental). Also added WPXRSS import to the
+      generic RSS importer. (garvinhicking)
 
     * Patch PEAR.php for better detection, if already included.
       Thanks to Assen Tchorbadjiev.

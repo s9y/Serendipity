@@ -37,7 +37,13 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                                     array('text'   => RSS_IMPORT_BODYONLY,
                                          'type'    => 'bool',
                                          'name'    => 'bodyonly',
-                                         'value'   => 'false'));
+                                         'value'   => 'false'),
+
+                                    array('text'   => RSS_IMPORT_WPXRSS,
+                                         'type'    => 'bool',
+                                         'name'    => 'wpxrss',
+                                         'value'   => 'false')
+         );
     }
 
     function validateData() {
@@ -124,8 +130,196 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         return true;
     }
 
+    function import_wpxrss() {
+        // TODO: Backtranscoding to NATIVE charset. Currently only works with UTF-8.
+        $dry_run = false;
+        
+        $serendipity['noautodiscovery'] = 1;
+        $uri = $this->data['url'];
+        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        serendipity_request_start();
+        $req = &new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
+        $res = $req->sendRequest();
+        
+        if (PEAR::isError($res) || $req->getResponseCode() != '200') {
+            serendipity_request_end();
+            echo IMPORT_FAILED . ': ' . htmlspecialchars($this->data['url']);
+            echo "<br />\n";
+            return false;
+        }
+        
+        $fContent = $req->getResponseBody();
+        serendipity_request_end();
+        echo strlen($fContent) . " Bytes<br />\n";
+        
+        if (version_compare(PHP_VERSION, '5.0') === -1) {
+            printf(UNMET_REQUIREMENTS, 'PHP >= 5.0');
+            echo "<br />\n";
+            return false;
+        }
+        
+        $xml = simplexml_load_string($fContent);
+        unset($fContent);
+        
+        
+        /* ************* USERS **********************/
+        $_s9y_users = serendipity_fetchUsers();
+        $s9y_users = array();
+        if (is_array($s9y_users)) {
+            foreach ($s9y_users as $v) {
+                $s9y_users[$v['realname']] = $v;
+            }
+        }
+
+        /* ************* CATEGORIES **********************/
+        $_s9y_cat = serendipity_fetchCategories('all');
+        $s9y_cat  = array();
+        if (is_array($s9y_cat)) {
+            foreach ($s9y_cat as $v) {
+                $s9y_cat[$v['category_name']] = $v['categoryid'];
+            }
+        }
+
+        $wp_ns      = 'http://wordpress.org/export/1.0/';
+        $dc_ns      = 'http://purl.org/dc/elements/1.1/';
+        $content_ns = 'http://purl.org/rss/1.0/modules/content/';
+
+        $wp_core = $xml->channel->children($wp_ns);
+        foreach($wp_core->category AS $idx => $cat) {
+            //TODO: Parent generation unknown.
+            $cat_name = (string)$cat->cat_name;
+            if (!isset($s9y_cat[$cat_name])) {
+                $cat = array('category_name'        => $cat_name,
+                             'category_description' => '',
+                             'parentid'             => 0,
+                             'category_left'        => 0,
+                             'category_right'       => 0);
+    
+                printf(CREATE_CATEGORY, htmlspecialchars($cat_name));
+                echo "<br />\n";
+                if ($dry_run) {
+                    $s9y_cat[$cat_name] = time();
+                } else {
+                    serendipity_db_insert('category', $cat);
+                    $s9y_cat[$cat_name] = serendipity_db_insert_id('category', 'categoryid');
+                }
+            }
+        }
+
+        /* ************* ITEMS **********************/
+        foreach($xml->channel->item AS $idx => $item) {
+            $wp_items = $item->children($wp_ns);
+            $dc_items = $item->children($dc_ns);
+            $content_items = $item->children($content_ns);
+            
+            // TODO: Attachments not handled
+            if ((string)$wp_items->post_type == 'attachment' OR (string)$wp_items->post_type == 'page') {
+                continue;
+            }
+            
+            $entry = array(
+                'title'          => (string)$item->title,
+                'isdraft'        => ((string)$wp_items->status == 'publish' ? 'false' : 'true'),
+                'timestamp'      => strtotime((string)$wp_items->post_date),
+                'allow_comments' => ((string)$wp_items->comment_status == 'open' ? true : false),
+                'categories'     => array(),
+                'body'           => htmlspecialchars(substr((string)$content_items->encoded, 0, 50))
+            );
+            
+            if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$wp_items->timestamp, $timematch)) {
+                $entry['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
+            } else {
+                $entry['timestamp'] = time();
+            }
+
+            if (isset($item->category[1])) {
+                foreach($item->category AS $idx => $category) {
+                    $cstring=(string)$category;
+                    if (!isset($s9y_cat[$cstring])) {
+                        echo "WARNING: $category unset!<br />\n";
+                    } else {
+                        $entry['categories'][] = $s9y_cat[$cstring];
+                    }
+                }
+            } else {
+                $cstring = (string)$item->category;
+                $entry['categories'][] = $s9y_cat[$cstring];
+            }
+            
+            $wp_user = (string)$dc_items->creator;
+            if (!isset($s9y_users[$wp_user])) {
+                if ($dry_run) {
+                    $s9y_users[$wp_user]['authorid'] = time();
+                } else {
+                    $s9y_users[$wp_user]['authorid'] = serendipity_addAuthor($wp_user, md5(time()), $wp_user, '', USERLEVEL_EDITOR);
+                }
+                printf(CREATE_AUTHOR, htmlspecialchars($wp_user));
+                echo "<br />\n";
+            }
+
+            $entry['authorid'] = $s9y_users[$wp_user]['authorid'];
+            
+            if ($dry_run) {
+                $id = time();
+            } else {
+                $id = serendipity_updertEntry($entry);
+            }
+            
+            $s9y_cid = array(); // Holds comment ids to s9y ids association.
+            $c_i = 0;
+            foreach($wp_items->comment AS $comment) {
+                $c_i++;
+                $c_id   = (string)$comment->comment_id;
+                $c_pid  = (string)$comment->comment_parent;
+                $c_type = (string)$comment->comment_type;
+                if ($c_type == 'pingback') {
+                    $c_type2 = 'PINGBACK';
+                } elseif ($c_type == 'trackback') {
+                    $c_type2 = 'TRACKBACK';
+                } else {
+                    $c_type2 = 'NORMAL';
+                }
+
+                $comment = array('entry_id ' => $id,
+                                 'parent_id' => $s9y_cid[$c_pd],
+                                 'author'    => (string)$comment->comment_author,
+                                 'email'     => (string)$comment->comment_author_email,
+                                 'url'       => (string)$comment->comment_author_url,
+                                 'ip'        => (string)$comment->comment_author_IP,
+                                 'status'    => (empty($comment->comment_approved) || $comment->comment_approved == '1') ? 'approved' : 'pending',
+                                 'subscribed'=> 'false',
+                                 'body'      => (string)$comment->comment_content,
+                                 'type'      => $c_type2);
+
+                if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$comment->comment_date, $timematch)) {
+                    $comment['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
+                } else {
+                    $comment['timestamp'] = time();
+                }
+                
+                if ($dry_run) {
+                    $cid = time();
+                } else {
+                    serendipity_db_insert('comments', $comment);
+                    $cid = serendipity_db_insert_id('comments', 'id');
+                    if ($comment['status'] == 'approved') {
+                        serendipity_approveComment($cid, $assoc['entries'][$a['comment_post_ID']], true);
+                    }
+                }
+                $s9y_cid[$c_id] = $cid;
+            }
+            
+            echo "Entry '" . htmlspecialchars($entry['title']) . " ($c_i comments) imported.<br />\n";
+        }
+        return true;
+    }
+
     function import() {
         global $serendipity;
+
+        if ($this->data['wpxrss']) {
+            return $this->import_wpxrss();
+        }
 
         $c = &new Onyx_RSS($this->data['charset']);
         $c->parse($this->data['url']);
@@ -146,4 +340,3 @@ class Serendipity_Import_Generic extends Serendipity_Import {
 return 'Serendipity_Import_Generic';
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>

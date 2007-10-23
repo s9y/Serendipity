@@ -899,3 +899,4 @@ $i18n_unknown = 'tw';
 @define('PINGBACK_FAILED', '回測失敗： %s');
 @define('PINGBACK_NOT_FOUND', '沒有回測的網頁。');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', '隱藏歷史的連接如果時間內沒有文章 (需要計算文章數)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
