@@ -26,6 +26,11 @@ pre {
     white-space: pre;
 }
 
+abbr, acronym, .help{
+    cursor: help;
+    border-bottom: 1px dotted #000000;
+}
+
 #wrapper {
     font-size: 80%;
 }
