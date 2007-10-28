@@ -13,7 +13,7 @@ if (file_exists($probelang)) {
 
 include dirname(__FILE__) . '/lang_en.inc.php';
 
-@define('PLUGIN_KARMA_VERSION', '1.3');
+@define('PLUGIN_KARMA_VERSION', '1.4');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -30,7 +30,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('name',          PLUGIN_KARMA_NAME);
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Garvin Hicking');
+        $propbag->add('author',        'Garvin Hicking','Grischa Brockhaus');
         $propbag->add('version',       '1.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
@@ -39,7 +39,7 @@ class serendipity_event_karma extends serendipity_event
         ));
         $propbag->add('event_hooks',   array('frontend_configure' => true, 'entry_display' => true, 'css' => true, 'event_additional_statistics' => true));
         $propbag->add('groups', array('STATISTICS'));
-        $propbag->add('configuration', array('karma_active', 'visits_active', 'exits_active', 'max_entrytime', 'max_votetime', 'extended_only', 'max_karmatime', 'logging'));
+        $propbag->add('configuration', array('karma_active', 'visits_active', 'track_visits_of_loggedin_users', 'exits_active', 'max_entrytime', 'max_votetime', 'extended_only', 'max_karmatime', 'logging'));
     }
 
     function introspect_config_item($name, &$propbag)
@@ -77,6 +77,13 @@ class serendipity_event_karma extends serendipity_event
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_KARMA_VISITS);
                 $propbag->add('description', PLUGIN_KARMA_VISITS_BLAHBLAH);
+                $propbag->add('default', 'true');
+                break;
+
+            case 'track_visits_of_loggedin_users':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_KARMA_VISITS_LOGGEDIN_USERS);
+                $propbag->add('description', PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH);
                 $propbag->add('default', 'true');
                 break;
 
@@ -232,7 +239,7 @@ class serendipity_event_karma extends serendipity_event
                     }
 
                     if ($entryid && empty($serendipity['GET']['adminAction'])) {
-                        $track_clicks  = serendipity_db_bool($this->get_config('visits_active', true));
+                        $track_clicks  = serendipity_db_bool($this->get_config('visits_active', true)) && $this->track_clicks_allowed_by_user();
                         if ($track_clicks) {
                             $sql = serendipity_db_query('UPDATE ' . $serendipity['dbPrefix'] . 'karma SET visits = visits + 1 WHERE entryid = ' . $entryid, true);
                             if (serendipity_db_affected_rows() < 1) {
@@ -614,6 +621,16 @@ class serendipity_event_karma extends serendipity_event
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Check, if visit counting for the actual visitor should be done.
+     */
+    function track_clicks_allowed_by_user(){
+        if (!$this->get_config('track_visits_of_loggedin_users',true) && serendipity_userLoggedIn()){
+            return false;
+        }
+        return true;
     }
 }
 

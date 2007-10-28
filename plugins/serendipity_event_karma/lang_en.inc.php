@@ -48,4 +48,6 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'points');
 
 @define('PLUGIN_KARMA_STARRATING', 'Enable individual rating on this entry?');
-?>
+
+@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS', 'Track visits of logged in users?');
+@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH', 'If this option is enabled, page visits of users who are logged in are tracked, too.');
