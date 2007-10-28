@@ -41,3 +41,6 @@
         @define('PLUGIN_KARMA_STATISTICS_VISITS_NO', 'Besuche');
         @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'Stimmen');
         @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'Punkte');
+
+        @define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS', 'Aufrufstatistik auch für eingeloggte Benutzer?');
+        @define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH', 'Wenn diese Option eingeschaltet ist, dann werden auch die Besuche von eingeloggten Benutzern protokolliert.');
