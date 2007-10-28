@@ -33,7 +33,7 @@
             <input type="hidden" name="serendipity[commentform]" value="true" />
        </div>
         <fieldset>
-            <legend><a href="#">{$plugin_contactform_pagetitle}</a></legend>
+            <legend>{$plugin_contactform_pagetitle}</legend>
             <dl>
                 <dt class="serendipity_commentsLabel"><label for="serendipity_commentform_name">{$CONST.NAME}</label></dt>
                     <dd class="serendipity_commentsValue"><input class="frm" type="text" id="serendipity_commentform_name" name="serendipity[name]" value="{$commentform_name}" size="30" /></dd>
