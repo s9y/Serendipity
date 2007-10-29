@@ -39,7 +39,7 @@
        </div>
 
        <fieldset>
-           <legend><a href="#">{$plugin_contactform_pagetitle}</a></legend>
+           <legend>{$plugin_contactform_pagetitle}</legend>
            <dl>
                {foreach name="field" from=$commentform_dynamicfields item="field"}
                    {if $field.type != "hidden"}
