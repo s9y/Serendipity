@@ -8,6 +8,7 @@
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang}" lang="{$lang}">
     <head>
         <title>{$head_title|@default:$blogTitle}{if $head_subtitle} - {$head_subtitle}{/if}</title>
+        {serendipity_hookPlugin hook="frontend_header"}
         <meta http-equiv="Content-Type" content="text/html; charset={$head_charset}" />
         <meta name="Powered-By" content="Serendipity v.{$head_version}" />
         <link rel="alternate"  type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
@@ -49,7 +50,6 @@
         {if $template_option.jscolumns == 'true'}<script type="text/javascript" src="{$serendipityHTTPPath}templates/{$template}/js/p7_eqCols2_10.js"></script>{/if}
         <!-- print media stylesheet -->
         <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="print.css"}" media="print" />
-        {serendipity_hookPlugin hook="frontend_header"}
     </head>
 
     <body{if $template_option.jscolumns == 'true'} onload="P7_equalCols2(0,{if $template_option.layouttype != '1col'}'content','DIV',{/if}'serendipityLeftSideBar','DIV','serendipityRightSideBar','DIV')"{/if}>
