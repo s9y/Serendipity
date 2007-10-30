@@ -102,6 +102,17 @@ a:hover {
     color: #055BC6 !important;
 }
 
+/* all fieldsets in admin content, such as "advanced options" */
+.serendipityAdminContent fieldset {
+    border: 1px solid #72878A;
+}
+
+.serendipityAdminContent legend {
+    border: 1px solid #72878A;
+    padding: 2px 5px;
+    background-color: #DFDFDF;
+}
+
 /* welcome message on sign-on screen, ie */
 /* 'welcome to serendipity admin suite'  */
 /* 'please enter your credentials'       */
