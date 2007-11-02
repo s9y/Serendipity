@@ -165,6 +165,92 @@ function serendipity_imageSelector_addToElement (str, el)
 
 function serendipity_imageSelector_addToBody (str, textarea)
 {
+
+    // check for FCKEditor usage
+    if (typeof(FCKeditorAPI) != 'undefined') {
+
+        // if here the blog uses FCK editor
+        var oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
+
+        if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG) {
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.InsertHtml(str);
+        } else {
+            // if here just insert the text to the textarea ( named with the value of textarea variable )
+            noWysiwygAdd( str, textarea );
+        }
+    
+    } else if(typeof(xinha_editors) != 'undefined') {
+
+        // if here the blog uses Xinha editor
+        var oEditor;
+
+        if (typeof(xinha_editors['serendipity[' + textarea + ']']) != 'undefined') {
+            // this is good for the two default editors (body & extended)
+            oEditor = xinha_editors['serendipity['+ textarea +']'];
+        } else if (typeof(xinha_editors[textarea]) != 'undefined') {
+            // this should work in any other cases than previous one
+            oEditor = xinha_editors[textarea];
+        } else {
+            // this is the last chance to retrieve the instance of the editor !
+            // editor has not been registered by the name of it's textarea
+            // so we must iterate over editors to find the good one
+            for (var editorName in xinha_editors) {
+                if ('serendipity[' + textarea + ']' == xinha_editors[editorName]._textArea.name) {
+                    oEditor = xinha_editors[editorName];
+                    break;
+                }
+            }
+        }
+
+        // the actual insert for the xinha editor
+        if (oEditor) {
+            if (oEditor._editMode != 'textmode') {
+                // if here the editior is in WYSIWYG mode so use the insert html function
+                oEditor.insertHTML(str);
+            } else {
+                // if here just insert the text to the textarea ( named with the value of textarea variable )
+                noWysiwygAdd(str, textarea);
+            }
+        } else {
+            noWysiwygAdd(str, textarea);
+        }
+    } else if(typeof(HTMLArea) != 'undefined') {
+        // if here the blog uses HTMLArea editor
+        var oEditor;
+
+        if (textarea == 'body' && typeof(editorbody) != 'undefined') {
+            oEditor = editorbody;
+        } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') {
+            oEditor = editorextended;
+        } else if (typeof(htmlarea_editors) != 'undefined' && typeof(htmlarea_editors[textarea]) != 'undefined') {
+            oEditor =  htmlarea_editors[textarea];
+        }
+
+        // the actual insert for the HTMLArea editor
+        if (oEditor._editMode != 'textmode') {
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.insertHTML(str);
+        } else {
+            // if here just insert the text to the textarea ( named with the value of textarea variable )
+            noWysiwygAdd(str, textarea);
+        }
+    
+    } else if(typeof(TinyMCE) != 'undefined') {
+        // for the TinyMCE editor we do not have a text mode insert
+
+        //tinyMCE.execCommand('mceInsertContent', false, str);
+        tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
+    } else  {
+        noWysiwygAdd(str, textarea);
+    }
+}
+
+// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
+// NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
+function noWysiwygAdd( str, textarea )
+{
+    // default case: no wysiwyg editor
     eltarget = '';
     if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
         eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']']
@@ -173,10 +259,10 @@ function serendipity_imageSelector_addToBody (str, textarea)
     } else {
         eltarget = document.forms[0].elements[0];
     }
-
-	wrapSelection(eltarget, str, '');
+    
     eltarget.focus();
 }
+
 
 function serendipity_imageSelector_done(textarea)
 {
