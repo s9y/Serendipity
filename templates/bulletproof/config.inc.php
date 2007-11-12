@@ -181,6 +181,20 @@ $template_config = array(
         'default'       => 'false',
     ),
     array(
+        'var'           => 'addthiswidget',
+        'name'          => SHOW_ADDTHIS_WIDGET,
+        'type'          => 'radio',
+        'default'       => 'false',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES, NO))
+    ),
+    array(
+        'var'           => 'addthisaccount',
+        'name'          => ADDTHIS_ACCOUNT,
+        'type'          => 'string',
+        'default'       => '',
+    ),
+    array(
         'var'           => 'show_sticky_entry_footer',
         'name'          => SHOW_STICKY_ENTRY_FOOTER,
         'type'          => 'radio',

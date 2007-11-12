@@ -79,6 +79,18 @@
                         {/if}
 
                         {$entry.add_footer}
+
+                        {if $template_option.addthiswidget == 'true'}
+                            <div class="addthiswidget">
+                                <script type="text/javascript">
+                                    addthis_url = '{$entry.rdf_ident|escape:url}';
+                                    addthis_title = '{$entry.title|escape:url}';
+                                    addthis_pub = '{$template_option.addthisaccount}';
+                                </script>
+                                <script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12" ></script>
+                            </div>
+                        {/if}
+
                     </div>
                 {/if}
 
@@ -190,6 +202,18 @@
                         {/if}
 
                         {$entry.add_footer}
+
+                        {if $template_option.addthiswidget == 'true'}
+                            <div class="addthiswidget">
+                                <script type="text/javascript">
+                                    addthis_url = '{$entry.rdf_ident|escape:url}';
+                                    addthis_title = '{$entry.title|escape:url}';
+                                    addthis_pub = '{$template_option.addthisaccount}';
+                                </script>
+                                <script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12" ></script>
+                            </div>
+                        {/if}
+
                     </div>
                 {/if}
 
@@ -236,6 +260,18 @@
                         {/if}
 
                         {$entry.add_footer}
+
+                        {if $template_option.addthiswidget == 'true'}
+                            <div class="addthiswidget">
+                                <script type="text/javascript">
+                                    addthis_url = '{$entry.rdf_ident|escape:url}';
+                                    addthis_title = '{$entry.title|escape:url}';
+                                    addthis_pub = '{$template_option.addthisaccount}';
+                                </script>
+                                <script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12" ></script>
+                            </div>
+                        {/if}
+
                     </div>
                 {/if}
             {/if}
