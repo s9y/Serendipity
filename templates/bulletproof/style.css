@@ -400,6 +400,9 @@ img.serendipity_freeTag_xmlButton {
     border: none;
 }
 
+.addthiswidget {
+    margin-top: 5px;
+}
 
 /*** Quicksearch in the navbar ***/
 input#serendipityQuickSearchTermField {
