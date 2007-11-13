@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Add spartacus remote management versioning information subpage.
+      (garvinhicking)
+
     * Patch popup-HTML-code insertion javascript to better inter-
       operate with tinymce, xinha or fckeditor. Thanks to 
       Assen Tchorbadjiev.

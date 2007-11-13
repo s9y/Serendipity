@@ -40,3 +40,8 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS', 'Enable the use of Spartacus for fetching plugins?');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES', 'Enable the use of Spartacus for fetching themes?');
+
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE', 'Enable remote plugin version information');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_DESC', 'If enabled, visitors to %s can see the version information of all installed plugins. You might want to protect this URL through custom .htaccess rules for unprivileged access.');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL', 'Secret key to Remote plugin version information');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL_DESC', 'Enter a special URI component that people need to know to access your remote management version information output.');
