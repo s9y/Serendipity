@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.14');
+        $propbag->add('version',       '2.15');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -53,10 +53,12 @@ class serendipity_event_spartacus extends serendipity_event
             'backend_templates_fetchtemplate'    => true,
 
             'backend_pluginlisting_header'         => true,
-            'backend_pluginlisting_header_upgrade' => true
+            'backend_pluginlisting_header_upgrade' => true,
+            
+            'external_plugin'                      => true
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
-        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir'));
+        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir'));
     }
 
     function generate_content(&$title) {
@@ -142,6 +144,20 @@ class serendipity_event_spartacus extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES);
                 $propbag->add('description', '');
                 $propbag->add('default',     'true');
+                break;
+
+            case 'enable_remote':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE);
+                $propbag->add('description', sprintf(PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_DESC, $serendipity['baseURL'] . $serendipity['indexFile'] . '?/plugin/' . $this->get_config('remote_url')));
+                $propbag->add('default',     'false');
+                break;
+
+            case 'remote_url':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL);
+                $propbag->add('description', PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL_DESC);
+                $propbag->add('default',     'spartacus_remote');
                 break;
 
             case 'chmod_files':
@@ -853,6 +869,65 @@ class serendipity_event_spartacus extends serendipity_event
 
         if (isset($hooks[$event])) {
             switch($event) {
+                case 'external_plugin':
+                    if (!serendipity_db_bool($this->get_config('enable_remote'))) {
+                        return false;
+                    }
+
+                    if ($eventData == $this->get_config('remote_url')) {
+                        header('Content-Type: text/plain');
+                        $avail   = array();
+                        $install = array();
+                        $meth    = array('event', 'sidebar');
+                        $active  = serendipity_plugin_api::get_installed_plugins();
+
+                        $avail['event']   = $this->buildList($this->fetchOnline('event'), 'event');
+                        $avail['sidebar'] = $this->buildList($this->fetchOnline('sidebar'), 'sidebar');
+                        
+                        $install['event']   = serendipity_plugin_api::enum_plugin_classes(true);
+                        $install['sidebar'] = serendipity_plugin_api::enum_plugin_classes(false);
+                        
+                        foreach($meth AS $method) {
+                            echo "LISTING: $method\n-------------------\n";
+                            foreach ($install[$method] as $class_data) {
+                                $pluginFile = serendipity_plugin_api::probePlugin($class_data['name'], $class_data['classname'], $class_data['pluginPath']);
+                                $plugin     = serendipity_plugin_api::getPluginInfo($pluginFile, $class_data, $method);
+                        
+                                if (is_object($plugin)) {
+                                    // Object is returned when a plugin could not be cached.
+                                    $bag = new serendipity_property_bag;
+                                    $plugin->introspect($bag);
+                        
+                                    // If a foreign plugin is upgradable, keep the new version number.
+                                    if (isset($avail[$method][$class_data['name']]) && $avail[$method][$class_data['name']]['upgradable']) {
+                                        $class_data['upgrade_version'] = $avail[$method][$class_data['name']]['upgrade_version'];
+                                    }
+                                    $props = serendipity_plugin_api::setPluginInfo($plugin, $pluginFile, $bag, $class_data, 'local', $avail[$method]);
+                                    
+                                } elseif (is_array($plugin)) {
+                                    // Array is returned if a plugin could be fetched from info cache
+                                    $props = $plugin;
+                                } else {
+                                    $props = false;
+                                }
+                        
+                                if (is_array($props)) {
+                                    #print_r($props);
+                                    if (version_compare($props['version'], $props['upgrade_version'], '<')) {
+                                        echo "UPGRADE: " . $class_data['name'] . " -- " . $props['upgrade_version'] . "\n";
+                                    } else {
+                                        echo "OK: " . $class_data['name'] . " -- " . $props['version'] . "\n";
+                                    }
+                                } else {
+                                    echo "ERROR: " . $class_data['true_name'] . "\n";
+                                }
+                            }
+                        }
+                    }
+
+                    return true;
+                    break;
+
                 case 'backend_pluginlisting_header':
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
                         echo '<br /><div id="upgrade_notice" class="serendipityAdminMsgSuccess">';
