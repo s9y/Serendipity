@@ -48,3 +48,6 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'точки');
 
 @define('PLUGIN_KARMA_STARRATING', 'Разрешаване на индивидуална оценка на тази статия?');
+
+@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS', 'Следене на визитите на регистрираните посетители?');
+@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH', 'При избор \'Да\', посещенията на регистрираните посетители (потребители) ще бъдат броени.');
