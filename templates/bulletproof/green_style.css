@@ -242,7 +242,7 @@ input#serendipityQuickSearchTermField {
     border: 1px solid #224c03!important;
 }
 
-#navbarsearchform input {
+#sitenav #searchform input {
     border: 1px solid #224c03;
 }
 

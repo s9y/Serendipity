@@ -46,7 +46,7 @@ body {
     display: inline;
 }
 
-#navbarsearchform {
+#sitenav #searchform {
     float: right;
     display: inline;
 }
