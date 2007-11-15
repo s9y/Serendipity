@@ -409,11 +409,11 @@ input#serendipityQuickSearchTermField {
     background: #ffffff url('{TEMPLATE_PATH}img/quicksearch.png') no-repeat 97% 50%;
 }
 
-#navbarsearchform {
+#sitenav #searchform {
     margin: 0 10px 0 0;
 }
 
-#navbarsearchform input {
+#sitenav #searchform input {
     width: 165px; 
     margin-top: 3px;
     padding-left: 3px;
