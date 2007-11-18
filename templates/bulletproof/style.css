@@ -122,7 +122,7 @@ abbr, acronym, .help{
 
 /*** Entry styles ***/
 .serendipity_Entry_Date {
-    padding: 0.5em 1em;
+    margin: 0.5em 1em;
 }
 
 .serendipity_entry {
@@ -164,6 +164,7 @@ ul.archives_row li {
     font-size: 80%;
 }
 
+.archive_summary_postdetails ,
 .archive_summary_title {
     margin: 0;
 }
@@ -171,6 +172,7 @@ ul.archives_row li {
 .archive_summary {
     margin-bottom: 10px;
 }
+
 
 /*** s9y image manager ***/
 .serendipity_imageComment_center,

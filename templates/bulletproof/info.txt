@@ -1,4 +1,4 @@
 Name: Bulletproof v1.2 beta (s9y-bulletproof.com)
 Author: Bulletproof development team
-Date: 2007-11-15
+Date: 2007-11-18
 Require Serendipity: 1.2
