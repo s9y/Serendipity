@@ -96,4 +96,3 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', '使用blogg.de黑名单进行网址过滤');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', '使用blogg.de黑名单过滤');
 
-?>

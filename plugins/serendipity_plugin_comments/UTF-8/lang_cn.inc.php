@@ -21,5 +21,3 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES', '评论数量');
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', '要显示多少个评论？(默认：15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s 关于 %s');
-
-?>
