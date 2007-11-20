@@ -1,34 +1,28 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?php
 
-        @define('PLUGIN_REMOTERSS_TITLE', '远端 RSS/OPML-Blogroll Feed');
-        @define('PLUGIN_REMOTERSS_BLAHBLAH', '显示远端的 RSS/OPML feed (例如 Blogroll)');
-        @define('PLUGIN_REMOTERSS_NUMBER', '文章数量');
-        @define('PLUGIN_REMOTERSS_NUMBER_BLAHBLAH', '要显示多少篇文章(预设：全部文章)');
-        @define('PLUGIN_REMOTERSS_SIDEBARTITLE', 'Feed 的标题');
-        @define('PLUGIN_REMOTERSS_SIDEBARTITLE_BLAHBLAH', '则列显示 feed 标题');
-        @define('PLUGIN_REMOTERSS_RSSURI', 'RSS/OPML 网址');
-        @define('PLUGIN_REMOTERSS_RSSURI_BLAHBLAH', '显示 RSS/OPML feed 的网址');
-        @define('PLUGIN_REMOTERSS_NOURI', '没有 RSS/OPML feed');
-        @define('PLUGIN_REMOTERSS_RSSTARGET', 'RSS/OPML 连接目标');
-        @define('PLUGIN_REMOTERSS_RSSTARGET_BLAHBLAH', '显示 RSS 的目标属性 (预设：_blank)');
-        @define('PLUGIN_REMOTERSS_CACHETIME', '更新 feed 的时间');
-        @define('PLUGIN_REMOTERSS_CACHETIME_BLAHBLAH', 'feed 的内容会储存在快取资料内，时间过后会自动更新 (预设：3 小时)');
-        @define('PLUGIN_REMOTERSS_FEEDTYPE', 'feed 类型');
-        @define('PLUGIN_REMOTERSS_FEEDTYPE_BLAHBLAH', '显示远端 feed 的形式');
-        @define('PLUGIN_REMOTERSS_BULLETIMG', '子弹型图标');
-        @define('PLUGIN_REMOTERSS_BULLETIMG_BLAHBLAH', '每个标题旁的图标');
-        @define('PLUGIN_REMOTERSS_DISPLAYDATE', '显示日期');
-        @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', '在标题下显示日期');
-?>
+@define('PLUGIN_REMOTERSS_TITLE', '远端RSS/OPML-Blogroll种子');
+@define('PLUGIN_REMOTERSS_BLAHBLAH', '显示远端RSS/OPML种子(例如 Blogroll)中的内容');
+@define('PLUGIN_REMOTERSS_NUMBER', '文章数量');
+@define('PLUGIN_REMOTERSS_NUMBER_BLAHBLAH', '显示多少篇文章(默认：该种子中的全部文章)');
+@define('PLUGIN_REMOTERSS_SIDEBARTITLE', '种子标题');
+@define('PLUGIN_REMOTERSS_SIDEBARTITLE_BLAHBLAH', '在博客的侧栏所显示的该种子的标题');
+@define('PLUGIN_REMOTERSS_RSSURI', 'RSS/OPML网址');
+@define('PLUGIN_REMOTERSS_RSSURI_BLAHBLAH', '你想要显示的RSS/OPML种子的网址');
+@define('PLUGIN_REMOTERSS_NOURI', '没有选择RSS/OPML种子');
+@define('PLUGIN_REMOTERSS_RSSTARGET', 'RSS/OPML链接目标');
+@define('PLUGIN_REMOTERSS_RSSTARGET_BLAHBLAH', '链接（链接到RSS种子中的项目）的目标属性 (默认是新窗口：_blank)');
+@define('PLUGIN_REMOTERSS_CACHETIME', '何时更新RSS种子');
+@define('PLUGIN_REMOTERSS_CACHETIME_BLAHBLAH', '保存在缓存中的RSS种子的内容多长时间更新一次？ (按秒计算，默认是3个小时更新一次)');
+@define('PLUGIN_REMOTERSS_FEEDTYPE', '种子类型');
+@define('PLUGIN_REMOTERSS_FEEDTYPE_BLAHBLAH', '选择远端种子的格式');
+@define('PLUGIN_REMOTERSS_BULLETIMG', '小图标');
+@define('PLUGIN_REMOTERSS_BULLETIMG_BLAHBLAH', '在每个标题前面显示的小图标');
+@define('PLUGIN_REMOTERSS_DISPLAYDATE', '是否显示日期');
+@define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', '是否在标题下面显示日期');
+
+@define('PLUGIN_REMOTERSS_RSSLINK', '使用RSS链接？');
+@define('PLUGIN_REMOTERSS_RSSLINK_DESC', '是否使用RSS种子中的链接？');
+@define('PLUGIN_REMOTERSS_RSSFIELD', 'RSS显示内容');
+@define('PLUGIN_REMOTERSS_RSSFIELD_DESC', 'RSS种子中的哪些标记所标记的内容将被显示？(例如: "title", "content:encoded", "description", ……)');
+@define('PLUGIN_REMOTERSS_RSSESCAPE', '将HTML输出转义(Escape)');
+@define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', '如果启用该设置的话，RSS种子中的HTML内容将被转义(escaped)，因此XSS(Cross-site scripting, 跨站脚本)是不可能存在的。如果关闭这个设置的话，RSS种子中的HTML内容将被原样输出。如果所使用的RSS种子不是你所拥有的话，那么关闭这个设置会产生安全隐患。');

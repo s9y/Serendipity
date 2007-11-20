@@ -1,28 +1,15 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?
 
-        @define('PLUGIN_ENTRYLINKS_NAME', '文章连接');
-        @define('PLUGIN_ENTRYLINKS_BLAHBLAH', '显示文章内出现的连接');
-        @define('PLUGIN_ENTRYLINKS_NEWWIN', '弹出新窗口');
-        @define('PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH', '文章里的连接弹出新窗口(预设：主窗口)');
-        @define('PLUGIN_ENTRYLINKS_REFERERS', '参照连接');
-        @define('PLUGIN_ENTRYLINKS_WORDWRAP', '自动换行');
-        @define('PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH', '要多少字后自动换行(预设：30)');
-        @define('PLUGIN_ENTRYLINKS_MAXREF', '参照连接数量');
-        @define('PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH', '要显示多少个参照连接(预设：15)');
-        @define('PLUGIN_ENTRYLINKS_ORDERBY', '排列参照连接');
-        @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '要怎样排列参照连接(预设：连接数量)');
-        @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
-        @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '连接数量');
-?>
+@define('PLUGIN_ENTRYLINKS_NAME', '文章链接');
+@define('PLUGIN_ENTRYLINKS_BLAHBLAH', '显示涉及该文章的所有链接');
+@define('PLUGIN_ENTRYLINKS_NEWWIN', '在新窗口中打开链接');
+@define('PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH', '是否在新窗口中打开链接？(默认：在当前窗口打开)');
+@define('PLUGIN_ENTRYLINKS_REFERERS', '来源链接');
+@define('PLUGIN_ENTRYLINKS_WORDWRAP', '自动换行');
+@define('PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH', '在多少个字符之后自动换行(默认：30)');
+@define('PLUGIN_ENTRYLINKS_MAXREF', '来源链接数量');
+@define('PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH', '显示多少个来源链接(默认：15)');
+@define('PLUGIN_ENTRYLINKS_ORDERBY', '排列来源链接');
+@define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '以何种顺序排列来源链接(默认：链入次数)');
+@define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
+@define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '链入次数');

@@ -1,20 +1,7 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?php
 
-        @define('PLUGIN_EVENT_WRAPPER_NAME', '事件输出');
-        @define('PLUGIN_EVENT_WRAPPER_DESC', '显示某个事件外挂的输出资料');
-        @define('PLUGIN_EVENT_WRAPPER_PLUGIN', '来源/外挂');
-        @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', '选择要显示输出资料的时间外挂');
-        @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', '在则列显示文章的标题 (输入空白如果要用来源外挂的名称)');
-?>
+@define('PLUGIN_EVENT_WRAPPER_NAME', '事件输出');
+@define('PLUGIN_EVENT_WRAPPER_DESC', '通过特定事件插件输出相关内容');
+@define('PLUGIN_EVENT_WRAPPER_PLUGIN', '事件插件');
+@define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', '选择使用哪个事件插件来处理相关的输出内容');
+@define('PLUGIN_EVENT_WRAPPER_TITLEDESC', '在此输入该侧栏栏目的标题 (如果此处留空的话，则将使用事件插件所生成的标题)');
