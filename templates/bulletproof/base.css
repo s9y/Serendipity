@@ -121,7 +121,14 @@ body {
 
 /*** Accessibility styles ***/
 #skiplinks {
-    display: none;
+    display: inline;
+    height: 1px;
+    overflow: hidden;
+    width: 1px;
+    /* Absolute positioning */
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
 }
 
 #skiplinks ul {
