@@ -47,4 +47,3 @@
 @define('PLUGIN_EVENT_STATISTICS_OUT_LONGEST_ARTICLES', '%s nejdelích záznamů');
 @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS', 'Počet prvků');
 @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC', 'Kolik prvků vzít pro statistické vyhodnocení? (Default: 20)');
-?>

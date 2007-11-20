@@ -16,4 +16,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', '“创作共用”授权条款');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', '在侧栏显示“创作共用”的授权提示。');
 
-?>
