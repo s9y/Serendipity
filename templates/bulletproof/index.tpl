@@ -65,11 +65,11 @@
     <!--             hidden using CSS                                                -->
     <div id="skiplinks">
         <ul>
-            {if $template_option.sitenavpos != 'none'}<li><a href="#skipnav">Skip to site navigation</a></li>{/if}
-            <li><a href="#skipent">Skip to blog entries</a></li>
-            <li><a href="{$serendipityBaseURL}index.php?/archive">Skip to archive page</a></li>
-            {if $template_option.layouttype != '2bs'}<li><a href="#skiplsb">Skip to left sidebar</a></li>{/if}
-            {if $template_option.layouttype != '2sb'}<li><a href="#skiprsb">Skip to right sidebar</a></li>{/if}
+            {if $template_option.sitenavpos != 'none'}<li lang="en"><a href="{if $template_option.sitenavpos == 'left'}#sbsitenav{elseif $template_option.sitenavpos == 'right'}#sbsitenav{else}#sitenav{/if}">Skip to site navigation</a></li>{/if}
+            <li lang="en"><a href="#content">Skip to blog entries</a></li>
+            <li lang="en"><a href="{$serendipityBaseURL}index.php?/archive">Skip to archive page</a></li>
+            {if $template_option.layouttype != '2bs'}<li lang="en"><a href="#serendipityLeftSideBar">Skip to left sidebar</a></li>{/if}
+            {if $template_option.layouttype != '2sb'}<li lang="en"><a href="#serendipityRightSideBar">Skip to right sidebar</a></li>{/if}
         </ul>
     </div>
 
@@ -83,7 +83,6 @@
         {if $template_option.sitenavpos == 'above'}
             <!-- #sitenav: this holds a list of navigational links which can be customized   -->
             <!--           in the theme configurator                                         -->
-            <a name="skipnav"></a>
             <div id="sitenav" class="snabove">
                 <ul>
                     {foreach from=$navlinks item="navlink" name=navbar}
@@ -114,7 +113,6 @@
         {if $template_option.sitenavpos == 'below'}
             <!-- #sitenav: this holds a list of navigational links which can be customized   -->
             <!--           in the theme configurator                                         -->
-            <a name="skipnav"></a>
             <div id="sitenav" class="snbelow">
                 <ul>
                     {foreach from=$navlinks item="navlink" name="navbar"}
@@ -139,11 +137,9 @@
 
         {if $template_option.layouttype == '3sbs'}
             <!-- case 1: 3 columns, sidebar-content-sidebar -->
-            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3sbs_left">
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -155,15 +151,12 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
-            <a name="skipent"></a>
             <div id="content" class="threemain layout3sbs_content hfeed">
                 {$CONTENT}
             </div>
-            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3sbs_right">
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -179,15 +172,12 @@
 
         {if $template_option.layouttype == '3bss'}
             <!-- case 2: 3 columns, content-sidebar-sidebar -->
-            <a name="skipent"></a>
             <div id="content" class="threemain layout3bss_content hfeed">
                 {$CONTENT}
             </div>
-            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3bss_left">
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -199,11 +189,9 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
-            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3bss_right">
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -219,11 +207,9 @@
 
         {if $template_option.layouttype == '3ssb'}
             <!-- case 3: 3 columns, sidebar-sidebar-content -->
-            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="threeside layout3ssb_left">
                 {if $template_option.sitenavpos == 'left'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -235,11 +221,9 @@
                 {/if}
                 {serendipity_printSidebar side="left"}
             </div>
-            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="threeside layout3ssb_right">
                 {if $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -251,7 +235,6 @@
                 {/if}
                 {serendipity_printSidebar side="right"}
             </div>
-            <a name="skipent"></a>
             <div id="content" class="threemain layout3ssb_content hfeed">
                 {$CONTENT}
             </div>
@@ -259,11 +242,9 @@
 
         {if $template_option.layouttype == '2sb'}
             <!-- case 4: 2 columns, left sidebar only -->
-            <a name="skiplsb"></a>
             <div id="serendipityLeftSideBar" class="twoside layout2sb_left">
                 {if $template_option.sitenavpos == 'left' or $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -276,7 +257,6 @@
                 {serendipity_printSidebar side="left"}
                 {serendipity_printSidebar side="right"}
             </div>
-            <a name="skipent"></a>
             <div id="content" class="twomain layout2sb_content hfeed">
                 {$CONTENT}
             </div>
@@ -284,15 +264,12 @@
 
         {if $template_option.layouttype == '2bs'}
             <!-- case 5: 2 columns, right sidebar only -->
-            <a name="skipent"></a>
             <div id="content" class="twomain layout2bs_content hfeed">
                 {$CONTENT}
             </div>
-            <a name="skiprsb"></a>
             <div id="serendipityRightSideBar" class="twoside layout2bs_right">
                 {if $template_option.sitenavpos == 'left' or $template_option.sitenavpos == 'right'}
                     <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                    <a name="skipnav"></a>
                     <div id="sbsitenav" class="serendipitySideBarItem">
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
@@ -309,17 +286,14 @@
 
         {if $template_option.layouttype == '1col'}
             <!-- case 6: 1 column, sidebar(s) below -->
-            <a name="skipent"></a>
             <div id="content" class="onemain layout1col_content hfeed">
                 {$CONTENT}
             </div>
 
             {if $leftSidebarElements > 0}
-                <a name="skiplsb"></a>
                 <div id="serendipityLeftSideBar" class="{if $rightSidebarElements > 0}oneside layout1col_left_side{else}onefull layout_1col_left_full{/if}">
                     {if $template_option.sitenavpos == 'left'}
                         <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                        <a name="skipnav"></a>
                         <div id="sbsitenav" class="serendipitySideBarItem">
                             <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                             <div class="serendipitySideBarContent">
@@ -334,11 +308,9 @@
             {/if}
 
             {if $rightSidebarElements > 0}
-                <a name="skiprsb"></a>
                 <div id="serendipityRightSideBar" class="{if $leftSidebarElements > 0}oneside layout1col_right_side{else}onefull layout1col_right_full{/if}">
                     {if $template_option.sitenavpos == 'right'}
                         <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                        <a name="skipnav"></a>
                         <div id="sbsitenav" class="serendipitySideBarItem">
                             <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                             <div class="serendipitySideBarContent">
