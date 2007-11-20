@@ -1,20 +1,4 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Demin Yin <damon@deminy.net>                                  #
-#               http://www.deminy.net                                    #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?php
 
-@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', '¡°´´×÷¹²ÓÃ-ÊÚÈ¨Ìõ¿î');
-@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'ÔÚ²àÀ¸ÏÔÊ¾¡°´´×÷¹²ÓÃ¡±µÄÊÚÈ¨ÌáÊ¾¡£');
-
-?>
+@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'â€œåˆ›ä½œå…±ç”¨â€åè®®');
+@define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'åœ¨ä¾§æ æ˜¾ç¤ºä¸€æ¡â€œåˆ›ä½œå…±ç”¨â€åè®®çš„æç¤ºã€‚');

@@ -1,18 +1,4 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?php
 
-
-        @define('PLUGIN_EVENT_SEARCHHIGHLIGHT_NAME',     '突出搜寻字');
-        @define('PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC',     '高亮度搜寻引擎找到文章的字');
-?>
+@define('PLUGIN_EVENT_SEARCHHIGHLIGHT_NAME', '高亮搜索结果');
+@define('PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC', '对那些通过在搜索引擎搜索搜索关键字而进入你的博客的页面访问，在页面中将这些关键字高亮（突出显示）。');

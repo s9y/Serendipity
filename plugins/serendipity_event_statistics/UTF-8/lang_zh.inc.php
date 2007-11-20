@@ -1,63 +1,95 @@
-<?php # $Id$
-##########################################################################
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
-# Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details							         #
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com>                             #
-#               http://www.exten.cn                                      #
-##########################################################################
+<?php
 
-        @define('PLUGIN_EVENT_STATISTICS_NAME', '统计资料');
-        @define('PLUGIN_EVENT_STATISTICS_DESC', '记录一些关于您日志的资料');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_STATISTICS', '统计资料');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_FIRST_ENTRY', '第一篇文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_LAST_ENTRY', '最后一篇文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_ENTRIES', '总文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ENTRIES', '文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_PUBLIC', ' ... 公开');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_DRAFTS', ' ... 草稿');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES', '类别');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES2', '类别');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_CATEGORIES', '文章分类');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_CATEGORIES2', '文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_UPLOADED_IMAGES', '上传的图片');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_UPLOADED_IMAGES2', '图片');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_IMAGES', '图片类型');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_IMAGES2', '文件');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS', '回复数量');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS2', '回复');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS3', '最多回复的文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPCOMMENTS', '最多回复的作者');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_LINK', '连接');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_SUBSCRIBERS', '订阅者');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_SUBSCRIBERS2', '订阅者');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPSUBSCRIBERS', '最多订阅的文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPSUBSCRIBERS2', '订阅者');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS', '引用数量');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS2', '引用');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK', '最多引用的文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK2', '引用');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACKS3', '最多引用者');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS_PER_ARTICLE', '平均回复/文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS_PER_ARTICLE', '平均引用/文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_DAY', '平均文章/天');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_WEEK', '平均文章/周');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_MONTH', '平均文章/月');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS_PER_ARTICLE2', '回复/文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS_PER_ARTICLE2', '引用/文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_DAY2', '文章/天');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_WEEK2', '文章/周');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_MONTH2', '文章/月');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS', '总文字');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS2', '文字');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE', '文章里的文字数量');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE2', '文字/文章');
-        @define('PLUGIN_EVENT_STATISTICS_OUT_LONGEST_ARTICLES', '%s 篇最长的文章');
-        @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS', '记录数量');
-        @define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC', '每个记录显示的资料(预设：20)');
-?>
+@define('PLUGIN_EVENT_STATISTICS_NAME', '统计资料');
+@define('PLUGIN_EVENT_STATISTICS_DESC', '在文章页面显示一条指向统计资料的链接，另外还有访客计数器等');
+@define('PLUGIN_EVENT_STATISTICS_OUT_STATISTICS', '统计资料');
+@define('PLUGIN_EVENT_STATISTICS_OUT_FIRST_ENTRY', '最老的一篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_LAST_ENTRY', '最新的一篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_ENTRIES', '文章总数');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ENTRIES', '篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_PUBLIC', '……公开发表');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOTAL_DRAFTS', '……私人草稿');
+@define('PLUGIN_EVENT_STATISTICS_OUT_PER_AUTHOR', '每个用户添加的文章数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES', '类别');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CATEGORIES2', '类别');
+@define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_CATEGORIES', '文章分布');
+@define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_CATEGORIES2', '篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_UPLOADED_IMAGES', '上传的媒体文件');
+@define('PLUGIN_EVENT_STATISTICS_OUT_UPLOADED_IMAGES2', '份媒体文件');
+@define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_IMAGES', '媒体文件分布');
+@define('PLUGIN_EVENT_STATISTICS_OUT_DISTRIBUTION_IMAGES2', '个文件');
+@define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS', '回复数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS2', '个回复');
+@define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS3', '拥有最多回复的文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPCOMMENTS', '拥有最多回复的作者');
+@define('PLUGIN_EVENT_STATISTICS_OUT_LINK', '链接');
+@define('PLUGIN_EVENT_STATISTICS_OUT_SUBSCRIBERS', '订阅者');
+@define('PLUGIN_EVENT_STATISTICS_OUT_SUBSCRIBERS2', '订阅者');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPSUBSCRIBERS', '拥有最多订阅者的文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPSUBSCRIBERS2', '个订阅者');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS', '引用');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS2', '个引用');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK', '被引用次数最多的文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK2', '个引用');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACKS3', '引用次数最多的引用者');
+@define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS_PER_ARTICLE', '平均每篇文章拥有回复数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS_PER_ARTICLE', '平均每篇文章拥有的引用数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_DAY', '平均每天发布的文章数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_WEEK', '平均每周发布的文章数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_MONTH', '平均每月发布的文章数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS_PER_ARTICLE2', '个回复');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS_PER_ARTICLE2', '个引用');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_DAY2', '篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_WEEK2', '篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_ARTICLES_PER_MONTH2', '篇文章');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CHARS', '文字总数');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CHARS2', '个文字');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE', '平均每篇文章使用的文字数量');
+@define('PLUGIN_EVENT_STATISTICS_OUT_CHARS_PER_ARTICLE2', '个文字');
+@define('PLUGIN_EVENT_STATISTICS_OUT_LONGEST_ARTICLES', '最长的 %s 篇文章');
+@define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS', '条目数量');
+@define('PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC', '每个统计项目中最多显示多少个条目(默认：20)');
+
+//Language constants for the Extended Visitors feature
+@define('PLUGIN_EVENT_STATISTICS_EXT_ADD', '扩展的访客统计');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ADD_DESC', '添加扩展的访客统计功能？（默认：否）');
+@define('PLUGIN_EVENT_STATISTICS_EXT_OPT1', '否');
+@define('PLUGIN_EVENT_STATISTICS_EXT_OPT2', '是。放在页面底部');
+@define('PLUGIN_EVENT_STATISTICS_EXT_OPT3', '是。放在页面顶部');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL', '设置为“否”的话将会仅显示访客统计数据');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL_DESC', '显示全部？（默认：否）');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL1', '否。隐藏除了计数器之外的其他所有统计数据。');
+@define('PLUGIN_EVENT_STATISTICS_EXT_ALL2', '是。显示所有统计数据。');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISITORS', '计数器');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISTODAY', '今日访客数');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL', '累计访客数');
+@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY', '今日点击数');
+@define('PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL', '累计点击数');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISSINCE', '统计数据最初开始收集于');
+@define('PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC','点击数只是用来计算页面访问数(pageview)，它可以不断增长。点击数只在访问一个页面或刷新一个页面的时候才被更新。点击数并非是真实的访问次数。');
+@define('PLUGIN_EVENT_STATISTICS_EXT_VISLATEST', '最新访客');
+@define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS', '主要来源');
+@define('PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE', '尚未记录任何来源。');
+@define('PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH', '按日统计的访问次数');
+@define('PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH', '按月统计的访问次数');
+@define('PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS', '扩展的访客统计');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1', '启用。不将机器人(bots)的访问计算在内');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2', '关闭。将机器人(bots)的访问也计算在内');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', '面对机器人(Robot)的统计保护');
+@define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', '启动该设置的话，将不把机器人的访问计入统计范围内；关闭该设置的话，将把机器人的访问计入统计范围内。目前有超过25种不同的机器人可被Serendipity侦测到。');
+
+@define('PLUGIN_EVENT_STATISTICS_SHOW_LASTENTRY', '显示最后一篇文章的日期');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', '显示文章数量');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_COMMENTCOUNT', '显示回复数量');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_MONTHVISITORS', '显示本月访客数量'); //?
+@define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT', '缓存有效期');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT_DESC', '统计数据多长时间刷新一次（按分钟计算）。如果将此设置为一个较大的数值的话，可提高访客访问速度，但会影响到统计数据的精确性（如果该数值过大的话）');
+@define('PLUGIN_EVENT_STATISTICS_TEXT', '格式化文字输出');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_DESC', '使用 %s 来表示相应的数字或文字');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_LASTENTRY', '最新文章: %s');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_ENTRYCOUNT', '有 %s 篇文章');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_COMMENTCOUNT', '有 %s 个回复');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_MONTHVISITORS', '本月有 %s 个访客');
+
+@define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', '显示当前访客数量（过去15分钟内累计）');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s 个访客在线');
