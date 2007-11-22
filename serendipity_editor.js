@@ -260,6 +260,7 @@ function noWysiwygAdd( str, textarea )
         eltarget = document.forms[0].elements[0];
     }
     
+    wrapSelection(eltarget, str, '');
     eltarget.focus();
 }
 

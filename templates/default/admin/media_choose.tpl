@@ -2,9 +2,9 @@
     <head>
         <title>{$CONST.SERENDIPITY_ADMIN_SUITE}: {$CONST.SELECT_FILE}</title>
         <meta http-equiv="Content-Type" content="text/html; charset={$CONST.LANG_CHARSET}" />
-        <link rel="stylesheet" type="text/css" href="{$media.css}" />
-        <link rel="stylesheet" type="text/css" href="{$media.css_tree}" />
-        <link rel="stylesheet" type="text/css" href="{$media.css_imgedit}" />
+        {if $media.css}<link rel="stylesheet" type="text/css" href="{$media.css}" />{/if}
+        {if $media.css_tree}<link rel="stylesheet" type="text/css" href="{$media.css_tree}" />{/if}
+        {if $media.css_imgedit}<link rel="stylesheet" type="text/css" href="{$media.css_imgedit}" />{/if}
 
         {if $media.is_imgedit}
         <style type="text/css">
