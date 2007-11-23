@@ -26,7 +26,7 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.47');
+        $propbag->add('version',       '1.50');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -38,7 +38,7 @@ class serendipity_event_mailer extends serendipity_event
         ));
         $propbag->add('groups', array('FRONTEND_ENTRY_RELATED'));
 
-        $config = array('what', 'mailto', 'includelink', 'striptags', 'convertp');
+        $config = array('what', 'mailto', 'sendtoall', 'includelink', 'striptags', 'convertp');
         $propbag->add('configuration', $config);
     }
 
@@ -99,6 +99,13 @@ class serendipity_event_mailer extends serendipity_event
                 $propbag->add('default', '');
                 break;
 
+            case 'sendtoall':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_MAILER_SENDTOALL);
+                $propbag->add('description', '');
+                $propbag->add('default',     'false');
+                break;
+
             case 'includelink':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        PLUGIN_EVENT_MAILER_LINK);
@@ -144,6 +151,12 @@ class serendipity_event_mailer extends serendipity_event
                     } else {
                         $mailto = $this->get_config('mailto');
                     }
+                    
+                    if (isset($serendipity['POST']['properties']['sendentry_all'])) {
+                        $sendtoall = $serendipity['POST']['properties']['sendentry_all'];
+                    } else {
+                        $sendtoall = serendipity_db_bool($this->get_config('sendtoall'));
+                    }
 
 ?>
                     <fieldset style="margin: 5px">
@@ -151,7 +164,9 @@ class serendipity_event_mailer extends serendipity_event
                             <input class="input_checkbox" type="checkbox" name="serendipity[properties][sendentry]" id="properties_sendentry" value="true" checked="checked" />
                             <label title="<?php echo PLUGIN_EVENT_MAILER_SENDING; ?>" for="properties_sendentry">&nbsp;<?php echo PLUGIN_EVENT_MAILER_ISTOSENDIT; ?></label><br />
                             <label title="<?php echo PLUGIN_EVENT_MAILER_RECIPIENT; ?>" for="properties_mailto">&nbsp;<?php echo PLUGIN_EVENT_MAILER_RECIPIENTS; ?>&nbsp;&nbsp;</label>&nbsp;
-                            <input class="input_textbox" type="text" name="serendipity[properties][mailto]" id="properties_mailto" value="<?php echo htmlspecialchars($mailto); ?>" />
+                            <input class="input_textbox" type="text" name="serendipity[properties][mailto]" id="properties_mailto" value="<?php echo htmlspecialchars($mailto); ?>" /><br />
+                            <input type="checkbox" value="true" id="sendall" name="serendipity[properties][sendentry_all]" <?php echo ($sendtoall ? 'checked="checked"': ''); ?> />
+                            <label title="<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?>" for="sendall">&nbsp;<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?></label>
                     </fieldset>
 <?php
                     break;
@@ -190,6 +205,12 @@ class serendipity_event_mailer extends serendipity_event
                             }
                         }
 
+                        if ($serendipity['POST']['properties']['sendentry_all']) {
+                            $mails = serendipity_db_query("SELECT email FROM {$serendipity['dbPrefix']}authors");
+                            foreach($mails AS $mail) {
+                                $to[] = trim($mail['email']);
+                            }
+                        }
 
                         $mail = array(
                             'subject' => $eventData['title'],

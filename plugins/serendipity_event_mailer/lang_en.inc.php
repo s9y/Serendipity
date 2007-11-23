@@ -20,6 +20,4 @@
 @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', 'This entry was not sent via E-Mail because you decided to not send it.');
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Sending');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Send this entry via E-Mail');
-
-
-?>
+@define('PLUGIN_EVENT_MAILER_SENDTOALL', 'Send to all authors');

@@ -14,3 +14,4 @@
         @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', 'Dieser Eintrage wurde nicht per E-Mail versendet, da diese Option deaktiviert wurde.');
         @define('PLUGIN_EVENT_MAILER_SENDING', 'Versende');
         @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Diesen Eintrag per E-Mail versenden');
+        @define('PLUGIN_EVENT_MAILER_SENDTOALL', 'An alle Redakteure schicken');
