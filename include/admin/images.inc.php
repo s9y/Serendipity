@@ -497,8 +497,8 @@ switch ($serendipity['GET']['adminAction']) {
 
         $new_dir = serendipity_uploadSecure($serendipity['POST']['parent'] . '/' . $serendipity['POST']['name'], true);
         $new_dir = str_replace(array('..', '//'), array('', '/'), $new_dir);
-
-        serendipity_plugin_api::hook_event('backend_directory_create', $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir);
+        $nd      = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir;
+        serendipity_plugin_api::hook_event('backend_directory_create', $nd);
 
         /* TODO: check if directory already exist */
         if (@mkdir($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir)) {
