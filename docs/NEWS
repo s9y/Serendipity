@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Allow the "send mail" plugin to send mails to all registered
+      authors (garvinhicking)
+
     * Add spartacus remote management versioning information subpage.
       (garvinhicking)
 
