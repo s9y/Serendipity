@@ -26,7 +26,7 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.50');
+        $propbag->add('version',       '1.51');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -222,6 +222,7 @@ class serendipity_event_mailer extends serendipity_event
                         switch($this->get_config('what')) {
                             case 'all':
                                 $mail['body']     = $eventData['body'] . $eventData['extended'];
+                                break;
                             case 'body':
                                 $mail['body']     = $eventData['body'];
                                 break;
@@ -230,6 +231,7 @@ class serendipity_event_mailer extends serendipity_event
                                 break;
                             case 'none':
                                 $mail['body']     = '';
+                                break;
                         }
 
                         if (isset($serendipity['POST']['properties']['mailto'])) {
