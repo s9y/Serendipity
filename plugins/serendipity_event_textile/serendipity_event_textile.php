@@ -1,6 +1,5 @@
 <?php # $Id$
 
-require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/textile.php';
 
 
 if (IN_serendipity !== true) {
@@ -26,8 +25,8 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('name',          PLUGIN_EVENT_TEXTILE_NAME);
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.4');
+        $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -68,6 +67,7 @@ class serendipity_event_textile extends serendipity_event
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
+        $conf_array[] = 'textile_version';
         $propbag->add('configuration', $conf_array);
     }
 
@@ -87,6 +87,17 @@ class serendipity_event_textile extends serendipity_event
 
     function introspect_config_item($name, &$propbag)
     {
+        if ($name === 'textile_version') {
+            $propbag->add('type',        'radio');
+            $propbag->add('name',        PLUGIN_EVENT_TEXTILE_VERSION);
+            $propbag->add('description', PLUGIN_EVENT_TEXTILE_VERSION_DESCRIPTION);
+            $propbag->add('radio',       array(
+                                            'value' => array(1, 2),
+                                            'desc'  => array('1.0', '2.0'),
+            ));
+            $propbag->add('default',     2);
+            return true;
+        }
         $propbag->add('type',        'boolean');
         $propbag->add('name',        constant($name));
         $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
@@ -133,7 +144,7 @@ class serendipity_event_textile extends serendipity_event
 
         /* textile it */
 
-                        $eventData[$element] = textile($eventData[$element]);
+                        $eventData[$element] = $this->textile($eventData[$element]);
 
         /* each block will now be "<code>BLOCK::2</code>"
          * so look for those place holders and replace
@@ -230,6 +241,16 @@ class serendipity_event_textile extends serendipity_event
         return '<a name="'. $text . '"></a>';
     }
 
+    function textile($string) {
+        if ($this->get_config('textile_version') == 2) {
+            require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/classTextile.php';
+            $textile = new Textile();
+            return $textile->textileThis($string);
+        } else {
+            require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/textile.php';
+            return textile($string);
+        }
+    }
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
