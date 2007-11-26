@@ -339,8 +339,8 @@ Applying Attributes:
     {
         global $textile_a,$textile_c;
         $text = explode("\n",$m[0]);
-        foreach($text as $line){
-            $nextline = next($text);
+        foreach($text as $nr => $line){
+            $nextline = isset($text[$nr+1]) ? $text[$nr+1] : false;
             if(preg_match("/^([#*]+)($textile_a$textile_c) (.*)$/s",$line,$m)) {
                 list(,$tl,$textile_atts,$textile_content) = $m;
                 $nl = preg_replace("/^([#*]+)\s.*/","$1",$nextline);
