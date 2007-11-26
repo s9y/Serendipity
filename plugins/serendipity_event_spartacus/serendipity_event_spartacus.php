@@ -969,7 +969,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 case 'backend_plugins_fetchlist':
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
-                        $type = (isset($serendipity['GET']['type']) ? $serendipity['GET']['type'] : 'sidebar');
+                        $type = (isset($serendipity['GET']['type']) && !empty($serendipity['GET']['type']) ? $serendipity['GET']['type'] : 'sidebar');
 
                         $eventData = array(
                            'pluginstack' => $this->buildList($this->fetchOnline($type), $type),
