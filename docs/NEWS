@@ -67,6 +67,9 @@ Version 1.3 ()
 Version 1.2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix spartacus filter listing showing event plugin groups in the
+      sidebar listing.
+          
     * Patch PEAR.php for better detection, if already included.
       Thanks to Assen Tchorbadjiev.
 

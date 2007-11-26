@@ -149,7 +149,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
 
     $plugins = serendipity_plugin_api::get_installed_plugins();
-    $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] == 'event'));
+    $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
     usort($classes, 'serendipity_pluginListSort');
 
     $counter    = 0;
