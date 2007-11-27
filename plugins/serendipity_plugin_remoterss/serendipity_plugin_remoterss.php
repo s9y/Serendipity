@@ -257,7 +257,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.10');
+        $propbag->add('version',       '1.11');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -481,7 +481,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         }
 
                         if ($use_rss_link) {
-                            $content .= '<a href="' . $this->decode($item['link']) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
+                            $content .= '<a href="' . htmlspecialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
                         }
 
                         if (!empty($bulletimg)) {
@@ -571,13 +571,13 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             }
 
                             if ($blogrolling === true && (!empty($text) || !empty($url))) {
-                                $content .= '&bull; <a href="' . $url . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . ' title="' . $text . '">' . htmlspecialchars($text) . "</a>";
+                                $content .= '&bull; <a href="' . htmlspecialchars($url) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . ' title="' . $text . '">' . htmlspecialchars($text) . "</a>";
                                 if (isset($item['isRecent'])) {
                                     $content .= ' <span style="color: Red; ">*</span>';
                                 }
                                 $content .= "<br />";
                             } elseif ((isset($item['type']) && $item['type'] == 'url') || !empty($url)) {
-                                $content .= '&bull; <a href="' .$url . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . ' title="' . $text . '">' . $text . "</a>";
+                                $content .= '&bull; <a href="' . htmlspecialchars($url) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . ' title="' . $text . '">' . $text . "</a>";
                                 $content .= "<br />";
                             }
                             ++$i;
