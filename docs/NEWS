@@ -3,6 +3,8 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Added LifeType importer (garvinhicking)
+
     * Updated Textile library to 2.0, by Lars Strojny
     
     * Allow the "send mail" plugin to send mails to all registered
