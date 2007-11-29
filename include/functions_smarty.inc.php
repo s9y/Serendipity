@@ -146,6 +146,8 @@ function serendipity_ifRemember($name, $value, $isDefault = false, $att = 'check
  *                          returncode       (string)  If set to "array", the array of entries will be returned. "flat-array" will only return the articles without their entryproperties. "single" will only return a 1-dimensional array. "query" will only return the used SQL.
  *                          joinauthors      (bool)    Should an SQL-join be made to the AUTHORS DB table?
  *                          joincategories   (bool)    Should an SQL-join be made to the CATEGORIES DB table?
+ *                          joinown          (string)  SQL-Parts to add to the "JOIN" query
+ *                          entryprops       (string)  Condition list of commaseparated entryproperties that an entry must have to be displayed (example: "ep_CustomField='customVal',ep_CustomField2='customVal2'")
  *
  *                      [PRINTING]
  *                          template:          (string)  Name of the template file to print entries with
@@ -183,6 +185,18 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
 
     if (empty($params['fetchDrafts'])) {
         $params['fetchDrafts'] = false;
+    }
+    
+    if (!empty($params['entryprops'])) {
+        if (preg_match_all('@(.*)(!)?=[\'"]*(.*)[\'"]*(,|$)@imsU', $params['entryprops'], $m)) {
+            foreach($m[0] AS $idx => $p) {
+                $params['joinown'] .= "\n JOIN {$serendipity['dbPrefix']}entryproperties 
+                                          AS ep" . $idx . " 
+                                          ON (ep" . $idx . ".entryid = e.id AND 
+                                              ep" . $idx . ".property = '" . serendipity_db_escape_string($m[1][$idx]) . "' AND 
+                                              ep" . $idx . ".value " . $m[2][$idx] . "= '" . serendipity_db_escape_string($m[3][$idx]) . "') \n";
+            }
+        }
     }
 
     if (empty($params['modified_since'])) {
@@ -295,7 +309,8 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
             $params['group_by'],
             $params['returncode'],
             $params['joinauthors'],
-            $params['joincategories']
+            $params['joincategories'],
+            $params['joinown']
         );
 
         // Check whether the returned entries shall be grouped specifically

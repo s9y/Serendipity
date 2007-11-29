@@ -206,9 +206,10 @@ function &serendipity_fetchEntryCategories($entryid) {
  * @param   string      If set to "array", the array of entries will be returned. "flat-array" will only return the articles without their entryproperties. "single" will only return a 1-dimensional array. "query" will only return the used SQL.
  * @param   bool        Should an SQL-join be made to the AUTHORS DB table?
  * @param   bool        Should an SQL-join be made to the CATEGORIES DB table?
+ * @param   string      SQL-Parts to add to JOIN
  * @return  array       Holds the super-array of all entries with all additional information
  */
-function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true) {
+function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
 
     $cond = array();
@@ -392,6 +393,10 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                         ON e.id = ec.entryid
                     LEFT JOIN {$serendipity['dbPrefix']}category c
                         ON ec.categoryid = c.categoryid";
+    }
+    
+    if ($joinown) {
+        $cond['joins'] .= $joinown;
     }
 
     $serendipity['fullCountQuery'] .="
@@ -813,7 +818,14 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     if ($totalEntries === null) {
         $totalEntries = serendipity_getTotalEntries();
     }
-    $totalPages   = ceil($totalEntries / $serendipity['fetchLimit']);
+    
+    $limits = explode(',', $serendipity['fetchLimit']);
+    if (!empty($limits[1])) {
+        $limit = (int)$limits[1];
+    } else {
+        $limit = (int)$limits[0];
+    }
+    $totalPages   = ceil($totalEntries / $limit);
 
     if (!isset($serendipity['GET']['page'])) {
         $serendipity['GET']['page'] = 1;
