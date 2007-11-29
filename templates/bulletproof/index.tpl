@@ -363,6 +363,7 @@
 {/if}
 
 {$raw_data}
+
 {serendipity_hookPlugin hook="frontend_footer"}
 {if $is_embedded != true}
     </body>
