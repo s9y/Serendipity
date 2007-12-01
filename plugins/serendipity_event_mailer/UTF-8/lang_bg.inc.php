@@ -3,7 +3,8 @@
 /**
  *  @version $Revision$
  *  @author Ivan Cenov jwalker@hotmail.bg
- */
+ *  EN-Revision: 2030
+*/
 
     @define('PLUGIN_EVENT_MAILER_NAME', 'Изпращане на статии по e-mail');
     @define('PLUGIN_EVENT_MAILER_DESC', 'Приставката позволява изпращането на нови статии по e-mail съобщения на указани получатели.');
@@ -19,3 +20,4 @@
     @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', 'Статията не беше изпратена по e-mail, понеже вие отменихте това действие.');
     @define('PLUGIN_EVENT_MAILER_SENDING', 'Изпращане');
     @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Изпращане на тази статия по e-mail');
+    @define('PLUGIN_EVENT_MAILER_SENDTOALL', 'Изпращане до всички автори');
