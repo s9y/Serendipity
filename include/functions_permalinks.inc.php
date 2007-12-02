@@ -22,6 +22,7 @@ if (defined('S9Y_FRAMEWORK_PERMALINKS')) {
 function serendipity_makeFilename($str, $stripDots = false) {
     static $from = array(
                      ' ',
+                     '%',
 
                      'Ä',
                      'ä',
@@ -65,6 +66,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
 
     static $to   = array(
                      '-',
+                     '%25',
 
                      'AE',
                      'ae',
