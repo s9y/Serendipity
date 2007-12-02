@@ -74,6 +74,9 @@ Version 1.3 ()
 Version 1.2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix proper encoding of '%' sign when used in post titles
+      (garvinhicking)
+      
     * Encode RSS feed links, Patch by Hanno Boeck
 
     * Fix spartacus filter listing showing event plugin groups in the
