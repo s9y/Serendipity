@@ -5,7 +5,7 @@
 
     <ul id="serendipity_categories_list" style="list-style: none; margin: 0px; padding: 0px">
 {foreach from=$categories item="plugin_category"}
-        <li style="display: block;">
+        <li class="category_depth{$plugin_category.catdepth} category_{$plugin_category.categoryid}" style="display: block;">
         {if $is_form}    
             <input style="width: 15px" type="checkbox" name="serendipity[multiCat][]" value="{$plugin_category.categoryid}" />
         {/if}
