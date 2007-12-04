@@ -1,6 +1,7 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Farbwahl');
+@define('USER_STYLESHEET','Zusätzliches Benutzerstylesheet einbinden. Dieses Stylesheet muss vom Benutzer im Template-Verzeichnis angelegt werden. Es muss user.css heißen und kann benutzt werden, um ausgewählte Styles zu überschreiben.');
 // Layout
 @define('LAYOUT_TYPE','Layout des Blogs (B = Blogeinträge, S = Seitenleiste, CF = Content first)');
 @define('LAYOUT_SBS','Dreispaltig S-B-S');

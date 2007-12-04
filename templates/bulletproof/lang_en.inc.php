@@ -1,6 +1,7 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Colorset');
+@define('USER_STYLESHEET','Use additional user stylesheet. Users have to create this stylesheet in the template directory. It has to be named user.css and can be used to override selected styles.');
 // Layout
 @define('LAYOUT_TYPE','Blog layout (B = Blog entriee, S = Sidebar, CF = Content first)');
 @define('LAYOUT_SBS','Three columns S-B-S');
