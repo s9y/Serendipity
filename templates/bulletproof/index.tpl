@@ -50,8 +50,6 @@
         {if $template_option.jscolumns == 'true'}<script type="text/javascript" src="{$serendipityHTTPPath}templates/{$template}/js/p7_eqCols2_10.js"></script>{/if}
         <!-- print media stylesheet -->
         <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="print.css"}" media="print" />
-        <!-- additional stylesheet for user customization so bundled stylesheets do not require modification -->
-        <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="override.css"}" />
     </head>
 
     <body{if $template_option.jscolumns == 'true'} onload="P7_equalCols2(0,{if $template_option.layouttype != '1col'}'content','DIV',{/if}'serendipityLeftSideBar','DIV','serendipityRightSideBar','DIV')"{/if}>
