@@ -9,7 +9,11 @@
 
 
 .layout1col_content {
-    float: none !important;
+    float: none!important;
+}
+
+.layout1col_right_full {
+    float: none!important;
 }
 
 /* stop the footer from extending the page's height */

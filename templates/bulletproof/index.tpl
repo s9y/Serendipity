@@ -290,39 +290,21 @@
                 {$CONTENT}
             </div>
 
-            {if $leftSidebarElements > 0}
-                <div id="serendipityLeftSideBar" class="{if $rightSidebarElements > 0}oneside layout1col_left_side{else}onefull layout_1col_left_full{/if}">
-                    {if $template_option.sitenavpos == 'left'}
-                        <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                        <div id="sbsitenav" class="serendipitySideBarItem">
-                            <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
-                            <div class="serendipitySideBarContent">
-                                <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                                <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
-                            </div>    
-                            <div class="serendipitySideBarFooter"></div>
-                        </div>
-                    {/if}
-                    {serendipity_printSidebar side="left"}
+            <div id="serendipityRightSideBar" class="onefull layout1col_right_full">
+            {if $template_option.sitenavpos == 'left' || $template_option.sitenavpos == 'right'}
+            <!-- #sbsitenav: like #sitenav, but placed within the sidebar -->
+                <div id="sbsitenav" class="serendipitySideBarItem">
+                    <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
+                    <div class="serendipitySideBarContent">
+            <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                    </div>
+                    <div class="serendipitySideBarFooter"></div>
                 </div>
             {/if}
-
-            {if $rightSidebarElements > 0}
-                <div id="serendipityRightSideBar" class="{if $leftSidebarElements > 0}oneside layout1col_right_side{else}onefull layout1col_right_full{/if}">
-                    {if $template_option.sitenavpos == 'right'}
-                        <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
-                        <div id="sbsitenav" class="serendipitySideBarItem">
-                            <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
-                            <div class="serendipitySideBarContent">
-                                <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                                <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
-                            </div>
-                            <div class="serendipitySideBarFooter"></div>
-                        </div>
-                    {/if}
-                    {serendipity_printSidebar side="right"}
-                </div>
-            {/if}
+            {serendipity_printSidebar side="left"}
+            {serendipity_printSidebar side="right"}
+            </div>
         {/if}
 
         <!-- #footer: the page footer can be used for additional information             -->
