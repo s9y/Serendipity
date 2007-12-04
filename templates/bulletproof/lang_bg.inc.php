@@ -6,6 +6,7 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 
 // Colorsets
 @define('THEME_COLORSET', 'Цветова схема');
+@define('USER_STYLESHEET','');
 // Layout
 @define('LAYOUT_TYPE','Общо оформление (B = Статия, S = Странична приставка, CF = Първо съдържанието)');
 @define('LAYOUT_SBS','Три колони S-B-S');

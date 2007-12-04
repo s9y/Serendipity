@@ -32,6 +32,14 @@ $template_config = array(
         'select_values' => $colorsets
     ),
     array(
+        'var'           => 'userstylesheet',
+        'name'          => USER_STYLESHEET,
+        'type'          => 'radio',
+        'default'       => 'false',
+        'radio'         => array('value' => array('true', 'false'),
+                                 'desc'  => array(YES, NO))
+    ),
+    array(
         'var'           => 'layouttype',
         'name'          => LAYOUT_TYPE,
         'type'          => 'select',
