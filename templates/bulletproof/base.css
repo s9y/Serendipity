@@ -96,17 +96,20 @@ body {
 .onemain {
     width: 100%;
 }
-.oneside {
-    width: 50%;
-    max-width: 300px;
-}
+
 .onefull {
     width: 100%;
-    max-width: 300px;
 }
 
 .layout2sb_content {
     clear: right !important;
+}
+
+.onefull .serendipitySideBarItem {
+    float: left;
+    margin: 0px 1px 10px 11px!important;
+    padding: 0!important;
+    width: 18.5%;
 }
 
 #footer {
