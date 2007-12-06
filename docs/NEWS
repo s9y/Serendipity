@@ -3,76 +3,79 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
-    * Added new parameter "joinown" and "entryprops" to {serendipity_
-      fetchPrintEntries} smarty function, to be able to fetch entries
-      according to their entryprops or other custom SQL.
-      (garvinhicking)
-
-    * Added LifeType importer (garvinhicking)
-
-    * Updated Textile library to 2.0, by Lars Strojny
-    
-    * Allow the "send mail" plugin to send mails to all registered
-      authors (garvinhicking)
-
     * Add spartacus remote management versioning information subpage.
       (garvinhicking)
 
-    * Patch popup-HTML-code insertion javascript to better inter-
-      operate with tinymce, xinha or fckeditor. Thanks to 
-      Assen Tchorbadjiev.
-    
-    * Updated WordPress imported to be able to import from a 2.3
-      structure (experimental). Also added WPXRSS import to the
-      generic RSS importer. (garvinhicking)
-
-    * Fix wrong entry timestamp used in comment feeds (garvinhicking)
-
-    * Add experimental DB layer for "SQLRelay" database proxy extension, 
-      by Dante Mason
-
-    * Highlighting searched words in entries now uses str_replace instead
-      of slower and possibly insecure preg_replace(). Thanks to
-      Dietrich Raisin!
-      
-    * New plugin API method "parseTemplate($filename)" to allow a
-      sidebar- or event-plugin to fetch+display a smarty template.
-      (garvinhicking)
-
-    * Made short-urls index.php?serendipity[id]=X or index.php?p=X
-      properly show a single entry view (garvinhicking)
-
-    * Extended spam blocking plugin to handle pingbacks like trackbacks.
-      (brockhaus)
-
-    * Pingback receiving is working now with internal functionality in
-      comment.php Smarty trackback loader now loads trackbacks and
-      pingbacks (brockhaus)
-
-    * On the fly update of the media database: Not only images are added
-      but video and audio, too. (brockhaus)
+    * Allow the "send mail" plugin to send mails to all registered
+      authors (garvinhicking)
 
     * New spam blocking method for trackbacks: ip validation. The 
       senders ip is compared with the ip of the host, the trackback is
       set to. If they don't match, the trackback is rejected/moderated.
       This should reject most of the trackback spam bots. (brockhaus)
 
-    * The recent entries sidebar plugin shiped with s9y listed entries
-      not accessable by the current user because of right restrictions.
+    * Updated karma plugin to not track clicks of registered users
       (brockhaus)
+
+    * Made short-urls index.php?serendipity[id]=X or index.php?p=X
+      properly show a single entry view (garvinhicking)
+
+    * Added new parameter "joinown" and "entryprops" to {serendipity_
+      fetchPrintEntries} smarty function, to be able to fetch entries
+      according to their entryprops or other custom SQL.
+      (garvinhicking)
+
+    * New plugin API method "parseTemplate($filename)" to allow a
+      sidebar- or event-plugin to fetch+display a smarty template.
+      (garvinhicking)
 
     * The archive sidebar plugin shiped with s9y now displays numbers
       of articles correctly for month, catergories and so on, even
       if multicategory articles are used. (brockhaus)
 
-    * Trackbacks to links without a description now get properly
-      evaluated. (brockhaus)
+    * Added LifeType importer (garvinhicking)
+
+    * The recent entries sidebar plugin shiped with s9y listed entries
+      not accessable by the current user because of right restrictions.
+      (brockhaus)
+
+    * Patch popup-HTML-code insertion javascript to better inter-
+      operate with tinymce, xinha or fckeditor. Thanks to 
+      Assen Tchorbadjiev.
+
+    * Add experimental DB layer for "SQLRelay" database proxy extension, 
+      by Dante Mason
+
+    * On the fly update of the media database: Not only images are added
+      but video and audio, too. (brockhaus)
+
+    * Trackbacks to links without a RDF-description now get properly
+      evaluated. Mostly WordPress-specific. (brockhaus)
+
+    * Pingback receiving is working now with internal functionality in
+      comment.php Smarty trackback loader now loads trackbacks and
+      pingbacks (brockhaus)
+
+    * Extended spam blocking plugin to handle pingbacks like trackbacks.
+      (brockhaus)
 
     * Full pingback support, fallback trackback method for WordPress
       blogs. (brockhaus)
 
 Version 1.2.1 ()
 ------------------------------------------------------------------------
+
+    * Updated Textile library to 2.0, by Lars Strojny
+
+    * Fix wrong entry timestamp used in comment feeds (garvinhicking)
+
+    * Highlighting searched words in entries now uses str_replace instead
+      of slower and possibly insecure preg_replace(). Thanks to
+      Dietrich Raisin!
+
+    * Updated WordPress imported to be able to import from a 2.3
+      structure (experimental). Also added WPXRSS import to the
+      generic RSS importer. (garvinhicking)
 
     * Fix proper encoding of '%' sign when used in post titles
       (garvinhicking)

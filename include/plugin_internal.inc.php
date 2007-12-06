@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id:$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -382,6 +382,7 @@ class serendipity_quicksearch_plugin extends serendipity_plugin {
     <div>
         <input type="hidden"  name="serendipity[action]" value="search" />
         <input alt="<?php echo QUICKSEARCH; ?>" type="text"   id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" size="13" />
+        <input class="quicksearch_submit" type="submit" value="&gt;" alt="<?php echo QUICKSEARCH; ?>" name="serendipity[searchButton]" title="<?PHP echo GO; ?>" style="width: 2em;" />
     </div>
     <div id="LSResult" style="display: none;"><div id="LSShadow"></div></div>
 </form>
@@ -400,7 +401,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
         $propbag->add('version',       '1.0');
-        $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count'));
+        $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count', 'hide_zero_count'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -436,6 +437,13 @@ class serendipity_archives_plugin extends serendipity_plugin {
                 $propbag->add('default',     false);
                 break;
 
+            case 'hide_zero_count':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        CATEGORY_PLUGIN_HIDEZEROCOUNT);
+                $propbag->add('description', '');
+                $propbag->add('default',     false);
+                break;
+
             default:
                 return false;
         }
@@ -451,15 +459,18 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $ts = mktime(0, 0, 0, date('m'), 1);
 
         $add_query = '';
-        if (isset($serendipity['GET']['category'])) {
+        
+        $category_set = isset($serendipity['GET']['category']);
+        if ($category_set) {
             $base_query   = 'C' . (int)$serendipity['GET']['category'];
             $add_query    = '/' . $base_query;
         }
 
         $max_x = $this->get_config('count', 3);
         $show_count = serendipity_db_bool($this->get_config('show_count', false));
+        $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
         $freq = $this->get_config('frequency', 'months');
-
+        
         for($x = 0; $x < $max_x; $x++) {
             $current_ts = $ts;
             switch($freq) {
@@ -515,6 +526,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
             $link = serendipity_rewriteURL(PATH_ARCHIVES . '/' . $linkStamp . $add_query . '.html', 'serendipityHTTPPath');
 
             $html_count = '';
+            $hidden_by_zero_count = false;
             if ($show_count) {
                 switch($freq) {
                     case 'months':
@@ -540,22 +552,25 @@ class serendipity_archives_plugin extends serendipity_plugin {
                     true,
                     'count(e.id) AS orderkey',
                     '',
-                    'single'
+                    'single',
+                    false, $category_set // the joins used
                 );
 
                 if (is_array($ec)) {
                     if (empty($ec['orderkey'])) {
                         $ec['orderkey'] = '0';
                     }
+                    $hidden_by_zero_count = $hide_zero_count && ( $ec['orderkey'] == '0'); 
                     $html_count .= ' (' . $ec['orderkey'] . ')';
                 }
             }
 
-            echo '<a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a><br />' . "\n";
-
+            if (!$hidden_by_zero_count) {
+                echo '<a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a><br />' . "\n";
+            }
         }
 
-        echo '<a href="'. $serendipity['serendipityHTTPPath'] .'">' . RECENT . '</a><br />' . "\n";
+        echo '<a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a><br />' . "\n";
         echo '<a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a>'. "\n";
     }
 }
@@ -1132,7 +1147,7 @@ class serendipity_superuser_plugin extends serendipity_plugin {
 
         $link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
         $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
-        echo '<a rel="nofollow" href="' . $link . '" title="'. $text .'">'. $text .'</a>';
+        echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
     }
 
     function introspect_config_item($name, &$propbag)
@@ -1560,7 +1575,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
                 $categories[$cid]['feedCategoryURL'] = serendipity_feedCategoryURL($cat, 'serendipityHTTPPath');
                 $categories[$cid]['categoryURL']     = serendipity_categoryURL($cat, 'serendipityHTTPPath');
                 $categories[$cid]['paddingPx']       = $cat['depth']*6;
-                $categories[$cid]['catdepth']       = $cat['depth'];
+                $categories[$cid]['catdepth']        = $cat['depth'];
 
                 if (!empty($cat_count[$cat['categoryid']])) {
                     $categories[$cid]['true_category_name'] = $cat['category_name'];
@@ -1568,7 +1583,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
                 }
 
                 if (!$smarty) {
-                    $html .= '<li class="category_depth'. $cat['depth']. ' category_' . $cat['categoryid'] .'" style="display: block;">';
+                    $html .= '<li class="category_depth' . $cat['depth'] . ' category_' . $cat['categoryid'] . '" style="display: block;">';
 
                     if ($is_form) {
                         $html .= '<input style="width: 15px" type="checkbox" name="serendipity[multiCat][]" value="' . $cat['categoryid'] . '" />';
