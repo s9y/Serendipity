@@ -245,13 +245,13 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                      'url'       => $url,
                                      'title'     => $a['title'],
                                      'ip'        => $a['comment_author_IP'],
-                                     'status'    => ($a['comment_status'] == '1' ? 'pending' : 'approved'),
+                                     'status'    => ($a['comment_status'] == '2' ? 'pending' : 'approved'),
                                      'body'      => $a['comment_content'],
                                      'subscribed'=> 'false',
                                      'type'      => 'NORMAL');
 
                     serendipity_db_insert('comments', $this->strtrRecursive($comment));
-                    if ($a['comment_status'] != '1') {
+                    if ($a['comment_status'] != '2') {
                         $cid = serendipity_db_insert_id('comments', 'id');
                         serendipity_approveComment($cid, $entry['entryid'], true);
                     }
