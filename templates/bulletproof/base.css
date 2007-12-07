@@ -110,6 +110,7 @@ body {
     margin: 0px 1px 10px 11px!important;
     padding: 0!important;
     width: 18.5%;
+    display:inline;
 }
 
 #footer {
