@@ -149,7 +149,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="left"}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
             </div>
             <div id="content" class="threemain layout3sbs_content hfeed">
                 {$CONTENT}
@@ -166,7 +166,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="right"}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
         {/if}
 
@@ -187,7 +187,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="left"}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
             </div>
             <div id="serendipityRightSideBar" class="threeside layout3bss_right">
                 {if $template_option.sitenavpos == 'right'}
@@ -201,7 +201,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="right"}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
         {/if}
 
@@ -219,7 +219,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="left"}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
             </div>
             <div id="serendipityRightSideBar" class="threeside layout3ssb_right">
                 {if $template_option.sitenavpos == 'right'}
@@ -233,7 +233,7 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="right"}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
             <div id="content" class="threemain layout3ssb_content hfeed">
                 {$CONTENT}
@@ -254,8 +254,8 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="left"}
-                {serendipity_printSidebar side="right"}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
             <div id="content" class="twomain layout2sb_content hfeed">
                 {$CONTENT}
@@ -279,8 +279,8 @@
                         <div class="serendipitySideBarFooter"></div>
                     </div>
                 {/if}
-                {serendipity_printSidebar side="left"}
-                {serendipity_printSidebar side="right"}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
         {/if}
 
@@ -302,8 +302,8 @@
                     <div class="serendipitySideBarFooter"></div>
                 </div>
             {/if}
-            {serendipity_printSidebar side="left"}
-            {serendipity_printSidebar side="right"}
+            {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
+            {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
             </div>
         {/if}
 
