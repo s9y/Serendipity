@@ -45,3 +45,16 @@
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_DESC', 'If enabled, visitors to %s can see the version information of all installed plugins. You might want to protect this URL through custom .htaccess rules for unprivileged access.');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL', 'Secret key to Remote plugin version information');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL_DESC', 'Enter a special URI component that people need to know to access your remote management version information output.');
+
+@define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT', 'FTP Error: Unable to connect to FTP.');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_MKDIR', 'FTP Error: Unable to create directory (%s).');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CHMOD', 'FTP Error: Unable to change privilegies of directory (%s).');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_SUCCESS', 'FTP: Directory (%s) successfully created.');
+
+@define('PLUGIN_EVENT_SPARTACUS_FTP_USE', 'Use directory creating using ftp in safe_mode?');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_USE_DESC', 'If you are running PHP in safe_mode, some restrictions are applied. And these restrictions have the result that if you create a directory using an ordinary way, you cannot upload in this directory. But if you create directory using ftp, you can. So if you have safe_mode = on, this is only way how to use SPARTACUS and Media uploads successfully.');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_SERVER', 'FTP server address');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_USERNAME', 'FTP username');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_PASS', 'FTP password');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR', 'FTP serendipity directory');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC', 'When you connect to the FTP,you do not necessarilly enter into the serendipity directory. So here it is necessary to write the path from the FTP login place to the serendipity directory.');

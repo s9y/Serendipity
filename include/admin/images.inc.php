@@ -501,7 +501,7 @@ switch ($serendipity['GET']['adminAction']) {
         serendipity_plugin_api::hook_event('backend_directory_create', $nd);
 
         /* TODO: check if directory already exist */
-        if (@mkdir($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir)) {
+        if (is_dir($nd) || @mkdir($nd)) {
             printf(DIRECTORY_CREATED, $serendipity['POST']['name']);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
