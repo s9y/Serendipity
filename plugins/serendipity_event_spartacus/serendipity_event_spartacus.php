@@ -55,10 +55,13 @@ class serendipity_event_spartacus extends serendipity_event
             'backend_pluginlisting_header'         => true,
             'backend_pluginlisting_header_upgrade' => true,
             
-            'external_plugin'                      => true
+            'external_plugin'                      => true,
+
+            'backend_directory_create'             => true
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
-        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir'));
+        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
+
     }
 
     function generate_content(&$title) {
@@ -197,6 +200,55 @@ class serendipity_event_spartacus extends serendipity_event
                 $propbag->add('default',     0);
                 break;
 
+            case 'use_ftp':
+                if (function_exists('ftp_connect')) {
+                    $propbag->add('type',        'boolean');
+                    $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_FTP_USE);
+                    $propbag->add('description', PLUGIN_EVENT_SPARTACUS_FTP_USE_DESC);
+                    if (@ini_get('safe_mode')) {
+                        $propbag->add('default', 'true');
+                    } else {
+                        $propbag->add('default', 'false');
+                    }
+                }
+                break;
+                
+            case 'ftp_server':
+                if (function_exists('ftp_connect')) {
+                    $propbag->add('type',        'string');
+                    $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_FTP_SERVER);
+                    $propbag->add('description', '');
+                    $propbag->add('default',     '');
+                }
+                break;
+            
+            case 'ftp_username':
+                if (function_exists('ftp_connect')) {
+                    $propbag->add('type',        'string');
+                    $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_FTP_USERNAME);
+                    $propbag->add('description', '');
+                    $propbag->add('default',     '');
+                }
+                break;
+            
+            case 'ftp_password':
+                if (function_exists('ftp_connect')) {
+                    $propbag->add('type',        'string');
+                    $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_FTP_PASS);
+                    $propbag->add('description', '');
+                    $propbag->add('default',     '');
+                }
+                break;
+            
+            case 'ftp_basedir':
+                if (function_exists('ftp_connect')) {
+                    $propbag->add('type',        'string');
+                    $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR);
+                    $propbag->add('description', PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC);
+                    $propbag->add('default',     $serendipity['serendipityHTTPPath']);
+                }
+                break;
+
             default:
                 return false;
         }
@@ -240,6 +292,10 @@ class serendipity_event_spartacus extends serendipity_event
     function rmkdir($dir, $sub = 'plugins') {
         global $serendipity;
 
+        if (serendipity_db_bool($this->get_config('use_ftp')) && !empty($this->get_config('ftp_password')) {
+            return $this->make_dir_via_ftp($dir);
+        }
+        
         $spaths = explode('/', $serendipity['serendipityPath'] . $sub . '/');
         $paths  = explode('/', $dir);
 
@@ -848,7 +904,7 @@ class serendipity_event_spartacus extends serendipity_event
         foreach($files AS $file) {
             $url    = $mirror . '/' . $sfloc . '/' . $file . '?rev=1.9999';
             $target = $pdir . $file;
-            @mkdir($pdir . $plugin_to_install);
+            $this->rmkdir($pdir . $plugin_to_install,$sub);
             $this->fileperm($pdir . $plugin_to_install, true);
             $this->fetchfile($url, $target);
             if (!isset($baseDir)) {
@@ -860,6 +916,58 @@ class serendipity_event_spartacus extends serendipity_event
         if (isset($baseDir)) {
             return $baseDir;
         }
+    }
+
+    function make_dir_via_ftp($dir) {
+        global $serendipity;
+        
+        if (!serendipity_db_bool($this->get_config('use_ftp'))) {
+            return false;
+        }
+        
+    	$ftp_server    = $this->get_config('ftp_server');
+    	$ftp_user_name = $this->get_config('ftp_username');
+    	$ftp_user_pass = $this->get_config('ftp_password');
+    	$basedir       = $this->get_config('ftp_basedir');
+    	$dir_rules     = intval($this->get_config('chmod_dir'), 8);
+
+        if (empty($ftp_server) || empty($ftp_user_name)) {
+            return false;
+        }
+
+    	$dir = str_replace($serendipity['serendipityPath'],"",$dir);
+    
+    	// set up basic connection and log in with username and password
+    	$conn_id       = ftp_connect($ftp_server); 
+    	$login_result  = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass); 
+    
+    	// check connection
+    	if ((!$conn_id) || (!$login_result)) { 
+        	$this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT);
+        	return false;
+        } else {
+        	$paths  = preg_split('@/@', $basedir.$dir,-1,PREG_SPLIT_NO_EMPTY);
+        	foreach ($paths as $path) {
+        	    // trying to change directory, if not succesfull, it means
+                // the directory does not exist and we must create it 
+        		if (!ftp_chdir($conn_id,$path)) {
+        			if (!ftp_mkdir($conn_id,$path)) {
+                        $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_MKDIR);
+                        return false;
+                    }
+        			if (!ftp_chmod($conn_id,$dir_rules,$path)) {
+                        $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CHMOD);
+                        return false;
+                    }
+        			if (!ftp_chdir($conn_id,$path)) {
+                        return false;
+                    }
+      		        $this->outputMSG('success',sprintf(PLUGIN_EVENT_SPARTACUS_FTP_SUCCESS, $path));
+        		}
+        	}
+        	ftp_close($conn_id);
+        	return true;        
+    	}
     }
 
     function event_hook($event, &$bag, &$eventData) {
@@ -1002,6 +1110,14 @@ class serendipity_event_spartacus extends serendipity_event
                     }
 
                     return false;
+                    break;
+
+                case 'backend_directory_create' :  
+                    if (serendipity_db_bool($this->get_config('use_ftp')) && (!is_dir($eventData))) {
+                        return $this->make_dir_via_ftp($eventData);
+                    }
+                
+                    return true;
                     break;
 
                 default:
