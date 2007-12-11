@@ -292,7 +292,7 @@ class serendipity_event_spartacus extends serendipity_event
     function rmkdir($dir, $sub = 'plugins') {
         global $serendipity;
 
-        if (serendipity_db_bool($this->get_config('use_ftp')) && !empty($this->get_config('ftp_password')) {
+        if (serendipity_db_bool($this->get_config('use_ftp')) && $this->get_config('ftp_password') != '') {
             return $this->make_dir_via_ftp($dir);
         }
         
