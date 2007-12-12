@@ -379,7 +379,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
             case 'displaydate':
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_REMOTERSS_DISPLAYDATE);
-                $propbag->add('description', PLUGIN_REMOTERSS_BLAHBLAH);
+                $propbag->add('description', PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH);
                 $propbag->add('default', 'true');
                 break;
 
@@ -480,24 +480,41 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             continue;
                         }
 
+                        echo '<div class="rss_item">';
                         if ($use_rss_link) {
-                            $content .= '<a href="' . htmlspecialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
+                            $content .= '<div class="rss_link"><a href="' . htmlspecialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
                         }
 
                         if (!empty($bulletimg)) {
                             $content .= '<img src="' . $bulletimg . '" border="0" alt="*" /> ';
                         }
 
+                        $is_first = true;
                         foreach($rss_elements AS $rss_element) {
                             $rss_element = trim($rss_element);
+                            
+                            if (!$is_first) {
+                                $content .= '<span class="rss_' . preg_replace('@[^a-z0-9]@imsU', '', $rss_element) . '">';
+                            }
+
                             if ($escape_rss) {
                                 $content .= $this->decode($item[$rss_element]);
                             } else {
                                 $content .= htmlspecialchars($this->decode($item[$rss_element]));
                             }
+                            
+                            if (!$is_first) {
+                                $content .= '</span>';
+                            }
+
+                            if ($is_first && $use_rss_link) {
+                                $content .= '</a></div>'; // end of first linked element
+                            }
+                            $is_first = false;
                         }
 
-                        if ($use_rss_link) {
+                        if ($is_first && $use_rss_link) {
+                            // No XML element has been configured.
                             $content .= '</a>';
                         }
 
@@ -506,9 +523,10 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         if (!($item['timestamp'] == -1) AND ($displaydate == 'true')) {
                             $content .= '<div class="serendipitySideBarDate">'
                                       . htmlspecialchars(serendipity_formatTime($dateformat, $item['timestamp'], false))
-                                      . '</div><br />';
+                                      . '</div>';
 
                         }
+                        echo '</div>'; // end of rss_item
                         ++$i;
                     }
 
