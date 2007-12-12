@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Make browser compatibility plugin bail out for IE7. Thanks to
+      Freudi from the forums.
+      
     * Add possibility to spartacus to upload files via FTP. This can
       bypass Safe_mode restrictions on your server to make Spartacus
       work for you. (VladaAjgl)
