@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit>
+  <filter>
+    <whitelist addUncoveredFilesFromWhitelist="false">
+      <directory>../include</directory>
+      <directory>../plugins</directory>
+        <exclude>
+          <file>../include/db/mysql.inc.php</file>
+          <file>../include/db/mysqli.inc.php</file>
+          <file>../include/db/pdo-postgres.inc.php</file>
+          <file>../include/db/postgres.inc.php</file>
+          <file>../include/db/mysql.inc.php</file>
+          <file>../include/db/sqlite.inc.php</file>
+          <file>../include/db/sqlrelay.inc.php</file>
+        </exclude>
+    </whitelist>
+  </filter>
+  <php>
+    <var name="S9Y_INSTALLDIR" value="http://localhost/s9y"/>
+    <var name="S9Y_LANG" value="en"/>
+    <var name="S9Y_SELENIUM_ENABLED" value="true"/>
+    <var name="S9Y_SELENIUM_HOST" value="127.0.0.1"/>
+    <var name="S9Y_SELENIUM_PORT" value="4444"/>
+    <var name="S9Y_SELENIUM_BROWSER" value="*firefox /usr/lib/firefox/firefox-bin"/>
+  </php>
+</phpunit>

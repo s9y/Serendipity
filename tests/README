@@ -1,0 +1,40 @@
+PHPUnit and Selenium RC
+=======================
+
+  1. Install PHPUnit
+
+     $ pear channel-discover pear.phpunit.de
+
+     $ pear install phpunit/phpunit
+
+  2. Download Selenium RC and copy selenium-server.jar to
+     /usr/local/bin/selenium-server.jar, for instance.
+
+
+Running the Tests
+=================
+
+  1. Start the Selenium RC server
+
+     $ java -jar /usr/local/bin/selenium-server.jar
+
+  2. $ cd /path/to/s9y/tests
+
+     $ phpunit --configuration config.xml FrontendTest
+
+
+Code Coverage
+=============
+
+  1. Copy *.php to the S9Y installation directory on your webserver.
+
+  2. In your php.ini, add the following settings
+
+     auto_prepend_file = /path/to/prepend.php
+     auto_append_file  = /path/to/append.php
+
+  3. Use
+
+       $ phpunit --configuration config.xml --coverage-html report FrontendTest
+
+     instead of the command above.
