@@ -5,7 +5,9 @@ Version 1.3 ()
 
     * Add more verbose CSS classes to remote RSS sidebar plugin, also
       only encapsulate the first XML-Item as link. All following
-      items are only encapsulated in <span>s. (garvinhicking)
+      items are only encapsulated in <span>s. Also add possible
+      plugin_remoterss.tpl smarty output template to this
+      plugin. (garvinhicking)
 
     * Make browser compatibility plugin bail out for IE7. Thanks to
       Freudi from the forums.
