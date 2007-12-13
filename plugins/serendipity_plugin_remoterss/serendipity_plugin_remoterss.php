@@ -263,7 +263,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('configuration', array('number', 'use_rss_link', 'show_rss_element', 'escape_rss', 'displaydate', 'dateformat', 'sidebartitle', 'rssuri', 'charset', 'target', 'cachetime', 'feedtype', 'bulletimg', 'markup'));
+        $propbag->add('configuration', array('sidebartitle', 'feedtype', 'rssuri', 'show_rss_element', 'smarty', 'number', 'use_rss_link', 'escape_rss', 'displaydate', 'dateformat', 'charset', 'target', 'cachetime', 'bulletimg', 'markup'));
         $propbag->add('groups', array('FRONTEND_EXTERNAL_SERVICES'));
     }
 
@@ -375,6 +375,12 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                 $propbag->add('default', '');
                 break;
 
+            case 'smarty':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        CATEGORY_PLUGIN_TEMPLATE);
+                $propbag->add('description', CATEGORY_PLUGIN_TEMPLATE_DESC);
+                $propbag->add('default',     false);
+                break;
 
             case 'displaydate':
                 $propbag->add('type', 'boolean');
@@ -452,6 +458,8 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         if (!$cachetime || !is_numeric($cachetime)) {
             $cachetime = 10800; // 3 hours in seconds
         }
+        
+        $smarty = serendipity_db_bool($this->get_config('smarty'));
 
         if (trim($rssuri)) {
             $feedcache = $serendipity['serendipityPath'] . 'templates_c/remoterss_cache_' . md5(preg_replace('@[^a-z0-9]*@i', '', $rssuri)) . '.dat';
@@ -475,12 +483,14 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                     $escape_rss   = serendipity_db_bool($this->get_config('escape_rss'));
                     $i = 0;
                     $content = '';
+                    $smarty_items = array();
                     while (($showAll || ($i < $number)) && ($item = $c->getNextItem())) {
                         if (empty($item['title'])) {
                             continue;
                         }
 
-                        echo '<div class="rss_item">';
+                        $content .= '<div class="rss_item">';
+
                         if ($use_rss_link) {
                             $content .= '<div class="rss_link"><a href="' . htmlspecialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
                         }
@@ -503,6 +513,10 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                                 $content .= htmlspecialchars($this->decode($item[$rss_element]));
                             }
                             
+                            if ($smarty) {
+                                $item['display_elements'][preg_replace('@[^a-z0-9]@imsU', '', $rss_element)] = $this->decode($item[$rss_element]);
+                            }
+                            
                             if (!$is_first) {
                                 $content .= '</span>';
                             }
@@ -515,7 +529,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
 
                         if ($is_first && $use_rss_link) {
                             // No XML element has been configured.
-                            $content .= '</a>';
+                            $content .= '</a></div>';
                         }
 
                         $content .= "<br />\n";
@@ -526,8 +540,28 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                                       . '</div>';
 
                         }
-                        echo '</div>'; // end of rss_item
+                        
+                        if ($smarty) {
+                            $smarty_items['items'][$i] = $item;
+                            $smarty_items['items'][$i]['css_class'] = preg_replace('@[^a-z0-9]@imsU', '', $rss_element);
+                            foreach($item AS $key => $val) {
+                                $smarty_items['items'][$i]['decoded_' . str_replace(':', '_', $key)] = $this->decode($key);
+                            }
+                        }
+                        $content .= '</div>'; // end of rss_item
                         ++$i;
+                    }
+                    
+                    if ($smarty) {
+                        $smarty_items['use_rss_link'] = $use_rss_link;
+                        $smarty_items['bulletimg']    = $bulletimg;
+                        $smarty_items['escape_rss']   = $escape_rss;
+                        $smarty_items['displaydate']  = $displaydate;
+                        $smarty_items['dateformat']   = $dateformat;
+                        $smarty_items['target']       = $target;
+
+                        $serendipity['smarty']->assign_by_ref('remoterss_items', $smarty_items);
+                        $content = $this->parseTemplate('plugin_remoterss.tpl');
                     }
 
                     $this->debug('Caching Feed (' . strlen($content) . ' bytes)');

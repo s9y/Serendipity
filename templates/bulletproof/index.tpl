@@ -58,6 +58,7 @@
 {else}
     {serendipity_hookPlugin hook="frontend_header"}
 {/if}
+
 {if $is_raw_mode != true}
 
     <!-- #skiplinks: these are links used to navigate quickly in text-based browsers -->
