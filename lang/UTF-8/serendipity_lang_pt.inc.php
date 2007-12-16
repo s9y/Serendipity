@@ -538,7 +538,7 @@
 @define('ALREADY_INSTALLED', 'Já instalado');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Selecione o plugin que você deseja instalar');
 @define('INSTALL_OFFSET', 'Offset temporal no servidor');
-@define('STICKY_POSTINGS', 'Artigos sacanas');
+@define('STICKY_POSTINGS', 'Postagens Fixas');
 @define('INSTALL_FETCHLIMIT', 'Entradas que serão mostradas na primeira página');
 @define('INSTALL_FETCHLIMIT_DESC', 'Números de entradas para mostrar na primeira página');
 @define('IMPORT_ENTRIES', 'Importar dados');
