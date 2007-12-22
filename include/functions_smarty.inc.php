@@ -744,8 +744,10 @@ function &serendipity_smarty_printTrackbacks($params, &$smarty) {
         return;
     }
 
-    $tb =& serendipity_fetchTrackbacks($params['entry']);
-    return serendipity_printTrackbacks($tb);
+    $trackbacks =& serendipity_fetchTrackbacks($params['entry']);
+
+    $out = serendipity_printComments($trackbacks, VIEWMODE_LINEAR, 0, null, 'TRACKBACKS', 'trackbacks.tpl');
+    return $out;
 }
 
 /**

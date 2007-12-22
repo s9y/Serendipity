@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Added hooks to trackback listing in order to let plugins change 
+      it (the avatar plugin in example) (brockhaus)
+
     * Add more verbose CSS classes to remote RSS sidebar plugin, also
       only encapsulate the first XML-Item as link. All following
       items are only encapsulated in <span>s. Also add possible
