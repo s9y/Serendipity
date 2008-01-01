@@ -254,3 +254,8 @@ ul.staticpage_navigation li {
     display: inline;
     font-style: normal;
 }
+
+.published {
+    border-bottom: none;
+    cursor: auto;
+}
