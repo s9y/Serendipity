@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Fix displaying entry title in the backend section exactly like
+      in the frontend, thanks to Alex (garvinhicking)
+
     * Added hooks to trackback listing in order to let plugins change 
       it (the avatar plugin in example) (brockhaus)
 
