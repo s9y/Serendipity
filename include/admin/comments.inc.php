@@ -78,6 +78,23 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     }
 }
 
+if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'pending' && serendipity_checkFormToken()) {
+    $sql = "SELECT c.*, e.title, a.email as authoremail, a.mail_comments
+            FROM {$serendipity['dbPrefix']}comments c
+            LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
+            LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
+            WHERE c.id = " . (int)$serendipity['GET']['id']  ." AND status = 'approved'";
+    $rs  = serendipity_db_query($sql, true);
+
+    if ($rs === false) {
+        echo ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
+    } else {
+
+        serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id'], true, true);
+        echo DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
+    }
+}
+
 /* We are asked to delete a comment */
 if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'delete' && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
@@ -469,6 +486,9 @@ foreach ($sql as $rs) {
         </table>
 <?php if ($comment['status'] == 'pending') { ?>
           <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]=<?php echo $comment['id'] ?>&amp;<?php echo serendipity_setFormToken('url'); ?>" class="serendipityIconLink" title="<?php echo APPROVE; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/accept.png'); ?>" alt="<?php echo APPROVE ?>" /><?php echo APPROVE ?></a>
+<?php } ?>
+<?php if ($comment['status'] == 'approved') { ?>
+          <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]=<?php echo $comment['id'] ?>&amp;<?php echo serendipity_setFormToken('url'); ?>" class="serendipityIconLink" title="<?php echo SET_TO_MODERATED; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/clock.png'); ?>" alt="<?php echo SET_TO_MODERATED ?>" /><?php echo SET_TO_MODERATED ?></a>
 <?php } ?>
 <?php if ($comment['excerpt']) { ?>
           <a href="#c<?php echo $comment['id'] ?>" onclick="FT_toggle(<?php echo $comment['id'] ?>); return false;" title="<?php echo VIEW; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo TOGGLE_ALL; ?>" /><span id="<?php echo $comment['id'] ?>_text"><?php echo TOGGLE_ALL ?></span></a>
