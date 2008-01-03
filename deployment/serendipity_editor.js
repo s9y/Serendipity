@@ -260,6 +260,7 @@ function noWysiwygAdd( str, textarea )
         eltarget = document.forms[0].elements[0];
     }
     
+    wrapSelection(eltarget, str, '');
     eltarget.focus();
 }
 
@@ -324,12 +325,12 @@ function serendipity_imageSelector_done(textarea)
 
     floating = 'center';
     if (f['serendipity[align]'][0].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
     } else if (f['serendipity[align]'][1].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
         floating = 'left';
     } else if (f['serendipity[align]'][2].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
         floating = 'right';
     }
 
