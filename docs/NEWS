@@ -3,6 +3,10 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Insert "serendipity_image_center", "serendipity_image_left" and
+      "serendipity_image_right" CSS classes to the image tag, when
+      inserting an image from the mediadatabase (garvinhicking)
+
     * Fix displaying entry title in the backend section exactly like
       in the frontend, thanks to Alex (garvinhicking)
 
