@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_no.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
+<?php # $Id: serendipity_lang_no.inc.php 1993 2007-10-23 13:30:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Jo Christian Oterhals <oterhals@gmail.com>
@@ -899,3 +899,5 @@
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
+@define('SET_TO_MODERATED', 'Moderate');
+@define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');

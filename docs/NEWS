@@ -3,6 +3,10 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Add ability to set comments as "pending" again, even when already
+      approved in the comment-moderation backend panel.
+      (garvinhicking)
+
     * Insert "serendipity_image_center", "serendipity_image_left" and
       "serendipity_image_right" CSS classes to the image tag, when
       inserting an image from the mediadatabase (garvinhicking)

@@ -497,9 +497,10 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
  * @param   int         The ID of the comment to approve
  * @param   int         The ID of the entry a comment belongs to
  * @param   boolean     Whether to force approving a comment despite of its current status
+ * @param  boolean      If set to true, a comment will be moderated instead of approved.
  * @return boolean      Success or failure
  */
-function serendipity_approveComment($cid, $entry_id, $force = false) {
+function serendipity_approveComment($cid, $entry_id, $force = false, $moderate = false) {
     global $serendipity;
 
     /* Get data about the comment, we need this query because this function can be called from anywhere */
@@ -518,7 +519,11 @@ function serendipity_approveComment($cid, $entry_id, $force = false) {
         return false;
     }
 
-    $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
+    if ($moderate) {
+        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
+    } else {
+        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
+    }
     serendipity_db_query($sql);
 
     $field = ($rs['type'] == 'NORMAL' ? 'comments' : 'trackbacks');
@@ -531,14 +536,21 @@ function serendipity_approveComment($cid, $entry_id, $force = false) {
         $lm = (int)$rs['entry_last_modified'];
     }
 
-    $query = "UPDATE {$serendipity['dbPrefix']}entries SET $field=$field+1, last_modified=". $lm ." WHERE id='". (int)$entry_id ."'";
+    if ($moderate) {
+        $query = "UPDATE {$serendipity['dbPrefix']}entries SET $field=$field-1, last_modified=". $lm ." WHERE id='". (int)$entry_id ."'";
+    } else {
+        $query = "UPDATE {$serendipity['dbPrefix']}entries SET $field=$field+1, last_modified=". $lm ." WHERE id='". (int)$entry_id ."'";
+    }
     serendipity_db_query($query);
 
-    if ($serendipity['allowSubscriptions']) {
-        serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
+    if (!$moderate) {
+        if ($serendipity['allowSubscriptions']) {
+            serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
+        }
+
+        serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
     }
 
-    serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
     return true;
 }
 

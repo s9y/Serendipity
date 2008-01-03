@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_pt.inc.php 1854 2007-08-16 13:07:43Z garvinhicking $
+<?php # $Id: serendipity_lang_pt.inc.php 2077 2007-12-16 22:46:30Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Agner Olson <agner@agner.net>
@@ -538,7 +538,7 @@
 @define('ALREADY_INSTALLED', 'Já instalado');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Selecione o plugin que você deseja instalar');
 @define('INSTALL_OFFSET', 'Offset temporal no servidor');
-@define('STICKY_POSTINGS', 'Postagens Fixas');
+@define('STICKY_POSTINGS', 'Postagens fixas');
 @define('INSTALL_FETCHLIMIT', 'Entradas que serão mostradas na primeira página');
 @define('INSTALL_FETCHLIMIT_DESC', 'Números de entradas para mostrar na primeira página');
 @define('IMPORT_ENTRIES', 'Importar dados');
@@ -901,3 +901,5 @@
 @define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
+@define('SET_TO_MODERATED', 'Moderate');
+@define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
