@@ -8,3 +8,5 @@
         @define('PLUGIN_COMMENTS_MAXENTRIES', 'Anzahl an Kommentaren');
         @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Wieviele Kommentare sollen gezeigt werden? (Standard: 15)');
         @define('PLUGIN_COMMENTS_ABOUT', '%s zu%s');
+
+        @define('PLUGIN_COMMENTS_ADDURL', 'Kommentatoren URL anzeigen bei');

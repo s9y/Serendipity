@@ -35,12 +35,27 @@ class serendipity_plugin_comments extends serendipity_plugin
                                              'max_chars',
                                              'max_entries',
                                              'dateformat',
-                                             'viewmode'));
+                                             'viewmode',
+                                             'showurls'));
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+            case 'showurls':
+                $urltypes = array(
+                    'none'       => NONE,
+                    'comments'   => COMMENTS,
+                    'trackbacks' => TRACKBACKS,
+                    'all'        => COMMENTS . ' + ' . TRACKBACKS
+                );
+                $propbag->add('type',        'select');
+                $propbag->add('name',        PLUGIN_COMMENTS_ADDURL);
+                $propbag->add('description', '');
+                $propbag->add('select_values', $urltypes);
+                $propbag->add('default',     'trackbacks');
+                break;
+
             case 'viewmode':
                 $types = array(
                     'comments'   => COMMENTS,
@@ -160,8 +175,11 @@ class serendipity_plugin_comments extends serendipity_plugin
                         $comment .= ' [...]';
                     }
                 }
-
-                if ($row['comment_type'] == 'TRACKBACK' && $row['comment_url'] != '') {
+                
+                $showurls = $this->get_config('showurls','trackbacks');
+                $isTrackBack = $row['comment_type'] == 'TRACKBACK' || $row['comment_type'] == 'PINGBACK';
+                
+                if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
                     $user = '<a class="highlight" href="' . htmlspecialchars(strip_tags($row['comment_url'])) . '" title="' . htmlspecialchars(strip_tags($row['comment_title'])) . '">' . htmlspecialchars(strip_tags($row['user'])) . '</a>';
                 } else {
                     $user = htmlspecialchars(strip_tags($row['user']));
