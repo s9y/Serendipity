@@ -320,6 +320,9 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
         $title = $url;
     }
 
+    // Decode HTML Entities
+    $excerpt = trackback_body_strip($excerpt);
+    
     $comment = array(
         'title'   => $title,
         'url'     => $url,
@@ -489,6 +492,17 @@ function fetchPingbackData( &$comment) {
         return;
     }
     
+    // Max amount of characters fetched from the page doing a pingback:
+    $fetchPageMaxLenght = 200;
+    if (isset($serendipity['pingbackFetchPageMaxLenght'])){
+        $fetchPageMaxLenght = $serendipity['pingbackFetchPageMaxLenght'];
+    }
+    // HTML Entity Encoding
+    $entityEncoding = "UTF-8";
+    if (isset($serendipity['pingbackEntityEncoding'])){
+        $entityEncoding = $serendipity['pingbackEntityEncoding'];
+    }
+    
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
     
@@ -507,7 +521,7 @@ function fetchPingbackData( &$comment) {
 
         // Get a title
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
-            $comment['title'] = strip_tags($matches[1]);
+            $comment['title'] = html_entity_decode(strip_tags($matches[1]),ENT_COMPAT,$entityEncoding);
         }
         
         // Try to get content from first <p> tag on:
@@ -519,16 +533,10 @@ function fetchPingbackData( &$comment) {
         }
         // Get a part of the article
         if (!empty($body)) {
-            $body = strip_tags($body);
+            $body = trackback_body_strip($body);
 
-            //TODO: Serendipity comes into trouble wit html_entity_decode and "Umlaute"
-            $body = str_replace(array("&nbsp;"),array(' '),$body);
-            
-            // replace whitespace with single space            
-            $body = preg_replace('@\s+@s', ' ', $body);
-            
             // truncate the text to 200 chars
-            $arr = str_split($body, 200);
+            $arr = str_split($body, $fetchPageMaxLenght);
             $body = $arr[0];
 
             $comment['comment'] = $body . '[..]';
@@ -537,6 +545,27 @@ function fetchPingbackData( &$comment) {
     
     if (function_exists('serendipity_request_end')) serendipity_request_end();
     
+}
+
+/**
+ * Strips any unneeded code from trackback / pingback bodies returning pure (UTF8) text.
+ */
+function trackback_body_strip( $body ){
+    // replace non brakeable space with normal space:            
+    $body = str_replace('&nbsp;', ' ', $body);
+
+    // HTML Entity Encoding
+    $entityEncoding = "UTF-8";
+    if (isset($serendipity['pingbackEntityEncoding'])){
+        $entityEncoding = $serendipity['pingbackEntityEncoding'];
+    }
+    // strip html entities and tags.
+    $body = html_entity_decode(strip_tags($body),ENT_COMPAT,$entityEncoding);
+
+    // replace whitespace with single space            
+    $body = preg_replace('@\s+@s', ' ', $body);
+    
+    return $body;
 }
 
 /**

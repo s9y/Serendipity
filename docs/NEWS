@@ -3,6 +3,16 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Pingback/Trackback textfetching: HTML Entities are now converted
+      to characters. Character encoding defaults to UTF-8 but can be 
+      configured via $serendipity['pingbackEntityEncoding'] = "UTF-8"
+      in your serendipity_config_local.php (brockhaus)
+
+    * For Pingback it is now possible to define the maximum amount of
+      characters while fetching text of the remote site. Add 
+      $serendipity['pingbackFetchPageMaxLenght'] = 200 to your 
+      serendipity_config_local.php. (brockhaus)
+
     * Add ability to set comments as "pending" again, even when already
       approved in the comment-moderation backend panel.
       (garvinhicking)
