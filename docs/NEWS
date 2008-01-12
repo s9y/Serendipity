@@ -3,6 +3,11 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Sitebar plugin comments: URLs of writers now are shown for all 
+      entries not only for trackbacks. You may configure if they should
+      be shown for all, none, normal writers or trackback/pingbacks.
+      (brockhaus)
+
     * Pingback/Trackback textfetching: HTML Entities are now converted
       to characters. Character encoding defaults to UTF-8 but can be 
       configured via $serendipity['pingbackEntityEncoding'] = "UTF-8"

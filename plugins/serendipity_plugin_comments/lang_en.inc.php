@@ -15,4 +15,6 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'How many comments will be shown? (Default: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s about%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anon');
-?>
+
+@define('PLUGIN_COMMENTS_ADDURL', 'Add writers URL to');
+
