@@ -494,15 +494,9 @@ function fetchPingbackData( &$comment) {
     
     // Max amount of characters fetched from the page doing a pingback:
     $fetchPageMaxLenght = 200;
-    if (isset($serendipity['pingbackFetchPageMaxLenght'])){
-        $fetchPageMaxLenght = $serendipity['pingbackFetchPageMaxLenght'];
+    if (isset($serendipity['pingbackFetchPageMaxLength'])){
+        $fetchPageMaxLenght = $serendipity['pingbackFetchPageMaxLength'];
     }
-    // HTML Entity Encoding
-    $entityEncoding = "UTF-8";
-    if (isset($serendipity['pingbackEntityEncoding'])){
-        $entityEncoding = $serendipity['pingbackEntityEncoding'];
-    }
-    
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
     
@@ -521,7 +515,7 @@ function fetchPingbackData( &$comment) {
 
         // Get a title
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
-            $comment['title'] = html_entity_decode(strip_tags($matches[1]),ENT_COMPAT,$entityEncoding);
+            $comment['title'] = html_entity_decode(strip_tags($matches[1]), ENT_COMPAT, LANG_CHARSET);
         }
         
         // Try to get content from first <p> tag on:
@@ -554,13 +548,8 @@ function trackback_body_strip( $body ){
     // replace non brakeable space with normal space:            
     $body = str_replace('&nbsp;', ' ', $body);
 
-    // HTML Entity Encoding
-    $entityEncoding = "UTF-8";
-    if (isset($serendipity['pingbackEntityEncoding'])){
-        $entityEncoding = $serendipity['pingbackEntityEncoding'];
-    }
     // strip html entities and tags.
-    $body = html_entity_decode(strip_tags($body),ENT_COMPAT,$entityEncoding);
+    $body = html_entity_decode(strip_tags($body), ENT_COMPAT, LANG_CHARSET);
 
     // replace whitespace with single space            
     $body = preg_replace('@\s+@s', ' ', $body);
