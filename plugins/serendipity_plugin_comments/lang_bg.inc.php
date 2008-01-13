@@ -13,4 +13,4 @@
     @define('PLUGIN_COMMENTS_MAXENTRIES', 'Максимален брой на показваните коментари');
     @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Колко коментара най-много да бъдат показани (по подразбиране: 15)');
     @define('PLUGIN_COMMENTS_ABOUT', '%s за%s');
-    @define('PLUGIN_COMMENTS_ANONYMOUS', 'anon');
+    @define('PLUGIN_COMMENTS_ANONYMOUS', 'анонимен');
