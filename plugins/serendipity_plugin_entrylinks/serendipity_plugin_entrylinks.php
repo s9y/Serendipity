@@ -22,7 +22,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
         $propbag->add('description',   PLUGIN_ENTRYLINKS_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.01');
+        $propbag->add('version',       '1.02');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -141,7 +141,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
             }
         }
 
-        $references = serendipity_db_query("SELECT link, max(name) as name FROM {$serendipity['dbPrefix']}references WHERE entry_id = " . $id . " AND type = '' GROUP BY link");
+        $references = serendipity_db_query("SELECT link, max(name) as name FROM {$serendipity['dbPrefix']}references WHERE entry_id = " . $id . " AND type = '' GROUP BY link ORDER BY id");
         if (is_array($references)) {
             $links = '<ul style="margin: 5px; padding: 10px; text-align: left">';
             foreach($references AS $key => $row) {
