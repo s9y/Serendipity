@@ -287,6 +287,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $id = (int)$matches[1];
+    if ($id === 0) {
+        $id = false;
+    }
 
     serendipity_track_referrer($id);
     $track_referer = false;
