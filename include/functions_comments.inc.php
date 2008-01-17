@@ -181,10 +181,11 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
     $comments = serendipity_db_query($query, false, 'assoc');
 
     if (!is_array($comments)) {
-        return array();
+        $comments = array();
     }
 
-    serendipity_plugin_api::hook_event('fetchcomments', $comments);
+    $addData = array('id' => $id, 'limit' => $limit, 'order' => $order, 'showAll' => $showAll, 'type' => $type, 'where' => $where);
+    serendipity_plugin_api::hook_event('fetchcomments', $comments, $addData);
 
     return $comments;
 }
