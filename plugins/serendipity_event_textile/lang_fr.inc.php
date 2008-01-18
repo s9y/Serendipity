@@ -15,7 +15,7 @@
 
 @define('PLUGIN_EVENT_TEXTILE_NAME', 'Balises: Textile');
 @define('PLUGIN_EVENT_TEXTILE_DESC', 'Permet l\'utilisation de balises Textile dans le texte des billets');
-@define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Syntaxe <a href="http://www.textism.com/tools/textile/">Textile</a> autorisée');
+@define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Syntaxe <a href="%s">Textile</a> autorisée');
 
 /* vim: set sts=4 ts=4 expandtab : */
 ?>

@@ -7,6 +7,6 @@
 
 @define('PLUGIN_EVENT_TEXTILE_NAME', 'Formato: Textile');
 @define('PLUGIN_EVENT_TEXTILE_DESC', 'Analizar la salida a través del convertidor Textile');
-@define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Formato <a href="http://www.textism.com/tools/textile/">Textile</a> permitido');
+@define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Formato <a href="%s">Textile</a> permitido');
 
 ?>
