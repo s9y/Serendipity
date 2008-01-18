@@ -188,7 +188,10 @@ class serendipity_event_textile extends serendipity_event
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
-                        echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . PLUGIN_EVENT_TEXTILE_TRANSFORM . '</div>';
+                        $url = $this->get_config('textile_version') == 1
+                                   ? 'http://www.textism.com/tools/textile/'
+                                   : 'http://thresholdstate.com/articles/4312/the-textile-reference-manual';
+                        echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . sprintf(PLUGIN_EVENT_TEXTILE_TRANSFORM, $url) . '</div>';
                     }
                     return true;
                     break;

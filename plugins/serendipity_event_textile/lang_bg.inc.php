@@ -8,7 +8,7 @@
 
     @define('PLUGIN_EVENT_TEXTILE_NAME', 'Форматиране на текст: Textile');
     @define('PLUGIN_EVENT_TEXTILE_DESC', 'Форматиране на текст чрез Textile конвертор.');
-    @define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Форматиране <a href="http://www.textism.com/tools/textile/">Textile</a> е разрешено');
+    @define('PLUGIN_EVENT_TEXTILE_TRANSFORM', 'Форматиране <a href="%s">Textile</a> е разрешено');
     @define('PLUGIN_EVENT_TEXTILE_VERSION', 'Версия на Textile');
     @define('PLUGIN_EVENT_TEXTILE_VERSION_DESCRIPTION', 'Коя версия на Textile искате да използвате?');
     @define('PLUGIN_EVENT_TEXTILE_UNESCAPE', 'Конвертиране на HTML кавички в истински кавички?');
