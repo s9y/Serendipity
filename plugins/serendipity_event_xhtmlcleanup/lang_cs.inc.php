@@ -1,0 +1,16 @@
+<?php # $Id: lang_cs.inc.php 1381 2007-12-19 23:55:00 VladaAjgl $
+
+/**
+ *  @version $Revision: 1381 $
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
+
+@define('PLUGIN_EVENT_XHTMLCLEANUP_NAME', 'Oprava nejèastìjších XHTML chyb');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_DESC', 'Plugin opravuje nejbìžnìjší chyby XHTML jazyka. Pomáhá tak udržet výsledný kód XHTML kompatibilní podle standardù.');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_XHTML', 'Kódovat zpracovaná XML data?');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_XHTML_DESC', 'Tento plugin používá XML parsování pro zajištìní validity XHTML kódu. Toto parsování mùže zpùsobit, že budou validní entity (znaky) pøevedeny na "unsescaped" entity (XHTML kódy). Proto plugin všechny entity znovu kóduje po zpracování textu. Vypnìte tuto volbu, pokud pozorujete dvojité rekódování!');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8', 'Èištìní UTF-8 znakù?');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Pokud je zapnuto, HTML entity zpùsobené pøevedením znakù v kódování Unicode UTF-8 budou správnì pøevedeny nazpìt na znaky UTF-8 a nebudou zakódovány do podivných znakù v zobrazení stránky.');
+
+?>

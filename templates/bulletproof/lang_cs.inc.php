@@ -1,0 +1,81 @@
+<?php # $Id: lang_cs.inc.php 1.0 2008/01/20 01:53:00 VladaAjgl $
+
+/**
+ *  @version $Revision: 1.0 $
+ *  @author Vladimir Ajgl <vlada@ajgl.cz>
+ *  EN-Revision: Revision of lang_en.inc.php
+ *  Translated on 2007/12/07 
+ */
+ 
+ // Colorsets
+@define('THEME_COLORSET',               'Barevná sada');
+@define('USER_STYLESHEET',              'Použít doplòující uživatelský soubor s css styly. Uživatel musí tento soubor ruènì vytvoøit v adresáøi šablony bulletproof. Tento soubor musí být pojmenovám user.css a mùže být použit k nahrazení nìkterých stylù.');
+// Layout
+@define('LAYOUT_TYPE',                  'Uspoøádání blogu (B = Tìlo blogu, S = Sloupec (postranní), ON = Obsah nejdøíve)');
+@define('LAYOUT_SBS',                   'Tøi sloupce, S-B-S');
+@define('LAYOUT_BSS',                   'Tøi sloupce, B-S-S, ON');
+@define('LAYOUT_SSB',                   'Tøi sloupce, S-S-B');
+@define('LAYOUT_SB',                    'Dva sloupce, S-B');
+@define('LAYOUT_BS',                    'Dva sloupce, B-S, ON');
+@define('LAYOUT_SC',                    'Jeden sloupec, Postranní sloupec pod ním, ON');
+@define('JAVASCRIPT_COLUMNS',           'Vytvoø stejnì vysoké sloupce pomocí javascriptu (trochu zpomalí vykreslování stránky).');
+// Custom header
+@define('BP_CUSTOM_HEADER',             'Vlastní obrázek v záhlaví stránky');
+@define('BP_HEADER_IMAGE',              'Vyber obrázek');
+@define('BP_HEADER_TYPE',               'Opakování obrázku v záhlaví');
+@define('BP_HEADER_BANNER',             'Banner (neopakovat)');
+@define('BP_HEADER_HTILED',             'Vodorovnì opakovaný');
+@define('BP_HEADER_VTILED',             'Svisle opakovaný');
+@define('BP_HEADER_BTILED',             'Vodorovnì i svisle opakovaný');
+@define('BP_HEADER_POSHOR',             'Vodorovné zarovnání');
+@define('BP_HEADER_POSVER',             'Svislé zarovnání');
+@define('BP_CENTER',                    'na støed');
+@define('BP_TOP',                       'nahoøe');
+@define('BP_BOTTOM',                    'dole');
+// Fahrner Image Replacement
+@define('FIR_BTITLE',                   'Zobrazovat název blogu v záhlaví');
+@define('FIR_BDESCR',                   'Zobrazovat popis (podnadpis) blogu v záhlaví');
+// Date format
+@define('BP_DATE_FORMAT',               'Formát data');
+// Entry footer
+@define('ENTRY_FOOTER_POS',             'Umístìní patièky/záhlaví pøíspìvku (takové to s informacemi o autoru, datu vydání, zaøazení do kategorií; rozdìlení patièky = kategorie pøíspìvku nad, zbytek pod pøíspìvkem)');
+@define('BELOW_ENTRY',                  'Patièka = pod pøíspìvkem');
+@define('BELOW_TITLE',                  'Záhlaví = pod nadpisem pøíspìvku');
+@define('SPLIT_FOOTER',                 'Rozdìlit patièku/záhlaví');
+@define('FOOTER_AUTHOR',                'Zobrazit v patièce autora');
+@define('FOOTER_CATEGORIES',            'Zobrazit v patièce kategorie');
+@define('FOOTER_TIMESTAMP',             'Zobrazit v patièce èas zveøejnìní');
+@define('FOOTER_COMMENTS',              'Zobrazit v patièce poèet komentáøù');
+@define('FOOTER_TRACKBACKS',            'Zobrazit v patièce poèet odezev');
+@define('ALT_COMMTRACK',                'Použít alternativní zobrazení poètu komentáøù a odezev (napø. "Žádné komentáøe" nebo "1 komentáø" místo "Komentáøù (0)" nebo "Komentáøù (1)")');
+@define('SHOW_ADDTHIS_WIDGET',          'Zobrzit záložku AddThis (http://www.addthis.com) v patièce pøíspìvku');
+@define('ADDTHIS_ACCOUNT',              'Èíslo úètu AddThis.com. Není vyžadováno, ale pokud je zadáno, umožní vést statistiku, jak Vás vaši ètenáøi ètou, jak si Vás ukládají do záložek a jak si mezi sebou sdílí obsah Vašich stránek.');
+@define('SHOW_STICKY_ENTRY_FOOTER',     'Zobrazit patièku u stálých (pøilepených) pøíspìvkù (vyžaduje nainstalování pluginu událostí "Rozšíøené vlastnosti pøíspìvkù")');
+@define('SHOW_STICKY_ENTRY_HEADING',    'Zobraz nadpis u stálých (pøilepených) pøíspìvkù (vyžaduje nainstalování pluginu událostí "Rozšíøené vlastnosti pøíspìvkù")');
+// Page footer next page  and previous page links
+@define('PREV_NEXT_STYLE',              'Zobrazit patièku "další/pøedchozí pøíspìvek" ve tvaru');
+@define('PREV_NEXT_TEXT',               'Text');
+@define('PREV_NEXT_TEXT_ICON',          'Text a ikonka');
+@define('PREV_NEXT_ICON',               'Ikonka');
+// coComment support
+@define('COCOMMENT_ACTIVE',             'Vložit coComment (http://www.cocomment.com) do formuláøe komentáøù');
+// Counter code
+@define('COUNTER_CODE',                 'Vložit kód poèítadla pøístupù a/nebo statistik webu');
+@define('USE_COUNTER',                  'Použít výše zadaný kód poèítadla/statistik?');
+// Additional footer text
+@define('FOOTER_TEXT',                  'Následující text bude vložen do patièky pøíspìvkù');
+@define('USE_FOOTER_TEXT',              'Vložit výše zadaný text do patièky?');
+//Sitenav
+@define('SITENAV_POSITION',             'Poloha navigaèní lišty');
+@define('SITENAV_NONE',                 'Žádná navigaèní lišta');
+@define('SITENAV_ABOVE',                'Nad obrázkem v záhlaví stránky');
+@define('SITENAV_BELOW',                'Pod obrázkem v záhlaví stránky');
+@define('SITENAV_LEFT',                 'Na zaèátku LEVÉHO postranního sloupce');
+@define('SITENAV_RIGHT',                'Na zaèátku PRAVÉHO postranního sloupce');
+@define('SITENAV_FOOTER',               'Zobraz navigaèní lištu v patièce stránky (pokud je v pøedchozí volbì vybráno "Žádná navigaèní lišta", nebude zobrazena nikdy bez ohledu na tuto volbu)');
+@define('SITENAV_QUICKSEARCH',          'Zobrazit políèko rychlého vyhledávání v navigaèní lištì (zobrazuje se pouze v navigaèní lištì nad nebo pod obrázkem v záhlaví stránky. Je-li navigaèní lišta v postranních sloupcích, vyhledávací políèko není nikdy zobrazeno.)');
+@define('SITENAV_TITLE',                'Nadpis pro navigaèní lištu/menu (pouze pokud je zobrazena na zaèátku postranního sloupce)');
+@define('SITENAV_TITLE_TEXT',           'Hlavní menu');
+@define('NAVLINK_AMOUNT',               'Zadejte poèet odkazù navigaèní lišty (ihned po zadání této volby kliknìte na "Uloži" a obnovte stránku)');
+@define('NAV_LINK_TEXT',                'Test odkazu');
+@define('NAV_LINK_URL',                 'URL adresa odkazu');
