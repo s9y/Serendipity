@@ -493,9 +493,9 @@ function fetchPingbackData( &$comment) {
     }
     
     // Max amount of characters fetched from the page doing a pingback:
-    $fetchPageMaxLenght = 200;
+    $fetchPageMaxLength = 200;
     if (isset($serendipity['pingbackFetchPageMaxLength'])){
-        $fetchPageMaxLenght = $serendipity['pingbackFetchPageMaxLength'];
+        $fetchPageMaxLength = $serendipity['pingbackFetchPageMaxLength'];
     }
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
@@ -530,7 +530,7 @@ function fetchPingbackData( &$comment) {
             $body = trackback_body_strip($body);
 
             // truncate the text to 200 chars
-            $arr = str_split($body, $fetchPageMaxLenght);
+            $arr = str_split($body, $fetchPageMaxLength);
             $body = $arr[0];
 
             $comment['comment'] = $body . '[..]';
