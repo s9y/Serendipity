@@ -15,6 +15,8 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('LAYOUT_SB','Две колони, S-B');
 @define('LAYOUT_BS','Две колони, B-S, CF');
 @define('LAYOUT_SC','Една колона, приставките отдолу, CF');
+@define('LAYOUT_SBF','');
+@define('LAYOUT_BSF','');
 @define('JAVASCRIPT_COLUMNS','Генериране на колони с еднаква височина (използва се Javascript, а това може да забави малко появата на страницата');
 // Custom header
 @define('BP_CUSTOM_HEADER','Изображение по избор на базата данни за хедъра на блога');

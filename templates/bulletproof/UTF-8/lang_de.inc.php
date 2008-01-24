@@ -10,6 +10,8 @@
 @define('LAYOUT_SB','Zweispaltig, Seitenleiste links');
 @define('LAYOUT_BS','Zweispaltig, Seitenleiste rechts, CF');
 @define('LAYOUT_SC','Einspaltig, Seitenleiste(n) unten, CF');
+@define('LAYOUT_SBF','Zweispaltig, Seitenleisten links + unten');
+@define('LAYOUT_BSF','Zweispaltig, Seitenleisten rechts + unten, CF');
 @define('JAVASCRIPT_COLUMNS','Gleich lange Spalten über Javascript erzeugen (Kann den Seitenaufbau verzögern.)');
 // Custom header
 @define('BP_CUSTOM_HEADER','Eigene Header-Grafik aus der Mediendatenbank verwenden');

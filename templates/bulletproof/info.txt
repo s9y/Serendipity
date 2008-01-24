@@ -1,4 +1,4 @@
 Name: Bulletproof v1.2 (s9y-bulletproof.com)
 Author: Bulletproof development team
-Date: 2007-12-07
+Date: 2008-01-24
 Require Serendipity: 1.2
