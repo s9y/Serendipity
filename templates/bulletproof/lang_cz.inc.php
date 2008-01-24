@@ -18,6 +18,8 @@
 @define('LAYOUT_SB',                    'Dva sloupce, S-B');
 @define('LAYOUT_BS',                    'Dva sloupce, B-S, ON');
 @define('LAYOUT_SC',                    'Jeden sloupec, Postranní sloupec pod ním, ON');
+@define('LAYOUT_SBF','');
+@define('LAYOUT_BSF','');
 @define('JAVASCRIPT_COLUMNS',           'Vytvoø stejnì vysoké sloupce pomocí javascriptu (trochu zpomalí vykreslování stránky).');
 // Custom header
 @define('BP_CUSTOM_HEADER',             'Vlastní obrázek v záhlaví stránky');

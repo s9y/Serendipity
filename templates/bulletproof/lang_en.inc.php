@@ -10,6 +10,8 @@
 @define('LAYOUT_SB','Two columns, S-B');
 @define('LAYOUT_BS','Two columns, B-S, CF');
 @define('LAYOUT_SC','One column, sidebars below, CF');
+@define('LAYOUT_SBF','Two columns, sidebars left + below');
+@define('LAYOUT_BSF','Two columns, sidebars right + below, CF');
 @define('JAVASCRIPT_COLUMNS','Generate equal heights columns using javascript (May slow down page rendering a little.)');
 // Custom header
 @define('BP_CUSTOM_HEADER','Custom header image from media database');

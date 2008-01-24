@@ -308,6 +308,76 @@
             </div>
         {/if}
 
+        {if $template_option.layouttype == '2sbf'}
+            <!-- case 7: 2 columns, left sidebar plus sidebar below -->
+            <div id="serendipityLeftSideBar" class="twoside layout2sb_left">
+                {if $template_option.sitenavpos == 'left'}
+                    <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <div id="sbsitenav" class="serendipitySideBarItem">
+                        <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
+                        <div class="serendipitySideBarContent">
+                            <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                        </div>
+                        <div class="serendipitySideBarFooter"></div>
+                    </div>
+                {/if}
+                {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
+            </div>
+            <div id="content" class="twomain layout2sb_content hfeed">
+                {$CONTENT}
+            </div>
+            <div id="serendipityRightSideBar" class="onefull layout1col_right_full">
+            {if $template_option.sitenavpos == 'right'}
+            <!-- #sbsitenav: like #sitenav, but placed within the sidebar -->
+                <div id="sbsitenav" class="serendipitySideBarItem">
+                    <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
+                    <div class="serendipitySideBarContent">
+            <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                    </div>
+                    <div class="serendipitySideBarFooter"></div>
+                </div>
+            {/if}
+            {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
+            </div>
+        {/if}
+
+        {if $template_option.layouttype == '2bsf'}
+            <!-- case 8: 2 columns, right sidebar plus sidebar below -->
+            <div id="content" class="twomain layout2bs_content hfeed">
+                {$CONTENT}
+            </div>
+            <div id="serendipityRightSideBar" class="twoside layout2bs_right">
+                {if $template_option.sitenavpos == 'right'}
+                    <!-- #sbsitenav: like #sitenav, but placed within the sidebar                    -->
+                    <div id="sbsitenav" class="serendipitySideBarItem">
+                        <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
+                        <div class="serendipitySideBarContent">
+                            <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                        </div>
+                        <div class="serendipitySideBarFooter"></div>
+                    </div>
+                {/if}
+                {if $rightSidebarElements > 0}{serendipity_printSidebar side="right"}{/if}
+            </div>
+            <div id="serendipityLeftSideBar" class="onefull layout1col_right_full">
+            {if $template_option.sitenavpos == 'left'}
+            <!-- #sbsitenav: like #sitenav, but placed within the sidebar -->
+                <div id="sbsitenav" class="serendipitySideBarItem">
+                    <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
+                    <div class="serendipitySideBarContent">
+            <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                    </div>
+                    <div class="serendipitySideBarFooter"></div>
+                </div>
+            {/if}
+            {if $leftSidebarElements > 0}{serendipity_printSidebar side="left"}{/if}
+            </div>
+        {/if}
+
         <!-- #footer: the page footer can be used for additional information             -->
         <div id="footer">
             {if $template_option.footer_text_toggle == 'true'}

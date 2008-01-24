@@ -49,7 +49,9 @@ $template_config = array(
                                  '3ssb' => LAYOUT_SSB,
                                  '2sb'  => LAYOUT_SB,
                                  '2bs'  => LAYOUT_BS,
-                                 '1col' => LAYOUT_SC)
+                                 '1col' => LAYOUT_SC,
+                                 '2sbf' => LAYOUT_SBF,
+                                 '2bsf' => LAYOUT_BSF)
     ),
     array(
         'var'           => 'jscolumns',
