@@ -404,8 +404,10 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         $serendipity['uriArguments'][]  = PATH_CATEGORIES;
         $serendipity['uriArguments'][]  = serendipity_db_escape_string($serendipity['GET']['category']) . '-multi';
     } elseif (preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
-        $is_multicat = true;
-        $serendipity['GET']['category'] = $multimatch[1];
+        if (stristr($multimatch[1], ';')) {
+            $is_multicat = true;
+            $serendipity['GET']['category'] = $multimatch[1];
+        }
     }
 
     $serendipity['GET']['action'] = 'read';
