@@ -1,6 +1,7 @@
 <?php # $Id$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
+# Improved by Vladimir Ajgl (vlada@ajgl.cz) 2008-01-26
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -1026,7 +1027,7 @@ function serendipity_guessMime($extension) {
         case 'jar':
             $mime = 'application/java-archive';
             break;
-            
+
         case 'ico':
             $mime = 'image/x-icon';
             break;
@@ -2271,35 +2272,76 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
             'val'   => $val,
             'title' => htmlspecialchars($parts[0])
         );
+        
+        if (!is_array($GLOBALS['IPTC'])) {
+            // Your templates config.inc.php or any of the language files can declare this variable,
+            // if you want to use other default settings for this. No interface ability to declare this
+            // yet, sorry.
+            $GLOBALS['IPTC'] = array(
+                'DATE'          => array('DateCreated'),
+                'RUN_LENGTH'    => array('RunLength'),
+                'DPI'           => array('XResolution'),
+                'COPYRIGHT'     => array('Creator'),
+                'TITLE'         => array('Title', 'ObjectName'),
+                'COMMENT1'      => array('Description'),
+                'COMMENT2'      => array('Keywords', 'PhotoLocation')
+            );
+        }
 
         if (empty($val)) {
             switch($parts[0]) {
                 case 'DATE':
-                    $media['base_property'][$propkey]['val'] = serendipity_strftime(DATE_FORMAT_SHORT, serendipity_pickKey($media['metadata'], 'DateCreated', $now));
-                    break;
+                    $default_iptc_val = $now;
 
                 case 'RUN_LENGTH':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'RunLength', '00:00:00.00');
-                    break;
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = '00:00:00.00';
+                    }
 
                 case 'DPI':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'XResolution', 72);
-                    break;
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = '72';
+                    }
 
                 case 'COPYRIGHT':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'Creator', $serendipity['serendipityUser']);
-                    break;
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = $serendipity['serendipityUser'];
+                    }
 
                 case 'TITLE':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'Title', $media['internal']['realname']);
-                    break;
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = $media['internal']['realname'];
+                    }
 
                 case 'COMMENT1':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'Keywords', '');
-                    break;
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = '';
+                    }
 
                 case 'COMMENT2':
-                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'PhotoLocation', '');
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = '';
+                    }
+
+                    $media['base_property'][$propkey]['val'] = serendipity_pickKey($media['metadata'], 'Keywords', '');
+
+                    $new_iptc_val     = false;
+                    foreach($GLOBALS['IPTC'][$parts[0]] AS $iptc_key) {
+                        if (empty($new_iptc_val)) {
+                            $new_iptc_val = serendipity_pickKey($media['metadata'], $iptc_key, '');
+                        }
+                    }
+
+                    if (empty($new_iptc_val)) {
+                        $new_iptc_val = $default_iptc_val;
+                    }
+
+                    if ($parts[0] == 'DATE') {
+                        $media['base_property'][$propkey]['val'] = serendipity_strftime(DATE_FORMAT_SHORT, $new_iptc_val);
+                    } else {
+                        $media['base_property'][$propkey]['val'] = $new_iptc_val;
+                    }
+
                     break;
 
                 default:
@@ -2574,7 +2616,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
 
     $file['links'] = array('imagelinkurl' => $file['full_file']);
 
-	$file['dim']       = @getimagesize($file['full_thumb'], $file['header']);
+	$file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
+	$file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
     $file['is_image']  = serendipity_isImage($file);
 
     if ($file['is_image']) {
@@ -2750,8 +2793,20 @@ function serendipity_metaFieldConvert(&$item, $type) {
             break;
 
         case 'date2':
-            $parts = explode(':', $item);
+            $parts = preg_split('&[ :]&', $item);
             return mktime($parts[3], $parts[4], $parts[5], $parts[1], $parts[2], $parts[0]);
+            break;
+
+        case 'IPTCdate':
+            preg_match('@(\d{4})(\d{2})(\d{2})@',$item,$parts);
+            return mktime(0, 0, 0, intval($parts[2]), intval($parts[3]), intval($parts[1]));
+            break;
+
+        case 'IPTCtime':
+            preg_match('@(\d{2})(\d{2})(\d{2})([\+-])(\d{2})(\d{2})@',$item,$parts);
+            $time = serendipity_strftime("%H:%M",mktime(intval($parts[1]), intval($parts[2]), intval($parts[3]), 0, 0, 0));
+            $timezone = serendipity_strftime("%H:%M",mktime(intval($parts[5]), intval($parts[6]), 0, 0, 0, 0));
+            return $time." GMT".$parts[4].$timezone;
             break;
 
         case 'rdf':
@@ -2859,8 +2914,8 @@ function &serendipity_getMetaData($file, &$info) {
     '2#035' => 'ReleaseTime',
     '2#037' => 'ExpirationDate',
     '2#038' => 'ExpirationTime',
-    '2#055' => 'DateCreated',
-    '2#060' => 'TimeCreated',
+    '2#055' => 'IPTCDateCreated',
+    '2#060' => 'IPTCTimeCreated',
     '2#062' => 'DigitalDateCreated',
     '2#063' => 'DigitalTimeCreated',
     '2#065' => 'Software',
@@ -2955,7 +3010,7 @@ function &serendipity_getMetaData($file, &$info) {
     if (!file_exists($file)) {
         return $ret;
     }
-
+    
     if (function_exists('iptcparse') && is_array($info) && isset($info['APP13'])) {
         $iptc = iptcparse($info['APP13']);
         foreach($IPTC_Fields AS $field => $desc) {
@@ -2965,6 +3020,15 @@ function &serendipity_getMetaData($file, &$info) {
                 } else {
                     $ret['IPTC'][$desc] = trim($iptc[$field]);
                 }
+                
+                switch ($desc) {
+                    case 'IPTCDateCreated':
+                        $ret['IPTC'][$desc] = serendipity_metaFieldConvert($ret['IPTC'][$desc],'IPTCdate');
+                        break;
+                    case 'IPTCTimeCreated':
+                        $ret['IPTC'][$desc] = serendipity_metaFieldConvert($ret['IPTC'][$desc],'IPTCtime');
+                        break;
+                }                
             }
         }
     }
