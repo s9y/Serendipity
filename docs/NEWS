@@ -3,6 +3,11 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Add ability to plugins to check uploaded media files for invalid
+      file extensions. Added more escaping to user- and groupnames
+      for untrusted author environments, thanks to Hanno Boeck.
+      (garvinhicking)
+
     * Added czech translation to bulletproof templates and bundled
       plugins, by Vlada Ajgl
 

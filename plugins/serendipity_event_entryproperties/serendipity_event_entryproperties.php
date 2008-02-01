@@ -380,7 +380,7 @@ class serendipity_event_entryproperties extends serendipity_event
                                 $avail_users =& $this->getValidAuthors();
 
                                 foreach($avail_users AS $user) {
-                                    echo '<option value="' . $user['authorid'] . '" ' . ($selected_user == $user['authorid'] ? ' selected="selected"' : '') . '>' . $user['realname'] . '</option>' . "\n";
+                                    echo '<option value="' . $user['authorid'] . '" ' . ($selected_user == $user['authorid'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($user['realname']) . '</option>' . "\n";
                                 }
                                 ?>
                                 </select>

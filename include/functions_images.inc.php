@@ -24,7 +24,14 @@ function serendipity_isActiveFile($file) {
         return true;
     }
 
-    return preg_match('@\.(php[345]?|[psj]html?|aspx?|cgi|jsp|py|pl)$@i', $file);
+    $core = preg_match('@\.(php[345]?|[psj]html?|aspx?|cgi|jsp|py|pl)$@i', $file);
+    if ($core) {
+        return true;
+    }
+    
+    $eventData = false;
+    serendipity_plugin_api::hook_event('backend_media_check', $eventData, $file);
+    return $eventData;
 }
 
 /**
