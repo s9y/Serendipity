@@ -94,7 +94,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
         }
         $from = $_POST;
 ?>
-    <div class="serendipityAdminMsgSuccess"><img width="22px" height="22px" style="border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_success.png'); ?>" alt="" /><?php echo sprintf(MODIFIED_USER, $_POST['realname']) ?></div>
+    <div class="serendipityAdminMsgSuccess"><img width="22px" height="22px" style="border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_success.png'); ?>" alt="" /><?php echo sprintf(MODIFIED_USER, htmlspecialchars($_POST['realname'])) ?></div>
 <?php }
 } ?>
 

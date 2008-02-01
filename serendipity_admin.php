@@ -59,7 +59,7 @@ if (defined('IS_up2date') && IS_up2date === true && IS_installed === true) {
 $is_logged_in = serendipity_userLoggedIn();
 
 if ($is_logged_in) {
-    $self_info = sprintf(USER_SELF_INFO, $serendipity['serendipityUser'], $serendipity['permissionLevels'][$serendipity['serendipityUserlevel']]);
+    $self_info = sprintf(USER_SELF_INFO, htmlspecialchars($serendipity['serendipityUser']), $serendipity['permissionLevels'][$serendipity['serendipityUserlevel']]);
 } else {
     $self_info = '';
 }

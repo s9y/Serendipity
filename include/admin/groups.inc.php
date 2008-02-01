@@ -14,7 +14,7 @@ if (!serendipity_checkPermission('adminUsersGroups')) {
 if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
     $group = serendipity_fetchGroup($serendipity['POST']['group']);
     serendipity_deleteGroup($serendipity['POST']['group']);
-    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_GROUP . '</div>', $serendipity['POST']['group'], $group['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_GROUP . '</div>', htmlspecialchars($serendipity['POST']['group']), htmlspecialchars($group['name']));
 }
 
 /* Save new group */
@@ -22,7 +22,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     $serendipity['POST']['group'] = serendipity_addGroup($serendipity['POST']['name']);
     $perms = serendipity_getAllPermissionNames();
     serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
-    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_GROUP . '</div>', '#' . $serendipity['POST']['group'] . ', ' . $serendipity['POST']['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_GROUP . '</div>', '#' . htmlspecialchars($serendipity['POST']['group']) . ', ' . htmlspecialchars($serendipity['POST']['name']));
 }
 
 
@@ -30,7 +30,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
     serendipity_updateGroupConfig($serendipity['POST']['group'], $perms, $serendipity['POST'], false, $serendipity['POST']['forbidden_plugins'], $serendipity['POST']['forbidden_hooks']);
-    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_GROUP . '</div>', $serendipity['POST']['name']);
+    printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_GROUP . '</div>', htmlspecialchars($serendipity['POST']['name']));
 }
 
 if ( $serendipity['GET']['adminAction'] != 'delete' ) {
@@ -57,8 +57,8 @@ foreach($groups as $group) {
 <table width="100%">
     <tr>
         <td><?php echo htmlspecialchars($group['name']); ?></td>
-        <td width="200" align="right"> <a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo EDIT . " " . $group['name']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . $group['name']; ?>" /><?php echo EDIT ?></a>
-                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo DELETE . " " . $group['name']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . $group['name']; ?>" /><?php echo DELETE ?></a></td>
+        <td width="200" align="right"> <a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo EDIT . " " . htmlspecialchars($group['name']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . htmlspecialchars($group['name']); ?>" /><?php echo EDIT ?></a>
+                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]=<?php echo $group['id'] ?>" title="<?php echo DELETE . " " . htmlspecialchars($group['name']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . htmlspecialchars($group['name']); ?>" /><?php echo DELETE ?></a></td>
     </tr>
 </table>
 </div>
@@ -247,10 +247,10 @@ if ($serendipity['GET']['adminAction'] == 'edit') { ?>
 ?>
 <form action="?serendipity[adminModule]=groups" method="post">
     <div>
-    <?php printf(DELETE_GROUP, $serendipity['GET']['group'], $group['name']); ?>
+    <?php printf(DELETE_GROUP, (int)$serendipity['GET']['group'], htmlspecialchars($group['name'])); ?>
         <br /><br />
         <?php echo serendipity_setFormToken(); ?>
-        <input type="hidden" name="serendipity[group]" value="<?php echo $serendipity['GET']['group']; ?>" />
+        <input type="hidden" name="serendipity[group]" value="<?php echo htmlspecialchars($serendipity['GET']['group']); ?>" />
         <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton input_button" />
         <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton input_button" />
     </div>

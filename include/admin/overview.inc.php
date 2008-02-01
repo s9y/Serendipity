@@ -11,7 +11,7 @@ $user = serendipity_fetchAuthor($serendipity['authorid']);
 $bookmarklet = "javascript:bm=document.selection?document.selection.createRange().text:document.getSelection();void(newwin=open('" . $serendipity['baseURL'] . "serendipity_admin.php?serendipity[adminModule]=entries&serendipity[adminAction]=new&serendipity[title]='+ escape(document.title) + '&serendipity[body]=' + escape(bm) +'&serendipity[url]=' + escape(location.href), 'new_log_entry','resizable=yes, scrollbars=yes, width=800, height=600, location=yes,status=yes')); newwin.focus();";
 
 $output = array(
-    'welcome'       => WELCOME_BACK . ' ' . $user[0]['realname'],
+    'welcome'       => WELCOME_BACK . ' ' . htmlspecialchars($user[0]['realname']),
     'show_links'    => true,
     'links_title'   => FURTHER_LINKS,
     'bookmarklet'   => $bookmarklet,

@@ -120,9 +120,9 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
             || (serendipity_checkPermission('adminCategoriesDelete') && ($serendipity['authorid'] == $this_cat['authorid'] || $this_cat['authorid'] == '0'))
             || (serendipity_checkPermission('adminCategoriesDelete') && serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write'))) {
 ?>
-        <form method="POST" name="serendipityCategory" action="?serendipity[adminModule]=category&amp;serendipity[adminAction]=doDelete&amp;serendipity[cid]=<?php echo $serendipity['GET']['cid'] ?>">
+        <form method="POST" name="serendipityCategory" action="?serendipity[adminModule]=category&amp;serendipity[adminAction]=doDelete&amp;serendipity[cid]=<?php echo (int)$serendipity['GET']['cid'] ?>">
         <?php echo serendipity_setFormToken(); ?>
-            <h3><?php echo $this_cat['category_name']; ?></h3>
+            <h3><?php echo htmlspecialchars($this_cat['category_name']); ?></h3>
             <?php echo CATEGORY_REMAINING ?>:
             <select name="serendipity[cat][remaining_catid]">
                 <option value="0">- <?php echo NO_CATEGORY ?> -</option>
@@ -170,7 +170,7 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
     <tr>
         <td><?php echo NAME; ?></td>
         <td><input class="input_textbox" type="text" name="serendipity[cat][name]" value="<?php echo isset($this_cat['category_name']) ? htmlspecialchars($this_cat['category_name']) : ''; ?>" /></td>
-        <td rowspan="5" align="center" valign="middle" width="200" style="border: 1px solid #ccc"><img src="<?php echo isset($this_cat['category_icon']) ? $this_cat['category_icon'] : '' ?>" id="imagepreview" <?php echo empty($this_cat['category_icon']) ? 'style="display: none"' : '' ?> /></td>
+        <td rowspan="5" align="center" valign="middle" width="200" style="border: 1px solid #ccc"><img src="<?php echo isset($this_cat['category_icon']) ? htmlspecialchars($this_cat['category_icon']) : '' ?>" id="imagepreview" <?php echo empty($this_cat['category_icon']) ? 'style="display: none"' : '' ?> /></td>
     </tr>
 
     <tr>
@@ -279,7 +279,7 @@ if ( $serendipity['GET']['adminAction'] == 'view' ) {
                 <td width="16"><?php if ( !empty($category['category_icon']) ) {?><img src="<?php echo serendipity_getTemplateFile('admin/img/thumbnail.png') ?>" alt="" /><?php } else echo '&nbsp;' ?></td>
                 <td width="300" style="padding-left: <?php echo ($category['depth']*15)+20 ?>px"><img src="<?php echo serendipity_getTemplateFile('admin/img/folder.png') ?>" style="vertical-align: bottom;"> <?php echo htmlspecialchars($category['category_name']) ?></td>
                 <td><?php echo htmlspecialchars($category['category_description']) ?></td>
-                <td align="right"><?php echo ($category['authorid'] == '0' ? ALL_AUTHORS : $category['realname']); ?></td>
+                <td align="right"><?php echo ($category['authorid'] == '0' ? ALL_AUTHORS : htmlspecialchars($category['realname'])); ?></td>
             </tr>
 <?php           }
             } ?>

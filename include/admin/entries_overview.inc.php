@@ -7,6 +7,6 @@ if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
-echo WELCOME_BACK . ' ' . $_SESSION['serendipityUser'];
+echo WELCOME_BACK . ' ' . htmlspecialchars($_SESSION['serendipityUser']);
 
 ?>

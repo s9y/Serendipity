@@ -25,7 +25,7 @@ if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
         if (serendipity_checkPermission('adminUsersMaintainOthers') ||
             (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
             serendipity_deleteAuthor($user[0]['authorid']);
-            printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_USER . '</div>', $serendipity['POST']['user'], $user[0]['realname']);
+            printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_USER . '</div>', htmlspecialchars($serendipity['POST']['user']), htmlspecialchars($user[0]['realname']));
             serendipity_plugin_api::hook_event('backend_users_delete', $user[0]);
         } else {
             echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
@@ -90,7 +90,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
         }
 
         serendipity_plugin_api::hook_event('backend_users_add', $serendipity['POST']['user']);
-        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_USER . '</div>', '#' . $serendipity['POST']['user'] . ', ' . $_POST['realname']);
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_USER . '</div>', '#' . htmlspecialchars($serendipity['POST']['user']) . ', ' . htmlspecialchars($_POST['realname']));
     }
 }
 
@@ -161,7 +161,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
         serendipity_updatePermalink($pl_data, 'author');
 
         serendipity_plugin_api::hook_event('backend_users_edit', $pl_data);
-        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_USER . '</div>', $_POST['realname']);
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_USER . '</div>', htmlspecialchars($_POST['realname']));
     }
 }
 
@@ -202,8 +202,8 @@ if (is_array($users)) {
 <?php /* TODO: Add username to list once tom figures out how to fix uneven rowstyles */ ?>
         <td><img src="<?php echo $img ?>" alt="" style="border: 0px none ; vertical-align: bottom; display: inline;" /> <?php echo htmlspecialchars($user['realname']); ?></td>
         <td width="100" align="center"><?php echo $user['userlevel']; ?></td>
-        <td width="200" align="right"> <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . $user['realname']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . $user['realname']; ?>" /><?php echo EDIT ?></a>
-                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>" title="<?php echo DELETE . " " . $user['realname']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . $user['realname']; ?>" /><?php echo DELETE ?></a></td>
+        <td width="200" align="right"> <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" /><?php echo EDIT ?></a>
+                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>" title="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" /><?php echo DELETE ?></a></td>
     </tr>
 </table>
 </div>
@@ -253,7 +253,7 @@ if ($serendipity['GET']['adminAction'] == 'edit') {
         echo EDIT;
         $from = &$user[0];
         unset($from['password']);
-        echo '<input type="hidden" name="serendipity[user]" value="' . $from['authorid'] . '" />';
+        echo '<input type="hidden" name="serendipity[user]" value="' . (int)$from['authorid'] . '" />';
     } else {
         echo '<strong>' . CREATE_NOT_AUTHORIZED . '</strong><br />';
         echo EDIT;
@@ -294,10 +294,10 @@ if ($serendipity['GET']['adminAction'] == 'edit') { ?>
 ?>
 <form action="?serendipity[adminModule]=users" method="post">
     <div>
-    <?php printf(DELETE_USER, $serendipity['GET']['userid'], $user[0]['realname']); ?>
+    <?php printf(DELETE_USER, (int)$serendipity['GET']['userid'], htmlspecialchars($user[0]['realname'])); ?>
         <br /><br />
         <?php echo serendipity_setFormToken(); ?>
-        <input type="hidden" name="serendipity[user]" value="<?php echo $serendipity['GET']['userid']; ?>" />
+        <input type="hidden" name="serendipity[user]" value="<?php echo (int)$serendipity['GET']['userid']; ?>" />
         <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton input_button" />
         <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton input_button" />
     </div>

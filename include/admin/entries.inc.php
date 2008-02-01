@@ -116,7 +116,7 @@ function serendipity_drawList() {
                     $users = serendipity_fetchUsers();
                     if (is_array($users)) {
                         foreach ($users AS $user) {
-                            echo '<option value="' . $user['authorid'] . '" ' . (isset($serendipity['GET']['filter']['author']) && $serendipity['GET']['filter']['author'] == $user['authorid'] ? 'selected="selected"' : '') . '>' . $user['realname'] . '</option>' . "\n";
+                            echo '<option value="' . $user['authorid'] . '" ' . (isset($serendipity['GET']['filter']['author']) && $serendipity['GET']['filter']['author'] == $user['authorid'] ? 'selected="selected"' : '') . '>' . htmlspecialchars($user['realname']) . '</option>' . "\n";
                         }
                     }
 ?>              </select> <select name="serendipity[filter][isdraft]">
@@ -133,7 +133,7 @@ function serendipity_drawList() {
                     $categories = serendipity_fetchCategories();
                     $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
                     foreach ( $categories as $cat ) {
-                        echo '<option value="'. $cat['categoryid'] .'"'. ($serendipity['GET']['filter']['category'] == $cat['categoryid'] ? ' selected="selected"' : '') .'>'. str_repeat('&nbsp;', $cat['depth']) . $cat['category_name'] .'</option>' . "\n";
+                        echo '<option value="'. $cat['categoryid'] .'"'. ($serendipity['GET']['filter']['category'] == $cat['categoryid'] ? ' selected="selected"' : '') .'>'. str_repeat('&nbsp;', $cat['depth']) . htmlspecialchars($cat['category_name']) .'</option>' . "\n";
                     }
 ?>              </select>
             </td>

@@ -16,7 +16,7 @@ $summaryLength = 200;
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
     foreach ( $serendipity['POST']['delete'] as $k => $v ) {
         serendipity_deleteComment($k, $v);
-        echo DONE . ': '. sprintf(COMMENT_DELETED, $k) . '<br />';
+        echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
     }
 }
 
@@ -89,7 +89,6 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     if ($rs === false) {
         echo ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
-
         serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id'], true, true);
         echo DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
     }
