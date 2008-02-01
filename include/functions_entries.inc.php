@@ -1007,6 +1007,8 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $entry['authorid'] = $serendipity['authorid'];
             }
 
+            $entry['author'] = htmlspecialchars($entry['author']);
+
             $authorData = array(
                             'authorid' => $entry['authorid'],
                             'username' => $entry['loginname'],
