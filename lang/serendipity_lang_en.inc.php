@@ -150,6 +150,7 @@
 @define('SERENDIPITY_INSTALLATION', 'Serendipity Installation');
 @define('LEFT', 'left');
 @define('RIGHT', 'right');
+@define('CENTER', 'center');
 @define('HIDDEN', 'hidden');
 @define('REMOVE_TICKED_PLUGINS', 'Remove ticked plugins');
 @define('SAVE_CHANGES_TO_LAYOUT', 'Save changes to layout');
