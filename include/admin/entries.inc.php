@@ -266,13 +266,13 @@ function serendipity_drawList() {
                     <tr>
                         <td>
                             <?php
-                echo POSTED_BY . ' ' . $entry['author'];
+                echo POSTED_BY . ' ' . htmlspecialchars($entry['author']);
                 if (count($entry['categories'])) {
                     echo ' ' . IN . ' ';
                     $cats = array();
                     foreach ($entry['categories'] as $cat) {
                         $caturl = serendipity_categoryURL($cat);
-                        $cats[] = '<a href="' . $caturl . '">' . $cat['category_name'] . '</a>';
+                        $cats[] = '<a href="' . $caturl . '">' . htmlspecialchars($cat['category_name']) . '</a>';
                     }
                     echo implode(', ', $cats);
                 }
