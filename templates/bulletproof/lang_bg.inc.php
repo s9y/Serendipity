@@ -6,7 +6,7 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 
 // Colorsets
 @define('THEME_COLORSET', 'Цветова схема');
-@define('USER_STYLESHEET','');
+@define('USER_STYLESHEET','Използване на допълнителна CSS. Файлът трябва да бъде записан в директорията на шаблона (bulletproof) и да бъде с име user.css. Може да бъде използван за предефиниране на стилове.');
 // Layout
 @define('LAYOUT_TYPE','Общо оформление (B = Статия, S = Странична приставка, CF = Първо съдържанието)');
 @define('LAYOUT_SBS','Три колони S-B-S');
@@ -15,8 +15,8 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('LAYOUT_SB','Две колони, S-B');
 @define('LAYOUT_BS','Две колони, B-S, CF');
 @define('LAYOUT_SC','Една колона, приставките отдолу, CF');
-@define('LAYOUT_SBF','');
-@define('LAYOUT_BSF','');
+@define('LAYOUT_SBF','Две колони, S-B + долу');
+@define('LAYOUT_BSF','Три колони, S-R + долу, CF');
 @define('JAVASCRIPT_COLUMNS','Генериране на колони с еднаква височина (използва се Javascript, а това може да забави малко появата на страницата');
 // Custom header
 @define('BP_CUSTOM_HEADER','Изображение по избор на базата данни за хедъра на блога');
