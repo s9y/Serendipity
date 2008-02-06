@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 1993 2007-10-23 13:30:39Z garvinhicking $
+<?php # $Id: serendipity_lang_en.inc.php 2102 2008-02-01 15:37:00Z slothman $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -896,3 +896,4 @@
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('CENTER', 'center');
