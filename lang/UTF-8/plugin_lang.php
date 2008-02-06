@@ -102,3 +102,4 @@ foreach($const['missing'] AS $file => $constants) {
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('CENTER', 'center');

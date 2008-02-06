@@ -1,2 +1,1 @@
-@define('SET_TO_MODERATED', 'Moderate');
-@define('COMMENT_APPROVED', 'Comment #%s has successfully been set as moderated');
+@define('CENTER', 'center');

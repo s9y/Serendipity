@@ -150,7 +150,6 @@
 @define('SERENDIPITY_INSTALLATION', 'Serendipity Installation');
 @define('LEFT', 'left');
 @define('RIGHT', 'right');
-@define('CENTER', 'center');
 @define('HIDDEN', 'hidden');
 @define('REMOVE_TICKED_PLUGINS', 'Remove ticked plugins');
 @define('SAVE_CHANGES_TO_LAYOUT', 'Save changes to layout');
@@ -897,3 +896,4 @@
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('CENTER', 'center');
