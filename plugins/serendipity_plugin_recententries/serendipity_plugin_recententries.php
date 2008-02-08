@@ -20,8 +20,8 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('name',          PLUGIN_RECENTENTRIES_TITLE);
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
-        $propbag->add('author',        'Christian Machmeier, Christian Brabandt');
-        $propbag->add('version',       '1.8');
+        $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert');
+        $propbag->add('version',       '1.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -178,7 +178,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
             $sql_order = "ORDER BY timestamp DESC ";
         }
 
-        $sql_condition['and'] = "AND timestamp <= " . time();
+        $sql_condition['and'] .= "AND timestamp <= " . time();
         serendipity_ACL_SQL($sql_condition, $category == 'none');
 
         $entries_query = "SELECT DISTINCT id,
