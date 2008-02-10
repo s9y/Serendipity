@@ -262,7 +262,7 @@ function FT_toggle(id) {
     if ( document.getElementById(id + '_full').style.display == '' ) {
         document.getElementById(id + '_full').style.display='none';
         document.getElementById(id + '_summary').style.display='';
-        document.getElementById(id + '_text').innerHTML = '<?php echo TOGGLE_ALL ?>';
+        document.getElementById(id + '_text').innerHTML = '<?php echo VIEW_FULL ?>';
     } else {
         document.getElementById(id + '_full').style.display='';
         document.getElementById(id + '_summary').style.display='none';
