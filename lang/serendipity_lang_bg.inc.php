@@ -889,4 +889,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS импорт, изисква се PHP5 и е възможно да изисква много памет');
 @define('SET_TO_MODERATED', 'Модериране');
 @define('COMMENT_MODERATED', 'Коментар #%s успешно е установен като модериран');
-@define('CENTER', 'center');
+@define('CENTER', 'център');
