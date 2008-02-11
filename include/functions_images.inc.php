@@ -609,6 +609,10 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
     if ($size === false) {
         $size = $serendipity['thumbSize'];
     }
+    
+    if ($size < 1) {
+       return array(0,0);
+    }
 
     if ($thumbname === false) {
         $thumbname = $serendipity['thumbSuffix'];
