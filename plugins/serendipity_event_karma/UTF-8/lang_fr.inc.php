@@ -18,11 +18,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', 'Donne à vos visiteurs la possibilité de noter vos billets');
 @define('PLUGIN_KARMA_VOTETEXT', 'Karma de cet article: ');
 @define('PLUGIN_KARMA_RATE', 'Noter cet article: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', 'Excellent!');
-@define('PLUGIN_KARMA_VOTEPOINT_2', 'Bon');
+@define('PLUGIN_KARMA_VOTEPOINT_5', 'Excellent!');
+@define('PLUGIN_KARMA_VOTEPOINT_4', 'Bon');
 @define('PLUGIN_KARMA_VOTEPOINT_3', 'Neutre');
-@define('PLUGIN_KARMA_VOTEPOINT_4', 'Pas intéressant');
-@define('PLUGIN_KARMA_VOTEPOINT_5', 'Mauvais');
+@define('PLUGIN_KARMA_VOTEPOINT_2', 'Pas intéressant');
+@define('PLUGIN_KARMA_VOTEPOINT_1', 'Mauvais');
 @define('PLUGIN_KARMA_VOTED', 'Votre notation "%s" a été enregistrée.');
 @define('PLUGIN_KARMA_INVALID', 'Votre notation est invalide.');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'Votre notation a déjà été enregistrée.');

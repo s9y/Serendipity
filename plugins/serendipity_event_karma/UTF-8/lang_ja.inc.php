@@ -10,11 +10,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', '訪問者にあなたのエントリの品質を評価させます。');
 @define('PLUGIN_KARMA_VOTETEXT', 'この記事の評価: ');
 @define('PLUGIN_KARMA_RATE', 'この記事の評価: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', 'とても素晴らしい!');
-@define('PLUGIN_KARMA_VOTEPOINT_2', '素晴らしい');
+@define('PLUGIN_KARMA_VOTEPOINT_5', 'とても素晴らしい!');
+@define('PLUGIN_KARMA_VOTEPOINT_4', '素晴らしい');
 @define('PLUGIN_KARMA_VOTEPOINT_3', '普通');
-@define('PLUGIN_KARMA_VOTEPOINT_4', '面白くない');
-@define('PLUGIN_KARMA_VOTEPOINT_5', 'よくない');
+@define('PLUGIN_KARMA_VOTEPOINT_2', '面白くない');
+@define('PLUGIN_KARMA_VOTEPOINT_1', 'よくない');
 @define('PLUGIN_KARMA_VOTED', 'あなたの評価 "%s" は保管されました。');
 @define('PLUGIN_KARMA_INVALID', 'あなたの投票は無効でした。');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'あなたは既に評価が保管されていました。');

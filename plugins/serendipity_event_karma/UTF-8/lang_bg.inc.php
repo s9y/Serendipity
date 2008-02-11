@@ -10,11 +10,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', 'Дава възможност посетителите да оценяват качеството на вашите статии');
 @define('PLUGIN_KARMA_VOTETEXT', 'Карма за тази статия: ');
 @define('PLUGIN_KARMA_RATE', 'Оецнете тази статия: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', 'Много добра!');
-@define('PLUGIN_KARMA_VOTEPOINT_2', 'Добра');
+@define('PLUGIN_KARMA_VOTEPOINT_5', 'Много добра!');
+@define('PLUGIN_KARMA_VOTEPOINT_4', 'Добра');
 @define('PLUGIN_KARMA_VOTEPOINT_3', 'Неутрална');
-@define('PLUGIN_KARMA_VOTEPOINT_4', 'Безинтересна');
-@define('PLUGIN_KARMA_VOTEPOINT_5', 'Лоша');
+@define('PLUGIN_KARMA_VOTEPOINT_2', 'Безинтересна');
+@define('PLUGIN_KARMA_VOTEPOINT_1', 'Лоша');
 @define('PLUGIN_KARMA_VOTED', 'Вашата оценка "%s" беше записана.');
 @define('PLUGIN_KARMA_INVALID', 'Вашето гласуване е невалидно.');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'Вашата оецнка вече е записана.');
@@ -48,6 +48,3 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'точки');
 
 @define('PLUGIN_KARMA_STARRATING', 'Разрешаване на индивидуална оценка на тази статия?');
-
-@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS', 'Следене на визитите на регистрираните посетители?');
-@define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH', 'При избор \'Да\', посещенията на регистрираните посетители (потребители) ще бъдат броени.');

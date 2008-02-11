@@ -17,11 +17,11 @@
         @define('PLUGIN_KARMA_BLAHBLAH', '允許訪客評價文章');
         @define('PLUGIN_KARMA_VOTETEXT', '評價值: ');
         @define('PLUGIN_KARMA_RATE', '評價值: %s');
-        @define('PLUGIN_KARMA_VOTEPOINT_1', '很好!');
-        @define('PLUGIN_KARMA_VOTEPOINT_2', '好');
+        @define('PLUGIN_KARMA_VOTEPOINT_5', '很好!');
+        @define('PLUGIN_KARMA_VOTEPOINT_4', '好');
         @define('PLUGIN_KARMA_VOTEPOINT_3', '沒意見');
-        @define('PLUGIN_KARMA_VOTEPOINT_4', '沒興趣');
-        @define('PLUGIN_KARMA_VOTEPOINT_5', '不好');
+        @define('PLUGIN_KARMA_VOTEPOINT_2', '沒興趣');
+        @define('PLUGIN_KARMA_VOTEPOINT_1', '不好');
         @define('PLUGIN_KARMA_VOTED', '您的評價 "%s" 已送出。');
         @define('PLUGIN_KARMA_INVALID', '您的評價錯誤。');
         @define('PLUGIN_KARMA_ALREADYVOTED', '您已經提供評價。');

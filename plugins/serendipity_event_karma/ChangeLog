@@ -1,6 +1,11 @@
 # $Id: ChangeLog,v 1.27 2007/10/25 13:56:39 brockhaus Exp $
 
 ------------------------------------------------------------------------
+Version 2.0 (gregman):
+
+    * Included new option to change to animated voting based on images.
+
+------------------------------------------------------------------------
 Version 1.4 (brockhaus):
 
     * New option to disable visit tracking for logged in users.

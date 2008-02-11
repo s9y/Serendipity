@@ -1,26 +1,31 @@
 <?php # $Id$
 
-        @define('PLUGIN_KARMA_VERSION', '1.3');
+        @define('PLUGIN_KARMA_VERSION', '2.0');
         @define('PLUGIN_KARMA_NAME', 'Karma');
         @define('PLUGIN_KARMA_BLAHBLAH', 'Abstimmung über die Einträge');
         @define('PLUGIN_KARMA_VOTETEXT', 'Karma dieses Eintrags: ');
+        @define('PLUGIN_KARMA_VOTETEXT_IMAGE', 'aktuelle Bewertung:');
         @define('PLUGIN_KARMA_RATE', 'Eintrag bewerten: %s');
-        @define('PLUGIN_KARMA_VOTEPOINT_1', 'Sehr gut!');
-        @define('PLUGIN_KARMA_VOTEPOINT_2', 'Gut');
+        @define('PLUGIN_KARMA_VOTEPOINT_5', 'Sehr gut!');
+        @define('PLUGIN_KARMA_VOTEPOINT_4', 'Gut');
         @define('PLUGIN_KARMA_VOTEPOINT_3', 'Neutral');
-        @define('PLUGIN_KARMA_VOTEPOINT_4', 'Uninteressant');
-        @define('PLUGIN_KARMA_VOTEPOINT_5', 'Übel');
+        @define('PLUGIN_KARMA_VOTEPOINT_2', 'Uninteressant');
+        @define('PLUGIN_KARMA_VOTEPOINT_1', 'Übel');
         @define('PLUGIN_KARMA_VOTED', 'Punktzahl "%s" gespeichert.');
+        @define('PLUGIN_KARMA_VOTED_IMAGE', 'Bewertung gespeichert.');
+        @define('PLUGIN_KARMA_VOTES', '%3$s Stimme(n)');
         @define('PLUGIN_KARMA_INVALID', 'Bewertung ungültig oder manipuliert!');
         @define('PLUGIN_KARMA_ALREADYVOTED', 'Bewertung bereits gespeichert.');
         @define('PLUGIN_KARMA_NOCOOKIE', 'Der Browser muss Cookies unterstützen um eine Abstimmung zu ermöglichen.');
-        @define('PLUGIN_KARMA_CLOSED', 'Stimm ab für Artikel, die jünger als %s Tage sind!');
+        @define('PLUGIN_KARMA_CLOSED', 'Abstimmungszeitraum abgelaufen.');
         @define('PLUGIN_KARMA_ENTRYTIME', 'Abstimmungszeitraum nach Veröffentlichung eines Artikels');
         @define('PLUGIN_KARMA_VOTINGTIME', 'Abstimmungszeitraum');
         @define('PLUGIN_KARMA_ENTRYTIME_BLAHBLAH', 'Wie lang (in Minuten) kann nach der Veröffentlichung eines Artikels ein uneingeschränkter Abstimmungszeitraum durchgeführt werden? Standard sind 1440 Minuten (ein Tag).');
         @define('PLUGIN_KARMA_VOTINGTIME_BLAHBLAH', 'Wartezeit (in Minuten), die nach einer Stimmabgabe vergehen muss bevor eine nächste Stimme angenommen wird. Diese Einschränkung gilt erst nach Überschreitung des obigen uneingeschränkten Abstimmungszeitraumes. Standard: 5 Minuten.');
         @define('PLUGIN_KARMA_TIMEOUT', 'Wahlschutz: Ein anderer Besucher hat gerade abgestimmt. Bitte %s Minuten warten.');
         @define('PLUGIN_KARMA_CURRENT', 'Derzeitiges Karma: %2$s, %3$s Stimme(n)');
+        @define('PLUGIN_KARMA_CURRENT_IMAGE', 'aktuelle Bewertung:');
+        @define('PLUGIN_KARMA_CURRENT_IMAGE_ALT', 'aktuelle Bewertung: %2$1.2f von 5');
         @define('PLUGIN_KARMA_EXTENDEDONLY', 'Nur erweiterte Artikel');
         @define('PLUGIN_KARMA_EXTENDEDONLY_BLAHBLAH', 'Karmavoting nur im erweiterten Artikel einblenden');
         @define('PLUGIN_KARMA_MAXKARMA', 'Maximaler Abstimmungszeitraum');
@@ -42,6 +47,8 @@
         @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'Stimmen');
         @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'Punkte');
 
-
         @define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS', 'Aufrufstatistik auch für eingeloggte Benutzer?');
         @define('PLUGIN_KARMA_VISITS_LOGGEDIN_USERS_BLAHBLAH', 'Wenn diese Option eingeschaltet ist, dann werden auch die Besuche von eingeloggten Benutzern protokolliert.');
+
+        @define('PLUGIN_KARMA_BASEIMAGE', 'Animation');
+        @define('PLUGIN_KARMA_BASEIMAGE_DESC', 'Wähle eine Bilddatei aus (z.B. diamonds.png), um die Punkteskala grafisch darzustellen. Wähle \'' . PLUGIN_KARMA_STATISTICS_POINTS_NO . '\' für textbasiertes Voting. Sämtliche notwendigen Grafikdateien findest Du im Image-Verzeichnis.');

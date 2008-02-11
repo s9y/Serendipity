@@ -10,11 +10,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH',                    'Ètenáøi hodnotí kvalitu Va¹ich pøíspìvkù');
 @define('PLUGIN_KARMA_VOTETEXT',                    'Karma tohoto èlánku: ');
 @define('PLUGIN_KARMA_RATE',                        'Ohodno» tento èlánek: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1',                 'Dost dobrý!');
-@define('PLUGIN_KARMA_VOTEPOINT_2',                 'Dobrý');
+@define('PLUGIN_KARMA_VOTEPOINT_5',                 'Dost dobrý!');
+@define('PLUGIN_KARMA_VOTEPOINT_4',                 'Dobrý');
 @define('PLUGIN_KARMA_VOTEPOINT_3',                 'Prùmer');
-@define('PLUGIN_KARMA_VOTEPOINT_4',                 'Nezajímavý');
-@define('PLUGIN_KARMA_VOTEPOINT_5',                 'Mizerný');
+@define('PLUGIN_KARMA_VOTEPOINT_2',                 'Nezajímavý');
+@define('PLUGIN_KARMA_VOTEPOINT_1',                 'Mizerný');
 @define('PLUGIN_KARMA_VOTED',                       'Vy¹e hodnocení "%s" bylo zaznamenáno.');
 @define('PLUGIN_KARMA_INVALID',                     'Va¹e hlasování je neplatné.');
 @define('PLUGIN_KARMA_ALREADYVOTED',                'Ji¾ jste hlasoval.');

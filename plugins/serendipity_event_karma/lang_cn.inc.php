@@ -4,11 +4,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', '允许访客通过打分的方式评价你的文章质量');
 @define('PLUGIN_KARMA_VOTETEXT', '对此文章进行打分: ');
 @define('PLUGIN_KARMA_RATE', '对此文章的打分: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', '非常好');
-@define('PLUGIN_KARMA_VOTEPOINT_2', '还不错');
+@define('PLUGIN_KARMA_VOTEPOINT_5', '非常好');
+@define('PLUGIN_KARMA_VOTEPOINT_4', '还不错');
 @define('PLUGIN_KARMA_VOTEPOINT_3', '一般般');
-@define('PLUGIN_KARMA_VOTEPOINT_4', '没兴趣');
-@define('PLUGIN_KARMA_VOTEPOINT_5', '挺糟糕');
+@define('PLUGIN_KARMA_VOTEPOINT_2', '没兴趣');
+@define('PLUGIN_KARMA_VOTEPOINT_1', '挺糟糕');
 @define('PLUGIN_KARMA_VOTED', '你打的分“ %s ”已被保存。');
 @define('PLUGIN_KARMA_INVALID', '你的打分无效。');
 @define('PLUGIN_KARMA_ALREADYVOTED', '你已经打过分了。');

@@ -10,11 +10,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH',                    '»ten·¯i hodnotÌ kvalitu Vaöich p¯ÌspÏvk˘');
 @define('PLUGIN_KARMA_VOTETEXT',                    'Karma tohoto Ël·nku: ');
 @define('PLUGIN_KARMA_RATE',                        'Ohodnoù tento Ël·nek: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1',                 'Dost dobr˝!');
-@define('PLUGIN_KARMA_VOTEPOINT_2',                 'Dobr˝');
+@define('PLUGIN_KARMA_VOTEPOINT_5',                 'Dost dobr˝!');
+@define('PLUGIN_KARMA_VOTEPOINT_4',                 'Dobr˝');
 @define('PLUGIN_KARMA_VOTEPOINT_3',                 'Pr˘mer');
-@define('PLUGIN_KARMA_VOTEPOINT_4',                 'NezajÌmav˝');
-@define('PLUGIN_KARMA_VOTEPOINT_5',                 'Mizern˝');
+@define('PLUGIN_KARMA_VOTEPOINT_2',                 'NezajÌmav˝');
+@define('PLUGIN_KARMA_VOTEPOINT_1',                 'Mizern˝');
 @define('PLUGIN_KARMA_VOTED',                       'Vyöe hodnocenÌ "%s" bylo zaznamen·no.');
 @define('PLUGIN_KARMA_INVALID',                     'Vaöe hlasov·nÌ je neplatnÈ.');
 @define('PLUGIN_KARMA_ALREADYVOTED',                'Jiû jste hlasoval.');
