@@ -9,11 +9,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', 'Permite aos visitantes classificar a qualidade das suas entradas');
 @define('PLUGIN_KARMA_VOTETEXT', 'Karma deste artigo: ');
 @define('PLUGIN_KARMA_RATE', 'Classifica este artigo: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', 'Muito bom!');
-@define('PLUGIN_KARMA_VOTEPOINT_2', 'Bom');
+@define('PLUGIN_KARMA_VOTEPOINT_5', 'Muito bom!');
+@define('PLUGIN_KARMA_VOTEPOINT_4', 'Bom');
 @define('PLUGIN_KARMA_VOTEPOINT_3', 'Regular');
-@define('PLUGIN_KARMA_VOTEPOINT_4', 'Sem interesse');
-@define('PLUGIN_KARMA_VOTEPOINT_5', 'Mau');
+@define('PLUGIN_KARMA_VOTEPOINT_2', 'Sem interesse');
+@define('PLUGIN_KARMA_VOTEPOINT_1', 'Mau');
 @define('PLUGIN_KARMA_VOTED', 'A sua classificação de "%s" foi guardada.');
 @define('PLUGIN_KARMA_INVALID', 'Voto inválido.');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'A sua classificação já tinha sido guardada.');

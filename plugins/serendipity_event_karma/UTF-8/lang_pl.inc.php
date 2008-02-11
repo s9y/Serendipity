@@ -10,11 +10,11 @@
 @define('PLUGIN_KARMA_BLAHBLAH', 'Niechaj odwiedzający Twoją stronę ocenią jakość Twoich wpisów');
 @define('PLUGIN_KARMA_VOTETEXT', 'Karma dla tego artykułu: ');
 @define('PLUGIN_KARMA_RATE', 'Oceń ten wpis: %s');
-@define('PLUGIN_KARMA_VOTEPOINT_1', 'Bardzo dobry!');
-@define('PLUGIN_KARMA_VOTEPOINT_2', 'Dobry');
+@define('PLUGIN_KARMA_VOTEPOINT_5', 'Bardzo dobry!');
+@define('PLUGIN_KARMA_VOTEPOINT_4', 'Dobry');
 @define('PLUGIN_KARMA_VOTEPOINT_3', 'Neutralny');
-@define('PLUGIN_KARMA_VOTEPOINT_4', 'Nie interesujący');
-@define('PLUGIN_KARMA_VOTEPOINT_5', 'Zły');
+@define('PLUGIN_KARMA_VOTEPOINT_2', 'Nie interesujący');
+@define('PLUGIN_KARMA_VOTEPOINT_1', 'Zły');
 @define('PLUGIN_KARMA_VOTED', 'Twoja ocena "%s" została zachowana.');
 @define('PLUGIN_KARMA_INVALID', 'Twoje ocenianie nie przebiegło prawidłowo.');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'Twoja ocena została już zachowana.');

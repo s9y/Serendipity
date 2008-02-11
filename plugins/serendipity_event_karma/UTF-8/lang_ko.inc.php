@@ -7,11 +7,11 @@
         @define('PLUGIN_KARMA_BLAHBLAH', '작성된 글에 대해 방문자가 평가를 매길 수 있게 함');
         @define('PLUGIN_KARMA_VOTETEXT', '이 글에 대한 카르마 점수: ');
         @define('PLUGIN_KARMA_RATE', '이 글을 평가한다면: %s');
-        @define('PLUGIN_KARMA_VOTEPOINT_1', '매우 좋음');
-        @define('PLUGIN_KARMA_VOTEPOINT_2', '좋음');
+        @define('PLUGIN_KARMA_VOTEPOINT_5', '매우 좋음');
+        @define('PLUGIN_KARMA_VOTEPOINT_4', '좋음');
         @define('PLUGIN_KARMA_VOTEPOINT_3', '평범함');
-        @define('PLUGIN_KARMA_VOTEPOINT_4', '흥미 없음');
-        @define('PLUGIN_KARMA_VOTEPOINT_5', '나쁨');
+        @define('PLUGIN_KARMA_VOTEPOINT_2', '흥미 없음');
+        @define('PLUGIN_KARMA_VOTEPOINT_1', '나쁨');
         @define('PLUGIN_KARMA_VOTED', '평가 등급이 "%s"으로 매겨졌습니다.');
         @define('PLUGIN_KARMA_INVALID', '유효한 투표가 이루어지지 않았습니다.');
         @define('PLUGIN_KARMA_ALREADYVOTED', '이미 평가가 매겨졌습니다.');
