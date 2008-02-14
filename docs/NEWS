@@ -3,6 +3,11 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Fixed bug #1893108: Missing 'xmlns' attribute in templates for
+      <html> tag. (garvinhicking)
+
+    * Updated karma ranking plugin to use nice graphics (judebert)
+
     * Added phpNuke importer (garvinhicking)
 
     * Add ability to plugins to check uploaded media files for invalid
