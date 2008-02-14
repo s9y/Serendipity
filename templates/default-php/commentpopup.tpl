@@ -6,7 +6,7 @@
            "http://www.w3.org/TR/html4/loose.dtd">
 <?php endif; ?>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang}" lang="{$lang}">
 <head>
     <title>{$head_title|@default:$blogTitle} {if $head_subtitle} - <?= $GLOBALS['tpl']['head_subtitle'] ?><?php endif; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=<?= $GLOBALS['tpl']['head_charset'] ?>" />
