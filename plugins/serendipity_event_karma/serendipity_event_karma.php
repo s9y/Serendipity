@@ -693,7 +693,7 @@ class serendipity_event_karma extends serendipity_event
                             $bg = 'red';
                         }
                         print("
-.serendipity_karamVote_selectorTable {
+.serendipity_karmaVote_selectorTable {
     background: $bg;
 }
 ");
@@ -1251,7 +1251,7 @@ END_IMG_CSS;
 </tr>
 <tr>
 <td colspan='2'>
-<table border='1' class='serendipity_karamVote_selectorTable'>";
+<table border='1' class='serendipity_karmaVote_selectorTable'>";
         // Add the 'text-only' selection and its CSS
         if ($cursel == '0') {
             $checked = 'checked="checked" ';
