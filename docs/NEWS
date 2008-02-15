@@ -3,6 +3,8 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Upgrade to Smarty 2.6.19 (garvinhicking)
+
     * Fixed bug #1893108: Missing 'xmlns' attribute in templates for
       <html> tag. (garvinhicking)
 

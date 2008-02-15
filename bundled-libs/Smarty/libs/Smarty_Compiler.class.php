@@ -21,12 +21,12 @@
  * @link http://smarty.php.net/
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author Andrei Zmievski <andrei@php.net>
- * @version 2.6.18
+ * @version 2.6.19
  * @copyright 2001-2005 New Digital Group, Inc.
  * @package Smarty
  */
 
-/* $Id: Smarty_Compiler.class.php,v 1.395 2007/03/06 10:40:06 messju Exp $ */
+/* $Id: Smarty_Compiler.class.php 2736 2007-09-16 14:47:53Z mohrt $ */
 
 /**
  * Template compiling class
@@ -869,7 +869,7 @@ class Smarty_Compiler extends Smarty {
             // traditional argument format
             $args = implode(',', array_values($attrs));
             if (empty($args)) {
-                $args = 'null';
+                $args = '';
             }
         }
 
@@ -1171,7 +1171,7 @@ class Smarty_Compiler extends Smarty {
         }
         $item = $this->_dequote($attrs['item']);
         if (!preg_match('~^\w+$~', $item)) {
-            return $this->_syntax_error("'foreach: 'item' must be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
+            return $this->_syntax_error("foreach: 'item' must be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
         }
 
         if (isset($attrs['key'])) {
@@ -1222,22 +1222,20 @@ class Smarty_Compiler extends Smarty {
         $attrs = $this->_parse_attrs($tag_args);
 
         if ($start) {
-            if (isset($attrs['name']))
-                $buffer = $attrs['name'];
-            else
-                $buffer = "'default'";
-
-            if (isset($attrs['assign']))
-                $assign = $attrs['assign'];
-            else
-                $assign = null;
+            $buffer = isset($attrs['name']) ? $attrs['name'] : "'default'";
+            $assign = isset($attrs['assign']) ? $attrs['assign'] : null;
+            $append = isset($attrs['append']) ? $attrs['append'] : null;
+            
             $output = "<?php ob_start(); ?>";
-            $this->_capture_stack[] = array($buffer, $assign);
+            $this->_capture_stack[] = array($buffer, $assign, $append);
         } else {
-            list($buffer, $assign) = array_pop($this->_capture_stack);
+            list($buffer, $assign, $append) = array_pop($this->_capture_stack);
             $output = "<?php \$this->_smarty_vars['capture'][$buffer] = ob_get_contents(); ";
             if (isset($assign)) {
                 $output .= " \$this->assign($assign, ob_get_contents());";
+            }
+            if (isset($append)) {
+                $output .= " \$this->append($append, ob_get_contents());";
             }
             $output .= "ob_end_clean(); ?>";
         }
