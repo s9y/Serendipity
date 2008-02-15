@@ -91,3 +91,6 @@
         @define('PLUGIN_KARMA_NO_IMAGES', 'Es wurden keine Bilder in dem img/ Verzeichnis des Plugins gefunden!');
         @define('PLUGIN_KARMA_IMAGE_RATING', '%1.2f von 5');
         @define('PLUGIN_KARMA_IMAGE_INT_RATING', '%d von 5');
+@define('PLUGIN_KARMA_TAB_OPTIONS', 'Globales');
+@define('PLUGIN_KARMA_TAB_APPEARANCE', 'Darstellung');
+@define('PLUGIN_KARMA_TAB_TEXT', 'Texte');
