@@ -1574,14 +1574,13 @@ END_IMG_CSS;
             $rating = ((float)$points) / ((float)$votes);
             // Put it into the language-specific string format, rounding up
             // I'm mapping invalid cases (rating > 5 and rating < -2) to the extremes
-            $rating = (int)($rating + 0.5);
-            if ($rating <= -2) {
+            if ($rating <= -1.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_1;
-            } elseif ($rating <= -1) {
+            } elseif ($rating <= -0.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_2;
-            } elseif ($rating <= 0) {
+            } elseif ($rating <= 0.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_3;
-            } elseif ($rating <= 1) {
+            } elseif ($rating <= 1.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_4;
             } else {
                 $rating = PLUGIN_KARMA_VOTEPOINT_5;
