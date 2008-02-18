@@ -17,7 +17,7 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('LAYOUT_SC','Една колона, приставките отдолу, CF');
 @define('LAYOUT_SBF','Две колони, S-B + долу');
 @define('LAYOUT_BSF','Три колони, S-R + долу, CF');
-@define('JAVASCRIPT_COLUMNS','Генериране на колони с еднаква височина (използва се Javascript, а това може да забави малко появата на страницата');
+@define('JAVASCRIPT_COLUMNS','Генериране на колони с еднаква височина (използва се Javascript, но това може да забави малко появата на страницата)');
 // Custom header
 @define('BP_CUSTOM_HEADER','Изображение по избор на базата данни за хедъра на блога');
 @define('BP_HEADER_IMAGE','Избор на изображение');
