@@ -1,6 +1,6 @@
 # $Id$
 
-Version 1.3 ()
+Version 1.3-beta1 (February 19th)
 ------------------------------------------------------------------------
 
     * Upgrade to Smarty 2.6.19 (garvinhicking)
@@ -8,7 +8,7 @@ Version 1.3 ()
     * Fixed bug #1893108: Missing 'xmlns' attribute in templates for
       <html> tag. (garvinhicking)
 
-    * Updated karma ranking plugin to use nice graphics (judebert)
+    * Updated karma ranking plugin to use nice graphics (judebert,gregman)
 
     * Added phpNuke importer (garvinhicking)
 
