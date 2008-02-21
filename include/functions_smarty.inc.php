@@ -592,7 +592,12 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
         $smarty->trigger_error(__FUNCTION__ .": missing 'side' parameter");
         return;
     }
-    return serendipity_plugin_api::generate_plugins($params['side']);
+
+    if (isset($params['template'])) {
+        return serendipity_plugin_api::generate_plugins($params['side'], '', false, null, null, $params['template']);
+    } else {
+        return serendipity_plugin_api::generate_plugins($params['side']);
+    }
 }
 
 /**

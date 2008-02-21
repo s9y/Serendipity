@@ -804,7 +804,7 @@ class serendipity_plugin_api
      * @param   string      Only show a plugin with this instance ID
      * @return  string      Smarty HTML output
      */
-    function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null)
+    function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
     {
         global $serendipity;
 
@@ -861,7 +861,7 @@ class serendipity_plugin_api
         $serendipity['smarty']->assign_by_ref('plugindata', $pluginData);
         $serendipity['smarty']->assign('pluginside', ucfirst($side));
 
-        return serendipity_smarty_fetch('sidebar_'. $side, 'sidebar.tpl', true);
+        return serendipity_smarty_fetch('sidebar_'. $side, $tpl, true);
     }
 
     /**
