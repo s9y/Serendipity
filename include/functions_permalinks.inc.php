@@ -710,7 +710,7 @@ function serendipity_currentURL($strict = false) {
     // articles view. POSTing data to that page only works with mod_rewrite and not the ErrorDocument
     // redirection, so we need to generate the ErrorDocument-URI here.
 
-    $uri = parse_url($_SERVER['REQUEST_URI']);
+    $uri = @parse_url($_SERVER['REQUEST_URI']);
     $qst = '';
     if (!empty($uri['query'])) {
         $qst = '&amp;' . str_replace('&', '&amp;', $uri['query']);
