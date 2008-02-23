@@ -640,6 +640,207 @@ EOS;
 EOS;
                 break;
 
+            case 'sequence':
+                // For the drag-n-drop to work, the list must be included in
+                // a container (probably an <ol>) that JavaScript can access
+                // (easiest by ID), with <li> children that have unique IDs,
+                // and handles with ids of 'g'.$li_id.
+                // I can't get it to work unless there's a class of
+                // pluginmanager_container on the ol, either.
+                // The drag-n-drop returns the list of IDs in order.
+                $sequencejs_output = $serendipity['sequencejs_output'];
+                if (!$sequencejs_output) {
+                    echo '<script src="' . serendipity_getTemplateFile('dragdrop.js') . '" type="text/javascript"></script>';
+                    $serendipity['sequencejs_output'] = true;
+                }
+                
+                // I want this generic sequence widget to hide the ID, but
+                // display a name or description with an optional picture.
+                // (This would allow users to identify choices by thumbnail.)
+                // Therefore, I need an array with keys 'id', 'display', and
+                // 'imgurl' (or similar) to generate each list item.
+
+                // Get the data we need to display the list
+                if (!$value) {
+                    $value = $eventData['default'];
+                }
+                $cname = $cbag->get('name');
+                $cdesc = $cbag->get('description');
+                /** Unordered array of values */
+                $items = $cbag->get('values');
+                if (!is_array($items)) { $items = null; }
+                /** Array specifying order to use values in $items */
+                $order = null;
+                if ($value) {
+                    $order = explode(',', $value);
+                }
+                $uparrow_img = serendipity_getTemplateFile('admin/img/uparrow.png');
+                $downarrow_img = serendipity_getTemplateFile('admin/img/downarrow.png');
+
+                // $items is the list of things to sequence.  It's not in
+                // order, and reordering PHP arrays is problematic.  So
+                // we keep it unordered, and access its values according
+                // to another array (appropriately named $order).
+                if (is_array($items)) {
+                    // Allow simple value for any sequence item
+                    foreach ($items as $key => $item) {
+                        if (!is_array($item)) {
+                            // Replace this item with an empty array
+                            unset($items[$key]);
+                            $items[$item] = array();
+                        }
+                    }
+
+                    // Make sure all the items are in the order list; new items
+                    // go on the end (new items could have been added without 
+                    // this config item being updated)
+                    // Also fill out thumbnails and display names
+                    foreach ($items as $id => $junk) {
+                        if ($order == null) {
+                            $order = array($id);
+                        } else if (!in_array($id, $order)) {
+                            $order[] = $id;
+                        }
+                        // If there's no defined display name, default to the ID
+                        if (!isset($items[$id]['display'])) {
+                            $items[$id]['display'] = $id;
+                        }
+                        // If there's no image, we just won't display anything.
+                    }
+
+                    // Make sure all the items to be ordered exist!  Otherwise
+                    // we could try to sequence nothing.
+                    $filtered = array();
+                    foreach ($order as $id) {
+                        if (array_key_exists($id, $items)) {
+                            $filtered[] = $id;
+                        }
+                    }
+                    $order = $filtered;
+                } else {
+                    // If there's nothing to sequence, make the order in
+                    // which to use them valid, but empty
+                    $order = array();
+                }
+
+                // Start the row, add one cell for the name and description
+                print <<<EOS
+<tr>
+<td style="border-bottom: 1px solid #000000; vertical-align: top">
+  <strong>$cname</strong>
+  <br /><span style="color: #5E7A94; font-size: 8pt;">$cdesc</span>
+</td>
+
+EOS;
+                // Now add one cell for the list
+                print <<<EOS
+<td style="border-bottom: 1px solid #000000; vertical-align: middle">
+
+EOS;
+                // Print the list
+                print <<<EOS
+  <input type="hidden" name="serendipity[$postKey][$config_item]" id="${config_item}_value" value="$value" />
+  <noscript>
+    <!-- Replace standard submit button when using up/down submits -->
+    <input type="hidden" name="SAVECONF" value="Save" />
+  </noscript>
+  <ol id="$config_item" class="sequence_container pluginmanager_container">
+
+EOS;
+                $sort_idx == 0;
+                $last = count($order) - 1;
+                foreach ($order as $id) {
+                    // Create the variables required to print this item
+                    if ($sort_idx > 0) {
+                        $swapping = $order;
+                        $temp = $swapping[(int)$sort_idx];
+                        $swapping[(int)$sort_idx] = $swapping[(int)($sort_idx - 1)];
+                        $swapping[(int)($sort_idx - 1)] = $temp;
+                        $oneup = implode(',' , $swapping);
+                    }
+                    if ($sort_idx < $last) {
+                        $swapping = $order;
+                        $temp = $swapping[(int)$sort_idx];
+                        $swapping[(int)$sort_idx] = $swapping[(int)($sort_idx + 1)];
+                        $swapping[(int)($sort_idx + 1)] = $temp;
+                        $onedown = implode(',' , $swapping);
+                    }
+
+
+                    // Print the HTML
+                    //
+                    // Set the item and its ID
+                    print '    <li id="'.$id.'" class="sequence_item pluginmanager_item_even">' . "\n";
+                    // Make a handle with ID 'g$id'
+                    print '      <div id="g'.$id.'" class="pluginmanager_grablet sequence_grablet"><a href="#"></a></div>' . "\n";
+                    // Add the item contents
+                    print '      <span>'.$items[$id]['display'].'</span>' . "\n";
+                    if (isset($items[$id]['img'])) {
+                        print '      <img src="'.$items[$id]['img'].'" />' . "\n";
+                    }
+                    // Luddite submit buttons (please, think of the scriptless!)
+                    print "<noscript><div>\n";
+                    if ($sort_idx == 0) {
+                        // Skip the move-up submit button
+                        print "&nbsp;\n";
+                    } else {
+                        print <<<EOS
+  <button type="submit" name="serendipity[$postKey][$config_item]" value="$oneup">
+    <img src="$uparrow_img" alt="Move Up">
+  </button>
+
+EOS;
+                    }
+                    if ($sort_idx == $last) {
+                        // Skip the move-down submit button
+                        print "&nbsp;\n";
+                    } else {
+                        print <<<EOS
+  <button type="submit" name="serendipity[$postKey][$config_item]" value="$onedown">
+    <img src="$downarrow_img" alt="Move Down">
+  </button>
+
+EOS;
+                    }
+                    print "</div></noscript>\n";
+                    // Close the item
+                    print '    </li>'."\n";
+                    // Next, please
+                    $sort_idx++;
+                }
+                if (!is_array($items) or empty($order)) {
+                    // Print the empty message
+                    print(NONE);
+                }
+                // Print the Javascript to drag-n-drop the list
+                print <<<EOS
+<script type="text/javascript">
+    function init_${config_item}_Sequence()
+    {
+        var lst = document.getElementById("${config_item}");
+        DragDrop.makeListContainer(lst, '${config_item}_group');
+        lst.onDragOut = function() { 
+            //var seq = DragDrop.serData('${config_item}_group', null); 
+            var seq = DragDrop.serData(null, '${config_item}'); 
+            var start = seq.indexOf("(");
+            var end = seq.indexOf(")");
+            seq = seq.slice((start + 1), end);
+            var order = document.getElementById("${config_item}_value");
+            order.value = seq;
+        };
+    }
+    addLoadEvent(init_${config_item}_Sequence);
+</script>
+
+EOS;
+                // Finish the row
+                print <<<EOS
+</td>
+
+EOS;
+                break;
+
+
             default:
                 // Unknown configuration key. Let the plugin handle it.
                 $addData = func_get_args();
