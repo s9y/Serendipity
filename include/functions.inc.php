@@ -370,7 +370,7 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
     if ($is_count) {
         $query_select = ", count(e.authorid) as artcount";
         $query_join   = "LEFT OUTER JOIN {$serendipity['dbPrefix']}entries AS e
-                                      ON a.authorid = e.authorid";
+                                      ON (a.authorid = e.authorid AND e.isdraft = 'false')";
     }
 
     if ($is_count || $group != null) {

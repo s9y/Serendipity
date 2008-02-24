@@ -3,6 +3,9 @@
 Version 1.3 ()
 ------------------------------------------------------------------------
 
+    * Fix sidebar plugin for the author's list to not include counting
+      drafted articles (garvinhicking)
+
     * Add option "template" to smarty function call {serendipity_
       printSidebar} (garvinhicking)
 
