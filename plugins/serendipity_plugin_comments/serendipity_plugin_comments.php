@@ -22,7 +22,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
-        $propbag->add('version',       '1.11');
+        $propbag->add('version',       '1.12');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -157,6 +157,7 @@ class serendipity_plugin_comments extends serendipity_plugin
                         '.$serendipity['dbPrefix'].'entries  AS e
                WHERE    e.id = c.entry_id
                  AND    NOT (c.type = \'TRACKBACK\' AND c.author = \'' . serendipity_db_escape_string($serendipity['blogTitle']) . '\' AND c.title != \'\')
+                 AND    e.isdraft = \'false\'
                  AND    c.status = \'approved\'
                         ' . $viewtype . '
             ORDER BY    c.timestamp DESC
