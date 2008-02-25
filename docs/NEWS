@@ -1,6 +1,6 @@
 # $Id$
 
-Version 1.3 ()
+Version 1.3-beta1 (February 25th)
 ------------------------------------------------------------------------
 
     * Fix sidebar plugin for the author's list to not include counting
@@ -8,9 +8,6 @@ Version 1.3 ()
 
     * Add option "template" to smarty function call {serendipity_
       printSidebar} (garvinhicking)
-
-Version 1.3-beta1 (February 19th)
-------------------------------------------------------------------------
 
     * Upgrade to Smarty 2.6.19 (garvinhicking)
 
