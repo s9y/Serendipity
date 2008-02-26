@@ -88,6 +88,8 @@
 @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Show number of entries');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_COMMENTCOUNT', 'Show number of comments');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_MONTHVISITORS', 'Show visitors this month');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_DAYVISITORS', 'Show visitors today');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_WEEKVISITORS', 'Show visitors this week');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT', 'Cache timeout');
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT_DESC', 'How long may the statistics be shown before they get refreshed? Setting this to a high number of minutes will improve performance, but might not reflect the actual data if set too high.');
 @define('PLUGIN_EVENT_STATISTICS_TEXT', 'Formatting text');
@@ -96,6 +98,8 @@
 @define('PLUGIN_EVENT_STATISTICS_TEXT_ENTRYCOUNT', '%s entries written');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_COMMENTCOUNT', '%s comments have been made');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_MONTHVISITORS', '%s visitor(s) this month');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_DAYVISITORS', '%s visitor(s) today');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_WEEKVISITORS', '%s visitor(s) this week');
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Show number of current visitors (aggregate past 15 minutes)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s visitor(s) online');

@@ -44,6 +44,10 @@ class serendipity_plugin_statistics extends serendipity_plugin
                                              'text_commentcount',
                                              'show_monthvisitors',
                                              'text_monthvisitors',
+                                             'show_dayvisitors',
+                                             'text_dayvisitors',
+                                             'show_weekvisitors',
+                                             'text_weekvisitors',
                                              'show_currentvisitors',
                                              'text_currentvisitors',
                                              'cachetimeout'
@@ -89,6 +93,20 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 $propbag->add('default',     true);
                 break;
 
+            case 'show_dayvisitors':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_STATISTICS_SHOW_DAYVISITORS);
+                $propbag->add('description', '');
+                $propbag->add('default',     true);
+                break;
+
+            case 'show_weekvisitors':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_STATISTICS_SHOW_WEEKVISITORS);
+                $propbag->add('description', '');
+                $propbag->add('default',     true);
+                break;
+
             case 'text_lastentry':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        PLUGIN_EVENT_STATISTICS_TEXT);
@@ -115,6 +133,20 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 $propbag->add('name',        PLUGIN_EVENT_STATISTICS_TEXT);
                 $propbag->add('description', PLUGIN_EVENT_STATISTICS_TEXT_DESC);
                 $propbag->add('default',     PLUGIN_EVENT_STATISTICS_TEXT_MONTHVISITORS);
+                break;
+
+            case 'text_dayvisitors':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_STATISTICS_TEXT);
+                $propbag->add('description', PLUGIN_EVENT_STATISTICS_TEXT_DESC);
+                $propbag->add('default',     PLUGIN_EVENT_STATISTICS_TEXT_DAYVISITORS);
+                break;
+
+            case 'text_weekvisitors':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_STATISTICS_TEXT);
+                $propbag->add('description', PLUGIN_EVENT_STATISTICS_TEXT_DESC);
+                $propbag->add('default',     PLUGIN_EVENT_STATISTICS_TEXT_WEEKVISITORS);
                 break;
 
             case 'text_currentvisitors':
@@ -159,6 +191,8 @@ class serendipity_plugin_statistics extends serendipity_plugin
         if (!file_exists($cachef) || filesize($cachef) == 0 || filemtime($cachef) < (time() - $cachetime)) {
             // Create statistics
 	 	   	list($year, $month, $day) = split('-', date('Y-m-d'));
+	 	   	$lastmonday = date('Ymd', strtotime('last monday'));
+	 	   	$nextsunday = date('Ymd', strtotime('next sunday'));
 
             $content = '';
             if (serendipity_db_bool($this->get_config('show_lastentry'))) {
@@ -189,14 +223,34 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 }
             }
 
+            if (serendipity_db_bool($this->get_config('show_dayvisitors'))) {
+                $res = serendipity_db_query("SELECT sum(visits) AS dayvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE year='".$year."' AND month='".$month."' AND day='".$day."'", true, 'assoc');
+                if (is_array($res) && isset($res['dayvisitors'])) {
+                    $content .= '<div class="stat_dayhvisitors">' . sprintf($this->get_config('text_dayvisitors'), '<span class="stat_number">' . $res['dayvisitors'] . '</span>') . "</div>\n";
+                }
+            }
+
+            if (serendipity_db_bool($this->get_config('show_weekvisitors'))) {
+                $res = serendipity_db_query("SELECT sum(visits) AS weekvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE year || month || day >= '".$lastmonday."' AND year || month || day <= '".$nextsunday."'", true, 'assoc');
+                if (is_array($res) && isset($res['weekvisitors'])) {
+                    $content .= '<div class="stat_weekhvisitors">' . sprintf($this->get_config('text_weekvisitors'), '<span class="stat_number">' . $res['weekvisitors'] . '</span>') . "</div>\n";
+                }
+            }
+
             // This one is MySQL specific. Don't know how postgreSQL does it.
             if (serendipity_db_bool($this->get_config('show_currentvisitors'))) {
                 $max = time();
                 $min = $max - (15 * 60);
-                $max_ts = date('Hi', $max);
-                $min_ts = date('Hi', $min);
 
-                $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (REPLACE(time, ':', '') BETWEEN $min_ts AND $max_ts)";
+                if ($serendipity['dbType'] == 'sqlite') {
+                    $max_ts = date('H:i', $max);
+                    $min_ts = date('H:i', $min);
+                    $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (time BETWEEN '$min_ts' AND '$max_ts')";
+                } else {
+                    $max_ts = date('Hi', $max);
+                    $min_ts = date('Hi', $min);
+                    $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (REPLACE(time, ':', '') BETWEEN $min_ts AND $max_ts)";
+                }
                 $res = serendipity_db_query($q, true, 'assoc');
                 if (is_array($res) && isset($res['currentvisitors'])) {
                     $content .= '<div class="stat_currentvisitors">' . sprintf($this->get_config('text_currentvisitors'), '<span class="stat_number">' . $res['currentvisitors'] . '</span>') . "</div>\n";
