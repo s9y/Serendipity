@@ -5,7 +5,12 @@ Version 1.3 ()
 
     * Updated statistics plugin to contain per week/day visitors.
       (roti)
-      
+
+    * Updated hungarian language
+    
+    * Allow to submit comments to future entries, when showing
+      future entries is enabled (garvinhicking)      
+
 Version 1.3-beta1 (February 25th)
 ------------------------------------------------------------------------
 

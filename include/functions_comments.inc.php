@@ -591,8 +591,12 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
                  FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
                  WHERE e.id  = '". (int)$id ."'
                    AND e.isdraft = 'false'
-                   AND e.timestamp <= " . time() . "
                    AND e.authorid = a.authorid";
+        if (!serendipity_db_bool($serendipity['showFutureEntries'])) {
+            $query .= " AND e.timestamp <= " . serendipity_db_time();
+
+        }
+
         $row = serendipity_db_query($query, true); // Get info on author/entry
         if (!is_array($row) || empty($id)) {
             // No associated entry found.
