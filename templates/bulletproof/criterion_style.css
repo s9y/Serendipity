@@ -1,0 +1,309 @@
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Adapted for Serendipity BulletProof Template as a colorset by Judebert
+http://judebert.com/
+*/
+
+* {
+margin: 0pt;
+padding: 0pt;
+}
+
+#wrapper {
+  font-size: 100%;
+  /*
+  width: 100%;
+  */
+}
+
+body {
+  background: #FFFFFF url(img/criterion_body.png) repeat-x;
+  /*--JAM: (I don't like this) font: normal small "Trebuchet MS", Arial, Helvetica, sans-serif; */
+  font: normal small "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color: #666666;
+}
+
+h1, h2, h3 {
+  color: #586BAA;
+}
+
+blockquote {
+  margin-left: 3em;
+}
+
+/* This is not really needed; if used, fix {#sitenav ul}, {#sbsitenav ul}, {#skiplinks ul}, {ul.archivesrow}, and {ul.staticpage_navigation}, along with their <li>s
+ul {
+  margin-left: 3em;
+}
+
+ul li {
+}
+
+ol {
+  margin-left: 3em;
+}
+
+ol li {
+}
+*/
+
+.serendipity_entry_body ul,
+.serendipity_entry_body ol {
+	margin-left: 3em;
+}
+
+a {
+  color: #586BAA;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Sidebar items (criterion Boxed Style) */
+.serendipitySideBarItem {
+  margin-bottom: 20px;
+}
+
+.serendipitySideBarItem .serendipitySideBarTitle {
+  height: 31px;
+  padding: 9px 0 0 20px;
+  background: #6FBE6E url(img/criterion_sbtitle.png) repeat-x;
+  font-size: 1.2em;
+  color: #CC0000;
+}
+
+.serendipitySideBarItem .serendipitySideBarContent {
+  padding: 20px 20px 40px 20px;
+  background: url(img/criterion_sbcontent.png) repeat-x;
+}
+
+/* entries (criterion Post) */
+.serendipity_title {
+  padding: 5px 0 0 20px;
+  font-size: 2em;
+  font-weight: normal;
+}
+
+.serendipity_title a {
+  text-decoration: none;
+}
+
+.serendipity_entry {
+  padding: 20px 20px 10px 20px;
+  background: url(img/criterion_entry.png) repeat-x;
+}
+
+.serendipity_entry_body p, 
+.serendipity_entry_body blockquote, 
+.serendipity_entry_body ul, 
+.serendipity_entry_body ol {
+  margin-bottom: 1.5em;
+  line-height: 180%;
+}
+
+/* Oddly, criterion doesn't have any Header 
+ * The closest thing is div#logo, which contains an h1 and h2.
+#header {
+  width: 740px;
+  height: 150px;
+  margin: 0 auto;
+}
+*/
+
+/* Sitenav tabs (criterion Menu) */
+#sitenav {
+  width: 740px;
+  height: 90px;
+  margin: 0 auto;
+  padding: 0;
+  float: none;
+}
+
+#sitenav ul {
+  display: block;
+  margin: 0;
+  padding-top: 25px;
+}
+
+/* Already handled by BP
+#sitenav li {
+  display: inline;
+}
+*/
+
+#sitenav ul li {
+  /* Override index.php */
+  padding: 0;
+}
+
+#sitenav a {
+  display: block;
+  float: left;
+  height: 32px;
+  margin-left: 1px;
+  padding: 13px 25px 0 25px;
+  background: #FFFFFF url(img/criterion_tab.png) repeat-x;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  color: #586BAA;
+}
+
+#sitenav a:hover {
+  background-image: url(img/criterion_tabhover.png);
+  border-color: #FEDA8D;
+  color: #CC0000;
+}
+
+#sitenav .currentpage a {
+  height: 36px;
+  margin-top: -4px;
+  background-image: url(img/criterion_tabactive.png);
+  border: 1px solid #479AC6;
+  border-bottom: none;
+  font-weight: bold;
+  color: #479AC6;
+}
+
+/* Banner (criterion Logo */
+#serendipity_banner {
+  width: 740px;
+  height: 60px;
+  margin: 0 auto;
+}
+
+#serendipity_banner h1 {
+  float: left;
+  letter-spacing: -2px;
+  font-size: 36px;
+  font-weight: normal;
+}
+
+#serendipity_banner h2 {
+  float: left;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#serendipity_banner a {
+  text-decoration: none;
+  text-transform: lowercase;
+  font-style: italic;
+  color: #479AC6;
+}
+
+/* criterion Content */
+/* Nothing in BP exactly matches this.  As it sets the width of the page, 
+ * it's closest to #wrapper; however, criterion uses #content to wrap the 
+ * entries and sidebar, leaving #logo and #menu outside.  BP puts everything
+ * in #wrapper, and only the entries in #content.
+ */
+#wrapper {
+  width: 740px;
+  margin: 0 auto;
+}
+
+/* criterion Content > Main */
+/* This doesn't fit well in BP.  As #main contains only entries, the idea
+ * appears to be to float the entries in a right "column".  BP takes care
+ * of column placement on its own.  But we can still take care of the width.
+ */
+/* Two columns, main and sidebar, just like criterion */
+.twomain {
+  width: 505px;
+}
+/* Three columns, main and two equal sidebars */
+.threemain {
+  width: 400px;
+}
+
+/* criterion Content > Sidebar */
+/* Again, this doesn't fit well in BP. #sidebar contains, predictably; the
+ * sidebar, which criterion floats left.  BP still handles column placement
+ * with no intervention from me (which allows multiple layouts).  Note that
+ * #login is a sidebar box, which doesn't apply to s9y.
+ * 
+ * However, Serendipity does have sidebars, and in a fixed-width template,
+ * it's important to get the size right.
+ */
+/* Two columns, main and sidebar, just like criterion */
+.twoside {
+  width: 220px;
+}
+/* Three columns, main and two equal sidebars */
+.threeside {
+  width: 160px;
+}
+/* Bottom sidebars, 5 items at a time */
+.onefull .serendipitySideBarItem {
+  width: 18%
+}
+
+/* These are the specific sidebar items in the original criterion
+#login fieldset {
+  border: none;
+}
+
+#login legend {
+  display: none;
+}
+
+#login label {
+  font-size: x-small;
+  font-weight: bold;
+}
+
+#login input {
+  margin-bottom: 5px;
+}
+
+#inputtext1, #inputtext2 {
+  width: 170px;
+  padding: 2px;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  color: #666666;
+}
+
+#inputsubmit1 {
+}
+
+/* criterion Content > Sidebar > Updates*/
+/* This might be useful in the s9y recent plugin.
+#updates {
+}
+
+#updates ul {
+  margin: 0;
+  list-style: none;
+}
+
+#updates h3 {
+  margin: 0;
+  font: bold x-small Verdana, Arial, Helvetica, sans-serif;
+}
+
+#updates p {
+  margin-bottom: 1.4em;
+  font-size: smaller;
+  line-height: normal;
+}
+*/
+
+/* Footer (criterion Footer) (Imagine that!) */
+#footer {
+  clear: both;
+  width: 740px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background: url(img/criterion_pagefooter.png) repeat-x;
+}
+
+#footer p {
+  margin: 0;
+  text-align: center;
+  font-size: x-small;
+}

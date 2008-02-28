@@ -396,7 +396,8 @@
             <!-- if you create a custom template based on bulletproof.          -->
             <!-- ************************************************************** -->
 
-            <div id="serendipity_credit_line">{$CONST.POWERED_BY} <a href="http://www.s9y.org">s9y</a> &ndash; Template by <a href="http://s9y-bulletproof.com">Bulletproof development team</a>.</div>
+            <div id="serendipity_credit_line">{$CONST.POWERED_BY} <a href="http://www.s9y.org">s9y</a> &ndash; Template by <a href="http://s9y-bulletproof.com">Bulletproof development team</a>.<br />{$template_option.colorset_data.attribution}</div>
+            
             {if $template_option.counter_code_toggle == 'true'}
                 <div class="counter_code">{$template_option.counter_code}</div>
             {/if}
