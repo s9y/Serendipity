@@ -13,6 +13,7 @@
 }
 
 .layout1col_right_full {
+    clear: both!important;
     float: none!important;
 }
 
