@@ -360,6 +360,8 @@ switch ($serendipity['GET']['adminAction']) {
             printf(ERROR_NO_DIRECTORY, $new_dir);
         }
 
+        serendipity_plugin_api::hook_event('backend_directory_delete', $new_dir);
+
         break;
 
     case 'directoryEdit':
@@ -565,6 +567,7 @@ switch ($serendipity['GET']['adminAction']) {
                 </select>
             </td>
         </tr>
+        <?php serendipity_plugin_api::hook_event('backend_directory_createoptions', $folders); ?>
     </table>
     <div><input name="SAVE" value="<?php echo CREATE_DIRECTORY ?>" class="serendipityPrettyButton input_button" type="submit"></div>
     </form>
