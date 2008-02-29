@@ -1,10 +1,11 @@
 <?php # $Id: lang_cs.inc.php 1.0 2008/01/20 01:53:00 VladaAjgl $
 
 /**
- *  @version $Revision: 1.0 $
+ *  @version $Revision: 1.1 $
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2007/12/07 
+ *  Revision on 2008/02/28 
  */
  
  // Colorsets
@@ -18,8 +19,8 @@
 @define('LAYOUT_SB',                    'Dva sloupce, S-B');
 @define('LAYOUT_BS',                    'Dva sloupce, B-S, ON');
 @define('LAYOUT_SC',                    'Jeden sloupec, Postranní sloupec pod ním, ON');
-@define('LAYOUT_SBF','');
-@define('LAYOUT_BSF','');
+@define('LAYOUT_SBF',                   'Dva sloupce, dva postranní sloupce - na straně a pod tělem');
+@define('LAYOUT_BSF',                   'Dva sloupce, dva postranní sloupce - na straně a pod tělem, ON');
 @define('JAVASCRIPT_COLUMNS',           'Vytvoř stejně vysoké sloupce pomocí javascriptu (trochu zpomalí vykreslování stránky).');
 // Custom header
 @define('BP_CUSTOM_HEADER',             'Vlastní obrázek v záhlaví stránky');
