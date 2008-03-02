@@ -333,7 +333,7 @@ $serendipity['smarty']->assign_by_ref('navlinks', $navlinks);
 
 // Allow colorset authors to include license and attribution data
 $colorset_data = array();  // Maybe we'll want more data later...
-$colorset_data['attribution'] = $template_loaded_config['colorset'] . ' colorset provided under BSD license.';
+$colorset_data['attribution'] = '';
 $attribution_file = dirname(__FILE__) . '/' . $template_loaded_config['colorset'] . '_license.txt';
 if (is_readable($attribution_file)) {
 	$attribution = file_get_contents($attribution_file);
