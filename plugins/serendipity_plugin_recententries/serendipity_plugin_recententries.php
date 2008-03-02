@@ -20,14 +20,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('name',          PLUGIN_RECENTENTRIES_TITLE);
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
-        $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert');
-        $propbag->add('version',       '1.9');
+        $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
+        $propbag->add('version',       '2.0');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('configuration', array('title', 'number', 'number_from', 'dateformat', 'category', 'randomize'));
+        $propbag->add('configuration', array('title', 'number', 'number_from', 'dateformat', 'category', 'randomize', 'show_where'));
         $propbag->add('groups', array('FRONTEND_VIEWS'));
     }
 
@@ -108,6 +108,15 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                 $propbag->add('default',       'none');
                 break;
 
+            case 'show_where':
+                $select = array('extended' => PLUGIN_ITEM_DISPLAY_EXTENDED, 'overview' => PLUGIN_ITEM_DISPLAY_OVERVIEW, 'both' => PLUGIN_ITEM_DISPLAY_BOTH);
+                $propbag->add('type',        'select');
+                $propbag->add('select_values', $select);
+                $propbag->add('name',        PLUGIN_ITEM_DISPLAY);
+                $propbag->add('description', '');
+                $propbag->add('default',     'both');
+            break;
+                
             default:
                 return false;
         }
@@ -120,7 +129,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $number         = $this->get_config('number');
         $dateformat     = $this->get_config('dateformat');
         $category       = $this->get_config('category', 'none');
-        
+        $show_where = $this->get_config('show_where', 'both');
+
+        if ($show_where == 'extended' && (!isset($serendipity['GET']['id']) || !is_numeric($serendipity['GET']['id']))) {
+            return false;
+        } else if ($show_where == 'overview' && isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])) {
+            return false;
+        }
+
         if ($category == '_cur') {
             $category = $serendipity['GET']['category'];
         }
