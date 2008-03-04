@@ -190,9 +190,14 @@ class serendipity_plugin_statistics extends serendipity_plugin
 
         if (!file_exists($cachef) || filesize($cachef) == 0 || filemtime($cachef) < (time() - $cachetime)) {
             // Create statistics
-	 	   	list($year, $month, $day) = split('-', date('Y-m-d'));
-	 	   	$lastmonday = date('Ymd', strtotime('last monday'));
-	 	   	$nextsunday = date('Ymd', strtotime('next sunday'));
+            list($year, $month, $day) = split('-', date('Y-m-d'));
+            $lastmonday = date('Ymd', strtotime('last monday'));
+            $nextsunday = date('Ymd', strtotime('next sunday'));
+            if (date('w', strtotime('today') ) == "1" ) { // now it is monday
+                $lastmonday = date('Ymd', strtotime('today'));
+            } else if (date('w', strtotime('today') ) == "0" ) { // now it is sunday
+                $nextsunday = date('Ymd', strtotime('today'));
+            }             
 
             $content = '';
             if (serendipity_db_bool($this->get_config('show_lastentry'))) {
