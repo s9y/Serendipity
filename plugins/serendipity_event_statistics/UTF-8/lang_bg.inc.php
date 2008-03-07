@@ -87,6 +87,8 @@
     @define('PLUGIN_EVENT_STATISTICS_SHOW_ENTRYCOUNT', 'Показване на броя на статиите');
     @define('PLUGIN_EVENT_STATISTICS_SHOW_COMMENTCOUNT', 'Показване на броя на коментарите');
     @define('PLUGIN_EVENT_STATISTICS_SHOW_MONTHVISITORS', 'Показване на посетителите за месеца');
+    @define('PLUGIN_EVENT_STATISTICS_SHOW_DAYVISITORS', 'Показване на посетителите днес');
+    @define('PLUGIN_EVENT_STATISTICS_SHOW_WEEKVISITORS', 'Показване на посетителите тази седмица');
     @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT', 'Таймаут при кеширане');
     @define('PLUGIN_EVENT_STATISTICS_SHOW_CACHETIMEOUT_DESC', 'През колко време да се опресняват статистическите данни в минути. По-голямата стойност ще подобри скоростта на изпълнение на заявките, но може да не се показват реални данни, ако е прекалено голяма.');
     @define('PLUGIN_EVENT_STATISTICS_TEXT', 'Форматиращ текст');
@@ -95,6 +97,8 @@
     @define('PLUGIN_EVENT_STATISTICS_TEXT_ENTRYCOUNT', 'Записани са %s статии');
     @define('PLUGIN_EVENT_STATISTICS_TEXT_COMMENTCOUNT', 'Направени са %s коментари');
     @define('PLUGIN_EVENT_STATISTICS_TEXT_MONTHVISITORS', '%s посетители за месеца');
+    @define('PLUGIN_EVENT_STATISTICS_TEXT_DAYVISITORS', '%s посетител(и) днес');
+    @define('PLUGIN_EVENT_STATISTICS_TEXT_WEEKVISITORS', '%s посетител(и) тази седмица');
 
     @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Показване на броя на текущите посетители (били онлайн през последните 15 минути)');
     @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s посетители онлайн');
