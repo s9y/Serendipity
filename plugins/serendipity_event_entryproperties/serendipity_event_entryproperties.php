@@ -26,7 +26,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.15');
+        $propbag->add('version',       '1.16');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -53,7 +53,7 @@ class serendipity_event_entryproperties extends serendipity_event
             'frontend_configure'                                => true
         ));
         $propbag->add('groups', array('BACKEND_EDITOR'));
-        $propbag->add('configuration', array('cache', 'use_groups', 'use_users', 'default_read', 'customfields'));
+        $propbag->add('configuration', array('cache', 'use_groups', 'use_users', 'use_ext_joins', 'default_read', 'customfields'));
     }
 
     function introspect_config_item($name, &$propbag)
@@ -84,6 +84,13 @@ class serendipity_event_entryproperties extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS);
                 $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS_DESC);
                 $propbag->add('default',     'false');
+                break;
+
+            case 'use_ext_joins':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS);
+                $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS_DESC);
+                $propbag->add('default',     'true');
                 break;
 
             case 'use_users':
@@ -234,11 +241,19 @@ class serendipity_event_entryproperties extends serendipity_event
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
+        static $is_cache = null;
+        static $use_groups = null;
+        static $use_users = null;
+        static $ext_joins = null;
 
         $hooks = &$bag->get('event_hooks');
-        $is_cache   = serendipity_db_bool($this->get_config('cache', 'true'));
-        $use_groups = serendipity_db_bool($this->get_config('use_groups'));
-        $use_users  = serendipity_db_bool($this->get_config('use_users'));
+        
+        if ($is_cache === null) {
+            $is_cache   = serendipity_db_bool($this->get_config('cache', 'true'));
+            $use_groups = serendipity_db_bool($this->get_config('use_groups'));
+            $use_users  = serendipity_db_bool($this->get_config('use_users'));
+            $ext_joins  = serendipity_db_bool($this->get_config('use_ext_joins'));
+        }
 
         if (isset($hooks[$event])) {
             switch($event) {
@@ -665,6 +680,9 @@ class serendipity_event_entryproperties extends serendipity_event
                 case 'frontend_fetchentry':
                     $joins = array();
                     $conds = array();
+                    if (!$ext_joins) {
+                        return true;
+                    }
                     if ($_SESSION['serendipityAuthedUser'] === true) {
                         $conds[] = " (ep_access.property IS NULL OR ep_access.value = 'member' OR ep_access.value = 'public' OR (ep_access.value = 'private' AND e.authorid = " . (int)$serendipity['authorid'] . ")) ";
 
