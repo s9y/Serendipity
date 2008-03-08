@@ -1,4 +1,4 @@
-<?php # $Id:$
+<?php # $Id$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -728,6 +728,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
                                         'show_atom1.0',
                                         'show_opml1.0',
                                         'show_feedburner',
+                                        'show_googlereader',
                                         'seperator',
                                         'show_mail',
                                         'field_managingEditor',
@@ -808,6 +809,23 @@ class serendipity_syndication_plugin extends serendipity_plugin {
             case 'show_atom0.3':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_ATOM03);
+                $propbag->add('description', '');
+                $propbag->add('default',     'false');
+                break;
+
+            case 'show_googlereader':
+                $radio = array();
+                
+                $radio['value'][] = 'true';
+                $radio['desc'][]  = YES;
+                
+                $radio['value'][] = 'false';
+                $radio['desc'][]  = NO;
+
+                $propbag->add('type',        'radio');
+                $propbag->add('radio_per_row', '2');
+                $propbag->add('radio',       $radio);
+                $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Google Reader'));
                 $propbag->add('description', '');
                 $propbag->add('default',     'false');
                 break;
@@ -1013,6 +1031,14 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         <div style="padding-bottom: 2px;">
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 feed</a>
+        </div>
+<?php
+        }
+
+        if (serendipity_db_bool($this->get_config('show_googlereader', false))) {
+?>
+        <div style="padding-bottom: 2px;" class="serendipity_googlereader">
+            <a href="http://fusion.google.com/add?source=atgs&amp;feedurl=<?php echo urlencode(rtrim($serendipity['baseURL'], '/') . serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath')); ?>"><img src="http://buttons.googlesyndication.com/fusion/add.gif" border="0" alt="Add to Google"></a>
         </div>
 <?php
         }
