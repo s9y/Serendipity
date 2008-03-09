@@ -65,7 +65,7 @@ foreach($groups as $group) {
 <?php
     }
 ?>
-            </tr>
+            </td>
         </tr>
 <?php if ( !isset($_POST['NEW']) ) { ?>
         <tr>
