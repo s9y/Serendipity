@@ -212,7 +212,7 @@ if (is_array($users)) {
     }
 }
 ?>
-            </tr>
+            </td>
         </tr>
 <?php if ( !isset($_POST['NEW']) && serendipity_checkPermission('adminUsersCreateNew')) { ?>
         <tr>
