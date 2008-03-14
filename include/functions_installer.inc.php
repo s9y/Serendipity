@@ -241,11 +241,11 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
             $path[] = '/usr/local/bin';
 
             foreach ($path as $dir) {
-                if (!empty($dir) && (function_exists('is_executable') && is_readable($dir) && @is_executable($dir . '/convert')) || @is_file($dir . '/convert')) {
+                if (!empty($dir) && (function_exists('is_executable') && @is_readable($dir) && @is_executable($dir . '/convert')) || @is_file($dir . '/convert')) {
                     return $dir . '/convert';
                 }
 
-                if (!empty($dir) && (function_exists('is_executable') && is_readable($dir . '/convert') && @is_executable($dir . '/convert.exe')) || @is_file($dir . '/convert.exe')) {
+                if (!empty($dir) && (function_exists('is_executable') && @is_readable($dir . '/convert') && @is_executable($dir . '/convert.exe')) || @is_file($dir . '/convert.exe')) {
                     return $dir . '/convert.exe';
                 }
             }
