@@ -34,10 +34,8 @@ $template_config = array(
     array(
         'var'           => 'userstylesheet',
         'name'          => USER_STYLESHEET,
-        'type'          => 'radio',
+        'type'          => 'boolean',
         'default'       => 'false',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO))
     ),
     array(
         'var'           => 'layouttype',
@@ -56,18 +54,14 @@ $template_config = array(
     array(
         'var'           => 'jscolumns',
         'name'          => JAVASCRIPT_COLUMNS,
-        'type'          => 'radio',
+        'type'          => 'boolean',
         'default'       => 'false',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO))
     ),
     array(
         'var'           => 'custheader',
         'name'          => BP_CUSTOM_HEADER,
-        'type'          => 'radio',
+        'type'          => 'boolean',
         'default'       => 'false',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO))
     ),
     array(
         'var'           => 'headerimage',
@@ -106,17 +100,13 @@ $template_config = array(
     array(
         'var'           => 'firbtitle',
         'name'          => FIR_BTITLE,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'firbdescr',
         'name'          => FIR_BDESCR,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
@@ -145,58 +135,44 @@ $template_config = array(
     array(
         'var'           => 'footerauthor',
         'name'          => FOOTER_AUTHOR,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'footercategories',
         'name'          => FOOTER_CATEGORIES,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'footertimestamp',
         'name'          => FOOTER_TIMESTAMP,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'footercomments',
         'name'          => FOOTER_COMMENTS,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'footertrackbacks',
         'name'          => FOOTER_TRACKBACKS,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'altcommtrack',
         'name'          => ALT_COMMTRACK,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'false',
     ),
     array(
         'var'           => 'addthiswidget',
         'name'          => SHOW_ADDTHIS_WIDGET,
-        'type'          => 'radio',
+        'type'          => 'boolean',
         'default'       => 'false',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO))
     ),
     array(
         'var'           => 'addthisaccount',
@@ -207,26 +183,20 @@ $template_config = array(
     array(
         'var'           => 'show_sticky_entry_footer',
         'name'          => SHOW_STICKY_ENTRY_FOOTER,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'show_sticky_entry_heading',
         'name'          => SHOW_STICKY_ENTRY_HEADING,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
         'var'           => 'cocommentactive',
         'name'          => COCOMMENT_ACTIVE,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('active', 'inactive'),
-                                 'desc'  => array(YES, NO)),
-        'default'       => 'inactive',
+        'type'          => 'boolean',
+        'default'       => 'false',
     ),
     array(
         'var'           => 'prev_next_style',
@@ -246,9 +216,7 @@ $template_config = array(
     array(
         'var'           => 'counter_code_toggle',
         'name'          => USE_COUNTER,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'false'
     ),
     array(
@@ -260,9 +228,7 @@ $template_config = array(
     array(
         'var'           => 'footer_text_toggle',
         'name'          => USE_FOOTER_TEXT,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'false'
     ),
     array(
@@ -279,17 +245,13 @@ $template_config = array(
     array(
         'var'           => 'sitenav_footer',
         'name'          => SITENAV_FOOTER,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true'
     ),
     array(
         'var'           => 'sitenav_quicksearch',
         'name'          => SITENAV_QUICKSEARCH,
-        'type'          => 'radio',
-        'radio'         => array('value' => array('true', 'false'),
-                                 'desc'  => array(YES, NO)),
+        'type'          => 'boolean',
         'default'       => 'true',
     ),
     array(
