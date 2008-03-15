@@ -292,6 +292,9 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             $comment['trace']   = $trace . $i;
             $comment['depth']   = $depth;
             $comment['author']  = htmlspecialchars($comment['author']);
+            if (isset($comment['title'])) {
+                $comment['title']   = htmlspecialchars($comment['title']);
+            }
 
             $_smartyComments[] = $comment;
             if ($comment['id'] && $parentid !== VIEWMODE_LINEAR ) {
