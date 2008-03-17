@@ -48,7 +48,11 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             }
 
             $entry['feed_id']   = (isset($entry['entryid']) && !empty($entry['entryid']) ? $entry['entryid'] : $entry['id']);
-            $entry['feed_guid'] = serendipity_rss_getguid($entry, $options['comments']);
+
+            // set feed guid only, if not already defined externaly
+            if (empty($entry['feed_guid']))
+                $entry['feed_guid'] = serendipity_rss_getguid($entry, $options['comments']);
+
             $entry['feed_entryLink'] = serendipity_archiveURL($entry['feed_id'], $entry['title'], 'baseURL', true, array('timestamp' => $e_ts));
             if ($options['comments'] == true) {
                 // Display username as part of the title for easier feed-readability
