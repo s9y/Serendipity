@@ -70,6 +70,7 @@ abbr, acronym, .help{
 #footer_sitenav ul {
     list-style-type: none;
     display: inline;
+    padding: 0;
 }
 
 #footer_sitenav li {
@@ -160,12 +161,15 @@ ul.archives_row {
 }
 
 ul.archives_row li {
-    padding-right: 2px;
+    margin-right: 2px;
     font-size: 80%;
 }
 
-.archive_summary_postdetails ,
-.archive_summary_title {
+#content h4.archive_summary_title {
+    margin: 0;
+}
+
+.archive_summary_postdetails {
     margin: 0;
 }
 
