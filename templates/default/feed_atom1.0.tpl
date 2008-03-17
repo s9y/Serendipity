@@ -27,7 +27,7 @@
         <link href="{$entry.feed_entryLink}{if $is_comments}#c{$entry.commentid}{/if}" rel="alternate" title="{$entry.feed_title}" />
         <author>
             <name>{$entry.feed_author}</name>
-            {if $entry.feed_email != 'none@example.com'}<email>{$entry.feed_email}</email>{/if}
+            {if $entry.feed_email != 'nospam@example.com'}<email>{$entry.feed_email}</email>{/if}
         </author>
     
         <published>{$entry.feed_timestamp}</published>
