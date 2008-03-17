@@ -103,9 +103,9 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Trackback/Pingbackmoderation nach wievielen Tagen erzwingen');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Alle Trackbacks/Pingbacks zu einem Artikel können abhängig vom Alter des Artikels automatisch moderiert werden. Tragen Sie hier das Minimalalter eines Artikels in Tagen ein, ab dem jedes Trackback/Pingback erst nach Ihrer Moderation dargestellt wird. 0 bedeutet, dass keine automatische Moderation erzeugt wird.');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'CSRF-Schutz aktivieren?');
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Falls aktiviert, wird ein spezieller Hash-Wert sicherstellen, dass nur Benutzer Kommentare hinterlassen dürfen , die eine gültige Session-ID haben. Dies wird Spam etwas eindämmen und es unmöglich machen, dass Sie ungewollt Kommentare via CSRF-Angriffen hinterlassen, aber es wird auch dazu führen dass nur Benutzer mit aktivierten Cookies kommentieren können.');
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden!');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'Direktkommentare verbieten? (XSRF-Schutz)');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Falls aktiviert, ist es Besuchern nicht möglich, durch direktes Anspringen des zu kommentierenden Artikels einen Kommentar abzugeben. Dies blockt Spambots, aber auch Personen, die beispielsweise direkt aus ihrem RSS-Reader heraus kommentieren wollen oder die Cookies deaktiviert haben. Technisch wird dies erreicht, in dem ein spezieller Hash-Wert gesetzt wird, der nur bei gültiger Session-ID vorhanden ist. Weiterhin wird dadurch verhindert, dass mittels XSRF-Angriffen Kommentare unter ihrem Namen abgesetzt werden können. ');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden, und Sie müssen bereits eine weitere URL des Blogs geöffnet haben, bevor Sie einen Kommentar absenden können!');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'SPAM IP Adressen via HTaccess blocken?');
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihref .htacces Datei hinzu gefügt. Die .htaccess Datei wird regelmässig mit den abgelehnten IPs des letzten Monats erneuert.');
