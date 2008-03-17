@@ -115,9 +115,9 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Force API comment moderation after how many days');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'You can automatically set all trackbacks/pingbacks for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'Use CSRF protection for comments?');
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'If enabled, a special hash value will check that only users can submit a comment with a valid session ID. This will decrease spam and prevent users from tricking you into submitting comments via CSRF, but it will also prevent users commenting on your blog without cookies.');
-@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Your comment did not contain a Session-Hash. Comments can only be made on this blog when having cookies enabled!');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'Forbid direct comments (XSRF protection)');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'If enabled, visitors are not allowed to submit a comment when visiting your articles directly. This can block spambots, but also people who are commenting from their RSS readers or who have cookies disabled. This protection is implemented by setting a special hash field, which will only exist when a valid session was already started. This will also protect you from XSRF attacks that could trick you into submitting comments unter false pretenses.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Your comment did not contain a Session-Hash. Comments can only be made on this blog when having cookies enabled and visiting at least one URL before commenting!');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'Block bad IPs via HTaccess?');
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Enabling this will add IPs that have sent spam to your blog to your .htaccess file. The .htaccess file will be regenerated regularly with the forbidden IPs of the last month.');
