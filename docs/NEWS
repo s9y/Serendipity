@@ -1,6 +1,13 @@
 # $Id$
 
-Version 1.3 ()
+Version 1.4 ()
+------------------------------------------------------------------------
+
+    * Add new config option to entryproperties plugin to not use
+      extensive joins to save performance in cases where no ACLs
+      need to be evaluated. (garvinhicking)
+
+Version 1.3 (March 18th, 2008)
 ------------------------------------------------------------------------
 
     * Added "Google Reader" option to syndication plugin, by Adam
@@ -17,7 +24,7 @@ Version 1.3 ()
     * Allow to submit comments to future entries, when showing
       future entries is enabled (garvinhicking)      
 
-Version 1.3-beta1 (February 25th)
+Version 1.3-beta1 (February 25th, 2008)
 ------------------------------------------------------------------------
 
     * Fix sidebar plugin for the author's list to not include counting
