@@ -789,7 +789,7 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
     }
     // If no file, trigger an error
     if (!file_exists($file)) {
-      $smarty->trigger_error(__FUNCTION__ .': file ' . $params['file'] . 'not found ');
+      $smarty->trigger_error(__FUNCTION__ .': file ' . $params['file'] . NOT_FOUND . ' ');
       return;
     }
     $smarty->assign($params['assign'], serendipity_getimagesize($file));
