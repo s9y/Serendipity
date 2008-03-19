@@ -756,6 +756,46 @@ function &serendipity_smarty_printTrackbacks($params, &$smarty) {
 }
 
 /**
+ * Get the Serendipity dimensions for an image
+ *
+ * @access public
+ * @param   array       Smarty parameter input array:
+ *                      file: The image file to get image data for
+ *                      assign: The variable to assign the image data array to
+ * @param   object      Smarty object
+ * @return  string      Empty
+ */
+function serendipity_smarty_getImageSize($params, &$smarty) {
+    global $serendipity;
+
+    if (!isset($params['file'])) {
+        $smarty->trigger_error(__FUNCTION__ .": missing 'file' parameter");
+        return;
+    } 
+    if (!isset($params['assign'])) {
+        $smarty->trigger_error(__FUNCTION__ .": missing 'assign' parameter");
+        return;
+    }
+
+    // Is it a correct filesystem absolute path?
+    $file = $params['file'];
+    // Most likely the user specified an HTTP path
+    if (!file_exists($file)) {
+      $file = $_SERVER['DOCUMENT_ROOT'] . $file;
+    }
+    // Maybe wants a template file (returns filesystem path)
+    if (!file_exists($file)) {
+      $file = serendipity_getTemplateFile($params['file']);
+    }
+    // If no file, trigger an error
+    if (!file_exists($file)) {
+      $smarty->trigger_error(__FUNCTION__ .': file ' . $params['file'] . 'not found ');
+      return;
+    }
+    $smarty->assign($params['assign'], serendipity_getimagesize($file));
+}
+
+/**
  * Smarty Prefilter: Replace constants to direkt $smarty.const. access
  *
  * @access public
@@ -847,6 +887,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->register_function('serendipity_getTotalCount', 'serendipity_smarty_getTotalCount');
             $serendipity['smarty']->register_function('pickKey', 'serendipity_smarty_pickKey');
             $serendipity['smarty']->register_function('serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
+            $serendipity['smarty']->register_function('serendipity_getImageSize', 'serendipity_smarty_getImageSize');
             $serendipity['smarty']->register_prefilter('serendipity_replaceSmartyVars');
         }
 
