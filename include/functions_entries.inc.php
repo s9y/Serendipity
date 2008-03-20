@@ -535,7 +535,7 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
                         ON  e.authorid = a.authorid
                             {$cond['joins']}
                      WHERE
-                            e.$key LIKE '" . serendipity_db_escape_string($val) . "'
+                            e.$key " . ($key == 'id' ? '=' : 'LIKE') . " '" . serendipity_db_escape_string($val) . "'
                             {$cond['and']}
                      LIMIT  1";
 
