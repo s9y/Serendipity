@@ -584,7 +584,7 @@ class serendipity_topreferrers_plugin extends serendipity_plugin {
         $propbag->add('description',   SHOWS_TOP_SITES);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array('limit', 'use_links', 'interval'));
         $propbag->add('groups',        array('STATISTICS'));
     }
@@ -599,10 +599,10 @@ class serendipity_topreferrers_plugin extends serendipity_plugin {
                 $propbag->add('default',     10);
                 break;
 
-	    case 'interval':
-	        $propbag->add('type',        'string');
-	        $propbag->add('name',        ARCHIVE_FREQUENCY);
-		$propbag->add('description', ARCHIVE_FREQUENCY_DESC);
+            case 'interval':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        ARCHIVE_FREQUENCY);
+                $propbag->add('description', ARCHIVE_FREQUENCY_DESC);
                 $propbag->add('default',     7);
                 break;
 
@@ -610,7 +610,7 @@ class serendipity_topreferrers_plugin extends serendipity_plugin {
                 $propbag->add('type',        'tristate');
                 $propbag->add('name',        INSTALL_TOP_AS_LINKS);
                 $propbag->add('description', INSTALL_TOP_AS_LINKS_DESC);
-                $propbag->add('default',     false);
+                $propbag->add('default',     'default');
                 break;
 
             default:
@@ -631,12 +631,11 @@ class serendipity_topreferrers_plugin extends serendipity_plugin {
         $global_use_link = serendipity_get_config_var('top_as_links', false, true);
 
         // if local configuration say to use global default, do so
-        if ($use_links == 'default') {
+        if ($use_links === 'default') {
             $use_links = serendipity_db_bool($global_use_link);
         } else {
             $use_links = serendipity_db_bool($use_links);
         }
-
         echo serendipity_displayTopReferrers($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
     }
 }
@@ -697,7 +696,7 @@ class serendipity_topexits_plugin extends serendipity_plugin {
         $global_use_link = serendipity_get_config_var('top_as_links', false, true);
 
         // if local configuration say to use global default, do so
-        if ($use_links == 'default') {
+        if ($use_links === 'default') {
             $use_links = serendipity_db_bool($global_use_link);
         } else {
             $use_links = serendipity_db_bool($use_links);

@@ -916,15 +916,15 @@ function serendipity_displayTopUrlList($list, $limit, $use_links = true, $interv
             if ($use_links) {
                 printf(
                     '<a href="%1$s://%2$s" title="%2$s" >%2$s</a> (%3$s)<br />',
-                    $row['scheme'],
-                    $row['host'],
-                    $row['total']
+                    htmlspecialchars($row['scheme']),
+                    htmlspecialchars($row['host']),
+                    htmlspecialchars($row['total'])
                 );
             } else {
                 printf(
                     '%1$s (%2$s)<br />',
-                    $row['host'],
-                    $row['total']
+                    htmlspecialchars($row['host']),
+                    htmlspecialchars($row['total'])
                 );
             }
         }
