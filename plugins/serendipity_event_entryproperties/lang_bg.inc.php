@@ -5,7 +5,6 @@
  *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
-
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Допълнителни свойства за постингите');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(Кеширане, не публични постинги, sticky постинги)');
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Маркиране на този постинг като sticky');
@@ -37,3 +36,5 @@
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'Списъкът на достъпните допълнителни полета може да бъде редактиран в <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">конфигурацията</a> на приставка serendipity_event_entryproperties.');
 
     @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'Забранени текстови форматирания за тази статия:');
+    @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS', 'Използване на разширено търсене в базата данни');
+    @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS_DESC', 'Ако е позволено, ще бъдат изпълнени допълнителни SQL заявки за лепкави статии, скрити статии и изтрити статии, за да бъдат използвани на лицевата страница. Ако не е нужна, забраната на тази функция ще увеличи производителността.');
