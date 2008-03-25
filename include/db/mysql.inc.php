@@ -96,13 +96,13 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     }
 
     if (!$expectError && mysql_error($serendipity['dbConn']) != '') {
-        $msg = '<pre>' . $sql . '</pre> / ' . htmlspecialchars(mysql_error($serendipity['dbConn']));
+        $msg = '<pre>' . htmlspecialchars($sql) . '</pre> / ' . htmlspecialchars(mysql_error($serendipity['dbConn']));
         return $msg;
     }
 
     if (!$c) {
         if (!$expectError && !$serendipity['production']) {
-            print '<pre>' . $sql . '</pre> / ' . htmlspecialchars(mysql_error($serendipity['dbConn']));
+            print '<pre>' . htmlspecialchars($sql) . '</pre> / ' . htmlspecialchars(mysql_error($serendipity['dbConn']));
             if (function_exists('debug_backtrace') && $reportErr == true) {
                 highlight_string(var_export(debug_backtrace(), 1));
             }
