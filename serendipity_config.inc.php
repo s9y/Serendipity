@@ -115,7 +115,8 @@ $serendipity['autolang'] = 'en';
 $serendipity['defaultTemplate'] = 'carl_contest';
 
 /* Availiable languages */
-$serendipity['languages'] = array('en' => 'English',
+if (!isset($serendipity['languages'])) {
+    $serendipity['languages'] = array('en' => 'English',
                                   'de' => 'German',
                                   'da' => 'Danish',
                                   'es' => 'Spanish',
@@ -145,6 +146,7 @@ $serendipity['languages'] = array('en' => 'English',
                                   'ko' => 'Korean',
                                   'sa' => 'Arabic',
                                   'ta' => 'Tamil');
+}
 
 /* Available Calendars */
 $serendipity['calendars'] = array('gregorian'   => 'Gregorian',
