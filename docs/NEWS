@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Allow to override $serendipity['languages'] array, do not issue
+      s9y version number in RSS feed if 'expose_s9y' is disabled.
+      
     * Add new config option to entryproperties plugin to not use
       extensive joins to save performance in cases where no ACLs
       need to be evaluated. (garvinhicking)

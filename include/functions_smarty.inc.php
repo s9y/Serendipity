@@ -943,7 +943,7 @@ function serendipity_smarty_init($vars = array()) {
                 'serendipityBaseURL'        => $serendipity['baseURL'],
                 'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
                 'serendipityIndexFile'      => $serendipity['indexFile'],
-                'serendipityVersion'        => $serendipity['version'],
+                'serendipityVersion'        => ($serendipity['expose_s9y'] ? $serendipity['version'] : ''),
 
                 'lang'                      => $serendipity['lang'],
                 'category'                  => $category,
