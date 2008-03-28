@@ -487,7 +487,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         'fromName' => &$fromName,
         'fromMail' => &$fromMail,
         'blogMail' => $serendipity['blogMail'],
-        'version'  => 'Serendipity/' . $serendipity['version'],
+        'version'  => 'Serendipity' . ($serendipity['expose_s9y'] ? '/' . $serendipity['version'] : ''),
         'legacy'   => true,
         'headers'  => &$headers,
         'message'  => &$message
@@ -513,8 +513,10 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
             $maildata['headers'][] = 'From: "'. $maildata['fromName'] .'" <'. $maildata['blogMail'] .'>';
         }
         $maildata['headers'][] = 'Reply-To: "'. $maildata['fromName'] .'" <'. $maildata['fromMail'] .'>';
-        $maildata['headers'][] = 'X-Mailer: ' . $maildata['version'];
-        $maildata['headers'][] = 'X-Engine: PHP/'. phpversion();
+        if ($serendipity['expose_s9y']) {
+            $maildata['headers'][] = 'X-Mailer: ' . $maildata['version'];
+            $maildata['headers'][] = 'X-Engine: PHP/'. phpversion();
+        }
         $maildata['headers'][] = 'Message-ID: <'. md5(microtime() . uniqid(time())) .'@'. $_SERVER['HTTP_HOST'] .'>';
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
