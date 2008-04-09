@@ -222,13 +222,12 @@ class serendipity_plugin_comments extends serendipity_plugin
                 printf(
                   '<div class="plugin_comment_wrap">' . PLUGIN_COMMENTS_ABOUT . '</div>',
 
-                  '<span class="plugin_comment_author">' . $user . '</span>',
+                  '<div class="plugin_comment_subject"><span class="plugin_comment_author">' . $user . '</span>',
                   ' <a class="highlight" href="' . serendipity_archiveURL($row['entry_id'], $row['subject'], 'baseURL', true, array('timestamp' => $row['entrystamp'])) .'#c' . $row['comment_id'] . '" title="' . htmlspecialchars($row['subject']) . '">'
                       . htmlspecialchars($row['subject'])
-                      . '</a><br />' . "\n"
-                      . '<span class="plugin_comment_date">' . htmlspecialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</span><br />' . "\n"
-                      . '<span class="plugin_comment_body">' . strip_tags($entry['comment'], '<br /><img><a>') . '</span>'
-                      . '<br /><br /><br />' . "\n\n"
+                      . '</a></div>' . "\n"
+                      . '<div class="plugin_comment_date">' . htmlspecialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</div>' . "\n"
+                      . '<div class="plugin_comment_body">' . strip_tags($entry['comment'], '<br /><img><a>') . '</div>' . "\n\n"
                 );
             }
         }
