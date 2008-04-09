@@ -470,6 +470,8 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $show_count = serendipity_db_bool($this->get_config('show_count', false));
         $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
         $freq = $this->get_config('frequency', 'months');
+
+        echo '<ul>' . "\n";
         
         for($x = 0; $x < $max_x; $x++) {
             $current_ts = $ts;
@@ -566,12 +568,13 @@ class serendipity_archives_plugin extends serendipity_plugin {
             }
 
             if (!$hidden_by_zero_count) {
-                echo '<a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a><br />' . "\n";
+                echo '<li><a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a></li>' . "\n";
             }
         }
 
-        echo '<a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a><br />' . "\n";
-        echo '<a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a>'. "\n";
+        echo '<li><a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a></li>' . "\n";
+        echo '<li><a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a></li>'. "\n";
+        echo '</ul>' . "\n";
     }
 }
 
