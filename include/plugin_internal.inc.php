@@ -1741,11 +1741,13 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $html       = '';
 
         if ($is_form) {
-            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage" method="post"><div>';
+            $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage" method="post">';
         }
 
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
         $image = (($image == "'none'" || $image == 'none') ? '' : $image);
+
+        $html .= '<ul>' . "\n";
 
         if (is_array($authors) && count($authors)) {
             foreach ($authors as $auth) {
@@ -1759,7 +1761,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
                     $entrycount = "";
                 }
 
-                $html .= '<div style="padding-bottom: 2px;">';
+                $html .= '<li>';
 
                 if ($is_form) {
                     $html .= '<input style="width: 15px" type="checkbox" name="serendipity[multiAuth][]" value="' . $auth['authorid'] . '" />';
@@ -1769,16 +1771,18 @@ class serendipity_authors_plugin extends serendipity_plugin {
                     $html .= '<a class="serendipity_xml_icon" href="'. serendipity_feedAuthorURL($auth, 'serendipityHTTPPath') .'"><img src="'. $image .'" alt="XML" style="border: 0px" /></a> ';
                 }
                 $html .= '<a href="'. serendipity_authorURL($auth, 'serendipityHTTPPath') .'" title="'. htmlspecialchars($auth['realname']) .'">'. htmlspecialchars($auth['realname']) . $entrycount . '</a>';
-                $html .= '</div>' . "\n";
+                $html .= '</li>' . "\n";
             }
         }
 
+        $html .= '</ul>' . "\n";
+
         if ($is_form) {
-            $html .= '<br /><input type="submit" name="serendipity[isMultiAuth]" value="' . GO . '" /><br />';
+            $html .= '<div><input type="submit" name="serendipity[isMultiAuth]" value="' . GO . '" /></div>';
         }
 
         $html .= sprintf(
-            '<br /><a href="%s" title="%s">%s</a>',
+            '<div><a href="%s" title="%s">%s</a></div>',
 
             $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'],
             ALL_AUTHORS,
@@ -1786,7 +1790,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         );
 
         if ($is_form) {
-            $html .= '</div></form>';
+            $html .= '</form>';
         }
         print $html;
     }
