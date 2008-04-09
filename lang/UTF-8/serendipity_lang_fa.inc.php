@@ -89,7 +89,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'خطای ناشناخته، فایلی بالاگذاری نشد. ممکن است که حجم فایل شما بیشتر از ماکزیمم حجم اجازه داده شده باشد. لطفا ISP یا فایل php.ini خود را چک کنید.');
 @define('GO', 'برو!');
 @define('NEWSIZE', 'سایز جدید: ');
-@define('RESIZE_BLAHBLAH', '<b>تغییر اندازه %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>تغییر اندازه %s</b>');
 @define('ORIGINAL_SIZE', 'ابعاد اصلی: <i>%sx%s</i> پیکسل');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>در این مکان، شما می توانید ابعاد عکس را درست نمایید. اگر تصمیم دارید ابعاد عکس را متناسب تغییر دهید، فقط یکی از اعداد را وارد کرده و سپس کلید TAB را فشار دهید -- ما ضلع دیگر را به صورت متناسب تغییر خواهیم داد</p>');
 @define('QUICKJUMP_CALENDAR', 'تقویم برای پرش سریع');
@@ -203,6 +203,10 @@
 @define('RESIZING', 'تغییر اندازه');
 @define('RESIZE_DONE', 'انجام شد (تعداد %s تصویر تغییر کرد).');
 @define('SYNCING', 'هماهنگی پایگاه داده با شاخه تصاویر');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'انجام شد (تعداد %s تصویر هماهنگ شد).');
 @define('FILE_NOT_FOUND', 'توانایی تشخیص محل تصویر <b>%s</b> نیست، احتمالا قبلا حذف شده است؟');
 @define('ABORT_NOW', 'بازگشت');
@@ -414,6 +418,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'عکس های کوچک با روش روبرو نامگذاری خواهند شد: نام اصلی.[پیشوند].توسعه');
 @define('INSTALL_THUMBWIDTH', 'اندازه تصاویر کوچک');
 @define('INSTALL_THUMBWIDTH_DESC', 'بیشترین عرض عکس های کوچک');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* PERSONAL DETAILS */
 @define('USERCONF_CAT_PERSONAL', 'اطلاعات شخصی');

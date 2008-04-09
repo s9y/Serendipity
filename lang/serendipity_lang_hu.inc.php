@@ -88,7 +88,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Ismeretlen hiba történt, a fájl nincs feltöltve. Talán a fájl mérete nagyobb mint a szerveren beállított megengedett maximum érték. Ezt a beállítást a szerver üzemeltetõje tudja megváltoztatni.');
 @define('GO', 'OK');
 @define('NEWSIZE', 'Új méret: ');
-@define('RESIZE_BLAHBLAH', '<b>Átméretezés %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Átméretezés %s</b>');
 @define('ORIGINAL_SIZE', 'Eredeti méret: <i>%sx%s</i> képpont');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Itt módosíthatja a kép méretét. Ha arányosan szeretné a képet átméretezni, elég az egyik dobozban módosítani a számot,majd megnyomni a TAB billentyût -- az új méret automatikusan kerül meghatározásra, így a kép nem lesz aránytalan</p>');
 @define('QUICKJUMP_CALENDAR', 'Gyors naptárra ugrás');
@@ -202,6 +202,10 @@
 @define('RESIZING', 'Átméretezés');
 @define('RESIZE_DONE', 'Kész (%s kép átméretezve).');
 @define('SYNCING', 'Szinkronizálom az adatbázist a képek könyvtárával.');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Kész (%s képet szinkronizáltam).');
 @define('FILE_NOT_FOUND', 'Nem találom a <b>%s</b> fájlt, lehet, hogy már törölve lett?');
 @define('ABORT_NOW', 'Azonnali megszakítás');
@@ -413,6 +417,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'A képekbõl generált elõnézeti képek ilyen nevûek lesznek: eredetinév.[elõtag].kiterj');
 @define('INSTALL_THUMBWIDTH', 'Elõnézeti kép méretek');
 @define('INSTALL_THUMBWIDTH_DESC', 'Az automatikusan generált elõnézeti képek szélességének maximuma');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Személyes adatok');

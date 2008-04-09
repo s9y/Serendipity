@@ -90,7 +90,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Er is een onbekende fout opgetreden, het bestand is niet verzonden. Misschien is het bestand groter dan uw server toestaat. Controleer dit bij uw provider of bewerk uw php.ini zodat deze grotere bestanden toelaat.');
 @define('GO', 'Uitvoeren!');
 @define('NEWSIZE', 'Nieuwe grootte: ');
-@define('RESIZE_BLAHBLAH', '<b>Vergroten/Verkleinen %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Vergroten/Verkleinen %s</b>');
 @define('ORIGINAL_SIZE', 'Originele grootte: <i>%sx%s</i> pixels');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Hier kunt u de grootte van de afbeelding aanpassen. Als u de afbeeldingsverhoudingen wilt behouden, voer dan in één van de velden een waarde in en druk op de TAB-toets -- Het programma zal dan zelf de andere grootte berekenen zodat de verhoudingen hetzelfde blijven</p>');
 @define('QUICKJUMP_CALENDAR', 'Quickjump Kalender');
@@ -204,6 +204,10 @@
 @define('RESIZING', 'Grootte aanpassen');
 @define('RESIZE_DONE', 'Gereed (%s afbeeldingen aangepast).');
 @define('SYNCING', 'Bezig met het synchroniseren van de databank met de map waar de afbeeldingen in staan');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Gereed (%s afbeeldingen gesynchroniseerd).');
 @define('FILE_NOT_FOUND', 'Kan bestand <b>%s</b> niet vinden, mogelijk is deze reeds verwijderd.');
 @define('ABORT_NOW', 'Annuleren');
@@ -415,6 +419,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'Miniaturen krijgen een naam volgens het formaat: origineel.[achtervoegsel].ext');
 @define('INSTALL_THUMBWIDTH', 'Formaat miniaturen');
 @define('INSTALL_THUMBWIDTH_DESC', 'Maximale breedte van automatisch aangemaakte miniaturen');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Uw persoonlijke gegevens');

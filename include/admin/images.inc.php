@@ -47,6 +47,33 @@ switch ($serendipity['GET']['adminAction']) {
 
     case 'sync':
         if (!serendipity_checkPermission('adminImagesSync')) {
+            echo '<div class="warning"><em>' . PERM_DENIED . '</em></div>';
+            break;
+        }
+
+        // Make the form to actually do sync with deleting or not
+        $n = "\n";
+        $warning = preg_replace('#\\\n#', '<br />', WARNING_THIS_BLAHBLAH);
+        echo '<div class="serendipityAdminMsgNote">' . $warning . '</div>'; 
+        echo '  <form method="POST" action="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=doSync">' . $n;
+        echo '  <p>' . $n . '  <fieldset>' . $n;
+        echo '  <legend>' . SYNC_OPTION_LEGEND . '</legend>' . $n;
+        echo '    <input type="radio" name="serendipity[deleteThumbs]" value="no" checked="checked" id="keepthumbs" />' .$n;
+        echo '      <label for="keepthumbs">' . SYNC_OPTION_KEEPTHUMBS . '</label><br />' . $n;
+        echo '    <input type="radio" name="serendipity[deleteThumbs]" value="check" id="sizecheckthumbs" />' . $n;
+        echo '      <label for="sizecheckthumbs">' . SYNC_OPTION_SIZECHECKTHUMBS . '</label><br />' . $n;
+        echo '    <input type="radio" name="serendipity[deleteThumbs]" value="yes" />' . $n;
+        echo '      <label for="deletethumbs">' . SYNC_OPTION_DELETETHUMBS . '</label><br />' . $n;
+        echo '  </fieldset>' . $n . '  </p>' . $n;
+        echo '  <input name="doSync" value="' . CREATE_THUMBS . '" class="serendipityPrettyButton input_button" type="submit" />' . $n;
+        echo '  <a href="serendipity_admin.php" class="serendipityPrettyButton">' . ABORT_NOW . '</a>' . $n;
+        echo '</form>';
+        break;
+
+    case 'doSync':
+        // I don't know how it could've changed, but let's be safe.
+        if (!serendipity_checkPermission('adminImagesSync')) {
+            echo '<div class="warning"><em>' . PERM_DENIED . '</em></div>';
             break;
         }
 
@@ -58,7 +85,19 @@ switch ($serendipity['GET']['adminAction']) {
         echo '<p class="image_synch"><b>' . SYNCING . '</b></p><br />';
         flush();
 
-        $i = serendipity_syncThumbs();
+        $deleteThumbs = false;
+        if (isset($serendipity['POST']['deleteThumbs'])) {
+            switch ($serendipity['POST']['deleteThumbs'])
+            {
+            case 'yes':
+                $deleteThumbs = true;
+                break;
+            case 'check':
+                $deleteThumbs = 'checksize';
+                break;
+            }
+        }
+        $i = serendipity_syncThumbs($deleteThumbs);
         printf(SYNC_DONE, $i);
 
         echo '<p class="image_resize"><b>' . RESIZING . '</b></p><br />';

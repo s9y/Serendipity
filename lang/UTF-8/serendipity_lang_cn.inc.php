@@ -90,7 +90,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '发生错误, 文件没有上传，可能因为你的文件超过限制的大小， 请询问你的主机商或修改你的 php.ini 文件属性。');
 @define('GO', '继续');
 @define('NEWSIZE', '大小: ');
-@define('RESIZE_BLAHBLAH', '<b>重设大小 %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>重设大小 %s</b>');
 @define('ORIGINAL_SIZE', '原有的大小: <i>%sx%s</i> 像素');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>在这里你可以修改图片大小！如果你要修改成相同的图片比例, 你只需要输入一个数值然后按 TAB -- 系统会自动帮你计算比例以免出错。</p>');
 @define('QUICKJUMP_CALENDAR', '日历快速跳跃');
@@ -204,6 +204,10 @@
 @define('RESIZING', '重设大小');
 @define('RESIZE_DONE', '完成 (重设 %s 个图片)');
 @define('SYNCING', '进行数据库和图片文件夹数据同步');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', '完成 (同步了 %s 个图片)');
 @define('FILE_NOT_FOUND', '找不到文件 <b>%s</b>, 可能已被删除');
 @define('ABORT_NOW', '放弃');
@@ -415,6 +419,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', '缩图会以下面的格式重新命名: original.[后置字符].ext');
 @define('INSTALL_THUMBWIDTH', '缩图大小');
 @define('INSTALL_THUMBWIDTH_DESC', '自动建立缩图的最大宽度');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', '个人资料设定');

@@ -88,7 +88,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Õ’· Œÿ√ €Ì— „⁄—Ê›! ! ! ·„ Ì „· —›⁄ «·„·› ñ „‰ «·„„ﬂ‰ √‰ ÌﬂÊ‰ «·„·› √ﬂ»— „‰ ÕÃ„ «·„·› ·„’—Õ »—›⁄Â ! ! ! √›Õ’ ISP √Ê ﬁ„ » Õ—Ì— „·› php.ini ﬂÌ  ”„Õ »—›⁄ «·„·›«  «·ﬂ»Ì—…');
 @define('GO', '√ﬂ„·!');
 @define('NEWSIZE', '«·„ﬁ«” «·ÃœÌœ: ');
-@define('RESIZE_BLAHBLAH', '<b> €ÌÌ— «·„ﬁ«ÌÌ” %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b> €ÌÌ— «·„ﬁ«ÌÌ” %s</b>');
 @define('ORIGINAL_SIZE', '«·ÕÃ„ «·«’·Ì <i>%sx%s</i> pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Ì„ﬂ‰ ·ﬂ  €ÌÌ— ﬁÌ«”«  «·’Ê—… - «‰ ﬂ‰   —Ìœ  €ÌÌ— ﬁÌ«”«  «·’Ê—… »√ÿÊ«· „ ‰«”»… - ﬂ· „« ⁄·Ìﬂ ÂÊ «œŒ· «·ﬁÌ«” «·ÃœÌœ ›Ì «Õœ «·’‰œÊﬁÌ‰ À„ √÷€ÿ “— Tab -- ”Ê›  ⁄ÿÌﬂ « „« ÌﬂÌ« «·ÕÃ„ «·„‰«”» ··ﬁÌ«” «·ÃœÌœ - ·–·ﬂ «·’Ê—… ”Ê›  ” „— »‘ﬂ·Â« «·√’·Ì Ê ·«  ›ﬁœ ‘ﬂ·  Ê«“‰Â«</p>');
 @define('QUICKJUMP_CALENDAR', 'QuickJump Calendar');
@@ -203,6 +203,10 @@
 @define('RESIZING', ' €Ì— «·ÕÃ„');
 @define('RESIZE_DONE', ' „ ( €ÌÌ— ﬁÌ«”«  %s ’Ê—…).');
 @define('SYNCING', '÷»ÿ ﬁ«⁄œ… «·»Ì«‰«  „⁄ „Ã·œ «·’Ê—');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Done (÷»ÿ %s «·’Ê—).');
 @define('FILE_NOT_FOUND', '·„ Ì „ ≈ÌÃ«œ «·„·› <b>%s</b>, „‰ «·„„ﬂ‰ √‰ ÌﬂÊ‰ ﬁœ Õ–›ø');
 @define('ABORT_NOW', ' Êﬁ› «·¬‰');
@@ -414,6 +418,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', '”Ê› Ì⁄ÿÏ ··’Ê— «·„’€—… ««·√”„ Ê«·’Ì€… «· «·Ì…: original.[suffix].ext');
 @define('INSTALL_THUMBWIDTH', 'ﬁÌ«”«  «·’Ê—… «·„’€—…');
 @define('INSTALL_THUMBWIDTH_DESC', '«·⁄—÷ «·À«»  ·’Ê— «·„’€—… «·„‰‘∆… √ „« ÌﬂÌ«');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', ' ›’Ì· «⁄œ«œ ﬂ «·‘Œ’Ì…');

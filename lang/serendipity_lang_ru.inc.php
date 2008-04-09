@@ -90,7 +90,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Произошла неизвестная ошибка, файл не был загружен. Возможно, размер вашего файл превысил допустивый максимальный размер, разрешённый на вашем сервере. Сверьтесь с вашим провайдером, или отредактируйте ваш файл php.ini чтобы позволить загрузку на сервер файлов большего размера.');
 @define('GO', 'Давай!');
 @define('NEWSIZE', 'Новый размер: ');
-@define('RESIZE_BLAHBLAH', '<b>Изменить размеры %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Изменить размеры %s</b>');
 @define('ORIGINAL_SIZE', 'Оригинальный размер: <i>%sx%s</i> pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Здесь вы можете изменить размер изображения. Если вы хотите изменить размеры пропорционально, просто введите значение в одном из двух полей, и нажмите клавишу TAB - второе поле будет заполнено автоматически с учётом пропорций изображения.</p>');
 @define('QUICKJUMP_CALENDAR', 'Календарь');
@@ -205,6 +205,10 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('RESIZING', 'Изменение размеров');
 @define('RESIZE_DONE', 'Готово! (Изменено изображений: %s).');
 @define('SYNCING', 'Синхронизация базы данных с каталогом изображений');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Готово! (Синхронизировано изображений: %s).');
 @define('FILE_NOT_FOUND', 'Невозможно найти файл <b>%s</b>, может быть он уже был удалён?');
 @define('ABORT_NOW', 'Отмена');
@@ -416,6 +420,14 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_THUMBSUFFIX_DESC', 'Тамбнэйлы будут создаваться в соответствии с форматом: original.[suffix].ext');
 @define('INSTALL_THUMBWIDTH', 'Размеры тамбнэйлов');
 @define('INSTALL_THUMBWIDTH_DESC', 'Максимальная ширина автоматически создаваемых тамбнэйлов');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Личные настройки');

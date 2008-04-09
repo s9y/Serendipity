@@ -522,6 +522,16 @@
                                           'permission'  => 'siteConfiguration',
                                           'default'     => 110),
 
+                                    array('var'         => 'thumbConstraint',
+                                          'title'       => INSTALL_THUMBDIM,
+                                          'description' => INSTALL_THUMBDIM_DESC,
+                                          'type'        => 'list',
+                                          'permission'  => 'siteConfiguration',
+                                          'default'     => array(
+                                              'largest' => INSTALL_THUMBDIM_LARGEST,
+                                              'width'   => INSTALL_THUMBDIM_WIDTH,
+                                              'height'  => INSTALL_THUMBDIM_HEIGHT)),
+
                                     array('var'         => 'maxFileSize',
                                           'title'       => MEDIA_UPLOAD_SIZE,
                                           'description' => MEDIA_UPLOAD_SIZE_DESC,

@@ -643,15 +643,19 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
     } else {
         if ($serendipity['magick'] !== true) {
             if (is_array($size)) {
+                // The caller wants a thumbnail with a specific size
                 $r = serendipity_resize_image_gd($infile, $outfile, $size['width'], $size['height']);
             } else {
-                $r = serendipity_resize_image_gd($infile, $outfile, $size);
+                // The caller wants a thumbnail constrained in the dimension set by config
+                $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
+                $r = serendipity_resize_image_gd($infile, $outfile, $calc[0], $calc[1]);
             }
         } else {
             if (is_array($size)) {
                 $r = $size;
             } else {
-                $r = array('width' => $size, 'height' => $size);
+                $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
+                $r = array('width' => $calc[0], 'height' => $calc[1]);
             }
             $newSize = $r['width'] . 'x' . $r['height'];
             if ($fdim['mime'] == 'application/pdf') {
@@ -788,6 +792,7 @@ function serendipity_generateThumbs() {
 
     $i=0;
     $serendipity['imageList'] = serendipity_fetchImagesFromDatabase(0, 0, $total);
+    $msg_printed = false;
 
     foreach ($serendipity['imageList'] AS $k => $file) {
         $is_image = serendipity_isImage($file);
@@ -808,25 +813,37 @@ function serendipity_generateThumbs() {
 
             $oldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $file['thumbnail_name'] . '.' . $file['extension'];
             $newThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $serendipity['thumbSuffix'] . '.' . $file['extension'];
+            $sThumb = $file['path'] . $file['name'] . '.' . $serendipity['thumbSuffix'] . '.' . $file['extension'];
             $fdim = @getimagesize($ffull);
 
             if (!file_exists($oldThumb) && !file_exists($newThumb) && ($fdim[0] > $serendipity['thumbSize'] || $fdim[1] > $serendipity['thumbSize'])) {
                 $returnsize = serendipity_makeThumbnail($file['name'] . '.' . $file['extension'], $file['path']);
                 if ($returnsize !== false ) {
-                    printf(RESIZE_BLAHBLAH, $filename . ': ' . $returnsize[0] . 'x' . $returnsize[1]);
+                    // Only print the resize message the first time
+                    if (!$msg_printed) {
+                      printf(RESIZE_BLAHBLAH, THUMBNAIL_SHORT);
+                      echo "\n" . '<ul class="serendipityFileList">' . "\n";
+                      $msg_printed = true;
+                    }
+                    echo '<li>' . $sThumb . ': ' . $returnsize[0] . 'x' . $returnsize[1] . "</li>\n";
                     if (!file_exists($newThumb)) {
-                        printf('<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div><br />', $filename);
+                        printf('<li><div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div></li>' . "\n", $sThumb);
                     } else {
                         $update = true;
                     }
                 }
             } elseif (!file_exists($oldThumb) && !file_exists($newThumb) && $fdim[0] <= $serendipity['thumbSize'] && $fdim[1] <= $serendipity['thumbSize']) {
+                if (!$msg_printed) {
+                    printf(RESIZE_BLAHBLAH, THUMB);
+                    echo "\n" . '<ul class="serendipityFileList">' . "\n";
+                    $msg_printed = true;
+                }
                 $res = @copy($ffull, $newThumb);
                 if (@$res === true) {
-                    printf(THUMBNAIL_USING_OWN . '<br />', $filename);
+                    printf('<li>' . THUMBNAIL_USING_OWN . '</li>' . "\n", $sThumb);
                     $update = true;
                 } else {
-                    printf('<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div><br />', $filename);
+                    printf('<li><div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div></li>' . "\n", $sThumb);
                 }
             }
 
@@ -839,6 +856,12 @@ function serendipity_generateThumbs() {
             // Currently, non-image files have no thumbnail.
         }
     }
+
+    // Close the list, if it was created
+    if ($msg_printed) {
+        echo "</ul>\n";
+    }
+
 
     return $i;
 }
@@ -1059,7 +1082,7 @@ function serendipity_guessMime($extension) {
  * @access public
  * @return  int     Number of updated thumbnails
  */
-function serendipity_syncThumbs() {
+function serendipity_syncThumbs($deleteThumbs = false) {
     global $serendipity;
 
     $i=0;
@@ -1077,6 +1100,7 @@ function serendipity_syncThumbs() {
 
         $ffull   = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $files[$x];
         $fthumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $f[0] . '.' . $serendipity['thumbSuffix'] . '.' . $f[1];
+        $sThumb = $f[0] . '.' . $serendipity['thumbSuffix'] . '.' . $f[1];
         $fbase   = basename($f[0]);
         $fdir    = dirname($f[0]) . '/';
         if ($fdir == './') {
@@ -1091,6 +1115,40 @@ function serendipity_syncThumbs() {
         $ft_mime = serendipity_guessMime($f[1]);
         $fdim    = serendipity_getimagesize($ffull, $ft_mime);
 
+        // If we're supposed to delete thumbs, this is the easiest place.
+        if (is_readable($fthumb)) {
+            if ($deleteThumbs === true) {
+                if (@unlink($fthumb)) {
+                    printf(DELETE_THUMBNAIL . "<br />\n", $sThumb);
+                    $i++;
+                }
+            } else if ($deleteThumbs == 'checksize') {
+                // Find existing thumbnail dimensions
+                $tdim = serendipity_getimagesize($fthumb);
+                if ($tdim['noimage']) {
+                    // Delete it so it can be regenerated
+                    if (@unlink($fthumb)) {
+                        printf(DELETE_THUMBNAIL . "<br />\n", $sthumb);
+                        $i++;
+                    }
+                } else {
+                    // Calculate correct thumbnail size from original image
+                    $expect = serendipity_calculate_aspect_size(
+                        $fdim[0], $fdim[1], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
+                    // Check actual thumbnail size
+                    if ($tdim[0] != $expect[0] || $tdim[1] != $expect[1]) {
+                        // This thumbnail is incorrect; delete it so
+                        // it can be regenerated
+                        if (@unlink($fthumb)) {
+                            printf(DELETE_THUMBNAIL . "<br />\n", $sthumb);
+                            $i++;
+                        } 
+                    }
+                }
+            }
+            // else the option is to keep all existing thumbs; do nothing.
+        } // end if thumb exists
+
         $cond = array(
             'and' => "WHERE name = '" . serendipity_db_escape_string($fbase) . "'
                             " . ($fdir != '' ? "AND path = '" . serendipity_db_escape_string($fdir) . "'" : '') . "
@@ -1104,20 +1162,25 @@ function serendipity_syncThumbs() {
 
                                            {$cond['and']}", true, 'assoc');
         if (is_array($rs)) {
+            // This image is in the database.  Check our calculated data against the database data.
             $update    = array();
-            $checkfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $rs['path'] . $rs['name'] . '.' . $rs['thumbnail_name'] . '.' . $rs['extension'];
+            // Is the width correct?
             if (isset($fdim[0]) && $rs['dimensions_width'] != $fdim[0]) {
                 $update['dimensions_width'] = $fdim[0];
             }
 
+            // Is the height correct?
             if (isset($fdim[1]) && $rs['dimensions_height'] != $fdim[1]) {
                 $update['dimensions_height'] = $fdim[1];
             }
 
+            // Is the image size correct?
             if ($rs['size'] != filesize($ffull)) {
                 $update['size'] = filesize($ffull);
             }
 
+            // Has the thumbnail suffix changed?
+            $checkfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $rs['path'] . $rs['name'] . '.' . $rs['thumbnail_name'] . '.' . $rs['extension'];
             if (!file_exists($checkfile) && file_exists($fthumb)) {
                 $update['thumbnail_name'] = $serendipity['thumbSuffix'];
             }
@@ -1246,13 +1309,13 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
     $height = imagesy($in);
 
     if (is_null($newheight)) {
-        $newsizes = serendipity_calculate_aspect_size($width, $height, $newwidth);
+        $newsizes = serendipity_calculate_aspect_size($width, $height, $newwidth, 'width');
         $newwidth = $newsizes[0];
         $newheight = $newsizes[1];
     }
 
     if (is_null($newwidth)) {
-        $newsizes  = serendipity_calculate_aspect_size($width, $height, null, $newheight);
+        $newsizes  = serendipity_calculate_aspect_size($width, $height, $newheight, 'height');
         $newwidth  = $newsizes[0];
         $newheight = $newsizes[1];
     }
@@ -1277,56 +1340,81 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
 }
 
 /**
- * Calculate aspect ratio of an image
+ * Calculate new size for an image, considering aspect ratio and constraint
  *
  * @access public
  * @param   int     Image width
  * @param   int     Image height
- * @param   int     Target width
- * @return  int     Target height
+ * @param   int     Target dimension size
+ * @param   string  Dimension to constrain ('width', 'height', 'largest', 
+                    'smallest'; defaults to original behavior, 'largest')
+ * @return  array   An array with the scaled width and height
  */
-function serendipity_calculate_aspect_size($width, $height, $orig_newwidth, $orig_newheight = null) {
+function serendipity_calculate_aspect_size($width, $height, $size, $constraint = null) {
 
-    // calculate aspect ratio
-    if (!is_null($orig_newheight)) {
-        $div_width  = $width  / $orig_newheight;
-        $div_height = $height / $orig_newheight;
-    } else {
-        $div_width  = $width  / $orig_newwidth;
-        $div_height = $height / $orig_newwidth;
+    // Allow for future constraints (idea: 'percent')
+    $known_constraints = array('width', 'height', 'largest', 'smallest');
+
+    // Rearrange params for calls from old imageselectorplus plugin
+    if ($size == null) {
+      $size = $constraint;
+      $constraint = 'smallest';
     }
 
-    if ($div_width <= 1 && $div_height <= 1) {
-        // do not scale small images where both sides are smaller than the thumbnail dimensions
-        $newheight = $height;
-        $newwidth  = $width;
-    } elseif (is_null($orig_newheight) &&  $div_width >= $div_height) {
-        // max width - calculate height, keep width as scaling base
-        $newheight = round($height / $div_width);
-        // make sure the height is at least 1 pixel for extreme images
-        $newheight = ($newheight >= 1 ? $newheight : 1);
-        $newwidth = $orig_newwidth;
-    } elseif (is_null($orig_newwidth) && $div_width >= $div_height) {
-        // max width - calculate height, keep width as scaling base
-        $newwidth = round($width / $div_height);
-        // make sure the height is at least 1 pixel for extreme images
-        $newwidth = ($newwidth >= 1 ? $newwidth : 1);
-        $newheight = $orig_newheight;
-    } elseif (is_null($orig_newheight)) {
-        // max height - calculate width, keep height as scaling base
-        $newheight = $orig_newwidth;
-        $newwidth  = round($width / $div_height);
-        // make sure the width is at least 1 pixel for extreme images
-        $newwidth  = ($newwidth >= 1 ? $newwidth : 1);
-    } else {
-        // max height - calculate width, keep height as scaling base
-        $newwidth = $orig_newheight;
-        $newheight  = round($height / $div_width);
-        // make sure the width is at least 1 pixel for extreme images
-        $newheight = ($newheight >= 1 ? $newheight : 1);
+    // Normalize relative constraint types
+    if ($constraint == 'largest' || !in_array($constraint, $known_constraints)) {
+        // Original default behavior, included for backwards compatibility
+        // Constrains largest dimension
+        if ($width >= $height) {
+            $constraint = 'width';
+        } else {
+            $constraint = 'height';
+        }
+    } else if ($constraint == 'smallest') {
+        // Only ever called from imageselectorplus plugin, included for
+        // backwards compatibility with its older versions
+        if ($width >= $height) {
+            $constraint = 'height';
+        } else {
+            $constraint = 'width';
+        }
     }
 
-    return array($newwidth, $newheight);
+    // Constraint is now definitely one of the known absolute types,
+    // either 'width' or 'height'
+    if ($constraint == 'height') {
+        // Is the image big enough to resize?
+        if ($height > $size) {
+            // Calculate new size
+            $ratio = $width / $height;
+            $newwidth = round($size * $ratio);
+            // Limit calculated dimension to at least 1px
+            if ($newwidth <= 0) {
+                $newwidth = 1;
+            }
+            $newsize = array($newwidth, $size);
+        } else {
+            // Image is too small to be resized; use original dimensions
+            $newsize = array($width, $height);
+        }
+    } else {
+        // Default constraint is width
+        if ($width > $size) {
+            // Image is big enough to resize
+            $ratio = $height / $width;
+            $newheight = round($size * $ratio);
+            // Limit calculated dimension to at least 1px
+            if ($newheight <= 0) { 
+                $newheight = 1; 
+            }
+            $newsize = array($size, $newheight);
+        } else {
+            // Do not scale small images
+            $newsize = array($width, $height);
+        }
+    }
+
+    return $newsize;
 }
 
 /**
@@ -2665,7 +2753,7 @@ function serendipity_prepareMedia(&$file, $url = '') {
             $file['preview'] = '<a href="'. $file['preview_url'] .'">'. $file['preview'] .'</a>';
         }
     } elseif ($file['is_image'] && $file['hotlink']) {
-        $sizes = serendipity_calculate_aspect_size($file['dimensions_width'], $file['dimensions_height'], $serendipity['thumbSize']);
+        $sizes = serendipity_calculate_aspect_size($file['dimensions_width'], $file['dimensions_height'], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
         $file['thumbWidth']  = $sizes[0];
         $file['thumbHeight'] = $sizes[1];
         $file['preview'] .= '<img src="' . $file['path'] . '" width="' . $sizes[0] . '" height="' . $sizes[1] . '" border="0" title="' . $file['path'] . '" alt="'. $file['realname'] . '" />';

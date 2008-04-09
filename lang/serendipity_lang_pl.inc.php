@@ -90,7 +90,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Wyst±pi³ nieznany b³±d, plik nie zosta³ za³adowany. Byæ mo¿e konfiguracja serwera nie zezwala na przesy³anie tak du¿ych plików. Sprawd¼ to u swojego ISP lub wyedytuj odpowiednio plik php.ini (je¶li masz dostêp do konfiguracji serwera) by zezwoliæ na przesy³anie wiêkszych plików.');
 @define('GO', 'Start!');
 @define('NEWSIZE', 'Nowy rozmiar: ');
-@define('RESIZE_BLAHBLAH', '<b>Zmieñ rozmiar: %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Zmieñ rozmiar: %s</b>');
 @define('ORIGINAL_SIZE', 'Oryginalny rozmiar: <i>%sx%s</i> pikseli');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Tu mo¿esz zmieniæ rozmiar obrazka. Je¶li chcesz zmieniæ rozmiar proporcjonalnie, zaznacz odpowiedni± opcjê, wpisz warto¶æ w jedno z pól i wci¶nij TAB - nowy rozmiar dla drugiej warto¶ci zostanie automatycznie obliczony, tak by proporcje obrazka zosta³y zachowane.</p>');
 @define('QUICKJUMP_CALENDAR', 'Kalendarz szybkiego dostêpu');
@@ -204,6 +204,10 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('RESIZING', 'Zmieniam rozmiar');
 @define('RESIZE_DONE', 'Zrobione (ilo¶æ obrazków, którym zmieniono rozmiar: %s).');
 @define('SYNCING', 'Synchronizacja bazy danych z katalogiem obrazków');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Zrobione (%s obrazków zsynchronizowanych).');
 @define('FILE_NOT_FOUND', 'Nie mo¿na odnalze¼æ pliku <b>%s</b>. Byæ mo¿e zosta³ ju¿ usuniêty?');
 @define('ABORT_NOW', 'Przerwij teraz');
@@ -415,6 +419,14 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('INSTALL_THUMBSUFFIX_DESC', 'Miniaturki bêd± nazywane wed³ug nastêpuj±cego formatu: nazwaoryginalna.[sufiks].rozszerzenie');
 @define('INSTALL_THUMBWIDTH', 'Szeroko¶æ miniaturki');
 @define('INSTALL_THUMBWIDTH_DESC', 'Ustal szeroko¶æ tworzonych automatycznie miniatur');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Twoje ustawienia osobiste');

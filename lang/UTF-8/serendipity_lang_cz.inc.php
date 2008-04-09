@@ -98,7 +98,7 @@ $i18n_filename_to = array (
 @define('ERROR_FILE_EXISTS_ALREADY', 'Chyba: Soubor už ve vašem počítači existuje!');
 @define('GO', 'Provést!');
 @define('NEWSIZE', 'Nový rozměr: ');
-@define('RESIZE_BLAHBLAH', '<b>Změnit rozměr %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Změnit rozměr %s</b>');
 @define('ORIGINAL_SIZE', 'Původní rozměr: <i>%sx%s</i> pixelů');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Zde můžete zadat nový rozměr obrázku. Pokud chcete zachovat proporce, zadejte jen jednu hodnotu a stiskněte klávesu TAB, nový rozměr bude dopočítán automaticky:');
 @define('QUICKJUMP_CALENDAR', 'Vyhledávací kalendář');
@@ -200,6 +200,10 @@ $i18n_filename_to = array (
 @define('RESIZING', 'Změna rozměrů');
 @define('RESIZE_DONE', 'Hotovo (upraven rozměr %s obrázků).');
 @define('SYNCING', 'Synchronizace databáze s adresářem obrázků');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Hotovo (synchronizováno %s obrázků).');
 @define('DELETE_IMAGE_FAIL' , 'Nelze vymazat obrázek <b>%s</b>');
 @define('DELETE_THUMBNAIL', 'Vymazán náhled obrázku s názvem <b>%s</b>');
@@ -403,6 +407,14 @@ $i18n_filename_to = array (
 @define('INSTALL_THUMBSUFFIX_DESC', 'Náhledy budou pojmenovány original.sufix.ext');
 @define('INSTALL_THUMBWIDTH', 'Rozměry náhledů');
 @define('INSTALL_THUMBWIDTH_DESC', 'Pevná šířka automaticky generovaných náhledů');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Osobní nastavení');
