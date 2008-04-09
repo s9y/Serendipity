@@ -88,7 +88,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Pieleen meni, tiedostoa ei tuotu. Kenties tiedoston koko oli liian suuri. Kysy palveluntarjoajaltasi apua tai muokkaa php.ini tiedostoasi salliaksesi isompien tiedostojen tuonnin..');
 @define('GO', 'Tee!');
 @define('NEWSIZE', 'Uusi koko: ');
-@define('RESIZE_BLAHBLAH', '<b>Muokkaa kokoa %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Muokkaa kokoa %s</b>');
 @define('ORIGINAL_SIZE', 'Alkuperäinen koko: <i>%sx%s</i> pikseliä');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Kuvan koon muokkaus. Voit muokata kuvan kokoa säilyttäen suhteet, lisää toiseen laatikkoon arvo ja paina tab-näppäintä, niin lasken sinulle suhteen mukaisen toisen arvon automaattisesti.</p>');
 @define('QUICKJUMP_CALENDAR', 'Pikasiirtymä kalenteriin');
@@ -202,6 +202,10 @@
 @define('RESIZING', 'Muokataan');
 @define('RESIZE_DONE', 'Valmis (muokattu %s kuvaa).');
 @define('SYNCING', 'Päivitetään tietokantaa vastaamaan kuvakansiota');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Valmis (Päivitetty %s kuvaa).');
 @define('FILE_NOT_FOUND', 'Tiedostoa <b>%s</b> ei löydy, ehkäpä se on jo poistettu?');
 @define('ABORT_NOW', 'Peruuta');
@@ -412,6 +416,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'Pienoiskuvakkeet nimetään seuraavasti: originaali.[suffiksi].pääte');
 @define('INSTALL_THUMBWIDTH', 'Pienoiskuvakkeen mitat');
 @define('INSTALL_THUMBWIDTH_DESC', 'Pienoiskuvakkeen maksimileveys');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Henkilötietosi');

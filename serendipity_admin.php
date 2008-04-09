@@ -401,7 +401,7 @@ if ($use_installer) {
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect"><?php echo MANAGE_DIRECTORIES; ?></a></li>
 <?php } ?>
 <?php if (serendipity_checkPermission('adminImagesSync')) { ?>
-                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync" onclick="return confirm('<?php echo WARNING_THIS_BLAHBLAH; ?>');"><?php echo CREATE_THUMBS; ?></a></li>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuMediaLinks"><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync"><?php echo CREATE_THUMBS; ?></a></li>
 <?php } ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_entries_images', $serendipity); ?>
                         <li class="serendipitySideBarMenuFoot serendipitySideBarMenuMediaLinks" style="display:none"></li>

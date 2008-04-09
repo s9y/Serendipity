@@ -88,7 +88,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', 'Unknown error occurred, file not uploaded. Maybe your filesize is larger than the maximum size allowed by your server installation. Check with your ISP or edit your php.ini file to allow larger file size uploads.');
 @define('GO','செயல்படுத்துக!');
 @define('NEWSIZE', 'New size: ');
-@define('RESIZE_BLAHBLAH', '<b>Resize %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Resize %s</b>');
 @define('ORIGINAL_SIZE', 'Original size: <i>%sx%s</i> pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Here, you can adjust the image size. If you want to resize the image proportionally, just enter a value in one of the two boxes and press the TAB key --  I will automatically calculate the new size so the image proportions do not get messed up</p>');
 @define('QUICKJUMP_CALENDAR', 'QuickJump Calendar');
@@ -202,6 +202,10 @@
 @define('RESIZING', 'வலைபொருள்கள் சிறிதாக்கப்படுகின்றன');
 @define('RESIZE_DONE', '%s வலைபொருள்கள் சிறிதாக்கப்பட்டுவிட்டன.');
 @define('SYNCING', 'வலைபொருள் இருப்பிடங்கள் உறுதிப்படுத்தப்படுகின்றன...');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', '%s வலைபொருள் இருப்பிடங்கள் உறுதிப்படுத்தப்படுத்தப்பட்டுவிட்டன.');
 @define('FILE_NOT_FOUND', 'நீங்கள் தேடிய கணிபொறிக்ககோப்பு <b>%s</b> காணவில்லை. ஒருவேளை அது முன்பே நீக்கப்பட்டுவிட்டதோ?');
 @define('ABORT_NOW', 'இக்கணமே நிறுத்து!');
@@ -413,6 +417,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails will be named with the following format: original.[suffix].ext');
 @define('INSTALL_THUMBWIDTH', 'Thumbnail dimensions');
 @define('INSTALL_THUMBWIDTH_DESC', 'Static maximum width of auto-generated thumbnails');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'உங்கள் நிலைகள்');

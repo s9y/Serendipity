@@ -88,7 +88,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '未知のエラーが生じました。ファイルはアップロードしませんでした。おそらくファイルサイズがサーバーのインストールで許可された最大サイズを超えたと思われます。ISP に確認するか、php.ini ファイルで許可されたアップロード可能な最大ファイルサイズを編集してください。');
 @define('GO', 'Go!');
 @define('NEWSIZE', '新規サイズ: ');
-@define('RESIZE_BLAHBLAH', '<b>リサイズ %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>リサイズ %s</b>');
 @define('ORIGINAL_SIZE', '元サイズ: <i>%sx%s</i> ピクセル');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>ここで、画像サイズを調節することができます。画像の比率を変えずにサイズ変更をしたい場合は、2 つの入力ボックスのうちの 1 つにだけ値入力して、TAB キーを押してください - 自動的に新しいサイズを計算します。したがって、イメージは台無しになりません。</p>');
 @define('QUICKJUMP_CALENDAR', 'カレンダークイックジャンプ');
@@ -202,6 +202,10 @@
 @define('RESIZING', 'サイズ変更中');
 @define('RESIZE_DONE', '終了しました (%s このイメージをサイズ変更しました)');
 @define('SYNCING', 'データベースと画像フォルダーの同期中');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', '終了しました (%s 個の画像を同期しました)');
 @define('FILE_NOT_FOUND', '<b>%s</b> と言う名前のファイルは既に削除されたため、恐らく見つけることができません。');
 @define('ABORT_NOW', '今中断する');
@@ -413,6 +417,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'サムネイルは次の書式で指定されるでしょう: オリジナル.[接尾辞].拡張子');
 @define('INSTALL_THUMBWIDTH', 'サムネイルの大きさ');
 @define('INSTALL_THUMBWIDTH_DESC', '自動生成するサムネイルの不変の最大幅');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', '個人情報の詳細');

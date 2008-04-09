@@ -90,7 +90,7 @@
 @define('ERROR_FILE_EXISTS_ALREADY', 'Erro: O ficheiro já existe no seu servidor!');
 @define('GO', 'Vamos!');
 @define('NEWSIZE', 'Novo tamanho: ');
-@define('RESIZE_BLAHBLAH', '<b>Redimensionar %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Redimensionar %s</b>');
 @define('ORIGINAL_SIZE', 'Tamanho original: <i>%sx%s</i> pixéis');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Aqui pode ajustar o novo tamanho das suas imagens. Se pretender manter as proporções, preencha apenas um valor e pressione a tecla TAB de maneira a ser automaticamente calculado o novo tamanho de modo às proporções não ficarem erradas:');
 @define('QUICKJUMP_CALENDAR', 'Calendário de acesso rápido');
@@ -190,6 +190,10 @@
 @define('RESIZING', 'Redimensionando');
 @define('RESIZE_DONE', 'Pronto (%s imagens redimensionadas).');
 @define('SYNCING', 'Sincronizando a base de dados com a directoria de imagens');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Pronto (%s imagens sincronizadas).');
 @define('DELETE_IMAGE_FAIL' , 'Não foi possível excluir a imagem <b>%s</b>');
 @define('DELETE_THUMBNAIL', 'Excluir a miniatura da imagem entitulada <b>%s</b>');
@@ -402,6 +406,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'As miniaturas serão nomeadas com o seguinte formato: original.[sufixo].ext');
 @define('INSTALL_THUMBWIDTH', 'Dimensão das miniaturas ');
 @define('INSTALL_THUMBWIDTH_DESC', 'Largura máxima estática das miniaturas geradas automaticamente');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Detalhes pessoais');

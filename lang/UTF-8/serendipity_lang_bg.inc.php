@@ -89,7 +89,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('ERROR_FILE_EXISTS_ALREADY', 'Грешка: Този файл вече съществува!');
 @define('GO', 'Продължаване');
 @define('NEWSIZE', 'Нов размер: ');
-@define('RESIZE_BLAHBLAH', '<b>Промяна на размерите на %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>Промяна на размерите на %s</b>');
 @define('ORIGINAL_SIZE', 'Оригинални размери: <i>%s&#215;%s</i> pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Тук можете да настроите новите размери на изображенията. Ако искате да запазите пропорциите им, въведете стойност в едно от полетата и натиснете бутона TAB. Другото поле ще бъде изчислено автоматично, така че да се запази пропорцията.');
 @define('QUICKSEARCH', 'Бързо търсене');
@@ -188,6 +188,10 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('RESIZING', 'Промяна на размер');
 @define('RESIZE_DONE', 'Готово (променени са размерите на %s изображения).');
 @define('SYNCING', 'Синхронизиране на базата данни с папката с изображения');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', 'Готово (синхронизирани са %s изображения).');
 @define('DELETE_FILE_FAIL' , 'Не може да бъде изтрит файла <b>%s</b>');
 @define('DELETE_THUMBNAIL', 'Изтрита е миниатюрата, озаглавена <b>%s</b>');
@@ -436,6 +440,14 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_THUMBSUFFIX_DESC', 'Миниатюрите ще бъдат именувани по следния начин: оригинал.[наставка].разширение');
 @define('INSTALL_THUMBWIDTH', 'Размер на миниатюрите');
 @define('INSTALL_THUMBWIDTH_DESC', 'Статична максимална ширина на автоматично генерираните миниатюри');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 @define('USERCONF_CAT_PERSONAL', 'Лични данни');
 @define('USERCONF_CAT_PERSONAL_DESC', 'Въвеждане на вашите лични данни');
 @define('USERCONF_USERNAME', 'Потребителско име');

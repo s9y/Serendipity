@@ -90,7 +90,7 @@
 @define('ERROR_UNKNOWN_NOUPLOAD', '알 수 없는 오류가 발생하여 파일이 업로드되지 않았습니다. 서버가 허용하는 파일 크기를 초과했을 수 있습니다. 호스팅 업체에 확인을 하거나 php.ini 파일을 수정하여 더 큰 파일을 업로드할 수 있도록 하십시오.');
 @define('GO', '시작!');
 @define('NEWSIZE', '새로운 크기: ');
-@define('RESIZE_BLAHBLAH', '<b>크기 조절: %s</b><p>');
+@define('RESIZE_BLAHBLAH', '<b>크기 조절: %s</b>');
 @define('ORIGINAL_SIZE', '원래 크기: <i>%sx%s</i> 픽셀');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>여기서 그림 크기를 조절할 수 있습니다. 비율을 유지하면서 크기를 조절하려면 입력상자 한 쪽에 값을 넣고 Tab 키를 누르면 됩니다. 비율이 유지되는 값이 자동으로 계산됩니다.</p>');
 @define('QUICKJUMP_CALENDAR', '빨리 찾아보는 달력');
@@ -204,6 +204,10 @@
 @define('RESIZING', '크기 조절중');
 @define('RESIZE_DONE', '완료 (%s개의 그림의 크기를 조절함).');
 @define('SYNCING', '데이터베이스를 그림 폴더와 동기화합니다');
+@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
+@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
 @define('SYNC_DONE', '완료 (%s개의 그림을 동기화함).');
 @define('FILE_NOT_FOUND', '<b>%s</b>라는 이름의 파일을 찾지 못했습니다. 이미 삭제되었을 수 있습니다.');
 @define('ABORT_NOW', '지금 중지');
@@ -415,6 +419,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', '작은 그림은 원래이름.[접두사].확장자 식의 이름으로 생성됩니다');
 @define('INSTALL_THUMBWIDTH', '작은 그림 크기');
 @define('INSTALL_THUMBWIDTH_DESC', '자동 생성되는 작은 그림의 최대 크기');
+@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
+@define('INSTALL_THUMBDIM_WIDTH', 'Width');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" only limit the chosen dimension, so the other could be larger than the max size.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', '사용자의 개인 정보');
