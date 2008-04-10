@@ -1153,7 +1153,9 @@ function &serendipity_pickKey(&$array, $key, $default) {
 
     // array_key_exists() copies array, so is much slower.
     if (in_array($key, array_keys($array))) {
-        return $array[$key];
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
     }
     foreach($array AS $child) {
         if (is_array($child) && isset($child[$key]) && !empty($child[$key])) {
