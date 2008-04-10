@@ -3,6 +3,12 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Use semantically better HTML output by sidebar plugins 
+      (ordererd lists, less <br>s, ...) (YellowLED)
+
+    * Add new configuration option to allow rescaling thumbnails
+      with height/width/maximum size constraints. (judebert)
+
     * Allow to override $serendipity['languages'] array, do not issue
       s9y version number in RSS feed if 'expose_s9y' is disabled.
       
