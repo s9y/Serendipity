@@ -1508,8 +1508,10 @@ function serendipity_printArchives() {
     $entries =& serendipity_db_query($q, false, 'assoc');
 
     $group = array();
-    foreach($entries AS $entry) {
-        $group[date('Ym', $entry['timestamp'])]++;
+    if (is_array($entries)) {
+        foreach($entries AS $entry) {
+            $group[date('Ym', $entry['timestamp'])]++;
+        }
     }
 
     $output = array();
