@@ -188,10 +188,10 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('RESIZING', 'Промяна на размер');
 @define('RESIZE_DONE', 'Готово (променени са размерите на %s изображения).');
 @define('SYNCING', 'Синхронизиране на базата данни с папката с изображения');
-@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
-@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
-@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
-@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
+@define('SYNC_OPTION_LEGEND', 'Опции за синхронизация на миниатюрите');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Запазване на всички съществуващи миниатюри');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Запазване на съществуващите миниатюри, ако са с коректни размери');
+@define('SYNC_OPTION_DELETETHUMBS', 'Регенериране на всички миниатюри');
 @define('SYNC_DONE', 'Готово (синхронизирани са %s изображения).');
 @define('DELETE_FILE_FAIL' , 'Не може да бъде изтрит файла <b>%s</b>');
 @define('DELETE_THUMBNAIL', 'Изтрита е миниатюрата, озаглавена <b>%s</b>');
@@ -440,15 +440,14 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_THUMBSUFFIX_DESC', 'Миниатюрите ще бъдат именувани по следния начин: оригинал.[наставка].разширение');
 @define('INSTALL_THUMBWIDTH', 'Размер на миниатюрите');
 @define('INSTALL_THUMBWIDTH_DESC', 'Статична максимална ширина на автоматично генерираните миниатюри');
-@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
-@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
-@define('INSTALL_THUMBDIM_WIDTH', 'Width');
-@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
-@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
-    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
-    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
-    '" only limit the chosen dimension, so the other could be larger than the max size.');
-
+@define('INSTALL_THUMBDIM', 'Ограничен размер на миниатюрата');
+@define('INSTALL_THUMBDIM_LARGEST', 'Най-голям');
+@define('INSTALL_THUMBDIM_WIDTH', 'Ширина');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Височина');
+@define('INSTALL_THUMBDIM_DESC', 'Размерите, до които да бъдат ограничени миниатюрите. По подразбиране "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" ограничава и двата размера, така че нито един от двата да не бъде по-голям от максималната стойност; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" и "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" ограничават само избрания размер, но другият може да бъде по-голям от максималната стойност.');
 @define('USERCONF_CAT_PERSONAL', 'Лични данни');
 @define('USERCONF_CAT_PERSONAL_DESC', 'Въвеждане на вашите лични данни');
 @define('USERCONF_USERNAME', 'Потребителско име');
