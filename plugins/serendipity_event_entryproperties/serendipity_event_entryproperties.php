@@ -26,7 +26,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.16');
+        $propbag->add('version',       '1.17');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -580,7 +580,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
                 case 'backend_publish':
                 case 'backend_save':
-                    if (!isset($serendipity['POST']['properties']) || !is_array($serendipity['POST']['properties']) || !isset($eventData['id'])) {
+                    if (!isset($eventData['id'])) {
                         return true;
                     }
 
