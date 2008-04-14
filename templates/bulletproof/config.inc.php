@@ -268,7 +268,11 @@ $template_config = array(
     )
 );
 
-$template_loaded_config = &serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option']);
+if (isset($_POST['serendipity']['template'])) {
+  $template_loaded_config =$_POST['serendipity']['template'];
+} else {
+  $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option']);
+}
 
 $navlinks = array();
 
