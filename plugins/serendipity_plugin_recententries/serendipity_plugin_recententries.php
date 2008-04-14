@@ -221,11 +221,11 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                 if (empty($entry['title'])) {
                     $entry['title'] = '#' . $entry['id'];
                 }
-                
-                echo '<a href="' . $entryLink . '" title="' . htmlspecialchars($entry['title']) . '">' . $entry['title'] . '</a><br />'
-                     . '<div class="serendipitySideBarDate">'
+
+                echo '<dl>' . "\n" . '<dt class="serendipity_recententries_entrylink"><a href="' . $entryLink . '" title="' . htmlspecialchars($entry['title']) . '">' . $entry['title'] . '</a></dt>' . "\n"
+                     . '<dd class="serendipity_recententries_entrydate">'
                      . htmlspecialchars(serendipity_strftime($dateformat, $entry['timestamp']))
-                     . '</div><br />';
+                     . '</dd>' . "\n" . '</dl>' . "\n";
             }
         }
     }
