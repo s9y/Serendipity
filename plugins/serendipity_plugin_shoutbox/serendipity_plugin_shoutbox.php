@@ -142,12 +142,10 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
         }
        ?>
        <form action="<?php echo serendipity_currentURL(); ?>" method="post">
-            <div>
-                <input type="hidden" name="action" value="fillshoutbox" />
-                <textarea name="serendipity[shouttext]" rows="4" cols="15" style="width: 90%"></textarea>
-                <input name='submit' type='submit' value='<?php echo PLUGIN_SHOUTBOX_SUBMIT; ?>' />
-            </div>
-        </form><br />
+           <input type="hidden" name="action" value="fillshoutbox" />
+           <textarea name="serendipity[shouttext]" rows="4" cols="15" style="width: 90%"></textarea>
+           <input name='submit' type='submit' value='<?php echo PLUGIN_SHOUTBOX_SUBMIT; ?>' />
+       </form>
 <?php
         $q = 'SELECT    s.body              AS comment,
                         s.timestamp         AS stamp,
@@ -156,7 +154,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
             ORDER BY    s.timestamp DESC
                LIMIT ' . $max_entries;
 ?>
-<div style="margin: 0px; padding: 0px; text-align: left;">
+<div class="serendipity_shoutbox">
 <?php
         $sql = serendipity_db_query($q);
         if ($sql && is_array($sql)) {
@@ -170,7 +168,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
 
                 $deleteLink = "";
                 if ($_SESSION['serendipityAuthedUser'] === true) {
-                    $deleteLink =  ' | <a href="' . $serendipity['baseURL']
+                    $deleteLink =  '<a href="' . $serendipity['baseURL']
                                   . '?serendipity[action]=shoutboxdelete&amp;serendipity[comment_id]='
                                   . $row['comment_id'] . '">' . PLUGIN_SHOUTBOX_DELETE . '</a>';
                 }
@@ -178,10 +176,9 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
                 serendipity_plugin_api::hook_event('frontend_display', $entry);
                 $entry['comment'] = wordwrap($entry['comment'], $wordwrap, "\n", 1);
 
-                echo "<b>" . htmlspecialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</b> <br />' . "\n"
-                     . $entry['comment']
-                     . $deleteLink
-                     . '<br /><br /><br />' . "\n\n";
+                echo '<div class="serendipity_shoutbox_date">' . htmlspecialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</div>' . "\n"
+                     . '<div class="serendipity_shoutbox_comment">' . $entry['comment'] . '</div>' . "\n"
+                     . '<div class="serendipity_shoutbox_delete">' . $deleteLink . '</div>' . "\n\n";
             }
         }
 ?>
