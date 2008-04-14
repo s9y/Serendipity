@@ -143,17 +143,17 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
 
         $references = serendipity_db_query("SELECT link, max(name) as name FROM {$serendipity['dbPrefix']}references WHERE entry_id = " . $id . " AND type = '' GROUP BY link ORDER BY id");
         if (is_array($references)) {
-            $links = '<ul style="margin: 5px; padding: 10px; text-align: left">';
+            $links = '<ul>';
             foreach($references AS $key => $row) {
                 if (empty($row['name']) || empty($row['link'])) {
                     continue;
                 }
                 $count = '';
                 if (isset($counter[$row['link']])) {
-                    $count = '<br /><div style="text-align: right; margin: 0px">[' . $counter[$row['link']] . ']</div>';
+                    $count = '<span class="serendipity_entrylinks_count">[' . $counter[$row['link']] . ']</span>';
                 }
                 $link_name = $wordwrap < 1? $row['name']: wordwrap($row['name'], $wordwrap, "<br />", 1);
-                $links .= '<li><a href="' . $row['link'] . '" ' . $target . '>' . $link_name . "</a>$count</li>";
+                $links .= '<li><a href="' . $row['link'] . '" ' . $target . '>' . $link_name . "</a> $count</li>";
             }
             $links .= '</ul>';
 
@@ -169,7 +169,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
         if ($this->get_config('show_referers', 'true') == 'true') {
             $ref      = serendipity_db_query("SELECT SUM(count) as fullcount, scheme, host, port, path, query, " . serendipity_db_concat("scheme, '://', host, ':', port, path, '?', query") . " AS fulllink FROM {$serendipity['dbPrefix']}referrers WHERE entry_id = " . $id . " GROUP BY scheme,host,port,path,query ORDER BY $orderby DESC LIMIT $maxref");
             if (is_array($ref)) {
-                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul style="margin: 5px; padding: 10px; text-align: left">';
+                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul>';
                 foreach($ref AS $key => $row) {
                     $url = sprintf('%s://%s%s%s%s',
                       $row['scheme'],
@@ -179,7 +179,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
                       (!empty($row['query']) ? '?' . $row['query'] : '')
                     );
 
-                    echo '<li><a href="' . $url . '" ' . $target . '>' . wordwrap($row['host'], $wordwrap, "<br />", 1) . '</a><br /><div style="text-align: right; margin: 0px;">[' . $row['fullcount'] . "]</div></li>";
+                    echo '<li><a href="' . $url . '" ' . $target . '>' . wordwrap($row['host'], $wordwrap, "<br />", 1) . '</a> <span class="serendipity_entrylinks_fullcount">[' . $row['fullcount'] . "]</span></li>";
                 }
                 echo '</ul>';
             }
