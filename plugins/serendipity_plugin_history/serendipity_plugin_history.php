@@ -193,7 +193,7 @@ class serendipity_plugin_history extends serendipity_plugin
             echo '<div class="serendipity_history_info"><span class="serendipity_history_author">' . $author . '</span> <span class="serendipity_history_date">'. $date . "</span> <a href='$url' title='".str_replace("'", '`', htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) . '</a></div>' .
                  strip_tags($e[$x]['body']) . '<br />';
         }
-        echo '<div class="serendipity_history_outro">' . $outro . '</div>';
+        echo (empty($outro)) ? '' : '<div class="serendipity_history_outro">' . $outro . '</div>';
     }
 }
 
