@@ -22,7 +22,7 @@ class serendipity_plugin_history extends serendipity_plugin
         $propbag->add('description',   PLUGIN_HISTORY_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Jannis Hermanns');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -97,25 +97,22 @@ class serendipity_plugin_history extends serendipity_plugin
                 $propbag->add('default', 5);
             break;
             case 'full':
-                $propbag->add('type',         'select');
+                $propbag->add('type',         'boolean');
                 $propbag->add('name',         PLUGIN_HISTORY_SHOWFULL);
                 $propbag->add('description',  PLUGIN_HISTORY_SHOWFULL_DESC);
-                $propbag->add('select_values', array('false','true'));
-                $propbag->add('default',     'false');
+                $propbag->add('default',     false);
             break;
             case 'displaydate':
-                $propbag->add('type',         'select');
+                $propbag->add('type',         'boolean');
                 $propbag->add('name',         PLUGIN_HISTORY_DISPLAYDATE);
                 $propbag->add('description',  PLUGIN_HISTORY_DISPLAYDATE_DESC);
-                $propbag->add('select_values', array('false','true'));
-                $propbag->add('default',     'true');
+                $propbag->add('default',      true);
             break;
             case 'displayauthor':
-                $propbag->add('type',         'select');
+                $propbag->add('type',         'boolean');
                 $propbag->add('name',         PLUGIN_HISTORY_DISPLAYAUTHOR);
                 $propbag->add('description',  '');
-                $propbag->add('select_values', array('false','true'));
-                $propbag->add('default',     'false');
+                $propbag->add('default',      false);
             break;
             case 'dateformat':
                 $propbag->add('type', 'string');
@@ -142,7 +139,7 @@ class serendipity_plugin_history extends serendipity_plugin
         $specialage  = $this->get_config('specialage');
         $displaydate = $this->get_config('displaydate', 'true');
         $dateformat  = $this->get_config('dateformat');
-        $full        = ($this->get_config('full', 'false') != 'true') ? false : true;
+        $full        = serendipity_db_bool($this->get_config('full'));
         $displayauthor = serendipity_db_bool($this->get_config('displayauthor', false));
 
         if (!is_numeric($min_age) || $min_age < 0 || $specialage == 'year') {
