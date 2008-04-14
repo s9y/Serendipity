@@ -168,7 +168,7 @@ class serendipity_plugin_history extends serendipity_plugin
         $e     = serendipity_fetchEntries(array(($mints-$max_age*86400),
                                             ($maxts-$min_age*86400)), $full, $max_entries);
         $serendipity['fetchLimit'] = $oldLim;
-        echo (empty($intro)) ? '' : "$intro<br />";
+        echo (empty($intro)) ? '' : '<div class="serendipity_history_intro">' . $intro . '</div>' . "\n";
 
         if (!is_array($e)) {
             return false;
@@ -190,10 +190,10 @@ class serendipity_plugin_history extends serendipity_plugin
             $t = ($maxlength==0 || strlen($e[$x]['title'])<=$maxlength) ?
                     $e[$x]['title'] :
                     (trim(serendipity_mb('substr', $e[$x]['title'], 0, $maxlength-3)).' [...]');
-            echo $author . $date . "<a href='$url' title='".str_replace("'", '`', htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) ."</a> " .
+            echo '<div class="serendipity_history_info"><span class="serendipity_history_author">' . $author . '</span> <span class="serendipity_history_date">'. $date . "</span> <a href='$url' title='".str_replace("'", '`', htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) . '</a></div>' .
                  strip_tags($e[$x]['body']) . '<br />';
         }
-        echo $outro;
+        echo '<div class="serendipity_history_outro">' . $outro . '</div>';
     }
 }
 
