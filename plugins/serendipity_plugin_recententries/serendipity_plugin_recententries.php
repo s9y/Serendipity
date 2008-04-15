@@ -209,6 +209,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $entries = serendipity_db_query($entries_query);
 
         if (isset($entries) && is_array($entries)) {
+            echo '<dl>' . "\n";
             foreach ($entries as $k => $entry) {
                 $entryLink = serendipity_archiveURL(
                                $entry['id'],
@@ -222,11 +223,12 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                     $entry['title'] = '#' . $entry['id'];
                 }
 
-                echo '<dl>' . "\n" . '<dt class="serendipity_recententries_entrylink"><a href="' . $entryLink . '" title="' . htmlspecialchars($entry['title']) . '">' . $entry['title'] . '</a></dt>' . "\n"
+                echo '<dt class="serendipity_recententries_entrylink"><a href="' . $entryLink . '" title="' . htmlspecialchars($entry['title']) . '">' . $entry['title'] . '</a></dt>' . "\n"
                      . '<dd class="serendipity_recententries_entrydate serendipitySideBarDate">'
                      . htmlspecialchars(serendipity_strftime($dateformat, $entry['timestamp']))
-                     . '</dd>' . "\n" . '</dl>' . "\n";
+                     . '</dd>' . "\n";
             }
+            echo '</dl>' . "\n\n";
         }
     }
 }
