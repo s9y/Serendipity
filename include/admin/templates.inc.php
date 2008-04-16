@@ -69,7 +69,7 @@ if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] .
 if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
 
-    if ($serendipity['POST']['adminAction'] == 'configure') {
+    if ($serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
         foreach($serendipity['POST']['template'] AS $option => $value) {
             template_option::set_config($option, $value);
         }
@@ -79,6 +79,7 @@ if (is_array($template_config)) {
     echo '<form method="post" action="serendipity_admin.php">';
     echo '<input type="hidden" name="serendipity[adminModule]" value="templates" />';
     echo '<input type="hidden" name="serendipity[adminAction]" value="configure" />';
+    echo serendipity_setFormToken();
 
     include S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
     $template_vars =& serendipity_loadThemeOptions($template_config);
@@ -196,7 +197,3 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
 </div>
 <?php
     }
-?>
-<?php
-/* vim: set sts=4 ts=4 expandtab : */
-?>
