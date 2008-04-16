@@ -302,3 +302,39 @@ img.serendipity_entryIcon {
 .serendipity_comment_author_self {
     background-color: #f5f5f5;
 }
+
+
+/*** Additional plugin styles needed for the modernized output code ***/
+/*** added by Matthias 'YellowLed' Mees                             ***/
+
+.container_serendipity_archives_plugin ul,
+.container_serendipity_syndication_plugin ul,
+.container_serendipity_authors_plugin ul,
+.container_serendipity_plugin_entrylinks ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.container_serendipity_authors_plugin .serendipitySideBarContent div {
+    margin: 5px 0;
+    padding-left: 0;
+}
+
+.serendipity_history_author { font-weight: bolder; }
+
+.serendipity_history_intro,
+.serendipity_history_info { margin-bottom: 3px; }
+
+.serendipity_history_body { margin-bottom: 10px; }
+
+.serendipity_recententries_entrylink { margin-bottom: 2px; }
+
+.serendipity_recententries_entrydate { margin: 0 0 4px 0; }
+
+.plugin_comment_body { padding: 3px 0; }
+
+.serendipity_shoutbox_date { margin: 5px 0 2px 0; }
+
+.serendipity_shoutbox_comment { padding: 3px 0; }
+
+/*** End Additional plugin styles                                   ***/
