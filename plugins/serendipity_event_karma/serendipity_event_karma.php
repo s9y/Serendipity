@@ -1117,17 +1117,33 @@ END_IMG_CSS;
                                     $textual_visits = $this->get_config('textual_visits', 'true');
                                 }
 
-                                // Where's the footer?  Normally it would be 
-                                // in addData['extended']; but if the cache
-                                // plugin is used, it's elsewhere.  This
-                                // method retrieves it either way.
+                                // Where's the footer?  Normally it would be
+                                // in eventData[n]['add_footer'] but if the
+                                // cache plugin is used, it's in 
+                                // eventData[n]['properties']['ep_cache_add_footer'].
+                                // This method retrieves it either way.
                                 $footer = &$this->getFieldReference('add_footer', $eventData[$i]);
-                                /*--JAM: Probably time to delete this
-                                // Create a footer if one doesn't already exist
-                                if (!isset($eventData[$i]['add_footer'])) {
-                                $eventData[$i]['add_footer'] = '';
+
+                                // Depending on what existed, $footer could
+                                // be referencing the cached version, the
+                                // uncached version, or even a new empty 
+                                // string.  In particular, if $eventData[$i] 
+                                // has no properties, and no 'add_footer' key, 
+                                // $footer is referencing a new empty string,
+                                // so adding a karma bar to $footer would do 
+                                // nothing.
+                                //
+                                // We could be referencing an empty uncached
+                                // 'add_footer', but empty cache entries are
+                                // never returned.
+                                //
+                                // Reference a footer that will be printed
+                                if (empty($footer) && !isset($eventData[$i]['add_footer'])) {
+                                  $eventData[$i]['add_footer'] = '';
+                                  $footer = &$eventData[$i]['add_footer'];
+                                  // It's still empty, but it's referencing
+                                  // the right place.
                                 }
-                                 */
 
                                 if ($track_exits) {
                                     $footer .= $this->getExits($entryid, true);
