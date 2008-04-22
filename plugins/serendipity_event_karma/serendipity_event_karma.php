@@ -1072,7 +1072,9 @@ END_IMG_CSS;
                             } elseif (!serendipity_db_bool($this->get_config('extended_only', false))) {
                                 // We're in overview mode, and we want rating bars for all the entry IDs
                                 foreach(array_keys($eventData) as $key) {
-                                    $entries[$key] = (int)$eventData[$key]['id'];
+                                    if (isset($eventData[$key]['id'])) {
+                                        $entries[$key] = (int)$eventData[$key]['id'];
+                                    }
                                 }
                             }
 
