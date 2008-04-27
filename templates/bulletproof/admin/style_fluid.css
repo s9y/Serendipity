@@ -265,7 +265,7 @@ ul.serendipitySideBarMenuMain a,
 ul.serendipitySideBarMenuLogout a{
 /* this background is a default in the event additional links are added in the future, but not presently defined */
 /* it is an orange button with a double blue arrow pointing right */
-    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_default.png') no-repeat;
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_default.png') left top no-repeat;
     display: block;
     height: 33px;
 }
@@ -273,65 +273,65 @@ ul.serendipitySideBarMenuLogout a{
 /* default button hover and active states */
 ul.serendipitySideBarMenuMain a:hover,
 ul.serendipitySideBarMenuLogout a:hover{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default_h.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default.png') left 50% no-repeat;
 }
 
 ul.serendipitySideBarMenuMain a:active,
 ul.serendipitySideBarMenuLogout a:active{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default_a.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_default.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
 /* unique images for each of the main and logout links - normal, hover and active states */
 li.serendipitySideBarMenuMainFrontpage a{
-    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_frontpage.png') no-repeat;
+    background: #FBB73C url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left top no-repeat;
 }
 
 li.serendipitySideBarMenuMainFrontpage a:hover{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage_h.png') no-repeat;
+    background: #FDE33F url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left 50% no-repeat;
 }
 
 li.serendipitySideBarMenuMainFrontpage a:active{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage_a.png') no-repeat;
+    background: #FDE33F url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
 li.serendipitySideBarMenuMainPersonal a{
-    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_personal.png') no-repeat;
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_personal.png') left top no-repeat;
 }
 
 li.serendipitySideBarMenuMainPersonal a:hover{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal_h.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal.png') left 50% no-repeat;
 }
 
 li.serendipitySideBarMenuMainPersonal a:active{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal_a.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_personal.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
 li.serendipitySideBarMenuLogoutWeblog a{
-    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_weblog.png') no-repeat;
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_weblog.png') left top no-repeat;
 }
 
 li.serendipitySideBarMenuLogoutWeblog a:hover{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog_h.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog.png') left 50% no-repeat;
 }
 
 li.serendipitySideBarMenuLogoutWeblog a:active{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog_a.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_weblog.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
 li.serendipitySideBarMenuLogoutLogout a{
-    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_logout.png') no-repeat;
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_logout.png') left top no-repeat;
 }
 
 li.serendipitySideBarMenuLogoutLogout a:hover{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout_h.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout.png') left 50% no-repeat;
 }
 
 li.serendipitySideBarMenuLogoutLogout a:active{
-    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout_a.png') no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_logout.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
