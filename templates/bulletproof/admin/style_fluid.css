@@ -388,6 +388,24 @@ ul.serendipitySideBarMenuMain .serendipitySideBarMenuFoot {
     font-size: 100%;
 }
 
+/* installation and upgrade admin messages */
+/* defined here due to this template's styling of all other spans */
+/* these classes are available in s9y v1.3.2 and above */
+.serendipityAdminContent span.serendipityAdminMsgSuccessInstall {
+    color: green !important;
+    font-weight: bold !important;
+}
+
+.serendipityAdminContent span.serendipityAdminMsgWarningInstall {
+    color: orange !important;
+    font-weight: bold !important;
+}
+
+.serendipityAdminContent span.serendipityAdminMsgErrorInstall{
+    color: red !important;
+    font-weight: bold !important;
+}
+
 /* Pending comments in the admins comment list */
 .serendipity_admin_comment_pending {
     border: 2px solid #FF0000;

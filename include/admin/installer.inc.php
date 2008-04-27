@@ -37,14 +37,14 @@ if (defined('S9Y_DATA_PATH')) {
 function serendipity_installerResultDiagnose($result, $s) {
     global $errorCount;
     if ( $result === S9Y_I_SUCCESS ) {
-        return '<span style="color: green; font-weight: bold">'. $s .'</span>';
+        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
     }
     if ( $result === S9Y_I_WARNING ) {
-        return '<span style="color: orange; font-weight: bold">'. $s .' [?]</span>';
+        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .' [?]</span>';
     }
     if ( $result === S9Y_I_ERROR ) {
         $errorCount++;
-        return '<span style="color: red; font-weight: bold">'. $s .' [!]</span>';
+        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .' [!]</span>';
     }
 }
 
