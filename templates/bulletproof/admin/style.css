@@ -281,15 +281,15 @@ ul.serendipitySideBarMenuLogout a:active{
 
 /* unique images for each of the main and logout links - normal, hover and active states */
 li.serendipitySideBarMenuMainFrontpage a{
-    background: #FBB73C url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left top no-repeat;
+    background: #FBB73C url('{TEMPLATE_PATH}img/bp_admin_button_frontpage.png') left top no-repeat;
 }
 
 li.serendipitySideBarMenuMainFrontpage a:hover{
-    background: #FDE33F url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left 50% no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage.png') left 50% no-repeat;
 }
 
 li.serendipitySideBarMenuMainFrontpage a:active{
-    background: #FDE33F url('templates/mainstreetnews/admin/img/bp_admin_button_frontpage.png') left 100% no-repeat;
+    background: #FDE33F url('{TEMPLATE_PATH}img/bp_admin_button_frontpage.png') left 100% no-repeat;
     line-height: 30px !important;
 }
 
