@@ -294,6 +294,9 @@
 
 /* TRANSLATE */
 @define('PERMISSIONS', 'Rettigheter');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 
 /* DATABASE SETTINGS */
 @define('INSTALL_CAT_DB', 'Databaseinnstillinger');

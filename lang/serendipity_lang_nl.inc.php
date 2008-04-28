@@ -334,6 +334,9 @@
 @define('TOP_LEVEL', 'Bovenste niveau');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s-toevoer');
 @define('PERMISSIONS', 'Toegangsrechten');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'De instellingen zijn opgeslagen in %s');
 
 /* DATABASE SETTINGS */

@@ -321,6 +321,9 @@
 @define('TOP_LEVEL', 'Primo Livello');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', 'feed %s');
 @define('PERMISSIONS', 'Permessi');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Le nuove impostazioni sono state salvate in %s');
 
 /* DATABASE SETTINGS */

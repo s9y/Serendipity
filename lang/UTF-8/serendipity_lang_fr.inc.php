@@ -426,6 +426,9 @@
 @define('USERCONF_SENDTRACKBACKS_DESC', 'Voulez-vous recevoir un email lorsque quelqu\'un crée un rétrolien à l\'un de vos billets ?');
 
 @define('PERMISSIONS', 'Permissions');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('USERCONF_ALLOWPUBLISH', 'Publication de billets ?');
 @define('USERCONF_ALLOWPUBLISH_DESC', 'Cet utilisateur est-il autorisé à poster des billets ?');
 @define('ENTRY_SAVED', 'Votre billet a été enregistré');

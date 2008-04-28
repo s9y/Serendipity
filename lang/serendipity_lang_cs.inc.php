@@ -325,6 +325,9 @@ $i18n_filename_to = array (
 @define('SKIPPING_FILE_UNREADABLE', 'Vynechán soubor: %s nelze naèíst.');
 @define('FOUND_FILE', 'Založit nový/zmìnit soubor: %s.');
 @define('PERMISSIONS', 'Oprávnìní');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 
 /* DATABASE SETTINGS */
 @define('INSTALL_CAT_DB', 'Databáze');

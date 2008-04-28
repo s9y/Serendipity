@@ -367,6 +367,9 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('TOP_LEVEL', 'Корен');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', 'Емисия %s');
 @define('PERMISSIONS', 'Права');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Новите настройки са записани в %s');
 @define('INSTALL_CAT_DB', 'Настройки на базата данни');
 @define('INSTALL_CAT_DB_DESC', 'Тук можете да въведете цялата информация за базата данни. Serendipity се нуждае от нея, за да може да работи');

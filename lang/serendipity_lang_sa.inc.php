@@ -333,6 +333,9 @@
 @define('TOP_LEVEL', '„” ÊÏ √⁄·Ï');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', '«·’·«ÕÌ« ');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', ' „ Õ›Ÿ «·«⁄œ«œ«  «·ÃœÌœ… ›Ì  %s');
 
 /* DATABASE SETTINGS */

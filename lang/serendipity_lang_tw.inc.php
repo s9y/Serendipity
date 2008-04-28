@@ -334,6 +334,9 @@ $i18n_unknown = 'tw';
 @define('TOP_LEVEL', '最高層');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', '權限');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', '新設定已經儲存於 %s');
 
 /* DATABASE SETTINGS */

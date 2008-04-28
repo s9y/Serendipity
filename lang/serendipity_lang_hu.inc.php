@@ -332,6 +332,9 @@
 @define('TOP_LEVEL', 'Legfelsõ szint');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s hírcsatorna');
 @define('PERMISSIONS', 'Jogosultságok');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Az új beállításokat elmentettük ekkor: %s');
 
 /* DATABASE SETTINGS */
