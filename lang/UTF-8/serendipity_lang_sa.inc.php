@@ -333,6 +333,9 @@
 @define('TOP_LEVEL', 'مستوى أعلى');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', 'الصلاحيات');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'تم حفظ الاعدادات الجديدة في  %s');
 
 /* DATABASE SETTINGS */

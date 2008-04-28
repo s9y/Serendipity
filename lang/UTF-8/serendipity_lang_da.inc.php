@@ -294,6 +294,9 @@
 @define('LIMIT_TO_NUMBER', 'Hvor mange punkter skal vises?');
 @define('ENTRIES_PER_PAGE', 'artikler per side');
 @define('PERMISSIONS', 'Rettigheder');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 
 /* DATABASE SETTINGS */
 @define('INSTALL_CAT_DB', 'Database indstillinger');

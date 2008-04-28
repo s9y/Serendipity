@@ -331,6 +331,9 @@
 @define('TOP_LEVEL', 'Ylin taso');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s');
 @define('PERMISSIONS', 'Oikeudet');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Uudet asetukset on tallettetu %s');
 
 /* DATABASE SETTINGS */

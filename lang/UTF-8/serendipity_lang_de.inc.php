@@ -319,6 +319,9 @@
 @define('TOP_LEVEL', 'Ursprung');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s Feed');
 @define('PERMISSIONS', 'Rechte');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-Button');
 @define('XML_IMAGE_TO_DISPLAY_DESC','Bilddatei, um ein Icon für XML-Feeds darzustellen. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
 @define('SETTINGS_SAVED_AT', 'Die neuen Einstellungen wurden um %s gespeichert.');

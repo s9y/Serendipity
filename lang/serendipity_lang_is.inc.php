@@ -332,6 +332,9 @@
 @define('TOP_LEVEL', 'Toppstigi');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s straumur');
 @define('PERMISSIONS', 'Réttindi');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Nýju stillingarnar voru vistaðar klukkan %s');
 
 /* DATABASE SETTINGS */

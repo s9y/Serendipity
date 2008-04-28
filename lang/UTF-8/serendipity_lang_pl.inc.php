@@ -334,6 +334,9 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('TOP_LEVEL', 'Wpis');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', 'Uprawnienia');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Ustawienia zostały zapisane o %s');
 
 /* DATABASE SETTINGS */

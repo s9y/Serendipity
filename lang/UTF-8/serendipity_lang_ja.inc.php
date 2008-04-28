@@ -332,6 +332,9 @@
 @define('TOP_LEVEL', 'トップレベル');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s フィード');
 @define('PERMISSIONS', '許可');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', '新しい設定は %s に保存されました。');
 
 /* DATABASE SETTINGS */

@@ -334,6 +334,9 @@
 @define('TOP_LEVEL', 'En üst bölüm');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s beslemesi');
 @define('PERMISSIONS', 'izinler');
+@define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Yeni ayarlarınız kaydedildi %s');
 
 /* DATABASE SETTINGS */
