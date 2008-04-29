@@ -320,6 +320,7 @@
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s Feed');
 @define('PERMISSIONS', 'Rechte');
 @define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
 @define('CHECKSUMS_PASS', 'All required files verified.');
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-Button');

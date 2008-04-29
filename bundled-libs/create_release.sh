@@ -40,8 +40,20 @@ else
         echo "         serious harm! Only use it, if you are a developer and about"
         echo "         to bundle a new release version!"
         echo ""
-        echo "Hit [ENTER] to continue, or abort this script"
+        echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
         read -n 1
+        gensums=0
+        which php > /dev/null
+        if [ $? -ne 0 ]
+        then
+            gensums=-1
+            echo "NOTICE: Checksums will not be generated because PHP is not available."
+            echo "        Install PHP to generate checksums for file validation, or "
+            echo "        run serendipity_generateFTPChecksums.php manually."
+            echo ""
+            echo "Hit [ENTER] to continue, or abort this script (CTRL-C)"
+            read -n 1
+        fi
 
         echo "1. Operating on basedirectory ../../$2"
             cd ../../
@@ -81,7 +93,21 @@ else
             echo "    [DONE]"
             echo ""
 
-        echo "6. Altering CVS to be useful for anonymous users..."
+        echo "6. Generating checksums..."
+            if [ $gensums -ne 0 ]
+            then
+                echo "    [SKIP]"
+            else
+                if (echo "true" | php -B "define('IN_serendipity', true);" -F serendipity_generateFTPChecksums.php)
+                then
+                    echo "    [DONE]"
+                else
+                    rm -rf checksums.inc.php
+                    echo "    [FAIL]"
+                fi
+            fi
+            echo ""
+        echo "7. Altering CVS to be useful for anonymous users..."
             echo "   - Removing CVS branch tag, so that a user can upgrade to latest CVS"
             find "$2" -type f -name Tag -exec rm {} \;
             echo "       [DONE]"
@@ -93,12 +119,12 @@ else
             echo "       [DONE]"
             echo ""
 
-        echo "7. Creating .tgz file $1"
+        echo "8. Creating .tgz file $1"
             tar --owner=$3 --group=$4 -czf "$1" "$2"
             echo "    [DONE]"
             echo ""
 
-        echo "8. All Done. Bybe-Bye."
+        echo "9. All Done. Bye-Bye."
     else
         echo "Basedirectory ../../$2 not found. Check parameters"
     fi

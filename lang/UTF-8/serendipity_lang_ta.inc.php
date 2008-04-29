@@ -331,6 +331,7 @@
 @define('IN_REPLY_TO', 'இக்கருத்தைப் பற்றி');
 @define('TOP_LEVEL', 'குறிப்பு பற்றி');
 @define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
 @define('CHECKSUMS_PASS', 'All required files verified.');
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');

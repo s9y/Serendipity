@@ -215,6 +215,25 @@ if (!$use_installer && $is_logged_in) {
             echo LOGGEDOUT;
             break;
 
+        case 'integrity':
+            echo '<div class="serendipity_admin_title">' . INTEGRITY . '</div>';
+            $badsums = array();
+            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
+                echo '<span class="serendipityAdminMsgNote">' . CHECKSUMS_NOT_FOUND . '</span>';
+                break;
+            }
+            $badsums = serendipity_verifyFTPChecksums();
+            if (count($badsums) == 0) {
+                echo '<span class="serendipityAdminMsgSuccess">' . CHECKSUMS_PASS . '</span>';
+            } else {
+                echo '<ul>';
+                foreach ($badsums as $rpath => $calcsum) {
+                    echo '<li class="serendipityAdminMsgError">' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
+                }
+                echo '</ul>';
+            }
+            break;
+
         default:
             include S9Y_INCLUDE_PATH . 'include/admin/overview.inc.php';
             break;
@@ -435,6 +454,9 @@ if ($use_installer) {
 <?php if (serendipity_checkPermission('adminImport')) { ?>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=import"><?php echo IMPORT_ENTRIES; ?></a></li>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=export"><?php echo EXPORT_ENTRIES; ?></a></li>
+<?php } ?>
+<?php if (serendipity_checkPermission('siteConfiguration') || serendipity_checkPermission('blogConfiguration')) { ?>
+                        <li class="serendipitySideBarMenuLink serendipitySideBarMenuUserManagementLinks"><a href="serendipity_admin.php?serendipity[adminModule]=integrity"><?php echo INTEGRITY; ?></a></li>
 <?php } ?>
                         <?php if ($serendipity['no_create'] !== true) serendipity_plugin_api::hook_event('backend_sidebar_admin', $serendipity); ?>
                         <li class="serendipitySideBarMenuFoot serendipitySideBarMenuUserManagement" style="display:none"></li>

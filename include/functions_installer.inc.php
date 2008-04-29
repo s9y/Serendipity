@@ -688,6 +688,11 @@ function serendipity_checkInstallation() {
 
     $errs = array();
 
+    $badsums = serendipity_verifyFTPChecksums();
+    foreach ($badsums as $rfile => $sum) {
+        $errs[] = sprintf(CHECKSUM_FAILED, $rfile);
+    }
+
     serendipity_initPermalinks();
 
     // Check dirs
@@ -1182,3 +1187,113 @@ global $serendipity;
     }
 }
 
+/**
+ * Retrieve an FTP-compatible checksum for a file.
+ *
+ * @access public
+ * @param string filename is the path to the file to checksum
+ * @param string type forces a particular interpretation of newlines.  Mime
+ *    types and strings starting with 'text' will cause newlines to be stripped
+ *    before the checksum is calculated (default: null, determine from finfo 
+ *    and extension)
+ * @return string An MD5 checksum of the file, with newlines removed if it's 
+ *    an ASCII type; or false if the file cannot be read
+ */
+function serendipity_FTPChecksum($filename, $type = null) {
+    /** Only read the finfo database once */
+    static $debug_exts = array();
+
+    // Must be able to read the file 
+    if (!is_readable($filename)) {
+        return false;
+    }
+
+    // Figure out whether it's binary or text by extension
+    if ($type == null) {
+        $parts = pathinfo($filename);
+        $ext = '';
+        // Some PHP versions throw a warning if the index doesn't exist
+        if (isset($parts['extension'])) {
+            $ext = $parts['extension'];
+        }
+        // If they're case-insensitive equal, strcasecmp() returns 0, or
+        // 'false'.  So I use && to find if any of them are 0, in the
+        // most likely fail-fast order.
+        if (strcasecmp($ext, 'php') && 
+            strcasecmp($ext, 'tpl') &&
+            strcasecmp($ext, 'sql') &&
+            strcasecmp($ext, 'js') && 
+            strcasecmp($ext, 'txt') && 
+            strcasecmp($ext, 'htc') && 
+            strcasecmp($ext, 'css') && 
+            strcasecmp($ext, 'dist') && 
+            strcasecmp($ext, 'lib') && 
+            strcasecmp($ext, 'sh') && 
+            strcasecmp($ext, 'html') &&
+            strcasecmp($ext, 'htm') &&
+            !empty($ext)) {
+            if (!in_array($ext, array_keys($debug_exts))) {
+                $debug_exts[$ext] = $filename;
+            }
+            $type = 'bin';
+        } else {
+            $type = 'text';
+        }
+    }
+
+    // Calculate the checksum
+    $md5 = false;
+    if (stristr($type, 'text')) {
+        // This is a text-type file.  We need to remove linefeeds before 
+        // calculating a checksum, to account for possible FTP conversions
+        // that are inconvenient, but still valid.  But we don't want to
+        // allow newlines anywhere; just different *kinds* of newlines.
+        $newlines = array("#\r\n#", "#\r#", "#\n#");
+        $file = file_get_contents($filename);
+        $file = preg_replace($newlines, ' ', $file);
+        $md5 = md5($file);
+    } else {
+        // Just get its md5sum
+        $md5 = md5_file($filename);
+    }
+
+    return $md5;
+}
+
+/**
+ * Validate checksums for all required files.
+ * 
+ * @return A list of all files that failed checksum, where keys are the 
+ *    relative path of the file, and values are the bad checksum
+ */
+function serendipity_verifyFTPChecksums() {
+    // Load the checksums
+    require_once S9Y_INCLUDE_PATH . 'checksums.inc.php';
+    // Verify that every file in the checksum list was uploaded correctly
+    $badsums = array();
+    $basedir = realpath(dirname(__FILE__) . '/../');
+    foreach ($serendipity['checksums'] as $prel => $sum) {
+        $path = $basedir . '/' . $prel;
+        // Don't take checksums of directories
+        if (is_dir($path)) {
+            // Weird that it's even here. 
+            continue;
+        }
+
+        // Can't checksum unreadable or nonexistent files
+        if (!is_readable($path)) {
+            $badsums[$prel] = 'missing';
+            continue;
+        }
+
+        // Validate checksum
+        $calcsum = serendipity_FTPChecksum($path);
+        if ($sum != $calcsum) {
+            $badsums[$prel] = $calcsum;
+            continue;
+        }
+    }
+
+    return $badsums;
+}
+/* vim: set sts=4 ts=4 sw=4 expandtab : */
