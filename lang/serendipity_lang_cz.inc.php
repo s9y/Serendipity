@@ -326,6 +326,7 @@ $i18n_filename_to = array (
 @define('FOUND_FILE', 'Zalo¾it nový/zmìnit soubor: %s.');
 @define('PERMISSIONS', 'Oprávnìní');
 @define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
 @define('CHECKSUMS_PASS', 'All required files verified.');
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 

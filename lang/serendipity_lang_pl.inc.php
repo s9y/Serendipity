@@ -335,6 +335,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s feed');
 @define('PERMISSIONS', 'Uprawnienia');
 @define('INTEGRITY', 'Verify Installation Integrity');
+@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
 @define('CHECKSUMS_PASS', 'All required files verified.');
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', 'Ustawienia zosta³y zapisane o %s');

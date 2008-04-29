@@ -264,6 +264,25 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
 ?>
 <div align="center">
 <table class="serendipity_admin_list_item serendipity_admin_list_item_even" width="90%" align="center">
+<?php if (is_readable($basedir . 'checksums.inc.php')) {
+    $badsums = serendipity_verifyFTPChecksums();
+?>
+    <tr>
+        <td colspan="2" style="font-weight: bold"><?php echo INTEGRITY ?></td>
+    </tr>
+    <tr>
+        <td width="200"><?php
+            if ( empty($badsums) ) {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, CHECKSUMS_PASS);
+            } else {
+                foreach ($badsums as $rfile => $sum) {
+                    echo serendipity_upgraderResultDiagnose(S9Y_U_ERROR, sprintf(CHECKSUM_FAILED, $rfile));
+                }
+            }
+     ?></td>
+    </tr>
+<?php } // End if checksums
+?>
     <tr>
         <td colspan="2" style="font-weight: bold"><?php echo PERMISSIONS ?></td>
     </tr>
