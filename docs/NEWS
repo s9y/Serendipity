@@ -3,6 +3,12 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added RewriteRule to ensure that admin panel can be called,
+      thanks to rich4647 from the forums.
+
+    * Added file checksums to be able to verify integral structure
+      of a s9y release (judebert)
+      
     * Use semantically better HTML output by sidebar plugins 
       (ordererd lists, less <br>s, ...) (YellowLED)
 
