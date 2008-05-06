@@ -4,6 +4,7 @@ DirectoryIndex {PREFIX}{indexFile}
 
 RewriteEngine On
 RewriteBase {PREFIX}
+RewriteRule ^serendipity_admin.php serendipity_admin.php [NC,L,QSA]
 RewriteRule ^({PAT_PERMALINK}) {indexFile}?/$1 [NC,L,QSA]
 RewriteRule ^({PAT_PERMALINK_AUTHORS}) {indexFile}?/$1 [NC,L,QSA]
 RewriteRule ^({PAT_PERMALINK_FEEDCATEGORIES}) {indexFile}?/$1 [NC,L,QSA]
