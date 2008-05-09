@@ -217,15 +217,13 @@ body {
     width: 95%;
 }
 
-ul.archives_row {
-    list-style-type: none;
-}
+.archives_header { clear: left; }
 
-ul.archives_row li.archives_graph,
-ul.archives_row li.archives_date,
-ul.archives_row li.archives_count,
-ul.archives_row li.archives_count_link {
+ul.archives_row {
+    clear: left;
     float: left;
+    list-style-type: none;
+    width: 100%;
 }
 
 ul.archives_row li.archives_graph,
@@ -233,6 +231,7 @@ ul.archives_row li.archives_date,
 ul.archives_row li.archives_count,
 ul.archives_row li.archives_count_link,
 ul.archives_row li.archives_link {
+    float: left;
     width: 19.9%;
 }
 
