@@ -13,7 +13,7 @@ if (file_exists($probelang)) {
 
 include dirname(__FILE__) . '/lang_en.inc.php';
 
-@define('PLUGIN_KARMA_VERSION', '2.0');
+@define('PLUGIN_KARMA_DB_VERSION', '2.0');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -54,7 +54,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.0');
+        $propbag->add('version',       '2.1');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -375,12 +375,12 @@ class serendipity_event_karma extends serendipity_event
     function checkScheme() {
         global $serendipity;
 
-        $version = $this->get_config('version', '0.9'); 
+        $version = $this->get_config('dbversion', '0'); 
 
         if ($version == '1.1') {
             $q   = "ALTER TABLE {$serendipity['dbPrefix']}karma ADD visits INT(11) default 0";
             $sql = serendipity_db_schema_import($q);
-            $this->set_config('version', PLUGIN_KARMA_VERSION);
+            $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
         } elseif ($version == '1.0') {
             $q   = "ALTER TABLE {$serendipity['dbPrefix']}karma ADD visits INT(11) default 0";
             $sql = serendipity_db_schema_import($q);
@@ -393,8 +393,8 @@ class serendipity_event_karma extends serendipity_event
                         votetime int(11) default null
                     )";
             $sql = serendipity_db_schema_import($q);
-            $this->set_config('version', PLUGIN_KARMA_VERSION);
-        } elseif ($version != PLUGIN_KARMA_VERSION) {
+            $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
+        } elseif ($version != PLUGIN_KARMA_DB_VERSION) {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}karma (
                         entryid int(11) default null,
                         points int(4) default null,
@@ -418,7 +418,7 @@ class serendipity_event_karma extends serendipity_event
 
             $q   = "CREATE INDEX kentryid ON {$serendipity['dbPrefix']}karma (entryid);";
             $sql = serendipity_db_schema_import($q);
-            $this->set_config('version', PLUGIN_KARMA_VERSION);
+            $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
         }
 
         return true;
@@ -952,7 +952,7 @@ END_IMG_CSS;
                 // Add voting information to entries
                 case 'entry_display':
                     // Update database if necessary 
-                    if ($this->get_config('version') != PLUGIN_KARMA_VERSION) {
+                    if ($this->get_config('dbversion', 0) != PLUGIN_KARMA_DB_VERSION) {
                         $this->checkScheme();
                     }
                     
@@ -1058,8 +1058,55 @@ END_IMG_CSS;
 
                             //--TODO: Ensure that this works with the Custom Permalinks plugin
                             // (We've seen trouble; it votes correctly, but redirects to the front page)
-                            $url = serendipity_currentURL() . '&amp;';
-                            //$uri = $_SERVER['REQUEST_URI'];
+                            $url = serendipity_currentURL();
+                            // Voting is only allowed on entries.  Therefore voting URLs must be
+                            // either single-entry URLs or summary URLs.  serendipity_currentURL
+                            // converts them to an "ErrorDocument-URI", so we can focus on the
+                            // query portion of the URI.
+                            //
+                            // Single-entry URLs should be well-defined.  They can be permalinks,
+                            // of course; otherwise they're of the configured pattern.
+                            //
+                            // Summary URLs could be a little harder.  The summary pages that 
+                            // include entries are: frontpage, category, author, and archives. 
+                            // It's possible a plugin would show entries, but if that's the case
+                            // we don't need to allow the user to vote on them.  Still, that's
+                            // a lot of URLs to check for.
+                            //
+                            // Then there's the problem of the rest of the query.  It could 
+                            // include stuff we really want to keep around, like template 
+                            // overrides or something.  One can even add serendipity variables
+                            // to the URL in extreme cases.
+                            //
+                            // It seems that canonicalizing the URL will be quite difficult.
+                            // The only thing we can say for certain is that whatever the 
+                            // current URL is, it got us to this page, and we'd like to return
+                            // to this page after we cast our vote.
+                            
+                            // Remove any clutter from our previous voting activity
+                            $url_parts = parse_url(serendipity_currentURL());
+                            if (!empty($url_parts['query'])) {
+                                $exclude = array('serendipity[karmaVote]', 'serendipity[karmaId]'); 
+                                // I tried using parse_str, but it gave me very weird results
+                                // with embedded arrays
+                                //parse_str($url_parts['query'], $q_parts);
+                                $q_parts = array();
+                                // I don't know why this URL has been HTML encoded.  Oh well.
+                                $pairs = explode('&amp;', $url_parts['query']);
+                                foreach($pairs as $pair) {
+                                    $parts = explode('=', $pair);
+                                    $q_parts[$parts[0]] = $parts[1];
+                                }
+                                foreach($q_parts as $key => $value) {
+                                    if (in_array($key, $exclude)) {
+                                        $rm = preg_quote("$key=$value");
+                                        $url = preg_replace("@(&amp;|&)?$rm@", '', $url);
+                                    }
+                                }
+                            }
+                            if (substr($url, -1) != '?') {
+                                $url .= '&amp;';
+                            }
 
                             // Get the cookie data (past votes, etc)
                             $karma = (isset($serendipity['COOKIE']['karmaVote']) ? unserialize($serendipity['COOKIE']['karmaVote']) : array());
