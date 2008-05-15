@@ -3,6 +3,14 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added possibility to access more SQL query parts of fetchEntries
+      through plugin API. New indexes of $eventData:
+      - 'single_group', 'single_having', 'single_orderby' for
+         serendipity_fetchEntry (through hook 'frontend_fetchentry')
+      - 'group', 'having' for
+         serendipity_fetchEntries (through hook 'frontend_fetchentries')
+      (judebert&garvinhicking)
+
     * Added RewriteRule to ensure that admin panel can be called,
       thanks to rich4647 from the forums.
 

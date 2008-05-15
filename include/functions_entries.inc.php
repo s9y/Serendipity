@@ -339,23 +339,23 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         }
     }
 
-    serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => $noCache, 'noSticky' => $noSticky, 'source' => 'entries'));
-
     if ($serendipity['dbType'] == 'postgres' ||
         $serendipity['dbType'] == 'pdo-postgres') {
-        $group    = '';
-        $distinct = 'DISTINCT';
+        $cond['group']    = '';
+        $cond['distinct'] = 'DISTINCT';
     } else {
-        $group    = 'GROUP BY e.id';
-        $distinct = '';
+        $cond['group']    = 'GROUP BY e.id';
+        $cond['distinct'] = '';
     }
 
     if (!is_null($group_by)) {
-        $group = $group_by;
+        $cond['group'] = $group_by;
     }
 
+    serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('noCache' => $noCache, 'noSticky' => $noSticky, 'source' => 'entries'));
+
     if (is_null($select_key)) {
-        $select_key = "$distinct
+        $select_key = "{$cond['distinct']}
                     {$cond['addkey']}
 
                     e.id,
@@ -406,7 +406,8 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $query = "SELECT $select_key
                      $body
                      {$serendipity['fullCountQuery']}
-                     $group
+                     {$cond['group']}
+                     {$cond['having']}
             ORDER BY {$cond['orderby']}
                      $limit";
 
@@ -537,6 +538,10 @@ function &serendipity_fetchEntry($key, $val, $full = true, $fetchDrafts = 'false
                      WHERE
                             e.$key " . ($key == 'id' ? '=' : 'LIKE') . " '" . serendipity_db_escape_string($val) . "'
                             {$cond['and']}
+
+                            {$cond['single_group']}
+                            {$cond['single_having']}
+                            {$cond['single_orderby']}
                      LIMIT  1";
 
     $ret =& serendipity_db_query($querystring, true, 'assoc');
@@ -736,20 +741,20 @@ function &serendipity_searchEntries($term, $limit = '') {
     $cond = array();
     if ($serendipity['dbType'] == 'postgres' ||
         $serendipity['dbType'] == 'pdo-postgres') {
-        $group     = '';
-        $distinct  = 'DISTINCT';
+        $cond['group']     = '';
+        $cond['distinct']  = 'DISTINCT';
         $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
     } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
         // Very extensive SQLite search. There currently seems no other way to perform fulltext search in SQLite
         // But it's better than no search at all :-D
-        $group     = 'GROUP BY e.id';
-        $distinct  = '';
-        $term      = serendipity_mb('strtolower', $term);
+        $cond['group']     = 'GROUP BY e.id';
+        $cond['distinct']  = '';
+        $term              = serendipity_mb('strtolower', $term);
         $cond['find_part'] = "(lower(title) LIKE '%$term%' OR lower(body) LIKE '%$term%' OR lower(extended) LIKE '%$term%')";
     } else {
-        $group     = 'GROUP BY e.id';
-        $distinct  = '';
-        $term      = str_replace('&quot;', '"', $term);
+        $cond['group']    = 'GROUP BY e.id';
+        $cond['distinct'] = '';
+        $term             = str_replace('&quot;', '"', $term);
         if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
             $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term' IN BOOLEAN MODE)";
         } else {
@@ -773,7 +778,7 @@ function &serendipity_searchEntries($term, $limit = '') {
                             ({$cond['find_part']})
                             {$cond['and']}";
 
-    $querystring = "SELECT $distinct
+    $querystring = "SELECT {$cond['distinct']}
                             e.id,
                             e.authorid,
                             a.realname AS author,
@@ -788,7 +793,8 @@ function &serendipity_searchEntries($term, $limit = '') {
                             e.trackbacks,
                             e.exflag
                     {$serendipity['fullCountQuery']}
-                    $group
+                    {$cond['group']}
+                    {$cond['having']}
                   ORDER BY  timestamp DESC
                     $limit";
 
