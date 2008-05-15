@@ -6,7 +6,7 @@
 {*** POSSIBLE ERROR MESSAGES END ***}
 
 {*** MAIN ENTRY FORM START ***}
-<form {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post" id="serendipityEntry" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px">
+<form {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post" name="serendipityEntry" id="serendipityEntry" style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px">
 {$entry_vars.hidden}
 
 <table class="serendipityEntryEdit" border="0" width="100%">
