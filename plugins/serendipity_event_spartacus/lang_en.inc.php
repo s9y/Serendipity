@@ -58,3 +58,6 @@
 @define('PLUGIN_EVENT_SPARTACUS_FTP_PASS', 'FTP password');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR', 'FTP serendipity directory');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC', 'When you connect to the FTP,you do not necessarilly enter into the serendipity directory. So here it is necessary to write the path from the FTP login place to the serendipity directory.');
+
+@define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR', 'Custom location for mirror');
+@define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR_DESC', 'This option is for advanced users only. When the preconfigurable mirrors are down or malfunctioning, you can enter your own server name (like http://mirror.org/serendipity/). The server needs to maintain the XML files at URL level, and have subdirectories like additional_plugins and additional_themes. Only enter mirrors that you trust to be safe and which are a full duplicate of the files hosted in the CVS repository of Serendipity. You can enter multiple mirrors, separated by "|".');

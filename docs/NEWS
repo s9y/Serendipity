@@ -3,6 +3,8 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Update to Spartacus to support custom mirrors (garvinhicking)
+
     * Added possibility to access more SQL query parts of fetchEntries
       through plugin API. New indexes of $eventData:
       - 'single_group', 'single_having', 'single_orderby' for
