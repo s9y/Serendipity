@@ -1187,7 +1187,7 @@ END_IMG_CSS;
                                 // never returned.
                                 //
                                 // Reference a footer that will be printed
-                                if (empty($footer) && !isset($eventData[$i]['add_footer'])) {
+                                if (empty($footer) && !isset($eventData[$i]['add_footer']) && is_array($eventData[$i])) {
                                   $eventData[$i]['add_footer'] = '';
                                   $footer = &$eventData[$i]['add_footer'];
                                   // It's still empty, but it's referencing
