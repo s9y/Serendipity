@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.15');
+        $propbag->add('version',       '2.20');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -60,7 +60,7 @@ class serendipity_event_spartacus extends serendipity_event
             'backend_directory_create'             => true
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
-        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
+        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'custommirror', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
 
     }
 
@@ -92,35 +92,40 @@ class serendipity_event_spartacus extends serendipity_event
         static $mirror = array(
             'xml' => array(
                 'Netmirror.org',
-                's9y.org'
+                's9y.org',
+                'openmirror.org'
             ),
 
             'files' => array(
                 'Netmirror.org',
                 'SourceForge.net',
                 's9y.org',
-                'BerliOS.de'
+                'BerliOS.de (inactive)',
+                'openmirror.org'
             )
         );
 
         static $http = array(
             'xml' => array(
                 'http://netmirror.org/mirror/serendipity/',
-                'http://s9y.org/mirror/'
+                'http://s9y.org/mirror/',
+                'http://openmirror.org/pub/s9y/',
             ),
 
             'files' => array(
                 'http://netmirror.org/mirror/serendipity/',
                 'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/',
                 'http://s9y.org/mirror/',
-                'http://svn.berlios.de/viewcvs/serendipity/'
+                'http://svn.berlios.de/viewcvs/serendipity/',
+                'http://openmirror.org/pub/s9y/',
             ),
 
             'files_health' => array(
                 'http://netmirror.org/'                 => 'http://netmirror.org/mirror/serendipity/last.txt',
                 'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
-                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/'
+                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/',
+                'http://openmirror.org/'                => 'http://openmirror.org/pub/s9y/last.txt',
             )
         );
 
@@ -181,6 +186,13 @@ class serendipity_event_spartacus extends serendipity_event
                 $propbag->add('type',        'string');
                 $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_CHOWN);
                 $propbag->add('description', PLUGIN_EVENT_SPARTACUS_CHOWN_DESC);
+                $propbag->add('default',     '');
+                break;
+
+            case 'custommirror':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR);
+                $propbag->add('description', PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR_DESC);
                 $propbag->add('default',     '');
                 break;
 
@@ -381,7 +393,7 @@ class serendipity_event_spartacus extends serendipity_event
             $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
         } else {
             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-            $options = array();
+            $options = array('allowRedirects' => true, 'maxRedirects' => 5);
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'spartacus');
             serendipity_request_start();
 
@@ -548,14 +560,34 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         $mirrors = $this->getMirrors('xml', true);
-        $mirror  = $mirrors[$this->get_config('mirror_xml', 0)];
+        $custom  = $this->get_config('custommirror');
+        if (strlen($custom) > 2) {
+            $servers = explode('|', $custom);
+            $cacheTimeout = 60*60*12; // XML file is cached for half a day
+            $valid = false;
+            foreach($servers AS $server) {
+                if ($valid) continue;
 
-        $url    = $mirror . '/package_' . $url_type .  $lang . '.xml';
-        $cacheTimeout = 60*60*12; // XML file is cached for half a day
-        $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
+                $url    = $server . '/package_' . $url_type .  $lang . '.xml';
+                $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
+        
+                $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
+                if (strlen($xml) > 0) {
+                    $valid = true;
+                }
+                echo '<br /><br />';
+            }
 
-        $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
-        echo '<br /><br />';
+        } else {
+            $mirror  = $mirrors[$this->get_config('mirror_xml', 0)];
+
+            $url    = $mirror . '/package_' . $url_type .  $lang . '.xml';
+            $cacheTimeout = 60*60*12; // XML file is cached for half a day
+            $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
+    
+            $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
+            echo '<br /><br />';
+        }
 
         $new_crc  = md5($xml);
         $last_crc = $this->get_config('last_crc_' . $url_type);
@@ -768,6 +800,12 @@ class serendipity_event_spartacus extends serendipity_event
         $mirrors = $this->getMirrors('files', true);
         $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
 
+        $custom  = $this->get_config('custommirror');
+        if (strlen($custom) > 2) {
+            $servers = explode('|', $custom);
+            $mirror = $servers[0];
+        }
+
         $this->checkArray($tree);
 
         foreach($tree[0]['children'] AS $idx => $subtree) {
@@ -900,6 +938,12 @@ class serendipity_event_spartacus extends serendipity_event
 
         $mirrors = $this->getMirrors('files', true);
         $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
+
+        $custom  = $this->get_config('custommirror');
+        if (strlen($custom) > 2) {
+            $servers = explode('|', $custom);
+            $mirror = $servers[0];
+        }
 
         foreach($files AS $file) {
             $url    = $mirror . '/' . $sfloc . '/' . $file . '?rev=1.9999';
