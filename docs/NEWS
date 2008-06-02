@@ -3,6 +3,11 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Default .htaccess now contains a conditional rewrite pattern
+      for fallback *.html generation. Thanks to absynth.
+      (TODO: Regenerate .htaccess on update, maybe make this
+       condition optional)
+      
     * Update to Spartacus to support custom mirrors (garvinhicking)
 
     * Added possibility to access more SQL query parts of fetchEntries
