@@ -913,3 +913,4 @@
 @define('PINGBACK_NOT_FOUND', 'Nem található hivatkozás az URL létezés ellenõrzéséhez.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Az archívum hivatkozás elrejtése, ha nincs abban az idõszakban bejegyzés (a bejegyzések számolása szükséges)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS importálása, PHP5 szükséges, és lehet hogy sok memóriát igényel');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

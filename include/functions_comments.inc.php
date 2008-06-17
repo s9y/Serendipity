@@ -100,7 +100,7 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
         'commentform_subscribe'      => isset($data['subscribe']) ? 'checked="checked"' : '',
         'commentform_data'           => isset($data['comment'])   ? htmlspecialchars($data['comment']) : '',
         'is_commentform_showToolbar' => $showToolbar,
-        'is_allowSubscriptions'      => $serendipity['allowSubscriptions'],
+        'is_allowSubscriptions'      => (serendipity_db_bool($serendipity['allowSubscriptions']) || $serendipity['allowSubscriptions'] === 'fulltext' ? true : false),
         'is_moderate_comments'       => $moderate_comments,
         'commentform_entry'          => $entry
     );
@@ -548,7 +548,9 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     serendipity_db_query($query);
 
     if (!$moderate) {
-        if ($serendipity['allowSubscriptions']) {
+        if ($serendipity['allowSubscriptions'] === 'fulltext') {
+            serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid, $rs['body']);
+        } elseif (serendipity_db_bool($serendipity['allowSubscriptions'])) {
             serendipity_mailSubscribers($entry_id, $rs['author'], $rs['email'], $rs['title'], $rs['authoremail'], $cid);
         }
 
@@ -646,9 +648,10 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
  * @param   string  The title of the entry
  * @param   string  The mail address used to send emails from
  * @param   int     The ID of the comment that has been made
+ * @param   string  The body of the comment that has been made
  * @return null
  */
-function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $fromEmail = 'none@example.com', $cid = null) {
+function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $fromEmail = 'none@example.com', $cid = null, $body = null) {
     global $serendipity;
 
     $entryURI = serendipity_archiveURL($entry_id, $title, 'baseURL') . ($cid > 0 ? '#c' . $cid : '');
@@ -684,7 +687,7 @@ function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $f
                       $serendipity['blogTitle'],
                       $title,
                       $poster,
-                      $entryURI,
+                      ($body ? "\n\n" . $body . "\n" : '') . $entryURI,
                       serendipity_rewriteURL('unsubscribe/' . urlencode($subscriber['email']) . '/' . (int)$entry_id, 'baseURL')
             );
         } else {
@@ -695,7 +698,7 @@ function serendipity_mailSubscribers($entry_id, $poster, $posterMail, $title, $f
                       $serendipity['blogTitle'],
                       $title,
                       $poster,
-                      $entryURI,
+                      ($body ? "\n\n" . $body . "\n" : '') . $entryURI,
                       serendipity_rewriteURL('unsubscribe/' . urlencode($subscriber['email']) . '/' . (int)$entry_id, 'baseURL')
             );
         }

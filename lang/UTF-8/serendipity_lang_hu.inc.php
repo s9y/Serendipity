@@ -60,7 +60,7 @@
 @define('NAME', 'Név');
 @define('EMAIL', 'email');
 @define('HOMEPAGE', 'Honlap');
-@define('COMMENT', 'Hozzászólás');
+@define('COMMENT', 'Megjegyzés');
 @define('REMEMBER_INFO', 'Megjegyezzem a megadott adatokat? ');
 @define('SUBMIT_COMMENT', 'Hozzászólás beküldése');
 @define('NO_ENTRIES_TO_PRINT', 'Nincs mit megjeleníteni');
@@ -913,3 +913,4 @@
 @define('PINGBACK_NOT_FOUND', 'Nem található hivatkozás az URL létezés ellenőrzéséhez.');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Az archívum hivatkozás elrejtése, ha nincs abban az időszakban bejegyzés (a bejegyzések számolása szükséges)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS importálása, PHP5 szükséges, és lehet hogy sok memóriát igényel');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

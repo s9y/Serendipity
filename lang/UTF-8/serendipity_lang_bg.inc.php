@@ -906,3 +906,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SET_TO_MODERATED', 'Модериране');
 @define('COMMENT_MODERATED', 'Коментар #%s успешно е установен като модериран');
 @define('CENTER', 'център');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

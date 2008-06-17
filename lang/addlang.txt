@@ -1,1 +1,1 @@
-@define('CENTER', 'center');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
