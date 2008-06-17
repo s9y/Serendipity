@@ -3,6 +3,11 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Fix bug in category sidebar plugin, which showed categories that
+      should have been hidden when the option "Hide parents of 
+      selected sub-tree" was selected and Smarty templating was enabled.
+      (garvinhicking)
+
     * Change option to allow subscriptions to comments so that
       fulltext comments can be mailed to subscribers.
       (garvinhicking)
