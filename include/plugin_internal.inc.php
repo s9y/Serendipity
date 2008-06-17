@@ -1589,6 +1589,7 @@ class serendipity_categories_plugin extends serendipity_plugin {
                 // Hide parents outside of our tree
                 if ($hide_parallel && $serendipity['GET']['category']) {
                     if ($hidedepth == 0 && $cat['parentid'] != $serendipity['GET']['category'] && $cat['categoryid'] != $serendipity['GET']['category']) {
+                        unset($categories[$cid]);
                         continue;
                     } else {
                         if ($cat['depth'] < $hidedepth) {
