@@ -913,3 +913,4 @@
 @define('SET_TO_MODERATED', 'Moderieren');
 @define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich moderiert.');
 @define('CENTER', 'mitte');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

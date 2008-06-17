@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ru.inc.php 2083 2008-01-03 15:02:22Z garvinhicking $
+<?php # $Id: serendipity_lang_ru.inc.php 2270 2008-04-29 19:42:57Z slothman $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Nightly <nightly@reys.net>
@@ -919,3 +919,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
 @define('CENTER', 'center');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

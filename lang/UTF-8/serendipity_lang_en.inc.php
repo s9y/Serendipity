@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 2102 2008-02-01 15:37:00Z slothman $
+<?php # $Id: serendipity_lang_en.inc.php 2270 2008-04-29 19:42:57Z slothman $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -419,8 +419,8 @@
 @define('INSTALL_IMAGEMAGICKPATH_DESC', 'Full path & name of your ImageMagick convert binary');
 @define('INSTALL_THUMBSUFFIX', 'Thumbnail suffix');
 @define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails will be named with the following format: original.[suffix].ext');
-@define('INSTALL_THUMBWIDTH', 'Thumbnail dimensions');
-@define('INSTALL_THUMBWIDTH_DESC', 'Static maximum width of auto-generated thumbnails');
+@define('INSTALL_THUMBWIDTH', 'Thumbnail max size');
+@define('INSTALL_THUMBWIDTH_DESC', 'Maximum size of thumbnail in constrained dimension');
 @define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
 @define('INSTALL_THUMBDIM_LARGEST', 'Largest');
 @define('INSTALL_THUMBDIM_WIDTH', 'Width');
@@ -913,3 +913,4 @@
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
 @define('CENTER', 'center');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

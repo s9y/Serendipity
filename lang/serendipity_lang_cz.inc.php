@@ -925,3 +925,4 @@ $i18n_filename_to = array (
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
 @define('CENTER', 'center');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

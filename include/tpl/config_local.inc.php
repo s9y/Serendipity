@@ -319,13 +319,6 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('installOnly', 'local')),
 
-                                    array('var'         => 'allowSubscriptions',
-                                          'title'       => INSTALL_SUBSCRIBE,
-                                          'description' => INSTALL_SUBSCRIBE_DESC,
-                                          'type'        => 'bool',
-                                          'permission'  => 'siteConfiguration',
-                                          'default'     => true),
-
                                     array('var'         => 'blogTitle',
                                           'title'       => INSTALL_BLOGNAME,
                                           'description' => INSTALL_BLOGNAME_DESC,
@@ -348,6 +341,13 @@
                                           'type'        => 'string',
                                           'permission'  => 'blogConfiguration',
                                           'default'     => ''),
+
+                                    array('var'         => 'allowSubscriptions',
+                                          'title'       => INSTALL_SUBSCRIBE,
+                                          'description' => INSTALL_SUBSCRIBE_DESC,
+                                          'type'        => 'list',
+                                          'default'     => array('true' => YES, 'false' => NO, 'fulltext' => FULL_COMMENT_TEXT),
+                                          'permission'  => 'siteConfiguration'),
 
                                     array('var'         => 'lang',
                                           'title'       => INSTALL_LANG,
