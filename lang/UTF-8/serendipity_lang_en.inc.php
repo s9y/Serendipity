@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 2270 2008-04-29 19:42:57Z slothman $
+<?php # $Id: serendipity_lang_en.inc.php 2282 2008-06-17 12:06:45Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -913,4 +913,4 @@
 @define('SET_TO_MODERATED', 'Moderate');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
 @define('CENTER', 'center');
-@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
+@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');

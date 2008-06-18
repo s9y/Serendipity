@@ -261,7 +261,7 @@
 @define('ALL_CATEGORIES', 'Alla kategorier');
 @define('DO_MARKUP', 'Utför Markup Transformations');
 @define('GENERAL_PLUGIN_DATEFORMAT', 'Datumformatering');
-@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Formatet på artikelns verkliga datum, med hjälp PHPs strftime() variabler. (Default: "%s")');
+@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'Formatet på artikelns verkliga datum, med hjälp PHPs strftime() variabler. (Ursprungsvärde: "%s")');
 @define('ERROR_TEMPLATE_FILE', 'Kunde inte öppna mallfil. Uppdatera Serendipity!');
 @define('ADVANCED_OPTIONS', 'Utökade inställningar');
 @define('EDIT_ENTRY', 'Redigera artikel');
@@ -332,10 +332,10 @@
 @define('TOP_LEVEL', 'Översta nivån');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s matning');
 @define('PERMISSIONS', 'Rättigheter');
-@define('INTEGRITY', 'Verify Installation Integrity');
-@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
-@define('CHECKSUMS_PASS', 'All required files verified.');
-@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
+@define('INTEGRITY', 'Verifiera installationens integritet');
+@define('CHECKSUMS_NOT_FOUND', 'Kunde inte jämföra kontrollsummor! (Ingen checksums.inc.php i huvudmappen)');
+@define('CHECKSUMS_PASS', 'Alla nödvändiga filer verifierade..');
+@define('CHECKSUM_FAILED', '%s korrupt eller ändrad: verifiering misslyckades');
 @define('SETTINGS_SAVED_AT', 'De nya inställningarna har sparats på %s');
 
 /* DATABASE SETTINGS */
@@ -356,7 +356,7 @@
 
 /* PATHS */
 @define('INSTALL_CAT_PATHS', 'Sökvägar');
-@define('INSTALL_CAT_PATHS_DESC', 'Olka sökvägar till nödvändiga mappar och filer. Glöm inte efterföljande snedstreck för kataloger!');
+@define('INSTALL_CAT_PATHS_DESC', 'Olika sökvägar till nödvändiga mappar och filer. Glöm inte efterföljande snedstreck för kataloger!');
 @define('INSTALL_FULLPATH', 'Fullständig sökväg');
 @define('INSTALL_FULLPATH_DESC', 'Den absoluta (fullständiga) sökvägen till din Serendipity-installation');
 @define('INSTALL_UPLOADPATH', 'Sökväg för uppladdning');
@@ -421,14 +421,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'Miniatyrer kommer att döpas enligt följande format: original.[suffix].ext');
 @define('INSTALL_THUMBWIDTH', 'Miniatyrbildsdimensioner');
 @define('INSTALL_THUMBWIDTH_DESC', 'Statisk max-bredd för auto-genererade miniatyrbilder');
-@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
-@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
-@define('INSTALL_THUMBDIM_WIDTH', 'Width');
-@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
-@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
-    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
-    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
-    '" only limit the chosen dimension, so the other could be larger than the max size.');
+@define('INSTALL_THUMBDIM', 'Begränsad miniatyrbildsdimension');
+@define('INSTALL_THUMBDIM_LARGEST', 'Störst');
+@define('INSTALL_THUMBDIM_WIDTH', 'Bredd');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Höjd');
+@define('INSTALL_THUMBDIM_DESC', 'Dimension att begränsa till miniatyrbildens maxstorlek. Ursprungsvärdet "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" begränsar båda dimensionerna, så att ingen av dem kan vara större än maxstorleken; "' . 
+    INSTALL_THUMBDIM_WIDTH . '" och "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" begränsa endast den valda dimensionen, så att den andra kan vara större än maxstorleken.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Din personliga information');
@@ -600,8 +600,8 @@
 @define('ACTUAL', 'Verklig');
 @define('PHPINI_CONFIGURATION', 'php.ini-konfiguration');
 @define('PHP_INSTALLATION', 'PHP-installation');
-@define('THEY_DO', 'they do');
-@define('THEY_DONT', 'they do not');
+@define('THEY_DO', 'det gör de');
+@define('THEY_DONT', 'det gör de inte');
 @define('SIMPLE_INSTALLATION', 'Enkel installation');
 @define('EXPERT_INSTALLATION', 'Expertinstallation');
 @define('COMPLETE_INSTALLATION', 'Komplett installation');
@@ -817,102 +817,102 @@
 @define('CATEGORIES_HIDE_PARENT', 'Vill du gömma vald överordnad kategori?');
 @define('CATEGORIES_HIDE_PARENT_DESC', 'Om du begränsar listningen av kategorier till en specifik kategori så kommer du att endast se den överordnade kategorin när de listas. Om du avaktiverar detta val så kommer inte den överordnade kategorin att visas.');
 @define('WARNING_NO_GROUPS_SELECTED', 'OBS! Du valde inte något gruppmedlemskap. Det medför att du kommer att loggas ut från hanteringen av användargrupper. Ditt medlemskap har därför inte ändrats.');
-@define('INSTALL_RSSFETCHLIMIT', 'Entries to display in Feeds');
-@define('INSTALL_RSSFETCHLIMIT_DESC', 'Number of entries to display for each page on the RSS Feed.');
-@define('INSTAL_DB_UTF8', 'Enable DB-charset conversion');
-@define('INSTAL_DB_UTF8_DESC', 'Issues a MySQL "SET NAMES" query to indicate the required charset for the database. Turn this on or off, if you see weird characters in your blog.');
-@define('ONTHEFLYSYNCH', 'Enable on-the-fly media synchronization');
-@define('ONTHEFLYSYNCH_DESC', 'If enabled, Serendipity will compare the media database with the files stored on your server and synchronize the database and directory contents.');
-@define('USERCONF_CHECK_USERNAME_ERROR', 'The username cannot be left blank.');
-@define('FURTHER_LINKS', 'Further Links');
-@define('FURTHER_LINKS_S9Y', 'Serendipity Homepage');
-@define('FURTHER_LINKS_S9Y_DOCS', 'Serendipity Documentation');
-@define('FURTHER_LINKS_S9Y_BLOG', 'Official Blog');
-@define('FURTHER_LINKS_S9Y_FORUMS', 'Forums');
+@define('INSTALL_RSSFETCHLIMIT', 'Artiklar som visas i flöden');
+@define('INSTALL_RSSFETCHLIMIT_DESC', 'Antal artiklar att visa på varje sida i RSS-flödet.');
+@define('INSTAL_DB_UTF8', 'Aktivera Enable DB-teckenuppsättningskonvertering');
+@define('INSTAL_DB_UTF8_DESC', 'Utfärdare MySQL-förfrågan "SET NAMES" för att indikera den för databasen nödvändiga teckenuppsättningen. Ändra denna inställning om du ser märkliga tecken i din blogg.');
+@define('ONTHEFLYSYNCH', 'Aktivera mediasynkronisering');
+@define('ONTHEFLYSYNCH_DESC', 'Om aktiv kommer Serendipity att jämföra mediadatabasen med filerna som lagras på din server och synkronisera databasen med mappinnehållet.');
+@define('USERCONF_CHECK_USERNAME_ERROR', 'Användarnamnet kan inte utelämnas.');
+@define('FURTHER_LINKS', 'Fler länkar');
+@define('FURTHER_LINKS_S9Y', 'Serendipitys hemsida');
+@define('FURTHER_LINKS_S9Y_DOCS', 'Serendipitys dokumentation');
+@define('FURTHER_LINKS_S9Y_BLOG', 'Officiell blogg');
+@define('FURTHER_LINKS_S9Y_FORUMS', 'Forum');
 @define('FURTHER_LINKS_S9Y_SPARTACUS', 'Spartacus');
-@define('COMMENT_IS_DELETED', '(Comment removed)');
+@define('COMMENT_IS_DELETED', '(Kommentar borttagen)');
 
-@define('CURRENT_AUTHOR', 'Current author');
+@define('CURRENT_AUTHOR', 'Innevarande författare');
 
-@define('WORD_NEW', 'New');
-@define('SHOW_MEDIA_TOOLBAR', 'Show toolbar within media selector popup?');
-@define('MEDIA_KEYWORDS', 'Media keywords');
-@define('MEDIA_KEYWORDS_DESC', 'Enter a list of ";" separated words that you want to use as pre-defined keywords for media items.');
-@define('MEDIA_EXIF', 'Import EXIF/JPEG image data');
-@define('MEDIA_EXIF_DESC', 'If enabled, existing EXIF/JPEG metadata of images will be parsed and stored in the database for display in the media gallery.');
-@define('MEDIA_PROP', 'Media properties');
+@define('WORD_NEW', 'Ny');
+@define('SHOW_MEDIA_TOOLBAR', 'Visa verktygsrad i mediaväljarens popup-fönster?');
+@define('MEDIA_KEYWORDS', 'Medianyckelord');
+@define('MEDIA_KEYWORDS_DESC', 'Fyll i en lista med ord separerade av ";" som du vill använda som fördefinierade nyckelord för mediastycken.');
+@define('MEDIA_EXIF', 'Importera EXIF/JPEG-bilddata');
+@define('MEDIA_EXIF_DESC', 'Om aktiv kommer existerande EXIF/JPEG-metadata i bilder att läsas och lagras i databasen för visning i mediagalleriet.');
+@define('MEDIA_PROP', 'Mediaegenskaper');
 
 
-@define('GO_ADD_PROPERTIES', 'Go & enter properties');
+@define('GO_ADD_PROPERTIES', 'Mata in egenskaper');
 @define('MEDIA_PROPERTY_DPI', 'DPI');
-@define('MEDIA_PROPERTY_COPYRIGHT', 'Copyright');
-@define('MEDIA_PROPERTY_COMMENT1', 'Short Comment');
-@define('MEDIA_PROPERTY_COMMENT2', 'Long Comment');
-@define('MEDIA_PROPERTY_TITLE', 'Title');
-@define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
-@define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
+@define('MEDIA_PROPERTY_COPYRIGHT', 'Upphovsskydd');
+@define('MEDIA_PROPERTY_COMMENT1', 'Kort kommentar');
+@define('MEDIA_PROPERTY_COMMENT2', 'Lång kommentar');
+@define('MEDIA_PROPERTY_TITLE', 'Titel');
+@define('MEDIA_PROP_DESC', 'Fyll i en lista med egenskapsfält separerade av  ";" som du vill definiera för varje mediafil');
+@define('MEDIA_PROP_MULTIDESC', '(Du kan lägga till ":MULTI" efter valfritt egenskapsfält för att indikera att detta kommer att innehålla en längre text snarare än enstaka tecken)');
 
-@define('STYLE_OPTIONS_NONE', 'This theme/style has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Theme/Style options');
+@define('STYLE_OPTIONS_NONE', 'Denna stil har inga specifika inställningar. För att se hur din mall kan specifiera inställningar, läs "Technical Documentation" på www.s9y.org om "Configuration of Theme options".');
+@define('STYLE_OPTIONS', 'Tema/stil-inställningar');
 
-@define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
+@define('PLUGIN_AVAILABLE_COUNT', 'Totalt: %d insticksmoduler.');
 
-@define('SYNDICATION_RFC2616', 'Activate strict RFC2616 RSS-Feed compliance');
-@define('SYNDICATION_RFC2616_DESC', 'NOT Enforcing RFC2616 means that all Conditional GETs to Serendipity will return entries last modified since the time of the last request. With that setting to "false", your visitors will get all articles since their last request, which is considered a good thing. However, some Agents like Planet act weird, if that happens, at it also violates RFC2616. So if you set this option to "TRUE" you will comply with that RFC, but readers of your RSS feed might miss items in their holidays. So either way, either it hearts Aggregators like Planet, or it hurts actual readers of your blog. If you are facing complaints from either side, you can toggle this option. Reference: <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
-@define('MEDIA_PROPERTY_DATE', 'Associated Date');
-@define('MEDIA_PROPERTY_RUN_LENGTH', 'Run-Length');
-@define('FILENAME_REASSIGNED', 'Automagically assigned new file name: %s');
-@define('MEDIA_UPLOAD_SIZE', 'Max. file upload size');
-@define('MEDIA_UPLOAD_SIZE_DESC', 'Enter the maximum filesize for uploaded files in bytes. This setting can be overruled by server-side settings in PHP.ini: upload_max_filesize, post_max_size, max_input_time all take precedence over this option. An empty string means to only use the server-side limits.');
-@define('MEDIA_UPLOAD_SIZEERROR', 'Error: You cannot upload files larger than %s bytes!');
-@define('MEDIA_UPLOAD_MAXWIDTH', 'Max. width of image files for upload');
-@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Enter the maximum image width in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_MAXHEIGHT', 'Max. height of image files for upload');
-@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Enter the maximum image height in pixels for uploaded images.');
-@define('MEDIA_UPLOAD_DIMERROR', 'Error: You cannot upload image files larger than %s x %s pixels!');
+@define('SYNDICATION_RFC2616', 'Aktivera strikt RFC2616 RSS-flödesefterlevnad');
+@define('SYNDICATION_RFC2616_DESC', 'Att INTE verkställa RFC2616 innebär att alla villkorliga GETs till Serendipity kommer att returnera artiklar som ändrats sedan den senaste förfrågan. Med den inställingen som "falsk" kommer dina besökare att få alla artiklar sedan deras senaste besök, vilket betraktas som en god sak. Dock kan vissa agenter såsom Planet att uppträda märkligt eftersom det strider mot RFC2616. Så om du sötter denna inställning som "true" kommer du att hålla dig till denna RFC, men läsare av dina RSS-flöden kan missa artiklar vid längre uppehåll. Antingen orsakar du problem för sammanställare som Planet eller för dina direkta läsare. Om du får klagomål från någon av dessa kan du ändra denna inställning. Se även: <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
+@define('MEDIA_PROPERTY_DATE', 'Tillhörande datum');
+@define('MEDIA_PROPERTY_RUN_LENGTH', 'Speltid');
+@define('FILENAME_REASSIGNED', 'Automatiskt tilldelat nytt filnamn: %s');
+@define('MEDIA_UPLOAD_SIZE', 'Maximal uppladdningsstorlek för fil');
+@define('MEDIA_UPLOAD_SIZE_DESC', 'Mata in den maximala filstorleken för uppladdade filer i bytes. Denna inställning kan åsidosättas av serverinställningar i PHP.ini: upload_max_filesize, post_max_size, max_input_time kommer alla att ha företräde framför denna inställning. En tom sträng innebär att endast serverinställningarnas begränsning används.');
+@define('MEDIA_UPLOAD_SIZEERROR', 'Fel: Du kan inte ladda upp filer större än %s byte!');
+@define('MEDIA_UPLOAD_MAXWIDTH', 'Maximal bredd på bilder som laddas upp');
+@define('MEDIA_UPLOAD_MAXWIDTH_DESC', 'Mata in den maximala bildbredden i pixlar för uppladdade bilder.');
+@define('MEDIA_UPLOAD_MAXHEIGHT', 'Maximal höjd på bilder som laddas upp');
+@define('MEDIA_UPLOAD_MAXHEIGHT_DESC', 'Mata in den maximala bildhöjden i pixlar för uppladdade bilder.');
+@define('MEDIA_UPLOAD_DIMERROR', 'Fel: Du kan inte ladda upp bildfiler större än %s x %s pixlar!');
 
-@define('MEDIA_TARGET', 'Target for this link');
-@define('MEDIA_TARGET_JS', 'Popup window (via JavaScript, adaptive size)');
-@define('MEDIA_ENTRY', 'Isolated Entry');
-@define('MEDIA_TARGET_BLANK', 'Popup window (via target=_blank)');
+@define('MEDIA_TARGET', 'Mål för denna länk');
+@define('MEDIA_TARGET_JS', 'Popup-fönster (via JavaScript, adaptiv storlek)');
+@define('MEDIA_ENTRY', 'Isolerad artikel');
+@define('MEDIA_TARGET_BLANK', 'Popup-fönster (via target=_blank)');
 
-@define('MEDIA_DYN_RESIZE', 'Allow dynamic image resizing?');
-@define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
+@define('MEDIA_DYN_RESIZE', 'Tillåt dynamisk bildskalning?');
+@define('MEDIA_DYN_RESIZE_DESC', 'Om aktiv kan mediaväljaren returnera bilder i valfri efterfrågad storlek via en GET-variabel. Resultaten cache-lagras och kan därför skapa en stor filsamling om du använder detta intensivt.');
 
-@define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
-@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
-@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
-@define('PLUGIN_ACTIVE', 'Active');
-@define('PLUGIN_INACTIVE', 'Inactive');
-@define('PREFERENCE_USE_JS', 'Enable advanced JS usage?');
-@define('PREFERENCE_USE_JS_DESC', 'If enabled, advanced JavaScript sections will be enabled for better usability, like in the Plugin Configuration section you can use drag and drop for re-ordering plugins.');
+@define('MEDIA_DIRECTORY_MOVED', 'Mapp och filer flyttades utan problem till %s');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'Mapp och filer kunde inte flyttas till %s!');
+@define('MEDIA_DIRECTORY_MOVE_ENTRY', 'I andra databaser än MySQL är det inte möjligt att iterera genom varje artikel för att ersätta gammal mapps URL. Du kommer att behöva att redigera dina artiklar manuellt för att fixa ny URLer. Du kan fortfarande flytta din gamla mapp tillbaka till dess gamla plats om detta är för ansträngande.');
+@define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Flyttade URLen för den flyttade mappen för %s artiklar.');
+@define('PLUGIN_ACTIVE', 'Aktiv');
+@define('PLUGIN_INACTIVE', 'Inaktiv');
+@define('PREFERENCE_USE_JS', 'Aktivera avancerad JS-användning?');
+@define('PREFERENCE_USE_JS_DESC', 'Om aktiv kommer avancerade JavaScript-sektioner att användas för större användbarhet, såsom att i sektionen för konfigurering av insticksmoduler kunna dra och släppa insticksmoduler för att ändra deras ordning.');
 
-@define('PREFERENCE_USE_JS_WARNING', '(This page uses advanced JavaScripting. If you are having functionality issues, please disable the use of advanced JS usage in your personal preferences or disable your browser\'s JavaScript)');
+@define('PREFERENCE_USE_JS_WARNING', '(Denna sida använder avancerad JavaScript. Om du upplever funktionsproblem stäng av användningen av avancerad JS-användning i dina personliga inställningar eller stäng av din webbläsares JavaScript)');
 
 
-@define('INSTALL_PERMALINK_COMMENTSPATH', 'Path to comments');
-@define('PERM_SET_CHILD', 'Set the same permissions on all child directories');
-@define('PERMISSION_FORBIDDEN_PLUGINS', 'Forbidden plugins');
-@define('PERMISSION_FORBIDDEN_HOOKS', 'Forbidden events');
-@define('PERMISSION_FORBIDDEN_ENABLE', 'Enable Plugin ACL for usergroups?');
-@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', 'Delete selected entries');
-@define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
+@define('INSTALL_PERMALINK_COMMENTSPATH', 'Sökväg till kommentarer');
+@define('PERM_SET_CHILD', 'Ange samma behörigheter på alla undermappar');
+@define('PERMISSION_FORBIDDEN_PLUGINS', 'Förbjudna insticksmoduler');
+@define('PERMISSION_FORBIDDEN_HOOKS', 'Förbjudna händelser');
+@define('PERMISSION_FORBIDDEN_ENABLE', 'Aktivera ACL för insticksmoduler och användargrupper?');
+@define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'Om aktiv så kan du specifiera vilka användargrupper som får tillgång till olika insticksmoduler/händelser.');
+@define('DELETE_SELECTED_ENTRIES', 'Ta bort valda artiklar');
+@define('PLUGIN_AUTHORS_MINCOUNT', 'Visa enbart författare med minst X skrivna artiklar');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'Bookmarklet');
-@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
-@define('IMPORT_WP_PAGES', 'Also fetch attachments and staticpages as normal blog entries?');
-@define('USERCONF_CREATE', 'Disable user / forbid activity?');
-@define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
-@define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
-@define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
-@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
-@define('PINGBACK_SENT', 'Pingback successful');
-@define('PINGBACK_FAILED', 'Pingback failed: %s');
-@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
-@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
-@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
-@define('SET_TO_MODERATED', 'Moderate');
-@define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
-@define('CENTER', 'center');
-@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
+@define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Lägg till denna länk som bokmärke och använd den sen på valfri sida som du vill blogga om för att snabbt komma åt din Serendipity-blogg.');
+@define('IMPORT_WP_PAGES', 'Hämta även bilagor och statiska sidor som normala artiklar?');
+@define('USERCONF_CREATE', 'Stäng av användare / förbjud aktivitet?');
+@define('USERCONF_CREATE_DESC', 'Om vald har användaren inte några möjligheter att redigera eller skapa på bloggen längre. Vid inloggning i användargränssnittet kan användaren enbart se sina personliga inställningar samt logga ut.');
+@define('CATEGORY_HIDE_SUB', 'Dölj inlägg gjorda i underkategorier?');
+@define('CATEGORY_HIDE_SUB_DESC', 'Normalt sett när du bläddrar i en kategori kommer även artiklar från underkategorier att visas. Om denna inställning aktiveras kommer enbart artiklar i den valda kategorin att visas.');
+@define('PINGBACK_SENDING', 'Skickar pingback till URI %s...');
+@define('PINGBACK_SENT', 'Pingback lyckades');
+@define('PINGBACK_FAILED', 'Pingback misslyckades: %s');
+@define('PINGBACK_NOT_FOUND', 'Ingen pingback-URI hittades.');
+@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Dölj arkivlänken om inga artiklar skrevs i denna tidsrymd (kräver att artiklar räknas)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, kräver PHP5 och kan använda mycket minne');
+@define('SET_TO_MODERATED', 'Moderera');
+@define('COMMENT_MODERATED', 'Kommentar #%s har angetts som modererad');
+@define('CENTER', 'centrera');
+@define('FULL_COMMENT_TEXT', 'Ja, med komplett kommentarstext');
