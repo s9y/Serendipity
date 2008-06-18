@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tw.inc.php 2270 2008-04-29 19:42:57Z slothman $
+<?php # $Id: serendipity_lang_tw.inc.php 2282 2008-06-17 12:06:45Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
