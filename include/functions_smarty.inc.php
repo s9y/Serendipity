@@ -165,7 +165,7 @@ function serendipity_ifRemember($name, $value, $isDefault = false, $att = 'check
 function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
     global $serendipity;
     static $entrycount = 0;
-    static $restore_var_GET_keys = array('category', 'viewAuthor', 'page');
+    static $restore_var_GET_keys = array('category', 'viewAuthor', 'page', 'hide_category');
 
     // A counter variable to not assign template files multiple times
     $entrycount++;
