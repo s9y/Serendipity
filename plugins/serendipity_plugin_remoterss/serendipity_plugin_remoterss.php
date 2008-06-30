@@ -257,13 +257,13 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.12');
+        $propbag->add('version',       '1.13');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('configuration', array('sidebartitle', 'feedtype', 'rssuri', 'show_rss_element', 'smarty', 'number', 'use_rss_link', 'escape_rss', 'displaydate', 'dateformat', 'charset', 'target', 'cachetime', 'bulletimg', 'markup'));
+        $propbag->add('configuration', array('sidebartitle', 'feedtype', 'template', 'rssuri', 'show_rss_element', 'smarty', 'number', 'use_rss_link', 'escape_rss', 'displaydate', 'dateformat', 'charset', 'target', 'cachetime', 'bulletimg', 'markup'));
         $propbag->add('groups', array('FRONTEND_EXTERNAL_SERVICES'));
     }
 
@@ -389,6 +389,23 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                 $propbag->add('default', 'true');
                 break;
 
+            case 'template':
+                $select = array('plugin_remoterss.tpl' => 'Default (plugin_remoterss.tpl)', 'plugin_remoterss_nasaiotd.tpl' => 'NASA Image of the day');
+                
+                $add_files = glob(dirname(__FILE__) . '/*.tpl');
+                foreach($add_files AS $add_file) {
+                    $bn = basename($add_file);
+                    if (!isset($select[$bn])) {
+                        $select[$bn] = $bn;
+                    }
+                }
+                $propbag->add('type', 'select');
+                $propbag->add('name', PLUGIN_REMOTERSS_TEMPLATE);
+                $propbag->add('description', PLUGIN_REMOTERSS_TEMPLATE_DESC);
+                $propbag->add('select_values', $select);
+                $propbag->add('default', 'plugin_remoterss.tpl');
+                break;
+
             default:
                 return false;
         }
@@ -427,6 +444,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
 
         $fp = fopen('rss.log', 'a');
         fwrite($fp, '[' . date('Y-m-d H:i') . '] ' . $msg . "\n");
+        echo $msg . "<br />\n";
         fclose($fp);
     }
 
@@ -460,9 +478,12 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         }
         
         $smarty = serendipity_db_bool($this->get_config('smarty'));
+        if ($this->get_config('template') != 'plugin_remoterss.tpl') {
+            $smarty = true;
+        }
 
         if (trim($rssuri)) {
-            $feedcache = $serendipity['serendipityPath'] . 'templates_c/remoterss_cache_' . md5(preg_replace('@[^a-z0-9]*@i', '', $rssuri)) . '.dat';
+            $feedcache = $serendipity['serendipityPath'] . 'templates_c/remoterss_cache_' . md5(preg_replace('@[^a-z0-9]*@i', '', $rssuri) . $this->get_config('template')) . '.dat';
             if (!file_exists($feedcache) || filesize($feedcache) == 0 || filemtime($feedcache) < (time() - $cachetime)) {
                 $this->debug('Cachefile does not existing.');
                 if (!$this->urlcheck($rssuri)) {
@@ -561,7 +582,18 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         $smarty_items['target']       = $target;
 
                         $serendipity['smarty']->assign_by_ref('remoterss_items', $smarty_items);
-                        $content = $this->parseTemplate('plugin_remoterss.tpl');
+                        $tpl = $this->get_config('template');
+                        if (empty($tpl)) {
+                            $tpl = 'plugin_remoterss.tpl';
+                        }
+                        
+                        // Template specifics go here
+                        switch($tpl) {
+                            case 'plugin_remoterss_nasaiotd.tpl':
+                                $smarty_items['nasa_image'] = $c->getData('image');
+                            break;
+                        }
+                        $content = $this->parseTemplate($tpl);
                     }
 
                     $this->debug('Caching Feed (' . strlen($content) . ' bytes)');
