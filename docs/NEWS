@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * RFE #2006182: Make search highlight plugin also honour serendipity's
+      search terms. (garvinhicking)
+
     * Improved "Remote RSS" plugin's templating output to select
       custom template files. Add demo "Nasa Image of the Day" plugin
       by Grigory F. (garvinhicking)

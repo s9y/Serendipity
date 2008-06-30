@@ -29,7 +29,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tom Sommer');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -88,6 +88,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_ALTAVISTA', 5);
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_DE', 6);
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM', 7);
+        define('PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y', 8);
     }
 
     function getSearchEngine() {
@@ -115,10 +116,17 @@ class serendipity_event_searchhighlight extends serendipity_event
         if ( preg_match('@^search\.aol\.com@i', $url['host']) ) {
             return PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM;
         }
-
+        if ( preg_match('@^(www\.)?google\.@i', $url['host']) ) {
+            return PLUGIN_EVENT_SEARCHHIGHLIGHT_GOOGLE;
+        }
+        
         if (!empty($_SESSION['search_referer']) && $this->uri != $_SESSION['search_referer']) {
             $this->uri = $_SESSION['search_referer'];
             return $this->getSearchEngine();
+        }
+
+        if ($url['host'] == $_SERVER['HTTP_HOST']) {
+            return PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y;
         }
 
         return false;
@@ -133,7 +141,17 @@ class serendipity_event_searchhighlight extends serendipity_event
         $url = parse_url($this->uri);
         parse_str($url['query'], $pStr);
 
-        switch ( $this->getSearchEngine() ) {
+        $s = $this->getSearchEngine();
+        
+        switch ( $s ) {
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y:
+                $query = $pStr['serendipity']['searchTerm'];
+                
+                if (!empty($_REQUEST['serendipity']['searchTerm'])) {
+                    $query = $_REQUEST['serendipity']['searchTerm'];
+                }
+                break;
+
             case PLUGIN_EVENT_SEARCHHIGHLIGHT_GOOGLE :
                 $query = $pStr['q'];
                 break;
@@ -163,7 +181,11 @@ class serendipity_event_searchhighlight extends serendipity_event
                 break;
 
             default:
-                return false;
+                if ($_REQUEST['serendipity']['searchTerm'] != '') {
+                    $query = $_REQUEST['serendipity']['searchTerm'];
+                } else {
+                    return false;
+                }
         }
 
         /* Clean the query */
@@ -240,4 +262,3 @@ class serendipity_event_searchhighlight extends serendipity_event
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>
