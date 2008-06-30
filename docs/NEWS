@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Improved "Remote RSS" plugin's templating output to select
+      custom template files. Add demo "Nasa Image of the Day" plugin
+      by Grigory F. (garvinhicking)
+
     * Fix Generic RSS import to not always assume WPXRSS feed.
       (garvinhicking)
 
