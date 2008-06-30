@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Fix Generic RSS import to not always assume WPXRSS feed.
+      (garvinhicking)
+
     * Fix bug in category sidebar plugin, which showed categories that
       should have been hidden when the option "Hide parents of 
       selected sub-tree" was selected and Smarty templating was enabled.

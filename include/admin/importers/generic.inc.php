@@ -316,7 +316,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
     function import() {
         global $serendipity;
 
-        if ($this->data['wpxrss']) {
+        if (serendipity_db_bool($this->data['wpxrss'])) {
             return $this->import_wpxrss();
         }
 
