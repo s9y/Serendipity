@@ -2387,6 +2387,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
             );
         }
 
+        $default_iptc_val = null;
         if (empty($val)) {
             switch($parts[0]) {
                 case 'DATE':
@@ -2409,7 +2410,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
 
                 case 'TITLE':
                     if (!isset($default_iptc_val)) {
-                        $default_iptc_val = $media['internal']['realname'];
+                        $default_iptc_val = $media['realname'];
                     }
 
                 case 'COMMENT1':

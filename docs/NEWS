@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Fix showing wrong metadata (00:00:00" for uploaded metadata.
+      (garvinhicking)
+
     * RFE #2006182: Make search highlight plugin also honour serendipity's
       search terms. (garvinhicking)
 
