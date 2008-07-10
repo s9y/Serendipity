@@ -3,6 +3,13 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added optional token insertion for comment notification 
+      (moderation) e-mails, which you can click without the need
+      for authentication. This is a convenience feature, note that
+      if someone can access your mails, he does not need to authenticate
+      for deleting/approving a comment with the contained link.
+      (Rob A)
+      
     * Fix showing wrong metadata (00:00:00" for uploaded metadata.
       (garvinhicking)
 

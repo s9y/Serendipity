@@ -913,4 +913,10 @@
 @define('SET_TO_MODERATED', 'Moderieren');
 @define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich moderiert.');
 @define('CENTER', 'mitte');
-@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
+@define('FULL_COMMENT_TEXT', 'Ja, mit vollständigen Kommentar-Texten.');
+
+@define('COMMENT_TOKENS', 'Schnelle Kommentar-Moderation verwenden?');
+@define('COMMENT_TOKENS_DESC', 'Diese Methode setzt Tokens ein, damit Kommentare direkt aus der Hinweis-E-Mail heraus gelöscht oder akzeptiert werden können. Diese Funktion ist für höheren Komfort gedacht, geht aber zu Lasten der Sicherheit: Wenn jemand die E-Mail abfängt, kann diese Person entsprechende Kommentare ohne weitere Authentifikation löschen oder freischalten.');
+@define('COMMENT_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Kommentar #%s wurde bereits akzeptiert oder gelöscht.');
+@define('TRACKBACK_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Trackback #%s wurde bereits akzeptiert oder gelöscht.');
+@define('BADTOKEN', 'Ungültiger Kommentar-Link'); 
