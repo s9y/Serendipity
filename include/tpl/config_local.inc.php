@@ -349,6 +349,13 @@
                                           'default'     => array('true' => YES, 'false' => NO, 'fulltext' => FULL_COMMENT_TEXT),
                                           'permission'  => 'siteConfiguration'),
 
+                                    array('var'         => 'useCommentTokens',
+                                          'title'       => COMMENT_TOKENS,
+                                          'description' => COMMENT_TOKENS_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'blogConfiguration'), 
+
                                     array('var'         => 'lang',
                                           'title'       => INSTALL_LANG,
                                           'description' => INSTALL_LANG_DESC,
