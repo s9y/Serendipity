@@ -914,3 +914,9 @@
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Az archívum hivatkozás elrejtése, ha nincs abban az idõszakban bejegyzés (a bejegyzések számolása szükséges)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS importálása, PHP5 szükséges, és lehet hogy sok memóriát igényel');
 @define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
+
+@define('COMMENT_TOKENS', 'Use Tokens for Comment Moderation?');
+@define('COMMENT_TOKENS_DESC', 'If tokens are used, comments can be approved and deleted by clicking the email links without requiring login access to the blog. Note that this is a convenience feature, and if your mails get hijacked, those people can approve/delete the referenced comment without further authentication.');
+@define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
+@define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
+@define('BADTOKEN', 'Invalid Moderation Link'); 

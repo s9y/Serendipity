@@ -56,6 +56,8 @@ if (preg_match(PAT_UNSUBSCRIBE, $uri, $res)) {
     define('DATA_UNSUBSCRIBED', false);
 }
 
+serendipity_checkCommentTokenModeration($uri);
+
 if (preg_match(PAT_DELETE, $uri, $res) && $serendipity['serendipityAuthedUser'] === true) {
     if ($res[1] == 'comment' && serendipity_deleteComment($res[2], $res[3], 'comments')) {
         define('DATA_COMMENT_DELETED', sprintf(COMMENT_DELETED, $res[2]));

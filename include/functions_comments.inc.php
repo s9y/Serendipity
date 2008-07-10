@@ -12,6 +12,106 @@ if (defined('S9Y_FRAMEWORK_COMMENTS')) {
 @define('S9Y_FRAMEWORK_COMMENTS', true);
 
 /**
+ * Check if a comment token (from comment notification email) is valid for a given comment id.
+ *
+ * @param string    The Token
+ * @param int       The comment id
+ * @access public
+ * @return bool
+ */
+function serendipity_checkCommentToken($token, $cid) {
+    global $serendipity;
+
+    $goodtoken = false;
+    if ($serendipity['useCommentTokens']) {
+        // Delete any comment tokens older than 1 week.
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+        // Get the token for this comment id
+        $tokencheck =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
+                                             WHERE okey = 'comment_" . $cid . "' LIMIT 1", true, 'assoc');
+        // Verify it against the passed key
+        if (is_array($tokencheck)) {
+            if ($tokencheck['value'] == $token) {
+                $goodtoken = true;  // use this to bypass security checks later
+                // if using tokens, delete this comment from that list no matter how we got here
+                serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                            WHERE okey = 'comment_" . $cid . "'");
+
+            }
+        }
+    }
+    
+    return $goodtoken;
+}
+
+/**
+ * Check if a comment token was submitted to the serendipity main framework.
+ * This function can kill the workflow completely, if moderation was wanted.
+ *
+ * @param  string   The current base URI
+ * @access public
+ * @return null
+ */
+function serendipity_checkCommentTokenModeration($uri) {
+    global $serendipity;
+
+    // token based comment moderation starts here
+    if ($serendipity['useCommentTokens'] === true && preg_match(PAT_DELETE, $uri, $res)) {
+        $return_msg = "Error.\n";
+        $tokenparse = explode("_",$res[1]);
+        // check that we got a 32 char token
+        if (is_array($tokenparse)) {
+            if (strlen($tokenparse[2]) == 32) {
+                if ($tokenparse[0] == 'comment') {
+                    if (serendipity_deleteComment($res[2], $res[3], 'comments', $tokenparse[2])) {
+                        $return_msg = sprintf (COMMENT_DELETED, $res[2])."\n";
+                    } else {
+                        $return_msg = sprintf (COMMENT_NOTOKENMATCH, $res[2])."\n";
+                    }
+                } elseif ($tokenparse[0] == 'trackback') {
+                    if (serendipity_deleteComment($res[2], $res[3], 'trackbacks', $tokenparse[2])) {
+                        $return_msg = sprintf (TRACKBACK_DELETED, $res[2])."\n";
+                    } else {
+                        $return_msg = sprintf (TRACKBACK_NOTOKENMATCH, $res[2])."\n";
+                    }
+                }
+            } else {
+                $return_msg = sprintf (BADTOKEN)."\n";
+            }
+            header('Content-Type: text/plain; charset='. LANG_CHARSET);
+            die($return_msg);
+        }
+    }
+    if ($serendipity['useCommentTokens'] === true && preg_match(PAT_APPROVE, $uri, $res)) {
+        $return_msg = "Error.\n";
+        $tokenparse = explode("_",$res[1]);
+        // check that we got a 32 char token
+        if (is_array($tokenparse)) {
+            if (strlen($tokenparse[2]) == 32) {
+                if ($tokenparse[0] == 'comment') {
+                    if (serendipity_approveComment($res[2], $res[3], false, false, $tokenparse[2])) {
+                        $return_msg = sprintf (COMMENT_APPROVED, $res[2])."\n";
+                    } else {
+                        $return_msg = sprintf (COMMENT_NOTOKENMATCH, $res[2])."\n";
+                    }
+                } elseif ($tokenparse[0] == 'trackback') {
+                    if (serendipity_approveComment($res[2], $res[3], false, false, $tokenparse[2])) {
+                        $return_msg = sprintf (TRACKBACK_APPROVED, $res[2])."\n";
+                    } else {
+                        $return_msg = sprintf (TRACKBACK_NOTOKENMATCH, $res[2])."\n";
+                    }
+                }
+            } else {
+                $return_msg = sprintf (BADTOKEN)."\n";
+            }
+            header('Content-Type: text/plain; charset='. LANG_CHARSET);
+            die($return_msg);
+        }
+    }
+}
+
+/**
  * Store the personal details of a commenting user in a cookie (or delete that cookie)
  *
  * @access public
@@ -401,9 +501,10 @@ function serendipity_printCommentsByAuthor() {
  * @param   int     The ID of the comment to delete
  * @param   int     The ID of the entry the comment belongs to [safety]
  * @param   string  The type of a comment (comments/trackback)
+ * @param   string  The 32 character token [if using token based moderation]
  * @return  boolean Return whether the action was successful)
  */
-function serendipity_deleteComment($id, $entry_id, $type='comments') {
+function serendipity_deleteComment($id, $entry_id, $type='comments', $token=false) {
     global $serendipity;
 
     $id       = (int)$id;
@@ -412,9 +513,11 @@ function serendipity_deleteComment($id, $entry_id, $type='comments') {
         return false;
     }
 
-    if ($_SESSION['serendipityAuthedUser'] === true) {
+    $goodtoken = serendipity_checkCommentToken($token, $id);
+
+    if ($_SESSION['serendipityAuthedUser'] === true || $goodtoken) {
         $admin = '';
-        if (!serendipity_checkPermission('adminEntriesMaintainOthers')) {
+        if (!$goodtoken && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
             $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
         }
 
@@ -498,14 +601,17 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
  * LONG
  *
  * @access public
- * @param   int         The ID of the comment to approve
- * @param   int         The ID of the entry a comment belongs to
- * @param   boolean     Whether to force approving a comment despite of its current status
- * @param  boolean      If set to true, a comment will be moderated instead of approved.
- * @return boolean      Success or failure
+ * @param  int         The ID of the comment to approve
+ * @param  int         The ID of the entry a comment belongs to
+ * @param  boolean     Whether to force approving a comment despite of its current status
+ * @param  boolean     If set to true, a comment will be moderated instead of approved.
++ * @param  string     The 32 character token [if using token based moderation]
+ * @return boolean     Success or failure
  */
-function serendipity_approveComment($cid, $entry_id, $force = false, $moderate = false) {
+function serendipity_approveComment($cid, $entry_id, $force = false, $moderate = false, $token = false) {
     global $serendipity;
+
+    $goodtoken = serendipity_checkCommentToken($token, $cid);
 
     /* Get data about the comment, we need this query because this function can be called from anywhere */
     /* This also makes sure we are either the author of the comment, or a USERLEVEL_ADMIN */
@@ -514,7 +620,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                 LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                 LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
                 WHERE c.id = '". (int)$cid ."'
-                    ". ((!serendipity_checkPermission('adminEntriesMaintainOthers') && $force !== true) ? "AND e.authorid = '". (int)$serendipity['authorid'] ."'" : '') ."
+                    ". ((!serendipity_checkPermission('adminEntriesMaintainOthers') && $force !== true && !$goodtoken) ? "AND e.authorid = '". (int)$serendipity['authorid'] ."'" : '') ."
                     ". (($force === true) ? "" : "AND status = 'pending'");
     $rs  = serendipity_db_query($sql, true);
 
@@ -750,6 +856,21 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
 
     $entryURI   = serendipity_archiveURL($id, $title, 'baseURL');
     $path       = ($type == 'TRACKBACK') ? 'trackback' : 'comment';
+
+    // Check for using Tokens
+    if ($serendipity['useCommentTokens']) {
+        $token = md5(uniqid(rand(),1));
+        $path = $path . "_token_" . $token;
+
+        //Delete any comment tokens older than 1 week.
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+
+        // Issue new comment moderation hash
+        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
+                              VALUES ('" . time() . "', '" . $token . "', 'comment_" . $comment_id ."')");
+    }
+
     $deleteURI  = serendipity_rewriteURL(PATH_DELETE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
     $approveURI = serendipity_rewriteURL(PATH_APPROVE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
 
