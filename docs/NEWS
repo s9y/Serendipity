@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Make cookie deletion routine use the same host like cookie
+      insertion, thanks to JPhilip
+
     * Added optional token insertion for comment notification 
       (moderation) e-mails, which you can click without the need
       for authentication. This is a convenience feature, note that

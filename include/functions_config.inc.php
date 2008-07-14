@@ -620,7 +620,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true) {
     
     // If HTTP-Hosts like "localhost" are used, current browsers reject cookies.
     // In this case, we disregard the HTTP host to be able to set that cookie.
-    if (substr_count($host, '.') < 2) {
+    if (substr_count($host, '.') < 1) {
         $host = '';
     }
 
@@ -646,6 +646,12 @@ function serendipity_deleteCookie($name) {
         $host = substr($host, 0, $pos);
     }
 
+    // If HTTP-Hosts like "localhost" are used, current browsers reject cookies.
+    // In this case, we disregard the HTTP host to be able to set that cookie.
+    if (substr_count($host, '.') < 1) {
+        $host = '';
+    }
+                        
     setcookie("serendipity[$name]", '', time()-4000, $serendipity['serendipityHTTPPath'], $host);
     unset($_COOKIE[$name]);
     unset($serendipity['COOKIE'][$name]);
