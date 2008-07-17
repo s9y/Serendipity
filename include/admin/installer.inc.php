@@ -97,6 +97,31 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 <div align="center">
 <table class="serendipity_admin_list_item serendipity_admin_list_item_even" width="90%" align="center">
     <tr>
+        <td colspan="2" style="font-weight: bold"><?php echo INTEGRITY ?></td>
+    </tr>
+<?php if (is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
+    $badsums = serendipity_verifyFTPChecksums();
+?>
+    <?php if (empty($badsums)) {?>
+    <tr>
+      <td colspan="2"><?php echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, CHECKSUMS_PASS); ?></td>
+    </tr>
+    <?php } else { 
+        foreach ($badsums as $file => $sum) {
+?>
+    <tr>
+      <td colspan="2"><?php echo serendipity_installerResultDiagnose(S9Y_I_WARNING, sprintf(CHECKSUM_FAILED, $file)); ?></td>
+    </tr>
+    <?php } 
+    }
+} else { ?>
+    <tr>
+      <td colspan="2"><?php echo serendipity_installerResultDiagnose(S9Y_I_WARNING, CHECKSUMS_NOT_FOUND); ?></td>
+    </tr>
+<?php } ?>
+</table>
+<table class="serendipity_admin_list_item serendipity_admin_list_item_even" width="90%" align="center">
+    <tr>
         <td colspan="2" style="font-weight: bold"><?php echo PHP_INSTALLATION ?></td>
     </tr>
     <tr>
