@@ -688,11 +688,6 @@ function serendipity_checkInstallation() {
 
     $errs = array();
 
-    $badsums = serendipity_verifyFTPChecksums();
-    foreach ($badsums as $rfile => $sum) {
-        $errs[] = sprintf(CHECKSUM_FAILED, $rfile);
-    }
-
     serendipity_initPermalinks();
 
     // Check dirs

@@ -98,7 +98,7 @@ else
             then
                 echo "    [SKIP]"
             else
-                if (echo "true" | php -B "define('IN_serendipity', true);" -F serendipity_generateFTPChecksums.php)
+                if (echo "true" | php -B "define('IN_serendipity', true);" -F $2/bundled-libs/serendipity_generateFTPChecksums.php)
                 then
                     echo "    [DONE]"
                 else
