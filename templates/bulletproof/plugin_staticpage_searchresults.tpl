@@ -4,7 +4,7 @@
     <dl class="staticpage_result">
     {foreach from=$staticpage_results item="result"}
         <dt><strong><a href="{$result.permalink|@escape}" title="{$result.pagetitle|@escape}">{$result.headline}</a></strong> ({$result.realname})</dt>
-        <dd>{$result.content|@escape:htmlall|@truncate:200:" ... "}</dd>
+        <dd>{$result.content|@strip_tags|@strip|@truncate:200:" ... "}</dd>
     {/foreach}
     </dl>
 </div>
