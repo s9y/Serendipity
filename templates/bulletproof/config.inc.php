@@ -208,6 +208,12 @@ $template_config = array(
                                  'icon' => PREV_NEXT_ICON)
     ),
     array(
+        'var'           => 'show_pagination',
+        'name'          => SHOW_PAGINATION,
+        'type'          => 'boolean',
+        'default'       => 'false',
+    ),
+    array(
         'var'           => 'counter_code',
         'name'          => COUNTER_CODE,
         'type'          => 'text',

@@ -51,6 +51,7 @@
 @define('PREV_NEXT_TEXT','Nur Text');
 @define('PREV_NEXT_TEXT_ICON','Text und Icon');
 @define('PREV_NEXT_ICON','Nur Icon');
+@define('SHOW_PAGINATION','Zusätzliche Seitennummerierung (Pagination) anzeigen');
 // coComment support
 @define('COCOMMENT_ACTIVE','coComment (http://www.cocomment.com) in Kommentarformulare einbinden');
 // Counter code
