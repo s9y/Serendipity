@@ -45,7 +45,7 @@ if ($serendipity['smarty_raw_mode']) {
         case 'read':
             if (isset($serendipity['GET']['id'])) {
                 $entry = array(serendipity_fetchEntry('id', $serendipity['GET']['id']));
-                if (!is_array($entry) || count($entry) < 1) {
+                if (!is_array($entry) || count($entry) < 1 || !is_array($entry[0])) {
                     unset($serendipity['GET']['id']);
                     $entry = array(array());
                     $serendipity['head_title'] = htmlspecialchars($serendipity['blogTitle']); 
