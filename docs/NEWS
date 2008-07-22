@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Do not show title of entries marked as public/private when
+      viewed without permissions. Patch thanks to Anthem
+      
     * Make cookie deletion routine use the same host like cookie
       insertion, thanks to JPhilip
 
