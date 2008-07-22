@@ -60,6 +60,9 @@ abbr, acronym, .help{
     background: #ddd;
 }
 
+/* optional pagination in the footer */
+.pagination { padding: 0.5em 0; }
+
 /* optional nav links in the footer */
 #footer_sitenav {
     clear: both;
