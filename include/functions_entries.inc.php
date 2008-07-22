@@ -791,7 +791,10 @@ function &serendipity_searchEntries($term, $limit = '') {
                             e.body,
                             e.extended,
                             e.trackbacks,
-                            e.exflag
+                            e.exflag,
+                            e.isdraft,
+                            e.last_modified,
+                            a.username AS loginname
                     {$serendipity['fullCountQuery']}
                     {$cond['group']}
                     {$cond['having']}
