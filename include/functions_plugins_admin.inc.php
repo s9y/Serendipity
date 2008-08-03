@@ -666,13 +666,15 @@ EOS;
                 }
                 $cname = $cbag->get('name');
                 $cdesc = $cbag->get('description');
+                $checkable = $cbag->get('checkable');
+
                 /** Unordered array of values */
                 $items = $cbag->get('values');
                 if (!is_array($items)) { $items = null; }
                 /** Array specifying order to use values in $items */
                 $order = null;
                 if ($value) {
-                    $order = explode(',', $value);
+                    $store_order = $order = explode(',', $value);
                 }
                 $uparrow_img = serendipity_getTemplateFile('admin/img/uparrow.png');
                 $downarrow_img = serendipity_getTemplateFile('admin/img/downarrow.png');
@@ -773,6 +775,11 @@ EOS;
                     print '    <li id="'.$id.'" class="sequence_item pluginmanager_item_even">' . "\n";
                     // Make a handle with ID 'g$id'
                     print '      <div id="g'.$id.'" class="pluginmanager_grablet sequence_grablet"><a href="#"></a></div>' . "\n";
+                    
+                    if ($checkable) {
+                        print '         <input type="checkbox" onclick="sort_' . $config_item . '_Sequence();" name="serendipity[' . $postKey . ']' . '[activate][' . $config_item . '][' . $id . ']" ' . (in_array($id, $store_order) ? ' checked="checked" ' : '') . ' value="true" id="activate_' . $id . '" />' . "\n";
+                    }
+
                     // Add the item contents
                     print '      <span>'.$items[$id]['display'].'</span>' . "\n";
                     if (isset($items[$id]['img'])) {
@@ -785,7 +792,7 @@ EOS;
                         print "&nbsp;\n";
                     } else {
                         print <<<EOS
-  <button type="submit" name="serendipity[$postKey][$config_item]" value="$oneup">
+  <button type="submit" name="serendipity[$postKey][override][$config_item]" value="$oneup">
     <img src="$uparrow_img" alt="Move Up">
   </button>
 
@@ -796,7 +803,7 @@ EOS;
                         print "&nbsp;\n";
                     } else {
                         print <<<EOS
-  <button type="submit" name="serendipity[$postKey][$config_item]" value="$onedown">
+  <button type="submit" name="serendipity[$postKey][override][$config_item]" value="$onedown">
     <img src="$downarrow_img" alt="Move Down">
   </button>
 
@@ -815,18 +822,35 @@ EOS;
                 // Print the Javascript to drag-n-drop the list
                 print <<<EOS
 <script type="text/javascript">
+    function sort_${config_item}_Sequence() {
+            //var seq = DragDrop.serData('${config_item}_group', null);
+            var seq = DragDrop.serData(null, '${config_item}');
+            var start = seq.indexOf("(");
+            var end = seq.indexOf(")");
+            seq = seq.slice((start + 1), end);
+            checkable_seq = seq.split(",");
+            out_seq = '';
+            for (i in checkable_seq) {
+                if (document.getElementById('activate_' + checkable_seq[i]) && !document.getElementById('activate_' + checkable_seq[i]).checked) {
+                    continue;
+                } else {
+                    if (out_seq != '') {
+                        out_seq += ',';
+                    }
+
+                    out_seq += checkable_seq[i];
+                }
+            }
+            var order = document.getElementById("${config_item}_value");
+            order.value = out_seq;
+    }
+
     function init_${config_item}_Sequence()
     {
         var lst = document.getElementById("${config_item}");
         DragDrop.makeListContainer(lst, '${config_item}_group');
-        lst.onDragOut = function() { 
-            //var seq = DragDrop.serData('${config_item}_group', null); 
-            var seq = DragDrop.serData(null, '${config_item}'); 
-            var start = seq.indexOf("(");
-            var end = seq.indexOf(")");
-            seq = seq.slice((start + 1), end);
-            var order = document.getElementById("${config_item}_value");
-            order.value = seq;
+        lst.onDragOut = function() {
+            sort_${config_item}_Sequence();
         };
     }
     addLoadEvent(init_${config_item}_Sequence);
