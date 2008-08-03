@@ -1299,7 +1299,7 @@ function serendipity_updertEntry($entry) {
 
     serendipity_purgeEntry($entry['id'], $entry['timestamp']);
 
-    if (!serendipity_db_bool($entry['isdraft'])) {
+    if (!serendipity_db_bool($entry['isdraft']) && $entry['timestamp'] <= serendipity_serverOffsetHour()) {
         // When saving an entry, first all references need to be gathered. But trackbacks to them
         // shall only be send at the end of the execution flow. However, certain plugins depend on
         // the existance of handled references. Thus we store the current references at this point,
@@ -1316,7 +1316,7 @@ function serendipity_updertEntry($entry) {
         serendipity_plugin_api::hook_event('backend_save', $entry, $newEntry);
     }
 
-    if (!serendipity_db_bool($entry['isdraft'])) {
+    if (!serendipity_db_bool($entry['isdraft']) && $entry['timestamp'] <= serendipity_serverOffsetHour()) {
         // Now that plugins are executed, we go ahead into the Temple of Doom and send possibly failing trackbacks.
         // First, original list of references is restored (inside the function call)
         serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $drafted_entry['title'], $drafted_entry['body'] . $drafted_entry['extended'], false);
