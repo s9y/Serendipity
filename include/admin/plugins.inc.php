@@ -89,6 +89,24 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
                 if ($validate === true) {
 //                    echo $config_item . " validated: $validate<br />\n";
+
+                    if (!empty($_POST['serendipity']['plugin']['override'][$config_item])) {
+                        $value = $_POST['serendipity']['plugin']['override'][$config_item];
+                    }
+
+                    if (is_array($_POST['serendipity']['plugin']['activate'][$config_item])) {
+                        $values = explode(',', $value);
+                        $out_values = array();
+                        foreach($values AS $out_value) {
+                            if (!isset($_POST['serendipity']['plugin']['activate'][$config_item][$out_value])) {
+                                continue;
+                            }
+                            
+                            $out_values[] = $out_value;
+                        }
+                        $value = implode(',', $out_values);
+                    }
+
                     $plugin->set_config($config_item, $value);
                 } else {
                     $save_errors[] = $validate;
