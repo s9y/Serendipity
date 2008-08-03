@@ -3,6 +3,11 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Trackbacks are no longer sent when an entry shall be published
+      in the future. You can force them by editing and re-saving an
+      entry, once it is published. TODO: A plugin/cronjob to automatically
+      execute those trackbacks? (garvinhicking)
+
     * Allow 'sequence' widget to enable/disable each config item,
       if the property "checkable" is added to the introspect method.
       (garvinhicking)
