@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Propagate a 'article_count' smarty variable for each category
+      in the category sidebar plugin, when article counting is 
+      enabled. (garvinhicking)
+
     * Trackbacks are no longer sent when an entry shall be published
       in the future. You can force them by editing and re-saving an
       entry, once it is published. TODO: A plugin/cronjob to automatically
