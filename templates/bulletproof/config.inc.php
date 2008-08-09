@@ -28,7 +28,7 @@ $template_config = array(
         'var'           => 'colorset',
         'name'          => THEME_COLORSET,
         'type'          => 'select',
-        'default'       => 'purple',
+        'default'       => 'default',
         'select_values' => $colorsets
     ),
     array(

@@ -3,14 +3,14 @@
 /* Authors: Matthias Mees, David Cummins and Don Chambers             */
 /*                                                                    */
 /* Stylesheet for the Bulletproof admin interface by Don Chambers     */
-/* Fluid width design                                                 */
+/* Fixed width design                                                 */
 /*                                                                    */
 /* http://s9y-bulletproof.com                                         */
 /**********************************************************************/
 
 body {
     font: 100.01% Verdana, Arial, Helvetica, sans-serif;
-    margin: 5px 0 0 0;
+    margin: 0;
     text-align: center;
     background: #888888;
     direction: {LANG_DIRECTION};
@@ -43,8 +43,8 @@ a:hover {
     text-align: left;
     margin: 0px auto;
     border: 0;
-    width: 95%;
-    background: #ffffff;
+    width: 970px;
+    background: #ffffff url('{TEMPLATE_PATH}img/bp_admin_adminframe.png') top left repeat-y;
 }
 
 /* container is a table, so font must be set on tbody to affect td's */
@@ -56,9 +56,8 @@ a:hover {
 /* equal to frontend #serendipity_banner */
 #serendipityAdminBanner {
     color: #ffffff;
-    background: #5792D8 url('{TEMPLATE_PATH}img/bp_admin_banner_fluid.png') top left repeat-x;
-    height: 94px;
-    border: 3px solid #ffffff;
+    background: #5792D8 url('{TEMPLATE_PATH}img/bp_admin_banner.png') top left no-repeat;
+    height: 105px;
     padding: 0;
     line-height: 0.7em;
 }
@@ -67,32 +66,30 @@ a:hover {
 #serendipityAdminBanner h1 {
     font-weight: bold;
     padding: 0;
-    margin: 17px 0 0 5px;
+    margin: 12px 0 0 15px;
 }
 
 /* Second line in banner, ie blog name */ 
 #serendipityAdminBanner h2 {
     font-weight: normal;
     padding: 0;
-    margin-left: 5px;
+    margin-left: 15px;
 }
 
 /* approximately equal to BP frontend #sitenav when located below header */
 #serendipityAdminInfopane {
-    background: #CCCCCC url('{TEMPLATE_PATH}img/bp_admin_infopane_fluid.png') top left repeat-x;
-    border-left: 3px solid #ffffff;
-    border-right: 3px solid #ffffff;
+    background: #CCCCCC url('{TEMPLATE_PATH}img/bp_admin_infopane.png') top left no-repeat;
     text-align: right;
     font-size: 75%;
     line-height: 70%;
     height: 24px;
     color: #055BC6;
-    padding:0;
+    padding:0 10px 0 0;
 }
 
 /* approximately equal to frontend #content */
 .serendipityAdminContent {
-    padding: 3px 3px 0 8px;    
+    padding: 3px 8px 0 8px;
     text-align: left;
 }
 
@@ -142,7 +139,7 @@ a:hover {
 
 /* Equal to frontend sidebar - positioned left due to table structure */
 #serendipitySideBar {
-    width: 203px;
+    width: 208px;
     padding: 3px 0 0 0;
 }
 
@@ -156,7 +153,7 @@ ul.serendipitySideBarMenu {
     background: #EEEEEE url('{TEMPLATE_PATH}img/bp_admin_sidebar_body.png') repeat-y;
     padding: 0;
     width: 200px;
-    margin: 0 0 3px 3px;
+    margin: 0 0 2px 8px;
 }
 
 /* just the further links container */
@@ -563,6 +560,7 @@ span.serendipityTemplateSelectName {
 .serendipity_PluginAdminHighlight {
     background: #ededed;
 }
+
 /* Added class in s9y v1.2 */
 /* container between AdminFrame and AdminFooter */
 /* can be used to emulate a footer while allowing */
@@ -576,11 +574,10 @@ span.serendipityTemplateSelectName {
     border: 0;
 /*have to pick up some of the styles from wrapper so they apply to footer div below table*/
     margin: 0 auto;
-/*    background: #CCCCCC; */
-    width: 95%;
-    height: 24px;
+    width: 970px;
+    background: #CCCCCC url('{TEMPLATE_PATH}img/bp_admin_footer.png') top left no-repeat; 
+    height: 35px; 
     font-size: 70%;
-    line-height: 24px;
+    line-height: 30px;
     padding: 0;
 }
-
