@@ -112,7 +112,7 @@ $serendipity['use_iframe'] = true;
 $serendipity['autolang'] = 'en';
 
 /* Name of folder for the default theme */
-$serendipity['defaultTemplate'] = 'carl_contest';
+$serendipity['defaultTemplate'] = 'bulletproof';
 
 /* Availiable languages */
 if (!isset($serendipity['languages'])) {
