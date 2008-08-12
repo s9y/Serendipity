@@ -56,6 +56,7 @@ Translator: Ivan Cenov (jwalker@hotmail.bg)
 @define('PREV_NEXT_TEXT','Само текст');
 @define('PREV_NEXT_TEXT_ICON','Текст и икона');
 @define('PREV_NEXT_ICON','Само икона');
+@define('SHOW_PAGINATION','Показване на номера на страници (страниране)');
 // coComment support
 @define('COCOMMENT_ACTIVE','Интегриране на coComment (http://www.cocomment.com) във формата на коментарите');
 // Counter code
