@@ -831,7 +831,10 @@ class serendipity_plugin_api
             $serendipity['prevent_sidebar_plugins_' . $side] = true;
         }
         
-        $loggedin = serendipity_userLoggedIn();
+        $loggedin = false;
+        if (serendipity_userLoggedIn() && serendipity_checkPermission('adminPlugins')) {
+            $loggedin = true;
+        }
 
         foreach ($plugins AS $plugin_data) {
             $plugin =& serendipity_plugin_api::load_plugin($plugin_data['name'], $plugin_data['authorid'], $plugin_data['path']);
