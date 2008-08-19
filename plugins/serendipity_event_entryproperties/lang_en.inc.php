@@ -39,3 +39,6 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'Disable Markup plugins for this entry:');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS', 'Use extended database lookups');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS_DESC', 'If enabled, additional SQL queries will be issued to be able to use sticky entries, hidden entries and removed entries from the frontpage. If those are not needed, disabling this feature can improve performance.');
+
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE', 'Entry editing screen');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC', 'Here you can choose, which elements and in which order the plugin should show its input fields in the entry editing process.');

@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Enhance entryproperties plugin to use sequencing widget: Allows
+      you to configure which fields you want to see in the 'Edit Entry'
+      panel for "Advanced Options". (garvinhicking)
+
     * Propagate a 'article_count' smarty variable for each category
       in the category sidebar plugin, when article counting is 
       enabled. (garvinhicking)
