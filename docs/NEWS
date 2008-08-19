@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Add a "Configure this plugin" link to the frontend output for
+      every sidebar plugin, not only HTML nuggets. (garvinhicking)
+
     * Enhance entryproperties plugin to use sequencing widget: Allows
       you to configure which fields you want to see in the 'Edit Entry'
       panel for "Advanced Options". (garvinhicking)

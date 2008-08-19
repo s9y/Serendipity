@@ -830,6 +830,8 @@ class serendipity_plugin_api
         if (count($plugins) == 0) {
             $serendipity['prevent_sidebar_plugins_' . $side] = true;
         }
+        
+        $loggedin = serendipity_userLoggedIn();
 
         foreach ($plugins AS $plugin_data) {
             $plugin =& serendipity_plugin_api::load_plugin($plugin_data['name'], $plugin_data['authorid'], $plugin_data['path']);
@@ -842,6 +844,10 @@ class serendipity_plugin_api
                 $show_plugin = $plugin->generate_content($title);
                 $content = ob_get_contents();
                 ob_end_clean();
+                
+                if ($loggedin) {
+                    $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($plugin->instance) . '">' . ADMIN . ': ' . EDIT . '</a></div>';
+                }
 
                 if ($show_plugin !== false) {
                     $pluginData[] = array('side'    => $side,

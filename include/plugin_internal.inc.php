@@ -1354,6 +1354,7 @@ class serendipity_html_nugget_plugin extends serendipity_plugin {
             echo $this->get_config('content');
         }
 
+/* THIS FUNCTIONALITY IS NOW IN THE CORE, YET A BIT REDUCED [performance]
         if (serendipity_userLoggedIn()) {
             $is_plugin_owner    = ($this->serendipity_owner == $serendipity['authorid'] || serendipity_checkPermission('adminPluginsMaintainOthers'));
 
@@ -1361,6 +1362,7 @@ class serendipity_html_nugget_plugin extends serendipity_plugin {
                 echo '<div class="serendipity_edit_nugget"><a href="' . $serendipity['baseURL'] . '/serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($this->instance) . '">' . EDIT . '</a></div>';
             }
         }
+*/
     }
 }
 
