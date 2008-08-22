@@ -27,6 +27,7 @@ if (isset($_GET['url_id']) && !empty($_GET['url_id']) && isset($_GET['entry_id']
 
 if (serendipity_isResponseClean($url)) {
     header('HTTP/1.0 301 Moved Permanently');
+    header('Status: 301 Moved Permanently');
     header('Location: ' . $url);
 }
 exit;

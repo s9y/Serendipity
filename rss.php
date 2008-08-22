@@ -74,6 +74,7 @@ if (!isset($_GET['nocache'])) {
             (!$none_match && $modified_since == $last_modified) ||
             (!$modified_since && $none_match == $last_modified)) {
             header('HTTP/1.0 304 Not Modified');
+            header('Status: 304 Not Modified');
             return;
         }
     }

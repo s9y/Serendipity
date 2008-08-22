@@ -18,6 +18,7 @@ if ($global_debug) {
 // We need to set this to return a 200 since we use .htaccess ErrorDocument
 // rules to handle archives.
 header('HTTP/1.0 200');
+header('Status: 200 OK');
 
 // Session are needed to also remember an autologin user on the frontend
 ob_start();
@@ -306,6 +307,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     } else {
         $serendipity['view'] = '404';
         header('HTTP/1.0 404 Not found');
+        header('Status: 404 Not found');
     }
 
     ob_start();
@@ -447,6 +449,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     if (!is_array($cInfo)) {
         $serendipity['view'] = '404';
         header('HTTP/1.0 404 Not found');
+        header('Status: 404 Not found');
     } else {
         $serendipity['head_title']    = $cInfo['category_name'];
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
@@ -492,6 +495,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     if (!is_array($uInfo)) {
         $serendipity['view'] = '404';
         header('HTTP/1.0 404 Not found');
+        header('Status: 404 Not found');
     } else {
         $serendipity['head_title']    = sprintf(ENTRIES_BY, $uInfo[0]['realname']);
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
@@ -604,6 +608,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 } else {
     $serendipity['view'] = '404';
     header('HTTP/1.0 404 Not found');
+    header('Status: 404 Not found');
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
     // printf('<div class="serendipity_msg_important">' . DOCUMENT_NOT_FOUND . '</div>', $uri);
 }

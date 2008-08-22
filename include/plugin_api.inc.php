@@ -849,7 +849,7 @@ class serendipity_plugin_api
                 ob_end_clean();
                 
                 if ($loggedin) {
-                    $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($plugin->instance) . '">' . ADMIN . ': ' . EDIT . '</a></div>';
+                    $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($plugin->instance) . '">' . EDIT . '</a></div>';
                 }
 
                 if ($show_plugin !== false) {
