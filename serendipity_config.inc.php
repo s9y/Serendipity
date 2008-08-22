@@ -287,6 +287,7 @@ if (IS_installed === true) {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
             header("WWW-Authenticate: Basic realm=\"Feed Login\"");
             header("HTTP/1.0 401 Unauthorized");
+            header("Status: 401 Unauthorized");
             exit;
         } else {
             if (!isset($serendipity['POST']['user'])) {

@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added header('Status:...') calls so that some CGI installations
+      of apache emit proper headers (garvinhicking)
+
     * Add a "Configure this plugin" link to the frontend output for
       every sidebar plugin, not only HTML nuggets. (garvinhicking)
 
