@@ -51,7 +51,7 @@ function serendipity_db_connect()
     }
 
 
-    $serendipity['dbConn'] = $function($serendipity['serendipityPath'] . $serendipity['dbName'] . '.db');
+    $serendipity['dbConn'] = $function(S9Y_DATA_PATH . $serendipity['dbName'] . '.db');
 
     return $serendipity['dbConn'];
 }
