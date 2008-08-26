@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Add support for postgreSQL ts_vector fulltext search, thanks
+      to genesis.
+
     * Bulletproof: Added support for custom, randomized header image.
       If you enter a path (relative to the domain root, like
       '/blog/uploads/'), any of the contained images will be rotated.
