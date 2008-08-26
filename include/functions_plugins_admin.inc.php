@@ -360,6 +360,13 @@ function placement_box($name, $val, $is_plugin_editable = false, $is_event = fal
 function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_names, $showTable = true, $showSubmit = true, $showExample = true, $spawnNuggets = true, $postKey = 'plugin') {
     global $serendipity;
 
+    if ($showSubmit && $postKey != 'plugin') { 
+?>
+    <div style="margin: 0px auto 0px 0px; text-align: right">
+        <input type="submit" name="SAVECONF" value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
+    </div>
+<?php }
+
     if ($showTable) {
 ?>
     <table id="serendipity_plugin_config" border="0" cellspacing="0" cellpadding="3" width="100%">
