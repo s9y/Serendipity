@@ -297,6 +297,22 @@ for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
     );
 }
 
+if ($template_loaded_config['headerimage'] != '' && is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $template_loaded_config['headerimage'])) {
+    $files = array();
+    if ($d = opendir($_SERVER['DOCUMENT_ROOT'] . '/' . $template_loaded_config['headerimage'])) {
+        while (($file = readdir($d)) !== false) {
+            if (preg_match('@(\.jpe?g|\.png|\.gif)$@i', $file) && !preg_match('@' . preg_quote($serendipity['thumbSuffix']) . '@i', $file)) {
+                $files[] = $file;
+            }
+        }
+    }
+    
+    if (count($files) > 0) {
+        shuffle($files);
+        $serendipity['smarty']->assign('random_headerimage', $template_loaded_config['headerimage'] . '/' . $files[0]);
+    }
+}
+
 $serendipity['smarty']->assign_by_ref('navlinks', $navlinks);
 
 // Allow colorset authors to include license and attribution data

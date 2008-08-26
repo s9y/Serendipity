@@ -34,7 +34,7 @@
         {if $template_option.custheader == 'true'}
         <style type="text/css">
             #serendipity_banner {ldelim}
-            background-image: url({$template_option.headerimage});
+            background-image: url({$random_headerimage|@default:$template_option.headerimage});
             background-position: {$template_option.headerposhor} {$template_option.headerposver};
             {if $template_option.headertype == 'banner'}
                 background-repeat: no-repeat;
