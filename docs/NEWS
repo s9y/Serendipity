@@ -3,6 +3,11 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Bulletproof: Added support for custom, randomized header image.
+      If you enter a path (relative to the domain root, like
+      '/blog/uploads/'), any of the contained images will be rotated.
+      (garvinhicking)
+
     * Added header('Status:...') calls so that some CGI installations
       of apache emit proper headers (garvinhicking)
 
