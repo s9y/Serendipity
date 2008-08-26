@@ -131,7 +131,8 @@
             <div class="entry-content serendipity_entry_body">
                 {$entry.body}
                 {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
-                    <span class="continue_reading"><a href="{$entry.link}#extended" title='{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title|truncate:50:" ..."}'>{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title|truncate:50:" ..."} &raquo;</a></span>
+                    {assign var="shorttitle"  value=$entry.title|@truncate:50:'...'}
+                    <span class="continue_reading"><a href="{$entry.link}#extended" title='{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle}'>{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle} &raquo;</a></span>
                 {/if}
            </div>
 
