@@ -754,7 +754,7 @@ function &serendipity_searchEntries($term, $limit = '') {
             to_tsvector('english', title)    @@to_tsquery('$term') OR
             to_tsvector('english', body)     @@to_tsquery('$term') OR
             to_tsvector('english', extended) @@to_tsquery('$term')
-            )"); 
+            )"; 
         } else {
             $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
         }
