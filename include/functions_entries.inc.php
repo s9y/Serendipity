@@ -743,7 +743,21 @@ function &serendipity_searchEntries($term, $limit = '') {
         $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']     = '';
         $cond['distinct']  = 'DISTINCT';
-        $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
+            
+        $r = serendipity_db_query("SELECT count(routine_name) AS counter
+                                     FROM information_schema.routines
+                                    WHERE routine_name LIKE 'to_tsvector'
+                                      AND specific_catalog = '" . $serendipity['dbName'] . "'");
+        if (is_array($r) && $r[0]['counter'] > 0) {
+            $term = str_replace('&amp;', '&', $term);
+            $cond['find_part'] = "(
+            to_tsvector('english', title)    @@to_tsquery('$term') OR
+            to_tsvector('english', body)     @@to_tsquery('$term') OR
+            to_tsvector('english', extended) @@to_tsquery('$term')
+            )"); 
+        } else {
+            $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
+        }
     } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
         // Very extensive SQLite search. There currently seems no other way to perform fulltext search in SQLite
         // But it's better than no search at all :-D
