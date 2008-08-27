@@ -2310,13 +2310,13 @@ HTMLArea.htmlEncode = function(str) {
 // getting innerHTML, using standard DOM calls.
 // Wrapper catch a Mozilla-Exception with non well formed html source code
 HTMLArea.getHTML = function(root, outputRoot, editor){
-    try{
+//    try{
         return HTMLArea.getHTMLWrapper(root,outputRoot,editor);
-    }
-    catch(e){
-        alert('Your Document is not well formed. Check JavaScript console for details.');
-        return editor._iframe.contentWindow.document.body.innerHTML;
-    }
+//    }
+//    catch(e){
+//        alert('Your Document is not well formed. Check JavaScript console for details.');
+//        return editor._iframe.contentWindow.document.body.innerHTML;
+//    }
 }
 
 HTMLArea.getHTMLWrapper = function(root, outputRoot, editor) {
