@@ -216,11 +216,13 @@ switch ($serendipity['GET']['step']) {
         $curl = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . ($_SERVER['HTTP_PORT'] != 80 ? ':' . $_SERVER['HTTP_PORT'] : '');
         switch($serendipity['GET']['show']) {
             case 'redirect':
+                header('Status: 302 Found');
                 header('Location: ' . $curl . $file['links']['imagelinkurl']);
                 exit;
                 break;
 
             case 'redirectThumb':
+                header('Status: 302 Found');
                 header('Location: ' . $curl . $file['show_thumb']);
                 exit;
                 break;

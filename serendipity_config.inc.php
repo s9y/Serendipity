@@ -174,6 +174,7 @@ $serendipity['charsets'] = array(
  *   Kill the script if we are not installed, and not inside the installer
  */
 if ( !defined('IN_installer') && IS_installed === false ) {
+    header('Status: 302 Found');
     header('Location: ' . (strtolower($_SERVER['HTTPS']) == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . str_replace('\\', '/', dirname($_SERVER['PHP_SELF'])) . '/serendipity_admin.php');
     serendipity_die(sprintf(SERENDIPITY_NOT_INSTALLED, 'serendipity_admin.php'));
 }

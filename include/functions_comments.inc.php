@@ -588,7 +588,9 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
         $query = "UPDATE {$serendipity['dbPrefix']}entries SET allow_comments = '" . ($switch == 'disable' ? 'false' : 'true') . "' WHERE id = '". (int)$entry_id ."' $admin";
         serendipity_db_query($query);
         if (serendipity_isResponseClean($_SERVER['HTTP_REFERER'])) {
+            header('Status: 302 Found');
             header('Location: '. $_SERVER['HTTP_REFERER']);
+            exit;
         }
     } else {
         die('What are you up to? You need to be an admin to close comments');

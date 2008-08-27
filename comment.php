@@ -10,7 +10,9 @@ header('Content-Type: text/html; charset=' . LANG_CHARSET);
 if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type'])) {
     serendipity_deleteComment($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']);
     if (serendipity_isResponseClean($_SERVER['HTTP_REFERER'])) {
+        header('Status: 302 Found');
         header('Location: '. $_SERVER['HTTP_REFERER']);
+        exit;
     }
 }
 
@@ -170,6 +172,7 @@ if ($type == 'trackback') {
             if (serendipity_saveComment($id, $comment, 'NORMAL')) {
                 $sc_url = $serendipity['baseURL'] . 'comment.php?serendipity[entry_id]=' . $id . '&success=true&url=' . urlencode($_SERVER['HTTP_REFERER']);
                 if (serendipity_isResponseClean($sc_url)) {
+                    header('Status: 302 Found');
                     header('Location: ' . $sc_url);
                 }
                 exit;
