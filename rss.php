@@ -174,6 +174,7 @@ if (is_array($plugins)) {
                 !(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
                ) {
                 $url = 'http://feeds.feedburner.com/' . $plugin->get_config('fb_id');
+                header('Status: 302 Found');
                 header('Location: ' . $url);
                 exit;
             }
