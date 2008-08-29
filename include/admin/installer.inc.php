@@ -343,6 +343,18 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
             }
      ?></td>
     </tr>
+    <tr>
+      <td>memory_limit</td>
+      <td width="150"><strong><?php echo (PHP_INT_SIZE == 4 ? '8M' : '16M'); ?></strong></td>
+      <td width="150"><?php
+            if ( serendipity_ini_bytesize(ini_get('memory_limit')) >= ((PHP_INT_SIZE == 4 ? 8 : 16)*1024*1024) ) {
+                echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, ini_get('memory_limit'));
+            } else {
+                echo serendipity_installerResultDiagnose(S9Y_I_WARNING, ini_get('memory_limit'));
+            }
+     ?></td>
+    </tr>
+
 </table>
 
 <br />

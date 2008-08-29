@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Add memory_limit output to s9y installation, 8MB for 32bit and
+      16MB for 64bit OSes
+
     * Add support for postgreSQL ts_vector fulltext search, thanks
       to genesis.
 
