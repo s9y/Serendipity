@@ -31,3 +31,15 @@ input#serendipityQuickSearchTermField {
 .s9y_wrap {
     font-size: 69%;
 }
+
+/* edit link for all sidebar items */
+.serendipity_edit_nugget {
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.serendipity_edit_nugget a {
+    background: transparent url('img/configure.png') bottom left no-repeat;
+    padding: 4px 0 0 20px;
+}
