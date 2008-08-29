@@ -11,7 +11,6 @@
           <file>../include/db/pdo-postgres.inc.php</file>
           <file>../include/db/postgres.inc.php</file>
           <file>../include/db/mysql.inc.php</file>
-          <file>../include/db/sqlite.inc.php</file>
           <file>../include/db/sqlrelay.inc.php</file>
         </exclude>
     </whitelist>
