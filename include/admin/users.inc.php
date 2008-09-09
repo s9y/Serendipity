@@ -171,7 +171,7 @@ if ($serendipity['GET']['adminAction'] != 'delete') {
         <tr>
             <td><strong><?php echo USER; ?></strong></td>
             <td width="100" align="center"><strong><?php echo USER_LEVEL ?></strong></td>
-            <td width="200">&nbsp;</td>
+            <td width="300">&nbsp;</td>
         </tr>
         <tr>
             <td colspan="3">
@@ -202,7 +202,10 @@ if (is_array($users)) {
 <?php /* TODO: Add username to list once tom figures out how to fix uneven rowstyles */ ?>
         <td><img src="<?php echo $img ?>" alt="" style="border: 0px none ; vertical-align: bottom; display: inline;" /> <?php echo htmlspecialchars($user['realname']); ?></td>
         <td width="100" align="center"><?php echo $user['userlevel']; ?></td>
-        <td width="200" align="right"> <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" /><?php echo EDIT ?></a>
+        <td width="300" align="right"> 
+                                       <a target="_blank" href="<?php echo serendipity_authorURL($user); ?>" title="<?php echo PREVIEW . ' ' . $user['realname']; ?>" class="serendipityIconLink">
+                                        <img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo PREVIEW; ?>" /><?php echo PREVIEW ?></a>
+                                       <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" /><?php echo EDIT ?></a>
                                        <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>" title="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" /><?php echo DELETE ?></a></td>
     </tr>
 </table>
