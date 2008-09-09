@@ -1,177 +1,203 @@
-// FullPage Plugin for HTMLArea-3.0
-// Implementation by Mihai Bazon.  Sponsored by http://thycotic.com
-//
-// htmlArea v3.0 - Copyright (c) 2002 interactivetools.com, inc.
-// This notice MUST stay intact for use (see license.txt).
-//
-// A free WYSIWYG editor replacement for <textarea> fields.
-// For full source code and docs, visit http://www.interactivetools.com/
-//
-// Version 3.0 developed by Mihai Bazon for InteractiveTools.
-//   http://dynarch.com/mishoo
-//
-// $Id: full-page.js,v 1.2 2005/01/11 15:00:57 garvinhicking Exp $
-
-function FullPage(editor) {
-	this.editor = editor;
-
-	var cfg = editor.config;
-	cfg.fullPage = true;
-	var tt = FullPage.I18N;
-	var self = this;
-
-	cfg.registerButton("FP-docprop", tt["Document properties"], editor.imgURL("docprop.gif", "FullPage"), false,
-			   function(editor, id) {
-				   self.buttonPress(editor, id);
-			   });
-
-	// add a new line in the toolbar
-	cfg.toolbar[0].splice(0, 0, "separator");
-	cfg.toolbar[0].splice(0, 0, "FP-docprop");
+/* This compressed file is part of Xinha. For uncompressed sources, forum, and bug reports, go to xinha.org */
+/* This file is part of version 0.95 released Mon, 12 May 2008 17:33:15 +0200 */
+/* The URL of the most recent version of this file is http://svn.xinha.webfactional.com/trunk/plugins/FullPage/full-page.js */
+function FullPage(_1){
+this.editor=_1;
+var _2=_1.config;
+_2.fullPage=true;
+var _3=this;
+_2.registerButton("FP-docprop",this._lc("Document properties"),_1.imgURL("docprop.gif","FullPage"),false,function(_4,id){
+_3.buttonPress(_4,id);
+});
+_2.addToolbarElement(["separator","FP-docprop"],"separator",-1);
+}
+FullPage._pluginInfo={name:"FullPage",version:"1.0",developer:"Mihai Bazon",developer_url:"http://dynarch.com/mishoo/",c_owner:"Mihai Bazon",sponsor:"Thycotic Software Ltd.",sponsor_url:"http://thycotic.com",license:"htmlArea"};
+FullPage.prototype._lc=function(_6){
+return Xinha._lc(_6,"FullPage");
+};
+FullPage.prototype.buttonPress=function(_7,id){
+var _9=this;
+switch(id){
+case "FP-docprop":
+var _a=_7._doc;
+var _b=_a.getElementsByTagName("link");
+var _c="";
+var _d="";
+var _e="";
+var _f="";
+var _10="";
+for(var i=_b.length;--i>=0;){
+var _12=_b[i];
+if(/stylesheet/i.test(_12.rel)){
+if(/alternate/i.test(_12.rel)){
+_d=_12.href;
+}else{
+_c=_12.href;
+}
+}
+}
+var _13=_a.getElementsByTagName("meta");
+for(var i=_13.length;--i>=0;){
+var _14=_13[i];
+if(/content-type/i.test(_14.httpEquiv)){
+r=/^text\/html; *charset=(.*)$/i.exec(_14.content);
+_10=r[1];
+}else{
+if((/keywords/i.test(_14.name))||(/keywords/i.test(_14.id))){
+_e=_14.content;
+}else{
+if((/description/i.test(_14.name))||(/description/i.test(_14.id))){
+_f=_14.content;
+}
+}
+}
+}
+var _15=_a.getElementsByTagName("title")[0];
+_15=_15?_15.innerHTML:"";
+var _16={f_doctype:_7.doctype,f_title:_15,f_body_bgcolor:Xinha._colorToRgb(_a.body.style.backgroundColor),f_body_fgcolor:Xinha._colorToRgb(_a.body.style.color),f_base_style:_c,f_alt_style:_d,f_charset:_10,f_keywords:_e,f_description:_f,editor:_7};
+_7._popupDialog("plugin://FullPage/docprop",function(_17){
+_9.setDocProp(_17);
+},_16);
+break;
+}
+};
+FullPage.prototype.setDocProp=function(_18){
+var txt="";
+var doc=this.editor._doc;
+var _1b=doc.getElementsByTagName("head")[0];
+var _1c=doc.getElementsByTagName("link");
+var _1d=doc.getElementsByTagName("meta");
+var _1e=null;
+var _1f=null;
+var _20=null;
+var _21=null;
+var _22=null;
+var _23=null;
+for(var i=_1c.length;--i>=0;){
+var _25=_1c[i];
+if(/stylesheet/i.test(_25.rel)){
+if(/alternate/i.test(_25.rel)){
+_1f=_25;
+}else{
+_1e=_25;
+}
+}
+}
+for(var i=_1d.length;--i>=0;){
+var _26=_1d[i];
+if(/content-type/i.test(_26.httpEquiv)){
+r=/^text\/html; *charset=(.*)$/i.exec(_26.content);
+_20=r[1];
+_21=_26;
+}else{
+if((/keywords/i.test(_26.name))||(/keywords/i.test(_26.id))){
+_22=_26;
+}else{
+if((/description/i.test(_26.name))||(/description/i.test(_26.id))){
+_23=_26;
+}
+}
+}
+}
+function createLink(alt){
+var _28=doc.createElement("link");
+_28.rel=alt?"alternate stylesheet":"stylesheet";
+_1b.appendChild(_28);
+return _28;
+}
+function createMeta(_29,_2a,_2b){
+var _2c=doc.createElement("meta");
+if(_29!=""){
+_2c.httpEquiv=_29;
+}
+if(_2a!=""){
+_2c.name=_2a;
+}
+if(_2a!=""){
+_2c.id=_2a;
+}
+_2c.content=_2b;
+_1b.appendChild(_2c);
+return _2c;
+}
+if(!_1e&&_18.f_base_style){
+_1e=createLink(false);
+}
+if(_18.f_base_style){
+_1e.href=_18.f_base_style;
+}else{
+if(_1e){
+_1b.removeChild(_1e);
+}
+}
+if(!_1f&&_18.f_alt_style){
+_1f=createLink(true);
+}
+if(_18.f_alt_style){
+_1f.href=_18.f_alt_style;
+}else{
+if(_1f){
+_1b.removeChild(_1f);
+}
+}
+if(_21){
+_1b.removeChild(_21);
+_21=null;
+}
+if(!_21&&_18.f_charset){
+_21=createMeta("Content-Type","","text/html; charset="+_18.f_charset);
+}
+if(!_22&&_18.f_keywords){
+_22=createMeta("","keywords",_18.f_keywords);
+}else{
+if(_18.f_keywords){
+_22.content=_18.f_keywords;
+}else{
+if(_22){
+_1b.removeChild(_22);
+}
+}
+}
+if(!_23&&_18.f_description){
+_23=createMeta("","description",_18.f_description);
+}else{
+if(_18.f_description){
+_23.content=_18.f_description;
+}else{
+if(_23){
+_1b.removeChild(_23);
+}
+}
+}
+for(var i in _18){
+var val=_18[i];
+switch(i){
+case "f_title":
+var _2e=doc.getElementsByTagName("title")[0];
+if(!_2e){
+_2e=doc.createElement("title");
+_1b.appendChild(_2e);
+}else{
+while(node=_2e.lastChild){
+_2e.removeChild(node);
+}
+}
+if(!Xinha.is_ie){
+_2e.appendChild(doc.createTextNode(val));
+}else{
+doc.title=val;
+}
+break;
+case "f_doctype":
+this.editor.setDoctype(val);
+break;
+case "f_body_bgcolor":
+doc.body.style.backgroundColor=val;
+break;
+case "f_body_fgcolor":
+doc.body.style.color=val;
+break;
+}
+}
 };
 
-FullPage._pluginInfo = {
-	name          : "FullPage",
-	version       : "1.0",
-	developer     : "Mihai Bazon",
-	developer_url : "http://dynarch.com/mishoo/",
-	c_owner       : "Mihai Bazon",
-	sponsor       : "Thycotic Software Ltd.",
-	sponsor_url   : "http://thycotic.com",
-	license       : "htmlArea"
-};
-
-FullPage.prototype.buttonPress = function(editor, id) {
-	var self = this;
-	switch (id) {
-	    case "FP-docprop":
-		var doc = editor._doc;
-		var links = doc.getElementsByTagName("link");
-		var style1 = '';
-		var style2 = '';
-		var charset = '';
-		for (var i = links.length; --i >= 0;) {
-			var link = links[i];
-			if (/stylesheet/i.test(link.rel)) {
-				if (/alternate/i.test(link.rel))
-					style2 = link.href;
-				else
-					style1 = link.href;
-			}
-		}
-		var metas = doc.getElementsByTagName("meta");
-		for (var i = metas.length; --i >= 0;) {
-			var meta = metas[i];
-			if (/content-type/i.test(meta.httpEquiv)) {
-				r = /^text\/html; *charset=(.*)$/i.exec(meta.content);
-				charset = r[1];
-			}
-		}
-		var title = doc.getElementsByTagName("title")[0];
-		title = title ? title.innerHTML : '';
-		var init = {
-			f_doctype      : editor.doctype,
-			f_title        : title,
-			f_body_bgcolor : HTMLArea._colorToRgb(doc.body.style.backgroundColor),
-			f_body_fgcolor : HTMLArea._colorToRgb(doc.body.style.color),
-			f_base_style   : style1,
-			f_alt_style    : style2,
-			f_charset      : charset,
-			editor         : editor
-		};
-		editor._popupDialog("plugin://FullPage/docprop", function(params) {
-			self.setDocProp(params);
-		}, init);
-		break;
-	}
-};
-
-FullPage.prototype.setDocProp = function(params) {
-	var txt = "";
-	var doc = this.editor._doc;
-	var head = doc.getElementsByTagName("head")[0];
-	var links = doc.getElementsByTagName("link");
-	var metas = doc.getElementsByTagName("meta");
-	var style1 = null;
-	var style2 = null;
-	var charset = null;
-	var charset_meta = null;
-	for (var i = links.length; --i >= 0;) {
-		var link = links[i];
-		if (/stylesheet/i.test(link.rel)) {
-			if (/alternate/i.test(link.rel))
-				style2 = link;
-			else
-				style1 = link;
-		}
-	}
-	for (var i = metas.length; --i >= 0;) {
-		var meta = metas[i];
-		if (/content-type/i.test(meta.httpEquiv)) {
-			r = /^text\/html; *charset=(.*)$/i.exec(meta.content);
-			charset = r[1];
-			charset_meta = meta;
-		}
-	}
-	function createLink(alt) {
-		var link = doc.createElement("link");
-		link.rel = alt ? "alternate stylesheet" : "stylesheet";
-		head.appendChild(link);
-		return link;
-	};
-	function createMeta(name, content) {
-		var meta = doc.createElement("meta");
-		meta.httpEquiv = name;
-		meta.content = content;
-		head.appendChild(meta);
-		return meta;
-	};
-
-	if (!style1 && params.f_base_style)
-		style1 = createLink(false);
-	if (params.f_base_style)
-		style1.href = params.f_base_style;
-	else if (style1)
-		head.removeChild(style1);
-
-	if (!style2 && params.f_alt_style)
-		style2 = createLink(true);
-	if (params.f_alt_style)
-		style2.href = params.f_alt_style;
-	else if (style2)
-		head.removeChild(style2);
-
-	if (charset_meta) {
-		head.removeChild(charset_meta);
-		charset_meta = null;
-	}
-	if (!charset_meta && params.f_charset)
-		charset_meta = createMeta("Content-Type", "text/html; charset="+params.f_charset);
-
-  	for (var i in params) {
-		var val = params[i];
-		switch (i) {
-		    case "f_title":
-			var title = doc.getElementsByTagName("title")[0];
-			if (!title) {
-				title = doc.createElement("title");
-				head.appendChild(title);
-			} else while (node = title.lastChild)
-				title.removeChild(node);
-			if (!HTMLArea.is_ie)
-				title.appendChild(doc.createTextNode(val));
-			else
-				doc.title = val;
-			break;
-		    case "f_doctype":
-			this.editor.setDoctype(val);
-			break;
-		    case "f_body_bgcolor":
-			doc.body.style.backgroundColor = val;
-			break;
-		    case "f_body_fgcolor":
-			doc.body.style.color = val;
-			break;
-		}
-	}
-};

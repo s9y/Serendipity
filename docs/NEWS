@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Replace htmlarea with XINHA. Thanks to abdussamad!
+      (Experimental! Needs testing on shared installations. Might 
+       need browser cache refresh!)
+
     * Add link to preview entries by an author into the usermanagement
       (garvinhicking)
 

@@ -1,0 +1,21 @@
+dl { border: 1px dotted #800000; }
+dt {
+  width: 18px;
+  height: 18px;
+  background-image: url(img/ed_dt.gif);
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-left: 19px;
+  display: block;
+  color: #800000;
+}
+dd {
+  width: 18px;
+  height: 18px;
+  background-image: url(img/ed_dd.gif);
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-left: 19px;
+  display: block;
+  color: #800000;
+}

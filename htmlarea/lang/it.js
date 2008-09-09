@@ -1,79 +1,55 @@
 // I18N constants
 
-// LANG: "it", ENCODING: UTF-8 | ISO-8859-1
-// Author: Fabio Rotondo <fabio@rotondo.it>
-// Update for 3.0 rc1: Giovanni Premuda <gpremuda@softwerk.it>
+// LANG: "it", ENCODING: UTF-8
+// Author: Mattia Landoni, http://www.webpresident.org/
 
-HTMLArea.I18N = {
-
-        // the following should be the filename without .js extension
-        // it will be used for automatically load plugin language.
-        lang: "it",
-
-        tooltips: {
-                bold:           "Grassetto",
-                italic:         "Corsivo",
-                underline:      "Sottolineato",
-                strikethrough:  "Barrato",
-                subscript:      "Pedice",
-                superscript:    "Apice",
-                justifyleft:    "Allinea a sinistra",
-                justifycenter:  "Allinea in centro",
-                justifyright:   "Allinea a destra",
-                justifyfull:    "Giustifica",
-                insertorderedlist:    "Lista ordinata",
-                insertunorderedlist:  "Lista puntata",
-                outdent:        "Decrementa indentazione",
-                indent:         "Incrementa indentazione",
-                forecolor:      "Colore del carattere",
-                hilitecolor:    "Colore di sfondo",
-                inserthorizontalrule: "Linea orizzontale",
-                createlink:     "Inserisci un link",
-                insertimage:    "Inserisci un'immagine",
-                inserttable:    "Inserisci una tabella",
-                htmlmode:       "Visualizzazione HTML",
-                popupeditor:    "Editor a pieno schermo",
-                about:          "Info sull'editor",
-                showhelp:       "Aiuto sull'editor",
-                textindicator:  "Stile corrente",
-                undo:           "Annulla",
-                redo:           "Ripristina",
-                cut:            "Taglia",
-                copy:           "Copia",
-                paste:          "Incolla",
-                lefttoright:    "Scrivi da sinistra a destra",
-                righttoleft:    "Scrivi da destra a sinistra"
-        },
-
-        buttons: {
-                "ok":           "OK",
-                "cancel":       "Annulla"
-        },
-
-        msg: {
-                "Path":         "Percorso",
-                "TEXT_MODE":    "Sei in MODALITA' TESTO. Usa il bottone [<>] per tornare alla modalità WYSIWYG.",
-                "IE-sucks-full-screen" :
-                // translate here
-                "The full screen mode is known to cause problems with Internet Explorer, " +
-                "due to browser bugs that we weren't able to workaround.  You might experience garbage " +
-                "display, lack of editor functions and/or random browser crashes.  If your system is Windows 9x " +
-                "it's very likely that you'll get a 'General Protection Fault' and need to reboot.\n\n" +
-                "You have been warned.  Please press OK if you still want to try the full screen editor."
-        },
-
-        dialogs: {
-                "Annulla"                                            : "Cancel",
-                "Inserisci/modifica Link"                                : "Insert/Modify Link",
-                "Nuova finestra (_blank)"                               : "New window (_blank)",
-                "Nessuno (usa predefinito)"                               : "None (use implicit)",
-                "OK"                                                : "OK",
-                "Altro"                                             : "Other",
-                "Stessa finestra (_self)"                                : "Same frame (_self)",
-                "Target:"                                           : "Target:",
-                "Title (suggerimento):"                                  : "Title (tooltip):",
-                "Frame principale (_top)"                                  : "Top frame (_top)",
-                "URL:"                                              : "URL:",
-                "You must enter the URL where this link points to"  : "Devi inserire un indirizzo per questo link"
-        }
-};
+{
+  "Bold": "Grassetto",
+  "Italic": "Corsivo",
+  "Underline": "Sottolineato",
+  "Strikethrough": "Barrato",
+  "Subscript": "Pedice",
+  "Superscript": "Apice",
+  "Justify Left": "Sinistra",
+  "Justify Center": "Centrato",
+  "Justify Right": "Destra",
+  "Justify Full": "Giustificato",
+  "Ordered List": "Lista numerata",
+  "Bulleted List": "Lista non numerata",
+  "Decrease Indent": "Diminuisci indentazione",
+  "Increase Indent": "Aumenta indentazione",
+  "Font Color": "Colore font",
+  "Background Color": "Colore sfondo",
+  "Horizontal Rule": "Righello orizzontale",
+  "Insert Web Link": "Inserisci link",
+  "Insert/Modify Image": "Inserisci/modifica Immagine",
+  "Insert Table": "Inserisci tabella",
+  "Toggle HTML Source": "Visualizza/nascondi sorgente HTML",
+  "Enlarge Editor": "Allarga editor",
+  "About this editor": "Informazioni su Xinha",
+  "Help using editor": "Aiuto",
+  "Current style": "Stile corrente",
+  "Undoes your last action": "Annulla ultima azione",
+  "Redoes your last action": "Ripeti ultima azione",
+  "Cut selection": "Taglia",
+  "Copy selection": "Copia",
+  "Paste from clipboard": "Incolla",
+  "Direction left to right": "Testo da sx a dx",
+  "Direction right to left": "Testo da dx a sx",
+  "OK": "OK",
+  "Cancel": "Annulla",
+  "Path": "Percorso",
+  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "Sei in MODALITA",
+  "The full screen mode is known to cause problems with Internet Explorer, due to browser bugs that we weren": "E",
+  "Cancel": "Annulla",
+  "Insert/Modify Link": "Inserisci/modifica link",
+  "New window (_blank)": "Nuova finestra (_blank)",
+  "None (use implicit)": "Niente (usa implicito)",
+  "Other": "Altro",
+  "Same frame (_self)": "Stessa frame (_self)",
+  "Target:": "Target:",
+  "Title (tooltip):": "Title (suggerimento):",
+  "Top frame (_top)": "Pagina intera (_top)",
+  "URL:": "URL:",
+  "You must enter the URL where this link points to": "Devi inserire l'indirizzo a cui punta il link"
+}

@@ -1,144 +1,184 @@
-// I18N constants
-
-// LANG: "pt_br", ENCODING: UTF-8 | ISO-8859-1
-// Author: Agner Olson, agner@agner.net for Portuguese brasilian
-// Jo„o P Matos, jmatos@math.ist.utl.pt for European Portuguese
-
-// FOR TRANSLATORS:
+Ôªø// I18N constants
 //
-//   1. PLEASE PUT YOUR CONTACT INFO IN THE ABOVE LINE
-//      (at least a valid email address)
+// LANG: "pt_br", ENCODING: UTF-8
+// Portuguese Brazilian Translation
 //
-//   2. PLEASE TRY TO USE UTF-8 FOR ENCODING;
-//      (if this is not possible, please include a comment
-//       that states what encoding is necessary.)
-
-
-HTMLArea.I18N = {
-
-	// the following should be the filename without .js extension
-	// it will be used for automatically load plugin language.
-	lang: "pt_br",
-
-	tooltips: {
-		bold:           "Negrito",
-		italic:         "It·lico",
-		underline:      "Sublinhado",
-		strikethrough:  "Riscado",
-		subscript:      "Subscrito",
-		superscript:    "Sobrescrito",
-		justifyleft:    "Alinhado ‡ esquerda",
-		justifycenter:  "Centralizado",
-		justifyright:   "Alinhado ‡ direita",
-		justifyfull:    "Justificado",
-		orderedlist:    "Lista ordenada",
-		unorderedlist:  "Lista n„o ordenada",
-		outdent:        "Diminuir a indentaÁ„o",
-		indent:         "Aumentar a indentaÁ„o",
-		forecolor:      "Cor do texto",
-		hilitecolor:    "Cor de Ínfase",
-		horizontalrule: "Linha horizontal",
-		createlink:     "Inserir uma hiperligaÁ„o",
-		insertimage:    "Inserir/Modificar uma imagem",
-		inserttable:    "Inserir uma tabela",
-		htmlmode:       "Mostrar cÛdigo fonte",
-		popupeditor:    "Maximizar o editor",
-		about:          "Sobre o editor",
-		showhelp:       "Ajuda",
-		textindicator:  "Estilo corrente",
-		undo:           "Anular a ˙ltima aÁ„o",
-		redo:           "Repetir a ˙ltima aÁ„o",
-		cut:            "Cortar",
-		copy:           "Copiar",
-		paste:          "Colar",
-		lefttoright:    "Da esquerda para a direita",
-		righttoleft:    "Da direita para a esquerda"
-	},
-
-	buttons: {
-		"ok":           "OK",
-		"cancel":       "Cancelar"
-	},
-
-	msg: {
-		"Path":         "Caminho",
-		"TEXT_MODE":    "Est· em MODO TEXTO.  Pressione o bot„o [<>] para voltar ao modo gr·fico.",
-
-		"IE-sucks-full-screen" :
-		// translate here
-		"O modo ·rea de trabalho completo pode causar problemas no IE, " +
-		"devido aos seus problemas que n„o foi possÌvel de evitar.  " +
-		"Os sintomas podem ser erros na ·rea de trabalho ou falta de algumas" +
-		"funÁıes no editor ou falhas catastrÛficas do sistema operacional.  Se o seu  " +
-		"sistema È Windows 9x, È possÌvel o erro " +
-		"'General Protection Fault' aconteÁa e que vocÍ tenha de reiniciar o computador." +
-		"\n\nConsidere-se avisado.  Pressione OK se deseja continuar mesmo assim " +
-		"testando o modo de tela cheia."
-	},
-
-	dialogs: {
-		"OK"                                                : "OK",
-		"Cancel"                                            : "Cancelar",
-		"Alignment:"                                        : "Alinhamento:",
-		"Not set"                                           : "N„o definido",
-		"Left"                                              : "Esquerda",
-		"Right"                                             : "Direita",
-		"Texttop"                                           : "Topo do texto",
-		"Absmiddle"                                         : "Meio absoluto",
-		"Baseline"                                          : "Linha base",
-		"Absbottom"                                         : "Abaixo absoluto",
-		"Bottom"                                            : "Fundo",
-		"Middle"                                            : "Meio",
-		"Top"                                               : "Topo",
-
-		"Layout"                                            : "FormataÁ„o",
-		"Spacing"                                           : "EspaÁamento",
-		"Horizontal:"                                       : "Horizontal:",
-		"Horizontal padding"                                : "Enchimento horizontal",
-		"Vertical:"                                         : "Vertical:",
-		"Vertical padding"                                  : "Preenchimento vertical",
-		"Border thickness:"                                 : "Espessura da borda:",
-		"Leave empty for no border"                         : "Deixar vazio para ficar sem borda",
-
-		// Insert Link
-		"Insert/Modify Link"                                : "Inserir/Modificar link",
-		"None (use implicit)"                               : "Nenhum (por omiss„o)",
-		"New window (_blank)"                               : "Nova janela (_blank)",
-		"Same frame (_self)"                                : "Mesmo frame (_self)",
-		"Top frame (_top)"                                  : "Frame de cima (_top)",
-		"Other"                                             : "Outro",
-		"Target:"                                           : "Alvo:",
-		"Title (tooltip):"                                  : "TÌtulo (tooltip):",
-
-		"URL:"                                              : "URL:",
-		"You must enter the URL where this link points to"  : "VocÍ deve digitar o link para o qual aponta",
-
-		// Insert Table
-		"Insert Table"                                      : "Inserir Tabela",
-		"Rows:"                                             : "Linhas:",
-		"Number of rows"                                    : "N˙mero de linhas",
-		"Cols:"                                             : "Colunas:",
-		"Number of columns"                                 : "N˙mero de colunas",
-		"Width:"                                            : "Largura:",
-		"Width of the table"                                : "Largura da tabela",
-		"Percent"                                           : "Porcentagem",
-		"Pixels"                                            : "Pixel",
-		"Em"                                                : "Em",
-		"Width unit"                                        : "Unidade de largura",
-		"Positioning of this table"                         : "Posicionamento da tabela",
-		"Cell spacing:"                                     : "EspaÁamento da cÈlula:",
-		"Space between adjacent cells"                      : "EspaÁo entre cÈlulas adjacentes",
-		"Cell padding:"                                     : "Preenchimento da cÈlula:",
-		"Space between content and border in cell"          : "EspaÁo entre o conte˙do e a borda da cÈlula",
-		// Insert Image
-		"Insert Image"                                      : "Inserir imagem",
-		"Image URL:"                                        : "EndereÁo da imagem:",
-		"Enter the image URL here"                          : "Informe o endereÁo da imagem aqui",
-		"Preview"                                           : "Previs„o",
-		"Preview the image in a new window"                 : "Previs„o da imagem numa nova janela",
-		"Alternate text:"                                   : "Texto alternativo:",
-		"For browsers that don't support images"            : "Para navegadores que n„o suportam imagens",
-		"Positioning of this image"                         : "Posicionamento desta imagem",
-		"Image Preview:"                                    : "Previs„o da imagem:"
-	}
-};
+// Initial basic work by Alex Piaz <webmaster@globalmap.com>
+//
+// Author: Marcio Barbosa, <marcio@mpg.com.br>
+// MSN: tomarshall@msn.com - ICQ: 69419933
+// Site: http://www.mpg.com.br
+//
+// Last revision: 06 september 2007
+// Please don¬¥t remove this information
+// If you modify any source, please insert a comment with your name and e-mail
+//
+// Distributed under the same terms as HTMLArea itself.
+// This notice MUST stay intact for use (see license.txt)
+{
+  "About": "Sobre",
+  "About Xinha": "Sobre o Xinha",
+  "Absbottom": "Inferior absoluto",
+  "Absmiddle": "Meio absoluto",
+  "Alignment:": "Alinhamento",
+  "Alternate text:": "Texto alternativo",
+  "Baseline": "Linha base",
+  "Bold": "Negrito",
+  "Border thickness:": "Espessura da borda",
+  "Bottom": "Bot√£o",
+  "CTRL-0 (zero)": "CTRL-0 (zero)",
+  "CTRL-1 .. CTRL-6": "CTRL-1 .. CTRL-6",
+  "CTRL-A": "CTRL-A",
+  "CTRL-B": "CTRL-B",
+  "CTRL-C": "CTRL-C",
+  "CTRL-E": "CTRL-E",
+  "CTRL-I": "CTRL-I",
+  "CTRL-J": "CTRL-J",
+  "CTRL-L": "CTRL-L",
+  "CTRL-N": "CTRL-N",
+  "CTRL-R": "CTRL-R",
+  "CTRL-S": "CTRL-S",
+  "CTRL-U": "CTRL-U",
+  "CTRL-V": "CTRL-V",
+  "CTRL-X": "CTRL-X",
+  "CTRL-Y": "CTRL-Y",
+  "CTRL-Z": "CTRL-Z",
+  "Cancel": "Cancelar",
+  "Cell padding:": "Espa√ßamento interno da c√©lula:",
+  "Cell spacing:": "Espa√ßamento da c√©lula:",
+  "Clean content pasted from Word": "Limpar conte√∫do copiado do Word",
+  "Close": "Fechar",
+  "Collapse borders:": "Bordas fechadas:",
+  "Cols:": "Colunas:",
+  "Constructing object": "Construindo objeto",
+  "Copy selection": "Copiar sele√ß√£o",
+  "Create Statusbar": "Criar barra de informa√ß√£o (statusbar)",
+  "Create Toolbar": "Criar Barra de Ferramentas",
+  "Current style": "Estilo Atual",
+  "Cut selection": "Recortar sele√ß√£o",
+  "Developer": "Desenvolvedor",
+  "ENTER": "ENTRAR",
+  "Editor Help": "Ajuda do Editor",
+  "Em": "Em",
+  "Enter the image URL here": "Entre aqui com a URL da imagem",
+  "Finishing": "Terminando",
+  "Fixed width columns": "Colunas com largura fixa",
+  "For browsers that don't support images": "Para navegadores que n√£o suportam imagens",
+  "Generate Xinha framework": "Gerar √Årea de Trabalho do Xinha",
+  "Headings": "T√≠tulos",
+  "Horizontal padding": "Espa√ßamento interno horizontal",
+  "Horizontal:": "Horizontal:",
+  "Image Preview:": "Visualiza√ß√£o da Imagem:",
+  "Image URL:": "URL da imagem:",
+  "Init editor size": "Iniciar tamanho do editor",
+  "Insert Image": "Inserir Imagem",
+  "Insert Table": "Inserir Tabela",
+  "Insert/Modify Link": "Inserir/Modificar Link",
+  "Italic": "It√°lico",
+  "Justify Center": "Justificar Centralizado",
+  "Justify Full": "Justificar Completamente",
+  "Justify Left": "Justificar √† Esquerda",
+  "Justify Right": "Justificar √† Direita",
+  "Keyboard shortcuts": "Atalhos de Teclado",
+  "Layout": "Esquema",
+  "Leave empty for no border": "Deixe em branco para n√£o ter bordas",
+  "Left": "Esquerda",
+  "License": "Licen√ßa",
+  "Loading in progress. Please wait!": "Carregamento em processo. Por favor, aguarde!",
+  "Middle": "Meio",
+  "Name": "Nome",
+  "New window (_blank)": "Nova janela (_blank)",
+  "None (use implicit)": "Nenhum (uso implicito)",
+  "Not set": "N√£o definido",
+  "Number of columns": "N√∫mero de colunas",
+  "Number of rows": "N√∫mero de linhas",
+  "OK": "OK",
+  "Paste from clipboard": "Colar da √Årea de Transfer√™ncia",
+  "Path": "Caminho",
+  "Percent": "Porcentagem",
+  "Pixels": "Pixels",
+  "Plugins": "Plugins",
+  "Positioning of this image": "Posicionamento desta imagem",
+  "Positioning of this table": "Posicionamento desta tabela",
+  "Preview": "Visualiza√ß√£o",
+  "Preview the image in a new window": "Visualizar a imagem em uma nova janela",
+  "Redoes your last action": "Refazer sua √∫ltima a√ß√£o",
+  "Right": "Direita",
+  "Rows:": "Linhas:",
+  "SHIFT-ENTER": "SHIFT-ENTER",
+  "Same frame (_self)": "Mesmo frame (_self)",
+  "Select Color": "Selecionar c√¥r",
+  "Select all": "Selecionar tudo",
+  "Set format to paragraph": "Definir formato para o par√°grafo",
+  "Space between adjacent cells": "Espa√ßo entre c√©lulas adjacentes",
+  "Space between content and border in cell": "Espa√ßo entre conte√∫do e borda na c√©lula",
+  "Spacing": "Espa√ßamento",
+  "Sponsored by": "Patrocinado por",
+  "Strikethrough": "Tachado",
+  "Target:": "Destino:",
+  "Texttop": "Texto no topo",
+  "Thanks": "Agradecimentos",
+  "The Paste button does not work in Mozilla based web browsers (technical security reasons). Press CTRL-V on your keyboard to paste directly.": "O bot√£o Colar n√£o funciona em navegadores baseado no Mozilla (por raz√µes t√©cnicas de seguran√ßa). Pressione CTRL-V no seu teclado para colar diretamente.",
+  "The editor provides the following key combinations:": "Este editor fornece a seguinte combina√ß√£o de teclas:",
+  "Title (tooltip):": "T√≠tulo (tooltip)",
+  "Top": "Topo",
+  "Top frame (_top)": "Frame no topo (_top)",
+  "URL:": "URL:",
+  "Underline": "Sublinhado",
+  "Undoes your last action": "Desfazer sua √∫ltima a√ß√£o",
+  "Version": "Vers√£o",
+  "Vertical padding": "Espa√ßamento interno vertical",
+  "Vertical:": "Vertical:",
+  "Width of the table": "Larguran da tabela",
+  "Width unit": "Unidade de largura",
+  "Width:": "Largura:",
+  "Would you like to clear font colours?": "Deseja limpar as cores de fonte",
+  "Would you like to clear font sizes?": "Deseja limpar os tamanhos de fonte",
+  "Would you like to clear font typefaces?": "Deseja limpar os tipos de fonte",
+  "Xinha Help": "Ajuda do Xinha",
+  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "Voc√™ est√° no MODO TEXTO.  Use o bot√£o [<>] para mudar para o modo de Visualiza√ß√£o (WYSIWYG)",
+  "Your Document is not well formed. Check JavaScript console for details.": "Seu Documento n√£o est√° formatado corretamente. Verifique o console do JavaScript para maiores detalhes.",
+  "insert linebreak": "inserir quebra de linha",
+  "new paragraph": "novo par√°grafo",
+  
+  // not find with lc_parse_strings.php
+  "Subscript": "Subescrito",
+  "Superscript": "Sobrescrito",
+  "Direction left to right": "Da esquerda para direita",
+  "Direction right to left": "Da direita para esquerda",
+  "Remove formatting": "Remover formata√ß√£o",
+  "Select all": "Selecionar tudo",
+  "Print document": "Imprimir documento",
+  "Clear MSOffice tags": "Limpar tags do MS Office",
+  "Clear Inline Font Specifications": "Limpar especifica√ß√µes de fontes inline",
+  "Split Block": "Dividir Bloco",
+  "Toggle Borders": "Mudar Bordas",
+  "Save as": "Salvar como",
+  "Insert/Overwrite": "Inserir/Sobrescrever",
+  "&mdash; format &mdash;": "&mdash; formato &mdash;",
+  "Heading 1": "T√≠tulo 1",
+  "Heading 2": "T√≠tulo 2",
+  "Heading 3": "T√≠tulo 3",
+  "Heading 4": "T√≠tulo 4",
+  "Heading 5": "T√≠tulo 5",
+  "Heading 6": "T√≠tulo 6",
+  "Normal": "Normal",
+  "Address": "Endere√ßo",
+  "Formatted": "Formatado",
+  "&mdash; font &mdash;": "&mdash; fonte &mdash;",
+  "&mdash; size &mdash;": "&mdash; tamanho &mdash;",
+  "Ordered List": "Lista Numerada",
+  "Bulleted List": "Lista Marcadores",
+  "Decrease Indent": "Diminuir Indenta√ß√£o",
+  "Increase Indent": "Aumentar Indenta√ß√£o",
+  "Font Color": "Cor da Fonte",
+  "Background Color": "Cor do Fundo",
+  "Horizontal Rule": "Linha Horizontal",
+  "Insert Web Link": "Inserir Link",
+  "Insert/Modify Image": "Inserir/Modificar Imagem",
+  "Insert Table": "Inserir Tabela",
+  "Toggle HTML Source": "Ver C√≥digo-Fonte",
+  "Enlarge Editor": "Expandir Editor",
+  "About this editor": "Sobre este editor",
+  "Help using editor": "Ajuda - Usando o editor"
+}

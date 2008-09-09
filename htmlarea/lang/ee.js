@@ -1,6 +1,6 @@
 // I18N constants
 
-// LANG: "ee", ENCODING: UTF-8 | ISO-8859-1
+// LANG: "ee", ENCODING: UTF-8
 // Author: Martin Raie, <albertvill@hot.ee>
 
 // FOR TRANSLATORS:
@@ -12,52 +12,39 @@
 //      (if this is not possible, please include a comment
 //       that states what encoding is necessary.)
 
-HTMLArea.I18N = {
-
-	// the following should be the filename without .js extension
-	// it will be used for automatically load plugin language.
-	lang: "ee",
-
-	tooltips: {
-		bold:           "Paks",
-		italic:         "Kursiiv",
-		underline:      "Allakriipsutatud",
-		strikethrough:  "Läbikriipsutatud",
-		subscript:      "Allindeks",
-		superscript:    "Ülaindeks",
-		justifyleft:    "Joonda vasakule",
-		justifycenter:  "Joonda keskele",
-		justifyright:   "Joonda paremale",
-		justifyfull:    "Rööpjoonda",
-		orderedlist:    "Nummerdus",
-		unorderedlist:  "Täpploend",
-		outdent:        "Vähenda taanet",
-		indent:         "Suurenda taanet",
-		forecolor:      "Fondi värv",
-		hilitecolor:    "Tausta värv",
-		inserthorizontalrule: "Horisontaaljoon",
-		createlink:     "Lisa viit",
-		insertimage:    "Lisa pilt",
-		inserttable:    "Lisa tabel",
-		htmlmode:       "HTML/tavaline vaade",
-		popupeditor:    "Suurenda toimeti aken",
-		about:          "Teave toimeti kohta",
-		showhelp:       "Spikker",
-		textindicator:  "Kirjastiil",
-		undo:           "Võta tagasi",
-		redo:           "Tee uuesti",
-		cut:            "Lõika",
-		copy:           "Kopeeri",
-		paste:          "Kleebi"
-	},
-
-	buttons: {
-		"ok":           "OK",
-		"cancel":       "Loobu"
-	},
-
-	msg: {
-		"Path":         "Path",
-		"TEXT_MODE":    "Sa oled tekstireziimis.  Kasuta nuppu [<>] lülitamaks tagasi WYSIWIG reziimi."
-	}
-};
+{
+  "Bold": "Paks",
+  "Italic": "Kursiiv",
+  "Underline": "Allakriipsutatud",
+  "Strikethrough": "LÃ¤bikriipsutatud",
+  "Subscript": "Allindeks",
+  "Superscript": "Ãœlaindeks",
+  "Justify Left": "Joonda vasakule",
+  "Justify Center": "Joonda keskele",
+  "Justify Right": "Joonda paremale",
+  "Justify Full": "RÃ¶Ã¶pjoonda",
+  "Ordered List": "Nummerdus",
+  "Bulleted List": "TÃ¤pploend",
+  "Decrease Indent": "VÃ¤henda taanet",
+  "Increase Indent": "Suurenda taanet",
+  "Font Color": "Fondi vÃ¤rv",
+  "Background Color": "Tausta vÃ¤rv",
+  "Horizontal Rule": "Horisontaaljoon",
+  "Insert Web Link": "Lisa viit",
+  "Insert/Modify Image": "Lisa pilt",
+  "Insert Table": "Lisa tabel",
+  "Toggle HTML Source": "HTML/tavaline vaade",
+  "Enlarge Editor": "Suurenda toimeti aken",
+  "About this editor": "Teave toimeti kohta",
+  "Help using editor": "Spikker",
+  "Current style": "Kirjastiil",
+  "Undoes your last action": "VÃµta tagasi",
+  "Redoes your last action": "Tee uuesti",
+  "Cut selection": "LÃµika",
+  "Copy selection": "Kopeeri",
+  "Paste from clipboard": "Kleebi",
+  "OK": "OK",
+  "Cancel": "Loobu",
+  "Path": "Path",
+  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "Sa oled tekstireziimis.  Kasuta nuppu [<>] lÃ¼litamaks tagasi WYSIWIG reziimi."
+}
