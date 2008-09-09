@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Add link to preview entries by an author into the usermanagement
+      (garvinhicking)
+
     * Add memory_limit output to s9y installation, 8MB for 32bit and
       16MB for 64bit OSes
 
