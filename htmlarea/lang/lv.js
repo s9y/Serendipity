@@ -1,55 +1,42 @@
 // I18N constants
 
-// LANG: "lv", ENCODING: UTF-8 | ISO-8859-1
+// LANG: "lv", ENCODING: UTF-8
 // Author: Mihai Bazon, http://dynarch.com/mishoo
 // Translated by: Janis Klavins, <janis.klavins@devia.lv>
 
-HTMLArea.I18N = {
-
-	// the following should be the filename without .js extension
-	// it will be used for automatically load plugin language.
-	lang: "lv",
-
-	tooltips: {
-		bold:           "Trekniem burtiem",
-		italic:         "Kursîvâ",
-		underline:      "Pasvîtrots",
-		strikethrough:  "Pârsvîtrots",
-		subscript:      "Novietot zem rindas",
-		superscript:    "Novietot virs rindas",
-		justifyleft:    "Izlîdzinât pa kreisi",
-		justifycenter:  "Izlîdzinât centrâ",
-		justifyright:   "Izlîdzinât pa labi",
-		justifyfull:    "Izlîdzinât pa visu lapu",
-		orderedlist:    "Numurçts saraksts",
-		unorderedlist:  "Saraksts",
-		outdent:        "Samazinât atkâpi",
-		indent:         "Palielinât atkâpi",
-		forecolor:      "Burtu krâsa",
-		hilitecolor:    "Fona krâsa",
-		horizontalrule: "Horizontâla atdalîtâjsvîtra",
-		createlink:     "Ievietot hipersaiti",
-		insertimage:    "Ievietot attçlu",
-		inserttable:    "Ievietot tabulu",
-		htmlmode:       "Skatît HTML kodu",
-		popupeditor:    "Palielinât Rediìçtâju",
-		about:          "Par ðo rediìçtâju",
-		showhelp:       "Rediìçtâja palîgs",
-		textindicator:  "Patreizçjais stils",
-		undo:           "Atcelt pçdçjo darbîbu",
-		redo:           "Atkârtot pçdçjo darbîbu",
-		cut:            "Izgriezt iezîmçto",
-		copy:           "Kopçt iezîmçto",
-		paste:          "Ievietot iezîmçto"
-	},
-
-	buttons: {
-		"ok":           "Labi",
-		"cancel":       "Atcelt"
-	},
-
-	msg: {
-		"Path":         "Ceïð",
-		"TEXT_MODE":    "Jûs patlaban darbojaties TEKSTA REÞÎMÂ. Lai pârietu atpakaï uz GRAFISKO REÞÎMU (WYSIWIG), lietojiet [<>] pogu."
-	}
-};
+{
+  "Bold": "Trekniem burtiem",
+  "Italic": "Kursîvâ",
+  "Underline": "Pasvîtrots",
+  "Strikethrough": "Pârsvîtrots",
+  "Subscript": "Novietot zem rindas",
+  "Superscript": "Novietot virs rindas",
+  "Justify Left": "Izlîdzinât pa kreisi",
+  "Justify Center": "Izlîdzinât centrâ",
+  "Justify Right": "Izlîdzinât pa labi",
+  "Justify Full": "Izlîdzinât pa visu lapu",
+  "Ordered List": "Numurçts saraksts",
+  "Bulleted List": "Saraksts",
+  "Decrease Indent": "Samazinât atkâpi",
+  "Increase Indent": "Palielinât atkâpi",
+  "Font Color": "Burtu krâsa",
+  "Background Color": "Fona krâsa",
+  "Horizontal Rule": "Horizontâla atdalîtâjsvîtra",
+  "Insert Web Link": "Ievietot hipersaiti",
+  "Insert/Modify Image": "Ievietot attçlu",
+  "Insert Table": "Ievietot tabulu",
+  "Toggle HTML Source": "Skatît HTML kodu",
+  "Enlarge Editor": "Palielinât Rediìçtâju",
+  "About this editor": "Par ðo rediìçtâju",
+  "Help using editor": "Rediìçtâja palîgs",
+  "Current style": "Patreizçjais stils",
+  "Undoes your last action": "Atcelt pçdçjo darbîbu",
+  "Redoes your last action": "Atkârtot pçdçjo darbîbu",
+  "Cut selection": "Izgriezt iezîmçto",
+  "Copy selection": "Kopçt iezîmçto",
+  "Paste from clipboard": "Ievietot iezîmçto",
+  "OK": "Labi",
+  "Cancel": "Atcelt",
+  "Path": "Ceïð",
+  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "Jûs patlaban darbojaties TEKSTA REÞÎMÂ. Lai pârietu atpakaï uz GRAFISKO REÞÎMU (WYSIWIG), lietojiet [<>] pogu."
+}

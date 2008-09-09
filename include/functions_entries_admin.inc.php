@@ -548,17 +548,23 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             return true;
         }
 
+        if (file_exists($serendipity['serendipityPath'] . 'htmlarea/XinhaCore.js')) {
+            $xinha = true;
+        } else {
+            $xinha = false;
+        }
+
         if (!$init) {
 ?>
     <script type="text/javascript">
         _editor_url = "<?php echo $serendipity['serendipityHTTPPath'] . 'htmlarea/'; ?>";
-        _editor_lang = "<?php echo WYSIWYG_LANG; ?>";
+        _editor_lang = "<?php echo ($xinha ? $serendipity['lang'] : WYSIWYG_LANG); ?>";
+        _editor_skin = "silva";
         var editorref = '';
     </script>
-    <script type="text/javascript" src="htmlarea/htmlarea.js"></script>
-    <script type="text/javascript" src="htmlarea/lang/<?php echo WYSIWYG_LANG; ?>.js"></script>
-    <script type="text/javascript" src="htmlarea/dialog.js"></script>
-    <style  type="text/css">@import url(htmlarea/htmlarea.css);</style>
+    <?php if ($xinha) { ?><script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
+    <?php } else { ?><script type="text/javascript" src="htmlarea/htmlarea.js"></script>
+    <?php } ?>
 <?php
         }
 
@@ -606,7 +612,10 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             }
         );
         config<?php echo $jsname; ?>.toolbar.push([ "image_selector"]);
-        config<?php echo $jsname; ?>.cssFile = '<?php echo $csscode; ?>';
+        <?php if ($xinha) { ?>config<?php echo $jsname; ?>.pageStyle = '<?php echo $csscode; ?>';
+        <?php } else { ?>config<?php echo $jsname; ?>.cssFile = '<?php echo $csscode; ?>';
+        <?php } ?>
+
         config<?php echo $jsname; ?>.toolbar = [
             [ "fontname", "space",
               "fontsize", "space",

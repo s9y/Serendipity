@@ -18,12 +18,14 @@ div.htmlarea-context-menu table {
 }
 
 div.htmlarea-context-menu tr.item td.icon img {
-  width: 18px;
-  height: 18px;
+/* taken care of by xinha.makeBtnImg() */
+/* width: 18px; */
+/* height: 18px; */
 }
 
 div.htmlarea-context-menu tr.item td.icon {
   padding: 0px 3px;
+  width: 18px;
   height: 18px;
   background-color: #cdf;
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Paste Text</title>
+  <link rel="stylesheet" type="text/css" href="../../../popups/popup.css" />
+  <script type="text/javascript" src="../../../popups/popup.js"></script>
+<script type="text/javascript">
+
+function init() {
+
+  __dlg_translate("PasteText");
+  __dlg_init(null,{width:600,height:480});
+
+  var param = window.dialogArguments;
+  document.getElementById("paragraphOption").style.display = (param.showParagraphOption) ? '' : 'none';
+   document.getElementById("insertParagraphs").checked = param.newParagraphDefault;
+  document.getElementById("inputArea").focus();
+}
+
+function onCancel() {
+  __dlg_close( null );
+  return false;
+}
+
+function onOK() {
+  var ret = {};
+  ret.text = document.getElementById("inputArea").value;
+  ret.insertParagraphs = document.getElementById("insertParagraphs").checked;
+  __dlg_close( ret );
+}
+window.onload = init;
+</script>
+</head>
+
+<body class="dialog">
+<div class="title">Paste as Plain Text</div>
+<form>
+<div>
+<textarea name="inputArea" id="inputArea" cols=22 rows=5 style="width: 100%; height: 315px; margin-top: 8px; margin-bottom: 4px; font-family: monospace; font-size: 11px;"></textarea>
+<div id="buttons">
+<label for="insertParagraphs" style="float:left;display:none" id="paragraphOption">
+<input type="checkbox" id="insertParagraphs" /> Insert text in new paragraph 
+</label>
+    <button type="button" name="ok" onclick="return onOK();">OK</button>
+    <button type="button" name="cancel" onclick="return onCancel();">Cancel</button>
+</div>
+</div>
+</form>
+</body>
+</html>

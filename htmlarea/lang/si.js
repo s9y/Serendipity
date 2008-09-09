@@ -1,6 +1,6 @@
 // I18N constants
 
-// LANG: "si", ENCODING: ISO-8859-2
+// LANG: "si", ENCODING: UTF-8
 // Author: Tomaz Kregar, x_tomo_x@email.si
 
 // FOR TRANSLATORS:
@@ -12,52 +12,39 @@
 //      (if this is not possible, please include a comment
 //       that states what encoding is necessary.)
 
-HTMLArea.I18N = {
-
-	// the following should be the filename without .js extension
-	// it will be used for automatically load plugin language.
-	lang: "si",
-
-	tooltips: {
-		bold:           "Krepko",
-		italic:         "LeæeËe",
-		underline:      "PodËrtano",
-		strikethrough:  "PreËrtano",
-		subscript:      "Podpisano",
-		superscript:    "Nadpisano",
-		justifyleft:    "Poravnaj levo",
-		justifycenter:  "Na sredino",
-		justifyright:   "Poravnaj desno",
-		justifyfull:    "Porazdeli vsebino",
-		orderedlist:    "OπtevilËevanje",
-		unorderedlist:  "OznaËevanje",
-		outdent:        "Zmanjπaj zamik",
-		indent:         "PoveËaj zamik",
-		forecolor:      "Barva pisave",
-		hilitecolor:    "Barva ozadja",
-		horizontalrule: "Vodoravna Ërta",
-		createlink:     "Vstavi hiperpovezavo",
-		insertimage:    "Vstavi sliko",
-		inserttable:    "Vstavi tabelo",
-		htmlmode:       "Preklopi na HTML kodo",
-		popupeditor:    "PoveËaj urejevalnik",
-		about:          "Vizitka za urejevalnik",
-		showhelp:       "PomoË za urejevalnik",
-		textindicator:  "Trenutni slog",
-		undo:           "Razveljavi zadnjo akcijo",
-		redo:           "Uveljavi zadnjo akcijo",
-		cut:            "Izreæi",
-		copy:           "Kopiraj",
-		paste:          "Prilepi"
-	},
-
-	buttons: {
-		"ok":           "V redu",
-		"cancel":       "PrekliËi"
-	},
-
-	msg: {
-		"Path":         "Pot",
-		"TEXT_MODE":    "Si v tekstovnem naËinu.  Uporabi [<>] gumb za prklop nazaj na WYSIWYG."
-	}
-};
+{
+  "Bold": "Krepko",
+  "Italic": "Le≈æeƒçe",
+  "Underline": "Podƒçrtano",
+  "Strikethrough": "Preƒçrtano",
+  "Subscript": "Podpisano",
+  "Superscript": "Nadpisano",
+  "Justify Left": "Poravnaj levo",
+  "Justify Center": "Na sredino",
+  "Justify Right": "Poravnaj desno",
+  "Justify Full": "Porazdeli vsebino",
+  "Ordered List": "O≈°tevilƒçevanje",
+  "Bulleted List": "Oznaƒçevanje",
+  "Decrease Indent": "Zmanj≈°aj zamik",
+  "Increase Indent": "Poveƒçaj zamik",
+  "Font Color": "Barva pisave",
+  "Background Color": "Barva ozadja",
+  "Horizontal Rule": "Vodoravna ƒçrta",
+  "Insert Web Link": "Vstavi hiperpovezavo",
+  "Insert/Modify Image": "Vstavi sliko",
+  "Insert Table": "Vstavi tabelo",
+  "Toggle HTML Source": "Preklopi na HTML kodo",
+  "Enlarge Editor": "Poveƒçaj urejevalnik",
+  "About this editor": "Vizitka za urejevalnik",
+  "Help using editor": "Pomoƒç za urejevalnik",
+  "Current style": "Trenutni slog",
+  "Undoes your last action": "Razveljavi zadnjo akcijo",
+  "Redoes your last action": "Uveljavi zadnjo akcijo",
+  "Cut selection": "Izre≈æi",
+  "Copy selection": "Kopiraj",
+  "Paste from clipboard": "Prilepi",
+  "OK": "V redu",
+  "Cancel": "Prekliƒçi",
+  "Path": "Pot",
+  "You are in TEXT MODE.  Use the [<>] button to switch back to WYSIWYG.": "Si v tekstovnem naƒçinu.  Uporabi [<>] gumb za prklop nazaj na WYSIWYG."
+}

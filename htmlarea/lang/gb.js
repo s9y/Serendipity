@@ -1,36 +1,29 @@
 // I18N constants -- Chinese GB
 // by Dave Lo -- dlo@interactivetools.com
-HTMLArea.I18N = {
-
-	// the following should be the filename without .js extension
-	// it will be used for automatically load plugin language.
-	lang: "gb",
-
-	tooltips: {
-		bold:           "´ÖÌå",
-		italic:         "Ğ±Ìå",
-		underline:      "µ×Ïß",
-		strikethrough:  "É¾³ıÏß",
-		subscript:      "ÏÂ±ê",
-		superscript:    "ÉÏ±ê",
-		justifyleft:    "Î»ÖÃ¿¿×ó",
-		justifycenter:  "Î»ÖÃ¾ÓÖĞ",
-		justifyright:   "Î»ÖÃ¿¿ÓÒ",
-		justifyfull:    "Î»ÖÃ×óÓÒÆ½µÈ",
-		orderedlist:    "Ë³ĞòÇåµ¥",
-		unorderedlist:  "ÎŞĞòÇåµ¥",
-		outdent:        "¼õĞ¡ĞĞÇ°¿Õ°×",
-		indent:         "¼Ó¿íĞĞÇ°¿Õ°×",
-		forecolor:      "ÎÄ×ÖÑÕÉ«",
-		backcolor:      "±³¾°ÑÕÉ«",
-		horizontalrule: "Ë®Æ½Ïß",
-		createlink:     "²åÈëÁ¬½á",
-		insertimage:    "²åÈëÍ¼ĞÎ",
-		inserttable:    "²åÈë±í¸ñ",
-		htmlmode:       "ÇĞ»»HTMLÔ­Ê¼Âë",
-		popupeditor:    "·Å´ó",
-		about:          "¹Øì¶ HTMLArea",
-		help:           "ËµÃ÷",
-		textindicator:  "×ÖÌåÀı×Ó"
-	}
-};
+{
+  "Bold": "ç²—ä½“",
+  "Italic": "æ–œä½“",
+  "Underline": "åº•çº¿",
+  "Strikethrough": "åˆ é™¤çº¿",
+  "Subscript": "ä¸‹æ ‡",
+  "Superscript": "ä¸Šæ ‡",
+  "Justify Left": "ä½ç½®é å·¦",
+  "Justify Center": "ä½ç½®å±…ä¸­",
+  "Justify Right": "ä½ç½®é å³",
+  "Justify Full": "ä½ç½®å·¦å³å¹³ç­‰",
+  "Ordered List": "é¡ºåºæ¸…å•",
+  "Bulleted List": "æ— åºæ¸…å•",
+  "Decrease Indent": "å‡å°è¡Œå‰ç©ºç™½",
+  "Increase Indent": "åŠ å®½è¡Œå‰ç©ºç™½",
+  "Font Color": "æ–‡å­—é¢œè‰²",
+  "Background Color": "èƒŒæ™¯é¢œè‰²",
+  "Horizontal Rule": "æ°´å¹³çº¿",
+  "Insert Web Link": "æ’å…¥è¿ç»“",
+  "Insert/Modify Image": "æ’å…¥å›¾å½¢",
+  "Insert Table": "æ’å…¥è¡¨æ ¼",
+  "Toggle HTML Source": "åˆ‡æ¢HTMLåŸå§‹ç ",
+  "Enlarge Editor": "æ”¾å¤§",
+  "About this editor": "å…³æ–¼ Xinha",
+  "Help using editor": "è¯´æ˜",
+  "Current style": "å­—ä½“ä¾‹å­"
+}
