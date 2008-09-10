@@ -8,7 +8,7 @@
 
 @define('PLUGIN_COMMENTS_BLAHBLAH', 'Displays the last comments to your entries');
 @define('PLUGIN_COMMENTS_WORDWRAP', 'Wordwrap');
-@define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'How many words until a wordwrap will occur? (Default: 30)');
+@define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'How many characters until a wordwrap will occur? (Default: 30)');
 @define('PLUGIN_COMMENTS_MAXCHARS', 'Maximum chars per comment');
 @define('PLUGIN_COMMENTS_MAXCHARS_BLAHBLAH', 'How many chars will be displayed for each comment? (Default: 120)');
 @define('PLUGIN_COMMENTS_MAXENTRIES', 'Maximum number of comments');
