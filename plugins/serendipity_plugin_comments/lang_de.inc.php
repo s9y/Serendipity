@@ -2,7 +2,7 @@
 
         @define('PLUGIN_COMMENTS_BLAHBLAH', 'Zeigt die letzten Kommentare');
         @define('PLUGIN_COMMENTS_WORDWRAP', 'Zeilenumbruch');
-        @define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'Nach wievielen Wörtern soll ein Zeilenumbruch eingefügt werden? (Standard: 30)');
+        @define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'Nach wievielen Buchstaben soll ein Zeilenumbruch eingefügt werden? (Standard: 30)');
         @define('PLUGIN_COMMENTS_MAXCHARS', 'Zeichen pro Kommentar');
         @define('PLUGIN_COMMENTS_MAXCHARS_BLAHBLAH', 'Wieviele Zeichen sollen pro Kommentar gezeigt werden? (Standard: 120)');
         @define('PLUGIN_COMMENTS_MAXENTRIES', 'Anzahl an Kommentaren');
