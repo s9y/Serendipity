@@ -368,6 +368,7 @@ switch($serendipity['GET']['adminAction']) {
 
     case 'save':
         if (!$preview_only) {
+            $sim_last_modified = time();
             $entry = array(
                        'id'                 => $serendipity['POST']['id'],
                        'title'              => $serendipity['POST']['title'],
@@ -378,7 +379,17 @@ switch($serendipity['GET']['adminAction']) {
                        'isdraft'            => $serendipity['POST']['isdraft'],
                        'allow_comments'     => $serendipity['POST']['allow_comments'],
                        'moderate_comments'  => $serendipity['POST']['moderate_comments'],
-                       'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false)
+                       'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false),
+                       // New stuff for advanced templates
+                       'last_modified'      => $sim_last_modified,
+                       'comments'           => 0,
+                       'trackbacks'         => 0,
+                       'authorid'           => $serendipity['user'],
+                       'author'             => $serendipity['authorid']
+                       // Not possible to get loginname or email, so far as I can tell
+                       //'loginname'          =>
+                       //'email'              =>
+
             );
         }
 
@@ -416,6 +427,9 @@ switch($serendipity['GET']['adminAction']) {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
                     echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
+                    if (isset($sim_last_modifed)) {
+                        unset($entry['last_modified']);
+                    }
                     serendipity_updertEntry($entry);
                 } else {
                     if ($serendipity['use_iframe']) {
