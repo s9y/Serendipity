@@ -27,7 +27,7 @@ RewriteRule ^{PAT_COMMENTS} {indexFile}?url=/{PATH_COMMENTS}/$1 [L,QSA]
 RewriteRule ^{PAT_CSS} {indexFile}?url=/$1 [L,QSA]
 RewriteRule ^index\.(html?|php.+) {indexFile}?url=index.html [L,QSA]
 RewriteRule ^htmlarea/(.*) htmlarea/$1 [L,QSA]
-RewriteCond %{REQUEST_URI} !-U
+#RewriteCond %{REQUEST_URI} !-U
 RewriteRule (.*\.html?) {indexFile}?url=/$1 [L,QSA]
 
 <Files *.tpl.php>
