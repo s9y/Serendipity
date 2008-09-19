@@ -1516,7 +1516,14 @@ function serendipity_printArchives() {
         $author_get = '';
     }
 
-    $q = "SELECT e.timestamp
+    if ($serendipity['dbType'] == 'postgres' ||
+        $serendipity['dbType'] == 'pdo-postgres') {
+        $distinct = 'DISTINCT e.id,';
+    } else {
+        $distinct = '';
+    }
+
+    $q = "SELECT $distinct e.timestamp
             FROM {$serendipity['dbPrefix']}entries e
             " . (!empty($cat_sql) ? "
        LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
