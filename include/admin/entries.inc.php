@@ -384,8 +384,9 @@ switch($serendipity['GET']['adminAction']) {
                        'last_modified'      => $sim_last_modified,
                        'comments'           => 0,
                        'trackbacks'         => 0,
-                       'authorid'           => $serendipity['user'],
-                       'author'             => $serendipity['authorid']
+                       // Messing with these causes problems when entry is saved
+                       //'authorid'           => $serendipity['user'],
+                       //'author'             => $serendipity['authorid']
                        // Not possible to get loginname or email, so far as I can tell
                        //'loginname'          =>
                        //'email'              =>
