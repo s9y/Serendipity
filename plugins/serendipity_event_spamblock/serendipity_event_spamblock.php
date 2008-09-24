@@ -508,11 +508,11 @@ var $filter_defaults;
                 if (preg_match('@true@i', $reqdata)) {
                     $ret['is_spam'] = true;
                     $ret['message'] = $reqdata;
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
+                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
                 } elseif (preg_match('@false@i', $reqdata)) {
                     $ret['is_spam'] = false;
                     $ret['message'] = $reqdata;
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
+                    $this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
                 } else {
                     $ret['is_spam'] = false;
                     $ret['message'] = 'Akismet API failure';
