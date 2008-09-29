@@ -147,6 +147,30 @@ body {
     margin: 5px 0 10px;
 }
 
+/* pagination links */
+div.pagination{
+    margin-top: 1em;
+}
+
+.pagination a:link,
+.pagination a:visited{
+    border: 1px solid #EDBCF9;
+    padding: 2px 6px;
+}
+
+span#thispage {
+    background-color: #823995;
+    border: 1px solid #823995;
+    color: #ffffff;
+    padding: 2px 6px;
+}
+
+.pagination a:hover,
+.pagination a:active {
+    background-color: #EDBCF9;
+    border: 1px solid #823995;
+}
+
 .serendipitySideBarItem {
     margin: 10px;
     padding: 0;

@@ -221,6 +221,34 @@ a.homelink2:link, a.homelink2:visited,
     background-color: #ecf3fd;
 }
 
+/* pagination links */
+div.pagination{
+    margin-top: 1em;
+}
+
+.pagination a:link,
+.pagination a:visited{
+    background: #DDECFB url(img/default_sitenav_back.png) center left repeat-x;
+    border: 1px solid #CFCFCF;
+    padding: 2px 6px;
+    text-decoration: none;
+}
+
+span#thispage {
+    background: #235587;
+    border: 1px solid #235587;
+    color: #ffffff;
+    padding: 2px 6px;
+}
+
+.pagination a:hover,
+.pagination a:active {
+    background: #5F90BA;
+    border: 1px solid #235587;
+    color: #ffffff;
+    padding: 2px 6px;
+}
+
 img.serendipity_entryIcon {
     float: right;
     border: 0px;
