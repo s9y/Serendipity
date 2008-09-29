@@ -417,26 +417,42 @@
     {/if}
 
     {if $template_option.show_pagination == 'true'}
-    <div class="pagination">
-        {eval var=$footer_currentPage-3 assign="paginationStartPage"}
-    {if $footer_currentPage+3 > $footer_totalPages}
-        {eval var=$footer_totalPages-6 assign="paginationStartPage"}
+        <div class="pagination">
+            {eval var=$footer_currentPage-3 assign="paginationStartPage"}
+            {if $footer_currentPage+3 > $footer_totalPages}
+                {eval var=$footer_totalPages-6 assign="paginationStartPage"}
+            {/if}
+            {if $paginationStartPage <= 0}
+                {assign var="paginationStartPage" value="1"}
+            {/if}
+            {if $footer_prev_page}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&#9668;</a>
+            {/if}
+            {if $paginationStartPage > 1}
+                <a href="{'1'|string_format:$footer_pageLink}">1</a>
+            {/if}
+            {if $paginationStartPage > 2}
+                &hellip;
+            {/if}
+            {section name=i start=$paginationStartPage loop=$footer_totalPages+1 max=7}
+                {if $smarty.section.i.index != $footer_currentPage}
+                    <a href="{$smarty.section.i.index|string_format:$footer_pageLink}">{$smarty.section.i.index}</a>
+                {else}
+                    <span id="thispage">{$smarty.section.i.index}</span>
+                {/if}
+            {/section}
+            {if $smarty.section.i.index < $footer_totalPages}
+                &hellip;
+            {/if}
+            {if $smarty.section.i.index <= $footer_totalPages}
+                <a href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
+            {/if}
+            {if $footer_next_page}
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">&#9658;</a>
+            {/if}
+        </div>
     {/if}
-    {if $paginationStartPage <= 0}
-        {assign var="paginationStartPage" value="1"}
-    {/if}
-    {section name=i start=$paginationStartPage loop=$footer_totalPages+1 max=7}
-        {if $smarty.section.i.index != $footer_currentPage}
-        <a href="{$smarty.section.i.index|string_format:$footer_pageLink}">{$smarty.section.i.index}</a>
-        {else}
-        <span id="thispage">{$smarty.section.i.index}</span>
-        {/if}
-    {/section}
-    {if $smarty.section.i.index <= $footer_totalPages}
-        &hellip; <a href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
-    {/if}
-    </div>
-    {/if}
+
 
     {serendipity_hookPlugin hook="entries_footer"}
 </div>
