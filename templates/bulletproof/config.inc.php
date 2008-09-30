@@ -205,7 +205,8 @@ $template_config = array(
         'default'       => 'text',
         'select_values' => array('text' => PREV_NEXT_TEXT,
                                  'texticon' => PREV_NEXT_TEXT_ICON,
-                                 'icon' => PREV_NEXT_ICON)
+                                 'icon' => PREV_NEXT_ICON,
+                                 'none' => NONE)
     ),
     array(
         'var'           => 'show_pagination',
