@@ -416,7 +416,7 @@
         {/if}
     {/if}
 
-    {if $template_option.show_pagination == 'true'}
+    {if $template_option.show_pagination == 'true' && $footer_totalPages > 1}
         <div class="pagination">
             {eval var=$footer_currentPage-3 assign="paginationStartPage"}
             {if $footer_currentPage+3 > $footer_totalPages}
