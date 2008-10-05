@@ -29,7 +29,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tom Sommer');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -190,6 +190,7 @@ class serendipity_event_searchhighlight extends serendipity_event
 
         /* Clean the query */
         $query = trim($query);
+        if (empty($query)) return false;
         $query = preg_replace('/(\"|\')/i', '', $query);
 
         /* Split by search engine chars or spaces */
