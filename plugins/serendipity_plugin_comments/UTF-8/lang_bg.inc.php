@@ -14,3 +14,5 @@
     @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Колко коментара най-много да бъдат показани (по подразбиране: 15)');
     @define('PLUGIN_COMMENTS_ABOUT', '%s за%s');
     @define('PLUGIN_COMMENTS_ANONYMOUS', 'анонимен');
+
+    @define('PLUGIN_COMMENTS_ADDURL', 'Добавя URL към');
