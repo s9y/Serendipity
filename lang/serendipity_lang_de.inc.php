@@ -920,3 +920,6 @@
 @define('COMMENT_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Kommentar #%s wurde bereits akzeptiert oder gelöscht.');
 @define('TRACKBACK_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Trackback #%s wurde bereits akzeptiert oder gelöscht.');
 @define('BADTOKEN', 'Ungültiger Kommentar-Link'); 
+
+@define('CONFIRMATION_MAIL_ALWAYS', "Hallo %s,\n\nSie haben einen neuen Kommentar zu \"%s\" erstellt. Ihr Kommentar war:\n\n%s\n\nDer Betreiber dieses Blogs hat die Bestätigung per E-Mail gewünscht, daher müssen Sie folgenden Link anklicken:\n<%s>\n");
+@define('CONFIRMATION_MAIL_ONCE', "Hallo %s,\n\nSie haben einen neuen Kommentar zu \"%s\" erstellt. Ihr Kommentar war:\n\n%s\n\nDer Betreiber dieses Blogs hat die Bestätigung per E-Mail gewünscht, daher müssen Sie folgenden Link anklicken:\n<%s>\n\nNachdem Sie dies getan haben, können Sie auf dem Blog jederzeit mit ihrem Namen und E-Mail-Adresse ohne weitere Freischaltung kommentieren.");

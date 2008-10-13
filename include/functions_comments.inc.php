@@ -186,7 +186,11 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
     global $serendipity;
 
     if ($comments == NULL) {
-        $comments = serendipity_fetchComments($id);
+        if (empty($id)) {
+            $comments = array();
+        } else {
+            $comments = serendipity_fetchComments($id);
+        }
     }
 
     $commentform_data = array(
@@ -669,6 +673,168 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
 }
 
 /**
+ * Confirm a mail authentication request
+ *
+ * @access public
+ * @param   int     The ID of a comment
+ * @param   string  The confirmation hash
+ * @return  boolean
+ */
+function serendipity_confirmMail($cid, $hash) {
+    global $serendipity;
+    
+    $q = "SELECT c.entry_id, e.title, e.timestamp, e.id
+            FROM {$serendipity['dbPrefix']}comments AS c
+            JOIN {$serendipity['dbPrefix']}entries AS e
+              ON (e.id = c.entry_id)
+           WHERE c.status = 'confirm" . serendipity_db_escape_string($hash) . "'
+             AND c.id     = '" . (int)$cid . "'";
+    $confirm = serendipity_db_query($q, true);
+
+    if ($confirm['entry_id'] > 0) {
+        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}options
+                                 SET okey = 'mail_confirm'
+                               WHERE okey = 'mail_confirm" . serendipity_db_escape_string($hash) . "'");
+
+        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments
+                                 SET status = 'pending'
+                               WHERE status = 'confirm" . serendipity_db_escape_string($hash) . "'
+                                 AND id     = '" . (int)$cid . "'");
+
+        // TODO?
+        /* if (serendipity_db_bool($confirm['mail_comments'])) {
+            serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']));
+        }
+        */
+        
+        serendipity_approveComment($cid, $confirm['entry_id'], true);
+        
+        $link = serendipity_getPermalink($confirm);
+        header('Location: ' . $serendipity['baseURL'] . $link);
+        exit;
+        return $confirm['entry_id'];
+    } else {
+        exit;
+        return false;
+    }
+}
+
+/**
+ * Store the comment made by a visitor in the database
+ *
+ * @access public
+ * @param   int     The ID of an entry
+ * @param   array   An array that holds the input data from the visitor
+ * @param   string  The type of a comment (normal/trackback)
+ * @param   string  Where did a comment come from? (internal|trackback|plugin)
+ * @param   string  Additional plugin data (spamblock plugin etc.)
+ * @return  boolean Returns true if the comment could be added
+ */
+function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source = 'internal', $ca = array()) {
+    global $serendipity;
+
+    if (!empty($ca['status'])) {
+        $commentInfo['status'] = $ca['status'];
+    }
+
+    $title         = serendipity_db_escape_string(isset($commentInfo['title']) ? $commentInfo['title'] : '');
+    $comments      = $commentInfo['comment'];
+    $ip            = serendipity_db_escape_string(isset($commentInfo['ip']) ? $commentInfo['ip'] : $_SERVER['REMOTE_ADDR']);
+    $commentsFixed = serendipity_db_escape_string($commentInfo['comment']);
+    $name          = serendipity_db_escape_string($commentInfo['name']);
+    $url           = serendipity_db_escape_string($commentInfo['url']);
+    $email         = serendipity_db_escape_string($commentInfo['email']);
+    $parentid      = (isset($commentInfo['parent_id']) && is_numeric($commentInfo['parent_id'])) ? $commentInfo['parent_id'] : 0;
+    $status        = serendipity_db_escape_string(isset($commentInfo['status']) ? $commentInfo['status'] : (serendipity_db_bool($ca['moderate_comments']) ? 'pending' : 'approved'));
+    $t             = serendipity_db_escape_string(isset($commentInfo['time']) ? $commentInfo['time'] : time());
+    $referer       = substr((isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : ''), 0, 200);
+
+    $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
+             FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
+             WHERE e.id  = '". (int)$id ."'
+               AND e.isdraft = 'false'
+               AND e.authorid = a.authorid";
+    if (!serendipity_db_bool($serendipity['showFutureEntries'])) {
+        $query .= " AND e.timestamp <= " . serendipity_db_time();
+
+    }
+
+    $row = serendipity_db_query($query, true); // Get info on author/entry
+    if (!is_array($row) || empty($id)) {
+        // No associated entry found.
+        return false;
+    }
+
+    if (isset($commentInfo['subscribe'])) {
+        $subscribe = 'true';
+    } else {
+        $subscribe = 'false';
+    }
+    
+    $dbhash   = md5(uniqid(rand(), true));
+
+    if ($status == 'confirm') {
+        $dbstatus = 'confirm' . $dbhash;
+    } elseif ($status == 'confirm1') {
+        $auth = serendipity_db_query("SELECT *
+                                        FROM {$serendipity['dbPrefix']}options
+                                       WHERE okey  = 'mail_confirm'
+                                         AND name  = '" . $email . "'
+                                         AND value = '" . $name . "'", true);
+        if (!is_array($auth)) {
+            serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
+                                       VALUES ('mail_confirm{$dbhash}', '{$email}', '{$name}')");
+            $dbstatus = 'confirm' . $dbhash;
+        } else {
+            $serendipity['csuccess'] = 'true';
+            $status = $dbstatus = 'approved';
+        }
+    } else {
+        $dbstatus = $status;
+    }
+
+    $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, subscribed, status, referer)";
+    $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$subscribe', '$dbstatus', '$referer')";
+
+    serendipity_db_query($query);
+    $cid = serendipity_db_insert_id('comments', 'id');
+
+    // Send mail to the author if he chose to receive these mails, or if the comment is awaiting moderation
+    if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
+        || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
+        || ($type == 'TRACKBACK' && serendipity_db_bool($row['mail_trackbacks'])))) {
+        serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']));
+    }
+
+    // Approve with force, if moderation is disabled
+    if ($status != 'confirm' && (empty($ca['moderate_comments']) || serendipity_db_bool($ca['moderate_comments']) == false)) {
+        serendipity_approveComment($cid, $id, true);
+    }
+
+    if ($status == 'confirm') {
+        $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
+        $message = sprintf(CONFIRMATION_MAIL_ALWAYS,
+                            $name,
+                            $row['title'],
+                            $commentsFixed,
+                            $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
+
+        serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
+    } elseif ($status == 'confirm1') {
+        $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
+        $message = sprintf(CONFIRMATION_MAIL_ONCE,
+                            $name,
+                            $row['title'],
+                            $commentsFixed,
+                            $serendipity['baseURL'] . 'comment.php?c=' . $cid . '&hash=' . $dbhash);
+
+        serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
+    }
+
+    serendipity_purgeEntry($id, $t);
+}
+
+/**
  * Save a comment made by a visitor
  *
  * @access public
@@ -688,58 +854,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
     $commentInfo['source'] = $source;
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
-        $title         = serendipity_db_escape_string(isset($commentInfo['title']) ? $commentInfo['title'] : '');
-        $comments      = $commentInfo['comment'];
-        $ip            = serendipity_db_escape_string(isset($commentInfo['ip']) ? $commentInfo['ip'] : $_SERVER['REMOTE_ADDR']);
-        $commentsFixed = serendipity_db_escape_string($commentInfo['comment']);
-        $name          = serendipity_db_escape_string($commentInfo['name']);
-        $url           = serendipity_db_escape_string($commentInfo['url']);
-        $email         = serendipity_db_escape_string($commentInfo['email']);
-        $parentid      = (isset($commentInfo['parent_id']) && is_numeric($commentInfo['parent_id'])) ? $commentInfo['parent_id'] : 0;
-        $status        = serendipity_db_escape_string(isset($commentInfo['status']) ? $commentInfo['status'] : (serendipity_db_bool($ca['moderate_comments']) ? 'pending' : 'approved'));
-        $t             = serendipity_db_escape_string(isset($commentInfo['time']) ? $commentInfo['time'] : time());
-        $referer       = substr((isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : ''), 0, 200);
-
-        $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
-                 FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
-                 WHERE e.id  = '". (int)$id ."'
-                   AND e.isdraft = 'false'
-                   AND e.authorid = a.authorid";
-        if (!serendipity_db_bool($serendipity['showFutureEntries'])) {
-            $query .= " AND e.timestamp <= " . serendipity_db_time();
-
-        }
-
-        $row = serendipity_db_query($query, true); // Get info on author/entry
-        if (!is_array($row) || empty($id)) {
-            // No associated entry found.
-            return false;
-        }
-
-        if (isset($commentInfo['subscribe'])) {
-            $subscribe = 'true';
-        } else {
-            $subscribe = 'false';
-        }
-
-        $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, subscribed, status, referer)";
-        $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$subscribe', '$status', '$referer')";
-
-        serendipity_db_query($query);
-        $cid = serendipity_db_insert_id('comments', 'id');
-
-        // Send mail to the author if he chose to receive these mails, or if the comment is awaiting moderation
-        if (serendipity_db_bool($ca['moderate_comments'])
-            || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
-            || ($type == 'TRACKBACK' && serendipity_db_bool($row['mail_trackbacks']))) {
-            serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']));
-        }
-
-        // Approve with force, if moderation is disabled
-        if (empty($ca['moderate_comments']) || serendipity_db_bool($ca['moderate_comments']) == false) {
-            serendipity_approveComment($cid, $id, true);
-        }
-        serendipity_purgeEntry($id, $t);
+        serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         return true;
     } else {
         return false;
