@@ -157,10 +157,15 @@ var $filter_defaults;
                 break;
 
             case 'checkmail':
-                $propbag->add('type', 'boolean');
+                $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL);
-                $propbag->add('description', '');
-                $propbag->add('default', false);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_DESC);
+                $propbag->add('default', 'false');
+                $propbag->add('radio', array(
+                    'value' => array('false', 'true', 'verify_once', 'verify_always'),
+                    'desc'  => array(NO, YES, PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ONCE, PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ALWAYS)
+                ));
+                $propbag->add('radio_per_row', '1');
                 break;
 
             case 'required_fields':
@@ -735,6 +740,7 @@ var $filter_defaults;
                         $serendipity['csuccess'] = 'true';
                         $logfile = $this->logfile = $this->get_config('logfile', $serendipity['serendipityPath'] . 'spamblock.log');
                         $required_fields = $this->get_config('required_fields', '');
+                        $checkmail = $this->get_config('checkmail');
 
                         // Check CSRF [comments only, cannot be applied to trackbacks]
                         if ($addData['type'] == 'NORMAL' && serendipity_db_bool($this->get_config('csrf', true))) {
@@ -758,7 +764,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-
+                        
                         /*
                         if ($addData['type'] != 'NORMAL' && empty($addData['name'])) {
                             $eventData = array('allow_coments' => false);
@@ -770,6 +776,26 @@ var $filter_defaults;
                         // Check whether to allow comments from registered authors
                         if (serendipity_userLoggedIn() && $this->inGroup()) {
                             return true;
+                        }
+
+                        // Check if the user has verified himself via email already.
+                        if ($addData['type'] == 'NORMAL' && (string)$checkmail === 'verify_once') {
+                            $auth = serendipity_db_query("SELECT *
+                                                            FROM {$serendipity['dbPrefix']}options
+                                                           WHERE okey  = 'mail_confirm'
+                                                             AND name  = '" . serendipity_db_escape_string($addData['email']) . "'
+                                                             AND value = '" . serendipity_db_escape_string($addData['name']) . "'", true);
+                            if (!is_array($auth)) {
+                                $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
+                                $eventData['moderate_comments'] = true;
+                                $eventData['status']            = 'confirm1';
+                                $serendipity['csuccess']        = 'moderate';
+                                $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL;
+                                return false;
+                            } else {
+                                // User is allowed to post message, bypassing other checks as if he were logged in.
+                                return true;
+                            }
                         }
 
                         // Check if entry title is the same as comment body
@@ -1103,6 +1129,15 @@ var $filter_defaults;
                             }
                         }
 
+                        if ($addData['type'] == 'NORMAL' && (string)$checkmail === 'verify_always') {
+                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
+                            $eventData['moderate_comments'] = true;
+                            $eventData['status']            = 'confirm';
+                            $serendipity['csuccess']        = 'moderate';
+                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL;
+                            return false;
+                        }
+
                         // Check invalid email
                         if ($addData['type'] == 'NORMAL' && serendipity_db_bool($this->get_config('checkmail', false))) {
                             if (!empty($addData['email']) && strstr($addData['email'], '@') === false) {
@@ -1124,6 +1159,10 @@ var $filter_defaults;
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('hide_email', false))) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_spamblock">' . PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE . '</div>';
+                    }
+                    
+                    if ((string)$this->get_config('checkmail') === 'verify_always' || (string)$this->get_config('checkmail') === 'verify_once') {
+                        echo '<div class="serendipity_commentDirection serendipity_comment_spamblock">' . PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_INFO . '</div>';
                     }
 
                     if (serendipity_db_bool($this->get_config('csrf', true))) {

@@ -20,6 +20,10 @@ if (isset($serendipity['GET']['switch'], $serendipity['GET']['entry'])) {
     serendipity_allowCommentsToggle($serendipity['GET']['entry'], $serendipity['GET']['switch']);
 }
 
+if (!empty($_REQUEST['c']) && !empty($_REQUEST['hash'])) {
+    serendipity_confirmMail($_REQUEST['c'], $_REQUEST['hash']);
+}
+
 serendipity_rememberComment();
 
 // Trackback logging. For developers: can be switched to true!

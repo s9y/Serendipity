@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Allow spamblock plugin to use approval mechanism for comments,
+      so that commenting users first need to approve their comment
+      via email ("once" or "always" as options).
+
     * Replace htmlarea with XINHA. Thanks to abdussamad!
       (Experimental! Needs testing on shared installations. Might 
        need browser cache refresh!)

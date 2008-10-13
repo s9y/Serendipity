@@ -116,4 +116,8 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Soll die IP des Senders bei Trackbacks/Pingbacks mit der IP des Hosts übereinstimmen, auf den der Kommentar gesetzt werden soll? (EMPFOHLEN!)');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'IP Validierung : %s [%s] != Sender IP [%s]');
 
-?>
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_DESC', 'Falls deaktiviert wird keine E-Mail-Prüfung ausgeführt. Falls auf "Ja" gesetzt wird eine E-Mail-Adresse auf syntaktische Korrektheit geprüft. "Immer bestätigen" bedeutet, dass ein Kommentator seine Kommentare jedesmal per E-Mail bestätigen muss. "Einmal bestätigen" heißt, dass er beim ersten Kommentare seine Identität bestätigt, und danach immer ohne weitere Moderation kommentieren darf.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ONCE', 'Einmal bestätigen');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ALWAYS', 'Immer bestätigen');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL', 'Sie erhalten nun eine E-Mail-Benachrichtigung, mit der Sie ihren Kommentar freischalten können.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_INFO', 'Um einen Kommentar hinterlassen zu können, erhalten Sie nach dem Kommentieren eine E-Mail mit Aktivierungslink an ihre angegebene Adresse.');

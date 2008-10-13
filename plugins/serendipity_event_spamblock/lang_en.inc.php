@@ -128,4 +128,8 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_DESC', 'Should the IP of the sender match the IP of the host, a trackback/pingback is set to? (RECOMMENDED!)');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION', 'IP validation: %s [%s] != sender ip [%s]');
 
-?>
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_DESC', 'If disabled, no email checking will be performed. If set to "Yes", the commenting user must supply a valid e-mail address. If set to "Confirm always", the commenting user will need to approve his comments always via email (by clicking a mailed link). If set to "Confirm once", the user has to confirm his comment once and will then always be allowed to pass comment moderation.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ONCE', 'Confirm once');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ALWAYS', 'Confirm always');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL', 'You will now receive an email notification with which you can approve your comment.');
+@define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_INFO', 'To leave a comment you must approve it via e-mail, which will be sent to your address after submission.');
