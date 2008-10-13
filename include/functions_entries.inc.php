@@ -408,7 +408,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                      {$serendipity['fullCountQuery']}
                      {$cond['group']}
                      {$cond['having']}
-            ORDER BY {$cond['orderby']}
+                     " . (!empty($cond['orderby']) ? "ORDER BY {$cond['orderby']}" : "") . "
                      $limit";
 
     // DEBUG:

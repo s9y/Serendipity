@@ -423,9 +423,16 @@ function serendipity_issueAutologin($array) {
     $rnd = md5(uniqid(time(), true) . $_SERVER['REMOTE_ADDR']);
 
     // Delete possible current cookie. Also delete any autologin keys that smell like 3-week-old, dead fish.
+    if (stristr($serendipity['dbType'], 'sqlite')) {
+        $cast = "name";
+    } else {
+        // Adds explicits casting for mysql, postgresql and others.
+        $cast = "cast(name as integer)";
+    }
+
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options 
                                 WHERE okey = 'l_" . serendipity_db_escape_string($serendipity['COOKIE']['author_information']) . "'
-                                   OR (okey LIKE 'l_%' AND name < " . (time() - 1814400) . ")");
+                                   OR (okey LIKE 'l_%' AND $cast < " . (time() - 1814400) . ")");
 
     // Issue new autologin cookie
     serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('" . time() . "', '" . serendipity_db_escape_string($package) . "', 'l_" . $rnd . "')");
