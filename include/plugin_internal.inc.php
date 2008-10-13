@@ -548,11 +548,11 @@ class serendipity_archives_plugin extends serendipity_plugin {
                     '',
                     false,
                     false,
-                    'timestamp DESC',
+                    null,
                     '',
                     false,
                     true,
-                    'count(e.id) AS orderkey',
+                    'count(DISTINCT e.id) AS orderkey',
                     '',
                     'single',
                     false, $category_set // the joins used
