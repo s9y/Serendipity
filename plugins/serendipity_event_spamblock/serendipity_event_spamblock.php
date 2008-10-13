@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.70');
+        $propbag->add('version',       '1.71');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -305,7 +305,7 @@ var $filter_defaults;
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_LOGTYPE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DESC);
-                $propbag->add('default', 'db');
+                $propbag->add('default', 'none');
                 $propbag->add('radio',         array(
                     'value' => array('file', 'db', 'none'),
                     'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_FILE, PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DB, PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_NONE)
