@@ -402,8 +402,8 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
 
         case 'multilist':
             echo '<select name="'. $name .'[]" multiple="multiple" size="5">';
+
             foreach ((array)$default as $k => $v) {
-                print_r($v);
                 $selected = false;
                 foreach((array)$value AS $vk => $vv) {
                     if ($vv['confkey'] == $v['confkey']) {
@@ -421,9 +421,12 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
 
         case 'list':
             echo '<select name="'. $name .'">';
-
+            $cval = (string)$value;
             foreach ((array)$default as $k => $v) {
-                $selected = ($k == $value);
+                $selected = ((string)$k == (string)$value);
+                if (empty($cval) && ((string)$k === 'false' || (string)$k === null)) {
+                    $selected = true;
+                }
 
                 printf('<option value="%s"%s>%s</option>'. "\n",
                       $k,
