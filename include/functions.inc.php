@@ -533,6 +533,11 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         }
     }
 
+    if ($serendipity['dumpMail']) {
+        $fp = fopen($serendipity['serendipityPath'] . '/templates_c/mail.log', 'a');
+        fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($maildata, true));
+        fclose($fp);
+    }
     return mail($maildata['to'], $maildata['subject'], $maildata['message'], implode("\n", $maildata['headers']));
 }
 

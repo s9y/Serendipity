@@ -386,6 +386,10 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
     switch ($type) {
         case 'bool':
             $value = serendipity_get_bool($value);
+            if ($value === null) {
+                $value = $default;
+            }
+            
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
             echo (($value == true) ? 'checked="checked"' : ''). ' /><label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>&nbsp;';
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';

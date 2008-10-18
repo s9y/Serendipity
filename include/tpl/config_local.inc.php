@@ -349,6 +349,13 @@
                                           'default'     => array('true' => YES, 'false' => NO, 'fulltext' => FULL_COMMENT_TEXT),
                                           'permission'  => 'siteConfiguration'),
 
+                                    array('var'         => 'allowSubscriptionsOptIn',
+                                          'title'       => INSTALL_SUBSCRIBE_OPTIN,
+                                          'description' => INSTALL_SUBSCRIBE_OPTIN_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => true,
+                                          'permission'  => 'siteConfiguration'),
+
                                     array('var'         => 'useCommentTokens',
                                           'title'       => COMMENT_TOKENS,
                                           'description' => COMMENT_TOKENS_DESC,

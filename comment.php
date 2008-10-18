@@ -24,6 +24,10 @@ if (!empty($_REQUEST['c']) && !empty($_REQUEST['hash'])) {
     serendipity_confirmMail($_REQUEST['c'], $_REQUEST['hash']);
 }
 
+if (!empty($_REQUEST['optin'])) {
+    serendipity_commentSubscriptionConfirm($_REQUEST['optin']);
+}
+
 serendipity_rememberComment();
 
 // Trackback logging. For developers: can be switched to true!

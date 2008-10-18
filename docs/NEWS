@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Add new global config option to support OptIn confirmation for
+      comment subscriptions (garvinhicking)
+
     * Allow spamblock plugin to use approval mechanism for comments,
       so that commenting users first need to approve their comment
       via email ("once" or "always" as options).
