@@ -710,7 +710,7 @@ function serendipity_confirmMail($cid, $hash) {
         serendipity_approveComment($cid, $confirm['entry_id'], true);
         
         $link = serendipity_archiveURL($confirm['id'], $confirm['title'], 'baseURL');
-        header('Location: ' . $serendipity['baseURL'] . $link);
+        header('Location: ' . $link);
         exit;
         return $confirm['entry_id'];
     } else {
@@ -898,7 +898,7 @@ function serendipity_commentSubscriptionConfirm($hash) {
                WHERE c.id = " . $cid;
         $confirm = serendipity_db_query($q, true);
         $link = serendipity_archiveURL($confirm['id'], $confirm['title'], 'baseURL');
-        header('Location: ' . $serendipity['baseURL'] . $link);
+        header('Location: ' . $link);
         exit;
     }
 }
