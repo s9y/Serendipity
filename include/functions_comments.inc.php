@@ -756,7 +756,6 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
                AND e.authorid = a.authorid";
     if (!serendipity_db_bool($serendipity['showFutureEntries'])) {
         $query .= " AND e.timestamp <= " . serendipity_db_time();
-
     }
 
     $row = serendipity_db_query($query, true); // Get info on author/entry
@@ -765,8 +764,14 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         return false;
     }
 
+    $send_optin = false;
     if (isset($commentInfo['subscribe'])) {
-        $subscribe = 'true';
+        if (!isset($serendipity['allowSubscriptionsOptIn']) || $serendipity['allowSubscriptionsOptIn']) {
+            $subscribe = 'false';
+            $send_optin = true;
+        } else {
+            $subscribe = 'true';
+        }
     } else {
         $subscribe = 'false';
     }
@@ -831,7 +836,71 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
     }
 
+    if ($send_optin) {
+        $dupe_check = serendipity_db_query("SELECT count(entry_id) AS counter
+                                              FROM {$serendipity['dbPrefix']}comments
+                                             WHERE entry_id = " . (int)$id . "
+                                               AND email = '$email'
+                                               AND subscribed = 'true'", true);
+        if (!is_array($dupe_check) || $dupe_check['counter'] < 1) {
+            serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
+                                       VALUES ('commentsub_{$dbhash}', '" . time() . "', '{$cid}')");
+
+            $subject = sprintf(NEW_COMMENT_TO_SUBSCRIBED_ENTRY, $row['title']);
+            $message = sprintf(CONFIRMATION_MAIL_SUBSCRIPTION,
+                                $name,
+                                $row['title'],
+                                serendipity_archiveURL($id, $row['title'], 'baseURL'),
+                                $serendipity['baseURL'] . 'comment.php?optin=' . $dbhash);
+
+            serendipity_sendMail($email, $subject, $message, $serendipity['blogMail']);
+        }
+    }
+
     serendipity_purgeEntry($id, $t);
+}
+
+/**
+ * Confirm a comment subscription
+ *
+ * @access public
+ * @param   string  The confirmation hash
+ * @return  boolean
+ */
+function serendipity_commentSubscriptionConfirm($hash) {
+    global $serendipity;
+
+    // Delete possible current cookie. Also delete any confirmation hashs that smell like 3-week-old, dead fish.
+    if (stristr($serendipity['dbType'], 'sqlite')) {
+        $cast = "name";
+    } else {
+        // Adds explicits casting for mysql, postgresql and others.
+        $cast = "cast(name as integer)";
+    }
+
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                WHERE okey LIKE 'commentsub_%' AND $cast < " . (time() - 1814400) . ")");
+
+
+    $hashinfo = serendipity_db_query("SELECT value
+                                        FROM {$serendipity['dbPrefix']}options
+                                       WHERE okey = 'commentsub_" . serendipity_db_escape_string($hash) . "'", true);
+    if (is_array($hashinfo) && $hashinfo['value'] > 0) {
+        $cid = (int)$hashinfo['value'];
+        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}comments
+                                 SET subscribed = 'true'
+                               WHERE id = $cid");
+
+        $q = "SELECT c.entry_id, e.title, e.timestamp, e.id
+                FROM {$serendipity['dbPrefix']}comments AS c
+                JOIN {$serendipity['dbPrefix']}entries AS e
+                  ON (e.id = c.entry_id)
+               WHERE c.id = " . $cid;
+        $confirm = serendipity_db_query($q, true);
+        $link = serendipity_getPermalink($confirm);
+        header('Location: ' . $serendipity['baseURL'] . $link);
+        exit;
+    }
 }
 
 /**
@@ -855,6 +924,8 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
         serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
+        $commentInfo['comment_id'] = $id;
+        serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
     } else {
         return false;
