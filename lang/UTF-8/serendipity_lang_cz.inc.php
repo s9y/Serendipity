@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cz.inc.php 2282 2008-06-17 12:06:45Z garvinhicking $
+<?php # $Id: serendipity_lang_cz.inc.php 2294 2008-07-10 10:32:08Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -932,3 +932,6 @@ $i18n_filename_to = array (
 @define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
 @define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
 @define('BADTOKEN', 'Invalid Moderation Link'); 
+
+@define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n");
+@define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled one-time mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n\nAfter you have done that, you can always post comments on that blog with your username and e-mail address without receiving such notifications.");
