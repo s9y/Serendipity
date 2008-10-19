@@ -708,13 +708,8 @@ function serendipity_confirmMail($cid, $hash) {
         */
         
         serendipity_approveComment($cid, $confirm['entry_id'], true);
-        
-        $link = serendipity_archiveURL($confirm['id'], $confirm['title'], 'baseURL');
-        header('Location: ' . $link);
-        exit;
-        return $confirm['entry_id'];
+        return $confirm;
     } else {
-        exit;
         return false;
     }
 }
@@ -881,7 +876,6 @@ function serendipity_commentSubscriptionConfirm($hash) {
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                                 WHERE okey LIKE 'commentsub_%' AND $cast < " . (time() - 1814400) . ")");
 
-
     $hashinfo = serendipity_db_query("SELECT value
                                         FROM {$serendipity['dbPrefix']}options
                                        WHERE okey = 'commentsub_" . serendipity_db_escape_string($hash) . "'", true);
@@ -891,15 +885,10 @@ function serendipity_commentSubscriptionConfirm($hash) {
                                  SET subscribed = 'true'
                                WHERE id = $cid");
 
-        $q = "SELECT c.entry_id, e.title, e.timestamp, e.id
-                FROM {$serendipity['dbPrefix']}comments AS c
-                JOIN {$serendipity['dbPrefix']}entries AS e
-                  ON (e.id = c.entry_id)
-               WHERE c.id = " . $cid;
-        $confirm = serendipity_db_query($q, true);
-        $link = serendipity_archiveURL($confirm['id'], $confirm['title'], 'baseURL');
-        header('Location: ' . $link);
-        exit;
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                    WHERE okey = 'commentsub_" . serendipity_db_escape_string($hash) . "'");
+
+        return $cid;
     }
 }
 

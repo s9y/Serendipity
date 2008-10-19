@@ -116,6 +116,16 @@ if ($serendipity['smarty_raw_mode']) {
             serendipity_printArchives();
             break;
 
+
+        case 'custom':
+            if ($serendipity['smarty_custom_vars']) {
+                $serendipity['smarty']->assign($serendipity['smarty_custom_vars']);
+            }
+            break;
+
+        case 'empty':
+            break;
+
         // Welcome screen or whatever
         default:
             serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
