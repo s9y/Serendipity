@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2351 2008-10-13 11:02:12Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2354 2008-10-18 11:17:40Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -926,3 +926,7 @@
 @define('INSTALL_SUBSCRIBE_OPTIN', 'Benutze Double-Opt In für Abonnements von Kommentarbenachrichtigungen?');
 @define('INSTALL_SUBSCRIBE_OPTIN_DESC', 'Falls aktiviert, wird einem Kommentator, der E-Mail-Benachrichtigung zu neuen Kommentaren abonnieren möchte, eine E-Mail geschickt. Diese enthält einen Bestätigungslink nach dem z.B. für Deutsche Gesetze erforderlichen Opt-In-Schema.');
 @define('CONFIRMATION_MAIL_SUBSCRIPTION', "Hallo %s,\n\nSie haben bei ihrem Blog-Kommentar zu dem Eintrag \"%s\" auf <%s> das Abonnement neuer Kommentare gewünscht. Um dies zu bestätigen (\"Double Opt In\") klicken Sie bitte diesen Link:\n<%s>\n");
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Die Bestätigung des Abonnements der Kommentarbenachrichtigung wurde erfolgreich verarbeitet.');
+@define('NOTIFICATION_CONFIRM_MAIL', 'Die Bestätigung ihres Kommentars wurde erfolgreich verarbeitet.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Ihre Bestätigung des Abonnements einer Kommentarbenachrichtigung konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie eine neue E-Mail anfordern.');
+@define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Ihre Bestätigung des Kommentars konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie ihr Kommentar erneut senden.');

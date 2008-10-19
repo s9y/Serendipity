@@ -21,11 +21,27 @@ if (isset($serendipity['GET']['switch'], $serendipity['GET']['entry'])) {
 }
 
 if (!empty($_REQUEST['c']) && !empty($_REQUEST['hash'])) {
-    serendipity_confirmMail($_REQUEST['c'], $_REQUEST['hash']);
+    $res = serendipity_confirmMail($_REQUEST['c'], $_REQUEST['hash']);
+    $serendipity['view'] = 'notification';
+    $serendipity['GET']['action'] = 'custom';
+    $serendipity['smarty_custom_vars'] = array(
+        'content_message'       => ($res ? NOTIFICATION_CONFIRM_MAIL : NOTIFICATION_CONFIRM_MAIL_FAIL),
+    );
+    include S9Y_INCLUDE_PATH . 'include/genpage.inc.php';
+    $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
+    exit;
 }
 
 if (!empty($_REQUEST['optin'])) {
-    serendipity_commentSubscriptionConfirm($_REQUEST['optin']);
+    $res = serendipity_commentSubscriptionConfirm($_REQUEST['optin']);
+    $serendipity['view'] = 'notification';
+    $serendipity['GET']['action'] = 'custom';
+    $serendipity['smarty_custom_vars'] = array(
+        'content_message'       => ($res ? NOTIFICATION_CONFIRM_SUBMAIL : NOTIFICATION_CONFIRM_SUBMAIL_FAIL),
+    );
+    include S9Y_INCLUDE_PATH . 'include/genpage.inc.php';
+    $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
+    exit;
 }
 
 serendipity_rememberComment();
@@ -217,4 +233,3 @@ function log_pingback($message){
     }
 }
 /* vim: set sts=4 ts=4 expandtab : */
-?>

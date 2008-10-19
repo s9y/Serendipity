@@ -1,5 +1,7 @@
 <?php
-die('For developers only. Remove this line in PHP file to use this.');
+if (!file_exists('recode.active')) {
+  die('For developers only. Remove this line in PHP file to use this.');
+}
 
 $dh = @opendir('.');
 if (!$dh) {
