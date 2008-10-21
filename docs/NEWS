@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Recount trackbacks/comments when a new comment is made, instead
+      of carrying over an incrementing/decreminting counter for
+      entries, that might get off. (garvinhicking)
+
     * Add new global config option to support OptIn confirmation for
       comment subscriptions (garvinhicking)
 
