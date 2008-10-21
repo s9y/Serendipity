@@ -652,11 +652,25 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
         $lm = (int)$rs['entry_last_modified'];
     }
 
-    if ($moderate) {
-        $query = "UPDATE {$serendipity['dbPrefix']}entries SET $field=$field-1, last_modified=". $lm ." WHERE id='". (int)$entry_id ."'";
-    } else {
-        $query = "UPDATE {$serendipity['dbPrefix']}entries SET $field=$field+1, last_modified=". $lm ." WHERE id='". (int)$entry_id ."'";
-    }
+    $counter_comments = serendipity_db_query("SELECT count(id) AS counter 
+                                                FROM {$serendipity['dbPrefix']}comments 
+                                               WHERE status = 'approved' 
+                                                 AND type   = 'NORMAL'
+                                                 AND entry_id = " . (int)$entry_id . "
+                                            GROUP BY entry_id", true);
+    
+    $counter_tb = serendipity_db_query("SELECT count(id) AS counter 
+                                          FROM {$serendipity['dbPrefix']}comments 
+                                         WHERE status = 'approved' 
+                                           AND type   = 'TRACKBACK'
+                                           AND entry_id = " . (int)$entry_id . "
+                                      GROUP BY entry_id", true);
+
+    $query = "UPDATE {$serendipity['dbPrefix']}entries 
+                 SET comments      = " . (int)$counter_comments['counter'] . ",
+                     trackbacks    = " . (int)$counter_comments['trackbacks'] . ", 
+                     last_modified = ". $lm ." 
+               WHERE id = ". (int)$entry_id;
     serendipity_db_query($query);
 
     if (!$moderate) {
