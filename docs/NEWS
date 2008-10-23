@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Prefix possibly missing http:// of commenting authors URLs
+      in recent comments sidebar plugin and admin interface.
+      (garvinhicking)
+
     * Recount trackbacks/comments when a new comment is made, instead
       of carrying over an incrementing/decreminting counter for
       entries, that might get off. (garvinhicking)

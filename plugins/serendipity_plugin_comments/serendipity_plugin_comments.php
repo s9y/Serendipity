@@ -22,7 +22,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
-        $propbag->add('version',       '1.12');
+        $propbag->add('version',       '1.13');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -181,6 +181,10 @@ class serendipity_plugin_comments extends serendipity_plugin
                 $isTrackBack = $row['comment_type'] == 'TRACKBACK' || $row['comment_type'] == 'PINGBACK';
                 
                 if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
+                    if (substr($row['comment_url'], 0, 7) != 'http://' && 
+                        substr($row['comment_url'], 0, 8) != 'https://') {
+                        $row['comment_url'] = 'http://' . $comment['url']; 
+                    }    
                     $user = '<a class="highlight" href="' . htmlspecialchars(strip_tags($row['comment_url'])) . '" title="' . htmlspecialchars(strip_tags($row['comment_title'])) . '">' . htmlspecialchars(strip_tags($row['user'])) . '</a>';
                 } else {
                     $user = htmlspecialchars(strip_tags($row['user']));

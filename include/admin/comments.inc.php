@@ -167,6 +167,11 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
         }
     }
 
+    if (!empty($data['url']) && substr($data['url'], 0, 7) != 'http://' &&
+         substr($data['url'], 0, 8) != 'https://') {
+         $data['url'] = 'http://' . $data['url'];
+    }
+                                
     serendipity_displayCommentForm(
       $serendipity['GET']['entry_id'],
       $target_url,
@@ -415,6 +420,12 @@ foreach ($sql as $rs) {
         $class .= ' serendipity_admin_comment_pending'; 
     }
     $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote serendipity_admin_comment_pending_header' : '');
+
+    if (!empty($comment['url']) && substr($comment['url'], 0, 7) != 'http://' &&
+         substr($comment['url'], 0, 8) != 'https://') {
+         $comment['url'] = 'http://' . $comment['url'];
+    }
+                                
 ?>
 <tr>
     <td class="<?php echo $header_class; ?>">

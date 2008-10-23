@@ -445,7 +445,6 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         $matches[1] = serendipity_searchPermalink($serendipity['permalinkCategoryStructure'], implode('/', $_args), $matches[1], 'category');
         $serendipity['GET']['category'] = $matches[1];
     }
-
     $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
 
     if (!is_array($cInfo)) {
