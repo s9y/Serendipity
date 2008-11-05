@@ -141,7 +141,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('COMMENTS_ENABLE', 'Разрешаване на коментарите към тази статия');
 @define('COMMENTS_CLOSED', 'Авторът е забранил коментарите към тази статия');
 @define('EMPTY_COMMENT', 'Коментарът Ви не е празен, моля, %sвърнете се%s и пробвайте отново');
-@define('ENTRIES_FOR', 'Статии на %s');
+@define('ENTRIES_FOR', 'Статии, публикувани в %s');
 @define('DOCUMENT_NOT_FOUND', 'Документът %s не е намерен.');
 @define('USERNAME', 'Потребител');
 @define('PASSWORD', 'Парола');
@@ -906,20 +906,20 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SET_TO_MODERATED', 'Модериране');
 @define('COMMENT_MODERATED', 'Коментар #%s успешно е установен като модериран');
 @define('CENTER', 'център');
-@define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
+@define('FULL_COMMENT_TEXT', 'Да, с пълен текст на коментара');
 
-@define('COMMENT_TOKENS', 'Use Tokens for Comment Moderation?');
-@define('COMMENT_TOKENS_DESC', 'If tokens are used, comments can be approved and deleted by clicking the email links without requiring login access to the blog. Note that this is a convenience feature, and if your mails get hijacked, those people can approve/delete the referenced comment without further authentication.');
-@define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
-@define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
-@define('BADTOKEN', 'Invalid Moderation Link'); 
+@define('COMMENT_TOKENS', 'Използване на Tokens за модериране на коментари?');
+@define('COMMENT_TOKENS_DESC', 'Ако се използват tokens, коментарите могат да се одобряват или изтриват чрез избиране на връзки в e-mail, без изискване за влизане в блога и име и парола. Въпреки, че това е удобно, ако вашият email бъбде прехванат, коментарите могат да бъдат одобрявани или изтривани без допълнително удостовервяване.');
+@define('COMMENT_NOTOKENMATCH', 'Връзката е с изтекъл срок или коментар #%s вече е бил одобрен или изтрит');
+@define('TRACKBACK_NOTOKENMATCH', 'Връзката е с изтекъл срок или проследяването #%s вече е било одобрено или изтрито');
+@define('BADTOKEN', 'Невалидна връзка за модерация'); 
 
-@define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n");
-@define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled one-time mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n\nAfter you have done that, you can always post comments on that blog with your username and e-mail address without receiving such notifications.");
-@define('INSTALL_SUBSCRIBE_OPTIN', 'Use Double-Opt In for comment subscriptions?');
-@define('INSTALL_SUBSCRIBE_OPTIN_DESC', 'If enabled, when a comment is made where the person wants to be notified via e-mail about new comments to the same entry, he must confirm his subscription to the entry. This Double-Opt In is required by german law, for example.');
-@define('CONFIRMATION_MAIL_SUBSCRIPTION', "Hello %s,\n\nYou have requested to be notified for comments to \"%s\" (<%s>). To approve this subscription (\"Double Opt In\") please click this link:\n<%s>\n.");
-@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Your confirmation of your comment subscription has been successfully entered.');
-@define('NOTIFICATION_CONFIRM_MAIL', 'Your confirmation of the comment has been successfully entered.');
-@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Your comment subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
-@define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Your comment confirmation could not be confirmed.  Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must send your comment again.');
+@define('CONFIRMATION_MAIL_ALWAYS', "Здравейте %s,\n\nВие сте изпратил(а) нов коментар  на \"%s\". Вашият коментар е:\n\n%s\n\nСобственикът на блога е включил e-mail верификация, така че Вие трябва да изберете следващата връзка, за да удостоверите Вашия коментар:\n<%s>\n");
+@define('CONFIRMATION_MAIL_ONCE', "Здравейте %s,\n\nВие сте изпратил(а) нов коментар  на \"%s\". Вашият коментар е:\n\n%s\n\nСобственикът на блога е включил еднократна e-mail верификация, така че Вие трябва да изберете следващата връзка, за да удостоверите Вашия коментар:\n<%s>\n\nСлед като направите това, Вие можете да изпращате коментари в този блог с Вашето име и e-mail адрес без да получавате известия като това.");
+@define('INSTALL_SUBSCRIBE_OPTIN', 'Използване на двойно потвърждение за абониране за коментари?');
+@define('INSTALL_SUBSCRIBE_OPTIN_DESC', 'Ако е позволено, когато някой поиска да получава съобщения за нови коментари към статия, към която изпраща коментар, той трябва да потвърди абонамента си за статията. Това двойно потвърждение се изисква в някои страни (например Германия).');
+@define('CONFIRMATION_MAIL_SUBSCRIPTION', "Здравейте %s,\n\nВие сте заявили да получавате известия за нови коментари към \"%s\" (<%s>). За да потвърдите абонамента (\"Double Opt In\") моля изберете тази връзка:\n<%s>\n.");
+@define('NOTIFICATION_CONFIRM_SUBMAIL', 'Вашето потвърждение за абонамент за известия за коментари беше прието успешно.');
+@define('NOTIFICATION_CONFIRM_MAIL', 'Вашето потвърждение на коментара беше прието успешно.');
+@define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Вашият абонамент за известия за коментари не е потвърден. Моля проверете връзката, която сте избрали. Ако връзката е била изпратена преди повече от три седмици, Вие трябва да поискате нов email за потвърждение.');
+@define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Вашето потвърждение на коментара не е потвърдено.  Моля проверете връзката, която сте избрали. Ако връзката е била изпратена преди повече от три седмици, Вие трябва да изпратите Вашият коментар отново.');
