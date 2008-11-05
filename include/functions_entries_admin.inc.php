@@ -608,7 +608,8 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         config<?php echo $jsname; ?>.registerButton('image_selector', '<?PHP echo MANAGE_IMAGES; ?>', '<?php echo $serendipity['serendipityHTTPPath']; ?>htmlarea/images/ed_s9yimage.gif', false,
             function(editor, id) {
                 window.open('<?php echo $serendipity['serendipityHTTPPath']; ?>serendipity_admin_image_selector.php?serendipity[textarea]=<?php echo $jsname . ($spawnMulti ? "' + editor._textArea.id + '" : ''); ?>', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-                editorref = editor<?php echo $jsname; ?>;
+                // editorref = editor<?php echo $jsname; ?>;
+                editorref = editor;
             }
         );
         config<?php echo $jsname; ?>.toolbar.push([ "image_selector"]);
