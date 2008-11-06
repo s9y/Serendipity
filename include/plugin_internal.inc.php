@@ -1063,7 +1063,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 			<a href="<?php echo $url; ?>"><?php echo $mytitle; ?></a>
             <?php } ?>
 	</li>
-?>
+<?php
         }
         echo '</ul>';
     }
