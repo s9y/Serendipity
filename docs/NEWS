@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Also recreate custom permalinks without using URL rewriting
+      (garvinhicking)
+
     * Fix WYSIWYG media insertion when being called on pages with
       multiple HTML portions/nuggets, and also the staticpage plugin
       (garvinhicking)

@@ -43,7 +43,6 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
 
             // Compare all old permalink section values against new one. A change in any of those
             // will force to update the .htaccess for rewrite rules.
-            if ($serendipity['rewrite'] != 'none') {
                 $permconf = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
                 if (is_array($permconf) && is_array($permconf['permalinks']['items'])) {
                     foreach($permconf['permalinks']['items'] AS $permitem) {
@@ -51,7 +50,7 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
                         $permalinkNew[] = $serendipity[$permitem['var']];
                     }
                 }
-            }
+
 
             if (serendipity_checkPermission('siteConfiguration') && serialize($permalinkOld) != serialize($permalinkNew)) {
                 printf(ATTEMPT_WRITE_FILE, $serendipity['serendipityPath'] . '.htaccess');
