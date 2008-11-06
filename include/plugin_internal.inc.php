@@ -1063,9 +1063,9 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 			<a href="<?php echo $url; ?>"><?php echo $mytitle; ?></a>
             <?php } ?>
 	</li>
-     </ul>
-<?php
-		}
+?>
+        }
+        echo '</ul>';
     }
 
     function generate_rss_fields(&$title, &$description, &$entries) {
