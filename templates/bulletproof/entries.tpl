@@ -95,6 +95,8 @@
                 {/if}
 
                 {if $template_option.entryfooterpos == 'splitfoot'}
+                  {if $template_option.footerauthor == 'false' and $template_option.footercategories == 'false' and $template_option.footertimestamp == 'false'}
+                  {else}
                     <div class='serendipity_entryFooter byline'>
                         {if $template_option.footerauthor == 'true'}
                             {$CONST.POSTED_BY} <address class="author"><a href="{$entry.link_author}">{$entry.author}</a></address>
@@ -115,6 +117,7 @@
                             <a href="{$entry.link}">{if $dategroup.is_sticky}{$entry.timestamp|@formatTime:$template_option.date_format} {/if}{$entry.timestamp|@formatTime:'%H:%M'}</a>
                         {/if}
                     </div>
+                  {/if}
                 {/if}
             {/if}
 
