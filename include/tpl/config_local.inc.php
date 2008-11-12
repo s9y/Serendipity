@@ -35,7 +35,7 @@
                                     array('var'         => 'dbPass',
                                           'title'       => INSTALL_DBPASS,
                                           'description' => INSTALL_DBPASS_DESC,
-                                          'type'        => 'protected',
+                                          'type'        => 'fullprotected',
                                           'default'     => '',
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('nosave', 'hideValue', 'simpleInstall')),
