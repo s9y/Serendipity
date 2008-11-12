@@ -396,6 +396,10 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             echo (($value == true) ? '' : 'checked="checked"'). ' /><label for="radio_cfg_' . $name . '_no"> ' . NO . '</label>';
             break;
 
+        case 'fullprotected':
+            echo '<input autocomplete="off" class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            break;
+
         case 'protected':
             echo '<input class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;

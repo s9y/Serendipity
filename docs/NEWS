@@ -3,6 +3,13 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added experimental Serendipity importer (for merging installations,
+      fore example). (Garvinhicking)
+
+    * Use "autocomplete=off" for the default database password in
+      the installer, to workaround stupid Firefox password
+      autocompletion inserting the author password at this place.
+
     * Also recreate custom permalinks without using URL rewriting
       (garvinhicking)
 
