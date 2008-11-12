@@ -16,10 +16,13 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
     var $counter     = 0;
 
     function getImportNotes() {
+        // TODO: I18n!
         return 'This importer is still work in progress. It can currently import most things of the database. HOWEVER it can NOT import previously installed plugins (including their configuration) or any database tables of installed plugins. Those must be migrated manually. Also, you must use FTP to transfer your uploaded images to the new location.<br />
         Please do a test-run first if you are SQL-savvy. If you encounter any errors, save the message output you get - it will definitely help debugging!<br />
         <br/>
-        This is <strong>NOT</strong> an importer meant for upgrading Serendipity. This importer assumes that both Serendipity installations use the same version.';
+        This is <strong>NOT</strong> an importer meant for upgrading Serendipity. This importer assumes that both Serendipity installations use the same version.<br />
+        It is strongly advised that you test this importer in an isolated environment first, do not use it on a production blog unless you made sure it works in a cloned installation. Always make a backup of both the source and the target blog.<br /><br />
+        After these precautions: The importer code generally works very well for me and my purposes. Your mileage may vary.';
     }
 
     function Serendipity_Import_Serendipity ($data) {
