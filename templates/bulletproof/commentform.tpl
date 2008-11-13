@@ -22,6 +22,7 @@ coco =
 {/if}
 <!-- cocomment end -->
 <div class="serendipityCommentForm">
+<div id="serendipity_replyform_0"></div>
 <a id="serendipity_CommentForm"></a>
 <!-- The actual form -->
 <form id="serendipity_comment_CommentForm" action="{$commentform_action}#feedback" method="post">
