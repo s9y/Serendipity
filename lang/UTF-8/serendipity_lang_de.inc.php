@@ -319,10 +319,10 @@
 @define('TOP_LEVEL', 'Ursprung');
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s Feed');
 @define('PERMISSIONS', 'Rechte');
-@define('INTEGRITY', 'Verify Installation Integrity');
-@define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
-@define('CHECKSUMS_PASS', 'All required files verified.');
-@define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
+@define('INTEGRITY', 'Installation prüfen');
+@define('CHECKSUMS_NOT_FOUND', 'Konnte Prüfsummen nicht vergleichen! (Keine checksums.inc.php im Hauptverzeichnis)');
+@define('CHECKSUMS_PASS', 'Alle benötigten Dateien wurden erfolgreich überprüft.');
+@define('CHECKSUM_FAILED', '%s ist defekt oder verändert: Prüfung fehlgeschlagen');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-Button');
 @define('XML_IMAGE_TO_DISPLAY_DESC','Bilddatei, um ein Icon für XML-Feeds darzustellen. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
 @define('SETTINGS_SAVED_AT', 'Die neuen Einstellungen wurden um %s gespeichert.');
@@ -410,14 +410,14 @@
 @define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails werden nach dem Schema originalname.Suffix.erweiterung benannt.');
 @define('INSTALL_THUMBWIDTH', 'Thumbnailgröße');
 @define('INSTALL_THUMBWIDTH_DESC', 'Maximale Breite/Höhe der automatisch erzeugten Thumbnails');
-@define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
-@define('INSTALL_THUMBDIM_LARGEST', 'Largest');
-@define('INSTALL_THUMBDIM_WIDTH', 'Width');
-@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
-@define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
-    INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
-    INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
-    '" only limit the chosen dimension, so the other could be larger than the max size.');
+@define('INSTALL_THUMBDIM', 'Gültigkeit der Thumbnailgröße');
+@define('INSTALL_THUMBDIM_LARGEST', 'Größte Seite');
+@define('INSTALL_THUMBDIM_WIDTH', 'Breite');
+@define('INSTALL_THUMBDIM_HEIGHT', 'Höhe');
+@define('INSTALL_THUMBDIM_DESC', 'Legt fest, wie die Größe der Thumbnails angepasst werden soll. Der Standard "' . 
+    INSTALL_THUMBDIM_LARGEST .  '" nutzt die größte Seite als Beschränkung, so dass weder Breite noch Höhe die festgelegte Zahl überschreiten dürfen.
+"' . INSTALL_THUMBDIM_WIDTH . '" und "' .  INSTALL_THUMBDIM_HEIGHT . 
+    '" legen lediglich die Höhe bzw. Breite als größte Seite fest, so dass die jeweils andere Angabe auch größer als die festgelegte Zahl sein darf.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Persönliche Einstellungen');
@@ -907,8 +907,8 @@
 @define('PINGBACK_SENT', 'Pingback erfolgreich');
 @define('PINGBACK_FAILED', 'Pingback fehlgeschlagen: %s');
 @define('PINGBACK_NOT_FOUND', 'Keine pingback-URI gefunden.');
-@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
-@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
+@define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Versteckt den Archiv-Link, wenn es keine Einträge für einen Zeitraum gab (benötigt das Zählen der Einträge)');
+@define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS Import, benötigt PHP5 und kann viel RAM/Speicher benötigen.');
 
 @define('SET_TO_MODERATED', 'Moderieren');
 @define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich moderiert.');
