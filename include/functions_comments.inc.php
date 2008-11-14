@@ -630,10 +630,6 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                     ". (($force === true) ? "" : "AND status = 'pending'");
     $rs  = serendipity_db_query($sql, true);
 
-    /* It's already approved, don't spam people */
-    if ( $rs === false ) {
-        return false;
-    }
 
     if ($moderate) {
         $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
@@ -668,10 +664,15 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
 
     $query = "UPDATE {$serendipity['dbPrefix']}entries 
                  SET comments      = " . (int)$counter_comments['counter'] . ",
-                     trackbacks    = " . (int)$counter_comments['trackbacks'] . ", 
+                     trackbacks    = " . (int)$counter_tb['counter'] . ", 
                      last_modified = ". $lm ." 
                WHERE id = ". (int)$entry_id;
     serendipity_db_query($query);
+
+    /* It's already approved, don't spam people */
+    if ( $rs === false ) {
+        return false;
+    }
 
     if (!$moderate) {
         if ($serendipity['allowSubscriptions'] === 'fulltext') {
@@ -759,10 +760,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     $referer       = substr((isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : ''), 0, 200);
 
     $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
-             FROM {$serendipity['dbPrefix']}entries e, {$serendipity['dbPrefix']}authors a
+                FROM {$serendipity['dbPrefix']}entries AS e
+     LEFT OUTER JOIN {$serendipity['dbPrefix']}authors AS a
+                  ON a.authorid = e.authorid
              WHERE e.id  = '". (int)$id ."'
-               AND e.isdraft = 'false'
-               AND e.authorid = a.authorid";
+               AND e.isdraft = 'false'";
     if (!serendipity_db_bool($serendipity['showFutureEntries'])) {
         $query .= " AND e.timestamp <= " . serendipity_db_time();
     }
@@ -770,6 +772,12 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     $row = serendipity_db_query($query, true); // Get info on author/entry
     if (!is_array($row) || empty($id)) {
         // No associated entry found.
+        if ($GLOBALS['tb_logging']) {
+            $fp = fopen('trackback2.log', 'a');
+            fwrite($fp, '[' . date('d.m.Y H:i') . '] entry reference not found: ' . $query . "\n");
+            fclose($fp);
+        }
+
         return false;
     }
 
@@ -810,6 +818,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     $query  = "INSERT INTO {$serendipity['dbPrefix']}comments (entry_id, parent_id, ip, author, email, url, body, type, timestamp, title, subscribed, status, referer)";
     $query .= " VALUES ('". (int)$id ."', '$parentid', '$ip', '$name', '$email', '$url', '$commentsFixed', '$type', '$t', '$title', '$subscribe', '$dbstatus', '$referer')";
 
+    if ($GLOBALS['tb_logging']) {
+        $fp = fopen('trackback2.log', 'a');
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] SQL: ' . $query . "\n");
+    }
+
     serendipity_db_query($query);
     $cid = serendipity_db_insert_id('comments', 'id');
 
@@ -821,8 +834,17 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
 
     // Approve with force, if moderation is disabled
+    if ($GLOBALS['tb_logging']) {
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] status: ' . $status . ', moderate: ' . $ca['moderate_comments'] . "\n");
+    }
+
     if ($status != 'confirm' && (empty($ca['moderate_comments']) || serendipity_db_bool($ca['moderate_comments']) == false)) {
+        if ($GLOBALS['tb_logging']) {
+            fwrite($fp, '[' . date('d.m.Y H:i') . '] Approving...' . "\n");
+        }
         serendipity_approveComment($cid, $id, true);
+    } elseif ($GLOBALS['tb_logging']) {
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] No need to approve...' . "\n");
     }
 
     if ($status == 'confirm') {
@@ -867,6 +889,10 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     }
 
     serendipity_purgeEntry($id, $t);
+
+    if ($GLOBALS['tb_logging']) {
+        fclose($fp);
+    }
 }
 
 /**
@@ -926,11 +952,23 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
     $commentInfo['source'] = $source;
     serendipity_plugin_api::hook_event('frontend_saveComment', $ca, $commentInfo);
     if (!is_array($ca) || serendipity_db_bool($ca['allow_comments'])) {
+        if ($GLOBALS['tb_logging']) {
+            $fp = fopen('trackback2.log', 'a');
+            fwrite($fp, '[' . date('d.m.Y H:i') . '] insert comment into DB' . "\n");
+            fclose($fp);
+        }
+                        
         serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         $commentInfo['comment_id'] = $id;
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
     } else {
+        if ($GLOBALS['tb_logging']) {
+            $fp = fopen('trackback2.log', 'a');
+            fwrite($fp, '[' . date('d.m.Y H:i') . '] discarding comment from DB' . "\n");
+            fclose($fp);
+        }
+
         return false;
     }
 }
