@@ -183,7 +183,7 @@ class serendipity_plugin_comments extends serendipity_plugin
                 if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
                     if (substr($row['comment_url'], 0, 7) != 'http://' && 
                         substr($row['comment_url'], 0, 8) != 'https://') {
-                        $row['comment_url'] = 'http://' . $comment['url']; 
+                        $row['comment_url'] = 'http://' . $row['comment_url']; 
                     }    
                     $user = '<a class="highlight" href="' . htmlspecialchars(strip_tags($row['comment_url'])) . '" title="' . htmlspecialchars(strip_tags($row['comment_title'])) . '">' . htmlspecialchars(strip_tags($row['user'])) . '</a>';
                 } else {
