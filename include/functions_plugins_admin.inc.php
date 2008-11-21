@@ -219,7 +219,7 @@ function show_plugins($event_only = false, $sidebars = null)
 
                     <span class="pluginmanager_title">
                 <?php if ( $can_configure ) { ?>
-                    <a href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=<?php echo $key ?>"><?php echo $title; ?></a>
+                    <a title="<?php echo $plugin_data['name']; ?>" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=<?php echo $key ?>"><?php echo $title; ?></a>
                 <?php } else { ?>
                     <?php echo $title; ?>
                 <?php } ?></span><br />

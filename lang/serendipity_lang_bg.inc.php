@@ -923,3 +923,6 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('NOTIFICATION_CONFIRM_MAIL', 'Вашето потвърждение на коментара беше прието успешно.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Вашият абонамент за известия за коментари не е потвърден. Моля проверете връзката, която сте избрали. Ако връзката е била изпратена преди повече от три седмици, Вие трябва да поискате нов email за потвърждение.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Вашето потвърждение на коментара не е потвърдено.  Моля проверете връзката, която сте избрали. Ако връзката е била изпратена преди повече от три седмици, Вие трябва да изпратите Вашият коментар отново.');
+@define('PLUGIN_DOCUMENTATION', 'Documentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cn.inc.php 2354 2008-10-18 11:17:40Z garvinhicking $
+<?php # $Id: serendipity_lang_cn.inc.php 2358 2008-10-19 10:48:12Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by
@@ -934,3 +934,6 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Your confirmation of the comment has been successfully entered.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Your comment subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Your comment confirmation could not be confirmed.  Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must send your comment again.');
+@define('PLUGIN_DOCUMENTATION', 'Documentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
