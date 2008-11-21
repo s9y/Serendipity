@@ -39,7 +39,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.20');
+        $propbag->add('version',       '2.21');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -742,6 +742,14 @@ class serendipity_event_spartacus extends serendipity_event
 
                         case 'summary':
                             $pluginstack[$i]['name']         = $childtree['value'];
+                            break;
+
+                        case 'website':
+                            $pluginstack[$i]['website']      = $childtree['value'];
+                            break;
+
+                        case 'changelog':
+                            $pluginstack[$i]['changelog']    = $childtree['value'];
                             break;
 
                         case 'groups':

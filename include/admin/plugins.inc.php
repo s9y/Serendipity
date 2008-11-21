@@ -74,6 +74,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $name = htmlspecialchars($bag->get('name'));
     $desc = htmlspecialchars($bag->get('description'));
 
+    $documentation = $bag->get('website');
+
     $config_names = $bag->get('configuration');
 
     if (isset($_POST['SAVECONF']) && serendipity_checkFormToken()) {
@@ -139,15 +141,37 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     <table cellpadding="5" style="border: 1px dashed" width="90%" align="center">
         <tr>
             <th width="100"><?php echo NAME; ?></th>
-            <td><?php echo $name; ?></td>
+            <td><?php echo $name; ?> (<em><?php echo get_class($plugin); ?></em>)</td>
         </tr>
 
         <tr>
-            <th><?php echo DESCRIPTION; ?></th>
-            <td><?php echo $desc; ?></td>
+            <th style="vertical-align: top"><?php echo DESCRIPTION; ?></th>
+            <td>
+            <?php
+                echo $desc;
+                if (!empty($documentation)) {
+                    echo '<br /><a href="' . htmlspecialchars($documentation) . '">' . PLUGIN_DOCUMENTATION . '</a>';
+                }
+
+                if (file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/ChangeLog">' . PLUGIN_DOCUMENTATION_CHANGELOG . '</a>';
+                }
+
+                if (file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
+                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_' . $serendipity['lang'] . '.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                } elseif (file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
+                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_en.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                } elseif (file_exists(dirname($plugin->pluginFile) . '/documentation.html')) {
+                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                } elseif (file_exists(dirname($plugin->pluginFile) . '/README')) {
+                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/README">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                }
+            ?>
+            </td>
         </tr>
     </table>
 <br />
+
 <?php serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names); ?>
 </form>
 <?php
@@ -204,6 +228,22 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
             $props['requirements'] = unserialize($props['requirements']);
 
+            if (empty($props['changelog']) && file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+                $props['changelog'] = 'plugins/' . $plugin->pluginPath . '/ChangeLog';
+            }
+
+            if (empty($props['local_documentation'])) {
+                if (file_exists(dirname($props['plugin_file']) . '/documentation_' . $serendipity['lang'] . '.html')) {
+                    $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation_' . $serendipity['lang'] . '.html';
+                } elseif (file_exists(dirname($props['plugin_file']) . '/documentation_en.html')) {
+                    $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation_en.html';
+                } elseif (file_exists(dirname($props['plugin_file']) . '/documentation.html')) {
+                    $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation.html';
+                } elseif (file_exists(dirname($props['plugin_file']) . '/README')) {
+                    $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
+                }
+            }
+            
             $pluginstack[$class_data['true_name']] = $props;
         } else {
             // False is returned if a plugin could not be instantiated
@@ -286,12 +326,25 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $jsLine .= " onmouseover=\"document.getElementById('serendipity_plugin_". $plug['class_name'] ."').className='serendipity_PluginAdminHighlight';\"";
 
             $pluginInfo = $notice = array();
+
             if (!empty($plug['author'])) {
                 $pluginInfo[] = AUTHOR  . ': ' . $plug['author'];
             }
 
             if (!empty($plug['version'])) {
                 $pluginInfo[] = VERSION  . ': ' . $plug['version'];
+            }
+
+            if (!empty($plug['website'])) {
+                $pluginInfo[] = '<a href="' . htmlspecialchars($plug['website']) . '">' . PLUGIN_DOCUMENTATION . '</a>';
+            }
+
+            if (!empty($plug['local_documentation'])) {
+                $pluginInfo[] = '<a href="' . htmlspecialchars($plug['local_documentation']) . '">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+            }
+
+            if (!empty($plug['changelog'])) {
+                $pluginInfo[] = '<a href="' . htmlspecialchars($plug['changelog']) . '">' . PLUGIN_DOCUMENTATION_CHANGELOG . '</a>';
             }
 
             if (!empty($plug['upgrade_version']) && $plug['upgrade_version'] != $plug['version']) {
@@ -351,7 +404,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 </tr>
 <?php       if (count($pluginInfo) > 0) { ?>
                 <tr>
-                    <td style="padding-left: 10px; font-size: x-small"><?php echo implode('; ', $pluginInfo); ?></td>
+                    <td style="padding-left: 10px; font-size: x-small">(<?php echo $plug['class_name']; ?>) <?php echo implode('; ', $pluginInfo); ?></td>
                 </tr>
 <?php       } ?>
             </table>

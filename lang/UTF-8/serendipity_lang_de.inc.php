@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2354 2008-10-18 11:17:40Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2374 2008-11-13 13:28:53Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -930,3 +930,6 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Die Bestätigung ihres Kommentars wurde erfolgreich verarbeitet.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Ihre Bestätigung des Abonnements einer Kommentarbenachrichtigung konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie eine neue E-Mail anfordern.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Ihre Bestätigung des Kommentars konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie ihr Kommentar erneut senden.');
+@define('PLUGIN_DOCUMENTATION', 'Documentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');

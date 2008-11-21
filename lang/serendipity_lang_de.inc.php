@@ -930,3 +930,6 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Die Bestätigung ihres Kommentars wurde erfolgreich verarbeitet.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Ihre Bestätigung des Abonnements einer Kommentarbenachrichtigung konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie eine neue E-Mail anfordern.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Ihre Bestätigung des Kommentars konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie ihr Kommentar erneut senden.');
+@define('PLUGIN_DOCUMENTATION', 'Documentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');

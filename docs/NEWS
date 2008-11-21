@@ -3,6 +3,27 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added full plugin name and links to documentation/changelog for
+      plugins on installation and configuration [1.4-beta1]:
+
+      You can provide Documentation for your plugins by supplying a local file
+      called documentation_XX.html inside the plugin directory, which Serendipity
+      will automatically detect.
+
+      You can also (additionally) add a property bag attribute "website" inside
+      your plugin's introspect() method:
+
+      $propbag->add('website', 'http://anypage.com/');
+
+      To provide a version history, you can add a file "ChangeLog" (mind the exact
+      spelling) to your plugin directory.
+
+      All three possible links are shown on the Serendipity interface when
+      configuring or installing a plugin.
+      
+      (garvinhicking)
+
+      
     * Fix not properly counting trackbacks [1.4-beta1] (garvinhicking)
 
     * Added experimental Serendipity importer (for merging installations,

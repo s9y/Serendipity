@@ -931,3 +931,6 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Your confirmation of the comment has been successfully entered.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Your comment subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Your comment confirmation could not be confirmed.  Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must send your comment again.');
+@define('PLUGIN_DOCUMENTATION', 'Documentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
