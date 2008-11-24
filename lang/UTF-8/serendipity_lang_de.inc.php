@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2374 2008-11-13 13:28:53Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2358 2008-10-19 10:48:12Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -23,16 +23,12 @@
 @define('CONFIGURE_PLUGINS', 'Plugins verwalten');
 @define('CONFIGURATION', 'Konfiguration');
 @define('BACK_TO_BLOG', 'Zurück zum Blog');
+@define('LOGIN', 'Login');
 @define('LOGOUT', 'Abmelden');
 @define('LOGGEDOUT', 'Abgemeldet.');
 @define('CREATE', 'Erstellen');
 @define('SAVE', 'Speichern');
 @define('NAME', 'Name');
-@define('NEW_TRACKBACK_TO', 'Neues Trackback für');
-@define('NEW_COMMENT_TO', 'Neuer Kommentar für');
-@define('RECENT', 'Das Neueste ...');
-@define('OLDER', 'Älteres ...');
-@define('ANONYMOUS', 'Anonym');
 @define('CREATE_NEW_CAT', 'Neue Kategorie');
 @define('I_WANT_THUMB', 'Ich möchte die Vorschau im Eintrag haben.');
 @define('I_WANT_BIG_IMAGE', 'Ich möchte das große Bild im Eintrag haben.');
@@ -40,6 +36,11 @@
 @define('I_WANT_IT_TO_LINK', 'Das Bild soll hierhin linken:');
 @define('BACK', 'Zurück');
 @define('FORWARD', 'Vorwärts');
+@define('ANONYMOUS', 'Anonym');
+@define('NEW_TRACKBACK_TO', 'Neues Trackback für');
+@define('NEW_COMMENT_TO', 'Neuer Kommentar für');
+@define('RECENT', 'Das Neueste ...');
+@define('OLDER', 'Älteres ...');
 @define('DONE', 'Fertig');
 @define('WELCOME_BACK', 'Willkommen zurück,');
 @define('TITLE', 'Titel');
@@ -253,10 +254,10 @@
 @define('SIDEBAR_PLUGINS', 'Seitenleisten-Plugins');
 @define('EVENT_PLUGINS', 'Ereignis-Plugins');
 @define('SYNCING', 'Synchronisiere Datenbank mit Bilder-Ordner');
-@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
-@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
-@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
-@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
+@define('SYNC_OPTION_LEGEND', 'Optionen für die Erzeugung der Vorschaubilder');
+@define('SYNC_OPTION_KEEPTHUMBS', 'Behalte alle vorhandenen Vorschaubilder');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Behalte vorhandene Vorschaubilder nur, wenn diese die richtige Größe haben');
+@define('SYNC_OPTION_DELETETHUMBS', 'Erneuere alle Vorschaubilder');
 @define('SYNC_DONE', 'Fertig (%s Bilder synchronisiert).');
 @define('SORT_ORDER', 'Sortierung');
 @define('SORT_ORDER_NAME', 'Dateiname');
@@ -320,9 +321,9 @@
 @define('SYNDICATION_PLUGIN_GENERIC_FEED', '%s Feed');
 @define('PERMISSIONS', 'Rechte');
 @define('INTEGRITY', 'Installation prüfen');
-@define('CHECKSUMS_NOT_FOUND', 'Konnte Prüfsummen nicht vergleichen! (Keine checksums.inc.php im Hauptverzeichnis)');
-@define('CHECKSUMS_PASS', 'Alle benötigten Dateien wurden erfolgreich überprüft.');
-@define('CHECKSUM_FAILED', '%s ist defekt oder verändert: Prüfung fehlgeschlagen');
+@define('CHECKSUMS_NOT_FOUND', 'Fehler beim Vergleich der Prüfsummen! (Keine Prüfsummendatei checksums.inc.php im Hauptverzeichnis gefunden)');
+@define('CHECKSUMS_PASS', 'Alle erforderlichen Dateien wurden überprüft.');
+@define('CHECKSUM_FAILED', '%s beschädigt oder verändert: Überprüfung fehlgeschlagen');
 @define('XML_IMAGE_TO_DISPLAY', 'XML-Button');
 @define('XML_IMAGE_TO_DISPLAY_DESC','Bilddatei, um ein Icon für XML-Feeds darzustellen. Für das Standardbild leer lassen, oder \'none\' zum Deaktivieren.');
 @define('SETTINGS_SAVED_AT', 'Die neuen Einstellungen wurden um %s gespeichert.');
@@ -406,18 +407,18 @@
 @define('INSTALL_IMAGEMAGICK_DESC', 'Ist ImageMagick installiert? Verwendet ansonsten die GDLib.');
 @define('INSTALL_IMAGEMAGICKPATH', 'Pfad zur convert ImageMagick-Datei');
 @define('INSTALL_IMAGEMAGICKPATH_DESC', 'Voller Pfad und Name zur Image-Magick Datei');
-@define('INSTALL_THUMBSUFFIX', 'Thumbnail-Endung');
-@define('INSTALL_THUMBSUFFIX_DESC', 'Thumbnails werden nach dem Schema originalname.Suffix.erweiterung benannt.');
-@define('INSTALL_THUMBWIDTH', 'Thumbnailgröße');
-@define('INSTALL_THUMBWIDTH_DESC', 'Maximale Breite/Höhe der automatisch erzeugten Thumbnails');
-@define('INSTALL_THUMBDIM', 'Gültigkeit der Thumbnailgröße');
-@define('INSTALL_THUMBDIM_LARGEST', 'Größte Seite');
+@define('INSTALL_THUMBSUFFIX', 'Vorschaubild-Endung');
+@define('INSTALL_THUMBSUFFIX_DESC', 'Vorschaubilder werden nach dem Schema originalname.Suffix.erweiterung benannt.');
+@define('INSTALL_THUMBWIDTH', 'Vorschaubildgröße');
+@define('INSTALL_THUMBWIDTH_DESC', 'Maximale Breite/Höhe der automatisch erzeugten Vorschaubildes');
+@define('INSTALL_THUMBDIM', 'Bestimmung der maximalen Vorschaubildgröße');
+@define('INSTALL_THUMBDIM_LARGEST', 'Längste Seite');
 @define('INSTALL_THUMBDIM_WIDTH', 'Breite');
 @define('INSTALL_THUMBDIM_HEIGHT', 'Höhe');
-@define('INSTALL_THUMBDIM_DESC', 'Legt fest, wie die Größe der Thumbnails angepasst werden soll. Der Standard "' . 
-    INSTALL_THUMBDIM_LARGEST .  '" nutzt die größte Seite als Beschränkung, so dass weder Breite noch Höhe die festgelegte Zahl überschreiten dürfen.
-"' . INSTALL_THUMBDIM_WIDTH . '" und "' .  INSTALL_THUMBDIM_HEIGHT . 
-    '" legen lediglich die Höhe bzw. Breite als größte Seite fest, so dass die jeweils andere Angabe auch größer als die festgelegte Zahl sein darf.');
+@define('INSTALL_THUMBDIM_DESC', 'Legt fest, wie die Größe der Thumbnails angepasst werden soll. Der Standard 
+    "' . INSTALL_THUMBDIM_LARGEST .  '" nutzt die größte Seite als Beschränkung, so dass weder Breite noch Höhe die festgelegte Zahl überschreiten dürfen.
+    "' . INSTALL_THUMBDIM_WIDTH . '" und "' .  INSTALL_THUMBDIM_HEIGHT . '" 
+    legen lediglich die Höhe bzw. Breite als größte Seite fest, so dass die jeweils andere Angabe auch größer als die festgelegte Zahl sein darf.');
 
 /* Personal details */
 @define('USERCONF_CAT_PERSONAL', 'Persönliche Einstellungen');
@@ -506,7 +507,6 @@
 @define('DELETE_FILE', 'Datei namens <b>%s</b> gelöscht');
 @define('ABOUT_TO_DELETE_FILE', 'Sie beabsichtigen, die Datei <b>%s</b> zu löschen.<br />Wenn Sie die Datei in einem Ihrer Einträge verwenden, wird das Löschen Lücken erzeugen.<br />Soll trotzdem fortgefahren werden?<br /><br />');
 @define('A_NEW_TRACKBACK_BLAHBLAH', 'Ein neues Trackback für den Blog-Eintrag namens "%s" wurde empfangen.');
-@define('LOGIN', 'Login');
 @define('TRACKBACK_SENDING', 'Sende Trackback zu URI %s ...');
 @define('TRACKBACK_SENT', 'Trackback erfolgreich!');
 @define('TRACKBACK_FAILED', 'Trackback gescheitert: %s');
@@ -773,7 +773,7 @@
 @define('PERMISSION_ADMINIMAGESDELETE', 'adminImagesDelete: Mediendaten löschen');
 @define('PERMISSION_ADMINIMAGESMAINTAINOTHERS', 'adminImagesMaintainOthers: Mediendaten anderer Benutzer verwalten');
 @define('PERMISSION_ADMINIMAGESVIEW', 'adminImagesView: Mediendaten ansehen');
-@define('PERMISSION_ADMINIMAGESSYNC', 'adminImagesSync: Thumbnails synchronisieren');
+@define('PERMISSION_ADMINIMAGESSYNC', 'adminImagesSync: Vorschaubilder synchronisieren');
 @define('PERMISSION_ADMINCOMMENTS', 'adminComments: Kommentare verwalten');
 @define('PERMISSION_ADMINTEMPLATES', 'adminTemplates: Templates verwalten');
 @define('INSTALL_BLOG_EMAIL', 'E-Mail-Adresse des Blogs');
@@ -930,6 +930,6 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Die Bestätigung ihres Kommentars wurde erfolgreich verarbeitet.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Ihre Bestätigung des Abonnements einer Kommentarbenachrichtigung konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie eine neue E-Mail anfordern.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Ihre Bestätigung des Kommentars konnte nicht verarbeitet werden. Bitte prüfen Sie den Link, den Sie geklickt haben, auf Vollständigkeit. Falls dieser Link vor mehr als 3 Wochen gesendet wurde, müssen Sie ihr Kommentar erneut senden.');
-@define('PLUGIN_DOCUMENTATION', 'Documentation');
-@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
-@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
+@define('PLUGIN_DOCUMENTATION', 'Dokumentation');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'Lokale Dokumentation');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Versionsgeschichte');
