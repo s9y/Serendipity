@@ -3,6 +3,10 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Made entrypropertie's password plugin form use "autocomplete=off"
+      to prevent inserting badly stored passwords. Thanks to sbauer!
+      [1.4-beta1]
+
     * Added full plugin name and links to documentation/changelog for
       plugins on installation and configuration [1.4-beta1]:
 

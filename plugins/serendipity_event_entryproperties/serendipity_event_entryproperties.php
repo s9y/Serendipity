@@ -313,7 +313,7 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
             <br /><?php echo PASSWORD; ?>:<br />
             <div style="margin-left: 10px" class="entryproperties_access_pw">
-                <input class="input_textbox" type="password" name="serendipity[properties][entrypassword]" value="<?php echo htmlspecialchars($password); ?>" />
+                <input autocomplete="off" class="input_textbox" type="password" name="serendipity[properties][entrypassword]" value="<?php echo htmlspecialchars($password); ?>" />
             </div>
 <?php
             return true;
