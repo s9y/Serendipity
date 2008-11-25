@@ -28,7 +28,8 @@ Version 1.4 ()
       (garvinhicking)
 
       
-    * Fix not properly counting trackbacks [1.4-beta1] (garvinhicking)
+    * Fix not properly counting trackbacks or resetting comment/tb
+      counter when editing an entry [1.4-beta1] (garvinhicking)
 
     * Added experimental Serendipity importer (for merging installations,
       fore example). (Garvinhicking)

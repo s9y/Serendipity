@@ -382,9 +382,9 @@ switch($serendipity['GET']['adminAction']) {
                        'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false),
                        // New stuff for advanced templates
                        'last_modified'      => $sim_last_modified,
-                       'comments'           => 0,
-                       'trackbacks'         => 0,
                        // Messing with these causes problems when entry is saved
+                       //'comments'           => 0,
+                       //'trackbacks'         => 0,
                        //'authorid'           => $serendipity['user'],
                        //'author'             => $serendipity['authorid']
                        // Not possible to get loginname or email, so far as I can tell
