@@ -368,7 +368,6 @@ switch($serendipity['GET']['adminAction']) {
 
     case 'save':
         if (!$preview_only) {
-            $sim_last_modified = time();
             $entry = array(
                        'id'                 => $serendipity['POST']['id'],
                        'title'              => $serendipity['POST']['title'],
@@ -380,16 +379,7 @@ switch($serendipity['GET']['adminAction']) {
                        'allow_comments'     => $serendipity['POST']['allow_comments'],
                        'moderate_comments'  => $serendipity['POST']['moderate_comments'],
                        'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false),
-                       // New stuff for advanced templates
-                       'last_modified'      => $sim_last_modified,
-                       // Messing with these causes problems when entry is saved
-                       //'comments'           => 0,
-                       //'trackbacks'         => 0,
-                       //'authorid'           => $serendipity['user'],
-                       //'author'             => $serendipity['authorid']
-                       // Not possible to get loginname or email, so far as I can tell
-                       //'loginname'          =>
-                       //'email'              =>
+                       // Messing with other attributes causes problems when entry is saved
 
             );
         }
@@ -428,9 +418,6 @@ switch($serendipity['GET']['adminAction']) {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
                     echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
-                    if (isset($sim_last_modifed)) {
-                        unset($entry['last_modified']);
-                    }
                     serendipity_updertEntry($entry);
                 } else {
                     if ($serendipity['use_iframe']) {
@@ -443,6 +430,11 @@ switch($serendipity['GET']['adminAction']) {
             } else {
                 // Only display the preview
                 $serendipity['hidefooter'] = true;
+                // Advanced templates use this to show update status and elapsed time
+                if (!is_numeric($entry['last_modified'])) {
+                    $entry['last_modified'] = time();
+                }
+
                 if (!is_numeric($entry['timestamp'])) {
                     $entry['timestamp']  = time();
                 }
