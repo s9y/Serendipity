@@ -696,7 +696,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', '作者的静态连接');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', '这里可以让你设定以基本位置来计算文章的相对连接。你可以用以下参数：%id%, %realname%, %username%, %email% 或其它字符。');
 @define('INSTALL_PERMALINK_CATEGORY', '类别的静态连接');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', '这里可以让你设定以基本位置来计算文章的相对连接。你可以用以下参数：%id%, %name%, %description% 或其它字符。');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', '这里可以让你设定以基本位置来计算文章的相对连接。你可以用以下参数：%id%, %name%, %parentname%, %description% 或其它字符。');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'RSS-Feed 类别的静态连接');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', '这里可以让你设定以基本位置来计算 RSS-Feed 类别文章的相对连接。你可以用以下参数：%id%, %name%, %description% 或其它字符。');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', '保存文件路径');

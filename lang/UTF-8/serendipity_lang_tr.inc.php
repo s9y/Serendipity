@@ -695,7 +695,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Yazarlara göre  kalıcı bağlantı için URL Adresi yapısı ');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Burada göreli URL adresi yapısı tanımlayabilirsiniz temel URL adresinizden başlayarak yazılar yazarına göre  nasıl yönlenip sıralanacak,belirleyebilirsiniz. Şu değişkenleri kullanabilirsiniz %id%, %realname%, %username%, %email% ve başka çeşitli karakterleri.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Konu Başlığına göre Kalıcı Bağlantı URL Adresi yapısı');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Burada göreli URL adresi yapısı tanımlayabilirsiniz temel URL adresinizden başlayarak yazılar konu başlıklarına göre  nasıl yönlenip sıralanacak,belirleyebilirsiniz. Şu değişkenleri kullanabilirsiniz %id%, %name%, %description% ve başka çeşitli karakterleri.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Burada göreli URL adresi yapısı tanımlayabilirsiniz temel URL adresinizden başlayarak yazılar konu başlıklarına göre  nasıl yönlenip sıralanacak,belirleyebilirsiniz. Şu değişkenleri kullanabilirsiniz %id%, %name%, %parentname%, %description% ve başka çeşitli karakterleri.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Konu Başlığına göre RSS-Beslemeleri için Kalıcı Bağlantı URL adres yapısı');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Burada göreli URL adresi yapısı tanımlayabilirsiniz temel URL adresinizden başlayarak yazıların RSS Beslemelerinin kalıcı bağlantıları konu başlıklarına göre  nasıl yönlenip sıralanacak,belirleyebilirsiniz. Şu değişkenleri kullanabilirsiniz  %id%, %name%, %description% ve başka çeşitli karakterleri.');
 @define('INSTALL_PERMALINK_FEEDAUTHOR', ' RSS-Beslemelerin Yazarlarına göre  Kalıcı Bağlantı URL adres yapısı');

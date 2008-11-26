@@ -695,7 +695,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permalink-Struktur für Autoren-URLs');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der Artikel von gewählten Autoren dargestellt werden. Die Variablen %id%, %realname%, %username%, %email% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permalink-Struktur für Kategorie-URLs');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte Kategorien dargestellt werden. Die Variablen %id%, %name%, %description% und alle anderen normalen Zeichen sind möglich.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte Kategorien dargestellt werden. Die Variablen %id%, %name%, %parentname%, %description% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permalink-Struktur für RSS-Kategorien-Feed URLs');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte RSS-Feeds von Kategorien dargestellt werden. Die Variablen %id%, %name%, %description% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Pfad zu den Einträgen');

@@ -694,7 +694,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permalink forfatter URL struktur');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Her kan du angive den relative URL struktur fra din grund URL til hvor artikler fra bestemte forfattere bliver tilgængelige. Du kan bruge variablene %id%, %realname%, %username%, %email% samt alle andre karakterer.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permalink kategori URL struktur');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Her kan du angive den relative URL struktur fra din grund URL til hvor artikler fra bestemte kategorier bliver tilgængelige. Du kan anvende de variable %id%, %name%, %description% samt alle andre karakterer.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Her kan du angive den relative URL struktur fra din grund URL til hvor artikler fra bestemte kategorier bliver tilgængelige. Du kan anvende de variable %id%, %name%, %parentname%, %description% samt alle andre karakterer.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permalink RSS-Feed kategori URL struktur');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Her kan du angive den relative URL struktur fra din grund URL til hvor RSS-feeds fra bestemte kategorier bliver tilgængelige. Du kan anvende de variable %id%, %name%, %description% samt alle andre karakterer.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Sti til arkiver');

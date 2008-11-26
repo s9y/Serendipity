@@ -1626,3 +1626,22 @@ function serendipity_getTotalCount($what) {
 
     }
 }
+
+/**
+ * Get a path of all parent categories to a given category.
+ *
+ * @access public
+ * @param   string      The id of the category, whose parents you want to fetch
+ * @return  array       An Array with all category information, ordered from root to the ID you supplied.
+ */
+function serendipity_getCategoryRoot($id) {
+    global $serendipity;
+
+    $r = serendipity_db_query("SELECT p.*
+                                 FROM {$serendipity['dbPrefix']}category n,
+                                      {$serendipity['dbPrefix']}category p
+                                WHERE n.category_left BETWEEN p.category_left AND p.category_right
+                                  AND n.categoryid = " . (int)$id . "
+                             ORDER BY n.category_left DESC, p.category_left ASC");
+    return $r;
+}

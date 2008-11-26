@@ -693,7 +693,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Uppbygging varanlegra hlekkja slóða höfundar');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Hér geturðu skilgreint slóðauppbygginguna, allt frá upphafsslóð til þess hvar færslur frá ákveðnum höfundum kynnu að vera til staðar. Þú getur notað breyturnar %id%, %realname%, %username%, %email% Og alla aðra stafi.');
 @define('INSTALL_PERMALINK_CATEGORY', 'URL uppbygging varanlegra hlekkja flokka');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hér geturðu skilgreint slóðauppbygginguna, allt frá upphafsslóð til þess hvar færslur úr ákveðnum flokkum kynnu að vera til staðar. Þú getur notað breyturnar %id%, %name%, %description% og alla aðra stafi.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hér geturðu skilgreint slóðauppbygginguna, allt frá upphafsslóð til þess hvar færslur úr ákveðnum flokkum kynnu að vera til staðar. Þú getur notað breyturnar %id%, %name%, %parentname%, %description% og alla aðra stafi.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'URL uppbygging varanlegra RSS-strauma flokka');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Hér geturðu skilgreint slóðauppbygginguna, allt frá upphafsslóð til þess hvar RSS-straumar úr ákveðnum flokkum kynnu að vera til staðar. Þú getur notað breyturnar %id%, %name%, %description% og alla aðra stafi.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Slóð til skjalasafna');

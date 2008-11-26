@@ -693,7 +693,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Författares artiklars pemalink-URL-struktur');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Här kan du definiera URL-strukturen relativt till din bas-URL för att nå artiklar skrivna av vissa författare. Du kan använda variablerna %id%, %realname%, %username%, %email% samt alla andra tecken.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Kategoriers permalink-URL-struktur');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Här kan du definiera URL-strukturen relativt till din bas-URL för att nå artiklar i vissa kategorier. Du kan använda variablerna %id%, %name%, %description% samt alla andra tecken.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Här kan du definiera URL-strukturen relativt till din bas-URL för att nå artiklar i vissa kategorier. Du kan använda variablerna %id%, %name%, %parentname%, %description% samt alla andra tecken.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Kategoriers RSS-matningars permalink-URL-struktur');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Här kan du definiera URL-strukturen relativt till din bas-URL för att nå RSS-matningar från vissa kategorier. Du kan använda variablerna %id%, %name%, %description% samt alla andra tecken.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Sökväg till arkiv');

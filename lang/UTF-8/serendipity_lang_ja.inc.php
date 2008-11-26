@@ -693,7 +693,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', '著者の固定リンク URL 構造');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'ここで、ベース URL からある著者のエントリが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%realname%、%username%、%email%、そして他の文字を使用することができます。');
 @define('INSTALL_PERMALINK_CATEGORY', 'カテゴリの固定リンク URL 構造');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'ここで、ベース URL からあるカテゴリのエントリが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%description%、そして他の文字を使用することができます。');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'ここで、ベース URL からあるカテゴリのエントリが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%parentname、%description%、そして他の文字を使用することができます。');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'カテゴリ RSS フィードの固定リンク URL 構造');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', '
 ここで、ベース URL からあるカテゴリーの RSS フィード が入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%description%、そして他の文字を使用することができます。');

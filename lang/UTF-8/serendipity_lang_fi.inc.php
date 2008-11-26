@@ -692,7 +692,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Kirjoittajien merkintöjen permalink-lauseke');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Lauseke kirjoittajien merkintöjä varten alkaen blogin osoitteesta. Voit käyttää muuttujia %id%, %realname%, %username%, %email% sekä muita merkkejä.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Kategorioiden merkintöjen permalink-lauseke');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Lauseke kategorioiden merkintöjä varten alkaen blogin osoitteesta. Voit käyttää muuttujia %id%, %name%, %description% sekä muita merkkejä.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Lauseke kategorioiden merkintöjä varten alkaen blogin osoitteesta. Voit käyttää muuttujia %id%, %name%, %parentname%, %description% sekä muita merkkejä.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'RSS-kanavien (kategoriat) merkintöjen permalink-lauseke');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Lauseke RSS-kanavien merkintöjä varten (kategoriat) alkaen blogin osoitteesta. Voit käyttää muuttujia %id%, %name%, %description% sekä muita merkkejä.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Arkistojenpolku');

@@ -693,7 +693,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Szerzőre vonatkozó permanens hivatkozás URL struktúrája');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Itt adhatod meg a relatív URL struktúrát az alap URL-hez képest, ahonnan a szerzőre mutató hivatkozások elérhetőek lesznek. Használhatod a következő változókat: %id%, %realname%, %username%, %email% és egyéb karaktereket is.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Kategóriára vonatkozó permanens hivatkozás URL struktúrája');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Itt adhatod meg a relatív URL struktúrát az alap URL-hez képest, ahonnan a kategóriára mutató hivatkozások elérhetőek lesznek. Használhatod a következő változókat: %id%, %name%, %description% és egyéb karaktereket is.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Itt adhatod meg a relatív URL struktúrát az alap URL-hez képest, ahonnan a kategóriára mutató hivatkozások elérhetőek lesznek. Használhatod a következő változókat: %id%, %name%, %parentname%, %description% és egyéb karaktereket is.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'RSS hírcsatornára vonatkozó permanens hivatkozás URL struktúrája');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Itt adhatod meg a relatív URL struktúrát az alap URL-hez képest, ahonnan az RSS hírcsatornára mutató hivatkozások elérhetőek lesznek. Használhatod a következő változókat: %id%, %name%, %description% és egyéb karaktereket is.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Archívumok útvonala');

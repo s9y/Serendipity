@@ -695,7 +695,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', '고정 링크 - 작성자에 따른 주소 구조');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', '특정 작성자가 쓴 글이 기본 블로그 주소에 대해 상대적으로 가지게 되는 주소 구조를 정할 수 있습니다. %id%, %realname%, %username%, %email% 변수와 함께 다른 일반 글자를 활용할 수 있습니다.');
 @define('INSTALL_PERMALINK_CATEGORY', '고정 링크 - 범주에 따른 주소 구조');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', '특정 범주에 속하는 글이 기본 블로그 주소에 대해 상대적으로 가지게 되는 주소 구조를 정할 수 있습니다. %id%, %name%, %description% 변수와 함께 다른 일반 글자를 활용할 수 있습니다.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', '특정 범주에 속하는 글이 기본 블로그 주소에 대해 상대적으로 가지게 되는 주소 구조를 정할 수 있습니다. %id%, %name%, %parentname%, %description% 변수와 함께 다른 일반 글자를 활용할 수 있습니다.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', '고정 링크 - RSS 피드 - 범주에 따른 주소 구조');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', '특정 범주에 속하는 RSS 피드가 기본 블로그 주소에 대해 상대적으로 가지게 되는 주소 구조를 정할 수 있습니다. %id%, %name%, %description% 변수와 함께 다른 일반 글자를 활용할 수 있습니다.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', '글 목록으로 가는 경로');

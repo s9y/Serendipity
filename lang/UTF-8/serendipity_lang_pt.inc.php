@@ -697,7 +697,7 @@
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Aqui você pode definir as URLs relativas das estruturas que iniciam pela sua URL base onde algumas entradas de outros autores tornan-se disponíveis. Você pode usar as variáveis %id%, %realname%, %username%, %email% ou quaisquer outros.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Estrutura da URL da categoria de permalink');
 
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui você pode definir as estruturas URL relativas, iniciando pela sua URL base, de onde outras categorias se tornarão disponíveis. Você pode usar as variáveis %id%, %name%, %description%, ou quaisquer outros.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui você pode definir as estruturas URL relativas, iniciando pela sua URL base, de onde outras categorias se tornarão disponíveis. Você pode usar as variáveis %id%, %name%, %parentname%, %description%, ou quaisquer outros.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Categoria das estruturas URL de Permalink e RSS-Feed');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Aqui você pode definir as estruturas URL relativas, iniciando pela sua URL base até onde o RSS-feed se torna disponível. Você pode usar as variáveis %id%, %name%, %description%, ou quaisquer outros.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Caminho para arquivos');

@@ -684,7 +684,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_PERMALINK_AUTHOR', 'Структура на постоянна връзка към автор');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Тук можете да определите относителна структура на URL спрямо основния URL, откъдето са налични статиите на определен автор. Можете да използвате променливите %id%, %realname%, %username%, %email% и всички други знаци.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Структура на постоянна връзка към категория');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Тук можете да определите относителна структура на URL спрямо основния URL, откъдето са налични статиите от определена категория. Можете да използвате променливите %id%, %name%, %description% и всички други знаци.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Тук можете да определите относителна структура на URL спрямо основния URL, откъдето са налични статиите от определена категория. Можете да използвате променливите %id%, %name%, %parentname%, %description% и всички други знаци.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Структура на постоянна връзка към емисия на RSS');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Тук можете да определите относителна структура на URL спрямо основния URL, откъдето са налични статиите от определена категория. Можете да използвате променливите %id%, %name%, %description% и всички други знаци.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Път до архиви');

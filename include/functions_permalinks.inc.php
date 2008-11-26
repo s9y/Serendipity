@@ -255,6 +255,7 @@ function serendipity_initPermalinks() {
      */
     @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-\%');
     @define('PAT_FILENAME_MATCH', '[' . PAT_FILENAME . ']+');
+    @define('PAT_DIRNAME_MATCH',  '[' . PAT_FILENAME . '/]*');
     @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)@');
     @define('PAT_FEED',           '@/(index|atom[0-9]*|rss|b2rss|b2rdf).(rss|rdf|rss2|xml)@');
     @define('PAT_COMMENTSUB',     '@/([0-9]+)[_\-][' . PAT_FILENAME . ']*\.html@i');
@@ -503,7 +504,7 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
     global $serendipity;
     static $entryKeys    = array('%id%', '%lowertitle%', '%title%', '%day%', '%month%', '%year%');
     static $authorKeys   = array('%id%', '%username%', '%realname%', '%email%');
-    static $categoryKeys = array('%id%', '%name%', '%description%');
+    static $categoryKeys = array('%id%', '%name%', '%parentname%', '%description%');
 
     switch($type) {
         case 'entry':
@@ -546,10 +547,23 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
             break;
 
         case 'category':
+            $parent_path = array();
+
+            // This is expensive. Only lookup if required.
+            if (strstr($format, '%parentname%')) {
+                $parents = serendipity_getCategoryRoot($data['categoryid']);
+                if (is_array($parents)) {
+                    foreach($parents AS $parent) {
+                        $parent_path[] = serendipity_makeFilename($parent['category_name'], true);
+                    }
+                }
+            }            
+
             $replacements =
                 array(
                     (int)$data['categoryid'],
                     serendipity_makeFilename($data['category_name'], true),
+                    implode('/', $parent_path),
                     serendipity_makeFilename($data['category_description'], true)
                 );
             return str_replace($categoryKeys, $replacements, $format);
@@ -571,11 +585,11 @@ function serendipity_makePermalinkRegex($format, $type = 'entry') {
     static $entryKeys           = array('%id%',     '%lowertitle%',     '%title%',          '%day%',      '%month%',    '%year%');
     static $entryRegexValues    = array('([0-9]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH, '[0-9]{1,2}', '[0-9]{1,2}', '[0-9]{4}');
 
-    static $authorKeys          = array('%id%',     '%username%',           '%realname%',           '%email%');
+    static $authorKeys          = array('%id%',     '%username%',       '%realname%',       '%email%');
     static $authorRegexValues   = array('([0-9]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH, PAT_FILENAME_MATCH);
 
-    static $categoryKeys        = array('%id%',     '%name%',               '%description%');
-    static $categoryRegexValues = array('([0-9;]+)', PAT_FILENAME_MATCH, PAT_FILENAME_MATCH);
+    static $categoryKeys        = array('%id%',     '%name%',            '%parentname%',     '%description%');
+    static $categoryRegexValues = array('([0-9;]+)', PAT_FILENAME_MATCH, PAT_DIRNAME_MATCH,  PAT_FILENAME_MATCH);
 
     switch($type) {
         case 'entry':

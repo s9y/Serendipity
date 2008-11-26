@@ -706,7 +706,7 @@ $i18n_filename_to = array (
 @define('INSTALL_PERMALINK_AUTHOR', 'Struktura URL autorù');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Zde mù¾ete definovat relativní strukturu URL, kde zaèátek je va¹e base URL, z ní¾ mohou být dostupné pøíspìvky urèitých autorù.  Mù¾ete pou¾ít promìnné %id%, %realname%, %username%, %email% a jakékoli jiné znaky.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Struktura URL kategorií');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Zde mù¾ete definovat relativní strukturu URL, kde zaèátek je va¹e base URL, z ní¾ mohou být dostupné urèité kategorie. Mù¾ete pou¾ít promìnné  %id%, %name%, %description% a jakékoli jiné znaky.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Zde mù¾ete definovat relativní strukturu URL, kde zaèátek je va¹e base URL, z ní¾ mohou být dostupné urèité kategorie. Mù¾ete pou¾ít promìnné  %id%, %name%, %parentname%, %description% a jakékoli jiné znaky.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Struktura URL trvalých odkazù kategorií RSS');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Zde mù¾ete definovat relativní strukturu URL, kde zaèátek je va¹e base URL, z ní¾ mohou být dostupné  RSS kanály z urèitých kategorií. Mù¾ete pou¾ít promìnné %id%, %name%, %description% a jakékoli jiné znaky.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Cesta k archivùm');
