@@ -3,12 +3,16 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added %parentname% permalink property to category structure,
+      so that a full category name path can be used instead of only
+      %name%. (garvinhicking) [1.4-beta2]
+
     * Made entrypropertie's password plugin form use "autocomplete=off"
       to prevent inserting badly stored passwords. Thanks to sbauer!
-      [1.4-beta1]
+      [1.4-beta2]
 
     * Added full plugin name and links to documentation/changelog for
-      plugins on installation and configuration [1.4-beta1]:
+      plugins on installation and configuration [1.4-beta2]:
 
       You can provide Documentation for your plugins by supplying a local file
       called documentation_XX.html inside the plugin directory, which Serendipity
@@ -26,10 +30,9 @@ Version 1.4 ()
       configuring or installing a plugin.
       
       (garvinhicking)
-
       
     * Fix not properly counting trackbacks or resetting comment/tb
-      counter when editing an entry [1.4-beta1] (garvinhicking)
+      counter when editing an entry [1.4-beta2] (garvinhicking)
 
     * Added experimental Serendipity importer (for merging installations,
       fore example). (Garvinhicking)

@@ -703,7 +703,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Estrutura de URL de Links Pernamentes do Autor'); // Verify
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Aqui pode definir a estrura relativa dos URLs do seu URL base até onde entradas para certos autores ficam disponíveis. Pode usar as variáveis %id%, %realname%, %username%, %email% e quaisquer outros caracteres.'); // Verify
 @define('INSTALL_PERMALINK_CATEGORY', 'Estrutura do URL para Links Pernamentes por Categoria'); // Verify
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui pode definir a estrura relativa dos URLs do seu URL base até onde entradas para certas categorias ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aqui pode definir a estrura relativa dos URLs do seu URL base até onde entradas para certas categorias ficam disponíveis. Pode usar as variáveis %id%, %name%, %parentname%, %description% e quaisquer outros caracteres.'); // Verify
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Estrutura do URL para Links Permanentes por Categoria de RSS-Feed'); // Verify
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Aqui pode definir a estrutura relativa dos URLs d seu URL base até onde entradas para certas categorias de RSS-Feed ficam disponíveis. Pode usar as variáveis %id%, %name%, %description% e quaisquer outros caracteres.'); // Verify
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Caminho para arquivos');

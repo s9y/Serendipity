@@ -695,7 +695,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Struttura URL Permalink Autore');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Qui puoi definire la struttura di URL relativa ad iniziare dal tuo URL di base fino a dove le notizie di certi autori possono rendersi disponibili. Puoi utilizzre le variabili %id%, %realname%, %username%, %email% ed ogni altro carattere.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Struttura URL Permalink Categoria');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Here you can define the relative URL structure begining from your base URL to where entries from certain categories may become available. You can use the variables %id%, %name%, %description% and any other characters.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Here you can define the relative URL structure begining from your base URL to where entries from certain categories may become available. You can use the variables %id%, %name%, %parentname%, %description% and any other characters.');
 @define('INSTALL_PERMALINK_CATEGORY_DESC', 'Qui puoi definire la struttura di URL relativa ad iniziare dal tuo URL di base fino a dove le notizie di certe categorie possono rendersi disponibili. Puoi utilizzre le variabili %id%, %name%, %description% ed ogni altro carattere.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Struttura URL Categoria RSS-Feed Permalink');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Qui puoi definire la struttura di URL relativa ad iniziare dal tuo URL di base fino a dove  feeds RSS di certe categorie possono rendersi disponibili. Puoi utilizzre le variabili %id%, %name%, %description% ed ogni altro carattere.');

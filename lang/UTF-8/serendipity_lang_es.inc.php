@@ -709,7 +709,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Estructura URL de los enlaces permanentes al autor');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Aquí puedes definir la estructura URL relativa desde la URL base hasta donde las entradas pertenecientes a cierto autor sean accesibles. Puedes utilizar las variables %id%, %realname%, %username%, %email% y cualquier otro caracter.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Estructura URL de los enlaces permanentes a categorías');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aquí puedes definir la estructura URL relativa desde la URL base hasta donde las entradas pertenecientes a cierta categoría sean accesibles. Puedes utilizar las variables %id%, %name%, %description% y cualquier otro caracter.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Aquí puedes definir la estructura URL relativa desde la URL base hasta donde las entradas pertenecientes a cierta categoría sean accesibles. Puedes utilizar las variables %id%, %name%, %parentname%, %description% y cualquier otro caracter.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Estructura URL de los enlaces permanentes a la sindicación RSS de las categorías');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Aquí puedes definir la estructura URL relativa desde la URL base hasta donde las sindicaciones RSS de ciertas categorías sean accesibles. Puedes utilizar las variables %id%, %name%, %description% y cualquier otro caracter.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Ruta a los archivos');

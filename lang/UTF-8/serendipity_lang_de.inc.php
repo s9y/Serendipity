@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2358 2008-10-19 10:48:12Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2379 2008-11-24 10:08:53Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -695,7 +695,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permalink-Struktur für Autoren-URLs');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der Artikel von gewählten Autoren dargestellt werden. Die Variablen %id%, %realname%, %username%, %email% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permalink-Struktur für Kategorie-URLs');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte Kategorien dargestellt werden. Die Variablen %id%, %name%, %description% und alle anderen normalen Zeichen sind möglich.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte Kategorien dargestellt werden. Die Variablen %id%, %name%, %parentname%, %description% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permalink-Struktur für RSS-Kategorien-Feed URLs');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Legt die relative URL-Struktur fest (beginnend mit der Stamm-URL), mit der gewählte RSS-Feeds von Kategorien dargestellt werden. Die Variablen %id%, %name%, %description% und alle anderen normalen Zeichen sind möglich.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Pfad zu den Einträgen');

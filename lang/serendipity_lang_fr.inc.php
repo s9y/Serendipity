@@ -698,7 +698,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Structure des rétroliens par auteur');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Ici vous pouvez définir le chemin relatif à l\adresse de votre blog par lequel on pourra accéder aux billets classés par auteur. Vous pouvez utiliser les variables %id% (identifiant), %realname% (nom réel), %username% (pseudo), %email% et n\'importe quels autres caractères.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Structure des rétroliens par catégorie');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Ici vous pouvez définir le chemin relatif à l\'adresse de votre blog par lequel on pourra accéder aux billets classés par catégorie. Vous pouvez utiliser les variables %id% (identifiant), %name% (nom), %description% et n\'importe quels autres caractères.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Ici vous pouvez définir le chemin relatif à l\'adresse de votre blog par lequel on pourra accéder aux billets classés par catégorie. Vous pouvez utiliser les variables %id% (identifiant), %name% (nom), %parentname%, %description% et n\'importe quels autres caractères.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Structure des fils RSS par catégorie');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Ici vous pouvez définir le chemin relatif à l\'adresse de votre blog par lequel on pourra accéder aux fils RSS des catégories. Vous pouvez utiliser les variables %id% (identifiant), %name% (nom), %description% et n\'importe quels autres caractères.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Chemin d\'accès aux archives');

@@ -696,7 +696,7 @@ $i18n_unknown = 'tw';
 @define('INSTALL_PERMALINK_AUTHOR', '作者的靜態連接');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', '這裡可以讓您設定以基底位址來計算作者文章的相對連結。您可以用以下變數：%id%, %realname%, %username%, %email% 或其他字串。');
 @define('INSTALL_PERMALINK_CATEGORY', '類別的靜態連接');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', '這裡可以讓您設定以基底位址來計算類別文章的相對連結。您可以用以下變數：%id%, %name%, %description% 或其他字串。');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', '這裡可以讓您設定以基底位址來計算類別文章的相對連結。您可以用以下變數：%id%, %name%, %parentname%, %description% 或其他字串。');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'RSS-Feed 類別的靜態連接');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', '這裡可以讓您設定以基底位址來計算 RSS-Feed 類別文章的相對連結。您可以用以下變數：%id%, %name%, %description% 或其他字串。');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', '保存文庫路徑');

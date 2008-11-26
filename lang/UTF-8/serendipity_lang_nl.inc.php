@@ -694,7 +694,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permanente hyperlink Auteur URL-structuur');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Hier kunt u de relatieve URL-structuur bepalen, startend van je basis-URL tot artikelen van bepaalde auteurs beschikbaar worden. U kunt gebruikmaken van de variabelen %id%, %realname%, %username%, %email% en andere karakters.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permanente hyperlink Categorie URL-structuur');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hier kunt u de relatieve URL-structuur bepalen, startend van je basis-URL tot de artikelen van bepaalde categorieën beschikbaar worden. U kunt gebruikmaken van de variabelen %id%, %name%, %description% en andere karakters.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Hier kunt u de relatieve URL-structuur bepalen, startend van je basis-URL tot de artikelen van bepaalde categorieën beschikbaar worden. U kunt gebruikmaken van de variabelen %id%, %name%, %parentname%, %description% en andere karakters.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permanente hyperlink Verzamelpublicatie Categorie URL-structuur');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Hier kunt u de relatieve URL-structuur bepalen, startend van je basis-URL tot waar de verzamelpublicaties van bepaalde categorieën vrijkomen. U kunt gebruikmaken van de variabelen %id%, %name%, %description% en andere karakters.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Pad naar archieven');

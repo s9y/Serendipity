@@ -693,7 +693,7 @@
 @define('INSTALL_PERMALINK_AUTHOR', 'Permalink Author URL structure');
 @define('INSTALL_PERMALINK_AUTHOR_DESC', 'Here you can define the relative URL structure begining from your base URL to where entries from certain authors may become available. You can use the variables %id%, %realname%, %username%, %email% and any other characters.');
 @define('INSTALL_PERMALINK_CATEGORY', 'Permalink Category URL structure');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Here you can define the relative URL structure begining from your base URL to where entries from certain categories may become available. You can use the variables %id%, %name%, %description% and any other characters.');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'Here you can define the relative URL structure begining from your base URL to where entries from certain categories may become available. You can use the variables %id%, %name%, %parentname%, %description% and any other characters.');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'Permalink RSS-Feed Category URL structure');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', 'Here you can define the relative URL structure begining from your base URL to where RSS-feeds frmo certain categories may become available. You can use the variables %id%, %name%, %description% and any other characters.');
 @define('INSTALL_PERMALINK_ARCHIVESPATH', 'Path to archives');
