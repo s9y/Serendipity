@@ -9,6 +9,8 @@
     list-style-type: none;
     background-color: #fdfdff;
     height: 98%;
+    min-height: 200px;
+    border: 1px dashed #f0f0f0;
 }
 
 .pluginmanager_container li {
