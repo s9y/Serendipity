@@ -249,7 +249,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
     function showPasswordform() {
         global $serendipity;
-        $url = serendipity_currentURL();
+        $url = serendipity_currentURL(true);
 
         $out = '
         <form action="'.$url.'" method="post" id="entrypasswordform">

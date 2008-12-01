@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Adjust getting the right URL for karmavoting and shoutbox
+      plugins [1.4-beta2]
+
     * Added %parentname% permalink property to category structure,
       so that a full category name path can be used instead of only
       %name%. (garvinhicking) [1.4-beta2]
