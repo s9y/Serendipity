@@ -13,7 +13,7 @@ if (file_exists($probelang)) {
 
 include dirname(__FILE__) . '/lang_en.inc.php';
 
-@define('PLUGIN_KARMA_DB_VERSION', '2.0');
+@define('PLUGIN_KARMA_DB_VERSION', '2.01');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -129,7 +129,7 @@ class serendipity_event_karma extends serendipity_event
             case 'appearance_tab':
                 $propbag->add('type', 'content');
                 $propbag->add('default', '
-    <input class="serendipityPrettyButton input_button" type="submit" value="Save" name="SAVECONF" />
+    <input class="serendipityPrettyButton input_button" type="submit" value="' . SAVE . '" name="SAVECONF" />
 </div>
 <div class="serendipity_karmaVoting_appearancetab" style="text-align: center;"><a name="karmaVoting_appearance"></a>
 <span style="font-size: 10pt; font-weight: bold;">' . PLUGIN_KARMA_TAB_APPEARANCE . '<hr style="width: 80%" />
@@ -138,7 +138,7 @@ class serendipity_event_karma extends serendipity_event
             case 'text_tab':
                 $propbag->add('type', 'content');
                 $propbag->add('default', '
-    <input class="serendipityPrettyButton input_button" type="submit" value="Save" name="SAVECONF" />
+    <input class="serendipityPrettyButton input_button" type="submit" value="' . SAVE . '" name="SAVECONF" />
 </div>
 <div class="serendipity_karmaVoting_texttab" style="text-align: center;"><a name="karmaVoting_text"></a> 
 <span style="font-size: 10pt; font-weight: bold;">' . PLUGIN_KARMA_TAB_TEXT . '<hr style="width: 80%" />
@@ -1058,7 +1058,8 @@ END_IMG_CSS;
 
                             //--TODO: Ensure that this works with the Custom Permalinks plugin
                             // (We've seen trouble; it votes correctly, but redirects to the front page)
-                            $url = serendipity_currentURL();
+                            $url = serendipity_currentURL(true);
+                            
                             // Voting is only allowed on entries.  Therefore voting URLs must be
                             // either single-entry URLs or summary URLs.  serendipity_currentURL
                             // converts them to an "ErrorDocument-URI", so we can focus on the

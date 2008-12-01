@@ -141,7 +141,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
             $dateformat = '%a, %d.%m.%Y %H:%M';
         }
        ?>
-       <form action="<?php echo serendipity_currentURL(); ?>" method="post">
+       <form action="<?php echo serendipity_currentURL(true); ?>" method="post">
            <input type="hidden" name="action" value="fillshoutbox" />
            <textarea name="serendipity[shouttext]" rows="4" cols="15" style="width: 90%"></textarea>
            <input name='submit' type='submit' value='<?php echo PLUGIN_SHOUTBOX_SUBMIT; ?>' />
