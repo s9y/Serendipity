@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Fix setting cookies for 30 Days, not only ~43 Minutes. Thanks
+      to konus! [1.4-beta2]
+
     * Adjust getting the right URL for karmavoting and shoutbox
       plugins [1.4-beta2]
 

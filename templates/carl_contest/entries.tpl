@@ -13,6 +13,7 @@
 <div class="serendipity_entry serendipity_entry_author_{$entry.author|@makeFilename} {if $entry.is_entry_owner}serendipity_entry_author_self{/if} ">
 
        <div class='serendipity_entryFooter'>
+
 		{if $entry.categories}
             <span class="serendipity_entryIcon">
             {foreach from=$entry.categories item="entry_category"}
