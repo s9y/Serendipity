@@ -627,6 +627,7 @@ a img {
 .container_serendipity_authors_plugin ul,
 .container_serendipity_plugin_entrylinks ul {
     list-style: none;
+    margin-left: 0;
     padding-left: 0;
 }
 
