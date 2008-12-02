@@ -288,7 +288,7 @@ if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
         function SetCookie(name, value) {
             var today  = new Date();
             var expire = new Date();
-            expire.setTime(today.getTime() + (60*60*24*30));
+            expire.setTime(today.getTime() + (60*60*24*30*1000));
             document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
         }
 
