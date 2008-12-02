@@ -429,7 +429,7 @@
                 {assign var="paginationStartPage" value="1"}
             {/if}
             {if $footer_prev_page}
-                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&#9668;</a>
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><!--[if lte IE 6]>&laquo;<![endif]--><!--[if gt IE 6]><!-->&#9668;<!--<![endif]--></a>
             {/if}
             {if $paginationStartPage > 1}
                 <a href="{'1'|string_format:$footer_pageLink}">1</a>
@@ -451,7 +451,7 @@
                 <a href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
             {/if}
             {if $footer_next_page}
-                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">&#9658;</a>
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><!--[if lte IE 6]>&raquo;<![endif]--><!--[if gt IE 6]><!-->&#9658;<!--<![endif]--></a>
             {/if}
         </div>
     {/if}
