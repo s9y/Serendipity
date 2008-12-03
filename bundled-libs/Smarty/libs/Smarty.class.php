@@ -20,17 +20,17 @@
  *
  * For questions, help, comments, discussion, etc., please join the
  * Smarty mailing list. Send a blank e-mail to
- * smarty-general-subscribe@lists.php.net
+ * smarty-discussion-subscribe@googlegroups.com 
  *
- * @link http://smarty.php.net/
+ * @link http://www.smarty.net/
  * @copyright 2001-2005 New Digital Group, Inc.
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author Andrei Zmievski <andrei@php.net>
  * @package Smarty
- * @version 2.6.19
+ * @version 2.6.21
  */
 
-/* $Id: Smarty.class.php 2722 2007-06-18 14:29:00Z danilo $ */
+/* $Id: Smarty.class.php 2785 2008-09-18 21:04:12Z Uwe.Tews $ */
 
 /**
  * DIR_SEP isn't used anymore, but third party apps might
@@ -464,7 +464,7 @@ class Smarty
      *
      * @var string
      */
-    var $_version              = '2.6.19';
+    var $_version              = '2.6.21';
 
     /**
      * current template inclusion depth
