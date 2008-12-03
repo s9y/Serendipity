@@ -3,6 +3,8 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added SMF importer [1.4-beta2]
+
     * Fix setting cookies for 30 Days, not only ~43 Minutes. Thanks
       to konus! [1.4-beta2]
 
