@@ -55,6 +55,8 @@ body {
     list-style-type: none;
 }
 
+.pagearrow { font-family: Arial, sans-serif!important;} /* greatest cross browser support for left and right facing arrows */
+
 #serendipityLeftSideBar,
 #content {
     float: left;

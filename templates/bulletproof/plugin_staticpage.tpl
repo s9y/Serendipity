@@ -13,7 +13,7 @@
     </ul>
     <div class="staticpage_navigation_center">
       {foreach name="crumbs" from=$staticpage_navigation.crumbs item="crumb"}
-      {if !$smarty.foreach.crumbs.first}&raquo;{/if}<a href="{$crumb.link}">{$crumb.name|@escape}</a>
+      {if !$smarty.foreach.crumbs.first}&#187;{/if}<a href="{$crumb.link}">{$crumb.name|@escape}</a>
       {/foreach}
     </div>
 {/if}

@@ -92,7 +92,7 @@ a:hover {
 
 /* approximately equal to frontend #content */
 .serendipityAdminContent {
-    padding: 3px 3px 0 8px;    
+    padding: 3px 3px 10px 8px;
     text-align: left;
 }
 

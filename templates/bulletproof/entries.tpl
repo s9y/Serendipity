@@ -135,7 +135,7 @@
                 {$entry.body}
                 {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
                     {assign var="shorttitle"  value=$entry.title|@truncate:50:'...'}
-                    <span class="continue_reading"><a href="{$entry.link}#extended" title='{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle}'>{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle} &raquo;</a></span>
+                    <span class="continue_reading"><a href="{$entry.link}#extended" title='{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle}'>{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$shorttitle} &#187;</a></span>
                 {/if}
            </div>
 
@@ -393,7 +393,7 @@
                 <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><img alt="{$CONST.PREVIOUS_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_back.png" /></a>
             {/if}
         {elseif $template_option.prev_next_style == 'text'}
-            <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&laquo; {$CONST.PREVIOUS_PAGE}</a>&#160;&#160;
+            <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}">&#171; {$CONST.PREVIOUS_PAGE}</a>&#160;&#160;
         {/if}
     {/if}
 
@@ -415,7 +415,7 @@
                 <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><img alt="{$CONST.NEXT_PAGE}" src="{$serendipityHTTPPath}templates/{$template}/img/{$template_option.colorset}_forward.png" /></a>
             {/if}
         {elseif $template_option.prev_next_style == 'text'}
-             <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE} &raquo;</a>
+             <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}">{$CONST.NEXT_PAGE} &#187;</a>
         {/if}
     {/if}
 
@@ -429,7 +429,7 @@
                 {assign var="paginationStartPage" value="1"}
             {/if}
             {if $footer_prev_page}
-                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><!--[if lte IE 6]>&laquo;<![endif]--><!--[if gt IE 6]><!-->&#9668;<!--<![endif]--></a>
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><span class="pagearrow">&#9668;</span></a>
             {/if}
             {if $paginationStartPage > 1}
                 <a href="{'1'|string_format:$footer_pageLink}">1</a>
@@ -451,7 +451,7 @@
                 <a href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
             {/if}
             {if $footer_next_page}
-                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><!--[if lte IE 6]>&raquo;<![endif]--><!--[if gt IE 6]><!-->&#9658;<!--<![endif]--></a>
+                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><span class="pagearrow">&#9658;</span></a>
             {/if}
         </div>
     {/if}
