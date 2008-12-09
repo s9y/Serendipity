@@ -6,6 +6,10 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+if (isset($serendipity['lang']) && !isset($serendipity['languages'][$serendipity['lang']])) {
+    $serendipity['lang'] = $serendipity['autolang'];
+}
+
 if (!defined('serendipity_LANG_LOADED') || serendipity_LANG_LOADED !== true) {
     $charset = serendipity_getCharset();
 
@@ -21,6 +25,7 @@ if (!defined('serendipity_LANG_LOADED') || serendipity_LANG_LOADED !== true) {
     }
 
     // Try and include preferred language from the configurated setting
+
     if (@include(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_'. $serendipity['lang'] .'.inc.php') ) {
         // Only here can we truely say the language is loaded
         define('serendipity_LANG_LOADED', true);
