@@ -473,6 +473,12 @@ class serendipity_archives_plugin extends serendipity_plugin {
 
         echo '<ul>' . "\n";
         
+        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
+            $dist_sql = 'count(e.id) AS orderkey';
+        } else {
+            $dist_sql = 'count(DISTINCT e.id) AS orderkey';
+        }
+        
         for($x = 0; $x < $max_x; $x++) {
             $current_ts = $ts;
             switch($freq) {
@@ -552,7 +558,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
                     '',
                     false,
                     true,
-                    'count(DISTINCT e.id) AS orderkey',
+                    $dist_sql,
                     '',
                     'single',
                     false, $category_set // the joins used
