@@ -1500,7 +1500,7 @@ function serendipity_printArchives() {
             $thisMonth  = persian_date_utf('m', serendipity_serverOffsetHour());
             break;
     }
-    $max = 0;
+    $max = 1;
 
     if (isset($serendipity['GET']['category'])) {
         $cat_sql = serendipity_getMultiCategoriesSQL($serendipity['GET']['category']);
