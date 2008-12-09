@@ -276,7 +276,7 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
                 echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, CHECKSUMS_PASS);
             } else {
                 foreach ($badsums as $rfile => $sum) {
-                    echo serendipity_upgraderResultDiagnose(S9Y_U_ERROR, sprintf(CHECKSUM_FAILED, $rfile));
+                    echo serendipity_upgraderResultDiagnose(S9Y_U_WARNING, sprintf(CHECKSUM_FAILED, $rfile)) . "<br />\n";
                 }
             }
      ?></td>

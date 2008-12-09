@@ -9,9 +9,14 @@ if (IN_serendipity !== true) {
     die ("Don't hack!\n");
 }
 
+echo "Creating checksums.\n";
+
 $basedir = realpath(dirname(__FILE__) . '/../') . '/';
 require_once $basedir . 'include/functions_installer.inc.php';
 require_once $basedir . 'include/functions_images.inc.php';
+
+$conf = file_get_contents($basedir . 'serendipity_config.inc.php');
+preg_match('@\$serendipity\[\'version\'\]\s*=\s*\'(.+)\'@imsU', $conf, $vmatch);
 
 // Find all the files in the serendipity directory and calculate their md5 sums
 $sums = array();
@@ -21,6 +26,7 @@ $excludes = array(
     );
 $files = serendipity_traversePath($basedir, '', false);
 foreach ($files as $fdata) {
+    echo $fdata['relpath'] . "\n";
     // Don't take checksums of directories
     if ($fdata['directory']) {
         continue;
@@ -48,7 +54,7 @@ if (!empty($sums)) {
     if (!$file) {
         die('Unable to open output file!');
     }
-    fwrite($file, '<?php' . "\n" . 'global $serendipity;' . "\n" . '$serendipity[\'checksums\'] = array (' . "\n");
+    fwrite($file, '<?php' . "\n" . 'global $serendipity;' . "\n" . '$serendipity[\'checksums_' . $vmatch[1] . '\'] = array (' . "\n");
         foreach ($sums as $fname => $sum) {
             fwrite($file, "'$fname' => '$sum',\n");
         }

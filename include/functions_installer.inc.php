@@ -1273,12 +1273,26 @@ function serendipity_FTPChecksum($filename, $type = null) {
  *    relative path of the file, and values are the bad checksum
  */
 function serendipity_verifyFTPChecksums() {
-    // Load the checksums
-    require_once S9Y_INCLUDE_PATH . 'checksums.inc.php';
-    // Verify that every file in the checksum list was uploaded correctly
+    global $serendipity;
+
     $badsums = array();
+
+    // Load the checksums
+    $f = S9Y_INCLUDE_PATH . 'checksums.inc.php';
+    
+    if (!file_exists($f) || filesize($f) < 1) {
+        return $badsums;
+    }
+
+    require_once $f;
+    // Verify that every file in the checksum list was uploaded correctly
     $basedir = realpath(dirname(__FILE__) . '/../');
-    foreach ($serendipity['checksums'] as $prel => $sum) {
+
+    if (!is_array($serendipity['checksums_' . $serendipity['version']])) {
+        return $badsums;
+    }
+
+    foreach ($serendipity['checksums_' . $serendipity['version']] as $prel => $sum) {
         $path = $basedir . '/' . $prel;
         // Don't take checksums of directories
         if (is_dir($path)) {

@@ -887,6 +887,9 @@ function serendipity_getSessionLanguage() {
         return $serendipity['lang'];
     }
 */
+    if (isset($serendipity['lang']) && !isset($serendipity['languages'][$serendipity['lang']])) {
+        $serendipity['lang'] = $serendipity['autolang'];
+    }
 
     if (isset($_REQUEST['user_language']) && (!empty($serendipity['languages'][$_REQUEST['user_language']])) && !headers_sent()) {
         serendipity_setCookie('serendipityLanguage', $_REQUEST['user_language'], false);
