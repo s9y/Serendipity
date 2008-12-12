@@ -3,6 +3,11 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added more parameters to {serendipity_printComments} function:
+      "block" (smarty block variable name),
+      "template" (smarty template file to render)
+      [1.4-beta2]
+
     * Fixed not remembering entryproperties when re-editing an entry,
       introduced with 1.4-beta1 [1.4-beta2]
 

@@ -730,7 +730,23 @@ function &serendipity_smarty_printComments($params, &$smarty) {
             );
     }
 
-    $out = serendipity_printComments($comments, $params['mode']);
+    if (empty($params['depth'])) {
+        $params['depth'] = 0;
+    }
+    
+    if (empty($params['trace'])) {
+        $params['trace'] = null;
+    }
+
+    if (empty($params['block'])) {
+        $params['block'] = 'COMMENTS';
+    }
+    
+    if (empty($params['template'])) {
+        $params['template'] = 'comments.tpl';
+    }
+    
+    $out = serendipity_printComments($comments, $params['mode'], $params['depth'], $params['trace'], $params['block'], $params['template']);
     return $out;
 }
 
