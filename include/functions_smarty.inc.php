@@ -767,7 +767,23 @@ function &serendipity_smarty_printTrackbacks($params, &$smarty) {
 
     $trackbacks =& serendipity_fetchTrackbacks($params['entry']);
 
-    $out = serendipity_printComments($trackbacks, VIEWMODE_LINEAR, 0, null, 'TRACKBACKS', 'trackbacks.tpl');
+    if (empty($params['depth'])) {
+        $params['depth'] = 0;
+    }
+
+    if (empty($params['trace'])) {
+        $params['trace'] = null;
+    }
+
+    if (empty($params['block'])) {
+        $params['block'] = 'TRACKBACKS';
+    }
+
+    if (empty($params['template'])) {
+        $params['template'] = 'trackbacks.tpl';
+    }
+
+    $out = serendipity_printComments($trackbacks, VIEWMODE_LINEAR, $params['depth'], $params['trace'], $params['block'], $params['template']);
     return $out;
 }
 
