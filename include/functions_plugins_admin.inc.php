@@ -360,6 +360,10 @@ function placement_box($name, $val, $is_plugin_editable = false, $is_event = fal
 function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_names, $showTable = true, $showSubmit = true, $showExample = true, $spawnNuggets = true, $postKey = 'plugin') {
     global $serendipity;
 
+    if (empty($config_names)) {
+        return false;
+    }
+
     if ($showSubmit && $postKey != 'plugin') { 
 ?>
     <div style="margin: 0px auto 0px 0px; text-align: right">
@@ -375,6 +379,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     $elcount = 0;
     $htmlnugget = array();
+    
     foreach ($config_names as $config_item) {
         $elcount++;
         $cbag = new serendipity_property_bag;
