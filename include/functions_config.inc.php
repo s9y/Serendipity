@@ -745,7 +745,7 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
             break;
 
         case 'preview':
-            echo '<div style="float: left; height: 225px"></div>';
+            echo '<div id="serendipity_preview_spacer" style="float: left; height: 225px"></div>';
             serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
             echo '<br style="clear: both" />';
 
