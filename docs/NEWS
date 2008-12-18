@@ -3,6 +3,9 @@
 Version 1.4 ()
 ------------------------------------------------------------------------
 
+    * Added ability to rename "feeds" in teh syndication plugin and
+      add a big image on top (onli)
+
     * Added more parameters to {serendipity_printComments} function:
       "block" (smarty block variable name),
       "template" (smarty template file to render)

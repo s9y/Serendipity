@@ -935,3 +935,9 @@
 @define('PLUGIN_DOCUMENTATION', 'Documentation');
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
+@define('SYNDICATION_PLUGIN_BIGIMG', 'Big Image');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file.');
+@define('SYNDICATION_PLUGIN_FEEDNAME', 'Displayed name for "feed"');
+@define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Enter an optional custom name for the feeds (defaults to "feed" when empty)');
+@define('SYNDICATION_PLUGIN_COMMENTNAME', 'Displayed name for "comment" feed');
+@define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'Enter an optional custom name for the comment feed');

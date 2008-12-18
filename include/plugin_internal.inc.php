@@ -753,6 +753,9 @@ class serendipity_syndication_plugin extends serendipity_plugin {
                                         'fb_title',
                                         'fb_alt',
                                         'fb_img',
+                                        'big_img',
+                                        'feed_name',
+                                        'comment_name',
                                        )
         );
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
@@ -966,6 +969,26 @@ class serendipity_syndication_plugin extends serendipity_plugin {
                 $propbag->add('default',     '');
                 break;
 
+            case 'big_img':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        SYNDICATION_PLUGIN_BIGIMG);
+                $propbag->add('description', SYNDICATION_PLUGIN_BIGIMG_DESC);
+                $propbag->add('default',     '');
+                break;
+
+            case 'feed_name':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDNAME);
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDNAME_DESC);
+                $propbag->add('default',     '');
+                break;
+
+             case 'comment_name':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        SYNDICATION_PLUGIN_COMMENTNAME);
+                $propbag->add('description', SYNDICATION_PLUGIN_COMMENTNAME_DESC);
+                $propbag->add('default',     '');
+                break;
 
             default:
                 return false;
@@ -980,13 +1003,37 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         $title = $this->get_config('title');
         $icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
 
-   ?><ul><?php
+        $custom_feed = trim($this->get_config('feed_name'));
+        $custom_comm = trim($this->get_config('comment_name'));
+        $custom_img  = trim($this->get_config('big_img'));
+
+        if (empty($custom_feed) || $custom_feed == 'default' || $custom_feed == 'none' || $custom_feed == 'empty') {
+            $FEED = 'feed';
+        } else {
+            $FEED = $custom_feed;
+        }
+
+        if (empty($custom_comm) || $custom_comm == 'default' || $custom_comm == 'none' || $custom_comm == 'empty') {
+            $COMMENTS = COMMENTS;
+        } else {
+            $COMMENTS = $custom_comm;
+        }
+
+        if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
+?>
+        <div style="padding-bottom: 2px;">
+            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" /></a>
+        </div>
+<?php
+        }
+
+?><ul><?php
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>">RSS 0.91 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>">RSS 0.91 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
@@ -995,7 +1042,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>">RSS 1.0 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>">RSS 1.0 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
@@ -1004,7 +1051,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>">RSS 2.0 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>">RSS 2.0 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
@@ -1013,7 +1060,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="ATOM/XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>">ATOM 0.3 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>">ATOM 0.3 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
@@ -1022,7 +1069,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="ATOM/XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>">ATOM 1.0 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>">ATOM 1.0 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
@@ -1031,7 +1078,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><span style="white-space: nowrap">RSS 2.0 <?php echo COMMENTS; ?></span></a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><span style="white-space: nowrap">RSS 2.0 <?php echo $COMMENTS; ?></span></a>
         </li>
 <?php
         }
@@ -1040,7 +1087,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 ?>
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 feed</a>
+            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 <?php echo $FEED; ?></a>
         </li>
 <?php
         }
