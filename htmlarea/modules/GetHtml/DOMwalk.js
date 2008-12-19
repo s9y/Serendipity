@@ -22,13 +22,15 @@ break;
 case 2:
 break;
 case 4:
-_9+=(Xinha.is_ie?("\n"+_8):"")+"<![CDATA["+_5.data+"]]>";
+// s9y patch, ticket #1360
+_9+=(Xinha.is_ie?(""+_8):"")+"<![CDATA["+_5.data+"]]>";
 break;
 case 5:
 _9+="&"+_5.nodeValue+";";
 break;
 case 7:
-_9+=(Xinha.is_ie?("\n"+_8):"")+"<"+"?"+_5.target+" "+_5.data+" ?>";
+// s9y patch, ticket #1360
+_9+=(Xinha.is_ie?(""+_8):"")+"<"+"?"+_5.target+" "+_5.data+" ?>";
 break;
 case 1:
 case 11:
@@ -155,7 +157,8 @@ for(i=_5.firstChild;i;i=i.nextSibling){
 if(!_18&&i.nodeType==1&&Xinha.isBlockElement(i)){
 _18=true;
 }
-_9+=Xinha.getHTMLWrapper(i,true,_7,_8+"  ");
+// S9Y PATCH, TICKET #1360
+_9+=Xinha.getHTMLWrapper(i,true,_7,_8);
 }
 if(_6&&!_a){
 _9+=(((Xinha.isBlockElement(_5)&&_18)||_c=="head"||_c=="html")?("\n"+_8):"")+"</"+_5.tagName.toLowerCase()+">";

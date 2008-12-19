@@ -144,7 +144,8 @@ _18=_18.replace(/<br \/>\n$/,"");
 if(_16){
 _18+="</"+_1e+">";
 }
-_18=Xinha.indent(_18);
+//COMMENTED OUT FROM S9Y, TICKET #1360
+//_18=Xinha.indent(_18);
 }
 return _18;
 };
