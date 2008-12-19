@@ -599,6 +599,60 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
 	<?php } else  { ?>
     var editor<?php echo $jsname; ?> = null; var config<?php echo $jsname; ?> = null;
 	<?php } // end if ?>
+    <?php if (is_array($eventData['buttons'])) { ?>
+    var btn_callbacks = new Array();
+    // Serendipity standardized editor functions
+    function serendipity_editor_getSelected(editor_id) {
+        var editor = findXinha(editor_id);
+        if (editor == 'undefined') {
+            editor = findHtmlArea(editor_id);
+        }
+        var html = editor.getSelectedHTML();
+        return html;
+    }
+    function serendipity_editor_replaceSelected(editor_id, str) {
+        var editor = findXinha(editor_id);
+        if (editor == 'undefined') {
+            editor = findHtmlArea(editor_id);
+        }
+        editor.insertHTML(str);
+    }
+    function serendipity_editor_getAll(editor_id) {
+        var editor = findXinha(editor_id);
+        if (editor == 'undefined') {
+            editor = findHtmlArea(editor_id);
+        }
+        return editor.getEditorContent();
+    }
+    function serendipity_editor_replaceAll(editor_id, str) {
+        var editor = findXinha(editor_id);
+        if (editor == 'undefined') {
+            editor = findHtmlArea(editor_id);
+        }
+        editor.setEditorContent(str);
+    }
+    // Serendipity standardized editor convenience function
+    function findXinha(editor_id) {
+        if (typeof(xinha_editors) != 'undefined') {
+            for (var editorName in xinha_editors) {
+                if (editor_id == xinha_editors[editorName]._textArea.name) {
+                    return xinha_editors[editorName];
+                }
+            }
+        }
+        return 'undefined';
+    }
+    function findHtmlArea(editor_id) {
+        if (editor_id == 'serendipity[body]') {
+            return editorbody;
+        } else if (editor_id == 'serendipity[extended]') {
+            return editorextended;
+        } else if (typeof(htmlarea_editors) != 'undefined') {
+            return htmlarea_editors[editor_id];
+        } 
+        return 'undefined';
+    }
+    <?php } ?>
     function Spawn<?php echo $jsname; ?>(<?php echo $spawnMulti ? 'id' : ''; ?>) {
 		editor<?php echo $jsname; ?> = new HTMLArea("<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>);
         <?php if($spawnMulti) { ?>
@@ -613,6 +667,29 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             }
         );
         config<?php echo $jsname; ?>.toolbar.push([ "image_selector"]);
+        <?php 
+            if (is_array($eventData['buttons'])) {
+                foreach($eventData['buttons'] as $button) {
+                    echo "btn_callbacks['{$button['id']}'] = {$button['javascript']};\n";
+                    echo "var cb_{$button['id']} = btn_callbacks['{$button['id']}'];\n";
+                    echo "config$jsname.registerButton('{$button['id']}', '{$button['name']}', '{$button['img_url']}', false, function (editor, id) { btn_callbacks['{$button['id']}'](editor._textArea.id, id); });\n";
+                    echo "config$jsname.toolbar.push([\"{$button['id']}\"]);\n";
+                    // Sort buttons into toolbar lists for later additions
+                    switch($button['toolbar']) {
+                    case S9Y_WYSIWYG_TOOLBAR_FORMATTING:
+                        $toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING][] = $button;
+                        break;
+                    case S9Y_WYSIWYG_TOOLBAR_MEDIA:
+                    case S9Y_WYSIWYG_TOOLBAR_WEB:
+                        $toolbar[S9Y_WYSIWYG_WEB][] = $button;
+                        break;
+                    default:
+                        $toolbar['other'][] = $button;
+                        break;
+                    }
+                }
+            }
+            ?>
         <?php if ($xinha) { ?>config<?php echo $jsname; ?>.pageStyle = '<?php echo $csscode; ?>';
         <?php } else { ?>config<?php echo $jsname; ?>.cssFile = '<?php echo $csscode; ?>';
         <?php } ?>
@@ -622,15 +699,35 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
               "fontsize", "space",
               "formatblock", "space",
               "bold", "italic", "underline", "strikethrough", "separator",
-              "subscript", "superscript", "separator",
+              "subscript", "superscript", "separator", <?php
+                  if (is_array($toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING])) {
+                      foreach($toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING] as $button) {
+                          echo '"' . $button['id'] . '",';
+                      }
+                      echo '"separator",' . "\n";
+                  } ?>
               "copy", "cut", "paste", "space", "undo", "redo" ],
 
             [ "justifyleft", "justifycenter", "justifyright", "justifyfull", "separator",
               "lefttoright", "righttoleft", "separator",
               "orderedlist", "unorderedlist", "outdent", "indent", "separator",
               "forecolor", "hilitecolor", "separator",
-              "inserthorizontalrule", "createlink", "insertimage", "image_selector", "inserttable", "htmlmode", "separator",
-              "popupeditor", "separator", "showhelp", "about" ]
+              "inserthorizontalrule", "createlink", "insertimage", "image_selector", "inserttable", "htmlmode", "separator", <?php
+                  if (is_array($toolbar[S9Y_WYSIWYG_TOOLBAR_WEB])) {
+                      foreach($toolbar[S9Y_WYSIWYG_TOOLBAR_WEB] as $button) {
+                          echo '"' . $button['id'] . '",';
+                      }
+                      echo '"separator",' . "\n";
+                  } ?>
+              "popupeditor", "separator", "showhelp", "about" ] <?php
+                  if (is_array($toolbar['other'])) {
+                      echo ",\n    [ ";
+                      foreach($toolbar['other'] as $button) {
+                          echo '"' . $button['id'] . '", ';
+                      }
+                      echo '"separator" ]' . "\n";
+                  } ?>
+              
         ];
         // editor<?php echo $jsname; ?>.registerPlugin(SpellChecker);  // [SPELLCHECK]
         editor<?php echo $jsname; ?>.generate();
