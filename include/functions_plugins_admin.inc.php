@@ -139,7 +139,7 @@ function show_plugins($event_only = false, $sidebars = null)
         $ptitle = $opts[$plugin_placement];
         $pid    = $plugin_placement;
 
-        echo '<td class="pluginmanager_side">';
+        echo '<td class="pluginmanager_side pluginmanager_' . ($event_only ? 'event' : 'sidebar') . '">';
         echo '<div class="heading">' . $ptitle . '</div>';
         echo '<ol id="' . $pid . '_col" class="pluginmanager_container">';
         if ($is_invisible) {
