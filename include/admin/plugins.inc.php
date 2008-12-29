@@ -153,17 +153,17 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                     echo '<br /><a href="' . htmlspecialchars($documentation) . '">' . PLUGIN_DOCUMENTATION . '</a>';
                 }
 
-                if (file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+                if (@file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
                     echo '<br /><a href="plugins/' . $plugin->pluginPath . '/ChangeLog">' . PLUGIN_DOCUMENTATION_CHANGELOG . '</a>';
                 }
 
-                if (file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
+                if (@file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
                     echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_' . $serendipity['lang'] . '.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
-                } elseif (file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
+                } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
                     echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_en.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
-                } elseif (file_exists(dirname($plugin->pluginFile) . '/documentation.html')) {
+                } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation.html')) {
                     echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
-                } elseif (file_exists(dirname($plugin->pluginFile) . '/README')) {
+                } elseif (@file_exists(dirname($plugin->pluginFile) . '/README')) {
                     echo '<br /><a href="plugins/' . $plugin->pluginPath . '/README">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
                 }
             ?>
@@ -228,18 +228,18 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
             $props['requirements'] = unserialize($props['requirements']);
 
-            if (empty($props['changelog']) && file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+            if (empty($props['changelog']) && @file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
                 $props['changelog'] = 'plugins/' . $plugin->pluginPath . '/ChangeLog';
             }
 
             if (empty($props['local_documentation'])) {
-                if (file_exists(dirname($props['plugin_file']) . '/documentation_' . $serendipity['lang'] . '.html')) {
+                if (@file_exists(dirname($props['plugin_file']) . '/documentation_' . $serendipity['lang'] . '.html')) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation_' . $serendipity['lang'] . '.html';
-                } elseif (file_exists(dirname($props['plugin_file']) . '/documentation_en.html')) {
+                } elseif (@file_exists(dirname($props['plugin_file']) . '/documentation_en.html')) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation_en.html';
-                } elseif (file_exists(dirname($props['plugin_file']) . '/documentation.html')) {
+                } elseif (@file_exists(dirname($props['plugin_file']) . '/documentation.html')) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/documentation.html';
-                } elseif (file_exists(dirname($props['plugin_file']) . '/README')) {
+                } elseif (@file_exists(dirname($props['plugin_file']) . '/README')) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
                 }
             }
