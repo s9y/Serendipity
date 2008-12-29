@@ -6,6 +6,9 @@ Version 1.5 ()
 Version 1.4.1 ()
 ------------------------------------------------------------------------
 
+    * Remove warning message when checking for plugin documentation files
+      on open_basedir servers (garvinhicking)
+
 Version 1.4 (December 29th 2008)
 ------------------------------------------------------------------------
 
