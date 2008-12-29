@@ -41,7 +41,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version']         = '1.4-beta2';
+$serendipity['version']         = '1.4';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
@@ -222,12 +222,12 @@ if (defined('IN_installer') && IS_installed === false) {
  *   Make sure that the file included is in the current directory and not any possible
  *   include path
  */
-if (file_exists($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php')) {
+if (@file_exists($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php')) {
     $local_config = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php';
 } elseif (defined('S9Y_DATA_PATH')) {
     // Shared installation!
     $local_config = S9Y_DATA_PATH . '/serendipity_config_local.inc.php';
-} elseif (file_exists($serendipity['serendipityPath'] . '/serendipity_config_local.inc.php')) {
+} elseif (@file_exists($serendipity['serendipityPath'] . '/serendipity_config_local.inc.php')) {
     $local_config = $serendipity['serendipityPath'] . '/serendipity_config_local.inc.php';
 } else {
     // Installation fallback
