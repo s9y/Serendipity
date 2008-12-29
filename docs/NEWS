@@ -1,10 +1,13 @@
 # $Id$
 
-Version 1.4 ()
+Version 1.4 (December 29th 2008)
 ------------------------------------------------------------------------
 
-    * Added ability to rename "feeds" in teh syndication plugin and
-      add a big image on top (onli)
+    * Added new event hooks for future support of WYSIWYG button
+      modifications (judebert) [1.4-beta2]
+
+    * Added ability to rename "feeds" in the syndication plugin and
+      add a big image on top (onli) [1.4-beta2]
 
     * Added more parameters to {serendipity_printComments} function:
       "block" (smarty block variable name),
