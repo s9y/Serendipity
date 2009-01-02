@@ -187,11 +187,16 @@ class serendipity_plugin_history extends serendipity_plugin
             );
             $date   = ($displaydate=='0') ? '' : serendipity_strftime($dateformat,$e[$x]['timestamp']);
             $author = ($displayauthor) ? $e[$x]['author'] . ': ' : '';
+            echo '<div class="serendipity_history_info">';
+            if ($displayauthor)
+                { echo '<span class="serendipity_history_author">' . $author . '</span>'; }
+            if ($displaydate)
+                { echo '<span class="serendipity_history_date">' . $date . '</span>'; } 
             $t = ($maxlength==0 || strlen($e[$x]['title'])<=$maxlength) ?
                     $e[$x]['title'] :
                     (trim(serendipity_mb('substr', $e[$x]['title'], 0, $maxlength-3)).' [...]');
-            echo '<div class="serendipity_history_info"><span class="serendipity_history_author">' . $author . '</span> <span class="serendipity_history_date">'. $date . "</span> <a href='$url' title='".str_replace("'", '`', htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) . '</a></div>' . '<div class="serendipity_history_body">' .
-                 strip_tags($e[$x]['body']) . '</div>';
+            echo "<a href=" . $url . " title='".str_replace("'", "`", htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) . "</a></div>";
+            echo '<div class="serendipity_history_body">' . strip_tags($e[$x]['body']) . '</div>';
         }
         echo (empty($outro)) ? '' : '<div class="serendipity_history_outro">' . $outro . '</div>';
     }
