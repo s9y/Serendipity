@@ -414,7 +414,7 @@ var $filter_defaults;
         }
 
         $hta = $serendipity['serendipityPath'] . '.htaccess';
-        if (file_exists($hta) && is_writable($hta)) {
+        if (count($deny) > 0 && file_exists($hta) && is_writable($hta)) {
             $htaccess = file_get_contents($hta);
             $fp = @fopen($hta, 'w');
             if (!$fp) {
@@ -734,6 +734,11 @@ var $filter_defaults;
                     break;
 
                 case 'frontend_saveComment':
+                    $fp = fopen('/tmp/spamblock2.log', 'a');
+                    fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($eventData, true) . "\n" . print_r($addData, true) . "\n");
+                    fclose($fp);
+                    
+                    
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
 
