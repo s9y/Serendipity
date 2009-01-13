@@ -6,6 +6,9 @@ Version 1.5 ()
 Version 1.4.1 ()
 ------------------------------------------------------------------------
 
+    * Change "Allow duplicate content" in spamblock plugin to not
+      operate on (empty) pingbacks (garvinhicking)
+          
     * Upgrade to Smarty 2.6.22 to fix a PCRE bug
 
     * Remove warning message when checking for plugin documentation files
