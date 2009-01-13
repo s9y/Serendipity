@@ -734,10 +734,11 @@ var $filter_defaults;
                     break;
 
                 case 'frontend_saveComment':
+                /*
                     $fp = fopen('/tmp/spamblock2.log', 'a');
                     fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($eventData, true) . "\n" . print_r($addData, true) . "\n");
                     fclose($fp);
-                    
+                */    
                     
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
@@ -1110,8 +1111,8 @@ var $filter_defaults;
                         }
 
                         // Check for identical comments. We allow to bypass trackbacks from our server to our own blog.
-                        if ( $this->get_config('bodyclone', true) === true && $_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) {
-                            $query = "SELECT count(id) AS counter FROM {$serendipity['dbPrefix']}comments WHERE body = '" . serendipity_db_escape_string($addData['comment']) . "'";
+                        if ( $this->get_config('bodyclone', true) === true && $_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR'] && $addData['type'] != 'PINGBACK') {
+                            $query = "SELECT count(id) AS counter FROM {$serendipity['dbPrefix']}comments WHERE type = '" . $addData['type'] . "' AND body = '" . serendipity_db_escape_string($addData['comment']) . "'";
                             $row   = serendipity_db_query($query, true);
                             if (is_array($row) && $row['counter'] > 0) {
                                 $this->IsHardcoreSpammer();
