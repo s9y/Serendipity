@@ -6,6 +6,9 @@ Version 1.5 ()
 Version 1.4.1 ()
 ------------------------------------------------------------------------
 
+    * Fix missing index key creation for statistics tables in the
+      statistics plugin (isotopp)
+         
     * Change "Allow duplicate content" in spamblock plugin to not
       operate on (empty) pingbacks (garvinhicking)
           
