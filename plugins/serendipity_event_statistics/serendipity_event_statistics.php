@@ -966,15 +966,22 @@ class serendipity_event_statistics extends serendipity_event
     } //end of function createTables()
 
     function updateTables() {
+        global $serendipity;
+
         //create indices
-        $q   = "CREATE INDEX visitorses ON {$serendipity['dbPrefix']}visitors(sessID);";
+        $q   = "CREATE INDEX visitorses ON {$serendipity['dbPrefix']}visitors (sessID);";
         serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitorday ON {$serendipity['dbPrefix']}visitors(day);";
+        $q   = "CREATE INDEX visitorday ON {$serendipity['dbPrefix']}visitors (day);";
         serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitortime ON {$serendipity['dbPrefix']}visitors(time);";
+        $q   = "CREATE INDEX visitortime ON {$serendipity['dbPrefix']}visitors (time);";
         serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitortimeb ON {$serendipity['dbPrefix']}visitors_count(year, month, day);";
+        $q   = "CREATE INDEX visitortimeb ON {$serendipity['dbPrefix']}visitors_count (year, month, day);";
         serendipity_db_schema_import($q);
+        $q   = "CREATE INDEX refsrefs ON {$serendipity['dbPrefix']}refs (refs);";
+        serendipity_db_schema_import($q);
+        $q   = "CREATE INDEX refscount ON {$serendipity['dbPrefix']}refs (count);";
+        serendipity_db_schema_import($q);
+
         $this->set_config('db_indices_created', '1');
     }
 
