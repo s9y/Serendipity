@@ -143,7 +143,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
 
         $references = serendipity_db_query("SELECT link, max(name) as name FROM {$serendipity['dbPrefix']}references WHERE entry_id = " . $id . " AND type = '' GROUP BY link ORDER BY id");
         if (is_array($references)) {
-            $links = '<ul>';
+            $links = '<ul class="plainList">';
             foreach($references AS $key => $row) {
                 if (empty($row['name']) || empty($row['link'])) {
                     continue;
@@ -169,7 +169,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
         if ($this->get_config('show_referers', 'true') == 'true') {
             $ref      = serendipity_db_query("SELECT SUM(count) as fullcount, scheme, host, port, path, query, " . serendipity_db_concat("scheme, '://', host, ':', port, path, '?', query") . " AS fulllink FROM {$serendipity['dbPrefix']}referrers WHERE entry_id = " . $id . " GROUP BY scheme,host,port,path,query ORDER BY $orderby DESC LIMIT $maxref");
             if (is_array($ref)) {
-                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul>';
+                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul class="plainList">';
                 foreach($ref AS $key => $row) {
                     $url = sprintf('%s://%s%s%s%s',
                       $row['scheme'],
