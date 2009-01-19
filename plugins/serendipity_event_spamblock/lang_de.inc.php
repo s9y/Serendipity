@@ -121,3 +121,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_ALWAYS', 'Immer bestätigen');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL', 'Sie erhalten nun eine E-Mail-Benachrichtigung, mit der Sie ihren Kommentar freischalten können.');
 @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_INFO', 'Um einen Kommentar hinterlassen zu können, erhalten Sie nach dem Kommentieren eine E-Mail mit Aktivierungslink an ihre angegebene Adresse.');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER', 'Antispam-Server');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER_DESC', 'Für welchen Antispam-Server soll obiger API-Key gelten? Die anonymisierten Varianten bedeuten, dass alle übertragenen Daten zu den Antispam-Servern keine Angabe von Name oder E-Mail-Adresse enthalten. Dies reduziert jedoch auch die Spam-Erkennungsrate.');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS', 'TypePad Antispam');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET', 'Akismet');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS_ANON', 'TypePad Antispam (anonymisiert)');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET_ANON', 'Akismet (anonymisiert)');
