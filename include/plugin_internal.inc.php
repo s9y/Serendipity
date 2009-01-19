@@ -1807,7 +1807,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
         $image = (($image == "'none'" || $image == 'none') ? '' : $image);
 
-        $html .= '<ul>' . "\n";
+        $html .= '<ul class="plainList">' . "\n";
 
         if (is_array($authors) && count($authors)) {
             foreach ($authors as $auth) {
