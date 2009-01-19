@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 2384 2008-11-26 12:33:29Z garvinhicking $
+<?php # $Id: serendipity_lang_en.inc.php 2405 2008-12-18 10:55:57Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
