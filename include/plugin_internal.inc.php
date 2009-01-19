@@ -1027,7 +1027,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 <?php
         }
 
-?><ul><?php
+?><ul class="plainList"><?php
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
