@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.71');
+        $propbag->add('version',       '1.72');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -263,10 +263,12 @@ var $filter_defaults;
                 // to akismet.  Otherwise, encourage adoption of the Open
                 // Source alternative, TypePad Antispam.
                 $curr_key = $this->get_config('akismet', false);
-                $propbag->add('default', (empty($curr_key)?'akismet':'tpas'));
+                $propbag->add('default', (empty($curr_key) ? 'akismet' : 'tpas'));
                 $propbag->add('radio', array(
-                    'value' => array('tpas', 'akismet'),
-                    'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS, PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET)
+                    'value' => array('tpas', 'akismet', 'anon-tpas', 'anon-akismet'),
+                    'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS, PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET,
+                                     PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS_ANON, PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET_ANON
+                    )
                 ));
                 $propbag->add('radio_per_row', '1');
 
@@ -484,14 +486,28 @@ var $filter_defaults;
                 // where no server was set
                 $server_type = $this->get_config('akismet_server', 'akismet');
                 $server = '';
+                $anon = false;
+
                 switch ($server_type) {
-                case 'tpas':
-                    $server = 'api.antispam.typepad.com';
-                    break;
-                case 'akismet':
-                    $server = 'rest.akismet.com';
-                    break;
+                    case 'anon-tpas':
+                        $anon = true;
+                    case 'tpas':
+                        $server = 'api.antispam.typepad.com';
+                        break;
+    
+                    case 'anon-akismet':
+                        $anon = true;
+                    case 'akismet':
+                        $server = 'rest.akismet.com';
+                        break;
                 }
+                
+                if ($anon) {
+                    $data['comment_author'] = 'John Doe';
+                    $data['comment_author_email'] = '';
+                    $data['comment_author_url'] = '';
+                }
+
                 if (empty($server)) {
                     $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
                     $ret['is_spam'] = false;

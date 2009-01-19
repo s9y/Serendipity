@@ -3,6 +3,13 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Allow anonymized submission to Typepad/Akismet to attribute
+      possible federal laws for data protection (garvinhicking)
+      (RFE #2517320)
+
+    * Change antispam plugin to also support Typepad as an alternative
+      to Akismet. (judebert)
+
 Version 1.4.1 (January 16th, 2009)
 ------------------------------------------------------------------------
 
