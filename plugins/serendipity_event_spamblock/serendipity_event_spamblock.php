@@ -74,6 +74,7 @@ var $filter_defaults;
             'contentfilter_emails',
             'bloggdeblacklist',
             'akismet',
+            'akismet_server',
             'akismet_filter',
             'hide_email',
             'checkmail',
@@ -250,9 +251,17 @@ var $filter_defaults;
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_AKISMET);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC);
                 $propbag->add('default', '');
+
+                break;
+
+            case 'akismet_server':
+                $propbag->add('type', 'radio');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER_DESC);
+                $propbag->add('default', 'tpas');
                 $propbag->add('radio', array(
-                    'value' => array('moderate', 'reject', 'none'),
-                    'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT, NONE)
+                    'value' => array('tpas', 'akismet'),
+                    'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS, PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET)
                 ));
                 $propbag->add('radio_per_row', '1');
 
@@ -466,8 +475,26 @@ var $filter_defaults;
                     'readTimeout'       => array(5,0), 
                 );
 
+                $server_type = $this->get_config('akismet_server');
+                $server = '';
+                switch ($server_type) {
+                case 'tpas':
+                    $server = 'api.antispam.typepad.com';
+                    break;
+                case 'akismet':
+                    $server = 'rest.akismet.com';
+                    break;
+                }
+                if (empty($server)) {
+                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
+                    $ret['is_spam'] = false;
+                    $ret['message'] = 'No server for Akismet request';
+                    break;
+                } else {
+                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
+                }
                 $req    = &new HTTP_Request(
-                    'http://rest.akismet.com/1.1/verify-key',
+                    'http://' . $server . '/1.1/verify-key',
                      $opt
                 );
 
@@ -492,7 +519,7 @@ var $filter_defaults;
                 }
 
                 $req    = &new HTTP_Request(
-                    'http://' . $api_key . '.rest.akismet.com/1.1/comment-check',
+                    'http://' . $api_key . '.' . $server . '/1.1/comment-check',
                     $opt
                 );
 

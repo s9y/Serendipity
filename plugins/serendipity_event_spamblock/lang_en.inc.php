@@ -105,8 +105,12 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE', 'Disable spamblock for Authors');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', 'You can allow authors in the following usergroups to post comments without them being checked by the spamblock plugin.');
 
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER', 'Akismet server');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER_DESC', 'Which server is the above key registered for?');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS', 'TypePad Antispam');
+@define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET', 'Original Akismet');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET', 'Akismet API Key');
-@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is a central anti-spam and blacklisting server. It can analyze your incoming comments and check if that comment has been listed as Spam. Akismet was developed for WordPress specifically, but can be used by other systems. You just need an API Key from http://www.akismet.com by registering an account at http://www.wordpress.com/. If you leave this API key empty, Akismet will not be used.');
+@define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet is an anti-spam and blacklisting protocol. It can analyze your incoming comments and check if that comment has been listed as Spam.  Two servers are supported: the original Akismet server, and the TypePad Antispam (TPAS) Open Source server.  To use the Akismet server, you must register for an account at http://www.wordpress.com/.  To use the TPAS server, you must optain a free key from http://antispam.typepad.com/.  If you leave the key blank, Akismet will not be used to check spam.');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'How to treat Akismet-reported spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Filtered by Akismet.com Blacklist');
 
