@@ -417,10 +417,7 @@ td.serendipity_admin_list_item {
 /*** Additional plugin styles needed for the modernized output code ***/
 /*** added by Matthias 'YellowLed' Mees                             ***/
 
-.container_serendipity_archives_plugin ul,
-.container_serendipity_syndication_plugin ul,
-.container_serendipity_authors_plugin ul,
-.container_serendipity_plugin_entrylinks ul {
+.plainList {
     list-style: none;
     margin-left: 0;
     padding-left: 0;
