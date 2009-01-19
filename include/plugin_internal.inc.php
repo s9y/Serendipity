@@ -471,7 +471,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
         $freq = $this->get_config('frequency', 'months');
 
-        echo '<ul>' . "\n";
+        echo '<ul class="plainList">' . "\n";
         
         if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
             $dist_sql = 'count(e.id) AS orderkey';
