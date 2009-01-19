@@ -258,7 +258,12 @@ var $filter_defaults;
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_AKISMET_SERVER_DESC);
-                $propbag->add('default', 'tpas');
+                // If the user has an API key, but hasn't set a server, he 
+                // must be using an older version of the plugin; default
+                // to akismet.  Otherwise, encourage adoption of the Open
+                // Source alternative, TypePad Antispam.
+                $curr_key = $this->get_config('akismet', false);
+                $propbag->add('default', (empty($curr_key)?'akismet':'tpas'));
                 $propbag->add('radio', array(
                     'value' => array('tpas', 'akismet'),
                     'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS, PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET)
@@ -475,7 +480,9 @@ var $filter_defaults;
                     'readTimeout'       => array(5,0), 
                 );
 
-                $server_type = $this->get_config('akismet_server');
+                // Default server type to akismet, in case user has an older version of the plugin
+                // where no server was set
+                $server_type = $this->get_config('akismet_server', 'akismet');
                 $server = '';
                 switch ($server_type) {
                 case 'tpas':
