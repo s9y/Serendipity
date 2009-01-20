@@ -13,6 +13,9 @@ Version 1.5 ()
 Version 1.4.1 (January 16th, 2009)
 ------------------------------------------------------------------------
 
+    * Fix bad link in Remote RSS sidebar plugin (#2521122)
+      (garvinhicking)
+
     * Fix missing index key creation for statistics tables in the
       statistics plugin (isotopp)
          

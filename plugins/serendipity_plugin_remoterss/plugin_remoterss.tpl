@@ -1,7 +1,7 @@
 {foreach from=$remoterss_items.items item="item"}
 <div class="rss_item">
     {if $remoterss_items.use_rss_link}
-    <div class="rss_link"><a href="{$remoterss_items.link|@escape}" {if $remoterss_items.target}target="$remoterss_items.target"{/if}>
+    <div class="rss_link"><a href="{$item.link|@escape}" {if $remoterss_items.target}target="$remoterss_items.target"{/if}>
     {/if}
 
     {if $remoterss_items.bulletimg}
