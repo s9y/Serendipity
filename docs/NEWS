@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Allow javascript inside Xinha WYSIWYG textarea (garvinhicking)
+
     * Allow anonymized submission to Typepad/Akismet to attribute
       possible federal laws for data protection (garvinhicking)
       (RFE #2517320)

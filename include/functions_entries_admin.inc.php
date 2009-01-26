@@ -690,7 +690,9 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                 }
             }
             ?>
-        <?php if ($xinha) { ?>config<?php echo $jsname; ?>.pageStyle = '<?php echo $csscode; ?>';
+        <?php if ($xinha) { ?>
+             config<?php echo $jsname; ?>.pageStyle = '<?php echo $csscode; ?>';
+             config<?php echo $jsname; ?>.stripScripts = false;
         <?php } else { ?>config<?php echo $jsname; ?>.cssFile = '<?php echo $csscode; ?>';
         <?php } ?>
 
