@@ -13,7 +13,7 @@ if (file_exists($probelang)) {
 
 include dirname(__FILE__) . '/lang_en.inc.php';
 
-@define('PLUGIN_KARMA_DB_VERSION', '2.01');
+@define('PLUGIN_KARMA_DB_VERSION', '2.0');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -54,7 +54,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.1');
+        $propbag->add('version',       '2.2');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -65,6 +65,8 @@ class serendipity_event_karma extends serendipity_event
             'entry_display'               => true, 
             'css'                         => true, 
             'backend_header'              => true, 
+            'backend_sidebar_entries'     => true,
+            'backend_sidebar_entries_event_display_karmalog' => true,
             'event_additional_statistics' => true
             ));
         $propbag->add('groups', array('STATISTICS'));
@@ -91,7 +93,7 @@ class serendipity_event_karma extends serendipity_event
             'textual_visits',
             'preview_bg',
             'base_image',
-            // Text/Language optins
+            // Text/Language options
             'text_tab',
             'rate_msg',
             'curr_msg',
@@ -491,7 +493,6 @@ class serendipity_event_karma extends serendipity_event
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
-        
 
         $hooks = &$bag->get('event_hooks');
 
@@ -558,8 +559,12 @@ class serendipity_event_karma extends serendipity_event
                         return ;
                     }
 
-                    // We don't want googlebots hitting the karma-voting
-                    if (stristr($_SERVER['HTTP_USER_AGENT'], 'google')) {
+                    // We don't want bots hitting the karma-voting
+                    $agent = $_SERVER['HTTP_USER_AGENT'];
+                    if (stristr($agent, 'google')
+                        || stristr($agent, 'LinkWalker')
+                        || stristr($agent, 'zermelo')
+                        || stristr($agent, 'NimbleCrawler')) {
                         $this->karmaVote = 'invalid1';
                         return ;
                     }
@@ -1059,7 +1064,6 @@ END_IMG_CSS;
                             //--TODO: Ensure that this works with the Custom Permalinks plugin
                             // (We've seen trouble; it votes correctly, but redirects to the front page)
                             $url = serendipity_currentURL(true);
-                            
                             // Voting is only allowed on entries.  Therefore voting URLs must be
                             // either single-entry URLs or summary URLs.  serendipity_currentURL
                             // converts them to an "ErrorDocument-URI", so we can focus on the
@@ -1085,7 +1089,7 @@ END_IMG_CSS;
                             // to this page after we cast our vote.
                             
                             // Remove any clutter from our previous voting activity
-                            $url_parts = parse_url(serendipity_currentURL());
+                            $url_parts = parse_url(serendipity_currentURL(true));
                             if (!empty($url_parts['query'])) {
                                 $exclude = array('serendipity[karmaVote]', 'serendipity[karmaId]'); 
                                 // I tried using parse_str, but it gave me very weird results
@@ -1272,6 +1276,343 @@ END_IMG_CSS;
                                 $footer .= sprintf($karma_block, $myvote, $points, $votes, $visits, $url);
                             } // foreach key in entries
                     }// End switch on karma voting status
+                    return true;
+                    break;
+
+                // Display the Karma Log link on the sidebar
+                case 'backend_sidebar_entries':
+?>
+<li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks">
+    <a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=karmalog">
+        <?php echo PLUGIN_KARMA_DISPLAY_LOG; ?>
+    </a>
+</li>
+<?php
+                    return true;
+                    break;
+
+                // Display the Karma Log!
+                //case 'external_plugin':
+                case 'backend_sidebar_entries_event_display_karmalog':
+                    // Print any stored messages
+                    //foreach ($serendipity['karma_messages'] as $msg) {
+                    //    print("<div class='serendipityAdminInfo'>$msg</div>\n");
+                    //}
+                    // Was I asked to process any votes?
+                    if (($serendipity['POST']['delete_button'] || $serendipity['POST']['approve_button'])
+                        && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
+                        foreach($serendipity['POST']['delete'] as $d => $i) {
+                            $kdata = $serendipity['POST']['karmalog'.$i];
+                            // validate posted variables 
+                            // posted points
+                            $ppoints = $kdata['points'];
+                            if (!is_numeric($ppoints) || ((int)$ppoints < -2) || ((int)$ppoints > 2)) {
+                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                return false;
+                            }
+                            // posted id
+                            $pid = $kdata['entryid'];
+                            if (!is_numeric($pid)) {
+                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                return false;
+                            }
+                            // posted IP
+                            $pip = long2ip(ip2long($kdata['ip']));
+                            if ($pip == -1 || $pip === FALSE) {
+                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                return false;
+                            }
+                            // posted user agent (need a better validator, I think)
+                            $puser_agent = $kdata['user_agent'];
+                            if (serendipity_db_escape_string($puser_agent) != $puser_agent) {
+                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                return false;
+                            }
+                            // posted vote time
+                            $pvotetime = $kdata['votetime'];
+                            $unixsecs = date('U', $kdata['votetime']);
+                            if ($pvotetime != $unixsecs) {
+                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                return false;
+                            }
+
+                            // Remove karma from entry?
+                            if ($serendipity['POST']['delete_button']) {
+                                // Fetch vote total for the entry IDs
+                                $q = 'SELECT k.*
+                                    FROM ' . $serendipity['dbPrefix'] . 'karma   AS k
+                                    WHERE k.entryid IN (' . $pid . ') GROUP BY k.entryid';
+
+                                $sql = serendipity_db_query($q);
+                                if (is_array($sql)) {
+                                    $karma = $sql[0];
+
+                                    $update = sprintf(
+                                        "UPDATE {$serendipity['dbPrefix']}karma
+                                        SET points   = %s,
+                                        votes    = %s
+                                        WHERE entryid  = %s",
+                                        serendipity_db_escape_string($karma['points'] - $ppoints),
+                                        serendipity_db_escape_string($karma['votes']  - 1),
+                                        serendipity_db_escape_string($pid)
+                                        );
+                                    $updated = serendipity_db_query($update);
+                                    if ($updated != 1) {
+                                        printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_REMOVE_ERROR."</div>\n", $pid);
+                                        // Don't delete from karma log if we couldn't take away the points
+                                        continue;
+                                    }
+                                } else {
+                                    // This will only happen if someone is messing with the karma table or submit data
+                                    printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_UPDATE_ERROR."</div>", $pid);
+                                    continue;
+                                }
+                            }
+
+                            // Remove vote from log (approved or deleted, doesn't matter)
+                            $del = sprintf(
+                                "DELETE FROM {$serendipity['dbPrefix']}karmalog
+                                WHERE entryid = %s AND ip = '%s' AND user_agent LIKE '%%%s%%' AND votetime = %s LIMIT 1",
+                                serendipity_db_escape_string($pid),
+                                serendipity_db_escape_string($pip),
+                                serendipity_db_escape_string($puser_agent),
+                                serendipity_db_escape_string($pvotetime)
+                                );
+                            $deleted = serendipity_db_query($del);
+                            // User feedback
+                            if ($deleted == 1) {
+                                if ($serendipity['POST']['delete_button']) {
+                                    printf("<div class='serendipityAdminMsgSuccess'>".PLUGIN_KARMA_REMOVED_POINTS."</div>\n", $ppoints, $pid);
+                                } else {
+                                    printf("<div class='serendipityAdminMsgSuccess'>".PLUGIN_KARMA_APPROVED_POINTS."</div>\n", $ppoints, $pid);
+                                }
+                            } else {
+                                printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_REMOVE_ERROR."</div>\n", $pid);
+                            }
+                        }
+                    }
+
+                    // URL; expected to be event_display and karmalog, respectively 
+                    $url = '?serendipity[adminModule]='.$serendipity['GET']['adminModule'].'&serendipity[adminAction]='.$serendipity['GET']['adminAction'];
+
+                    // Filters
+                    print("
+<form action='' method='get' name='karmafilters' id='karmafilters'>
+  <input type='hidden' name='serendipity[adminModule]' value='{$serendipity['GET']['adminModule']}' />
+  <input type='hidden' name='serendipity[adminAction]' value='{$serendipity['GET']['adminAction']}' />
+<table class='serendipity_admin_filters' width='100%'>
+<tr>
+  <td colspan='4' class='serendipity_admin_filters_headline'><strong>".FILTERS."</strong></td>
+</tr>
+<tr>
+  <td>User Agent:</td>
+  <td><input class='input_textbox' type='text' name='serendipity[filter][user_agent]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['user_agent'])."' /></td>
+  <td>".IP."</td>
+  <td><input class='input_textbox' type='text' name='serendipity[filter][ip]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['ip'])."' /></td>
+</tr>
+<tr>
+  <td>Entry ID:</td>
+  <td><input class='input_textbox' type='text' name='serendipity[filter][entryid]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['entryid'])."' /></td>
+  <td>Entry title:</td>
+  <td><input class='input_textbox' type='text' name='serendipity[filter][title]' size='30' value='".htmlspecialchars($serendipity['GET']['filter']['title'])."' /></td>
+</tr>
+</table>
+");
+                    // Set all filters into $and and $searchString
+                    if (!empty($serendipity['GET']['filter']['entryid'])) {
+                        $val = $serendipity['GET']['filter']['entryid'];
+                        $and .= "AND l.entryid = '" . serendipity_db_escape_string($val) . "'";
+                        $searchString .= "&amp;serendipity['filter']['entryid']=".htmlspecialchars($val);
+                    }
+                    if (!empty($serendipity['GET']['filter']['ip'])) {
+                        $val = $serendipity['GET']['filter']['ip'];
+                        $and .= "AND l.ip = '" . serendipity_db_escape_string($val) . "'";
+                        $searchString .= "&amp;serendipity['filter']['ip']=".htmlspecialchars($val);
+                    }
+                    if (!empty($serendipity['GET']['filter']['user_agent'])) {
+                        $val = $serendipity['GET']['filter']['user_agent'];
+                        $and .= "AND l.user_agent LIKE '%" . serendipity_db_escape_string($val) . "%'";
+                        $searchString .= "&amp;serendipity['filter']['user_agent']=".htmlspecialchars($val);
+                    }
+                    if (!empty($serendipity['GET']['filter']['title'])) {
+                        $val = $serendipity['GET']['filter']['title'];
+                        $and .= "AND e.title LIKE '%" . serendipity_db_escape_string($val) . "%'";
+                        $searchString .= "&amp;serendipity['filter']['title']=".htmlspecialchars($val);
+                    }
+
+                    // Sorting (controls go after filtering controls in form above)
+                    $sort_order = array(
+                        'votetime' => DATE,
+                        'user_agent' => USER_AGENT,
+                        'title' => TITLE,
+                        'entryid' => 'ID');
+                    if (empty($serendipity['GET']['sort']['ordermode']) || $serendipity['GET']['sort']['ordermode'] != 'ASC') {
+                        $desc = true;
+                        $serendipity['GET']['sort']['ordermode'] = 'DESC';
+                    }
+                    if (!empty($serendipity['GET']['sort']['order']) && !empty($sort_order[$serendipity['GET']['sort']['order']])) {
+                        $curr_order = $serendipity['GET']['sort']['order'];
+                        $orderby = serendipity_db_escape_string($curr_order . ' ' . $serendipity['GET']['sort']['ordermode']);
+                    } else {
+                        $curr_order = 'votetime';
+                        $orderby = 'votetime ' . serendipity_db_escape_string($serendipity['GET']['sort']['ordermode']);
+                    }
+                    print("
+<div>".SORT_BY."
+<select name='serendipity[sort][order]'>
+");
+                    foreach($sort_order as $order => $val) {
+                        print("
+  <option value='$order'".($curr_order == $order?" selected='selected'":'').">$val</option>
+");
+                    }
+                    print("
+</select>
+<select name='serendipity[sort][ordermode]'>
+  <option value='DESC'".($desc?"selected='selected'":'').">".SORT_ORDER_DESC."</option>
+  <option value='ASC'".($desc?'':"selected='selected'").">".SORT_ORDER_ASC."</option>
+</select>
+</div>
+<input type='submit' name='submit' value=' - ".GO." - ' class='serendipityPrettyButton input_button' /> 
+</form>
+");
+
+                    // Paging (partly ripped from include/admin/comments.inc.php)
+                    $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 25);
+                    $sql = serendipity_db_query("SELECT COUNT(*) AS total FROM {$serendipity['dbPrefix']}karmalog l WHERE 1 = 1 " . $and, true);
+                    $totalVotes = $sql['total'];
+                    $pages = ($commentsPerPage == COMMENTS_FILTER_ALL ? 1 : ceil($totalVotes/(int)$commentsPerPage));
+                    $page = (int)$serendipity['GET']['page'];
+                    if ($page == 0 || ($page > $pages)) {
+                        $page = 1;
+                    }
+
+                    if ($page > 1) {
+                        $linkPrevious = $url . '&amp;serendipity[page]='. ($page-1) . $searchString;
+                    }
+                    if ($pages > $page) {
+                        $linkNext = $url . '&amp;serendipity[page]='. ($page+1) . $searchString;
+                    }
+
+                    if ($commentsPerPage == COMMENTS_FILTER_ALL) {
+                        $limit = '';
+                    }else {
+                        $limit = serendipity_db_limit_sql(serendipity_db_limit(($page-1)*(int)$commentsPerPage, (int)$commentsPerPage));
+                    }
+
+                    // Variables for display
+                    if ($linkPrevious) {
+                        $linkPrevious = '<a href="' . $linkPrevious . '" class="serendipityIconLink"><img src="'.serendipity_getTemplateFile('admin/img/previous.png').'" /></a>';
+                    } else {
+                        $linkPrevious = '&nbsp;';
+                    }
+                    if ($linkNext) {
+                        $linkNext = '<a href="' . $linkNext . '" class="serendipityIconLinkRight"><img src="'.serendipity_getTemplateFile('admin/img/next.png').'" /></a>';
+                    } else {
+                        $linkNext = '&nbsp;';
+                    }
+                    $paging = sprintf(PAGE_BROWSE_COMMENTS, $page, $pages, $totalVotes);
+
+                    // Retrieve the next batch of karma votes
+                    // [entryid, points, ip, user_agent, votetime]
+                    $sql = serendipity_db_query("SELECT l.entryid AS entryid, l.points AS points, l.ip AS ip, l.user_agent AS user_agent, l.votetime AS votetime, e.title AS title FROM {$serendipity['dbPrefix']}karmalog l
+                        LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = l.entryid)
+                        WHERE 1 = 1 " . $and . "
+                        ORDER BY $orderby $limit");
+
+                    // Start the form for display and deleting
+                    if (is_array($sql)) {
+                        print("<form action='' method='post' name='formMultiDelete' id='formMultiDelete'>\n".serendipity_setFormToken()."
+<script type='text/javascript'>
+function invertSelection() {
+    var f = document.formMultiDelete;
+    for (var i = 0; i < f.elements.length; i++) {
+        if( f.elements[i].type == 'checkbox' ) {
+            f.elements[i].checked = !(f.elements[i].checked);
+        }
+    }
+}
+</script>
+");
+
+                        // Print the header paging table
+                        print("
+<table width='100%' style='border-collapse: collapse;'>
+  <tr>
+  <td align='left'>$linkPrevious</td>
+  <td align='center'>$paging</td>
+  <td align='right'>$linkNext</td>
+  </tr>
+</table>
+");
+                        // Start the vote table
+                        print("
+<table class='karmalog' width='100%'>
+");
+                        // Print each vote
+                        $i = 0;
+                        foreach ($sql as $vote) {
+                            $i++;
+                            // entryid, title, points, ip, user_agent, votetime
+                            $entrylink = serendipity_archiveURL($vote['entryid'], $vote['title'], 'serendipityHTTPPath', true);
+                            $entryFilterHtml = "<a class='serendipityIconLink' href='$url&serendipity[filter][entryid]={$vote['entryid']}'><img src='".serendipity_getTemplateFile('admin/img/zoom.png')."' /></a>";
+                            $ipFilterHtml = "<a class='serendipityIconLink' href='$url&serendipity[filter][ip]={$vote['ip']}'><img src='".serendipity_getTemplateFile('admin/img/zoom.png')."' /></a>";
+                            $timestr = strftime('%H:%M:%S<br />%n%a %b %d %Y', $vote['votetime']);
+                            $cssClass = 'serendipity_admin_list_item serendipity_admin_list_item_';
+                            $cssClass .= (($i % 2 ==0)?'even':'uneven');
+                            $barClass = str_replace(array('.',' '), array('_','_'), $this->image_name);
+                            $barHtml = $this->createRatingBar(null, $vote['points'], 1, $barClass);
+                            $barHtml = sprintf($barHtml, 'what', $vote['points'], '1');
+                            print("
+  <tr class='$cssClass'>
+    <td rowspan='2' width='20' align='center'>
+      <input class='input_checkbox' type='checkbox' name='serendipity[delete][$i]' value='$i' tabindex='$i' />
+      <input type='hidden' name='serendipity[karmalog$i][points]' value='{$vote['points']}' />
+      <input type='hidden' name='serendipity[karmalog$i][entryid]' value='{$vote['entryid']}' />
+      <input type='hidden' name='serendipity[karmalog$i][votetime]' value='{$vote['votetime']}' />
+      <input type='hidden' name='serendipity[karmalog$i][ip]' value='{$vote['ip']}' />
+      <input type='hidden' name='serendipity[karmalog$i][user_agent]' value='{$vote['user_agent']}' />
+    </td>
+    <td>$barHtml</td>
+    <td colspan='2'><a href='$entrylink' title='{$vote['entryid']}' alt='{$vote['title']}'>{$vote['title']}</a> $entryFilterHtml</td>
+  </tr>
+  <tr class='$cssClass'>
+    <td>$timestr</td>
+    <td>{$vote['ip']} $ipFilterHtml</td>
+    <td>{$vote['user_agent']}</td>
+  </tr>
+");
+                        }
+
+                        // End the vote table
+                        print("
+                            </table>
+                            ");
+                        if (is_array($sql)) {
+                            print("
+<input type='button' name='toggle' value='".INVERT_SELECTIONS."' onclick='invertSelection()' class='serendipityPrettyButton input_button' /> 
+<input class='serendipityPrettyButton input_button' type='submit' value='" . PLUGIN_KARMA_DELETE_VOTES . "' name='serendipity[delete_button]' />
+<input class='serendipityPrettyButton input_button' type='submit' value='" . PLUGIN_KARMA_APPROVE_VOTES . "' name='serendipity[approve_button]' />
+</form>
+");
+                        }
+
+                        // Print the footer paging table
+                        print("
+<table width='100%' style='border-collapse: collapse;'>
+  <tr>
+  <td align='left'>$linkPrevious</td>
+  <td align='center'>$paging</td>
+  <td align='right'>$linkNext</td>
+  </tr>
+</table>
+");
+                    } else {
+                        print("
+<div class='serendipityAdminMsgNotice'>No entries to display.</div>
+");
+                    }
+
                     return true;
                     break;
 
@@ -1645,7 +1986,6 @@ END_IMG_CSS;
             } elseif ($rating <= -0.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_2;
             } elseif ($rating <= 0.5) {
-                $rating = PLUGIN_KARMA_VOTEPOINT_3;
             } elseif ($rating <= 1.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_4;
             } else {
