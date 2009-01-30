@@ -471,7 +471,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
         $freq = $this->get_config('frequency', 'months');
 
-        echo '<ul>' . "\n";
+        echo '<ul class="plainList">' . "\n";
         
         if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
             $dist_sql = 'count(e.id) AS orderkey';
@@ -1027,7 +1027,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 <?php
         }
 
-?><ul><?php
+?><ul class="plainList"><?php
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
@@ -1814,7 +1814,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
         $image = (($image == "'none'" || $image == 'none') ? '' : $image);
 
-        $html .= '<ul>' . "\n";
+        $html .= '<ul class="plainList">' . "\n";
 
         if (is_array($authors) && count($authors)) {
             foreach ($authors as $auth) {
