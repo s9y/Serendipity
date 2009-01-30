@@ -128,9 +128,9 @@ class serendipity_calendar_plugin extends serendipity_plugin {
                 list(,$jy, $jm, $jd) = $serendipity['uriArguments'];
 
                 if( isset($jd) && $jd ){
-                	list ( $gy, $gm, $gd ) = p2g ($jy, $jm, $jd);
+                    list ( $gy, $gm, $gd ) = p2g ($jy, $jm, $jd);
                 }elseif( isset($jm) && $jm ){
-                	list ( $gy, $gm, $gd ) = p2g ( $jy, $jm, 1);
+                    list ( $gy, $gm, $gd ) = p2g ( $jy, $jm, 1);
                 }else{
                     $gy = $year;
                     $gm = $month;
@@ -471,7 +471,7 @@ class serendipity_archives_plugin extends serendipity_plugin {
         $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
         $freq = $this->get_config('frequency', 'months');
 
-        echo '<ul class="plainList">' . "\n";
+        echo '<ul>' . "\n";
         
         if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
             $dist_sql = 'count(e.id) AS orderkey';
@@ -870,7 +870,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
                 $propbag->add('radio_per_row', '3');
                 $propbag->add('radio',       $radio);
                 $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'FeedBurner'));
-                $propbag->add('description', '');
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2);
                 $propbag->add('default',     'false');
                 break;
 
@@ -944,7 +944,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
             case 'fb_id':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERID);
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_DESC);
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_DESC . ' ' . SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD);
                 $propbag->add('default',     '');
                 break;
 
@@ -1027,7 +1027,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
 <?php
         }
 
-?><ul class="plainList"><?php
+?><ul><?php
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
@@ -1101,21 +1101,28 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         }
 
         if (serendipity_db_bool($this->get_config('show_feedburner', false)) || $this->get_config('show_feedburner', false) === 'force') {
-			$alt = $this->get_config('fb_alt');
-			$url = 'http://feeds.feedburner.com/' . $this->get_config('fb_id');
-			$img = $this->get_config('fb_img');
-			if (strlen($img) == 0) {
-				$img = 'http://feeds.feedburner.com/~fc/'.$this->get_config('fb_id').'?bg=99CCFF&amp;fg=444444&amp;anim=0';
-			}
+            $alt = $this->get_config('fb_alt');
+
+            $fbid = $plugin->get_config('fb_id');
+            if (stristr($fbid, 'http://')) {
+                $url = $fbid;
+            } else {
+                $url = 'http://feeds.feedburner.com/' . $fbid;
+            }
+
+            $img = $this->get_config('fb_img');
+            if (strlen($img) == 0) {
+                $img = 'http://feeds.feedburner.com/~fc/'.$this->get_config('fb_id').'?bg=99CCFF&amp;fg=444444&amp;anim=0';
+            }
 ?>
         <li>
-			<a href="<?php echo $url; ?>"<?php if (strlen($alt) > 0) echo " title=\"$alt\""; ?>><img src="<?php echo $img; ?>" alt="" style="border:0"/></a>
+            <a href="<?php echo $url; ?>"<?php if (strlen($alt) > 0) echo " title=\"$alt\""; ?>><img src="<?php echo $img; ?>" alt="" style="border:0"/></a>
             <?php
-			$mytitle = $this->get_config('fb_title');
-			if (strlen($mytitle) > 0) { ?>
-			<a href="<?php echo $url; ?>"><?php echo $mytitle; ?></a>
+            $mytitle = $this->get_config('fb_title');
+            if (strlen($mytitle) > 0) { ?>
+            <a href="<?php echo $url; ?>"><?php echo $mytitle; ?></a>
             <?php } ?>
-	</li>
+    </li>
 <?php
         }
         echo '</ul>';
@@ -1786,7 +1793,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
     function generate_content(&$title) {
         global $serendipity;
 
-    	$title = $this->get_config('title', $this->title);
+        $title = $this->get_config('title', $this->title);
 
         $sort = $this->get_config('sort_order');
         if ($sort == 'none') {
@@ -1807,7 +1814,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
         $image = (($image == "'none'" || $image == 'none') ? '' : $image);
 
-        $html .= '<ul class="plainList">' . "\n";
+        $html .= '<ul>' . "\n";
 
         if (is_array($authors) && count($authors)) {
             foreach ($authors as $auth) {
