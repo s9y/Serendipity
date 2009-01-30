@@ -932,3 +932,6 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Въведете име за емисиите (по подразбиране "feed", когато е празно)');
 @define('SYNDICATION_PLUGIN_COMMENTNAME', 'Име на емисията на коментарите');
 @define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'Въведете име на емисиите на коментарите');
+@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(If you enter an absolute URL with http://... here, this URL will be used as the redirection target in case you have enabled the "Force" option for FeedBurner. Note that this can also be a URL independent to FeedBurner. For new Google FeedBurner feeds, you need to enter http://feeds2.feedburner.com/yourfeedname here)');
+
+@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');

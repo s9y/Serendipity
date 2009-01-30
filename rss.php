@@ -173,7 +173,12 @@ if (is_array($plugins)) {
                 !preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&
                 !(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
                ) {
-                $url = 'http://feeds.feedburner.com/' . $plugin->get_config('fb_id');
+                $fbid = $plugin->get_config('fb_id');
+                if (stristr($fbid, 'http://')) {
+                    $url = $fbid;
+                } else {
+                    $url = 'http://feeds.feedburner.com/' . $fbid;
+                }
                 header('Status: 302 Found');
                 header('Location: ' . $url);
                 exit;
