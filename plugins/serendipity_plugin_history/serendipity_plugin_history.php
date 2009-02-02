@@ -195,7 +195,7 @@ class serendipity_plugin_history extends serendipity_plugin
             $t = ($maxlength==0 || strlen($e[$x]['title'])<=$maxlength) ?
                     $e[$x]['title'] :
                     (trim(serendipity_mb('substr', $e[$x]['title'], 0, $maxlength-3)).' [...]');
-            echo "<a href=" . $url . " title='".str_replace("'", "`", htmlspecialchars($e[$x]['title']))."'>". htmlspecialchars($t) . "</a></div>";
+            echo '<a href="' . $url . '" title="' . str_replace("'", "`", htmlspecialchars($e[$x]['title'])) . '">"' . htmlspecialchars($t) . '"</a></div>"';
             echo '<div class="serendipity_history_body">' . strip_tags($e[$x]['body']) . '</div>';
         }
         echo (empty($outro)) ? '' : '<div class="serendipity_history_outro">' . $outro . '</div>';
