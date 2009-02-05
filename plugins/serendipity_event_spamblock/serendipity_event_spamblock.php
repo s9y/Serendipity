@@ -1052,6 +1052,7 @@ var $filter_defaults;
                             $filter_emails = explode(';', $this->get_config('contentfilter_emails', $this->filter_defaults['emails']));
                             if (is_array($filter_emails)) {
                                 foreach($filter_emails AS $filter_email) {
+                                    $filter_email = trim($filter_email);
                                     if (empty($filter_email)) {
                                         continue;
                                     }
