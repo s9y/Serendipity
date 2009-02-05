@@ -15,6 +15,9 @@ Version 1.5 ()
 Version 1.4.2 ()
 ------------------------------------------------------------------------
 
+    * Changed spamblock plugin for text filtering to ignore trailing
+      or prepending spaces in blacklists (garvinhicking)
+
     * Change syndication plugin to also support new feeds2.feedburner.com
       style URLs (garvinhicking)
 
