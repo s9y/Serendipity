@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.72');
+        $propbag->add('version',       '1.73');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -980,6 +980,7 @@ var $filter_defaults;
                             $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
                             if (is_array($filter_authors)) {
                                 foreach($filter_authors AS $filter_author) {
+                                    $filter_author = trim($filter_author);
                                     if (empty($filter_author)) {
                                         continue;
                                     }
@@ -1003,6 +1004,7 @@ var $filter_defaults;
                             $filter_urls = explode(';', $this->get_config('contentfilter_urls', $this->filter_defaults['urls']));
                             if (is_array($filter_urls)) {
                                 foreach($filter_urls AS $filter_url) {
+                                    $filter_url = trim($filter_url);
                                     if (empty($filter_url)) {
                                         continue;
                                     }
@@ -1026,6 +1028,7 @@ var $filter_defaults;
                             $filter_bodys = explode(';', $this->get_config('contentfilter_words', $this->filter_defaults['words']));
                             if (is_array($filter_bodys)) {
                                 foreach($filter_bodys AS $filter_body) {
+                                    $filter_body = trim($filter_body);
                                     if (empty($filter_body)) {
                                         continue;
                                     }
