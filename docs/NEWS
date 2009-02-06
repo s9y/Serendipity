@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Fix statistics sidebar plugin to properly count weekly visitors
+      (garvinhicking)
+
     * Allow javascript inside Xinha WYSIWYG textarea (garvinhicking)
 
     * Allow anonymized submission to Typepad/Akismet to attribute
