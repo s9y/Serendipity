@@ -27,7 +27,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_NAME);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking');
-        $propbag->add('version',       '1.3');
+        $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -236,7 +236,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
             }
 
             if (serendipity_db_bool($this->get_config('show_weekvisitors'))) {
-                $res = serendipity_db_query("SELECT sum(visits) AS weekvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE year || month || day >= '".$lastmonday."' AND year || month || day <= '".$nextsunday."'", true, 'assoc');
+                $res = serendipity_db_query("SELECT sum(visits) AS weekvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE CONCAT(year,month,day) >= '".$lastmonday."' AND CONCAT(year,month,day) <= '".$nextsunday."'", true, 'assoc');
                 if (is_array($res) && isset($res['weekvisitors'])) {
                     $content .= '<div class="stat_weekhvisitors">' . sprintf($this->get_config('text_weekvisitors'), '<span class="stat_number">' . $res['weekvisitors'] . '</span>') . "</div>\n";
                 }
