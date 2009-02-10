@@ -1103,7 +1103,7 @@ class serendipity_syndication_plugin extends serendipity_plugin {
         if (serendipity_db_bool($this->get_config('show_feedburner', false)) || $this->get_config('show_feedburner', false) === 'force') {
             $alt = $this->get_config('fb_alt');
 
-            $fbid = $plugin->get_config('fb_id');
+            $fbid = $this->get_config('fb_id');
             if (stristr($fbid, 'http://')) {
                 $url = $fbid;
             } else {
