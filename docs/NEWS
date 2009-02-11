@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Allow admins to also approve comments awaiting user-confirmation
+      (garvinhicking)
+
     * Fix statistics sidebar plugin to properly count weekly visitors
       (garvinhicking)
 
