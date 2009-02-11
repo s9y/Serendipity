@@ -1,7 +1,7 @@
 {serendipity_hookPlugin hook="entries_header"}
 <h3 class="serendipity_date"><?= ARCHIVES ?></h3>
 {foreach from=$archives item="archive"}
-<table id="archives_listing" cellspacing="4" cellpadding="4" border="0">
+<table class="archives_listing" cellspacing="4" cellpadding="4" border="0">
     <tr class="archives_header">
         <td class="archives_header" colspan="4"><h2><?= $archive['year'] ?></h2></td>
     </tr>
