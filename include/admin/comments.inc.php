@@ -67,7 +67,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
             FROM {$serendipity['dbPrefix']}comments c
             LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
             LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
-            WHERE c.id = " . (int)$serendipity['GET']['id']  ." AND status = 'pending'";
+            WHERE c.id = " . (int)$serendipity['GET']['id']  ." AND (status = 'pending' OR status LIKE 'confirm%')";
     $rs  = serendipity_db_query($sql, true);
 
     if ($rs === false) {
@@ -201,6 +201,9 @@ if ($serendipity['GET']['filter']['show'] == 'approved') {
 } elseif ($serendipity['GET']['filter']['show'] == 'pending') {
     $and           .= "AND status = 'pending'";
     $searchString .= "&amp;serendipity[filter][show]=pending";
+} elseif ($serendipity['GET']['filter']['show'] == 'confirm') {
+    $and           .= "AND status LIKE 'confirm%'";
+    $searchString .= "&amp;serendipity[filter][show]=confirm";
 } else {
     $serendipity['GET']['filter']['show'] = 'all';
 }
@@ -335,6 +338,7 @@ function highlightComment(id, checkvalue) {
                 <option value="all"<?php if ( $serendipity['GET']['filter']['show'] == 'all' ) echo ' selected="selected"' ?>><?php echo COMMENTS_FILTER_ALL ?></option>
                 <option value="approved"<?php if ( $serendipity['GET']['filter']['show'] == 'approved' ) echo ' selected="selected"' ?>><?php echo COMMENTS_FILTER_APPROVED_ONLY ?></option>
                 <option value="pending"<?php if ( $serendipity['GET']['filter']['show'] == 'pending' ) echo ' selected="selected"' ?>><?php echo COMMENTS_FILTER_NEED_APPROVAL ?></option>
+                <option value="confirm"<?php if ( $serendipity['GET']['filter']['show'] == 'confirm' ) echo ' selected="selected"' ?>><?php echo COMMENTS_FILTER_NEED_CONFIRM ?></option>
             </select></td>
         <td><?php echo TYPE; ?></td>
         <td><select name="serendipity[filter][type]">
@@ -418,8 +422,14 @@ foreach ($sql as $rs) {
     $class = 'serendipity_admin_list_item_' . (($i % 2 == 0 ) ? 'even' : 'uneven');
     if ($comment['status'] == 'pending') {
         $class .= ' serendipity_admin_comment_pending'; 
+        $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header';
+    } elseif (strstr($comment['status'], 'confirm') {
+        $class .= ' serendipity_admin_comment_pending serendipity_admin_comment_confirm'; 
+        $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header serendipity_admin_comment_confirm_header';
+    } else {
+        $header_class = '';
     }
-    $header_class = ($comment['status'] == 'pending' ? 'serendipityAdminMsgNote serendipity_admin_comment_pending_header' : '');
+
 
     if (!empty($comment['url']) && substr($comment['url'], 0, 7) != 'http://' &&
          substr($comment['url'], 0, 8) != 'https://') {
@@ -429,7 +439,7 @@ foreach ($sql as $rs) {
 ?>
 <tr>
     <td class="<?php echo $header_class; ?>">
-<?php   if ($header_class=='serendipityAdminMsgNote serendipity_admin_comment_pending_header') { ?>
+<?php   if (!empty($header_class)) { ?>
             <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" />
 <?php   }?>
         <a name="c<?php echo $comment['id'] ?>"></a>
@@ -494,7 +504,7 @@ foreach ($sql as $rs) {
                 </td>
             </tr>
         </table>
-<?php if ($comment['status'] == 'pending') { ?>
+<?php if ($comment['status'] == 'pending' || strstr($comment['status'], 'confirm') { ?>
           <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]=<?php echo $comment['id'] ?>&amp;<?php echo serendipity_setFormToken('url'); ?>" class="serendipityIconLink" title="<?php echo APPROVE; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/accept.png'); ?>" alt="<?php echo APPROVE ?>" /><?php echo APPROVE ?></a>
 <?php } ?>
 <?php if ($comment['status'] == 'approved') { ?>
