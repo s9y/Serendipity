@@ -423,7 +423,7 @@ foreach ($sql as $rs) {
     if ($comment['status'] == 'pending') {
         $class .= ' serendipity_admin_comment_pending'; 
         $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header';
-    } elseif (strstr($comment['status'], 'confirm') {
+    } elseif (strstr($comment['status'], 'confirm')) {
         $class .= ' serendipity_admin_comment_pending serendipity_admin_comment_confirm'; 
         $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header serendipity_admin_comment_confirm_header';
     } else {
@@ -504,7 +504,7 @@ foreach ($sql as $rs) {
                 </td>
             </tr>
         </table>
-<?php if ($comment['status'] == 'pending' || strstr($comment['status'], 'confirm') { ?>
+<?php if ($comment['status'] == 'pending' || strstr($comment['status'], 'confirm')) { ?>
           <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]=<?php echo $comment['id'] ?>&amp;<?php echo serendipity_setFormToken('url'); ?>" class="serendipityIconLink" title="<?php echo APPROVE; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/accept.png'); ?>" alt="<?php echo APPROVE ?>" /><?php echo APPROVE ?></a>
 <?php } ?>
 <?php if ($comment['status'] == 'approved') { ?>
