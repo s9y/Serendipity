@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 2446 2009-01-30 14:03:31Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 2463 2009-02-11 12:35:44Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
@@ -30,8 +30,8 @@
 @define('SAVE', '保存する');
 @define('NAME', '名前');
 @define('CREATE_NEW_CAT', '新規カテゴリを作成する');
-@define('I_WANT_THUMB', 'エントリ中でサムネイルを使用したい');
-@define('I_WANT_BIG_IMAGE', 'エントリの中で大きな画像を使用したい');
+@define('I_WANT_THUMB', 'エントリー内でサムネイルを使用したい');
+@define('I_WANT_BIG_IMAGE', 'エントリーの中で大きな画像を使用したい');
 @define('I_WANT_NO_LINK', ' 画像として表示したい');
 @define('I_WANT_IT_TO_LINK', 'この URL へのリンクとして表示したい:');
 @define('BACK', '戻る');
@@ -50,9 +50,9 @@
 @define('SAVE', '保存');
 @define('UP', '上へ');
 @define('DOWN', '下へ');
-@define('ENTRIES', 'エントリ');
-@define('NEW_ENTRY', '新規エントリ追加');
-@define('EDIT_ENTRIES', 'エントリ編集');
+@define('ENTRIES', 'エントリー');
+@define('NEW_ENTRY', '新規エントリー追加');
+@define('EDIT_ENTRIES', 'エントリー編集');
 @define('CATEGORIES', 'カテゴリ管理');
 @define('WARNING_THIS_BLAHBLAH', "警告:\\nサムネイルなしの画像が多い場合、長時間かかるかもしれません。");
 @define('CREATE_THUMBS', 'サムネイル再構築');
@@ -63,20 +63,20 @@
 @define('COMMENT', 'コメント');
 @define('REMEMBER_INFO', '入力情報を記憶しますか?');
 @define('SUBMIT_COMMENT', 'コメント送信');
-@define('NO_ENTRIES_TO_PRINT', '表示するエントリはありません。');
+@define('NO_ENTRIES_TO_PRINT', '表示するエントリーはありません。');
 @define('COMMENTS', 'コメント');
 @define('ADD_COMMENT', 'コメント追加');
 @define('NO_COMMENTS', 'コメントがありません');
 @define('POSTED_BY', '投稿者');
 @define('ON', '日時');
-@define('A_NEW_COMMENT_BLAHBLAH', "エントリに新しいコメントが投稿されました。\n\nブログ名:%s\nエントリ名:\n%s");
+@define('A_NEW_COMMENT_BLAHBLAH', "エントリーに新しいコメントが投稿されました。\n\nブログ名:%s\nエントリー名:\n%s");
 @define('A_NEW_TRACKBACK_BLAHBLAH', '題名 "%s" に新しいトラックバックが作成されました。');
 @define('NO_CATEGORY', 'カテゴリがありません');
-@define('ENTRY_BODY', 'エントリ本文');
+@define('ENTRY_BODY', 'エントリー本文');
 @define('EXTENDED_BODY', '拡張本文');
 @define('CATEGORY', 'カテゴリ');
 @define('EDIT', '編集');
-@define('NO_ENTRIES_BLAHBLAH', 'キーワード「%s」はどのエントリでも見つけられませんでした。' . "\n");
+@define('NO_ENTRIES_BLAHBLAH', 'キーワード「%s」はどのエントリーでも見つけられませんでした。' . "\n");
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', '「%s」の検索結果は %s 個あります:');
 @define('IMAGE', '画像');
 @define('ERROR_FILE_NOT_EXISTS', 'エラー: 古いファイル名が存在しません!');
@@ -93,7 +93,7 @@
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>ここで、画像サイズを調節することができます。画像の比率を変えずにサイズ変更をしたい場合は、2 つの入力ボックスのうちの 1 つにだけ値入力して、TAB キーを押してください - 自動的に新しいサイズを計算します。したがって、イメージは台無しになりません。</p>');
 @define('QUICKJUMP_CALENDAR', 'カレンダークイックジャンプ');
 @define('QUICKSEARCH', 'クイックサーチ');
-@define('SEARCH_FOR_ENTRY', 'エントリの検索');
+@define('SEARCH_FOR_ENTRY', 'エントリーの検索');
 @define('ARCHIVES', '書庫一覧');
 @define('BROWSE_ARCHIVES', '月単位の書庫表示');
 @define('TOP_REFERRER', 'トップリファラ一覧');
@@ -125,24 +125,24 @@
 @define('IN', 'in');
 @define('EXCERPT', '抜粋');
 @define('TRACKED', 'Tracked');
-@define('LINK_TO_ENTRY', 'エントリへのリンク');
-@define('LINK_TO_REMOTE_ENTRY', 'リモートエントリへのリンク');
+@define('LINK_TO_ENTRY', 'エントリーへのリンク');
+@define('LINK_TO_REMOTE_ENTRY', 'リモートエントリーへのリンク');
 @define('IP_ADDRESS', 'IP アドレス');
 @define('USER', 'ユーザー');
 @define('THUMBNAIL_USING_OWN', '既に非常に小さいので、自分がサムネイルとして %s を使用します。');
 @define('THUMBNAIL_FAILED_COPY', '自分自身をサムネイルとして %s を使いたかったのですが、コピーに失敗しました!');
 @define('AUTHOR', '執筆者');
 @define('LAST_UPDATED', '最終更新日');
-@define('TRACKBACK_SPECIFIC', 'このエントリのトラックバック URI を指定する');
-@define('DIRECT_LINK', 'このエントリへのダイレクトリンク');
+@define('TRACKBACK_SPECIFIC', 'このエントリーのトラックバック URI を指定する');
+@define('DIRECT_LINK', 'このエントリーへのダイレクトリンク');
 @define('COMMENT_ADDED', 'コメントの追加に成功しました。');
 @define('COMMENT_ADDED_CLICK', '%sここ%s をクリックするとコメントに戻ります。%sここ%s をクリックするとウィンドウを閉じます。');
 @define('COMMENT_NOT_ADDED_CLICK', '%s戻る%s でコメントに戻ります。%s閉じる%s でウィンドウを閉じます。');
-@define('COMMENTS_DISABLE', 'このエントリのコメントを許可しない');
-@define('COMMENTS_ENABLE', 'このエントリへのコメントを許可する');
-@define('COMMENTS_CLOSED', '執筆者はこのエントリへのコメントを許可していません');
+@define('COMMENTS_DISABLE', 'このエントリーのコメントを許可しない');
+@define('COMMENTS_ENABLE', 'このエントリーへのコメントを許可する');
+@define('COMMENTS_CLOSED', '執筆者はこのエントリーへのコメントを許可していません');
 @define('EMPTY_COMMENT', 'コメントは何も含んでいません。%s戻る%s でもう一度試してください。');
-@define('ENTRIES_FOR', '%s のエントリ一覧');
+@define('ENTRIES_FOR', '%s のエントリー一覧');
 @define('DOCUMENT_NOT_FOUND', 'ドキュメント %s が見つかりません。');
 @define('USERNAME', 'ユーザー名');
 @define('PASSWORD', 'パスワード');
@@ -155,17 +155,17 @@
 @define('SAVE_CHANGES_TO_LAYOUT', 'レイアウトへの変更を保存');
 @define('COMMENTS_FROM', 'Comments from');
 @define('ERROR', 'エラー');
-@define('ENTRY_SAVED', 'エントリは保存されました。');
+@define('ENTRY_SAVED', 'エントリーは保存されました。');
 @define('DELETE_SURE', '#%s の削除を本当に実行しますか?');
 @define('NOT_REALLY', 'とりやめます...');
 @define('DUMP_IT', '実行します!');
-@define('RIP_ENTRY', 'R.I.P. エントリ #%s');
+@define('RIP_ENTRY', 'R.I.P. エントリー #%s');
 @define('CATEGORY_DELETED_ARTICLES_MOVED', 'カテゴリ #%s を削除しました。古い記事はカテゴリ #%s に移動しました。');
 @define('CATEGORY_DELETED', 'カテゴリ #%s を削除しました。');
 @define('INVALID_CATEGORY', 'カテゴリは破棄するために提供されませんでした。');
 @define('CATEGORY_SAVED', 'カテゴリを保存しました。');
 @define('SELECT_TEMPLATE', 'ウェブログに使用したいテンプレートを選択します。');
-@define('ENTRIES_NOT_SUCCESSFULLY_INSERTED', 'エントリの挿入が成功しませんでした!');
+@define('ENTRIES_NOT_SUCCESSFULLY_INSERTED', 'エントリーの挿入が成功しませんでした!');
 @define('MT_DATA_FILE', 'Movable Type データファイル');
 @define('FORCE', '強制');
 @define('CREATE_AUTHOR', '執筆者 \'%s\' を作成する');
@@ -175,14 +175,14 @@
 @define('COULDNT_SELECT_DB', 'データベースを選択できませんでした: %s');
 @define('COULDNT_SELECT_USER_INFO', 'ユーザー情報を選択できませんでした: %s');
 @define('COULDNT_SELECT_CATEGORY_INFO', 'カテゴリ情報を選択できませんでした: %s');
-@define('COULDNT_SELECT_ENTRY_INFO', 'エントリ情報を選択できませんでした: %s');
+@define('COULDNT_SELECT_ENTRY_INFO', 'エントリー情報を選択できませんでした: %s');
 @define('COULDNT_SELECT_COMMENT_INFO', 'コメント情報を選択できませんでした: %s');
 @define('YES', 'はい');
 @define('NO', 'いいえ');
-@define('USE_DEFAULT', 'デフォルト');
+@define('USE_DEFAULT', '標準');
 @define('CHECK_N_SAVE', '確認と保存をする');
-@define('DIRECTORY_WRITE_ERROR', 'ディレクトリ %s の書き込みができませんでした。パーミッションを調べてください');
-@define('DIRECTORY_CREATE_ERROR', 'ディレクトリ %s が存在しないか作成することができませんでした。手動でディレクトリを作成してください。');
+@define('DIRECTORY_WRITE_ERROR', 'ディレクトリー %s の書き込みができませんでした。パーミッションを調べてください');
+@define('DIRECTORY_CREATE_ERROR', 'ディレクトリー %s が存在しないか作成することができませんでした。手動でディレクトリーを作成してください。');
 @define('DIRECTORY_RUN_CMD', '&nbsp;-&gt; 実行 <i>%s %s</i>');
 @define('CANT_EXECUTE_BINARY', '%s バイナリを実行できませんでした。');
 @define('FILE_WRITE_ERROR', 'ファイル %s の書き込みができませんでした。');
@@ -194,7 +194,7 @@
 @define('SERENDIPITY_NOT_INSTALLED', 'Serendipity はまだインストールされていません。今から<a href="%s">インストール</a> してください。');
 @define('INCLUDE_ERROR', 'serendipity エラー: %s を含むことをできません - 終了します。');
 @define('DATABASE_ERROR', 'serendipity エラー: データベースに接続できませんでした - 終了します。');
-@define('CREATE_DATABASE', 'デフォルトデータベースセットアップの作成中...');
+@define('CREATE_DATABASE', '初期データベースセットアップを作成しています...');
 @define('ATTEMPT_WRITE_FILE', 'ファイル %s の書き込みを試みます...');
 @define('WRITTEN_N_SAVED', '設定の書き込みと保存を行いました。');
 @define('IMAGE_ALIGNMENT', '画像の位置あわせ');
@@ -202,10 +202,10 @@
 @define('RESIZING', 'サイズ変更中');
 @define('RESIZE_DONE', '終了しました (%s このイメージをサイズ変更しました)');
 @define('SYNCING', 'データベースと画像フォルダーの同期中');
-@define('SYNC_OPTION_LEGEND', 'Thumbnail Synchronization Options');
-@define('SYNC_OPTION_KEEPTHUMBS', 'Keep all existing thumbnails');
-@define('SYNC_OPTION_SIZECHECKTHUMBS', 'Keep existing thumbnails only if they are the correct size');
-@define('SYNC_OPTION_DELETETHUMBS', 'Regenerate all thumbnails');
+@define('SYNC_OPTION_LEGEND', 'サムネイル同期オプション');
+@define('SYNC_OPTION_KEEPTHUMBS', 'すべての既存サムネイルを維持する');
+@define('SYNC_OPTION_SIZECHECKTHUMBS', '正しい大きさのときのみ既存サムネイルを維持する');
+@define('SYNC_OPTION_DELETETHUMBS', 'すべてのサムネイルを再生成する');
 @define('SYNC_DONE', '終了しました (%s 個の画像を同期しました)');
 @define('FILE_NOT_FOUND', '<b>%s</b> と言う名前のファイルは既に削除されたため、恐らく見つけることができません。');
 @define('ABORT_NOW', '今中断する');
@@ -218,11 +218,11 @@
 @define('REALLY_SCALE_IMAGE', '本当に画像を変換しますか? この操作は取り消すことができません!');
 @define('TOGGLE_ALL', 'すべて展開に切り替え');
 @define('TOGGLE_OPTION', 'オプションに切り替え');
-@define('SUBSCRIBE_TO_THIS_ENTRY', 'このエントリを購読する');
-@define('UNSUBSCRIBE_OK', "%s は今、このエントリの購読を取り消しました。");
-@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '購読済エントリ "%s" に新規コメントです');
-@define('SUBSCRIPTION_MAIL', "こんにちは %s さん。\n監視中のエントリに新しいコメントが作成されました。\n\nブログ名:\n%s\nエントリ名:\n%s\n\n下記でエントリを見つけることができます:\n%s\n\n下記のリンクをクリックすると購読解除することができます:\n%s\n");
-@define('SUBSCRIPTION_TRACKBACK_MAIL', "こんにちは。\n\n監視中のエントリに新しいトラックバックが追加されました。\nサイト名: %s\n題名: %s\n投稿者の名前: %s\n\nここでエントリを見つけることができます:\n%s\n\nこのリンクをクリックすると購読をやめることができます:\n%s\n");
+@define('SUBSCRIBE_TO_THIS_ENTRY', 'このエントリーを購読する');
+@define('UNSUBSCRIBE_OK', "%s は今、このエントリーの購読を取り消しました。");
+@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '購読済エントリー "%s" に新規コメントです');
+@define('SUBSCRIPTION_MAIL', "こんにちは %s さん。\n監視中のエントリーに新しいコメントが作成されました。\n\nブログ名:\n%s\nエントリー名:\n%s\n\n下記でエントリーを見つけることができます:\n%s\n\n下記のリンクをクリックすると購読解除することができます:\n%s\n");
+@define('SUBSCRIPTION_TRACKBACK_MAIL', "こんにちは。\n\n監視中のエントリーに新しいトラックバックが追加されました。\nサイト名: %s\n題名: %s\n投稿者の名前: %s\n\nここでエントリーを見つけることができます:\n%s\n\nこのリンクをクリックすると購読をやめることができます:\n%s\n");
 @define('SIGNATURE', "\n-- \n%s は Serendipity を使っています。\n最良の blog を探しているなら <http://s9y.org> を見てください。");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 フィード');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 フォード');
@@ -241,8 +241,8 @@
 @define('SYNDICATION_PLUGIN_BANNERHEIGHT_DESC', '最大 400 ピクセルです。');
 @define('SYNDICATION_PLUGIN_TTL', '"ttl" フィールド(生存期間)');
 @define('SYNDICATION_PLUGIN_TTL_DESC', 'Amount of minutes after which your blog should not be cached any more by foreign sites/applications (empty: hidden) [RSS 2.0]');
-@define('SYNDICATION_PLUGIN_PUBDATE', '"pubDate" フィールド');
-@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'RSS チャンネルに最新のエントリの日付を表すために「pubDate」項目を組み込みますか?');
+@define('SYNDICATION_PLUGIN_PUBDATE', '項目 "pubDate"');
+@define('SYNDICATION_PLUGIN_PUBDATE_DESC', 'RSS チャンネルに最新のエントリーの日付を表すために項目「pubDate」を組み込みますか?');
 @define('CONTENT', '内容');
 @define('TYPE', '種類');
 @define('DRAFT', '草稿');
@@ -255,16 +255,16 @@
 @define('ALL_AUTHORS', 'すべての執筆者');
 @define('CATEGORIES_TO_FETCH', 'カテゴリを取得する');
 @define('CATEGORIES_TO_FETCH_DESC', 'どの執筆者のカテゴリを取得しますか?');
-@define('PAGE_BROWSE_ENTRIES', 'ページ %s/%s, 合計 %s エントリ');
+@define('PAGE_BROWSE_ENTRIES', 'ページ %s/%s, 合計 %s エントリー');
 @define('PREVIOUS_PAGE', '前のページ');
 @define('NEXT_PAGE', '次のページ');
 @define('ALL_CATEGORIES', 'すべてのカテゴリ');
 @define('DO_MARKUP', 'マークアップ変換を行う');
 @define('GENERAL_PLUGIN_DATEFORMAT', '日付書式');
-@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'エントリの実際の日付の書式です。PHP の strftime() 値を使用します (デフォルト: "%s")');
+@define('GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH', 'エントリーの実際の日付の書式です。PHP の strftime() 値を使用します (デフォルト: "%s")');
 @define('ERROR_TEMPLATE_FILE', 'テンプレートファイルを開けません。serendipity をアップデートしてください!');
 @define('ADVANCED_OPTIONS', '高度なオプション');
-@define('EDIT_ENTRY', 'エントリ編集');
+@define('EDIT_ENTRY', 'エントリー編集');
 @define('HTACCESS_ERROR', 'ローカルのウェブサーバでのインストールを確認するために、serendipity はファイル「.htaccess」を書き込みできる書くことができる必要があります。これは権限エラーのためにできませんでした。このように権限を調整してください: <br />&nbsp;&nbsp;%s<br /> そして、このページを再読み込みします。');
 @define('SIDEBAR_PLUGINS', 'サイドバープラグイン');
 @define('EVENT_PLUGINS', 'イベントプラグイン');
@@ -304,25 +304,25 @@
 @define('CREATED_USER', '新規ユーザー %s を作成しました。');
 @define('MODIFIED_USER', 'ユーザー %s のプロパティを変更しました。');
 @define('USER_LEVEL', 'ユーザーレベル');
-@define('DELETE_USER', 'ユーザー #%d の「%s」を削除します。本気ですか? これは彼がフロントエンドで書いたいくつかのエントリの表示を不可能にするでしょう。');
+@define('DELETE_USER', 'ユーザー #%d の「%s」を削除します。本気ですか? これは彼がフロントエンドで書いたいくつかのエントリーの表示を不可能にするでしょう。');
 @define('DELETED_USER', 'ユーザー ID #%d の %s を削除しました。');
 @define('LIMIT_TO_NUMBER', 'どれだけの項目を表示しますか?');
-@define('ENTRIES_PER_PAGE', 'ページ毎のエントリ');
+@define('ENTRIES_PER_PAGE', 'ページ毎のエントリー');
 @define('XML_IMAGE_TO_DISPLAY', 'XML ボタン');
 @define('XML_IMAGE_TO_DISPLAY_DESC','この画像で XML フィードへのリンクを表示します。デフォルトは空にし、「none」を入力すると無効にします。');
 
 @define('DIRECTORIES_AVAILABLE', 'In the list of available subdirectories you can click on any directory name to create a new directory within that structure.');
-@define('ALL_DIRECTORIES', 'すべてのディレクトリ');
-@define('MANAGE_DIRECTORIES', 'ディレクトリ管理');
-@define('DIRECTORY_CREATED', 'ディレクトリ <strong>%s</strong> を作成しました。');
-@define('PARENT_DIRECTORY', '親ディレクトリ');
-@define('CONFIRM_DELETE_DIRECTORY', '本当にディレクトリ %s の内容をすべて削除しますか?');
-@define('ERROR_NO_DIRECTORY', 'エラー: ディレクトリ %s がありません');
-@define('CHECKING_DIRECTORY', 'ディレクトリ %s 内のファイルを調べています');
+@define('ALL_DIRECTORIES', 'すべてのディレクトリー');
+@define('MANAGE_DIRECTORIES', 'ディレクトリー管理');
+@define('DIRECTORY_CREATED', 'ディレクトリー <strong>%s</strong> を作成しました。');
+@define('PARENT_DIRECTORY', '親ディレクトリー');
+@define('CONFIRM_DELETE_DIRECTORY', '本当にディレクトリー %s の内容をすべて削除しますか?');
+@define('ERROR_NO_DIRECTORY', 'エラー: ディレクトリー %s がありません');
+@define('CHECKING_DIRECTORY', 'ディレクトリー %s 内のファイルを調べています');
 @define('DELETING_FILE', 'ファイル %s を削除中...');
-@define('ERROR_DIRECTORY_NOT_EMPTY', '空でないディレクトリは削除できません。もし同様にファイルを削除したければチェックボックス「強制削除する」をチェックし、もう一度送信してください.存在するファイルは次の通りです:');
-@define('DIRECTORY_DELETE_FAILED', 'ディレクトリ %s の削除に失敗しました。パーミッションか上野メッセージを調べてください。');
-@define('DIRECTORY_DELETE_SUCCESS', 'ディレクトリ %s の削除に成功しました。');
+@define('ERROR_DIRECTORY_NOT_EMPTY', '空でないディレクトリーは削除できません。もし同様にファイルを削除したければチェックボックス「強制削除する」をチェックし、もう一度送信してください.存在するファイルは次の通りです:');
+@define('DIRECTORY_DELETE_FAILED', 'ディレクトリー %s の削除に失敗しました。パーミッションか上野メッセージを調べてください。');
+@define('DIRECTORY_DELETE_SUCCESS', 'ディレクトリー %s の削除に成功しました。');
 @define('SKIPPING_FILE_EXTENSION', 'ファイルを飛ばします: %s は拡張子がありません。');
 @define('SKIPPING_FILE_UNREADABLE', 'ファイルを飛ばします: %s は読み込めません。');
 @define('FOUND_FILE', '新規/修正されたファイルを見つけました: %s.');
@@ -334,7 +334,7 @@
 @define('PERMISSIONS', '許可');
 @define('INTEGRITY', 'Verify Installation Integrity');
 @define('CHECKSUMS_NOT_FOUND', 'Unable to compare checksums! (No checksums.inc.php in main directory)');
-@define('CHECKSUMS_PASS', 'All required files verified.');
+@define('CHECKSUMS_PASS', '要求されたすべてのファイルを確認しました。');
 @define('CHECKSUM_FAILED', '%s corrupt or modified: failed verification');
 @define('SETTINGS_SAVED_AT', '新しい設定は %s に保存されました。');
 
@@ -356,7 +356,7 @@
 
 /* PATHS */
 @define('INSTALL_CAT_PATHS', 'パス');
-@define('INSTALL_CAT_PATHS_DESC', '各種パスに必要なフォルダーとファイルを指定します。ディレクトリには末尾にスラッシュを忘れないでください!');
+@define('INSTALL_CAT_PATHS_DESC', '各種パスに必要なフォルダーとファイルを指定します。ディレクトリーには末尾にスラッシュを忘れないでください!');
 @define('INSTALL_FULLPATH', 'フルパス');
 @define('INSTALL_FULLPATH_DESC', 'serendipity をインストールした絶対フルパスです。');
 @define('INSTALL_UPLOADPATH', 'アップロードパス');
@@ -382,9 +382,9 @@
 @define('INSTALL_EMAIL', '管理者電子メール');
 @define('INSTALL_EMAIL_DESC', 'ブログ管理者の電子メールを指定します。');
 @define('INSTALL_SENDMAIL', '管理者にメールを送信しますか?');
-@define('INSTALL_SENDMAIL_DESC', 'エントリにコメントが投稿されたとき、電子メールを受信しますか?');
-@define('INSTALL_SUBSCRIBE', 'ユーザーのエントリの購読を許可しますか?');
-@define('INSTALL_SUBSCRIBE_DESC', 'ユーザーがエントリを購読し、かつ新しいコメントがそのエントリへ作られた場合、そのメールを受け取ることを許可します。');
+@define('INSTALL_SENDMAIL_DESC', 'エントリーにコメントが投稿されたとき、電子メールを受信しますか?');
+@define('INSTALL_SUBSCRIBE', 'ユーザーのエントリーの購読を許可しますか?');
+@define('INSTALL_SUBSCRIBE_DESC', 'ユーザーがエントリーを購読し、かつ新しいコメントがそのエントリーへ作られた場合、そのメールを受け取ることを許可します。');
 @define('INSTALL_BLOGNAME', 'ブログの名前');
 @define('INSTALL_BLOGNAME_DESC', 'ブログの題名を記述します。');
 @define('INSTALL_BLOGDESC', 'ブログの説明');
@@ -408,7 +408,7 @@
 @define('INSTALL_BLOCKREF', 'リファラーブロック');
 @define('INSTALL_BLOCKREF_DESC', 'リファラー一覧で表示しないことを希望する特殊なホストがありますか? ホスト名の一覧を「;」で列挙し、そのホスト名が部分一致でブロックされることに注意してください!');
 @define('INSTALL_REWRITE', 'URL 書き換え');
-@define('INSTALL_REWRITE_DESC', 'URL を生成するときに使用するルールを選択します。書き換えルールを有効にさせることで、ウェブログに対してきれいな URL を作成し、google のようなスパイダーはよりよいインデックスを作成します。ウェブサーバーは、serendipity ディレクトリに対して、mod_rewrite あるいは「AllowOverride All」のいずれかをサポートする必要があります。デフォルト設定は自動車検知されます。');
+@define('INSTALL_REWRITE_DESC', 'URL を生成するときに使用するルールを選択します。書き換えルールを有効にさせることで、ウェブログに対してきれいな URL を作成し、google のようなスパイダーはよりよいインデックスを作成します。ウェブサーバーは、serendipity ディレクトリーに対して、mod_rewrite あるいは「AllowOverride All」のいずれかをサポートする必要があります。デフォルト設定は自動車検知されます。');
 
 /* Imageconversion Settings */
 @define('INSTALL_CAT_IMAGECONV', '画像変換設定');
@@ -423,8 +423,8 @@
 @define('INSTALL_THUMBWIDTH_DESC', '自動生成するサムネイルの不変の最大幅');
 @define('INSTALL_THUMBDIM', 'Thumbnail constrained dimension');
 @define('INSTALL_THUMBDIM_LARGEST', 'Largest');
-@define('INSTALL_THUMBDIM_WIDTH', 'Width');
-@define('INSTALL_THUMBDIM_HEIGHT', 'Height');
+@define('INSTALL_THUMBDIM_WIDTH', '幅');
+@define('INSTALL_THUMBDIM_HEIGHT', '高さ');
 @define('INSTALL_THUMBDIM_DESC', 'Dimension to be constrained to the thumbnail max size. The default "' . 
     INSTALL_THUMBDIM_LARGEST .  '" limits both dimensions, so neither can be greater than the max size; "' . 
     INSTALL_THUMBDIM_WIDTH . '" and "' .  INSTALL_THUMBDIM_HEIGHT . 
@@ -440,21 +440,21 @@
 @define('USERCONF_EMAIL', '電子メールアドレス');
 @define('USERCONF_EMAIL_DESC', '個人の電子メールアドレスを指定します。');
 @define('USERCONF_SENDCOMMENTS', 'コメントの通知を送信しますか?');
-@define('USERCONF_SENDCOMMENTS_DESC', 'コメントをあなたのエントリが受けたとき、電子メールを受信しますか?');
+@define('USERCONF_SENDCOMMENTS_DESC', 'コメントをあなたのエントリーが受けたとき、電子メールを受信しますか?');
 @define('USERCONF_SENDTRACKBACKS', 'トラックバックの通知を送信しますか?');
-@define('USERCONF_SENDTRACKBACKS_DESC', 'トラックバックをあなたのエントリが受けたとき、電子メールを受信しますか?');
-@define('USERCONF_ALLOWPUBLISH', '権限: エントリを公開しますか?');
-@define('USERCONF_ALLOWPUBLISH_DESC', 'このユーザーがエントリを公開することを許可しますか?');
+@define('USERCONF_SENDTRACKBACKS_DESC', 'トラックバックをあなたのエントリーが受けたとき、電子メールを受信しますか?');
+@define('USERCONF_ALLOWPUBLISH', '権限: エントリーを公開しますか?');
+@define('USERCONF_ALLOWPUBLISH_DESC', 'このユーザーがエントリーを公開することを許可しますか?');
 @define('SUCCESS', '成功');
 @define('POWERED_BY_SHOW_TEXT', 'テキストとして "Serendipity" を表示する');
 @define('POWERED_BY_SHOW_TEXT_DESC', 'テキストとして "Serendipity Weblog" を表示するでしょう。');
 @define('POWERED_BY_SHOW_IMAGE', '"Serendipity" とロゴを表示');
 @define('POWERED_BY_SHOW_IMAGE_DESC', 'Serendipity ロゴを表示します。');
 @define('PLUGIN_ITEM_DISPLAY', 'どこで項目を表示するべきですか?');
-@define('PLUGIN_ITEM_DISPLAY_EXTENDED', '拡張エントリのみ表示');
+@define('PLUGIN_ITEM_DISPLAY_EXTENDED', '拡張エントリーのみ表示');
 @define('PLUGIN_ITEM_DISPLAY_OVERVIEW', '概要ページのみ表示');
 @define('PLUGIN_ITEM_DISPLAY_BOTH', '常に表示');
-@define('RSS_IMPORT_CATEGORY', '一致しなかったインポートしたエントリはこのカテゴリを使用する');
+@define('RSS_IMPORT_CATEGORY', '一致しなかったインポートしたエントリーはこのカテゴリを使用する');
 
 @define('COMMENTS_WILL_BE_MODERATED', '送信されたコメントは表示する前にもでレーションされるでしょう。');
 @define('YOU_HAVE_THESE_OPTIONS', '次のオプションが利用可能です:');
@@ -464,7 +464,7 @@
 @define('REQUIRES_REVIEW', 'レビューが必要');
 @define('COMMENT_APPROVED', 'コメント #%s の承認に成功しました。');
 @define('COMMENT_DELETED', 'コメント #%s の削除に成功しました。');
-@define('COMMENTS_MODERATE', 'このエントリのコメントとトラックバックにはモデレーションが必要');
+@define('COMMENTS_MODERATE', 'このエントリーのコメントとトラックバックにはモデレーションが必要');
 @define('THIS_TRACKBACK_NEEDS_REVIEW', '警告: このトラックバックは表示する前に承認が必要です。');
 @define('DELETE_TRACKBACK', 'トラックバックを削除する');
 @define('APPROVE_TRACKBACK', 'トラックバックを承認する');
@@ -475,17 +475,17 @@
 @define('COMMENT_EDITED', '選択されたコメントを編集しました。');
 @define('HIDE', '隠す');
 @define('VIEW_EXTENDED_ENTRY', '"%s" の続きを読む...');
-@define('TRACKBACK_SPECIFIC_ON_CLICK', 'このリンクは、クリックされるのが目的ではありません。それは、このエントリ用のトラックバック URIを含んでいます。このエントリにブログからトラックバックと ping を送信するにはこの URI を 使用することができます。このリンクをコピーするには、Internet Explorer の場合右クリックを、「ショートカットをコピー」を選択します。Mozilla の場合「リンクロケーションをコピー」を選択します。');
+@define('TRACKBACK_SPECIFIC_ON_CLICK', 'このリンクは、クリックされるのが目的ではありません。それは、このエントリー用のトラックバック URIを含んでいます。このエントリーにブログからトラックバックと ping を送信するにはこの URI を 使用することができます。このリンクをコピーするには、Internet Explorer の場合右クリックを、「ショートカットをコピー」を選択します。Mozilla の場合「リンクロケーションをコピー」を選択します。');
 @define('PLUGIN_SUPERUSER_HTTPS', 'ログインに https を使う');
 @define('PLUGIN_SUPERUSER_HTTPS_DESC', 'ログインの https ロケーションへのリンクポイントです。ウェブサーバーがこれをサポートしている必要があります!');
 @define('INSTALL_SHOW_EXTERNAL_LINKS', '外部リンクをクリック可能にしますか?');
 @define('INSTALL_SHOW_EXTERNAL_LINKS_DESC', '"いいえ": google スパムを防ぐために適用可能な未確認外部リンク (トップ退出、トップ入口、ユーザーコメント) はただのテキストとして表示する/しないを指定します (推奨). "はい": 未確認外部リンクはハイパーリンクとして表示します。サイドバープラグインの設定で上書きすることができます!');
 @define('PAGE_BROWSE_COMMENTS', 'ページ %s/%s, 合計 %s コメント');
 @define('FILTERS', 'フィルター');
-@define('FIND_ENTRIES', 'エントリ検索');
+@define('FIND_ENTRIES', 'エントリー検索');
 @define('FIND_COMMENTS', 'コメント検索');
 @define('FIND_MEDIA', 'メディア検索');
-@define('FILTER_DIRECTORY', 'ディレクトリ');
+@define('FILTER_DIRECTORY', 'ディレクトリー');
 @define('SORT_BY', 'ソート基準');
 @define('TRACKBACK_COULD_NOT_CONNECT', 'トラックバックを送信しませんでした: %s のポート番号 %s に接続できませんでした。');
 @define('MEDIA', 'メディア');
@@ -494,7 +494,7 @@
 @define('ENTER_MEDIA_URL', '取得するファイルの URL の入力:');
 @define('ENTER_MEDIA_UPLOAD', 'アップロードしたいファイルの選択:');
 @define('SAVE_FILE_AS', '保存するファイル名:');
-@define('STORE_IN_DIRECTORY', '次のディレクトリの中に保存: ');
+@define('STORE_IN_DIRECTORY', '次のディレクトリーの中に保存: ');
 @define('ADD_MEDIA_BLAHBLAH', '<b>メディアリポジトリにファイルを追加します:</b><p>ここでメディアファイルをアップロードするか、ウェブ中のどこかからそれらを取得するように指示することができます! If you don\'t have an appropriate image, <a href="http://images.google.com" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :)</p><p><b>選択方法:</b></p><br/>');
 @define('MEDIA_RENAME', 'このファイルの名称を変更する');
 @define('IMAGE_RESIZE', 'この画像の大きさを変更する');
@@ -514,11 +514,11 @@
 @define('COMMENT_DELETE_CONFIRM', 'コメント番号 #%d で %s が書いたコメントを本当に削除しますか?');
 @define('DELETE_SELECTED_COMMENTS', '選択したコメントを削除する');
 @define('VIEW_COMMENT', 'コメントを閲覧する');
-@define('VIEW_ENTRY', 'エントリを閲覧する');
+@define('VIEW_ENTRY', 'エントリーを閲覧する');
 @define('DELETE_FILE_FAIL' , 'ファイル <b>%s</b> を削除できませんでした。');
 @define('DELETE_THUMBNAIL', '<b>%s</b> という名前の画像サムネイルを削除しました。');
 @define('DELETE_FILE', '<b>%s</b> という名前のファイルを削除しました。');
-@define('ABOUT_TO_DELETE_FILE', '<b>%s</b>を削除します。<br />もしこのファイルをエントリで使用していた場合、リンク切れや表示できない画像の原因になるでしょう。<br />本当に進めますか?<br /><br />');
+@define('ABOUT_TO_DELETE_FILE', '<b>%s</b>を削除します。<br />もしこのファイルをエントリーで使用していた場合、リンク切れや表示できない画像の原因になるでしょう。<br />本当に進めますか?<br /><br />');
 @define('TRACKBACK_SENDING', 'URI %s にトラックバックを送信中...');
 @define('TRACKBACK_SENT', 'トラックバック成功');
 @define('TRACKBACK_FAILED', 'トラックバック失敗: %s');
@@ -534,7 +534,7 @@
 @define('COMMENTS_FILTER_ALL', 'すべて');
 @define('COMMENTS_FILTER_APPROVED_ONLY', '承認済のみ');
 @define('COMMENTS_FILTER_NEED_APPROVAL', '承認待ち');
-@define('RSS_IMPORT_BODYONLY', 'すべてのエントリは「本文」セクションに置き、拡張エントリセクションに分割しない');
+@define('RSS_IMPORT_BODYONLY', 'すべてのエントリーは「本文」セクションに置き、拡張エントリーセクションに分割しない');
 @define('SYNDICATION_PLUGIN_FULLFEED', 'RSS フィード中で拡張本文とすべての記事を表示する');
 @define('WEEK', '週');
 @define('WEEKS', '週');
@@ -554,12 +554,12 @@
 @define('SELECT_A_PLUGIN_TO_ADD', 'インストールしたいプラグインを選択する');
 @define('INSTALL_OFFSET', 'サーバー時間差');
 @define('STICKY_POSTINGS', 'スティッキ投稿');
-@define('INSTALL_FETCHLIMIT', 'フロントページにエントリを表示する');
-@define('INSTALL_FETCHLIMIT_DESC', '各ページでフロントエンドに表示するエントリの数');
+@define('INSTALL_FETCHLIMIT', 'フロントページにエントリーを表示する');
+@define('INSTALL_FETCHLIMIT_DESC', '各ページでフロントエンドに表示するエントリーの数');
 @define('IMPORT_ENTRIES', 'インポートデータ');
-@define('EXPORT_ENTRIES', 'エクスポートエントリ');
+@define('EXPORT_ENTRIES', 'エクスポートエントリー');
 @define('IMPORT_WELCOME', 'ようこそ Serendipity のインポートユーティリティへ');
-@define('IMPORT_WHAT_CAN', 'ここで、他のウェブログソフトウェアアプリケーションからエントリをインポートすることができます。');
+@define('IMPORT_WHAT_CAN', 'ここで、他のウェブログソフトウェアアプリケーションからエントリーをインポートすることができます。');
 @define('IMPORT_SELECT', 'あなたがインポートしたいソフトウェアを選択してください。');
 @define('IMPORT_PLEASE_ENTER', '下に要求されたデータを入力してください。');
 @define('IMPORT_NOW', '今すぐインポート!');
@@ -571,14 +571,14 @@
 @define('EXPORT_FEED', 'フル RSS フィードをエクスポートする');
 @define('STATUS', 'インポート後の状況');
 @define('IMPORT_GENERIC_RSS', '一般的な RSS をインポートする');
-@define('ACTIVATE_AUTODISCOVERY', 'エントリで見つたリンクにトラックバックを送る');
+@define('ACTIVATE_AUTODISCOVERY', 'エントリーで見つたリンクにトラックバックを送る');
 @define('WELCOME_TO_ADMIN', 'ようこそ Serendipity の管理スイートへ');
 @define('PLEASE_ENTER_CREDENTIALS', 'ログイン情報を下記に入力してください。');
 @define('ADMIN_FOOTER_POWERED_BY', 'Powered by Serendipity %s and PHP %s');
 @define('INSTALL_USEGZIP', 'ページの gzip 圧縮を使う');
 @define('INSTALL_USEGZIP_DESC', 'ページの送信を高速化するために、ブラウザーがこれをサポートするなら、訪問者へ送るページを圧縮することができます。これが推奨です。');
-@define('INSTALL_SHOWFUTURE', '未来のエントリを表示する');
-@define('INSTALL_SHOWFUTURE_DESC', 'もし有効にしたならブログは未来を含むすべてのエントリを表示するでしょう。デフォルトはそれらのエントリを隠し、公開日が到来したらそれらを表示します。');
+@define('INSTALL_SHOWFUTURE', '未来のエントリーを表示する');
+@define('INSTALL_SHOWFUTURE_DESC', 'もし有効にしたならブログは未来を含むすべてのエントリーを表示するでしょう。デフォルトはそれらのエントリーを隠し、公開日が到来したらそれらを表示します。');
 @define('INSTALL_DBPERSISTENT', '継続的接続を使用する');
 @define('INSTALL_DBPERSISTENT_DESC', '継続的データベース接続の使用法を有効にします。詳しいことは <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">ここ</a> を参照してください。これは通常使用することを推奨しません。');
 @define('NO_IMAGES_FOUND', '画像が見つかりません。');
@@ -619,15 +619,15 @@
 @define('TEMPLATE_SET', '\'%s\' をアクティブテンプレートに設定しました。');
 @define('SEARCH_ERROR', '検索機能は期待通りに処理しませんでした。このブログの管理者に通知します: これはデータベースにインデックスキーがないために発生するのかもしれません。MySQL システムにおいては、あなたのデータベースユーザアカウントがこの照会を実行する特権のある必要があります: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> データベースから返された特定のエラーはこの通りです: <pre>%s</pre>');
 @define('EDIT_THIS_CAT', '"%s" 編集中');
-@define('CATEGORY_REMAINING', 'このカテゴリーを削除し、このカテゴリーへのそのエントリーを移動させます。');
-@define('CATEGORY_INDEX', '下記にあなたのエントリに利用可能なカテゴリの一覧があります。');
+@define('CATEGORY_REMAINING', 'このカテゴリーを削除し、このカテゴリーへのそのエントリーーを移動させます。');
+@define('CATEGORY_INDEX', '下記にあなたのエントリーに利用可能なカテゴリの一覧があります。');
 @define('NO_CATEGORIES', 'カテゴリがありません');
 @define('RESET_DATE', 'データリセット');
 @define('RESET_DATE_DESC', '現在の時刻への日付をリセットするにはここをクリックしてください。');
-@define('PROBLEM_PERMISSIONS_HOWTO', 'パーミッションは失敗したディレクトリでシェルコマンド`<em>%s</em>`の実行で設定するか、FTP プログラムを用いて設定します。');
+@define('PROBLEM_PERMISSIONS_HOWTO', 'パーミッションは失敗したディレクトリーでシェルコマンド`<em>%s</em>`の実行で設定するか、FTP プログラムを用いて設定します。');
 @define('WARNING_TEMPLATE_DEPRECATED', '警告: あなたの現在のテンプレートは非常に古いテンプレート方法を使用しています。可能なかぎり更新を提案します。');
-@define('ENTRY_PUBLISHED_FUTURE', 'このエントリはまだ公開されていません。');
-@define('ENTRIES_BY', '%s のエントリ一覧');
+@define('ENTRY_PUBLISHED_FUTURE', 'このエントリーはまだ公開されていません。');
+@define('ENTRIES_BY', '%s のエントリー一覧');
 @define('PREVIOUS', '前へ');
 @define('NEXT', '次へ');
 @define('APPROVE', '承認');
@@ -637,35 +637,35 @@
 @define('ADMIN', '管理');
 @define('ADMIN_FRONTPAGE', 'フロントページ');
 @define('QUOTE', '引用');
-@define('IFRAME_SAVE', 'Serendipity はをエントリ保存中で、トラックバックの作成と可能な限り XML-RPC 呼び出しを実行中です。これは時間がかかるかもしれません...');
-@define('IFRAME_SAVE_DRAFT', 'このエントリの草稿を保存しました。');
-@define('IFRAME_PREVIEW', 'Serendipity はエントリのプレビューを作成中です...');
+@define('IFRAME_SAVE', 'Serendipity はをエントリー保存中で、トラックバックの作成と可能な限り XML-RPC 呼び出しを実行中です。これは時間がかかるかもしれません...');
+@define('IFRAME_SAVE_DRAFT', 'このエントリーの草稿を保存しました。');
+@define('IFRAME_PREVIEW', 'Serendipity はエントリーのプレビューを作成中です...');
 @define('IFRAME_WARNING', 'ブラウザーが iframe をサポートしていません。serendipity_config.inc.php ファイルを開いて、$serendipity[\'use_iframe\'] を FALSE に設定してください。');
 @define('NONE', 'なし');
-@define('USERCONF_CAT_DEFAULT_NEW_ENTRY', '新規エントリのデフォルト設定');
+@define('USERCONF_CAT_DEFAULT_NEW_ENTRY', '新規エントリーのデフォルト設定');
 @define('UPGRADE', 'アップグレード');
 @define('UPGRADE_TO_VERSION', 'バージョン %s へアップグレード');
-@define('DELETE_DIRECTORY', 'ディレクトリの削除');
-@define('DELETE_DIRECTORY_DESC', 'メディアファイル(恐らくあなたのエントリのうちのいくつかの中で使用されるファイル)を含むディレクトリの内容を削除をします。');
-@define('FORCE_DELETE', 'Serendipity でこのディレクトリ中の未知のものを含むファイルをすべて削除します。');
-@define('CREATE_DIRECTORY', 'ディレクトリの作成');
-@define('CREATE_NEW_DIRECTORY', '新規ディレクトリの作成');
-@define('CREATE_DIRECTORY_DESC', 'ここで、メディアファイルを中へ保存めに新しいディレクトリを作成することができます。新しいディレクトリの名前を選び、それを保存するオプションと親ディレクトリを選択します。');
-@define('BASE_DIRECTORY', 'ベースディレクトリ');
+@define('DELETE_DIRECTORY', 'ディレクトリーの削除');
+@define('DELETE_DIRECTORY_DESC', 'メディアファイル(恐らくあなたのエントリーのうちのいくつかの中で使用されるファイル)を含むディレクトリーの内容を削除をします。');
+@define('FORCE_DELETE', 'Serendipity でこのディレクトリー中の未知のものを含むファイルをすべて削除します。');
+@define('CREATE_DIRECTORY', 'ディレクトリーの作成');
+@define('CREATE_NEW_DIRECTORY', '新規ディレクトリーの作成');
+@define('CREATE_DIRECTORY_DESC', 'ここで、メディアファイルを中へ保存めに新しいディレクトリーを作成することができます。新しいディレクトリーの名前を選び、それを保存するオプションと親ディレクトリーを選択します。');
+@define('BASE_DIRECTORY', 'ベースディレクトリー');
 @define('USERLEVEL_EDITOR_DESC', '標準の編集者');
 @define('USERLEVEL_CHIEF_DESC', 'チーフ編集者');
 @define('USERLEVEL_ADMIN_DESC', '管理者');
 @define('USERCONF_USERLEVEL', 'アクセスレベル');
 @define('USERCONF_USERLEVEL_DESC', 'このレベルはこのユーザがウェブログに対してどういう種類のアクセスを持つか決定するため使用されます。');
 @define('USER_SELF_INFO', '%s としてログイン中 (%s)');
-@define('ADMIN_ENTRIES', 'エントリ');
+@define('ADMIN_ENTRIES', 'エントリー');
 @define('RECHECK_INSTALLATION', 'インストールの再検査');
 @define('IMAGICK_EXEC_ERROR', '実行できませんでした: "%s", エラー: %s, 返り値: %d');
 @define('INSTALL_OFFSET_DESC', 'ウェブサーバー(現在: %clock%)と希望の時間帯の時差を入力します。');
 @define('UNMET_REQUIREMENTS', '要求に失敗: %s');
 @define('CHARSET', '文字セット');
 @define('AUTOLANG', '訪問者が使用するブラウザーのデフォルト言語');
-@define('AUTOLANG_DESC', 'もし有効にしたならエントリとインターフェースの言語の決定は訪問者のブラウザーの言語設定を使用します。');
+@define('AUTOLANG_DESC', 'もし有効にしたならエントリーとインターフェースの言語の決定は訪問者のブラウザーの言語設定を使用します。');
 @define('INSTALL_AUTODETECT_URL', '自動検知に HTTP-Host を使う');
 @define('INSTALL_AUTODETECT_URL_DESC', 'If set to "true", Serendipity will ensure that the HTTP Host which was used by your visitor is used as your BaseURL setting. Enabling this will let you be able to use multiple domain names for your Serendipity Blog, and use the domain for all follow-up links which the user used to access your blog.'); // Translate
 @define('CONVERT_HTMLENTITIES', 'HTML 実体への自動変換を試みますか?');
@@ -688,12 +688,12 @@
 @define('PAGE_BROWSE_PLUGINS', '%s/%s ページ、合計 %s プラグインです。');
 @define('INSTALL_CAT_PERMALINKS', '固定リンク');
 @define('INSTALL_CAT_PERMALINKS_DESC', 'あなたのウェブログに固定リンクを定義するために様々なURLパターンを定義します。これはデフォルトを使用することが提案されます; if not, you should try to use the %id% value where possible to prevent Serendipity from querying the database to lookup the target URL.');
-@define('INSTALL_PERMALINK', 'エントリの固定リンク URL 構造');
-@define('INSTALL_PERMALINK_DESC', 'ここで、ベース URL からエントリの入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%title、%day%、%month、%year、そして他の文字を使用することができます。');
+@define('INSTALL_PERMALINK', 'エントリーの固定リンク URL 構造');
+@define('INSTALL_PERMALINK_DESC', 'ここで、ベース URL からエントリーの入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%title、%day%、%month、%year、そして他の文字を使用することができます。');
 @define('INSTALL_PERMALINK_AUTHOR', '著者の固定リンク URL 構造');
-@define('INSTALL_PERMALINK_AUTHOR_DESC', 'ここで、ベース URL からある著者のエントリが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%realname%、%username%、%email%、そして他の文字を使用することができます。');
+@define('INSTALL_PERMALINK_AUTHOR_DESC', 'ここで、ベース URL からある著者のエントリーが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%realname%、%username%、%email%、そして他の文字を使用することができます。');
 @define('INSTALL_PERMALINK_CATEGORY', 'カテゴリの固定リンク URL 構造');
-@define('INSTALL_PERMALINK_CATEGORY_DESC', 'ここで、ベース URL からあるカテゴリのエントリが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%parentname、%description%、そして他の文字を使用することができます。');
+@define('INSTALL_PERMALINK_CATEGORY_DESC', 'ここで、ベース URL からあるカテゴリのエントリーが入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%parentname、%description%、そして他の文字を使用することができます。');
 @define('INSTALL_PERMALINK_FEEDCATEGORY', 'カテゴリ RSS フィードの固定リンク URL 構造');
 @define('INSTALL_PERMALINK_FEEDCATEGORY_DESC', '
 ここで、ベース URL からあるカテゴリーの RSS フィード が入手可能になる、適当な場所への相対的な URL 構造の先頭を定義することができます。変数は、%id%、%name%、%description%、そして他の文字を使用することができます。');
@@ -736,7 +736,7 @@
 @define('PLUGIN_GROUP_FRONTEND_FEATURES', 'フロントエンド: 機能');
 @define('PLUGIN_GROUP_FRONTEND_FULL_MODS', 'フロントエンド: Full Mods');
 @define('PLUGIN_GROUP_FRONTEND_VIEWS', 'フロントエンド: 閲覧');
-@define('PLUGIN_GROUP_FRONTEND_ENTRY_RELATED', 'フロントエンド: エントリー関連');
+@define('PLUGIN_GROUP_FRONTEND_ENTRY_RELATED', 'フロントエンド: エントリーー関連');
 @define('PLUGIN_GROUP_BACKEND_EDITOR', 'バックエンド: エディタ');
 @define('PLUGIN_GROUP_BACKEND_USERMANAGEMENT', 'バックエンド: ユーザー管理');
 @define('PLUGIN_GROUP_BACKEND_METAINFORMATION', 'バックエンド: メタ情報');
@@ -748,13 +748,13 @@
 @define('PLUGIN_GROUP_STATISTICS', '統計');
 @define('PERMISSION_PERSONALCONFIGURATION', '個人設定: 個人設定のアクセス');
 @define('PERMISSION_PERSONALCONFIGURATIONUSERLEVEL', '個人のユーザーレベル設定: ユーザーレベルの変更');
-@define('PERMISSION_PERSONALCONFIGURATIONNOCREATE', '個人の作成禁止設定: 「エントリ作成の禁止」の変更');
-@define('PERMISSION_PERSONALCONFIGURATIONRIGHTPUBLISH', '個人の公開権限設定: エントリを公開する権限の変更');
+@define('PERMISSION_PERSONALCONFIGURATIONNOCREATE', '個人の作成禁止設定: 「エントリー作成の禁止」の変更');
+@define('PERMISSION_PERSONALCONFIGURATIONRIGHTPUBLISH', '個人の公開権限設定: エントリーを公開する権限の変更');
 @define('PERMISSION_SITECONFIGURATION', 'サイト設定: システム設定のアクセス');
 @define('PERMISSION_BLOGCONFIGURATION', 'ブログ設定: ブログの中心設定のアクセス');
-@define('PERMISSION_ADMINENTRIES', 'エントリ管理: エントリの管理');
-@define('PERMISSION_ADMINENTRIESMAINTAINOTHERS', '他ユーザー保持エントリの管理: 他ユーザーのエントリの管理');
-@define('PERMISSION_ADMINIMPORT', 'インポート管理: エントリのインポート');
+@define('PERMISSION_ADMINENTRIES', 'エントリー管理: エントリーの管理');
+@define('PERMISSION_ADMINENTRIESMAINTAINOTHERS', '他ユーザー保持エントリーの管理: 他ユーザーのエントリーの管理');
+@define('PERMISSION_ADMINIMPORT', 'インポート管理: エントリーのインポート');
 @define('PERMISSION_ADMINCATEGORIES', 'カテゴリ管理: カテゴリの管理');
 @define('PERMISSION_ADMINCATEGORIESMAINTAINOTHERS', '他ユーザー保持カテゴリの管理: 他ユーザーのカテゴリの管理');
 @define('PERMISSION_ADMINCATEGORIESDELETE', 'カテゴリ削除管理: カテゴリの削除');
@@ -768,7 +768,7 @@
 @define('PERMISSION_ADMINPLUGINS', 'プラグイン管理: プラグイン管理');
 @define('PERMISSION_ADMINPLUGINSMAINTAINOTHERS', '他ユーザー保持のプラグインの管理: 他ユーザーのプラグインの管理');
 @define('PERMISSION_ADMINIMAGES', '画像管理: メディアファイルの管理');
-@define('PERMISSION_ADMINIMAGESDIRECTORIES', '画像ディレクトリ管理: メディアディレクトリの管理');
+@define('PERMISSION_ADMINIMAGESDIRECTORIES', '画像ディレクトリー管理: メディアディレクトリーの管理');
 @define('PERMISSION_ADMINIMAGESADD', '画像追加管理: 新規メディアファイルの追加');
 @define('PERMISSION_ADMINIMAGESDELETE', '画像削除管理: メディアファイルの削除');
 @define('PERMISSION_ADMINIMAGESMAINTAINOTHERS', '他ユーザー保持画像の管理: 他ユーザーのメディアファイルの管理');
@@ -785,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: 他ユーザーのメディアファイルの閲覧');
 @define('CHARSET_NATIVE', 'ネイティブ');
 @define('INSTALL_CHARSET', '文字コード選択');
-@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては http://www.s9y.org/index.php?node=46 をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
+@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリーを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては http://www.s9y.org/index.php?node=46 をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'プラグインの API フックを有効にする');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 's9y への XML-RPC API インタフェースは、もはやそれを使用して、この API を含めた進行中のセキュリティ問題および多くでない人々のためにバンドルされません。Serendipity の XML-RPC API インターフェースは、ずっと継続するセキュリティの問題と、この API を多くの人が使用していないため、もはやバンドルされていません。したがって、XML-RPC API を使用するために XML-RPC プラグインをインストールする必要があります。アプリケーション中で使用する URL は変わりません。プラグインをインストールしたらすぐに、再び API を使用することができるでしょう。');
@@ -806,23 +806,23 @@
 @define('INSTALL_PERMALINK_AUTHORSPATH', '著者へのパス');
 @define('AUTHORS', 'Authors');
 @define('AUTHORS_ALLOW_SELECT', '訪問者がすぐに複数の著者を表示することを許可しますか?');
-@define('AUTHORS_ALLOW_SELECT_DESC', 'このオプションが有効な場合、チェックボックスはこのサイドバープラグインに各著者の次に追加されるでしょう。ユーザーはそれらのボックスをチェックし、彼らの選択と一致するエントリがを見る事ができます。');
+@define('AUTHORS_ALLOW_SELECT_DESC', 'このオプションが有効な場合、チェックボックスはこのサイドバープラグインに各著者の次に追加されるでしょう。ユーザーはそれらのボックスをチェックし、彼らの選択と一致するエントリーがを見る事ができます。');
 @define('AUTHOR_PLUGIN_DESC', '著者の一覧を表示します。');
 @define('CATEGORY_PLUGIN_TEMPLATE', 'Smarty テンプレートを有効にしますか?');
 @define('CATEGORY_PLUGIN_TEMPLATE_DESC', 'If this option is enabled, the plugin will utilize Smarty-Templating features to output the category listing. If you enable this, you can change the layout via the "plugin_categories.tpl" template file. Enabling this option will impact performance, so if you do not need to make customizations, leave it disabled.');
-@define('CATEGORY_PLUGIN_SHOWCOUNT', 'カテゴリ毎に表示するエントリの数は?');
+@define('CATEGORY_PLUGIN_SHOWCOUNT', 'カテゴリ毎に表示するエントリーの数は?');
 @define('AUTHORS_SHOW_ARTICLE_COUNT', 'Show number of articles next to author name?');
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', 'If this option is enabled, the number of articles by this author is shown next to the authors name in parentheses.');
 @define('CUSTOM_ADMIN_INTERFACE', 'カスタム管理インターフェースが利用可能です');
 
-@define('COMMENT_NOT_ADDED', 'このエントリへのコメントが無効になったのでコメントは追加できませんでした。'); // Retranslate: 'Your comment could not be added, because comments for this entry have either been disabled, you entered invalid data, or your comment was caught by anti-spam measurements.'
+@define('COMMENT_NOT_ADDED', 'このエントリーへのコメントが無効になったのでコメントは追加できませんでした。'); // Retranslate: 'Your comment could not be added, because comments for this entry have either been disabled, you entered invalid data, or your comment was caught by anti-spam measurements.'
 @define('INSTALL_TRACKREF', 'リファラー追跡を有効にしますか?');
 @define('INSTALL_TRACKREF_DESC', 'Enabling the referrer tracking will show you which sites refer to your articles. Today this is often abused for spamming, so you can disable it if you want.');
 @define('CATEGORIES_HIDE_PARENT', '選択された親カテゴリを隠しますか?');
 @define('CATEGORIES_HIDE_PARENT_DESC', 'If you restrict the listing of categories to a specific category, by default you will see that parent category within the output listing. If you disable this option, the parent category name will not be displayed.');
 @define('WARNING_NO_GROUPS_SELECTED', '警告: いくつかのグループメンバーを選択していません。This would effectively log you out of the usergroup management, and thus your group memberships werde not changed.');
-@define('INSTALL_RSSFETCHLIMIT', 'フィードに表示するエントリ数');
-@define('INSTALL_RSSFETCHLIMIT_DESC', '各ページでRSSフィードに表示するエントリの数です。');
+@define('INSTALL_RSSFETCHLIMIT', 'フィードに表示するエントリー数');
+@define('INSTALL_RSSFETCHLIMIT_DESC', '各ページでRSSフィードに表示するエントリーの数です。');
 @define('INSTAL_DB_UTF8', 'データベース文字エンコード変換を有効にする');
 @define('INSTAL_DB_UTF8_DESC', 'Issues a MySQL "SET NAMES" query to indicate the required charset for the database. Turn this on or off, if you see weird characters in your blog.');
 @define('ONTHEFLYSYNCH', 'オンザフライメディアの同期を有効にする');
@@ -877,14 +877,14 @@
 
 @define('MEDIA_TARGET', 'このリンクのターゲット');
 @define('MEDIA_TARGET_JS', 'ポップアップウィンドウ (via JavaScript, adaptive size)');
-@define('MEDIA_ENTRY', '単独のエントリ');
+@define('MEDIA_ENTRY', '単独のエントリー');
 @define('MEDIA_TARGET_BLANK', 'ポップアップウィンドウ (「target=_blank」による)');
 
 @define('MEDIA_DYN_RESIZE', '動的な画像のサイズ変更を許可しますか?');
 @define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
 
-@define('MEDIA_DIRECTORY_MOVED', 'ディレクトリとファイルを「%s」に移動することに成功しました。');
-@define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリとファイルを「%s」に移動できませんでした!');
+@define('MEDIA_DIRECTORY_MOVED', 'ディレクトリーとファイルを「%s」に移動することに成功しました。');
+@define('MEDIA_DIRECTORY_MOVE_ERROR', 'ディレクトリーとファイルを「%s」に移動できませんでした!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
 @define('MEDIA_DIRECTORY_MOVE_ENTRIES', 'Moved the URL of the moved directory in %s entries.');
 @define('PLUGIN_ACTIVE', 'アクティブ');
@@ -896,12 +896,12 @@
 
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', 'パスへのコマンド');
-@define('PERM_SET_CHILD', 'すべての子ディレクトリに同じパーミッションを設定する');
+@define('PERM_SET_CHILD', 'すべての子ディレクトリーに同じパーミッションを設定する');
 @define('PERMISSION_FORBIDDEN_PLUGINS', '禁止プラグイン');
 @define('PERMISSION_FORBIDDEN_HOOKS', '禁止イベント');
 @define('PERMISSION_FORBIDDEN_ENABLE', 'ユーザーグループ用の ACL プラグインを有効にしますか?');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', 'If the option "Plugin ACL for usergroups" is enabled in the configuration, you can specify which usergroups are allowed to execute certain plugins/events.');
-@define('DELETE_SELECTED_ENTRIES', '選択したエントリを削除する');
+@define('DELETE_SELECTED_ENTRIES', '選択したエントリーを削除する');
 @define('PLUGIN_AUTHORS_MINCOUNT', 'Show only authors with at least X articles');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET', 'ブックマークレット');
 @define('FURTHER_LINKS_S9Y_BOOKMARKLET_DESC', 'Bookmark this link and then use it on any page you want to blog about to quickly access your Serendipity Blog.');
@@ -911,14 +911,14 @@
 @define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
 @define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
 @define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
-@define('PINGBACK_SENT', 'Pingback successful');
-@define('PINGBACK_FAILED', 'Pingback failed: %s');
-@define('PINGBACK_NOT_FOUND', 'No pingback-URI found.');
+@define('PINGBACK_SENT', 'ピングバックに成功しました');
+@define('PINGBACK_FAILED', 'ピングバックに失敗しました: %s');
+@define('PINGBACK_NOT_FOUND', 'ピングバック URI が見つかりませんでした。');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
-@define('SET_TO_MODERATED', 'Moderate');
+@define('SET_TO_MODERATED', 'モデレート');
 @define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
-@define('CENTER', 'center');
+@define('CENTER', '中央');
 @define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
 
 @define('COMMENT_TOKENS', 'Use Tokens for Comment Moderation?');
@@ -936,10 +936,10 @@
 @define('NOTIFICATION_CONFIRM_MAIL', 'Your confirmation of the comment has been successfully entered.');
 @define('NOTIFICATION_CONFIRM_SUBMAIL_FAIL', 'Your comment subscription could not be confirmed. Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must request a new confirmation mail.');
 @define('NOTIFICATION_CONFIRM_MAIL_FAIL', 'Your comment confirmation could not be confirmed.  Please check the link you clicked on for completion. If the link was sent more than 3 weeks ago, you must send your comment again.');
-@define('PLUGIN_DOCUMENTATION', 'Documentation');
-@define('PLUGIN_DOCUMENTATION_LOCAL', 'Local Documentation');
-@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Version history');
-@define('SYNDICATION_PLUGIN_BIGIMG', 'Big Image');
+@define('PLUGIN_DOCUMENTATION', 'ドキュメント');
+@define('PLUGIN_DOCUMENTATION_LOCAL', 'ローカルのドキュメント');
+@define('PLUGIN_DOCUMENTATION_CHANGELOG', 'バージョン履歴');
+@define('SYNDICATION_PLUGIN_BIGIMG', '大きな画像');
 @define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file.');
 @define('SYNDICATION_PLUGIN_FEEDNAME', 'Displayed name for "feed"');
 @define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Enter an optional custom name for the feeds (defaults to "feed" when empty)');
