@@ -11,13 +11,6 @@
 
         $servicesdb = array(
             array(
-              'name'       => 'Myblog japan',
-              'host'       => 'ping.myblog.jp',
-              'path'       => '/',
-              'extended' => false
-            ),
-
-            array(
               'name'        => 'BLOGGERS.JP',
               'host'        => 'ping.bloggers.jp',
               'path'        => '/rpc/',
@@ -171,5 +164,10 @@
               'extended' => false
             )
 
+            array(
+              'name'        => 'FeedPing.net',
+              'host'        => 'rpc.feedping.net',
+              'path'        => '/',
+              'extended'    => false
         );
 ?>
