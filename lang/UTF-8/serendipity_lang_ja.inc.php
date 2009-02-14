@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 2463 2009-02-11 12:35:44Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 2465 2009-02-14 13:20:16Z elf2000 $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2005.
@@ -51,9 +51,9 @@
 @define('UP', '上へ');
 @define('DOWN', '下へ');
 @define('ENTRIES', 'エントリー');
-@define('NEW_ENTRY', '新規エントリー追加');
-@define('EDIT_ENTRIES', 'エントリー編集');
-@define('CATEGORIES', 'カテゴリ管理');
+@define('NEW_ENTRY', '新規エントリーの追加');
+@define('EDIT_ENTRIES', 'エントリーの編集');
+@define('CATEGORIES', 'カテゴリの管理');
 @define('WARNING_THIS_BLAHBLAH', "警告:\\nサムネイルなしの画像が多い場合、長時間かかるかもしれません。");
 @define('CREATE_THUMBS', 'サムネイル再構築');
 @define('MANAGE_IMAGES', '画像管理');
@@ -65,7 +65,7 @@
 @define('SUBMIT_COMMENT', 'コメント送信');
 @define('NO_ENTRIES_TO_PRINT', '表示するエントリーはありません。');
 @define('COMMENTS', 'コメント');
-@define('ADD_COMMENT', 'コメント追加');
+@define('ADD_COMMENT', 'コメントの追加');
 @define('NO_COMMENTS', 'コメントがありません');
 @define('POSTED_BY', '投稿者');
 @define('ON', '日時');
@@ -82,7 +82,7 @@
 @define('ERROR_FILE_NOT_EXISTS', 'エラー: 古いファイル名が存在しません!');
 @define('ERROR_FILE_EXISTS', 'エラー: 既に新しいファイル名が使用されています。別の名前を指定してください!');
 @define('ERROR_SOMETHING', 'エラー: 何かが間違っています。');
-@define('ADDING_IMAGE', '画像追加中...');
+@define('ADDING_IMAGE', '画像を追加しています...');
 @define('THUMB_CREATED_DONE', 'サムネイルを作成しました。<br>終了します。');
 @define('ERROR_FILE_EXISTS_ALREADY', 'エラー: ファイルはマシン上に既に存在します!');
 @define('ERROR_UNKNOWN_NOUPLOAD', '未知のエラーが生じました。ファイルはアップロードしませんでした。おそらくファイルサイズがサーバーのインストールで許可された最大サイズを超えたと思われます。ISP に確認するか、php.ini ファイルで許可されたアップロード可能な最大ファイルサイズを編集してください。');
@@ -220,7 +220,7 @@
 @define('TOGGLE_OPTION', 'オプションに切り替え');
 @define('SUBSCRIBE_TO_THIS_ENTRY', 'このエントリーを購読する');
 @define('UNSUBSCRIBE_OK', "%s は今、このエントリーの購読を取り消しました。");
-@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '購読済エントリー "%s" に新規コメントです');
+@define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '購読済みエントリー "%s" に新規コメントです');
 @define('SUBSCRIPTION_MAIL', "こんにちは %s さん。\n監視中のエントリーに新しいコメントが作成されました。\n\nブログ名:\n%s\nエントリー名:\n%s\n\n下記でエントリーを見つけることができます:\n%s\n\n下記のリンクをクリックすると購読解除することができます:\n%s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "こんにちは。\n\n監視中のエントリーに新しいトラックバックが追加されました。\nサイト名: %s\n題名: %s\n投稿者の名前: %s\n\nここでエントリーを見つけることができます:\n%s\n\nこのリンクをクリックすると購読をやめることができます:\n%s\n");
 @define('SIGNATURE', "\n-- \n%s は Serendipity を使っています。\n最良の blog を探しているなら <http://s9y.org> を見てください。");
@@ -281,7 +281,7 @@
 @define('ORIGINAL_SHORT', 'オリジナル');
 @define('APPLY_MARKUP_TO', '%s へのマークアップを適用します。');
 @define('CALENDAR_BEGINNING_OF_WEEK', '週の開始曜日');
-@define('SERENDIPITY_NEEDS_UPGRADE', 'Serendipity は現在のインストール済バージョン %s の設定を検出しました。しかし serendipity 自身はバージョン %s としてインストールされています。<a href="%s">ここをクリック</a>してアップグレードする必要があります!');
+@define('SERENDIPITY_NEEDS_UPGRADE', 'Serendipity は現在のインストール済みバージョン %s の設定を検出しました。しかし serendipity 自身はバージョン %s としてインストールされています。<a href="%s">ここをクリック</a>してアップグレードする必要があります!');
 @define('SERENDIPITY_UPGRADER_WELCOME', 'やあ、Serendipity アップグレードエージェントにようこそ。');
 @define('SERENDIPITY_UPGRADER_PURPOSE', '私は Serendipity %s をアップグレードインストールするのを助けるためにここに居ます。');
 @define('SERENDIPITY_UPGRADER_WHY', '今 Serendipity %s をインストールしましたが、まだこのバージョンに適したデータベースをアップグレードインストールしていないのでこのメッセージを見ています。');
@@ -414,7 +414,7 @@
 @define('INSTALL_CAT_IMAGECONV', '画像変換設定');
 @define('INSTALL_CAT_IMAGECONV_DESC', 'serendipity がどのようにイメージを扱わなければならないかに関する一般的な情報を入力します。');
 @define('INSTALL_IMAGEMAGICK', 'Imagemagick を使う');
-@define('INSTALL_IMAGEMAGICK_DESC', 'image magick がインストール済で、それを使って画像のリサイズをしますか?');
+@define('INSTALL_IMAGEMAGICK_DESC', 'image magick がインストール済みで、それを使って画像のリサイズをしますか?');
 @define('INSTALL_IMAGEMAGICKPATH', 'convert バイナリへのパス');
 @define('INSTALL_IMAGEMAGICKPATH_DESC', 'image magic convert バイナリのフルパスと名前');
 @define('INSTALL_THUMBSUFFIX', 'サムネイル接尾辞');
@@ -501,7 +501,7 @@
 @define('MEDIA_DELETE', 'このファイルを削除する');
 @define('FILES_PER_PAGE', 'ページ毎のファイル数');
 @define('CLICK_FILE_TO_INSERT', '追加したいファイルをクリック:');
-@define('SELECT_FILE', '追加するファイルを選択');
+@define('SELECT_FILE', '追加するファイルの選択');
 @define('MEDIA_FULLSIZE', 'フルサイズ');
 @define('CALENDAR_BOW_DESC', 'その週の始めと考えるべき週の曜日です。デフォルトは「Monday(月曜日)」です。');
 @define('SUPERUSER', 'ブログ管理');
@@ -532,7 +532,7 @@
 @define('DISPLAY_COMMENTS_AS', 'コメント表示形式');
 @define('COMMENTS_FILTER_SHOW', '表示');
 @define('COMMENTS_FILTER_ALL', 'すべて');
-@define('COMMENTS_FILTER_APPROVED_ONLY', '承認済のみ');
+@define('COMMENTS_FILTER_APPROVED_ONLY', '承認済みのみ');
 @define('COMMENTS_FILTER_NEED_APPROVAL', '承認待ち');
 @define('RSS_IMPORT_BODYONLY', 'すべてのエントリーは「本文」セクションに置き、拡張エントリーセクションに分割しない');
 @define('SYNDICATION_PLUGIN_FULLFEED', 'RSS フィード中で拡張本文とすべての記事を表示する');
@@ -544,20 +544,20 @@
 @define('ARCHIVE_FREQUENCY_DESC', 'リストの中で各項目間で使用するカレンダーの間隔です。');
 @define('ARCHIVE_COUNT', '一覧中の項目の数');
 @define('ARCHIVE_COUNT_DESC', '表示する月・週または日の合計数');
-@define('BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS', '以下にインストール済のプラグインの一覧があります。');
+@define('BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS', '以下にインストール済みのプラグインの一覧があります。');
 @define('SIDEBAR_PLUGIN', 'サイドバープラグイン');
 @define('EVENT_PLUGIN', 'イベントプラグイン');
 @define('CLICK_HERE_TO_INSTALL_PLUGIN', '新しい %s をインストールする');
 @define('VERSION', 'バージョン');
 @define('INSTALL', 'インストール');
-@define('ALREADY_INSTALLED', '既にインストール済です。');
+@define('ALREADY_INSTALLED', '既にインストール済みです。');
 @define('SELECT_A_PLUGIN_TO_ADD', 'インストールしたいプラグインを選択する');
 @define('INSTALL_OFFSET', 'サーバー時間差');
 @define('STICKY_POSTINGS', 'スティッキ投稿');
 @define('INSTALL_FETCHLIMIT', 'フロントページにエントリーを表示する');
 @define('INSTALL_FETCHLIMIT_DESC', '各ページでフロントエンドに表示するエントリーの数');
-@define('IMPORT_ENTRIES', 'インポートデータ');
-@define('EXPORT_ENTRIES', 'エクスポートエントリー');
+@define('IMPORT_ENTRIES', 'データのインポート');
+@define('EXPORT_ENTRIES', 'エントリーのエクスポート');
 @define('IMPORT_WELCOME', 'ようこそ Serendipity のインポートユーティリティへ');
 @define('IMPORT_WHAT_CAN', 'ここで、他のウェブログソフトウェアアプリケーションからエントリーをインポートすることができます。');
 @define('IMPORT_SELECT', 'あなたがインポートしたいソフトウェアを選択してください。');
@@ -675,7 +675,7 @@
 @define('HOTLINK_DONE', 'ファイルをホットリンクしました。<br />完了です。');
 @define('ENTER_MEDIA_URL_METHOD', '取得方法:');
 @define('ADD_MEDIA_BLAHBLAH_NOTE', '注: ホットリンクは、それらをローカルに格納せずに、リモートのイメージを使用することを可能にします。サーバーへのホットリンクを選択した場合、自分のウェブサイトか指定のウェブサイトへホットリンクする許可を持っていることを確認してください。');
-@define('MEDIA_HOTLINKED', 'ホットリンク済');
+@define('MEDIA_HOTLINKED', 'ホットリンク済み');
 @define('FETCH_METHOD_IMAGE', 'サーバーへ画像をダウンロード');
 @define('FETCH_METHOD_HOTLINK', 'サーバーにホットリンクする');
 @define('DELETE_HOTLINK_FILE', '<b>%s</b> というファイ名のホットリンクを削除');
@@ -910,14 +910,14 @@
 @define('USERCONF_CREATE_DESC', 'If selected, the user will not have any editing or creation possibilities on the blog anymore. When logging in to the backend, he cannot do anything else apart from logging out and viewing his personal configuration.');
 @define('CATEGORY_HIDE_SUB', 'Hide postings made to sub-categories?');
 @define('CATEGORY_HIDE_SUB_DESC', 'By default, when you browse a category also entries of any subcategory are displayed. If this option is turned on, only postings of the currently selected category are displayed.');
-@define('PINGBACK_SENDING', 'Sending pingback to URI %s...');
+@define('PINGBACK_SENDING', 'URI %s にピングバックを送信しています...');
 @define('PINGBACK_SENT', 'ピングバックに成功しました');
 @define('PINGBACK_FAILED', 'ピングバックに失敗しました: %s');
 @define('PINGBACK_NOT_FOUND', 'ピングバック URI が見つかりませんでした。');
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
 @define('SET_TO_MODERATED', 'モデレート');
-@define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('COMMENT_MODERATED', 'コメント #%s をもでレート済みに設定することに成功しました');
 @define('CENTER', '中央');
 @define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
 
@@ -948,4 +948,4 @@
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(If you enter an absolute URL with http://... here, this URL will be used as the redirection target in case you have enabled the "Force" option for FeedBurner. Note that this can also be a URL independent to FeedBurner. For new Google FeedBurner feeds, you need to enter http://feeds2.feedburner.com/yourfeedname here)');
 
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');
-@define('COMMENTS_FILTER_NEED_CONFIRM', 'Pending user confirmation');
+@define('COMMENTS_FILTER_NEED_CONFIRM', 'ユーザーの確認を保留しています');
