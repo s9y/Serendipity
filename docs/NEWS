@@ -3,6 +3,13 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Change password hashing from plain md5 to salted SHA1. Logins
+      should continue to work and are migrated to SHA1 keys upon
+      first login. MD5-logins will only work successfully once. This
+      mechanism will expire 6 months after the upgrade has been executed.
+      EXPERIMENTAL! (http://blog.s9y.org/archives/205-hash.html)
+      (garvinhicking)
+
     * Allow admins to also approve comments awaiting user-confirmation
       (garvinhicking)
 

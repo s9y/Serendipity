@@ -19,7 +19,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
         echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
     } elseif (empty($_POST['username'])) {
         echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . USERCONF_CHECK_USERNAME_ERROR . '</div>';
-    } elseif (!empty($_POST['password']) && $_POST['check_password'] != $_SESSION['serendipityPassword'] && md5($_POST['check_password']) != $_SESSION['serendipityPassword']) {
+    } elseif (!empty($_POST['password']) && $_POST['check_password'] != $_SESSION['serendipityPassword'] && serendipity_passwordhash($_POST['check_password']) != $_SESSION['serendipityPassword']) {
         echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . USERCONF_CHECK_PASSWORD_ERROR . '</div>';
     } else {
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
