@@ -22,15 +22,17 @@ if (defined('S9Y_FRAMEWORK_CONFIG')) {
  * @param   int     The userlevel of a user
  * @return  int     The new user ID of the added author
  */
-function serendipity_addAuthor($username, $password, $realname, $email, $userlevel=0) {
+function serendipity_addAuthor($username, $password, $realname, $email, $userlevel=0, $hashtype=1) {
     global $serendipity;
-    $password = md5($password);
-    $query = "INSERT INTO {$serendipity['dbPrefix']}authors (username, password, realname, email, userlevel)
+    $password = serendipity_hash($password);
+    $query = "INSERT INTO {$serendipity['dbPrefix']}authors (username, password, realname, email, userlevel, hashtype)
                         VALUES  ('" . serendipity_db_escape_string($username) . "',
                                  '" . serendipity_db_escape_String($password) . "',
                                  '" . serendipity_db_escape_String($realname) . "',
                                  '" . serendipity_db_escape_String($email) . "',
-                                 '" . serendipity_db_escape_String($userlevel) . "')";
+                                 '" . serendipity_db_escape_String($userlevel) . "',
+                                 '" . serendipity_db_escape_String($hashtype) . "'
+                                 )";
     serendipity_db_query($query);
     $cid = serendipity_db_insert_id('authors', 'authorid');
 
@@ -224,7 +226,7 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
                 return;
             }
 
-            $val = md5($val);
+            $val = serendipity_hash($val);
             $copy_to_s9y = false;
             break;
 
@@ -492,14 +494,14 @@ function serendipity_setAuthorToken() {
  * @param   boolean     Indicates whether to query external plugins for authentication
  * @return  boolean     True on success, False on error
  */
-function serendipity_authenticate_author($username = '', $password = '', $is_md5 = false, $use_external = true) {
+function serendipity_authenticate_author($username = '', $password = '', $is_hashed = false, $use_external = true) {
     global $serendipity;
 
     if (isset($_SESSION['serendipityUser']) && isset($_SESSION['serendipityPassword']) && isset($_SESSION['serendipityAuthedUser']) && $_SESSION['serendipityAuthedUser'] == true) {
         $username = $_SESSION['serendipityUser'];
         $password = $_SESSION['serendipityPassword'];
         // For safety reasons when multiple blogs are installed on the same host, we need to check the current author each time to not let him log into a different blog with the same sessiondata
-        $is_md5 = true;
+        $is_hashed = true;
     }
 
     $is_authenticated = false;
@@ -510,42 +512,75 @@ function serendipity_authenticate_author($username = '', $password = '', $is_md5
 
     if ($username != '') {
         if ($use_external) {
-            serendipity_plugin_api::hook_event('backend_auth', $is_md5, array('username' => $username, 'password' => $password));
-        }
-
-        if ($is_md5 === false && !empty($password)) {
-            $password = md5($password);
+            serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
         }
 
         $query = "SELECT DISTINCT
-                    email, realname, authorid, userlevel, right_publish
+                    email, password, realname, authorid, userlevel, right_publish, hashtype
                   FROM
                     {$serendipity['dbPrefix']}authors
                   WHERE
-                    username   = '" . serendipity_db_escape_string($username) . "'
-                  AND password = '" . serendipity_db_escape_string($password) . "'";
-        $row =& serendipity_db_query($query, true, 'assoc');
+                    username   = '" . serendipity_db_escape_string($username) . "'";
+        $rows =& serendipity_db_query($query, false, 'assoc');
+        if (is_array($rows)) {
+            foreach($rows AS $row) {
+                $is_valid_user = false;
 
-        if (is_array($row)) {
-            serendipity_setCookie('old_session', session_id(), false);
-            if (!$is_md5) {
-                serendipity_setAuthorToken();
+                // Old MD5 hashing routine. Will convert user.
+                if (empty($row['hashtype']) || $row['hashtype'] == 0) {
+                    
+                    if (isset($serendipity['hashkey']) && (time() - $serendipity['hashkey']) >= 15768000) {
+                        die('You can no longer login with an old-style MD5 hash to prevent MD5-Hostage abuse. 
+                             Please ask the Administrator to set you a new password.');
+                    }
+
+                    if ( ($is_hashed === false && (string)$row['password'] === (string)md5($password)) ||
+                         ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+
+                        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}authors
+                                                 SET password = '" . ($is_hashed === false ? serendipity_hash($password) : $password) . "',
+                                                     hashtype = 1
+                                               WHERE authorid = '" . $row['authorid'] . "'");
+                        $is_valid_user = true;
+                    } else {
+                        continue;
+                    }                    
+                } else {
+                    if ( ($is_hashed === false && (string)$row['password'] === (string)serendipity_hash($password)) ||
+                         ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+
+                        $is_valid_user = true;
+                    } else {
+                        continue;
+                    }                    
+                }
+
+                // This code is only reached, if the password before is valid.
+                if ($is_valid_user) {
+                    serendipity_setCookie('old_session', session_id(), false);
+                    if (!$is_hashed) {
+                        serendipity_setAuthorToken();
+                    }
+                    $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
+                    $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
+                    $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword']     = $password;
+                    $_SESSION['serendipityEmail']       = $serendipity['serendipityEmail']        = $row['email'];
+                    $_SESSION['serendipityAuthorid']    = $serendipity['authorid']                = $row['authorid'];
+                    $_SESSION['serendipityUserlevel']   = $serendipity['serendipityUserlevel']    = $row['userlevel'];
+                    $_SESSION['serendipityAuthedUser']  = $serendipity['serendipityAuthedUser']   = true;
+                    $_SESSION['serendipityRightPublish']= $serendipity['serendipityRightPublish'] = $row['right_publish'];
+                    $_SESSION['serendipityHashType']    = $serendipity['serendipityHashType']     = $row['hashtype'];
+                    
+                    serendipity_load_configuration($serendipity['authorid']);
+                    serendipity_setCookie('userDefLang', $serendipity['lang'], false);
+                    return true;
+                }
             }
-            $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
-            $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
-            $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword']     = $password;
-            $_SESSION['serendipityEmail']       = $serendipity['serendipityEmail']        = $row['email'];
-            $_SESSION['serendipityAuthorid']    = $serendipity['authorid']                = $row['authorid'];
-            $_SESSION['serendipityUserlevel']   = $serendipity['serendipityUserlevel']    = $row['userlevel'];
-            $_SESSION['serendipityAuthedUser']  = $serendipity['serendipityAuthedUser']   = true;
-            $_SESSION['serendipityRightPublish']= $serendipity['serendipityRightPublish'] = $row['right_publish'];
-            serendipity_load_configuration($serendipity['authorid']);
-            serendipity_setCookie('userDefLang', $serendipity['lang'], false);
-            return true;
-        } else {
-            $_SESSION['serendipityAuthedUser'] = false;
-            serendipity_session_destroy();
         }
+
+        // Only reached, when proper login did not yet return true.
+        $_SESSION['serendipityAuthedUser'] = false;
+        serendipity_session_destroy();
     }
 
     return false;
@@ -2053,6 +2088,26 @@ function serendipity_hasPluginPermissions($plugin, $groupid = null) {
         return false;
     } else {
         return true;
+    }
+}
+
+function serendipity_hash($string) {
+    global $serendipity;
+    
+    if (empty($serendipity['hashkey'])) {
+        serendipity_set_config_var('hashkey', time(), 0);
+    }
+
+    return sha1($serendipity['hashkey'] . $string);
+}
+
+function serendipity_passwordhash($cleartext_password) {
+    global $serendipity;
+
+    if ($_SESSION['serendipityHashType'] > 0) {
+        return serendipity_hash($cleartext_password);
+    } else {
+        return md5($cleartext_password);
     }
 }
 

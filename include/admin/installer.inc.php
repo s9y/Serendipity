@@ -516,7 +516,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         echo ' <strong>' . DONE . '</strong><br />';
 
         echo sprintf(CREATING_PRIMARY_AUTHOR, htmlspecialchars($_POST['user'])) .'...';
-        $authorid = serendipity_addAuthor($_POST['user'], $_POST['pass'], $_POST['realname'], $_POST['email'], USERLEVEL_ADMIN);
+        $authorid = serendipity_addAuthor($_POST['user'], $_POST['pass'], $_POST['realname'], $_POST['email'], USERLEVEL_ADMIN, 1);
         $mail_comments =  (serendipity_db_bool($_POST['want_mail']) ? 1 : 0);
         serendipity_set_user_var('mail_comments', $mail_comments, $authorid);
         serendipity_set_user_var('mail_trackbacks', $mail_comments, $authorid);
