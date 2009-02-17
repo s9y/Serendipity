@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added improved Blogger.com importer using the API, thanks to jaa
+    
     * Change password hashing from plain md5 to salted SHA1. Logins
       should continue to work and are migrated to SHA1 keys upon
       first login. MD5-logins will only work successfully once. This
