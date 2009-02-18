@@ -496,20 +496,32 @@ function serendipity_setAuthorToken() {
  */
 function serendipity_authenticate_author($username = '', $password = '', $is_hashed = false, $use_external = true) {
     global $serendipity;
+    static $debug = false;
+    static $debugc = 0;
+    
+    if ($debug) {
+        $fp = fopen('login.log', 'a');
+        flock($fp, LOCK_EX);
+        $debugc++;
+        fwrite($fp, date('Y-m-d H:i') . ' - #' . $debugc . ' Login init [' . $username . ',' . $password . ',' . (int)$is_hashed . ',' . (int)$use_external . ']' . ' (' . $_SERVER['REMOTE_ADDR'] . ',' . $_SERVER['REQUEST_URI'] . ', ' . session_id() . ')' . "\n");
+    }
 
     if (isset($_SESSION['serendipityUser']) && isset($_SESSION['serendipityPassword']) && isset($_SESSION['serendipityAuthedUser']) && $_SESSION['serendipityAuthedUser'] == true) {
         $username = $_SESSION['serendipityUser'];
         $password = $_SESSION['serendipityPassword'];
         // For safety reasons when multiple blogs are installed on the same host, we need to check the current author each time to not let him log into a different blog with the same sessiondata
-        $is_hashed = true;
+        #$is_hashed = true;
+        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Recall from session: ' . $username . ':' . $password . "\n");
     }
 
+    if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login ext check' . "\n");
     $is_authenticated = false;
     serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
     if ($is_authenticated) {
         return true;
     }
 
+    if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login username check:' . $username . "\n");
     if ($username != '') {
         if ($use_external) {
             serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
@@ -521,9 +533,12 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                     {$serendipity['dbPrefix']}authors
                   WHERE
                     username   = '" . serendipity_db_escape_string($username) . "'";
+        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login check (' . serialize($is_hashed) . ', ' . $_SESSION['serendipityPassword'] . '):' . $query . "\n");
+
         $rows =& serendipity_db_query($query, false, 'assoc');
         if (is_array($rows)) {
             foreach($rows AS $row) {
+                if ($is_valid_user) continue;
                 $is_valid_user = false;
 
                 // Old MD5 hashing routine. Will convert user.
@@ -541,6 +556,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                                                  SET password = '" . ($is_hashed === false ? serendipity_hash($password) : $password) . "',
                                                      hashtype = 1
                                                WHERE authorid = '" . $row['authorid'] . "'");
+                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Migrated user:' . $row['username'] . "\n");
                         $is_valid_user = true;
                     } else {
                         continue;
@@ -550,20 +566,24 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                          ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
 
                         $is_valid_user = true;
+                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Validated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
                     } else {
+                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - INValidated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
                         continue;
                     }                    
                 }
 
                 // This code is only reached, if the password before is valid.
                 if ($is_valid_user) {
+                    if ($debug) fwrite($fp, date('Y-m-d H:i') . ' [sid:' . session_id() . '] - Success.' . "\n");
                     serendipity_setCookie('old_session', session_id(), false);
                     if (!$is_hashed) {
                         serendipity_setAuthorToken();
+                        $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword'] = $password;
                     }
+
                     $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
                     $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
-                    $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword']     = $password;
                     $_SESSION['serendipityEmail']       = $serendipity['serendipityEmail']        = $row['email'];
                     $_SESSION['serendipityAuthorid']    = $serendipity['authorid']                = $row['authorid'];
                     $_SESSION['serendipityUserlevel']   = $serendipity['serendipityUserlevel']    = $row['userlevel'];
@@ -579,8 +599,15 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
         }
 
         // Only reached, when proper login did not yet return true.
+        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - FAIL.' . "\n");
+        
         $_SESSION['serendipityAuthedUser'] = false;
         serendipity_session_destroy();
+    }
+
+    if ($debug) {
+        fwrite($fp, date('Y-m-d H:i') . ' [sid:' . session_id() . '] - Uninit' . "\n");
+        fclose($fp);
     }
 
     return false;
