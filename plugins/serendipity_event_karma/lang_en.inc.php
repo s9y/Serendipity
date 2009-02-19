@@ -107,3 +107,12 @@
 @define('PLUGIN_KARMA_TAB_OPTIONS', 'Options');
 @define('PLUGIN_KARMA_TAB_APPEARANCE', 'Appearance');
 @define('PLUGIN_KARMA_TAB_TEXT', 'Text');
+@define('PLUGIN_KARMA_DISPLAY_LOG', 'Manage Karma');
+@define('PLUGIN_KARMA_REMOVED_POINTS', 'Removed vote of %s points for entry %s');
+@define('PLUGIN_KARMA_APPROVED_POINTS', 'Approved vote of %s points for entry %s');
+@define('PLUGIN_KARMA_POINTS_ERROR', 'Error updating points for entry %s!');
+@define('PLUGIN_KARMA_REMOVE_ERROR', 'Error removing vote for entry %s! (Points have been updated, though.)');
+@define('PLUGIN_KARMA_UPDATE_ERROR', 'No votes yet for entry %s!');
+@define('PLUGIN_KARMA_INVALID_INPUT', 'Invalid input!');
+@define('PLUGIN_KARMA_DELETE_VOTES', 'Delete selected votes');
+@define('PLUGIN_KARMA_APPROVE_VOTES', 'Approve selected votes');
