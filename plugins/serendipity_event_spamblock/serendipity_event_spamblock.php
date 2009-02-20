@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.73');
+        $propbag->add('version',       '1.74');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -319,7 +319,7 @@ var $filter_defaults;
                 $propbag->add('type', 'string');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_LOGFILE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_LOGFILE_DESC);
-                $propbag->add('default', $serendipity['serendipityPath'] . 'spamblock.log');
+                $propbag->add('default', $serendipity['serendipityPath'] . 'spamblock-%Y-%m-%d.log');
                 break;
 
             case 'logtype':
@@ -1467,6 +1467,9 @@ var $filter_defaults;
                 if (empty($logfile)) {
                     return;
                 }
+				if (strpos($logfile, '%') !== false) {
+					$logfile = strftime($logfile);
+				}
 
                 $fp = @fopen($logfile, 'a+');
                 if (!is_resource($fp)) {
