@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added ability to use strftime variables in the spamblock.log
+      filename. (kleinerchemiker)
+
     * Added improved Blogger.com importer using the API, thanks to jaa
     
     * Change password hashing from plain md5 to salted SHA1. Logins
