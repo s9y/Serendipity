@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Use a space instead of comma to seperate DENY rules in spamblock
+      plugin, patch by brielle
+
     * Added ability to use strftime variables in the spamblock.log
       filename. (kleinerchemiker)
 
