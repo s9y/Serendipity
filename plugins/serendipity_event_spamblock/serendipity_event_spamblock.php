@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.74');
+        $propbag->add('version',       '1.75');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -439,9 +439,9 @@ var $filter_defaults;
                 // Check if an old htaccess file existed and try to preserve its contents. Otherwise completely wipe the file.
                 if ($htaccess != '' && preg_match('@^(.*)#SPAMDENY.*Deny From.+#/SPAMDENY(.*)$@imsU', $htaccess, $match)) {
                     // Code outside from s9y-code was found.
-                    $content = trim($match[1]) . "\n#SPAMDENY\nDeny From " . implode(',', $deny) . "\n#/SPAMDENY\n" . trim($match[2]);
+                    $content = trim($match[1]) . "\n#SPAMDENY\nDeny From " . implode(' ', $deny) . "\n#/SPAMDENY\n" . trim($match[2]);
                 } else {
-                    $content = trim($htaccess) . "\n#SPAMDENY\nDeny From " . implode(',', $deny) . "\n#/SPAMDENY\n";
+                    $content = trim($htaccess) . "\n#SPAMDENY\nDeny From " . implode(' ', $deny) . "\n#/SPAMDENY\n";
                 }
                 fwrite($fp, $content);
                 fclose($fp);
