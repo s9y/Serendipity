@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Updated czech translation, by Vlada Ajgl
+
     * Use a space instead of comma to seperate DENY rules in spamblock
       plugin, patch by brielle
 
