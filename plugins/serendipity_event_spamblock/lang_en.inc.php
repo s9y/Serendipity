@@ -51,7 +51,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_MODERATE', 'Too many hyperlinks');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL', 'Hide E-Mail addresses of commenting users');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_DESC', 'Will show no E-Mail addresses of commenting users');
-@define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE', 'E-Mail addresses will not be displayed and will only be used for E-Mail notifications');
+@define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE', 'E-Mail addresses will not be displayed and will only be used for E-Mail notifications.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE', 'Choose logging method');
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DESC', 'Logging of rejected comments can be done in Database or to a plaintext file');
