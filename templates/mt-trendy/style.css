@@ -12,6 +12,7 @@ a:link,
 a:visited {
   color: #cccc66;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 a:active,
