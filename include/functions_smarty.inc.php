@@ -336,6 +336,10 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
                 break;
         }
     }
+    
+    if ($params['returncode'] == 'query') {
+        return print_r($entry, true);
+    }
 
     serendipity_printEntries(
         $entry,                                 // Entry data
