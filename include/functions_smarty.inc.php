@@ -188,7 +188,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
     }
     
     if (!empty($params['entryprops'])) {
-        if (preg_match_all('@(.*)(!)?=[\'"]*(.*)[\'"]*(,|$)@imsU', $params['entryprops'], $m)) {
+        if (preg_match_all('@(.*)(!)?=[\'"]*([^\'"]+)[\'"]*(,|$)@imsU', $params['entryprops'], $m)) {
             foreach($m[0] AS $idx => $p) {
                 $params['joinown'] .= "\n JOIN {$serendipity['dbPrefix']}entryproperties 
                                           AS ep" . $idx . " 
