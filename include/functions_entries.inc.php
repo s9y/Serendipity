@@ -722,11 +722,13 @@ function serendipity_rebuildCategoryTree($parent = 0, $left = 0) {
  * @access public
  * @param   string      The searchterm (may contain wildcards)
  * @param   int         Restrict the number of results [also uses $serendipity['GET']['page'] for pagination]
+ * @param   array       Add search Results at the top
  * @return  array       Returns the superarray of entries found
  */
-function &serendipity_searchEntries($term, $limit = '') {
+function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     global $serendipity;
 
+    $orig_limit = $limit;
     if ($limit == '') {
         $limit = $serendipity['fetchLimit'];
     }
@@ -817,10 +819,35 @@ function &serendipity_searchEntries($term, $limit = '') {
 
     $search =& serendipity_db_query($querystring);
 
-    if (is_array($search)) {
-        serendipity_fetchEntryData($search);
+    //Add param searchresults at the top and remove duplicates.
+    if (is_array($searchresults)) {
+        $ids_current = array();
+        foreach($searchresults AS $idx => $data) {
+            $ids_current[$data['id']] = true;
+        }
+   
+        foreach($search AS $idx => $data) {
+            if (isset($ids_current[$data['id']])) {
+                unset($search[$idx]);
+            }
+        }
+        $search = array_merge($searchresults, $search);
     }
 
+    //if * wasn't already appended and if there are none or not enough
+    //results, search again for entries containing the searchterm as a part  
+    if (strpos($term, '*') === false) {
+        if (! is_array($search)) {
+            return serendipity_searchEntries($term.'*', $orig_limit);
+        }else if (count($search) < 4){
+            return serendipity_searchEntries($term.'*', $orig_limit, $search);
+        }
+    }
+    
+    if (is_array($search)){
+        serendipity_fetchEntryData($search);
+    }
+    
     return $search;
 }
 

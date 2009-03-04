@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Enhance quicksearch by performing a wildcard-search for the
+      searchterms, when less than 4 matches are found. (onli)
+
     * Updated czech translation, by Vlada Ajgl
 
     * Use a space instead of comma to seperate DENY rules in spamblock
