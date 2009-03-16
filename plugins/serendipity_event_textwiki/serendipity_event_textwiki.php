@@ -466,7 +466,7 @@ class serendipity_event_textwiki extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTWIKI_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tobias Schlitt');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -620,7 +620,7 @@ class serendipity_event_textwiki extends serendipity_event
 
         if (class_exists('Text_Wiki')) {
             $this->wiki =& new Text_Wiki;
-            $this->wiki->setFormatConf('Xhtml', 'translate', HTML_SPECIALCHARS);
+            $this->wiki->setFormatConf('Xhtml', 'translate', null);
             $this->wiki->setFormatConf('Xhtml', 'charset', LANG_CHARSET);
         } else {
             return false;
