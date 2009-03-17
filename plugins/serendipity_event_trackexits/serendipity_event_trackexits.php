@@ -83,6 +83,7 @@ class serendipity_event_trackexits extends serendipity_event
             case 'commentredirection':
                 $propbag->add('type',        'select');
                 $propbag->add('select_values', array('none'     => PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_NONE,
+                                                     'bmi'      => 'BMI (Fun)',
                                                      's9y'      => PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_S9Y,
                                                      'google'   => PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_GOOGLE));
                 $propbag->add('name',        PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION);
@@ -137,6 +138,10 @@ class serendipity_event_trackexits extends serendipity_event
 
                             if ($temp['element'] == 'comment' && !empty($eventData['url'])) {
                                 switch(trim($this->get_config('commentredirection'))) {
+                                    case 'bmi':
+                                        $eventData['url'] = 'http://bmi.pifo.biz/?' . $eventData['url'];
+                                        break;
+
                                     case 's9y':
                                         $eventData['url'] = $this->_encodeExitsCallback(
                                                               array(
@@ -180,11 +185,20 @@ class serendipity_event_trackexits extends serendipity_event
     */
     function _encodeExitsCallback($buffer, $url_only = false) {
         global $serendipity;
+        static $redir = null;
+        
+        if ($redir === null) {
+            $redir    = $this->get_config('commentredirection');
+        }
 
         $entry_id = $serendipity['encodeExitsCallback_entry_id'];
         $url      = 'http' . $buffer[3] . '://' . $buffer[4];
 
         if ($url_only) {
+            if ($redir == 'bmi') {
+                return 'http://bmi.pifo.biz/?' . $url;
+            }
+
             return sprintf(
                 '%sexit.php?url=%s%s',
                 $serendipity['baseURL'],
@@ -198,6 +212,17 @@ class serendipity_event_trackexits extends serendipity_event
         $is_out   = (stristr($buffer[0], 'onmouseout=')  !== false ? true : false);
 
         $link     = '<a%shref="%sexit.php?url%s=%s%s" ' . (!$is_title ? 'title="%s" ' : '%s') . (!$is_over ? ' onmouseover="window.status=\'%s\';return true;" ' : '%s') . (!$is_out ? 'onmouseout="window.status=\'\';return true;"' : '') . '%s>';
+
+        if ($redir == 'bmi') {
+            return sprintf(
+                '<a%shref="%s" ' . (!$is_title ? 'title="%s" ' : '%s') . (!$is_over ? ' onmouseover="window.status=\'%s\';return true;" ' : '%s') . (!$is_out ? 'onmouseout="window.status=\'\';return true;"' : '') . '%s>',
+                
+                $buffer[1],
+                'http://bmi.pifo.biz/?' . $url,
+                (!$is_title ? htmlspecialchars($url) : ''),
+                (!$is_over  ? htmlspecialchars($url) : ''),
+                $buffer[6]);
+        }
 
         if (is_array($this->links) && !empty($this->links[$url])) {
             return sprintf(
