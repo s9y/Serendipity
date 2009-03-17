@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Enhance TrackExits plugin to also support link redirection for
+      future german law/access blocking :) (garvinhicking)
+      
     * Enhance quicksearch by performing a wildcard-search for the
       searchterms, when less than 4 matches are found. (onli)
 
