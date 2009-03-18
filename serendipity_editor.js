@@ -68,7 +68,7 @@ function wrapSelection(txtarea, lft, rgt) {
         mozWrap(txtarea, lft, rgt);
     }
     
-    if (txtarea.scrollTop) {
+    if (scrollPos) {
         txtarea.focus();
         txtarea.scrollTop = scrollPos;
     }
