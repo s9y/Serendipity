@@ -58,10 +58,19 @@ function IEWrap(txtarea, lft, rgt) {
 }
 
 function wrapSelection(txtarea, lft, rgt) {
+    if (txtarea.scrollTop) {
+        scrollPos = txtarea.scrollTop;
+    }
+
     if (document.all) {
         IEWrap(txtarea, lft, rgt);
     } else if (document.getElementById) {
         mozWrap(txtarea, lft, rgt);
+    }
+    
+    if (txtarea.scrollTop) {
+        txtarea.focus();
+        txtarea.scrollTop = scrollPos;
     }
 }
 
