@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Change javascript non-wysiwyg insertion methods to propery
+      return to scrollposition, patch by onli
+
     * Enhance TrackExits plugin to also support link redirection for
       future german law/access blocking :) (garvinhicking)
       
