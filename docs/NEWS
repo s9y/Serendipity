@@ -3,6 +3,15 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added possibility for templates to register a central function
+      serendipity_plugin_api_event_hook() and
+      serendipity_plugin_api_pre_event_hook() that can be used to
+      use plugin API interaction WITHOUT actual plugins. So special
+      plugins can be bundled within a template, without the need to
+      seperately install them. The "pre" function is called BEFORE
+      all normal plugins are executed, the normal function is called
+      AFTER plugin execution. (garvinhicking)
+      
     * Change javascript non-wysiwyg insertion methods to propery
       return to scrollposition, patch by onli
 
