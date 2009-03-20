@@ -1006,6 +1006,11 @@ class serendipity_plugin_api
         // skip the execution of any follow-up plugins.
         $plugins = serendipity_plugin_api::get_event_plugins();
 
+        if (function_exists('serendipity_plugin_api_pre_event_hook')) {
+            $apifunc = 'serendipity_plugin_api_pre_event_hook';
+            $apifunc($event_name, $bag, $eventData, $addData);
+        }
+        
         if (is_array($plugins)) {
             // foreach() operates on copies of values, but we want to operate on references, so we use while()
             @reset($plugins);
@@ -1028,6 +1033,12 @@ class serendipity_plugin_api
                     $plugin_data['p']->event_hook($event_name, $bag, $eventData, $addData);
                 }
             }
+
+            if (function_exists('serendipity_plugin_api_event_hook')) {
+                $apifunc = 'serendipity_plugin_api_event_hook';
+                $apifunc($event_name, $bag, $eventData, $addData);
+            }
+
         }
 
         return true;
