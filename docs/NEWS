@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Enhanced nl2br plugin to also use <p> tags, by onli
+
     * Added possibility for templates to register a central function
       serendipity_plugin_api_event_hook() and
       serendipity_plugin_api_pre_event_hook() that can be used to
