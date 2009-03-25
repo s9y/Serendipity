@@ -54,7 +54,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.2');
+        $propbag->add('version',       '2.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -975,7 +975,7 @@ END_IMG_CSS;
                         // Update the number of visits
                         // Are we supposed to track visits?
                         $track_clicks  = serendipity_db_bool($this->get_config('visits_active', true)) && $this->track_clicks_allowed_by_user();
-                        if ($track_clicks) {
+                        if ($track_clicks && $_SERVER['REQUEST_METHOD'] == 'GET') {
                             $sql = serendipity_db_query(
                                 "UPDATE {$serendipity['dbPrefix']}karma 
                                     SET visits = visits + 1 
