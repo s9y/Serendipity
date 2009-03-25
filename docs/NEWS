@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Changed karma plugin to only track GET requests as visits, not
+      POSTs. Thanks to Marcus Friedman
+
     * Enhanced nl2br plugin to also use <p> tags, by onli
 
     * Added possibility for templates to register a central function
