@@ -65,8 +65,7 @@
 {if $staticpage_adminlink AND $staticpage_adminlink.page_user}
     | <a class="staticpage_metainfo_editlink" href="{$staticpage_adminlink.link_edit}">{$staticpage_adminlink.link_name|@escape}</a>
 {/if}
-
+    </div>
 {if $staticpage_articleformat}
 </div>
 {/if}
-    </div>
