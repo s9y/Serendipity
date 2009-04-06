@@ -956,7 +956,7 @@ function serendipity_getTotalEntries() {
  * @param   boolean     Toggle whether the extended portion of an entry is requested (via $serendipity['GET']['id'] single entry view)
  * @param   boolean     Indicates if this is a preview
  * @param   string      The name of the SMARTY block that this gets parsed into
- * @param   boolean     Indicates whether the assigned smarty variables should be parsed
+ * @param   boolean     Indicates whether the assigned smarty variables should be parsed. When set to "return", no smarty parsing is done.
  * @param   boolean     Indicates whether to apply footer/header event hooks
  * @param   boolean     Indicates whether the pagination footer should be displayed
  * @param   mixed       Indicates whether the input $entries array is already grouped in preparation for the smarty $entries output array [TRUE], or if it shall be grouped by date [FALSE] or if a plugin hook shall be executed to modify data ['plugin']. This setting can also be superseded by a 'entry_display' hook.
@@ -1157,6 +1157,10 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         serendipity_printEntryFooter();
     }
 
+    if ($smarty_fetch === 'return') {
+        return $dategroup;    
+    }    
+    
     $serendipity['smarty']->assign_by_ref('entries', $dategroup);
     unset($entries, $dategroup);
 
