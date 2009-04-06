@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Enhanced serendipity_printEntries() logic to bypass smarty
+      parsing ($smarty_fetch) (garvinhicking)
+
     * Changed karma plugin to only track GET requests as visits, not
       POSTs. Thanks to Marcus Friedman
 
