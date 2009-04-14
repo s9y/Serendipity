@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Changed bookmarklet to work with Chrome, thanks to Oliver
+      Gassner & TextPattern :-) (garvinhicking)
+
     * Enhanced serendipity_printEntries() logic to bypass smarty
       parsing ($smarty_fetch) (garvinhicking)
 

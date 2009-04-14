@@ -8,7 +8,15 @@ if (IN_serendipity !== true) {
 }
 
 $user = serendipity_fetchAuthor($serendipity['authorid']);
-$bookmarklet = "javascript:bm=document.selection?document.selection.createRange().text:document.getSelection();void(newwin=open('" . $serendipity['baseURL'] . "serendipity_admin.php?serendipity[adminModule]=entries&serendipity[adminAction]=new&serendipity[title]='+ escape(document.title) + '&serendipity[body]=' + escape(bm) +'&serendipity[url]=' + escape(location.href), 'new_log_entry','resizable=yes, scrollbars=yes, width=800, height=600, location=yes,status=yes')); newwin.focus();";
+
+// old s9y variant
+// $bookmarklet = "javascript:bm=document.selection?document.selection.createRange().text:document.getSelection();void(newwin=open('" . $serendipity['baseURL'] . "serendipity_admin.php?serendipity[adminModule]=entries&serendipity[adminAction]=new&serendipity[title]='+escape(document.title)+'&serendipity[body]='+escape(bm)+'&serendipity[url]='+escape(location.href),'new_log_entry','resizable=yes,scrollbars=yes,width=800,height=600,location=yes,status=yes'));newwin.focus();";
+
+// non-popup variant
+$bookmarklet = "javascript:if(navigator.userAgent.indexOf('Safari')%20>=%200){Q=getSelection();}else{Q=document.selection?document.selection.createRange().text:document.getSelection();}location.href='" . $serendipity['baseURL'] . "'+encodeURIComponent(document.title)+'encodeURIComponent(Q)+''+encodeURIComponent(location.href)";
+
+// chrome-compatible, from Oliver Gassner, adapted from TextPattern. Hi guys, keep it up. :-)
+$bookmarklet = "javascript:var%20d=document,w=window,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),f='" . $serendipity['baseURL'] . "',l=d.location,e=encodeURIComponent,p='serendipity_admin.php?serendipity[adminModule]=entries&serendipity[adminAction]=new&serendipity[title]='+e(d.title)+'&serendipity[body]='+e(s)+'&serendipity[url]='+location.href,u=f+p;a=function(){%20%20if(!w.open(u,'t','toolbar=0,resizable=0,status=1,width=800,height=800'))%20%20%20%20l.href=u;};if(/Firefox/.test(navigator.userAgent))%20%20setTimeout(a,0);else%20%20a();void(0)";
 
 $output = array(
     'welcome'       => WELCOME_BACK . ' ' . htmlspecialchars($user[0]['realname']),
