@@ -32,7 +32,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_XHTMLCLEANUP_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -148,7 +148,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
                             // Basic cleanup (core s9y functionality)
                             $eventData[$element]    = xhtml_cleanup($eventData[$element]);
                             $eventData[$element]    = preg_replace_callback('@(<img.+/?>)@imsU', array($this, 'clean_tag'), $eventData[$element]);
-                            $eventData[$element]    = preg_replace_callback("@<(a|iframe)(.*)(href|src)=(\"|')([^\"']+)(\"|')@isUm", array($this, 'clean_htmlspecialchars'), $eventData[$element]);
+                            $eventData[$element]    = preg_replace_callback("@<(a|iframe|param)(.*)(href|src|value)=(\"|')([^\"']+)(\"|')@isUm", array($this, 'clean_htmlspecialchars'), $eventData[$element]);
                         }
                     }
 

@@ -1273,6 +1273,11 @@ END_IMG_CSS;
                                  */
 
                                 // Substitute the % stuff and add it to the footer
+                                $eventData[$i]['properties']['myvote'] = $myvote;
+                                $eventData[$i]['properties']['points'] = $points;
+                                $eventData[$i]['properties']['votes'] = $votes;
+                                $eventData[$i]['properties']['visits'] = $visits;
+
                                 $footer .= sprintf($karma_block, $myvote, $points, $votes, $visits, $url);
                             } // foreach key in entries
                     }// End switch on karma voting status
