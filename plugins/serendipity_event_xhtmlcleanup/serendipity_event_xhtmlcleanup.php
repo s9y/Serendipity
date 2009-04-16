@@ -71,6 +71,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         }
         $conf_array[] = 'xhtml_parse';
         $conf_array[] = 'utf8_parse';
+        $conf_array[] = 'youtube';
         $propbag->add('configuration', $conf_array);
     }
 
@@ -99,6 +100,11 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
             $propbag->add('name',        PLUGIN_EVENT_XHTMLCLEANUP_XHTML);
             $propbag->add('description', PLUGIN_EVENT_XHTMLCLEANUP_XHTML_DESC);
             $propbag->add('default',     'true');
+        } elseif ($name == 'youtube') {
+            $propbag->add('type',        'boolean');
+            $propbag->add('name',        PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE);
+            $propbag->add('description', PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC);
+            $propbag->add('default',     'true');
         } else {
             $propbag->add('type',        'boolean');
             $propbag->add('name',        constant($name));
@@ -122,6 +128,11 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
             'title',
             'author',
         );
+        static $youtube = null;
+        if ($youtube === null) {
+            $youtube = serendipity_db_bool($this->get_config('youtube'));
+        }
+
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
@@ -149,6 +160,10 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
                             $eventData[$element]    = xhtml_cleanup($eventData[$element]);
                             $eventData[$element]    = preg_replace_callback('@(<img.+/?>)@imsU', array($this, 'clean_tag'), $eventData[$element]);
                             $eventData[$element]    = preg_replace_callback("@<(a|iframe|param)(.*)(href|src|value)=(\"|')([^\"']+)(\"|')@isUm", array($this, 'clean_htmlspecialchars'), $eventData[$element]);
+
+                            if ($youtube) {
+                                $this->youtubify($eventData[$element]);
+                            }
                         }
                     }
 
@@ -176,6 +191,38 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         } else {
             return false;
         }
+    }
+
+    function youtubify(&$text) {
+        $text = preg_replace_callback('@<object(.*)>(.*)</object>@imsU', array($this, 'youtubify_regex'), $text);
+    }
+    
+    function youtubify_regex($matches) {
+        if (!preg_match('@<embed@i', $matches[2])) return $matches[0];
+
+        preg_match('@width=["\']?([0-9]+)@ims', $matches[1], $m);
+        $width = $m[1];
+
+        preg_match('@height=["\']?([0-9]+)@ims', $matches[1], $m);
+        $height = $m[1];
+
+        preg_match('@<param name="movie" value="(.+)"[\s/]*?>@imsU', $matches[2], $m);
+        $movie = $m[1];
+        
+        if (empty($movie)) {
+            preg_match('@<param value="(.+)" name="movie"[\s/]*?>@imsU', $matches[2], $m);
+            $movie = $m[1];
+        }
+
+        $appendix = preg_replace('@<embed.*>@imsU', '', $matches[2]);
+        $appendix = str_replace('</embed>', '', $appendix);
+
+        $out = '<!-- xhtml clean youtube --><object type="application/x-shockwave-flash" width="' . $width . '" height="' . $height . '" data="' . $movie . '">'
+             . '<param name="movie" value="' . $movie . '" />' 
+             . $appendix . '</object><!-- /xhtml clean youtube -->';
+        $out .= "\n\n<!-- {$matches[0]} -->\n\n";
+
+        return $out;
     }
 
     // Takes an input tag and search for ommitted attributes. Expects a single tag (array, index 0)

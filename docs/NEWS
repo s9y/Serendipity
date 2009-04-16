@@ -4,7 +4,7 @@ Version 1.5 ()
 ------------------------------------------------------------------------
 
     * Enhance xhtml cleanup plugin to also work on <param value="..." />
-      tags.  (garvinhicking)
+      tags and fix youtube html.  (garvinhicking)
 
     * Changed bookmarklet to work with Chrome, thanks to Oliver
       Gassner & TextPattern :-) (garvinhicking)

@@ -893,6 +893,8 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($GLOBALS['tb_logging']) {
         fclose($fp);
     }
+    
+    return $cid;
 }
 
 /**
