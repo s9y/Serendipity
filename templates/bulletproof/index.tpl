@@ -87,7 +87,7 @@
             <div id="sitenav" class="snabove">
                 <ul>
                     {foreach from=$navlinks item="navlink" name=navbar}
-                        <li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
+                        <li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
                     {/foreach}
                 </ul>
                 <!-- quicksearch option in the navigational link menu bar only when navbar is    -->
@@ -117,7 +117,7 @@
             <div id="sitenav" class="snbelow">
                 <ul>
                     {foreach from=$navlinks item="navlink" name="navbar"}
-                        <li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
+                        <li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.navbar.first} navlink_first{/if}{if $smarty.foreach.navbar.last} navlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
                     {/foreach}
                 </ul>
                 <!-- quicksearch option in the navigational link menu bar only when navbar is    -->
@@ -145,7 +145,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -162,7 +162,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>    
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -183,7 +183,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>    
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -197,7 +197,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -215,7 +215,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -229,7 +229,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -250,7 +250,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -275,7 +275,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -298,7 +298,7 @@
                     <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                     <div class="serendipitySideBarContent">
             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                     </div>
                     <div class="serendipitySideBarFooter"></div>
                 </div>
@@ -317,7 +317,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -334,7 +334,7 @@
                     <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                     <div class="serendipitySideBarContent">
             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                     </div>
                     <div class="serendipitySideBarFooter"></div>
                 </div>
@@ -355,7 +355,7 @@
                         <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                         <div class="serendipitySideBarContent">
                             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                            <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                         </div>
                         <div class="serendipitySideBarFooter"></div>
                     </div>
@@ -369,7 +369,7 @@
                     <h3 class="serendipitySideBarTitle">{$template_option.sitenav_sidebar_title}</h3>
                     <div class="serendipitySideBarContent">
             <!-- the line below must remain as a single uninterrupted line to display correctly in ie6 -->
-                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
+                        <ul>{foreach from=$navlinks item="navlink" name="sbnav"}<li class="{if $currpage==$navlink.href or $currpage2==$navlink.href}currentpage{/if}{if $smarty.foreach.sbnav.first} sbnavlink_first{/if}{if $smarty.foreach.sbnav.last} sbnavlink_last{/if}"><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>{/foreach}</ul>
                     </div>
                     <div class="serendipitySideBarFooter"></div>
                 </div>
@@ -406,7 +406,7 @@
                 <div id="footer_sitenav">
                     <ul>
                         {foreach from=$navlinks item="navlink" name=navbar}
-                            <li{if $currpage == $navlink.href} class="currentpage"{/if}><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
+                            <li{if $currpage==$navlink.href or $currpage2==$navlink.href} class="currentpage"{/if}><a href="{$navlink.href}" title="{$navlink.title}">{$navlink.title}</a></li>
                         {/foreach}
                     </ul>
                 </div>
