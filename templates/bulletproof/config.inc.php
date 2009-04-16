@@ -12,6 +12,7 @@ if (file_exists($probelang)) {
 include dirname(__FILE__) . '/lang_en.inc.php';
 
 $serendipity['smarty']->assign(array('currpage'=> "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']));
+$serendipity['smarty']->assign(array('currpage2'=> $_SERVER['REQUEST_URI']));
 
 function serendipity_plugin_api_event_hook($event, &$bag, &$eventData, $addData = null) {
     global $serendipity;
