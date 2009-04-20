@@ -1,5 +1,6 @@
 <?php # $Id: generic.inc.php 717 2005-11-21 09:56:25Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
+# Copyright (c) 2009, Matthew Weigel
 # All rights reserved.  See LICENSE file for licensing details
 
 require_once S9Y_PEAR_PATH . 'Onyx/RSS.php';
@@ -29,6 +30,11 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                                          'name'    => 'type',
                                          'value'   => 'publish',
                                          'default' => array('publish' => PUBLISH, 'draft' => DRAFT)),
+
+                                   array('text'    => USERNAME,
+                                         'type'    => 'input',
+                                         'name'    => 'user',
+                                         'default' => ''),
 
         );
     }
@@ -89,7 +95,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
             $encoding = $xml_encoding[1];
         }
 
-        preg_match_all('@(<entry>.*</entry>)@imsU', $xml, $xml_matches);
+        preg_match_all("@(<entry[a-z =\'0-9]*>.*</entry>)@imsU", $xml, $xml_matches);
         if (!is_array($xml_matches)) {
             return false;
         }
@@ -149,6 +155,49 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
         }
     }
 
+    function gatherComments($entrydata) {
+        $comments;
+        if (is_array($entrydata['children'])) {
+            $comments = array();
+            foreach($entrydata['children'] AS $idx3 => $commententry) {
+                if ($commententry['tag'] == 'comment' && is_array($commententry['children'])) {
+                    $comment = array(
+                        'ip'       => '127.0.0.1',
+                        'status'   => 'approved',
+                        'name'     => $commententry['attributes']['poster'] ? $commententry['attributes']['poster'] : 'Anonymous',
+                        'url'      => $commententry['attributes']['poster'] ? "http://" . $commententry['attributes']['poster'] . ".livejournal.com/" : '',
+                        'email'    => '',
+                        'jtalkid' => $commententry['attributes']['jtalkid'],
+                        'jparentid' => $commententry['attributes']['parentid'] ? $commententry['attributes']['parentid'] : 0
+                    );
+                    if ($comment['name'] == $this->data['user']) {
+                        if (!empty($serendipity['realname'])) {
+                            $comment['name'] = $serendipity['realname'];
+                        } else {
+                            $comment['name'] = $serendipity['user'];
+                        }
+                        $comment['url'] = $serendipity['baseURL'];
+                    }
+                    foreach($commententry['children'] AS $idx4 => $commentdata) {
+                        switch($commentdata['tag']) {
+                            case 'subject':
+                                $comment['title'] = $commentdata['value'];
+                                break;
+                            case 'body':
+                                $comment['comment'] = $commentdata['value'];
+                                break;
+                            case 'date':
+                                $comment['time'] = $this->getTimestamp($commentdata['value']);
+                                break;
+                        }
+                    }
+                    array_push($comments, $comment);
+                }
+            }
+        }
+        return $comments;
+    }
+
     function import() {
         global $serendipity;
 
@@ -186,6 +235,10 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                     case 'eventtime':
                         $new_entry['timestamp'] = $this->getTimestamp($entrydata['value']);
                         break;
+
+                    case 'date':
+                        $new_entry['timestamp'] = $this->getTimestamp($entrydata['value']);
+                        break;
                     
                     case 'subject':
                         $new_entry['title']     = $entrydata['value'];
@@ -194,10 +247,26 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                     case 'event':
                         $new_entry['body']      = $entrydata['value'];
                         break;
+                    case 'comments':
+                        $new_entry['comments'] = $this->gatherComments($entrydata);
+                        break;
                 }
             }
             $id = serendipity_updertEntry($new_entry);
             echo 'Inserted entry #' . $id . ', "' . htmlspecialchars($new_entry['title']) . '"<br />' . "\n";
+            if (is_array($new_entry['comments'])) {
+                $cid_map = array();
+                $jids = array();
+                foreach($new_entry['comments'] AS $comment) {
+                    array_push($jids, $comment['jtalkid']);
+                    if (array_key_exists($comment['jparentid'], $cid_map)) {
+                        $comment['parent_id'] = $cid_map[$comment['jparentid']];
+                    }
+                    $cid = serendipity_insertComment($id, $comment);
+                    $cid_map[$comment['jtalkid']] = $cid;
+                }
+                echo 'Inserted comments for entry #' . $id . '<br />' . "\n";
+            }
             
             if (function_exists('ob_flush')) {
                 @ob_flush();
