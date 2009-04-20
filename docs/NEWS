@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Livejournal importer update by Anson now supports importing
+      comments, see http://board.s9y.org/viewtopic.php?f=11&t=15141
+      
     * Enhance xhtml cleanup plugin to also work on <param value="..." />
       tags and fix youtube html.  (garvinhicking)
 
