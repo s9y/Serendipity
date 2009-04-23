@@ -9,6 +9,7 @@ if (defined('S9Y_FRAMEWORK')) {
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
+    session_name('s9y_' . md5(dirname(__FILE__)));
     session_start();
     
     // Prevent session fixation by only allowing sessions that have been sent by the server.
