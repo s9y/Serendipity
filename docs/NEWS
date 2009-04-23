@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Use a unique session name for each blog instance, so that multiple
+      s9y installations can live on the same domain and having their
+      own sessions (kleinerChemiker, DrNI)
+
     * Livejournal importer update by Anson now supports importing
       comments, see http://board.s9y.org/viewtopic.php?f=11&t=15141
       
