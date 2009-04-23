@@ -68,7 +68,7 @@
         <ul>
             {if $template_option.sitenavpos != 'none'}<li lang="en"><a href="{if $template_option.sitenavpos == 'left'}#sbsitenav{elseif $template_option.sitenavpos == 'right'}#sbsitenav{else}#sitenav{/if}">Skip to site navigation</a></li>{/if}
             <li lang="en"><a href="#content">Skip to blog entries</a></li>
-            <li lang="en"><a href="{$serendipityBaseURL}index.php?/archive">Skip to archive page</a></li>
+            <li lang="en"><a href="{$serendipityArchiveURL}">Skip to archive page</a></li>
             {if $template_option.layouttype != '2bs'}<li lang="en"><a href="#serendipityLeftSideBar">Skip to left sidebar</a></li>{/if}
             {if $template_option.layouttype != '2sb'}<li lang="en"><a href="#serendipityRightSideBar">Skip to right sidebar</a></li>{/if}
         </ul>
