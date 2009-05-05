@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Add new config option to base server time on UTC
+      (http://board.s9y.org/viewtopic.php?f=2&t=15123) (Abdussamad)
+      
     * Use a unique session name for each blog instance, so that multiple
       s9y installations can live on the same domain and having their
       own sessions (kleinerChemiker, DrNI)

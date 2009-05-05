@@ -480,8 +480,22 @@
                                           'type'        => 'list',
                                           'default'     => array(),
                                           'permission'  => 'siteConfiguration',
-                                          'flags'       => array('probeDefault')),
-
+                                          'flags'       => array('probeDefault'))
+                            ));
+    if(function_exists('date_default_timezone_set')) {
+        $res['display']['items'][] = array('var'           =>   'useServerOffset',
+                                       'title'         =>   INSTALL_OFFSET_ON_SERVER_TIME,
+                                       'description'   =>   INSTALL_OFFSET_ON_SERVER_TIME_DESC,
+                                       'type'          =>   'bool',
+                                       'default'       =>   true,
+                                       'permission'    =>   'blogConfiguration'
+                                       );
+                                       
+        
+        
+    }
+    
+    array_push( $res['display']['items'],
                                     array('var'         => 'serverOffsetHours',
                                           'title'       => INSTALL_OFFSET,
                                           'description' => INSTALL_OFFSET_DESC,
@@ -502,8 +516,8 @@
                                           'description' => INSTALL_ACL_DESC,
                                           'type'        => 'bool',
                                           'default'     => true,
-                                          'permission'  => 'blogConfiguration'),
-                            ));
+                                          'permission'  => 'blogConfiguration')
+                            );
 
     $res['imagehandling'] =
              array('title' => INSTALL_CAT_IMAGECONV,
