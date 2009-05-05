@@ -350,7 +350,11 @@ if (defined('DATE_LOCALES')) {
         }
     }
 }
-
+if (function_exists('date_default_timezone_set')) {
+    if(isset($serendipity['useServerOffset']) && $serendipity['useServerOffset']==false) {
+        date_default_timezone_set('UTC');
+    }
+}
 /*
  *   Fallback charset, if none is defined in the language files
  */

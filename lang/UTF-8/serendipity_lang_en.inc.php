@@ -552,6 +552,8 @@
 @define('INSTALL', 'Install');
 @define('ALREADY_INSTALLED', 'Already installed');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Select the plugin which you wish to install');
+@define('INSTALL_OFFSET_ON_SERVER_TIME', 'Base offset on server timezone?');
+@define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Offset entry times on server timezone or not. Select yes to base offset on server timezone and no to offset on GMT.');
 @define('INSTALL_OFFSET', 'Server time Offset');
 @define('STICKY_POSTINGS', 'Sticky Postings');
 @define('INSTALL_FETCHLIMIT', 'Entries to display on frontpage');
