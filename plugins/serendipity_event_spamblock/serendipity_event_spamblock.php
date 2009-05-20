@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.75');
+        $propbag->add('version',       '1.76');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -926,7 +926,7 @@ var $filter_defaults;
                         // Filter Akismet Blacklist?
                         $akismet_apikey = $this->get_config('akismet');
                         $akismet        = $this->get_config('akismet_filter');
-                        if (!empty($akismet_apikey) && ($akismet == 'moderate' || $akismet == 'reject')) {
+                        if (!empty($akismet_apikey) && ($akismet == 'moderate' || $akismet == 'reject') && !isset($addData['skip_akismet'])) {
                             $spam = $this->getBlacklist('akismet.com', $akismet_apikey, $eventData, $addData);
                             if ($spam['is_spam'] !== false) {
                                 $this->IsHardcoreSpammer();
