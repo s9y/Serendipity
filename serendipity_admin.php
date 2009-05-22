@@ -109,6 +109,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/configuration.inc.php';
+            $admin_section = CONFIGURATION;
             break;
 
         case 'media':
@@ -118,6 +119,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/images.inc.php';
+            $admin_section = MEDIA;
             break;
 
         case 'templates':
@@ -126,6 +128,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/templates.inc.php';
+            $admin_section = MANAGE_STYLES;
             break;
 
         case 'plugins':
@@ -134,6 +137,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/plugins.inc.php';
+            $admin_section = CONFIGURE_PLUGINS;
             break;
 
         case 'users':
@@ -142,6 +146,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/users.inc.php';
+            $admin_section = MANAGE_USERS;
             break;
 
         case 'groups':
@@ -150,6 +155,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/groups.inc.php';
+            $admin_section = MANAGE_GROUPS;
             break;
 
         case 'personal':
@@ -158,6 +164,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/personal.inc.php';
+            $admin_section = PERSONAL_SETTINGS;
             break;
 
         case 'export':
@@ -166,6 +173,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/export.inc.php';
+            $admin_section = EXPORT_ENTRIES;
             break;
 
         case 'import':
@@ -174,6 +182,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/import.inc.php';
+            $admin_section = IMPORT_ENTRIES;
             break;
 
         case 'entries':
@@ -182,6 +191,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/entries.inc.php';
+            $admin_section = ADMIN_ENTRIES;
             break;
 
         case 'comments':
@@ -190,6 +200,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/comments.inc.php';
+            $admin_section = COMMENTS;
             break;
 
         case 'category':
@@ -199,6 +210,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/category.inc.php';
+            $admin_section = CATEGORIES;
             break;
 
         case 'logout':
@@ -232,10 +244,12 @@ if (!$use_installer && $is_logged_in) {
                 }
                 echo '</ul>';
             }
+            $admin_section = INTEGRITY;
             break;
 
         default:
             include S9Y_INCLUDE_PATH . 'include/admin/overview.inc.php';
+            $admin_section = ADMIN_FRONTPAGE;
             break;
     }
 
@@ -244,7 +258,7 @@ if (!$use_installer && $is_logged_in) {
 }
 
 if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
-    $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer');
+    $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
     $admin_vars = array();
     foreach($poll_admin_vars AS $poll_admin_var) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
@@ -252,6 +266,8 @@ if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
 
     $admin_vars['out']              = array();
     $admin_vars['no_create']        = $serendipity['no_create'];
+
+    $admin_vars['title'] = $admin_section;
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
