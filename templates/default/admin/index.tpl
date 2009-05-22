@@ -1,7 +1,7 @@
 <html>
     <head>
 <!-- ADMIN-ENTRY TEMPLATE: index.tpl START -->
-        <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
+        <title>{$admin_vars.title} - {$CONST.SERENDIPITY_ADMIN_SUITE}</title>
         <meta http-equiv="Content-Type" content="text/html; charset={$CONST.LANG_CHARSET}" />
         <link rel="stylesheet" type="text/css" href="{$admin_vars.css_file}" />
         <link rel="stylesheet" type="text/css" href="{$admin_vars.admin_css_file}" />

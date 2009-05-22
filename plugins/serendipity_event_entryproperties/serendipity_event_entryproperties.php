@@ -26,7 +26,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.21');
+        $propbag->add('version',       '1.30');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -229,6 +229,8 @@ class serendipity_event_entryproperties extends serendipity_event
             }
         }
 
+        serendipity_plugin_api::hook_event('backend_entryproperties', $supported_properties);
+
         foreach($supported_properties AS $prop_key) {
             $prop_val = (isset($properties[$prop_key]) ? $properties[$prop_key] : null);
             $prop_key = 'ep_' . $prop_key;
@@ -264,7 +266,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
     function showBackend($element, $eventData, $is_sticky, $no_frontpage, $hiderss, $access_values, $access, $password, $use_groups, $access_groups, $use_users, $access_users, $more = array()) {
         global $serendipity;
-    
+
         switch($element) {
         case 'sticky':
 ?>
@@ -470,7 +472,7 @@ class serendipity_event_entryproperties extends serendipity_event
         static $ext_joins = null;
 
         $hooks = &$bag->get('event_hooks');
-        
+
         if ($is_cache === null) {
             $is_cache   = serendipity_db_bool($this->get_config('cache', 'true'));
             $use_groups = serendipity_db_bool($this->get_config('use_groups'));
@@ -538,7 +540,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $password = '';
                     }
-                    
+
 ?>
                     <fieldset style="margin: 5px" class="entyproperties">
                         <legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_TITLE; ?></legend>
@@ -550,7 +552,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     }
 ?>
                     </fieldset>
-<?php                    
+<?php
 
                     return true;
                     break;
