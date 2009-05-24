@@ -4,7 +4,7 @@
 # Translation (c) 2004 Bogomil Shopov <bogomil@spisanie.com>
 # http://www.purplerain.org/nb/
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2005
-# Ivan Cenov <JWalker@hotmail.bg>, 2005-2007
+# Ivan Cenov <JWalker@hotmail.bg>, 2005-2009
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'windows-1251');
@@ -541,6 +541,8 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL', 'Инсталиране');
 @define('ALREADY_INSTALLED', 'Вече е инсталирана');
 @define('SELECT_A_PLUGIN_TO_ADD', 'Изберете приставка, която искате да инсталирате');
+@define('INSTALL_OFFSET_ON_SERVER_TIME', 'Използване на времевата зона на сървъра?');
+@define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Задаване на времето на статиите спрямо сървъра или не. Изберете \'да\' за база сървъра или не за база GMT.');
 @define('INSTALL_OFFSET', 'Времево отместване на сървъра');
 @define('STICKY_POSTINGS', 'Лепкави съобщения');
 @define('INSTALL_FETCHLIMIT', 'Статии за показване в лицевата част');
@@ -935,4 +937,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(Ако въведете абсолютен URL с http://... тук, този URL ще бъде използван за пренасочване в случай, че сте разрешили опция "Force" за FeedBurner. Забележете, че този URL може да е независим от FeedBurner. За нови Google FeedBurner емисии, трябва да въведете тук http://feeds2.feedburner.com/yourfeedname)');
 
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'Ако установите тази опция на "Force", ще можете да пренасочвате RSS емисиите към всеки webservice, не само към FeedBurner. Вижте опцията "Feedburner ID" по-долу за да въведете абсолютен URL)');
-@define('COMMENTS_FILTER_NEED_CONFIRM', 'Pending user confirmation');
+@define('COMMENTS_FILTER_NEED_CONFIRM', 'Коментарът очаква одобрение от потребителя');
