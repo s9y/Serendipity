@@ -568,7 +568,10 @@ class serendipity_plugin_api
             }
         }
         
-        $p->pluginPath = $pluginPath;
+        $p->pluginPath = $p->act_pluginPath = $pluginPath;
+        if (empty($p->act_pluginPath)) {
+            $p->act_pluginPath = $class_name;
+        }
         $p->pluginFile = $pluginFile;
 
         return $p;
@@ -1165,6 +1168,7 @@ class serendipity_plugin
     var $content_class = 'serendipitySideBarContent';
     var $title         = null;
     var $pluginPath    = null;
+    var $act_pluginPath= null;
     var $pluginFile    = null;
     var $serendipity_owner = null;
 
