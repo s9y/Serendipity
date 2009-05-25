@@ -154,17 +154,17 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 }
 
                 if (@file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
-                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/ChangeLog">' . PLUGIN_DOCUMENTATION_CHANGELOG . '</a>';
+                    echo '<br /><a href="plugins/' . $plugin->act_pluginPath . '/ChangeLog">' . PLUGIN_DOCUMENTATION_CHANGELOG . '</a>';
                 }
 
                 if (@file_exists(dirname($plugin->pluginFile) . '/documentation_' . $serendipity['lang'] . '.html')) {
-                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_' . $serendipity['lang'] . '.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                    echo '<br /><a href="plugins/' . $plugin->act_pluginPath . '/documentation_' . $serendipity['lang'] . '.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
                 } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation_en.html')) {
-                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation_en.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                    echo '<br /><a href="plugins/' . $plugin->act_pluginPath . '/documentation_en.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
                 } elseif (@file_exists(dirname($plugin->pluginFile) . '/documentation.html')) {
-                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/documentation.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                    echo '<br /><a href="plugins/' . $plugin->act_pluginPath . '/documentation.html">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
                 } elseif (@file_exists(dirname($plugin->pluginFile) . '/README')) {
-                    echo '<br /><a href="plugins/' . $plugin->pluginPath . '/README">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
+                    echo '<br /><a href="plugins/' . $plugin->act_pluginPath . '/README">' . PLUGIN_DOCUMENTATION_LOCAL . '</a>';
                 }
             ?>
             </td>
@@ -229,7 +229,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $props['requirements'] = unserialize($props['requirements']);
 
             if (empty($props['changelog']) && @file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
-                $props['changelog'] = 'plugins/' . $plugin->pluginPath . '/ChangeLog';
+                $props['changelog'] = 'plugins/' . $props['pluginPath'] . '/ChangeLog';
             }
 
             if (empty($props['local_documentation'])) {
