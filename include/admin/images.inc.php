@@ -115,6 +115,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $file   = $serendipity['GET']['fname'];
         serendipity_deleteImage($serendipity['GET']['fid']);
+        showMediaLibrary();
         break;
 
     case 'delete':
@@ -179,7 +180,7 @@ switch ($serendipity['GET']['adminAction']) {
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesAdd')) {
             return;
         }
-
+        $messages = array();
         if ($serendipity['POST']['adminSubAction'] == 'properties') {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
@@ -196,9 +197,8 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
 ?>
-    <div class="image_add"><b><?php echo ADDING_IMAGE; ?></b></div>
-    <br /><br />
 <?php
+    $messages[] = '<div class="image_add"><b>' . ADDING_IMAGE . '</b></div>';
 
     $authorid = (isset($serendipity['POST']['all_authors']) && $serendipity['POST']['all_authors'] == 'true') ? '0' : $serendipity['authorid'];
 
@@ -221,7 +221,7 @@ switch ($serendipity['GET']['adminAction']) {
         $tfile = serendipity_uploadSecure(basename($tfile));
 
         if (serendipity_isActiveFile($tfile)) {
-            printf(ERROR_FILE_FORBIDDEN, $tfile);
+            $messages[] = sprintf(ERROR_FILE_FORBIDDEN, $tfile);
             break;
         }
 
@@ -229,13 +229,13 @@ switch ($serendipity['GET']['adminAction']) {
         $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex] . $tfile;
 
         if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$tindex])) {
-            echo PERM_DENIED;
+            $messages[] = PERM_DENIED;
             return;
         }
 
         $realname = $tfile;
         if (file_exists($target)) {
-            echo '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY . '<br />';
+            $messages[] = '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY . '';
             $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex]);
         }
 
@@ -247,7 +247,7 @@ switch ($serendipity['GET']['adminAction']) {
         // Try to get the URL
 
         if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-            printf(REMOTE_FILE_NOT_FOUND, $serendipity['POST']['imageurl']);
+            $messages[] = sprintf(REMOTE_FILE_NOT_FOUND, $serendipity['POST']['imageurl']);
         } else {
             // Fetch file
             $fContent = $req->getResponseBody();
@@ -259,14 +259,14 @@ switch ($serendipity['GET']['adminAction']) {
                 fclose($fp);
 
                 $image_id = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
-                printf(HOTLINK_DONE. '<br />', $serendipity['POST']['imageurl'], $tfile);
+                $messages[] = sprintf( HOTLINK_DONE , $serendipity['POST']['imageurl'] , $tfile .'');
                 serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
             } else {
                 $fp = fopen($target, 'w');
                 fwrite($fp, $fContent);
                 fclose($fp);
 
-                printf(FILE_FETCHED . '<br />', $serendipity['POST']['imageurl'], $tfile);
+                $messages[] = sprintf(FILE_FETCHED , $serendipity['POST']['imageurl'] , $tfile);
 
                 if (serendipity_checkMediaSize($target)) {
                     $thumbs = array(array(
@@ -278,7 +278,7 @@ switch ($serendipity['GET']['adminAction']) {
                     foreach($thumbs as $thumb) {
                         // Create thumbnail
                         if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$tindex], $thumb['thumbSize'], $thumb['thumb']) ) {
-                            echo THUMB_CREATED_DONE . '<br />';
+                            $messages[] = THUMB_CREATED_DONE . '';
                         }
                     }
 
@@ -314,15 +314,14 @@ switch ($serendipity['GET']['adminAction']) {
             $tfile = serendipity_uploadSecure(basename($tfile));
 
 	        if (serendipity_isActiveFile($tfile)) {
-                printf(ERROR_FILE_FORBIDDEN, $tfile);
-                echo '<br />';
+                $messages[] = ERROR_FILE_FORBIDDEN .' '. $tfile;
                 continue;
             }
 
             $serendipity['POST']['target_directory'][$idx] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$idx], true, true);
 
             if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$idx])) {
-                echo PERM_DENIED;
+                $messages[] = PERM_DENIED;
                 continue;
             }
 
@@ -330,13 +329,13 @@ switch ($serendipity['GET']['adminAction']) {
 
             $realname = $tfile;
             if (file_exists($target)) {
-                echo '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY . '<br />';
+                $messages[] = '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY;
                 $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
             }
 
             // Accept file
             if (is_uploaded_file($uploadtmp) && serendipity_checkMediaSize($uploadtmp) && move_uploaded_file($uploadtmp, $target)) {
-                printf(FILE_UPLOADED . '<br />', $uploadfile, $target);
+                $messages[] = sprintf( FILE_UPLOADED , $uploadfile , $target);
                 @umask(0000);
                 @chmod($target, 0664);
 
@@ -349,7 +348,7 @@ switch ($serendipity['GET']['adminAction']) {
                 foreach($thumbs as $thumb) {
                     // Create thumbnail
                     if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$idx], $thumb['thumbSize'], $thumb['thumb']) ) {
-                        echo THUMB_CREATED_DONE . '<br />';
+                        $messages[] = THUMB_CREATED_DONE;
                     }
                 }
 
@@ -362,7 +361,7 @@ switch ($serendipity['GET']['adminAction']) {
                     'created_thumbnail' => $created_thumbnail
                 );
             } else {
-                echo ERROR_UNKNOWN_NOUPLOAD . '<br />';
+                $messages[] = ERROR_UNKNOWN_NOUPLOAD;
             }
         }
     }
@@ -379,6 +378,8 @@ switch ($serendipity['GET']['adminAction']) {
             serendipity_insertMediaProperty('base_hidden', '', $nm['image_id'], $hidden);
         }
     }
+    showMediaLibrary($messages);
+
     break;
 
 
@@ -816,9 +817,23 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     default:
-        if (!serendipity_checkPermission('adminImagesView')) {
+        showMediaLibrary();
+
+        break;
+}
+
+function showMediaLibrary($messages=false) {
+    if (!serendipity_checkPermission('adminImagesView')) {
             return;
         }
+
+    if(!empty($messages)) {
+        echo '<div class="imageMessage"><ul>';
+        foreach($messages as $message) {
+            echo '<li>'. $message .'</li>';
+        }
+        echo '</ul></div>';
+    }
 
 ?>
 <script type="text/javascript" language="javascript">
@@ -840,7 +855,5 @@ switch ($serendipity['GET']['adminAction']) {
           $serendipity['thumbPerPage'],
           true
         );
-
-        break;
 }
 /* vim: set sts=4 ts=4 expandtab : */
