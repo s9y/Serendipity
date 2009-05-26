@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Changed image upload workflow so that the upload results/errors
+      are shown on top of the media library, allowing to go on
+      immediately (onli)
+
     * Added new smarty variable $admin_vars.title to the admin/index.tpl
       template file to customize the title (onli)
 
