@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Change uriArgument parsing routine to allow "!" in URLs.
+      Now we can have absolute serocracy.
+
     * Changed image upload workflow so that the upload results/errors
       are shown on top of the media library, allowing to go on
       immediately (onli)

@@ -21,7 +21,8 @@ if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
 $uri_addData = array(
     'startpage' => false,
     'uriargs'   => implode('/', serendipity_getUriArguments($uri, true)),
-    'view'      => $serendipity['view']
+    'view'      => $serendipity['view'],
+    'viewtype'  => $serendipity['viewtype']
 );
 if ((empty($uri_addData['uriargs']) || trim($uri_addData['uriargs']) == $serendipity['indexFile']) && empty($serendipity['GET']['subpage'])) {
     $uri_addData['startpage'] = true;
