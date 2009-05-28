@@ -307,6 +307,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         $serendipity['head_subtitle'] = htmlspecialchars($serendipity['blogTitle']);
     } else {
         $serendipity['view'] = '404';
+        $serendipity['viewtype'] = '404_1';
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     }
@@ -449,6 +450,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     if (!is_array($cInfo)) {
         $serendipity['view'] = '404';
+        $serendipity['viewtype'] = '404_2';
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     } else {
@@ -495,6 +497,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     
     if (!is_array($uInfo)) {
         $serendipity['view'] = '404';
+        $serendipity['viewtype'] = '404_3';
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     } else {
@@ -608,6 +611,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } else {
     $serendipity['view'] = '404';
+    $serendipity['viewtype'] = '404_4';
     header('HTTP/1.0 404 Not found');
     header('Status: 404 Not found');
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
@@ -624,6 +628,7 @@ if (!defined('NO_EXIT')) {
     $serendipity['smarty']->assign_by_ref('raw_data', $raw_data);
     if (empty($serendipity['smarty_file'])) {
         $serendipity['smarty_file'] = '404.tpl';
+        $serendipity['viewtype'] = '404_5';
     }
 
     serendipity_gzCompression();
