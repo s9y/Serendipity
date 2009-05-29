@@ -15,3 +15,6 @@
         @define('PLUGIN_EVENT_MAILER_SENDING', 'Versende');
         @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Diesen Eintrag per E-Mail versenden');
         @define('PLUGIN_EVENT_MAILER_SENDTOALL', 'An alle Redakteure schicken');
+
+@define('PLUGIN_EVENT_MAILER_STRIPTAGS', 'Bilder und Hyperlinks beibehalten, wenn HTML entfernt wird?');
+@define('PLUGIN_EVENT_MAILER_STRIPTAGSDESC', 'Gilt nur, wenn HTML entfernt wird. Falls aktiviert, werden Bilder und Hyperlinks in der Mail enthalten bleiben (in eckigen Klammern). Falls deaktiviert, werden alle Bilder und Hyperlinks auch entfernt.');

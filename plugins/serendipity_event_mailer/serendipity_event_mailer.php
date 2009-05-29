@@ -26,7 +26,7 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.51');
+        $propbag->add('version',       '1.52');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -118,6 +118,13 @@ class serendipity_event_mailer extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_MAILER_STRIPTAGS);
                 $propbag->add('description', PLUGIN_EVENT_MAILER_STRIPTAGSDESC);
                 $propbag->add('default',     'false');
+                break;
+
+            case 'keepstriptags':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        PLUGIN_EVENT_MAILER_KEEPSTRIPTAGS);
+                $propbag->add('description', PLUGIN_EVENT_MAILER_KEEPSTRIPTAGSDESC);
+                $propbag->add('default',     'true');
                 break;
 
             case 'convertp':
@@ -249,8 +256,13 @@ class serendipity_event_mailer extends serendipity_event
                         }
 
                         if (serendipity_db_bool($this->get_config('striptags', false)) == true) {
-                            $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "$2 [$1]", $mail['body']);
-                            $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "[" . IMAGE . ": $1]", $mail['body']);
+                            if (serendipity_db_bool($this->get_config('keepstriptags', true))) {
+                                $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "$2 [$1]", $mail['body']);
+                                $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "[" . IMAGE . ": $1]", $mail['body']);
+                            } else {
+                                $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "", $mail['body']);
+                                $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "", $mail['body']);
+                            }
                             $mail['body'] = strip_tags($mail['body']);
                         }
 
