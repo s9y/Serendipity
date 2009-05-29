@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Change mail entry plugin to be able to send mails without
+      hyperlinks and images. (garvinhicking)
+
     * Change uriArgument parsing routine to allow "!" in URLs.
       Now we can have absolute serocracy.
 
