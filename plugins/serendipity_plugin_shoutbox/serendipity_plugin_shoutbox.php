@@ -33,7 +33,10 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
                                              'wordwrap',
                                              'max_chars',
                                              'max_entries',
-                                             'dateformat'));
+                                             'dateformat',
+                                             'box_cols',
+                                             'box_rows'));
+                                             
         $propbag->add('groups', array('FRONTEND_FEATURES'));
     }
 
@@ -68,6 +71,20 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
                 $propbag->add('default',     '%a, %d.%m.%Y %H:%M');
                 break;
 
+            case 'box_cols':
+                $propbag->add('type', 'string');
+                $propbag->add('name', GENERAL_PLUGIN_BOX_COLS);
+                $propbag->add('description', GENERAL_PLUGIN_BOX_COLS_BLAHBLAH);
+                $propbag->add('default',     '15');
+                break;
+
+            case 'box_rows':
+                $propbag->add('type', 'string');
+                $propbag->add('name', GENERAL_PLUGIN_BOX_ROWS);
+                $propbag->add('description', GENERAL_PLUGIN_BOX_ROWS_BLAHBLAH);
+                $propbag->add('default',     '4');
+                break;
+
             default:
                     return false;
         }
@@ -83,6 +100,8 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
         $max_chars   = $this->get_config('max_chars');
         $wordwrap    = $this->get_config('wordwrap');
         $dateformat  = $this->get_config('dateformat');
+        $box_cols    = $this->get_config('box_cols');
+        $box_rows    = $this->get_config('box_rows');
 
         // Create table, if not yet existant
         if ($this->get_config('version') != '1.0') {
@@ -140,10 +159,18 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
         if (!$dateformat || strlen($dateformat) < 1) {
             $dateformat = '%a, %d.%m.%Y %H:%M';
         }
+
+        if (!$box_cols || !is_numeric($box_cols) || $box_cols < 1) {
+            $box_cols = 15;
+        }
+
+        if (!$box_rows || !is_numeric($box_rows) || $box_rows < 1) {
+            $box_rows = 4;
+        }
        ?>
        <form action="<?php echo serendipity_currentURL(true); ?>" method="post">
            <input type="hidden" name="action" value="fillshoutbox" />
-           <textarea name="serendipity[shouttext]" rows="4" cols="15" style="width: 90%"></textarea>
+           <textarea name="serendipity[shouttext]" rows="<?php echo $box_rows; ?>" cols="<?php echo $box_cols; ?>" style="width: 90%"></textarea>
            <input name='submit' type='submit' value='<?php echo PLUGIN_SHOUTBOX_SUBMIT; ?>' />
        </form>
 <?php
