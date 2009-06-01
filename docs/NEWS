@@ -4,6 +4,7 @@ Version 1.5 ()
 ------------------------------------------------------------------------
 
     * Changed shoutbox plugin. Shoutbox input size is configurable now.
+      Wrong description for dateformat fixed.
       (brockhaus)
 
     * Change mail entry plugin to be able to send mails without

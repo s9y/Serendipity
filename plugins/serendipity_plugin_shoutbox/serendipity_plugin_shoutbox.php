@@ -67,7 +67,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
             case 'dateformat':
                 $propbag->add('type', 'string');
                 $propbag->add('name', GENERAL_PLUGIN_DATEFORMAT);
-                $propbag->add('description', sprintf(GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH, '%a, %m.%m.%Y %H:%M'));
+                $propbag->add('description', sprintf(GENERAL_PLUGIN_DATEFORMAT_BLAHBLAH, '%a, %d.%m.%Y %H:%M'));
                 $propbag->add('default',     '%a, %d.%m.%Y %H:%M');
                 break;
 
