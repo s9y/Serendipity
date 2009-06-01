@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Changed shoutbox plugin. Shoutbox input size is configurable now.
+      (brockhaus)
+
     * Change mail entry plugin to be able to send mails without
       hyperlinks and images. (garvinhicking)
 
