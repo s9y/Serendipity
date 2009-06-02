@@ -283,7 +283,7 @@ function serendipity_parseTemplate($filename, $areas = null, $onlyFlags=null) {
 
     $config = @include($filename);
     if (! is_array($config)) {
-    	echo "<b>Error reading: " . $filename . "</b><br/>Perhaps the Webserver can't access the file?<br/>";
+    	printf(INCLUDE_ERROR,$filename);
     }
 
     foreach ( $config as $n => $category ) {
