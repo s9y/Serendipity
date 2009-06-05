@@ -30,6 +30,7 @@
 @define('FIR_BTITLE','Show blog title in the header');
 @define('FIR_BDESCR','Show blog description in the header');
 // Date format
+@define('DATEGROUP_SORT', 'Emit entries sorted by dategroup?');
 @define('BP_DATE_FORMAT', 'Date format');
 // Entry footer
 @define('ENTRY_FOOTER_POS','Position of the entry footer');

@@ -133,6 +133,9 @@ abbr, acronym, .help{
     margin-bottom: 0.5em;
 }
 
+.serendipity_entry ul,
+.serendipity_entry ol { padding-left: 2.5em; }
+
 img.serendipity_entryIcon {
     border: 0;
 }
