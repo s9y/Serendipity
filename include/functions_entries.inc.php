@@ -1017,9 +1017,13 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         $dategroup =& $entries;
     }
 
-    foreach($dategroup as $properties) {
+    foreach($dategroup as $dategroup_idx => $properties) {
         foreach($properties['entries'] as $x => $_entry) {
-            $entry = &$properties['entries'][$x]; // PHP4 Compat
+            if ($smarty_fetch === 'return') {
+                $entry = &$dategroup[$dategroup_idx]['entries'][$x]; // PHP4 Compat
+            } else {
+                $entry = &$properties['entries'][$x]; // PHP4 Compat
+            }
 
             if (!empty($entry['properties']['ep_cache_body'])) {
                 $entry['body']      = &$entry['properties']['ep_cache_body'];
