@@ -960,7 +960,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
             fclose($fp);
         }
                         
-        serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
+        $commentInfo['comment_cid'] = serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         $commentInfo['comment_id'] = $id;
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
         return true;
