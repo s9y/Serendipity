@@ -2,6 +2,8 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+#if ($_REQUEST['type'] == 'trackback') die('Disabled');
+
 include('serendipity_config.inc.php');
 include S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 

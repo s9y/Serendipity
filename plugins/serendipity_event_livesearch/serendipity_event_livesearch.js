@@ -60,6 +60,7 @@ function liveSearchInit() {
 }
 
 function liveSearchKeyPress(event) {
+    if (!event || typeof(event) == 'undefined' || typeof(event.keyCode) == 'undefined') return;
     if (event.keyCode == 40 ) { //KEY DOWN
         highlight = document.getElementById("LSHighlight");
         if (!highlight) {
