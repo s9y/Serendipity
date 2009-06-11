@@ -9,7 +9,10 @@ if (defined('S9Y_FRAMEWORK')) {
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
-    session_name('s9y_' . md5(dirname(__FILE__)));
+    // Only set the session name, if no session has yet been issued.
+    if (session_id() == '') {
+        session_name('s9y_' . md5(dirname(__FILE__)));
+    }
     session_start();
     
     // Prevent session fixation by only allowing sessions that have been sent by the server.
@@ -20,7 +23,7 @@ if (!headers_sent()) {
         session_regenerate_id(true);
         @session_start();
         header('X-Session-Reinit: true');
-        $_SESSION['SERVER_GENERATED_SID'] = true;
+        $_SESSION['SERVER_GENERATED_SID'] = $_SERVER['REMOTE_ADDR'] . $_SERVER['QUERY_STRING'];
     }
 }
 
@@ -152,7 +155,6 @@ if (!isset($serendipity['languages'])) {
 /* Available Calendars */
 $serendipity['calendars'] = array('gregorian'   => 'Gregorian',
                                   'persian-utf8' => 'Persian (utf8)');
-
 /*
  *   Load main language file
  */
@@ -402,5 +404,4 @@ if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
-
 /* vim: set sts=4 ts=4 expandtab : */

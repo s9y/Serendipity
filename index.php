@@ -24,7 +24,6 @@ header('Status: 200 OK');
 ob_start();
 include('serendipity_config.inc.php');
 header('Content-Type: text/html; charset='. LANG_CHARSET);
-
 if ($serendipity['expose_s9y']) {
     header('X-Blog: Serendipity'); // Used for installer detection
 }
