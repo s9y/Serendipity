@@ -369,6 +369,11 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             $comment['url']     = strip_tags($comment['url']);
             $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments';
 
+            /* Fix invalid cases in protocoll part */
+            if (!empty($comment['url'])) {
+                $comment['url'] = preg_replace('@^http://@i','http://', $comment['url']);
+                $comment['url'] = preg_replace('@^https://@i','https://', $comment['url']);
+            }
             /* Fix fucked links */
             if (!empty($comment['url']) && substr($comment['url'], 0, 7) != 'http://' && substr($comment['url'], 0, 8) != 'https://') {
                 $comment['url'] = 'http://' . $comment['url'];
