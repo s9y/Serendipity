@@ -181,6 +181,11 @@ class serendipity_plugin_comments extends serendipity_plugin
                 $isTrackBack = $row['comment_type'] == 'TRACKBACK' || $row['comment_type'] == 'PINGBACK';
                 
                 if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
+                    
+                    /* Fix invalid cases in protocoll part */
+                    $row['comment_url'] = preg_replace('@^http://@i','http://', $row['comment_url']);
+                    $row['comment_url'] = preg_replace('@^https://@i','https://', $row['comment_url']);
+                    
                     if (substr($row['comment_url'], 0, 7) != 'http://' && 
                         substr($row['comment_url'], 0, 8) != 'https://') {
                         $row['comment_url'] = 'http://' . $row['comment_url']; 
