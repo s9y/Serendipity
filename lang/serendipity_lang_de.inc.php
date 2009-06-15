@@ -933,13 +933,18 @@
 @define('PLUGIN_DOCUMENTATION', 'Dokumentation');
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Lokale Dokumentation');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Versionsgeschichte');
-@define('SYNDICATION_PLUGIN_BIGIMG', 'Big Image');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file.');
-@define('SYNDICATION_PLUGIN_FEEDNAME', 'Displayed name for "feed"');
-@define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Enter an optional custom name for the feeds (defaults to "feed" when empty)');
-@define('SYNDICATION_PLUGIN_COMMENTNAME', 'Displayed name for "comment" feed');
-@define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'Enter an optional custom name for the comment feed');
-@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(If you enter an absolute URL with http://... here, this URL will be used as the redirection target in case you have enabled the "Force" option for FeedBurner. Note that this can also be a URL independent to FeedBurner. For new Google FeedBurner feeds, you need to enter http://feeds2.feedburner.com/yourfeedname here)');
+@define('SYNDICATION_PLUGIN_BIGIMG', 'Großes Bild');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeige ein (großes) Bild über den Feeds im Sidebar, volle oder absolute URL zur Bilddatei eingeben');
+@define('SYNDICATION_PLUGIN_FEEDNAME', 'Angezeigter Name für "feed"');
+@define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Optional benutzerdefinierten Namen für die Feeds eingeben (Vorgabe ist "feed" wenn leer)');
+@define('SYNDICATION_PLUGIN_COMMENTNAME', 'Anzeigename für "Kommentar" feed');
+@define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'Optional benutzerdefinierten Namen für den Kommentar-Feed eingeben');
+@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(ist eine absolute URL mit http://... eingetragen, wird diese URL wird als Umleitungsziel verwendet, wenn die "Erzwingen" Option für FeedBurner eingeschaltet ist. Hinweis: Das kann auch eine URL sein, die auf andere Ziele als FeedBurner verweist. Für die neuen Google FeedBurner Feeds muss http://feeds2.feedburner.com/yourfeedname eigetragen werden)');
 
-@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');
+@define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', '(Wenn diese Option auf "Erzwingen" gesetzt ist, wird der RSS Feed an einen anderen Webservice weitergeleitet, wie z.B. (aber nicht nur) FeedBurner. Siehe die untenstehende Option "Feedburner ID" um die absolute URL einzutragen)');
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Zu bestätigende');
+
+// Next lines were translated on 2009/06/03
+@define('DELETE_FILE_FAIL', 'Kann das Bild namens <b>%s</b> nicht löschen');
+@define('INSTALL_OFFSET_ON_SERVER_TIME', 'Worauf basiert die Zeitdifferenz zur Server-Zeitzone?');
+@define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Eintragszeiten nach Server-Zeitzone eintragen oder nicht. YES wählt die Server-Zeitzone als Basis, NO wählt GMT.');
