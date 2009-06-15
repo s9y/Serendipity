@@ -1,9 +1,11 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 09:51:33 VladaAjgl $
 
 /**
- *  @version $Revision$
+ *  @version 1.0
  *  @author Grischa Brockhaus <http://blog.brockha.us>
  *  DE-Revision: Revision of lang_de.inc.php
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
  */
 
 @define('PLUGIN_KARMA_NAME', 'Karma');
@@ -107,3 +109,14 @@
 @define('PLUGIN_KARMA_TAB_OPTIONS', 'Optionen');
 @define('PLUGIN_KARMA_TAB_APPEARANCE', 'Darstellung');
 @define('PLUGIN_KARMA_TAB_TEXT', 'Texte');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_KARMA_DISPLAY_LOG', 'Karma administrieren');
+@define('PLUGIN_KARMA_REMOVED_POINTS', '%s Punkte für Artikel %s entfernt');
+@define('PLUGIN_KARMA_APPROVED_POINTS', '%s Punkte für Artikel %s hinzugefügt');
+@define('PLUGIN_KARMA_POINTS_ERROR', 'Fehler bei der Aktualisierung der Punkte für den Eintrag %s!');
+@define('PLUGIN_KARMA_REMOVE_ERROR', 'Fehler beim Entfernen der Stimme für Eintrag %s! (Punkte wurden trotzdem aktualisiert)');
+@define('PLUGIN_KARMA_UPDATE_ERROR', 'Bisher keine Stimme für Eintrag %s!');
+@define('PLUGIN_KARMA_INVALID_INPUT', 'ungültige Eingabe!');
+@define('PLUGIN_KARMA_DELETE_VOTES', 'Lösche ausgewählte Stimmen');
+@define('PLUGIN_KARMA_APPROVE_VOTES', 'Bestätige ausgewählte Stimmen');

@@ -801,7 +801,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     }
 
                     $conds = array();
-                    if (!isset($addData['noSticky']) || $addData['noSticky'] !== true) {
+                    if ((!isset($addData['noSticky']) || $addData['noSticky'] !== true) && !isset($serendipity['skipSticky'])) {
                         $conds[] = 'ep_sticky.value AS orderkey,';
                     } else {
                         $conds[] = 'e.isdraft AS orderkey,';
@@ -853,7 +853,7 @@ class serendipity_event_entryproperties extends serendipity_event
                                                   ON (e.id = ep_access_users.entryid AND ep_access_users.property = 'ep_access_users')";
                     }
 
-                    if (!isset($addData['noSticky']) || $addData['noSticky'] !== true) {
+                    if ((!isset($addData['noSticky']) || $addData['noSticky'] !== true) && !isset($serendipity['skipSticky'])) {
                         $joins[] = " LEFT JOIN {$serendipity['dbPrefix']}entryproperties ep_sticky
                                             ON (e.id = ep_sticky.entryid AND ep_sticky.property = 'ep_is_sticky')";
                     }

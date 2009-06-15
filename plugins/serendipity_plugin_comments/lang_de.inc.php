@@ -1,5 +1,10 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 10:01:36 VladaAjgl $
 
+/**
+ *  @version 1.0
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
+ */
         @define('PLUGIN_COMMENTS_BLAHBLAH', 'Zeigt die letzten Kommentare');
         @define('PLUGIN_COMMENTS_WORDWRAP', 'Zeilenumbruch');
         @define('PLUGIN_COMMENTS_WORDWRAP_BLAHBLAH', 'Nach wievielen Buchstaben soll ein Zeilenumbruch eingefügt werden? (Standard: 30)');
@@ -10,3 +15,6 @@
         @define('PLUGIN_COMMENTS_ABOUT', '%s zu%s');
 
         @define('PLUGIN_COMMENTS_ADDURL', 'Kommentatoren URL anzeigen bei');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_COMMENTS_ANONYMOUS', 'anonym');

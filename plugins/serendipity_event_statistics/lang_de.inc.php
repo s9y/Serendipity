@@ -1,5 +1,10 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 09:59:20 VladaAjgl $
 
+/**
+ *  @version 1.0
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
+ */
         @define('PLUGIN_EVENT_STATISTICS_NAME', 'Statistiken');
         @define('PLUGIN_EVENT_STATISTICS_DESC', 'Zeigt einen Link zu informativen Statistiken (inkl. Besucherzähler) in der Administrationsoberfläche an.');
         @define('PLUGIN_EVENT_STATISTICS_OUT_STATISTICS', 'Statistik');
@@ -92,3 +97,9 @@
 
         @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Anzahl momentaner Besucher (inkl. ca. der letzten 15 Minuten) anzeigen');
         @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s Besucher online');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_EVENT_STATISTICS_SHOW_DAYVISITORS', 'Besucher dieses Tages anzeigen');
+@define('PLUGIN_EVENT_STATISTICS_SHOW_WEEKVISITORS', 'Besucher dieser Woche anzeigen');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_DAYVISITORS', '%s Besucher heute');
+@define('PLUGIN_EVENT_STATISTICS_TEXT_WEEKVISITORS', '%s Besucher in dieser Woche');
