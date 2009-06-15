@@ -1,5 +1,10 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 10:01:55 VladaAjgl $
 
+/**
+ *  @version 1.0
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
+ */
         @define('PLUGIN_HISTORY_NAME', 'Geschichte');
         @define('PLUGIN_HISTORY_DESC', 'Zeigt Einträge eines einstellbaren Alters an.');
         @define('PLUGIN_HISTORY_MIN_AGE', 'Mindestalter');
@@ -24,3 +29,6 @@
         @define('PLUGIN_HISTORY_CUSTOMAGE', 'Zeitrahmen selbst einstellen');
         @define('PLUGIN_HISTORY_OYA', 'Heute vor einem Jahr');
         @define('PLUGIN_HISTORY_MYSELF', 'Anderer');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_HISTORY_DISPLAYAUTHOR', 'Zeige den Namen des Authors');

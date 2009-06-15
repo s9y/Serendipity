@@ -1,5 +1,10 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 09:50:12 VladaAjgl $
 
+/**
+ *  @version 1.0
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
+ */
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Erweiterte Eigenschaften von Artikeln');
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(Cache, nicht-öffentliche Artikel, dauerhafte Artikel)');
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Dauerhafte Artikel');
@@ -29,5 +34,12 @@
         
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS', 'Freie Felder');
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1', 'Zusätzliche, freie Felder können in Ihrem Template an beliebigen Stellen eingesetzt werden. Dafür müssen Sie nur Ihr entries.tpl Template bearbeiten und Smarty-Tags wie {$entry.properties.ep_MyCustomField} an gewünschter Stelle einfügen. Bitte beachten Sie den Präfix ep_ für jedes Feld! ');
-        @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'Geben Sie hier eine Liste von kommaseparierten Feldnamen an, die Sie für die Einträge verwenden möchten. Keine Sonderzeichen und Leerzeichen benutzen. Beispiel: "Customfield1, Customfield2". ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
+        @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'Geben Sie hier eine Liste von kommaseparierten Feldnamen an, die Sie für die Einträge verwenden möchten. Keine Sonderzeichen und Leerzeichen benutzen. Beispiel: "Customfield1, Customfield2". Zusätzliche, freie Felder können in Ihrem Template an beliebigen Stellen eingesetzt werden. Dafür müssen Sie nur Ihr entries.tpl Template bearbeiten und Smarty-Tags wie {$entry.properties.ep_MyCustomField} an gewünschter Stelle einfügen. Bitte beachten Sie den Präfix ep_ für jedes Feld!');
         @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'Die Liste verfügbarer freier Felder kann in der <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">Plugin-Konfiguration</a> bearbeitet werden.');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'Formatierungs-PlugIns für diesen Eintrag deaktivieren');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS', 'Verwende erweiterte Datenbankabfragen');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS_DESC', 'Wenn aktiviert, werden zusätzliche Datenbankabfragen ausgeführt. Damit wird es möglich, dauerhafte , nicht in Artikelübersicht aufgeführte und im RSS-Feed versteckte Artikel zu verwenden . Wenn diese Funktionen nicht benötigt werden, kann das Abschalten der Abfragen die Geschwindigkeit verbessern.');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE', 'Reihenfolge der Optionen');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC', 'Hier kann ausgewählt werden, welche Optionen in welcher Reihenfolge im Editiermodus des Artikels angezeigt werden.');

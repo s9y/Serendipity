@@ -1,5 +1,10 @@
-<?php # $Id$
+<?php # lang_de.inc.php 1.0 2009-06-03 09:52:40 VladaAjgl $
 
+/**
+ *  @version 1.0
+ *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
+ *  @translated 2009/06/03
+ */
         @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'Spamschutz');
         @define('PLUGIN_EVENT_SPAMBLOCK_DESC', 'Mehrere Möglichkeiten, um Kommentarspam einzudämmen');
         @define('PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY', 'Spamschutz: Ungültiger Kommentar!');
@@ -64,7 +69,7 @@
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Wortfilter für URLs');
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@ angegeben werden.');
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Wortfilter für Autorennamen');
-        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
+        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@ angegeben werden.');
 
         @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Ungültige E-Mail-Adresse!');
         @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', 'Auf ungültige E-Mail-Adressen prüfen?');
@@ -128,3 +133,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET', 'Akismet');
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS_ANON', 'TypePad Antispam (anonymisiert)');
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET_ANON', 'Akismet (anonymisiert)');
+
+// Next lines were translated on 2009/06/03
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'durch blogg.de Blacklist gefiltert');
