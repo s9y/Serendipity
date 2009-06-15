@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Plugin drag/drop now can scroll up/down/left/right when touching
+      the borders. Thanks to onli!
+
     * Changed shoutbox plugin. Shoutbox input size is configurable now.
       Wrong description for dateformat fixed.
       (brockhaus)

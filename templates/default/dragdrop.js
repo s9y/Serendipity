@@ -151,6 +151,8 @@ var Drag = {
     BIG_Z_INDEX : 10000,
     group : null,
     isDragging : false,
+    scrolledY : 0,
+    scrolledX : 0,
 
     makeDraggable : function(group) {
         group.handle = group;
@@ -288,6 +290,7 @@ var Drag = {
                 "SE offset: " + seOffset.toString();*/
     },
 
+    
     onMouseMove : function(event) {
         event = Drag.fixEvent(event);
         var group = Drag.group;
@@ -317,11 +320,14 @@ var Drag = {
             group.style["opacity"] = 0.75;
         }
 
+
         // TODO: need better constraint API
         var adjusted = mouse.constrain(group.mouseMin, group.mouseMax);
         nwPosition = nwPosition.plus(adjusted.minus(group.dragCoordinate));
         nwPosition.reposition(group);
         group.dragCoordinate = adjusted;
+
+
 
         // once dragging has started, the position of the group
         // relative to the mouse should stay fixed.  They can get out
@@ -335,17 +341,43 @@ var Drag = {
         // changed to be recursive/use absolute offset for corrections
         var offsetBefore = Coordinates.northwestOffset(group, true);
         group.onDrag(nwPosition, sePosition, nwOffset, seOffset);
+        
+        //sroll window if reaching the border
+        if(event.clientX < 20) {
+            window.scrollBy(-20, 0);
+            Drag.scrolledX = -20;
+        }
+        if (event.clientX > window.innerWidth -20) {
+            window.scrollBy(20, 0);
+            Drag.scrolledX = 20;
+        }
+        if(event.clientY < 20) {
+            window.scrollBy(0, -20);
+            Drag.scrolledY = -20;
+        }
+        if (event.clientY > window.innerHeight -20) {
+            window.scrollBy(0, 20);
+            Drag.scrolledY = 20;
+        }
+        
         var offsetAfter = Coordinates.northwestOffset(group, true);
 
+        offsetAfter.x = offsetAfter.x - Drag.scrolledX;
+        offsetAfter.y = offsetAfter.y - Drag.scrolledY;
+        
+        
         if (!offsetBefore.equals(offsetAfter)) {
             var errorDelta = offsetBefore.minus(offsetAfter);
+            Drag.scrolledX = 0;
+            Drag.scrolledY = 0;
             nwPosition = Coordinates.northwestPosition(group).plus(errorDelta);
             nwPosition.reposition(group);
         }
 
+        
         return false;
     },
-
+    
     onMouseUp : function(event) {
         event = Drag.fixEvent(event);
         var group = Drag.group;
