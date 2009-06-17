@@ -727,6 +727,15 @@ function serendipity_rebuildCategoryTree($parent = 0, $left = 0) {
  */
 function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     global $serendipity;
+    static $log_queries = false;
+    
+    if ($log_queries) {
+        $fp = fopen($serendipity['serendipityPath'] . '/archives/queries.csv', 'a');
+        fwrite($fp, date('Y-m-d H:i') . ';'
+                    . $_SERVER['REMOTE_ADDR'] . ';'
+                    . $term . "\n");
+        fclose($fp);
+    }
 
     $orig_limit = $limit;
     if ($limit == '') {
