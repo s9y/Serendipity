@@ -38,7 +38,7 @@ class serendipity_event_mailer extends serendipity_event
         ));
         $propbag->add('groups', array('FRONTEND_ENTRY_RELATED'));
 
-        $config = array('what', 'mailto', 'sendtoall', 'includelink', 'striptags', 'convertp');
+        $config = array('what', 'mailto', 'sendtoall', 'includelink', 'striptags', 'convertp', 'keepstriptags');
         $propbag->add('configuration', $config);
     }
 
