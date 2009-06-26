@@ -3395,7 +3395,8 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             'newDir' => $newDir,
             'type'   => $type,
             'item_id'=> $item_id,
-            'file'   => $file
+            'file'   => $file,
+            'name'   => $pick['name']
         ));
 
         serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
