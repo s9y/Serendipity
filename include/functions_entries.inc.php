@@ -1031,7 +1031,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             if ($smarty_fetch === 'return') {
                 $entry = &$dategroup[$dategroup_idx]['entries'][$x]; // PHP4 Compat
             } else {
-                $entry = &$properties['entries'][$x]; // PHP4 Compat
+                // DISABLED - made problems with custom plugins
+                // $entry = &$properties['entries'][$x]; // PHP4 Compat
+                $entry = &$dategroup[$dategroup_idx]['entries'][$x]; // PHP4 Compat
             }
 
             if (!empty($entry['properties']['ep_cache_body'])) {
