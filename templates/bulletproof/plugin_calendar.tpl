@@ -37,7 +37,7 @@
     </tr>
 </thead>
 <tfoot class="serendipity_calendarHeader">
-<tr><td id="today" scope="col" colspan="7">{$smarty.now|@formatTime:"%a %B %e %Y"}</td></tr>
+<tr><td id="today" scope="col" colspan="7">{$smarty.now|@formatTime:$template_option.date_format}</td></tr>
 </tfoot>
 <tbody>
     {foreach from=$plugin_calendar_weeks item="week"}
