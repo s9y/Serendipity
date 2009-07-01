@@ -139,7 +139,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         if ($this->get_config('viewmode') == 'comments') {
             $viewtype .= ' AND c.type = \'NORMAL\'';
         } elseif ($this->get_config('viewmode') == 'trackbacks') {
-            $viewtype .= ' AND c.type = \'TRACKBACK\'';
+            $viewtype .= ' AND (c.type = \'TRACKBACK\' OR c.type = \'PINGBACK\')';
         }
 
         $q = 'SELECT    c.body              AS comment,
