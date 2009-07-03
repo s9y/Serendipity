@@ -972,7 +972,7 @@ function serendipity_smarty_init($vars = array()) {
                 'is_single_entry'           => (isset($serendipity['GET']['id']) && is_numeric($serendipity['GET']['id'])),
 
                 'blogTitle'                 => $serendipity['blogTitle'],
-                'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? $serendipity['blogSubTitle']) : ''),
+                'blogSubTitle'              => (!empty($serendipity['blogSubTitle']) ? $serendipity['blogSubTitle'] : ''),
                 'blogDescription'           => $serendipity['blogDescription'],
 
                 'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
