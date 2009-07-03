@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * no longer use htmlspecialchars() on the blog's title and sub-
+      title, to allow for custom HTML code to appear and unify
+      only letting Smarty do the escaping (garvinhicking,falk)
+      
     * Plugin drag/drop now can scroll up/down/left/right when touching
       the borders. Thanks to onli!
 
