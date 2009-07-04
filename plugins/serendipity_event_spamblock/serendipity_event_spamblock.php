@@ -39,7 +39,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.76');
+        $propbag->add('version',       '1.77');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -61,6 +61,7 @@ var $filter_defaults;
             'forcemoderation',
             'forcemoderation_treat',
             'trackback_ipvalidation' ,
+            'trackback_ipvalidation_url_exclude' ,
             'forcemoderationt',
             'forcemoderationt_treat',
             'disable_api_comments',
@@ -120,6 +121,13 @@ var $filter_defaults;
                     'desc'  => array(NO, PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT)
                 ));
                 $propbag->add('radio_per_row', '1');
+                break;
+
+            case 'trackback_ipvalidation_url_exclude':
+                $propbag->add('type', 'string');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC);
+                $propbag->add('default', $this->get_default_exclude_urls());
                 break;
 
             case 'trackback_check_url':
@@ -416,6 +424,10 @@ var $filter_defaults;
         return true;
     }
 
+    function get_default_exclude_urls() {
+        return '^http://identi\.ca/notice/\d+$';
+        
+    }
     function htaccess_update($new_ip) {
         global $serendipity;
 
@@ -890,35 +902,45 @@ var $filter_defaults;
                         $trackback_ipvalidation_option = $this->get_config('trackback_ipvalidation','moderate');
                         if (($addData['type'] == 'TRACKBACK' || $addData['type'] == 'PINGBACK') && $trackback_ipvalidation_option != 'no') {
                             $this->IsHardcoreSpammer();
-                            $parts = @parse_url($addData['url']);
-                            $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
-                            // Getting host from url successfully?
-                            if (!is_array($parts)) { // not a valid URL
-                                $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''));
-                                if ($trackback_ipvalidation_option == 'reject') {
-                                    $eventData = array('allow_comments' => false);
-                                    $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
-                                    return false;
-                                } else {
-                                    $eventData['moderate_comments'] = true;
-                                    $serendipity['csuccess']        = 'moderate';
-                                    $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
-                                }
+                            $exclude_urls = explode(';',$this->get_config('trackback_ipvalidation_url_exclude'), $this->get_default_exclude_urls());
+                            $found_exclude_url = false;
+                            foreach ($exclude_urls as $exclude_url) {
+                                $exclude_url = trim($exclude_url);
+                                if (empty($exclude_url)) continue; 
+                                $found_exclude_url = preg_match('@' . $exclude_url . '@',$addData['url']);
+                                if ($found_exclude_url) break;
                             }
-                            $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
-                            $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
-                            $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
-                            // Is host ip and sender ip matching?
-                            if ($trackback_ip != $sender_ip) {
-                                $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
-                                if ($trackback_ipvalidation_option == 'reject') {
-                                    $eventData = array('allow_comments' => false);
-                                    $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
-                                    return false;
-                                } else {
-                                    $eventData['moderate_comments'] = true;
-                                    $serendipity['csuccess']        = 'moderate';
-                                    $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                            if (!$found_exclude_url) {
+                                $parts = @parse_url($addData['url']);
+                                $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
+                                // Getting host from url successfully?
+                                if (!is_array($parts)) { // not a valid URL
+                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''));
+                                    if ($trackback_ipvalidation_option == 'reject') {
+                                        $eventData = array('allow_comments' => false);
+                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                        return false;
+                                    } else {
+                                        $eventData['moderate_comments'] = true;
+                                        $serendipity['csuccess']        = 'moderate';
+                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
+                                    }
+                                }
+                                $trackback_ip = preg_replace('/[^0-9.]/', '', gethostbyname($parts['host']) );
+                                $sender_ip = preg_replace('/[^0-9.]/', '', $_SERVER['REMOTE_ADDR'] );
+                                $sender_ua = ($debug ? ', ua="' . $_SERVER['HTTP_USER_AGENT'] . '"' : '') ;
+                                // Is host ip and sender ip matching?
+                                if ($trackback_ip != $sender_ip) {
+                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip  . $sender_ua), $addData);
+                                    if ($trackback_ipvalidation_option == 'reject') {
+                                        $eventData = array('allow_comments' => false);
+                                        $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                        return false;
+                                    } else {
+                                        $eventData['moderate_comments'] = true;
+                                        $serendipity['csuccess']        = 'moderate';
+                                        $serendipity['moderate_reason'] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $parts['host'], $trackback_ip, $sender_ip . $sender_ua);
+                                    }
                                 }
                             }
                         }
