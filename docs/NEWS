@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added "exclude urls" to ip validation functionality in spam block
+      plugin. identi.ca is sending pingbacks but fails the ip validation!
+      (brockhaus)
+
     * no longer use htmlspecialchars() on the blog's title and sub-
       title, to allow for custom HTML code to appear and unify
       only letting Smarty do the escaping (garvinhicking,falk)

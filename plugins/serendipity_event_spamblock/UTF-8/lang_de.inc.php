@@ -67,9 +67,9 @@
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC', 'Durchsucht Kommentare nach speziellen Zeichenketten und markiert diese als Spam.');
 
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS', 'Wortfilter für URLs');
-        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@ angegeben werden.');
+        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenketten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@, der Punkt als \\. angegeben werden.');
         @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS', 'Wortfilter für Autorennamen');
-        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', 'Reguläre Ausdrücke erlaubt, Zeichenkennten durch Semikolon (;) trennen. Das @-Zeichen muss mit \\@ angegeben werden.');
+        @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 
         @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CHECKMAIL', 'Ungültige E-Mail-Adresse!');
         @define('PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL', 'Auf ungültige E-Mail-Adressen prüfen?');
@@ -136,3 +136,6 @@
 
 // Next lines were translated on 2009/06/03
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'durch blogg.de Blacklist gefiltert');
+
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE', 'URLs von IP Validatierung ausnehmen');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC', 'URLs, die von der IP Validatierung ausgeschlossen werden sollen. ' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
