@@ -663,7 +663,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     $counter_tb = serendipity_db_query("SELECT count(id) AS counter 
                                           FROM {$serendipity['dbPrefix']}comments 
                                          WHERE status = 'approved' 
-                                           AND type   = 'TRACKBACK'
+                                           AND (type = 'TRACKBACK' or type = 'PINGBACK')
                                            AND entry_id = " . (int)$entry_id . "
                                       GROUP BY entry_id", true);
 
