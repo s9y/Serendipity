@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * pingbacks were not counted as entry trackbacks (also added to entries)
+      (brockhaus)
+
     * Added "exclude urls" to ip validation functionality in spam block
       plugin. identi.ca is sending pingbacks but fails the ip validation!
       (brockhaus)
