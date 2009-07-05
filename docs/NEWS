@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added new optional parameter for plugin config type "text": rows.
+      (brockhaus)
+
     * pingbacks were not counted as entry trackbacks (also added to entries)
       (brockhaus)
 
