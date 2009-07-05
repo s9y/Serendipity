@@ -124,9 +124,10 @@ var $filter_defaults;
                 break;
 
             case 'trackback_ipvalidation_url_exclude':
-                $propbag->add('type', 'string');
+                $propbag->add('type', 'text');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC);
+                $propbag->add('rows', 2);
                 $propbag->add('default', $this->get_default_exclude_urls());
                 break;
 
@@ -297,6 +298,7 @@ var $filter_defaults;
 
             case 'contentfilter_urls':
                 $propbag->add('type', 'text');
+                $propbag->add('rows', 3);
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
                 $propbag->add('default', $this->filter_defaults['urls']);
@@ -304,6 +306,7 @@ var $filter_defaults;
 
             case 'contentfilter_authors':
                 $propbag->add('type', 'text');
+                $propbag->add('rows', 3);
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC);
                 $propbag->add('default', $this->filter_defaults['authors']);
@@ -311,6 +314,7 @@ var $filter_defaults;
 
             case 'contentfilter_words':
                 $propbag->add('type', 'text');
+                $propbag->add('rows', 3);
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC);
                 $propbag->add('default', $this->filter_defaults['words']);
@@ -318,6 +322,7 @@ var $filter_defaults;
 
             case 'contentfilter_emails':
                 $propbag->add('type', 'text');
+                $propbag->add('rows', 3);
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS_DESC);
                 $propbag->add('default', $this->filter_defaults['emails']);
@@ -902,13 +907,15 @@ var $filter_defaults;
                         $trackback_ipvalidation_option = $this->get_config('trackback_ipvalidation','moderate');
                         if (($addData['type'] == 'TRACKBACK' || $addData['type'] == 'PINGBACK') && $trackback_ipvalidation_option != 'no') {
                             $this->IsHardcoreSpammer();
-                            $exclude_urls = explode(';',$this->get_config('trackback_ipvalidation_url_exclude'), $this->get_default_exclude_urls());
+                            $exclude_urls = explode(';',$this->get_config('trackback_ipvalidation_url_exclude', $this->get_default_exclude_urls()));
                             $found_exclude_url = false;
                             foreach ($exclude_urls as $exclude_url) {
                                 $exclude_url = trim($exclude_url);
                                 if (empty($exclude_url)) continue; 
                                 $found_exclude_url = preg_match('@' . $exclude_url . '@',$addData['url']);
-                                if ($found_exclude_url) break;
+                                if ($found_exclude_url) {
+                                    break;
+                                }
                             }
                             if (!$found_exclude_url) {
                                 $parts = @parse_url($addData['url']);
