@@ -419,6 +419,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $radio    = array();
         $select   = array();
         $per_row  = null;
+        $text_rows = null;
 
         $is_multi_select = false;
         $ctype    = $cbag->get('type');
@@ -565,6 +566,12 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
             case 'html':
             case 'text':
+                if (empty($text_rows)) {
+                    $text_rows = $cbag->get('rows');
+                    if (empty($text_rows)) {
+                        $text_rows = 20;
+                    }
+                }
 ?>
         <tr>
             <td colspan="2"><strong><?php echo $cname; ?></strong>
@@ -575,7 +582,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         <tr>
             <td colspan="2">
                 <div>
-                    <textarea class="direction_<?php echo $lang_direction; ?>" style="width: 100%" id="nuggets<?php echo $elcount; ?>" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" rows="20" cols="80"><?php echo $hvalue; ?></textarea>
+                    <textarea class="direction_<?php echo $lang_direction; ?>" style="width: 100%" id="nuggets<?php echo $elcount; ?>" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" rows="<?php echo $text_rows; ?>" cols="80"><?php echo $hvalue; ?></textarea>
                 </div>
             </td>
         </tr>
