@@ -363,7 +363,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         <td colspan="2" style="font-weight: bold"><?php echo PERMISSIONS ?></td>
     </tr>
     <tr>
-        <td><?php echo $basedir ?></td>
+        <td style="vertical-align: top"><?php echo $basedir ?></td>
         <td width="200"><?php
             $basewritable = False;
             if ( is_writable($basedir) ) {
@@ -385,6 +385,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
                         break;
                     }
                 }
+                
                 if (!$showWritableNote) {
                     echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
                 }
@@ -392,7 +393,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
      ?></td>
     </tr>
     <tr>
-        <td><?php echo $basedir . PATH_SMARTY_COMPILE?></td>
+        <td style="vertical-align: top"><?php echo $basedir . PATH_SMARTY_COMPILE?></td>
         <td width="200"><?php
             if ( is_writable($basedir . PATH_SMARTY_COMPILE) ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
@@ -408,7 +409,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
      ?></td>
     </tr>
     <tr>
-        <td><?php echo $basedir . 'archives/'?></td>
+        <td style="vertical-align: top"><?php echo $basedir . 'archives/'?></td>
         <td width="200"><?php
             if ( is_writable($basedir . 'archives/') ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
@@ -423,9 +424,20 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
             }
      ?></td>
     </tr>
+    <tr>
+        <td style="vertical-align: top"><?php echo $basedir . 'plugins/'?></td>
+        <td width="200"><?php
+            if ( is_writable($basedir . 'plugins/') ) {
+                echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
+            } else {
+                echo serendipity_installerResultDiagnose(S9Y_I_WARNING, NOT_WRITABLE . NOT_WRITABLE_SPARTACUS);
+            }
+     ?></td>
+    </tr>
+
 <?php if ( is_dir($basedir .'uploads/') ) { ?>
     <tr>
-        <td><?php echo $basedir . 'uploads/'?></td>
+        <td style="vertical-align: top"><?php echo $basedir . 'uploads/'?></td>
         <td width="200"><?php
             if ( is_writable($basedir . 'uploads/') ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
@@ -443,7 +455,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 <?php } ?>
 <?php if (function_exists('is_executable')) { ?>
     <tr>
-      <td>Execute Imagemagick  binary </td>
+      <td style="vertical-align: top">Execute Imagemagick  binary </td>
       <td><?php
             if ($binary = serendipity_query_default('convert', false)) {
                 if (is_executable($binary)) {
