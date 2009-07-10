@@ -3,6 +3,11 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Fix PDF imagemagick thumbnail generation to be properly displayed
+      (http://board.s9y.org/viewtopic.php?f=3&t=15446)
+      
+    * Warn about non-writable "plugins" directory in installation
+    
     * Added new optional parameter for plugin config type "text": rows.
       (brockhaus)
 
