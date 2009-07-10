@@ -1681,6 +1681,7 @@ function serendipity_isImage(&$file, $strict = false, $allowed = 'image/') {
     $file['location'] = $serendipity['serendipityPath'] . preg_replace('@^(' . preg_quote($serendipity['serendipityHTTPPath']) . ')@i', '', $file['imgsrc']);
 
     // File is PDF -> Thumb is PNG
+    // Detect PDF thumbs
     if ($file['mime'] == 'application/pdf' && file_exists($file['location'] . '.png') && $strict == false) {
         $file['imgsrc']     .= '.png';
         $file['displaymime'] = 'image/png';
@@ -2709,6 +2710,14 @@ function serendipity_prepareMedia(&$file, $url = '') {
     	}
     }
 
+    // Detect PDF thumbs
+    if (file_exists($file['full_thumb'] . '.png')) {
+        $file['full_thumb']     .= '.png';
+        $file['full_thumbHTTP'] .= '.png';
+        $file['show_thumb']     .= '.png'; 
+        $sThumbSource           .= '.png';
+    }
+    
     if (empty($file['realname'])) {
         $file['realname'] = $file['name'] . '.' . $file['extension'];
     }
