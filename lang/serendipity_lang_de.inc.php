@@ -948,3 +948,4 @@
 @define('DELETE_FILE_FAIL', 'Kann das Bild namens <b>%s</b> nicht löschen');
 @define('INSTALL_OFFSET_ON_SERVER_TIME', 'Worauf basiert die Zeitdifferenz zur Server-Zeitzone?');
 @define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Eintragszeiten nach Server-Zeitzone eintragen oder nicht. YES wählt die Server-Zeitzone als Basis, NO wählt GMT.');
+@define('NOT_WRITABLE_SPARTACUS', ' (Nur notwendig wenn Spartacus zur Plugin-Installation über das Internet genutzt werden soll)');
