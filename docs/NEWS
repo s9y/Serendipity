@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Filter entries only by authors that have written at least
+      one article (garvinhicking)
+      
     * Fix PDF imagemagick thumbnail generation to be properly displayed
       (http://board.s9y.org/viewtopic.php?f=3&t=15446)
       
