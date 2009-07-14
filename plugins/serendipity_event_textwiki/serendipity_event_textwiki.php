@@ -619,7 +619,7 @@ class serendipity_event_textwiki extends serendipity_event
         include_once S9Y_PEAR_PATH . 'Text/Wiki.php';
 
         if (class_exists('Text_Wiki')) {
-            $this->wiki =& new Text_Wiki;
+            $this->wiki = new Text_Wiki;
             $this->wiki->setFormatConf('Xhtml', 'translate', null);
             $this->wiki->setFormatConf('Xhtml', 'charset', LANG_CHARSET);
         } else {

@@ -557,7 +557,7 @@ class serendipity_plugin_api
         }
 
         // $serendipity['debug']['pluginload'][] = "Returning new $class_name($instance_id)";
-        $p =& new $class_name($instance_id);
+        $p = new $class_name($instance_id);
         if (!is_null($authorid)) {
             $p->serendipity_owner = $authorid;
         } else {
