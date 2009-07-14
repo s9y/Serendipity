@@ -279,6 +279,7 @@ function serendipity_imageSelector_done(textarea)
     var insert = '';
     var img = '';
     var src = '';
+    var alt = '';
     var f = document.forms['serendipity[selForm]'].elements;
 
     if (f['serendipity[linkThumbnail]'] && f['serendipity[linkThumbnail]'][0].checked == true) {
@@ -317,11 +318,9 @@ function serendipity_imageSelector_done(textarea)
         }
     }
 
-    if (document.getElementById('serendipity_imagecomment').value != '') {
-        styled = false;
-    } else {
-        styled = true;
-    }
+    alt = f['serendipity[alt]'].value;
+
+    styled = false; // Templates now do this.
 
     imgID = 0;
     if (f['imgID']) {
@@ -334,12 +333,12 @@ function serendipity_imageSelector_done(textarea)
 
     floating = 'center';
     if (f['serendipity[align]'][0].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
     } else if (f['serendipity[align]'][1].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
         floating = 'left';
     } else if (f['serendipity[align]'][2].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
         floating = 'right';
     }
 

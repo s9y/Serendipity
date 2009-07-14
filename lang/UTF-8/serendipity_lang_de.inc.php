@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2526 2009-06-15 09:19:59Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2544 2009-07-10 13:50:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -949,3 +949,6 @@
 @define('INSTALL_OFFSET_ON_SERVER_TIME', 'Worauf basiert die Zeitdifferenz zur Server-Zeitzone?');
 @define('INSTALL_OFFSET_ON_SERVER_TIME_DESC', 'Eintragszeiten nach Server-Zeitzone eintragen oder nicht. YES wählt die Server-Zeitzone als Basis, NO wählt GMT.');
 @define('NOT_WRITABLE_SPARTACUS', ' (Nur notwendig wenn Spartacus zur Plugin-Installation über das Internet genutzt werden soll)');
+@define('MEDIA_ALT', 'ALT-Attribut (Bildinhalt oder Kurzbeschreibung)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Bildinhalt (Zusammenfassung für das ALT-Attribut)');
+

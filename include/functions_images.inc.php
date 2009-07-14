@@ -659,7 +659,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             }
             $newSize = $r['width'] . 'x' . $r['height'];
             if ($fdim['mime'] == 'application/pdf') {
-                $cmd     = escapeshellcmd($serendipity['convert']) . ' -antialias -flatten -scale '. serendipity_escapeshellarg($newSize) .' '. serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile . '.png');
+                $cmd     = escapeshellcmd($serendipity['convert']) . ' -antialias -flatten -scale '. serendipity_escapeshellarg($newSize) .' "'. serendipity_escapeshellarg($infile) .'[0]" '. serendipity_escapeshellarg($outfile . '.png');
             } else {
                 if (!$force_resize && serendipity_ini_bool(ini_get('safe_mode')) === false) {
                     $newSize .= '>'; // Tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
@@ -2384,6 +2384,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
                 'COPYRIGHT'     => array('Creator'),
                 'TITLE'         => array('Title', 'ObjectName'),
                 'COMMENT1'      => array('Description'),
+                'ALT'           => array('Title', 'ObjectName'),
                 'COMMENT2'      => array('Keywords', 'PhotoLocation')
             );
         }
@@ -2412,6 +2413,11 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
                 case 'TITLE':
                     if (!isset($default_iptc_val)) {
                         $default_iptc_val = $media['realname'];
+                    }
+
+                case 'ALT':
+                    if (!isset($default_iptc_val)) {
+                        $default_iptc_val = '';
                     }
 
                 case 'COMMENT1':

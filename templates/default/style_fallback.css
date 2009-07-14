@@ -1,0 +1,91 @@
+/* This is the templates/default/style_fallback.css file.
+   It emits CSS rules that all templates should have.
+   Classes are declared on top of the file, so if you
+   want to make changes in your own template, you
+   should override the rules on the bottom of your
+   style.css template. 
+   IT IS NOT ADVISED TO CREATE YOUR OWN style_fallback.css FILE! */
+
+/* Default image classes for left/right/usual layout */
+.serendipity_image_center {
+  border: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.serendipity_image_left {
+  float: left;
+  border: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.serendipity_image_right {
+  float: right;
+  border: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* Default listing without spacers */
+.plainList {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/* Messages: Centered, important, notice */
+.serendipity_center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.serendipity_msg_important {
+    color: red;
+}
+
+.serendipity_msg_notice {
+    color: green;
+}
+
+/* Embedded images with comments inside the s9y image manager */
+.serendipity_imageComment_center,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    border: 1px solid #DDDDDD;
+    background-color: #EFEFEF;
+    margin: 3px;
+    padding: 3px;
+    text-align: center;
+}
+
+.serendipity_imageComment_center {
+    margin: auto;
+}
+
+.serendipity_imageComment_left {
+    float: left;
+}
+
+.serendipity_imageComment_right {
+    float: right;
+}
+
+.serendipity_imageComment_img,
+.serendipity_imageComment_img img {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+.serendipity_imageComment_txt {
+    border-top: 1px solid #DDDDDD;
+    margin: 0px;
+    padding: 3px;
+    clear: both;
+    font-size: 8pt;
+    text-align: center;
+}
+
+/* END OF style_fallback.css */

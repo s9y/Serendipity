@@ -1,1 +1,3 @@
-@define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
+@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+
