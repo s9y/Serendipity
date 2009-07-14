@@ -257,6 +257,12 @@
                     <input size="30" class="input_textbox" type="text" id="serendipity_alt" name="serendipity[alt]" value="{$media.file.props.base_property.ALT|@escape}" /></textarea>
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_alt' eventData=$media.file}
                     <br />
+
+                    <b>{$CONST.MEDIA_TITLE}:</b>
+                    <br />
+                    <input size="30" class="input_textbox" type="text" id="serendipity_title" name="serendipity[title]" value="{$media.file.props.base_property.TITLE|@escape}" /></textarea>
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_title' eventData=$media.file}
+                    <br />
                     {/if}
 
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}
