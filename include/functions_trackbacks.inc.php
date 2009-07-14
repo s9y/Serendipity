@@ -130,7 +130,7 @@ function _serendipity_send($loc, $data, $contenttype = null) {
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_send');
     serendipity_request_start();
 
-    $req = &new HTTP_Request($uri, $options);
+    $req = new HTTP_Request($uri, $options);
     if (isset($contenttype)){
        $req->addHeader('Content-Type', $contenttype);
     }
@@ -271,7 +271,7 @@ global $serendipity;
     $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'GET');
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_detect');
     serendipity_request_start();
-    $req = &new HTTP_Request($parsed_loc, $options);
+    $req = new HTTP_Request($parsed_loc, $options);
     $res = $req->sendRequest();
 
     if (PEAR::isError($res)) {
@@ -503,7 +503,7 @@ function fetchPingbackData( &$comment) {
     if (function_exists('serendipity_request_start')) serendipity_request_start();
     
     // Request the page
-    $req = &new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
+    $req = new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
 
     // code 200: OK, code 30x: REDIRECTION
     $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)

@@ -78,7 +78,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
 			                                         'default'   => $tokens['Token']));
 
 			// Prepare blog list request
-			$req = &new HTTP_Request('http://www.blogger.com/feeds/default/blogs');
+			$req = new HTTP_Request('http://www.blogger.com/feeds/default/blogs');
 			$req->addHeader('GData-Version', 2);
 			$req->addHeader('Authorization', 'AuthSub token="'. $tokens['Token'] .'"');
 			
@@ -140,7 +140,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         $this->getTransTable();
         		
 		// Prepare export request
-		$req = &new HTTP_Request('http://www.blogger.com/feeds/'. $this->data['bId'] .'/archive');
+		$req = new HTTP_Request('http://www.blogger.com/feeds/'. $this->data['bId'] .'/archive');
 		$req->addHeader('GData-Version', 2);
 		$req->addHeader('Authorization', 'AuthSub token="'. $this->data['bAuthToken'] .'"');
 				

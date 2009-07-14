@@ -48,7 +48,7 @@ class s9y_remoterss_XMLTree {
     function GetXMLTree($file) {
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         serendipity_request_start();
-        $req = &new HTTP_Request($file);
+        $req = new HTTP_Request($file);
 
         if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
             $data = file_get_contents($file);
@@ -424,7 +424,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         return true;
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         serendipity_request_start();
-        $req = &new HTTP_Request($uri);
+        $req = new HTTP_Request($uri);
 
         if (PEAR::isError($req->sendRequest()) || !preg_match('@^[23]..@', $req->getResponseCode())) {
             serendipity_request_end();
@@ -494,7 +494,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                     // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
                     @touch($feedcache);
                     require_once S9Y_PEAR_PATH . 'Onyx/RSS.php';
-                    $c = &new Onyx_RSS($charset);
+                    $c = new Onyx_RSS($charset);
                     $this->debug('Running Onyx Parser');
                     $c->parse($rssuri);
                     $this->encoding = $c->rss['encoding'];
