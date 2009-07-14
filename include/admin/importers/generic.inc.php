@@ -138,7 +138,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         $uri = $this->data['url'];
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         serendipity_request_start();
-        $req = &new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
+        $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
         $res = $req->sendRequest();
         
         if (PEAR::isError($res) || $req->getResponseCode() != '200') {
@@ -320,7 +320,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
             return $this->import_wpxrss();
         }
 
-        $c = &new Onyx_RSS($this->data['charset']);
+        $c = new Onyx_RSS($this->data['charset']);
         $c->parse($this->data['url']);
         $this->data['encoding'] = $c->rss['encoding'];
 

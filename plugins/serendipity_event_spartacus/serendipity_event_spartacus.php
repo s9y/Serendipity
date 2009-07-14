@@ -397,7 +397,7 @@ class serendipity_event_spartacus extends serendipity_event
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'spartacus');
             serendipity_request_start();
 
-            $req = &new HTTP_Request($url, $options);
+            $req = new HTTP_Request($url, $options);
 
             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                 $resolved_url = $url . ' (IP ' . $url_ip . ')';
@@ -441,7 +441,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $health_options = $options;
                 serendipity_plugin_api::hook_event('backend_http_request', $health_options, 'spartacus_health');
-                $health_req = &new HTTP_Request($health_url, $health_options);
+                $health_req = new HTTP_Request($health_url, $health_options);
                 $health_result = $health_req->sendRequest();
                 if (PEAR::isError($health_result)) {
                     $fp = @fsockopen('www.google.com', 80, $errno, $errstr);

@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Upgrade to Smarty 2.6.26
+
     * Removed inline styles of the s9y media insertion, they will now
       properly utilize CSS classes (defined in the new file 
       style_fallback.css). Also added support for entering "ALT/TITLE"

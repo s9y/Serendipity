@@ -243,7 +243,7 @@ switch ($serendipity['GET']['adminAction']) {
         $options = array();
         serendipity_plugin_api::hook_event('backend_http_request', $options, 'image');
         serendipity_request_start();
-        $req = &new HTTP_Request($serendipity['POST']['imageurl'], $options);
+        $req = new HTTP_Request($serendipity['POST']['imageurl'], $options);
         // Try to get the URL
 
         if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {

@@ -533,7 +533,7 @@ var $filter_defaults;
                 } else {
                     $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
                 }
-                $req    = &new HTTP_Request(
+                $req    = new HTTP_Request(
                     'http://' . $server . '/1.1/verify-key',
                      $opt
                 );
@@ -558,7 +558,7 @@ var $filter_defaults;
                     break;
                 }
 
-                $req    = &new HTTP_Request(
+                $req    = new HTTP_Request(
                     'http://' . $api_key . '.' . $server . '/1.1/comment-check',
                     $opt
                 );
@@ -602,7 +602,7 @@ var $filter_defaults;
                 } else {
                     $data = '';
 
-                    $req    = &new HTTP_Request('http://spam.blogg.de/blacklist.txt');
+                    $req    = new HTTP_Request('http://spam.blogg.de/blacklist.txt');
 
                     if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                         if (file_exists($target) && filesize($target) > 0) {
@@ -978,7 +978,7 @@ var $filter_defaults;
                             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
 
                             if (function_exists('serendipity_request_start')) serendipity_request_start();
-                            $req     = &new HTTP_Request($addData['url'], array('allowRedirects' => true, 'maxRedirects' => 5, 'readTimeout' => array(5,0)));
+                            $req     = new HTTP_Request($addData['url'], array('allowRedirects' => true, 'maxRedirects' => 5, 'readTimeout' => array(5,0)));
                             $is_valid = false;
                             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                                 $is_valid = false;

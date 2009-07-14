@@ -130,7 +130,7 @@ class ONYX_RSS
          
          require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
          serendipity_request_start();
-         $req = &new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
+         $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
          $res = $req->sendRequest();
         
          if (PEAR::isError($res) || $req->getResponseCode() != '200')
@@ -349,7 +349,7 @@ class ONYX_RSS
       {
          require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
          serendipity_request_start();
-         $req = &new HTTP_Request($uri);
+         $req = new HTTP_Request($uri);
 
          if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
             serendipity_request_end();
