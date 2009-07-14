@@ -58,6 +58,7 @@ function IEWrap(txtarea, lft, rgt) {
 }
 
 function wrapSelection(txtarea, lft, rgt) {
+    scrollPos = false;
     if (txtarea.scrollTop) {
         scrollPos = txtarea.scrollTop;
     }
