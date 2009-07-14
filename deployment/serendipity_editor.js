@@ -280,6 +280,8 @@ function serendipity_imageSelector_done(textarea)
     var img = '';
     var src = '';
     var alt = '';
+    var title = '';
+
     var f = document.forms['serendipity[selForm]'].elements;
 
     if (f['serendipity[linkThumbnail]'] && f['serendipity[linkThumbnail]'][0].checked == true) {
@@ -318,8 +320,9 @@ function serendipity_imageSelector_done(textarea)
         }
     }
 
-    alt = f['serendipity[alt]'].value;
-
+    alt = f['serendipity[alt]'].value.replace(/"/g, "&quot;");
+    title = f['serendipity[title]'].value.replace(/"/g, "&quot;");
+    
     styled = false; // Templates now do this.
 
     imgID = 0;
@@ -333,12 +336,12 @@ function serendipity_imageSelector_done(textarea)
 
     floating = 'center';
     if (f['serendipity[align]'][0].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
     } else if (f['serendipity[align]'][1].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
         floating = 'left';
     } else if (f['serendipity[align]'][2].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" alt=\"" + alt + "\" />";
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
         floating = 'right';
     }
 
@@ -368,7 +371,7 @@ function serendipity_imageSelector_done(textarea)
             ilink   = baseURL + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
         }
 
-        insert = prepend + "<a class='serendipity_image_link' href='" + ilink + "'" + itarget + ">" + img + "</a>";
+        insert = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
     } else {
         insert = img;
     }

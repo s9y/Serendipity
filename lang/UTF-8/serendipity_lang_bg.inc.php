@@ -940,5 +940,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Коментарът очаква одобрение от потребителя');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
 @define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
-@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+@define('MEDIA_PROPERTY_ALT', 'Depiction (summary for ALT-Attribute)');
+
+@define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
 

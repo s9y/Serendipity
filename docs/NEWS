@@ -5,9 +5,9 @@ Version 1.5 ()
 
     * Removed inline styles of the s9y media insertion, they will now
       properly utilize CSS classes (defined in the new file 
-      style_fallback.css). Also added support for entering "ALT"
+      style_fallback.css). Also added support for entering "ALT/TITLE"
       attributes to an <img> tag, can be used as a media property if
-      you add "ALT" to the list of "Media properties" in the
+      you add "ALT" and "TITLE" to the list of "Media properties" in the
       main configuration. (garvinhicking)
 
     * Filter entries only by authors that have written at least

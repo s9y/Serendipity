@@ -137,3 +137,5 @@ foreach($const['missing'] AS $file => $constants) {
 @define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
 @define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
 
+@define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
+
