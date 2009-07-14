@@ -53,8 +53,8 @@
 .serendipity_imageComment_center,
 .serendipity_imageComment_left,
 .serendipity_imageComment_right {
-    border: 1px solid #DDDDDD;
-    background-color: #EFEFEF;
+    border: 1px solid #ddd;
+    background-color: #efefef;
     margin: 3px;
     padding: 3px;
     text-align: center;
@@ -80,7 +80,7 @@
 }
 
 .serendipity_imageComment_txt {
-    border-top: 1px solid #DDDDDD;
+    border-top: 1px solid #ddd;
     margin: 0px;
     padding: 3px;
     clear: both;
