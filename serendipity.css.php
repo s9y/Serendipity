@@ -67,7 +67,13 @@ if (IS_installed === false) {
 }
 
 
+// First all of our fallback classes, so they can be overridden by the usual template.
 $out = serendipity_printStylesheet(
+         serendipity_getTemplateFile('style_fallback.css', 'serendipityPath'),
+         serendipity_getTemplateFile('style_fallback.css', '')
+);
+
+$out .= serendipity_printStylesheet(
          serendipity_getTemplateFile($css_file, 'serendipityPath'),
          serendipity_getTemplateFile($css_file, '')
 );

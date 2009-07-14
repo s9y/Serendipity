@@ -956,3 +956,6 @@ $i18n_filename_to = array (
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2',		'Pokud nastavíte tuto volbu na "Vynutit", mùžete pøesmìrovat RSS kanál na jakoukoliv webovou službu, nejen na FeedBurner. Podívejte se níže na volbu "Feedburner ID" pro zadání absolutní adresy.');
 @define('COMMENTS_FILTER_NEED_CONFIRM',		'Èeká na potvrzení uživatelem');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
+@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+

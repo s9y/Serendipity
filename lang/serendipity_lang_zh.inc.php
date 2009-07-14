@@ -947,3 +947,6 @@
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Pending user confirmation');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
+@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+

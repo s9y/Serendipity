@@ -251,6 +251,12 @@
                     <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5" cols="40">{$media.file.props.base_property.COMMENT1|@escape}</textarea>
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagecomment' eventData=$media.file}
                     <br />
+
+                    <b>{$CONST.MEDIA_ALT}:</b>
+                    <br />
+                    <input size="30" class="input_textbox" type="text" id="serendipity_alt" name="serendipity[alt]" value="{$media.file.props.base_property.ALT|@escape}" /></textarea>
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_alt' eventData=$media.file}
+                    <br />
                     {/if}
 
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}

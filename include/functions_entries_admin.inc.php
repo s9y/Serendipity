@@ -583,6 +583,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                    (defined('LANG_DIRECTION') ? LANG_DIRECTION : 'ltr')
                  ),
 
+                 file_get_contents(serendipity_getTemplateFile('style_fallback.css', 'serendipityPath')) . 
                  file_get_contents(serendipity_getTemplateFile('htmlarea.css', 'serendipityPath'))
         );
 ?>

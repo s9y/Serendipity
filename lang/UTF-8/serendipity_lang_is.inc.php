@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_is.inc.php 2463 2009-02-11 12:35:44Z garvinhicking $
+<?php # $Id: serendipity_lang_is.inc.php 2544 2009-07-10 13:50:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Örn Arnarson <orn@arnarson.net>
@@ -947,3 +947,6 @@
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Pending user confirmation');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
+@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+

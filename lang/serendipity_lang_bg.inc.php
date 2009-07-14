@@ -939,3 +939,6 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'Ако установите тази опция на "Force", ще можете да пренасочвате RSS емисиите към всеки webservice, не само към FeedBurner. Вижте опцията "Feedburner ID" по-долу за да въведете абсолютен URL)');
 @define('COMMENTS_FILTER_NEED_CONFIRM', 'Коментарът очаква одобрение от потребителя');
 @define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
+@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
+@define('MEDIA_PROPERTY_COMMENT1', 'Depiction (summary for ALT-Attribute)');
+

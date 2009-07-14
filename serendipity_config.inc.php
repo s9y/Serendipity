@@ -90,7 +90,7 @@ if (!isset($serendipity['RSSfetchLimit'])) {
 }
 
 if (!isset($serendipity['mediaProperties'])) {
-    $serendipity['mediaProperties'] = 'DPI;COPYRIGHT;TITLE;COMMENT1:MULTI;COMMENT2:MULTI';
+    $serendipity['mediaProperties'] = 'DPI;COPYRIGHT;TITLE;COMMENT1:MULTI;COMMENT2:MULTI;ALT';
 }
 
 if (!isset($serendipity['use_PEAR'])) {
