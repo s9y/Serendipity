@@ -420,6 +420,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $select   = array();
         $per_row  = null;
         $text_rows = null;
+        $input_type = null;
 
         $is_multi_select = false;
         $ctype    = $cbag->get('type');
@@ -549,6 +550,12 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 break;
 
             case 'string':
+                if (empty($input_type)) {
+                    $input_type = $cbag->get('input_type');
+                    if (empty($input_type)) {
+                        $input_type = "text";
+                    }
+                }
 ?>
         <tr>
             <td style="border-bottom: 1px solid #000000">
@@ -557,7 +564,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             </td>
             <td style="border-bottom: 1px solid #000000" width="250">
                 <div>
-                    <input class="direction_<?php echo $lang_direction; ?> input_textbox" type="text" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $hvalue; ?>" size="30" />
+                    <input class="direction_<?php echo $lang_direction; ?> input_textbox" type="<?php echo $input_type; ?>" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $hvalue; ?>" size="30" />
                 </div>
             </td>
         </tr>
