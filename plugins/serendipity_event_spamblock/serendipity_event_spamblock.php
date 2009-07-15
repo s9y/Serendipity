@@ -476,7 +476,8 @@ var $filter_defaults;
 
         switch($where) {
             case 'akismet.com':
-                $this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
+                // DEBUG
+                //$this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
                 $ret  = array();
         		$data = array(
         		  'blog'                    => $serendipity['baseURL'],
@@ -484,7 +485,7 @@ var $filter_defaults;
         		  'referrer'                => $_SERVER['HTTP_REFERER'],
         		  'user_ip'                 => $_SERVER['REMOTE_ADDR'] != getenv('SERVER_ADDR') ? $_SERVER['REMOTE_ADDR'] : getenv('HTTP_X_FORWARDED_FOR'),
         		  'permalink'               => serendipity_archiveURL($eventData['id'], $eventData['title'], 'serendipityHTTPPath', true, array('timestamp' => $eventData['timestamp'])),
-        		  'comment_type'            => ($addData['type'] == 'NORMAL' ? 'comment' : 'trackback'),
+        		  'comment_type'            => ($addData['type'] == 'NORMAL' ? 'comment' : strtolower($addData['type'])), // second: pingback or trackback.
         		  'comment_author'          => $addData['name'],
         		  'comment_author_email'    => $addData['email'],
         		  'comment_author_url'      => $addData['url'],
@@ -531,7 +532,8 @@ var $filter_defaults;
                     $ret['message'] = 'No server for Akismet request';
                     break;
                 } else {
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
+                    // DEBUG
+                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
                 }
                 $req    = new HTTP_Request(
                     'http://' . $server . '/1.1/verify-key',
@@ -580,11 +582,13 @@ var $filter_defaults;
                 if (preg_match('@true@i', $reqdata)) {
                     $ret['is_spam'] = true;
                     $ret['message'] = $reqdata;
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
+                    // DEBUG
+                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
                 } elseif (preg_match('@false@i', $reqdata)) {
                     $ret['is_spam'] = false;
                     $ret['message'] = $reqdata;
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
+                    // DEBUG
+                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
                 } else {
                     $ret['is_spam'] = false;
                     $ret['message'] = 'Akismet API failure';
