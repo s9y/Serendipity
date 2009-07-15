@@ -21,7 +21,8 @@ Version 1.5 ()
     * Warn about non-writable "plugins" directory in installation
     
     * Added new optional parameter for plugin config type "text": rows.
-      (brockhaus)
+      Added new optional parameter "input_type"="password" for plugin
+      string type configuration (brockhaus)
 
     * pingbacks were not counted as entry trackbacks although added to
       entries. (brockhaus)
