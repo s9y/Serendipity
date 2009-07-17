@@ -178,7 +178,7 @@ echo '<h3>' . SELECT_TEMPLATE . '</h3>';
 ?>
             <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]=<?php echo $theme . $info['customURI']; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/install_now' . $info['customIcon'] . '.png') ?>" alt="<?php echo SET_AS_TEMPLATE ?>" title="<?php echo SET_AS_TEMPLATE ?>" border="0" /></a>
 <?php   } else { ?>
-        <span class="serendipityTemplateSelectUnmetRequirements">style="color: #cccccc"><?php echo sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements)); ?></span>
+        <span class="serendipityTemplateSelectUnmetRequirements" style="color: #cccccc"><?php echo sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements)); ?></span>
 <?php
         }
     } ?>
