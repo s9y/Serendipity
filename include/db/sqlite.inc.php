@@ -212,7 +212,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 function &serendipity_db_query($sql, $single = false, $result_type = "both", $reportErr = true, $assocKey = false, $assocVal = false, $expectError = false)
 {
     global $serendipity;
-    static $type_map = array(
+    $type_map = array(
                          'assoc' => SQLITE_ASSOC,
                          'num'   => SQLITE_NUM,
                          'both'  => SQLITE_BOTH,

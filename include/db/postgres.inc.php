@@ -193,7 +193,7 @@ function serendipity_db_insert_id($table = '', $id = '') {
  */
 function &serendipity_db_query($sql, $single = false, $result_type = "both", $reportErr = false, $assocKey = false, $assocVal = false, $expectError = false) {
     global $serendipity;
-    static $type_map = array(
+    $type_map = array(
                          'assoc' => PGSQL_ASSOC,
                          'num'   => PGSQL_NUM,
                          'both'  => PGSQL_BOTH,

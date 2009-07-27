@@ -60,7 +60,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
  */
 function &serendipity_db_query($sql, $single = false, $result_type = "both", $reportErr = false, $assocKey = false, $assocVal = false, $expectError = false) {
     global $serendipity;
-    static $type_map = array(
+    $type_map = array(
                          'assoc' => MYSQL_ASSOC,
                          'num'   => MYSQL_NUM,
                          'both'  => MYSQL_BOTH,

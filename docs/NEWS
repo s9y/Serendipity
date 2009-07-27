@@ -9,6 +9,9 @@ Version 1.5 ()
       you can overwrite the plugins and buttons of all Xinha instances.
       See the mentioned default file for usage. (garvinhicking)
 
+    * Removed "static" db layer typelist to prevent accidental over-
+      writes of referenced return values (garvinhicking)
+
     * Upgrade to Smarty 2.6.26
 
     * Removed inline styles of the s9y media insertion, they will now
