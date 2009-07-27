@@ -3,6 +3,12 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added ability to specify a custom Xinha config. Either supply
+      a 'my_custom.js' file inside the template directory, or if
+      omitted, the default htmlarea/my_custom.js is used. With this
+      you can overwrite the plugins and buttons of all Xinha instances.
+      See the mentioned default file for usage. (garvinhicking)
+
     * Upgrade to Smarty 2.6.26
 
     * Removed inline styles of the s9y media insertion, they will now
