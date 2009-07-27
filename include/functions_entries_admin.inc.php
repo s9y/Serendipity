@@ -554,6 +554,11 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             $xinha = false;
         }
 
+        $xinha_custom = serendipity_getTemplateFile('my_custom.js', 'serendipityHTTPPath');
+        if (empty($xinha_custom)) {
+            $xinha_custom = 'htmlarea/my_custom.js';
+        }
+        
         if (!$init) {
 ?>
     <script type="text/javascript">
@@ -562,8 +567,12 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         _editor_skin = "silva";
         var editorref = '';
     </script>
-    <?php if ($xinha) { ?><script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
-    <?php } else { ?><script type="text/javascript" src="htmlarea/htmlarea.js"></script>
+    <?php if ($xinha) { ?>
+    <script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
+    <!-- This file can contain user customizations -->
+    <script type="text/javascript" src="<?= $xinha_custom; ?>"></script>
+    <?php } else { ?>
+    <script type="text/javascript" src="htmlarea/htmlarea.js"></script>
     <?php } ?>
 <?php
         }
@@ -732,6 +741,11 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                   } ?>
               
         ];
+        
+        if (typeof('s9y_xinha') != 'undefined') {
+            s9y_xinha(editor<?php echo $jsname; ?>);
+        }
+
         // editor<?php echo $jsname; ?>.registerPlugin(SpellChecker);  // [SPELLCHECK]
         editor<?php echo $jsname; ?>.generate();
         editor<?php echo $jsname; ?>._textArea.className = 'serendipity_entry';
