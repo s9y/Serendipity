@@ -11,16 +11,34 @@
 // to insert/uncomment, what you want it to do.
 
 function s9y_xinha(xinha_editor) {
-    
+
 /* EXAMPLE USAGE ***
 
-    xinha_editor.registerPlugin('CharacterMap');
-    xinha_editor.registerPlugin('ContextMenu');
-    
+    var xinha_plugins = [ 'CharacterMap', 'ContextMenu', 'HorizontalRule' ];
+
+    // This is a loader, it should stay as is. Do not remove.
+    Xinha.loadPlugins(
+        xinha_plugins, 
+        function() {  
+            for (i in xinha_plugins) {
+                if (typeof(xinha_plugins[i]) == 'string') {
+                    xinha_editor.registerPlugin(xinha_plugins[i]);
+                }
+            }
+        } 
+    );
+
+
+    // Here you can start to customize again.
     xinha_editor.config.pageStyleSheets = [ _editor_url + 'custom.css' ];
     xinha_editor.config.fontsize = { 
         '1 (8pt)' : '1',
         '2 (10pt)' : '1',
+        "3 (12 pt)": "3",
+        "4 (14 pt)": "4",
+        "5 (18 pt)": "5",
+        "6 (24 pt)": "6",
+        "7 (36 pt)": "7"
     }
     
     // s9y image selection is called: 'image_selector'
