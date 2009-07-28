@@ -691,7 +691,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                         break;
                     case S9Y_WYSIWYG_TOOLBAR_MEDIA:
                     case S9Y_WYSIWYG_TOOLBAR_WEB:
-                        $toolbar[S9Y_WYSIWYG_WEB][] = $button;
+                        $toolbar[S9Y_WYSIWYG_TOOLBAR_WEB][] = $button;
                         break;
                     default:
                         $toolbar['other'][] = $button;
