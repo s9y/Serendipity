@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added new event hook frontend_sidebar_plugins to iterate through
+      sidebar plugins and modify their output. $eventData is the array
+      of their data. (garvinhicking)
+
     * Added ability to specify a custom Xinha config. Either supply
       a 'my_custom.js' file inside the template directory, or if
       omitted, the default htmlarea/my_custom.js is used. With this

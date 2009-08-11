@@ -870,6 +870,8 @@ class serendipity_plugin_api
             }
         }
 
+        serendipity_plugin_api::hook_event('frontend_sidebar_plugins', $pluginData, $addData);
+
         $serendipity['smarty']->assign_by_ref('plugindata', $pluginData);
         $serendipity['smarty']->assign('pluginside', ucfirst($side));
 
