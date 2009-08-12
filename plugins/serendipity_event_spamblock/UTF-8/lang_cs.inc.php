@@ -1,4 +1,4 @@
-<?php # lang_cs.inc.php 1658.1 2009-02-23 17:31:15 VladaAjgl $
+<?php # lang_cs.inc.php 1658.1 2009-07-06 16:12:57 VladaAjgl $
 
 /**
  *  @version 1658.1
@@ -7,7 +7,7 @@
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/16
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
- *  @revisionDate 2009/02/23
+ *  @revisionDate 2009/07/06
  */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE',		'Spam Protector');
@@ -34,10 +34,10 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL_DESC',		'Kryptogramy (spamové obrázky) mohou být vynucovány v závislosti na stáří článku. Zadejte počet dní, po kterých bude nutné zadat správný text z kryptogramu pro vložení komentáře. Počet nastavený na 0 znamená, že kryptogramy budou vyžadovány ihned po vydání.');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION',		'Vynutit moderování (schvalování) komentářů po kolika dnech');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC',		'Můžeš automaticky nastavit všechny komentáře jako moderované. Po uplynutí zde zadané doby od vydání článku bude třeba potvrzovat (auto-moderovat) komentáře. 0 znamené žádné potvrzování.');
-@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE',		'Kolik odezev povolit předtím, než bude třeba moderovat (schválit) komentář.');
-@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE_DESC',		'Když komentář zaznamená tento počet odezev, bude třeba jej moderovat. 0 znamená žádné kontroly množství odezev.');
-@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT',		'Kolik odezev povolit předtím, než bude komentář zakázán');
-@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT_DESC',		'Když komentář zaznamená tento počet odezev, bude zakázán. 0 znamená žádné kontroly množství odezev.');
+@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE',		'Kolik odkazů v jednom komentáři povolit, než bude automaticky nastaven ke schválení');
+@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE_DESC',		'Když se v komentáři objeví více než zde zadaný počet odkazů &lt;a href="..."&gt;, bude automaticky nastaven ke schávlení. 0 znamená žádné kontroly množství odkazů.');
+@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT',		'Kolik odkazů v jednom komentáři povolit, než bude zamítnut');
+@define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT_DESC',		'Když se v komentáři objeví více než zde zadaný počet odkazů &lt;a href="..."&gt;, bude zamítnut. 0 znamená žádné kontroly množství odkazů.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_NOTICE_MODERATION',		'Váš komentář vyžaduje souhlas provozovatele blogu. Neposílejte jej znovu, vyčkejte na jeho potvrzení.');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHA_COLOR',		'Pozadí kryptogramů');
@@ -58,7 +58,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE',		'E-mailové adresy nebudou zobrazovány, budou použity pouze pro oznámení elektronickou poštou.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE',		'Vyberte metodu logování');
-@define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DESC',		'Logování zamítnutých komentářů může být prováděno bu´d v databázi nebo v textovém souboru');
+@define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DESC',		'Logování zamítnutých komentářů může být prováděno buď v databázi nebo v textovém souboru');
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_FILE',		'Soubor (viz. volba "logfile" níže)');
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_DB',		'Databáze');
 @define('PLUGIN_EVENT_SPAMBLOCK_LOGTYPE_NONE',		'Nelogovat');
@@ -100,7 +100,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE',		'Odmítne komentáře, které v těle obsahují pouze nadpis.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL',		'Kontrolovat URL odezev');
-@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC',		'Povolit pouze odezvy, jejichž URL obsahuje adresu vašeho blogu');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC',		'Povolit pouze odezvy, kde stránka odezvy opravdu obsahuje odkaz na Váš blog - kontroluje stránku odezvy.');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL',		'Trackback URL invalid.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_SCRAMBLE',		'Pomíchané kryptogramy');
@@ -143,3 +143,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET',		'původní Akismet');
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_TPAS_ANON',		'TypePad Antispam (anonymní)');
 @define('PLUGIN_EVENT_SPAMBLOCK_SERVER_AKISMET_ANON',		'původní Akismet (anonymní)');
+
+// Next lines were translated on 2009/07/06
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE',		'Vyloučit URL adresy z ověření IP adresy');
+@define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC',		'URL adresy, které se nemají ověřovat na IP adresu.');

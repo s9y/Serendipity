@@ -1,9 +1,11 @@
-<?php # $Id: lang_cz.inc.php 1381 2007-12-20 01:02:00 VladaAjgl $
+<?php # lang_cz.inc.php 1381.0 2009-06-14 10:53:02 VladaAjgl $
 
 /**
- *  @version $Revision: 1381 $
+ *  @version 1381.0
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/06/14
  */
 
 @define('PLUGIN_SHOUTBOX_NAME',                 'Výkøièník');
@@ -18,3 +20,10 @@
 @define('PLUGIN_SHOUTBOX_MAXENTRIES_BLAHBLAH',  'Kolik posledních výkøikù se má zobrazovat? (Pøednastaveno: 15)');
 
 ?>
+
+
+// Next lines were translated on 2009/06/14
+@define('GENERAL_PLUGIN_BOX_COLS',              'Sloupce shoutboxu');
+@define('GENERAL_PLUGIN_BOX_COLS_BLAHBLAH',     'Poèet sloupcù pole pro zadávání výkøikù');
+@define('GENERAL_PLUGIN_BOX_ROWS',              'Poèet øádek shoutboxu');
+@define('GENERAL_PLUGIN_BOX_ROWS_BLAHBLAH',     'Poèet øádek pole pro zadávání výkøikù');

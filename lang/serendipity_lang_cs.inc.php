@@ -1,12 +1,14 @@
-<?php # lang_cs.inc.php 1.2 2009-02-23 16:52:03 VladaAjgl $
+<?php # lang_cs.inc.php 1.3 2009-07-14 19:49:06 VladaAjgl $
 
 /**
- *  @version 1.2
+ *  @version 1.3
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/23
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/07/14
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','¾','ò','ó','à','ø','œ','š','','ú','ù','ı','Ÿ','',
@@ -955,9 +957,12 @@ $i18n_filename_to = array (
 
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2',		'Pokud nastavíte tuto volbu na "Vynutit", mùete pøesmìrovat RSS kanál na jakoukoliv webovou slubu, nejen na FeedBurner. Podívejte se níe na volbu "Feedburner ID" pro zadání absolutní adresy.');
 @define('COMMENTS_FILTER_NEED_CONFIRM',		'Èeká na potvrzení uivatelem');
-@define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
-@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
-@define('MEDIA_PROPERTY_ALT', 'Depiction (summary for ALT-Attribute)');
+@define('NOT_WRITABLE_SPARTACUS', ' (Vyadováno pouze pokud chcete v budoucnu vyuívat plugin Spartacus pro stahování novıch pøídavnıch modulù.)');
+@define('MEDIA_ALT', 'Atribut ALT (popis nebo krátkı popis)');
+@define('MEDIA_PROPERTY_ALT', 'Popis (shrnutí pro atribut ALT)');
 
-@define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
+@define('MEDIA_TITLE', 'Atribut TITLE (zobrazuje se pøi najetí myší na obrázek)');
 
+// Next lines were translated on 2009/07/14
+@define('INSTALL_OFFSET_ON_SERVER_TIME',		'Posun èasové zóny vùèi serveru?');
+@define('INSTALL_OFFSET_ON_SERVER_TIME_DESC',		'Posun èasu pøíspìvkù vùèi èasu na serveru. Vyberte "ano" pro zadání relativního èasového posunu vùèi hodinám serveru. Nikoliv posun vùèi GMT (Greenwich mean time).');
