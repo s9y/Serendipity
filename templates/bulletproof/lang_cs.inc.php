@@ -1,11 +1,13 @@
-<?php # $Id: lang_cs.inc.php 1.0 2008/01/20 01:53:00 VladaAjgl $
+<?php # lang_cs.inc.php 1.2 2009-06-30 20:21:39 VladaAjgl $
 
 /**
- *  @version $Revision: 1.1 $
+ *  @version 1.2
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2007/12/07 
  *  Revision on 2008/02/28 
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/06/30
  */
  
  // Colorsets
@@ -82,3 +84,6 @@
 @define('NAVLINK_AMOUNT',               'Zadejte poèet odkazù navigaèní lišty (ihned po zadání této volby kliknìte na "Uloži" a obnovte stránku)');
 @define('NAV_LINK_TEXT',                'Test odkazu');
 @define('NAV_LINK_URL',                 'URL adresa odkazu');
+
+// Next lines were translated on 2009/06/30
+@define('SHOW_PAGINATION',              'Zobrazovat èísla stránek (stránkování)');

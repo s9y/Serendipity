@@ -1,9 +1,11 @@
-<?php # $Id: lang_cz.inc.php 1381 2007-12-19 23:55:00 VladaAjgl $
+<?php # lang_cz.inc.php 1381.0 2009-05-06 20:15:24 VladaAjgl $
 
 /**
- *  @version $Revision: 1381 $
+ *  @version 1381.0
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/05/06
  */
 
 @define('PLUGIN_EVENT_XHTMLCLEANUP_NAME', 'Oprava nejčastějších XHTML chyb');
@@ -14,3 +16,8 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Pokud je zapnuto, HTML entity způsobené převedením znaků v kódování Unicode UTF-8 budou správně převedeny nazpět na znaky UTF-8 a nebudou zakódovány do podivných znaků v zobrazení stránky.');
 
 ?>
+
+
+// Next lines were translated on 2009/05/06
+@define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE', 'Vyčistit kód videí z youtube?');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC', 'Pokud je zapnuto, pak jsou invalidní XHTML tagy generované youtube vyřezány z embed části. Prohlíčeč přes toto vyřezání zobrazí video správně.');

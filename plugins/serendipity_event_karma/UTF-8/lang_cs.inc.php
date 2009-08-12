@@ -1,4 +1,4 @@
-<?php # lang_cs.inc.php 1475.2 2009-02-23 17:30:09 VladaAjgl $
+<?php # lang_cs.inc.php 1475.2 2009-03-08 17:19:00 VladaAjgl $
 
 /**
  *  @version 1475.2
@@ -7,10 +7,10 @@
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/15
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
- *  @revisionDate 2009/02/23
+ *  @revisionDate 2009/03/08
  */
 
-@define('PLUGIN_KARMA_NAME',		' Karma');
+@define('PLUGIN_KARMA_NAME',		'Karma');
 @define('PLUGIN_KARMA_BLAHBLAH',		'Čtenáři hodnotí kvalitu Vašich příspěvků');
 @define('PLUGIN_KARMA_VOTETEXT',		'Karma tohoto článku: ');
 @define('PLUGIN_KARMA_VOTETEXT_NAME',		'Zpráva požadavku o hodnocení');
@@ -111,3 +111,12 @@
 @define('PLUGIN_KARMA_TAB_OPTIONS',		'Volby');
 @define('PLUGIN_KARMA_TAB_APPEARANCE',		'Vzhled');
 @define('PLUGIN_KARMA_TAB_TEXT',		'Text');
+@define('PLUGIN_KARMA_DISPLAY_LOG',		'Správa Karmy');
+@define('PLUGIN_KARMA_REMOVED_POINTS',		'%s bodů odstraněno z příspěvku %s');
+@define('PLUGIN_KARMA_APPROVED_POINTS',		'%s bodů pro příspěvek %s potvrzeno');
+@define('PLUGIN_KARMA_POINTS_ERROR',		'Chyba při aktualizaci bodů pro příspěvek %s!');
+@define('PLUGIN_KARMA_REMOVE_ERROR',		'Chyba při odstraňování hlasu pro příspěvek %s! (Počet bodů byl nicméně aktualizován.)');
+@define('PLUGIN_KARMA_UPDATE_ERROR',		'Zatím žádné hlasy pro příspěvek %s!');
+@define('PLUGIN_KARMA_INVALID_INPUT',		'Nesprávné zadání!');
+@define('PLUGIN_KARMA_DELETE_VOTES',		'Vymazat vybrané hlasy');
+@define('PLUGIN_KARMA_APPROVE_VOTES',		'Potvrdit vybrané hlasy');

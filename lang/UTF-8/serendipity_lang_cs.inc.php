@@ -1,12 +1,14 @@
-<?php # lang_cs.inc.php 1.2 2009-02-23 16:52:03 VladaAjgl $
+<?php # lang_cs.inc.php 1.3 2009-07-14 19:49:06 VladaAjgl $
 
 /**
- *  @version 1.2
+ *  @version 1.3
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/23
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/07/14
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -19,11 +21,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET', 'utf8');
+@define('SQL_CHARSET',		'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'cs-utf');
+@define('WYSIWYG_LANG',		'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -955,9 +957,12 @@ $i18n_filename_to = array (
 
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2',		'Pokud nastavíte tuto volbu na "Vynutit", můžete přesměrovat RSS kanál na jakoukoliv webovou službu, nejen na FeedBurner. Podívejte se níže na volbu "Feedburner ID" pro zadání absolutní adresy.');
 @define('COMMENTS_FILTER_NEED_CONFIRM',		'Čeká na potvrzení uživatelem');
-@define('NOT_WRITABLE_SPARTACUS', ' (Only required when you plan to use Spartacus plugin for remote plugin download)');
-@define('MEDIA_ALT', 'ALT-Attribute (depiction or short description)');
-@define('MEDIA_PROPERTY_ALT', 'Depiction (summary for ALT-Attribute)');
+@define('NOT_WRITABLE_SPARTACUS', ' (Vyžadováno pouze pokud chcete v budoucnu využívat plugin Spartacus pro stahování nových přídavných modulů.)');
+@define('MEDIA_ALT', 'Atribut ALT (popis nebo krátký popis)');
+@define('MEDIA_PROPERTY_ALT', 'Popis (shrnutí pro atribut ALT)');
 
-@define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
+@define('MEDIA_TITLE', 'Atribut TITLE (zobrazuje se při najetí myší na obrázek)');
 
+// Next lines were translated on 2009/07/14
+@define('INSTALL_OFFSET_ON_SERVER_TIME',		'Posun časové zóny vůči serveru?');
+@define('INSTALL_OFFSET_ON_SERVER_TIME_DESC',		'Posun času příspěvků vůči času na serveru. Vyberte "ano" pro zadání relativního časového posunu vůči hodinám serveru. Nikoliv posun vůči GMT (Greenwich mean time).');
