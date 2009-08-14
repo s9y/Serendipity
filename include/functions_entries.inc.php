@@ -1106,7 +1106,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
             if (is_array($entry['categories'])) {
                 foreach ($entry['categories'] as $k => $v) {
-                    $entry['categories'][$k]['category_link'] =  serendipity_categoryURL($entry['categories'][$k]);
+                    if (!isset($entry['categories'][$k]['category_link'])) {
+                        $entry['categories'][$k]['category_link'] =  serendipity_categoryURL($entry['categories'][$k]);
+                    }
                 }
             }
 
