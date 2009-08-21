@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * PHP 5.3.0 compatibility without E_WARNING triggers (garvinhicking)
+
     * Added 'orderby' parameter to plugin API hooks for the serendipity
       fulltext search function (garvinhicking)
 
