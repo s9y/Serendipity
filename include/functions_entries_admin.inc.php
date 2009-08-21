@@ -30,7 +30,7 @@ if (!defined('S9Y_FRAMEWORK_TRACKBACKS')) {
 function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = array(), $errMsg = "") {
     global $serendipity;
 
-    $serendipity['EditorBrowsers'] = '(IE|Mozilla|Opera)';
+    $serendipity['EditorBrowsers'] = '@(IE|Mozilla|Opera)@i';
 
     $draftD = '';
     $draftP = '';
@@ -155,7 +155,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
             $template_vars['show_wysiwyg'] = true;
         }
 
-        if (eregi($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
+        if (preg_match($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
             $template_vars['wysiwyg_advanced'] = true;
         }
 
@@ -378,7 +378,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                 <td align="right">
 <?php
         /* Since the user has WYSIWYG editor disabled, we want to check if we should use the "better" non-WYSIWYG editor */
-        if (!$serendipity['wysiwyg'] && eregi($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
+        if (!$serendipity['wysiwyg'] && preg_match($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
 ?>
                   <script type="text/javascript" language="JavaScript">
                         document.write('<input type="button" class="serendipityPrettyButton input_button" name="insI" value="I" accesskey="i" style="font-style: italic" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<em>\',\'</em>\')" />');
@@ -448,7 +448,7 @@ if (!$serendipity['wysiwyg']) {
                     <div id="tools_extended" style="display: none">
 <?php
         /* Since the user has WYSIWYG editor disabled, we want to check if we should use the "better" non-WYSIWYG editor */
-        if (eregi($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
+        if (preg_match($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
 ?>
                         <input type="button" class="serendipityPrettyButton input_button" name="insI" value="I" accesskey="i" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<em>','</em>')" />
                         <input type="button" class="serendipityPrettyButton input_button" name="insB" value="B" accesskey="b" style="font-weight: bold" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<strong>','</strong>')" />
