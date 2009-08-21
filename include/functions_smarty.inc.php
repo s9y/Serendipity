@@ -839,7 +839,7 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
  * @param   object  Smarty object
  * @return
  */
-function &serendipity_replaceSmartyVars(&$tpl_source, &$smarty) {
+function &serendipity_replaceSmartyVars($tpl_source, &$smarty) {
     $tpl_source = str_replace('$CONST.', '$smarty.const.', $tpl_source);
     return $tpl_source;
 }
