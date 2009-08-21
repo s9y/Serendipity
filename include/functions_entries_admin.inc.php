@@ -570,7 +570,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     <?php if ($xinha) { ?>
     <script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
     <!-- This file can contain user customizations -->
-    <script type="text/javascript" src="<?= $xinha_custom; ?>"></script>
+    <script type="text/javascript" src="<?php echo $xinha_custom; ?>"></script>
     <?php } else { ?>
     <script type="text/javascript" src="htmlarea/htmlarea.js"></script>
     <?php } ?>
