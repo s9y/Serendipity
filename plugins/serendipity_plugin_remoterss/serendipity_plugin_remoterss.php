@@ -60,7 +60,7 @@ class s9y_remoterss_XMLTree {
 
         // Global replacements
         // by: waldo@wh-e.com - trim space around tags not within
-        $data = eregi_replace('>[[:space:]]+<', '><', $data);
+        $data = preg_replace('@>[[:space:]]+<@', '><', $data);
 
         // Flatten the input opml file to not have nested categories
         $data = preg_replace('@<outline[^>]+[^/]>@imsU', '', $data);
