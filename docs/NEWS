@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added 'orderby' parameter to plugin API hooks for the serendipity
+      fulltext search function (garvinhicking)
+
     * Added new event hook frontend_sidebar_plugins to iterate through
       sidebar plugins and modify their output. $eventData is the array
       of their data. (garvinhicking)

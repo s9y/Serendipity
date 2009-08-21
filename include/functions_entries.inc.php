@@ -787,6 +787,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         }
     }
 
+    $cond['orderby'] = "timestamp DESC";
     $cond['and'] = " AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '');
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'search', 'term' => $term));
     serendipity_ACL_SQL($cond, 'limited');
@@ -823,7 +824,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
                     {$serendipity['fullCountQuery']}
                     {$cond['group']}
                     {$cond['having']}
-                  ORDER BY  timestamp DESC
+                  ORDER BY  {$cond['orderby']}
                     $limit";
 
     $search =& serendipity_db_query($querystring);
