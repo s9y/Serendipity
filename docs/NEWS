@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Allow redirects when fetching remote images (garvinhicking)
+
+    -- beta1 release
+
     * PHP 5.3.0 compatibility without E_WARNING triggers (garvinhicking)
 
     * Added 'orderby' parameter to plugin API hooks for the serendipity

@@ -240,7 +240,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-        $options = array();
+        $options = array('allowRedirects' => true, 'maxRedirects' => 5);
         serendipity_plugin_api::hook_event('backend_http_request', $options, 'image');
         serendipity_request_start();
         $req = new HTTP_Request($serendipity['POST']['imageurl'], $options);
