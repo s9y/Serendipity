@@ -953,3 +953,7 @@
 @define('MEDIA_PROPERTY_ALT', 'Bildinhalt (Zusammenfassung für das ALT-Attribut)');
 @define('MEDIA_TITLE', 'TITLE-Attribut (wird beim Überfahren mit der Maus angezeigt)');
 
+@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+

@@ -750,6 +750,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
 
     $term = serendipity_db_escape_string($term);
     $cond = array();
+    $relevance_enabled = false;
     if ($serendipity['dbType'] == 'postgres' ||
         $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']     = '';
@@ -780,6 +781,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $cond['group']    = 'GROUP BY e.id';
         $cond['distinct'] = '';
         $term             = str_replace('&quot;', '"', $term);
+        $relevance_enabled = true;
         if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
             $cond['find_part'] = "MATCH(title,body,extended) AGAINST('$term' IN BOOLEAN MODE)";
         } else {
@@ -787,7 +789,21 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         }
     }
 
-    $cond['orderby'] = "timestamp DESC";
+    switch($serendipity['searchsort']) {
+        case 'relevance':
+            if ($relevance_enabled) {
+                $cond['searchorderby'] = $cond['find_part'] . " DESC";
+            } else {
+                $cond['searchorderby'] = "timestamp DESC";
+            }
+            break;
+
+        case 'timestamp':
+        default:
+            $cond['searchorderby'] = "timestamp DESC";
+            break;
+    }
+
     $cond['and'] = " AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '');
     serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'search', 'term' => $term));
     serendipity_ACL_SQL($cond, 'limited');
@@ -824,7 +840,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
                     {$serendipity['fullCountQuery']}
                     {$cond['group']}
                     {$cond['having']}
-                  ORDER BY  {$cond['orderby']}
+                  ORDER BY  {$cond['searchorderby']}
                     $limit";
 
     $search =& serendipity_db_query($querystring);

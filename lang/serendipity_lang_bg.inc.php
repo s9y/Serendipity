@@ -944,3 +944,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 @define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
 
+@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+

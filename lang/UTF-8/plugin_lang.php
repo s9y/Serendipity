@@ -139,3 +139,7 @@ foreach($const['missing'] AS $file => $constants) {
 
 @define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
 
+@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+
