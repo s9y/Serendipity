@@ -417,6 +417,13 @@
                                           'default'     => 15,
                                           'permission'  => 'blogConfiguration'),
 
+                                    array('var'         => 'searchsort',
+                                          'title'       => QUICKSEARCH_SORT,
+                                          'description' => '',
+                                          'type'        => 'list',
+                                          'default'     => array('timestamp' => DATE, 'relevance' => QUICKSEARCH_SORT_RELEVANCE),
+                                          'permission'  => 'blogConfiguration'),
+
                                     array('var'         => 'enforce_RFC2616',
                                           'title'       => SYNDICATION_RFC2616,
                                           'description' => SYNDICATION_RFC2616_DESC,

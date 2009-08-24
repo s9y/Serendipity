@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2547 2009-07-14 09:22:06Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2548 2009-07-14 09:40:11Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -952,4 +952,8 @@
 @define('MEDIA_ALT', 'ALT-Attribut (Bildinhalt oder Kurzbeschreibung)');
 @define('MEDIA_PROPERTY_ALT', 'Bildinhalt (Zusammenfassung für das ALT-Attribut)');
 @define('MEDIA_TITLE', 'TITLE-Attribut (wird beim Überfahren mit der Maus angezeigt)');
+
+@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
 

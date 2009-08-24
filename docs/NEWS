@@ -5,6 +5,8 @@ Version 1.5 ()
 
     * Allow redirects when fetching remote images (garvinhicking)
 
+    * Allow to define sort order for search-results (garvinhicking)
+
     -- beta1 release
 
     * PHP 5.3.0 compatibility without E_WARNING triggers (garvinhicking)

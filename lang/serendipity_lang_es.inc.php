@@ -969,3 +969,7 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 
 @define('MEDIA_TITLE', 'TITLE-Attribute (will be displayed on mouse over)');
 
+@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+
