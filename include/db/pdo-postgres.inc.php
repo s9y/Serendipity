@@ -95,7 +95,7 @@ function serendipity_db_limit($start, $offset) {
  * @return  SQL string containing a full LIMIT statement
  */
 function serendipity_db_limit_sql($limitstring) {
-    $limit_split = split(',', $limitstring);
+    $limit_split = explode(',', $limitstring);
     if (count($limit_split) > 1) {
         $limit = ' LIMIT ' . $limit_split[0] . ' OFFSET ' . $limit_split[1];
     } else {

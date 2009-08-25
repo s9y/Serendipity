@@ -388,7 +388,7 @@ function serendipity_db_limit_sql($limitstring) {
        return ' LIMIT ' . $limitstring;
     case "postgresql":
         $limit;
-        $limit_split = split(',', $limitstring);
+        $limit_split = explode(',', $limitstring);
         if (count($limit_split) > 1) {
             $limit = ' LIMIT ' . $limit_split[0] . ' OFFSET ' . $limit_split[1];
         } else {
