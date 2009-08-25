@@ -190,7 +190,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
 
         if (!file_exists($cachef) || filesize($cachef) == 0 || filemtime($cachef) < (time() - $cachetime)) {
             // Create statistics
-            list($year, $month, $day) = split('-', date('Y-m-d'));
+            list($year, $month, $day) = explode('-', date('Y-m-d'));
             $lastmonday = date('Ymd', strtotime('last monday'));
             $nextsunday = date('Ymd', strtotime('next sunday'));
             if (date('w', strtotime('today') ) == "1" ) { // now it is monday

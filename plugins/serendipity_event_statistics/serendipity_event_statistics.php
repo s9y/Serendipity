@@ -571,7 +571,7 @@ class serendipity_event_statistics extends serendipity_event
     function updatestats($action) {
         global $serendipity;
         
-           list($year, $month, $day) = split('-', date('Y-m-d'));    
+           list($year, $month, $day) = explode('-', date('Y-m-d'));    
         $sql = serendipity_db_query("SELECT COUNT(year) AS result FROM {$serendipity['dbPrefix']}visitors_count WHERE year='$year' AND month='$month' AND day='$day'", true);
         
         $sql_hit_update = "UPDATE {$serendipity['dbPrefix']}visitors_count SET hits = hits+1 WHERE year='$year' AND month='$month' AND day='$day'";
@@ -662,7 +662,7 @@ class serendipity_event_statistics extends serendipity_event
     function statistics_getdailystats($day, $amount) {
         global $serendipity;
         
-        list($year, $month) = split('[-]', date("Y-m"));
+        list($year, $month) = explode('-', date("Y-m"));
         if ($day > 0 && $day <32) {
             $sql = "SELECT SUM(visits) AS dailyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE day";
             for ($i=1; $i<32; $i++)    {
@@ -720,7 +720,7 @@ class serendipity_event_statistics extends serendipity_event
         
         // ---------------QUERIES for Viewing statistics ----------------------------------------------
         $day = date('Y-m-d');
-              list($year, $month, $day) = split('-', $day);    
+              list($year, $month, $day) = explode('-', $day);    
               
         $visitors_count_firstday = serendipity_db_query("SELECT day FROM {$serendipity['dbPrefix']}visitors ORDER BY counter_id ASC LIMIT 1", true);
         $visitors_count_today = serendipity_db_query("SELECT visits FROM {$serendipity['dbPrefix']}visitors_count WHERE year = '".$year."' AND month = '".$month."' AND day = '".$day."'", true);
