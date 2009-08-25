@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1.3 2009-07-14 19:49:06 VladaAjgl $
+<?php # lang_cz.inc.php 1.4 2009-08-25 20:20:16 VladaAjgl $
 
 /**
- *  @version 1.3
+ *  @version 1.4
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -9,6 +9,8 @@
  *  @revisionDate 2009/02/23
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/07/14
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2009/08/25
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -268,6 +270,7 @@ $i18n_filename_to = array (
 @define('DATE',		'Datum');
 @define('DATE_FORMAT_2',		'Y-m-d H:i');
 // Needs to be ISO 8601 compliant for date conversion!
+
 @define('DATE_INVALID',		'Upozornění: Datum je specifikováno špatně. Použijte formát YYYY-MM-DD HH:MM.');
 @define('CATEGORY_PLUGIN_DESC',		'Seznam kategorií.');
 @define('ALL_AUTHORS',		'Všichni autoři');
@@ -964,5 +967,10 @@ $i18n_filename_to = array (
 @define('MEDIA_TITLE', 'Atribut TITLE (zobrazuje se při najetí myší na obrázek)');
 
 // Next lines were translated on 2009/07/14
+
 @define('INSTALL_OFFSET_ON_SERVER_TIME',		'Posun časové zóny vůči serveru?');
 @define('INSTALL_OFFSET_ON_SERVER_TIME_DESC',		'Posun času příspěvků vůči času na serveru. Vyberte "ano" pro zadání relativního časového posunu vůči hodinám serveru. Nikoliv posun vůči GMT (Greenwich mean time).');
+
+// Next lines were translated on 2009/08/25
+@define('QUICKSEARCH_SORT',		'Jak mají být řazeny výsledky hledání?');
+@define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
