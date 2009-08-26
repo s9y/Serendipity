@@ -132,3 +132,4 @@ else
     echo ""
 fi
 
+echo "REMEMBER TO UPDATE docs/RELEASE and commit SVN branch"
