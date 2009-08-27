@@ -3,7 +3,7 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
-    * Fixed Spartacus download URLs for SF.Net mirror
+    * Fixed Spartacus download URLs for SF.Net mirror (christian_boltz)
 
     * Allow redirects when fetching remote images (garvinhicking)
 
