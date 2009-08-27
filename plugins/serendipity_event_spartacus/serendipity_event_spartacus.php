@@ -868,8 +868,8 @@ class serendipity_event_spartacus extends serendipity_event
                 }
 
                 $plugname = $pluginstack[$i]['template'];
-                $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $plugname . '/preview.png?rev=1.9999';
-                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $plugname . '/preview_fullsize.jpg?rev=1.9999';
+                $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $plugname . '/preview.png?revision=1.9999';
+                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $plugname . '/preview_fullsize.jpg?revision=1.9999';
                 $pluginstack[$i]['customURI']  = '&amp;serendipity[spartacus_fetch]=' . $plugname;
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
@@ -954,7 +954,7 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         foreach($files AS $file) {
-            $url    = $mirror . '/' . $sfloc . '/' . $file . '?rev=1.9999';
+            $url    = $mirror . '/' . $sfloc . '/' . $file . '?revision=1.9999';
             $target = $pdir . $file;
             $this->rmkdir($pdir . $plugin_to_install,$sub);
             $this->fileperm($pdir . $plugin_to_install, true);
