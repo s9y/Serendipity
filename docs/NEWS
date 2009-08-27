@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Fixed Spartacus download URLs for SF.Net mirror
+
     * Allow redirects when fetching remote images (garvinhicking)
 
     * Allow to define sort order for search-results (garvinhicking)
