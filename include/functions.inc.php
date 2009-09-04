@@ -222,7 +222,7 @@ function serendipity_fetchTemplates($dir = '') {
         return $rv;
     }
     while (($file = readdir($cdir)) !== false) {
-        if (is_dir($serendipity['serendipityPath'] . $serendipity['templatePath'] . $dir . $file) && !ereg('^(\.|CVS)', $file) && !file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $dir . $file . '/inactive.txt')) {
+        if (is_dir($serendipity['serendipityPath'] . $serendipity['templatePath'] . $dir . $file) && !preg_match('@^(\.|CVS)@i', $file) && !file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $dir . $file . '/inactive.txt')) {
             if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $dir . $file . '/info.txt')) {
                 $key = strtolower($file);
                 if (isset($rv[$key])) {
