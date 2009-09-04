@@ -9,7 +9,7 @@ Version 1.5 ()
 
     * Allow to define sort order for search-results (garvinhicking)
 
-    * More PHP 5.3.0 compat (split()).
+    * More PHP 5.3.0 compat (split(), ereg(), ereg_replace()).
     
     -- beta1 release
 
