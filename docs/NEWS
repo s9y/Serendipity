@@ -10,7 +10,10 @@ Version 1.5 ()
     * Allow to define sort order for search-results (garvinhicking)
 
     * More PHP 5.3.0 compat (split(), ereg(), ereg_replace()).
-    
+
+    * PostgreSQL compatibility for the printArchives() function to
+      gather only unique timestamps (cite)    
+
     -- beta1 release
 
     * PHP 5.3.0 compatibility without E_WARNING triggers (garvinhicking)

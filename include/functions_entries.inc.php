@@ -1599,7 +1599,7 @@ function serendipity_printArchives() {
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
                 . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
                 . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '') 
-                . (!empty($cat_sql) ? " GROUP BY e.id" : '');
+                . (!empty($cat_sql) ? " GROUP BY e.id, e.timestamp" : '');
     $entries =& serendipity_db_query($q, false, 'assoc');
 
     $group = array();
