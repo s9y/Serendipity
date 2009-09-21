@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Also use htmlspecialchars() for the Recent Entries sidebar plugin
+      (Anson)
+
     * Fixed Spartacus download URLs for SF.Net mirror (christian_boltz)
 
     * Allow redirects when fetching remote images (garvinhicking)
