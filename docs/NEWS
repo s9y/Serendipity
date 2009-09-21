@@ -6,6 +6,10 @@ Version 1.5 ()
     * Also use htmlspecialchars() for the Recent Entries sidebar plugin
       (Anson)
 
+    * Do not send mails, if the "To:" address is empty, might happen
+      if authors do not have a mail account entered in their profile.
+      (nealk)
+
     * Fixed Spartacus download URLs for SF.Net mirror (christian_boltz)
 
     * Allow redirects when fetching remote images (garvinhicking)
