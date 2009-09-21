@@ -22,7 +22,7 @@ class serendipity_plugin_comments extends serendipity_plugin
         $propbag->add('description',   PLUGIN_COMMENTS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking, Tadashi Jokagi, Judebert, G. Brockhaus');
-        $propbag->add('version',       '1.13');
+        $propbag->add('version',       '1.14');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -36,12 +36,31 @@ class serendipity_plugin_comments extends serendipity_plugin
                                              'max_entries',
                                              'dateformat',
                                              'viewmode',
-                                             'showurls'));
+                                             'showurls',
+                                             'authorid'));
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+            case 'authorid':
+                $authors     = array('all' => ALL_AUTHORS, 'login' => CURRENT_AUTHOR);
+                /*
+                $row_authors = serendipity_db_query("SELECT realname, authorid FROM {$serendipity['dbPrefix']}authors");
+                if (is_array($row_authors)) {
+                    foreach($row_authors as $row) {
+                        $authors[$row['authorid']] = $row['realname'];
+                    }
+                }
+                */
+
+                $propbag->add('type',         'select');
+                $propbag->add('name',         CATEGORIES_TO_FETCH);
+                $propbag->add('description',  CATEGORIES_TO_FETCH_DESC);
+                $propbag->add('select_values', $authors);
+                $propbag->add('default',     'all');
+                break;
+
             case 'showurls':
                 $urltypes = array(
                     'none'       => NONE,
@@ -137,33 +156,41 @@ class serendipity_plugin_comments extends serendipity_plugin
 
         $viewtype = '';
         if ($this->get_config('viewmode') == 'comments') {
-            $viewtype .= ' AND c.type = \'NORMAL\'';
+            $viewtype .= ' AND co.type = \'NORMAL\'';
         } elseif ($this->get_config('viewmode') == 'trackbacks') {
-            $viewtype .= ' AND (c.type = \'TRACKBACK\' OR c.type = \'PINGBACK\')';
+            $viewtype .= ' AND (co.type = \'TRACKBACK\' OR co.type = \'PINGBACK\')';
+        }
+        
+        $cond = array();
+        $cond['and'] = ' AND e.isdraft = \'false\' ';
+        if ($this->get_config('authorid') == 'login') {
+            serendipity_ACL_SQL($cond, true);
         }
 
-        $q = 'SELECT    c.body              AS comment,
-                        c.timestamp         AS stamp,
-                        c.author            AS user,
-                        e.title             AS subject,
-                        e.timestamp         AS entrystamp,
-                        e.id                AS entry_id,
-                        c.id                AS comment_id,
-                        c.type              AS comment_type,
-                        c.url               AS comment_url,
-                        c.title             AS comment_title,
-                        c.email             AS comment_email
-                FROM    '.$serendipity['dbPrefix'].'comments AS c,
+        $q = 'SELECT    co.body              AS comment,
+                        co.timestamp         AS stamp,
+                        co.author            AS user,
+                        e.title              AS subject,
+                        e.timestamp          AS entrystamp,
+                        e.id                 AS entry_id,
+                        co.id                AS comment_id,
+                        co.type              AS comment_type,
+                        co.url               AS comment_url,
+                        co.title             AS comment_title,
+                        co.email             AS comment_email
+                FROM    '.$serendipity['dbPrefix'].'comments AS co,
                         '.$serendipity['dbPrefix'].'entries  AS e
-               WHERE    e.id = c.entry_id
-                 AND    NOT (c.type = \'TRACKBACK\' AND c.author = \'' . serendipity_db_escape_string($serendipity['blogTitle']) . '\' AND c.title != \'\')
-                 AND    e.isdraft = \'false\'
-                 AND    c.status = \'approved\'
+                        ' . $cond['joins'] . '
+               WHERE    e.id = co.entry_id
+                 AND    NOT (co.type = \'TRACKBACK\' AND co.author = \'' . serendipity_db_escape_string($serendipity['blogTitle']) . '\' AND co.title != \'\')
+                 AND    co.status = \'approved\'
                         ' . $viewtype . '
-            ORDER BY    c.timestamp DESC
+                        ' . $cond['and'] . '
+            ORDER BY    co.timestamp DESC
             LIMIT ' . $max_entries;
         $sql = serendipity_db_query($q);
-
+        // echo $q;
+        
         if ($sql && is_array($sql)) {
             foreach($sql AS $key => $row) {
                 if (function_exists('mb_strimwidth')) {

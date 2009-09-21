@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Allow comment sidebar plugin to only show coments for entries
+      that are allowed to be viewed by the current visitor.
+
     * Also use htmlspecialchars() for the Recent Entries sidebar plugin
       (Anson)
 
