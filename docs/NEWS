@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Always increase last_modified when an entry is saved to prevent
+      stale entries in RSS feeds. Thanks to Cenic
+      
     * Allow comment sidebar plugin to only show coments for entries
       that are allowed to be viewed by the current visitor.
 
