@@ -1355,9 +1355,9 @@ function serendipity_updertEntry($entry) {
             }
         }
 
-        if (!serendipity_db_bool($entry['isdraft']) && !serendipity_db_bool($_entry['isdraft'])) {
+        //if (!serendipity_db_bool($entry['isdraft']) && !serendipity_db_bool($_entry['isdraft'])) {
             $entry['last_modified'] = time();
-        }
+        //}
 
         $res = serendipity_db_update('entries', array('id' => $entry['id']), $entry);
         $newEntry = 0;
