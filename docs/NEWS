@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Fix a bug in statistics output, when statistics for single-number
+      months is created. (Andreas Bilke)
+
     * Always increase last_modified when an entry is saved to prevent
       stale entries in RSS feeds. Thanks to Cenic
       

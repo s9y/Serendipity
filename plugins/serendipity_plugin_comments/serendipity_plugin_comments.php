@@ -165,7 +165,9 @@ class serendipity_plugin_comments extends serendipity_plugin
         $cond['and'] = ' AND e.isdraft = \'false\' ';
         if ($this->get_config('authorid') == 'login') {
             serendipity_ACL_SQL($cond, true);
+            serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'entries'));
         }
+        
 
         $q = 'SELECT    co.body              AS comment,
                         co.timestamp         AS stamp,
