@@ -24,7 +24,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg, kalkin');
-        $propbag->add('version',       '1.48');
+        $propbag->add('version',       '1.49');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -659,59 +659,33 @@ class serendipity_event_statistics extends serendipity_event
     } //end of function countVisitor
     
     // Calculate daily stats
-    function statistics_getdailystats($day, $amount) {
+    function statistics_getdailystats() {
         global $serendipity;
         
         list($year, $month) = explode('-', date("Y-m"));
-        if ($day > 0 && $day <32) {
-            $sql = "SELECT SUM(visits) AS dailyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE day";
-            for ($i=1; $i<32; $i++)    {
-                $sqlfire = $sql . " = '$i' AND year = '$year' AND month = '$month'";
-                $res = serendipity_db_query($sqlfire, true);
-                $container[$i] = $res['dailyvisit'];
-            }
-            return $container;
-        } else if (!is_integer($day))    {
-            echo "Daycount failed - You've gotta specify a correct date(read: integer!)";
-            return "failure";
-        } else if ($day < 0 || $day > 32) {
-            echo "Daycount failed - Days only go from 1 to 31";
-            return "failure";
+        $sql = "SELECT SUM(visits) AS dailyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE day";
+        for ($i=1; $i<32; $i++)    {
+            $myDay = ($i < 10) ? "0" . $i : $i;
+            $sqlfire = $sql . " = '$myDay' AND year = '$year' AND month = '$month'";
+            $res = serendipity_db_query($sqlfire, true);
+            $container[$i] = $res['dailyvisit'];
         }
-        
-        if (! isset($container)) {        
-            $sql = "SELECT SUM(visits) FROM {$serendipity['dbPrefix']}visitors_count WHERE day = '$day' AND month = '$month' AND year = '$year'";
-            $res = serendipity_db_query($sql, true);    
-            return $res;                    
-        }    
+        return $container;
     }
     
     // Calculate monthly stats
-    function statistics_getmonthlystats($month, $amount) {    
+    function statistics_getmonthlystats() {    
         global $serendipity;
 
         $year = date("Y");    
-        if ($month > 0 && $month < 13) {
-            $sql = "SELECT SUM(visits) AS monthlyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE month";
-            for ($i=1; $i<13; $i++)    {
-                $sqlfire = $sql . " = '$i' AND year = '$year'";
-                $res = serendipity_db_query($sqlfire, true);
-                $container[$i] = $res['monthlyvisit'];
-            }
-            return $container;
-        } else if (!is_integer($month)) {
-            echo "Monthcount failed - You've gotta specify a correct month(read: integer!)";
-            return "failure";
-        } else if ($month < 0 || $month > 13) {
-            echo "Monthcount failed - Months only go from 1 to 12";
-            return "failure";
+        $sql = "SELECT SUM(visits) AS monthlyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE month";
+        for ($i=1; $i<13; $i++)    {
+            $myMonth = ($i < 10) ? "0" . $i : $i;
+            $sqlfire = $sql . " = '$myMonth' AND year = '$year'";
+            $res = serendipity_db_query($sqlfire, true);
+            $container[$i] = $res['monthlyvisit'];
         }
-        
-        if (!isset($container)) {    
-            $sql = "SELECT SUM(visits) FROM {$serendipity['dbPrefix']}visitors_count WHERE month = '$month' AND year = '$year'";
-            $res = serendipity_db_query($sql, true);    
-            return $res;    
-        }
+        return $container;
     }   
     
     function extendedVisitorStatistics($max_items){
@@ -780,6 +754,10 @@ class serendipity_event_statistics extends serendipity_event
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <?php
                 $color = "col2";
+                $num = $this->statistics_getmonthlystats();
+                $rep = $num;
+                rsort($rep);
+                $maxVisHeigh = 100/$rep[0]*2;
                 for ($i=1; $i < 13; $i++) {
                     if ($color == "col1") {
                         $color ="col2";
@@ -787,10 +765,6 @@ class serendipity_event_statistics extends serendipity_event
                         $color ="col1";
                     }
 
-                    $num = $this->statistics_getmonthlystats($i, $visitors_count[0]);
-                    $rep = $num;
-                    rsort($rep);
-                    $maxVisHeigh = 100/$rep[0]*2;
                     echo '<td class="'.$color.'" width="8%" align="center" valign="bottom"><small>' . $num[$i];
                     echo '<br /><img src="plugins/serendipity_event_statistics/'; 
                     if ($num[$i]*$maxVisHeigh/2 <= 33) {
@@ -825,16 +799,16 @@ class serendipity_event_statistics extends serendipity_event
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <?php
                 $color = "col2";
-                 for ($i=1; $i < 32; $i++) {
+                $num = $this->statistics_getdailystats();
+                $rep = $num;
+                rsort($rep);
+                for ($i=1; $i < 32; $i++) {
                     if ($color == "col1") {
                         $color ="col2";
                     } else {
                         $color ="col1";
                     }
 
-                    $num = $this->statistics_getdailystats($i, $visitors_count[0]);
-                    $rep = $num;
-                    rsort($rep);
                     $maxVisHeigh = 100/$rep[0]*2;
                     echo '<td class="'.$color.'" width="3%" align="center" valign="bottom"><small>' . $num[$i];        
                     echo '<br /><img src="plugins/serendipity_event_statistics/';
