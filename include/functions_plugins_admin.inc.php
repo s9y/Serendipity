@@ -629,6 +629,7 @@ function change_preview(id)
     var image_box = document.getElementById(id + '_preview'); 
     var filename = text_box.value;
     image_box.style.backgroundImage = 'url(' + filename + ')';
+    image_box.style.backgroundRepeat = 'no-repeat';
 }
 function choose_media(id)
 {
