@@ -657,7 +657,7 @@ EOS;
 </td> </tr>
 <tr>
   <td style="border-bottom: 1px solid #000000">
-    <div id="{$config_item}_preview" style="background-image: url($value); width:$preview_width; height: $preview_height;">&nbsp;</div>
+    <div id="{$config_item}_preview" style="background-image: url($value); width:$preview_width; height: $preview_height; background-repeat: no-repeat;">&nbsp;</div>
   </td>
   <td style="border-bottom: 1px solid #000000">
     <input class="input_textbox" type="text" id="serendipity[$postKey][$config_item]" name="serendipity[$postKey][$config_item]" value="$value" onchange="change_preview('$config_item')"/>
