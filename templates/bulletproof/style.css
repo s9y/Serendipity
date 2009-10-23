@@ -184,6 +184,19 @@ ul.archives_row li {
 
 
 /*** s9y image manager ***/
+.serendipity_image_center {
+    display: block;
+    margin: 0 auto;
+    padding: 0 5px;
+}
+.serendipity_image_left {
+    padding: 0 5px 0 0!important;
+}
+
+.serendipity_image_right {
+    padding: 0 0 0 5px!important;
+}
+
 .serendipity_imageComment_center,
 .serendipity_imageComment_left,
 .serendipity_imageComment_right {
