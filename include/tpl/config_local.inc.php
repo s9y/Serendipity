@@ -290,7 +290,7 @@
                                     array('var'         => 'pass',
                                           'title'       => INSTALL_PASSWORD,
                                           'description' => INSTALL_PASSWORD_DESC,
-                                          'type'        => 'protected',
+                                          'type'        => 'fullprotected',
                                           'default'     => 'john',
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('installOnly', 'local', 'simpleInstall')),

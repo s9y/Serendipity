@@ -3,6 +3,10 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Prevent password autocompletion for user passwords to prevent
+      possible mismatch. In media manager popup, fix bug that did
+      not properly forward to image selection after upload (onli)
+      
     * Fix a bug in statistics output, when statistics for single-number
       months is created. (Andreas Bilke)
 
