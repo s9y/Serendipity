@@ -18,14 +18,14 @@
                                     array('var'         => 'password',
                                           'title'       => USERCONF_PASSWORD,
                                           'description' => USERCONF_PASSWORD_DESC,
-                                          'type'        => 'protected',
+                                          'type'        => 'fullprotected',
                                           'default'     => '',
                                           'permission'  => 'personalConfiguration'),
 
                                     array('var'         => 'check_password',
                                           'title'       => USERCONF_CHECK_PASSWORD,
                                           'description' => USERCONF_CHECK_PASSWORD_DESC,
-                                          'type'        => 'protected',
+                                          'type'        => 'fullprotected',
                                           'default'     => '',
                                           'permission'  => 'personalConfiguration'),
 

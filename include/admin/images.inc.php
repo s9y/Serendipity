@@ -825,7 +825,7 @@ switch ($serendipity['GET']['adminAction']) {
 function showMediaLibrary($messages=false) {
     if (!serendipity_checkPermission('adminImagesView')) {
             return;
-        }
+    }
 
     if(!empty($messages)) {
         echo '<div class="imageMessage"><ul>';
@@ -834,6 +834,14 @@ function showMediaLibrary($messages=false) {
         }
         echo '</ul></div>';
     }
+
+    global $image_selector_addvars;
+    #if $image_selector_addvars is not empty, this was called by 
+    #serendipity_admin_image_selector.php and the library shall not be displayed (yet).
+    if (!empty($image_selector_addvars)) {
+    	return;
+	}
+
 
 ?>
 <script type="text/javascript" language="javascript">
