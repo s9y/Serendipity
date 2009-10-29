@@ -1467,7 +1467,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         $perPage++;
     }
     $start   = ($page-1) * $perPage;
-
+    
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
         $aExclude = array("CVS" => true, ".svn" => true);
