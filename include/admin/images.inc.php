@@ -378,7 +378,8 @@ switch ($serendipity['GET']['adminAction']) {
             serendipity_insertMediaProperty('base_hidden', '', $nm['image_id'], $hidden);
         }
     }
-    showMediaLibrary($messages);
+
+    showMediaLibrary($messages, true);
 
     break;
 
@@ -822,7 +823,9 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 }
 
-function showMediaLibrary($messages=false) {
+function showMediaLibrary($messages=false, $addvar_check = false) {
+    global $serendipity;
+    
     if (!serendipity_checkPermission('adminImagesView')) {
             return;
     }
@@ -835,13 +838,11 @@ function showMediaLibrary($messages=false) {
         echo '</ul></div>';
     }
 
-    global $image_selector_addvars;
-    #if $image_selector_addvars is not empty, this was called by 
-    #serendipity_admin_image_selector.php and the library shall not be displayed (yet).
-    if (!empty($image_selector_addvars)) {
-    	return;
-	}
-
+    // After upload, do not show the list to be able to proceed to
+    // media selection.
+    if ($addvar_check && !empty($GLOBALS['image_selector_addvars'])) {
+        return true;
+    }
 
 ?>
 <script type="text/javascript" language="javascript">
@@ -858,6 +859,7 @@ function showMediaLibrary($messages=false) {
         if (!isset($serendipity['thumbPerPage'])) {
             $serendipity['thumbPerPage'] = 2;
         }
+
         serendipity_displayImageList(
           isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
           $serendipity['thumbPerPage'],
