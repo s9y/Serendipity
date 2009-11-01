@@ -542,7 +542,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     }
 
 ?>
-                    <fieldset style="margin: 5px" class="entyproperties">
+                    <fieldset style="margin: 5px" class="entryproperties">
                         <legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_TITLE; ?></legend>
 <?php
 
