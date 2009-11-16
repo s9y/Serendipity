@@ -24,7 +24,7 @@ function serendipity_isActiveFile($file) {
         return true;
     }
 
-    $core = preg_match('@\.(php[345]?|[psj]html?|aspx?|cgi|jsp|py|pl)$@i', $file);
+    $core = preg_match('@\.(php.*|[psj]html?|aspx?|cgi|jsp|py|pl)$@i', $file);
     if ($core) {
         return true;
     }
