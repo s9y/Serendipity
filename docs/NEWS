@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Disallow uploading any files with ".php." in the filename
+      (garvinhicking)
+
     * Prevent password autocompletion for user passwords to prevent
       possible mismatch. In media manager popup, fix bug that did
       not properly forward to image selection after upload (onli)
