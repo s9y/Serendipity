@@ -582,7 +582,7 @@
 @define('INSTALL_SHOWFUTURE_DESC', 'Falls aktiviert, werden auch die Eintr‰ge angezeigt, deren Datum in der Zukunft liegt. Standardm‰ﬂig werden solche Eintr‰ge versteckt und erscheinen erst, wenn der entsprechende Zeitpunkt erreicht wird.');
 @define('INSTALL_DBPERSISTENT', 'Persistente Verbindungen nutzen');
 @define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. ‹blicherweise wird diese Einstellung nicht empfohlen.');
-@define('NO_IMAGES_FOUND', 'Keine Bilder gefunden');
+@define('NO_IMAGES_FOUND', 'Keine Mediendaten gefunden');
 @define('PERSONAL_SETTINGS', 'Eigene Einstellungen');
 @define('REFERER', 'Referrer');
 @define('NOT_FOUND', 'Nicht gefunden');
