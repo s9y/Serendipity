@@ -596,6 +596,9 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 <?php
                 if ($cbag->get('type') == 'html') {
                     $htmlnugget[] = $elcount;
+                    if (!function_exists(serendipity_emit_htmlarea-code)) {
+                        @include dirname(__FILE__) . '/functions_entries_admin.inc.php';
+                    }
                     serendipity_emit_htmlarea_code('nuggets', 'nuggets', true);
                 }
                 break;
