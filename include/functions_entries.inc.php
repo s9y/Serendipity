@@ -821,6 +821,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
                             {$cond['and']}";
 
     $querystring = "SELECT {$cond['distinct']}
+                            {$cond['addkey']}
                             e.id,
                             e.authorid,
                             a.realname AS author,
