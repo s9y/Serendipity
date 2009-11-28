@@ -3,6 +3,8 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Added expermiantel PDO::SQLite transport, by nth
+
     * Disallow uploading any files with ".php." in the filename
       (garvinhicking)
 
