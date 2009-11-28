@@ -883,6 +883,12 @@ function serendipity_probeInstallation($item) {
                 in_array('pgsql', PDO::getAvailableDrivers())) {
                 $res['pdo-postgres'] = 'PDO::PostgreSQL';
             }
+
+            if (extension_loaded('PDO') &&
+                in_array('sqlite', PDO::getAvailableDrivers())) {
+                $res['pdo-sqlite'] = 'PDO::SQLite';
+            }
+
             if (extension_loaded('pgsql')) {
                 $res['postgres'] = 'PostgreSQL';
             }
