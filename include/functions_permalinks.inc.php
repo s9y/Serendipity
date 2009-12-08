@@ -108,29 +108,36 @@ function serendipity_makeFilename($str, $stripDots = false) {
 
                      'y');
 
-    if (isset($GLOBALS['i18n_filename_from'])) {
-        // Replace international chars not detected by every locale.
-        // The array of chars is defined in the language file.
-        $str = str_replace($GLOBALS['i18n_filename_from'], $GLOBALS['i18n_filename_to'], $str);
-
-        if (LANG_CHARSET == 'UTF-8') {
-            // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
-            // characters, try to UTF8-decode the string first.
-            $str = utf8_decode($str);
-        }
+    if (isset($GLOBALS['i18n_filename_utf8'])) {
+        $str = str_replace(' ', '_', $str);
+        $str = str_replace('&', '%25', $str);
+        $str = str_replace('/', '%2F', $str);
+        $str = urlencode($str);
     } else {
-        // Replace international chars not detected by every locale
-        if (LANG_CHARSET == 'UTF-8') {
-            // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
-            // characters, try to UTF8-decode the string first.
-            $str = utf8_decode($str);
+        if (isset($GLOBALS['i18n_filename_from'])) {
+            // Replace international chars not detected by every locale.
+            // The array of chars is defined in the language file.
+            $str = str_replace($GLOBALS['i18n_filename_from'], $GLOBALS['i18n_filename_to'], $str);
+
+            if (LANG_CHARSET == 'UTF-8') {
+                // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
+                // characters, try to UTF8-decode the string first.
+                $str = utf8_decode($str);
+            }
+        } else {
+            // Replace international chars not detected by every locale
+            if (LANG_CHARSET == 'UTF-8') {
+                // URLs need to be 7bit - since this function takes care of the most common ISO-8859-1
+                // characters, try to UTF8-decode the string first.
+                $str = utf8_decode($str);
+            }
+
+            $str = str_replace($from, $to, $str);
         }
 
-        $str = str_replace($from, $to, $str);
-    }
-
-    // Nuke chars not allowed in our URI
-    $str = preg_replace('#[^' . PAT_FILENAME . ']#i', '', $str);
+        // Nuke chars not allowed in our URI
+        $str = preg_replace('#[^' . PAT_FILENAME . ']#i', '', $str);
+    }    
 
     // Check if dots are allowed
     if ($stripDots) {

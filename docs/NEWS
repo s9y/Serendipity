@@ -2,6 +2,10 @@
 
 Version 1.6 ()
 ------------------------------------------------------------------------
+    * Added experimental global variable $i18n_filename_utf8 that can
+      be set in a serendipity_config_local.inc.php or language include
+      file, which will return Unicode-Permalinks.
+      (http://board.s9y.org/viewtopic.php?f=11&t=15896)
 
 Version 1.5 ()
 ------------------------------------------------------------------------
