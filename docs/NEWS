@@ -10,6 +10,8 @@ Version 1.6 ()
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Show backend comment pagination in footer and header
+    
     * Don't toggle the border of marked comments in the admin section
       to 2px, to avoid padding. Thanks to hboeck!
 

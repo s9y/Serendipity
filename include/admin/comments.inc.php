@@ -547,5 +547,26 @@ foreach ($sql as $rs) {
     <td><input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton input_button" /> <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" onclick="return confirm('<?php echo COMMENTS_DELETE_CONFIRM ?>')" tabindex="<?php echo ($i+1) ?>" class="serendipityPrettyButton input_button" /></td>
 </tr>
 </table>
+<table width="100%" cellpadding="3" border="0" cellspacing="0">
+<tr>
+    <td align="center">
+        <table width="100%" cellspacing="5" cellpadding="0" border="0">
+            <tr>
+                <td>
+                <?php if ( $page != 1 && $page <= $pages ) { ?>
+                    <a href="<?php echo $linkPrevious; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/previous.png') ?>" /><?php echo PREVIOUS ?></a>
+                <?php } ?>
+                </td>
+                <td align="center"><?php printf(PAGE_BROWSE_COMMENTS, $page, $pages, $totalComments); ?></td>
+                <td align="right">
+                <?php if ( $page != $pages ) { ?>
+                    <a href="<?php echo $linkNext; ?>" class="serendipityIconLinkRight"><?php echo NEXT ?><img src="<?php echo serendipity_getTemplateFile('admin/img/next.png') ?>" /></a>
+                <?php } ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+
 </form>
 <?php } ?>
