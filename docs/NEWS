@@ -3,6 +3,9 @@
 Version 1.5 ()
 ------------------------------------------------------------------------
 
+    * Don't toggle the border of marked comments in the admin section
+      to 2px, to avoid padding. Thanks to hboeck!
+
     * Added expermiantel PDO::SQLite transport, by nth
 
     * Disallow uploading any files with ".php." in the filename

@@ -287,14 +287,33 @@ function invertSelection() {
         }
     }
 }
+
+var origborder = '';
+var origwidth = '';
+
 function highlightComment(id, checkvalue) {
     var comment = document.getElementById(id);
+    
+    if (origborder == '') {
+        origborder = comment.style.borderColor;
+        if (origborder == '') {
+            origborder = '#FFFFFF';
+        }
+    }
+    
+    if (origwidth == '') {
+        origwidth = comment.style.borderWidth;
+        if (origwidth == '' || origwidth == 0) {
+            origwidth = 1;
+        }
+    }
+    
     if (checkvalue) {
         comment.style.borderColor = '#FF0000';
-        comment.style.borderWidth = 2;
+        comment.style.borderWidth = origwidth;
     } else {
         comment.style.borderColor = '';
-        comment.style.borderWidth = '';
+        comment.style.borderWidth = origwidth;
     }
 }
 </script>
