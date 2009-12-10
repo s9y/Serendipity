@@ -7,11 +7,11 @@
 * Technical choices are described in the 'docs/technical' file
 *
 * @package Cache_Lite
-* @version $Id: Output.php,v 1.3 2005/04/17 21:40:18 fab Exp $
+* @version $Id: Output.php,v 1.4 2006/01/29 00:22:07 fab Exp $
 * @author Fabien MARTY <fab@php.net>
 */
 
-require_once(dirname(__FILE__) . '/../Lite.php');
+require_once dirname(__FILE__) . '/../Lite.php';
 
 class Cache_Lite_Output extends Cache_Lite
 {
@@ -47,11 +47,10 @@ class Cache_Lite_Output extends Cache_Lite
         if ($data !== false) {
             echo($data);
             return true;
-        } else {
-            ob_start();
-            ob_implicit_flush(false);
-            return false;
         }
+        ob_start();
+        ob_implicit_flush(false);
+        return false;
     }
 
     /**
