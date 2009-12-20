@@ -1110,6 +1110,21 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     $deleteURI  = serendipity_rewriteURL(PATH_DELETE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
     $approveURI = serendipity_rewriteURL(PATH_APPROVE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
 
+    $eventData = array( 'comment_id'       => $comment_id,
+                        'entry_id'         => $id,
+                        'entryURI'         => $entryURI,
+                        '$path'            => $path,
+                        'deleteURI'        => $deleteURI,
+                        'approveURI'       => $approveURI,
+                        'moderate_comment' => $moderate_comment,
+                        'action_more'      => array());
+    serendipity_plugin_api::hook_event('backend_sendcomment', $eventData);
+
+    $action_more = '';
+    foreach($eventData['action_more'] as $action) {
+        $action_more .= "\n" . str_repeat(' ', 3) . $action;
+    } 
+
     if ($type == 'TRACKBACK') {
 
         /******************* TRACKBACKS *******************/
@@ -1129,7 +1144,8 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
               . (($moderate_comment) ? "\n" . str_repeat(' ', 2) . THIS_TRACKBACK_NEEDS_REVIEW : '')
               . "\n" . str_repeat(' ', 3) . str_pad(VIEW_ENTRY,  15) . ' -- '. $entryURI
               . "\n" . str_repeat(' ', 3) . str_pad(DELETE_TRACKBACK,  15) . ' -- '. $deleteURI
-              . (($moderate_comment) ? "\n" . str_repeat(' ', 3) . str_pad(APPROVE_TRACKBACK, 15) . ' -- '. $approveURI : '');
+              . (($moderate_comment) ? "\n" . str_repeat(' ', 3) . str_pad(APPROVE_TRACKBACK, 15) . ' -- '. $approveURI : '')
+              . $action_more;
 
     } else {
 
@@ -1152,7 +1168,8 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
               . (($moderate_comment) ? "\n" . str_repeat(' ', 2) . THIS_COMMENT_NEEDS_REVIEW : '')
               . "\n" . str_repeat(' ', 3) . str_pad(VIEW_COMMENT,  15) . ' -- '. $entryURI .'#c'. $comment_id
               . "\n" . str_repeat(' ', 3) . str_pad(DELETE_COMMENT,  15) . ' -- '. $deleteURI
-              . (($moderate_comment) ? "\n" . str_repeat(' ', 3) . str_pad(APPROVE_COMMENT, 15) . ' -- '. $approveURI : '');
+              . (($moderate_comment) ? "\n" . str_repeat(' ', 3) . str_pad(APPROVE_COMMENT, 15) . ' -- '. $approveURI : '')
+              . $action_more;
     }
 
     return serendipity_sendMail($to, $subject, $text, $fromEmail, null, $fromName);

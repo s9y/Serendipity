@@ -3,12 +3,13 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
-    * Upgraded to PEAR Cache_Lite 1.7.8
-
     * Added experimental global variable $i18n_filename_utf8 that can
       be set in a serendipity_config_local.inc.php or language include
       file, which will return Unicode-Permalinks.
       (http://board.s9y.org/viewtopic.php?f=11&t=15896)
+
+    * Added event hook backend_sendcomment for sending comments and
+      being able to chang via plugin API (onli)
 
 Version 1.5 ()
 ------------------------------------------------------------------------
