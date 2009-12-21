@@ -11,6 +11,11 @@ Version 1.6 ()
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
+Version 1.5.1 ()
+------------------------------------------------------------------------
+
+    * Fix bug with not showing "html" type configuration items.
+    
 Version 1.5 (December 21st, 2009)
 ------------------------------------------------------------------------
 
