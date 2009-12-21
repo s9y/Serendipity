@@ -162,12 +162,13 @@
               'host'        => 'rpc.reader.livedoor.com',
               'path'        => '/ping',
               'extended' => false
-            )
+            ),
 
             array(
               'name'        => 'FeedPing.net',
               'host'        => 'rpc.feedping.net',
               'path'        => '/',
               'extended'    => false
+            )
         );
 ?>
