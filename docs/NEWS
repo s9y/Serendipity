@@ -11,7 +11,7 @@ Version 1.6 ()
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
-Version 1.5 ()
+Version 1.5 (December 21st, 2009)
 ------------------------------------------------------------------------
 
     * Show backend comment pagination in footer and header
