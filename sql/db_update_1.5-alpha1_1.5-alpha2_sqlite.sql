@@ -13,7 +13,7 @@ create table {PREFIX}tempauthors (
 
 INSERT INTO {PREFIX}tempauthors 
 (realname,username,password,authorid,mail_comments,mail_trackbacks,email,userlevel,right_publish,hashtype) SELECT 
-realname,username,password,authorid,mail_comments,mail_trackbacks,email,userlevel,right_publish,1 FROM {PREFIX}authors;
+realname,username,password,authorid,mail_comments,mail_trackbacks,email,userlevel,right_publish,0 FROM {PREFIX}authors;
 DROP TABLE {PREFIX}authors;
 
 create table {PREFIX}authors (
