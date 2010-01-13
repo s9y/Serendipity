@@ -874,3 +874,5 @@
 
 @define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
 
+@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
+

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_da.inc.php 2548 2009-07-14 09:40:11Z garvinhicking $
+<?php # $Id: serendipity_lang_da.inc.php 2575 2009-08-24 08:24:19Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Tom Sommer, <ts@dreamcoder.dk>
@@ -953,4 +953,6 @@
 @define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
 
 @define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+
+@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 

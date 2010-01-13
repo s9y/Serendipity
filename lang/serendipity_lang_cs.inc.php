@@ -974,3 +974,5 @@ $i18n_filename_to = array (
 // Next lines were translated on 2009/08/25
 @define('QUICKSEARCH_SORT',		'Jak mají být øazeny výsledky hledání?');
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
+@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
+
