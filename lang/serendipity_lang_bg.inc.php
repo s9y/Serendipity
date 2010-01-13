@@ -948,3 +948,5 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 @define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
 
+@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
+

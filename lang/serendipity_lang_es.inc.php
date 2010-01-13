@@ -973,3 +973,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 
 @define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
 
+@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
+
