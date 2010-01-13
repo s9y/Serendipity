@@ -93,7 +93,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
         if (!@mysql_select_db($this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysql_error($gdb));
         }
-
+        
         /* Users */
         $res = @$this->nativeQuery("SELECT ID_MEMBER       AS ID,
                                     memberName      AS user_login,
@@ -241,9 +241,26 @@ class Serendipity_Import_smf extends Serendipity_Import {
                     break;
                 }
             }
+            
+            $topic_id = $entries[$x]['topic_id'];
+
+            // Store original ID, we might need it at some point.
+            serendipity_db_insert('entryproperties', array('entryid' => $entries[$x]['entryid'], 'property' => 'foreign_import_id', 'value' => $entries[$x]['topic_id']));
+
+            // Convert SMF tags
+            $t_res = @$this->nativeQuery("SELECT t.tag
+                                            FROM {$this->data['prefix']}tags_log AS tl
+                                            JOIN {$this->data['prefix']}tags AS t
+                                              ON tl.ID_TAG = t.ID_TAG
+                                           WHERE tl.ID_TOPIC = {$topic_id}
+                                             AND t.approved = 1");
+            if (mysql_num_rows($t_res) > 0) {
+                while ($a = mysql_fetch_assoc($t_res)) {
+                    serendipity_db_insert('entrytags', array('entryid' => $entries[$x]['entryid'], 'tag' => $t_res['tag']));
+                }
+            }
 
             /* Comments */
-            $topic_id = $entries[$x]['topic_id'];
             $c_res = @$this->nativeQuery("SELECT
                 tm.subject AS post_subject,
                 tm.body AS post_text,
