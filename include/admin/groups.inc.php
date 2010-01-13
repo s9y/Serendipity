@@ -163,7 +163,7 @@ foreach($allusers AS $user) {
             $permname = $perm;
         }
 
-        if (!serendipity_checkPermission($perm)) {
+        if (!serendipity_checkPermission($perm) && $perm != 'hiddenGroup') {
             echo "<tr>\n";
             echo "<td>$indent" . htmlspecialchars($permname) . "</td>\n";
             echo '<td>' . $indentB . ' ' . (!empty($selected) ? YES : NO) . '</td>' . "\n";

@@ -269,7 +269,7 @@ function ownership($authorid, $name, $is_plugin_owner = false) {
 
     static $users = array();
     if (empty($users)) {
-        $users = serendipity_fetchUsers();
+        $users = serendipity_fetchUsers('', 'hidden');
     }
 
     if ($is_plugin_owner) {
