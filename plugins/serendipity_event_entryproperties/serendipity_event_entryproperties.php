@@ -149,7 +149,7 @@ class serendipity_event_entryproperties extends serendipity_event
         global $serendipity;
 
         if (serendipity_checkPermission('adminUsersMaintainOthers')) {
-            $users = serendipity_fetchUsers('');
+            $users = serendipity_fetchUsers('', 'hidden');
         } elseif (serendipity_checkPermission('adminUsersMaintainSame')) {
             $users = serendipity_fetchUsers('', serendipity_getGroups($serendipity['authorid'], true));
         } else {
@@ -348,7 +348,7 @@ class serendipity_event_entryproperties extends serendipity_event
             <br /><?php echo PERM_READ . ': <em>'. AUTHOR . '</em>'; ?><br />
             <select class="entryproperties_access_users" onchange="document.getElementById('properties_access_member').checked = true;" style="margin-left: 5px" multiple="multiple" name="serendipity[properties][access_users][]" size="4">
 <?php
-                $users = serendipity_fetchUsers();
+                $users = serendipity_fetchUsers('', 'hidden');
                 foreach($users AS $user) {
 ?>
                 <option value="<?php echo $user['authorid']; ?>" <?php echo (in_array($user['authorid'], $access_users) ? 'selected="selected"' : ''); ?>><?php echo htmlspecialchars($user['realname']); ?></option>

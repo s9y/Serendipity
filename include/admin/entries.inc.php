@@ -113,7 +113,7 @@ function serendipity_drawList() {
                 <select name="serendipity[filter][author]">
                     <option value="">--</option>
 <?php
-                    $users = serendipity_fetchUsers('', null, true);
+                    $users = serendipity_fetchUsers('', 'hidden', true);
                     if (is_array($users)) {
                         foreach ($users AS $user) {
                             if (isset($user['artcount']) && $user['artcount'] < 1) continue;

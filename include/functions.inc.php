@@ -405,7 +405,12 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
                                $query_group
                       ORDER BY a.realname ASC";
     } else {
-        if (is_array($group)) {
+
+        if ($group === 'hidden') {
+            $query_join .= "LEFT OUTER JOIN {$serendipity['dbPrefix']}groupconfig AS gc
+                                         ON (gc.property = 'hiddenGroup' AND gc.id = ag.groupid AND gc.value = 'true')";
+            $where .= " AND ISNULL(gc.id) ";
+        } elseif (is_array($group)) {
             foreach($group AS $idx => $groupid) {
                 $group[$idx] = (int)$groupid;
             }
@@ -432,7 +437,7 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
                LEFT OUTER JOIN {$serendipity['dbPrefix']}groups AS g
                             ON ag.groupid  = g.id
                                $query_join
-                         WHERE g.id IN ($group_sql)
+                         WHERE " . ($group_sql ? "g.id IN ($group_sql)" : '1=1') . "
                                $where
                                $query_group
                       ORDER BY a.realname ASC";

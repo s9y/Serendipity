@@ -1804,7 +1804,7 @@ class serendipity_authors_plugin extends serendipity_plugin {
         $is_form  = serendipity_db_bool($this->get_config('allow_select'));
         $is_count = serendipity_db_bool($this->get_config('showartcount'));
         $mincount = (int)$this->get_config('mincount');
-        $authors  = serendipity_fetchUsers(null, null, $is_count);
+        $authors  = serendipity_fetchUsers(null, 'hidden', $is_count);
         $html       = '';
 
         if ($is_form) {

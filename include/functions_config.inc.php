@@ -1153,6 +1153,9 @@ function serendipity_getPermissionNames() {
 
         'adminTemplates'
             => array(USERLEVEL_ADMIN, USERLEVEL_CHIEF),
+
+        'hiddenGroup'
+            => array(-1)
     );
 }
 
@@ -1574,7 +1577,7 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
             $value = 'false';
         }
 
-        if ($isNewPriv == false && !serendipity_checkPermission($perm)) {
+        if ($isNewPriv == false && !serendipity_checkPermission($perm) && $perm != 'hiddenGroup') {
             if (!isset($storage[$perm])) {
                 $value = 'false';
             } else {
