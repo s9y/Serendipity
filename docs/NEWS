@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Use "Longtext" instead of "text" for new installations on blog entry
+      body and extended body inside database tables. (garvinhicking)
+
     * Added ability to mark authorgroups as "hidden", so that members
       of such groups are excluded from common author listings.
       (Ref http://board.s9y.org/viewtopic.php?f=11&t=16237)

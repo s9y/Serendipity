@@ -456,9 +456,9 @@ function serendipity_db_schema_import($query) {
     switch($type_of_database) {
         case "mysql":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}',
-                '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}');
+                '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{TEXT}');
             static $replace = array('int(11) not null auto_increment', 'primary key',
-                'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'');
+                'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
             static $is_utf8 = null;
     
             if ($is_utf8 === null) {
@@ -476,14 +476,14 @@ function serendipity_db_schema_import($query) {
 
         case "postgresql":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}',
-                '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', 'int(1)', 'int(10)', 'int(11)', 'int(4)', '{UTF_8}');
+                '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', 'int(1)', 'int(10)', 'int(11)', 'int(4)', '{UTF_8}', '{TEXT}');
             static $replace = array('SERIAL', 'primary key', '', 
-                '', '', 'BOOLEAN NOT NULL', 'int2', 'int4', 'int4', 'int4', '');
+                '', '', 'BOOLEAN NOT NULL', 'int2', 'int4', 'int4', 'int4', '', 'text');
             break;
     
         case "sqlite":
-            static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{UTF_8}');
-            static $replace = array('INTEGER', 'PRIMARY KEY', '', '', '', 'BOOLEAN NOT NULL', '');
+            static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
+            static $replace = array('INTEGER', 'PRIMARY KEY', '', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');
             break;
 
         default:
