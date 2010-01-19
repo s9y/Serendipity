@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix escaping when using ImageMagick to create PDF-thumbnail images
+      (stm9x9)
+
     * Use "Longtext" instead of "text" for new installations on blog entry
       body and extended body inside database tables. (garvinhicking)
 

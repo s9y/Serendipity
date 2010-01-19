@@ -659,7 +659,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             }
             $newSize = $r['width'] . 'x' . $r['height'];
             if ($fdim['mime'] == 'application/pdf') {
-                $cmd     = escapeshellcmd($serendipity['convert']) . ' -antialias -flatten -scale '. serendipity_escapeshellarg($newSize) .' "'. serendipity_escapeshellarg($infile) .'[0]" '. serendipity_escapeshellarg($outfile . '.png');
+                $cmd     = escapeshellcmd($serendipity['convert']) . ' -antialias -flatten -scale '. serendipity_escapeshellarg($newSize) .' '. serendipity_escapeshellarg($infile . '[0]') . ' ' . serendipity_escapeshellarg($outfile . '.png');
             } else {
                 if (!$force_resize && serendipity_ini_bool(ini_get('safe_mode')) === false) {
                     $newSize .= '>'; // Tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
