@@ -12,8 +12,8 @@ if (!headers_sent()) {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
         session_name('s9y_' . md5(dirname(__FILE__)));
+        session_start();
     }
-    session_start();
     
     // Prevent session fixation by only allowing sessions that have been sent by the server.
     // Any session that does not contain our unique token will be regarded as foreign/fixated

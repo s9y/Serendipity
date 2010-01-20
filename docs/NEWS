@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * To support custom PHP sessions, s9y will only issue session_start,
+      if no session exists yet (garvinhicking)
+
     * Fix escaping when using ImageMagick to create PDF-thumbnail images
       (stm9x9)
 
