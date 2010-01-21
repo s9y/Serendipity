@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Add new template variable to feed*.tpl files to support new 
+      plugins like pubsubhubbub, so that plugins can embed data to the
+      main XML element (onli)
+
     * To support custom PHP sessions, s9y will only issue session_start,
       if no session exists yet (garvinhicking)
 

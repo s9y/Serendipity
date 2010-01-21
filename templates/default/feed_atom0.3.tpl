@@ -8,6 +8,7 @@
    xmlns:admin="http://webns.net/mvcb/"
    xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
    xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+    {$channel_display_dat}
     <link href="{$serendipityBaseURL}rss.php?version=atom0.3" rel="service.feed" title="{$metadata.title}" type="application/x.atom+xml" />
     <link href="{$serendipityBaseURL}"                        rel="alternate"    title="{$metadata.title}" type="text/html" />
     <link href="{$serendipityBaseURL}rss.php?version=2.0"     rel="alternate"    title="{$metadata.title}" type="application/rss+xml" />
