@@ -533,7 +533,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         if (LANG_CHARSET == 'UTF-8') {
             if (function_exists('imap_8bit')) {
                 $maildata['headers'][] = 'Content-Transfer-Encoding: quoted-printable';
-                $maildata['message']   = str_replace("=\r\n", "", imap_8bit($maildata['message']));
+                $maildata['message']   = imap_8bit($maildata['message']);
             } else {
                 $maildata['headers'][] = 'Content-Transfer-Encoding: base64';
                 $maildata['message']   = chunk_split(base64_encode($maildata['message']));

@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Experimental: When sending quoted-printable notification mails,
+      auto-split after 75 characters.
+      (Ref: http://board.s9y.org/viewtopic.php?f=3&t=16314)
+      
     * Add new template variable to feed*.tpl files to support new 
       plugins like pubsubhubbub, so that plugins can embed data to the
       main XML element (onli)
