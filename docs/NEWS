@@ -31,6 +31,11 @@ Version 1.6 ()
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
+Version 1.5.2 (January 25th, 2010)
+------------------------------------------------------------------------
+
+    * Fixed SQL upgrade path for SQLite.
+
 Version 1.5.1 (December 21st, 2009)
 ------------------------------------------------------------------------
 
