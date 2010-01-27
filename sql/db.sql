@@ -257,7 +257,7 @@ CREATE UNIQUE INDEX entryid_idx ON {PREFIX}entrycat (entryid, categoryid);
 create table {PREFIX}entryproperties (
   entryid int(11) not null,
   property varchar(255) not null,
-  value text
+  value {TEXT}
 ) {UTF_8};
 
 CREATE INDEX entrypropid_idx ON {PREFIX}entryproperties (entryid);
