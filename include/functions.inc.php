@@ -528,6 +528,7 @@ function serendipity_sendMail($to, $subject, $message, $fromMail, $headers = NUL
         $maildata['headers'][] = 'MIME-Version: 1.0';
         $maildata['headers'][] = 'Precedence: bulk';
         $maildata['headers'][] = 'Content-Type: text/plain; charset=' . LANG_CHARSET;
+        $maildata['headers'][] = 'Auto-Submitted: auto-generated';
 
         if (LANG_CHARSET == 'UTF-8') {
             if (function_exists('imap_8bit')) {
