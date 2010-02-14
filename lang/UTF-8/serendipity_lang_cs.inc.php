@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.4 2009-08-25 20:20:17 VladaAjgl $
+<?php # lang_cs.inc.php 1.5 2010-02-06 14:24:18 VladaAjgl $
 
 /**
- *  @version 1.4
+ *  @version 1.5
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -11,6 +11,8 @@
  *  @revisionDate 2009/07/14
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/08/25
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2010/02/06
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -23,11 +25,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET', 'utf8');
+@define('SQL_CHARSET',		'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'cs-utf');
+@define('WYSIWYG_LANG',		'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -618,12 +620,12 @@ $i18n_filename_to = array (
 @define('ACTUAL',		'Aktuální');
 @define('PHPINI_CONFIGURATION',		'konfigurace php.ini');
 @define('PHP_INSTALLATION',		'Instalace PHP');
-@define('THEY_DO',		'they do');
-@define('THEY_DONT',		'they do not');
+@define('THEY_DO',		'existují');
+@define('THEY_DONT',		'neexistují');
 @define('SIMPLE_INSTALLATION',		'Jednoduchá instalace');
 @define('EXPERT_INSTALLATION',		'Expertní instalace');
 @define('COMPLETE_INSTALLATION',		'Kompletní instalace');
-@define('WONT_INSTALL_DB_AGAIN',		'nechci znovu instalovat databázi');
+@define('WONT_INSTALL_DB_AGAIN',		'nebude se znovu instalovat databáze');
 @define('CHECK_DATABASE_EXISTS',		'Kontrola, jestli databáze a tabulky opravdu existují');
 @define('CREATING_PRIMARY_AUTHOR',		'Vytvoření hlavního autora \'%s\'');
 @define('SETTING_DEFAULT_TEMPLATE',		'Nastavení defaultního vzoru');
@@ -972,7 +974,7 @@ $i18n_filename_to = array (
 @define('INSTALL_OFFSET_ON_SERVER_TIME_DESC',		'Posun času příspěvků vůči času na serveru. Vyberte "ano" pro zadání relativního časového posunu vůči hodinám serveru. Nikoliv posun vůči GMT (Greenwich mean time).');
 
 // Next lines were translated on 2009/08/25
+
 @define('QUICKSEARCH_SORT',		'Jak mají být řazeny výsledky hledání?');
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
-@define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
-
+@define('PERMISSION_HIDDENGROUP', 'Skrytá skupina / Bez autora');
