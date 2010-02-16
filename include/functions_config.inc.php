@@ -895,10 +895,10 @@ function serendipity_probeInstallation($item) {
             if (extension_loaded('mysqli')) {
                 $res['mysqli'] = 'MySQLi';
             }
-            if (extension_loaded('sqlite')) {
+            if (extension_loaded('sqlite') && function_exists('sqlite_open')) {
                 $res['sqlite'] = 'SQLite';
             }
-            if (extension_loaded('SQLITE3')) {
+            if (extension_loaded('SQLITE3') && function_exists('sqlite3_open')) {
                 $res['sqlite3'] = 'SQLite3';
             }
             if (function_exists('sqlrcon_alloc')) {
