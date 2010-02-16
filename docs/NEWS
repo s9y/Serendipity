@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Stricter check for sqlite3 extension, only functional interface
+      instead of OOP currently supported (garvinhicking)
+      
     * Experimental: When sending quoted-printable notification mails,
       auto-split after 75 characters.
       (Ref: http://board.s9y.org/viewtopic.php?f=3&t=16314)
