@@ -23,7 +23,7 @@ class serendipity_event_creativecommons extends serendipity_event {
         $propbag->add('description',   PLUGIN_CREATIVECOMMONS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Evan Nemerson');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -198,12 +198,12 @@ class serendipity_event_creativecommons extends serendipity_event {
                 break;
 
             case 'frontend_display:rss-2.0:namespace':
-                $eventData['display_dat'] .= 'xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"';
+                $eventData['display_dat'] .= ' xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" ';
                 return true;
                 break;
 
             case 'frontend_display:rss-1.0:namespace':
-                $eventData['display_dat'] .= 'xmlns:cc="http://web.resource.org/cc/"';
+                $eventData['display_dat'] .= ' xmlns:cc="http://web.resource.org/cc/" ';
                 return true;
                 break;
 
