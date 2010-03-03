@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Recent entries plugin can now fetch the associated categoryid,
+      when a single entry is displayed. (Garvinhicking)
+
     * Stricter check for sqlite3 extension, only functional interface
       instead of OOP currently supported (garvinhicking)
       

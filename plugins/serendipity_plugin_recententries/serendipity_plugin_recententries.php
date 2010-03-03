@@ -21,7 +21,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
-        $propbag->add('version',       '2.1');
+        $propbag->add('version',       '2.2');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -139,6 +139,10 @@ class serendipity_plugin_recententries extends serendipity_plugin {
 
         if ($category == '_cur') {
             $category = $serendipity['GET']['category'];
+            if (empty($category) && !empty($serendipity['GET']['id'])) {
+                $entry = serendipity_fetchEntry('id', $serendipity['GET']['id']);
+                $category = $entry['categories'][0]['categoryid'];
+            }
         }
         $title          = $this->get_config('title', $this->title);
         $number_from_sw = $this->get_config('number_from');
@@ -147,10 +151,12 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $sql_condition = array();
         $sql_condition['joins'] = '';
         $sql_condition['and']   = '';
-        if ($category != 'none') {
-            $sql_condition['joins'] .= 
-                'LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid
-                 LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid';
+
+        $sql_condition['joins'] .= 
+            'LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid
+             LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid';
+
+        if ($category != 'none' && !empty($category)) {
                          
             $sql_categories = array();
             if (is_numeric($category)) {
