@@ -32,7 +32,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_XHTMLCLEANUP_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.6');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -104,7 +104,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
             $propbag->add('type',        'boolean');
             $propbag->add('name',        PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE);
             $propbag->add('description', PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC);
-            $propbag->add('default',     'true');
+            $propbag->add('default',     'false');
         } else {
             $propbag->add('type',        'boolean');
             $propbag->add('name',        constant($name));
