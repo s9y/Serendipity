@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix SQLite substring search to use % instead of * for secondary
+      matches (SvOlli)
+
     * Recent entries plugin can now fetch the associated categoryid,
       when a single entry is displayed. (Garvinhicking)
 
