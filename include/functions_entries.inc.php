@@ -773,6 +773,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
         // Very extensive SQLite search. There currently seems no other way to perform fulltext search in SQLite
         // But it's better than no search at all :-D
+        $term = str_replace('*', '%', $term);
         $cond['group']     = 'GROUP BY e.id';
         $cond['distinct']  = '';
         $term              = serendipity_mb('strtolower', $term);
@@ -863,7 +864,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
 
     //if * wasn't already appended and if there are none or not enough
     //results, search again for entries containing the searchterm as a part  
-    if (strpos($term, '*') === false) {
+    if (strpos($term, '*') === false && strpos($term, '%') === false) {
         if (! is_array($search)) {
             return serendipity_searchEntries($term.'*', $orig_limit);
         }else if (count($search) < 4){
