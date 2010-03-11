@@ -864,7 +864,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
 
     //if * wasn't already appended and if there are none or not enough
     //results, search again for entries containing the searchterm as a part  
-    if (strpos($term, '*') === false && strpos($term, '%') === false) {
+    if (strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3') {
         if (! is_array($search)) {
             return serendipity_searchEntries($term.'*', $orig_limit);
         }else if (count($search) < 4){
