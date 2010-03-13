@@ -152,10 +152,6 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $sql_condition['joins'] = '';
         $sql_condition['and']   = '';
 
-        $sql_condition['joins'] .= 
-            'LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid
-             LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid';
-
         if ($category != 'none' && !empty($category)) {
                          
             $sql_categories = array();
@@ -203,6 +199,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $sql_condition['and'] .= "AND timestamp <= " . time();
         serendipity_ACL_SQL($sql_condition, $category == 'none');
 
+        if (!stristr($sql_condition['joins'], $serendipity['dbPrefix'] . 'entrycat')) {
+            $sql_condition['joins'] .= ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid ';
+        }
+
+        if (!stristr($sql_condition['joins'], $serendipity['dbPrefix'] . 'category')) {
+            $sql_condition['joins'] .= ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid ';
+        }
+
         $entries_query = "SELECT DISTINCT id,
                                 title,
                                 timestamp
@@ -213,6 +217,11 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                                 $sql_number";
         
         $entries = serendipity_db_query($entries_query);
+        
+        if (is_string($entries)) {
+            echo $entries . "<br />\n";
+            echo $entries_query . "<br />\n";
+        }
 
         if (isset($entries) && is_array($entries)) {
             echo '<dl>' . "\n";
