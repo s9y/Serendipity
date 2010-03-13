@@ -21,7 +21,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
-        $propbag->add('version',       '2.2');
+        $propbag->add('version',       '2.3');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -199,12 +199,13 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $sql_condition['and'] .= "AND timestamp <= " . time();
         serendipity_ACL_SQL($sql_condition, $category == 'none');
 
-        if (!stristr($sql_condition['joins'], $serendipity['dbPrefix'] . 'entrycat')) {
-            $sql_condition['joins'] .= ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid ';
-        }
 
         if (!stristr($sql_condition['joins'], $serendipity['dbPrefix'] . 'category')) {
-            $sql_condition['joins'] .= ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid ';
+            $sql_condition['joins'] = ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'category AS c  ON ec.categoryid = c.categoryid ' . $sql_condition['joins'];
+        }
+
+        if (!stristr($sql_condition['joins'], $serendipity['dbPrefix'] . 'entrycat')) {
+            $sql_condition['joins'] = ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid ' . $sql_condition['joins'];
         }
 
         $entries_query = "SELECT DISTINCT id,
