@@ -465,9 +465,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         $serendipity['GET']['viewAuthor'] = implode(';', $serendipity['POST']['multiAuth']);
         $serendipity['uriArguments'][]    = PATH_AUTHORS;
         $serendipity['uriArguments'][]    = serendipity_db_escape_string($serendipity['GET']['viewAuthor']) . '-multi';
-    } elseif (preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
+    } elseif (empty($matches[1]) && preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
         $is_multiauth = true;
         $serendipity['GET']['viewAuthor'] = $multimatch[1];
+    } else {
+        $serendipity['GET']['viewAuthor'] = $matches[1];
     }
 
     $serendipity['GET']['action'] = 'read';
