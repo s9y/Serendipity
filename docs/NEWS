@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix "viewAuthor" URL detection routine if the path name of a
+      domain begins with a number. (garvinhicking)
+
     * Fix SQLite substring search to use % instead of * for secondary
       matches (SvOlli)
 
