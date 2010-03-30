@@ -816,6 +816,7 @@ function serendipity_track_url($list, $url, $entry_id = 0) {
     global $serendipity;
 
     $url_parts = parse_url($url);
+    $url_parts['query'] = substr($url_parts['query'], 0, 255);
 
     serendipity_db_query(
       @sprintf(
