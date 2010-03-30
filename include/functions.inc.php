@@ -739,6 +739,8 @@ function serendipity_track_referrer($entry = 0) {
 
         $ts       = serendipity_db_get_interval('ts');
         $interval = serendipity_db_get_interval('interval', 900);
+        
+        $url_parts['query'] = substr($url_parts['query'], 0, 255);
 
         $suppressq = "SELECT count(1)
                       FROM $serendipity[dbPrefix]suppress
