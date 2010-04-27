@@ -93,19 +93,19 @@ if ($serendipity['GET']['adminAction'] == 'doDelete' && serendipity_checkFormTok
                           AND c.category_left BETWEEN {$category_range}
                           {$admin_category}";
         }
-        if ( serendipity_db_query($query) ) {
-            if (serendipity_deleteCategory($category_range, $admin_category) ) {
 
-                foreach($category_ranges AS $cid) {
-                    if (serendipity_ACLCheck($serendipity['authorid'], $cid, 'category', 'write')) {
-                        serendipity_ACLGrant($cid, 'category', 'read', array());
-                        serendipity_ACLGrant($cid, 'category', 'write', array());
-                    }
+        serendipity_db_query($query);
+        if (serendipity_deleteCategory($category_range, $admin_category) ) {
+
+            foreach($category_ranges AS $cid) {
+                if (serendipity_ACLCheck($serendipity['authorid'], $cid, 'category', 'write')) {
+                    serendipity_ACLGrant($cid, 'category', 'read', array());
+                    serendipity_ACLGrant($cid, 'category', 'write', array());
                 }
-
-                echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ($remaining_cat ? sprintf(CATEGORY_DELETED_ARTICLES_MOVED, (int)$serendipity['GET']['cid'], $remaining_cat) : sprintf(CATEGORY_DELETED,(int)$serendipity['GET']['cid'])) .'</div>';
-                $serendipity['GET']['adminAction'] = 'view';
             }
+
+            echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ($remaining_cat ? sprintf(CATEGORY_DELETED_ARTICLES_MOVED, (int)$serendipity['GET']['cid'], $remaining_cat) : sprintf(CATEGORY_DELETED,(int)$serendipity['GET']['cid'])) .'</div>';
+            $serendipity['GET']['adminAction'] = 'view';
         }
     } else {
         echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />'. INVALID_CATEGORY .'</div>';

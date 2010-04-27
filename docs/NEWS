@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix SQL query statement for deleting a category, which on some
+      DB types (SQlite) might not return "true" and thus not really
+      delete the category. (garvinhicking)
+
     * Truncate suppressed referrer's query string to 255 characters
       (ads)
 
