@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2597 2009-11-25 20:41:43Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2627 2010-01-13 12:25:58Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -959,3 +959,4 @@
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

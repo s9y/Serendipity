@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_tn.inc.php 2575 2009-08-24 08:24:19Z garvinhicking $
+<?php # $Id: serendipity_lang_tn.inc.php 2627 2010-01-13 12:25:58Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by CapriSkye <admin@capriskye.com>
@@ -961,3 +961,4 @@ $i18n_unknown = 'tw';
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

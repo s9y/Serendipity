@@ -961,3 +961,4 @@
 
 @define('PERMISSION_HIDDENGROUP', 'グループ/非著者を隠す');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

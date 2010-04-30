@@ -959,3 +959,4 @@
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');
