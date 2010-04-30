@@ -98,7 +98,8 @@ if ($serendipity['smarty_raw_mode']) {
             $serendipity['smarty']->assign(
                 array(
                     'content_message'      => sprintf(YOUR_SEARCH_RETURNED_BLAHBLAH, '<span class="searchterm">' . $serendipity['GET']['searchTerm'] . '</span>', '<span class="searchresults">' . serendipity_getTotalEntries() . '</span>'),
-                    'searchresult_results' => true
+                    'searchresult_results' => true,
+                    'searchresult_fullentry' => $serendipity['GET']['fullentry']
                 )
             );
 

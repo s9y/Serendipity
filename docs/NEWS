@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added new 'fulltext' search option to sidebar plugin
+      http://board.s9y.org/viewtopic.php?f=4&t=16051
+
     * Fix SQL query statement for deleting a category, which on some
       DB types (SQlite) might not return "true" and thus not really
       delete the category. (garvinhicking)

@@ -368,8 +368,24 @@ class serendipity_quicksearch_plugin extends serendipity_plugin {
         $propbag->add('description',   SEARCH_FOR_ENTRY);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
+        $propbag->add('configuration', array('fullentry'));
         $propbag->add('groups',        array('FRONTEND_ENTRY_RELATED'));
+    }
+
+    function introspect_config_item($name, &$propbag)
+    {
+        switch($name) {
+            case 'fullentry':
+                $propbag->add('type',       'boolean');
+                $propbag->add('name',        SEARCH_FULLENTRY);
+                $propbag->add('description', '');
+                $propbag->add('default',     true);
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 
     function generate_content(&$title)
@@ -377,10 +393,12 @@ class serendipity_quicksearch_plugin extends serendipity_plugin {
         global $serendipity;
 
         $title = $this->title;
+        $fullentry = serendipity_db_bool($this->get_config('fullentry', true));
 ?>
 <form id="searchform" action="<?php echo $serendipity['serendipityHTTPPath'] . $serendipity['indexFile']; ?>" method="get">
     <div>
         <input type="hidden"  name="serendipity[action]" value="search" />
+        <input type="hidden"  name="serendipity[fullentry]" value="<?php echo $fullentry ?>" />
         <input alt="<?php echo QUICKSEARCH; ?>" type="text"   id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" size="13" />
         <input class="quicksearch_submit" type="submit" value="&gt;" alt="<?php echo QUICKSEARCH; ?>" name="serendipity[searchButton]" title="<?PHP echo GO; ?>" style="width: 2em;" />
     </div>
