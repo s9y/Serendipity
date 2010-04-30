@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 2627 2010-01-13 12:25:58Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 2640 2010-02-28 19:27:58Z elf2000 $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2010.
@@ -961,3 +961,4 @@
 
 @define('PERMISSION_HIDDENGROUP', 'グループ/非著者を隠す');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

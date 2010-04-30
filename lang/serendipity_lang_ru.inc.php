@@ -961,3 +961,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

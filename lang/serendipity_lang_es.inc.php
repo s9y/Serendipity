@@ -975,3 +975,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');

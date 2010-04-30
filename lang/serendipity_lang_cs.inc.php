@@ -978,3 +978,4 @@ $i18n_filename_to = array (
 @define('QUICKSEARCH_SORT',		'Jak mají být øazeny výsledky hledání?');
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
 @define('PERMISSION_HIDDENGROUP', 'Skrytá skupina / Bez autora');
+@define('SEARCH_FULLENTRY', 'Show full entry');

@@ -145,3 +145,4 @@ foreach($const['missing'] AS $file => $constants) {
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
+@define('SEARCH_FULLENTRY', 'Show full entry');
