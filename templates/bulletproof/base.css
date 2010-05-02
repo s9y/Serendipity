@@ -237,6 +237,8 @@ ul.archives_row li.archives_link {
     width: 19.9%;
 }
 
+.archive_summary dd { margin-left: 0; }
+
 ul.staticpage_navigation {
     list-style-type: none;
     display: inline;
