@@ -5,8 +5,9 @@
         {foreach from=$entries item="entries"}
             {foreach from=$entries.entries item="entry"}
                 <dl class="archive_summary {cycle values='archive_summary_odd,archive_summary_even'}">
-                    <h4 class="archive_summary_title"><a href="{$entry.link}">{$entry.title|truncate:80:" ..."}</a></h4>
-                    <dt class="archive_summary_postdate">{$entry.timestamp|@formatTime:$template_option.date_format}</dt>
+                    <dt class="archive_summary_title"><a href="{$entry.link}">{$entry.title|truncate:80:" ..."}</a></dt>
+                    <dd class="archive_summary_postdate">{$entry.timestamp|@formatTime:$template_option.date_format}</dd>
+                  {if $template_option.footerauthor == 'true' or $template_option.footercategories == 'true'}
                     <dd class="archive_summary_postdetails">
                         {if $template_option.footerauthor == 'true'}
                             {$CONST.POSTED_BY} <address class="author"><a href="{$entry.link_author}">{$entry.author}</a></address>
@@ -17,6 +18,7 @@
                             {/if}
                         {/if}
                     </dd>
+                  {/if}
                 </dl>
             {/foreach}
         {/foreach}
