@@ -9,6 +9,7 @@
    xmlns:content="http://purl.org/rss/1.0/modules/content/"
    {$namespace_display_dat}>
 <channel>
+    {$channel_display_dat}
     <title>{$metadata.title}</title>
     <link>{$metadata.link}</link>
     <description>{$metadata.description}</description>
