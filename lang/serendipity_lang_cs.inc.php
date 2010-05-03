@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.5 2010-02-06 14:24:18 VladaAjgl $
+<?php # lang_cs.inc.php 1.6 2010-05-02 22:01:52 VladaAjgl $
 
 /**
- *  @version 1.5
+ *  @version 1.6
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -13,6 +13,8 @@
  *  @revisionDate 2009/08/25
  *  @author Vladimнr Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/02/06
+ *  @author Vladimнr Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2010/05/02
  */
 $i18n_filename_from = array (
 'б','и','п','й','м','н','е','Њ','т','у','а','ш','Ь','Ъ','Э','ъ','щ','э','Я','Ю',
@@ -978,4 +980,4 @@ $i18n_filename_to = array (
 @define('QUICKSEARCH_SORT',		'Jak majн bэt шazeny vэsledky hledбnн?');
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
 @define('PERMISSION_HIDDENGROUP', 'Skrytб skupina / Bez autora');
-@define('SEARCH_FULLENTRY', 'Show full entry');
+@define('SEARCH_FULLENTRY', 'Zobrazit celэ pшнspмvek');
