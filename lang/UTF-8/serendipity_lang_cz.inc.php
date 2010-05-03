@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1.5 2010-02-06 14:24:17 VladaAjgl $
+<?php # lang_cz.inc.php 1.6 2010-05-02 22:01:52 VladaAjgl $
 
 /**
- *  @version 1.5
+ *  @version 1.6
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -13,6 +13,8 @@
  *  @revisionDate 2009/08/25
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/02/06
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2010/05/02
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -25,11 +27,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET', 'utf8');
+@define('SQL_CHARSET',		'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, cs_CZ.UTF8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'cs-utf');
+@define('WYSIWYG_LANG',		'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -978,4 +980,4 @@ $i18n_filename_to = array (
 @define('QUICKSEARCH_SORT',		'Jak mají být řazeny výsledky hledání?');
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
 @define('PERMISSION_HIDDENGROUP', 'Skrytá skupina / Bez autora');
-@define('SEARCH_FULLENTRY', 'Show full entry');
+@define('SEARCH_FULLENTRY', 'Zobrazit celý příspěvek');
