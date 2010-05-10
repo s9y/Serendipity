@@ -60,9 +60,11 @@ Version 1.6 ()
 Version 1.5.3 (May 10th, 2010);
 ------------------------------------------------------------------------
 
-    * Temporarily disabled ExtendedFilemanager, ImageManager, 
-      InsertSnippet and Linker plugins for bundled Xinha editor.
-
+    * Added workaround for dynamic configuration of Xinha plugins
+      ExtendedFilemanager, ImageManager,
+      InsertSnippet and Linker plugins to avoid remote code inclusion.
+      (Stefan Esser)
+                      
 Version 1.5.2 (January 25th, 2010)
 ------------------------------------------------------------------------
 
