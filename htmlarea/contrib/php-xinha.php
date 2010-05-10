@@ -26,7 +26,13 @@
 // temporary
 unset($_REQUEST['backend_config']);
 unset($_REQUEST['backend_data']);
-      
+function xinha_read_passed_data() {
+  return array("msg"=>"dynamic configuration disabled for security reason");
+}
+function xinha_passed_data_querystring() {
+  return '';
+}
+                        
   function xinha_pass_to_php_backend($Data, $KeyLocation = 'Xinha:BackendKey', $ReturnPHP = FALSE)
   {
    
@@ -142,7 +148,7 @@ unset($_REQUEST['backend_data']);
   *  if none was passed or a security error was encountered.
   */
   
-  function xinha_read_passed_data()
+  function oldxinha_read_passed_data()
   {
    if(isset($_REQUEST['backend_data']) && is_array($_REQUEST['backend_data']))
    {
@@ -167,7 +173,7 @@ unset($_REQUEST['backend_data']);
   * (or another part of the backend) to send the same data.
   */
   
-  function xinha_passed_data_querystring()
+  function oldxinha_passed_data_querystring()
   {
    $qs = array();
    if(isset($_REQUEST['backend_data']) && is_array($_REQUEST['backend_data']))
