@@ -22,6 +22,10 @@
    *  </script>
    * 
    */
+
+// temporary
+unset($_REQUEST['backend_config']);
+unset($_REQUEST['backend_data']);
       
   function xinha_pass_to_php_backend($Data, $KeyLocation = 'Xinha:BackendKey', $ReturnPHP = FALSE)
   {
