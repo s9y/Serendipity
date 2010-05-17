@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Include referrer in comment notification email (konus)
+
     * Added new 'fulltext' search option to sidebar plugin
       http://board.s9y.org/viewtopic.php?f=4&t=16051
 
