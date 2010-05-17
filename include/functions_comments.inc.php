@@ -835,7 +835,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
         || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
         || ($type == 'TRACKBACK' && serendipity_db_bool($row['mail_trackbacks'])))) {
-        serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']));
+        serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
     }
 
     // Approve with force, if moderation is disabled
@@ -1083,7 +1083,7 @@ function serendipity_cancelSubscription($email, $entry_id) {
  * @param  boolean  Toggle Whether comments to this entry need approval
  * @return boolean  Return success of sending the mails
  */
-function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromUrl, $id, $title, $comment, $type = 'NORMAL', $moderate_comment = false) {
+function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromUrl, $id, $title, $comment, $type = 'NORMAL', $moderate_comment = false, $referer = '') {
     global $serendipity;
 
     if (empty($fromName)) {
@@ -1159,6 +1159,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
               . "\n" . USER . ' ' . NAME       . ': ' . $fromName
               . "\n" . USER . ' ' . EMAIL      . ': ' . $fromEmail
               . "\n" . USER . ' ' . HOMEPAGE   . ': ' . $fromUrl
+              . "\n" . USER . ' ' . REFERER    . ': ' . $referer
               . "\n"
               . "\n" . COMMENTS                . ': '
               . "\n" . strip_tags($comment)
