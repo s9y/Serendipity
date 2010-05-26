@@ -21,7 +21,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
-        $propbag->add('version',       '2.3');
+        $propbag->add('version',       '2.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -210,9 +210,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
 
         $entries_query = "SELECT DISTINCT id,
                                 title,
-                                timestamp
+                                timestamp,
+                                epm.value AS multilingual_title
                            FROM {$serendipity['dbPrefix']}entries AS e
                                 {$sql_condition['joins']}
+
+                LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties AS epm
+                             ON (epm.entryid = e.id AND epm.property = 'multilingual_title_" . $serendipity['lang'] . "')
+
                           WHERE isdraft = 'false' {$sql_condition['and']}
                                 $sql_order
                                 $sql_number";
@@ -227,6 +232,9 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         if (isset($entries) && is_array($entries)) {
             echo '<dl>' . "\n";
             foreach ($entries as $k => $entry) {
+                if (!empty($entry['multilingual_title'])) {
+                    $entry['title'] = $entry['multilingual_title'];
+                }
                 $entryLink = serendipity_archiveURL(
                                $entry['id'],
                                $entry['title'],

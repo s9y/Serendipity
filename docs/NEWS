@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Recent entry properties now recognizes multilingual titles
+    
     * Include referrer in comment notification email (konus)
 
     * Added new 'fulltext' search option to sidebar plugin
