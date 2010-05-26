@@ -54,7 +54,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.3');
+        $propbag->add('version',       '2.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -1991,6 +1991,7 @@ function invertSelection() {
             } elseif ($rating <= -0.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_2;
             } elseif ($rating <= 0.5) {
+                $rating = PLUGIN_KARMA_VOTEPOINT_3;
             } elseif ($rating <= 1.5) {
                 $rating = PLUGIN_KARMA_VOTEPOINT_4;
             } else {
