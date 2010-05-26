@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix karma rating plugin missing the text translation for a 
+      specific point area
+      
     * Recent entry properties now recognizes multilingual titles
     
     * Include referrer in comment notification email (konus)
