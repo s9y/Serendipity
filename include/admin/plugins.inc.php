@@ -73,6 +73,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
     $name = htmlspecialchars($bag->get('name'));
     $desc = htmlspecialchars($bag->get('description'));
+    $license = htmlspecialchars($bag->get('license'));
 
     $documentation = $bag->get('website');
 
@@ -169,6 +170,11 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             ?>
             </td>
         </tr>
+         <?php
+            if (!empty($license)) {
+                echo '<th>'.MEDIA_PROPERTY_COPYRIGHT.'</th><td>'.$license.'</td>';
+            }
+        ?>
     </table>
 <br />
 

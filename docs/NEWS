@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Include license output in plugin listing (onli)
+    
     * Fix karma rating plugin missing the text translation for a 
       specific point area
       
