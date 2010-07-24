@@ -1431,10 +1431,10 @@ function serendipity_deleteEntry($id) {
     serendipity_purgeEntry($id, $result[0]);
 
     serendipity_plugin_api::hook_event('backend_delete_entry', $id);
-    serendipity_db_query("DELETE FROM {$serendipity["dbPrefix"]}entries WHERE id=$id");
-    serendipity_db_query("DELETE FROM {$serendipity["dbPrefix"]}entrycat WHERE entryid=$id");
-    serendipity_db_query("DELETE FROM {$serendipity["dbPrefix"]}entryproperties WHERE entryid=$id");
-    serendipity_db_query("DELETE FROM {$serendipity["dbPrefix"]}comments WHERE entry_id=$id");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entries WHERE id=$id");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entrycat WHERE entryid=$id");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid=$id");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}comments WHERE entry_id=$id");
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id='$id' AND type = ''");
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}permalinks WHERE entry_id='$id'");
 }
