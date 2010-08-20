@@ -882,7 +882,8 @@ function serendipity_smarty_init($vars = array()) {
 
             $serendipity['smarty']->template_dir  = array(
             	$template_dir,
-            	$serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default'
+            	$serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default',
+            	$serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_engine']
             );
             $serendipity['smarty']->compile_dir   = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE;
 
