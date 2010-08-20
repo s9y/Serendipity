@@ -1099,6 +1099,24 @@ class serendipity_plugin_api
 
         return $instance;
     }
+
+    /**
+     * Probe for a language include with constants. Still include defines later on, if some constants were missing
+     *
+     * @access public
+     * @param current plugin's path
+     * @return  object      Returns the plugin object or false, if failure
+     */
+    function load_language($path) {
+        global $serendipity;
+
+        $probelang = $path . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
+        if (file_exists($probelang)) {
+            include $probelang;
+        }
+        
+        include $path . '/lang_en.inc.php';
+    }
 }
 
 /** 

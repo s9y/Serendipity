@@ -3,6 +3,11 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Implemented suggestion of removing boilerplate code in plugin API:
+      Change hack protection, introduce unified language loading, see
+      http://board.s9y.org/viewtopic.php?f=11&t=16921
+      Thanks to mt2!
+
     * Fix PHP 5.3.2 parse error in a file, thanks to fyremoon
     
     * Include license output in plugin listing (onli)
