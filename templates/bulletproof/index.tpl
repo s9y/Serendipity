@@ -30,7 +30,7 @@
             <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie7.css"}" />
         <![endif]-->
         <!-- additional colorset stylesheet -->
-        <link rel="stylesheet" type="text/css" href="{$serendipityHTTPPath}templates/{$template}/{$template_option.colorset}_style.css" />
+        {if $template_option.colorset}<link rel="stylesheet" type="text/css" href="{$serendipityHTTPPath}templates/{$template}/{$template_option.colorset}_style.css" />{/if}
         {if $template_option.custheader == 'true'}
         <style type="text/css">
             #serendipity_banner {ldelim}
