@@ -880,11 +880,13 @@ function serendipity_smarty_init($vars = array()) {
                 $serendipity['smarty']->debugging       = true;
             }
 
-            $serendipity['smarty']->template_dir  = array(
-            	$template_dir,
-            	$serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default',
-            	$serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_engine']
-            );
+            $serendipity['smarty']->template_dir  = array($template_dir);
+            $p = explode(',', $serendipity['template_engine']);
+            foreach($p AS $te) {
+                $serendipity['smarty']->template_dir[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $te;
+            }
+
+            $serendipity['smarty']->template_dir[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default';
             $serendipity['smarty']->compile_dir   = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE;
 
             if (!is_dir($serendipity['smarty']->compile_dir) || !is_writable($serendipity['smarty']->compile_dir)) {
