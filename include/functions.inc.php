@@ -409,7 +409,7 @@ function serendipity_fetchUsers($user = '', $group = null, $is_count = false) {
         if ($group === 'hidden') {
             $query_join .= "LEFT OUTER JOIN {$serendipity['dbPrefix']}groupconfig AS gc
                                          ON (gc.property = 'hiddenGroup' AND gc.id = ag.groupid AND gc.value = 'true')";
-            $where .= " AND ISNULL(gc.id) ";
+            $where .= " AND gc.id IS NULL ";
         } elseif (is_array($group)) {
             foreach($group AS $idx => $groupid) {
                 $group[$idx] = (int)$groupid;
