@@ -851,7 +851,7 @@ function &serendipity_replaceSmartyVars($tpl_source, &$smarty) {
  * @return null
  */
 function serendipity_smarty_init($vars = array()) {
-    global $serendipity, $template_config;
+    global $serendipity, $template_config, $template_global_config;
 
     if (!isset($serendipity['smarty'])) {
         $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];

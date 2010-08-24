@@ -981,3 +981,6 @@ $i18n_filename_to = array (
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
 @define('PERMISSION_HIDDENGROUP', 'Skrytá skupina / Bez autora');
 @define('SEARCH_FULLENTRY', 'Zobrazit celý pøíspìvek');
+@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
+@define('NAV_LINK_TEXT', 'Enter the navbar link text');
+@define('NAV_LINK_URL', 'Enter the full URL of your link');

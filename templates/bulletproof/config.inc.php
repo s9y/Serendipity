@@ -280,36 +280,11 @@ $template_config = array(
         'type'          => 'string',
         'default'       => SITENAV_TITLE_TEXT,
     ),
-    array(
-        'var'           => 'amount',
-        'name'          => NAVLINK_AMOUNT,
-        'type'          => 'string',
-        'default'       => '5',
-    )
 );
 
+$template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option']);
-
-$navlinks = array();
-
-for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
-    $navlinks[] = array(
-        'title' => $template_loaded_config['navlink' . $i . 'text'],
-        'href'  => $template_loaded_config['navlink' . $i . 'url']
-    );
-    $template_config[] = array(
-        'var'           => 'navlink' . $i . 'text',
-        'name'          => NAV_LINK_TEXT . ' #' . $i,
-        'type'          => 'string',
-        'default'       => 'Link #' . $i,
-        );
-    $template_config[] = array(
-        'var'           => 'navlink' . $i . 'url',
-        'name'          => NAV_LINK_URL . ' #' . $i,
-        'type'          => 'string',
-        'default'       => '#',
-    );
-}
+serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
 if ($template_loaded_config['headerimage'] != '' && is_dir($_SERVER['DOCUMENT_ROOT'] . '/' . $template_loaded_config['headerimage'])) {
     $files = array();
@@ -326,8 +301,6 @@ if ($template_loaded_config['headerimage'] != '' && is_dir($_SERVER['DOCUMENT_RO
         $serendipity['smarty']->assign('random_headerimage', $template_loaded_config['headerimage'] . '/' . $files[0]);
     }
 }
-
-$serendipity['smarty']->assign_by_ref('navlinks', $navlinks);
 
 // Allow colorset authors to include license and attribution data
 $colorset_data = array();  // Maybe we'll want more data later...

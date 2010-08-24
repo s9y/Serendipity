@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_zh.inc.php 2627 2010-01-13 12:25:58Z garvinhicking $
+<?php # $Id: serendipity_lang_zh.inc.php 2652 2010-04-30 11:03:36Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by
@@ -959,3 +959,6 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
+@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
+@define('NAV_LINK_TEXT', 'Enter the navbar link text');
+@define('NAV_LINK_URL', 'Enter the full URL of your link');
