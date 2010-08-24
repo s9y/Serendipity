@@ -27,11 +27,20 @@ class template_option {
 
     function set_config($item, $value) {
         global $serendipity;
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                               WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'
-                                 AND name = '" . serendipity_db_escape_string($item) . "'");
-        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
-                                   VALUES ('t_" . serendipity_db_escape_string($serendipity['template']) . "', '" . serendipity_db_escape_string($item) . "', '" . serendipity_db_escape_string($value) . "')");
+        
+        if ($this->config[$item]['scope'] == 'global') {
+            serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                   WHERE okey = 't_global'
+                                     AND name = '" . serendipity_db_escape_string($item) . "'");
+            serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
+                                       VALUES ('t_global', '" . serendipity_db_escape_string($item) . "', '" . serendipity_db_escape_string($value) . "')");
+        } else {
+            serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                   WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'
+                                     AND name = '" . serendipity_db_escape_string($item) . "'");
+            serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (okey, name, value)
+                                       VALUES ('t_" . serendipity_db_escape_string($serendipity['template']) . "', '" . serendipity_db_escape_string($item) . "', '" . serendipity_db_escape_string($value) . "')");
+        }
         return true;
     }
 
@@ -70,8 +79,10 @@ if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
 
     if ($serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
+        $storage = new template_option();
+        $storage->import($template_config);
         foreach($serendipity['POST']['template'] AS $option => $value) {
-            template_option::set_config($option, $value);
+            $storage->set_config($option, $value);
         }
         echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')) . '</div>';
     }
@@ -82,8 +93,9 @@ if (is_array($template_config)) {
     echo serendipity_setFormToken();
 
     include S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
-    $template_vars =& serendipity_loadThemeOptions($template_config);
 
+    $template_vars =& serendipity_loadThemeOptions($template_config);
+    
     $template_options = new template_option();
     $template_options->import($template_config);
     $template_options->values =& $template_vars;

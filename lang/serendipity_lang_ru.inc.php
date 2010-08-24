@@ -962,3 +962,6 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
+@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
+@define('NAV_LINK_TEXT', 'Enter the navbar link text');
+@define('NAV_LINK_URL', 'Enter the full URL of your link');

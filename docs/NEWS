@@ -3,6 +3,16 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * (experimental) global theme options (garvinhicking)
+      Inside template's config.inc.php you can enable a global
+      navigation configuration feature:
+      
+      $template_global_config = array('navigation' => true);
+      serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
+      
+      More keys apart from "navigation" might get supported in the future.
+      
+
     * Implemented suggestion of removing boilerplate code in plugin API:
       Change hack protection, introduce unified language loading, see
       http://board.s9y.org/viewtopic.php?f=11&t=16921

@@ -2070,7 +2070,8 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '') {
     }
 
     $_template_vars =& serendipity_db_query("SELECT name, value FROM {$serendipity['dbPrefix']}options
-                                             WHERE okey = 't_" . serendipity_db_escape_string($okey) . "'", false, 'assoc', false, 'name', 'value');
+                                             WHERE okey = 't_" . serendipity_db_escape_string($okey) . "'
+                                                OR okey = 't_global'", false, 'assoc', false, 'name', 'value');
     if (!is_array($_template_vars)) {
         $template_vars = array();
     } else {
@@ -2085,6 +2086,63 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '') {
 
     return $template_vars;
 }
+
+/**
+ * Load global available/configured options for a specific theme
+ * into an array.
+ *
+ * @param   array   Referenced variable coming from the config.inc.php file, where the config values will be stored in
+ * @param   array   Current template configuration
+ * @return  array   Final return array with default values
+ */
+function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded_config, $supported = array()) {
+    global $serendipity;
+    
+    if ($supported['navigation']) {
+        $navlinks = array();
+
+        $conf_amount = array(
+                'var'           => 'amount',
+                'name'          => NAVLINK_AMOUNT,
+                'type'          => 'string',
+                'default'       => '5',
+                'scope'         => 'global'
+        );
+        $template_config[] = $conf_amount;
+        
+        if (empty($template_loaded_config['amount'])) {
+            $template_loaded_config['amount'] = $conf_amount['default'];
+        }
+    
+        for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
+            $navlinks[] = array(
+                'title' => $template_loaded_config['navlink' . $i . 'text'],
+                'href'  => $template_loaded_config['navlink' . $i . 'url']
+            );
+    
+            $template_config[] = array(
+                'var'           => 'navlink' . $i . 'text',
+                'name'          => NAV_LINK_TEXT . ' #' . ($i+1),
+                'type'          => 'string',
+                'default'       => 'Link #' . $i,
+                'scope'         => 'global'
+            );
+            $template_config[] = array(
+                'var'           => 'navlink' . $i . 'url',
+                'name'          => NAV_LINK_URL . ' #' . ($i+1),
+                'type'          => 'string',
+                'default'       => '#',
+                'scope'         => 'global'
+            );
+        }
+    
+        $serendipity['smarty']->assign_by_ref('navlinks', $navlinks);
+    }
+    
+    // Forward thinking. ;-)
+    serendipity_plugin_api::hook_event('backend_templates_globalthemeoptions', $template_config, $supported);
+}
+
 
 
 /**
