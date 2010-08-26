@@ -172,7 +172,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         </tr>
          <?php
             if (!empty($license)) {
-                echo '<th>'.MEDIA_PROPERTY_COPYRIGHT.'</th><td>'.$license.'</td>';
+                echo '<tr><th>'.MEDIA_PROPERTY_COPYRIGHT.'</th><td>'.$license.'</td></tr>';
             }
         ?>
     </table>
