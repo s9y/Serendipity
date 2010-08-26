@@ -18,10 +18,6 @@ Version 1.6 ()
       http://board.s9y.org/viewtopic.php?f=11&t=16921
       Thanks to mt2!
 
-    * Fix PHP 5.3.2 parse error in a file, thanks to fyremoon
-    
-    * Include license output in plugin listing (onli)
-    
     * Fix karma rating plugin missing the text translation for a 
       specific point area
       
@@ -31,10 +27,6 @@ Version 1.6 ()
 
     * Added new 'fulltext' search option to sidebar plugin
       http://board.s9y.org/viewtopic.php?f=4&t=16051
-
-    * Fix SQL query statement for deleting a category, which on some
-      DB types (SQlite) might not return "true" and thus not really
-      delete the category. (garvinhicking)
 
     * Truncate suppressed referrer's query string to 255 characters
       (ads)
@@ -55,15 +47,8 @@ Version 1.6 ()
       auto-split after 75 characters.
       (Ref: http://board.s9y.org/viewtopic.php?f=3&t=16314)
       
-    * Add new template variable to feed*.tpl files to support new 
-      plugins like pubsubhubbub, so that plugins can embed data to the
-      main XML element (onli)
-
     * To support custom PHP sessions, s9y will only issue session_start,
       if no session exists yet (garvinhicking)
-
-    * Fix escaping when using ImageMagick to create PDF-thumbnail images
-      (stm9x9)
 
     * Use "Longtext" instead of "text" for new installations on blog entry
       body and extended body inside database tables. (garvinhicking)
@@ -83,7 +68,25 @@ Version 1.6 ()
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
-Version 1.5.3 (May 10th, 2010);
+Version 1.5.4 (August 26th, 2010)
+------------------------------------------------------------------------
+
+    * Fix PHP 5.3.2 parse error in a file, thanks to fyremoon
+
+    * Fix SQL query statement for deleting a category, which on some
+      DB types (SQlite) might not return "true" and thus not really
+      delete the category. (garvinhicking)
+
+    * Include license output in plugin listing (onli)
+
+    * Fix escaping when using ImageMagick to create PDF-thumbnail images
+      (stm9x9)
+      
+    * Add new template variable to feed*.tpl files to support new 
+      plugins like pubsubhubbub, so that plugins can embed data to the
+      main XML element (onli)
+
+Version 1.5.3 (May 10th, 2010)
 ------------------------------------------------------------------------
 
     * Added workaround for dynamic configuration of Xinha plugins
