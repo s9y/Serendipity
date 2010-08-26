@@ -71,6 +71,8 @@ Version 1.6 ()
 Version 1.5.4 (August 26th, 2010)
 ------------------------------------------------------------------------
 
+    * Fix XSS in backend, thanks to High-Tech Bridge SA #HTB22595
+
     * Fix PHP 5.3.2 parse error in a file, thanks to fyremoon
 
     * Fix SQL query statement for deleting a category, which on some

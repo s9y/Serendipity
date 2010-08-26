@@ -846,6 +846,10 @@ function serendipity_iframe_create($mode, &$entry) {
         return true;
     }
 
+    if (!serendipity_checkFormToken()) {
+        return false;
+    }
+
     $_SESSION['save_entry']      = $entry;
     $_SESSION['save_entry_POST'] = $serendipity['POST'];
     
