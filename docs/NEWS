@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * RSS feed timestamp properly calculates offset (abdussamad)
+    
     * (experimental) global theme options (garvinhicking)
       Inside template's config.inc.php you can enable a global
       navigation configuration feature:
