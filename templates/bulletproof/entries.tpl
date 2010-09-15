@@ -428,14 +428,14 @@
                 <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><span class="pagearrow">&#9668;</span></a>
             {/if}
             {if $paginationStartPage > 1}
-                <a href="{'1'|string_format:$footer_pageLink}">1</a>
+                <a href="{$footer_pageLink|replace:'%s':'1'}">1</a>
             {/if}
             {if $paginationStartPage > 2}
                 &hellip;
             {/if}
             {section name=i start=$paginationStartPage loop=$footer_totalPages+1 max=7}
                 {if $smarty.section.i.index != $footer_currentPage}
-                    <a href="{$smarty.section.i.index|string_format:$footer_pageLink}">{$smarty.section.i.index}</a>
+                    <a href="{$footer_pageLink|replace:'%s':$smarty.section.i.index}">{$smarty.section.i.index}</a>
                 {else}
                     <span id="thispage">{$smarty.section.i.index}</span>
                 {/if}
@@ -444,7 +444,7 @@
                 &hellip;
             {/if}
             {if $smarty.section.i.index <= $footer_totalPages}
-                <a href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
+                <a href="{$footer_pageLink|replace:'%s':$footer_totalPages}">{$footer_totalPages}</a>
             {/if}
             {if $footer_next_page}
                 <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><span class="pagearrow">&#9658;</span></a>
