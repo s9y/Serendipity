@@ -1206,7 +1206,7 @@ IMAGE;
                 switch($match[1]) {
                     case 'pubDate':
                         if (serendipity_db_bool($bag_content)) {
-                            $bag_content = gmdate('D, d M Y H:i:s \G\M\T', serendipity_serverOffsetHour($entries[0]['last_modified']));
+                            $bag_content = gmdate('D, d M Y H:i:s \G\M\T', $entries[0]['last_modified']);
                         } else {
                             $bag_content = '';
                         }
