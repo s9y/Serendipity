@@ -15,7 +15,7 @@ class serendipity_event_weblogping extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_WEBLOGPING_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.07');
+        $propbag->add('version',       '1.08');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -116,7 +116,7 @@ class serendipity_event_weblogping extends serendipity_event
                         $onclick   = '';
                         if (!empty($service['supersedes'])) {
                             $onclick    = 'onclick="';
-                            $supersedes = explode(', ', $service['supersedes']);
+                            $supersedes = $service['supersedes'];
                             foreach($supersedes AS $sid => $servicename) {
                                 $onclick .= 'document.getElementById(\'serendipity[announce_entries_' . $servicename . ']\').checked = false; ';
                             }
@@ -124,7 +124,7 @@ class serendipity_event_weblogping extends serendipity_event
                         }
 
                         $title    = sprintf(PLUGIN_EVENT_WEBLOGPING_SENDINGPING, $service['name'])
-                                  . (!empty($service['supersedes']) ?  ' ' . sprintf(PLUGIN_EVENT_WEBLOGPING_SUPERSEDES, $service['supersedes']) : '');
+                                  . (!empty($service['supersedes']) ?  ' ' . sprintf(PLUGIN_EVENT_WEBLOGPING_SUPERSEDES, implode(',', $service['supersedes'])) : '');
 ?>
                             <input <?php echo $onclick; ?> class="input_checkbox" style="margin: 0px; padding: 0px; vertical-align: bottom;" type="checkbox" name="serendipity[announce_entries_<?php echo $service['name']; ?>]" id="serendipity[announce_entries_<?php echo $service['name']; ?>]" value="true" <?php echo $selected; ?> />
                                 <label title="<?php echo $title; ?>" style="vertical-align: bottom; margin: 0px; padding: 0px;" for="serendipity[announce_entries_<?php echo $service['name']; ?>]">&nbsp;<?php echo $service['name']; ?>&nbsp;&nbsp;</label><br />
@@ -146,7 +146,7 @@ class serendipity_event_weblogping extends serendipity_event
                     // First cycle through list of services to remove superseding services which may have been checked
                     foreach ($this->services AS $index => $service) {
                         if (!empty($service['supersedes']) && isset($serendipity['POST']['announce_entries_' . $service['name']])) {
-                            $supersedes = explode(', ', $service['supersedes']);
+                            $supersedes = $service['supersedes'];
                             foreach($supersedes AS $sid => $servicename) {
                                 // A service has been checked that is superseded by another checked meta-service. Remove that service from the list of services to be ping'd
                                 unset($serendipity['POST']['announce_entries_' . $servicename]);
