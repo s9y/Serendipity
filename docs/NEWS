@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Only do '*' parameter expansion on the first page of search
+      results: http://board.s9y.org/viewtopic.php?f=10&t=14810
+      (onli, Timbalu)
+
     * RSS feed timestamp properly calculates offset (abdussamad)
     
     * (experimental) global theme options (garvinhicking)
