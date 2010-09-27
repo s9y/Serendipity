@@ -862,9 +862,12 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $search = array_merge($searchresults, $search);
     }
 
+    $p = (int)$serendipity['GET']['page'];
+    if ($p == 0) $p = 1;
+
     //if * wasn't already appended and if there are none or not enough
     //results, search again for entries containing the searchterm as a part  
-    if (strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3') {
+    if ($p == 1 && strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3') {
         if (! is_array($search)) {
             return serendipity_searchEntries($term.'*', $orig_limit);
         }else if (count($search) < 4){
