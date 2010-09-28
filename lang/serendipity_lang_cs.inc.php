@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.6 2010-05-02 22:01:52 VladaAjgl $
+<?php # lang_cs.inc.php 1.7 2010-09-12 11:21:23 VladaAjgl $
 
 /**
- *  @version 1.6
+ *  @version 1.7
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -15,6 +15,8 @@
  *  @revisionDate 2010/02/06
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/05/02
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2010/09/12
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','¾','ò','ó','à','ø','œ','š','','ú','ù','ı','Ÿ','',
@@ -981,6 +983,6 @@ $i18n_filename_to = array (
 @define('QUICKSEARCH_SORT_RELEVANCE',		'Relevance');
 @define('PERMISSION_HIDDENGROUP', 'Skrytá skupina / Bez autora');
 @define('SEARCH_FULLENTRY', 'Zobrazit celı pøíspìvek');
-@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
-@define('NAV_LINK_TEXT', 'Enter the navbar link text');
-@define('NAV_LINK_URL', 'Enter the full URL of your link');
+@define('NAVLINK_AMOUNT', 'Zadejte poèet odkazù navigaèní lišty (ihned po zadání této volby kliknìte na "Uloit" a obnovte stránku)');
+@define('NAV_LINK_TEXT', 'Test odkazu');
+@define('NAV_LINK_URL', 'URL adresa odkazu');
