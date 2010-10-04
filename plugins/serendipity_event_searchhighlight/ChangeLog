@@ -1,0 +1,10 @@
+ChangeLog:
+""""""""""
+
+[Version 1.7 2010/09/30] by Ian (Timbalu)
+ - added   to support the wildcard(*) search which was added in core. 
+           it will now act like a fuzzy search, if you enter an asterisk search. The search 'word*' will highlight case insensive all occurences of '%word%'. 
+ - added   the searchengine Bing (untested)
+ - added   to config the ability to highlight search results in static pages 
+           which are appended at the end of the search page. This does not work in the teaser itself, but on the opend static page.
+ - added   lang files constants <en>, <de> and <de-utf8>
