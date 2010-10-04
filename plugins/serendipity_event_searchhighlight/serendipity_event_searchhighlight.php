@@ -18,7 +18,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SEARCHHIGHLIGHT_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Tom Sommer');
-        $propbag->add('version',       '1.6');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -43,6 +43,10 @@ class serendipity_event_searchhighlight extends serendipity_event
             array(
               'name'     => 'HTML_NUGGET',
               'element'  => 'html_nugget',
+            ),
+            array(
+              'name'     => 'PLUGIN_EVENT_SEARCHHIGHLIGHT_STATICPAGE',
+              'element'  => 'content',
             )
         );
 
@@ -77,7 +81,8 @@ class serendipity_event_searchhighlight extends serendipity_event
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_ALTAVISTA', 5);
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_DE', 6);
         define('PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM', 7);
-        define('PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y', 8);
+        define('PLUGIN_EVENT_SEARCHHIGHLIGHT_BING', 8);
+        define('PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y', 9);
     }
 
     function getSearchEngine() {
@@ -105,8 +110,8 @@ class serendipity_event_searchhighlight extends serendipity_event
         if ( preg_match('@^search\.aol\.com@i', $url['host']) ) {
             return PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM;
         }
-        if ( preg_match('@^(www\.)?google\.@i', $url['host']) ) {
-            return PLUGIN_EVENT_SEARCHHIGHLIGHT_GOOGLE;
+        if ( preg_match('@^(www\.)?bing\.@i', $url['host']) ) {
+            return PLUGIN_EVENT_SEARCHHIGHLIGHT_BING;
         }
         
         if (!empty($_SESSION['search_referer']) && $this->uri != $_SESSION['search_referer']) {
@@ -122,6 +127,7 @@ class serendipity_event_searchhighlight extends serendipity_event
     }
 
     function getQuery() {
+        global $serendipity;
         if ( empty($this->uri) ) {
             return false;
         }
@@ -139,8 +145,15 @@ class serendipity_event_searchhighlight extends serendipity_event
                 if (!empty($_REQUEST['serendipity']['searchTerm'])) {
                     $query = $_REQUEST['serendipity']['searchTerm'];
                 }
+                if (!empty($serendipity['GET']['searchTerm'])) {
+                    $query = $serendipity['GET']['searchTerm'];
+                }
                 break;
 
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_MSN :
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_BING :
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_DE :
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_ALTAVISTA :
             case PLUGIN_EVENT_SEARCHHIGHLIGHT_GOOGLE :
                 $query = $pStr['q'];
                 break;
@@ -149,23 +162,8 @@ class serendipity_event_searchhighlight extends serendipity_event
                 $query = $pStr['p'];
                 break;
 
-            case PLUGIN_EVENT_SEARCHHIGHLIGHT_LYCOS :
-                $query = $pStr['query'];
-                break;
-
-            case PLUGIN_EVENT_SEARCHHIGHLIGHT_MSN :
-                $query = $pStr['q'];
-                break;
-
-            case PLUGIN_EVENT_SEARCHHIGHLIGHT_ALTAVISTA :
-                $query = $pStr['q'];
-                break;
-
-            case PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_DE :
-                $query = $pStr['q'];
-                break;
-
             case PLUGIN_EVENT_SEARCHHIGHLIGHT_AOL_COM :
+            case PLUGIN_EVENT_SEARCHHIGHLIGHT_LYCOS :
                 $query = $pStr['query'];
                 break;
 
@@ -206,11 +204,11 @@ class serendipity_event_searchhighlight extends serendipity_event
             if ( ($queries = $this->getQuery()) === false ) {
                 return;
             }
-
             $_SESSION['is_searchengine_visitor'] = true;
             $_SESSION['search_referer'] = $this->uri;
-
+            
             foreach ($this->markup_elements as $temp) {
+
                 if ( ! (serendipity_db_bool($this->get_config($temp['name'])) && isset($eventData[$temp['element']])) ) {
                     continue;
                 }
@@ -222,14 +220,26 @@ class serendipity_event_searchhighlight extends serendipity_event
 
                 $element = &$eventData[$temp['element']];
 
+                //Iterate over search terms and do the highlighting.
                 foreach ( $queries as $word ) {
-                    /* If the data contains HTML tags, we have to be careful not to break URIs and use a more complex preg */
-                    if ( preg_match('/\<.+\>/', $element) ) {
-                        $_pattern =  '/(?!<.*?)(\b'. preg_quote($word, '/') .'\b)(?![^<>]*?>)/im';
-                    } else {
-                        $_pattern = '/(\b'. preg_quote($word, '/') .'\b)/im';
-                    }
-                    $element = preg_replace($_pattern, '<span class="serendipity_searchQuery">$1</span>', $element);
+                    if ( strpos($word, '*') ) { 
+                        // fuzzy search (case insensitive) all words containing term; 
+                        $word = str_replace('*', '', $word);
+                        /* If the data contains HTML tags, we have to be careful not to break URIs and use a more complex preg */
+                        if ( preg_match('/\<.+\>/', $element) ) {
+                            $_pattern =  '/(?!<.*?)('. preg_quote($word, '/') .')(?![^<>]*?>)/im';
+                        } else {
+                            $_pattern = '/('.preg_quote($word, '/').')/im';
+                        }
+                    } else { 
+                        /* If the data contains HTML tags, we have to be careful not to break URIs and use a more complex preg */
+                        if ( preg_match('/\<.+\>/', $element) ) {
+                            $_pattern =  '/(?!<.*?)(\b'. preg_quote($word, '/') .'\b)(?![^<>]*?>)/im';
+                        } else {
+                            $_pattern = '/(\b'. preg_quote($word, '/') .'\b)/im';
+                        }
+                    } 
+					$element = preg_replace($_pattern, '<span class="serendipity_searchQuery">$1</span>', $element);
                 } // end foreach
             } // end foreach
             return;
