@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix newline before <?xml tag, thanks to deedw
+
     * Only do '*' parameter expansion on the first page of search
       results: http://board.s9y.org/viewtopic.php?f=10&t=14810
       (onli, Timbalu)

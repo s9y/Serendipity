@@ -77,8 +77,7 @@ global $serendipity;
     }
 
     // xml-rpc pingback call
-    $query = "
-<?xml version=\"1.0\"?>
+    $query = "<?xml version=\"1.0\"?>
 <methodCall>
   <methodName>pingback.ping</methodName>
   <params>
