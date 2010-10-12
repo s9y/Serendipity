@@ -1,0 +1,32 @@
+<html>
+    <head>
+		<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+		<meta name="generator" content="PSPad editor, www.pspad.com">
+        <title>Dokumentace: Zvýrazňování vyhledávaných řetězců</title>
+    </head>
+
+<body>
+    
+<h1>Dokumentace k pluginu 'Zvýrazňování vyhledávaných řetězců' (searchhighligh)</h1>
+
+<p>Dokumentaci k tomuto pluginu přeložil do češtiny Vladimír Ajgl (vlada [zavinac] ajgl [tecka] cz) dne 6.10.2010. Od té doby mohl být plugin pozměněn nebo mohly být rozšířené jeho funkce. Zkontrolujte pro jistotu i <a href="ChangeLog">aktuální anglický ChangeLog</a>.
+<p>
+
+
+<h2>Historie verzí (ChangeLog)</h2>
+<ul>
+<li>Verze 1.8, 11.10.2010, autor Ian (Timbalu)</li>
+	<ul>
+	<li>přidáno - zvýrazňování statických stránek, pokud není hledání vyvoláno $REQUEST['GET']['searchTerm'], nýbrž pokud přichází z /search/ referrer</li>
+	<li>změněno -  $_REQUEST na $serendipity['GET']</li>
+	</ul>
+<li>Verze 1.7, 30.9.2010, autor Ian (Timbalu)</li>
+	<ul>
+	<li>přidáno - podpora hledání se zástupnými znaky (*) byla přidána do jádra serendipity. Pokud nyní zadáte hvězdičku, bude probíhat chytré hledání. Např. po zadání 'slovo*' najde všechny výskyty '%slovo%' (bez rozlišování velikosti písmen)</li>
+	<li>přidáno - vyhledávací engine Bing (neotestováno)</li>
+	<li>přidáno - nastavitelná možnost prohledávání statických stránek. Výsledek jejich prohledávání je připojen na konec výpisu hledání. Nefunguje to na perexu, ale na otevřené statické stránce.</li>
+	<li>přidáno - konstanty do jazykových souborů &lt;en&gt;, &lt;de&gt; a &lt;de-utf&gt;</li>
+	</ul>
+</ul>
+  </body>
+</html>
