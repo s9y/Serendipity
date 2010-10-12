@@ -39,20 +39,7 @@ function serendipity_db_sqlite_fetch_array($row, $type = PDO::FETCH_BOTH)
         $newrow[preg_replace('@^.+\.(.*)@', '\1', $i)] = str_replace($search, $replace, $v);
     }
 
-    if ($type == PDO::FETCH_NUM)
-        $frow = array();
-    else
-        $frow = $newrow;
-
-    if ($type != PDO::FETCH_ASSOC) {
-        $i = 0;
-        foreach($newrow AS $k => $v) {
-            $frow[$i] = $v;
-            $i++;
-        }
-    }
-
-    return $frow;
+    return $newrow;
 }
 
 /**

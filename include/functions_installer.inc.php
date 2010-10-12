@@ -742,7 +742,7 @@ function serendipity_checkInstallation() {
         $errs[] = sprintf(CANT_EXECUTE_BINARY, 'convert imagemagick');
     }
 
-    if ($_POST['dbType'] == 'sqlite' || $_POST['dbType'] == 'sqlite3') {
+    if ($_POST['dbType'] == 'sqlite' || $_POST['dbType'] == 'sqlite3' || $_POST['dbType'] == 'pdo-sqlite') {
         // We don't want that our SQLite db file can be guessed from other applications on a server
         // and have access to our's. So we randomize the SQLite dbname.
         $_POST['sqlitedbName'] = $_POST['dbName'] . '_' . md5(time());
