@@ -770,7 +770,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         } else {
             $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
         }
-    } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
+    } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite') {
         // Very extensive SQLite search. There currently seems no other way to perform fulltext search in SQLite
         // But it's better than no search at all :-D
         $term = str_replace('*', '%', $term);
@@ -867,7 +867,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
 
     //if * wasn't already appended and if there are none or not enough
     //results, search again for entries containing the searchterm as a part  
-    if ($p == 1 && strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3') {
+    if ($p == 1 && strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3' && $serendipity['dbType'] != 'pdo-sqlite') {
         if (! is_array($search)) {
             return serendipity_searchEntries($term.'*', $orig_limit);
         }else if (count($search) < 4){
@@ -951,7 +951,7 @@ function serendipity_getTotalEntries() {
     global $serendipity;
 
     // The unique query condition was built previously in serendipity_fetchEntries()
-    if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
+    if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite') {
         $querystring  = "SELECT count(e.id) {$serendipity['fullCountQuery']} GROUP BY e.id";
     } else {
         $querystring  = "SELECT count(distinct e.id) {$serendipity['fullCountQuery']}";
@@ -960,7 +960,7 @@ function serendipity_getTotalEntries() {
     $query =& serendipity_db_query($querystring);
 
     if (is_array($query) && isset($query[0])) {
-        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
+        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite') {
             return count($query);
         } else {
             return $query[0][0];

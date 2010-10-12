@@ -236,7 +236,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 $max = time();
                 $min = $max - (15 * 60);
 
-                if ($serendipity['dbType'] == 'sqlite') {
+                if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite') {
                     $max_ts = date('H:i', $max);
                     $min_ts = date('H:i', $min);
                     $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (time BETWEEN '$min_ts' AND '$max_ts')";
