@@ -105,7 +105,7 @@ class serendipity_event_statistics extends serendipity_event
                         $this->createTables();
                     }
 
-                    if ($this->get_config('db_indices_created', 'false') !== '1') {
+                    if ((int)$this->get_config('db_indices_created', '0') == 0) {
                         $this->updateTables();
                     }
                     
