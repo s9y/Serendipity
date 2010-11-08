@@ -2215,7 +2215,7 @@ function &serendipity_getImageData($sRelativePath) {
         'authorid'          => 0,
         'hotlink'           => 0,
         'id'                => $sRelativePath,
-        'realname'          => $sFilename
+        'realname'          => $sFileName
     );
 
     return $array;
