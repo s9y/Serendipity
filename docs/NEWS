@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Make CSS permalink pattern compatible to 1&1 servers,
+      thanks to lfrantzen
+
     * PDO-SQLite patches by nth
 
     * Fix newline before <?xml tag, thanks to deedw

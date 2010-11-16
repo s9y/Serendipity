@@ -263,7 +263,7 @@ function serendipity_initPermalinks() {
     @define('PAT_FILENAME',       '0-9a-z\.\_!;,\+\-\%');
     @define('PAT_FILENAME_MATCH', '[' . PAT_FILENAME . ']+');
     @define('PAT_DIRNAME_MATCH',  '[' . PAT_FILENAME . '/]*');
-    @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)$@');
+    @define('PAT_CSS',            '@/(serendipity\.css|serendipity_admin\.css)@');
     @define('PAT_FEED',           '@/(index|atom[0-9]*|rss|b2rss|b2rdf).(rss|rdf|rss2|xml)@');
     @define('PAT_COMMENTSUB',     '@/([0-9]+)[_\-][' . PAT_FILENAME . ']*\.html@i');
 
