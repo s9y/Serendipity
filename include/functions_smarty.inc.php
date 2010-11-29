@@ -465,8 +465,11 @@ function serendipity_smarty_showPlugin($params, &$smarty) {
     if (!isset($params['negate'])) {
         $params['negate'] = null;
     }
+    if (empty($params['template'])) {
+        $params['template'] = 'sidebar.tpl';
+    }
 
-    return serendipity_plugin_api::generate_plugins($params['side'], null, $params['negate'], $params['class'], $params['id']);
+    return serendipity_plugin_api::generate_plugins($params['side'], null, $params['negate'], $params['class'], $params['id'], $params['template']);
 }
 
 /**

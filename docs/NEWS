@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Allow to pass 'template' variable to serendipity_showPlugin
+    
     * Make CSS permalink pattern compatible to 1&1 servers,
       thanks to lfrantzen
 
