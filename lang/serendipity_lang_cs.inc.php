@@ -986,3 +986,4 @@ $i18n_filename_to = array (
 @define('NAVLINK_AMOUNT', 'Zadejte poèet odkazù navigaèní lišty (ihned po zadání této volby kliknìte na "Uložit" a obnovte stránku)');
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
+@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
