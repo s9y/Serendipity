@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_cn.inc.php 2652 2010-04-30 11:03:36Z garvinhicking $
+<?php # $Id: serendipity_lang_cn.inc.php 2679 2010-08-24 08:45:09Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by
@@ -963,3 +963,4 @@
 @define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
+@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');

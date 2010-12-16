@@ -979,3 +979,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
+@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
