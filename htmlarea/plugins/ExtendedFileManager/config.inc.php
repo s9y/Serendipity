@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
 /**
  * ExtendedFileManager configuration file.
  * Authors: Wei Zhuo, Afru

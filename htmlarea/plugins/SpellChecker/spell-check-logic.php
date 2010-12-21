@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
   $text = stripslashes($_POST['content']);
 
   // Convert UTF-8 multi-bytes into decimal character entities.  This is because

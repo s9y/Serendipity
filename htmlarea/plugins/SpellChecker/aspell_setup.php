@@ -4,7 +4,7 @@
 // 2005-08-17 YmL:
 //	.	security fix on unchecked variables. Original author missed quite a few
 //		holes.
-
+die('disabled in s9y');
   umask(000);
   $temptext = tempnam('/tmp', 'spell_');
   if ((!isset($_POST['dictionary'])) || (strlen(trim($_POST['dictionary'])) < 1))

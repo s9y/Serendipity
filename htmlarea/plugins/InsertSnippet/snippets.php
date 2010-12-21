@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
 $snippets_file = 'snippets.html';
 
 include_once('../../contrib/php-xinha.php');

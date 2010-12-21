@@ -1,4 +1,5 @@
 <?PHP
+die('disabled in s9y');
   //this plugin only use the relativ webpath to the picturefolder
   //default ~  /Xinha/plugins/InsertPicture/demo_pictures/
   strstr( PHP_OS, "WIN") ? $strPathSeparator = "\\" : $strPathSeparator = "/";

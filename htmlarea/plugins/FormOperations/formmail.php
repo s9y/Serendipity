@@ -1,5 +1,5 @@
 <?php
-
+die('disabled in s9y');
   $send_to      = 'Website Enquiries <enquiries@' . preg_replace('/^www./', '', $_SERVER['HTTP_HOST']) . '>';
 
   $emailfield   = NULL;

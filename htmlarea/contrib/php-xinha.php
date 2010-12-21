@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
   /** Write the appropriate xinha_config directives to pass data to a PHP (Plugin) backend file.
    *
    *  ImageManager Example:
