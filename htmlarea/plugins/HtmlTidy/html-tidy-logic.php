@@ -1,4 +1,6 @@
 <?php 
+die('disabled in s9y');
+
 ##
 ##  Plugin for htmlArea, to run code through the server's HTML Tidy
 ##   By Adam Wright, for The University of Western Australia

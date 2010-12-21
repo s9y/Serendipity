@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
   /** This PHP file is intended for use with XMLHTTPRequest from Xinha
    * it requrns javascript to set the Xinha html with tidied html that is
    * submitted in a $_POST parameter called 'content'

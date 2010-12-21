@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
 /**
  * Image Manager configuration file.
  * @author $Author:gogo $
