@@ -513,14 +513,13 @@ function serendipity_smarty_hookPlugin($params, &$smarty) {
                              'entries_footer',
                              'frontend_comment',
                              'frontend_footer');
-
     if (!isset($params['hook'])) {
         $smarty->trigger_error(__FUNCTION__ .": missing 'hook' parameter");
         return;
     }
 
     if (!in_array($params['hook'], $hookable) && $params['hookAll'] != 'true') {
-        $smarty->trigger_error(__FUNCTION__ .": illegal hook '". $params['hook'] ."'");
+        $smarty->trigger_error(__FUNCTION__ .": illegal hook '". $params['hook'] ."' (" . $params['hookAll'] . ")");
         return;
     }
 

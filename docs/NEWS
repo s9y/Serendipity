@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Allow to moderate multiple selected comments (garvinhicking)
+    
     * Allow to pass 'template' variable to serendipity_showPlugin
     
     * Make CSS permalink pattern compatible to 1&1 servers,
@@ -83,6 +85,14 @@ Version 1.6 ()
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
+Version 1.5.5 (December 21st, 2010)
+------------------------------------------------------------------------
+
+    * Due to security issues in the bundled Xinha WYSIWYG,
+      disabled the PHP-based plugins (which are not utilized by
+      serendipity unless manually enabled), until a proper security
+      fix is available
+      
 Version 1.5.4 (August 26th, 2010)
 ------------------------------------------------------------------------
 

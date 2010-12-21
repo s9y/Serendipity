@@ -635,8 +635,18 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                     ". (($force === true) ? "" : "AND status = 'pending'");
     $rs  = serendipity_db_query($sql, true);
 
+	$flip = false;
+	if ($moderate === 'flip') {
+		$flip = true;
 
-    if ($moderate) {
+		if ($rs['status'] == 'pending') {
+	        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
+	        $moderate = false;
+		} else {
+	        $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
+	        $moderate = true;
+		}
+	} elseif ($moderate) {
         $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'pending' WHERE id = ". (int)$cid;
     } else {
         $sql = "UPDATE {$serendipity['dbPrefix']}comments SET status = 'approved' WHERE id = ". (int)$cid;
@@ -689,6 +699,11 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
         serendipity_plugin_api::hook_event('backend_approvecomment', $rs);
     }
 
+	if ($flip) {
+		if ($moderate) return -1; // comment set to pending
+		if (!$moderate) return 1; // comment set to approved
+	}
+	
     return true;
 }
 

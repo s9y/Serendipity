@@ -14,10 +14,21 @@ $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $ser
 $summaryLength = 200;
 
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
-    foreach ( $serendipity['POST']['delete'] as $k => $v ) {
-        serendipity_deleteComment($k, $v);
-        echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
-    }
+    if ($serendipity['POST']['togglemoderate'] != '') {
+		foreach ( $serendipity['POST']['delete'] as $k => $v ) {
+			$ac = serendipity_approveComment($k, $v, false, 'flip');
+			if ($ac > 0) {
+				echo DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k) . '<br />';
+			} else {
+				echo DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k) . '<br />';
+			}
+		}
+    } else {
+		foreach ( $serendipity['POST']['delete'] as $k => $v ) {
+#			serendipity_deleteComment($k, $v);
+			echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
+		}
+	}
 }
 
 
@@ -544,7 +555,10 @@ foreach ($sql as $rs) {
 </tr>
 <?php } ?>
 <tr>
-    <td><input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton input_button" /> <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" onclick="return confirm('<?php echo COMMENTS_DELETE_CONFIRM ?>')" tabindex="<?php echo ($i+1) ?>" class="serendipityPrettyButton input_button" /></td>
+    <td><input type="button" name="toggle" value="<?php echo INVERT_SELECTIONS ?>" onclick="invertSelection()" class="serendipityPrettyButton input_button" /> 
+    <input type="submit" name="toggle" value="<?php echo DELETE_SELECTED_COMMENTS ?>" onclick="return confirm('<?php echo COMMENTS_DELETE_CONFIRM ?>')" tabindex="<?php echo ($i+1) ?>" class="serendipityPrettyButton input_button" />
+    <input type="submit" name="serendipity[togglemoderate]" value="<?php echo MODERATE_SELECTED_COMMENTS ?>" class="serendipityPrettyButton input_button" />
+    </td>
 </tr>
 </table>
 <table width="100%" cellpadding="3" border="0" cellspacing="0">
