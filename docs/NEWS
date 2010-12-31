@@ -3,6 +3,15 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added new parameter "empty" to {serendipity_showPlugin}. When
+      no callable plugins were found, the string in the "empty" parameter
+      will be shown instead, allowing users to get notified of a missing
+      plugin:
+      
+       {serendipity_showPlugin 
+           class="serendipity_plugin_twitter"
+           empty="Twitter plugin not found!"}
+
     * Bundle jquery by default and enable it in frontend and backend
       templates; overrides serendipity_event_jquery. If your template
       contains its own "jquery.js" file, the core will NOT use it.
