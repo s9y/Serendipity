@@ -15,6 +15,36 @@ if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
     include S9Y_INCLUDE_PATH . 'include/functions.inc.php';
 }
 
+
+/* Core API function mappings
+ * This allows the s9y Core to also execute internal core actions on plugin API hooks
+ * Future use: Global variable can be customized/overriden by your own plugin on the frontend_configure event
+ * or during runtime,
+ */
+$serendipity['capabilities']['jquery']         = true;
+$serendipity['core_events']['frontend_header'] = 'serendipity_plugin_api_frontend_header';
+$serendipity['core_events']['backend_header']  = 'serendipity_plugin_api_frontend_header';
+
+// Add jquery to all frontend and backend templates
+function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
+  global $serendipity;
+
+    // Only execute if current template does not have its own jquery.js file
+    // jquery can be disabled if a template's config.inc.php or a plugin sets
+    // $serendipity['capabilities']['jquery'] = false
+    
+    $check = serendipity_getTemplateFile('jquery.js');
+    if (!$check && $serendipity['capabilities']['jquery']) {
+?>
+    <script type="text/javascript" src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
+    <script type="text/javascript">
+    jQuery.noConflict();
+    </script>
+<?php
+    }
+}
+
+
 /* This file defines the plugin API for serendipity.
  * By extending these classes, you can add your own code
  * to appear in the sidebar(s) of serendipity.
@@ -1011,6 +1041,11 @@ class serendipity_plugin_api
         // skip the execution of any follow-up plugins.
         $plugins = serendipity_plugin_api::get_event_plugins();
 
+        if ($serendipity['core_events'][$event_name]) {
+            $apifunc = $serendipity['core_events'][$event_name];
+            $apifunc($event_name, $bag, $eventData, $addData);
+        }
+        
         if (function_exists('serendipity_plugin_api_pre_event_hook')) {
             $apifunc = 'serendipity_plugin_api_pre_event_hook';
             $apifunc($event_name, $bag, $eventData, $addData);

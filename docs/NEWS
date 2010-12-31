@@ -3,6 +3,15 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Bundle jquery by default and enable it in frontend and backend
+      templates; overrides serendipity_event_jquery. If your template
+      contains its own "jquery.js" file, the core will NOT use it.
+      (garvinhicking)
+    
+    * Include API logic to allow the core to utilize event hooks with
+      internal function calls (used for jquery output, for example)
+      (garvinhicking)
+        
     * Allow to moderate multiple selected comments (garvinhicking)
     
     * Allow to pass 'template' variable to serendipity_showPlugin
