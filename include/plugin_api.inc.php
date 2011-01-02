@@ -22,8 +22,8 @@ if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
  * or during runtime,
  */
 $serendipity['capabilities']['jquery']         = true;
-$serendipity['core_events']['frontend_header'] = 'serendipity_plugin_api_frontend_header';
-$serendipity['core_events']['backend_header']  = 'serendipity_plugin_api_frontend_header';
+$serendipity['core_events']['frontend_header']['jquery'] = 'serendipity_plugin_api_frontend_header';
+$serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_frontend_header';
 
 // Add jquery to all frontend and backend templates
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
@@ -1042,8 +1042,9 @@ class serendipity_plugin_api
         $plugins = serendipity_plugin_api::get_event_plugins();
 
         if ($serendipity['core_events'][$event_name]) {
-            $apifunc = $serendipity['core_events'][$event_name];
-            $apifunc($event_name, $bag, $eventData, $addData);
+            foreach($serendipity['core_events'][$event_name] as $apifunc_key => $apifunc) {
+                $apifunc($event_name, $bag, $eventData, $addData);
+            }
         }
         
         if (function_exists('serendipity_plugin_api_pre_event_hook')) {
