@@ -399,8 +399,8 @@
 @define('INSTALL_WYSIWYG_DESC', 'WYSIWYG エディタを使用しますか? (実行には IE5 以上か+、Mozilla 1.3 以上が必要です)');
 @define('INSTALL_XHTML11', '強制的に XHTML 1.1 準拠');
 @define('INSTALL_XHTML11_DESC', '強制で XHTML 1.1 準拠にします (第 4 世代より古いブラウザーのフロントエンド・バックエンドの問題を起こすかもしれません。)');
-@define('INSTALL_POPUP', 'ポップアップウィンドウを有効にする');
-@define('INSTALL_POPUP_DESC', 'コメントやトラックバックにポップアップウィンドウを使用しますか?');
+@define('INSTALL_POPUP', 'ポップアップ ウィンドウを有効にする');
+@define('INSTALL_POPUP_DESC', 'コメントやトラックバックにポップアップ ウィンドウを使用しますか?');
 @define('INSTALL_EMBED', 'serendipity を組み込みで使用しますか?');
 @define('INSTALL_EMBED_DESC', 'If you want to embed serendipity within a regular page, set to true to discard any headers and just print the contents. You can make use of the indexFile option to use a wrapper class where you put your normal webpage headers. より詳しい情報はファイル README を参照してください!');
 @define('INSTALL_TOP_AS_LINKS', 'トップの退出/リファラーをリンクとして表示しますか?');
@@ -876,9 +876,9 @@
 @define('MEDIA_UPLOAD_DIMERROR', 'エラー: %s x %s ピクセルより大きな画像はアップロードできません!');
 
 @define('MEDIA_TARGET', 'このリンクのターゲット');
-@define('MEDIA_TARGET_JS', 'ポップアップウィンドウ (via JavaScript, adaptive size)');
+@define('MEDIA_TARGET_JS', 'ポップアップ ウィンドウ (via JavaScript, adaptive size)');
 @define('MEDIA_ENTRY', '単独のエントリー');
-@define('MEDIA_TARGET_BLANK', 'ポップアップウィンドウ (「target=_blank」による)');
+@define('MEDIA_TARGET_BLANK', 'ポップアップ ウィンドウ (「target=_blank」による)');
 
 @define('MEDIA_DYN_RESIZE', '動的な画像のサイズ変更を許可しますか?');
 @define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
@@ -921,7 +921,7 @@
 @define('CENTER', '中央');
 @define('FULL_COMMENT_TEXT', 'はい、コメント全文です');
 
-@define('COMMENT_TOKENS', 'Use Tokens for Comment Moderation?');
+@define('COMMENT_TOKENS', 'コメントのモデレーションにトークンを使いますか?');
 @define('COMMENT_TOKENS_DESC', 'If tokens are used, comments can be approved and deleted by clicking the email links without requiring login access to the blog. Note that this is a convenience feature, and if your mails get hijacked, those people can approve/delete the referenced comment without further authentication.');
 @define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
 @define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
@@ -942,9 +942,9 @@
 @define('SYNDICATION_PLUGIN_BIGIMG', '大きな画像');
 @define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file.');
 @define('SYNDICATION_PLUGIN_FEEDNAME', '「フィード」の名前を表示する');
-@define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Enter an optional custom name for the feeds (defaults to "feed" when empty)');
+@define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'フィードのオプション カスタム名を入力します (空のときはフィードへの標準値)');
 @define('SYNDICATION_PLUGIN_COMMENTNAME', 'フィード「コメント」での名前を表示する');
-@define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'Enter an optional custom name for the comment feed');
+@define('SYNDICATION_PLUGIN_COMMENTNAME_DESC', 'コメント フィードのオプション カスタム名を入力する');
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD', '(If you enter an absolute URL with http://... here, this URL will be used as the redirection target in case you have enabled the "Force" option for FeedBurner. Note that this can also be a URL independent to FeedBurner. For new Google FeedBurner feeds, you need to enter http://feeds2.feedburner.com/yourfeedname here)');
 
 @define('SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2', 'If you set this option to "Force" you can forward the RSS feed to any webservice, not only FeedBurner. Look at the option "Feedburner ID" below to enter an absolute URL)');
@@ -961,8 +961,8 @@
 
 @define('PERMISSION_HIDDENGROUP', 'グループ/非著者を隠す');
 
-@define('SEARCH_FULLENTRY', 'Show full entry');
+@define('SEARCH_FULLENTRY', '全エントリーを表示する');
 @define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
-@define('NAV_LINK_URL', 'Enter the full URL of your link');
-@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('NAV_LINK_URL', 'リンクの完全な URL を入力する');
+@define('MODERATE_SELECTED_COMMENTS', '選択したコメントを許可する');
