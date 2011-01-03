@@ -69,7 +69,7 @@ if ( @file_exists($serendipity['serendipityPath'] . $serendipity['templatePath']
     echo '<div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_note.png') . '" alt="" />'. WARNING_TEMPLATE_DEPRECATED .'</div>';
 }
 
-echo '<h3>' . STYLE_OPTIONS . '</h3>';
+echo '<h3>' . STYLE_OPTIONS . ' (' . $serendipity['template'] . ')</h3>';
 if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php')) {
     serendipity_smarty_init();
     include_once $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php';
@@ -110,7 +110,8 @@ if (is_array($template_config)) {
         true,
         true,
         true,
-        'template'
+        'template',
+        $template_config_groups
     );
     echo '</form><br />';
     serendipity_plugin_api::hook_event('backend_templates_configuration_bottom', $template_config);

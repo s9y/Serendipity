@@ -3,6 +3,12 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Experimental: Config-Groups for template and plugin options,
+      currently mimics fold in/out of global configuration.
+      Usage through "config_groups", examples are in config.inc.php of
+      bulletproof and spamblock plugin. Needs documentation.
+      (garvinhicking)
+      
     * Added new parameter "empty" to {serendipity_showPlugin}. When
       no callable plugins were found, the string in the "empty" parameter
       will be shown instead, allowing users to get notified of a missing

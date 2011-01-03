@@ -457,21 +457,7 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
     }
 }
 
-/**
- * Parses the configuration array and displays the configuration screen
- *
- * @access public
- * @param   array       Configuration superarray
- * @param   array       The previous values submitted by the user
- * @param   boolean     If true, no HTML FORM container will be emitted
- * @param   boolean     If true, the configuration sections will all be folded
- * @param   boolean     If true, the user can turn config sections on and off
- * @param   boolean     If true, the user can NOT display possibly dangerous options
- * @return null
- */
-function serendipity_printConfigTemplate($config, $from = false, $noForm = false, $folded = true, $allowToggle = true, $showDangerous = false) {
-    global $serendipity;
-    if ( $allowToggle ) {
+function serendipity_printConfigJS($folded = true) {
 ?>
 <script type="text/javascript" language="JavaScript">
 function showConfig(id) {
@@ -505,8 +491,26 @@ function showConfigAll(count) {
     }
 }
 </script>
-
 <?php
+}
+
+/**
+ * Parses the configuration array and displays the configuration screen
+ *
+ * @access public
+ * @param   array       Configuration superarray
+ * @param   array       The previous values submitted by the user
+ * @param   boolean     If true, no HTML FORM container will be emitted
+ * @param   boolean     If true, the configuration sections will all be folded
+ * @param   boolean     If true, the user can turn config sections on and off
+ * @param   boolean     If true, the user can NOT display possibly dangerous options
+ * @return null
+ */
+function serendipity_printConfigTemplate($config, $from = false, $noForm = false, $folded = true, $allowToggle = true, $showDangerous = false) {
+    global $serendipity;
+
+    if ($allowToggle) {
+        serendipity_printConfigJS($folded);
     }
 
     if (!$noForm) {

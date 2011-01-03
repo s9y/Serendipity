@@ -78,6 +78,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $documentation = $bag->get('website');
 
     $config_names = $bag->get('configuration');
+    $config_groups = $bag->get('config_groups');
 
     if (isset($_POST['SAVECONF']) && serendipity_checkFormToken()) {
         /* enum properties and set their values */
@@ -178,7 +179,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     </table>
 <br />
 
-<?php serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names); ?>
+<?php serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups); ?>
 </form>
 <?php
 

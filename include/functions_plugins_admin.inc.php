@@ -355,9 +355,10 @@ function placement_box($name, $val, $is_plugin_editable = false, $is_event = fal
  * @param  boolean  Shows a plugin's "example" method output?
  * @param  boolean  Spawn a plugins' configuration WYSIWYG items?
  * @param  string   The array index name of POSTed values ($serendipity['POST'][xxx])
+ * @param  array    An array that groups certain config keys
  * @return boolean
  */
-function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_names, $showTable = true, $showSubmit = true, $showExample = true, $spawnNuggets = true, $postKey = 'plugin') {
+function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_names, $showTable = true, $showSubmit = true, $showExample = true, $spawnNuggets = true, $postKey = 'plugin', $config_groups = NULL) {
     global $serendipity;
 
     if (empty($config_names)) {
@@ -380,6 +381,9 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     $elcount = 0;
     $htmlnugget = array();
     
+
+    $out_stack = array();
+
     foreach ($config_names as $config_item) {
         $elcount++;
         $cbag = new serendipity_property_bag;
@@ -424,6 +428,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
         $is_multi_select = false;
         $ctype    = $cbag->get('type');
+        
+        ob_start();
         switch ($ctype) {
             case 'seperator':
 ?>
@@ -909,7 +915,59 @@ EOS;
                 serendipity_plugin_api::hook_event('backend_pluginconfig_' . $ctype, $eventData, $addData);
                 break;
         }
+
+        $out_stack[$config_item] = ob_get_contents();
+        ob_end_clean();
     }
+    
+    if (is_array($config_groups)) {
+        $hid = 0;
+        $folded = true;
+?>
+        <tr>
+            <td colspan="2">
+                <div align="right">
+                    <a style="border:0; text-decoration: none" href="#" onClick="showConfigAll(<?php echo sizeof($config_groups); ?>)" title="<?php echo TOGGLE_ALL; ?>"><img src="<?php echo serendipity_getTemplateFile('img/'. ($folded === true ? 'plus' : 'minus') .'.png') ?>" id="optionall" alt="+/-" border="0" />&nbsp;<?php echo TOGGLE_ALL; ?></a></a><br />
+                </div>
+            </td>
+        </tr>
+<?php
+        foreach($config_groups AS $config_header => $config_groupkeys) {
+            $hid++;
+            echo '<tr>';
+            echo '<td colspan="2">';
+
+            echo '<h2>';
+            echo '<a style="border:0; text-decoration: none;" href="#" onClick="showConfig(\'el' . $hid . '\'); return false" title="' . TOGGLE_OPTION . '"><img src="' . serendipity_getTemplateFile('img/'. ($folded === true ? 'plus' : 'minus') .'.png') . '" id="optionel' . $hid . '" alt="+/-" border="0" />&nbsp;';
+            echo $config_header;
+            echo '</a>';
+            echo '</h2>';
+            echo '</td>';
+            echo '</tr>';
+
+            echo '<tr>';
+            echo '<td colspan="2">';
+            echo '<table class="plugin_optiongroup" id="el' . $hid . '" border="0" cellspacing="0" cellpadding="3" width="100%">';
+
+            foreach($config_groupkeys AS $config_groupkey) {
+                echo $out_stack[$config_groupkey];
+                echo "\n";
+                unset($out_stack[$config_groupkey]);
+            }
+            echo '</table>';
+
+            echo '<script type="text/javascript" language="JavaScript">';
+            echo 'document.getElementById("el' . $hid . '").style.display = "none";' . "\n";
+            echo '</script>';
+
+            echo '</td>';
+            echo '</tr>';
+        }
+
+        echo '<tr><td colspan="2" style="height: 100px" id="configuration_footer">&nbsp;</td></tr>';
+    }
+    
+    echo implode("\n", $out_stack);
 
     if ($showTable) {
 ?>
@@ -917,6 +975,8 @@ EOS;
 <br />
 <?php
     }
+
+    serendipity_printConfigJS();
 
     if ($showSubmit) {
 ?>
