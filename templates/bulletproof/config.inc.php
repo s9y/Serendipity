@@ -36,6 +36,11 @@ if ($serendipity['GET']['adminModule'] == 'templates') {
     }
 }
 
+$template_config_groups = array(
+    THEME_COLORSET  => array('colorset', 'userstylesheet', 'layouttype', 'jscolumns'),
+    THEME_HEADER    => array('custheader', 'headerimage', 'headertype')
+);
+
 $template_config = array(
     array(
         'var'           => 'colorset',

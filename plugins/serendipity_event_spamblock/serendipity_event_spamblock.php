@@ -73,6 +73,27 @@ var $filter_defaults;
             'logtype',
             'logfile'));
         $propbag->add('groups', array('ANTISPAM'));
+        $propbag->add('config_groups', array(
+            'Content Filter' => array(
+                'contentfilter_activate',
+                'contentfilter_urls',
+                'contentfilter_authors',
+                'contentfilter_words',
+                'contentfilter_emails',
+                'bloggdeblacklist',
+                'akismet',
+                'akismet_server',
+                'akismet_filter',
+            ),
+            'Trackbacks' => array(
+                'trackback_ipvalidation' ,
+                'trackback_ipvalidation_url_exclude' ,
+                'forcemoderationt',
+                'forcemoderationt_treat',
+                'disable_api_comments',
+                'trackback_check_url',
+            )
+        ));
 
         $this->filter_defaults = array(
                                    'authors' => 'casino;phentermine;credit;loans;poker',
