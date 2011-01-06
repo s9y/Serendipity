@@ -2,9 +2,9 @@
 <div class='serendipity_date'>{$CONST.TOPICS_OF} {$dateRange.0|@formatTime:"%B, %Y"}</div>
 
 <div class="serendipity_entry">
-    {foreach from=$entries item="entries"}
+    {foreach from=$entries item="sentries"}
         <ul>
-        {foreach from=$entries.entries item="entry"}
+        {foreach from=$sentries.entries item="entry"}
             <li><a href="{$entry.link}">{$entry.title}</a>
                 <br />{$CONST.POSTED_BY} {$entry.username} {$CONST.ON} {$entry.timestamp|@formatTime:DATE_FORMAT_ENTRY}</li>
         {/foreach}
