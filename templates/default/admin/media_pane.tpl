@@ -120,7 +120,7 @@
             <td>{$CONST.SORT_ORDER}</td>
             <td><select name="serendipity[sortorder][ordermode]">
                     <option value="DESC" {if $media.sortorder.ordermode == 'DESC'}selected="selected"{/if}>{$CONST.SORT_ORDER_DESC}</option>
-                    <option value="ASC"  {if $media.sortorder.ordermode == 'ASC'}selected="selected"{/if}>{$CONST.SORT_ORDER_ASC }</option>
+                    <option value="ASC"  {if $media.sortorder.ordermode == 'ASC'}selected="selected"{/if}>{$CONST.SORT_ORDER_ASC}</option>
                 </select>
             </td>
             <td>{$CONST.FILES_PER_PAGE}</td>

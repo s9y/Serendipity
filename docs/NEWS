@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * TPL fixes for upcoming Smarty3, thanks to timbalu
+    
     * Experimental: Config-Groups for template and plugin options,
       currently mimics fold in/out of global configuration.
       Usage through "config_groups", examples are in config.inc.php of

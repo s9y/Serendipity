@@ -104,7 +104,7 @@
             if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {ldelim}
                 newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
                 location.href=newloc;
-            }
+            {rdelim}
         {rdelim}
 {/if}
 
