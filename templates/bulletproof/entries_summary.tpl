@@ -2,8 +2,8 @@
 <div class="serendipity_Entry_Date">
     <h3 class='serendipity_date'>{$CONST.TOPICS_OF} {$dateRange.0|@formatTime:"%B, %Y"}</h3>
     <div class="serendipity_entry archive_summary_entry">
-        {foreach from=$entries item="entries"}
-            {foreach from=$entries.entries item="entry"}
+        {foreach from=$entries item="sentries"}
+            {foreach from=$sentries.entries item="entry"}
                 <dl class="archive_summary {cycle values='archive_summary_odd,archive_summary_even'}">
                     <dt class="archive_summary_title"><a href="{$entry.link}">{$entry.title|truncate:80:" ..."}</a></dt>
                     <dd class="archive_summary_postdate">{$entry.timestamp|@formatTime:$template_option.date_format}</dd>

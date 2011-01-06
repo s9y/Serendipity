@@ -26,7 +26,7 @@ function showNodes(n) {ldelim}
 
         default:
             html += 'Type is ' + n.nodeType + ', Content is <strong>' + n.nodeValue + '<\/strong>';
-    }
+    {rdelim}
 
     if (n.hasChildNodes()) {ldelim}
         html += '\n<ol>\n';
