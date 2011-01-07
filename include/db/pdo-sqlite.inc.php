@@ -18,7 +18,7 @@ function serendipity_db_logmsg($msgstr) {
  * @param  int          Bitmask to tell whether to fetch numerical/associative arrays
  * @return array        Propper array containing the ressource results
  */
-function serendipity_db_sqlite_fetch_array($row, $type = PDO::FETCH_BOTH)
+function serendipity_db_sqlite_fetch_array($row, $type = PDO::FETCH_ASSOC)
 {
     static $search  = array('%00',  '%25');
     static $replace = array("\x00", '%');
@@ -253,7 +253,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     $rows = array();
 
     foreach($serendipity['dbSth']->fetchAll($result_type) AS $row) {
-	$row = serendipity_db_sqlite_fetch_array($row);
+	$row = serendipity_db_sqlite_fetch_array($row, $result_type);
         if (!empty($assocKey)) {
             // You can fetch a key-associated array via the two function parameters assocKey and assocVal
             if (empty($assocVal)) {

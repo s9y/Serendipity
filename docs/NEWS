@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix PDO::SQLite to properly fetch the requested row type
+      (assoc/both/num), important for staticpage plugin
+      
     * TPL fixes for upcoming Smarty3, thanks to timbalu
     
     * Experimental: Config-Groups for template and plugin options,
