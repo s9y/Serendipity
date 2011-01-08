@@ -919,7 +919,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->compile_check = true;
             $serendipity['smarty']->compile_id    = &$serendipity['template'];
 
-            if (strpos($serendipity['smarty']->_version, '2', 1)) {
+            if (!strpos($serendipity['smarty']->_version, '2', 1)) {
                 $serendipity['smarty']->setDeprecationNotices(false); // set $smarty->deprecation_notices
                 #$serendipity['smarty']->setCaching(true);             // set $smarty->caching to not being regenerated
                 #$serendipity['smarty']->force_compile = false;        // override compile_check (default:false)
