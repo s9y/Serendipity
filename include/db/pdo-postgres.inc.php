@@ -170,7 +170,7 @@ function serendipity_db_insert_id($table = '', $id = '') {
  *
  * This function returns values dependin on the input parameters and the result of the query.
  * It can return:
- *   false if there was an error,
+ *   false or a string if there was an error (depends on $expectError),
  *   true if the query succeeded but did not generate any rows
  *   array of field values if it returned a single row and $single is true
  *   array of array of field values if it returned row(s) [stacked array]

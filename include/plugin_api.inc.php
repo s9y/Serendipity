@@ -1504,7 +1504,7 @@ class serendipity_plugin
     function cleanup()
     {
         // Cleanup. Remove all empty configs on SAVECONF-Submit.
-        // serendipity_plugin_api::remove_plugin_value($this->instance, array('title', 'description'));
+        // serendipity_plugin_api::remove_plugin_value($this->instance, array('configname1', 'configname2'));
         return true;
     }
 
