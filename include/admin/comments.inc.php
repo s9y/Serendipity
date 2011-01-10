@@ -25,7 +25,7 @@ if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['
 		}
     } else {
 		foreach ( $serendipity['POST']['delete'] as $k => $v ) {
-#			serendipity_deleteComment($k, $v);
+ 			serendipity_deleteComment($k, $v);
 			echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
 		}
 	}
