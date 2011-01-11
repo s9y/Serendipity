@@ -1,19 +1,23 @@
-<?php # lang_cs.inc.php 1.2 2009-06-30 20:21:39 VladaAjgl $
+<?php # lang_cs.inc.php 1.3 2011-01-08 10:43:18 VladaAjgl $
 
 /**
- *  @version 1.2
+ *  @version 1.3
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2007/12/07 
  *  Revision on 2008/02/28 
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/06/30
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2011/01/08
  */
  
  // Colorsets
+
 @define('THEME_COLORSET',               'Barevná sada');
 @define('USER_STYLESHEET',              'Použít doplňující uživatelský soubor s css styly. Uživatel musí tento soubor ručně vytvořit v adresáři šablony bulletproof. Tento soubor musí být pojmenovám user.css a může být použit k nahrazení některých stylů.');
 // Layout
+
 @define('LAYOUT_TYPE',                  'Uspořádání blogu (B = Tělo blogu, S = Sloupec (postranní), ON = Obsah nejdříve)');
 @define('LAYOUT_SBS',                   'Tři sloupce, S-B-S');
 @define('LAYOUT_BSS',                   'Tři sloupce, B-S-S, ON');
@@ -25,6 +29,7 @@
 @define('LAYOUT_BSF',                   'Dva sloupce, dva postranní sloupce - na straně a pod tělem, ON');
 @define('JAVASCRIPT_COLUMNS',           'Vytvoř stejně vysoké sloupce pomocí javascriptu (trochu zpomalí vykreslování stránky).');
 // Custom header
+
 @define('BP_CUSTOM_HEADER',             'Vlastní obrázek v záhlaví stránky');
 @define('BP_HEADER_IMAGE',              'Vyber obrázek');
 @define('BP_HEADER_TYPE',               'Opakování obrázku v záhlaví');
@@ -38,11 +43,14 @@
 @define('BP_TOP',                       'nahoře');
 @define('BP_BOTTOM',                    'dole');
 // Fahrner Image Replacement
+
 @define('FIR_BTITLE',                   'Zobrazovat název blogu v záhlaví');
 @define('FIR_BDESCR',                   'Zobrazovat popis (podnadpis) blogu v záhlaví');
 // Date format
+
 @define('BP_DATE_FORMAT',               'Formát data');
 // Entry footer
+
 @define('ENTRY_FOOTER_POS',             'Umístění patičky/záhlaví příspěvku (takové to s informacemi o autoru, datu vydání, zařazení do kategorií; rozdělení patičky = kategorie příspěvku nad, zbytek pod příspěvkem)');
 @define('BELOW_ENTRY',                  'Patička = pod příspěvkem');
 @define('BELOW_TITLE',                  'Záhlaví = pod nadpisem příspěvku');
@@ -58,19 +66,24 @@
 @define('SHOW_STICKY_ENTRY_FOOTER',     'Zobrazit patičku u stálých (přilepených) příspěvků (vyžaduje nainstalování pluginu událostí "Rozšířené vlastnosti příspěvků")');
 @define('SHOW_STICKY_ENTRY_HEADING',    'Zobraz nadpis u stálých (přilepených) příspěvků (vyžaduje nainstalování pluginu událostí "Rozšířené vlastnosti příspěvků")');
 // Page footer next page  and previous page links
+
 @define('PREV_NEXT_STYLE',              'Zobrazit patičku "další/předchozí příspěvek" ve tvaru');
 @define('PREV_NEXT_TEXT',               'Text');
 @define('PREV_NEXT_TEXT_ICON',          'Text a ikonka');
 @define('PREV_NEXT_ICON',               'Ikonka');
 // coComment support
+
 @define('COCOMMENT_ACTIVE',             'Vložit coComment (http://www.cocomment.com) do formuláře komentářů');
 // Counter code
+
 @define('COUNTER_CODE',                 'Vložit kód počítadla přístupů a/nebo statistik webu');
 @define('USE_COUNTER',                  'Použít výše zadaný kód počítadla/statistik?');
 // Additional footer text
+
 @define('FOOTER_TEXT',                  'Následující text bude vložen do patičky příspěvků');
 @define('USE_FOOTER_TEXT',              'Vložit výše zadaný text do patičky?');
 //Sitenav
+
 @define('SITENAV_POSITION',             'Poloha navigační lišty');
 @define('SITENAV_NONE',                 'Žádná navigační lišta');
 @define('SITENAV_ABOVE',                'Nad obrázkem v záhlaví stránky');
@@ -87,3 +100,6 @@
 
 // Next lines were translated on 2009/06/30
 @define('SHOW_PAGINATION',              'Zobrazovat čísla stránek (stránkování)');
+
+// Next lines were translated on 2011/01/08
+@define('THEME_HEADER',                 'Hlavička');
