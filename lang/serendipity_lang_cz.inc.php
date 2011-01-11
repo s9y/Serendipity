@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1.7 2010-09-12 11:21:23 VladaAjgl $
+<?php # lang_cz.inc.php 1.8 2010-12-25 22:53:57 VladaAjgl $
 
 /**
- *  @version 1.7
+ *  @version 1.8
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -17,6 +17,8 @@
  *  @revisionDate 2010/05/02
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/09/12
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2010/12/25
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','µ','ò','ó','à','ø','¶','¹','»','ú','ù','ý','¼','¾',
@@ -986,4 +988,4 @@ $i18n_filename_to = array (
 @define('NAVLINK_AMOUNT', 'Zadejte poèet odkazù navigaèní li¹ty (ihned po zadání této volby kliknìte na "Ulo¾it" a obnovte stránku)');
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
-@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáøe');
