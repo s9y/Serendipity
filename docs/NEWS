@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added new rewrite option for 1&1 specific servers, because a 
+      combined htaccess for both variants could not be find. The reason
+      is the MultiViews option in certain apache configs.
+      
     * Fix PDO::SQLite to properly fetch the requested row type
       (assoc/both/num), important for staticpage plugin
       

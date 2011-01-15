@@ -1,3 +1,4 @@
+
 <?php # $Id$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
@@ -920,6 +921,10 @@ function serendipity_probeInstallation($item) {
             if( !function_exists('apache_get_modules') || in_array('mod_rewrite', apache_get_modules()) ) {
                 $res['rewrite'] = 'Use Apache mod_rewrite';
             }
+            if( !function_exists('apache_get_modules') || in_array('mod_rewrite', apache_get_modules()) ) {
+                $res['rewrite2'] = 'Use Apache mod_rewrite (for 1&amp;1 and problematic servers)';
+            }
+
             break;
     }
 
