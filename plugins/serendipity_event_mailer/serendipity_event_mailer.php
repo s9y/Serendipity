@@ -15,7 +15,7 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.52');
+        $propbag->add('version',       '1.53');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -171,7 +171,7 @@ class serendipity_event_mailer extends serendipity_event
                     if (isset($serendipity['POST']['properties']) && !isset($serendipity['POST']['properties']['sendentry'])) {
                         echo PLUGIN_EVENT_MAILER_NOTSENDDECISION . '<br />';
                     } else {
-                        $mails = explode(' ', $this->get_config('mailto'));
+                        $mails = explode(' ', str_replace(',', '', $this->get_config('mailto')));
                         $to = array();
                         foreach($mails AS $mailto) {
                             $mailto = trim($mailto);
@@ -193,7 +193,7 @@ class serendipity_event_mailer extends serendipity_event
                                 $mailto = trim($this->get_config('category_' . $cid));
 
                                 if (!empty($mailto) && isset($selected[$cid])) {
-                                    $tos = explode(' ', $mailto);
+                                    $tos = explode(' ', str_replace(',', '', $mailto));
                                     foreach($tos AS $mailtopart) {
                                         $to[] = trim($mailtopart);
                                     }
@@ -202,7 +202,7 @@ class serendipity_event_mailer extends serendipity_event
                         }
 
                         if ($serendipity['POST']['properties']['sendentry_all']) {
-                            $mails = serendipity_db_query("SELECT email FROM {$serendipity['dbPrefix']}authors");
+                            $mails = serendipity_db_query("SELECT DISTINCT email FROM {$serendipity['dbPrefix']}authors");
                             foreach($mails AS $mail) {
                                 $to[] = trim($mail['email']);
                             }
@@ -231,7 +231,7 @@ class serendipity_event_mailer extends serendipity_event
                         }
 
                         if (isset($serendipity['POST']['properties']['mailto'])) {
-                            $mails = explode(' ', $serendipity['POST']['properties']['mailto']);
+                            $mails = explode(' ', str_replace(',', '', $serendipity['POST']['properties']['mailto']));
                             foreach($mails as $mailto) {
                                 $mailto = trim($mailto);
                                 if (!in_array($mailto, $to)) {
