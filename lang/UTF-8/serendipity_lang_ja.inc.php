@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 2713 2010-12-16 08:51:54Z garvinhicking $
+<?php # $Id: serendipity_lang_ja.inc.php 2721 2011-01-02 19:24:58Z elf2000 $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2010.
@@ -962,7 +962,7 @@
 @define('PERMISSION_HIDDENGROUP', 'グループ/非著者を隠す');
 
 @define('SEARCH_FULLENTRY', '全エントリーを表示する');
-@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
-@define('NAV_LINK_TEXT', 'Enter the navbar link text');
-@define('NAV_LINK_URL', 'リンクの完全な URL を入力する');
+@define('NAVLINK_AMOUNT', 'ナビゲーション バーのリンク数の入力 (スタイル ページ管理の再読み込みに必要)');
+@define('NAV_LINK_TEXT', 'ナビゲーション バーのリンクでのテキストの入力');
+@define('NAV_LINK_URL', '完全なリンクの URL を入力する');
 @define('MODERATE_SELECTED_COMMENTS', '選択したコメントを許可する');
