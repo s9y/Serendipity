@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Bugfix: Adjust /admin permalink detection so that it does not listen
+      on /adminbook for example. Thanks to Lux!
+      
     * serendipity_event_mailer now also allows to use commas instead of 
       spaces to seperate multiple mails. Use distinct email adresses
       (Thanks to evanslee)
