@@ -1579,7 +1579,7 @@ class serendipity_plugin
         }
         $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
         $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
-        $content = $serendipity['smarty']->fetch('file:'. $tfile, null, null, false);
+        $content = $serendipity['smarty']->fetch('file:'. $tfile);
         $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
         
         return $content;    
