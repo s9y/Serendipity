@@ -1,13 +1,15 @@
-<?php # lang_cz.inc.php 1475.2 2009-03-08 17:19:00 VladaAjgl $
+<?php # lang_cz.inc.php 1475.3 2011-03-09 20:05:20 VladaAjgl $
 
 /**
- *  @version 1475.2
+ *  @version 1475.3
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/15
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/03/08
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2011/03/09
  */
 
 @define('PLUGIN_KARMA_NAME',		'Karma');
@@ -120,3 +122,6 @@
 @define('PLUGIN_KARMA_INVALID_INPUT',		'Nesprávné zadání!');
 @define('PLUGIN_KARMA_DELETE_VOTES',		'Vymazat vybrané hlasy');
 @define('PLUGIN_KARMA_APPROVE_VOTES',		'Potvrdit vybrané hlasy');
+
+// Next lines were translated on 2011/03/09
+@define('PLUGIN_KARMA_ACTIVE_REGISTERED',		'Hlasovat mohou pouze pøihlá¹ení u¾ivatelé');
