@@ -116,3 +116,4 @@
 @define('PLUGIN_KARMA_INVALID_INPUT', 'Invalid input!');
 @define('PLUGIN_KARMA_DELETE_VOTES', 'Delete selected votes');
 @define('PLUGIN_KARMA_APPROVE_VOTES', 'Approve selected votes');
+@define('PLUGIN_KARMA_ACTIVE_REGISTERED', 'Only logged-in authors can vote');

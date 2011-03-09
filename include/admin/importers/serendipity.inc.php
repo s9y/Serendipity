@@ -119,6 +119,9 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             if (is_array($primary_keys)) {
                 foreach($primary_keys AS $primary_key) {
                     $primary_vals[$primary_key] = $row[$primary_key];
+                    if ($table == 'comments') {
+	                    $primary_vals['entry_id'] = $row['entry_id'];
+                    }
                     unset($row[$primary_key]);
                 }
             } else {
@@ -129,10 +132,13 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             if (is_array($fix_relations)) {
                 foreach($fix_relations AS $primary_key => $fix_relation) {
                     foreach($fix_relation AS $fix_relation_table => $fix_relation_primary_key) {
-                        if (isset($primary_vals[$fix_relation_primary_key])) {
+                    
+						if ($table == 'comments' && $fix_relation_table == 'entries') {
+							$assoc_val = $primary_vals['entry_id'];
+						} elseif (isset($primary_vals[$fix_relation_primary_key])) {
                             $assoc_val = $primary_vals[$fix_relation_primary_key];
                         } else {
-                            $assoc_val = $row[$primary_key];
+							$assoc_val = $row[$primary_key];
                         }
                         
                         if (!$this->execute && empty($assoc_val)) {
@@ -184,6 +190,12 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                     foreach($primary_vals AS $primary_key => $primary_val) {
                         $this->storage[$table][$primary_key][$primary_val] = $this->counter;
                     }
+                }
+                
+                foreach($this->storage[$table] AS $primary_key => $primary_data) {
+                	foreach($primary_data AS $primary_val => $replace_val) {
+                		serendipity_set_config_var('import_s9y_' . $table . '_' . $primary_key . '_' . $primary_val, $replace_val, 99);
+                	}
                 }
             } else {
                 if ($this->debug && !$this->execute) {

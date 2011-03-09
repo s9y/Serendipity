@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Karma plugin: Added option to only track votings when users are
+      logged in.
+      
     * Bugfix: Adjust /admin permalink detection so that it does not listen
       on /adminbook for example. Thanks to Lux!
       

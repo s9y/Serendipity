@@ -43,7 +43,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.4');
+        $propbag->add('version',       '2.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -63,6 +63,7 @@ class serendipity_event_karma extends serendipity_event
             // Functionality options
             'options_tab',
             'karma_active', 
+            'karma_active_registered',
             'extended_only', 
             'max_karmatime', 
             'max_votetime', 
@@ -171,6 +172,14 @@ class serendipity_event_karma extends serendipity_event
                 $propbag->add('name', PLUGIN_KARMA_ACTIVE);
                 $propbag->add('description', PLUGIN_KARMA_ACTIVE_BLAHBLAH);
                 $propbag->add('default', 'true');
+                break;
+
+            // Is karma voting allowed only for registered authors?
+            case 'karma_active_registered':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_KARMA_ACTIVE_REGISTERED);
+                $propbag->add('description', '');
+                $propbag->add('default', 'false');
                 break;
 
             // Min votes to display
@@ -1039,6 +1048,10 @@ END_IMG_CSS;
                             // Find out what the admin wants
                             $track_clicks  = serendipity_db_bool($this->get_config('visits_active', true));
                             $track_karma   = serendipity_db_bool($this->get_config('karma_active', true));
+                            
+                            if (serendipity_db_bool($this->get_config('karma_active_registered', false))) {
+                                if (!serendipity_userLoggedIn()) $track_karma = false;
+                            }
                             $track_exits   = serendipity_db_bool($this->get_config('exits_active', true));
 
                             // Get the limits
