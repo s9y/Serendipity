@@ -5,6 +5,8 @@ Version 1.6 ()
 
     * Added localization for {$WEBLOG} in trackbacks.tpl (LazyBadger)
     
+    * Added "Options -MultiViews" to .htaccess to prevent IE9 trouble
+    
     * Karma plugin: Added option to only track votings when users are
       logged in.
       
