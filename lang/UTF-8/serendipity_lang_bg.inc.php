@@ -955,3 +955,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('WEBLOG', 'Weblog');

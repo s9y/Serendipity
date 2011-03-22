@@ -966,3 +966,4 @@
 @define('NAV_LINK_TEXT', 'ナビゲーション バーのリンクでのテキストの入力');
 @define('NAV_LINK_URL', '完全なリンクの URL を入力する');
 @define('MODERATE_SELECTED_COMMENTS', '選択したコメントを許可する');
+@define('WEBLOG', 'Weblog');

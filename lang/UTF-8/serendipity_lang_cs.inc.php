@@ -31,11 +31,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET',		'utf8');
+@define('SQL_CHARSET', 'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG',		'cs-utf');
+@define('WYSIWYG_LANG', 'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -988,4 +988,4 @@ $i18n_filename_to = array (
 @define('NAVLINK_AMOUNT', 'Zadejte počet odkazů navigační lišty (ihned po zadání této volby klikněte na "Uložit" a obnovte stránku)');
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
-@define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáře');
+@define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáře');@define('WEBLOG', 'Weblog');

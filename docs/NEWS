@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added localization for {$WEBLOG} in trackbacks.tpl (LazyBadger)
+    
     * Karma plugin: Added option to only track votings when users are
       logged in.
       
