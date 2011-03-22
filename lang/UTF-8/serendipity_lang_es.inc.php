@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_es.inc.php 2679 2010-08-24 08:45:09Z garvinhicking $
+<?php # $Id: serendipity_lang_es.inc.php 2713 2010-12-16 08:51:54Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Luis Cervantes <LuisCervantes@ono.com>,
@@ -980,3 +980,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('WEBLOG', 'Weblog');

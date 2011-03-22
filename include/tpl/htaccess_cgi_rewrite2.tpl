@@ -1,6 +1,7 @@
 # BEGIN s9y
 ErrorDocument 404 {PREFIX}{indexFile}
 DirectoryIndex {PREFIX}{indexFile}
+Options -MultiViews
 
 RewriteEngine On
 RewriteBase {PREFIX}

@@ -1,1 +1,1 @@
-@define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('WEBLOG', 'Weblog');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_fa.inc.php 2679 2010-08-24 08:45:09Z garvinhicking $
+<?php # $Id: serendipity_lang_fa.inc.php 2713 2010-12-16 08:51:54Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved. See LICENSE file for licensing details
 # this translation, translated by Omid Mottaghi <http://oxygenws.com>
@@ -964,3 +964,4 @@
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
+@define('WEBLOG', 'Weblog');
