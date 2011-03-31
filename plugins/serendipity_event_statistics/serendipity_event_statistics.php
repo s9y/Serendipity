@@ -14,7 +14,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg, kalkin');
-        $propbag->add('version',       '1.49');
+        $propbag->add('version',       '1.50');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -403,6 +403,11 @@ class serendipity_event_statistics extends serendipity_event
                             }
 
                             if (!empty($com_stat['url'])) {
+                                if (substr($com_stat['url'], 0, 7) != 'http://' && substr($com_stat['url'], 0, 8) != 'https://') {
+                                    $com_stat['url'] = 'http://' . $com_stat['url'];
+                                }
+                                        
+                                if (!preg_match())
                                 $link_url = ' (<a href="' . htmlspecialchars($com_stat['url']) . '">' . PLUGIN_EVENT_STATISTICS_OUT_LINK . '</a>)';
                             }
 
