@@ -159,7 +159,7 @@ var $filter_defaults;
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_DESC);
-                $propbag->add('default', false);
+                $propbag->add('default', true);
                 break;
 
             case 'csrf':
