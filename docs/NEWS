@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Show subscription status of comments in frontend and backend
+    
     * Added ability to report spam/ham to akismet (Black Warthog)
     
     * Added localization for {$WEBLOG} in trackbacks.tpl (LazyBadger)

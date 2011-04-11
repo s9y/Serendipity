@@ -989,3 +989,6 @@ $i18n_filename_to = array (
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
 @define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáře');@define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

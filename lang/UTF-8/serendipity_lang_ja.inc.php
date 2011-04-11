@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ja.inc.php 2735 2011-01-22 16:21:02Z elf2000 $
+<?php # $Id: serendipity_lang_ja.inc.php 2740 2011-03-22 09:14:30Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Tadashi Jokagi <elf2000@users.sourceforge.net>, 2004-2010.
@@ -967,3 +967,6 @@
 @define('NAV_LINK_URL', '完全なリンクの URL を入力する');
 @define('MODERATE_SELECTED_COMMENTS', '選択したコメントを許可する');
 @define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
