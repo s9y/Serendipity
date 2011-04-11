@@ -431,7 +431,8 @@ foreach ($sql as $rs) {
         'entry_url' => serendipity_archiveURL($rs['entry_id'], $rs['title']),
         'email'     => $rs['email'],
         'author'    => (empty($rs['author']) ? ANONYMOUS : $rs['author']),
-        'entry_id'  => $rs['entry_id']
+        'entry_id'  => $rs['entry_id'],
+        'subscribed'=> $rs['subscribed']
     );
 
     $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
@@ -489,7 +490,7 @@ foreach ($sql as $rs) {
                         } else {
                     ?>
                             <a href="mailto:<?php echo htmlspecialchars($comment['email']) ?>" title="<?php echo htmlspecialchars($comment['email']) ?>"><?php echo htmlspecialchars(serendipity_truncateString($comment['email'],30)) ?></a>
-                            <?php if ($comment['subscribed'] == 'true') { echo '<span class="serendipity_subscription_on">' . ACTIVE_COMMENT_SUBSCRIPTION . '</span>'; } ?>
+                            <?php if ($comment['subscribed'] == 'true') { echo '<span class="serendipity_subscription_on">(' . ACTIVE_COMMENT_SUBSCRIPTION . ')</span>'; } ?>
                     <?php } ?>
                 <?php echo $comment['action_email']; ?>
                 </td>
