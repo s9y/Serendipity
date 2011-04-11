@@ -273,7 +273,8 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
                     e.id AS entryid,
                     e.authorid,
                     co.id AS commentid,
-                    co.parent_id AS parent_id
+                    co.parent_id AS parent_id,
+                    co.status
               FROM
                     {$serendipity['dbPrefix']}comments AS co
                     LEFT JOIN {$serendipity['dbPrefix']}entries AS e ON (co.entry_id = e.id)
