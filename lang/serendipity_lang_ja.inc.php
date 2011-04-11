@@ -967,3 +967,6 @@
 @define('NAV_LINK_URL', '完全なリンクの URL を入力する');
 @define('MODERATE_SELECTED_COMMENTS', '選択したコメントを許可する');
 @define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

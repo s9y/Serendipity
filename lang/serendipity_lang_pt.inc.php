@@ -968,3 +968,6 @@
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Accept selected comments');
 @define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
+@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');

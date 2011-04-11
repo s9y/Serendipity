@@ -404,6 +404,18 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             if (isset($comment['title'])) {
                 $comment['title']   = htmlspecialchars($comment['title']);
             }
+            
+            if (serendipity_userLoggedIn()) {
+                if ($comment['subscribed'] == 'true') {
+                    if ($comment['status'] == 'approved') {
+                        $comment['body'] .= '<div class="serendipity_subscription_on"><em>' . ACTIVE_COMMENT_SUBSCRIPTION . '</em></div>';
+                    } else {
+                        $comment['body'] .= '<div class="serendipity_subscription_pending"><em>' . PENDING_COMMENT_SUBSCRIPTION . '</em></div>';
+                    }
+                } else {
+                    #$comment['body'] .= '<div class="serendipity_subscription_off"><em>' . NO_COMMENT_SUBSCRIPTION . '</em></div>';
+                }
+            }
 
             $_smartyComments[] = $comment;
             if ($comment['id'] && $parentid !== VIEWMODE_LINEAR ) {
