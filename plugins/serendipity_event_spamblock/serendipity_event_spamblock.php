@@ -476,6 +476,155 @@ var $filter_defaults;
             }
         }
     }
+    
+    function akismetRequest($api_key, $data, &$ret, $action = 'comment-check') {
+        $opt = array(
+            'method'            => 'POST',
+            'http'              => '1.1',
+            'timeout'           => 20,
+            'allowRedirects'    => true,
+            'maxRedirects'      => 3,
+            'readTimeout'       => array(5,0), 
+        );
+
+        // Default server type to akismet, in case user has an older version of the plugin
+        // where no server was set
+        $server_type = $this->get_config('akismet_server', 'akismet');
+        $server = '';
+        $anon = false;
+
+        switch ($server_type) {
+            case 'anon-tpas':
+                $anon = true;
+            case 'tpas':
+                $server = 'api.antispam.typepad.com';
+                break;
+    
+            case 'anon-akismet':
+                $anon = true;
+            case 'akismet':
+                $server = 'rest.akismet.com';
+                break;
+        }
+                
+        if ($anon) {
+            $data['comment_author'] = 'John Doe';
+            $data['comment_author_email'] = '';
+            $data['comment_author_url'] = '';
+        }
+
+        if (empty($server)) {
+            $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
+            $ret['is_spam'] = false;
+            $ret['message'] = 'No server for Akismet request';
+            return;
+        } else {
+            // DEBUG
+            //$this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
+        }
+        $req    = new HTTP_Request(
+             'http://' . $server . '/1.1/verify-key',
+             $opt
+        );
+
+        $req->addPostData('key',  $api_key);
+        $req->addPostData('blog', $serendipity['baseURL']);
+
+        if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+            $ret['is_spam'] = false;
+            $ret['message'] = 'API Verification Request failed';
+            $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP verification request failed.', $addData);
+            return;
+        } else {
+            // Fetch response
+            $reqdata = $req->getResponseBody();
+        }
+
+        if (!preg_match('@valid@i', $reqdata)) {
+            $ret['is_spam'] = false;
+            $ret['message'] = 'API Verification failed';
+            $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API verification failed: ' . $reqdata, $addData);
+            return;
+        }
+
+        $req    = new HTTP_Request(
+            'http://' . $api_key . '.' . $server . '/1.1/' . $action,
+            $opt
+        );
+
+        foreach($data AS $key => $value) {
+            $req->addPostData($key, $value);
+        }
+
+        if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+            $ret['is_spam'] = false;
+            $ret['message'] = 'Akismet Request failed';
+            $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP request failed.', $addData);
+            return;
+        } else {
+            // Fetch response
+            $reqdata = $req->getResponseBody();
+        }
+
+        if ($action == 'comment-check' && preg_match('@true@i', $reqdata)) {
+            $ret['is_spam'] = true;
+            $ret['message'] = $reqdata;
+            // DEBUG
+            //$this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
+        } elseif ($action == 'comment-check' && preg_match('@false@i', $reqdata)) {
+            $ret['is_spam'] = false;
+            $ret['message'] = $reqdata;
+            // DEBUG
+            //$this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
+        } elseif ($action != 'comment-check' && preg_match('@received@i', $reqdata)) {
+            $ret['is_spam'] = ($action == 'submit-spam');
+            $ret['message'] = $reqdata;
+            $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API failure: ' . $reqdata, $addData);
+        } else {
+            $ret['is_spam'] = false;
+            $ret['message'] = 'Akismet API failure';
+            $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API failure: ' . $reqdata, $addData);
+        }
+    }
+    
+    
+    function tellAboutComment($where, $api_key = '', $comment_id, $is_spam) {
+    	global $serendipity;
+    	$comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
+    								  . " FROM {$serendipity['dbPrefix']}comments C, {$serendipity['dbPrefix']}spamblocklog L , {$serendipity['dbPrefix']}entries E "
+    								  . " WHERE C.id = '" . (int)$comment_id . "' AND C.entry_id=L.entry_id AND C.entry_id=E.id "
+    								  . " AND C.author=L.author AND C.url=L.url AND C.referer=L.referer "
+    								  . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
+    	if (!is_array($comment)) return;
+    	
+        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        if (function_exists('serendipity_request_start')) serendipity_request_start();
+    	
+        switch($where) {
+            case 'akismet.com':
+                // DEBUG
+                //$this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
+                $ret  = array();
+        		$data = array(
+        		  'blog'                    => $serendipity['baseURL'],
+        		  'user_agent'              => $comment['log_useragent'],
+        		  'referrer'                => $comment['referer'],
+        		  'user_ip'                 => $comment['ip'],
+        		  'permalink'               => serendipity_archiveURL($comment['entry_id'], $comment['entry_title'], 'serendipityHTTPPath', true, array('timestamp' => $comment['timestamp'])),
+        		  'comment_type'            => ($comment['type'] == 'NORMAL' ? 'comment' : strtolower($comment['type'])), // second: pingback or trackback.
+        		  'comment_author'          => $comment['author'],
+        		  'comment_author_email'    => $comment['email'],
+        		  'comment_author_url'      => $comment['url'],
+        		  'comment_content'         => $comment['body']
+                );
+				
+				$this->akismetRequest($api_key, $data, $ret, ($is_spam ? 'submit-spam' : 'submit-ham'));
+				
+                break;
+        }
+        
+        if (function_exists('serendipity_request_end')) serendipity_request_end();
+    }
 
     function &getBlacklist($where, $api_key = '', &$eventData, &$addData) {
         global $serendipity;
@@ -501,110 +650,8 @@ var $filter_defaults;
         		  'comment_author_url'      => $addData['url'],
         		  'comment_content'         => $addData['comment']
                 );
-                $opt = array(
-                    'method'            => 'POST',
-                    'http'              => '1.1',
-                    'timeout'           => 20,
-                    'allowRedirects'    => true,
-                    'maxRedirects'      => 3,
-                    'readTimeout'       => array(5,0), 
-                );
-
-                // Default server type to akismet, in case user has an older version of the plugin
-                // where no server was set
-                $server_type = $this->get_config('akismet_server', 'akismet');
-                $server = '';
-                $anon = false;
-
-                switch ($server_type) {
-                    case 'anon-tpas':
-                        $anon = true;
-                    case 'tpas':
-                        $server = 'api.antispam.typepad.com';
-                        break;
-    
-                    case 'anon-akismet':
-                        $anon = true;
-                    case 'akismet':
-                        $server = 'rest.akismet.com';
-                        break;
-                }
-                
-                if ($anon) {
-                    $data['comment_author'] = 'John Doe';
-                    $data['comment_author_email'] = '';
-                    $data['comment_author_url'] = '';
-                }
-
-                if (empty($server)) {
-                    $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
-                    $ret['is_spam'] = false;
-                    $ret['message'] = 'No server for Akismet request';
-                    break;
-                } else {
-                    // DEBUG
-                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
-                }
-                $req    = new HTTP_Request(
-                    'http://' . $server . '/1.1/verify-key',
-                     $opt
-                );
-
-                $req->addPostData('key',  $api_key);
-                $req->addPostData('blog', $serendipity['baseURL']);
-
-                if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                    $ret['is_spam'] = false;
-                    $ret['message'] = 'API Verification Request failed';
-                    $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP verification request failed.', $addData);
-                    break;
-                } else {
-                    // Fetch response
-                    $reqdata = $req->getResponseBody();
-                }
-
-                if (!preg_match('@valid@i', $reqdata)) {
-                    $ret['is_spam'] = false;
-                    $ret['message'] = 'API Verification failed';
-                    $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API verification failed: ' . $reqdata, $addData);
-                    break;
-                }
-
-                $req    = new HTTP_Request(
-                    'http://' . $api_key . '.' . $server . '/1.1/comment-check',
-                    $opt
-                );
-
-                foreach($data AS $key => $value) {
-                    $req->addPostData($key, $value);
-                }
-
-                if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                    $ret['is_spam'] = false;
-                    $ret['message'] = 'Akismet Request failed';
-                    $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP request failed.', $addData);
-                    break;
-                } else {
-                    // Fetch response
-                    $reqdata = $req->getResponseBody();
-                }
-
-                if (preg_match('@true@i', $reqdata)) {
-                    $ret['is_spam'] = true;
-                    $ret['message'] = $reqdata;
-                    // DEBUG
-                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_SPAM', 'Akismet API returned spam', $addData);
-                } elseif (preg_match('@false@i', $reqdata)) {
-                    $ret['is_spam'] = false;
-                    $ret['message'] = $reqdata;
-                    // DEBUG
-                    //$this->log($this->logfile, $eventData['id'], 'AKISMET_PASS', 'Passed Akismet verification', $addData);
-                } else {
-                    $ret['is_spam'] = false;
-                    $ret['message'] = 'Akismet API failure';
-                    $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API failure: ' . $reqdata, $addData);
-                }
-
+				
+				$this->akismetRequest($api_key, $data, $ret);
                 break;
 
             case 'blogg.de':
@@ -1388,6 +1435,23 @@ var $filter_defaults;
 
                 case 'backend_comments_top':
 
+                    // Tell Akismet about spam or not spam
+                    $tell_id = null;
+                    if (isset($serendipity['GET']['spamIsSpam'])) {
+                    	$tell_spam = true;
+                    	$tell_id = $serendipity['GET']['spamIsSpam'];
+                    }
+                    if (isset($serendipity['GET']['spamNotSpam'])) {
+                    	$tell_spam = false;
+                    	$tell_id = $serendipity['GET']['spamNotSpam'];
+                    }
+                    if ($tell_id !== null) {
+                        $akismet_apikey = $this->get_config('akismet');
+                        $akismet        = $this->get_config('akismet_filter');
+                        if (!empty($akismet_apikey))
+	                        $this->tellAboutComment('akismet.com', $akismet_apikey, $tell_id, $tell_spam);
+                    }
+
                     // Add Author to blacklist. If already filtered, it will be removed from the filter. (AKA "Toggle")
                     if (isset($serendipity['GET']['spamBlockAuthor'])) {
                         $item    = $this->getComment('author', $serendipity['GET']['spamBlockAuthor']);
@@ -1417,6 +1481,13 @@ var $filter_defaults;
                     $author_is_filtered = $this->checkFilter('authors', $eventData['author']);
                     $clink1 = 'clink1' . $eventData['id'];
                     $clink2 = 'clink2' . $eventData['id'];
+
+                    $akismet_apikey = $this->get_config('akismet');
+                    $akismet        = $this->get_config('akismet_filter');
+                    if (!empty($akismet_apikey)) {
+	                    $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/unconfigure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
+    	                $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/configure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
+   	                }
 
                     $eventData['action_author'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/' . ($author_is_filtered ? 'un' : '') . 'configure.png') . '" alt="" /></a>';
 

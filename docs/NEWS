@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added ability to report spam/ham to akismet (Black Warthog)
+    
     * Added localization for {$WEBLOG} in trackbacks.tpl (LazyBadger)
     
     * Added "Options -MultiViews" to .htaccess to prevent IE9 trouble
