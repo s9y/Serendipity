@@ -1,13 +1,15 @@
-<?php # lang_cs.inc.php 1658.1 2009-07-06 16:12:57 VladaAjgl $
+<?php # lang_cs.inc.php 1658.2 2011-04-17 14:17:14 VladaAjgl $
 
 /**
- *  @version 1658.1
+ *  @version 1658.2
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/16
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/07/06
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2011/04/17
  */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE',		'Spam Protector');
@@ -147,3 +149,7 @@
 // Next lines were translated on 2009/07/06
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE',		'Vylouèit URL adresy z ovìøení IP adresy');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC',		'URL adresy, které se nemají ovìøovat na IP adresu.');
+
+// Next lines were translated on 2011/04/17
+@define('PLUGIN_EVENT_SPAMBLOCK_SPAM',		'Spam');
+@define('PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM',		'Není spam');

@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1.8 2010-12-25 22:53:57 VladaAjgl $
+<?php # lang_cz.inc.php 1.9 2011-04-17 14:16:50 VladaAjgl $
 
 /**
- *  @version 1.8
+ *  @version 1.9
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -19,6 +19,8 @@
  *  @revisionDate 2010/09/12
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/12/25
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2011/04/17
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -31,11 +33,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET', 'utf8');
+@define('SQL_CHARSET',		'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, cs_CZ.UTF8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG', 'cs-utf');
+@define('WYSIWYG_LANG',		'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -988,7 +990,8 @@ $i18n_filename_to = array (
 @define('NAVLINK_AMOUNT', 'Zadejte počet odkazů navigační lišty (ihned po zadání této volby klikněte na "Uložit" a obnovte stránku)');
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
-@define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáře');@define('WEBLOG', 'Weblog');
-@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
-@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
-@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('MODERATE_SELECTED_COMMENTS', 'Schválit vybrané komentáře');
+@define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Čeká na potvrzení');
+@define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
