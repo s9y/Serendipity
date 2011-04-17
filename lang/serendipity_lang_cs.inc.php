@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.8 2010-12-25 22:53:57 VladaAjgl $
+<?php # lang_cs.inc.php 1.9 2011-04-17 14:16:50 VladaAjgl $
 
 /**
- *  @version 1.8
+ *  @version 1.9
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -19,6 +19,8 @@
  *  @revisionDate 2010/09/12
  *  @author VladimÌr Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2010/12/25
+ *  @author VladimÌr Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2011/04/17
  */
 $i18n_filename_from = array (
 '·','Ë','Ô','È','Ï','Ì','Â','æ','Ú','Û','‡','¯','ú','ö','ù','˙','˘','˝','ü','û',
@@ -988,7 +990,8 @@ $i18n_filename_to = array (
 @define('NAVLINK_AMOUNT', 'Zadejte poËet odkaz˘ navigaËnÌ liöty (ihned po zad·nÌ tÈto volby kliknÏte na "Uloûit" a obnovte str·nku)');
 @define('NAV_LINK_TEXT', 'Test odkazu');
 @define('NAV_LINK_URL', 'URL adresa odkazu');
-@define('MODERATE_SELECTED_COMMENTS', 'Schv·lit vybranÈ koment·¯e');@define('WEBLOG', 'Weblog');
-@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
-@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
-@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('MODERATE_SELECTED_COMMENTS', 'Schv·lit vybranÈ koment·¯e');
+@define('WEBLOG', 'Weblog');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'OdebÌr·no');
+@define('PENDING_COMMENT_SUBSCRIPTION', '»ek· na potvrzenÌ');
+@define('NO_COMMENT_SUBSCRIPTION', 'NeodebÌr·no');
