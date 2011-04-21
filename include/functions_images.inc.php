@@ -573,7 +573,7 @@ function serendipity_insertImageInDatabase($filename, $directory, $authorid = 0,
       serendipity_db_escape_string($directory),
       serendipity_db_escape_string($realname)
     );
-
+    
     $sql = serendipity_db_query($query);
     if (is_string($sql)) {
         echo $query . '<br />';
@@ -1152,15 +1152,17 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         $cond = array(
             'and' => "WHERE name = '" . serendipity_db_escape_string($fbase) . "'
                             " . ($fdir != '' ? "AND path = '" . serendipity_db_escape_string($fdir) . "'" : '') . "
-                            AND mime = '" . serendipity_db_escape_string($fdim['mime']) . "'"
+                            AND mime = '" . serendipity_db_escape_string($fdim['mime']) . "'
+                            AND extension = '" . serendipity_db_escape_string($f[1]) . "'"
         );
         serendipity_ACL_SQL($cond, false, 'directory');
-
+        
         $rs = serendipity_db_query("SELECT *
                                       FROM {$serendipity['dbPrefix']}images AS i
                                            {$cond['joins']}
 
                                            {$cond['and']}", true, 'assoc');
+
         if (is_array($rs)) {
             // This image is in the database.  Check our calculated data against the database data.
             $update    = array();
@@ -1187,12 +1189,12 @@ function serendipity_syncThumbs($deleteThumbs = false) {
 
             /* Do the database update, if needed */
             if (sizeof($update) != 0) {
-                printf(FOUND_FILE . '<br />', $files[$x]);
+                printf(FOUND_FILE . ' (2)<br />', $files[$x]);
                 serendipity_updateImageInDatabase($update, $rs['id']);
                 $i++;
             }
         } else {
-            printf(FOUND_FILE . '<br />', $files[$x]);
+            printf(FOUND_FILE . ' (1)<br />', $files[$x]);
             serendipity_insertImageInDatabase($fbase . '.' . $f[1], $fdir, 0, filemtime($ffull));
             $i++;
         }
