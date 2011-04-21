@@ -3,6 +3,10 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fixed a bug in synchronizing new files with the same basename
+      but different extensions, where files with the same mimetype
+      would not get added (garvinhicking)
+
     * Show subscription status of comments in frontend and backend
     
     * Added ability to report spam/ham to akismet (Black Warthog)
