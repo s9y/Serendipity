@@ -319,7 +319,7 @@ $serendipity['indexFile'] = 'index.php';
 if (function_exists('date_default_timezone_get')) {
     // We currently offer no Timezone setting (only offset to UTC), so we
     // rely on the OS' timezone.
-    date_default_timezone_set(date_default_timezone_get());
+    @date_default_timezone_set(@date_default_timezone_get());
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
