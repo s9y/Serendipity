@@ -1161,7 +1161,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
               . "\n"
               . "\n" . REQUIRES_REVIEW          . ': ' . (($moderate_comment) ? YES : NO) . (isset($serendipity['moderate_reason']) ? ' (' . $serendipity['moderate_reason'] . ')' : '')
               . "\n" . LINK_TO_ENTRY            . ': ' . $entryURI
-              . "\n" . 'Weblog ' . NAME         . ': ' . stripslashes($fromName)
+              . "\n" . WEBLOG                   . ': ' . stripslashes($fromName)
               . "\n" . LINK_TO_REMOTE_ENTRY     . ': ' . $fromUrl
               . "\n"
               . "\n" . EXCERPT . ':'
@@ -1183,11 +1183,11 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
               . "\n" . LINK_TO_ENTRY . ': ' . $entryURI
               . "\n"
               . "\n" . REQUIRES_REVIEW         . ': ' . (($moderate_comment) ? YES : NO) . (isset($serendipity['moderate_reason']) ? ' (' . $serendipity['moderate_reason'] . ')' : '')
-              . "\n" . USER . ' ' . IP_ADDRESS . ': ' . $_SERVER['REMOTE_ADDR']
-              . "\n" . USER . ' ' . NAME       . ': ' . $fromName
-              . "\n" . USER . ' ' . EMAIL      . ': ' . $fromEmail
-              . "\n" . USER . ' ' . HOMEPAGE   . ': ' . $fromUrl
-              . "\n" . USER . ' ' . REFERER    . ': ' . $referer
+              . "\n" . IP_ADDRESS . ': ' . $_SERVER['REMOTE_ADDR']
+              . "\n" . NAME       . ': ' . $fromName
+              . "\n" . EMAIL      . ': ' . $fromEmail
+              . "\n" . HOMEPAGE   . ': ' . $fromUrl
+              . "\n" . REFERER    . ': ' . $referer
               . "\n"
               . "\n" . COMMENTS                . ': '
               . "\n" . strip_tags($comment)
