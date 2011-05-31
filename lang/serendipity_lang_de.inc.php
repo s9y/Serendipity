@@ -334,7 +334,7 @@
 @define('INSTALL_DBTYPE', 'Datenbanktyp');
 @define('INSTALL_DBTYPE_DESC', 'Datenbanktyp');
 @define('INSTALL_DBHOST', 'Datenbank Servername');
-@define('INSTALL_DBHOST_DESC', 'Datenbank Servername');
+@define('INSTALL_DBHOST_DESC', 'Datenbank Servername. Bei pgsql kann ein abweichender Port mittels "localhost port=4711" angegeben werden; bei MySQL mit "localhost:4711".');
 @define('INSTALL_DBUSER', 'Datenbank Username');
 @define('INSTALL_DBUSER_DESC', 'Datenbank Username');
 @define('INSTALL_DBPASS', 'Datenbank Passwort');

@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_de.inc.php 2740 2011-03-22 09:14:30Z garvinhicking $
+<?php # $Id: serendipity_lang_de.inc.php 2745 2011-04-11 12:35:40Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) Jannis Hermanns, Garvin Hicking and others
@@ -334,7 +334,7 @@
 @define('INSTALL_DBTYPE', 'Datenbanktyp');
 @define('INSTALL_DBTYPE_DESC', 'Datenbanktyp');
 @define('INSTALL_DBHOST', 'Datenbank Servername');
-@define('INSTALL_DBHOST_DESC', 'Datenbank Servername');
+@define('INSTALL_DBHOST_DESC', 'Datenbank Servername. Bei pgsql kann ein abweichender Port mittels "localhost port=4711" angegeben werden; bei MySQL mit "localhost:4711".');
 @define('INSTALL_DBUSER', 'Datenbank Username');
 @define('INSTALL_DBUSER_DESC', 'Datenbank Username');
 @define('INSTALL_DBPASS', 'Datenbank Passwort');
