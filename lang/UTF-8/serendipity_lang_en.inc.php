@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 2740 2011-03-22 09:14:30Z garvinhicking $
+<?php # $Id: serendipity_lang_en.inc.php 2745 2011-04-11 12:35:40Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */
@@ -344,7 +344,7 @@
 @define('INSTALL_DBTYPE', 'Database type');
 @define('INSTALL_DBTYPE_DESC', 'Database type');
 @define('INSTALL_DBHOST', 'Database host');
-@define('INSTALL_DBHOST_DESC', 'The hostname for your database server');
+@define('INSTALL_DBHOST_DESC', 'The hostname for your database server. For pgsql you can specify a non-default port with "localhost port=4711" for example; for MySQL you can use "localhost:4711". If you use the default port, never mind this explanation.');
 @define('INSTALL_DBUSER', 'Database user');
 @define('INSTALL_DBUSER_DESC', 'The username used to connect to your database');
 @define('INSTALL_DBPASS', 'Database password');

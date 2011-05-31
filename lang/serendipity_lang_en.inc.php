@@ -344,7 +344,7 @@
 @define('INSTALL_DBTYPE', 'Database type');
 @define('INSTALL_DBTYPE_DESC', 'Database type');
 @define('INSTALL_DBHOST', 'Database host');
-@define('INSTALL_DBHOST_DESC', 'The hostname for your database server');
+@define('INSTALL_DBHOST_DESC', 'The hostname for your database server. For pgsql you can specify a non-default port with "localhost port=4711" for example; for MySQL you can use "localhost:4711". If you use the default port, never mind this explanation.');
 @define('INSTALL_DBUSER', 'Database user');
 @define('INSTALL_DBUSER_DESC', 'The username used to connect to your database');
 @define('INSTALL_DBPASS', 'Database password');
