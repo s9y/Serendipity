@@ -3,6 +3,9 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Added new event hook 'backend_loginfail' to track failed logins
+      (serendipity_event_externalauth can make use of it for fail2ban)
+      
     * Fixed a bug in synchronizing new files with the same basename
       but different extensions, where files with the same mimetype
       would not get added (garvinhicking)
