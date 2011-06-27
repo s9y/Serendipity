@@ -3,6 +3,8 @@
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fixed Spartauc SF.Net download location (Thanks to christian_boltz)
+    
     * Added new event hook 'backend_loginfail' to track failed logins
       (serendipity_event_externalauth can make use of it for fail2ban)
       

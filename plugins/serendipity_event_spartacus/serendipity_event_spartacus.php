@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.22');
+        $propbag->add('version',       '2.23');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -103,7 +103,7 @@ class serendipity_event_spartacus extends serendipity_event
 
             'files' => array(
                 'http://netmirror.org/mirror/serendipity/',
-                'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/',
+                'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
                 'http://s9y.org/mirror/',
 //                'http://svn.berlios.de/viewcvs/serendipity/',
 //                'http://openmirror.org/pub/s9y/',
@@ -111,7 +111,7 @@ class serendipity_event_spartacus extends serendipity_event
 
             'files_health' => array(
                 'http://netmirror.org/'                 => 'http://netmirror.org/mirror/serendipity/last.txt',
-                'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/*checkout*/php-blog/serendipity/docs/LICENSE',
+                'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
 //                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/',
 //                'http://openmirror.org/'                => 'http://openmirror.org/pub/s9y/last.txt',
