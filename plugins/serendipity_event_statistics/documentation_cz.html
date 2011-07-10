@@ -1,0 +1,44 @@
+<html>    
+	<head>        
+		<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+		<title>Dokumentace: Plugin Statistiky</title>        
+	</head>
+	<body>
+	<h1>Dokumentace k pluginu 'Statistiky'</h1>
+		<p>Dokumentaci k tomuto pluginu přeložil do češtiny Vladimír Ajgl (vlada [zavinac] ajgl [tecka] cz) dne 5.7.2011. Od té doby mohl být plugin pozměněn nebo mohly být rozšířené jeho funkce. Zkontrolujte pro jistotu i <a href="ChangeLog">aktuální anglický ChangeLog</a>. 
+		</p>
+		
+		<h2>Popis pluginu</h2>
+		<p>Plugin vyhodnocuje a zobrazuje různé ukazatele o provozu blogu, jako jsou počty publikovaných příspěvků nebo návštěvnost.
+		</p>
+				 
+		<h2>Historie verzí (ChangeLog)</h2>
+		<ul>
+			<li>verze ???</li>	
+			<ul>	
+				<li>Přidání 'http://' k URL adrese komentátora, pokud to v ní chybí.</li>	
+			</ul>
+			<li>verze 1.60, 23.7.2007 [Kalkin]</li>	
+			<ul>	
+				<li>Přepsán filtr prohledávacích robotů. Nyní je chytřejší.</li>	
+				<li>Grafy mohou být široké nejvýše 200 pixelů.</li>	
+				<li>Barvy sloupečků jsou nyní relativní.</li>	
+			</ul>
+			<li>verze 1.50, 21.7.2007 [Kalkin]</li>	
+			<ul>	
+				<li>Přidané velké množství prohledávacích robotů</li>	
+				<li>Nyní plugin počítá jako návštěvy pouze unikátní IP adresy, nikoliv každé obnovení stránky.</li>	
+			</ul>
+			<li>verze 1.40 [Shrikee / Arnan]</li>	
+			<ul>	
+				<li>Přidána databázová tabulka, která uchovává denní statistiky.</li>	
+				<li>Přidány 2 grafy, které zobrazují data z předchozí tabulky</li>	
+				<li>Přepsán filtr na prohledávací roboty</li>	
+				<li>Přidána volba nastavení, která umožňuje zobrazovat pouze statistiky návštěv, nebo všechny statistiky (počet příspěvků a podobné)</li>
+				<li>Přidána volba nastavení pro zapnutí nebo vypnutí filtru na prohledávací roboty.</li>	
+				<li>Opraven registr referer. Doteď nebyly ukládány do databáze, teď už jsou.</li>	
+				<li>Pokud je $useragent, $referer nebo $remote_addr prázdný nebo neznámý, je nastavený na 'neznámý'.</li>	
+			</ul>
+		</ul>  
+	</body>
+</html>
