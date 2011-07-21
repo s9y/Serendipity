@@ -2116,15 +2116,18 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
     if ($supported['navigation']) {
         $navlinks = array();
 
-        $conf_amount = array(
+        if (!isset($template_loaded_config['amount'])) { 
+            $conf_amount = array(
                 'var'           => 'amount',
                 'name'          => NAVLINK_AMOUNT,
+                'desc'          => NAVLINK_AMOUNT_BLAHBLAH,
                 'type'          => 'string',
                 'default'       => '5',
                 'scope'         => 'global'
-        );
-        $template_config[] = $conf_amount;
-        
+            );
+            $template_config[] = $conf_amount;
+        }
+
         if (empty($template_loaded_config['amount'])) {
             $template_loaded_config['amount'] = $conf_amount['default'];
         }
