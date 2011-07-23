@@ -397,10 +397,10 @@ class serendipity_quicksearch_plugin extends serendipity_plugin {
 ?>
 <form id="searchform" action="<?php echo $serendipity['serendipityHTTPPath'] . $serendipity['indexFile']; ?>" method="get">
     <div>
-        <input type="hidden"  name="serendipity[action]" value="search" />
-        <input type="hidden"  name="serendipity[fullentry]" value="<?php echo $fullentry ?>" />
-        <input alt="<?php echo QUICKSEARCH; ?>" type="text"   id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" size="13" />
-        <input class="quicksearch_submit" type="submit" value="&gt;" alt="<?php echo QUICKSEARCH; ?>" name="serendipity[searchButton]" title="<?PHP echo GO; ?>" style="width: 2em;" />
+        <input type="hidden" name="serendipity[action]" value="search" />
+        <input type="hidden" name="serendipity[fullentry]" value="<?php echo $fullentry ?>" />
+        <input type="text" id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" size="13" />
+        <input class="quicksearch_submit" type="submit" value="&gt;" name="serendipity[searchButton]" title="<?PHP echo GO; ?>" style="width: 2em;" />
     </div>
     <div id="LSResult" style="display: none;"><div id="LSShadow"></div></div>
 </form>
