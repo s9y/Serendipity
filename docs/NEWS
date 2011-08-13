@@ -7,6 +7,9 @@ Version 1.7 ()
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Removed browsercompatibilitty plugin because it's outdated and
+      IE6 shall be dead.
+      
     * Fixed Spartauc SF.Net download location (Thanks to christian_boltz)
     
     * Added new event hook 'backend_loginfail' to track failed logins

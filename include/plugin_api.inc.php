@@ -88,7 +88,6 @@ class serendipity_plugin_api
         serendipity_plugin_api::create_plugin_instance('serendipity_event_s9ymarkup', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_emoticate', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_nl2br', null, 'event');
-        serendipity_plugin_api::create_plugin_instance('serendipity_event_browsercompatibility', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_spamblock', null, 'event');
 
         /* Register additional plugins? */
