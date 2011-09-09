@@ -7,6 +7,9 @@ Version 1.7 ()
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix problem with autosave plugin used in conjunction with
+      entryproperties (chrisbra)
+      
     * Removed browsercompatibilitty plugin because it's outdated and
       IE6 shall be dead.
       

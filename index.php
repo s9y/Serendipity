@@ -251,10 +251,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     echo $data;
-} else if ( preg_match(PAT_COMMENTSUB, $uri, $matches) ||
+} else if ( (preg_match(PAT_COMMENTSUB, $uri, $matches) ||
             preg_match(PAT_PERMALINK, $uri, $matches) ||
             isset($serendipity['GET']['id']) ||
-            isset($_GET['p']) ) {
+            isset($_GET['p']))
+            && !preg_match('/autosave/', $serendipity['uriArguments'][1]) ) {
     $serendipity['view'] = 'entry';
 
     if (isset($serendipity['GET']['id'])) {
