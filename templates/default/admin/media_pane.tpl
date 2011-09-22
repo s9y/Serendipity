@@ -100,7 +100,6 @@
                 </div>
                 <script type="text/javascript" language="javascript">
                 {if $media.keywords_selected != '' OR $show_filter}showFilters();{/if}
-                // {$show_filter}
                 </script>
             </td>
         </tr>
