@@ -43,7 +43,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.5');
+        $propbag->add('version',       '2.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -1400,7 +1400,7 @@ END_IMG_CSS;
                     }
 
                     // URL; expected to be event_display and karmalog, respectively 
-                    $url = '?serendipity[adminModule]='.$serendipity['GET']['adminModule'].'&serendipity[adminAction]='.$serendipity['GET']['adminAction'];
+                    $url = '?serendipity[adminModule]='.htmlspecialchars($serendipity['GET']['adminModule']).'&serendipity[adminAction]='.htmlspecialchars($serendipity['GET']['adminAction']);
 
                     // Filters
                     print("
