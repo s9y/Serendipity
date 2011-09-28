@@ -110,7 +110,7 @@
                                           'permission'  => 'siteConfiguration',
                                           'default'     => 'uploads/'),
 
-                                    array('var'         => 'baseURL',
+                                    array('var'         => 'defaultBaseURL',
                                           'title'       => INSTALL_URL,
                                           'description' => INSTALL_URL_DESC,
                                           'type'        => 'string',

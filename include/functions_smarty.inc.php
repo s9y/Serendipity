@@ -1000,6 +1000,7 @@ function serendipity_smarty_init($vars = array()) {
                 'blogDescription'           => $serendipity['blogDescription'],
 
                 'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
+                'serendipityDefaultBaseURL' => $serendipity['defaultBaseURL'],
                 'serendipityBaseURL'        => $serendipity['baseURL'],
                 'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
                 'serendipityIndexFile'      => $serendipity['indexFile'],
