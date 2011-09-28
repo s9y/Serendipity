@@ -329,6 +329,12 @@ function serendipity_load_configuration($author = null) {
     }
     $config_loaded[$author] = true;
 
+    // Set baseURL to defaultBaseURL
+    if ((empty($author) || empty($serendipity['baseURL'])) && isset($serendipity['defaultBaseURL'])) {
+        $serendipity['baseURL'] = $serendipity['defaultBaseURL'];
+    }
+    
+
     // Store default language
     $serendipity['default_lang'] = $serendipity['lang'];
 }

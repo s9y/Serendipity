@@ -30,14 +30,14 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
             $permalinkOld = array(
                 $oldConfig['serendipityHTTPPath'],
                 $oldConfig['serendipityPath'],
-                $oldConfig['baseURL'],
+                $oldConfig['defaultBaseURL'],
                 $oldConfig['indexFile'],
                 $oldConfig['rewrite']);
 
             $permalinkNew = array(
                 $serendipity['serendipityHTTPPath'],
                 $serendipity['serendipityPath'],
-                $serendipity['baseURL'],
+                $serendipity['defaultBaseURL'],
                 $serendipity['indexFile'],
                 $serendipity['rewrite']);
 
