@@ -2154,7 +2154,7 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
                 'var'           => 'navlink' . $i . 'text',
                 'name'          => NAV_LINK_TEXT . ' #' . ($i+1),
                 'type'          => 'string',
-                'default'       => 'Link #' . $i,
+                'default'       => 'Link #' . ($i+1),
                 'scope'         => 'global'
             );
             $template_config[] = array(
