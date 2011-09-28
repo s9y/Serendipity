@@ -2075,9 +2075,10 @@ function serendipity_setFormToken($type = 'form') {
  * into an array.
  *
  * @param   array   Referenced variable coming from the config.inc.php file, where the config values will be stored in
+ * @param   boolean Use true boolean mode in array $template_config in the config.inc.php file
  * @return  array   Final return array with default values
  */
-function &serendipity_loadThemeOptions(&$template_config, $okey = '') {
+function &serendipity_loadThemeOptions(&$template_config, $okey = '', $bc_bool = false) {
     global $serendipity;
     
     if (empty($okey)) {
@@ -2098,7 +2099,14 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '') {
             $template_vars[$item['var']] = $item['default'];
         }
     }
-
+    if($bc_bool) { 
+        foreach($template_vars AS $k => $i) { 
+            if($i == 'true' || $i == 'false') {
+                $template_vars[$k] = serendipity_db_bool($i);
+            }
+        }
+        //reset smarty compiled template ?
+    }
     return $template_vars;
 }
 
@@ -2116,19 +2124,16 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
     if ($supported['navigation']) {
         $navlinks = array();
 
-        if (!isset($template_loaded_config['amount'])) { 
-            $conf_amount = array(
+        $conf_amount = array(
                 'var'           => 'amount',
                 'name'          => NAVLINK_AMOUNT,
-                'desc'          => NAVLINK_AMOUNT_BLAHBLAH,
                 'type'          => 'string',
                 'default'       => '5',
                 'scope'         => 'global'
-            );
-            $template_config[] = $conf_amount;
-        }
+        );
 
-        if (empty($template_loaded_config['amount'])) {
+        if (!isset($template_loaded_config['amount']) || empty($template_loaded_config['amount'])) {
+            $template_config[] = $conf_amount;
             $template_loaded_config['amount'] = $conf_amount['default'];
         }
     
