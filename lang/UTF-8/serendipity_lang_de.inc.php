@@ -960,9 +960,9 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
-@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
-@define('NAV_LINK_TEXT', 'Enter the navbar link text');
-@define('NAV_LINK_URL', 'Enter the full URL of your link');
+@define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Styles verwalten-Seite muss danach neu geladen werden)');
+@define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
+@define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
 @define('MODERATE_SELECTED_COMMENTS', 'Markierte Kommentare freischalten');
 @define('WEBLOG', 'Weblog');
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');

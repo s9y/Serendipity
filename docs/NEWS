@@ -7,6 +7,8 @@ Version 1.7 ()
 Version 1.6 ()
 ------------------------------------------------------------------------
 
+    * Fix XSS issue in mediadatabase filtering, thanks to Stefan Schurtz
+
     * Fix problem with autosave plugin used in conjunction with
       entryproperties (chrisbra)
       
