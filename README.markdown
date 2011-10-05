@@ -2,5 +2,6 @@
 
 Just a test repo.
 
-It really whips a Llama's ass. GC-test, mailupdate commit.
+## What is this? What does it do?
 
+It really whips a Llama's ass. And tests mail notifies.
