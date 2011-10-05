@@ -1,7 +1,3 @@
-# s9y git Test
+# Serendipity Weblog System
 
-Just a test repo.
-
-## What is this? What does it do?
-
-It really whips a Llama's ass. And tests mail notifies.
+(Master branch)
