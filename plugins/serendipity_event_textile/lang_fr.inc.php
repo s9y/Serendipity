@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_fr.inc.php 2093 2008-01-18 12:50:00Z garvinhicking $
 
 ##########################################################################
 # serendipity - another blogger...                                       #

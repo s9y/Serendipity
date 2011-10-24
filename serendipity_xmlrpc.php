@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_xmlrpc.php 1055 2006-04-06 09:14:11Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

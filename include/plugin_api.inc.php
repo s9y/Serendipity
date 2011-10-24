@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: plugin_api.inc.php 2771 2011-08-13 22:06:09Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

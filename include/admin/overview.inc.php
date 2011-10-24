@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: overview.inc.php 2504 2009-05-04 08:33:50Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 /* vim: set sts=4 ts=4 expandtab : */

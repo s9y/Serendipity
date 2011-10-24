@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_karma.php 2778 2011-09-23 12:32:28Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 

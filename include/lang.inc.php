@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang.inc.php 2397 2008-12-09 10:41:48Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

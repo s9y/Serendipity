@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: configuration.inc.php 2366 2008-11-06 11:44:43Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -30,14 +30,14 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
             $permalinkOld = array(
                 $oldConfig['serendipityHTTPPath'],
                 $oldConfig['serendipityPath'],
-                $oldConfig['defaultBaseURL'],
+                $oldConfig['baseURL'],
                 $oldConfig['indexFile'],
                 $oldConfig['rewrite']);
 
             $permalinkNew = array(
                 $serendipity['serendipityHTTPPath'],
                 $serendipity['serendipityPath'],
-                $serendipity['defaultBaseURL'],
+                $serendipity['baseURL'],
                 $serendipity['indexFile'],
                 $serendipity['rewrite']);
 

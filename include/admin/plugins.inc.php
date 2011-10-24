@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: plugins.inc.php 2722 2011-01-03 09:11:17Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

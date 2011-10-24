@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_de.inc.php 2491 2009-03-24 10:41:50Z garvinhicking $
 
 @define('PLUGIN_EVENT_NL2BR_NAME',     'Textformatierung: NL2BR');
 @define('PLUGIN_EVENT_NL2BR_DESC',     'Konvertiert Zeilenumbrüche zu HTML');

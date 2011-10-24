@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: phpbb.inc.php 50 2005-04-25 16:50:43Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: generic.inc.php 2551 2009-07-14 11:40:16Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

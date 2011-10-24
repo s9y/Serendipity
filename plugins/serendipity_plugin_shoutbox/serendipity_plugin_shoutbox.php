@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_plugin_shoutbox.php 2673 2010-08-20 09:07:42Z garvinhicking $
 
 /* Contributed by Matthias Lange (http://blog.dinnri.de/ml/) */
 

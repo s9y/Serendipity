@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions_smarty.inc.php 2761 2011-07-19 16:37:24Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -70,12 +70,7 @@ function &serendipity_printTrackbacks(&$trackbacks) {
 function &serendipity_smarty_fetch($block, $file, $echo = false) {
     global $serendipity;
 
-    if (strpos($serendipity['smarty']->_version, '2', 1)) {
-        $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, ($echo === true && $serendipity['smarty_raw_mode']));
-    } else {
-        $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
-    }
-
+    $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, ($echo === true && $serendipity['smarty_raw_mode']));
     $serendipity['smarty']->assign_by_ref($block, $output);
 
     return $output;
@@ -919,14 +914,6 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->compile_check = true;
             $serendipity['smarty']->compile_id    = &$serendipity['template'];
 
-            if (!strpos($serendipity['smarty']->_version, '2', 1)) {
-                $serendipity['smarty']->setDeprecationNotices(false); // set $smarty->deprecation_notices
-                #$serendipity['smarty']->setCaching(true);             // set $smarty->caching to not being regenerated
-                #$serendipity['smarty']->force_compile = false;        // override compile_check (default:false)
-                #$serendipity['smarty']->error_reporting = E_ALL & ~E_NOTICE;
-                #$serendipity['smarty']->auto_literal = false;
-            }
-            
             $serendipity['smarty']->register_modifier('makeFilename', 'serendipity_makeFilename');
             $serendipity['smarty']->register_modifier('xhtml_target', 'serendipity_xhtml_target');
             $serendipity['smarty']->register_modifier('emptyPrefix', 'serendipity_emptyPrefix');
@@ -1000,7 +987,6 @@ function serendipity_smarty_init($vars = array()) {
                 'blogDescription'           => $serendipity['blogDescription'],
 
                 'serendipityHTTPPath'       => $serendipity['serendipityHTTPPath'],
-                'serendipityDefaultBaseURL' => $serendipity['defaultBaseURL'],
                 'serendipityBaseURL'        => $serendipity['baseURL'],
                 'serendipityRewritePrefix'  => $serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '',
                 'serendipityIndexFile'      => $serendipity['indexFile'],

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_spartacus.php 2756 2011-06-27 09:39:25Z garvinhicking $
 
 /************
   TODO:

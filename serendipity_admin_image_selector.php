@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_admin_image_selector.php 2326 2008-08-27 19:20:23Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

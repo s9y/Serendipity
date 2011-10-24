@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: exit.php 2316 2008-08-22 09:20:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

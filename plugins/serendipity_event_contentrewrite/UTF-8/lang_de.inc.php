@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_de.inc.php 1562 2007-01-02 10:37:47Z garvinhicking $
 
         @define('PLUGIN_EVENT_CONTENTREWRITE_FROM', 'quelle');
         @define('PLUGIN_EVENT_CONTENTREWRITE_TO', 'ziel');

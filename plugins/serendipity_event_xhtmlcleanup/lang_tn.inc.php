@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_tn.inc.php 1510 2006-11-16 09:31:52Z garvinhicking $
 ##########################################################################
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
 # Developer Team) All rights reserved.  See LICENSE file for licensing   #

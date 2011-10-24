@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_spamblock.php 2744 2011-04-11 07:34:37Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 

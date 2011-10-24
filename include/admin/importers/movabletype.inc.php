@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: movabletype.inc.php 1815 2007-08-06 10:18:26Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

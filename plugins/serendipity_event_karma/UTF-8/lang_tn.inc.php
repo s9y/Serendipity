@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_tn.inc.php 2110 2008-02-11 02:12:07Z slothman $
 ##########################################################################
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
 # Developer Team) All rights reserved.  See LICENSE file for licensing   #

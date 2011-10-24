@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: installer.inc.php 2544 2009-07-10 13:50:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

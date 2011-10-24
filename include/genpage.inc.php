@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: genpage.inc.php 2651 2010-04-30 08:13:30Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

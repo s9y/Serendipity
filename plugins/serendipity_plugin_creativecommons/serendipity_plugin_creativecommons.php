@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_plugin_creativecommons.php 2673 2010-08-20 09:07:42Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 

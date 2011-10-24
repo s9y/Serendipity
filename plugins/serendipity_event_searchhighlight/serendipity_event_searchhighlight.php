@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_searchhighlight.php 2705 2010-10-12 12:17:13Z garvinhicking $
 
 /**********************************/
 /*  Authored by Tom Sommer, 2004  */

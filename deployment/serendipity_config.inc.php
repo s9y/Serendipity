@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_config.inc.php 861 2006-01-23 09:46:13Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Serendipity is provided in managed mode here

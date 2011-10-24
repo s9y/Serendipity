@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_de.inc.php 1731 2007-06-18 10:47:59Z garvinhicking $
 @define('REPLY', 'Antworten');
 @define('SAYS', 'schreibt');
 @define('LINK_TO_COMMENT', 'Link zu Kommentar #%d');

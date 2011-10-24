@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions_trackbacks.inc.php 2704 2010-10-07 08:43:53Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

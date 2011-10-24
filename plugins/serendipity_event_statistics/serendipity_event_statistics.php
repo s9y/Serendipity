@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_statistics.php 2743 2011-03-31 11:49:11Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
    

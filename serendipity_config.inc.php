@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_config.inc.php 2762 2011-07-19 16:39:23Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -45,7 +45,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version']         = '1.7-alpha1';
+$serendipity['version']         = '1.6';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
@@ -280,7 +280,7 @@ $serendipity['lang'] = serendipity_getSessionLanguage();
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
-    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
+    $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
 }
 /*
  * If a user is logged in, fetch his preferences. He possibly wants to have a different language

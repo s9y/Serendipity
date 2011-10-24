@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_en.inc.php 7 2005-04-16 06:39:31Z s_bergmann $
 @define('REPLY', 'Reply');
 @define('SAYS', 'says');
 @define('LINK_TO_COMMENT', 'Link to comment #%d');

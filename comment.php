@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: comment.php 2522 2009-06-11 12:14:15Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

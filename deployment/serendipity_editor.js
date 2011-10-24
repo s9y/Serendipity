@@ -1,5 +1,5 @@
 <!-- // Hide from older browsers
-/* $Id$ */
+/* $Id: serendipity_editor.js 2549 2009-07-14 10:14:46Z garvinhicking $ */
 /*
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details

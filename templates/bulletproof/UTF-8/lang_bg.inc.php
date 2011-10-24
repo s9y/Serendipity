@@ -1,6 +1,6 @@
 <?php
 
-/* $Id$
+/* $Id: lang_bg.inc.php 2312 2008-08-12 17:09:03Z jwalker $
 Translator: Ivan Cenov (jwalker@hotmail.bg)
 */
 

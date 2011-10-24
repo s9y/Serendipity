@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: plugin_internal.inc.php 2768 2011-07-23 04:42:02Z yellowled $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

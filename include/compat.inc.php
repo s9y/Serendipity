@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: compat.inc.php 2751 2011-05-10 12:51:30Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

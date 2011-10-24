@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_de.inc.php 2517 2009-06-01 02:36:52Z brockhaus $
 
         @define('PLUGIN_SHOUTBOX_NAME', 'Shoutbox');
         @define('PLUGIN_SHOUTBOX_BLAHBLAH', 'Zeigt eine Shoutbox für beliebige Kommentare');

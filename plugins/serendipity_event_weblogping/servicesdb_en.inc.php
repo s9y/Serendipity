@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: servicesdb_en.inc.php 1443 2006-10-11 18:59:31Z garvinhicking $
 
 ##########################################################################
 # serendipity - another blogger...                                       #

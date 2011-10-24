@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php # $Id: lang_nl.inc.php 1381 2006-08-15 10:14:56Z elf2000 $
 
 /**
- *  @version $Revision$
+ *  @version $Revision: 1381 $
  *  @author Wilco Wietsma <demo@demo.webxtra.nl>
  *  NL-Revision: Revision of lang_en.inc.php
  */

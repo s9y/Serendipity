@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions_upgrader.inc.php 1696 2007-05-18 07:59:14Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

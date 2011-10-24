@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_plugin_recententries.php 2673 2010-08-20 09:07:42Z garvinhicking $
 
 // Contributed by Christian Machmeier <cm@redsplash.de>
 // Randomizing contributed by Christian Brabandt <cb@256bit.org>

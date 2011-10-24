@@ -1,6 +1,6 @@
-<?php # $Id$
+<?php # $Id: lang_es.inc.php 1561 2007-01-02 10:15:53Z garvinhicking $
 /**
- *  @version $Revision$
+ *  @version $Revision: 1561 $
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */

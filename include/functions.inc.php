@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions.inc.php 2680 2010-08-24 09:45:46Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

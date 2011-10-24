@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: config_personal.inc.php 2592 2009-10-27 09:08:48Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

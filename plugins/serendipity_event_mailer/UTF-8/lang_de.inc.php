@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_de.inc.php 2516 2009-05-29 13:23:31Z garvinhicking $
 
         @define('PLUGIN_EVENT_MAILER_NAME', 'Artikel mailen');
         @define('PLUGIN_EVENT_MAILER_DESC', 'Verschickt jeden neuen Artikel im Blog via E-Mail');

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions_config.inc.php 2785 2011-09-28 11:39:01Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -328,12 +328,6 @@ function serendipity_load_configuration($author = null) {
         }
     }
     $config_loaded[$author] = true;
-
-    // Set baseURL to defaultBaseURL
-    if ((empty($author) || empty($serendipity['baseURL'])) && isset($serendipity['defaultBaseURL'])) {
-        $serendipity['baseURL'] = $serendipity['defaultBaseURL'];
-    }
-    
 
     // Store default language
     $serendipity['default_lang'] = $serendipity['lang'];

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_mailer.php 2734 2011-01-21 10:35:33Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 

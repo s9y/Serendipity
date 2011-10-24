@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: textpattern.inc.php 558 2005-10-15 16:02:02Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

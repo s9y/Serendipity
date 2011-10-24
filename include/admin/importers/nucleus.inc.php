@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: nucleus.inc.php 1463 2006-10-27 09:20:03Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

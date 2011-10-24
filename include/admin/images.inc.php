@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: images.inc.php 2593 2009-10-29 18:18:44Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

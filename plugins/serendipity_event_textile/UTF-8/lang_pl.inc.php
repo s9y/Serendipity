@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php # $Id: lang_pl.inc.php 2093 2008-01-18 12:50:00Z garvinhicking $
 
 /**
- *  @version $Revision$
+ *  @version $Revision: 2093 $
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */

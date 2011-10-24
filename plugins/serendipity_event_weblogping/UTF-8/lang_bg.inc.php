@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_bg.inc.php 1641 2007-03-08 18:09:58Z jwalker $
 
 /**
  *  @version $Revision: 1381 $

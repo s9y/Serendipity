@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: bblog.inc.php 144 2005-06-05 17:53:31Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

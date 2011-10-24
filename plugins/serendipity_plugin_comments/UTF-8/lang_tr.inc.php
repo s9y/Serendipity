@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php # $Id: lang_tr.inc.php 1987 2007-10-18 11:42:35Z garvinhicking $
 
 /**
- *  @version $Revision$
+ *  @version $Revision: 1987 $
  *  @author Ahmet Usal <ahmetusal@gmail.com>
  *  First public version: lang_tr.inc.php
  */

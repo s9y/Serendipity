@@ -1,23 +1,13 @@
 # $Id$
 
-
-Version 1.7 ()
-------------------------------------------------------------------------
-
-    * Added new serendipity['defaultBaseURL'] variable that makes sure
-      that the baseURL is not overriden when configuring serendipity
-      with a possibly autodetected currentl URL. Patch by Manko10.
-
 Version 1.6 ()
 ------------------------------------------------------------------------
 
-    * Fix XSS issue in mediadatabase filtering, thanks to Stefan Schurtz
-
     * Fix problem with autosave plugin used in conjunction with
       entryproperties (chrisbra)
-      
-    * Removed browsercompatibilitty plugin because it's outdated and
-      IE6 shall be dead.
+          
+    * Removed browsercompatibility plugin due to its outdatedness. IE6
+      is dead.
       
     * Fixed Spartauc SF.Net download location (Thanks to christian_boltz)
     

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: functions_installer.inc.php 2732 2011-01-15 13:32:59Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 

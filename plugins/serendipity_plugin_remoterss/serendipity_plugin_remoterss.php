@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_plugin_remoterss.php 2673 2010-08-20 09:07:42Z garvinhicking $
 
 // Contributed by Udo Gerhards <udo@babyblaue-seiten.de>
 // OPML Contributed by Richard Thomas Harrison <rich@mibnet.plus.com>

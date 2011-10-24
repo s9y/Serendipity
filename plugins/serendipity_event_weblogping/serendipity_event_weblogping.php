@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_weblogping.php 2700 2010-09-22 07:56:49Z garvinhicking $
 
 require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
 @serendipity_plugin_api::load_language(dirname(__FILE__));

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: rss.php 2707 2010-10-12 12:40:32Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
