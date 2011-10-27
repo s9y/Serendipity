@@ -407,7 +407,6 @@ class serendipity_event_statistics extends serendipity_event
                                     $com_stat['url'] = 'http://' . $com_stat['url'];
                                 }
                                         
-                                if (!preg_match())
                                 $link_url = ' (<a href="' . htmlspecialchars($com_stat['url']) . '">' . PLUGIN_EVENT_STATISTICS_OUT_LINK . '</a>)';
                             }
 
