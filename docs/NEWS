@@ -1,5 +1,10 @@
 # $Id$
 
+Version 1.6.1 ()
+------------------------------------------------------------------------
+
+    * Fixed unneccessary preg_match notices in the statistics backend
+    
 Version 1.6 (October 27th 2011)
 ------------------------------------------------------------------------
 
