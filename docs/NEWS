@@ -1,8 +1,11 @@
 # $Id$
 
-Version 1.6 ()
+Version 1.6 (October 27th 2011)
 ------------------------------------------------------------------------
 
+    * Fix XSS issue in karma-plugin admin interface and media manager
+      interface, by Stefan Schurtz
+    
     * Fix problem with autosave plugin used in conjunction with
       entryproperties (chrisbra)
           
