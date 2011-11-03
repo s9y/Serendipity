@@ -28,6 +28,10 @@ class template_option {
     function set_config($item, $value) {
         global $serendipity;
         
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                                    WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'
+                                      AND name = '" . serendipity_db_escape_string($item) . "'");
+                                                                                    
         if ($this->config[$item]['scope'] == 'global') {
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                                    WHERE okey = 't_global'
