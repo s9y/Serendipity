@@ -5,6 +5,9 @@ Version 1.6.1 ()
 
     * Fixed unneccessary preg_match notices in the statistics backend
     
+    * Fixed a possible problem where template-specific variables would
+      note be cleared in favor of the new global ones.
+      
 Version 1.6 (October 27th 2011)
 ------------------------------------------------------------------------
 
