@@ -53,13 +53,13 @@ function &serendipity_fetchTrackbacks($id, $limit = null, $showAll = false) {
 function &serendipity_printTrackbacks(&$trackbacks) {
     global $serendipity;
 
-    $serendipity['smarty']->assign_by_ref('trackbacks', $trackbacks);
+    $serendipity['smarty']->assignByRef('trackbacks', $trackbacks);
 
     return serendipity_smarty_fetch('TRACKBACKS', 'trackbacks.tpl');
 }
 
 /**
- * Smarty: Fetch a smarty block and pass it on to Serendipity Templates
+ * Smarty: Fetch a smarty block and pass it on to Serendipity Templates - use with Smarty > 3.0 only
  *
  * @access public
  * @param   string      The name of the block to parse data into ("COMMENTS" - virtual variable like {$COMMENTS})
@@ -70,13 +70,9 @@ function &serendipity_printTrackbacks(&$trackbacks) {
 function &serendipity_smarty_fetch($block, $file, $echo = false) {
     global $serendipity;
 
-    if (strpos($serendipity['smarty']->_version, '2', 1)) {
-        $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, ($echo === true && $serendipity['smarty_raw_mode']));
-    } else {
-        $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
-    }
+    $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
 
-    $serendipity['smarty']->assign_by_ref($block, $output);
+    $serendipity['smarty']->assignByRef($block, $output);
 
     return $output;
 }
@@ -887,72 +883,61 @@ function serendipity_smarty_init($vars = array()) {
                 return false;
             }
 
-            $serendipity['smarty'] = new Smarty;
-            if ($serendipity['production'] === 'debug') {
-                $serendipity['smarty']->force_compile   = true;
-                $serendipity['smarty']->debugging       = true;
+            // Load serendipity smarty class loading class
+            if (!class_exists('Serendipity_Smarty')) {
+                include 'serendipity_smarty_class.inc.php';
             }
-
-            $serendipity['smarty']->template_dir  = array($template_dir);
-            $p = explode(',', $serendipity['template_engine']);
-            foreach($p AS $te) {
-                $serendipity['smarty']->template_dir[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $te;
-            }
-
-            $serendipity['smarty']->template_dir[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default';
-            $serendipity['smarty']->compile_dir   = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE;
-
-            if (!is_dir($serendipity['smarty']->compile_dir) || !is_writable($serendipity['smarty']->compile_dir)) {
-                printf(DIRECTORY_WRITE_ERROR, $serendipity['smarty']->compile_dir);
+            
+            if (!class_exists('Serendipity_Smarty')) {
                 return false;
             }
+
+            // set smarty instance
+            $serendipity['smarty'] = new Serendipity_Smarty;
+            // debug moved to class
 
             // Hooray for Smarty:
             $_SESSION['no_smarty'] = $prev_smarty;
 
-            $serendipity['smarty']->config_dir    = $template_dir;
-            $serendipity['smarty']->secure_dir    = array($serendipity['serendipityPath'] . $serendipity['templatePath']);
-            $serendipity['smarty']->security_settings['MODIFIER_FUNCS']  = array('sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat');
-            $serendipity['smarty']->security_settings['ALLOW_CONSTANTS'] = true;
-            $serendipity['smarty']->security      = true;
-            $serendipity['smarty']->use_sub_dirs  = false;
-            $serendipity['smarty']->compile_check = true;
-            $serendipity['smarty']->compile_id    = &$serendipity['template'];
+            // enable security policy by instance of the Smarty_Security class
+            $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy'); 
 
-            if (!strpos($serendipity['smarty']->_version, '2', 1)) {
-                $serendipity['smarty']->setDeprecationNotices(false); // set $smarty->deprecation_notices
-                #$serendipity['smarty']->setCaching(true);             // set $smarty->caching to not being regenerated
-                #$serendipity['smarty']->force_compile = false;        // override compile_check (default:false)
-                #$serendipity['smarty']->error_reporting = E_ALL & ~E_NOTICE;
-                #$serendipity['smarty']->auto_literal = false;
-            }
+            // debugging...
+            #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
+            #$serendipity['smarty']->testInstall();exit;
+
+            /** 
+             * prüfe auf eventuelle API Änderungen in 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (siehe class) ] 
+             * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
+             **/
+            $serendipity['smarty']->registerPlugin('modifier', 'makeFilename', 'serendipity_makeFilename');
+            $serendipity['smarty']->registerPlugin('modifier', 'xhtml_target', 'serendipity_xhtml_target');
+            $serendipity['smarty']->registerPlugin('modifier', 'emptyPrefix', 'serendipity_emptyPrefix');
+            $serendipity['smarty']->registerPlugin('modifier', 'formatTime', 'serendipity_smarty_formatTime');
+            $serendipity['smarty']->registerPlugin('modifier', 'serendipity_utf8_encode', 'serendipity_utf8_encode');
+            $serendipity['smarty']->registerPlugin('modifier', 'ifRemember', 'serendipity_ifRemember');
+            $serendipity['smarty']->registerPlugin('modifier', 'checkPermission', 'serendipity_checkPermission');
+            $serendipity['smarty']->registerPlugin('modifier', 'serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
+
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_showPlugin', 'serendipity_smarty_showPlugin');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_getFile', 'serendipity_smarty_getFile');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_printComments', 'serendipity_smarty_printComments');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_printTrackbacks', 'serendipity_smarty_printTrackbacks');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_rss_getguid', 'serendipity_smarty_rss_getguid');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_fetchPrintEntries', 'serendipity_smarty_fetchPrintEntries');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_getTotalCount', 'serendipity_smarty_getTotalCount');
+            $serendipity['smarty']->registerPlugin('function', 'pickKey', 'serendipity_smarty_pickKey');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_getImageSize', 'serendipity_smarty_getImageSize');
             
-            $serendipity['smarty']->register_modifier('makeFilename', 'serendipity_makeFilename');
-            $serendipity['smarty']->register_modifier('xhtml_target', 'serendipity_xhtml_target');
-            $serendipity['smarty']->register_modifier('emptyPrefix', 'serendipity_emptyPrefix');
-            $serendipity['smarty']->register_modifier('formatTime', 'serendipity_smarty_formatTime');
-            $serendipity['smarty']->register_modifier('serendipity_utf8_encode', 'serendipity_utf8_encode');
-            $serendipity['smarty']->register_modifier('ifRemember', 'serendipity_ifRemember');
-            $serendipity['smarty']->register_modifier('checkPermission', 'serendipity_checkPermission');
-            $serendipity['smarty']->register_modifier('serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
-
-            $serendipity['smarty']->register_function('serendipity_printSidebar', 'serendipity_smarty_printSidebar');
-            $serendipity['smarty']->register_function('serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
-            $serendipity['smarty']->register_function('serendipity_showPlugin', 'serendipity_smarty_showPlugin');
-            $serendipity['smarty']->register_function('serendipity_getFile', 'serendipity_smarty_getFile');
-            $serendipity['smarty']->register_function('serendipity_printComments', 'serendipity_smarty_printComments');
-            $serendipity['smarty']->register_function('serendipity_printTrackbacks', 'serendipity_smarty_printTrackbacks');
-            $serendipity['smarty']->register_function('serendipity_rss_getguid', 'serendipity_smarty_rss_getguid');
-            $serendipity['smarty']->register_function('serendipity_fetchPrintEntries', 'serendipity_smarty_fetchPrintEntries');
-            $serendipity['smarty']->register_function('serendipity_getTotalCount', 'serendipity_smarty_getTotalCount');
-            $serendipity['smarty']->register_function('pickKey', 'serendipity_smarty_pickKey');
-            $serendipity['smarty']->register_function('serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
-            $serendipity['smarty']->register_function('serendipity_getImageSize', 'serendipity_smarty_getImageSize');
-            $serendipity['smarty']->register_prefilter('serendipity_replaceSmartyVars');
+            $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
+            
         }
 
         if (!isset($serendipity['smarty_raw_mode'])) {
-            if (file_exists($serendipity['smarty']->config_dir . '/layout.php') && $serendipity['template'] != 'default') {
+            if (file_exists($serendipity['smarty']->getConfigDir(0) . '/layout.php') && $serendipity['template'] != 'default') {
                 $serendipity['smarty_raw_mode'] = true;
             } else {
                 $serendipity['smarty_raw_mode'] = false;
@@ -1021,14 +1006,14 @@ function serendipity_smarty_init($vars = array()) {
 
         // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
         // setup custom smarty variables, modifiers etc. to use in their templates.
-        @include_once $serendipity['smarty']->config_dir . '/config.inc.php';
+        @include_once $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
 
         if (is_array($template_loaded_config)) {
             $template_vars =& $template_loaded_config;
-            $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
+            $serendipity['smarty']->assignByRef('template_option', $template_vars);
         } elseif (is_array($template_config)) {
             $template_vars =& serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option']);
-            $serendipity['smarty']->assign_by_ref('template_option', $template_vars);
+            $serendipity['smarty']->assignByRef('template_option', $template_vars);
         }
     }
 
@@ -1047,14 +1032,14 @@ function serendipity_smarty_purge() {
     /* Attempt to init Smarty, brrr */
     serendipity_smarty_init();
 
-    $files = serendipity_traversePath($serendipity['smarty']->compile_dir, '', false, '/.+\.tpl\.php$/');
+    $files = serendipity_traversePath($serendipity['smarty']->getCompileDir() . DIRECTORY_SEPARATOR, '', false, '/.+\.tpl\.php$/');
 
     if ( !is_array($files) ) {
         return false;
     }
 
     foreach ( $files as $file ) {
-        @unlink($serendipity['smarty']->compile_dir . DIRECTORY_SEPARATOR . $file['name']);
+        @unlink($serendipity['smarty']->getCompileDir() . DIRECTORY_SEPARATOR . $file['name']);
     }
 }
 
@@ -1076,7 +1061,7 @@ global $serendipity;
     chdir($serendipity_directory);
     $raw_data = ob_get_contents();
     ob_end_clean();
-    $serendipity['smarty']->assign_by_ref('content_message', $raw_data);
+    $serendipity['smarty']->assignByRef('content_message', $raw_data);
 
     serendipity_smarty_fetch('CONTENT', 'content.tpl');
     $serendipity['smarty']->assign('ENTRIES', '');

@@ -2864,7 +2864,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         $media['paths'] =& serendipity_getMediaPaths();
     }
 
-    $serendipity['smarty']->assign_by_ref('media', $media);
+    $serendipity['smarty']->assignByRef('media', $media);
 
     if ($enclose) {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
@@ -2895,7 +2895,7 @@ function serendipity_metaFieldConvert(&$item, $type) {
     switch($type) {
         case 'math':
             $parts = explode('/', $item);
-            return ($parts[0] / $parts[1]);
+            return ($parts[1] > 0) ? ($parts[0] / $parts[1]) : 0;
             break;
 
         case 'or':

@@ -250,11 +250,11 @@ $namespace_display_dat = $entries['display_dat'];
 $channel_display_dat = $entries['channel_dat'];
 unset($entries['display_dat']);
 unset($entries['channel_dat']);
-$serendipity['smarty']->assign_by_ref('metadata', $metadata);
-$serendipity['smarty']->assign_by_ref('entries', $entries);
-$serendipity['smarty']->assign_by_ref('namespace_display_dat', $namespace_display_dat);
-$serendipity['smarty']->assign_by_ref('channel_display_dat', $channel_display_dat);
-$serendipity['smarty']->assign_by_ref('once_display_dat', $once_display_dat);
+$serendipity['smarty']->assignByRef('metadata', $metadata);
+$serendipity['smarty']->assignByRef('entries', $entries);
+$serendipity['smarty']->assignByRef('namespace_display_dat', $namespace_display_dat);
+$serendipity['smarty']->assignByRef('channel_display_dat', $channel_display_dat);
+$serendipity['smarty']->assignByRef('once_display_dat', $once_display_dat);
 
 $serendipity['smarty']->assign(
     array(

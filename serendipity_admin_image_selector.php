@@ -32,7 +32,7 @@ if (empty($serendipity['GET']['step']) && $serendipity['GET']['page'] < 1) {
         'GET_STRING' => serendipity_build_query($_GET),
         'frameset'   => true
     );
-    $serendipity['smarty']->assign_by_ref('media', $media);
+    $serendipity['smarty']->assignByRef('media', $media);
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_choose.tpl', 'serendipityPath'));
     return;
 }
@@ -304,7 +304,7 @@ switch ($serendipity['GET']['step']) {
 }
 
 $media = array_merge($serendipity['GET'], $media);
-$serendipity['smarty']->assign_by_ref('media', $media);
+$serendipity['smarty']->assignByRef('media', $media);
 $serendipity['smarty']->display(serendipity_getTemplateFile($showFile, 'serendipityPath'));
 
 /* vim: set sts=4 ts=4 expandtab : */

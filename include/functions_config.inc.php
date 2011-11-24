@@ -834,7 +834,7 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
     if ($use_smarty) {
         $preview = ob_get_contents();
         ob_end_clean();
-        $serendipity['smarty']->assign_by_ref('preview', $preview);
+        $serendipity['smarty']->assignByRef('preview', $preview);
         $serendipity['smarty']->display(serendipity_getTemplateFile('preview_iframe.tpl', 'serendipityPath'));
     }
 
@@ -2172,7 +2172,7 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
             );
         }
     
-        $serendipity['smarty']->assign_by_ref('navlinks', $navlinks);
+        $serendipity['smarty']->assignByRef('navlinks', $navlinks);
     }
     
     // Forward thinking. ;-)

@@ -86,6 +86,20 @@ class serendipity_smarty_emulator {
     }
 
 /**
+ * Assign one or multiple template variable by reference - Smarty API Change > 3.0
+ *
+ * @param   string      Variable name
+ * @param   mixed       Referenced variable
+ * @access public
+ * @return null
+ */
+    function assignByRef($tpl_var, &$value) {
+        $GLOBALS['tpl'][$tpl_var] =& $value;
+
+        return true;
+    }
+
+/**
  * Assign one or multiple template variable by reference
  *
  * @param   string      Variable name
@@ -252,6 +266,26 @@ class serendipity_smarty_emulator_xml extends serendipity_smarty_emulator {
         return true;
     }
     
+/**
+ * Assign one or multiple template variable by reference - Smarty API Change > 3.0
+ *
+ * @param   string      Variable name
+ * @param   mixed       Referenced variable
+ * @access public
+ * @return null
+ */
+    function assignByRef($tpl_var, &$value) {
+        if (is_array($value)) {
+            foreach ($value as $key => $val) {
+                $this->createXML($level, $key, $val);
+            }
+        } else {
+            $this->createXML($level, $tpl_var, $value);
+        }
+
+        return true;
+    }
+
 /**
  * Assign one or multiple template variable by reference
  *

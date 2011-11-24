@@ -339,13 +339,13 @@ class serendipity_calendar_plugin extends serendipity_plugin {
             } // end for
         } // end for
 
-        $serendipity['smarty']->assign_by_ref('plugin_calendar_weeks', $smartyRows);
+        $serendipity['smarty']->assignByRef('plugin_calendar_weeks', $smartyRows);
 
         $dow = array();
         for ($i = 1; $i <= 7; $i++) {
             $dow[] = array('date' => mktime(0, 0, 0, 3, $bow + $i - 1, 2004));
         }
-        $serendipity['smarty']->assign_by_ref('plugin_calendar_dow', $dow);
+        $serendipity['smarty']->assignByRef('plugin_calendar_dow', $dow);
 
         $plugin_calendar_data = array('month_date'   => $ts,
             'uri_previous' => serendipity_archiveDateUrl(sprintf('%04d/%02d', $previousYear, $previousMonth). $add_query),
@@ -353,7 +353,7 @@ class serendipity_calendar_plugin extends serendipity_plugin {
             'uri_next'     => serendipity_archiveDateUrl(sprintf('%04d/%02d',$nextYear, $nextMonth) . $add_query),
             'minScroll'    => $minmax[0]['min'],
             'maxScroll'    => $minmax[0]['max']);
-        $serendipity['smarty']->assign_by_ref('plugin_calendar_head', $plugin_calendar_data);
+        $serendipity['smarty']->assignByRef('plugin_calendar_head', $plugin_calendar_data);
         echo serendipity_smarty_fetch('CALENDAR', 'plugin_calendar.tpl');
 
     } // end function

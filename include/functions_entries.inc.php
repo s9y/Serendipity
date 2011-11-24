@@ -1200,7 +1200,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         return $dategroup;    
     }    
     
-    $serendipity['smarty']->assign_by_ref('entries', $dategroup);
+    $serendipity['smarty']->assignByRef('entries', $dategroup);
     unset($entries, $dategroup);
 
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
@@ -1658,8 +1658,8 @@ function serendipity_printArchives() {
         }
     }
 
-    $serendipity['smarty']->assign_by_ref('archives', $output);
-    $serendipity['smarty']->assign_by_ref('max_entries', $max);
+    $serendipity['smarty']->assignByRef('archives', $output);
+    $serendipity['smarty']->assignByRef('max_entries', $max);
 
     serendipity_smarty_fetch('ARCHIVES', 'entries_archives.tpl', true);
 }

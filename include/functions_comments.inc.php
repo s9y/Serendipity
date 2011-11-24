@@ -430,7 +430,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
         return true;
     }
 
-    $serendipity['smarty']->assign_by_ref($smarty_block == 'COMMENTS'?'comments':'trackbacks', $_smartyComments);
+    $serendipity['smarty']->assignByRef($smarty_block == 'COMMENTS'?'comments':'trackbacks', $_smartyComments);
     unset($_smartyComments);
 
     return serendipity_smarty_fetch($smarty_block, $smarty_file);
@@ -487,7 +487,7 @@ function serendipity_printCommentsByAuthor() {
         $entry_comments[$entry_id]['tpl_comments'] =& serendipity_printComments($_data['comments'], VIEWMODE_LINEAR, 0, null, 'COMMENTS', 'comments.tpl');
     }
 
-    $serendipity['smarty']->assign_by_ref('comments_by_authors', $entry_comments);
+    $serendipity['smarty']->assignByRef('comments_by_authors', $entry_comments);
 
     if (!empty($id)) {
         $and .= " AND co.entry_id = '" . (int)$id ."'";

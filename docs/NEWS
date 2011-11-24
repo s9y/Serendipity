@@ -4,6 +4,8 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * EXPERIMENTAL: Smarty3 support (ophian)
+
     * Added new serendipity['defaultBaseURL'] variable that makes sure
       that the baseURL is not overriden when configuring serendipity
       with a possibly autodetected currentl URL. Patch by Manko10.

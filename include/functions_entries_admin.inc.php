@@ -176,10 +176,10 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         
         $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
 
-        $serendipity['smarty']->register_modifier('emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
+        $serendipity['smarty']->registerPlugin('modifier', 'emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
         $serendipity['smarty']->assign('admin_view', 'entryform');
         serendipity_plugin_api::hook_event('backend_entryform_smarty', $template_vars);
-        $serendipity['smarty']->assign_by_ref('entry_vars', $template_vars);
+        $serendipity['smarty']->assignByRef('entry_vars', $template_vars);
         $serendipity['smarty']->display($template_vars['entry_template']);
         return true;
     }

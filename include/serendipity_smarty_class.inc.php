@@ -1,7 +1,7 @@
 <?php // (experimental) serendipity_smarty_class.inc.php 2011-11-03 10:29 Ian
             
 // This is the only way I found to get this into Serendipity_Smarty_Security_Policy class as secure_dir and trusted_dir.
-// Does this somehow has any negativ effects on building template paths in serendipity and/or smarty, partitially builded somehow dynamic?
+// Does this somehow have any negativ effects on building template paths in serendipity and/or smarty, partitially builded somehow dynamic?
 @define('S9Y_TEMPLATE_FALLBACK', $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
 @define('S9Y_TEMPLATE_DEFAULT', $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template']);
 @define('S9Y_TEMPLATE_SECUREDIR', $serendipity['serendipityPath'] . $serendipity['templatePath']);
@@ -36,22 +36,10 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     // actually no need, as template dirs are explicit defined as trusted_dirs (unproofed)
     public $trusted_dir = array(S9Y_TEMPLATE_DEFAULT, S9Y_TEMPLATE_FALLBACK); // do i need this then?
     
-    #public $modifiers = array(); // kann weg, wenn alles erlaubt
-    // guter test - überschreibt Serendipity_Smarty::default_modifiers und Serendipity_Smarty_Security_Policy::php_modifiers - modifier 'escape' not allowed by security setting
+    #public $modifiers = array(); // can be omitted when all allowed
+    // to test this - overwrites Serendipity_Smarty::default_modifiers and Serendipity_Smarty_Security_Policy::php_modifiers - modifier 'escape' not allowed by security setting
     #public $allowed_modifiers = array('escape:"htmlall"');
     
-    /* I could have used this, but actually there is no real need as staying with properties only, right?
-       Which construction is recommended, using CONSTANTS or __construct() with global $serendipity for trusted and secure_dir ??
-       STILL LEARNING OOP:
-       Does this has to be renamed to public function __construct(Serendipity_Smarty $serendipity['smarty']) 
-       as my class is Serendipity_Smarty and my object is $serendipity['smarty'] ???
-    public function __construct(Smarty $smarty)
-     {
-        parent::__construct($smarty);
-        // whatever you need to do to setup…
-     } 
-     */
-
     static public function test() 
       { 
         var_dump(get_called_class());
@@ -138,7 +126,7 @@ class Serendipity_Smarty extends Smarty
         if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) {
             die(printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()));
         }
-#cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // uncomment if not using cache
+        #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // uncomment if not using cache
         
         /**
          * here we go with our other Smarty class properties, which can all be called by their property name (recommended)
@@ -151,15 +139,16 @@ class Serendipity_Smarty extends Smarty
          ***********************************/
         // WIE GEHT das genau?
         // 3.1.4 test 2011-10-20
-        // cache_modified, caching, cache_lifetime und cache_id müssen gesetzt sein, sonst funktioniert caching nur nach Ablauf lifetime!
-        // cache_id($id) gab Fehler und musste deshalb auf md5($_SERVER['REQUEST_URI']) gesetzt sein, damit jede einzelne url auch wirklich gecached wird. 
-        // Wie ist das mit fallbacks auf index (zb mit fehlermeldungen)???
+        // cache_modified, caching, cache_lifetime and cache_id need to be set, or caching is only running after lifetime
+        // cache_id($id) returned errors and needed to be set to md5($_SERVER['REQUEST_URI']) so that every single URL is cached
+        // (note garvin: that might not be unique enough, what about POST variables influencing output?)
+        // what about fallbacks to index (i.e. error messages)
         //
-        // cache_modified_check, cache_lifetime, setCaching arbeiten zwar mit cache, reagieren aber nicht auf unterschiedliche urls, sondern erst auf ende lifetime - WARUM???
+        // cache_modified_check, cache_lifetime, setCaching do work with cache, but do not react to different urls, but only to lifetime ending
         // If cache_modified_check is enabled Smarty tries to make use of the client browser cache. Maybe you got some garbage in your browser cache. Have you tried to clear the browser cache first? 
 
-#cache# $this->cache_modified_check = true; // must be true to enable 304 headers
-        // Muss ich cache noch auf true setzen?
+        #cache# $this->cache_modified_check = true; // must be true to enable 304 headers
+        // does cache need to be set to true?
 
         // some documentary from the smarty forum
         /*********************************************************
@@ -169,12 +158,12 @@ class Serendipity_Smarty extends Smarty
          * it cannot be altered except for clearing and regenerating said cache file
          **/
 
-#cache# $this->caching = Smarty::CACHING_LIFETIME_CURRENT; // $this->setCaching(2); // 1 will change the end of lifetime immediately.
+         #cache# $this->caching = Smarty::CACHING_LIFETIME_CURRENT; // $this->setCaching(2); // 1 will change the end of lifetime immediately.
         // $this->caching = Smarty::CACHING_LIFETIME_SAVED; // $this->setCaching(Smarty::CACHING_LIFETIME_SAVED);
         // #$this->setCaching(Smarty::CACHING_OFF) // stop caching >= 3.1.4
         // set the cache_lifetime for index.tpl to 5 minutes
         
-#cache# $this->cache_lifetime = 300; // $this->setCacheLifetime(120);
+        #cache# $this->cache_lifetime = 300; // $this->setCacheLifetime(120);
         // some documentary from the smarty forum
         /*********************************************************
          * Smarty caching is based purely on the fetch() or display() call. So:
@@ -184,9 +173,9 @@ class Serendipity_Smarty extends Smarty
          * $smarty->fetch('application.tpl',$cache_id);
          * It is entirely up to you what is taken into account for the cache_id (URL, etc.)
          **/
-//
-// does this mean $this->setCacheId($id); is useless here and has to be set where the actual templates are called? or does ist work as something default?
-//
+         //
+         // does this mean $this->setCacheId($id); is useless here and has to be set where the actual templates are called? or does ist work as something default?
+         //
         // some documentary from the smarty forum
         /*********************************************************
          * Smarty will use the cache_id for distributing the cache files into sub_dirs
@@ -195,13 +184,13 @@ class Serendipity_Smarty extends Smarty
          * $this->cache_id($id); // $this->setCacheId($id);
          **/
          
-#cache# $this->cache_id = md5($_SERVER['REQUEST_URI']); // this isn't a good idea either, better have it disabled or use a special id (where of?)
+         #cache# $this->cache_id = md5($_SERVER['REQUEST_URI']); // this isn't a good idea either, better have it disabled or use a special id (where of?)
        
         /************************************************
          * Set all other needed Smarty class properties
          ***********************************************/
-        // welche gehören noch in die security klasse?
-#???#        $this->merge_compiled_includes = true; // $this->setMergeCompiledIncludes(true);
+        // which do also belong to security class?
+        #???#        $this->merge_compiled_includes = true; // $this->setMergeCompiledIncludes(true);
 
         $this->debugging = false; // $this->setDebugging(false); // default here to be overwritten by $serendipity['production'] == 'debug'!
         // Smarty will create subdirectories under the compiled templates and cache directories if $use_sub_dirs is set to TRUE, default is FALSE.
@@ -213,10 +202,6 @@ class Serendipity_Smarty extends Smarty
         #$this->compile_check = COMPILECHECK_CACHEMISS - template files will be checked if caching is enabled and there is no existing cache file or it has expired            
         $this->compile_id    = &$serendipity['template']; // $this->setCompileId(&$serendipity['template'])
         $this->config_overwrite = true; // $this->setConfigOverwrite(true);
-        // guter test - modifier 'escape' wird zwar by security setting generell erlaubt, hiermit aber beschränkt - also keine exeption und doch keine < >
-        #$this->default_modifiers = array('escape:"htmlall"');
-        //default_modifiers gehört zu smarty klasse, wird mit allowed bzw php modifiers in security Klasse überschrieben....?!
-        #$this->default_modifiers = array('sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat');
 
         // production == debug extends from s9y version information (alpha|beta|cvs) is always debug | USE ===
         if ($serendipity['production'] === 'debug') {
@@ -303,4 +288,3 @@ class Serendipity_Smarty extends Smarty
       } 
   }
 
-?>

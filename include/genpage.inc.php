@@ -34,8 +34,8 @@ serendipity_smarty_init($serendipity['plugindata']['smartyvars']);
 
 $leftSidebarElements  = serendipity_plugin_api::count_plugins('left');
 $rightSidebarElements = serendipity_plugin_api::count_plugins('right');
-$serendipity['smarty']->assign_by_ref('leftSidebarElements', $leftSidebarElements);
-$serendipity['smarty']->assign_by_ref('rightSidebarElements', $rightSidebarElements);
+$serendipity['smarty']->assignByRef('leftSidebarElements', $leftSidebarElements);
+$serendipity['smarty']->assignByRef('rightSidebarElements', $rightSidebarElements);
 
 if ($serendipity['smarty_raw_mode']) {
     /* For BC reasons, we have to ask for layout.php */

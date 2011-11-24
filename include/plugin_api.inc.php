@@ -901,7 +901,7 @@ class serendipity_plugin_api
 
         serendipity_plugin_api::hook_event('frontend_sidebar_plugins', $pluginData, $addData);
 
-        $serendipity['smarty']->assign_by_ref('plugindata', $pluginData);
+        $serendipity['smarty']->assignByRef('plugindata', $pluginData);
         $serendipity['smarty']->assign('pluginside', ucfirst($side));
 
         return serendipity_smarty_fetch('sidebar_'. $side, $tpl, true);
@@ -1576,10 +1576,7 @@ class serendipity_plugin
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
-        $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
-        $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
-        $content = $serendipity['smarty']->fetch('file:'. $tfile);
-        $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+        $content = $serendipity['smarty']->display('file:'. $tfile);
         
         return $content;    
     }
