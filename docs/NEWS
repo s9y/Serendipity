@@ -4,6 +4,8 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Updated nl2br plugin (ophian)
+    
     * EXPERIMENTAL: Smarty3 support (ophian)
 
     * Added new serendipity['defaultBaseURL'] variable that makes sure
