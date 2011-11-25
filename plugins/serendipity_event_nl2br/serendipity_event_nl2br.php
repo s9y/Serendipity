@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_nl2br.php 2011-11-21 18:47:00Z ian $
+<?php # $Id: serendipity_event_nl2br.php 2011-11-25 09:00:00Z ian $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,7 +14,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.12');
+        $propbag->add('version',       '2.13');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -22,10 +22,10 @@ class serendipity_event_nl2br extends serendipity_event
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
             
-        $propbag->add('event_hooks',     array('frontend_display' => true, 
-                                                'backend_display' => true,
-                                               'css'              => true)
-                                               );
+        $propbag->add('event_hooks',     array('frontend_display'  => true, 
+                                               'backend_configure' => true,
+                                               'css'               => true
+                     ));
         $propbag->add('groups', array('MARKUP'));
 
         $this->markup_elements = array(
@@ -243,14 +243,18 @@ class serendipity_event_nl2br extends serendipity_event
                 return true;
                 break;
 
-                case 'backend_display':
-                /*
-                    // create some buttons
+                case 'backend_configure':
+
+                    // check single entry for temporary disabled markups
                     if( $isobr ) { 
-                        // ToDo: hook into default/admin/entries.tpl somehow via the Heart Of Gold = serendipity_printEntryForm() before! it is loaded
+                        if (!is_object($serendipity['smarty'])) { 
+                            serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
+                        }
+                        
+                        // hook into default/admin/entries.tpl somehow via the Heart Of Gold = serendipity_printEntryForm() before! it is loaded
                         $serendipity['smarty']->assign('iso2br', true);
                     }
-                */
+                
                 
                 return true;
                 break;
