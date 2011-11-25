@@ -13,20 +13,22 @@ if (!serendipity_checkPermission('adminComments')) {
 $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10);
 $summaryLength = 200;
 
+$errormsg = '';
+
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
     if ($serendipity['POST']['togglemoderate'] != '') {
 		foreach ( $serendipity['POST']['delete'] as $k => $v ) {
 			$ac = serendipity_approveComment($k, $v, false, 'flip');
 			if ($ac > 0) {
-				echo DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k) . '<br />';
+				$errormsg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k) . '<br />';
 			} else {
-				echo DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k) . '<br />';
+				$errormsg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k) . '<br />';
 			}
 		}
     } else {
 		foreach ( $serendipity['POST']['delete'] as $k => $v ) {
  			serendipity_deleteComment($k, $v);
-			echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
+			$errormsg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$k) . '<br />';
 		}
 	}
 }
@@ -45,7 +47,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
                   entry_id = " . (int)$serendipity['POST']['entry_id'];
     serendipity_db_query($sql);
     serendipity_plugin_api::hook_event('backend_updatecomment', $serendipity['POST'], $serendipity['GET']['id']);
-    echo COMMENT_EDITED;
+    $errormsg .= COMMENT_EDITED;
 }
 
 /* Submit a new comment */
@@ -60,14 +62,14 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     if (!empty($comment['comment'])) {
         if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
             echo '<script type="text/javascript">alert("' . COMMENT_ADDED . '"); parent.focus(); this.close();</script>';
-            echo '<noscript>' . COMMENT_ADDED . '</noscript>';
+            echo '<noscript><p class="serendipityAdminMsgError serendipity_backend_msg_notice"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . COMMENT_ADDED . '</p></noscript>';
             return true;
         } else {
-            echo COMMENT_NOT_ADDED;
+            $errormsg .= COMMENT_NOT_ADDED;
             $serendipity['GET']['adminAction'] = 'reply';
         }
     } else {
-        echo COMMENT_NOT_ADDED;
+        $errormsg .= COMMENT_NOT_ADDED;
         $serendipity['GET']['adminAction'] = 'reply';
     }
 }
@@ -82,10 +84,10 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $rs  = serendipity_db_query($sql, true);
 
     if ($rs === false) {
-        echo ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
+        $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id']);
-        echo DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
+        $errormsg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
     }
 }
 
@@ -98,17 +100,17 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $rs  = serendipity_db_query($sql, true);
 
     if ($rs === false) {
-        echo ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
+        $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id'], true, true);
-        echo DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
+        $errormsg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
     }
 }
 
 /* We are asked to delete a comment */
 if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'delete' && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
-    echo DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
+    $errormsg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
 }
 
 /* We are either in edit mode, or preview mode */
@@ -275,6 +277,9 @@ $sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}
                                 WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and
                                 . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . "
                                 ORDER BY c.id DESC $limit");
+
+if(!empty($errormsg)) echo '<p class="serendipityAdminMsgError serendipity_backend_msg_notice"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $errormsg . '</p>'; // closing admin messages
+
 ?>
 <script type="text/javascript">
 function FT_toggle(id) {
