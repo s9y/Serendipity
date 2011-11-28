@@ -122,7 +122,7 @@ class Serendipity_Smarty extends Smarty
         
         $this->setConfigDir(array(S9Y_TEMPLATE_DEFAULT));
         
-        // changed init false to die(error) in here, as original false had no use
+        // ToDo: better throw exception depending on context or 500/503 header here
         if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) {
             die(printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()));
         }
