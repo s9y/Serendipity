@@ -39,7 +39,9 @@ jQuery(document).ready(function($) {
             }).appendTo($select);
         }
     });
+    if($select.children().size() > 0) {
     $select.appendTo('#primary-nav').change(function() {
         window.location = $(this).find('option:selected').val();
     });
+    }
 });
