@@ -1,18 +1,17 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2011-11-03 10:29 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2011-11-28 11:31 Ian
             
-// This is the only way I found to get this into Serendipity_Smarty_Security_Policy class as secure_dir and trusted_dir.
-// Does this somehow have any negativ effects on building template paths in serendipity and/or smarty, partitially builded somehow dynamic?
+// define secure_dir and trusted_dirs.
 @define('S9Y_TEMPLATE_FALLBACK', $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
 @define('S9Y_TEMPLATE_DEFAULT', $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template']);
 @define('S9Y_TEMPLATE_SECUREDIR', $serendipity['serendipityPath'] . $serendipity['templatePath']);
             
 
-// Create a wrapper class extended from Smarty_Security 
+// Create a wrapper class extended from Smarty_Security - allowing access in S9Y-plugins and S9Y-templates 
 class Serendipity_Smarty_Security_Policy extends Smarty_Security 
   { 
     // these are the allowed functions ONLY. - default as is
     public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br');
-    // disable all PHP functions
+    // to disable all PHP functions
     #public $php_functions = null;
     
     // remove PHP tags
@@ -22,9 +21,6 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     
     // ALL php functions as modifiers are accessible. (for instance {$somevar|PHP_FUNCTION_NAME}) - default = array( 'escape', 'count' );
     public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat');
-    #Warning: rand() expects exactly 2 parameters, 1 given in 
-    #Warning: str_repeat() expects exactly 2 parameters, 1 given in 
-    #public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat');
     
     public $allow_constants = true;
     
@@ -37,6 +33,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     public $trusted_dir = array(S9Y_TEMPLATE_DEFAULT, S9Y_TEMPLATE_FALLBACK); // do i need this then?
     
     #public $modifiers = array(); // can be omitted when all allowed
+    
     // to test this - overwrites Serendipity_Smarty::default_modifiers and Serendipity_Smarty_Security_Policy::php_modifiers - modifier 'escape' not allowed by security setting
     #public $allowed_modifiers = array('escape:"htmlall"');
     
@@ -60,8 +57,7 @@ class Serendipity_Smarty extends Smarty
      * $serendipity['smarty'] = Serendipity_Smarty::getInstance();
      * The first time this is called a new instance will be created. Thereafter, the same instance is handed back.
      **/
-     // ??? what does that mean exactly? 
-     // Do we need to call also $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy'); // enable security policy by instance of the Smarty_Security class
+     // ??? what does that mean for us - exactly? 
     public static function getInstance()
       {
         static $instance = null;
@@ -74,6 +70,7 @@ class Serendipity_Smarty extends Smarty
       {
         // Class Constructor. These automatically get set with each new instance.
         parent::__construct();
+        
         // call the objects parameter
         self::setParams(); // your initialization code goes in here
     }
@@ -94,15 +91,18 @@ class Serendipity_Smarty extends Smarty
     
         /***********************
          * Set all directories
+         * Smarty will always use the first template found in order of the given array. Move the least significant directory to the end.
          **********************/
-        // WAHRSCHEINLICH SPIELT DIE REIHENFOLGE DER SET UND ADDTEMPLATEDIR PFADE EINE ROLLE IN DER FALLBACK FRAGE
-        // initiate templateDir setter
+
+         // initiate templateDir setter
         $this->setTemplateDir(array(S9Y_TEMPLATE_DEFAULT));
         // set addTemplate array with the blogs used template anyway
         $serendipity['addTemplateDir'] = array($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate']);
-        // merge engine only templates to addTemplate array - BEWARE: Bulletproof and default templates do not have any engine settings, so this will be empty
-        // if empty array [0] => , $serendipity['addTemplateDir'] will have $serendipity['serendipityPath'] . $serendipity['templatePath']!
-        // we could add if !empty(), but since we have array_unique at the end there is no need
+        /*
+            Note: Ian
+            BEWARE: Bulletproof and default template do not have any engine settings, so this will be empty. This is why adding defaultTemplate was necessary
+        */
+        // merge engine only templates to addTemplate array
         $p = explode(',', $serendipity['template_engine']);
         foreach($p AS $te) {
             $serendipity['addTemplateDir'][] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $te; 
@@ -116,7 +116,7 @@ class Serendipity_Smarty extends Smarty
         // expand smarty objects (add)TemplateDir setter with $serendipity['addTemplateDir'] as is
          $this->addTemplateDir($serendipity['addTemplateDir']); 
         // setTemplateDir again to unified getTemplateDir() to avoid doubles for (engine, default and main template)
-        $this->setTemplateDir(array_merge(array(), array_unique($this->getTemplateDir()))); // used additional array_merge to reset keys
+        $this->setTemplateDir(array_values(array_unique($this->getTemplateDir()))); // reset keys unique
 
         $this->setCompileDir($serendipity['serendipityPath'] . PATH_SMARTY_COMPILE);
         
@@ -126,29 +126,47 @@ class Serendipity_Smarty extends Smarty
         if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) {
             die(printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()));
         }
-        #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // uncomment if not using cache
         
-        /**
-         * here we go with our other Smarty class properties, which can all be called by their property name (recommended)
-         * $smarty->use_sub_dirs = true; or by $smarty->setUseSubDirs(true); and echo $smarty->getUseSubDirs(); 
-         * as the latter's would run through an internal __call() wrapper function.
-         **/
+        #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // (enable #cache# properties)
+        
+        /*
+            here we go with our other Smarty class properties, which can all be called by their property name (recommended)
+            $smarty->use_sub_dirs = true; or by $smarty->setUseSubDirs(true); and echo $smarty->getUseSubDirs(); 
+            as the latter's would run through an internal __call() wrapper function.
+            Note: rodneyrehm - From within the Smarty class context you can safely access properties like Smarty::$use_sub_dirs directly.
+        */
         
         /************************************
-         * Set Smarty caching (enable #cache# properties)
+         * Set Smarty caching 
          ***********************************/
-        // WIE GEHT das genau?
-        // 3.1.4 test 2011-10-20
-        // cache_modified, caching, cache_lifetime and cache_id need to be set, or caching is only running after lifetime
-        // cache_id($id) returned errors and needed to be set to md5($_SERVER['REQUEST_URI']) so that every single URL is cached
-        // (note garvin: that might not be unique enough, what about POST variables influencing output?)
-        // what about fallbacks to index (i.e. error messages)
-        //
-        // cache_modified_check, cache_lifetime, setCaching do work with cache, but do not react to different urls, but only to lifetime ending
-        // If cache_modified_check is enabled Smarty tries to make use of the client browser cache. Maybe you got some garbage in your browser cache. Have you tried to clear the browser cache first? 
-
+         
+        /*
+            Caching is disabled, as long as we haven't figured out on how to use it best here....
+            
+            Note: rodneyrehm
+            A cache_id is (ideally) supposed to identify a single page.
+            md5(REQUEST_URI) may _seem_ to be doing that, but /foo.html and /foo.html?foo=bar are the same resource
+            from S9Y's point of view - with DIFFERENT REQUEST_URIs. Your approach leads to a number of problems:
+                * flooding the cache space with duplicate content
+                * essentially making clearCache() useless, as md5 checksums of /foo.html and /foo.html?foo=bar have
+            exactly nothing in common.
+            You want to specify the pieces of cachable content yourself. Go with a structure like
+                post-123
+                post-123|comments (if you have a page for all comments belonging to that post)
+                post-123|comments|feed (if you have a comment feed for a certain post)
+            now you can clearCache('post-123') and comments and comments|feed are killed as well.
+        */
+        
+        // does set cache also need to be set to true?
         #cache# $this->cache_modified_check = true; // must be true to enable 304 headers
-        // does cache need to be set to true?
+
+        /*
+            Note: rodneyrehm
+            $cache_modified_check only works if you're using display() - it won't do anything on fetch().
+            It won't do anything if you have non-caching plugins or {insert} tags, either.
+            
+            We're working on making this more intelligent for 3.2, but… work with what you've got in 3.1 first.
+        */
 
         // some documentary from the smarty forum
         /*********************************************************
@@ -159,11 +177,22 @@ class Serendipity_Smarty extends Smarty
          **/
 
          #cache# $this->caching = Smarty::CACHING_LIFETIME_CURRENT; // $this->setCaching(2); // 1 will change the end of lifetime immediately.
-        // $this->caching = Smarty::CACHING_LIFETIME_SAVED; // $this->setCaching(Smarty::CACHING_LIFETIME_SAVED);
-        // #$this->setCaching(Smarty::CACHING_OFF) // stop caching >= 3.1.4
-        // set the cache_lifetime for index.tpl to 5 minutes
+            // $this->caching = Smarty::CACHING_LIFETIME_SAVED; // $this->setCaching(Smarty::CACHING_LIFETIME_SAVED);
+            // $this->setCaching(Smarty::CACHING_OFF) // stop caching >= 3.1.4
+
+        /*
+            Note: rodneyrehm
+            The CACHING_LIFETIME_SAVED option is something you only really "need" if many cache files have different lifetimes.
+            I've used Smarty intensively over the past years and I _never_ required LIFETIME_SAVED...
+
+            you can do $force_cache = true; to make the current page re-render to cache. This actually allows you to work with a very high
+            cache_lifetime and poll a secondary modified time from somewhere. You could then implement the serve-stale-until-updated caching approach.
+            I'll blog about this… probably around christmas
+        */
         
-        #cache# $this->cache_lifetime = 300; // $this->setCacheLifetime(120);
+        // set the cache_lifetime for index.tpl to 5 minutes
+        #cache# $this->cache_lifetime = 300; // $this->setCacheLifetime(300);
+
         // some documentary from the smarty forum
         /*********************************************************
          * Smarty caching is based purely on the fetch() or display() call. So:
@@ -173,9 +202,17 @@ class Serendipity_Smarty extends Smarty
          * $smarty->fetch('application.tpl',$cache_id);
          * It is entirely up to you what is taken into account for the cache_id (URL, etc.)
          **/
-         //
-         // does this mean $this->setCacheId($id); is useless here and has to be set where the actual templates are called? or does ist work as something default?
-         //
+        
+        // does this mean $this->setCacheId($id); is useless here and has to be set where the actual templates are called? or does ist work as something default?
+        /*
+            Note: rodneyrehm
+            when fetch(tpl) is called, Smarty::$cache_id is injected. If you need a single cache_id for the whole render complex, this may be the sane thing to do.
+            But you'll probably segment certain content. A Post does not have to be reendered for every new comment. It thus makes sense to separate these entities
+            into their own cache spaces. In turn they'd probably receive their own cache_ids. Although that is not _necessary_ as template_name and cache_id work in
+            conjunction. If both are supplied (to say clearCache()) template_name increases the specificity of cache_id, so only those items are purged that meet
+            both criteria.
+        */
+
         // some documentary from the smarty forum
         /*********************************************************
          * Smarty will use the cache_id for distributing the cache files into sub_dirs
@@ -184,23 +221,40 @@ class Serendipity_Smarty extends Smarty
          * $this->cache_id($id); // $this->setCacheId($id);
          **/
          
-         #cache# $this->cache_id = md5($_SERVER['REQUEST_URI']); // this isn't a good idea either, better have it disabled or use a special id (where of?)
+        #cache# $this->cache_id = md5($_SERVER['REQUEST_URI']); // this isn't a good idea either, better have it disabled or use a special id 
+        /* 
+            Note: Ian
+            What kind of Serendipity ID could this be?
+            - see Rodneys first caching note
+        */
        
         /************************************************
          * Set all other needed Smarty class properties
          ***********************************************/
-        // which do also belong to security class?
+
         #???#        $this->merge_compiled_includes = true; // $this->setMergeCompiledIncludes(true);
 
         $this->debugging = false; // $this->setDebugging(false); // default here to be overwritten by $serendipity['production'] == 'debug'!
         // Smarty will create subdirectories under the compiled templates and cache directories if $use_sub_dirs is set to TRUE, default is FALSE.
         $this->use_sub_dirs = ( ini_get('safe_mode') ? false : true ); // $this->setUseSubDirs(false); // cache and compile dir only
-        //Smarty should update the cache files automatically if $smarty->compile_check is true. 
+        // Smarty should update the cache files automatically if $smarty->compile_check is true. 
         $this->compile_check = true; // $this->setCompileCheck(true);
-        #$this->compile_check = COMPILECHECK_OFF (false) - template files will not be checked
-        #$this->compile_check = COMPILECHECK_ON (true) - template files will always be checked
-        #$this->compile_check = COMPILECHECK_CACHEMISS - template files will be checked if caching is enabled and there is no existing cache file or it has expired            
+            #$this->compile_check = COMPILECHECK_OFF (false) - template files will not be checked
+            #$this->compile_check = COMPILECHECK_ON (true)   - template files will always be checked
+            #$this->compile_check = COMPILECHECK_CACHEMISS   - template files will be checked, if caching is enabled and there is no existing cache file, or it has expired            
+        /*
+            Note: rodneyrehm
+            If you actually manage to build a page from a single template (with inclusions and plugins and stuff)
+            in a way that allows smarty to do 304 handling - or implement the serve-stale-while-update approach,
+            you should go with CACHEMISS.
+        */
         $this->compile_id    = &$serendipity['template']; // $this->setCompileId(&$serendipity['template'])
+        /*
+            Note: rodneyrehm
+            Please only specify the compile_id if you really need to.
+            That means if you pre-process templates for say internationalization.
+            Otherwise you don't need this and are better off ignoring it (performance-wise).
+        */
         $this->config_overwrite = true; // $this->setConfigOverwrite(true);
 
         // production == debug extends from s9y version information (alpha|beta|cvs) is always debug | USE ===
@@ -211,30 +265,23 @@ class Serendipity_Smarty extends Smarty
         }
         
         $this->error_reporting = E_ALL & ~E_NOTICE;
-        #$this->error_reporting = E_STRICT; // produces lots of errors, a la 
-        // Strict Standards: Non-static method *** should not be called statically in *** | solution may be add "public static" function to functions
-        //
-        // http://stackoverflow.com/questions/4684454/error-message-strict-standards-non-static-method-should-not-be-called-staticall
-        // Your methods are missing the static keyword. Change
-        // function getInstanceByName($name=''){
-        // to
-        // public static function getInstanceByName($name=''){
-        // if you want to call them statically.
-        // Note that static methods (and Singletons) are death to testability. (http://sebastian-bergmann.de/archives/883-Stubbing-and-Mocking-Static-Methods.html)
-        // Also note do not overload the constructor with code that shouldn't be in there. 
-        // All your constructor is supposed to do is set the object into a valid state. If you have to have data from outside 
-        // the class to do that consider injecting it instead of pulling it. Also note that constructors cannot return anything. 
-        // They will always return void so all these return false statements do nothing but end the construction.
+        #$this->error_reporting = E_STRICT; 
+        /*
+            Note: Ian
+            E_STRICT produces lots of errors, a la 
+            Strict Standards: Non-static method *** should not be called statically in *** 
+            
+            The solution might be to add "public static" to all errored functions
+        */
         
-        // ...constructor is supposed to ... this is why all register() things went back to function init()
-
       } 
       
-    /***************************************************************************
-     * Search "$serendipity['smarty']->register_" (11 hits in 6 files) in additional_plugins
-     * serendipity_event_communityrating.php, serendipity_event_customarchive.php, serendipity_event_microformats.php, 
-     * serendipity_event_multilingual.php, serendipity_event_smartymarkup.php, serendipity_event_staticpage.php
-     **************************************************************************/
+    /*
+        Note: Ian
+        Search "$serendipity['smarty']->register_" (11 hits in 6 files) in additional_plugins
+        serendipity_event_communityrating.php, serendipity_event_customarchive.php, serendipity_event_microformats.php, 
+        serendipity_event_multilingual.php, serendipity_event_smartymarkup.php, serendipity_event_staticpage.php
+    */
      
     /**
      * Registers custom function to be used in templates - BC mode Smarty 2 -> 3
