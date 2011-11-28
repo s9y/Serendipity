@@ -40,7 +40,7 @@
 {assign var="navtitle" value=$CONST.TWOK11_NAV_TITLE}
 <a class="visuallyhidden" href="#content"><span lang="en">Skip to content</span></a>
 <div id="page" class="clearfix">
-    <header id="banner" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}" role="banner">
+    <header id="banner" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}{if not $template_option.use_corenav} no-nav{/if}" role="banner">
         <div id="identity">
             <h1><a href="{$serendipityBaseURL}">{$blogTitle}</a></h1>
             <p>{$blogDescription}</p>
