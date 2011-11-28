@@ -134,14 +134,13 @@ q q:after  { content: '’'; content: close-quote; }
 :lang(de) q:after    { content: '“'; content: close-quote; }
 :lang(de) q q:before { content: '‚'; content: open-quote;  }
 :lang(de) q q:after  { content: '‘'; content: close-quote; }
-
-blockquote { quotes: '“' '”'; }
+blockquote p { quotes: '“' '”'; }
 blockquote p:before { content: ''; content: no-open-quote; }
 blockquote p:after  { content: ''; content: no-close-quote; }
 blockquote p:first-child:before { content: '“'; content: open-quote;  }
 blockquote p:last-child:after   { content: '”'; content: close-quote; }
-:lang(de) blockquote,
-blockquote:lang(de) { quotes: '„' '“'; }
+:lang(de) blockquote p,
+blockquote:lang(de) p { quotes: '„' '“'; }
 :lang(de) blockquote p:before,
 blockquote:lang(de)  p:before { content: ''; content: no-open-quote; }
 :lang(de) blockquote p:after,
@@ -248,10 +247,15 @@ li ul, li ol,
 blockquote,
 blockquote + cite {
     display: block;
-    margin: 0 0 1em 40px;
+    margin: 0 2.5em 1em;
 }
 
 blockquote + cite:before { content: "–\202F"; }
+
+.content blockquote {
+    border-left: 4px solid #aaa;
+    padding-left: .75em;
+}
 
 dt,
 .serendipity_calendar tfoot a,
@@ -318,6 +322,11 @@ fieldset,
 
 #banner>img,
 .serendipity_entry footer { clear: both; }
+
+.no-nav {
+    border-bottom: 2px solid #294564;
+    margin-bottom: 2.1429em;
+}
 
 #search div { padding: 0 1em; }
 
@@ -409,6 +418,11 @@ fieldset,
 .serendipity_entry li ul,
 .serendipity_entry li ol { margin: 0 0 0 2em; }
 
+.serendipity_entryIcon {
+    float: left;
+    margin: 0 .625em .625em 0;
+}
+
 .serendipity_entry table {
     border: 1px solid #aaa;
     max-width: 100%;
@@ -436,9 +450,23 @@ fieldset,
 .serendipity_entry pre {
     background: #eee;
     border: 1px solid #aaa;
-    font-size: .8125em;
+    font-size: .875em;
     margin: 0 0 1.2308em;
     padding: .5385em;
+}
+
+.serendipity_entry code,
+.serendipity_entry kbd,
+.serendipity_entry samp {
+    font-size: .875em;
+    line-height: 1.7143;
+}
+
+pre>code,
+pre>kbd,
+pre>samp {
+    font-size: 1em;
+    line-height: 1.5;
 }
 
 .serendipity_byline { margin: 0 0 1.2308em; }
@@ -474,6 +502,8 @@ fieldset,
 
 .serendipity_comment { margin: 0 0 2em; }
 
+.serendipity_comment h4 { margin: 0 0 .25em; }
+
 .form_tarea,
 .form_toolbar { margin-bottom: 1em; }
 
@@ -494,9 +524,15 @@ fieldset,
 
 #serendipity_commentform_comment { max-width: 97%; }
 
+#c,
 .serendipity_commentDirection {
     background: #eee;
     border: 1px solid #aaa;
+}
+
+#c { padding: .625em; }
+
+.serendipity_commentDirection {
     color: #222;
     font-size: .8125em;
     line-height: 1.8462;
