@@ -4,6 +4,10 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Changed backend comment (error) messages  (ophian)
+      as now captured and styleable messages
+      (newly added .serendipity_backend_msg_notice css class)
+
     * Updated nl2br plugin (ophian)
     
     * EXPERIMENTAL: Smarty3 support (ophian)
