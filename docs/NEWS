@@ -4,11 +4,17 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Updated spamblock plugin (ophian)
+      changed wordfilter to function and Commenters moderation check verify_once 
+      to get checked via wordfilter to reject known spam comments before
+    
     * Changed backend comment (error) messages  (ophian)
       as now captured and styleable messages
       (newly added .serendipity_backend_msg_notice css class)
 
     * Updated nl2br plugin (ophian)
+      added isolation tag using nl to br
+      this also adds some NoBR buttons to backend entry forms
     
     * EXPERIMENTAL: Smarty3 support (ophian)
 
