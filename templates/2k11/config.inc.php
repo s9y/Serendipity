@@ -6,16 +6,7 @@ if (IN_serendipity !== true) { die ("Don't hack!"); }
 $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
                                      'currpage2' => $_SERVER['REQUEST_URI']));
 
-function serendipity_plugin_api_event_hook($event, &$bag, &$eventData, $addData = null) {
-   global $serendipity;
-   switch($event) { case 'frontend_footer': echo '<!--PLUGIN API-->'; }
-   return true;
-}
-
-function serendipity_smarty_html5time($timestamp) {
-   return date("c", $timestamp);
-}
-
+function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
 $serendipity['smarty']->register_modifier('serendipity_smarty_html5time', 'serendipity_smarty_html5time');
 
 $template_config = array(
