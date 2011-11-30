@@ -8,6 +8,10 @@
     <form id="serendipity_comment" action="{$commentform_action}#feedback" method="post">
     <div><input type="hidden" name="serendipity[entry_id]" value="{$commentform_id}"/></div>
     <div class="form_field">
+        <label id="reply-to-hint" for="serendipity_replyTo">{$CONST.IN_REPLY_TO}</label>
+        {$commentform_replyTo}
+    </div>
+    <div class="form_field">
         <label for="serendipity_commentform_name">{$CONST.NAME}</label>
         <input id="serendipity_commentform_name" name="serendipity[name]" type="text" value="{$commentform_name}" placeholder="{$placename}"/>
     </div>
@@ -18,10 +22,6 @@
     <div class="form_field">
         <label for="serendipity_commentform_url">{$CONST.HOMEPAGE}</label>
         <input id="serendipity_commentform_url" name="serendipity[url]" type="url" value="{$commentform_url}" placeholder="{$placeurl}"/>
-    </div>
-    <div class="form_field">
-        <label for="serendipity_replyTo">{$CONST.IN_REPLY_TO}</label>
-        {$commentform_replyTo}
     </div>
     <div class="form_tarea">
         <label for="serendipity_commentform_comment">{$CONST.COMMENT}</label>
