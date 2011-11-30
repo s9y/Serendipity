@@ -175,6 +175,7 @@ class Serendipity_Smarty extends Smarty
          * The point is simply, that once the cache lifetime (expiration date) has been saved to the cache file, 
          * it cannot be altered except for clearing and regenerating said cache file
          * 
+<<<<<<< HEAD
          * Template Inheritance
 		 * Using is_cached() on sub-templates has to set up caching before is_cached() calls, 
 		 *     e.g if (!$smarty->isCached('sub_test.tpl')) { $smarty->assign('foo', $foo); }.
@@ -182,12 +183,23 @@ class Serendipity_Smarty extends Smarty
 		 * Otherwise you could never cache a subtemplate with caching disabled for the main template.
          * If you don't want to have the main template cached, turn caching off again after the is_cached() calls for the subtemplate.
          * So the example will cache sub_test.tpl, but not test.tpl
+=======
+         * Using is_cached() on subtemplates has to set up caching before is_cached() calls.
+         * The subtemplate will always be cached as specified in the {include} tag. Otherwise you could never cache a subtemplate with caching disabled for the main template.
+         * If you don't want to have the main template cached, turn caching off again after the is_cached() calls for the subtemplate.
+         * So the example will cache sub_test.tpl but not test.tpl
+>>>>>>> origin/master
          * Use $smarty->caching = Smarty::CACHING_LIFETIME_SAVED; with {include file="sub_test.tpl" cache_lifetime="120"} in test.tpl;
          * Use $smarty->caching = Smarty::CACHING_LIFETIME_CURRENT; with {include .... caching}
          **/
 
+<<<<<<< HEAD
         #cache# $this->caching = Smarty::CACHING_LIFETIME_CURRENT; // $this->setCaching(2); // 1 will change the end of lifetime immediately.
             # $this->caching = Smarty::CACHING_LIFETIME_SAVED;     // $this->setCaching(Smarty::CACHING_LIFETIME_SAVED);
+=======
+         #cache# $this->caching = Smarty::CACHING_LIFETIME_CURRENT; // $this->setCaching(2); // 1 will change the end of lifetime immediately.
+            # $this->caching = Smarty::CACHING_LIFETIME_SAVED;      // $this->setCaching(Smarty::CACHING_LIFETIME_SAVED);
+>>>>>>> origin/master
             # $this->caching = Smarty::CACHING_OFF;                // $this->setCaching(Smarty::CACHING_OFF) // stop caching >= 3.1.4
 
         /*
