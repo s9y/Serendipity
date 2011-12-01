@@ -269,6 +269,7 @@ caption, th, prev,
 
 #page {
     background: #fcfcfc;
+    overflow: hidden;
     width: 100%;
 }
 
@@ -329,6 +330,15 @@ fieldset,
 }
 
 #search div { padding: 0 1em; }
+
+#searchterm,
+#serendipity_comment input[type=text],
+#serendipity_comment input[type=email],
+#serendipity_comment input[type=url] { width: 97%; }
+
+#serendipity_replyTo { width: 99%; }
+
+#serendipity_comment textarea { width: 97%; }
 
 #primary-nav {
     border-top: 1px solid #294564;
@@ -509,21 +519,6 @@ pre>samp {
 
 .form_field { margin-bottom: .5em; }
 
-#searchterm,
-#serendipity_comment input[type=text],
-#serendipity_comment input[type=email],
-#serendipity_comment input[type=url] {
-    min-width: 13em;
-    width: 97%;
-}
-
-#serendipity_replyTo {
-    min-width: 13.5em;
-    width: 100%;
-}
-
-#serendipity_commentform_comment { max-width: 97%; }
-
 #c,
 .serendipity_commentDirection {
     background: #eee;
@@ -537,7 +532,7 @@ pre>samp {
     font-size: .8125em;
     line-height: 1.8462;
     margin: 0 0 1.2308em;
-    max-width: 28.75em;
+    max-width: 96%;
     padding: .3846em;
 }
 
@@ -720,17 +715,19 @@ pre .geshi { font-size: 1em; }
 
 
 /* Media queries  */
-@media only screen and (min-width: 321px) {
+@media only screen and (min-width: 481px) {
     #searchterm { max-width: 15em; }
-
-    #serendipity_replyTo { max-width: 24em; }
-
+    
     #serendipity_comment input[type=text],
     #serendipity_comment input[type=email],
-    #serendipity_comment input[type=url] { max-width: 23.4375em; }
-}
+    #serendipity_comment input[type=url] { max-width: 20em; }
 
-@media only screen and (min-width: 481px) {
+    #serendipity_replyTo { max-width: 20.5em; }
+
+    #serendipity_comment textarea { max-width: 30em; }
+
+    .serendipity_commentDirection { max-width: 36.75em;}
+
     #primary-nav ul { display: block; }
     
     #primary-nav select { display: none; }
@@ -787,11 +784,6 @@ pre .geshi { font-size: 1em; }
     
     #search div { margin-top: 4.4em; }
 
-    #searchterm {
-        min-width: 8em;
-        width: auto;
-    }
-    
     #identity p, #search div { margin-bottom: 1.5em; }
     
     #primary-nav { margin-bottom: 2em; }

@@ -42,7 +42,7 @@
             
             <div class="form_tarea">
                 <label for="serendipity_commentform_comment">{$plugin_contactform_message}</label>
-                <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" cols="40" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}">{$commentform_data}</textarea>
+                <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}">{$commentform_data}</textarea>
             </div>
             {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
             <input id="serendipity_submit" name="serendipity[submit]" type="submit" value="{$CONST.TWOK11_SEND_MAIL}"/>
