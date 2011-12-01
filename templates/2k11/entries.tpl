@@ -1,5 +1,4 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
-{assign var="pagtitle" value=$CONST.TWOK11_PAG_TITLE}
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
     <article id="post_{$entry.id}" class="serendipity_entry{if $dategroup.is_sticky} sticky{/if}" role="article">
@@ -123,7 +122,7 @@
 {/foreach}
 {if $footer_info or $footer_prev_page or $footer_next_page}
     <nav class="serendipity_pagination" role="navigation">
-        <h2 class="visuallyhidden">{$pagtitle}</h2>
+        <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>
         
         <ul class="clearfix">
             {if $footer_info}
