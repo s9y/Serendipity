@@ -122,9 +122,9 @@ class Serendipity_Smarty extends Smarty
         
         $this->setConfigDir(array(S9Y_TEMPLATE_DEFAULT));
         
-        // ToDo: better throw exception depending on context or 500/503 header here
         if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) {
-            die(printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()));
+            // howto: better throw exception depending on context or 500/503 header here ??
+            throw new Exception(printf(DIRECTORY_WRITE_ERROR.'<br />', $this->getCompileDir()));
         }
         
         #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // (enable #cache# properties)
