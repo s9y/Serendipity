@@ -21,7 +21,7 @@
     </div>
     <div class="form_tarea">
         <label for="serendipity_commentform_comment">{$CONST.COMMENT}</label>
-        <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" cols="40" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}">{$commentform_data}</textarea>
+        <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}">{$commentform_data}</textarea>
     </div>
     {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
 {if $is_commentform_showToolbar}
