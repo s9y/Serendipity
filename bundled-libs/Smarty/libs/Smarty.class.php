@@ -2,7 +2,7 @@
 /**
 * Project:     Smarty: the PHP compiling template engine
 * File:        Smarty.class.php
-* SVN:         $Id: Smarty.class.php 4426 2011-10-19 19:20:58Z monte.ohrt $
+* SVN:         $Id: Smarty.class.php 4478 2011-11-24 21:08:26Z uwe.tews@googlemail.com $
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
 * @author Uwe Tews
 * @author Rodney Rehm
 * @package Smarty
-* @version 3.1.4
+* @version 3.1.6
 */
 
 /**
@@ -107,7 +107,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * smarty version
     */
-    const SMARTY_VERSION = 'Smarty 3.1.4';
+    const SMARTY_VERSION = 'Smarty-3.1.6';
 
     /**
     * define variable scopes
@@ -157,7 +157,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * assigned global tpl vars
     */
     public static $global_tpl_vars = array();
-    
+
     /**
      * error handler returned by set_error_hanlder() in Smarty::muteExpectedErrors()
      */
@@ -190,7 +190,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * template directory
     * @var array
     */
-    protected $template_dir = array();
+    private $template_dir = array();
     /**
     * joined template directory string used in cache keys
     * @var string
@@ -220,22 +220,22 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * compile directory
     * @var string
     */
-    protected $compile_dir = null;
+    private $compile_dir = null;
     /**
     * plugins directory
     * @var array
     */
-    protected $plugins_dir = array();
+    private $plugins_dir = array();
     /**
     * cache directory
     * @var string
     */
-    protected $cache_dir = null;
+    private $cache_dir = null;
     /**
     * config directory
     * @var array
     */
-    protected $config_dir = array();
+    private $config_dir = array();
     /**
     * force template compiling?
     * @var boolean
@@ -251,6 +251,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @var boolean
     */
     public $use_sub_dirs = false;
+    /**
+     * allow ambiguous resources (that are made unique by the resource handler)
+     * @var boolean
+     */
+    public $allow_ambiguous_resources = false;
     /**
     * caching enabled
     * @var boolean
@@ -588,13 +593,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
             ->setPluginsDir(SMARTY_PLUGINS_DIR)
             ->setCacheDir('.' . DS . 'cache' . DS)
             ->setConfigDir('.' . DS . 'configs' . DS);
-            
+
         $this->debug_tpl = 'file:' . dirname(__FILE__) . '/debug.tpl';
         if (isset($_SERVER['SCRIPT_NAME'])) {
             $this->assignGlobal('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
         }
     }
-    
+
 
     /**
     * Class destructor
@@ -857,7 +862,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         foreach ((array) $config_dir as $k => $v) {
             $this->config_dir[$k] = rtrim($v, '/\\') . DS;
         }
-        
+
         $this->joined_config_dir = join(DIRECTORY_SEPARATOR, $this->config_dir);
         return $this;
     }
@@ -891,7 +896,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             // append new directory
             $this->config_dir[] = rtrim($config_dir, '/\\') . DS;
         }
-        
+
         $this->joined_config_dir = join(DIRECTORY_SEPARATOR, $this->config_dir);
         return $this;
     }
@@ -1172,14 +1177,22 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $cache_id = $cache_id === null ? $this->cache_id : $cache_id;
         $compile_id = $compile_id === null ? $this->compile_id : $compile_id;
         // already in template cache?
-        $unique_template_name = Smarty_Resource::getUniqueTemplateName($this, $template);
-        $_templateId =  sha1($unique_template_name . $cache_id . $compile_id);
+        if ($this->allow_ambiguous_resources) {
+            $_templateId = Smarty_Resource::getUniqueTemplateName($this, $template) . $cache_id . $compile_id;
+        } else {
+            $_templateId = $this->joined_template_dir . '#' . $template . $cache_id . $compile_id;
+        }
+        if (isset($_templateId[150])) {
+            $_templateId = sha1($_templateId);
+        }
         if ($do_clone) {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object
                 $tpl = clone $this->template_objects[$_templateId];
                 $tpl->smarty = clone $tpl->smarty;
                 $tpl->parent = $parent;
+                $tpl->tpl_vars = array();
+                $tpl->config_vars = array();
             } else {
                 $tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
             }
@@ -1187,6 +1200,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object
                 $tpl = $this->template_objects[$_templateId];
+                $tpl->parent = $parent;
+                $tpl->tpl_vars = array();
+                $tpl->config_vars = array();
             } else {
                 $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
             }
@@ -1336,7 +1352,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public static function mutingErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
         $_is_muted_directory = false;
-        
+
         // add the SMARTY_DIR to the list of muted directories
         if (!isset(Smarty::$_muted_directories[SMARTY_DIR])) {
             $smarty_dir = realpath(SMARTY_DIR);
@@ -1345,7 +1361,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 'length' => strlen($smarty_dir),
             );
         }
-        
+
         // walk the muted directories and test against $errfile
         foreach (Smarty::$_muted_directories as $key => &$dir) {
             if (!$dir) {

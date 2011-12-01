@@ -140,7 +140,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         // save template object in compiler class
         $this->template = $template;
         // reset has noche code flag
-        $this->template->has_nocache_code = false; 
+        $this->template->has_nocache_code = false;
         $this->smarty->_current_file = $saved_filepath = $this->template->source->filepath;
         // template header code
         $template_header = '';
@@ -521,14 +521,17 @@ abstract class Smarty_Internal_TemplateCompilerBase {
                     }
                     include_once $script;
                 }  else {
-                    throw new SmartyCompilerException("Plugin or modifer script file $script not found");
+                    $this->trigger_template_error("Default plugin handler: Returned script file \"{$script}\" for \"{$tag}\" not found");
                 }
+            }
+            if (!is_string($callback) && !(is_array($callback) && is_string($callback[0]) && is_string($callback[1]))) {
+                $this->trigger_template_error("Default plugin handler: Returned callback for \"{$tag}\" must be a static function name or array of class and function name");
             }
             if (is_callable($callback)) {
                 $this->default_handler_plugins[$plugin_type][$tag] = array($callback, true, array());
                 return true;
             } else {
-                throw new SmartyCompilerException("Function for plugin or modifier $tag not callable");
+                $this->trigger_template_error("Default plugin handler: Returned callback for \"{$tag}\" not callable");
             }
         }
         return false;
@@ -569,6 +572,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         } else {
             $_output = $content;
         }
+        $this->modifier_plugins = array();
         $this->suppressNocacheProcessing = false;
         $this->tag_nocache = false;
         return $_output;
