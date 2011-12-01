@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2011-11-28 11:31 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2011-12-01 10:51 Ian
             
 // define secure_dir and trusted_dirs.
 @define('S9Y_TEMPLATE_FALLBACK', $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -176,10 +176,10 @@ class Serendipity_Smarty extends Smarty
          * it cannot be altered except for clearing and regenerating said cache file
          * 
          * Template Inheritance
-		 * Using is_cached() on sub-templates has to set up caching before is_cached() calls, 
-		 *     e.g if (!$smarty->isCached('sub_test.tpl')) { $smarty->assign('foo', $foo); }.
+         * Using is_cached() on sub-templates has to set up caching before is_cached() calls, 
+         *     e.g if (!$smarty->isCached('sub_test.tpl')) { $smarty->assign('foo', $foo); }.
          * The subtemplate will always be cached as specified in the {include} tag. 
-		 * Otherwise you could never cache a subtemplate with caching disabled for the main template.
+         * Otherwise you could never cache a subtemplate with caching disabled for the main template.
          * If you don't want to have the main template cached, turn caching off again after the is_cached() calls for the subtemplate.
          * So the example will cache sub_test.tpl, but not test.tpl
          * Using is_cached() on subtemplates has to set up caching before is_cached() calls.
