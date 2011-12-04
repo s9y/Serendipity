@@ -4,6 +4,15 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Set the smarty object by instance (ophian)
+      It is often needed to access the Smarty object from anywhere in your code, e.g. plugins
+      We now ensure that there is one and only one instance of the object available.
+      To obtain an instance of this class: $serendipity['smarty'] = Serendipity_Smarty::getInstance();
+      The first time this is called a new instance will be created. Thereafter, the same instance is handed back.
+    
+    * Set an global errorToExceptionHandler (ophian)
+      changed some old smarty trigger_errors to native function
+    
     * Updated spamblock plugin (ophian)
       changed wordfilter to function and Commenters moderation check verify_once 
       to get checked via wordfilter to reject known spam comments before
