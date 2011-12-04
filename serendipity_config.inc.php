@@ -6,6 +6,8 @@ if (defined('S9Y_FRAMEWORK')) {
     return;
 }
 
+set_error_handler('errorToExceptionHandler', E_ALL & ~E_NOTICE);
+
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
@@ -58,6 +60,22 @@ if ($serendipity['production'] !== true) {
         error_reporting(E_ALL);
     }
     @ini_set('display_errors', 'on');
+}
+
+/**
+ * Set our own exeption handler tp convert all errors into exeptions automatically
+ *
+ * @access public
+ * @param  unchanged default
+ * @return null
+ */
+function errorToExceptionHandler($errNo, $errStr, $errFile, $errLine, $errContext) {
+    global $php_errormsg; $php_errormsg = $errStr;
+    if (error_reporting() == 0) return;
+    if($serendipity['production'] !== true) echo ' == DEBUG MODE == ';
+    echo '<pre>';
+    throw new ErrorException($errStr, 0, $errNo, $errFile, $errLine);
+    echo '</pre>'; 
 }
 
 // Default rewrite method
