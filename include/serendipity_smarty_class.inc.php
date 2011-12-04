@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2011-12-01 10:51 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2011-12-04 17:35 Ian
             
 // define secure_dir and trusted_dirs.
 @define('S9Y_TEMPLATE_FALLBACK', $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -49,15 +49,13 @@ class Serendipity_Smarty extends Smarty
     // backward compat for plugins INCLUDE_ANY fetch calls - undefinied property Serendipity_Smarty::security_settings, which were used in old smarty libs (in early 2.6.x versions)
     public $security_settings = false;
     
-    // some documentary from the smarty forum
-    /*********************************************************
-     * It is often helpful to access the Smarty object from anywhere in your code. Although you could use a global variable, 
-     * globals are not adequate for larger projects. The singleton pattern ensures that there is one and only one instance of the object available.
+    /**
+     * It is often helpful to access the Smarty object from anywhere in your code. A
+     * Enable smarty object by instance always. The singleton pattern ensures that there is one and only one instance of the object available.
      * To obtain an instance of this class:
      * $serendipity['smarty'] = Serendipity_Smarty::getInstance();
      * The first time this is called a new instance will be created. Thereafter, the same instance is handed back.
      **/
-     // enable smarty object by instance always
     public static function getInstance($newInstance = null)
       {
         static $instance = null;
