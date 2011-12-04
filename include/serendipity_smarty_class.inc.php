@@ -57,14 +57,18 @@ class Serendipity_Smarty extends Smarty
      * $serendipity['smarty'] = Serendipity_Smarty::getInstance();
      * The first time this is called a new instance will be created. Thereafter, the same instance is handed back.
      **/
-     // ??? what does that mean for us - exactly? 
-    public static function getInstance()
+     // enable smarty object by instance always
+    public static function getInstance($newInstance = null)
       {
         static $instance = null;
-        if ( $instance == null )
+        if(isset($newInstance)) {
+            $instance = $newInstance;
+        }
+        if ( $instance == null ) {
             $instance = new Serendipity_Smarty();
+        }
         return $instance;
-      }
+      } 
 
     public function __construct() 
       {
