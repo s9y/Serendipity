@@ -230,17 +230,17 @@ audio, video,
 #trackback_url,
 .manage_comments,
 .plugin_comment_wrap,
-p.break, #search div,
+p.whiteline, #search div,
 .serendipity_entry .plainList,
 #page, #primary-nav,
 .serendipity_calendar,
 .serendipity_freetag_taglist,
-.geshi, .serendipity_entrypaging,
+.serendipity_entrypaging,
 #serendipity_emoticonchooser { margin: 0 0 1em; }
 
 summary { cursor: pointer; }
 
-li ul, li ol,
+li ul, li ol, p.break,
 #serendipity_replyTo,
 .serendipity_freeTag { margin: 0; }
 
@@ -457,6 +457,12 @@ fieldset,
 
 .serendipity_entry tbody tr:nth-child(even) { background: #eee; }
 
+.geshi {
+    font-family: monospace, monospace;
+    _font-family: 'courier new', monospace;
+}
+
+.serendipity_entry .geshi,
 .serendipity_entry pre {
     background: #eee;
     border: 1px solid #aaa;
@@ -474,7 +480,8 @@ fieldset,
 
 pre>code,
 pre>kbd,
-pre>samp {
+pre>samp,
+pre .geshi {
     font-size: 1em;
     line-height: 1.5;
 }
@@ -694,14 +701,6 @@ pre>samp {
 }
 
 .serendipity_freetag_taglist_related { font-size: 1.25em; }
-
-.geshi {
-    font-family: monospace, monospace;
-    _font-family: 'courier new', monospace;
-    font-size: .875em;
-}
-
-pre .geshi { font-size: 1em; }
 
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
