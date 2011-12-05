@@ -63,19 +63,30 @@ if ($serendipity['production'] !== true) {
 }
 
 /**
- * Set our own exeption handler tp convert all errors into exeptions automatically
+ * Set our own exeption handler to convert all errors into exeptions automatically
  *
  * @access public
- * @param  unchanged default
+ * @param  standard
  * @return null
  */
 function errorToExceptionHandler($errNo, $errStr, $errFile, $errLine, $errContext) {
-    global $php_errormsg; $php_errormsg = $errStr;
-    if (error_reporting() == 0) return;
-    if($serendipity['production'] !== true) echo ' == DEBUG MODE == ';
-    echo '<pre>';
-    throw new ErrorException($errStr, 0, $errNo, $errFile, $errLine);
-    echo '</pre>'; 
+    // ToDo: enhance for special serendipity error needs, 
+    //       like $errContext or specify tracing off in user context
+    // @disabled errors will not appear 
+    
+    $rep = ini_get('error_reporting');
+    // function error handler must return false to support $php_errormsg
+    if(!($rep & $errStr)) { return false; }
+    // respect user has set php to not display errors at all
+    // may be overridden by if(ini_get('display_errors') == 0) print error in further context
+    elseif (error_reporting() == 0) { return; }
+    else {
+        if($serendipity['production'] !== true) echo ' == DEBUG MODE == ';
+        echo '<pre>';
+        throw new ErrorException($errStr, 0, $errNo, $errFile, $errLine);
+        echo '</pre>'; 
+    }
+    return true;
 }
 
 // Default rewrite method
