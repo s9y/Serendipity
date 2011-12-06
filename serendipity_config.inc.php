@@ -6,8 +6,6 @@ if (defined('S9Y_FRAMEWORK')) {
     return;
 }
 
-set_error_handler('errorToExceptionHandler', E_ALL & ~E_NOTICE);
-
 @define('S9Y_FRAMEWORK', true);
 
 if (!headers_sent()) {
@@ -62,31 +60,13 @@ if ($serendipity['production'] !== true) {
     @ini_set('display_errors', 'on');
 }
 
-/**
- * Set our own exeption handler to convert all errors into exeptions automatically
- *
- * @access public
- * @param  standard
- * @return null
- */
-function errorToExceptionHandler($errNo, $errStr, $errFile, $errLine, $errContext) {
-    // ToDo: enhance for special serendipity error needs, 
-    //       like $errContext or specify tracing off in user context
-    // @disabled errors will not appear 
-    
-    $rep = ini_get('error_reporting');
-    // function error handler must return false to support $php_errormsg
-    if(!($rep & $errStr)) { return false; }
-    // respect user has set php to not display errors at all
-    // may be overridden by if(ini_get('display_errors') == 0) print error in further context
-    elseif (error_reporting() == 0) { return; }
-    else {
-        if($serendipity['production'] !== true) echo ' == DEBUG MODE == ';
-        echo '<pre>';
-        throw new ErrorException($errStr, 0, $errNo, $errFile, $errLine);
-        echo '</pre>'; 
-    }
-    return true;
+// The serendipity errorhandler string
+$serendipity['errorhandler'] = 'errorToExceptionHandler';
+
+//[internal callback function]: errorToExceptionHandler()
+if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
+    // set serendipity global error to exeption handler
+    set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE);
 }
 
 // Default rewrite method

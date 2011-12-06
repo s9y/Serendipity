@@ -67,6 +67,37 @@ function memSnap($tshow = '') {
     $memUsage = $current;
 }
 
+/**
+ * Set our own exeption handler to convert all errors into exeptions automatically
+ * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context
+ *
+ * @access public
+ * @param  standard
+ * @return null
+ */
+if(!function_exists('errorToExceptionHandler')) {
+    function errorToExceptionHandler($errNo, $errStr, $errFile, $errLine, $errContext) {
+        // ToDo: enhance for special serendipity error needs,
+        //       like $errContext or specify tracing off in user context
+        // @disabled errors will not appear
+
+        $rep = ini_get('error_reporting');
+        // function error handler must return false to support $php_errormsg messages
+        if(!($rep & $errStr)) { return false; }
+        // respect user has set php to not display errors at all
+        // may be overridden by if(ini_get('display_errors') == 0) print error in further context
+        elseif (error_reporting() == 0) { return; }
+        // throw errors as exception
+        else {
+            if($serendipity['production'] !== true) echo ' == DEBUG MODE == ';
+            echo '<pre>';
+            throw new ErrorException($errStr, 0, $errNo, $errFile, $errLine);
+            echo '</pre>';
+        }
+        return true;
+    }
+}
+
 if (!function_exists('file_get_contents')) {
     function file_get_contents($filename, $use_include_path = 0) {
         $file = fopen($filename, 'rb', $use_include_path);
