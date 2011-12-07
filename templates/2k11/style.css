@@ -663,6 +663,8 @@ pre .geshi {
     max-width: 100%;
 }
 
+.emoticon { vertical-align: baseline!important; }
+
 .serendipity_calendar {
     border: 1px solid #3e5f81;
     width: 85%;

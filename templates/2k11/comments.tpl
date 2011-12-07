@@ -11,7 +11,8 @@
     </div>
     
     <footer>
-        <a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.TWOK11_PLINK_TITLE}">{$CONST.TWOK11_PLINK_TEXT}</a>
+        <time>{$comment.timestamp|@formatTime:'%H:%M'}</time>
+        | <a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.TWOK11_PLINK_TITLE}">{$CONST.TWOK11_PLINK_TEXT}</a>
     {if $entry.is_entry_owner}
         | <a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a>
     {/if}
