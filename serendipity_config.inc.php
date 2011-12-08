@@ -66,7 +66,13 @@ $serendipity['errorhandler'] = 'errorToExceptionHandler';
 //[internal callback function]: errorToExceptionHandler()
 if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
     // set serendipity global error to exeption handler
-    set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE);
+    #if ($serendipity['production'] === 'debug') {
+    #    set_error_handler($serendipity['errorhandler'], E_ALL);
+    #} else {
+    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode, 
+    // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
+        set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE);
+    #}
 }
 
 // Default rewrite method
