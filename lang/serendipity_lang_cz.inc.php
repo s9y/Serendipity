@@ -994,4 +994,4 @@ $i18n_filename_to = array (
 @define('WEBLOG', 'Weblog');
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Èeká na potvrzení');
-@define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
+@define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');@define('SUMMARY', 'Summary');

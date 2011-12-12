@@ -984,3 +984,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('SUMMARY', 'Summary');

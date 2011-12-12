@@ -965,3 +965,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('SUMMARY', 'Summary');

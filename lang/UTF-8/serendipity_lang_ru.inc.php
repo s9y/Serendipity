@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_ru.inc.php 2745 2011-04-11 12:35:40Z garvinhicking $
+<?php # $Id$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation by Nightly <nightly@reys.net>
@@ -970,3 +970,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('SUMMARY', 'Summary');

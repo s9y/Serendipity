@@ -122,6 +122,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
             }
         } elseif ($v == 'summary') { /* Summary */
             $serendipity['short_archives'] = true;
+            $serendipity['head_subtitle'] .= SUMMARY . ' - ';
             unset($_args[$k]);
         } elseif ($v[0] == 'P') { /* Page */
             $page = substr($v, 1);

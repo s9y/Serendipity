@@ -154,3 +154,4 @@ foreach($const['missing'] AS $file => $constants) {
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
+@define('SUMMARY', 'Summary');
