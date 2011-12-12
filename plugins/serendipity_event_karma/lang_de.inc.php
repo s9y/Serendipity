@@ -1,11 +1,13 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 09:51:33 VladaAjgl $
+<?php # lang_de.inc.php 1.1 2011-11-22 10:01:55 VladaAjgl $
 
 /**
- *  @version 1.0
+ *  @version 1.1
  *  @author Grischa Brockhaus <http://blog.brockha.us>
  *  DE-Revision: Revision of lang_de.inc.php
  *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
  *  @translated 2009/06/03
+ *  @author Konrad Bauckmeier <yourmail@example.com>
+ *  @revisionDate 2011/11/22
  */
 
 @define('PLUGIN_KARMA_NAME', 'Karma');
@@ -71,6 +73,7 @@
 //--JAM:@define('PLUGIN_KARMA_ALIGNMENT', 'Voting Bar Alignment');
 //--JAM:@define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH', 'Alignment of voting bar in the entry footer.  Templates can override this setting with !important (Default: right)');
 //--JAM: @define('PLUGIN_KARMA_ALIGNMENT_DETECT', 'from style');
+
 @define('PLUGIN_KARMA_VISITS', 'Aufrufstatisik aktivieren?');
 @define('PLUGIN_KARMA_VISITS_BLAHBLAH', 'Soll jeder Klick auf einen Artikel gezählt und dargestellt werden?');
 @define('PLUGIN_KARMA_VISITSCOUNT', ' %4$s Klicks');
@@ -120,3 +123,6 @@
 @define('PLUGIN_KARMA_INVALID_INPUT', 'ungültige Eingabe!');
 @define('PLUGIN_KARMA_DELETE_VOTES', 'Lösche ausgewählte Stimmen');
 @define('PLUGIN_KARMA_APPROVE_VOTES', 'Bestätige ausgewählte Stimmen');
+
+// Next lines were translated on 2011/11/22
+@define('PLUGIN_KARMA_ACTIVE_REGISTERED', 'Nur eingeloggte Authoren können abstimmen');
