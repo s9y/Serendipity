@@ -100,7 +100,7 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'http://netmirror.org/mirror/serendipity/',
                 'http://s9y.org/mirror/',
-                'https://raw.github.com/s9y/additional_plugins/',
+                'https://raw.github.com/s9y/additional_plugins/master/',
 //                'http://openmirror.org/pub/s9y/',
             ),
 
@@ -370,8 +370,8 @@ class serendipity_event_spartacus extends serendipity_event
         static $error = false;
 
         // Fix double URL strings.
-        $url = str_replace('http:/', 'http://', str_replace('//', '/', $url));
-
+        $url = preg_replace('@http(s)?:/@i', 'http\1://', str_replace('//', '/', $url));
+        
         // --JAM: Get the URL's IP in the most error-free way possible
         $url_parts = @parse_url($url);
         $url_hostname = 'localhost';
@@ -879,6 +879,7 @@ class serendipity_event_spartacus extends serendipity_event
     function download(&$tree, $plugin_to_install, $sub = 'plugins') {
         global $serendipity;
 
+        $gitloc = '';
         switch($sub) {
             case 'plugins':
             default:
@@ -946,9 +947,13 @@ class serendipity_event_spartacus extends serendipity_event
             $servers = explode('|', $custom);
             $mirror = $servers[0];
         }
+        
+        if (stristr($mirror, 'github.com')) {
+            $gitloc = 'master/';
+        }
 
         foreach($files AS $file) {
-            $url    = $mirror . '/' . $sfloc . '/' . $file . '?revision=1.9999';
+            $url    = $mirror . '/' . $sfloc . '/' . $gitloc . $file . '?revision=1.9999';
             $target = $pdir . $file;
             $this->rmkdir($pdir . $plugin_to_install,$sub);
             $this->fileperm($pdir . $plugin_to_install, true);

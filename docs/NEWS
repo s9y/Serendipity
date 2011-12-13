@@ -4,6 +4,8 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Made Spartacus recognize github.com mirror (garvinhicking)
+    
     * Add "Summary" output to title of summary archive pages, patch by
       hboeck
  
