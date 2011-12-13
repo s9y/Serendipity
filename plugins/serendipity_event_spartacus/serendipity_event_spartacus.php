@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.23');
+        $propbag->add('version',       '2.25');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -82,6 +82,7 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'Netmirror.org',
                 's9y.org',
+                'github.com'
 //                'openmirror.org'
             ),
 
@@ -89,6 +90,7 @@ class serendipity_event_spartacus extends serendipity_event
                 'Netmirror.org',
                 'SourceForge.net',
                 's9y.org',
+                'github.com'
 //                'BerliOS.de (inactive)',
 //                'openmirror.org'
             )
@@ -98,6 +100,7 @@ class serendipity_event_spartacus extends serendipity_event
             'xml' => array(
                 'http://netmirror.org/mirror/serendipity/',
                 'http://s9y.org/mirror/',
+                'https://raw.github.com/s9y/additional_plugins/',
 //                'http://openmirror.org/pub/s9y/',
             ),
 
@@ -105,6 +108,7 @@ class serendipity_event_spartacus extends serendipity_event
                 'http://netmirror.org/mirror/serendipity/',
                 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
                 'http://s9y.org/mirror/',
+                'https://raw.github.com/s9y/',
 //                'http://svn.berlios.de/viewcvs/serendipity/',
 //                'http://openmirror.org/pub/s9y/',
             ),
@@ -113,6 +117,7 @@ class serendipity_event_spartacus extends serendipity_event
                 'http://netmirror.org/'                 => 'http://netmirror.org/mirror/serendipity/last.txt',
                 'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
                 'http://s9y.org/'                       => 'http://s9y.org/',
+                'https://raw.github.com/'               => 'https://raw.github.com/',
 //                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/',
 //                'http://openmirror.org/'                => 'http://openmirror.org/pub/s9y/last.txt',
             )
