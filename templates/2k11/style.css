@@ -120,7 +120,7 @@ img,
 audio, video,
 embed, object { max-width: 100%; }
 
-img { height: auto; }
+img, video { height: auto; }
 
 q { quotes: '“' '”' '‘' '’'; }
 :lang(de) q { quotes: '„' '“' '‚' '‘'; }
@@ -496,17 +496,15 @@ pre .geshi {
 }
 
 .serendipity_pagination .info {
-    left: 25%;
     text-align: center;
-    width: 50%;
+    width: 100%;
 }
 
-.serendipity_pagination .prev {
-    left: -50%;
-    width: 25%;
-}
+.serendipity_pagination .prev,
+.serendipity_pagination .next { width: 50%; }
 
-.serendipity_pagination .next { width: 25%; }
+.ie7 .serendipity_pagination .prev,
+.ie7 .serendipity_pagination .next { width: 49.9%; }
 
 .archives_date { min-width: 10em; }
 
@@ -749,6 +747,23 @@ pre .geshi {
         clear: both;
         margin-right: 5%;
     }
+
+    .serendipity_pagination .info {
+        left: 25%;
+        width: 50%;
+    }
+
+    .serendipity_pagination .prev {
+        left: -50%;
+        width: 25%;
+    }
+
+    .serendipity_pagination .next { width: 25%; }
+
+    .ie7 .serendipity_pagination .info { width: 49.9%; }
+
+    .ie7 .serendipity_pagination .prev,
+    .ie7 .serendipity_pagination .next { width: 24.9%; }
     
     .archives_year {
         float: left;
