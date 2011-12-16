@@ -10,6 +10,7 @@
 @define('TWOK11_PAG_TITLE', 'Pagination');
 @define('TWOK11_PLINK_TEXT', 'Link');
 @define('TWOK11_PLINK_TITLE', 'Permanent link for this comment');
+@define('TWOK11_PLACE_SEARCH', 'Search term(s)');
 @define('TWOK11_PLACE_NAME', 'i.e. John Doe');
 @define('TWOK11_PLACE_MAIL', 'i.e. mail@example.org');
 @define('TWOK11_PLACE_URL', 'i.e. http://example.org');

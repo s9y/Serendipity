@@ -1,6 +1,4 @@
-{if $plugin_contactform_articleformat}
-    <div class="serendipity_entry">
-{/if}
+    <div class="serendipity_staticpage{if $plugin_contactform_articleformat} serendipity_entry{/if}">
         <h2>{if $plugin_contactform_articleformat}{$plugin_contactform_name}{else}{$plugin_contactform_pagetitle}{/if}</h2>
             
         <div class="serendpity_preface content">
@@ -49,6 +47,4 @@
             </form>
         </div>
     {/if}
-{if $plugin_contactform_articleformat}
-</div>
-{/if}
+    </div>

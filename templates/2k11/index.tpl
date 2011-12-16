@@ -39,7 +39,7 @@
 {if $is_raw_mode != true}
 <a class="visuallyhidden" href="#content"><span lang="en">Skip to content</span></a>
 <div id="page" class="clearfix">
-    <header id="banner" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}{if not $template_option.use_corenav} no-nav{/if}" role="banner">
+    <header id="banner" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}{if not $template_option.use_corenav} no-nav{/if}">
         <div id="identity">
             <h1><a href="{$serendipityBaseURL}">{$blogTitle}</a></h1>
             <p>{$blogDescription}</p>
@@ -49,7 +49,7 @@
         <div>
             <input type="hidden" name="serendipity[action]" value="search"/>
             <label for="searchterm" class="visuallyhidden">{$CONST.QUICKSEARCH}</label>
-            <input id="searchterm" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.QUICKSEARCH}" value=""/>
+            <input id="searchterm" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.TWOK11_PLACE_SEARCH}" value=""/>
             <input id="searchsend" name="serendipity[searchButton]" type="submit" value="{$CONST.GO}"/>
         </div>
         </form>
@@ -59,7 +59,7 @@
         {/if}
     </header>
     {if $template_option.use_corenav}
-    <nav id="primary-nav" role="navigation">
+    <nav id="primary-nav">
         <h2 class="visuallyhidden">{$CONST.TWOK11_NAV_TITLE}</h2>
         
         <ul class="clearfix">{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
@@ -70,20 +70,20 @@
         {$CONTENT}
         </div>
     {if $leftSidebarElements > 0}
-        <aside id="sidebar_left" role="complementary">
+        <aside id="sidebar_left">
             <h2 class="visuallyhidden">Sidebar</h2>
             {serendipity_printSidebar side="left"}
         </aside>
     {/if}
     {if $rightSidebarElements > 0}
-        <aside id="sidebar_right" role="complementary">
+        <aside id="sidebar_right">
             <h2 class="visuallyhidden">Sidebar</h2>
             {serendipity_printSidebar side="right"}
         </aside>
     {/if}
     </div>
     
-    <footer id="colophon" role="contentinfo">
+    <footer id="colophon">
         <small lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</small>
     </footer>
 </div>
