@@ -1013,8 +1013,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             return; // no display of this item
         }
     }
-
-
+    
     // We shouldn't return here, because we want Smarty to handle the output
     if (!is_array($entries) || $entries[0] == false || !isset($entries[0]['timestamp'])) {
         $entries = array();
@@ -1059,6 +1058,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_body'])) {
+                $entry['pre_body']  = $entry['body'];
                 $entry['body']      = &$entry['properties']['ep_cache_body'];
                 $entry['is_cached'] = true;
             }
@@ -1074,6 +1074,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             if (!empty($entry['properties']['ep_cache_extended'])) {
+                $entry['pre_extended']  = $entry['extended'];
                 $entry['extended']  = &$entry['properties']['ep_cache_extended'];
                 $entry['is_cached'] = true;
             }
