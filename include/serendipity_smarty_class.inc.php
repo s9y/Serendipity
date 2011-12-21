@@ -47,6 +47,19 @@ class Serendipity_Smarty extends Smarty
     // bc mode for plugins Smarty2 compat INCLUDE_ANY fetch() calls - to avoid an undefinied property error.
     public $security_settings = false;
     
+    
+    public function __set($name, $value) {
+        if ($name == 'security') {
+            if ($value) {
+                $this->enableSecurity('Serendipity_Smarty_Security_Policy');
+            } else {
+                $this->disableSecurity();
+            }    
+        } else {
+            parent::__set($name, $value);
+        }
+    }
+    
     /**
      * It is often helpful to access the Smarty object from anywhere in your code, e.g in Plugins.
      * Enables the Smarty object by instance always. The singleton pattern ensures that there is only one instance of the object available.
