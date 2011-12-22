@@ -3,7 +3,17 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
-    * Patch by Markus Brükner: Properly handle files that have no
+   * Allow Smarty to fetch .tpl files from all directories so that
+     s9y plugin can use the fetch() call for their .tpl files no
+     matter which (symlinked) directory the plugin resides in.
+     The Smarty security policy to us only serves as a restriction
+     within .tpl files to not allow arbitrary PHP modifier/function calls.
+     If in the future Smarty supports enforcing trustedDir checks on
+     {include} calls seperately to smarty->fetch() calls, we'll also
+     add that to .tpl files.
+     (garvinhicking)
+     
+   * Patch by Markus Brükner: Properly handle files that have no
       extension in media database
 
     * Made Spartacus recognize github.com mirror (garvinhicking)

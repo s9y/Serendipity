@@ -35,6 +35,16 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     // to test this - overwrites Serendipity_Smarty::default_modifiers and Serendipity_Smarty_Security_Policy::php_modifiers - modifier 'escape' not allowed by security setting
     #public $allowed_modifiers = array('escape:"htmlall"');
     
+    // This allows the fetch() and include calls to pull .tpl files from any directory,
+    // so that symlinked plugin directories outside the s9y path can be included properly.
+    // TODO / FUTURE: If Smarty will implement a seperation option to dissect fetch() from
+    // {include} calls, we should only apply this workaround to fetch() calls.
+    // Redirecting fetch() as our custom function is too risky and has too high a performance
+    // impact.
+    public function isTrustedResourceDir($path) {
+        return true;
+    }
+    
     static public function test() 
       { 
         var_dump(get_called_class());
@@ -51,9 +61,9 @@ class Serendipity_Smarty extends Smarty
     public function __set($name, $value) {
         if ($name == 'security') {
             if ($value) {
-                $this->enableSecurity('Serendipity_Smarty_Security_Policy');
+                 $this->enableSecurity('Serendipity_Smarty_Security_Policy');
             } else {
-                $this->disableSecurity();
+                 $this->disableSecurity();
             }    
         } else {
             parent::__set($name, $value);
