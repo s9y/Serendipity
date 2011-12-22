@@ -10,34 +10,21 @@
  *
  * PHP versions 4 and 5
  *
- * LICENSE: License is granted to use or modify this software
- * ("XML-RPC for PHP") for commercial or non-commercial use provided the
- * copyright of the author is preserved in any distributed or derivative work.
- *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESSED OR
- * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
- * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
- * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
- * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
- * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
- * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  * @category   Web Services
  * @package    XML_RPC
  * @author     Edd Dumbill <edd@usefulinc.com>
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    CVS: $Id: RPC.php,v 1.83 2005/08/14 20:25:35 danielc Exp $
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    SVN: $Id: RPC.php 315594 2011-08-27 01:03:57Z danielc $
  * @link       http://pear.php.net/package/XML_RPC
  */
 
 
 if (!function_exists('xml_parser_create')) {
+    include_once dirname(__FILE__) . '/../../PEAR.php';
     PEAR::loadExtension('xml');
 }
 
@@ -199,6 +186,14 @@ $GLOBALS['XML_RPC_backslash'] = chr(92) . chr(92);
 
 
 /**
+ * Should we automatically base64 encode strings that contain characters
+ * which can cause PHP's SAX-based XML parser to break?
+ * @global boolean $GLOBALS['XML_RPC_auto_base64']
+ */
+$GLOBALS['XML_RPC_auto_base64'] = false;
+
+
+/**
  * Valid parents of XML elements
  * @global array $GLOBALS['XML_RPC_valid_parents']
  */
@@ -248,7 +243,8 @@ $GLOBALS['XML_RPC_xh'] = array();
  */
 function XML_RPC_se($parser_resource, $name, $attrs)
 {
-    global $XML_RPC_xh, $XML_RPC_DateTime, $XML_RPC_String, $XML_RPC_valid_parents;
+    global $XML_RPC_xh, $XML_RPC_valid_parents;
+
     $parser = (int) $parser_resource;
 
     // if invalid xmlrpc already detected, skip all processing
@@ -267,7 +263,7 @@ function XML_RPC_se($parser_resource, $name, $attrs)
     } else {
         // not top level element: see if parent is OK
         if (!in_array($XML_RPC_xh[$parser]['stack'][0], $XML_RPC_valid_parents[$name])) {
-            $name = preg_replace('[^a-zA-Z0-9._-]', '', $name);
+            $name = preg_replace('@[^a-zA-Z0-9._-]@', '', $name);
             $XML_RPC_xh[$parser]['isf'] = 2;
             $XML_RPC_xh[$parser]['isf_reason'] = "xmlrpc element $name cannot be child of {$XML_RPC_xh[$parser]['stack'][0]}";
             return;
@@ -313,7 +309,7 @@ function XML_RPC_se($parser_resource, $name, $attrs)
 
     case 'VALUE':
         $XML_RPC_xh[$parser]['lv'] = 1;
-        $XML_RPC_xh[$parser]['vt'] = $XML_RPC_String;
+        $XML_RPC_xh[$parser]['vt'] = $GLOBALS['XML_RPC_String'];
         $XML_RPC_xh[$parser]['ac'] = '';
         $XML_RPC_xh[$parser]['qt'] = 0;
         // look for a value: if this is still 1 by the
@@ -334,7 +330,7 @@ function XML_RPC_se($parser_resource, $name, $attrs)
             $XML_RPC_xh[$parser]['qt'] = 1;
 
             if ($name == 'DATETIME.ISO8601') {
-                $XML_RPC_xh[$parser]['vt'] = $XML_RPC_DateTime;
+                $XML_RPC_xh[$parser]['vt'] = $GLOBALS['XML_RPC_DateTime'];
             }
 
         } elseif ($name == 'BASE64') {
@@ -376,7 +372,8 @@ function XML_RPC_se($parser_resource, $name, $attrs)
  */
 function XML_RPC_ee($parser_resource, $name)
 {
-    global $XML_RPC_xh, $XML_RPC_Types, $XML_RPC_String;
+    global $XML_RPC_xh;
+
     $parser = (int) $parser_resource;
 
     if ($XML_RPC_xh[$parser]['isf'] >= 2) {
@@ -430,7 +427,7 @@ function XML_RPC_ee($parser_resource, $name)
         } else {
             // we have an I4, INT or a DOUBLE
             // we must check that only 0123456789-.<space> are characters here
-            if (!preg_match("@^[+-]?[0123456789 \t\.]+$@i", $XML_RPC_xh[$parser]['ac'])) {
+            if (!preg_match("@^[+-]?[0123456789 \t\.]+$@", $XML_RPC_xh[$parser]['ac'])) {
                 XML_RPC_Base::raiseError('Non-numeric value received in INT or DOUBLE',
                                          XML_RPC_ERROR_NON_NUMERIC_FOUND);
                 $XML_RPC_xh[$parser]['value'] = XML_RPC_ERROR_NON_NUMERIC_FOUND;
@@ -446,10 +443,13 @@ function XML_RPC_ee($parser_resource, $name)
         break;
 
     case 'VALUE':
-        // deal with a string value
-        if (strlen($XML_RPC_xh[$parser]['ac']) > 0 &&
-            $XML_RPC_xh[$parser]['vt'] == $XML_RPC_String) {
-            $XML_RPC_xh[$parser]['value'] = $XML_RPC_xh[$parser]['ac'];
+        if ($XML_RPC_xh[$parser]['vt'] == $GLOBALS['XML_RPC_String']) {
+            if (strlen($XML_RPC_xh[$parser]['ac']) > 0) {
+                $XML_RPC_xh[$parser]['value'] = $XML_RPC_xh[$parser]['ac'];
+            } elseif ($XML_RPC_xh[$parser]['lv'] == 1) {
+                // The <value> element was empty.
+                $XML_RPC_xh[$parser]['value'] = '';
+            }
         }
 
         $temp = new XML_RPC_Value($XML_RPC_xh[$parser]['value'], $XML_RPC_xh[$parser]['vt']);
@@ -497,7 +497,7 @@ function XML_RPC_ee($parser_resource, $name)
     }
 
     // if it's a valid type name, set the type
-    if (isset($XML_RPC_Types[strtolower($name)])) {
+    if (isset($GLOBALS['XML_RPC_Types'][strtolower($name)])) {
         $XML_RPC_xh[$parser]['vt'] = strtolower($name);
     }
 }
@@ -510,6 +510,7 @@ function XML_RPC_ee($parser_resource, $name)
 function XML_RPC_cd($parser_resource, $data)
 {
     global $XML_RPC_xh, $XML_RPC_backslash;
+
     $parser = (int) $parser_resource;
 
     if ($XML_RPC_xh[$parser]['lv'] != 3) {
@@ -542,8 +543,9 @@ function XML_RPC_cd($parser_resource, $data)
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    Release: 1.4.0
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    Release: 1.5.5
  * @link       http://pear.php.net/package/XML_RPC
  */
 class XML_RPC_Base {
@@ -574,7 +576,7 @@ class XML_RPC_Base {
      */
     function isError($value)
     {
-        return is_a($value, 'PEAR_Error');
+        return is_object($value) && is_a($value, 'PEAR_Error');
     }
 }
 
@@ -587,8 +589,9 @@ class XML_RPC_Base {
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    Release: 1.4.0
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    Release: 1.5.5
  * @link       http://pear.php.net/package/XML_RPC
  */
 class XML_RPC_Client extends XML_RPC_Base {
@@ -800,6 +803,26 @@ class XML_RPC_Client extends XML_RPC_Base {
     }
 
     /**
+     * Sets whether strings that contain characters which may cause PHP's
+     * SAX-based XML parser to break should be automatically base64 encoded
+     *
+     * This is is a workaround for systems that don't have PHP's mbstring
+     * extension available.
+     *
+     * @param int $in  where 1 = on, 0 = off
+     *
+     * @return void
+     */
+    function setAutoBase64($in)
+    {
+        if ($in) {
+            $GLOBALS['XML_RPC_auto_base64'] = true;
+        } else {
+            $GLOBALS['XML_RPC_auto_base64'] = false;
+        }
+    }
+
+    /**
      * Set username and password properties for connecting to the RPC server
      *
      * @param string $u  the user name
@@ -829,7 +852,7 @@ class XML_RPC_Client extends XML_RPC_Base {
      */
     function send($msg, $timeout = 0)
     {
-        if (strtolower(get_class($msg)) != 'xml_rpc_message') {
+        if (!is_object($msg) || !is_a($msg, 'XML_RPC_Message')) {
             $this->errstr = 'send()\'s $msg parameter must be an'
                           . ' XML_RPC_Message object.';
             $this->raiseError($this->errstr, XML_RPC_ERROR_PROGRAMMING);
@@ -864,6 +887,26 @@ class XML_RPC_Client extends XML_RPC_Base {
     function sendPayloadHTTP10($msg, $server, $port, $timeout = 0,
                                $username = '', $password = '')
     {
+        // Pre-emptive BC hacks for fools calling sendPayloadHTTP10() directly
+        if ($username != $this->username) {
+            $this->setCredentials($username, $password);
+        }
+
+        // Only create the payload if it was not created previously
+        if (empty($msg->payload)) {
+            $msg->createPayload();
+        }
+        $this->createHeaders($msg);
+
+        $op  = $this->headers . "\r\n\r\n";
+        $op .= $msg->payload;
+
+        if ($this->debug) {
+            print "\n<pre>---SENT---\n";
+            print $op;
+            print "\n---END---</pre>\n";
+        }
+
         /*
          * If we're using a proxy open a socket to the proxy server
          * instead to the xml-rpc server
@@ -921,20 +964,6 @@ class XML_RPC_Client extends XML_RPC_Base {
              */
             socket_set_timeout($fp, $timeout);
         }
-
-        // Pre-emptive BC hacks for fools calling sendPayloadHTTP10() directly
-        if ($username != $this->username) {
-            $this->setCredentials($username, $password);
-        }
-
-        // Only create the payload if it was not created previously
-        if (empty($msg->payload)) {
-            $msg->createPayload();
-        }
-        $this->createHeaders($msg);
-
-        $op  = $this->headers . "\r\n\r\n";
-        $op .= $msg->payload;
 
         if (!fputs($fp, $op, strlen($op))) {
             $this->errstr = 'Write error';
@@ -1009,8 +1038,9 @@ class XML_RPC_Client extends XML_RPC_Base {
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    Release: 1.4.0
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    Release: 1.5.5
  * @link       http://pear.php.net/package/XML_RPC
  */
 class XML_RPC_Response extends XML_RPC_Base
@@ -1100,12 +1130,22 @@ class XML_RPC_Response extends XML_RPC_Base
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    Release: 1.4.0
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    Release: 1.5.5
  * @link       http://pear.php.net/package/XML_RPC
  */
 class XML_RPC_Message extends XML_RPC_Base
 {
+    /**
+     * Should the payload's content be passed through mb_convert_encoding()?
+     *
+     * @see XML_RPC_Message::setConvertPayloadEncoding()
+     * @since Property available since Release 1.5.1
+     * @var boolean
+     */
+    var $convert_payload_encoding = false;
+
     /**
      * The current debug mode (1 = on, 0 = off)
      * @var integer
@@ -1141,6 +1181,21 @@ class XML_RPC_Message extends XML_RPC_Base
     var $payload = '';
 
     /**
+     * Should extra line breaks be removed from the payload?
+     * @since Property available since Release 1.4.6
+     * @var boolean
+     */
+    var $remove_extra_lines = true;
+
+    /**
+     * The XML response from the remote server
+     * @since Property available since Release 1.4.6
+     * @var string
+     */
+    var $response_payload = '';
+
+
+    /**
      * @return void
      */
     function XML_RPC_Message($meth, $pars = 0)
@@ -1168,6 +1223,7 @@ class XML_RPC_Message extends XML_RPC_Base
     function xml_header()
     {
         global $XML_RPC_defencoding;
+
         if (!$this->send_encoding) {
             $this->send_encoding = $XML_RPC_defencoding;
         }
@@ -1184,9 +1240,22 @@ class XML_RPC_Message extends XML_RPC_Base
     }
 
     /**
+     * Fills the XML_RPC_Message::$payload property
+     *
+     * Part of the process makes sure all line endings are in DOS format
+     * (CRLF), which is probably required by specifications.
+     *
+     * If XML_RPC_Message::setConvertPayloadEncoding() was set to true,
+     * the payload gets passed through mb_convert_encoding()
+     * to ensure the payload matches the encoding set in the
+     * XML declaration.  The encoding type can be manually set via
+     * XML_RPC_Message::setSendEncoding().
+     *
      * @return void
      *
      * @uses XML_RPC_Message::xml_header(), XML_RPC_Message::xml_footer()
+     * @see XML_RPC_Message::setSendEncoding(), $GLOBALS['XML_RPC_defencoding'],
+     *      XML_RPC_Message::setConvertPayloadEncoding()
      */
     function createPayload()
     {
@@ -1199,7 +1268,14 @@ class XML_RPC_Message extends XML_RPC_Base
         }
         $this->payload .= "</params>\n";
         $this->payload .= $this->xml_footer();
-        $this->payload = preg_replace("@[\r\n]+@", "\r\n", $this->payload);
+        if ($this->remove_extra_lines) {
+            $this->payload = preg_replace("@[\r\n]+@", "\r\n", $this->payload);
+        } else {
+            $this->payload = preg_replace("@\r\n|\n|\r|\n\r@", "\r\n", $this->payload);
+        }
+        if ($this->convert_payload_encoding) {
+            $this->payload = mb_convert_encoding($this->payload, $this->send_encoding);
+        }
     }
 
     /**
@@ -1263,13 +1339,35 @@ class XML_RPC_Message extends XML_RPC_Base
     }
 
     /**
+     * Sets whether the payload's content gets passed through
+     * mb_convert_encoding()
+     *
+     * Returns PEAR_ERROR object if mb_convert_encoding() isn't available.
+     *
+     * @param int $in  where 1 = on, 0 = off
+     *
+     * @return void
+     *
+     * @see XML_RPC_Message::setSendEncoding()
+     * @since Method available since Release 1.5.1
+     */
+    function setConvertPayloadEncoding($in)
+    {
+        if ($in && !function_exists('mb_convert_encoding')) {
+            return $this->raiseError('mb_convert_encoding() is not available',
+                              XML_RPC_ERROR_PROGRAMMING);
+        }
+        $this->convert_payload_encoding = $in;
+    }
+
+    /**
      * Sets the XML declaration's encoding attribute
      *
      * @param string $type  the encoding type (ISO-8859-1, UTF-8 or US-ASCII)
      *
      * @return void
      *
-     * @see XML_RPC_Message::$send_encoding, XML_RPC_Message::xml_header()
+     * @see XML_RPC_Message::setConvertPayloadEncoding(), XML_RPC_Message::xml_header()
      * @since Method available since Release 1.2.0
      */
     function setSendEncoding($type)
@@ -1295,7 +1393,7 @@ class XML_RPC_Message extends XML_RPC_Base
     {
         global $XML_RPC_defencoding;
 
-        if (preg_match('/<\?xml[^>]*\s*encoding\s*=\s*[\'"]([^"\']*)[\'"]/i',
+        if (preg_match('@<\?xml[^>]*\s*encoding\s*=\s*[\'"]([^"\']*)[\'"]@',
                        $data, $match))
         {
             $match[1] = trim(strtoupper($match[1]));
@@ -1362,7 +1460,7 @@ class XML_RPC_Message extends XML_RPC_Base
         // But only do this if we're using the HTTP protocol.
         if (preg_match('@^HTTP@', $data) &&
             !preg_match('@^HTTP/[0-9\.]+ 200 @', $data) &&
-            !preg_match('@^HTTP/[0-9\.]+ 10[0-9]([A-Za-z ]+)?[\r\n]+HTTP/[0-9\.]+ 200@', $data))
+            !preg_match('@^HTTP/[0-9\.]+ 10[0-9]([A-Z ]+)?[\r\n]+HTTP/[0-9\.]+ 200@', $data))
         {
                 $errstr = substr($data, 0, strpos($data, "\n") - 1);
                 error_log('HTTP error, got response: ' . $errstr);
@@ -1386,6 +1484,7 @@ class XML_RPC_Message extends XML_RPC_Base
          * thanks to Luca Mariano <luca.mariano@email.it>
          */
         $data = substr($data, 0, strpos($data, "</methodResponse>") + 17);
+        $this->response_payload = $data;
 
         if (!xml_parse($parser_resource, $data, sizeof($data))) {
             // thanks to Peter Kocks <peter.kocks@baygate.com>
@@ -1422,7 +1521,6 @@ class XML_RPC_Message extends XML_RPC_Base
                                       $XML_RPC_str['invalid_return']);
         } else {
             $v = $XML_RPC_xh[$parser]['value'];
-            $allOK=1;
             if ($XML_RPC_xh[$parser]['isf']) {
                 $f = $v->structmem('faultCode');
                 $fs = $v->structmem('faultString');
@@ -1432,7 +1530,7 @@ class XML_RPC_Message extends XML_RPC_Base
                 $r = new XML_RPC_Response($v);
             }
         }
-        $r->hdrs = preg_split("@\r?\n@", $XML_RPC_xh[$parser]['ha'][1]);
+        $r->hdrs = preg_split("@\r?\n@", $XML_RPC_xh[$parser]['ha']);
         return $r;
     }
 }
@@ -1446,8 +1544,9 @@ class XML_RPC_Message extends XML_RPC_Base
  * @author     Stig Bakken <stig@php.net>
  * @author     Martin Jansen <mj@php.net>
  * @author     Daniel Convissor <danielc@php.net>
- * @copyright  1999-2001 Edd Dumbill, 2001-2005 The PHP Group
- * @version    Release: 1.4.0
+ * @copyright  1999-2001 Edd Dumbill, 2001-2010 The PHP Group
+ * @license    http://www.php.net/license/3_01.txt  PHP License
+ * @version    Release: 1.5.5
  * @link       http://pear.php.net/package/XML_RPC
  */
 class XML_RPC_Value extends XML_RPC_Base
@@ -1460,21 +1559,20 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function XML_RPC_Value($val = -1, $type = '')
     {
-        global $XML_RPC_Types;
         $this->me = array();
         $this->mytype = 0;
         if ($val != -1 || $type != '') {
             if ($type == '') {
                 $type = 'string';
             }
-            if (!array_key_exists($type, $XML_RPC_Types)) {
+            if (!array_key_exists($type, $GLOBALS['XML_RPC_Types'])) {
                 // XXX
                 // need some way to report this error
-            } elseif ($XML_RPC_Types[$type] == 1) {
+            } elseif ($GLOBALS['XML_RPC_Types'][$type] == 1) {
                 $this->addScalar($val, $type);
-            } elseif ($XML_RPC_Types[$type] == 2) {
+            } elseif ($GLOBALS['XML_RPC_Types'][$type] == 2) {
                 $this->addArray($val);
-            } elseif ($XML_RPC_Types[$type] == 3) {
+            } elseif ($GLOBALS['XML_RPC_Types'][$type] == 3) {
                 $this->addStruct($val);
             }
         }
@@ -1485,21 +1583,19 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function addScalar($val, $type = 'string')
     {
-        global $XML_RPC_Types, $XML_RPC_Boolean;
-
         if ($this->mytype == 1) {
             $this->raiseError('Scalar can have only one value',
                               XML_RPC_ERROR_INVALID_TYPE);
             return 0;
         }
-        $typeof = $XML_RPC_Types[$type];
+        $typeof = $GLOBALS['XML_RPC_Types'][$type];
         if ($typeof != 1) {
             $this->raiseError("Not a scalar type (${typeof})",
                               XML_RPC_ERROR_INVALID_TYPE);
             return 0;
         }
 
-        if ($type == $XML_RPC_Boolean) {
+        if ($type == $GLOBALS['XML_RPC_Boolean']) {
             if (strcasecmp($val, 'true') == 0
                 || $val == 1
                 || ($val == true && strcasecmp($val, 'false')))
@@ -1528,14 +1624,13 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function addArray($vals)
     {
-        global $XML_RPC_Types;
         if ($this->mytype != 0) {
             $this->raiseError(
                     'Already initialized as a [' . $this->kindOf() . ']',
                     XML_RPC_ERROR_ALREADY_INITIALIZED);
             return 0;
         }
-        $this->mytype = $XML_RPC_Types['array'];
+        $this->mytype = $GLOBALS['XML_RPC_Types']['array'];
         $this->me['array'] = $vals;
         return 1;
     }
@@ -1545,14 +1640,13 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function addStruct($vals)
     {
-        global $XML_RPC_Types;
         if ($this->mytype != 0) {
             $this->raiseError(
                     'Already initialized as a [' . $this->kindOf() . ']',
                     XML_RPC_ERROR_ALREADY_INITIALIZED);
             return 0;
         }
-        $this->mytype = $XML_RPC_Types['struct'];
+        $this->mytype = $GLOBALS['XML_RPC_Types']['struct'];
         $this->me['struct'] = $vals;
         return 1;
     }
@@ -1599,19 +1693,18 @@ class XML_RPC_Value extends XML_RPC_Base
     function serializedata($typ, $val)
     {
         $rs = '';
-        global $XML_RPC_Types, $XML_RPC_Base64, $XML_RPC_String, $XML_RPC_Boolean;
-        if (!array_key_exists($typ, $XML_RPC_Types)) {
+        if (!array_key_exists($typ, $GLOBALS['XML_RPC_Types'])) {
             // XXX
             // need some way to report this error
             return;
         }
-        switch ($XML_RPC_Types[$typ]) {
+        switch ($GLOBALS['XML_RPC_Types'][$typ]) {
         case 3:
             // struct
             $rs .= "<struct>\n";
             reset($val);
             foreach ($val as $key2 => $val2) {
-                $rs .= "<member><name>${key2}</name>\n";
+                $rs .= "<member><name>" . htmlspecialchars($key2) . "</name>\n";
                 $rs .= $this->serializeval($val2);
                 $rs .= "</member>\n";
             }
@@ -1621,21 +1714,21 @@ class XML_RPC_Value extends XML_RPC_Base
         case 2:
             // array
             $rs .= "<array>\n<data>\n";
-            for ($i = 0; $i < sizeof($val); $i++) {
-                $rs .= $this->serializeval($val[$i]);
+            foreach ($val as $value) {
+                $rs .= $this->serializeval($value);
             }
             $rs .= "</data>\n</array>";
             break;
 
         case 1:
             switch ($typ) {
-            case $XML_RPC_Base64:
+            case $GLOBALS['XML_RPC_Base64']:
                 $rs .= "<${typ}>" . base64_encode($val) . "</${typ}>";
                 break;
-            case $XML_RPC_Boolean:
+            case $GLOBALS['XML_RPC_Boolean']:
                 $rs .= "<${typ}>" . ($val ? '1' : '0') . "</${typ}>";
                 break;
-            case $XML_RPC_String:
+            case $GLOBALS['XML_RPC_String']:
                 $rs .= "<${typ}>" . htmlspecialchars($val). "</${typ}>";
                 break;
             default:
@@ -1697,7 +1790,6 @@ class XML_RPC_Value extends XML_RPC_Base
     function getval()
     {
         // UNSTABLE
-        global $XML_RPC_BOOLEAN, $XML_RPC_Base64;
 
         reset($this->me);
         $b = current($this->me);
@@ -1729,13 +1821,17 @@ class XML_RPC_Value extends XML_RPC_Base
     }
 
     /**
-     * @return mixed
+     * @return mixed  the current element's scalar value.  If the value is
+     *                 not scalar, FALSE is returned.
      */
     function scalarval()
     {
-        global $XML_RPC_Boolean, $XML_RPC_Base64;
         reset($this->me);
-        return current($this->me);
+        $v = current($this->me);
+        if (!is_scalar($v)) {
+            $v = false;
+        }
+        return $v;
     }
 
     /**
@@ -1743,11 +1839,10 @@ class XML_RPC_Value extends XML_RPC_Base
      */
     function scalartyp()
     {
-        global $XML_RPC_I4, $XML_RPC_Int;
         reset($this->me);
         $a = key($this->me);
-        if ($a == $XML_RPC_I4) {
-            $a = $XML_RPC_Int;
+        if ($a == $GLOBALS['XML_RPC_I4']) {
+            $a = $GLOBALS['XML_RPC_Int'];
         }
         return $a;
     }
@@ -1882,9 +1977,6 @@ function XML_RPC_decode($XML_RPC_val)
  */
 function XML_RPC_encode($php_val)
 {
-    global $XML_RPC_Boolean, $XML_RPC_Int, $XML_RPC_Double, $XML_RPC_String,
-           $XML_RPC_Array, $XML_RPC_Struct;
-
     $type = gettype($php_val);
     $XML_RPC_val = new XML_RPC_Value;
 
@@ -1914,23 +2006,33 @@ function XML_RPC_encode($php_val)
         break;
 
     case 'integer':
-        $XML_RPC_val->addScalar($php_val, $XML_RPC_Int);
+        $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_Int']);
         break;
 
     case 'double':
-        $XML_RPC_val->addScalar($php_val, $XML_RPC_Double);
+        $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_Double']);
         break;
 
     case 'string':
     case 'NULL':
-        $XML_RPC_val->addScalar($php_val, $XML_RPC_String);
+        if (preg_match('@^[0-9]{8}\T{1}[0-9]{2}\:[0-9]{2}\:[0-9]{2}$@', $php_val)) {
+            $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_DateTime']);
+        } elseif ($GLOBALS['XML_RPC_auto_base64']
+                  && preg_match("@[^ -~\t\r\n]@", $php_val))
+        {
+            // Characters other than alpha-numeric, punctuation, SP, TAB,
+            // LF and CR break the XML parser, encode value via Base 64.
+            $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_Base64']);
+        } else {
+            $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_String']);
+        }
         break;
 
     case 'boolean':
         // Add support for encoding/decoding of booleans, since they
         // are supported in PHP
         // by <G_Giunta_2001-02-29>
-        $XML_RPC_val->addScalar($php_val, $XML_RPC_Boolean);
+        $XML_RPC_val->addScalar($php_val, $GLOBALS['XML_RPC_Boolean']);
         break;
 
     case 'unknown type':

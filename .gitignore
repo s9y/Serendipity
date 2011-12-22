@@ -9,3 +9,6 @@ archives/*
 *~
 DEADJOE
 plugins/additional_plugins*
+/.settings
+/.buildpath
+/.project

@@ -3,6 +3,6 @@ RPC.php:
 include_once 'PEAR.php'
 include_once dirname(__FILE__) . '/../../PEAR.php';
 
-RPC/Server.php:
-require_once 'RPC/RPC.php';
+RPC/Server.php, RPC/Dump.php:
+require_once 'XML/RPC.php';
 require_once dirname(__FILE__) . '/../RPC.php';
