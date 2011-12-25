@@ -71,7 +71,7 @@ function memSnap($tshow = '') {
  * Set our own exeption handler to convert all errors into exeptions automatically
  * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
  * 
- * See Notes returning false
+ * See Notes about returning false
  *
  * @access public
  * @param  standard
@@ -93,23 +93,24 @@ if(!function_exists('errorToExceptionHandler')) {
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible
-            if(function_exists('debug_backtrace')) 
+            if(function_exists('debug_backtrace')) {
                 print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)); // whether or not to populate the "object" index >= PHP 5.3.6
+            }
             throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            echo '</pre>'; // if throw new ... endtag is not set, but browsers don't care
+            echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         }
         if($serendipity['production'] !== true) { 
             $e = new Exception;
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
             throw new ErrorException("Serendipity error: " . $errStr); // tracepath = all; 
-            echo '</pre>'; // if throw new ... endtag is not set, , but browsers don't care
+            echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         } else { 
             // ToDo: enhance for more special serendipity error needs
-            $diestr = '<p> == SERENDIPITY ERROR == </p>';
-            $diestr .= '<p>Please correct:</p>';
-            $diestr .=  '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            serendipity_die($diestr); // needs to halt with die() here, else will path through and gets written underneath blog content.
+            $str  = '<p> == SERENDIPITY ERROR == </p>';
+            $str .= '<p>Please correct:</p>';
+            $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+            serendipity_die($str); // needs to halt with die() here, else it will path through and gets written underneath blog content.
         }
     }
 }

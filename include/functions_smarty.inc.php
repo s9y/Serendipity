@@ -393,7 +393,7 @@ function serendipity_smarty_showCommentForm($params, &$smarty) {
     global $serendipity;
 
     if (!isset($params['id']) || !isset($params['entry'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'id' or 'entry' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'id' or 'entry' parameter", E_USER_WARNING);
         return;
     }
 
@@ -455,7 +455,7 @@ function serendipity_smarty_showPlugin($params, &$smarty) {
     global $serendipity;
 
     if (!isset($params['class']) && !isset($params['id'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'class' or 'id' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'class' or 'id' parameter", E_USER_WARNING);
         return;
     }
 
@@ -490,7 +490,7 @@ function serendipity_smarty_showPlugin($params, &$smarty) {
  */
 function serendipity_smarty_getTotalCount($params, &$smarty) {
     if (!isset($params['what'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'what' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'what' parameter", E_USER_WARNING);
         return;
     }
 
@@ -521,12 +521,12 @@ function serendipity_smarty_hookPlugin($params, &$smarty) {
                              'frontend_comment',
                              'frontend_footer');
     if (!isset($params['hook'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'hook' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'hook' parameter", E_USER_WARNING);
         return;
     }
 
     if (!in_array($params['hook'], $hookable) && $params['hookAll'] != 'true') {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": illegal hook '". $params['hook'] ."' (" . $params['hookAll'] . ")", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": illegal hook '". $params['hook'] ."' (" . $params['hookAll'] . ")", E_USER_WARNING);
         return;
     }
 
@@ -571,7 +571,7 @@ function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
     global $serendipity;
 
     if (!isset($hook)) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'hook' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'hook' parameter", E_USER_WARNING);
         return;
     }
 
@@ -602,7 +602,7 @@ function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
  */
 function serendipity_smarty_printSidebar($params, &$smarty) {
     if ( !isset($params['side']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'side' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'side' parameter", E_USER_WARNING);
         return;
     }
 
@@ -624,7 +624,7 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
  */
 function serendipity_smarty_getFile($params, &$smarty) {
     if ( !isset($params['file']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
     }
     return serendipity_getTemplateFile($params['file']);
@@ -644,12 +644,12 @@ function serendipity_smarty_getFile($params, &$smarty) {
  */
 function serendipity_smarty_pickKey($params, &$smarty) {
     if ( !isset($params['array']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'array' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'array' parameter", E_USER_WARNING);
         return;
     }
 
     if ( !isset($params['key']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'key' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'key' parameter", E_USER_WARNING);
         return;
     }
 
@@ -669,11 +669,11 @@ function serendipity_smarty_pickKey($params, &$smarty) {
  */
 function serendipity_smarty_rss_getguid($params, &$smarty) {
     if ( !isset($params['entry']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_WARNING);
         return;
     }
     if ( !isset($params['is_comments']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'is_comments' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'is_comments' parameter", E_USER_WARNING);
         return;
     }
 
@@ -717,7 +717,7 @@ function &serendipity_smarty_printComments($params, &$smarty) {
     global $serendipity;
 
     if (!isset($params['entry'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_WARNING);
         return;
     }
 
@@ -774,7 +774,7 @@ function &serendipity_smarty_printComments($params, &$smarty) {
  */
 function &serendipity_smarty_printTrackbacks($params, &$smarty) {
     if ( !isset($params['entry']) ) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'entry' parameter", E_USER_WARNING);
         return;
     }
 
@@ -814,11 +814,11 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
     global $serendipity;
 
     if (!isset($params['file'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
     } 
     if (!isset($params['assign'])) {
-        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'assign' parameter", E_USER_ERROR);
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'assign' parameter", E_USER_WARNING);
         return;
     }
 
@@ -826,16 +826,16 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
     $file = $params['file'];
     // Most likely the user specified an HTTP path
     if (!file_exists($file)) {
-      $file = $_SERVER['DOCUMENT_ROOT'] . $file;
+        $file = $_SERVER['DOCUMENT_ROOT'] . $file;
     }
     // Maybe wants a template file (returns filesystem path)
     if (!file_exists($file)) {
-      $file = serendipity_getTemplateFile($params['file']);
+        $file = serendipity_getTemplateFile($params['file']);
     }
     // If no file, trigger an error
     if (!file_exists($file)) {
-      trigger_error("Smarty Error: " . __FUNCTION__ .': file ' . $params['file'] . NOT_FOUND . ' ', E_USER_ERROR);
-      return;
+        trigger_error("Smarty Error: " . __FUNCTION__ .': file ' . $params['file'] . NOT_FOUND . ' ', E_USER_WARNING);
+        return;
     }
     $smarty->assign($params['assign'], serendipity_getimagesize($file));
 }
