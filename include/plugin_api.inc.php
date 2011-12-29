@@ -1565,7 +1565,7 @@ class serendipity_plugin
      * or the default template directory, and return the parsed output.
      *
      * @access public
-     * @param  string    template filename (no directory!)
+     * @param  string   template filename (no directory!)
      * @return string   Parsed Smarty return
      */
     function &parseTemplate($filename) {
@@ -1576,7 +1576,7 @@ class serendipity_plugin
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
-        $content = $serendipity['smarty']->display('file:'. $tfile);
+        $content = $serendipity['smarty']->fetch('file:'. $tfile);
         
         return $content;    
     }
