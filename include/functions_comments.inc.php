@@ -629,7 +629,7 @@ function serendipity_allowCommentsToggle($entry_id, $switch = 'disable') {
  * @param  int         The ID of the entry a comment belongs to
  * @param  boolean     Whether to force approving a comment despite of its current status
  * @param  boolean     If set to true, a comment will be moderated instead of approved.
-+ * @param  string     The 32 character token [if using token based moderation]
+ * @param  string     The 32 character token [if using token based moderation]
  * @return boolean     Success or failure
  */
 function serendipity_approveComment($cid, $entry_id, $force = false, $moderate = false, $token = false) {
