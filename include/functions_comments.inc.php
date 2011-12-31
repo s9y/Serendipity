@@ -539,19 +539,17 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
 
     if ($_SESSION['serendipityAuthedUser'] === true || $goodtoken) {
         
-        // Check for adminEntriesMaintainOthers
-        if (!serendipity_checkPermission('adminEntriesMaintainOthers')) {
+        $admin = '';
+        if (!$goodtoken && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
+            $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
+
             // Load articles author id and check it
             $sql = serendipity_db_query("SELECT authorid FROM {$serendipity['dbPrefix']}entries
                                                 WHERE entry_id = ". $entry_id, true);
             if ($sql['authorid'] != $serendipity['authorid']) { 
                 return false; // wrong user having no adminEntriesMaintainOthers right
             }
-        }
-        
-        $admin = '';
-        if (!$goodtoken && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
-            $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
+
         }
 
         /* We have to figure out if the comment we are about to delete, is awaiting approval,
