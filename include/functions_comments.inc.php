@@ -639,7 +639,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
 
     /* Get data about the comment, we need this query because this function can be called from anywhere */
     /* This also makes sure we are either the author of the comment, or a USERLEVEL_ADMIN */
-    $sql = "SELECT c.*, e.title, a.email as authoremail, a.mail_comments, e.timestamp AS entry_timestamp, e.last_modified AS entry_last_modified
+    $sql = "SELECT c.*, e.title, a.email as authoremail, a.mail_comments, e.timestamp AS entry_timestamp, e.last_modified AS entry_last_modified, e.authorid AS entry_authorid
                 FROM {$serendipity['dbPrefix']}comments c
                 LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                 LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
@@ -647,6 +647,11 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                     ". ((!serendipity_checkPermission('adminEntriesMaintainOthers') && $force !== true && !$goodtoken) ? "AND e.authorid = '". (int)$serendipity['authorid'] ."'" : '') ."
                     ". (($force === true) ? "" : "AND status = 'pending'");
     $rs  = serendipity_db_query($sql, true);
+    
+    // Check for adminEntriesMaintainOthers
+    if (!$force && $rs['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
+        return false; // wrong user having no adminEntriesMaintainOthers right
+    }
 
 	$flip = false;
 	if ($moderate === 'flip') {
