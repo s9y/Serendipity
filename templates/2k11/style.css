@@ -230,7 +230,7 @@ audio, video,
 #trackback_url,
 .manage_comments,
 .plugin_comment_wrap,
-p.whiteline, #search div,
+p.whiteline, #searchform div,
 .serendipity_entry .plainList,
 #page, #primary-nav,
 .serendipity_calendar,
@@ -329,9 +329,9 @@ fieldset,
     margin-bottom: 2.1429em;
 }
 
-#search div { padding: 0 1em; }
+#searchform div { padding: 0 1em; }
 
-#searchterm,
+#serendipityQuickSearchTermField,
 #serendipity_comment input[type=text],
 #serendipity_comment input[type=email],
 #serendipity_comment input[type=url] { width: 97%; }
@@ -702,6 +702,15 @@ pre .geshi {
 
 .serendipity_freetag_taglist_related { font-size: 1.25em; }
 
+#twitter_update_list { list-style: none; }
+
+#twitter_update_list li { margin: 0 0 1em; }
+
+.twitter_update_time {
+    display: block;
+    text-align: right;
+}
+
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 
@@ -715,7 +724,7 @@ pre .geshi {
 
 /* Media queries  */
 @media only screen and (min-width: 481px) {
-    #searchterm { max-width: 15em; }
+    #serendipityQuickSearchTermField { max-width: 15em; }
     
     #serendipity_comment input[type=text],
     #serendipity_comment input[type=email],
@@ -798,15 +807,15 @@ pre .geshi {
     
     #identity h1 { margin: 1em 0 0; }
     
-    #search div { margin-top: 4.4em; }
+    #searchform div { margin-top: 4.4em; }
 
-    #identity p, #search div { margin-bottom: 1.5em; }
+    #identity p, #searchform div { margin-bottom: 1.5em; }
     
     #primary-nav { margin-bottom: 2em; }
     
     #banner>img { display: block; }
     
-    #identity, #search,
+    #identity, #searchform,
     #content,
     #sidebar_left,
     #sidebar_right {
@@ -816,7 +825,7 @@ pre .geshi {
 
     #identity,
     #content { width: 62%; }
-    #search,
+    #searchform,
     #sidebar_left,
     #sidebar_right { width: 38%; }
     .col2l #sidebar_left { left: -62%; }
@@ -824,13 +833,13 @@ pre .geshi {
 
     .ie7 #identity,
     .ie7 #content { width: 61.9%; }
-    .ie7 #search,
+    .ie7 #searchform,
     .ie7 #sidebar_left,
     .ie7 #sidebar_right { width: 37.9%; }
     .ie7 .col2l #sidebar_left { left: -61.9%; }
     .ie7 .col2l #content { left: 37.9%; }
     
-    .col2l #search { text-align: right; }
+    .col2l #searchform { text-align: right; }
     
     #sidebar_left,
     #sidebar_right { padding: 0; }
@@ -852,8 +861,8 @@ pre .geshi {
     #sidebar_right .sidebar_plugin,
     .ie7 #sidebar_right .sidebar_plugin { margin: 0 1em 2em 2em; }
     
-    #search div,
-    .ie7 #search div { padding: 0 1em 0 2em; }
+    #searchform div,
+    .ie7 #searchform div { padding: 0 1em 0 2em; }
     
     .commentlevel-1 { margin-left: 1em; }
     .commentlevel-2 { margin-left: 2em; }
@@ -870,12 +879,12 @@ pre .geshi {
     #identity h1 { padding: 0 1em; }
     
     #identity p,
-    #search div { padding: 0 2em; }
+    #searchform div { padding: 0 2em; }
     
     #primary-nav ul { margin: 0 1em; }
 
     .col3 #content { width: 50%; }
-    .col3 #search,
+    .col3 #searchform,
     .col3 #sidebar_left,
     .col3 #sidebar_right { width: 25%; }
     .col3 #identity { width: 75%; }
@@ -883,7 +892,7 @@ pre .geshi {
     .col3 #sidebar_left { left: -50%; }
 
     .ie7 .col3 #content { width: 49.9%; }
-    .ie7 .col3 #search,
+    .ie7 .col3 #searchform,
     .ie7 .col3 #sidebar_left,
     .ie7 .col3 #sidebar_right { width: 24.9%; }
     .ie7 .col3 #identity { width: 74.9%; }
@@ -925,7 +934,7 @@ pre .geshi {
     p, h2, h3 { orphans: 3; widows: 3; }
     h2, h3 { page-break-after: avoid; }
     
-    #search, #primary-nav,
+    #searchform, #primary-nav,
     #sidebar_left, #sidebar_right,
     #colophon, audio, video,
     .serendipity_entry>footer,

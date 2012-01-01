@@ -45,11 +45,11 @@
             <p>{$blogDescription}</p>
         </div>
         
-        <form id="search" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get" role="search">
+        <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get" role="search">
         <div>
             <input type="hidden" name="serendipity[action]" value="search"/>
-            <label for="searchterm" class="visuallyhidden">{$CONST.QUICKSEARCH}</label>
-            <input id="searchterm" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.TWOK11_PLACE_SEARCH}" value=""/>
+            <label for="serendipityQuickSearchTermField" class="visuallyhidden">{$CONST.QUICKSEARCH}</label>
+            <input id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.TWOK11_PLACE_SEARCH}" value=""/>
             <input id="searchsend" name="serendipity[searchButton]" type="submit" value="{$CONST.GO}"/>
         </div>
         </form>

@@ -16,3 +16,7 @@
 @define('TWOK11_PLACE_URL', 'z.B. http://example.org');
 @define('TWOK11_PLACE_MESSAGE', 'Was gibt es zu sagen?');
 @define('TWOK11_SEND_MAIL', 'Senden');
+@define('TWOK11_TWEET_THIS', 'Artikel via Twitter teilen');
+@define('TWOK11_DENT_THIS', 'Artikel via Identica teilen');
+@define('TWOK11_SHORT_URL', 'Kurz-URL');
+@define('TWOK11_SHORT_URL_HINT', 'Dieser Link ist nicht aktiv. Er enthält die Kurz-URL zu diesem Eintrag. Sie können diese URL benutzen, um diesen Eintrag zu verlinken. Um den Link zu kopieren, klicken Sie ihn mit der rechten Maustaste an und wählen "Verknüpfung kopieren" im Internet Explorer oder "Linkadresse kopieren" in Mozilla/Firefox.');

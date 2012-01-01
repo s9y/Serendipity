@@ -16,13 +16,15 @@ $template_config = array(
        'type' => 'select',
        'default' => DATE_FORMAT_ENTRY,
        'select_values' => array(DATE_FORMAT_ENTRY => DATE_FORMAT_ENTRY,
+                                '%A, %e. %B %Y' => '%A, %e. %B %Y',
                                 '%a, %e. %B %Y' => '%a, %e. %B %Y',
-                                '%d-%m-%y' => '%d-%m-%y',
-                                '%m-%d-%y' => '%m-%d-%y',
-                                '%a %d-%m-%y' => '%a %d-%m-%y',
-                                '%a %m-%d-%y' => '%a %m-%d-%y',
-                                '%b %d' => '%b %d',
-                                "%b %d '%y" => "%b %d '%y")
+                                '%d.%m.%y' => '%d.%m.%y',
+                                '%d.%m.%Y' => '%d.%m.%Y',
+                                '%A, %m/%d/%Y' => '%A, %m/%d/%Y',
+                                '%a, %m/%d/%y' => '%a, %m/%d/%y',
+                                '%m/%d/%y' => '%m/%d/%y',
+                                '%m/%d/%Y' => '%m/%d/%Y',
+                                '%Y-%m-%d' => '%Y-%m-%d')
    ),
    array(
        'var' => 'header_img',
