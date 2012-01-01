@@ -13,10 +13,10 @@ jQuery(document).ready(function($) {
         header: '#banner',
         footer: '#colophon'
     });
-    // Disable trackback url link
-    $('#trackback_url>a').click(function() {
-        var trackbackMsg = $(this).attr('title');
-        alert(trackbackMsg);
+    // Disable trackback + short url links
+    $('#trackback_url>a,.short-url').click(function() {
+        var linkMsg = $(this).attr('title');
+        alert(linkMsg);
         return false;
     });
     // Comment reply

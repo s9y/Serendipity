@@ -5,7 +5,7 @@
         <header>
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
             
-            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_smarty_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time></span>
+            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_smarty_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
         </header>
 
         <div class="clearfix content serendipity_entry_body">
@@ -29,8 +29,14 @@
         {if $entry.has_comments}
             <a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a>
         {/if}
-        {if $entry.is_entry_owner and not $is_preview}
-            | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>
+        {if $entry.url_tweetthis}
+            | <a href="{$entry.url_tweetthis}" title="{$CONST.TWOK11_TWEET_THIS}">Twitter</a>
+        {/if}
+        {if $entry.url_dentthis}
+            | <a href="{$entry.url_dentthis}" title="{$CONST.TWOK11_DENT_THIS}">Identica</a>
+        {/if}
+        {if $entry.url_shorturl}
+            | <a href="{$entry.url_shorturl}" title="{$CONST.TWOK11_SHORT_URL_HINT}" class="short-url">{$CONST.TWOK11_SHORT_URL}</a>
         {/if}
             {$entry.add_footer}
             {$entry.plugin_display_dat}
