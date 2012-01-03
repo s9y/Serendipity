@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2011-12-25 15:19 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2012-01-03 14:11 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -18,7 +18,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     public $php_handling = Smarty::PHP_REMOVE; // = 2
     
     // set allowed modifiers only. (default = array( 'escape', 'count' );)
-    public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat');
+    public $php_modifiers = array('escape', 'sprintf', 'sizeof', 'count', 'rand', 'print_r', 'str_repeat', 'nl2br');
     
     public $allow_constants = true;
     
