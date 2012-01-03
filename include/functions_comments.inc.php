@@ -281,7 +281,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
               WHERE co.type LIKE '" . $type . "' AND co.entry_id > 0 $and
               $group
               ORDER BY
-                    " . ($where != '' ? '' : 'co.id') . " " . ($order != '' ? $order : '') . "
+                    " . (empty($order) ? 'co.id' : $order) . "
                     $limit";
     $comments = serendipity_db_query($query, false, 'assoc');
 
