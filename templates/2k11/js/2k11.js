@@ -9,55 +9,23 @@ jQuery(document).ready(function($) {
     // placeholder polyfill
     $('input, textarea').placeholder();
     // Assign WAI-ARIA roles
-    AccessifyHTML5({
-        header: '#banner',
-        footer: '#colophon'
-    });
+    AccessifyHTML5({header:'#banner',footer:'#colophon'});
+    // Cloned primary navigation for small screen
+    var $select = $('<select/>');
+    $('#primary-nav li').each(function(){var $el=$(this);if($el.find('span').length){$('<option/>',{'selected':'selected','value':'','text':$el.text()}).appendTo($select);}else{$('<option/>',{'value':$el.find('a').attr('href'),'text':$el.text()}).appendTo($select);}});
+    if($select.children().size()>0){$select.appendTo('#primary-nav').change(function(){window.location=$(this).find('option:selected').val();});}
+    // Replace entrypaging icons
+    $('.serendipity_entrypaging_left .epicon').text('←');
+    $('.serendipity_entrypaging_right .epicon').text('→');
     // Disable trackback + short url links
-    $('#trackback_url>a,.short-url').click(function() {
-        var linkMsg = $(this).attr('title');
-        alert(linkMsg);
-        return false;
-    });
+    $('#trackback_url>a,.short-url').click(function(){var linkMsg=$(this).attr('title');alert(linkMsg);return false;});
     // Comment reply
-    $('.comment_reply').click(function() {
-        var commentId = $(this).attr('id').replace(/serendipity_reply_/g,"");
-        $('#serendipity_replyTo').val(commentId);
-    });
+    $('.comment_reply').click(function(){var commentId=$(this).attr('id').replace(/serendipity_reply_/g,"");$('#serendipity_replyTo').val(commentId);});
     // Confirm comment deletion
-    $('.comment_source_ownerlink').click(function() {
-        var deleteMsg = $(this).attr('title');
-        return confirm(deleteMsg);
-    });
+    $('.comment_source_ownerlink').click(function(){var deleteMsg=$(this).attr('title');return confirm(deleteMsg);});
     // Move preview comment in the DOM to fix comment preview
     $('#c').insertAfter('#feedback');
     // Hide reply-to form element
-    $('.comment_reply').click(function() {
-        $('#reply-to-comment').remove();
-        var replyToPlaceholder = '<p id="reply-to-comment">' + $('#reply-to-hint').text() + ' ' + $('#serendipity_replyTo :selected').text() + '</p>';
-        $('#serendipity_replyTo').after(replyToPlaceholder);
-    });
-    $('#reply-to-hint, #serendipity_replyTo').addClass('visuallyhidden');
-    // Cloned primary navigation for small screen
-    var $select = $('<select/>');
-    $('#primary-nav li').each(function() {
-        var $el = $(this);
-        if ($el.find('span').length) {
-            $('<option/>', {
-                'selected': 'selected',
-                'value'   : '',
-                'text'    : $el.text()
-            }).appendTo($select);
-        } else {
-            $('<option/>', {
-                'value'   : $el.find('a').attr('href'),
-                'text'    : $el.text()
-            }).appendTo($select);
-        }
-    });
-    if($select.children().size() > 0) {
-    $select.appendTo('#primary-nav').change(function() {
-        window.location = $(this).find('option:selected').val();
-    });
-    }
+    $('.comment_reply').click(function(){$('#reply-to-comment').remove();var replyToPlaceholder='<p id="reply-to-comment">'+$('#reply-to-hint').text()+' '+$('#serendipity_replyTo :selected').text()+'</p>';$('#serendipity_replyTo').after(replyToPlaceholder);});
+    $('#reply-to-hint,#serendipity_replyTo').addClass('visuallyhidden');
 });

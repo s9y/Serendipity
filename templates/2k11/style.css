@@ -118,9 +118,11 @@ button { padding: 4px; }
 
 img,
 audio, video,
-embed, object { max-width: 100%; }
+embed, object,
+.content iframe { max-width: 100%; }
 
-img, video { height: auto; }
+img, video,
+.content iframe { height: auto; }
 
 q { quotes: '“' '”' '‘' '’'; }
 :lang(de) q { quotes: '„' '“' '‚' '‘'; }
@@ -401,9 +403,9 @@ fieldset,
 
 .serendipity_entry,
 .serendipity_staticpage,
-.sidebar_plugin,
-.archives,
-.freetag_cloud { margin: 0 1em 2em; }
+.sidebar_plugin, .archives,
+.freetag_cloud,
+.serendipity_entrypaging { margin: 0 1em 2em; }
 
 .serendipity_search,
 .staticpage_results,
@@ -711,6 +713,14 @@ pre .geshi {
     text-align: right;
 }
 
+.serendipity_entrypaging>.epicon { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+.serendipity_entrypaging_left,
+.serendipity_entrypaging_right { display: block; }
+
+.serendipity_entrypaging_left { text-align: left; }
+.serendipity_entrypaging_right { text-align: right; }
+
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 
@@ -787,6 +797,20 @@ pre .geshi {
     .arch_even { margin: 0 0 0 2%; }
     
     .archives_date { min-width: 7em; }
+
+    .serendipity_entrypaging_left,
+    .serendipity_entrypaging_right {
+        display: inline;
+        width: 50%;
+    }
+
+    .ie7 .serendipity_entrypaging_left,
+    .ie7 .serendipity_entrypaging_right { width: 49.9%; }
+
+    .serendipity_entrypaging { overflow: hidden; }
+
+    .serendipity_entrypaging_left { float: left; }
+    .serendipity_entrypaging_right { float: right; }
 }
 
 @media only screen and (min-width: 768px) {
@@ -904,7 +928,8 @@ pre .geshi {
     
     .serendipity_search,
     .staticpage_results,
-    .nocontent { margin: 0 2em 1em; }
+    .nocontent,
+    .serendipity_entrypaging { margin: 0 2em 1em; }
     
     .serendipity_entry { margin: 0 2em 3em; }
     
@@ -938,6 +963,7 @@ pre .geshi {
     #sidebar_left, #sidebar_right,
     #colophon, audio, video,
     .serendipity_entry>footer,
+    .serendipity_entrypaging,
     .serendipity_pagination,
     #trackback_url, .manage_comments,
     .serendipity_comment>details,
