@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.9 2011-04-17 14:16:50 VladaAjgl $
+<?php # lang_cs.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
 
 /**
- *  @version 1.9
+ *  @version 1.10
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -21,6 +21,8 @@
  *  @revisionDate 2010/12/25
  *  @author VladimÌr Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2011/04/17
+ *  @author VladimÌr Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2012/01/08
  */
 $i18n_filename_from = array (
 '·','Ë','Ô','È','Ï','Ì','Â','æ','Ú','Û','‡','¯','ú','ö','ù','˙','˘','˝','ü','û',
@@ -994,4 +996,5 @@ $i18n_filename_to = array (
 @define('WEBLOG', 'Weblog');
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'OdebÌr·no');
 @define('PENDING_COMMENT_SUBSCRIPTION', '»ek· na potvrzenÌ');
-@define('NO_COMMENT_SUBSCRIPTION', 'NeodebÌr·no');@define('SUMMARY', 'Summary');
+@define('NO_COMMENT_SUBSCRIPTION', 'NeodebÌr·no');
+@define('SUMMARY', 'Souhrn');
