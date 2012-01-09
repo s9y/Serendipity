@@ -9,7 +9,10 @@ Version 1.6.1 ()
     
     * Fixed a possible problem where template-specific variables would
       note be cleared in favor of the new global ones.
-      
+
+    * Fixed serendipity_fetchComments producing wrong SQL code. Please
+      check your code if you did workarounds already and remove them.
+
 Version 1.6 (October 27th 2011)
 ------------------------------------------------------------------------
 
@@ -625,21 +628,21 @@ Version 1.3.1 ()
 ------------------------------------------------------------------------
 
     * Add XSS security checks for installer, even though very
-      hypothetical application :) (Hanno Böck)
+      hypothetical application :) (Hanno Bï¿½ck)
 
     * Add {serendipity_getImageSize} smarty function (judebert)
     
     * Add escaping to "Top Referrers" plugin and honor local configuration
-      of "Show links" option, thanks to Hanno Böck
+      of "Show links" option, thanks to Hanno Bï¿½ck
     
     * Fix some PostgreSQL implicit casts for SQL queries (changed
-      LIKE to =). (Devrim Gündüz)
+      LIKE to =). (Devrim Gï¿½ndï¿½z)
 
 Version 1.3 (March 18th, 2008)
 ------------------------------------------------------------------------
 
     * Fix possible XSS injection for published trackbacks, thanks to 
-      Peter Hüwe!
+      Peter Hï¿½we!
 
     * Added "Google Reader" option to syndication plugin, by Adam
       Charnock
@@ -1221,7 +1224,7 @@ Version 1.1-beta1 (August 14th, 2006)
     * Added arabic (sa) language by Way
 
     * Add patch to allow entryproperties plugin to define passwords for
-      specific entries (Falk Döring)
+      specific entries (Falk Dï¿½ring)
 
     * Made smarty function "serendipity_printComments" accept to new
       parameters: "order" (ASC/DESC) and "limit" (garvinhicking)
@@ -1234,7 +1237,7 @@ Version 1.1-beta1 (August 14th, 2006)
       (thanks to deminy!)
 
     * Replaced core smarty assign() calls to assign_by_ref() where
-      appropriate. (Falk Döring, garvinhicking)
+      appropriate. (Falk Dï¿½ring, garvinhicking)
       TODO: This might introduce oddities! Check thoroughly.
 
     * Fixed not showing entries in the quicksearch that have the
@@ -1304,7 +1307,7 @@ Version 1.1-alpha5()
 
    * Added "plugin_api_extension" class, which contains some helper
      methods for future use, like re-ordering DB items or checking
-     valid emails. (Falk Döring)
+     valid emails. (Falk Dï¿½ring)
 
    * Fix multiple occurences of the string "--" in the entry title to
      not mess up HTML display because of weird Firefox interpretation
@@ -1630,7 +1633,7 @@ Version 1.0-beta2 (March 13th, 2006)
 
    * Updated french translation by Sebastian Mordziol
 
-   * Updated icelandic translation by Örn Arnarson
+   * Updated icelandic translation by ï¿½rn Arnarson
 
    * Updated chinese plugin translation, by Demin Yin
 
@@ -1822,7 +1825,7 @@ Version 0.9.1 (November 23rd, 2005)
     * Fix showing preview image of hotlinked images. Thanks to Thomas
       and RobA from the forums! (garvinhicking)
 
-    * Make Onyx RSS parser interpret HTTP redirecty. (Kristian Köhntopp)
+    * Make Onyx RSS parser interpret HTTP redirecty. (Kristian Kï¿½hntopp)
 
     * Added blogger.com importer by Jawish Hameed
 
@@ -2096,7 +2099,7 @@ Version 0.9-beta1 (September 29th, 2005)
     * Localized the string "Reply" which occured inside some templates.
       (s/Reply/{$CONST.REPLY}/) (garvinhicking)
 
-    * Added swedish translation by Torbjörn Hedberg, Added european
+    * Added swedish translation by Torbjï¿½rn Hedberg, Added european
       portugues translation by Joao Palhoto Matos, Added hungarian
       translation by Posz Marton
 
@@ -2358,7 +2361,7 @@ Version 0.8.1 (May 17th, 2005)
 Version 0.8 (April, 15th 2005)
 ------------------------------------------------------------------------
 
-    * Added icelandic translation by Örn Arnarson
+    * Added icelandic translation by ï¿½rn Arnarson
 
     * Fixed a possible SQL injection issue in Tracking methods. Also
       fixed possible XSS exploit in BBCode markup, if enabled for
