@@ -60,6 +60,7 @@ Version 1.6.1 ()
 
     * Fixed a possible problem where template-specific variables would
       not be cleared in favor of the new global ones.
+
     * Fixed serendipity_fetchComments producing wrong SQL code. Please
       check your code if you did workarounds already and remove them.
       
