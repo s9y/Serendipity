@@ -876,7 +876,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     // Send mail to the author if he chose to receive these mails, or if the comment is awaiting moderation
     if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
         || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
-        || ($type == 'TRACKBACK' && serendipity_db_bool($row['mail_trackbacks'])))) {
+        || (($type == 'TRACKBACK' || $type == 'PINGBACK') && serendipity_db_bool($row['mail_trackbacks'])))) {
         serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
     }
 
@@ -1133,7 +1133,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     }
 
     $entryURI   = serendipity_archiveURL($id, $title, 'baseURL');
-    $path       = ($type == 'TRACKBACK') ? 'trackback' : 'comment';
+    $path       = ($type == 'TRACKBACK' || $type == 'PINGBACK') ? 'trackback' : 'comment';
 
     // Check for using Tokens
     if ($serendipity['useCommentTokens']) {
@@ -1167,7 +1167,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
         $action_more .= "\n" . str_repeat(' ', 3) . $action;
     } 
 
-    if ($type == 'TRACKBACK') {
+    if ($type == 'TRACKBACK' || $type == 'PINGBACK') {
 
         /******************* TRACKBACKS *******************/
         $subject =  ($moderate_comment ? '[' . REQUIRES_REVIEW . '] ' : '') . NEW_TRACKBACK_TO . ' ' . $title;
