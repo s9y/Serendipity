@@ -90,9 +90,9 @@ input[type=url],
 textarea {
     border: 1px solid #aaa;
     color: #666;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    -moz-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 input[type=text]:focus,
@@ -119,10 +119,9 @@ button { padding: 4px; }
 img,
 audio, video,
 embed, object,
-.content iframe { max-width: 100%; }
+.content>iframe { max-width: 100%; }
 
-img, video,
-.content iframe { height: auto; }
+img, video { height: auto; }
 
 q { quotes: '“' '”' '‘' '’'; }
 :lang(de) q { quotes: '„' '“' '‚' '‘'; }
@@ -229,6 +228,7 @@ h4, h5, h6,
 p, ul, ol, dl,
 table, details,
 audio, video,
+.fluid-width-video-wrapper,
 #trackback_url,
 .manage_comments,
 .plugin_comment_wrap,
@@ -404,7 +404,7 @@ fieldset,
 .serendipity_entry,
 .serendipity_staticpage,
 .sidebar_plugin, .archives,
-.freetag_cloud,
+.freetag_cloud, .content_msg,
 .serendipity_entrypaging { margin: 0 1em 2em; }
 
 .serendipity_search,
@@ -490,7 +490,10 @@ pre .geshi {
 
 .serendipity_byline { margin: 0 0 1.2308em; }
 
-.serendipity_pagination { margin: 0 1.2308em 1.2308em; }
+.serendipity_pagination {
+    clear: both;
+    margin: 0 1.2308em 1.2308em;
+}
 
 .serendipity_pagination li {
     float: left;
@@ -530,6 +533,9 @@ pre .geshi {
 .serendipity_commentDirection {
     background: #eee;
     border: 1px solid #aaa;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #c { padding: .625em; }
@@ -558,6 +564,7 @@ pre .geshi {
 
 .comment_avatar {
     border: 1px solid #aaa;
+    float: left;
     margin: 0 .625em .625em 0;
     padding: 0!important;
     overflow: hidden;
@@ -581,23 +588,20 @@ pre .geshi {
 
 .serendipity_msg_important,
 .serendipity_msg_notice {
+    color: #fff;
     font-size: .8125em;
     line-height: 1.8462;
     max-width: 35em;
     padding: .3846em;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
-.serendipity_msg_important {
-    background: #fee;
-    border: 1px solid #900;
-    color: #900;
-}
+.serendipity_msg_important { background: #800; }
 
-.serendipity_msg_notice {
-    background: #efe;
-    border: 1px solid #090;
-    color: #090;
-}
+.serendipity_msg_notice { background: #080; }
 
 .serendipity_image_left,
 .serendipity_image_right,
@@ -934,6 +938,7 @@ pre .geshi {
     .serendipity_entry { margin: 0 2em 3em; }
     
     .archives, .freetag_cloud,
+    .content_msg,
     .serendipity_staticpage,
     #sidebar_left .sidebar_plugin,
     .ie7 #sidebar_left .sidebar_plugin,

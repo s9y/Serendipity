@@ -3,6 +3,7 @@
     <h4>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|@default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if} {$CONST.ON} <time datetime="{$comment.timestamp|@serendipity_smarty_html5time}" pubdate>{$comment.timestamp|@formatTime:$template_option.date_format}</time>:</h4>
     
     <div class="serendipity_commentBody clearfix content">
+    {if $comment.avatar}{$comment.avatar}{/if}
     {if $comment.body == 'COMMENT_DELETED'}
         {$CONST.COMMENT_IS_DELETED}
     {else}

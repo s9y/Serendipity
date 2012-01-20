@@ -1,3 +1,7 @@
+//https://github.com/scottjehl/iOS-Orientationchange-Fix
+(function(j){var i=j.document;if(!i.querySelector){return}var l=i.querySelector("meta[name=viewport]"),a=l&&l.getAttribute("content"),h=a+", maximum-scale=1",d=a+", maximum-scale=10",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+// https://github.com/davatron5000/FitVids.js
+(function(a){a.fn.fitVids=function(b){var c={customSelector:null};var e=document.createElement("div"),d=document.getElementsByTagName("base")[0]||document.getElementsByTagName("script")[0];e.className="fit-vids-style";e.innerHTML="&shy;<style>               .fluid-width-video-wrapper {                 width: 100%;                              position: relative;                       padding: 0;                            }                                                                                   .fluid-width-video-wrapper iframe,        .fluid-width-video-wrapper object,        .fluid-width-video-wrapper embed {           position: absolute;                       top: 0;                                   left: 0;                                  width: 100%;                              height: 100%;                          }                                       </style>";d.parentNode.insertBefore(e,d);if(b){a.extend(c,b)}return this.each(function(){var f=["iframe[src^='http://player.vimeo.com']","iframe[src^='http://www.youtube.com']","iframe[src^='http://www.kickstarter.com']","object","embed"];if(c.customSelector){f.push(c.customSelector)}var g=a(this).find(f.join(","));g.each(function(){var j=a(this);if(this.tagName.toLowerCase()=="embed"&&j.parent("object").length||j.parent(".fluid-width-video-wrapper").length){return}var h=this.tagName.toLowerCase()=="object"?j.attr("height"):j.height(),i=h/j.width();j.wrap('<div class="fluid-width-video-wrapper"></div>').parent(".fluid-width-video-wrapper").css("padding-top",(i*100)+"%");j.removeAttr("height").removeAttr("width")})})}})(jQuery);
 // http://mths.be/placeholder v1.8.5 by @mathias
 jQuery(function(g,a,$){var f='placeholder' in a.createElement('input'),b='placeholder' in a.createElement('textarea');if(f&&b){$.fn.placeholder=function(){return this};$.fn.placeholder.input=$.fn.placeholder.textarea=true}else{$.fn.placeholder=function(){return this.filter((f?'textarea':':input')+'[placeholder]').bind('focus.placeholder',c).bind('blur.placeholder',e).trigger('blur.placeholder').end()};$.fn.placeholder.input=f;$.fn.placeholder.textarea=b;$(function(){$('form').bind('submit.placeholder',function(){var h=$('.placeholder',this).each(c);setTimeout(function(){h.each(e)},10)})});$(g).bind('unload.placeholder',function(){$('.placeholder').val('')})}function d(i){var h={},j=/^jQuery\d+$/;$.each(i.attributes,function(l,k){if(k.specified&&!j.test(k.name)){h[k.name]=k.value}});return h}function c(){var h=$(this);if(h.val()===h.attr('placeholder')&&h.hasClass('placeholder')){if(h.data('placeholder-password')){h.hide().next().show().focus().attr('id',h.removeAttr('id').data('placeholder-id'))}else{h.val('').removeClass('placeholder')}}}function e(){var l,k=$(this),h=k,j=this.id;if(k.val()===''){if(k.is(':password')){if(!k.data('placeholder-textinput')){try{l=k.clone().attr({type:'text'})}catch(i){l=$('<input>').attr($.extend(d(this),{type:'text'}))}l.removeAttr('name').data('placeholder-password',true).data('placeholder-id',j).bind('focus.placeholder',c);k.data('placeholder-textinput',l).data('placeholder-id',j).before(l)}k=k.removeAttr('id').hide().prev().attr('id',j).show()}k.addClass('placeholder').val(k.attr('placeholder'))}else{k.removeClass('placeholder')}}}(this,document,jQuery));
 // https://github.com/manuelbieh/Details-Polyfill
@@ -6,8 +10,6 @@ jQuery(function(a){(function(){var b=this;this.hideDetailChildren=function(c){va
 var AccessifyHTML5=function(b){var a={article:{role:"article"},aside:{role:"complementary"},nav:{role:"navigation"},output:{"aria-live":"polite"},section:{role:"region"},"[required]":{"aria-required":"true"}};if(b){if(b.header){a[b.header]={role:"banner"}}if(b.footer){a[b.footer]={role:"contentinfo"}}}jQuery.each(a,function(c,d){jQuery(c).attr(d)})};
 // 2k11
 jQuery(document).ready(function($) {
-    // placeholder polyfill
-    $('input, textarea').placeholder();
     // Assign WAI-ARIA roles
     AccessifyHTML5({header:'#banner',footer:'#colophon'});
     // Cloned primary navigation for small screen
@@ -17,8 +19,14 @@ jQuery(document).ready(function($) {
     // Replace entrypaging icons
     $('.serendipity_entrypaging_left .epicon').text('←');
     $('.serendipity_entrypaging_right .epicon').text('→');
+    // Fit embedded videos
+    $('#content>article').fitVids();
+    // placeholder polyfill
+    $('input, textarea').placeholder();
     // Disable trackback + short url links
     $('#trackback_url>a,.short-url').click(function(){var linkMsg=$(this).attr('title');alert(linkMsg);return false;});
+    // Fix non-smarty gravatar w/ float right
+    $(".comment_avatar").each(function(){test=$(this).css("float");if(test=="right"){$(this).css("margin","0 0 .625em .625em")}});
     // Comment reply
     $('.comment_reply').click(function(){var commentId=$(this).attr('id').replace(/serendipity_reply_/g,"");$('#serendipity_replyTo').val(commentId);});
     // Confirm comment deletion

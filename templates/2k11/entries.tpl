@@ -1,8 +1,8 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
-    <article id="post_{$entry.id}" class="serendipity_entry{if $dategroup.is_sticky} sticky{/if}">
-        <header>
+    <article id="post_{$entry.id}" class="clearfix serendipity_entry{if $dategroup.is_sticky} sticky{/if}">
+        <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
             
             <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_smarty_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
@@ -21,7 +21,7 @@
         </div>
         {/if}
 
-        <footer>
+        <footer class="clearfix">
         {if $entry.categories}
             <span class="visuallyhidden">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
         {/if}
