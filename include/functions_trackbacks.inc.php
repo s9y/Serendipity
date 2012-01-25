@@ -362,9 +362,19 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
         fclose($fp);
     }
 
-    serendipity_saveComment($id, $comment, 'TRACKBACK');
-
-    return 1;
+    if ($id>0) {
+        // first check, if we already have this pingback
+        $comments = serendipity_fetchComments($id,1,'co.id',true,'TRACKBACK'," AND co.url='$url'");
+        if (is_array($comments) && sizeof($comments) == 1) {
+            log_pingback("We already have that TRACKBACK!");
+            return 0; // We already have it!
+        }
+        // We don't have it, so save the pingback
+        serendipity_saveComment($id, $comment, 'TRACKBACK');
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 /**
