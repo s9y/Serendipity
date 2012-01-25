@@ -24,4 +24,4 @@
 @define('TWOK11_TWEET_THIS', 'Sdílet pøíspìvek na Twitteru');
 @define('TWOK11_DENT_THIS', 'Sdílet pøíspìvek na Identice');
 @define('TWOK11_SHORT_URL', 'Krátké URL');
-@define('TWOK11_SHORT_URL_HINT', 'Tento odkaz není my¹len ke klikání. Obsahuje krátkou URL adresu k tomuto pøíspìvku. Mù¾ete ji pou¾ít k odkazování na tento pøíspìvek. Zkopírujte kliknutím pravým tlaèítkem a následnì kliknìte na "Kopírovat odkaz" v Internet Exporeru nebo "Kopírovat umístìní odkazu" v Mozille.');
+@define('TWOK11_SHORT_URL_HINT', 'Tento odkaz není my¹len ke klikání. Obsahuje krátkou URL adresu k tomuto pøíspìvku. Mù¾ete ji pou¾ít k odkazování na tento pøíspìvek. Zkopírujte kliknutím pravým tlaèítkem a následnì kliknìte na Kopírovat odkaz v Internet Exporeru nebo Kopírovat umístìní odkazu v Mozille.');

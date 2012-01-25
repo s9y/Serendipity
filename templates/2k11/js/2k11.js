@@ -25,8 +25,6 @@ jQuery(document).ready(function($) {
     $('input, textarea').placeholder();
     // Disable trackback + short url links
     $('#trackback_url>a,.short-url').click(function(){var linkMsg=$(this).attr('title');alert(linkMsg);return false;});
-    // Fix non-smarty gravatar w/ float right
-    $(".comment_avatar").each(function(){test=$(this).css("float");if(test=="right"){$(this).css("margin","0 0 .625em .625em")}});
     // Comment reply
     $('.comment_reply').click(function(){var commentId=$(this).attr('id').replace(/serendipity_reply_/g,"");$('#serendipity_replyTo').val(commentId);});
     // Confirm comment deletion

@@ -119,7 +119,8 @@ button { padding: 4px; }
 img,
 audio, video,
 embed, object,
-.content>iframe { max-width: 100%; }
+.serendipity_entry_body iframe,
+.serendipity_staticpage iframe { max-width: 100%; }
 
 img, video { height: auto; }
 
@@ -432,7 +433,7 @@ fieldset,
 
 .serendipity_entryIcon {
     float: left;
-    margin: 0 .625em .625em 0;
+    margin: 0 2em .625em 0;
 }
 
 .serendipity_entry table {
@@ -568,6 +569,16 @@ pre .geshi {
     margin: 0 .625em .625em 0;
     padding: 0!important;
     overflow: hidden;
+}
+
+.avatar_left {
+    float: left;
+    margin: 0 .625em .625em 0;
+}
+
+.avatar_right {
+    float: right;
+    margin: 0 0 .625em .625em;
 }
 
 #colophon small,
