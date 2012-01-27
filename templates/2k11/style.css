@@ -67,7 +67,7 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 textarea { overflow: auto; vertical-align: top; resize: vertical; }
 
 input:valid, textarea:valid {  }
-input:invalid, textarea:invalid { background-color: #f0dddd; }
+input:invalid, textarea:invalid { background-color: #eee; }
 
 table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }

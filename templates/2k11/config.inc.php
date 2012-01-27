@@ -9,6 +9,16 @@ $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOS
 function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
 $serendipity['smarty']->register_modifier('serendipity_smarty_html5time', 'serendipity_smarty_html5time');
 
+$required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%spamblock%required_fields'", true, 'assoc');
+$required_fields = explode(',', $required_fieldlist['value']);
+$smarty_required_fields = array();
+foreach($required_fields AS $required_field) {
+    $required_field = trim($required_field);
+    if (empty($required_field)) continue;
+    $smarty_required_fields[$required_field] = $required_field;
+}
+$serendipity['smarty']->assign('required_fields', $smarty_required_fields);
+
 $template_config = array(
    array(
        'var' => 'date_format',
