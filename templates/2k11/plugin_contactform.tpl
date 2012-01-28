@@ -20,22 +20,22 @@
             
             <form id="serendipity_comment" action="{$commentform_action}#feedback" method="post">
             <div>
-	            <input type="hidden" name="serendipity[subpage]" value="{$commentform_sname}"/>
-	            <input type="hidden" name="serendipity[commentform]" value="true"/>
+	            <input type="hidden" name="serendipity[subpage]" value="{$commentform_sname}">
+	            <input type="hidden" name="serendipity[commentform]" value="true">
             </div>
             <div class="form_field">
                 <label for="serendipity_commentform_name">{$CONST.NAME}{if $required_fields.name}*{/if}</label>
-                <input id="serendipity_commentform_name" name="serendipity[name]" type="text" value="{$commentform_name}" placeholder="{$CONST.TWOK11_PLACE_NAME}"{if $required_fields.name} required{/if}/>
+                <input id="serendipity_commentform_name" name="serendipity[name]" type="text" value="{$commentform_name}" placeholder="{$CONST.TWOK11_PLACE_NAME}"{if $required_fields.name} required{/if}>
             </div>
             
             <div class="form_field">
                 <label for="serendipity_commentform_email">{$CONST.EMAIL}{if $required_fields.email}*{/if}</label>
-                <input id="serendipity_commentform_email" name="serendipity[email]" type="email" value="{$commentform_email}" placeholder="{$CONST.TWOK11_PLACE_MAIL}"{if $required_fields.email} required{/if}/>
+                <input id="serendipity_commentform_email" name="serendipity[email]" type="email" value="{$commentform_email}" placeholder="{$CONST.TWOK11_PLACE_MAIL}"{if $required_fields.email} required{/if}>
             </div>
             
             <div class="form_field">
                 <label for="serendipity_commentform_url">{$CONST.HOMEPAGE}{if $required_fields.url}*{/if}</label>
-                <input id="serendipity_commentform_url" name="serendipity[url]" type="url" value="{$commentform_url}" placeholder="{$CONST.TWOK11_PLACE_URL}"{if $required_fields.url} required{/if}/>
+                <input id="serendipity_commentform_url" name="serendipity[url]" type="url" value="{$commentform_url}" placeholder="{$CONST.TWOK11_PLACE_URL}"{if $required_fields.url} required{/if}>
             </div>
             
             <div class="form_tarea">
@@ -43,7 +43,7 @@
                 <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}"{if $required_fields.comment} required{/if}>{$commentform_data}</textarea>
             </div>
             {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
-            <input id="serendipity_submit" name="serendipity[submit]" type="submit" value="{$CONST.TWOK11_SEND_MAIL}"/>
+            <input id="serendipity_submit" name="serendipity[submit]" type="submit" value="{$CONST.TWOK11_SEND_MAIL}">
             </form>
         </div>
     {/if}

@@ -13,8 +13,8 @@
     <form class="staticpage_password_form" action="{$staticpage_form_url}" method="post">
     <fieldset>
         <legend>{$CONST.STATICPAGE_PASSWORD_NOTICE}</legend>
-        <input name="serendipity[pass]" type="password" value=""/>
-        <input name="submit" type="submit" value="{$CONST.GO}" />
+        <input name="serendipity[pass]" type="password" value="">
+        <input name="submit" type="submit" value="{$CONST.GO}" >
     </fieldset>
     </form>
 {else}
