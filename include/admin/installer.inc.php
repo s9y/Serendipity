@@ -133,9 +133,9 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
       <td><?php echo php_sapi_name() ?></td>
     </tr>
     <tr>
-        <td>PHP version >= 4.1.2</td>
+        <td>PHP version >= 5.2.6</td>
         <td width="200"><?php
-            if ( version_compare(phpversion(), '4.1.2', '>=') ) {
+            if ( version_compare(phpversion(), '5.2.6', '>=') ) {
                 echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES .', '. phpversion());
             } else {
                 echo serendipity_installerResultDiagnose(S9Y_I_ERROR, NO);
