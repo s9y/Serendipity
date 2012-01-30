@@ -10,15 +10,19 @@ function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp)
 $serendipity['smarty']->register_modifier('serendipity_smarty_html5time', 'serendipity_smarty_html5time');
 
 if (class_exists('serendipity_event_spamblock')) {
-    $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%spamblock%required_fields'", true, 'assoc');
-    $required_fields = explode(',', $required_fieldlist['value']);
-    $smarty_required_fields = array();
-    foreach($required_fields AS $required_field) {
-        $required_field = trim($required_field);
-        if (empty($required_field)) continue;
-        $smarty_required_fields[$required_field] = $required_field;
-    }
-    $serendipity['smarty']->assign('required_fields', $smarty_required_fields);
+  $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%spamblock%required_fields'", true, 'assoc');
+} elseif (class_exists('serendipity_event_commentspice')) {
+  $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%commentspice%required_fields'", true, 'assoc');
+}
+if (is_array($required_fieldlist)) {
+  $required_fields = explode(',', $required_fieldlist['value']);
+  $smarty_required_fields = array();
+  foreach($required_fields AS $required_field) {
+    $required_field = trim($required_field);
+    if (empty($required_field)) continue;
+    $smarty_required_fields[$required_field] = $required_field;
+  }
+  $serendipity['smarty']->assign('required_fields', $smarty_required_fields);
 }
 
 $template_config = array(
