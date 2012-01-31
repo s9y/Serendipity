@@ -503,6 +503,7 @@ if ($use_installer) {
                 </td>
             </tr>
         </table>
+        <?php if (!$no_footer) { ?>
         <div class="serendipityAdminFooterSpacer">
             <br />
         </div>
@@ -517,6 +518,7 @@ if ($use_installer) {
             ?>
             </span>
         </div>
+        <?php } ?>
     </body>
 </html>
 <?php
