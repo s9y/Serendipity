@@ -239,12 +239,14 @@
                 </td>
             </tr>
         </table>
+        {if NOT $admin_vars.no_footer}
         <div class="serendipityAdminFooterSpacer">
             <br />
         </div>
         <div id="serendipityAdminFooter">
             <span>{$admin_vars.version_info}</span>
         </div>                            
+        {/if}
     </body>
 <!-- ADMIN-ENTRY TEMPLATE: index.tpl END -->
 </html>

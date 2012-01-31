@@ -76,6 +76,12 @@ if (isset($serendipity['GET']['noSidebar']) || isset($serendipity['POST']['noSid
     $no_sidebar = false;
 }
 
+if (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST']['noFooter'])) {
+    $no_footer = true;
+} else {
+    $no_footer = false;
+}
+
 $file = '';
 if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false ) {
     $use_installer = true;
@@ -258,7 +264,7 @@ if (!$use_installer && $is_logged_in) {
 }
 
 if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
-    $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
+    $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'no_footer', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
     $admin_vars = array();
     foreach($poll_admin_vars AS $poll_admin_var) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
