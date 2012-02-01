@@ -223,6 +223,7 @@ h3 {
 h4, h5, h6,
 .serendipity_staticpage small,
 .staticpage_results h3,
+.comment_results h3,
 .serendipity_freeTag { font-size: 1em; }
 
 h4, h5, h6,
@@ -233,7 +234,7 @@ audio, video,
 #trackback_url,
 .manage_comments,
 .plugin_comment_wrap,
-p.whiteline, #searchform div,
+p.whiteline, #searchform>div,
 .serendipity_entry .plainList,
 #page, #primary-nav,
 .serendipity_calendar,
@@ -293,7 +294,9 @@ fieldset,
 .serendipity_pagination,
 .serendipity_comment_captcha .captcha,
 .serendipity_comment_captcha label,
-.serendipity_freeTag { display: block; }
+.serendipity_freeTag,
+.staticpage_results li>span,
+.comment_results li>span { display: block; }
 
 #primary-nav select {
     margin: .5em 1em;
@@ -332,7 +335,7 @@ fieldset,
     margin-bottom: 2.1429em;
 }
 
-#searchform div { padding: 0 1em; }
+#searchform>div { padding: 0 1em; }
 
 #serendipityQuickSearchTermField,
 #serendipity_comment input[type=text],
@@ -410,6 +413,7 @@ fieldset,
 
 .serendipity_search,
 .staticpage_results,
+.comment_results,
 .nocontent { margin: 0 1em 1em; }
 
 .serendipity_byline,
@@ -735,15 +739,45 @@ pre .geshi {
     text-align: right;
 }
 
-.epicon { display: none; visibility: hidden; }
-
 .serendipity_entrypaging_left,
 .serendipity_entrypaging_right { display: block; }
 
 .serendipity_entrypaging_left { text-align: left; }
-.serendipity_entrypaging_left:before { content: "← "; }
 .serendipity_entrypaging_right { text-align: right; }
-.serendipity_entrypaging_right:after { content: " →"; }
+
+.serendipity_entrypaging>.epicon { display: none; visibility: hidden; }
+
+.generatedcontent .epicon { display: none; visibility: hidden; }
+.generatedcontent .serendipity_entrypaging_left:before { content: "← "; }
+.generatedcontent .serendipity_entrypaging_right:after { content: " →"; }
+
+#LSResult {
+    background: #ccdee7;
+    margin-top: 1px;
+    opacity: .9;
+    z-index: 10;
+}
+
+#LSShadow {
+    bottom: 0;
+    right: 0;
+    color: transparent;
+    border-right: 0px none;
+    border-bottom: 0px none;
+}
+
+.serendipity_livesearch_result {
+    border: 1px solid #aaa;
+    bottom: 0px;
+    right: 0px;
+}
+
+#LSResult,
+.serendipity_livesearch_result {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
 
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
@@ -855,9 +889,9 @@ pre .geshi {
     
     #identity h1 { margin: 1em 0 0; }
     
-    #searchform div { margin-top: 4.4em; }
+    #searchform>div { margin-top: 4.4em; }
 
-    #identity p, #searchform div { margin-bottom: 1.5em; }
+    #identity p, #searchform>div { margin-bottom: 1.5em; }
     
     #primary-nav { margin-bottom: 2em; }
     
@@ -909,8 +943,8 @@ pre .geshi {
     #sidebar_right .sidebar_plugin,
     .ie7 #sidebar_right .sidebar_plugin { margin: 0 1em 2em 2em; }
     
-    #searchform div,
-    .ie7 #searchform div { padding: 0 1em 0 2em; }
+    #searchform>div,
+    .ie7 #searchform>div { padding: 0 1em 0 2em; }
     
     .commentlevel-1 { margin-left: 1em; }
     .commentlevel-2 { margin-left: 2em; }
@@ -927,7 +961,7 @@ pre .geshi {
     #identity h1 { padding: 0 1em; }
     
     #identity p,
-    #searchform div { padding: 0 2em; }
+    #searchform>div { padding: 0 2em; }
     
     #primary-nav ul { margin: 0 1em; }
 
@@ -952,6 +986,7 @@ pre .geshi {
     
     .serendipity_search,
     .staticpage_results,
+    .comment_results,
     .nocontent,
     .serendipity_entrypaging { margin: 0 2em 1em; }
     
@@ -975,7 +1010,6 @@ pre .geshi {
     * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
     a, a:visited { text-decoration: underline; }
     abbr[title]:after { content: " (" attr(title) ")"; }
-    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
     pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
     thead { display: table-header-group; }
     tr, img { page-break-inside: avoid; }
