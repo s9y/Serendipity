@@ -67,13 +67,13 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
 class serendipity_plugin_api 
 {
 
-	/**
-	 * Register the default list of plugins for installation.
-	 *
-	 * @access public
-	 * @return null
-	 */
-	function register_default_plugins()
+    /**
+     * Register the default list of plugins for installation.
+     *
+     * @access public
+     * @return null
+     */
+    function register_default_plugins()
     {
         /* Register default sidebar plugins, order matters */
         serendipity_plugin_api::create_plugin_instance('@serendipity_calendar_plugin');
@@ -366,7 +366,7 @@ class serendipity_plugin_api
         $res = array();
         foreach ( (array)$plugins AS $plugin ) {
             list($class_name) = explode(':', $plugin['name']);
-			$class_name = ltrim($class_name, '@');
+            $class_name = ltrim($class_name, '@');
             $res[] = $class_name;
         }
         return $res;
@@ -1160,27 +1160,27 @@ class serendipity_plugin_api
  */
 class serendipity_property_bag 
 {
-	/**
-	 * @access  private
-	 * @var array   property storage container.
-	 */
-	var $properties = array();
+    /**
+     * @access  private
+     * @var array   property storage container.
+     */
+    var $properties = array();
 
-	/**
-	 * @access private
-	 * @var    string   Name of the property bag
-	 */
-	var $name       = null;
+    /**
+     * @access private
+     * @var    string   Name of the property bag
+     */
+    var $name       = null;
 
-	/**
-	 * Adds a property value to the bag
-	 *
-	 * @access public
-	 * @param   string  The name of the property
-	 * @param   mixed   The value of a property
-	 * @return null
-	 */
-	function add($name, $value)
+    /**
+     * Adds a property value to the bag
+     *
+     * @access public
+     * @param   string  The name of the property
+     * @param   mixed   The value of a property
+     * @return null
+     */
+    function add($name, $value)
     {
         $this->properties[$name] = $value;
     }
@@ -1576,8 +1576,16 @@ class serendipity_plugin
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
-        $content = $serendipity['smarty']->fetch('file:'. $tfile);
-        
+
+        if( !SMARTY_VERSION ) { 
+            $inclusion = $serendipity['smarty']->security_settings[@INCLUDE_ANY];
+            $serendipity['smarty']->security_settings[@INCLUDE_ANY] = true;
+            $content = $serendipity['smarty']->fetch('file:'. $tfile);
+            $serendipity['smarty']->security_settings[@INCLUDE_ANY] = $inclusion;
+        } else { 
+            $content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
+        }
+
         return $content;    
     }
 
@@ -1590,17 +1598,17 @@ class serendipity_plugin
 class serendipity_event extends serendipity_plugin 
 {
 
-	/**
-	 * The class constructor
-	 *
-	 * Be sure to call this method from your derived classes constructors,
-	 * otherwise your config data will not be stored or retrieved correctly
-	 *
-	 * @access public
-	 * @param   string      The instance name
-	 * @return
-	 */
-	function serendipity_event($instance)
+    /**
+     * The class constructor
+     *
+     * Be sure to call this method from your derived classes constructors,
+     * otherwise your config data will not be stored or retrieved correctly
+     *
+     * @access public
+     * @param   string      The instance name
+     * @return
+     */
+    function serendipity_event($instance)
     {
         $this->instance = $instance;
     }
