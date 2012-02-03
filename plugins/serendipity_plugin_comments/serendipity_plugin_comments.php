@@ -241,8 +241,9 @@ class serendipity_plugin_comments extends serendipity_plugin
                 $entry = array('comment' => $comment,
                                'email'   => $row['comment_email'],
                                'url'     => $row['comment_url'],
-                               'author'  => $row['user']);
-                               
+                               'author'  => $row['user'],
+                               'id'      => $row['comment_id']);
+
                 // Let's help the BBCOde plugin a bit:
                 if (class_exists('serendipity_event_bbcode')) {
                     $entry['comment'] = preg_replace('@((\[.*)[\n\r]+(.*\]))+@imsU', '\2\3', $entry['comment']);
