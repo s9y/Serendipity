@@ -8,6 +8,7 @@
  * @access public
  */
 function serendipity_db_begin_transaction(){
+    global $serendipity;
     $serendipity['dbConn']->beginTransaction();
 }
 
@@ -18,6 +19,7 @@ function serendipity_db_begin_transaction(){
  * @param  boolean  If true, perform the query. If false, rollback.
  */
 function serendipity_db_end_transaction($commit){
+    global $serendipity;
     if ($commit){
         $serendipity['dbConn']->commit();
     }else{
