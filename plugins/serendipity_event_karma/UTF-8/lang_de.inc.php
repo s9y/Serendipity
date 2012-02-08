@@ -1,13 +1,11 @@
-<?php # lang_de.inc.php 1.1 2011-11-22 10:01:55 VladaAjgl $
+<?php # lang_de.inc.php 1.0 2009-06-03 09:51:33 VladaAjgl $
 
 /**
- *  @version 1.1
+ *  @version 1.0
  *  @author Grischa Brockhaus <http://blog.brockha.us>
  *  DE-Revision: Revision of lang_de.inc.php
  *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
  *  @translated 2009/06/03
- *  @author Konrad Bauckmeier <yourmail@example.com>
- *  @revisionDate 2011/11/22
  */
 
 @define('PLUGIN_KARMA_NAME', 'Karma');
@@ -46,7 +44,7 @@
 @define('PLUGIN_KARMA_VOTETEXT_1', '-2');
 @define('PLUGIN_KARMA_VOTETEXT_1_NAME', 'Benennung: Schlechtes Ergebnis');
 @define('PLUGIN_KARMA_VOTETEXT_1_BLAHBLAH', 'Text, der dargestellt wird, wenn der Benutzer für "schlecht" im Textmode stimmen möchte. (Standard: ' . PLUGIN_KARMA_VOTETEXT_1 . ')');
-@define('PLUGIN_KARMA_VOTED', 'Punktzahl "%s" gespeichert.');
+@define('PLUGIN_KARMA_VOTED', 'Bewertung "%s" gespeichert.');
 @define('PLUGIN_KARMA_VOTES', '%3$s Stimme(n)');
 @define('PLUGIN_KARMA_INVALID', 'Bewertung ungültig oder manipuliert!');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'Bewertung bereits gespeichert.');
@@ -73,7 +71,6 @@
 //--JAM:@define('PLUGIN_KARMA_ALIGNMENT', 'Voting Bar Alignment');
 //--JAM:@define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH', 'Alignment of voting bar in the entry footer.  Templates can override this setting with !important (Default: right)');
 //--JAM: @define('PLUGIN_KARMA_ALIGNMENT_DETECT', 'from style');
-
 @define('PLUGIN_KARMA_VISITS', 'Aufrufstatisik aktivieren?');
 @define('PLUGIN_KARMA_VISITS_BLAHBLAH', 'Soll jeder Klick auf einen Artikel gezählt und dargestellt werden?');
 @define('PLUGIN_KARMA_VISITSCOUNT', ' %4$s Klicks');
@@ -124,5 +121,8 @@
 @define('PLUGIN_KARMA_DELETE_VOTES', 'Lösche ausgewählte Stimmen');
 @define('PLUGIN_KARMA_APPROVE_VOTES', 'Bestätige ausgewählte Stimmen');
 
-// Next lines were translated on 2011/11/22
-@define('PLUGIN_KARMA_ACTIVE_REGISTERED', 'Nur eingeloggte Authoren können abstimmen');
+//New on ajax feature
+@define('PLUGIN_KARMA_AJAX', 'AJAX Funktionalität');
+@define('PLUGIN_KARMA_AJAX_BLAHBLAH', 'Soll die Stimmabgabe mittels asynchronem Javascript erfolgen? Wenn ja, wird die Bewertung im Hintergrund an den Server gesendet und das Ergebnis dargestellt, ohne dass die Seite neu geladen werden muss.');
+@define('PLUGIN_KARMA_ALIGNMENT', 'Ausrichtung des Plugins');
+@define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH', 'Soll das Plugin links, mittig oder rechts angezeigt werden?');

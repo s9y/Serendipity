@@ -6,6 +6,9 @@ Version 1.7 ()
 
     * fixed draft & future entries preview link in backend
 
+   * Improved karmarating plugin to be able to use AJAX calls
+     (gregman)
+
     * Allow Smarty to fetch .tpl files from all directories so that
       s9y plugin can use the fetch() call for their .tpl files no
       matter which (symlinked) directory the plugin resides in.
@@ -15,7 +18,8 @@ Version 1.7 ()
       {include} calls seperately to smarty->fetch() calls, we'll also
       add that to .tpl files.
       (garvinhicking)
-     
+
+
     * Patch by Markus Brükner: Properly handle files that have no
       extension in media database
 

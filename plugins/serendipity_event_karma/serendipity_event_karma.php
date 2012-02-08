@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: serendipity_event_karma.php 2778 2011-09-23 12:32:28Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -42,14 +42,16 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('name',          PLUGIN_KARMA_NAME);
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Gregor Völtz, Judebert');
-        $propbag->add('version',       '2.6');
+        $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz');
+        $propbag->add('version',       '2.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
         $propbag->add('event_hooks',   array(
+            'external_plugin'             => true,
+            'frontend_footer'             => true,
             'frontend_configure'          => true, 
             'entry_display'               => true, 
             'css'                         => true, 
@@ -73,10 +75,11 @@ class serendipity_event_karma extends serendipity_event
             'track_visits_of_loggedin_users', 
             'min_disp_visits',
             'exits_active', 
-            'logging', 
+            'logging',
+            'ajax',
             // Appearance options
             'appearance_tab',
-            //--JAM:'alignment',
+            'alignment',
             'rate_with_words',
             'textual_msg',
             'textual_current',
@@ -238,11 +241,17 @@ class serendipity_event_karma extends serendipity_event
                 $propbag->add('default', 'false');
                 break;
 
-            /*--JAM:
+            // Log karma votes?
+            case 'ajax':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_KARMA_AJAX);
+                $propbag->add('description', PLUGIN_KARMA_AJAX_BLAHBLAH);
+                $propbag->add('default', 'false');
+                break;
+
             // Alignment to use for rating bars
             case 'alignment':
                 $select = array(
-                            //--JAM: 'detect' => PLUGIN_KARMA_ALIGNMENT_DETECT,
                             'left' => LEFT,
                             'center' => CENTER,
                             'right' => RIGHT);
@@ -252,7 +261,7 @@ class serendipity_event_karma extends serendipity_event
                 $propbag->add('select_values', $select);
                 $propbag->add('default', 'right');
                 break;
-             */
+
             // Use words for ratings?
             case 'rate_with_words':
                 $propbag->add('type', 'boolean');
@@ -488,6 +497,207 @@ class serendipity_event_karma extends serendipity_event
 
         return sprintf($karma_exits, $points);
     }
+   
+    function performkarmaVote() {
+        global $serendipity;
+        // Make sure the karmaVote cookie is set, even if empty <a name="#1" />
+        if (!isset($serendipity['COOKIE']['karmaVote'])) {
+            serendipity_setCookie('karmaVote', serialize(array()));
+        }
+
+        // If user didn't vote, we're done.
+        // Do we realy need this?
+        if (!isset($_POST['karmaId'])) {
+            if (!isset($serendipity['GET']['karmaId']) || !isset($serendipity['GET']['karmaVote'])) {
+                return;
+            }
+        }
+
+        // Get URL vote data
+        if (isset($_POST['karmaId'])) {
+            $this->karmaId     = (int)$_POST['karmaId'];
+            $this->karmaVoting = (int)$_POST['karmaVote'];
+        } else {
+            $this->karmaId     = (int)$serendipity['GET']['karmaId'];
+            $this->karmaVoting = (int)$serendipity['GET']['karmaVote'];
+        }
+
+        // karmaVote cookie was just set (see name="#1"); this boils down to 
+        // "if check cookie isn't 1, there's no real cookie".
+        // The check cookie gets set when a rater is displayed,
+        // so you've got no business voting if you haven't even
+        // seen the rater yet.
+        if (!isset($serendipity['COOKIE']['karmaVote']) OR $serendipity['COOKIE']['check'] != '1') {
+            $this->karmaVote = 'nocookie';
+            return;
+        }
+
+        // Everything is ready.  Get the cookie vote data.
+        $karma   = unserialize($serendipity['COOKIE']['karmaVote']);
+
+        // Stop on invalid votes (cookie invalid, or URL data incorrect)
+        if (!is_array($karma) || !is_numeric($this->karmaVoting) || !is_numeric($this->karmaId) || $this->karmaVoting > 2 || $this->karmaVoting < -2) {
+            $this->karmaVote = 'invalid1';
+            return;
+        }
+
+        // Stop if the cookie says we already voted
+        if (!empty($karma[$this->karmaId])) {
+            $this->karmaVote = 'alreadyvoted';
+            return ;
+        }
+
+        // We don't want bots hitting the karma-voting
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (stristr($agent, 'google')
+            || stristr($agent, 'LinkWalker')
+            || stristr($agent, 'zermelo')
+            || stristr($agent, 'NimbleCrawler')) {
+            $this->karmaVote = 'invalid1';
+            return ;
+        }
+
+        // Voting takes place here.
+        // 
+        // Get voting data from the database (keeps all entries,
+        // even if no karma match)
+        $q = 'SELECT *
+                FROM ' . $serendipity['dbPrefix'] . 'entries AS e
+     LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'karma   AS k
+                  ON e.id = k.entryid
+               WHERE e.id = ' . serendipity_db_escape_string($this->karmaId) . ' LIMIT 1';
+        $row = serendipity_db_query($q, true);
+
+        // If there's no entry with this ID, we're done
+        //
+        // --TODO: Modify the plugin to allow arbitrary voting with generated IDs
+        if (!isset($row) || !is_array($row)) {
+            $this->karmaVote = 'invalid2';
+            return;
+        }
+
+        $now = time();
+        if ($row['votes'] === '0' || $row['votes'] > 0) {
+            // Votes for this entry already exist. Do some checking.
+            $max_entrytime = $this->get_config('max_entrytime', 1440) * 60;
+            $max_votetime  = $this->get_config('max_votetime', 5)     * 60;
+            $max_karmatime = $this->get_config('max_karmatime', 7)    * 24 * 60 * 60;
+            // Allow infinite voting when 0 or negative
+            if ($max_karmatime <= 0) {
+                $max_karmatime = $now;
+            }
+
+            // If the entry's timestamp is too old for voting,
+            // we're done.
+            if ($row['timestamp'] < ($now - $max_karmatime)) {
+                $this->karmaVote = 'timeout2';
+                return;
+            }
+
+            // If the entry is in the grace period, or votes
+            // aren't too close together, record the vote.
+            if (($row['timestamp'] > ($now - $max_entrytime)) || ($row['lastvote'] + $max_votetime < $now) || $row['lastvote'] == 0) {
+                // Update votes
+                $q = sprintf(
+                  "UPDATE {$serendipity['dbPrefix']}karma
+                      SET points   = %s,
+                          votes    = %s,
+                          lastvote = %s
+                    WHERE entryid  = %s",
+                  $row['points'] + $this->karmaVoting,
+                  $row['votes']  + 1,
+                  $now,
+                  $this->karmaId
+                );
+
+                serendipity_db_query($q);
+            } else {
+                // Entry was too recently voted upon.  Figure out 
+                // how long until voting will be allowed (in minutes).
+                $this->karmaVote    = 'timeout';
+                $this->karmaTimeOut = abs(ceil(($now - ($row['lastvote'] + $max_votetime)) / 60));
+                return;
+            }
+        } else {
+            // No row. Use INSERT instead of UPDATE.
+            $q = sprintf(
+              "INSERT INTO {$serendipity['dbPrefix']}karma
+                           (entryid, points, votes, lastvote, visits)
+                    VALUES (%s,      %s,     %s,    %s,       %s)",
+              $this->karmaId,
+              $this->karmaVoting,
+              1,
+              $now,
+              0
+            );
+
+            $sql = serendipity_db_query($q);
+        }
+
+        // Log the vote
+        if (serendipity_db_bool($this->get_config('logging', false))) {
+            $q = sprintf(
+              "INSERT INTO {$serendipity['dbPrefix']}karmalog
+                           (entryid, points, ip, user_agent, votetime)
+                    VALUES (%s, %s, '%s', '%s', %s)",
+              $this->karmaId,
+              $this->karmaVoting,
+              serendipity_db_escape_string($_SERVER['REMOTE_ADDR']),
+              substr(serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']), 0, 255),
+              $now
+            );
+            $sql = serendipity_db_query($q);
+            if (is_string($sql)) {
+                mail($serendipity['serendipityEmail'] , 'KARMA ERROR', $q . '<br />' . $sql . '<br />');
+            }
+        }
+
+        // Set the cookie that we already voted for this entry
+        $karma[$this->karmaId] = $this->karmaVoting;
+        $this->karmaVote       = 'voted';
+        serendipity_setCookie('karmaVote', serialize($karma));
+    }
+    
+    function karmaVoted($myvote,$points,$votes) {
+        $msg = '<div class="serendipity_karmaSuccess">' . PLUGIN_KARMA_VOTED . '</div>';
+        if ($this->get_config('rate_with_words', false)) {
+            $myvote = $this->wordRating($myvote, 1);
+        }
+        elseif ($this->image_name != '0') {
+            $myvote = $this->imageRating($myvote, 1);
+        }
+        // Just a current rating bar, if any
+        $bar = $this->createRatingBar(null, $points, $votes);
+        return array("myvote" => $myvote, "msg" => $msg, "bar" => $bar);
+    }
+    
+    function createkarmaBlock($entryid, $textual_msg, $msg, $bar, $enough_votes, $textual_current, $enough_visits, $textual_visits, $points, $votes) {
+        $image_class = '';
+        if ($this->image_name != '0') {
+            $image_class = ' serendipity_karmaVoting_images';
+        }
+        $karma_block = "<div class='serendipity_karmaVoting$image_class'><a id='karma_vote$entryid'></a>";
+        if ($textual_msg) {
+            $karma_block .= $msg;
+        }
+        $karma_block .= $bar;
+        if ($enough_votes && $textual_current) {
+            $curr_msg = $this->get_config('curr_msg', PLUGIN_KARMA_CURRENT);
+            $karma_block .= '<span class="serendipity_karmaVoting_current">' . $curr_msg . '</span>';
+        }
+        if ($enough_visits && $textual_visits) {
+            $karma_block .= '<span class="serendipity_karmaVoting_visits">' . PLUGIN_KARMA_VISITSCOUNT . '</span>';
+        }
+        $karma_block .= "\n</div>\n";
+        // Adjust rating points
+        if ($this->get_config('rate_with_words', false)) {
+            $points = $this->wordRating($points, $votes);
+        }
+        elseif ($this->image_name != '0') {
+            $points = $this->imageRating($points, $votes);
+        }
+        return array("karma_block" => $karma_block, "points" => $points);
+    }
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
@@ -515,157 +725,88 @@ class serendipity_event_karma extends serendipity_event
             }
 
             switch($event) {
+
+                //Javascript for ajax functionality
+                case 'frontend_footer':
+                    if ($this->get_config('ajax') == true) {
+?>
+<script type="text/javascript">
+/*<![CDATA[ */
+ajaxloader = new Image();
+ajaxloader.src = "<?php echo $serendipity['baseURL']; ?>plugins/serendipity_event_karma/img/ajax-loader.gif";
+for (i=1;i<6;i++) {
+    jQuery('.serendipity_karmaVoting_link'+i).click(function(event) {
+        event.preventDefault();
+        karmaId = jQuery(this).attr('href').match(/\[karmaId\]=([0-9]+)/);
+        vote(jQuery(this).html(),karmaId[1]);
+    });
+}
+
+function vote(karmaVote,karmaId) {
+    // Send the data using post and put the results in place
+    jQuery('#karma_vote'+karmaId).parent().children('.serendipity_karmaVoting_links').replaceWith('<div class="serendipity_karmaVoting_links ajaxloader"><img src="<?php echo $serendipity['baseURL']; ?>plugins/serendipity_event_karma/img/ajax-loader.gif" border="0" alt="ajax-loader" /></div>');
+    jQuery.post("<?php echo $serendipity['baseURL']. $serendipity['permalinkPluginPath'] ?>/karma-ajaxquery", { karmaVote: karmaVote, karmaId: karmaId }, function(data) {
+        jQuery('#karma_vote'+karmaId).parent().replaceWith(data);
+    });
+}
+/* ]]>*/
+</script>
+<?php
+                    }
+                
+                // Hook for ajax calls
+                case 'external_plugin':
+                    $uri_parts = explode('?', str_replace('&amp;', '&', $eventData));
+
+                    // Try to get request parameters from eventData name
+                    if (!empty($uri_parts[1])) {
+                        $reqs = explode('&', $uri_parts[1]);
+                        foreach($reqs AS $id => $req) {
+                            $val = explode('=', $req);
+                            if (empty($_REQUEST[$val[0]])) {
+                                $_REQUEST[$val[0]] = $val[1];
+                            }
+                        }
+                    }
+                    
+                    $parts = explode('_', $uri_parts[0]);
+
+                    switch($parts[0]) {
+                        case 'karma-ajaxquery':
+                            $this->performkarmaVote();
+                            $q = "SELECT SUM(votes) AS votes, SUM(points) AS points, SUM(visits) AS visits
+                                    FROM " . $serendipity['dbPrefix'] . "karma
+                                   WHERE entryid = '" . (int)$_POST['karmaId'] . "';";
+                            $sql = serendipity_db_query($q);
+                            $track_clicks  = serendipity_db_bool($this->get_config('visits_active', true));
+                            $track_karma   = serendipity_db_bool($this->get_config('karma_active', true));
+                            $enough_votes = $track_karma && ($sql[0]['votes'] >= $this->get_config('min_disp_votes', 0));
+                            $enough_visits = $track_clicks && ($sql[0]['visits'] >= $this->get_config('min_disp_visits', 0));
+                            $textual_msg = true;
+                            $textual_current = true;
+                            $textual_visits = true;
+                            if ($this->image_name != '0') {
+                                $textual_msg = $this->get_config('textual_msg', 'true');
+                                $textual_current = $this->get_config('textual_current', 'true');
+                                $textual_visits = $this->get_config('textual_visits', 'true');
+                            }
+                            $temp = $this->karmaVoted((int)$_POST['karmaVote'],$sql[0]['points'],$sql[0]['votes']);
+                            $myvote = $temp['myvote'];
+                            $msg = $temp['msg'];
+                            $bar = $temp['bar'];
+                            $temp = $this->createkarmaBlock((int)$_POST['karmaId'], $textual_msg, $msg, $bar, $enough_votes, $textual_current, $enough_visits, $textual_visits, $sql[0]['points'], $sql[0]['votes']);
+                            $karma_block = $temp['karma_block'];
+                            $points = $temp['points'];
+                            echo sprintf($karma_block, $myvote, $points, $sql[0]['votes'], $sql[0]['visits'], '');
+                            break;
+                    }
+                    
+                    return true;
+                    break;
+
                 // Early hook, before any page is displayed
                 case 'frontend_configure':
-                    
-                    // Make sure the karmaVote cookie is set, even if empty <a name="#1" />
-                    if (!isset($serendipity['COOKIE']['karmaVote'])) {
-                        serendipity_setCookie('karmaVote', serialize(array()));
-                    }
-
-                    // If user didn't vote, we're done.
-                    if (!isset($serendipity['GET']['karmaId']) || !isset($serendipity['GET']['karmaVote'])) {
-                        return;
-                    }
-
-                    // Get URL vote data
-                    $this->karmaId     = (int)$serendipity['GET']['karmaId'];
-                    $this->karmaVoting = (int)$serendipity['GET']['karmaVote'];
-
-                    // karmaVote cookie was just set (see name="#1"); this boils down to 
-                    // "if check cookie isn't 1, there's no real cookie".
-                    // The check cookie gets set when a rater is displayed,
-                    // so you've got no business voting if you haven't even
-                    // seen the rater yet.
-                    if (!isset($serendipity['COOKIE']['karmaVote']) OR $serendipity['COOKIE']['check'] != '1') {
-                        $this->karmaVote = 'nocookie';
-                        return;
-                    }
-
-                    // Everything is ready.  Get the cookie vote data.
-                    $karma   = unserialize($serendipity['COOKIE']['karmaVote']);
-
-                    // Stop on invalid votes (cookie invalid, or URL data incorrect)
-                    if (!is_array($karma) || !is_numeric($this->karmaVoting) || !is_numeric($this->karmaId) || $this->karmaVoting > 2 || $this->karmaVoting < -2) {
-                        $this->karmaVote = 'invalid1';
-                        return;
-                    }
-
-                    // Stop if the cookie says we already voted
-                    if (!empty($karma[$this->karmaId])) {
-                        $this->karmaVote = 'alreadyvoted';
-                        return ;
-                    }
-
-                    // We don't want bots hitting the karma-voting
-                    $agent = $_SERVER['HTTP_USER_AGENT'];
-                    if (stristr($agent, 'google')
-                        || stristr($agent, 'LinkWalker')
-                        || stristr($agent, 'zermelo')
-                        || stristr($agent, 'NimbleCrawler')) {
-                        $this->karmaVote = 'invalid1';
-                        return ;
-                    }
-
-                    // Voting takes place here.
-                    // 
-                    // Get voting data from the database (keeps all entries,
-                    // even if no karma match)
-                    $q = 'SELECT *
-                            FROM ' . $serendipity['dbPrefix'] . 'entries AS e
-                 LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'karma   AS k
-                              ON e.id = k.entryid
-                           WHERE e.id = ' . serendipity_db_escape_string($this->karmaId) . ' LIMIT 1';
-                    $row = serendipity_db_query($q, true);
-
-                    // If there's no entry with this ID, we're done
-                    //
-                    // --TODO: Modify the plugin to allow arbitrary voting with generated IDs
-                    if (!isset($row) || !is_array($row)) {
-                        $this->karmaVote = 'invalid2';
-                        return;
-                    }
-
-                    $now = time();
-                    if ($row['votes'] === '0' || $row['votes'] > 0) {
-                        // Votes for this entry already exist. Do some checking.
-                        $max_entrytime = $this->get_config('max_entrytime', 1440) * 60;
-                        $max_votetime  = $this->get_config('max_votetime', 5)     * 60;
-                        $max_karmatime = $this->get_config('max_karmatime', 7)    * 24 * 60 * 60;
-                        // Allow infinite voting when 0 or negative
-                        if ($max_karmatime <= 0) {
-                            $max_karmatime = $now;
-                        }
-
-                        // If the entry's timestamp is too old for voting,
-                        // we're done.
-                        if ($row['timestamp'] < ($now - $max_karmatime)) {
-                            $this->karmaVote = 'timeout2';
-                            return;
-                        }
-
-                        // If the entry is in the grace period, or votes
-                        // aren't too close together, record the vote.
-                        if (($row['timestamp'] > ($now - $max_entrytime)) || ($row['lastvote'] + $max_votetime < $now) || $row['lastvote'] == 0) {
-                            // Update votes
-                            $q = sprintf(
-                              "UPDATE {$serendipity['dbPrefix']}karma
-                                  SET points   = %s,
-                                      votes    = %s,
-                                      lastvote = %s
-                                WHERE entryid  = %s",
-                              $row['points'] + $this->karmaVoting,
-                              $row['votes']  + 1,
-                              $now,
-                              $this->karmaId
-                            );
-
-                            serendipity_db_query($q);
-                        } else {
-                            // Entry was too recently voted upon.  Figure out 
-                            // how long until voting will be allowed (in minutes).
-                            $this->karmaVote    = 'timeout';
-                            $this->karmaTimeOut = abs(ceil(($now - ($row['lastvote'] + $max_votetime)) / 60));
-                            return;
-                        }
-                    } else {
-                        // No row. Use INSERT instead of UPDATE.
-                        $q = sprintf(
-                          "INSERT INTO {$serendipity['dbPrefix']}karma
-                                       (entryid, points, votes, lastvote, visits)
-                                VALUES (%s,      %s,     %s,    %s,       %s)",
-                          $this->karmaId,
-                          $this->karmaVoting,
-                          1,
-                          $now,
-                          0
-                        );
-
-                        $sql = serendipity_db_query($q);
-                    }
-
-                    // Log the vote
-                    if (serendipity_db_bool($this->get_config('logging', false))) {
-                        $q = sprintf(
-                          "INSERT INTO {$serendipity['dbPrefix']}karmalog
-                                       (entryid, points, ip, user_agent, votetime)
-                                VALUES (%s, %s, '%s', '%s', %s)",
-                          $this->karmaId,
-                          $this->karmaVoting,
-                          serendipity_db_escape_string($_SERVER['REMOTE_ADDR']),
-                          substr(serendipity_db_escape_string($_SERVER['HTTP_USER_AGENT']), 0, 255),
-                          $now
-                        );
-                        $sql = serendipity_db_query($q);
-                        if (is_string($sql)) {
-                            mail($serendipity['serendipityEmail'] , 'KARMA ERROR', $q . '<br />' . $sql . '<br />');
-                        }
-                    }
-
-                    // Set the cookie that we already voted for this entry
-                    $karma[$this->karmaId] = $this->karmaVoting;
-                    $this->karmaVote       = 'voted';
-                    serendipity_setCookie('karmaVote', serialize($karma));
+                    $this->performkarmaVote();
 
                     return true;
                     break;
@@ -737,7 +878,7 @@ class serendipity_event_karma extends serendipity_event
                     }
                     if ($align == 'detect') {
                     */
-                    $align = $this->get_config('alignment', 'center');
+                    $align = $this->get_config('alignment');
                         // Try to let the template take care of it
                         if ($this->image_name == '0') {
                             // Text-only rating bar is used
@@ -841,6 +982,9 @@ EOS;
 .serendipity_karmaVoting_current-rating {
     background: url($img) left;
     font-size: 0;
+}
+.ajaxloader {
+    background-image: none;
 }
 .serendipity_karmaVoting_links {
     position: relative;
@@ -1210,17 +1354,10 @@ END_IMG_CSS;
                                 if ($track_karma) {
                                     if (isset($karma[$entryid])) {
                                         // We already voted for this one
-                                        $msg =
-    '<div class="serendipity_karmaSuccess">' . PLUGIN_KARMA_VOTED . '</div>';
-                                        $myvote = $karma[$entryid];
-                                        if ($this->get_config('rate_with_words', false)) {
-                                            $myvote = $this->wordRating($myvote, 1);
-                                        }
-                                        elseif ($this->image_name != '0') {
-                                            $myvote = $this->imageRating($myvote, 1);
-                                        }
-                                        // Just a current rating bar, if any
-                                        $bar = $this->createRatingBar(null, $points, $votes);
+                                        $temp = $this->karmaVoted($karma[$entryid],$points,$votes);
+                                        $myvote = $temp['myvote'];
+                                        $msg = $temp['msg'];
+                                        $bar = $temp['bar'];
                                     } elseif ($eventData[$i]['timestamp'] < ($now - $max_karmatime)) {
                                         // Too late to vote for this one
                                         $msg = 
@@ -1237,36 +1374,9 @@ END_IMG_CSS;
                                     }
                                 }
                                 // Create the karma block
-                                $image_class = '';
-                                if ($this->image_name != '0') {
-                                    $image_class = ' serendipity_karmaVoting_images';
-                                }
-                                $karma_block = 
-"<div class='serendipity_karmaVoting$image_class'><a id='karma_vote$entryid'></a>";
-                                if ($textual_msg) {
-                                    $karma_block .= 
-    $msg;
-                                }
-                                $karma_block .=
-    $bar;
-                                if ($enough_votes && $textual_current) {
-                                    $curr_msg = $this->get_config('curr_msg', PLUGIN_KARMA_CURRENT);
-                                    $karma_block .=
-    '<span class="serendipity_karmaVoting_current">' . $curr_msg . '</span>';
-                                }
-                                if ($enough_visits && $textual_visits) {
-                                    $karma_block .= 
-    '<span class="serendipity_karmaVoting_visits">' . PLUGIN_KARMA_VISITSCOUNT . '</span>';
-                                }
-                                $karma_block .=
-"\n</div>\n";
-                                // Adjust rating points
-                                if ($this->get_config('rate_with_words', false)) {
-                                    $points = $this->wordRating($points, $votes);
-                                }
-                                elseif ($this->image_name != '0') {
-                                    $points = $this->imageRating($points, $votes);
-                                }
+                                $temp = $this->createkarmaBlock($entryid, $textual_msg, $msg, $bar, $enough_votes, $textual_current, $enough_visits, $textual_visits, $points, $votes);
+                                $karma_block = $temp['karma_block'];
+                                $points = $temp['points'];
 
                                 /*
                                    print("<h3>--DEBUG: Karma block code:</h3>\n<pre>\n");
@@ -1279,8 +1389,9 @@ END_IMG_CSS;
                                 $eventData[$i]['properties']['points'] = $points;
                                 $eventData[$i]['properties']['votes'] = $votes;
                                 $eventData[$i]['properties']['visits'] = $visits;
-
+                                
                                 $footer .= sprintf($karma_block, $myvote, $points, $votes, $visits, $url);
+
                             } // foreach key in entries
                     }// End switch on karma voting status
                     return true;
@@ -1783,11 +1894,13 @@ function invertSelection() {
         $images = array();
         $folder = opendir($path);
         while (false !== ($filename = readdir($folder))) {
-            $parts = serendipity_parseFileName($filename);
-            $img_data = serendipity_getimagesize($path . '/' . $filename);
-            if (!isset($img_data['noimage'])) {
-                // Curly braces are just a different syntax of associative array assignment
-                $images{$filename} = array('fname'=>$filename, 'width'=>$img_data[0], 'height'=>$img_data[1]);
+            if ($filename != "ajax-loader.gif") {
+                $parts = serendipity_parseFileName($filename);
+                $img_data = serendipity_getimagesize($path . '/' . $filename);
+                if (!isset($img_data['noimage'])) {
+                    // Curly braces are just a different syntax of associative array assignment
+                    $images{$filename} = array('fname'=>$filename, 'width'=>$img_data[0], 'height'=>$img_data[1]);
+                }
             }
         }
         closedir($folder);                               
@@ -1988,16 +2101,16 @@ function invertSelection() {
             $rating = ((float)$points) / ((float)$votes);
             // Put it into the language-specific string format, rounding up
             // I'm mapping invalid cases (rating > 5 and rating < -2) to the extremes
-            if ($rating <= -1.5) {
-                $rating = PLUGIN_KARMA_VOTEPOINT_1;
-            } elseif ($rating <= -0.5) {
-                $rating = PLUGIN_KARMA_VOTEPOINT_2;
-            } elseif ($rating <= 0.5) {
-                $rating = PLUGIN_KARMA_VOTEPOINT_3;
-            } elseif ($rating <= 1.5) {
-                $rating = PLUGIN_KARMA_VOTEPOINT_4;
+            if ($rating < -1.5) {
+                $rating = $this->get_config('rate_vile', PLUGIN_KARMA_VOTEPOINT_1);
+            } elseif ($rating < -0.5) {
+                $rating = $this->get_config('rate_poor', PLUGIN_KARMA_VOTEPOINT_2);
+            } elseif ($rating < 0.5) {
+                $rating = $this->get_config('rate_okay', PLUGIN_KARMA_VOTEPOINT_3);
+            } elseif ($rating < 1.5) {
+                $rating = $this->get_config('rate_good', PLUGIN_KARMA_VOTEPOINT_4);
             } else {
-                $rating = PLUGIN_KARMA_VOTEPOINT_5;
+                $rating = $this->get_config('rate_best', PLUGIN_KARMA_VOTEPOINT_5);
             }
         }
         return $rating;

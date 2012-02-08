@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php # $Id: lang_en.inc.php 2738 2011-03-09 11:11:14Z garvinhicking $
 
 /**
- *  @version $Revision$
+ *  @version $Revision: 2738 $
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -117,3 +117,9 @@
 @define('PLUGIN_KARMA_DELETE_VOTES', 'Delete selected votes');
 @define('PLUGIN_KARMA_APPROVE_VOTES', 'Approve selected votes');
 @define('PLUGIN_KARMA_ACTIVE_REGISTERED', 'Only logged-in authors can vote');
+
+//New on ajax feature
+@define('PLUGIN_KARMA_AJAX', 'AJAX funcionality');
+@define('PLUGIN_KARMA_AJAX_BLAHBLAH', 'Shall rating be performed by asynchronous javascript? If set to "yes", your rating will be send to the server in the background and the result will be displayed without refreshing the website.');
+@define('PLUGIN_KARMA_ALIGNMENT', 'Alignmnet of the plugin');
+@define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH', 'Shall the plugin be displayed left, center or right');

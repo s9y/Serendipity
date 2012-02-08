@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php # $Id: lang_ko.inc.php 2110 2008-02-11 02:12:07Z slothman $
 # Translated by: Wesley Hwang-Chung <wesley96@gmail.com> 
 # (c) 2005 http://www.tool-box.info/
 
