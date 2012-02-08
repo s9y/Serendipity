@@ -6,8 +6,8 @@ Version 1.7 ()
 
     * fixed draft & future entries preview link in backend
 
-   * Improved karmarating plugin to be able to use AJAX calls
-     (gregman)
+    * Improved karmarating plugin to be able to use AJAX calls
+      (gregman)
 
     * Allow Smarty to fetch .tpl files from all directories so that
       s9y plugin can use the fetch() call for their .tpl files no
