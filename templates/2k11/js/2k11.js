@@ -5,17 +5,18 @@ jQuery(function(f,h,c){var a='placeholder' in h.createElement('input'),d='placeh
 // https://github.com/manuelbieh/Details-Polyfill
 jQuery(function(a){(function(){var b=this;this.hideDetailChildren=function(c){var d=c instanceof jQuery?c[0].childNodes:c.childNodes,e=d.length;a(c).attr("open",!1);if(a.browser.safari==!0)for(var f=0;f<e;f++)if(d[f].nodeType==3&&d[f].textContent!=""){var g=a("<span />");g.text(d[f].textContent).hide(),a(d[f]).after(g),d[f].textContent="",e++}a.each(d,function(d,e){if(a(e)[0].nodeType==1&&e==a(e).parent().find("> summary:first-of-type")[0])a(e).data("processed")!=!0&&(a(e).css({display:"block",cursor:"pointer"}).data("processed",!0).addClass("detailHidden").bind("click",function(){b.toggleDetailChildren(a(this))}),a(c).prepend(a(e)));else if(a(e)[0].nodeType==3&&!e.isElementContentWhitespace&&!!a.browser.safari==!1){var f=a("<span />");f.text(e.textContent).hide(),a(e).after(f),e.textContent=""}else if(a(c).find("> summary").length==0){var g=a("<summary />").text("Details").css({display:"block",cursor:"pointer"}).data("processed",!0).addClass("detailHidden").bind("click",function(){b.toggleDetailChildren(a(this))});a(c).prepend(g)}a(c).find("> :visible:not(summary:first-child)").hide()})},this.showDetailChildren=function(b){a(b).attr("open",!0),a.each(a(b).find("> *"),function(b,c){a(c).show()})},this.toggleDetailChildren=function(a){a.hasClass("detailHidden")?(a.removeClass("detailHidden"),b.showDetailChildren(a.parents("details")[0])):(a.addClass("detailHidden"),b.hideDetailChildren(a.parents("details")[0]))};var c=function(a){var b=a.createElement("details"),c,d,e;return"open"in b?(d=a.body||function(){var b=a.documentElement;return c=!0,b.insertBefore(a.createElement("body"),b.firstElementChild||b.firstChild)}(),b.innerHTML="<summary>a</summary>b",b.style.display="block",d.appendChild(b),e=b.offsetHeight,b.open=!0,e=e!=b.offsetHeight,d.removeChild(b),c&&d.parentNode.removeChild(d),e):!1}(document);if(c==!1){if(a("details").length!==0){var d=a("<style />").text('summary {-webkit-text-size-adjust: none;}  details > summary:first-child:before {content: "\u25bc"; font-size:.9em;padding-right:6px;font-family:"Courier New";} details > summary.detailHidden:first-child:before {content: "\u25ba";font-size:.9em;padding-right:6px;font-family:"Courier New";}');a("head").append(d)}a.each(a("details"),function(a,c){b.hideDetailChildren(c)})}})()})
 // https://github.com/yatil/accessifyhtml5.js
-var AccessifyHTML5=function(b){var a={article:{role:"article"},aside:{role:"complementary"},nav:{role:"navigation"},output:{"aria-live":"polite"},section:{role:"region"},"[required]":{"aria-required":"true"}};if(b){if(b.header){a[b.header]={role:"banner"}}if(b.footer){a[b.footer]={role:"contentinfo"}}}jQuery.each(a,function(c,d){jQuery(c).attr(d)})};
+var AccessifyHTML5=function(b){var a={article:{role:"article"},aside:{role:"complementary"},nav:{role:"navigation"},output:{"aria-live":"polite"},section:{role:"region"},"[required]":{"aria-required":"true"}};if(b){if(b.header){a[b.header]={role:"banner"}}if(b.footer){a[b.footer]={role:"contentinfo"}}if(b.main){a[b.main]={role:"main"}}}jQuery.each(a,function(c,d){jQuery(c).attr(d)})};
 // 2k11
 jQuery(document).ready(function($) {
     // Assign WAI-ARIA roles
-    AccessifyHTML5({header:'#banner',footer:'#colophon'});
+    AccessifyHTML5({header:'#banner',main:'#main',footer:'#colophon'});
+    // AccessifyHTML can't handle this (yet)
+    $('input[type=search]').parents('form').attr('role','search');
     // Cloned primary navigation for small screen
     var $select = $('<select/>');
     $('#primary-nav li').each(function(){var $el=$(this);if($el.find('span').length){$('<option/>',{'selected':'selected','value':'','text':$el.text()}).appendTo($select);}else{$('<option/>',{'value':$el.find('a').attr('href'),'text':$el.text()}).appendTo($select);}});
     if($select.children().size()>0){$select.appendTo('#primary-nav').change(function(){window.location=$(this).find('option:selected').val();});}
     // Livesearch
-    console.log(typeof(lsbase));
     if (typeof(lsbase) == 'string') { $('<div id="LSResult" style="display: none;"><div id="LSShadow"></div></div>').appendTo('#searchform>div'); }
     // Fit embedded videos
     $('#content>article').fitVids();
