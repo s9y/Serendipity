@@ -24,7 +24,7 @@
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script id="modernizr" src="{serendipity_getFile file="js/modernizr-2.0.6.min.js"}"></script>
+    <script id="modernizr" src="{serendipity_getFile file="js/modernizr-2.5.1.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
@@ -41,11 +41,13 @@
 <div id="page" class="clearfix">
     <header id="banner" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}{if not $template_option.use_corenav} no-nav{/if}">
         <div id="identity">
-            <h1><a href="{$serendipityBaseURL}">{$blogTitle}</a></h1>
-            <p>{$blogDescription}</p>
+            <a href="{$serendipityBaseURL}">
+                <h1>{$blogTitle}</h1>
+                <p>{$blogDescription}</p>
+            </a>
         </div>
         
-        <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get" role="search">
+        <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get">
         <div>
             <input type="hidden" name="serendipity[action]" value="search">
             <label for="serendipityQuickSearchTermField" class="visuallyhidden">{$CONST.QUICKSEARCH}</label>
@@ -66,7 +68,7 @@
     </nav>
     {/if}
     <div id="main" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
-        <div id="content" class="clearfix" role="main">
+        <div id="content" class="clearfix">
         {$CONTENT}
         </div>
     {if $leftSidebarElements > 0}

@@ -166,6 +166,7 @@ blockquote:lang(de)  p:last-child:after  { content: '“'; content: close-quote;
 a, a:active, a:visited { color: #3e5f81; }
 a:hover { color: #d52; }
 
+#identity a,
 h1 a, h2 a, h3 a,
 h4 a, h5 a, h6 a { text-decoration: none; }
 
