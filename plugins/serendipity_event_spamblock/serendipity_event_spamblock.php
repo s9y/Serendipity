@@ -28,7 +28,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.78');
+        $propbag->add('version',       '1.79');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -926,6 +926,11 @@ var $filter_defaults;
                                     // already there #$this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                     // already there #$eventData = array('allow_comments' => false);
                                     // already there #$serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                    return false;
+                                } elseif (serendipity_db_bool($this->get_config('killswitch', false)) === true) {
+                                    $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_KILLSWITCH, $addData);
+                                    $eventData = array('allow_comments' => false);
+                                    $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
                                     return false;
                                 } else { 
                                     $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
