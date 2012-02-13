@@ -955,7 +955,7 @@ var $filter_defaults;
                         }
 
                         // Check for global emergency moderation
-                        if ($this->get_config('killswitch', false) === true) {
+                        if (serendipity_db_bool($this->get_config('killswitch', false)) === true) {
                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_KILLSWITCH, $addData);
                             $eventData = array('allow_comments' => false);
                             $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
