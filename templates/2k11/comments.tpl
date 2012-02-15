@@ -3,6 +3,7 @@
     <h4>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|@default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if} {$CONST.ON} <time datetime="{$comment.timestamp|@serendipity_smarty_html5time}" pubdate>{$comment.timestamp|@formatTime:$template_option.date_format}</time>:</h4>
     
     <div class="serendipity_commentBody clearfix content">
+    {if $comment.avatar}{$comment.avatar}{/if}
     {if $comment.body == 'COMMENT_DELETED'}
         {$CONST.COMMENT_IS_DELETED}
     {else}
@@ -11,7 +12,8 @@
     </div>
     
     <footer>
-        <a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.TWOK11_PLINK_TITLE}">{$CONST.TWOK11_PLINK_TEXT}</a>
+        <time>{$comment.timestamp|@formatTime:'%H:%M'}</time>
+        | <a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.TWOK11_PLINK_TITLE}">{$CONST.TWOK11_PLINK_TEXT}</a>
     {if $entry.is_entry_owner}
         | <a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a>
     {/if}
