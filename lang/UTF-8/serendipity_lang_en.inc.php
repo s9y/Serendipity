@@ -913,7 +913,7 @@
 @define('CATEGORY_PLUGIN_HIDEZEROCOUNT', 'Hide archives link when no entries were made in that timespan (requires counting entries)');
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS import, requires PHP5 and might take up much memory');
 @define('SET_TO_MODERATED', 'Moderate');
-@define('COMMENT_MODERATED', 'Comment #%s has successfully been set as moderated');
+@define('COMMENT_MODERATED', 'Comment #%s has successfully been set back to state "moderate".');
 @define('CENTER', 'center');
 @define('FULL_COMMENT_TEXT', 'Yes, with full comment text');
 

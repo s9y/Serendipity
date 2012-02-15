@@ -911,7 +911,7 @@
 @define('RSS_IMPORT_WPXRSS', 'WordPress eXtended RSS Import, benötigt PHP5 und kann viel RAM/Speicher benötigen.');
 
 @define('SET_TO_MODERATED', 'Moderieren');
-@define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich moderiert.');
+@define('COMMENT_MODERATED', 'Kommentar #%s wurde erfolgreich auf Status "moderieren" zurückgesetzt.');
 @define('CENTER', 'mitte');
 @define('FULL_COMMENT_TEXT', 'Ja, mit vollständigen Kommentar-Texten.');
 
