@@ -284,7 +284,7 @@ function serendipity_drawList() {
                         </td>
                         <td align="right">
                             <?php if (serendipity_db_bool($entry['isdraft']) || (!$serendipity['showFutureEntries'] && $entry['timestamp'] >= serendipity_serverOffsetHour())) { ?>
-                            <a target="_blank" href="<?php echo $entry['preview_link']; ?>" title="<?php echo PREVIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo PREVIEW; ?>" /><?php echo PREVIEW ?></a>
+                            <a target="_blank" href="<?php echo $entry['preview_link']; ?>&amp;<?php echo serendipity_setFormToken('url'); ?>" title="<?php echo PREVIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo PREVIEW; ?>" /><?php echo PREVIEW ?></a>
                             <?php } else { ?>
                             <a target="_blank" href="<?php echo $entry['link']; ?>" title="<?php echo VIEW . ' #' . $entry['id']; ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo VIEW; ?>" /><?php echo VIEW ?></a>
                             <?php } ?>

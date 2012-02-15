@@ -5,6 +5,8 @@
 Version 1.6.1 ()
 ------------------------------------------------------------------------
 
+    * fixed draft & future entries preview link in backend
+
     * Fixed some possible errors with pdo db_begin/end_transaction()
 
     * Fixed unneccessary preg_match notices in the statistics backend
