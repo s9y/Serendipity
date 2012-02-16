@@ -56,6 +56,8 @@ class template_option {
     }
 }
 
+$data = array();
+
 if ($serendipity['GET']['adminAction'] == 'install' ) {
     serendipity_plugin_api::hook_event('backend_templates_fetchtemplate', $serendipity);
 
@@ -64,16 +66,17 @@ if ($serendipity['GET']['adminAction'] == 'install' ) {
     serendipity_set_config_var('template', htmlspecialchars($serendipity['GET']['theme']));
     serendipity_set_config_var('template_engine', isset($themeInfo['engine']) ? $themeInfo['engine'] : 'default');
 
-    echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . sprintf(TEMPLATE_SET, htmlspecialchars($serendipity['GET']['theme'])) .'</div>';
+    $data["adminAction"] = "install";
+    $data["install_template"] = htmlspecialchars($serendipity['GET']['theme']);
+    
 }
-?>
 
-<?php
 if ( @file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] .'/layout.php') ) {
-    echo '<div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_note.png') . '" alt="" />'. WARNING_TEMPLATE_DEPRECATED .'</div>';
+    $data["deprecated"] = true;
 }
 
-echo '<h3>' . STYLE_OPTIONS . ' (' . $serendipity['template'] . ')</h3>';
+$data["cur_template"] = $serendipity['template'];
+
 if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php')) {
     serendipity_smarty_init();
     include_once $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php';
@@ -81,6 +84,7 @@ if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] .
 
 if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
+    $data["has_config"] = true;
 
     if ($serendipity['POST']['adminAction'] == 'configure' &&  serendipity_checkFormToken()) {
         $storage = new template_option();
@@ -88,13 +92,11 @@ if (is_array($template_config)) {
         foreach($serendipity['POST']['template'] AS $option => $value) {
             $storage->set_config($option, $value);
         }
-        echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DONE .': '. sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S')) . '</div>';
+        $data["adminAction"] = "configure";
+        $data["save_time"] = sprintf(SETTINGS_SAVED_AT, serendipity_strftime('%H:%M:%S'));
     }
 
-    echo '<form method="post" action="serendipity_admin.php">';
-    echo '<input type="hidden" name="serendipity[adminModule]" value="templates" />';
-    echo '<input type="hidden" name="serendipity[adminAction]" value="configure" />';
-    echo serendipity_setFormToken();
+    $data["form_token"] = serendipity_setFormToken();
 
     include S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 
@@ -104,6 +106,7 @@ if (is_array($template_config)) {
     $template_options->import($template_config);
     $template_options->values =& $template_vars;
 
+    ob_start();
     serendipity_plugin_config(
         $template_options,
         $template_vars,
@@ -117,100 +120,65 @@ if (is_array($template_config)) {
         'template',
         $template_config_groups
     );
-    echo '</form><br />';
+    $data["configuration"] = ob_get_contents();
+    ob_end_clean();
+    
     serendipity_plugin_api::hook_event('backend_templates_configuration_bottom', $template_config);
 } else {
-    echo '<p>' . STYLE_OPTIONS_NONE . '</p>';
     serendipity_plugin_api::hook_event('backend_templates_configuration_none', $template_config);
 }
 
-echo '<h3>' . SELECT_TEMPLATE . '</h3>';
-?>
-<br />
-<?php
     $i = 0;
     $stack = array();
     serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
     $themes = serendipity_fetchTemplates();
+    $data['templates'] = array();
+    $data['templates'][$theme] = array();
     foreach($themes AS $theme) {
         $stack[$theme] = serendipity_fetchTemplateInfo($theme);
     }
     ksort($stack);
 
+    
     foreach ($stack as $theme => $info) {
-        $i++;
-
+        $data['templates'][$theme]['info'] = $info;
         /* Sorry, but we don't display engines */
         if ( strtolower($info['engine']) == 'yes' ) {
             continue;
         }
 
-        $preview = '';
-        $preview_link = false;
         if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg')) {
-            $preview .= '<a href="' . $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg" target="_blank">';
-            $preview_link = true;
+            $data['templates'][$theme]['fullsize_preview'] = $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg';
         } elseif (!empty($info['preview_fullsizeURL'])) {
-            $preview .= '<a href="' . $info['preview_fullsizeURL'] . '" target="_blank">';
-            $preview_link = true;
-
-#        } else {
-#            echo "No large preview";
+            $data['templates'][$theme]['fullsize_preview'] = $info['preview_fullsizeURL'];
         }
 
         if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
-            $preview .= '<img src="' . $serendipity['templatePath'] . $theme . '/preview.png" width="100" style="border: 1px #000000 solid" />';
+            $data['templates'][$theme]['preview'] = $serendipity['templatePath'] . $theme . '/preview.png';
         } elseif (!empty($info['previewURL'])) {
-            $preview .= '<img src="' . $info['previewURL'] . '" width="100" style="border: 1px #000000 solid" />';
-        } else {
-            $preview .= '&nbsp;';
-        }
-        
-        if ($preview_link) {
-            $preview .= '</a>';
-        }
-
-        if (empty($info['customURI'])) {
-            $info['customURI'] = '';
+            $data['templates'][$theme]['preview'] = $info['previewURL'] ;
         }
 
         $unmetRequirements = array();
         if ( isset($info['require serendipity']) && version_compare($info['require serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
             $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
+            $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
         }
 
         /* TODO: Smarty versioncheck */
-
-        $class = (($i % 2 == 0) ? 'even' : 'uneven');
-
-?>
-<div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo $class ?>">
-    <table width="100%" id="serendipity_theme_<?php echo $theme; ?>">
-        <tr>
-            <td colspan="2"><span class="serendipityTemplateSelectName"><strong><?php echo $info['name']; ?></strong></span></td>
-            <td valign="middle" align="center" width="70" rowspan="2">
-<?php
-    if ( $serendipity['template'] != $theme ) {
-        if ( !sizeof($unmetRequirements) ) {
-?>
-            <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]=<?php echo $theme . $info['customURI']; ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/install_now' . $info['customIcon'] . '.png') ?>" alt="<?php echo SET_AS_TEMPLATE ?>" title="<?php echo SET_AS_TEMPLATE ?>" border="0" /></a>
-<?php   } else { ?>
-        <span class="serendipityTemplateSelectUnmetRequirements" style="color: #cccccc"><?php echo sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements)); ?></span>
-<?php
-        }
-    } ?>
-            </td>
-        </tr>
-
-        <tr>
-            <td width="100" style="padding-left: 10px"><?php echo $preview; ?></td>
-            <td valign="top">
-                <span class="serendipityTemplateSelectDetails"><?php echo AUTHOR;       ?>: <?php echo $info['author'];?></span><br />
-                <span class="serendipityTemplateSelectDetails"><?php echo LAST_UPDATED; ?>: <?php echo $info['date'];  ?></span><br />
-                <span class="serendipityTemplateSelectDetails"><?php echo CUSTOM_ADMIN_INTERFACE; ?>: <?php echo $info['custom_admin_interface']; ?></span><br />
-            </td>
-        </tr>
-    </table>
-</div>
-<?php
     }
+    
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
+$serendipity['smarty']->assign($data);
+
+$tfile = dirname(__FILE__) . "/templates.inc.tpl";
+
+$inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
+$serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
+$serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+
+echo $content;
