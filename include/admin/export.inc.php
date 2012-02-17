@@ -6,10 +6,20 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-?>
-  <div>
-    <a href="<?php echo $serendipity['baseURL'] ?>rss.php?version=2.0&all=1" class="serendipityPrettyButton input_button"><?php echo EXPORT_FEED; ?></a>
-  </div>
-<?php
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
+$serendipity['smarty']->assign($data);
+
+$tfile = dirname(__FILE__) . "/export.inc.tpl";
+
+$inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
+$serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
+$serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+
+echo $content;
+
 /* vim: set sts=4 ts=4 expandtab : */
 ?>
