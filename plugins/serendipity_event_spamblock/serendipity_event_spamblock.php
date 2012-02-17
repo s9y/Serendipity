@@ -441,8 +441,8 @@ var $filter_defaults;
 
     function get_default_exclude_urls() {
         return '^http://identi\.ca/notice/\d+$';
-        
     }
+
     function htaccess_update($new_ip) {
         global $serendipity;
 
@@ -476,7 +476,7 @@ var $filter_defaults;
             }
         }
     }
-    
+
     function akismetRequest($api_key, $data, &$ret, $action = 'comment-check') {
         $opt = array(
             'method'            => 'POST',
@@ -506,7 +506,7 @@ var $filter_defaults;
                 $server = 'rest.akismet.com';
                 break;
         }
-                
+
         if ($anon) {
             $data['comment_author'] = 'John Doe';
             $data['comment_author_email'] = '';
@@ -586,8 +586,8 @@ var $filter_defaults;
             $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet API failure: ' . $reqdata, $addData);
         }
     }
-    
-    
+
+
     function tellAboutComment($where, $api_key = '', $comment_id, $is_spam) {
         global $serendipity;
         $comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
@@ -596,10 +596,10 @@ var $filter_defaults;
                                       . " AND C.author=L.author AND C.url=L.url AND C.referer=L.referer "
                                       . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
         if (!is_array($comment)) return;
-        
+
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         if (function_exists('serendipity_request_start')) serendipity_request_start();
-        
+
         switch($where) {
             case 'akismet.com':
                 // DEBUG
@@ -617,12 +617,12 @@ var $filter_defaults;
                   'comment_author_url'      => $comment['url'],
                   'comment_content'         => $comment['body']
                 );
-                
+
                 $this->akismetRequest($api_key, $data, $ret, ($is_spam ? 'submit-spam' : 'submit-ham'));
-                
+
                 break;
         }
-        
+
         if (function_exists('serendipity_request_end')) serendipity_request_end();
     }
 
@@ -650,7 +650,7 @@ var $filter_defaults;
                     'comment_author_url'      => $addData['url'],
                     'comment_content'         => $addData['comment']
                 );
-                
+
                 $this->akismetRequest($api_key, $data, $ret);
                 break;
 
@@ -867,7 +867,7 @@ var $filter_defaults;
                     fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($eventData, true) . "\n" . print_r($addData, true) . "\n");
                     fclose($fp);
                 */    
-                    
+
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
 
@@ -898,7 +898,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        
+
                         /*
                         if ($addData['type'] != 'NORMAL' && empty($addData['name'])) {
                             $eventData = array('allow_coments' => false);
@@ -1026,7 +1026,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        
+
                         // Filter Akismet Blacklist?
                         $akismet_apikey = $this->get_config('akismet');
                         $akismet        = $this->get_config('akismet_filter');
@@ -1404,7 +1404,7 @@ var $filter_defaults;
                     if (!empty($akismet_apikey)) {
                         $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/unconfigure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
                         $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/configure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
-                       }
+                    }
 
                     $eventData['action_author'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/' . ($author_is_filtered ? 'un' : '') . 'configure.png') . '" alt="" /></a>';
 
@@ -1438,7 +1438,7 @@ var $filter_defaults;
 
         // Check for word filtering
         if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
-        
+
             if($ftc) $filter_type = 'reject';
 
             // Filter authors names
@@ -1538,7 +1538,7 @@ var $filter_defaults;
                 }
             }
         } // Content filtering end
-        
+
         if($ftc) { 
             // Check for maximum number of links before rejecting
             $link_count = substr_count(strtolower($addData['comment']), 'http://');
