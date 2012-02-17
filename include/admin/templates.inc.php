@@ -174,11 +174,10 @@ if (!is_object($serendipity['smarty'])) {
 
 $serendipity['smarty']->assign($data);
 
-$tfile = dirname(__FILE__) . "/templates.inc.tpl";
+$tfile = dirname(__FILE__) . "/tpl/templates.inc.tpl";
 
-$inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
-$serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-$serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
 
 echo $content;
+
+/* vim: set sts=4 ts=4 expandtab : */

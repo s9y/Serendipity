@@ -129,15 +129,11 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW'])) {
 
 $serendipity['smarty']->assign($data);
 
-$tfile = dirname(__FILE__) . "/groups.inc.tpl";
+$tfile = dirname(__FILE__) . "/tpl/groups.inc.tpl";
 
-$inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
-$serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-$serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
 
 echo $content;
-
 
 /* vim: set sts=4 ts=4 expandtab : */
 ?>
