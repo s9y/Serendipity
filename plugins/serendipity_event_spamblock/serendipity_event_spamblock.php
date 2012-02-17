@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_event_spamblock.php 2744 2011-04-11 07:34:37Z garvinhicking $
+<?php # $Id$
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -22,13 +22,13 @@ var $filter_defaults;
         $propbag->add('name',          PLUGIN_EVENT_SPAMBLOCK_TITLE);
         $propbag->add('description',   PLUGIN_EVENT_SPAMBLOCK_DESC);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Garvin Hicking, Sebastian Nohn, Grischa Brockhaus');
+        $propbag->add('author',        'Garvin Hicking, Sebastian Nohn, Grischa Brockhaus, Ian');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.77');
+        $propbag->add('version',       '1.79');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -74,32 +74,32 @@ var $filter_defaults;
             'logfile'));
         $propbag->add('groups', array('ANTISPAM'));
         $propbag->add('config_groups', array(
-            'Content Filter' => array(
-                'contentfilter_activate',
-                'contentfilter_urls',
-                'contentfilter_authors',
-                'contentfilter_words',
-                'contentfilter_emails',
-                'bloggdeblacklist',
-                'akismet',
-                'akismet_server',
-                'akismet_filter',
-            ),
-            'Trackbacks' => array(
-                'trackback_ipvalidation' ,
-                'trackback_ipvalidation_url_exclude' ,
-                'forcemoderationt',
-                'forcemoderationt_treat',
-                'disable_api_comments',
-                'trackback_check_url',
-            )
+                'Content Filter' => array(
+                    'contentfilter_activate',
+                    'contentfilter_urls',
+                    'contentfilter_authors',
+                    'contentfilter_words',
+                    'contentfilter_emails',
+                    'bloggdeblacklist',
+                    'akismet',
+                    'akismet_server',
+                    'akismet_filter',
+                ),
+                'Trackbacks' => array(
+                    'trackback_ipvalidation' ,
+                    'trackback_ipvalidation_url_exclude' ,
+                    'forcemoderationt',
+                    'forcemoderationt_treat',
+                    'disable_api_comments',
+                    'trackback_check_url',
+                )
         ));
 
         $this->filter_defaults = array(
-                                   'authors' => 'casino;phentermine;credit;loans;poker',
-                                   'emails'  => '',
-                                   'urls'    => '8gold\.com;911easymoney\.com;canadianlabels\.net;condodream\.com;crepesuzette\.com;debt-help-bill-consolidation-elimination\.com;fidelityfunding\.net;flafeber\.com;gb\.com;houseofsevengables\.com;instant-quick-money-cash-advance-personal-loans-until-pay-day\.com;mediavisor\.com;newtruths\.com;oiline\.com;onlinegamingassociation\.com;online\-+poker\.com;popwow\.com;royalmailhotel\.com;spoodles\.com;sportsparent\.com;stmaryonline\.org;thatwhichis\.com;tmsathai\.org;uaeecommerce\.com;learnhowtoplay\.com',
-                                   'words'   => 'very good site!;Real good stuff!'
+                                'authors' => 'casino;phentermine;credit;loans;poker',
+                                'emails'  => '',
+                                'urls'    => '8gold\.com;911easymoney\.com;canadianlabels\.net;condodream\.com;crepesuzette\.com;debt-help-bill-consolidation-elimination\.com;fidelityfunding\.net;flafeber\.com;gb\.com;houseofsevengables\.com;instant-quick-money-cash-advance-personal-loans-until-pay-day\.com;mediavisor\.com;newtruths\.com;oiline\.com;onlinegamingassociation\.com;online\-+poker\.com;popwow\.com;royalmailhotel\.com;spoodles\.com;sportsparent\.com;stmaryonline\.org;thatwhichis\.com;tmsathai\.org;uaeecommerce\.com;learnhowtoplay\.com',
+                                'words'   => 'very good site!;Real good stuff!'
         );
     }
 
@@ -589,40 +589,40 @@ var $filter_defaults;
     
     
     function tellAboutComment($where, $api_key = '', $comment_id, $is_spam) {
-    	global $serendipity;
-    	$comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
-    								  . " FROM {$serendipity['dbPrefix']}comments C, {$serendipity['dbPrefix']}spamblocklog L , {$serendipity['dbPrefix']}entries E "
-    								  . " WHERE C.id = '" . (int)$comment_id . "' AND C.entry_id=L.entry_id AND C.entry_id=E.id "
-    								  . " AND C.author=L.author AND C.url=L.url AND C.referer=L.referer "
-    								  . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
-    	if (!is_array($comment)) return;
-    	
+        global $serendipity;
+        $comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
+                                      . " FROM {$serendipity['dbPrefix']}comments C, {$serendipity['dbPrefix']}spamblocklog L , {$serendipity['dbPrefix']}entries E "
+                                      . " WHERE C.id = '" . (int)$comment_id . "' AND C.entry_id=L.entry_id AND C.entry_id=E.id "
+                                      . " AND C.author=L.author AND C.url=L.url AND C.referer=L.referer "
+                                      . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
+        if (!is_array($comment)) return;
+
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         if (function_exists('serendipity_request_start')) serendipity_request_start();
-    	
+
         switch($where) {
             case 'akismet.com':
                 // DEBUG
                 //$this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
                 $ret  = array();
-        		$data = array(
-        		  'blog'                    => $serendipity['baseURL'],
-        		  'user_agent'              => $comment['log_useragent'],
-        		  'referrer'                => $comment['referer'],
-        		  'user_ip'                 => $comment['ip'],
-        		  'permalink'               => serendipity_archiveURL($comment['entry_id'], $comment['entry_title'], 'serendipityHTTPPath', true, array('timestamp' => $comment['timestamp'])),
-        		  'comment_type'            => ($comment['type'] == 'NORMAL' ? 'comment' : strtolower($comment['type'])), // second: pingback or trackback.
-        		  'comment_author'          => $comment['author'],
-        		  'comment_author_email'    => $comment['email'],
-        		  'comment_author_url'      => $comment['url'],
-        		  'comment_content'         => $comment['body']
+                $data = array(
+                  'blog'                    => $serendipity['baseURL'],
+                  'user_agent'              => $comment['log_useragent'],
+                  'referrer'                => $comment['referer'],
+                  'user_ip'                 => $comment['ip'],
+                  'permalink'               => serendipity_archiveURL($comment['entry_id'], $comment['entry_title'], 'serendipityHTTPPath', true, array('timestamp' => $comment['timestamp'])),
+                  'comment_type'            => ($comment['type'] == 'NORMAL' ? 'comment' : strtolower($comment['type'])), // second: pingback or trackback.
+                  'comment_author'          => $comment['author'],
+                  'comment_author_email'    => $comment['email'],
+                  'comment_author_url'      => $comment['url'],
+                  'comment_content'         => $comment['body']
                 );
-				
-				$this->akismetRequest($api_key, $data, $ret, ($is_spam ? 'submit-spam' : 'submit-ham'));
-				
+
+                $this->akismetRequest($api_key, $data, $ret, ($is_spam ? 'submit-spam' : 'submit-ham'));
+
                 break;
         }
-        
+
         if (function_exists('serendipity_request_end')) serendipity_request_end();
     }
 
@@ -638,20 +638,20 @@ var $filter_defaults;
                 // DEBUG
                 //$this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
                 $ret  = array();
-        		$data = array(
-        		  'blog'                    => $serendipity['baseURL'],
-        		  'user_agent'              => $_SERVER['HTTP_USER_AGENT'],
-        		  'referrer'                => $_SERVER['HTTP_REFERER'],
-        		  'user_ip'                 => $_SERVER['REMOTE_ADDR'] != getenv('SERVER_ADDR') ? $_SERVER['REMOTE_ADDR'] : getenv('HTTP_X_FORWARDED_FOR'),
-        		  'permalink'               => serendipity_archiveURL($eventData['id'], $eventData['title'], 'serendipityHTTPPath', true, array('timestamp' => $eventData['timestamp'])),
-        		  'comment_type'            => ($addData['type'] == 'NORMAL' ? 'comment' : strtolower($addData['type'])), // second: pingback or trackback.
-        		  'comment_author'          => $addData['name'],
-        		  'comment_author_email'    => $addData['email'],
-        		  'comment_author_url'      => $addData['url'],
-        		  'comment_content'         => $addData['comment']
+                $data = array(
+                    'blog'                    => $serendipity['baseURL'],
+                    'user_agent'              => $_SERVER['HTTP_USER_AGENT'],
+                    'referrer'                => $_SERVER['HTTP_REFERER'],
+                    'user_ip'                 => $_SERVER['REMOTE_ADDR'] != getenv('SERVER_ADDR') ? $_SERVER['REMOTE_ADDR'] : getenv('HTTP_X_FORWARDED_FOR'),
+                    'permalink'               => serendipity_archiveURL($eventData['id'], $eventData['title'], 'serendipityHTTPPath', true, array('timestamp' => $eventData['timestamp'])),
+                    'comment_type'            => ($addData['type'] == 'NORMAL' ? 'comment' : strtolower($addData['type'])), // second: pingback or trackback.
+                    'comment_author'          => $addData['name'],
+                    'comment_author_email'    => $addData['email'],
+                    'comment_author_url'      => $addData['url'],
+                    'comment_content'         => $addData['comment']
                 );
-				
-				$this->akismetRequest($api_key, $data, $ret);
+
+                $this->akismetRequest($api_key, $data, $ret);
                 break;
 
             case 'blogg.de':
@@ -699,17 +699,17 @@ var $filter_defaults;
         
         if ($dbversion == '1') {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblocklog (
-                          timestamp int(10) {UNSIGNED} default null,
-                          type varchar(255),
-                          reason text,
-                          entry_id int(10) {UNSIGNED} not null default '0',
-                          author varchar(80),
-                          email varchar(200),
-                          url varchar(200),
-                          useragent varchar(255),
-                          ip varchar(15),
-                          referer varchar(255),
-                          body text)";
+                        timestamp int(10) {UNSIGNED} default null,
+                        type varchar(255),
+                        reason text,
+                        entry_id int(10) {UNSIGNED} not null default '0',
+                        author varchar(80),
+                        email varchar(200),
+                        url varchar(200),
+                        useragent varchar(255),
+                        ip varchar(15),
+                        referer varchar(255),
+                        body text)";
             $sql = serendipity_db_schema_import($q);
 
             $q   = "CREATE INDEX kspamidx ON {$serendipity['dbPrefix']}spamblocklog (timestamp);";
@@ -722,8 +722,8 @@ var $filter_defaults;
             $sql = serendipity_db_schema_import($q);
 
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblock_htaccess (
-                          timestamp int(10) {UNSIGNED} default null,
-                          ip varchar(15))";
+                        timestamp int(10) {UNSIGNED} default null,
+                        ip varchar(15))";
             $sql = serendipity_db_schema_import($q);
 
             $q   = "CREATE INDEX kshtaidx ON {$serendipity['dbPrefix']}spamblock_htaccess (timestamp);";
@@ -867,7 +867,7 @@ var $filter_defaults;
                     fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($eventData, true) . "\n" . print_r($addData, true) . "\n");
                     fclose($fp);
                 */    
-                    
+
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
 
@@ -898,7 +898,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        
+
                         /*
                         if ($addData['type'] != 'NORMAL' && empty($addData['name'])) {
                             $eventData = array('allow_coments' => false);
@@ -920,12 +920,26 @@ var $filter_defaults;
                                                              AND name  = '" . serendipity_db_escape_string($addData['email']) . "'
                                                              AND value = '" . serendipity_db_escape_string($addData['name']) . "'", true);
                             if (!is_array($auth)) {
-                                $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
-                                $eventData['moderate_comments'] = true;
-                                $eventData['status']            = 'confirm1';
-                                $serendipity['csuccess']        = 'moderate';
-                                $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL;
-                                return false;
+                                // Filter authors names, Filter URL, Filter Content, Filter Emails, Check for maximum number of links before rejecting
+                                // moderate false
+                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData, true)) { 
+                                    // already there #$this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
+                                    // already there #$eventData = array('allow_comments' => false);
+                                    // already there #$serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                                    return false;
+                                } elseif (serendipity_db_bool($this->get_config('killswitch', false)) === true) {
+                                    $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_KILLSWITCH, $addData);
+                                    $eventData = array('allow_comments' => false);
+                                    $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
+                                    return false;
+                                } else { 
+                                    $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
+                                    $eventData['moderate_comments'] = true;
+                                    $eventData['status']            = 'confirm1';
+                                    $serendipity['csuccess']        = 'moderate';
+                                    $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL;
+                                    return false;
+                                }
                             } else {
                                 // User is allowed to post message, bypassing other checks as if he were logged in.
                                 return true;
@@ -941,7 +955,7 @@ var $filter_defaults;
                         }
 
                         // Check for global emergency moderation
-                        if ($this->get_config('killswitch', false) === true) {
+                        if (serendipity_db_bool($this->get_config('killswitch', false)) === true) {
                             $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_KILLSWITCH, $addData);
                             $eventData = array('allow_comments' => false);
                             $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
@@ -1012,7 +1026,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        
+
                         // Filter Akismet Blacklist?
                         $akismet_apikey = $this->get_config('akismet');
                         $akismet        = $this->get_config('akismet_filter');
@@ -1063,106 +1077,9 @@ var $filter_defaults;
                             }
                         }
 
-                        // Check for word filtering
-                        if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
-
-                            // Filter authors names
-                            $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
-                            if (is_array($filter_authors)) {
-                                foreach($filter_authors AS $filter_author) {
-                                    $filter_author = trim($filter_author);
-                                    if (empty($filter_author)) {
-                                        continue;
-                                    }
-                                    if (preg_match('@(' . $filter_author . ')@i', $addData['name'], $wordmatch)) {
-                                        if ($filter_type == 'moderate') {
-                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1], $addData);
-                                            $eventData['moderate_comments'] = true;
-                                            $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1] . ')';
-                                        } else {
-                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1], $addData);
-                                            $eventData = array('allow_comments' => false);
-                                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
-                                            return false;
-                                        }
-                                    }
-                                }
-                            }
-
-                            // Filter URL
-                            $filter_urls = explode(';', $this->get_config('contentfilter_urls', $this->filter_defaults['urls']));
-                            if (is_array($filter_urls)) {
-                                foreach($filter_urls AS $filter_url) {
-                                    $filter_url = trim($filter_url);
-                                    if (empty($filter_url)) {
-                                        continue;
-                                    }
-                                    if (preg_match('@(' . $filter_url . ')@i', $addData['url'], $wordmatch)) {
-                                        if ($filter_type == 'moderate') {
-                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1], $addData);
-                                            $eventData['moderate_comments'] = true;
-                                            $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1] . ')';
-                                        } else {
-                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1], $addData);
-                                            $eventData = array('allow_comments' => false);
-                                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
-                                            return false;
-                                        }
-                                    }
-                                }
-                            }
-
-                            // Filter Content
-                            $filter_bodys = explode(';', $this->get_config('contentfilter_words', $this->filter_defaults['words']));
-                            if (is_array($filter_bodys)) {
-                                foreach($filter_bodys AS $filter_body) {
-                                    $filter_body = trim($filter_body);
-                                    if (empty($filter_body)) {
-                                        continue;
-                                    }
-                                    if (preg_match('@(' . $filter_body . ')@i', $addData['comment'], $wordmatch)) {
-                                        if ($filter_type == 'moderate') {
-                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
-                                            $eventData['moderate_comments'] = true;
-                                            $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1] . ')';
-                                        } else {
-                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
-                                            $eventData = array('allow_comments' => false);
-                                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
-                                            return false;
-                                        }
-                                    }
-                                }
-                            }
-
-                            // Filter Emails
-                            $filter_emails = explode(';', $this->get_config('contentfilter_emails', $this->filter_defaults['emails']));
-                            if (is_array($filter_emails)) {
-                                foreach($filter_emails AS $filter_email) {
-                                    $filter_email = trim($filter_email);
-                                    if (empty($filter_email)) {
-                                        continue;
-                                    }
-                                    if (preg_match('@(' . $filter_email . ')@i', $addData['email'], $wordmatch)) {
-                                        $this->IsHardcoreSpammer();
-                                        if ($filter_type == 'moderate') {
-                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1], $addData);
-                                            $eventData['moderate_comments'] = true;
-                                            $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1] . ')';
-                                        } else {
-                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1], $addData);
-                                            $eventData = array('allow_comments' => false);
-                                            $serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
-                                            return false;
-                                        }
-                                    }
-                                }
-                            }
-                        } // Content filtering end
+                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) { 
+                            return false;
+                        }
 
                         // Filter Blogg.de Blacklist?
                         $bloggdeblacklist = $this->get_config('bloggdeblacklist');
@@ -1438,18 +1355,18 @@ var $filter_defaults;
                     // Tell Akismet about spam or not spam
                     $tell_id = null;
                     if (isset($serendipity['GET']['spamIsSpam'])) {
-                    	$tell_spam = true;
-                    	$tell_id = $serendipity['GET']['spamIsSpam'];
+                        $tell_spam = true;
+                        $tell_id = $serendipity['GET']['spamIsSpam'];
                     }
                     if (isset($serendipity['GET']['spamNotSpam'])) {
-                    	$tell_spam = false;
-                    	$tell_id = $serendipity['GET']['spamNotSpam'];
+                        $tell_spam = false;
+                        $tell_id = $serendipity['GET']['spamNotSpam'];
                     }
                     if ($tell_id !== null) {
                         $akismet_apikey = $this->get_config('akismet');
                         $akismet        = $this->get_config('akismet_filter');
                         if (!empty($akismet_apikey))
-	                        $this->tellAboutComment('akismet.com', $akismet_apikey, $tell_id, $tell_spam);
+                            $this->tellAboutComment('akismet.com', $akismet_apikey, $tell_id, $tell_spam);
                     }
 
                     // Add Author to blacklist. If already filtered, it will be removed from the filter. (AKA "Toggle")
@@ -1485,9 +1402,9 @@ var $filter_defaults;
                     $akismet_apikey = $this->get_config('akismet');
                     $akismet        = $this->get_config('akismet_filter');
                     if (!empty($akismet_apikey)) {
-	                    $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/unconfigure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
-    	                $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/configure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
-   	                }
+                        $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/unconfigure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
+                        $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/configure.png') . '" alt="" />' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
+                    }
 
                     $eventData['action_author'] .= ' <a id="' . $clink1 . '" class="serendipityIconLink" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><img src="' . serendipity_getTemplateFile('admin/img/' . ($author_is_filtered ? 'un' : '') . 'configure.png') . '" alt="" /></a>';
 
@@ -1512,6 +1429,129 @@ var $filter_defaults;
             return false;
         }
     }
+
+    /**
+     * wordfilter, email and additional link check moved to this function, to allow comment user to opt-in (verify_once), but reject all truly spam comments before.
+     **/
+    function wordfilter($logfile, &$eventData, $wordmatch, $addData, $ftc = false) { 
+        global $serendipity;
+
+        // Check for word filtering
+        if ($filter_type = $this->get_config('contentfilter_activate', 'moderate')) {
+
+            if($ftc) $filter_type = 'reject';
+
+            // Filter authors names
+            $filter_authors = explode(';', $this->get_config('contentfilter_authors', $this->filter_defaults['authors']));
+            if (is_array($filter_authors)) {
+                foreach($filter_authors AS $filter_author) {
+                    $filter_author = trim($filter_author);
+                    if (empty($filter_author)) {
+                        continue;
+                    }
+                    if (preg_match('@(' . $filter_author . ')@i', $addData['name'], $wordmatch)) {
+                        if ($filter_type == 'moderate') {
+                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1], $addData);
+                            $eventData['moderate_comments'] = true;
+                            $serendipity['csuccess']        = 'moderate';
+                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1] . ')';
+                        } else {
+                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_AUTHORS . ': ' . $wordmatch[1], $addData);
+                            $eventData = array('allow_comments' => false);
+                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // Filter URL
+            $filter_urls = explode(';', $this->get_config('contentfilter_urls', $this->filter_defaults['urls']));
+            if (is_array($filter_urls)) {
+                foreach($filter_urls AS $filter_url) {
+                    $filter_url = trim($filter_url);
+                    if (empty($filter_url)) {
+                        continue;
+                    }
+                    if (preg_match('@(' . $filter_url . ')@i', $addData['url'], $wordmatch)) {
+                        if ($filter_type == 'moderate') {
+                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1], $addData);
+                            $eventData['moderate_comments'] = true;
+                            $serendipity['csuccess']        = 'moderate';
+                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1] . ')';
+                        } else {
+                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS . ': ' . $wordmatch[1], $addData);
+                            $eventData = array('allow_comments' => false);
+                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // Filter Content
+            $filter_bodys = explode(';', $this->get_config('contentfilter_words', $this->filter_defaults['words']));
+            if (is_array($filter_bodys)) {
+                foreach($filter_bodys AS $filter_body) {
+                    $filter_body = trim($filter_body);
+                    if (empty($filter_body)) {
+                        continue;
+                    }
+                    if (preg_match('@(' . $filter_body . ')@i', $addData['comment'], $wordmatch)) {
+                        if ($filter_type == 'moderate') {
+                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
+                            $eventData['moderate_comments'] = true;
+                            $serendipity['csuccess']        = 'moderate';
+                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1] . ')';
+                        } else {
+                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS . ': ' . $wordmatch[1], $addData);
+                            $eventData = array('allow_comments' => false);
+                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            // Filter Emails
+            $filter_emails = explode(';', $this->get_config('contentfilter_emails', $this->filter_defaults['emails']));
+            if (is_array($filter_emails)) {
+                foreach($filter_emails AS $filter_email) {
+                    $filter_email = trim($filter_email);
+                    if (empty($filter_email)) {
+                        continue;
+                    }
+                    if (preg_match('@(' . $filter_email . ')@i', $addData['email'], $wordmatch)) {
+                        $this->IsHardcoreSpammer();
+                        if ($filter_type == 'moderate') {
+                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1], $addData);
+                            $eventData['moderate_comments'] = true;
+                            $serendipity['csuccess']        = 'moderate';
+                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1] . ')';
+                        } else {
+                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_EMAILS . ': ' . $wordmatch[1], $addData);
+                            $eventData = array('allow_comments' => false);
+                            $serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                            return false;
+                        }
+                    }
+                }
+            }
+        } // Content filtering end
+
+        if($ftc) { 
+            // Check for maximum number of links before rejecting
+            $link_count = substr_count(strtolower($addData['comment']), 'http://');
+            if ($links_reject > 0 && $link_count > $links_reject) {
+                $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT, $addData);
+                $eventData = array('allow_comments' => false);
+                $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
+                return false;
+            }
+        }
+
+    } // function wordfilter end
+
 
     function &checkFilter($what, $match, $getItems = false) {
         $items = explode(';', $this->get_config('contentfilter_' . $what, $this->filter_defaults[$what]));
@@ -1581,9 +1621,9 @@ var $filter_defaults;
                 if (empty($logfile)) {
                     return;
                 }
-				if (strpos($logfile, '%') !== false) {
-					$logfile = strftime($logfile);
-				}
+                if (strpos($logfile, '%') !== false) {
+                    $logfile = strftime($logfile);
+                }
 
                 $fp = @fopen($logfile, 'a+');
                 if (!is_resource($fp)) {
