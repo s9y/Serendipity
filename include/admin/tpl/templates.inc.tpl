@@ -1,13 +1,13 @@
 {if $adminAction == "install"}
     <div class="serendipityAdminMsgSuccess">
-        <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+        <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {$install_template|string_format:"{$CONST.TEMPLATE_SET}"}
     </div>
 {/if}
 
 {if $deprecated}
     <div class="serendipityAdminMsgNote">
-        <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_note.png"}" alt="" />
+        <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />
         {$CONST.WARNING_TEMPLATE_DEPRECATED}
     </div>
 {/if}
@@ -17,7 +17,7 @@
 {if $has_config}
     {if $adminAction == "configure"}
         <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {$CONST:DONE}: {$save_time}
         </div>
     {/if}
@@ -50,7 +50,7 @@
     {if $template != $cur_template}
         {if ! $info.unmetRequirements}
             <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">
-                <img src="{serendipity_getFile file="admin/img/install_now{$info.info.customIcon}.png"}" alt="{$CONST.SET_AS_TEMPLATE}" title="{$CONST.SET_AS_TEMPLATE}" border="0" />
+                <img src="{serendipity_getFile file='admin/img/install_now{$info.info.customIcon}.png'}" alt="{$CONST.SET_AS_TEMPLATE}" title="{$CONST.SET_AS_TEMPLATE}" border="0" />
             </a>
         {else}
             <span class="serendipityTemplateSelectUnmetRequirements" style="color: #cccccc">{$info.unmetRequirements}></span>

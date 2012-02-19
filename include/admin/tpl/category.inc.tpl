@@ -1,14 +1,14 @@
 {if $post_save}
     {if $new}
          <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {$CONST.CATEGORY_SAVED}
          </div>
     {/if}
     {if $edit}
         {if isset($editPermission) && $editPermission == false}
             <div class="serendipityAdminMsgError">
-                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
+                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
                 {$CONST.PERM_DENIED}
             </div>
         {else}
@@ -16,7 +16,7 @@
                 {$subcat}
             {else}
                 <div class="serendipityAdminMsgSuccess">
-                    <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+                    <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
                     {$CONST.CATEGORY_SAVED}
                 </div>
             {/if}
@@ -27,7 +27,7 @@
 {if $doDelete}
     {if $deleteSuccess}
         <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {if $remainingCat}
                 {$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}
             {else}
@@ -36,7 +36,7 @@
         </div>
     {else}
         <div class="serendipityAdminMsgError">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
+            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
             {$CONST.INVALID_CATEGORY}
         </div>
     {/if}
@@ -121,7 +121,7 @@
             <select id="parent_cat" name="serendipity[cat][parent_cat]">
                 <option value="0" {if $cid == 0} selected="selected" {/if}>[ {$CONST.NO_CATEGORY} ]</option>
                 {foreach $categories as $cat}
-                    {*We can't be our own parent, the universe will collapse *}
+                    {* We can't be our own parent, the universe will collapse *}
                     {if $cat.categoryid == $cid}
                         {continue}
                     {/if}
@@ -163,23 +163,23 @@
             <tr>
                 <td width="16">
                     <a title="{$CONST.EDIT}" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}">
-                        <img src="{serendipity_getFile file="admin/img/edit.png"}" border="0" alt="{$CONST.EDIT}" />
+                        <img src="{serendipity_getFile file='admin/img/edit.png'}" border="0" alt="{$CONST.EDIT}" />
                     </a>
                 </td>
                 <td width="16">
                     <a title="{$CONST.DELETE}" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}">
-                        <img src="{serendipity_getFile file="admin/img/delete.png"}" border="0" alt="{$CONST.DELETE}" />
+                        <img src="{serendipity_getFile file='admin/img/delete.png'}" border="0" alt="{$CONST.DELETE}" />
                     </a>
                 </td>
                 <td width="16">
                     {if $category.category_icon}
-                        <img src="{serendipity_getFile file="admin/img/thumbnail.png"}" alt="" />
+                        <img src="{serendipity_getFile file='admin/img/thumbnail.png'}" alt="" />
                     {else}
                         &nbsp;
                     {/if}
                 </td>
                 <td width="300" style="padding-left: {$category.depth*15+20}px">
-                    <img src="{serendipity_getFile file="admin/img/folder.png"}" style="vertical-align: bottom;">
+                    <img src="{serendipity_getFile file='admin/img/folder.png'}" style="vertical-align: bottom;">
                     {$category.category_name|escape:"html"}
                 </td>
                 <td>
