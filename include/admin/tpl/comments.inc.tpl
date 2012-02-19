@@ -239,6 +239,7 @@ function highlightComment(id, checkvalue) {
         </table>
     </td>
 </tr>
+</table>
 
 </form>
 {/if} {* if no comments else comments end *}
