@@ -140,11 +140,11 @@
                         {if count($entry.categories)}
                             {$CONST.IN}
                             {foreach $entry.categories as $cat}
-                                {$caturl = serendipity_categoryURL($cat)}{* serendipity_categoryURL($cat) entweder die fnction in security setting aufnehmen oder nachbilden oder raus *}
+                                {$caturl = serendipity_categoryURL($cat)}{* serendipity_categoryURL($cat) include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
                                 {$cats[] = '<a href="{$caturl}">{$cat.category_name|escape)}</a>'}
                             {/foreach}
                             {foreach $cats AS $implode_cat}
-                                {$implode_cat}{if !$implode_cat@last}, {/if}
+                                {$implode_cat}{if (count($cats) > 1) && !$implode_cat@last}, {/if}
                             {/foreach}
                         {/if}
 
@@ -155,7 +155,7 @@
                         <td align="right">
                             {if ($entry.isdraft == true) || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
                             <a target="_blank" href="?serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.PREVIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.PREVIEW}" />{$CONST.PREVIEW}</a>
-                            {else}
+                            {else} {* serendipity_archiveURL() include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
                             <a target="_blank" href="{serendipity_archiveURL($entry.id, $entry.title, "serendipityHTTPPath", true, ['timestamp' => $entry.timestamp])}" title="{$CONST.VIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.VIEW}" />{$CONST.VIEW}</a>
                             {/if}
                             <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/edit.png'}" alt="{$CONST.EDIT}" />{$CONST.EDIT}</a>
@@ -243,13 +243,13 @@
     {foreach $rip_entry AS $rip}
         {$rip}
         <br />
-    {/foreach}
+	{/foreach}
 {/if}
 {if ($marty.get.adminAction && $is_doMultiDelete)}
     {foreach $delete_entry AS $erase}
-        {$erase}
+		{$erase}
         <br />
-    {/foreach}
+	{/foreach}
 {/if}
 {if ($marty.get.adminAction && ( $is_delete || $is_multidelete ))}
 <br />
