@@ -1,6 +1,54 @@
-﻿===== Smarty-3.1.7 =====
+﻿===== trunk  =====
+===== Smarty-3.1.8  =====
+19.02.2012
+- bugfix {include} could result in a fatal error if used in appended or prepended nested {block} tags
+  (reported by mh and Issue 83)
+- enhancement added Smarty special variable $smarty.template_object to return the current template object (Forum Topic 20289)
+
+
+07.02.2012
+- bugfix increase entropy of internal function names in compiled and cached template files (Forum Topic 20996)
+- enhancement cacheable parameter added to default plugin handler, same functionality as in registerPlugin (request by calguy1000)
+
+06.02.2012
+- improvement stream_resolve_include_path() added to Smarty_Internal_Get_Include_Path (Forum Topic 20980)
+- bugfix fetch('extends:foo.tpl') always yielded $source->exists == true (Forum Topic 20980)
+- added modifier unescape:"url", fix (Forum Topic 20980)
+- improvement replaced some calls of preg_replace with str_replace (Issue 73)
+
+30.01.2012
+- bugfix Smarty_Security internal $_resource_dir cache wasn't properly propagated
+
+27.01.2012
+- bugfix Smarty did not a template name of "0" (Forum Topic 20895)
+
+20.01.2012
+- bugfix typo in Smarty_Internal_Get_IncludePath did cause runtime overhead (Issue 74)
+- improvment remove unneeded assigments (Issue 75 and 76)
+- fixed typo in template parser
+- bugfix output filter must not run before writing cache when template does contain nocache code (Issue 71)
+
+02.01.2012
+- bugfix {block foo nocache} did not load plugins within child {block} in nocache mode (Forum Topic 20753)
+
+29.12.2011
+- bugfix enable more entropy in Smarty_Internal_Write_File for "more uniqueness" and Cygwin compatibility (Forum Topic 20724)
+- bugfix embedded quotes in single quoted strings did not compile correctly in {nocache} sections (Forum Topic 20730)
+
+28.12.2011
+- bugfix Smarty's internal header code must be excluded from postfilters (issue 71)
+
+22.12.2011
+- bugfix the new lexer of 17.12.2011 did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+- bugfix template inheritace did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+
+20.12.2011
+- bugfix template inheritance: {$smarty.block.child} in nested child {block} tags did not return 
+  content after {$smarty.block.child} (Forum Topic 20564)
+
+===== Smarty-3.1.7 =====
 18.12.2011
-- bugfix strings ending with " in multiline strings of config files failed to compile (isse #67)
+- bugfix strings ending with " in multiline strings of config files failed to compile (issue #67)
 - added chaining to Smarty_Internal_Templatebase
 - changed unloadFilter() to not return a boolean in favor of chaining and API conformity
 - bugfix unregisterObject() raised notice when object to unregister did not exist
