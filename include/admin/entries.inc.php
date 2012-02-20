@@ -96,28 +96,27 @@ function serendipity_drawList() {
                  $filter_sql
                );
 
-	$users      = serendipity_fetchUsers('', 'hidden', true);
+    $users      = serendipity_fetchUsers('', 'hidden', true);
     $categories = serendipity_fetchCategories();
     $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
 
-	// set smarty flag $config_booleanize = true; in backend only? how? 
-    #$data[''] = '';
-	$serendipity['smarty']->assign( array(
-								'drawList'   => true, 
-								'entries'    => $entries, 
-								'sort_order' => $sort_order, 
-								'per_page'   => $per_page,
+    // ToDo: set smarty flag $config_booleanize = true; in backend only? how? or does it not matter?
+    $serendipity['smarty']->assign( array(
+                                'drawList'   => true,
+                                'entries'    => $entries,
+                                'sort_order' => $sort_order,
+                                'per_page'   => $per_page,
                                 'urltoken'   => serendipity_setFormToken('url'),
                                 'formtoken'  => serendipity_setFormToken(),
-								'users'      => $users,
-								'categories' => $categories,
-								'offSet'     => $offSet,
-								'use_iframe' => $serendipity['use_iframe']
-								)
-							);
+                                'users'      => $users,
+                                'categories' => $categories,
+                                'offSet'     => $offSet,
+                                'use_iframe' => $serendipity['use_iframe']
+                                )
+                            );
 
     if (is_array($entries)) {
-	    $data['is_entries'] = true;
+        $data['is_entries'] = true;
         $data['count'] = count($entries);
 
         $qString = '?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect';
@@ -178,8 +177,8 @@ function serendipity_drawList() {
         $serendipity['smarty']->assign(
                         array(  'urltoken'          => serendipity_setFormToken('url'),
                                 'formtoken'         => serendipity_setFormToken(),
-								'serverOffsetHours' => serendipity_serverOffsetHour(),
-								'showFutureEntries' => $serendipity['showFutureEntries']
+                                'serverOffsetHours' => serendipity_serverOffsetHour(),
+                                'showFutureEntries' => $serendipity['showFutureEntries']
                             ));
 
     } // entries end 
@@ -187,10 +186,12 @@ function serendipity_drawList() {
 } // End function serendipity_drawList()
 
 if (!empty($serendipity['GET']['editSubmit'])) {
-    $serendipity['GET']['adminAction'] = 'edit';
+    $serendipity['GET']['adminAction'] = 'edit'; // does this change smarty.get vars?
 }
 
 $preview_only = false;
+
+// very sticky smartification to origin, could be done better, I assume!
 
 switch($serendipity['GET']['adminAction']) {
     case 'preview':
@@ -230,7 +231,9 @@ switch($serendipity['GET']['adminAction']) {
             $entry['timestamp'] = strtotime($serendipity['POST']['new_timestamp']);
 
             if ($entry['timestamp'] == -1) {
-                echo DATE_INVALID . '<br />';
+                $data['switched_output'] = true;
+                $data['dateval'] = false;
+                #echo DATE_INVALID . '<br />';
                 // The date given by the user is not convertable. Reset the timestamp.
                 $entry['timestamp'] = $serendipity['POST']['timestamp'];
             }
@@ -243,15 +246,16 @@ switch($serendipity['GET']['adminAction']) {
 
         // Save the entry, or just display a preview
         $use_legacy = true;
-		$data['use_legacy'] = $use_legacy;
+        $data['use_legacy'] = $use_legacy;
         serendipity_plugin_api::hook_event('backend_entry_iframe', $use_legacy);
 
         if ($use_legacy) {
+            $data['switched_output'] = true;
             if ($serendipity['POST']['preview'] != 'true') {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
                     $data['is_draft'] = true;
-					#echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
+                    #echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
                     serendipity_updertEntry($entry);
                 } else {
                     if ($serendipity['use_iframe']) {
@@ -352,8 +356,10 @@ switch($serendipity['GET']['adminAction']) {
 
         $entry = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
         serendipity_deleteEntry((int)$serendipity['GET']['id']);
-        $data['is_doDelete'] = true;
-		$data['rip_entry'] = printf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+        $data['switched_output'] = true;
+        $data['is_doDelete']     = true;
+        // for smartification printf had to turn into sprintf!!
+        $data['del_entry']       = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
         #echo '<br />';
         $cont_draw = true;
 
@@ -364,14 +370,16 @@ switch($serendipity['GET']['adminAction']) {
             }
 
             $parts = explode(',', $serendipity['GET']['id']);
-		    $data['rip_entry'] = array();
+            $data['switched_output'] = true;
+            $data['del_entry']       = array();
             foreach($parts AS $id) {
                 $id = (int)$id;
                 if ($id > 0) {
                     $entry = serendipity_fetchEntry('id', $id, 1, 1);
                     serendipity_deleteEntry((int)$id);
-					$data['is_doMultiDelete'] = true;
-                    $data['rip_entry'][] = printf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+                    $data['is_doMultiDelete'] = true;
+                    // for smartification printf had to turn into sprintf!!
+                    $data['del_entry'][]      = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
                     #echo '<br />';
                 }
             }
@@ -388,9 +396,11 @@ switch($serendipity['GET']['adminAction']) {
         $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doDelete&amp;serendipity[id]=' . (int)$serendipity['GET']['id'];
 
         $entry = serendipity_fetchEntry('id', $serendipity['GET']['id'], 1, 1);
-        $data['is_delete'] = true;
-        $data['newLoc'] = $newLoc;
-        #printf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+        $data['switched_output'] = true;
+        $data['is_delete']       = true;
+        $data['newLoc']          = $newLoc;
+        // for smartification printf had to turn into sprintf!!
+        $data['rip_entry']       = sprintf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
         break;
 
     case 'multidelete':
@@ -399,16 +409,18 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         $ids = '';
-		$data['delete_entry'] = array();
+        $data['rip_entry'] = array();
         foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
             $ids .= (int)$id . ',';
             $entry = serendipity_fetchEntry('id', $id, 1, 1);
             $data['is_multidelete'] = true;
-            $data['delete_entry'][] = printf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+            // for smartification printf had to turn into sprintf!!
+            $data['rip_entry'][]    = sprintf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
             #echo '<br />';
         }
         $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
-        $data['newLoc'] = $newLoc;
+        $data['switched_output'] = true;
+        $data['newLoc']          = $newLoc;
         break;
 
     case 'edit':
@@ -416,7 +428,7 @@ switch($serendipity['GET']['adminAction']) {
 
     default:
         include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
-
+        // edit entry mode
         serendipity_printEntryForm(
             '?',
             array(
@@ -438,6 +450,7 @@ $serendipity['smarty']->assign(
                                 'urltoken'  => serendipity_setFormToken('url'),
                                 'formtoken' => serendipity_setFormToken()
                             ));
+
 
 $serendipity['smarty']->assign($data);
 

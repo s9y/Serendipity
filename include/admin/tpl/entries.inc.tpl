@@ -1,6 +1,6 @@
-<div class="serendipity_admin_list">
-
 {if $drawList}
+
+<div class="serendipity_admin_list">
 
     <form action="?" method="get">
         <input type="hidden" name="serendipity[action]"      value="admin"      />
@@ -212,8 +212,14 @@
         </table>
     </div>
 
+</div><!-- // div.serendipity_admin_list end -->
+
  {else}
-    {* We've got nothing *}
+    {if !$switched_output}
+
+<div class="serendipity_admin_list">
+
+	{* We've got nothing *}
     <table class="serendipity_admin_list" cellpadding="0" width="100%">
 
         <tr>
@@ -224,12 +230,19 @@
         </tr>
 
     </table>
-{/if}{* $drawList end *}
 
 </div><!-- // div.serendipity_admin_list end -->
 
+	{/if}
+{/if}{* $drawList end *}
+
+{if $switched_output}
+{if ($marty.get.adminAction && $dateval)}
+    {$CONST.DATE_INVALID}
+	<br />
+{/if}
 {if ($marty.get.adminAction && $use_legacy)}
-    {if $is_Draft}
+    {if $is_draft}
     <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE_DRAFT}</div><br />
     {/if}
     {if $is_iframe}
@@ -239,19 +252,18 @@
     <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_PREVIEW}</div><br />
     {/if}
 {/if}
-{if ($marty.get.adminAction && $is_doDelete)}
-    {foreach $rip_entry AS $rip}
-        {$rip}
+{if ($is_doDelete || $is_doMultiDelete )}
+    {foreach $del_entry AS $delent}
+        {$delent}
         <br />
-	{/foreach}
+    {/foreach}
 {/if}
-{if ($marty.get.adminAction && $is_doMultiDelete)}
-    {foreach $delete_entry AS $erase}
-		{$erase}
+{if ( $is_delete || $is_multidelete )}
+	{* delent and ripent look like $CONST.DELETE_SURE|sprintf:"$del_entry_id - $del_entry_title" *}
+    {foreach $rip_entry AS $ripent}
+        {$ripent}
         <br />
-	{/foreach}
-{/if}
-{if ($marty.get.adminAction && ( $is_delete || $is_multidelete ))}
+    {/foreach}
 <br />
 <br />
 <div>
@@ -259,4 +271,5 @@
     {'&nbsp;'|str_repeat:10}
     <a href="{$newLoc}" class="serendipityPrettyButton input_button">{$CONST.DUMP_IT}</a>
 </div>
+{/if}
 {/if}
