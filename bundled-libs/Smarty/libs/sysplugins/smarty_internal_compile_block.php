@@ -99,8 +99,8 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
                             $replacement = '';
                         }
                         // replace {$smarty.block.child} tag
-                        $search = array("%({$_ldl}{$al}block[\s\S]*?{$name}[\s\S]*?{$_rdl})([\s\S]*?)({$_ldl}{$al}\\\$smarty\.block\.child{$_rdl})([\s\S]*?{$_ldl}{$al}/block{$_rdl})%","/§§§child§§§/");
-                        $replace = array('\2§§§child§§§', $replacement);
+                        $search = array("%({$_ldl}{$al}block[\s\S]*?{$name}[\s\S]*?{$_rdl})([\s\S]*?)({$_ldl}{$al}\\\$smarty\.block\.child{$_rdl})([\s\S]*?)({$_ldl}{$al}/block{$_rdl})%","/§§§child§§§/");
+                        $replace = array('\2§§§child§§§\4', $replacement);
                         $block_content = preg_replace($search, $replace , $block_content);
                     }
                 }
@@ -198,7 +198,12 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         if ($_tpl->has_nocache_code) {
             $compiler->template->has_nocache_code = true;
         }
-        foreach($_tpl->required_plugins as $code => $tmp1) {
+        foreach($_tpl->required_plugins as $key => $tmp1) {
+            if ($compiler->nocache) {
+                $code = 'nocache';
+            } else {
+                $code = $key;
+            }
             foreach($tmp1 as $name => $tmp) {
                 foreach($tmp as $type => $data) {
                     $compiler->template->required_plugins[$code][$name][$type] = $data;
@@ -235,10 +240,14 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
         $_name = trim($saved_data[0]['name'], "\"'");
         if (isset($compiler->template->block_data[$_name]) && !isset($compiler->template->block_data[$_name]['compiled'])) {
             // restore to status before {block} tag as new subtemplate code of parent {block} is not needed
-            $compiler->merged_templates = $saved_data[4];
-            $compiler->smarty->merged_templates_func = $saved_data[5];
-            $compiler->template->properties = $saved_data[6];
-            $compiler->template->has_nocache_code = $saved_data[7];
+            // TODO: Below code was disabled in 3.1.8 because of problems with {include} in nested {block} tags in child templates
+            //       combined with append/prepend or $smarty.block.parent
+            //       For later versions it should be checked under which conditions it could run for optimisation
+            //
+            //$compiler->merged_templates = $saved_data[4];
+            //$compiler->smarty->merged_templates_func = $saved_data[5];
+            //$compiler->template->properties = $saved_data[6];
+            //$compiler->template->has_nocache_code = $saved_data[7];
             $_output = Smarty_Internal_Compile_Block::compileChildBlock($compiler, $_name);
         } else {
             if (isset($saved_data[0]['hide']) && !isset($compiler->template->block_data[$_name]['source'])) {
@@ -251,7 +260,7 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
         // reset flags
         $compiler->parser->current_buffer = $saved_data[1];
         $compiler->nocache = $saved_data[2];
-        $compiler->smarty->merge_compiled_includes = $saved_data[3];
+        //$compiler->smarty->merge_compiled_includes = $saved_data[3];
         // reset flag for {block} tag
         $compiler->inheritance = false;
         // $_output content has already nocache code processed
