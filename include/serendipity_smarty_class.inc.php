@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2012-01-03 14:11 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2012-02-20 10:26 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -10,7 +10,7 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security 
   { 
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br');
+    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'serendipity_categoryURL', 'serendipity_archiveURL');
     // to disable all PHP functions
     #public $php_functions = null;
     
