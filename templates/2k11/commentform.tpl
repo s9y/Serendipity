@@ -4,10 +4,6 @@
     <form id="serendipity_comment" action="{$commentform_action}#feedback" method="post">
     <div><input type="hidden" name="serendipity[entry_id]" value="{$commentform_id}"></div>
     <div class="form_field">
-        <label id="reply-to-hint" for="serendipity_replyTo">{$CONST.IN_REPLY_TO}</label>
-        {$commentform_replyTo}
-    </div>
-    <div class="form_field">
         <label for="serendipity_commentform_name">{$CONST.NAME}{if $required_fields.name}*{/if}</label>
         <input id="serendipity_commentform_name" name="serendipity[name]" type="text" value="{$commentform_name}" placeholder="{$CONST.TWOK11_PLACE_NAME}"{if $required_fields.name} required{/if}>
     </div>
@@ -22,6 +18,10 @@
     <div class="form_tarea">
         <label for="serendipity_commentform_comment">{$CONST.COMMENT}{if $required_fields.comment}*{/if}</label>
         <textarea id="serendipity_commentform_comment" name="serendipity[comment]" rows="10" placeholder="{$CONST.TWOK11_PLACE_MESSAGE}"{if $required_fields.comment} required{/if}>{$commentform_data}</textarea>
+    </div>
+    <div class="form_field">
+        <label id="reply-to-hint" for="serendipity_replyTo">{$CONST.IN_REPLY_TO}</label>
+        {$commentform_replyTo}
     </div>
     {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
 {if $is_commentform_showToolbar}
