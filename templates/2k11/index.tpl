@@ -24,7 +24,7 @@
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script id="modernizr" src="{serendipity_getFile file="js/modernizr-2.5.1.min.js"}"></script>
+    <script id="modernizr" src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
@@ -50,7 +50,7 @@
         <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get">
         <div>
             <input type="hidden" name="serendipity[action]" value="search">
-            <label for="serendipityQuickSearchTermField" class="visuallyhidden">{$CONST.QUICKSEARCH}</label>
+            <label for="serendipityQuickSearchTermField">{$CONST.QUICKSEARCH}</label>
             <input id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.TWOK11_PLACE_SEARCH}" value="">
             <input id="searchsend" name="serendipity[searchButton]" type="submit" value="{$CONST.GO}">
         </div>
@@ -89,7 +89,7 @@
         <small lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</small>
     </footer>
 </div>
-<script src="{serendipity_getFile file="js/2k11.js"}"></script>
+<script src="{serendipity_getFile file="js/2k11.min.js"}"></script>
 {/if}
 {$raw_data}
 {serendipity_hookPlugin hook="frontend_footer"}

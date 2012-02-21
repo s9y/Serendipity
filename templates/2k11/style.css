@@ -304,6 +304,7 @@ fieldset,
     width: 90%;
 }
 
+#identity a,
 #primary-nav li,
 .archives_date { display: inline-block; }
 
@@ -337,6 +338,11 @@ fieldset,
 }
 
 #searchform>div { padding: 0 1em; }
+
+#searchform label {
+    position: absolute;
+    left: -999em;
+}
 
 #serendipityQuickSearchTermField,
 #serendipity_comment input[type=text],
@@ -779,6 +785,27 @@ pre .geshi {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
+
+label span.placeholder{
+    position:absolute;
+    font-size:75%;
+    color:#999;
+    /*font-family:sans-serif;*/
+    padding:4px 3px;
+    z-index:1;
+}
+
+label span.placeholder-hide-exept-screenreader {
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding:0 !important;
+    border:0 !important;
+    height: 1px !important;
+    width: 1px !important;
+    overflow: hidden;
+}
+
+label span.placeholder-hide { display:none; }
 
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
