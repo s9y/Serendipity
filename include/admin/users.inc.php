@@ -12,23 +12,24 @@ if (!serendipity_checkPermission('adminUsers')) {
 
 require_once(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
 
+$data = array();
+
 /* Delete a user */
 if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
+    $data['delete_yes'] = true;
     $user = serendipity_fetchUsers($serendipity['POST']['user']);
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersDelete')) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
+        $data['no_delete_permission'] = true;
     } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+        $data['no_delete_permission_userlevel'] = true;
     } else {
         $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
-
-        if (serendipity_checkPermission('adminUsersMaintainOthers') ||
-            (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
+        if (serendipity_checkPermission('adminUsersMaintainOthers') || (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
+            $data['delete_permission'] = true;
             serendipity_deleteAuthor($user[0]['authorid']);
-            printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . DELETED_USER . '</div>', htmlspecialchars($serendipity['POST']['user']), htmlspecialchars($user[0]['realname']));
             serendipity_plugin_api::hook_event('backend_users_delete', $user[0]);
-        } else {
-            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+            $data['user'] = $serendipity['POST']['user'];
+            $data['realname'] = $_POST['realname'];
         }
     }
 }
@@ -36,8 +37,9 @@ if (isset($_POST['DELETE_YES']) && serendipity_checkFormToken()) {
 
 /* Save new user */
 if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
+    $data['save_new'] = true;
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $_POST['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersCreateNew')) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
+        $data['no_save_permission'] = true;
     } else {
         $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['pass'], $_POST['realname'], $_POST['email'], $_POST['userlevel'], 1);
 
@@ -72,7 +74,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
                     }
 
                     if (count($_POST[$item['var']]) < 1) {
-                        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
+                        $data['no_group_selected'] = true;
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['POST']['user'], false);
                     }
@@ -90,18 +92,21 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
         }
 
         serendipity_plugin_api::hook_event('backend_users_add', $serendipity['POST']['user']);
-        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . CREATED_USER . '</div>', '#' . htmlspecialchars($serendipity['POST']['user']) . ', ' . htmlspecialchars($_POST['realname']));
+        $data['user'] = $serendipity['POST']['user'];
+        $data['realname'] = $_POST['realname'];
     }
 }
 
 
 /* Edit a user */
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
+    $data['save_edit'] = true;
     $user = serendipity_fetchUsers($serendipity['POST']['user']);
+    $data['user'] = $user;
     if (!serendipity_checkPermission('adminUsersMaintainOthers') && $user[0]['userlevel'] >= $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED . '</div>';
+        $data['no_edit_permission'] = true;
     } elseif ($_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+        $data['no_edit_permission_userlevel'] = true;
     } else {
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
         $config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
@@ -134,7 +139,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
                     }
 
                     if (count($_POST[$item['var']]) < 1) {
-                        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
+                        $data['no_group_selected'] = true;
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['POST']['user'], false);
                     }
@@ -161,153 +166,99 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
         serendipity_updatePermalink($pl_data, 'author');
 
         serendipity_plugin_api::hook_event('backend_users_edit', $pl_data);
-        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_USER . '</div>', htmlspecialchars($_POST['realname']));
     }
 }
 
 if ($serendipity['GET']['adminAction'] != 'delete') {
-?>
-    <table width="100%">
-        <tr>
-            <td><strong><?php echo USER; ?></strong></td>
-            <td width="100" align="center"><strong><?php echo USER_LEVEL ?></strong></td>
-            <td width="300">&nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="3">
-<?php
-if (serendipity_checkPermission('adminUsersMaintainOthers')) {
-    $users = serendipity_fetchUsers('');
-} elseif (serendipity_checkPermission('adminUsersMaintainSame')) {
-    $users = serendipity_fetchUsers('', serendipity_getGroups($serendipity['authorid'], true));
-} else {
-    $users = serendipity_fetchUsers($serendipity['authorid']);
-}
+    $data['delete'] = false;
+    if (serendipity_checkPermission('adminUsersMaintainOthers')) {
+        $users = serendipity_fetchUsers('');
+    } elseif (serendipity_checkPermission('adminUsersMaintainSame')) {
+        $users = serendipity_fetchUsers('', serendipity_getGroups($serendipity['authorid'], true));
+    } else {
+        $users = serendipity_fetchUsers($serendipity['authorid']);
+    }
 
-$i = 0;
-if (is_array($users)) {
-    foreach($users as $user) {
-        if ($user['userlevel'] < $serendipity['serendipityUserlevel'] || $user['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
-            if ( $user['userlevel'] >= USERLEVEL_ADMIN ) {
-                $img = serendipity_getTemplateFile('admin/img/user_admin.png');
-            } elseif ( $user['userlevel'] >= USERLEVEL_CHIEF ) {
-                $img = serendipity_getTemplateFile('admin/img/user_chief.png');
-            } else {
-                $img = serendipity_getTemplateFile('admin/img/user_editor.png');
+    $data['users'] = $users;
+    $data['urlFormToken'] = serendipity_setFormToken('url');
+    if (is_array($users)) {
+        foreach($users as $user => $userdata) {
+            if ($userdata['userlevel'] < $serendipity['serendipityUserlevel'] || $userdata['authorid'] == $serendipity['authorid'] || $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
+                    $data['users'][$user]['isEditable'] = true;
+                    $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
             }
-?>
-<div class="serendipity_admin_list_item serendipity_admin_list_item_<?php echo ($i++ % 2) ? 'even' : 'uneven' ?>">
-<table width="100%">
-    <tr>
-<?php /* TODO: Add username to list once tom figures out how to fix uneven rowstyles */ ?>
-        <td><img src="<?php echo $img ?>" alt="" style="border: 0px none ; vertical-align: bottom; display: inline;" /> <?php echo htmlspecialchars($user['realname']); ?></td>
-        <td width="100" align="center"><?php echo $user['userlevel']; ?></td>
-        <td width="300" align="right"> 
-                                       <a target="_blank" href="<?php echo serendipity_authorURL($user); ?>" title="<?php echo PREVIEW . ' ' . $user['realname']; ?>" class="serendipityIconLink">
-                                        <img src="<?php echo serendipity_getTemplateFile('admin/img/zoom.png'); ?>" alt="<?php echo PREVIEW; ?>" /><?php echo PREVIEW ?></a>
-                                       <a href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]=<?php echo $user['authorid'] ?>#editform" title="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/edit.png'); ?>" alt="<?php echo EDIT . " " . htmlspecialchars($user['realname']); ?>" /><?php echo EDIT ?></a>
-                                       <a href="?<?php echo serendipity_setFormToken('url'); ?>&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=<?php echo $user['authorid'] ?>" title="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" class="serendipityIconLink"><img src="<?php echo serendipity_getTemplateFile('admin/img/delete.png'); ?>" alt="<?php echo DELETE . " " . htmlspecialchars($user['realname']); ?>" /><?php echo DELETE ?></a></td>
-    </tr>
-</table>
-</div>
-<?php
         }
     }
-}
-?>
-            </td>
-        </tr>
-<?php if ( !isset($_POST['NEW']) && serendipity_checkPermission('adminUsersCreateNew')) { ?>
-        <tr>
-            <td colspan="3" align="right">
-                <form action="?serendipity[adminModule]=users" method="post">
-                    <input type="submit" name="NEW"   value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton input_button" />
-                </form>
-            </td>
-        </tr>
-<?php } ?>
-    </table>
-
-<?php
+       
+    if ( !isset($_POST['NEW']) && serendipity_checkPermission('adminUsersCreateNew')) {
+        $data['new'] = true;
+    }
 }
 
 
 if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermission('adminUsersDelete')) || (isset($_POST['NEW']) && serendipity_checkPermission('adminUsersCreateNew')) ) {
-?>
-<br />
-<br />
-<hr noshade="noshade">
-<form action="?serendipity[adminModule]=users#editform" method="post">
-<?php echo serendipity_setFormToken(); ?>
-    <div>
-    <h3>
-<?php
-if ($serendipity['GET']['adminAction'] == 'edit') {
-    echo '<a id="editform"></a>';
-    $user = serendipity_fetchUsers($serendipity['GET']['userid']);
-    $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
-
-    if ($user[0]['userlevel'] >= $serendipity['serendipityUserlevel'] && $user[0]['authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminUsersMaintainOthers')) {
-        echo '<strong>' . CREATE_NOT_AUTHORIZED . '</strong><br />';
-        echo EDIT;
-        $from = array();
-    } elseif (serendipity_checkPermission('adminUsersMaintainOthers') ||
-            (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
-        echo EDIT;
-        $from = &$user[0];
-        unset($from['password']);
-        echo '<input type="hidden" name="serendipity[user]" value="' . (int)$from['authorid'] . '" />';
+    $data['adminAction'] = $serendipity['GET']['adminAction'];
+    $data['show_form'] = true;
+    $data['formToken'] = serendipity_setFormToken();
+    
+    if ($serendipity['GET']['adminAction'] == 'edit') {
+        $user = serendipity_fetchUsers($serendipity['GET']['userid']);
+        $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
+        echo "userid: ";
+        echo $serendipity['GET']['userid'];
+        if ($user[0]['userlevel'] >= $serendipity['serendipityUserlevel'] && $user[0]['authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminUsersMaintainOthers')) {
+            $data['no_create_permission'] = true;
+            $from = array();
+        } elseif (serendipity_checkPermission('adminUsersMaintainOthers') ||
+                (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
+            $data['create_permission'] = true;
+            $from = &$user[0];
+            unset($from['password']);
+        } else {
+            
+            $from = array();
+        }
     } else {
-        echo '<strong>' . CREATE_NOT_AUTHORIZED . '</strong><br />';
-        echo EDIT;
         $from = array();
     }
-} else {
-    echo CREATE;
-    $from = array();
-}
-?>
-    </h3>
+    $data['from'] = $from;
 
-<?php
-$config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
-if (!empty($serendipity['GET']['userid'])) {
-    $from['groups'] = serendipity_getGroups($serendipity['GET']['userid']);
-} else {
-    $from['groups'] = array();
-}
+    $config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
+    if (!empty($serendipity['GET']['userid'])) {
+        $from['groups'] = serendipity_getGroups($serendipity['GET']['userid']);
+    } else {
+        $from['groups'] = array();
+    }
 
-serendipity_printConfigTemplate($config, $from, true, false, true, true);
+    ob_start();
+    serendipity_printConfigTemplate($config, $from, true, false, true, true);
+    $data['config'] = ob_get_contents();
+    ob_end_clean();
 
-if ($serendipity['GET']['adminAction'] == 'edit') { ?>
-        <input type="submit" name="SAVE_EDIT"   value="<?php echo SAVE; ?>" class="serendipityPrettyButton input_button" />
-<?php } else { ?>
-        <input type="submit" name="SAVE_NEW" value="<?php echo CREATE_NEW_USER; ?>" class="serendipityPrettyButton input_button" />
-<?php } ?>
-
-    </div>
-</form>
-<?php
 } elseif ($serendipity['GET']['adminAction'] == 'delete' && serendipity_checkPermission('adminUsersDelete')) {
     $user = serendipity_fetchUsers($serendipity['GET']['userid']);
     $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
 
     if (serendipity_checkPermission('adminUsersMaintainOthers') ||
                 (serendipity_checkPermission('adminUsersMaintainSame') && $group_intersect)) {
-?>
-<form action="?serendipity[adminModule]=users" method="post">
-    <div>
-    <?php printf(DELETE_USER, (int)$serendipity['GET']['userid'], htmlspecialchars($user[0]['realname'])); ?>
-        <br /><br />
-        <?php echo serendipity_setFormToken(); ?>
-        <input type="hidden" name="serendipity[user]" value="<?php echo (int)$serendipity['GET']['userid']; ?>" />
-        <input type="submit" name="DELETE_YES" value="<?php echo DUMP_IT; ?>" class="serendipityPrettyButton input_button" />
-        <input type="submit" name="NO" value="<?php echo NOT_REALLY; ?>" class="serendipityPrettyButton input_button" />
-    </div>
-</form>
-<?php
+        $data['delete'] = true;
+        $data['userid'] = (int)$serendipity['GET']['userid'];
+        $data['realname'] = $user[0]['realname'];
+        $data['formToken'] = serendipity_setFormToken();
     }
 }
+
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
+$serendipity['smarty']->assign($data);
+
+$tfile = dirname(__FILE__) . "/tpl/users.inc.tpl";
+
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
+
+echo $content;
 
 /* vim: set sts=4 ts=4 expandtab : */
 ?>
