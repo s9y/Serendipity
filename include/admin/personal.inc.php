@@ -6,6 +6,8 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
+$data = array();
+
 if (!serendipity_checkPermission('personalConfiguration')) {
     return;
 }
@@ -14,16 +16,17 @@ $from = array();
 
 if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
+    $data['adminAction'] = "save";
     if ( (!serendipity_checkPermission('adminUsersEditUserlevel') || !serendipity_checkPermission('adminUsersMaintainOthers') )
           && (int)$_POST['userlevel'] > $serendipity['serendipityUserlevel']) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . CREATE_NOT_AUTHORIZED_USERLEVEL . '</div>';
+        $data['not_authorized'] = true;
     } elseif (empty($_POST['username'])) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . USERCONF_CHECK_USERNAME_ERROR . '</div>';
+        $data['empty_username'] = true;
     } elseif (!empty($_POST['password']) && $_POST['check_password'] != $_SESSION['serendipityPassword'] && serendipity_passwordhash($_POST['check_password']) != $_SESSION['serendipityPassword']) {
-        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . USERCONF_CHECK_PASSWORD_ERROR . '</div>';
+         $data['password_check_fail'] = true;
     } else {
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
-
+        $data['realname'] = $_POST['realname'];
         foreach($config as $category) {
             foreach ($category['items'] as $item) {
                 if (in_array('groups', $item['flags'])) {
@@ -94,25 +97,35 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
         }
         $from = $_POST;
 ?>
-    <div class="serendipityAdminMsgSuccess"><img width="22px" height="22px" style="border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_success.png'); ?>" alt="" /><?php echo sprintf(MODIFIED_USER, htmlspecialchars($_POST['realname'])) ?></div>
 <?php }
 } ?>
 
-<form action="?serendipity[adminModule]=personal&amp;serendipity[adminAction]=save" method="post">
+
 <?php
-echo serendipity_setFormToken();
+$data['formToken'] = serendipity_setFormToken();
 $template       = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
 $user           = serendipity_fetchUsers($serendipity['authorid']);
 $from           = $user[0];
 $from['groups'] = serendipity_getGroups($serendipity['authorid']);
 unset($from['password']);
+ob_start();
 serendipity_printConfigTemplate($template, $from, true, false);
-?>
-    <div align="right"><input class="serendipityPrettyButton input_button" type="submit" name="SAVE"   value="<?php echo SAVE; ?>" /></div>
-</form>
+$data['config'] = ob_get_contents();
+ob_get_clean();
 
-<?php
+    
 
 $add = array('internal' => true);
 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_profiles', $from, $add);
+
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
+$serendipity['smarty']->assign($data);
+$tfile = dirname(__FILE__) . "/tpl/personal.inc.tpl";
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
+echo $content;
+
+
 /* vim: set sts=4 ts=4 expandtab : */
