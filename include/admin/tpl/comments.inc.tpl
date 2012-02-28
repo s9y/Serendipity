@@ -66,7 +66,7 @@ function highlightComment(id, checkvalue) {
     <tr>
         <td colspan="6" class="serendipity_admin_filters_headline"><strong>{$CONST.FILTERS}</strong> - {$CONST.FIND_COMMENTS}</td>
     </tr>
-	{* if we change/set $serendipity{'GET'] values in the parents php file ... does $smarty.get then know about them ??? *}
+    {* if we change/set $serendipity{'GET'] values in the parents php file ... does $smarty.get then know about them ??? *}
     <tr>
         <td>{$CONST.AUTHOR}:</td>
         <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="{$smarty.get.filter.author|escape}" /></td>
@@ -86,8 +86,8 @@ function highlightComment(id, checkvalue) {
     <tr>
         <td>{$CONST.COMMENTS}:</td>
         <td><select name="serendipity[filter][perpage]">
-            {* Smarty 3 does support ternary syntax e.g. {('N'==$member.is_admin)?'Yes':'No'} *}
-			{foreach $filter_vals AS $filter_val}
+            {* Smarty 3 does support ternary syntax e.g. {('N'==$foo)?'Yes':'No'} *}
+            {foreach $filter_vals AS $filter_val}
             <option value="{$filter_val}" {($commentsPerPage == $filter_val) ? ' selected="selected"' : ''}>{$filter_val}</option>
             {/foreach}
             </select></td>
