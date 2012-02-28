@@ -96,7 +96,6 @@
         {/if}
     {/if}
 
-
     {if $case_directoryDoDelete}
         {if $print_DIRECTORY_WRITE_ERROR}{$print_DIRECTORY_WRITE_ERROR}{/if} 
         {if $ob_serendipity_killPath}{$ob_serendipity_killPath}{/if} 
@@ -253,25 +252,21 @@
     {/if}
 
     {if $case_rotateCW}
-
         {if $rotate_img_done}
             <script language="javascript" type="text/javascript">
             location.href="{$adminFile_redirect}";
             </script>
             <noscript><a href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
         {/if}
-
     {/if}
 
     {if $case_rotateCCW}
-
         {if $rotate_img_done}
             <script language="javascript" type="text/javascript">
             location.href="{$adminFile_redirect}";
             </script>
             <noscript><a href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
         {/if}
-
     {/if}
 
     {if $case_scale}
@@ -340,4 +335,3 @@
     {if $case_default}
         {if $showML_def}{$showML_def}{/if}
     {/if}
-

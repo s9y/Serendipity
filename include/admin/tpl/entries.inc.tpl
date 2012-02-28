@@ -219,7 +219,7 @@
 
 <div class="serendipity_admin_list">
 
-	{* We've got nothing *}
+    {* We've got nothing *}
     <table class="serendipity_admin_list" cellpadding="0" width="100%">
 
         <tr>
@@ -233,13 +233,13 @@
 
 </div><!-- // div.serendipity_admin_list end -->
 
-	{/if}
+    {/if}
 {/if}{* $drawList end *}
 
 {if $switched_output}
 {if ($marty.get.adminAction && $dateval)}
     {$CONST.DATE_INVALID}
-	<br />
+    <br />
 {/if}
 {if ($marty.get.adminAction && $use_legacy)}
     {if $is_draft}
@@ -259,7 +259,7 @@
     {/foreach}
 {/if}
 {if ( $is_delete || $is_multidelete )}
-	{* delent and ripent look like $CONST.DELETE_SURE|sprintf:"$del_entry_id - $del_entry_title" *}
+    {* delent and ripent look like $CONST.DELETE_SURE|sprintf:"$del_entry_id - $del_entry_title" *}
     {foreach $rip_entry AS $ripent}
         {$ripent}
         <br />

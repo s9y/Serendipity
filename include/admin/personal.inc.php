@@ -96,12 +96,9 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
             }
         }
         $from = $_POST;
-?>
-<?php }
-} ?>
+    }
+} 
 
-
-<?php
 $data['formToken'] = serendipity_setFormToken();
 $template       = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
 $user           = serendipity_fetchUsers($serendipity['authorid']);
@@ -112,8 +109,7 @@ ob_start();
 serendipity_printConfigTemplate($template, $from, true, false);
 $data['config'] = ob_get_contents();
 ob_get_clean();
-
-    
+   
 
 $add = array('internal' => true);
 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_profiles', $from, $add);
@@ -126,6 +122,5 @@ $serendipity['smarty']->assign($data);
 $tfile = dirname(__FILE__) . "/tpl/personal.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile);
 echo $content;
-
 
 /* vim: set sts=4 ts=4 expandtab : */

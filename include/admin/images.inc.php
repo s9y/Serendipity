@@ -29,16 +29,16 @@ switch ($serendipity['GET']['adminAction']) {
             if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
                 return;
             }
-    
+
             $fullfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
             $httpfile = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
 
             $img = new imgedit($fullfile, $httpfile);
-            
+
             // Set the filenames used for the cropping areas. Width/Height are automagically detected. Orientation is either horizontal or vertical.
             $img->setArea('imgedit_area.gif',  'h');
             $img->setArea('imgedit_varea.gif', 'v');
-            
+
             // Let the IMGEditor do its magic. It will parse its results straightly into a template variable array.
             $img->main();
             $serendipity['smarty']->assign('imgedit', $img->imgedit_smarty);
@@ -90,8 +90,6 @@ switch ($serendipity['GET']['adminAction']) {
         $i = serendipity_generateThumbs();
         $data['print_RESIZE_DONE'] = sprintf(RESIZE_DONE, $i);
         flush();
-
-
         break;
 
     case 'DoDelete':
@@ -102,12 +100,11 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_DoDelete'] = true;
         $file   = $serendipity['GET']['fname'];
         serendipity_deleteImage($serendipity['GET']['fid']);
-        
+
         ob_start();
         showMediaLibrary();
         $data['showML_DD'] = ob_get_contents();
         ob_end_clean();
-        
         break;
 
     case 'delete':
@@ -126,7 +123,6 @@ switch ($serendipity['GET']['adminAction']) {
         $data['file']   = $file['name'] . '.' . $file['extension'];
         $data['abortLoc'] = $abortLoc;
         $data['newLoc']   = $newLoc;
-
         break;
 
     case 'rename':
@@ -143,7 +139,6 @@ switch ($serendipity['GET']['adminAction']) {
             $data['go_back'] = true;
             break;
         }
-
         break;
 
     case 'properties':
@@ -351,8 +346,7 @@ switch ($serendipity['GET']['adminAction']) {
         showMediaLibrary($messages, true);
         $data['showML_add'] = ob_get_contents();
         ob_end_clean();        
-
-    break;
+        break;
 
 
     case 'directoryDoDelete':
@@ -377,7 +371,6 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         serendipity_plugin_api::hook_event('backend_directory_delete', $new_dir);
-
         break;
 
     case 'directoryEdit':
@@ -434,7 +427,6 @@ switch ($serendipity['GET']['adminAction']) {
         $data['wgroups']      = (isset($write_groups[0]) ? true : false);
         $data['read_groups']  = $read_groups;
         $data['write_groups'] = $write_groups;
-
         break;
 
     case 'directoryDelete':
@@ -445,7 +437,6 @@ switch ($serendipity['GET']['adminAction']) {
         $data['dir']          = htmlspecialchars($serendipity['GET']['dir']);
         $data['formtoken']    = serendipity_setFormToken();
         $data['basename_dir'] = basename(htmlspecialchars($serendipity['GET']['dir']));
-
         break;
 
     case 'directoryDoCreate':
@@ -464,7 +455,7 @@ switch ($serendipity['GET']['adminAction']) {
             $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $serendipity['POST']['name']);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
-            
+
             // Apply parent ACL to new child.
             $array_parent_read  = serendipity_ACLGet(0, 'directory', 'read',  $serendipity['POST']['parent']);
             $array_parent_write = serendipity_ACLGet(0, 'directory', 'write', $serendipity['POST']['parent']);
@@ -505,7 +496,6 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_directoryCreate'] = true;
         $data['formtoken'] = serendipity_setFormToken();
         $data['folders']   = $folders;
-
         break;
 
     case 'directorySelect':
@@ -525,7 +515,6 @@ switch ($serendipity['GET']['adminAction']) {
         usort($folders, 'serendipity_sortPath');
         $data['case_directorySelect'] = true;
         $data['folders']   = $folders;
-
         break;
 
     case 'addSelect':
@@ -600,7 +589,7 @@ switch ($serendipity['GET']['adminAction']) {
             $data['rotate_img_done'] = true;
             $data['adminFile_redirect'] = $serendipity['adminFile_redirect'];
         }
-    break;
+        break;
 
     case 'scale':
         $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
@@ -644,7 +633,6 @@ switch ($serendipity['GET']['adminAction']) {
         showMediaLibrary();
         $data['showML_def'] = ob_get_contents();
         ob_end_clean();
-
         break;
 }
 

@@ -354,7 +354,6 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
     }
 }
 
-
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
