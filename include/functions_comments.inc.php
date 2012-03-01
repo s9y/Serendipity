@@ -658,7 +658,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     $rs  = serendipity_db_query($sql, true);
     
     // Check for adminEntriesMaintainOthers
-    if (!$force && !$token && $rs['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
+    if (!$force && !$goodtoken && $rs['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
         return false; // wrong user having no adminEntriesMaintainOthers right
     }
 
