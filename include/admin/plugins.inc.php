@@ -424,6 +424,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     ob_end_clean();
 
     ob_start();
+    serendipity_plugin_api::hook_event('backend_plugins_event_header', $serendipity);
     $data['backend_plugins_event_header'] = ob_get_contents();
     ob_end_clean();
     ob_start();
