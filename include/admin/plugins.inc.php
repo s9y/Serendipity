@@ -259,7 +259,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     }
     $data['groupnames'] = $groupnames;
     $data['pluggroups'] = $pluggroups;
-    $data['formToken'] = $formToken;
+    $data['formToken'] = serendipity_setFormToken();
     $data['only_group'] = $serendipity['GET']['only_group'];
     $requirement_failures = array();
     
