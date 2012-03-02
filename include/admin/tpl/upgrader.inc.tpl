@@ -1,3 +1,14 @@
+{** please return correct markup for these serendipity_upgraderResultDiagnose notices in the upper PHP file
+    {if $u_success}
+        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
+    {/if}
+    {if $u_warning}
+        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .'</span>';
+    {/if}
+    {if $u_error}
+        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .'</span>';
+    {/if}
+**}
 
 {if $task_function}
     {'Calling %s ...<br />'|sprintf:(is_array($task['function']) ? $task['function'][0] . '::'. $task['function'][1] : $task['function'])}
