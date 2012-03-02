@@ -857,7 +857,14 @@ class serendipity_event_statistics extends serendipity_event
                                 echo "<td class = \"".$color."\">".wordwrap($row['browser'], 25, "<br />", 1)."</td>\n";
                                 echo "<td class = \"".$color."\">";
                                 if ($row['ip']){
-                                    echo wordwrap(gethostbyaddr($row['ip']), 25, "\n", 1);
+				    $curIP = $row['ip'];
+				    if (array_key_exists($curIP, $resolvedHosts)) {
+					$resolvedHost = $resolvedHosts[$curIP];
+				    } else {
+					$resolvedHost = gethostbyaddr($curIP);
+					$resolvedHosts[$curIP] = $resolvedHost;
+				    }
+                                    echo wordwrap($resolvedHost, 25, "\n", 1);
                                 } else {
                                     echo "--";
                                 }
