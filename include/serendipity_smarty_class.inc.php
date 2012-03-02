@@ -10,7 +10,7 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security 
   { 
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'serendipity_categoryURL', 'serendipity_archiveURL');
+    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'serendipity_categoryURL', 'serendipity_archiveURL', 'serendipity_groupname');
     // to disable all PHP functions
     #public $php_functions = null;
     
