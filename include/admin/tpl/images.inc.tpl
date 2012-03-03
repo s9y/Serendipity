@@ -209,7 +209,7 @@
                         <select name="serendipity[parent]">
                             <option value="">{$CONST.BASE_DIRECTORY}</option>
                         {foreach $folders as $folder}
-                            <option {if $folder.relpath == $smarty.get.only_path}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:"($folder.depth*2)"} {$folder.name}</option>
+                            <option {if $folder.relpath == $get.only_path}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:"($folder.depth*2)"} {$folder.name}</option>
                         {/foreach}
                         </select>
                     </td>
@@ -315,7 +315,7 @@
                 {$formtoken}
                 <input type="hidden" name="serendipity[adminModule]" value="images" />
                 <input type="hidden" name="serendipity[adminAction]" value="scale" />
-                <input type="hidden" name="serendipity[fid]"         value="{$smarty.get.fid}" />
+                <input type="hidden" name="serendipity[fid]"         value="{$get.fid}" />
 
                 <input class="input_textbox" type="text" size="4" name="serendipity[width]"   onchange="rescale('width' , value);" value="{$img_width}" />
                 <input class="input_textbox" type="text" size="4" name="serendipity[height]"  onchange="rescale('height', value);" value="{$img_height}" />

@@ -19,10 +19,10 @@
     <div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{foreach $errors AS $implode_err}{$implode_err}{if (count($errors) > 1) && !$implode_err@last}<br /> {/if}{/foreach}</div><br /><br />
 {/if}
 
-{if ($smarty.get.action == 'ignore')}
+{if ($get.action == 'ignore')}
     {* Todo: Don't know what to put here? *}
 
-{elseif ($smarty.get.action == 'upgrade')}
+{elseif ($get.action == 'upgrade')}
 
     {foreach $call_tasks AS $ctask}
         {if $is_callable_task}
@@ -37,11 +37,11 @@
 
 {/if}
 
-{if (($showAbort && $smarty.get.action == 'ignore') || $smarty.get.action == 'upgrade')}
+{if (($showAbort && $get.action == 'ignore') || $get.action == 'upgrade')}
 
-    {if $smarty.get.action == 'ignore'}
+    {if $get.action == 'ignore'}
         {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}
-    {elseif $smarty.get.action == 'upgrade'}
+    {elseif $get.action == 'upgrade'}
         <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</div>
     {/if}
     <br />

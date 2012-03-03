@@ -19,15 +19,15 @@
                             {foreach $users AS $user}
                                 {if isset($user.artcount) && $user.artcount < 1} 
                                     {continue}
-                                <option value="{$user.authorid}" {(isset($smarty.get.filter.author) && ($smarty.get.filter.author == $user.authorid)) ? 'selected="selected"' : ''}>{$user.realname|escape}</option>
+                                <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected="selected"' : ''}>{$user.realname|escape}</option>
                                 {/if}
                             {/foreach}
                         {/if}
                     </select> 
                     <select name="serendipity[filter][isdraft]">
                         <option value="all">{$CONST.COMMENTS_FILTER_ALL}</option>
-                        <option value="draft"   {(isset($smarty.get.filter.isdraft) &&  ($smarty.get.filter.isdraft == 'draft') ? 'selected="selected"' : '')}>{$CONST.DRAFT}</option>
-                        <option value="publish" {(isset($smarty.get.filter.isdraft) &&  ($smarty.get.filter.isdraft == 'publish') ? 'selected="selected"' : '')}>{$CONST.PUBLISH}</option>
+                        <option value="draft"   {(isset($get.filter.isdraft) &&  ($get.filter.isdraft == 'draft') ? 'selected="selected"' : '')}>{$CONST.DRAFT}</option>
+                        <option value="publish" {(isset($get.filter.isdraft) &&  ($get.filter.isdraft == 'publish') ? 'selected="selected"' : '')}>{$CONST.PUBLISH}</option>
                     </select>
                 </td>
                 <td valign="top" width="80">{$CONST.CATEGORY}</td>
@@ -35,12 +35,12 @@
                     <select name="serendipity[filter][category]">
                         <option value="">--</option>
                         {foreach $categories as $cat}
-                            <option value="{$cat.categoryid}"{($smarty.get.filter.category == $cat.categoryid) ? ' selected="selected"' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
+                            <option value="{$cat.categoryid}"{($get.filter.category == $cat.categoryid) ? ' selected="selected"' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
                         {/foreach}
                     </select>
                 </td>
                 <td valign="top" width="80">{$CONST.CONTENT}</td>
-                <td valign="top"><input class="input_textbox" size="10" type="text" name="serendipity[filter][body]" value="{(isset($smarty.get.filter.body)) ? "$smarty.get.filter.body|escape" : ''}" /></td>
+                <td valign="top"><input class="input_textbox" size="10" type="text" name="serendipity[filter][body]" value="{(isset($get.filter.body)) ? "$get.filter.body|escape" : ''}" /></td>
             </tr>
             <tr>
                 <td class="serendipity_admin_filters_headline" colspan="6"><strong>{$CONST.SORT_ORDER}</strong></td>
@@ -52,22 +52,22 @@
                 <td>
                     <select name="serendipity[sort][order]">
                     {foreach $sort_order as $so_key => $so_val}
-                        <option value="{$so_key}" {(isset($smarty.get.sort.order) && ($smarty.get.sort.order == $so_key) ? 'selected="selected"': '')}>{$so_val}</option>
+                        <option value="{$so_key}" {(isset($get.sort.order) && ($get.sort.order == $so_key) ? 'selected="selected"': '')}>{$so_val}</option>
                     {/foreach}
                     </select>
                 </td>
                 <td>{$CONST.SORT_ORDER}</td>
                 <td>
                     <select name="serendipity[sort][ordermode]">
-                        <option value="DESC" {(isset($smarty.get.sort.ordermode) && ($smarty.get.sort.ordermode == 'DESC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_DESC}</option>
-                        <option value="ASC" {(isset($smarty.get.sort.ordermode) && ($smarty.get.sort.ordermode == 'ASC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_ASC}</option>
+                        <option value="DESC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'DESC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_DESC}</option>
+                        <option value="ASC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'ASC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_ASC}</option>
                     </select>
                 </td>
                 <td>{$CONST.ENTRIES_PER_PAGE}</td>
                 <td>
                     <select name="serendipity[sort][perPage]">
                     {foreach $per_page AS $per_page_nr}
-                        <option value="{$per_page_nr}" {(isset($smarty.get.sort.perPage) && ($smarty.get.sort.perPage == $per_page_nr) ? 'selected="selected"' : '')}>{$per_page_nr}</option>
+                        <option value="{$per_page_nr}" {(isset($get.sort.perPage) && ($get.sort.perPage == $per_page_nr) ? 'selected="selected"' : '')}>{$per_page_nr}</option>
                     {/foreach}
                     </select>
                 </td>

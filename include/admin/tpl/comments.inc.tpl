@@ -67,19 +67,19 @@ function highlightComment(id, checkvalue) {
         </tr>
         <tr>
             <td>{$CONST.AUTHOR}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="{$getfilter.author|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="{$get.filter.author|escape}" /></td>
             <td>{$CONST.EMAIL}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][email]" size="15" value="{$getfilter.email|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][email]" size="15" value="{$get.filter.email|escape}" /></td>
             <td>{$CONST.URL}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][url]" size="15" value="{$getfilter.url|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][url]" size="15" value="{$get.filter.url|escape}" /></td>
         </tr>
         <tr>
             <td>IP:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][ip]" size="15" value="{$getfilter.ip|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][ip]" size="15" value="{$get.filter.ip|escape}" /></td>
             <td>{$CONST.CONTENT}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][body]" size="15" value="{$getfilter.body|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][body]" size="15" value="{$get.filter.body|escape}" /></td>
             <td>{$CONST.REFERER}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][referer]" size="15" value="{$getfilter.referer|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][referer]" size="15" value="{$get.filter.referer|escape}" /></td>
         </tr>
         <tr>
             <td>{$CONST.COMMENTS}:</td>
@@ -94,10 +94,10 @@ function highlightComment(id, checkvalue) {
             <td>{$CONST.COMMENTS_FILTER_SHOW}:</td>
             <td>
                 <select name="serendipity[filter][show]">
-                    <option value="all"{if $getfilter.show == 'all'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
-                    <option value="approved"{if $getfilter.show == 'approved'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
-                    <option value="pending"{if $getfilter.show == 'pending'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
-                    <option value="confirm"{if $getfilter.show == 'confirm'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
+                    <option value="all"{if $get.filter.show == 'all'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
+                    <option value="approved"{if $get.filter.show == 'approved'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
+                    <option value="pending"{if $get.filter.show == 'pending'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
+                    <option value="confirm"{if $get.filter.show == 'confirm'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
                 </select>
             </td>
             <td>{$CONST.TYPE}</td>
@@ -120,7 +120,7 @@ function highlightComment(id, checkvalue) {
 
 {if !is_array($sql)}
     <div align="center">- {$CONST.NO_COMMENTS} -</div>
-    <div align="center">- Click button "{$CONST.GO}" again, please.  -</div>
+    <div align="center">- Return to default comment list <a href="serendipity_admin.php?serendipity[adminModule]=comments">"here"</a>.  -</div>
 {else}
 
 <form action="" method="POST" name="formMultiDelete" id="formMultiDelete">

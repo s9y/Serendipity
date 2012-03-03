@@ -17,6 +17,7 @@ $sort_order = array('timestamp'     => DATE,
                     'id'            => 'ID');
 $per_page = array('12', '16', '50', '100');
 
+$data = array();
 
 /**
  * Shows the entry panel overview
@@ -26,7 +27,7 @@ $per_page = array('12', '16', '50', '100');
  * @access public
  * @return null
  */
-function serendipity_drawList() {
+function serendipity_drawList($data=array()) {
     global $serendipity, $sort_order, $per_page;
 
     $filter_import = array('author', 'category', 'isdraft');
@@ -100,7 +101,6 @@ function serendipity_drawList() {
     $categories = serendipity_fetchCategories();
     $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
 
-    // ToDo: set smarty flag $config_booleanize = true; in backend only? how? or does it not matter?
     $serendipity['smarty']->assign( array(
                                 'drawList'   => true,
                                 'entries'    => $entries,
@@ -233,7 +233,6 @@ switch($serendipity['GET']['adminAction']) {
             if ($entry['timestamp'] == -1) {
                 $data['switched_output'] = true;
                 $data['dateval'] = false;
-                #echo DATE_INVALID . '<br />';
                 // The date given by the user is not convertable. Reset the timestamp.
                 $entry['timestamp'] = $serendipity['POST']['timestamp'];
             }
@@ -255,12 +254,10 @@ switch($serendipity['GET']['adminAction']) {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
                     $data['is_draft'] = true;
-                    #echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE_DRAFT . '</div><br />';
                     serendipity_updertEntry($entry);
                 } else {
                     if ($serendipity['use_iframe']) {
                         $data['is_iframe'] = true;
-                        #echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_SAVE . '</div><br />';
                         serendipity_iframe_create('save', $entry);
                     } else {
                         serendipity_iframe($entry, 'save');
@@ -318,7 +315,6 @@ switch($serendipity['GET']['adminAction']) {
 
                 if ($serendipity['use_iframe']) {
                     $data['is_iframepreview'] = true;
-                    #echo '<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . IFRAME_PREVIEW . '</div><br />';
                     serendipity_iframe_create('preview', $entry);
                 } else {
                     serendipity_iframe($entry, 'preview');
@@ -358,9 +354,7 @@ switch($serendipity['GET']['adminAction']) {
         serendipity_deleteEntry((int)$serendipity['GET']['id']);
         $data['switched_output'] = true;
         $data['is_doDelete']     = true;
-        // for smartification printf had to turn into sprintf!!
         $data['del_entry']       = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
-        #echo '<br />';
         $cont_draw = true;
 
     case 'doMultiDelete':
@@ -378,15 +372,13 @@ switch($serendipity['GET']['adminAction']) {
                     $entry = serendipity_fetchEntry('id', $id, 1, 1);
                     serendipity_deleteEntry((int)$id);
                     $data['is_doMultiDelete'] = true;
-                    // for smartification printf had to turn into sprintf!!
                     $data['del_entry'][]      = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
-                    #echo '<br />';
                 }
             }
         }
 
     case 'editSelect':
-        serendipity_drawList();
+        serendipity_drawList($data);
         break;
 
     case 'delete':
@@ -414,9 +406,7 @@ switch($serendipity['GET']['adminAction']) {
             $ids .= (int)$id . ',';
             $entry = serendipity_fetchEntry('id', $id, 1, 1);
             $data['is_multidelete'] = true;
-            // for smartification printf had to turn into sprintf!!
             $data['rip_entry'][]    = sprintf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
-            #echo '<br />';
         }
         $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
         $data['switched_output'] = true;
@@ -440,17 +430,14 @@ switch($serendipity['GET']['adminAction']) {
         );
 }
 
+$data['get']       = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+// make sure we've got these
+$data['urltoken']  = serendipity_setFormToken('url');
+$data['formtoken'] = serendipity_setFormToken();
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
-
-$serendipity['smarty']->assign(
-                        array(  'comments'  => $comments,
-                                'urltoken'  => serendipity_setFormToken('url'),
-                                'formtoken' => serendipity_setFormToken()
-                            ));
-
 
 $serendipity['smarty']->assign($data);
 

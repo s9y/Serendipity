@@ -8,7 +8,7 @@ if (!serendipity_checkPermission('adminComments')) {
     return;
 }
 
-$codata = array();
+$data = array();
 
 $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10);
 $summaryLength = 200;
@@ -134,37 +134,37 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
         }
         
         $target_url = '?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=doReply&amp;serendipity[id]=' . (int)$serendipity['GET']['id'] . '&amp;serendipity[entry_id]=' . (int)$serendipity['GET']['entry_id'] . '&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;' . serendipity_setFormToken('url');
-        $data       = $serendipity['POST'];
-        $data['replyTo'] = (int)$serendipity['GET']['id'];
+        $codata       = $serendipity['POST'];
+        $codata['replyTo'] = (int)$serendipity['GET']['id'];
         $out        = serendipity_printComments($c);
         $serendipity['smarty']->display(serendipity_getTemplateFile('comments.tpl', 'serendipityPath'));
         
-        if (!isset($data['name'])) {
-            $data['name']  = $serendipity['serendipityRealname'];
+        if (!isset($codata['name'])) {
+            $codata['name']  = $serendipity['serendipityRealname'];
         }
 
-        if (!isset($data['email'])) {
-            $data['email']  = $serendipity['serendipityEmail'];
+        if (!isset($codata['email'])) {
+            $codata['email']  = $serendipity['serendipityEmail'];
         }
     } else {
         $target_url = '?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=doEdit&amp;serendipity[id]=' . (int)$serendipity['GET']['id'] . '&amp;serendipity[entry_id]=' . (int)$serendipity['GET']['entry_id'] . '&amp;' . serendipity_setFormToken('url');
 
-        /* If we are not in preview, we need data from our database */
+        /* If we are not in preview, we need comment data from our database */
         if (!isset($serendipity['POST']['preview'])) {
             $comment = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}comments WHERE id = ". (int)$serendipity['GET']['id']);
-            $data['name']       = $comment[0]['author'];
-            $data['email']      = $comment[0]['email'];
-            $data['url']        = $comment[0]['url'];
-            $data['replyTo']    = $comment[0]['parent_id'];
-            $data['comment']    = $comment[0]['body'];
+            $codata['name']       = $comment[0]['author'];
+            $codata['email']      = $comment[0]['email'];
+            $codata['url']        = $comment[0]['url'];
+            $codata['replyTo']    = $comment[0]['parent_id'];
+            $codata['comment']    = $comment[0]['body'];
     
-        /* If we are in preview, we get data from our form */
+        /* If we are in preview, we get comment data from our form */
         } elseif (isset($serendipity['POST']['preview'])) {
-            $data['name']       = $serendipity['POST']['name'];
-            $data['email']      = $serendipity['POST']['email'];
-            $data['url']        = $serendipity['POST']['url'];
-            $data['replyTo']    = $serendipity['POST']['replyTo'];
-            $data['comment']    = $serendipity['POST']['comment'];
+            $codata['name']       = $serendipity['POST']['name'];
+            $codata['email']      = $serendipity['POST']['email'];
+            $codata['url']        = $serendipity['POST']['url'];
+            $codata['replyTo']    = $serendipity['POST']['replyTo'];
+            $codata['comment']    = $serendipity['POST']['comment'];
             $pc_data = array(
                     array(
                       'email'     => $serendipity['POST']['email'],
@@ -180,16 +180,16 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
         }
     }
 
-    if (!empty($data['url']) && substr($data['url'], 0, 7) != 'http://' &&
-         substr($data['url'], 0, 8) != 'https://') {
-         $data['url'] = 'http://' . $data['url'];
+    if (!empty($codata['url']) && substr($codata['url'], 0, 7) != 'http://' &&
+         substr($codata['url'], 0, 8) != 'https://') {
+         $codata['url'] = 'http://' . $codata['url'];
     }
                                 
     serendipity_displayCommentForm(
       $serendipity['GET']['entry_id'],
       $target_url,
       NULL,
-      $data,
+      $codata,
       false,
       false
     );
@@ -279,16 +279,16 @@ $sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}
                                 . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . " 
                                 ORDER BY c.id DESC $limit");
 
-$codata['commentsPerPage'] = $commentsPerPage;
-$codata['totalComments']   = $totalComments;
-$codata['pages']           = $pages;
-$codata['page']            = $page;
-$codata['linkPrevious']    = $linkPrevious;
-$codata['linkNext']        = $linkNext;
-$codata['searchString']    = $searchString;
-$codata['filter_vals']     = $filter_vals;
-$codata['sql']             = $sql;
-$codata['c_type']          = $c_type;
+$data['commentsPerPage'] = $commentsPerPage;
+$data['totalComments']   = $totalComments;
+$data['pages']           = $pages;
+$data['page']            = $page;
+$data['linkPrevious']    = $linkPrevious;
+$data['linkNext']        = $linkNext;
+$data['searchString']    = $searchString;
+$data['filter_vals']     = $filter_vals;
+$data['sql']             = $sql;
+$data['c_type']          = $c_type;
 
 $i = 0;
 $comments = array();
@@ -404,17 +404,17 @@ if(is_array($sql)) {
     }
 **/
 
-$codata['comments']  = $comments;
-$codata['errormsg']  = $errormsg;
-$codata['urltoken']  = serendipity_setFormToken('url');
-$codata['formtoken'] = serendipity_setFormToken();
-$codata['getfilter'] = $serendipity['GET']['filter']; // don't trust {$smarty.get.vars} as we often change GET vars via serendipty['GET']
+$data['comments']      = $comments;
+$data['errormsg']      = $errormsg;
+$data['urltoken']      = serendipity_setFormToken('url');
+$data['formtoken']     = serendipity_setFormToken();
+$data['get']['filter'] = $serendipity['GET']['filter']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
-$serendipity['smarty']->assign($codata); // do not use $data here, as already used above - use i.e. $codata['foo'] = $foo;
+$serendipity['smarty']->assign($data); 
 
 $tfile = dirname(__FILE__) . "/tpl/comments.inc.tpl";
 

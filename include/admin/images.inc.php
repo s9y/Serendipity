@@ -680,6 +680,8 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
         );
 }
 
+$data['get'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
