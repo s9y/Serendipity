@@ -65,40 +65,39 @@ function highlightComment(id, checkvalue) {
         <tr>
             <td colspan="6" class="serendipity_admin_filters_headline"><strong>{$CONST.FILTERS}</strong> - {$CONST.FIND_COMMENTS}</td>
         </tr>
-        {* if we change/set $serendipity{'GET'] values in the parents php file ... does $smarty.get then know about them ??? *}
         <tr>
             <td>{$CONST.AUTHOR}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="{$smarty.get.filter.author|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][author]" size="15" value="{$getfilter.author|escape}" /></td>
             <td>{$CONST.EMAIL}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][email]" size="15" value="{$smarty.get.filter.email|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][email]" size="15" value="{$getfilter.email|escape}" /></td>
             <td>{$CONST.URL}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][url]" size="15" value="{$smarty.get.filter.url|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][url]" size="15" value="{$getfilter.url|escape}" /></td>
         </tr>
         <tr>
             <td>IP:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][ip]" size="15" value="{$smarty.get.filter.ip|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][ip]" size="15" value="{$getfilter.ip|escape}" /></td>
             <td>{$CONST.CONTENT}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][body]" size="15" value="{$smarty.get.filter.body|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][body]" size="15" value="{$getfilter.body|escape}" /></td>
             <td>{$CONST.REFERER}:</td>
-            <td><input class="input_textbox" type="text" name="serendipity[filter][referer]" size="15" value="{$smarty.get.filter.referer|escape}" /></td>
+            <td><input class="input_textbox" type="text" name="serendipity[filter][referer]" size="15" value="{$getfilter.referer|escape}" /></td>
         </tr>
         <tr>
             <td>{$CONST.COMMENTS}:</td>
             <td>
-                <select name="serendipity[filter][perpage]">
                 {* Smarty 3 does support ternary syntax e.g. {('N'==$foo)?'Yes':'No'} *}
-                {foreach $filter_vals AS $filter_val}
-                <option value="{$filter_val}" {($commentsPerPage == $filter_val) ? ' selected="selected"' : ''}>{$filter_val}</option>
+                <select name="serendipity[filter][perpage]">
+                {foreach $filter_vals AS $filter}
+                    <option value="{$filter}" {($commentsPerPage == $filter) ? ' selected="selected"' : ''}>{$filter}</option>
                 {/foreach}
                 </select>
             </td>
             <td>{$CONST.COMMENTS_FILTER_SHOW}:</td>
             <td>
                 <select name="serendipity[filter][show]">
-                    <option value="all"{if $smarty.get.filter.show == 'all'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
-                    <option value="approved"{if $smarty.get.filter.show == 'approved'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
-                    <option value="pending"{if $smarty.get.filter.show == 'pending'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
-                    <option value="confirm"{if $smarty.get.filter.show == 'confirm'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
+                    <option value="all"{if $getfilter.show == 'all'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
+                    <option value="approved"{if $getfilter.show == 'approved'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
+                    <option value="pending"{if $getfilter.show == 'pending'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
+                    <option value="confirm"{if $getfilter.show == 'confirm'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
                 </select>
             </td>
             <td>{$CONST.TYPE}</td>
@@ -121,6 +120,7 @@ function highlightComment(id, checkvalue) {
 
 {if !is_array($sql)}
     <div align="center">- {$CONST.NO_COMMENTS} -</div>
+    <div align="center">- Click button "{$CONST.GO}" again, please.  -</div>
 {else}
 
 <form action="" method="POST" name="formMultiDelete" id="formMultiDelete">
