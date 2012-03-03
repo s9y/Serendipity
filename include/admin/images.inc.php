@@ -553,6 +553,7 @@ switch ($serendipity['GET']['adminAction']) {
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
         );
+        // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);
         $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_upload.tpl', 'serendipityPath'));
         break;
@@ -680,7 +681,8 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
         );
 }
 
-$data['get'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
