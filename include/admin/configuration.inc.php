@@ -18,13 +18,16 @@ if (!serendipity_checkPermission('siteConfiguration') && !serendipity_checkPermi
     return;
 }
 
+$data = array();
+
 switch ($_POST['installAction'] && serendipity_checkFormToken()) {
     case 'check':
+        $data['installAction'] = 'check';
         $oldConfig = $serendipity;
         $res = serendipity_updateConfiguration();
+        $data['res'] = $res;
         if (is_array($res)) {
-            echo DIAGNOSTIC_ERROR;
-            echo '<div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . implode('<br />', $res) . '</div><br /><br />';
+            $data['diagnosticError'] = true;
         } else {
             /* If we have new rewrite rules, then install them */
             $permalinkOld = array(
@@ -51,20 +54,13 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
                     }
                 }
 
-
             if (serendipity_checkPermission('siteConfiguration') && serialize($permalinkOld) != serialize($permalinkNew)) {
-                printf(ATTEMPT_WRITE_FILE, $serendipity['serendipityPath'] . '.htaccess');
+                $data['htaccessRewrite'] = true;
+                $data['serendipityPath'] = $serendipity['serendipityPath'];
                 $res = serendipity_installFiles($serendipity['serendipityPath']);
-                if (is_array($res)) {
-                    echo implode('<br />', $res);
-                } else {
-                    echo DONE . '<br />';
-                }
-
+                $data['res'] = $res;
                 serendipity_buildPermalinks();
             }
-
-            echo '<br /><div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . WRITTEN_N_SAVED .'</div>';
         }
 
         break;
@@ -72,9 +68,21 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
     default:
         $from = &$serendipity;
         $t = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
+        ob_start();
         serendipity_printConfigTemplate($t, $from, false, true);
+        $data['config'] = ob_get_contents();
+        ob_end_clean();
         break;
 }
+
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
+$serendipity['smarty']->assign($data);
+$tfile = dirname(__FILE__) . "/tpl/configuration.inc.tpl";
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
+echo $content;
 
 /* vim: set sts=4 ts=4 expandtab : */
 ?>
