@@ -3,7 +3,7 @@
         {$CONST.DIAGNOSTIC_ERROR}
         <div class="serendipityAdminMsgError">-
             <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
-            {foreach $r in $res}
+            {foreach $res as $r}
                 {$r} <br />
             {/foreach}
         </div>
@@ -13,7 +13,7 @@
         {if $htaccessRewrite}
             {$CONST.ATTEMPT_WRITE_FILE|sprintf:"{$serendipityPath}htaccess"}
             {if is_array($res)}
-                {foreach $r in $res}
+                {foreach $res as $r}
                     {$r} <br />
                 {/foreach}
             {else}
