@@ -12,9 +12,8 @@ define('S9Y_I_ERROR', -1);
 define('S9Y_I_WARNING', 0);
 define('S9Y_I_SUCCESS', 1);
 
-if (!defined('S9Y_FRAMEWORK_SMARTY')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_smarty.inc.php");
-}
+// smartification needs to pull everything first for installation and db purposes
+include(S9Y_INCLUDE_PATH . 'serendipity_config.inc.php');
 
 $data = array();
 
