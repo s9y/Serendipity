@@ -252,15 +252,10 @@ li ul, li ol, p.break,
 blockquote,
 blockquote + cite {
     display: block;
-    margin: 0 2.5em 1em;
+    margin: 0 1em 1em;
 }
 
 blockquote + cite:before { content: "–\202F"; }
-
-.content blockquote {
-    border-left: 4px solid #aaa;
-    padding-left: .75em;
-}
 
 dt,
 .serendipity_calendar tfoot a,
@@ -790,7 +785,7 @@ label span.placeholder{
     position:absolute;
     font-size:75%;
     color:#999;
-    /*font-family:sans-serif;*/
+    font-family:sans-serif;
     padding:4px 3px;
     z-index:1;
 }
@@ -805,7 +800,18 @@ label span.placeholder-hide-exept-screenreader {
     overflow: hidden;
 }
 
-label span.placeholder-hide { display:none; }
+label span.placeholder-hide{
+    display:none;
+}
+
+/* overwrite for the HTML5 Boilerplate way to hide labels */
+label.visuallyhidden-with-placeholder{
+    clip: auto !important;
+    height:auto !important;
+    overflow: visible !important;
+    position:absolute !important;
+    left:-999em;
+}
 
 /* Helper classes  */
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
@@ -973,6 +979,14 @@ label span.placeholder-hide { display:none; }
     
     #searchform>div,
     .ie7 #searchform>div { padding: 0 1em 0 2em; }
+
+    .content blockquote {
+        border-left: 4px solid #aaa;
+        padding-left: .75em;
+    }
+
+    .content blockquote,
+    .content blockquote + cite { margin: 0 2.5em 1em; }
     
     .commentlevel-1 { margin-left: 1em; }
     .commentlevel-2 { margin-left: 2em; }
@@ -983,6 +997,12 @@ label span.placeholder-hide { display:none; }
     .commentlevel-7 { margin-left: 7em; }
     .commentlevel-8 { margin-left: 8em; }
     .commentlevel-9 { margin-left: 9em; }
+
+    #serendipity_comment textarea {
+        max-width: 100%;
+        resize: both;
+        width: 26.25em;
+    }
 }
 
 @media only screen and (min-width:1024px) {
@@ -1031,6 +1051,8 @@ label span.placeholder-hide { display:none; }
     .serendipity_pagination { margin: 0 2.4615em 1.2308em; }
     
     #colophon small { padding: .9167em 2.4615em 1em; }
+
+    #serendipity_comment textarea { width: 30em; }
 }
 
 /* Print styles */
