@@ -13,7 +13,7 @@ define('S9Y_I_WARNING', 0);
 define('S9Y_I_SUCCESS', 1);
 
 // smartification needs to pull everything first for installation and db purposes
-include(S9Y_INCLUDE_PATH . 'serendipity_config.inc.php');
+//include(S9Y_INCLUDE_PATH . 'serendipity_config.inc.php');
 
 $data = array();
 
@@ -373,6 +373,11 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     if ( serendipity_updateConfiguration() ) {
         $data['s9y_installed'] = true;
     } 
+}
+
+
+if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
+    include  dirname(dirname(__FILE__)) . "/functions.inc.php";
 }
 
 if (!is_object($serendipity['smarty'])) {
