@@ -40,7 +40,7 @@
                     </select>
                 </td>
                 <td valign="top" width="80">{$CONST.CONTENT}</td>
-                <td valign="top"><input class="input_textbox" size="10" type="text" name="serendipity[filter][body]" value="{(isset($get.filter.body)) ? "$get.filter.body|escape" : ''}" /></td>
+                <td valign="top"><input class="input_textbox" size="10" type="text" name="serendipity[filter][body]" value="{(isset($get.filter.body)) ? "{$get.filter.body|escape}" : ''}" /></td>
             </tr>
             <tr>
                 <td class="serendipity_admin_filters_headline" colspan="6"><strong>{$CONST.SORT_ORDER}</strong></td>
@@ -169,7 +169,7 @@
 
         {/foreach}
 
-        {/if} {* end entries output *}
+    {/if} {* end is_entries *}
 
         <table class="serendipity_admin_list" cellpadding="5" width="100%">
             <tr>
@@ -212,10 +212,11 @@
         </table>
     </div>
 
-</div><!-- // div.serendipity_admin_list end -->
+</div><!-- // div.serendipity_admin_list drawList end -->
 
- {else}
-    {if !$switched_output}
+{/if}{* $drawList end *}
+
+{if (($switched_output !== true && empty($entries)) || (!$drawList && empty($entries))) && ($smarty.get.serendipity.adminAction != 'new' &&  $smarty.get.serendipity.adminAction != 'edit')}
 
 <div class="serendipity_admin_list">
 
@@ -231,17 +232,16 @@
 
     </table>
 
-</div><!-- // div.serendipity_admin_list end -->
+</div><!-- // div.serendipity_admin_list no entries end -->
 
-    {/if}
-{/if}{* $drawList end *}
+{/if}
 
 {if $switched_output}
-{if ($marty.get.adminAction && $dateval)}
+{if ($smarty.get.serendipity.adminAction && $dateval)}
     {$CONST.DATE_INVALID}
     <br />
 {/if}
-{if ($marty.get.adminAction && $use_legacy)}
+{if ($smarty.get.serendipity.adminAction && $use_legacy)}
     {if $is_draft}
     <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE_DRAFT}</div><br />
     {/if}

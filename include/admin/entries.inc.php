@@ -373,6 +373,7 @@ switch($serendipity['GET']['adminAction']) {
         }
 
     case 'editSelect':
+        $data['switched_output'] = false;
         serendipity_drawList();
         break;
 
