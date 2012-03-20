@@ -216,7 +216,7 @@
 
 {/if}{* $drawList end *}
 
-{if (($switched_output !== true && empty($entries)) || (!$drawList && empty($entries))) && ($smarty.get.serendipity.adminAction != 'new' &&  $smarty.get.serendipity.adminAction != 'edit')}
+{if (($switched_output !== true && empty($entries)) || (!$drawList && empty($entries))) && ($get.adminAction != 'new' &&  $get.adminAction != 'edit')}
 
 <div class="serendipity_admin_list">
 
@@ -237,11 +237,11 @@
 {/if}
 
 {if $switched_output}
-{if ($smarty.get.serendipity.adminAction && $dateval)}
+{if ($get.adminAction && $dateval)}
     {$CONST.DATE_INVALID}
     <br />
 {/if}
-{if ($smarty.get.serendipity.adminAction && $use_legacy)}
+{if ($get.adminAction && $use_legacy)}
     {if $is_draft}
     <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE_DRAFT}</div><br />
     {/if}
