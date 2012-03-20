@@ -79,7 +79,7 @@
 
     </form>
 
-    {if is_array($entries)}
+    {if $is_entries}
 
     <table class="serendipity_admin_list" cellpadding="5" width="100%">
 
@@ -127,11 +127,11 @@
                 <table width="100%" cellspacing="0" cellpadding="3">
                     <tr>
                         <td>
-                            <strong>{if (!$serendipity.showFutureEntries) && ($entry.timestamp >= $serverOffsetHour)}<a href="#" title="{$CONST.ENTRY_PUBLISHED_FUTURE}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock_future.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a> {else}{/if}{if $entry.properties.ep_is_sticky == true} {$CONST.STICKY_POSTINGS}: {/if}{if $entry.isdraft == true}{$CONST.DRAFT}: {/if}<a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></strong>
+                            <strong>{if (!$showFutureEntries) && ($entry.timestamp >= $serverOffsetHour)}<a href="#" title="{$CONST.ENTRY_PUBLISHED_FUTURE}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock_future.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a> {else}{/if}{if $entry.properties.ep_is_sticky == true} {$CONST.STICKY_POSTINGS}: {/if}{if $entry.isdraft == true}{$CONST.DRAFT}: {/if}<a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></strong>
                         </td>
                         <td align="right">
                             {* Find out if the entry has been modified later than 30 minutes after creation *}
-                            {$entry.timestamp|@formatTime:"DATE_FORMAT_SHORT"} {if $entry.timestamp <= ($entry.last_modified - (60*30))}<a href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"$CONST.DATE_FORMAT_SHORT"}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a>{else}{/if}
+                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"} {if $entry.timestamp <= ($entry.last_modified - (60*30))}<a href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a>{else}{/if}
                         </td>
                     </tr>
                     <tr>
@@ -140,8 +140,8 @@
                         {if count($entry.categories)}
                             {$CONST.IN}
                             {foreach $entry.categories as $cat}
-                                {$caturl = serendipity_categoryURL($cat)}{* serendipity_categoryURL($cat) include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
-                                {$cats[] = '<a href="{$caturl}">{$cat.category_name|escape)}</a>'}
+                                {assign var="caturl" value="serendipity_categoryURL($cat)"}{* serendipity_categoryURL($cat) include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
+                                {$cats = ['<a href="{$caturl}">{$cat.category_name|escape)}</a>']}
                             {/foreach}
                             {foreach $cats AS $implode_cat}
                                 {$implode_cat}{if (count($cats) > 1) && !$implode_cat@last}, {/if}

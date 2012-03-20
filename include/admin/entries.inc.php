@@ -27,8 +27,8 @@ $data = array();
  * @access public
  * @return null
  */
-function serendipity_drawList($data=array()) {
-    global $serendipity, $sort_order, $per_page;
+function serendipity_drawList() {
+    global $serendipity, $sort_order, $per_page, $data;
 
     $filter_import = array('author', 'category', 'isdraft');
     $sort_import   = array('perPage', 'ordermode', 'order');
@@ -101,19 +101,16 @@ function serendipity_drawList($data=array()) {
     $categories = serendipity_fetchCategories();
     $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
 
-    $serendipity['smarty']->assign( array(
-                                'drawList'   => true,
-                                'entries'    => $entries,
-                                'sort_order' => $sort_order,
-                                'per_page'   => $per_page,
-                                'urltoken'   => serendipity_setFormToken('url'),
-                                'formtoken'  => serendipity_setFormToken(),
-                                'users'      => $users,
-                                'categories' => $categories,
-                                'offSet'     => $offSet,
-                                'use_iframe' => $serendipity['use_iframe']
-                                )
-                            );
+    $data['drawList']   = true;
+    $data['sort_order'] = $sort_order;
+    $data['perPage']    = $perPage;
+    $data['per_page']   = $per_page;
+    $data['urltoken']   = serendipity_setFormToken('url');
+    $data['formtoken']  = serendipity_setFormToken();
+    $data['users']      = $users;
+    $data['categories'] = $categories;
+    $data['offSet']     = $offSet;
+    $data['use_iframe'] = $serendipity['use_iframe'];
 
     if (is_array($entries)) {
         $data['is_entries'] = true;
@@ -130,7 +127,7 @@ function serendipity_drawList($data=array()) {
         $data['linkNext']     = $qString . '&amp;serendipity[page]=' . ($page+1);
 
         // Print the entries
-        $entry = array();
+        $smartentries = array();
         foreach ($entries as $ey) {
             // Find out if the entry has been modified later than 30 minutes after creation
             if ($ey['timestamp'] <= ($ey['last_modified'] - 60*30)) {
@@ -158,7 +155,7 @@ function serendipity_drawList($data=array()) {
                 $entry_cats = implode(', ', $cats);
             }
 
-            $entry[] = array(
+            $smartentries[] = array(
                 'clock'        => $entry_pre,
                 'id'           => $ey['id'],
                 'title'        => htmlspecialchars($ey['title']),
@@ -173,16 +170,14 @@ function serendipity_drawList($data=array()) {
             );
 
         } // end entries output
-
-        $serendipity['smarty']->assign(
-                        array(  'urltoken'          => serendipity_setFormToken('url'),
-                                'formtoken'         => serendipity_setFormToken(),
-                                'serverOffsetHours' => serendipity_serverOffsetHour(),
-                                'showFutureEntries' => $serendipity['showFutureEntries']
-                            ));
+        
+        $data['entries']           = $smartentries;
+        $data['urltoken']          = serendipity_setFormToken('url');
+        $data['formtoken']         = serendipity_setFormToken();
+        $data['serverOffsetHour']  = serendipity_serverOffsetHour();
+        $data['showFutureEntries'] = $serendipity['showFutureEntries'];
 
     } // entries end 
-
 } // End function serendipity_drawList()
 
 if (!empty($serendipity['GET']['editSubmit'])) {
@@ -378,7 +373,7 @@ switch($serendipity['GET']['adminAction']) {
         }
 
     case 'editSelect':
-        serendipity_drawList($data);
+        serendipity_drawList();
         break;
 
     case 'delete':
@@ -430,10 +425,10 @@ switch($serendipity['GET']['adminAction']) {
         );
 }
 
-$data['get']       = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
-$data['urltoken']  = serendipity_setFormToken('url');
-$data['formtoken'] = serendipity_setFormToken();
+if(!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
+if(!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
