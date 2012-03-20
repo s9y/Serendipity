@@ -51,7 +51,7 @@
     {if $template != $cur_template}
         {if ! $info.unmetRequirements}
             <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">
-                <img src="{serendipity_getFile file='admin/img/install_now{$info.info.customIcon}.png'}" alt="{$CONST.SET_AS_TEMPLATE}" title="{$CONST.SET_AS_TEMPLATE}" border="0" />
+                <img src="{serendipity_getFile file="admin/img/install_now{$info.info.customIcon}.png"}" alt="{$CONST.SET_AS_TEMPLATE}" title="{$CONST.SET_AS_TEMPLATE}" border="0" />
             </a>
         {else}
             <span class="serendipityTemplateSelectUnmetRequirements" style="color: #cccccc">{$info.unmetRequirements}></span>
