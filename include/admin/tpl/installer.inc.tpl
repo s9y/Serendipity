@@ -264,7 +264,7 @@
     <strong>{$CONST.DONE}</strong><br />
     {/if}
 
-    {$CONST.CREATING_PRIMARY_AUTHOR|sprintf:"{$marty.post.user|escape}"}$hellip;
+    {$CONST.CREATING_PRIMARY_AUTHOR|sprintf:"{$smarty.post.user|escape}"}$hellip;
     {if $add_authors}
     <strong>{$CONST.DONE}</strong><br />
     {/if}
