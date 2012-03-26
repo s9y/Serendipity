@@ -40,19 +40,19 @@ $data['basedir'] = $basedir;
  * @return string   returned String
  */
 function serendipity_installerResultDiagnose($result, $s) {
-    global $errorCount;
+    global $errorCount, $data;
     if ( $result === S9Y_I_SUCCESS ) {
-        $data['i_success'] = true;
-        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
+        $data['i_success'] = true; // we dont need data here explicitely, but we keep it for possible future purposes
+        return '<span class="msg_success">'. $s .'</span>';
     }
     if ( $result === S9Y_I_WARNING ) {
         $data['i_warning'] = true;
-        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .' [?]</span>';
+        return '<span class="msg_notice">'. $s .' [?]</span>';
     }
     if ( $result === S9Y_I_ERROR ) {
         $errorCount++;
         $data['i_error'] = true;
-        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .' [!]</span>';
+        return '<span class="msg_error">'. $s .' [!]</span>';
     }
 }
 

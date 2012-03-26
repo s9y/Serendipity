@@ -23,22 +23,22 @@ define('S9Y_U_SUCCESS', 1);
  * @return string   returned String
  */
 function serendipity_upgraderResultDiagnose($result, $s) {
-    global $errorCount;
+    global $errorCount, $data;
 
     if ( $result === S9Y_U_SUCCESS ) {
-        $data['u_success'] = true;
-        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
+        $data['u_success'] = true; // we dont need data here explicitely, but we keep it for possible future purposes
+        return '<span class="msg_success">'. $s .'</span>';
     }
 
     if ( $result === S9Y_U_WARNING ) {
         $data['u_warning'] = true;
-        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .'</span>';
+        return '<span class="msg_notice">'. $s .'</span>';
     }
 
     if ( $result === S9Y_U_ERROR ) {
         $errorCount++;
         $data['u_error'] = true;
-        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .'</span>';
+        return '<span class="msg_error">'. $s .'</span>';
     }
 }
 

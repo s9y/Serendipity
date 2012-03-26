@@ -1,14 +1,3 @@
-{** please return correct markup for these serendipity_installerResultDiagnose notices in the upper PHP file
-    {if $i_success}
-        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
-    {/if}
-    {if $i_warning}
-        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .' [?]</span>';
-    {/if}
-    {if $i_error}
-        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .' [!]</span>';
-    {/if}
-**}
 {* From configuration to install *}
 {if ( sizeof($smarty.post) > 1 && $s9yGETstep == 3 )}
 
