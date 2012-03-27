@@ -148,7 +148,7 @@ class Serendipity_Smarty extends Smarty
         
         $this->setConfigDir(array(S9Y_TEMPLATE_USERDEFAULT));
         
-        if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir()) && IN_installer !== true) {
+        if ( (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) && IN_installer !== true) {
             if(ini_get('display_errors') == 0 || ini_get('display_errors') == 'off') printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir());
             trigger_error(sprintf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()), E_USER_ERROR);
         }
