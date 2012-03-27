@@ -387,9 +387,16 @@ if (!is_object($serendipity['smarty'])) {
 $serendipity['smarty']->assign($data);
 
 $tfile = dirname(__FILE__) . "/tpl/installer.inc.tpl";
+ob_start();
+include $tfile;
+$content = ob_get_contents();
+ob_end_clean();
 
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
+#$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
+#echo $content;
 
-echo $content;
+// eval a string template and do not store compiled code
+echo $serendipity['smarty']->display('eval:'.$content);
+
 
 /* vim: set sts=4 ts=4 expandtab : */
