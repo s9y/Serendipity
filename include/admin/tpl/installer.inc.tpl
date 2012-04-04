@@ -1,11 +1,9 @@
 {* From configuration to install *}
-{if ( sizeof($smarty.post) > 1 && $s9yGETstep == 3 )}
+{if $is_errors && is_array($errors)}
 
-    {if is_array($errors)}
-        {foreach $errors AS $error}
+    {foreach $errors AS $error}
 <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$error}</div>
-        {/foreach}
-    {/if}
+    {/foreach}
 
 {/if}
 
@@ -253,7 +251,7 @@
     <strong>{$CONST.DONE}</strong><br />
     {/if}
 
-    {$CONST.CREATING_PRIMARY_AUTHOR|sprintf:"{$smarty.post.user|escape}"}$hellip;
+    {$CONST.CREATING_PRIMARY_AUTHOR|sprintf:"{$smarty.post.user|escape}"}&hellip;
     {if $add_authors}
     <strong>{$CONST.DONE}</strong><br />
     {/if}

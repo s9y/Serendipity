@@ -78,8 +78,8 @@ if ( sizeof($_POST) > 1 && (int)$serendipity['GET']['step'] == 3 ) {
     }
 
     if ( is_array($errors = serendipity_checkInstallation()) ) {
+        $data['is_errors'] = true;
         $data['errors'] = $errors;
-
         $from = $_POST;
         /* Back to configuration, user did something wrong */
         $serendipity['GET']['step'] = $serendipity['POST']['step'];
