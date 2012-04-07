@@ -213,6 +213,7 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
         case 'serendipityHTTPPath':
             return rtrim(dirname($_SERVER['PHP_SELF']), '/') .'/';
 
+        case 'defaultBaseURL':
         case 'baseURL':
             $ssl  = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on';
             $port = $_SERVER['SERVER_PORT'];
