@@ -43,7 +43,7 @@
         <div id="identity">
             <a href="{$serendipityBaseURL}">
                 <h1>{$blogTitle}</h1>
-                <p>{$blogDescription}</p>
+                {if $blogDescription}<p>{$blogDescription}</p>{/if}
             </a>
         </div>
         
