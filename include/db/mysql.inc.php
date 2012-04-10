@@ -313,7 +313,7 @@ function serendipity_db_schema_import($query) {
     }
 
     $query = trim(str_replace($search, $replace, $query));
-
+    serendipity_db_query("SET storage_engine=MYISAM");
     if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
         return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);
