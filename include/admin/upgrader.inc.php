@@ -214,7 +214,7 @@ if ($serendipity['GET']['action'] == 'ignore') {
         if (!empty($task['function']) && version_compare($serendipity['versionInstalled'], $task['version'], '<') ) {
             if (is_callable($task['function'])) {
                 $data['is_callable_task'] = true;
-                $data['call_tasks'][] = $task;
+                $data['call_tasks'][] = sprintf('Calling %s ...<br />', (is_array($task['function']) ? $task['function'][0] . '::'. $task['function'][1] : $task['function']));
 
                 if (empty($task['arguments'])) {
                     call_user_func($task['function']);

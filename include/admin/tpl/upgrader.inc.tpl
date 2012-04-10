@@ -1,7 +1,3 @@
-{if $task_function}
-    {'Calling %s ...<br />'|sprintf:(is_array($task['function']) ? $task['function'][0] . '::'. $task['function'][1] : $task['function'])}
-{/if}
-
 {if $errors}
     {$CONST.DIAGNOSTIC_ERROR}<br /><br />
     <div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{foreach $errors AS $implode_err}{$implode_err}{if (count($errors) > 1) && !$implode_err@last}<br /> {/if}{/foreach}</div><br /><br />
@@ -14,7 +10,7 @@
 
     {foreach $call_tasks AS $ctask}
         {if $is_callable_task}
-            {'Calling %s ...<br />'|sprintf:( is_array($ctask.function) ? "{$ctask.function.0} :: {$ctask.function.1}" : "$ctask.function" )}
+            {$ctasks}
         {/if}
     {/foreach}
 
