@@ -102,7 +102,7 @@
     {/if}
     </div>
 
-{if ($errorCount < 1)}
+    {if ($errorCount < 1)}
     {if (sizeof($sqlfiles) > 0)}
     <br />
     <h3>{$database_update_types}:</h3>
@@ -122,7 +122,7 @@
         <div><strong>{$task.version} - {$task.title}</strong></div>
         <div style="padding-left: 5px">{$task.desc|nl2br}</div><br />
     {/foreach}
-    {if}
+    {/if}
 
     {if ($taskCount == 0)}
         {$CONST.SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC}
@@ -138,5 +138,5 @@
         <br /><br /><a href="{$upgradeLoc}" class="serendipityPrettyButton input_button">{$CONST.SERENDIPITY_UPGRADER_CONSIDER_DONE}</a>
     {/if}
 
-    {/if}
+    {/if} {* errorCount end *}
 {/if}{* showAbort else end *}
