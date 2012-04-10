@@ -24,7 +24,9 @@
         <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</div>
     {/if}
     <br />
-    <div align="center">{$CONST.SERENDIPITY_UPGRADER_RETURN_HERE|sprintf:'<a href="{$serendipityHTTPPath}">':'</a>'}</div>
+    {if $return_here}
+    <div align="center">{$print_UPGRADER_RETURN_HERE}</div>
+    {/if]
 {else}
     <h2>{$CONST.SERENDIPITY_UPGRADER_WELCOME}</h2>
     {$CONST.SERENDIPITY_UPGRADER_PURPOSE|sprintf:$s9y_version_installed}<br />

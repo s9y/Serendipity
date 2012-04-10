@@ -262,6 +262,7 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
         // void
     }
     $data['return_here'] = true;
+    $data['print_UPGRADER_RETURN_HERE'] = sprintf(SERENDIPITY_UPGRADER_RETURN_HERE, '<a href="'. $serendipity['serendipityHTTPPath'] .'">', '</a>');
     $_SESSION['serendipityAuthedUser'] = false;
     @session_destroy();
 } else {
