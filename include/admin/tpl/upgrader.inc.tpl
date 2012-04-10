@@ -1,8 +1,3 @@
-{if $errors}
-    {$CONST.DIAGNOSTIC_ERROR}<br /><br />
-    <div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{foreach $errors AS $implode_err}{$implode_err}{if (count($errors) > 1) && !$implode_err@last}<br /> {/if}{/foreach}</div><br /><br />
-{/if}
-
 {if ($get.action == 'ignore')}
     {* Todo: Don't know what to put here? *}
 
