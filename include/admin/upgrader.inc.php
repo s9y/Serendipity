@@ -209,7 +209,7 @@ if ($serendipity['GET']['action'] == 'ignore') {
     }
 
     /* Call functions */
-    $data['call_tasks'] = array():
+    $data['call_tasks'] = array();
     foreach ($tasks as $task) {
         if (!empty($task['function']) && version_compare($serendipity['versionInstalled'], $task['version'], '<') ) {
             if (is_callable($task['function'])) {
