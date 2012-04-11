@@ -240,7 +240,9 @@ if (defined('IN_installer') && IS_installed === false) {
  *   Make sure that the file included is in the current directory and not any possible
  *   include path
  */
-if (@file_exists($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php')) {
+if (!defined('S9Y_DATA_PATH') && file_exists(dirname(__FILE__) . '/serendipity_config_local.inc.php')) {
+    $local_config = dirname(__FILE__) . '/serendipity_config_local.inc.php';
+} elseif (@file_exists($_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php')) {
     $local_config = $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/serendipity_config_local.inc.php';
 } elseif (defined('S9Y_DATA_PATH')) {
     // Shared installation!
