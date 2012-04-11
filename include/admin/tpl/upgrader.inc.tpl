@@ -26,7 +26,7 @@
     <br />
     {if $return_here}
     <div align="center">{$print_UPGRADER_RETURN_HERE}</div>
-    {/if]
+    {/if}
 {else}
     <h2>{$CONST.SERENDIPITY_UPGRADER_WELCOME}</h2>
     {$CONST.SERENDIPITY_UPGRADER_PURPOSE|sprintf:$s9y_version_installed}<br />
