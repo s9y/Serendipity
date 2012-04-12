@@ -203,7 +203,7 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
             $test_path2 = serendipity_getRealDir(__FILE__);
             
             if (!empty($_SERVER['ORIG_PATH_TRANSLATED']) && file_exists(dirname($_SERVER['ORIG_PATH_TRANSLATED']) . '/serendipity_admin.php')) {
-                return realpath(rtrim(dirname($_SERVER['ORIG_PATH_TRANSLATED'], '/'))) . '/';
+                return realpath(rtrim(dirname($_SERVER['ORIG_PATH_TRANSLATED']), '/')) . '/';
             }
 
             if (file_exists($test_path1 . 'serendipity_admin.php')) {
