@@ -4,6 +4,9 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Added to use MyISAM handler for s9y tables (we do not use InnoDB
+      features, but rely on MyISAM fulltext)
+      
     * fixed defaultBaseURL did not show up installer. Thanks to onli.
       Follow up from c292bad
 

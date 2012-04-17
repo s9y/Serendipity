@@ -95,6 +95,9 @@ textarea {
     border-radius: 3px;
 }
 
+input.placeholder,
+textarea.placeholder { color: #aaa; }
+
 input[type=text]:focus,
 input[type=search]:focus,
 input[type=email]:focus,
@@ -197,7 +200,17 @@ a:link { -webkit-tap-highlight-color: #d52; }
 p {
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
+    -ms-hypens: auto;
     hyphens: auto;
+}
+
+p code,
+p samp,
+p kbd {
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hypens: none;
+    hyphens: none;
 }
 
 h1 { font-size: 2em; }
@@ -211,7 +224,7 @@ h1, h2 { line-height: 1.25; }
 
 .serendipity_entry header h2 { margin: 0 0 .3333em; }
 
-h3 { 
+h3 {
     font-size: 1.25em;
     margin: 0 0 .8em;
 }
@@ -236,7 +249,7 @@ audio, video,
 .manage_comments,
 .plugin_comment_wrap,
 p.whiteline, #searchform>div,
-.serendipity_entry .plainList,
+.serendipity_entry_body .plainList,
 #page, #primary-nav,
 .serendipity_calendar,
 .serendipity_freetag_taglist,
@@ -431,11 +444,11 @@ fieldset,
     line-height: 1.8462;
 }
 
-.serendipity_entry ul,
-.serendipity_entry ol { margin: 0 0 1em 2em; }
+.serendipity_entry_body ul,
+.serendipity_entry_body ol { margin: 0 0 1em 2em; }
 
-.serendipity_entry li ul,
-.serendipity_entry li ol { margin: 0 0 0 2em; }
+.serendipity_entry_body li ul,
+.serendipity_entry_body li ol { margin: 0 0 0 2em; }
 
 .serendipity_entryIcon {
     float: left;
@@ -781,36 +794,51 @@ pre .geshi {
     border-radius: 3px;
 }
 
-label span.placeholder{
-    position:absolute;
-    font-size:75%;
-    color:#999;
-    font-family:sans-serif;
-    padding:4px 3px;
-    z-index:1;
+.serendipity_findmore,
+.serendipity_findmore_like {
+    list-style: none;
+    margin: 0;
 }
 
-label span.placeholder-hide-exept-screenreader {
-    clip: rect(1px 1px 1px 1px);
-    clip: rect(1px, 1px, 1px, 1px);
-    padding:0 !important;
-    border:0 !important;
-    height: 1px !important;
-    width: 1px !important;
-    overflow: hidden;
+.serendipity_findmore {
+    padding: 0;
+    text-align: left;
 }
 
-label span.placeholder-hide{
-    display:none;
+.serendipity_findmore li,
+.serendipity_findmore_like li {
+    display: inline-block;
+    margin: 0 4px 8px 0;
 }
 
-/* overwrite for the HTML5 Boilerplate way to hide labels */
-label.visuallyhidden-with-placeholder{
-    clip: auto !important;
-    height:auto !important;
-    overflow: visible !important;
-    position:absolute !important;
-    left:-999em;
+.lazyload_switcher {
+    display: inline-block;
+    margin: 0 4px 0 0;
+}
+
+.ie7 .serendipity_findmore li,
+.ie7 .serendipity_findmore_like li,
+.ie7 .lazyload_switcher {
+    display: inline;
+    zoom: 1;
+}
+
+.findmore_like_button { min-width: 120px; }
+
+.facebook_like iframe {
+    position: relative;
+    top: 15px;
+}
+
+.gplus_lazyload_switcher {
+    float: left;
+    position: relative;
+    top: 8px;
+}
+
+.gplus_like iframe {
+    position: relative!important;
+    top: 6px!important;
 }
 
 /* Helper classes  */
@@ -827,7 +855,7 @@ label.visuallyhidden-with-placeholder{
 /* Media queries  */
 @media only screen and (min-width: 481px) {
     #serendipityQuickSearchTermField { max-width: 15em; }
-    
+
     #serendipity_comment input[type=text],
     #serendipity_comment input[type=email],
     #serendipity_comment input[type=url] { max-width: 20em; }
@@ -839,20 +867,20 @@ label.visuallyhidden-with-placeholder{
     .serendipity_commentDirection { max-width: 36.75em;}
 
     #primary-nav ul { display: block; }
-    
+
     #primary-nav select { display: none; }
-    
+
     #sidebar_left,
     #sidebar_right { padding: 0 1em; }
-    
+
     .sidebar_plugin {
         float: left;
         margin: 0 0 2em;
         width: 47.5%;
     }
-    
+
     .ie7 .sidebar_plugin { width: 47.4%; }
-    
+
     #sidebar_left .odd,
     #sidebar_right .odd {
         clear: both;
@@ -875,7 +903,7 @@ label.visuallyhidden-with-placeholder{
 
     .ie7 .serendipity_pagination .prev,
     .ie7 .serendipity_pagination .next { width: 24.9%; }
-    
+
     .archives_year {
         float: left;
         width: 48%;
@@ -887,7 +915,7 @@ label.visuallyhidden-with-placeholder{
     }
 
     .arch_even { margin: 0 0 0 2%; }
-    
+
     .archives_date { min-width: 7em; }
 
     .serendipity_entrypaging_left,
@@ -920,17 +948,17 @@ label.visuallyhidden-with-placeholder{
         -moz-box-shadow: 0 0 10px 1px rgba(0,0,0,.2);
         box-shadow: 0 0 10px 1px rgba(0,0,0,.2);
     }
-    
+
     #identity h1 { margin: 1em 0 0; }
-    
+
     #searchform>div { margin-top: 4.4em; }
 
     #identity p, #searchform>div { margin-bottom: 1.5em; }
-    
+
     #primary-nav { margin-bottom: 2em; }
-    
+
     #banner>img { display: block; }
-    
+
     #identity, #searchform,
     #content,
     #sidebar_left,
@@ -954,29 +982,29 @@ label.visuallyhidden-with-placeholder{
     .ie7 #sidebar_right { width: 37.9%; }
     .ie7 .col2l #sidebar_left { left: -61.9%; }
     .ie7 .col2l #content { left: 37.9%; }
-    
+
     .col2l #searchform { text-align: right; }
-    
+
     #sidebar_left,
     #sidebar_right { padding: 0; }
-    
+
     #sidebar_left .odd,
     #sidebar_right .odd {
         clear: none;
         margin-right: 1em;
     }
-    
+
     .sidebar_plugin,
     .ie7 .sidebar_plugin {
         float: none;
         width: auto;
     }
-    
+
     #sidebar_left .sidebar_plugin,
     .ie7 #sidebar_left .sidebar_plugin,
     #sidebar_right .sidebar_plugin,
     .ie7 #sidebar_right .sidebar_plugin { margin: 0 1em 2em 2em; }
-    
+
     #searchform>div,
     .ie7 #searchform>div { padding: 0 1em 0 2em; }
 
@@ -987,7 +1015,7 @@ label.visuallyhidden-with-placeholder{
 
     .content blockquote,
     .content blockquote + cite { margin: 0 2.5em 1em; }
-    
+
     .commentlevel-1 { margin-left: 1em; }
     .commentlevel-2 { margin-left: 2em; }
     .commentlevel-3 { margin-left: 3em; }
@@ -1007,10 +1035,10 @@ label.visuallyhidden-with-placeholder{
 
 @media only screen and (min-width:1024px) {
     #identity h1 { padding: 0 1em; }
-    
+
     #identity p,
     #searchform>div { padding: 0 2em; }
-    
+
     #primary-nav ul { margin: 0 1em; }
 
     .col3 #content { width: 50%; }
@@ -1031,15 +1059,15 @@ label.visuallyhidden-with-placeholder{
 
     #sidebar_left .sidebar_plugin,
     .ie7 #sidebar_left .sidebar_plugin { margin: 0 2em 2em 1em; }
-    
+
     .serendipity_search,
     .staticpage_results,
     .comment_results,
     .nocontent,
     .serendipity_entrypaging { margin: 0 2em 1em; }
-    
+
     .serendipity_entry { margin: 0 2em 3em; }
-    
+
     .archives, .freetag_cloud,
     .content_msg,
     .serendipity_staticpage,
@@ -1047,9 +1075,9 @@ label.visuallyhidden-with-placeholder{
     .ie7 #sidebar_left .sidebar_plugin,
     #sidebar_right .sidebar_plugin,
     .ie7 #sidebar_right .sidebar_plugin { margin: 0 2em 2em; }
-    
+
     .serendipity_pagination { margin: 0 2.4615em 1.2308em; }
-    
+
     #colophon small { padding: .9167em 2.4615em 1em; }
 
     #serendipity_comment textarea { width: 30em; }
@@ -1067,7 +1095,7 @@ label.visuallyhidden-with-placeholder{
     @page { margin: 0.5cm; }
     p, h2, h3 { orphans: 3; widows: 3; }
     h2, h3 { page-break-after: avoid; }
-    
+
     #searchform, #primary-nav,
     #sidebar_left, #sidebar_right,
     #colophon, audio, video,
