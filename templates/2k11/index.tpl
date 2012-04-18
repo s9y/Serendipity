@@ -1,14 +1,14 @@
 {if $is_embedded != true}
 <!doctype html>
-<!--[if lt IE 7 ]> <html class="no-js ie6 oldie" lang="{$lang}"> <![endif]-->
-<!--[if IE 7 ]>    <html class="no-js ie7 oldie" lang="{$lang}"> <![endif]-->
-<!--[if IE 8 ]>    <html class="no-js ie8 oldie" lang="{$lang}"> <![endif]-->
+<!--[if lt IE 7 ]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="{$lang}"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js lt-ie9 lt-ie8" lang="{$lang}"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="{$lang}"> <!--<![endif]-->
 <head>
     <meta charset="{$head_charset}">
     <title>{$head_title|@default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
     <meta name="generator" content="Serendipity v.{$head_version}">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width">
 {if $template_option.webfonts == 'droid'}
     <link  rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
 {elseif $template_option.webfonts == 'ptsans'}
@@ -24,7 +24,7 @@
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script id="modernizr" src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
@@ -46,7 +46,7 @@
                 {if $blogDescription}<p>{$blogDescription}</p>{/if}
             </a>
         </div>
-        
+
         <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get">
         <div>
             <input type="hidden" name="serendipity[action]" value="search">
@@ -63,7 +63,7 @@
     {if $template_option.use_corenav}
     <nav id="primary-nav">
         <h2 class="visuallyhidden">{$CONST.TWOK11_NAV_TITLE}</h2>
-        
+
         <ul class="clearfix">{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
     </nav>
     {/if}
@@ -84,7 +84,7 @@
         </aside>
     {/if}
     </div>
-    
+
     <footer id="colophon">
         <small lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</small>
     </footer>
