@@ -4,7 +4,7 @@
     <ul class="plainList">
     {foreach from=$categories item="plugin_category"}
         <li id="category_{$plugin_category.categoryid}" class="category_depth{$plugin_category.catdepth}">
-        {if $is_form}    
+        {if $is_form}
             <input name="serendipity[multiCat][]" type="checkbox" value="{$plugin_category.categoryid}">
         {/if}
         {if !empty($category_image)}

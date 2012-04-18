@@ -4,7 +4,7 @@
 {foreach from=$archives item="archive"}
     <section class="archives_year {cycle values="arch_odd,arch_even"}">
         <h3>{$archive.year}</h3>
-        
+
         <ul class="plainList">
         {foreach from=$archive.months item="month"}
             <li class="archives_month">

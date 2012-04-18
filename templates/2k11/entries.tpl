@@ -4,8 +4,8 @@
     <article id="post_{$entry.id}" class="clearfix serendipity_entry{if $dategroup.is_sticky} sticky{/if}">
         <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
-            
-            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_smarty_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
+
+            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
         </header>
 
         <div class="clearfix content serendipity_entry_body">
@@ -75,13 +75,13 @@
             <h3>{$CONST.TRACKBACKS}</h3>
 
             <div id="trackback_url"><a rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape}">{$CONST.TRACKBACK_SPECIFIC}</a></div>
-            
+
             {serendipity_printTrackbacks entry=$entry.id}
         </section>
 
         <section id="comments" class="serendipity_comments">
             <h3>{$CONST.COMMENTS}</h3>
-            
+
             <p class="manage_comments">{$CONST.DISPLAY_COMMENTS_AS}
             {if $entry.viewmode eq $CONST.VIEWMODE_LINEAR}
                {$CONST.COMMENTS_VIEWMODE_LINEAR} | <a href="{$entry.link_viewmode_threaded}#comments" rel="nofollow">{$CONST.COMMENTS_VIEWMODE_THREADED}</a>
@@ -129,7 +129,7 @@
 {if $footer_info or $footer_prev_page or $footer_next_page}
     <nav class="serendipity_pagination">
         <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>
-        
+
         <ul class="clearfix">
             {if $footer_info}
             <li class="info"><span>{$footer_info}</span></li>
