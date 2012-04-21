@@ -1,4 +1,5 @@
-<?php # $Id: serendipity_event_nl2br.php 2011-11-25 09:00:00Z ian $
+<?php # $Id$
+# serendipity_event_nl2br.php 2012-04-21 16:11:00 ian $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,7 +15,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.13');
+        $propbag->add('version',       '2.14');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -247,6 +248,8 @@ class serendipity_event_nl2br extends serendipity_event
 
                     // check single entry for temporary disabled markups
                     if( $isobr ) { 
+                        $serendipity['nl2br']['iso2br'] = true; // include to global as also used by staticpages now
+
                         if (!is_object($serendipity['smarty'])) { 
                             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
                         }
