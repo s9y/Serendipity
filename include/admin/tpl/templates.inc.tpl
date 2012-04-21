@@ -18,7 +18,7 @@
     {if $adminAction == "configure"}
         <div class="serendipityAdminMsgSuccess">
             <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
-            {$CONST:DONE}: {$save_time}
+            {$CONST.DONE}: {$save_time}
         </div>
     {/if}
 
