@@ -155,16 +155,16 @@ blockquote:lang(de)  p:first-child:before { content: '„'; content: open-quote;
 :lang(de) blockquote p:last-child:after,
 blockquote:lang(de)  p:last-child:after  { content: '“'; content: close-quote; }
 
-.ie8 q:before,
-.ie8 q q:before,
-.ie8 :lang(de) q:before,
-.ie8 :lang(de) q q:before,
-.ie8 blockquote p:before,
-.ie8 blockquote p:first-child:before,
-.ie8 :lang(de) blockquote p:before,
-.ie8 blockquote:lang(de)  p:before,
-.ie8 :lang(de) blockquote p:first-child:before,
-.ie8 blockquote:lang(de)  p:first-child:before { content: ''; content: no-open-quote; }
+.lt-ie9 q:before,
+.lt-ie9 q q:before,
+.lt-ie9 :lang(de) q:before,
+.lt-ie9 :lang(de) q q:before,
+.lt-ie9 blockquote p:before,
+.lt-ie9 blockquote p:first-child:before,
+.lt-ie9 :lang(de) blockquote p:before,
+.lt-ie9 blockquote:lang(de)  p:before,
+.lt-ie9 :lang(de) blockquote p:first-child:before,
+.lt-ie9 blockquote:lang(de)  p:first-child:before { content: ''; content: no-open-quote; }
 
 a, a:active, a:visited { color: #3e5f81; }
 a:hover { color: #d52; }
@@ -316,8 +316,8 @@ fieldset,
 #primary-nav li,
 .archives_date { display: inline-block; }
 
-.ie7 #primary-nav li,
-.ie7 .archives_date {
+.lt-ie8 #primary-nav li,
+.lt-ie8 .archives_date {
     display: inline;
     zoom: 1;
 }
@@ -355,11 +355,10 @@ fieldset,
 #serendipityQuickSearchTermField,
 #serendipity_comment input[type=text],
 #serendipity_comment input[type=email],
-#serendipity_comment input[type=url] { width: 97%; }
+#serendipity_comment input[type=url] { width: 95%; }
 
-#serendipity_replyTo { width: 99%; }
-
-#serendipity_comment textarea { width: 97%; }
+#serendipity_replyTo,
+#serendipity_comment textarea { width: 95%; }
 
 #primary-nav {
     border-top: 1px solid #294564;
@@ -528,8 +527,8 @@ pre .geshi {
 .serendipity_pagination .prev,
 .serendipity_pagination .next { width: 50%; }
 
-.ie7 .serendipity_pagination .prev,
-.ie7 .serendipity_pagination .next { width: 49.9%; }
+.lt-ie8 .serendipity_pagination .prev,
+.lt-ie8 .serendipity_pagination .next { width: 49.9%; }
 
 .archives_date { min-width: 10em; }
 
@@ -816,9 +815,9 @@ pre .geshi {
     margin: 0 4px 0 0;
 }
 
-.ie7 .serendipity_findmore li,
-.ie7 .serendipity_findmore_like li,
-.ie7 .lazyload_switcher {
+.lt-ie8 .serendipity_findmore li,
+.lt-ie8 .serendipity_findmore_like li,
+.lt-ie8 .lazyload_switcher {
     display: inline;
     zoom: 1;
 }
@@ -879,7 +878,7 @@ pre .geshi {
         width: 47.5%;
     }
 
-    .ie7 .sidebar_plugin { width: 47.4%; }
+    .lt-ie8 .sidebar_plugin { width: 47.4%; }
 
     #sidebar_left .odd,
     #sidebar_right .odd {
@@ -899,10 +898,10 @@ pre .geshi {
 
     .serendipity_pagination .next { width: 25%; }
 
-    .ie7 .serendipity_pagination .info { width: 49.9%; }
+    .lt-ie8 .serendipity_pagination .info { width: 49.9%; }
 
-    .ie7 .serendipity_pagination .prev,
-    .ie7 .serendipity_pagination .next { width: 24.9%; }
+    .lt-ie8 .serendipity_pagination .prev,
+    .lt-ie8 .serendipity_pagination .next { width: 24.9%; }
 
     .archives_year {
         float: left;
@@ -924,8 +923,8 @@ pre .geshi {
         width: 50%;
     }
 
-    .ie7 .serendipity_entrypaging_left,
-    .ie7 .serendipity_entrypaging_right { width: 49.9%; }
+    .lt-ie8 .serendipity_entrypaging_left,
+    .lt-ie8 .serendipity_entrypaging_right { width: 49.9%; }
 
     .serendipity_entrypaging { overflow: hidden; }
 
@@ -975,13 +974,13 @@ pre .geshi {
     .col2l #sidebar_left { left: -62%; }
     .col2l #content { left: 38%; }
 
-    .ie7 #identity,
-    .ie7 #content { width: 61.9%; }
-    .ie7 #searchform,
-    .ie7 #sidebar_left,
-    .ie7 #sidebar_right { width: 37.9%; }
-    .ie7 .col2l #sidebar_left { left: -61.9%; }
-    .ie7 .col2l #content { left: 37.9%; }
+    .lt-ie8 #identity,
+    .lt-ie8 #content { width: 61.9%; }
+    .lt-ie8 #searchform,
+    .lt-ie8 #sidebar_left,
+    .lt-ie8 #sidebar_right { width: 37.9%; }
+    .lt-ie8 .col2l #sidebar_left { left: -61.9%; }
+    .lt-ie8 .col2l #content { left: 37.9%; }
 
     .col2l #searchform { text-align: right; }
 
@@ -995,18 +994,18 @@ pre .geshi {
     }
 
     .sidebar_plugin,
-    .ie7 .sidebar_plugin {
+    .lt-ie8 .sidebar_plugin {
         float: none;
         width: auto;
     }
 
     #sidebar_left .sidebar_plugin,
-    .ie7 #sidebar_left .sidebar_plugin,
+    .lt-ie8 #sidebar_left .sidebar_plugin,
     #sidebar_right .sidebar_plugin,
-    .ie7 #sidebar_right .sidebar_plugin { margin: 0 1em 2em 2em; }
+    .lt-ie8 #sidebar_right .sidebar_plugin { margin: 0 1em 2em 2em; }
 
     #searchform>div,
-    .ie7 #searchform>div { padding: 0 1em 0 2em; }
+    .lt-ie8 #searchform>div { padding: 0 1em 0 2em; }
 
     .content blockquote {
         border-left: 4px solid #aaa;
@@ -1049,16 +1048,16 @@ pre .geshi {
     .col3 #content { left: 25%; }
     .col3 #sidebar_left { left: -50%; }
 
-    .ie7 .col3 #content { width: 49.9%; }
-    .ie7 .col3 #searchform,
-    .ie7 .col3 #sidebar_left,
-    .ie7 .col3 #sidebar_right { width: 24.9%; }
-    .ie7 .col3 #identity { width: 74.9%; }
-    .ie7 .col3 #content { left: 24.9%; }
-    .ie7 .col3 #sidebar_left { left: -49.9%; }
+    .lt-ie8 .col3 #content { width: 49.9%; }
+    .lt-ie8 .col3 #searchform,
+    .lt-ie8 .col3 #sidebar_left,
+    .lt-ie8 .col3 #sidebar_right { width: 24.9%; }
+    .lt-ie8 .col3 #identity { width: 74.9%; }
+    .lt-ie8 .col3 #content { left: 24.9%; }
+    .lt-ie8 .col3 #sidebar_left { left: -49.9%; }
 
     #sidebar_left .sidebar_plugin,
-    .ie7 #sidebar_left .sidebar_plugin { margin: 0 2em 2em 1em; }
+    .lt-ie8 #sidebar_left .sidebar_plugin { margin: 0 2em 2em 1em; }
 
     .serendipity_search,
     .staticpage_results,
@@ -1072,9 +1071,9 @@ pre .geshi {
     .content_msg,
     .serendipity_staticpage,
     #sidebar_left .sidebar_plugin,
-    .ie7 #sidebar_left .sidebar_plugin,
+    .lt-ie8 #sidebar_left .sidebar_plugin,
     #sidebar_right .sidebar_plugin,
-    .ie7 #sidebar_right .sidebar_plugin { margin: 0 2em 2em; }
+    .lt-ie8 #sidebar_right .sidebar_plugin { margin: 0 2em 2em; }
 
     .serendipity_pagination { margin: 0 2.4615em 1.2308em; }
 
@@ -1088,7 +1087,7 @@ pre .geshi {
     * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; }
     a, a:visited { text-decoration: underline; }
     abbr[title]:after { content: " (" attr(title) ")"; }
-    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+    pre, blockquote { border: 1px solid #999; page-break-inside: avoid; padding: 0.25cm 0.25cm 0; }
     thead { display: table-header-group; }
     tr, img { page-break-inside: avoid; }
     img { max-width: 100% !important; }

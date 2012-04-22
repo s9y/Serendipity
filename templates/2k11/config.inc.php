@@ -7,7 +7,15 @@ $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOS
                                      'currpage2' => $_SERVER['REQUEST_URI']));
 
 function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
-$serendipity['smarty']->register_modifier('serendipity_smarty_html5time', 'serendipity_smarty_html5time');
+if( defined('Smarty::SMARTY_VERSION') ) {
+   $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
+} else {
+   // old Smarty 2 syntax
+   $serendipity['smarty']->register_modifier('serendipity_html5time', 'serendipity_smarty_html5time');
+}
+
+// function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
+// $serendipity['smarty']->register_modifier('serendipity_smarty_html5time', 'serendipity_smarty_html5time');
 
 if (class_exists('serendipity_event_spamblock')) {
   $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%spamblock%required_fields'", true, 'assoc');

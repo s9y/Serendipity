@@ -1577,7 +1577,7 @@ class serendipity_plugin
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
 
-        if( !SMARTY_VERSION ) { 
+        if( !defined('Smarty::SMARTY_VERSION') ) {
             $inclusion = $serendipity['smarty']->security_settings[@INCLUDE_ANY];
             $serendipity['smarty']->security_settings[@INCLUDE_ANY] = true;
             $content = $serendipity['smarty']->fetch('file:'. $tfile);
