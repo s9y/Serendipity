@@ -5,6 +5,9 @@
 Version 1.6.1 ()
 ------------------------------------------------------------------------
 
+    * Improved escaping of backend plugin management for DB query
+      (Stefan Schurtz)
+          
     * Updated spamblock plugin to 1.78 & 1.79
       changed wordfilter to function to check with 'verify_once'
       to reject wordfilter signed spam comments before - 
