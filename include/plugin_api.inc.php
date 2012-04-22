@@ -526,7 +526,7 @@ class serendipity_plugin_api
             $filename = serendipity_plugin_api::includePlugin($class_name, $pluginPath, $instance_id);
             if (empty($filename) && !empty($instance_id)) {
                 // $serendipity['debug']['pluginload'][] = "No valid path/filename found.";
-                $sql = "SELECT path from {$serendipity['dbPrefix']}plugins WHERE name = '" . $instance_id . "'";
+                $sql = "SELECT path from {$serendipity['dbPrefix']}plugins WHERE name = '" . serendipity_db_escape_string($instance_id) . "'";
                 $plugdata = serendipity_db_query($sql, true, 'both', false, false, false, true);
                 if (is_array($plugdata) && isset($plugdata[0])) {
                     $pluginPath = $plugdata[0];
@@ -590,7 +590,7 @@ class serendipity_plugin_api
         if (!is_null($authorid)) {
             $p->serendipity_owner = $authorid;
         } else {
-            $sql = "SELECT authorid from {$serendipity['dbPrefix']}plugins WHERE name = '" . $instance_id . "'";
+            $sql = "SELECT authorid from {$serendipity['dbPrefix']}plugins WHERE name = '" . serendipity_db_escape_string($instance_id) . "'";
             $owner = serendipity_db_query($sql, true);
             if (is_array($owner) && isset($owner[0])) {
                 $p->serendipity_owner = $owner[0];
@@ -1099,7 +1099,7 @@ class serendipity_plugin_api
             $instance_id .= ':';
         }
 
-        $existing = serendipity_db_query("SELECT name FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '%$instance_id%'");
+        $existing = serendipity_db_query("SELECT name FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '%" . serendipity_db_escape_string($instance_id) . "%'");
 
         if (is_array($existing) && !empty($existing[0][0])) {
             return $existing[0][0];
