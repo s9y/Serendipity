@@ -293,7 +293,7 @@ switch ($serendipity['GET']['step']) {
           isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
           $serendipity['thumbPerPage2'],
           ($serendipity['showMediaToolbar'] ? true : false),
-          '?serendipity[step]=1' . $add_url . '&amp;serendipity[textarea]='. $serendipity['GET']['textarea'],
+          '?serendipity[step]=1' . $add_url . '&amp;serendipity[textarea]='. htmlspecialchars($serendipity['GET']['textarea']),
           true,
           null,
           false
