@@ -15,7 +15,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.15');
+        $propbag->add('version',       '2.16');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -59,18 +59,26 @@ class serendipity_event_nl2br extends serendipity_event
     function cleanup() {
         global $serendipity;
     
-        /* check possible config mismatch setting */
-        if ( serendipity_db_bool($this->get_config('isobr')) === true && serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
+        /* check possible config mismatch setting in combination with ISOBR */
+        if ( serendipity_db_bool($this->get_config('isobr')) === true ) { 
+            if( serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
+                $this->set_config('clean_tags', false);
+                echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
+                echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'ISOBR') . '</div>';
+                return false;
+            }
+            if ( serendipity_db_bool($this->get_config('p_tags')) === true ) { 
+                $this->set_config('p_tags', false);
+                echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
+                echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'p_tags', 'ISOBR') . '</div>';
+                return false;
+            }
+        }
+        /* check possible config mismatch setting in combination with P_TAGS */
+        if ( serendipity_db_bool($this->get_config('p_tags')) === true && serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
             $this->set_config('clean_tags', false);
             echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
-            echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'ISOBR') . '</div>';
-            return false;
-        }
-        /* check possible config mismatch setting */
-        if ( serendipity_db_bool($this->get_config('isobr')) === true && serendipity_db_bool($this->get_config('p_tags')) === true ) { 
-            $this->set_config('p_tags', false);
-            echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
-            echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'p_tags', 'ISOBR') . '</div>';
+            echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'P_TAGS') . '</div>';
             return false;
         }
         return true;
