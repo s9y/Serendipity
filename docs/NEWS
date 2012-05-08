@@ -1,8 +1,6 @@
 # $Id$
 
-(test)
-
-Version 1.6.1 ()
+Version 1.6.1 (May 8th, 2012)
 ------------------------------------------------------------------------
 
     * Improved escaping of backend plugin management for DB query
