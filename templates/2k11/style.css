@@ -428,7 +428,8 @@ fieldset,
 .serendipity_search,
 .staticpage_results,
 .comment_results,
-.nocontent { margin: 0 1em 1em; }
+.nocontent,
+.serendipity_blogpdf { margin: 0 1em 1em; }
 
 .serendipity_byline,
 .serendipity_entry footer,
@@ -1063,7 +1064,8 @@ pre .geshi {
     .staticpage_results,
     .comment_results,
     .nocontent,
-    .serendipity_entrypaging { margin: 0 2em 1em; }
+    .serendipity_entrypaging,
+    .serendipity_blogpdf { margin: 0 2em 1em; }
 
     .serendipity_entry { margin: 0 2em 3em; }
 
