@@ -4,7 +4,7 @@
  *  @version 1.0
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
- *  Translation (c) 2010 Martin Matu¹ka <martin.matuska@vx.sk>
+ *  Translation (c) 2010 Martin Matu¹ka <martin@matuska.org>
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','µ','ò','ó','ô','à','ø','¶','¹','»','ú','ù','ý','¼','¾',

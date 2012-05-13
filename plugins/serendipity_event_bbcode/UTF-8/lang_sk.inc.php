@@ -2,7 +2,7 @@
 
 /**
  *  @version $$
- *  @author Martin Matuška <mm@FreeBSD.org>
+ *  @author Martin Matuška <martin@matuska.org>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2010-08-17
  */

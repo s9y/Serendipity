@@ -2,12 +2,12 @@
 
 /**
  *  @version 1.0
- *  @author Martin Matu¹ka <martin.matuska@vx.sk>
+ *  @author Martin Matu¹ka <martin@matuska.org>
  *  EN-Revision: Revision of lang_en.inc.php
- *  Translated on 2010/08/17 
- *  Revision on 2010/08/17 
+ *  Translated on 2010/08/17
+ *  Revision on 2010/08/17
  */
- 
+
  // Colorsets
 @define('THEME_COLORSET',               'Farebná sada');
 @define('USER_STYLESHEET',              'Pou¾i» dodatoèný u¾ívateµský súbor so ¹týlmi css. U¾ívateµ musí tento súbor ruène vytvori» v prieèinku ¹ablóny bulletproof. Tento súbor musí ma» názov user.css a mô¾e by» pou¾itý na náhradu niektorých vybraných ¹týlov.');
