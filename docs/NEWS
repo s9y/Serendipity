@@ -1,5 +1,11 @@
 # $Id$
 
+Version 1.6.2 (May 16th, 2012)
+------------------------------------------------------------------------
+
+    * Fix SQL injection for comment.php used in read-context.     
+      (Thanks to High-Tech Bridge SA Security Release Lab, Advisory HTB23092)
+          
 Version 1.6.1 (May 8th, 2012)
 ------------------------------------------------------------------------
 
