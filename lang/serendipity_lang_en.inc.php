@@ -821,6 +821,9 @@
 @define('WARNING_NO_GROUPS_SELECTED', 'Warning: You did not select any group memberships. This would effectively log you out of the usergroup management, and thus your group memberships were not changed.');
 @define('INSTALL_RSSFETCHLIMIT', 'Entries to display in Feeds');
 @define('INSTALL_RSSFETCHLIMIT_DESC', 'Number of entries to display for each page on the RSS Feed.');
+@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+
 @define('INSTAL_DB_UTF8', 'Enable DB-charset conversion');
 @define('INSTAL_DB_UTF8_DESC', 'Issues a MySQL "SET NAMES" query to indicate the required charset for the database. Turn this on or off, if you see weird characters in your blog.');
 @define('ONTHEFLYSYNCH', 'Enable on-the-fly media synchronization');

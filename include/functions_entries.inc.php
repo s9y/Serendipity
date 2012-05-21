@@ -908,12 +908,14 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     }
     $totalPages   = ceil($totalEntries / $limit);
 
-    if (!isset($serendipity['GET']['page'])) {
-        $serendipity['GET']['page'] = 1;
-    }
-
     if ($totalPages <= 0 ) {
         $totalPages = 1;
+    }
+
+    if (!isset($serendipity['GET']['page']) && $serendipity['archiveSortStable']) {
+        $serendipity['GET']['page'] = $totalPages;
+    } else if (!isset($serendipity['GET']['page'])) {
+        $serendipity['GET']['page'] = 1;
     }
 
     if ($serendipity['GET']['page'] > 1) {
@@ -934,6 +936,12 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $uriArguments = $serendipity['uriArguments'];
         $uriArguments[] = 'P'. ($serendipity['GET']['page'] + 1);
         $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix));
+    }
+
+    if ($serendipity['archiveSortStable']) {
+        $temp = $serendipity['smarty']->getTemplateVars('footer_prev_page');
+        $serendipity['smarty']->assign('footer_prev_page', $serendipity['smarty']->getTemplateVars('footer_next_page'));
+        $serendipity['smarty']->assign('footer_next_page', $temp);
     }
 }
 
