@@ -35,11 +35,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET',		'utf8');
+@define('SQL_CHARSET', 'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, cs_CZ.UTF8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG',		'cs-utf');
+@define('WYSIWYG_LANG', 'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -997,4 +997,5 @@ $i18n_filename_to = array (
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Čeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
-@define('SUMMARY', 'Souhrn');
+@define('SUMMARY', 'Souhrn');@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
