@@ -130,7 +130,11 @@ if ($serendipity['smarty_raw_mode']) {
 
         // Welcome screen or whatever
         default:
-            serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
+            if (! isset($serendipity['GET']['page']) || $serendipity['archiveSortStable'] === false) {
+                serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
+            } else  {
+                serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit'], false, false, 'timestamp ASC'));
+            }
             break;
     }
 
