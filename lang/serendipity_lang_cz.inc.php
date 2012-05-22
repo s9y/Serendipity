@@ -997,4 +997,5 @@ $i18n_filename_to = array (
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Èeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
-@define('SUMMARY', 'Souhrn');
+@define('SUMMARY', 'Souhrn');@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
