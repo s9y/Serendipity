@@ -130,7 +130,6 @@ if ($serendipity['smarty_raw_mode']) {
 
         // Welcome screen or whatever
         default:
-            echo "default";
             if (! isset($serendipity['GET']['page']) || $serendipity['archiveSortStable'] === false) {
                 serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
             } else  {
