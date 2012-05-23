@@ -1,7 +1,7 @@
 {if $plugin_to_conf}
     {if is_array($save_errors)}
-        <div class="serendipityAdminMsgError">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
+        <div class="serendipityAdminMsgError msg_error">
+            <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
             {$CONST.ERROR}:<br />
             <ul>
                 {foreach $save_errors as $save_error}
@@ -10,8 +10,8 @@
             </ul>
         </div>
     {elseif $saveconf}
-        <div class="serendipityAdminMsgSuccess">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+        <div class="serendipityAdminMsgSuccess msg_success">
+            <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
             {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}
         </div>
     {/if}
@@ -165,8 +165,8 @@
     </table>
 {else}
     {if $save}
-        <div class="serendipityAdminMsgSuccess">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+        <div class="serendipityAdminMsgSuccess msg_success">
+            <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
             {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</div>
     {/if}
     <div>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</div>
@@ -179,7 +179,7 @@
     
     <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
     <a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" class="serendipityIconLink">
-        <img src="{serendipity_getFile file="admin/img/install.png"}" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />
+        <img src="{serendipity_getFile file="admin/img/install.png"}" style="border: 0px none; vertical-align: middle; display: inline;" alt="" />
         {$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}
     </a>
     {$backend_plugins_sidebar_header}

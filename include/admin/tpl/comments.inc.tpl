@@ -1,5 +1,5 @@
 {if !empty($errormsg)}
-    <p class="serendipityAdminMsgError serendipity_backend_msg_notice"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$errormsg}</p>
+    <p class="serendipityAdminMsgError msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$errormsg}</p>
 {/if}
 
 <script type="text/javascript">
@@ -153,7 +153,7 @@ function highlightComment(id, checkvalue) {
         <tr>
             <td class="{$comment.header_class}">
             {if !empty($comment.header_class)}
-                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />
+                <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />
             {/if}
                 <a name="c{$comment.id}"></a>{* NOTE: a $comment.pubdate with 'c' is available *}
                 {($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id}, {$CONST.IN_REPLY_TO} <strong><a href="{$comment.entry_url}">{$comment.title|escape}</a></strong>{$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}

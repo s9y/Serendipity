@@ -1,17 +1,17 @@
 {if $delete_yes}
     {if $no_delete_permission}
-        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED}</div>
+        <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED}</div>
     {else}
         {if $no_delete_permission_userlevel}
-            <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
+            <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
         {else}
             {if $delete_permission}
-                <div class="serendipityAdminMsgSuccess">
-                    <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+                <div class="serendipityAdminMsgSuccess msg_success">
+                    <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
                     {$CONST.DELETED_USER|sprintf:"{$user|escape:"html"}":"{$realname|escape:"html"}"}
                 </div>
             {else}
-                <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
+                <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
             {/if}
         {/if}
     {/if}
@@ -19,13 +19,13 @@
 
 {if $save_new}
     {if $no_save_permission}
-        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED}</div>
+        <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED}</div>
     {else}
         {if $no_group_selected}
-            <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.WARNING_NO_GROUPS_SELECTED}</div>
+            <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.WARNING_NO_GROUPS_SELECTED}</div>
         {/if}
-        <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+        <div class="serendipityAdminMsgSuccess msg_success">
+            <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
             {$CONST.CREATED_USER|sprintf:"# {$user|escape:"html"}":"{$realname|escape:"html"}"}
             </div>
     {/if}
@@ -33,19 +33,19 @@
 
 {if $save_edit}
     {if $no_edit_permission}
-        <div class="serendipityAdminMsgError">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
+        <div class="serendipityAdminMsgError msg_error">
+            <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />
             {$CONST.CREATE_NOT_AUTHORIZED}
         </div>
     {else}
         {if $no_edit_permission_userlevel}
-            <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
+            <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</div>
         {else}
             {if $no_group_selected}
-                <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.WARNING_NO_GROUPS_SELECTED}</div>
+                <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_error.png"}" alt="" />{$CONST.WARNING_NO_GROUPS_SELECTED}</div>
             {/if}
-            <div class="serendipityAdminMsgSuccess">
-                <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
+            <div class="serendipityAdminMsgSuccess msg_success">
+                <img class="img_error" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
                 {$CONST.MODIFIED_USER|sprintf:"{$realname|escape:"html"}"}
                 </div>
         {/if}

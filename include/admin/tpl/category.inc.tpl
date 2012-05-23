@@ -1,22 +1,22 @@
 {if $post_save}
     {if $new}
-         <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
+         <div class="serendipityAdminMsgSuccess msg_success">
+            <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {$CONST.CATEGORY_SAVED}
          </div>
     {/if}
     {if $edit}
         {if isset($editPermission) && $editPermission == false}
-            <div class="serendipityAdminMsgError">
-                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
+            <div class="serendipityAdminMsgError msg_error">
+                <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
                 {$CONST.PERM_DENIED}
             </div>
         {else}
             {if $subcat}
                 {$subcat}
             {else}
-                <div class="serendipityAdminMsgSuccess">
-                    <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
+                <div class="serendipityAdminMsgSuccess msg_success">
+                    <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
                     {$CONST.CATEGORY_SAVED}
                 </div>
             {/if}
@@ -26,8 +26,8 @@
 
 {if $doDelete}
     {if $deleteSuccess}
-        <div class="serendipityAdminMsgSuccess">
-            <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
+        <div class="serendipityAdminMsgSuccess msg_success">
+            <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />
             {if $remainingCat}
                 {$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}
             {else}
@@ -35,8 +35,8 @@
             {/if}
         </div>
     {else}
-        <div class="serendipityAdminMsgError">
-            <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
+        <div class="serendipityAdminMsgError msg_error">
+            <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />
             {$CONST.INVALID_CATEGORY}
         </div>
     {/if}

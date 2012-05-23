@@ -62,7 +62,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     if (!empty($comment['comment'])) {
         if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
             echo '<script type="text/javascript">alert("' . COMMENT_ADDED . '"); parent.focus(); this.close();</script>';
-            echo '<noscript><p class="serendipityAdminMsgError serendipity_backend_msg_notice"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . COMMENT_ADDED . '</p></noscript>';
+            echo '<noscript><p class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . COMMENT_ADDED . '</p></noscript>';
             return true;
         } else {
             $errormsg .= COMMENT_NOT_ADDED;

@@ -2,7 +2,7 @@
 {if $is_errors && is_array($errors)}
 
     {foreach $errors AS $error}
-<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$error}</div>
+<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$error}</div>
     {/foreach}
 
 {/if}
@@ -204,12 +204,12 @@
     </table>
 
     {if $showWritableNote}
-    <div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</div>
+    <div class="serendipityAdminMsgNote msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</div>
     {/if}
 
     <div align="center">
     {if $errorCount > 0}
-        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.PROBLEM_DIAGNOSTIC}</div>
+        <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.PROBLEM_DIAGNOSTIC}</div>
         <h2><a href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a></h2>
     {else}
         {$CONST.SELECT_INSTALLATION_TYPE}:
@@ -274,16 +274,16 @@
 {else}
     <strong>{$CONST.FAILED}</strong><br />
     {foreach $errors_sif AS $error_f}
-    <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$error_f}</div>
+    <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$error_f}</div>
     {/foreach}
 {/if}
 
 {if $s9y_installed}
-    <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_INSTALLED}</div>
+    <div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_INSTALLED}</div>
     <div align="center" style="font-size: large"><a href="{$smarty.post.serendipityHTTPPath}">{$CONST.VISIT_BLOG_HERE}</a></div>
     <div align="center">{$CONST.THANK_YOU_FOR_CHOOSING}</div>
 {else}
-    <div class="serendipityAdminMsgError"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.ERROR_DETECTED_IN_INSTALL}</div>
+    <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.ERROR_DETECTED_IN_INSTALL}</div>
 {/if}
 
 {/if}{* getstepint3 end *}

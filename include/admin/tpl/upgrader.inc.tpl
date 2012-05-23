@@ -11,7 +11,7 @@
 
     {if $errors}
         {$CONST.DIAGNOSTIC_ERROR}<br /><br />
-        <div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{foreach $errors AS $implode_err}{$implode_err}{if (count($errors) > 1) && !$implode_err@last}<br /> {/if}{/foreach}</div><br /><br />
+        <div class="serendipityAdminMsgError msg_error">- <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{foreach $errors AS $implode_err}{$implode_err}{if (count($errors) > 1) && !$implode_err@last}<br /> {/if}{/foreach}</div><br /><br />
     {/if}
 
 {/if}
@@ -21,11 +21,12 @@
     {if $get.action == 'ignore'}
         {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}
     {elseif $get.action == 'upgrade'}
-        <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</div>
+        <div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</div>
     {/if}
     <br />
     {if $return_here}
     <div align="center">{$print_UPGRADER_RETURN_HERE}</div>
+{* could also be used as:   <div align="center">{$CONST.SERENDIPITY_UPGRADER_RETURN_HERE|sprintf:'<a href="{$serendipityHTTPPath}">':'</a>'}</div> *}
     {/if}
 {else}
     <h2>{$CONST.SERENDIPITY_UPGRADER_WELCOME}</h2>
@@ -88,12 +89,12 @@
         </div>
 
     {if $showWritableNote}
-        <div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</div>
+        <div class="serendipityAdminMsgNote msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</div>
     {/if}
 
     {if ($errorCount > 0)}
         <div align="center">
-            <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.PROBLEM_DIAGNOSTIC}</div>
+            <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.PROBLEM_DIAGNOSTIC}</div>
             <h2><a href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a></h2>
         </div>
     {/if}

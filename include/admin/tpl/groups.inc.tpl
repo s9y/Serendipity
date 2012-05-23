@@ -1,19 +1,19 @@
 {if $delete_yes}
-    <div class="serendipityAdminMsgSuccess">
+    <div class="serendipityAdminMsgSuccess msg_success">
         <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
         {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}
     </div>
 {/if}
 
 {if $save_new}
-    <div class="serendipityAdminMsgSuccess">
+    <div class="serendipityAdminMsgSuccess msg_success">
         <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
         {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}
     </div>
 {/if}
 
 {if $save_edit}
-    <div class="serendipityAdminMsgSuccess">
+    <div class="serendipityAdminMsgSuccess msg_success">
         <img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
         {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:"html"}"}
     </div>

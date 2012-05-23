@@ -63,13 +63,13 @@ class serendipity_event_nl2br extends serendipity_event
         if ( serendipity_db_bool($this->get_config('isobr')) === true ) { 
             if( serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
                 $this->set_config('clean_tags', false);
-                echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
+                echo '<div class="serendipityAdminMsgError msg_error"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
                 echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'ISOBR') . '</div>';
                 return false;
             }
             if ( serendipity_db_bool($this->get_config('p_tags')) === true ) { 
                 $this->set_config('p_tags', false);
-                echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
+                echo '<div class="serendipityAdminMsgError msg_error"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
                 echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'p_tags', 'ISOBR') . '</div>';
                 return false;
             }
@@ -77,7 +77,7 @@ class serendipity_event_nl2br extends serendipity_event
         /* check possible config mismatch setting in combination with P_TAGS */
         if ( serendipity_db_bool($this->get_config('p_tags')) === true && serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
             $this->set_config('clean_tags', false);
-            echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
+            echo '<div class="serendipityAdminMsgError msg_error"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
             echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'P_TAGS') . '</div>';
             return false;
         }

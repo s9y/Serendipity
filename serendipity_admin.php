@@ -237,16 +237,16 @@ if (!$use_installer && $is_logged_in) {
             echo '<div class="serendipity_admin_title">' . INTEGRITY . '</div>';
             $badsums = array();
             if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
-                echo '<span class="serendipityAdminMsgNote">' . CHECKSUMS_NOT_FOUND . '</span>';
+                echo '<span class="serendipityAdminMsgNote msg_notice">' . CHECKSUMS_NOT_FOUND . '</span>';
                 break;
             }
             $badsums = serendipity_verifyFTPChecksums();
             if (count($badsums) == 0) {
-                echo '<span class="serendipityAdminMsgSuccess">' . CHECKSUMS_PASS . '</span>';
+                echo '<span class="serendipityAdminMsgSuccess msg_success">' . CHECKSUMS_PASS . '</span>';
             } else {
                 echo '<ul>';
                 foreach ($badsums as $rpath => $calcsum) {
-                    echo '<li class="serendipityAdminMsgError">' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
+                    echo '<li class="serendipityAdminMsgError msg_error">' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
                 }
                 echo '</ul>';
             }
@@ -372,7 +372,7 @@ if ($use_installer) {
                     <h3><?php echo PLEASE_ENTER_CREDENTIALS ?></h3></div>
                     <?php echo $out['header']; ?>
                     <?php if ($post_action != '' && !$is_logged_in ) { ?>
-                    <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" /><?php echo WRONG_USERNAME_OR_PASSWORD; ?></div>
+                    <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" /><?php echo WRONG_USERNAME_OR_PASSWORD; ?></div>
                     <?php } ?>
                     <form action="serendipity_admin.php" method="post">
                         <input type="hidden" name="serendipity[action]" value="admin" />

@@ -85,7 +85,7 @@
                         {$admin_vars.out.header}
                     </div>
                     {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
-                        <div class="serendipityAdminMsgError"><img width="22px" height="22px" style="border: 0px; padding-right: 2px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.WRONG_USERNAME_OR_PASSWORD}</div>
+                        <div class="serendipityAdminMsgError msg_error"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_error.png'}" alt="" />{$CONST.WRONG_USERNAME_OR_PASSWORD}</div>
                     {/if}
                     <form action="serendipity_admin.php" method="post">
                         <input type="hidden" name="serendipity[action]" value="admin" />

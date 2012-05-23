@@ -224,8 +224,8 @@
     <table class="serendipity_admin_list" cellpadding="0" width="100%">
 
         <tr>
-            <td align="center" class="serendipityAdminMsgNote">
-                <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />
+            <td align="center" class="serendipityAdminMsgNote msg_notice">
+                <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />
                 {$CONST.NO_ENTRIES_TO_PRINT}
             </td>
         </tr>
@@ -243,13 +243,13 @@
 {/if}
 {if ($get.adminAction && $use_legacy)}
     {if $is_draft}
-    <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE_DRAFT}</div><br />
+    <div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE_DRAFT}</div><br />
     {/if}
     {if $is_iframe}
-    <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE}</div><br />
+    <div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_SAVE}</div><br />
     {/if}
     {if $is_iframepreview}
-    <div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_PREVIEW}</div><br />
+    <div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}" alt="" />{$CONST.IFRAME_PREVIEW}</div><br />
     {/if}
 {/if}
 {if ($is_doDelete || $is_doMultiDelete )}
