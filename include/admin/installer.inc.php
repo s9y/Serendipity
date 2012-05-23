@@ -322,15 +322,15 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $data['errorCount'] = $errorCount;
 
 } elseif ( $serendipity['GET']['step'] == '2a' ) { 
-    ob_start();
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE, null, array('simpleInstall'));
+    ob_start();
     serendipity_printConfigTemplate($config, $from, true, false, false);
     $data['ob_serendipity_printConfigTemplate'] = ob_get_contents();
     ob_end_clean();        
 
 } elseif ( $serendipity['GET']['step'] == '2b' ) { 
-    ob_start();
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
+    ob_start();
     serendipity_printConfigTemplate($config, $from, true, false, false);
     $data['ob_serendipity_printConfigTemplate'] = ob_get_contents();
     ob_end_clean();        

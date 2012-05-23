@@ -12,7 +12,7 @@
     {elseif $saveconf}
         <div class="serendipityAdminMsgSuccess">
             <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="{serendipity_getFile file="admin/img/admin_msg_success.png"}" alt="" />
-            {$CONST.DONE}: {{$CONST.SETTINGS_SAVED_AT}|sprintf:"{$timestamp}"}
+            {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}
         </div>
     {/if}
     <form method="post" name="serendipityPluginConfigure">
