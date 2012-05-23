@@ -1,60 +1,63 @@
 {if !empty($errormsg)}
-    <p class="serendipityAdminMsgError msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$errormsg}</p>
+    <p class="serendipityAdminMsgNote msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$errormsg}</p>
 {/if}
 
+{*
+Smarty 3 has a new auto literal option which is enabled by default.
+When the { is followed by a space it's not interpreted as smarty delimiter but literal.
+*}
 <script type="text/javascript">
-function FT_toggle(id) {ldelim}
-    if ( document.getElementById(id + '_full').style.display == '' ) {ldelim}
+function FT_toggle(id) { 
+    if ( document.getElementById(id + '_full').style.display == '' ) { 
         document.getElementById(id + '_full').style.display='none';
         document.getElementById(id + '_summary').style.display='';
         document.getElementById(id + '_text').innerHTML = '{$CONST.VIEW_FULL}';
-    {rdelim} else {ldelim}
+    } else { 
         document.getElementById(id + '_full').style.display='';
         document.getElementById(id + '_summary').style.display='none';
         document.getElementById(id + '_text').innerHTML = '{$CONST.HIDE}';
-    {rdelim}
+    } 
     return false;
-{rdelim}
-{literal}
-function invertSelection() {
+} 
+
+function invertSelection() { 
     var f = document.formMultiDelete;
-    for (var i = 0; i < f.elements.length; i++) {
-        if( f.elements[i].type == 'checkbox' ) {
+    for (var i = 0; i < f.elements.length; i++) { 
+        if( f.elements[i].type == 'checkbox' ) { 
             f.elements[i].checked = !(f.elements[i].checked);
             f.elements[i].onclick();
-        }
-    }
-}
+        } 
+    } 
+} 
 
 var origborder = '';
 var origwidth = '';
 
-function highlightComment(id, checkvalue) {
+function highlightComment(id, checkvalue) { 
     var comment = document.getElementById(id);
 
-    if (origborder == '') {
+    if (origborder == '') { 
         origborder = comment.style.borderColor;
-        if (origborder == '') {
+        if (origborder == '') { 
             origborder = '#FFFFFF';
-        }
-    }
+        } 
+    } 
 
-    if (origwidth == '') {
+    if (origwidth == '') { 
         origwidth = comment.style.borderWidth;
-        if (origwidth == '' || origwidth == 0) {
+        if (origwidth == '' || origwidth == 0) { 
             origwidth = 1;
-        }
-    }
+        } 
+    } 
 
-    if (checkvalue) {
+    if (checkvalue) { 
         comment.style.borderColor = '#FF0000';
         comment.style.borderWidth = origwidth;
-    } else {
+    } else { 
         comment.style.borderColor = '';
         comment.style.borderWidth = origwidth;
-    }
-}
-{/literal}
+    } 
+} 
 </script>
 
 <form action="" method="GET" style="margin: 0">
