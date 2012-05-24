@@ -388,6 +388,15 @@ ul.serendipitySideBarMenuMain .serendipitySideBarMenuFoot {
     font-size: 100%;
 }
 
+/* used in backend to style img error notice success icons */
+.img_error { 
+    width: 22px; 
+    height: 22px; 
+    border: 0px; 
+    padding-right: 4px; 
+    vertical-align: middle;
+}
+
 /* installation and upgrade admin messages */
 /* defined here due to this template's styling of all other spans */
 /* these classes are available in s9y v1.3.2 and above */
