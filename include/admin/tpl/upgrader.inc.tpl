@@ -26,7 +26,7 @@
     <br />
     {if $return_here}
     <div align="center">{$print_UPGRADER_RETURN_HERE}</div>
-{* could also be used as:   <div align="center">{$CONST.SERENDIPITY_UPGRADER_RETURN_HERE|sprintf:'<a href="{$serendipityHTTPPath}">':'</a>'}</div> *}
+{* could also be used as:   <div align="center">{$CONST.SERENDIPITY_UPGRADER_RETURN_HERE|sprintf:"<a href='$serendipityHTTPPath'>":'</a>'}</div> *}
     {/if}
 {else}
     <h2>{$CONST.SERENDIPITY_UPGRADER_WELCOME}</h2>
