@@ -4,6 +4,9 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * For Blogs running on a non-UTF-8 language, set a Smarty constant
+      to indicate the actually used charset. 
+
     * Added to use MyISAM handler for s9y tables (we do not use InnoDB
       features, but rely on MyISAM fulltext)
       
