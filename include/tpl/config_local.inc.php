@@ -421,7 +421,7 @@
                                           'title'       => ARCHIVE_SORT_STABLE,
                                           'description' => ARCHIVE_SORT_STABLE_DESC,
                                           'type'        => 'bool',
-                                          'default'     => true,
+                                          'default'     => false,
                                           'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'searchsort',
