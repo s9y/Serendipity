@@ -959,7 +959,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix));
     }
 
-    if ($serendipity['archiveSortStable']) {
+    if (serendipity_db_bool($serendipity['archiveSortStable'])) {
         $temp = $serendipity['smarty']->getTemplateVars('footer_prev_page');
         $serendipity['smarty']->assign('footer_prev_page', $serendipity['smarty']->getTemplateVars('footer_next_page'));
         $serendipity['smarty']->assign('footer_next_page', $temp);
