@@ -307,14 +307,6 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         }
     }
 
-    if (!empty($limit)) {
-        if (isset($serendipity['GET']['page']) && $serendipity['GET']['page'] > 1 && !strstr($limit, ',')) {
-            $limit = serendipity_db_limit(($serendipity['GET']['page']-1) * $limit, $limit);
-        }
-
-        $limit = serendipity_db_limit_sql($limit);
-    }
-
     if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModule'] == 'entries' && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
         if (!empty($cond['and'])) {
             $cond['and'] .= " AND e.authorid = '" . $serendipity['authorid'] . "'";
@@ -402,6 +394,31 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $serendipity['fullCountQuery'] .="
                     {$cond['joins']}
                     {$cond['and']}";
+
+    if (!empty($limit)) {
+        if (isset($serendipity['GET']['page']) && ($serendipity['GET']['page'] > 1 || serendipity_db_bool($serendipity['archiveSortStable'])) && !strstr($limit, ',')) {
+            if (serendipity_db_bool($serendipity['archiveSortStable'])) {
+                $totalEntries = serendipity_getTotalEntries();
+                
+                $totalPages = ceil($totalEntries / $limit);
+                if ($totalPages <= 0 ) {
+                    $totalPages = 1;
+                }
+
+                if ($serendipity['GET']['page'] == $totalPages) {
+                    $limit = serendipity_db_limit(0, $limit);
+                } else if ($serendipity['GET']['page'] == $totalPages - 1) {
+                    $limit = serendipity_db_limit($limit, ($totalEntries - (($totalPages -2) * $limit)) - $limit);
+                } else {
+                    $limit = serendipity_db_limit(($totalEntries - ($limit * $serendipity['GET']['page'])), $limit);
+                }
+            } else {
+                $limit = serendipity_db_limit(($serendipity['GET']['page']-1) * $limit, $limit);
+            }
+        }
+
+        $limit = serendipity_db_limit_sql($limit);
+    }
 
     $query = "SELECT $select_key
                      $body
@@ -906,13 +923,13 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     } else {
         $limit = (int)$limits[0];
     }
-    $totalPages   = ceil($totalEntries / $limit);
+    $totalPages = ceil($totalEntries / $limit);
 
     if ($totalPages <= 0 ) {
         $totalPages = 1;
     }
 
-    if (!isset($serendipity['GET']['page']) && $serendipity['archiveSortStable']) {
+    if (!isset($serendipity['GET']['page']) && serendipity_db_bool($serendipity['archiveSortStable'])) {
         $serendipity['GET']['page'] = $totalPages;
     } else if (!isset($serendipity['GET']['page'])) {
         $serendipity['GET']['page'] = 1;
@@ -928,9 +945,13 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     $uriArguments[] = 'P%s';
     $serendipity['smarty']->assign('footer_totalEntries', $totalEntries);
     $serendipity['smarty']->assign('footer_totalPages', $totalPages);
-    $serendipity['smarty']->assign('footer_currentPage', $serendipity['GET']['page']);
+    if (serendipity_db_bool($serendipity['archiveSortStable'])) {
+        $serendipity['smarty']->assign('footer_currentPage', $totalPages - $serendipity['GET']['page']);
+    } else {
+        $serendipity['smarty']->assign('footer_currentPage', $serendipity['GET']['page']);
+    }
     $serendipity['smarty']->assign('footer_pageLink', str_replace('%2A', '*', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix)));
-    $serendipity['smarty']->assign('footer_info', sprintf(PAGE_BROWSE_ENTRIES, (int)$serendipity['GET']['page'], $totalPages, $totalEntries));
+    $serendipity['smarty']->assign('footer_info', sprintf(PAGE_BROWSE_ENTRIES, serendipity_db_bool($serendipity['archiveSortStable']) ?  $totalPages - (int)$serendipity['GET']['page'] +1 : (int)$serendipity['GET']['page'], $totalPages, $totalEntries));
 
     if ($serendipity['GET']['page'] < $totalPages) {
         $uriArguments = $serendipity['uriArguments'];
