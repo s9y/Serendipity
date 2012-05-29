@@ -28,7 +28,7 @@ function serendipity_isActiveFile($file) {
     if ($core) {
         return true;
     }
-    
+
     $eventData = false;
     serendipity_plugin_api::hook_event('backend_media_check', $eventData, $file);
     return $eventData;
@@ -315,55 +315,59 @@ function serendipity_updateImageInDatabase($updates, $id) {
 function serendipity_deleteImage($id) {
     global $serendipity;
     $dThumb = array();
+    $messages = '';
 
     $file   = serendipity_fetchImageFromDatabase($id);
 
     if (!is_array($file)) {
-        printf(FILE_NOT_FOUND . '<br />', $id);
-        return false;
-    }
+        $messages .= sprintf(FILE_NOT_FOUND . '<br />', $id);
+        //return false;
+    } else { 
 
-    $dFile  = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
+        $dFile  = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
 
-    $dThumb = array(array(
-        'fthumb' => $file['thumbnail_name']
-    ));
+        $dThumb = array(array(
+            'fthumb' => $file['thumbnail_name']
+        ));
 
-    if (!serendipity_checkPermission('adminImagesDelete')) {
-        return;
-    }
+        if (!serendipity_checkPermission('adminImagesDelete')) {
+            return;
+        }
 
-    if (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid']) {
-        // A non-admin user may not delete private files from other users.
-        return;
-    }
+        if (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid']) {
+            // A non-admin user may not delete private files from other users.
+            return;
+        }
 
-    if (!$file['hotlink']) {
-        if (file_exists($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
-            if (@unlink($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
-                printf(DELETE_FILE . '<br />', $dFile);
-            } else {
-                printf(DELETE_FILE_FAIL . '<br />', $dFile);
-            }
-
-            serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
-            foreach($dThumb AS $thumb) {
-                $dfnThumb = $file['path'] . $file['name'] . (!empty($thumb['fthumb']) ? '.' . $thumb['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
-
-                if (@unlink($dfThumb)) {
-                    printf(DELETE_THUMBNAIL . '<br />', $dfnThumb);
+        if (!$file['hotlink']) {
+            if (file_exists($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
+                if (@unlink($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
+                    $messages .= sprintf(DELETE_FILE . '<br />', $dFile);
+                } else {
+                    $messages .= sprintf(DELETE_FILE_FAIL . '<br />', $dFile);
                 }
+
+                serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
+                foreach($dThumb AS $thumb) {
+                    $dfnThumb = $file['path'] . $file['name'] . (!empty($thumb['fthumb']) ? '.' . $thumb['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
+                    $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
+
+                    if (@unlink($dfThumb)) {
+                        $messages .= sprintf(DELETE_THUMBNAIL . '<br />', $dfnThumb);
+                    }
+                }
+            } else {
+                $messages .= sprintf(FILE_NOT_FOUND . '<br />', $dFile);
             }
         } else {
-            printf(FILE_NOT_FOUND . '<br />', $dFile);
+            $messages .= sprintf(DELETE_HOTLINK_FILE . '<br />', $file['name']);
         }
-    } else {
-        printf(DELETE_HOTLINK_FILE . '<br />', $file['name']);
+
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}mediaproperties WHERE mediaid = ". (int)$id);
     }
 
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}mediaproperties WHERE mediaid = ". (int)$id);
+    return $messages;
 }
 
 /**
@@ -384,16 +388,16 @@ function serendipity_fetchImages($group = false, $start = 0, $end = 20, $images 
     $basedir = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     $images = array();
     if ($dir = @opendir($basedir . $odir)) {
-		$aTempArray = array();
-		while (($file = @readdir($dir)) !== false) {
-		    if ($file == '.svn' || $file == 'CVS' || $file == '.' || $file == '..') {
-		        continue;
-		    }
-			array_push($aTempArray, $file);
-		}
-		@closedir($dir);
-		sort($aTempArray);
-		foreach($aTempArray AS $f) {
+        $aTempArray = array();
+        while (($file = @readdir($dir)) !== false) {
+            if ($file == '.svn' || $file == 'CVS' || $file == '.' || $file == '..') {
+                continue;
+            }
+            array_push($aTempArray, $file);
+        }
+        @closedir($dir);
+        sort($aTempArray);
+        foreach($aTempArray AS $f) {
             if (strpos($f, $serendipity['thumbSuffix']) !== false) {
                 // This is a s9y thumbnail, skip it.
                 continue;
@@ -1804,11 +1808,11 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     while (($file = @readdir($dh)) !== false) {
         if ($file != '.' && $file != '..') {
             $bPatternMatch = (is_null($pattern) || preg_match($pattern, $file));
-			$sFullPath     = $odir . $file;
-			$bIsDir        = is_dir($sFullPath);
+            $sFullPath     = $odir . $file;
+            $bIsDir        = is_dir($sFullPath);
             if ($onlyDirs === false || $bIsDir) {
-				if ($bPatternMatch &&
-				    (!$bIsDir || $aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
+                if ($bPatternMatch &&
+                    (!$bIsDir || $aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
                     $files[] = array(
                         'name'      => $file,
                         'depth'     => $depth,
@@ -1819,10 +1823,10 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
             }
 
             if ($bIsDir &&
-				($max_depth === null || $depth < $max_depth) &&
-				($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
+                ($max_depth === null || $depth < $max_depth) &&
+                ($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
                 $next_dir = serendipity_dirSlash('end', $dir) . basename($file);
-				$files = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
+                $files = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
             }
         }
     }
@@ -2700,22 +2704,22 @@ function serendipity_prepareMedia(&$file, $url = '') {
         $full_perm = serendipity_checkPermission('adminImagesMaintainOthers');
     }
 
-	$sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
-	$file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
-	$file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
+    $sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
+    $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
+    $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
 
     if ($file['hotlink']) {
         $file['full_file']  = $file['path'];
-    	$file['show_thumb'] = $file['path'];
-    	if (!isset($file['imgsrc'])) {
-        	$file['imgsrc'] = $file['show_thumb'];
-    	}
+        $file['show_thumb'] = $file['path'];
+        if (!isset($file['imgsrc'])) {
+            $file['imgsrc'] = $file['show_thumb'];
+        }
     } else {
         $file['full_file']  = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-    	$file['show_thumb'] = $file['full_thumbHTTP'];
-    	if (!isset($file['imgsrc'])) {
-        	$file['imgsrc'] = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
-    	}
+        $file['show_thumb'] = $file['full_thumbHTTP'];
+        if (!isset($file['imgsrc'])) {
+            $file['imgsrc'] = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
+        }
     }
 
     // Detect PDF thumbs
@@ -2733,8 +2737,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
 
     $file['links'] = array('imagelinkurl' => $file['full_file']);
 
-	$file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
-	$file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
+    $file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
+    $file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
     $file['is_image']  = serendipity_isImage($file);
 
     if ($file['is_image']) {
@@ -2825,7 +2829,10 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         }
     }
 
-    serendipity_smarty_init();
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init();
+    }
+
     $media = array(
         'manage'            => $manage,
         'lineBreak'         => $lineBreak,
@@ -3485,27 +3492,27 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 function &serendipity_getMediaPaths() {
     global $serendipity;
 
-	$aExclude = array("CVS" => true, ".svn" => true);
-	serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
-	$paths        = array();
+    $aExclude = array("CVS" => true, ".svn" => true);
+    serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
+    $paths        = array();
 
-	$aResultSet   = serendipity_traversePath(
-	    $serendipity['serendipityPath'] . $serendipity['uploadPath'],
-	    '',
-	    false,
-	    NULL,
-	    1,
-	    NULL,
-	    FALSE,
-	    $aExclude
-	);
+    $aResultSet   = serendipity_traversePath(
+        $serendipity['serendipityPath'] . $serendipity['uploadPath'],
+        '',
+        false,
+        NULL,
+        1,
+        NULL,
+        FALSE,
+        $aExclude
+    );
 
-	foreach ($aResultSet AS $sKey => $sFile) {
-		if ($sFile['directory']) {
-			array_push($paths, $sFile);
-		}
-		unset($aResultSet[$sKey]);
-	}
+    foreach ($aResultSet AS $sKey => $sFile) {
+        if ($sFile['directory']) {
+            array_push($paths, $sFile);
+        }
+        unset($aResultSet[$sKey]);
+    }
     serendipity_directoryACL($paths, 'read');
 
     usort($paths, 'serendipity_sortPath');

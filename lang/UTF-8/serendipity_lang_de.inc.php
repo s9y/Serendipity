@@ -969,3 +969,6 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
 @define('SUMMARY', 'Summary');
+
+// Next lines were translated on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'Sie beabsichtigen mehrere Dateien auf einmal zu löschen.<br />Wenn Sie diese in ihren Einträge verwenden, wird das Löschen Lücken erzeugen.<br />Soll trotzdem fortgefahren werden?<br /><br />');

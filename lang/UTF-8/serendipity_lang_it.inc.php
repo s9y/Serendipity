@@ -1,4 +1,4 @@
-<?php # $Id:/\([a-zA-Z]\)\?/$1?/cgserendipity_lang_it.inc.php 825 2006-01-03 10:02:22Z garvinhicking $
+<?php # $Id:$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Alessandro Pellizzari <alex@amiran.it>
@@ -971,3 +971,7 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
 @define('SUMMARY', 'Summary');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
+

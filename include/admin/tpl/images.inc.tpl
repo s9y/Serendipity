@@ -47,11 +47,6 @@
         {/if}
     {/if}
 
-    {if $case_DoDelete}
-        {** delete & showMediaLibrary($messages) **}
-        {$showML_DD}
-    {/if}
-
     {if $case_delete}
         <div class="image_notify_delete">{$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</div>
         <form method="get" id="delete_image">
@@ -62,6 +57,21 @@
             </div>
         </form>
     {/if}
+
+{if $switched_output}
+    <form method="get" id="delete_images">
+    {if ( $is_delete || $is_multidelete )}
+        <p><span class="msg_notice">{$CONST.ABOUT_TO_DELETE_FILES}</span></p>
+        {foreach $rip_image AS $ripimg}
+        <span class="msg_dialog_ripentry">{$ripimg}</span><br />
+        {/foreach}
+        <ul class="dialog_delrip">
+            <li><a class="link_abort" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a></li>
+            <li><a class="link_confirm" href="{$newLoc}">{$CONST.DUMP_IT}</a></li>
+        </ul>
+    {/if}
+    </form>
+{/if}
 
     {if $case_rename}
         {if $go_back}

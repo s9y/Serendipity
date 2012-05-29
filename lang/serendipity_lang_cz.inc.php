@@ -997,4 +997,8 @@ $i18n_filename_to = array (
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Èeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
+
 @define('SUMMARY', 'Souhrn');

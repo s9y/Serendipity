@@ -145,6 +145,25 @@
 {if $media.nr_files < 1}
     <div align="center">- {$CONST.NO_IMAGES_FOUND} -</div>
 {else}
+    <script type="text/javascript">
+    {literal}
+    function invertSelection() {
+        var f = document.formMultiDelete;
+        for (var i = 0; i < f.elements.length; i++) {
+            if (f.elements[i].type == 'checkbox') {
+                f.elements[i].checked = !(f.elements[i].checked);
+            }
+        }
+    }
+    {/literal}
+    </script>
+
+    <form action="?" method="post" name="formMultiDelete" id="formMultiDelete">
+        {$media.token}
+        <input type="hidden" name="serendipity[action]" value="admin" />
+        <input type="hidden" name="serendipity[adminModule]" value="media" />
+        <input type="hidden" name="serendipity[adminAction]" value="multidelete" />
+
 <table border="0" width="100%">
     <tr>
         <td colspan="{$media.lineBreak}">
@@ -187,5 +206,13 @@
             </table>
         </td>
     </tr>
+    <tr>
+        <td align="right">
+            <input type="button" name="toggle" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()" class="serendipityPrettyButton input_button" />
+            <input type="submit" name="toggle" value="{$CONST.DELETE_SELECTED_ENTRIES}" class="serendipityPrettyButton input_button" />
+        </td>
+    </tr>
 </table>
+
+</form>
 {/if}

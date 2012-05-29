@@ -10,6 +10,10 @@ if (!serendipity_checkPermission('adminImages')) {
 
 $data = array();
 
+if (!is_object($serendipity['smarty'])) {
+    serendipity_smarty_init();
+}
+
 switch ($serendipity['GET']['adminAction']) {
     case 'imgedit':
         $data['case_imgedit'] = true;
@@ -92,20 +96,39 @@ switch ($serendipity['GET']['adminAction']) {
         flush();
         break;
 
-    case 'DoDelete':
+    case 'doDelete':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             break;
         }
 
-        $data['case_DoDelete'] = true;
-        $file   = $serendipity['GET']['fname'];
-        serendipity_deleteImage($serendipity['GET']['fid']);
+        $messages = array();
+        $data['switched_output'] = true;
+        $data['is_doDelete']     = true;
+        $messages[] = serendipity_deleteImage($serendipity['GET']['fid']);
+        $messages[] = sprintf(RIP_ENTRY, $serendipity['GET']['fid']);
 
-        ob_start();
-        showMediaLibrary();
-        $data['showML_DD'] = ob_get_contents();
-        ob_end_clean();
-        break;
+        showMediaLibrary($messages);
+        unset($messages);
+
+    case 'doMultiDelete':
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
+            break;
+        }
+
+        $messages = array();
+        $parts = explode(',', $serendipity['GET']['id']);
+        $data['switched_output']  = true;
+        $data['is_doMultiDelete'] = true;
+        foreach($parts AS $id) {
+            $id = (int)$id;
+            if ($id > 0) {
+                $image = serendipity_fetchImageFromDatabase($id);
+                $messages[] = serendipity_deleteImage((int)$id);
+                $messages[] = sprintf(RIP_ENTRY, $image['id'] . ' - ' . htmlspecialchars($image['realname']));
+            }
+        }
+        showMediaLibrary($messages);
+        unset($messages);
 
     case 'delete':
         $file     = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
@@ -115,14 +138,39 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         $data['case_delete'] = true;
+        $data['is_delete']   = true;
         if (!isset($serendipity['adminFile'])) {
             $serendipity['adminFile'] = 'serendipity_admin.php';
         }
         $abortLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?serendipity[adminModule]=images';
-        $newLoc   = $abortLoc . '&serendipity[adminAction]=DoDelete&serendipity[fid]=' . (int)$serendipity['GET']['fid'] . '&' . serendipity_setFormToken('url');
-        $data['file']   = $file['name'] . '.' . $file['extension'];
+        $newLoc   = $abortLoc . '&serendipity[adminAction]=doDelete&serendipity[fid]=' . (int)$serendipity['GET']['fid'] . '&' . serendipity_setFormToken('url');
+        $data['file']     = $file['name'] . '.' . $file['extension'];
         $data['abortLoc'] = $abortLoc;
         $data['newLoc']   = $newLoc;
+        break;
+
+    case 'multidelete':
+        if (!serendipity_checkFormToken() || !is_array($serendipity['POST']['multiDelete'])) {
+            break;
+        }
+
+        $ids = '';
+        $data['rip_image']        = array();
+        $data['case_multidelete'] = true;
+        $data['is_multidelete']   = true;
+        foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
+            $ids .= (int)$id . ',';
+            $image = serendipity_fetchImageFromDatabase($id);
+            $data['rip_image'][] = sprintf(DELETE_SURE, $image['id'] . ' - ' . htmlspecialchars($image['realname']));
+        }
+        if (!isset($serendipity['adminFile'])) {
+            $serendipity['adminFile'] = 'serendipity_admin.php';
+        }
+        $abortLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?serendipity[adminModule]=images';
+        $newLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
+        $data['switched_output'] = true;
+        $data['abortLoc']        = $abortLoc;
+        $data['newLoc']          = $newLoc;
         break;
 
     case 'rename':
@@ -543,7 +591,6 @@ switch ($serendipity['GET']['adminAction']) {
             }
         }
 
-        serendipity_smarty_init();
         $mediaFiles = array(
             'token'             => serendipity_setFormToken(),
             'form_hidden'       => $form_hidden,
@@ -683,10 +730,6 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
 
 $data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 $data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
-}
 
 $serendipity['smarty']->assign($data);
 

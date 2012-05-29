@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_en.inc.php 568 2005-10-18 19:01:10Z garvinhicking $
+<?php # $Id:$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Arabic issue was translated by Way http://www.flyingway.com  UTF-8
@@ -886,3 +886,6 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
 @define('SUMMARY', 'Summary');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
