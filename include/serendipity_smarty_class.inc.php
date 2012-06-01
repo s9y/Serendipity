@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2012-03-27 12:52 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2012-06-01 14:50 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -10,7 +10,7 @@
 class Serendipity_Smarty_Security_Policy extends Smarty_Security 
   { 
     // these are the allowed functions only. - default as is
-    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'serendipity_categoryURL', 'serendipity_archiveURL', 'serendipity_groupname');
+    public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br');
     // to disable all PHP functions
     #public $php_functions = null;
     
@@ -152,7 +152,7 @@ class Serendipity_Smarty extends Smarty
             if(ini_get('display_errors') == 0 || ini_get('display_errors') == 'off') printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir());
             trigger_error(sprintf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()), E_USER_ERROR);
         }
-        
+
         #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // (enable #cache# properties)
         
         /*
@@ -307,10 +307,12 @@ class Serendipity_Smarty extends Smarty
             $this->caching         = false;  // $this->setCaching(false); 
             $this->debugging       = true;   // $this->setDebugging(true);
         }
-        
+
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
         $this->error_reporting = E_ALL & ~E_NOTICE;
-        
+
+        // we use our own error_handler ???
+        #$this->muteExpectedErrors();
       } 
       
     /*
