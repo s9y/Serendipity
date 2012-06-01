@@ -98,18 +98,7 @@
 
     </table>
 
-    <script type="text/javascript">
-    {literal}
-    function invertSelection() {
-        var f = document.formMultiDelete;
-        for (var i = 0; i < f.elements.length; i++) {
-            if (f.elements[i].type == 'checkbox') {
-                f.elements[i].checked = !(f.elements[i].checked);
-            }
-        }
-    }
-    {/literal}
-    </script>
+    <script type="text/javascript" language="JavaScript" src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
 
     <form action="?" method="post" name="formMultiDelete" id="formMultiDelete">
         {$formtoken}
@@ -127,7 +116,7 @@
                 <table width="100%" cellspacing="0" cellpadding="3">
                     <tr>
                         <td>
-                            <strong>{if (!$showFutureEntries) && ($entry.timestamp >= $serverOffsetHour)}<a href="#" title="{$CONST.ENTRY_PUBLISHED_FUTURE}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock_future.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a> {else}{/if}{if $entry.properties.ep_is_sticky == true} {$CONST.STICKY_POSTINGS}: {/if}{if $entry.isdraft == true}{$CONST.DRAFT}: {/if}<a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></strong>
+                            <strong>{if (!$showFutureEntries) && ($entry.timestamp >= $serverOffsetHour)}<a href="#" title="{$CONST.ENTRY_PUBLISHED_FUTURE}" onclick="alert(this.title)"><img src="{serendipity_getFile file='admin/img/clock_future.png'}" alt="*" style="border: 0px none ; vertical-align: bottom;" /></a> {else}{/if}{if $entry.ep_is_sticky} {$CONST.STICKY_POSTINGS}: {/if}{if $entry.isdraft}{$CONST.DRAFT}: {/if}<a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></strong>
                         </td>
                         <td align="right">
                             {* Find out if the entry has been modified later than 30 minutes after creation *}
@@ -137,26 +126,19 @@
                     <tr>
                         <td>
                             {$CONST.POSTED_BY} {$entry.author|escape}
-                        {if count($entry.categories)}
+                        {if count($entry.cats)}
                             {$CONST.IN}
-                            {foreach $entry.categories as $cat}
-                                {assign var="caturl" value="serendipity_categoryURL($cat)"}{* serendipity_categoryURL($cat) include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
-                                {$cats = ['<a href="{$caturl}">{$cat.category_name|escape)}</a>']}
-                            {/foreach}
-                            {foreach $cats AS $implode_cat}
-                                {$implode_cat}{if (count($cats) > 1) && !$implode_cat@last}, {/if}
+                            {foreach $entry.cats AS $cat}
+                                {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
                             {/foreach}
                         {/if}
 
-                        {* Smarty3 allows you to {$var = ['foo' => 'bar', 'sub' => [1, 2, 3]]} and {$var.foo = 'other'} *}
-                        {* $tst = ['timestamp' => $entry.timestamp] *}
-
                         </td>
                         <td align="right">
-                            {if ($entry.isdraft == true) || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
-                            <a target="_blank" href="?serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.PREVIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.PREVIEW}" />{$CONST.PREVIEW}</a>
-                            {else} {* serendipity_archiveURL() include to allowed php_functions in Smarty Security, or rebuild somehow, or rewrite tpl *}
-                            <a target="_blank" href="{serendipity_archiveURL($entry.id, $entry.title, "serendipityHTTPPath", true, ['timestamp' => $entry.timestamp])}" title="{$CONST.VIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.VIEW}" />{$CONST.VIEW}</a>
+                            {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
+                            <a href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.PREVIEW}" />{$CONST.PREVIEW}</a>
+                            {else}
+                            <a href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/zoom.png'}" alt="{$CONST.VIEW}" />{$CONST.VIEW}</a>
                             {/if}
                             <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/edit.png'}" alt="{$CONST.EDIT}" />{$CONST.EDIT}</a>
                             <a href="?{$urltoken}&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}" title="{$CONST.DELETE} #{$entry.id}" class="serendipityIconLink"><img src="{serendipity_getFile file='admin/img/delete.png'}" alt="{$CONST.DELETE}" />{$CONST.DELETE}</a>
@@ -215,8 +197,7 @@
 </div><!-- // div.serendipity_admin_list drawList end -->
 
 {/if}{* $drawList end *}
-
-{if (($switched_output !== true && empty($entries)) || (!$drawList && empty($entries))) && ($get.adminAction != 'new' &&  $get.adminAction != 'edit')}
+{if ( ( (!$switched_output && empty($entries)) || (!$drawList && empty($entries)) ) && ( $get.adminAction != 'new' ||  $get.adminAction != 'edit' ) && !$is_iframepreview )}
 
 <div class="serendipity_admin_list">
 

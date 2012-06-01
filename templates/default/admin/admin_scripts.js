@@ -13,34 +13,34 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 // - serendipity_plugins_admin.inc.php::serendipity_plugin_config() function 
 // - templates/default/admin/default_staticpage_backend.tpl
 function showConfig(id) {
-    if (document.getElementById) {
-        dlm = document.getElementById(id);
-        if (dlm.style.display == 'none') {
-            document.getElementById('option' + id).src = img_minus;
-            dlm.style.display = '';
-        } else {
-            document.getElementById('option' + id).src = img_plus;
-            dlm.style.display = 'none';
-        }
+  if (document.getElementById) {
+    dlm = document.getElementById(id);
+    if (dlm.style.display == 'none') {
+        document.getElementById('option' + id).src = img_minus;
+        dlm.style.display = '';
+    } else {
+        document.getElementById('option' + id).src = img_plus;
+        dlm.style.display = 'none';
     }
+  }
 }
 
-var state='';
 function showConfigAll(count) {
-    if (document.getElementById) {
-        for (i = 1; i <= count; i++) {
-            document.getElementById('el' + i).style.display = state;
-            document.getElementById('optionel' + i).src = (state == '' ? img_minus : img_plus);
-        }
-
-        if (state == '') {
-            document.getElementById('optionall').src = img_minus;
-            state = 'none';
-        } else {
-            document.getElementById('optionall').src = img_plus;
-            state = '';
-        }
+  var state='';
+  if (document.getElementById) {
+    for (i = 1; i <= count; i++) {
+         document.getElementById('el' + i).style.display = state;
+         document.getElementById('optionel' + i).src = (state == '' ? img_minus : img_plus);
     }
+
+    if (state == '') {
+        document.getElementById('optionall').src = img_minus;
+        state = 'none';
+    } else {
+        document.getElementById('optionall').src = img_plus;
+        state = '';
+    }
+  }
 }
 
 function chkAll(frm, arr, mark) {
@@ -52,4 +52,14 @@ function chkAll(frm, arr, mark) {
    } catch (err) {}
   }
 }
+
+function invertSelection() {
+  var f = document.formMultiDelete;
+    for (var i = 0; i < f.elements.length; i++) {
+      if (f.elements[i].type == 'checkbox') {
+          f.elements[i].checked = !(f.elements[i].checked);
+      }
+    }
+}
+
 

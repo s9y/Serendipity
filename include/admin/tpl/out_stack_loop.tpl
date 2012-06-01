@@ -8,7 +8,7 @@
         <tr>
             <td style="border-bottom: 1px solid #000000; vertical-align: top"><strong>{$cname}</strong>
         {if $cdesc != ''}
-                <br><span  style="color: #5E7A94; font-size: 8pt;">&nbsp;{$cdesc}</span>
+                <br><span style="color: #5E7A94; font-size: 8pt;">&nbsp;{$cdesc}</span>
         {/if}
             </td>
             <td style="border-bottom: 1px solid #000000; vertical-align: middle" width="250">
@@ -31,7 +31,7 @@
         <tr>
             <td style="border-bottom: 1px solid #000000; vertical-align: top"><strong>{$cname}</strong>
         {if $cdesc != ''}
-                <br /><span  style="color: #5E7A94; font-size: 8pt;">&nbsp;{$cdesc}</span>
+                <br /><span style="color: #5E7A94; font-size: 8pt;">&nbsp;{$cdesc}</span>
         {/if}
             </td>
             <td style="border-bottom: 1px solid #000000; vertical-align: middle;" width="250">
@@ -40,7 +40,7 @@
                 <div class="clearfix">
                 {/if}
                     <input class="direction_{$lang_direction} input_radio" type="radio" id="serendipity_plugin_{$r['id']}" name="serendipity[{$postKey}][{$config_item}]" value="{$r['value']}" {(!empty($r['checked'])) ? 'checked="checked"' : ''} title="{$r['index']|escape}" />
-                        <label for="serendipity_plugin_{$r['id']}">{$r['index']}{* escape is already done *}</label>
+                        <label for="serendipity_plugin_{$r['id']}">{$r['index']}{* escapement is already done *}</label>
                 {if ($r['counter'] == $per_row)}
                     {assign var="r" value="counter[0]"}
                 </div>

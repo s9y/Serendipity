@@ -59,7 +59,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
                     }
 /*
                     if (count($_POST[$item['var']]) < 1) {
-                        echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
+                        echo '<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . WARNING_NO_GROUPS_SELECTED . '</div>';
                     } else {
                         serendipity_updateGroups($_POST[$item['var']], $serendipity['authorid'], false);
                     }

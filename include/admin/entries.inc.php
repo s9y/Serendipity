@@ -129,44 +129,27 @@ function serendipity_drawList() {
         // Print the entries
         $smartentries = array();
         foreach ($entries as $ey) {
-            // Find out if the entry has been modified later than 30 minutes after creation
-            if ($ey['timestamp'] <= ($ey['last_modified'] - 60*30)) {
-                $lm = '<a href="#" title="' . LAST_UPDATED . ': ' . serendipity_formatTime(DATE_FORMAT_SHORT, $ey['last_modified']) . '" onclick="alert(this.title)"><img src="'. serendipity_getTemplateFile('admin/img/clock.png') .'" alt="*" /></a>';
-            } else {
-                $lm = '';
-            }
-
-            if (!$serendipity['showFutureEntries'] && $ey['timestamp'] >= serendipity_serverOffsetHour()) {
-                $entry_pre = '<a href="#" title="' . ENTRY_PUBLISHED_FUTURE . '" onclick="alert(this.title)"><img src="'. serendipity_getTemplateFile('admin/img/clock_future.png') .'" alt="*" /></a> ';
-            } else {
-                $entry_pre = '';
-            }
-
-            if (serendipity_db_bool($ey['properties']['ep_is_sticky'])) {
-                $entry_pre .= ' ' . STICKY_POSTINGS . ': ';
-            }
-
             if (count($ey['categories'])) {
                 $cats = array();
                 foreach ($ey['categories'] as $cat) {
-                    $caturl = serendipity_categoryURL($cat);
-                    $cats[] = '<a href="' . $caturl . '">' . htmlspecialchars($cat['category_name']) . '</a>';
+                    $cats[] = '<a href="' . serendipity_categoryURL($cat) . '">' . htmlspecialchars($cat['category_name']) . '</a>';
                 }
                 $entry_cats = implode(', ', $cats);
             }
 
             $smartentries[] = array(
-                'clock'        => $entry_pre,
-                'id'           => $ey['id'],
-                'title'        => htmlspecialchars($ey['title']),
-                'pubdate'      => date("c", (int)$ey['timestamp']),
-                'stime'        => serendipity_formatTime(DATE_FORMAT_SHORT, $ey['timestamp']) . ' ' .$lm,
-                'author'       => htmlspecialchars($ey['author']),
-                'cats'         => $entry_cats,
-                'link'         => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
-                'draft_pre'    => ((serendipity_db_bool($ey['isdraft']) || (!$serendipity['showFutureEntries'] && $ey['timestamp'] >= serendipity_serverOffsetHour())) ? true : false),
-                'link'         => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
-                'preview_link' => '?serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;serendipity[id]=' . $ey['id']
+                'id'            => $ey['id'],
+                'title'         => htmlspecialchars($ey['title']),
+                'timestamp'     => (int)$ey['timestamp'],
+                'last_modified' => (int)$ey['last_modified'],
+                'isdraft'       => serendipity_db_bool($ey['isdraft']),
+                'ep_is_sticky'  => (serendipity_db_bool($ey['properties']['ep_is_sticky']) ? true : false),
+                'pubdate'       => date("c", (int)$ey['timestamp']),
+                'author'        => htmlspecialchars($ey['author']),
+                'cats'          => $entry_cats,
+                'preview'       => ((serendipity_db_bool($ey['isdraft']) || (!$serendipity['showFutureEntries'] && $ey['timestamp'] >= serendipity_serverOffsetHour())) ? true : false),
+                'archive_link'  => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
+                'preview_link'  => '?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;' . serendipity_setFormToken('url') . '&amp;serendipity[id]=' . $ey['id']
             );
 
         } // end entries output
@@ -239,8 +222,7 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         // Save the entry, or just display a preview
-        $use_legacy = true;
-        $data['use_legacy'] = $use_legacy;
+        $data['use_legacy'] = $use_legacy = true;
         serendipity_plugin_api::hook_event('backend_entry_iframe', $use_legacy);
 
         if ($use_legacy) {
@@ -436,11 +418,8 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-
 $tfile = dirname(__FILE__) . "/tpl/entries.inc.tpl";
-
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-
+$content = $serendipity['smarty']->fetch('file:'. $tfile);
 echo $content;
 
 /* vim: set sts=4 ts=4 expandtab : */
