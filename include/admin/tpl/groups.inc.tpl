@@ -19,7 +19,7 @@
     </div>
 {/if}
 
-{if $delete == false}
+{if !$delete}
     <table width="100%">
         <tr>
             <td><strong>{$CONST.GROUP}</strong></td>
@@ -98,7 +98,7 @@
                         {continue}
                     {/if}
 
-                    {if ! isset($section)}
+                    {if !isset($section)}
                         {$section=$perm@key}
                     {/if}
 
@@ -113,7 +113,7 @@
                         {/if}
                     {/if}
 
-                    {if $perm.permission == false} 
+                    {if !$perm.permission}
                         <tr>
                             <td>{$indent} {$perm.permission_name|escape:"html"}</td>
                             <td>{$indentB} {if isset($from.{$perm@key}) && $from.{$perm@key} == "true"} YES {else} NO {/if} </td>
