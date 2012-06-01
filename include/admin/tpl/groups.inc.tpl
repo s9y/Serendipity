@@ -114,7 +114,7 @@
                     {if !$perm.permission}
                         <tr>
                             <td>{$indent} {$perm.permission_name|escape:"html"}</td>
-                            <td>{$indentB} {if isset($from.{$perm@key}) && $from.{$perm@key} == "true"} YES {else} NO {/if} </td>
+                            <td>{$indentB} {(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO} </td>
                         </tr>
                     {else}
                         <tr>
