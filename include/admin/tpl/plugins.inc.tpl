@@ -81,12 +81,8 @@
                         </form>
                     </td>
                 </tr>
-                {if !empty($only_group)}
-                    {continue}
-                {/if}
-            {elseif ! empty($only_group) && $pluggroup != $only_group}
-                {continue}
-            {else}
+                {if !empty($only_group)}{continue}{/if}
+            {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
                 <tr>
                     <td colspan="2" class="serendipity_pluginlist_section"><strong>{$groupnames.{$available_group}}</strong></td>
                 </tr>

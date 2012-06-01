@@ -94,9 +94,7 @@
                     <td colspan="2">&nbsp;</td>
                 </tr>
                 {foreach $perms as $perm}
-                    {if {{$perm@key}|truncate:"2":""} == "f_"}
-                        {continue}
-                    {/if}
+                    {if {{$perm@key}|truncate:"2":""} == "f_"}{continue}{/if}
 
                     {if !isset($section)}
                         {$section=$perm@key}

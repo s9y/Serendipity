@@ -35,9 +35,7 @@
 <h3>{$CONST.SELECT_TEMPLATE}</h3>
 
 {foreach $templates as $template=>$info}
-    {if $info.info.engine == "yes"}
-        {continue}
-    {/if}
+    {if $info.info.engine == "yes"}{continue}{/if}
     {if !empty($template)}
     {if $template@iteration is even}
         <div class="serendipity_admin_list_item serendipity_admin_list_item_even">

@@ -17,7 +17,7 @@
                         <option value="">--</option>
                         {if is_array($users)}
                             {foreach $users AS $user}
-                                {if isset($user.artcount) && $user.artcount < 1} {continue} {/if}
+                                {if isset($user.artcount) && $user.artcount < 1}{continue}{/if}
                                 <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected="selected"' : ''}>{$user.realname|escape}</option>
                             {/foreach}
                         {/if}
@@ -105,9 +105,7 @@
         <input type="hidden" name="serendipity[adminAction]" value="multidelete" />
 
         {foreach $entries as $entry}
-            {if ($entry@index > $perPage)}
-                {continue}
-            {/if}
+            {if ($entry@index > $perPage)}{continue}{/if}
 
             <div class="serendipity_admin_list_item serendipity_admin_list_item_{($entry@index % 2) ? 'even' : 'uneven'}">
 

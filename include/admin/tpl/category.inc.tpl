@@ -122,9 +122,7 @@
                 <option value="0" {if $cid == 0} selected="selected" {/if}>[ {$CONST.NO_CATEGORY} ]</option>
                 {foreach $categories as $cat}
                     {* We can't be our own parent, the universe will collapse *}
-                    {if $cat.categoryid == $cid}
-                        {continue}
-                    {/if}
+                    {if $cat.categoryid == $cid}{continue}{/if}
                     <option value="{$cat.categoryid}" {if $this_cat.parentid == $cat.categoryid} selected="selected"{/if} >
                         {for $i=1 to $cat.depth}&nbsp{/for} $cat.category_name
                     </option>
