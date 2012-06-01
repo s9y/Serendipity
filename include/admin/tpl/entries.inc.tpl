@@ -17,10 +17,8 @@
                         <option value="">--</option>
                         {if is_array($users)}
                             {foreach $users AS $user}
-                                {if isset($user.artcount) && $user.artcount < 1} 
-                                    {continue}
+                                {if isset($user.artcount) && $user.artcount < 1} {continue} {/if}
                                 <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected="selected"' : ''}>{$user.realname|escape}</option>
-                                {/if}
                             {/foreach}
                         {/if}
                     </select> 
@@ -67,7 +65,7 @@
                 <td>
                     <select name="serendipity[sort][perPage]">
                     {foreach $per_page AS $per_page_nr}
-                        <option value="{$per_page_nr}" {(isset($get.sort.perPage) && ($get.sort.perPage == $per_page_nr) ? 'selected="selected"' : '')}>{$per_page_nr}</option>
+                        <option value="{$per_page_nr}" {((isset($get.sort.perPage) && ($get.sort.perPage == $per_page_nr)) ? 'selected="selected"' : '')}>{$per_page_nr}</option>
                     {/foreach}
                     </select>
                 </td>
