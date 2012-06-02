@@ -9,7 +9,6 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $tfile = dirname(__FILE__) . "/tpl/entries_overview.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-echo $content;
+$serendipity['smarty']->display('file:'. $tfile);
 
 /* vim: set sts=4 ts=4 expandtab : */
