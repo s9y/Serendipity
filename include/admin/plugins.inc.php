@@ -1,6 +1,4 @@
 <?php # $Id$
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
-# All rights reserved.  See LICENSE file for licensing details
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -255,7 +253,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['available_groups'] = $available_groups;
     $groupnames = array();
     foreach($available_groups as $available_group) {
-        $groupnames[$available_name] = serendipity_groupname($available_group);
+        $groupnames[$available_group] = serendipity_groupname($available_group);
     }
     $data['groupnames'] = $groupnames;
     $data['pluggroups'] = $pluggroups;
@@ -418,6 +416,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_sidebar_header', $serendipity);
     $data['backend_plugins_sidebar_header'] = ob_get_contents();
     ob_end_clean();
+
     ob_start();
     show_plugins(false, $sidebars);
     $data['sidebar_plugins'] = ob_get_contents();
@@ -427,6 +426,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_event_header', $serendipity);
     $data['backend_plugins_event_header'] = ob_get_contents();
     ob_end_clean();
+
     ob_start();
     show_plugins(true);
     $data['event_plugins'] = ob_get_contents();
@@ -446,4 +446,5 @@ $serendipity['smarty']->assign($data);
 $tfile = dirname(__FILE__) . "/tpl/plugins.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile);
 echo $content;
+
 /* vim: set sts=4 ts=4 expandtab : */
