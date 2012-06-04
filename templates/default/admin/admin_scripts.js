@@ -62,4 +62,18 @@ function invertSelection() {
     }
 }
 
+function showFilters()  {
+  s = document.getElementById('moreFilter').style;
+  if (s.display == 'none') {
+      s.display = 'block';
+      } else {
+      s.display = 'none';
+  }
+}
+
+function AddKeyword(keyword)  {
+  s = document.getElementById('keyword_input').value;
+  document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
+}
+
 
