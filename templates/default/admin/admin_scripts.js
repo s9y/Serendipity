@@ -14,19 +14,19 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 // - templates/default/admin/default_staticpage_backend.tpl
 function showConfig(id) {
   if (document.getElementById) {
-    dlm = document.getElementById(id);
-    if (dlm.style.display == 'none') {
+    plugbox = document.getElementById(id);
+    if (plugbox.style.display == 'none') {
         document.getElementById('option' + id).src = img_minus;
-        dlm.style.display = '';
+        plugbox.style.display = '';
     } else {
         document.getElementById('option' + id).src = img_plus;
-        dlm.style.display = 'none';
+        plugbox.style.display = 'none';
     }
   }
 }
 
+var state='';
 function showConfigAll(count) {
-  var state='';
   if (document.getElementById) {
     for (i = 1; i <= count; i++) {
          document.getElementById('el' + i).style.display = state;
