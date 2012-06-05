@@ -1089,7 +1089,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 case 'backend_pluginlisting_header':
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
-                        echo '<br /><div id="upgrade_notice" class="serendipityAdminMsgSuccess msg_success">';
+                        echo '<div id="upgrade_notice" class="serendipityAdminMsgSuccess msg_success">';
                         echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE" class="serendipityIconLink upgrade_sidebar"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR . '</a> &nbsp; ';
                         echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event" class="serendipityIconLink upgrade_event"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_EVENT . '</a> ';
                         echo '</div>';
