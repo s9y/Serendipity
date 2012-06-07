@@ -5,44 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset={$CONST.LANG_CHARSET}" />
         <link rel="stylesheet" type="text/css" href="{$admin_vars.css_file}" />
         <link rel="stylesheet" type="text/css" href="{$admin_vars.admin_css_file}" />
-
-        <script type="text/javascript">
-        {literal}
-        function spawn() {
-            if (self.Spawnextended) {
-                Spawnextended();
-            }
-
-            if (self.Spawnbody) {
-                Spawnbody();
-            }
-
-            if (self.Spawnnugget) {
-                Spawnnugget();
-            }
-        }
-
-        function SetCookie(name, value) {
-            var today  = new Date();
-            var expire = new Date();
-            expire.setTime(today.getTime() + (60*60*24*30*1000));
-            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
-        }
-
-        function addLoadEvent(func) {
-          var oldonload = window.onload;
-          if (typeof window.onload != 'function') {
-            window.onload = func;
-          } else {
-            window.onload = function() {
-              oldonload();
-              func();
-            }
-          }
-        }
-        {/literal}
-
-        </script>
+        <script src="{serendipity_getFile file='admin/header_spawn.js'}"></script>
     {if $admin_vars.admin_installed}
         {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     {/if}
