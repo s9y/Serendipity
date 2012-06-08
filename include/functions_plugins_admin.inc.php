@@ -726,7 +726,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     if ($showExample && method_exists($plugin, 'example') ) { 
         $data['showExample'] = true;
-        $data['plugin_example'] = $plugin->example();
+        ob_start();
+        echo $plugin->example();
+        $data['plugin_example'] = ob_get_contents();
+        ob_end_clean();
     }
 
     if ($spawnNuggets && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && count($htmlnugget) > 0) { 
