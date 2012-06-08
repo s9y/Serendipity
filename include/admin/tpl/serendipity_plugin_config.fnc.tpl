@@ -31,7 +31,7 @@
         <tr>
             <td colspan="2">
                 <h2>
-                    <a style="border:0; text-decoration: none;" href="#" onClick='showConfig("el{$config_groupkeys@iteration}"); return false' title="{$CONST.TOGGLE_OPTION}"><img src="{serendipity_getFile file="img/plus.png"}" id="optionel{$config_groupkeys@iteration}" alt="+/-" border="0" />&nbsp;
+                    <a style="border:0; text-decoration: none;" href="#" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}"><img src="{serendipity_getFile file="img/plus.png"}" id="optionel{$config_groupkeys@iteration}" alt="+/-" border="0" />&nbsp;
                         {$config_header}
                     </a>
                 </h2>
@@ -46,7 +46,7 @@
                 {/foreach}
                 </table>
                 <script type="text/javascript" language="JavaScript">
-                    document.getElementById("el{$config_groupkeys@iteration}").style.display = "none";
+                    document.getElementById('el{$config_groupkeys@iteration}').style.display = "none";
                 </script>
             </td>
         </tr>
