@@ -709,7 +709,17 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     $data['config_groups'] = $config_groups;
     $data['OUT_STACK']     = $out_stack;
 
-    // is left here without use for archiv issues - now using external js file outsourced to templates/default/admin/admin_scripts.js 
+    if (is_array($config_groups)) {
+        foreach($config_groups AS $config_header => $config_groupkeys) {
+            foreach($config_groupkeys AS $config_groupkey) {
+                unset($out_stack[$config_groupkey]);
+            }
+        }
+    }
+
+    $data['OUT_STACK_REST'] = $out_stack;
+
+    // is left here without any use for archiv issues only - we now use external js file outsourced to templates/default/admin/admin_scripts.js 
     // see passed vars in serendipity_plugin_config.fnc.tpl - can get erased, as not being used any more if keeping Smartification.
     ob_start();
     serendipity_printConfigJS();

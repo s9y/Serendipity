@@ -5,7 +5,6 @@
     var const_hide = '{$CONST.HIDE}';
     var img_plus   = '{serendipity_getFile file="img/plus.png"}';
     var img_minus  = '{serendipity_getFile file="img/minus.png"}';
-    var jspath     = '{$serendipityHTTPPath}include/admin/js/';
 </script>
 
 {if $allow_admin_scripts}
@@ -55,7 +54,7 @@
         <tr><td colspan="2" style="height: 100px" id="configuration_footer">&nbsp;</td></tr>
 {/if} {* foreach config_groups end *}
     
-{foreach $OUT_STACK as $out_stack_config_item}
+{foreach $OUT_STACK_REST as $out_stack_config_item}
     {$out_stack_config_item}
 {/foreach}
 
