@@ -8,11 +8,16 @@ Version 2.0 ()
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * For Blogs running on a non-UTF-8 language, set a Smarty constant
+      to indicate the actually used charset.
+
     * Added to use MyISAM handler for s9y tables (we do not use InnoDB
       features, but rely on MyISAM fulltext)
-          
+
     * fixed defaultBaseURL did not show up installer. Thanks to onli.
       Follow up from c292bad
+
+    * fixed draft & future entries preview link in backend
 
     * Improved karmarating plugin to be able to use AJAX calls
       (gregman)
@@ -71,19 +76,19 @@ Version 1.6.2 (May 16th, 2012)
 
     * Fix SQL injection for comment.php used in read-context.
       (Thanks to High-Tech Bridge SA Security Release Lab, Advisory HTB23092)
-      
+
 Version 1.6.1 (May 8th, 2012)
 ------------------------------------------------------------------------
     
     * Improved escaping of backend plugin management for DB query
       and media selector output (Stefan Schurtz)
 
-    * Updated spamblock plugin to 1.78 & 1.79
+    * Updated spamblock plugin to 1.78 & 1.79 (backport)
       changed wordfilter to function to check with 'verify_once'
       to reject wordfilter signed spam comments before -
           added in 1.79 killswitch check and serendipity_db_bool()
 
-    * fixed draft & future entries preview link in backend
+    * fixed draft & future entries preview link in backend (backport)
 
     * Fixed some possible errors with pdo db_begin/end_transaction()
 
