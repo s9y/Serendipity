@@ -199,7 +199,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
             $compiler->template->has_nocache_code = true;
         }
         foreach($_tpl->required_plugins as $key => $tmp1) {
-            if ($compiler->nocache) {
+            if ($compiler->nocache  && $compiler->template->caching) {
                 $code = 'nocache';
             } else {
                 $code = $key;
@@ -260,7 +260,7 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
         // reset flags
         $compiler->parser->current_buffer = $saved_data[1];
         $compiler->nocache = $saved_data[2];
-        //$compiler->smarty->merge_compiled_includes = $saved_data[3];
+        $compiler->smarty->merge_compiled_includes = $saved_data[3];
         // reset flag for {block} tag
         $compiler->inheritance = false;
         // $_output content has already nocache code processed
