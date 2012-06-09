@@ -112,6 +112,11 @@ abstract class Smarty_Internal_TemplateCompilerBase {
      * @var array
      */
     public $modifier_plugins = array();
+    /**
+     * type of already compiled modifier
+     * @var array
+     */
+    public $known_modifier_type = array();
 
     /**
      * Initialize compiler
@@ -156,7 +161,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
             $_content = $template->source->content;
             // run prefilter if required
             if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
-                $template->source->content = $_content = Smarty_Internal_Filter_Handler::runFilter('pre', $_content, $template);
+                $_content = Smarty_Internal_Filter_Handler::runFilter('pre', $_content, $template);
             }
             // on empty template just return header
             if ($_content == '') {
@@ -563,7 +568,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
             ($this->nocache || $this->tag_nocache || $this->forceNocache == 2)) {
                 $this->template->has_nocache_code = true;
                 $_output = str_replace("'", "\'", $content);
-                $_output = str_replace('\\\\', '\\\\\\', $_output);
+                $_output = str_replace('\\\\', '\\\\\\\\', $_output);
                 $_output = str_replace("^#^", "'", $_output);
                 $_output = "<?php echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/" . $_output . "/*/%%SmartyNocache:{$this->nocache_hash}%%*/';?>\n";
                 // make sure we include modifer plugins for nocache code
