@@ -17,7 +17,7 @@
 @define('PLUGIN_EVENT_MAILER_CONVERTPDESC',     'Pridáva prázdny riadok za každým HTML tagom pre odstavec. Ak zvolíte odstraňovanie HTML tagov, tak toto nastavenie umožní zachovať pôvodné delenie odstavcov v e-maili.');
 @define('PLUGIN_EVENT_MAILER_RECIPIENTS',       'Príjemca e-mailu (viac príjemcov oddelujte čiarkou)');
 @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION',  'Tento príspevok nebol poslaný e-mailom, lebo ste sa rozhodli ho neposielať.');
-@define('PLUGIN_EVENT_MAILER_SENDING',          'Posielam'););
+@define('PLUGIN_EVENT_MAILER_SENDING',          'Posielam');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT',       'Poslať tento príspevok e-mailom');
 @define('PLUGIN_EVENT_MAILER_SENDTOALL',        'Poslať všetkým autorom');
 
