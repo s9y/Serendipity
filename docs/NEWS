@@ -14,8 +14,6 @@ Version 1.7 ()
     * fixed defaultBaseURL did not show up installer. Thanks to onli.
       Follow up from c292bad
 
-    * fixed draft & future entries preview link in backend
-
     * Improved karmarating plugin to be able to use AJAX calls
       (gregman)
 
@@ -28,7 +26,6 @@ Version 1.7 ()
       {include} calls seperately to smarty->fetch() calls, we'll also
       add that to .tpl files.
       (garvinhicking)
-
 
     * Patch by Markus Brükner: Properly handle files that have no
       extension in media database
@@ -60,7 +57,7 @@ Version 1.7 ()
       added isolation tag using nl to br
       this also adds some NoBR buttons to backend entry forms
     
-    * EXPERIMENTAL: Smarty3 support (ophian)
+    * Smarty3 support (ophian)
       with this upgrade Serendipity / Smarty will at least need a webserver running the PHP 5.2 series.
       As of August 2011, all PHP users should note, that the PHP 5.2 series is NOT supported anymore by the PHP developers. 
       All users are strongly encouraged to upgrade to PHP 5.3.8 and up. Please refer to your ISP about this.
