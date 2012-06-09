@@ -28,7 +28,6 @@ Version 1.7 ()
       add that to .tpl files.
       (garvinhicking)
 
-
     * Patch by Markus Brükner: Properly handle files that have no
       extension in media database
 
@@ -59,7 +58,7 @@ Version 1.7 ()
       added isolation tag using nl to br
       this also adds some NoBR buttons to backend entry forms
     
-    * EXPERIMENTAL: Smarty3 support (ophian)
+    * Smarty3 support (ophian)
       with this upgrade Serendipity / Smarty will at least need a webserver running the PHP 5.2 series.
       As of August 2011, all PHP users should note, that the PHP 5.2 series is NOT supported anymore by the PHP developers. 
       All users are strongly encouraged to upgrade to PHP 5.3.8 and up. Please refer to your ISP about this.
@@ -80,12 +79,12 @@ Version 1.6.1 (May 8th, 2012)
     * Improved escaping of backend plugin management for DB query
       and media selector output (Stefan Schurtz)
 
-    * Updated spamblock plugin to 1.78 & 1.79
+    * Updated spamblock plugin to 1.78 & 1.79 (backport)
       changed wordfilter to function to check with 'verify_once'
       to reject wordfilter signed spam comments before -
           added in 1.79 killswitch check and serendipity_db_bool()
 
-    * fixed draft & future entries preview link in backend
+    * fixed draft & future entries preview link in backend (backport)
 
     * Fixed some possible errors with pdo db_begin/end_transaction()
 
