@@ -77,19 +77,19 @@ function memSnap($tshow = '') {
  * @param  standard
  * @return null
  */
-if(!function_exists('errorToExceptionHandler')) {
+if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
         
         $rep = ini_get('error_reporting');
         // respect user has set php error_reporting to not display any errors at all
-        if(!($rep & $errStr)) { return false; }
+        if (!($rep & $errStr)) { return false; }
         // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
         if ($rep == 0) { return false; }
         // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect
-        if($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
+        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
         // any other errors go here - throw errors as exception
-        if($serendipity['production'] === 'debug') { 
+        if ($serendipity['production'] === 'debug') { 
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible
@@ -99,10 +99,12 @@ if(!function_exists('errorToExceptionHandler')) {
             throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         }
-        if($serendipity['production'] !== true) { 
+        if ($serendipity['production'] !== true) { 
             $e = new Exception;
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
+            print_r(func_get_args());
+            print_r($e);
             throw new ErrorException("Serendipity error: " . $errStr); // tracepath = all; 
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         } else { 

@@ -51,7 +51,8 @@ $serendipity['version']         = '1.7-alpha1';
 $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
 
 // Set error reporting
-error_reporting(E_ALL & ~E_NOTICE);
+// TODO: E_STRICT throws problematic errors due to "hook_event" being a static function, but all of our plugins don't really define that...
+error_reporting(E_ALL & ~E_NOTICE ^ E_STRICT);
 
 if ($serendipity['production'] !== true) {
     if ($serendipity['production'] === 'debug') {
@@ -71,7 +72,7 @@ if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
     #} else {
     // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode, 
     // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
-        set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE);
+        set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE ^ E_STRICT);
     #}
 }
 
