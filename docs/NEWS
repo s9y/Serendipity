@@ -4,6 +4,8 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Bundled simplepie
+    
     * For Blogs running on a non-UTF-8 language, set a Smarty constant
       to indicate the actually used charset. 
 
