@@ -565,6 +565,47 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         }
                         $content .= '</div>'; // end of rss_item
                         ++$i;
+                    }
+
+                    if ($smarty) {
+                        $smarty_items['use_rss_link'] = $use_rss_link;
+                        $smarty_items['bulletimg']    = $bulletimg;
+                        $smarty_items['escape_rss']   = $escape_rss;
+                        $smarty_items['displaydate']  = $displaydate;
+                        $smarty_items['dateformat']   = $dateformat;
+                        $smarty_items['target']       = $target;
+
+                        $serendipity['smarty']->assign_by_ref('remoterss_items', $smarty_items);
+                        $tpl = $this->get_config('template');
+                        if (empty($tpl)) {
+                            $tpl = 'plugin_remoterss.tpl';
+                        }
+                        
+                        // Template specifics go here
+                        switch($tpl) {
+                            case 'plugin_remoterss_nasaiotd.tpl':
+                                $smarty_items['nasa_image'] = $c->getData('image');
+                            break;
+                        }
+                        $content = $this->parseTemplate($tpl);
+                    }
+
+                    $this->debug('Caching Feed (' . strlen($content) . ' bytes)');
+                    $fp = @fopen($feedcache, 'w');
+                    if (trim($content) != '' && $fp) {
+                        fwrite($fp, $content);
+                        fclose($fp);
+                        $this->debug('Feed cache written');
+                    } else {
+                        $this->debug('Could not write (empty?) cache.');
+                        echo '<!-- Cache failed to ' . $feedcache . ' in ' . getcwd() . ' --><br />';
+                        if (trim($content) == '') {
+                            $this->debug('Getting old feedcache');
+                            $content = @file_get_contents($feedcache);
+                        }
+                    }
+                    $this->debug('RSS Plugin finished.');
+
                 } elseif ($feedtype == 'atom') {
                     $this->debug('URLCheck succeeded. Touching ' . $feedcache);
                     // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
@@ -706,7 +747,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             $content = @file_get_contents($feedcache);
                         }
                     }
-                    $this->debug('RSS Plugin finished.');
+                    $this->debug('RSS Plugin (Atom) finished.');
                 } elseif ($feedtype == 'opml') {
                     // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
                     @touch($feedcache);
