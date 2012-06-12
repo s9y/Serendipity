@@ -8,6 +8,8 @@ Version 2.0 ()
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Improved RSS sidebarplugin to support Atom 
+    
     * Bundled simplepie
     
     * For Blogs running on a non-UTF-8 language, set a Smarty constant
