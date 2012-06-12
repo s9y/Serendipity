@@ -417,6 +417,14 @@
                                           'default'     => 15,
                                           'permission'  => 'blogConfiguration'),
 
+                                    array('var'         => 'archiveSortStable',
+                                          'title'       => ARCHIVE_SORT_STABLE,
+                                          'description' => ARCHIVE_SORT_STABLE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'blogConfiguration'),
+
+
                                     array('var'         => 'searchsort',
                                           'title'       => QUICKSEARCH_SORT,
                                           'description' => '',

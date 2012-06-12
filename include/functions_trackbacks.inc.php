@@ -411,7 +411,7 @@ function add_pingback ($id, $postdata) {
         
         if ($id>0) {
             // first check, if we already have this pingback
-            $comments = serendipity_fetchComments($id,1,'co.id',true,'PINGBACK'," AND co.url='$remote'");
+            $comments = serendipity_fetchComments($id,1,'co.id',true,'PINGBACK'," AND co.url='" . serendipity_db_escape_string($remote) . "'");
             if (is_array($comments) && sizeof($comments) == 1) {
                 log_pingback("We already have that PINGBACK!");
                 return 0; // We already have it!
