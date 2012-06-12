@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2012-06-01 14:50 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2012-01-03 14:11 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -148,11 +148,11 @@ class Serendipity_Smarty extends Smarty
         
         $this->setConfigDir(array(S9Y_TEMPLATE_USERDEFAULT));
         
-        if ( (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) && IN_installer !== true) {
+        if (!is_dir($this->getCompileDir()) || !is_writable($this->getCompileDir())) {
             if(ini_get('display_errors') == 0 || ini_get('display_errors') == 'off') printf(DIRECTORY_WRITE_ERROR, $this->getCompileDir());
             trigger_error(sprintf(DIRECTORY_WRITE_ERROR, $this->getCompileDir()), E_USER_ERROR);
         }
-
+        
         #cache# $this->setCacheDir($serendipity['serendipityPath'] . 'cache'); // (enable #cache# properties)
         
         /*
@@ -307,12 +307,10 @@ class Serendipity_Smarty extends Smarty
             $this->caching         = false;  // $this->setCaching(false); 
             $this->debugging       = true;   // $this->setDebugging(true);
         }
-
+        
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
-        $this->error_reporting = E_ALL & ~E_NOTICE;
-
-        // we use our own error_handler ???
-        #$this->muteExpectedErrors();
+        $this->error_reporting = E_ALL & ~E_NOTICE ^ E_STRICT;
+        
       } 
       
     /*

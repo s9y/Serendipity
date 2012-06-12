@@ -73,7 +73,7 @@ class serendipity_plugin_api
      * @access public
      * @return null
      */
-    function register_default_plugins()
+    static function register_default_plugins()
     {
         /* Register default sidebar plugins, order matters */
         serendipity_plugin_api::create_plugin_instance('@serendipity_calendar_plugin');
@@ -130,7 +130,7 @@ class serendipity_plugin_api
      * @param   string  The source path of the plugin file
      * @return  string  ID of the new plugin
      */
-    function create_plugin_instance($plugin_class_id, $copy_from_instance = null, $default_placement = 'right', $authorid = '0', $pluginPath = '')
+    static function create_plugin_instance($plugin_class_id, $copy_from_instance = null, $default_placement = 'right', $authorid = '0', $pluginPath = '')
     {
         global $serendipity;
 
@@ -184,7 +184,7 @@ class serendipity_plugin_api
      * @param   string  The name of the plugin id ("serendipity_plugin_xxx:1232132fsdf")
      * @return null
      */
-    function remove_plugin_instance($plugin_instance_id)
+    static function remove_plugin_instance($plugin_instance_id)
     {
         global $serendipity;
 
@@ -212,7 +212,7 @@ class serendipity_plugin_api
      * @param   array   An array of configuration item names
      * @return null
      */
-    function remove_plugin_value($plugin_instance_id, $where)
+    static function remove_plugin_value($plugin_instance_id, $where)
     {
         global $serendipity;
         $where_sql = array();
@@ -236,7 +236,7 @@ class serendipity_plugin_api
      * @param   boolean     If true, only event plugins will be searched. If false, sidebar plugins will be searched.
      * @return
      */
-    function &enum_plugin_classes($event_only = false)
+    static function &enum_plugin_classes($event_only = false)
     {
         global $serendipity;
 
@@ -290,7 +290,7 @@ class serendipity_plugin_api
      * @param   string      The maindir where we started searching from [for recursive use]
      * @return
      */
-    function traverse_plugin_dir($ppath, &$classes, $event_only, $maindir = '') 
+    static function traverse_plugin_dir($ppath, &$classes, $event_only, $maindir = '') 
     {
         $d = @opendir($ppath);
         if ($d) {
@@ -360,7 +360,7 @@ class serendipity_plugin_api
      * @param   string  The filter for plugins (left|right|hide|event|eventh)
      * @return  array   The list of plugins
      */
-    function get_installed_plugins($filter = '*') 
+    static function get_installed_plugins($filter = '*') 
     {
         $plugins = serendipity_plugin_api::enum_plugins($filter);
         $res = array();
@@ -382,7 +382,7 @@ class serendipity_plugin_api
      * @param   string  Filter by a specific plugin instance id
      * @return  array   Returns the associative array of found plugins in the database
      */
-    function enum_plugins($filter = '*', $negate = false, $classname = null, $id = null)
+    static function enum_plugins($filter = '*', $negate = false, $classname = null, $id = null)
     {
         global $serendipity;
 
@@ -422,7 +422,7 @@ class serendipity_plugin_api
      * @param   boolean If true, the filtering logic will be reversed an all plugins that are NOT part of the filter will be evaluated
      * @return  int     Number of plugins that were found.
      */
-    function count_plugins($filter = '*', $negate = false)
+    static function count_plugins($filter = '*', $negate = false)
     {
         global $serendipity;
 
@@ -459,7 +459,7 @@ class serendipity_plugin_api
      * @param   string  If an instance ID is passed this means, the plugin to be loaded is internally available
      * @return  string  Returns the filename to include for a specific plugin
      */
-    function includePlugin($name, $pluginPath = '', $instance_id = '') 
+    static function includePlugin($name, $pluginPath = '', $instance_id = '') 
     {
         global $serendipity;
 
@@ -494,7 +494,7 @@ class serendipity_plugin_api
      * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@')
      * @return  string      The classname of the plugin
      */
-    function getClassByInstanceID($instance_id, &$is_internal) 
+    static function getClassByInstanceID($instance_id, &$is_internal) 
     {
         $instance   = explode(':', $instance_id);
         $class_name = ltrim($instance[0], '@');
@@ -511,7 +511,7 @@ class serendipity_plugin_api
      * @return  string      Returns the filename of a plugin to load
      */
     /* Probes for the plugin filename */
-    function probePlugin($instance_id, &$class_name, &$pluginPath) 
+    static function probePlugin($instance_id, &$class_name, &$pluginPath) 
     {
         global $serendipity;
 
@@ -561,7 +561,7 @@ class serendipity_plugin_api
      * @param   string      The filename of a plugin (can be autodetected)
      * @return
      */
-    function &load_plugin($instance_id, $authorid = null, $pluginPath = '', $pluginFile = null) 
+    static function &load_plugin($instance_id, $authorid = null, $pluginPath = '', $pluginFile = null) 
     {
         global $serendipity;
 
@@ -615,7 +615,7 @@ class serendipity_plugin_api
      * @param   type        The type of the plugin (local|spartacus|...)
      * @return  array       Information about the plugin
      */
-    function &getPluginInfo(&$pluginFile, &$class_data, $type) 
+    static function &getPluginInfo(&$pluginFile, &$class_data, $type) 
     {
         global $serendipity;
 
@@ -668,7 +668,7 @@ class serendipity_plugin_api
      * @param   string      The location/type of a plugin (local|spartacus)
      * @return
      */
-    function &setPluginInfo(&$plugin, &$pluginFile, &$bag, &$class_data, $pluginlocation = 'local') 
+    static function &setPluginInfo(&$plugin, &$pluginFile, &$bag, &$class_data, $pluginlocation = 'local') 
     {
         global $serendipity;
 
@@ -778,7 +778,7 @@ class serendipity_plugin_api
      * @param   string  A new sort order for the plugin
      * @return
      */
-    function update_plugin_placement($name, $placement, $order = null)
+    static function update_plugin_placement($name, $placement, $order = null)
     {
         global $serendipity;
 
@@ -807,7 +807,7 @@ class serendipity_plugin_api
      * @param   int     The ID of the new author owner of the plugin
      * @return
      */
-    function update_plugin_owner($name, $authorid)
+    static function update_plugin_owner($name, $authorid)
     {
         global $serendipity;
 
@@ -836,7 +836,7 @@ class serendipity_plugin_api
      * @param   string      Only show a plugin with this instance ID
      * @return  string      Smarty HTML output
      */
-    function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
+    static function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
     {
         global $serendipity;
 
@@ -915,7 +915,7 @@ class serendipity_plugin_api
      * @param   string      The default title, if none was configured
      * @return  string      The title of the plugin
      */
-    function get_plugin_title(&$plugin, $default_title = '')
+    static function get_plugin_title(&$plugin, $default_title = '')
     {
         global $serendipity;
 
@@ -954,7 +954,7 @@ class serendipity_plugin_api
      * @param   string  Name of a plugin
      * @return  boolean
      */
-    function is_event_plugin($name) 
+    static function is_event_plugin($name) 
     {
         return (strstr($name, '_event_'));
     }
@@ -967,7 +967,7 @@ class serendipity_plugin_api
      * @param  boolean  If set to true, the list of cached event plugins will be refreshed
      * @return mixed    Either returns the whole list of event plugins, or only a specific instance
      */
-    function &get_event_plugins($getInstance = false, $refresh = false) 
+    static function &get_event_plugins($getInstance = false, $refresh = false) 
     {
         static $event_plugins;
         static $false = false;
@@ -1021,7 +1021,7 @@ class serendipity_plugin_api
      * @param   mixed       May contain any type of variables that are passed to an event plugin
      * @return true
      */
-    function hook_event($event_name, &$eventData, $addData = null) 
+    static function hook_event($event_name, &$eventData, $addData = null) 
     {
         global $serendipity;
 
@@ -1091,7 +1091,7 @@ class serendipity_plugin_api
      * @param   string      A name (may contain wildcards) of a plugin class to check
      * @return  boolean     True if a plugin was found
      */
-    function exists($instance_id) 
+    static function exists($instance_id) 
     {
         global $serendipity;
 
@@ -1117,7 +1117,7 @@ class serendipity_plugin_api
      * @param   boolean     Indicates if the plugin is an event plugin
      * @return  object      Returns the plugin object or false, if failure
      */
-    function &autodetect_instance($plugin_name, $authorid, $is_event_plugin = false) 
+    static function &autodetect_instance($plugin_name, $authorid, $is_event_plugin = false) 
     {
         if ($is_event_plugin) {
             $side = 'event';
@@ -1142,7 +1142,7 @@ class serendipity_plugin_api
      * @param current plugin's path
      * @return  object      Returns the plugin object or false, if failure
      */
-    function load_language($path) {
+    static function load_language($path) {
         global $serendipity;
 
         $probelang = $path . '/' . $serendipity['charset'] . 'lang_' . $serendipity['lang'] . '.inc.php';
