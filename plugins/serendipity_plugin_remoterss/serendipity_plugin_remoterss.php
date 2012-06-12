@@ -251,7 +251,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.13');
+        $propbag->add('version',       '1.20');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -312,7 +312,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                 break;
 
             case 'feedtype':
-                $select = array('rss' => 'RSS', 'opml' => 'OPML');
+                $select = array('rss' => 'RSS', 'opml' => 'OPML', 'atom' => 'ATOM');
                 $propbag->add('type', 'select');
                 $propbag->add('name', PLUGIN_REMOTERSS_FEEDTYPE);
                 $propbag->add('description', PLUGIN_REMOTERSS_FEEDTYPE_BLAHBLAH);
@@ -500,6 +500,108 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                     $content = '';
                     $smarty_items = array();
                     while (($showAll || ($i < $number)) && ($item = $c->getNextItem())) {
+                        if (empty($item['title'])) {
+                            continue;
+                        }
+
+                        $content .= '<div class="rss_item">';
+
+                        if ($use_rss_link) {
+                            $content .= '<div class="rss_link"><a href="' . htmlspecialchars($this->decode($item['link'])) . '" ' . (!empty($target) ? 'target="'.$target.'"' : '') . '>';
+                        }
+
+                        if (!empty($bulletimg)) {
+                            $content .= '<img src="' . $bulletimg . '" border="0" alt="*" /> ';
+                        }
+
+                        $is_first = true;
+                        foreach($rss_elements AS $rss_element) {
+                            $rss_element = trim($rss_element);
+                            
+                            if (!$is_first) {
+                                $content .= '<span class="rss_' . preg_replace('@[^a-z0-9]@imsU', '', $rss_element) . '">';
+                            }
+
+                            if ($escape_rss) {
+                                $content .= $this->decode($item[$rss_element]);
+                            } else {
+                                $content .= htmlspecialchars($this->decode($item[$rss_element]));
+                            }
+                            
+                            if ($smarty) {
+                                $item['display_elements'][preg_replace('@[^a-z0-9]@imsU', '', $rss_element)] = $this->decode($item[$rss_element]);
+                            }
+                            
+                            if (!$is_first) {
+                                $content .= '</span>';
+                            }
+
+                            if ($is_first && $use_rss_link) {
+                                $content .= '</a></div>'; // end of first linked element
+                            }
+                            $is_first = false;
+                        }
+
+                        if ($is_first && $use_rss_link) {
+                            // No XML element has been configured.
+                            $content .= '</a></div>';
+                        }
+
+                        $content .= "<br />\n";
+                        $item['timestamp'] = @strtotime(isset($item['pubdate']) ? $item['pubdate'] : $item['dc:date']);
+                        if (!($item['timestamp'] == -1) AND ($displaydate == 'true')) {
+                            $content .= '<div class="serendipitySideBarDate">'
+                                      . htmlspecialchars(serendipity_formatTime($dateformat, $item['timestamp'], false))
+                                      . '</div>';
+
+                        }
+                        
+                        if ($smarty) {
+                            $smarty_items['items'][$i] = $item;
+                            $smarty_items['items'][$i]['css_class'] = preg_replace('@[^a-z0-9]@imsU', '', $rss_element);
+                            foreach($item AS $key => $val) {
+                                $smarty_items['items'][$i]['decoded_' . str_replace(':', '_', $key)] = $this->decode($key);
+                            }
+                        }
+                        $content .= '</div>'; // end of rss_item
+                        ++$i;
+                } elseif ($feedtype == 'atom') {
+                    $this->debug('URLCheck succeeded. Touching ' . $feedcache);
+                    // Touching the feedcache file will prevent loops of death when the RSS target is the same URI than our blog.
+                    @touch($feedcache);
+
+                    require_once S9Y_PEAR_PATH . '/simplepie/simplepie.inc';
+
+                    $this->debug('Running simplepie Parser');
+
+                    $simplefeed = new SimplePie();
+                    $simplefeed->cache=false;
+                    $simplefeed->set_feed_url($rssuri);
+                    $success = $simplefeed->init();
+                    $simplefeed->set_output_encoding($charset);
+                    $simplefeed->handle_content_type();
+                    $this->encoding = $charset;
+
+                    $use_rss_link = serendipity_db_bool($this->get_config('use_rss_link'));
+                    $rss_elements = explode(',', $this->get_config('show_rss_element'));
+                    $escape_rss   = serendipity_db_bool($this->get_config('escape_rss'));
+                    $i = 0;
+                    $content = '';
+                    $smarty_items = array();
+
+                    foreach($simplefeed->get_items() as $simpleitem) {
+                        // map SimplePie items to s9y items
+                        $item['title']       = $simpleitem->get_title();
+                        $item['link']        = $simpleitem->get_permalink();
+                        $item['pubdate']     = $simpleitem->get_date('U');
+
+                        $item['date']        = $simpleitem->get_date('U');
+                        $item['description'] = $simpleitem->get_description();
+                        $item['content']     = $simpleitem->get_content();
+                        $item['author']      = $simpleitem->get_author();
+
+                        if (!$showAll && $i > $number) break;
+
                         if (empty($item['title'])) {
                             continue;
                         }
