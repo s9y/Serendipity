@@ -722,7 +722,7 @@ class serendipity_event_spartacus extends serendipity_event
         $this->checkArray($tree);
 
         foreach($tree[0]['children'] AS $idx => $subtree) {
-            if ($subtree['tag'] == 'package') {
+            if (is_array($subtree) && $subtree['tag'] == 'package') {
                 $i++;
 
                 foreach($subtree['children'] AS $child => $childtree) {
