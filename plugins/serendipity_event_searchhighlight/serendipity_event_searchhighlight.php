@@ -203,7 +203,7 @@ class serendipity_event_searchhighlight extends serendipity_event
     }
 
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
 
         $this->uri = $_SERVER['HTTP_REFERER'];

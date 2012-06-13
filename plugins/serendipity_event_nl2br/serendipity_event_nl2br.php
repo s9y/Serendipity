@@ -88,7 +88,7 @@ class serendipity_event_nl2br extends serendipity_event
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall() {
+    function uninstall(&$propbag) {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
@@ -156,7 +156,7 @@ class serendipity_event_nl2br extends serendipity_event
         return preg_replace('~\001(\d+)~e', '$_buf[$1]', $text);
     }
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
         static $markup  = null;
         static $isolate = null;

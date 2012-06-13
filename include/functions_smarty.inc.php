@@ -70,7 +70,7 @@ function &serendipity_printTrackbacks(&$trackbacks) {
 function &serendipity_smarty_fetch($block, $file, $echo = false) {
     global $serendipity;
 
-    $output =& $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
+    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
 
     $serendipity['smarty']->assignByRef($block, $output);
 

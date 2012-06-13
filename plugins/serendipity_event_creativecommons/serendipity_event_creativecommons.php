@@ -103,7 +103,7 @@ class serendipity_event_creativecommons extends serendipity_event {
         $title = $this->title;
     }
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
 
         $license_data    = $this->get_license_data();
