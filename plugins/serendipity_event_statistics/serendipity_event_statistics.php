@@ -86,7 +86,7 @@ class serendipity_event_statistics extends serendipity_event
         $title = $this->title;
     }
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
@@ -974,7 +974,7 @@ class serendipity_event_statistics extends serendipity_event
         
     }
     
-    function uninstall(){
+    function uninstall(&$propbag){
         
         $this->dropTables();
         

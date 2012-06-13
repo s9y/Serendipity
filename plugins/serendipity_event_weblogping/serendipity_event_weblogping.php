@@ -95,7 +95,7 @@ class serendipity_event_weblogping extends serendipity_event
         $title = PLUGIN_EVENT_WEBLOGPING_TITLE;
     }
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');

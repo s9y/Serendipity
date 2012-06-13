@@ -1021,7 +1021,7 @@ class serendipity_event_spartacus extends serendipity_event
     	}
     }
 
-    function event_hook($event, &$bag, &$eventData) {
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
