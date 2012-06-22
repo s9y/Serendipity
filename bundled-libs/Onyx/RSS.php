@@ -51,11 +51,6 @@ class ONYX_RSS
     * private $type;
    */
 
-   function ONYX_RSS($charset = 'UTF-8')
-   {
-      $this->__construct($charset);
-   }
-
    // Forward compatibility with PHP v.5
    // http://www.phpvolcano.com/eide/php5.php?page=start
    function __construct($charset = 'UTF-8')
@@ -87,6 +82,11 @@ class ONYX_RSS
       @xml_parser_set_option($this->parser, XML_OPTION_TARGET_ENCODING, LANG_CHARSET);
       xml_set_element_handler($this->parser, 'tag_open', 'tag_close');
       xml_set_character_data_handler($this->parser, 'cdata');
+   }
+
+   function ONYX_RSS($charset = 'UTF-8')
+   {
+      $this->__construct($charset);
    }
 
    function parse($uri, $file=false, $time=false, $local=false)
