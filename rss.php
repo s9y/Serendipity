@@ -40,7 +40,7 @@ switch ($_GET['type']) {
     case 'comments_and_trackbacks':
     case 'trackbacks':
     case 'comments':
-        $latest_entry = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, 1, 'desc', false, $_GET['type']);
+        $latest_entry = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, 1, 'co.id desc', false, $_GET['type']);
         break;
     case 'content':
     default:
