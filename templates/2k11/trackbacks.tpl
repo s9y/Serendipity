@@ -1,5 +1,5 @@
 {foreach from=$trackbacks item=trackback}
-<article id="c{$trackback.id}" class="serendipity_comment {cycle values="odd,even"}">
+<article id="c{$trackback.id}" class="clearfix serendipity_comment {cycle values="odd,even"}">
     <h4><cite>{$trackback.author|@default:$CONST.ANONYMOUS}</cite> {$CONST.ON} <time datetime="{$trackback.timestamp|@serendipity_html5time}" pubdate>{$trackback.timestamp|@formatTime:$template_option.date_format}</time>: <a href="{$trackback.url|@strip_tags}">{$trackback.title}</a></h4>
 
     <details>
