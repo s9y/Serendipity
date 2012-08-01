@@ -369,13 +369,13 @@ fieldset,
 #primary-nav,
 .serendipity_calendar thead,
 .serendipity_calendar tfoot {
-    background: #294564 url({TEMPLATE_PATH}img/gradient-dblue.png) left top repeat-x; /* Fallback */
-    background: -moz-linear-gradient(top, #3e5f81 0%, #294564 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3e5f81), color-stop(100%,#294564)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #3e5f81 0%, #294564 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #3e5f81 0%, #294564 100%); /* Opera11.10+ */
-    background: -ms-linear-gradient(top, #3e5f81 0%, #294564 100%); /* IE10+ */
-    background: linear-gradient(top, #3e5f81 0%, #294564 100%); /* W3C */
+    background: #294564;
+    background-image: url({TEMPLATE_PATH}img/gradient-dblue.png) left top repeat-x; /* Fallback */
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3e5f81), color-stop(100%, #294564));
+    background-image: -webkit-linear-gradient(#3e5f81, #294564);
+    background-image: -moz-linear-gradient(#3e5f81, #294564);
+    background-image: -o-linear-gradient(#3e5f81, #294564);
+    background-image: linear-gradient(#3e5f81, #294564);
 }
 
 #primary-nav span,
@@ -410,13 +410,13 @@ fieldset,
 
 #primary-nav a:hover,
 #primary-nav a:focus {
-    background: #aabcc5 url({TEMPLATE_PATH}img/gradient-lblue.png) left top repeat-x; /* Fallback */
-    background: -moz-linear-gradient(top, #ccdee7 0%, #aabcc5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccdee7), color-stop(100%,#aabcc5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #ccdee7 0%, #aabcc5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #ccdee7 0%, #aabcc5 100%); /* Opera11.10+ */
-    background: -ms-linear-gradient(top, #ccdee7 0%, #aabcc5 100%); /* IE10+ */
-    background: linear-gradient(top, #ccdee7 0%, #aabcc5 100%); /* W3C */
+    background: #aabcc5;
+    background-image: url({TEMPLATE_PATH}img/gradient-lblue.png) left top repeat-x; /* Fallback */
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ccdee7), color-stop(100%, #aabcc5));
+    background-image: -webkit-linear-gradient(#ccdee7, #aabcc5);
+    background-image: -moz-linear-gradient(#ccdee7, #aabcc5);
+    background-image: -o-linear-gradient(#ccdee7, #aabcc5);
+    background-image: linear-gradient(#ccdee7, #aabcc5);
 }
 
 .serendipity_entry,
@@ -444,9 +444,11 @@ fieldset,
     line-height: 1.8462;
 }
 
+#staticpage_childpages,
 .serendipity_entry_body ul,
 .serendipity_entry_body ol { margin: 0 0 1em 2em; }
 
+#staticpage_childpages li ul,
 .serendipity_entry_body li ul,
 .serendipity_entry_body li ol { margin: 0 0 0 2em; }
 
@@ -551,7 +553,7 @@ pre .geshi {
 
 #c,
 .serendipity_commentDirection {
-    background: #eee;
+    background-color: #eee;
     border: 1px solid #ddd;
     color: #aaa;
     -webkit-border-radius: 3px;
@@ -839,6 +841,40 @@ pre .geshi {
 .gplus_like iframe {
     position: relative!important;
     top: 6px!important;
+}
+
+/* Comment Spice */
+.serendipity_comment_spice { background: #eee; }
+
+.commentspice_rss_input {
+    background: #fff;
+    border: 1px solid #aaa;
+    color: #666;
+    max-width: 320px;
+    min-width: 52%;
+    overflow: hidden;
+    padding-left: 0;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.commentspice_announce_article {
+    clear: both;
+    font-size: .8125em;
+    margin-bottom: 0;
+    padding-top: 0;
+    text-align: left;
+}
+
+.short-heading {
+    float: left;
+    width: 64%;
+}
+
+.twitter_follow {
+    float: right;
+    width: 34%;
 }
 
 /* Helper classes  */

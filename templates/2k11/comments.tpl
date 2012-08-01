@@ -1,6 +1,13 @@
 {foreach from=$comments item=comment name="comments"}
 <article id="c{$comment.id}" class="serendipity_comment{if $entry.author == $comment.author} serendipity_comment_author_self{/if} {cycle values="odd,even"} {if $comment.depth > 8}commentlevel-9{else}commentlevel-{$comment.depth}{/if}">
-    <h4>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|@default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if} {$CONST.ON} <time datetime="{$comment.timestamp|@serendipity_html5time}" pubdate>{$comment.timestamp|@formatTime:$template_option.date_format}</time>:</h4>
+    <header class="clearfix">
+        <h4{if $comment.spice_twitter_name} class="short-heading"{/if}>{if $comment.url}<a href="{$comment.url}">{/if}{$comment.author|@default:$CONST.ANONYMOUS}{if $comment.url}</a>{/if} {$CONST.ON} <time datetime="{$comment.timestamp|@serendipity_html5time}" pubdate>{$comment.timestamp|@formatTime:$template_option.date_format}</time>:</h4>
+    {if $comment.spice_twitter_name}
+        <div class="twitter_follow"><a href="{$comment.spice_twitter_url}"{if $comment.spice_twitter_nofollow} rel="nofollow"{/if}><span class="visuallyhidden">@{$comment.spice_twitter_name}</span></a>
+        {if $comment.spice_twitter_followme}{$comment.spice_twitter_followme}{/if}
+        </div>
+    {/if}
+    </header>
 
     <div class="serendipity_commentBody clearfix content">
     {if $comment.avatar}{$comment.avatar}{/if}
