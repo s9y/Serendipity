@@ -1,4 +1,4 @@
-<div id="staticpage_{$staticpage_pagetitle|@makeFilename}" class="{if $staticpage_articleformat}serendipity_entry {/if}serendipity_staticpage">
+<article id="staticpage_{$staticpage_pagetitle|@makeFilename}" class="clearfix serendipity_staticpage {if $staticpage_articleformat} serendipity_entry{/if}">
     <header>
         <h2>{if $staticpage_articleformat}{if $staticpage_articleformattitle}{$staticpage_articleformattitle|@escape}{else}{$staticpage_pagetitle}{/if}{else}{if $staticpage_headline}{$staticpage_headline|@escape}{else}{$staticpage_pagetitle}{/if}{/if}</h2>
     {if is_array($staticpage_childpages)}
@@ -44,4 +44,4 @@
         </small>
     </footer>
 {/if}
-</div>
+</article>

@@ -3,11 +3,11 @@
 {/if}
 {foreach from=$plugindata item=item}
 {if $item.class != "serendipity_quicksearch_plugin"}
-    <section class="sidebar_plugin {cycle values="odd,even"} {$item.class}">
+    <section class="sidebar_plugin clearfix {cycle values="odd,even"} {$item.class}">
         {if $item.title != ""}
         <h3>{$item.title}</h3>
         {/if}
-        <div class="sidebar_content">{$item.content}</div>
+        <div class="sidebar_content clearfix">{$item.content}</div>
     </section>
 {/if}
 {/foreach}

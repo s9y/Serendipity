@@ -16,7 +16,7 @@
         {/if}
         </div>
         {if $entry.is_extended}
-        <div id="extended" class="content">
+        <div id="extended" class="clearfix content">
         {$entry.extended}
         </div>
         {/if}
@@ -25,9 +25,13 @@
         {if $entry.categories}
             <span class="visuallyhidden">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
         {/if}
-        {if $entry.categories and $entry.has_comments} | {/if}
-        {if $entry.has_comments}
+        {if $entry.categories and ($entry.has_comments or $entry.has_disqus)} | {/if}
+        {if ($entry.has_comments or $entry.has_disqus)}
+        {if $entry.has_disqus }
+            {$entry.comments}{if $entry.has_trackbacks}, <a href="{$entry.link}#trackbacks">{$entry.trackbacks} {$entry.label_trackbacks}</a>{/if}
+        {else}
             <a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a>
+        {/if}
         {/if}
         {if $entry.url_tweetthis}
             | <a href="{$entry.url_tweetthis}" title="{$CONST.TWOK11_TWEET_THIS}">Twitter</a>
@@ -71,7 +75,7 @@
         <p class="serendipity_msg_notice">{$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
         {/if}
 
-        <section id="trackbacks" class="serendipity_comments">
+        <section id="trackbacks" class="serendipity_comments serendipity_section_trackbacks">
             <h3>{$CONST.TRACKBACKS}</h3>
 
             <div id="trackback_url"><a rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape}">{$CONST.TRACKBACK_SPECIFIC}</a></div>
@@ -79,7 +83,7 @@
             {serendipity_printTrackbacks entry=$entry.id}
         </section>
 
-        <section id="comments" class="serendipity_comments">
+        <section id="comments" class="serendipity_comments serendipity_section_comments">
             <h3>{$CONST.COMMENTS}</h3>
 
             <p class="manage_comments">{$CONST.DISPLAY_COMMENTS_AS}

@@ -1,5 +1,5 @@
 {serendipity_hookPlugin hook="entries_header"}
-<div class="archives">
+<article class="archives">
     <h2>{$CONST.TOPICS_OF} {$dateRange.0|@formatTime:"%B %Y"}</h2>
 
     <ul class="archives_summary plainList">
@@ -11,5 +11,5 @@
         {/foreach}
     {/foreach}
     </ul>
-</div>
+</article>
 {serendipity_hookPlugin hook="entries_footer"}
