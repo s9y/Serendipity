@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.26');
+        $propbag->add('version',       '2.27');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -798,6 +798,7 @@ class serendipity_event_spartacus extends serendipity_event
     function &buildTemplateList(&$tree) {
         $pluginstack = array();
         $i = 0;
+        $gitloc = '';
 
         $mirrors = $this->getMirrors('files', true);
         $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
@@ -806,6 +807,10 @@ class serendipity_event_spartacus extends serendipity_event
         if (strlen($custom) > 2) {
             $servers = explode('|', $custom);
             $mirror = $servers[0];
+        }
+
+        if (stristr($mirror, 'github.com')) {
+            $gitloc = 'master/';
         }
 
         $this->checkArray($tree);
@@ -825,7 +830,7 @@ class serendipity_event_spartacus extends serendipity_event
                             break;
 
                         case 'template':
-                            $pluginstack[$i]['template']  = $childtree['value'];
+                            $pluginstack[$i]['template']     = $childtree['value'];
                             break;
 
                         case 'description':
@@ -862,13 +867,13 @@ class serendipity_event_spartacus extends serendipity_event
                 }
 
                 $plugname = $pluginstack[$i]['template'];
-                $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $plugname . '/preview.png?revision=1.9999';
-                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $plugname . '/preview_fullsize.jpg?revision=1.9999';
+                $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $gitloc . $plugname . '/preview.png?revision=1.9999';
+                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $gitloc . $plugname . '/preview_fullsize.jpg?revision=1.9999';
                 $pluginstack[$i]['customURI']  = '&amp;serendipity[spartacus_fetch]=' . $plugname;
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
-                // Remove the temporary $i reference, as the array should be associative
-                $pluginstack[$plugname] = $pluginstack[$i];
+                // Remove the temporary $i reference, as the array should be associative and fix double slashes in url string
+                $pluginstack[$plugname] = str_replace('//', '/', $pluginstack[$i]);
                 unset($pluginstack[$i]);
             }
         }
