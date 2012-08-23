@@ -347,12 +347,12 @@ function serendipity_getCoreVersion($version) {
  */
 function serendipity_die($html) {
     die(
-        '<html>
-            <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=' . LANG_CHARSET . '">
-            </head>
-            <body>' . $html . '</body>
-        </html>');
+'<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=' . LANG_CHARSET . '">
+    </head>
+    <body>' . $html . '</body>
+</html>');
 }
 
 /*
