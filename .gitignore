@@ -12,3 +12,4 @@ plugins/additional_plugins*
 /.settings
 /.buildpath
 /.project
+.DS_Store
