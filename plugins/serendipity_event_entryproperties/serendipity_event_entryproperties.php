@@ -628,8 +628,10 @@ class serendipity_event_entryproperties extends serendipity_event
                         true
                     );
 
-                    foreach($entries AS $idx => $entry) {
-                        $this->updateCache($entry);
+                    if (is_array($entries) && !empty($entries)) {
+                        foreach($entries AS $idx => $entry) {
+                            $this->updateCache($entry);
+                        }
                     }
                     return true;
                     break;
