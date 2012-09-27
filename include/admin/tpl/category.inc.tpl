@@ -84,7 +84,13 @@
         <td>
             <script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
             <input class="input_textbox" type="text" id="img_icon" name="serendipity[cat][icon]" value="{$this_cat.category_icon|default:""|escape:"html"}" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';" />
-            <script type="text/javascript" language="JavaScript">document.write('<input type="button" name="insImage" value="{$CONST.IMAGE}" {literal}onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=img_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton input_button" />');</script><!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->{/literal}
+            <script type="text/javascript" language="JavaScript">
+                var img_icon     = document.getElementById('img_icon');
+                var imgBtn       = document.createElement('div');
+                imgBtn.id        = "category_ml_popup";
+                imgBtn.innerHTML = '<input type="button" name="insImage" value="<?php echo IMAGE ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=img_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton input_button" />';
+                img_icon.parentNode.insertBefore(imgBtn, img_icon.nextSibling);
+            </script>
         </td>
     </tr>
 

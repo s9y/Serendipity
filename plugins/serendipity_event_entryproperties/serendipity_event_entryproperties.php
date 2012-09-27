@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.30');
+        $propbag->add('version',       '1.31');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -437,7 +437,13 @@ class serendipity_event_entryproperties extends serendipity_event
                 <tr>
                     <td class="customfield_<?php echo $fieldname; ?> customfield_name"><strong><?php echo $fieldname; ?></strong></td>
                     <td class="customfield_<?php echo $fieldname; ?> customfield_value"><textarea id="prop<?php echo htmlspecialchars($fieldname); ?>" name="serendipity[properties][<?php echo htmlspecialchars($fieldname); ?>]"><?php echo htmlspecialchars($value); ?></textarea></td>
-                    <td valign="top"><script type="text/javascript" language="JavaScript">document.write('<input class="serendipityPrettyButton input_button" type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo htmlspecialchars($fieldname); ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />');</script></td>
+                    <td valign="top" id="ep_column_<?php echo htmlspecialchars($fieldname); ?>">
+                        <script type="text/javascript" language="JavaScript">
+    var epColumn       = document.getElementById('ep_column_<?php echo htmlspecialchars($fieldname); ?>');
+    var epImgBtn       = document.createElement('span');
+    epImgBtn.innerHTML = '<input class="serendipityPrettyButton input_button" type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo htmlspecialchars($fieldname); ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />';
+    epColumn.appendChild(epImgBtn);
+</script>
                 </tr>
             <?php
                     }
