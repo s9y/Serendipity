@@ -197,6 +197,11 @@ a:link { -webkit-tap-highlight-color: #d52; }
 .ubuntu input, .ubuntu select,
 .ubuntu textarea { font-family: 'Ubuntu', sans-serif; }
 
+.dserif, .dserif button,
+.dserif input, .dserif select,
+.dserif textarea { font-family: 'Droid Serif', serif; }
+
+
 p {
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -293,7 +298,7 @@ caption, th, prev,
 
 fieldset,
 .no-js #primary-nav ul,
-.archives_summary span,
+.archives_summary .serendipity_byline,
 .form_field label,
 .form_tarea label,
 .podcastdownload,
@@ -338,6 +343,7 @@ fieldset,
 #banner>img { display: none; }
 
 #banner>img,
+.plugin_comment_wrap,
 .serendipity_entry footer { clear: both; }
 
 .no-nav {
@@ -1145,7 +1151,7 @@ pre .geshi {
     .comment_avatar, #respond,
     .serendipityCommentForm { display: none;}
 
-    body { font-family: Georgia, Times, "Times New Roman", serif !important; }
+    body { font-family: Times, "Times New Roman", serif !important; }
     .content a[href]:after,
     #trackbacks h4 a[href]:after { content: " (" attr(href) ")"; }
     .content a.serendipity_image_link[href]:after { content: ""; }

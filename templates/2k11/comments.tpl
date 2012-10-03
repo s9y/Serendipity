@@ -24,10 +24,13 @@
     {if $entry.is_entry_owner}
         | <a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|@sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a>
     {/if}
-    {if $entry.allow_comments AND $comment.body != 'COMMENT_DELETED'}
+{if $template_option.refcomments == true}
+    {if $comment.parent_id != '0'}
+        | <a class="reply_origin" href="#c{$comment.parent_id}" title="{$CONST.TWOK11_REPLYORIGIN}: {$CONST.COMMENT} #c{$comment.parent_id}">{$CONST.TWOK11_REPLYORIGIN}</a>
+    {/if}
+{/if}
         | <a class="comment_reply" href="#serendipity_CommentForm" id="serendipity_reply_{$comment.id}"{if $comment_onchange != ''} onclick="{$comment_onchange}"{/if}>{$CONST.REPLY}</a>
         <div id="serendipity_replyform_{$comment.id}"></div>
-    {/if}
     </footer>
 </article>
 {foreachelse}

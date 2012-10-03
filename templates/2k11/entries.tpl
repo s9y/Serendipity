@@ -5,7 +5,7 @@
         <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
 
-            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
+            <span class="serendipity_byline"><span class="single_user">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} </span><time datetime="{$entry.timestamp|@serendipity_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
         </header>
 
         <div class="clearfix content serendipity_entry_body">

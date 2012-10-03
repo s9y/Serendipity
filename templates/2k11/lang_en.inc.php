@@ -5,6 +5,7 @@
 @define('TWOK11_WEBFONTS', 'Use a webfont, hosted by Google?');
 @define('TWOK11_NOWEBFONT', 'Include no webfont');
 @define('TWOK11_USERSTYLES', 'Include user.css? (You need to create that file in your template directory. Generator: http://yellowled.github.com)');
+@define('TWOK11_REFCOMMENTS', 'Add link to related comment to comments (if they are replies to another comment)?');
 // Lang constants
 @define('TWOK11_NAV_TITLE', 'Navigation');
 @define('TWOK11_PAG_TITLE', 'Pagination');
@@ -20,3 +21,6 @@
 @define('TWOK11_DENT_THIS', 'Share article on Identica');
 @define('TWOK11_SHORT_URL', 'Short URL');
 @define('TWOK11_SHORT_URL_HINT', 'This link is not meant to be clicked. It contains the short URL for this entry. You can use this URL to link to this entry. To copy the link, right click and select Copy Shortcut in Internet Explorer or Copy Link Location in Mozilla.');
+@define('TWOK11_EMPTYTRACKBACK', 'Unfortunately, the contents of this trackback can not be displayed.');
+@define('TWOK11_TRACKBACKPREVIEW', 'Show preview');
+@define('TWOK11_REPLYORIGIN', 'Origin');
