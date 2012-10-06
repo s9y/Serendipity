@@ -34,7 +34,7 @@
                             <td>{$group.name|escape:"html"}</td>
                             <td width="200" align="right">
                                 <a href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}" class="serendipityIconLink">
-                                    <img src="{serendipity_getFile file="admin/img/edit.png"}" alt="{$CONST.EDIT} $group.name|escape:"html"}" />
+                                    <img src="{serendipity_getFile file="admin/img/edit.png"}" alt="{$CONST.EDIT} {$group.name|escape:"html"}" />
                                     {$CONST.EDIT}
                                 </a>
                                 <a href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:"html"}" class="serendipityIconLink">
