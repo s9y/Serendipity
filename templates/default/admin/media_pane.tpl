@@ -23,7 +23,7 @@
             <td><select name="serendipity[only_path]">
                     <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
                     {foreach from=$media.paths item="folder"}
-                    <option {if ($media.only_path == $media.limit_path|cat:$folder.relpath)}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:$folder.depth*2}{$folder.name}</option>
+                    <option {if ($media.only_path == $media.limit_path|cat:$folder.relpath)}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
                     {/foreach}
                 </select>
             </td>
