@@ -28,7 +28,7 @@ function serendipity_checkCommentToken($token, $cid) {
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                               WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
         // Get the token for this comment id
-        $tokencheck =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
+        $tokencheck = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
                                              WHERE okey = 'comment_" . $cid . "' LIMIT 1", true, 'assoc');
         // Verify it against the passed key
         if (is_array($tokencheck)) {
@@ -484,7 +484,7 @@ function serendipity_printCommentsByAuthor() {
     }
 
     foreach($entry_comments AS $entry_id => $_data) {
-        $entry_comments[$entry_id]['tpl_comments'] =& serendipity_printComments($_data['comments'], VIEWMODE_LINEAR, 0, null, 'COMMENTS', 'comments.tpl');
+        $entry_comments[$entry_id]['tpl_comments'] = serendipity_printComments($_data['comments'], VIEWMODE_LINEAR, 0, null, 'COMMENTS', 'comments.tpl');
     }
 
     $serendipity['smarty']->assignByRef('comments_by_authors', $entry_comments);
