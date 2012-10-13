@@ -270,12 +270,15 @@ a.day {
 /*** Staticpage styles ***/
 ul.staticpage_navigation {
     margin-left: 0;
-    padding-left: 0;
 }
 
 .staticpage_results {
     margin: 1em 0;
     padding: 0 10px;
+}
+
+.staticpage_navigation_center {
+	margin: 1em 0;
 }
 
 
