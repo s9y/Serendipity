@@ -9,6 +9,7 @@
 // Lang constants
 @define('TWOK11_NAV_TITLE', 'Navigation');
 @define('TWOK11_PAG_TITLE', 'Pagination');
+@define('TWOK11_SIDEBAR', 'Sidebar');
 @define('TWOK11_PLINK_TEXT', 'Link');
 @define('TWOK11_PLINK_TITLE', 'Permanent link for this comment');
 @define('TWOK11_PLACE_SEARCH', 'Search term(s)');
