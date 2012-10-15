@@ -75,13 +75,13 @@
         </div>
     {if $leftSidebarElements > 0}
         <aside id="sidebar_left">
-            <h2 class="visuallyhidden">Sidebar</h2>
+            <h2 class="visuallyhidden">{$CONST.TWOK11_SIDEBAR}</h2>
             {serendipity_printSidebar side="left"}
         </aside>
     {/if}
     {if $rightSidebarElements > 0}
         <aside id="sidebar_right">
-            <h2 class="visuallyhidden">Sidebar</h2>
+            <h2 class="visuallyhidden">{$CONST.TWOK11_SIDEBAR}</h2>
             {serendipity_printSidebar side="right"}
         </aside>
     {/if}
