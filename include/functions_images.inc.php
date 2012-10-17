@@ -2368,7 +2368,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
         if (!$is_edit) {
             $type = 'readonly';
         }
-        $val =& serendipity_mediaTypeCast($parts[0], $props['base_property'][$parts[0]], true);
+        $val = serendipity_mediaTypeCast($parts[0], $props['base_property'][$parts[0]], true);
 
         $propkey = htmlspecialchars($parts[0]) . $idx;
 
