@@ -85,7 +85,7 @@
                 <select id="newDir{$mediakey}" name="serendipity[newDir][{$mediakey}]">
                 <option value=""></option>
                 {foreach from=$media.paths item="folder"}
-                <option {if ($file.path == $folder.relpath)}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:$folder.depth*2}{$folder.name}</option>
+                <option {if ($file.path == $folder.relpath)}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
                 {/foreach}
                 </select>
             </div>
