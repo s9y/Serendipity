@@ -1441,7 +1441,7 @@ function serendipity_deleteGroup($groupid) {
 
     if (!serendipity_checkPermission('adminUsersMaintainOthers')) {
         // Only groups should be accessible where a user has access rights.
-        $my_groups =& serendipity_getGroups($serendipity['authorid'], true);
+        $my_groups = serendipity_getGroups($serendipity['authorid'], true);
         if (!in_array($groupid, $my_groups)) {
             return false;
         }
@@ -1543,8 +1543,8 @@ function serendipity_intersectGroup($checkuser = null, $myself = null) {
         $myself = $serendipity['authorid'];
     }
 
-    $my_groups  =& serendipity_getGroups($myself, true);
-    $his_groups =& serendipity_getGroups($checkuser, true);
+    $my_groups  = serendipity_getGroups($myself, true);
+    $his_groups = serendipity_getGroups($checkuser, true);
 
     foreach($his_groups AS $his_group) {
         if (in_array($his_group, $my_groups)) {
@@ -1577,7 +1577,7 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
 
     if (!serendipity_checkPermission('adminUsersMaintainOthers')) {
         // Only groups should be accessible where a user has access rights.
-        $my_groups =& serendipity_getGroups($serendipity['authorid'], true);
+        $my_groups = serendipity_getGroups($serendipity['authorid'], true);
         if (!in_array($groupid, $my_groups)) {
             return false;
         }
@@ -2200,7 +2200,7 @@ function serendipity_hasPluginPermissions($plugin, $groupid = null) {
         $forbidden = array();
         
         if ($groupid === null) {
-            $groups =& serendipity_checkPermission(null, null, 'all');
+            $groups = serendipity_checkPermission(null, null, 'all');
         } else {
             $groups = array($groupid => serendipity_fetchGroup($groupid));
         }

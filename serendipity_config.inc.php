@@ -48,7 +48,9 @@ if (defined('USE_MEMSNAP')) {
 $serendipity['version']         = '2.0-alpha1';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
-$serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
+if (!isset($serendipity['production'])) {
+    $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs)@', $serendipity['version']) ? false : true);
+}
 
 // Set error reporting
 // TODO: E_STRICT throws problematic errors due to "hook_event" being a static function, but all of our plugins don't really define that...

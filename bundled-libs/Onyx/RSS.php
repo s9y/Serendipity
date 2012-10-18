@@ -84,11 +84,6 @@ class ONYX_RSS
       xml_set_character_data_handler($this->parser, 'cdata');
    }
 
-   function ONYX_RSS($charset = 'UTF-8')
-   {
-      $this->__construct($charset);
-   }
-
    function parse($uri, $file=false, $time=false, $local=false)
    {
       $this->rss = array();
