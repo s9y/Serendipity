@@ -4,6 +4,9 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Onyx, Net_URL classes: Remove PHP4 style constructor due to
+      PHP5 error "Constructor already defined"
+      
     * Improved RSS sidebarplugin to support Atom 
     
     * Bundled simplepie
