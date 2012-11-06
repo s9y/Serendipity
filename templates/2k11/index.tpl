@@ -19,12 +19,14 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Cabin:400,400italic,700,700italic">
 {elseif $template_option.webfonts == 'ubuntu'}
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic">
+{elseif $template_option.webfonts == 'dserif'}
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
     <link rel="stylesheet" href="{$head_link_stylesheet}">
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.6.2.min.js"}"></script>
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
@@ -73,13 +75,13 @@
         </div>
     {if $leftSidebarElements > 0}
         <aside id="sidebar_left">
-            <h2 class="visuallyhidden">Sidebar</h2>
+            <h2 class="visuallyhidden">{$CONST.TWOK11_SIDEBAR}</h2>
             {serendipity_printSidebar side="left"}
         </aside>
     {/if}
     {if $rightSidebarElements > 0}
         <aside id="sidebar_right">
-            <h2 class="visuallyhidden">Sidebar</h2>
+            <h2 class="visuallyhidden">{$CONST.TWOK11_SIDEBAR}</h2>
             {serendipity_printSidebar side="right"}
         </aside>
     {/if}

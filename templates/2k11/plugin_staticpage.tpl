@@ -1,4 +1,4 @@
-<div id="staticpage_{$staticpage_pagetitle|@makeFilename}" class="{if $staticpage_articleformat}serendipity_entry {/if}serendipity_staticpage">
+<article id="staticpage_{$staticpage_pagetitle|@makeFilename}" class="clearfix serendipity_staticpage{if $staticpage_articleformat} serendipity_entry{/if}">
     <header>
         <h2>{if $staticpage_articleformat}{if $staticpage_articleformattitle}{$staticpage_articleformattitle|@escape}{else}{$staticpage_pagetitle}{/if}{else}{if $staticpage_headline}{$staticpage_headline|@escape}{else}{$staticpage_pagetitle}{/if}{/if}</h2>
     {if is_array($staticpage_childpages)}
@@ -24,7 +24,7 @@
     </div>
     {/if}
     {if $staticpage_content}
-    <div class="clearfix content staticpage_content">
+    <div class="clearfix content {if $staticpage_articleformat}serendipity_entry_body{else}staticpage_content{/if}">
     {$staticpage_content}
     </div>
     {/if}
@@ -33,10 +33,11 @@
     <footer class="staticpage_metainfo">
         <small>
         {if $staticpage_author}
-            <span class="visuallyhidden">{$CONST.POSTED_BY} </span>{$staticpage_author|@escape}
+            <span class="single_user"><span class="visuallyhidden">{$CONST.POSTED_BY} </span>{$staticpage_author|@escape}
         {/if}
+        {if $staticpage_author AND $staticpage_lastchange} | </span>{/if}
         {if $staticpage_lastchange}
-            | <span class="visuallyhidden">{$CONST.ON} </span><time datetime="{$staticpage_lastchange|@serendipity_html5time}" pubdate>{$staticpage_lastchange|date_format:$template_option.date_format}</time>
+            <span class="visuallyhidden">{$CONST.ON} </span><time datetime="{$staticpage_lastchange|@serendipity_html5time}" pubdate>{$staticpage_lastchange|date_format:$template_option.date_format}</time>
         {/if}
         {if $staticpage_adminlink AND $staticpage_adminlink.page_user}
             | <a href="{$staticpage_adminlink.link_edit}">{$staticpage_adminlink.link_name|@escape}</a>
@@ -44,4 +45,4 @@
         </small>
     </footer>
 {/if}
-</div>
+</article>

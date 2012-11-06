@@ -1,0 +1,15 @@
+uploads/*
+templates_c/*
+serendipity_config_local.inc.php
+.cvsignore
+.htaccess*
+*.db
+private/*
+archives/*
+*~
+DEADJOE
+plugins/additional_plugins*
+/.settings
+/.buildpath
+/.project
+.DS_Store

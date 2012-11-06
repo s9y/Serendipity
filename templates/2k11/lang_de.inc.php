@@ -5,9 +5,11 @@
 @define('TWOK11_WEBFONTS', 'Einen von Google gehosteten Webfont nutzen?');
 @define('TWOK11_NOWEBFONT', 'Keinen Webfont einbinden');
 @define('TWOK11_USERSTYLES', 'user.css einbinden? (Muss selbst im Templateverzeichnis angelegt werden! Generator: http://yellowled.github.com)');
+@define('TWOK11_REFCOMMENTS', 'Kommentaren (falls vorhanden) einen Link zum Kommentar, auf den geantwortet wurde, hinzufügen?');
 // Sprachkonstanten
 @define('TWOK11_NAV_TITLE', 'Navigation');
 @define('TWOK11_PAG_TITLE', 'Pagination');
+@define('TWOK11_SIDEBAR', 'Seitenleiste');
 @define('TWOK11_PLINK_TEXT', 'Link');
 @define('TWOK11_PLINK_TITLE', 'Permanenter Link zu diesem Kommentar');
 @define('TWOK11_PLACE_SEARCH', 'Suchbegriff(e)');
@@ -20,3 +22,6 @@
 @define('TWOK11_DENT_THIS', 'Artikel via Identica teilen');
 @define('TWOK11_SHORT_URL', 'Kurz-URL');
 @define('TWOK11_SHORT_URL_HINT', 'Dieser Link ist nicht aktiv. Er enthält die Kurz-URL zu diesem Eintrag. Sie können diese URL benutzen, um diesen Eintrag zu verlinken. Um den Link zu kopieren, klicken Sie ihn mit der rechten Maustaste an und wählen Verknüpfung kopieren im Internet Explorer oder Linkadresse kopieren in Mozilla/Firefox.');
+@define('TWOK11_EMPTYTRACKBACK', 'Die Anzeige des Inhaltes dieses Trackbacks ist leider nicht möglich.');
+@define('TWOK11_TRACKBACKPREVIEW', 'Vorschau anzeigen');
+@define('TWOK11_REPLYORIGIN', 'Antwort auf');

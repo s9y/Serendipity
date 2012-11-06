@@ -5,18 +5,18 @@
         <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
 
-            <span class="serendipity_byline">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
+            <span class="serendipity_byline block_level"><span class="single_user">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} </span><time datetime="{$entry.timestamp|@serendipity_html5time}" pubdate>{$entry.timestamp|@formatTime:$template_option.date_format}</time>{if $entry.is_entry_owner and not $is_preview} | <a href="{$entry.link_edit}">{$CONST.EDIT_ENTRY}</a>{/if}</span>
         </header>
 
         <div class="clearfix content serendipity_entry_body">
         {if $entry.categories}{foreach from=$entry.categories item="entry_category"}{if $entry_category.category_icon}<a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|@escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|@escape}" src="{$entry_category.category_icon}"></a>{/if}{/foreach}{/if}
         {$entry.body}
         {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
-        <a class="read_more" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title}</a>
+        <a class="read_more block_level" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title}</a>
         {/if}
         </div>
         {if $entry.is_extended}
-        <div id="extended" class="content">
+        <div id="extended" class="clearfix content">
         {$entry.extended}
         </div>
         {/if}
@@ -25,9 +25,13 @@
         {if $entry.categories}
             <span class="visuallyhidden">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}
         {/if}
-        {if $entry.categories and $entry.has_comments} | {/if}
-        {if $entry.has_comments}
+        {if $entry.categories and ($entry.has_comments or $entry.has_disqus)} | {/if}
+        {if ($entry.has_comments or $entry.has_disqus)}
+        {if $entry.has_disqus }
+            {$entry.comments}{if $entry.has_trackbacks}, <a href="{$entry.link}#trackbacks">{$entry.trackbacks} {$entry.label_trackbacks}</a>{/if}
+        {else}
             <a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a>
+        {/if}
         {/if}
         {if $entry.url_tweetthis}
             | <a href="{$entry.url_tweetthis}" title="{$CONST.TWOK11_TWEET_THIS}">Twitter</a>
@@ -71,15 +75,15 @@
         <p class="serendipity_msg_notice">{$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
         {/if}
 
-        <section id="trackbacks" class="serendipity_comments">
+        <section id="trackbacks" class="serendipity_comments serendipity_section_trackbacks">
             <h3>{$CONST.TRACKBACKS}</h3>
 
-            <div id="trackback_url"><a rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape}">{$CONST.TRACKBACK_SPECIFIC}</a></div>
+            <div id="trackback_url" class="block_level"><a rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape}">{$CONST.TRACKBACK_SPECIFIC}</a></div>
 
             {serendipity_printTrackbacks entry=$entry.id}
         </section>
 
-        <section id="comments" class="serendipity_comments">
+        <section id="comments" class="serendipity_comments serendipity_section_comments">
             <h3>{$CONST.COMMENTS}</h3>
 
             <p class="manage_comments">{$CONST.DISPLAY_COMMENTS_AS}
@@ -127,7 +131,7 @@
     {/if}
 {/foreach}
 {if $footer_info or $footer_prev_page or $footer_next_page}
-    <nav class="serendipity_pagination">
+    <nav class="serendipity_pagination block_level">
         <h2 class="visuallyhidden">{$CONST.TWOK11_PAG_TITLE}</h2>
 
         <ul class="clearfix">
