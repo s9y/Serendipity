@@ -726,6 +726,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $i++;
 
                 foreach($subtree['children'] AS $child => $childtree) {
+                    if (isset($childtree['tag'])) {
                     switch($childtree['tag']) {
                         case 'name':
                             $pluginstack[$i]['plugin_class']    =
@@ -774,6 +775,7 @@ class serendipity_event_spartacus extends serendipity_event
                             $pluginstack[$i]['author']       = $childtree['children'][0]['children'][0]['value']; // I dig my PHP arrays ;-)
                             break;
                     }
+                    }
                 }
 
                 $this->checkPlugin($pluginstack[$i], $plugins, $type);
@@ -820,6 +822,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $i++;
 
                 foreach($subtree['children'] AS $child => $childtree) {
+                    if (isset($childtree['tag'])) {
                     switch($childtree['tag']) {
                         case 'name':
                             $pluginstack[$i]['name']         = $childtree['value'];
@@ -863,6 +866,7 @@ class serendipity_event_spartacus extends serendipity_event
                         case 'maintainers':
                             $pluginstack[$i]['author']       = $childtree['children'][0]['children'][0]['value']; // I dig my PHP arrays ;-)
                             break;
+                    }
                     }
                 }
 
