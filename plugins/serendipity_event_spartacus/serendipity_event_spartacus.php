@@ -726,7 +726,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $i++;
 
                 foreach($subtree['children'] AS $child => $childtree) {
-                    if (isset($childtree['tag'])) {
+                    if (is_array($childtree) && isset($childtree['tag'])) {
                     switch($childtree['tag']) {
                         case 'name':
                             $pluginstack[$i]['plugin_class']    =
@@ -822,7 +822,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $i++;
 
                 foreach($subtree['children'] AS $child => $childtree) {
-                    if (isset($childtree['tag'])) {
+                    if (is_array($childtree) && isset($childtree['tag'])) {
                     switch($childtree['tag']) {
                         case 'name':
                             $pluginstack[$i]['name']         = $childtree['value'];
