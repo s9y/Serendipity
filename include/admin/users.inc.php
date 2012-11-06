@@ -152,8 +152,8 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
         }
 
         $pl_data = array(
-            'id'       => $serendipity['POST']['authorid'],
-            'authorid' => $serendipity['POST']['authorid'],
+            'id'       => $serendipity['POST']['user'],
+            'authorid' => $serendipity['POST']['user'],
             'username' => $_POST['username'],
             'realname' => $_POST['realname'],
             'email'    => $_POST['email']
