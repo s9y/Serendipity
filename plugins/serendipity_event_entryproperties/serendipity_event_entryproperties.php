@@ -176,7 +176,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     $field = trim($field);
                     if (!empty($field)) {
                         $field = str_replace($special_to, $special_from, $field);
-                        $fieldnames = explode(':', $fieldnames);
+                        $fieldnames = explode(':', $field);
                         $supported_properties[] = $fieldnames[0];
                     }
                 }
