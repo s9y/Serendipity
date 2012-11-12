@@ -8,6 +8,8 @@ Version 2.0 ()
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Allow entryproperties plugin to define defaults for custom fields
+
     * Onyx, Net_URL classes: Remove PHP4 style constructor due to
       PHP5 error "Constructor already defined"
           

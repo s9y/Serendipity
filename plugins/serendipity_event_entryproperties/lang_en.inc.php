@@ -35,6 +35,7 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1', 'Additional custom fields can be used in your template at places where you want them to show up. For that, edit your entries.tpl template file and place Smarty tags like {$entry.properties.ep_MyCustomField} in the HTML where you like. Note the prefix ep_ for each field. ');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'Here you can enter a list of commaseparated field names that you can use to enter for every entry - do not use special characters or spaces for those fieldnames. Example: "Customfield1, Customfield2". ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'The list of available custom fields can be changed in the <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">plugin configuration</a>.');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC4', 'You can enter the default setting for each field by using "Customfield1:Default value1, Customfield2:Default value2". If you need to use the special characters ":" and "," within the default value, put an \\ backslash before them, like "Customfield1:I want\\:Coookies\\, Muffins and Sausages,Customfield2:I am satisfied". For better readability, you can put a newline in front of each custom field, if you like.');
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'Disable Markup plugins for this entry:');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS', 'Use extended database lookups');
