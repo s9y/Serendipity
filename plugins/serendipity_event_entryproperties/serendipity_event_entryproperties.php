@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.31');
+        $propbag->add('version',       '1.32');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -64,7 +64,7 @@ class serendipity_event_entryproperties extends serendipity_event
             case 'customfields':
                 $propbag->add('type',        'text');
                 $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS);
-                $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2);
+                $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2 . "\n" . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC4);
                 $propbag->add('default',     'CustomField1, CustomField2, CustomField3');
                 break;
 
@@ -165,12 +165,19 @@ class serendipity_event_entryproperties extends serendipity_event
         if ($supported_properties === null) {
             $supported_properties = array('is_sticky', 'access', 'access_groups', 'access_users', 'cache_body', 'cache_extended', 'no_frontpage', 'hiderss', 'entrypassword');
 
-            $fields = explode(',', trim($this->get_config('customfields')));
+            // Capture special characters for "," and ":"
+            $special_from = array('\\,', '\\:');
+            $special_to   = array(chr(0x01), chr(0x02));
+            $string = str_replace($special_from, $special_to, trim($this->get_config('customfields')));
+
+            $fields = explode(',', $string);
             if (is_array($fields) && count($fields) > 0) {
                 foreach($fields AS $field) {
                     $field = trim($field);
                     if (!empty($field)) {
-                        $supported_properties[] = $field;
+                        $field = str_replace($special_to, $special_from, $field);
+                        $fieldnames = explode(':', $field);
+                        $supported_properties[] = $fieldnames[0];
                     }
                 }
             }
@@ -413,6 +420,12 @@ class serendipity_event_entryproperties extends serendipity_event
         <br /><div class="entryproperties_customfields">
             <?php
                 $fields = trim($this->get_config('customfields'));
+                  // Capture special characters for "," and ":"
+                $special_from = array('\\,', '\\:');
+                $special_to   = array(chr(0x01), chr(0x02));
+                $special_read = array(',', ':');
+                $fields = str_replace($special_from, $special_to, $fields);
+
                 if (!empty($fields)) {
                     $fields = explode(',', $fields);
                 }
@@ -424,6 +437,8 @@ class serendipity_event_entryproperties extends serendipity_event
                 <table id="serendipity_customfields">
             <?php
                     foreach($fields AS $fieldname) {
+                        $fieldparts = explode(':', $fieldname);
+                        $fieldname = $fieldparts[0];
                         $fieldname = htmlspecialchars(trim($fieldname));
 
                         if (isset($serendipity['POST']['properties'][$fieldname])) {
@@ -431,19 +446,20 @@ class serendipity_event_entryproperties extends serendipity_event
                         } elseif (!empty($eventData['properties']['ep_' . $fieldname])) {
                             $value = $eventData['properties']['ep_' . $fieldname];
                         } else {
-                            $value = '';
+                            $value = trim(str_replace($special_to, $special_read, $fieldparts[1]));
                         }
             ?>
                 <tr>
                     <td class="customfield_<?php echo $fieldname; ?> customfield_name"><strong><?php echo $fieldname; ?></strong></td>
-                    <td class="customfield_<?php echo $fieldname; ?> customfield_value"><textarea id="prop<?php echo htmlspecialchars($fieldname); ?>" name="serendipity[properties][<?php echo htmlspecialchars($fieldname); ?>]"><?php echo htmlspecialchars($value); ?></textarea></td>
-                    <td valign="top" id="ep_column_<?php echo htmlspecialchars($fieldname); ?>">
+                    <td class="customfield_<?php echo $fieldname; ?> customfield_value"><textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo htmlspecialchars($value); ?></textarea></td>
+                    <td valign="top" id="ep_column_<?php echo $fieldname; ?>">
                         <script type="text/javascript" language="JavaScript">
-    var epColumn       = document.getElementById('ep_column_<?php echo htmlspecialchars($fieldname); ?>');
+    var epColumn       = document.getElementById('ep_column_<?php echo $fieldname; ?>');
     var epImgBtn       = document.createElement('span');
-    epImgBtn.innerHTML = '<input class="serendipityPrettyButton input_button" type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo htmlspecialchars($fieldname); ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />';
+    epImgBtn.innerHTML = '<input class="serendipityPrettyButton input_button" type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo $fieldname; ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" class="serendipityPrettyButton" />';
     epColumn.appendChild(epImgBtn);
 </script>
+                    </td>
                 </tr>
             <?php
                     }
