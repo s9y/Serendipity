@@ -938,7 +938,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     if ($serendipity['GET']['page'] > 1) {
         $uriArguments = $serendipity['uriArguments'];
         $uriArguments[] = 'P'. ($serendipity['GET']['page'] - 1);
-        $serendipity['smarty']->assign('footer_prev_page', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix));
+        $serendipity['smarty']->assign('footer_prev_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
     }
 
     $uriArguments = $serendipity['uriArguments'];
@@ -956,7 +956,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     if ($serendipity['GET']['page'] < $totalPages) {
         $uriArguments = $serendipity['uriArguments'];
         $uriArguments[] = 'P'. ($serendipity['GET']['page'] + 1);
-        $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix));
+        $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
     }
 
     if (serendipity_db_bool($serendipity['archiveSortStable'])) {
