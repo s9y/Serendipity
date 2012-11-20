@@ -212,7 +212,8 @@ function show_plugins($event_only = false, $sidebars = null)
     $data['total'] = $total;
 
     $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/show_plugins.fnc.tpl";
+    $tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+    $tfile = dirname(__FILE__) . "/admin/$tpldir/show_plugins.fnc.tpl";
     $serendipity['smarty']->display('file:'. $tfile);
 
 }
@@ -243,7 +244,8 @@ function ownership($authorid, $name, $is_plugin_owner = false) {
     $data['show_ownership'] = true;
 
     $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/show_ownership.fnc.tpl";
+    $tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+    $tfile = dirname(__FILE__) . "/admin/$tpldir/show_ownership.fnc.tpl";
     $serendipity['smarty']->display('file:'. $tfile);
 
 }
@@ -318,7 +320,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
-    $tfile = dirname(__FILE__) . "/admin/tpl/out_stack_loop.tpl";
+    $tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+    $tfile = dirname(__FILE__) . "/admin/$tpldir/out_stack_loop.tpl";
 
     $data = array();
 
@@ -750,7 +753,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     }
 
     $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/serendipity_plugin_config.fnc.tpl";
+    $tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+    $tfile = dirname(__FILE__) . "/admin/$tpldir/serendipity_plugin_config.fnc.tpl";
     $content = $serendipity['smarty']->fetch('file:'. $tfile);
     echo $content;
 
