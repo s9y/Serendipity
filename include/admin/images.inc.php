@@ -732,11 +732,9 @@ $data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.va
 $data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
 
 $serendipity['smarty']->assign($data);
-
-$tfile = dirname(__FILE__) . "/tpl/images.inc.tpl";
-
+$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+$tfile = dirname(__FILE__) . "/$tpldir/images.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-
 echo $content;
 
 /* vim: set sts=4 ts=4 expandtab : */

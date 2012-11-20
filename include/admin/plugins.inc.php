@@ -443,7 +443,8 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/plugins.inc.tpl";
+$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+$tfile = dirname(__FILE__) . "/$tpldir/plugins.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile);
 echo $content;
 

@@ -253,11 +253,9 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-
-$tfile = dirname(__FILE__) . "/tpl/users.inc.tpl";
-
+$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
+$tfile = dirname(__FILE__) . "/$tpldir/users.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile);
-
 echo $content;
 
 /* vim: set sts=4 ts=4 expandtab : */
