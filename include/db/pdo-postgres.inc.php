@@ -49,10 +49,21 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 function serendipity_db_connect() {
     global $serendipity;
 
+    $host = port = '';
+    if (strlen($serendipity['dbHost'])) {
+        if (false !== strstr($serendipity['dbHost'], ':')) {
+            $tmp = explode(':', $serendipity['dbHost']);
+            $host = "host={$tmp[0]};";
+            $port = "port={$tmp[1]};";
+        } else {
+            $host = "host={$serendipity['dbHost']};";
+        }
+    }
+
     $serendipity['dbConn'] = new PDO(
                                sprintf(
                                  'pgsql:%sdbname=%s',
-                                 strlen($serendipity['dbHost']) ? ('host=' . $serendipity['dbHost'] . ';') : '',
+                                 "$host$port",
                                  $serendipity['dbName']
                                ),
                                $serendipity['dbUser'],

@@ -53,10 +53,22 @@ function serendipity_db_connect() {
         $function = 'pg_connect';
     }
 
+    $host = port = '';
+    if (strlen($serendipity['dbHost'])) {
+        if (false !== strstr($serendipity['dbHost'], ':')) {
+            $tmp = explode(':', $serendipity['dbHost']);
+            $host = "host={$tmp[0]} ";
+            $port = "port={$tmp[1]} ";
+        } else {
+            $host = "host={$serendipity['dbHost']} ";
+        }
+    }
+
+
     $serendipity['dbConn'] = $function(
                                sprintf(
                                  '%sdbname=%s user=%s password=%s',
-                                 strlen($serendipity['dbHost']) ? ('host=' . $serendipity['dbHost'] . ' ') : '',
+                                 "$host$port",
                                  $serendipity['dbName'],
                                  $serendipity['dbUser'],
                                  $serendipity['dbPass']
