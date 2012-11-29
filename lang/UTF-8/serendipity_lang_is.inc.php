@@ -968,5 +968,9 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
 @define('SUMMARY', 'Summary');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
 @define('ARCHIVE_SORT_STABLE', 'Stable Archives');
 @define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');

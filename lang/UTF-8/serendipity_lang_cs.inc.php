@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.11 2012-09-09 20:17:24 VladaAjgl $
+<?php # lang_cs.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
 
 /**
- *  @version 1.11
+ *  @version 1.10
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -23,8 +23,6 @@
  *  @revisionDate 2011/04/17
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2012/01/08
- *  @author Vladimír Ajgl <vlada@ajgl.cz>
- *  @revisionDate 2012/09/09
  */
 $i18n_filename_from = array (
 'á','č','ď','é','ě','í','ĺ','ľ','ň','ó','ŕ','ř','ś','š','ť','ú','ů','ý','ź','ž',
@@ -37,11 +35,11 @@ $i18n_filename_to = array (
 '-', '', '', '',
 );
 @define('LANG_CHARSET',		'UTF-8');
-@define('SQL_CHARSET',		'utf8');
+@define('SQL_CHARSET', 'utf8');
 @define('DATE_LOCALES',		'cs_CZ.UTF-8, czech, cs');
 @define('DATE_FORMAT_ENTRY',		'%A, %e. %B %Y');
 @define('DATE_FORMAT_SHORT',		'%d.%m.%Y %H:%M');
-@define('WYSIWYG_LANG',		'cs-utf');
+@define('WYSIWYG_LANG', 'cs-utf');
 @define('NUMBER_FORMAT_DECIMALS',		'2');
 @define('NUMBER_FORMAT_DECPOINT',		',');
 @define('NUMBER_FORMAT_THOUSANDS',		' ');
@@ -1000,5 +998,9 @@ $i18n_filename_to = array (
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Čeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
 @define('SUMMARY', 'Souhrn');
-@define('ARCHIVE_SORT_STABLE', 'Neměnný archiv');
-@define('ARCHIVE_SORT_STABLE_DESC', 'Seřadí stránky archivu sestupně, takže jejich URL adresa bude odkazovat na stále stejné články a vyhledávače je nebudou muset re-indexovat.');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
+@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');

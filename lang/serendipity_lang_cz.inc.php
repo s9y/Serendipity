@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1.11 2012-09-09 20:17:18 VladaAjgl $
+<?php # lang_cz.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
 
 /**
- *  @version 1.11
+ *  @version 1.10
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -23,8 +23,6 @@
  *  @revisionDate 2011/04/17
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2012/01/08
- *  @author Vladimír Ajgl <vlada@ajgl.cz>
- *  @revisionDate 2012/09/09
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','µ','ò','ó','à','ø','¶','¹','»','ú','ù','ý','¼','¾',
@@ -999,6 +997,10 @@ $i18n_filename_to = array (
 @define('ACTIVE_COMMENT_SUBSCRIPTION', 'Odebíráno');
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Èeká na potvrzení');
 @define('NO_COMMENT_SUBSCRIPTION', 'Neodebíráno');
-@define('SUMMARY', 'Souhrn');
-@define('ARCHIVE_SORT_STABLE', 'Nemìnný archiv');
-@define('ARCHIVE_SORT_STABLE_DESC', 'Seøadí stránky archivu sestupnì, tak¾e jejich URL adresa bude odkazovat na stále stejné èlánky a vyhledávaèe je nebudou muset re-indexovat.');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
+
+@define('SUMMARY', 'Souhrn');@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');

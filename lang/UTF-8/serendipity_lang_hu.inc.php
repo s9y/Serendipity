@@ -1,4 +1,4 @@
-<?php # $Id: serendipity_lang_hu.inc.php 93 2005-05-12 10:49:41Z garvinhicking $
+<?php # $Id:$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by Márton Pósz <ful_s@AT@passwd.hu> and Hrotkó Gábor <roti@al.pmmf.hu>
@@ -965,5 +965,10 @@
 @define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
 @define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
 @define('SUMMARY', 'Summary');
+
+// Next lines were added on 2012/05/29
+@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
+
 @define('ARCHIVE_SORT_STABLE', 'Stable Archives');
 @define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
