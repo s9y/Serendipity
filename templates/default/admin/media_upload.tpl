@@ -219,7 +219,7 @@ function fillInput(source, target) {ldelim}
 
             <tr>
                 <td>{$CONST.SAVE_FILE_AS}</td>
-                <td><input class="input_textbox" type="text" id="target_filename_1" name="serendipity[target_filename][1]" value="" size="40" /></td>
+                <td><input class="input_textbox" type="text" id="target_filename_1" name="serendipity[target_filename][1]" value="" size="40" /> <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></td>
             </tr>
 
             <tr>
