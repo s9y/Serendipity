@@ -1508,8 +1508,8 @@ function &serendipity_getDBPermissionNames() {
 function &serendipity_getAllPermissionNames() {
     global $serendipity;
 
-    $DBperms =& serendipity_getDBPermissionNames();
-    $perms   =& serendipity_getPermissionNames();
+    $DBperms = serendipity_getDBPermissionNames();
+    $perms   = serendipity_getPermissionNames();
 
     foreach($DBperms AS $perm) {
         if (!isset($perms[$perm['property']])) {
