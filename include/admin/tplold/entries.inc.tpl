@@ -193,7 +193,7 @@
 </div><!-- // div.serendipity_admin_list drawList end -->
 
 {/if}{* $drawList end *}
-{if ( ( (!$switched_output && empty($entries)) || (!$drawList && empty($entries)) ) && ( $get.adminAction != 'new' ||  $get.adminAction != 'edit' ) && !$is_iframepreview )}
+{if ( ( (!$switched_output && empty($entries)) || (!$drawList && empty($entries)) ) && ( $get.adminAction != 'new' &&  $get.adminAction != 'edit' ) && !$is_iframepreview )}
 
 <div class="serendipity_admin_list">
 
