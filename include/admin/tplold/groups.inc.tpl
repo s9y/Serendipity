@@ -48,7 +48,7 @@
             {/foreach}
             </td>
         </tr>
-        {if !$new}
+        {if $start}
             <tr>
                 <td colspan="3" align="right">
                     <form action="?serendipity[adminModule]=groups" method="post">
