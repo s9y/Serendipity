@@ -977,3 +977,4 @@ $i18n_unknown = 'tw';
 
 @define('ARCHIVE_SORT_STABLE', 'Stable Archives');
 @define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
