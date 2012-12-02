@@ -107,7 +107,7 @@
                                             <img src="{serendipity_getFile file="admin/img/upgrade_now.png"}" title="{$CONST.UPGRADE}" alt="{$CONST.UPGRADE}" border="0" />
                                         </a>
                                     {elseif $plug.installable == true}
-                                        <a href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURL}{/if}">
+                                        <a href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">
                                             <img src="{if !empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} {serendipity_getFile file="admin/img/install_now_{$plug.pluginlocation|lower}.png"}{else}{serendipity_getFile file="admin/img/install_now.png"}{/if}" title="{$CONST.INSTALL}" alt="{$CONST.INSTALL}" border="0" />
                                         </a>
                                     {else}
