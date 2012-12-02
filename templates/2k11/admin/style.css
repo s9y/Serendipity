@@ -1,0 +1,877 @@
+/* normalize.css v1.0.1 | MIT License | git.io/normalize */
+article, aside, details,
+figcaption, figure, footer,
+header, hgroup, nav, section,
+summary { display: block; }
+
+audio, canvas,
+video {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+[hidden] { display: none; }
+
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+a:focus { outline: thin dotted; }
+
+a:active,
+a:hover { outline: 0; }
+
+abbr[title] { border-bottom: 1px dotted; }
+
+b, strong { font-weight: bold; }
+
+blockquote { margin: 1em 40px; }
+
+dfn { font-style: italic; }
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+code, kbd,
+pre, samp {
+    font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+    font-size: 1em;
+}
+
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+small { font-size: 80%; }
+
+sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+menu, ol,
+ul { padding: 0 0 0 40px; }
+
+nav ul,
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+img {
+    border: 0;
+    -ms-interpolation-mode: bicubic;
+}
+
+svg:not(:root) { overflow: hidden; }
+
+figure,
+form { margin: 0; }
+
+fieldset {
+    border: 1px solid #ccc;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+    border: 0;
+    padding: 0;
+    white-space: normal;
+    *margin-left: -7px;
+}
+
+button, input,
+select, textarea {
+    font-size: 100%;
+    margin: 0;
+    vertical-align: baseline;
+    *vertical-align: middle;
+}
+
+button, input { line-height: normal; }
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+    *overflow: visible;
+}
+
+button[disabled],
+input[disabled] { cursor: default; }
+
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+    *height: 13px;
+    *width: 13px;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+textarea {
+    overflow: auto;
+    vertical-align: top;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Base styles */
+html, button,
+input, select,
+textarea {
+    background: #fcfcfc;
+    color: #222;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* These selection declarations have to be separate. */
+::-moz-selection {
+    background: #3a4b6f;
+    color: #fff;
+    text-shadow: none;
+}
+
+::selection {
+    background: #3a4b6f;
+    color: #fff;
+    text-shadow: none;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1.5em 0;
+    padding: 0;
+}
+
+img { vertical-align: middle; }
+
+/* Responsive media objects
+   http://unstoppablerobotninja.com/entry/fluid-images */
+embed, object,
+audio, video,
+img { max-width: 100%; }
+
+video,
+img { height: auto; }
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea { resize: vertical; }
+
+/* Automagic quotes, http://html5doctor.com/blockquote-q-cite/ */
+q { quotes: '“' '”' '‘' '’'; }
+:lang(de) q { quotes: '„' '“' '‚' '‘'; }
+
+blockquote p { quotes: '“' '”'; }
+
+blockquote p:before {
+    content: '';
+    content: no-open-quote;
+}
+
+blockquote p:after {
+    content: '';
+    content: no-close-quote;
+}
+
+blockquote p:first-child:before {
+    content: '“';
+    content: open-quote;
+}
+
+blockquote p:last-child:after {
+    content: '”';
+    content: close-quote;
+}
+
+:lang(de) blockquote p,
+blockquote:lang(de) p { quotes: '„' '“'; }
+
+:lang(de) blockquote p:before,
+blockquote:lang(de) p:before {
+    content: '';
+    content: no-open-quote;
+}
+
+:lang(de) blockquote p:after,
+blockquote:lang(de) p:after {
+    content: '';
+    content: no-close-quote;
+}
+
+:lang(de) blockquote p:first-child:before,
+blockquote:lang(de) p:first-child:before {
+    content: '„';
+    content: open-quote;
+}
+
+:lang(de) blockquote p:last-child:after,
+blockquote:lang(de) p:last-child:after {
+    content: '“';
+    content: close-quote;
+}
+
+blockquote > cite,
+blockquote + cite { display: block; }
+
+blockquote > cite:before,
+blockquote + cite:before { content: "– "; }
+
+blockquote > cite { margin: 1.5em 0; }
+
+blockquote + cite { margin: 0 0 1.5em 3em; }
+
+dt { font-weight: bold; }
+dd { margin: 0; }
+
+caption, th { text-align: left; }
+
+li ul, li ol { margin: 0; }
+
+pre code { font-size: 1em; }
+
+p {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+p code, p samp,
+p kbd {
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hypens: none;
+    hyphens: none;
+}
+
+nav ul,
+nav ol { padding: 0; }
+
+/* CSS helper classes for various purposes */
+/* Image replacement */
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+}
+
+/* Hide from both screenreaders and browsers */
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders */
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* Extends the .visuallyhidden class to allow the element
+   to be focusable when navigated to via the keyboard */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* Clearfix: contain floats */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after { clear: both; }
+.clearfix { *zoom: 1; }
+
+/* Forms | forked from formalize.me */
+.input_full_wrap {
+    display: block;
+    padding-right: 8px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    position: relative;
+    vertical-align: top;
+    top: 5px;
+    top: 0 \0;
+    *top: -5px;
+}
+
+button:focus, input:focus,
+select:focus, textarea:focus {
+    -webkit-box-shadow: #0066ff 0 0 5px 0;
+    -moz-box-shadow: #0066ff 0 0 5px 0;
+    box-shadow: #0066ff 0 0 5px 0;
+    z-index: 1;
+}
+
+input[type="file"]:focus, input[type="file"]:active,
+input[type="radio"]:focus, input[type="radio"]:active,
+input[type="checkbox"]:focus, input[type="checkbox"]:active {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+button, input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    background: #ddd;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));
+    background-image: -webkit-linear-gradient(#ffffff, #dddddd);
+    background-image: -moz-linear-gradient(#ffffff, #dddddd);
+    background-image: -o-linear-gradient(#ffffff, #dddddd);
+    background-image: linear-gradient(#ffffff, #dddddd);
+    border: 1px solid;
+    border-color: #ddd #bbb #999;
+    color: #000;
+    outline: 0;
+    padding: 3px 10px;
+    text-shadow: #fff 0 1px 1px;
+    width: auto;
+    *padding-top: 2px;
+    *padding-bottom: 0;
+}
+
+button:hover, input[type="button"]:hover,
+input[type="reset"]:hover,
+input[type="submit"]:hover {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #eeeeee), color-stop(100%, #cccccc));
+    background-image: -webkit-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
+    background-image: -moz-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
+    background-image: -o-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
+    background-image: linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
+}
+
+button:active, input[type="button"]:active,
+input[type="reset"]:active,
+input[type="submit"]:active {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #dddddd), color-stop(100%, #eeeeee));
+    background-image: -webkit-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
+    background-image: -moz-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
+    background-image: -o-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
+    background-image: linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
+    -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    border-color: #999 #bbb #ddd;
+}
+
+button {
+    *padding-top: 1px;
+    *padding-bottom: 1px;
+}
+
+input[type="date"], input[type="datetime"],
+input[type="datetime-local"], input[type="month"],
+input[type="number"], input[type="password"],
+input[type="time"], input[type="week"],
+textarea, select, input[type="email"],
+input[type="search"], input[type="tel"],
+input[type="text"], input[type="url"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-background-clip: padding;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid;
+    border-color: #c1c1c1 #c1c1c1 #e1e1e1;
+    color: #222;
+    outline: 0;
+    padding: 2px 3px;
+    text-align: left;
+    height: 1.8em;
+    *padding-top: 2px;
+    *padding-bottom: 1px;
+    *height: auto;
+}
+
+input[type="date"][disabled], input[type="datetime"][disabled],
+input[type="datetime-local"][disabled], input[type="month"][disabled],
+input[type="number"][disabled], input[type="password"][disabled],
+input[type="time"][disabled], input[type="week"][disabled],
+textarea[disabled], select[disabled], input[type="email"][disabled],
+input[type="search"][disabled], input[type="tel"][disabled],
+input[type="text"][disabled], input[type="url"][disabled] { background-color: #eee; }
+
+button[disabled], input[disabled],
+select[disabled], select[disabled] option,
+select[disabled] optgroup, textarea[disabled] {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: #888;
+    cursor: default;
+}
+
+/* Separate rule for Firefox.
+   Separate rule for IE, too.
+   Cannot stack with WebKit's. */
+::-webkit-input-placeholder { color: #888; }
+
+input:-moz-placeholder,
+textarea:-moz-placeholder { color: #888; }
+
+input.placeholder_text,
+textarea.placeholder_text { color: #888; }
+
+:invalid {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+textarea, select[size],
+select[multiple] { height: auto; }
+
+@media (-webkit-min-device-pixel-ratio: 0) {
+    select {
+        background-image: url("data:image/gif;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==");
+        background-repeat: no-repeat;
+        background-position: right center;
+        padding-right: 20px;
+    }
+
+    select[size],
+    select[multiple] {
+        background-image: none;
+        padding: 0;
+    }
+}
+
+textarea {
+    min-height: 40px;
+    overflow: auto;
+    resize: vertical;
+    width: 100%;
+}
+
+optgroup {
+    color: #222;
+    font-style: normal;
+    font-weight: normal;
+}
+
+/* Backend-specific form stuff */
+label, .standout,
+legend > span { font-weight: bold; }
+
+.block_level,
+.form_multiselect label,
+label > span { display: block; }
+
+label > span,
+input[type=checkbox] + label,
+input[type=radio] + label,
+.form_check label { font-weight: normal; }
+
+input[type=checkbox] { margin-right: .4em; }
+
+.form_radio {
+    float: left;
+    margin-right: 1em;
+}
+
+.form_buttons {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.form_field, .form_area,
+.form_check, .form_radio,
+.form_select, .form_multiselect {
+    margin-top: .75em;
+    margin-bottom: .75em;
+}
+
+/* Styles common to all resolutions */
+
+/* Color scheme:
+   -------------
+   Dark blue:   #25253d     Mid blue:    #3e5f81
+   Lite blue:   #ccdee7     Yellow:      #ffbf00
+   Off black:   #222        Off white:   #fcfcfc
+ */
+
+html { background: #ccdee7; }
+
+body {
+    background: #fcfcfc;
+    font-size: 0.875em;
+}
+
+a, a:visited { color: #3a4b6f; }
+
+a:hover, a:focus { color: #d06604; }
+
+h1 {
+    font-size: 1.71429em;
+    line-height: 1.75em;
+    margin: 0.875em 0;
+}
+
+h2 {
+    font-size: 1.42857em;
+    line-height: 1.05em;
+    margin: 1.05em 0;
+}
+
+h3 {
+    font-size: 1.28571em;
+    line-height: 1.16667em;
+    margin: 1.16667em 0;
+}
+
+h4 {
+    font-size: 1.14286em;
+    line-height: 1.3125em;
+    margin: 1.3125em 0;
+}
+
+h5, h6 { font-size: 1em; }
+
+h5, h6,
+blockquote,
+ul, ol, dl,
+p, table,
+details,
+.standalone {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+summary { cursor: pointer; }
+
+.plainList,
+.imageMessage ul,
+.actions {
+    list-style: none;
+    padding: 0;
+}
+
+/* Backend messages */
+.msg_error, .msg_success,
+.msg_notice {
+    display: block;
+    margin: 1.5em 0;
+    padding: 10px;
+}
+
+.msg_error {
+    background: #f2dede;
+    border: 1px solid #e4b9b9;
+    color: #b94a48;
+}
+
+.msg_success {
+    background: #dff0d8;
+    border: 1px solid #c1e2b3;
+    color: #468847;
+}
+
+.msg_notice {
+    background: #fcf8e3;
+    border: 1px solid #f7ecb5;
+    color: #c09853;
+}
+
+/* Layout */
+#top > div,
+#main {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 96%;
+}
+
+/* Header area */
+#top {
+    background: #25253d;
+    color: #fcfcfc;
+}
+
+#top a, #top a:visited { color: #ffbf00; }
+#top a:hover, #top a:focus { color: #fcfcfc; }
+
+#banner h1,
+#banner a { float: left; }
+
+#banner a { margin: 2.4em 0 0 2em; }
+
+#user_menu { clear: both; }
+
+#user_menu h2 { margin: 1.5em 0 0; }
+
+#user_menu li,
+.edit_actions li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+    *display: inline;
+    *zoom: 1;
+}
+
+.edit_actions li { margin: 0 0 0 1em; }
+
+.category_data,
+.user_name, .group_name,
+.edit_actions { float: left; }
+
+.category_data,
+.user_name, .group_name { min-width: 8em; }
+
+.category_data { margin: 0 1em 0 0; }
+
+/* Content area */
+.comment_data dt, .comment_data dd,
+.template_info dt,
+.template_info dd { float: left; }
+
+.comment_data dt,
+.template_info dt { margin: 0 .4em 0 0; }
+
+.comment_data dt, .template_info dt,
+.comment_summary, .comment_full { clear: both; }
+
+.actions li {
+    display: inline-block;
+    margin: 0 .4em 0 0;
+    *display: inline;
+    *zoom: 1;
+}
+
+#entry_skip legend,
+#entry_skip label,
+#skipto_entry,
+.dialog_delrip li {
+    float: left;
+    margin: 0 .4em 0 0;
+}
+
+.sub_perm { margin-left: 1em; }
+
+/* Login form */
+#login { margin: 2em auto 1em; }
+
+#back_to_blog {
+    display: block;
+    margin: 1em auto 2em;
+}
+
+#back_to_blog,
+#login { max-width: 24em; }
+
+#login .form_check,
+#login_send { float: left; }
+
+#login_send { margin: .5em 0 0 7.5em;}
+
+#login .form_field label {
+    display: inline-block;
+    min-width: 8em;
+    *display: inline;
+    *zoom: 1;
+}
+
+/* Footer area */
+#meta {
+    background: #ccdee7;
+    border-top: 1px solid #25253d;
+    text-align: center;
+}
+
+#meta small {
+    display: block;
+    font-size: 1em;
+    padding: 8px;
+}
+
+/* Plugin manager – might go into pluginmanager.css in the end */
+#configuration_footer { height: 100px; }
+
+.plugin_count {
+    clear: both;
+    margin: 0 0 1.5em;
+}
+
+/* Media db – might go into imgedit.css in the end */
+#fs_crop { min-height: 200px; }
+
+.media_pane .pagination { margin: 0; }
+
+/* Media Queries for Responsive Design. */
+@media only screen and (min-width: 481px) { }
+
+@media only screen and (min-width: 768px) {
+    body { font-size: 1em; }
+
+    h1 {
+        font-size: 2em;
+        line-height: 1.5em;
+        margin: 0.75em 0;
+    }
+
+    h2 {
+        font-size: 1.5em;
+        line-height: 1em;
+        margin: 1em 0;
+    }
+
+    pre {
+        font-size: 0.875em;
+        line-height: 1.71429em;
+        margin: 1.71429em 0;
+    }
+
+    /* Plugin manager – might go into pluginmanager.css in the end */
+    .pluginmanager_side {
+        float: left;
+        margin: 0 0 1.5em;
+    }
+
+    #pluginlist_sidebar .pluginmanager_side  {
+        margin-right: 1%;
+        width: 32%;
+    }
+
+    #pluginlist_event .pluginmanager_side  {
+        margin-right: 1%;
+        width: 48%;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    #banner,
+    #content {
+        float: left;
+        margin: 0 2% 0 0;
+    }
+
+    #user_menu,
+    #main_menu {
+        float: right;
+        margin: 0 0 0 2%;
+    }
+
+    #banner, #user_menu { width: 48%; }
+    .lt-ie8 #banner, .lt-ie8 #user_menu { width: 47.5%; }
+
+    #user_menu {
+        clear: none;
+        text-align: right;
+    }
+
+    #user_menu li,
+    .edit_actions li { margin: 0 0 0 1em; }
+
+    .edit_actions { float: right; }
+
+    #content { width: 73%; }
+    .lt-ie8 #content { width: 72.5%; }
+
+    #main_menu { width: 23%; }
+    .lt-ie8 #main_menu { width: 22.5%; }
+
+    #login { margin: 4em auto 1em; }
+
+    #back_to_blog { margin: 1em auto 4em; }
+}
+
+@media only screen and (min-width: 1400px) {
+    body { font-size: 1.125em; }
+}
