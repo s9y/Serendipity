@@ -1,6 +1,9 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 
+<script src="serendipity_define.js.php"></script>
+<script src="serendipity_editor.js"></script>
+
 {if $entry_vars.errMsg}
     <span class="msg_error">{$entry_vars.errMsg}</span>
 {/if}
@@ -131,5 +134,3 @@
     {/foreach}
     {$entry_vars.wysiwyg_blocks|@serendipity_refhookPlugin:'backend_wysiwyg_finish'}
 {/if}
-<script src="serendipity_define.js.php"></script>
-<script src="serendipity_editor.js"></script>
