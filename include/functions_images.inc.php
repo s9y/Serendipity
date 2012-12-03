@@ -3295,21 +3295,29 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     if ($type == 'dir') {
         if (!is_dir($real_oldDir)) {
-            printf(ERROR_FILE_NOT_EXISTS . '<br />', $oldDir);
+            echo '<span class="msg_error">';
+            printf(ERROR_FILE_NOT_EXISTS, . '<span class="block_level">' . $oldDir . '</span>');
+            echo '</span>';
             return false;
         }
 
         if (is_dir($real_newDir)) {
-            printf(ERROR_FILE_EXISTS . '<br />', $newDir);
+            echo '<span class="msg_error">';
+            printf(ERROR_FILE_EXISTS, . '<span class="block_level">' . $newDir . '</span>');
+            echo '</span>';
             return false;
         }
 
         if (!rename($real_oldDir, $real_newDir)) {
-            printf(MEDIA_DIRECTORY_MOVE_ERROR . '<br />', $newDir);
+            echo '<span class="msg_error">';
+            printf(MEDIA_DIRECTORY_MOVE_ERROR, . '<span class="block_level">' . $newDir . '</span>');
+            echo '</span>';
             return false;
         }
 
-        printf(MEDIA_DIRECTORY_MOVED . '<br />', $newDir);
+        echo '<span class="msg_success">';
+        printf(MEDIA_DIRECTORY_MOVED, . '<span class="block_level">' . $newDir . '</span>');
+        echo '</span>';
 
         $dirs = serendipity_db_query("SELECT id, path
                                         FROM {$serendipity['dbPrefix']}images
