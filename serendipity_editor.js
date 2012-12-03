@@ -398,4 +398,249 @@ function serendipity_imageSelector_done(textarea)
     parent.self.close();
 }
 
+function toggle_extended(setCookie) {
+    var textarea = document.getElementById('serendipity[extended]');
+    var button   = document.getElementById('option_extended');
+    var tools    = document.getElementById('tools_extended');
+    if ( textarea.style.display == 'none' ) {
+        textarea.style.display = '';
+        tools.style.display = '';
+        button.src = minus_img;
+        if (setCookie == true) {
+            document.cookie = 'serendipity[toggle_extended]=true;';
+        }
+    } else {
+        textarea.style.display = 'none';
+        tools.style.display = 'none';
+        button.src = plus_img;
+        if (setCookie == true) {
+            document.cookie = 'serendipity[toggle_extended]=;';
+        }
+    }
+}
+
+var selector_toggle = new Array();
+function showItem(id) {
+    var selected = 0;
+    if (typeof(id) == 'undefined' || typeof(id) == 'object') {
+        id = 'categoryselector';
+    }
+
+    if (document.getElementById) {
+        el = document.getElementById(id);
+        if (selector_toggle[id] && selector_toggle[id] == 'off') {
+            selector_restore[id] = new Array();
+            selector_toggle[id]  = 'on';
+
+            /* Hack to make sure that when the single dropdown is shown, don't have multiple selections */
+            last = 0;
+
+            for (i=0; i < el.options.length; i++) {
+                if (el.options[i].selected == true) {
+                    selected++;
+                    last = i;
+                    selector_restore[id][last] = 'on';
+                }
+
+                if (selected > 1) {
+                    /* If there is more than one selected, we reset all those to false
+                       This is because otherwise the label will say 'No Category', but the categories will still be selected */
+                    for (j=0; j < el.options.length; j++) {
+                        /* Save selection in array to later restore them */
+                        if (el.options[j].selected == true) {
+                            el.options[j].selected = false;
+                            selector_restore[id][j] = 'on';
+                            last = j;
+                        } else {
+                            selector_restore[id][j] = false;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            el.selectedIndex = null;
+            if (last > 0) {
+                el.selectedIndex = last;
+            }
+
+            el.size = 1;
+
+            /* Show a normal dropdown */
+            if (el.multiple) {
+                el.multiple = false;
+            }
+
+            document.getElementById('option_' + id).src = plus_img;
+        } else {
+            selector_store[id] = el.size;
+            if (selector_store[id] == 0) {
+                selector_store[id] = 5;
+            }
+
+            last = 0;
+            if (el.selectedIndex > 0) {
+                if (!selector_restore[id]) {
+                    selector_restore[id] = new Array();
+                }
+
+                for (j=0; j < el.options.length; j++) {
+                    /* Save selection in array to later restore them */
+                    if (el.options[j].selected == true) {
+                        selector_restore[id][j] = 'on';
+                        last = j;
+                    }
+                }
+            }
+            el.selectedIndex = -1;
+            el.size = cat_count;
+            selector_toggle[id] = 'off';
+
+            /* Show multiple items */
+            el.multiple = true;
+
+            /* Restore previously selected items? */
+            last = 0;
+            for (i = 0; i < el.options.length; i++) {
+                if (selector_restore && selector_restore[id] && selector_restore[id][i] && selector_restore[id][i] == 'on') {
+                    val = el.options[i].value;
+                    if (el.options[i].selected != true) {
+                        el.options[i].selected = true;
+                        last = i;
+                        // [TODO] IE Bug: Don't ask me why, but this restoring only works in Internet Explorer if you put this:
+                        // alert('it doesnt matter what, just the alert is important');
+                    }
+                }
+            }
+
+            document.getElementById('option_' + id).src = minus_img;
+        }
+    }
+}
+
+function rememberMediaOptions() {
+    el = document.getElementById('imageForm');
+    for (i = 0; i < el.elements.length; i++) {
+        elname = new String(el.elements[i].name);
+        elname = elname.replace(/\[/g, '_');
+        elname = elname.replace(/\]/g, '');
+
+        if (el.elements[i].type == 'radio') {
+            if (el.elements[i].checked) {
+                SetCookie(elname, el.elements[i].value);
+            }
+        } else if (typeof(el.elements[i].options) == 'object') {
+            SetCookie(elname, el.elements[i].options[el.elements[i].selectedIndex].value);
+        }
+    }
+}
+
+function rename(id, fname) {
+    if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {
+        newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
+        location.href=newloc;
+    }
+}
+
+var tree_toggle_state = 'expand';
+function treeToggleAll() {
+    if (tree_toggle_state == 'expand') {
+        tree_toggle_state = 'collapse';
+        tree.expandAll();
+    } else {
+        tree_toggle_state = 'expand';
+        tree.collapseAll();
+        coreNode.expand();
+    }
+}
+
+function getfilename(value) {
+    re = /^.+[\/\\]+?(.+)$/;
+    return value.replace(re, "$1");
+}
+
+isFileUpload = true;
+function hideForeign() {
+    document.getElementById('foreign_upload').style.display = 'none';
+    document.getElementById('imageurl').value = '';
+    isFileUpload = false;
+}
+
+function rememberUploadOptions() {
+    td     = document.getElementById('target_directory_2');
+    td_val = td.options[td.selectedIndex].value;
+    SetCookie("addmedia_directory", td_val);
+}
+
+var upload_fieldcount = 1;
+function addUploadField() {
+    upload_fieldcount++;
+
+    fields = jQuery('#upload_template').clone();
+    fields.attr('id', 'upload_form_' + upload_fieldcount);
+    fields.css('display', 'block');
+
+    userfile       = jQuery('.uploadform_userfile',         fields);
+    targetfilename = jQuery('.uploadform_target_filename',  fields);
+    targetdir      = jQuery('.uploadform_target_directory', fields);
+    columncount    = jQuery('.uploadform_column_count',     fields);
+
+    userfile.attr('id', 'userfile_' + upload_fieldcount);
+    userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
+
+    targetfilename.attr('id', 'target_filename_' + upload_fieldcount);
+    targetfilename.attr('name', 'serendipity[target_filename][' + upload_fieldcount + ']');
+
+    targetdir.attr('id', 'target_directory_' + upload_fieldcount);
+    targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
+
+    columncount.attr('id', 'column_count_' + upload_fieldcount);
+    columncount.attr('name', 'serendipity[column_count][' + upload_fieldcount + ']');
+
+    fields.insertBefore('#upload_form');
+
+    document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
+}
+
+var inputStorage = new Array();
+function checkInputs() {
+    for (i = 1; i <= upload_fieldcount; i++) {
+        if (!inputStorage[i]) {
+            fillInput(i, i);
+        } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) {
+            fillInput(i, i);
+        }
+    }
+
+}
+
+function fillInput(source, target) {
+    useDuplicate = false;
+
+    // First field is a special value for foreign URLs instead of uploaded files
+    if (source == 1 && document.getElementById('imageurl').value != "") {
+        sourceval = getfilename(document.getElementById('imageurl').value);
+        useDuplicate = true;
+    } else {
+        sourceval = getfilename(document.getElementById('userfile_' + source).value);
+    }
+
+    if (sourceval.length > 0) {
+        document.getElementById('target_filename_' + target).value = sourceval;
+        inputStorage[target] = sourceval;
+    }
+
+    // Display filename in duplicate form as well!
+    if (useDuplicate) {
+        tkey = target + 1;
+
+        if (!inputStorage[tkey] || inputStorage[tkey] == document.getElementById('target_filename_' + tkey).value) {
+            document.getElementById('target_filename_' + (target+1)).value = sourceval;
+            inputStorage[target + 1] = '~~~';
+        }
+    }
+}
+
+
+
 // -->

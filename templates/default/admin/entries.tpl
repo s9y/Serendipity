@@ -1,3 +1,6 @@
+<script type="text/javascript" language="JavaScript" src="serendipity_define.js.php"></script>
+<script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
+
 <!-- ADMIN-ENTRY TEMPLATE: entries.tpl START -->
 {*** POSSIBLE ERROR MESSAGES START ***}
 {if $entry_vars.errMsg}
@@ -73,7 +76,6 @@
 
             selector_toggle['categoryselector'] = '{$entry_vars.cat_state}';
             </script>
-            <script type="text/javascript" language="JavaScript" src="{serendipity_getFile file='admin/category_selector.js'}"></script>
             <script type="text/javascript" language="JavaScript">
              addLoadEvent(showItem);
             </script>
@@ -227,6 +229,4 @@
 {/if}
 {*** SPAWN WYSIWYG EDITORS END ***}
 
-<script type="text/javascript" language="JavaScript" src="serendipity_define.js.php"></script>
-<script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
 <!-- ADMIN-ENTRY TEMPLATE: entries.tpl END -->
