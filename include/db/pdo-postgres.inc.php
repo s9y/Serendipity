@@ -216,12 +216,12 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
 
     if (!$serendipity['dbSth']) {
         if (!$expectError && !$serendipity['production']) {
-            print "Error in $sql<br/>\n";
+            print "<span class='msg_error'>Error in $sql</span>";
             print $serendipity['dbConn']->errorInfo() . "<BR/>\n";
             if (function_exists('debug_backtrace')) {
                 highlight_string(var_export(debug_backtrace(), 1));
             }
-            print "<br><code>$sql</code>\n";
+            print "<pre>$sql</pre>\n";
         }
         return $type_map['false'];
     }
