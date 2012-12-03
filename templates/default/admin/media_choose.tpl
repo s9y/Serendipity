@@ -56,7 +56,7 @@
         <script type="text/javascript" language="Javascript" src="{$serendipityHTTPPath}serendipity_editor.js"></script>
 
         {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-script>
+
     </head>
 
     <script type="text/javascript">
