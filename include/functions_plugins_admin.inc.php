@@ -112,7 +112,7 @@ function show_plugins($event_only = false, $sidebars = null)
         $plugin_placements = $sidebars;
     }
     $data['plugin_placements'] = $plugin_placements;
-    //???$ownership = array();
+    $ownership = array();
 
     $total = 0;
     foreach ($plugin_placements as $plugin_placement) {
