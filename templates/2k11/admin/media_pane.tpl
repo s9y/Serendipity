@@ -11,7 +11,7 @@
     <fieldset>
         <legend><span>{$CONST.FILTERS}</span></legend>
 
-        <a id="toggle_filters" class="block_level" href="#" onclick="showFilters(); return false">{$CONST.FILTERS}</a>
+        <a id="toggle_filters" class="icon_link" href="#" title="{$CONST.FILTERS}" onclick="showFilters(); return false"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a>
 
         <div id="media_filter" class="clearfix">
             <div id="media_filter_path" class="form_select">

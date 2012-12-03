@@ -19,7 +19,7 @@
         {* TODO: this should be input[type=datetime] *}
         <label for="serendipityNewTimestamp">{$CONST.DATE}:</label>
         <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="text" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}">
-        <a id="reset_timestamp" href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}">{$CONST.RESET_DATE}</a>
+        <a id="reset_timestamp" class="icon_link" href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></a>
     </div>
 {/if}
     <div class="form_select">

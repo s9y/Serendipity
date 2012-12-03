@@ -425,6 +425,12 @@ nav ol { padding: 0; }
 .icon-download:before { content: '📥'; }
 .icon-clock:before { content: '🕔'; }
 
+.icon_link {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+
 /* Forms | forked from formalize.me */
 .input_full_wrap {
     display: block;
