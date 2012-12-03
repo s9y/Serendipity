@@ -70,7 +70,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                 $entry['body'] .= ' ' . $entry['extended'];
                 $ext = '';
             } elseif ($entry['exflag']) {
-                $ext = '<br /><a href="' . $entry['feed_entryLink'] . '#extended">' . sprintf(VIEW_EXTENDED_ENTRY, htmlspecialchars($entry['title'])) . '</a>';
+                $ext = '<a class="block_level" href="' . $entry['feed_entryLink'] . '#extended">' . sprintf(VIEW_EXTENDED_ENTRY, htmlspecialchars($entry['title'])) . '</a>';
             } else {
                 $ext = '';
             }

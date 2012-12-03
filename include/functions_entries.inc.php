@@ -1500,7 +1500,7 @@ function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, 
         if ($cat['parentid'] == $id) {
             switch ($type) {
                 case 0:
-                    $ret .= str_repeat('&nbsp;', $level * 2).'&bull;&nbsp;<span id="catItem_' . $cat['categoryid'] . '"' . (($cat['categoryid'] && in_array($cat['categoryid'], $select)) ? ' selected="selected"' : '') . '><a href="?serendipity[adminModule]=category&amp;serendipity[cat][catid]=' . $cat['categoryid'] . '">' . (!empty($cat['category_icon']) ? '<img style="vertical-align: middle;" src="' . $cat['category_icon'] . '" border="0" alt="' . $cat['category_name'] . '"/> ' : '') . htmlspecialchars($cat['category_name']) . (!empty($cat['category_description']) ? ' - ' . htmlspecialchars($cat['category_description']) : '') . '</a></span><br/>' . "\n";
+                    $ret .= str_repeat('&nbsp;', $level * 2).'&bull;&nbsp;<span class="block_level" id="catItem_' . $cat['categoryid'] . '"' . (($cat['categoryid'] && in_array($cat['categoryid'], $select)) ? ' selected="selected"' : '') . '><a href="?serendipity[adminModule]=category&amp;serendipity[cat][catid]=' . $cat['categoryid'] . '">' . (!empty($cat['category_icon']) ? '<img style="vertical-align: middle;" src="' . $cat['category_icon'] . '" border="0" alt="' . $cat['category_name'] . '"/> ' : '') . htmlspecialchars($cat['category_name']) . (!empty($cat['category_description']) ? ' - ' . htmlspecialchars($cat['category_description']) : '') . '</a></span>';
                     break;
                 case 1:
                 case 2:
@@ -1525,7 +1525,7 @@ function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, 
                           htmlspecialchars($cat['category_name']));
                     } else {
                         $ret .= sprintf(
-                          '%s<a href="%s" title="%s">%s</a><br />',
+                          '<span class="block_level">%s<a href="%s" title="%s">%s</a></span>',
                           str_repeat('&#160;', $level * 3),
                           serendipity_categoryURL($cat, 'serendipityHTTPPath'),
                           htmlspecialchars($cat['category_description']),

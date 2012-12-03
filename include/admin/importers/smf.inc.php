@@ -13,7 +13,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
     var $categories  = array();
 
     function getImportNotes() {
-        return 'SMF uses salted MD5 passwords that Serendipity cannot import. Thus, those passwords are incompatible with the MD5 hashing of Serendipity. The passwords for all users have been set to a random string. <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.<br />';
+        return '<p>SMF uses salted MD5 passwords that Serendipity cannot import. Thus, those passwords are incompatible with the MD5 hashing of Serendipity. The passwords for all users have been set to a random string. <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.</p>';
     }
 
     function Serendipity_Import_smf($data) {

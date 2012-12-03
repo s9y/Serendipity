@@ -128,7 +128,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     }
 
     if (!empty($serendipity['GET']['url'])) {
-        $entry['body'] .= "\n" . '<br /><a href="' . htmlspecialchars(utf8_decode(urldecode($serendipity['GET']['url']))) . '">' . $entry['title'] . '</a>';
+        $entry['body'] .= "\n" . '<a class="block_level" href="' . htmlspecialchars(utf8_decode(urldecode($serendipity['GET']['url']))) . '">' . $entry['title'] . '</a>';
     }
 
     $hidden = '';
@@ -423,16 +423,15 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                     <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
                             <td align="left" width="70%">
-                                <input class="input_checkbox" id="checkbox_allow_comments" type="checkbox" name="serendipity[allow_comments]" value="true" <?php echo $allow_comments; ?> /><label for="checkbox_allow_comments"><?php echo COMMENTS_ENABLE; ?></label><br />
+                                <input class="input_checkbox" id="checkbox_allow_comments" type="checkbox" name="serendipity[allow_comments]" value="true" <?php echo $allow_comments; ?> /><label for="checkbox_allow_comments"><?php echo COMMENTS_ENABLE; ?></label>
                                 <input class="input_checkbox" id="checkbox_moderate_comments" type="checkbox" name="serendipity[moderate_comments]" value="true" <?php echo $moderate_comments; ?> /><label for="checkbox_moderate_comments"><?php echo COMMENTS_MODERATE; ?></label>
                             </td>
                             <td align="right" rowspan="2" valign="middle" width="30%">
-                                <input accesskey="p" type="submit" value="- <?php echo PREVIEW; ?> -" class="serendipityPrettyButton input_button"  style="width: 150px" onclick="document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';" /><br />
+                                <input accesskey="p" type="submit" value="- <?php echo PREVIEW; ?> -" class="serendipityPrettyButton input_button"  style="width: 150px" onclick="document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';" />
                                 <input accesskey="s" type="submit" onclick="return checkSave();" value="- <?php echo SAVE; ?> -" class="serendipityPrettyButton input_button" style="width: 150px" />
                             </td>
                         </tr>
                     </table>
-                    <br />
                 </td>
             </tr>
 
@@ -491,7 +490,6 @@ if (!$serendipity['wysiwyg']) {
 
             <tr>
                 <td colspan="3">
-                    <br />
                     <fieldset>
                         <legend><b><?php echo ADVANCED_OPTIONS; ?></b></legend>
 <?php

@@ -648,7 +648,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $data['case_scale'] = true;
         $data['print_SCALING_IMAGE'] = sprintf(
-          SCALING_IMAGE . '<br />',
+          SCALING_IMAGE,
           $file['path'] . $file['name'] .'.'. $file['extension'],
           (int)$serendipity['GET']['width'],
           (int)$serendipity['GET']['height']

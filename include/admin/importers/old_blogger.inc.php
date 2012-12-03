@@ -59,7 +59,7 @@ class Serendipity_Import_OldBlogger extends Serendipity_Import {
 
 <p class="style1">BLOGGER.COM to SERENDIPITY IMPORT</p>
 <p class="style2">Version 0.1,( 29/10/2005 )</p>
-<p class="style2"> <br />
+<p class="style2">
   1. First go to Blogger.com, login.</p>
 <p class="style2">2. Go to the templates section. Set the following as your template. You should backup the current template if you want to reset it back after this operation. Click &quot;Save template changes&quot; button to save this new template.</p>
 <p class="style2">
@@ -97,10 +97,8 @@ ENDPOST
 <p class="style2">9. Now in the box below type in the path to the &quot;index.html&quot; file blogger created under your &quot;blogger&quot; directory.  File path should then look something like &quot;/httpdocs/blogger/index.html&quot;.</p>
 <p class="style2">10. This script will create the users as from the blogger blog being imported. However if a user already exists, then that user will be used instead of creating a new user with similar name. For the new users that this script will create, you need to provide a default password. Type it in the box below.</p>
 <p class="style2">11. Click &quot;Submit&quot;. Your posts and comments should be imported to serendipity!</p>
-<p class="style2"> If you have questions or problems, feel free to drop me a mail at jaa at technova dot com dot mv.<br />
-  <br />
-Jaa<br />
-http://jaa.technova.com.mv</p>';
+<p class="style2"> If you have questions or problems, feel free to drop me a mail at jaa at technova dot com dot mv.</p>
+<p class="style2">Jaa, http://jaa.technova.com.mv</p>';
         return $out;
     }
 
@@ -127,45 +125,45 @@ http://jaa.technova.com.mv</p>';
             # locate the post title
             if (preg_match("/TITLE:(.*)/", $post, $title)) {
                 $title = trim($title[1]);
-                echo "<b>" . htmlspecialchars($title) . "</b><br />";
+                echo "<b class='block_level'>" . htmlspecialchars($title) . "</b>";
             } else {
                 $title = "";
-                echo "<b>Empty title</b><br />";
+                echo "<b class='block_level'>Empty title</b>";
             }
 
             # locate the post author
             if (preg_match("/AUTHOR:(.*)/", $post, $author)) {
                 $author = trim($author[1]);
-                echo "<em>" . htmlspecialchars($author[1]) . "</em><br />";
+                echo "<em class='block_level'>" . htmlspecialchars($author[1]) . "</em>";
             } else {
                 $author = "";
-                echo "<em>Unknown author</em><br />";
+                echo "<em class='block_level'>Unknown author</em>";
             }
 
             # locate the post date
             if (preg_match("/DATE:(.*)/", $post, $date)) {
                 $date = strtotime(trim($date[1]));
-                echo "Posted on " . htmlspecialchars($date[1]) . ".<br />";
+                echo "<span class='block_level'>Posted on " . htmlspecialchars($date[1]) . ".</span>";
             } else {
                 $date = time();
-                echo "Unknown posting time.<br />";
+                echo "<span class='block_level'>Unknown posting time.</span>";
             }
 
             # locate the post body
             if (preg_match("/BODY:(.*)-----/sU", $post, $body)) {
                 $body = trim($body[1]);
-                echo strlen($body) . " Bytes of text.<br />";
+                echo '<span class="block_level">' . strlen($body) . " Bytes of text.</span>";
             } else {
                 $body = "";
-                echo "<strong>Empty Body!</strong><br />";
+                echo "<span class='msg_error'>Empty Body!</span>";
             }
 
             # find all comments for the post using pattern matching
             if (preg_match_all( "/COMMENT:(.*)----/sU", $post, $commentlist)) {
-                echo count($commentlist[1]) . " comments found.<br />";
+                echo '<span class="block_level">' . count($commentlist[1]) . " comments found.</span>";
             } else {
                 $commentlist = array();
-                echo "No comments found.<br />";
+                echo "<span class='block_level'>No comments found.</span>";
             }
 
             $result = serendipity_db_query("SELECT authorid FROM ". $serendipity['dbPrefix'] ."authors WHERE username = '". serendipity_db_escape_string($author) ."' LIMIT 1", true, 'assoc');
@@ -192,12 +190,12 @@ http://jaa.technova.com.mv</p>';
                            'authorid'       => $authorid
                            );
 
-            echo "Entry insert...<br />";
+            echo "<span class='block_level'>Entry insert...</span>";
             if (!is_int($id = serendipity_updertEntry($entry))) {
-                echo "Inserting entry failed.<br />";
+                echo "<span class='msg_error'>Inserting entry failed.</span>";
                 return $id;
             } else {
-                echo "Entry $id inserted.<br />";
+                echo "<span class='msg_notice'>Entry $id inserted.</span>";
             }
 
             # iterate through all comments
@@ -242,10 +240,10 @@ http://jaa.technova.com.mv</p>';
             }
 
             serendipity_db_query("UPDATE ". $serendipity['dbPrefix'] ."entries SET comments = ". $c ." WHERE id = ". $id);
-            echo "Comment count set to: ". $c ."<br />";
+            echo "<span class='block_level'>Comment count set to: ". $c ."</span>";
         }
 
-        echo "Import finished.<br />";
+        echo "<span class='msg_success'>Import finished.</span>";
 
         return true;
     }

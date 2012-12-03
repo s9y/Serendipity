@@ -936,14 +936,14 @@ function serendipity_displayTopUrlList($list, $limit, $use_links = true, $interv
         foreach ($rows as $row) {
             if ($use_links) {
                 printf(
-                    '<a href="%1$s://%2$s" title="%2$s" >%2$s</a> (%3$s)<br />',
+                    '<span class="block_level"><a href="%1$s://%2$s" title="%2$s" >%2$s</a> (%3$s)</span>',
                     htmlspecialchars($row['scheme']),
                     htmlspecialchars($row['host']),
                     htmlspecialchars($row['total'])
                 );
             } else {
                 printf(
-                    '%1$s (%2$s)<br />',
+                    '<span class="block_level">%1$s (%2$s)</span>',
                     htmlspecialchars($row['host']),
                     htmlspecialchars($row['total'])
                 );

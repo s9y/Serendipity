@@ -492,8 +492,8 @@ function serendipity_insertHotlinkedImageInDatabase($filename, $url, $authorid =
 
     $sql = serendipity_db_query($query);
     if (is_string($sql)) {
-        echo $query . '<br />';
-        echo $sql . '<br />';
+        echo '<span class="block_level">' . $query . '</span>';
+        echo '<span class="block_level">' . $sql . '</span>';
     }
 
     $image_id = serendipity_db_insert_id('images', 'id');
@@ -580,8 +580,8 @@ function serendipity_insertImageInDatabase($filename, $directory, $authorid = 0,
     
     $sql = serendipity_db_query($query);
     if (is_string($sql)) {
-        echo $query . '<br />';
-        echo $sql . '<br />';
+        echo '<span class="block_level">' . $query . '</span>';
+        echo '<span class="block_level">' . $sql . '</span>';
     }
 
     $image_id = serendipity_db_insert_id('images', 'id');
@@ -1493,10 +1493,10 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         );
         foreach ($aResultSet AS $sKey => $sFile) {
                 if ($sFile['directory']) {
-                    if ($debug) echo "{$sFile['relpath']} is a directory.<br />";
+                    if ($debug) echo "<span class='block_level'>{$sFile['relpath']} is a directory.</span>";
                     array_push($paths, $sFile);
                 } else {
-                    if ($debug) echo "{$sFile['relpath']} is a file.<br />";
+                    if ($debug) echo "<span class='block_level'>{$sFile['relpath']} is a file.</span>";
                     // Store the file in our array, remove any ending slashes
                     $aFilesOnDisk[$sFile['relpath']] = 1;
                 }
@@ -1530,13 +1530,13 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
                     }
 
                     $sFileName = $sFile['path'] . $sFile['name'] . (empty($sFile['extension']) ? '' : '.' . $sFile['extension']);
-                    if ($debug) echo "<p>File name is $sFileName,<br />thumbnail is $sThumbNailFile</p>";
+                    if ($debug) echo "<p>File name is $sFileName, thumbnail is $sThumbNailFile</p>";
                     unset($aResultSet[$sKey]);
 
                     if (isset($aFilesOnDisk[$sFileName])) {
                         unset($aFilesOnDisk[$sFileName]);
                     } else {
-                        if ($debug) echo "Deleting Image {$sFile['id']}<br />\n";
+                        if ($debug) echo "<span class='block_level'>Deleting Image {$sFile['id']}</span>";
                         serendipity_deleteImage($sFile['id']);
                         ++$nCount;
                     }
@@ -2065,7 +2065,7 @@ function serendipity_directoryACL(&$paths, $type = 'read') {
     static $debug = false;
 
     if ($debug) {
-        echo "Applying ACL for mode '$type'.<br />\n";
+        echo "<span class='block_level'>Applying ACL for mode '$type'.</span>";
     }
 
     if (!is_array($paths)) {
@@ -2130,19 +2130,19 @@ function serendipity_directoryACL(&$paths, $type = 'read') {
             if ($granted === false) {
                 // We are not allowed to access this element
                 if ($debug) {
-                    echo "ACL for " . $info['relpath'] . " DENIED.<br />\n";
+                    echo "<span class='msg_error'>ACL for " . $info['relpath'] . " DENIED.</span>";
                 }
                 unset($paths[$idx]);
             } else {
                 if ($debug) {
-                    echo "ACL for " . $info['relpath'] . " granted.<br />\n";
+                    echo "<span class='msg_success'>ACL for " . $info['relpath'] . " granted.</span>";
                 }
             }
         }
 
         if (count($paths) < $startCount) {
             if ($debug) {
-                echo "ACL denied all.<br />\n";
+                echo "<span class='msg_error'>ACL denied all.</span>";
             }
             return false;
         }
@@ -2789,10 +2789,10 @@ function serendipity_prepareMedia(&$file, $url = '') {
         if (!$mimeicon) {
             $mimeicon = serendipity_getTemplateFile('admin/img/mime_unknown.png');
         }
-        $file['preview'] .= '<img src="'. $mimeicon .'" title="' . $file['path'] . $file['name'] . ' (' . $file['mime'] . ')" alt="'. $file['mime'] .'" /><br /><span style="font-weight: bold; font-size: 8pt">- ' . (($file['hotlink']) ? MEDIA_HOTLINKED : $file['mime']) .' -</span>';
+        $file['preview'] .= '<img src="'. $mimeicon .'" title="' . $file['path'] . $file['name'] . ' (' . $file['mime'] . ')" alt="'. $file['mime'] .'" /><span class="block_level" style="font-weight: bold; font-size: 8pt">- ' . (($file['hotlink']) ? MEDIA_HOTLINKED : $file['mime']) .' -</span>';
         if ($url) {
             $file['preview_url'] = $url .'&amp;serendipity[image]='. $file['id'];
-            $file['preview'] .= '<br /><a href="' . $file['preview_url'] . '">' . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']) . '</a>';
+            $file['preview'] .= '<a class="block_level" href="' . $file['preview_url'] . '">' . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']) . '</a>';
         }
     }
 

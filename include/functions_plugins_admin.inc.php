@@ -155,7 +155,7 @@ function show_plugins($event_only = false, $sidebars = null)
 
                 $name  = htmlspecialchars($bag->get('name'));
                 $desc  = htmlspecialchars($bag->get('description'));
-                $desc .= '<br />' . VERSION  . ': <em>' . $bag->get('version') . '</em>';
+                $desc .= '<span class="block_level">' . VERSION  . ': <em>' . $bag->get('version') . '</em></span>';
 
                 $title = serendipity_plugin_api::get_plugin_title($plugin, '[' . $name . ']');
 

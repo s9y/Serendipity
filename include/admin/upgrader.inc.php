@@ -94,7 +94,7 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_removeFiles',
                      'title'     => 'Removal of obsolete files',
                      'arguments' => array($obsolete_files),
-                     'desc'      => 'The directory structure has been reworked. The following files will be moved to a folder called "backup". If you made manual changes to those files, be sure to read the file docs/CHANGED_FILES to re-implement your changes.<br /><div style="font-size: x-small; margin: 15px">' . implode(', ', $obsolete_files) . '</div>'),
+                     'desc'      => '<p>The directory structure has been reworked. The following files will be moved to a folder called "backup". If you made manual changes to those files, be sure to read the file docs/CHANGED_FILES to re-implement your changes.</p><div style="font-size: x-small; margin: 15px">' . implode(', ', $obsolete_files) . '</div>'),
 
                array('version'   => '0.8-alpha4',
                      'function'  => 'serendipity_removeFiles',
@@ -142,9 +142,9 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_fixPlugins',
                      'arguments' => array('markup_column_names'),
                      'title'     => 'Configuration options of markup plugins',
-                     'desc'      => 'Because of the latest multilingual improvements in Serendipity, the database key names for certain configuration directives only found in markup plugins need to be renamed.<br />'
-                                    . 'This will be automatically handled by Serendipity for all internally bundled and external plugins. If you are using the external plugins "GeShi" and "Markdown", please make sure you will upgrade to their latest versions!<br />'
-                                    . 'We also advise that you check the plugin configuration of all your markup plugins (like emoticate, nl2br, s9ymarkup, bbcode) and see if the settings you made are all properly migrated.'),
+                     'desc'      => '<p>Because of the latest multilingual improvements in Serendipity, the database key names for certain configuration directives only found in markup plugins need to be renamed.</p>'
+                                    . '<p>This will be automatically handled by Serendipity for all internally bundled and external plugins. If you are using the external plugins "GeShi" and "Markdown", please make sure you will upgrade to their latest versions!</p>'
+                                    . '<p>We also advise that you check the plugin configuration of all your markup plugins (like emoticate, nl2br, s9ymarkup, bbcode) and see if the settings you made are all properly migrated.</p>'),
 
                array('version'   => '0.8-beta5',
                      'function'  => 'serendipity_smarty_purge',

@@ -143,18 +143,18 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         
         if (PEAR::isError($res) || $req->getResponseCode() != '200') {
             serendipity_request_end();
-            echo IMPORT_FAILED . ': ' . htmlspecialchars($this->data['url']);
-            echo "<br />\n";
+            echo '<span class="block_level">' . IMPORT_FAILED . ': ' . htmlspecialchars($this->data['url']) . '</span>';
             return false;
         }
         
         $fContent = $req->getResponseBody();
         serendipity_request_end();
-        echo strlen($fContent) . " Bytes<br />\n";
+        echo '<span class="block_level">' . strlen($fContent) . " Bytes</span>";
         
         if (version_compare(PHP_VERSION, '5.0') === -1) {
+            echo '<span class="block_level">';
             printf(UNMET_REQUIREMENTS, 'PHP >= 5.0');
-            echo "<br />\n";
+            echo "</span>";
             return false;
         }
         
@@ -194,9 +194,9 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                              'parentid'             => 0,
                              'category_left'        => 0,
                              'category_right'       => 0);
-    
+                echo '<span class="block_level">';
                 printf(CREATE_CATEGORY, htmlspecialchars($cat_name));
-                echo "<br />\n";
+                echo "</span>";
                 if ($dry_run) {
                     $s9y_cat[$cat_name] = time();
                 } else {
@@ -235,7 +235,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 foreach($item->category AS $idx => $category) {
                     $cstring=(string)$category;
                     if (!isset($s9y_cat[$cstring])) {
-                        echo "WARNING: $category unset!<br />\n";
+                        echo "<span class='msg_error'>WARNING: $category unset!</span>";
                     } else {
                         $entry['categories'][] = $s9y_cat[$cstring];
                     }
@@ -252,8 +252,9 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 } else {
                     $s9y_users[$wp_user]['authorid'] = serendipity_addAuthor($wp_user, md5(time()), $wp_user, '', USERLEVEL_EDITOR);
                 }
+                echo '<span class="block_level">';
                 printf(CREATE_AUTHOR, htmlspecialchars($wp_user));
-                echo "<br />\n";
+                echo "</span>";
             }
 
             $entry['authorid'] = $s9y_users[$wp_user]['authorid'];
@@ -308,7 +309,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 $s9y_cid[$c_id] = $cid;
             }
             
-            echo "Entry '" . htmlspecialchars($entry['title']) . "' ($c_i comments) imported.<br />\n";
+            echo "<span class='msg_notice'>Entry '" . htmlspecialchars($entry['title']) . "' ($c_i comments) imported.</span>";
         }
         return true;
     }

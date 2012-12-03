@@ -372,8 +372,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             /* Load the new plugin */
             $plugin = &serendipity_plugin_api::load_plugin($inst);
             if (!is_object($plugin)) {
-                echo "DEBUG: Plugin $inst not an object: " . print_r($plugin, true) . ".<br />Input: " . print_r($serendipity['GET'], true) . ".<br /><br />\n\nThis error can happen if a plugin was not properly downloaded (check your plugins directory if the requested plugin was downloaded) or the inclusion of a file failed (permissions?)<br />\n";
-                echo "Backtrace:<br />\n" . implode("<br />\n", $serendipity['debug']['pluginload']) . "<br />";
+                echo "<dl><dt>DEBUG: Plugin $inst not an object: " . print_r($plugin, true) . ".</dt><dd>Input: " . print_r($serendipity['GET'], true) . ".</dd><dd>This error can happen if a plugin was not properly downloaded (check your plugins directory if the requested plugin was downloaded) or the inclusion of a file failed (permissions?)</dd>";
+                echo "<dt>Backtrace:</dt><dd>" . implode("<br />\n", $serendipity['debug']['pluginload']) . "<br /></dd></dl>";
             }
             $bag  = new serendipity_property_bag;
             $plugin->introspect($bag);

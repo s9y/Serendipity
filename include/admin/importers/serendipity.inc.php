@@ -17,12 +17,11 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
 
     function getImportNotes() {
         // TODO: I18n!
-        return 'This importer is still work in progress. It can currently import most things of the database. HOWEVER it can NOT import previously installed plugins (including their configuration) or any database tables of installed plugins. Those must be migrated manually. Also, you must use FTP to transfer your uploaded images to the new location.<br />
-        Please do a test-run first if you are SQL-savvy. If you encounter any errors, save the message output you get - it will definitely help debugging!<br />
-        <br/>
-        This is <strong>NOT</strong> an importer meant for upgrading Serendipity. This importer assumes that both Serendipity installations use the same version.<br />
-        It is strongly advised that you test this importer in an isolated environment first, do not use it on a production blog unless you made sure it works in a cloned installation. Always make a backup of both the source and the target blog.<br /><br />
-        After these precautions: The importer code generally works very well for me and my purposes. Your mileage may vary.';
+        return '<p>This importer is still work in progress. It can currently import most things of the database. HOWEVER it can NOT import previously installed plugins (including their configuration) or any database tables of installed plugins. Those must be migrated manually. Also, you must use FTP to transfer your uploaded images to the new location.</p>
+        <p>Please do a test-run first if you are SQL-savvy. If you encounter any errors, save the message output you get - it will definitely help debugging!</p>
+        <p>This is <strong>NOT</strong> an importer meant for upgrading Serendipity. This importer assumes that both Serendipity installations use the same version.</p>
+        <p>It is strongly advised that you test this importer in an isolated environment first, do not use it on a production blog unless you made sure it works in a cloned installation. Always make a backup of both the source and the target blog.<p/>
+        <p>After these precautions: The importer code generally works very well for me and my purposes. Your mileage may vary.</p>';
     }
 
     function Serendipity_Import_Serendipity ($data) {
@@ -96,7 +95,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
     function import_table(&$s9ydb, $table, $primary_keys, $where = null, $dupe_check = false, $fix_relations = false, $skip_dupes = false) {
         global $serendipity;
 
-        echo "<br /><br />Starting with table <strong>{$table}</strong>...<br />\n";
+        echo "<span class='block_level'>Starting with table <strong>{$table}</strong>...</span>";
 
         if ($dupe_check) {
             $dupes = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}" . $table . " " . $where, false, 'both', false, $dupe_check);
@@ -161,7 +160,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                         }
                         
                         if (!$this->execute && $this->debug) {
-                            echo "Fix relation from $fix_relation_table.$fix_relation_primary_key={$primary_vals[$fix_relation_primary_key]} to {$row[$primary_key]} (assoc_val: $assoc_val)<br />\n";
+                            echo "<span>Fix relation from $fix_relation_table.$fix_relation_primary_key={$primary_vals[$fix_relation_primary_key]} to {$row[$primary_key]} (assoc_val: $assoc_val)</span>";
                         }
                     }
                 }
@@ -170,7 +169,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             if ($insert) {
                 if ($dupe_check && isset($dupes[$row[$dupe_check]])) {
                     if ($this->debug) {
-                        echo "Skipping duplicate: <pre>" . print_r($dupes[$row[$dupe_check]], true) . "</pre><br />\n";
+                        echo "Skipping duplicate: <pre>" . print_r($dupes[$row[$dupe_check]], true) . "</pre>";
                     }
                     foreach($primary_vals AS $primary_key => $primary_val) {
                         $this->storage[$table][$primary_key][$primary_val] = $dupes[$row[$dupe_check]][$primary_key];
@@ -182,7 +181,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                         $dbid = serendipity_db_insert_id($table, $primary_key);
                         $this->storage[$table][$primary_key][$primary_val] = $dbid;
                     }
-                    echo "Migrated entry #{$dbid} into {$table}.<br />\n";
+                    echo "<span class='block_level'>Migrated entry #{$dbid} into {$table}.</span>";
                 } else {
                     if ($this->debug) {
                         echo 'DB Insert: <pre>' . print_r($row, true) . '</pre>';
@@ -199,7 +198,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                 }
             } else {
                 if ($this->debug && !$this->execute) {
-                    echo "Ignoring Duplicate.<br />\n";
+                    echo "<span class='block_level'>Ignoring Duplicate.</span>";
                 }
             }
         }
@@ -207,7 +206,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         if (!$this->execute) {
             echo 'Storage on '. $table . ':<pre>' . print_r($this->storage[$table], true) . '</pre>';
         } else {
-            echo "Finished table <strong>{$table}</strong><br />\n";
+            echo "<span class='block_level'>Finished table <strong>{$table}</strong></span>";
         }
     }
 

@@ -803,6 +803,7 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
     $show = false;
     switch ($mode) {
         case 'save':
+            echo '<div class="clearfix">';
             echo '<div style="float: left; height: 75px"></div>';
             $res = serendipity_updertEntry($entry);
 
@@ -817,15 +818,16 @@ function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
                 $entrylink = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
                 echo '<div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)</div>';
             }
-            echo '<br style="clear: both" />';
+            echo '</div>';
 
             $show = true;
             break;
 
         case 'preview':
+            echo '<div class="clearfix">';
             echo '<div id="serendipity_preview_spacer" style="float: left; height: 225px"></div>';
             serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
-            echo '<br id="serendipity_preview_spacer2" style="clear: both" />';
+            echo '</div>';
 
             $show = true;
             break;
@@ -879,7 +881,7 @@ function serendipity_iframe_create($mode, &$entry) {
 
     echo '<iframe src="serendipity_admin.php?serendipity[is_iframe]=true&amp;serendipity[iframe_mode]=' . $mode . '" id="serendipity_iframe" name="serendipity_iframe" ' . $attr . ' width="100%" frameborder="0" marginwidth="0" marginheight="0" scrolling="auto" title="Serendipity">'
          . IFRAME_WARNING
-         . '</iframe><br /><br />';
+         . '</iframe>';
 }
 
 /**

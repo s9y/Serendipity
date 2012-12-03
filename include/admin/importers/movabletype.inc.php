@@ -67,7 +67,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
 
         if ($debug) {
             $c++;
-            echo '#' . $c . ' [' . date('d.m.Y H:i.s') . '] ' . $string . "<br />\n";
+            echo '<span class="block_level">#' . $c . ' [' . date('d.m.Y H:i.s') . '] ' . $string . "</span>";
         }
     }
 
@@ -139,7 +139,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                         $au_inf = serendipity_fetchAuthor($data);
                         if ( !is_array($au_inf) ) {
                             $tasks[] = sprintf(CREATE_AUTHOR, htmlspecialchars($data));
-                            $tasks[] = 'Input array is: ' . print_r($data, true) . '<br />Return is: ' . print_r($au_inf, true) . '<br />';
+                            $tasks[] = '<ul class="plainList"><li>Input array is: ' . print_r($data, true) . '</li><<li>Return is: ' . print_r($au_inf, true) . '</li></ul>';
                             $au_inf = serendipity_fetchAuthor($serendipity['authorid']);
                         }
                         $authors[$data] = $au_inf[0];
@@ -183,7 +183,9 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                         $cat_found  = false;
                         if (is_array($this->categories)) {
                             for ( $y=0 ; $y<sizeof($this->categories) ; $y++ ) {
-                                echo '"' . $this->categories[$y]['category_name'] . '" == "' . $data . '"<br />';
+                                echo '<span class="block_level">';
+                                echo '"' . $this->categories[$y]['category_name'] . '" == "' . $data;
+                                echo '</span>';
                                 if ( $this->categories[$y]['category_name'] == $data ) {
                                     $cat_found = true;
                                     break;
@@ -425,7 +427,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
         if ( !sizeof($tasks) || $force == true ) {
             serendipity_db_begin_transaction();
             foreach ($entries as $entry) {
-                #echo '<pre>' . printR_($entry, true) . '</pre><br />';
+                #echo '<pre>' . printR_($entry, true) . '</pre>';
                 #continue;
                 if (empty($entry['authorid'])) {
                     $entry['authorid'] = $serendipity['authorid'];

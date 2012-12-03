@@ -82,7 +82,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
 
         // Dependency on static pages
         if (!class_exists('serendipity_event_staticpage')) {
-            die(IMPORTER_VOODOO_REQUIREMENTFAIL . '<br/>');
+            die('<span class="msg_error">' . IMPORTER_VOODOO_REQUIREMENTFAIL . '</span>');
         }
 
           // The selected file
@@ -160,18 +160,18 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
 
                         // Either replace or insert depending on previous existence
                         if (!isset($thispage['id'])) {
-                            echo '<br/>'.IMPORTER_VOODOO_CREATINGPAGE.': '. $mykey;
+                            echo '<span class="block_level">'.IMPORTER_VOODOO_CREATINGPAGE.': '. $mykey.'</span>';
                             serendipity_db_insert('staticpages', $thispage);
                             $serendipity["POST"]["staticpage"] = serendipity_db_insert_id("staticpages", 'id'); 
                         } elseif ($this->data['updateExisting'] == 'true') {
-                            echo '<br/>'.IMPORTER_VOODOO_UPDATINGPAGE.': '. $mykey;
+                            echo '<span class="block_level">'.IMPORTER_VOODOO_UPDATINGPAGE.': '. $mykey.'</span>';
                             serendipity_db_update("staticpages", array("id" => $thispage["id"]), $thispage);
                         } else {
-                            echo '<br/>'.IMPORTER_VOODOO_NOTUPDATING.': '. $mykey;
+                            echo '<span class="block_level">'.IMPORTER_VOODOO_NOTUPDATING.': '. $mykey.'</span>';
                         }
                     } else {
                         // If its a url, the content is the link instead
-                        echo '<br/>'.IMPORTER_VOODOO_RECORDURL.': '.$thispage['headline'];
+                        echo '<span class="block_level">'.IMPORTER_VOODOO_RECORDURL.': '.$thispage['headline'].'</span>';
                         $aliases[$thispage['headline']] = $thispage['content'];
                     }
                     break;                      
@@ -179,7 +179,6 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         }
 
         // Now rewrite the permalinks
-        echo '<br/>';
         if ($this->data['shouldWriteLinks'] == 'true') {
             Serendipity_Import_VoodooPad::write_links($aliases);
         }
@@ -192,7 +191,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         global $serendipity;
 
         // **TODO** Change this to pull out only entries for the current wiki
-        echo '<br/><p>'.IMPORTER_VOODOO_WRITEINTRALINKS.'</p>';
+        echo '<p>'.IMPORTER_VOODOO_WRITEINTRALINKS.'</p>';
                        
         $pages= &serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}staticpages  ORDER BY pagetitle DESC"); 
           
@@ -210,7 +209,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
             serendipity_db_update("staticpages", array("id" => $thispage["id"]), $thispage);
         }
         
-        echo DONE . '<br />';
+        echo '<span class="msg_success">' . DONE . '</span>';
     } 
 
     // Search and replace avoiding content of links

@@ -13,9 +13,8 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
     var $categories  = array();
 
     function getImportNotes() {
-        return 'Sunlog uses a crypted string to represent stored passwords. Thus, those passwords are incompatible with the MD5 hashing of Serendipity and can not be reconstructed. The passwords for all users have been set to "sunlog". <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.<br />'
-             . '<br />'
-             . 'Sunlog has a granular control over access privileges which cannot be migrated to Serendipity. All Users will be migrated as Superusers, you may need to set them to editor or chief users manually after import.';
+        return '<p>Sunlog uses a crypted string to represent stored passwords. Thus, those passwords are incompatible with the MD5 hashing of Serendipity and can not be reconstructed. The passwords for all users have been set to "sunlog". <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.</p>'
+             . '<p>Sunlog has a granular control over access privileges which cannot be migrated to Serendipity. All Users will be migrated as Superusers, you may need to set them to editor or chief users manually after import.</p>';
     }
 
     function Serendipity_Import_sunlog($data) {
