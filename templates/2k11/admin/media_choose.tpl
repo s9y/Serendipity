@@ -188,17 +188,18 @@ if (parent.frames && parent.frames['tree']) {ldelim}
                     <div class="form_radio">
                         <input id="radio_islink_no" name="serendipity[isLink]" type="radio" value="no" {'isLink'|@ifRemember:'no'}>
                         <label for="radio_islink_no">{$CONST.I_WANT_IT_TO_LINK}</label>
-                    </div>
-                </div>
 
-                <div class="form_field">
-                    {* Could use input[type=url], but does that handle local URLs as well? Hm. *}
-                {if $media.file.hotlink}
-                    <input name="serendipity[url]" type="text" value="{$media.file.path}">
-                {else}
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_link_url' eventData=$media.file.links}
-                    <input name="serendipity[url]" type="text" value="{$media.file.links.imagelinkurl}">
-                {/if}
+                        <div class="form_field">
+                        {* Could use input[type=url], but does that handle local URLs as well? Hm. *}
+                            <label for="media_file_path" class="visuallyhidden">Media file path</label> {* i18n *}
+                        {if $media.file.hotlink}
+                            <input id="media_file_path" name="serendipity[url]" type="text" value="{$media.file.path}">
+                        {else}
+                            {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_link_url' eventData=$media.file.links}
+                            <input id="media_file_path" name="serendipity[url]" type="text" value="{$media.file.links.imagelinkurl}">
+                        {/if}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form_select">
