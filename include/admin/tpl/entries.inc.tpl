@@ -82,13 +82,13 @@
         <input name="go" type="submit" value="{$CONST.GO}">
     </form>
     {if $is_entries}
-    {if $offSet > 0}||$count > $perPage}
+    {if ($offSet > 0) || ($count > $perPage)}
     <nav class="pagination">
         <ul class="clearfix">
-        {if $offSet > 0}
+        {if ($offSet > 0)}
             <li><a class="link_prev" href="{$linkPrevious}">{$CONST.PREVIOUS}</a></li>
         {/if}
-        {if $count > $perPage}
+        {if ($count > $perPage)}
             <li><a class="link_next" href="{$linkNext}">{$CONST.NEXT}</a></li>
         {/if}
         </ul>
@@ -110,7 +110,7 @@
                 <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">TODO_LANG #{$entry_id}</label>
 
                 <div class="entry_status">
-                {if (!$showFutureEntries) && ($entry.timestamp >= $serverOffsetHour)}
+                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
                     <span class="status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
                 {/if}
                 {if $entry.ep_is_sticky}
