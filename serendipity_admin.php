@@ -408,7 +408,6 @@ if ($use_installer) {
 <?php } ?>
                         <li class="serendipitySideBarMenuFoot serendipitySideBarMenuMainLinks" style="display:none"></li>
                     </ul>
-                    <br class="serendipitySideBarMenuSpacer" />
 <?php if (serendipity_checkPermission('adminEntries') || serendipity_checkPermission('adminEntriesPlugins')) { ?>
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuEntry">
                         <li class="serendipitySideBarMenuHead serendipitySideBarMenuEntryLinks"><?php echo ADMIN_ENTRIES ?></li>
@@ -484,8 +483,6 @@ if ($use_installer) {
                         <li class="serendipitySideBarMenuFoot serendipitySideBarMenuUserManagement" style="display:none"></li>
                     </ul>
 <?php } ?>
-                    <br class="serendipitySideBarMenuSpacer" />
-
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuLogout">
                         <li class="serendipitySideBarMenuHead serendipitySideBarMenuLogoutLinks" style="display:none"></li>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuLogoutLinks serendipitySideBarMenuLogoutWeblog"><a href="<?php echo $serendipity['baseURL']; ?>"><?php echo BACK_TO_BLOG; ?></a></li>
