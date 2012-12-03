@@ -360,6 +360,71 @@ nav ol { padding: 0; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
 
+/* Icon font | http://fortawesome.github.com/Font-Awesome/ */
+@font-face {
+    font-family: 'fontello';
+    src: url("{TEMPLATE_PATH}font/fontello.eot");
+    src: url("{TEMPLATE_PATH}font/fontello.eot?#iefix") format('embedded-opentype'),
+         url("{TEMPLATE_PATH}font/fontello.woff") format('woff'),
+         url("{TEMPLATE_PATH}font/fontello.ttf") format('truetype'),
+         url("{TEMPLATE_PATH}font/fontello.svg#fontello") format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+    font-family: 'fontello';
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    opacity: 1.0;
+    line-height: 1em;
+}
+
+.icon-home:before { content: '\2302'; }
+.icon-cog:before { content: '\2699'; }
+.icon-attention:before { content: '\26a0'; }
+.icon-cog-alt:before { content: '\26ef'; }
+.icon-edit:before { content: '\270d'; }
+.icon-ok-circle:before { content: '\2714'; }
+.icon-cancel-circle:before { content: '\2716'; }
+.icon-plus-circle:before { content: '\2795'; }
+.icon-minus-circle:before { content: '\2796'; }
+.icon-ccw:before { content: '\27f2'; }
+.icon-cw:before { content: '\27f3'; }
+.icon-help-circle:before { content: '\e704'; }
+.icon-info-circle:before { content: '\e705'; }
+.icon-eye:before { content: '\e70a'; }
+.icon-trash:before { content: '\e729'; }
+.icon-resize-full:before { content: '\e744'; }
+.icon-zoom-in:before { content: '\e750'; }
+.icon-zoom-out:before { content: '\e751'; }
+.icon-off:before { content: '\e78e'; }
+.icon-move:before { content: '\f047'; }
+.icon-link-ext:before { content: '\f08e'; }
+.icon-rss:before { content: '\f09e'; }
+.icon-left-circled:before { content: '\f0a8'; }
+.icon-right-circled:before { content: '\f0a9'; }
+.icon-up-circled:before { content: '\f0aa'; }
+.icon-down-circled:before { content: '\f0ab'; }
+.icon-filter:before { content: '\f0b0'; }
+.icon-resize-full-alt:before { content: '\f0b2'; }
+.icon-menu:before { content: '\f0c9'; }
+.icon-sort:before { content: '\f0dc'; }
+.icon-picture:before { content: '🌄'; }
+.icon-user:before { content: '👤'; }
+.icon-users:before { content: '👥'; }
+.icon-folder-open:before { content: '📂'; }
+.icon-upload:before { content: '📤'; }
+.icon-download:before { content: '📥'; }
+.icon-clock:before { content: '🕔'; }
+
 /* Forms | forked from formalize.me */
 .input_full_wrap {
     display: block;
