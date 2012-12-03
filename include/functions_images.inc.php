@@ -3397,11 +3397,11 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 // Forward user to overview (we don't want the user's back button to rename things again)
             } else {
                 if (!file_exists($oldfile)) {
-                    echo ERROR_FILE_NOT_EXISTS;
+                    echo '<span class="msg_error">' . ERROR_FILE_NOT_EXISTS . '</span>';
                 } elseif (file_exists($newfile)) {
-                    echo ERROR_FILE_EXISTS;
+                    echo '<span class="msg_error">' . ERROR_FILE_EXISTS . '</span>';
                 } else {
-                    echo ERROR_SOMETHING;
+                    echo '<span class="msg_error">' . ERROR_SOMETHING . '</span>';
                 }
 
                 return false;
@@ -3462,7 +3462,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     // Only MySQL supported, since I don't know how to use REGEXPs differently.
     if ($serendipity['dbType'] != 'mysql' && $serendipity['dbType'] != 'mysqli') {
-        echo MEDIA_DIRECTORY_MOVE_ENTRY . '<br />';
+        echo '<span class="block_level">' . MEDIA_DIRECTORY_MOVE_ENTRY . '</span>';
         return true;
     }
 
