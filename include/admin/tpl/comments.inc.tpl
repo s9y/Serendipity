@@ -2,7 +2,7 @@
 {* jQuery: No *}
 
 {if !empty($errormsg)}
-    <span class="msg_error">{$errormsg}</span>
+    <span class="msg_error"><span class="attention"></span> {$errormsg}</span>
 {/if}
 {* Smarty 3 has a new auto literal option which is enabled by default.
    When the { is followed by a space it's not interpreted as smarty delimiter but literal. *}
@@ -136,7 +136,7 @@ function highlightComment(id, checkvalue) {
         {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
     </form>
 {if !is_array($sql)}
-    <span class="msg_notice">{$CONST.NO_COMMENTS}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_COMMENTS}</span>
 
     {* TODO: l18n *}
     <a class="block_level" href="serendipity_admin.php?serendipity[adminModule]=comments">Return to default comment list</a>
@@ -162,7 +162,11 @@ function highlightComment(id, checkvalue) {
         <ul class="plainList">
         {foreach $comments AS $comment}
             <li><h3 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id}, {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h3>
-                <input class="action_highlight_comment" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" onclick="highlightComment('comment_{$comment.id}', this.checked)" tabindex="{$i}">
+                <div class="form_check">
+                    <input id="serendipity_multidelete_comment_{$comment.id}" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" onclick="highlightComment('comment_{$comment.id}', this.checked)" tabindex="{$i}">
+                    <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
+                </div>
+
                 <div id="comment_{$comment.id}">
                     <dl class="comment_data clearfix">
                         <dt>{$CONST.AUTHOR}:</dt>
@@ -189,18 +193,18 @@ function highlightComment(id, checkvalue) {
 
                     <ul class="actions clearfix">
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
-                        <li><a class="link_approve" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}">{$CONST.APPROVE}</a></li>
+                        <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-ok-circle"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                     {/if}
                     {if ($comment.status == 'approved')}
-                        <li><a class="link_moderate" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;{$urltoken}">{$CONST.SET_TO_MODERATED}</a></li>
+                        <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}">{$CONST.SET_TO_MODERATED}</a></li>
                     {/if}
                     {if $comment.excerpt}
-                        <li><a class="link_toggle" href="#c{$comment.id}" onclick="FT_toggle({$comment.id}); return false;"><span id="{$comment.id}_text">{$CONST.TOGGLE_ALL}</span></a></li>
+                        <li><a class="icon_link" href="#c{$comment.id}" onclick="FT_toggle({$comment.id}); return false;" title="{$CONST.TOGGLE_ALL}"><span id="{$comment.id}_text">{$CONST.TOGGLE_ALL}</span></a></li>
                     {/if}
-                        <li><a class="link_view" href="{$entrylink}">{$CONST.VIEW}</a></li>
-                        <li><a class="link_edit" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}">{$CONST.EDIT}</a></li>
-                        <li><a class="link_delete" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" onclick='return confirm("{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}")'>{$CONST.DELETE}</a></li>
-                        <li><a class="link_comment" onclick="cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); cf.focus(); return false;" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}">{$CONST.REPLY}</a></li>
+                        <li><a class="icon_link" href="{$entrylink}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
+                        <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" onclick='return confirm("{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}")' title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                        <li><a class="icon_link" onclick="cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); cf.focus(); return false;" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}">{$CONST.REPLY}</a></li>
                     </ul>
                     {$comment.action_more}
                 </div>
