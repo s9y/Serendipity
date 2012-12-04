@@ -180,10 +180,10 @@ function highlightComment(id, checkvalue) {
                         {* TODO: This should not emit an img *}
                         <dd class="action_ip">{$comment.action_ip}</dd>
                         <dt>{$CONST.URL}:</dt>
-                        <dd>{if empty($comment.url)}N/A{else}<a class="link_url" href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:30:"&hellip;"}</a> {/if}</dd>
+                        <dd>{if empty($comment.url)}N/A{else}<a class="icon_link" href="{$comment.url|escape}" title="{$comment.url|escape}"><span class="icon-link"></span> {$comment.url|escape|truncate:30:"&hellip;"}</a> {/if}</dd>
                         <dd class="action_url">{$comment.action_url}</dd>
                         <dt>{$CONST.REFERER}:</dt>
-                        <dd>{if empty($comment.referer)}N/A{else}<a class="link_url" href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:30:"&hellip;"}</a>{/if}</dd>
+                        <dd>{if empty($comment.referer)}N/A{else}<a class="icon_link" href="{$comment.referer|escape}" title="{$comment.referer|escape}"><span class="icon-link"></span> {$comment.referer|escape|truncate:30:"&hellip;"}</a>{/if}</dd>
                         <dd class="action_referer">{$comment.action_referer}</dd>
                     </dl>
 
