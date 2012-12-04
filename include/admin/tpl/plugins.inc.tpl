@@ -4,7 +4,7 @@
 {if $plugin_to_conf}
     {if is_array($save_errors)}
     <div class="msg_error">
-        <h2>{$CONST.ERROR}:</h2>
+        <h2><span class="icon-attention"></span> {$CONST.ERROR}:</h2>
 
         <ul class="plainList">
         {foreach $save_errors as $save_error}
@@ -13,7 +13,7 @@
         </ul>
     </div>
     {elseif $saveconf}
-    <span class="msg_success">{$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <form method="post" name="serendipityPluginConfigure">
         {$formToken}
@@ -43,7 +43,7 @@
 {elseif $adminAction == 'addnew'}
     <h3>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:"count({$pluginstack})"}</span></h3>
     {foreach $errorstack as $e_idx => $e_name}
-    <span class="msg_error">{$CONST.ERROR}: {$e_name}</span>
+    <span class="msg_error"><span class="icon-attention"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
     <form action="serendipity_admin.php" method="get">
         {$formToken}
@@ -114,13 +114,13 @@
     {/foreach}
 {else}
     {if $save}
-    <span class="msg_success">{$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <h2>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</h2>
     {if $eyecandy}
     <script src="{serendipity_getFile file="dragdrop.js"}"></script>
 
-    <span class="msg_notice">{$CONST.PREFERENCE_USE_JS_WARNING}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
     {/if}
     <section id="pluginlist_sidebar">
         <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
