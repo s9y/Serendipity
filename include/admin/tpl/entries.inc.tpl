@@ -86,10 +86,10 @@
     <nav class="pagination">
         <ul class="clearfix">
         {if ($offSet > 0)}
-            <li><a class="link_prev" href="{$linkPrevious}">{$CONST.PREVIOUS}</a></li>
+            <li><a class="icon_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a></li>
         {/if}
         {if ($count > $perPage)}
-            <li><a class="link_next" href="{$linkNext}">{$CONST.NEXT}</a></li>
+            <li><a class="icon_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="icon-right-circled"></span><span class="visuallyhidden"> {$CONST.NEXT}</span></a></li>
         {/if}
         </ul>
     </nav>
