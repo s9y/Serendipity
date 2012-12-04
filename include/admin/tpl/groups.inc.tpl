@@ -2,13 +2,13 @@
 {* jQuery: NN *}
 
 {if $delete_yes}
-    <span class="msg_success">{$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
 {/if}
 {if $save_new}
-    <span class="msg_success">{$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
 {/if}
 {if $save_edit}
-    <span class="msg_success">{$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:"html"}"}</span>
 {/if}
 
 {if !$delete}
@@ -17,11 +17,11 @@
     <ul id="serendipity_groups" class="plainList">
     {foreach $groups as $group}
         <li class="clearfix">
-            <span class="group_name">{$group.name|escape:"html"}</span>
+            <span class="group_name"><span class="icon-users"></span> {$group.name|escape:"html"}</span>
             <ul class="plainList edit_actions">
-                <li><a class="link_edit" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}">{$CONST.EDIT}</a></li>
+                <li><a class="icon_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                 {* BUG: Doesn't skip to the deletion process - What does that mean??? *}
-                <li><a class="link_delete" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:"html"}">{$CONST.DELETE}</a></li>
+                <li><a class="icon_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>
         </li>
     {/foreach}
@@ -102,7 +102,7 @@
                 </select>
             </div>
         {else}
-            <span class="msg_notice">{$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
+            <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
         {if $edit}
             <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}"> {$CONST.WORD_OR} <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
