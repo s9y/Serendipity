@@ -124,14 +124,12 @@
                         {if ($orid['sort_idx'] == 0)}
                             &nbsp;
                         {else}
-                            {* Button label should be localized *}
-                            <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}">Move Up</button>
+                            <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}"><span class="icon-up-circled"></span><span class="visuallyhidden"> Move Up</span></button> {* i18n *}
                         {/if}
                         {if ($orid['sort_idx'] == $last)}
                             &nbsp;
                         {else}
-                            {* Button label should be localized *}
-                            <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}">Move Down</button>
+                            <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}"><span class="icon-down-circled"></span><span class="visuallyhidden"> Move Down</span></button> {* i18n *}
                         {/if}
                             </div>
                         </noscript>
