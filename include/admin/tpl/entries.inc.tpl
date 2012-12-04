@@ -22,7 +22,7 @@
                         {/foreach}
                     {/if}
                     </select>
-                    <label for="filter_draft" class="visuallyhidden">TODO_LANG</label>
+                    <label for="filter_draft" class="visuallyhidden">Entry status</label> {* i18n *}
                     <select id="filter_draft" name="serendipity[filter][isdraft]">
                         <option value="all">{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="draft" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'draft') ? 'selected="selected"' : '')}>{$CONST.DRAFT}</option>
@@ -134,12 +134,12 @@
 
                 <ul class="actions">
                 {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
-                    <li><a class="link_view" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}">{$CONST.PREVIEW}</a></li>
+                    <li><a class="icon_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                 {else}
-                    <li><a class="link_view" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}">{$CONST.VIEW}</a></li>
+                    <li><a class="icon_link" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
                 {/if}
-                    <li><a class="link_edit" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}">{$CONST.EDIT}</a></li>
-                    <li><a class="link_delete" href="?{$urltoken}&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}" title="{$CONST.DELETE} #{$entry.id}">{$CONST.DELETE}</a></li>
+                    <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                    <li><a class="icon_link" href="?{$urltoken}&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}" title="{$CONST.DELETE} #{$entry.id}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
             </li>
         {/foreach}
@@ -170,22 +170,22 @@
 {/if}
 {* BUG: This seems to be triggered if only one entry is present and said entry should be deleted? Ian: Is it gone now? *}
 {if ( ( (!$switched_output && empty($entries)) || (!$drawList && empty($entries)) ) && ( $get.adminAction != 'new' &&  $get.adminAction != 'edit' ) && !$is_iframepreview )}
-    <span class="msg_notice">{$CONST.NO_ENTRIES_TO_PRINT}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
 
 {if $switched_output}
     {if ($get.adminAction && $dateval)}
-        <span class="msg_error">{$CONST.DATE_INVALID}</span>
+        <span class="msg_error"><span class="icon-attention"></span> {$CONST.DATE_INVALID}</span>
     {/if}
     {if ($get.adminAction && $use_legacy)}
         {if $is_draft}
-        <span class="msg_success">{$CONST.IFRAME_SAVE_DRAFT}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
-        <span class="msg_success">{$CONST.IFRAME_SAVE}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_SAVE}</span>
         {/if}
         {if $is_iframepreview}
-        <span class="msg_success">{$CONST.IFRAME_PREVIEW}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_PREVIEW}</span>
         {/if}
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
