@@ -1,13 +1,13 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 {if $case_imgedit}
-    <span class="msg_notice">{$CONST.PREFERENCE_USE_JS_WARNING}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
 {/if}
 {if $case_sync}
     {if !$perm_adminImagesSync}
-    <span class="msg_error">{$CONST.PERM_DENIED}</span>
+    <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
     {else}
-    <span class="msg_notice">{$CONST.WARNING_THIS_BLAHBLAH|replace:'\\n':'<br>'}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.WARNING_THIS_BLAHBLAH|replace:'\\n':'<br>'}</span>
 
     <form method="POST" action="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=doSync">
         <fieldset>
@@ -40,19 +40,19 @@
 {/if}
 {if $case_doSync}
     {if !$perm_adminImagesSync}
-        <span class="msg_error">{$CONST.PERM_DENIED}</span>
+        <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
     {else}
         <h2>{$CONST.SYNCING}</h2>
 
-        <span class="msg_success">{$print_SYNC_DONE}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$print_SYNC_DONE}</span>
 
         <h2>{$CONST.RESIZING}</h2>
 
-        <span class="msg_success">{$print_RESIZE_DONE}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$print_RESIZE_DONE}</span>
     {/if}
 {/if}
 {if $case_delete}
-    <span class="msg_notice">{$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
 
     <form id="delete_image" method="get">
         <div class="form_buttons">
@@ -64,7 +64,7 @@
 {if $switched_output}
     <form id="delete_image" method="get">
     {if ( $is_delete || $is_multidelete )}
-        <span class="msg_notice">{$CONST.ABOUT_TO_DELETE_FILES}</span>
+        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
         {foreach $rip_image AS $ripimg}
         <span class="msg_dialog_ripentry">{$ripimg}</span>
         {/foreach}
@@ -106,7 +106,7 @@
 {if $case_directoryEdit}
     {if !empty($smarty.post.save)}
     {if $ob_serendipity_moveMediaDirectory}{$ob_serendipity_moveMediaDirectory}{/if}
-    <span class="msg_notice">{$print_CONST.SETTINGS_SAVED_AT}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$print_CONST.SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
@@ -231,9 +231,9 @@
     {/if}
 {/if}
 {if $case_scale}
-    {if $print_SCALING_IMAGE}<span class="msg_notice">{$print_SCALING_IMAGE}</span>{/if}
-    {if $print_serendipity_scaleImg}<span class="msg_notice">{$print_serendipity_scaleImg}</span>{/if}
-    <span class="msg_notice">{$CONST.DONE}</span>
+    {if $print_SCALING_IMAGE}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_SCALING_IMAGE}</span>{/if}
+    {if $print_serendipity_scaleImg}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_serendipity_scaleImg}</span>{/if}
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.DONE}</span>
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
     <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
 {/if}
@@ -262,8 +262,9 @@
     //-->
     </script>
 
-    {if $print_RESIZE_BLAHBLAH}<span class="msg_notice">{$print_RESIZE_BLAHBLAH}</span>{/if}
-    {if $print_ORIGINAL_SIZE}<span class="msg_notice">{$print_ORIGINAL_SIZE}</span>{/if}
+    {if $print_RESIZE_BLAHBLAH}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_RESIZE_BLAHBLAH}</span>{/if}
+    {if $print_ORIGINAL_SIZE}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_ORIGINAL_SIZE}</span>{/if}
+    
     <h2>{$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</h2>
 
     <form name="serendipityScaleForm" action="?" method="GET">
