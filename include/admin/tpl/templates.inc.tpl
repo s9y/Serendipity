@@ -2,16 +2,16 @@
 {* jQuery: NN *}
 
 {if $adminAction == 'install'}
-    <span class="msg_success">{$install_template|string_format:"{$CONST.TEMPLATE_SET}"}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$install_template|string_format:"{$CONST.TEMPLATE_SET}"}</span>
 {/if}
 {if $deprecated}
-    <span class="msg_notice">{$CONST.WARNING_TEMPLATE_DEPRECATED}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.WARNING_TEMPLATE_DEPRECATED}</span>
 {/if}
 <section id="template_options">
     <h2>{$CONST.STYLE_OPTIONS} ({$cur_template})</h2>
 {if $has_config}
     {if $adminAction == 'configure'}
-    <span class="msg_success">{$CONST.DONE}: {$save_time}</span>
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}: {$save_time}</span>
     {/if}
     <form method="post" action="serendipity_admin.php">
         <input name="serendipity[adminModule]" type="hidden" value="templates">
@@ -55,7 +55,7 @@
                 <div class="template_status">
                 {if $template != $cur_template}
                     {if !$info.unmetRequirements}
-                    <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">{$CONST.SET_AS_TEMPLATE}</a>
+                    <a class="set_as_template" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">{$CONST.SET_AS_TEMPLATE}</a>
                     {else}
                     <span class="unmet_requirements block_level">{$info.unmetRequirements}></span>
                     {/if}
