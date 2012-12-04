@@ -9,6 +9,7 @@
 // Sprachkonstanten
 @define('TWOK11_NAV_TITLE', 'Navigation');
 @define('TWOK11_PAG_TITLE', 'Pagination');
+@define('TWOK11_SIDEBAR', 'Seitenleiste');
 @define('TWOK11_PLINK_TEXT', 'Link');
 @define('TWOK11_PLINK_TITLE', 'Permanenter Link zu diesem Kommentar');
 @define('TWOK11_PLACE_SEARCH', 'Suchbegriff(e)');
@@ -24,3 +25,4 @@
 @define('TWOK11_EMPTYTRACKBACK', 'Die Anzeige des Inhaltes dieses Trackbacks ist leider nicht möglich.');
 @define('TWOK11_TRACKBACKPREVIEW', 'Vorschau anzeigen');
 @define('TWOK11_REPLYORIGIN', 'Ursprung');
+@define('TWOK11_FORMOPTIONS', 'Formular-Optionen');

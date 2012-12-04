@@ -37,7 +37,8 @@
     </div>
     {serendipity_hookPlugin hook="frontend_comment" data=$commentform_entry}
 {if $is_commentform_showToolbar}
-    <div class="form_toolbar">
+    <fieldset class="form_toolbar">
+        <legend class="visuallyhidden">{$CONST.TWOK11_FORMOPTIONS}</legend>
         <div class="form_box">
             <input id="checkbox_remember" name="serendipity[remember]" type="checkbox" {$commentform_remember}><label for="checkbox_remember">{$CONST.REMEMBER_INFO}</label>
         </div>
@@ -46,7 +47,7 @@
             <input id="checkbox_subscribe" name="serendipity[subscribe]" type="checkbox" {$commentform_subscribe} ><label for="checkbox_subscribe">{$CONST.SUBSCRIBE_TO_THIS_ENTRY}</label>
         </div>
   {/if}
-    </div>
+    </fieldset>
 {/if}
 {if $is_moderate_comments}
     <p class="serendipity_msg_important">{$CONST.COMMENTS_WILL_BE_MODERATED}</p>

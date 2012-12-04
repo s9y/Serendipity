@@ -25,3 +25,4 @@
 @define('TWOK11_EMPTYTRACKBACK', 'Die Anzeige des Inhaltes dieses Trackbacks ist leider nicht möglich.');
 @define('TWOK11_TRACKBACKPREVIEW', 'Vorschau anzeigen');
 @define('TWOK11_REPLYORIGIN', 'Antwort auf');
+@define('TWOK11_FORMOPTIONS', 'Formular-Optionen');
