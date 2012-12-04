@@ -3,23 +3,23 @@
 
 {if $post_save}
     {if $new}
-        <span class="msg_success">{$CONST.CATEGORY_SAVED}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CATEGORY_SAVED}</span>
     {/if}
     {if $edit}
         {if isset($editPermission) && $editPermission == false}
-        <span class="msg_error">{$CONST.PERM_DENIED}</span>
+        <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
         {else}
         {if $subcat}{$subcat}{else}
-        <span class="msg_success">{$CONST.CATEGORY_SAVED}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CATEGORY_SAVED}</span>
         {/if}
         {/if}
     {/if}
 {/if}
 {if $doDelete}
   {if $deleteSuccess}
-        <span class="msg_success">{if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
+        <span class="msg_success"><span class="icon-ok-circle"></span> {if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
   {else}
-        <span class="msg_error">{$CONST.INVALID_CATEGORY}</span>
+        <span class="msg_error"><span class="icon-attention"></span> {$CONST.INVALID_CATEGORY}</span>
   {/if}
 {/if}
 {if $delete}
@@ -136,6 +136,7 @@
         {foreach $viewCategories as $category}
         {* TODO: Ideally, this should use true nesting, i.e. nested lists instead of a level class. *}
             <li class="clearfix level_{$category.depth}">
+                <span class="icon-folder-open"></span> 
                 <details class="category_data">
                     <summary class="category_name{if $category.category_icon} category_hasicon{/if}">{$category.category_name|escape:"html"}</summary>
 
@@ -148,14 +149,14 @@
                 </details>
                 
                 <ul class="plainList edit_actions">
-                    <li><a class="link_edit" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}">{$CONST.EDIT}</a></li>
-                    <li><a class="link_delete" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}">{$CONST.DELETE}</a></li>
+                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT}"><span class="icon-edit"></span> {$CONST.EDIT}</a></li>
+                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span> {$CONST.DELETE}</a></li>
                 </ul>
             </li>
         {/foreach}
         </ul>
     {else}
-        <span class="msg_notice">{$CONST.NO_CATEGORIES}</span>
+        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_CATEGORIES}</span>
     {/if}
         <a class="link_create" href="?serendipity[adminModule]=category&serendipity[adminAction]=new">{$CONST.CREATE_NEW_CAT}</a>
 {/if}
