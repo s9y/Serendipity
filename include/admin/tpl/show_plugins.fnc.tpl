@@ -42,7 +42,7 @@
                 {foreach $plugin_placement['plugin_data'] as $plugin_data}
                     <li id="{$plugin_data['css_key']}" class="pluginmanager_item_{cycle values="even,uneven"}">
                         <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
-                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
                         </div>
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
@@ -51,7 +51,7 @@
                         </div>
                     {/if}
                     {if $plugin_data['can_configure']}
-                        <a class="pluginmanager_configure icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
+                        <a class="pluginmanager_configure icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
                     {/if}
                         <h5>
                         {if $plugin_data['can_configure']}
