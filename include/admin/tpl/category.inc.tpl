@@ -136,9 +136,8 @@
         {foreach $viewCategories as $category}
         {* TODO: Ideally, this should use true nesting, i.e. nested lists instead of a level class. *}
             <li class="clearfix level_{$category.depth}">
-                <span class="icon-folder-open"></span> 
                 <details class="category_data">
-                    <summary class="category_name{if $category.category_icon} category_hasicon{/if}">{$category.category_name|escape:"html"}</summary>
+                    <summary class="category_name{if $category.category_icon} category_hasicon{/if}"><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
 
                     <div class="category_info">    
                     {if $category.category_description != ''}
@@ -149,8 +148,8 @@
                 </details>
                 
                 <ul class="plainList edit_actions">
-                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT}"><span class="icon-edit"></span> {$CONST.EDIT}</a></li>
-                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span> {$CONST.DELETE}</a></li>
+                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT}"><span class="icon-edit"></span> <span class="visuallyhidden">{$CONST.EDIT}</span></a></li>
+                    <li><a class="link_icon" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span> <span class="visuallyhidden">{$CONST.DELETE}</span></a></li>
                 </ul>
             </li>
         {/foreach}
