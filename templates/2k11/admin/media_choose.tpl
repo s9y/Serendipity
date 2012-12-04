@@ -101,7 +101,7 @@ if (parent.frames && parent.frames['tree']) {ldelim}
     <!-- MEDIA MANAGER END -->
 {elseif $media.case == 'choose'}
     {if $perm_denied}
-    <span class="msg_error">{$CONST.PERM_DENIED}</span>
+    <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
     {else}
     <!-- MEDIA SELECTION START -->
     {$media.external}

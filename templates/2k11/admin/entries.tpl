@@ -5,7 +5,7 @@
 <script src="serendipity_editor.js"></script>
 
 {if $entry_vars.errMsg}
-    <span class="msg_error">{$entry_vars.errMsg}</span>
+    <span class="msg_error"><span class="icon-attention"></span> {$entry_vars.errMsg}</span>
 {/if}
 <form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
     {$entry_vars.hidden}

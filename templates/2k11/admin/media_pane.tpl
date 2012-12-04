@@ -134,7 +134,7 @@
     <input name="go" type="submit" value="{$CONST.GO}">
 </form>
 {if $media.nr_files < 1}
-    <span class="msg_notice">{$CONST.NO_IMAGES_FOUND}</span>
+    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
     {if $smarty.get.serendipity.adminModule == 'media'}
     <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
