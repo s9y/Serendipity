@@ -169,7 +169,7 @@
         <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
     </form>
 {/if}
-{* BUG: This seems to be triggered if only one entry is present and said entry should be deleted? Ian: Is it gone now? *}
+{* BUG: This seems to be triggered if only one entry is present and said entry should be deleted? Ian: Is it gone now? YL: Nope, still triggered. *}
 {if ( ( (!$switched_output && empty($entries)) || (!$drawList && empty($entries)) ) && ( $get.adminAction != 'new' &&  $get.adminAction != 'edit' ) && !$is_iframepreview )}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
