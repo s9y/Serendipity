@@ -19,6 +19,7 @@
         {$media.form_hidden}
         <div id="foreign_upload" class="image_add_foreign">
             <div class="form_field">
+                {* Probably could use input[type=url] here … *}
                 <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
                 <input id="imageurl" name="serendipity[imageurl]" type="text" onchange="checkInputs()" value="">
             </div>
