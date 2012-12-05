@@ -55,7 +55,7 @@
                 <td><select class="uploadform_target_directory" id="target_directory_1" name="serendipity[target_directory][1]">
                     <option value="">{$CONST.BASE_DIRECTORY}</option>
                     {foreach from=$media.folders item="folder"}
-                    <option {if $media.only_path == $folder.relpath}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|@str_repeat:($folder.depth*2)} {$folder.name}</option>
+                    <option{if $media.only_path == $folder.relpath} selected{/if} value="{$folder.relpath}">{'&nbsp;'|@str_repeat:($folder.depth*2)} {$folder.name}</option>
                     {/foreach}
                     </select>
                 </td>

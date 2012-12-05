@@ -19,7 +19,7 @@
                 <select id="serendipity_only_path" name="serendipity[only_path]">
                     <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
                 {foreach from=$media.paths item="folder"}
-                    <option {if ($media.only_path == $media.limit_path|cat:$folder.relpath)}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                    <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
                 {/foreach}
                 </select>
             </div>
@@ -76,7 +76,7 @@
                 <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
                     <option value="">{$CONST.ALL_AUTHORS}</option>
                 {foreach from=$media.authors item="media_author"}
-                    <option value="{$media_author.authorid}" {if $media.filter[$so_key] == $media_author.authorid}selected="selected"{/if}>{$media_author.realname|@escape}</option>
+                    <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|@escape}</option>
                 {/foreach}
                 </select>
             {else}
@@ -103,7 +103,7 @@
 
                 <select id="serendipity_sortorder_order" name="serendipity[sortorder][order]">
                 {foreach from=$media.sort_order item="so_val" key="so_key"}
-                    <option value="{$so_key}" {if $media.sortorder.order == $so_key}selected="selected"{/if}>{$so_val.desc}</option>
+                    <option value="{$so_key}"{if $media.sortorder.order == $so_key} selected{/if}>{$so_val.desc}</option>
                 {/foreach}
                 </select>
             </div>
@@ -112,8 +112,8 @@
                 <label for="serendipity_sortorder_ordermode">{$CONST.SORT_ORDER}</label>
                 
                 <select id="serendipity_sortorder_ordermode" name="serendipity[sortorder][ordermode]">
-                    <option value="DESC" {if $media.sortorder.ordermode == 'DESC'}selected="selected"{/if}>{$CONST.SORT_ORDER_DESC}</option>
-                    <option value="ASC"  {if $media.sortorder.ordermode == 'ASC'}selected="selected"{/if}>{$CONST.SORT_ORDER_ASC}</option>
+                    <option value="DESC"{if $media.sortorder.ordermode == 'DESC'} selected{/if}>{$CONST.SORT_ORDER_DESC}</option>
+                    <option value="ASC"{if $media.sortorder.ordermode == 'ASC'} selected{/if}>{$CONST.SORT_ORDER_ASC}</option>
                 </select>
             </div>
 
@@ -122,7 +122,7 @@
 
                 <select id="serendipity_sortorder_perpage" name="serendipity[sortorder][perpage]">
                 {foreach from=$media.sort_row_interval item="so_val"}
-                    <option value="{$so_val}" {if $media.perPage == $so_val}selected="selected"{/if}>{$so_val}</option>
+                    <option value="{$so_val}"{if $media.perPage == $so_val} selected{/if}>{$so_val}</option>
                 {/foreach}
                 </select>
             </div>

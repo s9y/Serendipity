@@ -121,20 +121,20 @@
 
         <div class="form_select">
             <label for="read_authors">{$CONST.PERM_READ}</label>
-            <select id="read_authors" name="serendipity[read_authors][]" multiple="multiple" size="6">
-                <option value="0"{if $rgroups} selected="selected"{/if}>{$CONST.ALL_AUTHORS}</option>
+            <select id="read_authors" name="serendipity[read_authors][]" multiple size="6">
+                <option value="0"{if $rgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
             {foreach $groups AS $group}
-                <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected="selected"{/if}>{$group.confvalue|escape:'html'}</option>
+                <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
             {/foreach}
             </select>
         </div>
 
         <div class="form_select">
             <label for="write_authors">{$CONST.PERM_WRITE}</label>
-            <select id="write_authors" name="serendipity[write_authors][]" multiple="multiple" size="6">
-                <option value="0"{if $wgroups} selected="selected"{/if}>{$CONST.ALL_AUTHORS}</option>
+            <select id="write_authors" name="serendipity[write_authors][]" multiple size="6">
+                <option value="0"{if $wgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
             {foreach $groups AS $group}
-                <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected="selected"{/if}>{$group.confvalue|escape:'html'}</option>
+                <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
             {/foreach}
             </select>
         </div>
@@ -185,7 +185,7 @@
             <select id="dircreate_parent" name="serendipity[parent]">
                 <option value="">{$CONST.BASE_DIRECTORY}</option>
             {foreach $folders as $folder}
-                <option{if $folder.relpath == $get.only_path} selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:"($folder.depth*2)"} {$folder.name}</option>
+                <option{if $folder.relpath == $get.only_path} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:"($folder.depth*2)"} {$folder.name}</option>
             {/foreach}
             </select>
         </div>

@@ -81,20 +81,20 @@
 
             <div class="form_multiselect">
                 <label for="read_authors">{$CONST.PERM_READ}</label>
-                <select id="read_authors" size="6" multiple="multiple" name="serendipity[cat][read_authors][]">
-                    <option value="0"{if $selectAllReadAuthors} selected="selected"{/if}>{$CONST.ALL_AUTHORS}</option>
+                <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
+                    <option value="0"{if $selectAllReadAuthors} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                 {foreach $groups as $group}
-                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected="selected"{/if} >{$group.confvalue|escape:"html"}</option>
+                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if} >{$group.confvalue|escape:"html"}</option>
                 {/foreach}
                 </select>
             </div>
 
             <div class="form_multiselect">
                 <label for="write_authors">{$CONST.PERM_WRITE}</label>
-                <select id="write_authors"size="6" multiple="multiple" name="serendipity[cat][write_authors][]">
-                    <option value="0"{if $selectAllReadAuthors} selected="selected"{/if}>{$CONST.ALL_AUTHORS}</option>
+                <select id="write_authors"size="6" multiple name="serendipity[cat][write_authors][]">
+                    <option value="0"{if $selectAllReadAuthors} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                 {foreach $groups as $group}
-                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected="selected"{/if}>{$group.confvalue|escape:"html"}</option>
+                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:"html"}</option>
                 {/foreach}
                 </select>
             </div>
@@ -102,10 +102,10 @@
             <div class="form_select">
                 <label for="parent_cat">{$CONST.PARENT_CATEGORY}</label>
                 <select id="parent_cat" name="serendipity[cat][parent_cat]">
-                    <option value="0"{if $cid == 0} selected="selected"{/if}>{$CONST.NO_CATEGORY}</option>
+                    <option value="0"{if $cid == 0} selected{/if}>{$CONST.NO_CATEGORY}</option>
                 {foreach $categories as $cat}
                     {if $cat.categoryid == $cid}{continue}{/if}
-                    <option value="{$cat.categoryid}"{if $this_cat.parentid == $cat.categoryid} selected="selected"{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name}</option>
+                    <option value="{$cat.categoryid}"{if $this_cat.parentid == $cat.categoryid} selected{/if}>{for $i=1 to $cat.depth}&nbsp{/for} {$cat.category_name}</option>
                 {/foreach}
                 </select>
             </div>

@@ -18,15 +18,15 @@
                     {if is_array($users)}
                         {foreach $users AS $user}
                         {if isset($user.artcount) && $user.artcount < 1}{continue}{/if}
-                        <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected="selected"' : ''}>{$user.realname|escape}</option>
+                        <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected' : ''}>{$user.realname|escape}</option>
                         {/foreach}
                     {/if}
                     </select>
                     <label for="filter_draft" class="visuallyhidden">Entry status</label> {* i18n *}
                     <select id="filter_draft" name="serendipity[filter][isdraft]">
                         <option value="all">{$CONST.COMMENTS_FILTER_ALL}</option>
-                        <option value="draft" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'draft') ? 'selected="selected"' : '')}>{$CONST.DRAFT}</option>
-                        <option value="publish" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'publish') ? 'selected="selected"' : '')}>{$CONST.PUBLISH}</option>
+                        <option value="draft" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'draft') ? 'selected' : '')}>{$CONST.DRAFT}</option>
+                        <option value="publish" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'publish') ? 'selected' : '')}>{$CONST.PUBLISH}</option>
                     </select>
                 </div>
 
@@ -35,7 +35,7 @@
                     <select id="filter_category" name="serendipity[filter][category]">
                         <option value="">-</option>
                     {foreach $categories as $cat}
-                        <option value="{$cat.categoryid}"{($get.filter.category == $cat.categoryid) ? ' selected="selected"' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
+                        <option value="{$cat.categoryid}"{($get.filter.category == $cat.categoryid) ? ' selected' : ''}>{'&nbsp;'|str_repeat:$cat.depth} {$cat.category_name|escape}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -55,7 +55,7 @@
                     <label for="sort_order">{$CONST.SORT_BY}</label>
                     <select id="sort_order" name="serendipity[sort][order]">
                     {foreach $sort_order as $so_key => $so_val}
-                        <option value="{$so_key}" {(isset($get.sort.order) && ($get.sort.order == $so_key) ? 'selected="selected"': '')}>{$so_val}</option>
+                        <option value="{$so_key}" {(isset($get.sort.order) && ($get.sort.order == $so_key) ? 'selected': '')}>{$so_val}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -63,8 +63,8 @@
                 <div class="form_select">
                     <label for="sort_ordermode">{$CONST.SORT_ORDER}</label>
                     <select id="sort_ordermode" name="serendipity[sort][ordermode]">
-                        <option value="DESC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'DESC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_DESC}</option>
-                        <option value="ASC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'ASC') ? 'selected="selected"' : '')}>{$CONST.SORT_ORDER_ASC}</option>
+                        <option value="DESC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'DESC') ? 'selected' : '')}>{$CONST.SORT_ORDER_DESC}</option>
+                        <option value="ASC" {(isset($get.sort.ordermode) && ($get.sort.ordermode == 'ASC') ? 'selected' : '')}>{$CONST.SORT_ORDER_ASC}</option>
                     </select>
                 </div>
 
@@ -72,7 +72,7 @@
                     <label for="sort_perpage">{$CONST.ENTRIES_PER_PAGE}</label>
                     <select id="sort_perpage" name="serendipity[sort][perPage]">
                     {foreach $per_page AS $per_page_nr}
-                        <option value="{$per_page_nr}" {((isset($get.sort.perPage) && ($get.sort.perPage == $per_page_nr)) ? 'selected="selected"' : '')}> {$per_page_nr}</option>
+                        <option value="{$per_page_nr}" {((isset($get.sort.perPage) && ($get.sort.perPage == $per_page_nr)) ? 'selected' : '')}> {$per_page_nr}</option>
                     {/foreach}
                     </select>
                 </div>

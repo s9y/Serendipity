@@ -51,9 +51,9 @@
 
         <div class="form_select">
             <label for="group_members">{$CONST.USERCONF_GROUPS}</label>
-            <select id="group_members" name="serendipity[members][]" multiple="multiple" size="5">
+            <select id="group_members" name="serendipity[members][]" multiple size="5">
                 {foreach $allusers as $user}
-                <option value="{$user.authorid}" {if isset($selected.{$user.authorid})} selected="selected"{/if} >{$user.realname|escape:"html"}</option>
+                <option value="{$user.authorid}" {if isset($selected.{$user.authorid})} selected{/if} >{$user.realname|escape:"html"}</option>
                 {/foreach}
             </select>
         </div>
@@ -86,18 +86,18 @@
         {if $enablePluginACL}
             <div class="form_select">
                 <label for="forbidden_plugins">{$CONST.PERMISSION_FORBIDDEN_PLUGINS}</label>
-                <select id="forbidden_plugins" name="serendipity[forbidden_plugins][]" multiple="multiple" size="5">
+                <select id="forbidden_plugins" name="serendipity[forbidden_plugins][]" multiple size="5">
                 {foreach $allplugins as $plugin}
-                    <option value="{{$plugin@key}|escape:"url"}{if $plugin.has_permission == false} selected="selected"{/if}">{$plugin.b->properties.name|escape:"html"}</option>
+                    <option value="{{$plugin@key}|escape:"url"}{if $plugin.has_permission == false} selected{/if}">{$plugin.b->properties.name|escape:"html"}</option>
                 {/foreach}
                 </select>
             </div>
 
             <div class="form_select">
                 <label for="forbidden_hooks">{$CONST.PERMISSION_FORBIDDEN_HOOKS}</label>
-                <select name="serendipity[forbidden_hooks][]" multiple="multiple" size="5">
+                <select name="serendipity[forbidden_hooks][]" multiple size="5">
                 {foreach $allhooks as $hook}
-                    <option value="{{$hook@key}|escape:"url"}"{$hook.has_permission == false} 'selected="selected"'}>{{$hook@key}|escape:"html"}</option>
+                    <option value="{{$hook@key}|escape:"url"}"{$hook.has_permission == false} 'selected'}>{{$hook@key}|escape:"html"}</option>
                 {/foreach}
                 </select>
             </div>

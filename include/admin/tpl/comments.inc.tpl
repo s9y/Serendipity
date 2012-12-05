@@ -105,7 +105,7 @@ function highlightComment(id, checkvalue) {
                     <label for="filter_perpage">{$CONST.COMMENTS}:</label>
                     <select id="filter_perpage" name="serendipity[filter][perpage]">
                     {foreach $filter_vals AS $filter}
-                        <option value="{$filter}" {($commentsPerPage == $filter) ? ' selected="selected"' : ''}>{$filter}</option>
+                        <option value="{$filter}" {($commentsPerPage == $filter) ? ' selected' : ''}>{$filter}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -113,10 +113,10 @@ function highlightComment(id, checkvalue) {
                 <div class="form_select">
                     <label for="filter_show">{$CONST.COMMENTS_FILTER_SHOW}:</label>
                     <select id="filter_show" name="serendipity[filter][show]">
-                        <option value="all"{if $get.filter.show == 'all'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
-                        <option value="approved"{if $get.filter.show == 'approved'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
-                        <option value="pending"{if $get.filter.show == 'pending'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
-                        <option value="confirm"{if $get.filter.show == 'confirm'} selected="selected"{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
+                        <option value="all"{if $get.filter.show == 'all'} selected{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
+                        <option value="approved"{if $get.filter.show == 'approved'} selected{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
+                        <option value="pending"{if $get.filter.show == 'pending'} selected{/if}>{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</option>
+                        <option value="confirm"{if $get.filter.show == 'confirm'} selected{/if}>{$CONST.COMMENTS_FILTER_NEED_CONFIRM}</option>
                     </select>
                 </div>
 
@@ -124,9 +124,9 @@ function highlightComment(id, checkvalue) {
                     <label for="filter_type">{$CONST.TYPE}</label>
                     <select id="filter_type" name="serendipity[filter][type]">
                         <option value="">{$CONST.COMMENTS_FILTER_ALL}</option>
-                        <option value="NORMAL"{if $c_type == 'NORMAL'} selected="selected"{/if}>{$CONST.COMMENTS}</option>
-                        <option value="TRACKBACK"{if $c_type == 'TRACKBACK'} selected="selected"{/if}>{$CONST.TRACKBACKS}</option>
-                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected="selected"{/if}>{$CONST.PINGBACKS}</option>
+                        <option value="NORMAL"{if $c_type == 'NORMAL'} selected{/if}>{$CONST.COMMENTS}</option>
+                        <option value="TRACKBACK"{if $c_type == 'TRACKBACK'} selected{/if}>{$CONST.TRACKBACKS}</option>
+                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected{/if}>{$CONST.PINGBACKS}</option>
                     </select>
                 </div>
             </div>

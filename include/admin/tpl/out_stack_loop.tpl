@@ -13,11 +13,11 @@
             {if $cdesc != ''}<span>{$cdesc}</span>{/if}
             </label>
             {* Make sure id creation actually produces unique identifiers *}
-            <select id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]{($is_multi_select) ? '[]' : ''}" {($is_multi_select) ? 'multiple="multiple"' : ''} {($is_multi_select && ($select_size > 0)) ? "size='{$select_size}'" : ''}>
+            <select id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]{($is_multi_select) ? '[]' : ''}" {($is_multi_select) ? 'multiple' : ''} {($is_multi_select && ($select_size > 0)) ? "size='{$select_size}'" : ''}>
             {foreach $select AS $select_value => $select_desc}
                 {assign var="id" value="{$config_item|escape}_{$select_value|escape}"}
                 <!-- case select assign id={$id} -->
-                <option value="{$select_value}" {(in_array($select_value, $selected_options) || in_array($select_value, $pre_selected)) ? 'selected="selected"' : ''} title="{$select_desc|escape}">{$select_desc|escape}</option>
+                <option value="{$select_value}" {(in_array($select_value, $selected_options) || in_array($select_value, $pre_selected)) ? 'selected' : ''} title="{$select_desc|escape}">{$select_desc|escape}</option>
             {/foreach}
             </select>            
         </div>

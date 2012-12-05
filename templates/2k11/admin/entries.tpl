@@ -27,10 +27,10 @@
         <div id="edit_entry_category" class="form_select">
             {* TODO: this needs JS to be collapsible *}
             <label for="categoryselector">{$CONST.CATEGORY}</label>
-            <select id="categoryselector" name="serendipity[categories][]" multiple="multiple">
+            <select id="categoryselector" name="serendipity[categories][]" multiple>
                 <option value="0">{$CONST.NO_CATEGORY}</option>
             {foreach from=$entry_vars.category_options item="entry_cat"}
-                <option value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} selected="selected"{/if}>{$entry_cat.depth_pad}{$entry_cat.category_name}</option>
+                <option value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} selected{/if}>{$entry_cat.depth_pad}{$entry_cat.category_name}</option>
             {/foreach}
             </select>
         </div>
@@ -39,9 +39,9 @@
             <label for="entry_status">Entry status</label> {* i18n *}
             <select id="entry_status" name="serendipity[isdraft]">
             {if $entry_vars.serendipityRightPublish}
-                <option value="false"{if $entry_vars.draft_mode == 'publish'} selected="selected"{/if}>{$CONST.PUBLISH}</option>
+                <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>
             {/if}
-                <option value="true"{if $entry_vars.draft_mode == 'draft'} selected="selected"{/if}>{$CONST.DRAFT}</option>
+                <option value="true"{if $entry_vars.draft_mode == 'draft'} selected{/if}>{$CONST.DRAFT}</option>
             </select>
         </div>
     </div>

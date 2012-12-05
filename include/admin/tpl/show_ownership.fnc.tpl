@@ -12,7 +12,7 @@
         {if (!$is_plugin_owner && ($user['authorid'] == $authorid))}
             {assign var="realname" value="{$user['realname']|escape}"}
         {elseif $is_plugin_owner}
-        <option value="{$user['authorid']}"{($user['authorid'] == $authorid) ? ' selected="selected"' : ''}>{$user['realname']|escape}</option>
+        <option value="{$user['authorid']}"{($user['authorid'] == $authorid) ? ' selected' : ''}>{$user['realname']|escape}</option>
         {/if}
     {/foreach}
     {if $is_plugin_owner}
