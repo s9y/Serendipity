@@ -141,9 +141,9 @@
 
                     <div class="category_info">    
                     {if $category.category_description != ''}
-                        <p class="category_desc">{$category.category_description|escape:"html"}</p>
+                        <span class="category_desc block_level">{$category.category_description|escape:"html"}</span>
                     {/if}
-                        <span class="category_author block_level standalone">{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>
+                        <span class="category_author block_level">{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>
                     </div>
                 </details>
                 
