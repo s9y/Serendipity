@@ -927,7 +927,10 @@ summary { cursor: pointer; }
 
     #user_menu { text-align: right; }
 
-    #user_menu ul { margin: 1.5em 0 .5em; }
+    #user_menu ul {
+        font-size: 1.5em;
+        margin: 1.5em 0 .5em;
+    }
 
     #user_menu li,
     .edit_actions li { margin: 0 0 0 1em; }
@@ -946,7 +949,10 @@ summary { cursor: pointer; }
 }
 
 @media only screen and (min-width: 1280px) {
-    #user_menu ul { font-size: 1.5em; }
+    #user_menu ul {
+        font-size: 2em;
+        margin: 1em 0;
+    }
 }
 
 @media only screen and (min-width: 1400px) {
