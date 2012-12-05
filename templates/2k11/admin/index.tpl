@@ -26,7 +26,7 @@
             {if $admin_vars.admin_installed}
                 <h1><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</h1>
                 {if $admin_vars.is_logged_in}
-                <a class="icon_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a>
+                <span class="block_level">{$admin_vars.self_info}</span>
                 {/if}
             {else}
                 <h1>{$CONST.SERENDIPITY_INSTALLATION}</h1>
@@ -34,14 +34,15 @@
             </div>
         {if $admin_vars.is_logged_in}
             <nav id="user_menu">
-                <h2>{$admin_vars.self_info}</h2>
+                <h2 class="visuallyhidden">User menu</h2> {* i18n *}
 
                 <ul>
-                    <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-off"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                     <li><a class="icon_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
                 {if 'personalConfiguration'|checkPermission}
                     <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
+                    <li><a class="icon_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                    <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-off"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                 </ul>
             </nav>
         {/if}
