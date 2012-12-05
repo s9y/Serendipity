@@ -765,6 +765,11 @@ summary { cursor: pointer; }
 #top a, #top a:visited { color: #ffbf00; }
 #top a:hover, #top a:focus { color: #fcfcfc; }
 
+#user_menu ul {
+    font-size: 2em;
+    margin: 1em 0 .5em;
+}
+
 #user_menu li,
 .edit_actions li {
     display: inline-block;
