@@ -160,7 +160,10 @@ function serendipity_drawList() {
         $data['serverOffsetHour']  = serendipity_serverOffsetHour();
         $data['showFutureEntries'] = $serendipity['showFutureEntries'];
 
-    } // entries end 
+    } else {
+        $data['no_entries'] = true;
+    } // if entries end
+
 } // End function serendipity_drawList()
 
 if (!empty($serendipity['GET']['editSubmit'])) {
