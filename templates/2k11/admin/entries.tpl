@@ -9,44 +9,47 @@
 {/if}
 <form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
     {$entry_vars.hidden}
-    <div class="form_field">
-        <label for="entryTitle">{$CONST.TITLE}:</label>
+    <div id="edit_entry_title" class="form_field">
+        <label for="entryTitle">{$CONST.TITLE}</label>
         <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|@escape}">
     </div>
-{if $entry_vars.allowDateManipulation}
-    <div class="form_field">
-        <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp}">
-        {* TODO: this should be input[type=datetime] *}
-        <label for="serendipityNewTimestamp">{$CONST.DATE}:</label>
-        <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="text" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}">
-        <a id="reset_timestamp" class="icon_link" href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></a>
-    </div>
-{/if}
-    <div class="form_select">
-        {* BUG: doesn't work the way it used to (collapsed multiselect) *}
-        <label for="categoryselector">{$CONST.CATEGORY}:</label>
-        <select id="categoryselector" name="serendipity[categories][]" multiple="multiple">
-            <option value="0">{$CONST.NO_CATEGORY}</option>
-        {foreach from=$entry_vars.category_options item="entry_cat"}
-            <option value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} selected="selected"{/if}>{$entry_cat.depth_pad}{$entry_cat.category_name}</option>
-        {/foreach}
-        </select>
-    </div>
 
-    <div class="form_select">
-        <label for="entry_status" class="visuallyhidden">Entry status</label> {* i18n *}
-        <select id="entry_status" name="serendipity[isdraft]">
-        {if $entry_vars.serendipityRightPublish}
-            <option value="false"{if $entry_vars.draft_mode == 'publish'} selected="selected"{/if}>{$CONST.PUBLISH}</option>
-        {/if}
-            <option value="true"{if $entry_vars.draft_mode == 'draft'} selected="selected"{/if}>{$CONST.DRAFT}</option>
-        </select>
+    <div id="edit_entry_metadata" class="clearfix">
+    {if $entry_vars.allowDateManipulation}
+        <div id="edit_entry_timestamp" class="form_field">
+            <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp}">
+            {* TODO: this should be input[type=datetime] *}
+            <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
+            <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="text" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}">
+            <a id="reset_timestamp" class="icon_link" href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></a>
+        </div>
+    {/if}
+        <div id="edit_entry_category" class="form_select">
+            {* TODO: this needs JS to be collapsible *}
+            <label for="categoryselector">{$CONST.CATEGORY}</label>
+            <select id="categoryselector" name="serendipity[categories][]" multiple="multiple">
+                <option value="0">{$CONST.NO_CATEGORY}</option>
+            {foreach from=$entry_vars.category_options item="entry_cat"}
+                <option value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} selected="selected"{/if}>{$entry_cat.depth_pad}{$entry_cat.category_name}</option>
+            {/foreach}
+            </select>
+        </div>
+
+        <div id="edit_entry_status" class="form_select">
+            <label for="entry_status">Entry status</label> {* i18n *}
+            <select id="entry_status" name="serendipity[isdraft]">
+            {if $entry_vars.serendipityRightPublish}
+                <option value="false"{if $entry_vars.draft_mode == 'publish'} selected="selected"{/if}>{$CONST.PUBLISH}</option>
+            {/if}
+                <option value="true"{if $entry_vars.draft_mode == 'draft'} selected="selected"{/if}>{$CONST.DRAFT}</option>
+            </select>
+        </div>
     </div>
 
     <div class="form_area">
         <label for="serendipity[body]">{$CONST.ENTRY_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
-        <div id="tools_entry">
+        <div id="tools_entry" class="editor_toolbar">
             {* This whole button bar should be replaced by something external, which maybe even
                "reacts" to installed markup plugins. I.e. if a blog uses Markdown, the button for
                italic should not insert an em element but the appropriate Markdown formatting. *}
@@ -94,7 +97,7 @@
     <div class="form_area">
         <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
-        <div id="tools_extended">
+        <div id="tools_extended" class="editor_toolbar">
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}<input name="insX" type="button" value="NoBR" accesskey="x" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<nl>','</nl>')">{/if}
             <input name="insI" type="button" accesskey="i" value="I" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<em>','</em>')">

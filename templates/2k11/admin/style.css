@@ -123,6 +123,8 @@ input[disabled] { cursor: default; }
 
 input[type="checkbox"],
 input[type="radio"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0;
     *height: 13px;
@@ -842,6 +844,22 @@ summary { cursor: pointer; }
     *zoom: 1;
 }
 
+#edit_entry_title label,
+#edit_entry_metadata label {
+    display: inline-block;
+    width: 15%;
+}
+
+#edit_entry_title input { width: 84%; }
+
+#edit_entry_metadata input,
+#edit_entry_metadata select { width: 84%; }
+
+.editor_toolbar input {
+    margin: 0 .25em .75em 0;
+    min-width: 4.25em;
+}
+
 /* Footer area */
 #meta {
     background: #ccdee7;
@@ -950,6 +968,16 @@ summary { cursor: pointer; }
     #login { margin: 4em auto 1em; }
 
     #back_to_blog { margin: 1em auto 4em; }
+
+    #edit_entry_metadata label {
+        display: block;
+        width: auto;
+    }
+
+    #edit_entry_metadata>div {
+        float: left;
+        width: 33% ;
+    }
 }
 
 @media only screen and (min-width: 1280px) {
