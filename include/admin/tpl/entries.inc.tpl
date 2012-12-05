@@ -22,7 +22,10 @@
                         {/foreach}
                     {/if}
                     </select>
-                    <label for="filter_draft" class="visuallyhidden">Entry status</label> {* i18n *}
+                </div>
+
+                <div class="form_select">
+                    <label for="filter_draft">Entry status</label> {* i18n *}
                     <select id="filter_draft" name="serendipity[filter][isdraft]">
                         <option value="all">{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="draft" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'draft') ? 'selected' : '')}>{$CONST.DRAFT}</option>
@@ -103,10 +106,10 @@
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
 
-        <ul class="plainList">
+        <ul id="entries_list" class="plainList">
         {foreach $entries as $entry}
             {if ($entry@index > $perPage)}{continue}{/if}
-            <li><div class="form_check">
+            <li class="clearfix"><div class="form_check">
                     <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
                 </div>
 

@@ -972,19 +972,32 @@ summary { cursor: pointer; }
 
     #back_to_blog { margin: 1em auto 4em; }
 
-    #edit_entry_metadata label {
+    #edit_entry_metadata label,
+    #sort_entries .form_select label,
+    #filter_entries .form_select label,
+    #filter_entries .form_field label {
         display: block;
         width: auto;
     }
 
-    #edit_entry_metadata>div {
+    #edit_entry_metadata>div,
+    #sort_entries .form_select {
         float: left;
         width: 33% ;
     }
 
+    #filter_entries .form_select,
+    #filter_entries .form_field {
+        float: left;
+        width: 25%;
+    }
+
     #edit_entry_metadata select { width: 100%; }
 
-    #edit_entry_metadata select[multiple] { width: 84%; }
+    #edit_entry_metadata select[multiple],
+    #sort_entries .form_select select,
+    #filter_entries .form_select select,
+    #filter_entries .form_field input { width: 84%; }
 }
 
 @media only screen and (min-width: 1280px) {
