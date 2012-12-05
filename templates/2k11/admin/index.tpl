@@ -22,7 +22,7 @@
 {if NOT $admin_vars.no_banner}
     <header id="top">
         <div class="clearfix">
-            <div id="banner">
+            <div id="banner{if not $admin_vars.is_logged_in}_install{/if}">
             {if $admin_vars.admin_installed}
                 <h1><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</h1>
                 {if $admin_vars.is_logged_in}
