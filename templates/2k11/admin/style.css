@@ -859,6 +859,17 @@ summary { cursor: pointer; }
     width: 15%;
 }
 
+#sort_entries .form_select label,
+#filter_entries .form_select label,
+#filter_entries .form_field label {
+    display: inline-block;
+    width: 20%;
+}
+
+#sort_entries .form_select select,
+#filter_entries .form_select select,
+#filter_entries .form_field input { width: 79%; }
+
 #edit_entry_title input { width: 84%; }
 
 #edit_entry_metadata input,
