@@ -107,7 +107,7 @@
         {foreach $entries as $entry}
             {if ($entry@index > $perPage)}{continue}{/if}
             <li><h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
-                <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">TODO_LANG #{$entry_id}</label>
+                <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
 
                 <div class="entry_status">
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
@@ -161,10 +161,11 @@
             <legend><span>{$CONST.EDIT_ENTRY} #</span></legend>
 
             <div class="form_field">
+                <label for="skipto_entry" class="visuallyhidden">Skip to entry no.</label> {* i18n *}
                 <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-                <label for="skipto_entry" class="visuallyhidden">TODO_LANG</label>
             </div>
         </fieldset>
+
         <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
     </form>
 {/if}
