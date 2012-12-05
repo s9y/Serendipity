@@ -765,15 +765,6 @@ summary { cursor: pointer; }
 #top a, #top a:visited { color: #ffbf00; }
 #top a:hover, #top a:focus { color: #fcfcfc; }
 
-#banner h1,
-#banner a { float: left; }
-
-#banner a { margin: 2.4em 0 0 2em; }
-
-#user_menu { clear: both; }
-
-#user_menu h2 { margin: 1.5em 0 0; }
-
 #user_menu li,
 .edit_actions li {
     display: inline-block;
