@@ -22,8 +22,8 @@
 {if NOT $admin_vars.no_banner}
     <header id="top">
         <div class="clearfix">
-        {if $admin_vars.admin_installed}
             <div id="banner">
+            {if $admin_vars.admin_installed}
                 <h1><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</h1>
                 {if $admin_vars.is_logged_in}
                 <a class="icon_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a>
