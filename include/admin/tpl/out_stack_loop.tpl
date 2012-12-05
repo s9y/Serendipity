@@ -113,7 +113,10 @@
                     <li id="{$orid['id']}" class="sequence_item pluginmanager_item_even">
                         <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet"><a href="#"></a></div>
                     {if $checkable}
-                        <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" onclick="sort_{$config_item}_Sequence();" value="true">
+                        <div class="form_check">
+                            <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" onclick="sort_{$config_item}_Sequence();" value="true">
+                            {* TODO: needs label *}
+                        </div>
                     {/if}
                         <span>{$items[{$orid['id']}]['display']}</span>
                     {if isset($items[{$orid['id']}]['img'])}

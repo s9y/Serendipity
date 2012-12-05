@@ -34,8 +34,9 @@
             {/if}
                 <li><a id="media_prop" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
                 <li><a id="media_delete" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
-                <li><input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}">
-                    <label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
+                <li><div class="form_check">
+                        <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
+                    </div>
                 </li>
             </ul>
         {/if}
