@@ -30,39 +30,32 @@
                     <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
                 </select>
             </div>
-            <span class="standout"> {$CONST.WORD_OR} </span>
+            <span class="standalone">{$CONST.WORD_OR}</span>
         </div>
 
-        <!-- WARNING: Do not change spacing or breaks below. If you do, the JavaScript childNodes need to be edited. Newlines count as nodes! -->
         <div id="upload_template">
-        <table style="margin-top: 35px" id="upload_table" class="image_add_local">
-            <tr>
-                <td nowrap='nowrap'>{$CONST.ENTER_MEDIA_UPLOAD}</td>
-                <td><input class="input_file uploadform_userfile" id="userfile_1" name="serendipity[userfile][1]" onchange="checkInputs();" type="file"></td>
-            </tr>
+            <div class="form_field">
+                <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
+                <input id="userfile_1" class="uploadform_userfile" name="serendipity[userfile][1]" type="file" onchange="checkInputs();">
+            </div>
 
-            <tr>
-                <td align="center" colspan="2"><br></td>
-            </tr>
+            <div class="form_field">
+                <label for="target_filename_1" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></label>
+                <input id="target_filename_1" class="uploadform_target_filename" name="serendipity[target_filename][1]" type="text" value="">
+            </div>
 
-            <tr>
-                <td>{$CONST.SAVE_FILE_AS}</td>
-                <td><input class="input_textbox uploadform_target_filename" type="text" id="target_filename_1" name="serendipity[target_filename][1]" value="" size="40"><span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></td>
-            </tr>
-
-            <tr>
-                <td>{$CONST.STORE_IN_DIRECTORY}</td>
-                <td><select class="uploadform_target_directory" id="target_directory_1" name="serendipity[target_directory][1]">
+            <div class="form_select">
+                <label for="target_directory_1"class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
+                <select id="target_directory_1" class="uploadform_target_directory" name="serendipity[target_directory][1]">
                     <option value="">{$CONST.BASE_DIRECTORY}</option>
                     {foreach from=$media.folders item="folder"}
                     <option{if $media.only_path == $folder.relpath} selected{/if} value="{$folder.relpath}">{'&nbsp;'|@str_repeat:($folder.depth*2)} {$folder.name}</option>
                     {/foreach}
-                    </select>
-                </td>
-            </tr>
-       </table>
-       <div id="ccounter"><input class="uploadform_column_count" type="hidden" name="serendipity[column_count][1]" id="column_count_1" value="true" /></div>
-       </div>
+                </select>
+            </div>
+
+            <div id="ccounter"><input id="column_count_1" class="uploadform_column_count" type="hidden" name="serendipity[column_count][1]" value="true"></div>
+        </div>
 
        <div id="debug">
        </div>

@@ -580,19 +580,25 @@ function addUploadField() {
     fields.attr('id', 'upload_form_' + upload_fieldcount);
     fields.css('display', 'block');
 
-    userfile       = jQuery('.uploadform_userfile',         fields);
-    targetfilename = jQuery('.uploadform_target_filename',  fields);
-    targetdir      = jQuery('.uploadform_target_directory', fields);
-    columncount    = jQuery('.uploadform_column_count',     fields);
+    userfile             = jQuery('.uploadform_userfile',               fields);
+    userfile_label       = jQuery('.uploadform_userfile_label',         fields);
+    targetfilename       = jQuery('.uploadform_target_filename',        fields);
+    targetfilename_label = jQuery('.uploadform_target_filename_label',  fields);
+    targetdir            = jQuery('.uploadform_target_directory',       fields);
+    targetdir_label      = jQuery('.uploadform_target_directory_label', fields);
+    columncount          = jQuery('.uploadform_column_count',           fields);
 
     userfile.attr('id', 'userfile_' + upload_fieldcount);
     userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
+    userfile_label.attr('for', 'userfile_' + upload_fieldcount);
 
     targetfilename.attr('id', 'target_filename_' + upload_fieldcount);
     targetfilename.attr('name', 'serendipity[target_filename][' + upload_fieldcount + ']');
+    targetfilename_label.attr('for', 'target_filename_' + upload_fieldcount);
 
     targetdir.attr('id', 'target_directory_' + upload_fieldcount);
     targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
+    targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
     columncount.attr('id', 'column_count_' + upload_fieldcount);
     columncount.attr('name', 'serendipity[column_count][' + upload_fieldcount + ']');
