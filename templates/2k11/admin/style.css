@@ -728,7 +728,7 @@ summary { cursor: pointer; }
 
 /* Backend messages */
 .msg_error, .msg_success,
-.msg_notice {
+.msg_notice, .msg_dialogue {
     display: block;
     margin: 1.5em 0;
     padding: 10px;
@@ -750,6 +750,12 @@ summary { cursor: pointer; }
     background: #fcf8e3;
     border: 1px solid #f7ecb5;
     color: #c09853;
+}
+
+.msg_dialogue {
+    background: #eee;
+    border: 1px solid #aaa;
+    color: #777;
 }
 
 /* Layout */

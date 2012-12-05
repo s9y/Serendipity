@@ -66,9 +66,9 @@
     {if ( $is_delete || $is_multidelete )}
         <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
         {foreach $rip_image AS $ripimg}
-        <span class="msg_dialog_ripentry">{$ripimg}</span>
+        <span class="msg_dialogue"><span class="icon-help-circle"></span> {$ripimg}</span>
         {/foreach}
-        <ul class="dialog_delrip">
+        <ul class="dialogue_delrip plainList clearfix">
             <li><a class="link_abort" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a></li>
             <li><a class="link_confirm" href="{$newLoc}">{$CONST.DUMP_IT}</a></li>
         </ul>

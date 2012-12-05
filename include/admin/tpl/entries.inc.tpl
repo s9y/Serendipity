@@ -191,14 +191,14 @@
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
         {foreach $del_entry AS $delent}
-        <span class="msg_dialog_delentry">{$delent}</span>
+        <span class="msg_dialogue"><span class="icon-help-circle"></span> {$delent}</span>
         {/foreach}
     {/if}
     {if ( $is_delete || $is_multidelete )}
         {foreach $rip_entry AS $ripent}
-        <span class="msg_dialog_ripentry">{$ripent}</span>
+        <span class="msg_dialogue"><span class="icon-help-circle"></span> {$ripent}</span>
         {/foreach}
-        <ul class="dialog_delrip plainList clearfix">
+        <ul class="dialogue_delrip plainList clearfix">
             <li><a class="link_abort" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a></li>
             <li><a class="link_confirm" href="{$newLoc}">{$CONST.DUMP_IT}</a></li>
         </ul>
