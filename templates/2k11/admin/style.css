@@ -769,6 +769,9 @@ summary { cursor: pointer; }
 #top a, #top a:visited { color: #ffbf00; }
 #top a:hover, #top a:focus { color: #fcfcfc; }
 
+#banner,
+#user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
+
 #user_menu ul {
     font-size: 1.5em;
     margin: .5em 0;
