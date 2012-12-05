@@ -863,6 +863,25 @@ summary { cursor: pointer; }
     min-width: 4.25em;
 }
 
+#entries_list .form_check { float: left; }
+
+#entries_list h3 {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+#entries_list h3,
+#entries_list .entry_status,
+#entries_list .entry_meta {
+    float : left;
+    margin: .75em 1em .75em 0;
+}
+
+#entries_list .actions {
+    float: right;
+    margin: .75em 0;
+}
+
 /* Footer area */
 #meta {
     background: #ccdee7;

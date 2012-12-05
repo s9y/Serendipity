@@ -151,8 +151,7 @@
         {/foreach}
         </ul>
     {/if}
-        {* TODO: Clone pagination using JS *}
-        <div id="multidelete_tools">
+        <div id="multidelete_tools" class="form_buttons">
             <input name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()">
             <input name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_ENTRIES}">
         </div>
@@ -163,15 +162,11 @@
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
 
-        <fieldset id="entry_skip" class="clearfix">
-            <legend><span>{$CONST.EDIT_ENTRY} #</span></legend>
-
-            <div class="form_field">
-                <label for="skipto_entry" class="visuallyhidden">Skip to entry no.</label> {* i18n *}
-                <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-            </div>
-        </fieldset>
-
+        <div id="entry_skip" class="form_field">
+            <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
+            <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
+        </div>
+        
         <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
     </form>
 {/if}
