@@ -766,8 +766,8 @@ summary { cursor: pointer; }
 #top a:hover, #top a:focus { color: #fcfcfc; }
 
 #user_menu ul {
-    font-size: 2em;
-    margin: 1em 0 .5em;
+    font-size: 1.5em;
+    margin: .5em 0;
 }
 
 #user_menu li,
@@ -944,6 +944,13 @@ summary { cursor: pointer; }
     #login { margin: 4em auto 1em; }
 
     #back_to_blog { margin: 1em auto 4em; }
+}
+
+@media only screen and (min-width: 1280px) {
+    #user_menu ul {
+        font-size: 1.5em;
+        margin: 1em 0;
+    }
 }
 
 @media only screen and (min-width: 1400px) {
