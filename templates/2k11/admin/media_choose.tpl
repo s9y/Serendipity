@@ -39,11 +39,11 @@
         } 
 
         #outer { 
-            width:                       {$imgedit.img_width}px;
-            height:                      {$imgedit.img_height}px;
-            border:                      1px solid red;
-            position:                    relative;
-            display:                     block;
+            width: {$imgedit.img_width}px;
+            height: {$imgedit.img_height}px;
+            border: 1px solid red;
+            position: relative;
+            display: block;
         } 
     </style>
     <script src="{serendipity_getFile file='dragdrop.js'}" ></script>
@@ -304,13 +304,13 @@ if (parent.frames && parent.frames['tree']) {
         coreNode.target   = 'media';
         coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = {  id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" }; 
+        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" }; 
         {if $item.depth == 1}
         tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         {else}
         if (last_node[{$item.depth}-1]) { 
             tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        }  else { 
+        } else { 
             tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         } 
         {/if}

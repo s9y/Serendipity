@@ -37,11 +37,11 @@
         } 
 
         #outer { 
-            width:                       {$imgedit.img_width}px;
-            height:                      {$imgedit.img_height}px;
-            border:                      1px solid red;
-            position:                    relative;
-            display:                     block;
+            width: {$imgedit.img_width}px;
+            height: {$imgedit.img_height}px;
+            border: 1px solid red;
+            position: relative;
+            display: block;
         } 
         </style>
         <script type="text/javascript" src="{serendipity_getFile file='dragdrop.js'}" ></script>
