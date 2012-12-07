@@ -144,7 +144,7 @@
         {/if}
             </fieldset>
 {* Smarty 3 has a new auto literal option which is enabled by default.
-   When the { is followed by a space it's not interpreted as smarty delimiter but literal. *}
+   When the { is surrounded by whitespace it is not interpreted as smarty delimiter but literal. e.g. ' } ;' *}
             <script>
                 function sort_{$config_item}_Sequence() { 
                     //var seq = DragDrop.serData('{$config_item}_group', null);
@@ -155,7 +155,7 @@
                     checkable_seq = seq.split(",");
                     out_seq = '';
                     for (i in checkable_seq) { 
-                        if (document.getElementById('activate_' + checkable_seq[i]) && !document.getElementById('activate_' + checkable_seq[i]).checked) {
+                        if (document.getElementById('activate_' + checkable_seq[i]) && !document.getElementById('activate_' + checkable_seq[i]).checked) { 
                             continue;
                         } else { 
                             if (out_seq != '') { 
@@ -173,7 +173,7 @@
                     DragDrop.makeListContainer(lst, '{$config_item}_group');
                     lst.onDragOut = function() { 
                         sort_{$config_item}_Sequence();
-                    }; 
+                    } ; 
                 } 
                 addLoadEvent(init_{$config_item}_Sequence);
             </script>
