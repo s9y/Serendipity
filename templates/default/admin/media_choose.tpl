@@ -274,14 +274,14 @@
         tree = new YAHOO.widget.TreeView("treeDiv1");
         tree.onExpand = function(node) { 
             document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        }; 
+        } ;
 
         coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
         coreNode.href     = baseurl;
         coreNode.target   = 'media';
         coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" }; 
+        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" } ;
         {if $item.depth == 1}
         tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         {else}
