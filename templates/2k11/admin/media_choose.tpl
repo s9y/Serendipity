@@ -64,7 +64,6 @@ var media_rename = '{$CONST.ENTER_NEW_NAME}';
 if (parent.frames && parent.frames['tree']) { 
     parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|@escape}";
 } 
-
 {/if}
 </script>
 {if $media.frameset}
@@ -256,7 +255,7 @@ if (parent.frames && parent.frames['tree']) {
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
             if (parent.self.opener.editorref) { 
                 parent.self.opener.editorref.surroundHTML(block, '');
-            }  else { 
+            } else { 
                 parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
             } 
             parent.self.close();
