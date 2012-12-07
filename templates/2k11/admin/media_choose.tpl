@@ -56,14 +56,17 @@
     <script src="{$serendipityHTTPPath}serendipity_editor.js"></script>
     {serendipity_hookPlugin hook="backend_header" hookAll="true"}
 </head>
-{if $media.only_path}
 <script>
+var media_token_url = '{$media.token_url}';
+var media_rename = '{$CONST.ENTER_NEW_NAME}';
+
+{if $media.only_path}
 if (parent.frames && parent.frames['tree']) {ldelim}
     parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|@escape}";
 {rdelim}
-</script>
-{/if}
 
+{/if}
+</script>
 {if $media.frameset}
 <frameset id="media_frame" cols="20%,*">
     <frame id="media_frame_tree" frameborder="0" name="tree" scrolling="auto" src="{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=tree">

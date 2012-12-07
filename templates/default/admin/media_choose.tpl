@@ -60,6 +60,9 @@
     </head>
 
     <script type="text/javascript">
+    var media_token_url = '{$media.token_url}';
+    var media_rename = '{$CONST.ENTER_NEW_NAME}';
+
 {if $media.only_path}
         if (parent.frames && parent.frames['tree']) {ldelim}
             parent.frames['tree'].document.getElementById('newdirlink').href =

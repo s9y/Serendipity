@@ -536,8 +536,8 @@ function rememberMediaOptions() {
 }
 
 function rename(id, fname) {
-    if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {
-        newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
+    if (newname = prompt(media_rename + fname, fname)) {
+        newloc = '?' + media_token_url + '&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
         location.href=newloc;
     }
 }
