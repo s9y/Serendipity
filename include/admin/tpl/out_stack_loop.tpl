@@ -106,12 +106,14 @@
                 <noscript>
                     <!-- Replace standard submit button when using up/down submits -->
                     <input name="SAVECONF" type="hidden" value="Save">
+                    {* ToDo: what about the non-js buttons ? *}
                 </noscript>
 
                 <ol id="{$config_item}" class="sequence_container pluginmanager_container">
                 {foreach $order_id as $orid}
                     <li id="{$orid['id']}" class="sequence_item pluginmanager_item_even">
-                        <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet"><a href="#"></a></div>
+                        <a id="g{$orid['id']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                        {* <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet"><a href="#"></a></div> *}
                     {if $checkable}
                         <div class="form_check">
                             <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" onclick="sort_{$config_item}_Sequence();" value="true">
