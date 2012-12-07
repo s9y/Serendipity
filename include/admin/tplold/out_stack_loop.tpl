@@ -165,8 +165,9 @@
                 {if (!is_array($items) || empty($order_id))}
                     {$none}
                 {/if}
-{* Smarty 3 has a new auto literal option which is enabled by default.
-   When the { is surrounded by whitespace it is not interpreted as smarty delimiter but literal. e.g. ' } ;' *}
+{*** Smarty 3 has a new auto literal option which is enabled by default.
+   When the { is surrounded by whitespace it is not interpreted as smarty delimiter but literal. e.g. ' } ;' 
+   AS tests have proofed, ending javascript delimiters " } ;" and " };" and even "};" work fine as well. So back to origin. ***}
                 <script type="text/javascript">
                     function sort_{$config_item}_Sequence() { 
                         //var seq = DragDrop.serData('{$config_item}_group', null);
@@ -195,7 +196,7 @@
                         DragDrop.makeListContainer(lst, '{$config_item}_group');
                         lst.onDragOut = function() { 
                             sort_{$config_item}_Sequence();
-                        } ;
+                        };
                     } 
                     addLoadEvent(init_{$config_item}_Sequence);
                 </script>

@@ -274,7 +274,7 @@
         tree = new YAHOO.widget.TreeView("treeDiv1");
         tree.onExpand = function(node) { 
             document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        } ;
+        };
 
         coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
         coreNode.href     = baseurl;

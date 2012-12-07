@@ -14,8 +14,8 @@ When the { is followed by a space it's not interpreted as smarty delimiter but l
 
             {($is_first) ? 'var ' : ''}list = document.getElementById("{$sidebar}_col");
             DragDrop.makeListContainer(list, 'g1');
-            list.onDragOver = function() { this.style["border"] = "1px solid #4d759b"; } ;
-            list.onDragOut = function() { this.style["border"] = "none"; } ;
+            list.onDragOver = function() { this.style["border"] = "1px solid #4d759b"; };
+            list.onDragOut = function() { this.style["border"] = "none"; };
             {assign var="is_first" value=false}
 
         {/foreach}
