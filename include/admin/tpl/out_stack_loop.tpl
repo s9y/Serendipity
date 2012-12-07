@@ -106,7 +106,6 @@
                 <noscript>
                     <!-- Replace standard submit button when using up/down submits -->
                     <input name="SAVECONF" type="hidden" value="Save">
-                    {* ToDo: what about the non-js buttons ? *}
                 </noscript>
 
                 <ol id="{$config_item}" class="sequence_container pluginmanager_container">
