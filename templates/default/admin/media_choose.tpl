@@ -8,41 +8,41 @@
 
         {if $media.is_imgedit}
         <style type="text/css">
-        #outer {ldelim}
+        #outer { 
             left: {$imgedit.zoombox_padding}px;
-        {rdelim}
+        } 
 
-        #overlay {ldelim}
+        #overlay { 
             clip: rect({$imgedit.overlay_clip_top} {$imgedit.overlay_clip_right} {$imgedit.overlay_clip_bottom} {$imgedit.overlay_clip_left});
-        {rdelim}
+        } 
 
-        #harea {ldelim}
+        #harea { 
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.harea_visibility};
-        {rdelim}
+        } 
 
-        #varea {ldelim}
+        #varea { 
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.varea_visibility};
-        {rdelim}
+        } 
 
-        #zoom {ldelim}
+        #zoom { 
             width: {$imgedit.zoombox_width}px;
-        {rdelim}
+        } 
 
-        #scaletext {ldelim}
+        #scaletext { 
             visibility: {$imgedit.scale_visibility};
-        {rdelim}
+        } 
 
-        #outer {ldelim}
+        #outer { 
             width:                       {$imgedit.img_width}px;
             height:                      {$imgedit.img_height}px;
             border:                      1px solid red;
             position:                    relative;
             display:                     block;
-        {rdelim}
+        } 
         </style>
         <script type="text/javascript" src="{serendipity_getFile file='dragdrop.js'}" ></script>
         <script type="text/javascript" src="{serendipity_getFile file='imgedit.js'}" ></script>
@@ -64,11 +64,11 @@
     var media_rename = '{$CONST.ENTER_NEW_NAME}';
 
 {if $media.only_path}
-        if (parent.frames && parent.frames['tree']) {ldelim}
+        if (parent.frames && parent.frames['tree']) { 
             parent.frames['tree'].document.getElementById('newdirlink').href =
                 parent.frames['tree'].basenewdirurl +
                 "{$media.only_path|@escape}"
-        {rdelim}
+        } 
 {/if}
     </script>
 
@@ -87,10 +87,10 @@
     <!-- EXTERNAL MEDIA START -->
     {if $media.is_created OR $media.is_deleted}
     <script type="text/javascript">
-    if (parent.frames['tree']) {ldelim}
+    if (parent.frames['tree']) { 
         parent.frames['tree'].location.href  = parent.frames['tree'].location.href;
         parent.frames['media'].location.href = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&serendipity[only_path]={$media.new_dir}';
-    {rdelim}
+    } 
     </script>
     {/if}
     {$media.external}
@@ -231,11 +231,11 @@
         <script type="text/javascript">
             block = '<a href="{$media.file.full_file}" title="{$media.file.realname|@escape}" target="_blank">{$media.file.realname|@escape}</a>';
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
-            if (parent.self.opener.editorref) {ldelim}
+            if (parent.self.opener.editorref) { 
                 parent.self.opener.editorref.surroundHTML(block, '');
-            {rdelim} else {ldelim}
+            } else { 
                 parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
-            {rdelim}
+            } 
             parent.self.close();
         </script>
         {/if}
@@ -261,40 +261,40 @@
     </div>
 
     <script type="text/javascript">
-	var tree;
-	var nodes = new Array();
-	var nodeIndex;
-	var coreNode = '';
-	var last_path = '';
-	var last_node = new Array();
-	var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
-    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;&amp;serendipity[only_path]=';
+    var tree;
+    var nodes = new Array();
+    var nodeIndex;
+    var coreNode      = '';
+    var last_path     = '';
+    var last_node     = new Array();
+    var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
+    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
 
-	function treeInit() {ldelim}
-		tree = new YAHOO.widget.TreeView("treeDiv1");
-		tree.onExpand = function(node) {ldelim}
-		    document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-		{rdelim};
+    function treeInit() { 
+        tree = new YAHOO.widget.TreeView("treeDiv1");
+        tree.onExpand = function(node) { 
+            document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
+        }; 
 
         coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
-		coreNode.href     = baseurl;
-		coreNode.target   = 'media';
+        coreNode.href     = baseurl;
+        coreNode.target   = 'media';
         coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = {ldelim} id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" {rdelim};
+        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" }; 
         {if $item.depth == 1}
         tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         {else}
-        if (last_node[{$item.depth}-1]) {ldelim}
+        if (last_node[{$item.depth}-1]) { 
             tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        {rdelim} else {ldelim}
+        } else { 
             tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        {rdelim}
+        } 
         {/if}
         last_node[{$item.depth}] = tmpNode;
         {/foreach}
-		tree.draw();
-	{rdelim}
+        tree.draw();
+    }  
 
     addLoadEvent(treeInit);
     </script>
