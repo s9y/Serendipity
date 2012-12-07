@@ -537,7 +537,7 @@ function rememberMediaOptions() {
 
 function rename(id, fname) {
     if (newname = prompt(media_rename + fname, fname)) {
-        newloc = '?' + media_token_url + '&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
+        newloc = '?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
         location.href=newloc;
     }
 }
