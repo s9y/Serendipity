@@ -219,7 +219,7 @@
                         <select name="serendipity[parent]">
                             <option value="">{$CONST.BASE_DIRECTORY}</option>
                         {foreach $folders as $folder}
-                            <option {if $folder.relpath == $get.only_path}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:"($folder.depth*2)"} {$folder.name}</option>
+                            <option {if $folder.relpath == $get.only_path}selected="selected"{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)} {$folder.name}</option>
                         {/foreach}
                         </select>
                     </td>
