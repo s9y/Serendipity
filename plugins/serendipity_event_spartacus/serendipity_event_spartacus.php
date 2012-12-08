@@ -294,9 +294,9 @@ class serendipity_event_spartacus extends serendipity_event
         }
     }
 
-    // remove double slahshes without breaking URI
-    protected function fixUri($string) {
-        return preg_replace('%([^:])([/]{2,})%', '\\1/', $string);
+    // remove double slashes without breaking URI
+    protected function fixUri($s) {
+        return preg_replace('%([^:])([/]{2,})%', '\\1/', $s);
     }
 
     // Create recursive directories; begins at serendipity plugin root folder level
