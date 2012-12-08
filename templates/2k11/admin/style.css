@@ -647,7 +647,7 @@ input[type=checkbox] { margin-right: .4em; }
     margin-right: 1em;
 }
 
-.form_buttons {
+.form_buttons input {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -800,9 +800,23 @@ summary { cursor: pointer; }
 .category_data,
 .user_name, .group_name { min-width: 8em; }
 
-.category_data { margin: 0 1em 0 0; }
+.category_data {
+    margin: 0 1em 0 0;
+    width: 75%;
+}
+
+.category_desc { margin: 0 1em 0 0; }
 
 /* Content area */
+#serendipity_comments_list .form_check,
+#serendipity_comments_list h4 { float: left; }
+
+#serendipity_comments_list .actions { margin-top: .75em; }
+
+#serendipity_comments_list .form_check { margin: 1.35em 0; }
+
+.comment_data { margin-top: 0; }
+
 .comment_data dt, .comment_data dd,
 .template_info dt,
 .template_info dd { float: left; }
@@ -854,7 +868,8 @@ summary { cursor: pointer; }
 }
 
 #edit_entry_title label,
-#edit_entry_metadata label {
+#edit_entry_metadata label,
+#filter_comments label {
     display: inline-block;
     width: 15%;
 }
@@ -873,12 +888,14 @@ summary { cursor: pointer; }
 #edit_entry_title input { width: 84%; }
 
 #edit_entry_metadata input,
-#edit_entry_metadata select { width: 84%; }
+#edit_entry_metadata select,
+#filter_comments input,
+#filter_comments select { width: 84%; }
 
-.editor_toolbar input {
-    margin: 0 .25em .75em 0;
-    min-width: 4.25em;
-}
+.editor_toolbar input { margin: 0 .25em .75em 0; }
+
+.editor_toolbar input,
+.comment_data dt { min-width: 4.25em; }
 
 #entries_list .form_check { float: left; }
 
@@ -1011,13 +1028,15 @@ summary { cursor: pointer; }
     #edit_entry_metadata label,
     #sort_entries .form_select label,
     #filter_entries .form_select label,
-    #filter_entries .form_field label {
+    #filter_entries .form_field label,
+    #filter_comments label {
         display: block;
         width: auto;
     }
 
     #edit_entry_metadata>div,
-    #sort_entries .form_select {
+    #sort_entries .form_select,
+    #filter_comments .clearfix>div {
         float: left;
         width: 33% ;
     }
