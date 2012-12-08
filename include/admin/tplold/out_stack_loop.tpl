@@ -162,8 +162,8 @@
                     </li>
                 {/foreach}
                 </ol>
-                {if (!is_array($items) || empty($order_id))}
-                    {$none}
+                {if isset($no_sequence)}
+                    {$no_sequence}
                 {/if}
 {*** Smarty 3 has a new auto literal option which is enabled by default.
    When the { is surrounded by whitespace it is not interpreted as smarty delimiter but literal. e.g. ' } ;' 

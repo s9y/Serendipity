@@ -140,8 +140,8 @@
                     </li>
                 {/foreach}
                 </ol>
-        {if (!is_array($items) || empty($order_id))}
-            {$none}
+        {if isset($no_sequence)}
+            {$no_sequence}
         {/if}
             </fieldset>
 {*** Smarty 3 has a new auto literal option which is enabled by default.

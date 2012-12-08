@@ -680,7 +680,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                 if (!is_array($items) or empty($order)) {
                     // Print the empty message
-                    $data['none'] = sprint(NONE);
+                    $data['no_sequence'] = sprint(NONE);
                 }
                 // Print the Javascript to drag-n-drop the list
                 // Finish the row
