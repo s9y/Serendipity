@@ -72,37 +72,37 @@ function highlightComment(id, checkvalue) {
 
             <div class="clearfix">
                 <div class="form_field">
-                    <label for="filter_author">{$CONST.AUTHOR}:</label>
+                    <label for="filter_author">{$CONST.AUTHOR}</label>
                     <input id="filter_author" name="serendipity[filter][author]" type="text" value="{$get.filter.author|escape}">
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_email">{$CONST.EMAIL}:</label>
+                    <label for="filter_email">{$CONST.EMAIL}</label>
                     <input id="filter_email" name="serendipity[filter][email]" type="text" value="{$get.filter.email|escape}">
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_url">{$CONST.URL}:</label>
+                    <label for="filter_url">{$CONST.URL}</label>
                     <input id="filter_url" name="serendipity[filter][url]" type="text" value="{$get.filter.url|escape}">
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_ip">IP:</label>
+                    <label for="filter_ip">IP</label>
                     <input id="filter_ip" name="serendipity[filter][ip]" type="text" value="{$get.filter.ip|escape}">
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_body">{$CONST.CONTENT}:</label>
+                    <label for="filter_body">{$CONST.CONTENT}</label>
                     <input id="filter_body" name="serendipity[filter][body]" type="text" value="{$get.filter.body|escape}">
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_referer">{$CONST.REFERER}:</label>
+                    <label for="filter_referer">{$CONST.REFERER}</label>
                     <input id="filter_referer" name="serendipity[filter][referer]" type="text" value="{$get.filter.referer|escape}">
                 </div>
 
                 <div class="form_select">
-                    <label for="filter_perpage">{$CONST.COMMENTS}:</label>
+                    <label for="filter_perpage">{$CONST.COMMENTS}</label>
                     <select id="filter_perpage" name="serendipity[filter][perpage]">
                     {foreach $filter_vals AS $filter}
                         <option value="{$filter}" {($commentsPerPage == $filter) ? ' selected' : ''}>{$filter}</option>
@@ -111,7 +111,7 @@ function highlightComment(id, checkvalue) {
                 </div>
 
                 <div class="form_select">
-                    <label for="filter_show">{$CONST.COMMENTS_FILTER_SHOW}:</label>
+                    <label for="filter_show">{$CONST.COMMENTS_FILTER_SHOW}</label>
                     <select id="filter_show" name="serendipity[filter][show]">
                         <option value="all"{if $get.filter.show == 'all'} selected{/if}>{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="approved"{if $get.filter.show == 'approved'} selected{/if}>{$CONST.COMMENTS_FILTER_APPROVED_ONLY}</option>
@@ -132,8 +132,10 @@ function highlightComment(id, checkvalue) {
             </div>
         </fieldset>
 
-        <input name="submit" type="submit" value="{$CONST.GO}">
-        {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
+        <div class="form_buttons">
+            <input name="submit" type="submit" value="{$CONST.GO}">
+            {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
+        </div>
     </form>
 {if !is_array($sql)}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_COMMENTS}</span>
@@ -144,9 +146,11 @@ function highlightComment(id, checkvalue) {
         {$formtoken}
         <input name="serendipity[formAction]" type="hidden" value="multiDelete">
 
+        <h3>{$CONST.PAGE_BROWSE_COMMENTS|sprintf:$page:$pages:$totalComments}</h3>
+        {if ($page != 1 && $page <= $pages)||$page != $pages}
         <nav class="pagination">
-            <h2>{$CONST.PAGE_BROWSE_COMMENTS|sprintf:$page:$pages:$totalComments}</h2>
-            {if ($page != 1 && $page <= $pages)||$page != $pages}
+            <h4 class="visuallyhidden">Comments pagination</h4> {* i18n *}
+
             <ul class="clearfix">
             {if ($page != 1 && $page <= $pages)}
                 <li><a class="icon_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a></li>
@@ -155,16 +159,18 @@ function highlightComment(id, checkvalue) {
                 <li><a class="icon_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="icon-right-circled"></span><span class="visuallyhidden"> {$CONST.NEXT}</span></a></li>
             {/if}
             </ul>
-            {/if}
         </nav>
+        {/if}
     {if is_array($comments)}
-        <ul class="plainList">
+        <ul id="serendipity_comments_list" class="clearfix plainList">
         {foreach $comments AS $comment}
-            <li><h3 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id}, {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h3>
+            <li class="clearfix">
                 <div class="form_check">
                     <input id="serendipity_multidelete_comment_{$comment.id}" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" onclick="highlightComment('comment_{$comment.id}', this.checked)" tabindex="{$i}">
                     <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
                 </div>
+
+                <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id}, {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h4>
 
                 <div id="comment_{$comment.id}">
                     <dl class="comment_data clearfix">
@@ -185,10 +191,10 @@ function highlightComment(id, checkvalue) {
                         <dd>{if empty($comment.referer)}N/A{else}<a class="icon_link" href="{$comment.referer|escape}" title="{$comment.referer|escape}"><span class="icon-link"></span> {$comment.referer|escape|truncate:30:"&hellip;"}</a>{/if}</dd>
                         <dd class="action_referer">{$comment.action_referer}</dd>
                     </dl>
-
+                    {* BUG: comment summary and fullBody seem to emit the same content?! *}
                     <div id="{$comment.id}_summary" class="comment_summary">{$comment.summary}</div>
 
-                    <div id="{$comment.id}_full" class="comment_full" style="display:none;">{$comment.fullBody}</div>
+                    <div id="{$comment.id}_full" class="comment_full">{$comment.fullBody}</div>
 
                     <ul class="actions clearfix">
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
@@ -200,7 +206,7 @@ function highlightComment(id, checkvalue) {
                     {if $comment.excerpt}
                         <li><a class="icon_link" href="#c{$comment.id}" onclick="FT_toggle({$comment.id}); return false;" title="{$CONST.TOGGLE_ALL}"><span id="{$comment.id}_text">{$CONST.TOGGLE_ALL}</span></a></li>
                     {/if}
-                        <li><a class="icon_link" href="{$entrylink}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
+                        <li><a class="icon_link" href="{$entrylink}" title="{$CONST.VIEW}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
                         <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                         <li><a class="icon_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" onclick='return confirm("{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}")' title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                         <li><a class="icon_link" onclick="cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); cf.focus(); return false;" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
@@ -211,7 +217,7 @@ function highlightComment(id, checkvalue) {
         {/foreach}
         </ul>
     {/if}
-        <div class="multidelete_actions">
+        <div class="multidelete_actions form_buttons">
             <input name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()">
             <input name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_COMMENTS}" onclick="return confirm('{$CONST.COMMENTS_DELETE_CONFIRM}')" tabindex="{($i+1)}">
             <input name="serendipity[togglemoderate]" type="submit" value="{$CONST.MODERATE_SELECTED_COMMENTS}">
