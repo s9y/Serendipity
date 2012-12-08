@@ -294,6 +294,11 @@ class serendipity_event_spartacus extends serendipity_event
         }
     }
 
+    // remove double slahshes without breaking URI
+    protected function fixUri($string) {
+        return preg_replace('%([^:])([/]{2,})%', '\\1/', $string);
+    }
+
     // Create recursive directories; begins at serendipity plugin root folder level
     function rmkdir($dir, $sub = 'plugins') {
         global $serendipity;
@@ -877,7 +882,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
                 // Remove the temporary $i reference, as the array should be associative and fix double slashes in url string
-                $pluginstack[$plugname] = str_replace('serendipity//', 'serendipity/', $pluginstack[$i]);
+                $pluginstack[$plugname] = $this->fixUri($pluginstack[$i]);
                 unset($pluginstack[$i]);
             }
         }
