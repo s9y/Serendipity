@@ -294,6 +294,11 @@ class serendipity_event_spartacus extends serendipity_event
         }
     }
 
+    // remove double slahshes without breaking URI
+    protected function fixUri($string) {
+        return preg_replace('%([^:])([/]{2,})%', '\\1/', $string);
+    }
+
     // Create recursive directories; begins at serendipity plugin root folder level
     function rmkdir($dir, $sub = 'plugins') {
         global $serendipity;
@@ -877,7 +882,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
                 // Remove the temporary $i reference, as the array should be associative and fix double slashes in url string
-                $pluginstack[$plugname] = str_replace('//', '/', $pluginstack[$i]);
+                $pluginstack[$plugname] = $this->fixUri($pluginstack[$i]);
                 unset($pluginstack[$i]);
             }
         }
@@ -985,49 +990,49 @@ class serendipity_event_spartacus extends serendipity_event
             return false;
         }
         
-    	$ftp_server    = $this->get_config('ftp_server');
-    	$ftp_user_name = $this->get_config('ftp_username');
-    	$ftp_user_pass = $this->get_config('ftp_password');
-    	$basedir       = $this->get_config('ftp_basedir');
-    	$dir_rules     = intval($this->get_config('chmod_dir'), 8);
+        $ftp_server    = $this->get_config('ftp_server');
+        $ftp_user_name = $this->get_config('ftp_username');
+        $ftp_user_pass = $this->get_config('ftp_password');
+        $basedir       = $this->get_config('ftp_basedir');
+        $dir_rules     = intval($this->get_config('chmod_dir'), 8);
 
         if (empty($ftp_server) || empty($ftp_user_name)) {
             return false;
         }
 
-    	$dir = str_replace($serendipity['serendipityPath'],"",$dir);
+        $dir = str_replace($serendipity['serendipityPath'],"",$dir);
     
-    	// set up basic connection and log in with username and password
-    	$conn_id       = ftp_connect($ftp_server); 
-    	$login_result  = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass); 
+        // set up basic connection and log in with username and password
+        $conn_id       = ftp_connect($ftp_server);
+        $login_result  = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
     
-    	// check connection
-    	if ((!$conn_id) || (!$login_result)) { 
-        	$this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT);
-        	return false;
+        // check connection
+        if ((!$conn_id) || (!$login_result)) {
+            $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT);
+            return false;
         } else {
-        	$paths  = preg_split('@/@', $basedir.$dir,-1,PREG_SPLIT_NO_EMPTY);
-        	foreach ($paths as $path) {
-        	    // trying to change directory, if not succesfull, it means
+            $paths  = preg_split('@/@', $basedir.$dir,-1,PREG_SPLIT_NO_EMPTY);
+            foreach ($paths as $path) {
+                // trying to change directory, if not succesfull, it means
                 // the directory does not exist and we must create it 
-        		if (!ftp_chdir($conn_id,$path)) {
-        			if (!ftp_mkdir($conn_id,$path)) {
+                if (!ftp_chdir($conn_id,$path)) {
+                    if (!ftp_mkdir($conn_id,$path)) {
                         $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_MKDIR);
                         return false;
                     }
-        			if (!ftp_chmod($conn_id,$dir_rules,$path)) {
+                    if (!ftp_chmod($conn_id,$dir_rules,$path)) {
                         $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CHMOD);
                         return false;
                     }
-        			if (!ftp_chdir($conn_id,$path)) {
+                    if (!ftp_chdir($conn_id,$path)) {
                         return false;
                     }
-      		        $this->outputMSG('success',sprintf(PLUGIN_EVENT_SPARTACUS_FTP_SUCCESS, $path));
-        		}
-        	}
-        	ftp_close($conn_id);
-        	return true;        
-    	}
+                      $this->outputMSG('success',sprintf(PLUGIN_EVENT_SPARTACUS_FTP_SUCCESS, $path));
+                }
+            }
+            ftp_close($conn_id);
+            return true;
+        }
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
