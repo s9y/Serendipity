@@ -800,7 +800,12 @@ summary { cursor: pointer; }
 .category_data,
 .user_name, .group_name { min-width: 8em; }
 
-.category_data { margin: 0 1em 0 0; }
+.category_data {
+    margin: 0 1em 0 0;
+    width: 75%;
+}
+
+.category_desc { margin: 0 1em 0 0; }
 
 /* Content area */
 #serendipity_comments_list .form_check,
