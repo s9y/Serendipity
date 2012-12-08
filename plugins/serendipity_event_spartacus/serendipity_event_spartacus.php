@@ -877,7 +877,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
                 // Remove the temporary $i reference, as the array should be associative and fix double slashes in url string
-                $pluginstack[$plugname] = str_replace('//', '/', $pluginstack[$i]);
+                $pluginstack[$plugname] = str_replace('serendipity//', 'serendipity/', $pluginstack[$i]);
                 unset($pluginstack[$i]);
             }
         }
