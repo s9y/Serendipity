@@ -191,10 +191,10 @@ function highlightComment(id, checkvalue) {
                         <dd>{if empty($comment.referer)}N/A{else}<a class="icon_link" href="{$comment.referer|escape}" title="{$comment.referer|escape}"><span class="icon-link"></span> {$comment.referer|escape|truncate:30:"&hellip;"}</a>{/if}</dd>
                         <dd class="action_referer">{$comment.action_referer}</dd>
                     </dl>
-                    {* BUG: comment summary and fullBody seem to emit the same content?! *}
-                    <div id="{$comment.id}_summary" class="comment_summary">{$comment.summary}</div>
+                    
+                    <div id="{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:120:"&hellip;"}</div>
 
-                    <div id="{$comment.id}_full" class="comment_full">{$comment.fullBody}</div>
+                    <div id="{$comment.id}_full" class="comment_full hidden">{$comment.fullBody}</div>
 
                     <ul class="actions clearfix">
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
