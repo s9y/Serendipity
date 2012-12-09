@@ -316,6 +316,7 @@ if(is_array($sql)) {
         );
 
         $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
+        $comment['entrylink'] = $entrylink;
 
         if (strlen($comment['fullBody']) > strlen($comment['summary']) ) {
             $comment['summary'] .= ' ...';
@@ -325,7 +326,7 @@ if(is_array($sql)) {
             $comment['fullBody'] = nl2br(htmlspecialchars($comment['fullBody']));
             $comment['summary']  = nl2br(strip_tags($comment['summary']));
         } else {
-            $comment['excerpt'] = false;
+            $comment['excerpt']  = false;
             $comment['fullBody'] = $comment['summary'] = nl2br(htmlspecialchars($comment['fullBody']));
         }
 
