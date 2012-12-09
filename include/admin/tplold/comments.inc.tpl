@@ -2,63 +2,11 @@
     <p class="serendipityAdminMsgNote msg_notice"><img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_note.png'}" alt="" />{$errormsg}</p>
 {/if}
 
-{*
-Smarty 3 has a new auto literal option which is enabled by default.
-When the { is followed by a space it's not interpreted as smarty delimiter but literal.
-*}
 <script type="text/javascript">
-function FT_toggle(id) { 
-    if ( document.getElementById(id + '_full').style.display == '' ) { 
-        document.getElementById(id + '_full').style.display='none';
-        document.getElementById(id + '_summary').style.display='';
-        document.getElementById(id + '_text').innerHTML = '{$CONST.VIEW_FULL}';
-    } else { 
-        document.getElementById(id + '_full').style.display='';
-        document.getElementById(id + '_summary').style.display='none';
-        document.getElementById(id + '_text').innerHTML = '{$CONST.HIDE}';
-    } 
-    return false;
-} 
-
-function invertSelection() { 
-    var f = document.formMultiDelete;
-    for (var i = 0; i < f.elements.length; i++) { 
-        if( f.elements[i].type == 'checkbox' ) { 
-            f.elements[i].checked = !(f.elements[i].checked);
-            f.elements[i].onclick();
-        } 
-    } 
-} 
-
-var origborder = '';
-var origwidth = '';
-
-function highlightComment(id, checkvalue) { 
-    var comment = document.getElementById(id);
-
-    if (origborder == '') { 
-        origborder = comment.style.borderColor;
-        if (origborder == '') { 
-            origborder = '#FFFFFF';
-        } 
-    } 
-
-    if (origwidth == '') { 
-        origwidth = comment.style.borderWidth;
-        if (origwidth == '' || origwidth == 0) { 
-            origwidth = 1;
-        } 
-    } 
-
-    if (checkvalue) { 
-        comment.style.borderColor = '#FF0000';
-        comment.style.borderWidth = origwidth;
-    } else { 
-        comment.style.borderColor = '';
-        comment.style.borderWidth = origwidth;
-    } 
-} 
+    var view_full = '{$CONST.VIEW_FULL}';
+    var view_hide = '{$CONST.HIDE}';
 </script>
+<script src="serendipity_editor.js"></script>
 
 <form action="" method="GET" style="margin: 0">
     {$formtoken}

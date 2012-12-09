@@ -648,5 +648,57 @@ function fillInput(source, target) {
 }
 
 
+/* outsourced from comments.inc.tpl */
+function FT_toggle(id) {
+    if ( document.getElementById(id + '_full').style.display == '' ) {
+        document.getElementById(id + '_full').style.display='none';
+        document.getElementById(id + '_summary').style.display='';
+        document.getElementById(id + '_text').innerHTML = view_full;
+    } else {
+        document.getElementById(id + '_full').style.display='';
+        document.getElementById(id + '_summary').style.display='none';
+        document.getElementById(id + '_text').innerHTML = view_hide;
+    }
+    return false;
+}
+function invertSelection() {
+    var f = document.formMultiDelete;
+    for (var i = 0; i < f.elements.length; i++) {
+        if( f.elements[i].type == 'checkbox' ) {
+            f.elements[i].checked = !(f.elements[i].checked);
+            f.elements[i].onclick();
+        }
+    }
+}
+
+var origborder = '';
+var origwidth = '';
+
+function highlightComment(id, checkvalue) {
+    var comment = document.getElementById(id);
+
+    if (origborder == '') {
+        origborder = comment.style.borderColor;
+        if (origborder == '') {
+            origborder = '#FFFFFF';
+        }
+    }
+
+    if (origwidth == '') {
+        origwidth = comment.style.borderWidth;
+        if (origwidth == '' || origwidth == 0) {
+            origwidth = 1;
+        }
+    }
+
+    if (checkvalue) {
+        comment.style.borderColor = '#FF0000';
+        comment.style.borderWidth = origwidth;
+    } else {
+        comment.style.borderColor = '';
+        comment.style.borderWidth = origwidth;
+    }
+}
+
 
 // -->
