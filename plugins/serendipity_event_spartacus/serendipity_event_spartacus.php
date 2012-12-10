@@ -294,8 +294,8 @@ class serendipity_event_spartacus extends serendipity_event
         }
     }
 
-    // remove double slashes without breaking URI
-    protected function fixUri($s) {
+    // remove double slashes without breaking URL
+    protected function fixUrl($s) {
         return preg_replace('%([^:])([/]{2,})%', '\\1/', $s);
     }
 
@@ -876,13 +876,13 @@ class serendipity_event_spartacus extends serendipity_event
                 }
 
                 $plugname = $pluginstack[$i]['template'];
-                $pluginstack[$i]['previewURL'] = $mirror . '/additional_themes/' . $gitloc . $plugname . '/preview.png?revision=1.9999';
-                $pluginstack[$i]['preview_fullsizeURL'] = $mirror . '/additional_themes/' . $gitloc . $plugname . '/preview_fullsize.jpg?revision=1.9999';
+                $pluginstack[$i]['previewURL'] = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview.png?revision=1.9999');
+                $pluginstack[$i]['preview_fullsizeURL'] = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview_fullsize.jpg?revision=1.9999');
                 $pluginstack[$i]['customURI']  = '&amp;serendipity[spartacus_fetch]=' . $plugname;
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
-                // Remove the temporary $i reference, as the array should be associative and fix double slashes in url string
-                $pluginstack[$plugname] = $this->fixUri($pluginstack[$i]);
+                // Remove the temporary $i reference, as the array should be associative
+                $pluginstack[$plugname] = $pluginstack[$i];
                 unset($pluginstack[$i]);
             }
         }
