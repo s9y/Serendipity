@@ -311,12 +311,12 @@ function serendipity_load_configuration($author = null) {
 
     if (!empty($author)) {
         // Replace default configuration directives with user-relevant data
-        $rows =& serendipity_db_query("SELECT name,value
+        $rows = serendipity_db_query("SELECT name,value
                                         FROM {$serendipity['dbPrefix']}config
                                         WHERE authorid = '". (int)$author ."'");
     } else {
         // Only get default variables, user-independent (frontend)
-        $rows =& serendipity_db_query("SELECT name, value
+        $rows = serendipity_db_query("SELECT name, value
                                         FROM {$serendipity['dbPrefix']}config
                                         WHERE authorid = 0");
     }
@@ -465,7 +465,7 @@ function serendipity_checkAutologin($ident, $iv) {
     global $serendipity;
 
     // Fetch login data from DB
-    $autologin =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options WHERE okey = 'l_" . serendipity_db_escape_string($ident) . "' LIMIT 1", true, 'assoc');
+    $autologin = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options WHERE okey = 'l_" . serendipity_db_escape_string($ident) . "' LIMIT 1", true, 'assoc');
     if (!is_array($autologin)) {
         return false;
     }
@@ -551,7 +551,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                     username   = '" . serendipity_db_escape_string($username) . "'";
         if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login check (' . serialize($is_hashed) . ', ' . $_SESSION['serendipityPassword'] . '):' . $query . "\n");
 
-        $rows =& serendipity_db_query($query, false, 'assoc');
+        $rows = serendipity_db_query($query, false, 'assoc');
         if (is_array($rows)) {
             foreach($rows AS $row) {
                 if ($is_valid_user) continue;
@@ -1080,7 +1080,7 @@ function &serendipity_getPermissions($authorid) {
     global $serendipity;
 
         // Get group information
-        $groups =& serendipity_db_query("SELECT ag.groupid, g.name, gc.property, gc.value
+        $groups = serendipity_db_query("SELECT ag.groupid, g.name, gc.property, gc.value
                                           FROM {$serendipity['dbPrefix']}authorgroups AS ag
                                LEFT OUTER JOIN {$serendipity['dbPrefix']}groups AS g
                                             ON ag.groupid = g.id
@@ -1303,7 +1303,7 @@ function &serendipity_getAllGroups($apply_ACL_user = false) {
     global $serendipity;
 
     if ($apply_ACL_user) {
-        $groups =& serendipity_db_query("SELECT g.id   AS confkey,
+        $groups = serendipity_db_query("SELECT g.id   AS confkey,
                                                 g.name AS confvalue,
                                                 g.id   AS id,
                                                 g.name AS name
@@ -1313,7 +1313,7 @@ function &serendipity_getAllGroups($apply_ACL_user = false) {
                                           WHERE ag.authorid = " . (int)$apply_ACL_user . "
                                        ORDER BY g.name", false, 'assoc');
     } else {
-        $groups =& serendipity_db_query("SELECT g.id   AS confkey,
+        $groups = serendipity_db_query("SELECT g.id   AS confkey,
                                                 g.name AS confvalue,
                                                 g.id   AS id,
                                                 g.name AS name
@@ -1341,7 +1341,7 @@ function &serendipity_fetchGroup($groupid) {
     global $serendipity;
 
     $conf = array();
-    $groups =& serendipity_db_query("SELECT g.id        AS confkey,
+    $groups = serendipity_db_query("SELECT g.id        AS confkey,
                                             g.name      AS confvalue,
                                             g.id        AS id,
                                             g.name      AS name,
@@ -1379,7 +1379,7 @@ function &serendipity_fetchGroup($groupid) {
 function &serendipity_getGroups($authorid, $sequence = false) {
     global $serendipity;
 
-    $_groups =& serendipity_db_query("SELECT g.id   AS confkey,
+    $_groups = serendipity_db_query("SELECT g.id   AS confkey,
                                             g.name AS confvalue,
                                             g.id   AS id,
                                             g.name AS name
@@ -1390,7 +1390,7 @@ function &serendipity_getGroups($authorid, $sequence = false) {
     if (!is_array($_groups)) {
         $groups = array();
     } else {
-        $groups =& $_groups;
+        $groups = $_groups;
     }
 
     if ($sequence) {
@@ -1399,7 +1399,7 @@ function &serendipity_getGroups($authorid, $sequence = false) {
             $rgroups[] = $grouprow['confkey'];
         }
     } else {
-        $rgroups =& $groups;
+        $rgroups = $groups;
     }
 
     return $rgroups;
@@ -1415,7 +1415,7 @@ function &serendipity_getGroups($authorid, $sequence = false) {
 function &serendipity_getGroupUsers($groupid) {
     global $serendipity;
 
-    $groups =& serendipity_db_query("SELECT g.name     AS name,
+    $groups = serendipity_db_query("SELECT g.name     AS name,
                                             a.realname AS author,
                                             a.authorid AS id
                                       FROM {$serendipity['dbPrefix']}authorgroups AS ag
@@ -1486,7 +1486,7 @@ function serendipity_addGroup($name) {
 function &serendipity_getDBPermissionNames() {
     global $serendipity;
 
-    $config =& serendipity_db_query("SELECT property FROM {$serendipity['dbPrefix']}groupconfig GROUP BY property ORDER BY property", false, 'assoc');
+    $config = serendipity_db_query("SELECT property FROM {$serendipity['dbPrefix']}groupconfig GROUP BY property ORDER BY property", false, 'assoc');
 
     return $config;
 }
@@ -1585,7 +1585,7 @@ function serendipity_updateGroupConfig($groupid, &$perms, &$values, $isNewPriv =
         }
     }
 
-    $storage =& serendipity_fetchGroup($groupid);
+    $storage = serendipity_fetchGroup($groupid);
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}groupconfig WHERE id = " . (int)$groupid);
     foreach ($perms AS $perm => $userlevels) {
@@ -1772,7 +1772,7 @@ function serendipity_ACLGet($artifact_id, $artifact_type, $artifact_mode, $artif
                       AND artifact_id    = '" . (int)$artifact_id . "'
                       AND artifact_mode  = '" . serendipity_db_escape_string($artifact_mode) . "'
                       AND artifact_index = '" . serendipity_db_escape_string($artifact_index) . "'";
-    $rows =& serendipity_db_query($sql, false, 'assoc');
+    $rows = serendipity_db_query($sql, false, 'assoc');
 
     if (!is_array($rows)) {
         return false;
@@ -1833,7 +1833,7 @@ function serendipity_ACLCheck($authorid, $artifact_id, $artifact_type, $artifact
                AND ( {$artifact_sql['where']} )
           GROUP BY result";
 
-    $res =& serendipity_db_query($sql, true, 'assoc');
+    $res = serendipity_db_query($sql, true, 'assoc');
     if (is_array($res) && !empty($res['result'])) {
         return true;
     }
@@ -2093,13 +2093,13 @@ function &serendipity_loadThemeOptions(&$template_config, $okey = '', $bc_bool =
         $okey = $serendipity['template'];
     }
 
-    $_template_vars =& serendipity_db_query("SELECT name, value FROM {$serendipity['dbPrefix']}options
+    $_template_vars = serendipity_db_query("SELECT name, value FROM {$serendipity['dbPrefix']}options
                                              WHERE okey = 't_" . serendipity_db_escape_string($okey) . "'
                                                 OR okey = 't_global'", false, 'assoc', false, 'name', 'value');
     if (!is_array($_template_vars)) {
         $template_vars = array();
     } else {
-        $template_vars =& $_template_vars;
+        $template_vars = $_template_vars;
     }
 
     foreach($template_config AS $key => $item) {
