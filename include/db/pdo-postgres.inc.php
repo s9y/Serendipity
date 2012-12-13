@@ -49,7 +49,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 function serendipity_db_connect() {
     global $serendipity;
 
-    $host = port = '';
+    $host = $port = '';
     if (strlen($serendipity['dbHost'])) {
         if (false !== strstr($serendipity['dbHost'], ':')) {
             $tmp = explode(':', $serendipity['dbHost']);
@@ -216,12 +216,12 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
 
     if (!$serendipity['dbSth']) {
         if (!$expectError && !$serendipity['production']) {
-            print "<span class='msg_error'>Error in $sql</span>";
+            print "Error in $sql<br/>\n";
             print $serendipity['dbConn']->errorInfo() . "<BR/>\n";
             if (function_exists('debug_backtrace')) {
                 highlight_string(var_export(debug_backtrace(), 1));
             }
-            print "<pre>$sql</pre>\n";
+            print "<br><code>$sql</code>\n";
         }
         return $type_map['false'];
     }

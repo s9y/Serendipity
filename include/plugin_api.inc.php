@@ -171,7 +171,7 @@ class serendipity_plugin_api
             $plugin->install();
         } else {
             $serendipity['debug']['pluginload'][] = "Loading plugin failed painfully. File not found?";
-            echo '<span class="msg_error">' . ERROR . ': ' . $key . ' (' . $pluginPath . ')</span>';
+            echo ERROR . ': ' . $key . ' (' . $pluginPath . ')<br />';
         }
 
         return $key;

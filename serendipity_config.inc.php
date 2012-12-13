@@ -45,7 +45,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version']         = '2.0-alpha1';
+$serendipity['version']         = '1.7-alpha1';
 
 // Setting this to 'false' will enable debugging output. All alpa/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 if (!isset($serendipity['production'])) {
@@ -146,7 +146,7 @@ if (!isset($serendipity['languages'])) {
                                   'fi' => 'Finnish',
                                   'cs' => 'Czech (Win-1250)',
                                   'cz' => 'Czech (ISO-8859-2)',
-                                  'sk' => 'Slovak',
+				  'sk' => 'Slovak',
                                   'nl' => 'Dutch',
                                   'is' => 'Icelandic',
                                   'tr' => 'Turkish',

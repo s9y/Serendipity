@@ -1,15 +1,12 @@
 <?php # $Id$
+# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
+# All rights reserved.  See LICENSE file for licensing details
+/* vim: set sts=4 ts=4 expandtab : */
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
-}
+echo WELCOME_BACK . ' ' . htmlspecialchars($_SESSION['serendipityUser']);
 
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/entries_overview.inc.tpl";
-$serendipity['smarty']->display('file:'. $tfile);
-
-/* vim: set sts=4 ts=4 expandtab : */
+?>

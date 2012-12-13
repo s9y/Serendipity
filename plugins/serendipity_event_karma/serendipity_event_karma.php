@@ -1727,7 +1727,7 @@ function invertSelection() {
 ");
                     } else {
                         print("
-<div class='serendipityAdminMsgNote msg_notice'>No entries to display.</div>
+<div class='serendipityAdminMsgNotice'>No entries to display.</div>
 ");
                     }
 

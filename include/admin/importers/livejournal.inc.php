@@ -253,7 +253,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                 }
             }
             $id = serendipity_updertEntry($new_entry);
-            echo '<span class="msg_notice">Inserted entry #' . $id . ', "' . htmlspecialchars($new_entry['title']) . '"</span>';
+            echo 'Inserted entry #' . $id . ', "' . htmlspecialchars($new_entry['title']) . '"<br />' . "\n";
             if (is_array($new_entry['comments'])) {
                 $cid_map = array();
                 $jids = array();
@@ -265,7 +265,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                     $cid = serendipity_insertComment($id, $comment);
                     $cid_map[$comment['jtalkid']] = $cid;
                 }
-                echo '<span class="msg_notice">Inserted comments for entry #' . $id . '</span>';
+                echo 'Inserted comments for entry #' . $id . '<br />' . "\n";
             }
             
             if (function_exists('ob_flush')) {

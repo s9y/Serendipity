@@ -424,7 +424,6 @@
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
 
-
                                     array('var'         => 'searchsort',
                                           'title'       => QUICKSEARCH_SORT,
                                           'description' => '',

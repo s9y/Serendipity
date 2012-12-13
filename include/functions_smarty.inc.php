@@ -872,13 +872,14 @@ function serendipity_smarty_init($vars = array()) {
             // Set a session variable if Smarty fails:
             $prev_smarty = $_SESSION['no_smarty'];
             $_SESSION['no_smarty'] = true;
-            
+
             if (LANG_CHARSET != 'UTF-8') {
                 @define('SMARTY_RESOURCE_CHAR_SET', LANG_CHARSET);
             }
-
+            
             // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+            
             if (!class_exists('Smarty')) {
                 include SMARTY_DIR . 'Smarty.class.php';
             }

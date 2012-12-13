@@ -74,7 +74,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
             $this->data['pivot_path'] = $check_dir;
         }
 
-        printf('<span class="block_level">' . CHECKING_DIRECTORY . ': ', $this->data['pivot_path']) . '</span>';
+        printf('<br />' . CHECKING_DIRECTORY . '<br /><br />', $this->data['pivot_path']);
         if ($root = opendir($this->data['pivot_path'])) {
             // Fetch category data:
             $s9y_categories = serendipity_fetchCategories('all');
@@ -83,7 +83,6 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                 'categories' => array()
             );
 
-            echo '<ul>';
             foreach($categories AS $pivot_category_id => $category) {
                 $found = false;
                 $pivot_category = trim(stripslashes($category[0]));
@@ -95,10 +94,10 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                 }
 
                 if ($found) {
-                    echo '<li>Pivot Category "' . htmlspecialchars($pivot_category) . '" mapped to Serendipity ID ' . $found . '</li>';
+                    echo '&middot; Pivot Category "' . htmlspecialchars($pivot_category) . '" mapped to Serendipity ID ' . $found . '<br />';
                     $pivot_to_s9y['categories'][$pivot_category] = $found;
                 } else {
-                    echo '<li>Created Pivot Category "' . htmlspecialchars($pivot_category) . '".</li>';
+                    echo '&middot; Created Pivot Category "' . htmlspecialchars($pivot_category) . '".<br />';
                     $cat = array('category_name'        => $pivot_category,
                                  'category_description' => '',
                                  'parentid'             => 0,
@@ -115,11 +114,11 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
             while (false !== ($dir = readdir($root))) {
                 if ($dir[0] == '.') continue;
                 if (substr($dir, 0, 8) == 'standard') {
-                    printf('<li>' . CHECKING_DIRECTORY . '...</li>', $dir);
+                    printf('&nbsp;&nbsp;&middot; ' . CHECKING_DIRECTORY . '...<br />', $dir);
                     $data = $this->unserialize($this->data['pivot_path'] . '/' . $dir . '/index-' . $dir . '.php');
 
                     if (empty($data) || !is_array($data) || count($data) < 1) {
-                        echo '<li><span class="msg_error">FATAL: File <em>' . $dir . '/index-' . $dir . '.php</em> has no data!</span></li>';
+                        echo '&nbsp;&nbsp;&nbsp;&nbsp;&middot; <strong style="color: red">FATAL: File <em>' . $dir . '/index-' . $dir . '.php</em> has no data!</strong><br />';
                         flush();
                         ob_flush();
                         continue;
@@ -129,14 +128,14 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                         $entryid = str_pad($entry['code'], 5, '0', STR_PAD_LEFT);
 
                         if ($i >= $max_import) {
-                            echo '<li>Skipping entry data for #' . $entryid . '</li>';
+                            echo '&nbsp;&nbsp;&nbsp;&nbsp;&middot; Skipping entry data for #' . $entryid . '<br />';
                             continue;
                         }
 
-                        echo '<li>Fetching entry data for #' . $entryid . '</li>';
+                        echo '&nbsp;&nbsp;&nbsp;&nbsp;&middot; Fetching entry data for #' . $entryid . '<br />';
                         $entrydata = $this->unserialize($this->data['pivot_path'] . '/' . $dir . '/' . $entryid . '.php');
                         if (empty($entrydata) || !is_array($entrydata) || count($entrydata) < 1) {
-                            echo '<li><span class="msg_error">FATAL: File <em>' . $dir . '/' . $entryid . '.php</em> has no data!</span></li>';
+                            echo '&nbsp;&nbsp;&nbsp;&nbsp;&middot; <strong style="color: red">FATAL: File <em>' . $dir . '/' . $entryid . '.php</em> has no data!</strong><br />';
                             flush();
                             ob_flush();
                             continue;
@@ -183,13 +182,12 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                                 serendipity_db_insert('comments', $comment);
                             }
                         }
-                        echo '<li><span class="msg_success">Entry #' . $entryid . ' imported</span></li>';
+                        echo '&nbsp;&nbsp;&nbsp;&nbsp;&middot; <strong style="color: green">Entry #' . $entryid . ' imported</strong><br />';
                         flush();
                         ob_flush();
                     }
                 }
             }
-            echo '</ul>';
         } else {
             return sprintf(ERROR_NO_DIRECTORY, $this->data['pivot_path']);
         }

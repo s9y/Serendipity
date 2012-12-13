@@ -67,7 +67,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
 
         if ($debug) {
             $c++;
-            echo '<span class="block_level">#' . $c . ' [' . date('d.m.Y H:i.s') . '] ' . $string . "</span>";
+            echo '#' . $c . ' [' . date('d.m.Y H:i.s') . '] ' . $string . "<br />\n";
         }
     }
 
@@ -139,7 +139,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                         $au_inf = serendipity_fetchAuthor($data);
                         if ( !is_array($au_inf) ) {
                             $tasks[] = sprintf(CREATE_AUTHOR, htmlspecialchars($data));
-                            $tasks[] = '<ul class="plainList"><li>Input array is: ' . print_r($data, true) . '</li><<li>Return is: ' . print_r($au_inf, true) . '</li></ul>';
+                            $tasks[] = 'Input array is: ' . print_r($data, true) . '<br />Return is: ' . print_r($au_inf, true) . '<br />';
                             $au_inf = serendipity_fetchAuthor($serendipity['authorid']);
                         }
                         $authors[$data] = $au_inf[0];
@@ -183,9 +183,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                         $cat_found  = false;
                         if (is_array($this->categories)) {
                             for ( $y=0 ; $y<sizeof($this->categories) ; $y++ ) {
-                                echo '<span class="block_level">';
-                                echo '"' . $this->categories[$y]['category_name'] . '" == "' . $data;
-                                echo '</span>';
+                                echo '"' . $this->categories[$y]['category_name'] . '" == "' . $data . '"<br />';
                                 if ( $this->categories[$y]['category_name'] == $data ) {
                                     $cat_found = true;
                                     break;
@@ -427,7 +425,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
         if ( !sizeof($tasks) || $force == true ) {
             serendipity_db_begin_transaction();
             foreach ($entries as $entry) {
-                #echo '<pre>' . printR_($entry, true) . '</pre>';
+                #echo '<pre>' . printR_($entry, true) . '</pre><br />';
                 #continue;
                 if (empty($entry['authorid'])) {
                     $entry['authorid'] = $serendipity['authorid'];
@@ -448,7 +446,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                 unset($entry['s9y_comments']);
 
                 if ( !is_int($r = serendipity_updertEntry($entry)) ) {
-                    echo '<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $r . '</div>';
+                    echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $r . '</div>';
                 } else {
                     $this->debug('Saved entry ' . $r . ' (' . $entry['title'] . ')');
                     $entry['id'] = $r;
@@ -458,7 +456,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                             $cid = serendipity_db_insert_id('comments', 'id');
                             serendipity_approveComment($cid, $entry['id'], true);
                         } else {
-                            echo '<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $rc . '</div>';
+                            echo '<div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $rc . '</div>';
                         }
                     }
                     // Let the plugins do some additional stuff. Here it's used with

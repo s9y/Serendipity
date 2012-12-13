@@ -1,4 +1,7 @@
 <?php # $Id$
+# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
+# All rights reserved.  See LICENSE file for licensing details
+/* vim: set sts=4 ts=4 expandtab : */
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -25,7 +28,7 @@ $output = array(
         '<a href="http://www.s9y.org/33.html">' . FURTHER_LINKS_S9Y_DOCS . '</a>',
         '<a href="http://blog.s9y.org/">' . FURTHER_LINKS_S9Y_BLOG . '</a>',
         '<a href="http://www.s9y.org/forums/">' . FURTHER_LINKS_S9Y_FORUMS . '</a>',
-        '<a href="http://spartacus.s9y.org/">' . FURTHER_LINKS_S9Y_SPARTACUS . '</a>',
+        '<a href="http://php-blog.sf.net/">' . FURTHER_LINKS_S9Y_SPARTACUS . '</a>',
         '<a href="' . $bookmarklet . '" onclick="alert(\'' . FURTHER_LINKS_S9Y_BOOKMARKLET_DESC . '\'); return false;" title="' . FURTHER_LINKS_S9Y_BOOKMARKLET_DESC . '">' . FURTHER_LINKS_S9Y_BOOKMARKLET . '</a>'
     ),
     'links_css'     => 'further_links',
@@ -34,16 +37,16 @@ $output = array(
 
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
 
-$data['output'] = $output;
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
+if ($output['show_links']) {
+    echo '<div class="' . $output['links_css'] . '">' . "\n";
+    echo '<p class="further_links_head">' . $output['links_title'] . '</p>' . "\n";
+    echo '<ul>' . "\n";
+    foreach($output['links'] AS $link) {
+        echo '<li>' . $link . '</li>' . "\n";
+    }
+    echo '</ul>' . "\n";
+    echo '<p class="further_links_foot" style="display: none"></p>' . "\n";
+    echo '</div>' . "\n";
 }
-
-$serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/overview.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-echo $content;
-
-/* vim: set sts=4 ts=4 expandtab : */
+echo '<h3 class="serendipityWelcomeBack">' . $output['welcome'] . '</h3>';
+echo $output['more'];

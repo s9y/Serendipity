@@ -1,7 +1,8 @@
-<?php # lang_cs.inc.php 1475.3 2011-03-09 20:05:20 VladaAjgl $
+<?php # lang_cs.inc.php 1475.0 2012-02-17 22:39:24 VladaAjgl $
 
 /**
- *  @version 1475.3
+ *  @version 1475.0
+/**
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
@@ -10,6 +11,8 @@
  *  @revisionDate 2009/03/08
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2011/03/09
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2012/02/17
  */
 
 @define('PLUGIN_KARMA_NAME',		'Karma');
@@ -125,3 +128,9 @@
 
 // Next lines were translated on 2011/03/09
 @define('PLUGIN_KARMA_ACTIVE_REGISTERED',		'Hlasovat mohou pouze přihlášení uživatelé');
+
+// Next lines were translated on 2012/02/17
+@define('PLUGIN_KARMA_AJAX',		'Nastavení AJAXu');
+@define('PLUGIN_KARMA_AJAX_BLAHBLAH',		'Má se hlasování provádět pomocí asynchronního javascriptu? Pokud je nastavené "Ano", bude se hlasování odesílat na server na pozadí stránky a výsledek bude aktualizován bez znovunačtení stránky blogu.');
+@define('PLUGIN_KARMA_ALIGNMENT',		'Zarovnání pluginu');
+@define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH',		'Má být plugin zarovnán doleva, na střed nebo doprava');

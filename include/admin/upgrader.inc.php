@@ -1,4 +1,6 @@
 <?php # $Id$
+# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
+# All rights reserved.  See LICENSE file for licensing details
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -23,44 +25,30 @@ define('S9Y_U_SUCCESS', 1);
  * @return string   returned String
  */
 function serendipity_upgraderResultDiagnose($result, $s) {
-    global $errorCount, $data;
+    global $errorCount;
 
     if ( $result === S9Y_U_SUCCESS ) {
-        $data['u_success'] = true; // we dont need data here explicitely, but we keep it for possible future purposes
-        return '<span class="msg_success">'. $s .'</span>';
+        return '<span class="serendipityAdminMsgSuccessInstall" style="color: green; font-weight: bold">'. $s .'</span>';
     }
 
     if ( $result === S9Y_U_WARNING ) {
-        $data['u_warning'] = true;
-        return '<span class="msg_notice">'. $s .'</span>';
+        return '<span class="serendipityAdminMsgWarningInstall" style="color: orange; font-weight: bold">'. $s .'</span>';
     }
 
     if ( $result === S9Y_U_ERROR ) {
         $errorCount++;
-        $data['u_error'] = true;
-        return '<span class="msg_error">'. $s .'</span>';
+        return '<span class="serendipityAdminMsgErrorInstall" style="color: red; font-weight: bold">'. $s .'</span>';
     }
 }
-
-/* shall we add the function to smarty ?? */
-/*
-function serendipity_smarty_backend_upgraderResultDiagnose($params, $smarty) {
-    $ssb_URD = serendipity_upgraderResultDiagnose($params[0], $params[1]);
-    $smarty->assign($ssb_URD);
-}
-*/
 
 // Setting this value to 'FALSE' is recommended only for SHARED BLOG INSTALLATIONS. This enforces all shared blogs with a common
 // codebase to only allow upgrading, no bypassing and thus causing instabilities.
 // This variable can also be set as $serendipity['UpgraderShowAbort'] inside serendipity_config_local.inc.php to prevent
 // your setting being changed when updating serendipity in first place.
 $showAbort  = (isset($serendipity['UpgraderShowAbort']) ? $serendipity['UpgraderShowAbort'] : true);
-$data['showAbort'] = $showAbort;
 
 $abortLoc   = $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[action]=ignore';
 $upgradeLoc = $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[action]=upgrade';
-$data['abortLoc']   = $abortLoc;
-$data['upgradeLoc'] = $upgradeLoc;
 
 /* Functions which needs to be run if installed version is equal or lower */
 $tasks = array(array('version'   => '0.5.1',
@@ -94,7 +82,7 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_removeFiles',
                      'title'     => 'Removal of obsolete files',
                      'arguments' => array($obsolete_files),
-                     'desc'      => '<p>The directory structure has been reworked. The following files will be moved to a folder called "backup". If you made manual changes to those files, be sure to read the file docs/CHANGED_FILES to re-implement your changes.</p><div style="font-size: x-small; margin: 15px">' . implode(', ', $obsolete_files) . '</div>'),
+                     'desc'      => 'The directory structure has been reworked. The following files will be moved to a folder called "backup". If you made manual changes to those files, be sure to read the file docs/CHANGED_FILES to re-implement your changes.<br /><div style="font-size: x-small; margin: 15px">' . implode(', ', $obsolete_files) . '</div>'),
 
                array('version'   => '0.8-alpha4',
                      'function'  => 'serendipity_removeFiles',
@@ -142,9 +130,9 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_fixPlugins',
                      'arguments' => array('markup_column_names'),
                      'title'     => 'Configuration options of markup plugins',
-                     'desc'      => '<p>Because of the latest multilingual improvements in Serendipity, the database key names for certain configuration directives only found in markup plugins need to be renamed.</p>'
-                                    . '<p>This will be automatically handled by Serendipity for all internally bundled and external plugins. If you are using the external plugins "GeShi" and "Markdown", please make sure you will upgrade to their latest versions!</p>'
-                                    . '<p>We also advise that you check the plugin configuration of all your markup plugins (like emoticate, nl2br, s9ymarkup, bbcode) and see if the settings you made are all properly migrated.</p>'),
+                     'desc'      => 'Because of the latest multilingual improvements in Serendipity, the database key names for certain configuration directives only found in markup plugins need to be renamed.<br />'
+                                    . 'This will be automatically handled by Serendipity for all internally bundled and external plugins. If you are using the external plugins "GeShi" and "Markdown", please make sure you will upgrade to their latest versions!<br />'
+                                    . 'We also advise that you check the plugin configuration of all your markup plugins (like emoticate, nl2br, s9ymarkup, bbcode) and see if the settings you made are all properly migrated.'),
 
                array('version'   => '0.8-beta5',
                      'function'  => 'serendipity_smarty_purge',
@@ -209,12 +197,10 @@ if ($serendipity['GET']['action'] == 'ignore') {
     }
 
     /* Call functions */
-    $data['call_tasks'] = array();
     foreach ($tasks as $task) {
         if (!empty($task['function']) && version_compare($serendipity['versionInstalled'], $task['version'], '<') ) {
             if (is_callable($task['function'])) {
-                $data['is_callable_task'] = true;
-                $data['call_tasks'][] = sprintf('Calling %s ...<br />', (is_array($task['function']) ? $task['function'][0] . '::'. $task['function'][1] : $task['function']));
+                echo sprintf('Calling %s ...<br />', (is_array($task['function']) ? $task['function'][0] . '::'. $task['function'][1] : $task['function']));;
 
                 if (empty($task['arguments'])) {
                     call_user_func($task['function']);
@@ -228,16 +214,14 @@ if ($serendipity['GET']['action'] == 'ignore') {
     }
 
     if (sizeof($errors)) {
-        $data['errors'] = $errors;
+        echo DIAGNOSTIC_ERROR . '<br /><br />';
+        echo '<div class="serendipityAdminMsgError">- <img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . implode('<br />', $errors) . '</div><br /><br />';
     }
 
     /* I don't care what you told me, I will always nuke Smarty cache */
     serendipity_smarty_purge();
 
 }
-
-$data['s9y_version']           = $serendipity['version'];
-$data['s9y_version_installed'] = $serendipity['versionInstalled'];
 
 if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['GET']['action'] == 'upgrade') {
     $privateVariables = array();
@@ -257,117 +241,159 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
     );
 
     if ($serendipity['GET']['action'] == 'ignore') {
-        $data['ignore'] = true;
+        echo SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED;
     } elseif ($serendipity['GET']['action'] == 'upgrade') {
-        // void
+        printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . SERENDIPITY_UPGRADER_NOW_UPGRADED .'</div>', $serendipity['version']);
     }
-    $data['return_here'] = true;
-    $data['print_UPGRADER_RETURN_HERE'] = sprintf(SERENDIPITY_UPGRADER_RETURN_HERE, '<a href="'. $serendipity['serendipityHTTPPath'] .'">', '</a>');
+    echo '<br />';
+    printf('<div align="center">'. SERENDIPITY_UPGRADER_RETURN_HERE .'</div>', '<a href="'. $serendipity['serendipityHTTPPath'] .'">', '</a>');
     $_SESSION['serendipityAuthedUser'] = false;
     @session_destroy();
 } else {
-    $data['upgrade'] = true;
-    $data['result_diagnose'] = sprintf(ERRORS_ARE_DISPLAYED_IN, serendipity_upgraderResultDiagnose(S9Y_U_ERROR, RED), serendipity_upgraderResultDiagnose(S9Y_U_WARNING, YELLOW), serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, GREEN));
-
+    echo '<h2>' . SERENDIPITY_UPGRADER_WELCOME . '</h2>';
+    printf(SERENDIPITY_UPGRADER_PURPOSE . '<br />', $serendipity['versionInstalled']);
+    printf(SERENDIPITY_UPGRADER_WHY . '.', $serendipity['version']);
+    echo '<br />' . FIRST_WE_TAKE_A_LOOK  . '.';
+?>
+<br /><br />
+<div align="center"><?php printf(ERRORS_ARE_DISPLAYED_IN, serendipity_upgraderResultDiagnose(S9Y_U_ERROR, RED), serendipity_upgraderResultDiagnose(S9Y_U_WARNING, YELLOW), serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, GREEN)); ?>.<br />
+<?php
     $errorCount = 0;
     $showWritableNote = false;
     $basedir = $serendipity['serendipityPath'];
-    $data['basedir'] = $basedir;
-    
-    $data['upgraderResultDiagnose1'] = array();
-    if (is_readable($basedir . 'checksums.inc.php')) {
-        $data['checksums'] = true;
-        $badsums = serendipity_verifyFTPChecksums();
-
-        if ( empty($badsums) ) {
-            $data['upgraderResultDiagnose1'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, CHECKSUMS_PASS);
-        } else {
-            foreach ($badsums as $rfile => $sum) {
-                $data['upgraderResultDiagnose1'][] = serendipity_upgraderResultDiagnose(S9Y_U_WARNING, sprintf(CHECKSUM_FAILED, $rfile));
+?>
+<div align="center">
+<table class="serendipity_admin_list_item serendipity_admin_list_item_even" width="90%" align="center">
+<?php if (is_readable($basedir . 'checksums.inc.php')) {
+    $badsums = serendipity_verifyFTPChecksums();
+?>
+    <tr>
+        <td colspan="2" style="font-weight: bold"><?php echo INTEGRITY ?></td>
+    </tr>
+    <tr>
+        <td width="200"><?php
+            if ( empty($badsums) ) {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, CHECKSUMS_PASS);
+            } else {
+                foreach ($badsums as $rfile => $sum) {
+                    echo serendipity_upgraderResultDiagnose(S9Y_U_WARNING, sprintf(CHECKSUM_FAILED, $rfile)) . "<br />\n";
+                }
             }
-        }
-    } // End if checksums
+     ?></td>
+    </tr>
+<?php } // End if checksums
+?>
+    <tr>
+        <td colspan="2" style="font-weight: bold"><?php echo PERMISSIONS ?></td>
+    </tr>
+    <tr>
+        <td><?php echo $basedir ?></td>
+        <td width="200"><?php
+            if ( is_writable($basedir) ) {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
+            } else {
+                $showWritableNote = false;
+                #Figure out if we're set up a little more securely
+                #PATH_SMARTY_COMPILE/
+                #uploads/
+                #archives/
+                #.htaccess
+                #serendipity_config_local.inc.php
+                # For completeness we could test to make sure the directories
+                # really are directories, but that's probably overkill
+                foreach (array('archives/', PATH_SMARTY_COMPILE . '/', 'uploads/', '.htaccess', 'serendipity_config_local.inc.php') as $path) {
+                    if (!is_writeable($basedir . $path)) {
+                        echo serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
+                        $showWritableNote = true;
+                        break;
+                    }
+                }
 
-    $data['upgraderResultDiagnose2'] = array();
-    if ( is_writable($basedir) ) {
-        $data['upgraderResultDiagnose2'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
-    } else {
-        $showWritableNote = false;
-        #Figure out if we're set up a little more securely
-        #PATH_SMARTY_COMPILE/
-        #uploads/
-        #archives/
-        #.htaccess
-        #serendipity_config_local.inc.php
-        # For completeness we could test to make sure the directories
-        # really are directories, but that's probably overkill
-        foreach (array('archives/', PATH_SMARTY_COMPILE . '/', 'uploads/', '.htaccess', 'serendipity_config_local.inc.php') as $path) {
-            if (!is_writeable($basedir . $path)) {
-                $data['upgraderResultDiagnose2'][] = serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
+                if (!$showWritableNote) {
+                    echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
+                }
+            }
+     ?></td>
+    </tr>
+    <tr>
+        <td><?php echo $basedir . PATH_SMARTY_COMPILE?></td>
+        <td width="200"><?php
+            if ( is_writable($basedir . PATH_SMARTY_COMPILE) ) {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
+            } else {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
                 $showWritableNote = true;
-                break;
+            }
+     ?></td>
+    </tr>
+<?php if (is_dir($basedir . $serendipity['uploadHTTPPath'])) { ?>
+    <tr>
+        <td><?php echo $basedir . $serendipity['uploadHTTPPath']; ?></td>
+        <td width="200"><?php
+            if (is_writable($basedir . $serendipity['uploadHTTPPath'])) {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
+            } else {
+                echo serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
+                $showWritableNote = true;
+            }
+     ?></td>
+    </tr>
+<?php } ?>
+</table>
+</div>
+<?php if ($showWritableNote === true) { ?>
+    <div class="serendipityAdminMsgNote"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_note.png'); ?>" alt="" /><?php echo sprintf(PROBLEM_PERMISSIONS_HOWTO, 'chmod 1777') ?></div>
+<?php }
+
+    if ($errorCount > 0) { ?>
+    <div align="center">
+        <div class="serendipityAdminMsgError"><img style="width: 22px; height: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="<?php echo serendipity_getTemplateFile('admin/img/admin_msg_error.png'); ?>" alt="" />
+<?php echo PROBLEM_DIAGNOSTIC ?></div>
+        <h2><a href="serendipity_admin.php"><?php echo RECHECK_INSTALLATION ?></a></h2>
+    </div>
+<?php }
+?>
+</div>
+
+<?php
+    if ($errorCount < 1) {
+        if (sizeof($sqlfiles) > 0) { ?>
+    <br />
+    <h3><?php printf(SERENDIPITY_UPGRADER_DATABASE_UPDATES, $serendipity['dbType']) ?>:</h3>
+<?php echo SERENDIPITY_UPGRADER_FOUND_SQL_FILES ?>:<br />
+<?php
+            foreach ($sqlfiles as $sqlfile) {
+                echo '<div style="padding-left: 5px"><strong>'. $sqlfile .'</strong></div>';
             }
         }
+?>
+    <br />
 
-        if (!$showWritableNote) {
-            $data['upgraderResultDiagnose2'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
-        }
-    }
-
-    $data['upgraderResultDiagnose3'] = array();
-    if ( is_writable($basedir . PATH_SMARTY_COMPILE) ) {
-         $data['upgraderResultDiagnose3'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
-    } else {
-         $data['upgraderResultDiagnose3'][] = serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
-         $showWritableNote = true;
-    }
-            
-    $data['upgraderResultDiagnose4'] = array();
-    if (is_dir($basedir . $serendipity['uploadHTTPPath'])) { 
-        $data['isdir_uploadpath'] = is_dir($basedir . $serendipity['uploadHTTPPath']);
-        if (is_writable($basedir . $serendipity['uploadHTTPPath'])) {
-            $data['upgraderResultDiagnose4'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
-        } else {
-            $data['upgraderResultDiagnose4'][] = serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
-            $showWritableNote = true;
-        }
-    }
-
-    $data['showWritableNote'] = $showWritableNote;
-
-    $data['errorCount'] = $errorCount;
-    if ($errorCount < 1) {
-        if (sizeof($sqlfiles) > 0) { 
-            $data['database_update_types'] = sprintf(SERENDIPITY_UPGRADER_DATABASE_UPDATES, $serendipity['dbType']);
-            $data['sqlfiles'] = $sqlfiles;
-        }
-
+    <h3><?php echo SERENDIPITY_UPGRADER_VERSION_SPECIFIC ?>:</h3>
+<?php
         $taskCount = 0;
-        $data['tasks'] = array();
+
         foreach ( $tasks as $task ) {
             if (version_compare($serendipity['versionInstalled'], $task['version'], '<'))  {
-                $data['tasks'][] = $task;
+                echo '<div><strong>'. $task['version'] .' - '. $task['title'] .'</strong></div>';
+                echo '<div style="padding-left: 5px">'. nl2br($task['desc']) .'</div><br />';
                 $taskCount++;
             }
         }
 
-        $data['taskCount'] = $taskCount;
+        if ($taskCount == 0) {
+            echo SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC;
+        }
+?>
+
+    <br /><br />
+    <hr noshade="noshade">
+<?php if ($taskCount > 0 || sizeof($sqlfiles) > 0) { ?>
+        <strong><?php echo SERENDIPITY_UPGRADER_PROCEED_QUESTION ?></strong>
+        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton input_button"><?php echo SERENDIPITY_UPGRADER_PROCEED_DOIT ?></a> <?php if ($showAbort) { ?><a href="<?php echo $abortLoc; ?>" class="serendipityPrettyButton"><?php echo SERENDIPITY_UPGRADER_PROCEED_ABORT ?></a><?php } ?>
+<?php } else { ?>
+        <strong><?php echo SERENDIPITY_UPGRADER_NO_UPGRADES ?></strong>
+        <br /><br /><a href="<?php echo $upgradeLoc; ?>" class="serendipityPrettyButton input_button"><?php echo SERENDIPITY_UPGRADER_CONSIDER_DONE ?></a>
+<?php }
     }
 }
-
-$data['get']['action'] = $serendipity['GET']['action']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
-}
-
-/* see on top */
-#$serendipity['smarty']->registerPlugin('function', 'serendipity_upgraderResultDiagnose', 'serendipity_smarty_backend_upgraderResultDiagnose');
-
-$serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/upgrader.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-echo $content;
-
-/* vim: set sts=4 ts=4 expandtab : */

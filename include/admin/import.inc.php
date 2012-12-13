@@ -6,8 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-$data = array();
-
 if (!serendipity_checkPermission('adminImport')) {
     return;
 }
@@ -198,41 +196,62 @@ class Serendipity_Import {
     }
 }
 
-
 if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
-    $data['importForm'] = true;
+
     /* Include the importer */
     $class = @require_once(S9Y_INCLUDE_PATH . 'include/admin/importers/'. basename($serendipity['GET']['importFrom']) .'.inc.php');
     if ( !class_exists($class) ) {
-        $data['die'] = true;
-    } else {
-
-        /* Init the importer with form data */
-        $importer = new $class($serendipity['POST']['import']);
-
-        /* Yes sir, we are importing if we have valid data */
-        if ( $importer->validateData() ) {
-            $data['validateData'] = true;
-
-            /* import() MUST return (bool)true, otherwise we assume it failed */
-            if ( ($result = $importer->import()) !== true ) {
-                $data['result'] = $result;
-            } 
-        /* Apprently we do not have valid data, ask for some */
-        } else {
-            $data['formToken'] = serendipity_setFormToken();
-            $fields = $importer->getInputFields();
-            foreach ($fields as &$field ) {
-                ob_start();
-                serendipity_guessInput($field['type'], 'serendipity[import]['. $field['name'] .']', (isset($serendipity['POST']['import'][$field['name']]) ? $serendipity['POST']['import'][$field['name']] : $field['default']), $field['default']);
-                $field['guessedInput'] = ob_get_contents();
-                ob_end_clean();
-            }
-            $data['fields'] = $fields;
-            $data['notes'] = $importer->getImportNotes();
-        }
+        die('FAILURE: Unable to require import module, possible syntax error?');
     }
+
+    /* Init the importer with form data */
+    $importer = new $class($serendipity['POST']['import']);
+
+    /* Yes sir, we are importing if we have valid data */
+    if ( $importer->validateData() ) {
+        echo IMPORT_STARTING . '<br />';
+
+        /* import() MUST return (bool)true, otherwise we assume it failed */
+        if ( ($result = $importer->import()) !== true ) {
+            echo IMPORT_FAILED .': '. $result . '<br />';
+        } else {
+            echo IMPORT_DONE . '<br />';
+        }
+
+
+    /* Apprently we do not have valid data, ask for some */
+    } else {
+?>
+
+<?php echo IMPORT_PLEASE_ENTER ?>:<br />
+<br />
+<form action="" method="POST" enctype="multipart/form-data">
+  <?php echo serendipity_setFormToken(); ?>
+  <table cellpadding="3" cellspacing="2">
+    <?php foreach ( $importer->getInputFields() as $field ) { ?>
+    <tr>
+      <td><?php echo $field['text'] ?></td>
+      <td><?php serendipity_guessInput($field['type'], 'serendipity[import]['. $field['name'] .']', (isset($serendipity['POST']['import'][$field['name']]) ? $serendipity['POST']['import'][$field['name']] : $field['default']), $field['default']) ?></td>
+    </tr>
+    <?php } ?>
+    <?php if ($notes = $importer->getImportNotes()){ ?>
+    <tr>
+      <td colspan="2">
+        <b><?php echo IMPORT_NOTES; ?></b><br />
+        <?php echo $notes ?>
+      </td>
+    </tr>
+    <?php } ?>
+    <tr>
+      <td colspan="2" align="right"><input type="submit" value="<?php echo IMPORT_NOW ?>" class="serendipityPrettyButton input_button"></td>
+    </tr>
+  </table>
+</form>
+<?php
+    }
+
 } else {
+
     $importpath = S9Y_INCLUDE_PATH . 'include/admin/importers/';
     $dir        = opendir($importpath);
     $list       = array();
@@ -250,19 +269,24 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
     }
     closedir($dir);
     ksort($list);
-    $data['formToken'] = serendipity_setFormToken();
-    $data['list'] = $list;
+?>
+<?php echo IMPORT_WELCOME ?>.<br />
+<?php echo IMPORT_WHAT_CAN ?>. <br />
+<br />
+<?php echo IMPORT_SELECT ?>:<br />
+<br />
+<form action="" method="GET">
+  <input type="hidden" name="serendipity[adminModule]" value="import">
+  <?php echo serendipity_setFormToken(); ?>
+  <strong><?php echo IMPORT_WEBLOG_APP ?>: </strong>
+  <select name="serendipity[importFrom]">
+    <?php foreach ($list as $v=>$k) { ?>
+    <option value="<?php echo $v ?>"><?php echo $k ?></option>
+    <?php } ?>
+  </select>
+  <input type="submit" value="<?php echo GO ?>" class="serendipityPrettyButton input_button">
+</form>
+<?php
 }
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
-}
-
-$serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/import.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-echo $content;
-
 
 /* vim: set sts=4 ts=4 expandtab : */

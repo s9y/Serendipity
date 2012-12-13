@@ -201,7 +201,6 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
                 $test_path1 = $_SERVER['DOCUMENT_ROOT'] . rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/';
             }
             $test_path2 = serendipity_getRealDir(__FILE__);
-            
             if (!empty($_SERVER['ORIG_PATH_TRANSLATED']) && file_exists(dirname($_SERVER['ORIG_PATH_TRANSLATED']) . '/serendipity_admin.php')) {
                 return realpath(rtrim(dirname($_SERVER['ORIG_PATH_TRANSLATED']), '/')) . '/';
             }
@@ -289,7 +288,7 @@ function serendipity_parseTemplate($filename, $areas = null, $onlyFlags=null) {
 
     $config = @include($filename);
     if (! is_array($config)) {
-        printf(INCLUDE_ERROR,$filename);
+    	printf(INCLUDE_ERROR,$filename);
     }
 
     foreach ( $config as $n => $category ) {
@@ -470,8 +469,10 @@ function showConfig(id) {
     if (document.getElementById) {
         el = document.getElementById(id);
         if (el.style.display == 'none') {
-            el.style.display = 'block';
+            document.getElementById('option' + id).src = '<?php echo serendipity_getTemplateFile('img/minus.png') ?>';
+            el.style.display = '';
         } else {
+            document.getElementById('option' + id).src = '<?php echo serendipity_getTemplateFile('img/plus.png') ?>';
             el.style.display = 'none';
         }
     }
@@ -482,11 +483,15 @@ function showConfigAll(count) {
     if (document.getElementById) {
         for (i = 1; i <= count; i++) {
             document.getElementById('el' + i).style.display = state;
+            document.getElementById('optionel' + i).src = (state == '' ? '<?php echo serendipity_getTemplateFile('img/minus.png') ?>' : '<?php echo serendipity_getTemplateFile('img/plus.png') ?>');
         }
-        if (state == 'block') {
+
+        if (state == '') {
+            document.getElementById('optionall').src = '<?php echo serendipity_getTemplateFile('img/minus.png') ?>';
             state = 'none';
         } else {
-            state = 'block';
+            document.getElementById('optionall').src = '<?php echo serendipity_getTemplateFile('img/plus.png') ?>';
+            state = '';
         }
     }
 }
@@ -516,26 +521,45 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     if (!$noForm) {
 ?>
 <form action="?" method="POST">
-    <input type="hidden" name="serendipity[adminModule]" value="installer">
-    <input type="hidden" name="installAction" value="check">
-    <?php echo serendipity_setFormToken(); ?>
+    <div>
+        <input type="hidden" name="serendipity[adminModule]" value="installer" />
+        <input type="hidden" name="installAction" value="check" />
+        <?php echo serendipity_setFormToken(); ?>
+        <br />
 <?php   }
     if (sizeof($config) > 1 && $allowToggle) { ?>
-    <a href="#" onClick="showConfigAll(<?php echo sizeof($config); ?>)"><?php echo TOGGLE_ALL; ?></a>
+        <div align="right">
+            <a style="border:0; text-decoration: none" href="#" onClick="showConfigAll(<?php echo sizeof($config); ?>)" title="<?php echo TOGGLE_ALL; ?>"><img src="<?php echo serendipity_getTemplateFile('img/'. ($folded === true ? 'plus' : 'minus') .'.png') ?>" id="optionall" alt="+/-" border="0" />&nbsp;<?php echo TOGGLE_ALL; ?></a></a><br />
+        </div>
 <?php
     }
     $el_count = 0;
     foreach ($config as $category) {
         $el_count++;
 ?>
-    <div class="configuration_group">
+        <table width="100%" cellspacing="2">
 <?php
         if (sizeof($config) > 1) {
 ?>
-        <h3><?php if ($allowToggle) { ?><a href="#" onClick="showConfig('el<?php echo $el_count; ?>'); return false"><?php echo $category['title']; ?></a><?php } else { ?><?php echo $category['title']; ?><?php } ?></h3>
+            <tr>
+                <th align="left" colspan="2" style="padding-left: 15px;">
+<?php if ($allowToggle) { ?>
+                    <a style="border:0; text-decoration: none;" href="#" onClick="showConfig('el<?php echo $el_count; ?>'); return false" title="<?php echo TOGGLE_OPTION; ?>"><img src="<?php echo serendipity_getTemplateFile('img/'. ($folded === true ? 'plus' : 'minus') .'.png') ?>" id="optionel<?php echo $el_count; ?>" alt="+/-" border="0" />&nbsp;<?php echo $category['title']; ?></a>
+<?php } else { ?>
+                    <?php echo $category['title']; ?>
+<?php } ?>
+                </th>
+            </tr>
 <?php   } ?>
-        <fieldset id="el<?php echo $el_count; ?>">
-            <legend><?php echo $category['description'] ?></legend>
+            <tr>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="3" id="el<?php echo $el_count; ?>">
+                        <tr>
+                            <td style="padding-left: 20px;" colspan="2">
+                                <?php echo $category['description'] ?>
+                            </td>
+                        </tr>
+
 <?php
         foreach ($category['items'] as $item) {
 
@@ -575,15 +599,23 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
                 $value = serendipity_query_default($item['var'], $item['default']);
             }
 ?>
-            <div class="form_<?php echo $item['type']; ?>">
-                <label for="<?php echo $item['var']; ?>"><?php echo $item['title']; ?> <span><?php echo $item['description']; ?></span></label>
-                <?php echo serendipity_guessInput($item['type'], $item['var'], $value, $item['default']); ?>
-            </div>
+                        <tr>
+                            <td style="border-bottom: 1px #000000 solid" align="left" valign="top" width="75%">
+                                <strong><?php echo $item['title']; ?></strong>
+                                <br />
+                                <span style="color: #5E7A94; font-size: 8pt;"><?php echo $item['description']; ?></span>
+                            </td>
+                            <td style="border-bottom: 1px #000000 solid; font-size: 8pt" align="left" valign="middle" width="25%">
+                                <span style="white-space: nowrap"><?php echo serendipity_guessInput($item['type'], $item['var'], $value, $item['default']); ?></span>
+                            </td>
+                        </tr>
 <?php
         }
 ?>
-        </fieldset>
-    </div>
+                    </table><br /><br />
+                </td>
+            </tr>
+        </table>
 <?php
     }
 
@@ -597,7 +629,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 
     if (!$noForm) {
 ?>
-    <input type="submit" value="<?php echo CHECK_N_SAVE; ?>">
+        <input type="submit" value="<?php echo CHECK_N_SAVE; ?>" class="serendipityPrettyButton input_button" />
+    </div>
 </form>
 <?php
     }
@@ -1027,7 +1060,7 @@ function serendipity_httpCoreDir() {
     if (!empty($_SERVER['ORIG_PATH_TRANSLATED'])) {
         return dirname(realpath($_SERVER['ORIG_PATH_TRANSLATED'])) . '/';
     }
-
+    
     return $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/';
 }
 

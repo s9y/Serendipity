@@ -8,41 +8,43 @@
 
         {if $media.is_imgedit}
         <style type="text/css">
-        #outer { 
+        #outer {ldelim}
             left: {$imgedit.zoombox_padding}px;
-        } 
+        {rdelim}
 
-        #overlay { 
+        #overlay {ldelim}
             clip: rect({$imgedit.overlay_clip_top} {$imgedit.overlay_clip_right} {$imgedit.overlay_clip_bottom} {$imgedit.overlay_clip_left});
-        } 
+        {rdelim}
 
-        #harea { 
+        #harea {ldelim}
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.harea_visibility};
-        } 
+        {rdelim}
 
-        #varea { 
+        #varea {ldelim}
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.varea_visibility};
-        } 
+        {rdelim}
 
-        #zoom { 
+        #zoom {ldelim}
             width: {$imgedit.zoombox_width}px;
-        } 
+        {rdelim}
 
-        #scaletext { 
+        #scaletext {ldelim}
             visibility: {$imgedit.scale_visibility};
-        } 
+        {rdelim}
 
-        #outer { 
-            width: {$imgedit.img_width}px;
-            height: {$imgedit.img_height}px;
-            border: 1px solid red;
-            position: relative;
-            display: block;
-        } 
+        #outer {ldelim}
+            width:                       {$imgedit.img_width}px;
+            height:                      {$imgedit.img_height}px;
+            border:                      1px solid red;
+            position:                    relative;
+            display:                     block;
+        {rdelim}
+
+
         </style>
         <script type="text/javascript" src="{serendipity_getFile file='dragdrop.js'}" ></script>
         <script type="text/javascript" src="{serendipity_getFile file='imgedit.js'}" ></script>
@@ -50,25 +52,74 @@
 
         <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
         <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
-
-        <script src="{serendipity_getFile file='admin/header_spawn.js'}"></script>
-        <script type="text/javascript" language="JavaScript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
-        <script type="text/javascript" language="Javascript" src="{$serendipityHTTPPath}serendipity_editor.js"></script>
-
-        {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-
     </head>
 
     <script type="text/javascript">
-    var media_token_url = '{$media.token_url}';
-    var media_rename = '{$CONST.ENTER_NEW_NAME}';
+        function addLoadEvent(func) {ldelim}
+          var oldonload = window.onload;
+          if (typeof window.onload != 'function') {ldelim}
+            window.onload = func;
+          {rdelim} else {ldelim}
+            window.onload = function() {ldelim}
+              oldonload();
+              func();
+            {rdelim}
+          {rdelim}
+        {rdelim}
+
+        function SetCookie(name, value) {ldelim}
+            var today  = new Date();
+            var expire = new Date();
+            expire.setTime(today.getTime() + (60*60*24*30*1000));
+            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
+        {rdelim}
+
+        function rememberOptions() {ldelim}
+            el = document.getElementById('imageForm');
+            for (i = 0; i < el.elements.length; i++) {ldelim}
+                elname = new String(el.elements[i].name);
+                elname = elname.replace(/\[/g, '_');
+                elname = elname.replace(/\]/g, '');
+
+                if (el.elements[i].type == 'radio') {ldelim}
+                    if (el.elements[i].checked) {ldelim}
+                        SetCookie(elname, el.elements[i].value);
+                    {rdelim}
+                {rdelim} else if (typeof(el.elements[i].options) == 'object') {ldelim}
+                    SetCookie(elname, el.elements[i].options[el.elements[i].selectedIndex].value);
+                {rdelim}
+            {rdelim}
+        {rdelim}
 
 {if $media.only_path}
-        if (parent.frames && parent.frames['tree']) { 
+        if (parent.frames && parent.frames['tree']) {ldelim}
             parent.frames['tree'].document.getElementById('newdirlink').href =
                 parent.frames['tree'].basenewdirurl +
                 "{$media.only_path|@escape}"
-        } 
+        {rdelim}
+{/if}
+
+{if $media.case == 'default'}
+        function rename(id, fname) {ldelim}
+            if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {ldelim}
+                newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
+                location.href=newloc;
+            {rdelim}
+        {rdelim}
+{/if}
+
+{if $media.case == 'tree'}
+    var toggle_state = 'expand';
+    function treeToggleAll() {ldelim}
+        if (toggle_state == 'expand') {ldelim}
+            toggle_state = 'collapse';
+            tree.expandAll();
+        {rdelim} else {ldelim}
+            toggle_state = 'expand';
+            tree.collapseAll();
+            coreNode.expand();
+        {rdelim}
+    {rdelim}
 {/if}
     </script>
 
@@ -87,10 +138,10 @@
     <!-- EXTERNAL MEDIA START -->
     {if $media.is_created OR $media.is_deleted}
     <script type="text/javascript">
-    if (parent.frames['tree']) { 
+    if (parent.frames['tree']) {ldelim}
         parent.frames['tree'].location.href  = parent.frames['tree'].location.href;
         parent.frames['media'].location.href = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&serendipity[only_path]={$media.new_dir}';
-    } 
+    {rdelim}
     </script>
     {/if}
     {$media.external}
@@ -119,6 +170,8 @@
 
     <!-- MEDIA SELECTION START -->
     {$media.external}
+    <script type="text/javascript" language="JavaScript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
+    <script type="text/javascript" language="Javascript" src="{$serendipityHTTPPath}serendipity_editor.js"></script>
     <div>
     {if $media.file.is_image}
         {serendipity_hookPlugin hook="frontend_image_selector" eventData=$media.file hookAll=true}
@@ -214,7 +267,7 @@
 
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}
                     <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.BACK}" onclick="history.go(-1);" />
-                    <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.DONE}" onclick="rememberMediaOptions(); {$media.file.origfinishJSFunction}" />
+                    <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.DONE}" onclick="rememberOptions(); {$media.file.origfinishJSFunction}" />
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' eventData=$media.file}
                 {/if}
             </div>
@@ -231,11 +284,11 @@
         <script type="text/javascript">
             block = '<a href="{$media.file.full_file}" title="{$media.file.realname|@escape}" target="_blank">{$media.file.realname|@escape}</a>';
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
-            if (parent.self.opener.editorref) { 
+            if (parent.self.opener.editorref) {ldelim}
                 parent.self.opener.editorref.surroundHTML(block, '');
-            } else { 
+            {rdelim} else {ldelim}
                 parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
-            } 
+            {rdelim}
             parent.self.close();
         </script>
         {/if}
@@ -261,40 +314,40 @@
     </div>
 
     <script type="text/javascript">
-    var tree;
-    var nodes = new Array();
-    var nodeIndex;
-    var coreNode      = '';
-    var last_path     = '';
-    var last_node     = new Array();
-    var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
-    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
+	var tree;
+	var nodes = new Array();
+	var nodeIndex;
+	var coreNode = '';
+	var last_path = '';
+	var last_node = new Array();
+	var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
+    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;&amp;serendipity[only_path]=';
 
-    function treeInit() { 
-        tree = new YAHOO.widget.TreeView("treeDiv1");
-        tree.onExpand = function(node) { 
-            document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        };
+	function treeInit() {ldelim}
+		tree = new YAHOO.widget.TreeView("treeDiv1");
+		tree.onExpand = function(node) {ldelim}
+		    document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
+		{rdelim};
 
         coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
-        coreNode.href     = baseurl;
-        coreNode.target   = 'media';
+		coreNode.href     = baseurl;
+		coreNode.target   = 'media';
         coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" } ;
+        mydir = {ldelim} id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" {rdelim};
         {if $item.depth == 1}
         tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         {else}
-        if (last_node[{$item.depth}-1]) { 
+        if (last_node[{$item.depth}-1]) {ldelim}
             tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        } else { 
+        {rdelim} else {ldelim}
             tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        } 
+        {rdelim}
         {/if}
         last_node[{$item.depth}] = tmpNode;
         {/foreach}
-        tree.draw();
-    }  
+		tree.draw();
+	{rdelim}
 
     addLoadEvent(treeInit);
     </script>

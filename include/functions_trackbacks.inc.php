@@ -673,7 +673,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id, false, 'assoc');
 
         if ($debug && is_string($old_references)) {
-            echo '<span class="block_level">' . $old_references . "</span>";
+            echo $old_references . "<br />\n";
         }
 
         if (is_array($old_references) && count($old_references) > 0) {
@@ -684,15 +684,15 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                 $saved_urls[$old_reference['link']] = true;
             }
         }
-        if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre>\n";
+        if ($debug) echo "Got references in dry run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
         $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id);
         if ($debug && is_string($del)) {
-            echo '<span class="block_level">' . $del . "</span>";
+            echo $del . "<br />\n";
         }
 
-        if ($debug) echo "<span class='block_level'>Deleted references.</span>";
+        if ($debug) echo "Deleted references.<br />\n";
 
         if (is_array($old_references) && count($old_references) > 0) {
             $current_references = array();
@@ -702,12 +702,12 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                 $q = serendipity_db_insert('references', $old_reference, 'show');
                 $cr = serendipity_db_query($q);
                 if ($debug && is_string($cr)) {
-                    echo '<span class="block_level">' . $cr . "</span>";
+                    echo $cr . "<br />\n";
                 }
             }
         }
 
-        if ($debug) echo "Got references in final run: <pre>" . print_r($current_references, true) . "</pre>\n";
+        if ($debug) echo "Got references in final run: <pre>" . print_r($current_references, true) . "</pre><br />\n";
     }
 
     if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>(.+?)</a>@i', $text, $matches)) {
@@ -729,13 +729,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
     for ($i = 0, $j = count($locations); $i < $j; ++$i) {
-        if ($debug) echo "<span class='block_level'>Checking {$locations[$i]}...</span>";
+        if ($debug) echo "Checking {$locations[$i]}...<br />\n";
         if ($locations[$i][0] == '/') {
             $locations[$i] = 'http' . (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $locations[$i];
         }
 
         if (isset($checked_locations[$locations[$i]])) {
-            if ($debug) echo "<span class='block_level'>Already checked.</span>";
+            if ($debug) echo "Already checked.<br />\n";
             continue;
         }
 
@@ -756,7 +756,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
         $row = serendipity_db_query($query, true, 'num');
         if ($debug && is_string($row)) {
-            echo '<span class="block_level">' . $row . "</span>";
+            echo $row . "<br />\n";
         }
         
         $names[$i] = strip_tags($names[$i]);
@@ -766,31 +766,31 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         }
 
         if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
-            if ($debug) echo "<span class='block_level'>Found references for $id, skipping rest</span>";
+            if ($debug) echo "Found references for $id, skipping rest<br />\n";
             continue;
         }
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
             if (!$dry_run) {
                 if (!isset($saved_urls[$locations[$i]])){
-                    if ($debug) echo "<span class='block_level'>Enabling autodiscovery.</span>";
+                    if ($debug) echo "Enabling autodiscovery.<br />\n";
                     serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
                 }
-                elseif ($debug) echo "<span class='block_level'>This reference was already used before in $id and therefore will not be trackbacked again.</span>";
+                elseif ($debug) echo "This reference was already used before in $id and therefore will not be trackbacked again.<br/>\n";
             } elseif ($debug) {
-                echo "<span class='block_level'>Dry run: Skipping autodiscovery</span>";
+                echo "Dry run: Skipping autodiscovery<br />\n";
             }
             $checked_locations[$locations[$i]] = true; // Store trackbacked link so that no further trackbacks will be sent to the same link
         } elseif ($debug) {
-            echo "<span class='block_level'>Skipping full autodiscovery</span>";
+            echo "Skipping full autodiscovery<br />\n";
         }
     }
     $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND (type = '' OR type IS NULL)");
     if ($debug && is_string($del)) {
-        echo '<span class="block_level">' . $del . "</span>";
+        echo $del . "<br />\n";
     }
 
-    if ($debug) echo "<span class='block_level'>Deleted references again.</span>";
+    if ($debug) echo "Deleted references again.<br />\n";
 
     if (!is_array($old_references)) {
         $old_references = array();
@@ -811,7 +811,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $query .= (int)$current_references[$locations[$i] . $names[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if ($debug && is_string($ins)) {
-                echo '<span class="block_level">' . $ins . "</span>";
+                echo $ins . "<br />\n";
             }
             $duplicate_check[$locations[$i] . $names[$i]] = true;
         } else {
@@ -819,7 +819,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if ($debug && is_string($ins)) {
-                echo '<span class="block_level">' . $ins . "</span>";
+                echo $ins . "<br />\n";
             }
 
             $old_references[] = array(
@@ -832,13 +832,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         }
 
         if ($debug) {
-            echo "Current lookup for {$locations[$i]}{$names[$i]} is <pre>" . print_r($current_references[$locations[$i] . $names[$i]], true) . "</pre>\n";
-            echo '<span class="block_level">' . $query . "</span>";
+            echo "Current lookup for {$locations[$i]}{$names[$i]} is <pre>" . print_r($current_references[$locations[$i] . $names[$i]], true) . "</pre><br />\n";
+            echo $query . "<br />\n";
         }
     }
 
     if ($debug) {
-        echo "Old/Saved locations: <pre>" . print_r($old_references, true) . "</pre>\n";
+        echo "Old/Saved locations: <pre>" . print_r($old_references, true) . "</pre><br />\n";
     }
 
     // Add citations
@@ -850,7 +850,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
         $cite = serendipity_db_query($query);
         if ($debug && is_string($cite)) {
-            echo '<span class="block_level">' . $cite . "</span>";
+            echo $cite . "<br />\n";
         }
     }
 }

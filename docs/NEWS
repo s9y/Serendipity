@@ -1,28 +1,24 @@
 # $Id$
 
-Version 2.0 ()
-------------------------------------------------------------------------
-
-    * Use Smarty for backend display output
 
 Version 1.7 ()
 ------------------------------------------------------------------------
 
     * Allow entryproperties plugin to define defaults for custom fields
-
+    
     * Onyx, Net_URL classes: Remove PHP4 style constructor due to
       PHP5 error "Constructor already defined"
-          
+      
     * Improved RSS sidebarplugin to support Atom 
     
     * Bundled simplepie
     
     * For Blogs running on a non-UTF-8 language, set a Smarty constant
-      to indicate the actually used charset.
+      to indicate the actually used charset. 
 
     * Added to use MyISAM handler for s9y tables (we do not use InnoDB
       features, but rely on MyISAM fulltext)
-
+      
     * fixed defaultBaseURL did not show up installer. Thanks to onli.
       Follow up from c292bad
 
@@ -83,7 +79,7 @@ Version 1.7 ()
 Version 1.6.2 (May 16th, 2012)
 ------------------------------------------------------------------------
 
-    * Fix SQL injection for comment.php used in read-context.
+    * Fix SQL injection for comment.php used in read-context.     
       (Thanks to High-Tech Bridge SA Security Release Lab, Advisory HTB23092)
 
 Version 1.6.1 (May 8th, 2012)

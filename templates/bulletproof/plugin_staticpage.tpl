@@ -11,9 +11,12 @@
       <li class="staticpage_navigation_center"><a href="{$staticpage_navigation.top.link}" title="top">{$staticpage_navigation.top.name|@escape}</a></li>
       <li class="staticpage_navigation_right"><a href="{$staticpage_navigation.next.link}" title="next">{$staticpage_navigation.next.name|@escape}</a></li>
     </ul>
+{/if}
+{if $staticpage_show_breadcrumb}
     <div class="staticpage_navigation_center">
+	<a href="{$serendipityBaseURL}">{$CONST.HOME|lower|capitalize:true}</a>&nbsp;&raquo;
       {foreach name="crumbs" from=$staticpage_navigation.crumbs item="crumb"}
-      {if !$smarty.foreach.crumbs.first}&#187;{/if}<a href="{$crumb.link}">{$crumb.name|@escape}</a>
+      {if !$smarty.foreach.crumbs.first}&raquo;&nbsp;{/if}{if !$smarty.foreach.crumbs.last}<a href="{$crumb.link}">{$crumb.name|@escape}</a>{else}{$crumb.name|@escape}{/if}
       {/foreach}
     </div>
 {/if}

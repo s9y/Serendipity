@@ -129,7 +129,7 @@ class serendipity_smarty_emulator {
         } elseif (function_exists($funcname)) {
             return call_user_func($funcname, $params, $this);
         } else {
-            return "<span class='msg_error'>ERROR: " . htmlspecialchars($funcname) . " NOT FOUND.</span>";
+            return "ERROR: " . htmlspecialchars($funcname) . " NOT FOUND.<br />\n";
         }
     }
 

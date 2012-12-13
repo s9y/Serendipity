@@ -53,7 +53,7 @@ function serendipity_db_connect() {
         $function = 'pg_connect';
     }
 
-    $host = port = '';
+    $host = $port = '';
     if (strlen($serendipity['dbHost'])) {
         if (false !== strstr($serendipity['dbHost'], ':')) {
             $tmp = explode(':', $serendipity['dbHost']);
@@ -226,12 +226,12 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
 
     if (!$serendipity['dbLastResult']) {
         if (!$expectError && !$serendipity['production']) {
-            print "<span class='msg_error'>Error in $sql</span>";
+            print "Error in $sql<br/>\n";
             print pg_last_error($serendipity['dbConn']) . "<BR/>\n";
             if (function_exists('debug_backtrace')) {
                 highlight_string(var_export(debug_backtrace(), 1));
             }
-            print "<pre>$sql</pre>";
+            print "<br><code>$sql</code>\n";
         }
         return $type_map['false'];
     }
