@@ -139,9 +139,9 @@ function show_plugins($event_only = false, $sidebars = null)
         $ptitle = $opts[$plugin_placement];
         $pid    = $plugin_placement;
 
-        echo '<td class="pluginmanager_side pluginmanager_' . ($event_only ? 'event' : 'sidebar') . '">';
-        echo '<div class="heading">' . $ptitle . '</div>';
-        echo '<ol id="' . $pid . '_col" class="pluginmanager_container">';
+        echo '<td class="pluginmanager_side pluginmanager_' . ($event_only ? 'event' : 'sidebar') . '">'."\n";
+        echo '<div class="heading">' . $ptitle . '</div>'."\n";
+        echo '<ol id="' . $pid . '_col" class="pluginmanager_container">'."\n";
         if ($is_invisible) {
             $plugins = $invisible_plugins;
         } else {
@@ -149,6 +149,7 @@ function show_plugins($event_only = false, $sidebars = null)
         }
 
         if (!is_array($plugins)) {
+            echo "</ol>\n</td>\n";
             continue;
         }
 
