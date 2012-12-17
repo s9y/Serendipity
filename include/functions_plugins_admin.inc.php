@@ -139,9 +139,9 @@ function show_plugins($event_only = false, $sidebars = null)
         $ptitle = $opts[$plugin_placement];
         $pid    = $plugin_placement;
 
-        echo '<td class="pluginmanager_side pluginmanager_' . ($event_only ? 'event' : 'sidebar') . '">';
-        echo '<div class="heading">' . $ptitle . '</div>';
-        echo '<ol id="' . $pid . '_col" class="pluginmanager_container">';
+        echo '<td class="pluginmanager_side pluginmanager_' . ($event_only ? 'event' : 'sidebar') . '">'."\n";
+        echo '<div class="heading">' . $ptitle . '</div>'."\n";
+        echo '<ol id="' . $pid . '_col" class="pluginmanager_container">'."\n";
         if ($is_invisible) {
             $plugins = $invisible_plugins;
         } else {
@@ -149,6 +149,7 @@ function show_plugins($event_only = false, $sidebars = null)
         }
 
         if (!is_array($plugins)) {
+            echo "</ol>\n</td>\n";
             continue;
         }
 
@@ -624,11 +625,11 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 ?><tr><td colspan="2"><input class="direction_<?php echo $lang_direction; ?>" type="hidden" name="serendipity[<?php echo $postKey; ?>][<?php echo $config_item; ?>]" value="<?php echo $cbag->get('value'); ?>" /></td></tr><?php
                 break;
 
-	    case 'media':
+            case 'media':
                 // Output the JavaScript, if we haven't already
-		$mediajs_output = $serendipity['mediajs_output'];
-		if (!$mediajs_output)
-		{
+                $mediajs_output = $serendipity['mediajs_output'];
+                if (!$mediajs_output)
+                {
                     print <<<EOS
 <script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
 <script type="text/javascript">
@@ -647,8 +648,8 @@ function choose_media(id)
 </script>
 
 EOS;
-		    $serendipity['mediajs_output'] = true;
-	        }
+                    $serendipity['mediajs_output'] = true;
+                }
                 // Print the HTML to display the popup media selector
                 $preview_width = $cbag->get('preview_width');
                 if (!$preview_width || $preview_width == "") {
