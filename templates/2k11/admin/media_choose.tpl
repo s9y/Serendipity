@@ -1,6 +1,7 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 
+<!doctype html>
 <html>
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
@@ -55,7 +56,6 @@
     <script type="text/javascript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
     <script src="{$serendipityHTTPPath}serendipity_editor.js"></script>
     {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-</head>
 <script>
 var media_token_url = '{$media.token_url}';
 var media_rename = '{$CONST.ENTER_NEW_NAME}';
@@ -64,8 +64,10 @@ var media_rename = '{$CONST.ENTER_NEW_NAME}';
 if (parent.frames && parent.frames['tree']) { 
     parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|@escape}";
 } 
+
 {/if}
 </script>
+</head>
 {if $media.frameset}
 <frameset id="media_frame" cols="20%,*">
     <frame id="media_frame_tree" frameborder="0" name="tree" scrolling="auto" src="{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=tree">
@@ -240,9 +242,9 @@ if (parent.frames && parent.frames['tree']) {
                 <input type="button" value="{$CONST.DONE}" onclick="rememberMediaOptions(); {$media.file.origfinishJSFunction}">
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' eventData=$media.file}
             </div>
-        {/if}
+        {/if}{* else fast_select end *}
         </form>
-    {else}
+    {else}{* if $media.file.is_image end *}
         {if $media.filename_only}
         <script>
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
@@ -255,14 +257,14 @@ if (parent.frames && parent.frames['tree']) {
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
             if (parent.self.opener.editorref) { 
                 parent.self.opener.editorref.surroundHTML(block, '');
-            } else { 
+            }  else { 
                 parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
             } 
             parent.self.close();
         </script>
         {/if}
-    {/if}
-    {/if}
+    {/if}{* if $media.file.is_image is something else end *}
+    {/if}{* if $perm_denied else end *}
 {elseif $media.case == 'tree'}
     <div id="content">
         <form name="mainForm" action="javscript:;">
@@ -296,32 +298,32 @@ if (parent.frames && parent.frames['tree']) {
         tree = new YAHOO.widget.TreeView("treeDiv1");
         tree.onExpand = function(node) { 
             document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        };
+        }; 
 
         coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
         coreNode.href     = baseurl;
         coreNode.target   = 'media';
         coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" } ;
-        {if $item.depth == 1}
-        tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        {else}
-        if (last_node[{$item.depth}-1]) { 
-            tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        } else { 
-            tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        } 
-        {/if}
-        last_node[{$item.depth}] = tmpNode;
+            mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" };
+            {if $item.depth == 1}
+                tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+            {else}
+            if (last_node[{$item.depth}-1]) { 
+                tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
+            } else { 
+                tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+            } 
+            {/if}
+            last_node[{$item.depth}] = tmpNode;
         {/foreach}
         tree.draw();
     } 
 
     addLoadEvent(treeInit);
     </script>
-{/if}
-</div>
+{/if}{* if $media.case switch end *}
+</div> <!-- //.serendipityAdminContent end -->
 </body>
 </html>
-{/if}
+{/if}{* $media.frameset else end *}
