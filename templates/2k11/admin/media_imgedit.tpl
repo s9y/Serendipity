@@ -1,7 +1,7 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 
-{* Erm, why isn't this localized at all? o_O *}
+{* Erm, why isn't this localized at all? o_O A: (cite Garvin) http://board.s9y.org/viewtopic.php?f=10&t=18967&p=10432556#p10432556*}
     <div id="imgedit" class="clearfix">
         <form method="post" action="{$imgedit.my_url}" onsubmit="imgedit_getCoordinates()">
             <input id="area_orientation" name="area_orientation" type="hidden"  value="{$imgedit.area_orientation}">
@@ -22,7 +22,17 @@
             <div id="zoom" class="clearfix">
                 <input id="action_enlarge" name="action[enlarge]" type="submit" onclick="return imgedit_zoom(-2); this.blur();" value="Enlarge">
 
-                <script>document.write('<div id="zoomslider"><img id="zoombutton" src="{serendipity_getFile file="admin/img/imgedit_slider.gif"}" width="25" height="5" alt="[Slider]"></div>');</script>
+                <div id="zoomslider"></div>
+                <script>
+                {* document.write('<div id="zoomslider"><img id="zoombutton" src="{serendipity_getFile file="admin/img/imgedit_slider.gif"}" width="25" height="5" alt="[Slider]"></div>'); *}
+                    jQuery('<img/>', { 
+                        id: 'zoombutton',
+                        src: '{serendipity_getFile file="admin/img/imgedit_slider.gif"}',
+                        width: '25',
+                        height: '5',
+                        alt: '[Slider]'
+                    }).appendTo('#zoomslider');
+                </script>
 
                 <noscript>
                     <div class="zoomfactor">Zoom: {$imgedit.zoombox_factor}x</div>
@@ -45,13 +55,11 @@
             </div>
 
             <div id="outer" class="clearfix">
-                <img id="backdrop" src="{$imgedit.http_img_name}" alt="Backdrop" width="{$imgedit.img_width}"   height="{$imgedit.img_height}">
+                <img id="backdrop" src="{$imgedit.http_img_name}" alt="Backdrop" width="{$imgedit.img_width}" height="{$imgedit.img_height}">
                 <img id="overlay" src="{$imgedit.http_img_name}" alt="Overlay" width="{$imgedit.img_width}" height="{$imgedit.img_height}">
                 <img id="harea" src="{$imgedit.harea_img_name}" alt="[Crop area]" width="{$imgedit.harea_width}" height="{$imgedit.harea_height}">
                 <img id="varea" src="{$imgedit.varea_img_name}" alt="[Crop area]" width="{$imgedit.varea_width}" height="{$imgedit.varea_height}">
             </div>
         </form>
     </div>
-    <script>imgedit_init({$imgedit.zoombox_width}, {$imgedit.area_border}, {$imgedit.zoombox_x}, {$imgedit.zoombox_y}, '{$imgedit.area_orientation}');</script>
-</body>
-</html>
+    <script> imgedit_init({$imgedit.zoombox_width}, {$imgedit.area_border}, {$imgedit.zoombox_x}, {$imgedit.zoombox_y}, '{$imgedit.area_orientation}'); </script>
