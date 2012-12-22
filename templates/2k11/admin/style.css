@@ -396,6 +396,7 @@ nav ol { padding: 0; }
 .icon-edit:before { content: '\270d'; } /* '✍' */
 .icon-ok-circle:before { content: '\2714'; } /* '✔' */
 .icon-cancel-circle:before { content: '\2716'; } /* '✖' */
+.icon-attention-circle:before { content: '\2757'; } /* '❗' */
 .icon-plus-circle:before { content: '\2795'; } /* '➕' */
 .icon-minus-circle:before { content: '\2796'; } /* '➖' */
 .icon-ccw:before { content: '\27f2'; } /* '⟲' */
@@ -403,12 +404,14 @@ nav ol { padding: 0; }
 .icon-help-circle:before { content: '\e704'; } /* '' */
 .icon-info-circle:before { content: '\e705'; } /* '' */
 .icon-eye:before { content: '\e70a'; } /* '' */
+.icon-tags:before { content: '\e70d'; } /* '' */
 .icon-comment:before { content: '\e718'; } /* '' */
 .icon-chat:before { content: '\e720'; } /* '' */
 .icon-trash:before { content: '\e729'; } /* '' */
 .icon-resize-full:before { content: '\e744'; } /* '' */
 .icon-zoom-in:before { content: '\e750'; } /* '' */
 .icon-zoom-out:before { content: '\e751'; } /* '' */
+.icon-arrows-cw:before { content: '\e760'; } /* '' */
 .icon-off:before { content: '\e78e'; } /* '' */
 .icon-move:before { content: '\f047'; } /* '' */
 .icon-link-ext:before { content: '\f08e'; } /* '' */
@@ -421,16 +424,22 @@ nav ol { padding: 0; }
 .icon-resize-full-alt:before { content: '\f0b2'; } /* '' */
 .icon-menu:before { content: '\f0c9'; } /* '' */
 .icon-sort:before { content: '\f0dc'; } /* '' */
+.icon-sort-down:before { content: '\f0dd'; } /* '' */
+.icon-sort-up:before { content: '\f0de'; } /* '' */
+.icon-mail-alt:before { content: '\f0e0'; } /* '' */
 .icon-picture:before { content: '🌄'; } /* '\1f304' */
 .icon-user:before { content: '👤'; } /* '\1f464' */
 .icon-users:before { content: '👥'; } /* '\1f465' */
 .icon-folder-open:before { content: '📂'; } /* '\1f4c2' */
 .icon-upload:before { content: '📤'; } /* '\1f4e4' */
 .icon-download:before { content: '📥'; } /* '\1f4e5' */
+.icon-shuffle:before { content: '🔀'; } /* '\1f500' */
+.icon-search:before { content: '🔍'; } /* '\1f50d' */
 .icon-lock:before { content: '🔒'; } /* '\1f512' */
 .icon-lock-open:before { content: '🔓'; } /* '\1f513' */
 .icon-link:before { content: '🔗'; } /* '\1f517' */
 .icon-clock:before { content: '🕔'; } /* '\1f554' */
+.icon-block:before { content: '🚫'; } /* '\1f6ab' */
 
 .icon_link {
     display: inline-block;
