@@ -93,7 +93,7 @@
         {/if}
             {if $file.is_image}
             <div>
-                <br /><a target="_blank" class="serendipityPrettyButton input_button" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
+                <br /><a class="serendipityPrettyButton input_button" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
             </div>
             {/if}
         </div>
