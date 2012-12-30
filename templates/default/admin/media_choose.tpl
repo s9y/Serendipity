@@ -57,21 +57,21 @@
 
         {serendipity_hookPlugin hook="backend_header" hookAll="true"}
 
-    </head>
 
-    <script type="text/javascript">
-    var media_token_url = '{$media.token_url}';
-    var media_rename = '{$CONST.ENTER_NEW_NAME}';
+        <script type="text/javascript">
+            var media_token_url = '{$media.token_url}';
+            var media_rename = '{$CONST.ENTER_NEW_NAME}';
 
-{if $media.only_path}
-        if (parent.frames && parent.frames['tree']) { 
-            parent.frames['tree'].document.getElementById('newdirlink').href =
-                parent.frames['tree'].basenewdirurl +
-                "{$media.only_path|@escape}"
-        } 
-{/if}
+        {if $media.only_path}
+            if (parent.frames && parent.frames['tree']) { 
+                parent.frames['tree'].document.getElementById('newdirlink').href =
+                    parent.frames['tree'].basenewdirurl +
+                    "{$media.only_path|@escape}"
+            } 
+        {/if}
     </script>
 
+    </head>
 {if $media.frameset}
     <frameset id="media_frame" cols="20%,*">
         <frame id="media_frame_tree" frameborder="0" name="tree" scrolling="auto" src="{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=tree" />
@@ -261,45 +261,46 @@
     </div>
 
     <script type="text/javascript">
-    var tree;
-    var nodes = new Array();
-    var nodeIndex;
-    var coreNode      = '';
-    var last_path     = '';
-    var last_node     = new Array();
-    var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
-    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
+        var tree;
+        var nodes = new Array();
+        var nodeIndex;
+        var coreNode      = '';
+        var last_path     = '';
+        var last_node     = new Array();
+        var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
+        var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
 
-    function treeInit() { 
-        tree = new YAHOO.widget.TreeView("treeDiv1");
-        tree.onExpand = function(node) { 
-            document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        };
+        function treeInit() { 
+            tree = new YAHOO.widget.TreeView("treeDiv1");
+            tree.onExpand = function(node) { 
+                document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
+            };
 
-        coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
-        coreNode.href     = baseurl;
-        coreNode.target   = 'media';
-        coreNode.expanded = true;
+            coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
+            coreNode.href     = baseurl;
+            coreNode.target   = 'media';
+            coreNode.expanded = true;
         {foreach from=$media.paths item="item" key="id"}
-        mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" } ;
+            mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" };
         {if $item.depth == 1}
-        tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        {else}
-        if (last_node[{$item.depth}-1]) { 
-            tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        } else { 
             tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        } 
+        {else}
+            if (last_node[{$item.depth}-1]) { 
+                tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
+            } else { 
+                tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+            } 
         {/if}
-        last_node[{$item.depth}] = tmpNode;
+            last_node[{$item.depth}] = tmpNode;
         {/foreach}
-        tree.draw();
-    }  
+            tree.draw();
+        } 
 
-    addLoadEvent(treeInit);
+        addLoadEvent(treeInit);
     </script>
 {/if}
-</div>
+
+    </div>
 </body>
 </html>
 {/if}
