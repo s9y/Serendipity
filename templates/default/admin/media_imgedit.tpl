@@ -20,19 +20,26 @@
                         <input type="submit" name="action[enlarge]" onclick="return imgedit_zoom(-2); this.blur();" value="Enlarge" class="button" />
                     </div>
 
+                    <div id="zoomslider"></div>
                     <script language="JavaScript" type="text/javascript">
-                        document.write('<div id="zoomslider"><img id="zoombutton" src="{serendipity_getFile file="admin/img/imgedit_slider.gif"}" width="25" height="5" alt="[Slider]" /></div>');
+                        var img    = document.createElement("IMG");
+                        img.id     = 'zoombutton';
+                        img.scr    = '{serendipity_getFile file="admin/img/imgedit_slider.gif"}';
+                        img.width  = '25';
+                        img.height = '5';
+                        img.alt    = '[Slider]';
+                        document.getElementById("zoomslider").appendChild(img);
                     </script>
 
                     <noscript>
                         <div class="smallcaps">Zoom: {$imgedit.zoombox_factor}x</div>
                     </noscript>
 
-                    <div class="smallcaps"><input type="submit" name="action[reduce]"          onclick="return imgedit_zoom(2); this.blur();"   value="Reduce" class="button" /></div>
-                    <div class="smallcaps"><input type="submit" name="autoscale"               onclick="return imgedit_autoSize('false');"      value="Best Guess" class="button" /></div>
+                    <div class="smallcaps"><input type="submit" name="action[reduce]" onclick="return imgedit_zoom(2); this.blur();" value="Reduce" class="button" /></div>
+                    <div class="smallcaps"><input type="submit" name="autoscale"      onclick="return imgedit_autoSize('false');"    value="Best Guess" class="button" /></div>
 
                     <!-- BEGIN ORIENTATION_AVAILABLE -->
-                    <div class="smallcaps"><input type="image"  name="toggle_area_orientation" onclick="return imgedit_areaOrientation();"    title="Toggle Orientation" alt="Toggle Orientation" src="{serendipity_getFile file="admin/img/imgedit_orientation.gif"}" /></div>
+                    <div class="smallcaps"><input type="image"  name="toggle_area_orientation" onclick="return imgedit_areaOrientation();" title="Toggle Orientation" alt="Toggle Orientation" src="{serendipity_getFile file="admin/img/imgedit_orientation.gif"}" /></div>
                     <!-- END ORIENTATION_AVAILABLE -->
                     <noscript>
                         <br />
@@ -45,13 +52,11 @@
                 </div>
 
                 <div id="outer">
-                    <img id="backdrop" src="{$imgedit.http_img_name}"       alt="Backdrop"    width="{$imgedit.img_width}"   height="{$imgedit.img_height}"   />
-                    <img id="overlay"  src="{$imgedit.http_img_name}"       alt="Overlay"     width="{$imgedit.img_width}"   height="{$imgedit.img_height}"   />
+                    <img id="backdrop" src="{$imgedit.http_img_name}"   alt="Backdrop"    width="{$imgedit.img_width}"   height="{$imgedit.img_height}"   />
+                    <img id="overlay"  src="{$imgedit.http_img_name}"   alt="Overlay"     width="{$imgedit.img_width}"   height="{$imgedit.img_height}"   />
                     <img id="harea"    src="{$imgedit.harea_img_name}"  alt="[Crop area]" width="{$imgedit.harea_width}" height="{$imgedit.harea_height}" />
                     <img id="varea"    src="{$imgedit.varea_img_name}"  alt="[Crop area]" width="{$imgedit.varea_width}" height="{$imgedit.varea_height}" />
                 </div>
             </form>
         </div>
         <script language="JavaScript" type="text/javascript">imgedit_init({$imgedit.zoombox_width}, {$imgedit.area_border}, {$imgedit.zoombox_x}, {$imgedit.zoombox_y}, '{$imgedit.area_orientation}');</script>
-    </body>
-</html>
