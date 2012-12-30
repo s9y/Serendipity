@@ -52,76 +52,75 @@
 
         <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
         <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
-    </head>
 
-    <script type="text/javascript">
-        function addLoadEvent(func) {ldelim}
-          var oldonload = window.onload;
-          if (typeof window.onload != 'function') {ldelim}
-            window.onload = func;
-          {rdelim} else {ldelim}
-            window.onload = function() {ldelim}
-              oldonload();
-              func();
-            {rdelim}
-          {rdelim}
-        {rdelim}
-
-        function SetCookie(name, value) {ldelim}
-            var today  = new Date();
-            var expire = new Date();
-            expire.setTime(today.getTime() + (60*60*24*30*1000));
-            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
-        {rdelim}
-
-        function rememberOptions() {ldelim}
-            el = document.getElementById('imageForm');
-            for (i = 0; i < el.elements.length; i++) {ldelim}
-                elname = new String(el.elements[i].name);
-                elname = elname.replace(/\[/g, '_');
-                elname = elname.replace(/\]/g, '');
-
-                if (el.elements[i].type == 'radio') {ldelim}
-                    if (el.elements[i].checked) {ldelim}
-                        SetCookie(elname, el.elements[i].value);
+        <script type="text/javascript">
+            function addLoadEvent(func) {ldelim}
+                var oldonload = window.onload;
+                if (typeof window.onload != 'function') {ldelim}
+                    window.onload = func;
+                {rdelim} else {ldelim}
+                    window.onload = function() {ldelim}
+                        oldonload();
+                        func();
                     {rdelim}
-                {rdelim} else if (typeof(el.elements[i].options) == 'object') {ldelim}
-                    SetCookie(elname, el.elements[i].options[el.elements[i].selectedIndex].value);
                 {rdelim}
             {rdelim}
-        {rdelim}
 
-{if $media.only_path}
-        if (parent.frames && parent.frames['tree']) {ldelim}
-            parent.frames['tree'].document.getElementById('newdirlink').href =
-                parent.frames['tree'].basenewdirurl +
-                "{$media.only_path|@escape}"
-        {rdelim}
-{/if}
-
-{if $media.case == 'default'}
-        function rename(id, fname) {ldelim}
-            if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {ldelim}
-                newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
-                location.href=newloc;
+            function SetCookie(name, value) {ldelim}
+                var today  = new Date();
+                var expire = new Date();
+                expire.setTime(today.getTime() + (60*60*24*30*1000));
+                document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
             {rdelim}
-        {rdelim}
-{/if}
 
-{if $media.case == 'tree'}
-    var toggle_state = 'expand';
-    function treeToggleAll() {ldelim}
-        if (toggle_state == 'expand') {ldelim}
-            toggle_state = 'collapse';
-            tree.expandAll();
-        {rdelim} else {ldelim}
-            toggle_state = 'expand';
-            tree.collapseAll();
-            coreNode.expand();
-        {rdelim}
-    {rdelim}
-{/if}
+            function rememberOptions() {ldelim}
+                el = document.getElementById('imageForm');
+                for (i = 0; i < el.elements.length; i++) {ldelim}
+                    elname = new String(el.elements[i].name);
+                    elname = elname.replace(/\[/g, '_');
+                    elname = elname.replace(/\]/g, '');
+
+                    if (el.elements[i].type == 'radio') {ldelim}
+                        if (el.elements[i].checked) {ldelim}
+                            SetCookie(elname, el.elements[i].value);
+                        {rdelim}
+                    {rdelim} else if (typeof(el.elements[i].options) == 'object') {ldelim}
+                        SetCookie(elname, el.elements[i].options[el.elements[i].selectedIndex].value);
+                    {rdelim}
+                {rdelim}
+            {rdelim}
+
+        {if $media.only_path}
+            if (parent.frames && parent.frames['tree']) {ldelim}
+                parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|@escape}"
+            {rdelim}
+        {/if}
+
+        {if $media.case == 'default'}
+            function rename(id, fname) {ldelim}
+                if (newname = prompt('{$CONST.ENTER_NEW_NAME}' + fname, fname)) {ldelim}
+                    newloc = '?{$media.token_url}&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
+                    location.href=newloc;
+                {rdelim}
+            {rdelim}
+        {/if}
+
+        {if $media.case == 'tree'}
+            var toggle_state = 'expand';
+            function treeToggleAll() {ldelim}
+                if (toggle_state == 'expand') {ldelim}
+                    toggle_state = 'collapse';
+                    tree.expandAll();
+                {rdelim} else {ldelim}
+                    toggle_state = 'expand';
+                    tree.collapseAll();
+                    coreNode.expand();
+                {rdelim}
+            {rdelim}
+        {/if}
+
     </script>
+    </head>
 
 {if $media.frameset}
     <frameset id="media_frame" cols="20%,*">
@@ -314,45 +313,46 @@
     </div>
 
     <script type="text/javascript">
-	var tree;
-	var nodes = new Array();
-	var nodeIndex;
-	var coreNode = '';
-	var last_path = '';
-	var last_node = new Array();
-	var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
-    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;&amp;serendipity[only_path]=';
+        var tree;
+        var nodes = new Array();
+        var nodeIndex;
+        var coreNode = '';
+        var last_path = '';
+        var last_node = new Array();
+        var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
+        var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;&amp;serendipity[only_path]=';
 
-	function treeInit() {ldelim}
-		tree = new YAHOO.widget.TreeView("treeDiv1");
-		tree.onExpand = function(node) {ldelim}
-		    document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-		{rdelim};
+        function treeInit() {ldelim}
+            tree = new YAHOO.widget.TreeView("treeDiv1");
+            tree.onExpand = function(node) {ldelim}
+                document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
+            {rdelim};
 
-        coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
-		coreNode.href     = baseurl;
-		coreNode.target   = 'media';
-        coreNode.expanded = true;
-        {foreach from=$media.paths item="item" key="id"}
-        mydir = {ldelim} id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" {rdelim};
-        {if $item.depth == 1}
-        tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-        {else}
-        if (last_node[{$item.depth}-1]) {ldelim}
-            tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-        {rdelim} else {ldelim}
-            tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+            coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
+            coreNode.href     = baseurl;
+            coreNode.target   = 'media';
+            coreNode.expanded = true;
+            {foreach from=$media.paths item="item" key="id"}
+                mydir = {ldelim} id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" {rdelim};
+                {if $item.depth == 1}
+                    tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+                {else}
+                    if (last_node[{$item.depth}-1]) {ldelim}
+                        tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
+                    {rdelim} else {ldelim}
+                        tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
+                    {rdelim}
+                {/if}
+                last_node[{$item.depth}] = tmpNode;
+            {/foreach}
+            tree.draw();
         {rdelim}
-        {/if}
-        last_node[{$item.depth}] = tmpNode;
-        {/foreach}
-		tree.draw();
-	{rdelim}
 
-    addLoadEvent(treeInit);
+        addLoadEvent(treeInit);
     </script>
 {/if}
-</div>
+
+    </div>
 </body>
 </html>
 {/if}
