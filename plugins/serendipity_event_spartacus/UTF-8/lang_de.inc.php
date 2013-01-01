@@ -18,7 +18,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC', 'Wählen Sie den Download-Server. Ändern Sie diesen Wert nur, wenn Sie wissen, was Sie tun und ein Server nicht mehr reagiert. Diese Option ist hauptsächlich für zukünftige Server reserviert.');
 
 @define('PLUGIN_EVENT_SPARTACUS_CHOWN', 'Eigentümer der heruntergeladenen Dateien');
-@define('PLUGIN_EVENT_SPARTACUS_CHOWN_DESC', 'Hier kann der FTP/Shell-Benutzer (z.B. "nobody") angegeben werden, der für von Spartacus heruntergeladene Dateien verwendet wird. Falls leer wird keien Änderung des Eigentümers vorgenommen.');
+@define('PLUGIN_EVENT_SPARTACUS_CHOWN_DESC', 'Hier kann der FTP/Shell-Benutzer (z.B. "nobody") angegeben werden, der für von Spartacus heruntergeladene Dateien verwendet wird. Falls leer wird keine Änderung des Eigentümers vorgenommen.');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD', 'Zugriffsrechte der heruntergeladenen Dateien');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DESC', 'Hier kann der Oktagonale Dateimodus (z.B: "0777") für von Spartacus heruntergeladene Dateien angegeben werden. Falls dieser Wert leergelassen wird, verwendet Serendipity die Standardmaske des Systems. Nicht alle Server unterstützen eine Änderung dieser Dateirechte. Stellen Sie unbedingt sicher, dass die von Ihnen gewählten Rechte das Lesen und Schreiben des Webserver-Benutzers weiterhin erlauben - sonst könnte Serendipity/Spartacus keine bestehenden Dateien überschreiben.');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Zugriffsrechte der heruntergeladenen Verzeichnisse');
