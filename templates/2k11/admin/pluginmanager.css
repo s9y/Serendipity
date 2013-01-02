@@ -1,8 +1,3 @@
-.pluginmanager_side {
-    vertical-align: top;
-    width: 33%;
-}
-
 .pluginmanager_container {
     background: transparent;
     border: 1px solid #ddd;
@@ -31,4 +26,11 @@
 .pluginmanager_grablet {
     cursor: move;
     display: block;
+}
+
+@media only screen and (min-width: 768px) {
+    .pluginmanager_side {
+        vertical-align: top;
+        width: 33%;
+    }
 }
