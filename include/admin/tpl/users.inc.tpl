@@ -70,9 +70,9 @@
         <h3>{if $adminAction == 'edit'}{if $no_create_permission}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{else}{if $create_permission}{$CONST.EDIT}{else}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{/if}{/if}{else}{$CONST.CREATE}{/if}</h3>
         {$config}
     {if $adminAction == 'edit'}
-        <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
+        <input class="standalone" name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
     {else}
-        <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
+        <input class="standalone" name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
     {/if}
     </form>
 {else}

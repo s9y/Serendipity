@@ -104,9 +104,11 @@
             <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
         {if $edit}
-            <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}"> {$CONST.WORD_OR} <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+            <div class="form_buttons">
+                <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}"> {$CONST.WORD_OR} <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+            </div>
         {else}
-            <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+            <input class="standalone" name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
         {/if}
     </form>
 {else}
@@ -117,7 +119,7 @@
 
         <h2>{$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:"html"}"}</h2>
         
-        <div id="groups_delete_action">
+        <div id="groups_delete_action" class="form_buttons">
             <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
             <input name="NO" type="submit" value="{$CONST.NOT_REALLY}">
         </div>
