@@ -40,18 +40,12 @@
 
                 <ol id="{$plugin_placement['pid']}_col" class="pluginmanager_container plainList">
                 {foreach $plugin_placement['plugin_data'] as $plugin_data}
-                    <li id="{$plugin_data['css_key']}" class="pluginmanager_item_{cycle values="odd,even"}">
-                        <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
-                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
-                        </div>
+                    <li id="{$plugin_data['css_key']}" class="pluginmanager_plugin pluginmanager_item_{cycle values="odd,even"}">
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
                             <input id="remove_{$plugin_data['name']}" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}">
                             <label for="remove_{$plugin_data['name']}" class="visuallyhidden">Remove this plugin</label>{* i18n *}
                         </div>
-                    {/if}
-                    {if $plugin_data['can_configure']}
-                        <a class="pluginmanager_configure icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
                     {/if}
                         <h5>
                         {if $plugin_data['can_configure']}
@@ -60,6 +54,14 @@
                             {$plugin_data['title']}
                         {/if}
                         </h5>
+
+                        <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
+                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                        </div>
+
+                    {if $plugin_data['can_configure']}
+                        <a class="pluginmanager_configure icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
+                    {/if}
 
                         <ul class="pluginmanager_plugininfo plainList">
                             <li class="pluginmanager_description">{$plugin_data['desc']}</li>

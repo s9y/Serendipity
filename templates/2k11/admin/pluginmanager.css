@@ -12,14 +12,14 @@
     padding: 5px;
 }
 
-.pluginmanager_container li {
+.pluginmanager_plugin {
     margin: 0 0 5px;
-    padding: 5px;
+    padding: 2em 5px 5px;
     position: relative;
 }
 
-.pluginmanager_item_even,
-.pluginmanager_item_uneven {
+.pluginmanager_item_odd,
+.pluginmanager_item_even {
     background: #eee;
     border: 1px solid #ddd;
 }

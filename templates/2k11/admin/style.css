@@ -902,6 +902,8 @@ summary { cursor: pointer; }
 #filter_comments label {
     display: inline-block;
     width: 15%;
+    *display: inline;
+    *zoom: 1;
 }
 
 #sort_entries .form_select label,
@@ -910,6 +912,8 @@ summary { cursor: pointer; }
 #serendipity_category label {
     display: inline-block;
     width: 20%;
+    *display: inline;
+    *zoom: 1;
 }
 
 #serendipity_category .form_multiselect label {
@@ -971,6 +975,23 @@ summary { cursor: pointer; }
 .plugin_count {
     clear: both;
     margin: 0 0 1.5em;
+}
+
+.pluginmanager_grablet,
+.pluginmanager_configure {
+    position: absolute;
+    top: 5px;
+}
+
+.pluginmanager_grablet { left: 5px; }
+.pluginmanager_configure { right: 5px; }
+
+.pluginmanager_plugin .form_check,
+.pluginmanager_plugin h5 {
+    display: inline-block;
+    margin: 0 0 1em;
+    *display: inline;
+    *zoom: 1;
 }
 
 /* Media db – might go into imgedit.css in the end */
