@@ -885,9 +885,15 @@ summary { cursor: pointer; }
 
 #sort_entries .form_select label,
 #filter_entries .form_select label,
-#filter_entries .form_field label {
+#filter_entries .form_field label,
+#serendipity_category label {
     display: inline-block;
     width: 20%;
+}
+
+#serendipity_category .form_multiselect label {
+    display: block;
+    width: auto;
 }
 
 #sort_entries .form_select select,
@@ -1038,14 +1044,16 @@ summary { cursor: pointer; }
     #sort_entries .form_select label,
     #filter_entries .form_select label,
     #filter_entries .form_field label,
-    #filter_comments label {
+    #filter_comments label,
+    #serendipity_category label {
         display: block;
         width: auto;
     }
 
     #edit_entry_metadata>div,
     #sort_entries .form_select,
-    #filter_comments .clearfix>div {
+    #filter_comments .clearfix>div,
+    #serendipity_category>.clearfix>div {
         float: left;
         width: 33% ;
     }
