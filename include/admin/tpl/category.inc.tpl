@@ -87,7 +87,7 @@
                         category_icon.parentNode.insertBefore(imgBtn, category_icon.nextSibling);
                     </script>
                     <!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
-                    <figure id="preview">
+                    <figure id="preview" class="standalone">
                         <figcaption>{$CONST.PREVIEW}</figcaption>
                         <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape:"html"}" alt="">
                     </figure>
