@@ -639,7 +639,8 @@ optgroup {
 
 /* Backend-specific form stuff */
 label, .standout,
-legend > span { font-weight: bold; }
+legend > span,
+figcaption { font-weight: bold; }
 
 .block_level,
 .form_multiselect label,
@@ -837,6 +838,25 @@ summary { cursor: pointer; }
 .comment_data dt, .template_info dt,
 .comment_summary, .comment_full { clear: both; }
 
+#template_select article {
+    border: 1px solid #ccc;
+    margin: 0 0 1em;
+    padding: 0 .5em 1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#template_select .preview_image {
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+.template_info {
+    float: left;
+    margin-top: 0;
+}
+
 .actions li {
     display: inline-block;
     margin: 0 .4em 0 0;
@@ -999,6 +1019,14 @@ summary { cursor: pointer; }
         margin-right: 1%;
         width: 48%;
     }
+
+    #template_select article {
+        float: left;
+        margin: 0 2% 1em 0;
+        width: 48%;
+    }
+
+    #template_select .odd { clear: left; }
 }
 
 @media only screen and (min-width: 1024px) {

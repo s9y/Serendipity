@@ -30,28 +30,31 @@
     {foreach $templates as $template=>$info}
         {if $info.info.engine == 'yes'}{continue}{/if}
         {if !empty($template)}
-        <li><article class="clearfix">
+        <li><article class="clearfix {cycle values="odd,even"}">
                 <h3>{$info.info.name}</h3>
             {if $info.fullsize_preview || $info.preview}
-                <div class="preview_image">
-                    {if $info.fullsize_preview}<a href="{$info.fullsize_preview}">{/if}
-                    {if $info.preview}<img src="{$info.preview}" alt="{$CONST.PREVIEW}" >{/if}
-                    {if $info.fullsize_preview}</a>{/if}
+                <div class="clearfix">
+                    <div class="preview_image">
+                        {if $info.fullsize_preview}<a href="{$info.fullsize_preview}">{/if}
+                        {if $info.preview}<img src="{$info.preview}" alt="{$CONST.PREVIEW}" >{/if}
+                        {if $info.fullsize_preview}</a>{/if}
+                    </div>
+            {/if}
+                    <details class="template_info">
+                        <summary>Template info</summary> {* i18n *}
+
+                        <dl class="clearfix">
+                            <dt class="template_author">{$CONST.AUTHOR}:</dt>
+                            <dd>{$info.info.author}</dd>
+                            <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
+                            <dd>{$info.info.date}</dd>
+                            <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt> {* Should be shortened *}
+                            <dd>{$info.info.custom_admin_interface}</dd>
+                        </dl>
+                    </details>
+            {if $info.fullsize_preview || $info.preview}
                 </div>
             {/if}
-                <details class="template_info">
-                    <summary>Template info</summary> {* i18n *}
-
-                    <dl class="clearfix">
-                        <dt class="template_author">{$CONST.AUTHOR}:</dt>
-                        <dd>{$info.info.author}</dd>
-                        <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
-                        <dd>{$info.info.date}</dd>
-                        <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
-                        <dd>{$info.info.custom_admin_interface}</dd>
-                    </dl>
-                </details>
-            
                 <div class="template_status">
                 {if $template != $cur_template}
                     {if !$info.unmetRequirements}

@@ -9,7 +9,7 @@
 {* Smarty 3 has a new auto literal option which is enabled by default.
    When the { is followed by a space it's not interpreted as smarty delimiter but literal. *}
     <script>
-        function templatePluginMoverInit() { 
+        function templatePluginMoverInit() {
 
         {foreach $plugin_placements AS $sidebar}
 
@@ -21,7 +21,7 @@
 
         {/foreach}
 
-        } 
+        }
         addLoadEvent(templatePluginMoverInit);
     </script>
 
@@ -40,7 +40,7 @@
 
                 <ol id="{$plugin_placement['pid']}_col" class="pluginmanager_container plainList">
                 {foreach $plugin_placement['plugin_data'] as $plugin_data}
-                    <li id="{$plugin_data['css_key']}" class="pluginmanager_item_{cycle values="even,uneven"}">
+                    <li id="{$plugin_data['css_key']}" class="pluginmanager_item_{cycle values="odd,even"}">
                         <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
                             <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
                         </div>
