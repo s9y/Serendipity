@@ -826,9 +826,13 @@ summary { cursor: pointer; }
 
 #serendipity_comments_list .form_check { margin: 1.35em 0; }
 
-.comment_data { margin-top: 0; }
+.comment_data {
+    clear: both;
+    margin-top: 0;
+}
 
-.comment_data dt, .comment_data dd,
+.comment_data dt,
+.comment_data dd,
 .template_info dt,
 .template_info dd { float: left; }
 
