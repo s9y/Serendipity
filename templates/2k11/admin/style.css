@@ -854,12 +854,16 @@ summary { cursor: pointer; }
 #template_select .preview_image {
     float: left;
     margin: 0 1em 1em 0;
+    /* TESTING */
+    overflow: hidden;
+    height: 100px;
+    width: 100px;
 }
 
-.template_info {
-    float: left;
-    margin-top: 0;
-}
+.template_info { float: left; }
+
+.template_info,
+.template_info dl { margin: 0; }
 
 .actions li {
     display: inline-block;
