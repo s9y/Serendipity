@@ -243,6 +243,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     }
     ksort($pluggroups);
 
+    $data['count_pluginstack'] = count($pluginstack);
     $data['errorstack'] = $errorstack;
 
     if ($serendipity['GET']['only_group'] == 'UPGRADE') {

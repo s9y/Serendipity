@@ -41,8 +41,7 @@
         {$config}
     </form>
 {elseif $adminAction == 'addnew'}
-    {* BUG: $pluginstack always is 0 in 2.0? *}
-    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:"count({$pluginstack})"}</span></h2>
+    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span></h2>
     {foreach $errorstack as $e_idx => $e_name}
     <span class="msg_error"><span class="icon-attention"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
