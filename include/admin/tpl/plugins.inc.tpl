@@ -41,7 +41,8 @@
         {$config}
     </form>
 {elseif $adminAction == 'addnew'}
-    <h3>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:"count({$pluginstack})"}</span></h3>
+    {* BUG: $pluginstack always is 0 in 2.0? *}
+    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:"count({$pluginstack})"}</span></h2>
     {foreach $errorstack as $e_idx => $e_name}
     <span class="msg_error"><span class="icon-attention"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
@@ -68,20 +69,20 @@
     {if empty($pluggroup)}
         {if !empty($only_group)}{continue}{/if}
     {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
-        <h4>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h4>
+        <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
     {/if}
-        <ul class="plainList">
+        <ul class="plugins_installable plainList">
         {foreach $groupstack as $plug}
-            <li><h5>{$plug.name} ({$plug.class_name})</h5>
+            <li><h4>{$plug.name} ({$plug.class_name})</h4>
 
                 <p class="plugin_desc">{$plug.description}</p>
 
-                <ul class="plugin_info">
+                <ul class="plugin_info plainList">
                 {if ! empty($plug.author)}
-                    <li class="plugin_author">{$CONST.AUTHOR}: {$plug.author}</li>
+                    <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
                 {/if}
                 {if ! empty($plug.version)}
-                    <li class="plugin_version">{$CONST.VERSION}: {$plug.version}</li>
+                    <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
                 {/if}
                 {if ! empty($plug.website)}
                     <li class="plugin_web"><a href="{$plug.website|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
@@ -99,13 +100,13 @@
 
                 <div class="plugin_status">
                 {if isset($requirements_failures.{$plug.class_name})}
-                    <span class="unmet_requirements">{$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
+                    <span class="unmet_requirements msg_notice"><span class="icon-info-circle"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
                 {elseif $plug['upgradable'] == true}
-                    <a class="upgradable" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}">{$CONST.UPGRADE}</a>
+                    <a class="upgradable block_level standalone" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}">{$CONST.UPGRADE}</a>
                 {elseif $plug.installable == true}
-                    <a class="installable" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
+                    <a class="installable block_level standalone" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
                 {else}
-                    <span class="installed">{$CONST.ALREADY_INSTALLED}</span>
+                    <span class="installed msg_success"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
                 {/if}
                 </div>
             </li>
