@@ -156,7 +156,7 @@
             {/foreach}
         {/foreach}
         <tr>
-            <td colspan="2" align="right">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:"count({$pluginstack})"}</td>
+            <td colspan="2" align="right">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</td>
         </tr>
     </table>
 {else}
