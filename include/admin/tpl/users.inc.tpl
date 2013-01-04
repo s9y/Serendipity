@@ -83,8 +83,11 @@
         
         <fieldset class="users_delete_action">
             <legend><span>{$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span></legend>
-            <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
-            <input name="NO" type="submit" value="{$CONST.NOT_REALLY}">
+
+            <div class="form_buttons">
+                <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
+                <input name="NO" type="submit" value="{$CONST.NOT_REALLY}">
+            </div>
         </fieldset>
     </form>
     {/if}

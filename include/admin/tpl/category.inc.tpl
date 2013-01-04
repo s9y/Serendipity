@@ -150,7 +150,7 @@
                     {if $category.category_description != ''}
                         <span class="category_desc">{$category.category_description|escape:"html"}</span>
                     {/if}
-                        <span class="category_author">{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>
+                        (<span class="category_author">{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>)
                     </div>
                 </details>
 

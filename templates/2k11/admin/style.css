@@ -658,11 +658,7 @@ input[type=checkbox] { margin-right: .4em; }
     margin-right: 1em;
 }
 
-.form_buttons input {
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-}
-
+.serendipity_commentDirection,
 .form_field, .form_area,
 .form_check, .form_radio,
 .form_select, .form_multiselect {
@@ -723,7 +719,8 @@ blockquote,
 ul, ol, dl,
 p, table,
 details,
-.standalone {
+.standalone,
+.form_buttons {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -817,6 +814,11 @@ summary { cursor: pointer; }
 }
 
 .category_desc { margin: 0 1em 0 0; }
+
+.users_delete_action {
+    position: relative;
+    top: 1.5em;
+}
 
 /* Content area */
 #serendipity_comments_list .form_check,
