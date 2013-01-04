@@ -463,6 +463,7 @@ input[type="checkbox"] {
     *top: -5px;
 }
 
+.button_link:focus,
 button:focus, input:focus,
 select:focus, textarea:focus {
     -webkit-box-shadow: #0066ff 0 0 5px 0;
@@ -479,6 +480,7 @@ input[type="checkbox"]:focus, input[type="checkbox"]:active {
     box-shadow: none;
 }
 
+.button_link,
 button, input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -491,11 +493,11 @@ input[type="submit"] {
     -moz-background-clip: padding;
     background-clip: padding-box;
     background: #ddd;
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));
-    background-image: -webkit-linear-gradient(#ffffff, #dddddd);
-    background-image: -moz-linear-gradient(#ffffff, #dddddd);
-    background-image: -o-linear-gradient(#ffffff, #dddddd);
-    background-image: linear-gradient(#ffffff, #dddddd);
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
+    background-image: -webkit-linear-gradient(#fff, #ddd);
+    background-image: -moz-linear-gradient(#fff, #ddd);
+    background-image: -o-linear-gradient(#fff, #ddd);
+    background-image: linear-gradient(#fff, #ddd);
     border: 1px solid;
     border-color: #ddd #bbb #999;
     color: #000;
@@ -507,24 +509,26 @@ input[type="submit"] {
     *padding-bottom: 0;
 }
 
+.button_link:hover,
 button:hover, input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover {
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #eeeeee), color-stop(100%, #cccccc));
-    background-image: -webkit-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
-    background-image: -moz-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
-    background-image: -o-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
-    background-image: linear-gradient(#ffffff, #eeeeee 1px, #cccccc);
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
+    background-image: -webkit-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: -moz-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: -o-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: linear-gradient(#fff, #eee 1px, #ccc);
 }
 
+.button_link:active,
 button:active, input[type="button"]:active,
 input[type="reset"]:active,
 input[type="submit"]:active {
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #dddddd), color-stop(100%, #eeeeee));
-    background-image: -webkit-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
-    background-image: -moz-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
-    background-image: -o-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
-    background-image: linear-gradient(#ffffff, #dddddd 1px, #eeeeee);
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
+    background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: -moz-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: -o-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: linear-gradient(#fff, #ddd 1px, #eee);
     -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
     -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
     box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
@@ -686,6 +690,19 @@ a, a:visited { color: #3a4b6f; }
 
 a:hover, a:focus { color: #d06604; }
 
+a.button_link,
+a.button_link:hover,
+a.button_link:focus,
+.button_link>span:before {
+    color: #000;
+    text-decoration: none;
+}
+
+.button_link>span:before {
+    margin-right: 0;
+    width: auto;
+}
+
 h1 {
     font-size: 1.71429em;
     line-height: 1.75em;
@@ -814,6 +831,10 @@ summary { cursor: pointer; }
 }
 
 .category_desc { margin: 0 1em 0 0; }
+
+#categories li,
+#serendipity_users li,
+#serendipity_groups li { margin: .125em 0; }
 
 .users_delete_action {
     position: relative;

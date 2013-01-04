@@ -126,7 +126,7 @@
     <section id="pluginlist_sidebar">
         <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
 
-        <a class="install_plugins block_level" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew">{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}</a>
+        <a class="install_plugins button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew">{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}</a>
 
         {$backend_plugins_sidebar_header}
         {$sidebar_plugins}
@@ -135,7 +135,7 @@
     <section id="pluginlist_event">
         <h3>{$CONST.EVENT_PLUGINS}</h3>
 
-        <a class="install_plugins block_level" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event">{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}</a>
+        <a class="install_plugins button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event">{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}</a>
 
         {$backend_plugins_event_header}
         {$event_plugins}
