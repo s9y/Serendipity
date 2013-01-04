@@ -13,6 +13,8 @@
     position: relative;
 }
 
+.pluginmanager_plugin:last-child { margin-bottom: 0; }
+
 .pluginmanager_item_odd,
 .pluginmanager_item_even {
     background: #eee;
