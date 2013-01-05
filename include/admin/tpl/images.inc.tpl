@@ -56,8 +56,8 @@
 
     <form id="delete_image" method="get">
         <div class="form_buttons">
-            <a href="{$newLoc}">{$CONST.DUMP_IT}</a>
-            <a href="{$abortLoc}">{$CONST.ABORT_NOW}</a>
+            <a class="button_link icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
+            <a class="button_link icon_link" href="{$abortLoc}">{$CONST.ABORT_NOW}</a>
         </div>
     </form>
 {/if}
@@ -68,10 +68,10 @@
         {foreach $rip_image AS $ripimg}
         <span class="msg_dialogue"><span class="icon-help-circle"></span> {$ripimg}</span>
         {/foreach}
-        <ul class="dialogue_delrip plainList clearfix">
-            <li><a class="link_abort" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a></li>
-            <li><a class="link_confirm" href="{$newLoc}">{$CONST.DUMP_IT}</a></li>
-        </ul>
+        <div class="dialogue_delrip form_buttons">
+            <a class="button_link icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
+            <a class="button_link icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
+        </div>
     {/if}
     </form>
 {/if}
