@@ -10,52 +10,54 @@
         {/if}
         </div>
     {else}
-        <article class="media_file">
+        <article class="media_file {cycle values="odd,even"}">
             <header>
+                <div class="form_check">
+                    <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
+                </div>
                 <h3>{$file.realname}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
-                {if $file.authorid != 0}<span class="author">{$file.authorname}</span>{/if}
+                {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
-            <div class="media_file_preview">
-            {$file.preview}
+            <div class="clearfix">
+                <div class="media_file_preview">
+                {$file.preview}
+                </div>
+
+                <footer>
+                    <ul class="media_file_meta plainList">
+                {if $file.hotlink}
+                        <li>{$file.nice_hotlink}</li>
+                {else}
+                    {if $file.is_image}
+                        <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
+                        <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
+                    {/if}
+                        <li>{$file.nice_size} KB</li>
+                    {if $file.realname != $file.diskname}
+                        <li>{$file.diskname}</li>
+                    {/if}
+                {/if}
+                    </ul>
+                </footer>
             </div>
         {if $file.is_editable}
-            <ul class="media_file_actions plainList">
-                <li><a id="media_fullsize" class="icon_link" href="#" title="{$CONST.MEDIA_FULLSIZE}" onclick="F1 = window.open('{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}', 'Zoom', 'height={$file.popupHeight},width={$file.popupWidth},top='+ (screen.height-{$file.popupHeight})/2 +',left='+ (screen.width-{$file.popupWidth})/2 +',toolbar=no,menubar=no,location=no,resize=1,resizable=1{if NOT $file.is_image},scrollbars=yes{/if}');"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
-                <li><a id="media_rename" class="icon_link" href="#" title="{$CONST.MEDIA_RENAME}" onclick="rename('{$file.id}', '{$file.name|escape:javascript}')"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
+            <ul class="media_file_actions actions plainList clearfix">
+                <li><a id="media_fullsize" class="button_link" href="#" title="{$CONST.MEDIA_FULLSIZE}" onclick="F1 = window.open('{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}', 'Zoom', 'height={$file.popupHeight},width={$file.popupWidth},top='+ (screen.height-{$file.popupHeight})/2 +',left='+ (screen.width-{$file.popupWidth})/2 +',toolbar=no,menubar=no,location=no,resize=1,resizable=1{if NOT $file.is_image},scrollbars=yes{/if}');"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
+                <li><a id="media_rename" class="button_link" href="#" title="{$CONST.MEDIA_RENAME}" onclick="rename('{$file.id}', '{$file.name|escape:javascript}')"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
             {if $file.is_image AND NOT $file.hotlink}
-                <li><a id="media_resize" class="icon_link" href="#" title="{$CONST.IMAGE_RESIZE}" onclick="location.href='?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}';"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
+                <li><a id="media_resize" class="button_link" href="#" title="{$CONST.IMAGE_RESIZE}" onclick="location.href='?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}';"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
             {/if}
             {if $file.is_image AND NOT $file.hotlink}
-                <li><a id="media_rotate_left" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
+                <li><a id="media_rotate_left" class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
             {/if}
             {if $file.is_image AND NOT $file.hotlink}
-                <li><a id="media_rotate_right" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}"><span class="icon-cw"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
+                <li><a id="media_rotate_right" class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}"><span class="icon-cw"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
             {/if}
-                <li><a id="media_prop" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
-                <li><a id="media_delete" class="icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
-                <li><div class="form_check">
-                        <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
-                    </div>
-                </li>
+                <li><a id="media_prop" class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
+                <li><a id="media_delete" class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
             </ul>
         {/if}
-            <footer>
-                <ul class="media_file_meta plainList">
-            {if $file.hotlink}
-                    <li>{$file.nice_hotlink}</li>
-            {else}
-                {if $file.is_image}
-                    <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
-                    <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
-                {/if}
-                    <li>{$file.nice_size} KB</li>
-                {if $file.realname != $file.diskname}
-                    <li>{$file.diskname}</li>
-                {/if}
-            {/if}
-                </ul>
-            </footer>
         </article>
     {/if}
 

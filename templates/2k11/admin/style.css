@@ -451,7 +451,9 @@ form > a,
 #filter_entries .form_field label,
 #serendipity_category label,
 .pluginmanager_plugin .form_check,
-.pluginmanager_plugin h5 {
+.pluginmanager_plugin h5,
+.media_file .form_check,
+.media_file h3 {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -855,10 +857,9 @@ summary { cursor: pointer; }
 #serendipity_comments_list .form_check { margin: 1.35em 0; }
 
 .comment_data,
-.configuration_group h3 {
-    clear: both;
-    margin-top: 0;
-}
+.configuration_group h3 { margin-top: 0; }
+
+.comment_data { clear: both; }
 
 .comment_data dt,
 .comment_data dd,
@@ -872,15 +873,26 @@ summary { cursor: pointer; }
 .comment_summary, .comment_full,
 .serendipity_commentDirection { clear: both; }
 
-#template_select article {
+#template_select article,
+.media_file {
     background: #eee;
-    border: 1px solid #ddd;
     margin: 0 0 1em;
     padding: 0 .5em 1em;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+#template_select article,
+.media_file,
+.media_file_preview img { border: 1px solid #ddd; }
+
+.media_file_preview {
+    float: left;
+    margin: 0 1em 0 0;
+}
+
+.media_file .actions { margin-bottom: 0; }
 
 #template_select .preview_image {
     float: left;
@@ -895,7 +907,8 @@ summary { cursor: pointer; }
 
 .template_info,
 .template_info dl,
-fieldset p { margin: 0; }
+fieldset p,
+.media_file_meta { margin: 0; }
 
 .actions li { margin: 0 .4em 0 0; }
 
@@ -1020,7 +1033,15 @@ fieldset p { margin: 0; }
 .pluginmanager_configure { right: 5px; }
 
 .pluginmanager_plugin .form_check,
-.pluginmanager_plugin h5 { margin: 0 0 1em; }
+.pluginmanager_plugin h5,
+.media_file .form_check { margin: 0 0 1em; }
+
+.media_file h3 { margin: .5em 0 1em; }
+
+.media_file .form_check input {
+    position: relative;
+    top: .125em;
+}
 
 /* Media db – might go into imgedit.css in the end */
 #fs_crop { min-height: 200px; }
@@ -1069,13 +1090,15 @@ fieldset p { margin: 0; }
         width: 48%;
     }
 
-    #template_select article {
+    #template_select article,
+    .media_file {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
     }
 
-    #template_select .odd { clear: left; }
+    #template_select .odd,
+    .media_pane .odd { clear: left; }
 }
 
 @media only screen and (min-width: 1024px) {

@@ -11,7 +11,7 @@
     <fieldset>
         <legend><span>{$CONST.FILTERS}</span></legend>
 
-        <a id="toggle_filters" class="icon_link" href="#" title="{$CONST.FILTERS}" onclick="showFilters(); return false"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a>
+        <a id="toggle_filters" class="button_link icon_link" href="#" title="{$CONST.FILTERS}" onclick="showFilters(); return false"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a>
 
         <div id="media_filter" class="clearfix">
             <div id="media_filter_path" class="form_select">
@@ -131,7 +131,9 @@
 {if $media.show_upload}
     <input type="button" value="{$CONST.ADD_MEDIA|@escape}" onclick="location.href='{$media.url}&amp;serendipity[adminAction]=addSelect&amp;serendipity[only_path]={$media.only_path|escape:url}'; return false">
 {/if}
-    <input name="go" type="submit" value="{$CONST.GO}">
+    <div class="form_buttons">
+        <input name="go" type="submit" value="{$CONST.GO}">
+    </div>
 </form>
 {if $media.nr_files < 1}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_IMAGES_FOUND}</span>
