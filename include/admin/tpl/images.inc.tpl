@@ -119,24 +119,26 @@
             <input id="diredit_new" name="serendipity[newDir]" type="text" value="{$use_dir}">
         </div>
 
-        <div class="form_select">
-            <label for="read_authors">{$CONST.PERM_READ}</label>
-            <select id="read_authors" name="serendipity[read_authors][]" multiple size="6">
-                <option value="0"{if $rgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
-            {foreach $groups AS $group}
-                <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
-            {/foreach}
-            </select>
-        </div>
+        <div class="clearfix">
+            <div class="form_select">
+                <label for="read_authors">{$CONST.PERM_READ}</label>
+                <select id="read_authors" name="serendipity[read_authors][]" multiple size="6">
+                    <option value="0"{if $rgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
+                {foreach $groups AS $group}
+                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
+                {/foreach}
+                </select>
+            </div>
 
-        <div class="form_select">
-            <label for="write_authors">{$CONST.PERM_WRITE}</label>
-            <select id="write_authors" name="serendipity[write_authors][]" multiple size="6">
-                <option value="0"{if $wgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
-            {foreach $groups AS $group}
-                <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
-            {/foreach}
-            </select>
+            <div class="form_select">
+                <label for="write_authors">{$CONST.PERM_WRITE}</label>
+                <select id="write_authors" name="serendipity[write_authors][]" multiple size="6">
+                    <option value="0"{if $wgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
+                {foreach $groups AS $group}
+                    <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
+                {/foreach}
+                </select>
+            </div>
         </div>
 
         <div class="form_check">

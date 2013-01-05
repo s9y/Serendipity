@@ -662,7 +662,8 @@ figcaption { font-weight: bold; }
 
 .block_level,
 .form_multiselect label,
-label > span { display: block; }
+label > span,
+#image_directory_edit_form .form_select label { display: block; }
 
 label > span,
 input[type=checkbox] + label,
@@ -1106,6 +1107,11 @@ fieldset p,
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    #image_directory_edit_form>.clearfix>div {
+        float: left;
+        margin: 0 5% 0 0;
     }
 
     #template_select .odd,
