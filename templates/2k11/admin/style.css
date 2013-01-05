@@ -86,12 +86,6 @@ svg:not(:root) { overflow: hidden; }
 figure,
 form { margin: 0; }
 
-/*fieldset {
-    border: 1px solid #ccc;
-    margin: 0 2px;
-    padding: 0.35em 0.625em 0.75em;
-}*/
-
 legend {
     border: 0;
     padding: 0;
@@ -189,7 +183,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ddd;
     margin: 1.5em 0;
     padding: 0;
 }
@@ -442,7 +436,22 @@ nav ol { padding: 0; }
 .icon-block:before { content: '🚫'; } /* '\1f6ab' */
 
 .icon_link,
-#insert_image {
+#insert_image,
+form > a,
+#user_menu li,
+.edit_actions li,
+.actions li,
+#login .form_field label,
+#edit_entry_title label,
+#edit_entry_metadata label,
+#filter_comments label,
+#serendipity_comment label,
+#sort_entries .form_select label,
+#filter_entries .form_select label,
+#filter_entries .form_field label,
+#serendipity_category label,
+.pluginmanager_plugin .form_check,
+.pluginmanager_plugin h5 {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -737,7 +746,8 @@ ul, ol, dl,
 p, table,
 details,
 .standalone,
-.form_buttons {
+.form_buttons,
+form > a {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -809,12 +819,7 @@ summary { cursor: pointer; }
 }
 
 #user_menu li,
-.edit_actions li {
-    display: inline-block;
-    margin: 0 1em 0 0;
-    *display: inline;
-    *zoom: 1;
-}
+.edit_actions li { margin: 0 1em 0 0; }
 
 .edit_actions li { margin: 0 0 0 1em; }
 
@@ -864,10 +869,12 @@ summary { cursor: pointer; }
 .template_info dt { margin: 0 .4em 0 0; }
 
 .comment_data dt, .template_info dt,
-.comment_summary, .comment_full { clear: both; }
+.comment_summary, .comment_full,
+.serendipity_commentDirection { clear: both; }
 
 #template_select article {
-    border: 1px solid #ccc;
+    background: #eee;
+    border: 1px solid #ddd;
     margin: 0 0 1em;
     padding: 0 .5em 1em;
     -webkit-box-sizing: border-box;
@@ -890,12 +897,7 @@ summary { cursor: pointer; }
 .template_info dl,
 fieldset p { margin: 0; }
 
-.actions li {
-    display: inline-block;
-    margin: 0 .4em 0 0;
-    *display: inline;
-    *zoom: 1;
-}
+.actions li { margin: 0 .4em 0 0; }
 
 #entry_skip legend,
 #entry_skip label,
@@ -923,31 +925,17 @@ fieldset p { margin: 0; }
 
 #login_send { margin: .5em 0 0 7.5em;}
 
-#login .form_field label {
-    display: inline-block;
-    min-width: 8em;
-    *display: inline;
-    *zoom: 1;
-}
+#login .form_field label { min-width: 8em; }
 
 #edit_entry_title label,
 #edit_entry_metadata label,
-#filter_comments label {
-    display: inline-block;
-    width: 15%;
-    *display: inline;
-    *zoom: 1;
-}
+#filter_comments label,
+#serendipity_comment label { width: 15%; }
 
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
-#serendipity_category label {
-    display: inline-block;
-    width: 20%;
-    *display: inline;
-    *zoom: 1;
-}
+#serendipity_category label { width: 20%; }
 
 #serendipity_category .form_multiselect label {
     display: block;
@@ -958,12 +946,24 @@ fieldset p { margin: 0; }
 #filter_entries .form_select select,
 #filter_entries .form_field input { width: 79%; }
 
-#edit_entry_title input { width: 84%; }
-
+#edit_entry_title input,
 #edit_entry_metadata input,
 #edit_entry_metadata select,
 #filter_comments input,
-#filter_comments select { width: 84%; }
+#filter_comments select,
+#serendipity_comment .form_field input,
+#serendipity_comment select { width: 84%; }
+
+#edit_entry_timestamp { position: relative; }
+
+#reset_timestamp {
+    max-height: 1.25em;
+    position: absolute;
+    top: 0;
+    right: .1875em;
+}
+
+.editor_toolbar { margin-top: .25em; }
 
 .editor_toolbar input { margin: 0 .25em .75em 0; }
 
@@ -1020,12 +1020,7 @@ fieldset p { margin: 0; }
 .pluginmanager_configure { right: 5px; }
 
 .pluginmanager_plugin .form_check,
-.pluginmanager_plugin h5 {
-    display: inline-block;
-    margin: 0 0 1em;
-    *display: inline;
-    *zoom: 1;
-}
+.pluginmanager_plugin h5 { margin: 0 0 1em; }
 
 /* Media db – might go into imgedit.css in the end */
 #fs_crop { min-height: 200px; }
@@ -1128,7 +1123,8 @@ fieldset p { margin: 0; }
     #filter_entries .form_select label,
     #filter_entries .form_field label,
     #filter_comments label,
-    #serendipity_category label {
+    #serendipity_category label,
+    #serendipity_comment label {
         display: block;
         width: auto;
     }
@@ -1136,7 +1132,8 @@ fieldset p { margin: 0; }
     #edit_entry_metadata>div,
     #sort_entries .form_select,
     #filter_comments .clearfix>div,
-    #serendipity_category>.clearfix>div {
+    #serendipity_category>.clearfix>div,
+    #serendipity_comment .form_field {
         float: left;
         width: 33% ;
     }
@@ -1147,12 +1144,20 @@ fieldset p { margin: 0; }
         width: 25%;
     }
 
+    #serendipity_comment .form_tarea { clear: both; }
+
     #edit_entry_metadata select { width: 100%; }
 
     #edit_entry_metadata select[multiple],
     #sort_entries .form_select select,
     #filter_entries .form_select select,
     #filter_entries .form_field input { width: 84%; }
+
+    #edit_entry_timestamp,
+    #reset_timestamp {
+        max-height: auto;
+        position: static;
+    }
 }
 
 @media only screen and (min-width: 1280px) {
