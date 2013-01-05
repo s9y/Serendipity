@@ -20,7 +20,7 @@
     <div id="serendipity_plugin_config">
 {/if}
 {if is_array($config_groups)}
-        <a id="optionall" href="#" onClick="showConfigAll({sizeof($config_groups)}); return false" title="{$CONST.TOGGLE_ALL}">{$CONST.TOGGLE_ALL}</a>
+        <a id="optionall" class="button_link icon_link standalone" href="#" onClick="showConfigAll({sizeof($config_groups)}); return false" title="{$CONST.TOGGLE_ALL}">{$CONST.TOGGLE_ALL}</a>
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <h2><a id="optionel{$config_groupkeys@iteration}" href="#" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h2>
         

@@ -849,7 +849,8 @@ summary { cursor: pointer; }
 
 #serendipity_comments_list .form_check { margin: 1.35em 0; }
 
-.comment_data {
+.comment_data,
+.configuration_group h3 {
     clear: both;
     margin-top: 0;
 }
