@@ -86,11 +86,11 @@ svg:not(:root) { overflow: hidden; }
 figure,
 form { margin: 0; }
 
-fieldset {
+/*fieldset {
     border: 1px solid #ccc;
     margin: 0 2px;
     padding: 0.35em 0.625em 0.75em;
-}
+}*/
 
 legend {
     border: 0;
@@ -887,7 +887,8 @@ summary { cursor: pointer; }
 .template_info { float: left; }
 
 .template_info,
-.template_info dl { margin: 0; }
+.template_info dl,
+fieldset p { margin: 0; }
 
 .actions li {
     display: inline-block;

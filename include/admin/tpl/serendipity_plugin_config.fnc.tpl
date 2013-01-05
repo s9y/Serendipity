@@ -45,7 +45,7 @@
 {/if}
 {* $serendipity_printConfigJS *}{* outsourced to templates/default/admin/admin_scripts.js - see passed vars on top *}
 {if $showSubmit_foot}
-    <div class="save_conf">
+    <div class="save_conf form_buttons">
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
