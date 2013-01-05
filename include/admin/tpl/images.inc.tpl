@@ -267,39 +267,46 @@
     //-->
     </script>
 
-    {if $print_RESIZE_BLAHBLAH}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_RESIZE_BLAHBLAH}</span>{/if}
-    {if $print_ORIGINAL_SIZE}<span class="msg_notice"><span class="icon-info-circle"></span> {$print_ORIGINAL_SIZE}</span>{/if}
+    {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
+    {if $print_ORIGINAL_SIZE}<span class="block_level standalone">{$print_ORIGINAL_SIZE}</span>{/if}
     
-    <h2>{$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</h2>
+    <span class="msg_notice image_resize_hint"><span class="icon-info-circle"></span> {$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</span>
 
-    <form name="serendipityScaleForm" action="?" method="GET">
-        {$formtoken}
-        <input name="serendipity[adminModule]" type="hidden" value="images">
-        <input name="serendipity[adminAction]" type="hidden" value="scale">
-        <input name="serendipity[fid]" type="hidden" value="{$get.fid}">
+    <div class="clearfix">
+        <form id="serendipityScaleForm" name="serendipityScaleForm" action="?" method="GET">
+            {$formtoken}
+            <input name="serendipity[adminModule]" type="hidden" value="images">
+            <input name="serendipity[adminAction]" type="hidden" value="scale">
+            <input name="serendipity[fid]" type="hidden" value="{$get.fid}">
 
-        <fieldset>
-            <legend><span>{$CONST.NEWSIZE}</span></legend>
+            <fieldset>
+                <legend><span>{$CONST.NEWSIZE}</span></legend>
 
-            <div class="form_field">
-                <label for="resize_width">Width</label> {* i18n *}
-                <input id="resize_width" name="serendipity[width]" type="text" onchange="rescale('width' , value);" value="{$img_width}">
+                <div class="form_field">
+                    <label for="resize_width">Width</label> {* i18n *}
+                    <input id="resize_width" name="serendipity[width]" type="text" onchange="rescale('width' , value);" value="{$img_width}">
+                </div>
+
+                <div class="form_field">
+                    <label for="resize_height">Height</label> {* i18n *}
+                    <input id="resize_height" name="serendipity[height]" type="text" onchange="rescale('height', value);" value="{$img_height}">
+                </div>
+            </fieldset>
+
+            <div class="form_check">
+                <input id="resize_keepprops" name="auto" type="checkbox" checked="checked">
+                <label for="resize_keepprops">{$CONST.KEEP_PROPORTIONS}</label>
             </div>
-
-            <div class="form_field">
-                <label for="resize_height">Height</label> {* i18n *}
-                <input id="resize_height" name="serendipity[height]" type="text" onchange="rescale('height', value);" value="{$img_height}">
+            
+            <div class="form_buttons">
+                <input name="scale" type="button" value="{$CONST.IMAGE_RESIZE}" onclick="if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();">
             </div>
-        </fieldset>
+        </form>
 
-        <div class="form_check">
-            <input id="resize_keepprops" name="auto" type="checkbox" checked="checked">
-            <label for="resize_keepprops">{$CONST.KEEP_PROPORTIONS}</label>
+        <div id="serendipityScaleImg">
+            <img src="{$file}" name="serendipityScaleImg" style="width: {$img_width}px; height: {$img_height}px;" alt="">
         </div>
-        
-        <input name="scale" type="button" value="{$CONST.IMAGE_RESIZE}" onclick="if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();">
-    </form>
-    <img src="{$file}" name="serendipityScaleImg" style="width: {$img_width}px; height: {$img_height}px;" alt="">
+    </div>
 {/if}
 {if $case_default}
     {if $showML_def}{$showML_def}{/if}

@@ -883,6 +883,7 @@ summary { cursor: pointer; }
 }
 
 #template_select article,
+#serendipityScaleImg img,
 .media_file,
 .media_file_preview img { border: 1px solid #ddd; }
 
@@ -907,7 +908,10 @@ summary { cursor: pointer; }
 .template_info,
 .template_info dl,
 fieldset p,
-.media_file_meta { margin: 0; }
+.media_file_meta,
+.image_resize_hint p { margin: 0; }
+
+.image_resize_hint p { display: inline; }
 
 .actions li { margin: 0 .4em 0 0; }
 
@@ -1103,10 +1107,17 @@ fieldset p,
     }
 
     #template_select article,
+    #serendipityScaleForm,
+    #serendipityScaleImg,
     .media_file {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    #serendipityScaleImg {
+        overflow: hidden;
+        margin-top: 2.25em;
     }
 
     .media_file header { overflow: hidden; }
