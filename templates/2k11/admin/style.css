@@ -453,7 +453,9 @@ form > a,
 .pluginmanager_plugin .form_check,
 .pluginmanager_plugin h5,
 .media_file .form_check,
-.media_file h3 {
+.media_file h3,
+#media_pane_filter label,
+#media_pane_sort label {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -948,7 +950,9 @@ fieldset p,
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
-#serendipity_category label { width: 20%; }
+#serendipity_category label,
+#media_pane_filter label,
+#media_pane_sort label { width: 20%; }
 
 #serendipity_category .form_multiselect label {
     display: block;
@@ -967,14 +971,21 @@ fieldset p,
 #serendipity_comment .form_field input,
 #serendipity_comment select { width: 84%; }
 
-#edit_entry_timestamp { position: relative; }
+#edit_entry_timestamp,
+#media_pane_filter { position: relative; }
+
+#reset_timestamp,
+#media_pane_filter #toggle_filters {
+    position: absolute;
+    top: 0;
+}
 
 #reset_timestamp {
     max-height: 1.25em;
-    position: absolute;
-    top: 0;
     right: .1875em;
 }
+
+#media_pane_filter #toggle_filters { right: 1.5em;}
 
 .editor_toolbar { margin-top: .25em; }
 
@@ -1147,7 +1158,9 @@ fieldset p,
     #filter_entries .form_field label,
     #filter_comments label,
     #serendipity_category label,
-    #serendipity_comment label {
+    #serendipity_comment label,
+    #media_pane_filter label,
+    #media_pane_sort label {
         display: block;
         width: auto;
     }
@@ -1156,7 +1169,10 @@ fieldset p,
     #sort_entries .form_select,
     #filter_comments .clearfix>div,
     #serendipity_category>.clearfix>div,
-    #serendipity_comment .form_field {
+    #serendipity_comment .form_field,
+    #media_filter>div,
+    #moreFilter>div,
+    #media_pane_sort>.clearfix>div {
         float: left;
         width: 33% ;
     }
@@ -1167,14 +1183,21 @@ fieldset p,
         width: 25%;
     }
 
+    #moreFilter .left,
     #serendipity_comment .form_tarea { clear: both; }
+
+    #moreFilter fieldset input,
+    #moreFilter fieldset select { margin-bottom: .75em; }
 
     #edit_entry_metadata select { width: 100%; }
 
     #edit_entry_metadata select[multiple],
     #sort_entries .form_select select,
     #filter_entries .form_select select,
-    #filter_entries .form_field input { width: 84%; }
+    #filter_entries .form_field input,
+    #media_filter input,
+    #media_filter select,
+    #media_pane_sort select { width: 84%; }
 
     #edit_entry_timestamp,
     #reset_timestamp {
