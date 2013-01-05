@@ -11,11 +11,11 @@
         </div>
     {else}
         <article class="media_file {cycle values="odd,even"}">
-            <header>
+            <header class="clearfix">
                 <div class="form_check">
                     <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
                 </div>
-                <h3>{$file.realname}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
+                <h3>{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
