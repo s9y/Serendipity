@@ -456,7 +456,8 @@ form > a,
 .media_file h3,
 #media_pane_filter label,
 #media_pane_sort label,
-#image_directory_create_form label {
+#image_directory_create_form label,
+#mediaPropertyForm .media_file_props label {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -892,6 +893,13 @@ summary { cursor: pointer; }
     margin: 0 1em 0 0;
 }
 
+#mediaPropertyForm .media_file_preview {
+    float: none;
+    margin: 1.5em 0;
+}
+
+#mediaPropertyForm textarea { max-width: 40em; }
+
 .media_file .actions { margin-bottom: 0; }
 
 #template_select .preview_image {
@@ -954,7 +962,8 @@ fieldset p,
 #serendipity_category label,
 #media_pane_filter label,
 #media_pane_sort label,
-#image_directory_create_form label { width: 20%; }
+#image_directory_create_form label,
+#mediaPropertyForm .media_file_props label { width: 20%; }
 
 #serendipity_category .form_multiselect label {
     display: block;
@@ -966,7 +975,9 @@ fieldset p,
 #filter_entries .form_field input { width: 79%; }
 
 #image_directory_create_form .form_field input,
-#image_directory_create_form .form_select select { min-width: 12em; }
+#image_directory_create_form .form_select select,
+#mediaPropertyForm .form_field input,
+#mediaPropertyForm .form_select select { min-width: 12em; }
 
 #edit_entry_title input,
 #edit_entry_metadata input,
@@ -1113,6 +1124,12 @@ fieldset p,
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    #mediaPropertyForm .media_file {
+        float: none;
+        margin: 1.5em 0;
+        width: auto;
     }
 
     #serendipityScaleImg {

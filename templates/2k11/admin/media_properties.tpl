@@ -15,7 +15,9 @@
 {$MEDIA_ITEMS}
 
 {if $media.is_edit}
-    <input name="submit" type="submit" value="{$CONST.GO}">
+    <div class="form_buttons">
+        <input name="submit" type="submit" value="{$CONST.GO}">
+    </div>
 </div>
 </form>
 {/if}

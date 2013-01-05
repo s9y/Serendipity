@@ -65,7 +65,7 @@
         <article class="media_file media_enclose_no">
             <header>
                 <h3>{$file.realname}</h3>
-                <span>{$file.mime}{if $file.realname != $file.diskname}, {$file.diskname}{/if}</span>
+                <span class="block_level">{$file.mime}{if $file.realname != $file.diskname}, {$file.diskname}{/if}</span>
             </header>
 
             <footer>
@@ -110,7 +110,7 @@
                 </div>
             {/if}
             {if $file.is_image}
-                <a class="block_level opens_window" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
+                <a class="button_link icon_link opens_window" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
             {/if}
             </section>
 
