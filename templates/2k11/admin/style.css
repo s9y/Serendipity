@@ -678,6 +678,9 @@ input[type=checkbox] { margin-right: .4em; }
     margin-right: 1em;
 }
 
+.form_radio label,
+.form_check label { display: inline-block !important; }
+
 .serendipity_commentDirection,
 .form_field, .form_area,
 .form_check, .form_radio,
