@@ -33,7 +33,7 @@
                         <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
                         <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                     {/if}
-                        <li>{$file.nice_size} KB</li>
+                        <li><b>{$CONST.SIZE_SHORT}:</b> {$file.nice_size} KB</li>
                     {if $file.realname != $file.diskname}
                         <li>{$file.diskname}</li>
                     {/if}
@@ -65,19 +65,19 @@
         <article class="media_file media_enclose_no">
             <header>
                 <h3>{$file.realname}</h3>
-                <span class="block_level">{$file.mime}{if $file.realname != $file.diskname}, {$file.diskname}{/if}</span>
+                <span class="block_level"><b>{$CONST.SORT_ORDER_EXTENSION}:</b> {$file.mime}{if $file.realname != $file.diskname}, {$file.diskname}{/if}</span>
             </header>
 
             <footer>
                 <ul class="media_file_meta plainList">
-                    <li>{if $file.authorid != 0}{$CONST.POSTED_BY} {$file.authorname} {/if}{$CONST.ON} {$file.date|@formatTime:DATE_FORMAT_SHORT}</li>
+                    <li><b>{$CONST.SORT_ORDER_DATE}:</b> {if $file.authorid != 0}{$CONST.POSTED_BY} {$file.authorname} {/if}{$CONST.ON} {$file.date|@formatTime:DATE_FORMAT_SHORT}</li>
                 {if $file.hotlink}
                     <li>{$file.nice_hotlink}</li>
                 {elseif $file.is_image}
                     <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
                     <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                 {/if}
-                    <li>{$file.nice_size} KB</li>
+                    <li><b>{$CONST.SIZE_SHORT}:</b> {$file.nice_size} KB</li>
                 </ul>
             </footer>
         
