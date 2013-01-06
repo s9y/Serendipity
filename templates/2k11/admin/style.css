@@ -1,4 +1,5 @@
-/* normalize.css v1.0.1 | MIT License | git.io/normalize */
+/* NORMALIZE.CSS
+   ----------------------------------------------------------------- */
 article, aside, details,
 figcaption, figure, footer,
 header, hgroup, nav, section,
@@ -151,7 +152,9 @@ table {
     border-spacing: 0;
 }
 
-/* Base styles */
+
+/* BASE STYLES
+   ----------------------------------------------------------------- */
 html, button,
 input, select,
 textarea {
@@ -297,7 +300,9 @@ p kbd {
 nav ul,
 nav ol { padding: 0; }
 
-/* CSS helper classes for various purposes */
+
+/* GENERIC CSS HELPER CLASSES
+   ----------------------------------------------------------------- */
 /* Image replacement */
 .ir {
     background-color: transparent;
@@ -356,7 +361,9 @@ nav ol { padding: 0; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
 
-/* Icon font | http://fortawesome.github.com/Font-Awesome/ */
+
+/* ICON FONT:; http://fortawesome.github.com/Font-Awesome/
+   ----------------------------------------------------------------- */
 @font-face {
     font-family: 'fontello';
     src: url("{TEMPLATE_PATH}font/fontello.eot");
@@ -435,6 +442,9 @@ nav ol { padding: 0; }
 .icon-clock:before { content: '🕔'; } /* '\1f554' */
 .icon-block:before { content: '🚫'; } /* '\1f6ab' */
 
+
+/* BACKEND HELPER CLASSES
+   ----------------------------------------------------------------- */
 .icon_link,
 #insert_image,
 form > a,
@@ -463,7 +473,9 @@ form > a,
     *zoom: 1;
 }
 
-/* Forms | forked from formalize.me */
+
+/* BASIC FORM STYLES (forked from formalize.me)
+   ----------------------------------------------------------------- */
 .input_full_wrap {
     display: block;
     padding-right: 8px;
@@ -656,7 +668,9 @@ optgroup {
     font-weight: normal;
 }
 
-/* Backend-specific form stuff */
+
+/* BACKEND FORM STYLES
+   ----------------------------------------------------------------- */
 label, .standout,
 legend > span,
 figcaption { font-weight: bold; }
@@ -689,14 +703,15 @@ input[type=checkbox] { margin-right: .4em; }
     margin-bottom: .75em;
 }
 
-/* Styles common to all resolutions */
 
-/* Color scheme:
+/* COMMON STYLES (all resolutions)
+
+   Color scheme:
    -------------
    Dark blue:   #25253d     Mid blue:    #3e5f81
    Lite blue:   #ccdee7     Yellow:      #ffbf00
    Off black:   #222        Off white:   #fcfcfc
- */
+   ----------------------------------------------------------------- */
 
 html { background: #ccdee7; }
 
@@ -771,7 +786,9 @@ summary { cursor: pointer; }
     padding: 0;
 }
 
-/* Backend messages */
+
+/* BACKEND MESSAGES
+   ----------------------------------------------------------------- */
 .msg_error, .msg_success,
 .msg_notice, .msg_dialogue {
     display: block;
@@ -803,7 +820,9 @@ summary { cursor: pointer; }
     color: #777;
 }
 
-/* Layout */
+
+/* LAYOUT
+   ----------------------------------------------------------------- */
 #top > div,
 #main {
     margin: 0 auto;
@@ -811,7 +830,6 @@ summary { cursor: pointer; }
     width: 96%;
 }
 
-/* Header area */
 #top {
     background: #25253d;
     color: #fcfcfc;
@@ -851,7 +869,9 @@ summary { cursor: pointer; }
     top: 1.5em;
 }
 
-/* Content area */
+
+/* CONTENT
+   ----------------------------------------------------------------- */
 #serendipity_comments_list .form_check,
 #serendipity_comments_list h4 { float: left; }
 
@@ -936,7 +956,9 @@ fieldset p,
 
 .sub_perm { margin-left: 1em; }
 
-/* Login form */
+
+/* LOGIN FORM
+   ----------------------------------------------------------------- */
 #login { margin: 2em auto 1em; }
 
 #back_to_blog {
@@ -953,6 +975,7 @@ fieldset p,
 #login_send { margin: .5em 0 0 7.5em;}
 
 #login .form_field label { min-width: 8em; }
+
 
 #edit_entry_title label,
 #edit_entry_metadata label,
@@ -1032,7 +1055,6 @@ fieldset p,
     margin: .75em 0;
 }
 
-/* Footer area */
 #meta {
     background: #ccdee7;
     border-top: 1px solid #25253d;
@@ -1045,7 +1067,11 @@ fieldset p,
     padding: 8px;
 }
 
-/* Plugin manager – might go into pluginmanager.css in the end */
+
+/* PLUGIN MANAGER
+
+   (These might go into pluginmanager.css or be merged with it.)
+   ----------------------------------------------------------------- */
 #configuration_footer { height: 100px; }
 
 .plugin_count {
@@ -1073,14 +1099,23 @@ fieldset p,
     top: .125em;
 }
 
-/* Media db – might go into imgedit.css in the end */
+
+/* MEDIA DB
+
+   (These might go into imgedit.css or be merged with it.)
+   ----------------------------------------------------------------- */
 #fs_crop { min-height: 200px; }
 
 .media_pane .pagination { margin: 0; }
 
-/* Media Queries for Responsive Design. */
+
+/* SMALL SCREEN (e.g. smartphones)
+   ----------------------------------------------------------------- */
 @media only screen and (min-width: 481px) { }
 
+
+/* MEDIUM SCREEN (e.g. tablets)
+   ----------------------------------------------------------------- */
 @media only screen and (min-width: 768px) {
     body { font-size: 1em; }
 
@@ -1151,6 +1186,9 @@ fieldset p,
     .media_pane .odd { clear: left; }
 }
 
+
+/* LARGE SCREEN (e.g. netbooks)
+   ----------------------------------------------------------------- */
 @media only screen and (min-width: 1024px) {
     #banner,
     #content {
@@ -1244,6 +1282,9 @@ fieldset p,
     }
 }
 
+
+/* LARGER SCREEN (e.g. laptops)
+   ----------------------------------------------------------------- */
 @media only screen and (min-width: 1280px) {
     #user_menu ul {
         font-size: 2em;
@@ -1251,6 +1292,9 @@ fieldset p,
     }
 }
 
+
+/* HUGE SCREEN (e.g. desktops)
+   ----------------------------------------------------------------- */
 @media only screen and (min-width: 1400px) {
     body { font-size: 1.125em; }
 }
