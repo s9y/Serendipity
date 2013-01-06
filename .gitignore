@@ -13,3 +13,4 @@ plugins/additional_plugins*
 /.buildpath
 /.project
 .DS_Store
+.editorconfig
