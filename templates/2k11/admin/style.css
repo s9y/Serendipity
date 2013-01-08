@@ -473,6 +473,37 @@ form > a,
     *zoom: 1;
 }
 
+.block_level,
+.form_multiselect label,
+label > span,
+#back_to_blog,
+#meta small,
+.msg_error, .msg_success,
+.msg_notice, .msg_dialogue,
+#serendipity_category .form_multiselect label,
+#image_directory_edit_form .form_select label { display: block; }
+
+.image_resize_hint p { display: inline; }
+
+h5, h6,
+blockquote,
+ul, ol, dl,
+p, table,
+details,
+.standalone,
+.form_buttons,
+form > a {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.plainList,
+.imageMessage ul,
+.actions {
+    list-style: none;
+    padding: 0;
+}
+
 
 /* BASIC FORM STYLES (forked from formalize.me)
    ----------------------------------------------------------------- */
@@ -675,11 +706,6 @@ label, .standout,
 legend > span,
 figcaption { font-weight: bold; }
 
-.block_level,
-.form_multiselect label,
-label > span,
-#image_directory_edit_form .form_select label { display: block; }
-
 label > span,
 input[type=checkbox] + label,
 input[type=radio] + label,
@@ -702,6 +728,11 @@ input[type=checkbox] { margin-right: .4em; }
     margin-top: .75em;
     margin-bottom: .75em;
 }
+
+.comment_data,
+.comment_data dt, .template_info dt,
+.comment_summary, .comment_full,
+.serendipity_commentDirection { clear: both; }
 
 
 /* COMMON STYLES (all resolutions)
@@ -765,33 +796,13 @@ h4 {
 
 h5, h6 { font-size: 1em; }
 
-h5, h6,
-blockquote,
-ul, ol, dl,
-p, table,
-details,
-.standalone,
-.form_buttons,
-form > a {
-    margin-top: 1.5em;
-    margin-bottom: 1.5em;
-}
-
 summary { cursor: pointer; }
-
-.plainList,
-.imageMessage ul,
-.actions {
-    list-style: none;
-    padding: 0;
-}
 
 
 /* BACKEND MESSAGES
    ----------------------------------------------------------------- */
 .msg_error, .msg_success,
 .msg_notice, .msg_dialogue {
-    display: block;
     margin: 1.5em 0;
     padding: 10px;
 }
@@ -821,6 +832,23 @@ summary { cursor: pointer; }
 }
 
 
+/* LOGIN FORM
+   ----------------------------------------------------------------- */
+#login { margin: 2em auto 1em; }
+
+#back_to_blog { margin: 1em auto 2em; }
+
+#back_to_blog,
+#login { max-width: 24em; }
+
+#login .form_check,
+#login_send { float: left; }
+
+#login_send { margin: .5em 0 0 7.5em;}
+
+#login .form_field label { min-width: 8em; }
+
+
 /* LAYOUT
    ----------------------------------------------------------------- */
 #top > div,
@@ -830,6 +858,21 @@ summary { cursor: pointer; }
     width: 96%;
 }
 
+.category_data,
+.user_name, .group_name,
+.edit_actions,
+#serendipity_comments_list .form_check,
+#serendipity_comments_list h4,
+.comment_data dt,
+.comment_data dd,
+.template_info dt,
+.template_info dd,
+#entries_list .form_check,
+.template_info { float: left; }
+
+
+/* HEADER
+   ----------------------------------------------------------------- */
 #top {
     background: #25253d;
     color: #fcfcfc;
@@ -848,11 +891,10 @@ summary { cursor: pointer; }
 
 #user_menu li { margin: 0 1em 0 0; }
 
-.edit_actions li { margin: .125em 0; }
 
-.category_data,
-.user_name, .group_name,
-.edit_actions { float: left; }
+/* CONTENT
+   ----------------------------------------------------------------- */
+.edit_actions li { margin: .125em 0; }
 
 .category_data,
 .user_name, .group_name { min-width: 8em; }
@@ -869,12 +911,6 @@ summary { cursor: pointer; }
     top: 1.5em;
 }
 
-
-/* CONTENT
-   ----------------------------------------------------------------- */
-#serendipity_comments_list .form_check,
-#serendipity_comments_list h4 { float: left; }
-
 #serendipity_comments_list .actions { margin-top: .75em; }
 
 #serendipity_comments_list .form_check { margin: 1.35em 0; }
@@ -882,19 +918,8 @@ summary { cursor: pointer; }
 .comment_data,
 .configuration_group h3 { margin-top: 0; }
 
-.comment_data { clear: both; }
-
-.comment_data dt,
-.comment_data dd,
-.template_info dt,
-.template_info dd { float: left; }
-
 .comment_data dt,
 .template_info dt { margin: 0 .4em 0 0; }
-
-.comment_data dt, .template_info dt,
-.comment_summary, .comment_full,
-.serendipity_commentDirection { clear: both; }
 
 #template_select article,
 .media_file {
@@ -934,15 +959,11 @@ summary { cursor: pointer; }
     width: 100px;
 }
 
-.template_info { float: left; }
-
 .template_info,
 .template_info dl,
 fieldset p,
 .media_file_meta,
 .image_resize_hint p { margin: 0; }
-
-.image_resize_hint p { display: inline; }
 
 .actions li { margin: 0 .4em 0 0; }
 
@@ -955,27 +976,6 @@ fieldset p,
 }
 
 .sub_perm { margin-left: 1em; }
-
-
-/* LOGIN FORM
-   ----------------------------------------------------------------- */
-#login { margin: 2em auto 1em; }
-
-#back_to_blog {
-    display: block;
-    margin: 1em auto 2em;
-}
-
-#back_to_blog,
-#login { max-width: 24em; }
-
-#login .form_check,
-#login_send { float: left; }
-
-#login_send { margin: .5em 0 0 7.5em;}
-
-#login .form_field label { min-width: 8em; }
-
 
 #edit_entry_title label,
 #edit_entry_metadata label,
@@ -991,10 +991,7 @@ fieldset p,
 #image_directory_create_form label,
 #mediaPropertyForm .media_file_props label { width: 20%; }
 
-#serendipity_category .form_multiselect label {
-    display: block;
-    width: auto;
-}
+#serendipity_category .form_multiselect label { width: auto; }
 
 #sort_entries .form_select select,
 #filter_entries .form_select select,
@@ -1036,8 +1033,6 @@ fieldset p,
 .editor_toolbar input,
 .comment_data dt { min-width: 4.25em; }
 
-#entries_list .form_check { float: left; }
-
 #entries_list h3 {
     font-size: 1em;
     line-height: 1.5;
@@ -1062,7 +1057,6 @@ fieldset p,
 }
 
 #meta small {
-    display: block;
     font-size: 1em;
     padding: 8px;
 }
