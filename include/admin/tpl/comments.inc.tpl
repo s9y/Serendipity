@@ -142,7 +142,7 @@
 
                     <div id="{$comment.id}_full" class="comment_full hidden">{$comment.fullBody}</div>
 
-                    <ul class="actions clearfix">
+                    <ul class="plainList clearfix actions">
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-lock-open"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                     {/if}

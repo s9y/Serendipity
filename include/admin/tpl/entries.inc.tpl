@@ -138,7 +138,7 @@
                 {/if}
                 </span>
 
-                <ul class="actions">
+                <ul class="plainList clearfix actions">
                 {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
                     <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                 {else}

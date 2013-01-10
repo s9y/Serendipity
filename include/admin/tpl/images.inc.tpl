@@ -207,7 +207,7 @@
     {foreach $folders as $folder}
         <li class="level_{$folder.depth} clearfix">
             <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
-            <ul class="plainList edit_actions">
+            <ul class="plainList clearfix edit_actions">
                 <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                 <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>
