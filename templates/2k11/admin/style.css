@@ -881,10 +881,7 @@ summary { cursor: pointer; }
     margin: .75em 1em .75em 0;
 }
 
-#entries_list .actions {
-    float: right;
-    margin: .75em 0;
-}
+#entries_list .actions { float: right; }
 
 #edit_entry_title label,
 #edit_entry_metadata label,
@@ -983,7 +980,18 @@ fieldset p,
 .media_file_meta,
 .image_resize_hint p { margin: 0; }
 
-.edit_actions li { margin: .125em 0; }
+.actions,
+.edit_actions {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
+.media_file .actions,
+#entries_list .actions { margin-bottom: 0; }
+
+#entries_list .actions { margin-top: .5em; }
+
+.media_file .actions { margin-top: 1em; }
 
 .category_data,
 .category_desc { margin: 0 1em 0 0; }
@@ -992,7 +1000,8 @@ fieldset p,
 
 .comment_data dt,
 .template_info dt,
-.actions li { margin: 0 .4em 0 0; }
+.actions li,
+.edit_actions li { margin: 0 .4em 0 0; }
 
 .editor_toolbar input { margin: 0 .25em .75em 0; }
 
@@ -1002,8 +1011,6 @@ fieldset p,
 .editor_toolbar { margin-top: .25em; }
 
 #serendipity_comments_list .actions { margin-top: .75em; }
-
-.media_file .actions { margin-bottom: 0; }
 
 .sub_perm { margin-left: 1em; }
 
