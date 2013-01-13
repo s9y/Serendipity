@@ -107,7 +107,7 @@
     <div class="form_area">
         <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
-        <div id="tools_extended" class="editor_toolbar"{*  style="display: none" this relies on toggle_extended() (see this page Line 143) function in former categeory_selector.js, now serendipity_editor js, which also relies on cookies and wysiwyg vars. */>
+        <div id="tools_extended" class="editor_toolbar">{*  style="display: none" this relies on toggle_extended() (see this page Line 143) function in former categeory_selector.js, now serendipity_editor js, which also relies on cookies and wysiwyg vars. *}
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}<input name="insX" type="button" value="NoBR" accesskey="x" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<nl>','</nl>')">{/if}
             <input name="insI" type="button" accesskey="i" value="I" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<em>','</em>')">
@@ -131,9 +131,9 @@
     {/if}
         {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="20">{$entry_vars.entry.extended|@escape}</textarea>
-        {* {if NOT $entry_vars.wysiwyg}
-        <script> toggle_extended(); </script>
-        {/if} *}
+        {* if NOT $entry_vars.wysiwyg}
+        {<script> toggle_extended(); </script>
+        {/if *}
     </div>
 
     <fieldset>
