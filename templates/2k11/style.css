@@ -874,6 +874,12 @@ pre .geshi {
     width: 34%;
 }
 
+.serendipity_entry footer>.FlattrButton {
+    margin: 0 .4em;
+    position: relative;
+    top: .5em;
+}
+
 .visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
 
 .visuallyhidden.focusable:active,
