@@ -62,22 +62,23 @@
 
             <script type="text/javascript" language="JavaScript">
 
-            var plus_img  = '{serendipity_getFile file='img/plus.png'}';
-            var minus_img = '{serendipity_getFile file='img/minus.png'}';
-            var cat_count = {$entry_vars.cat_count};
-            var selector_toggle  = new Array();
-            var selector_store   = new Array();
-            var selector_restore = new Array();
+                var plus_img  = '{serendipity_getFile file='img/plus.png'}';
+                var minus_img = '{serendipity_getFile file='img/minus.png'}';
+                var cat_count = {$entry_vars.cat_count};
+                var selector_toggle  = new Array();
+                var selector_store   = new Array();
+                var selector_restore = new Array();
 
-            function checkSave() {ldelim}
-                {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
-                return true;
-            {rdelim}
+                /* use new smarty auto-literal = delimiter + space */
+                function checkSave() { 
+                    {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
+                    return true;
+                } 
 
-            selector_toggle['categoryselector'] = '{$entry_vars.cat_state}';
+                selector_toggle['categoryselector'] = '{$entry_vars.cat_state}';
             </script>
             <script type="text/javascript" language="JavaScript">
-             addLoadEvent(showItem);
+                addLoadEvent(showItem);
             </script>
         </td>
     </tr>
@@ -88,29 +89,38 @@
         {if NOT $entry_vars.wysiwyg}
         <td colspan="2"><b>{$CONST.ENTRY_BODY}</b></td>
         <td align="right">
+            <div id="tools_entry" style="display: none">
             {if $entry_vars.wysiwyg_advanced}
-            <script type="text/javascript" language="JavaScript">
-                {if $iso2br}document.write('<input type="button" class="serendipityPrettyButton input_button" name="insX" value="NoBR" accesskey="x" style="font-style: italic" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<nl>\',\'</nl>\')" />');{/if}
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insI" value="I" accesskey="i" style="font-style: italic" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<em>\',\'</em>\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insB" value="B" accesskey="b" style="font-weight: bold" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<strong>\',\'</strong>\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insU" value="U" accesskey="u" style="text-decoration: underline;" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<u>\',\'</u>\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insQ" value="{$CONST.QUOTE}" accesskey="q" style="font-style: italic" onclick="wrapSelection(document.forms[\'serendipityEntry\'][\'serendipity[body]\'],\'<blockquote>\',\'</blockquote>\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insJ" value="img" accesskey="j" onclick="wrapInsImage(document.forms[\'serendipityEntry\'][\'serendipity[body]\'])" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insImage" value="{$CONST.MEDIA}" style="" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[textarea]=body\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" name="insURL" value="URL" accesskey="l" onclick="wrapSelectionWithLink(document.forms[\'serendipityEntry\'][\'serendipity[body]\'])" />');
-            </script>
+{if $iso2br}
+    <input type="button" class="serendipityPrettyButton input_button" name="insX" value="NoBR" accesskey="x" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')" />
+{/if}
+                <input type="button" class="serendipityPrettyButton input_button" name="insI" value="I" accesskey="i" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<em>','</em>')" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insB" value="B" accesskey="b" style="font-weight: bold" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<strong>','</strong>')" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insU" value="U" accesskey="u" style="text-decoration: underline;" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<u>','</u>')" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insQ" value="{$CONST.QUOTE}" accesskey="q" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<blockquote>','</blockquote>')" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insJ" value="img" accesskey="j" onclick="wrapInsImage(document.forms['serendipityEntry']['serendipity[body]'])" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insImage" value="{$CONST.MEDIA}" style="" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');" />
+                <input type="button" class="serendipityPrettyButton input_button" name="insURL" value="URL" accesskey="l" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[body]'])" />
             {else}
-            <script type="text/javascript" language="JavaScript">
-                {if $iso2br}document.write('<input type="button" class="serendipityPrettyButton input_button" value=" NoBR " onclick="serendipity_insBasic(document.forms[\'serendipityEntry\'][\'serendipity[body]\'], \'x\')" />');{/if}
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value=" B " onclick="serendipity_insBasic(document.forms[\'serendipityEntry\'][\'serendipity[body]\'], \'b\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value=" U " onclick="serendipity_insBasic(document.forms[\'serendipityEntry\'][\'serendipity[body]\'], \'u\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value=" I " onclick="serendipity_insBasic(document.forms[\'serendipityEntry\'][\'serendipity[body]\'], \'i\')" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value="<img>" onclick="serendipity_insImage(document.forms[\'serendipityEntry\'][\'serendipity[body]\'])" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value="{$CONST.MEDIA}" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[textarea]=body\', \'ImageSel\', \'width=800,height=600,toolbar=no\');" />');
-                document.write('<input type="button" class="serendipityPrettyButton input_button" value="Link" onclick="serendipity_insLink(document.forms[\'serendipityEntry\'][\'serendipity[body]\'])" />');
-            </script>
+
+                {if $iso2br}
+                <input type="button" class="serendipityPrettyButton input_button" value=" NoBR " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'x')" />
+                {/if}
+
+                <input type="button" class="serendipityPrettyButton input_button" value=" B " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'b')" />
+                <input type="button" class="serendipityPrettyButton input_button" value=" U " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'u')" />
+                <input type="button" class="serendipityPrettyButton input_button" value=" I " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'i')" />
+                <input type="button" class="serendipityPrettyButton input_button" value="<img>" onclick="serendipity_insImage(document.forms['serendipityEntry']['serendipity[body]'])" />
+                <input type="button" class="serendipityPrettyButton input_button" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no');" />
+                <input type="button" class="serendipityPrettyButton input_button" value="Link" onclick="serendipity_insLink(document.forms['serendipityEntry']['serendipity[body]'])" />
             {/if}
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+
+                {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
+            </div>
+            <script type="text/javascript" language="JavaScript">
+                var toolbarentry = document.getElementById('tools_entry');
+                toolbarentry.style.display = '';
+            </script>
         </td>
         {else}
         <td colspan="2"><b>{$CONST.ENTRY_BODY}</b></td>
