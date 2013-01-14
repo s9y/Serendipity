@@ -33,7 +33,7 @@
 
         <div class="form_buttons">
             <input name="doSync" type="submit" value="{$CONST.CREATE_THUMBS}">
-            <a href="serendipity_admin.php">{$CONST.ABORT_NOW}</a>
+            <a href="serendipity_admin.php" class="button_link icon_link">{$CONST.ABORT_NOW}</a>
         </div>
     </form>
     {/if}
@@ -145,7 +145,9 @@
             <input id="setchild" name="serendipity[update_children]" type="checkbox" value="true"{if !empty($smarty.post.update_children) == 'on'} checked="checked"{/if}><label for="setchild">{$CONST.PERM_SET_CHILD}</label>
         </div>
 
-        <input name="serendipity[save]" type="submit" value="{$CONST.SAVE}">
+        <div class="form_buttons">
+            <input name="serendipity[save]" type="submit" value="{$CONST.SAVE}">
+        </div>
     </form>
 {/if}
 {if $case_directoryDelete}
@@ -161,8 +163,9 @@
         </div>
 
         {* I think this is redudant: <p>{$CONST.CONFIRM_DELETE_DIRECTORY|sprintf:$dir|escape:'html'}</p> *}
-
-        <input name="SAVE" type="submit" value="{$CONST.DELETE_DIRECTORY}">
+        <div class="form_buttons">
+            <input name="SAVE" type="submit" value="{$CONST.DELETE_DIRECTORY}">
+        </div>
     </form>
 {/if}
 {if $case_directoryDoCreate}
@@ -214,6 +217,7 @@
         </li>
     {/foreach}
     </ul>
+    
     <a class="button_link icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
 {/if}
 

@@ -125,7 +125,7 @@
 
                 <div id="comment_{$comment.id}">
                     <dl class="comment_data clearfix">
-                        {* TODO: This should not emit an images *}
+                        {* TODO: This should not emit any images *}
                         <dt>{$CONST.AUTHOR}:</dt>
                         <dd>{$comment.author|escape|truncate:30:"&hellip;"} {$comment.action_author}</dd>
                         <dt>{$CONST.EMAIL}:</dt>

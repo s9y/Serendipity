@@ -82,7 +82,9 @@
             </div>
         </fieldset>
 
-        <input name="go" type="submit" value="{$CONST.GO}">
+        <div class="form_buttons">
+            <input name="go" type="submit" value="{$CONST.GO}">
+        </div>
     </form>
     {if $is_entries}
     {if ($offSet > 0) || ($count > $perPage)}
@@ -167,7 +169,9 @@
             <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
         </div>
         
-        <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+        <div class="form_buttons">
+            <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+        </div>
     </form>
 {/if}
 {if $no_entries}

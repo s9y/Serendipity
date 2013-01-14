@@ -59,7 +59,9 @@
     </ul>
     {if $new}
     <form action="?serendipity[adminModule]=users" method="post">
-        <input name="NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
+        <div class="form_buttons">
+            <input name="NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
+        </div>
     </form>
     {/if}
 {/if}
@@ -69,11 +71,13 @@
         {if $adminAction == 'edit'}{if $create_permission}<input name="serendipity[user]" type="hidden" value="{$from.authorid}">{/if}{/if}
         <h3>{if $adminAction == 'edit'}{if $no_create_permission}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{else}{if $create_permission}{$CONST.EDIT}{else}{$CONST.CREATE_NOT_AUTHORIZED}: {$CONST.EDIT}{/if}{/if}{else}{$CONST.CREATE}{/if}</h3>
         {$config}
-    {if $adminAction == 'edit'}
-        <input class="standalone" name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
-    {else}
-        <input class="standalone" name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
-    {/if}
+        <div class="form_buttons">
+        {if $adminAction == 'edit'}
+            <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
+        {else}
+            <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_USER}">
+        {/if}
+        </div>
     </form>
 {else}
     {if $delete}

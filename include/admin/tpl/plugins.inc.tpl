@@ -62,7 +62,9 @@
             </select>
         </div>
 
-        <input type="submit" value="{$CONST.GO}">
+        <div class="form_buttons">
+            <input type="submit" value="{$CONST.GO}">
+        </div>
     </form>
     {foreach $pluggroups AS $pluggroup => $groupstack}
     {if empty($pluggroup)}

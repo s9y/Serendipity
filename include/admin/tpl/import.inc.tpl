@@ -26,7 +26,9 @@
                 {if $notes}
                 <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.IMPORT_NOTES}: {$notes}</span>
                 {/if}
-                <input type="submit" value="{$CONST.IMPORT_NOW}">
+                <div class="form_buttons">
+                    <input type="submit" value="{$CONST.IMPORT_NOW}">
+                </div>
             </form>
         {/if}
     {/if}
@@ -50,6 +52,8 @@
             </select>
         </div>
         
-        <input type="submit" value="{$CONST.GO}">
+        <div class="form_buttons">
+            <input type="submit" value="{$CONST.GO}">
+        </div>
     </form>
 {/if}

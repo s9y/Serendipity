@@ -27,7 +27,9 @@
     </ul>
     {if $start}
     <form action="?serendipity[adminModule]=groups" method="post">
-        <input name="NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+        <div class="form_buttons">
+            <input name="NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+        </div>
     </form>
     {/if}
 {/if}
@@ -103,13 +105,13 @@
         {else}
             <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
-        {if $edit}
             <div class="form_buttons">
+        {if $edit}
                 <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}"> {$CONST.WORD_OR} <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
-            </div>
         {else}
-            <input class="standalone" name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+                <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
         {/if}
+            </div>
     </form>
 {else}
     {if $delete}

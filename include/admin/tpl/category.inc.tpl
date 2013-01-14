@@ -164,5 +164,5 @@
     {else}
         <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_CATEGORIES}</span>
     {/if}
-        <a class="link_create" href="?serendipity[adminModule]=category&serendipity[adminAction]=new">{$CONST.CREATE_NEW_CAT}</a>
+        <a class="block_level" href="?serendipity[adminModule]=category&serendipity[adminAction]=new">{$CONST.CREATE_NEW_CAT}</a>
 {/if}

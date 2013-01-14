@@ -12,7 +12,7 @@
     <script src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
 {/if}
 {if $showSubmit_head}
-    <div class="save_conf">
+    <div class="save_conf form_buttons">
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
