@@ -214,14 +214,16 @@ img { vertical-align: middle; }
 
 /* Responsive media objects
    http://unstoppablerobotninja.com/entry/fluid-images */
-/*embed,
+embed,
 object,
 audio,
 video,
 img { max-width: 100%; }
 
 video,
-img { height: auto; }*/
+img { height: auto; }
+
+.htmlarea .toolbar img { max-width: inherit; }
 
 fieldset {
     border: 0;
