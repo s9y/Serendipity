@@ -54,23 +54,20 @@
                "reacts" to installed markup plugins. I.e. if a blog uses Markdown, the button for
                italic should not insert an em element but the appropriate Markdown formatting. *}
         {if $entry_vars.wysiwyg_advanced}
-
-{if $iso2br}
-    <input type="button" name="insX" value="NoBR" accesskey="x" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')">
-{/if}
-           <input type="button" name="insI" value="I" accesskey="i" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<em>','</em>')">
-           <input type="button" name="insB" value="B" accesskey="b" style="font-weight: bold" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<strong>','</strong>')">
-           <input type="button" name="insU" value="U" accesskey="u" style="text-decoration: underline;" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<u>','</u>')">
-           <input type="button" name="insQ" value="{$CONST.QUOTE}" accesskey="q" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<blockquote>','</blockquote>')">
-           <input type="button" name="insJ" value="img" accesskey="j" onclick="wrapInsImage(document.forms['serendipityEntry']['serendipity[body]'])">
-           <input type="button" name="insImage" value="{$CONST.MEDIA}" style="" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');">
-           <input type="button" name="insURL" value="URL" accesskey="l" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[body]'])">
+            {if $iso2br}
+            <input type="button" name="insX" value="NoBR" accesskey="x" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')">
+            {/if}
+            <input type="button" name="insI" value="I" accesskey="i" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<em>','</em>')">
+            <input type="button" name="insB" value="B" accesskey="b" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<strong>','</strong>')">
+            <input type="button" name="insU" value="U" accesskey="u" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<u>','</u>')">
+            <input type="button" name="insQ" value="{$CONST.QUOTE}" accesskey="q" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<blockquote>','</blockquote>')">
+            <input type="button" name="insJ" value="img" accesskey="j" onclick="wrapInsImage(document.forms['serendipityEntry']['serendipity[body]'])">
+            <input type="button" name="insImage" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');">
+            <input type="button" name="insURL" value="URL" accesskey="l" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[body]'])">
         {else}
-
             {if $iso2br}
             <input type="button" value=" NoBR " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'x')">
             {/if}
-
             <input type="button" value=" B " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'b')">
             <input type="button" value=" U " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'u')">
             <input type="button" value=" I " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'i')">
