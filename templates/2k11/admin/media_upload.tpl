@@ -31,8 +31,9 @@
                     <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
                 </select>
             </div>
-            <span class="standalone">{$CONST.WORD_OR}</span>
         </div>
+
+        <span class="standalone hilite_b">{$CONST.WORD_OR}</span>
 
         <div id="upload_template">
             <div class="form_field">

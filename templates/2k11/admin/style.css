@@ -433,7 +433,8 @@ label > span,
 .msg_notice,
 .msg_dialogue,
 #serendipity_category .form_multiselect label,
-#image_directory_edit_form .form_select label { display: block; }
+#image_directory_edit_form .form_select label,
+#uploadform label { display: block; }
 
 .image_resize_hint p { display: inline; }
 
@@ -959,6 +960,11 @@ summary { cursor: pointer; }
 
 /* CONTENT
    ----------------------------------------------------------------- */
+.image_add_form br {
+    display: none;
+    visibility: hidden;
+} /* Temporary */
+
 .users_delete_action,
 #edit_entry_timestamp,
 #media_pane_filter { position: relative; }
@@ -1108,7 +1114,17 @@ fieldset p,
 
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
-@media only screen and (min-width: 481px) { }
+@media only screen and (min-width: 481px) {
+    #uploadform label {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        min-width: 40%;
+    }
+
+    #uploadform .form_field input,
+    #uploadform .form_select select { min-width: 16em; }
+}
 
 
 /* MEDIUM SCREEN (e.g. tablets)
