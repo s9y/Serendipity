@@ -77,7 +77,7 @@
         
         <div class="form_buttons">
             <input type="submit" value="{$CONST.GO}" onclick="checkInputs();">
-            <span class="standout"> {$CONST.WORD_OR} </span>
+            <span class="hilite_b"> {$CONST.WORD_OR} </span>
             <input name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}" onclick="checkInputs();">
         </div>
     </div>

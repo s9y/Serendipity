@@ -457,6 +457,10 @@ form > a {
     padding: 0;
 }
 
+.hilite_b { font-weight: bold;}
+.hilite_i { font-style: italic; }
+.hilite_u { text-decoration: underline; }
+
 
 /* BASIC FORM STYLES (forked from formalize.me)
    ----------------------------------------------------------------- */
@@ -678,7 +682,6 @@ optgroup {
 /* BACKEND FORM STYLES
    ----------------------------------------------------------------- */
 label,
-.standout,
 legend > span,
 figcaption { font-weight: bold; }
 
