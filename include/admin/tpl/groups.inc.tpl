@@ -35,7 +35,7 @@
 {/if}
 
 {if $edit || $new}
-    <form action="?serendipity[adminModule]=groups" method="post">
+    <form id="serendipity_admin_groups" action="?serendipity[adminModule]=groups" method="post">
         {$formToken}
     {if $edit}
         <h3>{$CONST.EDIT}</h3>
@@ -73,14 +73,11 @@
                 {/if}
             {/if}
             {if !$perm.permission}
-                <div>
-                    <span class="perm_name">{$indent} {$perm.permission_name|escape:"html"}</span>
-                    <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span>
-                </div>
+                <div><span class="perm_name hilite_b">{$indent} {$perm.permission_name|escape:"html"}:</span> <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
-                    {$indent} <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}</label>
-                    <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
+                    {$indent} <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
+                    <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}</label>
                 </div>
             {/if}
         {/foreach}

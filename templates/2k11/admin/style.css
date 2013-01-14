@@ -434,7 +434,9 @@ label > span,
 .msg_dialogue,
 #serendipity_category .form_multiselect label,
 #image_directory_edit_form .form_select label,
-#uploadform label { display: block; }
+#uploadform label,
+#serendipity_admin_groups .form_field label,
+#serendipity_admin_groups .form_select label { display: block; }
 
 .image_resize_hint p { display: inline; }
 
@@ -960,6 +962,7 @@ summary { cursor: pointer; }
 
 /* CONTENT
    ----------------------------------------------------------------- */
+#serendipity_admin_groups br,
 .image_add_form br {
     display: none;
     visibility: hidden;
