@@ -851,7 +851,6 @@ summary { cursor: pointer; }
 .category_data,
 .user_name,
 .group_name,
-.edit_actions,
 #serendipity_comments_list .form_check,
 #serendipity_comments_list h4,
 .comment_data dt,
@@ -886,6 +885,7 @@ summary { cursor: pointer; }
     margin: .75em 1em .75em 0;
 }
 
+.edit_actions,
 #entries_list .actions { float: right; }
 
 #edit_entry_title label,
@@ -973,7 +973,7 @@ summary { cursor: pointer; }
 
 #reset_timestamp {
     max-height: 1.25em;
-    right: .1875em;
+    right: 0;
 }
 
 #media_pane_filter #toggle_filters { right: 1.5em;}
@@ -1209,8 +1209,6 @@ fieldset p,
         float: left;
         margin: 0 2% 0 0;
     }
-
-    .edit_actions { float: right; }
 
     #user_menu,
     #main_menu {

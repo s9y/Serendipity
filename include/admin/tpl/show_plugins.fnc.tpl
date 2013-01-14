@@ -60,7 +60,7 @@
                         </div>
 
                     {if $plugin_data['can_configure']}
-                        <a class="pluginmanager_configure icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
+                        <a class="pluginmanager_configure button_link icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
                     {/if}
 
                         <ul class="pluginmanager_plugininfo plainList">
