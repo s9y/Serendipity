@@ -47,7 +47,7 @@
             </div>
 
             <div class="form_select">
-                <label for="target_directory_1"class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
+                <label for="target_directory_1" class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
                 <select id="target_directory_1" class="uploadform_target_directory" name="serendipity[target_directory][1]">
                     <option value="">{$CONST.BASE_DIRECTORY}</option>
                     {foreach from=$media.folders item="folder"}
