@@ -1015,7 +1015,8 @@ fieldset p,
 .category_data,
 .category_desc { margin: 0 1em 0 0; }
 
-#serendipity_comments_list .form_check { margin: 1.35em 0; }
+#serendipity_comments_list .form_check,
+#serendipity_comments_list h4 { margin: .75em 0; }
 
 .comment_data dt,
 .template_info dt,
@@ -1029,7 +1030,7 @@ fieldset p,
 
 .editor_toolbar { margin-top: .25em; }
 
-#serendipity_comments_list .actions { margin-top: .75em; }
+#serendipity_comments_list .actions { margin: .75em 0; }
 
 .sub_perm { margin-left: 1em; }
 
@@ -1064,16 +1065,19 @@ fieldset p,
 
 .zebra_list>.odd { background: #eee; }
 
-#entries_list h3 {
+#entries_list h3,
+#serendipity_comments_list h4 {
     font-size: 1em;
     line-height: 1.5;
 }
 
 #entries_list>li,
 #categories li,
-#serendipity_image_folders li { padding: 0 0 0 .4em; }
+#serendipity_image_folders li,
+#serendipity_comments_list>li { padding: 0 0 0 .4em; }
 
-#categories .edit_actions li { padding: 0; }
+#categories .edit_actions li,
+#serendipity_image_folders .edit_actions li { padding: 0; }
 
 #entries_list .entry_info span { margin: 0 1em .75em 0; }
 

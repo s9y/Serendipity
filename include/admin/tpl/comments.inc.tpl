@@ -113,10 +113,9 @@
         </nav>
         {/if}
     {if is_array($comments)}
-        <ul id="serendipity_comments_list" class="clearfix plainList">
+        <ul id="serendipity_comments_list" class="clearfix plainList zebra_list">
         {foreach $comments AS $comment}
-            <li class="clearfix">
-                <div class="form_check">
+            <li class="clearfix {cycle values="odd,even"}"><div class="form_check">
                     <input id="serendipity_multidelete_comment_{$comment.id}" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" onclick="highlightComment('comment_{$comment.id}', this.checked)" tabindex="{$i}">
                     <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
                 </div>
