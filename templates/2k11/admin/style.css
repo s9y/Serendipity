@@ -417,8 +417,7 @@ form > a,
 #media_pane_sort label,
 #image_directory_create_form label,
 #mediaPropertyForm .media_file_props label,
-#entries_list .entry_info span,
-.entry_status span {
+#entries_list .entry_info span {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -884,8 +883,7 @@ summary { cursor: pointer; }
     margin: 0 .4em 0 0;
 }
 
-#entries_list h3,
-#entries_list .entry_status {
+#entries_list h3 {
     float : left;
     margin: .75em 1em .75em 0;
 }
@@ -1073,15 +1071,15 @@ fieldset p,
 
 #entries_list .icon_link { height: 24px; }
 
-.entry_status span {
+.entry_status {
     background: #888;
     color: #fff;
-    padding: 0 10px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    border-radius: 15px;
+    padding: 0 4px;
+}
+
+#entries_list .entry_info .entry_status {
+    float: right;
+    margin: 0 .4em .75em 0;
 }
 
 /* FOOTER

@@ -117,18 +117,6 @@
 
                 <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
 
-                <div class="entry_status">
-                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
-                    <span class="status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
-                {/if}
-                {if $entry.ep_is_sticky}
-                    <span class="status_sticky">{$CONST.STICKY_POSTINGS}</span>
-                {/if}
-                {if $entry.isdraft}
-                    <span class="status_draft">{$CONST.DRAFT}</span>
-                {/if}
-                </div>
-
                 <ul class="plainList clearfix actions">
                 {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
                     <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
@@ -139,7 +127,7 @@
                     <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
 
-                <div class="entry_info">
+                <div class="entry_info clearfix">
                     <span class="status_timestamp">
                         {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}" onclick="alert(this.title)"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
                     </span>
@@ -151,6 +139,15 @@
                       {/foreach}
                     {/if}
                     </span>
+                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
+                    <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
+                {/if}
+                {if $entry.ep_is_sticky}
+                    <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
+                {/if}
+                {if $entry.isdraft}
+                    <span class="entry_status status_draft">{$CONST.DRAFT}</span>
+                {/if}
                 </div>
             </li>
         {/foreach}
