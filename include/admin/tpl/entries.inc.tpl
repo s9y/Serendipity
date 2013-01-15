@@ -108,7 +108,7 @@
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
 
-        <ul id="entries_list" class="plainList">
+        <ul id="entries_list" class="plainList zebra_list">
         {foreach $entries as $entry}
             {if ($entry@index > $perPage)}{continue}{/if}
             <li class="clearfix {cycle values="odd,even"}"><div class="form_check">

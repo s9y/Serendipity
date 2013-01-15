@@ -1053,19 +1053,18 @@ fieldset p,
     width: 100px;
 }
 
-#entries_list { border-top: 1px solid #aaa; }
+.zebra_list { border-top: 1px solid #aaa; }
+
+.zebra_list>li { border-bottom: 1px solid #aaa; }
+
+.zebra_list>.odd { background: #eee; }
 
 #entries_list h3 {
     font-size: 1em;
     line-height: 1.5;
 }
 
-#entries_list>li {
-    border-bottom: 1px solid #aaa;
-    padding: 0 .4em;
-}
-
-#entries_list .odd { background: #eee; }
+#entries_list>li { padding: 0 .4em; }
 
 #entries_list .entry_info span { margin: 0 1em .75em 0; }
 
