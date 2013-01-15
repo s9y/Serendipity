@@ -1082,6 +1082,8 @@ fieldset p,
     margin: 0 .4em .75em 0;
 }
 
+.status_timestamp { min-width: 11em; }
+
 /* FOOTER
    ----------------------------------------------------------------- */
 
