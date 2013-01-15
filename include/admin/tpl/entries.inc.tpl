@@ -111,7 +111,7 @@
         <ul id="entries_list" class="plainList">
         {foreach $entries as $entry}
             {if ($entry@index > $perPage)}{continue}{/if}
-            <li class="clearfix"><div class="form_check">
+            <li class="clearfix {cycle values="odd,even"}"><div class="form_check">
                     <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
                 </div>
 
@@ -127,18 +127,7 @@
                 {if $entry.isdraft}
                     <span class="status_draft">{$CONST.DRAFT}</span>
                 {/if}
-                    <span class="status_timestamp">
-                        {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}" onclick="alert(this.title)"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
-                    </span>
                 </div>
-
-                <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
-                {if count($entry.cats)} {$CONST.IN}
-                  {foreach $entry.cats AS $cat}
-                    {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
-                  {/foreach}
-                {/if}
-                </span>
 
                 <ul class="plainList clearfix actions">
                 {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
@@ -149,6 +138,20 @@
                     <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                     <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
+
+                <div class="entry_info">
+                    <span class="status_timestamp">
+                        {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}" onclick="alert(this.title)"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
+                    </span>
+
+                    <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
+                    {if count($entry.cats)} {$CONST.IN}
+                      {foreach $entry.cats AS $cat}
+                        {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
+                      {/foreach}
+                    {/if}
+                    </span>
+                </div>
             </li>
         {/foreach}
         </ul>
