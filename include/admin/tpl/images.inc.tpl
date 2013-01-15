@@ -206,9 +206,9 @@
 
     <h3>{$CONST.BASE_DIRECTORY}</h3>
 
-    <ul class="plainList">
+    <ul id="serendipity_image_folders" class="plainList zebra_list">
     {foreach $folders as $folder}
-        <li class="level_{$folder.depth} clearfix">
+        <li class="level_{$folder.depth} clearfix {cycle values="odd,even"}">
             <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
             <ul class="plainList clearfix edit_actions">
                 <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>

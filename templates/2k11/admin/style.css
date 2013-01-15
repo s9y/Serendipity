@@ -417,7 +417,8 @@ form > a,
 #media_pane_sort label,
 #image_directory_create_form label,
 #mediaPropertyForm .media_file_props label,
-#entries_list .entry_info span {
+#entries_list .entry_info span,
+.folder_name {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -926,7 +927,11 @@ summary { cursor: pointer; }
 
 .category_data,
 .user_name,
-.group_name { min-width: 8em; }
+.group_name,
+.folder_name {
+    min-width: 8em;
+    padding: .4em 0;
+}
 
 #image_directory_create_form .form_field input,
 #image_directory_create_form .form_select select,
@@ -1064,7 +1069,11 @@ fieldset p,
     line-height: 1.5;
 }
 
-#entries_list>li { padding: 0 .4em; }
+#entries_list>li,
+#categories li,
+#serendipity_image_folders li { padding: 0 0 0 .4em; }
+
+#categories .edit_actions li { padding: 0; }
 
 #entries_list .entry_info span { margin: 0 1em .75em 0; }
 

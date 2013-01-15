@@ -14,9 +14,9 @@
 {if !$delete}
     <h2>{$CONST.GROUP}</h2>
 
-    <ul id="serendipity_groups" class="plainList">
+    <ul id="serendipity_groups" class="plainList zebra_list">
     {foreach $groups as $group}
-        <li class="clearfix">
+        <li class="clearfix {cycle values="odd,even"}">
             <span class="group_name"><span class="icon-users"></span> {$group.name|escape:"html"}</span>
             <ul class="plainList clearfix edit_actions">
                 <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>

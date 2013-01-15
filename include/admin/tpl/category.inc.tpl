@@ -139,10 +139,10 @@
 {if $view}
     <h2>{$CONST.CATEGORY_INDEX}:</h2>
     {if is_array($viewCats)}
-        <ul id="categories" class="plainList">
+        <ul id="categories" class="plainList zebra_list">
         {foreach $viewCategories as $category}
         {* TODO: Ideally, this should use true nesting, i.e. nested lists instead of a level class. *}
-            <li class="clearfix level_{$category.depth}">
+            <li class="clearfix level_{$category.depth} {cycle values="odd,even"}">
                 <details class="category_data">
                     <summary class="category_name{if $category.category_icon} category_hasicon{/if}"><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
 
