@@ -550,6 +550,12 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 <?php
                     }
                 }
+                // add a closing div tag to the last element here, if uneven elements !! 2013-01-15
+                if ($counter == 1) {
+?>
+                </div>
+<?php
+                }
 ?>
             </td>
         </tr>
@@ -856,6 +862,10 @@ EOS;
                     // Print the empty message
                     print(NONE);
                 }
+                 // added missing closing ol tag - 2013-01-15
+                 print <<<EOS
+  </ol>
+EOS;
                 // Print the Javascript to drag-n-drop the list
                 print <<<EOS
 <script type="text/javascript">
@@ -895,9 +905,10 @@ EOS;
 
 EOS;
                 // Finish the row
+                // added missing closing tr tag - 2013-01-15
                 print <<<EOS
-</td>
-
+  </td>
+</tr>
 EOS;
                 break;
 
