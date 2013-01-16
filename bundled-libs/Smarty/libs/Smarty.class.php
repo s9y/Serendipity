@@ -2,7 +2,7 @@
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        Smarty.class.php
- * SVN:         $Id: Smarty.class.php 4658 2012-09-11 16:23:30Z uwe.tews@googlemail.com $
+ * SVN:         $Id: Smarty.class.php 4694 2013-01-13 21:13:14Z uwe.tews@googlemail.com $
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
  * @author Uwe Tews
  * @author Rodney Rehm
  * @package Smarty
- * @version 3.1.12
+ * @version 3.1.13
  */
 
 /**
@@ -113,7 +113,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * smarty version
      */
-    const SMARTY_VERSION = 'Smarty-3.1.12';
+    const SMARTY_VERSION = 'Smarty-3.1.13';
 
     /**
      * define variable scopes
@@ -1392,10 +1392,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // add the SMARTY_DIR to the list of muted directories
         if (!isset(Smarty::$_muted_directories[SMARTY_DIR])) {
             $smarty_dir = realpath(SMARTY_DIR);
-            Smarty::$_muted_directories[SMARTY_DIR] = array(
-                'file' => $smarty_dir,
-                'length' => strlen($smarty_dir),
-            );
+            if ($smarty_dir !== false) {
+                Smarty::$_muted_directories[SMARTY_DIR] = array(
+                    'file' => $smarty_dir,
+                    'length' => strlen($smarty_dir),
+                );
+            }
         }
 
         // walk the muted directories and test against $errfile
@@ -1403,6 +1405,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
             if (!$dir) {
                 // resolve directory and length for speedy comparisons
                 $file = realpath($key);
+                if ($file === false) {
+                    // this directory does not exist, remove and skip it
+                    unset(Smarty::$_muted_directories[$key]);
+                    continue;
+                }
                 $dir = array(
                     'file' => $file,
                     'length' => strlen($file),
@@ -1481,8 +1488,9 @@ if (Smarty::$_CHARSET !== 'UTF-8') {
  * @package Smarty
  */
 class SmartyException extends Exception {
+    public static $escape = true;
     public function __construct($message) {
-        $this->message = htmlentities($message);
+        $this->message = self::$escape ? htmlentities($message) : $message;
     }
 }
 
