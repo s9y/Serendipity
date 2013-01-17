@@ -1122,14 +1122,14 @@ fieldset p,
     margin: 0 0 1.5em;
 }
 
-.pluginmanager_grablet,
-.pluginmanager_configure {
+.pluginmanager .pluginmanager_grablet,
+.pluginmanager .pluginmanager_configure {
     position: absolute;
     top: 5px;
 }
 
-.pluginmanager_grablet { left: 5px; }
-.pluginmanager_configure { right: 5px; }
+.pluginmanager .pluginmanager_grablet { left: 5px; }
+.pluginmanager .pluginmanager_configure { right: 5px; }
 
 .pluginmanager_plugin .form_check,
 .pluginmanager_plugin h5,
