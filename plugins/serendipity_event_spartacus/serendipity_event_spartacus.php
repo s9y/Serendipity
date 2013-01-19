@@ -859,7 +859,7 @@ class serendipity_event_spartacus extends serendipity_event
                                     $pluginstack[$i]['requirements']['serendipity'] = $relInfo['value'];
                                 }
 
-                                if ($relInfo['tag'] == 'date') {
+                                if (isset($relInfo['tag']) && $relInfo['tag'] == 'date') {
                                     $pluginstack[$i]['date'] = $relInfo['value'];
                                 }
 
