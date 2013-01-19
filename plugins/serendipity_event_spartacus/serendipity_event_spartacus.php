@@ -855,11 +855,11 @@ class serendipity_event_spartacus extends serendipity_event
                             );
 
                             foreach((array)$childtree['children'] AS $relInfo) {
-                                if ($relInfo['tag'] == 'requirements:s9yVersion') {
+                                if (isset($relInfo['tag']) && $relInfo['tag'] == 'requirements:s9yVersion') {
                                     $pluginstack[$i]['requirements']['serendipity'] = $relInfo['value'];
                                 }
 
-                                if ($relInfo['tag'] == 'date') {
+                                if (isset($relInfo['tag']) && $relInfo['tag'] == 'date') {
                                     $pluginstack[$i]['date'] = $relInfo['value'];
                                 }
 
