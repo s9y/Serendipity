@@ -100,10 +100,17 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         }
         if ($serendipity['production'] !== true) { 
+            $args = func_get_args();
+            
+            // Several plugins might not adapt to proper style. This should not completely kill our execution.
+            if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
+                #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
+                return false;
+            }
             $e = new Exception;
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
-            print_r(func_get_args());
+            print_r($args);
             print_r($e);
             throw new ErrorException("Serendipity error: " . $errStr); // tracepath = all; 
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
