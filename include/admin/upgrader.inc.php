@@ -149,6 +149,16 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Introduce author groups',
                      'desc'      => 'This version introduces customizable user groups. Your existing users will be migrated into the new default groups.'),
 
+               array('version'   => '1.7-rc2',
+                     'type'      => 'PLUGIN_NOTICE',
+                     'function'  => '',
+                     'title'     => '<b>PLUGIN NOTICE:</b> Due to PHP 5.2+\'s raised error reporting, every Serendipity event plugin needs to conform to the core plugin API method signature.',
+                     'desc'      => '<p>All internal and spartacus plugins have been updated to reflect this change. The most important signatures are:</p>'
+                     . '<p><strong>function uninstall(&$propbag)</strong><br />'
+                        . '<strong>function event_hook($event, &$bag, &$eventData, $addData = null)</strong></p>'
+                        . '<p>Older plugins specifically did not always include the <strong>$addData</strong> signature. Make sure this exists.
+                        If after installation you get uncircumventable errors, you can make sure to set <strong>$serendipity[\'product\'] = true;</strong> in your <strong>serendipity_config_local.inc.php</strong> file. This should lower error reporting to a way that will not interfere with incompatible problem. But this is no solution in the long run, you need to update your plugins.</p>'),
+
 );
 
 /* Fetch SQL files which needs to be run */
