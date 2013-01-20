@@ -254,7 +254,7 @@ if (!is_readable($local_config)) {
 include($local_config);
 
 if ($serendipity['production'] === 'debug') {
-    error_reporting((E_ALL ^ E_STRICT) & ~E_NOTICE); // Read: Show E_ALL, E_STRICT but NOT E_NOTICE.
+    error_reporting(E_ALL &~E_NOTICE | E_STRICT);
 }
 
 //[internal callback function]: errorToExceptionHandler()
