@@ -54,29 +54,16 @@ if (!isset($serendipity['production'])) {
 
 // Set error reporting
 // TODO: E_STRICT throws problematic errors due to "hook_event" being a static function, but all of our plugins don't really define that...
-error_reporting(E_ALL & ~E_NOTICE ^ E_STRICT);
+error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
 
 if ($serendipity['production'] !== true) {
-    if ($serendipity['production'] === 'debug') {
-        error_reporting(E_ALL);
-    }
     @ini_set('display_errors', 'on');
 }
+
 
 // The serendipity errorhandler string
 $serendipity['errorhandler'] = 'errorToExceptionHandler';
 
-//[internal callback function]: errorToExceptionHandler()
-if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
-    // set serendipity global error to exeption handler
-    #if ($serendipity['production'] === 'debug') {
-    #    set_error_handler($serendipity['errorhandler'], E_ALL);
-    #} else {
-    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode, 
-    // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
-        set_error_handler($serendipity['errorhandler'], E_ALL & ~E_NOTICE ^ E_STRICT);
-    #}
-}
 
 // Default rewrite method
 $serendipity['rewrite']         = 'none';
@@ -265,6 +252,22 @@ if (!is_readable($local_config)) {
 }
 
 include($local_config);
+
+if ($serendipity['production'] === 'debug') {
+    error_reporting((E_ALL ^ E_STRICT) & ~E_NOTICE); // Read: Show E_ALL, E_STRICT but NOT E_NOTICE.
+}
+
+//[internal callback function]: errorToExceptionHandler()
+if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
+    // set serendipity global error to exeption handler
+    if ($serendipity['production'] === 'debug') {
+        set_error_handler($serendipity['errorhandler'], error_reporting()); // Yes, DEBUG mode should actually report E_STRICT errors! In PHP 5.4s is contained in E_ALL already, but not in PHP 5.2.
+    } else {
+    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode, 
+    // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
+        set_error_handler($serendipity['errorhandler'], E_ALL & ~(E_NOTICE|E_STRICT));
+    }
+}
 
 define('IS_up2date', version_compare($serendipity['version'], $serendipity['versionInstalled'], '<='));
 

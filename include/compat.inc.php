@@ -82,6 +82,7 @@ if (!function_exists('errorToExceptionHandler')) {
         global $serendipity;
         
         $rep = ini_get('error_reporting');
+        
         // respect user has set php error_reporting to not display any errors at all
         if (!($rep & $errStr)) { return false; }
         // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
@@ -90,6 +91,9 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
         // any other errors go here - throw errors as exception
         if ($serendipity['production'] === 'debug') { 
+        
+            // We don't want the notices
+            
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible

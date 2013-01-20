@@ -309,7 +309,7 @@ class Serendipity_Smarty extends Smarty
         }
         
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
-        $this->error_reporting = E_ALL & ~E_NOTICE ^ E_STRICT;
+        $this->error_reporting = E_ALL & ~(E_NOTICE|E_STRICT);
         
       } 
       
