@@ -8,6 +8,7 @@
       {/if}
 
       {foreach from=$dategroup.entries item="entry"}
+      {assign var="entry" value=$entry scope=parent}
         <div class="post">
         <h3 class="storytitle" id="post-{$entry.id}"><a href="{$entry.link}" rel="bookmark" title="Permanent Link: {$entry.title}">{$entry.title}</a></h3>
 

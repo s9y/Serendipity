@@ -1,4 +1,4 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2012-06-13 16:09 Ian
+<?php // (experimental) serendipity_smarty_class.inc.php 2012-01-03 14:11 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -309,10 +309,8 @@ class Serendipity_Smarty extends Smarty
         }
         
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
-        $this->error_reporting = E_ALL & ~E_NOTICE ^ E_STRICT;
+        $this->error_reporting = E_ALL & ~(E_NOTICE|E_STRICT);
         
-        // we use our own error_handler and get in conflicts with smarty?
-        #$this->muteExpectedErrors();
       } 
       
     /*

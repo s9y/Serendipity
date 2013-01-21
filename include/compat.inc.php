@@ -82,6 +82,7 @@ if (!function_exists('errorToExceptionHandler')) {
         global $serendipity;
         
         $rep = ini_get('error_reporting');
+        
         // respect user has set php error_reporting to not display any errors at all
         if (!($rep & $errStr)) { return false; }
         // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
@@ -90,6 +91,9 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
         // any other errors go here - throw errors as exception
         if ($serendipity['production'] === 'debug') { 
+        
+            // We don't want the notices
+            
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible
@@ -100,10 +104,17 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
         }
         if ($serendipity['production'] !== true) { 
+            $args = func_get_args();
+            
+            // Several plugins might not adapt to proper style. This should not completely kill our execution.
+            if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
+                #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
+                return false;
+            }
             $e = new Exception;
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
-            print_r(func_get_args());
+            print_r($args);
             print_r($e);
             throw new ErrorException("Serendipity error: " . $errStr); // tracepath = all; 
             echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care

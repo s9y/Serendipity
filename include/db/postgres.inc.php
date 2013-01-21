@@ -53,7 +53,7 @@ function serendipity_db_connect() {
         $function = 'pg_connect';
     }
 
-    $host = port = '';
+    $host = $port = '';
     if (strlen($serendipity['dbHost'])) {
         if (false !== strstr($serendipity['dbHost'], ':')) {
             $tmp = explode(':', $serendipity['dbHost']);

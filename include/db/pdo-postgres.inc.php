@@ -49,7 +49,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
 function serendipity_db_connect() {
     global $serendipity;
 
-    $host = port = '';
+    $host = $port = '';
     if (strlen($serendipity['dbHost'])) {
         if (false !== strstr($serendipity['dbHost'], ':')) {
             $tmp = explode(':', $serendipity['dbHost']);
