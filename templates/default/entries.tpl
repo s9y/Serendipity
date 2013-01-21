@@ -10,7 +10,7 @@
         {/if}
 
         {foreach from=$dategroup.entries item="entry"}
-        {assign var="entry" value=$entry scope=parent}
+        {assign var="entry" value=$entry scope="parent"}
 
         <h4 class="serendipity_title"><a href="{$entry.link}">{$entry.title}</a></h4>
 

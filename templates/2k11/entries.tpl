@@ -1,7 +1,7 @@
 {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
 {foreach from=$entries item="dategroup"}
     {foreach from=$dategroup.entries item="entry"}
-    {assign var="entry" value=$entry scope=parent}
+    {assign var="entry" value=$entry scope="parent"}
     <article id="post_{$entry.id}" class="clearfix serendipity_entry{if $dategroup.is_sticky} sticky{/if}">
         <header class="clearfix">
             <h2><a href="{$entry.link}">{$entry.title}</a></h2>
