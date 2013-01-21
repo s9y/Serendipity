@@ -6,6 +6,7 @@
 
 
         {foreach from=$dategroup.entries item="entry"}
+        {assign var="entry" value=$entry scope=parent}
         <h4 class="serendipity_title"><a href="{$entry.link}">{$entry.title}</a></h4>
                 {if $dategroup.is_sticky}
         <h3 class="serendipity_date">{$CONST.STICKY_POSTINGS}</h3>

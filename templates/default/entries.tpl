@@ -10,6 +10,7 @@
         {/if}
 
         {foreach from=$dategroup.entries item="entry"}
+        {assign var="entry" value=$entry scope=parent}
         <h4 class="serendipity_title"><a href="{$entry.link}">{$entry.title}</a></h4>
 
         <div class="serendipity_entry serendipity_entry_author_{$entry.author|@makeFilename} {if $entry.is_entry_owner}serendipity_entry_author_self{/if}">
