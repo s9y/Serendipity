@@ -9,7 +9,7 @@ Version 1.7 ()
 ------------------------------------------------------------------------
 
     * rc2: Alter entries.tpl to add the line:
-      {assign var="entry" value=$entry scope=parent}
+      {assign var="entry" value=$entry scope="parent"}
       for proper propagation of $entry to sub-templates.
       
     * rc2: Alter error reporting to only fail when 'debug' mode is enabled,

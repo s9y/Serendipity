@@ -179,7 +179,7 @@ $tasks = array(array('version'   => '0.5.1',
                      'desc'      => 'To transport the $entry variable to sub-templates like comments.tpl and trackbacks.tpl.
                      All internal and spartacus templates have been updated, so make sure you are using a recent version of your blog\'s template.
                      If you have your own custom template, be sure within your {foreach from=$dategroup.entries item="entry"} loop has this line after it:
-                     <strong>{assign var="entry" value=$entry scope=parent}</strong>'),
+                     <strong>{assign var="entry" value=$entry scope="parent"}</strong>'),
 
 );
 
