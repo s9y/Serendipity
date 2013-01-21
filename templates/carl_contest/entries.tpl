@@ -2,7 +2,7 @@
     {serendipity_hookPlugin hook="entries_header" addData="$entry_id"}
     {foreach from=$entries item="dategroup"}
 	{foreach from=$dategroup.entries item="entry"}
-        {assign var="entry" value=$entry scope=parent}
+        {assign var="entry" value=$entry scope="parent"}
 
     <div class="serendipity_Entry_Date">
         {if $dategroup.is_sticky}
