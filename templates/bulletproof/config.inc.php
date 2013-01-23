@@ -26,7 +26,7 @@ function serendipity_plugin_api_event_hook($event, &$bag, &$eventData, $addData 
 }
 
 
-if ($serendipity['GET']['adminModule'] == 'templates') {
+if ($serendipity['GET']['adminModule'] == 'templates' || $serendipity['POST']['adminModule'] == 'templates') {
     $css_files = glob(dirname(__FILE__) . '/*_style.css');
     foreach($css_files AS $css_file) {
         $css_file = str_replace('_style.css', '', basename($css_file));
