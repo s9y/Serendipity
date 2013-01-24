@@ -1,5 +1,5 @@
 <?php 
-// (experimental) serendipity_smarty_class.inc.php 2013-01-21 17:08 Ian
+// serendipity_smarty_class.inc.php 2013-01-24 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -368,6 +368,17 @@ class Serendipity_Smarty extends Smarty
     public function assign_by_ref($tpl_var, &$value)
     {
         $this->assignByRef($tpl_var, $value);
+    }
+
+    /**
+     * Returns an array containing template variables
+     *
+     * @param string $name
+     * @return array
+     */
+    public function get_template_vars($name=null)
+    {
+        return $this->getTemplateVars($name);
     }
 
     public static function test() 
