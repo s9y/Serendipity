@@ -1,4 +1,5 @@
-<?php # $Id: serendipity_event_karma.php 2778 2011-09-23 12:32:28Z garvinhicking $
+<?php # $Id:$
+// serendipity_event_karma.php 2778 2011-09-23 12:32:28Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -43,7 +44,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz');
-        $propbag->add('version',       '2.7');
+        $propbag->add('version',       '2.8');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -756,7 +757,8 @@ function vote(karmaVote,karmaId) {
                 
                 // Hook for ajax calls
                 case 'external_plugin':
-                    $uri_parts = explode('?', str_replace('&amp;', '&', $eventData));
+                    $theUri = (string)str_replace('&amp;', '&', $eventData);
+                    $uri_parts = explode('?', $theUri);
 
                     // Try to get request parameters from eventData name
                     if (!empty($uri_parts[1])) {

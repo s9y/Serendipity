@@ -371,7 +371,7 @@ class Serendipity_Smarty extends Smarty
     }
 
     /**
-     * Returns an array containing template variables
+     * Returns an array containing template variables- BC mode Smarty 2 -> 3
      *
      * @param string $name
      * @return array
