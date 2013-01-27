@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="form_field">
-                    <label for="filter_url">{$CONST.URL}</label>
+                    <label for="filter_url">URL</label>
                     <input id="filter_url" name="serendipity[filter][url]" type="text" value="{$get.filter.url|escape}">
                 </div>
 
