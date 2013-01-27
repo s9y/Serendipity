@@ -521,7 +521,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     <?php echo serendipity_setFormToken(); ?>
 <?php   }
     if (sizeof($config) > 1 && $allowToggle) { ?>
-    <a href="#" onClick="showConfigAll(<?php echo sizeof($config); ?>)"><?php echo TOGGLE_ALL; ?></a>
+    <a class="button_link" href="#" onClick="showConfigAll(<?php echo sizeof($config); ?>)"><?php echo TOGGLE_ALL; ?></a>
 <?php
     }
     $el_count = 0;
@@ -534,8 +534,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 ?>
         <h3><?php if ($allowToggle) { ?><a href="#" onClick="showConfig('el<?php echo $el_count; ?>'); return false"><?php echo $category['title']; ?></a><?php } else { ?><?php echo $category['title']; ?><?php } ?></h3>
 <?php   } ?>
-        <fieldset id="el<?php echo $el_count; ?>">
-            <legend><?php echo $category['description'] ?></legend>
+        <fieldset id="el<?php echo $el_count; ?>" class="clearfix">
+            <legend><span><?php echo $category['description'] ?></span></legend>
 <?php
         foreach ($category['items'] as $item) {
 
@@ -597,7 +597,9 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
 
     if (!$noForm) {
 ?>
-    <input type="submit" value="<?php echo CHECK_N_SAVE; ?>">
+    <div class="form_buttons">
+        <input type="submit" value="<?php echo CHECK_N_SAVE; ?>">
+    </div>
 </form>
 <?php
     }
