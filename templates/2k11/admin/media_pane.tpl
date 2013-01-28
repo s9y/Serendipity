@@ -54,6 +54,8 @@
                 {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                     <div class="form_field">
                         {* Core might need to be adapted to input[type=date] *}
+                        {* date is not ideal, should be datetime – but datetime isn't properly supported *}
+                        {* by browsers yet, so we probably need a JS widget (jQuery UI?) for this …      *}
                         <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
                         <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
                          - 
@@ -81,6 +83,7 @@
                     </select>
             {else}
                 {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
+                    {* TODO: needs a label … but what IS this? *}
                     <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|@escape}">
             {/if}
             {if $so_val.type == 'date' || $so_val.type == 'intrange'}
