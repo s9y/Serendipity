@@ -24,7 +24,7 @@
         <div class="clearfix">
             <div id="banner{if not $admin_vars.is_logged_in}_install{/if}">
             {if $admin_vars.admin_installed}
-                <h1><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</h1>
+                <h1><a href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</a></h1>
                 {if $admin_vars.is_logged_in}
                 <span class="block_level">{$admin_vars.self_info}</span>
                 {/if}

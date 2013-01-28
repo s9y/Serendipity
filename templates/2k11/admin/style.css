@@ -954,6 +954,14 @@ summary { cursor: pointer; }
 #top a:hover,
 #top a:focus { color: #fcfcfc; }
 
+#banner a,
+#banner a:visited,
+#banner a:hover,
+#banner a:focus {
+    color: #fcfcfc;
+    text-decoration: none;
+}
+
 #banner,
 #user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
 
