@@ -3,8 +3,12 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * When switching templates, both the backend and the frontend
+      will remember the timestamp of the last template change,
+      to make sure that the browser will not cache a mismatching CSS.
+      
     * Use Smarty for backend display output
-
+    
 Version 1.7 ()
 ------------------------------------------------------------------------
 

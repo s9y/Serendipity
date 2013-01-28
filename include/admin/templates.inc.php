@@ -65,6 +65,7 @@ if ($serendipity['GET']['adminAction'] == 'install' ) {
 
     serendipity_set_config_var('template', htmlspecialchars($serendipity['GET']['theme']));
     serendipity_set_config_var('template_engine', isset($themeInfo['engine']) ? $themeInfo['engine'] : 'default');
+    serendipity_set_config_var('last_template_change', time());
 
     $data["adminAction"] = "install";
     $data["install_template"] = htmlspecialchars($serendipity['GET']['theme']);

@@ -14,9 +14,24 @@ if (IS_installed === false) {
     require(S9Y_INCLUDE_PATH . 'include/functions_permalinks.inc.php');
     require(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
     require(S9Y_INCLUDE_PATH . 'include/functions_config.inc.php');
-    $css_file = 'serendipity.css.php?serendipity[css_mode]=serendipity_admin.css';
+    $css_file = 'serendipity.css.php?serendipity[css_mode]=serendipity_admin.css&v=' . time();
 } else {
     $css_file = serendipity_rewriteURL('serendipity_admin.css');
+
+    // This is a bit of an ugly hack, but when switching templates, the HTML head is already emitted,
+    // so we need a way to actually enforce switching/updating the CSS. So we need to do it at
+    // this place.
+    if ($serendipity['GET']['adminAction'] == 'install' && $serendipity['GET']['adminModule'] == 'templates') {
+        $serendipity['last_template_change'] = time();
+    }
+
+    // When templates are switched, append a specific version string to make sure the browser does not cache the CSS
+    if (strstr($css_file, '?')) {
+        $css_file .= '&v=' . $serendipity['last_template_change'];
+    } else {
+        $css_file .= '?v=' . $serendipity['last_template_change'];
+    }
+
     if (defined('IS_up2date') && IS_up2date === true) {
         serendipity_plugin_api::hook_event('backend_configure', $serendipity);
     }

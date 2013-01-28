@@ -967,6 +967,14 @@ function serendipity_smarty_init($vars = array()) {
 
         if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
             $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
+
+            // When templates are switched, append a specific version string to make sure the browser does not cache the CSS
+            if (strstr($serendipity['smarty_vars']['head_link_stylesheet'], '?')) {
+                $serendipity['smarty_vars']['head_link_stylesheet'] .= '&v=' . $serendipity['last_template_change'];
+            } else {
+                $serendipity['smarty_vars']['head_link_stylesheet'] .= '?v=' . $serendipity['last_template_change'];
+            }
+
         }
 
         $serendipity['smarty']->assign(
