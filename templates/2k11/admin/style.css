@@ -957,10 +957,10 @@ summary { cursor: pointer; }
 #top a:hover,
 #top a:focus { color: #fcfcfc; }
 
-h1 a,
-h1 a:visited,
-h1 a:hover,
-h1 a:focus {
+#top h1 a,
+#top h1 a:visited,
+#top h1 a:hover,
+#top h1 a:focus {
     color: #fcfcfc;
     text-decoration: none;
 }
