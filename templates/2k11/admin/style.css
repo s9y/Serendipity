@@ -895,10 +895,10 @@ summary { cursor: pointer; }
 
 #edit_entry_title label,
 #edit_entry_metadata label,
-#edit_entry_status label,
 #filter_comments label,
 #serendipity_comment label { width: 15%; }
 
+#edit_entry_status label,
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
@@ -910,6 +910,7 @@ summary { cursor: pointer; }
 
 .category_data { width: 75%; }
 
+#edit_entry_status select,
 #sort_entries .form_select select,
 #filter_entries .form_select select,
 #filter_entries .form_field input { width: 79%; }
@@ -917,7 +918,6 @@ summary { cursor: pointer; }
 #edit_entry_title input,
 #edit_entry_metadata input,
 #edit_entry_metadata select,
-#edit_entry_status select,
 #filter_comments input,
 #filter_comments select,
 #serendipity_comment .form_field input,
