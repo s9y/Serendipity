@@ -403,6 +403,7 @@ form > a,
 #login .form_field label,
 #edit_entry_title label,
 #edit_entry_metadata label,
+#edit_entry_status label,
 #filter_comments label,
 #serendipity_comment label,
 #sort_entries .form_select label,
@@ -894,6 +895,7 @@ summary { cursor: pointer; }
 
 #edit_entry_title label,
 #edit_entry_metadata label,
+#edit_entry_status label,
 #filter_comments label,
 #serendipity_comment label { width: 15%; }
 
@@ -915,6 +917,7 @@ summary { cursor: pointer; }
 #edit_entry_title input,
 #edit_entry_metadata input,
 #edit_entry_metadata select,
+#edit_entry_status select,
 #filter_comments input,
 #filter_comments select,
 #serendipity_comment .form_field input,
@@ -999,6 +1002,8 @@ summary { cursor: pointer; }
 }
 
 #media_pane_filter #toggle_filters { right: 1.5em;}
+
+#edit_entry_category label { vertical-align: top; }
 
 
 .template_info,
@@ -1256,6 +1261,7 @@ fieldset p,
     }
 
     #edit_entry_metadata label,
+    #edit_entry_status label,
     #sort_entries .form_select label,
     #filter_entries .form_select label,
     #filter_entries .form_field label,
@@ -1281,6 +1287,13 @@ fieldset p,
     }
 
     #edit_entry_metadata>div,
+    #edit_entry_submit>div {
+        float: left;
+        width: 50%;
+    }
+
+    #edit_entry_submit .form_buttons { text-align: right; }
+
     #sort_entries .form_select,
     #filter_comments .clearfix>div,
     #serendipity_category>.clearfix>div,
@@ -1313,7 +1326,7 @@ fieldset p,
     #content { width: 73%; }
     .lt-ie8 #content { width: 72.5%; }
 
-    #edit_entry_metadata select[multiple],
+    #edit_entry_status select[multiple],
     #sort_entries .form_select select,
     #filter_entries .form_select select,
     #filter_entries .form_field input,

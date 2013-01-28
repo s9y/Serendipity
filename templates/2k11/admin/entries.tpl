@@ -34,16 +34,6 @@
             {/foreach}
             </select>
         </div>
-
-        <div id="edit_entry_status" class="form_select">
-            <label for="entry_status">Entry status</label> {* i18n *}
-            <select id="entry_status" name="serendipity[isdraft]">
-            {if $entry_vars.serendipityRightPublish}
-                <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>
-            {/if}
-                <option value="true"{if $entry_vars.draft_mode == 'draft'} selected{/if}>{$CONST.DRAFT}</option>
-            </select>
-        </div>
     </div>
 
     <div class="form_area">
@@ -86,7 +76,7 @@
         <textarea id="serendipity[body]" name="serendipity[body]" rows="20">{$entry_vars.entry.body|@escape}</textarea>
     </div>
 
-    <div class="clearfix">
+    <div id="edit_entry_status_comments" class="clearfix">
         <div class="form_check">
             <input id="checkbox_allow_comments" name="serendipity[allow_comments]" type="checkbox" value="true"{if $entry_vars.allow_comments} checked="checked"{/if}><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label>
         </div>
@@ -96,9 +86,21 @@
         </div>
     </div>
 
-    <div class="form_buttons">
-        <input type="submit" accesskey="p" value="{$CONST.PREVIEW}" onclick="document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';">
-        <input type="submit" accesskey="s" value="{$CONST.SAVE}"onclick="return checkSave();">
+    <div id="edit_entry_submit" class="clearfix">
+        <div id="edit_entry_status" class="form_select">
+            <label for="entry_status">Entry status</label> {* i18n *}
+            <select id="entry_status" name="serendipity[isdraft]">
+            {if $entry_vars.serendipityRightPublish}
+                <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>
+            {/if}
+                <option value="true"{if $entry_vars.draft_mode == 'draft'} selected{/if}>{$CONST.DRAFT}</option>
+            </select>
+        </div>
+
+        <div class="form_buttons">
+            <input type="submit" accesskey="p" value="{$CONST.PREVIEW}" onclick="document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';">
+            <input type="submit" accesskey="s" value="{$CONST.SAVE}"onclick="return checkSave();">
+        </div>
     </div>
 
     <div class="form_area">
