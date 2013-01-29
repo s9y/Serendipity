@@ -987,11 +987,8 @@ summary {
     visibility: hidden;
 } /* Temporary */
 
-.users_delete_action,
 #edit_entry_timestamp,
 #media_pane_filter { position: relative; }
-
-.users_delete_action { top: 1.5em; }
 
 #reset_timestamp,
 #media_pane_filter #toggle_filters {
