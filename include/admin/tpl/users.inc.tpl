@@ -85,14 +85,14 @@
         {$formToken}
         <input name="serendipity[user]" type="hidden" value="{$userid}">
         
-        <fieldset class="users_delete_action">
-            <legend><span>{$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span></legend>
+        <div class="users_delete_action">
+            <h2>{$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</h2>
 
             <div class="form_buttons">
                 <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
                 <input name="NO" type="submit" value="{$CONST.NOT_REALLY}">
             </div>
-        </fieldset>
+        </div>
     </form>
     {/if}
 {/if}
