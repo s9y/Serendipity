@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.27');
+        $propbag->add('version',       '2.28');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -922,23 +922,23 @@ class serendipity_event_spartacus extends serendipity_event
             }
 
             foreach($subtree['children'] AS $child => $childtree) {
-                if ($sub == 'templates' && $childtree['tag'] == 'template' && $childtree['value'] == $plugin_to_install) {
+                if ($sub == 'templates' && @$childtree['tag'] == 'template' && $childtree['value'] == $plugin_to_install) {
                     $found = true;
-                } elseif ($sub == 'plugins' && $childtree['tag'] == 'name' && $childtree['value'] == $plugin_to_install) {
+                } elseif ($sub == 'plugins' && @$childtree['tag'] == 'name' && $childtree['value'] == $plugin_to_install) {
                     $found = true;
                 }
 
-                if (!$found || $childtree['tag'] != 'release') {
+                if (!$found || @$childtree['tag'] != 'release') {
                     continue;
                 }
 
                 foreach($childtree['children'] AS $child2 => $childtree2) {
-                    if ($childtree2['tag'] != 'serendipityFilelist') {
+                    if (@$childtree2['tag'] != 'serendipityFilelist') {
                         continue;
                     }
 
                     foreach($childtree2['children'] AS $idx => $_files) {
-                        if ($_files['tag'] == 'file' && !empty($_files['value'])) {
+                        if (@$_files['tag'] == 'file' && !empty($_files['value'])) {
                             $files[] = $_files['value'];
                         }
                     }
