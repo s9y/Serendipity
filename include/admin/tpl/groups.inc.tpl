@@ -59,7 +59,7 @@
             </select>
         </div>
         
-        <ul class="plainList">
+        <ul>
         {foreach $perms as $perm}
         {* TODO: major rewrite *}
             {if {{$perm@key}|truncate:"2":""} == 'f_'}{continue}{/if}
@@ -79,7 +79,7 @@
             {if $indent == "&nbsp;&nbsp;" && $in_indent != true}
                 {$in_indent=true}
                <li>
-                    <ul class="plainList">
+                    <ul>
                         
             {/if}
             {if $indent == "<br>" && $in_indent == true}

@@ -459,7 +459,7 @@ form > a {
     margin-bottom: 1.5em;
 }
 
-.plainList,
+#serendipity_admin_groups ul,
 .imageMessage ul {
     list-style: none;
     padding: 0;
