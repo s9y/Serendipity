@@ -14,7 +14,7 @@
 {/if}
 <form action="?serendipity[adminModule]=personal&amp;serendipity[adminAction]=save" method="post">
     {$formToken}
-    {$config}
+    {$config|replace:'class="form_string"':'class="form_field"'|replace:'class="form_bool"':'class="form_field"'|replace:'class="form_list"':'class="form_select"'}
     <div class="form_buttons">
         <input name="SAVE" type="submit" value="{$CONST.SAVE}">
     </div>
