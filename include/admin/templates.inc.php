@@ -80,8 +80,25 @@ $data["cur_template"] = $serendipity['template'];
 
 if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php')) {
     serendipity_smarty_init();
+    $old_template_config_groups = $template_config_groups;
     include_once $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php';
+    // in case of theme switch, check to unset config_group array
+    if ($serendipity['GET']['adminAction'] == 'install' && $serendipity['GET']['adminModule'] == 'templates') {
+        // array diff - but do not do this for bulletproof, as this is the only one which needs them in case of reloads (temporary)
+        if($old_template_config_groups === $template_config_groups && $serendipity['GET']['theme'] != 'bulletproof') {
+            $template_config_groups = NULL; // force destroy previouses config_group array!
+        }
+    }
+    unset($old_template_config_groups);
+} else {
+    if ($serendipity['GET']['adminAction'] == 'install' && $serendipity['GET']['adminModule'] == 'templates') {
+        #include_once $serendipity['serendipityPath'] . $serendipity['templatePath'] . '/default/config_fallback.inc.php';
+        $template_config_groups = NULL;
+        $template_config        = NULL;
+        $template_loaded_config = NULL;
+    }
 }
+
 
 if (is_array($template_config)) {
     serendipity_plugin_api::hook_event('backend_templates_configuration_top', $template_config);
