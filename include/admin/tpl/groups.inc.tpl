@@ -58,6 +58,8 @@
                 {/foreach}
             </select>
         </div>
+        
+        <ul class="plainList">
         {foreach $perms as $perm}
         {* TODO: major rewrite *}
             {if {{$perm@key}|truncate:"2":""} == 'f_'}{continue}{/if}
@@ -72,15 +74,32 @@
                     {$section="{$perm@key}"}
                 {/if}
             {/if}
+            
+            
+            {if $indent == "&nbsp;&nbsp;" && $in_indent != true}
+                {$in_indent=true}
+               <li>
+                    <ul class="plainList">
+                        
+            {/if}
+            {if $indent == "<br>" && $in_indent == true}
+                {$in_indent=false}
+                </ul></li>
+            {/if}
+            <li>
             {if !$perm.permission}
-                <div><span class="perm_name hilite_b">{$indent} {$perm.permission_name|escape:"html"}:</span> <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
+                <div><span class="perm_name hilite_b">
+                {$perm.permission_name|escape:"html"}:</span> <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
-                    {$indent} <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
+                    <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
                     <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}</label>
                 </div>
             {/if}
+            </li>
         {/foreach}
+        </ul>
+
         {if $enablePluginACL}
             <div class="form_select">
                 <label for="forbidden_plugins">{$CONST.PERMISSION_FORBIDDEN_PLUGINS}</label>
