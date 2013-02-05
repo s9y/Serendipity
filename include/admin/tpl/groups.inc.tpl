@@ -75,13 +75,17 @@
                 {/if}
             {/if}
             
+
+            {if ! ($perm@first || ($in_indent != true && $indent == "&nbsp;&nbsp;"))}
+                </li>
+            {/if}
+            
             
             {if $indent == "&nbsp;&nbsp;" && $in_indent != true}
                 {$in_indent=true}
-               <li>
-                    <ul>
-                        
+                <ul>
             {/if}
+            
             {if $indent == "<br>" && $in_indent == true}
                 {$in_indent=false}
                 </ul></li>
@@ -96,9 +100,8 @@
                     <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}</label>
                 </div>
             {/if}
-            </li>
         {/foreach}
-        </ul>
+        </li></ul>
 
         {if $enablePluginACL}
             <div class="form_select">
