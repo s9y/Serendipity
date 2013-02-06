@@ -441,7 +441,9 @@ label > span,
 #serendipity_admin_groups .form_field label,
 #serendipity_admin_groups .form_select label,
 #template_options .form_select label,
-#template_options .form_field label { display: block; }
+#template_options .form_field label,
+.configuration_group .form_select label,
+.configuration_group .form_field label { display: block; }
 
 .image_resize_hint p { display: inline; }
 
@@ -936,7 +938,9 @@ summary {
 #serendipity_comment select { width: 84%; }
 
 #template_options .form_select select,
-#template_options .form_field input { width: 100%; }
+#template_options .form_field input,
+.configuration_group .form_select select,
+.configuration_group .form_field input { width: 100%; }
 
 #serendipity_category .form_multiselect label { width: auto; }
 
@@ -1192,7 +1196,9 @@ fieldset p,
     #uploadform .form_select select { min-width: 16em; }
 
     #template_options .form_select select,
-    #template_options .form_field input { max-width: 320px; }
+    #template_options .form_field input,
+    .configuration_group .form_select select,
+    .configuration_group .form_field input { max-width: 320px; }
 }
 
 
@@ -1244,18 +1250,30 @@ fieldset p,
     #template_options .form_select label,
     #template_options .form_field label,
     #template_options .form_select select,
-    #template_options .form_field input {
+    #template_options .form_field input,
+    .configuration_group .form_select label,
+    .configuration_group .form_field label,
+    .configuration_group .form_select select,
+    .configuration_group .form_field input {
         float: left;
         margin-right: 2%;
         width: 48%;
     }
 
     #template_options .form_select select,
-    #template_options .form_field input { max-width: 48%; }
+    #template_options .form_field input,
+    .configuration_group .form_select select,
+    .configuration_group .form_field input { max-width: 48%; }
 
+    .configuration_group .form_select,
+    .configuration_group .form_field,
+    .configuration_group .form_radio,
     #template_select .odd,
     .media_pane .odd { clear: left; }
 
+    .configuration_group .form_select,
+    .configuration_group .form_field,
+    .configuration_group .form_radio,
     #serendipityScaleImg,
     .media_file header { overflow: hidden; } 
 
