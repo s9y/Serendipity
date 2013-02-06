@@ -39,7 +39,7 @@
                 </select>
             </div>
 
-            <input name="REMOVE" type="submit" value="{$CONST.GO}">
+            <input class="state_cancel" name="REMOVE" type="submit" value="{$CONST.GO}">
         </form>
     {/if}
 {/if}

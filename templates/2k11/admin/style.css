@@ -561,7 +561,9 @@ input[type="submit"] {
 
 .state_cancel,
 .state_cancel:visited,
-input[type="reset"] {
+input[type="reset"],
+input[type="submit"].state_cancel,
+input[type="submit"].state_cancel:visited {
     background: #b94a48;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(100%, #b94a48));
     background-image: -webkit-linear-gradient(#cc7a79, #b94a48);
@@ -594,7 +596,9 @@ input[type="submit"]:hover {
 
 .state_cancel:hover,
 .state_cancel:focus,
-input[type="reset"]:hover {
+input[type="reset"]:hover,
+input[type="submit"].state_cancel:hover,
+input[type="submit"].state_cancel:focus {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #c26260), color-stop(100%, #a2403e));
     background-image: -webkit-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
     background-image: -moz-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
@@ -628,7 +632,8 @@ input[type="submit"]:active {
 }
 
 .state_cancel:active,
-input[type="reset"]:active {
+input[type="reset"]:active
+input[type="submit"].state_cancel:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #b94a48), color-stop(100%, #c26260));
     background-image: -webkit-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
     background-image: -moz-linear-gradient(#cc7a79, #b94a48 1px, #c26260);

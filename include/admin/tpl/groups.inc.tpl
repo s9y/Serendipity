@@ -142,7 +142,7 @@
         
         <div id="groups_delete_action" class="form_buttons">
             <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
-            <input name="NO" type="submit" value="{$CONST.NOT_REALLY}">
+            <input class="state_cancel" name="NO" type="submit" value="{$CONST.NOT_REALLY}">
         </div>
     </form>
     {/if}
