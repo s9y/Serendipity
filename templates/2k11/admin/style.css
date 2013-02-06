@@ -546,12 +546,8 @@ input[type="button"] {
     text-shadow: #fff 0 1px 1px;
 }
 
-input[type="submit"],
-input[type="reset"] {
-    color: #fafafa;
-    text-shadow: #050505 0 1px 1px;
-}
-
+.state_submit,
+.state_submit:visited,
 input[type="submit"] {
     background: #468847;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(100%, #468847));
@@ -560,8 +556,12 @@ input[type="submit"] {
     background-image: -o-linear-gradient(#63af64, #468847);
     background-image: linear-gradient(#63af64, #468847);
     border-color: #468847 #2f5c30 #182f18;
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
+.state_cancel,
+.state_cancel:visited,
 input[type="reset"] {
     background: #b94a48;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(100%, #b94a48));
@@ -570,6 +570,8 @@ input[type="reset"] {
     background-image: -o-linear-gradient(#cc7a79, #b94a48);
     background-image: linear-gradient(#cc7a79, #b94a48);
     border-color: #b94a48 #893634 #582322;
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
 .button_link:hover,
@@ -583,20 +585,28 @@ input[type="button"]:hover {
     background-image: linear-gradient(#fff, #eee 1px, #ccc);
 }
 
+.state_submit:hover,
+.state_submit:focus,
 input[type="submit"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #519e52), color-stop(100%, #3b723c));
     background-image: -webkit-linear-gradient(#63af64, #519e52 1px, #3b723c);
     background-image: -moz-linear-gradient(#63af64, #519e52 1px, #3b723c);
     background-image: -o-linear-gradient(#63af64, #519e52 1px, #3b723c);
     background-image: linear-gradient(#63af64, #519e52 1px, #3b723c);
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
+.state_cancel:hover,
+.state_cancel:focus,
 input[type="reset"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #c26260), color-stop(100%, #a2403e));
     background-image: -webkit-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
     background-image: -moz-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
     background-image: -o-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
     background-image: linear-gradient(#cc7a79, #c26260 1px, #a2403e);
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
 .button_link:active,
@@ -614,6 +624,7 @@ input[type="button"]:active {
     border-color: #999 #bbb #ddd;
 }
 
+.state_submit:active,
 input[type="submit"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #468847), color-stop(100%, #519e52));
     background-image: -webkit-linear-gradient(#63af64, #468847 1px, #519e52);
@@ -621,15 +632,19 @@ input[type="submit"]:active {
     background-image: -o-linear-gradient(#63af64, #468847 1px, #519e52);
     background-image: linear-gradient(#63af64, #468847 1px, #519e52);
     border-color: #182f18 #2f5c30 #468847;
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
+.state_cancel:active,
 input[type="reset"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #b94a48), color-stop(100%, #c26260));
     background-image: -webkit-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
     background-image: -moz-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
     background-image: -o-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
     background-image: linear-gradient(#cc7a79, #b94a48 1px, #c26260);
-    border-color: #582322 #893634 #b94a48;
+    border-color: #582322 #893634 #b94a48;color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
 }
 
 button {
@@ -829,9 +844,14 @@ a.button_link:focus,
 #template_options div>a:hover,
 #template_options div>a:focus,
 .button_link>span:before {
-    color: #000;
+    /*color: #000;*/
     text-decoration: none;
 }
+
+#template_options div>a,
+#template_options div>a:hover,
+#template_options div>a:focus,
+.button_link>span:before { color: #000; }
 
 .button_link>span:before {
     margin-right: 0;
