@@ -530,6 +530,7 @@ input[type="submit"] {
     border: 1px solid;
     border-color: #ddd #bbb #999;
     color: #000;
+    line-height: normal;
     outline: 0;
     padding: 3px 10px;
     text-shadow: #fff 0 1px 1px;
