@@ -5,6 +5,8 @@
 
 <script src="{$serendipityHTTPPath}serendipity_editor.js"></script>
 
+<h2>{$CONST.ADD_MEDIA}</h2>
+
 <div class="image_add_form">{$CONST.ADD_MEDIA_BLAHBLAH}</div>
 
 <form id="uploadform" action="?" method="POST" enctype="multipart/form-data" onsubmit="rememberUploadOptions()">

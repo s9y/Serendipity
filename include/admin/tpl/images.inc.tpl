@@ -52,6 +52,8 @@
     {/if}
 {/if}
 {if $case_delete}
+    <h2>{$CONST.MEDIA_DELETE}</h2>
+    
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
 
     <form id="delete_image" method="get">

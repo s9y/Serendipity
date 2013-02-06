@@ -1,6 +1,8 @@
 {* HTML5: Yes *}
 {* jQuery: NN *}
 
+<h2>{$CONST.MEDIA_PROP}</h2>
+
 {if $media.is_edit}
 <form id="mediaPropertyForm" action="?" method="POST">
 <div>
