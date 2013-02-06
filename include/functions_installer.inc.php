@@ -398,11 +398,15 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             if ($value === null) {
                 $value = $default;
             }
-            
+            echo '<div class="form_radio">';
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
-            echo (($value == true) ? 'checked="checked"' : ''). ' /><label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>&nbsp;';
+            echo (($value == true) ? 'checked="checked"' : ''). ' /><label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>';
+            echo '</div>';
+            
+            echo '<div class="form_radio">';
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
             echo (($value == true) ? '' : 'checked="checked"'). ' /><label for="radio_cfg_' . $name . '_no"> ' . NO . '</label>';
+            echo '</div>';
             break;
 
         case 'fullprotected':
@@ -574,12 +578,23 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
             if (in_array('ifEmpty', $item['flags']) && empty($value)) {
                 $value = serendipity_query_default($item['var'], $item['default']);
             }
-?>
-            <div class="form_<?php echo $item['type']; ?>">
-                <label for="<?php echo $item['var']; ?>"><?php echo $item['title']; ?> <span><?php echo $item['description']; ?></span></label>
-                <?php echo serendipity_guessInput($item['type'], $item['var'], $value, $item['default']); ?>
-            </div>
-<?php
+
+            if ($item['type'] == 'bool') {
+                echo '<fieldset>
+                        <legend>
+                            <span>'. $item['title'] .'
+                                <span>'. $item['description'] .' </span>
+                            </span>
+                        </legend>';
+                serendipity_guessInput($item['type'], $item['var'], $value, $item['default']);
+                echo '</fieldset>';
+            } else {
+                echo '<div class="form_'. $item['type'] .'">
+                    <label for="'. $item['var'] .'">'. $item['title'] .' <span>'. $item['description'] .'</span></label>';
+                     serendipity_guessInput($item['type'], $item['var'], $value, $item['default']);
+                echo '</div>';
+            }
+
         }
 ?>
         </fieldset>
