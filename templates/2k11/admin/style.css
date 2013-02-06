@@ -429,6 +429,7 @@ form > a,
 .block_level,
 .form_multiselect label,
 label > span,
+legend > span > span,
 #back_to_blog,
 #meta small,
 .msg_error,
@@ -781,6 +782,7 @@ legend > span,
 figcaption { font-weight: bold; }
 
 label > span,
+legend>span>span,
 input[type=checkbox] + label,
 input[type=radio] + label,
 .form_check label { font-weight: normal; }
@@ -1351,13 +1353,11 @@ fieldset p,
 
     .configuration_group .form_select,
     .configuration_group .form_field,
-    .configuration_group .form_radio,
     #template_select .odd,
     .media_pane .odd { clear: left; }
 
     .configuration_group .form_select,
     .configuration_group .form_field,
-    .configuration_group .form_radio,
     #serendipityScaleImg,
     .media_file header { overflow: hidden; } 
 
