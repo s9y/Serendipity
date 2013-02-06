@@ -155,7 +155,7 @@
     {/if}
         <div id="multidelete_tools" class="form_buttons">
             <input name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()">
-            <input name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_ENTRIES}">
+            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_ENTRIES}">
         </div>
     </form>
 
