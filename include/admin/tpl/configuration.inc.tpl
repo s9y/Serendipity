@@ -21,5 +21,5 @@
         <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.WRITTEN_N_SAVED}</span>
     {/if}
 {else}
-    {$config}
+    {$config|replace:'class="form_string"':'class="form_field"'|replace:'class="form_fullprotected"':'class="form_field"'|replace:'class="form_bool"':'class="form_radio"'|replace:'class="form_list"':'class="form_select"'}
 {/if}
