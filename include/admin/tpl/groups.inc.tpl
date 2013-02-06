@@ -46,7 +46,7 @@
     {/if}
         <div class="form_field">
             <label for="group_name">{$CONST.NAME}</label>
-            {* BUG: Doesn't correctly pull the group name *}
+            {* BUG: Doesn't correctly pull the group name – $group_ vs $group. …? *}
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:"html"}">
         </div>
 
@@ -138,7 +138,9 @@
         {$formToken}
         <input name="serendipity[group]" type="hidden" value="{$group_id|escape:"html"}">
 
-        <h2>{$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:"html"}"}</h2>
+        <h2>{$CONST.MANAGE_GROUPS}</h2>
+
+        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:"html"}"}</span>
         
         <div id="groups_delete_action" class="form_buttons">
             <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">

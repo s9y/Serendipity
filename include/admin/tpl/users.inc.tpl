@@ -86,7 +86,9 @@
         <input name="serendipity[user]" type="hidden" value="{$userid}">
         
         <div class="users_delete_action">
-            <h2>{$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</h2>
+            <h2>{$CONST.MANAGE_USERS}</h2>
+
+            <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span>
 
             <div class="form_buttons">
                 <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
