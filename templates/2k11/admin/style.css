@@ -1346,10 +1346,14 @@ fieldset p,
     #template_options .form_field label,
     #template_options .form_select select,
     #template_options .form_field input,
+    #template_options fieldset legend,
+    #template_options fieldset>.clearfix,
     .configuration_group .form_select label,
     .configuration_group .form_field label,
     .configuration_group .form_select select,
-    .configuration_group .form_field input {
+    .configuration_group .form_field input,
+    .configuration_group fieldset>fieldset legend,
+    .configuration_group fieldset>fieldset .clearfix {
         float: left;
         margin-right: 2%;
         width: 48%;
@@ -1362,15 +1366,20 @@ fieldset p,
 
     .configuration_group .form_select,
     .configuration_group .form_field,
+    .configuration_group fieldset>fieldset,
     #template_select .odd,
     .media_pane .odd { clear: left; }
 
     .configuration_group .form_select,
     .configuration_group .form_field,
+    .configuration_group fieldset>fieldset,
     #serendipityScaleImg,
     .media_file header { overflow: hidden; } 
 
     #serendipityScaleImg { margin-top: 2.25em; }
+
+    .configuration_group fieldset>fieldset .form_radio,
+    #template_options fieldset .form_radio { margin-top: 0; }
 
     /* Plugin manager – might go into pluginmanager.css in the end */
     .pluginmanager_side {
