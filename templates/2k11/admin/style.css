@@ -1152,6 +1152,8 @@ fieldset p,
 .comment_data,
 .configuration_group h3 { margin-top: 0; }
 
+.configuration_group > fieldset { margin-bottom: 1.5em; }
+
 .editor_toolbar { margin-top: .25em; }
 
 #serendipity_comments_list .actions { margin: .75em 0; }
