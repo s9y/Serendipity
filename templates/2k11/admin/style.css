@@ -1047,6 +1047,7 @@ fieldset p,
 
 .sub_perm { margin-left: 1em; }
 
+#serendipity_admin_groups li ul div { margin-left: 1.5em; }
 
 #template_select article,
 .media_file {
