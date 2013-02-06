@@ -439,7 +439,9 @@ label > span,
 #image_directory_edit_form .form_select label,
 #uploadform label,
 #serendipity_admin_groups .form_field label,
-#serendipity_admin_groups .form_select label { display: block; }
+#serendipity_admin_groups .form_select label,
+#template_options .form_select label,
+#template_options .form_field label { display: block; }
 
 .image_resize_hint p { display: inline; }
 
@@ -482,6 +484,7 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
+#template_options div>a:focus,
 button:focus,
 input:focus,
 select:focus,
@@ -504,6 +507,7 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
+#template_options div>a,
 button, input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -533,6 +537,7 @@ input[type="submit"] {
 }
 
 .button_link:hover,
+#template_options div>a:hover,
 button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
@@ -545,6 +550,7 @@ input[type="submit"]:hover {
 }
 
 .button_link:active,
+#template_options div>a:active,
 button:active,
 input[type="button"]:active,
 input[type="reset"]:active,
@@ -753,6 +759,9 @@ a:focus { color: #d06604; }
 a.button_link,
 a.button_link:hover,
 a.button_link:focus,
+#template_options div>a,
+#template_options div>a:hover,
+#template_options div>a:focus,
 .button_link>span:before {
     color: #000;
     text-decoration: none;
@@ -925,6 +934,9 @@ summary {
 #filter_comments select,
 #serendipity_comment .form_field input,
 #serendipity_comment select { width: 84%; }
+
+#template_options .form_select select,
+#template_options .form_field input { width: 100%; }
 
 #serendipity_category .form_multiselect label { width: auto; }
 
@@ -1178,6 +1190,9 @@ fieldset p,
 
     #uploadform .form_field input,
     #uploadform .form_select select { min-width: 16em; }
+
+    #template_options .form_select select,
+    #template_options .form_field input { max-width: 320px; }
 }
 
 
@@ -1225,6 +1240,18 @@ fieldset p,
         margin: 1.5em 0;
         width: auto;
     }
+
+    #template_options .form_select label,
+    #template_options .form_field label,
+    #template_options .form_select select,
+    #template_options .form_field input {
+        float: left;
+        margin-right: 2%;
+        width: 48%;
+    }
+
+    #template_options .form_select select,
+    #template_options .form_field input { max-width: 48%; }
 
     #template_select .odd,
     .media_pane .odd { clear: left; }
