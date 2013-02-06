@@ -510,7 +510,8 @@ input[type="checkbox"]:active {
 
 .button_link,
 #template_options div>a,
-button, input[type="button"],
+button,
+input[type="button"],
 input[type="reset"],
 input[type="submit"] {
     -webkit-border-radius: 4px;
@@ -521,30 +522,60 @@ input[type="submit"] {
     -webkit-background-clip: padding;
     -moz-background-clip: padding;
     background-clip: padding-box;
+    border: 1px solid;
+    line-height: normal;
+    outline: 0;
+    padding: 3px 10px;
+    width: auto;
+    *padding-top: 2px;
+    *padding-bottom: 0;
+}
+
+.button_link,
+#template_options div>a,
+button,
+input[type="button"] {
     background: #ddd;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
     background-image: -webkit-linear-gradient(#fff, #ddd);
     background-image: -moz-linear-gradient(#fff, #ddd);
     background-image: -o-linear-gradient(#fff, #ddd);
     background-image: linear-gradient(#fff, #ddd);
-    border: 1px solid;
     border-color: #ddd #bbb #999;
     color: #000;
-    line-height: normal;
-    outline: 0;
-    padding: 3px 10px;
     text-shadow: #fff 0 1px 1px;
-    width: auto;
-    *padding-top: 2px;
-    *padding-bottom: 0;
+}
+
+input[type="submit"],
+input[type="reset"] {
+    color: #fafafa;
+    text-shadow: #050505 0 1px 1px;
+}
+
+input[type="submit"] {
+    background: #468847;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(100%, #468847));
+    background-image: -webkit-linear-gradient(#63af64, #468847);
+    background-image: -moz-linear-gradient(#63af64, #468847);
+    background-image: -o-linear-gradient(#63af64, #468847);
+    background-image: linear-gradient(#63af64, #468847);
+    border-color: #468847 #2f5c30 #182f18;
+}
+
+input[type="reset"] {
+    background: #b94a48;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(100%, #b94a48));
+    background-image: -webkit-linear-gradient(#cc7a79, #b94a48);
+    background-image: -moz-linear-gradient(#cc7a79, #b94a48);
+    background-image: -o-linear-gradient(#cc7a79, #b94a48);
+    background-image: linear-gradient(#cc7a79, #b94a48);
+    border-color: #b94a48 #893634 #582322;
 }
 
 .button_link:hover,
 #template_options div>a:hover,
 button:hover,
-input[type="button"]:hover,
-input[type="reset"]:hover,
-input[type="submit"]:hover {
+input[type="button"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
     background-image: -webkit-linear-gradient(#fff, #eee 1px, #ccc);
     background-image: -moz-linear-gradient(#fff, #eee 1px, #ccc);
@@ -552,12 +583,26 @@ input[type="submit"]:hover {
     background-image: linear-gradient(#fff, #eee 1px, #ccc);
 }
 
+input[type="submit"]:hover {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #519e52), color-stop(100%, #3b723c));
+    background-image: -webkit-linear-gradient(#63af64, #519e52 1px, #3b723c);
+    background-image: -moz-linear-gradient(#63af64, #519e52 1px, #3b723c);
+    background-image: -o-linear-gradient(#63af64, #519e52 1px, #3b723c);
+    background-image: linear-gradient(#63af64, #519e52 1px, #3b723c);
+}
+
+input[type="reset"]:hover {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #c26260), color-stop(100%, #a2403e));
+    background-image: -webkit-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
+    background-image: -moz-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
+    background-image: -o-linear-gradient(#cc7a79, #c26260 1px, #a2403e);
+    background-image: linear-gradient(#cc7a79, #c26260 1px, #a2403e);
+}
+
 .button_link:active,
 #template_options div>a:active,
 button:active,
-input[type="button"]:active,
-input[type="reset"]:active,
-input[type="submit"]:active {
+input[type="button"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
     background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
     background-image: -moz-linear-gradient(#fff, #ddd 1px, #eee);
@@ -567,6 +612,24 @@ input[type="submit"]:active {
     -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
     box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
     border-color: #999 #bbb #ddd;
+}
+
+input[type="submit"]:active {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #468847), color-stop(100%, #519e52));
+    background-image: -webkit-linear-gradient(#63af64, #468847 1px, #519e52);
+    background-image: -moz-linear-gradient(#63af64, #468847 1px, #519e52);
+    background-image: -o-linear-gradient(#63af64, #468847 1px, #519e52);
+    background-image: linear-gradient(#63af64, #468847 1px, #519e52);
+    border-color: #182f18 #2f5c30 #468847;
+}
+
+input[type="reset"]:active {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cc7a79), color-stop(1px, #b94a48), color-stop(100%, #c26260));
+    background-image: -webkit-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
+    background-image: -moz-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
+    background-image: -o-linear-gradient(#cc7a79, #b94a48 1px, #c26260);
+    background-image: linear-gradient(#cc7a79, #b94a48 1px, #c26260);
+    border-color: #582322 #893634 #b94a48;
 }
 
 button {
