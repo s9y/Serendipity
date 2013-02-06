@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.27');
+        $propbag->add('version',       '2.29');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -916,12 +916,15 @@ class serendipity_event_spartacus extends serendipity_event
 
         $this->checkArray($tree);
 
-        foreach($tree[0]['children'] AS $idx => $subtree) {
+        foreach($tree[0]['children'] AS $subtree) {
             if ($subtree['tag'] != 'package') {
                 continue;
             }
 
-            foreach($subtree['children'] AS $child => $childtree) {
+            foreach($subtree['children'] AS $childtree) {
+                if (!is_array($childtree) || !isset($childtree['tag'])) {
+                    continue;
+                }
                 if ($sub == 'templates' && $childtree['tag'] == 'template' && $childtree['value'] == $plugin_to_install) {
                     $found = true;
                 } elseif ($sub == 'plugins' && $childtree['tag'] == 'name' && $childtree['value'] == $plugin_to_install) {
@@ -932,12 +935,18 @@ class serendipity_event_spartacus extends serendipity_event
                     continue;
                 }
 
-                foreach($childtree['children'] AS $child2 => $childtree2) {
+                foreach($childtree['children'] AS $childtree2) {
+                    if (!is_array($childtree2) || !isset($childtree2['tag'])) {
+                        continue;
+                    }
                     if ($childtree2['tag'] != 'serendipityFilelist') {
                         continue;
                     }
 
-                    foreach($childtree2['children'] AS $idx => $_files) {
+                    foreach($childtree2['children'] AS $_files) {
+                        if (!is_array($_files) || !isset($_files['tag'])) {
+                            continue;
+                        }
                         if ($_files['tag'] == 'file' && !empty($_files['value'])) {
                             $files[] = $_files['value'];
                         }
