@@ -978,6 +978,7 @@ class serendipity_event_spartacus extends serendipity_event
         foreach($files AS $file) {
             $url    = $mirror . '/' . $sfloc . '/' . $gitloc . $file . '?revision=1.9999';
             $target = $pdir . $file;
+            $target = $this->fixUrl($target);
             $this->rmkdir($pdir . $plugin_to_install,$sub);
             $this->fileperm($pdir . $plugin_to_install, true);
             $this->fetchfile($url, $target);
