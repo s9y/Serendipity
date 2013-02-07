@@ -1,9 +1,11 @@
 # $Id$
 
-
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Media database: Escape more Cookie values to prevent storing
+      possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142)
+      
     * Allow entryproperties plugin to define defaults for custom fields
     
     * Onyx, Net_URL classes: Remove PHP4 style constructor due to

@@ -1443,28 +1443,28 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
     foreach($importParams AS $importParam) {
         if (isset($serendipity['GET'][$importParam])) {
-            $extraParems .= 'serendipity[' . $importParam . ']='. $serendipity['GET'][$importParam] .'&amp;';
+            $extraParems .= 'serendipity[' . $importParam . ']='. htmlspecialchars($serendipity['GET'][$importParam]) .'&amp;';
         }
     }
 
     foreach($sortParams AS $sortParam) {
         serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
-        serendipity_JSsetCookie('sortorder_' . $sortParam, $serendipity['GET']['sortorder'][$sortParam]);
-        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. $serendipity['GET']['sortorder'][$sortParam] .'&amp;';
+        serendipity_JSsetCookie('sortorder_' . $sortParam, htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]));
+        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
     }
 
     foreach($filterParams AS $filterParam) {
         serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
-        serendipity_JSsetCookie($filterParam, $serendipity['GET'][$filterParam]);
+        serendipity_JSsetCookie($filterParam, htmlspecialchars($serendipity['GET'][$filterParam]));
         if (!empty($serendipity['GET'][$filterParam])) {
-            $extraParems .= 'serendipity[' . $filterParam . ']='. $serendipity['GET'][$filterParam] .'&amp;';
+            $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
         }
     }
 
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
-    $serendipity['GET']['only_filename'] = str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']);
+    $serendipity['GET']['only_filename'] = htmlspecialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
 
-    $perPage = (!empty($serendipity['GET']['sortorder']['perpage']) ? $serendipity['GET']['sortorder']['perpage'] : 8);
+    $perPage = (!empty($serendipity['GET']['sortorder']['perpage']) ? (int)$serendipity['GET']['sortorder']['perpage'] : 8);
     while ($perPage % $lineBreak !== 0) {
         $perPage++;
     }
