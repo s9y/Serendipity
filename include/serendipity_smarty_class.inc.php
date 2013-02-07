@@ -1,4 +1,5 @@
-<?php // (experimental) serendipity_smarty_class.inc.php 2012-01-03 14:11 Ian
+<?php 
+// serendipity_smarty_class.inc.php 2013-01-24 Ian
             
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
@@ -191,7 +192,7 @@ class Serendipity_Smarty extends Smarty
             $cache_modified_check only works if you're using display() - it won't do anything on fetch().
             It won't do anything if you have non-caching plugins or {insert} tags, either.
             
-            We're working on making this more intelligent for 3.2, but… work with what you've got in 3.1 first.
+            We're working on making this more intelligent for 3.2, butï¿½ work with what you've got in 3.1 first.
         */
 
         // some documentary from the smarty forum
@@ -228,7 +229,7 @@ class Serendipity_Smarty extends Smarty
 
             you can do $force_cache = true; to make the current page re-render to cache. This actually allows you to work with a very high
             cache_lifetime and poll a secondary modified time from somewhere. You could then implement the serve-stale-until-updated caching approach.
-            I'll blog about this… probably around christmas
+            I'll blog about thisï¿½ probably around christmas
         */
         
         // set the cache_lifetime for index.tpl to 5 minutes
@@ -311,6 +312,8 @@ class Serendipity_Smarty extends Smarty
         // set smarty error reporting. General error_reporting is set in serendipity/serendipity_config.inc.php
         $this->error_reporting = E_ALL & ~(E_NOTICE|E_STRICT);
         
+        // we use our own error_handler and get in conflicts with smarty?
+        // $this->muteExpectedErrors();
       } 
       
     /*
@@ -365,6 +368,17 @@ class Serendipity_Smarty extends Smarty
     public function assign_by_ref($tpl_var, &$value)
     {
         $this->assignByRef($tpl_var, $value);
+    }
+
+    /**
+     * Returns an array containing template variables- BC mode Smarty 2 -> 3
+     *
+     * @param string $name
+     * @return array
+     */
+    public function get_template_vars($name=null)
+    {
+        return $this->getTemplateVars($name);
     }
 
     public static function test() 

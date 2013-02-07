@@ -160,6 +160,17 @@ $tasks = array(array('version'   => '0.5.1',
                         If after installation you get uncircumventable errors, you can make sure to set <strong>$serendipity[\'product\'] = true;</strong> in your <strong>serendipity_config_local.inc.php</strong> file. This should lower error reporting to a way that will not interfere with incompatible problem. But this is no solution in the long run, you need to update your plugins.
                         Also, the serendipity_event_browsercompatibility plugin has been removed, because it\'s functionality was no longer required. You should uninstall that plugin if you are currently using it.</p>'),
 
+               array('version'   => '1.7-rc2',
+                     'type'      => 'TEMPLATE_NOTICE',
+                     'function'  => '',
+                     'title'     => '<b>TEMPLATE_NOTICE:</b> The template file "entries.tpl" needs a specific assignment',
+                     'desc'      => 'To transport the $entry variable to sub-templates like comments.tpl and trackbacks.tpl.
+                     All internal and spartacus templates have been updated, so make sure you are using a recent version of your blog\'s template.
+                     If you have your own custom template, be sure within your {foreach from=$dategroup.entries item="entry"} loop has this line after it:
+                     <strong>{assign var="entry" value=$entry scope="parent"}</strong>'),
+
+
+
 );
 
 /* Fetch SQL files which needs to be run */

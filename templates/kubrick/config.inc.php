@@ -11,4 +11,6 @@ if (file_exists($probelang)) {
     include dirname(__FILE__) . '/lang_en.inc.php';
 }
 
+$template_config_groups = NULL;
+
 ?>
