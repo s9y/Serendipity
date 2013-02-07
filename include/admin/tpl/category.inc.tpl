@@ -147,6 +147,7 @@
                 {/if}
 
                 {if $category.depth < $priorDepth}
+                    </li>
                     {for $i=$category.depth+1 to $priorDepth}
                         </ul></li>
                     {/for}
@@ -176,9 +177,9 @@
                     <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
         {/foreach}
-            {for $i=1 to $priorDepth}
-                </ul></li>
-            {/for}
+        {for $i=1 to $priorDepth}
+            </ul></li>
+        {/for}
         </ul>
     {else}
         <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_CATEGORIES}</span>
