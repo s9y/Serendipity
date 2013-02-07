@@ -2,13 +2,15 @@
 {* jQuery: No *}
 
 {if $drawList}
+    <h2>{$CONST.FIND_ENTRIES}</h2>
+
     <form action="?" method="get">
         <input name="serendipity[action]" type="hidden" value="admin">
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
 
         <fieldset id="filter_entries">
-            <legend><span>{$CONST.FILTERS} ({$CONST.FIND_ENTRIES})</span></legend>
+            <legend><span>{$CONST.FILTERS}</span></legend>
 
             <div class="clearfix">
                 <div class="form_select">
@@ -175,6 +177,8 @@
     </form>
 {/if}
 {if $no_entries}
+    <h2>{$CONST.FIND_ENTRIES}</h2>
+
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
 
