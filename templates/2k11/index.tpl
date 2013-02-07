@@ -59,7 +59,7 @@
         </form>
         {serendipity_hookPlugin hook="quicksearch_plugin" hookAll="true"}
         {if $template_option.header_img}
-        <img src="{$template_option.header_img|@escape:"html"}" alt="">
+        <img src="{$template_option.header_img|@escape:"javascript"}" alt="">
         {/if}
     </header>
     {if $template_option.use_corenav}
