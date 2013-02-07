@@ -81,7 +81,8 @@ if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
         
-        $rep = ini_get('error_reporting');
+        $rep  = ini_get('error_reporting');
+        $args = func_get_args();
         
         // respect user has set php error_reporting to not display any errors at all
         if (!($rep & $errStr)) { return false; }
@@ -89,36 +90,35 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($rep == 0) { return false; }
         // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect
         if ($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
+        // Several plugins might not adapt to proper style. This should not completely kill our execution.
+        if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
+            #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
+            return false;
+        }
         // any other errors go here - throw errors as exception
         if ($serendipity['production'] === 'debug') { 
         
-            // We don't want the notices
-            
+            // We don't want the notices - but everything else !
+            $e = new Exception;
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible
-            if(function_exists('debug_backtrace')) {
+            if (function_exists('debug_backtrace')) {
                 print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)); // whether or not to populate the "object" index >= PHP 5.3.6
+            } else {
+                print_r($e);
             }
             throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
+            echo '</pre>'; // if ising throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
         }
-        if ($serendipity['production'] !== true) { 
-            $args = func_get_args();
-            
-            // Several plugins might not adapt to proper style. This should not completely kill our execution.
-            if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
-                #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
-                return false;
-            }
-            $e = new Exception;
+        if ($serendipity['production'] === false) { 
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
-            print_r($args);
-            print_r($e);
+            //print_r($args); // do this in strong test environments only, as containing sensible data! Better use debug!
             throw new ErrorException("Serendipity error: " . $errStr); // tracepath = all; 
-            echo '</pre>'; // if throw new ... endtag is not set, it still looks better and browsers don't care
-        } else { 
+            echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
+        } 
+        if ($serendipity['production'] === true) { 
             // ToDo: enhance for more special serendipity error needs
             $str  = '<p> == SERENDIPITY ERROR == </p>';
             $str .= '<p>Please correct:</p>';
