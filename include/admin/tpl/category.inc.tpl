@@ -177,6 +177,7 @@
                     <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
         {/foreach}
+        </li>
         {for $i=1 to $priorDepth}
             </ul></li>
         {/for}
