@@ -267,7 +267,7 @@
                                 <script type="text/javascript">
                                     addthis_url = '{$entry.rdf_ident|escape:url}';
                                     addthis_title = '{$entry.title|escape:url}';
-                                    addthis_pub = '{$template_option.addthisaccount}';
+                                    addthis_pub = '{$template_option.addthisaccount|@escape:"html"}';
                                 </script>
                                 <script type="text/javascript" src="http://s7.addthis.com/js/addthis_widget.php?v=12" ></script>
                             </div>
