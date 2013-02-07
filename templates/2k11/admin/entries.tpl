@@ -4,6 +4,7 @@
 <script src="serendipity_define.js.php"></script>
 <script src="serendipity_editor.js"></script>
 
+<h2>{if $entry_vars.entry.title}{$entry_vars.entry.title|@escape|string_format:"{$CONST.EDIT_THIS_CAT}"}{else}{$CONST.NEW_ENTRY}{/if}</h2>
 {if $entry_vars.errMsg}
     <span class="msg_error"><span class="icon-attention"></span> {$entry_vars.errMsg}</span>
 {/if}
