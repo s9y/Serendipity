@@ -141,8 +141,25 @@
     {if is_array($viewCats)}
         <ul id="categories" class="plainList zebra_list">
         {foreach $viewCategories as $category}
-        {* TODO: Ideally, this should use true nesting, i.e. nested lists instead of a level class. *}
-            <li class="clearfix level_{$category.depth} {cycle values="odd,even"}">
+            {if ! $category@first}
+                {if $category.depth > $priorDepth}
+                    <ul>
+                {/if}
+
+                {if $category.depth < $priorDepth}
+                    {for $i=$category.depth+1 to $priorDepth}
+                        </ul></li>
+                    {/for}
+                {/if}
+
+                {if $category.depth == $priorDepth}
+                    </li>
+                {/if}
+            {/if}
+
+            {$priorDepth=$category.depth}
+            
+            <li class="clearfix">
                 <details class="category_data">
                     <summary class="category_name{if $category.category_icon} category_hasicon{/if}"><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
 
@@ -158,8 +175,10 @@
                     <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                     <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
-            </li>
         {/foreach}
+            {for $i=1 to $priorDepth}
+                </ul></li>
+            {/for}
         </ul>
     {else}
         <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_CATEGORIES}</span>
