@@ -1150,7 +1150,8 @@ fieldset p,
 .editor_toolbar input { margin: 0 .25em .75em 0; }
 
 .comment_data,
-.configuration_group h3 { margin-top: 0; }
+.configuration_group h3,
+form > .button_link:first-of-type { margin-top: 0; }
 
 .configuration_group > fieldset { margin-bottom: 1.5em; }
 

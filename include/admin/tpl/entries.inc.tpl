@@ -1,7 +1,6 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 
-    <h2>{$CONST.EDIT_ENTRIES}</h2>
 {if $drawList}
     <form action="?" method="get">
         <input name="serendipity[action]" type="hidden" value="admin">
