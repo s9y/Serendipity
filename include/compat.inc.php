@@ -109,7 +109,7 @@ if (!function_exists('errorToExceptionHandler')) {
                 print_r($e);
             }
             throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            echo '</pre>'; // if ising throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
+            echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
         }
         if ($serendipity['production'] === false) { 
             echo '<p> == TESTING ERROR MODE == </p>';
