@@ -39,9 +39,9 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
     
 	function getImportNotes(){
 		if (empty($_REQUEST['token'])) {
-			$msg = 'In order to import your blog on Blogger, Serendipity needs to be able to access it via Google\'s Blogger Data APIs.<br />';
-			$msg .= 'Login to your Google/Blogger account and then click the link below.<br /><br />';
-			$msg .= '<a href="https://www.google.com/accounts/AuthSubRequest?scope=http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F&session=1&secure=0&next='. urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']) .'">Go to Google to grant access</a><br />';
+			$msg = 'In order to import your blog on Blogger, Serendipity needs to be able to access it via Google\'s Blogger Data APIs.';
+			$msg .= 'Login to your Google/Blogger account and then click the link below.';
+			$msg .= '<a class="block_level standalone" href="https://www.google.com/accounts/AuthSubRequest?scope=http%3A%2F%2Fwww.blogger.com%2Ffeeds%2F&session=1&secure=0&next='. urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']) .'">Go to Google to grant access</a>';
 			return $msg;
 		} else {
 			return '';
@@ -154,7 +154,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
 		}
 		
 		// Export success
-		echo 'Successfully exported entries from Blogger<br />';
+		echo '<span class="block_level">Successfully exported entries from Blogger</span>';
 		
 		// Get Serendipity authors list
 		$authorList = array();
@@ -247,29 +247,32 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
 		}
 		
 		// Report on resultant authors
-		echo '<br />Current list of authors: <br />'. join(', ', array_values($authorList)) .'<br /><br />';
+		echo '<span class="block_level">Current list of authors: </span>'. join(', ', array_values($authorList));
 		
 		// Do cleanup and report on entries
-		echo 'The following entries were successfully imported:<br />';
+		echo '<span class="block_level">The following entries were successfully imported:</span>';
+		echo '<ul>';
 		foreach ($entryList as $eId => $eDetails) {
 			// Update comment count for entry in s9y
 			serendipity_db_query("UPDATE ". $serendipity['dbPrefix'] ."entries SET comments = ". $eDetails[2] ." WHERE id = ". $eDetails[0]);
 			
-			echo '- '. $eDetails[1] .' comments('. $eDetails[2] .')<br />';
+			echo '<li>'. $eDetails[1] .' comments('. $eDetails[2] .')</li>';
 		}
-		echo '<br />';
+		echo '</ul>';
 		
 		// Report fails
-		echo 'The following entries ran into trouble and was not imported:<br />';
+		echo '<span class="block_level">The following entries ran into trouble and was not imported:</span>';
+		echo '<ul>';
 		foreach ($entryFailList as $eId => $eDetails) {
-			echo '- '. $eDetails .'<br />';
+			echo '<li>'. $eDetails .'</li>';
 		}
+		echo '</ul>';
 				
 		// Reset autodiscovery
 		$serendipity['noautodiscovery'] = $noautodiscovery;
 		
 		// All done!
-		echo "Import finished.<br />";
+		echo '<span class="msg_notice">Import finished.</span>';
 		return true;
 	}
 

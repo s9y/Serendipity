@@ -13,7 +13,7 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
     var $categories  = array();
 
     function getImportNotes() {
-        return 'Textpattern uses MySQLs native PASSWORD() function to save passwords. Thus, those passwords are incompatible with the MD5 hashing of Serendipity. The passwords for all users have been set to "txp". <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.<br />';
+        return '<p>Textpattern uses MySQLs native PASSWORD() function to save passwords. Thus, those passwords are incompatible with the MD5 hashing of Serendipity. The passwords for all users have been set to "txp". <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.</p>';
     }
 
     function Serendipity_Import_textpattern($data) {
@@ -87,7 +87,7 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
 
         $txpdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$txpdb) {
-            return sprintf(COULDNT_CONNECT, $this->data['host']);
+            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

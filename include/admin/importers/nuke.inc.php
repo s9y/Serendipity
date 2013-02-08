@@ -81,7 +81,7 @@ class Serendipity_Import_nuke extends Serendipity_Import {
 
         $nukedb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$nukedb) {
-            return sprintf(COULDNT_CONNECT, $this->data['host']);
+            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

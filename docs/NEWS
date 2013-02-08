@@ -5,8 +5,10 @@ Version 1.7 ()
 
     * Media database: Escape more Cookie values to prevent storing
       possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
-      Escape hotlinked media filename.
-      
+      Escape hotlinked media filename. Escape importer host name error
+      Thanks to GreenSun from the forums for bringing this to attention,
+      originally reported by Dshellnoi Unix
+                       
     * rc2: Alter entries.tpl to add the line:
       {assign var="entry" value=$entry scope="parent"}
       for proper propagation of $entry to sub-templates.

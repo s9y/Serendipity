@@ -81,7 +81,7 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
 
         $txpdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$txpdb) {
-            return sprintf(COULDNT_CONNECT, $this->data['host']);
+            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {
