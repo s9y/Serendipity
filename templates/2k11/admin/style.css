@@ -464,6 +464,8 @@ form > a {
     margin-bottom: 1.5em;
 }
 
+#categories,
+#categories ul,
 #serendipity_admin_groups ul,
 .imageMessage ul {
     list-style: none;
@@ -1187,11 +1189,15 @@ form > .button_link:first-of-type { margin-top: 0; }
     width: 100px;
 }
 
-.zebra_list { border-top: 1px solid #aaa; }
+.zebra_list,
+#categories .odd,
+#categories .even { border-top: 1px solid #aaa; }
 
-.zebra_list>li { border-bottom: 1px solid #aaa; }
+.zebra_list>li,
+#categories { border-bottom: 1px solid #aaa; }
 
-.zebra_list>.odd { background: #eee; }
+.zebra_list>.odd,
+#categories .odd { background: #eee; }
 
 #entries_list h3,
 #serendipity_comments_list h4 {
@@ -1200,9 +1206,10 @@ form > .button_link:first-of-type { margin-top: 0; }
 }
 
 #entries_list>li,
-#categories li,
 #serendipity_image_folders li,
 #serendipity_comments_list>li { padding: 0 0 0 .4em; }
+
+#categories li > ul { padding: 0 0 0 1em; }
 
 #categories .edit_actions li,
 #serendipity_image_folders .edit_actions li { padding: 0; }
