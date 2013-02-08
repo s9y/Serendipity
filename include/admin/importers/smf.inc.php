@@ -87,7 +87,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
 
         $gdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$gdb) {
-            return sprintf(COULDNT_CONNECT, $this->data['host']);
+            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

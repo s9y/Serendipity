@@ -69,7 +69,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
         if (!is_dir($this->data['pivot_path']) || !is_readable($this->data['pivot_path'])) {
             $check_dir = $serendipity['serendipityPath'] . $this->data['pivot_path'];
             if (!is_dir($check_dir) || !is_readable($check_dir)) {
-                return sprintf(ERROR_NO_DIRECTORY, $this->data['pivot_path']);
+                return sprintf(ERROR_NO_DIRECTORY, htmlspecialchars($this->data['pivot_path']));
             }
             $this->data['pivot_path'] = $check_dir;
         }
@@ -191,7 +191,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
             }
             echo '</ul>';
         } else {
-            return sprintf(ERROR_NO_DIRECTORY, $this->data['pivot_path']);
+            return sprintf(ERROR_NO_DIRECTORY, htmlspecialchars($this->data['pivot_path']));
         }
 
         return true;
