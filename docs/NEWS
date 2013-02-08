@@ -4,7 +4,8 @@ Version 1.7 ()
 ------------------------------------------------------------------------
 
     * Media database: Escape more Cookie values to prevent storing
-      possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142)
+      possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
+      Escape hotlinked media filename.
       
     * rc2: Alter entries.tpl to add the line:
       {assign var="entry" value=$entry scope="parent"}
