@@ -214,6 +214,8 @@ switch ($serendipity['GET']['adminAction']) {
 
         $new_media = array();
     
+        $serendipity['POST']['imageurl'] = htmlspecialchars($serendipity['POST']['imageurl']);
+
         // First find out whether to fetch a file or accept an upload
         if ($serendipity['POST']['imageurl'] != '' && $serendipity['POST']['imageurl'] != 'http://') {
             if (!empty($serendipity['POST']['target_filename'][2])) {
