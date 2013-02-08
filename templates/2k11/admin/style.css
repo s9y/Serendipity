@@ -1119,7 +1119,8 @@ summary {
 #edit_entry_category label { vertical-align: top; }
 
 
-.template_info,
+.template_info { margin: 0 0 1em 3%;}
+
 .template_info dl,
 fieldset p,
 .media_file_meta,
@@ -1182,7 +1183,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 #template_select .preview_image {
     float: left;
-    margin: 0 1em 1em 0;
+    margin: 0 0 1em;
     /* TESTING */
     overflow: hidden;
     height: 100px;
