@@ -1076,10 +1076,12 @@ summary {
 #top h1 a,
 #top h1 a:visited,
 #top h1 a:hover,
-#top h1 a:focus {
-    color: #fcfcfc;
-    text-decoration: none;
-}
+#top h1 a:focus { color: #fcfcfc; }
+
+#top a,
+#top a:visited,
+#top a:hover,
+#top a:focus { text-decoration: none; }
 
 #banner,
 #user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
@@ -1094,6 +1096,8 @@ summary {
 
 /* CONTENT
    ----------------------------------------------------------------- */
+#content { padding-bottom: 1.5em; }
+
 #serendipity_admin_groups br,
 .image_add_form br {
     display: none;
