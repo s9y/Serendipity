@@ -190,13 +190,13 @@ body {
 
 /* These selection declarations have to be separate. */
 ::-moz-selection {
-    background: #3a4b6f;
+    background: #3e5f81;
     color: #fff;
     text-shadow: none;
 }
 
 ::selection {
-    background: #3a4b6f;
+    background: #3e5f81;
     color: #fff;
     text-shadow: none;
 }
@@ -205,7 +205,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #aaa;
     margin: 1.5em 0;
     padding: 0;
 }
@@ -839,6 +839,7 @@ input[type=checkbox] { margin-right: .4em; }
    -------------
    Dark blue:   #25253d     Mid blue:    #3e5f81
    Lite blue:   #ccdee7     Yellow:      #ffbf00
+   Orange:      #d06604     
    Off black:   #222        Off white:   #fcfcfc
    ----------------------------------------------------------------- */
 
@@ -850,7 +851,7 @@ body {
 }
 
 a,
-a:visited { color: #3a4b6f; }
+a:visited { color: #3e5f81; }
 
 a:hover,
 a:focus { color: #d06604; }
@@ -1183,7 +1184,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 #template_select article,
 #serendipityScaleImg img,
 .media_file,
-.media_file_preview img { border: 1px solid #ddd; }
+.media_file_preview img { border: 1px solid #aaa; }
 
 #template_select .preview_image {
     float: left;
