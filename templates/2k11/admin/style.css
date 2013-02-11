@@ -980,23 +980,6 @@ summary {
 #entries_list .form_check,
 .media_file footer { float: left; }
 
-#banner {
-    float: left;
-    margin: 0 1% 0 0;
-}
-
-#user_menu {
-    float: left;
-    margin: 0 0 0 1%;
-    text-align: right;
-}
-
-#banner,
-#user_menu { width: 49%; }
-
-.lt-ie8 #banner,
-.lt-ie8 #user_menu { width: 48.5%; }
-
 #mediaPropertyForm .media_file_preview {
     float: none;
     margin: 1.5em 0;
@@ -1100,14 +1083,12 @@ summary {
 #banner,
 #user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
 
-#banner>span { margin: 0 0 1.5em; }
-
 #user_menu ul {
     font-size: 1.5em;
-    margin: 1.25em 0 .75em;
+    margin: .5em 0;
 }
 
-#user_menu li { margin: 0 0 0 1em; }
+#user_menu li { margin: 0 1em 0 0; }
 
 
 /* CONTENT
@@ -1314,6 +1295,34 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
+@media only screen and (min-width: 480px) {
+    #banner {
+        float: left;
+        margin: 0 1% 0 0;
+    }
+
+    #user_menu {
+        float: left;
+        margin: 0 0 0 1%;
+        text-align: right;
+    }
+
+    #banner,
+    #user_menu { width: 49%; }
+
+    .lt-ie8 #banner,
+    .lt-ie8 #user_menu { width: 48.5%; }
+
+    #banner>span { margin: 0 0 1.5em; }
+
+    #user_menu ul {
+        font-size: 1.5em;
+        margin: 1.35em 0 .65em;
+    }
+
+    #user_menu li { margin: 0 0 0 1em; }
+}
+
 @media only screen and (min-width: 481px) {
     #uploadform label {
         display: inline-block;
@@ -1520,20 +1529,25 @@ form > .button_link:first-of-type { margin-top: 0; }
 
     #moreFilter fieldset input,
     #moreFilter fieldset select { margin-bottom: .75em; }
-
-    #user_menu ul {
-        font-size: 1.5em;
-        margin: 1.5em 0 .5em;
-    }
 }
 
 
 /* LARGER SCREEN (e.g. laptops)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1280px) {
+    #banner h1 {
+        float: left;
+        margin: .75em 0;
+    }
+
+    #banner>span {
+        float: left;
+        margin: 2.35em 0 1.5em 1em;
+    }
+
     #user_menu ul {
         font-size: 2em;
-        margin: 1em 0;
+        margin: .75em 0;
     }
 
     .template_info dl { max-width: none; }
