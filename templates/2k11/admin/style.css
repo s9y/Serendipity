@@ -1124,7 +1124,7 @@ summary {
 #edit_entry_category label { vertical-align: top; }
 
 
-.template_info { margin: 0 0 1em 3%;}
+.template_info { margin: 0 0 1em;}
 
 .template_info dl,
 fieldset p,
@@ -1188,7 +1188,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 #template_select .preview_image {
     float: left;
-    margin: 0 0 1em;
+    margin: 0 1em 1em 0;
     /* TESTING */
     overflow: hidden;
     height: 100px;
@@ -1380,6 +1380,8 @@ form > .button_link:first-of-type { margin-top: 0; }
     .configuration_group .form_select select,
     .configuration_group .form_field input { max-width: 48%; }
 
+    .template_info dl { max-width: 12em; }
+
     .configuration_group .form_select,
     .configuration_group .form_field,
     .configuration_group fieldset>fieldset,
@@ -1529,6 +1531,8 @@ form > .button_link:first-of-type { margin-top: 0; }
         font-size: 2em;
         margin: 1em 0;
     }
+
+    .template_info dl { max-width: none; }
 }
 
 

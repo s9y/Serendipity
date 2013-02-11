@@ -48,7 +48,7 @@
                             <dd>{$info.info.author}</dd>
                             <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                             <dd>{$info.info.date}</dd>
-                            <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt> {* Should be shortened *}
+                            <dt class="template_admin">Admin theme:</dt> {* i18n *}
                             <dd>{$info.info.custom_admin_interface}</dd>
                         </dl>
                     </details>
