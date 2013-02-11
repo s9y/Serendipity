@@ -85,9 +85,6 @@
             {$admin_vars.out.footer}
         {* </div> *}
     {else}
-        <div id="content" class="clearfix">
-        {$admin_vars.main_content}
-        </div>
         {if NOT $admin_vars.no_sidebar}
         <nav id="main_menu">
             <h2 class="visuallyhidden">Main menu</h2> {* i18n *}
@@ -178,6 +175,9 @@
             </ul>
         </nav>
         {/if}
+        <div id="content" class="clearfix">
+        {$admin_vars.main_content}
+        </div>
     {/if}
     </div>
 {if NOT $admin_vars.no_footer}

@@ -980,6 +980,23 @@ summary {
 #entries_list .form_check,
 .media_file footer { float: left; }
 
+#banner {
+    float: left;
+    margin: 0 2% 0 0;
+}
+
+#user_menu {
+    float: left;
+    margin: 0 0 0 2%;
+    text-align: right;
+}
+
+#banner,
+#user_menu { width: 48%; }
+
+.lt-ie8 #banner,
+.lt-ie8 #user_menu { width: 47.5%; }
+
 #mediaPropertyForm .media_file_preview {
     float: none;
     margin: 1.5em 0;
@@ -1083,12 +1100,14 @@ summary {
 #banner,
 #user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
 
+#banner>span { margin: 0 0 1.5em; }
+
 #user_menu ul {
     font-size: 1.5em;
-    margin: .5em 0;
+    margin: 1.25em 0 .75em;
 }
 
-#user_menu li { margin: 0 1em 0 0; }
+#user_menu li { margin: 0 0 0 1em; }
 
 
 /* CONTENT
@@ -1440,14 +1459,12 @@ form > .button_link:first-of-type { margin-top: 0; }
         width: auto;
     }
 
-    #banner,
-    #content {
+    #main_menu {
         float: left;
         margin: 0 2% 0 0;
     }
 
-    #user_menu,
-    #main_menu {
+    #content {
         float: right;
         margin: 0 0 0 2%;
     }
@@ -1483,12 +1500,6 @@ form > .button_link:first-of-type { margin-top: 0; }
     #main_menu { width: 23%; }
     .lt-ie8 #main_menu { width: 22.5%; }
 
-    .lt-ie8 #banner,
-    .lt-ie8 #user_menu { width: 47.5%; }
-
-    #banner,
-    #user_menu { width: 48%; }
-
     #content { width: 73%; }
     .lt-ie8 #content { width: 72.5%; }
 
@@ -1503,19 +1514,12 @@ form > .button_link:first-of-type { margin-top: 0; }
     #edit_entry_metadata select { width: 100%; }
 
 
-    #banner>span { margin: 0 0 1.5em; }
-
-    #user_menu li { margin: 0 0 0 1em; }
-
     #login { margin: 4em auto 1em; }
 
     #back_to_blog { margin: 1em auto 4em; }
 
     #moreFilter fieldset input,
     #moreFilter fieldset select { margin-bottom: .75em; }
-
-
-    #user_menu { text-align: right; }
 
     #user_menu ul {
         font-size: 1.5em;
