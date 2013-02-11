@@ -982,20 +982,20 @@ summary {
 
 #banner {
     float: left;
-    margin: 0 2% 0 0;
+    margin: 0 1% 0 0;
 }
 
 #user_menu {
     float: left;
-    margin: 0 0 0 2%;
+    margin: 0 0 0 1%;
     text-align: right;
 }
 
 #banner,
-#user_menu { width: 48%; }
+#user_menu { width: 49%; }
 
 .lt-ie8 #banner,
-.lt-ie8 #user_menu { width: 47.5%; }
+.lt-ie8 #user_menu { width: 48.5%; }
 
 #mediaPropertyForm .media_file_preview {
     float: none;
