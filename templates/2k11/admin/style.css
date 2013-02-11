@@ -974,15 +974,11 @@ summary {
 #serendipity_comments_list h4,
 .comment_data dt,
 .comment_data dd,
+.template_info,
 .template_info dt,
 .template_info dd,
 #entries_list .form_check,
-.template_info { float: left; }
-
-.media_file_preview {
-    float: left;
-    margin: 0 1em 0 0;
-}
+.media_file footer { float: left; }
 
 #mediaPropertyForm .media_file_preview {
     float: none;
@@ -1186,9 +1182,13 @@ form > .button_link:first-of-type { margin-top: 0; }
 .media_file,
 .media_file_preview img { border: 1px solid #aaa; }
 
-#template_select .preview_image {
+#template_select .preview_image,
+.media_file_preview {
     float: left;
     margin: 0 1em 1em 0;
+}
+
+#template_select .preview_image {
     /* TESTING */
     overflow: hidden;
     height: 100px;

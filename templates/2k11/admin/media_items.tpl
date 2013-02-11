@@ -15,7 +15,7 @@
                 <div class="form_check">
                     <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
                 </div>
-                <h3>{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
+                <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
@@ -33,9 +33,9 @@
                         <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
                         <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                     {/if}
-                        <li><b>{$CONST.SIZE_SHORT}:</b> {$file.nice_size} KB</li>
+                        <li><b>{$CONST.IMAGE_SIZE}:</b> {$file.nice_size} KB</li>
                     {if $file.realname != $file.diskname}
-                        <li>{$file.diskname}</li>
+                        <li title="{$file.diskname}">{$file.diskname|truncate:30:"&hellip;"}</li>
                     {/if}
                 {/if}
                     </ul>
