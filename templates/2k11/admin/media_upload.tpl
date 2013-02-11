@@ -20,35 +20,35 @@
         <input name="serendipity[adminAction]" type="hidden" value="add">
         {$media.form_hidden}
         <div id="foreign_upload" class="image_add_foreign">
-            <div class="form_field">
+            <div class="form_field clearfix">
                 {* Probably could use input[type=url] here … *}
                 <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
                 <input id="imageurl" name="serendipity[imageurl]" type="text" onchange="checkInputs()" value="">
             </div>
 
-            <div class="form_select">
+            <div class="form_select clearfix">
                 <label for="serendipity_imageimporttype">{$CONST.ENTER_MEDIA_URL_METHOD}</label>
                 <select name="serendipity[imageimporttype]">
                     <option value="image">{$CONST.FETCH_METHOD_IMAGE}</option>
                     <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
                 </select>
             </div>
+
+            <span class="standalone hilite_b">{$CONST.WORD_OR}</span>
         </div>
 
-        <span class="standalone hilite_b">{$CONST.WORD_OR}</span>
-
         <div id="upload_template">
-            <div class="form_field">
+            <div class="form_field clearfix">
                 <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
                 <input id="userfile_1" class="uploadform_userfile" name="serendipity[userfile][1]" type="file" onchange="checkInputs();">
             </div>
 
-            <div class="form_field">
+            <div class="form_field clearfix">
                 <label for="target_filename_1" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></label>
                 <input id="target_filename_1" class="uploadform_target_filename" name="serendipity[target_filename][1]" type="text" value="">
             </div>
 
-            <div class="form_select">
+            <div class="form_select clearfix">
                 <label for="target_directory_1" class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
                 <select id="target_directory_1" class="uploadform_target_directory" name="serendipity[target_directory][1]">
                     <option value="">{$CONST.BASE_DIRECTORY}</option>
