@@ -99,15 +99,14 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === 'debug') { 
         
             // We don't want the notices - but everything else !
-            $e = new Exception;
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
-            // trying to be as detailled as possible
-            if (function_exists('debug_backtrace')) {
-                print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)); // whether or not to populate the "object" index >= PHP 5.3.6
-            } else {
-                print_r($e);
+            // trying to be as detailled as possible - but beware using args containing sensibel data like passwords
+            if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
+                $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+                print_r($debugbacktrace);
             }
+
             throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
         }
