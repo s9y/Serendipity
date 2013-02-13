@@ -37,7 +37,7 @@
 
                 <div id="keyword_list" class="clearfix">
                 {foreach from=$media.keywords item="keyword"}
-                    <a href="#" onclick="AddKeyword('{$keyword|@escape}'); return false">{$keyword|@escape}</a>
+                    <a href="#" onclick="addKeyword('{$keyword|@escape}'); return false">{$keyword|@escape}</a>
                 {/foreach}
                 </div>
             </div>

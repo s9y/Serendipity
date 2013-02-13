@@ -86,7 +86,7 @@ function showFilters()  {
 }
 
 // Add another (image) keyword
-function AddKeyword(keyword)  {
+function addKeyword(keyword)  {
     s = document.getElementById('keyword_input').value;
     document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
 }
