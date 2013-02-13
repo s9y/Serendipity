@@ -20,6 +20,7 @@
 var thisForm;
 
 // ?
+// Used internally by wrapSelectionWithLink()
 function getMozSelection(txtarea) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
@@ -33,11 +34,13 @@ function getMozSelection(txtarea) {
 }
 
 // ?
+// Used internally by wrapSelectionWithLink()
 function getIESelection(txtarea) {
     return document.selection.createRange().text;
 }
 
 // ?
+// Used internally by wrapSelection()
 function mozWrap(txtarea, lft, rgt) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
@@ -57,6 +60,7 @@ function mozWrap(txtarea, lft, rgt) {
 }
 
 // ?
+// Used internally by wrapSelection()
 function IEWrap(txtarea, lft, rgt) {
     strSelection = document.selection.createRange().text;
 
@@ -67,7 +71,8 @@ function IEWrap(txtarea, lft, rgt) {
     }
 }
 
-// ?
+// Used by non-wysiwyg editor toolbar buttons to wrap selection
+// in a element associated with toolbar button
 function wrapSelection(txtarea, lft, rgt) {
     scrollPos = false;
 
@@ -87,7 +92,8 @@ function wrapSelection(txtarea, lft, rgt) {
     }
 }
 
-// ?
+// Used by non-wysiwyg editor toolbar buttons to wrap selection
+// in <a> element (only)
 function wrapSelectionWithLink(txtarea) {
     var my_link = prompt("Enter URL:","http://");
 
@@ -121,6 +127,7 @@ function wrapSelectionWithLink(txtarea) {
 /* end chris w. script */
 
 // ?
+// Used internally by wrapInsImage()
 function mozInsert(txtarea, str) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
@@ -137,7 +144,9 @@ function mozInsert(txtarea, str) {
     txtarea.value = s1 + str + s2 + s3;
 }
 
-// ?
+// Used by non-wysiwyg editor toolbar buttons to wrap selection
+// in <img> element (only); doesn't really "wrap", merely inserts
+// an <img> element before selected text
 function wrapInsImage(area) {
     var loc = prompt('Enter the Image Location: ');
 
@@ -149,7 +158,9 @@ function wrapInsImage(area) {
 }
 /* end Better-Editor functions */
 
-// ?
+// These are just "basic" flavors of the "better editor" functions
+// above; not sure when/if these are actually used?
+// insert <img>
 function serendipity_insImage (area) {
     var loc = prompt('Enter the Image Location: ');
 
@@ -162,13 +173,13 @@ function serendipity_insImage (area) {
     area.focus();
 }
 
-// ?
+// see above; generic insert
 function serendipity_insBasic (area, tag) {
     area.value = area.value + "<" + tag + "></" + tag + ">";
     area.focus();
 }
 
-// ?
+// see above; insert <a>
 function serendipity_insLink (area) {
     var loc      = prompt('Enter URL Location: ');
     var text     = prompt('Enter Description: ');
@@ -428,7 +439,7 @@ function serendipity_imageSelector_done(textarea) {
     parent.self.close();
 }
 
-// ?
+// Toggle extended entry editor
 function toggle_extended(setCookie) {
     var textarea = document.getElementById('serendipity[extended]');
     var button   = document.getElementById('option_extended');
@@ -453,7 +464,7 @@ function toggle_extended(setCookie) {
     }
 }
 
-//?
+// Collapses/expands the category selector
 var selector_toggle = new Array();
 
 function showItem(id) {
@@ -578,7 +589,7 @@ function rememberMediaOptions() {
     }
 }
 
-// ?
+// Rename file in media db
 function rename(id, fname) {
     if (newname = prompt(media_rename + fname, fname)) {
         newloc = '?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
@@ -600,8 +611,8 @@ function treeToggleAll() {
     }
 }
 
-// ?
-function getfilename(value) {
+// Used internally by fillInput; regexp replace
+function getFilename(value) {
     re = /^.+[\/\\]+?(.+)$/;
     return value.replace(re, "$1");
 }
@@ -679,10 +690,10 @@ function fillInput(source, target) {
     useDuplicate = false;
     // First field is a special value for foreign URLs instead of uploaded files
     if (source == 1 && document.getElementById('imageurl').value != "") {
-        sourceval = getfilename(document.getElementById('imageurl').value);
+        sourceval = getFilename(document.getElementById('imageurl').value);
         useDuplicate = true;
     } else {
-        sourceval = getfilename(document.getElementById('userfile_' + source).value);
+        sourceval = getFilename(document.getElementById('userfile_' + source).value);
     }
 
     if (sourceval.length > 0) {
