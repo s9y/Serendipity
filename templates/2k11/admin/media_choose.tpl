@@ -48,7 +48,7 @@
         } 
     </style>
     <script src="{serendipity_getFile file='dragdrop.js'}" ></script>
-    <script src="{serendipity_getFile file='imgedit.js'}" ></script>
+    <script src="{serendipity_getFile file='admin/imgedit.js'}" ></script>
 {/if}
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
