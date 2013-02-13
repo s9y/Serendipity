@@ -61,7 +61,8 @@ function chkAll(frm, arr, mark) {
 }
 
 // Inverts a selection of checkboxes
-// NOTE: also used in serendipity_event_karma
+// NOTE: – also used in serendipity_event_karma
+//       – similar function (but not duplicate!) exists in serendipity_editor.js
 function invertSelection() {
     var f = document.formMultiDelete;
 

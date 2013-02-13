@@ -15,8 +15,11 @@
     if there are any problems, let chris know.
 */
 
+
+// This variable isn't used anywhere else?
 var thisForm;
 
+// ?
 function getMozSelection(txtarea) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
@@ -25,13 +28,16 @@ function getMozSelection(txtarea) {
     if (selEnd==1 || selEnd==2) {
         selEnd=selLength;
     }
+
     return (txtarea.value).substring(selStart, selEnd);
 }
 
+// ?
 function getIESelection(txtarea) {
     return document.selection.createRange().text;
 }
 
+// ?
 function mozWrap(txtarea, lft, rgt) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
@@ -39,17 +45,21 @@ function mozWrap(txtarea, lft, rgt) {
 
     if (txtarea.setSelectionRange) {
         if (selEnd==1 || selEnd==2) selEnd=selLength;
+
         var s1 = (txtarea.value).substring(0,selStart);
         var s2 = (txtarea.value).substring(selStart, selEnd)
         var s3 = (txtarea.value).substring(selEnd, selLength);
+
         txtarea.value = s1 + lft + s2 + rgt + s3;
     } else {
         txtarea.value = txtarea.value + ' ' + lft + rgt + ' ';
     }
 }
 
+// ?
 function IEWrap(txtarea, lft, rgt) {
     strSelection = document.selection.createRange().text;
+
     if (strSelection != "") {
         document.selection.createRange().text = lft + strSelection + rgt;
     } else {
@@ -57,8 +67,10 @@ function IEWrap(txtarea, lft, rgt) {
     }
 }
 
+// ?
 function wrapSelection(txtarea, lft, rgt) {
     scrollPos = false;
+
     if (txtarea.scrollTop) {
         scrollPos = txtarea.scrollTop;
     }
@@ -75,6 +87,7 @@ function wrapSelection(txtarea, lft, rgt) {
     }
 }
 
+// ?
 function wrapSelectionWithLink(txtarea) {
     var my_link = prompt("Enter URL:","http://");
 
@@ -86,17 +99,20 @@ function wrapSelectionWithLink(txtarea) {
     var my_title = prompt("Enter title/tooltip:", "");
 
     html_title = "";
+
     if (my_title != "" && my_title != null) {
         html_title = ' title="' + my_title + '"';
     }
 
     if (my_link != null) {
         lft = "<a href=\"" + my_link + "\"" + html_title + ">";
+
         if (my_desc != null && my_desc != "") {
             rgt = my_desc + "</a>";
         } else {
             rgt = "</a>";
         }
+
         wrapSelection(txtarea, lft, rgt);
     }
 
@@ -104,31 +120,39 @@ function wrapSelectionWithLink(txtarea) {
 }
 /* end chris w. script */
 
+// ?
 function mozInsert(txtarea, str) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
     var selEnd = txtarea.selectionEnd;
+
     if (selEnd==1 || selEnd==2) {
         selEnd=selLength;
     }
+
     var s1 = (txtarea.value).substring(0,selStart);
     var s2 = (txtarea.value).substring(selStart, selEnd)
     var s3 = (txtarea.value).substring(selEnd, selLength);
+
     txtarea.value = s1 + str + s2 + s3;
 }
 
+// ?
 function wrapInsImage(area) {
     var loc = prompt('Enter the Image Location: ');
+
     if (!loc) {
         return;
     }
+
     mozInsert(area,'<img src="'+ loc + '" alt="" />');
 }
-
 /* end Better-Editor functions */
 
+// ?
 function serendipity_insImage (area) {
     var loc = prompt('Enter the Image Location: ');
+
     if (!loc) {
         area.focus();
         return;
@@ -138,11 +162,13 @@ function serendipity_insImage (area) {
     area.focus();
 }
 
+// ?
 function serendipity_insBasic (area, tag) {
     area.value = area.value + "<" + tag + "></" + tag + ">";
     area.focus();
 }
 
+// ?
 function serendipity_insLink (area) {
     var loc      = prompt('Enter URL Location: ');
     var text     = prompt('Enter Description: ');
@@ -154,6 +180,7 @@ function serendipity_insLink (area) {
     }
 
     html_title = "";
+
     if (my_title != "" && my_title != null) {
         html_title = ' title="' + my_title + '"';
     }
@@ -162,23 +189,23 @@ function serendipity_insLink (area) {
     area.focus();
 }
 
-function serendipity_imageSelector_addToElement (str, el)
-{
+// ?
+function serendipity_imageSelector_addToElement (str, el) {
     document.getElementById(el).value = str;
+
     if (document.getElementById(el).type != 'hidden' && document.getElementById(el).focus) {
         document.getElementById(el).focus();
     }
+
     if (document.getElementById(el).onchange) {
         document.getElementById(el).onchange();
     }
 }
 
-function serendipity_imageSelector_addToBody (str, textarea)
-{
-
+// ?
+function serendipity_imageSelector_addToBody (str, textarea) {
     // check for FCKEditor usage
     if (typeof(FCKeditorAPI) != 'undefined') {
-
         // if here the blog uses FCK editor
         var oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
 
@@ -189,9 +216,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             // if here just insert the text to the textarea ( named with the value of textarea variable )
             noWysiwygAdd( str, textarea );
         }
-    
     } else if(typeof(xinha_editors) != 'undefined') {
-
         // if here the blog uses Xinha editor
         var oEditor;
 
@@ -256,12 +281,13 @@ function serendipity_imageSelector_addToBody (str, textarea)
     }
 }
 
-// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
+// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
+// which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
-function noWysiwygAdd( str, textarea )
-{
+function noWysiwygAdd( str, textarea ) {
     // default case: no wysiwyg editor
     eltarget = '';
+
     if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
         eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']']
     } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) {
@@ -271,12 +297,12 @@ function noWysiwygAdd( str, textarea )
     }
     
     wrapSelection(eltarget, str, '');
+
     eltarget.focus();
 }
 
-
-function serendipity_imageSelector_done(textarea)
-{
+// ?
+function serendipity_imageSelector_done(textarea) {
     var insert = '';
     var img = '';
     var src = '';
@@ -327,6 +353,7 @@ function serendipity_imageSelector_done(textarea)
     styled = false; // Templates now do this.
 
     imgID = 0;
+
     if (f['imgID']) {
         imgID = f['imgID'].value;
     }
@@ -336,6 +363,7 @@ function serendipity_imageSelector_done(textarea)
     }
 
     floating = 'center';
+
     if (f['serendipity[align]'][0].checked == true) {
         img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
     } else if (f['serendipity[align]'][1].checked == true) {
@@ -355,6 +383,7 @@ function serendipity_imageSelector_done(textarea)
 
         prepend   = '';
         ilink     = f['serendipity[url]'].value;
+
         if (!targetval || targetval == 'none') {
             itarget = '';
         } else if (targetval == 'js') {
@@ -379,6 +408,7 @@ function serendipity_imageSelector_done(textarea)
 
     if (document.getElementById('serendipity_imagecomment').value != '') {
         comment = f['serendipity[imagecomment]'].value;
+
         block = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
               +     '<div class="serendipity_imageComment_img">' + insert + '</div>'
               +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
@@ -398,14 +428,17 @@ function serendipity_imageSelector_done(textarea)
     parent.self.close();
 }
 
+// ?
 function toggle_extended(setCookie) {
     var textarea = document.getElementById('serendipity[extended]');
     var button   = document.getElementById('option_extended');
     var tools    = document.getElementById('tools_extended');
+
     if ( textarea.style.display == 'none' ) {
         textarea.style.display = '';
         tools.style.display = '';
         button.src = minus_img;
+
         if (setCookie == true) {
             document.cookie = 'serendipity[toggle_extended]=true;';
         }
@@ -413,26 +446,31 @@ function toggle_extended(setCookie) {
         textarea.style.display = 'none';
         tools.style.display = 'none';
         button.src = plus_img;
+
         if (setCookie == true) {
             document.cookie = 'serendipity[toggle_extended]=;';
         }
     }
 }
 
+//?
 var selector_toggle = new Array();
+
 function showItem(id) {
     var selected = 0;
+
     if (typeof(id) == 'undefined' || typeof(id) == 'object') {
         id = 'categoryselector';
     }
 
     if (document.getElementById) {
         el = document.getElementById(id);
+
         if (selector_toggle[id] && selector_toggle[id] == 'off') {
             selector_restore[id] = new Array();
             selector_toggle[id]  = 'on';
 
-            /* Hack to make sure that when the single dropdown is shown, don't have multiple selections */
+            // Hack to make sure that when the single dropdown is shown, don't have multiple selections
             last = 0;
 
             for (i=0; i < el.options.length; i++) {
@@ -443,10 +481,12 @@ function showItem(id) {
                 }
 
                 if (selected > 1) {
-                    /* If there is more than one selected, we reset all those to false
-                       This is because otherwise the label will say 'No Category', but the categories will still be selected */
+                    // If there is more than one selected, we reset all those to false
+                    //
+                    // This is because otherwise the label will say 'No Category', but the
+                    // categories will still be selected
                     for (j=0; j < el.options.length; j++) {
-                        /* Save selection in array to later restore them */
+                        // Save selection in array to later restore them
                         if (el.options[j].selected == true) {
                             el.options[j].selected = false;
                             selector_restore[id][j] = 'on';
@@ -466,7 +506,7 @@ function showItem(id) {
 
             el.size = 1;
 
-            /* Show a normal dropdown */
+            // Show a normal dropdown
             if (el.multiple) {
                 el.multiple = false;
             }
@@ -485,7 +525,7 @@ function showItem(id) {
                 }
 
                 for (j=0; j < el.options.length; j++) {
-                    /* Save selection in array to later restore them */
+                    // Save selection in array to later restore them
                     if (el.options[j].selected == true) {
                         selector_restore[id][j] = 'on';
                         last = j;
@@ -496,10 +536,10 @@ function showItem(id) {
             el.size = cat_count;
             selector_toggle[id] = 'off';
 
-            /* Show multiple items */
+            // Show multiple items
             el.multiple = true;
 
-            /* Restore previously selected items? */
+            // Restore previously selected items?
             last = 0;
             for (i = 0; i < el.options.length; i++) {
                 if (selector_restore && selector_restore[id] && selector_restore[id][i] && selector_restore[id][i] == 'on') {
@@ -507,7 +547,8 @@ function showItem(id) {
                     if (el.options[i].selected != true) {
                         el.options[i].selected = true;
                         last = i;
-                        // [TODO] IE Bug: Don't ask me why, but this restoring only works in Internet Explorer if you put this:
+                        // [TODO] IE Bug: Don't ask me why, but this restoring only works in
+                        // Internet Explorer if you put this:
                         // alert('it doesnt matter what, just the alert is important');
                     }
                 }
@@ -518,8 +559,10 @@ function showItem(id) {
     }
 }
 
+// ?
 function rememberMediaOptions() {
     el = document.getElementById('imageForm');
+
     for (i = 0; i < el.elements.length; i++) {
         elname = new String(el.elements[i].name);
         elname = elname.replace(/\[/g, '_');
@@ -535,6 +578,7 @@ function rememberMediaOptions() {
     }
 }
 
+// ?
 function rename(id, fname) {
     if (newname = prompt(media_rename + fname, fname)) {
         newloc = '?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
@@ -542,7 +586,9 @@ function rename(id, fname) {
     }
 }
 
+// ?
 var tree_toggle_state = 'expand';
+
 function treeToggleAll() {
     if (tree_toggle_state == 'expand') {
         tree_toggle_state = 'collapse';
@@ -554,25 +600,31 @@ function treeToggleAll() {
     }
 }
 
+// ?
 function getfilename(value) {
     re = /^.+[\/\\]+?(.+)$/;
     return value.replace(re, "$1");
 }
 
+// ?
 isFileUpload = true;
+
 function hideForeign() {
     document.getElementById('foreign_upload').style.display = 'none';
     document.getElementById('imageurl').value = '';
     isFileUpload = false;
 }
 
+// ?
 function rememberUploadOptions() {
     td     = document.getElementById('target_directory_2');
     td_val = td.options[td.selectedIndex].value;
     SetCookie("addmedia_directory", td_val);
 }
 
+// ?
 var upload_fieldcount = 1;
+
 function addUploadField() {
     upload_fieldcount++;
 
@@ -608,7 +660,9 @@ function addUploadField() {
     document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
 }
 
+// ?
 var inputStorage = new Array();
+
 function checkInputs() {
     for (i = 1; i <= upload_fieldcount; i++) {
         if (!inputStorage[i]) {
@@ -620,9 +674,9 @@ function checkInputs() {
 
 }
 
+// ?
 function fillInput(source, target) {
     useDuplicate = false;
-
     // First field is a special value for foreign URLs instead of uploaded files
     if (source == 1 && document.getElementById('imageurl').value != "") {
         sourceval = getfilename(document.getElementById('imageurl').value);
@@ -635,7 +689,6 @@ function fillInput(source, target) {
         document.getElementById('target_filename_' + target).value = sourceval;
         inputStorage[target] = sourceval;
     }
-
     // Display filename in duplicate form as well!
     if (useDuplicate) {
         tkey = target + 1;
@@ -647,8 +700,8 @@ function fillInput(source, target) {
     }
 }
 
-
-/* outsourced from comments.inc.tpl */
+// outsourced from comments.inc.tpl
+// ?
 function FT_toggle(id) {
     if ( document.getElementById(id + '_full').style.display == '' ) {
         document.getElementById(id + '_full').style.display='none';
@@ -659,10 +712,15 @@ function FT_toggle(id) {
         document.getElementById(id + '_summary').style.display='none';
         document.getElementById(id + '_text').innerHTML = view_hide;
     }
+
     return false;
 }
+
+// ?
+// NOTE: similar function (but not duplicate!) exists in admin_scripts.js
 function invertSelection() {
     var f = document.formMultiDelete;
+
     for (var i = 0; i < f.elements.length; i++) {
         if( f.elements[i].type == 'checkbox' ) {
             f.elements[i].checked = !(f.elements[i].checked);
@@ -671,6 +729,8 @@ function invertSelection() {
     }
 }
 
+// ?
+// NOTE: hard-coded color values in JS. Ugh.
 var origborder = '';
 var origwidth = '';
 
@@ -680,7 +740,7 @@ function highlightComment(id, checkvalue) {
     if (origborder == '') {
         origborder = comment.style.borderColor;
         if (origborder == '') {
-            origborder = '#FFFFFF';
+            origborder = '#fff';
         }
     }
 
@@ -692,13 +752,12 @@ function highlightComment(id, checkvalue) {
     }
 
     if (checkvalue) {
-        comment.style.borderColor = '#FF0000';
+        comment.style.borderColor = '#f00';
         comment.style.borderWidth = origwidth;
     } else {
         comment.style.borderColor = '';
         comment.style.borderWidth = origwidth;
     }
 }
-
 
 // -->
