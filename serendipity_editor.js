@@ -136,7 +136,7 @@ function wrapSelectionWithLink(txtarea) {
 }
 /* end chris w. script */
 
-// ?
+// Adds img element to selected text
 // Used internally by wrapInsImage()
 function mozInsert(txtarea, str) {
     var selLength = txtarea.textLength;
@@ -210,7 +210,7 @@ function serendipity_insLink (area) {
     area.focus();
 }
 
-// ?
+// "Transfer" value from media db popup to form element?
 function serendipity_imageSelector_addToElement (str, el) {
     document.getElementById(el).value = str;
 
@@ -223,7 +223,7 @@ function serendipity_imageSelector_addToElement (str, el) {
     }
 }
 
-// ?
+// "Transfer" value from media db popup to wysiwyg?
 function serendipity_imageSelector_addToBody (str, textarea) {
     // check for FCKEditor usage
     if (typeof(FCKeditorAPI) != 'undefined') {
@@ -322,7 +322,7 @@ function noWysiwygAdd( str, textarea ) {
     eltarget.focus();
 }
 
-// ?
+// Inserting media db img markup including s9y-specific container markup?
 function serendipity_imageSelector_done(textarea) {
     var insert = '';
     var img = '';
