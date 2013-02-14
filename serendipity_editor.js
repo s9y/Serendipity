@@ -29,7 +29,7 @@
 // This variable isn't used anywhere else?
 var thisForm;
 
-// ?
+// Returns "position" of selection in textarea (Mozilla)?
 // Used internally by wrapSelectionWithLink()
 function getMozSelection(txtarea) {
     var selLength = txtarea.textLength;
@@ -43,13 +43,13 @@ function getMozSelection(txtarea) {
     return (txtarea.value).substring(selStart, selEnd);
 }
 
-// ?
+// Returns "position" of selection in textarea (IE)?
 // Used internally by wrapSelectionWithLink()
 function getIESelection(txtarea) {
     return document.selection.createRange().text;
 }
 
-// ?
+// Wraps selection in tags passed as arguments (Mozilla)
 // Used internally by wrapSelection()
 function mozWrap(txtarea, lft, rgt) {
     var selLength = txtarea.textLength;
@@ -69,7 +69,7 @@ function mozWrap(txtarea, lft, rgt) {
     }
 }
 
-// ?
+// Wraps selection in tags passed as arguments (IE)
 // Used internally by wrapSelection()
 function IEWrap(txtarea, lft, rgt) {
     strSelection = document.selection.createRange().text;
