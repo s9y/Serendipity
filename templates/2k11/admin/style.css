@@ -1551,7 +1551,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
     #banner>span {
         float: left;
-        margin: 2.35em 0 1.5em 1em;
+        margin: 2.35em 0 1.5em 3.2em;
     }
 
     #user_menu ul {
@@ -1567,4 +1567,6 @@ form > .button_link:first-of-type { margin-top: 0; }
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1400px) {
     body { font-size: 1.125em; }
+
+    #banner>span { margin: 2.35em 0 1.5em 2em; }
 }
