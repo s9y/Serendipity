@@ -1,4 +1,10 @@
-// I have no idea what this does. Anybody?
+// File referenced in:
+// – templates/*/admin/index.tpl
+// – templates/*/admin/media_choose.tpl
+
+// Fires functions which are generated dynamically in backend PHP files
+// (i.e. include/functions_entries_admin.inc.php) which load the various
+// WYSIWYG editors in entries editor, HTML nuggets etc.
 function spawn() {
     if (self.Spawnextended) {
         Spawnextended();

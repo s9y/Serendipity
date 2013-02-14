@@ -1,3 +1,13 @@
+// File referenced in:
+// – include/admin/tpl/category.inc.tpl
+// – include/admin/tpl/comments.inc.tpl
+// – include/admin/tpl/out_stack_loop.tpl
+// – include/functions_entries_admin.inc.php
+// – templates/*/admin/admin_scripts.js
+// – templates/*/admin/entries.tpl
+// – templates/*/admin/media_choose.tpl
+// – templates/*/admin/media_upload.tpl
+
 <!-- // Hide from older browsers
 /* $Id$ */
 /*
@@ -612,7 +622,7 @@ function treeToggleAll() {
 }
 
 // Used internally by fillInput; regexp replace
-function getFilename(value) {
+function getfilename(value) {
     re = /^.+[\/\\]+?(.+)$/;
     return value.replace(re, "$1");
 }
@@ -690,10 +700,10 @@ function fillInput(source, target) {
     useDuplicate = false;
     // First field is a special value for foreign URLs instead of uploaded files
     if (source == 1 && document.getElementById('imageurl').value != "") {
-        sourceval = getFilename(document.getElementById('imageurl').value);
+        sourceval = getfilename(document.getElementById('imageurl').value);
         useDuplicate = true;
     } else {
-        sourceval = getFilename(document.getElementById('userfile_' + source).value);
+        sourceval = getfilename(document.getElementById('userfile_' + source).value);
     }
 
     if (sourceval.length > 0) {

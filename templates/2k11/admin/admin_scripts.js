@@ -1,3 +1,9 @@
+// File referenced in:
+// – include/admin/tpl/entries.inc.tpl
+// – include/admin/tpl/serendipity_plugin_config.fnc.tpl
+// – include/functions_plugins_admin.inc.php
+// – templates/*/admin/media_pane.tpl
+
 // usage: log('inside coolFunc', this, arguments);
 // paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
 window.log = function f(){ log.history = log.history || []; log.history.push(arguments); if(this.console) { var args = arguments, newarr; try { args.callee = f.caller } catch(e) {}; newarr = [].slice.call(args); if (typeof console.log === 'object') log.apply.call(console.log, console, newarr); else console.log.apply(console, newarr);}};
@@ -87,7 +93,7 @@ function showFilters()  {
 }
 
 // Add another (image) keyword
-function addKeyword(keyword)  {
+function AddKeyword(keyword)  {
     s = document.getElementById('keyword_input').value;
     document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
 }

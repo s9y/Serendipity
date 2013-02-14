@@ -1,3 +1,6 @@
+// File referenced in:
+// – templates/*/admin/media_choose.tpl
+
 /**************************************************
  * imgedit.js
  * 2003-10-17
