@@ -607,7 +607,7 @@ function rename(id, fname) {
     }
 }
 
-// ?
+// Collapse/expand tree view in media db choose img popup window
 var tree_toggle_state = 'expand';
 
 function treeToggleAll() {
@@ -627,7 +627,8 @@ function getfilename(value) {
     return value.replace(re, "$1");
 }
 
-// ?
+// Hides the foreign upload form if batch upload is used (if more
+// images are added)
 isFileUpload = true;
 
 function hideForeign() {
@@ -643,7 +644,7 @@ function rememberUploadOptions() {
     SetCookie("addmedia_directory", td_val);
 }
 
-// ?
+// Clones the upload form template
 var upload_fieldcount = 1;
 
 function addUploadField() {
@@ -695,7 +696,7 @@ function checkInputs() {
 
 }
 
-// ?
+// Used internally by checkInputs
 function fillInput(source, target) {
     useDuplicate = false;
     // First field is a special value for foreign URLs instead of uploaded files
@@ -722,7 +723,9 @@ function fillInput(source, target) {
 }
 
 // outsourced from comments.inc.tpl
-// ?
+//
+// Collapse/expand the full length comment in comments list
+// NOTE: doesn't work/isn't used right nowf
 function FT_toggle(id) {
     if ( document.getElementById(id + '_full').style.display == '' ) {
         document.getElementById(id + '_full').style.display='none';
@@ -737,7 +740,7 @@ function FT_toggle(id) {
     return false;
 }
 
-// ?
+// Inverts a selection of checkboxes
 // NOTE: similar function (but not duplicate!) exists in admin_scripts.js
 function invertSelection() {
     var f = document.formMultiDelete;
@@ -750,8 +753,9 @@ function invertSelection() {
     }
 }
 
-// ?
-// NOTE: hard-coded color values in JS. Ugh.
+// Purely cosmetic function to highlight (multi-)selected comments
+// NOTE: hard-coded color values in JS. Ugh. It would be better to
+//       just add a class and let CSS do the rest.
 var origborder = '';
 var origwidth = '';
 
