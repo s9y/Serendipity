@@ -1064,6 +1064,9 @@ summary {
 #top {
     background: #25253d;
     color: #fcfcfc;
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,.5);
+    box-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
 
 #top a,
@@ -1159,6 +1162,9 @@ fieldset p,
 .comment_data,
 .configuration_group h3,
 form > .button_link:first-of-type { margin-top: 0; }
+
+#template_options,
+#pluginlist_sidebar { margin-bottom: 3em; }
 
 .configuration_group > fieldset { margin-bottom: 1.5em; }
 
@@ -1278,6 +1284,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 .pluginmanager_plugin .form_check,
 .pluginmanager_plugin h5,
 .media_file .form_check { margin: 0 0 1em; }
+
+.pluginmanager_description { margin: 0 0 .5em; }
 
 .media_file h3 { margin: .5em 0 1em; }
 
@@ -1551,7 +1559,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
     #banner>span {
         float: left;
-        margin: 2.35em 0 1.5em 3.2em;
+        margin: 2.35em 0 1.5em 3.35em;
     }
 
     #user_menu ul {
@@ -1559,7 +1567,7 @@ form > .button_link:first-of-type { margin-top: 0; }
         margin: .75em 0;
     }
 
-    .template_info dl { max-width: none; }
+    .template_info dl { max-width: 16em; }
 }
 
 
