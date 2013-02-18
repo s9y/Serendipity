@@ -821,6 +821,7 @@ input[type=checkbox] { margin-right: .4em; }
 
 .serendipity_commentDirection,
 .configuration_group fieldset>fieldset,
+#preview,
 .form_field,
 .form_area,
 .form_check,
@@ -1187,6 +1188,8 @@ form>.button_link:first-of-type { margin-top: 0; }
 
 #serendipity_admin_groups li ul div { margin-left: 1.5em; }
 
+.category_info { margin-left: 2.5em; }
+
 #template_select article,
 .media_file,
 .plugins_installable>li {
@@ -1436,7 +1439,9 @@ form>.button_link:first-of-type { margin-top: 0; }
     #uploadform .form_select select,
     #uploadform .form_field input,
     #serendipity_plugin_config fieldset legend,
-    #serendipity_plugin_config fieldset>.clearfix {
+    #serendipity_plugin_config fieldset>.clearfix,
+    #serendipity_category fieldset legend,
+    #serendipity_category fieldset>.clearfix {
         float: left;
         margin-right: 2%;
         width: 48%;
@@ -1539,6 +1544,12 @@ form>.button_link:first-of-type { margin-top: 0; }
     #media_pane_sort>.clearfix>div {
         float: left;
         width: 33% ;
+    }
+
+    #preview {
+        float: left;
+        margin-bottom: 2.25em;
+        width: 66%;
     }
 
     #filter_entries .form_select,

@@ -75,24 +75,6 @@
             </div>
 
             <div class="clearfix">
-                <div class="form_field">
-                    <label for="category_icon">{$CONST.IMAGE}</label>
-                    {* TODO: this should probably become/fallback to input[type=file] *}
-                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';">
-                    <script>
-                        var category_icon = document.getElementById('category_icon');
-                        var imgBtn        = document.createElement('div');
-                        imgBtn.id         = "insert_image";
-                        imgBtn.innerHTML  = '<input type="button" name="insImage" value="{$CONST.IMAGE}" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');">';
-                        category_icon.parentNode.insertBefore(imgBtn, category_icon.nextSibling);
-                    </script>
-                    <!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
-                    <figure id="preview" class="standalone">
-                        <figcaption>{$CONST.PREVIEW}</figcaption>
-                        <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape:"html"}" alt="">
-                    </figure>
-                </div>
-
                 <div class="form_multiselect">
                     <label for="read_authors">{$CONST.PERM_READ}</label>
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
@@ -114,10 +96,29 @@
                 </div>
             </div>
 
-            <fieldset>
-                <legend><span>{$CONST.CATEGORY_HIDE_SUB}</span></legend>
+            <div class="clearfix">
+                <div class="form_field">
+                    <label for="category_icon">{$CONST.IMAGE}</label>
+                    {* TODO: this should probably become/fallback to input[type=file] *}
+                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';">
+                    <script>
+                        var category_icon = document.getElementById('category_icon');
+                        var imgBtn        = document.createElement('div');
+                        imgBtn.id         = "insert_image";
+                        imgBtn.innerHTML  = '<input type="button" name="insImage" value="{$CONST.IMAGE}" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');">';
+                        category_icon.parentNode.insertBefore(imgBtn, category_icon.nextSibling);
+                    </script>
+                    <!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
+                </div>
 
-                <span class="block_level">{$CONST.CATEGORY_HIDE_SUB_DESC}</span>
+                <figure id="preview">
+                    <figcaption>{$CONST.PREVIEW}</figcaption>
+                    <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape:"html"}" alt="">
+                </figure>
+            </div>
+
+            <fieldset class="clearfix">
+                <legend><span>{$CONST.CATEGORY_HIDE_SUB} <span>{$CONST.CATEGORY_HIDE_SUB_DESC}</span></span></legend>
 
                 <div class="clearfix">
                     <div class="form_radio">
