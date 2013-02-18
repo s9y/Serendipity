@@ -1,5 +1,6 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
+
 {if $case_imgedit}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
 {/if}
@@ -340,7 +341,7 @@
         </form>
 
         <div id="serendipityScaleImg">
-            <img src="{$file}" name="serendipityScaleImg" style="width: {$img_width}px; height: {$img_height}px;" alt="">
+            <img src="{$file}" name="serendipityScaleImg" style="width: {$img_width}px;" alt="{$CONST.PREVIEW}">
         </div>
     </div>
 {/if}

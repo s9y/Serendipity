@@ -419,7 +419,8 @@ form > a,
 #image_directory_create_form label,
 #mediaPropertyForm .media_file_props label,
 #entries_list .entry_info span,
-.folder_name {
+.folder_name,
+#serendipityScaleForm .form_field label {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -1043,7 +1044,8 @@ summary {
 #serendipity_category .form_multiselect label { width: auto; }
 
 .editor_toolbar input,
-.comment_data dt { min-width: 4.25em; }
+.comment_data dt,
+#serendipityScaleForm .form_field label { min-width: 4.25em; }
 
 .category_data,
 .user_name,
@@ -1195,6 +1197,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 .media_file,
 .media_file_preview img,
 .plugins_installable>li { border: 1px solid #aaa; }
+
+#serendipityScaleImg img { max-width: 99%; }
 
 #template_select .preview_image,
 .media_file_preview {
