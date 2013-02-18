@@ -204,8 +204,9 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
     if ($serendipity['GET']['adminAction'] == 'edit') {
         $user = serendipity_fetchUsers($serendipity['GET']['userid']);
         $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
-        echo "userid: ";
-        echo $serendipity['GET']['userid'];
+        // Unless someone has an idea what purpose this serves …?
+        // echo "userid: ";
+        // echo $serendipity['GET']['userid'];
         if ($user[0]['userlevel'] >= $serendipity['serendipityUserlevel'] && $user[0]['authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminUsersMaintainOthers')) {
             $data['no_create_permission'] = true;
             $from = array();
