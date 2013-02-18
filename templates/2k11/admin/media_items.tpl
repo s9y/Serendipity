@@ -77,7 +77,7 @@
                     <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
                     <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                 {/if}
-                    <li><b>{$CONST.SIZE_SHORT}:</b> {$file.nice_size} KB</li>
+                    <li><b>{$CONST.IMAGE_SIZE}:</b> {$file.nice_size} KB</li>
                 </ul>
             </footer>
         
@@ -110,7 +110,7 @@
                 </div>
             {/if}
             {if $file.is_image}
-                <a class="button_link icon_link opens_window" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
+                <a class="button_link icon_link state_submit" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
             {/if}
             </section>
 

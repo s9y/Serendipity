@@ -418,6 +418,8 @@ form > a,
 #media_pane_sort label,
 #image_directory_create_form label,
 #mediaPropertyForm .media_file_props label,
+#mediaPropertyForm header b,
+#mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
 #serendipityScaleForm .form_field label {
@@ -980,8 +982,7 @@ summary {
 .template_info,
 .template_info dt,
 .template_info dd,
-#entries_list .form_check,
-.media_file footer { float: left; }
+#entries_list .form_check { float: left; }
 
 #mediaPropertyForm .media_file_preview {
     float: none;
@@ -1017,7 +1018,9 @@ summary {
 #media_pane_filter label,
 #media_pane_sort label,
 #image_directory_create_form label,
-#mediaPropertyForm .media_file_props label { width: 20%; }
+#mediaPropertyForm .media_file_props label,
+#mediaPropertyForm header b,
+#mediaPropertyForm footer b { width: 20%; }
 
 .category_data { width: 75%; }
 
