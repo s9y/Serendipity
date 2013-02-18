@@ -1,4 +1,3 @@
-
 <script type="text/javascript" language="JavaScript" src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
 
 <form style="display: inline; margin: 0px; padding: 0px;" method="get" action="?">
@@ -80,7 +79,6 @@
                             </td>
                             <td>&nbsp;</td>
                             {/if}
-                            </td>
                         </tr>
                         {/foreach}
                     </table>
