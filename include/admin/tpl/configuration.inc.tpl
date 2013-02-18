@@ -23,5 +23,5 @@
 {else}
     <h2>{$CONST.CONFIGURATION}</h2>
 
-    {$config|replace:'class="form_string"':'class="form_field"'|replace:'class="form_fullprotected"':'class="form_field"'|replace:'class="form_list"':'class="form_select"'|replace:'class="form_int"':'class="form_field"'}
+    {$config|replace:'class="form_string"':'class="form_field"'|replace:'class="form_fullprotected"':'class="form_field"'|replace:'class="form_list"':'class="form_select"'|replace:'class="form_int"':'class="form_field"'|replace:'class="form_textarea"':'class="form_area"'}
 {/if}

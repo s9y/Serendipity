@@ -17,18 +17,19 @@
     </div>
 {/if}
 {if $showTable}
-    <div id="serendipity_plugin_config">
+    <div id="serendipity_plugin_config" class="configuration_group">
 {/if}
 {if is_array($config_groups)}
         <a id="optionall" class="button_link icon_link standalone" href="#" onClick="showConfigAll({sizeof($config_groups)}); return false" title="{$CONST.TOGGLE_ALL}">{$CONST.TOGGLE_ALL}</a>
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <h2><a id="optionel{$config_groupkeys@iteration}" href="#" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h2>
         
-        <div id="el{$config_groupkeys@iteration}" class="plugin_optiongroup">
+        <fieldset id="el{$config_groupkeys@iteration}" class="plugin_optiongroup">
         {foreach $config_groupkeys AS $config_groupkey}
             {$OUT_STACK[$config_groupkey]}
         {/foreach}
-        </div>
+        </fieldset>
+        
         <script>document.getElementById('el{$config_groupkeys@iteration}').style.display = "none";</script>
     {/foreach}
         {* Is this really necessary? What for? *}
