@@ -1098,7 +1098,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         $f      = serendipity_parseFileName($files[$x]);
         if (empty($f[1]) || $f[1] == $files[$x]) {
             // No extension means bad file most probably. Skip it.
-            printf(SKIPPING_FILE_EXTENSION . '<br />', $files[$x]);
+            printf('<span class="msg_error"><span class="icon-attention"></span> ' . SKIPPING_FILE_EXTENSION . '</span>', $files[$x]);
             continue;
         }
 
@@ -1112,7 +1112,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         }
 
         if (!is_readable($ffull) || filesize($ffull) == 0) {
-            printf(SKIPPING_FILE_UNREADABLE . '<br />', $files[$x]);
+            printf('<span class="msg_error"><span class="icon-attention"></span> ' . SKIPPING_FILE_UNREADABLE . '</span>', $files[$x]);
             continue;
         }
 

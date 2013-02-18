@@ -5,6 +5,7 @@
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
 {/if}
 {if $case_sync}
+    <h2>{$CONST.CREATE_THUMBS}</h2>
     {if !$perm_adminImagesSync}
     <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
     {else}
@@ -34,7 +35,7 @@
 
         <div class="form_buttons">
             <input name="doSync" type="submit" value="{$CONST.CREATE_THUMBS}">
-            <a href="serendipity_admin.php" class="button_link icon_link">{$CONST.ABORT_NOW}</a>
+            <a href="serendipity_admin.php" class="button_link state_cancel">{$CONST.ABORT_NOW}</a>
         </div>
     </form>
     {/if}
