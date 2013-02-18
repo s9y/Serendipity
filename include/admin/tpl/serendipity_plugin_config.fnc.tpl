@@ -24,7 +24,7 @@
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <h2><a id="optionel{$config_groupkeys@iteration}" href="#" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h2>
         
-        <fieldset id="el{$config_groupkeys@iteration}" class="plugin_optiongroup">
+        <fieldset id="el{$config_groupkeys@iteration}" class="plugin_optiongroup{if $config_groupkeys@last} plugin_optiongroup_last{/if}">
         {foreach $config_groupkeys AS $config_groupkey}
             {$OUT_STACK[$config_groupkey]}
         {/foreach}
@@ -32,9 +32,6 @@
         
         <script>document.getElementById('el{$config_groupkeys@iteration}').style.display = "none";</script>
     {/foreach}
-        {* Is this really necessary? What for? *}
-        <div id="configuration_footer">&nbsp;</div>
-        {* If it is not, drop the inline style from CSS. *}
 {/if} {* foreach config_groups end *}
 
 {foreach $OUT_STACK_REST as $out_stack_config_item}

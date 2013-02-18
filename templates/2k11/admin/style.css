@@ -396,7 +396,7 @@ nav ol { padding: 0; }
 /* replace w/ .level_inblock */
 .icon_link,
 #insert_image,
-form > a,
+form>a,
 #user_menu li,
 .edit_actions li,
 .actions li,
@@ -431,8 +431,8 @@ form > a,
 /* replace w/ .level_block */
 .block_level,
 .form_multiselect label,
-label > span,
-legend > span > span,
+label>span,
+legend>span>span,
 #back_to_blog,
 #meta small,
 .msg_error,
@@ -463,7 +463,7 @@ table,
 details,
 .standalone,
 .form_buttons,
-form > a {
+form>a {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -800,10 +800,10 @@ optgroup {
 /* BACKEND FORM STYLES
    ----------------------------------------------------------------- */
 label,
-legend > span,
+legend>span,
 figcaption { font-weight: bold; }
 
-label > span,
+label>span,
 legend>span>span,
 input[type=checkbox] + label,
 input[type=radio] + label,
@@ -820,6 +820,7 @@ input[type=checkbox] { margin-right: .4em; }
 .form_check label { display: inline-block !important; }
 
 .serendipity_commentDirection,
+.configuration_group fieldset>fieldset,
 .form_field,
 .form_area,
 .form_check,
@@ -966,7 +967,7 @@ summary {
 
 /* LAYOUT
    ----------------------------------------------------------------- */
-#top > div,
+#top>div,
 #main {
     margin: 0 auto;
     max-width: 1280px;
@@ -1171,12 +1172,12 @@ fieldset p,
 
 .comment_data,
 .configuration_group h3,
-form > .button_link:first-of-type { margin-top: 0; }
+form>.button_link:first-of-type { margin-top: 0; }
 
 #template_options,
 #pluginlist_sidebar { margin-bottom: 3em; }
 
-.configuration_group > fieldset { margin-bottom: 1.5em; }
+.configuration_group>fieldset { margin-bottom: 1.5em; }
 
 .editor_toolbar { margin-top: .25em; }
 
@@ -1241,8 +1242,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 #entries_list>li,
 #serendipity_comments_list>li { padding: 0 0 0 .4em; }
 
-#categories li > ul,
-#serendipity_image_folders li > ul { padding: 0 0 0 1em; }
+#categories li>ul,
+#serendipity_image_folders li>ul { padding: 0 0 0 1em; }
 
 #categories .edit_actions li,
 #serendipity_image_folders .edit_actions li { padding: 0; }
@@ -1283,7 +1284,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
    (These might go into pluginmanager.css or be merged with it.)
    ----------------------------------------------------------------- */
-#configuration_footer { height: 100px; }
+.plugin_optiongroup_last { border-bottom: 1px solid #aaa; }
 
 .plugin_count {
     clear: both;
