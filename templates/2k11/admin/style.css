@@ -1125,7 +1125,8 @@ summary {
 #edit_entry_category label { vertical-align: top; }
 
 
-.template_info { margin: 0 0 1em;}
+.template_info,
+.plugin_info { margin: 0 0 1em;}
 
 .template_info dl,
 fieldset p,
@@ -1177,7 +1178,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 #serendipity_admin_groups li ul div { margin-left: 1.5em; }
 
 #template_select article,
-.media_file {
+.media_file,
+.plugins_installable>li {
     background: #eee;
     margin: 0 0 1em;
     padding: 0 .5em 1em;
@@ -1189,7 +1191,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 #template_select article,
 #serendipityScaleImg img,
 .media_file,
-.media_file_preview img { border: 1px solid #aaa; }
+.media_file_preview img,
+.plugins_installable>li { border: 1px solid #aaa; }
 
 #template_select .preview_image,
 .media_file_preview {
