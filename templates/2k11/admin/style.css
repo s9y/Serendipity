@@ -833,6 +833,8 @@ input[type=checkbox] { margin-right: .4em; }
     margin-bottom: .75em;
 }
 
+.importer_data dd { margin-bottom: .75em; }
+
 .comment_data,
 .comment_data dt,
 .template_info dt,
@@ -1145,6 +1147,11 @@ summary {
 fieldset p,
 .media_file_meta,
 .image_resize_hint p { margin: 0; }
+
+.importer_data .clearfix>div {
+    margin-top: 0;
+    margin-bottom: 0;
+}
 
 .actions,
 .edit_actions {

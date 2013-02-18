@@ -17,15 +17,16 @@
 
             <form action="" method="POST" enctype="multipart/form-data">
                 {$formToken}
-                <dl>
-                {foreach $fields as $field}
-                    <dt>{$field.text}</dt>
-                    <dd>{$field.guessedInput}</dd>
-                {/foreach}
-                </dl>
                 {if $notes}
                 <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.IMPORT_NOTES}: {$notes}</span>
                 {/if}
+                <dl class="importer_data">
+                {foreach $fields as $field}
+                    <dt>{$field.text}</dt>
+                    <dd class="clearfix">{$field.guessedInput}</dd>
+                {/foreach}
+                </dl>
+
                 <div class="form_buttons">
                     <input type="submit" value="{$CONST.IMPORT_NOW}">
                 </div>
