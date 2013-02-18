@@ -46,7 +46,7 @@
     {/if}
         <div class="form_field">
             <label for="group_name">{$CONST.NAME}</label>
-            {* BUG: Doesn't correctly pull the group name – $group_ vs $group. …? *}
+            {* BUG: Doesn't pull the group name; this doesn't work in 1.7, either. *}
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:"html"}">
         </div>
 
