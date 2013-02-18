@@ -250,7 +250,7 @@
     {/for}
     </ul>
     
-    <a class="button_link icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
+    <a class="button_link icon_link state_submit" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
 {/if}
 
 {* TODO: obsolete? *}

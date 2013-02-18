@@ -2,7 +2,8 @@
 {* jQuery: No *}
 
 {if !empty($errormsg)}
-    <span class="msg_error"><span class="attention"></span> {$errormsg}</span>
+    {* TODO: Not sure anything emitted here actually IS an error. *}
+    <span class="msg_error"><span class="icon-attention"></span> {$errormsg}</span>
 {/if}
 
 <script type="text/javascript">
@@ -85,9 +86,9 @@
 
         <div class="form_buttons">
             <input name="submit" type="submit" value="{$CONST.GO}">
-            {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
         </div>
     </form>
+    {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
 {if !is_array($sql)}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_COMMENTS}</span>
 

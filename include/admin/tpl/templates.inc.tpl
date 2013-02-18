@@ -58,9 +58,9 @@
                 <div class="template_status">
                 {if $template != $cur_template}
                     {if !$info.unmetRequirements}
-                    <a class="set_as_template button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">{$CONST.SET_AS_TEMPLATE}</a>
+                    <a class="state_submit button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}">{$CONST.SET_AS_TEMPLATE}</a>
                     {else}
-                    <span class="unmet_requirements block_level"><span class="icon-attention"></span> {$info.unmetRequirements}></span>
+                    <span class="unmet_requirements msg_error"><span class="icon-attention"></span> {$info.unmetRequirements}></span>
                     {/if}
                 {else}
                     <span class="installed block_level"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
