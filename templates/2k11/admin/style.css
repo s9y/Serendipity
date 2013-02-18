@@ -1455,7 +1455,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     #uploadform .form_select select,
     #uploadform .form_field input { max-width: 48%; }
 
-    .template_info dl { max-width: 12em; }
+    .template_info dl { font-size: .65em; }
 
     .configuration_group .form_select,
     .configuration_group .form_field,
@@ -1605,7 +1605,7 @@ form>.button_link:first-of-type { margin-top: 0; }
         margin: .75em 0;
     }
 
-    .template_info dl { max-width: 16em; }
+    .template_info dl { max-width: .8125em; }
 }
 
 
