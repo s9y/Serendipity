@@ -37,7 +37,7 @@
 
     AccessifyHTML5({
         header: '#top>div>div',
-        main:   '#main',
+        main:   '#content',
         footer: '#meta'
     });
 })(jQuery);
