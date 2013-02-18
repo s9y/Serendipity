@@ -35,7 +35,7 @@
 {/if}
 
 {if $edit || $new}
-    <form id="serendipity_admin_groups" action="?serendipity[adminModule]=groups" method="post">
+    <form id="serendipity_admin_groups" class="configuration_group" action="?serendipity[adminModule]=groups" method="post">
         {$formToken}
     {if $edit}
         <h3>{$CONST.EDIT}</h3>

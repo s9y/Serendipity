@@ -447,6 +447,7 @@ legend>span>span,
 #template_options .form_select label,
 #template_options .form_field label,
 .configuration_group .form_select label,
+.configuration_group .form_multiselect label,
 .configuration_group .form_field label,
 .configuration_group .form_area label { display: block; }
 
@@ -1043,6 +1044,7 @@ summary {
 #template_options .form_select select,
 #template_options .form_field input,
 .configuration_group .form_select select,
+.configuration_group .form_multiselect select,
 .configuration_group .form_field input,
 .configuration_group .form_area textarea,
 #uploadform .form_select select,
@@ -1154,6 +1156,7 @@ fieldset p,
 #entries_list .actions { margin-bottom: 0; }
 
 #entries_list .actions,
+.serendipityCommentForm,
 #formMultiDelete .form_buttons input { margin-top: .75em; }
 
 .media_file .actions { margin-top: 1em; }
@@ -1199,6 +1202,13 @@ form>.button_link:first-of-type { margin-top: 0; }
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+
+#serendipity_iframe {
+    margin-top: 1.5em;
+    -webkit-box-shadow: 0 0 4px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 0 4px rgba(0,0,0,.5);
+    box-shadow: 0 0 4px rgba(0,0,0,.5);
 }
 
 #template_select article,
@@ -1370,6 +1380,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     #template_options .form_select select,
     #template_options .form_field input,
     .configuration_group .form_select select,
+    .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
     .configuration_group .form_area textarea { max-width: 320px; }
 }
@@ -1427,9 +1438,11 @@ form>.button_link:first-of-type { margin-top: 0; }
     #template_options fieldset legend,
     #template_options fieldset>.clearfix,
     .configuration_group .form_select label,
+    .configuration_group .form_multiselect label,
     .configuration_group .form_field label,
     .configuration_group .form_area label,
     .configuration_group .form_select select,
+    .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
     .configuration_group fieldset>fieldset legend,
@@ -1450,6 +1463,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     #template_options .form_select select,
     #template_options .form_field input,
     .configuration_group .form_select select,
+    .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
     #uploadform .form_select select,
@@ -1458,6 +1472,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     .template_info dl { font-size: .65em; }
 
     .configuration_group .form_select,
+    .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
     .configuration_group fieldset>fieldset,
@@ -1465,6 +1480,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     .media_pane .odd { clear: left; }
 
     .configuration_group .form_select,
+    .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
     .configuration_group fieldset>fieldset,
@@ -1474,6 +1490,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     #serendipityScaleImg { margin-top: 2.25em; }
 
     .configuration_group fieldset>fieldset .form_radio,
+    #serendipity_plugin_config>fieldset .form_radio,
     #template_options fieldset .form_radio { margin-top: 0; }
 
     /* Plugin manager – might go into pluginmanager.css in the end */
@@ -1605,7 +1622,7 @@ form>.button_link:first-of-type { margin-top: 0; }
         margin: .75em 0;
     }
 
-    .template_info dl { max-width: .8125em; }
+    .template_info dl { font-size: .8125em; }
 }
 
 

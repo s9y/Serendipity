@@ -3,9 +3,7 @@
 
 {* serendipity_plugins_admin.inc.php::serendipity_plugin_config() - the OUT_STACK loop *}
     {if $ctype == 'seperator'}
-        {* This could just as well be replaced by a CSS-only solution … *}
         <hr>
-        {* … then again, hr has new meaning in HTML5. *}
     {/if}
     {if $ctype == 'select'}
         <div class="form_select">
