@@ -127,7 +127,7 @@
             <table>
             {foreach from=$meta_data key="meta_name" item="meta_value"}
                 <tr>
-                    <td valign="top"><em>{$meta_name}!</em></th>
+                    <td valign="top"><em>{$meta_name}!</em></td>
                     <td>{if is_array($meta_value)}<pre>{$meta_value|@print_r}</pre>{else}{$meta_value|@formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</td>
                 </tr>
             {/foreach}
