@@ -466,6 +466,8 @@ form > a {
 
 #categories,
 #categories ul,
+#serendipity_image_folders,
+#serendipity_image_folders ul,
 #serendipity_admin_groups ul,
 .imageMessage ul {
     list-style: none;
@@ -1209,13 +1211,17 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 .zebra_list,
 #categories .odd,
-#categories .even { border-top: 1px solid #aaa; }
+#categories .even,
+#serendipity_image_folders .odd,
+#serendipity_image_folders .even { border-top: 1px solid #aaa; }
 
 .zebra_list>li,
-#categories { border-bottom: 1px solid #aaa; }
+#categories,
+#serendipity_image_folders { border-bottom: 1px solid #aaa; }
 
 .zebra_list>.odd,
-#categories .odd { background: #eee; }
+#categories .odd,
+#serendipity_image_folders .odd { background: #eee; }
 
 #entries_list h3,
 #serendipity_comments_list h4 {
@@ -1224,10 +1230,10 @@ form > .button_link:first-of-type { margin-top: 0; }
 }
 
 #entries_list>li,
-#serendipity_image_folders li,
 #serendipity_comments_list>li { padding: 0 0 0 .4em; }
 
-#categories li > ul { padding: 0 0 0 1em; }
+#categories li > ul,
+#serendipity_image_folders li > ul { padding: 0 0 0 1em; }
 
 #categories .edit_actions li,
 #serendipity_image_folders .edit_actions li { padding: 0; }

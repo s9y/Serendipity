@@ -171,8 +171,12 @@
     </form>
 {/if}
 {if $case_directoryDoCreate}
-    {if $print_DIRECTORY_CREATED}{$print_DIRECTORY_CREATED}{/if}
-    {if $print_DIRECTORY_WRITE_ERROR}{$print_DIRECTORY_WRITE_ERROR}{/if}
+    {if $print_DIRECTORY_CREATED}
+    <span class="msg_success"><span class="icon-ok-circle"></span> {$print_DIRECTORY_CREATED}</span>
+    {/if}
+    {if $print_DIRECTORY_WRITE_ERROR}
+    <span class="msg_error"><span class="icon-attention"></span> {$print_DIRECTORY_WRITE_ERROR}</span>
+    {/if}
 {/if}
 {if $case_directoryCreate}
     <h2>{$CONST.CREATE_DIRECTORY}</h2>
@@ -208,16 +212,42 @@
 
     <h3>{$CONST.BASE_DIRECTORY}</h3>
 
-    <ul id="serendipity_image_folders" class="plainList zebra_list">
+    <ul id="serendipity_image_folders">
     {foreach $folders as $folder}
-        <li class="level_{$folder.depth} clearfix {cycle values="odd,even"}">
-            <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
-            <ul class="plainList clearfix edit_actions">
-                <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
-            </ul>
-        </li>
+        {if ! $folder@first}
+            {if $folder.depth > $priorDepth}
+                <ul>
+            {/if}
+
+            {if $folder.depth < $priorDepth}
+                </li>
+                {for $i=$folder.depth+1 to $priorDepth}
+                    </ul></li>
+                {/for}
+            {/if}
+
+            {if $folder.depth == $priorDepth}
+                </li>
+            {/if}
+        {/if}
+
+        {$priorDepth=$folder.depth}
+
+        <li>
+            <div class="clearfix {cycle values="odd,even"}">
+                <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
+
+                <ul class="plainList clearfix edit_actions">
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                </ul>
+            </div>
     {/foreach}
+    </li>
+    {for $i=1 to $priorDepth}
+        </ul></li>
+    {/for}
     </ul>
     
     <a class="button_link icon_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
