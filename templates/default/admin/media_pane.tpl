@@ -93,7 +93,6 @@
                             </td>
                             <td>&nbsp;</td>
                             {/if}
-                            </td>
                         </tr>
                         {/foreach}
                     </table>
