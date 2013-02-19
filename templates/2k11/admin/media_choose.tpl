@@ -77,7 +77,7 @@ if (parent.frames && parent.frames['tree']) {
 {else}
 <body id="{$media.body_id}">
 
-<div class="serendipityAdminContent">
+<div id="main" class="clearfix serendipityAdminContent">
 {if $media.case == 'external'}
     <!-- EXTERNAL MEDIA START -->
     {if $media.is_created OR $media.is_deleted}
@@ -266,7 +266,7 @@ if (parent.frames && parent.frames['tree']) {
     {/if}{* if $media.file.is_image is something else end *}
     {/if}{* if $perm_denied else end *}
 {elseif $media.case == 'tree'}
-    <div id="content">
+    <div id="content" class="clearfix">
         <form name="mainForm" action="javscript:;">
             <div class="newsItem">
                 <div id="expandcontractdiv">
@@ -277,10 +277,10 @@ if (parent.frames && parent.frames['tree']) {
         </form>
     </div>
 
-    <div id="footerContainer">
+    <div id="footerContainer" class="clearfix">
         <div id="footer">
-            <a id="newdirlink" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a>
-            <a id="managedirlink" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
+            <a id="newdirlink" class="button_link block_level" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a>
+            <a id="managedirlink" class="button_link block_level" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
         </div>
     </div>
 
