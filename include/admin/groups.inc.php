@@ -71,10 +71,6 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW'])) {
     } else {
         $from = array();
     }
-    // check being constant or var
-    $from['name']      = defined($from['name']) ? constant($from['name']) : $from['name'];
-    $from['confvalue'] = defined($from['confvalue']) ? constant($from['confvalue']) : $from['confvalue'];
-
     $data['from'] = $from;
 
     $allusers = serendipity_fetchUsers();
