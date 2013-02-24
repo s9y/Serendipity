@@ -130,48 +130,6 @@ function wrapInsImage(txtarea) {
 }
 /* end Better-Editor functions */
 
-// These are just "basic" flavors of the "better editor" functions
-// above; not sure when/if these are actually used?
-// insert <img>
-function serendipity_insImage (area) {
-    var loc = prompt('Enter the Image Location: ');
-
-    if (!loc) {
-        area.focus();
-        return;
-    }
-
-    area.value = area.value + '<img src="' + loc + '" alt="" />';
-    area.focus();
-}
-
-// see above; generic insert
-function serendipity_insBasic (area, tag) {
-    area.value = area.value + "<" + tag + "></" + tag + ">";
-    area.focus();
-}
-
-// see above; insert <a>
-function serendipity_insLink (area) {
-    var loc      = prompt('Enter URL Location: ');
-    var text     = prompt('Enter Description: ');
-    var my_title = prompt("Enter title/tooltip:", "");
-
-    if (!loc) {
-        area.focus();
-        return;
-    }
-
-    html_title = "";
-
-    if (my_title != "" && my_title != null) {
-        html_title = ' title="' + my_title + '"';
-    }
-
-    area.value = area.value + '<a href="' + loc + '"' + html_title + '>' + (text ? text : loc) + '</a>';
-    area.focus();
-}
-
 // "Transfer" value from media db popup to form element?
 function serendipity_imageSelector_addToElement (str, el) {
     document.getElementById(el).value = str;
