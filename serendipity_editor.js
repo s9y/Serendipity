@@ -29,72 +29,34 @@
 // This variable isn't used anywhere else?
 var thisForm;
 
-// Returns "position" of selection in textarea (Mozilla)?
+// Returns "position" of selection in textarea
 // Used internally by wrapSelectionWithLink()
-function getMozSelection(txtarea) {
-    var selLength = txtarea.textLength;
-    var selStart = txtarea.selectionStart;
-    var selEnd = txtarea.selectionEnd;
-
-    if (selEnd==1 || selEnd==2) {
-        selEnd=selLength;
-    }
-
-    return (txtarea.value).substring(selStart, selEnd);
-}
-
-// Returns "position" of selection in textarea (IE)?
-// Used internally by wrapSelectionWithLink()
-function getIESelection(txtarea) {
-    return document.selection.createRange().text;
-}
-
-// Wraps selection in tags passed as arguments (Mozilla)
-// Used internally by wrapSelection()
-function mozWrap(txtarea, lft, rgt) {
-    var selLength = txtarea.textLength;
-    var selStart = txtarea.selectionStart;
-    var selEnd = txtarea.selectionEnd;
-
-    if (txtarea.setSelectionRange) {
-        if (selEnd==1 || selEnd==2) selEnd=selLength;
-
-        var s1 = (txtarea.value).substring(0,selStart);
-        var s2 = (txtarea.value).substring(selStart, selEnd)
-        var s3 = (txtarea.value).substring(selEnd, selLength);
-
-        txtarea.value = s1 + lft + s2 + rgt + s3;
-    } else {
-        txtarea.value = txtarea.value + ' ' + lft + rgt + ' ';
-    }
-}
-
-// Wraps selection in tags passed as arguments (IE)
-// Used internally by wrapSelection()
-function IEWrap(txtarea, lft, rgt) {
-    strSelection = document.selection.createRange().text;
-
-    if (strSelection != "") {
-        document.selection.createRange().text = lft + strSelection + rgt;
-    } else {
-        txtarea.value = txtarea.value + lft + rgt;
-    }
+function getSelection($txtarea) {
+    var start = $txtarea[0].selectionStart;
+    var end = $txtarea[0].selectionEnd;
+    return $txtarea.val().substring(start, end);
 }
 
 // Used by non-wysiwyg editor toolbar buttons to wrap selection
 // in a element associated with toolbar button
-function wrapSelection(txtarea, lft, rgt) {
+function wrapSelection(txtarea, openTag, closeTag) {
     scrollPos = false;
 
     if (txtarea.scrollTop) {
         scrollPos = txtarea.scrollTop;
     }
 
-    if (document.all) {
-        IEWrap(txtarea, lft, rgt);
-    } else if (document.getElementById) {
-        mozWrap(txtarea, lft, rgt);
-    }
+    // http://stackoverflow.com/questions/1712417/jquery-wrap-selected-text-in-a-textarea
+    var $txtarea = jQuery(txtarea);
+    var len = $txtarea.val().length;
+    var start = $txtarea[0].selectionStart;
+    var end = $txtarea[0].selectionEnd;
+    var selectedText = $txtarea.val().substring(start, end);
+    var replacement = openTag + selectedText + closeTag;
+    $txtarea.val($txtarea.val().substring(0, start) + replacement + $txtarea.val().substring(end, len));
+
+    $txtarea[0].selectionStart = start + replacement.length
+    $txtarea[0].selectionEnd = start + replacement.length
     
     if (scrollPos) {
         txtarea.focus();
@@ -107,8 +69,7 @@ function wrapSelection(txtarea, lft, rgt) {
 function wrapSelectionWithLink(txtarea) {
     var my_link = prompt("Enter URL:","http://");
 
-    if (document.all && getIESelection(txtarea) == "" ||
-         document.getElementById && getMozSelection(txtarea) == "") {
+    if (getSelection(jQuery(txtarea) ) == "") {
         var my_desc = prompt("Enter Description", '');
     }
 
@@ -138,33 +99,34 @@ function wrapSelectionWithLink(txtarea) {
 
 // Adds img element to selected text
 // Used internally by wrapInsImage()
-function mozInsert(txtarea, str) {
-    var selLength = txtarea.textLength;
-    var selStart = txtarea.selectionStart;
-    var selEnd = txtarea.selectionEnd;
+function insertText(txtarea, str) {
+    $txtarea = jQuery(txtarea);
+    var selLength = $txtarea.val().length;
+    var selStart = $txtarea[0].selectionStart;
+    var selEnd = $txtarea[0].selectionEnd;
 
     if (selEnd==1 || selEnd==2) {
         selEnd=selLength;
     }
 
-    var s1 = (txtarea.value).substring(0,selStart);
-    var s2 = (txtarea.value).substring(selStart, selEnd)
-    var s3 = (txtarea.value).substring(selEnd, selLength);
+    var before = $txtarea.val().substring(0,selStart);
+    var after = $txtarea.val().substring(selStart);
 
-    txtarea.value = s1 + str + s2 + s3;
+    $txtarea.val(before + str + after);
+
+    $txtarea[0].selectionStart = selStart + str.length
+    $txtarea[0].selectionEnd = selStart + str.length
 }
 
 // Used by non-wysiwyg editor toolbar buttons to wrap selection
 // in <img> element (only); doesn't really "wrap", merely inserts
 // an <img> element before selected text
-function wrapInsImage(area) {
+function wrapInsImage(txtarea) {
     var loc = prompt('Enter the Image Location: ');
 
-    if (!loc) {
-        return;
+    if (loc) {
+        insertText(txtarea,'<img src="'+ loc + '" alt="" />');
     }
-
-    mozInsert(area,'<img src="'+ loc + '" alt="" />');
 }
 /* end Better-Editor functions */
 
