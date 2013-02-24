@@ -30,8 +30,6 @@ if (!defined('S9Y_FRAMEWORK_TRACKBACKS')) {
 function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = array(), $errMsg = "") {
     global $serendipity;
 
-    $serendipity['EditorBrowsers'] = '@(IE|Mozilla|Opera)@i';
-
     $draftD = '';
     $draftP = '';
     $categoryselector_expanded = false;
@@ -155,9 +153,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
             $template_vars['show_wysiwyg'] = true;
         }
 
-        if (preg_match($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
-            $template_vars['wysiwyg_advanced'] = true;
-        }
+        $template_vars['wysiwyg_advanced'] = true;
 
         $template_vars['timestamp']                 = serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time());
         $template_vars['reset_timestamp']           = serendipity_serverOffsetHour(time());
@@ -379,7 +375,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                     <div id="tools_entry" style="display: none">
 <?php
         /* Since the user has WYSIWYG editor disabled, we want to check if we should use the "better" non-WYSIWYG editor */
-        if (!$serendipity['wysiwyg'] && preg_match($serendipity['EditorBrowsers'], $_SERVER['HTTP_USER_AGENT']) ) {
+        if (!$serendipity['wysiwyg']) {
             if ($serendipity['nl2br']['iso2br']) { ?>
                         <input type="button" class="serendipityPrettyButton input_button" name="insX" value="NoBR" accesskey="x" style="font-style: italic" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')" />
 <?php
@@ -393,20 +389,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                         <input type="button" class="serendipityPrettyButton input_button" name="insImage" value="<?php echo MEDIA; ?>" style="" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');" />
                         <input type="button" class="serendipityPrettyButton input_button" name="insURL" value="URL" accesskey="l" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[body]'])" />
 <?php
-        /* Do the "old" non-WYSIWYG editor */
-        } elseif (!$serendipity['wysiwyg']) {
-            if ($serendipity['nl2br']['iso2br']) { ?>
-                        <input type="button" class="serendipityPrettyButton input_button" value=" NoBR " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'x')" />
-<?php
-            }
-?>
-                        <input type="button" class="serendipityPrettyButton input_button" value=" B " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'b')" />
-                        <input type="button" class="serendipityPrettyButton input_button" value=" U " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'u')" />
-                        <input type="button" class="serendipityPrettyButton input_button" value=" I " onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'i')" />
-                        <input type="button" class="serendipityPrettyButton input_button" value="<img>" onclick="serendipity_insImage(document.forms['serendipityEntry']['serendipity[body]'])" />
-                        <input type="button" class="serendipityPrettyButton input_button" value="<?php echo MEDIA; ?>" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no');" />
-                        <input type="button" class="serendipityPrettyButton input_button" value="Link" onclick="serendipity_insLink(document.forms['serendipityEntry']['serendipity[body]'])" />
-<?php   }
+        }
 
         serendipity_plugin_api::hook_event('backend_entry_toolbar_body', $entry);
 ?>
