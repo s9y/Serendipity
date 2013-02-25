@@ -130,71 +130,40 @@ function wrapInsImage(txtarea) {
 }
 /* end Better-Editor functions */
 
-// "Transfer" value from media db popup to form element?
-function serendipity_imageSelector_addToElement (str, el) {
-    document.getElementById(el).value = str;
+// "Transfer" value from media db popup to form element, used for example for selecting a category-icon
+function serendipity_imageSelector_addToElement (str, id) {
+    var $input = jQuery('#'+id);
+    $input.val(str);
 
-    if (document.getElementById(el).type != 'hidden' && document.getElementById(el).focus) {
-        document.getElementById(el).focus();
+    if ($input.attr('type') != 'hidden') {
+        $input.focus();    // IE would generate an error when focusing an hidden element
     }
 
-    if (document.getElementById(el).onchange) {
-        document.getElementById(el).onchange();
-    }
+    // calling the change-event for doing stuff like generating the preview-image
+    $input.change();
 }
 
-// "Transfer" value from media db popup to wysiwyg?
+// "Transfer" value from media db popup to textarea, including wysiwyg
+// This gets textarea="body"/"extended" and tries to insert into the textarea named serendipity[body]/serendipity[extended]
 function serendipity_imageSelector_addToBody (str, textarea) {
-    // check for FCKEditor usage
+    var oEditor;
     if (typeof(FCKeditorAPI) != 'undefined') {
-        // if here the blog uses FCK editor
-        var oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
+        oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
 
         if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG) {
-            // if here the editior is in WYSIWYG mode so use the insert html function
             oEditor.InsertHtml(str);
-        } else {
-            // if here just insert the text to the textarea ( named with the value of textarea variable )
-            noWysiwygAdd( str, textarea );
+            return;
         }
     } else if(typeof(xinha_editors) != 'undefined') {
-        // if here the blog uses Xinha editor
-        var oEditor;
-
         if (typeof(xinha_editors['serendipity[' + textarea + ']']) != 'undefined') {
-            // this is good for the two default editors (body & extended)
             oEditor = xinha_editors['serendipity['+ textarea +']'];
-        } else if (typeof(xinha_editors[textarea]) != 'undefined') {
-            // this should work in any other cases than previous one
-            oEditor = xinha_editors[textarea];
-        } else {
-            // this is the last chance to retrieve the instance of the editor !
-            // editor has not been registered by the name of it's textarea
-            // so we must iterate over editors to find the good one
-            for (var editorName in xinha_editors) {
-                if ('serendipity[' + textarea + ']' == xinha_editors[editorName]._textArea.name) {
-                    oEditor = xinha_editors[editorName];
-                    break;
-                }
-            }
         }
 
-        // the actual insert for the xinha editor
         if (oEditor) {
-            if (oEditor._editMode != 'textmode') {
-                // if here the editior is in WYSIWYG mode so use the insert html function
-                oEditor.insertHTML(str);
-            } else {
-                // if here just insert the text to the textarea ( named with the value of textarea variable )
-                noWysiwygAdd(str, textarea);
-            }
-        } else {
-            noWysiwygAdd(str, textarea);
+            oEditor.insertHTML(str);
+            return;
         }
     } else if(typeof(HTMLArea) != 'undefined') {
-        // if here the blog uses HTMLArea editor
-        var oEditor;
-
         if (textarea == 'body' && typeof(editorbody) != 'undefined') {
             oEditor = editorbody;
         } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') {
@@ -203,46 +172,27 @@ function serendipity_imageSelector_addToBody (str, textarea) {
             oEditor =  htmlarea_editors[textarea];
         }
 
-        // the actual insert for the HTMLArea editor
         if (oEditor._editMode != 'textmode') {
-            // if here the editior is in WYSIWYG mode so use the insert html function
             oEditor.insertHTML(str);
-        } else {
-            // if here just insert the text to the textarea ( named with the value of textarea variable )
-            noWysiwygAdd(str, textarea);
-        }
-    
+            return;
+        } 
     } else if(typeof(TinyMCE) != 'undefined') {
         // for the TinyMCE editor we do not have a text mode insert
-
-        //tinyMCE.execCommand('mceInsertContent', false, str);
         tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
-    } else  {
-        noWysiwygAdd(str, textarea);
+        return;
     }
+    
+    noWysiwygAdd(str, textarea);
 }
 
 // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
 // which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
 function noWysiwygAdd( str, textarea ) {
-    // default case: no wysiwyg editor
-    eltarget = '';
-
-    if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
-        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']']
-    } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) {
-        eltarget = document.forms['serendipityEntry'][textarea];
-    } else {
-        eltarget = document.forms[0].elements[0];
-    }
-    
-    wrapSelection(eltarget, str, '');
-
-    eltarget.focus();
+    wrapSelection(jQuery('textarea[name="serendipity['+textarea+']"]'), str, '');
 }
 
-// Inserting media db img markup including s9y-specific container markup?
+// Inserting media db img markup including s9y-specific container markup
 function serendipity_imageSelector_done(textarea) {
     var insert = '';
     var img = '';
@@ -252,36 +202,34 @@ function serendipity_imageSelector_done(textarea) {
 
     var f = document.forms['serendipity[selForm]'].elements;
 
+    img           = f['imgName'].value;
+    var imgWidth  = f['imgWidth'].value;
+    var imgHeight = f['imgHeight'].value;
     if (f['serendipity[linkThumbnail]'] && f['serendipity[linkThumbnail]'][0].checked == true) {
         img       = f['thumbName'].value;
         imgWidth  = f['imgThumbWidth'].value;
         imgHeight = f['imgThumbHeight'].value;
-    } else {
-        img       = f['imgName'].value;
-        imgWidth  = f['imgWidth'].value;
-        imgHeight = f['imgHeight'].value;
     }
+        
 
     if (f['serendipity[filename_only]']) {
-        if (f['serendipity[htmltarget]']) {
-            starget = f['serendipity[htmltarget]'].value;
-        } else {
-            starget = 'serendipity[' + textarea + ']';
-        }
+        // this part is used when selecting only the image without further markup (-> category-icon)
+        var starget = f['serendipity[htmltarget]'] ? f['serendipity[htmltarget]'].value : 'serendipity[' + textarea + ']';
 
-        if (f['serendipity[filename_only]'].value == 'true') {
+        switch(f['serendipity[filename_only]'].value) {
+        case 'true':
             parent.self.opener.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
             parent.self.close();
             return true;
-        } else if (f['serendipity[filename_only]'].value == 'id') {
+        case 'id':
             parent.self.opener.serendipity_imageSelector_addToElement(f['imgID'].value, starget);
             parent.self.close();
             return true;
-        } else if (f['serendipity[filename_only]'].value == 'thumb') {
+        case 'thumb':
             parent.self.opener.serendipity_imageSelector_addToElement(f['thumbName'].value, starget);
             parent.self.close();
             return true;
-        } else if (f['serendipity[filename_only]'].value == 'big') {
+        case 'big':
             parent.self.opener.serendipity_imageSelector_addToElement(f['imgName'].value, starget);
             parent.self.close();
             return true;
@@ -290,82 +238,58 @@ function serendipity_imageSelector_done(textarea) {
 
     alt = f['serendipity[alt]'].value.replace(/"/g, "&quot;");
     title = f['serendipity[title]'].value.replace(/"/g, "&quot;");
-    
-    styled = false; // Templates now do this.
 
-    imgID = 0;
-
+    var imgID = 0;
     if (f['imgID']) {
         imgID = f['imgID'].value;
     }
-    baseURL = '';
-    if (f['baseURL']) {
-        baseURL = f['baseURL'].value;
+
+    var floating = jQuery(':input[name="serendipity[align]"]:checked').val();
+    if (floating == "") {
+        floating = "center";
     }
+    img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
 
-    floating = 'center';
+    if (jQuery("#radio_islink_yes").attr("checked")) {
+        // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
+        var targetval = jQuery('#select_image_target').val();
 
-    if (f['serendipity[align]'][0].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_center\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
-    } else if (f['serendipity[align]'][1].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_left\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: left; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
-        floating = 'left';
-    } else if (f['serendipity[align]'][2].checked == true) {
-        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_right\" width=\"" + imgWidth + "\" height=\"" + imgHeight + "\" " + (styled ? 'style="float: right; border: 0px; padding-left: 5px; padding-right: 5px;"' : '') + ' src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
-        floating = 'right';
-    }
+        var prepend   = '';
+        var ilink     = f['serendipity[url]'].value;
+        var itarget = '';
 
-    if (f['serendipity[isLink]'][1].checked == true) {
-        if (f['serendipity[target]'].selectedIndex) {
-            targetval = f['serendipity[target]'].options[f['serendipity[target]'].selectedIndex].value;
-        } else {
-            targetval = '';
-        }
-
-        prepend   = '';
-        ilink     = f['serendipity[url]'].value;
-
-        if (!targetval || targetval == 'none') {
-            itarget = '';
-        } else if (targetval == 'js') {
-            itarget = ' onclick="F1 = window.open(\'' + f['serendipity[url]'].value + '\',\'Zoom\',\''
+        switch (targetval) {
+        case 'js':
+            var itarget = ' onclick="F1 = window.open(\'' + f['serendipity[url]'].value + '\',\'Zoom\',\''
                     + 'height=' + (parseInt(f['imgHeight'].value) + 15) + ','
                     + 'width='  + (parseInt(f['imgWidth'].value)  + 15) + ','
                     + 'top='    + (screen.height - f['imgHeight'].value) /2 + ','
                     + 'left='   + (screen.width  - f['imgWidth'].value)  /2 + ','
                     + 'toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes\'); return false;"';
-        } else if (targetval == '_blank') {
-            itarget = ' target="_blank"';
-        } else if (targetval == 'plugin') {
-            itarget = ' id="s9yisphref' + imgID + '" onclick="javascript:this.href = this.href + \'&amp;serendipity[from]=\' + self.location.href;"';
+            break;
+        case '_blank':
+            var itarget = ' target="_blank"';
+            break;
+        case 'plugin':
+            var itarget = ' id="s9yisphref' + imgID + '" onclick="javascript:this.href = this.href + \'&amp;serendipity[from]=\' + self.location.href;"';
             prepend = '<a title="' + ilink + '" id="s9yisp' + imgID + '"></a>';
-            ilink   = baseURL + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
+            ilink   = f['baseURL'].value + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
+            break;
         }
 
-        insert = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
-    } else {
-        insert = img;
-    }
+        var img = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
+    } 
 
-    if (document.getElementById('serendipity_imagecomment').value != '') {
-        comment = f['serendipity[imagecomment]'].value;
+    if (jQuery('#serendipity_imagecomment').val() != '') {
+        var comment = f['serendipity[imagecomment]'].value;
 
-        block = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
-              +     '<div class="serendipity_imageComment_img">' + insert + '</div>'
+        var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
+              +     '<div class="serendipity_imageComment_img">' + img + '</div>'
               +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
               + '</div>';
-    } else {
-        block = insert;
     }
 
-    if (typeof(parent.self.opener.htmlarea_editors) != 'undefined' && typeof(parent.self.opener.htmlarea_editors[textarea]) != 'undefined') {
-        parent.self.opener.htmlarea_editors[textarea].surroundHTML(block, '');
-    } else if (parent.self.opener.editorref) {
-        parent.self.opener.editorref.surroundHTML(block, '');
-    } else {
-        parent.self.opener.serendipity_imageSelector_addToBody(block, textarea);
-    }
-
+    parent.self.opener.serendipity_imageSelector_addToBody(img, textarea);
     parent.self.close();
 }
 
@@ -393,8 +317,6 @@ function toggle_extended(setCookie) {
         }
     }
 }
-
-
 
 // Collapses/expands the category selector
 function showItem(id) {

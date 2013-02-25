@@ -171,8 +171,8 @@
                     <b>{$CONST.IMAGE_AS_A_LINK}:</b>
                     <br />
 
-                    <input class="input_radio" type="radio" id="radio_islink_yes" type="radio" name="serendipity[isLink]" value="yes" {'isLink'|@ifRemember:'yes':true} /><label for="radio_islink_yes"> {$CONST.I_WANT_NO_LINK}</label><br />
-                    <input class="input_radio" type="radio" id="radio_islink_no"  type="radio" name="serendipity[isLink]" value="no"  {'isLink'|@ifRemember:'no'} /><label for="radio_islink_no"> {$CONST.I_WANT_IT_TO_LINK}</label>
+                    <input class="input_radio" type="radio" id="radio_islink_no" type="radio" name="serendipity[isLink]" value="no" {'isLink'|@ifRemember:'no':true} /><label for="radio_islink_no"> {$CONST.I_WANT_NO_LINK}</label><br />
+                    <input class="input_radio" type="radio" id="radio_islink_yes"  type="radio" name="serendipity[isLink]" value="yes"  {'isLink'|@ifRemember:'yes'} /><label for="radio_islink_yes"> {$CONST.I_WANT_IT_TO_LINK}</label>
                     {if $media.file.hotlink}
 
                     <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.path}" /><br />
@@ -181,7 +181,7 @@
                         <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.links.imagelinkurl}" /><br />
                     {/if}
 
-                    <label id="select_image_target">{$CONST.MEDIA_TARGET}</label>
+                    <label for="select_image_target">{$CONST.MEDIA_TARGET}</label>
                         <select name="serendipity[target]" id="select_image_target">
                             <option value="none"   {'target'|@ifRemember:'none':false:'selected'}>{$CONST.NONE}</option>
                             <option value="js"     {'target'|@ifRemember:'js':false:'selected'}>{$CONST.MEDIA_TARGET_JS}</option>
