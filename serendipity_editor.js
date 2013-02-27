@@ -414,46 +414,6 @@ function addUploadField() {
     document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
 }
 
-// ?
-var inputStorage = new Array();
-
-function checkInputs() {
-    for (i = 1; i <= upload_fieldcount; i++) {
-        if (!inputStorage[i]) {
-            fillInput(i, i);
-        } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) {
-            fillInput(i, i);
-        }
-    }
-
-}
-
-// Used internally by checkInputs
-function fillInput(source, target) {
-    useDuplicate = false;
-    // First field is a special value for foreign URLs instead of uploaded files
-    if (source == 1 && document.getElementById('imageurl').value != "") {
-        sourceval = getfilename(document.getElementById('imageurl').value);
-        useDuplicate = true;
-    } else {
-        sourceval = getfilename(document.getElementById('userfile_' + source).value);
-    }
-
-    if (sourceval.length > 0) {
-        document.getElementById('target_filename_' + target).value = sourceval;
-        inputStorage[target] = sourceval;
-    }
-    // Display filename in duplicate form as well!
-    if (useDuplicate) {
-        tkey = target + 1;
-
-        if (!inputStorage[tkey] || inputStorage[tkey] == document.getElementById('target_filename_' + tkey).value) {
-            document.getElementById('target_filename_' + (target+1)).value = sourceval;
-            inputStorage[target + 1] = '~~~';
-        }
-    }
-}
-
 // outsourced from comments.inc.tpl
 //
 // Collapse/expand the full length comment in comments list
