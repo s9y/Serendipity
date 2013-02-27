@@ -336,8 +336,6 @@ function showItem(id) {
 
 // save in the cookie which options were selected when inserting a image from the media db
 function rememberMediaOptions() {
-    var el = jQuery('#imageForm');
-
     jQuery('#imageForm :input').each(function(index, element) {
         var elname = element.name.replace(/\[/g, '_').replace(/\]/g, '');
 
