@@ -337,10 +337,8 @@ function showItem(id) {
 // save in the cookie which options were selected when inserting a image from the media db
 function rememberMediaOptions() {
     jQuery('#imageForm :input').each(function(index, element) {
-        var elname = element.name.replace(/\[/g, '_').replace(/\]/g, '');
-
         if (! (element.type == 'radio' && element.checked == false)) {
-            SetCookie(elname, jQuery(element).val());
+            SetCookie(element.name.replace(/\[/g, '_').replace(/\]/g, ''), jQuery(element).val());
         }
     });
 }
