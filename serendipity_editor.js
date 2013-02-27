@@ -345,9 +345,9 @@ function rememberMediaOptions() {
 
 // Rename file in media db
 function rename(id, fname) {
+    var newname;
     if (newname = prompt(media_rename + fname, fname)) {
-        newloc = '?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
-        location.href=newloc;
+        location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
     }
 }
 
@@ -367,44 +367,35 @@ function treeToggleAll() {
 
 // Used internally by fillInput; regexp replace
 function getfilename(value) {
-    re = /^.+[\/\\]+?(.+)$/;
-    return value.replace(re, "$1");
+    return value.replace(/^.+[\/\\]+?(.+)$/, "$1");
 }
 
 // Hides the foreign upload form if batch upload is used (if more
 // images are added)
-isFileUpload = true;
-
 function hideForeign() {
-    document.getElementById('foreign_upload').style.display = 'none';
-    document.getElementById('imageurl').value = '';
-    isFileUpload = false;
+    jQuery('#foreign_upload').hide();
+    jQuery('#imageurl').val('');
 }
 
-// ?
+// save in which directory the frist uploaded files is stored (the default when only isnerting one file)
 function rememberUploadOptions() {
-    td     = document.getElementById('target_directory_2');
-    td_val = td.options[td.selectedIndex].value;
-    SetCookie("addmedia_directory", td_val);
+    SetCookie("addmedia_directory", jQuery('#target_directory_2').val());
 }
 
 // Clones the upload form template
-var upload_fieldcount = 1;
-
 function addUploadField() {
-    upload_fieldcount++;
+    var upload_fieldcount = jQuery('.uploadform_userfile').length;
 
-    fields = jQuery('#upload_template').clone();
-    fields.attr('id', 'upload_form_' + upload_fieldcount);
-    fields.css('display', 'block');
+    var $fields = jQuery('#upload_template').clone();
+    $fields.attr('id', 'upload_form_' + upload_fieldcount);
+    $fields.css('display', 'block');
 
-    userfile             = jQuery('.uploadform_userfile',               fields);
-    userfile_label       = jQuery('.uploadform_userfile_label',         fields);
-    targetfilename       = jQuery('.uploadform_target_filename',        fields);
-    targetfilename_label = jQuery('.uploadform_target_filename_label',  fields);
-    targetdir            = jQuery('.uploadform_target_directory',       fields);
-    targetdir_label      = jQuery('.uploadform_target_directory_label', fields);
-    columncount          = jQuery('.uploadform_column_count',           fields);
+    var userfile             = jQuery('.uploadform_userfile',               $fields);
+    var userfile_label       = jQuery('.uploadform_userfile_label',         $fields);
+    var targetfilename       = jQuery('.uploadform_target_filename',        $fields);
+    var targetfilename_label = jQuery('.uploadform_target_filename_label',  $fields);
+    var targetdir            = jQuery('.uploadform_target_directory',       $fields);
+    var targetdir_label      = jQuery('.uploadform_target_directory_label', $fields);
 
     userfile.attr('id', 'userfile_' + upload_fieldcount);
     userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
@@ -418,10 +409,7 @@ function addUploadField() {
     targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
     targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
-    columncount.attr('id', 'column_count_' + upload_fieldcount);
-    columncount.attr('name', 'serendipity[column_count][' + upload_fieldcount + ']');
-
-    fields.insertBefore('#upload_form');
+    $fields.insertBefore('#upload_form');
 
     document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
 }
