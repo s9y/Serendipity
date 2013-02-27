@@ -334,23 +334,17 @@ function showItem(id) {
     }
 }
 
-// ?
+// save in the cookie which options were selected when inserting a image from the media db
 function rememberMediaOptions() {
-    el = document.getElementById('imageForm');
+    var el = jQuery('#imageForm');
 
-    for (i = 0; i < el.elements.length; i++) {
-        elname = new String(el.elements[i].name);
-        elname = elname.replace(/\[/g, '_');
-        elname = elname.replace(/\]/g, '');
+    jQuery('#imageForm :input').each(function(index, element) {
+        var elname = element.name.replace(/\[/g, '_').replace(/\]/g, '');
 
-        if (el.elements[i].type == 'radio') {
-            if (el.elements[i].checked) {
-                SetCookie(elname, el.elements[i].value);
-            }
-        } else if (typeof(el.elements[i].options) == 'object') {
-            SetCookie(elname, el.elements[i].options[el.elements[i].selectedIndex].value);
+        if (! (element.type == 'radio' && element.checked == false)) {
+            SetCookie(elname, jQuery(element).val());
         }
-    }
+    });
 }
 
 // Rename file in media db
