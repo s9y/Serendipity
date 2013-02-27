@@ -295,26 +295,17 @@ function serendipity_imageSelector_done(textarea) {
 
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
-    var textarea = document.getElementById('serendipity[extended]');
-    var button   = document.getElementById('option_extended');
-    var tools    = document.getElementById('tools_extended');
-
-    if ( textarea.style.display == 'none' ) {
-        textarea.style.display = '';
-        tools.style.display = '';
-        button.src = minus_img;
-
-        if (setCookie == true) {
-            document.cookie = 'serendipity[toggle_extended]=true;';
-        }
+    if (jQuery('textarea[name="serendipity[extended]"]:hidden').length > 0) {
+        jQuery('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id doesn't work
+        jQuery('#tools_extended').show();
+        jQuery('#option_extended').attr('src', minus_img);
     } else {
-        textarea.style.display = 'none';
-        tools.style.display = 'none';
-        button.src = plus_img;
-
-        if (setCookie == true) {
-            document.cookie = 'serendipity[toggle_extended]=;';
-        }
+        jQuery('textarea[name="serendipity[extended]"]').hide();
+        jQuery('#tools_extended').hide();
+        jQuery('#option_extended').attr('src', plus_img);
+    }
+    if (setCookie) {
+        document.cookie = 'serendipity[toggle_extended]=' + ((jQuery('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
     }
 }
 
