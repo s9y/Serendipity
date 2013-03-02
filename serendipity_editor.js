@@ -8,7 +8,6 @@
 // – templates/*/admin/media_choose.tpl
 // – templates/*/admin/media_upload.tpl
 
-<!-- // Hide from older browsers
 /* $Id$ */
 /*
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
@@ -16,13 +15,7 @@
 */
 
 /*
-    Written by chris wetherell
-    http://www.massless.org
-    chris [THE AT SIGN] massless.org
-
-    warning: it only works for IE4+/Win and Moz1.1+
-    feel free to take it for your site
-    if there are any problems, let chris know.
+    Based upon code written by chris wetherell,  http://www.massless.org, chris [THE AT SIGN] massless.org
 */
 
 // Returns "position" of selection in textarea
@@ -435,5 +428,3 @@ function invertSelection() {
 function highlightComment(id, checkvalue) {
     jQuery('#'+id).toggleClass('comment_selected');
 }
-
-// -->
