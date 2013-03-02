@@ -25,10 +25,6 @@
     if there are any problems, let chris know.
 */
 
-
-// This variable isn't used anywhere else?
-var thisForm;
-
 // Returns "position" of selection in textarea
 // Used internally by wrapSelectionWithLink()
 function getSelection($txtarea) {
@@ -365,11 +361,6 @@ function treeToggleAll() {
     }
 }
 
-// Used internally by fillInput; regexp replace
-function getfilename(value) {
-    return value.replace(/^.+[\/\\]+?(.+)$/, "$1");
-}
-
 // Hides the foreign upload form if batch upload is used (if more
 // images are added)
 function hideForeign() {
@@ -417,16 +408,14 @@ function addUploadField() {
 // outsourced from comments.inc.tpl
 //
 // Collapse/expand the full length comment in comments list
-// NOTE: doesn't work/isn't used right nowf
+// NOTE: isn't used right now in 2k11
 function FT_toggle(id) {
-    if ( document.getElementById(id + '_full').style.display == '' ) {
-        document.getElementById(id + '_full').style.display='none';
-        document.getElementById(id + '_summary').style.display='';
-        document.getElementById(id + '_text').innerHTML = view_full;
+    jQuery('#'+ id + '_full').toggle();
+    jQuery('#'+ id + '_summary').toggle();
+    if (jQuery('#'+ id + '_full:visible').length > 0) {
+        jQuery('#'+ id + '_text').text(view_full);
     } else {
-        document.getElementById(id + '_full').style.display='';
-        document.getElementById(id + '_summary').style.display='none';
-        document.getElementById(id + '_text').innerHTML = view_hide;
+        jQuery('#'+ id + '_text').text(view_hide);
     }
 
     return false;
@@ -435,46 +424,16 @@ function FT_toggle(id) {
 // Inverts a selection of checkboxes
 // NOTE: similar function (but not duplicate!) exists in admin_scripts.js
 function invertSelection() {
-    var f = document.formMultiDelete;
-
-    for (var i = 0; i < f.elements.length; i++) {
-        if( f.elements[i].type == 'checkbox' ) {
-            f.elements[i].checked = !(f.elements[i].checked);
-            f.elements[i].onclick();
-        }
-    }
+    jQuery('.input_checkbox').each(function(index, checkbox) {
+        jQuery(checkbox).attr('checked',  ! jQuery(checkbox).attr('checked'));
+        var id = 'comment_' + checkbox.name.replace(/.*\[.*\]\[(.*)\]/, "$1");   // gets the id from the name of the checkbox, which is serendipity[delete][id]
+        highlightComment(id, jQuery(checkbox).attr('checked'));
+    });
 }
 
-// Purely cosmetic function to highlight (multi-)selected comments
-// NOTE: hard-coded color values in JS. Ugh. It would be better to
-//       just add a class and let CSS do the rest.
-var origborder = '';
-var origwidth = '';
-
+// Purely cosmetic function to highlight/dehighlight a comment by toggling the class comment_selected
 function highlightComment(id, checkvalue) {
-    var comment = document.getElementById(id);
-
-    if (origborder == '') {
-        origborder = comment.style.borderColor;
-        if (origborder == '') {
-            origborder = '#fff';
-        }
-    }
-
-    if (origwidth == '') {
-        origwidth = comment.style.borderWidth;
-        if (origwidth == '' || origwidth == 0) {
-            origwidth = 1;
-        }
-    }
-
-    if (checkvalue) {
-        comment.style.borderColor = '#f00';
-        comment.style.borderWidth = origwidth;
-    } else {
-        comment.style.borderColor = '';
-        comment.style.borderWidth = origwidth;
-    }
+    jQuery('#'+id).toggleClass('comment_selected');
 }
 
 // -->
