@@ -1,7 +1,7 @@
-<?php # lang_cs.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
+<?php # lang_cs.inc.php 1.11 2013-03-03 12:45:15 VladaAjgl $
 
 /**
- *  @version 1.10
+ *  @version 1.11
  *  Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  *  All rights reserved.  See LICENSE file for licensing details
  *  Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
@@ -23,6 +23,8 @@
  *  @revisionDate 2011/04/17
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2012/01/08
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2013/03/03
  */
 $i18n_filename_from = array (
 'á','è','ï','é','ì','í','å','¾','ò','ó','à','ø','œ','š','','ú','ù','ı','Ÿ','',
@@ -1000,7 +1002,8 @@ $i18n_filename_to = array (
 @define('SUMMARY', 'Souhrn');
 
 // Next lines were added on 2012/05/29
-@define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
-@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
-@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
-@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+
+@define('ABOUT_TO_DELETE_FILES', 'Chystáte se smazat najednou celı balík souborù.<br />Pokud nìkterı z nich pouíváte ve svıch pøíspìvcích, bude mít tato akce za následek neplatné obrázky a odkazy.<br />Urèitì chcete pokraèovat?<br /><br />');
+@define('ARCHIVE_SORT_STABLE', 'Stabilní archivy');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Seøadí stránky archivu sestupnì, take pøíspìvky budou navdy na stejné stránce a nebudou se propadat na stránky s vyšším èíslem. Vyhledávací roboty je pak nebudou muset re-indexovat.');
+@define('PLAIN_ASCII_NAMES', '(ádné zvláštní znaky, háèky, èárky, pøehlásky)');

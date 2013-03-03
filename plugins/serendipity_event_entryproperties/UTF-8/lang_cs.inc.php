@@ -1,4 +1,4 @@
-<?php # lang_cs.inc.php 1381.2 2009-02-23 17:29:23 VladaAjgl $
+<?php # lang_cs.inc.php 1381.2 2013-03-03 12:44:53 VladaAjgl $
 
 /**
  *  @version 1381.2
@@ -7,7 +7,7 @@
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/14
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
- *  @revisionDate 2009/02/23
+ *  @revisionDate 2013/03/03
  */
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE',		'Rozšířené vlastnosti příspěvků');
@@ -46,3 +46,6 @@
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE',		'Editační obrazovka');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC',		'Zde vyberte, které prvky a v jakém pořadí má tento modul zobrazovat v procesu úprav příspěvku.');
+
+// Next lines were translated on 2013/03/03
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC4',		'Pro každé políčko můžete zadat výchozí hodnoty následujícím způsobem "VlastníPole1:Výchozí hodnota 1, VlastníPole2:Výchozí hodnota 2". Pokud potřebujete ve výchozích hodnotách použít znaky ":" (středník) a "," (čárka), dejte před ně zpětné lomítko "\\", například: "VlastníPole1:Chci\\: koláčky\\,muffiny a klobásky,VlastníPole2:Jo\\, už jsem spokojený." Pro lepší čitelnost můžete zapisovat definici každého pole na novou řádku.');

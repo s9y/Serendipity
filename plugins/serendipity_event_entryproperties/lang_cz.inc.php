@@ -1,11 +1,13 @@
-<?php # lang_cz.inc.php 1381.1 2009-02-14 15:43:34 VladaAjgl $
+<?php # lang_cz.inc.php 1381.2 2013-03-03 12:44:52 VladaAjgl $
 
 /**
- *  @version 1381.1
+ *  @version 1381.2
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  @author Vladimir Ajgl <vlada@ajgl.cz>
  *  @revisionDate 2009/02/14
+ *  @author Vladimír Ajgl <vlada@ajgl.cz>
+ *  @revisionDate 2013/03/03
  */
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE',		'Roz¹íøené vlastnosti pøíspìvkù');
@@ -44,3 +46,6 @@
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE',		'Editaèní obrazovka');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC',		'Zde vyberte, které prvky a v jakém poøadí má tento modul zobrazovat v procesu úprav pøíspìvku.');
+
+// Next lines were translated on 2013/03/03
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC4',		'Pro ka¾dé políèko mù¾ete zadat výchozí hodnoty následujícím zpùsobem "VlastníPole1:Výchozí hodnota 1, VlastníPole2:Výchozí hodnota 2". Pokud potøebujete ve výchozích hodnotách pou¾ít znaky ":" (støedník) a "," (èárka), dejte pøed nì zpìtné lomítko "\\", napøíklad: "VlastníPole1:Chci\\: koláèky\\,muffiny a klobásky,VlastníPole2:Jo\\, u¾ jsem spokojený." Pro lep¹í èitelnost mù¾ete zapisovat definici ka¾dého pole na novou øádku.');
