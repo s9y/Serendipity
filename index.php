@@ -400,6 +400,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
     $serendipity['view'] = 'plugin';
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+
+    #echo $serendipity["handler"]["test.js"];
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
     if (!defined('NO_EXIT')) {
         exit;
@@ -599,6 +602,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $serendipity['head_subtitle'] = $serendipity['blogTitle'];
     $serendipity['GET']['action']     = 'comments';
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+
+
 } else if (preg_match('@/(index(\.php|\.html)?)|'. preg_quote($serendipity['indexFile']) .'@', $uri) ||
            preg_match('@^/' . preg_quote(trim($serendipity['serendipityHTTPPath'], '/')) . '/?(\?.*)?$@', $uri)) {
 

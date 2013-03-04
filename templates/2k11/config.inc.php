@@ -97,3 +97,47 @@ $template_config_groups = NULL;
 $template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
+
+function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$addData) {
+    global $serendipity;
+    // Check what Event is coming in, only react to those we want.
+    switch($event) {
+        case 'external_plugin':
+            switch ($eventData) {
+                case 'serendipity_editor.js':
+                    smarty_show('serendipity_editor.js.tpl');
+                    break;
+                }
+        return true;
+        break;
+    }
+}
+
+/* Render a smarty-template
+ * $template: path to the template-file
+ * $data: map with the variables to assign
+ * */
+function smarty_show($template, $data = null) {
+    global $serendipity;
+    
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init();
+    }
+    
+    $serendipity['smarty']->assign($data);
+    
+    $tfile = serendipity_getTemplateFile($template, 'serendipityPath');
+
+    if ($tfile == $template) {
+        $tfile = dirname(__FILE__) . "/$template";
+    }
+    $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
+    $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
+    $content = $serendipity['smarty']->fetch('file:'. $tfile);
+    $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+
+    echo $content;
+}
+
+//echo "registering link to js-handler";
+//serendipity_registerHandler(dirname(__FILE__). '/test.php', 'test.js');
