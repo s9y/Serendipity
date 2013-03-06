@@ -363,6 +363,15 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     print $data;
     exit;
+} else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
+    $serendipity['view'] = 'plugin';
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+
+    #echo $serendipity["handler"]["test.js"];
+    serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
+    if (!defined('NO_EXIT')) {
+        exit;
+    }
 } else if (preg_match(PAT_ADMIN, $uri)) {
     $serendipity['view'] = 'admin';
     $base = $serendipity['baseURL'];
@@ -398,15 +407,6 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-} else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
-    $serendipity['view'] = 'plugin';
-    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-
-    #echo $serendipity["handler"]["test.js"];
-    serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
-    if (!defined('NO_EXIT')) {
-        exit;
-    }
 } else if ($is_multicat || preg_match(PAT_PERMALINK_CATEGORIES, $uri, $matches)) {
     $serendipity['view'] = 'categories';
 

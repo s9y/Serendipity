@@ -282,6 +282,11 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
         if (file_exists($serendipity['serendipityPath'] . $templateFile)) {
             return $serendipity[$key] . $templateFile;
         }
+
+        if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl")) {
+            # catch .js.tpl files served via the template-plugin-api
+            return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
+        }
     }
 
     if (preg_match('@\.(tpl|css|php)@i', $file) && !stristr($file, 'plugin')) {
@@ -2245,5 +2250,15 @@ function serendipity_passwordhash($cleartext_password) {
         return md5($cleartext_password);
     }
 }
+
+//function serendipity_registerHandler($handler, $link) {
+    //global $serendipity;
+//
+    //if ( ! is_array($serendipity["handler"])) {
+        //$serendipity["handler"] = array();
+    //}
+    //$serendipity["handler"][$link] = $handler;
+    //
+//}
 
 /* vim: set sts=4 ts=4 expandtab : */
