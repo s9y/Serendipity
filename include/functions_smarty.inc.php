@@ -1020,8 +1020,8 @@ function serendipity_smarty_init($vars = array()) {
 
         // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
         // setup custom smarty variables, modifiers etc. to use in their templates.
-        @include_once $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
-
+        include_once $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
+        
         if (is_array($template_loaded_config)) {
             $template_vars =& $template_loaded_config;
             $serendipity['smarty']->assignByRef('template_option', $template_vars);
@@ -1083,4 +1083,30 @@ function serendipity_smarty_shutdown($serendipity_directory = '') {
         $serendipity['smarty_file'] = '404.tpl';
     }
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
+}
+
+/* Render a smarty-template
+ * $template: path to the template-file
+ * $data: map with the variables to assign
+ * */
+function serendipity_smarty_show($template, $data = null) {
+    global $serendipity;
+    
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init();
+    }
+    
+    $serendipity['smarty']->assign($data);
+    
+    $tfile = serendipity_getTemplateFile($template, 'serendipityPath');
+
+    if ($tfile == $template) {
+        $tfile = dirname(__FILE__) . "/$template";
+    }
+    $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
+    $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
+    $content = $serendipity['smarty']->fetch('file:'. $tfile);
+    $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
+
+    echo $content;
 }
