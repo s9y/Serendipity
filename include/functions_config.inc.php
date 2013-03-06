@@ -2251,14 +2251,4 @@ function serendipity_passwordhash($cleartext_password) {
     }
 }
 
-//function serendipity_registerHandler($handler, $link) {
-    //global $serendipity;
-//
-    //if ( ! is_array($serendipity["handler"])) {
-        //$serendipity["handler"] = array();
-    //}
-    //$serendipity["handler"][$link] = $handler;
-    //
-//}
-
 /* vim: set sts=4 ts=4 expandtab : */
