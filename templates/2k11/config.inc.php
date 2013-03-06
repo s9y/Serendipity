@@ -103,7 +103,6 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
     // Check what Event is coming in, only react to those we want.
     switch($event) {
         case 'external_plugin':
-            echo $eventData;
             switch ($eventData) {
                 case 'admin/serendipity_editor.js':
                     serendipity_smarty_show('admin/serendipity_editor.js.tpl');
@@ -113,6 +112,3 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
         break;
     }
 }
-
-//echo "registering link to js-handler";
-//serendipity_registerHandler(dirname(__FILE__). '/test.php', 'test.js');
