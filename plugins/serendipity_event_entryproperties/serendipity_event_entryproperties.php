@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.32');
+        $propbag->add('version',       '1.33');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -569,7 +569,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     break;
 
                 case 'backend_sidebar_entries':
-                    if ($is_cache && $serendipity['userlevel'] >= USERLEVEL_ADMIN) {
+                    if ($is_cache && $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
 ?>
                         <li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks"><a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache"><?php echo PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE; ?></a></li>
 <?php
