@@ -6,9 +6,12 @@ Version 2.0 ()
     * When switching templates, both the backend and the frontend
       will remember the timestamp of the last template change,
       to make sure that the browser will not cache a mismatching CSS.
-      
+
+    * try to fix template change issues with global template vars in core (1559472ca3)
+      see 'temporary added empty $template_config_groups' in 1.7-rc2 (eb77dc396a)
+
     * Use Smarty for backend display output
-    
+
 Version 1.7 ()
 ------------------------------------------------------------------------
 
