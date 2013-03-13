@@ -3,29 +3,39 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * rc4: fixed entryproperties backend 'cache now' link
+
     * Media database: Escape more Cookie values to prevent storing
       possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
       Escape hotlinked media filename. Escape importer host name error
       Thanks to GreenSun from the forums for bringing this to attention,
       originally reported by Dshellnoi Unix
-                       
+
     * rc2: Alter entries.tpl to add the line:
       {assign var="entry" value=$entry scope="parent"}
       for proper propagation of $entry to sub-templates.
-      
+
     * rc2: Alter error reporting to only fail when 'debug' mode is enabled,
       so that "normal" blog installations will not fail on specific
       E_STRICT warnings that are not important.
-      
+
+    * rc2: temporary added empty $template_config_groups into templates with config,
+      to avoid display troubles for template changes, if previous template had these set.
+      Please check your template.
+
+    * rc2: reflect POST submitted changes in Bulletproof template configs re-set situations 
+
+    * various PHP 5 compatibility fixes in core and plugins
+
     * Allow entryproperties plugin to define defaults for custom fields
-    
+
     * Onyx, Net_URL classes: Remove PHP4 style constructor due to
       PHP5 error "Constructor already defined"
-      
+
     * Improved RSS sidebarplugin to support Atom 
-    
+
     * Bundled simplepie
-    
+
     * For Blogs running on a non-UTF-8 language, set a Smarty constant
       to indicate the actually used charset. 
 
