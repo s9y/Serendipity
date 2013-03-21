@@ -157,7 +157,7 @@ $tasks = array(array('version'   => '0.5.1',
                      . '<p><strong>function uninstall(&$propbag)</strong><br />'
                         . '<strong>function event_hook($event, &$bag, &$eventData, $addData = null)</strong></p>'
                         . '<p>Older plugins specifically did not always include the <strong>$addData</strong> signature. Make sure this exists.
-                        If after installation you get uncircumventable errors, you can make sure to set <strong>$serendipity[\'product\'] = true;</strong> in your <strong>serendipity_config_local.inc.php</strong> file. This should lower error reporting to a way that will not interfere with incompatible problem. But this is no solution in the long run, you need to update your plugins.
+                        If after installation you get uncircumventable errors, you can make sure to set <strong>$serendipity[\'production\'] = true;</strong> in your <strong>serendipity_config_local.inc.php</strong> file. This should lower error reporting to a way that will not interfere with incompatible problem. But this is no solution in the long run, you need to update your plugins.
                         Also, the serendipity_event_browsercompatibility plugin has been removed, because it\'s functionality was no longer required. You should uninstall that plugin if you are currently using it.</p>'),
 
                array('version'   => '1.7-rc2',
