@@ -31,7 +31,7 @@
 {/if}
 {if $staticpage_author or $staticpage_lastchange or $staticpage_adminlink}
     <footer class="staticpage_metainfo">
-        <small>
+        <p>
         {if $staticpage_author}
             <span class="single_user"><span class="visuallyhidden">{$CONST.POSTED_BY} </span>{$staticpage_author|@escape}
         {/if}
@@ -42,7 +42,7 @@
         {if $staticpage_adminlink AND $staticpage_adminlink.page_user}
             | <a href="{$staticpage_adminlink.link_edit}">{$staticpage_adminlink.link_name|@escape}</a>
         {/if}
-        </small>
+        </p>
     </footer>
 {/if}
 </article>

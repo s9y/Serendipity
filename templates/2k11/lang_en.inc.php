@@ -5,6 +5,10 @@
 @define('TWOK11_WEBFONTS', 'Use a webfont, hosted by Google?');
 @define('TWOK11_NOWEBFONT', 'Include no webfont');
 @define('TWOK11_USERSTYLES', 'Include user.css? (You need to create that file in your template directory. Generator: http://yellowled.github.com)');
+@define('TWOK11_IMGSTYLE', 'Design of images in entries');
+@define('TWOK11_IMGSTYLE_NONE', 'No border');
+@define('TWOK11_IMGSTYLE_BORDER', 'Simple border');
+@define('TWOK11_IMGSTYLE_SHADOW', 'Border shadow');
 @define('TWOK11_REFCOMMENTS', 'Add link to related comment to comments (if they are replies to another comment)?');
 // Lang constants
 @define('TWOK11_NAV_TITLE', 'Navigation');

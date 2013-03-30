@@ -80,6 +80,15 @@ $template_config = array(
         'default' => false
     ),
     array(
+        'var' => 'imgstyle',
+        'name' => TWOK11_IMGSTYLE,
+        'type' => 'select',
+        'default' => 'plain-images',
+        'select_values' => array('none' => TWOK11_IMGSTYLE_NONE,
+                                'plain-images' => TWOK11_IMGSTYLE_BORDER,
+                                'fancy-images' => TWOK11_IMGSTYLE_SHADOW)
+    ),
+    array(
         'var' => 'refcomments',
         'name' => TWOK11_REFCOMMENTS,
         'type' => 'boolean',

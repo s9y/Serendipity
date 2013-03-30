@@ -18,12 +18,14 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Cabin:400,400italic,700,700italic">
 {elseif $template_option.webfonts == 'ubuntu'}
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700,700italic">
+{elseif $template_option.webfonts == 'dserif'}
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
     <link rel="stylesheet" href="{$head_link_stylesheet}">
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script src="{serendipity_getFile file="js/modernizr-2.5.3.min.js"}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.6.2.min.js"}"></script>
 <script>
     window.onload = function() {ldelim}
         parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
@@ -38,10 +40,10 @@
 </head>
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 <div id="page" class="clearfix container">
-    <div id="main" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
-        <div id="content" class="clearfix" style="padding: 1em 0; margin: 0;">
+    <div class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
+        <main id="content" style="padding: 1em 0; margin: 0;">
         {$preview}
-        </div>
+        </main>
     </div>
 </div>
 </body>
