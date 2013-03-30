@@ -80,6 +80,15 @@ $template_config = array(
         'default' => false
     ),
     array(
+        'var' => 'imgstyle',
+        'name' => TWOK11_IMGSTYLE,
+        'type' => 'select',
+        'default' => 'plain-images',
+        'select_values' => array('none' => TWOK11_IMGSTYLE_NONE,
+                                'plain-images' => TWOK11_IMGSTYLE_BORDER,
+                                'fancy-images' => TWOK11_IMGSTYLE_SHADOW)
+    ),
+    array(
         'var' => 'refcomments',
         'name' => TWOK11_REFCOMMENTS,
         'type' => 'boolean',
@@ -97,18 +106,3 @@ $template_config_groups = NULL;
 $template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
-
-function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$addData) {
-    global $serendipity;
-    // Check what Event is coming in, only react to those we want.
-    switch($event) {
-        case 'external_plugin':
-            switch ($eventData) {
-                case 'admin/serendipity_editor.js':
-                    serendipity_smarty_show('admin/serendipity_editor.js.tpl');
-                    break;
-                }
-        return true;
-        break;
-    }
-}

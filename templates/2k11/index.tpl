@@ -69,10 +69,10 @@
         <ul class="clearfix">{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
     </nav>
     {/if}
-    <div id="main" class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
-        <div id="content" class="clearfix">
+    <div class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
+        <main id="content" {if $template_option.imgstyle != 'none'} class="{$template_option.imgstyle}"{/if}>
         {$CONTENT}
-        </div>
+        </main>
     {if $leftSidebarElements > 0}
         <aside id="sidebar_left">
             <h2 class="visuallyhidden">{$CONST.TWOK11_SIDEBAR}</h2>
@@ -88,7 +88,7 @@
     </div>
 
     <footer id="colophon">
-        <small lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</small>
+        <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</span></p>
     </footer>
 </div>
 <script src="{serendipity_getFile file="js/2k11.min.js"}"></script>

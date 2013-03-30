@@ -5,6 +5,10 @@
 @define('TWOK11_WEBFONTS', 'Einen von Google gehosteten Webfont nutzen?');
 @define('TWOK11_NOWEBFONT', 'Keinen Webfont einbinden');
 @define('TWOK11_USERSTYLES', 'user.css einbinden? (Muss selbst im Templateverzeichnis angelegt werden! Generator: http://yellowled.github.com)');
+@define('TWOK11_IMGSTYLE', 'Gestaltung von Bildern in Einträgen');
+@define('TWOK11_IMGSTYLE_NONE', 'Kein Rahmen');
+@define('TWOK11_IMGSTYLE_BORDER', 'Einfacher Rahmen');
+@define('TWOK11_IMGSTYLE_SHADOW', 'Schatten-Rahmen');
 @define('TWOK11_REFCOMMENTS', 'Kommentaren (falls vorhanden) einen Link zum Kommentar, auf den geantwortet wurde, hinzufügen?');
 // Sprachkonstanten
 @define('TWOK11_NAV_TITLE', 'Navigation');
