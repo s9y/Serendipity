@@ -111,7 +111,7 @@ if (!function_exists('errorToExceptionHandler')) {
                 print_r($debugbacktrace);
             }
             if (!S9Y_DBCON_HALT_ERROR) {
-                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS for db connect errors
+                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             } else {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
@@ -124,7 +124,7 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '<pre>';
             //print_r($args); // do this in strong test environments only, as containing sensible data! Better use debug!
             if (!S9Y_DBCON_HALT_ERROR) {
-                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS for db connect errors
+                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             } else {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
