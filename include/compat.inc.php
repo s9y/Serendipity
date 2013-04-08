@@ -110,11 +110,12 @@ if (!function_exists('errorToExceptionHandler')) {
                 }
                 print_r($debugbacktrace);
             }
-            if ($serendipity['dbConn']) {
-                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            } else {
+            //print_r($args); // debugging
+            // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
+            if (!$serendipity['dbConn']) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+            } else {
+                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             }
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
@@ -122,12 +123,11 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === false) { 
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
-            //print_r($args); // do this in strong test environments only, as containing sensible data! Better use debug!
-            if ($serendipity['dbConn']) {
-                // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            } else {
+            // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
+            if (!$serendipity['dbConn']) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+            } else {
+                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             }
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
