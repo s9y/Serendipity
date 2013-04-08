@@ -288,7 +288,6 @@ if (serendipity_FUNCTIONS_LOADED !== true) {
 if (!serendipity_db_connect()) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
-    define('S9Y_DBCON_HALT_ERROR', true);
     serendipity_die(DATABASE_ERROR);
 }
 
