@@ -28,7 +28,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.79');
+        $propbag->add('version',       '1.80');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -1259,7 +1259,7 @@ var $filter_defaults;
 
 
                 case 'external_plugin':
-                    $parts     = explode('_', $eventData);
+                    $parts     = explode('_', (string)$eventData);
                     if (!empty($parts[1])) {
                         $param     = (int) $parts[1];
                     } else {
