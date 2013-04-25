@@ -236,7 +236,7 @@ if (!$use_installer && $is_logged_in) {
         case 'integrity':
             echo '<div class="serendipity_admin_title">' . INTEGRITY . '</div>';
             $badsums = array();
-            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
+            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php') || 0 == filesize(S9Y_INCLUDE_PATH . 'checksums.inc.php') ) {
                 echo '<span class="serendipityAdminMsgNote">' . CHECKSUMS_NOT_FOUND . '</span>';
                 break;
             }
