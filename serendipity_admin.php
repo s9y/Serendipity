@@ -251,7 +251,7 @@ if (!$use_installer && $is_logged_in) {
         case 'integrity':
             echo '<h2>' . INTEGRITY . '</h2>';
             $badsums = array();
-            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
+            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php') || 0 == filesize(S9Y_INCLUDE_PATH . 'checksums.inc.php') ) {
                 echo '<span class="msg_notice"><span class="icon-info-circle"></span> ' . CHECKSUMS_NOT_FOUND . '</span>';
                 break;
             }
