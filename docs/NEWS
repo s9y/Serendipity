@@ -3,6 +3,10 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * Change .htaccess blocking mechanism by spamblock plugin to not fetch
+      too many datarows, thanks to DLange from the forums. (The .htaccess
+      feature is still considered experimental, use at your own risk ;))
+
     * rc4: fixed entryproperties backend 'cache now' link
 
     * Media database: Escape more Cookie values to prevent storing
