@@ -115,6 +115,8 @@ if ($serendipity['smarty_raw_mode']) {
 
         // Show the archive
         case 'archives':
+            $serendipity['head_subtitle'] = ARCHIVES; 
+            $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']); 
             serendipity_printArchives();
             break;
 

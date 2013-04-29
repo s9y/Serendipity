@@ -459,6 +459,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         header('Status: 404 Not found');
     } else {
         $serendipity['head_title']    = $cInfo['category_name'];
+        if (isset($serendipity['GET']['page'])) {
+            $serendipity['head_title'] .= " - " . htmlspecialchars($serendipity['GET']['page']);
+        }
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
     }
 
