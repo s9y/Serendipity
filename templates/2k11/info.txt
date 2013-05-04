@@ -1,4 +1,4 @@
 Name: 2k11
 Author: Matthias Mees, Veit Lehmann
-Date: 2013-03-30
+Date: 2013-05-04
 Require Serendipity: 1.6
