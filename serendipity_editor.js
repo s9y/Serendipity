@@ -256,6 +256,12 @@ function serendipity_imageSelector_addToBody (str, textarea)
     }
 }
 
+
+function urldecode(url)
+{
+  return decodeURIComponent(url.replace(/\+/g, ' '));
+}
+
 // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
 function noWysiwygAdd( str, textarea )
@@ -263,13 +269,18 @@ function noWysiwygAdd( str, textarea )
     // default case: no wysiwyg editor
     eltarget = '';
     if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
-        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']']
+        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']'];
     } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) {
         eltarget = document.forms['serendipityEntry'][textarea];
     } else {
-        eltarget = document.forms[0].elements[0];
+        //eltarget = document.forms[0].elements[0]; // this did not work in staticpages textareas
+        var elements = document.getElementsByTagName("textarea");
+        for (var i = 0; i < elements.length; ++i) { 
+            if (elements[i].getAttribute("name") == urldecode(textarea)) {
+                eltarget = elements[i];
+            }
+        } if (eltarget=='') eltarget = document.forms[0].elements[0];
     }
-    
     wrapSelection(eltarget, str, '');
     eltarget.focus();
 }
