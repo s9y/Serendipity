@@ -176,8 +176,22 @@ function serendipity_imageSelector_addToElement (str, el)
 function serendipity_imageSelector_addToBody (str, textarea)
 {
 
+    // check for CKEDITOR usage
+    if (typeof(CKEDITOR) != 'undefined') {
+
+        // if here the blog uses CKEDITOR
+        var oEditor = isinstance; // build-in by ckeditor plugin
+
+        if (oEditor.mode == "wysiwyg") {
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.insertHtml(str);
+        } else {
+            // if here just insert the text to the textarea ( named with the value of textarea variable )
+            noWysiwygAdd( str, textarea );
+        }
+
     // check for FCKEditor usage
-    if (typeof(FCKeditorAPI) != 'undefined') {
+    } else if (typeof(FCKeditorAPI) != 'undefined') {
 
         // if here the blog uses FCK editor
         var oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
@@ -189,7 +203,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             // if here just insert the text to the textarea ( named with the value of textarea variable )
             noWysiwygAdd( str, textarea );
         }
-    
+
     } else if(typeof(xinha_editors) != 'undefined') {
 
         // if here the blog uses Xinha editor
@@ -245,7 +259,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             // if here just insert the text to the textarea ( named with the value of textarea variable )
             noWysiwygAdd(str, textarea);
         }
-    
+
     } else if(typeof(TinyMCE) != 'undefined') {
         // for the TinyMCE editor we do not have a text mode insert
 
