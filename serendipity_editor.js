@@ -185,9 +185,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
         if (oEditor.mode == "wysiwyg") {
             // if here the editior is in WYSIWYG mode so use the insert html function
             oEditor.insertHtml(str);
-        } else {
-            // if here just insert the text to the textarea ( named with the value of textarea variable )
-            noWysiwygAdd( str, textarea );
+            // CKEDITOR.editor.mode = "source" disables function buttons, so using the fallback is redundant and could even confuse
         }
 
     // check for FCKEditor usage
