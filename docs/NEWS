@@ -3,6 +3,8 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * rc4: Fixed fetching javascript object (for nugget textareas) in non-wysiwyg-mode
+
     * Change .htaccess blocking mechanism by spamblock plugin to not fetch
       too many datarows, thanks to DLange from the forums. (The .htaccess
       feature is still considered experimental, use at your own risk ;))
