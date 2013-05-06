@@ -478,7 +478,9 @@ var $filter_defaults;
         }
     }
 
-    function akismetRequest($api_key, $data, &$ret, $action = 'comment-check') {
+    function akismetRequest($api_key, $data, &$ret, $action = 'comment-check', $eventData = null, $addData = null) {
+        global $serendipity;
+
         $opt = array(
             'method'            => 'POST',
             'http'              => '1.1',
@@ -515,7 +517,7 @@ var $filter_defaults;
         }
 
         if (empty($server)) {
-            $this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
+            $this->log($this->logfile, is_null($eventData) ? 0:$eventData['id'], 'AKISMET_SERVER', 'No Akismet server found', $addData);
             $ret['is_spam'] = false;
             $ret['message'] = 'No server for Akismet request';
             return;
@@ -589,7 +591,7 @@ var $filter_defaults;
     }
 
 
-    function tellAboutComment($where, $api_key = '', $comment_id, $is_spam) {
+    function tellAboutComment($where, $api_key, $comment_id, $is_spam) {
         global $serendipity;
         $comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
                                       . " FROM {$serendipity['dbPrefix']}comments C, {$serendipity['dbPrefix']}spamblocklog L , {$serendipity['dbPrefix']}entries E "
@@ -627,7 +629,7 @@ var $filter_defaults;
         if (function_exists('serendipity_request_end')) serendipity_request_end();
     }
 
-    function &getBlacklist($where, $api_key = '', &$eventData, &$addData) {
+    function &getBlacklist($where, $api_key, &$eventData, &$addData) {
         global $serendipity;
 
         $ret = false;
@@ -998,7 +1000,7 @@ var $filter_defaults;
                                 $tipval_method = ($trackback_ipvalidation_option == 'reject'?'REJECTED':'MODERATE');
                                 // Getting host from url successfully?
                                 if (!is_array($parts)) { // not a valid URL
-                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''));
+                                    $this->log($logfile, $eventData['id'], $tipval_method, sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url'], '', ''), $addData);
                                     if ($trackback_ipvalidation_option == 'reject') {
                                         $eventData = array('allow_comments' => false);
                                         $serendipity['messagestack']['comments'][] = sprintf(PLUGIN_EVENT_SPAMBLOCK_REASON_IPVALIDATION, $addData['url']);
@@ -1543,6 +1545,7 @@ var $filter_defaults;
         if($ftc) { 
             // Check for maximum number of links before rejecting
             $link_count = substr_count(strtolower($addData['comment']), 'http://');
+            $links_reject = $this->get_config('links_reject', 20);
             if ($links_reject > 0 && $link_count > $links_reject) {
                 $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT, $addData);
                 $eventData = array('allow_comments' => false);

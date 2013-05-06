@@ -184,7 +184,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
 													'realname'      => $author,
 													'username'      => $author,
 													'userlevel'     => 0,
-													'password'      => md5($defaultpass))
+													'password'      => md5($this->data['defaultpass']))
 											);
 					$authorid = serendipity_db_insert_id('authors', 'authorid');
 					$authorList[$authorid] = $author;

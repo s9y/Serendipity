@@ -559,7 +559,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
                     $elements = explode(',', $this->get_config('sequence'));
                     foreach($elements AS $element) {
-                        $this->showBackend($element, $eventData, $is_sticky, $no_frontpage, $hiderss, $access_values, $access, $password, $use_groups, $access_groups, $use_users, $access_users, $more);
+                        $this->showBackend($element, $eventData, $is_sticky, $no_frontpage, $hiderss, $access_values, $access, $password, $use_groups, $access_groups, $use_users, $access_users);
                     }
 ?>
                     </fieldset>
