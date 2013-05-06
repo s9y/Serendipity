@@ -606,7 +606,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
                                 <span style="color: #5E7A94; font-size: 8pt;"><?php echo $item['description']; ?></span>
                             </td>
                             <td style="border-bottom: 1px #000000 solid; font-size: 8pt" align="left" valign="middle" width="25%">
-                                <span style="white-space: nowrap"><?php echo serendipity_guessInput($item['type'], $item['var'], $value, $item['default']); ?></span>
+                                <span style="white-space: nowrap"><?php serendipity_guessInput($item['type'], $item['var'], $value, $item['default']); ?></span>
                             </td>
                         </tr>
 <?php

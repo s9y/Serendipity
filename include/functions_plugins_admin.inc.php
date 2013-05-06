@@ -792,7 +792,7 @@ EOS;
   <ol id="$config_item" class="sequence_container pluginmanager_container">
 
 EOS;
-                $sort_idx == 0;
+                $sort_idx = 0;
                 $last = count($order) - 1;
                 foreach ($order as $id) {
                     // Create the variables required to print this item

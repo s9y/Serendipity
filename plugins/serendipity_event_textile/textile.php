@@ -262,7 +262,7 @@ Applying Attributes:
                 $matched = str_replace($pl[0],'',$matched);
             }
             if(preg_match("/([)]+)/",$matched,$pr)) {
-                dump($pr);
+#                dump($pr);
                 $textile_style[] = "padding-right:".strlen($pr[1])."em;";
                 $matched = str_replace($pr[0],'',$matched);
             }
@@ -882,8 +882,6 @@ Applying Attributes:
 // -------------------------------------------------------------
     function textile_popup_help($name,$helpvar,$windowW,$windowH) {
         return ' <a target="_blank" href="http://www.textpattern.com/help/?item='.$helpvar.'" onclick="window.open(this.href, \'popupwindow\', \'width='.$windowW.',height='.$windowH.',scrollbars,resizable\'); return false;">'.$name.'</a><br />';
-
-        return $out;
     }
 
 // -------------------------------------------------------------

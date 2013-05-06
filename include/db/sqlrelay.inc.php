@@ -387,7 +387,6 @@ function serendipity_db_limit_sql($limitstring) {
     case "mysql":
        return ' LIMIT ' . $limitstring;
     case "postgresql":
-        $limit;
         $limit_split = explode(',', $limitstring);
         if (count($limit_split) > 1) {
             $limit = ' LIMIT ' . $limit_split[0] . ' OFFSET ' . $limit_split[1];
@@ -510,7 +509,7 @@ function serendipity_db_schema_import($query) {
  */
 function serendipity_db_probe($hash, &$errs) {
     global $serendipity;
-    $c;
+    $c = null;
 
     if (!function_exists('sqlrcon_alloc')) {
         $errs[] = 'No sql_relay  extension found. Please check your webserver installation or contact your systems administrator regarding this problem.';
