@@ -64,7 +64,7 @@ die('disabled in s9y');
     $socket = fsockopen($Host, 80, $errno, $errstr);
     if (!$socket) {
       $result = "($errno) $errstr";
-      return $Result;
+      return $result;
     }
 
     fputs($socket, $ReqHeader);

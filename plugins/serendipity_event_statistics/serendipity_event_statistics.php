@@ -532,11 +532,11 @@ class serendipity_event_statistics extends serendipity_event
 
         <br />
         <dt><strong><?php echo TOP_REFERRER; ?></strong></dt>
-        <dd><?php echo serendipity_displayTopReferrers($max_items, true); ?></dd>
+        <dd><?php serendipity_displayTopReferrers($max_items, true); ?></dd>
 
         <br />
         <dt><strong><?php echo TOP_EXITS; ?></strong></dt>
-        <dd><?php echo serendipity_displayTopExits($max_items, true); ?></dd>
+        <dd><?php serendipity_displayTopExits($max_items, true); ?></dd>
     </dl>
     <hr />
     <?php serendipity_plugin_api::hook_event('event_additional_statistics', $eventData, array('maxitems' => $max_items)); ?>

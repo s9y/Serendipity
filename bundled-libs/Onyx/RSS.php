@@ -166,7 +166,7 @@ class ONYX_RSS
          clearstatcache();
          if (!($fp = @fopen($file, 'r')))
          {
-            $this->raiseError((__LINE__-2), 'Could not read contents of cache file (<em>'.$cache_file.'</em>).');
+            $this->raiseError((__LINE__-2), 'Could not read contents of cache file (<em>'.$file.'</em>).');
             return false;
          }
          $this->data = unserialize(fread($fp, filesize($file)));

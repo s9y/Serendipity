@@ -663,7 +663,7 @@ class serendipity_topreferrers_plugin extends serendipity_plugin {
         } else {
             $use_links = serendipity_db_bool($use_links);
         }
-        echo serendipity_displayTopReferrers($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
+        serendipity_displayTopReferrers($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
     }
 }
 
@@ -729,7 +729,7 @@ class serendipity_topexits_plugin extends serendipity_plugin {
             $use_links = serendipity_db_bool($use_links);
         }
 
-        echo serendipity_displayTopExits($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
+        serendipity_displayTopExits($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
     }
 }
 

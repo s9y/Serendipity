@@ -713,7 +713,7 @@ class serendipity_event_karma extends serendipity_event
             if ($this->image_name) {
                 // Is this a single-image bar, or a single segment?
                 $ratio = $this->image_width / $this->image_height;
-                if ($ratio < $max_segment_ratio) {
+                if ($ratio < $this->max_segment_ratio) {
                     // This is probably a single segment. Square segments
                     // will have a ratio of 0.3; long, flat segments won't
                     // get up to 1.0 unless they're 3 times as wide as they
@@ -1760,6 +1760,8 @@ function invertSelection() {
      * @return string an HTML string including working images of all the rating bars in the img/ directory.
      */
     function createRatingSelector() {
+        global $serendipity;
+
         // Since the inputs are set up with the proper names, the config item
         // gets saved automatically, with no need for magic
 
@@ -1817,7 +1819,7 @@ function invertSelection() {
             $width = $fdata['width'];
             $ratio = $width / $height;
             // If this is a single segment, adjust width
-            if ($ratio < $max_segment_ratio) {
+            if ($ratio < $this->max_segment_ratio) {
                 $width = $width * 5;
             }
             $height = $height / 3;
