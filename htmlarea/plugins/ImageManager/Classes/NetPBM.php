@@ -177,7 +177,7 @@ Class Image_Transform_Driver_NetPBM extends Image_Transform
                            ."$size -x $x -y ".$y+$size." -text \"$text\"";
     } // End addText
 
-    function _postProcess($type, $quality, $save_type)
+    function _postProcess($type, $quality, $save_type=null)
     {
         $type = is_null($type) || $type==''? $this->type : $type;
         $save_type = is_null($save_type) || $save_type==''? $this->type : $save_type;

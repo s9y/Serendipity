@@ -156,9 +156,8 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
     }
 
     function gatherComments($entrydata) {
-        $comments;
+        $comments = array();
         if (is_array($entrydata['children'])) {
-            $comments = array();
             foreach($entrydata['children'] AS $idx3 => $commententry) {
                 if ($commententry['tag'] == 'comment' && is_array($commententry['children'])) {
                     $comment = array(

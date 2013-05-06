@@ -584,7 +584,7 @@ function serendipity_smarty_refhookPlugin(&$eventData, $hook, $addData = null) {
     // $serendipity['skip_smarty_hook'] = array('entries_header');
     // That would only skip the entries_header event hook, but allow all others.
     // Of course it cannot be used in conjunction with the all-blocking skip_smarty_hooks.
-    if (isset($serendipity['skip_smarty_hook']) && is_array($serendipity['skip_smarty_hook']) && isset($serendipity['skip_smarty_hook'][$params['hook']])) {
+    if (isset($serendipity['skip_smarty_hook']) && is_array($serendipity['skip_smarty_hook']) && isset($serendipity['skip_smarty_hook'][$hook])) {
         return;
     }
 

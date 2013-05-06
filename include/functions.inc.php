@@ -1072,7 +1072,7 @@ function serendipity_addCategory($name, $desc, $authorid, $icon, $parentid) {
  * @param   int     The new category subcat hiding
  * @return null
  */
-function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $parentid, $sort_order = 0, $hide_sub = 0) {
+function serendipity_updateCategory($cid, $name, $desc, $authorid, $icon, $parentid, $sort_order = 0, $hide_sub = 0, $admin_category = '') {
     global $serendipity;
 
     $query = "UPDATE {$serendipity['dbPrefix']}category
