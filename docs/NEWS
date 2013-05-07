@@ -3,13 +3,15 @@
 Version 1.7 ()
 ------------------------------------------------------------------------
 
+    * rc4: Get ready for CKEDITOR-wysiwyg Plugin mode
+
     * rc4: Fixed fetching javascript object (for nugget textareas) in non-wysiwyg-mode
 
     * Change .htaccess blocking mechanism by spamblock plugin to not fetch
       too many datarows, thanks to DLange from the forums. (The .htaccess
       feature is still considered experimental, use at your own risk ;))
 
-    * rc4: fixed entryproperties backend 'cache now' link
+    * rc4: Fixed entryproperties backend 'cache now' link
 
     * Media database: Escape more Cookie values to prevent storing
       possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
