@@ -510,7 +510,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     global $serendipity;
 
     if ($init && $spawnMulti) {
-        return true;
+        return;
     }
 
     if (isset($serendipity['wysiwyg']) && $serendipity['wysiwyg']) {
@@ -524,7 +524,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
 
         if ($eventData['skip']) {
-            return true;
+            return;
         }
 
         if (file_exists($serendipity['serendipityPath'] . 'htmlarea/XinhaCore.js')) {
