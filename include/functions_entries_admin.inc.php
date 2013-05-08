@@ -544,7 +544,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     global $serendipity;
 
     if ($init && $spawnMulti) {
-        return true;
+        return;
     }
 
     if (isset($serendipity['wysiwyg']) && $serendipity['wysiwyg']) {
@@ -558,7 +558,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
 
         if ($eventData['skip']) {
-            return true;
+            return;
         }
 
         if (file_exists($serendipity['serendipityPath'] . 'htmlarea/XinhaCore.js')) {
@@ -616,12 +616,12 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     // Thanks to Randall for pointing this out!
 
     // HTMLArea.loadPlugin("SpellChecker"); // [SPELLCHECK]
-	<?php if($spawnMulti) { ?>
-	// when spawning multiple editors at once, keep track of instances in this array
+    <?php if($spawnMulti) { ?>
+    // when spawning multiple editors at once, keep track of instances in this array
     var htmlarea_editors = new Array();
-	<?php } else  { ?>
+    <?php } else  { ?>
     var editor<?php echo $jsname; ?> = null; var config<?php echo $jsname; ?> = null;
-	<?php } // end if ?>
+    <?php } // end if ?>
     <?php if (is_array($eventData['buttons'])) { ?>
     var btn_callbacks = new Array();
     // Serendipity standardized editor functions
@@ -677,10 +677,10 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     }
     <?php } ?>
     function Spawn<?php echo $jsname; ?>(<?php echo $spawnMulti ? 'id' : ''; ?>) {
-		editor<?php echo $jsname; ?> = new HTMLArea("<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>);
+        editor<?php echo $jsname; ?> = new HTMLArea("<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>);
         <?php if($spawnMulti) { ?>
-		htmlarea_editors["<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>] = editor<?php echo $jsname; ?>;
-		<?php } // end if ?>
+        htmlarea_editors["<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>] = editor<?php echo $jsname; ?>;
+        <?php } // end if ?>
         config<?php echo $jsname; ?>    = editor<?php echo $jsname; ?>.config;
         config<?php echo $jsname; ?>.registerButton('image_selector', '<?PHP echo MANAGE_IMAGES; ?>', '<?php echo $serendipity['serendipityHTTPPath']; ?>htmlarea/images/ed_s9yimage.gif', false,
             function(editor, id) {
