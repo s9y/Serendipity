@@ -448,7 +448,7 @@ var $filter_defaults;
 
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}spamblock_htaccess (ip, timestamp) VALUES ('" . serendipity_db_escape_string($new_ip) . "', '" . time() . "')");
 
-        // Temporarily hardcoded fix by DLang to prevent .htaccess growing too large.
+        // Temporarily hardcoded fix by DLange to prevent .htaccess growing too large.
         $q = "SELECT ip FROM {$serendipity['dbPrefix']}spamblock_htaccess WHERE timestamp > " . (time() - 86400*2) . " GROUP BY ip ORDER BY timestamp DESC LIMIT 177";
         $rows = serendipity_db_query($q, false, 'assoc');
 
