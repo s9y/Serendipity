@@ -49,7 +49,7 @@
         </div>
     </header>
 {/if}
-    <div id="main" class="clearfix">
+    <main class="clearfix">
     {if NOT $admin_vars.is_logged_in}
         {$admin_vars.out|@serendipity_refhookPlugin:'backend_login_page'}
         {* <div id="login_container"> *}
@@ -179,7 +179,7 @@
         {$admin_vars.main_content}
         </div>
     {/if}
-    </div>
+    </main>
 {if NOT $admin_vars.no_footer}
     <footer id="meta">
         <small>{$admin_vars.version_info}</small>

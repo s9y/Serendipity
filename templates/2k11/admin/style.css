@@ -8,6 +8,7 @@ figure,
 footer,
 header,
 hgroup,
+main,
 nav,
 section,
 summary { display: block; }
@@ -972,7 +973,7 @@ summary {
 /* LAYOUT
    ----------------------------------------------------------------- */
 #top>div,
-#main {
+main {
     margin: 0 auto;
     max-width: 1280px;
     width: 96%;
