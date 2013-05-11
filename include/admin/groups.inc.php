@@ -106,7 +106,7 @@ if ($serendipity['GET']['adminAction'] == 'edit') {
 <table>
     <tr>
         <td><?php echo NAME; ?></td>
-        <td><input class="input_textbox" type="text" name="serendipity[name]" value="<?php htmlspecialchars($from['name']); ?>" /></td>
+        <td><input class="input_textbox" type="text" name="serendipity[name]" value="<?php echo tmlspecialchars($from['name']); ?>" /></td>
     </tr>
     <tr>
         <td valign="top"><?php echo USERCONF_GROUPS; ?></td>
