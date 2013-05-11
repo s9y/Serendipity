@@ -1078,31 +1078,17 @@ main {
 /* HEADER
    ----------------------------------------------------------------- */
 #top {
-    background: #25253d;
-    color: #fcfcfc;
+    background: #ccdee7;
+    color: #3e5f81;
     -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.5);
     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.5);
     box-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
 
 #top a,
-#top a:visited { color: #ffbf00; }
-
-#top a:hover,
-#top a:focus { color: #fcfcfc; }
-
-#top h1 a,
-#top h1 a:visited,
-#top h1 a:hover,
-#top h1 a:focus { color: #fcfcfc; }
-
-#top a,
 #top a:visited,
 #top a:hover,
 #top a:focus { text-decoration: none; }
-
-#banner,
-#user_menu { text-shadow: 1px 1px 1px rgba(0,0,0,.8); }
 
 #user_menu ul {
     font-size: 1.5em;
@@ -1292,6 +1278,7 @@ form>.button_link:first-of-type { margin-top: 0; }
 #meta {
     background: #ccdee7;
     border-top: 1px solid #25253d;
+    color: #3e5f81;
     text-align: center;
 }
 
