@@ -176,8 +176,20 @@ function serendipity_imageSelector_addToElement (str, el)
 function serendipity_imageSelector_addToBody (str, textarea)
 {
 
+    // check for CKEDITOR usage
+    if (typeof(CKEDITOR) != 'undefined') {
+
+        // if here the blog uses CKEDITOR
+        var oEditor = isinstance; // build-in by ckeditor plugin
+
+        if (oEditor.mode == "wysiwyg") {
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.insertHtml(str);
+            // CKEDITOR.editor.mode = "source" disables function buttons, so using the fallback is redundant and could even confuse
+        }
+
     // check for FCKEditor usage
-    if (typeof(FCKeditorAPI) != 'undefined') {
+    } else if (typeof(FCKeditorAPI) != 'undefined') {
 
         // if here the blog uses FCK editor
         var oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
@@ -189,7 +201,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             // if here just insert the text to the textarea ( named with the value of textarea variable )
             noWysiwygAdd( str, textarea );
         }
-    
+
     } else if(typeof(xinha_editors) != 'undefined') {
 
         // if here the blog uses Xinha editor
@@ -245,7 +257,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             // if here just insert the text to the textarea ( named with the value of textarea variable )
             noWysiwygAdd(str, textarea);
         }
-    
+
     } else if(typeof(TinyMCE) != 'undefined') {
         // for the TinyMCE editor we do not have a text mode insert
 
@@ -256,6 +268,12 @@ function serendipity_imageSelector_addToBody (str, textarea)
     }
 }
 
+
+function urldecode(url)
+{
+  return decodeURIComponent(url.replace(/\+/g, ' '));
+}
+
 // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
 function noWysiwygAdd( str, textarea )
@@ -263,13 +281,18 @@ function noWysiwygAdd( str, textarea )
     // default case: no wysiwyg editor
     eltarget = '';
     if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
-        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']']
+        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']'];
     } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) {
         eltarget = document.forms['serendipityEntry'][textarea];
     } else {
-        eltarget = document.forms[0].elements[0];
+        //eltarget = document.forms[0].elements[0]; // this did not work in staticpages textareas
+        var elements = document.getElementsByTagName("textarea");
+        for (var i = 0; i < elements.length; ++i) { 
+            if (elements[i].getAttribute("name") == urldecode(textarea)) {
+                eltarget = elements[i];
+            }
+        } if (eltarget=='') eltarget = document.forms[0].elements[0];
     }
-    
     wrapSelection(eltarget, str, '');
     eltarget.focus();
 }
