@@ -132,4 +132,4 @@ else
     echo ""
 fi
 
-echo "REMEMBER TO UPDATE docs/RELEASE and commit SVN branch"
+echo "REMEMBER TO UPDATE docs/RELEASE and commit github branch: git tag -a X.Y ; git push --tags"
