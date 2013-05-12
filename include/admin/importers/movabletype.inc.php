@@ -9,7 +9,7 @@
 switch ($serendipity['lang']) {
     case 'de':
         @define('IMPORTER_MT_WARN_PLUGIN',     'Bitte installieren Sie das Plugin "%s"');
-        @define('IMPORTER_MT_NOTE', 'Falls Sie weiter machen, ohne die Plugins zu installieren, werden möglicherweise Zeilenumbrüche falsch importiert (verdoppelt oder entfernt)');
+        @define('IMPORTER_MT_NOTE', 'Falls Sie weiter machen, ohne die Plugins zu installieren, werden mÃ¶glicherweise ZeilenumbrÃ¼che falsch importiert (verdoppelt oder entfernt)');
         break;
 
     case 'en':
@@ -427,7 +427,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
         if ( !sizeof($tasks) || $force == true ) {
             serendipity_db_begin_transaction();
             foreach ($entries as $entry) {
-                #echo '<pre>' . printR_($entry, true) . '</pre>';
+                #echo '<pre>' . print_r($entry, true) . '</pre>';
                 #continue;
                 if (empty($entry['authorid'])) {
                     $entry['authorid'] = $serendipity['authorid'];
