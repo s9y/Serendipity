@@ -1,6 +1,15 @@
+1.51:
+-----
+- bumb event version for serendipity_plugin_statistics sync update to 1.5
+  plugin 1.5 now fixes weekly stats and visitors online query with PostgreSQL
+
+
+1.50: + 1.49:
+-------------
 - Made commentor URLs add http:// if missing
 
-20070723 Version 1.60:
+
+20070723 Version 1.48:
 ----------------------
 (By kalkin)
 
@@ -8,7 +17,7 @@
 - the graphs can be maximal 200px large
 - the bar colors are now relative.
 
-20070121 Version 1.50:
+20070121 Version 1.47:
 ----------------------
 (By kalkin)
 
