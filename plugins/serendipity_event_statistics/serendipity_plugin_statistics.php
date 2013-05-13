@@ -217,17 +217,17 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 }
             }
 
-            if (serendipity_db_bool($this->get_config('show_dayvisitors'))) {
-                $res = serendipity_db_query("SELECT sum(visits) AS dayvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE year='".$year."' AND month='".$month."' AND day='".$day."'", true, 'assoc');
-                if (is_array($res) && isset($res['dayvisitors'])) {
-                    $content .= '<div class="stat_dayhvisitors">' . sprintf($this->get_config('text_dayvisitors'), '<span class="stat_number">' . $res['dayvisitors'] . '</span>') . "</div>\n";
-                }
-            }
-
             if (serendipity_db_bool($this->get_config('show_weekvisitors'))) {
                 $res = serendipity_db_query("SELECT sum(visits) AS weekvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE CONCAT(year,month,day) >= '".$lastmonday."' AND CONCAT(year,month,day) <= '".$nextsunday."'", true, 'assoc');
                 if (is_array($res) && isset($res['weekvisitors'])) {
                     $content .= '<div class="stat_weekhvisitors">' . sprintf($this->get_config('text_weekvisitors'), '<span class="stat_number">' . $res['weekvisitors'] . '</span>') . "</div>\n";
+                }
+            }
+
+            if (serendipity_db_bool($this->get_config('show_dayvisitors'))) {
+                $res = serendipity_db_query("SELECT sum(visits) AS dayvisitors FROM {$serendipity['dbPrefix']}visitors_count WHERE year='".$year."' AND month='".$month."' AND day='".$day."'", true, 'assoc');
+                if (is_array($res) && isset($res['dayvisitors'])) {
+                    $content .= '<div class="stat_dayhvisitors">' . sprintf($this->get_config('text_dayvisitors'), '<span class="stat_number">' . $res['dayvisitors'] . '</span>') . "</div>\n";
                 }
             }
 
