@@ -16,7 +16,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_NAME);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -180,12 +180,12 @@ class serendipity_plugin_statistics extends serendipity_plugin
         if (!file_exists($cachef) || filesize($cachef) == 0 || filemtime($cachef) < (time() - $cachetime)) {
             // Create statistics
             list($year, $month, $day) = explode('-', date('Y-m-d'));
-            $lastmonday = date('Ymd', strtotime('last monday'));
-            $nextsunday = date('Ymd', strtotime('next sunday'));
+            $lastmonday = date('Ynj', strtotime('last monday'));
+            $nextsunday = date('Ynj', strtotime('next sunday'));
             if (date('w', strtotime('today') ) == "1" ) { // now it is monday
-                $lastmonday = date('Ymd', strtotime('today'));
+                $lastmonday = date('Ynj', strtotime('today'));
             } else if (date('w', strtotime('today') ) == "0" ) { // now it is sunday
-                $nextsunday = date('Ymd', strtotime('today'));
+                $nextsunday = date('Ynj', strtotime('today'));
             }             
 
             $content = '';
@@ -231,7 +231,6 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 }
             }
 
-            // This one is MySQL specific. Don't know how postgreSQL does it.
             if (serendipity_db_bool($this->get_config('show_currentvisitors'))) {
                 $max = time();
                 $min = $max - (15 * 60);
@@ -240,6 +239,10 @@ class serendipity_plugin_statistics extends serendipity_plugin
                     $max_ts = date('H:i', $max);
                     $min_ts = date('H:i', $min);
                     $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (time BETWEEN '$min_ts' AND '$max_ts')";
+                } elseif ($serendipity['dbType'] == 'postgres' || $serendipity['dbType'] == 'pdo-postgres') {
+                    $max_ts = date('Hi', $max);
+                    $min_ts = date('Hi', $min);
+                    $q   = "SELECT count(counter_id) AS currentvisitors FROM {$serendipity['dbPrefix']}visitors WHERE day LIKE '" . date('Y-m-d') . "' AND (REPLACE(time, ':', '') BETWEEN CAST($min_ts AS text) AND CAST($max_ts AS text))";
                 } else {
                     $max_ts = date('Hi', $max);
                     $min_ts = date('Hi', $min);
