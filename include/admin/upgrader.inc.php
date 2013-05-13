@@ -168,6 +168,11 @@ $tasks = array(array('version'   => '0.5.1',
                      All internal and spartacus templates have been updated, so make sure you are using a recent version of your blog\'s template.
                      If you have your own custom template, be sure within your {foreach from=$dategroup.entries item="entry"} loop has this line after it:
                      <strong>{assign var="entry" value=$entry scope="parent"}</strong>'),
+                array('version'   => '1.7',
+                     'function'  => 'serendipity_copyBaseURL',
+                     'title'     => 'Copy baseURL',
+                     'desc'      => 'The baseURL option was moved to the defaultBaseURL-Option in the backend-configuration. To reflect that change in the database and to prevent future bugs, baseURL should copied to defaultBaseURL if that options is not set already.'),
+
 
 
 

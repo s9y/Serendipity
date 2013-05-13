@@ -153,3 +153,15 @@ function serendipity_addDefaultGroups() {
     serendipity_addDefaultGroup(USERLEVEL_CHIEF_DESC,  USERLEVEL_CHIEF);
     serendipity_addDefaultGroup(USERLEVEL_ADMIN_DESC,  USERLEVEL_ADMIN);
 }
+
+
+/**
+ * baseURL is now defaultBaseURL in the database, so copy if not already set
+ *
+ * */
+function serendipity_copyBaseURL() {
+    global $serendipity;
+    if (serendipity_get_config_var("defaultBaseURL") === false && serendipity_get_config_var("baseURL") !== false ) {
+        serendipity_set_config_var("defaultBaseURL", serendipity_get_config_var("baseURL"));
+    }
+}
