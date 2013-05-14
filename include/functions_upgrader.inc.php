@@ -161,7 +161,7 @@ function serendipity_addDefaultGroups() {
  * */
 function serendipity_copyBaseURL() {
     global $serendipity;
-    if (serendipity_get_config_var("defaultBaseURL") === false && serendipity_get_config_var("baseURL") !== false ) {
+    if ((serendipity_get_config_var("defaultBaseURL") === false || serendipity_get_config_var("defaultBaseURL") == "" ) && serendipity_get_config_var("baseURL") !== false) {
         serendipity_set_config_var("defaultBaseURL", serendipity_get_config_var("baseURL"));
     }
 }

@@ -330,7 +330,7 @@ function serendipity_load_configuration($author = null) {
     $config_loaded[$author] = true;
 
     // Set baseURL to defaultBaseURL
-    if ((empty($author) || empty($serendipity['baseURL'])) && isset($serendipity['defaultBaseURL'])) {
+    if ((empty($author) || empty($serendipity['baseURL'])) && (! empty($serendipity['defaultBaseURL']))) {
         $serendipity['baseURL'] = $serendipity['defaultBaseURL'];
     }
     
