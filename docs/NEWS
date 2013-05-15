@@ -3,6 +3,9 @@
 Version 1.7.1 ()
 ------------------------------------------------------------------------
 
+    * Create new migration task for propagate defaultBaseURL when
+      currently empty (onli)
+      
     * Added missing current group name when editing usergroups
     
 Version 1.7 (May 11th 2013)
