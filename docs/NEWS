@@ -17,13 +17,13 @@ Version 1.7 (May 11th 2013)
 
     * rc4: Fixed fetching javascript object (for nugget textareas) in non-wysiwyg-mode
 
-    * Change .htaccess blocking mechanism by spamblock plugin to not fetch
+    * rc4: Change .htaccess blocking mechanism by spamblock plugin to not fetch
       too many datarows, thanks to DLange from the forums. (The .htaccess
       feature is still considered experimental, use at your own risk ;))
 
     * rc4: Fixed entryproperties backend 'cache now' link
 
-    * Media database: Escape more Cookie values to prevent storing
+    * rc3: Media database: Escape more Cookie values to prevent storing
       possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
       Escape hotlinked media filename. Escape importer host name error
       Thanks to GreenSun from the forums for bringing this to attention,
