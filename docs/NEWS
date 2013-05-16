@@ -14,16 +14,32 @@ Version 2.0 ()
 
     * Use Smarty for backend display output
 
+Version 1.7.1 ()
+------------------------------------------------------------------------
+
+    * Fixed curl result bug in spartacus plugin
+
+    * Create new migration task for propagate defaultBaseURL when
+      currently empty (onli)
+
+    * Fixed statistics sidebar querys ( & for PostgreSQL ) [242520b]
+
+    * Added missing current group name when editing usergroups
+
 Version 1.7 ()
 ------------------------------------------------------------------------
 
-    * Change .htaccess blocking mechanism by spamblock plugin to not fetch
+    * rc4: Get ready for CKEDITOR-wysiwyg Plugin mode
+
+    * rc4: Fixed fetching javascript object (for nugget textareas) in non-wysiwyg-mode
+
+    * rc4: Change .htaccess blocking mechanism by spamblock plugin to not fetch
       too many datarows, thanks to DLange from the forums. (The .htaccess
       feature is still considered experimental, use at your own risk ;))
-      
-    * rc4: fixed entryproperties backend 'cache now' link
 
-    * Media database: Escape more Cookie values to prevent storing
+    * rc4: Fixed entryproperties backend 'cache now' link
+
+    * rc3 + rc4: Media database: Escape more Cookie values to prevent storing
       possible XSS (http://board.s9y.org/viewtopic.php?f=3&t=19142).
       Escape hotlinked media filename. Escape importer host name error
       Thanks to GreenSun from the forums for bringing this to attention,
