@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.29');
+        $propbag->add('version',       '2.30');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -411,7 +411,7 @@ class serendipity_event_spartacus extends serendipity_event
                     $curl_handle=curl_init();
                     curl_setopt($curl_handle, CURLOPT_URL, $url);
                     curl_setopt($curl_handle, CURLOPT_HEADER, 0);
-                    $data = curl_exec($curl_handle);
+                    $curl_result = curl_exec($curl_handle);
                     curl_close($curl_handle);
                     if ($curl_result) {
                         $check_health = false;
