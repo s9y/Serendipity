@@ -1,3 +1,8 @@
+1.52:
+-----
+- fixed some missing ending strong tags
+
+
 1.51:
 -----
 - bumb event version for serendipity_plugin_statistics sync update to 1.5

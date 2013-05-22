@@ -14,7 +14,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg, kalkin');
-        $propbag->add('version',       '1.51');
+        $propbag->add('version',       '1.52');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -726,13 +726,13 @@ class serendipity_event_statistics extends serendipity_event
                         <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTODAY; ?><br /><strong><?php echo $visitors_count_today[0]; ?></strong>
                     </td>
                     <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL; ?><br /><strong><?php echo $visitors_count[0]; ?>
+                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL; ?><br /><strong><?php echo $visitors_count[0]; ?></strong>
                     </td>
                     <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY; ?><br /><strong><?php echo $hits_count_today[0]; ?>
+                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY; ?><br /><strong><?php echo $hits_count_today[0]; ?></strong>
                     </td>
                     <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL; ?><br /><strong><?php echo $hits_count[0]; ?>
+                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL; ?><br /><strong><?php echo $hits_count[0]; ?></strong>
                     </td>
                 </tr>
             </table>
