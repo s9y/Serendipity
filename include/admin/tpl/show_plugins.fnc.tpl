@@ -6,30 +6,11 @@
 {if !$eyecandy}
     <form action="?serendipity[adminModule]=plugins" method="post">
 {elseif !$event_only}
-{* Smarty 3 has a new auto literal option which is enabled by default.
-   When the { is followed by a space it's not interpreted as smarty delimiter but literal. *}
-    <script>
-        function templatePluginMoverInit() { 
 
-        {foreach $plugin_placements AS $sidebar}
-
-            {($is_first) ? 'var ' : ''}list = document.getElementById("{$sidebar}_col");
-            DragDrop.makeListContainer(list, 'g1');
-            list.onDragOver = function() { this.style["border"] = "1px solid #4d759b"; };
-            list.onDragOut = function() { this.style["border"] = "none"; };
-            {assign var="is_first" value=false}
-
-        {/foreach}
-
-        } 
-        addLoadEvent(templatePluginMoverInit);
-    </script>
-
-    <form action="?serendipity[adminModule]=plugins" method="post" onsubmit="pluginMovergetSort(); return true">
+    <form action="?serendipity[adminModule]=plugins" method="post">
         <input id="order" name="serendipity[pluginorder]" type="hidden" value="">
     {else}
-    <script>addLoadEvent(pluginMoverInitEvent);</script>
-    <form action="?serendipity[adminModule]=plugins" method="post" onsubmit="pluginMovergetSortEvent(); return true">
+    <form action="?serendipity[adminModule]=plugins" method="post">
         <input id="eventorder" name="serendipity[pluginorder]" type="hidden" value="">
     {/if}
         {$serendipity_setFormToken}
@@ -38,9 +19,12 @@
             <div class="pluginmanager_side pluginmanager_{($event_only) ? 'event' : 'sidebar'}">
                 <h4>{$plugin_placement['ptitle']}</h4>
 
-                <ol id="{$plugin_placement['pid']}_col" class="pluginmanager_container plainList">
+                <ol id="{$plugin_placement['pid']}_col" data-placement="{$plugin_placement['pid']}" class="pluginmanager_container plainList">
                 {foreach $plugin_placement['plugin_data'] as $plugin_data}
-                    <li id="{$plugin_data['css_key']}" class="pluginmanager_plugin pluginmanager_item_{cycle values="odd,even"}">
+                    <li id="{$plugin_data['css_key']}" class="pluginmanager_plugin pluginmanager_item_{cycle values="odd,even"}"=>
+                        <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][id]" value="{$plugin_data['name']}" />
+                        <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][position]" value="{$plugin_data@index}" />
+                        <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][placement]" value="{$plugin_placement['pid']}" />
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
                             <input id="remove_{$plugin_data['name']}" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}">
@@ -79,7 +63,7 @@
             <span class="plugin_count block_level">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$total}</span>
         </div>
         <div class="form_buttons">
-            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.DELETE}" value="{$CONST.REMOVE_TICKED_PLUGINS}">
+            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE_TICKED_PLUGINS}" value="{$CONST.DELETE}">
             <input name="SAVE" type="submit" title="{$CONST.SAVE_CHANGES_TO_LAYOUT}" value="{$CONST.SAVE}">
         </div>
     </form>

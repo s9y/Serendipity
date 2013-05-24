@@ -313,46 +313,25 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         $col_assoc[$sidebar . '_col'] = $sidebar;
     }
 
-    /* preparse Javascript-generated input */
-    if (isset($_POST['SAVE']) && !empty($_POST['serendipity']['pluginorder'])) {
-        $parts = explode(':', $_POST['serendipity']['pluginorder']);
-
-        foreach($parts AS $sidepart) {
-            preg_match('@^(.+)\((.*)\)$@imsU', $sidepart, $matches);
-            if (!isset($col_assoc[$matches[1]])) {
-                continue;
-            }
-            $pluginsidelist = explode(',', $matches[2]);
-            foreach($pluginsidelist AS $pluginname) {
-                $pluginname = trim(urldecode(str_replace(array('s9ycid', '-'), array('', '%'), $pluginname)));
-
-                if (empty($pluginname)) {
-                    continue;
-                }
-                $serendipity['POST']['placement'][$pluginname] = $col_assoc[$matches[1]];
-                $new_order[] = $pluginname;
-
-            }
-        }
-
-        if (is_array($new_order)) {
-            foreach($new_order AS $new_order_pos => $order_plugin) {
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins SET sort_order = ". (int)$new_order_pos . " WHERE name='" . serendipity_db_escape_string($order_plugin) . "'");
-            }
-        }
-    }
-
-    if (isset($_POST['SAVE']) && isset($_POST['serendipity']['placement']) && serendipity_checkFormToken()) {
-        foreach ($_POST['serendipity']['placement'] as $plugin_name => $placement) {
+    if (isset($_POST['SAVE'])  && serendipity_checkFormToken()) {
+        $pos=0;
+        foreach($_POST['serendipity']['plugin'] as $plugin) {
+            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins
+                                        SET
+                                    sort_order = ".  $pos . "
+                                WHERE
+                                    name='" . serendipity_db_escape_string($plugin['id']) . "'");
+        
             serendipity_plugin_api::update_plugin_placement(
-                addslashes($plugin_name),
-                addslashes($placement)
+                addslashes($plugin['id']),
+                addslashes($plugin['placement'])
             );
 
             serendipity_plugin_api::update_plugin_owner(
-                addslashes($plugin_name),
-                addslashes($_POST['serendipity']['ownership'][$plugin_name])
+                addslashes($plugin['id']),
+                addslashes($_POST['serendipity']['ownership'][$plugin['name']])
             );
+            $pos++;
         }
     }
 
