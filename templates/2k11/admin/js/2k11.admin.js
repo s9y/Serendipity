@@ -93,8 +93,21 @@
       }
     };
 
+    // Accessibility helper script
     AccessifyHTML5({
         header: '#top>div>div',
         footer: '#meta'
+    });
+
+    // Wait until content including images is loaded
+    $(window).load(function() {
+        // Equal Heights
+        var $eqHeights = $('body').has('.equal_heights');
+
+        if($eqHeights.size() > 0) {
+            $('.equal_heights').syncHeight({
+                updateOnResize: true
+            });
+        }
     });
 })(jQuery);

@@ -19,7 +19,7 @@
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
-            <div class="clearfix">
+            <div class="clearfix equal_heights">
                 <div class="media_file_preview">
                 {$file.preview}
                 </div>
