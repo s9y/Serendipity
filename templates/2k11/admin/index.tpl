@@ -182,7 +182,7 @@
     </main>
 {if NOT $admin_vars.no_footer}
     <footer id="meta">
-        <small>{$admin_vars.version_info}</small>
+        <p>{$admin_vars.version_info}</p>
     </footer>
 {/if}
     <script src="{serendipity_getFile file='admin/js/2k11.admin.js'}"></script>

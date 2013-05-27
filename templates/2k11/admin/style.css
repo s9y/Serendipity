@@ -435,7 +435,6 @@ form > a,
 label > span,
 legend > span > span,
 #back_to_blog,
-#meta small,
 .msg_error,
 .msg_success,
 .msg_notice,
@@ -1287,8 +1286,8 @@ form > .button_link:first-of-type { margin-top: 0; }
     text-align: center;
 }
 
-#meta small {
-    font-size: 1em;
+#meta p {
+    margin: 0;
     padding: 8px;
 }
 
