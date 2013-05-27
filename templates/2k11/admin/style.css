@@ -1325,6 +1325,36 @@ form > .button_link:first-of-type { margin-top: 0; }
     top: .125em;
 }
 
+.dragging,
+.dragging * {
+    cursor: move !important;
+}
+
+.dragged {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 2000;
+}
+
+.pluginmanager_container .placeholder {
+    border: 1px solid black;
+    height: 50px;
+    position: relative;
+}
+
+.pluginmanager_container .placeholder:before {
+    border: 5px solid transparent;
+    border-left-color: red;
+    border-right: none;
+    content: "";
+    height: 0;
+    margin-top: -5px;
+    position: absolute;
+    left: -5px;
+    top: -4px;
+    width: 0;
+}
+
 
 /* MEDIA DB
 

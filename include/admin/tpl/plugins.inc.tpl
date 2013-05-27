@@ -119,39 +119,9 @@
     <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <h2>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</h2>
-        {if $eyecandy}
+    {if $eyecandy}
     <script src="{serendipity_getFile file="admin/jquery.sortable.js"}"></script>
     <script src="{serendipity_getFile file="admin/dragdrop.js"}"></script>
-    <style>
-        body.dragging, body.dragging * {
-            cursor: move !important;
-        }
-
-        .dragged {
-            position: absolute;
-            opacity: 0.5;
-            z-index: 2000;
-        }
-
-        .pluginmanager_container li.placeholder {
-            position: relative;
-            height: 50px;
-            border: 1px solid black;
-        }
-        .pluginmanager_container li.placeholder:before {
-            position: absolute;
-            content: "";
-            width: 0;
-            height: 0;
-            margin-top: -5px;
-            left: -5px;
-            top: -4px;
-            border: 5px solid transparent;
-            border-left-color: red;
-            border-right: none;
-        }
-    </style>
-
     {/if}
     <section id="pluginlist_sidebar">
         <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
