@@ -1090,6 +1090,11 @@ main {
 #top a:hover,
 #top a:focus { text-decoration: none; }
 
+#top a:hover,
+#top a:focus {
+    color: #25253d;
+}
+
 #user_menu ul {
     font-size: 1.5em;
     margin: .5em 0;
