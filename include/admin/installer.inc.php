@@ -385,8 +385,7 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/installer.inc.tpl";
+$tfile = dirname(__FILE__) . "/tpl/installer.inc.tpl";
 
 ob_start();
 include $tfile;

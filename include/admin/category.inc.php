@@ -200,8 +200,7 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/category.inc.tpl";
+$tfile = dirname(__FILE__) . "/tpl/category.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
 echo $content;
 

@@ -126,8 +126,7 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW'])) {
 }
 
 $serendipity['smarty']->assign($data);
-$tpldir = ( !defined('SWITCH_TEMPLATE_VERSION') )  ? 'tplold' : 'tpl';
-$tfile = dirname(__FILE__) . "/$tpldir/groups.inc.tpl";
+$tfile = dirname(__FILE__) . "/tpl/groups.inc.tpl";
 $content = $serendipity['smarty']->fetch('file:'. $tfile);
 echo $content;
 
