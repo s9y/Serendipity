@@ -26,20 +26,22 @@
 <section id="template_select">
     <h2>{$CONST.SELECT_TEMPLATE}</h2>
 
+    <script src="{serendipity_getFile file='admin/jquery.syncheight.js'}"></script>
+
     <ul class="plainList clearfix">
     {foreach $templates as $template=>$info}
         {if $info.info.engine == 'yes'}{continue}{/if}
         {if !empty($template)}
         <li><article class="clearfix {cycle values="odd,even"}">
                 <h3>{$info.info.name}</h3>
-            {if $info.fullsize_preview || $info.preview}
-                <div class="clearfix">
+                <div class="clearfix equal_heights">
+                {if $info.fullsize_preview || $info.preview}
                     <div class="preview_image">
                         {if $info.fullsize_preview}<a href="{$info.fullsize_preview}">{/if}
                         {if $info.preview}<img src="{$info.preview}" alt="{$CONST.PREVIEW}" >{/if}
                         {if $info.fullsize_preview}</a>{/if}
                     </div>
-            {/if}
+                {/if}
                     <details class="template_info">
                         <summary>Template info</summary> {* i18n *}
 
@@ -52,9 +54,8 @@
                             <dd>{$info.info.custom_admin_interface}</dd>
                         </dl>
                     </details>
-            {if $info.fullsize_preview || $info.preview}
                 </div>
-            {/if}
+
                 <div class="template_status">
                 {if $template != $cur_template}
                     {if !$info.unmetRequirements}
