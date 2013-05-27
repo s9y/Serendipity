@@ -397,7 +397,7 @@ nav ol { padding: 0; }
 /* replace w/ .level_inblock */
 .icon_link,
 #insert_image,
-form>a,
+form > a,
 #user_menu li,
 .edit_actions li,
 .actions li,
@@ -432,8 +432,8 @@ form>a,
 /* replace w/ .level_block */
 .block_level,
 .form_multiselect label,
-label>span,
-legend>span>span,
+label > span,
+legend > span > span,
 #back_to_blog,
 #meta small,
 .msg_error,
@@ -465,7 +465,7 @@ table,
 details,
 .standalone,
 .form_buttons,
-form>a {
+form > a {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -497,7 +497,7 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
-#template_options div>a:focus,
+#template_options div > a:focus,
 button:focus,
 input:focus,
 select:focus,
@@ -520,7 +520,7 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
-#template_options div>a,
+#template_options div > a,
 button,
 input[type="button"],
 input[type="reset"],
@@ -543,7 +543,7 @@ input[type="submit"] {
 }
 
 .button_link,
-#template_options div>a,
+#template_options div > a,
 button,
 input[type="button"] {
     background: #ddd;
@@ -584,7 +584,7 @@ input[type="submit"].state_cancel:visited {
 }
 
 .button_link:hover,
-#template_options div>a:hover,
+#template_options div > a:hover,
 button:hover,
 input[type="button"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
@@ -617,7 +617,7 @@ input[type="submit"].state_cancel:focus {
 }
 
 .button_link:active,
-#template_options div>a:active,
+#template_options div > a:active,
 button:active,
 input[type="button"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
@@ -802,11 +802,11 @@ optgroup {
 /* BACKEND FORM STYLES
    ----------------------------------------------------------------- */
 label,
-legend>span,
+legend > span,
 figcaption { font-weight: bold; }
 
-label>span,
-legend>span>span,
+label > span,
+legend > span > span,
 input[type=checkbox] + label,
 input[type=radio] + label,
 .form_check label { font-weight: normal; }
@@ -822,7 +822,7 @@ input[type=checkbox] { margin-right: .4em; }
 .form_check label { display: inline-block !important; }
 
 .serendipity_commentDirection,
-.configuration_group fieldset>fieldset,
+.configuration_group fieldset > fieldset,
 #preview,
 .form_field,
 .form_area,
@@ -871,15 +871,15 @@ a:focus { color: #d06604; }
 a.button_link,
 a.button_link:hover,
 a.button_link:focus,
-#template_options div>a,
-#template_options div>a:hover,
-#template_options div>a:focus,
-.button_link>span:before {
+#template_options div > a,
+#template_options div > a:hover,
+#template_options div > a:focus,
+.button_link > span:before {
     color: #000;
     text-decoration: none;
 }
 
-.button_link>span:before {
+.button_link > span:before {
     margin-right: 0;
     width: auto;
 }
@@ -972,7 +972,7 @@ summary {
 
 /* LAYOUT
    ----------------------------------------------------------------- */
-#top>div,
+#top > div,
 main {
     margin: 0 auto;
     max-width: 1280px;
@@ -1140,7 +1140,7 @@ fieldset p,
 .media_file_meta,
 .image_resize_hint p { margin: 0; }
 
-.importer_data .clearfix>div {
+.importer_data .clearfix > div {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -1175,12 +1175,12 @@ fieldset p,
 
 .comment_data,
 .configuration_group h3,
-form>.button_link:first-of-type { margin-top: 0; }
+form > .button_link:first-of-type { margin-top: 0; }
 
 #template_options,
 #pluginlist_sidebar { margin-bottom: 3em; }
 
-.configuration_group>fieldset { margin-bottom: 1.5em; }
+.configuration_group > fieldset { margin-bottom: 1.5em; }
 
 .editor_toolbar { margin-top: .25em; }
 
@@ -1194,7 +1194,7 @@ form>.button_link:first-of-type { margin-top: 0; }
 
 #template_select article,
 .media_file,
-.plugins_installable>li {
+.plugins_installable > li {
     background: #eee;
     margin: 0 0 1em;
     padding: 0 .5em 1em;
@@ -1214,7 +1214,7 @@ form>.button_link:first-of-type { margin-top: 0; }
 #serendipityScaleImg img,
 .media_file,
 .media_file_preview img,
-.plugins_installable>li { border: 1px solid #aaa; }
+.plugins_installable > li { border: 1px solid #aaa; }
 
 #serendipityScaleImg img { max-width: 99%; }
 
@@ -1237,11 +1237,11 @@ form>.button_link:first-of-type { margin-top: 0; }
 #serendipity_image_folders .odd,
 #serendipity_image_folders .even { border-top: 1px solid #aaa; }
 
-.zebra_list>li,
+.zebra_list > li,
 #categories,
 #serendipity_image_folders { border-bottom: 1px solid #aaa; }
 
-.zebra_list>.odd,
+.zebra_list > .odd,
 #categories .odd,
 #serendipity_image_folders .odd { background: #eee; }
 
@@ -1251,11 +1251,11 @@ form>.button_link:first-of-type { margin-top: 0; }
     line-height: 1.5;
 }
 
-#entries_list>li,
-#serendipity_comments_list>li { padding: 0 0 0 .4em; }
+#entries_list > li,
+#serendipity_comments_list > li { padding: 0 0 0 .4em; }
 
-#categories li>ul,
-#serendipity_image_folders li>ul { padding: 0 0 0 1em; }
+#categories li > ul,
+#serendipity_image_folders li > ul { padding: 0 0 0 1em; }
 
 #categories .edit_actions li,
 #serendipity_image_folders .edit_actions li { padding: 0; }
@@ -1356,7 +1356,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     .lt-ie8 #banner,
     .lt-ie8 #user_menu { width: 48.5%; }
 
-    #banner>span { margin: 0 0 1.5em; }
+    #banner > span { margin: 0 0 1.5em; }
 
     #user_menu ul {
         font-size: 1.5em;
@@ -1411,7 +1411,7 @@ form>.button_link:first-of-type { margin-top: 0; }
         margin: 1.71429em 0;
     }
 
-    #image_directory_edit_form>.clearfix>div {
+    #image_directory_edit_form > .clearfix > div {
         float: left;
         margin: 0 5% 0 0;
     }
@@ -1436,7 +1436,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     #template_options .form_select select,
     #template_options .form_field input,
     #template_options fieldset legend,
-    #template_options fieldset>.clearfix,
+    #template_options fieldset > .clearfix,
     .configuration_group .form_select label,
     .configuration_group .form_multiselect label,
     .configuration_group .form_field label,
@@ -1445,16 +1445,16 @@ form>.button_link:first-of-type { margin-top: 0; }
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
-    .configuration_group fieldset>fieldset legend,
-    .configuration_group fieldset>fieldset .clearfix,
+    .configuration_group fieldset > fieldset legend,
+    .configuration_group fieldset > fieldset .clearfix,
     #uploadform .form_select label,
     #uploadform .form_field label,
     #uploadform .form_select select,
     #uploadform .form_field input,
     #serendipity_plugin_config fieldset legend,
-    #serendipity_plugin_config fieldset>.clearfix,
+    #serendipity_plugin_config fieldset > .clearfix,
     #serendipity_category fieldset legend,
-    #serendipity_category fieldset>.clearfix {
+    #serendipity_category fieldset > .clearfix {
         float: left;
         margin-right: 2%;
         width: 48%;
@@ -1475,7 +1475,7 @@ form>.button_link:first-of-type { margin-top: 0; }
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
-    .configuration_group fieldset>fieldset,
+    .configuration_group fieldset > fieldset,
     #template_select .odd,
     .media_pane .odd { clear: left; }
 
@@ -1483,14 +1483,14 @@ form>.button_link:first-of-type { margin-top: 0; }
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
-    .configuration_group fieldset>fieldset,
+    .configuration_group fieldset > fieldset,
     #serendipityScaleImg,
     .media_file header { overflow: hidden; } 
 
     #serendipityScaleImg { margin-top: 2.25em; }
 
-    .configuration_group fieldset>fieldset .form_radio,
-    #serendipity_plugin_config>fieldset .form_radio,
+    .configuration_group fieldset > fieldset .form_radio,
+    #serendipity_plugin_config > fieldset .form_radio,
     #template_options fieldset .form_radio { margin-top: 0; }
 
     /* Plugin manager – might go into pluginmanager.css in the end */
@@ -1544,8 +1544,8 @@ form>.button_link:first-of-type { margin-top: 0; }
         margin: 0 0 0 2%;
     }
 
-    #edit_entry_metadata>div,
-    #edit_entry_submit>div {
+    #edit_entry_metadata > div,
+    #edit_entry_submit > div {
         float: left;
         width: 50%;
     }
@@ -1553,12 +1553,12 @@ form>.button_link:first-of-type { margin-top: 0; }
     #edit_entry_submit .form_buttons { text-align: right; }
 
     #sort_entries .form_select,
-    #filter_comments .clearfix>div,
-    #serendipity_category>.clearfix>div,
+    #filter_comments .clearfix > div,
+    #serendipity_category > .clearfix > div,
     #serendipity_comment .form_field,
-    #media_filter>div,
-    #moreFilter>div,
-    #media_pane_sort>.clearfix>div {
+    #media_filter > div,
+    #moreFilter > div,
+    #media_pane_sort > .clearfix > div {
         float: left;
         width: 33% ;
     }
@@ -1612,7 +1612,7 @@ form>.button_link:first-of-type { margin-top: 0; }
         margin: .75em 0;
     }
 
-    #banner>span {
+    #banner > span {
         float: left;
         margin: 2.35em 0 1.5em 3.35em;
     }
@@ -1631,5 +1631,5 @@ form>.button_link:first-of-type { margin-top: 0; }
 @media only screen and (min-width: 1400px) {
     body { font-size: 1.125em; }
 
-    #banner>span { margin: 2.35em 0 1.5em 2em; }
+    #banner > span { margin: 2.35em 0 1.5em 2em; }
 }
