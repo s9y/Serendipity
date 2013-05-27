@@ -3,7 +3,7 @@
 
 {* Customization notes: All classnames and especially DOM IDs should be kept to keep compatibility with JavaScript calls! *}
 
-<script src="{$serendipityHTTPPath}serendipity_editor.js"></script>
+<script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 
 <h2>{$CONST.ADD_MEDIA}</h2>
 

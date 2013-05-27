@@ -135,7 +135,7 @@
 
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
         </form>
-        <script src="serendipity_editor.js"></script>
+        <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 {/if}
 {if $view}
     <h2>{$CONST.CATEGORY_INDEX}:</h2>

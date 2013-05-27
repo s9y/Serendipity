@@ -71,7 +71,7 @@
     {if $ctype == 'media'}
         <div class="clearfix">
         {if !$mediajs_output}
-            <script src="serendipity_editor.js"></script>
+            <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
             <script src="{serendipity_getFile file='admin/image_selector.js'}"></script>
         {/if}
             <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
