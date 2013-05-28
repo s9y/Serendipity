@@ -137,7 +137,25 @@ if (!function_exists('errorToExceptionHandler')) {
             $str  = '<p> == SERENDIPITY ERROR == </p>';
             $str .= '<p>Please correct:</p>';
             $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            serendipity_die($str); // needs to halt with die() here, else it will path through and gets written underneath blog content.
+            if (headers_sent()) {
+                serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
+            } else {
+                // react on non eye-displayed errors with following small javascript, while being in tags like <select> to push on top of page, else return $str just there
+                echo '<noscript>' . $str . '</noscript>' . "\n<script>" . '
+function create(htmlStr) {
+    var frag = document.createDocumentFragment(),
+        temp = document.createElement("div");
+    temp.innerHTML = htmlStr;
+    while (temp.firstChild) {
+        frag.appendChild(temp.firstChild);
+    }
+    return frag;
+}
+var fragment = create("Error redirect: '.addslashes($str).'");
+// You can use native DOM methods to insert the fragment:
+document.body.insertBefore(fragment, document.body.childNodes[0]);
+' . "\n</script>\n";
+            }
         }
     }
 }
