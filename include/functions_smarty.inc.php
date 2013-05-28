@@ -1097,16 +1097,6 @@ function serendipity_smarty_show($template, $data = null) {
     }
     
     $serendipity['smarty']->assign($data);
-    
-    $tfile = serendipity_getTemplateFile($template, 'serendipityPath');
 
-    if ($tfile == $template) {
-        $tfile = dirname(__FILE__) . "/$template";
-    }
-    $inclusion = $serendipity['smarty']->security_settings[INCLUDE_ANY];
-    $serendipity['smarty']->security_settings[INCLUDE_ANY] = true;
-    $content = $serendipity['smarty']->fetch('file:'. $tfile);
-    $serendipity['smarty']->security_settings[INCLUDE_ANY] = $inclusion;
-
-    echo $content;
+    return $serendipity['smarty']->display(serendipity_getTemplateFile($template, 'serendipityPath'));
 }
