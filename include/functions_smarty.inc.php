@@ -1098,5 +1098,5 @@ function serendipity_smarty_show($template, $data = null) {
     
     $serendipity['smarty']->assign($data);
 
-    return $serendipity['smarty']->display(serendipity_getTemplateFile($template, 'serendipityPath'));
+    return $serendipity['smarty']->fetch(serendipity_getTemplateFile($template, 'serendipityPath'));
 }
