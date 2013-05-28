@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.33');
+        $propbag->add('version',       '1.33.1');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -659,10 +659,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     break;
 
                 case 'backend_cache_purge':
-                    if (!$is_cache) {
-                        return true;
-                    }
-
                     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE property LIKE 'ep_cache_%'");
                     break;
 
