@@ -133,15 +133,17 @@ if (!function_exists('errorToExceptionHandler')) {
             exit; // make sure to exit in case of database connection errors.
         } 
         if ($serendipity['production'] === true) { 
-            // ToDo: enhance for more special serendipity error needs
-            $str  = '<p> == SERENDIPITY ERROR == </p>';
-            $str .= '<p>Please correct:</p>';
-            $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            if (headers_sent()) {
-                serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
-            } else {
-                // this also reacts on non eye-displayed errors with following small javascript, while being in tags like <select> to push on top of page, else return non javascript use $str just there
-                echo '<noscript>' . $str . '</noscript>' . "\n<script>" . '
+            if( serendipity_checkPermission('adminUsers') ) { 
+                // ToDo: enhance for more special serendipity error needs
+                $str  = '<p> == SERENDIPITY ERROR == </p>';
+                $str .= '<p>Please correct:</p>';
+                $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+                #var_dump(headers_list());
+                if (headers_sent()) {
+                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
+                } else {
+                    // this also reacts on non eye-displayed errors with following small javascript, while being in tags like <select> to push on top of page, else return non javascript use $str just there
+                    echo '<noscript>' . $str . '</noscript>' . "\n<script>" . '
 function create(htmlStr) {
     var frag = document.createDocumentFragment(),
         temp = document.createElement("div");
@@ -155,7 +157,8 @@ var fragment = create("Error redirect: '.addslashes($str).'");
 // You can use native DOM methods to insert the fragment:
 document.body.insertBefore(fragment, document.body.childNodes[0]);
 ' . "\n</script>\n";
-                // sadly we can't use HEREDOC notation here as this does not execute the javascript after finished writing
+                    // sadly we can't use HEREDOC notation here as this does not execute the javascript after finished writing
+                }
             }
         }
     }
