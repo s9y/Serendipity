@@ -133,7 +133,7 @@ if (!function_exists('errorToExceptionHandler')) {
             exit; // make sure to exit in case of database connection errors.
         } 
         if ($serendipity['production'] === true) { 
-            if( serendipity_checkPermission('adminUsers') ) { 
+            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
                 // ToDo: enhance for more special serendipity error needs
                 $str  = '<p> == SERENDIPITY ERROR == </p>';
                 $str .= '<p>Please correct:</p>';
