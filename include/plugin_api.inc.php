@@ -23,9 +23,9 @@ if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
  */
 $serendipity['capabilities']['jquery']         = true;
 $serendipity['core_events']['frontend_header']['jquery'] = 'serendipity_plugin_api_frontend_header';
-$serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_frontend_header';
+$serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_backend_header';
 
-// Add jquery to all frontend and backend templates
+// Add jquery to all frontend templates (in noConflict mode)
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
   global $serendipity;
 
@@ -36,10 +36,24 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     $check = serendipity_getTemplateFile('jquery.js');
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
-    <script type="text/javascript" src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
-    <script type="text/javascript">
-    jQuery.noConflict();
-    </script>
+    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
+    <script>jQuery.noConflict();</script>
+<?php
+    }
+}
+
+// Add jquery to all backend templates
+function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, $addData) {
+  global $serendipity;
+
+    // Only execute if current template does not have its own jquery.js file
+    // jquery can be disabled if a template's config.inc.php or a plugin sets
+    // $serendipity['capabilities']['jquery'] = false
+
+    $check = serendipity_getTemplateFile('jquery.js');
+    if (!$check && $serendipity['capabilities']['jquery']) {
+?>
+    <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
 <?php
     }
 }
