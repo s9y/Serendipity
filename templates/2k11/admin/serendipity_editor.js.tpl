@@ -82,7 +82,7 @@ function wrapSelection(txtarea, openTag, closeTag) {
     }
 
     // http://stackoverflow.com/questions/1712417/jquery-wrap-selected-text-in-a-textarea
-    var $txtarea = jQuery(txtarea);
+    var $txtarea = $(txtarea);
     var len = $txtarea.val().length;
     var start = $txtarea[0].selectionStart;
     var end = $txtarea[0].selectionEnd;
@@ -104,7 +104,7 @@ function wrapSelection(txtarea, openTag, closeTag) {
 function wrapSelectionWithLink(txtarea) {
     var my_link = prompt("Enter URL:","http://");
 
-    if (getSelection(jQuery(txtarea) ) == "") {
+    if (getSelection($(txtarea) ) == "") {
         var my_desc = prompt("Enter Description", '');
     }
 
@@ -135,7 +135,7 @@ function wrapSelectionWithLink(txtarea) {
 // Adds img element to selected text
 // Used internally by wrapInsImage()
 function insertText(txtarea, str) {
-    $txtarea = jQuery(txtarea);
+    $txtarea = $(txtarea);
     var selLength = $txtarea.val().length;
     var selStart = $txtarea[0].selectionStart;
     var selEnd = $txtarea[0].selectionEnd;
@@ -183,7 +183,7 @@ function choose_media(id) {
 
 // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
 function serendipity_imageSelector_addToElement (str, id) {
-    var $input = jQuery('#'+id);
+    var $input = $('#'+id);
     $input.val(str);
 
     if ($input.attr('type') != 'hidden') {
@@ -259,7 +259,7 @@ function serendipity_imageSelector_addToBody (str, textarea) {
 // which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
 function noWysiwygAdd( str, textarea ) {
-    wrapSelection(jQuery('textarea[name="serendipity['+textarea+']"]'), str, '');
+    wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
 }
 
 // Inserting media db img markup including s9y-specific container markup
@@ -314,15 +314,15 @@ function serendipity_imageSelector_done(textarea) {
         imgID = f['imgID'].value;
     }
 
-    var floating = jQuery(':input[name="serendipity[align]"]:checked').val();
+    var floating = $(':input[name="serendipity[align]"]:checked').val();
     if (floating == "") {
         floating = "center";
     }
     img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
 
-    if (jQuery("#radio_islink_yes").attr("checked")) {
+    if ($("#radio_islink_yes").attr("checked")) {
         // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
-        var targetval = jQuery('#select_image_target').val();
+        var targetval = $('#select_image_target').val();
 
         var prepend   = '';
         var ilink     = f['serendipity[url]'].value;
@@ -350,7 +350,7 @@ function serendipity_imageSelector_done(textarea) {
         var img = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
     } 
 
-    if (jQuery('#serendipity_imagecomment').val() != '') {
+    if ($('#serendipity_imagecomment').val() != '') {
         var comment = f['serendipity[imagecomment]'].value;
 
         var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
@@ -365,17 +365,17 @@ function serendipity_imageSelector_done(textarea) {
 
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
-    if (jQuery('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-        jQuery('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
-        jQuery('#tools_extended').show();
-        jQuery('#option_extended').attr('src', minus_img);
+    if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
+        $('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
+        $('#tools_extended').show();
+        $('#option_extended').attr('src', minus_img);
     } else {
-        jQuery('textarea[name="serendipity[extended]"]').hide();
-        jQuery('#tools_extended').hide();
-        jQuery('#option_extended').attr('src', plus_img);
+        $('textarea[name="serendipity[extended]"]').hide();
+        $('#tools_extended').hide();
+        $('#option_extended').attr('src', plus_img);
     }
     if (setCookie) {
-        document.cookie = 'serendipity[toggle_extended]=' + ((jQuery('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
+        document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
     }
 }
 
@@ -430,31 +430,31 @@ function showItem(id) {
     if (id == undefined) {
         // this function got called by addLoadEvent, used pre s9y 2.0
         id = 'categoryselector';
-        if (jQuery('#'+id).children('*[selected="selected"]').length > 1) {
+        if ($('#'+id).children('*[selected="selected"]').length > 1) {
             // when loading the page new for the preview and more than one category was selected, collapsing
             // the category-selector would lose those categories
-            jQuery('#'+id).attr("size", jQuery('#'+id).children().size);
-            jQuery('#option_' + id).attr("src", minus_img);
+            $('#'+id).attr("size", $('#'+id).children().size);
+            $('#option_' + id).attr("src", minus_img);
             return
         }
     }
-    if (jQuery('#'+id).attr("multiple")) {
-        jQuery('#'+id).removeAttr("multiple");
-        jQuery('#'+id).removeAttr("size");
-        jQuery('#option_' + id).attr("src", plus_img);
+    if ($('#'+id).attr("multiple")) {
+        $('#'+id).removeAttr("multiple");
+        $('#'+id).removeAttr("size");
+        $('#option_' + id).attr("src", plus_img);
         
     } else {
-        jQuery('#'+id).attr("multiple", "");
-        jQuery('#'+id).attr("size", jQuery('#'+id).children().size);
-        jQuery('#option_' + id).attr("src", minus_img);
+        $('#'+id).attr("multiple", "");
+        $('#'+id).attr("size", $('#'+id).children().size);
+        $('#option_' + id).attr("src", minus_img);
     }
 }
 
 // save in the cookie which options were selected when inserting a image from the media db
 function rememberMediaOptions() {
-    jQuery('#imageForm :input').each(function(index, element) {
+    $('#imageForm :input').each(function(index, element) {
         if (! (element.type == 'radio' && element.checked == false)) {
-            SetCookie(element.name.replace(/\[/g, '_').replace(/\]/g, ''), jQuery(element).val());
+            SetCookie(element.name.replace(/\[/g, '_').replace(/\]/g, ''), $(element).val());
         }
     });
 }
@@ -484,29 +484,29 @@ function treeToggleAll() {
 // Hides the foreign upload form if batch upload is used (if more
 // images are added)
 function hideForeign() {
-    jQuery('#foreign_upload').hide();
-    jQuery('#imageurl').val('');
+    $('#foreign_upload').hide();
+    $('#imageurl').val('');
 }
 
 // save in which directory the frist uploaded files is stored (the default when only isnerting one file)
 function rememberUploadOptions() {
-    SetCookie("addmedia_directory", jQuery('#target_directory_2').val());
+    SetCookie("addmedia_directory", $('#target_directory_2').val());
 }
 
 // Clones the upload form template
 function addUploadField() {
-    var upload_fieldcount = jQuery('.uploadform_userfile').length;
+    var upload_fieldcount = $('.uploadform_userfile').length;
 
-    var $fields = jQuery('#upload_template').clone();
+    var $fields = $('#upload_template').clone();
     $fields.attr('id', 'upload_form_' + upload_fieldcount);
     $fields.css('display', 'block');
 
-    var userfile             = jQuery('.uploadform_userfile',               $fields);
-    var userfile_label       = jQuery('.uploadform_userfile_label',         $fields);
-    var targetfilename       = jQuery('.uploadform_target_filename',        $fields);
-    var targetfilename_label = jQuery('.uploadform_target_filename_label',  $fields);
-    var targetdir            = jQuery('.uploadform_target_directory',       $fields);
-    var targetdir_label      = jQuery('.uploadform_target_directory_label', $fields);
+    var userfile             = $('.uploadform_userfile',               $fields);
+    var userfile_label       = $('.uploadform_userfile_label',         $fields);
+    var targetfilename       = $('.uploadform_target_filename',        $fields);
+    var targetfilename_label = $('.uploadform_target_filename_label',  $fields);
+    var targetdir            = $('.uploadform_target_directory',       $fields);
+    var targetdir_label      = $('.uploadform_target_directory_label', $fields);
 
     userfile.attr('id', 'userfile_' + upload_fieldcount);
     userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
@@ -530,12 +530,12 @@ function addUploadField() {
 // Collapse/expand the full length comment in comments list
 // NOTE: isn't used right now in 2k11
 function FT_toggle(id) {
-    jQuery('#'+ id + '_full').toggle().removeClass("hidden");
-    jQuery('#'+ id + '_summary').toggle().removeClass("hidden");
-    if (jQuery('#'+ id + '_full:visible').length > 0) {
-        jQuery('#'+ id + '_text').text('{$CONST.VIEW_FULL}');
+    $('#'+ id + '_full').toggle().removeClass("hidden");
+    $('#'+ id + '_summary').toggle().removeClass("hidden");
+    if ($('#'+ id + '_full:visible').length > 0) {
+        $('#'+ id + '_text').text('{$CONST.VIEW_FULL}');
     } else {
-        jQuery('#'+ id + '_text').text('{$CONST.HIDE}');
+        $('#'+ id + '_text').text('{$CONST.HIDE}');
     }
 
     return false;
@@ -544,10 +544,10 @@ function FT_toggle(id) {
 // Inverts a selection of checkboxes
 // NOTE: similar function (but not duplicate!) from admin_scripts.js, see below
 function invertSelection() {
-    jQuery('.input_checkbox').each(function(index, checkbox) {
-        jQuery(checkbox).attr('checked',  ! jQuery(checkbox).attr('checked'));
+    $('.input_checkbox').each(function(index, checkbox) {
+        $(checkbox).attr('checked',  ! $(checkbox).attr('checked'));
         var id = 'comment_' + checkbox.name.replace(/.*\[.*\]\[(.*)\]/, "$1");   // gets the id from the name of the checkbox, which is serendipity[delete][id]
-        highlightComment(id, jQuery(checkbox).attr('checked'));
+        highlightComment(id, $(checkbox).attr('checked'));
     });
 }
 
@@ -572,7 +572,7 @@ function invertSelection() {
 
 // Purely cosmetic function to highlight/dehighlight a comment by toggling the class comment_selected
 function highlightComment(id, checkvalue) {
-    jQuery('#'+id).toggleClass('comment_selected');
+    $('#'+id).toggleClass('comment_selected');
 }
 
 (function($) {
