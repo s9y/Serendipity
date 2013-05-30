@@ -258,10 +258,7 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
-$serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/import.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-echo $content;
+echo serendipity_smarty_show('admin/import.inc.tpl', $data);
 
 
 /* vim: set sts=4 ts=4 expandtab : */

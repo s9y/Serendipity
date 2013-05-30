@@ -8,7 +8,7 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
-$tfile = dirname(__FILE__) . "/tpl/export.inc.tpl";
-$serendipity['smarty']->display('file:'. $tfile);
+echo serendipity_smarty_show('admin/export.inc.tpl');
+
 
 /* vim: set sts=4 ts=4 expandtab : */

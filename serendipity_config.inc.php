@@ -121,7 +121,7 @@ $serendipity['use_iframe'] = true;
 $serendipity['autolang'] = 'en';
 
 /* Name of folder for the default theme */
-$serendipity['defaultTemplate'] = 'bulletproof';
+$serendipity['defaultTemplate'] = '2k11';
 
 /* Availiable languages */
 if (!isset($serendipity['languages'])) {

@@ -125,10 +125,7 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW'])) {
     $data['formToken'] = serendipity_setFormToken();
 }
 
-$serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/groups.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile);
-echo $content;
+echo serendipity_smarty_show('admin/groups.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */
 ?>

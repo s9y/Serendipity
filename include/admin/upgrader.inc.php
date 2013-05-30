@@ -384,9 +384,6 @@ if (!is_object($serendipity['smarty'])) {
 /* see on top */
 #$serendipity['smarty']->registerPlugin('function', 'serendipity_upgraderResultDiagnose', 'serendipity_smarty_backend_upgraderResultDiagnose');
 
-$serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/upgrader.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-echo $content;
+echo serendipity_smarty_show('admin/upgrader.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

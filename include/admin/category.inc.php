@@ -199,9 +199,6 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
-$serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/category.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-echo $content;
+echo serendipity_smarty_show('admin/category.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

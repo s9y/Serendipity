@@ -733,9 +733,7 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
 $data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 $data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
 
-$serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/images.inc.tpl";
-$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-echo $content;
+
+echo serendipity_smarty_show('admin/images.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */

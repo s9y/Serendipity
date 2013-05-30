@@ -210,11 +210,7 @@ function show_plugins($event_only = false, $sidebars = null)
     }
 
     $data['total'] = $total;
-
-    $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/show_plugins.fnc.tpl";
-    $serendipity['smarty']->display('file:'. $tfile);
-
+    echo serendipity_smarty_show('admin/show_plugins.fnc.tpl', $data);
 }
 
 /**
@@ -242,10 +238,7 @@ function ownership($authorid, $name, $is_plugin_owner = false) {
     $data['name'] = $name;
     $data['show_ownership'] = true;
 
-    $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/show_ownership.fnc.tpl";
-    $serendipity['smarty']->display('file:'. $tfile);
-
+    echo serendipity_smarty_show('admin/show_ownership.fnc.tpl', $data);
 }
 
 /**
@@ -318,7 +311,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
-    $tfile = dirname(__FILE__) . "/admin/tpl/out_stack_loop.tpl";
+    $tfile = "/admin/out_stack_loop.tpl";
+    
 
     $data = array();
 
@@ -392,8 +386,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         switch ($ctype) {
             case 'seperator': 
                 $data['ctype'] = 'seperator';
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -416,8 +409,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['select_size']      = $select_size  = $cbag->get('select_size');
                 $data['select']           = $select = $cbag->get('select_values');
 
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -469,8 +461,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     $data['radio_button'][$radio_index]['index'] = htmlspecialchars($radio['desc'][$radio_index]);
                 }
 
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -483,8 +474,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                 }
                 $data['input_type'] = $input_type;
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -504,32 +494,28 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                     serendipity_emit_htmlarea_code('nuggets', 'nuggets', true);
                 }
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                break;
 
             case 'content': 
                 $data['ctype'] = 'content';
                 $data['cbag_default'] = $cbag->get('default');
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'custom': 
                 $data['ctype'] = 'custom';
                 $data['cbag_custom'] = $cbag->get('custom');
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'hidden': 
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -553,8 +539,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['preview_width']  = $preview_width;
                 $data['preview_height'] = $preview_height;
 
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -681,8 +666,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 }
                 // Print the Javascript to drag-n-drop the list
                 // Finish the row
-                $serendipity['smarty']->assign($data);
-                $serendipity['smarty']->display('file:'. $tfile);
+                echo serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -749,10 +733,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['ev'] = $ev;
     }
 
-    $serendipity['smarty']->assign($data);
-    $tfile = dirname(__FILE__) . "/admin/tpl/serendipity_plugin_config.fnc.tpl";
-    $content = $serendipity['smarty']->fetch('file:'. $tfile);
-    echo $content;
+    echo serendipity_smarty_show('admin/serendipity_plugin_config.fnc.tpl', $data);
 
     return true;
 }

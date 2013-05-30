@@ -385,12 +385,13 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 $serendipity['smarty']->assign($data);
-$tfile = dirname(__FILE__) . "/tpl/installer.inc.tpl";
+$tfile = serendipity_getTemplateFile("admin/installer.inc.tpl");
 
 ob_start();
 include $tfile;
 $content = ob_get_contents();
 ob_end_clean();
+
 
 #$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
 #echo $content;
