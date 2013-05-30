@@ -58,6 +58,10 @@ class template_option {
 
 $data = array();
 
+if ($serendipity['GET']['adminAction'] == 'editConfiguration') {
+    $data["adminAction"] = "editConfiguration";
+}
+
 if ($serendipity['GET']['adminAction'] == 'install' ) {
     serendipity_plugin_api::hook_event('backend_templates_fetchtemplate', $serendipity);
 

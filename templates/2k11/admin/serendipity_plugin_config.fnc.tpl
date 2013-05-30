@@ -10,6 +10,9 @@
     </script>
 {if $showSubmit_head}
     <div class="save_conf form_buttons">
+        {if $postKey == "template"}
+            <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
@@ -41,6 +44,9 @@
 {* $serendipity_printConfigJS *}{* outsourced to templates/default/admin/admin_scripts.js - see passed vars on top *}
 {if $showSubmit_foot}
     <div class="save_conf form_buttons">
+        {if $postKey == "template"}
+            <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
