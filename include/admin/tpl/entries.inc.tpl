@@ -102,8 +102,6 @@
     </nav>
     {/if}
 
-    <script src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
-
     <form id="formMultiDelete" action="?" method="post" name="formMultiDelete">
         {$formtoken}
         <input name="serendipity[action]" type="hidden" value="admin">

@@ -8,9 +8,6 @@
         var img_plus   = '{serendipity_getFile file="img/plus.png"}';
         var img_minus  = '{serendipity_getFile file="img/minus.png"}';
     </script>
-{if $allow_admin_scripts}
-    <script src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
-{/if}
 {if $showSubmit_head}
     <div class="save_conf form_buttons">
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">

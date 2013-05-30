@@ -1,7 +1,6 @@
 {* HTML5: Yes *}
 {* jQuery: No *}
 
-<script src="{serendipity_getFile file='admin/admin_scripts.js'}"></script>
 <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 
 <h2>{$CONST.FIND_MEDIA}</h2>
