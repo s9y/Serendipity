@@ -134,6 +134,7 @@ function serendipity_imageSelector_addToElement (str, id) {
 
 // "Transfer" value from media db popup to textarea, including wysiwyg
 // This gets textarea="body"/"extended" and tries to insert into the textarea named serendipity[body]/serendipity[extended]
+// No! It does even support other textareas like the two nuggets in staticpages
 function serendipity_imageSelector_addToBody (str, textarea)
 {
     var oEditor;
@@ -229,8 +230,39 @@ function serendipity_imageSelector_addToBody (str, textarea)
 // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
 // which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
+/* Temporary disabled, since this does not support my changes to get this non func to work well everywhere (Ian)
 function noWysiwygAdd( str, textarea ) {
     wrapSelection(jQuery('textarea[name="serendipity['+textarea+']"]'), str, '');
+}
+*/
+
+// this is used by noWysiwygAdd() in nugget textareas
+function urldecode(url)
+{
+  return decodeURIComponent(url.replace(/\+/g, ' '));
+}
+
+// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
+// NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
+function noWysiwygAdd( str, textarea )
+{
+    // default case: no wysiwyg editor
+    eltarget = '';
+    if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) {
+        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']'];
+    } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) {
+        eltarget = document.forms['serendipityEntry'][textarea];
+    } else {
+        //eltarget = document.forms[0].elements[0]; // this did not work in staticpages textareas
+        var elements = document.getElementsByTagName("textarea");
+        for (var i = 0; i < elements.length; ++i) {
+            if (elements[i].getAttribute("name") == urldecode(textarea)) {
+                eltarget = elements[i];
+            }
+        } if (eltarget=='') eltarget = document.forms[0].elements[0];
+    }
+    wrapSelection(eltarget, str, '');
+    eltarget.focus();
 }
 
 // Inserting media db img markup including s9y-specific container markup
