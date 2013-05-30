@@ -1,5 +1,4 @@
 jQuery("document").ready(function() {
-    // TODO: Add autoscrolling
     jQuery('.pluginmanager_container').sortable(
         {
             containerSelector: '.pluginmanager_container',
@@ -10,6 +9,16 @@ jQuery("document").ready(function() {
                 $item.find('input[name$="placement]"]').val(placement);
                 $item.removeClass("dragged").removeAttr("style")
                 jQuery("body").removeClass("dragging")
+                $.autoscroll.stop();
+            },
+            onDragStart: function ($item, container, _super) {
+                $.autoscroll.init();
+                $item.css({
+                    height: $item.height(),
+                    width: $item.width()
+                })
+                $item.addClass("dragged")
+                $("body").addClass("dragging")
             }
         }
     );
