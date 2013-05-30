@@ -423,7 +423,8 @@ form > a,
 #mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
-#serendipityScaleForm .form_field label {
+#serendipityScaleForm .form_field label,
+#template_select .installed {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -1228,6 +1229,10 @@ form > .button_link:first-of-type { margin-top: 0; }
     overflow: hidden;
     height: 100px;
     width: 100px;
+}
+
+#template_select .installed {
+    margin-right: .5em;
 }
 
 .zebra_list,

@@ -67,8 +67,8 @@
                         <span class="unmet_requirements msg_error"><span class="icon-attention"></span> {$info.unmetRequirements}></span>
                         {/if}
                     {else}
-                        <span class="installed block_level"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
-                         <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration">{$CONST.CONFIGURATION}</a>
+                        <span class="installed"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
+                         <a class="button_link state_submit" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration">{$CONST.CONFIGURATION}</a>
                     {/if}
                     </div>
                 </article>
