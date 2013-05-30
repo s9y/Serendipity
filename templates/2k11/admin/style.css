@@ -1293,14 +1293,64 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 
 /* PLUGIN MANAGER
-
-   (These might go into pluginmanager.css or be merged with it.)
    ----------------------------------------------------------------- */
+.pluginmanager_container {
+    background: transparent;
+    border: 1px solid #ddd;
+    height: 98%;
+    margin: 0;
+    min-height: 12.5em;
+    padding: 5px;
+    position: relative;
+}
+
+.pluginmanager_container .placeholder {
+    border: 1px solid black;
+    height: 50px;
+    position: relative;
+}
+
+.pluginmanager_container .placeholder:before {
+    border: 5px solid transparent;
+    border-left-color: red;
+    border-right: none;
+    content: "";
+    height: 0;
+    margin-top: -5px;
+    position: absolute;
+    left: -5px;
+    top: -4px;
+    width: 0;
+}
+
+.pluginmanager_plugin {
+    margin: 0 0 5px;
+    padding: 2em 5px 5px;
+    position: relative;
+}
+
+.pluginmanager_plugin:last-child { margin-bottom: 0; }
+
+.pluginmanager_item_odd,
+.pluginmanager_item_even {
+    background: #eee;
+    border: 1px solid #ddd;
+}
+
+.pluginmanager_place,
+.pluginmanager_ownership,
+.pluginmanager_move { text-align: right; }
+
 .plugin_optiongroup_last { border-bottom: 1px solid #aaa; }
 
 .plugin_count {
     clear: both;
     margin: 0 0 1.5em;
+}
+
+.pluginmanager  .pluginmanager_grablet {
+    cursor: move;
+    display: block;
 }
 
 .pluginmanager .pluginmanager_grablet,
@@ -1334,25 +1384,6 @@ form > .button_link:first-of-type { margin-top: 0; }
     position: absolute;
     opacity: 0.5;
     z-index: 2000;
-}
-
-.pluginmanager_container .placeholder {
-    border: 1px solid black;
-    height: 50px;
-    position: relative;
-}
-
-.pluginmanager_container .placeholder:before {
-    border: 5px solid transparent;
-    border-left-color: red;
-    border-right: none;
-    content: "";
-    height: 0;
-    margin-top: -5px;
-    position: absolute;
-    left: -5px;
-    top: -4px;
-    width: 0;
 }
 
 
@@ -1522,10 +1553,12 @@ form > .button_link:first-of-type { margin-top: 0; }
     #serendipity_plugin_config > fieldset .form_radio,
     #template_options fieldset .form_radio { margin-top: 0; }
 
-    /* Plugin manager – might go into pluginmanager.css in the end */
+    /* Plugin manager */
     .pluginmanager_side {
         float: left;
         margin: 0 0 1.5em;
+        vertical-align: top;
+        width: 33%;
     }
 
     #pluginlist_sidebar .pluginmanager_side  {
