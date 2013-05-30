@@ -521,7 +521,7 @@ function addUploadField() {
     targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
     $fields.insertBefore('#upload_form');
-
+    // This throws: "Uncaught TypeError: Cannot read property 'selectedIndex' of null" …?
     document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
 }
 
