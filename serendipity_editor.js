@@ -237,9 +237,8 @@ function serendipity_imageSelector_addToBody (str, textarea)
             noWysiwygAdd(str, textarea);
         }
     } else if(typeof(HTMLArea) != 'undefined') {
-        // if here the blog uses HTMLArea editor
-        oEditor;
 
+        // if here the blog uses HTMLArea editor
         if (textarea == 'body' && typeof(editorbody) != 'undefined') {
             oEditor = editorbody;
         } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') {
