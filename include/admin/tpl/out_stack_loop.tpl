@@ -88,7 +88,7 @@
     {/if}
     {if $ctype == 'sequence'}
         {if !$sequencejs_output}
-            <script src="{serendipity_getFile file='dragdrop.js'}"></script>
+        <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
         {/if}
         <fieldset>
             <legend><span>{$cname}{if $cdesc != ''} <span>{$cdesc}</span>{/if}</span></legend>

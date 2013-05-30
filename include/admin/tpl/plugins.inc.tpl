@@ -120,9 +120,9 @@
     {/if}
     <h2>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</h2>
     {if $eyecandy}
-    <script src="{serendipity_getFile file="admin/jquery.autoscroll.js"}"></script>
-    <script src="{serendipity_getFile file="admin/jquery.sortable.js"}"></script>
-    <script src="{serendipity_getFile file="admin/dragdrop.js"}"></script>
+    <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
+    <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
+    <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
     {/if}
     <section id="pluginlist_sidebar">
         <h3>{$CONST.SIDEBAR_PLUGINS}</h3>

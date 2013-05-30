@@ -26,7 +26,7 @@
 <section id="template_select">
     <h2>{$CONST.SELECT_TEMPLATE}</h2>
 
-    <script src="{serendipity_getFile file='admin/jquery.syncheight.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 
     <ul class="plainList clearfix">
     {foreach $templates as $template=>$info}
