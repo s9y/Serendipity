@@ -339,7 +339,7 @@ function serendipity_imageSelector_done(textarea) {
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
     if (jQuery('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-        jQuery('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id doesn't work
+        jQuery('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
         jQuery('#tools_extended').show();
         jQuery('#option_extended').attr('src', minus_img);
     } else {
