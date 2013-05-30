@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="{$admin_vars.admin_css_file}">
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
     <script src="{serendipity_getFile file='admin/header_spawn.js'}"></script>
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 {if $admin_vars.admin_installed}
-    {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+{serendipity_hookPlugin hook="backend_header" hookAll="true"}
 {/if}
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
 <body id="serendipity_admin_page" onload="spawn()">
 {if NOT $admin_vars.no_banner}
