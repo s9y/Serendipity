@@ -10,7 +10,6 @@
     var view_full = '{$CONST.VIEW_FULL}';
     var view_hide = '{$CONST.HIDE}';
 </script>
-<script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 
     <h2>{$CONST.COMMENTS}</h2>
 

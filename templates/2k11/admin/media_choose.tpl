@@ -54,8 +54,8 @@
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
     <script src="{serendipity_getFile file='admin/header_spawn.js'}"></script>
     <script type="text/javascript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script>
 var media_token_url = '{$media.token_url}';
 var media_rename = '{$CONST.ENTER_NEW_NAME}';

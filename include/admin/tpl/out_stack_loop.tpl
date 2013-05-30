@@ -70,9 +70,6 @@
     {/if}
     {if $ctype == 'media'}
         <div class="clearfix">
-        {if !$mediajs_output}
-            <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
-        {/if}
             <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
             {if $cdesc != ''}<span>{$cdesc}</span>{/if}
             </label>
