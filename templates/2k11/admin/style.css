@@ -201,6 +201,10 @@ table {
 
 /* BASE STYLES
    ----------------------------------------------------------------- */
+html {
+    font-size: 100%;
+}
+
 html,
 button,
 input,
@@ -212,7 +216,6 @@ textarea {
 }
 
 body {
-    font-size: 1em;
     line-height: 1.5;
     margin: 0;
 }
@@ -336,8 +339,6 @@ nav ol { padding: 0; }
 
 .clearfix:after { clear: both; }
 
-.clearfix { *zoom: 1; }
-
 
 /* ICON FONT:; http://fortawesome.github.com/Font-Awesome/
    ----------------------------------------------------------------- */
@@ -422,7 +423,6 @@ nav ol { padding: 0; }
 
 /* BACKEND HELPER CLASSES
    ----------------------------------------------------------------- */
-/* replace w/ .level_inblock */
 .icon_link,
 #insert_image,
 form > a,
@@ -454,11 +454,8 @@ form > a,
 #serendipityScaleForm .form_field label,
 #template_select .installed {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
 }
 
-/* replace w/ .level_block */
 .block_level,
 .form_multiselect label,
 label > span,
@@ -520,8 +517,6 @@ input[type="checkbox"] {
     position: relative;
     vertical-align: top;
     top: 5px;
-    top: 0 \0;
-    *top: -5px;
 }
 
 .button_link:focus,
@@ -566,8 +561,6 @@ input[type="submit"] {
     outline: 0;
     padding: 3px 10px;
     width: auto;
-    *padding-top: 2px;
-    *padding-bottom: 0;
 }
 
 .button_link,
@@ -700,11 +693,6 @@ input[type="reset"]:focus {
     text-shadow: #050505 0 1px 1px;
 }
 
-button {
-    *padding-top: 1px;
-    *padding-bottom: 1px;
-}
-
 input[type="date"],
 input[type="datetime"],
 input[type="datetime-local"],
@@ -740,9 +728,6 @@ input[type="url"] {
     padding: 2px 3px;
     text-align: left;
     height: 1.8em;
-    *padding-top: 2px;
-    *padding-bottom: 1px;
-    *height: auto;
 }
 
 input[type="date"][disabled],
@@ -1062,7 +1047,7 @@ main {
 #edit_entry_status select,
 #sort_entries .form_select select,
 #filter_entries .form_select select,
-#filter_entries .form_field input { width: 79%; }
+#filter_entries .form_field input { width: 80%; }
 
 #edit_entry_title input,
 #edit_entry_metadata input,
@@ -1070,7 +1055,7 @@ main {
 #filter_comments input,
 #filter_comments select,
 #serendipity_comment .form_field input,
-#serendipity_comment select { width: 84%; }
+#serendipity_comment select { width: 85%; }
 
 #template_options .form_select select,
 #template_options .form_field input,
@@ -1446,9 +1431,6 @@ form > .button_link:first-of-type { margin-top: 0; }
     #banner,
     #user_menu { width: 49%; }
 
-    .lt-ie8 #banner,
-    .lt-ie8 #user_menu { width: 48.5%; }
-
     #banner > span { margin: 0 0 1.5em; }
 
     #user_menu ul {
@@ -1462,8 +1444,6 @@ form > .button_link:first-of-type { margin-top: 0; }
 @media only screen and (min-width: 481px) {
     #uploadform label {
         display: inline-block;
-        *display: inline;
-        *zoom: 1;
         min-width: 40%;
     }
 
@@ -1591,7 +1571,6 @@ form > .button_link:first-of-type { margin-top: 0; }
         float: left;
         margin: 0 0 1.5em;
         vertical-align: top;
-        width: 33%;
     }
 
     #pluginlist_sidebar .pluginmanager_side  {
@@ -1601,7 +1580,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
     #pluginlist_event .pluginmanager_side  {
         margin-right: 1%;
-        width: 48%;
+        width: 49%;
     }
 }
 
@@ -1674,10 +1653,8 @@ form > .button_link:first-of-type { margin-top: 0; }
     #serendipity_comment .form_area { clear: both; }
 
     #main_menu { width: 23%; }
-    .lt-ie8 #main_menu { width: 22.5%; }
 
     #content { width: 73%; }
-    .lt-ie8 #content { width: 72.5%; }
 
     #edit_entry_status select[multiple],
     #sort_entries .form_select select,
@@ -1685,7 +1662,7 @@ form > .button_link:first-of-type { margin-top: 0; }
     #filter_entries .form_field input,
     #media_filter input,
     #media_filter select,
-    #media_pane_sort select { width: 84%; }
+    #media_pane_sort select { width: 85%; }
 
     #edit_entry_metadata select { width: 100%; }
 
