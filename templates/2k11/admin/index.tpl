@@ -10,10 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{$admin_vars.css_file}">
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
-{if $admin_vars.admin_installed}
-{serendipity_hookPlugin hook="backend_header" hookAll="true"}
-{/if}
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
+{if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
 </head>
 <body id="serendipity_admin_page">
 {if NOT $admin_vars.no_banner}
@@ -182,5 +179,6 @@
         <p>{$admin_vars.version_info}</p>
     </footer>
 {/if}
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </body>
 </html>

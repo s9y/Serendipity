@@ -666,18 +666,21 @@ function highlightComment(id, checkvalue) {
         footer: '#meta'
     });
 
-    // Wait until content including images is loaded
-    $(window).load(function() {
-        // Fire WYSIWYG editor(s)
-        spawn();
+    // Fire WYSIWYG editor(s)
+    spawn();
 
-        // Equal Heights
-        var $eqHeights = $('body').has('.equal_heights');
-
-        if($eqHeights.size() > 0) {
-            $('.equal_heights').syncHeight({
-                updateOnResize: true
-            });
-        }
+    // Click events
+    $('.status_timestamp > a').click(function(e) {
+        alert($(this).attr('title'));
+        e.preventDefault();
     });
+
+    // Equal Heights
+    var $eqHeights = $('body').has('.equal_heights');
+
+    if($eqHeights.size() > 0) {
+        $('.equal_heights').syncHeight({
+            updateOnResize: true
+        });
+    }
 })(jQuery);
