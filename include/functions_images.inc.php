@@ -2707,6 +2707,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
     $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
     $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
 
+    $file['url'] = $url;
+
     if ($file['hotlink']) {
         $file['full_file']  = $file['path'];
         $file['show_thumb'] = $file['path'];
@@ -2768,31 +2770,17 @@ function serendipity_prepareMedia(&$file, $url = '') {
     if ($file['is_image'] && file_exists($file['full_thumb'])) {
         $file['thumbWidth']  = $file['dim'][0];
         $file['thumbHeight'] = $file['dim'][1];
-        $file['preview'] .= '<img src="' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource . '" border="0" title="' . $file['path'] . $file['name'] . '" alt="'. $file['realname'] . '" />';
-        if ($url) {
-            $file['preview_url'] = $url .'&amp;serendipity[image]='. $file['id'];
-            $file['preview'] = '<a href="'. $file['preview_url'] .'">'. $file['preview'] .'</a>';
-        }
     } elseif ($file['is_image'] && $file['hotlink']) {
         $sizes = serendipity_calculate_aspect_size($file['dimensions_width'], $file['dimensions_height'], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
         $file['thumbWidth']  = $sizes[0];
         $file['thumbHeight'] = $sizes[1];
-        $file['preview'] .= '<img src="' . $file['path'] . '" width="' . $sizes[0] . '" height="' . $sizes[1] . '" border="0" title="' . $file['path'] . '" alt="'. $file['realname'] . '" />';
-        if ($url) {
-            $file['preview_url'] = $url .'&amp;serendipity[image]='. $file['id'];
-            $file['preview'] = '<a href="'. $file['preview_url'] .'">'. $file['preview'] .'</a>';
-        }
     /* If it's not an image, or the thumbnail does not exist */
     } else {
         $mimeicon = serendipity_getTemplateFile('admin/img/mime_' . preg_replace('@[^a-z0-9\-\_]@i', '-', $file['mime']) . '.png');
         if (!$mimeicon) {
             $mimeicon = serendipity_getTemplateFile('admin/img/mime_unknown.png');
         }
-        $file['preview'] .= '<img src="'. $mimeicon .'" title="' . $file['path'] . $file['name'] . ' (' . $file['mime'] . ')" alt="'. $file['mime'] .'" /><span class="block_level" style="font-weight: bold; font-size: 8pt">- ' . (($file['hotlink']) ? MEDIA_HOTLINKED : $file['mime']) .' -</span>';
-        if ($url) {
-            $file['preview_url'] = $url .'&amp;serendipity[image]='. $file['id'];
-            $file['preview'] .= '<a class="block_level" href="' . $file['preview_url'] . '">' . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']) . '</a>';
-        }
+        $file['mimeicon'] = $mimeicon;
     }
 
     $file['popupWidth']   = ($file['is_image'] ? ($file['dimensions_width']  + 20) : 600);
