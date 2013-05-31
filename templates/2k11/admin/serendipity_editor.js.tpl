@@ -1,13 +1,3 @@
-// File referenced in:
-// – include/admin/tpl/category.inc.tpl
-// – include/admin/tpl/comments.inc.tpl
-// – include/admin/tpl/out_stack_loop.tpl
-// – include/functions_entries_admin.inc.php
-// – templates/*/admin/admin_scripts.js
-// – templates/*/admin/entries.tpl
-// – templates/*/admin/media_choose.tpl
-// – templates/*/admin/media_upload.tpl
-
 /* $Id$ */
 /*
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
@@ -60,9 +50,11 @@ function addLoadEvent(func) {
     }
 }
 
-/*
-    Based upon code written by chris wetherell,  http://www.massless.org, chris [THE AT SIGN] massless.org
-*/
+/**
+ * Based upon code written by chris wetherell
+ * http://www.massless.org
+ * chris [THE AT SIGN] massless.org
+ */
 
 // Returns "position" of selection in textarea
 // Used internally by wrapSelectionWithLink()
@@ -648,8 +640,6 @@ function addUploadField() {
     document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
 }
 
-// outsourced from comments.inc.tpl
-//
 // Collapse/expand the full length comment in comments list
 // NOTE: isn't used right now in 2k11
 function FT_toggle(id) {
