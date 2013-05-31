@@ -277,7 +277,10 @@ li ol { margin: 0; }
 pre code { font-size: 1em; }
 
 nav ul,
-nav ol { padding: 0; }
+nav ol {
+    list-style: none;
+    padding: 0;
+}
 
 
 /* GENERIC CSS HELPER CLASSES
@@ -988,7 +991,7 @@ summary {
 #top > div,
 main {
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: 80em;
     width: 96%;
 }
 
