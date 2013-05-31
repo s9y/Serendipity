@@ -1020,8 +1020,9 @@ function serendipity_smarty_init($vars = array()) {
 
         // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
         // setup custom smarty variables, modifiers etc. to use in their templates.
-        if (file_exists($serendipity['smarty']->getConfigDir(0) . '/config.inc.php')) {
-            include_once $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
+        $config = $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
+        if (file_exists($config)) {
+            include_once $config;
         }
         
         if (is_array($template_loaded_config)) {
