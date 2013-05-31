@@ -491,7 +491,7 @@ function addUploadField() {
 
     var $fields = $('#upload_template').clone();
     $fields.attr('id', 'upload_form_' + upload_fieldcount);
-    $fields.css('display', 'block');
+    $fields.removeClass('hidden');
 
     var userfile             = $('.uploadform_userfile',               $fields);
     var userfile_label       = $('.uploadform_userfile_label',         $fields);
@@ -513,8 +513,8 @@ function addUploadField() {
     targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
     $fields.insertBefore('#upload_form');
-    // This throws: "Uncaught TypeError: Cannot read property 'selectedIndex' of null" …?
-    document.getElementById(targetdir.attr('id')).selectedIndex = document.getElementById('target_directory_' + (upload_fieldcount - 1)).selectedIndex;
+    // This looks weird, but works. If anyone can improve this, by all means do so.
+    $('#' + targetdir.attr('id')).val($($('#target_directory_' + (upload_fieldcount - 1))).val());
 }
 
 // Collapse/expand the full length comment in comments list
@@ -670,9 +670,23 @@ function highlightComment(id, checkvalue) {
     spawn();
 
     // Click events
+    //
+    // Show entry timestamp
     $('.status_timestamp > a').click(function(e) {
         alert($(this).attr('title'));
         e.preventDefault();
+    });
+
+    // Add media db upload field
+    var $uploadForm = $('body').has('#uploadform');
+
+    if($uploadForm.size() > 0) {
+        addUploadField();
+    }
+
+    $('#add_upload').click(function(e) {
+        hideForeign();
+        addUploadField();
     });
 
     // Equal Heights
