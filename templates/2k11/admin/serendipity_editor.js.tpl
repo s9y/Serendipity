@@ -668,7 +668,9 @@ function highlightComment(id, checkvalue) {
 
     // Wait until content including images is loaded
     $(window).load(function() {
+        // Fire WYSIWYG editor(s)
         spawn();
+
         // Equal Heights
         var $eqHeights = $('body').has('.equal_heights');
 
