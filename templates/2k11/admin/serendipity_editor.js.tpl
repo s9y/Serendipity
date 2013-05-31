@@ -204,7 +204,7 @@ function AddKeyword(keyword)  {
     s = document.getElementById('keyword_input').value;
     document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
 }
-{*
+{* Ian: Onli, please double check this with the fixed and replaced origin functions below *}
 // "Transfer" value from media db popup to textarea, including wysiwyg
 // This gets textarea="body"/"extended" and tries to insert into the textarea named serendipity[body]/serendipity[extended]
 function serendipity_imageSelector_addToBody (str, textarea) {
