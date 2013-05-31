@@ -454,8 +454,7 @@ form > a,
 #mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
-#serendipityScaleForm .form_field label,
-#template_select .installed {
+#serendipityScaleForm .form_field label {
     display: inline-block;
 }
 
@@ -1247,10 +1246,6 @@ form > .button_link:first-of-type { margin-top: 0; }
     width: 100px;
 }
 
-#template_select .installed {
-    margin-right: .5em;
-}
-
 .zebra_list,
 #categories .odd,
 #categories .even,
@@ -1389,6 +1384,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 .pluginmanager_description { margin: 0 0 .5em; }
 
+#template_select h3,
 .media_file h3 { margin: .5em 0 1em; }
 
 .media_file .form_check input {

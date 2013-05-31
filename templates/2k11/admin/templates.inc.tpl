@@ -54,10 +54,7 @@
                 </details>
             </div>
 
-            <div class="template_status">
-                <span class="installed"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
-                 <a class="button_link state_submit" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration">{$CONST.CONFIGURATION}</a>
-            </div>
+             <a class="button_link state_submit" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration">{$CONST.CONFIGURATION}</a>
         </article>
 
         <h2>{$CONST.SELECT_TEMPLATE}</h2>
