@@ -1501,6 +1501,12 @@ form > .button_link:first-of-type { margin-top: 0; }
         width: 48%;
     }
 
+    #template_select .current_template {
+        float: none;
+        margin: 0 0 2em;
+        width: 48%;
+    }
+
     #mediaPropertyForm .media_file {
         float: none;
         margin: 1.5em 0;
