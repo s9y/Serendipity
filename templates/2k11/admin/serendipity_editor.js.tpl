@@ -212,7 +212,7 @@ function AddKeyword(keyword)  {
     s = document.getElementById('keyword_input').value;
     document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
 }
-
+{*
 // "Transfer" value from media db popup to textarea, including wysiwyg
 // This gets textarea="body"/"extended" and tries to insert into the textarea named serendipity[body]/serendipity[extended]
 function serendipity_imageSelector_addToBody (str, textarea) {
@@ -261,6 +261,129 @@ function serendipity_imageSelector_addToBody (str, textarea) {
 function noWysiwygAdd( str, textarea ) {
     wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
 }
+*}
+{* do not drop doc notes, as this is done automatically by any minifier *}
+function serendipity_imageSelector_addToBody (str, textarea)
+{ 
+    var oEditor;
+
+    // check for CKEDITOR usage
+    if (typeof(CKEDITOR) != 'undefined') { 
+
+        // if here the blog uses CKEDITOR
+        oEditor = isinstance; // build-in by ckeditor plugin
+
+        if (oEditor.mode == "wysiwyg") { 
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.insertHtml(str);
+            // CKEDITOR.editor.mode = "source" disables function buttons, so using the fallback is redundant and could even confuse
+        } 
+
+    // check for FCKEditor usage
+    } else if (typeof(FCKeditorAPI) != 'undefined') { 
+
+        // if here the blog uses FCK editor
+        oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']');
+
+        if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG) { 
+            // if here the editior is in WYSIWYG mode so use the insert html function
+            oEditor.InsertHtml(str);
+        } else { 
+            // if here just insert the text to the textarea ( named with the value of textarea variable )
+            noWysiwygAdd( str, textarea );
+        } 
+
+    } else if(typeof(xinha_editors) != 'undefined') { 
+
+        // if here the blog uses Xinha editor
+        if (typeof(xinha_editors['serendipity[' + textarea + ']']) != 'undefined') { 
+            // this is good for the two default editors (body & extended)
+            oEditor = xinha_editors['serendipity['+ textarea +']'];
+        } else if (typeof(xinha_editors[textarea]) != 'undefined') { 
+            // this should work in any other cases than previous one
+            oEditor = xinha_editors[textarea];
+        } else { 
+            // this is the last chance to retrieve the instance of the editor !
+            // editor has not been registered by the name of it's textarea
+            // so we must iterate over editors to find the good one
+            for (var editorName in xinha_editors) { 
+                if ('serendipity[' + textarea + ']' == xinha_editors[editorName]._textArea.name) { 
+                    oEditor = xinha_editors[editorName];
+                    break;
+                } 
+            } 
+        } 
+
+        // the actual insert for the xinha editor
+        if (oEditor) { 
+            if (oEditor._editMode != 'textmode') { 
+                // if here the editior is in WYSIWYG mode so use the insert html function
+                oEditor.insertHTML(str);
+            } else { 
+                // if here just insert the text to the textarea ( named with the value of textarea variable )
+                noWysiwygAdd(str, textarea);
+            } 
+        } else { 
+            noWysiwygAdd(str, textarea);
+        } 
+    } else if(typeof(HTMLArea) != 'undefined') { 
+
+        // if here the blog uses HTMLArea editor
+        if (textarea == 'body' && typeof(editorbody) != 'undefined') { 
+            oEditor = editorbody;
+        } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') { 
+            oEditor = editorextended;
+        } else if (typeof(htmlarea_editors) != 'undefined' && typeof(htmlarea_editors[textarea]) != 'undefined') { 
+            oEditor = htmlarea_editors[textarea];
+        } 
+
+        // the actual insert for the HTMLArea editor
+        if (oEditor._editMode != 'textmode') { 
+            // if here the editor is in WYSIWYG mode so use the insert html function
+            oEditor.insertHTML(str);
+        } else { 
+            // if here just insert the text to the textarea ( named with the value of textarea variable )
+            noWysiwygAdd(str, textarea);
+        } 
+
+    } else if(typeof(TinyMCE) != 'undefined') { 
+
+        // for the TinyMCE editor we do not have a text mode insert
+        tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
+    } else { 
+        noWysiwygAdd(str, textarea);
+    } 
+} 
+
+// this is used by noWysiwygAdd() in nugget textareas
+function urldecode(url)
+{ 
+  return decodeURIComponent(url.replace(/\+/g, ' '));
+} 
+
+// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function which works fine in NO WYSIWYG mode
+// NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
+function noWysiwygAdd( str, textarea )
+{ 
+    // default case: no wysiwyg editor
+    eltarget = '';
+    if (document.forms['serendipityEntry'] && document.forms['serendipityEntry']['serendipity['+ textarea +']']) { 
+        eltarget = document.forms['serendipityEntry']['serendipity['+ textarea +']'];
+    } else if (document.forms['serendipityEntry'] && document.forms['serendipityEntry'][textarea]) { 
+        eltarget = document.forms['serendipityEntry'][textarea];
+    } else { 
+        //eltarget = document.forms[0].elements[0]; // this did not work in staticpages textareas
+        var elements = document.getElementsByTagName("textarea");
+        for (var i = 0; i < elements.length; ++i) { 
+            if (elements[i].getAttribute("name") == urldecode(textarea)) { 
+                eltarget = elements[i];
+            } 
+        } if (eltarget=='') eltarget = document.forms[0].elements[0];
+    } 
+    wrapSelection(eltarget, str, '');
+    eltarget.focus();
+} 
+
 
 // Inserting media db img markup including s9y-specific container markup
 function serendipity_imageSelector_done(textarea) {
