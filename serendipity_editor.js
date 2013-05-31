@@ -214,7 +214,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
             oEditor = xinha_editors[textarea];
         } else {
             // this is the last chance to retrieve the instance of the editor !
-            // editor has not been registered by the name of it's textarea
+            // editor has not been registered by the name of its textarea
             // so we must iterate over editors to find the good one
             for (var editorName in xinha_editors) {
                 if ('serendipity[' + textarea + ']' == xinha_editors[editorName]._textArea.name) {
@@ -227,7 +227,7 @@ function serendipity_imageSelector_addToBody (str, textarea)
         // the actual insert for the xinha editor
         if (oEditor) {
             if (oEditor._editMode != 'textmode') {
-                // if here the editior is in WYSIWYG mode so use the insert html function
+                // if here the editor is in WYSIWYG mode so use the insert html function
                 oEditor.insertHTML(str);
             } else {
                 // if here just insert the text to the textarea ( named with the value of textarea variable )
