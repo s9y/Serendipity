@@ -15,7 +15,7 @@
 {/if}
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
-<body id="serendipity_admin_page" onload="spawn()">
+<body id="serendipity_admin_page">
 {if NOT $admin_vars.no_banner}
     <header id="top">
         <div class="clearfix">

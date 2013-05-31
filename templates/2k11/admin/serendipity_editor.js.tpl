@@ -668,6 +668,7 @@ function highlightComment(id, checkvalue) {
 
     // Wait until content including images is loaded
     $(window).load(function() {
+        spawn();
         // Equal Heights
         var $eqHeights = $('body').has('.equal_heights');
 
