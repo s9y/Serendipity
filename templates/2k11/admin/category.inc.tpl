@@ -96,16 +96,9 @@
             <div class="clearfix">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.IMAGE}</label>
-                    {* TODO: this should probably become/fallback to input[type=file] *}
-                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}" onchange="document.getElementById('imagepreview').src = this.value; document.getElementById('imagepreview').style.display = '';">
-                    <script>
-                        var category_icon = document.getElementById('category_icon');
-                        var imgBtn        = document.createElement('div');
-                        imgBtn.id         = "insert_image";
-                        imgBtn.innerHTML  = '<input type="button" name="insImage" value="{$CONST.IMAGE}" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');">';
-                        category_icon.parentNode.insertBefore(imgBtn, category_icon.nextSibling);
-                    </script>
-                    <!-- noscript>FIXXME: Emit a warning if JS is disabled</noscript -->
+                    {* TODO: this should probably become/fallback to input[type=file]; also needs
+                             a no-js fallback since this is unusable without JS as of now *}
+                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
                 </div>
 
                 <figure id="preview">

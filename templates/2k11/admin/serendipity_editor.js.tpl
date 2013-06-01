@@ -677,6 +677,25 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // Category icon preview
+    // NOTE: This is just to replace the old functionality; ideally, this should
+    //       have a working no-js fallback
+    var $catIcon = $('body').has('#category_icon');
+
+    if($catIcon.size() > 0) {
+        $('<input id="insert_image" name="insImage" type="button" value="{$CONST.IMAGE}">').insertAfter('#category_icon');
+    }
+
+    $('#insert_image').click(function(e) {
+        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&amp;serendipity[filename_only]=true', 
+                    'ImageSel', 
+                    'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+    });
+
+    $('#category_icon').change(function(e) {
+        $('#imagepreview').attr('src', $('#category_icon').val());
+    });
+
     // Add media db upload field
     var $uploadForm = $('body').has('#uploadform');
 
