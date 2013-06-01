@@ -546,6 +546,10 @@ function invertSelection() {
 // Somebody needs to figure out why there were two functions of the same name
 // and which one is supposed to be used or if both should be used in different
 // contexts. Commented out since I assume that the first one is the proper one …
+//
+// … aaaand I was completely wrong. The second one (commented out) works, but it
+// only inverts the checkboxes. It does not highlight comments. This needs a
+// rewrite in jQuery anyway.
 // ------------------------------------------------------------------------------
 // Inverts a selection of checkboxes
 // NOTE: – also used in serendipity_event_karma
@@ -562,7 +566,7 @@ function invertSelection() {
 
 // Purely cosmetic function to highlight/dehighlight a comment by toggling the class comment_selected
 function highlightComment(id, checkvalue) {
-    $('#'+id).toggleClass('comment_selected');
+    $('#' + id).toggleClass('comment_selected');
 }
 
 (function($) {
@@ -694,6 +698,13 @@ function highlightComment(id, checkvalue) {
 
     $('#category_icon').change(function(e) {
         $('#imagepreview').attr('src', $('#category_icon').val());
+    });
+
+    // Comment selection for multidelete
+    // onclick="highlightComment('comment_{$comment.id}', this.checked)"
+    $('.serendipity_multidelete_comment').click(function(e) {
+        var $el = $(this);
+        highlightComment($el.attr('data-commentid'), $el.attr('checked'));
     });
 
     // Add media db upload field

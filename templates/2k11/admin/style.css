@@ -1261,6 +1261,10 @@ form > .button_link:first-of-type { margin-top: 0; }
 #categories .odd,
 #serendipity_image_folders .odd { background: #eee; }
 
+.zebra_list .comment_selected {
+    border: 1px solid #b94a48;
+}
+
 #entries_list h3,
 #serendipity_comments_list h4 {
     font-size: 1em;
