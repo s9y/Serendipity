@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $delete_yes}
     {if $no_delete_permission}
             <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>

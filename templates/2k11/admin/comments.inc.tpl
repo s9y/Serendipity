@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {if !empty($errormsg)}
     {* TODO: Not sure anything emitted here actually IS an error. *}
     <span class="msg_error"><span class="icon-attention"></span> {$errormsg}</span>

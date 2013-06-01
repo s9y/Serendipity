@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 <!doctype html>
 <html>
 <head>

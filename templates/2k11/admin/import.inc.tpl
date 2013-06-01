@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $importForm}
     {if $die}
         <span class="msg_error"><span class="icon-attention"></span> FAILURE: Unable to require import module, possible syntax error?</span>

@@ -1,6 +1,3 @@
-{* HTML5: No  *}
-{* jQuery: No *}
-
 {* Customization notes: All classnames and especially DOM IDs should be kept to keep compatibility with JavaScript calls! *}
 
 <h2>{$CONST.ADD_MEDIA}</h2>

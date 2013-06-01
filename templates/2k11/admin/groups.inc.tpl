@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $delete_yes}
     <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
 {/if}

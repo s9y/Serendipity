@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {* Erm, why isn't this localized at all? o_O A: (cite Garvin) http://board.s9y.org/viewtopic.php?f=10&t=18967&p=10432556#p10432556*}
     <div id="imgedit" class="clearfix">
         <form method="post" action="{$imgedit.my_url}" onsubmit="imgedit_getCoordinates()">

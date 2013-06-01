@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $is_errors && is_array($errors)}
     {foreach $errors AS $error}
         <span class="msg_error"><span class="icon-attention"></span> {$error}</span>

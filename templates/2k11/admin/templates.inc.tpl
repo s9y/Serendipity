@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $adminAction == 'install'}
     <span class="msg_success"><span class="icon-ok-circle"></span> {$install_template|string_format:"{$CONST.TEMPLATE_SET}"}</span>
 {/if}

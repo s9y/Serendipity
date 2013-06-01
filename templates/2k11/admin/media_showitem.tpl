@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 <html>
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">

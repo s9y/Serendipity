@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {if $case_imgedit}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
 {/if}

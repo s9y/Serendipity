@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {if $drawList}
     <h2>{$CONST.FIND_ENTRIES}</h2>
 

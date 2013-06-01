@@ -1,6 +1,3 @@
-{* HTML5: Yes  *}
-{* jQuery: No *}
-
 {foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
     {if NOT $media.manage}
         <div class="media_file_preview">

@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if ($get.action == 'ignore')}
     {* TODO: don't know what to put here? *}
 {elseif ($get.action == 'upgrade')}

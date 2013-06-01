@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {if $post_save}
     {if $new}
         <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CATEGORY_SAVED}</span>

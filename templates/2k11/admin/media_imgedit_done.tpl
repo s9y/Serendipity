@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {* Erm, why isn't this localized at all? o_O *}
         <div  id="fs_info" class="info">
             {* Check if h3 is the proper level. *}

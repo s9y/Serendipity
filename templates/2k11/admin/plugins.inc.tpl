@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $plugin_to_conf}
     {if is_array($save_errors)}
     <div class="msg_error">

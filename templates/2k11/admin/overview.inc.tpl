@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN*}
-
 <h2>{$output.welcome}</h2>
 {$output.more}
 {if $output.show_links}

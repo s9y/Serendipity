@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: No *}
-
 {* serendipity_plugins_admin.inc.php::serendipity_plugin_config() *}
     <script>
         var const_view = '{$CONST.VIEW_FULL}';

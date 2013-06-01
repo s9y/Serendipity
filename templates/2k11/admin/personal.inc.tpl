@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 <h2>{$CONST.PERSONAL_SETTINGS}</h2>
 {if $adminAction == 'save'}
     {if $not_authorized}

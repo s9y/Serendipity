@@ -1,6 +1,3 @@
-{* HTML5: Yes *}
-{* jQuery: NN *}
-
 {if $installAction == 'check'}
     {if $diagnosticError}
             <h2>{$CONST.DIAGNOSTIC_ERROR}</h2>
