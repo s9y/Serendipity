@@ -41,7 +41,7 @@
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
-            <div class="clearfix equal_heights">
+            <div class="clearfix equal_heights image_wrapper"">
                 <div class="media_file_preview">
                     {if $file.is_image AND $file.full_thumb}
                         {if $file.url}
@@ -70,7 +70,7 @@
                     {/if}
                 </div>
 
-                <footer>
+                <footer class="image_caption">
                     <ul class="media_file_meta plainList">
                 {if $file.hotlink}
                         <li>{$file.nice_hotlink}</li>

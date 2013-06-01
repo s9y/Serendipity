@@ -563,7 +563,7 @@
                                           'description' => INSTALL_THUMBWIDTH_DESC,
                                           'type'        => 'int',
                                           'permission'  => 'siteConfiguration',
-                                          'default'     => 110),
+                                          'default'     => 400),
 
                                     array('var'         => 'thumbConstraint',
                                           'title'       => INSTALL_THUMBDIM,

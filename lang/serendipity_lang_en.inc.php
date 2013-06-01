@@ -79,6 +79,7 @@
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Your search for %s returned %s results:');
 @define('SEARCH_TOO_SHORT', 'Your search-query must be longer than 3 characters. You can try to append * to shorter words, like: s9y* to trick the search into using shorter words.');
 @define('IMAGE', 'Image');
+@define('VIDEO', 'Video');
 @define('ERROR_FILE_NOT_EXISTS', 'Error: Old filename does not exist!');
 @define('ERROR_FILE_EXISTS', 'Error: New filename already used, pick another!');
 @define('ERROR_SOMETHING', 'Error: Something is wrong.');
