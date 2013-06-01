@@ -3,7 +3,7 @@
         <div class="media_file_preview">
             {if $file.is_image AND $file.full_thumb}
                 {if $file.url}
-                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                <a href="{$file.url}&amp;serendipity[image]={$file.id}">
                 {/if}
                     <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
                 {if $file.url}
