@@ -1234,7 +1234,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 #serendipityScaleImg img { max-width: 99%; }
 
 #template_select .preview_image,
-.media_file_preview {
+.media_file_preview,
+.media_file > div > footer {
     float: left;
     margin: 0 1em 1em 0;
 }

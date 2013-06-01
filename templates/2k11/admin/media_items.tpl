@@ -6,28 +6,28 @@
         <div class="media_file_preview">
             {if $file.is_image AND $file.full_thumb}
                 {if $file.url}
-                    <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                 {/if}
-                <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}" />
+                    <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
                 {if $file.url}
-                    </a>
+                </a>
                 {/if}
             {elseif $file.is_image AND $file.hotlink}
                 {if $file.url}
-                    <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                 {/if}
-                <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}" />
+                    <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}">
                 {if $file.url}
-                    </a>
+                </a>
                 {/if}
             {else}
                 {if $file.url}
-                    <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                 {/if}
-                <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}" />
-                <span class="block_level" style="font-weight: bold; font-size: 8pt">-  {if $file.hotlink} {$CONST.MEDIA_HOTLINKED} {else} {$file.mime} {/if}-</span>
+                    <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
+                    <span class="block_level">{if $file.hotlink}{$CONST.MEDIA_HOTLINKED}{else}{$file.mime}{/if}</span>
                 {if $file.url}
-                    </a>
+                </a>
                 {/if}
             {/if}
         {if $file.orderkey != ''}
@@ -48,28 +48,27 @@
                 <div class="media_file_preview">
                     {if $file.is_image AND $file.full_thumb}
                         {if $file.url}
-                            <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                         {/if}
-                        <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}" />
+                            <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
                         {if $file.url}
-                            </a>
+                        </a>
                         {/if}
                     {elseif $file.is_image AND $file.hotlink}
                         {if $file.url}
-                            <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                         {/if}
-                        <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}" />
+                            <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}">
                         {if $file.url}
-                            </a>
+                        </a>
                         {/if}
                     {else}
                         {if $file.url}
-                            <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                         {/if}
-                        <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}" />
-                        <span class="block_level" style="font-weight: bold; font-size: 8pt">-  {if $file.hotlink} {$CONST.MEDIA_HOTLINKED} {else} {$file.mime} {/if}-</span>
+                            <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
                         {if $file.url}
-                            </a>
+                        </a>
                         {/if}
                     {/if}
                 </div>
@@ -78,15 +77,19 @@
                     <ul class="media_file_meta plainList">
                 {if $file.hotlink}
                         <li>{$file.nice_hotlink}</li>
+                        <li>{$CONST.MEDIA_HOTLINKED}</li>
                 {else}
+                    {if $file.realname != $file.diskname}
+                        <li title="{$file.diskname}">{$file.diskname|truncate:30:"&hellip;"}</li>
+                    {/if}
+                    {if $file.mime}
+                        <li><b>Mime-Type:</b> {$file.mime}</li> {* i18n *}
+                    {/if}
                     {if $file.is_image}
                         <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
                         <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                     {/if}
                         <li><b>{$CONST.IMAGE_SIZE}:</b> {$file.nice_size} KB</li>
-                    {if $file.realname != $file.diskname}
-                        <li title="{$file.diskname}">{$file.diskname|truncate:30:"&hellip;"}</li>
-                    {/if}
                 {/if}
                     </ul>
                 </footer>
