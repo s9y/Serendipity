@@ -104,9 +104,8 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
         $cond['parts']['keywords'] = " AND (mk.property IN ('" . serendipity_db_implode("', '", $keywords, 'string') . "'))\n";
         $cond['joinparts']['keywords'] = true;
     }
-
     foreach($filter AS $f => $fval) {
-        if (!isset($orderfields[$f]) || empty($fval)) {
+        if (! (isset($orderfields[$f]) || $f == "fileCategory") || empty($fval)) {
             continue;
         }
 
@@ -139,6 +138,15 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
                 $cond['parts']['filter'] .= " AND (bp2.property = '$realf' AND bp2.value = '" . serendipity_db_escape_string(trim($fval)) . "')\n";
             } else {
                 $cond['parts']['filter'] .= " AND ($f = '" . serendipity_db_escape_string(trim($fval)) . "')\n";
+            }
+        } elseif ($f == 'fileCategory') {
+            switch ($fval) {
+                case 'image':
+                    $cond['parts']['filter'] .= " AND (i.mime LIKE 'image/%')\n";
+                    break;
+                case 'video':
+                    $cond['parts']['filter'] .= " AND (i.mime LIKE 'video/%')\n";
+                    break;
             }
         } else {
             if (substr($f, 0, 3) === 'bp.') {

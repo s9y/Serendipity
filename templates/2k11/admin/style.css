@@ -1414,7 +1414,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 .media_pane .pagination { margin: 0; }
 
-.serendipity_ImageWrapper:hover > .serendipity_ImageCaption {
+.image_wrapper:hover > .image_caption {
     display: block;
     -webkit-animation: fade-in 0.4s 1;
     -moz-animation: fade-in 0.4s 1;
@@ -1422,14 +1422,12 @@ form > .button_link:first-of-type { margin-top: 0; }
     opacity: 1;
 }
 
-.serendipity_ImageCaption {
+.image_caption {
     display: none;
     position: absolute;
     color: white;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
-    
-    
 }
 
 @-webkit-keyframes fade-in {
@@ -1444,6 +1442,25 @@ form > .button_link:first-of-type { margin-top: 0; }
 @keyframes fade-in {
     0% { opacity: 0;  }
     100% { opacity: 1; }
+}
+
+input[name="serendipity[filter][fileCategory]"] {
+    display: none;
+}
+
+label.media_selector {
+    cursor: pointer;
+}
+input:checked + label.media_selector {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
+    background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: -moz-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: -o-linear-gradient(#fff, #ddd 1px, #eee);
+    background-image: linear-gradient(#fff, #ddd 1px, #eee);
+    -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
+    border-color: #999 #bbb #ddd;
 }
 
 
