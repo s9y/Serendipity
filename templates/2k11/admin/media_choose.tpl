@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{$lang}"> <!--<![endif]-->
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}: {$CONST.SELECT_FILE}</title>

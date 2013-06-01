@@ -1,4 +1,6 @@
-<html>
+<!doctype html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{$lang}"> <!--<![endif]-->
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$media.file.props.base_property.TITLE|@default:$media.file.realname}</title>
