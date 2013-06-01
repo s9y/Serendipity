@@ -4,6 +4,7 @@
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$media.file.props.base_property.TITLE|@default:$media.file.realname}</title>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{$media.css}">
     <link rel="stylesheet" href="{$media.css_front}">
 </head>

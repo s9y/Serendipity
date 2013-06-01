@@ -4,6 +4,7 @@
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}: {$CONST.SELECT_FILE}</title>
+    <meta name="viewport" content="width=device-width">
     {if $media.css}<link rel="stylesheet" href="{$media.css}">{/if}
     {if $media.css_tree}<link rel="stylesheet" href="{$media.css_tree}">{/if}
     {if $media.css_imgedit}<link rel="stylesheet" href="{$media.css_imgedit}">{/if}
