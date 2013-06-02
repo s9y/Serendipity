@@ -279,6 +279,7 @@ pre code { font-size: 1em; }
 nav ul,
 nav ol {
     list-style: none;
+    margin: 0;
     padding: 0;
 }
 
@@ -1004,7 +1005,9 @@ main {
 .template_info,
 .template_info dt,
 .template_info dd,
-#entries_list .form_check { float: left; }
+#entries_list .form_check,
+.pagination .prev,
+.pagination .next { float: left; }
 
 #mediaPropertyForm .media_file_preview {
     float: none;
@@ -1043,6 +1046,12 @@ main {
 #mediaPropertyForm .media_file_props label,
 #mediaPropertyForm header b,
 #mediaPropertyForm footer b { width: 20%; }
+
+.pagination .prev,
+.pagination .next {
+    min-height: 1px;
+    width: 50%;
+}
 
 .category_data { width: 75%; }
 
@@ -1360,7 +1369,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 
 .pluginmanager_place,
 .pluginmanager_ownership,
-.pluginmanager_move { text-align: right; }
+.pluginmanager_move,
+.pagination .next { text-align: right; }
 
 .plugin_optiongroup_last { border-bottom: 1px solid #aaa; }
 
@@ -1416,8 +1426,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 #fs_crop { min-height: 200px; }
 
 .media_pane .pagination {
-    clear: both;
-    margin: 0;
+    margin: 0 2% 0 0;
 }
 
 .media_file_wrap:hover > .media_file_meta {
@@ -1458,10 +1467,10 @@ input[name="serendipity[filter][fileCategory]"] {
     display: none;
 }
 
-label.media_selector {
+.media_selector {
     cursor: pointer;
 }
-input:checked + label.media_selector {
+input:checked + .media_selector {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
     background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
     background-image: -moz-linear-gradient(#fff, #ddd 1px, #eee);

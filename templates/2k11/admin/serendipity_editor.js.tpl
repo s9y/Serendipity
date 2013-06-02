@@ -719,6 +719,11 @@ function highlightComment(id, checkvalue) {
         addUploadField();
     });
 
+    // Clone media library
+    $('.media_pane .pagination').clone().prependTo('.media_pane');
+    $('.comments_pane .pagination').clone().insertAfter('.comments_pane > h3');
+    $('.entries_pane .pagination').clone().prependTo('.entries_pane');
+
     // Equal Heights
     var $eqHeights = $('body').has('.equal_heights');
 

@@ -158,16 +158,13 @@
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
     <div class="clearfix media_pane">
-        <ul class="clearfix pagination plainList">
-            <li>{if $media.page != 1 AND $media.page <= $media.pages}<a href="{$media.linkPrevious}">{$CONST.PREVIOUS}</a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-            <li>{if $media.page != $media.pages}<a href="{$media.linkNext}">{$CONST.NEXT}</a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-        </ul>
         {$MEDIA_ITEMS}
-        {* Should be cloned using JS *}
-        <ul class="clearfix pagination plainList">
-            <li>{if $media.page != 1 AND $media.page <= $media.pages}<a href="{$media.linkPrevious}">{$CONST.PREVIOUS}</a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-            <li>{if $media.page != $media.pages}<a href="{$media.linkNext}">{$CONST.NEXT}</a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-        </ul>
+        <nav class="pagination">
+            <ul class="clearfix">
+                <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-circled"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+            </ul>
+        </nav>
     </div>
     {if $smarty.get.serendipity.adminModule == 'media'}
         <div class="form_buttons">

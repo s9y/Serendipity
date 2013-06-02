@@ -86,69 +86,66 @@
         </div>
     </form>
     {if $is_entries}
-    {if ($offSet > 0) || ($count > $perPage)}
-    <nav class="pagination">
-        <ul class="clearfix">
-        {if ($offSet > 0)}
-            <li><a class="icon_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a></li>
-        {/if}
-        {if ($count > $perPage)}
-            <li><a class="icon_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="icon-right-circled"></span><span class="visuallyhidden"> {$CONST.NEXT}</span></a></li>
-        {/if}
-        </ul>
-    </nav>
-    {/if}
-
     <form id="formMultiDelete" action="?" method="post" name="formMultiDelete">
         {$formtoken}
         <input name="serendipity[action]" type="hidden" value="admin">
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
 
-        <ul id="entries_list" class="plainList zebra_list">
-        {foreach $entries as $entry}
-            {if ($entry@index > $perPage)}{continue}{/if}
-            <li class="clearfix {cycle values="odd,even"}"><div class="form_check">
-                    <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
-                </div>
+        <div class="entries_pane">
+            <ul id="entries_list" class="plainList zebra_list">
+            {foreach $entries as $entry}
+                {if ($entry@index > $perPage)}{continue}{/if}
+                <li class="clearfix {cycle values="odd,even"}"><div class="form_check">
+                        <input id="multidelete_entry{$entry.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
+                    </div>
 
-                <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
+                    <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
 
-                <ul class="plainList clearfix actions">
-                {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
-                    <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
-                {else}
-                    <li><a class="button_link" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
-                {/if}
-                    <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                    <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
-                </ul>
-
-                <div class="entry_info clearfix">
-                    <span class="status_timestamp">
-                        {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
-                    </span>
-
-                    <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
-                    {if count($entry.cats)} {$CONST.IN}
-                      {foreach $entry.cats AS $cat}
-                        {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
-                      {/foreach}
+                    <ul class="plainList clearfix actions">
+                    {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
+                        <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
+                    {else}
+                        <li><a class="button_link" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
                     {/if}
-                    </span>
-                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
-                    <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
-                {/if}
-                {if $entry.ep_is_sticky}
-                    <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
-                {/if}
-                {if $entry.isdraft}
-                    <span class="entry_status status_draft">{$CONST.DRAFT}</span>
-                {/if}
-                </div>
-            </li>
-        {/foreach}
-        </ul>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}" title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                    </ul>
+
+                    <div class="entry_info clearfix">
+                        <span class="status_timestamp">
+                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
+                        </span>
+
+                        <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
+                        {if count($entry.cats)} {$CONST.IN}
+                          {foreach $entry.cats AS $cat}
+                            {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
+                          {/foreach}
+                        {/if}
+                        </span>
+                    {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
+                        <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
+                    {/if}
+                    {if $entry.ep_is_sticky}
+                        <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
+                    {/if}
+                    {if $entry.isdraft}
+                        <span class="entry_status status_draft">{$CONST.DRAFT}</span>
+                    {/if}
+                    </div>
+                </li>
+            {/foreach}
+            </ul>
+            {if ($offSet > 0) || ($count > $perPage)}
+            <nav class="pagination">
+                <ul class="clearfix">
+                    <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-circled"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                </ul>
+            </nav>
+            {/if}
+        </div>
     {/if}
         <div id="multidelete_tools" class="form_buttons">
             <input name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()">
