@@ -1426,7 +1426,7 @@ form > .button_link:first-of-type { margin-top: 0; }
 #fs_crop { min-height: 200px; }
 
 .media_pane .pagination {
-    margin: 0 2% 0 0;
+    margin: 0 2% 1em 0;
 }
 
 .media_file_wrap:hover > .media_file_meta {
