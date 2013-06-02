@@ -722,9 +722,11 @@ function highlightComment(id, checkvalue) {
     // Equal Heights
     var $eqHeights = $('body').has('.equal_heights');
 
-    if($eqHeights.size() > 0) {
-        $('.equal_heights').syncHeight({
-            updateOnResize: true
-        });
-    }
+    $(window).load(function() {
+        if($eqHeights.size() > 0) {
+            $('.equal_heights').syncHeight({
+                updateOnResize: true
+            });
+        }
+    });
 })(jQuery);

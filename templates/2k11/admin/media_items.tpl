@@ -37,11 +37,12 @@
                 <div class="form_check">
                     <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
                 </div>
+
                 <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
-            <div class="clearfix equal_heights image_wrapper">
+            <div class="clearfix equal_heights media_file_wrap">
                 <div class="media_file_preview">
                     {if $file.is_image AND $file.full_thumb}
                         {if $file.url}
@@ -70,8 +71,8 @@
                     {/if}
                 </div>
 
-                <footer class="image_caption">
-                    <ul class="media_file_meta plainList">
+                <footer class="media_file_meta">
+                    <ul class="plainList">
                 {if $file.hotlink}
                         <li>{$file.nice_hotlink}</li>
                         <li>{$CONST.MEDIA_HOTLINKED}</li>
