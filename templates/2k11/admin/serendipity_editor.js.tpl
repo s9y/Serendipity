@@ -735,6 +735,7 @@ function highlightComment(id, checkvalue) {
 
     // Clone form submit buttons
     $('#sort_entries > .form_buttons').clone().appendTo('#filter_entries');
+    $('#media_pane_sort > .form_buttons').clone().appendTo('#media_pane_filter');
 
     // Clone pagination
     $('.media_pane .pagination').clone().prependTo('.media_pane');

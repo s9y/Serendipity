@@ -1,43 +1,61 @@
 <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 
-<h2>{$CONST.FIND_MEDIA}</h2>
+<div class="has_toolbar">
+    <h2>{$CONST.FIND_MEDIA}</h2>
 
-<form method="get" action="?">
-    {$media.token}
-    {$media.form_hidden}
-    <fieldset id="media_pane_filter">
-        <legend><span>{$CONST.FILTERS}</span></legend>
+    <form method="get" action="?">
+        {$media.token}
+        {$media.form_hidden}
+        <ul class="filters_toolbar plainList">
+            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+        {if $media.show_upload}
+            <li><input type="button" value="{$CONST.ADD_MEDIA|@escape}" onclick="location.href='{$media.url}&amp;serendipity[adminAction]=addSelect&amp;serendipity[only_path]={$media.only_path|escape:url}'; return false"></li>
+        {/if}
+            <li><input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == ""}checked{/if} value=""></input>
+                <label for="serendipity[filter][fileCategory][All]" class="media_selector button_link">All</label>
+                <input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "image"}checked{/if} value="image"></input>
+                <label for="serendipity[filter][fileCategory][Image]" class="media_selector button_link">{$CONST.IMAGE}</label>
+                <input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "video"}checked{/if} value="video"></input>
+                <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
+            </li>
+        </ul>
 
-        <a id="toggle_filters" class="button_link icon_link" href="#" title="{$CONST.FILTERS}" onclick="showFilters(); return false"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a>
+        <fieldset id="media_pane_filter" class="additional_info">
+            <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
-        <div id="media_filter" class="clearfix">
-            <div id="media_filter_path" class="form_select">
-                <label for="serendipity_only_path">{$CONST.FILTER_DIRECTORY}</label>
-                <select id="serendipity_only_path" name="serendipity[only_path]">
-                    <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
-                {foreach from=$media.paths item="folder"}
-                    <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
-                {/foreach}
-                </select>
-            </div>
+            <div id="media_filter" class="clearfix">
+                <div id="media_filter_path" class="form_select">
+                    <label for="serendipity_only_path">{$CONST.FILTER_DIRECTORY}</label>
+                    <select id="serendipity_only_path" name="serendipity[only_path]">
+                        <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
+                    {foreach from=$media.paths item="folder"}
+                        <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                    {/foreach}
+                    </select>
+                </div>
 
-            <div id="media_filter_file" class="form_field">
-                <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
-                <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|@escape}">
-            </div>
-        </div>
+                <div id="media_filter_file" class="form_field">
+                    <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
+                    <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|@escape}">
+                </div>
 
-        <div id="moreFilter" class="serendipity_pluginlist_section clearfix" style="height: auto; display: none">
-            <div class="form_field">
-                <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
-                <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|@escape}">
+                <div class="form_field">
+                    <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
+                    <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|@escape}">
 
-                <div id="keyword_list" class="clearfix">
-                {foreach from=$media.keywords item="keyword"}
-                    <a href="#" onclick="AddKeyword('{$keyword|@escape}'); return false">{$keyword|@escape}</a>
-                {/foreach}
+                    <div id="keyword_list" class="clearfix">
+                    {foreach from=$media.keywords item="keyword"}
+                        <a href="#" onclick="AddKeyword('{$keyword|@escape}'); return false">{$keyword|@escape}</a>
+                    {/foreach}
+                    </div>
                 </div>
             </div>
+        </fieldset>
+{* {if $media.keywords_selected != ''}<script>showFilters();</script>{/if} *}
+        <fieldset id="media_pane_sort" class="additional_info">
+            <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
+
         {foreach from=$media.sort_order item="so_val" key="so_key"}
             <div class="{cycle values="left,center,right"}">
             {if $so_val.type == 'date' || $so_val.type == 'intrange'}
@@ -90,63 +108,43 @@
             {/if}
             </div>
         {/foreach}
-        </div>
-    </fieldset>
-{if $media.keywords_selected != '' OR $show_filter}
-    <script>showFilters();</script>
-{/if}
-    <fieldset id="media_pane_sort">
-        <legend><span>{$CONST.SORT_ORDER}</span></legend>
+            <div class="clearfix">
+                <div class="form_select">
+                    <label for="serendipity_sortorder_order">{$CONST.SORT_BY}</label>
 
-        <div class="clearfix">
-            <div class="form_select">
-                <label for="serendipity_sortorder_order">{$CONST.SORT_BY}</label>
+                    <select id="serendipity_sortorder_order" name="serendipity[sortorder][order]">
+                    {foreach from=$media.sort_order item="so_val" key="so_key"}
+                        <option value="{$so_key}"{if $media.sortorder.order == $so_key} selected{/if}>{$so_val.desc}</option>
+                    {/foreach}
+                    </select>
+                </div>
 
-                <select id="serendipity_sortorder_order" name="serendipity[sortorder][order]">
-                {foreach from=$media.sort_order item="so_val" key="so_key"}
-                    <option value="{$so_key}"{if $media.sortorder.order == $so_key} selected{/if}>{$so_val.desc}</option>
-                {/foreach}
-                </select>
+                <div class="form_select">
+                    <label for="serendipity_sortorder_ordermode">{$CONST.SORT_ORDER}</label>
+                    
+                    <select id="serendipity_sortorder_ordermode" name="serendipity[sortorder][ordermode]">
+                        <option value="DESC"{if $media.sortorder.ordermode == 'DESC'} selected{/if}>{$CONST.SORT_ORDER_DESC}</option>
+                        <option value="ASC"{if $media.sortorder.ordermode == 'ASC'} selected{/if}>{$CONST.SORT_ORDER_ASC}</option>
+                    </select>
+                </div>
+
+                <div class="form_select">
+                    <label for="serendipity_sortorder_perpage">{$CONST.FILES_PER_PAGE}</label>
+
+                    <select id="serendipity_sortorder_perpage" name="serendipity[sortorder][perpage]">
+                    {foreach from=$media.sort_row_interval item="so_val"}
+                        <option value="{$so_val}"{if $media.perPage == $so_val} selected{/if}>{$so_val}</option>
+                    {/foreach}
+                    </select>
+                </div>
             </div>
 
-            <div class="form_select">
-                <label for="serendipity_sortorder_ordermode">{$CONST.SORT_ORDER}</label>
-                
-                <select id="serendipity_sortorder_ordermode" name="serendipity[sortorder][ordermode]">
-                    <option value="DESC"{if $media.sortorder.ordermode == 'DESC'} selected{/if}>{$CONST.SORT_ORDER_DESC}</option>
-                    <option value="ASC"{if $media.sortorder.ordermode == 'ASC'} selected{/if}>{$CONST.SORT_ORDER_ASC}</option>
-                </select>
+            <div class="form_buttons">
+                <input name="go" type="submit" value="{$CONST.GO}">
             </div>
-
-            <div class="form_select">
-                <label for="serendipity_sortorder_perpage">{$CONST.FILES_PER_PAGE}</label>
-
-                <select id="serendipity_sortorder_perpage" name="serendipity[sortorder][perpage]">
-                {foreach from=$media.sort_row_interval item="so_val"}
-                    <option value="{$so_val}"{if $media.perPage == $so_val} selected{/if}>{$so_val}</option>
-                {/foreach}
-                </select>
-            </div>
-        </div>
-    </fieldset>
-{if $media.show_upload}
-    <input type="button" value="{$CONST.ADD_MEDIA|@escape}" onclick="location.href='{$media.url}&amp;serendipity[adminAction]=addSelect&amp;serendipity[only_path]={$media.only_path|escape:url}'; return false">
-{/if}
-    <div class="form_buttons">
-        <input name="go" type="submit" value="{$CONST.GO}">
-    </div>
-    
-    
-    <input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == ""}checked{/if} value=""></input>
-    <label for="serendipity[filter][fileCategory][All]" class="media_selector button_link">All</label>
-    
-    <input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "image"}checked{/if} value="image"></input>
-    <label for="serendipity[filter][fileCategory][Image]" class="media_selector button_link">{$CONST.IMAGE}</label>
-    
-    <input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "video"}checked{/if} value="video"></input>
-    <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
-    
-</form>
+        </fieldset>
+    </form>
+</div>
 {if $media.nr_files < 1}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}

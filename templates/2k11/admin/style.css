@@ -1701,7 +1701,9 @@ input:checked + .media_selector {
     #serendipity_category > .clearfix > div,
     #serendipity_comment .form_field,
     #media_filter > div,
-    #moreFilter > div,
+    #media_pane_sort > .left,
+    #media_pane_sort > .center,
+    #media_pane_sort > .right,
     #media_pane_sort > .clearfix > div {
         float: left;
         width: 33% ;
@@ -1719,7 +1721,7 @@ input:checked + .media_selector {
         width: 25%;
     }
 
-    #moreFilter .left,
+    #media_pane_sort .left,
     #serendipity_comment .form_area { clear: both; }
 
     #main_menu { width: 23%; }
@@ -1741,8 +1743,8 @@ input:checked + .media_selector {
 
     #back_to_blog { margin: 1em auto 4em; }
 
-    #moreFilter fieldset input,
-    #moreFilter fieldset select { margin-bottom: .75em; }
+    #media_pane_sort div fieldset input,
+    #media_pane_sort div fieldset select { margin-bottom: .75em; }
 }
 
 
