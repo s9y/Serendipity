@@ -73,11 +73,11 @@
                             <footer id="template_info_{$info@key}" class="template_info additional_info">
                                 <dl class="clearfix">
                                     <dt class="template_author">{$CONST.AUTHOR}:</dt>
-                                    <dd>{$cur_tpl.info.author}</dd>
+                                    <dd>{$info.info.author}</dd>
                                     <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
-                                    <dd>{$cur_tpl.info.date}</dd>
+                                    <dd>{$info.info.date}</dd>
                                     <dt class="template_admin">Admin theme:</dt> {* i18n *}
-                                    <dd>{$cur_tpl.info.custom_admin_interface}</dd>
+                                    <dd>{if $info.info.custom_admin_interface} {$info.info.custom_admin_interface} {else} {$CONST.NO} {/if}</dd>
                                 </dl>
                             </footer>
                         </div>
