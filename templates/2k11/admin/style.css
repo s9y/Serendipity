@@ -1129,7 +1129,8 @@ main {
 
 /* CONTENT
    ----------------------------------------------------------------- */
-#content { padding-bottom: 1.5em; }
+#content,
+#main_menu { padding-bottom: 1.5em; }
 
 #serendipity_admin_groups br,
 .image_add_form br {
@@ -1237,7 +1238,6 @@ form > .button_link:first-of-type { margin-top: 0; }
 #template_select article,
 #serendipityScaleImg img,
 .media_file,
-.media_file_preview img,
 .plugins_installable > li { border: 1px solid #aaa; }
 
 #serendipityScaleImg img { max-width: 99%; }
