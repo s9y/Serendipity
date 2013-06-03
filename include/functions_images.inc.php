@@ -2856,6 +2856,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'sort_row_interval' => array(8, 16, 50, 100),
         'nr_files'          => count($file),
         'keywords'          => explode(';', $serendipity['mediaKeywords']),
+        'thumbSize'         => $serendipity['thumbSize']
     );
 
     $media = array_merge($media, $smarty_vars);
