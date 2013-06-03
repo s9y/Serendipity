@@ -719,13 +719,16 @@ function highlightComment(id, checkvalue) {
         addUploadField();
     });
 
-    // Show media file info
-    $('.media_show_info, .template_show_info').click(function(e) {
+    // Show media file info, template info or filters
+    $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
         e.preventDefault();
     });
 
-    // Clone media library
+    // Clone form submit buttons
+    $('#sort_entries > .form_buttons').clone().appendTo('#filter_entries');
+
+    // Clone pagination
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().insertAfter('.comments_pane > h3');
     $('.entries_pane .pagination').clone().prependTo('.entries_pane');

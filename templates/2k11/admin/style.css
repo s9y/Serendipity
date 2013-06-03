@@ -455,7 +455,8 @@ form > a,
 #mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
-#serendipityScaleForm .form_field label {
+#serendipityScaleForm .form_field label,
+.filters_toolbar li {
     display: inline-block;
 }
 
@@ -845,7 +846,9 @@ input[type=checkbox] { margin-right: .4em; }
 .form_check,
 .form_radio,
 .form_select,
-.form_multiselect {
+.form_multiselect,
+#filter_entries,
+#sort_entries {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -1157,6 +1160,7 @@ main {
 
 .plugin_info { margin: 0 0 1em;}
 
+.filters_toolbar,
 fieldset p,
 .media_file_meta > ul,
 .image_resize_hint p { margin: 0; }

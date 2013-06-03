@@ -1,4 +1,5 @@
 {if $drawList}
+<div  class="has_toolbar">
     <h2>{$CONST.FIND_ENTRIES}</h2>
 
     <form action="?" method="get">
@@ -6,8 +7,20 @@
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
 
-        <fieldset id="filter_entries">
-            <legend><span>{$CONST.FILTERS}</span></legend>
+        <ul class="filters_toolbar plainList">
+            <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
+            <li><a class="button_link" href="#filter_entries" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+        </ul>
+
+        <div id="entry_skip" class="form_field additional_info">
+            <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
+            <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
+            <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+        </div>
+
+        <fieldset id="filter_entries" class="additional_info">
+            <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
             <div class="clearfix">
                 <div class="form_select">
@@ -49,8 +62,8 @@
             </div>
         </fieldset>
 
-        <fieldset id="sort_entries">
-            <legend><span>{$CONST.SORT_ORDER}</span></legend>
+        <fieldset id="sort_entries" class="additional_info">
+            <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
 
             <div class="clearfix">
                 <div class="form_select">
@@ -79,12 +92,13 @@
                     </select>
                 </div>
             </div>
-        </fieldset>
 
-        <div class="form_buttons">
-            <input name="go" type="submit" value="{$CONST.GO}">
-        </div>
+            <div class="form_buttons">
+                <input name="go" type="submit" value="{$CONST.GO}">
+            </div>
+        </fieldset>
     </form>
+</div>
     {if $is_entries}
     <form id="formMultiDelete" action="?" method="post" name="formMultiDelete">
         {$formtoken}
@@ -157,15 +171,6 @@
         <input name="serendipity[action]" type="hidden" value="admin">
         <input name="serendipity[adminModule]" type="hidden" value="entries">
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
-
-        <div id="entry_skip" class="form_field">
-            <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
-            <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-        </div>
-        
-        <div class="form_buttons">
-            <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
-        </div>
     </form>
 {/if}
 {if $no_entries}
