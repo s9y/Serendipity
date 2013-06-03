@@ -157,7 +157,7 @@
         <input name="serendipity[adminModule]" type="hidden" value="media">
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
-    <div class="clearfix media_pane">
+    <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
         {$MEDIA_ITEMS}
         <nav class="pagination">
             <ul class="clearfix">

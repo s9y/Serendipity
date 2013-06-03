@@ -719,6 +719,14 @@ function highlightComment(id, checkvalue) {
         addUploadField();
     });
 
+    // Limit width of media file info
+    var $mediaPane = $('body').has('.media_pane');
+
+    if($mediaPane.size() > 0) {
+        var thumbsWidth = $('.media_pane').attr('data-thumbmaxwidth')  + 'px';
+        $('.media_file_meta').css('maxWidth', thumbsWidth);
+    }
+
     // Show media file info, template info or filters
     $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
