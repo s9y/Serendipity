@@ -1393,7 +1393,7 @@ var $filter_defaults;
                         $this->set_config('contentfilter_emails', implode(';', $items));
                     }
 
-                    echo ' - ' . WORD_OR . ' - <a class="serendipityPrettyButton" href="serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance . '">' . PLUGIN_EVENT_SPAMBLOCK_CONFIG . '</a>';
+                    echo '<a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance . '">' . PLUGIN_EVENT_SPAMBLOCK_CONFIG . '</a>';
                     return true;
                     break;
 
