@@ -13,10 +13,12 @@
             <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
         </ul>
 
-        <div id="entry_skip" class="form_field additional_info">
-            <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
-            <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-            <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+        <div id="entry_skip" class="clearfix additional_info">
+            <div class="form_field">
+                <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
+                <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
+                <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+            </div>
         </div>
 
         <fieldset id="filter_entries" class="additional_info">

@@ -847,6 +847,7 @@ input[type=checkbox] { margin-right: .4em; }
 .form_radio,
 .form_select,
 .form_multiselect,
+#entry_skip,
 #filter_entries,
 #sort_entries {
     margin-top: .75em;
