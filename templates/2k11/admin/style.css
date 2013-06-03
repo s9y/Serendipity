@@ -1142,12 +1142,21 @@ main {
 } /* Temporary */
 
 #edit_entry_timestamp,
-#media_pane_filter { position: relative; }
+#media_pane_filter,
+.comments_pane .pagination { position: relative; }
 
 #reset_timestamp,
 #media_pane_filter #toggle_filters {
     position: absolute;
     top: 0;
+}
+
+.comments_pane .pagination h3 {
+    font-size: 1em;
+    font-weight: normal;
+    position: absolute;
+    top: -60%;
+    left: 33%;
 }
 
 #reset_timestamp {

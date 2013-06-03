@@ -95,7 +95,6 @@
         <input name="serendipity[formAction]" type="hidden" value="multiDelete">
 
         <div class="clearfix comments_pane">
-            <h3>{$CONST.PAGE_BROWSE_COMMENTS|sprintf:$page:$pages:$totalComments}</h3>
         {if is_array($comments)}
             <ul id="serendipity_comments_list" class="clearfix plainList zebra_list">
             {foreach $comments AS $comment}
@@ -146,6 +145,8 @@
         {/if}
         {if ($page != 1 && $page <= $pages)||$page != $pages}
             <nav class="pagination">
+                <h3>{$CONST.PAGE_BROWSE_COMMENTS|sprintf:$page:$pages:$totalComments}</h3>
+                
                 <ul class="clearfix">
                     <li class="prev">{if ($page != 1 && $page <= $pages)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     <li class="next">{if $page != $pages}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-circled"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
