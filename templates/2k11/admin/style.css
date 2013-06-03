@@ -1156,11 +1156,8 @@ main {
 
 #edit_entry_category label { vertical-align: top; }
 
-
-.template_info,
 .plugin_info { margin: 0 0 1em;}
 
-.template_info dl,
 fieldset p,
 .media_file_meta > ul,
 .image_resize_hint p { margin: 0; }
@@ -1241,18 +1238,6 @@ form > .button_link:first-of-type { margin-top: 0; }
 .plugins_installable > li { border: 1px solid #aaa; }
 
 #serendipityScaleImg img { max-width: 99%; }
-
-#template_select .preview_image {
-    float: left;
-    margin: 0 1em 1em 0;
-}
-
-#template_select .preview_image {
-    /* TESTING */
-    overflow: hidden;
-    height: 100px;
-    width: 100px;
-}
 
 .zebra_list,
 #categories .odd,
@@ -1427,15 +1412,22 @@ form > .button_link:first-of-type { margin-top: 0; }
     margin: 0 2% 1em 0;
 }
 
-.no-js .media_file_preview img {
+.no-js .media_file_preview img,
+.js .template_wrap {
     margin: 0 0 1em;
 }
 
-.js .media_file_preview {
+.js .template_info > dl {
+    margin: 0;
+}
+
+.js .media_file_preview,
+.js .template_preview {
     position: relative;
 }
 
-.js .media_file_meta {
+.js .media_file_meta,
+.js .template_info {
     background: #000;
     background: rgba(0,0,0,.6);
     -webkit-box-sizing: border-box;
@@ -1609,8 +1601,6 @@ input:checked + .media_selector {
     #uploadform .form_select select,
     #uploadform .form_field input { max-width: 48%; }
 
-    .template_info dl { font-size: .65em; }
-
     .configuration_group .form_select,
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
@@ -1760,8 +1750,6 @@ input:checked + .media_selector {
         font-size: 2em;
         margin: .75em 0;
     }
-
-    .template_info dl { font-size: .8125em; }
 }
 
 

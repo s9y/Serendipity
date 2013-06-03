@@ -720,7 +720,7 @@ function highlightComment(id, checkvalue) {
     });
 
     // Show media file info
-    $('.media_show_info').click(function(e) {
+    $('.media_show_info, .template_show_info').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
         e.preventDefault();
     });
