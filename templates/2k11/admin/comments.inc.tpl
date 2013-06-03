@@ -2,12 +2,7 @@
     {* TODO: Not sure anything emitted here actually IS an error. *}
     <span class="msg_error"><span class="icon-attention"></span> {$errormsg}</span>
 {/if}
-
-<script type="text/javascript">
-    var view_full = '{$CONST.VIEW_FULL}';
-    var view_hide = '{$CONST.HIDE}';
-</script>
-
+<div class="has_toolbar">
     <h2>{$CONST.COMMENTS}</h2>
 
     <form action="" method="GET">
@@ -15,8 +10,13 @@
         <input name="serendipity[adminModule]" type="hidden" value="comments">
         <input name="serendipity[page]" type="hidden" value="{$page}">
 
-        <fieldset id="filter_comments">
-            <legend><span>{$CONST.FILTERS} ({$CONST.FIND_COMMENTS})</span></legend>
+        <ul class="filters_toolbar plainList">
+            <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li>{serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}</li> {* Does this ever emit anything but the 'Configure Anti-Spam' stuff? *}
+        </ul>
+
+        <fieldset id="filter_comments" class="additional_info">
+            <legend class="visuallyhidden">{$CONST.FILTERS} ({$CONST.FIND_COMMENTS})</legend>
 
             <div class="clearfix">
                 <div class="form_field">
@@ -78,13 +78,13 @@
                     </select>
                 </div>
             </div>
-        </fieldset>
 
-        <div class="form_buttons">
-            <input name="submit" type="submit" value="{$CONST.GO}">
-        </div>
+            <div class="form_buttons">
+                <input name="submit" type="submit" value="{$CONST.GO}">
+            </div>
+        </fieldset>
     </form>
-    {serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}
+</div>
 {if !is_array($sql)}
     <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_COMMENTS}</span>
 

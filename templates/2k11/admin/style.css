@@ -1066,7 +1066,7 @@ main {
 #edit_entry_title input,
 #edit_entry_metadata input,
 #edit_entry_metadata select,
-#filter_comments input,
+#filter_comments .form_field > input,
 #filter_comments select,
 #serendipity_comment .form_field input,
 #serendipity_comment select { width: 85%; }
