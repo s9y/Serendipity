@@ -719,6 +719,12 @@ function highlightComment(id, checkvalue) {
         addUploadField();
     });
 
+    // Show media file info
+    $('.media_show_info').click(function(e) {
+        $($(this).attr('href')).toggleClass('additional_info');
+        e.preventDefault();
+    });
+
     // Clone media library
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().insertAfter('.comments_pane > h3');
