@@ -187,8 +187,8 @@ function serendipity_imageSelector_addToElement (str, id) {
 }
 
 // Show (extended) filters in media db
-// NOTE: since we (will) use this in various sections of the backend, we
-//       probably want a more generic function for this
+// NOTE: replaced by additional_info, safe to be removed
+//       (check media_pane.tpl before removing)
 function showFilters()  {
     s = document.getElementById('moreFilter').style;
 
@@ -406,7 +406,7 @@ function showConfigAll(count) {
 }
 
 // Seems to check all (checkbox) elements of a given form
-// NOTE: doesn't seem to be used anywhere?
+// NOTE: unused, safe to be removed
 function chkAll(frm, arr, mark) {
     for (i = 0; i <= frm.elements.length; i++) {
         try {
@@ -480,7 +480,7 @@ function hideForeign() {
     $('#imageurl').val('');
 }
 
-// save in which directory the frist uploaded files is stored (the default when only isnerting one file)
+// save in which directory the first uploaded files is stored (the default when only isnerting one file)
 function rememberUploadOptions() {
     SetCookie("addmedia_directory", $('#target_directory_2').val());
 }
@@ -564,7 +564,7 @@ function invertSelection() {
 // }
 
 
-// Purely cosmetic function to highlight/dehighlight a comment by toggling the class comment_selected
+// Highlight/dehighlight elements in lists
 function highlightComment(id, checkvalue) {
     $('#' + id).toggleClass('multidel_selected');
 }
