@@ -70,7 +70,7 @@
             <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
             {if $cdesc != ''}<span>{$cdesc}</span>{/if}
             </label>
-            
+            {* This should be solved using JS. *}
             <div id="{$config_item}_preview" style="background-image: url({$value}); width: {$preview_width}; height: {$preview_height}; background-repeat: no-repeat;">&nbsp;</div>
             {* This should be input[type=file] … *}
             <input id="serendipity[{$postKey}][{$config_item}]" name="serendipity[{$postKey}][{$config_item}]" type="text" value="{$value}" onchange="change_preview('{$config_item}')">
