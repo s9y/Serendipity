@@ -1266,7 +1266,8 @@ form > .button_link:first-of-type { margin-top: 0; }
 #categories .odd,
 #serendipity_image_folders .odd { background: #eee; }
 
-.zebra_list .comment_selected {
+.zebra_list .multidel_selected,
+.multidel_selected {
     border: 1px solid #b94a48;
 }
 

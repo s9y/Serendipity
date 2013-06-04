@@ -566,7 +566,7 @@ function invertSelection() {
 
 // Purely cosmetic function to highlight/dehighlight a comment by toggling the class comment_selected
 function highlightComment(id, checkvalue) {
-    $('#' + id).toggleClass('comment_selected');
+    $('#' + id).toggleClass('multidel_selected');
 }
 
 (function($) {
@@ -702,9 +702,9 @@ function highlightComment(id, checkvalue) {
 
     // Comment selection for multidelete
     // onclick="highlightComment('comment_{$comment.id}', this.checked)"
-    $('.serendipity_multidelete_comment').click(function(e) {
+    $('.multidelete').click(function(e) {
         var $el = $(this);
-        highlightComment($el.attr('data-commentid'), $el.attr('checked'));
+        highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
     });
 
     // Add media db upload field
