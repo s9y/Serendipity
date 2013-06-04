@@ -384,16 +384,16 @@ function serendipity_fetchImages($group = false, $start = 0, $end = 20, $images 
     $basedir = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
     $images = array();
     if ($dir = @opendir($basedir . $odir)) {
-		$aTempArray = array();
-		while (($file = @readdir($dir)) !== false) {
-		    if ($file == '.svn' || $file == 'CVS' || $file == '.' || $file == '..') {
-		        continue;
-		    }
-			array_push($aTempArray, $file);
-		}
-		@closedir($dir);
-		sort($aTempArray);
-		foreach($aTempArray AS $f) {
+        $aTempArray = array();
+        while (($file = @readdir($dir)) !== false) {
+            if ($file == '.svn' || $file == 'CVS' || $file == '.htaccess' || $file == '.' || $file == '..') {
+                continue; // 2013/06/05 added exclude .htaccess for ckeditor/kcfinder usage
+            }
+            array_push($aTempArray, $file);
+        }
+        @closedir($dir);
+        sort($aTempArray);
+        foreach($aTempArray AS $f) {
             if (strpos($f, $serendipity['thumbSuffix']) !== false) {
                 // This is a s9y thumbnail, skip it.
                 continue;
@@ -1472,7 +1472,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
-        $aExclude = array("CVS" => true, ".svn" => true);
+        $aExclude = array("CVS" => true, ".svn" => true, ".thumbs" => true); // last one dropped in by ckeditor/kcfinder image browser
         serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
         $paths        = array();
         $aFilesOnDisk = array();
@@ -1804,11 +1804,11 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     while (($file = @readdir($dh)) !== false) {
         if ($file != '.' && $file != '..') {
             $bPatternMatch = (is_null($pattern) || preg_match($pattern, $file));
-			$sFullPath     = $odir . $file;
-			$bIsDir        = is_dir($sFullPath);
+            $sFullPath     = $odir . $file;
+            $bIsDir        = is_dir($sFullPath);
             if ($onlyDirs === false || $bIsDir) {
-				if ($bPatternMatch &&
-				    (!$bIsDir || $aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
+                if ($bPatternMatch &&
+                    (!$bIsDir || $aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
                     $files[] = array(
                         'name'      => $file,
                         'depth'     => $depth,
@@ -1819,10 +1819,10 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
             }
 
             if ($bIsDir &&
-				($max_depth === null || $depth < $max_depth) &&
-				($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
+                ($max_depth === null || $depth < $max_depth) &&
+                ($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
                 $next_dir = serendipity_dirSlash('end', $dir) . basename($file);
-				$files = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
+                $files = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
             }
         }
     }
@@ -2699,22 +2699,22 @@ function serendipity_prepareMedia(&$file, $url = '') {
         $full_perm = serendipity_checkPermission('adminImagesMaintainOthers');
     }
 
-	$sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
-	$file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
-	$file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
+    $sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
+    $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
+    $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
 
     if ($file['hotlink']) {
         $file['full_file']  = $file['path'];
-    	$file['show_thumb'] = $file['path'];
-    	if (!isset($file['imgsrc'])) {
-        	$file['imgsrc'] = $file['show_thumb'];
-    	}
+        $file['show_thumb'] = $file['path'];
+        if (!isset($file['imgsrc'])) {
+            $file['imgsrc'] = $file['show_thumb'];
+        }
     } else {
         $file['full_file']  = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-    	$file['show_thumb'] = $file['full_thumbHTTP'];
-    	if (!isset($file['imgsrc'])) {
-        	$file['imgsrc'] = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
-    	}
+        $file['show_thumb'] = $file['full_thumbHTTP'];
+        if (!isset($file['imgsrc'])) {
+            $file['imgsrc'] = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
+        }
     }
 
     // Detect PDF thumbs
@@ -2732,8 +2732,8 @@ function serendipity_prepareMedia(&$file, $url = '') {
 
     $file['links'] = array('imagelinkurl' => $file['full_file']);
 
-	$file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
-	$file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
+    $file['dim']       = @getimagesize($file['full_thumb'], $file['thumb_header']);
+    $file['dim_orig']  = @getimagesize($serendipity['serendipityPath'] . $file['full_file'], $file['header']);
     $file['is_image']  = serendipity_isImage($file);
 
     if ($file['is_image']) {
@@ -3484,27 +3484,27 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 function &serendipity_getMediaPaths() {
     global $serendipity;
 
-	$aExclude = array("CVS" => true, ".svn" => true);
-	serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
-	$paths        = array();
+    $aExclude = array("CVS" => true, ".svn" => true, ".thumbs" => true); // last one dropped in by ckeditor/kcfinder image browser
+    serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
+    $paths        = array();
 
-	$aResultSet   = serendipity_traversePath(
-	    $serendipity['serendipityPath'] . $serendipity['uploadPath'],
-	    '',
-	    false,
-	    NULL,
-	    1,
-	    NULL,
-	    FALSE,
-	    $aExclude
-	);
+    $aResultSet   = serendipity_traversePath(
+        $serendipity['serendipityPath'] . $serendipity['uploadPath'],
+        '',
+        false,
+        NULL,
+        1,
+        NULL,
+        FALSE,
+        $aExclude
+    );
 
-	foreach ($aResultSet AS $sKey => $sFile) {
-		if ($sFile['directory']) {
-			array_push($paths, $sFile);
-		}
-		unset($aResultSet[$sKey]);
-	}
+    foreach ($aResultSet AS $sKey => $sFile) {
+        if ($sFile['directory']) {
+            array_push($paths, $sFile);
+        }
+        unset($aResultSet[$sKey]);
+    }
     serendipity_directoryACL($paths, 'read');
 
     usort($paths, 'serendipity_sortPath');
