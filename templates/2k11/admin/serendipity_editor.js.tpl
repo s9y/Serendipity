@@ -752,4 +752,10 @@ function highlightComment(id, checkvalue) {
             });
         }
     });
+
+    // MediaDB-Filter-Buttons should react instantly
+    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
+        $('#media_library_control').submit();
+    });
+    
 })(jQuery);
