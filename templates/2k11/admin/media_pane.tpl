@@ -3,7 +3,7 @@
 <div class="has_toolbar">
     <h2>{$CONST.FIND_MEDIA}</h2>
 
-    <form method="get" action="?">
+    <form id="media_library_control" method="get" action="?">
         {$media.token}
         {$media.form_hidden}
         <ul class="filters_toolbar plainList">
@@ -12,19 +12,64 @@
         {if $media.show_upload}
             <li><input type="button" value="{$CONST.ADD_MEDIA|@escape}" onclick="location.href='{$media.url}&amp;serendipity[adminAction]=addSelect&amp;serendipity[only_path]={$media.only_path|escape:url}'; return false"></li>
         {/if}
-            <li><input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == ""}checked{/if} value=""></input>
-                <label for="serendipity[filter][fileCategory][All]" class="media_selector button_link">All</label>
-                <input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "image"}checked{/if} value="image"></input>
-                <label for="serendipity[filter][fileCategory][Image]" class="media_selector button_link">{$CONST.IMAGE}</label>
-                <input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "video"}checked{/if} value="video"></input>
-                <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
-            </li>
         </ul>
 
         <fieldset id="media_pane_filter" class="additional_info">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
             <div id="media_filter" class="clearfix">
+                {foreach from=$media.sort_order item="so_val" key="so_key"}
+                    <div class="{cycle values="left,center,right"}">
+                    {if $so_val.type == 'date' || $so_val.type == 'intrange'}
+                        <fieldset>
+                            <legend><span>{$CONST.SORT_BY} ({$so_key})</span></legend>
+                    {else}
+                        <div class="form_{if $so_val.type == 'authors'}select{else}field{/if}">
+                            <label for="serendipity_filter_{$so_key}">{$so_val.desc}</label>
+                    {/if}
+                    {if $so_val.type == 'date'}
+                        {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
+                            <div class="form_field">
+                                {* Core might need to be adapted to input[type=date] *}
+                                {* date is not ideal, should be datetime – but datetime isn't properly supported *}
+                                {* by browsers yet, so we probably need a JS widget (jQuery UI?) for this …      *}
+                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
+                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
+                                 - 
+                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
+                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|@escape}">
+                                {* <span class="input_hint">(DD.MM.YYYY | YYYY-MM-DD | MM/DD/YYYY)</span> *}
+                            </div>
+                    {elseif $so_val.type == 'intrange'}
+                        {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
+                            <div class="form_field">
+                                {* Could also use input[type=range]; unsure if that's actually useful (yet) *}
+                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
+                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|@escape}">
+                                 - 
+                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
+                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|@escape}">
+                            </div>
+                    {elseif $so_val.type == 'authors'}
+                        {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
+                            <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
+                                <option value="">{$CONST.ALL_AUTHORS}</option>
+                            {foreach from=$media.authors item="media_author"}
+                                <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|@escape}</option>
+                            {/foreach}
+                            </select>
+                    {else}
+                        {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
+                            {* TODO: needs a label … but what IS this? *}
+                            <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|@escape}">
+                    {/if}
+                    {if $so_val.type == 'date' || $so_val.type == 'intrange'}
+                        </fieldset>
+                    {else}
+                        </div>
+                    {/if}
+                    </div>
+                {/foreach}
                 <div id="media_filter_path" class="form_select">
                     <label for="serendipity_only_path">{$CONST.FILTER_DIRECTORY}</label>
                     <select id="serendipity_only_path" name="serendipity[only_path]">
@@ -55,59 +100,6 @@
 {* {if $media.keywords_selected != ''}<script>showFilters();</script>{/if} *}
         <fieldset id="media_pane_sort" class="additional_info">
             <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
-
-        {foreach from=$media.sort_order item="so_val" key="so_key"}
-            <div class="{cycle values="left,center,right"}">
-            {if $so_val.type == 'date' || $so_val.type == 'intrange'}
-                <fieldset>
-                    <legend><span>{$CONST.SORT_BY} ({$so_key})</span></legend>
-            {else}
-                <div class="form_{if $so_val.type == 'authors'}select{else}field{/if}">
-                    <label for="serendipity_filter_{$so_key}">{$so_val.desc}</label>
-            {/if}
-            {if $so_val.type == 'date'}
-                {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
-                    <div class="form_field">
-                        {* Core might need to be adapted to input[type=date] *}
-                        {* date is not ideal, should be datetime – but datetime isn't properly supported *}
-                        {* by browsers yet, so we probably need a JS widget (jQuery UI?) for this …      *}
-                        <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
-                        <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
-                         - 
-                        <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
-                        <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|@escape}">
-                        {* <span class="input_hint">(DD.MM.YYYY | YYYY-MM-DD | MM/DD/YYYY)</span> *}
-                    </div>
-            {elseif $so_val.type == 'intrange'}
-                {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
-                    <div class="form_field">
-                        {* Could also use input[type=range]; unsure if that's actually useful (yet) *}
-                        <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
-                        <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|@escape}">
-                         - 
-                        <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
-                        <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|@escape}">
-                    </div>
-            {elseif $so_val.type == 'authors'}
-                {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
-                    <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
-                        <option value="">{$CONST.ALL_AUTHORS}</option>
-                    {foreach from=$media.authors item="media_author"}
-                        <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|@escape}</option>
-                    {/foreach}
-                    </select>
-            {else}
-                {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
-                    {* TODO: needs a label … but what IS this? *}
-                    <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|@escape}">
-            {/if}
-            {if $so_val.type == 'date' || $so_val.type == 'intrange'}
-                </fieldset>
-            {else}
-                </div>
-            {/if}
-            </div>
-        {/foreach}
             <div class="clearfix">
                 <div class="form_select">
                     <label for="serendipity_sortorder_order">{$CONST.SORT_BY}</label>
@@ -142,6 +134,14 @@
             <div class="form_buttons">
                 <input name="go" type="submit" value="{$CONST.GO}">
             </div>
+        </fieldset>
+        <fieldset id="media_selector_bar">
+            <input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == ""}checked{/if} value=""></input>
+            <label for="serendipity[filter][fileCategory][All]" class="media_selector">All</label>
+            <input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "image"}checked{/if} value="image"></input>
+            <label for="serendipity[filter][fileCategory][Image]" class="media_selector">{$CONST.IMAGE}</label>
+            <input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "video"}checked{/if} value="video"></input>
+            <label for="serendipity[filter][fileCategory][Video]" class="media_selector">{$CONST.VIDEO}</label>
         </fieldset>
     </form>
 </div>

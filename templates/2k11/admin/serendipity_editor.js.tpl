@@ -691,7 +691,7 @@ function highlightComment(id, checkvalue) {
     }
 
     $('#insert_image').click(function(e) {
-        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&amp;serendipity[filename_only]=true', 
+        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&serendipity[filename_only]=true', 
                     'ImageSel', 
                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
@@ -752,4 +752,10 @@ function highlightComment(id, checkvalue) {
             });
         }
     });
+
+    // MediaDB-Filter-Buttons should react instantly
+    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
+        $('#media_library_control').submit();
+    });
+    
 })(jQuery);
