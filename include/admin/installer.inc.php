@@ -27,6 +27,8 @@ if (defined('S9Y_DATA_PATH')) {
 }
 
 $data['basedir'] = $basedir;
+$data['phpversion'] = phpversion();
+$data['versionInstalled'] = $serendipity['versionInstalled'];
 
 /**
  * Checks a return code constant if it's successfull or an error and return HTML code
@@ -384,6 +386,8 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
+
+
 $serendipity['smarty']->assign($data);
 $tfile = serendipity_getTemplateFile("admin/installer.inc.tpl");
 
@@ -391,10 +395,6 @@ ob_start();
 include $tfile;
 $content = ob_get_contents();
 ob_end_clean();
-
-
-#$content = $serendipity['smarty']->fetch('file:'. $tfile); // short notation with Smarty3 in S9y 1.7 and up
-#echo $content;
 
 // eval a string template and do not store compiled code
 echo $serendipity['smarty']->display('eval:'.$content);

@@ -1,3 +1,58 @@
+<html>
+    <head>
+        <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset={$CONST.LANG_CHARSET}" />
+        <link rel="stylesheet" type="text/css" href="{serendipity_getFile file='admin/style.css'}" />
+
+        <script type="text/javascript">
+        function spawn() {
+            if (self.Spawnextended) {
+                Spawnextended();
+            }
+
+            if (self.Spawnbody) {
+                Spawnbody();
+            }
+
+            if (self.Spawnnugget) {
+                Spawnnugget();
+            }
+        }
+
+        function SetCookie(name, value) {
+            var today  = new Date();
+            var expire = new Date();
+            expire.setTime(today.getTime() + (60*60*24*30*1000));
+            document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
+        }
+
+        function addLoadEvent(func) {
+          var oldonload = window.onload;
+          if (typeof window.onload != 'function') {
+            window.onload = func;
+          } else {
+            window.onload = function() {
+              oldonload();
+              func();
+            }
+          }
+        }
+        </script>
+    </head>
+    <body id="serendipity_admin_page" onload="spawn()">
+        <table cellspacing="0" cellpadding="0" border="0" id="serendipityAdminFrame">
+            <tr>
+                <td colspan="2" id="serendipityAdminBanner">
+                    <h1>{$CONST.SERENDIPITY_INSTALLATION}</h1>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="serendipityAdminInfopane">
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="serendipityAdminContent" colspan="2">
+
 {if $is_errors && is_array($errors)}
     {foreach $errors AS $error}
         <span class="msg_error"><span class="icon-attention"></span> {$error}</span>
@@ -259,3 +314,17 @@
         <span class="msg_error"><span class="icon-attention"></span> {$CONST.ERROR_DETECTED_IN_INSTALL}</span>
     {/if}
 {/if}
+
+
+</td>
+            </tr>
+        </table>
+        <div class="serendipityAdminFooterSpacer"></div>
+        
+        <div id="serendipityAdminFooter">
+            <span> 
+                {$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}
+            </span>
+        </div>
+    </body>
+</html>
