@@ -32,10 +32,10 @@
         {/if}
         </div>
     {else}
-        <article class="media_file {cycle values="odd,even"}">
+        <article id="media_{$file.id}" class="media_file {cycle values="odd,even"}">
             <header class="clearfix">
                 <div class="form_check">
-                    <input id="multidelete_image{$file.id}" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
+                    <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
                 </div>
 
                 <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
