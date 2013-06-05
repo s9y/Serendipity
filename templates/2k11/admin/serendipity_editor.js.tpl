@@ -406,18 +406,6 @@ function showConfigAll(count) {
     }
 }
 
-// Seems to check all (checkbox) elements of a given form
-// NOTE: unused, safe to be removed
-function chkAll(frm, arr, mark) {
-    for (i = 0; i <= frm.elements.length; i++) {
-        try {
-            if(frm.elements[i].name == arr) {
-                frm.elements[i].checked = mark;
-        }
-        } catch (err) {}
-    }
-}
-
 // Collapses/expands the category selector
 function showItem(id) {
     if (id == undefined) {
@@ -533,44 +521,11 @@ function FT_toggle(id) {
 }
 
 // Inverts a selection of checkboxes
-// NOTE: similar function (but not duplicate!) from admin_scripts.js, see below
-// function invertSelection() {
-//     $('.input_checkbox').each(function(index, checkbox) {
-//         $(checkbox).attr('checked',  ! $(checkbox).attr('checked'));
-//         var id = 'comment_' + checkbox.name.replace(/.*\[.*\]\[(.*)\]/, "$1");   // gets the id from the name of the checkbox, which is serendipity[delete][id]
-//         highlightComment(id, $(checkbox).attr('checked'));
-//     });
-// }
-
-// ------------------------------------------------------------------------------
-// This duplicate of invertSelection() was used in the defunct admin_scripts.js.
-// Somebody needs to figure out why there were two functions of the same name
-// and which one is supposed to be used or if both should be used in different
-// contexts. Commented out since I assume that the first one is the proper one …
-//
-// … aaaand I was completely wrong. The second one (commented out) works, but it
-// only inverts the checkboxes. It does not highlight comments. This needs a
-// rewrite in jQuery anyway.
-// ------------------------------------------------------------------------------
-// Inverts a selection of checkboxes
-// NOTE: – also used in serendipity_event_karma
-// function invertSelection() {
-//     var f = document.formMultiDelete;
-
-//     for (var i = 0; i < f.elements.length; i++) {
-//         if (f.elements[i].type == 'checkbox') {
-//             f.elements[i].checked = !(f.elements[i].checked);
-//         }
-//     }
-// }
-
-// Inverts a selection of checkboxes
 function invertSelection() {
     var $chkboxes = $('#formMultiDelete .multidelete');
     $chkboxes.prop('checked', !$chkboxes.attr('checked'))
         .trigger('click');
 }
-
 
 // Highlight/dehighlight elements in lists
 function highlightComment(id, checkvalue) {
