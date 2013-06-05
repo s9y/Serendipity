@@ -398,8 +398,8 @@ function serendipity_fetchImages($group = false, $start = 0, $end = 20, $images 
     if ($dir = @opendir($basedir . $odir)) {
         $aTempArray = array();
         while (($file = @readdir($dir)) !== false) {
-            if ($file == '.svn' || $file == 'CVS' || $file == '.' || $file == '..') {
-                continue;
+            if ($file == '.svn' || $file == 'CVS' || $file == '.htaccess' || $file == '.' || $file == '..') {
+                continue; // 2013/06/05 added exclude .htaccess for ckeditor/kcfinder usage
             }
             array_push($aTempArray, $file);
         }
@@ -1803,7 +1803,7 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
 function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern = NULL, $depth = 1, $max_depth = NULL, $apply_ACL = false, $aExcludeDirs = NULL) {
 
     if ($aExcludeDirs === null) {
-        $aExcludeDirs = array("CVS" => true, ".svn" => true);
+        $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true); // 2013/06/05 don't use hook here, but add ckeditor/kcfinders .thumb dir to exclude
     }
 
     $odir = serendipity_dirSlash('end', $basedir) . serendipity_dirSlash('end', $dir);
@@ -3561,3 +3561,4 @@ function serendipity_checkDirUpload($dir) {
 
     return false;
 }
+
