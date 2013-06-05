@@ -43,8 +43,6 @@
     <main class="clearfix">
     {if NOT $admin_vars.is_logged_in}
         {$admin_vars.out|@serendipity_refhookPlugin:'backend_login_page'}
-        {* <div id="login_container"> *}
-            {* <h2>{$CONST.WELCOME_TO_ADMIN}</h2> *}
             {$admin_vars.out.header}
         {if $admin_vars.post_action != '' AND NOT $admin_vars.is_logged_in}
             <span class="msg_error">{$CONST.WRONG_USERNAME_OR_PASSWORD}</span>
@@ -74,7 +72,6 @@
             </form>
             <a id="back_to_blog" href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a>
             {$admin_vars.out.footer}
-        {* </div> *}
     {else}
         {if NOT $admin_vars.no_sidebar}
         <nav id="main_menu">
