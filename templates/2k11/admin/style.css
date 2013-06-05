@@ -645,6 +645,7 @@ input[type="submit"].state_cancel:visited {
     border-color: #b94a48 #893634 #582322;
 }
 
+input:checked + .media_selector,
 .button_link:hover,
 #template_options div > a:hover,
 button:hover,
@@ -1656,28 +1657,26 @@ input[name="serendipity[filter][fileCategory]"] {
 
 .media_selector {
     cursor: pointer;
-    display: inline-block;
-    padding: 0.6em;
-    border: 1px solid #aaa;
 }
 
-input:checked + .media_selector {
-    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
-    background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
-    background-image: -moz-linear-gradient(#fff, #ddd 1px, #eee);
-    background-image: -o-linear-gradient(#fff, #ddd 1px, #eee);
-    background-image: linear-gradient(#fff, #ddd 1px, #eee);
-    -webkit-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
-    -moz-box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
-    box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;
-    border-color: #999 #bbb #ddd;
+.media_selector {
+    border-radius: 0;
+    border-right: 0 none;
+}
+
+/* These need an IE8 fallback */
+.media_selector:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+.media_selector:last-of-type {
+    border-radius: 0 4px 4px 0;
+    border-right: 1px solid #bbb;
 }
 
 #media_selector_bar {
-    background: #eee;
-    padding: 0.3em;
-    margin: 0.5em 2% 0.2em 0;
-    border: 1px solid #aaa;
+    float: right;
+    margin: 0 2% 1em 0;
 }
 
 
