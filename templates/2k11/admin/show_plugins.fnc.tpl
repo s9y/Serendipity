@@ -24,7 +24,7 @@
                         <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][placement]" value="{$plugin_placement['pid']}" />
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
-                            <input id="remove_{$plugin_data['name']}" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}">
+                            <input id="remove_{$plugin_data['name']}" class="multidelete" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}" data-multidelid="{$plugin_data['css_key']}">
                             <label for="remove_{$plugin_data['name']}" class="visuallyhidden">Remove this plugin</label>{* i18n *}
                         </div>
                     {/if}

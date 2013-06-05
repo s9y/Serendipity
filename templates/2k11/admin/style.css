@@ -1424,6 +1424,7 @@ form > .button_link:first-of-type {
     background: #eee;
 }
 
+.pluginmanager_container .multidel_selected,
 .zebra_list .multidel_selected,
 .multidel_selected {
     border: 1px solid #b94a48;
