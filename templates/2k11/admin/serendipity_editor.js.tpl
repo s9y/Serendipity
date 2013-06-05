@@ -29,7 +29,7 @@ function spawn() {
     }
 }
 
-// Generic function to set cookies. Duh.
+// Generic function to set cookies
 function SetCookie(name, value) {
     var today  = new Date();
     var expire = new Date();
@@ -206,7 +206,8 @@ function AddKeyword(keyword)  {
 }
 
 // "Transfer" value from media db popup to textarea, including wysiwyg
-// This gets textarea="body"/"extended" and tries to insert into the textarea named serendipity[body]/serendipity[extended]
+// This gets textarea="body"/"extended" and tries to insert into the textarea
+// named serendipity[body]/serendipity[extended]
 function serendipity_imageSelector_addToBody (str, textarea) {
     var oEditor;
     if (typeof(FCKeditorAPI) != 'undefined') {
@@ -423,8 +424,8 @@ function showItem(id) {
         // this function got called by addLoadEvent, used pre s9y 2.0
         id = 'categoryselector';
         if ($('#'+id).children('*[selected="selected"]').length > 1) {
-            // when loading the page new for the preview and more than one category was selected, collapsing
-            // the category-selector would lose those categories
+            // when loading the page new for the preview and more than one category was
+            // selected, collapsing the category-selector would lose those categories
             $('#'+id).attr("size", $('#'+id).children().size);
             $('#option_' + id).attr("src", minus_img);
             return
@@ -480,7 +481,7 @@ function hideForeign() {
     $('#imageurl').val('');
 }
 
-// save in which directory the first uploaded files is stored (the default when only isnerting one file)
+// save in which directory the first uploaded files is stored (the default when only inserting one file)
 function rememberUploadOptions() {
     SetCookie("addmedia_directory", $('#target_directory_2').val());
 }
