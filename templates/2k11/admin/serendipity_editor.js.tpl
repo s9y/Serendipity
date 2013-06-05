@@ -533,13 +533,13 @@ function FT_toggle(id) {
 
 // Inverts a selection of checkboxes
 // NOTE: similar function (but not duplicate!) from admin_scripts.js, see below
-function invertSelection() {
-    $('.input_checkbox').each(function(index, checkbox) {
-        $(checkbox).attr('checked',  ! $(checkbox).attr('checked'));
-        var id = 'comment_' + checkbox.name.replace(/.*\[.*\]\[(.*)\]/, "$1");   // gets the id from the name of the checkbox, which is serendipity[delete][id]
-        highlightComment(id, $(checkbox).attr('checked'));
-    });
-}
+// function invertSelection() {
+//     $('.input_checkbox').each(function(index, checkbox) {
+//         $(checkbox).attr('checked',  ! $(checkbox).attr('checked'));
+//         var id = 'comment_' + checkbox.name.replace(/.*\[.*\]\[(.*)\]/, "$1");   // gets the id from the name of the checkbox, which is serendipity[delete][id]
+//         highlightComment(id, $(checkbox).attr('checked'));
+//     });
+// }
 
 // ------------------------------------------------------------------------------
 // This duplicate of invertSelection() was used in the defunct admin_scripts.js.
@@ -562,6 +562,13 @@ function invertSelection() {
 //         }
 //     }
 // }
+
+// Inverts a selection of checkboxes
+function invertSelection() {
+    var $chkboxes = $('#formMultiDelete .multidelete');
+    $chkboxes.prop('checked', !$chkboxes.attr('checked'))
+        .trigger('click');
+}
 
 
 // Highlight/dehighlight elements in lists
@@ -700,11 +707,15 @@ function highlightComment(id, checkvalue) {
         $('#imagepreview').attr('src', $('#category_icon').val());
     });
 
-    // Comment selection for multidelete
-    // onclick="highlightComment('comment_{$comment.id}', this.checked)"
+    // Selection for multidelete
     $('.multidelete').click(function(e) {
         var $el = $(this);
         highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
+    });
+
+    // Invert checkboxes
+    $('.invert_selection').click(function(e) {
+        invertSelection();
     });
 
     // Add media db upload field
