@@ -671,6 +671,10 @@ function highlightComment(id, checkvalue) {
     // Fire WYSIWYG editor(s)
     spawn();
 
+    // Editor-area
+    toggle_category_selector('categoryselector');
+    toggle_extended();
+
     // Click events
     //
     // Show entry timestamp
@@ -797,13 +801,4 @@ function highlightComment(id, checkvalue) {
             });
         }
     });
-
-    // MediaDB-Filter-Buttons should react instantly
-    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
-        $('#media_library_control').submit();
-    });
-
-    // Editor-area
-    toggle_category_selector('categoryselector');
-    toggle_extended();
 })(jQuery);
