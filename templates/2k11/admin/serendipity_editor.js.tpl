@@ -612,8 +612,12 @@ function highlightComment(id, checkvalue) {
     spawn();
 
     // Editor-area
-    toggle_category_selector('categoryselector');
-    toggle_extended();
+    var $entryEditor = $('body').has('#serendipityEntry');
+
+    if($entryEditor.size() > 0) {
+        toggle_category_selector('categoryselector');
+        toggle_extended();
+    }
 
     // Click events
     //
