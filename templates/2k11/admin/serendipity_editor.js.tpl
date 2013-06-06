@@ -426,18 +426,20 @@ function showConfigAll(count) {
 function toggle_category_selector(id) {
     if ($('#toggle_' + id).length == 0) {
         // this function got called on load of the editor
-        var toggleButton = document.createElement('img');
-        toggleButton.id = ('toggle_' + id);
-        $(toggleButton).click(function() {
+        var toggleButton = '#toggle_' + id;
+
+        $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus-circle"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+
+        $(toggleButton).click(function(e) {
+            e.preventDefault();
             toggle_category_selector(id);
         });
-        $('#'+id).before(toggleButton);
         
         if ($('#'+id).children('*[selected="selected"]').length > 1) {
             // when loading the page new for the preview and more than one category was
             // selected, collapsing the category-selector would lose those categories
             $('#'+id).attr("size", $('#'+id).children().size);
-            $('#toggle_' + id).attr("src", img_minus);
+            $('#toggle_' + id).find('> span').removeClass('icon-plus-circle').addClass('icon-minus-circle');
             return
         }
         
@@ -445,12 +447,12 @@ function toggle_category_selector(id) {
     if ($('#'+id).attr("multiple")) {
         $('#'+id).removeAttr("multiple");
         $('#'+id).removeAttr("size");
-        $('#toggle_' + id).attr("src", img_plus);
+        $('#toggle_' + id).find('> span').removeClass('icon-minus-circle').addClass('icon-plus-circle');
         
     } else {
         $('#'+id).attr("multiple", "");
         $('#'+id).attr("size", $('#'+id).children().size);
-        $('#toggle_' + id).attr("src", img_minus);
+        $('#toggle_' + id).find('> span').removeClass('icon-plus-circle').addClass('icon-minus-circle');
     }
 }
 

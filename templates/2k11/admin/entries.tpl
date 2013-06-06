@@ -22,7 +22,6 @@
         </div>
     {/if}
         <div id="edit_entry_category" class="form_select">
-            {* TODO: this needs JS to be collapsible *}
             <label for="categoryselector">{$CONST.CATEGORY}</label>
             <select id="categoryselector" name="serendipity[categories][]" multiple>
                 <option value="0">{$CONST.NO_CATEGORY}</option>

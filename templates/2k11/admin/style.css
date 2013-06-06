@@ -1255,12 +1255,19 @@ main {
 } /* Temporary */
 
 #edit_entry_timestamp,
+#edit_entry_category,
 #media_pane_filter,
 .comments_pane .pagination {
     position: relative;
 }
 
 #reset_timestamp,
+#toggle_categoryselector {
+    position: absolute;
+    top: 1.55em;
+    right: 0;
+}
+
 #media_pane_filter #toggle_filters {
     position: absolute;
     top: 0;
@@ -1892,6 +1899,15 @@ input[name="serendipity[filter][fileCategory]"] {
         position: static;
     }
 
+    #toggle_categoryselector {
+        left: 0;
+        right: auto;
+    }
+
+    #categoryselector {
+        margin-left: 2.5em;
+    }
+
     #edit_entry_metadata label,
     #edit_entry_status label,
     #sort_entries .form_select label,
@@ -1974,7 +1990,7 @@ input[name="serendipity[filter][fileCategory]"] {
         width: 85%;
     }
 
-    #edit_entry_metadata select {
+    .no-js #edit_entry_metadata select {
         width: 100%;
     }
 
