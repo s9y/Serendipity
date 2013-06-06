@@ -186,19 +186,6 @@ function serendipity_imageSelector_addToElement (str, id) {
     $input.change();
 }
 
-// Show (extended) filters in media db
-// NOTE: replaced by additional_info, safe to be removed
-//       (check media_pane.tpl before removing)
-function showFilters()  {
-    s = document.getElementById('moreFilter').style;
-
-    if (s.display == 'none') {
-        s.display = 'block';
-    } else {
-        s.display = 'none';
-    }
-}
-
 // Add another (image) keyword
 function AddKeyword(keyword)  {
     s = document.getElementById('keyword_input').value;
@@ -382,46 +369,6 @@ function toggle_extended(setCookie) {
     }
 }
 
-// Variables for showConfig*
-var const_view = '{$CONST.VIEW_FULL}';
-var const_hide = '{$CONST.HIDE}';
-var img_plus   = '{serendipity_getFile file="img/plus.png"}';
-var img_minus  = '{serendipity_getFile file="img/minus.png"}';
-
-// Collapse/expand one config group
-function showConfig(id) {
-    if (document.getElementById) {
-        plugbox = document.getElementById(id);
-        if (plugbox.style.display == 'none') {
-            document.getElementById('option' + id).src = img_minus;
-            plugbox.style.display = '';
-        } else {
-            document.getElementById('option' + id).src = img_plus;
-            plugbox.style.display = 'none';
-        }
-    }
-}
-
-// Collapse/expand all config groups
-var state='';
-
-function showConfigAll(count) {
-    if (document.getElementById) {
-        for (i = 1; i <= count; i++) {
-            document.getElementById('el' + i).style.display = state;
-            document.getElementById('optionel' + i).src = (state == '' ? img_minus : img_plus);
-        }
-
-        if (state == '') {
-            document.getElementById('optionall').src = img_minus;
-            state = 'none';
-        } else {
-            document.getElementById('optionall').src = img_plus;
-            state = '';
-        }
-    }
-}
-
 // Collapses/expands the category selector
 function toggle_category_selector(id) {
     if ($('#toggle_' + id).length == 0) {
@@ -543,18 +490,6 @@ function FT_toggle(id) {
     }
 
     return false;
-}
-
-// Seems to check all (checkbox) elements of a given form
-// NOTE: used by serendipity_event_cal, serendipity_event_downloadmanager
-function chkAll(frm, arr, mark) {
-    for (i = 0; i <= frm.elements.length; i++) {
-        try {
-            if(frm.elements[i].name == arr) {
-                frm.elements[i].checked = mark;
-            }
-        } catch (err) {}
-    }
 }
 
 // Inverts a selection of checkboxes
