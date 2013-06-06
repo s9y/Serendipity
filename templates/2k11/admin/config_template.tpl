@@ -24,22 +24,24 @@
         <fieldset id="el{$category@index}" class="clearfix">
             <legend><span>{$category.description}</span></legend>
             {foreach $category.items as $item}
-                {if $item.type == 'bool'}
-                    <fieldset>
-                        <legend>
-                            <span>{$item.title}
-                                <span>{$item.description}</span>
-                            </span>
-                        </legend>
-                        <div class="clearfix">
+                {if $item.guessedInput}
+                    {if $item.type == 'bool'}
+                        <fieldset>
+                            <legend>
+                                <span>{$item.title}
+                                    <span>{$item.description}</span>
+                                </span>
+                            </legend>
+                            <div class="clearfix">
+                                {$item.guessedInput}
+                            </div>
+                        </fieldset>
+                    {else}
+                        <div class="form_{$item.type}">
+                            <label for="{$item.var}">{$item.title}<span>{$item.description}</span></label>
                             {$item.guessedInput}
                         </div>
-                    </fieldset>
-                {else}
-                    <div class="form_{$item.type}">
-                        <label for="{$item.var}">{$item.title}<span>{$item.description}</span></label>
-                        {$item.guessedInput}
-                    </div>
+                    {/if}
                 {/if}
             {/foreach}
         </fieldset>
