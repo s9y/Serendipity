@@ -703,14 +703,6 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     $data['OUT_STACK_REST'] = $out_stack;
 
-    // is left here without any use for archiv issues only - we now use external js file outsourced to templates/default/admin/admin_scripts.js 
-    // see passed vars in serendipity_plugin_config.fnc.tpl - can get erased, as not being used any more if keeping Smartification.
-    ob_start();
-    serendipity_printConfigJS();
-    $config_js = ob_get_contents();
-    $data['serendipity_printConfigJS'] = $config_js;
-    ob_end_clean();
-
     // this is new - allowing easier access to script handling like toogle 
     $data['allow_admin_scripts'] = true;
 
