@@ -358,14 +358,24 @@ function serendipity_imageSelector_done(textarea) {
 
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
+    if ($('#toggle_extended').length == 0) {
+        // this function got called on load of the editor
+        var toggleButton = document.createElement('img');
+        toggleButton.id = ('toggle_extended');
+        $(toggleButton).click(function() {
+            toggle_extended(true);
+        });
+        $('textarea[name="serendipity[extended]"]').parent().prepend(toggleButton);
+    }
+    
     if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
         $('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
         $('#tools_extended').show();
-        $('#option_extended').attr('src', minus_img);
+        $('#toggle_extended').attr('src', img_minus);
     } else {
         $('textarea[name="serendipity[extended]"]').hide();
         $('#tools_extended').hide();
-        $('#option_extended').attr('src', plus_img);
+        $('#toggle_extended').attr('src', img_plus);
     }
     if (setCookie) {
         document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
@@ -413,13 +423,13 @@ function showConfigAll(count) {
 }
 
 // Collapses/expands the category selector
-function toggleCategorySelector(id) {
+function toggle_category_selector(id) {
     if ($('#toggle_' + id).length == 0) {
         // this function got called on load of the editor
         var toggleButton = document.createElement('img');
         toggleButton.id = ('toggle_' + id);
         $(toggleButton).click(function() {
-            toggleCategorySelector(id);
+            toggle_category_selector(id);
         });
         $('#'+id).before(toggleButton);
         
@@ -750,7 +760,8 @@ function highlightComment(id, checkvalue) {
         $('#media_library_control').submit();
     });
 
-    // Category selector
-    toggleCategorySelector('categoryselector');
+    // Editor-area
+    toggle_category_selector('categoryselector');
+    toggle_extended();
     
 })(jQuery);
