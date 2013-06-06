@@ -372,6 +372,12 @@ function toggle_extended(setCookie) {
     }
 }
 
+// Variables for showConfig*
+var const_view = '{$CONST.VIEW_FULL}';
+var const_hide = '{$CONST.HIDE}';
+var img_plus   = '{serendipity_getFile file="img/plus.png"}';
+var img_minus  = '{serendipity_getFile file="img/minus.png"}';
+
 // Collapse/expand one config group
 function showConfig(id) {
     if (document.getElementById) {
@@ -533,7 +539,6 @@ function chkAll(frm, arr, mark) {
 }
 
 // Inverts a selection of checkboxes
-// NOTE: also used by serendipity_event_dashboard
 function invertSelection() {
     var $chkboxes = $('#formMultiDelete .multidelete');
     $chkboxes.prop('checked', !$chkboxes.attr('checked'))

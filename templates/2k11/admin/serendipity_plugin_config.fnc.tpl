@@ -1,10 +1,4 @@
 {* serendipity_plugins_admin.inc.php::serendipity_plugin_config() *}
-    <script>
-        var const_view = '{$CONST.VIEW_FULL}';
-        var const_hide = '{$CONST.HIDE}';
-        var img_plus   = '{serendipity_getFile file="img/plus.png"}';
-        var img_minus  = '{serendipity_getFile file="img/minus.png"}';
-    </script>
 {if $showSubmit_head}
     <div class="save_conf form_buttons">
         {if $postKey == "template"}
@@ -19,7 +13,7 @@
 {if is_array($config_groups)}
         <a id="optionall" class="button_link icon_link standalone" href="#" onClick="showConfigAll({sizeof($config_groups)}); return false" title="{$CONST.TOGGLE_ALL}">{$CONST.TOGGLE_ALL}</a>
     {foreach $config_groups AS $config_header => $config_groupkeys}
-        <h2><a id="optionel{$config_groupkeys@iteration}" href="#" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h2>
+        <h3><a id="optionel{$config_groupkeys@iteration}" href="#el{$config_groupkeys@iteration}" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h3>
         
         <fieldset id="el{$config_groupkeys@iteration}" class="plugin_optiongroup{if $config_groupkeys@last} plugin_optiongroup_last{/if}">
         {foreach $config_groupkeys AS $config_groupkey}
