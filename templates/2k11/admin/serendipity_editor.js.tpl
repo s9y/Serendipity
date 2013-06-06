@@ -358,14 +358,24 @@ function serendipity_imageSelector_done(textarea) {
 
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
+    if ($('#toggle_extended').length == 0) {
+        // this function got called on load of the editor
+        var toggleButton = document.createElement('img');
+        toggleButton.id = ('toggle_extended');
+        $(toggleButton).click(function() {
+            toggle_extended(true);
+        });
+        $('textarea[name="serendipity[extended]"]').parent().prepend(toggleButton);
+    }
+    
     if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
         $('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
         $('#tools_extended').show();
-        $('#option_extended').attr('src', minus_img);
+        $('#toggle_extended').attr('src', img_minus);
     } else {
         $('textarea[name="serendipity[extended]"]').hide();
         $('#tools_extended').hide();
-        $('#option_extended').attr('src', plus_img);
+        $('#toggle_extended').attr('src', img_plus);
     }
     if (setCookie) {
         document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
@@ -413,27 +423,34 @@ function showConfigAll(count) {
 }
 
 // Collapses/expands the category selector
-function showItem(id) {
-    if (id == undefined) {
-        // this function got called by addLoadEvent, used pre s9y 2.0
-        id = 'categoryselector';
+function toggle_category_selector(id) {
+    if ($('#toggle_' + id).length == 0) {
+        // this function got called on load of the editor
+        var toggleButton = document.createElement('img');
+        toggleButton.id = ('toggle_' + id);
+        $(toggleButton).click(function() {
+            toggle_category_selector(id);
+        });
+        $('#'+id).before(toggleButton);
+        
         if ($('#'+id).children('*[selected="selected"]').length > 1) {
             // when loading the page new for the preview and more than one category was
             // selected, collapsing the category-selector would lose those categories
             $('#'+id).attr("size", $('#'+id).children().size);
-            $('#option_' + id).attr("src", minus_img);
+            $('#toggle_' + id).attr("src", img_minus);
             return
         }
+        
     }
     if ($('#'+id).attr("multiple")) {
         $('#'+id).removeAttr("multiple");
         $('#'+id).removeAttr("size");
-        $('#option_' + id).attr("src", plus_img);
+        $('#toggle_' + id).attr("src", img_plus);
         
     } else {
         $('#'+id).attr("multiple", "");
         $('#'+id).attr("size", $('#'+id).children().size);
-        $('#option_' + id).attr("src", minus_img);
+        $('#toggle_' + id).attr("src", img_minus);
     }
 }
 
@@ -779,5 +796,14 @@ function highlightComment(id, checkvalue) {
                 updateOnResize: true
             });
         }
-    });    
+    });
+
+    // MediaDB-Filter-Buttons should react instantly
+    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
+        $('#media_library_control').submit();
+    });
+
+    // Editor-area
+    toggle_category_selector('categoryselector');
+    toggle_extended();
 })(jQuery);
