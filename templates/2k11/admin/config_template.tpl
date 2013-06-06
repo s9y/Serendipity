@@ -36,7 +36,7 @@
                         </div>
                     </fieldset>
                 {else}
-                    <div class="form_{$item.type}>
+                    <div class="form_{$item.type}">
                         <label for="{$item.var}">{$item.title}<span>{$item.description}</span></label>
                         {$item.guessedInput}
                     </div>
