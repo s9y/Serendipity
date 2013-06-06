@@ -1475,6 +1475,10 @@ form > .button_link:first-of-type {
     min-width: 11em;
 }
 
+.show_config_option {
+    text-decoration: none;
+}
+
 /* FOOTER
    ----------------------------------------------------------------- */
 
@@ -1545,7 +1549,7 @@ form > .button_link:first-of-type {
     text-align: right;
 }
 
-.plugin_optiongroup_last {
+.config_optiongroup_last {
     border-bottom: 1px solid #aaa;
 }
 

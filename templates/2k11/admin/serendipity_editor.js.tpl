@@ -662,6 +662,44 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // Collapsible configuration elements
+    var $hasConfigOpts = $('body').has('#serendipity_config_options');
+
+    if($hasConfigOpts.size() > 0) {
+        $('.show_config_option > span').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        var optsCollapsed = true;
+
+        $('.show_config_option').click(function(e) {
+            var $el = $(this);
+            var $toggled = $el.attr('href');
+            var $toggleIcon = $el.find('> span');
+            var $toggleState = $toggleIcon.attr('class');
+            if($toggleState == 'icon-minus-circle') {
+                $toggleIcon.removeClass('icon-minus-circle').addClass('icon-plus-circle');
+            } else {
+                $toggleIcon.removeClass('icon-plus-circle').addClass('icon-minus-circle');
+            }
+            $($toggled).toggleClass('additional_info');
+            e.preventDefault();
+        });
+
+        $('#show_config_all').click(function(e) {
+            var $container = $(this).attr('href');
+            var $toggleIcons = $($container).find('.show_config_option > span');
+            var $toggleOption = $($container).find('.config_optiongroup');
+            if(optsCollapsed) {
+                $toggleIcons.removeClass('icon-plus-circle').addClass('icon-minus-circle');
+                $toggleOption.removeClass('additional_info');
+                optsCollapsed = false;
+            } else {
+                $toggleIcons.removeClass('icon-minus-circle').addClass('icon-plus-circle');
+                $toggleOption.addClass('additional_info');
+                optsCollapsed = true;
+            }
+            e.preventDefault();
+        });
+    }
+
     // Category icon preview
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
@@ -718,6 +756,11 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // MediaDB-Filter-Buttons should react instantly
+    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
+        $('#media_library_control').submit();
+    });
+
     // Clone form submit buttons
     $('#sort_entries > .form_buttons').clone().appendTo('#filter_entries');
     $('#media_pane_sort > .form_buttons').clone().appendTo('#media_pane_filter');
@@ -736,11 +779,5 @@ function highlightComment(id, checkvalue) {
                 updateOnResize: true
             });
         }
-    });
-
-    // MediaDB-Filter-Buttons should react instantly
-    $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
-        $('#media_library_control').submit();
-    });
-    
+    });    
 })(jQuery);

@@ -7,32 +7,28 @@
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
-{if $showTable}
-    <div id="serendipity_plugin_config" class="configuration_group">
-{/if}
 {if is_array($config_groups)}
-        <a id="optionall" class="button_link icon_link standalone" href="#" onClick="showConfigAll({sizeof($config_groups)}); return false" title="{$CONST.TOGGLE_ALL}">{$CONST.TOGGLE_ALL}</a>
+    <a id="show_config_all" class="button_link" href="#serendipity_config_options">{$CONST.TOGGLE_ALL}</a>
+
+    <div id="serendipity_config_options">
     {foreach $config_groups AS $config_header => $config_groupkeys}
-        <h3><a id="optionel{$config_groupkeys@iteration}" href="#el{$config_groupkeys@iteration}" onClick="showConfig('el{$config_groupkeys@iteration}'); return false" title="{$CONST.TOGGLE_OPTION}">{$config_header}</a></h3>
+        <div class="configuration_group">
+            <h3><a id="optionel{$config_groupkeys@iteration}" class="show_config_option" href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-minus-circle"></span> {$config_header}</a></h3>
         
-        <fieldset id="el{$config_groupkeys@iteration}" class="plugin_optiongroup{if $config_groupkeys@last} plugin_optiongroup_last{/if}">
-        {foreach $config_groupkeys AS $config_groupkey}
+            <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
+            {foreach $config_groupkeys AS $config_groupkey}
             {$OUT_STACK[$config_groupkey]}
-        {/foreach}
-        </fieldset>
-        
-        <script>document.getElementById('el{$config_groupkeys@iteration}').style.display = "none";</script>
+            {/foreach}
+            </fieldset>
+        </div>
     {/foreach}
-{/if} {* foreach config_groups end *}
-
-{foreach $OUT_STACK_REST as $out_stack_config_item}
-    {$out_stack_config_item}
-{/foreach}
-
-{if $showTable}
     </div>
 {/if}
-{* $serendipity_printConfigJS *}{* outsourced to templates/default/admin/admin_scripts.js - see passed vars on top *}
+{foreach $OUT_STACK_REST as $out_stack_config_item}
+    <div class="configuration_group">
+    {$out_stack_config_item}
+    </div>
+{/foreach}
 {if $showSubmit_foot}
     <div class="save_conf form_buttons">
         {if $postKey == "template"}
