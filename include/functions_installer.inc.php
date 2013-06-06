@@ -390,84 +390,51 @@ function serendipity_replaceEmbeddedConfigVars ($s) {
  */
 
 function serendipity_guessInput($type, $name, $value='', $default='') {
-    global $serendipity;
-    $output = "";
+    $data = array();
+    $curOptions = array();
+    
     switch ($type) {
         case 'bool':
             $value = serendipity_get_bool($value);
             if ($value === null) {
                 $value = $default;
             }
-            $output .= '<div class="form_radio">';
-            $output .= '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
-            $output .= (($value == true) ? 'checked="checked"' : ''). ' />
-            <label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>';
-            $output .= '</div>';
-            
-            $output .= '<div class="form_radio">';
-            $output .= '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
-            $output .= (($value == true) ? '' : 'checked="checked"'). ' />
-            <label for="radio_cfg_' . $name . '_no"> ' . NO . '</label>';
-            $output .= '</div>';
-            break;
-
-        case 'fullprotected':
-            $output .= '<input autocomplete="off" class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
-            break;
-
-        case 'protected':
-            $output .= '<input class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
 
         case 'multilist':
-            $output .= '<select name="'. $name .'[]" multiple="multiple" size="5">';
-
-            foreach ((array)$default as $k => $v) {
+            $default = (array)$default;
+            $value = (array)$value;
+            foreach ($default as $k => $v) {
                 $selected = false;
-                foreach((array)$value AS $vk => $vv) {
+                foreach($value AS $vk => $vv) {
                     if ($vv['confkey'] == $v['confkey']) {
                         $selected = true;
                     }
                 }
-
-                $output .= sprintf('<option value="%s"%s>%s</option>'. "\n",
-                      $v['confkey'],
-                      ($selected ? ' selected="selected"' : ''),
-                      $v['confvalue']);
+                $curOptions[$name][$k]['selected'] = $selected;
             }
-            $output .= '</select>';
             break;
 
         case 'list':
-            $output .= '<select name="'. $name .'">';
             $cval = (string)$value;
-            foreach ((array)$default as $k => $v) {
+            $default = (array)$default;
+            foreach ($default as $k => $v) {
                 $selected = ((string)$k == (string)$value);
                 if (empty($cval) && ((string)$k === 'false' || (string)$k === null)) {
                     $selected = true;
                 }
-
-                $output .= sprintf('<option value="%s"%s>%s</option>'. "\n",
-                      $k,
-                      ($selected ? ' selected="selected"' : ''),
-                      $v);
+                $curOptions[$name][$k]['selected'] = $selected;
             }
-            $output .= '</select>';
-            break;
-
-        case 'file':
-            $output .= '<input class="input_file" type="file" size="30" name="' . $name . '" />';
-            break;
-
-        case 'textarea':
-            $output .= '<textarea rows="5" cols="40" name="' . $name . '">' . htmlspecialchars($value) . '</textarea>';
-            break;
-
-        default:
-            $output .= '<input class="input_textbox" type="text" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
     }
-    return $output;
+
+    $data['type'] = $type;
+    $data['name'] = $name;
+    $data['value'] = $value;
+    $data['default'] = $default;
+    $data['selected'] = $curOptions;
+
+    return serendipity_smarty_show('admin/guess_input.tpl', $data);
 }
 
 /**
@@ -489,10 +456,8 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     $data['formToken'] = serendipity_setFormToken();
     
     $data['allowToggle'] = $allowToggle;
-
-    $el_count = -1;
+    
     foreach ($config as &$category) {
-        $el_count++;
         foreach ($category['items'] as &$item) {
 
             $value = $from[$item['var']];
