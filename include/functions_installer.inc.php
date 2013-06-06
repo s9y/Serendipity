@@ -391,36 +391,36 @@ function serendipity_replaceEmbeddedConfigVars ($s) {
 
 function serendipity_guessInput($type, $name, $value='', $default='') {
     global $serendipity;
-
+    $output = "";
     switch ($type) {
         case 'bool':
             $value = serendipity_get_bool($value);
             if ($value === null) {
                 $value = $default;
             }
-            echo '<div class="form_radio">';
-            echo '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
-            echo (($value == true) ? 'checked="checked"' : ''). ' />
+            $output .= '<div class="form_radio">';
+            $output .= '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
+            $output .= (($value == true) ? 'checked="checked"' : ''). ' />
             <label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>';
-            echo '</div>';
+            $output .= '</div>';
             
-            echo '<div class="form_radio">';
-            echo '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
-            echo (($value == true) ? '' : 'checked="checked"'). ' />
+            $output .= '<div class="form_radio">';
+            $output .= '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
+            $output .= (($value == true) ? '' : 'checked="checked"'). ' />
             <label for="radio_cfg_' . $name . '_no"> ' . NO . '</label>';
-            echo '</div>';
+            $output .= '</div>';
             break;
 
         case 'fullprotected':
-            echo '<input autocomplete="off" class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            $output .= '<input autocomplete="off" class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
 
         case 'protected':
-            echo '<input class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            $output .= '<input class="input_textbox" type="password" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
 
         case 'multilist':
-            echo '<select name="'. $name .'[]" multiple="multiple" size="5">';
+            $output .= '<select name="'. $name .'[]" multiple="multiple" size="5">';
 
             foreach ((array)$default as $k => $v) {
                 $selected = false;
@@ -430,16 +430,16 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
                     }
                 }
 
-                printf('<option value="%s"%s>%s</option>'. "\n",
+                $output .= sprintf('<option value="%s"%s>%s</option>'. "\n",
                       $v['confkey'],
                       ($selected ? ' selected="selected"' : ''),
                       $v['confvalue']);
             }
-            echo '</select>';
+            $output .= '</select>';
             break;
 
         case 'list':
-            echo '<select name="'. $name .'">';
+            $output .= '<select name="'. $name .'">';
             $cval = (string)$value;
             foreach ((array)$default as $k => $v) {
                 $selected = ((string)$k == (string)$value);
@@ -447,57 +447,27 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
                     $selected = true;
                 }
 
-                printf('<option value="%s"%s>%s</option>'. "\n",
+                $output .= sprintf('<option value="%s"%s>%s</option>'. "\n",
                       $k,
                       ($selected ? ' selected="selected"' : ''),
                       $v);
             }
-            echo '</select>';
+            $output .= '</select>';
             break;
 
         case 'file':
-            echo '<input class="input_file" type="file" size="30" name="' . $name . '" />';
+            $output .= '<input class="input_file" type="file" size="30" name="' . $name . '" />';
             break;
 
         case 'textarea':
-            echo '<textarea rows="5" cols="40" name="' . $name . '">' . htmlspecialchars($value) . '</textarea>';
+            $output .= '<textarea rows="5" cols="40" name="' . $name . '">' . htmlspecialchars($value) . '</textarea>';
             break;
 
         default:
-            echo '<input class="input_textbox" type="text" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
+            $output .= '<input class="input_textbox" type="text" size="30" name="' . $name . '" value="' . htmlspecialchars($value) . '" />';
             break;
     }
-}
-
-function serendipity_printConfigJS($folded = true) {
-?>
-<script type="text/javascript" language="JavaScript">
-function showConfig(id) {
-    if (document.getElementById) {
-        el = document.getElementById(id);
-        if (el.style.display == 'none') {
-            el.style.display = 'block';
-        } else {
-            el.style.display = 'none';
-        }
-    }
-}
-
-var state='<?php echo ($folded === true ? '' : 'none'); ?>';
-function showConfigAll(count) {
-    if (document.getElementById) {
-        for (i = 1; i <= count; i++) {
-            document.getElementById('el' + i).style.display = state;
-        }
-        if (state == 'block') {
-            state = 'none';
-        } else {
-            state = 'block';
-        }
-    }
-}
-</script>
-<?php
+    return $output;
 }
 
 /**
@@ -514,36 +484,16 @@ function showConfigAll(count) {
  */
 function serendipity_printConfigTemplate($config, $from = false, $noForm = false, $folded = true, $allowToggle = true, $showDangerous = false) {
     global $serendipity;
+    $data = array();
+    $data['noForm'] = $noForm;
+    $data['formToken'] = serendipity_setFormToken();
+    
+    $data['allowToggle'] = $allowToggle;
 
-    if ($allowToggle) {
-        serendipity_printConfigJS($folded);
-    }
-
-    if (!$noForm) {
-?>
-<form action="?" method="POST">
-    <input type="hidden" name="serendipity[adminModule]" value="installer">
-    <input type="hidden" name="installAction" value="check">
-    <?php echo serendipity_setFormToken(); ?>
-<?php   }
-    if (sizeof($config) > 1 && $allowToggle) { ?>
-    <a class="button_link" href="#" onClick="showConfigAll(<?php echo sizeof($config); ?>)"><?php echo TOGGLE_ALL; ?></a>
-<?php
-    }
-    $el_count = 0;
-    foreach ($config as $category) {
+    $el_count = -1;
+    foreach ($config as &$category) {
         $el_count++;
-?>
-    <div class="configuration_group">
-<?php
-        if (sizeof($config) > 1) {
-?>
-        <h3><?php if ($allowToggle) { ?><a href="#" onClick="showConfig('el<?php echo $el_count; ?>'); return false"><?php echo $category['title']; ?></a><?php } else { ?><?php echo $category['title']; ?><?php } ?></h3>
-<?php   } ?>
-        <fieldset id="el<?php echo $el_count; ?>" class="clearfix">
-            <legend><span><?php echo $category['description'] ?></span></legend>
-<?php
-        foreach ($category['items'] as $item) {
+        foreach ($category['items'] as &$item) {
 
             $value = $from[$item['var']];
 
@@ -580,48 +530,11 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
             if (in_array('ifEmpty', $item['flags']) && empty($value)) {
                 $value = serendipity_query_default($item['var'], $item['default']);
             }
-
-            if ($item['type'] == 'bool') {
-                echo '<fieldset>
-                        <legend>
-                            <span>'. $item['title'] .'
-                                <span>'. $item['description'] .' </span>
-                            </span>
-                        </legend>
-                        <div class="clearfix">';
-                serendipity_guessInput($item['type'], $item['var'], $value, $item['default']);
-                echo '</div>
-                      </fieldset>';
-            } else {
-                echo '<div class="form_'. $item['type'] .'">
-                    <label for="'. $item['var'] .'">'. $item['title'] .' <span>'. $item['description'] .'</span></label>';
-                     serendipity_guessInput($item['type'], $item['var'], $value, $item['default']);
-                echo '</div>';
-            }
-
+            $item['guessedInput'] = serendipity_guessInput($item['type'], $item['var'], $value, $item['default']);
         }
-?>
-        </fieldset>
-    </div>
-<?php
     }
-
-    if ($folded && $allowToggle) {
-        echo '<script type="text/javascript" language="JavaScript">';
-        for ($i = 1; $i <= $el_count; $i++) {
-            echo 'document.getElementById("el' . $i . '").style.display = "none";' . "\n";
-        }
-        echo '</script>';
-    }
-
-    if (!$noForm) {
-?>
-    <div class="form_buttons">
-        <input type="submit" value="<?php echo CHECK_N_SAVE; ?>">
-    </div>
-</form>
-<?php
-    }
+    $data['config'] = $config;
+    echo serendipity_smarty_show('admin/config_template.tpl', $data);
 }
 
 /**
