@@ -520,7 +520,20 @@ function FT_toggle(id) {
     return false;
 }
 
+// Seems to check all (checkbox) elements of a given form
+// NOTE: used by serendipity_event_cal, serendipity_event_downloadmanager
+function chkAll(frm, arr, mark) {
+    for (i = 0; i <= frm.elements.length; i++) {
+        try {
+            if(frm.elements[i].name == arr) {
+                frm.elements[i].checked = mark;
+            }
+        } catch (err) {}
+    }
+}
+
 // Inverts a selection of checkboxes
+// NOTE: also used by serendipity_event_dashboard
 function invertSelection() {
     var $chkboxes = $('#formMultiDelete .multidelete');
     $chkboxes.prop('checked', !$chkboxes.attr('checked'))
