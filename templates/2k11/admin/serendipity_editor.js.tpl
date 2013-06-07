@@ -438,6 +438,8 @@ function treeToggleAll() {
 var inputStorage = new Array();
 
 function checkInputs() { 
+    var fieldcount = $('.uploadform_userfile').length;
+
     for (i = 1; i <= fieldcount; i++) { 
         if (!inputStorage[i]) { 
             fillInput(i, i);
@@ -473,6 +475,12 @@ function fillInput(source, target) {
             inputStorage[target + 1] = '~~~';
         }
     }
+}
+
+// Helper function for fillInput()
+function getfilename(value) { 
+    re = /^.+[\/\\]+?(.+)$/;
+    return value.replace(re, "$1"); 
 }
 
 // Hides the foreign upload form if batch upload is used (if more
