@@ -285,7 +285,7 @@ function placement_box($name, $val, $is_plugin_editable = false, $is_event = fal
 }
 
 /**
- * Show a placement box on where to move a sidebar plugin to
+ * Show the plugin configuration
  *
  * @access public
  * @param  object   A plugin object
@@ -311,7 +311,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
-    $tfile = "/admin/out_stack_loop.tpl";
+    $tfile = "/admin/plugin_config_item.tpl";
     
 
     $data = array();
@@ -725,7 +725,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['ev'] = $ev;
     }
 
-    echo serendipity_smarty_show('admin/serendipity_plugin_config.fnc.tpl', $data);
+    echo serendipity_smarty_show('admin/plugin_config.tpl', $data);
 
     return true;
 }
