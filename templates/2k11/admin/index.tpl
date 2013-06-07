@@ -16,9 +16,6 @@
             <div id="banner{if not $admin_vars.is_logged_in}_install{/if}">
             {if $admin_vars.admin_installed}
                 <h1><a href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="visuallyhidden">{$CONST.SERENDIPITY_ADMIN_SUITE}: </span>{$blogTitle}</a></h1>
-                {if $admin_vars.is_logged_in}
-                <span class="block_level">{$admin_vars.self_info}</span>
-                {/if}
             {else}
                 <h1>{$CONST.SERENDIPITY_INSTALLATION}</h1>
             {/if}
@@ -27,13 +24,15 @@
             <nav id="user_menu">
                 <h2 class="visuallyhidden">User menu</h2> {* i18n *}
 
+                <span class="block_level">{$admin_vars.self_info}</span>
+
                 <ul>
-                    <li><a class="icon_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
                 {if 'personalConfiguration'|checkPermission}
-                    <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
-                    <li><a class="icon_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
-                    <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-off"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
+                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-off"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                 </ul>
             </nav>
         {/if}

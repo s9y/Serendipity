@@ -202,7 +202,7 @@ table {
 /* BASE STYLES
    ----------------------------------------------------------------- */
 html {
-    font-size: 100%;
+    font-size: 0.875em;
 }
 
 html,
@@ -941,7 +941,6 @@ html {
 
 body {
     background: #fcfcfc;
-    font-size: 0.875em;
 }
 
 a,
@@ -973,7 +972,7 @@ a.button_link:focus,
 h1 {
     font-size: 1.71429em;
     line-height: 1.75em;
-    margin: 0.875em 0 0;
+    margin: 0.5em 0 0;
 }
 
 #banner_install h1 {
@@ -1231,9 +1230,9 @@ main {
     color: #25253d;
 }
 
+#user_menu span,
 #user_menu ul {
-    font-size: 1.5em;
-    margin: .5em 0;
+    margin: 0 0 .75em;
 }
 
 #user_menu li {
@@ -1693,37 +1692,6 @@ input[name="serendipity[filter][fileCategory]"] {
 
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
-@media only screen and (min-width: 480px) {
-    #banner {
-        float: left;
-        margin: 0 1% 0 0;
-    }
-
-    #user_menu {
-        float: left;
-        margin: 0 0 0 1%;
-        text-align: right;
-    }
-
-    #banner,
-    #user_menu {
-        width: 49%;
-    }
-
-    #banner > span {
-        margin: 0 0 1.5em;
-    }
-
-    #user_menu ul {
-        font-size: 1.5em;
-        margin: 1.35em 0 .65em;
-    }
-
-    #user_menu li {
-        margin: 0 0 0 1em;
-    }
-}
-
 @media only screen and (min-width: 481px) {
     #uploadform label {
         display: inline-block;
@@ -1745,21 +1713,37 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 }
 
+@media only screen and (min-width: 640px) {
+    #banner,
+    #user_menu {
+        float: left;
+        width: 50%;
+    }
+
+    #user_menu {
+        text-align: right;
+    }
+
+    #user_menu li {
+        margin: 0 0 0 1em;
+    }
+
+    #user_menu > span {
+        margin: .375em 0;
+    }
+}
+
 
 /* MEDIUM SCREEN (e.g. tablets)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 768px) {
-    body {
+    html {
         font-size: 1em;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1.75em;
         line-height: 1.5em;
-        margin: 0.75em 0 0;
-    }
-
-    #banner_install h1 {
         margin: 0.75em 0;
     }
 
@@ -1773,6 +1757,14 @@ input[name="serendipity[filter][fileCategory]"] {
         font-size: 0.875em;
         line-height: 1.71429em;
         margin: 1.71429em 0;
+    }
+
+    #user_menu > span {
+        margin: 0.875em 0 .4375em;
+    }
+
+    #user_menu ul {
+        margin: 0.4375em 0 .875em;
     }
 
     #image_directory_edit_form > .clearfix > div {
@@ -2013,31 +2005,14 @@ input[name="serendipity[filter][fileCategory]"] {
 /* LARGER SCREEN (e.g. laptops)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1280px) {
-    #banner h1 {
-        float: left;
-        margin: .75em 0;
-    }
-
-    #banner > span {
-        float: left;
-        margin: 2.35em 0 1.5em 3.35em;
-    }
-
-    #user_menu ul {
-        font-size: 2em;
-        margin: .75em 0;
-    }
+    
 }
 
 
 /* HUGE SCREEN (e.g. desktops)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1400px) {
-    body {
+    html {
         font-size: 1.125em;
-    }
-
-    #banner > span {
-        margin: 2.35em 0 1.5em 2em;
     }
 }
