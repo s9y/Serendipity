@@ -343,9 +343,6 @@ function serendipity_imageSelector_done(textarea) {
     parent.self.close();
 }
 
-var img_plus   = '{serendipity_getFile file="img/plus.png"}';
-var img_minus  = '{serendipity_getFile file="img/minus.png"}';
-
 // Toggle extended entry editor
 function toggle_extended(setCookie) {
     if ($('#toggle_extended').length == 0) {
