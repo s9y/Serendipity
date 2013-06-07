@@ -102,7 +102,7 @@
     <div class="form_area">
         <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
-        <div id="tools_extended" class="editor_toolbar">{*  style="display: none" this relies on toggle_extended() (see this page Line 143) function in former categeory_selector.js, now serendipity_editor js, which also relies on cookies and wysiwyg vars. *}
+        <div id="tools_extended" class="editor_toolbar">
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}<input name="insX" type="button" value="NoBR" accesskey="x" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<nl>','</nl>')">{/if}
             <input name="insI" type="button" accesskey="i" value="I" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<em>','</em>')" class="hilite_i">
@@ -126,9 +126,6 @@
     {/if}
         {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="20">{$entry_vars.entry.extended|@escape}</textarea>
-        {* if NOT $entry_vars.wysiwyg}
-        {<script> toggle_extended(); </script>
-        {/if *}
     </div>
 
     <fieldset>
@@ -136,10 +133,6 @@
         {$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}
     </fieldset>
 </form>
-
-{if $entry_vars.show_wysiwyg}
-<script>toggle_extended();</script>
-{/if}
 {if $entry_vars.wysiwyg}
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
         {$wysiwyg_block_item|emit_htmlarea_code:$wysiwyg_block_jsname}

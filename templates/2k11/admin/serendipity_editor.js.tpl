@@ -389,7 +389,7 @@ function toggle_category_selector(id) {
             // when loading the page new for the preview and more than one category was
             // selected, collapsing the category-selector would lose those categories
             $('#'+id).attr("size", $('#'+id).children().size);
-            $('#toggle_' + id).find('> span').removeClass('icon-plus-circle').addClass('icon-minus-circle');
+            $('#toggle_' + id).find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
             return
         }
         
@@ -397,12 +397,12 @@ function toggle_category_selector(id) {
     if ($('#'+id).attr("multiple")) {
         $('#'+id).removeAttr("multiple");
         $('#'+id).removeAttr("size");
-        $('#toggle_' + id).find('> span').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        $('#toggle_' + id).find('> .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
         
     } else {
         $('#'+id).attr("multiple", "");
         $('#'+id).attr("size", $('#'+id).children().size);
-        $('#toggle_' + id).find('> span').removeClass('icon-plus-circle').addClass('icon-minus-circle');
+        $('#toggle_' + id).find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
     }
 }
 
@@ -631,7 +631,7 @@ function highlightComment(id, checkvalue) {
     var $hasConfigOpts = $('body').has('#serendipity_config_options');
 
     if($hasConfigOpts.size() > 0) {
-        $('.show_config_option > span').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        $('.show_config_option > .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
