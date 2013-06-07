@@ -24,7 +24,7 @@
             <nav id="user_menu">
                 <h2 class="visuallyhidden">User menu</h2> {* i18n *}
 
-                <span class="block_level">{$admin_vars.self_info}</span>
+                <span class="logged_in">{$admin_vars.self_info}</span>
 
                 <ul>
                     <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>

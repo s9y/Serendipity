@@ -453,6 +453,7 @@ nav ol {
 /* BACKEND HELPER CLASSES
    ----------------------------------------------------------------- */
 .icon_link,
+.logged_in,
 #insert_image,
 form > a,
 #user_menu li,
@@ -1230,7 +1231,7 @@ main {
     color: #25253d;
 }
 
-#user_menu span,
+#user_menu .logged_in,
 #user_menu ul {
     margin: 0 0 .75em;
 }
@@ -1728,7 +1729,7 @@ input[name="serendipity[filter][fileCategory]"] {
         margin: 0 0 0 1em;
     }
 
-    #user_menu > span {
+    #user_menu .logged_in {
         margin: .375em 0;
     }
 }
@@ -1759,7 +1760,7 @@ input[name="serendipity[filter][fileCategory]"] {
         margin: 1.71429em 0;
     }
 
-    #user_menu > span {
+    #user_menu .logged_in {
         margin: .875em 0 .4375em;
     }
 
