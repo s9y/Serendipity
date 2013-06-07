@@ -202,7 +202,7 @@ table {
 /* BASE STYLES
    ----------------------------------------------------------------- */
 html {
-    font-size: 0.875em;
+    font-size: .875em;
 }
 
 html,
@@ -972,11 +972,11 @@ a.button_link:focus,
 h1 {
     font-size: 1.71429em;
     line-height: 1.75em;
-    margin: 0.5em 0 0;
+    margin: .5em 0 0;
 }
 
 #banner_install h1 {
-    margin: 0.875em 0;
+    margin: .875em 0;
 }
 
 h2 {
@@ -1744,7 +1744,7 @@ input[name="serendipity[filter][fileCategory]"] {
     h1 {
         font-size: 1.75em;
         line-height: 1.5em;
-        margin: 0.75em 0;
+        margin: .75em 0;
     }
 
     h2 {
@@ -1754,17 +1754,17 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     pre {
-        font-size: 0.875em;
+        font-size: .875em;
         line-height: 1.71429em;
         margin: 1.71429em 0;
     }
 
     #user_menu > span {
-        margin: 0.875em 0 .4375em;
+        margin: .875em 0 .4375em;
     }
 
     #user_menu ul {
-        margin: 0.4375em 0 .875em;
+        margin: .4375em 0 .875em;
     }
 
     #image_directory_edit_form > .clearfix > div {
