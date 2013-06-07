@@ -435,12 +435,15 @@ function treeToggleAll() {
 }
 
 // Used by media_upload.tpl to …?
+function getfilename(value) { 
+    re = /^.+[\/\\]+?(.+)$/;
+    return value.replace(re, "$1"); 
+}
+
 var inputStorage = new Array();
 
 function checkInputs() { 
-    var fieldcount = $('.uploadform_userfile').length;
-
-    for (i = 1; i <= fieldcount; i++) { 
+    for (i = 1; i <= upload_fieldcount; i++) { 
         if (!inputStorage[i]) { 
             fillInput(i, i);
         } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) { 
@@ -449,7 +452,6 @@ function checkInputs() {
     } 
 }
 
-// Helper function for checkInputs()
 function fillInput(source, target) { 
     useDuplicate = false;
 
@@ -470,18 +472,13 @@ function fillInput(source, target) {
     if (useDuplicate) { 
         tkey = target + 1;
 
-        if (!inputStorage[tkey] || inputStorage[tkey] == document.getElementById('target_filename_' + tkey).value) {ldelim}
+        if (!inputStorage[tkey] || inputStorage[tkey] == document.getElementById('target_filename_' + tkey).value) { 
             document.getElementById('target_filename_' + (target+1)).value = sourceval;
             inputStorage[target + 1] = '~~~';
         }
     }
 }
-
-// Helper function for fillInput()
-function getfilename(value) { 
-    re = /^.+[\/\\]+?(.+)$/;
-    return value.replace(re, "$1"); 
-}
+// end …?
 
 // Hides the foreign upload form if batch upload is used (if more
 // images are added)
@@ -497,7 +494,7 @@ function rememberUploadOptions() {
 
 // Clones the upload form template
 function addUploadField() {
-    var upload_fieldcount = $('.uploadform_userfile').length;
+    upload_fieldcount = $('.uploadform_userfile').length + 1;
 
     var $fields = $('#upload_template').clone();
     $fields.attr('id', 'upload_form_' + upload_fieldcount);

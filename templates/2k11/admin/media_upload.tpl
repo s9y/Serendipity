@@ -34,18 +34,18 @@
 
         <div id="upload_template" class="hidden">
             <div class="form_field clearfix">
-                <label for="userfile_0" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
-                <input id="userfile_0" class="uploadform_userfile" name="serendipity[userfile][1]" type="file" onchange="checkInputs();">
+                <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
+                <input id="userfile_1" class="uploadform_userfile" name="serendipity[userfile][1]" type="file" onchange="checkInputs();">
             </div>
 
             <div class="form_field clearfix">
-                <label for="target_filename_0" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></label>
-                <input id="target_filename_0" class="uploadform_target_filename" name="serendipity[target_filename][1]" type="text" value="">
+                <label for="target_filename_1" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></label>
+                <input id="target_filename_1" class="uploadform_target_filename" name="serendipity[target_filename][1]" type="text" value="">
             </div>
 
             <div class="form_select clearfix">
-                <label for="target_directory_0" class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
-                <select id="target_directory_0" class="uploadform_target_directory" name="serendipity[target_directory][1]">
+                <label for="target_directory_1" class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
+                <select id="target_directory_1" class="uploadform_target_directory" name="serendipity[target_directory][1]">
                     <option value="">{$CONST.BASE_DIRECTORY}</option>
                     {foreach from=$media.folders item="folder"}
                     <option{if $media.only_path == $folder.relpath} selected{/if} value="{$folder.relpath}">{'&nbsp;'|@str_repeat:($folder.depth*2)} {$folder.name}</option>
@@ -53,7 +53,7 @@
                 </select>
             </div>
 
-            <div id="ccounter"><input id="column_count_0" class="uploadform_column_count" type="hidden" name="serendipity[column_count][1]" value="true"></div>
+            <div id="ccounter"><input id="column_count_1" class="uploadform_column_count" type="hidden" name="serendipity[column_count][1]" value="true"></div>
         </div>
 
         <div id="debug"></div>
