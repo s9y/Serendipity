@@ -350,22 +350,22 @@ var img_minus  = '{serendipity_getFile file="img/minus.png"}';
 function toggle_extended(setCookie) {
     if ($('#toggle_extended').length == 0) {
         // this function got called on load of the editor
-        var toggleButton = document.createElement('img');
-        toggleButton.id = ('toggle_extended');
-        $(toggleButton).click(function() {
+        var toggleButton = '#toggle_extended';
+        $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus-circle"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+        $(toggleButton).click(function(e) {
+            e.preventDefault();
             toggle_extended(true);
         });
-        $('textarea[name="serendipity[extended]"]').parent().prepend(toggleButton);
     }
     
     if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-        $('textarea[name="serendipity[extended]"]').show();    // we use the name selector instead of the id here, because selecting the id does not work
+        $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
         $('#tools_extended').show();
-        $('#toggle_extended').attr('src', img_minus);
+        $('#toggle_extended').find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
     } else {
         $('textarea[name="serendipity[extended]"]').hide();
         $('#tools_extended').hide();
-        $('#toggle_extended').attr('src', img_plus);
+        $('#toggle_extended').find('> .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
     }
     if (setCookie) {
         document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
