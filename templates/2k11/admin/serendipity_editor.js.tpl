@@ -480,6 +480,12 @@ function fillInput(source, target) {
 }
 // end …?
 
+// …?
+function checkSave() { 
+    {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
+    return true;
+} 
+
 // Hides the foreign upload form if batch upload is used (if more
 // images are added)
 function hideForeign() {
