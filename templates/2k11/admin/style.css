@@ -1318,8 +1318,7 @@ fieldset p,
 }
 
 #entries_list .actions,
-.serendipityCommentForm,
-#formMultiDelete .form_buttons input {
+.serendipityCommentForm {
     margin-top: .75em;
 }
 
@@ -1364,7 +1363,7 @@ form > .button_link:first-of-type {
 }
 
 .editor_toolbar {
-    margin-top: .25em;
+    margin-top: .5em;
 }
 
 #serendipity_comments_list .actions {
