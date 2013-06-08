@@ -95,7 +95,7 @@
 
         <div class="form_buttons">
             <input type="submit" accesskey="p" value="{$CONST.PREVIEW}" onclick="document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';">
-            <input type="submit" accesskey="s" value="{$CONST.SAVE}" onclick="return checkSave();">
+            <input type="submit" accesskey="s" value="{$CONST.SAVE}">
         </div>
     </div>
 
