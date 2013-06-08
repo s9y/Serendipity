@@ -2873,13 +2873,13 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
         $block = 'admin/media_pane.tpl';
         if ($smarty_display) {
-            $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
+            echo serendipity_smarty_show(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
         }
     } else {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
         $block = 'admin/media_properties.tpl';
         if ($smarty_display) {
-            $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
+            echo serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
         }
     }
 

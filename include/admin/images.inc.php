@@ -192,7 +192,7 @@ switch ($serendipity['GET']['adminAction']) {
     case 'properties':
         $data['case_properties'] = true;
         $new_media = array(array('image_id' => $serendipity['GET']['fid']));
-        serendipity_showPropertyForm($new_media);
+        echo serendipity_showPropertyForm($new_media);
         break;
 
     case 'add':
@@ -380,7 +380,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         if (isset($_REQUEST['go_properties'])) {
-            serendipity_showPropertyForm($new_media);
+            echo serendipity_showPropertyForm($new_media);
         } else {
             $hidden = array(
                 'author'   => $serendipity['serendipityUser'],
@@ -392,10 +392,7 @@ switch ($serendipity['GET']['adminAction']) {
             }
         }
 
-        ob_start();
-        showMediaLibrary($messages, true);
-        $data['showML_add'] = ob_get_contents();
-        ob_end_clean();        
+        $data['showML_add'] = showMediaLibrary($messages, true);    
         break;
 
 
@@ -679,10 +676,7 @@ switch ($serendipity['GET']['adminAction']) {
 
     default:
         $data['case_default'] = true;
-        ob_start();
-        showMediaLibrary();
-        $data['showML_def'] = ob_get_contents();
-        ob_end_clean();
+        $data['showML_def'] = showMediaLibrary();
         break;
 }
 
@@ -692,13 +686,13 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
     if (!serendipity_checkPermission('adminImagesView')) {
             return;
     }
-
+    $output = "";
     if(!empty($messages)) {
-        echo '<div class="imageMessage"><ul>';
+        $output = '<div class="imageMessage"><ul>';
         foreach($messages as $message) {
-            echo '<li>'. $message .'</li>';
+             $output .= '<li>'. $message .'</li>';
         }
-        echo '</ul></div>';
+        $output .= '</ul></div>';
     }
 
     // After upload, do not show the list to be able to proceed to
@@ -707,27 +701,16 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
         return true;
     }
 
-?>
-<script type="text/javascript" language="javascript">
-    <!--
-        function rename(id, fname) {
-            if(newname = prompt('<?php echo ENTER_NEW_NAME ?>' + fname, fname)) {
-                location.href='?<?php echo serendipity_setFormToken('url'); ?>&serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname);
-            }
-        }
-    //-->
-</script>
+    if (!isset($serendipity['thumbPerPage'])) {
+        $serendipity['thumbPerPage'] = 2;
+    }
 
-<?php
-        if (!isset($serendipity['thumbPerPage'])) {
-            $serendipity['thumbPerPage'] = 2;
-        }
-
-        serendipity_displayImageList(
-          isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
-          $serendipity['thumbPerPage'],
-          true
-        );
+    $output .= serendipity_displayImageList(
+        isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
+        $serendipity['thumbPerPage'],
+        true
+    );
+    return $output;
 }
 
 $data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
