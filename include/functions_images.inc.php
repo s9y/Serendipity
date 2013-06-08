@@ -1461,13 +1461,11 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
     foreach($sortParams AS $sortParam) {
         serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
-        serendipity_JSsetCookie('sortorder_' . $sortParam, htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]));
         $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
     }
 
     foreach($filterParams AS $filterParam) {
         serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
-        serendipity_JSsetCookie($filterParam, htmlspecialchars($serendipity['GET'][$filterParam]));
         if (!empty($serendipity['GET'][$filterParam])) {
             $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
         }
@@ -2856,8 +2854,19 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'sort_row_interval' => array(8, 16, 50, 100),
         'nr_files'          => count($file),
         'keywords'          => explode(';', $serendipity['mediaKeywords']),
-        'thumbSize'         => $serendipity['thumbSize']
+        'thumbSize'         => $serendipity['thumbSize'],
+        'sortParams'        => array('perpage', 'order', 'ordermode'),
+        'filterParams'      => array('only_path', 'only_filename')
     );
+
+
+    foreach($media['sortParams'] AS $sortParam) {
+        $serendipity['smarty']->assign(array("get_sortorder_$sortParam" => $serendipity['GET']['sortorder'][$sortParam]));
+    }
+
+    foreach($media['filterParams'] AS $filterParam) {
+        $serendipity['smarty']->assign(array("$filterParam" => $serendipity['GET'][$filterParam]));
+    }
 
     $media = array_merge($media, $smarty_vars);
     $media['files'] =& $file;
