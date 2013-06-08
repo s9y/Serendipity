@@ -1290,11 +1290,11 @@ main {
     vertical-align: top;
 }
 
+.filters_toolbar,
 .plugin_info {
     margin: 0 0 1em;
 }
 
-.filters_toolbar,
 fieldset p,
 .media_file_meta > ul,
 .image_resize_hint p {
@@ -1997,7 +1997,9 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #media_pane_sort div fieldset input,
-    #media_pane_sort div fieldset select {
+    #media_pane_sort div fieldset select,
+    #media_pane_filter div fieldset input,
+    #media_pane_filter div fieldset select {
         margin-bottom: .75em;
     }
 }
