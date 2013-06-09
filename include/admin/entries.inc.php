@@ -291,6 +291,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['categories'] = $categories;
         $data['offSet']     = $offSet;
         $data['use_iframe'] = $serendipity['use_iframe'];
+        $data['page'] = $page;
 
         if (is_array($entries)) {
             $data['is_entries'] = true;
