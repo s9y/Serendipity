@@ -1258,7 +1258,8 @@ main {
 #edit_entry_category,
 #media_pane_filter,
 .comments_pane .pagination,
-.media_pane .pagination {
+.media_pane .pagination,
+.entries_pane .pagination {
     position: relative;
 }
 
@@ -1275,7 +1276,8 @@ main {
 }
 
 .comments_pane .pagination h3,
-.media_pane .pagination h3 {
+.media_pane .pagination h3,
+.entries_pane .pagination h3 {
     font-size: 1em;
     font-weight: normal;
     position: absolute;
