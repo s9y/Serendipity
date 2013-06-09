@@ -292,6 +292,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['offSet']     = $offSet;
         $data['use_iframe'] = $serendipity['use_iframe'];
         $data['page'] = $page;
+        $data['totalEntries'] = serendipity_getTotalEntries();
 
         if (is_array($entries)) {
             $data['is_entries'] = true;
@@ -341,7 +342,6 @@ switch($serendipity['GET']['adminAction']) {
             $data['showFutureEntries'] = $serendipity['showFutureEntries'];
             $data['filter_import'] = $filter_import;
             $data['sort_import'] = $sort_import;
-
         } else {
             $data['no_entries'] = true;
         } // if entries end
