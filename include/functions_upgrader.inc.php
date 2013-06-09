@@ -165,3 +165,9 @@ function serendipity_copyBaseURL() {
         serendipity_set_config_var("defaultBaseURL", serendipity_get_config_var("baseURL"));
     }
 }
+
+function serendipity_killPlugin($name) {
+    global $serendipity;
+
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']} WHERE name LIKE '" . serendipity_db_escape_string($name) . "%'");
+}

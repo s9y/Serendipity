@@ -3,6 +3,8 @@
 Version 1.7.1 ()
 ------------------------------------------------------------------------
 
+    * Upgrader will now remove/delete the browsercompatibility plugin
+    
     * Fixed Media Library exclude path to not show/proceed ckeditor/kcfinders .thumbs dir
 
     * Fixed bulletproof->colorset GET mismatch with categorytemplates plugin
