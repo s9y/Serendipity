@@ -61,7 +61,6 @@
             <input type="button" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no');">
             <input type="button" value="Link" onclick="serendipity_insLink(document.forms['serendipityEntry']['serendipity[body]'])">
         {/if}
-            {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
         </div>
         <script>
             var toolbarentry = document.getElementById('tools_entry');
@@ -121,7 +120,6 @@
             <input type="button" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=extended', 'ImageSel', 'width=800,height=600,toolbar=no');">
             <input type="button" value="Link" onclick="serendipity_insLink(document.forms['serendipityEntry']['serendipity[extended]'])">
         {/if}
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
         </div>
     {/if}
         {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
