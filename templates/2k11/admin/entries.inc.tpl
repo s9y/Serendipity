@@ -165,8 +165,9 @@
             {/foreach}
             </ul>
             {if ($offSet > 0) || ($count > $perPage)}
+            {math equation="ceil(values/parts)" assign=totalPages values=$totalEntries parts=$perPage} 
             <nav class="pagination">
-                <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:'TODO':'TODO':'TODO'}</h3>
+                <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
                     <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>

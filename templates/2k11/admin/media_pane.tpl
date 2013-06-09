@@ -166,7 +166,7 @@
         {$MEDIA_ITEMS}
         {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
         <nav class="pagination">
-            <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:'TODO'}</h3> {* i18n *}
+            <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3> {* i18n *}
 
             <ul class="clearfix">
                 <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
