@@ -169,5 +169,5 @@ function serendipity_copyBaseURL() {
 function serendipity_killPlugin($name) {
     global $serendipity;
 
-    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']} WHERE name LIKE '" . serendipity_db_escape_string($name) . "%'");
+    serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '" . serendipity_db_escape_string($name) . "%'");
 }
