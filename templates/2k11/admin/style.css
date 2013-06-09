@@ -1660,6 +1660,7 @@ form > .button_link:first-of-type {
     width: 100%;
 }
 
+.no-js .comment_summary,
 .js .additional_info {
     display: none;
     visibility: hidden;

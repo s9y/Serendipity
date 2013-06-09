@@ -770,6 +770,14 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // Show extended comment
+    $('.toggle_comment_full').click(function(e) {
+        var $toggles = $($(this).attr('href'));
+        $toggles.toggleClass('additional_info');
+        $toggles.prev().toggleClass('additional_info');
+        e.preventDefault();
+    });
+
     // MediaDB-Filter-Buttons should react instantly
     $('input[name="serendipity[filter][fileCategory]"]').on('change', function() {
         $('#media_library_control').submit();
