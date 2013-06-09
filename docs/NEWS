@@ -17,6 +17,8 @@ Version 2.0 ()
 Version 1.7.1 ()
 ------------------------------------------------------------------------
 
+    * Upgrader will now remove/delete the browsercompatibility plugin
+
     * Fixed curl result bug in spartacus plugin
 
     * Create new migration task for propagate defaultBaseURL when
