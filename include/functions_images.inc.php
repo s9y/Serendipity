@@ -1662,7 +1662,8 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         'pages'         => $pages,
         'linkNext'      => $linkNext,
         'linkPrevious'  => $linkPrevious,
-        'extraParems'   => $extraParems
+        'extraParems'   => $extraParems,
+        'totalImages'   => $totalImages
     );
     return serendipity_showMedia(
         $serendipity['imageList'],
