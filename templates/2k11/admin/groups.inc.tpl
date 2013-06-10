@@ -58,7 +58,6 @@
         
         <ul>
         {foreach $perms as $perm}
-        {* TODO: major rewrite *}
             {if {{$perm@key}|truncate:"2":""} == 'f_'}{continue}{/if}
             {if !isset($section)}
                 {$section=$perm@key}
@@ -71,18 +70,13 @@
                     {$section="{$perm@key}"}
                 {/if}
             {/if}
-            
-
             {if ! ($perm@first || ($in_indent != true && $indent == "&nbsp;&nbsp;"))}
                 </li>
             {/if}
-            
-            
             {if $indent == "&nbsp;&nbsp;" && $in_indent != true}
                 {$in_indent=true}
                 <ul>
             {/if}
-            
             {if $indent == "<br>" && $in_indent == true}
                 {$in_indent=false}
                 </ul></li>

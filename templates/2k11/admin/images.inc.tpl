@@ -89,7 +89,7 @@
 {if $case_properties}
     {** serendipity_showPropertyForm($new_media) **}
 {/if}
-{* END TODO *}
+{* END *}
 
 {if $case_add}
     {if $smarty.post.adminSubAction == 'properties'}
@@ -256,7 +256,7 @@
 {if $case_addSelect}
     {** smarty display 'admin/media_upload.tpl' **}
 {/if}
-{* END TODO *}
+{* END *}
 
 {if $case_rotateCW}
     {if $rotate_img_done}

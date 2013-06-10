@@ -106,17 +106,16 @@
                     <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} – {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h4>
 
                     <dl class="comment_data clearfix">
-                        {* TODO: This should not emit any images *}
                         <dt>{$CONST.AUTHOR}:</dt>
-                        <dd>{$comment.author|escape|truncate:30:"&hellip;"} {$comment.action_author}</dd>
+                        <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
                         <dt>{$CONST.EMAIL}:</dt>
-                        <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:30:"&hellip;"}</a>{if $comment.subscribed == 'true'} <span class="serendipity_subscription_on">({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</span>{/if}{/if} {$comment.action_email}</dd>
+                        <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <span class="serendipity_subscription_on">({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</span>{/if}{/if} {$comment.action_email}</dd>
                         <dt>IP:</dt>
                         <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {$comment.action_ip}</dd>
                         <dt>URL:</dt>
-                        <dd>{if empty($comment.url)}N/A{else}<a class="icon_link" href="{$comment.url|escape}" title="{$comment.url|escape}"><span class="icon-link"></span> {$comment.url|escape|truncate:30:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
+                        <dd>{if empty($comment.url)}N/A{else}<a class="icon_link" href="{$comment.url|escape}" title="{$comment.url|escape}"><span class="icon-link"></span> {$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
                         <dt>{$CONST.REFERER}:</dt>
-                        <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:30:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
+                        <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
                     </dl>
 
                     <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:120:"&hellip;"}</div>
