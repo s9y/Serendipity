@@ -1,22 +1,22 @@
 {if $post_save}
     {if $new}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CATEGORY_SAVED}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CATEGORY_SAVED}</span>
     {/if}
     {if $edit}
         {if isset($editPermission) && $editPermission == false}
-        <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
+        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
         {else}
         {if $subcat}{$subcat}{else}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CATEGORY_SAVED}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CATEGORY_SAVED}</span>
         {/if}
         {/if}
     {/if}
 {/if}
 {if $doDelete}
   {if $deleteSuccess}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {if $remainingCat}{$CONST.CATEGORY_DELETED_ARTICLES_MOVED|sprintf:$remainingCat:$cid}{else}{$cid|string_format:"{$CONST.CATEGORY_DELETED}"}{/if}</span>
   {else}
-        <span class="msg_error"><span class="icon-attention"></span> {$CONST.INVALID_CATEGORY}</span>
+        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.INVALID_CATEGORY}</span>
   {/if}
 {/if}
 {if $delete}
@@ -175,7 +175,7 @@
         {/for}
         </ul>
     {else}
-        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_CATEGORIES}</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_CATEGORIES}</span>
     {/if}
         <a class="button_link state_submit icon_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=new">{$CONST.CREATE_NEW_CAT}</a>
 {/if}

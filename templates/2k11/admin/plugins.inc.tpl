@@ -1,7 +1,7 @@
 {if $plugin_to_conf}
     {if is_array($save_errors)}
     <div class="msg_error">
-        <h2><span class="icon-attention"></span> {$CONST.ERROR}:</h2>
+        <h2><span class="icon-attention-circled"></span> {$CONST.ERROR}:</h2>
 
         <ul class="plainList">
         {foreach $save_errors as $save_error}
@@ -10,7 +10,7 @@
         </ul>
     </div>
     {elseif $saveconf}
-    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <form method="post" name="serendipityPluginConfigure">
         {$formToken}
@@ -40,7 +40,7 @@
 {elseif $adminAction == 'addnew'}
     <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span></h2>
     {foreach $errorstack as $e_idx => $e_name}
-    <span class="msg_error"><span class="icon-attention"></span> {$CONST.ERROR}: {$e_name}</span>
+    <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
     <form action="serendipity_admin.php" method="get">
         {$formToken}
@@ -98,13 +98,13 @@
 
                 <div class="plugin_status">
                 {if isset($requirements_failures.{$plug.class_name})}
-                    <span class="unmet_requirements msg_error"><span class="icon-attention"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
+                    <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
                 {elseif $plug['upgradable'] == true}
                     <a class="state_submit button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}">{$CONST.UPGRADE}</a>
                 {elseif $plug.installable == true}
                     <a class="state_submit button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
                 {else}
-                    <span class="block_level"><span class="icon-ok-circle"></span> {$CONST.ALREADY_INSTALLED}</span>
+                    <span class="block_level"><span class="icon-ok-circled"></span> {$CONST.ALREADY_INSTALLED}</span>
                 {/if}
                 </div>
             </li>
@@ -113,7 +113,7 @@
     {/foreach}
 {else}
     {if $save}
-    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <h2>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</h2>
     {if $eyecandy}

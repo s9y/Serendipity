@@ -252,16 +252,16 @@ if (!$use_installer && $is_logged_in) {
             echo '<h2>' . INTEGRITY . '</h2>';
             $badsums = array();
             if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php') || 0 == filesize(S9Y_INCLUDE_PATH . 'checksums.inc.php') ) {
-                echo '<span class="msg_notice"><span class="icon-info-circle"></span> ' . CHECKSUMS_NOT_FOUND . '</span>';
+                echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . CHECKSUMS_NOT_FOUND . '</span>';
                 break;
             }
             $badsums = serendipity_verifyFTPChecksums();
             if (count($badsums) == 0) {
-                echo '<span class="msg_success"><span class="icon-ok-circle"></span> ' . CHECKSUMS_PASS . '</span>';
+                echo '<span class="msg_success"><span class="icon-ok-circled"></span> ' . CHECKSUMS_PASS . '</span>';
             } else {
                 echo '<ul class="plainList">';
                 foreach ($badsums as $rpath => $calcsum) {
-                    echo '<li class="msg_error"><span class="icon-attention"></span> ' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
+                    echo '<li class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
                 }
                 echo '</ul>';
             }

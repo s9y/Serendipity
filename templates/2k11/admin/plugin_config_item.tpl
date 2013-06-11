@@ -103,12 +103,12 @@
                 {if ($orid['sort_idx'] == 0)}
                     &nbsp;
                 {else}
-                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}"><span class="icon-up-circled"></span><span class="visuallyhidden"> Move Up</span></button> {* i18n *}
+                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}"><span class="icon-up-open"></span><span class="visuallyhidden"> Move Up</span></button> {* i18n *}
                 {/if}
                 {if ($orid['sort_idx'] == $last)}
                     &nbsp;
                 {else}
-                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}"><span class="icon-down-circled"></span><span class="visuallyhidden"> Move Down</span></button> {* i18n *}
+                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}"><span class="icon-down-open"></span><span class="visuallyhidden"> Move Down</span></button> {* i18n *}
                 {/if}
                     </div>
                 </noscript>

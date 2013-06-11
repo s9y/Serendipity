@@ -1,39 +1,39 @@
 {if $delete_yes}
     {if $no_delete_permission}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
         {if $no_delete_permission_userlevel}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
         {else}
             {if $delete_permission}
-            <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DELETED_USER|sprintf:"{$user|escape:"html"}":"{$realname|escape:"html"}"}</span>
+            <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DELETED_USER|sprintf:"{$user|escape:"html"}":"{$realname|escape:"html"}"}</span>
             {else}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
             {/if}
         {/if}
     {/if}
 {/if}
 {if $save_new}
     {if $no_save_permission}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
         {if $no_group_selected}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
         {/if}
-            <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CREATED_USER|sprintf:"# {$user|escape:"html"}":"{$realname|escape:"html"}"}</span>
+            <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CREATED_USER|sprintf:"# {$user|escape:"html"}":"{$realname|escape:"html"}"}</span>
     {/if}
 {/if}
 {if $save_edit}
     {if $no_edit_permission}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED}</span>
     {else}
         {if $no_edit_permission_userlevel}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>
         {else}
             {if $no_group_selected}
-            <span class="msg_error"><span class="icon-attention"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.WARNING_NO_GROUPS_SELECTED}</span>
             {/if}
-            <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.MODIFIED_USER|sprintf:"{$realname|escape:"html"}"}</span>
+            <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.MODIFIED_USER|sprintf:"{$realname|escape:"html"}"}</span>
         {/if}
     {/if}
 {/if}
@@ -85,7 +85,7 @@
         <div class="users_delete_action">
             <h2>{$CONST.MANAGE_USERS}</h2>
 
-            <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span>
+            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span>
 
             <div class="form_buttons">
                 <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">

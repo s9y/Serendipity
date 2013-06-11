@@ -1,6 +1,6 @@
 {if !empty($errormsg)}
     {* TODO: Not sure anything emitted here actually IS an error. *}
-    <span class="msg_error"><span class="icon-attention"></span> {$errormsg}</span>
+    <span class="msg_error"><span class="icon-attention-circled"></span> {$errormsg}</span>
 {/if}
 <div class="has_toolbar">
     <h2>{$CONST.COMMENTS}</h2>
@@ -86,7 +86,7 @@
     </form>
 </div>
 {if !is_array($sql)}
-    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_COMMENTS}</span>
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_COMMENTS}</span>
 
     <a class="block_level" href="serendipity_admin.php?serendipity[adminModule]=comments">Return to default comment list</a> {* l18n *}
 {else}
@@ -147,8 +147,8 @@
                 <h3>{$CONST.PAGE_BROWSE_COMMENTS|sprintf:$page:$pages:$totalComments}</h3>
                 
                 <ul class="clearfix">
-                    <li class="prev">{if ($page != 1 && $page <= $pages)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-                    <li class="next">{if $page != $pages}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-circled"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="prev">{if ($page != 1 && $page <= $pages)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-open"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="next">{if $page != $pages}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-open"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
         {/if}

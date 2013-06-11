@@ -11,7 +11,7 @@
 
         <div class="msg_error">
         {foreach $errors AS $implode_err}
-            <p><span class="icon-attention"></span> {$implode_err}</p>
+            <p><span class="icon-attention-circled"></span> {$implode_err}</p>
         {/foreach}
         </div>
     {/if}
@@ -19,9 +19,9 @@
 
 {if (($showAbort && $get.action == 'ignore') || $get.action == 'upgrade')}
     {if $get.action == 'ignore'}
-        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
     {elseif $get.action == 'upgrade'}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
     {/if}
     {if $return_here}
         {$print_UPGRADER_RETURN_HERE}
@@ -37,7 +37,7 @@
     <h3>{$CONST.FIRST_WE_TAKE_A_LOOK}</h3>
 
     <div class="diagnose">
-        <span class="msg_notice"><span class="icon-info-circle"></span> {$result_diagnose}.</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$result_diagnose}.</span>
 
     {if $checksums}
         <h4>{$CONST.INTEGRITY}</h4>
@@ -67,12 +67,12 @@
         {/if}
         </dl>
     {if $showWritableNote}
-        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
     {/if}
     {if ($errorCount > 0)}
-        <span class="msg_error"><span class="icon-ok-circle"></span> {$CONST.PROBLEM_DIAGNOSTIC}</span>
+        <span class="msg_error"><span class="icon-ok-circled"></span> {$CONST.PROBLEM_DIAGNOSTIC}</span>
 
-        <a class="icon_link block_level" href="serendipity_admin.php"><span class="icon-help-circle"></span> {$CONST.RECHECK_INSTALLATION}</a>
+        <a class="icon_link block_level" href="serendipity_admin.php"><span class="icon-help-circled"></span> {$CONST.RECHECK_INSTALLATION}</a>
     {/if}
     </div>
     {if ($errorCount < 1)}

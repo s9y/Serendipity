@@ -13,7 +13,7 @@
     <div id="serendipity_config_options">
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <div class="configuration_group">
-            <h3><a id="optionel{$config_groupkeys@iteration}" class="show_config_option" href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-minus-circle"></span> {$config_header}</a></h3>
+            <h3><a id="optionel{$config_groupkeys@iteration}" class="show_config_option" href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-minus"></span> {$config_header}</a></h3>
         
             <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
             {foreach $config_groupkeys AS $config_groupkey}

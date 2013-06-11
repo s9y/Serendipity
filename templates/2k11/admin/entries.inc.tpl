@@ -141,7 +141,7 @@
 
                     <div class="entry_info clearfix">
                         <span class="status_timestamp">
-                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"><span class="icon-info-circle"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
+                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
                         </span>
 
                         <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
@@ -170,8 +170,8 @@
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
-                    <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-circled"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-                    <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-circled"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-open"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-open"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
             {/if}
@@ -192,32 +192,32 @@
 {if $no_entries}
     <h2>{$CONST.FIND_ENTRIES}</h2>
 
-    <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
 
 {if $switched_output}
     {if ($get.adminAction && $dateval)}
-        <span class="msg_error"><span class="icon-attention"></span> {$CONST.DATE_INVALID}</span>
+        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.DATE_INVALID}</span>
     {/if}
     {if ($get.adminAction && $use_legacy)}
         {if $is_draft}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_SAVE}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE}</span>
         {/if}
         {if $is_iframepreview}
-        <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.IFRAME_PREVIEW}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_PREVIEW}</span>
         {/if}
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
         {foreach $del_entry AS $delent}
-        <span class="msg_dialogue"><span class="icon-help-circle"></span> {$delent}</span>
+        <span class="msg_dialogue"><span class="icon-help-circled"></span> {$delent}</span>
         {/foreach}
     {/if}
     {if ( $is_delete || $is_multidelete )}
         {foreach $rip_entry AS $ripent}
-        <span class="msg_dialogue"><span class="icon-help-circle"></span> {$ripent}</span>
+        <span class="msg_dialogue"><span class="icon-help-circled"></span> {$ripent}</span>
         {/foreach}
         <div class="dialogue_delrip form_buttons">
             <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>

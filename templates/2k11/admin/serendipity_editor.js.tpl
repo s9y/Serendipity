@@ -348,7 +348,7 @@ function toggle_extended(setCookie) {
     if ($('#toggle_extended').length == 0) {
         // this function got called on load of the editor
         var toggleButton = '#toggle_extended';
-        $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus-circle"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+        $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
         $(toggleButton).click(function(e) {
             e.preventDefault();
             toggle_extended(true);
@@ -358,11 +358,11 @@ function toggle_extended(setCookie) {
     if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
         $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
         $('#tools_extended').show();
-        $('#toggle_extended').find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
+        $('#toggle_extended').find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
     } else {
         $('textarea[name="serendipity[extended]"]').hide();
         $('#tools_extended').hide();
-        $('#toggle_extended').find('> .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        $('#toggle_extended').find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
     }
     if (setCookie) {
         document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
@@ -375,7 +375,7 @@ function toggle_category_selector(id) {
         // this function got called on load of the editor
         var toggleButton = '#toggle_' + id;
 
-        $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus-circle"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+        $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
 
         $(toggleButton).click(function(e) {
             e.preventDefault();
@@ -386,7 +386,7 @@ function toggle_category_selector(id) {
             // when loading the page new for the preview and more than one category was
             // selected, collapsing the category-selector would lose those categories
             $('#'+id).attr("size", $('#'+id).children().size);
-            $('#toggle_' + id).find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
+            $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
             return
         }
         
@@ -394,12 +394,12 @@ function toggle_category_selector(id) {
     if ($('#'+id).attr("multiple")) {
         $('#'+id).removeAttr("multiple");
         $('#'+id).removeAttr("size");
-        $('#toggle_' + id).find('> .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        $('#toggle_' + id).find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
         
     } else {
         $('#'+id).attr("multiple", "");
         $('#'+id).attr("size", $('#'+id).children().size);
-        $('#toggle_' + id).find('> .icon-plus-circle').removeClass('icon-plus-circle').addClass('icon-minus-circle');
+        $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
     }
 }
 
@@ -680,7 +680,7 @@ function highlightComment(id, checkvalue) {
     var $hasConfigOpts = $('body').has('#serendipity_config_options');
 
     if($hasConfigOpts.size() > 0) {
-        $('.show_config_option > .icon-minus-circle').removeClass('icon-minus-circle').addClass('icon-plus-circle');
+        $('.show_config_option > .icon-minus').removeClass('icon-minus').addClass('icon-plus');
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
@@ -688,10 +688,10 @@ function highlightComment(id, checkvalue) {
             var $toggled = $el.attr('href');
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-minus-circle') {
-                $toggleIcon.removeClass('icon-minus-circle').addClass('icon-plus-circle');
+            if($toggleState == 'icon-minus') {
+                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
             } else {
-                $toggleIcon.removeClass('icon-plus-circle').addClass('icon-minus-circle');
+                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
             }
             $($toggled).toggleClass('additional_info');
             e.preventDefault();
@@ -702,11 +702,11 @@ function highlightComment(id, checkvalue) {
             var $toggleIcons = $($container).find('.show_config_option > span');
             var $toggleOption = $($container).find('.config_optiongroup');
             if(optsCollapsed) {
-                $toggleIcons.removeClass('icon-plus-circle').addClass('icon-minus-circle');
+                $toggleIcons.removeClass('icon-plus').addClass('icon-minus');
                 $toggleOption.removeClass('additional_info');
                 optsCollapsed = false;
             } else {
-                $toggleIcons.removeClass('icon-minus-circle').addClass('icon-plus-circle');
+                $toggleIcons.removeClass('icon-minus').addClass('icon-plus');
                 $toggleOption.addClass('additional_info');
                 optsCollapsed = true;
             }

@@ -11,7 +11,7 @@
     {foreach $config as $category}
         <div class="configuration_group">
         {if $config|@sizeof > 1}
-            <h3>{if $allowToggle}<a id="optionel{$category@iteration}" class="show_config_option" href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-minus-circle"></span> {$category.title}</a>{else}{$category.title}{/if}</h3>
+            <h3>{if $allowToggle}<a id="optionel{$category@iteration}" class="show_config_option" href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-minus"></span> {$category.title}</a>{else}{$category.title}{/if}</h3>
         {/if}
             <fieldset id="el{$category@index}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
                 <legend><span>{$category.description}</span></legend>

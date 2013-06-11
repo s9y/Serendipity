@@ -1,11 +1,11 @@
 {if $delete_yes}
-    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
 {/if}
 {if $save_new}
-    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:"html"}":"{$group.name|escape:"html"}"}</span>
 {/if}
 {if $save_edit}
-    <span class="msg_success"><span class="icon-ok-circle"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:"html"}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:"html"}"}</span>
 {/if}
 
 {if !$delete}
@@ -113,7 +113,7 @@
                 </select>
             </div>
         {else}
-            <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
+            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
             <div class="form_buttons">
         {if $edit}
@@ -131,7 +131,7 @@
 
         <h2>{$CONST.MANAGE_GROUPS}</h2>
 
-        <span class="msg_notice"><span class="icon-info-circle"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:"html"}"}</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:"html"}"}</span>
         
         <div id="groups_delete_action" class="form_buttons">
             <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">

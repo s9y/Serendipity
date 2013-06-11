@@ -11,7 +11,7 @@
 </head>
 <body id="{$media.body_id}">
 {if $perm_denied}
-    <span class="msg_error"><span class="icon-attention"></span> {$CONST.PERM_DENIED}</span>
+    <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
 {else}
     <div class="clearfix">
         <h2>{$media.file.realname}</h2>

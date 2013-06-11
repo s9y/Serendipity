@@ -93,7 +93,7 @@
             </div>
 
             <ul class="media_file_actions actions plainList clearfix">
-                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circle"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
+                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
             {if $file.is_editable}
                 <li><a class="media_fullsize button_link" href="#" title="{$CONST.MEDIA_FULLSIZE}" onclick="F1 = window.open('{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}', 'Zoom', 'height={$file.popupHeight},width={$file.popupWidth},top='+ (screen.height-{$file.popupHeight})/2 +',left='+ (screen.width-{$file.popupWidth})/2 +',toolbar=no,menubar=no,location=no,resize=1,resizable=1{if NOT $file.is_image},scrollbars=yes{/if}');"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
                 <li><a class="media_rename button_link" href="#" title="{$CONST.MEDIA_RENAME}" onclick="rename('{$file.id}', '{$file.name|escape:javascript}')"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>

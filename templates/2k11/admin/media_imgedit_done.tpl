@@ -17,7 +17,7 @@
             <p>Because the source dimensions were smaller than the destination dimensions, the image does not fill up the complete space.</p>
         {/if}
         {if $imgedit.image_error}
-            <span class="msg_error"><span class="icon-attention"></span> However, there were errors processing your image.</span>
+            <span class="msg_error"><span class="icon-attention-circled"></span> However, there were errors processing your image.</span>
         {/if}
         </div>
 
