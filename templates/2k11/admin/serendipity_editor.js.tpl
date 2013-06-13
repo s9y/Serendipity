@@ -750,6 +750,11 @@ function highlightComment(id, checkvalue) {
         invertSelection();
     });
 
+    // Go back one step
+    $('.go_back').click(function() {
+        history.go(-1);
+    });
+
     // Add media db upload field
     var $uploadForm = $('body').has('#uploadform');
 

@@ -78,7 +78,7 @@
 {/if}
 {if $case_rename}
     {if $go_back}
-    <input type="button" value="{$CONST.BACK}" onclick="history.go(-1);">
+    <input class="go_back" type="button" value="{$CONST.BACK}">
     {else}
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
     <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>

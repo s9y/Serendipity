@@ -237,7 +237,7 @@ if (parent.frames && parent.frames['tree']) {
             {/if}
             {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}
             <div class="form_buttons">
-                <input type="button" value="{$CONST.BACK}" onclick="history.go(-1);">
+                <input class="go_back" type="button" value="{$CONST.BACK}">
                 <input type="button" value="{$CONST.DONE}" onclick="rememberMediaOptions(); {$media.file.origfinishJSFunction}">
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' eventData=$media.file}
             </div>
