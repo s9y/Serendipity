@@ -177,7 +177,7 @@
     </div>
     {if $smarty.get.serendipity.adminModule == 'media'}
         <div class="form_buttons">
-            <input name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}" onclick="invertSelection()">
+            <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
             <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_ENTRIES}">
         </div>
     </form>
