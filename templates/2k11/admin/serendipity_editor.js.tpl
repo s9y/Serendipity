@@ -676,6 +676,12 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // Set entry timestamp
+    $('#reset_timestamp').click(function(e) {
+        $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
+        e.preventDefault();
+    });
+
     // Collapsible configuration elements
     var $hasConfigOpts = $('body').has('#serendipity_config_options');
 
