@@ -826,6 +826,11 @@ function highlightComment(id, checkvalue) {
         e.preventDefault();
     });
 
+    // Confirm media scale
+    $('.image_scale').click(function(e) {
+        if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();
+    });
+
     // Show extended comment
     $('.toggle_comment_full').click(function(e) {
         var $toggles = $($(this).attr('href'));

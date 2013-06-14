@@ -334,7 +334,7 @@
             </div>
             
             <div class="form_buttons">
-                <input name="scale" type="button" value="{$CONST.IMAGE_RESIZE}" onclick="if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();">
+                <input class="image_scale" name="scale" type="button" value="{$CONST.IMAGE_RESIZE}">
             </div>
         </form>
 
