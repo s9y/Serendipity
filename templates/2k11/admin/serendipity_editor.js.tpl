@@ -706,6 +706,11 @@ function highlightComment(id, checkvalue) {
         window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'), 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
 
+    // Entry preview
+    $('.entry_preview').click(function(e) {
+        document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';
+    });
+
     // Collapsible configuration elements
     var $hasConfigOpts = $('body').has('#serendipity_config_options');
 
