@@ -1441,10 +1441,9 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
  * @param   string  The URL to use for pagination
  * @param   boolean Show the "upload media item" feature?
  * @param   boolean Restrict viewing images to a specific directory
- * @param   boolean  If TRUE, will echo Smarty output.
  * @return  string   Smarty block name
  */
-function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL, $smarty_display = true) {
+function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL) {
     global $serendipity;
     static $debug = false;
 
@@ -1672,8 +1671,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         $manage,
         $lineBreak,
         true,
-        $smarty_vars,
-        $smarty_display
+        $smarty_vars
     );
 } // End serendipity_displayImageList()
 
@@ -2809,11 +2807,10 @@ function serendipity_prepareMedia(&$file, $url = '') {
  * @param  int      how many media items to display per row
  * @param  boolean  Enclose within a table cell?
  * @param  array    Additional Smarty variables
- * @param  boolean  If TRUE, will echo Smarty output.
  * @return string   Smarty block name
  *
  */
-function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lineBreak = 3, $enclose = true, $smarty_vars = array(), $smarty_display = true) {
+function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lineBreak = 3, $enclose = true, $smarty_vars = array()) {
     global $serendipity;
 
     $form_hidden = '';
@@ -2882,15 +2879,11 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     if ($enclose) {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
         $block = 'admin/media_pane.tpl';
-        if ($smarty_display) {
-            return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
-        }
+        return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
     } else {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
         $block = 'admin/media_properties.tpl';
-        if ($smarty_display) {
-            return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
-        }
+        return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
     }
 
     return $block;
