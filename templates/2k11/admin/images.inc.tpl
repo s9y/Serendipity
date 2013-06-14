@@ -278,30 +278,6 @@
     <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
 {/if}
 {if $case_scaleSelect}
-    <script>
-    <!--
-        function rescale(dim, newval) {ldelim}
-            var originalWidth  = {$img_width};
-            var originalHeight = {$img_height};
-            var ratio          = originalHeight/originalWidth;
-            var trans          = new Array();
-            trans['width']     = new Array('serendipity[height]', ratio);
-            trans['height']    = new Array('serendipity[width]', 1/ratio);
-
-            if (document.serendipityScaleForm.elements['auto'].checked == true) {ldelim}
-                document.serendipityScaleForm.elements[trans[dim][0]].value=Math.round(trans[dim][1]*newval);
-            {rdelim}
-
-                document.getElementsByName('serendipityScaleImg')[0].style.width =
-                document.serendipityScaleForm.elements['serendipity[width]'].value+'px';
-
-                document.getElementsByName('serendipityScaleImg')[0].style.height =
-                document.serendipityScaleForm.elements['serendipity[height]'].value+'px';
-
-            {rdelim}
-    //-->
-    </script>
-
     {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
     {if $print_ORIGINAL_SIZE}<span class="block_level standalone">{$print_ORIGINAL_SIZE}</span>{/if}
     
@@ -338,8 +314,8 @@
             </div>
         </form>
 
-        <div id="serendipityScaleImg">
-            <img src="{$file}" name="serendipityScaleImg" style="width: {$img_width}px;" alt="{$CONST.PREVIEW}">
+        <div id="serendipityScaleImg" data-imgwidth="{$img_width}" data-imgheight="{$img_height}">
+            <img src="{$file}" name="serendipityScaleImg" alt="{$CONST.PREVIEW}">
         </div>
     </div>
 {/if}

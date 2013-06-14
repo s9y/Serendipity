@@ -412,6 +412,18 @@ function rememberMediaOptions() {
     });
 }
 
+// Rescale image
+function rescale(dim, newval) { 
+    var ratio          = $('#serendipityScaleImg').attr('data-imgheight')/$('#serendipityScaleImg').attr('data-imgwidth');
+    var trans          = new Array();
+    trans['width']     = new Array('serendipity[height]', ratio);
+    trans['height']    = new Array('serendipity[width]', 1/ratio);
+
+    if ($('#resize_keepprops').is(':checked')) { 
+        document.serendipityScaleForm.elements[trans[dim][0]].value=Math.round(trans[dim][1]*newval);
+    }
+}
+
 // Rename file in media db
 function rename(id, fname) {
     var newname;

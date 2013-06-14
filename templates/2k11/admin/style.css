@@ -1399,6 +1399,7 @@ form > .button_link:first-of-type {
 }
 
 #serendipityScaleImg img {
+    height: auto;
     max-width: 99%;
 }
 
