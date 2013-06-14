@@ -5,7 +5,13 @@
     <span class="msg_error"><span class="icon-attention-circled"></span> {$entry_vars.errMsg}</span>
 {/if}
 <form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
-    {$entry_vars.hidden}
+    {foreach $hiddens as $key => $value}
+        <input type="hidden" name="{$key}" value="{$value}" />
+    {/foreach}
+    <input type="hidden" id="entryid" name="serendipity[id]" value="{$entry_vars.entry.id}" />
+    <input type="hidden" name="serendipity[timestamp]" value="{$entry_vars.timestamp}" />
+    <input type="hidden" name="serendipity[preview]" value="false" />
+    {$entry_vars.formToken}
     <div id="edit_entry_title" class="form_field">
         <label for="entryTitle">{$CONST.TITLE}</label>
         <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|@escape}">
