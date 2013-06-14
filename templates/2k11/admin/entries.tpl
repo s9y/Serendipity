@@ -36,10 +36,7 @@
     <div class="form_area">
         <label for="serendipity[body]">{$CONST.ENTRY_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
-        <div id="tools_entry" class="editor_toolbar" style="display: none">
-            {* This whole button bar should be replaced by something external, which maybe even
-               "reacts" to installed markup plugins. I.e. if a blog uses Markdown, the button for
-               italic should not insert an em element but the appropriate Markdown formatting. *}
+        <div id="tools_entry" class="editor_toolbar">
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}
             <input type="button" name="insX" value="NoBR" accesskey="x" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')">
@@ -63,10 +60,6 @@
             <input type="button" value="Link" onclick="serendipity_insLink(document.forms['serendipityEntry']['serendipity[body]'])">
         {/if}
         </div>
-        <script>
-            var toolbarentry = document.getElementById('tools_entry');
-            toolbarentry.style.display = '';
-        </script>
     {/if}
         {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
         <textarea id="serendipity[body]" name="serendipity[body]" rows="20">{$entry_vars.entry.body|@escape}</textarea>
