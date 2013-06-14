@@ -530,20 +530,6 @@ function addUploadField() {
     $('#' + targetdir.attr('id')).val($($('#target_directory_' + (upload_fieldcount - 1))).val());
 }
 
-// Collapse/expand the full length comment in comments list
-// NOTE: isn't used right now in 2k11
-function FT_toggle(id) {
-    $('#'+ id + '_full').toggle().removeClass("hidden");
-    $('#'+ id + '_summary').toggle().removeClass("hidden");
-    if ($('#'+ id + '_full:visible').length > 0) {
-        $('#'+ id + '_text').text('{$CONST.VIEW_FULL}');
-    } else {
-        $('#'+ id + '_text').text('{$CONST.HIDE}');
-    }
-
-    return false;
-}
-
 // Inverts a selection of checkboxes
 function invertSelection() {
     var $chkboxes = $('#formMultiDelete .multidelete');
