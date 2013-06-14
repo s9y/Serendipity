@@ -186,24 +186,6 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         if (empty($xinha_custom)) {
             $xinha_custom = 'htmlarea/my_custom.js';
         }
-        
-        if (!$init) {
-?>
-    <script type="text/javascript">
-        _editor_url = "<?php echo $serendipity['serendipityHTTPPath'] . 'htmlarea/'; ?>";
-        _editor_lang = "<?php echo ($xinha ? $serendipity['lang'] : WYSIWYG_LANG); ?>";
-        _editor_skin = "silva";
-        var editorref = '';
-    </script>
-    <?php if ($xinha) { ?>
-    <script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
-    <!-- This file can contain user customizations -->
-    <script type="text/javascript" src="<?php echo $xinha_custom; ?>"></script>
-    <?php } else { ?>
-    <script type="text/javascript" src="htmlarea/htmlarea.js"></script>
-    <?php } ?>
-<?php
-        }
 
         $csscode = str_replace(
                  array(
@@ -223,164 +205,37 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                  file_get_contents(serendipity_getTemplateFile('style_fallback.css', 'serendipityPath')) . 
                  file_get_contents(serendipity_getTemplateFile('htmlarea.css', 'serendipityPath'))
         );
-?>
-    <script type="text/javascript">
-    // IF you want to enable HTMLArea's spellchecker, download the SpellChecker plugin from the HTMLArea homepage
-    // (http://www.sourceforge.net/projects/itools-htmlarea) and uncomment the lines suffixed with ' // [SPELLCHECK]'
-    // Note that the SpellChecker is a CGI-based application which needs setup in your Apache host ("Options +CGIExec")
-    // Thanks to Randall for pointing this out!
 
-    // HTMLArea.loadPlugin("SpellChecker"); // [SPELLCHECK]
-	<?php if($spawnMulti) { ?>
-	// when spawning multiple editors at once, keep track of instances in this array
-    var htmlarea_editors = new Array();
-	<?php } else  { ?>
-    var editor<?php echo $jsname; ?> = null; var config<?php echo $jsname; ?> = null;
-	<?php } // end if ?>
-    <?php if (is_array($eventData['buttons'])) { ?>
-    var btn_callbacks = new Array();
-    // Serendipity standardized editor functions
-    function serendipity_editor_getSelected(editor_id) {
-        var editor = findXinha(editor_id);
-        if (editor == 'undefined') {
-            editor = findHtmlArea(editor_id);
-        }
-        var html = editor.getSelectedHTML();
-        return html;
-    }
-    function serendipity_editor_replaceSelected(editor_id, str) {
-        var editor = findXinha(editor_id);
-        if (editor == 'undefined') {
-            editor = findHtmlArea(editor_id);
-        }
-        editor.insertHTML(str);
-    }
-    function serendipity_editor_getAll(editor_id) {
-        var editor = findXinha(editor_id);
-        if (editor == 'undefined') {
-            editor = findHtmlArea(editor_id);
-        }
-        return editor.getEditorContent();
-    }
-    function serendipity_editor_replaceAll(editor_id, str) {
-        var editor = findXinha(editor_id);
-        if (editor == 'undefined') {
-            editor = findHtmlArea(editor_id);
-        }
-        editor.setEditorContent(str);
-    }
-    // Serendipity standardized editor convenience function
-    function findXinha(editor_id) {
-        if (typeof(xinha_editors) != 'undefined') {
-            for (var editorName in xinha_editors) {
-                if (editor_id == xinha_editors[editorName]._textArea.name) {
-                    return xinha_editors[editorName];
+        if (is_array($eventData['buttons'])) {
+            foreach($eventData['buttons'] as $button) {
+                // Sort buttons into toolbar lists for later additions
+                switch($button['toolbar']) {
+                case S9Y_WYSIWYG_TOOLBAR_FORMATTING:
+                    $toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING][] = $button;
+                    break;
+                case S9Y_WYSIWYG_TOOLBAR_MEDIA:
+                case S9Y_WYSIWYG_TOOLBAR_WEB:
+                    $toolbar[S9Y_WYSIWYG_TOOLBAR_WEB][] = $button;
+                    break;
+                default:
+                    $toolbar['other'][] = $button;
+                    break;
                 }
             }
         }
-        return 'undefined';
-    }
-    function findHtmlArea(editor_id) {
-        if (editor_id == 'serendipity[body]') {
-            return editorbody;
-        } else if (editor_id == 'serendipity[extended]') {
-            return editorextended;
-        } else if (typeof(htmlarea_editors) != 'undefined') {
-            return htmlarea_editors[editor_id];
-        } 
-        return 'undefined';
-    }
-    <?php } ?>
-    function Spawn<?php echo $jsname; ?>(<?php echo $spawnMulti ? 'id' : ''; ?>) {
-		editor<?php echo $jsname; ?> = new HTMLArea("<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>);
-        <?php if($spawnMulti) { ?>
-		htmlarea_editors["<?php echo $item; ?>"<?php echo $spawnMulti ? ' + id' : ''; ?>] = editor<?php echo $jsname; ?>;
-		<?php } // end if ?>
-        config<?php echo $jsname; ?>    = editor<?php echo $jsname; ?>.config;
-        config<?php echo $jsname; ?>.registerButton('image_selector', '<?PHP echo MANAGE_IMAGES; ?>', '<?php echo $serendipity['serendipityHTTPPath']; ?>htmlarea/images/ed_s9yimage.gif', false,
-            function(editor, id) {
-                window.open('<?php echo $serendipity['serendipityHTTPPath']; ?>serendipity_admin_image_selector.php?serendipity[textarea]=<?php echo $jsname . ($spawnMulti ? "' + editor._textArea.id + '" : ''); ?>', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-                // editorref = editor<?php echo $jsname; ?>;
-                editorref = editor;
-            }
-        );
-        config<?php echo $jsname; ?>.toolbar.push([ "image_selector"]);
-        <?php 
-            if (is_array($eventData['buttons'])) {
-                foreach($eventData['buttons'] as $button) {
-                    echo "btn_callbacks['{$button['id']}'] = {$button['javascript']};\n";
-                    echo "var cb_{$button['id']} = btn_callbacks['{$button['id']}'];\n";
-                    echo "config$jsname.registerButton('{$button['id']}', '{$button['name']}', '{$button['img_url']}', false, function (editor, id) { btn_callbacks['{$button['id']}'](editor._textArea.id, id); });\n";
-                    echo "config$jsname.toolbar.push([\"{$button['id']}\"]);\n";
-                    // Sort buttons into toolbar lists for later additions
-                    switch($button['toolbar']) {
-                    case S9Y_WYSIWYG_TOOLBAR_FORMATTING:
-                        $toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING][] = $button;
-                        break;
-                    case S9Y_WYSIWYG_TOOLBAR_MEDIA:
-                    case S9Y_WYSIWYG_TOOLBAR_WEB:
-                        $toolbar[S9Y_WYSIWYG_TOOLBAR_WEB][] = $button;
-                        break;
-                    default:
-                        $toolbar['other'][] = $button;
-                        break;
-                    }
-                }
-            }
-            ?>
-        <?php if ($xinha) { ?>
-             config<?php echo $jsname; ?>.pageStyle = '<?php echo $csscode; ?>';
-             config<?php echo $jsname; ?>.stripScripts = false;
-        <?php } else { ?>config<?php echo $jsname; ?>.cssFile = '<?php echo $csscode; ?>';
-        <?php } ?>
-
-        config<?php echo $jsname; ?>.toolbar = [
-            [ "fontname", "space",
-              "fontsize", "space",
-              "formatblock", "space",
-              "bold", "italic", "underline", "strikethrough", "separator",
-              "subscript", "superscript", "separator", <?php
-                  if (is_array($toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING])) {
-                      foreach($toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING] as $button) {
-                          echo '"' . $button['id'] . '",';
-                      }
-                      echo '"separator",' . "\n";
-                  } ?>
-              "copy", "cut", "paste", "space", "undo", "redo" ],
-
-            [ "justifyleft", "justifycenter", "justifyright", "justifyfull", "separator",
-              "lefttoright", "righttoleft", "separator",
-              "orderedlist", "unorderedlist", "outdent", "indent", "separator",
-              "forecolor", "hilitecolor", "separator",
-              "inserthorizontalrule", "createlink", "insertimage", "image_selector", "inserttable", "htmlmode", "separator", <?php
-                  if (is_array($toolbar[S9Y_WYSIWYG_TOOLBAR_WEB])) {
-                      foreach($toolbar[S9Y_WYSIWYG_TOOLBAR_WEB] as $button) {
-                          echo '"' . $button['id'] . '",';
-                      }
-                      echo '"separator",' . "\n";
-                  } ?>
-              "popupeditor", "separator", "showhelp", "about" ] <?php
-                  if (is_array($toolbar['other'])) {
-                      echo ",\n    [ ";
-                      foreach($toolbar['other'] as $button) {
-                          echo '"' . $button['id'] . '", ';
-                      }
-                      echo '"separator" ]' . "\n";
-                  } ?>
-              
-        ];
         
-        if (typeof('s9y_xinha') != 'undefined') {
-            s9y_xinha(editor<?php echo $jsname; ?>);
-        }
-
-        // editor<?php echo $jsname; ?>.registerPlugin(SpellChecker);  // [SPELLCHECK]
-        editor<?php echo $jsname; ?>.generate();
-        editor<?php echo $jsname; ?>._textArea.className = 'serendipity_entry';
+        $data = array();
+        $data['xinha'] = $xinha;
+        $data['xinha_custom'] = $xinha_custom;
+        $data['init'] = $init;
+        $data['csscode'] = $csscode;
+        $data['spawnMulti'] = $spawnMulti;
+        $data['jsname'] = $jsname;
+        $data['eventData'] = $eventData;
+        $data['item'] = $item;
+        $data['toolbar'] = $toolbar;
+        echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);
     }
-    </script>
-<?php
-    }
-
     $init = true;
+
 }
