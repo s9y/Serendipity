@@ -907,7 +907,8 @@ input[type=checkbox] {
 .comment_summary,
 .comment_full,
 .serendipity_commentDirection,
-.entry_info {
+.entry_info,
+.pagination {
     clear: both;
 }
 
@@ -1631,7 +1632,7 @@ form > .button_link:first-of-type {
     position: relative;
 }
 
-.js .media_file_meta,
+.js .media_pane .media_file_meta,
 .js .template_info {
     background: #000;
     background: rgba(0,0,0,.6);
