@@ -89,9 +89,9 @@ switch($serendipity['GET']['adminAction']) {
                 } else {
                     if ($serendipity['use_iframe']) {
                         $data['is_iframe'] = true;
-                        serendipity_iframe_create('save', $entry);
+                        $data['iframe'] = serendipity_iframe_create('save', $entry);
                     } else {
-                        serendipity_iframe($entry, 'save');
+                        $data['iframe'] = serendipity_iframe($entry, 'save');
                     }
                 }
             } else {
@@ -146,9 +146,9 @@ switch($serendipity['GET']['adminAction']) {
 
                 if ($serendipity['use_iframe']) {
                     $data['is_iframepreview'] = true;
-                    serendipity_iframe_create('preview', $entry);
+                    $data['iframe'] = serendipity_iframe_create('preview', $entry);
                 } else {
-                    serendipity_iframe($entry, 'preview');
+                    $data['iframe'] = serendipity_iframe($entry, 'preview');
                 }
             }
         }
@@ -162,7 +162,7 @@ switch($serendipity['GET']['adminAction']) {
 
         if (!$preview_only) {
             include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
-            serendipity_printEntryForm(
+            $entryForm = serendipity_printEntryForm(
                 '?',
                 array(
                   'serendipity[action]'      => 'admin',
@@ -385,7 +385,7 @@ switch($serendipity['GET']['adminAction']) {
     default:
         include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
         // edit entry mode
-        serendipity_printEntryForm(
+        $entryForm = serendipity_printEntryForm(
             '?',
             array(
             'serendipity[action]'      => 'admin',
@@ -396,6 +396,7 @@ switch($serendipity['GET']['adminAction']) {
         );
 }
 
+$data['entryForm'] = $entryForm;
 $data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
 if(!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');

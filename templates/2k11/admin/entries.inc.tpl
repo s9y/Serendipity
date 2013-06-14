@@ -225,3 +225,5 @@
         </div>
     {/if}
 {/if}
+{$iframe}
+{$entryForm}
