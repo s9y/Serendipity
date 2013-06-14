@@ -295,12 +295,12 @@
 
                 <div class="form_field">
                     <label for="resize_width">{$CONST.INSTALL_THUMBDIM_WIDTH}</label>
-                    <input id="resize_width" name="serendipity[width]" type="text" onchange="rescale('width' , value);" value="{$img_width}">
+                    <input id="resize_width" name="serendipity[width]" type="text" value="{$img_width}">
                 </div>
 
                 <div class="form_field">
                     <label for="resize_height">{$CONST.INSTALL_THUMBDIM_HEIGHT}</label>
-                    <input id="resize_height" name="serendipity[height]" type="text" onchange="rescale('height', value);" value="{$img_height}">
+                    <input id="resize_height" name="serendipity[height]" type="text" value="{$img_height}">
                 </div>
             </fieldset>
 

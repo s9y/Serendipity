@@ -829,6 +829,15 @@ function highlightComment(id, checkvalue) {
         if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();
     });
 
+    // Media scale change events
+    $('#resize_width').change(function(e) {
+        rescale('width' , $(this).val());
+    });
+
+    $('#resize_height').change(function(e) {
+        rescale('height' , $(this).val());
+    });
+
     // Show extended comment
     $('.toggle_comment_full').click(function(e) {
         var $toggles = $($(this).attr('href'));
