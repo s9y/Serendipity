@@ -749,6 +749,22 @@ function highlightComment(id, checkvalue) {
         });
     }
 
+    // Comments
+    $('.comments_delete').click(function(e) {
+        var $msg = $(this).attr('data-delmsg');
+        return confirm($msg);
+    });
+
+    $('.comments_reply').click(function(e) {
+        cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        cf.focus();
+        return false;
+    });
+
+    $('.comments_multidelete').click(function(e) {
+        return confirm('{$CONST.COMMENTS_DELETE_CONFIRM}');
+    });
+
     // Category icon preview
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
