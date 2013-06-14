@@ -670,24 +670,6 @@ function serendipity_restoreVar(&$source, &$target) {
 }
 
 /**
- * Echo Javascript code to set a cookie variable
- *
- * This function is useful if your HTTP headers were already sent, but you still want to set a cookie
- * Note that contents are echo'd, not return'd.
- *
- * @access public
- * @param   string      The name of the cookie variable
- * @param   string      The contents of the cookie variable
- * @return  null
- */
-function serendipity_JSsetCookie($name, $value) {
-    $name  = htmlentities($name);
-    $value = urlencode($value);
-
-    echo '<script type="text/javascript">SetCookie("' . $name . '", unescape("' . $value . '"))</script>' . "\n";
-}
-
-/**
  * Set a Cookie via HTTP calls, and update $_COOKIE plus $serendipity['COOKIE'] array.
  *
  * @access public
@@ -770,7 +752,7 @@ function serendipity_is_iframe() {
         $serendipity['POST'] = &$_SESSION['save_entry_POST'];
         $serendipity['GET']  = &$_SESSION['save_entry_POST']; // GET-Vars are the same as POST to ensure compatibility.
         ignore_user_abort(true);
-        serendipity_iframe($_SESSION['save_entry'], $iframe_mode, true);
+        echo serendipity_iframe($_SESSION['save_entry'], $iframe_mode);
         return true;
     }
     return false;
@@ -790,62 +772,39 @@ function serendipity_is_iframe() {
  * @param   boolean Use smarty templating?
  * @return  boolean Indicates whether iframe data was printed
  */
-function serendipity_iframe(&$entry, $mode = null, $use_smarty = true) {
+function serendipity_iframe(&$entry, $mode = null) {
     global $serendipity;
 
     if (empty($mode) || !is_array($entry)) {
         return false;
     }
 
-    if ($use_smarty) {
-        $serendipity['smarty_raw_mode'] = true; // Force output of Smarty stuff in the backend
-        $serendipity['smarty_preview']  = true;
-        serendipity_smarty_init();
-        $serendipity['smarty']->assign('is_preview',  true);
-        ob_start();
-    }
+    $serendipity['smarty_preview']  = true;
 
-    $show = false;
+    $data = array();
+    $data['is_preview'] =  true;
+    $data['mode'] =  $mode;
+
     switch ($mode) {
         case 'save':
-            echo '<div class="clearfix">';
-            echo '<div style="float: left; height: 75px"></div>';
+            ob_start();
             $res = serendipity_updertEntry($entry);
-
+            $data['updertHooks'] = ob_get_contents();
+            ob_end_clean();
             if (is_string($res)) {
-                echo '<div class="serendipity_msg_error">' . ERROR . ': <b>' . $res . '</b></div>';
-            } else {
-                if (!empty($serendipity['lastSavedEntry'])) {
-                    // Last saved entry must be propagated to entry form so that if the user re-edits it,
-                    // it needs to be stored with the new ID.
-                    echo '<script type="text/javascript">parent.document.forms[\'serendipityEntry\'][\'serendipity[id]\'].value = "' . $serendipity['lastSavedEntry'] . '";</script>';
-                }
-                $entrylink = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
-                echo '<div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . ENTRY_SAVED . ' (<a href="' . $entrylink . '" target="_blank">' . VIEW . '</a>)</div>';
+                $data['res'] = $res;
             }
-            echo '</div>';
-
-            $show = true;
+            if (!empty($serendipity['lastSavedEntry'])) {
+                $data['lastSavedEntry'] = $serendipity['lastSavedEntry'];
+                $data['entrylink'] = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
+            }
             break;
 
         case 'preview':
-            echo '<div class="clearfix">';
-            echo '<div id="serendipity_preview_spacer" style="float: left; height: 225px"></div>';
-            serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
-            echo '</div>';
-
-            $show = true;
+            $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
             break;
     }
-
-    if ($use_smarty) {
-        $preview = ob_get_contents();
-        ob_end_clean();
-        $serendipity['smarty']->assignByRef('preview', $preview);
-        $serendipity['smarty']->display(serendipity_getTemplateFile('preview_iframe.tpl', 'serendipityPath'));
-    }
-
-    return $show;
+    return serendipity_smarty_show('preview_iframe.tpl', $data);
 }
 
 /**

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
     <script src="{serendipity_getFile file="js/modernizr-2.6.2.min.js"}"></script>
+    {serendipity_hookPlugin hook="backend_header" hookAll="true"}
 <script>
     window.onload = function() {ldelim}
         parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
@@ -42,7 +43,29 @@
 <div id="page" class="clearfix container">
     <div class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
         <main id="content" style="padding: 1em 0; margin: 0;">
+        {if $mode == 'preview'}
+            <div class="clearfix">
+            <div id="serendipity_preview_spacer" style="float: left; height: 225px"></div>
+        {elseif $mode == 'save'}
+            <div class="clearfix">
+            <div style="float: left; height: 75px"></div>
+            {$updertHooks}
+            {if $res}
+                <div class="serendipity_msg_error">{$CONST.ERROR}: <b>{$res}</b></div>
+            {else}
+                {if $lastSavedEntry}
+                    <script type="text/javascript">$(document).ready(function() {
+                                                        parent.document.forms['serendipityEntry']['serendipity[id]'].value = "{$lastSavedEntry}";
+                    });
+                    </script>
+                {/if}
+                <div class="serendipityAdminMsgSuccess msg_success">
+                    <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}'" alt="" /> {$CONST.ENTRY_SAVED} (<a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>)
+                </div>
+            {/if}
+        {/if}
         {$preview}
+        </div>
         </main>
     </div>
 </div>
