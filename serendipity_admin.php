@@ -55,7 +55,7 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
 }
 
 // If we are inside an iframe, halt the script
-if (serendipity_is_iframe()) {
+if (serendipity_is_iframe() !== false) {
     return true;
 }
 
@@ -97,16 +97,8 @@ if (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST']['noFoot
     $no_footer = false;
 }
 
-$file = '';
 if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false ) {
     $use_installer = true;
-    if (IS_installed === false) {
-        $file = 'include/admin/installer.inc.php';
-    } elseif ( IS_up2date === false ) {
-        $file = 'include/admin/upgrader.inc.php';
-    } else {
-        $file = ''; // For register_global, safety
-    }
 } else {
     $use_installer = false;
 }
@@ -278,7 +270,7 @@ if (!$use_installer && $is_logged_in) {
     ob_end_clean();
 }
 
-if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
+if (!$use_installer) {
     $poll_admin_vars = array('css_file', 'admin_css_file', 'main_content', 'no_banner', 'no_sidebar', 'no_footer', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
     $admin_vars = array();
     foreach($poll_admin_vars AS $poll_admin_var) {
@@ -298,8 +290,11 @@ if (!$use_installer && !$_SESSION['no_smarty'] && serendipity_smarty_init()) {
 
     $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
-}
-
-if ($use_installer) {
+} else {
+    if (IS_installed === false) {
+        $file = 'include/admin/installer.inc.php';
+    } elseif ( IS_up2date === false ) {
+        $file = 'include/admin/upgrader.inc.php';
+    }
     require(S9Y_INCLUDE_PATH . $file);
 }
