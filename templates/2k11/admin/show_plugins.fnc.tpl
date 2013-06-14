@@ -46,10 +46,53 @@
 
                         <ul class="pluginmanager_plugininfo plainList">
                             <li class="pluginmanager_description">{$plugin_data['desc']}</li>
-                            <li class="pluginmanager_ownership">{$plugin_data['ownership']}</li>
+                            <li class="pluginmanager_ownership">
+                                {if $plugin_data.is_plugin_owner}
+                                    <select name="serendipity[ownership][{$plugin_data.name}]">
+                                        <option value="0">{$CONST.ALL_AUTHORS}</option>
+                                {/if}
+                                {foreach $users AS $user}
+                                    {if (! $plugin_data.is_plugin_owner && ($user['authorid'] == $plugin_data.authorid))}
+                                        {assign var="realname" value="{$user['realname']|escape}"}
+                                    {elseif $plugin_data.is_plugin_owner}
+                                        <option value="{$user['authorid']}"{($user['authorid'] == $plugin_data.authorid) ? ' selected' : ''}>{$user['realname']|escape}</option>
+                                    {/if}
+                                {/foreach}
+                                {if $plugin_data.is_plugin_owner}
+                                    </select>
+                                {else}
+                                    {(empty($realname)) ? $CONST.ALL_AUTHORS : $realname}
+                                {/if}
+
+                            </li>
                         {($eyecandy) ? '<noscript>' : ''}
-                            <li class="pluginmanager_place">{$plugin_data['place']}</li>
-                            <li class="pluginmanager_move">{$plugin_data['moveup']} {$plugin_data['movedown']}</li>
+                            <li class="pluginmanager_place">
+                                <select name="serendipity[placement][{$plugin_data['name']}]">
+                                    {foreach $plugin_data.gopts as $k => $v}
+                                        {if {$plugin_data.is_plugin_editable} && $k == 'hide'}
+                                            {continue}
+                                        {/if}
+                                        <option value="{$k}" {if $k == $plugin_data['placement']}selected="selected"{/if}>{$v}</option>
+                                    {/foreach}
+                                </select>
+                            </li>
+                            <li class="pluginmanager_move">
+                                {if $plugin_data.sort_idx == 0}
+                                    &nbsp;
+                                {else}
+                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}" style="border: 0">
+                                        <img src="{serendipity_getFile file='admin/img/uparrow.png'}" height="16" width="16" border="0" alt="' . UP . '" />
+                                    </a>
+                                {/if}
+
+                                {if $sort_idx == $total - 1}
+                                    &nbsp;
+                                {else}
+                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]=$plugin_data{if $event_only}&amp;serendipity[event_plugin]=true{/if}" style="border: 0">
+                                        <img src="{serendipity_getFile file='admin/img/downarrow.png'}" height="16" width="16" alt="'. DOWN .'" border="0" />
+                                    </a>
+                                {/if}
+                            </li>
                         {($eyecandy) ? '</noscript>' : ''}
                         </ul>
                     </li>

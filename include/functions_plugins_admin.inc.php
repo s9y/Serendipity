@@ -101,9 +101,7 @@ function show_plugins($event_only = false, $sidebars = null)
     }
 
     $data['serendipity_setFormToken'] = serendipity_setFormToken();
-
-    // what is this for???
-    $errors     = array();
+    $data['serendipity_setFormTokenUrl'] = serendipity_setFormToken('url');
 
     /* Block display the plugins per placement location. */
     if ($event_only) {
@@ -112,9 +110,14 @@ function show_plugins($event_only = false, $sidebars = null)
         $plugin_placements = $sidebars;
     }
     $data['plugin_placements'] = $plugin_placements;
-    $ownership = array();
 
-    $total = 0;
+    static $users = array();
+    if (empty($users)) {
+        $users = serendipity_fetchUsers('', 'hidden');
+    }
+    $data['users'] = $users;
+
+    $i = 0;
     foreach ($plugin_placements as $plugin_placement) {
         if (!$event_only && $plugin_placement == 'NONE') {
             $is_invisible     = true;
@@ -136,7 +139,7 @@ function show_plugins($event_only = false, $sidebars = null)
 
         $sort_idx = 0;
         foreach ($plugins as $plugin_data) {
-            $total++;
+            $i++;
             $plugin  =& serendipity_plugin_api::load_plugin($plugin_data['name'], $plugin_data['authorid']);
             $key     = urlencode($plugin_data['name']);
             $css_key = 's9ycid' . str_replace('%', '-', $key);
@@ -166,122 +169,44 @@ function show_plugins($event_only = false, $sidebars = null)
                 }
             }
 
-            if ($event_only) {
-                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable, true, $opts);
-                $event_only_uri = '&amp;serendipity[event_plugin]=true';
-            } else {
-                $place = placement_box('serendipity[placement][' . $plugin_data['name'] . ']', $plugin_data['placement'], $is_plugin_editable, false, $opts);
-                $event_only_uri = '';
+            if ($opts === null) {
+                $opts = array(
+                    'left'  => LEFT,
+                    'right' => RIGHT,
+                    'hide'  => HIDDEN
+                );
             }
 
-            /* Only display UP/DOWN links if there's somewhere for the plugin to go */
-            if ($sort_idx == 0) {
-                $moveup   = '&nbsp;';
+            static $event_opts = array(
+                            'event'     => PLUGIN_ACTIVE,
+                            'eventh' => PLUGIN_INACTIVE,
+            );
+
+            if ($is_event) {
+                $gopts =& $event_opts;
             } else {
-                $moveup   = '<a href="?' . serendipity_setFormToken('url') . '&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]=' . $key . $event_only_uri . '" style="border: 0"><img src="' . serendipity_getTemplateFile('admin/img/uparrow.png') .'" height="16" width="16" border="0" alt="' . UP . '" /></a>';
+                $gopts =& $opts;
             }
 
-            if ($sort_idx == (count($plugins)-1)) {
-                $movedown = '&nbsp;';
-            } else {
-                $movedown = ($moveup != '' ? '&nbsp;' : '') . '<a href="?' . serendipity_setFormToken('url') . '&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]=' . $key . $event_only_uri . '" style="border: 0"><img src="' . serendipity_getTemplateFile('admin/img/downarrow.png') . '" height="16" width="16" alt="'. DOWN .'" border="0" /></a>';
-            }
-
-            ob_start();
-                ownership($plugin_data['authorid'], $plugin_data['name'], $is_plugin_owner);
-                $ownership = ob_get_contents();
-            ob_end_clean();
-
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['sort_idx'] = $sort_idx;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['css_key'] = $css_key;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['is_plugin_editable'] = $is_plugin_editable;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['name'] = $plugin_data['name'];
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['can_configure'] = $can_configure;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['key'] = $key;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['title'] = $title;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['desc'] = $desc;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['ownership'] = $ownership;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['place'] = $place;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['moveup'] = $moveup;
-            $data['placement'][$plugin_placement]['plugin_data'][$total]['movedown'] = $movedown;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['sort_idx'] = $sort_idx;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['css_key'] = $css_key;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['is_plugin_editable'] = $is_plugin_editable;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['is_plugin_owner'] = $is_plugin_owner;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['name'] = $plugin_data['name'];
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['authorid'] = $plugin_data['authorid'];
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['can_configure'] = $can_configure;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['key'] = $key;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['title'] = $title;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['desc'] = $desc;
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['placement'] = $plugin_data['placement'];
+            $data['placement'][$plugin_placement]['plugin_data'][$i]['gopts'] = $gopts;
             $sort_idx++;
         }
 
     }
 
-    $data['total'] = $total;
+    $data['total'] = $i;
     echo serendipity_smarty_show('admin/show_plugins.fnc.tpl', $data);
-}
-
-/**
- * Returns HTML code for the ownership column of the plugin listing
- *
- * Used by the function show_plugins()
- *
- * @access  private
- * @see     show_plugins()
- * @param   int     ID of the current user
- * @param   string  plugin name
- * @param   boolean Toggle whether the plugin belongs to the current author
- * @return  null
- */
-function ownership($authorid, $name, $is_plugin_owner = false) {
-    global $serendipity;
-
-    static $users = array();
-    if (empty($users)) {
-        $users = serendipity_fetchUsers('', 'hidden');
-    }
-    $data['authorid'] = $authorid;
-    $data['users'] = $users;
-    $data['is_plugin_owner'] = $is_plugin_owner;
-    $data['name'] = $name;
-    $data['show_ownership'] = true;
-
-    echo serendipity_smarty_show('admin/show_ownership.fnc.tpl', $data);
-}
-
-/**
- * Show a placement box on where to move a sidebar plugin to
- *
- * @access private
- * @see    show_plugins()
- * @param  string   plugin name
- * @param  string   current position of the plugin
- * @param  boolean  Toggle whether a plugin is editable (depends on authorid and permissions)
- * @param  boolean  Toggle whether a plugin is an event plugin
- * @return string   HTML code for placement select box
- */
-function placement_box($name, $val, $is_plugin_editable = false, $is_event = false, $opts = null)
-{
-    if ($opts === null) {
-        $opts = array(
-            'left'  => LEFT,
-            'right' => RIGHT,
-            'hide'  => HIDDEN
-        );
-    }
-
-    static $event_opts = array(
-                    'event'     => PLUGIN_ACTIVE,
-                    'eventh' => PLUGIN_INACTIVE,
-    );
-
-    if ($is_event) {
-        $gopts =& $event_opts;
-    } else {
-        $gopts =& $opts;
-    }
-
-    $x = "\n<select name=\"$name\">\n";
-    foreach ($gopts as $k => $v) {
-        if (!$is_plugin_editable && $k == 'hide') {
-            continue;
-        }
-
-        $x .= "    <option value=\"$k\"" . ($k == $val ? ' selected="selected"' : '') . ">$v</option>\n";
-    }
-    return $x . "</select>\n";
 }
 
 /**
@@ -307,10 +232,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     if (empty($config_names)) {
         return false;
     }
-
-    if (!is_object($serendipity['smarty'])) {
-        serendipity_smarty_init();
-    }
+    
     $tfile = "/admin/plugin_config_item.tpl";
     
 
