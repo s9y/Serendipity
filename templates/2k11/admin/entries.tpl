@@ -39,15 +39,15 @@
         <div id="tools_entry" class="editor_toolbar">
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}
-            <input type="button" name="insX" value="NoBR" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<nl>','</nl>')">
+            <input class="wrap_selection" type="button" name="insX" value="NoBR" data-tag="nl" data-tarea="body">
             {/if}
-            <input class="hilite_i" type="button" name="insI" value="I" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<em>','</em>')">
-            <input class="hilite_b" type="button" name="insB" value="B" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<strong>','</strong>')">
-            <input class="hilite_u" type="button" name="insU" value="U" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<u>','</u>')">
-            <input type="button" name="insQ" value="{$CONST.QUOTE}" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[body]'],'<blockquote>','</blockquote>')">
-            <input type="button" name="insJ" value="img" onclick="wrapInsImage(document.forms['serendipityEntry']['serendipity[body]'])">
-            <input type="button" name="insImage" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=body', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');">
-            <input type="button" name="insURL" value="URL" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[body]'])">
+            <input class="hilite_i wrap_selection" type="button" name="insI" value="I" data-tag="em" data-tarea="body">
+            <input class="hilite_b wrap_selection" type="button" name="insB" value="B" data-tag="strong" data-tarea="body">
+            <input class="hilite_u wrap_selection" type="button" name="insU" value="U" data-tag="u" data-tarea="body">
+            <input class="wrap_selection" type="button" name="insQ" value="{$CONST.QUOTE}" data-tag="blockquote" data-tarea="body">
+            <input class="wrap_insimg" type="button" name="insJ" value="img" data-tarea="body">
+            <input class="wrap_insmedia" type="button" name="insImage" value="{$CONST.MEDIA}" data-tarea="body">
+            <input class="wrap_insurl" type="button" name="insURL" value="URL" data-tarea="body">
         {else}
             {if $iso2br}
             <input type="button" value="NoBR" onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[body]'], 'x')">
@@ -98,15 +98,15 @@
         <div id="tools_extended" class="editor_toolbar">
         {if $entry_vars.wysiwyg_advanced}
             {if $iso2br}
-            <input type="button" name="insX" value="NoBR" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<nl>','</nl>')">
+            <input class="wrap_selection" type="button" name="insX" value="NoBR" data-tag="nl" data-tarea="extended">
             {/if}
-            <input class="hilite_i" type="button" name="insI" value="I" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<em>','</em>')">
-            <input class="hilite_b" type="button" name="insB" value="B" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<strong>','</strong>')">
-            <input class="hilite_u" type="button" name="insU" value="U" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<u>','</u>')">
-            <input type="button" name="insQ" value="{$CONST.QUOTE}" onclick="wrapSelection(document.forms['serendipityEntry']['serendipity[extended]'],'<blockquote>','</blockquote>')">
-            <input type="button" name="insJ" value="img" onclick="wrapInsImage(document.forms['serendipityEntry']['serendipity[extended]'])">
-            <input type="button" name="insImage" value="{$CONST.MEDIA}" onclick="window.open('serendipity_admin_image_selector.php?serendipity[textarea]=extended', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');">
-            <input type="button" name="insURL" value="URL" onclick="wrapSelectionWithLink(document.forms['serendipityEntry']['serendipity[extended]'])">
+            <input class="hilite_i wrap_selection" type="button" name="insI" value="I" data-tag="em" data-tarea="extended">
+            <input class="hilite_b wrap_selection" type="button" name="insB" value="B" data-tag="strong" data-tarea="extended">
+            <input class="hilite_u wrap_selection" type="button" name="insU" value="U" data-tag="u" data-tarea="extended">
+            <input class="wrap_selection" type="button" name="insQ" value="{$CONST.QUOTE}" data-tag="blockquote" data-tarea="extended">
+            <input class="wrap_insimg" type="button" name="insJ" value="img" data-tarea="extended">
+            <input class="wrap_insmedia" type="button" name="insImage" value="{$CONST.MEDIA}" data-tarea="extended">
+            <input class="wrap_insurl" type="button" name="insURL" value="URL" data-tarea="extended">
         {else}
             {if $iso2br}
             <input type="button" value="NoBR" onclick="serendipity_insBasic(document.forms['serendipityEntry']['serendipity[extended]'], 'x')">

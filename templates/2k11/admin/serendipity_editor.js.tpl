@@ -152,7 +152,7 @@ function wrapInsImage(txtarea) {
     var loc = prompt('Enter the Image Location: ');
 
     if (loc) {
-        insertText(txtarea,'<img src="'+ loc + '" alt="" />');
+        insertText(txtarea,'<img src="'+ loc + '" alt="">');
     }
 }
 /* end Better-Editor functions */
@@ -680,6 +680,30 @@ function highlightComment(id, checkvalue) {
     $('#reset_timestamp').click(function(e) {
         $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
         e.preventDefault();
+    });
+
+    // Editor tools
+    $('.wrap_selection').click(function(e) {
+        var $el = $(this);
+        var $tag = $el.attr('data-tag');
+        var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        var open = '<' + $tag + '>';
+        var close = '</' + $tag + '>';
+        wrapSelection(target, open, close);
+    });
+
+    $('.wrap_insimg').click(function(e) {
+        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        wrapInsImage(target);
+    });
+
+    $('.wrap_insurl').click(function(e) {
+        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        wrapSelectionWithLink(target);
+    });
+
+    $('.wrap_insmedia').click(function(e) {
+        window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'), 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
 
     // Collapsible configuration elements
