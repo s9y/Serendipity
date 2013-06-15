@@ -548,6 +548,22 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $css_mode = $matches[1];
     include(S9Y_INCLUDE_PATH . 'serendipity.css.php');
     exit;
+} elseif (preg_match(PAT_JS, $uri, $matches)) {
+    $serendipity['view'] = 'js';
+    if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false) {
+        header('Cache-Control: no-cache');
+    } else {
+        header('Cache-Control:');
+        header('Pragma:');
+        header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time()+3600));
+    }
+
+    header('Content-type: application/javascript; charset=' . LANG_CHARSET);
+
+    $out = "";
+    serendipity_plugin_api::hook_event('js', $out);
+    echo $out;
+    exit;
 } else if (preg_match(PAT_COMMENTS, $uri, $matches)) {
     $serendipity['view'] = 'comments';
     $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
