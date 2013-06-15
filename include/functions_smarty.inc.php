@@ -470,7 +470,7 @@ function serendipity_smarty_showPlugin($params, &$smarty) {
         $params['template'] = 'sidebar.tpl';
     }
 
-    $out = serendipity_plugin_api::generate_plugins($params['side'], null, $params['negate'], $params['class'], $params['id'], $params['template']);
+    $out = serendipity_plugin_api::generate_plugins($params['side'], $params['negate'], $params['class'], $params['id'], $params['template']);
 
     if (empty($out) && !empty($params['empty'])) {
         return $params['empty'];
@@ -607,7 +607,7 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
     }
 
     if (isset($params['template'])) {
-        return serendipity_plugin_api::generate_plugins($params['side'], '', false, null, null, $params['template']);
+        return serendipity_plugin_api::generate_plugins($params['side'], false, null, null, $params['template']);
     } else {
         return serendipity_plugin_api::generate_plugins($params['side']);
     }
@@ -940,14 +940,6 @@ function serendipity_smarty_init($vars = array()) {
             
             $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
             
-        }
-
-        if (!isset($serendipity['smarty_raw_mode'])) {
-            if (file_exists($serendipity['smarty']->getConfigDir(0) . '/layout.php') && $serendipity['template'] != 'default') {
-                $serendipity['smarty_raw_mode'] = true;
-            } else {
-                $serendipity['smarty_raw_mode'] = false;
-            }
         }
 
         if (!isset($serendipity['smarty_file'])) {

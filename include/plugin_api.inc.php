@@ -850,14 +850,9 @@ class serendipity_plugin_api
      * @param   string      Only show a plugin with this instance ID
      * @return  string      Smarty HTML output
      */
-    static function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
+    static function generate_plugins($side, $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
     {
         global $serendipity;
-
-        /* $tag parameter is deprecated and used in Smarty templates instead. Only use it in function
-         * header for layout.php BC.
-         */
-
         $plugins = serendipity_plugin_api::enum_plugins($side, $negate, $class, $id);
 
         if (!is_array($plugins)) {
