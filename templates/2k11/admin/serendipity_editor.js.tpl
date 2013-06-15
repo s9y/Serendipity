@@ -810,6 +810,11 @@ function highlightComment(id, checkvalue) {
         addUploadField();
     });
 
+    // Check media db inputs
+    $('.check_input').change(function(e) {
+        checkInputs();
+    });
+
     // Limit width of media file info
     var $mediaPane = $('body').has('.media_pane');
 
