@@ -970,7 +970,17 @@ function serendipity_smarty_init($vars = array()) {
             } else {
                 $serendipity['smarty_vars']['head_link_stylesheet'] .= '?v=' . $serendipity['last_template_change'];
             }
+        }
 
+        if (!isset($serendipity['smarty_vars']['head_link_script'])) {
+            $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity.js');
+            
+            // When templates are switched, append a specific version string to make sure the browser does not cache the CSS
+            if (strstr($serendipity['smarty_vars']['head_link_stylesheet'], '?')) {
+                $serendipity['smarty_vars']['head_link_script'] .= '&v=' . $serendipity['last_template_change'];
+            } else {
+                $serendipity['smarty_vars']['head_link_script'] .= '?v=' . $serendipity['last_template_change'];
+            }
         }
 
         $serendipity['smarty']->assign(
@@ -980,6 +990,7 @@ function serendipity_smarty_init($vars = array()) {
                 'head_title'                => $serendipity['head_title'],
                 'head_subtitle'             => $serendipity['head_subtitle'],
                 'head_link_stylesheet'      => $serendipity['smarty_vars']['head_link_stylesheet'],
+                'head_link_script'          => $serendipity['smarty_vars']['head_link_script'],
 
                 'is_xhtml'                  => true,
                 'use_popups'                => $serendipity['enablePopup'],

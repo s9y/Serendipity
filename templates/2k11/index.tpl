@@ -33,6 +33,7 @@
     <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
 {/if}
 {serendipity_hookPlugin hook="frontend_header"}
+    <script src="{$head_link_script}"></script>
 </head>
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 {else}
