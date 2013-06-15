@@ -100,7 +100,8 @@
             </div>
         </fieldset>
     </form>
-    <script type="text/javascript">
+
+    <script>
         $(document).ready(function() {
     {foreach $filter_import AS $f_import}
         SetCookie("entrylist_filter_{$f_import}", "{$get_filter_{$f_import}}" )

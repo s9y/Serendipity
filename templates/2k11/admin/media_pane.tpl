@@ -139,7 +139,7 @@
                 <input name="go" type="submit" value="{$CONST.GO}">
             </div>
         </fieldset>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function() {
             {foreach $media.sortParams AS $sortParam}
                 SetCookie("sortorder_{$sortParam}","{$get_sortorder_{$sortParam}}" )

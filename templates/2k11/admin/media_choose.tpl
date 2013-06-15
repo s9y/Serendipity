@@ -52,7 +52,7 @@
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
-    <script type="text/javascript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
+    <script src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script>

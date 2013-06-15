@@ -1,5 +1,5 @@
 {if $init}
-    <script type="text/javascript">
+    <script>
         _editor_url = "{$serendipityHTTPPath}htmlarea/";
         _editor_lang = "{if $xinha}{$lang}{else}{$CONST.WYSIWYG_LANG}{/if}";
         _editor_skin = "silva";
@@ -7,15 +7,13 @@
     </script>
 
     {if $xinha}
-        <script type="text/javascript" src="htmlarea/XinhaCore.js"></script>
-        <script type="text/javascript" src="{$xinha_custom}"></script>
+        <script src="htmlarea/XinhaCore.js"></script>
+        <script src="{$xinha_custom}"></script>
     {else}
-        <script type="text/javascript" src="htmlarea/htmlarea.js"></script>
+        <script src="htmlarea/htmlarea.js"></script>
     {/if}
 {/if}
-
-        
-<script type="text/javascript">
+<script>
 // IF you want to enable HTMLArea's spellchecker, download the SpellChecker plugin from the HTMLArea homepage
 // (http://www.sourceforge.net/projects/itools-htmlarea) and uncomment the lines suffixed with ' // [SPELLCHECK]'
 // Note that the SpellChecker is a CGI-based application which needs setup in your Apache host ("Options +CGIExec")
