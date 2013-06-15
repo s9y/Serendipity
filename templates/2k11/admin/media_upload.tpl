@@ -18,7 +18,7 @@
             <div class="form_field clearfix">
                 {* Probably could use input[type=url] here … *}
                 <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
-                <input id="imageurl" name="serendipity[imageurl]" type="text" onchange="checkInputs()" value="">
+                <input id="imageurl" class="check_input" name="serendipity[imageurl]" type="text" value="">
             </div>
 
             <div class="form_select clearfix">
@@ -35,7 +35,7 @@
         <div id="upload_template" class="hidden">
             <div class="form_field clearfix">
                 <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
-                <input id="userfile_1" class="uploadform_userfile" name="serendipity[userfile][1]" type="file" onchange="checkInputs();">
+                <input id="userfile_1" class="uploadform_userfile check_input" name="serendipity[userfile][1]" type="file">
             </div>
 
             <div class="form_field clearfix">
