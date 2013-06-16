@@ -151,7 +151,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $serendipity['smarty']->assign('admin_view', 'entryform');
     serendipity_plugin_api::hook_event('backend_entryform_smarty', $template_vars);
     $serendipity['smarty']->assignByRef('entry_vars', $template_vars);
-    $serendipity['smarty']->display($template_vars['entry_template']);
+    return serendipity_smarty_show($template_vars['entry_template']);
 }
 
 function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
