@@ -489,9 +489,7 @@ class serendipity_plugin_api
 
         // First try the local path, and then (if existing) a shared library repository ...
         // Internal plugins ignored.
-        if (!empty($instance_id) && $instance_id[0] == '@') {
-            $file = S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php';
-        } elseif (file_exists($serendipity['serendipityPath'] . $pluginFile)) {
+        if (file_exists($serendipity['serendipityPath'] . $pluginFile)) {
             $file = $serendipity['serendipityPath'] . $pluginFile;
         } elseif (file_exists(S9Y_INCLUDE_PATH . $pluginFile)) {
             $file = S9Y_INCLUDE_PATH . $pluginFile;
@@ -1695,10 +1693,6 @@ class serendipity_event extends serendipity_plugin
         return true;
     }
 
-}
-
-if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
-    include S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php';
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

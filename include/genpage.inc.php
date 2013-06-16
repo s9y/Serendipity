@@ -14,10 +14,6 @@ if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
     include(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
 }
 
-if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
-    include(S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php');
-}
-
 $uri_addData = array(
     'startpage' => false,
     'uriargs'   => implode('/', serendipity_getUriArguments($uri, true)),

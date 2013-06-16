@@ -11,7 +11,6 @@ if (!serendipity_checkPermission('adminPlugins')) {
 $data = array();
 
 include_once S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php';
-include_once S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 
