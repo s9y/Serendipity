@@ -288,8 +288,8 @@ switch ($serendipity['GET']['step']) {
             $serendipity['thumbPerPage2'] = 3;
         }
 
-        ob_start();
-        $block = serendipity_displayImageList(
+
+        $media['external'] = serendipity_displayImageList(
           isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
           $serendipity['thumbPerPage2'],
           ($serendipity['showMediaToolbar'] ? true : false),
@@ -298,9 +298,7 @@ switch ($serendipity['GET']['step']) {
           null,
           false
         );
-        $media['external'] = ob_get_contents();
-        ob_end_clean();
-        serendipity_smarty_fetch('MEDIA_LIST', $block);
+        serendipity_smarty_fetch('MEDIA_LIST', "admin/media_pane.tpl");
 }
 
 $media = array_merge($serendipity['GET'], $media);

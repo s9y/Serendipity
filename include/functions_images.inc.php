@@ -1441,7 +1441,7 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
  * @param   string  The URL to use for pagination
  * @param   boolean Show the "upload media item" feature?
  * @param   boolean Restrict viewing images to a specific directory
- * @return  string   Smarty block name
+ * @return  string   Generated HTML
  */
 function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL) {
     global $serendipity;
@@ -2238,7 +2238,7 @@ function &serendipity_getImageData($sRelativePath) {
  * @param  array    Associative array holding an array('image_id', 'target', 'created_thumbnail') that points to the uploaded media
  * @param  int      How many keyword checkboxes to display next to each other?
  * @param  boolean  Can existing data be modified?
- * @return boolean
+ * @return string   Generated HTML
  *
  */
 function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_edit = true) {
@@ -2807,7 +2807,7 @@ function serendipity_prepareMedia(&$file, $url = '') {
  * @param  int      how many media items to display per row
  * @param  boolean  Enclose within a table cell?
  * @param  array    Additional Smarty variables
- * @return string   Smarty block name
+ * @return string   Generated HTML
  *
  */
 function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lineBreak = 3, $enclose = true, $smarty_vars = array()) {
@@ -2885,8 +2885,6 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         $block = 'admin/media_properties.tpl';
         return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
     }
-
-    return $block;
 }
 
 /**
