@@ -298,7 +298,6 @@ switch ($serendipity['GET']['step']) {
           null,
           false
         );
-        serendipity_smarty_fetch('MEDIA_LIST', "admin/media_pane.tpl");
 }
 
 $media = array_merge($serendipity['GET'], $media);
