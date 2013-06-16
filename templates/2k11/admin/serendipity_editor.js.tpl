@@ -676,7 +676,9 @@ function highlightComment(id, checkvalue) {
 
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
-    $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));   
+    if($entryEditor.size() > 0) {
+        $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
+    }
     
     
     // Set entry timestamp
