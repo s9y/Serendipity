@@ -23,7 +23,7 @@
             <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp}">
 
             <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
-            <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="text" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}">
+            <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|@formatTime:'o-m-d\TH:i':true:false:true}">
             
             <a id="reset_timestamp" class="button_link" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></a>
         </div>
