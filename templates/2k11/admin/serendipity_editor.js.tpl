@@ -175,9 +175,11 @@ function choose_media(id) {
 
 // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
 function serendipity_imageSelector_addToElement (str, id) {
+    id = id.replace(/\[/g, "\\[");  // jQuery fails to select the input when the selector contains unescaped [ or ]
+    id = id.replace(/\]/g, "\\]");
     var $input = $('#'+id);
     $input.val(str);
-
+    
     if ($input.attr('type') != 'hidden') {
         $input.focus();    // IE would generate an error when focusing an hidden element
     }
