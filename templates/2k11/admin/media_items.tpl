@@ -98,11 +98,9 @@
                 <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
             {if $file.is_editable}
                 <li><a class="media_fullsize button_link" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
-                {* onclick="F1 = window.open('{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}', 'Zoom', 'height={$file.popupHeight},width={$file.popupWidth},top='+ (screen.height-{$file.popupHeight})/2 +',left='+ (screen.width-{$file.popupWidth})/2 +',toolbar=no,menubar=no,location=no,resize=1,resizable=1{if NOT $file.is_image},scrollbars=yes{/if}');" *}
-
                 <li><a class="media_rename button_link" href="#" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
                 {if $file.is_image AND NOT $file.hotlink}
-                <li><a class="media_resize button_link" href="#" title="{$CONST.IMAGE_RESIZE}" onclick="location.href='?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}';"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
+                <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}'" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
                 {/if}
                 {if $file.is_image AND NOT $file.hotlink}
                 <li><a class="media_rotate_left button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
