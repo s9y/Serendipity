@@ -1075,9 +1075,11 @@ main {
     float: left;
 }
 
-#mediaPropertyForm .media_file_preview {
+#mediaPropertyForm .media_wrap_thumb {
+    display: inline-block;
     float: none;
-    margin: 1.5em 0;
+    margin: 0;
+    width: auto;
 }
 
 #entry_skip legend,
