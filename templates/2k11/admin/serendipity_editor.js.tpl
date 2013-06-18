@@ -298,7 +298,7 @@ function serendipity_imageSelector_done(textarea) {
     if (floating == "") {
         floating = "center";
     }
-    img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\" />";
+    img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\">";
 
     if ($("#radio_islink_yes").attr("checked")) {
         // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
@@ -425,6 +425,8 @@ function rescale(dim, newval) {
 }
 
 // Rename file in media db
+var media_rename = '{$CONST.ENTER_NEW_NAME}';
+var media_token_url = '{$media.token_url}';
 function rename(id, fname) {
     var newname;
     if (newname = prompt(media_rename + fname, fname)) {
@@ -680,7 +682,6 @@ function highlightComment(id, checkvalue) {
         $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
     }
     
-    
     // Set entry timestamp
     $('#reset_timestamp').click(function(e) {
         $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
@@ -835,6 +836,13 @@ function highlightComment(id, checkvalue) {
     $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
         e.preventDefault();
+    });
+
+    // Media file actions
+    $('.media_rename').click(function(e) {
+        e.preventDefault();
+        var $el = $(this);
+        rename($el.attr('data-fileid'), $el.attr('data-filename'));
     });
 
     // Confirm media scale
