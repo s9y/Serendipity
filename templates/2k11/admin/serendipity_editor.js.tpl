@@ -839,6 +839,17 @@ function highlightComment(id, checkvalue) {
     });
 
     // Media file actions
+    $('.media_fullsize').click(function(e) {
+        e.preventDefault();
+        var $el = $(this);
+        var filepath = $el.attr('href');
+        var pwidth = $el.attr('data-pwidth');
+        var pheight = $el.attr('data-pheight');
+        var ptop = (screen.height - pheight)/2;
+        var pleft = (screen.width - pwidth)/2;
+        window.open(filepath, 'Zoom', 'height='+pheight+',width='+pwidth+',top='+ptop+',left='+pleft+',toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes');
+    });
+
     $('.media_rename').click(function(e) {
         e.preventDefault();
         var $el = $(this);
