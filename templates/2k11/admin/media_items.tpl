@@ -1,7 +1,7 @@
 {foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
     {if NOT $media.manage}
         <article class="media_wrap_thumb {cycle values="odd,even"}">
-            <div class="media_file_thumb equal_heights">
+            <div class="media_file_thumb{if $media.enclose} equal_heights{/if}">
             {if $file.is_image AND $file.full_thumb}
                 {if $file.url}
                 <a href="{$file.url}&amp;serendipity[image]={$file.id}">
