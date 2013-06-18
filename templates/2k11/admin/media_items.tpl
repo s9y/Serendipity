@@ -164,7 +164,7 @@
                 </div>
             {/if}
             {if $file.is_image}
-                <a class="button_link icon_link state_submit" onclick="ic=window.open(this.href, 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1'); ic.focus(); return false;" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
+                <a id="media_crop" class="button_link icon_link state_submit" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
             {/if}
             </section>
 

@@ -856,6 +856,11 @@ function highlightComment(id, checkvalue) {
         rename($el.attr('data-fileid'), $el.attr('data-filename'));
     });
 
+    $('#media_crop').click(function(e) {
+        window.open($(this).attr('href'), 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
+        e.preventDefault();
+    });
+
     // Confirm media scale
     $('.image_scale').click(function(e) {
         if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();
