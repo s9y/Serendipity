@@ -80,7 +80,7 @@
                                 {if $plugin_data.sort_idx == 0}
                                     &nbsp;
                                 {else}
-                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}" style="border: 0">
+                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <img src="{serendipity_getFile file='admin/img/uparrow.png'}" height="16" width="16" border="0" alt="' . UP . '" />
                                     </a>
                                 {/if}
@@ -88,7 +88,7 @@
                                 {if $sort_idx == $total - 1}
                                     &nbsp;
                                 {else}
-                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]=$plugin_data{if $event_only}&amp;serendipity[event_plugin]=true{/if}" style="border: 0">
+                                    <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]=$plugin_data{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <img src="{serendipity_getFile file='admin/img/downarrow.png'}" height="16" width="16" alt="'. DOWN .'" border="0" />
                                     </a>
                                 {/if}
