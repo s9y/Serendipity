@@ -901,7 +901,8 @@ input[type=checkbox] {
 .comment_full,
 .serendipity_commentDirection,
 .entry_info,
-.pagination {
+.pagination,
+.media_choose > div {
     clear: both;
 }
 
@@ -1152,6 +1153,10 @@ main {
 #uploadform .form_select select,
 #uploadform .form_field input {
     width: 100%;
+}
+
+.configuration_group .media_choose input {
+    width: 90%;
 }
 
 #serendipity_category .form_multiselect label {
@@ -1807,6 +1812,16 @@ input[name="serendipity[filter][fileCategory]"] {
         max-width: 48%;
     }
 
+    .configuration_group .media_choose input {
+        margin-right: 1%;
+        max-width: 41.5%;
+    }
+
+    .media_choose .button_link {
+        position: relative;
+        top: 2px;
+    }
+
     .configuration_group .form_select,
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
@@ -1981,7 +1996,9 @@ input[name="serendipity[filter][fileCategory]"] {
 /* LARGER SCREEN (e.g. laptops)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1280px) {
-    
+    .configuration_group .media_choose input {
+        max-width: 42.5%;
+    }
 }
 
 

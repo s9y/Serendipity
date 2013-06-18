@@ -57,17 +57,16 @@
         <input name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$cbag_value}">
     </div>
 {elseif $ctype == 'media'}
-    <div class="clearfix">
+    <div class="form_field media_choose">
         <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
-        {* This should be solved using JS. *}
-        <div id="{$config_item}_preview" style="background-image: url({$value}); width: {$preview_width}; height: {$preview_height}; background-repeat: no-repeat;">&nbsp;</div>
-        {* This should be input[type=file] … *}
-        <input id="serendipity[{$postKey}][{$config_item}]" name="serendipity[{$postKey}][{$config_item}]" type="text" value="{$value}" onchange="change_preview('{$config_item}')">
+        
+        <input id="serendipity[{$postKey}][{$config_item}]" name="serendipity[{$postKey}][{$config_item}]" type="text" value="{$value}" onchange="change_preview('{$config_item}')">{* This should be input[type=file] … *}
 
-        <a href="#" onclick="choose_media('serendipity[{$postKey}][{$config_item}]')">{$CONST.MEDIA_LIBRARY}</a>
-        {* … not touching it in order to not break it for now. *}
+        <a class="button_link" href="#" title="{$CONST.MEDIA_LIBRARY}" onclick="choose_media('serendipity[{$postKey}][{$config_item}]')"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>
+
+        <div id="{$config_item}_preview" style="background-image: url({$value}); width: {$preview_width}; height: {$preview_height}; background-repeat: no-repeat;"></div>
     </div>
 {elseif $ctype == 'sequence'}
     {if !$sequencejs_output}
