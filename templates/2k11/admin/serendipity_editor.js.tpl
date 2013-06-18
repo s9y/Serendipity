@@ -824,6 +824,11 @@ function highlightComment(id, checkvalue) {
         checkInputs();
     });
 
+    $('.check_inputs').click(function(e) {
+        checkInputs();
+        e.preventDefault();
+    });
+
     // Limit width of media file info
     var $mediaPane = $('body').has('.media_pane');
 

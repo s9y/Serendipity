@@ -67,9 +67,9 @@
         </div>
         
         <div class="form_buttons">
-            <input type="submit" value="{$CONST.GO}" onclick="checkInputs();">
+            <input class="check_inputs" type="submit" value="{$CONST.GO}">
             <span class="hilite_b"> {$CONST.WORD_OR} </span>
-            <input name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}" onclick="checkInputs();">
+            <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
         </div>
     </div>
 </form>
