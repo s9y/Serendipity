@@ -1368,13 +1368,23 @@ form > .button_link:first-of-type {
 
 #template_select article,
 .media_file,
+.media_wrap_thumb,
 .plugins_installable > li {
     background: #eee;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0 0 1em;
+}
+
+#template_select article,
+.media_file,
+.plugins_installable > li {
     padding: 0 .5em 1em;
+}
+
+.media_wrap_thumb {
+    padding: .5em;
 }
 
 #serendipity_iframe {
@@ -1387,8 +1397,15 @@ form > .button_link:first-of-type {
 #template_select article,
 #serendipityScaleImg img,
 .media_file,
+.media_wrap_thumb,
 .plugins_installable > li {
     border: 1px solid #aaa;
+}
+
+.media_wrap_thumb {
+    float: left;
+    margin: 0 2% 1em 0;
+    width: 48%;
 }
 
 #serendipityScaleImg img {

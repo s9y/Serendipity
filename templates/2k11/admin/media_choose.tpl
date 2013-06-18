@@ -53,7 +53,6 @@
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script>
 var media_token_url = '{$media.token_url}';
 var media_rename = '{$CONST.ENTER_NEW_NAME}';
@@ -281,8 +280,11 @@ if (parent.frames && parent.frames['tree']) {
             <a id="managedirlink" class="button_link block_level" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
         </div>
     </div>
-
-    <script>
+{/if}{* if $media.case switch end *}
+</div> <!-- //.serendipityAdminContent end -->
+<script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
+{if $media.case == 'tree'}
+<script>
     var tree;
     var nodes = new Array();
     var nodeIndex;
@@ -319,9 +321,8 @@ if (parent.frames && parent.frames['tree']) {
     } 
 
     addLoadEvent(treeInit);
-    </script>
-{/if}{* if $media.case switch end *}
-</div> <!-- //.serendipityAdminContent end -->
+</script>
+{/if}
 </body>
 </html>
 {/if}{* $media.frameset else end *}

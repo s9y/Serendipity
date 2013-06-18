@@ -1,6 +1,7 @@
 {foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
     {if NOT $media.manage}
-        <div class="media_file_preview">
+        <article class="media_wrap_thumb {cycle values="odd,even"}">
+            <div class="media_file_thumb equal_heights">
             {if $file.is_image AND $file.full_thumb}
                 {if $file.url}
                 <a href="{$file.url}&amp;serendipity[image]={$file.id}">
@@ -27,10 +28,11 @@
                 </a>
                 {/if}
             {/if}
-        {if $file.orderkey != ''}
-            <span>{$file.orderkey|@escape}</span>
-        {/if}
-        </div>
+            {if $file.orderkey != ''}
+                <span>{$file.orderkey|@escape}</span>
+            {/if}
+            </div>
+        </article>
     {else}
         <article id="media_{$file.id}" class="media_file {cycle values="odd,even"}">
             <header class="clearfix">
