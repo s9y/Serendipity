@@ -486,8 +486,6 @@ legend > span > span,
 #uploadform label,
 #serendipity_admin_groups .form_field label,
 #serendipity_admin_groups .form_select label,
-#template_options .form_select label,
-#template_options .form_field label,
 .configuration_group .form_select label,
 .configuration_group .form_multiselect label,
 .configuration_group .form_field label,
@@ -548,7 +546,6 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
-#template_options div > a:focus,
 button:focus,
 input:focus,
 select:focus,
@@ -571,7 +568,6 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
-#template_options div > a,
 button,
 input[type="button"],
 input[type="reset"],
@@ -592,7 +588,6 @@ input[type="submit"] {
 }
 
 .button_link,
-#template_options div > a,
 button,
 input[type="button"] {
     background: #ddd;
@@ -634,7 +629,6 @@ input[type="submit"].state_cancel:visited {
 
 input:checked + .media_selector,
 .button_link:hover,
-#template_options div > a:hover,
 button:hover,
 input[type="button"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
@@ -667,7 +661,6 @@ input[type="submit"].state_cancel:focus {
 }
 
 .button_link:active,
-#template_options div > a:active,
 button:active,
 input[type="button"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
@@ -944,9 +937,6 @@ a:focus {
 a.button_link,
 a.button_link:hover,
 a.button_link:focus,
-#template_options div > a,
-#template_options div > a:hover,
-#template_options div > a:focus,
 .button_link > span:before {
     color: #000;
     text-decoration: none;
@@ -1155,8 +1145,6 @@ main {
     width: 85%;
 }
 
-#template_options .form_select select,
-#template_options .form_field input,
 .configuration_group .form_select select,
 .configuration_group .form_multiselect select,
 .configuration_group .form_field input,
@@ -1697,8 +1685,6 @@ input[name="serendipity[filter][fileCategory]"] {
         min-width: 16em;
     }
 
-    #template_options .form_select select,
-    #template_options .form_field input,
     .configuration_group .form_select select,
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
@@ -1787,10 +1773,6 @@ input[name="serendipity[filter][fileCategory]"] {
         width: auto;
     }
 
-    #template_options .form_select label,
-    #template_options .form_field label,
-    #template_options .form_select select,
-    #template_options .form_field input,
     #template_options fieldset legend,
     #template_options fieldset > .clearfix,
     .configuration_group .form_select label,
@@ -1816,8 +1798,6 @@ input[name="serendipity[filter][fileCategory]"] {
         width: 48%;
     }
 
-    #template_options .form_select select,
-    #template_options .form_field input,
     .configuration_group .form_select select,
     .configuration_group .form_multiselect select,
     .configuration_group .form_field input,
