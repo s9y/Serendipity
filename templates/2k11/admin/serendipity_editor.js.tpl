@@ -428,7 +428,7 @@ function rescale(dim, newval) {
 
 // Rename file in media db
 var media_rename = '{$CONST.ENTER_NEW_NAME}';
-var media_token_url = '{$media.token_url}';
+var media_token_url = '{$token_url}';
 function rename(id, fname) {
     var newname;
     if (newname = prompt(media_rename + fname, fname)) {
