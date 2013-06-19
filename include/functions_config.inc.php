@@ -751,6 +751,7 @@ function serendipity_is_iframe() {
         $iframe_mode         = $serendipity['GET']['iframe_mode'];
         $serendipity['POST'] = &$_SESSION['save_entry_POST'];
         $serendipity['GET']  = &$_SESSION['save_entry_POST']; // GET-Vars are the same as POST to ensure compatibility.
+        $serendipity['hidefooter'] = true;
         ignore_user_abort(true);
         echo serendipity_iframe($_SESSION['save_entry'], $iframe_mode);
         return true;
