@@ -90,13 +90,13 @@ class serendipity_plugin_api
     static function register_default_plugins()
     {
         /* Register default sidebar plugins, order matters */
-        serendipity_plugin_api::create_plugin_instance('@serendipity_calendar_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_quicksearch_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_archives_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_categories_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_syndication_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_superuser_plugin');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_plug_plugin');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_calendar');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_quicksearch');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_archives');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_categories');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_syndication');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_superuser');
+        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_plug');
 
         /* Register default event plugins */
         serendipity_plugin_api::create_plugin_instance('serendipity_event_s9ymarkup', null, 'event');
