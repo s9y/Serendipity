@@ -899,9 +899,17 @@ function highlightComment(id, checkvalue) {
 
     // Show extended comment
     $('.toggle_comment_full').click(function(e) {
-        var $toggles = $($(this).attr('href'));
+        var $el = $(this);
+        var $toggles = $($el.attr('href'));
         $toggles.toggleClass('additional_info');
         $toggles.prev().toggleClass('additional_info');
+        var $toggleIcon = $el.find('> span');
+        var $toggleState = $toggleIcon.attr('class');
+        if($toggleState == 'icon-minus') {
+            $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+        } else {
+            $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+        }
         e.preventDefault();
     });
 

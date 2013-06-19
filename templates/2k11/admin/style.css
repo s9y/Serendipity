@@ -1675,10 +1675,12 @@ form > .button_link:first-of-type {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #fcfcfc;
+    height: 100%;
     padding: .5em 1em;
     position: absolute;
     top: 0;
     left: 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
     width: 100%;
 }
 
@@ -2012,6 +2014,11 @@ input[name="serendipity[filter][fileCategory]"] {
         width: 85%;
     }
 
+    .js #edit_entry_metadata select {
+        width: 89%;
+    }
+
+    #edit_entry_title input,
     .no-js #edit_entry_metadata select {
         width: 100%;
     }
@@ -2039,6 +2046,10 @@ input[name="serendipity[filter][fileCategory]"] {
 @media only screen and (min-width: 1280px) {
     .configuration_group .media_choose input {
         max-width: 42.5%;
+    }
+
+    .js #edit_entry_metadata select {
+        width: 91%;
     }
 }
 
