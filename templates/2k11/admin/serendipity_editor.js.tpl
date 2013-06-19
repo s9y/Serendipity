@@ -827,6 +827,7 @@ function highlightComment(id, checkvalue) {
     }
 
     $('#add_upload').click(function(e) {
+        e.preventDefault();
         hideForeign();
         addUploadField();
     });

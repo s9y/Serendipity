@@ -62,13 +62,10 @@
         {serendipity_hookPlugin hook="backend_image_addform" hookAll=true}
 
         <div class="form_buttons">
-            <input id="add_upload" type="button" value="{$CONST.IMAGE_MORE_INPUT}">
             <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
-        </div>
-        
-        <div class="form_buttons">
+
+            <a id="add_upload" class="button_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
             <input class="check_inputs" type="submit" value="{$CONST.GO}">
-            <span class="hilite_b"> {$CONST.WORD_OR} </span>
             <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
         </div>
     </div>
