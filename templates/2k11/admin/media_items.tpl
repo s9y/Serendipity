@@ -183,7 +183,7 @@
                 </ul>
             </section>
 
-            <section class="media_file_metadata">
+            <section class="media_file_metadata clearfix">
                 <h4>EXIF/IPTC/XMP</h4>
             {foreach from=$file.metadata key="meta_type" item="meta_data"}
                 <h5>{$meta_type}</h5>
