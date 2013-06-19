@@ -838,7 +838,6 @@ function highlightComment(id, checkvalue) {
 
     $('.check_inputs').click(function(e) {
         checkInputs();
-        e.preventDefault();
     });
 
     // Limit width of media file info

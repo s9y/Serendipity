@@ -185,20 +185,19 @@
 
             <section class="media_file_metadata">
                 <h4>EXIF/IPTC/XMP</h4>
-
-                <dl>
             {foreach from=$file.metadata key="meta_type" item="meta_data"}
-                    <dt>{$meta_type}</dt>
+                <h5>{$meta_type}</h5>
                 {if is_array($meta_data)}
+                <dl class="clearfix">
                     {foreach from=$meta_data key="meta_name" item="meta_value"}
-                    <dd class="meta_name">{$meta_name}!</dd>
-                    <dd class="meta_value">{if is_array($meta_value)}<pre>{$meta_value|@print_r}</pre>{else}{$meta_value|@formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</dd>
+                    <dt>{$meta_name}</dt>
+                    <dd>{if is_array($meta_value)}{$meta_value|@print_r}{else}{$meta_value|@formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</dd>
                     {/foreach}
+                </dl>
                 {else}
-                    <dd>{$meta_data|@formatTime:DATE_FORMAT_SHORT:false:$meta_type}</dd>
+                <p>{$meta_data|@formatTime:DATE_FORMAT_SHORT:false:$meta_type}</p>
                 {/if}
             {/foreach}
-                </dl>
             </section>
         {if $file.references}
             <section class="media_file_referer">
