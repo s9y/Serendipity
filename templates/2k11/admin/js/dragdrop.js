@@ -1,7 +1,11 @@
 $("document").ready(function() {
-    $('.pluginmanager_container').sortable({
+    $('.pluginmanager_sidebar .pluginmanager_container').sortable(getDragdropConfiguration('plugins_sidebar'));
+    $('.pluginmanager_event .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
+
+    function getDragdropConfiguration(group) {
+        return {
             containerSelector: '.pluginmanager_container',
-            group: 'plugins',    // TODO: Distinguish between sidebar and event-plugin-container
+            group: group,
             handle: '.pluginmanager_grablet',
 
             onDrop: function ($item, container, _super) {
@@ -21,5 +25,5 @@ $("document").ready(function() {
                 $("body").addClass("dragging")
             }
         }
-    );
+    }
 });
