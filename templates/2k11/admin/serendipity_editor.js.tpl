@@ -165,7 +165,6 @@ function change_preview(id) {
     var filename = text_box.value;
 
     image_box.style.backgroundImage = 'url(' + filename + ')';
-    image_box.style.backgroundRepeat = 'no-repeat';
 }
 
 // Opens media db image selection in new window
@@ -757,6 +756,17 @@ function highlightComment(id, checkvalue) {
             e.preventDefault();
         });
     }
+
+    // Config option add media
+    $('.change_preview').change(function(e) {
+        change_preview($(this).attr('data-configitem'));
+    });
+
+    $('.choose_media').click(function(e) {
+        var configitem = $(this).parent().find('.change_preview').attr('id');
+        choose_media(configitem);
+        e.preventDefault();
+    });
 
     // Comments
     $('.comments_delete').click(function(e) {

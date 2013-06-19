@@ -902,7 +902,7 @@ input[type=checkbox] {
 .serendipity_commentDirection,
 .entry_info,
 .pagination,
-.media_choose > div {
+.media_choose .preview {
     clear: both;
 }
 
@@ -1159,6 +1159,13 @@ main {
 
 .configuration_group .media_choose input {
     width: 90%;
+}
+
+.media_choose .preview {
+    background-repeat: no-repeat;
+    height: auto;
+    margin: .75em 0;
+    max-width: 100%;
 }
 
 #serendipity_category .form_multiselect label {
