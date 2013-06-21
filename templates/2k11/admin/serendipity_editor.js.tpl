@@ -785,10 +785,9 @@ function highlightComment(id, checkvalue) {
         return confirm($msg);
     });
 
-    $('.comments_reply').click(function() {
-        cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-        cf.focus();
-        return false;
+    $('.comments_reply').click(function(e) {
+        e.preventDefault();
+        window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
     });
 
     $('.comments_multidelete').click(function() {
