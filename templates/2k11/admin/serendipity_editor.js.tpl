@@ -501,13 +501,6 @@ function checkSave() {
     return true;
 } 
 
-// Hides the foreign upload form if batch upload is used (if more
-// images are added)
-function hideForeign() {
-    $('#foreign_upload').hide();
-    $('#imageurl').val('');
-}
-
 // save in which directory the first uploaded files is stored (the default when only inserting one file)
 function rememberUploadOptions() {
     SetCookie("addmedia_directory", $('#target_directory_2').val());
@@ -862,7 +855,6 @@ function highlightComment(id, checkvalue) {
 
     $('#add_upload').click(function(e) {
         e.preventDefault();
-        hideForeign();
         addUploadField();
     });
 

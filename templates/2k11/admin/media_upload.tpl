@@ -1,7 +1,5 @@
 <h2>{$CONST.ADD_MEDIA}</h2>
 
-<div class="image_add_form">{$CONST.ADD_MEDIA_BLAHBLAH}</div>
-
 <form id="uploadform" action="?" method="POST" enctype="multipart/form-data">
     <div>
     {if $media.max_file_size}
@@ -12,23 +10,6 @@
         <input name="serendipity[adminModule]" type="hidden" value="images">
         <input name="serendipity[adminAction]" type="hidden" value="add">
         {$media.form_hidden}
-        <div id="foreign_upload" class="image_add_foreign">
-            <div class="form_field clearfix">
-                {* Probably could use input[type=url] here … *}
-                <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
-                <input id="imageurl" class="check_input" name="serendipity[imageurl]" type="text" value="">
-            </div>
-
-            <div class="form_select clearfix">
-                <label for="serendipity_imageimporttype">{$CONST.ENTER_MEDIA_URL_METHOD}</label>
-                <select name="serendipity[imageimporttype]">
-                    <option value="image">{$CONST.FETCH_METHOD_IMAGE}</option>
-                    <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
-                </select>
-            </div>
-
-            <span class="standalone hilite_b">{$CONST.WORD_OR}</span>
-        </div>
 
         <div id="upload_template" class="hidden">
             <div class="form_field clearfix">
@@ -68,5 +49,3 @@
         </div>
     </div>
 </form>
-
-<div class="image_add_note">{$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</div>
