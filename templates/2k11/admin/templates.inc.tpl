@@ -51,7 +51,7 @@
 
             <a class="template_show_info button_link" href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></a>
 
-             <a class="button_link state_submit" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration">{$CONST.CONFIGURATION}</a>
+             <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
         </article>
 
         <h2>{$CONST.SELECT_TEMPLATE}</h2>
