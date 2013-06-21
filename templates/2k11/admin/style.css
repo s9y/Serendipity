@@ -1685,6 +1685,7 @@ form > .button_link:first-of-type {
     width: 100%;
 }
 
+.no-js #show_config_all,
 .no-js .show_config_option .icon-minus,
 .no-js #reset_timestamp,
 .no-js .filters_toolbar,
