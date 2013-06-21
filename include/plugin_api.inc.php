@@ -11,9 +11,9 @@ if (defined('S9Y_FRAMEWORK_PLUGIN_API')) {
 }
 @define('S9Y_FRAMEWORK_PLUGIN_API', true);
 
-if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
-    include S9Y_INCLUDE_PATH . 'include/functions.inc.php';
-}
+
+include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
+
 
 
 /* Core API function mappings
