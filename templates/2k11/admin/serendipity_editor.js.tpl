@@ -239,7 +239,7 @@ function serendipity_imageSelector_addToBody (str, textarea) {
 // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
 // which works fine in NO WYSIWYG mode
 // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
-function noWysiwygAdd( str, textarea ) {
+function noWysiwygAdd(str, textarea) {
     wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
 }
 
@@ -428,6 +428,7 @@ function rescale(dim, newval) {
 // Rename file in media db
 var media_rename = '{$CONST.ENTER_NEW_NAME}';
 var media_token_url = '{$token_url}';
+
 function rename(id, fname) {
     var newname;
     if (newname = prompt(media_rename + fname, fname)) {
@@ -646,15 +647,15 @@ function highlightComment(id, checkvalue) {
     }
 
     // Form submit events
-    $('#uploadform').submit(function(e) {
+    $('#uploadform').submit(function() {
         rememberUploadOptions();
     });
 
-    $('#imageForm').submit(function(e) {
+    $('#imageForm').submit(function() {
         serendipity_imageSelector_done();
     });
 
-    $('#imgedit > form').submit(function(e) {
+    $('#imgedit > form').submit(function() {
         imgedit_getCoordinates();
     });
 
@@ -680,7 +681,7 @@ function highlightComment(id, checkvalue) {
     });
 
     // Editor tools
-    $('.wrap_selection').click(function(e) {
+    $('.wrap_selection').click(function() {
         var $el = $(this);
         var $tag = $el.attr('data-tag');
         var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
@@ -689,22 +690,22 @@ function highlightComment(id, checkvalue) {
         wrapSelection(target, open, close);
     });
 
-    $('.wrap_insimg').click(function(e) {
+    $('.wrap_insimg').click(function() {
         var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
         wrapInsImage(target);
     });
 
-    $('.wrap_insurl').click(function(e) {
+    $('.wrap_insurl').click(function() {
         var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
         wrapSelectionWithLink(target);
     });
 
-    $('.wrap_insmedia').click(function(e) {
+    $('.wrap_insmedia').click(function() {
         window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'), 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
 
     // Entry preview
-    $('.entry_preview').click(function(e) {
+    $('.entry_preview').click(function() {
         document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';
     });
 
@@ -768,7 +769,7 @@ function highlightComment(id, checkvalue) {
             });
     }
 
-    $('.change_preview').change(function(e) {
+    $('.change_preview').change(function() {
         change_preview($(this).attr('data-configitem'));
     });
 
@@ -779,18 +780,18 @@ function highlightComment(id, checkvalue) {
     });
 
     // Comments
-    $('.comments_delete').click(function(e) {
+    $('.comments_delete').click(function() {
         var $msg = $(this).attr('data-delmsg');
         return confirm($msg);
     });
 
-    $('.comments_reply').click(function(e) {
+    $('.comments_reply').click(function() {
         cf = window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
         cf.focus();
         return false;
     });
 
-    $('.comments_multidelete').click(function(e) {
+    $('.comments_multidelete').click(function() {
         return confirm('{$CONST.COMMENTS_DELETE_CONFIRM}');
     });
 
@@ -803,24 +804,24 @@ function highlightComment(id, checkvalue) {
         $('<a id="insert_image" class="button_link" name="insImage" href="#" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>').insertAfter('#category_icon');
     }
 
-    $('#insert_image').click(function(e) {
+    $('#insert_image').click(function() {
         window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&serendipity[filename_only]=true', 
                     'ImageSel', 
                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
 
-    $('#category_icon').change(function(e) {
+    $('#category_icon').change(function() {
         $('#imagepreview').attr('src', $('#category_icon').val());
     });
 
     // Selection for multidelete
-    $('.multidelete').click(function(e) {
+    $('.multidelete').click(function() {
         var $el = $(this);
         highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
     });
 
     // Invert checkboxes
-    $('.invert_selection').click(function(e) {
+    $('.invert_selection').click(function() {
         invertSelection();
     });
 
@@ -836,11 +837,11 @@ function highlightComment(id, checkvalue) {
     });
 
     // Check media db inputs
-    $('.check_input').change(function(e) {
+    $('.check_input').change(function() {
         checkInputs();
     });
 
-    $('.check_inputs').click(function(e) {
+    $('.check_inputs').click(function() {
         checkInputs();
     });
 
@@ -887,16 +888,16 @@ function highlightComment(id, checkvalue) {
     });
 
     // Confirm media scale
-    $('.image_scale').click(function(e) {
+    $('.image_scale').click(function() {
         if (confirm('{$CONST.REALLY_SCALE_IMAGE}')) document.serendipityScaleForm.submit();
     });
 
     // Media scale change events
-    $('#resize_width').change(function(e) {
+    $('#resize_width').change(function() {
         rescale('width' , $(this).val());
     });
 
-    $('#resize_height').change(function(e) {
+    $('#resize_height').change(function() {
         rescale('height' , $(this).val());
     });
 
