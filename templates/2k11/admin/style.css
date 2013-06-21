@@ -1834,6 +1834,8 @@ input[name="serendipity[filter][fileCategory]"] {
 
     #template_options fieldset legend,
     #template_options fieldset > .clearfix,
+    .configure_plugin fieldset legend,
+    .configure_plugin fieldset > .clearfix,
     .configuration_group .form_select label,
     .configuration_group .form_multiselect label,
     .configuration_group .form_field label,
@@ -1894,6 +1896,7 @@ input[name="serendipity[filter][fileCategory]"] {
         margin-top: 2.25em;
     }
 
+    .configure_plugin fieldset .form_radio,
     .configuration_group fieldset > fieldset .form_radio,
     #serendipity_plugin_config > fieldset .form_radio,
     #template_options fieldset .form_radio {

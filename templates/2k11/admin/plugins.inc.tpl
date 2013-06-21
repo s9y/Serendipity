@@ -12,7 +12,7 @@
     {elseif $saveconf}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
-    <form method="post" name="serendipityPluginConfigure">
+    <form class="configure_plugin" method="post" name="serendipityPluginConfigure">
         {$formToken}
         <div class="plugin_info">
             <h2>{$name} (<span class="plugin_class">{$class}</span>)</h2>
