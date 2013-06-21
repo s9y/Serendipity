@@ -12,36 +12,18 @@ if (defined('S9Y_FRAMEWORK_FUNCTIONS')) {
 @define('S9Y_FRAMEWORK_FUNCTIONS', true);
 
 $serendipity['imageList'] = array();
-if (!defined('S9Y_FRAMEWORK_DB')) {
-    include(S9Y_INCLUDE_PATH . "include/db/db.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_COMPAT')) {
-    include(S9Y_INCLUDE_PATH . "include/compat.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_CONFIG')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_config.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
-    include(S9Y_INCLUDE_PATH . "include/plugin_api.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_IMAGES')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_images.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_INSTALLER')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_installer.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_ENTRIES')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_entries.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_COMMENTS')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_comments.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_PERMALINKS')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_permalinks.inc.php");
-}
-if (!defined('S9Y_FRAMEWORK_SMARTY')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_smarty.inc.php");
-}
+
+include_once(S9Y_INCLUDE_PATH . "include/db/db.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/compat.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_config.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/plugin_api.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_images.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_installer.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_entries.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_comments.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_permalinks.inc.php");
+include_once(S9Y_INCLUDE_PATH . "include/functions_smarty.inc.php");
+
 /**
  * Truncate a string to a specific length, multibyte aware. Appends '...' if successfully truncated
  *

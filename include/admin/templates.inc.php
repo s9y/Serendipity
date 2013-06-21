@@ -120,7 +120,7 @@ if (is_array($template_config)) {
 
     $data["form_token"] = serendipity_setFormToken();
 
-    include S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
+    include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 
     $template_vars =& serendipity_loadThemeOptions($template_config);
     

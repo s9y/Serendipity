@@ -378,9 +378,9 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 }
 
 
-if (!defined('S9Y_FRAMEWORK_FUNCTIONS')) {
-    include  dirname(dirname(__FILE__)) . "/functions.inc.php";
-}
+
+include_once  dirname(dirname(__FILE__)) . "/functions.inc.php";
+
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();

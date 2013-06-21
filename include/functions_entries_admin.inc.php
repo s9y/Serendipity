@@ -11,9 +11,9 @@ if (defined('S9Y_FRAMEWORK_ENTRIES_ADMIN')) {
 }
 @define('S9Y_FRAMEWORK_ENTRIES_ADMIN', true);
 
-if (!defined('S9Y_FRAMEWORK_TRACKBACKS')) {
-    include(S9Y_INCLUDE_PATH . "include/functions_trackbacks.inc.php");
-}
+
+include_once(S9Y_INCLUDE_PATH . "include/functions_trackbacks.inc.php");
+
 
 /**
  * Prints the form for editing/creating new blog entries

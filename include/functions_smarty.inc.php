@@ -867,7 +867,7 @@ function serendipity_smarty_init($vars = array()) {
         if (!defined('IN_serendipity_admin') && file_exists($template_dir . '/template.inc.php')) {
             // If this file exists, a custom template engine will be loaded.
             // Beware: Smarty is used in the Admin backend, despite of this.
-            include $template_dir . '/template.inc.php';
+            include_once $template_dir . '/template.inc.php';
         } else {
             // Set a session variable if Smarty fails:
             $prev_smarty = $_SESSION['no_smarty'];
@@ -880,7 +880,7 @@ function serendipity_smarty_init($vars = array()) {
             // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
             if (!class_exists('Smarty')) {
-                include SMARTY_DIR . 'Smarty.class.php';
+                include_once SMARTY_DIR . 'Smarty.class.php';
             }
 
             if (!class_exists('Smarty')) {
@@ -889,7 +889,7 @@ function serendipity_smarty_init($vars = array()) {
 
             // Load serendipity smarty class loading class
             if (!class_exists('Serendipity_Smarty')) {
-                include 'serendipity_smarty_class.inc.php';
+                include_once 'serendipity_smarty_class.inc.php';
             }
             
             if (!class_exists('Serendipity_Smarty')) {

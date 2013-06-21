@@ -24,7 +24,7 @@ switch ($serendipity['GET']['adminAction']) {
             return true;
         }
 
-        include(S9Y_INCLUDE_PATH . "include/functions_images_crop.inc.php");
+        include_once(S9Y_INCLUDE_PATH . "include/functions_images_crop.inc.php");
         $media['is_imgedit'] = true;
         $media['css_imgedit'] = serendipity_getTemplateFile('admin/imgedit.css');
 

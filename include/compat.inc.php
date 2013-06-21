@@ -342,7 +342,7 @@ function serendipity_detectLang($use_include = false) {
             $preferred_language = strtolower(preg_replace('@^([^\-_;]*)_?.*$@', '\1', $lang));
             if (in_array($preferred_language, $supported_languages)) {
                 if ($use_include) {
-                    @include(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_' . $preferred_language . '.inc.php');
+                    @include_once(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_' . $preferred_language . '.inc.php');
                     $serendipity['autolang'] = $preferred_language;
                 }
                 return $preferred_language;

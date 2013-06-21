@@ -6,13 +6,11 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (!defined('S9Y_FRAMEWORK')) {
-    include('serendipity_config.inc.php');
-}
+include_once('serendipity_config.inc.php');
 
-if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
-    include(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
-}
+
+include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
+
 
 $uri_addData = array(
     'startpage' => false,
