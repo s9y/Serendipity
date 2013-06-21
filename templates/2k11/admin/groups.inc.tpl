@@ -117,7 +117,8 @@
         {/if}
             <div class="form_buttons">
         {if $edit}
-                <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}"> {$CONST.WORD_OR} <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
+                <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
+                <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
         {else}
                 <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
         {/if}
