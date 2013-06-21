@@ -128,8 +128,7 @@ if (is_array($template_config)) {
     $template_options->import($template_config);
     $template_options->values =& $template_vars;
 
-    ob_start();
-    serendipity_plugin_config(
+    $data["configuration"] = serendipity_plugin_config(
         $template_options,
         $template_vars,
         $serendipity['template'],
@@ -142,56 +141,50 @@ if (is_array($template_config)) {
         'template',
         $template_config_groups
     );
-    $data["configuration"] = ob_get_contents();
-    ob_end_clean();
     
     serendipity_plugin_api::hook_event('backend_templates_configuration_bottom', $template_config);
 } else {
     serendipity_plugin_api::hook_event('backend_templates_configuration_none', $template_config);
 }
 
-    $i = 0;
-    $stack = array();
-    serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
-    $themes = serendipity_fetchTemplates();
-    $data['templates'] = array();
-    $data['templates'][$theme] = array();
-    foreach($themes AS $theme) {
-        $stack[$theme] = serendipity_fetchTemplateInfo($theme);
+$i = 0;
+$stack = array();
+serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
+$themes = serendipity_fetchTemplates();
+$data['templates'] = array();
+$data['templates'][$theme] = array();
+foreach($themes AS $theme) {
+    $stack[$theme] = serendipity_fetchTemplateInfo($theme);
+}
+ksort($stack);
+
+
+foreach ($stack as $theme => $info) {
+    $data['templates'][$theme]['info'] = $info;
+    /* Sorry, but we don't display engines */
+    if ( strtolower($info['engine']) == 'yes' ) {
+        continue;
     }
-    ksort($stack);
 
-    
-    foreach ($stack as $theme => $info) {
-        $data['templates'][$theme]['info'] = $info;
-        /* Sorry, but we don't display engines */
-        if ( strtolower($info['engine']) == 'yes' ) {
-            continue;
-        }
-
-        if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg')) {
-            $data['templates'][$theme]['fullsize_preview'] = $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg';
-        } elseif (!empty($info['preview_fullsizeURL'])) {
-            $data['templates'][$theme]['fullsize_preview'] = $info['preview_fullsizeURL'];
-        }
-
-        if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
-            $data['templates'][$theme]['preview'] = $serendipity['templatePath'] . $theme . '/preview.png';
-        } elseif (!empty($info['previewURL'])) {
-            $data['templates'][$theme]['preview'] = $info['previewURL'] ;
-        }
-
-        $unmetRequirements = array();
-        if ( isset($info['require serendipity']) && version_compare($info['require serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
-            $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
-            $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
-        }
-
-        /* TODO: Smarty versioncheck */
+    if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg')) {
+        $data['templates'][$theme]['fullsize_preview'] = $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg';
+    } elseif (!empty($info['preview_fullsizeURL'])) {
+        $data['templates'][$theme]['fullsize_preview'] = $info['preview_fullsizeURL'];
     }
-    
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
+
+    if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {
+        $data['templates'][$theme]['preview'] = $serendipity['templatePath'] . $theme . '/preview.png';
+    } elseif (!empty($info['previewURL'])) {
+        $data['templates'][$theme]['preview'] = $info['previewURL'] ;
+    }
+
+    $unmetRequirements = array();
+    if ( isset($info['require serendipity']) && version_compare($info['require serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
+        $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
+        $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
+    }
+
+    /* TODO: Smarty versioncheck */
 }
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);

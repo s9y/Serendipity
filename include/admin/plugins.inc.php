@@ -149,10 +149,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     }
 
     $data['license'] = $license;
-    ob_start();
-    serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
-    $data['config'] = ob_get_contents();
-    ob_end_clean();
+    $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
 } elseif ( $serendipity['GET']['adminAction'] == 'addnew' ) {
     $data['adminAction'] = 'addnew';

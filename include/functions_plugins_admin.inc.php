@@ -224,7 +224,7 @@ function show_plugins($event_only = false, $sidebars = null)
  * @param  boolean  Spawn a plugins' configuration WYSIWYG items?
  * @param  string   The array index name of POSTed values ($serendipity['POST'][xxx])
  * @param  array    An array that groups certain config keys
- * @return boolean
+ * @return string   The configuration HTML
  */
 function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_names, $showTable = true, $showSubmit = true, $showExample = true, $spawnNuggets = true, $postKey = 'plugin', $config_groups = NULL) {
     global $serendipity;
@@ -647,7 +647,5 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['ev'] = $ev;
     }
 
-    echo serendipity_smarty_show('admin/plugin_config.tpl', $data);
-
-    return true;
+    return serendipity_smarty_show('admin/plugin_config.tpl', $data);
 }
