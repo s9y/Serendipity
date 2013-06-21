@@ -458,6 +458,8 @@ function getfilename(value) {
 var inputStorage = new Array();
 
 function checkInputs() { 
+    upload_fieldcount = $('.uploadform_userfile').length;
+
     for (i = 1; i <= upload_fieldcount; i++) { 
         if (!inputStorage[i]) { 
             fillInput(i, i);
@@ -491,9 +493,8 @@ function rememberUploadOptions() {
 function addUploadField() {
     upload_fieldcount = $('.uploadform_userfile').length + 1;
 
-    var $fields = $('#upload_template').clone(true);
+    var $fields = $('#uploads > div:last-child').clone(true);
     $fields.attr('id', 'upload_form_' + upload_fieldcount);
-    $fields.removeClass('hidden');
 
     var userfile             = $('.uploadform_userfile',               $fields);
     var userfile_label       = $('.uploadform_userfile_label',         $fields);
@@ -508,15 +509,16 @@ function addUploadField() {
 
     targetfilename.attr('id', 'target_filename_' + upload_fieldcount);
     targetfilename.attr('name', 'serendipity[target_filename][' + upload_fieldcount + ']');
+    targetfilename.val('');
     targetfilename_label.attr('for', 'target_filename_' + upload_fieldcount);
 
     targetdir.attr('id', 'target_directory_' + upload_fieldcount);
     targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
+    // This looks weird, but works. If anyone can improve this, by all means do so.
+    targetdir.val($($('#target_directory_' + (upload_fieldcount - 1))).val());
     targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
-    $fields.insertBefore('#upload_form');
-    // This looks weird, but works. If anyone can improve this, by all means do so.
-    $('#' + targetdir.attr('id')).val($($('#target_directory_' + (upload_fieldcount - 1))).val());
+    $fields.appendTo('#uploads');
 }
 
 // Inverts a selection of checkboxes
@@ -828,12 +830,6 @@ function highlightComment(id, checkvalue) {
     });
 
     // Add media db upload field
-    var $uploadForm = $('body').has('#uploadform');
-
-    if($uploadForm.size() > 0) {
-        addUploadField();
-    }
-
     $('#add_upload').click(function(e) {
         e.preventDefault();
         addUploadField();
