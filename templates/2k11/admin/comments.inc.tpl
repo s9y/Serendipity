@@ -113,7 +113,7 @@
                         <dt>IP:</dt>
                         <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {$comment.action_ip}</dd>
                         <dt>URL:</dt>
-                        <dd>{if empty($comment.url)}N/A{else}<a class="icon_link" href="{$comment.url|escape}" title="{$comment.url|escape}"><span class="icon-link"></span> {$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
+                        <dd>{if empty($comment.url)}N/A{else}<a href="{$comment.url|escape}" title="{$comment.url|escape}">{$comment.url|escape|truncate:40:"&hellip;"}</a> {/if} {$comment.action_url}</dd>
                         <dt>{$CONST.REFERER}:</dt>
                         <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
                     </dl>

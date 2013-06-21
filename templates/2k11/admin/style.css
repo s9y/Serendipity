@@ -860,7 +860,8 @@ input[type=radio] + label,
     font-weight: normal;
 }
 
-input[type=checkbox] {
+input[type=checkbox],
+#category_icon {
     margin-right: .4em;
 }
 

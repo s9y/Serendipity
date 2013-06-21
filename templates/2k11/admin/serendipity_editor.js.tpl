@@ -790,7 +790,7 @@ function highlightComment(id, checkvalue) {
     var $catIcon = $('body').has('#category_icon');
 
     if($catIcon.size() > 0) {
-        $('<input id="insert_image" name="insImage" type="button" value="{$CONST.IMAGE}">').insertAfter('#category_icon');
+        $('<a id="insert_image" class="button_link" name="insImage" href="#" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>').insertAfter('#category_icon');
     }
 
     $('#insert_image').click(function(e) {
