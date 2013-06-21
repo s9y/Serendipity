@@ -303,12 +303,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $data['postKey']     = $postKey;
         $data['config_item'] = $config_item;
 
-        ob_start();
-
         switch ($ctype) {
             case 'seperator': 
                 $data['ctype'] = 'seperator';
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -331,7 +329,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['select_size']      = $select_size  = $cbag->get('select_size');
                 $data['select']           = $select = $cbag->get('select_values');
 
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -383,7 +381,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     $data['radio_button'][$radio_index]['index'] = htmlspecialchars($radio['desc'][$radio_index]);
                 }
 
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -396,7 +394,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                 }
                 $data['input_type'] = $input_type;
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -416,39 +414,33 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                     serendipity_emit_htmlarea_code('nuggets', 'nuggets', true);
                 }
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                break;
 
             case 'content': 
                 $data['ctype'] = 'content';
                 $data['cbag_default'] = $cbag->get('default');
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'custom': 
                 $data['ctype'] = 'custom';
                 $data['cbag_custom'] = $cbag->get('custom');
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'hidden': 
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'media': 
                 $data['ctype'] = 'media';
-                // Output the JavaScript, if we haven't already
-                $data['mediajs_output'] = $mediajs_output = $serendipity['mediajs_output'];
-                if (!$mediajs_output)
-                {
-                    $serendipity['mediajs_output'] = true;
-                }
                 // Print the HTML to display the popup media selector
                 $preview_width = $cbag->get('preview_width');
                 if (!$preview_width || $preview_width == "") {
@@ -460,8 +452,9 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 }
                 $data['preview_width']  = $preview_width;
                 $data['preview_height'] = $preview_height;
+                $data['value'] = $value;
 
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -588,7 +581,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 }
                 // Print the Javascript to drag-n-drop the list
                 // Finish the row
-                echo serendipity_smarty_show($tfile, $data);
+                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -604,13 +597,14 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     'bag'         => $bag,
                     'postKey'     => $postKey
                 );
+                ob_start();
                 serendipity_plugin_api::hook_event('backend_pluginconfig_' . $ctype, $eventData, $addData);
-
+                $out_stack[$config_item] = ob_get_contents();
+                ob_end_clean();
                 break;
         }
 
-        $out_stack[$config_item] = ob_get_contents();
-        ob_end_clean();
+        
     }
     $data['config_groups'] = $config_groups;
     $data['OUT_STACK']     = $out_stack;
