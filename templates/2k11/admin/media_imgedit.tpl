@@ -1,6 +1,6 @@
-{* Erm, why isn't this localized at all? o_O A: (cite Garvin) http://board.s9y.org/viewtopic.php?f=10&t=18967&p=10432556#p10432556*}
+{* Why isn't this localized at all? http://board.s9y.org/viewtopic.php?f=10&t=18967&p=10432556#p10432556*}
     <div id="imgedit" class="clearfix">
-        <form method="post" action="{$imgedit.my_url}" onsubmit="imgedit_getCoordinates()">
+        <form method="post" action="{$imgedit.my_url}">
             <input id="area_orientation" name="area_orientation" type="hidden"  value="{$imgedit.area_orientation}">
             <input id="zoombox_factor" name="zoombox_factor" type="hidden" value="{$imgedit.zoombox_factor}">
             <input id="zoombox_x" name="zoombox_x" type="hidden" value="{$imgedit.zoombox_x}">

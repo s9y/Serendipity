@@ -669,6 +669,19 @@ function highlightComment(id, checkvalue) {
         toggle_extended();
     }
 
+    // Form submit events
+    $('#uploadform').submit(function(e) {
+        rememberUploadOptions();
+    });
+
+    $('#imageForm').submit(function(e) {
+        serendipity_imageSelector_done();
+    });
+
+    $('#imgedit > form').submit(function(e) {
+        imgedit_getCoordinates();
+    });
+
     // Click events
     //
     // Show entry timestamp

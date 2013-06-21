@@ -1,10 +1,8 @@
-{* Customization notes: All classnames and especially DOM IDs should be kept to keep compatibility with JavaScript calls! *}
-
 <h2>{$CONST.ADD_MEDIA}</h2>
 
 <div class="image_add_form">{$CONST.ADD_MEDIA_BLAHBLAH}</div>
 
-<form id="uploadform" action="?" method="POST" enctype="multipart/form-data" onsubmit="rememberUploadOptions()">
+<form id="uploadform" action="?" method="POST" enctype="multipart/form-data">
     <div>
     {if $media.max_file_size}
         <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">

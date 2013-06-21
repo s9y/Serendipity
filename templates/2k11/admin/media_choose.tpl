@@ -114,7 +114,7 @@ if (parent.frames && parent.frames['tree']) {
 
         <img src="{$media.file.imgsrc}" alt="">
         
-        <form id="imageForm" name="serendipity[selForm]" action="#" method="GET" onsubmit="serendipity_imageSelector_done()">
+        <form id="imageForm" name="serendipity[selForm]" action="#" method="GET">
             {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_hiddenfields' eventData=$media.file}
             <input name="imgThumbWidth" type="hidden" value="{$media.file.thumbWidth}">
             <input name="imgThumbHeight" type="hidden" value="{$media.file.thumbHeight}">
