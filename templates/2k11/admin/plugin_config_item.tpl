@@ -1,7 +1,7 @@
 {if $ctype == 'seperator'}
     <hr>
 {elseif $ctype == 'select'}
-    <div class="form_select">
+    <div class="clearfix form_select">
         <label for="serendipity_{$config_item}">{$cname}
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
@@ -28,7 +28,7 @@
         </div>
     </fieldset>
 {elseif $ctype == 'string'}
-    <div class="form_field">
+    <div class="clearfix form_field">
         <label for="serendipity_{$config_item}">{$cname}
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
@@ -36,7 +36,7 @@
         <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
     </div>
 {elseif (($ctype == 'html') || ($ctype == 'text'))}
-    <div class="form_area">
+    <div class="clearfix form_area">
         <label for="nuggets{$elcount}">{$cname}
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
@@ -57,7 +57,7 @@
         <input name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$cbag_value}">
     </div>
 {elseif $ctype == 'media'}
-    <div class="form_field media_choose">
+    <div class="clearfix form_field media_choose">
         <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
