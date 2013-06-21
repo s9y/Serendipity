@@ -1876,13 +1876,7 @@ input[name="serendipity[filter][fileCategory]"] {
         clear: left;
     }
 
-    .configuration_group .form_select,
-    .configuration_group .form_multiselect,
-    .configuration_group .form_field,
-    .configuration_group .form_area,
-    .configuration_group fieldset > fieldset,
-    #serendipityScaleImg,
-    .media_file header {
+    #serendipityScaleImg {
         overflow: hidden;
     }
 

@@ -18,14 +18,14 @@
         {foreach $category.items as $item}
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
-                <fieldset>
+                <fieldset class="clearfix">
                     <legend><span>{$item.title} <span>{$item.description}</span></span></legend>
                     <div class="clearfix">
                     {$item.guessedInput}
                     </div>
                 </fieldset>
                 {else}
-                <div class="form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
+                <div class="clearfix form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
                     <label for="{$item.var}">{$item.title}<span>{$item.description}</span></label>
                     {$item.guessedInput}
                 </div>

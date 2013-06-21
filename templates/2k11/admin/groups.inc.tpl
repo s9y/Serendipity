@@ -41,13 +41,13 @@
     {else}
         <h3>{$CONST.CREATE}</h3>
     {/if}
-        <div class="form_field">
+        <div class="clearfix form_field">
             <label for="group_name">{$CONST.NAME}</label>
             {* BUG: Doesn't pull the group name; this doesn't work in 1.7, either. *}
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:"html"}">
         </div>
 
-        <div class="form_select">
+        <div class="clearfix form_select">
             <label for="group_members">{$CONST.USERCONF_GROUPS}</label>
             <select id="group_members" name="serendipity[members][]" multiple size="5">
                 {foreach $allusers as $user}
@@ -95,7 +95,7 @@
         </li></ul>
 
         {if $enablePluginACL}
-            <div class="form_select">
+            <div class="clearfix form_select">
                 <label for="forbidden_plugins">{$CONST.PERMISSION_FORBIDDEN_PLUGINS}</label>
                 <select id="forbidden_plugins" name="serendipity[forbidden_plugins][]" multiple size="5">
                 {foreach $allplugins as $plugin}
@@ -104,7 +104,7 @@
                 </select>
             </div>
 
-            <div class="form_select">
+            <div class="clearfix form_select">
                 <label for="forbidden_hooks">{$CONST.PERMISSION_FORBIDDEN_HOOKS}</label>
                 <select name="serendipity[forbidden_hooks][]" multiple size="5">
                 {foreach $allhooks as $hook}
