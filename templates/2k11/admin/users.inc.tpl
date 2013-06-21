@@ -88,8 +88,8 @@
             <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_USER|sprintf:"{$userid}":"{$realname|escape:"html"}"}</span>
 
             <div class="form_buttons">
-                <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
                 <input class="state_cancel" name="NO" type="submit" value="{$CONST.NOT_REALLY}">
+                <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">
             </div>
         </div>
     </form>

@@ -31,8 +31,8 @@
         </fieldset>
 
         <div class="form_buttons">
-            <input name="doSync" type="submit" value="{$CONST.CREATE_THUMBS}">
             <a href="serendipity_admin.php" class="button_link state_cancel">{$CONST.ABORT_NOW}</a>
+            <input name="doSync" type="submit" value="{$CONST.CREATE_THUMBS}">
         </div>
     </form>
     {/if}
@@ -57,8 +57,8 @@
 
     <form id="delete_image" method="get">
         <div class="form_buttons">
-            <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
             <a class="button_link state_cancel icon_link" href="{$abortLoc}">{$CONST.ABORT_NOW}</a>
+            <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
         </div>
     </form>
 {/if}
