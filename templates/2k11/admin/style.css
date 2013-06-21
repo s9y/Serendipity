@@ -518,7 +518,8 @@ form > a {
 #serendipity_image_folders,
 #serendipity_image_folders ul,
 #serendipity_admin_groups ul,
-.imageMessage ul {
+.imageMessage ul,
+.sequence_container {
     list-style: none;
     padding: 0;
 }
@@ -1533,6 +1534,9 @@ form > .button_link:first-of-type {
 .pluginmanager_container {
     background: transparent;
     border: 1px solid #ddd;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     height: 98%;
     margin: 0;
     min-height: 12.5em;
@@ -1618,6 +1622,17 @@ form > .button_link:first-of-type {
 
 .pluginmanager_description {
     margin: 0 0 .5em;
+}
+
+.configuration_group .sequence_grablet,
+.configuration_group .sequence_item .form_check {
+    display: inline-block;
+    margin: 0 .4em 0 0;
+}
+
+.configuration_group .sequence_item {
+    padding: .25em;
+    margin: 0 0 .25em;
 }
 
 #template_select h3,
@@ -1837,6 +1852,7 @@ input[name="serendipity[filter][fileCategory]"] {
     #template_options fieldset > .clearfix,
     .configure_plugin fieldset legend,
     .configure_plugin fieldset > .clearfix,
+    .configure_plugin .sequence_container,
     .configuration_group .form_select label,
     .configuration_group .form_multiselect label,
     .configuration_group .form_field label,
