@@ -1685,6 +1685,15 @@ form > .button_link:first-of-type {
     width: 100%;
 }
 
+.no-js .show_config_option .icon-minus,
+.no-js #reset_timestamp,
+.no-js .filters_toolbar,
+.no-js .invert_selection,
+.no-js .toggle_comment_full,
+.no-js #add_upload,
+.no-js .media_show_info,
+.no-js .media_rename,
+.no-js .template_show_info,
 .no-js .comment_summary,
 .no-js .editor_toolbar,
 .js .additional_info {
@@ -1923,7 +1932,7 @@ input[name="serendipity[filter][fileCategory]"] {
         right: auto;
     }
 
-    #categoryselector {
+    .js #categoryselector {
         margin-left: 2.5em;
     }
 
