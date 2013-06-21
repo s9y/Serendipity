@@ -758,6 +758,27 @@ function highlightComment(id, checkvalue) {
     }
 
     // Config option add media
+    var $hasChooseMedia = $('body').has('.media_choose');
+
+    if($hasChooseMedia.size() > 0) {
+        var $el = $('.media_choose');
+        var $item = $el.find('> input');
+        var configItem = $item.attr('data-configitem');
+        var mWidth = $item.attr('data-pmwidth');
+        var mHeight = $item.attr('data-pmheight');
+        if($item.val() != '') {
+            var bgImg = 'url(' + $item.val() + ')';
+        } else {
+            var bgImg = 'none';
+        }
+        $('<div id="'+configItem+'_preview" class="preview"/>').appendTo($el)
+            .css({
+                backgroundImage: bgImg,
+                minWidth: mWidth,
+                minHeight: mHeight
+            });
+    }
+
     $('.change_preview').change(function(e) {
         change_preview($(this).attr('data-configitem'));
     });

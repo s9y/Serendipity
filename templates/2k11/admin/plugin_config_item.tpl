@@ -62,11 +62,9 @@
         {if $cdesc != ''}<span>{$cdesc}</span>{/if}
         </label>
         
-        <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" value="{$value}">{* This should be input[type=file] … *}
+        <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" data-pmwidth="{$preview_width}" data-pmheight="{$preview_height}" value="{$value}">{* This should be input[type=file] … *}
 
         <a class="button_link choose_media" href="#serendipity[{$postKey}][{$config_item}]" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>
-
-        <div id="{$config_item}_preview" class="preview" style="background-image: url({$value}); min-width: {$preview_width}; min-height: {$preview_height};"></div>
     </div>
 {elseif $ctype == 'sequence'}
     {if !$sequencejs_output}

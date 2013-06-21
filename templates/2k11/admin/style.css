@@ -1159,7 +1159,7 @@ main {
     width: 100%;
 }
 
-.configuration_group .media_choose input {
+.js .configuration_group .media_choose input {
     width: 90%;
 }
 
@@ -1692,6 +1692,7 @@ form > .button_link:first-of-type {
 .no-js .invert_selection,
 .no-js .toggle_comment_full,
 .no-js #add_upload,
+.no-js .choose_media,
 .no-js .media_show_info,
 .no-js .media_rename,
 .no-js .template_show_info,
@@ -1868,7 +1869,7 @@ input[name="serendipity[filter][fileCategory]"] {
         max-width: 48%;
     }
 
-    .configuration_group .media_choose input {
+    .js .configuration_group .media_choose input {
         margin-right: 1%;
         max-width: 41.5%;
     }
@@ -2052,7 +2053,7 @@ input[name="serendipity[filter][fileCategory]"] {
 /* LARGER SCREEN (e.g. laptops)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1280px) {
-    .configuration_group .media_choose input {
+    .js .configuration_group .media_choose input {
         max-width: 42.5%;
     }
 
