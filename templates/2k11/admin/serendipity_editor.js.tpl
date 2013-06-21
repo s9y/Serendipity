@@ -468,32 +468,13 @@ function checkInputs() {
 }
 
 function fillInput(source, target) { 
-    useDuplicate = false;
-
-    // First field is a special value for foreign URLs instead of uploaded files
-    if (source == 1 && document.getElementById('imageurl').value != "") { 
-        sourceval = getfilename(document.getElementById('imageurl').value);
-        useDuplicate = true;
-    } else { 
-        sourceval = getfilename(document.getElementById('userfile_' + source).value);
-    }
+    sourceval = getfilename(document.getElementById('userfile_' + source).value);
 
     if (sourceval.length > 0) { 
         document.getElementById('target_filename_' + target).value = sourceval;
         inputStorage[target] = sourceval;
     }
-
-    // Display filename in duplicate form as well!
-    if (useDuplicate) { 
-        tkey = target + 1;
-
-        if (!inputStorage[tkey] || inputStorage[tkey] == document.getElementById('target_filename_' + tkey).value) { 
-            document.getElementById('target_filename_' + (target+1)).value = sourceval;
-            inputStorage[target + 1] = '~~~';
-        }
-    }
 }
-// end …?
 
 // …?
 function checkSave() { 
@@ -510,7 +491,7 @@ function rememberUploadOptions() {
 function addUploadField() {
     upload_fieldcount = $('.uploadform_userfile').length + 1;
 
-    var $fields = $('#upload_template').clone();
+    var $fields = $('#upload_template').clone(true);
     $fields.attr('id', 'upload_form_' + upload_fieldcount);
     $fields.removeClass('hidden');
 
