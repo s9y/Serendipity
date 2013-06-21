@@ -598,7 +598,7 @@ input[type="button"] {
     background-image: -o-linear-gradient(#fff, #ddd);
     background-image: linear-gradient(#fff, #ddd);
     border-color: #ddd #bbb #999;
-    color: #000;
+    color: #222;
     text-shadow: #fff 0 1px 1px;
 }
 
@@ -942,7 +942,7 @@ a.button_link,
 a.button_link:hover,
 a.button_link:focus,
 .button_link > span:before {
-    color: #000;
+    color: #222;
     text-decoration: none;
 }
 
@@ -1685,7 +1685,7 @@ form > .button_link:first-of-type {
 
 .js .media_pane .media_file_meta,
 .js .template_info {
-    background: #000;
+    background: #222;
     background: rgba(0,0,0,.6);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
