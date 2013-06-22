@@ -904,13 +904,25 @@ input[type=checkbox],
     margin-bottom: 0;
 }
 
+.configure_plugin .configuration_group > fieldset {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+}
+
 .configuration_group fieldset > fieldset,
 .theme_options .configuration_group > fieldset,
+.configure_plugin .configuration_group > fieldset,
+.configure_plugin .config_optiongroup .odd,
+.configure_plugin .config_optiongroup .even,
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_select,
 .configuration_group .form_multiselect {
     padding: .75em 0;
+}
+
+.configure_plugin .configuration_group > h3 + fieldset {
+    padding: 0;
 }
 
 .importer_data dd,
@@ -1463,6 +1475,7 @@ form > .button_link:first-of-type {
 
 .zebra_list,
 .option_list,
+.configure_plugin .odd:first-of-type,
 #categories .odd,
 #categories .even,
 #serendipity_image_folders .odd,
@@ -1475,6 +1488,8 @@ form > .button_link:first-of-type {
 .option_list .even,
 .theme_options .odd,
 .theme_options .even,
+.configure_plugin .odd,
+.configure_plugin .even,
 #categories,
 #serendipity_image_folders {
     border-bottom: 1px solid #aaa;
@@ -1489,6 +1504,7 @@ form > .button_link:first-of-type {
 .zebra_list > .odd,
 .option_list > .odd,
 .theme_options .odd,
+.configure_plugin .odd,
 #categories .odd,
 #serendipity_image_folders .odd {
     background: #eee;

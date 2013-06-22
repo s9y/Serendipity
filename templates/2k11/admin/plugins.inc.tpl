@@ -12,29 +12,30 @@
     {elseif $saveconf}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
+    <h2>{$name} (<span class="plugin_class">{$class}</span>)</h2>
+
+    <div class="plugin_info">
+        <p><strong>{$CONST.DESCRIPTION}:</strong> {$desc}</p>
+    {if !empty($license)}
+        <p><strong>{$CONST.MEDIA_PROPERTY_COPYRIGHT}:</strong> {$license}</p>
+    {/if}
+    {if ! empty($documentation) || $changelog || $documentation_local}
+        <ul class="plainList">
+        {if !empty($documentation)}
+            <li><a href="{$documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
+        {/if}
+        {if $changelog}
+            <li><a href="plugins/{$plugin->act_pluginPath}/ChangeLog">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
+        {/if}
+        {if $documentation_local}
+            <li><a href="plugins/{$plugin->act_pluginPath}{$documentation}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
+        {/if}
+        </ul>
+    {/if}
+    </div>
+
     <form class="configure_plugin" method="post" name="serendipityPluginConfigure">
         {$formToken}
-        <div class="plugin_info">
-            <h2>{$name} (<span class="plugin_class">{$class}</span>)</h2>
-
-            <p><strong>{$CONST.DESCRIPTION}:</strong> {$desc}</p>
-        {if !empty($license)}
-            <p><strong>{$CONST.MEDIA_PROPERTY_COPYRIGHT}:</strong> {$license}</p>
-        {/if}
-        {if ! empty($documentation) || $changelog || $documentation_local}
-            <ul class="plainList">
-            {if !empty($documentation)}
-                <li><a href="{$documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
-            {/if}
-            {if $changelog}
-                <li><a href="plugins/{$plugin->act_pluginPath}/ChangeLog">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
-            {/if}
-            {if $documentation_local}
-                <li><a href="plugins/{$plugin->act_pluginPath}{$documentation}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
-            {/if}
-            </ul>
-        {/if}
-        </div>
         {$config}
     </form>
 {elseif $adminAction == 'addnew'}
