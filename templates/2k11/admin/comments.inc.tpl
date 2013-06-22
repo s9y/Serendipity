@@ -18,7 +18,7 @@
         <fieldset id="filter_comments" class="additional_info">
             <legend class="visuallyhidden">{$CONST.FILTERS} ({$CONST.FIND_COMMENTS})</legend>
 
-            <div class="clearfix">
+            <div class="clearfix inputs">
                 <div class="form_field">
                     <label for="filter_author">{$CONST.AUTHOR}</label>
                     <input id="filter_author" name="serendipity[filter][author]" type="text" value="{$get.filter.author|escape}">

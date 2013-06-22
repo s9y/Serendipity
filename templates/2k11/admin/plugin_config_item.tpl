@@ -17,7 +17,7 @@
 {elseif $ctype == 'radio'}
     <fieldset>
         <legend><span>{$cname}{if $cdesc != ''} <span>{$cdesc}</span>{/if}</span></legend>
-        <div class="clearfix">
+        <div class="clearfix grouped">
         {foreach $radio_button AS $r}
             <div class="form_radio">
                 <input id="serendipity_plugin_{$r['id']}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="radio" value="{$r['value']}" {(!empty($r['checked'])) ? 'checked="checked"' : ''} title="{$r['index']|escape}">

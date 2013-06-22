@@ -101,7 +101,7 @@
 
         <fieldset id="media_pane_sort" class="additional_info">
             <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
-            <div class="clearfix">
+            <div class="clearfix grouped">
                 <div class="form_select">
                     <label for="serendipity_sortorder_order">{$CONST.SORT_BY}</label>
 

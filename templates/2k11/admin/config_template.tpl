@@ -20,7 +20,7 @@
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix">
                     <legend><span>{$item.title} <span>{$item.description}</span></span></legend>
-                    <div class="clearfix">
+                    <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>
                 </fieldset>

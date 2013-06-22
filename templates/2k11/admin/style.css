@@ -892,7 +892,8 @@ input[type=checkbox],
     margin-bottom: .75em;
 }
 
-.importer_data dd {
+.importer_data dd,
+.form_buttons > input {
     margin-bottom: .75em;
 }
 
@@ -1311,7 +1312,7 @@ fieldset p,
     padding: .25em 0;
 }
 
-.importer_data .clearfix > div {
+.importer_data dd > div {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -1822,7 +1823,7 @@ input[name="serendipity[filter][fileCategory]"] {
         margin: .4375em 0 .875em;
     }
 
-    #image_directory_edit_form > .clearfix > div {
+    #image_directory_edit_form > div > .form_select {
         float: left;
         margin: 0 5% 0 0;
     }
@@ -1849,9 +1850,9 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #template_options fieldset legend,
-    #template_options fieldset > .clearfix,
+    #template_options fieldset > .grouped,
     .configure_plugin fieldset legend,
-    .configure_plugin fieldset > .clearfix,
+    .configure_plugin fieldset > .grouped,
     .configure_plugin .sequence_container,
     .configuration_group .form_select label,
     .configuration_group .form_multiselect label,
@@ -1862,15 +1863,12 @@ input[name="serendipity[filter][fileCategory]"] {
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
     .configuration_group fieldset > fieldset legend,
-    .configuration_group fieldset > fieldset .clearfix,
     #uploadform .form_select label,
     #uploadform .form_field label,
     #uploadform .form_select select,
     #uploadform .form_field input,
-    #serendipity_plugin_config fieldset legend,
-    #serendipity_plugin_config fieldset > .clearfix,
     #serendipity_category fieldset legend,
-    #serendipity_category fieldset > .clearfix {
+    #serendipity_category fieldset > .grouped {
         float: left;
         margin-right: 2%;
         width: 48%;
@@ -1992,14 +1990,14 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #sort_entries .form_select,
-    #filter_comments .clearfix > div,
-    #serendipity_category > .clearfix > div,
+    #filter_comments .inputs > div,
+    #serendipity_category > .inputs > div,
     #serendipity_comment .form_field,
     #media_filter > div,
     #media_pane_sort > .left,
     #media_pane_sort > .center,
     #media_pane_sort > .right,
-    #media_pane_sort > .clearfix > div {
+    #media_pane_sort > .grouped > div {
         float: left;
         width: 33% ;
     }

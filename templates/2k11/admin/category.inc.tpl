@@ -48,7 +48,7 @@
         <form id="serendipity_category" method="POST" name="serendipityCategory">
             {$formToken}
 
-            <div class="clearfix">
+            <div class="clearfix inputs">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
                     <input id="category_name" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}">
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix inputs">
                 <div class="form_multiselect">
                     <label for="read_authors">{$CONST.PERM_READ}</label>
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix inputs">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.IMAGE}</label>
                     {* TODO: this should probably become/fallback to input[type=file]; also needs
@@ -107,10 +107,10 @@
                 </figure>
             </div>
 
-            <fieldset class="clearfix">
+            <fieldset class="clearfix inputs">
                 <legend><span>{$CONST.CATEGORY_HIDE_SUB} <span>{$CONST.CATEGORY_HIDE_SUB_DESC}</span></span></legend>
 
-                <div class="clearfix">
+                <div class="clearfix grouped">
                     <div class="form_radio">
                         <input id="hide_sub_yes" name="serendipity[cat][hide_sub]" type="radio" value="1"{if $this_cat.hide_sub== 1} checked="checked"{/if}>
                         <label for="hide_sub_yes">{$CONST.YES}</label>
