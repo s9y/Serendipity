@@ -730,17 +730,19 @@ function highlightComment(id, checkvalue) {
         });
 
         $('#show_config_all').click(function(e) {
-            // TODO: switch toggle icon on $(this)
             var $container = $(this).attr('href');
+            var $toggleIcon = $(this).find('span:first-child');
             var $toggleIcons = $($container).find('.show_config_option > span');
             var $toggleOption = $($container).find('.config_optiongroup');
             if(optsCollapsed) {
                 $toggleIcons.removeClass('icon-plus').addClass('icon-minus');
                 $toggleOption.removeClass('additional_info');
+                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
                 optsCollapsed = false;
             } else {
                 $toggleIcons.removeClass('icon-minus').addClass('icon-plus');
                 $toggleOption.addClass('additional_info');
+                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
                 optsCollapsed = true;
             }
             e.preventDefault();
