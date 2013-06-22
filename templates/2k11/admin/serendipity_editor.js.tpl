@@ -730,6 +730,7 @@ function highlightComment(id, checkvalue) {
         });
 
         $('#show_config_all').click(function(e) {
+            // TODO: switch toggle icon on $(this)
             var $container = $(this).attr('href');
             var $toggleIcons = $($container).find('.show_config_option > span');
             var $toggleOption = $($container).find('.config_optiongroup');

@@ -877,7 +877,7 @@ input[type=checkbox],
 }
 
 .serendipity_commentDirection,
-.configuration_group fieldset > fieldset,
+.configuration_group ul .form_check,
 #preview,
 .form_field,
 .form_area,
@@ -890,6 +890,25 @@ input[type=checkbox],
 #sort_entries {
     margin-top: .75em;
     margin-bottom: .75em;
+}
+
+.configuration_group fieldset > fieldset,
+.configuration_group .form_field,
+.configuration_group .form_area,
+.configuration_group .form_check,
+.configuration_group .form_radio,
+.configuration_group .form_select,
+.configuration_group .form_multiselect {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.configuration_group fieldset > fieldset,
+.configuration_group .form_field,
+.configuration_group .form_area,
+.configuration_group .form_select,
+.configuration_group .form_multiselect {
+    padding: .75em 0;
 }
 
 .importer_data dd,
@@ -1441,6 +1460,7 @@ form > .button_link:first-of-type {
 }
 
 .zebra_list,
+.option_list,
 #categories .odd,
 #categories .even,
 #serendipity_image_folders .odd,
@@ -1449,12 +1469,15 @@ form > .button_link:first-of-type {
 }
 
 .zebra_list > li,
+.option_list .odd,
+.option_list .even,
 #categories,
 #serendipity_image_folders {
     border-bottom: 1px solid #aaa;
 }
 
 .zebra_list > .odd,
+.option_list > .odd,
 #categories .odd,
 #serendipity_image_folders .odd {
     background: #eee;
