@@ -1701,7 +1701,7 @@ form > .button_link:first-of-type {
 }
 
 .no-js #show_config_all,
-.no-js .show_config_option .icon-minus,
+.no-js .show_config_option .icon-plus,
 .no-js #reset_timestamp,
 .no-js .filters_toolbar,
 .no-js .invert_selection,

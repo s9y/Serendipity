@@ -713,7 +713,6 @@ function highlightComment(id, checkvalue) {
     var $hasConfigOpts = $('body').has('#serendipity_config_options');
 
     if($hasConfigOpts.size() > 0) {
-        $('.show_config_option > .icon-minus').removeClass('icon-minus').addClass('icon-plus');
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
