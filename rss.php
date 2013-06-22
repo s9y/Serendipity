@@ -138,9 +138,9 @@ $metadata = array(
     'version'           => $version
 );
 
-if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
-    include(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
-}
+
+include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
+
 $plugins = serendipity_plugin_api::enum_plugins();
 
 if (is_array($plugins)) {

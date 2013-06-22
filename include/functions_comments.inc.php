@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_COMMENTS')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_COMMENTS', true);
-
 /**
  * Check if a comment token (from comment notification email) is valid for a given comment id.
  *

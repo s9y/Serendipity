@@ -2,11 +2,6 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
-if (defined('S9Y_FRAMEWORK_DB')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_DB', true);
-
 if (@include(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php")) {
     @define('S9Y_DB_INCLUDED', TRUE);
 }

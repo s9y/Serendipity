@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
-if (defined('S9Y_FRAMEWORK_PLUGIN_API_EXTENSION')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_PLUGIN_API_EXTENSION', true);
-
 class serendipity_plugin_api_extension extends serendipity_plugin_api
 {
     /**

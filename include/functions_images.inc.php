@@ -7,11 +7,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_IMAGES')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_IMAGES', true);
-
 /**
  * Check if an uploaded file is "evil"
  *

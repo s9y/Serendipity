@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_INSTALLER')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_INSTALLER', true);
-
 /**
  * Convert a PHP Ini setting to a boolean flag
  *

@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_SMARTY')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_SMARTY', true);
-
 /**
  * Fetch a list of trackbacks for an entry
  *

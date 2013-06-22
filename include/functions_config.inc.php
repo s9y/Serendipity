@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_CONFIG')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_CONFIG', true);
-
 /**
  * Adds a new author account
  *

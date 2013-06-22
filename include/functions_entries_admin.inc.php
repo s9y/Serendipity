@@ -6,12 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_ENTRIES_ADMIN')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_ENTRIES_ADMIN', true);
-
-
 include_once(S9Y_INCLUDE_PATH . "include/functions_trackbacks.inc.php");
 
 
