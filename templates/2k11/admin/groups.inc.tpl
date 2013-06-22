@@ -32,22 +32,19 @@
 {/if}
 
 {if $edit || $new}
-    <form id="serendipity_admin_groups" class="configuration_group" action="?serendipity[adminModule]=groups" method="post">
+    <h3>{if $edit}{$CONST.EDIT}{else}{$CONST.CREATE}{/if}</h3>
+
+    <form id="serendipity_admin_groups" class="configuration_group option_list" action="?serendipity[adminModule]=groups" method="post">
         {$formToken}
     {if $edit}
-        <h3>{$CONST.EDIT}</h3>
-
         <input name="serendipity[group]" type="hidden" value="{$from.id}">
-    {else}
-        <h3>{$CONST.CREATE}</h3>
     {/if}
-        <div class="clearfix form_field">
+        <div class="clearfix odd form_field">
             <label for="group_name">{$CONST.NAME}</label>
-            {* BUG: Doesn't pull the group name; this doesn't work in 1.7, either. *}
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:"html"}">
         </div>
 
-        <div class="clearfix form_select">
+        <div class="clearfix even form_select">
             <label for="group_members">{$CONST.USERCONF_GROUPS}</label>
             <select id="group_members" name="serendipity[members][]" multiple size="5">
                 {foreach $allusers as $user}
