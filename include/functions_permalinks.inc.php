@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_PERMALINKS')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_PERMALINKS', true);
-
 /**
  * Converts a string into a filename that can be used safely in HTTP URLs
  *

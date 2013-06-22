@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_ENTRIES')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_ENTRIES', true);
-
 /**
  * Delete a category or range of categories
  *

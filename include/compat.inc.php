@@ -6,11 +6,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (defined('S9Y_FRAMEWORK_COMPAT')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_COMPAT', true);
-
 $serendipity = array();
 @ini_set('magic_quotes_runtime', 'off');
 

@@ -6,12 +6,6 @@ if (IN_serendipity !== true) {
     die ('Don\'t hack!');
 }
 
-if (defined('S9Y_FRAMEWORK_PLUGIN_API')) {
-    return;
-}
-@define('S9Y_FRAMEWORK_PLUGIN_API', true);
-
-
 include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
 
 
