@@ -11,7 +11,7 @@
 
     <div id="serendipity_config_options">
     {foreach $config_groups AS $config_header => $config_groupkeys}
-        <div class="configuration_group">
+        <div class="configuration_group {cycle values='odd,even'}">
             <h3><a id="optionel{$config_groupkeys@iteration}" class="show_config_option" href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$config_header}</a></h3>
         
             <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
@@ -24,7 +24,7 @@
     </div>
 {/if}
 {foreach $OUT_STACK_REST as $out_stack_config_item}
-    <div class="configuration_group">
+    <div class="configuration_group {cycle values='odd,even'}">
     {$out_stack_config_item}
     </div>
 {/foreach}

@@ -893,6 +893,7 @@ input[type=checkbox],
 }
 
 .configuration_group fieldset > fieldset,
+.theme_options .configuration_group > fieldset,
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_check,
@@ -904,6 +905,7 @@ input[type=checkbox],
 }
 
 .configuration_group fieldset > fieldset,
+.theme_options .configuration_group > fieldset,
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_select,
@@ -1471,13 +1473,22 @@ form > .button_link:first-of-type {
 .zebra_list > li,
 .option_list .odd,
 .option_list .even,
+.theme_options .odd,
+.theme_options .even,
 #categories,
 #serendipity_image_folders {
     border-bottom: 1px solid #aaa;
 }
 
+.theme_options > div:first-of-type {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: 0;
+    padding-bottom: 1.5em;
+}
+
 .zebra_list > .odd,
 .option_list > .odd,
+.theme_options .odd,
 #categories .odd,
 #serendipity_image_folders .odd {
     background: #eee;

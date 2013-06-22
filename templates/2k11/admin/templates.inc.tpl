@@ -12,7 +12,7 @@
         {if $adminAction == 'configure'}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$save_time}</span>
         {/if}
-        <form method="post" action="serendipity_admin.php">
+        <form class="theme_options" method="post" action="serendipity_admin.php">
             <input name="serendipity[adminModule]" type="hidden" value="templates">
             <input name="serendipity[adminAction]" type="hidden" value="configure">
             {$form_token}
