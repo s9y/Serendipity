@@ -77,14 +77,6 @@
                                           'permission'  => 'personalConfiguration',
                                           'flags'       => array('config')),
 
-                                    array('var'         => 'eyecandy',
-                                          'title'       => PREFERENCE_USE_JS,
-                                          'description' => PREFERENCE_USE_JS_DESC,
-                                          'type'        => 'bool',
-                                          'default'     => true,
-                                          'permission'  => 'personalConfiguration',
-                                          'flags'       => array('config')),
-
                                     array('var'         => 'mail_comments',
                                           'title'       => USERCONF_SENDCOMMENTS,
                                           'description' => USERCONF_SENDCOMMENTS_DESC,

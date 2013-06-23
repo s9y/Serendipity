@@ -1,9 +1,7 @@
 {* functions_plugins_admin.inc.php::function_show_plugins() including output of functions_plugins_admin.inc.php::function ownership() *}
 
-{if !$eyecandy}
-    <form action="?serendipity[adminModule]=plugins" method="post">
-{elseif !$event_only}
 
+{if !$event_only}
     <form action="?serendipity[adminModule]=plugins" method="post">
         <input id="order" name="serendipity[pluginorder]" type="hidden" value="">
     {else}
@@ -65,7 +63,7 @@
                                 {/if}
 
                             </li>
-                        {($eyecandy) ? '<noscript>' : ''}
+                        <noscript>
                             <li class="pluginmanager_place">
                                 <select name="serendipity[placement][{$plugin_data['name']}]">
                                     {foreach $plugin_data.gopts as $k => $v}
@@ -93,7 +91,7 @@
                                     </a>
                                 {/if}
                             </li>
-                        {($eyecandy) ? '</noscript>' : ''}
+                        </noscript>
                         </ul>
                     </li>
                 {/foreach}

@@ -90,14 +90,11 @@ function show_plugins($event_only = false, $sidebars = null)
         }
     }
 
-    $eyecandy = !isset($serendipity['eyecandy']) || serendipity_db_bool($serendipity['eyecandy']);
+
     $data['event_only'] = $event_only;
-    $data['eyecandy'] = $eyecandy;
-    if (!$eyecandy) {
-        $data['eyecandy'] = false;
-    } elseif (!$event_only) {
+    if (!$event_only) {
         $data['event_only'] = false;
-        $data['is_first'] = $is_first = true;
+        $data['is_first'] = true;
     }
 
     $data['serendipity_setFormToken'] = serendipity_setFormToken();
