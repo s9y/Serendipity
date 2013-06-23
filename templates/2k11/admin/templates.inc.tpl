@@ -35,7 +35,7 @@
                 {if $cur_tpl.fullsize_preview || $cur_tpl.preview}
                     {if $cur_tpl.fullsize_preview}
                         <a href="{$cur_tpl.fullsize_preview}">
-                            <img src="{$cur_tpl.fullsize_preview}" width="400" style="max-height: 250px;" alt="{$CONST.PREVIEW}" >
+                            <img src="{$cur_tpl.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
                         </a>
                     {else}
                         <img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}" >
@@ -72,7 +72,7 @@
                         {if $info.fullsize_preview || $info.preview}
                             {if $info.fullsize_preview}
                                 <a href="{$info.fullsize_preview}">
-                                    <img src="{$info.fullsize_preview}" width="400" style="max-height: 250px;" alt="{$CONST.PREVIEW}" >
+                                    <img src="{$info.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
                                 </a>
                             {else}
                                 <img src="{$info.preview}" alt="{$CONST.PREVIEW}" >

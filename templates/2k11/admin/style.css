@@ -1233,6 +1233,12 @@ main {
     max-width: 40em;
 }
 
+.template_preview_img {
+    max-width: 400px;
+    height: auto;
+    max-height: 248px;
+}
+
 
 /* HEADER
    ----------------------------------------------------------------- */
