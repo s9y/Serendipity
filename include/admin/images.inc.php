@@ -18,12 +18,6 @@ switch ($serendipity['GET']['adminAction']) {
     case 'imgedit':
         $data['case_imgedit'] = true;
 
-        if (!isset($serendipity['eyecandy']) || serendipity_db_bool($serendipity['eyecandy'])) {
-            // what??
-        } else {
-            return true;
-        }
-
         include_once(S9Y_INCLUDE_PATH . "include/functions_images_crop.inc.php");
         $media['is_imgedit'] = true;
         $media['css_imgedit'] = serendipity_getTemplateFile('admin/imgedit.css');

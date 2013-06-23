@@ -1195,4 +1195,22 @@ function serendipity_verifyFTPChecksums() {
 
     return $badsums;
 }
+
+function serendipity_getCurrentVersion() {
+    $updateURL = 'https://raw.github.com/s9y/Serendipity/master/docs/RELEASE';
+
+    $file = fopen($updateURL, 'r');
+    if (!$file) {
+        return;
+    }
+
+    while (!feof($file)) {
+        $line = fgets($file);
+
+        if (preg_match('/stable:(.+$)/', $line, $match)) {
+            return $match[1];
+        }
+    }
+}
+
 /* vim: set sts=4 ts=4 sw=4 expandtab : */
