@@ -823,6 +823,10 @@ class serendipity_event_spartacus extends serendipity_event
 
         $this->checkArray($tree);
 
+        if (! file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache')) {
+            mkdir($serendipity['serendipityPath'] . '/templates_c/template_cache');
+        }
+
         foreach($tree[0]['children'] AS $idx => $subtree) {
             if ($subtree['tag'] == 'package') {
                 $i++;
@@ -879,18 +883,23 @@ class serendipity_event_spartacus extends serendipity_event
                 $plugname = $pluginstack[$i]['template'];
                 $pluginstack[$i]['previewURL'] = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview.png?revision=1.9999');
                 $preview_fullsizeURL = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview_fullsize.jpg?revision=1.9999');
-                if (! file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache')) {
-                    mkdir($serendipity['serendipityPath'] . '/templates_c/template_cache');
-                }
-                if (! file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname .'.jpg')) {
-                    $file = @fopen($preview_fullsizeURL, 'r');
-                    if ($file) {
-                        file_put_contents($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname .'.jpg', $file);
-                    }
-                }
                 if (file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname .'.jpg')) {
                     $pluginstack[$i]['preview_fullsizeURL'] = $preview_fullsizeURL;
+                } else {
+                    if ( ! file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname)) { 
+                        $file = @fopen($preview_fullsizeURL, 'r');
+                        if ($file) {
+                            file_put_contents($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname .'.jpg', $file);
+                            $pluginstack[$i]['preview_fullsizeURL'] = $preview_fullsizeURL;
+                        } else {
+                            // place an empty file, so we don't have to check the server on every load
+                            file_put_contents($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname, $file);
+                        }
+                    }
                 }
+                
+                
+                
                 $pluginstack[$i]['customURI']  = '&amp;serendipity[spartacus_fetch]=' . $plugname;
                 $pluginstack[$i]['customIcon'] = '_spartacus';
 
