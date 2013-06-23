@@ -904,7 +904,8 @@ input[type=checkbox],
     margin-bottom: 0;
 }
 
-.configure_plugin .configuration_group > fieldset {
+#serendipity_config_options .configuration_group > .config_optiongroup,
+.configure_plugin .configuration_group > .config_optiongroup {
     margin-top: 0;
     margin-bottom: 1.5em;
 }
@@ -1400,10 +1401,6 @@ form > .button_link:first-of-type {
 #template_options,
 #pluginlist_sidebar {
     margin-bottom: 3em;
-}
-
-.configuration_group > fieldset {
-    margin-bottom: 1.5em;
 }
 
 .editor_toolbar {
