@@ -2,9 +2,7 @@
     <hr>
 {elseif $ctype == 'select'}
     <div class="clearfix form_select">
-        <label for="serendipity_{$config_item}">{$cname}
-        {if $cdesc != ''}<span>{$cdesc}</span>{/if}
-        </label>
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</label>
         {* Make sure id creation actually produces unique identifiers *}
         <select id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]{($is_multi_select) ? '[]' : ''}" {($is_multi_select) ? 'multiple' : ''} {($is_multi_select && ($select_size > 0)) ? "size='{$select_size}'" : ''}>
         {foreach $select AS $select_value => $select_desc}
@@ -16,7 +14,7 @@
     </div>
 {elseif $ctype == 'radio'}
     <fieldset>
-        <legend><span>{$cname}{if $cdesc != ''} <span>{$cdesc}</span>{/if}</span></legend>
+        <legend><span>{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</span></legend>
         <div class="clearfix grouped">
         {foreach $radio_button AS $r}
             <div class="form_radio">
@@ -29,17 +27,13 @@
     </fieldset>
 {elseif $ctype == 'string'}
     <div class="clearfix form_field">
-        <label for="serendipity_{$config_item}">{$cname}
-        {if $cdesc != ''}<span>{$cdesc}</span>{/if}
-        </label>
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</label>
         {* TODO: Make sure id creation actually produces unique identifiers *}
         <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
     </div>
 {elseif (($ctype == 'html') || ($ctype == 'text'))}
     <div class="clearfix form_area">
-        <label for="nuggets{$elcount}">{$cname}
-        {if $cdesc != ''}<span>{$cdesc}</span>{/if}
-        </label>
+        <label for="nuggets{$elcount}">{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</label>
 
         <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
     </div>
@@ -58,9 +52,7 @@
     </div>
 {elseif $ctype == 'media'}
     <div class="clearfix form_field media_choose">
-        <label for="serendipity[{$postKey}][{$config_item}]">{$cname}
-        {if $cdesc != ''}<span>{$cdesc}</span>{/if}
-        </label>
+        <label for="serendipity[{$postKey}][{$config_item}]">{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</label>
         
         <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" data-pmwidth="{$preview_width}" data-pmheight="{$preview_height}" value="{$value}">{* This should be input[type=file] … *}
 
@@ -71,7 +63,7 @@
     <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
     {/if}
     <fieldset>
-        <legend><span>{$cname}{if $cdesc != ''} <span>{$cdesc}</span>{/if}</span></legend>
+        <legend><span>{$cname}{if $cdesc != ''} <span class="icon-info-circled" title="{$cdesc}" rel="tooltip"></span>{/if}</span></legend>
         <input id="{$config_item}_value" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$value}">
 
         <noscript>

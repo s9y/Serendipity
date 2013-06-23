@@ -20,14 +20,14 @@
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix {$zebra_class}">
-                    <legend><span>{$item.title} <span>{$item.description}</span></span></legend>
+                    <legend><span>{$item.title}{if $item.description} <span class="icon-info-circled" title="{$item.description|escape:"html"}" rel="tooltip"></span>{/if}</span></legend>
                     <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>
                 </fieldset>
                 {else}
                 <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
-                    <label for="{$item.var}">{$item.title}<span>{$item.description}</span></label>
+                    <label for="{$item.var}">{$item.title}{if $item.description} <span class="icon-info-circled" title="{$item.description|escape:"html"}" rel="tooltip"></span>{/if}</label>
                     {$item.guessedInput}
                 </div>
                 {/if}
