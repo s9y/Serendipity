@@ -169,7 +169,11 @@ foreach ($stack as $theme => $info) {
     if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg')) {
         $data['templates'][$theme]['fullsize_preview'] = $serendipity['baseURL'] . $serendipity['templatePath'] . $theme . '/preview_fullsize.jpg';
     } elseif (!empty($info['preview_fullsizeURL'])) {
-        $data['templates'][$theme]['fullsize_preview'] = $info['preview_fullsizeURL'];
+        if (file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $theme .'.jpg')) {
+            $data['templates'][$theme]['fullsize_preview']  = $serendipity['baseURL'] . 'templates_c/template_cache/'. $theme .'.jpg';
+        } else {
+            $data['templates'][$theme]['fullsize_preview'] = $info['preview_fullsizeURL'];
+        }
     }
 
     if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $theme . '/preview.png')) {

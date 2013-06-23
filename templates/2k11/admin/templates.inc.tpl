@@ -33,9 +33,13 @@
             <div class="clearfix equal_heights template_wrap">
                 <div class="template_preview">
                 {if $cur_tpl.fullsize_preview || $cur_tpl.preview}
-                    {if $cur_tpl.fullsize_preview}<a href="{$cur_tpl.fullsize_preview}">{/if}
-                    {if $cur_tpl.preview}<img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}">{/if}
-                    {if $cur_tpl.fullsize_preview}</a>{/if}
+                    {if $cur_tpl.fullsize_preview}
+                        <a href="{$cur_tpl.fullsize_preview}">
+                            <img src="{$cur_tpl.fullsize_preview}" width="400" style="max-height: 250px;" alt="{$CONST.PREVIEW}" >
+                        </a>
+                    {else}
+                        <img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}" >
+                    {/if}
                 {/if}
                     <footer id="template_info_cur" class="template_info additional_info">
                         <dl class="clearfix">
@@ -66,10 +70,13 @@
                     <div class="clearfix equal_heights template_wrap">
                         <div class="template_preview">
                         {if $info.fullsize_preview || $info.preview}
-                        
-                            {if $info.fullsize_preview}<a href="{$info.fullsize_preview}">{/if}
-                            {if $info.preview}<img src="{$info.preview}" alt="{$CONST.PREVIEW}" >{/if}
-                            {if $info.fullsize_preview}</a>{/if}
+                            {if $info.fullsize_preview}
+                                <a href="{$info.fullsize_preview}">
+                                    <img src="{$info.fullsize_preview}" width="400" style="max-height: 250px;" alt="{$CONST.PREVIEW}" >
+                                </a>
+                            {else}
+                                <img src="{$info.preview}" alt="{$CONST.PREVIEW}" >
+                            {/if}
                         {/if}
                             <footer id="template_info_{$info@key}" class="template_info additional_info">
                                 <dl class="clearfix">
