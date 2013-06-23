@@ -223,10 +223,7 @@ if (isset($serendipity['GET']['importFrom']) && serendipity_checkFormToken()) {
             $data['formToken'] = serendipity_setFormToken();
             $fields = $importer->getInputFields();
             foreach ($fields as &$field ) {
-                ob_start();
-                serendipity_guessInput($field['type'], 'serendipity[import]['. $field['name'] .']', (isset($serendipity['POST']['import'][$field['name']]) ? $serendipity['POST']['import'][$field['name']] : $field['default']), $field['default']);
-                $field['guessedInput'] = ob_get_contents();
-                ob_end_clean();
+                $field['guessedInput'] = serendipity_guessInput($field['type'], 'serendipity[import]['. $field['name'] .']', (isset($serendipity['POST']['import'][$field['name']]) ? $serendipity['POST']['import'][$field['name']] : $field['default']), $field['default']);
             }
             $data['fields'] = $fields;
             $data['notes'] = $importer->getImportNotes();
