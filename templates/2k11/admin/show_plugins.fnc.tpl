@@ -37,11 +37,11 @@
                         </h5>
 
                         <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
-                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move" rel="tooltip"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
                         </div>
 
                     {if $plugin_data['can_configure']}
-                        <a class="pluginmanager_configure button_link icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
+                        <a class="pluginmanager_configure button_link icon_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}" rel="tooltip"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
                     {/if}
 
                         <ul class="pluginmanager_plugininfo plainList">
@@ -103,7 +103,7 @@
             <span class="plugin_count block_level">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$total}</span>
         </div>
         <div class="form_buttons">
-            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE_TICKED_PLUGINS}" value="{$CONST.DELETE}">
-            <input name="SAVE" type="submit" title="{$CONST.SAVE_CHANGES_TO_LAYOUT}" value="{$CONST.SAVE}">
+            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE_TICKED_PLUGINS}" rel="tooltip" value="{$CONST.DELETE}">
+            <input name="SAVE" type="submit" title="{$CONST.SAVE_CHANGES_TO_LAYOUT}" rel="tooltip" value="{$CONST.SAVE}">
         </div>
     </form>

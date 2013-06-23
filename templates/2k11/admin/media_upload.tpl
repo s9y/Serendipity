@@ -40,7 +40,7 @@
         <div class="form_buttons">
             <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
 
-            <a id="add_upload" class="button_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
+            <a id="add_upload" class="button_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}" rel="tooltip"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
             <input class="check_inputs" type="submit" value="{$CONST.GO}">
             <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
         </div>

@@ -24,7 +24,7 @@
         {else}
             <a href="{$media.file.full_file}">{$media.file.realname} ({$media.file.displaymime})</a>
         {/if}
-            <a href="{$media.from|@escape}" title="{$CONST.BACK_TO_BLOG}">{$CONST.BACK_TO_BLOG}</a>
+            <a href="{$media.from|@escape}">{$CONST.BACK_TO_BLOG}</a>
         </div>
     {if $media.file.base_property}
         <div class="media_props_base">

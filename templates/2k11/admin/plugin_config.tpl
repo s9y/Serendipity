@@ -7,7 +7,7 @@
     </div>
 {/if}
 {if is_array($config_groups)}
-    <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
+    <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}" rel="tooltip"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
 
     <div id="serendipity_config_options">
     {foreach $config_groups AS $config_header => $config_groupkeys}
