@@ -24,8 +24,9 @@
     </section>
 {else}
     <section id="template_select">
-        <h2>Current template</h2> {* i18n *}
         {assign var="cur_tpl" value=$templates[$cur_template]}
+        <h2>Current template</h2> {* i18n *}
+
         <article class="clearfix current_template">
             <h3>{$cur_tpl.info.name}</h3>
 
@@ -33,7 +34,7 @@
                 <div class="template_preview">
                 {if $cur_tpl.fullsize_preview || $cur_tpl.preview}
                     {if $cur_tpl.fullsize_preview}<a href="{$cur_tpl.fullsize_preview}">{/if}
-                    {if $cur_tpl.preview}<img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}" >{/if}
+                    {if $cur_tpl.preview}<img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}">{/if}
                     {if $cur_tpl.fullsize_preview}</a>{/if}
                 {/if}
                     <footer id="template_info_cur" class="template_info additional_info">
