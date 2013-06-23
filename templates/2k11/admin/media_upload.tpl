@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="form_field clearfix">
-                    <label for="target_filename_1" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span class="input-desc image-upload">{$CONST.PLAIN_ASCII_NAMES}</span></label>
+                    <label for="target_filename_1" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span>{$CONST.PLAIN_ASCII_NAMES}</span></label>
                     <input id="target_filename_1" class="uploadform_target_filename" name="serendipity[target_filename][1]" type="text" value="">
                 </div>
 
