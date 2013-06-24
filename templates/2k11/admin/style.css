@@ -482,6 +482,7 @@ form > a,
 .block_level,
 .form_multiselect label,
 label > span,
+legend > span > span,
 #back_to_blog,
 .msg_error,
 .msg_success,
@@ -497,13 +498,6 @@ label > span,
 .configuration_group .form_field label,
 .configuration_group .form_area label {
     display: block;
-}
-
-label > [class^="icon-"],
-label > [class*=" icon-"],
-legend > span > [class^="icon-"],
-legend > span > [class*=" icon-"] {
-    display: inline-block;
 }
 
 .image_resize_hint p {
@@ -1047,14 +1041,6 @@ summary {
     background: #eee;
     border: 1px solid #aaa;
     color: #777;
-}
-
-label > [class^="icon-"],
-label > [class*=" icon-"],
-legend > span > [class^="icon-"],
-legend > span > [class*=" icon-"] {
-    color: #444;
-    cursor: help;
 }
 
 
