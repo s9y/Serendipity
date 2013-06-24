@@ -174,8 +174,7 @@ function choose_media(id) {
 
 // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
 function serendipity_imageSelector_addToElement (str, id) {
-    id = id.replace(/\[/g, "\\[");  // jQuery fails to select the input when the selector contains unescaped [ or ]
-    id = id.replace(/\]/g, "\\]");
+    id = escapeBrackets(str);
     var $input = $('#'+id);
     $input.val(str);
     
@@ -185,6 +184,14 @@ function serendipity_imageSelector_addToElement (str, id) {
 
     // calling the change-event for doing stuff like generating the preview-image
     $input.change();
+}
+
+// Escape an id with [ in it to be able to be used as selector
+// jQuery fails to select the input when the selector contains unescaped [ or ]
+function escapeBrackets(str) {
+    str = str.replace(/\[/g, "\\[");  
+    str = str.replace(/\]/g, "\\]");
+    return str;
 }
 
 // Add another (image) keyword
