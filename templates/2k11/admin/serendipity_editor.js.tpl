@@ -12,534 +12,538 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 (function(a){ function b() { } for(var c="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),d;!!(d=c.pop());) { a[d]=a[d]||b; } } )
 (function() { try { console.log();return window.console; } catch(a) { return (window.console= { } ); } } ());
 
-// Fires functions which are generated dynamically in backend PHP files
-// (i.e. include/functions_entries_admin.inc.php) which load the various
-// WYSIWYG editors in entries editor, HTML nuggets etc.
-function spawn() {
-    if (self.Spawnextended) {
-        Spawnextended();
-    }
 
-    if (self.Spawnbody) {
-        Spawnbody();
-    }
+(function(serendipity, $, undefined ) {
+    // Fires functions which are generated dynamically in backend PHP files
+    // (i.e. include/functions_entries_admin.inc.php) which load the various
+    // WYSIWYG editors in entries editor, HTML nuggets etc.
+    serendipity.spawn = function() {
+        if (self.Spawnextended) {
+            Spawnextended();
+        }
 
-    if (self.Spawnnugget) {
-        Spawnnugget();
-    }
-}
+        if (self.Spawnbody) {
+            Spawnbody();
+        }
 
-// Generic function to set cookies
-function SetCookie(name, value) {
-    var today  = new Date();
-    var expire = new Date();
-    expire.setTime(today.getTime() + (60*60*24*30*1000));
-    document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
-}
-
-// Some sort of onload wrapper? @onli says jQuery can help with this
-function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    } else {
-        window.onload = function() {
-            oldonload();
-            func();
+        if (self.Spawnnugget) {
+            Spawnnugget();
         }
     }
-}
 
-/**
- * Based upon code written by chris wetherell
- * http://www.massless.org
- * chris [THE AT SIGN] massless.org
- */
-
-// Returns "position" of selection in textarea
-// Used internally by wrapSelectionWithLink()
-function getSelection($txtarea) {
-    var start = $txtarea[0].selectionStart;
-    var end = $txtarea[0].selectionEnd;
-    return $txtarea.val().substring(start, end);
-}
-
-// Used by non-wysiwyg editor toolbar buttons to wrap selection
-// in a element associated with toolbar button
-function wrapSelection(txtarea, openTag, closeTag) {
-    scrollPos = false;
-
-    if (txtarea.scrollTop) {
-        scrollPos = txtarea.scrollTop;
+    // Generic function to set cookies
+    serendipity.SetCookie = function(name, value) {
+        var today  = new Date();
+        var expire = new Date();
+        expire.setTime(today.getTime() + (60*60*24*30*1000));
+        document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
     }
 
-    // http://stackoverflow.com/questions/1712417/jquery-wrap-selected-text-in-a-textarea
-    var $txtarea = $(txtarea);
-    var len = $txtarea.val().length;
-    var start = $txtarea[0].selectionStart;
-    var end = $txtarea[0].selectionEnd;
-    var selectedText = $txtarea.val().substring(start, end);
-    var replacement = openTag + selectedText + closeTag;
-    $txtarea.val($txtarea.val().substring(0, start) + replacement + $txtarea.val().substring(end, len));
-
-    $txtarea[0].selectionStart = start + replacement.length
-    $txtarea[0].selectionEnd = start + replacement.length
-    
-    if (scrollPos) {
-        txtarea.focus();
-        txtarea.scrollTop = scrollPos;
-    }
-}
-
-// Used by non-wysiwyg editor toolbar buttons to wrap selection
-// in <a> element (only)
-function wrapSelectionWithLink(txtarea) {
-    var my_link = prompt("Enter URL:","http://");
-
-    if (getSelection($(txtarea) ) == "") {
-        var my_desc = prompt("Enter Description", '');
-    }
-
-    var my_title = prompt("Enter title/tooltip:", "");
-
-    html_title = "";
-
-    if (my_title != "" && my_title != null) {
-        html_title = ' title="' + my_title + '"';
-    }
-
-    if (my_link != null) {
-        lft = "<a href=\"" + my_link + "\"" + html_title + ">";
-
-        if (my_desc != null && my_desc != "") {
-            rgt = my_desc + "</a>";
+    // Some sort of onload wrapper? @onli says jQuery can help with this
+    serendipity.addLoadEvent = function(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
         } else {
-            rgt = "</a>";
+            window.onload = function() {
+                oldonload();
+                func();
+            }
         }
-
-        wrapSelection(txtarea, lft, rgt);
     }
 
-    return;
-}
-/* end chris w. script */
+    /**
+     * Based upon code written by chris wetherell
+     * http://www.massless.org
+     * chris [THE AT SIGN] massless.org
+     */
 
-// Adds img element to selected text
-// Used internally by wrapInsImage()
-function insertText(txtarea, str) {
-    $txtarea = $(txtarea);
-    var selLength = $txtarea.val().length;
-    var selStart = $txtarea[0].selectionStart;
-    var selEnd = $txtarea[0].selectionEnd;
-
-    if (selEnd==1 || selEnd==2) {
-        selEnd=selLength;
+    // Returns "position" of selection in textarea
+    // Used internally by wrapSelectionWithLink()
+    serendipity.getSelection = function($txtarea) {
+        var start = $txtarea[0].selectionStart;
+        var end = $txtarea[0].selectionEnd;
+        return $txtarea.val().substring(start, end);
     }
 
-    var before = $txtarea.val().substring(0,selStart);
-    var after = $txtarea.val().substring(selStart);
+    // Used by non-wysiwyg editor toolbar buttons to wrap selection
+    // in a element associated with toolbar button
+    serendipity.wrapSelection = function(txtarea, openTag, closeTag) {
+        scrollPos = false;
 
-    $txtarea.val(before + str + after);
+        if (txtarea.scrollTop) {
+            scrollPos = txtarea.scrollTop;
+        }
 
-    $txtarea[0].selectionStart = selStart + str.length
-    $txtarea[0].selectionEnd = selStart + str.length
-}
+        // http://stackoverflow.com/questions/1712417/jquery-wrap-selected-text-in-a-textarea
+        var $txtarea = $(txtarea);
+        var len = $txtarea.val().length;
+        var start = $txtarea[0].selectionStart;
+        var end = $txtarea[0].selectionEnd;
+        var selectedText = $txtarea.val().substring(start, end);
+        var replacement = openTag + selectedText + closeTag;
+        $txtarea.val($txtarea.val().substring(0, start) + replacement + $txtarea.val().substring(end, len));
 
-// Used by non-wysiwyg editor toolbar buttons to wrap selection
-// in <img> element (only); doesn't really "wrap", merely inserts
-// an <img> element before selected text
-function wrapInsImage(txtarea) {
-    var loc = prompt('Enter the Image Location: ');
-
-    if (loc) {
-        insertText(txtarea,'<img src="'+ loc + '" alt="">');
-    }
-}
-/* end Better-Editor functions */
-
-// Switches preview of image selected from media db by changing the
-// container's background image
-function change_preview(id) {
-    var text_box = document.getElementById('serendipity[template][' + id + ']');
-    var image_box = document.getElementById(id + '_preview'); 
-    var filename = text_box.value;
-
-    image_box.style.backgroundImage = 'url(' + filename + ')';
-}
-
-// Opens media db image selection in new window
-function choose_media(id) {
-    window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-}
-
-// "Transfer" value from media db popup to form element, used for example for selecting a category-icon
-function serendipity_imageSelector_addToElement (str, id) {
-    id = escapeBrackets(str);
-    var $input = $('#'+id);
-    $input.val(str);
-    
-    if ($input.attr('type') != 'hidden') {
-        $input.focus();    // IE would generate an error when focusing an hidden element
+        $txtarea[0].selectionStart = start + replacement.length
+        $txtarea[0].selectionEnd = start + replacement.length
+        
+        if (scrollPos) {
+            txtarea.focus();
+            txtarea.scrollTop = scrollPos;
+        }
     }
 
-    // calling the change-event for doing stuff like generating the preview-image
-    $input.change();
-}
+    // Used by non-wysiwyg editor toolbar buttons to wrap selection
+    // in <a> element (only)
+    serendipity.wrapSelectionWithLink = function(txtarea) {
+        var my_link = prompt("Enter URL:","http://");
 
-// Escape an id with [ in it to be able to be used as selector
-// jQuery fails to select the input when the selector contains unescaped [ or ]
-function escapeBrackets(str) {
-    str = str.replace(/\[/g, "\\[");  
-    str = str.replace(/\]/g, "\\]");
-    return str;
-}
-
-// Add another (image) keyword
-function AddKeyword(keyword)  {
-    s = document.getElementById('keyword_input').value;
-    document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
-}
-
-// "Transfer" value from media db popup to textarea, including wysiwyg
-// This gets textarea="body"/"extended" and tries to insert into the textarea
-// named serendipity[body]/serendipity[extended]
-function serendipity_imageSelector_addToBody (str, textarea) {
-    var oEditor;
-    if (typeof(FCKeditorAPI) != 'undefined') {
-        oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
-
-        if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG) {
-            oEditor.InsertHtml(str);
-            return;
-        }
-    } else if(typeof(xinha_editors) != 'undefined') {
-        if (typeof(xinha_editors['serendipity[' + textarea + ']']) != 'undefined') {
-            oEditor = xinha_editors['serendipity['+ textarea +']'];
+        if (getSelection($(txtarea) ) == "") {
+            var my_desc = prompt("Enter Description", '');
         }
 
-        if (oEditor) {
-            oEditor.insertHTML(str);
-            return;
-        }
-    } else if(typeof(HTMLArea) != 'undefined') {
-        if (textarea == 'body' && typeof(editorbody) != 'undefined') {
-            oEditor = editorbody;
-        } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') {
-            oEditor = editorextended;
-        } else if (typeof(htmlarea_editors) != 'undefined' && typeof(htmlarea_editors[textarea]) != 'undefined') {
-            oEditor =  htmlarea_editors[textarea];
+        var my_title = prompt("Enter title/tooltip:", "");
+
+        html_title = "";
+
+        if (my_title != "" && my_title != null) {
+            html_title = ' title="' + my_title + '"';
         }
 
-        if (oEditor._editMode != 'textmode') {
-            oEditor.insertHTML(str);
-            return;
-        } 
-    } else if(typeof(TinyMCE) != 'undefined') {
-        // for the TinyMCE editor we do not have a text mode insert
-        tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
+        if (my_link != null) {
+            lft = "<a href=\"" + my_link + "\"" + html_title + ">";
+
+            if (my_desc != null && my_desc != "") {
+                rgt = my_desc + "</a>";
+            } else {
+                rgt = "</a>";
+            }
+
+            serendipity.wrapSelection(txtarea, lft, rgt);
+        }
+
         return;
     }
-    
-    noWysiwygAdd(str, textarea);
-}
+    /* end chris w. script */
 
-// The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
-// which works fine in NO WYSIWYG mode
-// NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
-function noWysiwygAdd(str, textarea) {
-    wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
-}
+    // Adds img element to selected text
+    // Used internally by wrapInsImage()
+    serendipity.insertText = function(txtarea, str) {
+        $txtarea = $(txtarea);
+        var selLength = $txtarea.val().length;
+        var selStart = $txtarea[0].selectionStart;
+        var selEnd = $txtarea[0].selectionEnd;
 
-// Inserting media db img markup including s9y-specific container markup
-function serendipity_imageSelector_done(textarea) {
-    var insert = '';
-    var img = '';
-    var src = '';
-    var alt = '';
-    var title = '';
+        if (selEnd==1 || selEnd==2) {
+            selEnd=selLength;
+        }
 
-    var f = document.forms['serendipity[selForm]'].elements;
+        var before = $txtarea.val().substring(0,selStart);
+        var after = $txtarea.val().substring(selStart);
 
-    img           = f['imgName'].value;
-    var imgWidth  = f['imgWidth'].value;
-    var imgHeight = f['imgHeight'].value;
-    if (f['serendipity[linkThumbnail]'] && f['serendipity[linkThumbnail]'][0].checked == true) {
-        img       = f['thumbName'].value;
-        imgWidth  = f['imgThumbWidth'].value;
-        imgHeight = f['imgThumbHeight'].value;
+        $txtarea.val(before + str + after);
+
+        $txtarea[0].selectionStart = selStart + str.length
+        $txtarea[0].selectionEnd = selStart + str.length
     }
+
+    // Used by non-wysiwyg editor toolbar buttons to wrap selection
+    // in <img> element (only); doesn't really "wrap", merely inserts
+    // an <img> element before selected text
+    serendipity.wrapInsImage = function(txtarea) {
+        var loc = prompt('Enter the Image Location: ');
+
+        if (loc) {
+            insertText(txtarea,'<img src="'+ loc + '" alt="">');
+        }
+    }
+    /* end Better-Editor functions */
+
+    // Switches preview of image selected from media db by changing the
+    // container's background image
+    serendipity.change_preview = function(id) {
+        var text_box = document.getElementById('serendipity[template][' + id + ']');
+        var image_box = document.getElementById(id + '_preview'); 
+        var filename = text_box.value;
+
+        image_box.style.backgroundImage = 'url(' + filename + ')';
+    }
+
+    // Opens media db image selection in new window
+    serendipity.choose_media = function(id) {
+        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+    }
+
+    // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
+    serendipity.serendipity_imageSelector_addToElement = function(str, id) {
+        id = escapeBrackets(str);
+        var $input = $('#'+id);
+        $input.val(str);
         
+        if ($input.attr('type') != 'hidden') {
+            $input.focus();    // IE would generate an error when focusing an hidden element
+        }
 
-    if (f['serendipity[filename_only]']) {
-        // this part is used when selecting only the image without further markup (-> category-icon)
-        var starget = f['serendipity[htmltarget]'] ? f['serendipity[htmltarget]'].value : 'serendipity[' + textarea + ']';
+        // calling the change-event for doing stuff like generating the preview-image
+        $input.change();
+    }
 
-        switch(f['serendipity[filename_only]'].value) {
-        case 'true':
-            parent.self.opener.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
-            parent.self.close();
-            return true;
-        case 'id':
-            parent.self.opener.serendipity_imageSelector_addToElement(f['imgID'].value, starget);
-            parent.self.close();
-            return true;
-        case 'thumb':
-            parent.self.opener.serendipity_imageSelector_addToElement(f['thumbName'].value, starget);
-            parent.self.close();
-            return true;
-        case 'big':
-            parent.self.opener.serendipity_imageSelector_addToElement(f['imgName'].value, starget);
-            parent.self.close();
-            return true;
+    // Escape [ and ] to be able to use the string as selector
+    // jQuery fails to select the input when the selector contains unescaped [ or ]
+    serendipity.escapeBrackets = function(str) {
+        str = str.replace(/\[/g, "\\[");  
+        str = str.replace(/\]/g, "\\]");
+        return str;
+    }
+
+    // Add another (image) keyword
+    serendipity.AddKeyword = function(keyword)  {
+        s = document.getElementById('keyword_input').value;
+        document.getElementById('keyword_input').value = (s != '' ? s + ';' : '') + keyword;
+    }
+
+    // "Transfer" value from media db popup to textarea, including wysiwyg
+    // This gets textarea="body"/"extended" and tries to insert into the textarea
+    // named serendipity[body]/serendipity[extended]
+    serendipity.serendipity_imageSelector_addToBody = function(str, textarea) {
+        var oEditor;
+        if (typeof(FCKeditorAPI) != 'undefined') {
+            oEditor = FCKeditorAPI.GetInstance('serendipity[' + textarea + ']') ;
+
+            if (oEditor.EditMode == FCK_EDITMODE_WYSIWYG) {
+                oEditor.InsertHtml(str);
+                return;
+            }
+        } else if(typeof(xinha_editors) != 'undefined') {
+            if (typeof(xinha_editors['serendipity[' + textarea + ']']) != 'undefined') {
+                oEditor = xinha_editors['serendipity['+ textarea +']'];
+            }
+
+            if (oEditor) {
+                oEditor.insertHTML(str);
+                return;
+            }
+        } else if(typeof(HTMLArea) != 'undefined') {
+            if (textarea == 'body' && typeof(editorbody) != 'undefined') {
+                oEditor = editorbody;
+            } else if (textarea == 'extended' && typeof(editorextended) != 'undefined') {
+                oEditor = editorextended;
+            } else if (typeof(htmlarea_editors) != 'undefined' && typeof(htmlarea_editors[textarea]) != 'undefined') {
+                oEditor =  htmlarea_editors[textarea];
+            }
+
+            if (oEditor._editMode != 'textmode') {
+                oEditor.insertHTML(str);
+                return;
+            } 
+        } else if(typeof(TinyMCE) != 'undefined') {
+            // for the TinyMCE editor we do not have a text mode insert
+            tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
+            return;
+        }
+        
+        serendipity.noWysiwygAdd(str, textarea);
+    }
+
+    // The noWysiwygAdd JS function is the vanila serendipity_imageSelector_addToBody js function
+    // which works fine in NO WYSIWYG mode
+    // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
+    serendipity.noWysiwygAdd = function(str, textarea) {
+        serendipity.wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
+    }
+
+    // Inserting media db img markup including s9y-specific container markup
+    serendipity.serendipity_imageSelector_done = function(textarea) {
+        var insert = '';
+        var img = '';
+        var src = '';
+        var alt = '';
+        var title = '';
+
+        var f = document.forms['serendipity[selForm]'].elements;
+
+        img           = f['imgName'].value;
+        var imgWidth  = f['imgWidth'].value;
+        var imgHeight = f['imgHeight'].value;
+        if (f['serendipity[linkThumbnail]'] && f['serendipity[linkThumbnail]'][0].checked == true) {
+            img       = f['thumbName'].value;
+            imgWidth  = f['imgThumbWidth'].value;
+            imgHeight = f['imgThumbHeight'].value;
+        }
+            
+
+        if (f['serendipity[filename_only]']) {
+            // this part is used when selecting only the image without further markup (-> category-icon)
+            var starget = f['serendipity[htmltarget]'] ? f['serendipity[htmltarget]'].value : 'serendipity[' + textarea + ']';
+
+            switch(f['serendipity[filename_only]'].value) {
+            case 'true':
+                parent.self.opener.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
+                parent.self.close();
+                return true;
+            case 'id':
+                parent.self.opener.serendipity_imageSelector_addToElement(f['imgID'].value, starget);
+                parent.self.close();
+                return true;
+            case 'thumb':
+                parent.self.opener.serendipity_imageSelector_addToElement(f['thumbName'].value, starget);
+                parent.self.close();
+                return true;
+            case 'big':
+                parent.self.opener.serendipity_imageSelector_addToElement(f['imgName'].value, starget);
+                parent.self.close();
+                return true;
+            }
+        }
+
+        alt = f['serendipity[alt]'].value.replace(/"/g, "&quot;");
+        title = f['serendipity[title]'].value.replace(/"/g, "&quot;");
+
+        var imgID = 0;
+        if (f['imgID']) {
+            imgID = f['imgID'].value;
+        }
+
+        var floating = $(':input[name="serendipity[align]"]:checked').val();
+        if (floating == "") {
+            floating = "center";
+        }
+        img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\">";
+
+        if ($("#radio_islink_yes").attr("checked")) {
+            // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
+            var targetval = $('#select_image_target').val();
+
+            var prepend   = '';
+            var ilink     = f['serendipity[url]'].value;
+            var itarget = '';
+
+            switch (targetval) {
+            case 'js':
+                var itarget = ' onclick="F1 = window.open(\'' + f['serendipity[url]'].value + '\',\'Zoom\',\''
+                        + 'height=' + (parseInt(f['imgHeight'].value) + 15) + ','
+                        + 'width='  + (parseInt(f['imgWidth'].value)  + 15) + ','
+                        + 'top='    + (screen.height - f['imgHeight'].value) /2 + ','
+                        + 'left='   + (screen.width  - f['imgWidth'].value)  /2 + ','
+                        + 'toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes\'); return false;"';
+                break;
+            case '_blank':
+                var itarget = ' target="_blank"';
+                break;
+            case 'plugin':
+                var itarget = ' id="s9yisphref' + imgID + '" onclick="javascript:this.href = this.href + \'&amp;serendipity[from]=\' + self.location.href;"';
+                prepend = '<a title="' + ilink + '" id="s9yisp' + imgID + '"></a>';
+                ilink   = f['baseURL'].value + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
+                break;
+            }
+
+            var img = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
+        } 
+
+        if ($('#serendipity_imagecomment').val() != '') {
+            var comment = f['serendipity[imagecomment]'].value;
+
+            var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
+                  +     '<div class="serendipity_imageComment_img">' + img + '</div>'
+                  +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
+                  + '</div>';
+        }
+
+        parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
+        parent.self.close();
+    }
+
+    // Toggle extended entry editor
+    serendipity.toggle_extended = function(setCookie) {
+        if ($('#toggle_extended').length == 0) {
+            // this function got called on load of the editor
+            var toggleButton = '#toggle_extended';
+            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+            $(toggleButton).click(function(e) {
+                e.preventDefault();
+                toggle_extended(true);
+            });
+        }
+        
+        if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
+            $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
+            $('#tools_extended').show();
+            $('#toggle_extended').find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+        } else {
+            $('textarea[name="serendipity[extended]"]').hide();
+            $('#tools_extended').hide();
+            $('#toggle_extended').find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
+        }
+        if (setCookie) {
+            document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
         }
     }
 
-    alt = f['serendipity[alt]'].value.replace(/"/g, "&quot;");
-    title = f['serendipity[title]'].value.replace(/"/g, "&quot;");
+    // Collapses/expands the category selector
+    serendipity.toggle_category_selector = function(id) {
+        if ($('#toggle_' + id).length == 0) {
+            // this function got called on load of the editor
+            var toggleButton = '#toggle_' + id;
 
-    var imgID = 0;
-    if (f['imgID']) {
-        imgID = f['imgID'].value;
-    }
+            $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
 
-    var floating = $(':input[name="serendipity[align]"]:checked').val();
-    if (floating == "") {
-        floating = "center";
-    }
-    img = "<!-- s9ymdb:" + imgID + " --><img class=\"serendipity_image_"+ floating +"\" width=\"" + imgWidth + "\" height=\"" + imgHeight + '"  src="' + img + "\" " + (title != '' ? 'title="' + title + '"' : '') + " alt=\"" + alt + "\">";
-
-    if ($("#radio_islink_yes").attr("checked")) {
-        // wrap the img in a link to the image. TODO: The label in the media_chooser.tpl explains it wrong
-        var targetval = $('#select_image_target').val();
-
-        var prepend   = '';
-        var ilink     = f['serendipity[url]'].value;
-        var itarget = '';
-
-        switch (targetval) {
-        case 'js':
-            var itarget = ' onclick="F1 = window.open(\'' + f['serendipity[url]'].value + '\',\'Zoom\',\''
-                    + 'height=' + (parseInt(f['imgHeight'].value) + 15) + ','
-                    + 'width='  + (parseInt(f['imgWidth'].value)  + 15) + ','
-                    + 'top='    + (screen.height - f['imgHeight'].value) /2 + ','
-                    + 'left='   + (screen.width  - f['imgWidth'].value)  /2 + ','
-                    + 'toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes\'); return false;"';
-            break;
-        case '_blank':
-            var itarget = ' target="_blank"';
-            break;
-        case 'plugin':
-            var itarget = ' id="s9yisphref' + imgID + '" onclick="javascript:this.href = this.href + \'&amp;serendipity[from]=\' + self.location.href;"';
-            prepend = '<a title="' + ilink + '" id="s9yisp' + imgID + '"></a>';
-            ilink   = f['baseURL'].value + 'serendipity_admin_image_selector.php?serendipity[step]=showItem&amp;serendipity[image]=' + imgID;
-            break;
+            $(toggleButton).click(function(e) {
+                e.preventDefault();
+                toggle_category_selector(id);
+            });
+            
+            if ($('#'+id).children('*[selected="selected"]').length > 1) {
+                // when loading the page new for the preview and more than one category was
+                // selected, collapsing the category-selector would lose those categories
+                $('#'+id).attr("size", $('#'+id).children().size);
+                $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+                return
+            }
+            
         }
-
-        var img = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
-    } 
-
-    if ($('#serendipity_imagecomment').val() != '') {
-        var comment = f['serendipity[imagecomment]'].value;
-
-        var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
-              +     '<div class="serendipity_imageComment_img">' + img + '</div>'
-              +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
-              + '</div>';
-    }
-
-    parent.self.opener.serendipity_imageSelector_addToBody(img, textarea);
-    parent.self.close();
-}
-
-// Toggle extended entry editor
-function toggle_extended(setCookie) {
-    if ($('#toggle_extended').length == 0) {
-        // this function got called on load of the editor
-        var toggleButton = '#toggle_extended';
-        $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
-        $(toggleButton).click(function(e) {
-            e.preventDefault();
-            toggle_extended(true);
-        });
-    }
-    
-    if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-        $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
-        $('#tools_extended').show();
-        $('#toggle_extended').find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
-    } else {
-        $('textarea[name="serendipity[extended]"]').hide();
-        $('#tools_extended').hide();
-        $('#toggle_extended').find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
-    }
-    if (setCookie) {
-        document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
-    }
-}
-
-// Collapses/expands the category selector
-function toggle_category_selector(id) {
-    if ($('#toggle_' + id).length == 0) {
-        // this function got called on load of the editor
-        var toggleButton = '#toggle_' + id;
-
-        $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
-
-        $(toggleButton).click(function(e) {
-            e.preventDefault();
-            toggle_category_selector(id);
-        });
-        
-        if ($('#'+id).children('*[selected="selected"]').length > 1) {
-            // when loading the page new for the preview and more than one category was
-            // selected, collapsing the category-selector would lose those categories
+        if ($('#'+id).attr("multiple")) {
+            $('#'+id).removeAttr("multiple");
+            $('#'+id).removeAttr("size");
+            $('#toggle_' + id).find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
+            
+        } else {
+            $('#'+id).attr("multiple", "");
             $('#'+id).attr("size", $('#'+id).children().size);
             $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
-            return
         }
-        
     }
-    if ($('#'+id).attr("multiple")) {
-        $('#'+id).removeAttr("multiple");
-        $('#'+id).removeAttr("size");
-        $('#toggle_' + id).find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
-        
-    } else {
-        $('#'+id).attr("multiple", "");
-        $('#'+id).attr("size", $('#'+id).children().size);
-        $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
-    }
-}
 
-// save in the cookie which options were selected when inserting a image from the media db
-function rememberMediaOptions() {
-    $('#imageForm :input').each(function(index, element) {
-        if (! (element.type == 'radio' && element.checked == false)) {
-            SetCookie(element.name.replace(/\[/g, '_').replace(/\]/g, ''), $(element).val());
+    // save in the cookie which options were selected when inserting a image from the media db
+    serendipity.rememberMediaOptions = function() {
+        $('#imageForm :input').each(function(index, element) {
+            if (! (element.type == 'radio' && element.checked == false)) {
+                serendipity.SetCookie(element.name.replace(/\[/g, '_').replace(/\]/g, ''), $(element).val());
+            }
+        });
+    }
+
+    // Rescale image
+    serendipity.rescale = function(dim, newval) { 
+        var ratio          = $('#serendipityScaleImg').attr('data-imgheight')/$('#serendipityScaleImg').attr('data-imgwidth');
+        var trans          = new Array();
+        trans['width']     = new Array('serendipity[height]', ratio);
+        trans['height']    = new Array('serendipity[width]', 1/ratio);
+
+        if ($('#resize_keepprops').is(':checked')) { 
+            document.serendipityScaleForm.elements[trans[dim][0]].value=Math.round(trans[dim][1]*newval);
         }
-    });
-}
-
-// Rescale image
-function rescale(dim, newval) { 
-    var ratio          = $('#serendipityScaleImg').attr('data-imgheight')/$('#serendipityScaleImg').attr('data-imgwidth');
-    var trans          = new Array();
-    trans['width']     = new Array('serendipity[height]', ratio);
-    trans['height']    = new Array('serendipity[width]', 1/ratio);
-
-    if ($('#resize_keepprops').is(':checked')) { 
-        document.serendipityScaleForm.elements[trans[dim][0]].value=Math.round(trans[dim][1]*newval);
     }
-}
 
-// Rename file in media db
-var media_rename = '{$CONST.ENTER_NEW_NAME}';
-var media_token_url = '{$token_url}';
+    // Rename file in media db
+    var media_rename = '{$CONST.ENTER_NEW_NAME}';
+    var media_token_url = '{$token_url}';
 
-function rename(id, fname) {
-    var newname;
-    if (newname = prompt(media_rename + fname, fname)) {
-        location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
-    }
-}
-
-// Collapse/expand tree view in media db choose img popup window
-var tree_toggle_state = 'expand';
-
-function treeToggleAll() {
-    if (tree_toggle_state == 'expand') {
-        tree_toggle_state = 'collapse';
-        tree.expandAll();
-    } else {
-        tree_toggle_state = 'expand';
-        tree.collapseAll();
-        coreNode.expand();
-    }
-}
-
-// Used by media_upload.tpl to …?
-function getfilename(value) { 
-    re = /^.+[\/\\]+?(.+)$/;
-    return value.replace(re, "$1"); 
-}
-
-var inputStorage = new Array();
-
-function checkInputs() { 
-    upload_fieldcount = $('.uploadform_userfile').length;
-
-    for (i = 1; i <= upload_fieldcount; i++) { 
-        if (!inputStorage[i]) { 
-            fillInput(i, i);
-        } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) { 
-            fillInput(i, i);
+    serendipity.rename = function(id, fname) {
+        var newname;
+        if (newname = prompt(media_rename + fname, fname)) {
+            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
         }
+    }
+
+    // Collapse/expand tree view in media db choose img popup window
+    var tree_toggle_state = 'expand';
+
+    serendipity.treeToggleAll = function() {
+        if (tree_toggle_state == 'expand') {
+            tree_toggle_state = 'collapse';
+            tree.expandAll();
+        } else {
+            tree_toggle_state = 'expand';
+            tree.collapseAll();
+            coreNode.expand();
+        }
+    }
+
+    // Used by media_upload.tpl to …?
+    serendipity.getfilename = function(value) { 
+        re = /^.+[\/\\]+?(.+)$/;
+        return value.replace(re, "$1"); 
+    }
+
+    var inputStorage = new Array();
+
+    serendipity.checkInputs = function() { 
+        upload_fieldcount = $('.uploadform_userfile').length;
+
+        for (i = 1; i <= upload_fieldcount; i++) { 
+            if (!inputStorage[i]) { 
+                serendipity.fillInput(i, i);
+            } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) { 
+                serendipity.fillInput(i, i);
+            }
+        } 
+    }
+
+    serendipity.fillInput = function(source, target) { 
+        sourceval = serendipity.getfilename(document.getElementById('userfile_' + source).value);
+
+        if (sourceval.length > 0) { 
+            document.getElementById('target_filename_' + target).value = sourceval;
+            inputStorage[target] = sourceval;
+        }
+    }
+
+    // …?
+    serendipity.checkSave = function() { 
+        {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
+        return true;
     } 
-}
 
-function fillInput(source, target) { 
-    sourceval = getfilename(document.getElementById('userfile_' + source).value);
-
-    if (sourceval.length > 0) { 
-        document.getElementById('target_filename_' + target).value = sourceval;
-        inputStorage[target] = sourceval;
+    // save in which directory the first uploaded files is stored (the default when only inserting one file)
+    serendipity.rememberUploadOptions = function() {
+        serendipity.SetCookie("addmedia_directory", $('#target_directory_2').val());
     }
-}
 
-// …?
-function checkSave() { 
-    {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
-    return true;
-} 
+    // Clones the upload form template
+    serendipity.addUploadField = function() {
+        upload_fieldcount = $('.uploadform_userfile').length + 1;
 
-// save in which directory the first uploaded files is stored (the default when only inserting one file)
-function rememberUploadOptions() {
-    SetCookie("addmedia_directory", $('#target_directory_2').val());
-}
+        var $fields = $('#uploads > div:last-child').clone(true);
+        $fields.attr('id', 'upload_form_' + upload_fieldcount);
 
-// Clones the upload form template
-function addUploadField() {
-    upload_fieldcount = $('.uploadform_userfile').length + 1;
+        var userfile             = $('.uploadform_userfile',               $fields);
+        var userfile_label       = $('.uploadform_userfile_label',         $fields);
+        var targetfilename       = $('.uploadform_target_filename',        $fields);
+        var targetfilename_label = $('.uploadform_target_filename_label',  $fields);
+        var targetdir            = $('.uploadform_target_directory',       $fields);
+        var targetdir_label      = $('.uploadform_target_directory_label', $fields);
 
-    var $fields = $('#uploads > div:last-child').clone(true);
-    $fields.attr('id', 'upload_form_' + upload_fieldcount);
+        userfile.attr('id', 'userfile_' + upload_fieldcount);
+        userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
+        userfile_label.attr('for', 'userfile_' + upload_fieldcount);
 
-    var userfile             = $('.uploadform_userfile',               $fields);
-    var userfile_label       = $('.uploadform_userfile_label',         $fields);
-    var targetfilename       = $('.uploadform_target_filename',        $fields);
-    var targetfilename_label = $('.uploadform_target_filename_label',  $fields);
-    var targetdir            = $('.uploadform_target_directory',       $fields);
-    var targetdir_label      = $('.uploadform_target_directory_label', $fields);
+        targetfilename.attr('id', 'target_filename_' + upload_fieldcount);
+        targetfilename.attr('name', 'serendipity[target_filename][' + upload_fieldcount + ']');
+        targetfilename.val('');
+        targetfilename_label.attr('for', 'target_filename_' + upload_fieldcount);
 
-    userfile.attr('id', 'userfile_' + upload_fieldcount);
-    userfile.attr('name', 'serendipity[userfile][' + upload_fieldcount + ']');
-    userfile_label.attr('for', 'userfile_' + upload_fieldcount);
+        targetdir.attr('id', 'target_directory_' + upload_fieldcount);
+        targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
+        // This looks weird, but works. If anyone can improve this, by all means do so.
+        targetdir.val($($('#target_directory_' + (upload_fieldcount - 1))).val());
+        targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
 
-    targetfilename.attr('id', 'target_filename_' + upload_fieldcount);
-    targetfilename.attr('name', 'serendipity[target_filename][' + upload_fieldcount + ']');
-    targetfilename.val('');
-    targetfilename_label.attr('for', 'target_filename_' + upload_fieldcount);
+        $fields.appendTo('#uploads');
+    }
 
-    targetdir.attr('id', 'target_directory_' + upload_fieldcount);
-    targetdir.attr('name', 'serendipity[target_directory][' + upload_fieldcount + ']');
-    // This looks weird, but works. If anyone can improve this, by all means do so.
-    targetdir.val($($('#target_directory_' + (upload_fieldcount - 1))).val());
-    targetdir_label.attr('for', 'target_directory_' + upload_fieldcount);
+    // Inverts a selection of checkboxes
+    serendipity.invertSelection = function() {
+        var $chkboxes = $('#formMultiDelete .multidelete');
+        $chkboxes.prop('checked', !$chkboxes.attr('checked'))
+            .trigger('click');
+    }
 
-    $fields.appendTo('#uploads');
-}
+    // Highlight/dehighlight elements in lists
+    serendipity.highlightComment = function(id, checkvalue) {
+        $('#' + id).toggleClass('multidel_selected');
+    }
 
-// Inverts a selection of checkboxes
-function invertSelection() {
-    var $chkboxes = $('#formMultiDelete .multidelete');
-    $chkboxes.prop('checked', !$chkboxes.attr('checked'))
-        .trigger('click');
-}
-
-// Highlight/dehighlight elements in lists
-function highlightComment(id, checkvalue) {
-    $('#' + id).toggleClass('multidel_selected');
-}
+}( window.serendipity = window.serendipity || {}, jQuery ));
 
 (function($) {
     // Source: https://github.com/yatil/accessifyhtml5.js
@@ -643,27 +647,27 @@ function highlightComment(id, checkvalue) {
     });
 
     // Fire WYSIWYG editor(s)
-    spawn();
+    serendipity.spawn();
 
     // Editor-area
     var $entryEditor = $('body').has('#serendipityEntry');
 
     if($entryEditor.size() > 0) {
-        toggle_category_selector('categoryselector');
-        toggle_extended();
+        serendipity.toggle_category_selector('categoryselector');
+        serendipity.toggle_extended();
     }
 
     // Form submit events
     $('#uploadform').submit(function() {
-        rememberUploadOptions();
+        serendipity.rememberUploadOptions();
     });
 
     $('#imageForm').submit(function() {
-        serendipity_imageSelector_done();
+        serendipity.serendipity_imageSelector_done();
     });
 
     $('#imgedit > form').submit(function() {
-        imgedit_getCoordinates();
+        serendipity.imgedit_getCoordinates();
     });
 
     // Click events
@@ -694,17 +698,17 @@ function highlightComment(id, checkvalue) {
         var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
         var open = '<' + $tag + '>';
         var close = '</' + $tag + '>';
-        wrapSelection(target, open, close);
+        serendipity.wrapSelection(target, open, close);
     });
 
     $('.wrap_insimg').click(function() {
         var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
-        wrapInsImage(target);
+        serendipity.wrapInsImage(target);
     });
 
     $('.wrap_insurl').click(function() {
         var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
-        wrapSelectionWithLink(target);
+        serendipity.wrapSelectionWithLink(target);
     });
 
     $('.wrap_insmedia').click(function() {
@@ -779,12 +783,12 @@ function highlightComment(id, checkvalue) {
     }
 
     $('.change_preview').change(function() {
-        change_preview($(this).attr('data-configitem'));
+        serendipity.change_preview($(this).attr('data-configitem'));
     });
 
     $('.choose_media').click(function(e) {
         var configitem = $(this).parent().find('.change_preview').attr('id');
-        choose_media(configitem);
+        serendipity.choose_media(configitem);
         e.preventDefault();
     });
 
@@ -825,12 +829,12 @@ function highlightComment(id, checkvalue) {
     // Selection for multidelete
     $('.multidelete').click(function() {
         var $el = $(this);
-        highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
+        serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
     });
 
     // Invert checkboxes
     $('.invert_selection').click(function() {
-        invertSelection();
+        serendipity.invertSelection();
     });
 
     // Go back one step
@@ -841,16 +845,16 @@ function highlightComment(id, checkvalue) {
     // Add media db upload field
     $('#add_upload').click(function(e) {
         e.preventDefault();
-        addUploadField();
+        serendipity.addUploadField();
     });
 
     // Check media db inputs
     $('.check_input').change(function() {
-        checkInputs();
+        serendipity.checkInputs();
     });
 
     $('.check_inputs').click(function() {
-        checkInputs();
+        serendipity.checkInputs();
     });
 
     // Limit width of media file info
@@ -882,7 +886,7 @@ function highlightComment(id, checkvalue) {
     $('.media_rename').click(function(e) {
         e.preventDefault();
         var $el = $(this);
-        rename($el.attr('data-fileid'), $el.attr('data-filename'));
+        serendipity.rename($el.attr('data-fileid'), $el.attr('data-filename'));
     });
 
     $('#media_crop').click(function(e) {
@@ -902,11 +906,11 @@ function highlightComment(id, checkvalue) {
 
     // Media scale change events
     $('#resize_width').change(function() {
-        rescale('width' , $(this).val());
+        serendipity.rescale('width' , $(this).val());
     });
 
     $('#resize_height').change(function() {
-        rescale('height' , $(this).val());
+        serendipity.rescale('height' , $(this).val());
     });
 
     // Show extended comment
@@ -939,6 +943,7 @@ function highlightComment(id, checkvalue) {
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().prependTo('.comments_pane');
     $('.entries_pane .pagination').clone().prependTo('.entries_pane');
+    
 
     // Equal Heights
     var $eqHeights = $('body').has('.equal_heights');

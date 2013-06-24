@@ -134,11 +134,11 @@
         <script>
             $(document).ready(function() {
             {foreach $media.sortParams AS $sortParam}
-                SetCookie("sortorder_{$sortParam}","{$get_sortorder_{$sortParam}}" )
+                serendipity.SetCookie("sortorder_{$sortParam}","{$get_sortorder_{$sortParam}}" )
             {/foreach}
 
             {foreach $media.filterParams AS $filterParam}
-                SetCookie("{$filterParam}", "{$get_{$filterParam}}" )
+                serendipity.SetCookie("{$filterParam}", "{$get_{$filterParam}}" )
             {/foreach}
             });
         </script>
