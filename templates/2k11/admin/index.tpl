@@ -32,7 +32,7 @@
                 {if 'personalConfiguration'|checkPermission}
                     <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
-                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-link-ext"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
                     <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-off"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                 </ul>
             </nav>
