@@ -367,7 +367,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
-                toggle_extended(true);
+                serendipity.toggle_extended(true);
             });
         }
         
