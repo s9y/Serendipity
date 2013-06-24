@@ -854,8 +854,8 @@ function highlightComment(id, checkvalue) {
         $('.media_file_meta').css('maxWidth', thumbsWidth);
     }
 
-    // Show media file info, template info or filters
-    $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
+    // Show media file info, template info, label info or filters
+    $('.media_show_info, .template_show_info, .filters_toolbar li > a, .toggle_info').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
         e.preventDefault();
     });

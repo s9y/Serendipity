@@ -1477,10 +1477,20 @@ form > .button_link:first-of-type {
     height: 24px;
 }
 
-.entry_status {
+.entry_status,
+.field_info {
     background: #888;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     color: #fff;
     padding: 0 4px;
+}
+
+.field_info {
+    clear: both;
+    display: block;
+    margin: .75em 0 0;
 }
 
 #entries_list .entry_info .entry_status {
@@ -1852,10 +1862,15 @@ input[name="serendipity[filter][fileCategory]"] {
     #uploadform .form_select select,
     #uploadform .form_field input,
     #serendipity_category fieldset legend,
-    #serendipity_category fieldset > .grouped {
+    #serendipity_category fieldset > .grouped,
+    .field_info {
         float: left;
         margin-right: 2%;
         width: 48%;
+    }
+
+    .field_info {
+        margin: .85715em 2% 0 50%;
     }
 
     .configuration_group .form_select select,
