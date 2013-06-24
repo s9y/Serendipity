@@ -1,8 +1,6 @@
 {if $init}
     <script src="{$serendipityHTTPPath}ckeditor/ckeditor.js"></script>
-{/if}
-
-<script>
+    <script>
     $('document').ready(function() {
         CKEDITOR.plugins.add('s9y_medialibrary', {
                                                     init: function( editor ) {
@@ -21,7 +19,12 @@
                                                     }
                                                 }
         );
-    
+    });
+    </script>
+{/if}
+
+<script>
+    $('document').ready(function() {
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
                 extraPlugins : 's9y_medialibrary',
                 toolbar: [
