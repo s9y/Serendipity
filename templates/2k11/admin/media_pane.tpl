@@ -31,20 +31,15 @@
                     {if $so_val.type == 'date'}
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
-                                {* Core might need to be adapted to input[type=date] *}
-                                {* date is not ideal, should be datetime – but datetime isn't properly supported *}
-                                {* by browsers yet, so we probably need a JS widget (jQuery UI?) for this …      *}
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
                                 <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
                                  - 
                                 <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
                                 <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|@escape}">
-                                {* <span class="input_hint">(DD.MM.YYYY | YYYY-MM-DD | MM/DD/YYYY)</span> *}
                             </div>
                     {elseif $so_val.type == 'intrange'}
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
-                                {* Could also use input[type=range]; unsure if that's actually useful (yet) *}
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
                                 <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|@escape}">
                                  - 

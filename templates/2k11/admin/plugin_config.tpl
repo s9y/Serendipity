@@ -1,7 +1,7 @@
 {if $showSubmit_head}
-    <div class="save_conf form_buttons">
+    <div class="form_buttons">
         {if $postKey == "template"}
-            <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
         {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
@@ -31,9 +31,9 @@
     </div>
 {/foreach}
 {if $showSubmit_foot}
-    <div class="save_conf form_buttons">
+    <div class="form_buttons">
         {if $postKey == "template"}
-            <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
         {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>

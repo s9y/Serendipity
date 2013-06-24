@@ -1,8 +1,6 @@
 {if !empty($errormsg)}
-    {* TODO: Not sure anything emitted here actually IS an error. *}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$errormsg}</span>
 {/if}
-<div class="has_toolbar">
     <h2>{$CONST.COMMENTS}</h2>
 
     <form action="" method="GET">
@@ -84,7 +82,6 @@
             </div>
         </fieldset>
     </form>
-</div>
 {if !is_array($sql)}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_COMMENTS}</span>
 
@@ -109,7 +106,7 @@
                         <dt>{$CONST.AUTHOR}:</dt>
                         <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
                         <dt>{$CONST.EMAIL}:</dt>
-                        <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <span class="serendipity_subscription_on">({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</span>{/if}{/if} {$comment.action_email}</dd>
+                        <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {$comment.action_email}</dd>
                         <dt>IP:</dt>
                         <dd>{if empty($comment.ip)}N/A{else}{$comment.ip|escape}{/if} {$comment.action_ip}</dd>
                         <dt>URL:</dt>

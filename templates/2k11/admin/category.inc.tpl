@@ -153,13 +153,13 @@
             <li>
                 <div class="clearfix {cycle values="odd,even"}">
                     <details class="category_data">
-                        <summary class="category_name{if $category.category_icon} category_hasicon{/if}"><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
+                        <summary><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
 
                         <div class="category_info clearfix">
                         {if $category.category_description != ''}
                             <span class="category_desc">{$category.category_description|escape:"html"}</span>
                         {/if}
-                            (<span class="category_author">{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>)
+                            (<span>{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>)
                         </div>
                     </details>
 

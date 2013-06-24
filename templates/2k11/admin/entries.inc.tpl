@@ -220,7 +220,7 @@
         {foreach $rip_entry AS $ripent}
         <span class="msg_dialogue"><span class="icon-help-circled"></span> {$ripent}</span>
         {/foreach}
-        <div class="dialogue_delrip form_buttons">
+        <div class="form_buttons">
             <a class="button_link state_cancel icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
             <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
         </div>

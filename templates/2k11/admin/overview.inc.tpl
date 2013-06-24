@@ -16,21 +16,19 @@
         </li>
     </ul>
 </aside>
-
-
 {$backend_frontpage_display}
-
 {if $update}
     <section id="dashboard_update" class="dashboard">
         <h4>UPDATER_TITLE</h4>
-        New Version available: {$curVersion}
+
+        <span class="msg_notice"><span class="icon-info-circled"></span> New Version available: {$curVersion}</span>
     </section>
 {/if}
-
 {if is_array($comments)}
     <section id="dashboard_comments" class="dashboard">
         <h4>{$CONST.COMMENTS}</h4>
-        <ol>
+
+        <ol class="plainList">
         {foreach $comments as $comment}
             <li>
                 {$comment.body}
@@ -54,11 +52,11 @@
         </ol>
     </section>
 {/if}
-
 {if is_array($entries)}
     <section id="dashboard_entries" class="dashboard">
         <h4>Future Entries</h4>
-        <ol>
+
+        <ol class="plainList">
         {foreach $entries as $entry}
             <li>
                 {$entry.title}
@@ -85,4 +83,3 @@
         </ol>
     </section>
 {/if}
-

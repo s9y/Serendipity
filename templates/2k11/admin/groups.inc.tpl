@@ -113,12 +113,10 @@
             <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
             <div class="form_buttons">
-        {if $edit}
+            {if $edit}
                 <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
+            {/if}
                 <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
-        {else}
-                <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
-        {/if}
             </div>
     </form>
 {else}

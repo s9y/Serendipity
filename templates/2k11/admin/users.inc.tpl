@@ -44,7 +44,8 @@
     {foreach $users as $user}
         {if $user.isEditable}
         <li class="clearfix {cycle values="odd,even"}">
-            <span class="user_name user_{if $user.userlevel >= {$CONST.USERLEVEL_ADMIN}}admin{else}{if $user.userlevel >= {$CONST.USERLEVEL_CHIEF}}chief{else}editor{/if}{/if}"><span class="icon-user"></span> {$user.realname|escape:"html"} ({$user.userlevel})</span>
+            <span class="user_name"><span class="icon-user"></span> {$user.realname|escape:"html"} ({$user.userlevel})</span>
+            
             <ul class="plainList clearfix edit_actions">
                 <li><a class="button_link" href="{$user.authorUrl}" title="{$CONST.PREVIEW} {$user.realname}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                 <li><a class="button_link" href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]={$user.authorid}#editform" title="{$CONST.EDIT} {$user.realname|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>

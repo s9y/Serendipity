@@ -149,7 +149,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
         $data['new'] = true;
         $cid = false;
         $this_cat = array();
-        echo '<strong>'. CREATE_NEW_CAT .'</strong>';
+        echo '<h2>'. CREATE_NEW_CAT .'</h2>';
         $save = CREATE;
         $read_groups  = array(0 => 0);
         $write_groups = array(0 => 0);

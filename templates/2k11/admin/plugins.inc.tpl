@@ -12,12 +12,12 @@
     {elseif $saveconf}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
-    <h2>{$name} (<span class="plugin_class">{$class}</span>)</h2>
+    <h2>{$name} ({$class})</h2>
 
     <div class="plugin_info">
-        <p><strong>{$CONST.DESCRIPTION}:</strong> {$desc}</p>
+        <p><b>{$CONST.DESCRIPTION}:</b> {$desc}</p>
     {if !empty($license)}
-        <p><strong>{$CONST.MEDIA_PROPERTY_COPYRIGHT}:</strong> {$license}</p>
+        <p><b>{$CONST.MEDIA_PROPERTY_COPYRIGHT}:</b> {$license}</p>
     {/if}
     {if ! empty($documentation) || $changelog || $documentation_local}
         <ul class="plainList">

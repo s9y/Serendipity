@@ -19,6 +19,5 @@
     {/if}
 {else}
     <h2>{$CONST.CONFIGURATION}</h2>
-
     {$config}
 {/if}

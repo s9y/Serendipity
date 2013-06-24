@@ -4,11 +4,11 @@
 {/if}
 <form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
     {foreach $entry_vars.hiddens as $key => $value}
-        <input type="hidden" name="{$key}" value="{$value}" />
+    <input type="hidden" name="{$key}" value="{$value}">
     {/foreach}
-    <input type="hidden" id="entryid" name="serendipity[id]" value="{$entry_vars.entry.id}" />
-    <input type="hidden" name="serendipity[timestamp]" value="{$entry_vars.timestamp}" />
-    <input type="hidden" name="serendipity[preview]" value="false" />
+    <input type="hidden" id="entryid" name="serendipity[id]" value="{$entry_vars.entry.id}">
+    <input type="hidden" name="serendipity[timestamp]" value="{$entry_vars.timestamp}">
+    <input type="hidden" name="serendipity[preview]" value="false">
     {$entry_vars.formToken}
     <div id="edit_entry_title" class="form_field">
         <label for="entryTitle">{$CONST.TITLE}</label>
@@ -46,7 +46,6 @@
         {/if}
             <input class="hilite_i wrap_selection" type="button" name="insI" value="I" data-tag="em" data-tarea="body">
             <input class="hilite_b wrap_selection" type="button" name="insB" value="B" data-tag="strong" data-tarea="body">
-            <input class="hilite_u wrap_selection" type="button" name="insU" value="U" data-tag="u" data-tarea="body">
             <input class="wrap_selection" type="button" name="insQ" value="{$CONST.QUOTE}" data-tag="blockquote" data-tarea="body">
             <input class="wrap_insimg" type="button" name="insJ" value="img" data-tarea="body">
             <input class="wrap_insmedia" type="button" name="insImage" value="{$CONST.MEDIA}" data-tarea="body">
@@ -93,7 +92,6 @@
         {/if}
             <input class="hilite_i wrap_selection" type="button" name="insI" value="I" data-tag="em" data-tarea="extended">
             <input class="hilite_b wrap_selection" type="button" name="insB" value="B" data-tag="strong" data-tarea="extended">
-            <input class="hilite_u wrap_selection" type="button" name="insU" value="U" data-tag="u" data-tarea="extended">
             <input class="wrap_selection" type="button" name="insQ" value="{$CONST.QUOTE}" data-tag="blockquote" data-tarea="extended">
             <input class="wrap_insimg" type="button" name="insJ" value="img" data-tarea="extended">
             <input class="wrap_insmedia" type="button" name="insImage" value="{$CONST.MEDIA}" data-tarea="extended">

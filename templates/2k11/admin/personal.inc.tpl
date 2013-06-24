@@ -1,4 +1,4 @@
-<h2>{$CONST.PERSONAL_SETTINGS}</h2>
+    <h2>{$CONST.PERSONAL_SETTINGS}</h2>
 {if $adminAction == 'save'}
     {if $not_authorized}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CREATE_NOT_AUTHORIZED_USERLEVEL}</span>

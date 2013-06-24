@@ -69,7 +69,7 @@
         {foreach $rip_image AS $ripimg}
         <span class="msg_dialogue"><span class="icon-help-circled"></span> {$ripimg}</span>
         {/foreach}
-        <div class="dialogue_delrip form_buttons">
+        <div class="form_buttons">
             <a class="button_link icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
             <a class="button_link icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
         </div>
