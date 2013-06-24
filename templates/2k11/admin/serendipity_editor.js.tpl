@@ -240,8 +240,14 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             // for the TinyMCE editor we do not have a text mode insert
             tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
             return;
+        } else if (typeof(CKEDITOR) != 'undefined') {
+            oEditor = CKEDITOR.instances[textarea];
+            if (oEditor.mode == "wysiwyg") { 
+                oEditor.insertHtml(str);
+                return;
+            } 
         }
-        
+
         serendipity.noWysiwygAdd(str, textarea);
     }
 

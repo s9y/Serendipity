@@ -170,36 +170,6 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             return;
         }
 
-        if (file_exists($serendipity['serendipityPath'] . 'htmlarea/XinhaCore.js')) {
-            $xinha = true;
-        } else {
-            $xinha = false;
-        }
-
-        $xinha_custom = serendipity_getTemplateFile('my_custom.js', 'serendipityHTTPPath');
-        if (empty($xinha_custom)) {
-            $xinha_custom = 'htmlarea/my_custom.js';
-        }
-
-        $csscode = str_replace(
-                 array(
-                   "\n",
-                   "'",
-                   "\r",
-                   "{LANG_DIRECTION}"
-                 ),
-
-                 array(
-                   '\n',
-                   "\'",
-                   "",
-                   (defined('LANG_DIRECTION') ? LANG_DIRECTION : 'ltr')
-                 ),
-
-                 file_get_contents(serendipity_getTemplateFile('style_fallback.css', 'serendipityPath')) . 
-                 file_get_contents(serendipity_getTemplateFile('htmlarea.css', 'serendipityPath'))
-        );
-
         if (is_array($eventData['buttons'])) {
             foreach($eventData['buttons'] as $button) {
                 // Sort buttons into toolbar lists for later additions
@@ -219,10 +189,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         }
         
         $data = array();
-        $data['xinha'] = $xinha;
-        $data['xinha_custom'] = $xinha_custom;
         $data['init'] = $init;
-        $data['csscode'] = $csscode;
         $data['spawnMulti'] = $spawnMulti;
         $data['jsname'] = $jsname;
         $data['eventData'] = $eventData;
