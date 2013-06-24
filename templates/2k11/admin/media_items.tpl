@@ -95,21 +95,21 @@
             </div>
 
             <ul class="media_file_actions actions plainList clearfix">
-                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info" rel="tooltip"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
+                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
             {if $file.is_editable}
-                <li><a class="media_fullsize button_link" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}" rel="tooltip" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
-                <li><a class="media_rename button_link" href="#" title="{$CONST.MEDIA_RENAME}" rel="tooltip" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
+                <li><a class="media_fullsize button_link" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
+                <li><a class="media_rename button_link" href="#" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
                 {if $file.is_image AND NOT $file.hotlink}
-                <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}'" title="{$CONST.IMAGE_RESIZE}" rel="tooltip"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
+                <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}'" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
                 {/if}
                 {if $file.is_image AND NOT $file.hotlink}
-                <li><a class="media_rotate_left button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}" rel="tooltip"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
+                <li><a class="media_rotate_left button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
                 {/if}
                 {if $file.is_image AND NOT $file.hotlink}
-                <li><a class="media_rotate_right button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}" rel="tooltip"><span class="icon-cw"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
+                <li><a class="media_rotate_right button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}"><span class="icon-cw"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
                 {/if}
-                <li><a class="media_prop button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}" rel="tooltip"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
-                <li><a class="media_delete button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}" rel="tooltip"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
+                <li><a class="media_prop button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
+                <li><a class="media_delete button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
             {/if}
             </ul>
         </article>

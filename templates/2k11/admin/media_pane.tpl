@@ -7,8 +7,8 @@
         {$media.token}
         {$media.form_hidden}
         <ul class="filters_toolbar clearfix plainList">
-            <li><a class="button_link" href="#media_pane_filter" title="Show filters" rel="tooltip"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
-            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}" rel="tooltip"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             <li id="media_selector_bar"><fieldset>
                     <input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == ""}checked{/if} value=""></input><label for="serendipity[filter][fileCategory][All]" class="media_selector button_link">All</label><input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "image"}checked{/if} value="image"></input><label for="serendipity[filter][fileCategory][Image]" class="media_selector button_link">{$CONST.IMAGE}</label><input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]" {if $media.filter.fileCategory == "video"}checked{/if} value="video"></input><label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
                 </fieldset>
@@ -166,8 +166,8 @@
             <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3> {* i18n *}
 
             <ul class="clearfix">
-                <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}" rel="tooltip"><span class="icon-left-open"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-                <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}" rel="tooltip"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-open"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-open"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-open"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
             </ul>
         </nav>
         {/if}

@@ -56,7 +56,7 @@
         
         <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" data-pmwidth="{$preview_width}" data-pmheight="{$preview_height}" value="{$value}">{* This should be input[type=file] … *}
 
-        <a class="button_link choose_media" href="#serendipity[{$postKey}][{$config_item}]" title="{$CONST.MEDIA_LIBRARY}" rel="tooltip"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>
+        <a class="button_link choose_media" href="#serendipity[{$postKey}][{$config_item}]" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>
     </div>
 {elseif $ctype == 'sequence'}
     {if !$sequencejs_output}
@@ -75,7 +75,7 @@
         {foreach $order_id as $orid}
             <li id="{$orid['id']}" class="sequence_item pluginmanager_item_even">
                 <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet">
-                    <a class="icon_link" href="#" title="Move" rel="tooltip"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                    <a class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
                 </div>
             {if $checkable}
                 <div class="form_check">

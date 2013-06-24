@@ -398,51 +398,6 @@ nav ol {
 .icon-clock:before { content: '\e822'; }
 
 
-/* TOOLTIPS
-   ----------------------------------------------------------------- */
-#tooltip {
-    background: #222;
-    border-radius: 4px;
-    color: #fcfcfc;
-    font-size: .875em;
-    padding: 2px 8px;
-    position: absolute;
-    text-align: center;
-    z-index: 100;
-}
- 
-#tooltip:after {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #222;
-    content: '';
-    height: 0;
-    margin-left: -8px;
-    position: absolute;
-    left: 50%;
-    bottom: -8px;
-    width: 0;
-}
- 
-#tooltip.top:after {
-    border-top-color: transparent;
-    border-bottom: 8px solid #222;
-    top: -16px;
-    bottom: auto;
-}
- 
-#tooltip.left:after {
-    left: 8px;
-    margin: 0;
-}
- 
-#tooltip.right:after {
-    right: 8px;
-    left: auto;
-    margin: 0;
-}
-
-
 /* BACKEND HELPER CLASSES
    ----------------------------------------------------------------- */
 .icon_link,
