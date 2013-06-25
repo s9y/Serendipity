@@ -2073,6 +2073,11 @@ input[name="serendipity[filter][fileCategory]"] {
     .js #edit_entry_metadata select {
         width: 91%;
     }
+
+    #edit_entry_status_comments .form_check {
+        float: left;
+        margin: .75em 1em .75em 0;
+    }
 }
 
 
