@@ -1,37 +1,38 @@
-<h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
+    <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
 
-<aside id="further_links">
-    <h3>{$CONST.FURTHER_LINKS}</h3>
-    
-    <ul class="plainList">
-        <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
-        <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
-        <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
-        <li><a href="http://www.s9y.org/forums/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
-        <li><a href="http://spartacus.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_SPARTACUS}</a></li>
-        <li>
-            <a href="{$bookmarklet}" onclick="alert('{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}'); return false;" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">
-                {$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}
-            </a>
-        </li>
-    </ul>
-</aside>
+    <aside id="further_links">
+        <h3>{$CONST.FURTHER_LINKS}</h3>
+        
+        <ul class="plainList">
+            <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
+            <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
+            <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
+            <li><a href="http://www.s9y.org/forums/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
+            <li><a href="http://spartacus.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_SPARTACUS}</a></li>
+            <li>
+                <a href="{$bookmarklet}" onclick="alert('{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}'); return false;" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">
+                    {$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}
+                </a>
+            </li>
+        </ul>
+    </aside>
 {$backend_frontpage_display}
 {if $update}
     <section id="dashboard_update" class="dashboard">
-        <h4>UPDATER_TITLE</h4>
+        <h3>UPDATER_TITLE</h3>
 
         <span class="msg_notice"><span class="icon-info-circled"></span> New Version available: {$curVersion}</span>
     </section>
 {/if}
 {if is_array($comments)}
     <section id="dashboard_comments" class="dashboard">
-        <h4>{$CONST.COMMENTS}</h4>
+        <h3>{$CONST.COMMENTS}</h3>
 
         <ol class="plainList">
         {foreach $comments as $comment}
             <li>
-                {$comment.body}
+                <div class="comment_summary">{$comment.body|truncate:120:"&hellip;"}</div>
+                
                 <ul class="plainList actions">
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$token}" title="{$CONST.APPROVE}"><span class="icon-lock-open"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
@@ -54,12 +55,12 @@
 {/if}
 {if is_array($entries)}
     <section id="dashboard_entries" class="dashboard">
-        <h4>Future Entries</h4>
+        <h3>Future Entries</h3> {* i18n *}
 
         <ol class="plainList">
         {foreach $entries as $entry}
             <li>
-                {$entry.title}
+                <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title}</a>
                 <ul class="plainList actions">
                     <li>
                         <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$token}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}">
