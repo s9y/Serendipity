@@ -1,5 +1,5 @@
 {if $init}
-    <script src="{$serendipityHTTPPath}ckeditor/ckeditor.js"></script>
+    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
     <script>
     $('document').ready(function() {
         CKEDITOR.plugins.add('s9y_medialibrary', {
