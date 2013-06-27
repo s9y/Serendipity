@@ -17,7 +17,7 @@
         </div>
     </header>
 
-    <main class="clearfix serendipityAdminContent">
+    <main class="clearfix serendipityAdminContent installer">
         <div id="content" class="clearfix">
         {if $is_errors && is_array($errors)}
             {foreach $errors AS $error}
@@ -27,7 +27,7 @@
         {if $getstepint0}
             <h2>{$CONST.WELCOME_TO_INSTALLATION}</h2>
 
-            <h3>{$CONST.FIRST_WE_TAKE_A_LOOK}</h3>
+            <p>{$CONST.FIRST_WE_TAKE_A_LOOK}</p>
 
             <p>{$print_ERRORS_ARE_DISPLAYED_IN}</p>
 
@@ -225,9 +225,12 @@
 
                 <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
             {else}
-                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.SELECT_INSTALLATION_TYPE}:</span>
+                <p><strong>{$CONST.SELECT_INSTALLATION_TYPE}:</strong></p>
 
-                <div><a href="?serendipity[step]=2a">{$CONST.SIMPLE_INSTALLATION}</a> - <a href="?serendipity[step]=2b">{$CONST.EXPERT_INSTALLATION}</a></div>
+                <div class="form_buttons">
+                    <a class="button_link state_submit" href="?serendipity[step]=2a">{$CONST.SIMPLE_INSTALLATION}</a>
+                    <a class="button_link state_submit" href="?serendipity[step]=2b">{$CONST.EXPERT_INSTALLATION}</a>
+                </div>
             {/if}
             </div>
         {elseif $s9yGETstep == '2a'}

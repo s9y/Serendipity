@@ -947,7 +947,8 @@ h3 {
     margin: 1.16667em 0;
 }
 
-h4 {
+h4,
+#diagnose caption {
     font-size: 1.14286em;
     line-height: 1.3125em;
     margin: 1.3125em 0;
@@ -1130,7 +1131,8 @@ main {
 .configuration_group .form_field input,
 .configuration_group .form_area textarea,
 #uploadform .form_select select,
-#uploadform .form_field input {
+#uploadform .form_field input,
+#diagnose > table {
     width: 100%;
 }
 
@@ -1333,6 +1335,10 @@ fieldset p,
 .configuration_group h3,
 form > .button_link:first-of-type {
     margin-top: 0;
+}
+
+.installer .configuration_group h3 {
+    margin-top: 1.16667em;
 }
 
 #template_options,
@@ -1711,10 +1717,19 @@ form > .button_link:first-of-type {
 .no-js .template_show_info,
 .no-js .comment_summary,
 .no-js .editor_toolbar,
+.js .additional_info,
+.installer .toggle_info,
 .hidden {
     display: none !important;
     visibility: hidden;
 }
+
+.js .installer .additional_info {
+    display: block !important;
+    visibility: visible;
+}
+
+
 
 input[name="serendipity[filter][fileCategory]"] {
     display: none;
@@ -2027,6 +2042,13 @@ input[name="serendipity[filter][fileCategory]"] {
 
     #content {
         width: 73%;
+    }
+
+    .installer #content {
+        float: none;
+        margin: 0 auto;
+        max-width: 45em;
+        width: 100%;
     }
 
     #edit_entry_status select[multiple],
