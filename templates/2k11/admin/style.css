@@ -330,6 +330,12 @@ nav ol {
     clear: both;
 }
 
+.plainList {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
 
 /* ICON FONT:; http://fortawesome.github.com/Font-Awesome/
    ----------------------------------------------------------------- */
