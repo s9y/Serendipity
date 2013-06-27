@@ -361,7 +361,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
     // Toggle extended entry editor
     serendipity.toggle_extended = function(setCookie) {
-        if ($('#toggle_extended').length == 0) {
+        if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
             $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
