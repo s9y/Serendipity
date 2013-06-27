@@ -1377,6 +1377,10 @@ form > .button_link:first-of-type {
     padding: 0 .5em 1em;
 }
 
+.template_preview {
+    max-width: 400px;
+}
+
 .media_wrap_thumb {
     padding: .5em;
 }
