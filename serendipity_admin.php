@@ -11,9 +11,7 @@ include('serendipity_config.inc.php');
 header('Content-Type: text/html; charset=' . LANG_CHARSET);
 
 if (IS_installed === false) {
-    require(S9Y_INCLUDE_PATH . 'include/functions_permalinks.inc.php');
-    require(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
-    require(S9Y_INCLUDE_PATH . 'include/functions_config.inc.php');
+    require_once(S9Y_INCLUDE_PATH . 'include/functions.inc.php');
 } else {
     if (defined('IS_up2date') && IS_up2date === true) {
         serendipity_plugin_api::hook_event('backend_configure', $serendipity);

@@ -1711,7 +1711,6 @@ form > .button_link:first-of-type {
 .no-js .template_show_info,
 .no-js .comment_summary,
 .no-js .editor_toolbar,
-.js .additional_info,
 .hidden {
     display: none !important;
     visibility: hidden;
