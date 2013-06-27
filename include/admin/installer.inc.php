@@ -66,7 +66,7 @@ if (!empty($serendipity['POST']['getstep']) && is_numeric($serendipity['POST']['
 }
 
 /* From configuration to install */
-if ( sizeof($_POST) > 1 && (int)$serendipity['GET']['step'] == 3 ) {
+if ( sizeof($_POST) > 1 && $serendipity['GET']['step'] == '3' ) {
     /* One problem, if the user chose to do an easy install, not all config vars has been transfered
        Therefore we fetch all config vars with their default values, and merge them with our POST data */
 
@@ -87,7 +87,7 @@ if ( sizeof($_POST) > 1 && (int)$serendipity['GET']['step'] == 3 ) {
         $serendipity['GET']['step'] = $serendipity['POST']['step'];
     } else {
         /* We're good, move to install process */
-        $serendipity['GET']['step'] = 3;
+        $serendipity['GET']['step'] = '3';
     }
 }
 
@@ -337,9 +337,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $data['ob_serendipity_printConfigTemplate'] = ob_get_contents();
     ob_end_clean();        
 
-} elseif ( (int)$serendipity['GET']['step'] == 3 ) { 
-
-    $data['getstepint3'] = true;
+} elseif ( $serendipity['GET']['step'] == '3' ) {
     $serendipity['dbPrefix'] = $_POST['dbPrefix'];
 
     $t = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}authors", false, 'both', false, false, false, true);
@@ -374,7 +372,9 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 
     if ( serendipity_updateConfiguration() ) {
         $data['s9y_installed'] = true;
-    } 
+    }
+    echo serendipity_smarty_show("admin/installer.inc.tpl", $data);
+    return;
 }
 
 

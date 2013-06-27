@@ -247,7 +247,7 @@
                 {if $ob_serendipity_printConfigTemplate}{$ob_serendipity_printConfigTemplate}{/if}
                 <input name="submit" type="submit" value="{$CONST.COMPLETE_INSTALLATION}">
             </form>
-        {elseif $getstepint3}
+        {elseif $s9yGETstep == '3'}
             <h3>{$CONST.CHECK_DATABASE_EXISTS}</h3>
             {if is_array($authors_query)}
             <span class="msg_success"><strong>{$CONST.THEY_DO}</strong>, {$CONST.WONT_INSTALL_DB_AGAIN}</span>
