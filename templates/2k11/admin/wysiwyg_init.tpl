@@ -3,44 +3,41 @@
     <script>
     $('document').ready(function() {
         CKEDITOR.plugins.add('s9y_medialibrary', {
-                                                    init: function( editor ) {
-                                                        editor.addCommand( 'openML', {
-                                                                exec : function( editor ) {    
-                                                                    window.open('serendipity_admin_image_selector.php?serendipity[textarea]={$item}',
-                                                                                 'ImageSel',
-                                                                                 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-                                                                }
-                                                            });
-                                                        editor.ui.addButton('s9y_medialibrary', {
-                                                            label: 'Media',
-                                                            command: 'openML',
-                                                            icon: '{serendipity_getFile file="admin/img/thumbnail.png"}'
-                                                        });
-                                                    }
-                                                }
-        );
+            init: function( editor ) {
+                editor.addCommand( 'openML', {
+                    exec : function( editor ) {    
+                        window.open('serendipity_admin_image_selector.php?serendipity[textarea]={$item}',
+                                     'ImageSel',
+                                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+                    }
+                });
+                editor.ui.addButton('s9y_medialibrary', {
+                    label: 'Media',
+                    command: 'openML',
+                    icon: '{serendipity_getFile file="admin/img/thumbnail.png"}'
+                });
+            }
+        });
     });
     </script>
 {/if}
-
-<script>
+    <script>
     $('document').ready(function() {
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
-                extraPlugins : 's9y_medialibrary',
-                toolbar: [
-                    { name: 'tools', items: [ 'Maximize' ] },
-                    { name: 'styles', items: [ 'Format', 'Styles'  ] },
-                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
-                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Strike', '-', 'RemoveFormat' ] },
-                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
-                    { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                    { name: 'insert', items: [ 'Image', 's9y_medialibrary', 'Table', 'HorizontalRule', 'SpecialChar' ] },
-                    { name: 'others', items: [ '-' ] },
-                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-                    { name: 'about', items: [ 'About' ] }
-                ]
-            }
-        );
+            extraPlugins : 's9y_medialibrary',
+            toolbar: [
+                { name: 'tools', items: [ 'Maximize' ] },
+                { name: 'styles', items: [ 'Format' ] },
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'RemoveFormat' ] },
+                { name: 'paragraph',  groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                { name: 'insert', items: [ 'Image', 's9y_medialibrary', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
+                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+                { name: 'others', items: [ '-' ] },
+                { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
+                { name: 'about', items: [ 'About' ] }
+            ]
+        });
     });
 </script>
