@@ -1406,8 +1406,17 @@ form > .button_link:first-of-type {
 #serendipityScaleImg img,
 .media_file,
 .media_wrap_thumb,
-.plugins_installable > li {
+.plugins_installable > li,
+#dashboard > section {
     border: 1px solid #aaa;
+}
+
+#dashboard > section {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 0 1em;
+    padding: 0 1em;
 }
 
 .media_wrap_thumb {
@@ -1849,7 +1858,8 @@ input[name="serendipity[filter][fileCategory]"] {
     #template_select article,
     #serendipityScaleForm,
     #serendipityScaleImg,
-    .media_file {
+    .media_file,
+    #dashboard > section {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
@@ -1922,7 +1932,8 @@ input[name="serendipity[filter][fileCategory]"] {
     .configuration_group .form_area,
     .configuration_group fieldset > fieldset,
     #template_select .odd,
-    .media_pane .odd {
+    .media_pane .odd,
+    #dashboard > section:nth-child(odd) {
         clear: left;
     }
 
