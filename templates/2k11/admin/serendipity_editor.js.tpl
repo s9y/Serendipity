@@ -395,7 +395,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
-                toggle_category_selector(id);
+                serendipity.toggle_category_selector(id);
             });
             
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
