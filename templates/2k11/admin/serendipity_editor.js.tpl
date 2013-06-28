@@ -176,8 +176,8 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
     // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
     serendipity.serendipity_imageSelector_addToElement = function(str, id) {
-        id = escapeBrackets(str);
-        var $input = $('#'+id);
+        id = serendipity.escapeBrackets(id);
+        var $input = $('#' + id);
         $input.val(str);
         
         if ($input.attr('type') != 'hidden') {
@@ -284,19 +284,19 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
             switch(f['serendipity[filename_only]'].value) {
             case 'true':
-                parent.self.opener.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
+                parent.self.opener.serendipity.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
                 parent.self.close();
                 return true;
             case 'id':
-                parent.self.opener.serendipity_imageSelector_addToElement(f['imgID'].value, starget);
+                parent.self.opener.serendipity.serendipity_imageSelector_addToElement(f['imgID'].value, starget);
                 parent.self.close();
                 return true;
             case 'thumb':
-                parent.self.opener.serendipity_imageSelector_addToElement(f['thumbName'].value, starget);
+                parent.self.opener.serendipity.serendipity_imageSelector_addToElement(f['thumbName'].value, starget);
                 parent.self.close();
                 return true;
             case 'big':
-                parent.self.opener.serendipity_imageSelector_addToElement(f['imgName'].value, starget);
+                parent.self.opener.serendipity.serendipity_imageSelector_addToElement(f['imgName'].value, starget);
                 parent.self.close();
                 return true;
             }
@@ -822,7 +822,8 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         $('<a id="insert_image" class="button_link" name="insImage" href="#" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>').insertAfter('#category_icon');
     }
 
-    $('#insert_image').click(function() {
+    $('#insert_image').click(function(e) {
+        e.preventDefault();
         window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&serendipity[filename_only]=true', 
                     'ImageSel', 
                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
