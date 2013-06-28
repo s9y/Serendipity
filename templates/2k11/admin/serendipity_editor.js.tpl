@@ -813,11 +813,10 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     var $catIcon = $('body').has('#category_icon');
 
     if($catIcon.size() > 0) {
-        $('<a id="insert_image" class="button_link" name="insImage" href="#" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></a>').insertAfter('#category_icon');
+        $('<button id="insert_image" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
     }
 
     $('#insert_image').click(function(e) {
-        e.preventDefault();
         window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&serendipity[filename_only]=true', 
                     'ImageSel', 
                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
