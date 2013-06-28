@@ -142,7 +142,7 @@
 
                     <div class="entry_info clearfix">
                         <span class="status_timestamp">
-                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <a class="icon_link" href="#" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span></a>{/if}
+                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <span class="icon-info-circled" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span>{/if}
                         </span>
 
                         <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}

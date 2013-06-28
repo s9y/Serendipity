@@ -678,12 +678,6 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
     // Click events
     //
-    // Show entry timestamp
-    $('.status_timestamp > a').click(function(e) {
-        alert($(this).attr('title'));
-        e.preventDefault();
-    });
-
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
     if($entryEditor.size() > 0) {

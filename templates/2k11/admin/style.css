@@ -1527,6 +1527,11 @@ form > .button_link:first-of-type {
     min-width: 11em;
 }
 
+.status_timestamp .icon-info-circled {
+    color: #3e5f81;
+    cursor: help;
+}
+
 .show_config_option {
     text-decoration: none;
 }
