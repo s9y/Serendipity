@@ -1,0 +1,80 @@
+* the wysiwyg-spawn-api is partly removed (from 2k11/admin/wysiwyg_init.tpl) (TODO: Replace or fix)
+
+* All Javascript-functions like SetCookie now reside in a serendipity-object, simulating a namespace.
+    SetCookie(...)
+  became
+    serendipity.SetCookie(...)
+
+* Renamed JS-Function:
+    toggleCategorySelector became toggle_category_selector
+
+* The advanced js option (eyecandy) got removed, as such a thing like advanced js doesn't exist anymore
+
+* dashboard_plugin has an equivalent in the core
+
+* Constants like S9Y_FRAMEWORK_COMPAT are no longer set (include_once is used instead)
+
+* New additional option to render smarty-functions: serendipity_smarty_show($template, $data)
+
+* A number of functions now returns their result instead of echoing them (TODO: Make that "all functions"):
+    serendipity_plugin_config
+    serendipity_printEntryForm
+    serendipity_printEntries
+    function serendipity_showMedia
+    serendipity_showPropertyForm
+    showMediaLibrary
+    serendipity_guessInput
+
+* Functions removed from the core:
+    serendipity_printConfigJS
+
+* All internal plugins got extracted from plugin_internal.inc.php and moved to plugins/.
+  They are renamed to work there (TODO: Fix that and rename back or add upgrader task):
+    serendipity_calendar_plugin    became serendipity_plugin_calendar
+    serendipity_quicksearch_plugin became serendipity_plugin_quicksearch
+    serendipity_archives_plugin    became serendipity_plugin_archives
+    serendipity_categories_plugin  became serendipity_plugin_categories
+    serendipity_syndication_plugin became serendipity_plugin_syndication
+    serendipity_superuser_plugin   became serendipity_plugin_superuser
+    serendipity_plug_plugin        became serendipity_plugin_plug
+
+* Add plugin hook "js", generating a virtual serendipity.js
+
+* Admin JS is now bundled in serendipity_editor.js.tpl and rendered using smarty in the template config
+
+* Admin JS got rewritten using jQuery where applicable
+
+* serendipity_define.js.php removed
+
+* Removed support for layout.php
+
+* The whole PHP-Code now almost never echoes integrated HTML, but uses smarty template (TODO: Remove the almost)
+  The necessary smarty-templates reside in 2k11/admin/
+  Every design can generate its own backend if it integrates those templates udner admin/ itself
+
+* 2k11 is set as the new default backend, replacing bulletproof. default remains the fallback so far.
+
+* A number of functions had some arguments removed:
+    * function serendipity_displayImageList:
+        From
+            function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL, $smarty_display = true)
+        to
+            function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL)
+    * function serendipity_showMedia
+        From
+            function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lineBreak = 3, $enclose = true, $smarty_vars = array(), $smarty_display = true)
+        to
+            function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lineBreak = 3, $enclose = true, $smarty_vars = array())
+    * generate_plugins
+        From
+            static function generate_plugins($side, $tag = '', $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
+        to
+            static function generate_plugins($side, $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
+
+* serendipity_showMedia now no longer returns the used template and echoes the generated HTML, but only returns the generated HTML
+
+* Designs now have their own configuration page, ?serendipity[adminModule]=templates&serendipity[adminAction]=editConfiguration
+
+* jQuery in the backend no longer runs in noConflict-mode. Use $(...) instead of jQuery(...)
+
+* The entryproperty-plugin will now always delete its cache on uninstall, not only if the cache is activated then
