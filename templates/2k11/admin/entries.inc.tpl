@@ -104,10 +104,10 @@
     <script>
         $(document).ready(function() {
     {foreach $filter_import AS $f_import}
-        SetCookie("entrylist_filter_{$f_import}", "{$get_filter_{$f_import}}" )
+        serendipity.SetCookie("entrylist_filter_{$f_import}", "{$get_filter_{$f_import}}" )
     {/foreach}
     {foreach $sort_import AS $s_import}
-        SetCookie("entrylist_sort_{$s_import}", "{$get_sort_{$s_import}}" )
+        serendipity.SetCookie("entrylist_sort_{$s_import}", "{$get_sort_{$s_import}}" )
     {/foreach}
         });
     </script>
