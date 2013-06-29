@@ -1337,8 +1337,13 @@ fieldset p,
 
 .comment_data,
 .configuration_group h3,
-form > .button_link:first-of-type {
+form > .button_link:first-of-type,
+.upload_form > .form_field:first-child {
     margin-top: 0;
+}
+
+.upload_form > .form_field:first-child {
+    padding-top: .75em;
 }
 
 .installer .configuration_group h3 {
@@ -1430,6 +1435,7 @@ form > .button_link:first-of-type {
 
 .zebra_list,
 .option_list,
+#uploads,
 .configure_plugin .odd:first-of-type,
 #categories .odd,
 #categories .even,
@@ -1446,7 +1452,8 @@ form > .button_link:first-of-type {
 .configure_plugin .odd,
 .configure_plugin .even,
 #categories,
-#serendipity_image_folders {
+#serendipity_image_folders,
+.upload_form {
     border-bottom: 1px solid #aaa;
 }
 
@@ -1461,7 +1468,9 @@ form > .button_link:first-of-type {
 .theme_options .odd,
 .configure_plugin .odd,
 #categories .odd,
-#serendipity_image_folders .odd {
+#serendipity_image_folders .odd,
+.upload_form:nth-child(odd),
+.upload_form:nth-child(odd) input[type="file"] {
     background: #eee;
 }
 

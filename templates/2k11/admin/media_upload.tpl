@@ -12,7 +12,7 @@
         {$media.form_hidden}
 
         <div id="uploads">
-            <div id="upload_form_1">
+            <div id="upload_form_1" class="upload_form">
                 <div class="form_field clearfix">
                     <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
                     <input id="userfile_1" class="uploadform_userfile check_input" name="serendipity[userfile][1]" type="file">
