@@ -407,7 +407,6 @@ nav ol {
 /* BACKEND HELPER CLASSES
    ----------------------------------------------------------------- */
 .icon_link,
-.logged_in,
 #insert_image,
 form > a,
 #user_menu li,
@@ -934,7 +933,7 @@ a.button_link:focus,
 h1 {
     font-size: 1.71429em;
     line-height: 1.75em;
-    margin: .5em 0 0;
+    margin: .5em 0;
 }
 
 #banner_install h1 {
@@ -1203,7 +1202,6 @@ main {
     color: #25253d;
 }
 
-#user_menu .logged_in,
 #user_menu ul {
     margin: 0 0 .75em;
 }
@@ -1799,6 +1797,11 @@ input[name="serendipity[filter][fileCategory]"] {
     .configuration_group .form_area textarea {
         max-width: 320px;
     }
+
+    #user_menu .logged_in {
+        display: block;
+        margin: .85714em 0;
+    }
 }
 
 @media only screen and (min-width: 640px) {
@@ -1814,10 +1817,6 @@ input[name="serendipity[filter][fileCategory]"] {
 
     #user_menu li {
         margin: 0 0 0 1em;
-    }
-
-    #user_menu .logged_in {
-        margin: .375em 0;
     }
 }
 
@@ -1845,10 +1844,6 @@ input[name="serendipity[filter][fileCategory]"] {
         font-size: .875em;
         line-height: 1.71429em;
         margin: 1.71429em 0;
-    }
-
-    #user_menu .logged_in {
-        margin: .875em 0 .4375em;
     }
 
     #user_menu ul {
@@ -2006,6 +2001,11 @@ input[name="serendipity[filter][fileCategory]"] {
     #media_pane_sort label {
         display: block;
         width: auto;
+    }
+
+    #user_menu .logged_in {
+        display: inline-block;
+        margin: 1.5em 0 0;
     }
 
     #main_menu {
