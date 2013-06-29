@@ -1847,7 +1847,7 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #user_menu ul {
-        margin: .4375em 0 .875em;
+        margin: .4375em 0 0;
     }
 
     #image_directory_edit_form > div > .form_select {
