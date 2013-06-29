@@ -823,6 +823,7 @@ input[type=checkbox],
 
 .serendipity_commentDirection,
 .configuration_group ul .form_check,
+#serendipity_comments_list details,
 #preview,
 .form_field,
 .form_area,
@@ -885,7 +886,8 @@ input[type=checkbox],
 .entry_info,
 .pagination,
 .media_choose .preview,
-.media_file_metadata dt {
+.media_file_metadata dt,
+#serendipity_comments_list details {
     clear: both;
 }
 
