@@ -1907,7 +1907,7 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     .field_info {
-        margin: .85715em 2% 0 50%;
+        margin: .85715em 2% 0 0;
     }
 
     .configuration_group .form_select select,
