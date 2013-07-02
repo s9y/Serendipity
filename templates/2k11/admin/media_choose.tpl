@@ -7,48 +7,6 @@
     <meta name="viewport" content="width=device-width">
     {if $media.css}<link rel="stylesheet" href="{$media.css}">{/if}
     {if $media.css_tree}<link rel="stylesheet" href="{$media.css_tree}">{/if}
-    {if $media.css_imgedit}<link rel="stylesheet" href="{$media.css_imgedit}">{/if}
-{if $media.is_imgedit}
-    <style>
-        #outer { 
-            left: {$imgedit.zoombox_padding}px;
-        } 
-
-        #overlay { 
-            clip: rect({$imgedit.overlay_clip_top} {$imgedit.overlay_clip_right} {$imgedit.overlay_clip_bottom} {$imgedit.overlay_clip_left});
-        } 
-
-        #harea { 
-            left: {$imgedit.zoombox_x}px;
-            top: {$imgedit.zoombox_y}px;
-            visibility: {$imgedit.harea_visibility};
-        } 
-
-        #varea { 
-            left: {$imgedit.zoombox_x}px;
-            top: {$imgedit.zoombox_y}px;
-            visibility: {$imgedit.varea_visibility};
-        } 
-
-        #zoom { 
-            width: {$imgedit.zoombox_width}px;
-        } 
-
-        #scaletext { 
-            visibility: {$imgedit.scale_visibility};
-        } 
-
-        #outer { 
-            width: {$imgedit.img_width}px;
-            height: {$imgedit.img_height}px;
-            border: 1px solid red;
-            position: relative;
-            display: block;
-        } 
-    </style>
-    <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
-    <script src="{serendipity_getFile file='admin/imgedit.js'}" ></script>
-{/if}
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
@@ -86,10 +44,6 @@ if (parent.frames && parent.frames['tree']) {
     </script>
     {/if}
     {$media.external}
-
-    {if $media.is_imgedit}
-    {$IMGEDIT}
-    {/if}
     <!-- EXTERNAL MEDIA END -->
 {elseif $media.case == 'default'}
     <!-- MEDIA MANAGER START -->

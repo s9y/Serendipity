@@ -672,10 +672,6 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         serendipity.serendipity_imageSelector_done();
     });
 
-    $('#imgedit > form').submit(function() {
-        serendipity.imgedit_getCoordinates();
-    });
-
     // Click events
     //
     // Make the timestamp readable in browser not supporting datetime-local.

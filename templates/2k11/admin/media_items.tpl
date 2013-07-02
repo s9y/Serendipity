@@ -163,9 +163,6 @@
                     </select>
                 </div>
             {/if}
-            {if $file.is_image}
-                <a id="media_crop" class="button_link icon_link state_submit" href="serendipity_admin_image_selector.php?serendipity[adminModule]=images&amp;serendipity[adminAction]=imgedit&amp;serendipity[fid]={$file.id}">{$CONST.EDIT}</a>
-            {/if}
             </section>
 
             <section class="media_file_keywords">

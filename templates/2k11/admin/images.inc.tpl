@@ -1,6 +1,3 @@
-{if $case_imgedit}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PREFERENCE_USE_JS_WARNING}</span>
-{/if}
 {if $case_sync}
     <h2>{$CONST.CREATE_THUMBS}</h2>
     {if !$perm_adminImagesSync}
