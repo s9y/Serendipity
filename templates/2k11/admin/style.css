@@ -434,6 +434,7 @@ form > a,
 #mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
+.toggle_info,
 #serendipityScaleForm .form_field label,
 .filters_toolbar li {
     display: inline-block;
