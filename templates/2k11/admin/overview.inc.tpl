@@ -1,15 +1,13 @@
     <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
-    {if $update}
         <section id="dashboard_update">
             <h3>UPDATER_TITLE</h3>
 
             <span class="msg_notice"><span class="icon-info-circled"></span> New Version available: {$curVersion}</span>
         </section>
-    {/if}
     {if is_array($comments)}
-        <section id="dashboard_comments" class="equal_heights">
+        <section id="dashboard_comments" class="equal_heights quick_list">
             <h3>{$CONST.COMMENTS}</h3>
 
             <ol class="plainList">
@@ -40,7 +38,7 @@
         </section>
     {/if}
     {if is_array($entries)}
-        <section id="dashboard_entries" class="equal_heights">
+        <section id="dashboard_entries" class="equal_heights quick_list">
             <h3>Future Entries</h3> {* i18n *}
 
             <ol class="plainList">
@@ -70,10 +68,10 @@
             </ol>
         </section>
     {/if}
-        <section id="further_links" class="equal_heights">
+        <section id="further_links">
             <h3>{$CONST.FURTHER_LINKS}</h3>
             
-            <ul class="plainList">
+            <ul class="clearfix plainList">
                 <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
                 <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
                 <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
