@@ -1186,21 +1186,23 @@ summary {
 /* HEADER
    ----------------------------------------------------------------- */
 #top {
-    background: #ccdee7;
+    background: #3e5f81;
     box-shadow: 0 1px 4px rgba(0,0,0,.5);
-    color: #3e5f81;
+    color: #ccdde7;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
 }
 
 #top a,
 #top a:visited,
 #top a:hover,
 #top a:focus {
+    color: #ccdde7;
     text-decoration: none;
 }
 
 #top a:hover,
 #top a:focus {
-    color: #25253d;
+    color: #fcfcfc;
 }
 
 #user_menu ul {
@@ -1989,6 +1991,11 @@ input[name="serendipity[filter][fileCategory]"] {
     #pluginlist_event .pluginmanager_side  {
         margin-right: 1%;
         width: 49%;
+    }
+
+    #meta p {
+        font-size: .875em;
+        padding: .85715em;
     }
 }
 
