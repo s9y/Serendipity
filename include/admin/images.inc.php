@@ -15,35 +15,6 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 switch ($serendipity['GET']['adminAction']) {
-    case 'imgedit':
-        $data['case_imgedit'] = true;
-
-        include_once(S9Y_INCLUDE_PATH . "include/functions_images_crop.inc.php");
-        $media['is_imgedit'] = true;
-        $media['css_imgedit'] = serendipity_getTemplateFile('admin/imgedit.css');
-
-        if (isset($serendipity['GET']['fid'])) {
-            $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-            if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
-                return;
-            }
-
-            $fullfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
-            $httpfile = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
-
-            $img = new imgedit($fullfile, $httpfile);
-
-            // Set the filenames used for the cropping areas. Width/Height are automagically detected. Orientation is either horizontal or vertical.
-            $img->setArea('imgedit_area.gif',  'h');
-            $img->setArea('imgedit_varea.gif', 'v');
-
-            // Let the IMGEditor do its magic. It will parse its results straightly into a template variable array.
-            $img->main();
-            $serendipity['smarty']->assign('imgedit', $img->imgedit_smarty);
-            serendipity_smarty_fetch('IMGEDIT', $img->output_template);
-        }
-        break;
-
     case 'sync':
         $data['case_sync']            = true;
         $data['perm_adminImagesSync'] = true;
