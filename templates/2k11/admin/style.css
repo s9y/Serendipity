@@ -933,15 +933,17 @@ a.button_link:focus,
     width: auto;
 }
 
-h1 {
-    font-size: 1.71429em;
-    line-height: 1.75em;
-    margin: .4375em 0;
-}
-
+h1,
 h2 {
     font-size: 1.42857em;
     line-height: 1.05em;
+}
+
+h1 {
+    margin: 0.55em 0;
+}
+
+h2 {
     margin: 1.05em 0;
 }
 
@@ -1036,10 +1038,10 @@ summary {
 /* LAYOUT
    ----------------------------------------------------------------- */
 #top > div,
-main {
-    margin: 0 auto;
-    max-width: 80em;
-    width: 96%;
+#main_menu > ul > li,
+#content {
+    margin-left: .75em;
+    margin-right: .75em;
 }
 
 .category_data,
@@ -1203,9 +1205,15 @@ main {
 
 #user_menu ul {
     margin: .75em 0;
+    text-align: right;
 }
 
 #user_menu li {
+    margin: 0 0 0 1em;
+}
+
+#user_menu .logged_in {
+    float: left;
     margin: 0 1em 0 0;
 }
 
@@ -1563,7 +1571,7 @@ form > .button_link:first-of-type,
 
 #meta p {
     margin: 0;
-    padding: 8px;
+    padding: .75em;
 }
 
 
@@ -1814,6 +1822,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
     #user_menu .logged_in {
         display: block;
+        float: none;
         margin: 0 0 .75em;
     }
 }
@@ -1823,14 +1832,6 @@ input[name="serendipity[filter][fileCategory]"] {
     #user_menu {
         float: left;
         width: 50%;
-    }
-
-    #user_menu {
-        text-align: right;
-    }
-
-    #user_menu li {
-        margin: 0 0 0 1em;
     }
 }
 
@@ -1842,15 +1843,17 @@ input[name="serendipity[filter][fileCategory]"] {
         font-size: 1em;
     }
 
-    h1 {
-        font-size: 1.75em;
-        line-height: 1.5em;
-        margin: .75em 0;
-    }
-
+    h1,
     h2 {
         font-size: 1.5em;
         line-height: 1em;
+    }
+
+    h1 {
+        margin: .5em 0 1.5em;
+    }
+
+    h2 {
         margin: 1em 0;
     }
 
@@ -1993,6 +1996,28 @@ input[name="serendipity[filter][fileCategory]"] {
 /* LARGE SCREEN (e.g. netbooks)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1024px) {
+    h1 {
+        font-size: 1.125em;
+        line-height: 1.3333em;
+        margin: .6667em 0;
+    }
+
+    #user_menu ul {
+        margin: .75em 0;
+    }
+
+    #top > div,
+    main {
+        margin: 0 auto;
+        max-width: 80em;
+        width: 96%;
+    }
+
+    #main_menu > ul > li {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
     #edit_entry_timestamp,
     #reset_timestamp {
         max-height: auto;
@@ -2025,10 +2050,6 @@ input[name="serendipity[filter][fileCategory]"] {
     #user_menu .logged_in {
         display: inline-block;
         margin: 0;
-    }
-
-    #user_menu ul {
-        margin: 2em 0 1em;
     }
 
     #main_menu {
