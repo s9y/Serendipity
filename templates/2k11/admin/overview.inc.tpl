@@ -1,11 +1,13 @@
     <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
+    {if $update}
         <section id="dashboard_update">
             <h3>UPDATER_TITLE</h3>
 
             <span class="msg_notice"><span class="icon-info-circled"></span> New Version available: {$curVersion}</span>
         </section>
+    {/if}
     {if is_array($comments)}
         <section id="dashboard_comments" class="equal_heights quick_list">
             <h3>{$CONST.COMMENTS}</h3>
