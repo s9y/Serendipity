@@ -103,8 +103,10 @@
                     <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} – {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h4>
 
                     <details>
-                        <summary><b>{$CONST.AUTHOR}:</b> {$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</summary>
+                        <summary>Comment data</summary> {* i18n *}
                         <dl class="comment_data clearfix">
+                            <dt>{$CONST.AUTHOR}:</dt>
+                            <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
                             <dt>{$CONST.EMAIL}:</dt>
                             <dd>{if empty($comment.email)}N/A{else}<a href="mailto:{$comment.email|escape}" title="{$comment.email|escape}">{$comment.email|escape|truncate:40:"&hellip;"}</a>{if $comment.subscribed == 'true'} <i>({$CONST.ACTIVE_COMMENT_SUBSCRIPTION})</i>{/if}{/if} {$comment.action_email}</dd>
                             <dt>IP:</dt>

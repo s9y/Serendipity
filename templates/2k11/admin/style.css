@@ -1820,8 +1820,6 @@ form > .button_link:first-of-type,
     visibility: visible;
 }
 
-
-
 input[name="serendipity[filter][fileCategory]"] {
     display: none;
 }
