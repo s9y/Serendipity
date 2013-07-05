@@ -325,17 +325,11 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 
 } elseif ( $serendipity['GET']['step'] == '2a' ) { 
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE, null, array('simpleInstall'));
-    ob_start();
-    serendipity_printConfigTemplate($config, $from, true, false, false);
-    $data['ob_serendipity_printConfigTemplate'] = ob_get_contents();
-    ob_end_clean();        
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);     
 
 } elseif ( $serendipity['GET']['step'] == '2b' ) { 
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-    ob_start();
-    serendipity_printConfigTemplate($config, $from, true, false, false);
-    $data['ob_serendipity_printConfigTemplate'] = ob_get_contents();
-    ob_end_clean();        
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);   
 
 } elseif ( $serendipity['GET']['step'] == '3' ) {
     $serendipity['dbPrefix'] = $_POST['dbPrefix'];

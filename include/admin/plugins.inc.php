@@ -389,29 +389,19 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['backend_plugins_sidebar_header'] = ob_get_contents();
     ob_end_clean();
 
-    ob_start();
-    show_plugins(false, $sidebars);
-    $data['sidebar_plugins'] = ob_get_contents();
-    ob_end_clean();
+    $data['sidebar_plugins'] = show_plugins(false, $sidebars);
 
     ob_start();
     serendipity_plugin_api::hook_event('backend_plugins_event_header', $serendipity);
     $data['backend_plugins_event_header'] = ob_get_contents();
     ob_end_clean();
 
-    ob_start();
-    show_plugins(true);
-    $data['event_plugins'] = ob_get_contents();
-    ob_end_clean();
+    $data['event_plugins'] = show_plugins(true);
 
     if (count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
     }
     
-}
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
 }
 
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
