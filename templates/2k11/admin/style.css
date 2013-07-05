@@ -1478,6 +1478,11 @@ form > .button_link:first-of-type,
     border: 1px solid #aaa;
 }
 
+#template_select article,
+.media_file {
+    border-radius: 2px;
+}
+
 #dashboard > section > h3 {
     background: #ddd;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
@@ -1493,6 +1498,7 @@ form > .button_link:first-of-type,
 }
 
 #dashboard > section {
+    border-radius: 2px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1565,8 +1571,24 @@ form > .button_link:first-of-type,
 }
 
 #entries_list > li,
-#serendipity_comments_list > li {
+#serendipity_comments_list > li,
+#categories li > div,
+#serendipity_image_folders li > div,
+.upload_form {
     padding: 0 0 0 .4em;
+}
+
+.zebra_list .odd,
+.zebra_list .even,
+.option_list .odd,
+.option_list .even,
+.theme_options .odd,
+.theme_options .even,
+.configure_plugin .config_optiongroup .odd,
+.configure_plugin .config_optiongroup .even, 
+.configure_plugin .odd,
+.configure_plugin .even {
+    padding-left: .4em;
 }
 
 #categories li > ul,
@@ -2128,6 +2150,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
     #main_menu > ul > li {
         border: 1px solid #aaa;
+        border-radius: 2px;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
