@@ -64,7 +64,7 @@
     {if ( $is_delete || $is_multidelete )}
         <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
         {foreach $rip_image AS $ripimg}
-        <span class="msg_dialogue"><span class="icon-help-circled"></span> {$ripimg}</span>
+        <span class="msg_hint"><span class="icon-help-circled"></span> {$ripimg}</span>
         {/foreach}
         <div class="form_buttons">
             <a class="button_link icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>

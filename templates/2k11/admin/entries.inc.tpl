@@ -213,12 +213,12 @@
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
         {foreach $del_entry AS $delent}
-        <span class="msg_dialogue"><span class="icon-help-circled"></span> {$delent}</span>
+        <span class="msg_hint"><span class="icon-help-circled"></span> {$delent}</span>
         {/foreach}
     {/if}
     {if ( $is_delete || $is_multidelete )}
         {foreach $rip_entry AS $ripent}
-        <span class="msg_dialogue"><span class="icon-help-circled"></span> {$ripent}</span>
+        <span class="msg_hint"><span class="icon-help-circled"></span> {$ripent}</span>
         {/foreach}
         <div class="form_buttons">
             <a class="button_link state_cancel icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>

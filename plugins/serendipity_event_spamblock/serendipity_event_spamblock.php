@@ -779,9 +779,9 @@ var $filter_defaults;
     }
 
     function example() {
-        echo '<div id="captchabox" style="margin: 10px; padding: 5px; border: 1px solid black">' . PLUGIN_EVENT_SPAMBLOCK_LOOK . '<br />';
+        echo '<p id="captchabox" class="msg_hint">' . PLUGIN_EVENT_SPAMBLOCK_LOOK;
         $this->show_captcha();
-        echo '</div>';
+        echo '</p>';
     }
 
     function show_captcha($use_gd = false) {

@@ -448,7 +448,7 @@ legend > span > span,
 .msg_error,
 .msg_success,
 .msg_notice,
-.msg_dialogue,
+.msg_hint,
 #serendipity_category .form_multiselect label,
 #image_directory_edit_form .form_select label,
 #uploadform label,
@@ -457,7 +457,8 @@ legend > span > span,
 .configuration_group .form_select label,
 .configuration_group .form_multiselect label,
 .configuration_group .form_field label,
-.configuration_group .form_area label {
+.configuration_group .form_area label,
+#captchabox .captcha {
     display: block;
 }
 
@@ -976,7 +977,7 @@ summary {
 .msg_error,
 .msg_success,
 .msg_notice,
-.msg_dialogue {
+.msg_hint {
     margin: 1.5em 0;
     padding: 10px;
 }
@@ -999,7 +1000,7 @@ summary {
     color: #c09853;
 }
 
-.msg_dialogue {
+.msg_hint {
     background: #eee;
     border: 1px solid #aaa;
     color: #777;
@@ -1370,7 +1371,8 @@ fieldset p,
 }
 
 #entries_list .actions,
-.serendipityCommentForm {
+.serendipityCommentForm,
+#captchabox .captcha {
     margin-top: .75em;
 }
 
