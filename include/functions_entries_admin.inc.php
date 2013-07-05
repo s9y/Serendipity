@@ -86,6 +86,11 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         }
     }
 
+    if (count($selected) > 1 ||
+          (isset($serendipity['POST']['categories']) && is_array($serendipity['POST']['categories']) && sizeof($serendipity['POST']['categories']) > 1)) {
+        $categoryselector_expanded = true;
+    }
+
     if (is_array($cats = serendipity_fetchCategories())) {
         $cats = serendipity_walkRecursive($cats, 'categoryid', 'parentid', VIEWMODE_THREADED);
         foreach ($cats as $cat) {
