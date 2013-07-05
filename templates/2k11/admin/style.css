@@ -1220,10 +1220,59 @@ summary {
 }
 
 
+/* NAVIGATION
+   ----------------------------------------------------------------- */
+.smallscreen {
+    background: #ccdde7;
+}
+
+.js #main_menu {
+    clip: rect(0 0 0 0);
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    zoom: 1;
+}
+
+.js #main_menu.opened {
+    max-height: 9999px;
+}
+
+#main_menu h3 {
+    display: none;
+    visibility: hidden;
+}
+
+#main_menu > ul {
+    margin-bottom: .75em;
+}
+
+#main_menu li > ul > li {
+    float: left;
+    width: 50%;
+}
+
+#main_menu a {
+    display: inline-block;
+    padding: .2125em 0;
+}
+
+#main_menu a,
+#main_menu a:visited {
+    text-decoration: none;
+}
+
+#nav-toggle {
+    display: inline-block;
+    font-size: 1.5em;
+    margin: .25em .5em;
+}
+
+
 /* CONTENT
    ----------------------------------------------------------------- */
-#content,
-#main_menu {
+#content {
     padding-bottom: 1.5em;
 }
 
@@ -1428,7 +1477,7 @@ form > .button_link:first-of-type,
     border-bottom: 1px solid #aaa;
     font-size: 1em;
     margin: 0 -1em;
-    padding: .75em 1em;
+    padding: .5em 1em;
 }
 
 #dashboard > section {
@@ -1865,6 +1914,10 @@ input[name="serendipity[filter][fileCategory]"] {
         margin: 1.71429em 0;
     }
 
+    #main_menu li > ul > li {
+        width: 33%;
+    }
+
     #further_links li {
         display: inline-block;
         margin-right: 1em;
@@ -2020,9 +2073,54 @@ input[name="serendipity[filter][fileCategory]"] {
         width: 96%;
     }
 
+    .smallscreen {
+        background: transparent;
+    }
+
+    .js #main_menu {
+        position: relative;
+    }
+
+    .js #main_menu.closed {
+        max-height: none;
+    }
+
+    #main_menu a {
+        display: block;
+        padding: .125em 0;
+    }
+
+    #nav-toggle {
+        display: none;
+    }
+
+    #main_menu h3 {
+        background: #eee;
+        border-bottom: 1px solid #aaa;
+        display: block;
+        font-size: 1em;
+        margin: 0 -1em;
+        padding: .5em 1em;
+        visibility: visible;
+    }
+
+    #main_menu > ul {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+
     #main_menu > ul > li {
-        margin-left: 0;
-        margin-right: 0;
+        border: 1px solid #aaa;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin: 0 0 1em;
+        padding: 0 1em;
+    }
+
+    #main_menu li > ul > li {
+        float: none;
+        width: 100%;
     }
 
     #edit_entry_timestamp,
