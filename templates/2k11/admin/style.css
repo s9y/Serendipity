@@ -1187,6 +1187,11 @@ summary {
    ----------------------------------------------------------------- */
 #top {
     background: #3e5f81;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #3e5f81), color-stop(100%, #294564));
+    background-image: -webkit-linear-gradient(#3e5f81, #294564);
+    background-image: -moz-linear-gradient(#3e5f81, #294564);
+    background-image: -o-linear-gradient(#3e5f81, #294564);
+    background-image: linear-gradient(#3e5f81, #294564);
     box-shadow: 0 1px 4px rgba(0,0,0,.5);
     color: #ccdde7;
     text-shadow: 1px 1px 1px rgba(0,0,0,.8);
@@ -1224,6 +1229,7 @@ summary {
    ----------------------------------------------------------------- */
 .smallscreen {
     background: #ccdde7;
+    box-shadow: 0 1px 4px rgba(0,0,0,.5)
 }
 
 .js #main_menu {
@@ -1473,8 +1479,14 @@ form > .button_link:first-of-type,
 }
 
 #dashboard > section > h3 {
-    background: #eee;
+    background: #ddd;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
+    background-image: -webkit-linear-gradient(#fff, #ddd);
+    background-image: -moz-linear-gradient(#fff, #ddd);
+    background-image: -o-linear-gradient(#fff, #ddd);
+    background-image: linear-gradient(#fff, #ddd);
     border-bottom: 1px solid #aaa;
+    color: #666;
     font-size: 1em;
     margin: 0 -1em;
     padding: .5em 1em;
@@ -1615,7 +1627,7 @@ form > .button_link:first-of-type,
 
 #meta {
     background: #ccdee7;
-    border-top: 1px solid #25253d;
+    border-top: 1px solid #3e5f81;
     color: #3e5f81;
     text-align: center;
 }
@@ -2073,6 +2085,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
     .smallscreen {
         background: transparent;
+        box-shadow: none;
     }
 
     .js #main_menu {
@@ -2093,9 +2106,15 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #main_menu h3 {
-        background: #eee;
+        background: #ddd;
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
+        background-image: -webkit-linear-gradient(#fff, #ddd);
+        background-image: -moz-linear-gradient(#fff, #ddd);
+        background-image: -o-linear-gradient(#fff, #ddd);
+        background-image: linear-gradient(#fff, #ddd);
         border-bottom: 1px solid #aaa;
         display: block;
+        color: #666;
         font-size: 1em;
         margin: 0 -1em;
         padding: .5em 1em;
