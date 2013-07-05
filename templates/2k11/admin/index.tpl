@@ -73,94 +73,96 @@
             {$admin_vars.out.footer}
     {else}
         {if NOT $admin_vars.no_sidebar}
-        <nav id="main_menu">
-            <h2 class="visuallyhidden">Main menu</h2> {* i18n *}
+        <div class="smallscreen">
+            <nav id="main_menu">
+                <h2 class="visuallyhidden">Main menu</h2> {* i18n *}
 
-            <ul>
-                {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
-                <li><h3>Content</h3> {* i18n *}
-                    <ul>
-                    {if 'adminEntries'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new">{$CONST.NEW_ENTRY}</a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{$CONST.EDIT_ENTRIES}</a></li>
-                    {/if}
-                    {if 'adminCategories'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view">{$CONST.CATEGORIES}</a></li>
-                    {/if}
+                <ul class="clearfix">
                     {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
-                        {if $admin_vars.no_create !== true}
-                        {serendipity_hookPlugin hook="backend_sidebar_entries" hookAll="true"}
+                    <li><h3>Content</h3> {* i18n *}
+                        <ul>
+                        {if 'adminEntries'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=new">{$CONST.NEW_ENTRY}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{$CONST.EDIT_ENTRIES}</a></li>
                         {/if}
+                        {if 'adminCategories'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=category&amp;serendipity[adminAction]=view">{$CONST.CATEGORIES}</a></li>
+                        {/if}
+                        {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
+                            {if $admin_vars.no_create !== true}
+                            {serendipity_hookPlugin hook="backend_sidebar_entries" hookAll="true"}
+                            {/if}
+                        {/if}
+                        </ul>
+                    </li>
                     {/if}
-                    </ul>
-                </li>
-                {/if}
-                {if 'adminImages'|checkPermission}
-                <li><h3>{$CONST.MEDIA}</h3>
-                    <ul>
-                    {if 'adminImagesAdd'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect">{$CONST.ADD_MEDIA}</a></li>
+                    {if 'adminImages'|checkPermission}
+                    <li><h3>{$CONST.MEDIA}</h3>
+                        <ul>
+                        {if 'adminImagesAdd'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=addSelect">{$CONST.ADD_MEDIA}</a></li>
+                        {/if}
+                        {if 'adminImagesView'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=media">{$CONST.MEDIA_LIBRARY}</a></li>
+                        {/if}
+                        {if 'adminImagesDirectories'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a></li>
+                        {/if}
+                        {if 'adminImagesSync'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync">{$CONST.CREATE_THUMBS}</a></li>
+                        {/if}
+                        {if $admin_vars.no_create !== true}
+                            {serendipity_hookPlugin hook="backend_sidebar_entries_images" hookAll="true"}
+                        {/if}
+                        </ul>
+                    </li>
                     {/if}
-                    {if 'adminImagesView'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media">{$CONST.MEDIA_LIBRARY}</a></li>
-                    {/if}
-                    {if 'adminImagesDirectories'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a></li>
-                    {/if}
-                    {if 'adminImagesSync'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync">{$CONST.CREATE_THUMBS}</a></li>
-                    {/if}
-                    {if $admin_vars.no_create !== true}
-                        {serendipity_hookPlugin hook="backend_sidebar_entries_images" hookAll="true"}
-                    {/if}
-                    </ul>
-                </li>
-                {/if}
-                {if 'adminComments'|checkPermission}
-                <li><h3>Reactions</h3> {* i18n *}
-                    <ul>
                     {if 'adminComments'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=comments">{$CONST.COMMENTS}</a></li>
+                    <li><h3>Reactions</h3> {* i18n *}
+                        <ul>
+                        {if 'adminComments'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=comments">{$CONST.COMMENTS}</a></li>
+                        {/if}
+                        {if $admin_vars.no_create !== true}
+                            {serendipity_hookPlugin hook="backend_sidebar_admin_appearance" hookAll="true"}
+                        {/if}
+                        </ul>
+                    </li>
                     {/if}
-                    {if $admin_vars.no_create !== true}
-                        {serendipity_hookPlugin hook="backend_sidebar_admin_appearance" hookAll="true"}
+                    {if 'adminUsersGroups'|checkPermission OR 'adminImport'|checkPermission OR 'siteConfiguration'|checkPermission OR 'blogConfiguration'|checkPermission OR 'adminUsers'|checkPermission OR 'adminTemplates'|checkPermission OR 'adminPlugins'|checkPermission}
+                    <li><h3>Settings</h3> {* i18n *}
+                        <ul>
+                        {if 'siteConfiguration'|checkPermission OR 'blogConfiguration'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration">{$CONST.CONFIGURATION}</a></li>
+                        {/if}
+                        {if 'adminTemplates'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">{$CONST.MANAGE_STYLES}</a></li>
+                        {/if}
+                        {if 'adminPlugins'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins">{$CONST.CONFIGURE_PLUGINS}</a></li>
+                        {/if}
+                        {if 'adminUsers'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=users">{$CONST.MANAGE_USERS}</a></li>
+                        {/if}
+                        {if 'adminUsersGroups'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=groups">{$CONST.MANAGE_GROUPS}</a></li>
+                        {/if}
+                        {if 'adminImport'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=import">{$CONST.IMPORT_ENTRIES}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=export">{$CONST.EXPORT_ENTRIES}</a></li>
+                        {/if}
+                        {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=integrity">{$CONST.INTEGRITY}</a></li>
+                        {/if}
+                        {if $admin_vars.no_create !== true}
+                            {serendipity_hookPlugin hook="backend_sidebar_admin" hookAll="true"}
+                        {/if}
+                        </ul>
+                    </li>
                     {/if}
-                    </ul>
-                </li>
-                {/if}
-                {if 'adminUsersGroups'|checkPermission OR 'adminImport'|checkPermission OR 'siteConfiguration'|checkPermission OR 'blogConfiguration'|checkPermission OR 'adminUsers'|checkPermission OR 'adminTemplates'|checkPermission OR 'adminPlugins'|checkPermission}
-                <li><h3>Settings</h3> {* i18n *}
-                    <ul>
-                    {if 'siteConfiguration'|checkPermission OR 'blogConfiguration'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration">{$CONST.CONFIGURATION}</a></li>
-                    {/if}
-                    {if 'adminTemplates'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">{$CONST.MANAGE_STYLES}</a></li>
-                    {/if}
-                    {if 'adminPlugins'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins">{$CONST.CONFIGURE_PLUGINS}</a></li>
-                    {/if}
-                    {if 'adminUsers'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=users">{$CONST.MANAGE_USERS}</a></li>
-                    {/if}
-                    {if 'adminUsersGroups'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=groups">{$CONST.MANAGE_GROUPS}</a></li>
-                    {/if}
-                    {if 'adminImport'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=import">{$CONST.IMPORT_ENTRIES}</a></li>
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=export">{$CONST.EXPORT_ENTRIES}</a></li>
-                    {/if}
-                    {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=integrity">{$CONST.INTEGRITY}</a></li>
-                    {/if}
-                    {if $admin_vars.no_create !== true}
-                        {serendipity_hookPlugin hook="backend_sidebar_admin" hookAll="true"}
-                    {/if}
-                    </ul>
-                </li>
-                {/if}
-            </ul>
-        </nav>
+                </ul>
+            </nav>
+        </div>
         {/if}
         <div id="content" class="clearfix">
         {$admin_vars.main_content}
