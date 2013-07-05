@@ -2081,7 +2081,7 @@ input[name="serendipity[filter][fileCategory]"] {
         position: relative;
     }
 
-    .js #main_menu.closed {
+    .js #main_menu {
         max-height: none;
     }
 
