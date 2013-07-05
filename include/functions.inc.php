@@ -856,7 +856,7 @@ function serendipity_track_url($list, $url, $entry_id = 0) {
  * @return string   List of Top referrers
  */
 function serendipity_displayTopReferrers($limit = 10, $use_links = true, $interval = 7) {
-    serendipity_displayTopUrlList('referrers', $limit, $use_links, $interval);
+    return serendipity_displayTopUrlList('referrers', $limit, $use_links, $interval);
 }
 
 /**
@@ -870,7 +870,7 @@ function serendipity_displayTopReferrers($limit = 10, $use_links = true, $interv
  * @return string   List of Top exits
  */
 function serendipity_displayTopExits($limit = 10, $use_links = true, $interval = 7) {
-    serendipity_displayTopUrlList('exits', $limit, $use_links, $interval);
+    return serendipity_displayTopUrlList('exits', $limit, $use_links, $interval);
 }
 
 /**
@@ -913,18 +913,18 @@ function serendipity_displayTopUrlList($list, $limit, $use_links = true, $interv
     }
 
     $rows = serendipity_db_query($query);
-    echo "<span class='serendipityReferer'>";
+    $output = "<span class='serendipityReferer'>";
     if (is_array($rows)) {
         foreach ($rows as $row) {
             if ($use_links) {
-                printf(
+                $output .= sprintf(
                     '<span class="block_level"><a href="%1$s://%2$s" title="%2$s" >%2$s</a> (%3$s)</span>',
                     htmlspecialchars($row['scheme']),
                     htmlspecialchars($row['host']),
                     htmlspecialchars($row['total'])
                 );
             } else {
-                printf(
+                $output .= sprintf(
                     '<span class="block_level">%1$s (%2$s)</span>',
                     htmlspecialchars($row['host']),
                     htmlspecialchars($row['total'])
@@ -932,7 +932,8 @@ function serendipity_displayTopUrlList($list, $limit, $use_links = true, $interv
             }
         }
     }
-    echo "</span>";
+    $output .= "</span>";
+    return $output;
 }
 
 /**

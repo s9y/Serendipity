@@ -9,7 +9,7 @@ class serendipity_plugin_topexits extends serendipity_plugin {
         $propbag->add('description',   SHOWS_TOP_EXIT);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array('limit', 'use_links', 'interval'));
         $propbag->add('groups',        array('STATISTICS'));
     }
@@ -62,7 +62,7 @@ class serendipity_plugin_topexits extends serendipity_plugin {
             $use_links = serendipity_db_bool($use_links);
         }
 
-        serendipity_displayTopExits($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
+        echo serendipity_displayTopExits($this->get_config('limit', 10), $use_links, $this->get_config('interval', 7));
     }
 }
 

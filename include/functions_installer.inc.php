@@ -494,7 +494,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
         }
     }
     $data['config'] = $config;
-    echo serendipity_smarty_show('admin/config_template.tpl', $data);
+    return serendipity_smarty_show('admin/config_template.tpl', $data);
 }
 
 /**

@@ -110,6 +110,7 @@ function serendipity_set_config_var($name, $val, $authorid = 0) {
     }
 
     if (is_string($r)) {
+        # if $r is a string, it is the error-message from the insert
         echo $r;
     }
 }
@@ -737,18 +738,6 @@ function serendipity_is_iframe() {
     global $serendipity;
 
     if ($serendipity['GET']['is_iframe'] && is_array($_SESSION['save_entry'])) {
-        include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
-        // An iframe may NOT contain <html> and </html> tags, that's why we emit different headers here than on serendipity_admin.php
-
-        // We need to restore GET/POST variables to that depending plugins inside the iframe
-        // can still fetch all that variables; and we also tighten security by not allowing
-        // to pass any different GET/POST variables to our iframe.
-        $iframe_mode         = $serendipity['GET']['iframe_mode'];
-        $serendipity['POST'] = &$_SESSION['save_entry_POST'];
-        $serendipity['GET']  = &$_SESSION['save_entry_POST']; // GET-Vars are the same as POST to ensure compatibility.
-        $serendipity['hidefooter'] = true;
-        ignore_user_abort(true);
-        echo serendipity_iframe($_SESSION['save_entry'], $iframe_mode);
         return true;
     }
     return false;

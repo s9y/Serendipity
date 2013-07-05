@@ -68,10 +68,7 @@ switch ($_POST['installAction'] && serendipity_checkFormToken()) {
     default:
         $from = &$serendipity;
         $t = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-        ob_start();
-        serendipity_printConfigTemplate($t, $from, false, true);
-        $data['config'] = ob_get_contents();
-        ob_end_clean();
+        $data['config'] = serendipity_printConfigTemplate($t, $from, false, true);
         break;
 }
 

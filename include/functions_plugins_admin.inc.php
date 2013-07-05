@@ -203,7 +203,7 @@ function show_plugins($event_only = false, $sidebars = null)
     }
 
     $data['total'] = $i;
-    echo serendipity_smarty_show('admin/show_plugins.fnc.tpl', $data);
+    return serendipity_smarty_show('admin/show_plugins.fnc.tpl', $data);
 }
 
 /**
@@ -625,10 +625,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     if ($showExample && method_exists($plugin, 'example') ) { 
         $data['showExample'] = true;
-        ob_start();
-        echo $plugin->example();
-        $data['plugin_example'] = ob_get_contents();
-        ob_end_clean();
+        $data['plugin_example'] = $plugin->example();
     }
 
     if ($spawnNuggets && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && count($htmlnugget) > 0) { 

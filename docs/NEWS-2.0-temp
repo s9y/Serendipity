@@ -16,7 +16,8 @@
 
 * New additional option to render smarty-functions: serendipity_smarty_show($template, $data)
 
-* A number of functions now returns their result instead of echoing them (TODO: Make that "all functions"):
+* A number of functions now returns their result instead of echoing them (TODO: a bunch of image- and
+trackback-functions still use echo for messages"):
     serendipity_plugin_config
     serendipity_printEntryForm
     serendipity_printEntries
@@ -24,6 +25,12 @@
     serendipity_showPropertyForm
     showMediaLibrary
     serendipity_guessInput
+    memSnap
+    serendipity_displayTopUrlList
+    serendipity_displayTopExits
+    serendipity_displayTopReferrers
+    serendipity_printConfigTemplate
+    show_plugins
 
 * Functions removed from the core:
     serendipity_printConfigJS
@@ -78,3 +85,5 @@
 * jQuery in the backend no longer runs in noConflict-mode. Use $(...) instead of jQuery(...)
 
 * The entryproperty-plugin will now always delete its cache on uninstall, not only if the cache is activated then
+
+* serendipity_is_iframe now really only checks for iframe and doesn't also echo it

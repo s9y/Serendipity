@@ -228,10 +228,7 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
         $from['groups'] = array();
     }
 
-    ob_start();
-    serendipity_printConfigTemplate($config, $from, true, false, true, true);
-    $data['config'] = ob_get_contents();
-    ob_end_clean();
+    $data['config'] = serendipity_printConfigTemplate($config, $from, true, false, true, true);
 
 } elseif ($serendipity['GET']['adminAction'] == 'delete' && serendipity_checkPermission('adminUsersDelete')) {
     $user = serendipity_fetchUsers($serendipity['GET']['userid']);
@@ -245,11 +242,6 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
         $data['formToken'] = serendipity_setFormToken();
     }
 }
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
-}
-
 
 echo serendipity_smarty_show('admin/users.inc.tpl', $data);
 

@@ -41,7 +41,7 @@ if (!defined('IN_serendipity')) {
 
 include(S9Y_INCLUDE_PATH . 'include/compat.inc.php');
 if (defined('USE_MEMSNAP')) {
-    memSnap('Framework init');
+    echo memSnap('Framework init');
 }
 
 // The version string
@@ -296,7 +296,7 @@ if (!serendipity_db_connect()) {
  */
 
 if (defined('USE_MEMSNAP')) {
-    memSnap('Framework init');
+    echo memSnap('Framework init');
 }
 
 serendipity_load_configuration();

@@ -105,10 +105,7 @@ $user           = serendipity_fetchUsers($serendipity['authorid']);
 $from           = $user[0];
 $from['groups'] = serendipity_getGroups($serendipity['authorid']);
 unset($from['password']);
-ob_start();
-serendipity_printConfigTemplate($template, $from, true, false);
-$data['config'] = ob_get_contents();
-ob_get_clean();
+$data['config'] = serendipity_printConfigTemplate($template, $from, true, false);
    
 
 $add = array('internal' => true);
