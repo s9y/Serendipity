@@ -1049,9 +1049,9 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         animate: true,          // Boolean: Use CSS3 transitions, true or false
         transition: 250,        // Integer: Speed of the transition, in milliseconds
         // String: Label for the navigation toggle
-        label: "<span class='icon-menu'></span><span class='visuallyhidden'> Navigation</span>",
+        label: "",
         insert: "before",       // String: Insert the toggle before or after the navigation
-        customToggle: "",       // Selector: Specify the ID of a custom toggle
+        customToggle: "nav-toggle",       // Selector: Specify the ID of a custom toggle
         openPos: "relative",    // String: Position of the opened nav, relative or static
         jsClass: "js",          // String: 'JS enabled' class which is added to <html> el
         debug: false,           // Boolean: Log debug messages to console, true or false

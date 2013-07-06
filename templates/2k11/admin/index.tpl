@@ -74,6 +74,8 @@
     {else}
         {if NOT $admin_vars.no_sidebar}
         <div class="smallscreen">
+            <a id="nav-toggle" href="#main_menu"><span class="icon-menu"></span><span class="visuallyhidden"> Navigation</span></a> {* i18n *}
+
             <nav id="main_menu">
                 <h2 class="visuallyhidden">Main menu</h2> {* i18n *}
 
