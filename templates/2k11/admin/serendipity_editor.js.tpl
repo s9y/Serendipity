@@ -1271,6 +1271,12 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         serendipity.checkInputs();
     });
 
+    // Dashboard bookmarklet hint
+    $('.s9y_bookmarklet').click(function(e) {
+        e.preventDefault();
+        alert('{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}');
+    });
+
     // Limit width of media file info
     var $mediaPane = $('body').has('.media_pane');
 
