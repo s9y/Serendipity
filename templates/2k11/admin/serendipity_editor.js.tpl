@@ -1045,20 +1045,24 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
 (function($) {
     // Fire responsive nav
-    var navigation = responsiveNav('#main_menu', { 
-        animate: true,          // Boolean: Use CSS3 transitions, true or false
-        transition: 250,        // Integer: Speed of the transition, in milliseconds
-        // String: Label for the navigation toggle
-        label: "",
-        insert: "before",       // String: Insert the toggle before or after the navigation
-        customToggle: "nav-toggle",       // Selector: Specify the ID of a custom toggle
-        openPos: "relative",    // String: Position of the opened nav, relative or static
-        jsClass: "js",          // String: 'JS enabled' class which is added to <html> el
-        debug: false,           // Boolean: Log debug messages to console, true or false
-        init: function() { } ,  // Function: Init callback
-        open: function() { } ,  // Function: Open callback
-        close: function() { }   // Function: Close callback
-    });
+    var $hasMenu = $('body').has('#main_menu');
+
+    if($hasMenu.size() > 0) { 
+        var navigation = responsiveNav('#main_menu', { 
+            animate: true,          // Boolean: Use CSS3 transitions, true or false
+            transition: 250,        // Integer: Speed of the transition, in milliseconds
+            // String: Label for the navigation toggle
+            label: "",
+            insert: "before",       // String: Insert the toggle before or after the navigation
+            customToggle: "nav-toggle",       // Selector: Specify the ID of a custom toggle
+            openPos: "relative",    // String: Position of the opened nav, relative or static
+            jsClass: "js",          // String: 'JS enabled' class which is added to <html> el
+            debug: false,           // Boolean: Log debug messages to console, true or false
+            init: function() { } ,  // Function: Init callback
+            open: function() { } ,  // Function: Open callback
+            close: function() { }   // Function: Close callback
+        });
+    }
 
     // Fire WYSIWYG editor(s)
     serendipity.spawn();
