@@ -26,9 +26,11 @@ $data['update'] = version_compare($data['usedVersion'], $data['curVersion'], '<'
 $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                                     ORDER BY c.id DESC LIMIT 5");
-foreach ($comments as &$comment) {
-    $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
-    $comment['entrylink'] = $entrylink;
+if (count($comments) > 1) {
+    foreach ($comments as &$comment) {
+        $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
+        $comment['entrylink'] = $entrylink;
+    }
 }
 
 $data['comments'] = $comments;
@@ -55,7 +57,11 @@ if ($entriesAmount < 5) {
                      'timestamp DESC',
                      'isdraft = "true" AND e.timestamp <=  ' . serendipity_serverOffsetHour() 
                    );
-    $entries = array_merge($entries, $drafts);
+    if (count($entries) > 1) {
+        $entries = array_merge($entries, $drafts);
+    } else {
+        $entries = $drafts;
+    }
 }
 
 $data['entries'] = $entries;
