@@ -903,15 +903,6 @@ input[type=checkbox],
    Orange:      #d06604     
    Off black:   #222        Off white:   #fcfcfc
    ----------------------------------------------------------------- */
-
-html {
-    background: #ccdee7;
-}
-
-body {
-    background: #fcfcfc;
-}
-
 a,
 a:visited {
     color: #3e5f81;
@@ -1651,8 +1642,7 @@ form > .button_link:first-of-type,
    ----------------------------------------------------------------- */
 
 #meta {
-    background: #ccdee7;
-    border-top: 1px solid #3e5f81;
+    border-top: 1px solid #ccc;
     color: #3e5f81;
     text-align: center;
 }
