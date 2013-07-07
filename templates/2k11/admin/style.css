@@ -493,7 +493,8 @@ form > a {
     padding: 0;
 }
 
-.hilite_b {
+.hilite_b,
+#diagnose caption {
     font-weight: bold;
 }
 
