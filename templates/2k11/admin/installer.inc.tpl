@@ -6,7 +6,6 @@
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="{serendipity_getFile file='admin/style.css'}">
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
 </head>
 <body id="serendipity_admin_page">
     <header id="top">
@@ -289,7 +288,5 @@
     <footer id="meta">
         <p>{$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
     </footer>
-
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </body>
 </html>
