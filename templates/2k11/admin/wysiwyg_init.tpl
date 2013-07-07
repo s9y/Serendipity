@@ -1,15 +1,27 @@
 {if $init}
     <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
+    {if ! $use_popup}
+        <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
+    {/if}
 {/if}
 <script>
     $('document').ready(function() {
         CKEDITOR.plugins.add('s9y_medialibrary{$item}', {
             init: function( editor ) {
                 editor.addCommand( 'openML', {
-                    exec : function( editor ) {    
-                        window.open('serendipity_admin_image_selector.php?serendipity[textarea]={$item}',
+                    exec : function( editor ) {
+                        {if $use_popups}
+                            window.open('serendipity_admin_image_selector.php?serendipity[textarea]={$item}',
                                      'ImageSel',
                                      'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+                        {else}
+                            $.magnificPopup.open({
+                              items: {
+                                src: 'serendipity_admin_image_selector.php?serendipity[textarea]={$item}'
+                              },
+                              type: 'iframe'
+                            });
+                        {/if}
                     }
                 });
                 editor.ui.addButton('s9y_medialibrary{$item}', {

@@ -354,9 +354,15 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
                   +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
                   + '</div>';
         }
-
-        parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
-        parent.self.close();
+        {if $use_popups}
+            parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
+            parent.self.close();
+        {else}
+            // in iframes, there is no opener, and the magnific popup is wrapped
+            window.parent.parent.serendipity.serendipity_imageSelector_addToBody(img, textarea);
+            window.parent.parent.$.magnificPopup.close()
+        {/if}
+        
     }
 
     // Toggle extended entry editor
@@ -900,6 +906,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Media file actions
+    {if $use_popups}
     $('.media_fullsize').click(function(e) {
         e.preventDefault();
         var $el = $(this);
@@ -910,6 +917,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         var pleft = (screen.width - pwidth)/2;
         window.open(filepath, 'Zoom', 'height='+pheight+',width='+pwidth+',top='+ptop+',left='+pleft+',toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes');
     });
+    {else}
+    if ($('body').has('.media_fullsize').size() > 0) {
+        $('.media_fullsize').magnificPopup({ type:'image' });
+    }
+    {/if}
 
     $('.media_rename').click(function(e) {
         e.preventDefault();
