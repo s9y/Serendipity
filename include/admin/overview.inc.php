@@ -26,6 +26,10 @@ $data['update'] = version_compare($data['usedVersion'], $data['curVersion'], '<'
 $data['comments'] = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                                     ORDER BY c.id DESC LIMIT 5");
+foreach ($data['comments'] as &$comment) {
+    $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
+    $comment['entrylink'] = $entrylink;
+}
 
 $data['entries'] = serendipity_fetchEntries(
                      false,
