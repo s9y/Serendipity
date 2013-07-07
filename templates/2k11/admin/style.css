@@ -1176,17 +1176,16 @@ summary {
 }
 
 #user_menu ul {
-    margin: .75em 0;
-    text-align: right;
+    margin: 0 0 1em;
 }
 
 #user_menu li {
-    margin: 0 0 0 1em;
+    margin: 0 1em 0 0;
 }
 
 #user_menu .logged_in {
-    float: left;
-    margin: 0 1em 0 0;
+    display: block;
+    margin: 0 0 1em;
 }
 
 
@@ -1877,6 +1876,22 @@ input[name="serendipity[filter][fileCategory]"] {
 
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
+@media only screen and (min-width: 480px) {
+    #user_menu ul {
+        text-align: right;
+    }
+
+    #user_menu li {
+        margin: 0 0 0 1em;
+    }
+
+    #user_menu .logged_in {
+        display: inline;
+        float: left;
+        margin: 0 1em 0 0;
+    }
+}
+
 @media only screen and (min-width: 481px) {
     #login {
         max-width: 25em;
