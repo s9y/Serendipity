@@ -28,7 +28,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.80');
+        $propbag->add('version',       '1.81');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -779,9 +779,7 @@ var $filter_defaults;
     }
 
     function example() {
-        echo '<p id="captchabox" class="msg_hint">' . PLUGIN_EVENT_SPAMBLOCK_LOOK;
-        $this->show_captcha();
-        echo '</p>';
+        return '<p id="captchabox" class="msg_hint">' . PLUGIN_EVENT_SPAMBLOCK_LOOK . $this->show_captcha() . '</p>';
     }
 
     function show_captcha($use_gd = false) {
@@ -797,7 +795,7 @@ var $filter_defaults;
         }
 
         if ($use_gd) {
-            printf('<img src="%s" onclick="this.src=this.src + \'1\'" title="%s" alt="CAPTCHA" class="captcha" />',
+            return sprintf('<img src="%s" onclick="this.src=this.src + \'1\'" title="%s" alt="CAPTCHA" class="captcha" />',
                 $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . md5(time()),
                 htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
             );
@@ -805,14 +803,14 @@ var $filter_defaults;
             $bgcolors = explode(',', $this->get_config('captcha_color', '255,0,255'));
             $hexval   = '#' . dechex(trim($bgcolors[0])) . dechex(trim($bgcolors[1])) . dechex(trim($bgcolors[2]));
             $this->random_string($max_char, $min_char);
-            echo '<div class="serendipity_comment_captcha_image" style="background-color: ' . $hexval . '">';
+            $output = '<div class="serendipity_comment_captcha_image" style="background-color: ' . $hexval . '">';
             for ($i = 1; $i <= $max_char; $i++) {
-                printf('<img src="%s" title="%s" alt="CAPTCHA ' . $i . '" class="captcha" />',
+                $output .= sprintf('<img src="%s" title="%s" alt="CAPTCHA ' . $i . '" class="captcha" />',
                     $serendipity['baseURL'] . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] . '?/' : '') . 'plugin/captcha_' . $i . '_' . md5(time()),
                     htmlspecialchars(PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC2)
                 );
             }
-            echo '</div>';
+            $output .= '</div>';
         }
     }
 
@@ -1248,7 +1246,7 @@ var $filter_defaults;
                         echo '<div class="serendipity_commentDirection serendipity_comment_captcha">';
                         if (!isset($serendipity['POST']['preview']) || strtolower($serendipity['POST']['captcha'] != strtolower($_SESSION['spamblock']['captcha']))) {
                             echo '<br />' . PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC . '<br />';
-                            $this->show_captcha($use_gd);
+                            echo $this->show_captcha($use_gd);
                             echo '<br />';
                             echo '<label for="captcha">'. PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_USERDESC3 . '</label><br /><input class="input_textbox" type="text" size="5" name="serendipity[captcha]" value="" id="captcha" />';
                         } elseif (isset($serendipity['POST']['captcha'])) {
