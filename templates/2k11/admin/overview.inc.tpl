@@ -41,12 +41,15 @@
     {/if}
     {if is_array($entries)}
         <section id="dashboard_entries" class="equal_heights quick_list">
-            <h3>Future Entries</h3> {* i18n *}
+            <h3>{$CONST.ADMIN_ENTRIES}</h3> {* i18n *}
 
             <ol class="plainList">
             {foreach $entries as $entry}
                 <li>
                     <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title}</a>
+                    {if $entry.isdraft == "true"}
+                        <span class="entry_status status_draft">Draft</span>
+                    {/if}
                     <ul class="plainList actions">
                         <li>
                             <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$token}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}">
