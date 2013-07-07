@@ -1194,20 +1194,8 @@ summary {
    ----------------------------------------------------------------- */
 .smallscreen {
     background: #ccdde7;
-    box-shadow: 0 1px 4px rgba(0,0,0,.5)
-}
-
-.js #main_menu {
-    clip: rect(0 0 0 0);
-    display: block;
-    max-height: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,.5);
     overflow: hidden;
-    position: absolute;
-    zoom: 1;
-}
-
-.js #main_menu.opened {
-    max-height: 9999px;
 }
 
 #main_menu h3 {
@@ -2120,14 +2108,7 @@ input[name="serendipity[filter][fileCategory]"] {
     .smallscreen {
         background: transparent;
         box-shadow: none;
-    }
-
-    .js #main_menu {
-        position: relative;
-    }
-
-    .js #main_menu {
-        max-height: none;
+        overflow: visible;
     }
 
     #main_menu a {
@@ -2136,7 +2117,13 @@ input[name="serendipity[filter][fileCategory]"] {
     }
 
     #nav-toggle {
-        display: none;
+        display: none !important;
+        visibility: hidden;
+    }
+
+    #main_menu {
+        display: block !important;
+        visibility: visible;
     }
 
     #main_menu h3 {

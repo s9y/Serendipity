@@ -78,7 +78,7 @@
         <div class="smallscreen">
             <a id="nav-toggle" href="#main_menu"><span class="icon-menu"></span><span class="visuallyhidden"> Navigation</span></a> {* i18n *}
 
-            <nav id="main_menu">
+            <nav id="main_menu" class="additional_info">
                 <h2 class="visuallyhidden">Main menu</h2> {* i18n *}
 
                 <ul class="clearfix">
