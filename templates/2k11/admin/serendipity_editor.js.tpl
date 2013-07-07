@@ -1291,6 +1291,21 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         e.preventDefault();
     });
 
+    // Show further links
+    $('.toggle_links').click(function(e) {
+        var $el = $(this);
+        $($el.attr('href')).toggleClass('additional_info');
+        $el.parent().toggleClass('collapsed');
+        var $toggleIcon = $el.find('> span');
+        var $toggleState = $toggleIcon.attr('class');
+        if($toggleState == 'icon-minus') {
+            $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+        } else {
+            $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+        }
+        e.preventDefault();
+    });
+
     // Media file actions
     $('.media_fullsize').click(function(e) {
         e.preventDefault();

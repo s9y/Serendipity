@@ -835,7 +835,8 @@ input[type=checkbox],
 .form_multiselect,
 #entry_skip,
 #filter_entries,
-#sort_entries {
+#sort_entries,
+#s9y_links > ul {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -1478,6 +1479,22 @@ form > .button_link:first-of-type,
     box-sizing: border-box;
     margin: 0 0 1em;
     padding: 0 1em;
+}
+
+.js #dashboard > #further_links > .collapsed {
+    border-bottom: 0 none;
+}
+
+#further_links h3 > a,
+#further_links h3 > a:visited {
+    color: #666;
+    text-decoration: none;
+}
+
+#further_links h3 > a:hover,
+#further_links h3 > a:focus {
+    color: #222;
+    text-decoration: none;
 }
 
 .media_wrap_thumb {
