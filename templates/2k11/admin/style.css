@@ -444,7 +444,6 @@ form > a,
 .form_multiselect label,
 label > span,
 legend > span > span,
-#back_to_blog,
 .msg_error,
 .msg_success,
 .msg_notice,
@@ -999,35 +998,6 @@ summary {
 }
 
 
-/* LOGIN FORM
-   ----------------------------------------------------------------- */
-#login {
-    margin: 2em auto 1em;
-}
-
-#back_to_blog {
-    margin: 1em auto 2em;
-}
-
-#back_to_blog,
-#login {
-    max-width: 24em;
-}
-
-#login .form_check,
-#login_send {
-    float: left;
-}
-
-#login_send {
-    margin: .5em 0 0 7.5em;
-}
-
-#login .form_field label {
-    min-width: 8em;
-}
-
-
 /* LAYOUT
    ----------------------------------------------------------------- */
 #top > div,
@@ -1131,6 +1101,7 @@ summary {
 .configuration_group .form_area textarea,
 #uploadform .form_select select,
 #uploadform .form_field input,
+#login .form_field input,
 #diagnose > table {
     width: 100%;
 }
@@ -1357,6 +1328,7 @@ fieldset p,
     margin-bottom: .35em;
 }
 
+#login .form_buttons,
 .media_file .actions,
 #entries_list .actions {
     margin-bottom: 0;
@@ -1468,7 +1440,8 @@ form > .button_link:first-of-type,
 .media_file,
 .media_wrap_thumb,
 .plugins_installable > li,
-#dashboard > section {
+#dashboard > section,
+#login {
     border: 1px solid #aaa;
 }
 
@@ -1477,7 +1450,8 @@ form > .button_link:first-of-type,
     border-radius: 2px;
 }
 
-#dashboard > section > h3 {
+#dashboard > section > h3,
+#login fieldset > span {
     background: #ddd;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
     background-image: -webkit-linear-gradient(#fff, #ddd);
@@ -1491,7 +1465,13 @@ form > .button_link:first-of-type,
     padding: .5em 1em;
 }
 
-#dashboard > section {
+#login fieldset > span {
+    display: block;
+    font-weight: bold;
+}
+
+#dashboard > section,
+#login {
     border-radius: 2px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1642,14 +1622,27 @@ form > .button_link:first-of-type,
    ----------------------------------------------------------------- */
 
 #meta {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #aaa;
     color: #3e5f81;
     text-align: center;
 }
 
 #meta p {
+    color: #666;
     margin: 0;
     padding: .75em;
+}
+
+
+/* LOGIN FORM
+   ----------------------------------------------------------------- */
+#login {
+    margin: 2em auto 4em;
+    max-width: 22em;
+}
+
+#login .form_field label {
+    min-width: 8em;
 }
 
 
@@ -1706,7 +1699,8 @@ form > .button_link:first-of-type,
 .pluginmanager_place,
 .pluginmanager_ownership,
 .pluginmanager_move,
-.pagination .next {
+.pagination .next,
+#login .form_buttons {
     text-align: right;
 }
 
@@ -1879,6 +1873,10 @@ input[name="serendipity[filter][fileCategory]"] {
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 481px) {
+    #login {
+        max-width: 25em;
+    }
+
     #uploadform label {
         display: inline-block;
         min-width: 40%;
@@ -2081,6 +2079,10 @@ input[name="serendipity[filter][fileCategory]"] {
 /* LARGE SCREEN (e.g. netbooks)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 1024px) {
+    #login .form_field input {
+        width: auto;
+    }
+
     h1 {
         font-size: 1.125em;
         line-height: 1.3333em;
@@ -2274,13 +2276,8 @@ input[name="serendipity[filter][fileCategory]"] {
         width: 100%;
     }
 
-
     #login {
-        margin: 4em auto 1em;
-    }
-
-    #back_to_blog {
-        margin: 1em auto 4em;
+        margin: 4em auto 8em;
     }
 
     #media_pane_sort div fieldset input,
