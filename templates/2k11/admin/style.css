@@ -436,7 +436,8 @@ form > a,
 .folder_name,
 .toggle_info,
 #serendipityScaleForm .form_field label,
-.filters_toolbar li {
+.filters_toolbar li,
+#dashboard_entries .entry_status {
     display: inline-block;
 }
 
@@ -457,7 +458,8 @@ legend > span > span,
 .configuration_group .form_multiselect label,
 .configuration_group .form_field label,
 .configuration_group .form_area label,
-#captchabox .captcha {
+#captchabox .captcha,
+#dashboard_entries li > a {
     display: block;
 }
 
@@ -1311,7 +1313,8 @@ fieldset p,
 }
 
 .actions,
-.edit_actions {
+.edit_actions,
+#dashboard_entries .entry_status {
     margin-top: .35em;
     margin-bottom: .35em;
 }
@@ -1466,6 +1469,14 @@ form > .button_link:first-of-type,
     box-sizing: border-box;
     margin: 0 0 1em;
     padding: 0 1em;
+}
+
+#dashboard_entries .actions {
+    float: left;
+}
+
+#dashboard_entries .entry_status {
+    float: right;
 }
 
 .js #dashboard > #further_links > .collapsed {

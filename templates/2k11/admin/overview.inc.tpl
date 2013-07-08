@@ -45,29 +45,18 @@
 
             <ol class="plainList">
             {foreach $entries as $entry}
-                <li>
+                <li class="clearfix">
                     <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title}</a>
-                    {if $entry.isdraft == "true"}
-                        <span class="entry_status status_draft">Draft</span>
-                    {/if}
                     <ul class="plainList actions">
-                        <li>
-                            <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$token}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}">
-                                <span class="icon-eye"></span>
-                                <span class="visuallyhidden">
-                                    {$CONST.PREVIEW}
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}">
-                                <span class="icon-edit"></span>
-                                <span class="visuallyhidden">
-                                    {$CONST.EDIT}
-                                </span>
-                            </a>
-                        </li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$token}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-eye"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                     </ul>
+                {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
+                    <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
+                {/if}
+                {if $entry.isdraft == "true"}
+                    <span class="entry_status status_draft">Draft</span>
+                {/if}
                 </li>
             {/foreach}
             </ol>
