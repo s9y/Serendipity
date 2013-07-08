@@ -45,7 +45,7 @@ $entries = serendipity_fetchEntries(
                      'e.timestamp >= ' . serendipity_serverOffsetHour()
                    );
 
-$entriesAmount = count($data['entries']);
+$entriesAmount = count($entries);
 if ($entriesAmount < 5) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
@@ -57,10 +57,13 @@ if ($entriesAmount < 5) {
                      'timestamp DESC',
                      'isdraft = "true" AND e.timestamp <=  ' . serendipity_serverOffsetHour() 
                    );
-    if (count($entries) > 1) {
+    if (is_array($entries) && is_array($drafts)) {
         $entries = array_merge($entries, $drafts);
     } else {
-        $entries = $drafts;
+        if (is_array($drafts)) {
+            // $entries is not an array, thus empty
+            $entries = $drafts;
+        }
     }
 }
 
