@@ -34,7 +34,7 @@
                 <div class="template_preview">
                 {if $cur_tpl.fullsize_preview || $cur_tpl.preview}
                     {if $cur_tpl.fullsize_preview}
-                        <a class="media_fullsize" href="{$cur_tpl.fullsize_preview}">
+                        <a class="media_fullsize" href="{$cur_tpl.fullsize_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$cur_tpl.info.name}">
                             <img src="{$cur_tpl.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
                         </a>
                     {else}
@@ -71,7 +71,7 @@
                         <div class="template_preview">
                         {if $info.fullsize_preview || $info.preview}
                             {if $info.fullsize_preview}
-                                <a class="media_fullsize" href="{$info.fullsize_preview}">
+                                <a class="media_fullsize" href="{$info.fullsize_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$info.info.name}">
                                     <img src="{$info.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
                                 </a>
                             {else}
