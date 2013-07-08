@@ -2737,7 +2737,7 @@ img.mfp-img {
 
 /* HUGE SCREEN (e.g. desktops)
    ----------------------------------------------------------------- */
-@media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1600px) {
     html {
         font-size: 1.125em;
     }
