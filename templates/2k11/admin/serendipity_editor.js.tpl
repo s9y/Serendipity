@@ -151,10 +151,11 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     // in <img> element (only); doesn't really "wrap", merely inserts
     // an <img> element before selected text
     serendipity.wrapInsImage = function(txtarea) {
-        var loc = prompt('Enter the Image Location: ');
+        var loc = prompt('Enter the image location: ');
 
         if (loc) {
-            serendipity.insertText(txtarea,'<img src="'+ loc + '" alt="">');
+            var alttxt = prompt('Enter alternative text for this image: ');
+            serendipity.insertText(txtarea,'<img src="'+ loc + '" alt="' + alttxt + '">');
         }
     }
     /* end Better-Editor functions */
