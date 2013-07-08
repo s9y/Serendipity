@@ -878,7 +878,8 @@ input[type=checkbox],
 }
 
 .importer_data dd,
-.form_buttons > input {
+.form_buttons > input,
+.quick_list ol > li {
     margin-bottom: .75em;
 }
 

@@ -14,8 +14,7 @@
 
             <ol class="plainList">
             {foreach $comments as $comment}
-                <li>
-                    <div class="comment_summary">
+                <li><div class="comment_summary">
                         <b>#{$comment.id}</b> – {$comment.body|truncate:100:"&hellip;"}
                     </div>
                     
