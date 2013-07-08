@@ -654,9 +654,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
 (function($) {
     // Fire responsive nav
-    var $hasMenu = $('body').has('#main_menu');
-
-    if($hasMenu.size() > 0) {
+    if($('body').has('#main_menu').size() > 0) {
         $('#nav-toggle').click(function(e) {
             var $el = $(this);
             $($el.attr('href')).toggleClass('additional_info');
@@ -674,9 +672,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Editor-area
-    var $entryEditor = $('body').has('#serendipityEntry');
-
-    if($entryEditor.size() > 0) {
+    if($('body').has('#serendipityEntry').size() > 0) {
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
     }
@@ -735,9 +731,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Collapsible configuration elements
-    var $hasConfigOpts = $('body').has('#serendipity_config_options');
-
-    if($hasConfigOpts.size() > 0) {
+    if($('body').has('#serendipity_config_options').size() > 0) {
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
@@ -775,9 +769,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     // Config option add media
-    var $hasChooseMedia = $('body').has('.media_choose');
-
-    if($hasChooseMedia.size() > 0) {
+    if($('body').has('.media_choose').size() > 0) {
         var $el = $('.media_choose');
         var $item = $el.find('> input');
         var configItem = $item.attr('data-configitem');
@@ -824,9 +816,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Category icon preview
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
-    var $catIcon = $('body').has('#category_icon');
-
-    if($catIcon.size() > 0) {
+    if($('body').has('#category_icon').size() > 0) {
         $('<button id="insert_image" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
     }
 
@@ -878,9 +868,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Limit width of media file info
-    var $mediaPane = $('body').has('.media_pane');
-
-    if($mediaPane.size() > 0) {
+    if($('body').has('.media_pane').size() > 0) {
         var thumbsWidth = $('.media_pane').attr('data-thumbmaxwidth')  + 'px';
         $('.media_file_meta').css('maxWidth', thumbsWidth);
     }
@@ -987,10 +975,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     
 
     // Equal Heights
-    var $eqHeights = $('body').has('.equal_heights');
-
     $(window).load(function() {
-        if($eqHeights.size() > 0) {
+        if($('body').has('.equal_heights').size() > 0) {
             $('.equal_heights').syncHeight({
                 updateOnResize: true
             });
