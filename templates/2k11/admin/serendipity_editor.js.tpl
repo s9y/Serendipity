@@ -154,7 +154,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         var loc = prompt('Enter the Image Location: ');
 
         if (loc) {
-            insertText(txtarea,'<img src="'+ loc + '" alt="">');
+            serendipity.insertText(txtarea,'<img src="'+ loc + '" alt="">');
         }
     }
     /* end Better-Editor functions */
