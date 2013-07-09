@@ -222,14 +222,14 @@ body {
 
 /* These selection declarations have to be separate. */
 ::-moz-selection {
-    background: #3e5f81;
-    color: #fff;
+    background: #ccdde7;
+    color: #444;
     text-shadow: none;
 }
 
 ::selection {
-    background: #3e5f81;
-    color: #fff;
+    background: #ccdde7;
+    color: #444;
     text-shadow: none;
 }
 
