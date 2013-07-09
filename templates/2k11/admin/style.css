@@ -781,7 +781,7 @@ select[multiple] {
 }
 
 textarea {
-    min-height: 40px;
+    min-height: 3em;
     overflow: auto;
     resize: vertical;
     width: 100%;
@@ -974,7 +974,7 @@ summary {
 .msg_notice,
 .msg_hint {
     margin: 1.5em 0;
-    padding: 10px;
+    padding: .5em;
 }
 
 .msg_error {
@@ -1236,12 +1236,6 @@ summary {
 #content {
     padding-bottom: 1.5em;
 }
-
-#serendipity_admin_groups br,
-.image_add_form br {
-    display: none;
-    visibility: hidden;
-} /* Temporary */
 
 #edit_entry_timestamp,
 #edit_entry_category,
@@ -1595,10 +1589,6 @@ form > .button_link:first-of-type,
     margin: 0 1em .75em 0;
 }
 
-#entries_list .icon_link {
-    height: 24px;
-}
-
 .entry_status,
 .field_info {
     background: #888;
@@ -1606,7 +1596,7 @@ form > .button_link:first-of-type,
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     color: #fff;
-    padding: 0 4px;
+    padding: 0 .25em;
 }
 
 .field_info {
@@ -1667,18 +1657,20 @@ form > .button_link:first-of-type,
 .pluginmanager_container {
     background: transparent;
     border: 1px solid #ddd;
+    border-radius: 2px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     height: 98%;
     margin: 0;
     min-height: 12.5em;
-    padding: 5px;
+    padding: .25em;
     position: relative;
 }
 
 .pluginmanager_container .placeholder {
     border: 1px solid black;
+    border-radius: 2px
     height: 50px;
     position: relative;
 }
@@ -1710,6 +1702,7 @@ form > .button_link:first-of-type,
 .pluginmanager_item_even {
     background: #eee;
     border: 1px solid #ddd;
+    border-radius: 2px;
 }
 
 .pluginmanager_place,
@@ -1793,10 +1786,6 @@ form > .button_link:first-of-type,
 
 /* MEDIA DB
    ----------------------------------------------------------------- */
-#fs_crop {
-    min-height: 200px;
-}
-
 .media_pane .pagination {
     margin: 0 2% 1em 0;
 }
