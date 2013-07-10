@@ -1881,6 +1881,25 @@ input[name="serendipity[filter][fileCategory]"] {
     margin: 0 2% 1em 0;
 }
 
+/* TEMP fixes for tree view */
+#expandcontractdiv {
+    font-size: 1em !important;
+    margin: .75em auto !important;
+}
+
+#footerContainer {
+    margin-left: .75em !important;
+    margin-right: .75em !important;
+}
+
+#footerContainer .button_link {
+    display: block;
+}
+
+.ygtvitem table {
+    margin: 0;
+}
+/* end TEMP fixes */
 
 /* MAGNIFIC POPUP https://github.com/dimsemenov/Magnific-Popup
    ----------------------------------------------------------------- */
