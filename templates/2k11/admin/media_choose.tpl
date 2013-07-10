@@ -228,12 +228,12 @@ if (parent.frames && parent.frames['tree']) {
         </form>
     </div>
 
-    <div id="footerContainer" class="clearfix">
+    <footer id="footerContainer" class="clearfix">
         <div id="footer">
-            <a id="newdirlink" class="button_link block_level" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a>
-            <a id="managedirlink" class="button_link block_level" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
+            <a id="newdirlink" class="button_link" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a>
+            <a id="managedirlink" class="button_link" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
         </div>
-    </div>
+    </footer>
 {/if}{* if $media.case switch end *}
 </div> <!-- //.serendipityAdminContent end -->
 <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
