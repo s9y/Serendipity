@@ -221,7 +221,7 @@ if (parent.frames && parent.frames['tree']) {
         <form id="mainForm" name="mainForm" action="javscript:;">
             <div class="newsItem">
                 <div id="expandcontractdiv">
-                    <a href="javascript:serendipity.treeToggleAll()">{$CONST.TOGGLE_ALL}</a>
+                    <a id="tree_toggle_all" class="button_link" href="#treeDiv1">{$CONST.TOGGLE_ALL}</a>
                 </div>
                 <div id="treeDiv1"></div>
             </div>

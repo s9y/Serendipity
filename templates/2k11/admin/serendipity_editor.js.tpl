@@ -798,6 +798,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         e.preventDefault();
     });
 
+    $('#tree_toggle_all').click(function(e) {
+        e.preventDefault();
+        serendipity.treeToggleAll();
+    });
+
     // Comments
     $('.comments_delete').click(function() {
         var $msg = $(this).attr('data-delmsg');
