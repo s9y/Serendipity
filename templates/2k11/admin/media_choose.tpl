@@ -218,10 +218,10 @@ if (parent.frames && parent.frames['tree']) {
     {/if}{* if $perm_denied else end *}
 {elseif $media.case == 'tree'}
     <div id="content" class="clearfix">
-        <form name="mainForm" action="javscript:;">
+        <form id="mainForm" name="mainForm" action="javscript:;">
             <div class="newsItem">
                 <div id="expandcontractdiv">
-                    <a href="javascript:treeToggleAll()">{$CONST.TOGGLE_ALL}</a>
+                    <a href="javascript:serendipity.treeToggleAll()">{$CONST.TOGGLE_ALL}</a>
                 </div>
                 <div id="treeDiv1"></div>
             </div>
