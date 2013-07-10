@@ -977,6 +977,13 @@ summary {
     padding: .5em;
 }
 
+#diagnose .msg_error,
+#diagnose .msg_success,
+#diagnose .msg_notice,
+#diagnose .msg_hint {
+    margin: .75em 0;
+}
+
 .msg_error {
     background: #f2dede;
     border: 1px solid #e4b9b9;
@@ -2670,7 +2677,7 @@ img.mfp-img {
     .installer #content {
         float: none;
         margin: 0 auto;
-        max-width: 45em;
+        max-width: 60em;
         width: 100%;
     }
 
