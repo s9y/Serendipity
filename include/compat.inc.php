@@ -112,7 +112,8 @@ if (!function_exists('errorToExceptionHandler')) {
             }
             //print_r($args); // debugging
             // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-            if (!$serendipity['dbConn']) {
+            // compare version to not get strange T_NEW parse errors (http://board.s9y.org/viewtopic.php?f=10&t=19436)
+            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
             } else {
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
@@ -123,8 +124,8 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === false) { 
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
-            // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-            if (!$serendipity['dbConn']) {
+            // see notes above
+            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
             } else {
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
