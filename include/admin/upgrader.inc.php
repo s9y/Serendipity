@@ -173,17 +173,18 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_copyBaseURL',
                      'title'     => 'Copy baseURL',
                      'desc'      => 'The baseURL option was moved to the defaultBaseURL-Option in the backend-configuration. To reflect that change in the database and to prevent future bugs, baseURL should copied to defaultBaseURL if that options is not set already.'),
-               
+
+               array('version'   => '1.7.1',
+                     'type'      => 'TEMPLATE_NOTICE',
+                     'function'  => '',
+                     'title'     => '<b>TEMPLATE_NOTICE:</b> The Bulletproof template config has changed, to avoid a backend template view conflict with the "categorytemplates" plugin.',
+                     'desc'      => 'Please check any used <strong>copy</strong> of an old BP template config.inc.php file, in the colorset if(...) conditionals at around line 29 in config.inc.php, to be the same as in the origin bulletproof.'),
+
                array('version'   => '1.7.1',
                      'function'  => 'serendipity_killPlugin',
                      'arguments' => array('serendipity_event_browsercompatibility'),
                      'title'     => 'Remove obsolete plugin',
                      'desc'      => 'The "browsercompatibility" plugin is no longer supported (and no longer required with recent browsers), so it will be automatically uninstalled.'),
-                     
-                     
-
-
-
 
 );
 
