@@ -17,7 +17,16 @@ Version 2.0 ()
 Version 1.7.1 ()
 ------------------------------------------------------------------------
 
+    * Smarty upgrade to 3.1.14 (read changeLog and the README for API changes since Smarty 2)
+
     * Upgrader will now remove/delete the browsercompatibility plugin
+
+    * Fixed Media Library exclude path to not show/proceed ckeditor/kcfinders .thumbs dir
+
+    * Fixed bulletproof->colorset GET mismatch with categorytemplates plugin
+      config.inc.php [Line 29]
+
+    * German translation for stable archives added (YL)
 
     * Fixed curl result bug in spartacus plugin
 
@@ -25,6 +34,7 @@ Version 1.7.1 ()
       currently empty (onli)
 
     * Fixed statistics sidebar querys ( & for PostgreSQL ) [242520b]
+      and added some missing html end tags
 
     * Added missing current group name when editing usergroups
 
