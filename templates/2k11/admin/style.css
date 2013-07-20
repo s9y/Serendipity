@@ -977,11 +977,13 @@ summary {
     padding: .5em;
 }
 
-#diagnose .msg_error,
-#diagnose .msg_success,
-#diagnose .msg_notice,
-#diagnose .msg_hint {
-    margin: .75em 0;
+.installer .msg_error,
+.installer .msg_success,
+.installer .msg_notice,
+.installer .msg_hint {
+    display: inline-block;
+    margin: 0;
+    padding: 0 .5em;
 }
 
 .msg_error {
