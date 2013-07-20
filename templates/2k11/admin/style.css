@@ -1354,6 +1354,10 @@ fieldset p,
     margin: 0 .4em 0 0;
 }
 
+.no-js .media_file .actions li {
+    margin: 0 .4em 0 -.4em;
+}
+
 .editor_toolbar input {
     margin: 0 .25em .75em 0;
 }
@@ -1735,12 +1739,14 @@ form > .button_link:first-of-type,
 }
 
 .pluginmanager .pluginmanager_grablet,
-.pluginmanager .pluginmanager_configure {
+.pluginmanager .pluginmanager_configure,
+.pluginmanager_move {
     position: absolute;
     top: 5px;
 }
 
-.pluginmanager .pluginmanager_grablet {
+.pluginmanager .pluginmanager_grablet,
+.pluginmanager_move {
     left: 5px;
 }
 
@@ -1841,6 +1847,11 @@ form > .button_link:first-of-type,
 .no-js .template_show_info,
 .no-js #serendipity_comments_list .comment_summary,
 .no-js .editor_toolbar,
+.no-js #s9y_links > span,
+.no-js .toggle_info .info-icon-circled,
+.no-js .pluginmanager_grablet,
+.no-js .image_resize_hint,
+.no-js #serendipityScaleForm > .form_check,
 .js .additional_info,
 .installer .toggle_info,
 .hidden {

@@ -73,7 +73,6 @@
                             </li>
                             <li class="pluginmanager_move">
                                 {if $plugin_data.sort_idx == 0}
-                                    &nbsp;
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <span class="icon-up-open"></span><span class="visuallyhidden"> UP</span>
@@ -81,7 +80,6 @@
                                 {/if}
 
                                 {if $sort_idx == $total - 1}
-                                    &nbsp;
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <span class="icon-down-open"></span><span class="visuallyhidden"> DOWN</span>

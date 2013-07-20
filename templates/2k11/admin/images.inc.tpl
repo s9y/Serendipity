@@ -78,7 +78,7 @@
     <input class="go_back" type="button" value="{$CONST.BACK}">
     {else}
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
+    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {/if}
 {/if}
 
@@ -91,7 +91,7 @@
 {if $case_add}
     {if $smarty.post.adminSubAction == 'properties'}
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
+    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {else}
     {$showML_add}
     {/if}
@@ -258,13 +258,13 @@
 {if $case_rotateCW}
     {if $rotate_img_done}
     <script>location.href="{$adminFile_redirect}";</script>
-    <noscript><a href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
+    <noscript><a class="button_link icon_link standalone" href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
     {/if}
 {/if}
 {if $case_rotateCCW}
     {if $rotate_img_done}
     <script>location.href="{$adminFile_redirect}";</script>
-    <noscript><a href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
+    <noscript><a class="button_link icon_link standalone" href="{$adminFile_redirect}">{$CONST.DONE}</a></noscript>
     {/if}
 {/if}
 {if $case_scale}
@@ -272,7 +272,7 @@
     {if $print_serendipity_scaleImg}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_serendipity_scaleImg}</span>{/if}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DONE}</span>
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
+    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
 {/if}
 {if $case_scaleSelect}
     {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
