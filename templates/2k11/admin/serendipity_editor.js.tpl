@@ -558,6 +558,14 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         $('#' + id).toggleClass('multidel_selected');
     }
 
+    serendipity.closeCommentPopup = function() {
+        {if $use_popups}
+            parent.self.close();
+        {else}
+            window.parent.parent.$.magnificPopup.close();
+        {/if}
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -814,7 +822,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     $('.comments_reply').click(function(e) {
         e.preventDefault();
-        window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
+        {if $use_popups}
+            window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
+        {else}
+           $(this).magnificPopup({ type:'iframe' });
+        {/if}
     });
 
     $('.comments_multidelete').click(function() {
@@ -987,6 +999,12 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().prependTo('.comments_pane');
     $('.entries_pane .pagination').clone().prependTo('.entries_pane');
+
+    if ($('body').has('#comment_replied').size() > 0) {
+        $('#comment_replied').click(function() {
+            serendipity.closeCommentPopup();
+        });
+    }
     
 
     // Equal Heights
