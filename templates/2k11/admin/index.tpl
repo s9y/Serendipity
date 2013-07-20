@@ -122,7 +122,7 @@
                     </li>
                     {/if}
                     {if 'adminComments'|checkPermission}
-                    <li><h3>Reactions</h3> {* i18n *}
+                    <li><h3>Activity</h3> {* i18n *}
                         <ul>
                         {if 'adminComments'|checkPermission}
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=comments">{$CONST.COMMENTS}</a></li>
