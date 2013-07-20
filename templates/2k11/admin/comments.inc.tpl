@@ -104,10 +104,9 @@
                             <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
                         </div>
 
-                        <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} – {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}</h4>
+                        <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} – {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'} <a class="toggle_info" href="#comment_data_{$comment.id}"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></h4>
 
-                        <details>
-                            <summary>Comment data</summary> {* i18n *}
+                        <div id="comment_data_{$comment.id}" class="additional_info">
                             <dl class="comment_data clearfix">
                                 <dt>{$CONST.AUTHOR}:</dt>
                                 <dd>{$comment.author|escape|truncate:40:"&hellip;"} {$comment.action_author}</dd>
@@ -120,7 +119,7 @@
                                 <dt>{$CONST.REFERER}:</dt>
                                 <dd>{if empty($comment.referer)}N/A{else}<a href="{$comment.referer|escape}" title="{$comment.referer|escape}">{$comment.referer|escape|truncate:40:"&hellip;"}</a>{/if} {$comment.action_referer}</dd>
                             </dl>
-                        </details>
+                        </div>
 
                         <div id="c{$comment.id}_summary" class="comment_summary">{$comment.fullBody|truncate:120:"&hellip;"}</div>
 
