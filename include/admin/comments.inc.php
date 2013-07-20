@@ -61,8 +61,8 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $comment['parent_id'] = $serendipity['POST']['replyTo'];
     if (!empty($comment['comment'])) {
         if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
-            echo '<script type="text/javascript">alert("' . COMMENT_ADDED . '"); parent.focus(); this.close();</script>';
-            echo '<noscript><p class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . COMMENT_ADDED . '</p></noscript>';
+            $data['commentReplied'] = true;
+            echo serendipity_smarty_show('admin/comments.inc.tpl', $data);
             return true;
         } else {
             $errormsg .= COMMENT_NOT_ADDED;
