@@ -278,6 +278,12 @@ $sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}
                                 WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and 
                                 . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . " 
                                 ORDER BY c.id DESC $limit");
+                                
+ob_start();
+# This event has to get send here so the spamblock-plugin can block an author now and the comment_page show that on this pageload
+serendipity_plugin_api::hook_event('backend_comments_top', $sql);   
+$data['backend_comments_top'] = ob_get_contents();
+ob_end_clean();
 
 $data['commentsPerPage'] = $commentsPerPage;
 $data['totalComments']   = $totalComments;

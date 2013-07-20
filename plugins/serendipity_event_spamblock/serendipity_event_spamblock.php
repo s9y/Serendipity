@@ -1397,26 +1397,27 @@ var $filter_defaults;
 
                 case 'backend_view_comment':
                     $author_is_filtered = $this->checkFilter('authors', $eventData['author']);
-                    $clink1 = 'clink1' . $eventData['id'];
-                    $clink2 = 'clink2' . $eventData['id'];
-
+                    $clink = 'comment_' . $eventData['id'];
+                    $randomString = '&amp;random=' . substr(sha1(rand()), 0, 10);    # the random string will force browser to reload the page,
+                                                                                     # so the server knows who to block/unblock when clicking again on the same link,
+                                                                                     # see http://stackoverflow.com/a/2573986/2508518, http://stackoverflow.com/a/14043346/2508518
                     $akismet_apikey = $this->get_config('akismet');
                     $akismet        = $this->get_config('akismet_filter');
                     if (!empty($akismet_apikey)) {
-                        $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="icon_link" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><span class="icon-lock"></span> ' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
-                        $eventData['action_more'] .= ' <a id="' . $clink1 . '" class="icon_link" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><span class="icon-lock-open"></span> ' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
+                        $eventData['action_more'] .= ' <a class="icon_link" title="' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamIsSpam]=' . $eventData['id'] . $addData . '#' . $clink . '"><span class="icon-lock"></span> ' . PLUGIN_EVENT_SPAMBLOCK_SPAM . '</a>';
+                        $eventData['action_more'] .= ' <a" class="icon_link" title="' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamNotSpam]=' . $eventData['id'] . $addData . '#' . $clink . '"><span class="icon-lock-open"></span> ' . PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM . '</a>';
                     }
 
-                    $eventData['action_author'] .= ' <a id="' . $clink1 . '" class="icon_link" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . '#' . $clink1 . '"><span class="icon-lock' . ($author_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '</span></a>';
+                    $eventData['action_author'] .= ' <a class="icon_link" title="' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockAuthor]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-lock' . ($author_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($author_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR : PLUGIN_EVENT_SPAMBLOCK_ADD_AUTHOR) . '</span></a>';
 
                     if (!empty($eventData['url'])) {
                         $url_is_filtered    = $this->checkFilter('urls', $eventData['url']);
-                        $eventData['action_url']    .= ' <a id="' . $clink2 . '" class="icon_link" title="' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockURL]=' . $eventData['id'] . $addData . '#' . $clink2 . '"><span class="icon-lock' . ($url_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '</span></a>';
+                        $eventData['action_url']    .= ' <a class="icon_link" title="' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockURL]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-lock' . ($url_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($url_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL : PLUGIN_EVENT_SPAMBLOCK_ADD_URL) . '</span></a>';
                     }
 
                     if (!empty($eventData['email'])) {
                         $email_is_filtered    = $this->checkFilter('emails', $eventData['email']);
-                        $eventData['action_email']    .= ' <a id="' . $clink2 . '" class="icon_link" title="' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockEmail]=' . $eventData['id'] . $addData . '#' . $clink2 . '"><span class="icon-lock' . ($email_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '</span></a>';
+                        $eventData['action_email']    .= ' <a class="icon_link" title="' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '" href="serendipity_admin.php?serendipity[adminModule]=comments&amp;serendipity[spamBlockEmail]=' . $eventData['id'] . $addData . $randomString . '#' . $clink . '"><span class="icon-lock' . ($email_is_filtered ? '-open' : '') .'"></span><span class="visuallyhidden"> ' . ($email_is_filtered ? PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL : PLUGIN_EVENT_SPAMBLOCK_ADD_EMAIL) . '</span></a>';
                     }
 
                     return true;

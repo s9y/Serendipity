@@ -14,7 +14,7 @@
 
         <ul class="filters_toolbar plainList">
             <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
-            <li><div class="backend_comments">{serendipity_hookPlugin hookAll=true hook="backend_comments_top" addData=$sql}</div></li> {* Does this ever emit anything but the 'Configure Anti-Spam' stuff? *}
+            <li><div class="backend_comments">{$backend_comments_top}</div></li>
         </ul>
 
         <fieldset id="filter_comments" class="additional_info">

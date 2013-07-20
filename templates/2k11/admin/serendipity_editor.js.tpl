@@ -1000,12 +1000,17 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     $('.comments_pane .pagination').clone().prependTo('.comments_pane');
     $('.entries_pane .pagination').clone().prependTo('.entries_pane');
 
+    // close comment reply on button click
     if ($('body').has('#comment_replied').size() > 0) {
         $('#comment_replied').click(function() {
             serendipity.closeCommentPopup();
         });
     }
-    
+
+    // reopen detail element after spamblock action
+    if ($('body').has('#serendipity_comments_list').size() > 0 && window.location.hash && $('body').has('#' + window.location.hash.replace('#', '')).size() > 0) {
+        $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
+    }
 
     // Equal Heights
     $(window).load(function() {
@@ -1016,3 +1021,5 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         }
     });
 })(jQuery);
+
+
