@@ -279,6 +279,7 @@ if (!$use_installer) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
     }
 
+    if (!$serendipity['smarty']) serendipity_smarty_init();
     $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
 } else {
