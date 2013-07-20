@@ -844,6 +844,7 @@ input[type=checkbox],
     margin-bottom: .75em;
 }
 
+.inputs .form_radio,
 .configuration_group fieldset > fieldset,
 .theme_options .configuration_group > fieldset,
 .configuration_group .form_field,
