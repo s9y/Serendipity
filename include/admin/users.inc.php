@@ -187,6 +187,7 @@ if ($serendipity['GET']['adminAction'] != 'delete') {
                     $data['users'][$user]['isEditable'] = true;
                     $data['users'][$user]['authorUrl'] = serendipity_authorURL($userdata);
             }
+            $data['users'][$user]['userlevel_name'] = $serendipity['permissionLevels'][$userdata['userlevel']];
         }
     }
        
