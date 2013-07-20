@@ -939,7 +939,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     $('.add_keyword').click(function(e) {
-        AddKeyword($(this).attr('data-keyword'));
+        serendipity.AddKeyword($(this).attr('data-keyword'));
         e.preventDefault();
     });
 

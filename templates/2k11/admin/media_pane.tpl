@@ -88,7 +88,7 @@
 
                     <div id="keyword_list" class="clearfix">
                     {foreach from=$media.keywords item="keyword"}
-                        <a class="add_keyword" href="#" data-keyword="{$keyword|@escape}">{$keyword|@escape}</a>
+                        <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|@escape}">{$keyword|@escape}</a>
                     {/foreach}
                     </div>
                 </div>
