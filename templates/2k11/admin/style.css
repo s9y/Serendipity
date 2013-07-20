@@ -1446,6 +1446,7 @@ form > .button_link:first-of-type,
 }
 
 #template_select article,
+.plugins_installable > li,
 .media_file {
     border-radius: 2px;
 }
@@ -2410,6 +2411,7 @@ img.mfp-img {
     }
 
     #template_select article,
+    .plugins_installable > li,
     #serendipityScaleForm,
     #serendipityScaleImg,
     .media_file,
@@ -2490,6 +2492,7 @@ img.mfp-img {
     .configuration_group .form_area,
     .configuration_group fieldset > fieldset,
     #template_select .odd,
+    .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
     #dashboard > section:last-child {
         clear: left;

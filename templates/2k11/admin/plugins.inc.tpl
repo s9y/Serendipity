@@ -70,32 +70,35 @@
     {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
         <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
     {/if}
-        <ul class="plugins_installable plainList">
+        <ul class="plugins_installable plainList clearfix">
         {foreach $groupstack as $plug}
-            <li class="clearfix"><h4>{$plug.name} ({$plug.class_name})</h4>
+            <li class="clearfix">
+                <div class="equal_heights">
+                    <h4>{$plug.name} ({$plug.class_name})</h4>
 
-                <p class="plugin_desc">{$plug.description}</p>
+                    <p class="plugin_desc">{$plug.description}</p>
 
-                <ul class="plugin_info plainList">
-                {if ! empty($plug.author)}
-                    <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
-                {/if}
-                {if ! empty($plug.version)}
-                    <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
-                {/if}
-                {if ! empty($plug.website)}
-                    <li class="plugin_web"><a href="{$plug.website|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
-                {/if}
-                {if ! empty($plug.local_documentation)}
-                    <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
-                {/if}
-                {if ! empty($plug.changelog)}
-                    <li class="plugin_changelog"><a href="{$plug.changelog|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
-                {/if}
-                {if ! empty({$plug.upgrade_version}) && $plug.upgrade_version != $plug.version}
-                    <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape:"html"}){/if}</li>
-                {/if}
-                </ul>
+                    <ul class="plugin_info plainList">
+                    {if ! empty($plug.author)}
+                        <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
+                    {/if}
+                    {if ! empty($plug.version)}
+                        <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
+                    {/if}
+                    {if ! empty($plug.website)}
+                        <li class="plugin_web"><a href="{$plug.website|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
+                    {/if}
+                    {if ! empty($plug.local_documentation)}
+                        <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
+                    {/if}
+                    {if ! empty($plug.changelog)}
+                        <li class="plugin_changelog"><a href="{$plug.changelog|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
+                    {/if}
+                    {if ! empty({$plug.upgrade_version}) && $plug.upgrade_version != $plug.version}
+                        <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape:"html"}){/if}</li>
+                    {/if}
+                    </ul>
+                </div>
 
                 <div class="plugin_status">
                 {if isset($requirements_failures.{$plug.class_name})}
@@ -112,6 +115,7 @@
         {/foreach}
         </ul>
     {/foreach}
+    <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 {else}
     {if $save}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
