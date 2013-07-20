@@ -59,9 +59,8 @@
                     });
                     </script>
                 {/if}
-                <div class="serendipityAdminMsgSuccess msg_success">
-                    <img class="img_error" src="{serendipity_getFile file='admin/img/admin_msg_success.png'}'" alt="" /> {$CONST.ENTRY_SAVED} (<a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>)
-                </div>
+                <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_SAVED}</span>
+                <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
             {/if}
         {/if}
         {$preview}
