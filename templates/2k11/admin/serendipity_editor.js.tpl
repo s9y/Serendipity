@@ -374,6 +374,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
+                $(this).toggleClass('active');
                 serendipity.toggle_extended(true);
             });
         }
@@ -402,6 +403,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
+                $(this).toggleClass('active');
                 serendipity.toggle_category_selector(id);
             });
             
@@ -764,6 +766,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
                 $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
                 optsCollapsed = true;
             }
+            $(this).toggleClass('active');
             e.preventDefault();
         });
     }
@@ -879,7 +882,14 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     // Show media file info, template info, label info or filters
-    $('.media_show_info, .template_show_info, .filters_toolbar li > a, .toggle_info').click(function(e) {
+    $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
+        var $el = $(this);
+        $($el.attr('href')).toggleClass('additional_info');
+        $el.toggleClass('active');
+        e.preventDefault();
+    });
+
+    $('.toggle_info').click(function(e) {
         $($(this).attr('href')).toggleClass('additional_info');
         e.preventDefault();
     });
