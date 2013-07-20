@@ -421,7 +421,6 @@ form > a,
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
-#serendipity_category label,
 .pluginmanager_plugin .form_check,
 .pluginmanager_plugin h5,
 .media_file .form_check,
@@ -449,7 +448,7 @@ legend > span > span,
 .msg_success,
 .msg_notice,
 .msg_hint,
-#serendipity_category .form_multiselect label,
+#serendipity_category label,
 #image_directory_edit_form .form_select label,
 #uploadform label,
 #serendipity_admin_groups .form_field label,
@@ -839,12 +838,13 @@ input[type=checkbox],
 #entry_skip,
 #filter_entries,
 #sort_entries,
-#s9y_links > ul {
+#s9y_links > ul,
+#serendipity_category .inputs {
     margin-top: .75em;
     margin-bottom: .75em;
 }
 
-.inputs .form_radio,
+#serendipity_category .inputs .form_radio,
 .configuration_group fieldset > fieldset,
 .theme_options .configuration_group > fieldset,
 .configuration_group .form_field,
@@ -1073,7 +1073,6 @@ summary {
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
-#serendipity_category label,
 #media_pane_filter label,
 #media_pane_sort label,
 #image_directory_create_form label,
@@ -1114,6 +1113,9 @@ summary {
 .configuration_group .form_multiselect select,
 .configuration_group .form_field input,
 .configuration_group .form_area textarea,
+#serendipity_category .form_field input,
+#serendipity_category .form_select select,
+#serendipity_category .form_multiselect select,
 #uploadform .form_select select,
 #uploadform .form_field input,
 #login .form_field input,
@@ -1121,7 +1123,8 @@ summary {
     width: 100%;
 }
 
-.js .configuration_group .media_choose input {
+.js .configuration_group .media_choose input,
+.js #serendipity_category .form_field #category_icon {
     width: 90%;
 }
 
@@ -1130,10 +1133,6 @@ summary {
     height: auto;
     margin: .75em 0;
     max-width: 100%;
-}
-
-#serendipity_category .form_multiselect label {
-    width: auto;
 }
 
 .editor_toolbar input,
@@ -2416,7 +2415,8 @@ img.mfp-img {
     #serendipityScaleForm,
     #serendipityScaleImg,
     .media_file,
-    #dashboard > .quick_list {
+    #dashboard > .quick_list,
+    #serendipity_category > div {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
@@ -2464,6 +2464,10 @@ img.mfp-img {
         width: 48%;
     }
 
+    .js #serendipity_category .form_field #category_icon {
+        width: 85%;
+    }
+
     .field_info {
         margin: .85715em 2% 0 0;
     }
@@ -2495,7 +2499,8 @@ img.mfp-img {
     #template_select .odd,
     .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
-    #dashboard > section:last-child {
+    #dashboard > section:last-child,
+    #serendipity_category > fieldset {
         clear: left;
     }
 
@@ -2640,7 +2645,6 @@ img.mfp-img {
     #filter_entries .form_select label,
     #filter_entries .form_field label,
     #filter_comments label,
-    #serendipity_category label,
     #serendipity_comment label,
     #media_pane_filter label,
     #media_pane_sort label {
@@ -2675,7 +2679,6 @@ img.mfp-img {
 
     #sort_entries .form_select,
     #filter_comments .inputs > div,
-    #serendipity_category > .inputs > div,
     #serendipity_comment .form_field,
     #media_filter > div,
     #media_pane_sort > .left,

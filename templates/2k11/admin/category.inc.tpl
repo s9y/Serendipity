@@ -48,7 +48,7 @@
         <form id="serendipity_category" method="POST" name="serendipityCategory">
             {$formToken}
 
-            <div class="clearfix inputs">
+            <div class="clearfix odd">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
                     <input id="category_name" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}">
@@ -69,9 +69,7 @@
                     {/foreach}
                     </select>
                 </div>
-            </div>
-
-            <div class="clearfix inputs">
+            
                 <div class="form_multiselect">
                     <label for="read_authors">{$CONST.PERM_READ}</label>
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
@@ -93,9 +91,9 @@
                 </div>
             </div>
 
-            <div class="clearfix inputs">
+            <div class="clearfix even">
                 <div class="form_field">
-                    <label for="category_icon">{$CONST.IMAGE}</label>
+                    <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
                     {* TODO: this should probably become/fallback to input[type=file]; also needs
                              a no-js fallback since this is unusable without JS as of now *}
                     <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
