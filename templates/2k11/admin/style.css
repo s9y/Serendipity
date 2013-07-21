@@ -593,7 +593,6 @@ input[type="submit"].state_cancel:visited {
     border-color: #b94a48 #893634 #582322;
 }
 
-input:checked + .media_selector,
 .button_link:hover,
 .tabs > ul a:hover,
 button:hover,
@@ -628,6 +627,7 @@ input[type="submit"].state_cancel:focus {
 }
 
 .active,
+input:checked + .media_selector,
 .tabs > ul .on a,
 .button_link:active,
 .tabs > ul a:active,
