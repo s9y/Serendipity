@@ -3,7 +3,6 @@
 /************
   TODO:
 
-  - Perform Serendipity version checks to only install plugins available for version
   - Allow fetching files from mirrors / different locations - don't use ViewCVS hack (revision 1.999 dumbness)
 
  ***********/
