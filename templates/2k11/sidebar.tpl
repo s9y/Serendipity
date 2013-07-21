@@ -2,7 +2,7 @@
 <div id="serendipity{$pluginside}SideBar">
 {/if}
 {foreach from=$plugindata item=item}
-{if $item.class != "serendipity_quicksearch_plugin"}
+{if $item.class != "serendipity_plugin_quicksearch"}
     <section class="sidebar_plugin clearfix {cycle values="odd,even"} {$item.class}">
         {if $item.title != ""}
         <h3>{$item.title}</h3>
