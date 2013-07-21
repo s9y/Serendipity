@@ -1326,7 +1326,8 @@ fieldset p,
 
 #login .form_buttons,
 .media_file .actions,
-#entries_list .actions {
+#entries_list .actions,
+.msg_hint > p:last-of-type {
     margin-bottom: 0;
 }
 
@@ -1858,7 +1859,11 @@ form > .button_link:first-of-type,
 .no-js #serendipityScaleForm > .form_check,
 .js .additional_info,
 .installer .toggle_info,
-.hidden {
+.hidden,
+.msg_error > br,
+.msg_success > br,
+.msg_notice > br,
+.msg_hint > br {
     display: none !important;
     visibility: hidden;
 }

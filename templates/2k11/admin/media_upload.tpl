@@ -1,15 +1,19 @@
 <h2>{$CONST.ADD_MEDIA}</h2>
 
+<div class="msg_hint"><span class="icon-help-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH}</div>
+
 <form id="uploadform" action="?" method="POST" enctype="multipart/form-data">
-    <div>
-    {if $media.max_file_size}
-        <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">
-    {/if}
-        {$media.token}
-        <input name="serendipity[action]" type="hidden" value="admin">
-        <input name="serendipity[adminModule]" type="hidden" value="images">
-        <input name="serendipity[adminAction]" type="hidden" value="add">
-        {$media.form_hidden}
+{if $media.max_file_size}
+    <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">
+{/if}
+    {$media.token}
+    <input name="serendipity[action]" type="hidden" value="admin">
+    <input name="serendipity[adminModule]" type="hidden" value="images">
+    <input name="serendipity[adminAction]" type="hidden" value="add">
+    {$media.form_hidden}
+
+    <div class="clearfix tabs">
+        <h3>Upload</h3> {* i18n *}
 
         <div id="uploads">
             <div id="upload_form_1" class="upload_form">
@@ -36,13 +40,33 @@
                 <div id="ccounter"><input id="column_count_1" class="uploadform_column_count" type="hidden" name="serendipity[column_count][1]" value="true"></div>
             </div>
         </div>
-        {serendipity_hookPlugin hook="backend_image_addform" hookAll=true}
-        <div class="form_buttons">
-            <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
 
-            <a id="add_upload" class="button_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
-            <input class="check_inputs" type="submit" value="{$CONST.GO}">
-            <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
+        <h3>Download</h3> {* i18n *}
+
+        <div id="downloads">
+            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
+
+            <div class="clearfix form_field">
+                <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
+                <input id="imageurl" class="check_input" name="serendipity[imageurl]" type="text" value="">
+            </div>
+
+            <div class="clearfix form_select">
+                <label for="imageimporttype">{$CONST.ENTER_MEDIA_URL_METHOD}</label>
+                <select id="imageimporttype" name="serendipity[imageimporttype]">
+                    <option value="image">{$CONST.FETCH_METHOD_IMAGE}</option>
+                    <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
+                </select>
+            </div>
         </div>
+    </div>
+
+    {serendipity_hookPlugin hook="backend_image_addform" hookAll=true}
+    <div class="form_buttons">
+        <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
+
+        <a id="add_upload" class="button_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
+        <input class="check_inputs" type="submit" value="{$CONST.GO}">
+        <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
     </div>
 </form>
