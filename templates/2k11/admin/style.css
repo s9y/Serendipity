@@ -1345,7 +1345,8 @@ fieldset p,
     margin-top: .75em;
 }
 
-.media_file .actions {
+.media_file .actions,
+.js #add_upload {
     margin-top: 1em;
 }
 
