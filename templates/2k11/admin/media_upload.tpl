@@ -15,7 +15,7 @@
     <div class="clearfix tabs">
         <h3>Upload</h3> {* i18n *}
 
-        <div id="uploads">
+        <div id="uploads" class="panel">
             <div id="upload_form_1" class="upload_form">
                 <div class="form_field clearfix">
                     <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>
@@ -43,7 +43,7 @@
 
         <h3>Download</h3> {* i18n *}
 
-        <div id="downloads">
+        <div id="downloads" class="panel">
             <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
 
             <div class="clearfix form_field">
@@ -70,3 +70,4 @@
         <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
     </div>
 </form>
+<script src="{serendipity_getFile file='admin/js/jquery.tabs.js'}"></script>

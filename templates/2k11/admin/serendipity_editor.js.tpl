@@ -1012,6 +1012,22 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
     }
 
+    // Tabs
+    if($('body').has('.tabs').size() > 0) {
+        $('.tabs').accessibleTabs({
+            wrapperClass: 'tabcontent',
+            currentClass: 'on',
+            tabhead: 'h3',
+            tabheadClass: 'visuallyhidden',
+            tabbody: '.panel',
+            fx: 'fadeIn',
+            currentInfoText: 'Current tab: ', // i18n
+            currentInfoClass: 'visuallyhidden',
+            tabsListClass: 'plainList',
+            syncheights: false
+        });
+    }
+
     // Equal Heights
     $(window).load(function() {
         if($('body').has('.equal_heights').size() > 0) {

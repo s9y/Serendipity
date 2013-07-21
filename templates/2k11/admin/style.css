@@ -436,7 +436,8 @@ form > a,
 .toggle_info,
 #serendipityScaleForm .form_field label,
 .filters_toolbar li,
-#dashboard_entries .entry_status {
+#dashboard_entries .entry_status,
+.tabs > ul > li {
     display: inline-block;
 }
 
@@ -517,6 +518,7 @@ input[type="checkbox"] {
 }
 
 .button_link:focus,
+.tabs > ul a:focus,
 button:focus,
 input:focus,
 select:focus,
@@ -535,6 +537,7 @@ input[type="checkbox"]:active {
 }
 
 .button_link,
+.tabs > ul a,
 button,
 input[type="button"],
 input[type="reset"],
@@ -545,10 +548,12 @@ input[type="submit"] {
     line-height: normal;
     outline: 0;
     padding: 3px 10px;
+    text-decoration: none;
     width: auto;
 }
 
 .button_link,
+.tabs > ul a,
 button,
 input[type="button"] {
     background: #ddd;
@@ -590,6 +595,7 @@ input[type="submit"].state_cancel:visited {
 
 input:checked + .media_selector,
 .button_link:hover,
+.tabs > ul a:hover,
 button:hover,
 input[type="button"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
@@ -622,7 +628,9 @@ input[type="submit"].state_cancel:focus {
 }
 
 .active,
+.tabs > ul .on a,
 .button_link:active,
+.tabs > ul a:active,
 button:active,
 input[type="button"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #ddd), color-stop(100%, #eee));
@@ -1881,17 +1889,20 @@ input[name="serendipity[filter][fileCategory]"] {
     cursor: pointer;
 }
 
-.media_selector {
+.media_selector,
+.tabs > ul li > a {
     border-radius: 0;
     border-right: 0 none;
 }
 
 /* These need an IE8 fallback */
-.media_selector:first-of-type {
+.media_selector:first-of-type,
+.tabs > ul .first > a {
     border-radius: 4px 0 0 4px;
 }
 
-.media_selector:last-of-type {
+.media_selector:last-of-type,
+.tabs > ul .last > a {
     border-radius: 0 4px 4px 0;
     border-right: 1px solid #bbb;
 }
