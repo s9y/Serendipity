@@ -99,13 +99,15 @@
             {if is_array($comments)}
                 <ul id="serendipity_comments_list" class="clearfix plainList zebra_list">
                 {foreach $comments AS $comment}
-                    <li id="comment_{$comment.id}" class="clearfix {cycle values="odd,even"}"><div class="form_check">
+                    <li id="comment_{$comment.id}" class="clearfix {cycle values="odd,even"} {if ($comment.status == 'pending') || ($comment.status == 'confirm')}pending{/if}"><div class="form_check">
                             <input id="multidelete_comment{$comment.id}" class="multidelete" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" data-multidelid="comment_{$comment.id}">
                             <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
                         </div>
 
                         <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} – {$CONST.IN_REPLY_TO} <a href="{$comment.entry_url}">{$comment.title|escape}</a> {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'} <a class="toggle_info" href="#comment_data_{$comment.id}"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></h4>
-
+                    {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
+                        <span class="comment_status">{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</span>
+                    {/if}
                         <div id="comment_data_{$comment.id}" class="additional_info">
                             <dl class="comment_data clearfix">
                                 <dt>{$CONST.AUTHOR}:</dt>

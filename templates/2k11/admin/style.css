@@ -437,6 +437,7 @@ form > a,
 #serendipityScaleForm .form_field label,
 .filters_toolbar li,
 #dashboard_entries .entry_status,
+.comment_status,
 .tabs > ul > li {
     display: inline-block;
 }
@@ -1615,8 +1616,10 @@ form > .button_link:first-of-type,
 }
 
 .entry_status,
+.comment_status,
 .field_info {
     background: #888;
+    border-radius: 2px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -1630,8 +1633,20 @@ form > .button_link:first-of-type,
     margin: .75em 0 0;
 }
 
-#entries_list .entry_info .entry_status {
+#entries_list .entry_info .entry_status,
+.comment_status {
     float: right;
+}
+
+.comment_status {
+    margin: .5em;
+}
+
+.pending {
+    color: #666;
+}
+
+#entries_list .entry_info .entry_status {
     margin: 0 .4em .75em 0;
 }
 
