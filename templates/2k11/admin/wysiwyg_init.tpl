@@ -1,8 +1,5 @@
 {if $init}
     <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
-    {if ! $use_popup}
-        <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
-    {/if}
 {/if}
 <script>
     $('document').ready(function() {

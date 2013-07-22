@@ -732,7 +732,18 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     $('.wrap_insmedia').click(function() {
-        window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'), 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        {if $use_popups}
+            window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'),
+                        'ImageSel',
+                        'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        {else}
+            $.magnificPopup.open({
+              items: {
+                src: 'serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea')
+              },
+              type: 'iframe'
+            });
+        {/if}
     });
 
     // Entry preview
