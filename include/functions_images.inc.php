@@ -1436,9 +1436,10 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
  * @param   string  The URL to use for pagination
  * @param   boolean Show the "upload media item" feature?
  * @param   boolean Restrict viewing images to a specific directory
+ * @param   array   Map of smarty vars transported into all following templates
  * @return  string   Generated HTML
  */
-function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL) {
+function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = false, $url = NULL, $show_upload = false, $limit_path = NULL, $smarty_vars = array()) {
     global $serendipity;
     static $debug = false;
 
@@ -1648,7 +1649,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         }
     }
 
-    $smarty_vars = array(
+    $smarty_vars = array_merge($smarty_vars, array(
         'limit_path'    => $limit_path,
         'perPage'       => $perPage,
         'show_upload'   => $show_upload,
@@ -1657,8 +1658,8 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         'linkNext'      => $linkNext,
         'linkPrevious'  => $linkPrevious,
         'extraParems'   => $extraParems,
-        'totalImages'   => $totalImages
-    );
+        'totalImages'   => $totalImages,
+    ));
     return serendipity_showMedia(
         $serendipity['imageList'],
         $paths,

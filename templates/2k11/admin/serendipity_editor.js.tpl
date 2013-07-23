@@ -566,6 +566,22 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         {/if}
     }
 
+    serendipity.openPopup = function(url) {
+        {if $use_popups}
+            window.open(url,
+                        'ImageSel',
+                        'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        {else}
+            $.magnificPopup.open({
+              items: {
+                src: url
+              },
+              type: 'iframe'
+            });
+        {/if}
+        
+    };
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -732,18 +748,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     $('.wrap_insmedia').click(function() {
-        {if $use_popups}
-            window.open('serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea'),
-                        'ImageSel',
-                        'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-        {else}
-            $.magnificPopup.open({
-              items: {
-                src: 'serendipity_admin_image_selector.php?serendipity[textarea]=' + $(this).attr('data-tarea')
-              },
-              type: 'iframe'
-            });
-        {/if}
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[textarea]=' + $(this).attr('data-tarea'));
     });
 
     // Entry preview
@@ -852,9 +857,9 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 
     $('#insert_image').click(function(e) {
-        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=category_icon&serendipity[filename_only]=true', 
-                    'ImageSel', 
-                    'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        window.open('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[htmltarget]=category_icon&serendipity[filename_only]=true',
+                        'ImageSel',
+                        'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
     });
 
     $('#category_icon').change(function() {

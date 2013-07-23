@@ -3,29 +3,46 @@
         <article class="media_wrap_thumb {cycle values="odd,even"}">
             <div class="media_file_thumb{if $media.enclose} equal_heights{/if}">
             {if $file.is_image AND $file.full_thumb}
-                {if $file.url}
-                <a href="{$file.url}&amp;serendipity[image]={$file.id}">
+                {if $media.textarea || $media.htmltarget}
+                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}">
+                {else}
+                    {if $file.url}
+                        <a href="{$file.url}&amp;serendipity[image]={$file.id}">
+                    {/if}
                 {/if}
-                    <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
-                {if $file.url}
-                </a>
+                    
+                <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
+                
+                {if $media.textarea || $file.url}
+                    </a>
                 {/if}
             {elseif $file.is_image AND $file.hotlink}
-                {if $file.url}
-                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                {if $media.textarea}
+                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"">
+                {else}
+                    {if $file.url}
+                    <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                    {/if}
                 {/if}
+                
                     <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}">
-                {if $file.url}
-                </a>
+                {if $media.textarea || $file.url}
+                    </a>
                 {/if}
             {else}
-                {if $file.url}
-                <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                {if $media.textarea}
+                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"">
+                {else}
+                    {if $file.url}
+                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
+                    {/if}
                 {/if}
+
                     <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
                     <span class="block_level">{if $file.hotlink}{$CONST.MEDIA_HOTLINKED}{else}{$file.mime}{/if}</span>
-                {if $file.url}
-                </a>
+                    
+                {if $media.textarea || $file.url}
+                    </a>
                 {/if}
             {/if}
             {if $file.orderkey != ''}

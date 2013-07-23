@@ -639,13 +639,40 @@ switch ($serendipity['GET']['adminAction']) {
         $data['file']                  = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] .'.'. $file['extension'];
         break;
 
+    case 'choose':
+        $media['case'] = 'choose';
+
+        $file           = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
+        $media['file'] = &$file;
+        if (!is_array($file)) {
+            $media['perm_denied'] = true;
+            break;
+        }
+
+        serendipity_prepareMedia($file);
+
+        $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+        serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
+
+        if ($file['is_image']) {
+            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . htmlspecialchars($serendipity['GET']['textarea']) . '\')';
+
+            if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
+                $file['fast_select'] = true;
+            }
+        }
+        $media = array_merge($serendipity['GET'], $media);
+        $serendipity['smarty']->assignByRef('media', $media);
+        echo serendipity_smarty_show('admin/media_choose.tpl', $data);
+        return;
+
     default:
         $data['case_default'] = true;
         $data['showML_def'] = showMediaLibrary();
         break;
 }
 
-function showMediaLibrary($messages=false, $addvar_check = false) {
+function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars = array()) {
     global $serendipity;
     
     if (!serendipity_checkPermission('adminImagesView')) {
@@ -669,11 +696,20 @@ function showMediaLibrary($messages=false, $addvar_check = false) {
     if (!isset($serendipity['thumbPerPage'])) {
         $serendipity['thumbPerPage'] = 2;
     }
-
+    $smarty_vars = array(
+        'textarea' =>  isset($serendipity['GET']['textarea'])   ? $serendipity['GET']['textarea']  : false,
+        'htmltarget' =>  isset($serendipity['GET']['htmltarget'])   ? $serendipity['GET']['htmltarget']  : '',
+        'filename_only' =>  isset($serendipity['GET']['filename_only'])   ? $serendipity['GET']['filename_only']  : false,
+    );
+    
     $output .= serendipity_displayImageList(
         isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
         $serendipity['thumbPerPage'],
-        true
+        isset($serendipity['GET']['showMediaToolbar'])   ? serendipity_db_bool($serendipity['GET']['showMediaToolbar'])  : true,
+        NULL,
+        false,
+        NULL,
+        $smarty_vars
     );
     return $output;
 }
