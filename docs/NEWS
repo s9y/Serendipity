@@ -3,8 +3,6 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
-    * Added new event hooks "backend_plugins_install", "backend_plugins_update"
-      and "backend_templates_install".
       
     * Implemented patch https://github.com/s9y/Serendipity/pull/15
     
@@ -19,6 +17,9 @@ Version 2.0 ()
 
 Version 1.7.1 ()
 ------------------------------------------------------------------------
+
+    * Added new event hooks "backend_plugins_install", "backend_plugins_update"
+      and "backend_templates_install".
 
     * Serendipity will switch to mysqli if PHP >= 5.5 is used (mysql
       is deprecated)
