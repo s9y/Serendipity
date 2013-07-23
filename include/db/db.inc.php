@@ -7,6 +7,11 @@ if (defined('S9Y_FRAMEWORK_DB')) {
 }
 @define('S9Y_FRAMEWORK_DB', true);
 
+// PHP 5.5 compat, no longer use deprecated mysql
+if ($serendipity['dbType'] == 'mysql' && (version_compare(PHP_VERSION, '5.5.0' >= 0) || !function_exits('mysql_connect')) {
+    $serendipity['dbType'] = 'mysqli';
+}
+
 if (@include(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php")) {
     @define('S9Y_DB_INCLUDED', TRUE);
 }
