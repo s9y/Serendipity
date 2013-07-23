@@ -519,6 +519,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $bag  = new serendipity_property_bag;
             $plugin->introspect($bag);
 
+            serendipity_plugin_api::hook_event('backend_plugins_install', $serendipity['GET']['install_plugin'], $fetchplugin_data);
+
             if ($bag->is_set('configuration')) {
                 /* Only play with the plugin if there is something to play with */
                 echo '<script type="text/javascript">location.href = \'' . $serendipity['baseurl'] . '?serendipity[adminModule]=plugins&serendipity[plugin_to_conf]=' . $inst . '\';</script>';
@@ -528,6 +530,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 echo '<script type="text/javascript">location.href = \'' . $serendipity['baseurl'] . '?serendipity[adminModule]=plugins\';</script>';
                 die();
             }
+        } else {
+            serendipity_plugin_api::hook_event('backend_plugins_update', $serendipity['GET']['install_plugin'], $fetchplugin_data);
         }
     }
 
