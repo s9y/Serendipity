@@ -67,6 +67,9 @@ if ($serendipity['GET']['adminAction'] == 'install' ) {
 
     $themeInfo = serendipity_fetchTemplateInfo(htmlspecialchars($serendipity['GET']['theme']));
 
+    // A separate hook is used post installation, for plugins to possibly perform some actions
+    serendipity_plugin_api::hook_event('backend_templates_install', $serendipity['GET']['theme'], $themeInfo);
+
     serendipity_set_config_var('template', htmlspecialchars($serendipity['GET']['theme']));
     serendipity_set_config_var('template_engine', isset($themeInfo['engine']) ? $themeInfo['engine'] : 'default');
     serendipity_set_config_var('last_template_change', time());
