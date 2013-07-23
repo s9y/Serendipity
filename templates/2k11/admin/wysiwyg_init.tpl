@@ -1,4 +1,4 @@
-{if $init}
+{if $init == false}
     <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
 {/if}
 <script>

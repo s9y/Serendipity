@@ -154,6 +154,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 }
 
 function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
+    # init == true when already editor was already initialized
     static $init = false;
     global $serendipity;
 

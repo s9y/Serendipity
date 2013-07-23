@@ -409,7 +409,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     if (!function_exists('serendipity_emit_htmlarea_code')) {
                         @include_once dirname(__FILE__) . '/functions_entries_admin.inc.php';
                     }
-                    serendipity_emit_htmlarea_code('nuggets', 'nuggets', true);
+                    serendipity_emit_htmlarea_code("nuggets{$elcount}", 'nuggets', true);
                 }
                 $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
 
