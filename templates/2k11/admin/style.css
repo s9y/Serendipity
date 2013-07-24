@@ -904,7 +904,8 @@ input[type=checkbox],
 .pagination,
 .media_choose .preview,
 .media_file_metadata dt,
-#serendipity_comments_list details {
+#serendipity_comments_list details,
+.configure_plugin .cke {
     clear: both;
 }
 
@@ -1522,7 +1523,8 @@ form > .button_link:first-of-type,
     width: 48%;
 }
 
-#serendipityScaleImg img {
+#serendipityScaleImg img,
+.configure_plugin .cke {
     height: auto;
     max-width: 99%;
 }
