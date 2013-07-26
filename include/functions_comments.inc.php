@@ -267,6 +267,7 @@ function serendipity_fetchComments($id, $limit = null, $order = '', $showAll = f
                     e.timestamp AS entrytimestamp,
                     e.id AS entryid,
                     e.authorid,
+                    e.author as entryauthor,
                     co.id AS commentid,
                     co.parent_id AS parent_id,
                     co.status
