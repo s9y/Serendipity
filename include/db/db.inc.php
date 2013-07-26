@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 // PHP 5.5 compat, no longer use deprecated mysql
-if ($serendipity['dbType'] == 'mysql' && (version_compare(PHP_VERSION, '5.5.0' >= 0) || !function_exits('mysql_connect'))) {
+if ($serendipity['dbType'] == 'mysql' && (version_compare(PHP_VERSION, '5.5.0') >= 0 || !function_exists('mysql_connect'))) {
     $serendipity['dbType'] = 'mysqli';
 }
 
