@@ -295,8 +295,7 @@ switch ($serendipity['GET']['step']) {
           ($serendipity['showMediaToolbar'] ? true : false),
           '?serendipity[step]=1' . $add_url . '&amp;serendipity[textarea]='. htmlspecialchars($serendipity['GET']['textarea']),
           true,
-          null,
-          false
+          null
         );
 }
 
