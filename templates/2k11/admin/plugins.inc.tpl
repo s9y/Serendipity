@@ -38,6 +38,9 @@
         {$formToken}
         {$config}
     </form>
+    {if ! $use_popup}
+        <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
+    {/if}
 {elseif $adminAction == 'addnew'}
     <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span></h2>
     {foreach $errorstack as $e_idx => $e_name}
