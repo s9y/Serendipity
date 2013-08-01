@@ -683,7 +683,14 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     if($('body').has('#main_menu').size() > 0) {
         $('#nav-toggle').click(function(e) {
             var $el = $(this);
-            $($el.attr('href')).toggleClass('additional_info');
+            var $target = $el.attr('href');
+            var $icon = $el.find('span:first-child');
+            $($target).toggleClass('additional_info');
+            if($($target).hasClass('additional_info')) {
+                $icon.removeClass('icon-cancel').addClass('icon-menu');
+            } else {
+                $icon.removeClass('icon-menu').addClass('icon-cancel');
+            }
             e.preventDefault();
         });
     }
