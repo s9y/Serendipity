@@ -30,7 +30,6 @@
 {elseif $ctype == 'string'}
     <div class="clearfix form_field">
         <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <a class="toggle_info" href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a>{/if}</label>
-        {* TODO: Make sure id creation actually produces unique identifiers *}
         <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </div>
@@ -85,7 +84,7 @@
             {if $checkable}
                 <div class="form_check">
                     <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" onclick="sort_{$config_item}_Sequence();" value="true">
-                    {* TODO: needs label *}
+                    <label for="activate_{$orid['id']}" class="visuallyhidden">Activate</label> {* i18n *}
                 </div>
             {/if}
                 <span>{$items[{$orid['id']}]['display']}</span>

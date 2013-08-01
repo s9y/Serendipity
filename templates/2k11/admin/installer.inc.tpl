@@ -45,7 +45,6 @@
                     <caption>{$CONST.PHP_INSTALLATION}</caption>
                     <thead>
                         <tr>
-                            {* TODO: These are probably poorly labelled, needs to be checked *}
                             <th>Key</th> {* i18n *}
                             <th>Value</th> {* i18n *}
                         </tr>

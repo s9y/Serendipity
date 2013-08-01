@@ -94,8 +94,6 @@
             <div class="clearfix even">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
-                    {* TODO: this should probably become/fallback to input[type=file]; also needs
-                             a no-js fallback since this is unusable without JS as of now *}
                     <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
                 </div>
 
