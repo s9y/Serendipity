@@ -21,7 +21,7 @@
 || {{strong}}            || Strong (usually bold) text.                       || {{type:[start|end]}} ||
 || {{superscript}}       || Superscript text.                                 || {{type:[start|end]}} ||
 || {{table}}             || Table elements.                                   || {{type:[table|row|cell]_[start|end], colspan}} ||
-|| {{tt}}                || Teletype (monospaced) text.                 || {{type:[start|end]}} ||
+|| {{tt}}                || Teletype (monospaced) text.                       || {{type:[start|end]}} ||
 || {{url}}               || A page URL.                                       || {{type:[inline|footnote|descr]}}, {{href}}, {{text}} ||
 || {{wikilink}}          || A local !WikiPage reference.                      || {{page}}, {{anchor}} ||
 || {{toc}}               || Table of contents.                                || {{type:[list_start|list_end|item_start|item_end|target], level, count}} ||

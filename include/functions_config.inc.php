@@ -1008,7 +1008,7 @@ function serendipity_getSessionLanguage() {
                 $lang = $serendipity['COOKIE']['userDefLang'];
             } else {
                 $lang = $serendipity['lang'];
-          	}
+            }
         }
         $serendipity['detected_lang'] = null;
     }
@@ -2138,17 +2138,17 @@ function serendipity_loadGlobalThemeOptions(&$template_config, &$template_loaded
                 'scope'         => 'global'
         );
 
-		// This always needs to be present, if not it could happen that the template options do have an older version of this variable
-		$template_config[] = $conf_amount;
+        // This always needs to be present, if not it could happen that the template options do have an older version of this variable
+        $template_config[] = $conf_amount;
 
         if (!isset($template_loaded_config['amount']) || empty($template_loaded_config['amount'])) {
             $template_loaded_config['amount'] = $conf_amount['default'];
         }
         
-		// Check if we are currently inside the admin interface.
-		if ($serendipity['POST']['adminModule'] == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
-			$template_loaded_config['amount'] = (int)$serendipity['POST']['template']['amount'];
-		}
+        // Check if we are currently inside the admin interface.
+        if ($serendipity['POST']['adminModule'] == 'templates' && $serendipity['POST']['adminAction'] == 'configure' && !empty($serendipity['POST']['template']['amount'])) {
+            $template_loaded_config['amount'] = (int)$serendipity['POST']['template']['amount'];
+        }
 
         for ($i = 0; $i < $template_loaded_config['amount']; $i++) {
             $navlinks[] = array(

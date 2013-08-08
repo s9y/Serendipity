@@ -235,7 +235,7 @@ a:hover.serendipityPrettyButton {
 .serendipityPrettyButton {
     padding: 1px;
     background: url({TEMPLATE_PATH}img/button_background.png) repeat-x top;
-	background-color: #95accc;
+    background-color: #95accc;
     color: #1D2E3F;
     font-weight: bold;
     font-size: 0.9em;
