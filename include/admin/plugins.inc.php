@@ -523,11 +523,11 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
             if ($bag->is_set('configuration')) {
                 /* Only play with the plugin if there is something to play with */
-                echo '<script type="text/javascript">location.href = \'' . $serendipity['baseurl'] . '?serendipity[adminModule]=plugins&serendipity[plugin_to_conf]=' . $inst . '\';</script>';
+                echo '<script type="text/javascript">location.href = \'' . $serendipity['baseURL'] . '?serendipity[adminModule]=plugins&serendipity[plugin_to_conf]=' . $inst . '\';</script>';
                 die();
             } else {
                 /* If no config is available, redirect to plugin overview, because we do not want that a user can install the plugin a second time via accidental browser refresh */
-                echo '<script type="text/javascript">location.href = \'' . $serendipity['baseurl'] . '?serendipity[adminModule]=plugins\';</script>';
+                echo '<script type="text/javascript">location.href = \'' . $serendipity['baseURL'] . '?serendipity[adminModule]=plugins\';</script>';
                 die();
             }
         } else {
