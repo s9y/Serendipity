@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 # serendipity_event_nl2br.php 2012-04-21 16:11:00 ian $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));

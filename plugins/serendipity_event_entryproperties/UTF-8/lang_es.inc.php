@@ -1,11 +1,12 @@
-<?php # $Id$
+<?php # 
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
 
-  //Sticky post
+//Sticky post
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Propiedades extendidas de las entradas');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(caché, artículos privados, sticky posts)'); 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Marcar esta entrada como Sticky Post');
@@ -29,4 +30,4 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS_DESC', 'Si la activas, puedes definir qué usuarios de un grupo están autorizados para leer las entradas. Esta opción tiene un profundo impacto en el desempeño al visualizar tus artículos. Actívala sólo si realmente vas a utilizar esta característica.');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_USERS', 'Utilizar restricciones basadas en usuarios');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_USERS_DESC', 'Si la activas, puedes definir que usuarios específicos están autorizados a leer tus entradas. Esta opción tiene un profundo impacto en el desempeño al visualizar tus artículos. Actívala sólo si realmente vas a utilizar esta característica.');
-?>
+

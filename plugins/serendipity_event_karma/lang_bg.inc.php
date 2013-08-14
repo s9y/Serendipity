@@ -1,7 +1,8 @@
-<?php # $Id: lang_bg.inc.php 2114 2008-02-11 12:25:31Z jwalker $
+<?php #
 
 /**
- *  @version $Revision: 2114 $
+ *  @version  2114
+ *  @file lang_bg.inc.php 2114 2008-02-11 12:25:31Z jwalker
  *  @author Ivan Cenov jwalker@hotmail.bg
  */
 
@@ -71,3 +72,4 @@
 @define('PLUGIN_KARMA_TAB_OPTIONS', 'Опции');
 @define('PLUGIN_KARMA_TAB_APPEARANCE', 'Външен вид');
 @define('PLUGIN_KARMA_TAB_TEXT', 'Текст');
+

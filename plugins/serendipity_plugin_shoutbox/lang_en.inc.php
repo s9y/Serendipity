@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -21,4 +21,4 @@
 @define('GENERAL_PLUGIN_BOX_COLS_BLAHBLAH', 	'Column count of the shoutbox input element.');
 @define('GENERAL_PLUGIN_BOX_ROWS', 	'Shoutbox rows');
 @define('GENERAL_PLUGIN_BOX_ROWS_BLAHBLAH', 	'Row count of thesShoutbox input element.');
-?>
+

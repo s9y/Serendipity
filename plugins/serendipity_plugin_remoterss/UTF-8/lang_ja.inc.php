@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 692
  */
@@ -26,4 +26,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', '日付の表示');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'ヘッドラインの下に日付を表示しますか?');
 
-?>

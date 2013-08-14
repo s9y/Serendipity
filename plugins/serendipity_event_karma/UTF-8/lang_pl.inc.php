@@ -1,7 +1,8 @@
-<?php # $Id: lang_pl.inc.php 2110 2008-02-11 02:12:07Z slothman $
+<?php #
 
 /**
- *  @version $Revision: 2110 $
+ *  @version  2110
+ *  @file lang_pl.inc.php 2110 2008-02-11 02:12:07Z slothman
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -48,4 +49,4 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'punktów');
 
 @define('PLUGIN_KARMA_STARRATING', 'Włączyć induwidualne ocenianie w tym wpisie?');
-?>
+

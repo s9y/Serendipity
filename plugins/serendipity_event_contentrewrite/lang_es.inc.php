@@ -1,6 +1,7 @@
-<?php # $Id$
+<?php #
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -24,4 +25,3 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Caracter de reemplazo');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Si existe algún caracter que añadiste para forzar el reemplazo, ingrésalo aquí. Por ejemplo: si sólo deseabas reemplazar \'serendipity*\' con lo que ingresaste para esa palabra y quieres el \'*\' eliminado, ingrésalo aquí.');
 
-?>

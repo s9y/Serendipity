@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 1381
  */
@@ -31,3 +31,4 @@
 @define('PLUGIN_HISTORY_OYA', '1 年前');
 @define('PLUGIN_HISTORY_MYSELF', 'I\'ll define one');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR', '著者の名前を表示する');
+

@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_KARMA_NAME', '文章打分');
 @define('PLUGIN_KARMA_BLAHBLAH', '允许访客通过打分的方式评价你的文章质量');
@@ -41,3 +48,4 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', '次数');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', '分数');
 @define('PLUGIN_KARMA_STARRATING', '对这篇文章使用单独的打分方式吗？');
+

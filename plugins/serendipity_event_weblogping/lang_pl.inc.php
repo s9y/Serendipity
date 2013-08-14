@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -16,4 +16,3 @@
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_FAILURE', 'Niepowodzenie (przyczyna: %s)');
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_SUCCESS', 'Sukces!');
 
-?>

@@ -1,7 +1,8 @@
-<?php # $Id: lang_pl.inc.php 1548 2006-12-20 18:26:17Z garvinhicking $
+<?php #
 
 /**
- *  @version $Revision: 1548 $
+ *  @version  1548
+ *  @file lang_pl.inc.php 1548 2006-12-20 18:26:17Z garvinhicking
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -48,4 +49,4 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'punktów');
 
 @define('PLUGIN_KARMA_STARRATING', 'W³±czyæ induwidualne ocenianie w tym wpisie?');
-?>
+

@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Ahmet Usal <ahmetusal@gmail.com>
  *  First public version: lang_tr.inc.php
  */
@@ -15,4 +15,3 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL', 'Tümünü göster');
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'Anasayfadaki unsurları es geç');
 
-?>

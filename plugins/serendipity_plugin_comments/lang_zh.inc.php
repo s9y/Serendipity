@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_COMMENTS_BLAHBLAH', '显示最新的文章回复');
 @define('PLUGIN_COMMENTS_WORDWRAP', '自动换行');
@@ -9,3 +16,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', '显示多少个回复？(默认：15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s 关于 %s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', '匿名');
+

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 // Contributed by Christian Machmeier <cm@redsplash.de>
 // Randomizing contributed by Christian Brabandt <cb@256bit.org>

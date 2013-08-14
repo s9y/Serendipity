@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -13,3 +13,4 @@
 @define('PLUGIN_EVENT_TEXTILE_VERSION_DESCRIPTION', 'Which version of Textile do you want to use?');
 @define('PLUGIN_EVENT_TEXTILE_UNESCAPE', 'Convert HTML quotes to real quotes?');
 @define('PLUGIN_EVENT_TEXTILE_UNESCAPE_DESC', 'If enabled, HTML-Quote-Entities (&quot;) will be converted to real quotes. Only useful to enable, if you want to use Textile markup in your comments.');
+

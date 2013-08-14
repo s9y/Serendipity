@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -15,4 +15,3 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE', 'Cleanup Youtube player code?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC', 'If enabled, the by default XHTML invalid youtube object tags will get stripped of the embed part. Browser will still properly playback the video.');
 
-?>

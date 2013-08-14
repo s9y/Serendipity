@@ -1,8 +1,11 @@
-<?php # $Id:$
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
-# All rights reserved.  See LICENSE file for licensing details
-# Translation (c) by  Joao P Matos <jmatos@math.ist.utl.pt>
-/* vim: set sts=4 ts=4 expandtab : */
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author Joao P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_KARMA_VERSION', '1.3');
 @define('PLUGIN_KARMA_NAME', 'Karma');
@@ -46,4 +49,3 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'votos');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'pontos');
 
-?>

@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 690
  */
@@ -16,4 +16,3 @@
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_FAILURE', '失敗( 理由: %s)');
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_SUCCESS', '成功!!');
 
-?>

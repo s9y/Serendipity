@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Select the event plugin for which the output should be displayed');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Enter the title for this sidebar item (leave empty for inheritance by event plugin)');
 
-?>

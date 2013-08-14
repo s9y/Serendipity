@@ -1,7 +1,7 @@
-<?php
+<?php #
 
 /**
- *  @version $$
+ *  @version 
  *  @author Martin Matuška <martin@matuska.org>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -20,4 +20,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'Nastavenie NIE znamená, že: Vlastník licence povoľuje ostatným kopírovat, distribuovať, zobrazovať a používať dielo iba v jeho pôvodnom znení. Žiadne zmeny a úpravy diela nie sú povolené.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Áno, pokiaľ bude ostatnými šírené pod rovnakou licenciou');
 
-?>

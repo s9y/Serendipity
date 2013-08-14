@@ -1,6 +1,7 @@
-<?php # $Id$
+<?php #
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -89,4 +90,3 @@
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Muestra el número de visitantes actuales (agregado de los últimos 15 minutos)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s visitante(s) en linea');
 
-?>

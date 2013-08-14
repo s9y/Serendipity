@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -11,4 +11,3 @@
 @define('PLUGIN_TEMPLATEDROPDOWN_SUBMIT',   '¿Botón de enviar?');
 @define('PLUGIN_TEMPLATEDROPDOWN_SUBMIT_DESC',   '¿Mostrar un botón de envío?');
 
-?>

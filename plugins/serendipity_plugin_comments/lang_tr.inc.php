@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Ahmet Usal <ahmetusal@gmail.com>
  *  First public version: lang_tr.inc.php
  */
@@ -15,4 +15,3 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Kaç adet görüþ gösterilsin? (Öntanýmlý: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s hakkýnda%s');
 
-?>

@@ -1,7 +1,7 @@
-<?php # $Id: lang_en.inc.php 2492 2011-03-22 17:52:00Z ian $
+<?php #
 
 /**
- *  @version $Revision: 2491 $
+ *  @version  
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -19,4 +19,4 @@
 @define('PLUGIN_EVENT_NL2BR_CLEANTAGS', 'Use BR-Clean-Tags as fallback, when ISOBR false');
 @define('PLUGIN_EVENT_NL2BR_CLEANTAGS_DESC', 'If using <HTML-Tags> in you entries, which can\'t be solved satisfiable with the ISOBR Config-Option, remove nl2br after <tag>. This applies to all <tags> ending with > or >\n! Default (table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd)');
 @define('PLUGIN_EVENT_NL2BR_CONFIG_ERROR', 'Config missmatch alert! The Option: "%s" is set back to false, while  \'%s\' is active! Just use one of them, please.');
-?>
+

@@ -1,16 +1,11 @@
-<?php # $Id:$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P Matos <jmatos@math.ist.utl.pt>                                  #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author João P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_SPARTACUS_NAME', 'Spartacus');
 @define('PLUGIN_EVENT_SPARTACUS_DESC', '[S]erendipity [P]lugin [A]ccess [R]epository [T]ool [A]nd [C]ustomization/[U]nification [S]ystem - Permite obter plugins directamente dos arquivos oficiais do Serendipity.');
@@ -30,5 +25,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissões das directorias descarregadas');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Aqui pode introduzir o modo octal (por exemplo "0777") das permissões de directorias (FTP/Shell) downloaded by Spartacus. descarregados pelo Spartacus. Se vazio, a máscara de permissões por omissão do sistema é usada. Note que nem todos os servidores permitem definir ou alterar permissões. Note que as permissões aplicadas devem permitir leitura e escrita por parte do utilizador do servidor web. Além disso o spartacus/Serendipity não pode escrever sobre ficheiros existentes.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

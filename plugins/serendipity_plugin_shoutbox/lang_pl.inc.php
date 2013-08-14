@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -17,4 +17,3 @@
 @define('PLUGIN_SHOUTBOX_MAXENTRIES', 'Maksymalna ilo¶æ komentarzy');
 @define('PLUGIN_SHOUTBOX_MAXENTRIES_BLAHBLAH', 'Jak wiele komentarzy ma byæ pokazywanych (Standardowo: 15)');
 
-?>

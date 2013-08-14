@@ -1,7 +1,7 @@
-<?php
+<?php #
 
 /**
- *  @version $Revision: 1112 $
+ *  @version  1112
  *  @author Erwin Ravau <erwin@ravau.net>
  */
 
@@ -107,3 +107,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_DESC', 'Akismet.com is een centrale antispam en blacklist server. Het kan je inkomende commentaar verifieren op spam. Akismet werd ontwikkeld voor WordPress, maar kan door andere systemen gebruikt worden. Je dient enkel een API sleutel van http://www.akismet.com te verkrijgen door te registeren op http://www.wordpress.com/ Indien deze key leeg is, wordt Askimet niet gebruikt.');
 @define('PLUGIN_EVENT_SPAMBLOCK_AKISMET_FILTER', 'Hoe Akismet gereporteerde spam behandelen?');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_AKISMET_SPAMLIST', 'Gefilterd door Akismet.com Blacklist');
+

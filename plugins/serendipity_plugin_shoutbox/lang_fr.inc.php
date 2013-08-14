@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_SHOUTBOX_NAME', 'Shoutbox');
 @define('PLUGIN_SHOUTBOX_DELETE', 'Effacer');
@@ -24,5 +18,3 @@
 @define('PLUGIN_SHOUTBOX_MAXENTRIES', 'Nombre de commentaires');
 @define('PLUGIN_SHOUTBOX_MAXENTRIES_BLAHBLAH', 'Définit le nombre maximum de commentaires à afficher.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

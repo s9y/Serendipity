@@ -1,7 +1,8 @@
-<?php # $Id: lang_en.inc.php 1475 2006-11-02 11:26:10Z garvinhicking $
+<?php #
 
 /**
- *  @version $Revision: 1475 $
+ *  @version  1475
+ *  @file lang_en.inc.php 1475 2006-11-02 11:26:10Z garvinhicking
  *  @author Serge Shakhovsky <sadtg@mail.ru> http://blog.sadtg.ru
  *  @author http://www.perevod.cc - translations and software localization
  *  EN-Revision: Revision of lang_en.inc.php
@@ -49,3 +50,4 @@
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'очков');
 
 @define('PLUGIN_KARMA_STARRATING', 'Включить отдельное голосование по этой записи?');
+

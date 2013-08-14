@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 690
  */
@@ -73,4 +73,3 @@
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'カウントを禁止するブラウザー');
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', '「|」で区切ったカウントから除外されるべきブラウザーを指定します。');
 
-?>

@@ -1,4 +1,4 @@
-<?php
+<?php #
 
 /**
  *  @author Martin Matuška <martin@matuska.org>
@@ -16,4 +16,4 @@
 @define('PLUGIN_COMMENTS_ANONYMOUS',            'anonym');
 
 @define('PLUGIN_COMMENTS_ADDURL',               'Pridať URL adresu autorov do');
-?>
+

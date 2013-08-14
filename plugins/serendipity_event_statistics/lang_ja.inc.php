@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 1381
  */
@@ -101,3 +101,4 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', '現在の訪問者の数を表示する (過去 15 分の合計)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s 人の訪問者がオンラインです');
+

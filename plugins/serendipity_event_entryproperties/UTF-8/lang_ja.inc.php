@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php # 
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 966
  */
@@ -38,4 +38,4 @@
 利用できるカスタム項目の一覧は、<a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">プラグイン設定</a> で変更することができます。');
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'このエントリのマークアッププラグインを無効にする:');
-?>
+

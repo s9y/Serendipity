@@ -1,7 +1,8 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-12-11 01:17:00 VladaAjgl $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_cs.inc.php 1381 2007-12-11 01:17:00 VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  First-transaltion: Vladimir Ajgl <vlada@ajgl.cz> 2007-12-11
@@ -26,4 +27,4 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Přepisování znaků');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Odmazávání znaků ze slova ({slovo}) - příklad použití: Máte podnikový blog a šéfy Hrušku, Jelínka a Vrátného. Chcete, aby se jména šéfů zvýrazňovala, ale nechcete, aby se slovo hruška odkazovalo na šéfa, pokud mluvíte o ovoci, podobně se slivovicí, případně nechcete zaměňovat šéfa s důchodcem na vrátnici. V textu budete psát Hruška_šéf, Jelínek_šéf, Vrátný_šéf. V tomto poli zadáte \'_šéf\'. Tato přípona Vám umožní rozpoznat šéfy, ale sama o sobě se nebude v poli {slovo} zobrazovat.');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', 'Vaše nahrazovací řetězce jsou %s a %s.');
-?>
+

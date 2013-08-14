@@ -1,7 +1,8 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-11-23 15:30:00Z VladaAjgl $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_cs.inc.php 1381 2007-11-23 15:30:00Z VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2007/11/23
@@ -32,3 +33,4 @@
 @define('PLUGIN_HISTORY_OYA',               'Pøed rokem');
 @define('PLUGIN_HISTORY_MYSELF',            'Sám nastavím');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR',     'Zobraz jméno autora');
+

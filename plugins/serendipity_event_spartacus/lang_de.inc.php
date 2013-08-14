@@ -1,10 +1,11 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 09:57:42 VladaAjgl $
+<?php #
 
 /**
  *  @version 1.0
  *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
  *  @translated 2009/06/03
  */
+
 @define('PLUGIN_EVENT_SPARTACUS_NAME', 'Spartacus');
 @define('PLUGIN_EVENT_SPARTACUS_DESC', '[S]erendipity [P]lugin [A]ccess [R]epository [T]ool [A]nd [C]ustomization/[U]nification [S]ystem - Installiert Plugins direkt aus dem Netz.');
 @define('PLUGIN_EVENT_SPARTACUS_FETCH', 'Hier klicken um ein neues %s aus dem Netz zu installieren.');
@@ -58,3 +59,4 @@
 @define('PLUGIN_EVENT_SPARTACUS_FTP_PASS', 'FTP Passwort');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR', 'FTP Serendipity Verzeichnis');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC', 'Beim Login über FTP ist das Startverzeichnis nicht notwendigerweise das Serendipity-Verzeichnis. In diesem Fall ist es hier möglch, den Pfad vom FTP-Verzeichnis zum Serendipity-Verzeichnis anzugeben.');
+

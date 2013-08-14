@@ -1,6 +1,7 @@
-<?php # $Id$
+<?php #
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -19,4 +20,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'El licenciador autoriza a otros a copiar, distribuir, mostrary actuar sólo copias no alteradas de su trabajo -- no pueden derivarse trabajos basados en él.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Sí, siempre y cuando sea editado bajo la misma licencia');
 
-?>

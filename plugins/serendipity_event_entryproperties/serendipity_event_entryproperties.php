@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 

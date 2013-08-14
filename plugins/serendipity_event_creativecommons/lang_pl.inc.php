@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -20,4 +20,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'Licencjonodawca zezwala innym na kopiowanie, rozpowszechnianie odtwarzanie i wykonywanie dzie³a tylko w niezmienionej formie - nie udziela tym samym zezwolenia na korzystanie z utworu w dzie³ach zaleznych.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Yes, as long as others share alike');
 
-?>

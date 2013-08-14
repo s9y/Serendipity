@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -33,4 +33,3 @@
 @define('PLUGIN_REMOTERSS_RSSESCAPE', 'Wyłącz formatowanie HTML');
 @define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', 'Jeśli ta opcja zostanie włączona, kod HTML w feedzie zostanie usunięty. Jeśli ta opcja zostanie wyłączona, kod HTML w feedach będzie interpretowany. To może być potencjalne źródło problemów z bezpieczeństwem bloga jeśli feed nie pochodzi od Ciebie!');
 
-?>

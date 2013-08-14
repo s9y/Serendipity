@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
 @serendipity_plugin_api::load_language(dirname(__FILE__));

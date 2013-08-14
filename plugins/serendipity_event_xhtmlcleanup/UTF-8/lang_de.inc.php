@@ -1,12 +1,13 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 10:25:27 VladaAjgl $
+<?php #
 
 /**
  *  @version 1.0
  *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
  *  @translated 2009/06/03
  */
-        @define('PLUGIN_EVENT_XHTMLCLEANUP_NAME', 'Übliche XHTML-Fehler beseitigen');
-        @define('PLUGIN_EVENT_XHTMLCLEANUP_DESC', 'Korrigiert übliche Fehler, die beim XHTML-Markup der Einträge gemacht werden können');
+
+@define('PLUGIN_EVENT_XHTMLCLEANUP_NAME', 'Übliche XHTML-Fehler beseitigen');
+@define('PLUGIN_EVENT_XHTMLCLEANUP_DESC', 'Korrigiert übliche Fehler, die beim XHTML-Markup der Einträge gemacht werden können');
 
 // Next lines were translated on 2009/06/03
 @define('PLUGIN_EVENT_XHTMLCLEANUP_XHTML', 'kodiere XML-geparste Daten?');
@@ -15,3 +16,4 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Wenn aktiviert, werden HTML Sonderzeichen, die von UTF-8 Zeichen abstammen, in der Ausgabe konvertiert und nicht doppelt kodiert.');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE', 'Youtube Player Quelltext säubern?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC', 'Wenn aktiviert, werden die im XHTML ungültigen object-Tags des YouTube-Quelltextes aus dem embed-Teil entfernt. Die Wiedergabe des Videos im Browser funktioniert trotzdem.');
+

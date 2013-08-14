@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -31,3 +31,4 @@
 @define('PLUGIN_HISTORY_OYA', 'One year ago');
 @define('PLUGIN_HISTORY_MYSELF', 'I\'ll define one');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR', 'Show author\'s name');
+

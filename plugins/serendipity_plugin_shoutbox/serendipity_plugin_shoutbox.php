@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 /* Contributed by Matthias Lange (http://blog.dinnri.de/ml/) */
 

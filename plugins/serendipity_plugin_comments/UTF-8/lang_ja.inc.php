@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 1381
  */
@@ -15,4 +15,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'どれくらいのコメントを表示しますか? (デフォルト: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', 'コメント: %s<br />%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', '匿名');
-?>
+

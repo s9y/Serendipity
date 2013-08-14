@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_REMOTERSS_TITLE', 'Fil RSS/OPML externe');
 @define('PLUGIN_REMOTERSS_BLAHBLAH', 'Affiche les billets d\'un fil RSS/OPML externe (exemple: blogroll)');
@@ -33,5 +27,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Afficher la date');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Afficher la date du billet sous son titre?');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -1,10 +1,11 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 10:02:55 VladaAjgl $
+<?php #
 
 /**
  *  @version 1.0
  *  @author Konrad Bauckmeier <kontakt@dd4kids.de>
  *  @translated 2009/06/03
  */
+
 @define('PLUGIN_REMOTERSS_TITLE', 'Fremder RSS/OPML-Blogroll Feed');
 @define('PLUGIN_REMOTERSS_BLAHBLAH', 'Zeigt Einträge eines externen RSS/OPML-Feeds an (z.B. Blogroll)');
 @define('PLUGIN_REMOTERSS_NUMBER', 'Anzahl der Einträge');
@@ -35,3 +36,4 @@
 // Next lines were translated on 2009/06/03
 @define('PLUGIN_REMOTERSS_TEMPLATE', 'Ausgabe Template welches für diesen Feed verwendet wird');
 @define('PLUGIN_REMOTERSS_TEMPLATE_DESC', 'Hier kann eine Vorlage-Datei (Template) aus dem Plugin-Verzeichnis ausgewählt werden, um die Darstellung des Fees im Sidebar zu steuern. Sie können auch benutzerdefinierte Vorlage-Dateien im Plugin-Verzeichnis ablegen. Wenn eine Vorlage-Datei mit dem gleichen Namen in Ihrem eigenen Vorlageverzeichnis vorhanden ist, wird diese anstelle der Datei im Plugin-Verzeichnis verwendet. Wenn hier eine Vorlage abweichend zur Voreinstellung ausgewählt wird, wird automatisch Smarty aktiviert.');
+

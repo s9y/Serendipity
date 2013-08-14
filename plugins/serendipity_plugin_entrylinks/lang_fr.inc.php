@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_ENTRYLINKS_NAME', 'Liens du billet');
 @define('PLUGIN_ENTRYLINKS_BLAHBLAH', 'Affiche tous les liens contenus dans un billet');
@@ -27,5 +21,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Par date');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Par nombre de liens');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

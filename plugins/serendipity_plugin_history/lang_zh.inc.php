@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_HISTORY_NAME', '历史文章');
 @define('PLUGIN_HISTORY_DESC', '显示过去某一时间段内的文章');
@@ -25,3 +32,4 @@
 @define('PLUGIN_HISTORY_OYA', '显示恰好发布已满一年的文章');
 @define('PLUGIN_HISTORY_MYSELF', '自己设定日期时间段');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR', '显示作者姓名');
+

@@ -1,7 +1,8 @@
-<?php # $Id: lang_cz.inc.php 1381 2007-12-19 23:42:00 VladaAjgl $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_cz.inc.php 1381 2007-12-19 23:42:00 VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -16,4 +17,3 @@
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_FAILURE', 'Nezdaøilo se (Dùvod: %s)');
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_SUCCESS', 'Úspìch!');
 
-?>

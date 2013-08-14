@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Omid Mottaghi <webmaster@oxygenws.com>
  *  EN-Revision: Revision of lang_fa.inc.php
  */
@@ -15,4 +15,3 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL', 'نمایش همه');
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'رد کردن ارسال های صفحه اول');
 
-?>

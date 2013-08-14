@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -21,5 +21,3 @@
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Wysyłanie.');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Wyślij ten wpis e-mailem');
 
-
-?>

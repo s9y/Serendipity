@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -15,4 +15,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', '¿Cuántos comentarios deben ser mostrados? (Por defecto: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s acerca%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anon');
-?>
+

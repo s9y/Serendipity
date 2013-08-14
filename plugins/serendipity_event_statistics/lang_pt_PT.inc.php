@@ -1,16 +1,11 @@
-<?php # $Id:$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P. Matos <jmatos@math.ist.utl.pt>                                 #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author João P. Matos <jmatos@math.ist.utl.pt> 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_STATISTICS_NAME', 'Estatísticas');
 @define('PLUGIN_EVENT_STATISTICS_DESC', 'Junta uma ligação a estatísticas interessantes no seu painel entradas, incluindo um contador de visitantes');
@@ -78,6 +73,3 @@
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS', 'Banir da contagem navegadores');
 @define('PLUGIN_EVENT_STATISTICS_BANNED_HOSTS_DESC', 'Inserir navegadores que devem ser excluídos da contagem, separados por "|"');
 
-
-/* vim: set sts=4 ts=4 expandtab : */
-?>

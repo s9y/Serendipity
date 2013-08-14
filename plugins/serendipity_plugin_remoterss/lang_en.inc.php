@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -35,3 +35,4 @@
 
 @define('PLUGIN_REMOTERSS_TEMPLATE', 'Output Template to use for this feed');
 @define('PLUGIN_REMOTERSS_TEMPLATE_DESC', 'Here you can choose a template file inside the plugin\'s directory that is used to render the output of the feed in the sidebar. You can add custom template files to the plugin directory. If a template file with the same name is placed inside your own template directory, it will be used instead of the file supplied with the plugin. Selecting any template here other than the defualt one automatically enables Smarty templating.');
+

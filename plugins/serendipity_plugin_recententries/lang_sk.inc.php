@@ -1,4 +1,4 @@
-<?php
+<?php #
 
 /**
  *  @author Martin Matu¹ka <martin@matuska.org>

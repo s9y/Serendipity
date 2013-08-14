@@ -1,16 +1,11 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P. Matos <jmatos@math.ist.utl.pt>                                 #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file lang_pt_PT.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking
+ *  @author João P. Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_TRACKBACK_NAME', 'Código: Gestão das ligações para o exterior');
 @define('PLUGIN_EVENT_TRACKBACK_DESC', 'Regista os cliques nas ligações para o exterior do seu blogue');
@@ -20,5 +15,3 @@
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_S9Y', 'Sim');
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_GOOGLE', 'Sim, activando o deflector de Google PageRank');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

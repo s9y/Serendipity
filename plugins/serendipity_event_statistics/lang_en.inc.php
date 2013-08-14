@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -103,3 +103,4 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Show number of current visitors (aggregate past 15 minutes)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s visitor(s) online');
+

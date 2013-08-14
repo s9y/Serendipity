@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -13,4 +13,3 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8', 'Czy¶ciæ znaki UTF-8?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Po w³±czeniu tej opcji znaki pochodz±ce z kodowania UTF-8 zostan± odpowiednio przekonwertowane i pokazane.');
 
-?>

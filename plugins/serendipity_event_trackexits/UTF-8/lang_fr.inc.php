@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_TRACKBACK_NAME', 'Balises: Gestion des liens sortants');
 @define('PLUGIN_EVENT_TRACKBACK_DESC', 'Enregistre les clicks sur tous les liens sortant de votre blog');
@@ -21,5 +15,3 @@
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_S9Y', 'Oui');
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_GOOGLE', 'Oui, en activant le déflecteur du Google PageRank');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

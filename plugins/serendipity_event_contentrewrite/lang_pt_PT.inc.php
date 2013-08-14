@@ -1,16 +1,11 @@
-<?php # $Id:$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P Matos <jmatos@math.ist.utl.pt>                                  #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author João P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_CONTENTREWRITE_FROM', 'de');
 @define('PLUGIN_EVENT_CONTENTREWRITE_TO', 'para');
@@ -31,5 +26,3 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Caracter de reescrita');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Se utiliza um caracter especial para forçar a reescrita, introduza-lo aqui. Exemplo: se deseja somente substituir \'palavra*\' com o texto que definiu, mas não quer que o \'*\' seja mostrado, introduza o caracter aqui.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

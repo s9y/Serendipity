@@ -1,6 +1,8 @@
-<?php # $Id: lang_es.inc.php 1381 2006-08-15 10:14:56Z elf2000 $
+<?php #
+
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_es.inc.php 1381 2006-08-15 10:14:56Z elf2000
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -46,4 +48,3 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', 'votos');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'puntos');
 
-?>

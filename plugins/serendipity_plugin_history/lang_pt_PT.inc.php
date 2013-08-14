@@ -1,16 +1,11 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P. Matos <jmatos@math.ist.utl.pt>                                 #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file lang_pt_PT.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking
+ *  @author João P. Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_HISTORY_NAME', 'Histórico');
 @define('PLUGIN_HISTORY_DESC', 'Mostra as entradas num período ajustável.');
@@ -37,5 +32,3 @@
 @define('PLUGIN_HISTORY_OYA', 'Há um ano');
 @define('PLUGIN_HISTORY_MYSELF', 'Defini-lo-ei eu próprio');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

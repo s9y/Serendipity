@@ -1,7 +1,8 @@
-<?php # $Id: lang_nl.inc.php 762 2005-12-08 10:29:06Z garvinhicking $
+<?php #
 
 /**
- *  @version $Revision: 762 $
+ *  @version  762
+ *  @file lang_nl.inc.php 762 2005-12-08 10:29:06Z garvinhicking
  *  @author Jeffrey Lankamp
  *  NL-Revision: Revision of lang_nl.inc.php
  */
@@ -88,3 +89,4 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Geef het aantal actuele bezoekers weer (van de laatste 15 minuten)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s bezoeker(s) online');
+

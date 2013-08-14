@@ -1,4 +1,4 @@
-<?php
+<?php #
 
 /**
  *  @version 
@@ -10,4 +10,3 @@
 @define('PLUGIN_EVENT_S9YMARKUP_DESC', 'Applicera grundläggande serendipity markup på inläggstext');
 @define('PLUGIN_EVENT_S9YMARKUP_TRANSFORM', 'Omslutande asterisker markerar text som fetstil (*ord*), understruken text görs med hjälp av _ord_.');
 
-?>

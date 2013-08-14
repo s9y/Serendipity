@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -25,4 +25,4 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Rewrite char');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'If there is any char you append to force rewriting, enter it here. If you want to only replace \'serendipity*\' with what you entered for that word but want the \'*\' removed, enter that char here.');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', 'The strings to perform replacements in your environment are %s and %s.');
-?>
+

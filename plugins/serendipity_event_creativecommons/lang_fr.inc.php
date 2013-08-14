@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_CREATIVECOMMONS_NAME',        'Contrat Creative Commons');
 @define('PLUGIN_CREATIVECOMMONS_DESC',        'Choisissez et affichez un contrat Creative Commons pour les contenus de votre blog');
@@ -25,5 +19,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'L\'auteur autorise de reproduire, distribuer et communiquer cette création au public, mais n\'autorise pas la modification de cette création.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Oui, tant que les autres partagent aussi');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -1,6 +1,7 @@
-<?php # $Id$
+<?php #
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -16,4 +17,3 @@
 @define('PLUGIN_EVENT_MAILER_CONVERTP', '¿Convertir párrafo HTML en saltos de linea?');
 @define('PLUGIN_EVENT_MAILER_CONVERTPDESC', 'Añade saltos de linea luego de cada párrafo HTML. Esta opción es muy útil si también activas la eliminación HTML, así tus párrafos se mantendrán.');
 
-?>

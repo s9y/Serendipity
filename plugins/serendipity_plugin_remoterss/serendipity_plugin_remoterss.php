@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 // Contributed by Udo Gerhards <udo@babyblaue-seiten.de>
 // OPML Contributed by Richard Thomas Harrison <rich@mibnet.plus.com>

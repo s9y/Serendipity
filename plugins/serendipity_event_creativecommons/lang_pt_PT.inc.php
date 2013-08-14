@@ -1,8 +1,11 @@
-<?php # $Id:$
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
-# All rights reserved.  See LICENSE file for licensing details
-# Translation (c) by  Joao P Matos <jmatos@math.ist.utl.pt>
-/* vim: set sts=4 ts=4 expandtab : */
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author Joao P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_CREATIVECOMMONS_NAME',        'Licença Creative Commons');
 @define('PLUGIN_CREATIVECOMMONS_DESC',        'Escolhe e mostra uma licença creative commons para o seu conteúdo');
@@ -18,4 +21,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'O licenciador autoriza outros a copiar, distribuir, expor e utilizar só cópias não alteradas do seu trabalho -- não podem criar-se trabalhos baseados nele.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Sim, sempre que outros partilhem da mesma forma');
 
-?>

@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Wybierz wtyczkê, której dane maj± byæ pokazane');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Wprowad¼ tytu³ pozycji wy¶wietlonej w Panelu Bocznym	Enter (zostaw puste by pozostawiæ nazwê wtyczki, z której dane bêd± pobierane)');
 
-?>

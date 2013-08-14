@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Ivan Cenov jwalker@hotmail.bg
  *  EN-Revision: 1381
  */
@@ -25,3 +25,4 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Символ за фисиране на подмяна');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Ако е предвиден символ за предизвикване на подмяна, въведете го тук. Ако искате да замените \'serendipity*\' с каквото сте въвели за тази дума, но желаете \'*\' да се пропуска, въведете този символ тук.');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', 'Стринговете за изпълнение на подмяна във вашата конфигурация са %s и %s.');
+

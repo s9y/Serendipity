@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_STATISTICS_NAME', '统计资料');
 @define('PLUGIN_EVENT_STATISTICS_DESC', '在文章页面显示一条指向统计资料的链接，另外还有访客计数器等');
@@ -93,3 +100,4 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', '显示当前访客数量（过去15分钟内累计）');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s 个访客在线');
+

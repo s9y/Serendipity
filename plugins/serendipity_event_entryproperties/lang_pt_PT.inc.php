@@ -1,10 +1,12 @@
-<?php # $Id:$
-# Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
-# All rights reserved.  See LICENSE file for licensing details
-# Translation (c) by  Joao P Matos <jmatos@math.ist.utl.pt>
-/* vim: set sts=4 ts=4 expandtab : */
+<?php # 
 
-  //Sticky post
+/**
+ *  @version 
+ *  @author Joao P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
+
+//Sticky post
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Propriedades extra das entradas');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(cache, artigos privados, sticky posts)'); 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Marcar esta entrada como Sticky Post');
@@ -35,4 +37,4 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1', 'Campos ad hoc adicionais podem ser usados no seu modelo em locais em que quiser que apareçam. Para isso, edite o seu ficheiro entries.tpl e coloque etiquetas Smarty da forma {$entry.properties.ep_MyCustomField} no HTML onde desejar. Note o prefixo ep_ para cada campo. ');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'Aqui pode introduzir uma lista de nomes de campos separados por vírgulas que podem ser usados para cada entrada - não use caracteres especiais ou espaços nesses nomes de campos. Exemplo: "Customfield1, Customfield2". ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'A lista de campos ad hoc disponíveis pode ser mudada na <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">configuração de plugins</a>.');
-?>
+

@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_COMMENTS_BLAHBLAH', 'Affiche les derniers commentaires');
 @define('PLUGIN_COMMENTS_WORDWRAP', 'Retour à la ligne');
@@ -23,6 +17,3 @@
 @define('PLUGIN_COMMENTS_ABOUT', '%s à propos%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anonyme');
 
-
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_REMOTERSS_TITLE', '远端RSS/OPML-Blogroll种子');
 @define('PLUGIN_REMOTERSS_BLAHBLAH', '显示远端RSS/OPML种子(例如 Blogroll)中的内容');
@@ -26,3 +33,4 @@
 @define('PLUGIN_REMOTERSS_RSSFIELD_DESC', 'RSS种子中的哪些标记所标记的内容将被显示？(例如: "title", "content:encoded", "description", ……)');
 @define('PLUGIN_REMOTERSS_RSSESCAPE', '将HTML输出转义(Escape)');
 @define('PLUGIN_REMOTERSS_RSSESCAPE_DESC', '如果启用该设置的话，RSS种子中的HTML内容将被转义(escaped)，因此XSS(Cross-site scripting, 跨站脚本)是不可能存在的。如果关闭这个设置的话，RSS种子中的HTML内容将被原样输出。如果所使用的RSS种子不是你所拥有的话，那么关闭这个设置会产生安全隐患。');
+

@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_MAILER_NAME', '使用电子邮件发送文章');
 @define('PLUGIN_EVENT_MAILER_DESC', '可以让你将新发布的文章发送到指定的电子邮件地址中');
@@ -14,3 +21,4 @@
 @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', '你决定不将此文章通过电子邮件发送出去，因此该文章没有通过电子邮件发送出去。');
 @define('PLUGIN_EVENT_MAILER_SENDING', '电子邮件发送中……');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', '使用电子邮件发送文章');
+

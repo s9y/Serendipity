@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -15,4 +15,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Jak wiele komentarzy będzie pokazywanych. (Standardowo: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s do wpisu%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anonim');
-?>
+

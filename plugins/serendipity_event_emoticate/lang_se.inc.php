@@ -1,4 +1,4 @@
-<?php
+<?php #
 
 /**
  *  @version 
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_EMOTICATE_EXTENSION', 'Filändelse');
 @define('PLUGIN_EVENT_EMOTICATE_EXTENSION_BLAHBLAH', 'Filändelse för dina emoticons. Denna är "case sensitive", dvs se till att skriva stora och små bokstäver rätt.');
 
-?>

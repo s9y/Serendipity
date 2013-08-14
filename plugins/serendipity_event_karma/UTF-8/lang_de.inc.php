@@ -1,4 +1,4 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 09:51:33 VladaAjgl $
+<?php #
 
 /**
  *  @version 1.0
@@ -126,3 +126,4 @@
 @define('PLUGIN_KARMA_AJAX_BLAHBLAH', 'Soll die Stimmabgabe mittels asynchronem Javascript erfolgen? Wenn ja, wird die Bewertung im Hintergrund an den Server gesendet und das Ergebnis dargestellt, ohne dass die Seite neu geladen werden muss.');
 @define('PLUGIN_KARMA_ALIGNMENT', 'Ausrichtung des Plugins');
 @define('PLUGIN_KARMA_ALIGNMENT_BLAHBLAH', 'Soll das Plugin links, mittig oder rechts angezeigt werden?');
+

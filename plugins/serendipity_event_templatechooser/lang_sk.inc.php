@@ -1,4 +1,4 @@
-<?php
+<?php #
 
 /**
  *  @author Martin Matu¹ka <martin@matuska.org>
@@ -8,4 +8,3 @@
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME',     'Výber ¹ablón');
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_DESC',     'Umo¾nuje náv¹tevníkom zmeni» ¹ablónu (= vzhµad) podµa vlastného výberu');
 
-?>

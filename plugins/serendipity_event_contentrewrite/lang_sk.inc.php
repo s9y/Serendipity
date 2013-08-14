@@ -1,7 +1,7 @@
-<?php
+<?php #
 
 /**
- *  @version $$
+ *  @version 
  *  @author Martin Matu¹ka <martin@matuska.org>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -25,4 +25,4 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', 'Prepisovanie znakov');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', 'Zmazanie znakov zo slova ({slovo}) - príklad pou¾itia: Máte podnikový weblog a vedúcich Hru¹ku, Dlhého a Mokrého. Chcete, aby boli mená vedúcich zvýrazòované, ale nechcete, aby slovo hru¹ka odkazovalo na vedúceho, keï ide o ovocie. V texte budete písa» Hru¹ka_vedúci, Dlhý_vedúci a Mokrý_vedúci. V tomto poli zadáte \'_vedúci\'. Táto prípona Vám umo¾ní rozpozna» vedúcich, ale sama sa nebude v poli {slovo} zobrazova».');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', 'Va¹e nahradzované re»azce sú %s a %s.');
-?>
+

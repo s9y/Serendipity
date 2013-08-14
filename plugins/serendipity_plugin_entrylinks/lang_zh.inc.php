@@ -1,4 +1,11 @@
-<?
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_ENTRYLINKS_NAME', '文章链接');
 @define('PLUGIN_ENTRYLINKS_BLAHBLAH', '显示涉及该文章的所有链接');
@@ -13,3 +20,4 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH', '以何种顺序排列来源链接(默认：链入次数)');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日期');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', '链入次数');
+

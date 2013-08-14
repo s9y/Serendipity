@@ -1,7 +1,8 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
+ *  @file 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -23,3 +24,4 @@
 @define('PLUGIN_EVENT_MAILER_SENDTOALL', 'Send to all authors');
 @define('PLUGIN_EVENT_MAILER_STRIPTAGS', 'Keep images and hyperlinks when removing html?');
 @define('PLUGIN_EVENT_MAILER_STRIPTAGSDESC', 'Only applies when removing HTML-tags from the mail. If enabled, images and hyperlinks will be put inside the text, when disabled those placeholders will also be removed.');
+

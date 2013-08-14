@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -16,4 +16,3 @@
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_FAILURE', 'Failure(Reason: %s)');
 @define('PLUGIN_EVENT_WEBLOGPING_SEND_SUCCESS', 'Success!!');
 
-?>

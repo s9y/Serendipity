@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_STATISTICS_NAME', 'Statistiques');
 @define('PLUGIN_EVENT_STATISTICS_DESC', 'Ajoute un lien vers des statistiques intétressantes dans votre panneau d\'administration des billets');
@@ -93,5 +87,3 @@
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Afficher le nombre de visiteurs en ce moment (détectés sur les dernières 15 minutes)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s visiteur(s) en ligne');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

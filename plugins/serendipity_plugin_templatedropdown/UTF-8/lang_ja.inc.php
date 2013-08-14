@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 692
  */
@@ -11,5 +11,3 @@
 @define('PLUGIN_TEMPLATEDROPDOWN_SUBMIT',   '送信ボタンの表示は?');
 @define('PLUGIN_TEMPLATEDROPDOWN_SUBMIT_DESC',   '送信ボタンの表示をしますか?');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

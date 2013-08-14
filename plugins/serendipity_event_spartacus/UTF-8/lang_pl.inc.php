@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -33,4 +33,4 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Sprawdź czy są nowe wtyczki Panelu bocznego');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Sprawdź czy są nowe wtyczki Zdarzeń');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Podpowiedź: Możesz uaktualnić kilka wtyczek jednocześnie klikając link uaktualnienia środkowym klawiszem myszy, tak by otworzyć ten link w nowym oknie lub nowym tabie (zakładce) przeglądarki. Zauważ, że uaktualnianie kilku wtyczek jednocześnie mogłoby prowadzić do timeoutów i problemów z pobieraniem plików a w efekcie - nagromadzenia śmieci i potencjalnych problemów. Dlatego taka funkcjonalność nie została zaimplementowana rozmyślnie.');
-?>
+

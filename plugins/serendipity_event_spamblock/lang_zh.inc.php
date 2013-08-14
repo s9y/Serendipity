@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', '垃圾(spam)预防');
 @define('PLUGIN_EVENT_SPAMBLOCK_DESC', '几种预防垃圾回复、垃圾引用等的方法');
@@ -118,3 +125,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', '启用此设置的话，将会把那些向你的博客发送垃圾回复的IP地址添加到你的.htaccess文件中。这个.htaccess文件会被重新生成，并把上一个月屏蔽掉的IP地址加进去.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', '你的验证码目前看上去就是这个样子的了。如果你改变并保存了上述设置、并且想刷新显示你的验证码的话，只要点击一下它就可以刷新了。');
+

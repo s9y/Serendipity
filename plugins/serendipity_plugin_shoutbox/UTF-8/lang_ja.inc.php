@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 692
  */
@@ -17,5 +17,3 @@
 @define('PLUGIN_SHOUTBOX_MAXENTRIES', '最大コメント数');
 @define('PLUGIN_SHOUTBOX_MAXENTRIES_BLAHBLAH', 'どれだけのコメントを表示しますか? (デフォルト: 15)');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_SPARTACUS_NAME', 'Spartacus');
 @define('PLUGIN_EVENT_SPARTACUS_DESC', '[S]erendipity [P]lugin [A]ccess [R]epository [T]ool [A]nd [C]ustomization/[U]nification [S]ystem - Vous permet de télécharger des plugins directement de notre dépôt officiel.');
@@ -32,5 +26,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissions des répertoires téléchargés');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Ici vous pouvez entrer le mode octal (comme "0777" par ex.) pour les répertoires téléchargés. Si vous laissez ce champs vide, les permissions par défaut de votre serveur seront utilisés. Notez que tous les serveurs ne permettent pas de changer les permissions de répertoire. Faites attention aussi que les permissions que vous définissez permettent encore à Serendipity d\'accéder aux répertoires.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

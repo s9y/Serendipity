@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_MAILER_NAME', 'Envoyer les billets par E-Mail');
 @define('PLUGIN_EVENT_MAILER_DESC', 'Envoie un billet par Email à un destinataire de votre choix lorsqu\'il est publié');
@@ -28,5 +22,3 @@
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Envoi...');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Envoyer ce billet par email');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

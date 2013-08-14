@@ -1,7 +1,8 @@
-<?php # $Id: lang_en.inc.php 1797 2007-07-24 12:59:01Z garvinhicking $
+<?php #
 
 /**
- *  @version $Revision: 1797 $
+ *  @version  1797
+ *  @file lang_en.inc.php 1797 2007-07-24 12:59:01Z garvinhicking
  *  @author Hrotkó Gábor <roti@al.pmmf.hu>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -103,3 +104,4 @@
 
 @define('PLUGIN_EVENT_STATISTICS_SHOW_CURRENTVISITORS', 'Mutasd az aktuális látogatók számát (ez átlagban 15 percenként frissül)');
 @define('PLUGIN_EVENT_STATISTICS_TEXT_CURRENTVISITORS', '%s látogató van jelenleg');
+

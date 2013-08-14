@@ -1,7 +1,8 @@
-<?php # $Id: lang_cz.inc.php 1381 2007-12-15 22:40:00 VladaAjgl $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_cz.inc.php 1381 2007-12-15 22:40:00 VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -14,4 +15,3 @@
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_S9Y', 'Vnitøní sledovací funkce Serendipity');
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_GOOGLE', 'Google PageRank Deflector');
 
-?>

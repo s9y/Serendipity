@@ -1,7 +1,8 @@
-<?php # $Id: lang_ja.inc.php 1381 2006-08-15 10:14:56Z elf2000 $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_ja.inc.php 1381 2006-08-15 10:14:56Z elf2000
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 690
  */
@@ -47,4 +48,3 @@
 @define('PLUGIN_KARMA_STATISTICS_VOTES_NO', '回の投票');
 @define('PLUGIN_KARMA_STATISTICS_POINTS_NO', 'ポイント');
 
-?>

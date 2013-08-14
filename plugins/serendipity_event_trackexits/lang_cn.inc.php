@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_TRACKBACK_NAME', '记录出口');
 @define('PLUGIN_EVENT_TRACKBACK_DESC', '记录对每个链接到其他站点的链接的点击操作');
@@ -7,3 +14,4 @@
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_NONE', '不使用');
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_S9Y', '使用Serendipity的链接出口记录功能');
 @define('PLUGIN_EVENT_TRACKBACK_COMMENTREDIRECTION_GOOGLE', '使用Google PageRank Deflector来记录出口');
+

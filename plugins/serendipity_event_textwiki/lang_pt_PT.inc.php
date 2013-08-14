@@ -1,16 +1,11 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# João P. Matos <jmatos@math.ist.utl.pt>                                 #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file lang_pt_PT.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking
+ *  @author João P. Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_TEXTWIKI_NAME',     'Código: Wiki');
 @define('PLUGIN_EVENT_TEXTWIKI_DESC',     'Codificação do texto usando Text_Wiki');
@@ -69,6 +64,3 @@
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_TIGHTEN', 'Encontra seuências de mais de 3 newlines e redu-las a 2 newlines (parágrafo). Por omissão activo.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_ENTITIES', 'Escapar entidades HTML. Por omissão activo.');
 
-
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -1,4 +1,11 @@
-<?php
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_CONTENTREWRITE_FROM', '从');
 @define('PLUGIN_EVENT_CONTENTREWRITE_TO', '到');
@@ -19,3 +26,4 @@
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHAR', '重写字符');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITECHARDESC', '如果有任何附加的单个字符用于重写，将它输入在此。如果你想将\'serendipity*\'用你输入的单词替换，同时又想把\'*\'这个字符去除掉的话，那就把该字符(此例中该字符为*号)输入此处。');
 @define('PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING', '在你的设置中，用于进行替换的字符串是 %s 和 %s 。');
+
