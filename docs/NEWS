@@ -15,6 +15,18 @@ Version 2.0 ()
 
     * Use Smarty for backend display output
 
+Version 1.7.3 ()
+------------------------------------------------------------------------
+
+    * Trackback to https:// style URLs will use proper port 443 instead
+      of 80.
+
+Version 1.7.2 (July 26th 2013)
+------------------------------------------------------------------------
+
+    * Fix a syntax error in the "mysql" deprecation code, thanks
+      to Ian
+
 Version 1.7.1 ()
 ------------------------------------------------------------------------
 
