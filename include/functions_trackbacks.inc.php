@@ -119,6 +119,10 @@ function _serendipity_send($loc, $data, $contenttype = null) {
         $target['query'] = '?' . str_replace('&amp;', '&', $target['query']);
     }
 
+    if ($target['scheme'] == 'https' && empty($target['port'])) {
+        $target['port'] = 443;
+    }
+        
     if (!is_numeric($target['port'])) {
        $target['port'] = 80;
     }
