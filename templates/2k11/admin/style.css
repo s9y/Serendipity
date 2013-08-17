@@ -832,7 +832,7 @@ input[type=checkbox],
 
 .form_radio label,
 .form_check label {
-    display: inline-block !important;
+    display: inline !important;
 }
 
 .serendipity_commentDirection,
@@ -1066,6 +1066,7 @@ summary {
 #entries_list h3 {
     float : left;
     margin: .75em 1em .75em 0;
+    max-width: 85%;
 }
 
 .edit_actions,
@@ -1080,7 +1081,6 @@ summary {
     width: 15%;
 }
 
-#edit_entry_status label,
 #sort_entries .form_select label,
 #filter_entries .form_select label,
 #filter_entries .form_field label,
@@ -1097,10 +1097,6 @@ summary {
 .pagination .next {
     min-height: 1px;
     width: 50%;
-}
-
-.category_data {
-    width: 75%;
 }
 
 #edit_entry_status select,
@@ -1284,9 +1280,7 @@ summary {
 .entries_pane .pagination h3 {
     font-size: 1em;
     font-weight: normal;
-    position: absolute;
-    top: -60%;
-    left: 37%;
+    text-align: center;
 }
 
 #reset_timestamp {
@@ -1353,9 +1347,12 @@ fieldset p,
     margin-top: 1em;
 }
 
-.category_data,
-.category_desc {
+.category_data {
     margin: 0 1em 0 0;
+}
+
+.category_desc {
+    display: block;
 }
 
 #serendipity_comments_list .form_check,
@@ -2401,6 +2398,18 @@ img.mfp-img {
     #user_menu {
         float: left;
         width: 50%;
+    }
+
+    #entries_list h3 {
+        max-width: none;
+    }
+
+    .comments_pane .pagination h3,
+    .media_pane .pagination h3,
+    .entries_pane .pagination h3 {
+        position: absolute;
+        top: -60%;
+        left: 37%;
     }
 }
 
