@@ -1628,6 +1628,7 @@ form > .button_link:first-of-type,
     box-sizing: border-box;
     color: #fff;
     padding: 0 .25em;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.8);
 }
 
 .field_info {
