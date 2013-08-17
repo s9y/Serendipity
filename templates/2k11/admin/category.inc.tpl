@@ -36,7 +36,7 @@
                 </select>
             </div>
 
-            <input class="state_cancel" name="REMOVE" type="submit" value="{$CONST.GO}">
+            <input class="state_cancel" name="REMOVE" type="submit" value="{$CONST.DELETE}">
         </form>
     {/if}
 {/if}
