@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <a id="add_upload" class="button_link icon_link" href="#" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></a>
+            <button id="add_upload" class="button_link" type="button" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></button>
         </div>
 
         <h3>Download</h3> {* i18n *}
