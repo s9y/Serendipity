@@ -16,7 +16,7 @@
     <div class="clearfix">
         <h2>{$media.file.realname}</h2>
         
-        <h3><a href="#">{$media.file.props.base_property.TITLE|@default:''}</a></h3>
+        <h3>{$media.file.props.base_property.TITLE|@default:''}</h3>
 
         <div class="media_show">
         {if $media.file.is_image}
