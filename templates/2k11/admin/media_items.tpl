@@ -18,7 +18,7 @@
                 {/if}
             {elseif $file.is_image AND $file.hotlink}
                 {if $media.textarea}
-                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"">
+                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}">
                 {else}
                     {if $file.url}
                     <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
@@ -31,7 +31,7 @@
                 {/if}
             {else}
                 {if $media.textarea}
-                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"">
+                    <a href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}">
                 {else}
                     {if $file.url}
                         <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
@@ -115,7 +115,7 @@
                 <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
             {if $file.is_editable}
                 <li><a class="media_fullsize button_link" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
-                <li><a class="media_rename button_link" href="#" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></a></li>
+                <li><button class="media_rename button_link" type="button" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></button></li>
                 {if $file.is_image AND NOT $file.hotlink}
                 <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}'" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
                 {/if}
