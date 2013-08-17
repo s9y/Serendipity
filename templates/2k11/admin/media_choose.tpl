@@ -4,7 +4,7 @@
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}: {$CONST.SELECT_FILE}</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {if $media.css}<link rel="stylesheet" href="{$media.css}">{/if}
     {if $media.css_tree}<link rel="stylesheet" href="{$media.css_tree}">{/if}
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>

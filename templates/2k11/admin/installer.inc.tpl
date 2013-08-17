@@ -4,7 +4,7 @@
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{serendipity_getFile file='admin/style.css'}">
 </head>
 <body id="serendipity_admin_page">

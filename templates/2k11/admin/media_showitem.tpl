@@ -4,7 +4,7 @@
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$media.file.props.base_property.TITLE|@default:$media.file.realname}</title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{$media.css}">
     <link rel="stylesheet" href="{$media.css_front}">
     <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
