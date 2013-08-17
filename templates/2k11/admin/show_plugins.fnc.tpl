@@ -32,7 +32,7 @@
                         </h5>
 
                         <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
-                            <a id="grab{$plugin_data['css_key']}" class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                            <button id="grab{$plugin_data['css_key']}" class="icon_link" type="button" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></button>{* i18n *}
                         </div>
 
                     {if $plugin_data['can_configure']}

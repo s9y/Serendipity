@@ -1788,9 +1788,8 @@ form > .button_link:first-of-type,
 }
 
 .pluginmanager_plugin .form_check,
-.pluginmanager_plugin h5,
-.media_file .form_check {
-    margin: 0 0 1em;
+.pluginmanager_plugin h5 {
+    margin: .75em 0;
 }
 
 .pluginmanager_description {
@@ -1837,7 +1836,8 @@ form > .button_link:first-of-type,
 }
 
 .no-js .media_file_preview img,
-.js .template_wrap {
+.js .template_wrap,
+.media_file .form_check {
     margin: 0 0 1em;
 }
 

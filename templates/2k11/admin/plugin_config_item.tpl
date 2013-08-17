@@ -79,7 +79,7 @@
         {foreach $order_id as $orid}
             <li id="{$orid['id']}" class="sequence_item pluginmanager_item_even">
                 <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet">
-                    <a class="icon_link" href="#" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></a>{* i18n *}
+                    <button class="icon_link" type="button" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></button>{* i18n *}
                 </div>
             {if $checkable}
                 <div class="form_check">
