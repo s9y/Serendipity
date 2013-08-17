@@ -429,9 +429,6 @@ form > a,
 #media_pane_filter label,
 #media_pane_sort label,
 #image_directory_create_form label,
-#mediaPropertyForm .media_file_props label,
-#mediaPropertyForm header b,
-#mediaPropertyForm footer b,
 #entries_list .entry_info span,
 .folder_name,
 .toggle_info,
@@ -461,7 +458,10 @@ legend > span > span,
 .configuration_group .form_field label,
 .configuration_group .form_area label,
 #captchabox .captcha,
-#dashboard_entries li > a {
+#dashboard_entries li > a,
+#mediaPropertyForm .media_file_props label,
+#mediaPropertyForm header b,
+#mediaPropertyForm footer b {
     display: block;
 }
 
@@ -1066,7 +1066,6 @@ summary {
 #entries_list h3 {
     float : left;
     margin: .75em 1em .75em 0;
-    max-width: 85%;
 }
 
 .edit_actions,
@@ -1086,10 +1085,7 @@ summary {
 #filter_entries .form_field label,
 #media_pane_filter label,
 #media_pane_sort label,
-#image_directory_create_form label,
-#mediaPropertyForm .media_file_props label,
-#mediaPropertyForm header b,
-#mediaPropertyForm footer b {
+#image_directory_create_form label {
     width: 20%;
 }
 
@@ -1112,7 +1108,9 @@ summary {
 #filter_comments .form_field > input,
 #filter_comments select,
 #serendipity_comment .form_field input,
-#serendipity_comment select {
+#serendipity_comment select,
+.js .configuration_group .media_choose input,
+.js #serendipity_category .form_field #category_icon {
     width: 85%;
 }
 
@@ -1128,11 +1126,6 @@ summary {
 #login .form_field input,
 #diagnose > table {
     width: 100%;
-}
-
-.js .configuration_group .media_choose input,
-.js #serendipity_category .form_field #category_icon {
-    width: 90%;
 }
 
 .media_choose .preview {
@@ -1154,6 +1147,10 @@ summary {
 .folder_name {
     min-width: 8em;
     padding: .4em 0;
+}
+
+.user_level {
+    display: block;
 }
 
 #image_directory_create_form .form_field input,
@@ -1362,9 +1359,12 @@ fieldset p,
 
 .comment_data dt,
 .template_info dt,
-.actions li,
 .edit_actions li {
     margin: 0 .4em 0 0;
+}
+
+.actions li {
+    margin: 0 .4em .5em 0;
 }
 
 .no-js .media_file .actions li {
@@ -1430,6 +1430,10 @@ form > .button_link:first-of-type,
 .media_file,
 .plugins_installable > li {
     padding: 0 .5em 1em;
+}
+
+.media_file {
+    padding: 0 .5em .5em;
 }
 
 .template_preview {
@@ -1578,6 +1582,7 @@ form > .button_link:first-of-type,
 #serendipity_comments_list h4 {
     font-size: 1em;
     line-height: 1.5;
+    max-width: 85%;
 }
 
 #entries_list > li,
@@ -1592,13 +1597,19 @@ form > .button_link:first-of-type,
 .zebra_list .even,
 .option_list .odd,
 .option_list .even,
-.theme_options .odd,
-.theme_options .even,
 .configure_plugin .config_optiongroup .odd,
 .configure_plugin .config_optiongroup .even, 
 .configure_plugin .odd,
 .configure_plugin .even {
     padding-left: .4em;
+}
+
+.theme_options .odd,
+.theme_options .even {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 .4em;
 }
 
 #categories li > ul,
@@ -2400,7 +2411,8 @@ img.mfp-img {
         width: 50%;
     }
 
-    #entries_list h3 {
+    #entries_list h3,
+    #serendipity_comments_list h4 {
         max-width: none;
     }
 
@@ -2410,6 +2422,17 @@ img.mfp-img {
         position: absolute;
         top: -60%;
         left: 37%;
+    }
+
+    #mediaPropertyForm .media_file_props label,
+    #mediaPropertyForm header b,
+    #mediaPropertyForm footer b {
+        display: inline-block;
+        width: 20%;
+    }
+
+    .user_level {
+        display: inline;
     }
 }
 

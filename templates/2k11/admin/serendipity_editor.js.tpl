@@ -817,7 +817,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         $('<div id="'+configItem+'_preview" class="preview"/>').appendTo($el)
             .css({
                 backgroundImage: bgImg,
-                minWidth: mWidth,
+                // minWidth: mWidth,
                 minHeight: mHeight
             });
     }

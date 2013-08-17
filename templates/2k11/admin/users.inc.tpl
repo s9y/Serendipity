@@ -44,7 +44,7 @@
     {foreach $users as $user}
         {if $user.isEditable}
         <li class="clearfix {cycle values="odd,even"}">
-            <span class="user_name"><span class="icon-user"></span> {$user.realname|escape:"html"} ({$user.userlevel_name})</span>
+            <span class="user_name"><span class="icon-user"></span> {$user.realname|escape:"html"} <span class="user_level">({$user.userlevel_name})</span></span>
             
             <ul class="plainList clearfix edit_actions">
                 <li><a class="button_link" href="{$user.authorUrl}" title="{$CONST.PREVIEW} {$user.realname}"><span class="icon-zoom-in"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
