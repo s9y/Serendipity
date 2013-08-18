@@ -394,6 +394,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     }
 
     // Collapses/expands the category selector
+    var categoryselector_stored_categories = null;
     serendipity.toggle_category_selector = function(id) {
         if ($('#toggle_' + id).length == 0) {
             // this function got called on load of the editor
@@ -406,6 +407,9 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
                 $(this).toggleClass('active');
                 serendipity.toggle_category_selector(id);
             });
+            $('#'+id).change(function(e) {
+                categoryselector_stored_categories = null;
+            });
             
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
                 // when loading the page new for the preview and more than one category was
@@ -416,7 +420,16 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             }
             
         }
+
         if ($('#'+id).attr("multiple")) {
+            if ($('#'+id).children(':selected').filter('[value!="0"]').length > 1) {
+                // when collapsing, all multiple selection needs to be saved to be restoreable if the click was a mistake
+                var selected_categories = '';
+                $('#'+id).children(':selected').filter('[value!="0"]').each(function(i, child) {
+                    selected_categories += child.value + ','
+                });
+                categoryselector_stored_categories = selected_categories;
+            }
             $('#'+id).removeAttr("multiple");
             $('#'+id).removeAttr("size");
             $('#toggle_' + id).find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
@@ -425,6 +438,17 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             $('#'+id).attr("multiple", "");
             $('#'+id).attr("size", $('#'+id).children().size);
             $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+
+            var selected_categories = categoryselector_stored_categories;
+            if (selected_categories != null) {
+                selected_categories = selected_categories.split(',');
+                selected_categories.forEach(function(cat_id) {
+                    if(cat_id) {
+                        $('#'+id).find('[value="'+ cat_id +'"]').attr('selected', 'selected');
+                    }
+                });
+            }
+            
         }
     }
 
