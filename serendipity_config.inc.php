@@ -198,6 +198,8 @@ if (function_exists('get_include_path')) {
 }
 
 
+require_once("bundled_libs/autoload.php");
+
 $new_include = ($serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '')
              . S9Y_INCLUDE_PATH . 'bundled-libs/' . PATH_SEPARATOR
              . S9Y_INCLUDE_PATH . 'bundled-libs/Smarty/libs/' . PATH_SEPARATOR

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "zendframework/zend-db",
+        "version": "2.2.2",
+        "version_normalized": "2.2.2.0",
+        "target-dir": "Zend/Db",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/Component_ZendDb.git",
+            "reference": "release-2.2.2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://packages.zendframework.com/composer/zendframework-zend-db-2.2.2-release-2.2.2-6ab69c.zip",
+            "reference": "2.2.2",
+            "shasum": "8bc0c8d19bfd75f9a65a4b332f556c2571424c09"
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "suggest": {
+            "zendframework/zend-stdlib": "2.2.2"
+        },
+        "time": "2013-06-20 18:00:57",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2-dev",
+                "dev-develop": "2.3-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Zend\\Db\\": ""
+            }
+        },
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": " ",
+        "keywords": [
+            "db",
+            "zf2"
+        ],
+        "support": {
+            "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.2.2"
+        }
+    }
+]
