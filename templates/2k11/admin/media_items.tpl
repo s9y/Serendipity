@@ -1,5 +1,6 @@
 {foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
     {if NOT $media.manage}
+        {* ML got called for inserting media *}
         <article class="media_wrap_thumb {cycle values="odd,even"}">
             <div class="media_file_thumb{if $media.enclose} equal_heights{/if}">
             {if $file.is_image AND $file.full_thumb}
@@ -64,29 +65,17 @@
             <div class="clearfix equal_heights media_file_wrap">
                 <div class="media_file_preview">
                     {if $file.is_image AND $file.full_thumb}
-                        {if $file.url}
-                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
-                        {/if}
-                            <img src="{$file.full_thumbHTTP}" title="{$file.path}{$file.name}" alt="{$file.realname}">
-                        {if $file.url}
+                        <a class="media_fullsize" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                            <img src="{$file.show_thumb}" title="{$file.path}{$file.name}" alt="{$file.realname}">
                         </a>
-                        {/if}
                     {elseif $file.is_image AND $file.hotlink}
-                        {if $file.url}
-                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
-                        {/if}
+                        <a class="media_fullsize" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
                             <img src="{$file.path}" width="{$file.thumbWidth}" height="{$file.thumbHeight}" title="{$file.path}" alt="{$file.realname}">
-                        {if $file.url}
                         </a>
-                        {/if}
                     {else}
-                        {if $file.url}
-                        <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
-                        {/if}
+                        <a class="media_fullsize" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
                             <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
-                        {if $file.url}
                         </a>
-                        {/if}
                     {/if}
                     <footer id="media_file_meta_{$file.id}" class="media_file_meta additional_info">
                         <ul class="plainList">
@@ -114,7 +103,6 @@
             <ul class="media_file_actions actions plainList clearfix">
                 <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
             {if $file.is_editable}
-                <li><a class="media_fullsize button_link" href="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}"><span class="icon-resize-full-alt"></span><span class="visuallyhidden"> {$CONST.MEDIA_FULLSIZE}</span></a></li>
                 <li><button class="media_rename button_link" type="button" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></button></li>
                 {if $file.is_image AND NOT $file.hotlink}
                 <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fid]={$file.id}'" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
