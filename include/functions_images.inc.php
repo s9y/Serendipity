@@ -2172,7 +2172,11 @@ function serendipity_getThumbNailPath($sRelativePath, $sName, $sExtension, $sThu
     if (isset($aTempArray['thumbnail_filename'])) {
         $sThumbNailPath = $aTempArray['thumbnail_filename'];
     } else {
-        $sThumbNailPath = $sRelativePath . $sName . (!empty($sThumbName) ? '.' . $sThumbName : '') . '.' . $sExtension;
+        if ($sExtension) {
+            $sThumbNailPath = $sRelativePath . $sName . (!empty($sThumbName) ? '.' . $sThumbName : '') . '.' . $sExtension;
+        } else {
+            $sThumbNailPath = $sRelativePath . $sName . (!empty($sThumbName) ? '.' . $sThumbName : '');
+        }
     }
 
     return $sThumbNailPath;
@@ -2692,7 +2696,7 @@ function serendipity_checkPropertyAccess(&$new_media, &$additional, $mode = 'rea
  * Prepare a media item for showing
  *
  * @param  array    Array of image metadata
- * @param  string   URL for maintenance tasks
+ * @param  string   URL for maintenance tasks, set when using the ML for inserting images
  * @return bool
  *
  */
@@ -2705,8 +2709,11 @@ function serendipity_prepareMedia(&$file, $url = '') {
     }
 
     $sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
-    $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
-    $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
+    if (! $file['hotlink']) {
+        $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
+        $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
+    }
+
 
     $file['url'] = $url;
 
