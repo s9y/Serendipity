@@ -629,14 +629,14 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         $data['case_scaleSelect'] = true;
-        $s = getimagesize($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] .'.'. $file['extension']);
+        $s = getimagesize($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . ($file['extension'] ? '.'. $file['extension'] : ""));
         $data['img_width']  = $s[0];
         $data['img_height'] = $s[1];
 
         $data['print_RESIZE_BLAHBLAH'] = sprintf(RESIZE_BLAHBLAH, htmlspecialchars($serendipity['GET']['fname']));
         $data['print_ORIGINAL_SIZE']   = sprintf(ORIGINAL_SIZE, $s[0],$s[1]);
         $data['formtoken']             = serendipity_setFormToken();
-        $data['file']                  = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] .'.'. $file['extension'];
+        $data['file']                  = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] .($file['extension'] ? '.'. $file['extension'] : "");
         break;
 
     case 'choose':
