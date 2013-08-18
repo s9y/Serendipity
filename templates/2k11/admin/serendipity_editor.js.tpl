@@ -399,7 +399,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             // this function got called on load of the editor
             var toggleButton = '#toggle_' + id;
 
-            $('#'+id).before('<a id="toggle_' + id + '" class="button_link" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+            $('#'+id).before('<button class="button_link" id="toggle_' + id + '" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -769,7 +769,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
         $('.show_config_option').click(function(e) {
             var $el = $(this);
-            var $toggled = $el.attr('href');
+            if ($el.attr('href')) {
+                var $toggled= $el.attr('href');
+            } else {
+                var $toggled = $el.data('href');
+            }
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
             if($toggleState == 'icon-minus') {
@@ -782,7 +786,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         });
 
         $('#show_config_all').click(function(e) {
-            var $container = $(this).attr('href');
+            if ($(this).attr('href')) {
+                var $container = $(this).attr('href');
+            } else {
+                var $container = $(this).data('href');
+            }
             var $toggleIcon = $(this).find('span:first-child');
             var $toggleIcons = $($container).find('.show_config_option > span');
             var $toggleOption = $($container).find('.config_optiongroup');
@@ -919,13 +927,21 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Show media file info, template info, label info or filters
     $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
         var $el = $(this);
-        $($el.attr('href')).toggleClass('additional_info');
+        if ($el.attr('href')) {
+            $($el.attr('href')).toggleClass('additional_info');
+        } else {
+            $($el.data('href')).toggleClass('additional_info');
+        }
         $el.toggleClass('active');
         e.preventDefault();
     });
 
     $('.toggle_info').click(function(e) {
-        $($(this).attr('href')).toggleClass('additional_info');
+        if ($(this).attr('href')) {
+            $($(this).attr('href')).toggleClass('additional_info');
+        } else {
+            $($(this).data('href')).toggleClass('additional_info');
+        }
         e.preventDefault();
     });
 
@@ -995,7 +1011,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Show extended comment
     $('.toggle_comment_full').click(function(e) {
         var $el = $(this);
-        var $toggles = $($el.attr('href'));
+        if ($el.attr('href')) {
+            var $toggles = $($el.attr('href'));
+        } else {
+            var $toggles = $($el.data('href'));
+        }
         $toggles.toggleClass('additional_info');
         $toggles.prev().toggleClass('additional_info');
         var $toggleIcon = $el.find('> span');

@@ -410,6 +410,7 @@ nav ol {
 .icon_link,
 #insert_image,
 form > a,
+form > button,
 #user_menu li,
 .edit_actions li,
 .actions li,
@@ -480,7 +481,8 @@ table,
 details,
 .standalone,
 .form_buttons,
-form > a {
+form > a,
+form > button {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -571,7 +573,8 @@ input[type="button"] {
 
 .state_submit,
 .state_submit:visited,
-input[type="submit"] {
+input[type="submit"],
+button[type="submit"] {
     background: #468847;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(100%, #468847));
     background-image: -webkit-linear-gradient(#63af64, #468847);
@@ -608,7 +611,8 @@ input[type="button"]:hover {
 
 .state_submit:hover,
 .state_submit:focus,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+button[type="submit"]:hover {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #519e52), color-stop(100%, #3b723c));
     background-image: -webkit-linear-gradient(#63af64, #519e52 1px, #3b723c);
     background-image: -moz-linear-gradient(#63af64, #519e52 1px, #3b723c);
@@ -645,7 +649,8 @@ input[type="button"]:active {
 }
 
 .state_submit:active,
-input[type="submit"]:active {
+input[type="submit"]:active
+button[type="submit"]:active {
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #63af64), color-stop(1px, #468847), color-stop(100%, #519e52));
     background-image: -webkit-linear-gradient(#63af64, #468847 1px, #519e52);
     background-image: -moz-linear-gradient(#63af64, #468847 1px, #519e52);
@@ -676,11 +681,14 @@ a.button_link.state_cancel:hover,
 a.button_link.state_cancel:focus,
 a.button_link.state_cancel:active,
 input[type="submit"],
+button[type="submit"],
 input[type="reset"],
 input[type="submit"]:hover,
 input[type="reset"]:hover,
+button[type="submit"]:hover,
 input[type="submit"]:focus,
-input[type="reset"]:focus {
+input[type="reset"]:focus,
+button[type="submit"]:focus {
     color: #fafafa;
     text-shadow: #050505 0 1px 1px;
 }
@@ -1281,7 +1289,6 @@ summary {
 }
 
 #reset_timestamp {
-    max-height: 1.25em;
     right: 0;
 }
 
@@ -1777,6 +1784,9 @@ form > .button_link:first-of-type,
 .pluginmanager  .pluginmanager_grablet {
     cursor: move;
     display: block;
+}
+.pluginmanager_grablet button {
+    cursor: move;
 }
 
 .pluginmanager .pluginmanager_grablet,

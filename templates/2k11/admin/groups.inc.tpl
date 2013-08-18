@@ -16,18 +16,14 @@
         <li class="clearfix {cycle values="odd,even"}">
             <span class="group_name"><span class="icon-users"></span> {$group.name|escape:"html"}</span>
             <ul class="plainList clearfix edit_actions">
-                <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                <li><a class="button_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                <li><a class="icon_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                <li><a class="icon_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>
         </li>
     {/foreach}
     </ul>
     {if $start}
-    <form action="?serendipity[adminModule]=groups" method="post">
-        <div class="form_buttons">
-            <input name="NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
-        </div>
-    </form>
+        <a href="?serendipity[adminModule]=groups&serendipity[adminAction]=new">{$CONST.CREATE_NEW_GROUP}</a>
     {/if}
 {/if}
 
@@ -113,9 +109,9 @@
             <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
             <div class="form_buttons">
-            {if $edit}
-                <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
-            {/if}
+                {if $edit}
+                    <input name="SAVE_EDIT" type="submit" value="{$CONST.SAVE}">
+                {/if}
                 <input name="SAVE_NEW" type="submit" value="{$CONST.CREATE_NEW_GROUP}">
             </div>
     </form>

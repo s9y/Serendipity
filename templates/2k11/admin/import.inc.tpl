@@ -25,7 +25,7 @@
                 </dl>
 
                 <div class="form_buttons">
-                    <input type="submit" value="{$CONST.IMPORT_NOW}">
+                    <button type="submit">{$CONST.IMPORT_NOW}</button>
                 </div>
             </form>
         {/if}

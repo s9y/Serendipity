@@ -11,7 +11,14 @@
     {foreach $config as $category}
         <div class="configuration_group">
         {if $config|@sizeof > 1}
-            <h3>{if $allowToggle}<a id="optionel{$category@iteration}" class="show_config_option" href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$category.title}</a>{else}{$category.title}{/if}</h3>
+            {if $allowToggle}
+                <h3 class="toggle_headline">
+                    <button id="optionel{$category@iteration}" class="show_config_option icon_link" href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$category.title}</button>
+                </h3>
+            {else}
+                <h3>{$category.title}</h3>
+            {/if}
+            
         {/if}
             <fieldset id="el{$category@index}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info option_list">
                 <legend class="visuallyhidden">{$category.description}</legend>
@@ -20,7 +27,7 @@
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix {$zebra_class}">
-                    <legend><span>{$item.title}{if $item.description != ''} <a class="toggle_info" href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a>{/if}</span></legend>
+                    <legend><span>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</span></legend>
                     <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>
@@ -30,7 +37,7 @@
                 </fieldset>
                 {else}
                 <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
-                    <label for="{$item.var}">{$item.title}{if $item.description != ''} <a class="toggle_info" href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a>{/if}</label>{* i18n *}
+                    <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</label>{* i18n *}
                     {$item.guessedInput}
                     {if $item.description != ''}
                     <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
