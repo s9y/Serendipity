@@ -172,7 +172,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
     // Opens media db image selection in new window
     serendipity.choose_media = function(id) {
-        window.open('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true', 'ImageSel', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        serendipity.openPopup('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
     }
 
     // "Transfer" value from media db popup to form element, used for example for selecting a category-icon
@@ -277,12 +277,17 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             imgWidth  = f['imgThumbWidth'].value;
             imgHeight = f['imgThumbHeight'].value;
         }
-            
+
+        if (parent.self.opener == undefined) {
+            // in iframes, there is no opener, and the magnific popup is wrapped
+            parent.self = window.parent.parent.$.magnificPopup;
+            parent.self.opener = window.parent.parent;
+        }
 
         if (f['serendipity[filename_only]']) {
             // this part is used when selecting only the image without further markup (-> category-icon)
             var starget = f['serendipity[htmltarget]'] ? f['serendipity[htmltarget]'].value : 'serendipity[' + textarea + ']';
-
+            
             switch(f['serendipity[filename_only]'].value) {
             case 'true':
                 parent.self.opener.serendipity.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
@@ -355,15 +360,9 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
                   +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
                   + '</div>';
         }
-        {if $use_popups}
-            parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
-            parent.self.close();
-        {else}
-            // in iframes, there is no opener, and the magnific popup is wrapped
-            window.parent.parent.serendipity.serendipity_imageSelector_addToBody(img, textarea);
-            window.parent.parent.$.magnificPopup.close()
-        {/if}
-        
+
+        parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
+        parent.self.close();
     }
 
     // Toggle extended entry editor
@@ -892,13 +891,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
     if($('body').has('#category_icon').size() > 0) {
-        $('<button id="insert_image" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
+        $('<button id="insert_image" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
     }
 
     $('#insert_image').click(function(e) {
-        window.open('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[htmltarget]=category_icon&serendipity[filename_only]=true',
-                        'ImageSel',
-                        'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[htmltarget]=category_icon&serendipity[filename_only]=true');
     });
 
     $('#category_icon').change(function() {

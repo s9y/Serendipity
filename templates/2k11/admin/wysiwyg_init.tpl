@@ -7,18 +7,7 @@
             init: function( editor ) {
                 editor.addCommand( 'openML', {
                     exec : function( editor ) {
-                        {if $use_popups}
-                            window.open('serendipity_admin_image_selector.php?serendipity[textarea]={$item}',
-                                     'ImageSel',
-                                     'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
-                        {else}
-                            $.magnificPopup.open({
-                              items: {
-                                src: 'serendipity_admin_image_selector.php?serendipity[textarea]={$item}'
-                              },
-                              type: 'iframe'
-                            });
-                        {/if}
+                        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[textarea]={$item}');
                     }
                 });
                 editor.ui.addButton('s9y_medialibrary{$item}', {
@@ -26,6 +15,7 @@
                     command: 'openML',
                     icon: '{serendipity_getFile file="admin/img/thumbnail.png"}'
                 });
+                
             }
         });
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {

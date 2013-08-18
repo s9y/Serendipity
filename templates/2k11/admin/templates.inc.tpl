@@ -22,6 +22,7 @@
         <p>{$CONST.STYLE_OPTIONS_NONE}</p>
     {/if}
     </section>
+    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {else}
     <section id="template_select">
         {assign var="cur_tpl" value=$templates[$cur_template]}
