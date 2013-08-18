@@ -198,7 +198,7 @@ if (function_exists('get_include_path')) {
 }
 
 
-require_once("bundled_libs/autoload.php");
+require_once("bundled-libs/autoload.php");
 
 $new_include = ($serendipity['use_PEAR'] ? $old_include . PATH_SEPARATOR : '')
              . S9Y_INCLUDE_PATH . 'bundled-libs/' . PATH_SEPARATOR
