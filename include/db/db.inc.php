@@ -11,6 +11,8 @@ if ($serendipity['dbType'] == 'mysql' && (version_compare(PHP_VERSION, '5.5.0') 
 if (@include(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php")) {
     @define('S9Y_DB_INCLUDED', TRUE);
 }
+#include_once(S9Y_INCLUDE_PATH . "include/db/generic.inc.php");
+#define('S9Y_DB_INCLUDED', TRUE);
 
 /**
  * Perform a query to update the data of a certain table row
