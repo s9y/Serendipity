@@ -14,21 +14,22 @@ $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $ser
 $summaryLength = 200;
 
 $errormsg = '';
+$msg = '';
 
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
     if ($serendipity['POST']['togglemoderate'] != '') {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
             $ac = serendipity_approveComment($k, $v, false, 'flip');
             if ($ac > 0) {
-                $errormsg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k);
+                $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k);
             } else {
-                $errormsg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k);
+                $msg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k);
             }
         }
     } else {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
-             serendipity_deleteComment($k, $v);
-            $errormsg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$k);
+            serendipity_deleteComment($k, $v);
+            $msg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$k);
         }
     }
 }
@@ -47,7 +48,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
                   entry_id = " . (int)$serendipity['POST']['entry_id'];
     serendipity_db_query($sql);
     serendipity_plugin_api::hook_event('backend_updatecomment', $serendipity['POST'], $serendipity['GET']['id']);
-    $errormsg .= COMMENT_EDITED;
+    $msg .= COMMENT_EDITED;
 }
 
 /* Submit a new comment */
@@ -87,7 +88,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
         $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id']);
-        $errormsg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
+        $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
     }
 }
 
@@ -103,14 +104,14 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
         $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id'], true, true);
-        $errormsg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
+        $msg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
     }
 }
 
 /* We are asked to delete a comment */
 if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'delete' && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
-    $errormsg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
+    $msg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
 }
 
 /* We are either in edit mode, or preview mode */
@@ -361,58 +362,9 @@ if(is_array($sql)) {
     }
 }
 
-/* This could be used instead, as i.e. there is no need for summary body here, as strip_tags, nl2br, etc could be done via smarty in the tpl - see dashboard PoC */
-/* $class and $header_class would not be needed either, ... */
-/**
-    function buildCommentList($limit) {
-        global $serendipity;
-        
-        $comments = serendipity_fetchComments(null, $limit, 'co.id DESC', true, 'NORMAL', '');
-        
-        if (!is_array($comments) || count($comments) == 0) {
-            return;
-        }
-
-        $comment = array();
-        foreach ($sql as $rs) {
-            $comment[] = array(
-                'body'       => htmlspecialchars($rs['body']),
-                'status'     => $rs['status'],
-                'type'       => $rs['type'],
-                'id'         => $rs['id'],
-                'title'      => htmlspecialchars($rs['title']),
-                'timestamp'  => $rs['timestamp'],
-                'pubdate'    => date("c", (int)$rs['timestamp']),
-                'referer'    => htmlspecialchars($rs['referer']),
-                'url'        => htmlspecialchars($rs['url']),
-                'ip'         => htmlspecialchars($rs['ip']),
-                'entry_url'  => serendipity_archiveURL($rs['entry_id'], htmlspecialchars($rs['title'])),
-                'email'      => htmlspecialchars($rs['email']),
-                'author'     => (empty($rs['author']) ? ANONYMOUS : htmlspecialchars($rs['author'])),
-                'entry_id'   => $rs['entry_id'],
-                'subscribed' => $rs['subscribed'],
-                'entrylink'  => serendipity_archiveURL($rs['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $rs['id'],
-                'excerpt'    => ((strlen($rs['body']) > serendipity_mb('substr', $rs['body'], 0, $summaryLength) ) ? true : false),
-                'delete_id'  => sprintf(COMMENT_DELETE_CONFIRM, $rs['id'], htmlspecialchars($rs['author']))
-            );
-
-            if (!empty($comment['url']) && substr($comment['url'], 0, 7) != 'http://' && substr($comment['url'], 0, 8) != 'https://') {
-                $comment['url'] = 'http://' . $comment['url'];
-            }
-        }
-
-        serendipity_plugin_api::hook_event('backend_view_comment', $comment, '&amp;serendipity[page]='. $page . $searchString);
-
-        $serendipity['smarty']->assign(
-                        array(  'urltoken'  => serendipity_setFormToken('url'),
-                                'formtoken' => serendipity_setFormToken()
-                            ));
-        return $comment;
-    }
-**/
-
 $data['comments']      = $comments;
 $data['errormsg']      = $errormsg;
+$data['msg']           = $msg;
 $data['urltoken']      = serendipity_setFormToken('url');
 $data['formtoken']     = serendipity_setFormToken();
 $data['get']['filter'] = $serendipity['GET']['filter']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime

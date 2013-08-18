@@ -1,5 +1,8 @@
 {if !empty($errormsg)}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$errormsg}</span>
+    <span class="msg_error"><span class="icon-attention"></span> {$errormsg}</span>
+{/if}
+{if !empty($msg)}
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$msg}</span>
 {/if}
 {if $commentReplied}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.COMMENT_ADDED}</span>
