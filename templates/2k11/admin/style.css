@@ -724,6 +724,11 @@ input[type="url"] {
     height: 1.8em;
 }
 
+input[type="datetime-local"]::-webkit-clear-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 input[type="date"][disabled],
 input[type="datetime"][disabled],
 input[type="datetime-local"][disabled],
@@ -968,6 +973,9 @@ h3 {
     font-size: 1.28571em;
     line-height: 1.16667em;
     margin: 1.16667em 0;
+}
+h3.toggle_headline {
+    font-size: 1em;
 }
 
 h4,
