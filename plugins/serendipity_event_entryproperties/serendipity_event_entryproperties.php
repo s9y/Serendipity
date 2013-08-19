@@ -592,7 +592,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         $page = (isset($serendipity['GET']['page']) ? $serendipity['GET']['page'] : 1);
                         $from = ($page-1)*$per_fetch;
                         $to   = ($page)*$per_fetch;
-                        printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNO, $from, $to);
+                        printf('<h2>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNO, $from, $to);
                         $entries = serendipity_fetchEntries(
                             null,
                             true,
@@ -605,21 +605,21 @@ class serendipity_event_entryproperties extends serendipity_event
                         );
 
                         $total = serendipity_getTotalEntries();
-                        printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL . '<br />', $total);
+                        printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL  . '</h2>', $total);
 
                         if (is_array($entries)) {
+                            echo '<ul class="plainList">';
                             foreach($entries AS $idx => $entry) {
-                                printf(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_BUILDING . '<br />', $entry['id'], htmlspecialchars($entry['title']));
+                                printf('<li>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_BUILDING, $entry['id'], htmlspecialchars($entry['title']));
                                 $this->updateCache($entry);
-                                echo PLUGIN_EVENT_ENTRYPROPERTIES_CACHED . '<br /><br />';
+                                echo ' ' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHED . '</li>';
                             }
+                            echo '</ul>';
                         }
-
-                        echo '<br />';
 
                         if ($to < $total) {
 ?>
-                        <script type="text/javascript">
+                        <script>
                             if (confirm("<?php echo htmlspecialchars(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNEXT); ?>")) {
                                 location.href = "?serendipity[adminModule]=event_display&serendipity[adminAction]=buildcache&serendipity[page]=<?php echo ($page+1); ?>";
                             } else {
@@ -628,7 +628,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         </script>
 <?php
                         } else {
-                            echo '<div class="serendipity_msg_notice">' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</div>';
+                            echo '<span class="msg_notice">' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
                         }
                     }
                     return true;
