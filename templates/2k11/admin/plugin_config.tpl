@@ -1,7 +1,7 @@
 {if $showSubmit_head}
     <div class="form_buttons">
         {if $postKey == "template"}
-        <a class="admin_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        <a href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
         {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
@@ -35,7 +35,7 @@
 {if $showSubmit_foot}
     <div class="form_buttons">
         {if $postKey == "template"}
-        <a class="admin_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
+        <a href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
         {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
