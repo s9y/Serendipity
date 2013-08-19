@@ -1598,6 +1598,11 @@ form > .button_link:first-of-type,
     max-width: 85%;
 }
 
+.toggle_headline > button {
+    text-align: left;
+    width: 100%;
+}
+
 #entries_list > li,
 #serendipity_comments_list > li,
 #categories li > div,
