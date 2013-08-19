@@ -974,9 +974,6 @@ h3 {
     line-height: 1.16667em;
     margin: 1.16667em 0;
 }
-h3.toggle_headline {
-    font-size: 1em;
-}
 
 h4,
 #diagnose caption {
@@ -985,6 +982,7 @@ h4,
     margin: 1.3125em 0;
 }
 
+.toggle_headline,
 h5,
 h6 {
     font-size: 1em;
