@@ -22,7 +22,21 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
         $data['not_authorized'] = true;
     } elseif (empty($_POST['username'])) {
         $data['empty_username'] = true;
-    } elseif (!empty($_POST['password']) && $_POST['check_password'] != $_SESSION['serendipityPassword'] && serendipity_passwordhash($_POST['check_password']) != $_SESSION['serendipityPassword']) {
+    } elseif (  (!empty($_POST['password'])
+                    &&
+                !empty($_POST['check_password'])
+                    && 
+                $_POST['check_password'] != $_SESSION['serendipityPassword']
+                    && 
+                serendipity_passwordhash($_POST['check_password']) != $_SESSION['serendipityPassword'])
+                ||
+                (!empty($_POST['password'])
+                    &&
+                empty($_POST['check_password'])
+                    &&
+                $_POST['password'] != $_SESSION['serendipityPassword']
+                    &&
+                serendipity_passwordhash($_POST['password']) != $_SESSION['serendipityPassword']) ) {
          $data['password_check_fail'] = true;
     } else {
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
