@@ -21,6 +21,8 @@ Version 1.7.3 ()
     * Trackback to https:// style URLs will use proper port 443 instead
       of 80.
 
+    * Disabled htmlarea spellchecker
+    
 Version 1.7.2 (July 26th 2013)
 ------------------------------------------------------------------------
 

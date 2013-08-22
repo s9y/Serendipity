@@ -1,4 +1,5 @@
 <?php
+die('disabled in s9y');
   require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'aspell_setup.php');
 
 
