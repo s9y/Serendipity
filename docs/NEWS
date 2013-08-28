@@ -15,13 +15,14 @@ Version 2.0 ()
 
     * Use Smarty for backend display output
 
-Version 1.7.3 ()
+Version 1.7.3 (August 28th, 2013)
 ------------------------------------------------------------------------
 
     * Trackback to https:// style URLs will use proper port 443 instead
       of 80.
 
-    * Disabled htmlarea spellchecker
+    * Disabled htmlarea spellchecker module, http://osvdb.org/87395
+      Thanks for Henri Salo for pointing this out.
     
 Version 1.7.2 (July 26th 2013)
 ------------------------------------------------------------------------
@@ -29,7 +30,7 @@ Version 1.7.2 (July 26th 2013)
     * Fix a syntax error in the "mysql" deprecation code, thanks
       to Ian
 
-Version 1.7.1 ()
+Version 1.7.1 (July 26th 2013)
 ------------------------------------------------------------------------
 
     * Added new event hooks "backend_plugins_install", "backend_plugins_update"
