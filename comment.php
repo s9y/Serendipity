@@ -27,9 +27,9 @@ if (!empty($_REQUEST['c']) && !empty($_REQUEST['hash'])) {
     $serendipity['view'] = 'notification';
     $serendipity['GET']['action'] = 'custom';
     $serendipity['smarty_custom_vars'] = array(
-        'content_message'       => ($res ? NOTIFICATION_CONFIRM_MAIL : NOTIFICATION_CONFIRM_MAIL_FAIL),
-        'subscribe_confirm_error'                => !$res,
-        'subscribe_confirm_success'              => $res,
+        'content_message'           => ($res ? NOTIFICATION_CONFIRM_MAIL : NOTIFICATION_CONFIRM_MAIL_FAIL),
+        'subscribe_confirm_error'   => !$res,
+        'subscribe_confirm_success' => $res,
     );
     include S9Y_INCLUDE_PATH . 'include/genpage.inc.php';
     $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
@@ -41,9 +41,9 @@ if (!empty($_REQUEST['optin'])) {
     $serendipity['view'] = 'notification';
     $serendipity['GET']['action'] = 'custom';
     $serendipity['smarty_custom_vars'] = array(
-        'content_message'       => ($res ? NOTIFICATION_CONFIRM_SUBMAIL : NOTIFICATION_CONFIRM_SUBMAIL_FAIL),
-        'subscribe_confirm_error'                => !$res,
-        'subscribe_confirm_success'              => $res,
+        'content_message'           => ($res ? NOTIFICATION_CONFIRM_SUBMAIL : NOTIFICATION_CONFIRM_SUBMAIL_FAIL),
+        'subscribe_confirm_error'   => !$res,
+        'subscribe_confirm_success' => $res,
     );
     include S9Y_INCLUDE_PATH . 'include/genpage.inc.php';
     $serendipity['smarty']->display(serendipity_getTemplateFile('index.tpl', 'serendipityPath'));
