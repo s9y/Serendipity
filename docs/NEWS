@@ -1,12 +1,13 @@
 # $Id$
 
-Version 1.7.3 ()
+Version 1.7.3 (August 28th, 2013)
 ------------------------------------------------------------------------
 
     * Trackback to https:// style URLs will use proper port 443 instead
       of 80.
 
-    * Disabled htmlarea spellchecker module
+    * Disabled htmlarea spellchecker module, http://osvdb.org/87395
+      Thanks for Henri Salo for pointing this out.
           
 Version 1.7.2 (July 26th 2013)
 ------------------------------------------------------------------------
