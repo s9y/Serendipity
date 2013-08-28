@@ -1,4 +1,11 @@
-# $Id$
+#
+
+Version trunk master ()
+------------------------------------------------------------------------
+
+    * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
+
+
 
 Version 1.7.3 (August 28th, 2013)
 ------------------------------------------------------------------------
