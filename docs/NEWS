@@ -3,6 +3,8 @@
 Version trunk master ()
 ------------------------------------------------------------------------
 
+    * Fixed pagination when searching terms with fetchlimit < 4
+
     * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
 
 
