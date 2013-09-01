@@ -1,11 +1,11 @@
-# $Id$
+#
 
 Version 2.0 ()
 ------------------------------------------------------------------------
 
-      
+
     * Implemented patch https://github.com/s9y/Serendipity/pull/15
-    
+
     * When switching templates, both the backend and the frontend
       will remember the timestamp of the last template change,
       to make sure that the browser will not cache a mismatching CSS.
@@ -15,6 +15,17 @@ Version 2.0 ()
 
     * Use Smarty for backend display output
 
+
+
+Version 1.7.4 ()
+------------------------------------------------------------------------
+
+    * Fixed pagination when searching terms with fetchlimit < 4
+
+    * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
+
+
+
 Version 1.7.3 (August 28th, 2013)
 ------------------------------------------------------------------------
 
@@ -23,7 +34,7 @@ Version 1.7.3 (August 28th, 2013)
 
     * Disabled htmlarea spellchecker module, http://osvdb.org/87395
       Thanks for Henri Salo for pointing this out.
-    
+
 Version 1.7.2 (July 26th 2013)
 ------------------------------------------------------------------------
 
