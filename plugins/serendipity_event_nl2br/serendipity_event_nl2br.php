@@ -1,5 +1,6 @@
-<?php # $Id$
-# serendipity_event_nl2br.php 2012-04-21 16:11:00 ian $
+<?php #
+
+# serendipity_event_nl2br.php 2013-08-28 Ian $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -15,7 +16,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.16');
+        $propbag->add('version',       '2.17');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -153,7 +154,15 @@ class serendipity_event_nl2br extends serendipity_event
 
     function restore($text) {
         global $_buf;
-        return preg_replace('~\001(\d+)~e', '$_buf[$1]', $text);
+        // Define our callback here and import $_buf into its scope ...
+        if (version_compare(PHP_VERSION, '5.4') >= 0) {
+            // As of PHP 5.5 deprecated /e modifier we define our callback here and import $_buf into its scope ...
+            $callback = function ($matches) use ($_buf) { return $_buf[$matches[1]]; }; // this works!
+            return preg_replace_callback('!\001(\d+)!', $callback, $text);
+            ##return preg_replace_callback('!\001(\d+)!', array($this, 'restore'), $text); // NOT working - should be somehow else
+        } else {
+            return preg_replace('~\001(\d+)~e', '$_buf[$1]', $text);
+        }
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null) {
