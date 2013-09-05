@@ -1,12 +1,11 @@
 #
 
-Version trunk master ()
+Version 1.7.4 ()
 ------------------------------------------------------------------------
 
     * Fixed pagination when searching terms with fetchlimit < 4
 
     * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
-
 
 
 Version 1.7.3 (August 28th, 2013)
@@ -16,7 +15,7 @@ Version 1.7.3 (August 28th, 2013)
       of 80.
 
     * Disabled htmlarea spellchecker module, http://osvdb.org/87395
-      Thanks for Henri Salo for pointing this out.
+      Thanks for Henri Salo for pointing this out. CVE-2013-5670
 
 Version 1.7.2 (July 26th 2013)
 ------------------------------------------------------------------------
