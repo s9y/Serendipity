@@ -212,7 +212,7 @@ if (function_exists('set_include_path')) {
     $use_include = @ini_set('include_path', $new_include);
 }
 
-if ($use_include !== $false && $use_include == $new_include) {
+if ($use_include !== false && $use_include == $new_include) {
     @define('S9Y_PEAR',      true);
     @define('S9Y_PEAR_PATH', '');
 } else {
