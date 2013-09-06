@@ -8,7 +8,7 @@ if (defined('S9Y_FRAMEWORK')) {
 
 @define('S9Y_FRAMEWORK', true);
 
-if (!headers_sent()) {
+if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
         session_name('s9y_' . md5(dirname(__FILE__)));
@@ -312,7 +312,7 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
  * If a user is logged in, fetch his preferences. He possibly wants to have a different language
  */
 
-if (IS_installed === true) {
+if (IS_installed === true && php_sapi_name() !== 'cli') {
     // Import HTTP auth (mostly used for RSS feeds)
     if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
