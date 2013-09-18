@@ -102,7 +102,7 @@
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
     </div>
 
-    <fieldset>
+    <fieldset id="advanced_options">
         <legend><span>{$CONST.ADVANCED_OPTIONS}</span></legend>
         {$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}
     </fieldset>

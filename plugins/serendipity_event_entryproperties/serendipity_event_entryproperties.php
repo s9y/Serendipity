@@ -632,7 +632,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         </script>
 <?php
                         } else {
-                            echo '<span class="msg_notice">' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
+                            echo '<span class="msg_notice"><span class="icon-info-circled"></span>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
                         }
                     }
                     return true;
