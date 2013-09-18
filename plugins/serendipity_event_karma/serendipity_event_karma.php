@@ -1513,26 +1513,45 @@ END_IMG_CSS;
 
                     // Filters
                     print("
-<form action='' method='get' name='karmafilters' id='karmafilters'>
-  <input type='hidden' name='serendipity[adminModule]' value='{$serendipity['GET']['adminModule']}' />
-  <input type='hidden' name='serendipity[adminAction]' value='{$serendipity['GET']['adminAction']}' />
-<table class='serendipity_admin_filters' width='100%'>
-<tr>
-  <td colspan='4' class='serendipity_admin_filters_headline'><strong>".FILTERS."</strong></td>
-</tr>
-<tr>
-  <td>User Agent:</td>
-  <td><input class='input_textbox' type='text' name='serendipity[filter][user_agent]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['user_agent'])."' /></td>
-  <td>".IP."</td>
-  <td><input class='input_textbox' type='text' name='serendipity[filter][ip]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['ip'])."' /></td>
-</tr>
-<tr>
-  <td>Entry ID:</td>
-  <td><input class='input_textbox' type='text' name='serendipity[filter][entryid]' size='15' value='".htmlspecialchars($serendipity['GET']['filter']['entryid'])."' /></td>
-  <td>Entry title:</td>
-  <td><input class='input_textbox' type='text' name='serendipity[filter][title]' size='30' value='".htmlspecialchars($serendipity['GET']['filter']['title'])."' /></td>
-</tr>
-</table>
+<h2>".PLUGIN_KARMA_DISPLAY_LOG."</h2>
+<form id='karmafilters' name='karmafilters' action='' method='get'>
+    <input name='serendipity[adminModule]' type='hidden' value='{$serendipity['GET']['adminModule']}'>
+    <input name='serendipity[adminAction]' type='hidden' value='{$serendipity['GET']['adminAction']}'>
+
+    <ul class='filters_toolbar clearfix plainList'>
+        <li><a class='button_link' href='#serendipity_admin_filters' title='".FILTERS."'><span class='icon-filter'></span><span class='visuallyhidden'> ".FILTERS."</span></a></li>
+        <li><a class='button_link' href='#serendipity_admin_sort' title='".SORT_ORDER."'><span class='icon-sort'></span><span class='visuallyhidden'> ".SORT_ORDER."</span></a></li>
+    </ul>
+
+    <fieldset id='serendipity_admin_filters' class='additional_info'>
+        <legend><span class='visuallyhidden'>".FILTERS."</span></legend>
+
+        <div class='clearfix'>
+            <div class='form_field'>
+                <label for='serendipity_filter_useragent'>User Agent</label>
+                <input id='serendipity_filter_useragent' name='serendipity[filter][user_agent]' type='text' value='".htmlspecialchars($serendipity['GET']['filter']['user_agent'])."'>
+            </div>
+
+            <div class='form_field'>
+                <label for='serendipity_filter_ip'>".IP."</label>
+                <input id='serendipity_filter_ip' name='serendipity[filter][ip]' type='text' value='".htmlspecialchars($serendipity['GET']['filter']['ip'])."'>
+            </div>
+
+            <div class='form_field'>
+                <label for='serendipity_filter_entryid'>Entry ID</label>
+                <input id='serendipity_filter_entryid' name='serendipity[filter][entryid]' type='text' value='".htmlspecialchars($serendipity['GET']['filter']['entryid'])."'>
+            </div>
+
+            <div class='form_field'>
+                <label for='serendipity_filter_title'>Entry title</label>
+                <input id='serendipity_filter_title' name='serendipity[filter][title]' type='text' value='".htmlspecialchars($serendipity['GET']['filter']['title'])."'>
+            </div>
+        </div>
+
+        <div class='form_buttons'>
+            <input name='submit' type='submit' value='".GO."'>
+        </div>
+    </fieldset>
 ");
                     // Set all filters into $and and $searchString
                     if (!empty($serendipity['GET']['filter']['entryid'])) {
@@ -1574,8 +1593,13 @@ END_IMG_CSS;
                         $orderby = 'votetime ' . serendipity_db_escape_string($serendipity['GET']['sort']['ordermode']);
                     }
                     print("
-<div>".SORT_BY."
-<select name='serendipity[sort][order]'>
+    <fieldset id='serendipity_admin_sort' class='additional_info'>
+        <legend><span class='visuallyhidden'>".SORT_ORDER."</span></legend>
+
+        <div class='clearfix'>
+            <div class='form_select'>
+                <label for='serendipity_sort_order'>".SORT_BY."</label>
+                <select id='serendipity_sort_order' name='serendipity[sort][order]'>
 ");
                     foreach($sort_order as $order => $val) {
                         print("
@@ -1583,13 +1607,21 @@ END_IMG_CSS;
 ");
                     }
                     print("
-</select>
-<select name='serendipity[sort][ordermode]'>
-  <option value='DESC'".($desc?"selected='selected'":'').">".SORT_ORDER_DESC."</option>
-  <option value='ASC'".($desc?'':"selected='selected'").">".SORT_ORDER_ASC."</option>
-</select>
-</div>
-<input type='submit' name='submit' value=' - ".GO." - ' class='serendipityPrettyButton input_button' /> 
+                </select>
+            </div>
+            <div class='form_select'>
+                <label for='serendipity_sort_ordermode'>".SORT_ORDER."</label>
+                <select id='serendipity_sort_ordermode' name='serendipity[sort][ordermode]'>
+                    <option value='DESC'".($desc?"selected='selected'":'').">".SORT_ORDER_DESC."</option>
+                    <option value='ASC'".($desc?'':"selected='selected'").">".SORT_ORDER_ASC."</option>
+                </select>
+            </div>
+        </div>
+
+        <div class='form_buttons'>
+            <input name='submit' type='submit' value='".GO."'>
+        </div>
+    </fieldset>
 </form>
 ");
 
