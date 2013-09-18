@@ -1402,11 +1402,7 @@ END_IMG_CSS;
                 // Display the Karma Log link on the sidebar
                 case 'backend_sidebar_entries':
 ?>
-<li class="serendipitySideBarMenuLink serendipitySideBarMenuEntryLinks">
-    <a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=karmalog">
-        <?php echo PLUGIN_KARMA_DISPLAY_LOG; ?>
-    </a>
-</li>
+<li><a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=karmalog"><?php echo PLUGIN_KARMA_DISPLAY_LOG; ?></a></li>
 <?php
                     return true;
                     break;
