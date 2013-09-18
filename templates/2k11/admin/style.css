@@ -429,6 +429,7 @@ form > button,
 .media_file h3,
 #media_pane_filter label,
 #media_pane_sort label,
+#karmafilters label,
 #image_directory_create_form label,
 #entries_list .entry_info span,
 .folder_name,
@@ -1105,6 +1106,7 @@ summary {
 #filter_entries .form_field label,
 #media_pane_filter label,
 #media_pane_sort label,
+#karmafilters label,
 #image_directory_create_form label {
     width: 20%;
 }
@@ -2768,7 +2770,8 @@ img.mfp-img {
     #filter_comments label,
     #serendipity_comment label,
     #media_pane_filter label,
-    #media_pane_sort label {
+    #media_pane_sort label,
+    #karmafilters label {
         display: block;
         width: auto;
     }
@@ -2789,7 +2792,9 @@ img.mfp-img {
     }
 
     #edit_entry_metadata > div,
-    #edit_entry_submit > div {
+    #edit_entry_submit > div,
+    #karmafilters .form_field,
+    #karmafilters .form_select {
         float: left;
         width: 50%;
     }
@@ -2848,7 +2853,9 @@ img.mfp-img {
     #filter_entries .form_field input,
     #media_filter input,
     #media_filter select,
-    #media_pane_sort select {
+    #media_pane_sort select,
+    #karmafilters .form_field input,
+    #karmafilters .form_select select {
         width: 85%;
     }
 
