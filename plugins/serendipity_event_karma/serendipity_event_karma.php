@@ -1423,32 +1423,32 @@ END_IMG_CSS;
                             // posted points
                             $ppoints = $kdata['points'];
                             if (!is_numeric($ppoints) || ((int)$ppoints < -2) || ((int)$ppoints > 2)) {
-                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                print("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_INVALID_INPUT."</span>\n");
                                 return false;
                             }
                             // posted id
                             $pid = $kdata['entryid'];
                             if (!is_numeric($pid)) {
-                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                print("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_INVALID_INPUT."</span>\n");
                                 return false;
                             }
                             // posted IP
                             $pip = long2ip(ip2long($kdata['ip']));
                             if ($pip == -1 || $pip === FALSE) {
-                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                print("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_INVALID_INPUT."</span>\n");
                                 return false;
                             }
                             // posted user agent (need a better validator, I think)
                             $puser_agent = $kdata['user_agent'];
                             if (serendipity_db_escape_string($puser_agent) != $puser_agent) {
-                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                print("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_INVALID_INPUT."</span>\n");
                                 return false;
                             }
                             // posted vote time
                             $pvotetime = $kdata['votetime'];
                             $unixsecs = date('U', $kdata['votetime']);
                             if ($pvotetime != $unixsecs) {
-                                print("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_INVALID_INPUT."</div>\n");
+                                print("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_INVALID_INPUT."</span>\n");
                                 return false;
                             }
 
@@ -1474,13 +1474,13 @@ END_IMG_CSS;
                                         );
                                     $updated = serendipity_db_query($update);
                                     if ($updated != 1) {
-                                        printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_REMOVE_ERROR."</div>\n", $pid);
+                                        printf("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_REMOVE_ERROR."</span>\n", $pid);
                                         // Don't delete from karma log if we couldn't take away the points
                                         continue;
                                     }
                                 } else {
                                     // This will only happen if someone is messing with the karma table or submit data
-                                    printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_UPDATE_ERROR."</div>", $pid);
+                                    printf("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_UPDATE_ERROR."</span>", $pid);
                                     continue;
                                 }
                             }
@@ -1498,12 +1498,12 @@ END_IMG_CSS;
                             // User feedback
                             if ($deleted == 1) {
                                 if ($serendipity['POST']['delete_button']) {
-                                    printf("<div class='serendipityAdminMsgSuccess'>".PLUGIN_KARMA_REMOVED_POINTS."</div>\n", $ppoints, $pid);
+                                    printf("<span class='msg_success'><span class='icon-ok-circled'></span> ".PLUGIN_KARMA_REMOVED_POINTS."</span>\n", $ppoints, $pid);
                                 } else {
-                                    printf("<div class='serendipityAdminMsgSuccess'>".PLUGIN_KARMA_APPROVED_POINTS."</div>\n", $ppoints, $pid);
+                                    printf("<span class='msg_success'><span class='icon-ok-circled'></span> ".PLUGIN_KARMA_APPROVED_POINTS."</span>\n", $ppoints, $pid);
                                 }
                             } else {
-                                printf("<div class='serendipityAdminMsgError'>".PLUGIN_KARMA_REMOVE_ERROR."</div>\n", $pid);
+                                printf("<span class='msg_error'><span class='icon-attention-circled'></span> ".PLUGIN_KARMA_REMOVE_ERROR."</span>\n", $pid);
                             }
                         }
                     }
@@ -1725,7 +1725,7 @@ function invertSelection() {
 ");
                     } else {
                         print("
-<div class='serendipityAdminMsgNote msg_notice'>No entries to display.</div>
+<span class='msg_notice'><span class='icon-info-circled'></span> No entries to display.</span>
 ");
                     }
 
