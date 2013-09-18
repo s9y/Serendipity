@@ -862,7 +862,8 @@ input[type=checkbox],
 #filter_entries,
 #sort_entries,
 #s9y_links > ul,
-#serendipity_category .inputs {
+#serendipity_category .inputs,
+#serendipity_customfields textarea {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -1047,6 +1048,10 @@ summary {
     margin-right: .75em;
 }
 
+#serendipity_customfields label {
+    margin-right: 1em;
+}
+
 .category_data,
 .user_name,
 .group_name,
@@ -1058,7 +1063,8 @@ summary {
 .template_info dd,
 #entries_list .form_check,
 .pagination .prev,
-.pagination .next {
+.pagination .next,
+#serendipity_customfields textarea {
     float: left;
 }
 
@@ -1138,7 +1144,8 @@ summary {
 #uploadform .form_select select,
 #uploadform .form_field input,
 #login .form_field input,
-#diagnose > table {
+#diagnose > table,
+#advanced_options .form_multiselect select {
     width: 100%;
 }
 
@@ -1355,6 +1362,17 @@ fieldset p,
 .media_file .actions,
 .js #add_upload {
     margin-top: 1em;
+}
+
+#advanced_options {
+    margin-top: 2em;
+}
+
+#advanced_options > legend > span {
+    display: inline-block;
+    font-size: 1.28571em;
+    line-height: 1.16667em;
+    margin: 1.16667em 0;
 }
 
 .category_data {
@@ -2454,6 +2472,19 @@ img.mfp-img {
 
     .user_level {
         display: inline;
+    }
+
+    .entryproperties_access_groups,
+    .entryproperties_access_users,
+    .entryproperties_access_author,
+    .entryproperties_markup {
+        float: left;
+        margin-right: 2%;
+        width: 48%;
+    }
+
+    .entryproperties_customfields {
+        clear: both;
     }
 }
 
