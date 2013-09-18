@@ -459,12 +459,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
                         <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo htmlspecialchars($value); ?></textarea>
-                        <script>
-                            var epColumn       = document.getElementById('ep_column_<?php echo $fieldname; ?>');
-                            var epImgBtn       = document.createElement('span');
-                            epImgBtn.innerHTML = '<input type="button" name="insImage" value="<?php echo MEDIA ; ?>" onclick="window.open(\'serendipity_admin_image_selector.php?serendipity[htmltarget]=prop<?php echo $fieldname; ?>&amp;serendipity[filename_only]=true\', \'ImageSel\', \'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1\');">';
-                            epColumn.appendChild(epImgBtn);
-                        </script>
+                        <input class="customfieldMedia" type="button" name="insImage" value="<?php echo MEDIA ; ?>" data-tarea="prop<?php echo $fieldname; ?>">
                     </div>
             <?php
                     }

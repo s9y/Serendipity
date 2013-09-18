@@ -863,6 +863,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         e.preventDefault();
     });
 
+    $('.customfieldMedia').click(function() {
+        var configitem = $(this).parent().find('textarea').attr('id');
+        serendipity.choose_media(configitem);
+    });
+
     $('#tree_toggle_all').click(function(e) {
         e.preventDefault();
         serendipity.treeToggleAll();
