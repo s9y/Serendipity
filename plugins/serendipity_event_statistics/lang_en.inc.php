@@ -35,7 +35,7 @@
 @define('PLUGIN_EVENT_STATISTICS_OUT_TOPSUBSCRIBERS2', 'subscriber(s)');
 @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS', 'Received trackbacks');
 @define('PLUGIN_EVENT_STATISTICS_OUT_TRACKBACKS2', 'trackback(s)');
-@define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK', 'Most frequently trackbacked entires');
+@define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK', 'Most frequently trackbacked entries');
 @define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACK2', 'trackback(s)');
 @define('PLUGIN_EVENT_STATISTICS_OUT_TOPTRACKBACKS3', 'Most frequently trackbacking people');
 @define('PLUGIN_EVENT_STATISTICS_OUT_COMMENTS_PER_ARTICLE', 'estimated comments per entry');
