@@ -1477,7 +1477,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
-        $aExclude = array("CVS" => true, ".svn" => true);
+        $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // _vti_cnf to exclude frontpage extensions on windows servers
         serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
         $paths        = array();
         $aFilesOnDisk = array();
@@ -1796,7 +1796,9 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
 function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern = NULL, $depth = 1, $max_depth = NULL, $apply_ACL = false, $aExcludeDirs = NULL) {
 
     if ($aExcludeDirs === null) {
-        $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true); // 2013/06/05 don't use hook here, but add ckeditor/kcfinders .thumb dir to exclude
+        // add _vti_cnf to exclude frontpage extensions on windows servers
+        // add ckeditor/kcfinders .thumb dir to exclude, since no hook
+        $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true, "_vti_cnf" => true);
     }
 
     $odir = serendipity_dirSlash('end', $basedir) . serendipity_dirSlash('end', $dir);
@@ -3500,7 +3502,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 function &serendipity_getMediaPaths() {
     global $serendipity;
 
-    $aExclude = array("CVS" => true, ".svn" => true);
+    $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // add _vti_cnf to exclude frontpage extensions on windows servers
     serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
     $paths        = array();
 
