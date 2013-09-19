@@ -694,201 +694,188 @@ class serendipity_event_statistics extends serendipity_event
         $hits_count = serendipity_db_query("SELECT SUM(hits) FROM {$serendipity['dbPrefix']}visitors_count", true);
         $visitors_latest = serendipity_db_query("SELECT counter_id, day, time, ref, browser, ip FROM {$serendipity['dbPrefix']}visitors ORDER BY counter_id DESC LIMIT ".$max_items."");
         $top_refs = serendipity_db_query("SELECT refs, count FROM {$serendipity['dbPrefix']}refs ORDER BY count DESC LIMIT 20");
-                            
-        // ---------------STYLES for Viewing statistics ----------------------------------------------
-        echo "<style type='text/css'>";
-        echo ".colVis {text-align: center; width:600px; font-size: 10px; background-color:#dddddd;} ";
-        echo ".col1 {text-align: center; width:150px; font-size: 10px; background-color:#dddddd;} ";
-        echo ".col2 {text-align: center; width:150px; font-size: 10px; background-color:#CCCCFF;} ";
-        echo ".col4 {text-align: center; width:600px; font-size: 10px; background-color:#dddddd;} ";
-        echo ".col5 {text-align: center; width:600px; font-size: 10px; background-color:#CCCCFF;} ";
-        echo "</style>";
-
         ?>
-        <h3><?php echo PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS; ?></h3>
-        <div style="margin: 5px; padding: 5px">
-        <dl>
-            <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISITORS; ?></strong></dt>
-            <table width="100%" cellpadding="3" cellspacing="3">
-                <tr>
-                    <td colspan="4" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISSINCE." ".$visitors_count_firstday[0]; ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" align="center"><?php echo PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC; ?></td>
-                </tr>
-                <tr>
-                    <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTODAY; ?><br /><strong><?php echo $visitors_count_today[0]; ?></strong>
-                    </td>
-                    <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL; ?><br /><strong><?php echo $visitors_count[0]; ?>
-                    </td>
-                    <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY; ?><br /><strong><?php echo $hits_count_today[0]; ?>
-                    </td>
-                    <td width="25%" align="center">
-                        <?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL; ?><br /><strong><?php echo $hits_count[0]; ?>
-                    </td>
-                </tr>
-            </table>
-                <dd>
-                    <div class="colVis">
-                    </div>
-                </dd>
-        </dl>
-        
-         <!-- Visitor graphs -->    
-        <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH;?></strong></dt>
+        <h2><?php echo PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS; ?></h2>
+
+        <div class="serendipity_statistics_extended clearfix">
+            <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISITORS; ?></h3>
+
+                <p><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISSINCE." ".$visitors_count_firstday[0]; ?></p>
+
+                <span class="msg_notice"><span class="icon-info-circled"></span> <?php echo PLUGIN_EVENT_STATISTICS_EXT_COUNTDESC; ?></span>
+
+                <dl>
+                    <dt><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTODAY; ?></dt>
+                    <dd><?php echo $visitors_count_today[0]; ?></dd>
+                    <dt><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISTOTAL; ?></dt>
+                    <dd><?php echo $visitors_count[0]; ?></dd>
+                    <dt><?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTODAY; ?></dt>
+                    <dd><?php echo $hits_count_today[0]; ?></dd>
+                    <dt><?php echo PLUGIN_EVENT_STATISTICS_EXT_HITSTOTAL; ?></dt>
+                    <dd><?php echo $hits_count[0]; ?></dd>
+                <dl>
+            </section>
+
+            <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH;?></h3>
+
         <?php if ($visitors_count[0] > 0) { ?>            
-        <table width="100%" cellpadding="0" cellspacing="0"><tr>
-            <?php
-                $color = "col2";
-                $num = $this->statistics_getmonthlystats();
-                $rep = $num;
-                rsort($rep);
-                $maxVisHeigh = 100/$rep[0]*2;
-                for ($i=1; $i < 13; $i++) {
-                    if ($color == "col1") {
-                        $color ="col2";
-                    } else {
-                        $color ="col1";
+                <table>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><?php echo MONTHS; ?></th>
+                <?php
+                    $mon = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec');
+                    for ($i = 1; $i < 13; $i++) {
+                        echo '<td>'. serendipity_strftime('%b', mktime(0, 0, 0, $i, 1, 2000)) .'</td>';
                     }
-
-                    echo '<td class="'.$color.'" width="8%" align="center" valign="bottom"><small>' . $num[$i];
-                    echo '<br /><img src="plugins/serendipity_event_statistics/'; 
-                    if ($num[$i]*$maxVisHeigh/2 <= 33) {
-                        echo 'red.png';
-                    } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
-                        echo 'yellow.png';
-                    } else {
-                        echo 'green.png';
+                ?>
+                    </tr>
+                    <tr>
+                        <th scope="row">Visits</th>
+                <?php
+                    $num = $this->statistics_getmonthlystats();
+                    for ($i=1; $i < 13; $i++) {
+                        echo '<td>' . $num[$i] . '</td>';
                     }
-                    echo '" width="8" alt="" align="bottom" height="'.round($num[$i]*$maxVisHeigh).'" />';
-                    echo '<br /></small></td>';
-                } ?>
-        </tr><tr>
-            <?php
-            $mon = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', 
-             '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10'    => 'Oct', '11' => 'Nov', '12' => 'Dec');
-               $color = "col2";
-            for ($i = 1; $i < 13; $i++) {
-                if ($color == "col1") {
-                    $color ="col2";
-                } else {
-                    $color ="col1";
-                }
-                echo '<td class="'.$color.'" width="8%" align="center"><small><b>'. serendipity_strftime('%b', mktime(0, 0, 0, $i, 1, 2000)) .'</b></small></td>';
-            } 
-            ?>    
-        </tr></table>
-        <?php } ?>
-
-        <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH;?></strong></dt>
-        <?php if ($visitors_count[0] > 0) { ?>            
-        <table width="100%" cellpadding="0" cellspacing="0"><tr>
-            <?php
-                $color = "col2";
-                $num = $this->statistics_getdailystats();
-                $rep = $num;
-                rsort($rep);
-                for ($i=1; $i < 32; $i++) {
-                    if ($color == "col1") {
-                        $color ="col2";
-                    } else {
-                        $color ="col1";
-                    }
-
+                ?>
+                    </tr>
+                    <tr>
+                        <th scope="row">+/~/-</th>
+                <?php
+                    $num = $this->statistics_getmonthlystats();
+                    $rep = $num;
+                    rsort($rep);
                     $maxVisHeigh = 100/$rep[0]*2;
-                    echo '<td class="'.$color.'" width="3%" align="center" valign="bottom"><small>' . $num[$i];        
-                    echo '<br /><img src="plugins/serendipity_event_statistics/';
-                    if ($num[$i]*$maxVisHeigh/2 <= 33) {
-                        echo 'red.png';
-                    } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
-                        echo 'yellow.png';
-                    } else {
-                        echo 'green.png';
-                    }
-                    echo '" width="8" alt="" align="bottom" height="'.round($num[$i]*$maxVisHeigh).'" />';
-                    echo '<br /></small></td>';
-                }
-            ?>
-        </tr><tr>
-            <?php
-                $color = "col2";
-                for ($i=1; $i < 32; $i++) {
-                    if ($color == "col1") {
-                        $color ="col2";
-                    } else {
-                        $color ="col1";
-                    }
-                    echo '<td class="'.$color.'" width="3%" align="center"><small><b>'. $i .'</b></small></td>';
-                } ?>    
-        </tr></table>
-        <?php } ?>
-         <!-- End visitor graphs -->    
-                
-        <br /><br />
-        
-        <dl>
-        
-        <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISLATEST;?></strong></dt>
-            <dd>
-                <table width="100%" cellpadding="0" cellspacing="0">
-                    <?php
-                    $i=1;
-                    $color = "col2";
-                    if (is_array($visitors_latest)) {
-                        foreach($visitors_latest AS $key => $row) {
-                            if ($color == "col1"){$color ="col2";}else{$color ="col1";}
-                                echo "<tr>";
-                                echo "<td class = \"".$color."\">".$row['day']." ".$row['time']."</td>\n";
-                                if($row['ref']!='unknown'){
-                                echo "<td class = \"".$color."\"><a
-                                    href=\"".$row['ref']."\">".wordwrap($row['ref'], 25, "<br />", 1)."</a></td>\n";
-                                }
-                                if($row['ref']=='unknown'){
-                                echo "<td class = \"".$color."\">".wordwrap($row['ref'], 25, "<br />", 1)."</td>\n";
-                                }
-                                echo "<td class = \"".$color."\">".wordwrap($row['browser'], 25, "<br />", 1)."</td>\n";
-                                echo "<td class = \"".$color."\">";
-                                if ($row['ip']){
-                                    echo wordwrap(gethostbyaddr($row['ip']), 25, "\n", 1);
-                                } else {
-                                    echo "--";
-                                }
-                                echo "</td>\n";
-                                echo "</tr>\n";
-                            }
-                        }
-                        ?>
-                </table><br />
-            </dd>
-        </dl>
-       <dl>
-        <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_TOPREFS; ?></strong></dt>
-            <dd>
-                <table width="100%" cellpadding="0" cellspacing="0">
-                    <?php
-                        $i=1;
-                        if (is_array($top_refs)) {
-                            foreach($top_refs AS $key => $row) {
-                                if ($color == "col4") {
-                                    $color ="col5";
-                                } else {
-                                    $color ="col4";
-                                }
-                                echo '<tr><td class="'.$color.'">'.$i++.'. <a href="http://'.$row['refs'].'" target="_blank">'.$row['refs'].'</a> (<strong>'.$row['count'].'</strong>)</td></tr>';
-                            }
+
+                    for ($i=1; $i < 13; $i++) {
+                        echo '<td><img src="plugins/serendipity_event_statistics/';
+                        if ($num[$i]*$maxVisHeigh/2 <= 33) {
+                            echo 'red.png';
+                        } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
+                            echo 'yellow.png';
                         } else {
-                            echo PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE;
+                            echo 'green.png';
                         }
-                        ?>
+                        echo '" width="8" height="'.round($num[$i]*$maxVisHeigh).'" alt="';
+                        if ($num[$i]*$maxVisHeigh/2 <= 33) {
+                            echo '-';
+                        } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
+                            echo '~';
+                        } else {
+                            echo '+';
+                        }
+                        echo '" /></td>';
+                    }
+                ?>
+                    </tr>
+                    </tbody>
                 </table>
-            </dd>
-        </dl>
-                        
+        <?php } ?>
+            </section>
+
+            <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH;?></h3>
+
+        <?php if ($visitors_count[0] > 0) { ?>
+                <table>
+                    <tbody>
+                    <tr>
+                        <th scope="row"><?php echo DAYS; ?></th>
+                <?php
+                    for ($i=1; $i < 32; $i++) {
+                        echo '<td>'. $i .'</td>';
+                    }
+                ?>
+                    </tr>
+                    <tr>
+                        <th scope="row">Visits</th>
+                <?php
+                    $num = $this->statistics_getdailystats();
+                    for ($i=1; $i < 32; $i++) {
+                        echo '<td>' . $num[$i] . '</td>';
+                    }
+                ?>
+                    </tr>
+                    <tr>
+                        <th scope="row">+/~/-</th>
+                <?php
+                    $num = $this->statistics_getdailystats();
+                    $rep = $num;
+                    rsort($rep);
+
+                    for ($i=1; $i < 32; $i++) {
+                        $maxVisHeigh = 100/$rep[0]*2;
+                        echo '<td><img src="plugins/serendipity_event_statistics/';
+                        if ($num[$i]*$maxVisHeigh/2 <= 33) {
+                            echo 'red.png';
+                        } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
+                            echo 'yellow.png';
+                        } else {
+                            echo 'green.png';
+                        }
+                        echo '" width="8" height="'.round($num[$i]*$maxVisHeigh).'" alt="';
+                        if ($num[$i]*$maxVisHeigh/2 <= 33) {
+                            echo '-';
+                        } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
+                            echo '~';
+                        } else {
+                            echo '+';
+                        }
+                        echo '" /></td>';
+                    }
+                ?>
+                    </tr>
+                </table>
+        <?php } ?>
+            </section>
+
+            <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISLATEST;?></h3>
+
+                <dl>
+<?php
+    $i=1;
+    if (is_array($visitors_latest)) {
+        foreach($visitors_latest AS $key => $row) {
+                echo "<dt>".$row['day']." (".$row['time'].")</dt>\n";
+            if($row['ref']!='unknown'){
+                echo "<dd><a href=\"".$row['ref']."\">".$row['ref']."</a></dd>\n";
+            }
+            if($row['ref']=='unknown'){
+                echo "<dd>".$row['ref']."</dd>\n";
+            }
+                echo "<dd>".$row['browser']."</dd>\n";
+                echo "<dd>";
+            if ($row['ip']){
+                echo gethostbyaddr($row['ip']);
+            } else {
+                echo "-";
+            }
+            echo "</dd>\n";
+        }
+    }
+?>
+                </dl>
+            </section>
+
+            <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_TOPREFS; ?></h3>
+        <?php
+            $i=1;
+            if (is_array($top_refs)) {
+                echo '<ol>';
+                foreach($top_refs AS $key => $row) {
+                    echo '<li><a href="http://'.$row['refs'].'" target="_blank">'.$row['refs'].'</a> ('.$row['count'].')</li>';
+                }
+                echo '</ol>';
+            } else {
+                echo "<span class='msg_notice'><span class='icon-info-circled'></span> ".PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE."</<span>";
+            }
+        ?>
+            </section>
+        </div>
     <?php
     } //end of function extendedVisitorStatistics()
       
