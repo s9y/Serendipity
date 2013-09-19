@@ -1147,8 +1147,13 @@ summary {
 #uploadform .form_field input,
 #login .form_field input,
 #diagnose > table,
-#advanced_options .form_multiselect select {
+#advanced_options .form_multiselect select,
+.serendipity_statistics table {
     width: 100%;
+}
+
+.serendipity_statistics > .wide_box {
+    overflow: hidden; /* TEMP */
 }
 
 .media_choose .preview {
@@ -1488,6 +1493,7 @@ form > .button_link:first-of-type,
 .media_wrap_thumb,
 .plugins_installable > li,
 #dashboard > section,
+.serendipity_statistics > section,
 #login {
     border: 1px solid #aaa;
 }
@@ -1499,6 +1505,7 @@ form > .button_link:first-of-type,
 }
 
 #dashboard > section > h3,
+.serendipity_statistics > section > h3,
 #login fieldset > span {
     background: #ddd;
     background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
@@ -1519,6 +1526,7 @@ form > .button_link:first-of-type,
 }
 
 #dashboard > section,
+.serendipity_statistics > section,
 #login {
     border-radius: 2px;
     -webkit-box-sizing: border-box;
@@ -2539,6 +2547,7 @@ img.mfp-img {
     #serendipityScaleImg,
     .media_file,
     #dashboard > .quick_list,
+    .serendipity_statistics > section,
     #serendipity_category > div {
         float: left;
         margin: 0 2% 1em 0;
@@ -2591,6 +2600,13 @@ img.mfp-img {
         width: 85%;
     }
 
+    .serendipity_statistics > .wide_box {
+        clear: left;
+        float: none;
+        margin: 0 0 1em;
+        width: 100%;
+    }
+
     .field_info {
         margin: .85715em 2% 0 0;
     }
@@ -2623,7 +2639,8 @@ img.mfp-img {
     .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
     #dashboard > section:last-child,
-    #serendipity_category > fieldset {
+    #serendipity_category > fieldset,
+    .serendipity_statistics > section:nth-child(odd) {
         clear: left;
     }
 

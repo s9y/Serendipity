@@ -390,7 +390,7 @@ class serendipity_event_statistics extends serendipity_event
         </section>
 
         <section>
-            <h4><?php echo PLUGIN_EVENT_STATISTICS_OUT_TOPCOMMENTS; ?></h4>
+            <h3><?php echo PLUGIN_EVENT_STATISTICS_OUT_TOPCOMMENTS; ?></h3>
 
             <dl>
 <?php
@@ -697,7 +697,7 @@ class serendipity_event_statistics extends serendipity_event
         ?>
         <h2><?php echo PLUGIN_EVENT_STATISTICS_OUT_EXT_STATISTICS; ?></h2>
 
-        <div class="serendipity_statistics_extended clearfix">
+        <div class="serendipity_statistics extended_statistics clearfix">
             <section>
                 <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISITORS; ?></h3>
 
@@ -718,6 +718,22 @@ class serendipity_event_statistics extends serendipity_event
             </section>
 
             <section>
+                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_TOPREFS; ?></h3>
+        <?php
+            $i=1;
+            if (is_array($top_refs)) {
+                echo '<ol>';
+                foreach($top_refs AS $key => $row) {
+                    echo '<li><a href="http://'.$row['refs'].'" target="_blank">'.$row['refs'].'</a> ('.$row['count'].')</li>';
+                }
+                echo '</ol>';
+            } else {
+                echo "<span class='msg_notice'><span class='icon-info-circled'></span> ".PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE."</<span>";
+            }
+        ?>
+            </section>
+
+            <section class="wide_box">
                 <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH;?></h3>
 
         <?php if ($visitors_count[0] > 0) { ?>            
@@ -775,7 +791,7 @@ class serendipity_event_statistics extends serendipity_event
         <?php } ?>
             </section>
 
-            <section>
+            <section class="wide_box">
                 <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH;?></h3>
 
         <?php if ($visitors_count[0] > 0) { ?>
@@ -831,7 +847,7 @@ class serendipity_event_statistics extends serendipity_event
         <?php } ?>
             </section>
 
-            <section>
+            <section class="wide_box">
                 <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISLATEST;?></h3>
 
                 <dl>
@@ -858,22 +874,6 @@ class serendipity_event_statistics extends serendipity_event
     }
 ?>
                 </dl>
-            </section>
-
-            <section>
-                <h3><?php echo PLUGIN_EVENT_STATISTICS_EXT_TOPREFS; ?></h3>
-        <?php
-            $i=1;
-            if (is_array($top_refs)) {
-                echo '<ol>';
-                foreach($top_refs AS $key => $row) {
-                    echo '<li><a href="http://'.$row['refs'].'" target="_blank">'.$row['refs'].'</a> ('.$row['count'].')</li>';
-                }
-                echo '</ol>';
-            } else {
-                echo "<span class='msg_notice'><span class='icon-info-circled'></span> ".PLUGIN_EVENT_STATISTICS_EXT_TOPREFS_NONE."</<span>";
-            }
-        ?>
             </section>
         </div>
     <?php
