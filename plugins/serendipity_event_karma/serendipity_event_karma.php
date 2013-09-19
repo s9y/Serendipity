@@ -1079,19 +1079,22 @@ END_IMG_CSS;
                             GROUP BY e.id, e.title, e.timestamp ORDER BY no {$rows[1]} LIMIT {$addData['maxitems']}";
                         $sql_rows = serendipity_db_query($q);
 ?>
-    <dt><strong><?php echo constant('PLUGIN_KARMA_STATISTICS_' . strtoupper($key)); ?></strong></dt>
-    <dl>
+    <section>
+        <h3><?php echo constant('PLUGIN_KARMA_STATISTICS_' . strtoupper($key)); ?></h3>
+
+        <dl>
 <?php
                         if (is_array($sql_rows)) {
                             foreach($sql_rows AS $id => $row) {
     ?>
-        <dt><strong><a href="<?php echo serendipity_archiveURL($row['id'], $row['title'], 'serendipityHTTPPath', true, array('timestamp' => $row['timestamp'])); ?>"><?php echo htmlspecialchars($row['title']); ?></a></strong></dt>
-        <dd><?php echo $row['no']; ?> <?php echo constant('PLUGIN_KARMA_STATISTICS_' . strtoupper($rows[0]) . '_NO'); ?></dd>
+            <dt><a href="<?php echo serendipity_archiveURL($row['id'], $row['title'], 'serendipityHTTPPath', true, array('timestamp' => $row['timestamp'])); ?>"><?php echo htmlspecialchars($row['title']); ?></a></dt>
+            <dd><?php echo $row['no']; ?> <?php echo constant('PLUGIN_KARMA_STATISTICS_' . strtoupper($rows[0]) . '_NO'); ?></dd>
     <?php
                             }
                         }
 ?>
-    </dl>
+        </dl>
+    </section>
 <?php
                     }
 
