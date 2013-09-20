@@ -869,6 +869,10 @@ input[type=checkbox],
     margin-bottom: .75em;
 }
 
+#media_filter_path .form_select {
+    margin: 0 0 0 2em;
+}
+
 #serendipity_category .inputs .form_radio,
 .configuration_group fieldset > fieldset,
 .theme_options .configuration_group > fieldset,
