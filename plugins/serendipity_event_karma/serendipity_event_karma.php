@@ -64,22 +64,20 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('groups', array('STATISTICS'));
         $propbag->add('configuration', array(
             // Functionality options
-            'options_tab',
-            'karma_active', 
+            'karma_active',
             'karma_active_registered',
-            'extended_only', 
-            'max_karmatime', 
-            'max_votetime', 
-            'max_entrytime', 
+            'extended_only',
+            'max_karmatime',
+            'max_votetime',
+            'max_entrytime',
             'min_disp_votes',
-            'visits_active', 
-            'track_visits_of_loggedin_users', 
+            'visits_active',
+            'track_visits_of_loggedin_users',
             'min_disp_visits',
-            'exits_active', 
+            'exits_active',
             'logging',
             'ajax',
             // Appearance options
-            'appearance_tab',
             'alignment',
             'rate_with_words',
             'textual_msg',
@@ -88,7 +86,6 @@ class serendipity_event_karma extends serendipity_event
             'preview_bg',
             'base_image',
             // Text/Language options
-            'text_tab',
             'rate_msg',
             'curr_msg',
             'rate_best',
@@ -101,51 +98,52 @@ class serendipity_event_karma extends serendipity_event
             'text_okay',
             'text_poor',
             'text_vile',
-            // Close divs
-            'end_tabs',
             ));
+        $propbag->add('config_groups', array(
+            PLUGIN_KARMA_TAB_OPTIONS => array(
+                'karma_active',
+                'karma_active_registered',
+                'extended_only',
+                'max_karmatime',
+                'max_votetime',
+                'max_entrytime',
+                'min_disp_votes',
+                'visits_active',
+                'track_visits_of_loggedin_users',
+                'min_disp_visits',
+                'exits_active',
+                'logging',
+                'ajax',
+            ),
+            PLUGIN_KARMA_TAB_APPEARANCE => array(
+                'alignment',
+                'rate_with_words',
+                'textual_msg',
+                'textual_current',
+                'textual_visits',
+                'preview_bg',
+                'base_image',
+            ),
+            PLUGIN_KARMA_TAB_TEXT => array(
+                'rate_msg',
+                'curr_msg',
+                'rate_best',
+                'rate_good',
+                'rate_okay',
+                'rate_poor',
+                'rate_vile',
+                'text_best',
+                'text_good',
+                'text_okay',
+                'text_poor',
+                'text_vile',
+            )
+        ));
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
-            // Top of tab bar
-            case 'options_tab':
-                $propbag->add('type', 'content');
-                $propbag->add('default', '
-<span class="serendipity_karmaVoting_tabbar">
-<a class="serendipity_karmaVoting_optionstab_link" href="#karmaVoting_options">' . PLUGIN_KARMA_TAB_OPTIONS . '</a> | 
-<a class="serendipity_karmaVoting_appearancetab_link" href="#karmaVoting_appearance">' . PLUGIN_KARMA_TAB_APPEARANCE . '</a> |
-<a class="serendipity_karmaVoting_texttab_link" href="#karmaVoting_text">' . PLUGIN_KARMA_TAB_TEXT . '</a>
-</span>
-<div class="serendipity_karmaVoting_optionstab" style="text-align: center;"><a name="karmaVoting_options"></a>
-<span style="font-size: 10pt; font-weight: bold;">' . PLUGIN_KARMA_TAB_OPTIONS . '<hr style="width: 80%" />
-');
-                break;
-            case 'appearance_tab':
-                $propbag->add('type', 'content');
-                $propbag->add('default', '
-    <input class="serendipityPrettyButton input_button" type="submit" value="' . SAVE . '" name="SAVECONF" />
-</div>
-<div class="serendipity_karmaVoting_appearancetab" style="text-align: center;"><a name="karmaVoting_appearance"></a>
-<span style="font-size: 10pt; font-weight: bold;">' . PLUGIN_KARMA_TAB_APPEARANCE . '<hr style="width: 80%" />
-');
-                break;
-            case 'text_tab':
-                $propbag->add('type', 'content');
-                $propbag->add('default', '
-    <input class="serendipityPrettyButton input_button" type="submit" value="' . SAVE . '" name="SAVECONF" />
-</div>
-<div class="serendipity_karmaVoting_texttab" style="text-align: center;"><a name="karmaVoting_text"></a> 
-<span style="font-size: 10pt; font-weight: bold;">' . PLUGIN_KARMA_TAB_TEXT . '<hr style="width: 80%" />
-');
-                break;
-            case 'end_tabs':
-                $propbag->add('type', 'content');
-                $propbag->add('default', '
-</div>
-');
-                break;
             // Oldest entry age still valid for unrestricted voting
             case 'max_entrytime':
                 $propbag->add('type', 'string');
