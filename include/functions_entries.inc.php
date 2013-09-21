@@ -1027,6 +1027,10 @@ function serendipity_getTotalEntries() {
 function serendipity_printEntries($entries, $extended = 0, $preview = false, $smarty_block = 'ENTRIES', $smarty_fetch = true, $use_hooks = true, $use_footer = true, $use_grouped_array = false) {
     global $serendipity;
 
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init(); // if not set, start Smarty templating to avoid member function "method()" on a non-object errors (was draft preview error, now at line 1239)
+    }
+
     if ($use_hooks) {
         $addData = array('extended' => $extended, 'preview' => $preview);
         serendipity_plugin_api::hook_event('entry_display', $entries, $addData);
@@ -1491,7 +1495,7 @@ function serendipity_deleteEntry($id) {
 * @param string The character to use for blank indenting
 * @see serendipity_fetchCategories()
 */
-function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, $id = 0, $level = 0, $xmlImg = '', $blank_char = ' ') {
+function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, $id = 0, $level = 0, $xmlImg = '', $blank_char = ' ') {
     global $serendipity;
 
     if ( !is_array($cats) || !count($cats) )
