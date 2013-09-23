@@ -57,7 +57,7 @@
 
             <button class="template_show_info button_link" data-href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
 
-            <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
+            <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
         </article>
 
         <h2>{$CONST.SELECT_TEMPLATE}</h2>
@@ -95,7 +95,7 @@
                     <button class="template_show_info button_link" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
 
                 {if !$info.unmetRequirements}
-                    <a href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}"><button>{$CONST.SET_AS_TEMPLATE}</button></a>
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.SET_AS_TEMPLATE}</a>
                 {else}
                     <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$info.unmetRequirements}></span>
                 {/if}

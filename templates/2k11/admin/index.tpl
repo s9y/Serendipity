@@ -27,11 +27,11 @@
 
                 <ul>
                     <li class="logged_in"><span>{$admin_vars.self_info}</span></li>
-                    <li><a class="icon_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
                 {if 'personalConfiguration'|checkPermission}
-                    <li><a class="icon_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
-                    <li><a class="icon_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-globe"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-globe"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
                     <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-logout"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                 </ul>
             </nav>

@@ -1063,7 +1063,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     $('#sort_entries > .form_buttons').clone().appendTo('#filter_entries');
     $('#media_pane_sort > .form_buttons').clone().appendTo('#media_pane_filter');
 
-    // Clone pagination – this could become a function, which should also
+    // Clone pagination - this could become a function, which should also
     // check if the cloned pagination already exists
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().prependTo('.comments_pane');

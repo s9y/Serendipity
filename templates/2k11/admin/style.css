@@ -1167,7 +1167,7 @@ summary {
     max-width: 100%;
 }
 
-.editor_toolbar input,
+.editor_toolbar button,
 .comment_data dt,
 #serendipityScaleForm .form_field label {
     min-width: 4.25em;
@@ -1413,7 +1413,7 @@ fieldset p,
     margin: 0 .4em 0 -.4em;
 }
 
-.editor_toolbar input {
+.editor_toolbar button {
     margin: 0 .25em .75em 0;
 }
 
