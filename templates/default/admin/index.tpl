@@ -210,6 +210,11 @@
             <span>{$admin_vars.version_info}</span>
         </div>                            
         {/if}
+
+        {if $admin_vars.admin_installed}
+            {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+        {/if}
+       
     </body>
 <!-- ADMIN-ENTRY TEMPLATE: index.tpl END -->
 </html>
