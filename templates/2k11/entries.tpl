@@ -21,6 +21,9 @@
         {$entry.extended}
         </div>
         {/if}
+        {if $entry.plugin_display_dat}
+        {$entry.plugin_display_dat}
+        {/if}
 
         <footer class="clearfix">
         {if $entry.categories}
@@ -44,7 +47,6 @@
             | <a href="{$entry.url_shorturl}" title="{$CONST.TWOK11_SHORT_URL_HINT}" class="short-url">{$CONST.TWOK11_SHORT_URL}</a>
         {/if}
             {$entry.add_footer}
-            {$entry.plugin_display_dat}
         </footer>
 
         <!--
