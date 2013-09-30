@@ -80,7 +80,14 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
 
             // Do some relative -> absolute URI replacing magic. Replaces all HREF/SRC (<a>, <img>, ...) references to only the serendipitypath with the full baseURL URI
             // garvin: Could impose some problems. Closely watch this one.
-            $entry['body'] = preg_replace('@(href|src)=("|\')(' . preg_quote($serendipity['serendipityHTTPPath']) . ')(.*)("|\')(.*)>@imsU', '\1=\2' . $serendipity['baseURL'] . '\4\2\6>', $entry['body']);
+            // onli: Did impose some problems, when having //-links to stuff. following pattern-selection tries to workaround that
+            if ($serendipity['serendipityHTTPPath'] == "/") {
+                $pattern = '@(href|src)=(["\'])/([^/][^"\']*)@imsU';
+            } else {
+                $pattern = '@(href|src)=(["\'])' . preg_quote($serendipity['serendipityHTTPPath']) . '([^"\']*)@imsU';
+            }
+            $entry['body'] = preg_replace($pattern, '\1=\2' . $serendipity['baseURL'] . '\3', $entry['body']);
+            //$entry['body'] = preg_replace('@(href|src)=("|\')(' . preg_quote($serendipity['serendipityHTTPPath']) . ')(.*)("|\')(.*)>@imsU', '\1=\2' . $serendipity['baseURL'] . '\4\2\6>', $entry['body']);
             // jbalcorn: clean up body for XML compliance as best we can.
             $entry['body'] = xhtml_cleanup($entry['body']);
 
