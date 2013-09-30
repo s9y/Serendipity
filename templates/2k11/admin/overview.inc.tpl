@@ -15,7 +15,7 @@
             <ol class="plainList">
             {foreach $comments as $comment}
                 <li><div class="comment_summary">
-                        <b>#{$comment.id}</b> - {$comment.body|truncate:100:"&hellip;"}
+                        <b><a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b> - {$comment.body|truncate:100:"&hellip;"}
                     </div>
                     
                     <ul class="plainList actions">
