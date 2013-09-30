@@ -28,8 +28,18 @@ $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPref
                                     ORDER BY c.id DESC LIMIT 5");
 if (count($comments) > 1) {
     foreach ($comments as &$comment) {
-        $entrylink = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
-        $comment['entrylink'] = $entrylink;
+        $comment['entrylink'] = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
+        
+        $comment['fullBody']  = $comment['body'];
+        $comment['summary']   = serendipity_mb('substr', $comment['body'], 0, 100);
+        
+        if (strlen($comment['fullBody']) > strlen($comment['summary']) ) {
+            $comment['excerpt'] = true;
+
+            // When summary is not the full body, strip HTML tags from summary, as it might break and leave unclosed HTML.
+            $comment['fullBody'] = nl2br(htmlspecialchars($comment['fullBody']));
+            $comment['summary']  = nl2br(strip_tags($comment['summary']));
+        }
     }
 }
 
