@@ -56,6 +56,25 @@
         <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|@escape}</textarea>
     </div>
 
+     <div class="form_area">
+        <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
+    {if NOT $entry_vars.wysiwyg}
+        <div id="tools_extended" class="editor_toolbar">
+        {if $iso2br}
+            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="body" data-tarea="extended">NoBR</button>
+        {/if}
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="body" data-tarea="extended">I</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="body" data-tarea="extended">B</button>
+            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="body" data-tarea="extended">{$CONST.QUOTE}</button>
+            <button class="wrap_insimg" type="button" name="insJ" data-tarea="body" data-tarea="extended">img</button>
+            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="body" data-tarea="extended">{$CONST.MEDIA}</button>
+            <button class="wrap_insurl" type="button" name="insURL" data-tarea="body" data-tarea="extended">URL</button>
+            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
+        </div>
+    {/if}
+        <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
+    </div>
+
     <div id="edit_entry_status_comments" class="clearfix">
         <div class="form_check">
             <input id="checkbox_allow_comments" name="serendipity[allow_comments]" type="checkbox" value="true"{if $entry_vars.allow_comments} checked="checked"{/if}><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label>
@@ -81,25 +100,6 @@
             <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
             <input type="submit" value="{$CONST.SAVE}">
         </div>
-    </div>
-
-    <div class="form_area">
-        <label for="serendipity[extended]">{$CONST.EXTENDED_BODY}</label>
-    {if NOT $entry_vars.wysiwyg}
-        <div id="tools_extended" class="editor_toolbar">
-        {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="body" data-tarea="extended">NoBR</button>
-        {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="body" data-tarea="extended">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="body" data-tarea="extended">B</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="body" data-tarea="extended">{$CONST.QUOTE}</button>
-            <button class="wrap_insimg" type="button" name="insJ" data-tarea="body" data-tarea="extended">img</button>
-            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="body" data-tarea="extended">{$CONST.MEDIA}</button>
-            <button class="wrap_insurl" type="button" name="insURL" data-tarea="body" data-tarea="extended">URL</button>
-            {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
-        </div>
-    {/if}
-        <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
     </div>
     
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
