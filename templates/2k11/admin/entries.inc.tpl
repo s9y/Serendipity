@@ -1,6 +1,6 @@
 {if $drawList}
 <div  class="has_toolbar">
-    <h2>{$CONST.FIND_ENTRIES}</h2>
+    <h2>{$CONST.EDIT_ENTRIES}</h2>
 
     <form action="?" method="get">
         <input name="serendipity[action]" type="hidden" value="admin">
