@@ -1622,7 +1622,7 @@ class serendipity_event extends serendipity_plugin
         // $entries input data. This is a unifying function because
         // several plugins are using similar fields.
 
-        if (is_array($eventData) && isset($eventData[0]) && is_array($eventData[0]['properties'])) {
+        if (is_array($eventData) && isset($eventData[0]) && is_array($eventData[0]) && is_array($eventData[0]['properties'])) {
             if (!empty($eventData[0]['properties']['ep_cache_' . $fieldname])) {
 
                 // It may happen that there is no extended entry to concatenate to. In that case,

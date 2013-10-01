@@ -3,6 +3,8 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Fix possible temporary caching errors failing $eventData[0]['properties']
+
     * Added "backend_footer" event hook
     
     * Fixed pagination when searching terms with fetchlimit < 4
