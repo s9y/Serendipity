@@ -10,7 +10,7 @@
     {/if}
     {if is_array($comments)}
         <section id="dashboard_comments" class="equal_heights quick_list">
-            <h3>{$CONST.COMMENTS}</h3>
+            <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
             {foreach $comments as $comment}
@@ -42,7 +42,7 @@
     {/if}
     {if is_array($entries)}
         <section id="dashboard_entries" class="equal_heights quick_list">
-            <h3>{$CONST.ADMIN_ENTRIES}</h3> {* i18n *}
+            <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.ADMIN_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3> {* i18n *}
 
             <ol class="plainList">
             {foreach $entries as $entry}

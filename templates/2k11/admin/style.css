@@ -1265,7 +1265,9 @@ summary {
 }
 
 #main_menu a,
-#main_menu a:visited {
+#main_menu a:visited,
+.quick_list h3 a,
+.quick_list h3 a:visited {
     text-decoration: none;
 }
 
