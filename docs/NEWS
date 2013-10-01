@@ -4,6 +4,9 @@ Version 2.0 ()
 ------------------------------------------------------------------------
 
 
+    * Automatic upgrade removal of old Smarty2 files (2.0-alpha2)
+      function uses SPL
+
     * Implemented patch https://github.com/s9y/Serendipity/pull/15
 
     * When switching templates, both the backend and the frontend

@@ -198,6 +198,12 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Remove obsolete plugin',
                      'desc'      => 'The "browsercompatibility" plugin is no longer supported (and no longer required with recent browsers), so it will be automatically uninstalled.'),
 
+               array('version'   => '2.0-alpha2',
+                     'function'  => 'serendipity_removeDeadFiles_SPL',
+                     'title'     => 'Removal of obsolete and dead Smarty 2.6.x files',
+                     'arguments' => array($serendipity['serendipityPath'] . 'bundled-libs/Smarty', $dead_smarty_files, array('internals'), true),
+                     'desc'      => 'Smarty 3.x brought a new file structure. The following dead files will be removed from "bundled-libs/Smarty/libs".<br /><div style="font-size: x-small; margin: 15px">' . implode(', ', $dead_smarty_files) . '</div>'),
+
 );
 
 /* Fetch SQL files which needs to be run */
