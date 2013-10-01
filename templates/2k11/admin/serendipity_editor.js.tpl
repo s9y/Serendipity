@@ -973,17 +973,17 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Show further links
     $('.toggle_links').click(function(e) {
-        var $el = $(this);
-        $($el.attr('href')).toggleClass('additional_info');
-        $el.parent().toggleClass('collapsed');
-        var $toggleIcon = $el.find('> span');
-        var $toggleState = $toggleIcon.attr('class');
-        if($toggleState == 'icon-minus') {
-            $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
-        } else {
-            $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
-        }
         e.preventDefault();
+        {if $use_popups}
+            $('#s9y_links').toggleClass('mfp-hide');
+        {else}
+            $(this).magnificPopup({
+                items: [{
+                    src: '#s9y_links',
+                    type: 'inline'
+                }]
+            });
+        {/if}
     });
 
     // Media file actions

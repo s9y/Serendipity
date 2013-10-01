@@ -1069,7 +1069,8 @@ summary {
 #entries_list .form_check,
 .pagination .prev,
 .pagination .next,
-#serendipity_customfields textarea {
+#serendipity_customfields textarea,
+#dashboard_header h2 {
     float: left;
 }
 
@@ -1094,8 +1095,13 @@ summary {
 }
 
 .edit_actions,
-#entries_list .actions {
+#entries_list .actions,
+.toggle_links {
     float: right;
+}
+
+.toggle_links {
+    margin: 1.25em 2% .75em 0
 }
 
 #edit_entry_title label,
@@ -1135,7 +1141,8 @@ summary {
 #serendipity_comment .form_field input,
 #serendipity_comment select,
 .js .configuration_group .media_choose input,
-.js #serendipity_category .form_field #category_icon {
+.js #serendipity_category .form_field #category_icon,
+#dashboard_header h2 {
     width: 85%;
 }
 
@@ -1500,6 +1507,15 @@ form > .button_link:first-of-type,
     border: 1px solid #aaa;
 }
 
+.mfp-content #s9y_links {
+    background: #fcfcfc;
+    margin: 0 auto;
+    max-width: 480px;
+    padding: 0 2em;
+    position: relative;
+    width: 96%;
+}
+
 #template_select article,
 .plugins_installable > li,
 .media_file {
@@ -1544,22 +1560,6 @@ form > .button_link:first-of-type,
 
 #dashboard_entries .entry_status {
     float: right;
-}
-
-.js #dashboard > #further_links > .collapsed {
-    border-bottom: 0 none;
-}
-
-#further_links h3 > a,
-#further_links h3 > a:visited {
-    color: #666;
-    text-decoration: none;
-}
-
-#further_links h3 > a:hover,
-#further_links h3 > a:focus {
-    color: #222;
-    text-decoration: none;
 }
 
 .media_wrap_thumb {
@@ -1939,12 +1939,12 @@ form > .button_link:first-of-type,
 .no-js .template_show_info,
 .no-js #serendipity_comments_list .comment_summary,
 .no-js .editor_toolbar,
-.no-js #s9y_links > span,
 .no-js .toggle_info .info-icon-circled,
 .no-js .pluginmanager_grablet,
 .no-js .image_resize_hint,
 .no-js #serendipityScaleForm > .form_check,
 .no-js .customfieldMedia,
+.no-js .toggle_links,
 .js .additional_info,
 .installer .toggle_info,
 .hidden,
@@ -2531,11 +2531,6 @@ img.mfp-img {
 
     #main_menu li > ul > li {
         width: 33%;
-    }
-
-    #further_links li {
-        display: inline-block;
-        margin-right: 1em;
     }
 
     #image_directory_edit_form > div > .form_select {

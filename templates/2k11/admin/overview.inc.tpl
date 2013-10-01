@@ -1,4 +1,7 @@
-    <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
+    <div id="dashboard_header" class="clearfix">
+        <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
+        <a href="#s9y_links" class="button_link toggle_links"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
+    </div>
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
     {if $update}
@@ -63,19 +66,17 @@
             </ol>
         </section>
     {/if}
-        <section id="further_links">
-            <h3 class="collapsed"><a href="#s9y_links" class="toggle_links"><span class="icon-plus"></span> {$CONST.FURTHER_LINKS}</a></h3>
+        <section id="s9y_links" class="clearfix mfp-hide">
+            <h3>{$CONST.FURTHER_LINKS}</h3>
 
-            <div id="s9y_links" class="additional_info">
-                <ul class="clearfix plainList">
-                    <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
-                    <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
-                    <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
-                    <li><a href="http://www.s9y.org/forums/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
-                    <li><a href="http://spartacus.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_SPARTACUS}</a></li>
-                    <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
-                </ul>
-            </div>
+            <ul class="plainList">
+                <li><a href="http://www.s9y.org/">{$CONST.FURTHER_LINKS_S9Y}</a></li>
+                <li><a href="http://www.s9y.org/33.html">{$CONST.FURTHER_LINKS_S9Y_DOCS}</a></li>
+                <li><a href="http://blog.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_BLOG}</a></li>
+                <li><a href="http://www.s9y.org/forums/">{$CONST.FURTHER_LINKS_S9Y_FORUMS}</a></li>
+                <li><a href="http://spartacus.s9y.org/">{$CONST.FURTHER_LINKS_S9Y_SPARTACUS}</a></li>
+                <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
+            </ul>
         </section>
     </div>
     <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
