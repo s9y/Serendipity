@@ -1359,7 +1359,8 @@ fieldset p,
 #login .form_buttons,
 .media_file .actions,
 #entries_list .actions,
-.msg_hint > p:last-of-type {
+.msg_hint > p:last-of-type,
+#edit_entry_submit .form_buttons {
     margin-bottom: 0;
 }
 
@@ -1372,10 +1373,6 @@ fieldset p,
 .media_file .actions,
 .js #add_upload {
     margin-top: 1em;
-}
-
-#advanced_options {
-    margin-top: 2em;
 }
 
 #advanced_options > legend > span {
@@ -2604,8 +2601,26 @@ img.mfp-img {
         width: 48%;
     }
 
+    #edit_entry_status_comments {
+        float: left;
+        width: 70%;
+    }
+
+    #edit_entry_submit {
+        float: right;
+        width: 30%;
+    }
+
+    #edit_entry_submit label {
+        display: block;
+    }
+
     .js #serendipity_category .form_field #category_icon {
         width: 85%;
+    }
+
+    #entry_status {
+        width: 100%;
     }
 
     .serendipity_statistics > .wide_box {
@@ -2716,6 +2731,10 @@ img.mfp-img {
     #edit_entry_title input,
     .no-js #edit_entry_metadata select {
         width: 100%;
+    }
+
+    #edit_entry_status_comments .form_check {
+        margin-bottom: 0;
     }
 
     #media_pane_sort div fieldset input,
@@ -2876,18 +2895,6 @@ img.mfp-img {
         margin: 0 0 0 2%;
     }
 
-    #edit_entry_submit {
-        float: right;
-    }
-
-    #edit_entry_submit > div {
-        float: right;
-    }
-
-    #entry_status {
-        width: 100%;
-    }
-
     #preview {
         float: left;
         margin-bottom: 2.25em;
@@ -2924,11 +2931,6 @@ img.mfp-img {
 
     .js #edit_entry_metadata select {
         width: 91%;
-    }
-
-    #edit_entry_status_comments .form_check {
-        float: left;
-        margin: .75em 1em .75em 0;
     }
 }
 

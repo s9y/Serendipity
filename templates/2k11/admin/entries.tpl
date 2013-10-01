@@ -75,36 +75,36 @@
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
     </div>
 
-    <div id="edit_entry_submit" class="clearfix">
-        <div>
-            <div id="edit_entry_status" class="form_select">
-                <label for="entry_status">Entry status</label> {* i18n *}
-                <select id="entry_status" name="serendipity[isdraft]">
-                {if $entry_vars.serendipityRightPublish}
-                    <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>
-                {/if}
-                    <option value="true"{if $entry_vars.draft_mode == 'draft'} selected{/if}>{$CONST.DRAFT}</option>
-                </select>
+    <div class="clearfix">
+        <div id="edit_entry_status_comments" class="clearfix">
+            <div class="form_check">
+                <input id="checkbox_allow_comments" name="serendipity[allow_comments]" type="checkbox" value="true"{if $entry_vars.allow_comments} checked="checked"{/if}><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label>
             </div>
 
-            <div class="form_buttons">
-                <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
-                <input type="submit" value="{$CONST.SAVE}">
+            <div class="form_check">
+                <input id="checkbox_moderate_comments" name="serendipity[moderate_comments]" type="checkbox" value="true"{if $entry_vars.moderate_comments} checked="checked"{/if}><label for="checkbox_moderate_comments">{$CONST.COMMENTS_MODERATE}</label>
+            </div>
+        </div>
+
+        <div id="edit_entry_submit" class="clearfix">
+            <div>
+                <div id="edit_entry_status" class="form_select">
+                    <label for="entry_status">Entry status</label> {* i18n *}
+                    <select id="entry_status" name="serendipity[isdraft]">
+                    {if $entry_vars.serendipityRightPublish}
+                        <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>
+                    {/if}
+                        <option value="true"{if $entry_vars.draft_mode == 'draft'} selected{/if}>{$CONST.DRAFT}</option>
+                    </select>
+                </div>
+
+                <div class="form_buttons">
+                    <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
+                    <input type="submit" value="{$CONST.SAVE}">
+                </div>
             </div>
         </div>
     </div>
-
-    <div id="edit_entry_status_comments" class="clearfix">
-        <div class="form_check">
-            <input id="checkbox_allow_comments" name="serendipity[allow_comments]" type="checkbox" value="true"{if $entry_vars.allow_comments} checked="checked"{/if}><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label>
-        </div>
-
-        <div class="form_check">
-            <input id="checkbox_moderate_comments" name="serendipity[moderate_comments]" type="checkbox" value="true"{if $entry_vars.moderate_comments} checked="checked"{/if}><label for="checkbox_moderate_comments">{$CONST.COMMENTS_MODERATE}</label>
-        </div>
-    </div>
-
-    
     
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
