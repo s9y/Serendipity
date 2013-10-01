@@ -1513,7 +1513,13 @@ form > .button_link:first-of-type,
     max-width: 480px;
     padding: 0 2em;
     position: relative;
-    width: 96%;
+    width: auto;
+}
+
+.mfp-content #s9y_links h3 {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .583335em;
+    padding-bottom: .583335em;
 }
 
 #template_select article,
