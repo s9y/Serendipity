@@ -121,6 +121,7 @@
                 <span id="hide_subcats_info" class="field_info additional_info">{$CONST.CATEGORY_HIDE_SUB_DESC}</span>
             </fieldset>
 
+            <a class="button_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=view">{$CONST.BACK}</a>
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
         </form>
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
