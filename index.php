@@ -136,6 +136,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     /* We must always *assume* that Year, Month and Day are the first 3 arguments */
     list(,$year, $month, $day) = $_args;
+    if ($year == "archives") {
+        unset($year);
+    }
 
     $serendipity['GET']['action']     = 'read';
     $serendipity['GET']['hidefooter'] = true;
