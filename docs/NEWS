@@ -4,6 +4,8 @@ Version 2.0 ()
 ------------------------------------------------------------------------
 
 
+    * Fix possible temporary caching errors failing $eventData[0]['properties']
+
     * Automatic upgrade removal of old Smarty2 files (2.0-alpha2)
       function uses SPL
 
