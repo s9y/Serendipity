@@ -101,11 +101,15 @@
     {/if}
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
     </div>
-
-    <fieldset id="advanced_options">
+    
+    {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
+    {if ! empty($smarty.capture.advanced_options) }
+        <fieldset id="advanced_options">
         <legend><span>{$CONST.ADVANCED_OPTIONS}</span></legend>
-        {$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}
-    </fieldset>
+            {$smarty.capture.advanced_options}
+        </fieldset>
+    {/if}
+   
 </form>
 {if ! $use_popup}
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
