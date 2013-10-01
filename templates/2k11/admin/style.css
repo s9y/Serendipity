@@ -1121,7 +1121,6 @@ summary {
     width: 50%;
 }
 
-#edit_entry_status select,
 #sort_entries .form_select select,
 #filter_entries .form_select select,
 #filter_entries .form_field input {
@@ -1734,11 +1733,16 @@ form > .button_link:first-of-type,
     color: #3e5f81;
     text-align: center;
 }
-
+ 
 #meta p {
     color: #666;
     margin: 0;
     padding: .75em;
+}
+
+#s9y_links ul li a {
+    font-size: .8em;
+    color: #98A4B1;
 }
 
 
@@ -2766,7 +2770,6 @@ img.mfp-img {
     }
 
     #edit_entry_metadata > div,
-    #edit_entry_submit > div,
     #karmafilters .form_field,
     #karmafilters .form_select {
         float: left;
@@ -2873,8 +2876,16 @@ img.mfp-img {
         margin: 0 0 0 2%;
     }
 
-    #edit_entry_submit .form_buttons {
-        text-align: right;
+    #edit_entry_submit {
+        float: right;
+    }
+
+    #edit_entry_submit > div {
+        float: right;
+    }
+
+    #entry_status {
+        width: 100%;
     }
 
     #preview {
