@@ -1,6 +1,6 @@
     <div id="dashboard_header" class="clearfix">
         <h2>{$CONST.WELCOME_BACK} {$username|escape:"html"}</h2>
-        <a href="#s9y_links" class="button_link toggle_links"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
+        <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
     </div>
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
