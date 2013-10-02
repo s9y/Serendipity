@@ -3,6 +3,8 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Smarty 3.1.15 release - please read  bundled-libs/Smarty/change_log.txt
+
     * Fix possible temporary caching errors failing $eventData[0]['properties']
 
     * Added "backend_footer" event hook
