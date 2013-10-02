@@ -59,7 +59,7 @@
                     <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
                 {/if}
                 {if $entry.isdraft == "true"}
-                    <span class="entry_status status_draft">Draft</span>
+                    <span class="entry_status status_draft">{$CONST.DRAFT}</span>
                 {/if}
                 </li>
             {/foreach}
