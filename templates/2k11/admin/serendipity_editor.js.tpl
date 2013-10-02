@@ -781,6 +781,21 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[textarea]=' + $(this).attr('data-tarea'));
     });
 
+    // Advanced options
+    if($('body').has('#advanced_options').size() > 0) {
+        $('#advanced_options > legend > button').click(function() {
+            var $el = $(this);
+            var $toggleIcon = $el.find('> span');
+            var $toggleState = $toggleIcon.attr('class');
+            if($toggleState == 'icon-minus') {
+                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+            } else {
+                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+            }
+            $('#adv_opts').toggleClass('additional_info');
+        });
+    }
+
     // Entry preview
     $('.entry_preview').click(function() {
         document.forms['serendipityEntry'].elements['serendipity[preview]'].value='true';

@@ -1386,9 +1386,7 @@ fieldset p,
 
 #advanced_options > legend > span {
     display: inline-block;
-    font-size: 1.28571em;
-    line-height: 1.16667em;
-    margin: 1.16667em 0;
+    margin: 1.16667em 0 1.16667em .2em;
 }
 
 .category_data {
