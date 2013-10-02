@@ -7,14 +7,14 @@
     </div>
 {/if}
 {if is_array($config_groups)}
-    <button id="show_config_all" class="button_link" data-href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}">
+    <button id="show_config_all" class="button_link" type="button" data-href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}">
         <span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span>
     </button>
 
     <div id="serendipity_config_options">
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <div class="configuration_group">
-            <h3 class="toggle_headline"><button id="optionel{$config_groupkeys@iteration}" class="show_config_option" data-href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$config_header}</button></h3>
+            <h3 class="toggle_headline"><button id="optionel{$config_groupkeys@iteration}" class="show_config_option" type="button" data-href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$config_header}</button></h3>
         
             <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
             {foreach $config_groupkeys AS $config_groupkey}

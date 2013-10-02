@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <button class="template_show_info button_link" data-href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
+            <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
 
             <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
         </article>
@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <button class="template_show_info button_link" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
+                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
 
                 {if !$info.unmetRequirements}
                     <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.SET_AS_TEMPLATE}</a>

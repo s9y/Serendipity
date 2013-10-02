@@ -399,7 +399,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
             // this function got called on load of the editor
             var toggleButton = '#toggle_' + id;
 
-            $('#'+id).before('<button class="button_link" id="toggle_' + id + '" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
+            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();

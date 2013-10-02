@@ -110,7 +110,7 @@
                         <h4 id="c{$comment.id}">{($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} - {$CONST.IN_REPLY_TO}
                             <a href="{$comment.entry_url}">{$comment.title|escape}</a>
                             {$CONST.ON} {$comment.timestamp|@formatTime:'%b %e %Y, %H:%M'}
-                            <button class="toggle_info button_link" data-href="#comment_data_{$comment.id}"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
+                            <button class="toggle_info button_link" type="button" data-href="#comment_data_{$comment.id}"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
                         </h4>
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
                         <span class="comment_status">{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</span>
