@@ -1,7 +1,5 @@
 <h2>{$CONST.ADD_MEDIA}</h2>
 
-<div class="msg_hint"><span class="icon-help-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH}</div>
-
 <form id="uploadform" action="?" method="POST" enctype="multipart/form-data">
 {if $media.max_file_size}
     <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">
