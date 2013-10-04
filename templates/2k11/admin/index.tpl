@@ -179,6 +179,5 @@
     </footer>
 {/if}
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
-                            
 </body>
 </html>
