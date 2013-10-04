@@ -2,7 +2,7 @@
 <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 
 <div class="has_toolbar">
-    <h2>{$CONST.FIND_MEDIA}</h2>
+    <h2>{$CONST.MEDIA_LIBRARY}</h2>
 
     <form id="media_library_control" method="get" action="?">
         {$media.token}
@@ -174,7 +174,7 @@
     {if $smarty.get.serendipity.adminModule == 'media'}
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
-            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_ENTRIES}">
+            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
         </div>
     </form>
     {/if}

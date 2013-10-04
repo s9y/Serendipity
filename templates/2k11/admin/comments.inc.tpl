@@ -169,8 +169,8 @@
 
             <div class="form_buttons">
                 <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
-                <input class="state_cancel comments_multidelete" name="toggle" type="submit" value="{$CONST.DELETE_SELECTED_COMMENTS}">
-                <input name="serendipity[togglemoderate]" type="submit" value="{$CONST.MODERATE_SELECTED_COMMENTS}">
+                <input class="state_cancel comments_multidelete" name="toggle" type="submit" value="{$CONST.DELETE}">
+                <input name="serendipity[togglemoderate]" type="submit" value="{$CONST.APPROVE}">
             </div>
         </form>
         <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>

@@ -204,8 +204,6 @@
 {if $case_directorySelect}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
-    <p>{$CONST.DIRECTORIES_AVAILABLE}</p>
-
     <h3>{$CONST.BASE_DIRECTORY}</h3>
 
     <ul id="serendipity_image_folders">
