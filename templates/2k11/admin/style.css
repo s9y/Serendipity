@@ -671,6 +671,29 @@ input[type="submit"].state_cancel:active {
     border-color: #582322 #893634 #b94a48;color: #fafafa;
 }
 
+input[type="submit"].entry_preview {
+    background: #ddd;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(100%, #ddd));
+    background-image: -webkit-linear-gradient(#fff, #ddd);
+    background-image: -moz-linear-gradient(#fff, #ddd);
+    background-image: -o-linear-gradient(#fff, #ddd);
+    background-image: linear-gradient(#fff, #ddd);
+    border-color: #ddd #bbb #999;
+    color: #222;
+    text-shadow: #fff 0 1px 1px;
+}
+
+input[type="submit"].entry_preview:hover,
+input[type="submit"].entry_preview:focus {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fff), color-stop(1px, #eee), color-stop(100%, #ccc));
+    background-image: -webkit-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: -moz-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: -o-linear-gradient(#fff, #eee 1px, #ccc);
+    background-image: linear-gradient(#fff, #eee 1px, #ccc);
+    color: #222;
+    text-shadow: #fff 0 1px 1px;
+}
+
 a.button_link.state_submit,
 a.button_link.state_submit:visited,
 a.button_link.state_submit:hover,
@@ -2531,6 +2554,10 @@ img.mfp-img {
         font-size: .875em;
         line-height: 1.71429em;
         margin: 1.71429em 0;
+    }
+
+    #edit_entry_submit .form_buttons {
+        text-align: right;
     }
 
     #main_menu li > ul > li {
