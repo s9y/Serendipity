@@ -21,7 +21,7 @@
 {elseif $template_option.webfonts == 'dserif'}
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
-    <link rel="stylesheet" href="{$head_link_stylesheet}">
+    <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
