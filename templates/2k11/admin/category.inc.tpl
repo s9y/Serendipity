@@ -127,7 +127,7 @@
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {/if}
 {if $view}
-    <h2>{$CONST.CATEGORY_INDEX}:</h2>
+    <h2>{$CONST.CATEGORIES}</h2>
     {if is_array($viewCats)}
         <ul id="categories">
         {foreach $viewCategories as $category}

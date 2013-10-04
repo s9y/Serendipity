@@ -123,7 +123,6 @@
     {if $save}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
-    <h2>{$CONST.BELOW_IS_A_LIST_OF_INSTALLED_PLUGINS}</h2>
     <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
     <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
     <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
