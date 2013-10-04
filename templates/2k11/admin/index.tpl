@@ -140,7 +140,7 @@
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration">{$CONST.CONFIGURATION}</a></li>
                         {/if}
                         {if 'adminTemplates'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">{$CONST.MANAGE_STYLES}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">Configure Designs</a></li> {* i18n *}
                         {/if}
                         {if 'adminPlugins'|checkPermission}
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins">{$CONST.CONFIGURE_PLUGINS}</a></li>

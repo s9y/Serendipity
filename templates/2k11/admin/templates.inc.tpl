@@ -7,7 +7,7 @@
 
 {if $adminAction == 'editConfiguration'}
     <section id="template_options">
-        <h2>{$CONST.STYLE_OPTIONS} ({$cur_template})</h2>
+        <h2>Design options ({$cur_template})</h2> {* i18n *}
     {if $has_config}
         {if $adminAction == 'configure'}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$save_time}</span>
@@ -26,7 +26,7 @@
 {else}
     <section id="template_select">
         {assign var="cur_tpl" value=$templates[$cur_template]}
-        <h2>Current template</h2> {* i18n *}
+        <h2>Current Design</h2> {* i18n *}
 
         <article class="clearfix current_template">
             <h3>{$cur_tpl.info.name}</h3>
@@ -48,19 +48,19 @@
                             <dd>{$cur_tpl.info.author}</dd>
                             <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                             <dd>{$cur_tpl.info.date}</dd>
-                            <dt class="template_admin">Admin theme:</dt> {* i18n *}
+                            <dt class="template_admin">Own admin design:</dt> {* i18n *}
                             <dd>{$cur_tpl.info.custom_admin_interface}</dd>
                         </dl>
                     </footer>
                 </div>
             </div>
 
-            <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
+            <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button> {* i18n *}
 
             <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
         </article>
 
-        <h2>{$CONST.SELECT_TEMPLATE}</h2>
+        <h2>Available Designs</h2>
 
         <ul class="plainList clearfix">
         {foreach $templates as $template=>$info}
@@ -85,17 +85,17 @@
                                     <dd>{$info.info.author}</dd>
                                     <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                                     <dd>{$info.info.date}</dd>
-                                    <dt class="template_admin">Admin theme:</dt> {* i18n *}
+                                    <dt class="template_admin">Own admin design:</dt> {* i18n *}
                                     <dd>{if $info.info.custom_admin_interface} {$info.info.custom_admin_interface} {else} {$CONST.NO} {/if}</dd>
                                 </dl>
                             </footer>
                         </div>
                     </div>
 
-                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>
+                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>  {* i18n *}
 
                 {if !$info.unmetRequirements}
-                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.SET_AS_TEMPLATE}</a>
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">Select</a>  {* i18n *}
                 {else}
                     <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$info.unmetRequirements}></span>
                 {/if}
