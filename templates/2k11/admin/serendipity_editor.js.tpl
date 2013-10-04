@@ -370,22 +370,27 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
-            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-minus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
-                $(this).toggleClass('active');
                 serendipity.toggle_extended(true);
             });
+            if (localStorage.show_extended_editor == "true") {
+                // the editor is visible by default - note the string, as bool isn't supported yet in localStorage
+                return;
+            }
         }
         
         if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
             $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
             $('#toggle_extended').find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+            localStorage.show_extended_editor = "true";
         } else {
             $('textarea[name="serendipity[extended]"]').hide();
             $('#tools_extended').hide();
             $('#toggle_extended').find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
+            localStorage.show_extended_editor = "false";
         }
         if (setCookie) {
             document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
@@ -789,11 +794,16 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             var $toggleState = $toggleIcon.attr('class');
             if($toggleState == 'icon-minus') {
                 $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+                localStorage.show_advanced_options = "false";
             } else {
                 $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                localStorage.show_advanced_options = "true";
             }
             $('#adv_opts').toggleClass('additional_info');
         });
+        if (localStorage.show_advanced_options == "true") {
+            $('#advanced_options > legend > button').click();
+        }
     }
 
     // Entry preview

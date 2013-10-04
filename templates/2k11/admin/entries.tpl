@@ -109,7 +109,7 @@
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
         <fieldset id="advanced_options">
-            <legend><button class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button><span>{$CONST.ADVANCED_OPTIONS}</span></legend>
+            <legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button><span>{$CONST.ADVANCED_OPTIONS}</span></legend>
             <div id="adv_opts" class="additional_info">
             {$smarty.capture.advanced_options}
             </div>
