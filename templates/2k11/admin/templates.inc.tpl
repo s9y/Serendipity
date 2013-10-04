@@ -48,7 +48,7 @@
                             <dd>{$cur_tpl.info.author}</dd>
                             <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                             <dd>{$cur_tpl.info.date}</dd>
-                            <dt class="template_admin">Own admin design:</dt> {* i18n *}
+                            <dt class="template_admin">Has admin design:</dt> {* i18n *}
                             <dd>{$cur_tpl.info.custom_admin_interface}</dd>
                         </dl>
                     </footer>
@@ -85,7 +85,7 @@
                                     <dd>{$info.info.author}</dd>
                                     <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                                     <dd>{$info.info.date}</dd>
-                                    <dt class="template_admin">Own admin design:</dt> {* i18n *}
+                                    <dt class="template_admin">Has admin design:</dt> {* i18n *}
                                     <dd>{if $info.info.custom_admin_interface} {$info.info.custom_admin_interface} {else} {$CONST.NO} {/if}</dd>
                                 </dl>
                             </footer>
@@ -95,7 +95,7 @@
                     <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="Show template info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show template info</span></button>  {* i18n *}
 
                 {if !$info.unmetRequirements}
-                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">Select</a>  {* i18n *}
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}</a>
                 {else}
                     <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$info.unmetRequirements}></span>
                 {/if}
