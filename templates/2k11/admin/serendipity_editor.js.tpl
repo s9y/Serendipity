@@ -752,13 +752,17 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
     if($('body').has('#serendipityEntry').size() > 0) {
-        $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
+        if(!Modernizr.inputtypes.date) {
+            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
+        }
     }
     
     // Set entry timestamp
     $('#reset_timestamp').click(function(e) {
         $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
-        $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
+        if(!Modernizr.inputtypes.date) {
+            $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
+        }
         e.preventDefault();
     });
 
