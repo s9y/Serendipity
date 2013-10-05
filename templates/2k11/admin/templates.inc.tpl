@@ -60,7 +60,7 @@
             <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
         </article>
 
-        <h2>Available Designs</h2>
+        <h2>Available Designs</h2> {* i18n *}
 
         <ul class="plainList clearfix">
         {foreach $templates as $template=>$info}

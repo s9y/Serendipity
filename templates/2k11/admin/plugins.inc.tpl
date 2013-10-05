@@ -145,7 +145,7 @@
     </section>
     {if $memsnaps}
     <section>
-        <h3>Memory Usage</h3>
+        <h3>Memory Usage</h3> {* i18n *}
 
         <pre>{$memSnaps|print_r}</pre>
     </section>

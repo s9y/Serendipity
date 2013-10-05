@@ -1,6 +1,6 @@
 {if $importForm}
     {if $die}
-        <span class="msg_error"><span class="icon-attention-circled"></span> FAILURE: Unable to require import module, possible syntax error?</span>
+        <span class="msg_error"><span class="icon-attention-circled"></span> FAILURE: Unable to require import module, possible syntax error?</span> {* i18n *}
     {else}
         {if $validateData}
         <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.IMPORT_STARTING}</span>

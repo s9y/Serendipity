@@ -27,7 +27,7 @@
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix {$zebra_class}">
-                    <legend><span>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</span></legend>
+                    <legend><span>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</span></legend> {* i18n *}
                     <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>

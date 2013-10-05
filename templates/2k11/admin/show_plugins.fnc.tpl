@@ -20,7 +20,7 @@
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
                             <input id="remove_{$plugin_data['name']}" class="multidelete" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}" data-multidelid="{$plugin_data['css_key']}">
-                            <label for="remove_{$plugin_data['name']}" class="visuallyhidden">Remove this plugin</label>{* i18n *}
+                            <label for="remove_{$plugin_data['name']}" class="visuallyhidden">Remove this plugin</label> {* i18n *}
                         </div>
                     {/if}
                         <h5>
@@ -28,7 +28,7 @@
                         </h5>
 
                         <div id="g{$plugin_data['css_key']}" class="pluginmanager_grablet">
-                            <button id="grab{$plugin_data['css_key']}" class="icon_link button_link" type="button" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></button>{* i18n *}
+                            <button id="grab{$plugin_data['css_key']}" class="icon_link button_link" type="button" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> Move</span></button> {* i18n *}
                         </div>
 
                     {if $plugin_data['can_configure']}
@@ -72,14 +72,14 @@
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <span class="icon-up-open"></span><span class="visuallyhidden"> UP</span>
-                                    </a>
+                                    </a> {* i18n *}
                                 {/if}
 
                                 {if $sort_idx == $total - 1}
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
                                         <span class="icon-down-open"></span><span class="visuallyhidden"> DOWN</span>
-                                    </a>
+                                    </a> {* i18n *}
                                 {/if}
                             </li>
                         </noscript>

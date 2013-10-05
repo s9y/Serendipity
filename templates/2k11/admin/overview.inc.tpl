@@ -8,7 +8,7 @@
         <section id="dashboard_update">
             <h3>Update notification</h3> {* i18n *}
 
-            <span class="msg_notice"><span class="icon-info-circled"></span> New stable Serendipity version available: {$curVersion}</span>
+            <span class="msg_notice"><span class="icon-info-circled"></span> New stable Serendipity version available: {$curVersion}</span> {* i18n *}
         </section>
     {/if}
     {if is_array($comments)}
