@@ -997,19 +997,14 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Show further links
-    $('.toggle_links').click(function(e) {
-        e.preventDefault();
-        {if $use_popups}
+    {if $use_popups}
+        $('.toggle_links').click(function(e) {
+            e.preventDefault();
             $('#s9y_links').toggleClass('mfp-hide');
-        {else}
-            $(this).magnificPopup({
-                items: [{
-                    src: '#s9y_links',
-                    type: 'inline'
-                }]
-            });
-        {/if}
-    });
+        });
+    {else}
+        $('.toggle_links').magnificPopup({ type: "inline" });
+    {/if}
 
     // Media file actions
     {if $use_popups}
