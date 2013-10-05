@@ -1002,12 +1002,16 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Show further links
     {if $use_popups}
-        $('.toggle_links').click(function(e) {
-            e.preventDefault();
-            $('#s9y_links').toggleClass('mfp-hide');
-        });
+        if($('body').has('#dashboard').size() > 0) {
+            $('.toggle_links').click(function(e) {
+                e.preventDefault();
+                $('#s9y_links').toggleClass('mfp-hide');
+            });
+        }
     {else}
-        $('.toggle_links').magnificPopup({ type: "inline" });
+        if($('body').has('#dashboard').size() > 0) {
+            $('.toggle_links').magnificPopup({ type: "inline" });
+        }
     {/if}
 
     // Media file actions
