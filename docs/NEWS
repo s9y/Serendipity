@@ -3,12 +3,19 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Fixed possible double includement of plugin_internal.inc.php
+
     * Smarty 3.1.15 release - please read  bundled-libs/Smarty/change_log.txt
 
     * Fix possible temporary caching errors failing $eventData[0]['properties']
 
+    * Basic support for static blocks (includeentry plugin) in 2k11.
+
     * Added "backend_footer" event hook
-    
+
+    * Exclude "frontpage extensions" directories "_vti_cnf" on windows servers
+      in Media Library
+
     * Fixed pagination when searching terms with fetchlimit < 4
 
     * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
