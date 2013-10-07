@@ -1680,7 +1680,7 @@ class serendipity_event extends serendipity_plugin
 }
 
 if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
-    include S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php';
+    include_once S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php';
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

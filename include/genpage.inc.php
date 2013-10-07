@@ -15,7 +15,7 @@ if (!defined('S9Y_FRAMEWORK_PLUGIN_API')) {
 }
 
 if (!defined('S9Y_FRAMEWORK_PLUGIN_INTERNAL')) {
-    include(S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php');
+    include_once(S9Y_INCLUDE_PATH . 'include/plugin_internal.inc.php');
 }
 
 $uri_addData = array(
