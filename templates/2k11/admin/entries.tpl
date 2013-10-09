@@ -61,14 +61,14 @@
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_extended" class="editor_toolbar">
         {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="body" data-tarea="extended">NoBR</button>
+            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="extended">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="body" data-tarea="extended">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="body" data-tarea="extended">B</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="body" data-tarea="extended">{$CONST.QUOTE}</button>
-            <button class="wrap_insimg" type="button" name="insJ" data-tarea="body" data-tarea="extended">img</button>
-            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="body" data-tarea="extended">{$CONST.MEDIA}</button>
-            <button class="wrap_insurl" type="button" name="insURL" data-tarea="body" data-tarea="extended">URL</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="extended">I</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="extended">B</button>
+            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="extended">{$CONST.QUOTE}</button>
+            <button class="wrap_insimg" type="button" name="insJ" data-tarea="extended">img</button>
+            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="extended">{$CONST.MEDIA}</button>
+            <button class="wrap_insurl" type="button" name="insURL" data-tarea="extended">URL</button>
             {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
         </div>
     {/if}
