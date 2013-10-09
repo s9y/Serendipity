@@ -1,6 +1,7 @@
 $("document").ready(function() {
     $('.pluginmanager_sidebar .pluginmanager_container').sortable(getDragdropConfiguration('plugins_sidebar'));
     $('.pluginmanager_event .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
+    $('.configuration_group .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
 
     function getDragdropConfiguration(group) {
         return {

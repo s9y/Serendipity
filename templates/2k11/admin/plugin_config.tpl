@@ -27,6 +27,11 @@
     {/foreach}
     </div>
 {/if}
+
+{* Those are only needed if the plugin contains a config item of type sequence, liek the entryproperty-plugin *}
+<script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
+<script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
+<script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
 {foreach $OUT_STACK_REST as $out_stack_config_item}
     <div class="configuration_group {cycle values='odd,even'}">
     {$out_stack_config_item}

@@ -90,25 +90,18 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 $value    = $_POST['serendipity']['plugin'][$config_item];
 
                 $validate = $plugin->validate($config_item, $cbag, $value);
-
                 if ($validate === true) {
-//                    echo $config_item . " validated: $validate<br />\n";
-
                     if (!empty($_POST['serendipity']['plugin']['override'][$config_item])) {
                         $value = $_POST['serendipity']['plugin']['override'][$config_item];
                     }
 
                     if (is_array($_POST['serendipity']['plugin']['activate'][$config_item])) {
-                        $values = explode(',', $value);
-                        $out_values = array();
-                        foreach($values AS $out_value) {
-                            if (!isset($_POST['serendipity']['plugin']['activate'][$config_item][$out_value])) {
-                                continue;
-                            }
-                            
-                            $out_values[] = $out_value;
+                        $active_values = array();
+                        foreach($_POST['serendipity']['plugin']['activate'][$config_item] as $ordered_item_value) {
+                            $ordered_item_value;
+                            $active_values[] = $ordered_item_value;
                         }
-                        $value = implode(',', $out_values);
+                        $value = implode(',', $active_values);
                     }
 
                     $plugin->set_config($config_item, $value);

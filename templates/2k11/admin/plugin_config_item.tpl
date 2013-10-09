@@ -63,15 +63,12 @@
         {if $cdesc != ''}<span id="{$postKey}_{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </div>
 {elseif $ctype == 'sequence'}
-    {if !$sequencejs_output}
-    <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
-    {/if}
     <fieldset>
         <legend><span>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</span></legend>
         <input id="{$config_item}_value" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$value}">
 
         <noscript>
-            <!-- Replace standard submit button when using up/down submits -->
+            {* Replace standard submit button when using up/down submits *}
             <input name="SAVECONF" type="hidden" value="Save">
         </noscript>
 
@@ -83,7 +80,7 @@
                 </div>
             {if $checkable}
                 <div class="form_check">
-                    <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" onclick="sort_{$config_item}_Sequence();" value="true">
+                    <input id="activate_{$orid['id']}" name="serendipity[{$postKey}][activate][{$config_item}][{$orid['id']}]" {(in_array($orid['id'], $store_order)) ? ' checked="checked" ' : ''} type="checkbox" value="{$orid['id']}">
                     <label for="activate_{$orid['id']}" class="visuallyhidden">Activate</label> {* i18n *}
                 </div>
             {/if}
@@ -113,36 +110,4 @@
     {/if}
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </fieldset>
-    <script>
-        function sort_{$config_item}_Sequence() { 
-            //var seq = DragDrop.serData('{$config_item}_group', null);
-            var seq = DragDrop.serData(null, '{$config_item}');
-            var start = seq.indexOf("(");
-            var end = seq.indexOf(")");
-            seq = seq.slice((start + 1), end);
-            checkable_seq = seq.split(",");
-            out_seq = '';
-            for (i in checkable_seq) { 
-                if (document.getElementById('activate_' + checkable_seq[i]) && !document.getElementById('activate_' + checkable_seq[i]).checked) { 
-                    continue;
-                } else { 
-                    if (out_seq != '') { 
-                        out_seq += ',';
-                    } 
-                out_seq += checkable_seq[i];
-                } 
-            } 
-            var order = document.getElementById("{$config_item}_value");
-            order.value = out_seq;
-        } 
-
-        function init_{$config_item}_Sequence() { 
-            var lst = document.getElementById("{$config_item}");
-            DragDrop.makeListContainer(lst, '{$config_item}_group');
-            lst.onDragOut = function() { 
-                sort_{$config_item}_Sequence();
-            };
-        } 
-        addLoadEvent(init_{$config_item}_Sequence);
-    </script>
 {/if}
