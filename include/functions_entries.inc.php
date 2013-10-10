@@ -1239,6 +1239,10 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     $serendipity['smarty']->assignByRef('entries', $dategroup);
     unset($entries, $dategroup);
 
+    $serendipity['smarty']->assign(array(
+        'is_preview' => $preview
+    ));
+
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
         return serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
     } elseif ($smarty_fetch == true) {
