@@ -618,8 +618,8 @@ class serendipity_event_textwiki extends serendipity_event
             if (serendipity_db_bool($this->get_config($name, $rule['flag']))) {
                 $this->_add_wiki_rule($bag, $name, $rule);
             } else {
-		$this->_remove_wiki_rule($bag, $name);
-	    }
+        $this->_remove_wiki_rule($bag, $name);
+        }
         }
         return true;
     }
@@ -641,7 +641,7 @@ class serendipity_event_textwiki extends serendipity_event
             }
         }
         $this->wiki->enableRule($name);
-	$this->wiki->setRenderConf("Xhtml", $name, $rule_info);
+    $this->wiki->setRenderConf("Xhtml", $name, $rule_info);
         return true;
     }
 

@@ -21,7 +21,7 @@
 @define('PLUGIN_KARMA_INVALID', 'Voto inválido.');
 @define('PLUGIN_KARMA_ALREADYVOTED', 'A sua classificação já tinha sido guardada.');
 @define('PLUGIN_KARMA_NOCOOKIE', 'O seu navegador deve aceitar cookies para que possa votar.');
-@define('PLUGIN_KARMA_CLOSED', 'Vote artigos mais recentes que %s dias!'); 
+@define('PLUGIN_KARMA_CLOSED', 'Vote artigos mais recentes que %s dias!');
 @define('PLUGIN_KARMA_ENTRYTIME', 'Tempo até à votação depois da publicação');
 @define('PLUGIN_KARMA_VOTINGTIME', 'Tempo de votação');
 @define('PLUGIN_KARMA_ENTRYTIME_BLAHBLAH', 'Quanto tempo (em minutos) depois do artigo ser publicado deve decorrer até à votação sem restrições? Por omissão: 1440 (um dia)');

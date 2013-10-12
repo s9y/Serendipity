@@ -74,68 +74,68 @@ class Text_Wiki_Rule_table extends Text_Wiki_Rule {
     * table elements and cell text.
     *
     */
-    
+
     function process(&$matches)
     {
         // out eventual return value
         $return = '';
-        
+
         // start a new table
         $return .= $this->addToken(array('type' => 'table_start'));
-        
+
         // rows are separated by newlines in the matched text
         $rows = explode("\n", $matches[1]);
-        
+
         // loop through each row
         foreach ($rows as $row) {
-            
+
             // start a new row
             $return .= $this->addToken(array('type' => 'row_start'));
-            
+
             // cells are separated by double-pipes
             $cell = explode("||", $row);
-            
+
             // get the last cell number
             $last = count($cell) - 1;
-            
+
             // by default, cells span only one column (their own)
             $span = 1;
-            
+
             // ignore cell zero, and ignore the "last" cell; cell zero
             // is before the first double-pipe, and the "last" cell is
             // after the last double-pipe. both are always empty.
             for ($i = 1; $i < $last; $i ++) {
-                
+
                 // if there is no content at all, then it's an instance
                 // of two sets of || next to each other, indicating a
                 // colspan.
                 if ($cell[$i] == '') {
-                    
+
                     // add to the span and loop to the next cell
                     $span += 1;
                     continue;
-                    
+
                 } else {
-                    
+
                     // this cell has content.
-                    
+
                     // find the alignment, if any.
                     if (substr($cell[$i], 0, 2) == '> ') {
-                    	// set to right-align and strip the tag
-                    	$align = 'right';
-                    	$cell[$i] = substr($cell[$i], 2);
+                        // set to right-align and strip the tag
+                        $align = 'right';
+                        $cell[$i] = substr($cell[$i], 2);
                     } elseif (substr($cell[$i], 0, 2) == '= ') {
-                    	// set to center-align and strip the tag
-                    	$align = 'center';
-                    	$cell[$i] = substr($cell[$i], 2);
+                        // set to center-align and strip the tag
+                        $align = 'center';
+                        $cell[$i] = substr($cell[$i], 2);
                     } elseif (substr($cell[$i], 0, 2) == '< ') {
-                    	// set to left-align and strip the tag
-                    	$align = 'left';
-                    	$cell[$i] = substr($cell[$i], 2);
+                        // set to left-align and strip the tag
+                        $align = 'left';
+                        $cell[$i] = substr($cell[$i], 2);
                     } else {
-                    	$align = null;
+                        $align = null;
                     }
-                    
+
                     // start a new cell...
                     $return .= $this->addToken(
                         array (
@@ -144,10 +144,10 @@ class Text_Wiki_Rule_table extends Text_Wiki_Rule {
                             'colspan' => $span
                         )
                     );
-                    
+
                     // ...add the content...
                     $return .= trim($cell[$i]);
-                    
+
                     // ...and end the cell.
                     $return .= $this->addToken(
                         array (
@@ -156,26 +156,26 @@ class Text_Wiki_Rule_table extends Text_Wiki_Rule {
                             'colspan' => $span
                         )
                     );
-                    
+
                     // reset the colspan.
                     $span = 1;
                 }
-                    
+
             }
-            
+
             // end the row
             $return .= $this->addToken(array('type' => 'row_end'));
-            
+
         }
-        
+
         // end the table
         $return .= $this->addToken(array('type' => 'table_end'));
-        
+
         // we're done!
         return "\n$return\n";
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -193,56 +193,56 @@ class Text_Wiki_Rule_table extends Text_Wiki_Rule {
     {
         // make nice variable names (type, align, colspan)
         extract($options);
-        
+
         $pad = '    ';
-        
+
         $border = (isset($this->_conf['border']))
-        	? $this->_conf['border'] : '1';
-        	
+            ? $this->_conf['border'] : '1';
+
         $spacing = (isset($this->_conf['spacing']))
-        	? $this->_conf['spacing'] : '0';
-        
+            ? $this->_conf['spacing'] : '0';
+
         $padding = (isset($this->_conf['padding']))
-        	? $this->_conf['padding'] : '4';
-        
+            ? $this->_conf['padding'] : '4';
+
         switch ($type) {
-        
+
         case 'table_start':
             return "<table border=\"$border\" " .
-            	"cellspacing=\"$spacing\" " .
-            	"cellpadding=\"$padding\">\n";
+                "cellspacing=\"$spacing\" " .
+                "cellpadding=\"$padding\">\n";
             break;
-        
+
         case 'table_end':
             return "</table>\n";
             break;
-        
+
         case 'row_start':
             return "$pad<tr>\n";
             break;
-        
+
         case 'row_end':
             return "$pad</tr>\n";
             break;
-        
+
         case 'cell_start':
-        	$tmp = $pad . $pad . '<td';
+            $tmp = $pad . $pad . '<td';
             if ($colspan > 1) {
                 $tmp .= " colspan=\"$colspan\"";
             }
             if ($align) {
-            	$tmp .= " align=\"$align\"";
+                $tmp .= " align=\"$align\"";
             }
             return $tmp . '>';
             break;
-        
+
         case 'cell_end':
             return "</td>\n";
             break;
-        
+
         default:
             return '';
-        
+
         }
     }
 }

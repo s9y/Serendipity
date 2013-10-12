@@ -147,7 +147,7 @@ class serendipity_event_mailer extends serendipity_event
                     } else {
                         $mailto = $this->get_config('mailto');
                     }
-                    
+
                     if (isset($serendipity['POST']['properties']['sendentry_all'])) {
                         $sendtoall = $serendipity['POST']['properties']['sendentry_all'];
                     } else {

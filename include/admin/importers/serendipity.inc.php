@@ -104,10 +104,10 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                 echo 'Dupe-Check: <pre>' . print_r($dupes, true) . '</pre>';
             }
         }
-        
+
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}" . $table . " " . $where, $s9ydb);
         echo mysql_error($s9ydb);
-        
+
         if (!$res || mysql_num_rows($res) < 1) {
             return false;
         }
@@ -119,7 +119,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                 foreach($primary_keys AS $primary_key) {
                     $primary_vals[$primary_key] = $row[$primary_key];
                     if ($table == 'comments') {
-	                    $primary_vals['entry_id'] = $row['entry_id'];
+                        $primary_vals['entry_id'] = $row['entry_id'];
                     }
                     unset($row[$primary_key]);
                 }
@@ -131,15 +131,15 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             if (is_array($fix_relations)) {
                 foreach($fix_relations AS $primary_key => $fix_relation) {
                     foreach($fix_relation AS $fix_relation_table => $fix_relation_primary_key) {
-                    
-						if ($table == 'comments' && $fix_relation_table == 'entries') {
-							$assoc_val = $primary_vals['entry_id'];
-						} elseif (isset($primary_vals[$fix_relation_primary_key])) {
+
+                        if ($table == 'comments' && $fix_relation_table == 'entries') {
+                            $assoc_val = $primary_vals['entry_id'];
+                        } elseif (isset($primary_vals[$fix_relation_primary_key])) {
                             $assoc_val = $primary_vals[$fix_relation_primary_key];
                         } else {
-							$assoc_val = $row[$primary_key];
+                            $assoc_val = $row[$primary_key];
                         }
-                        
+
                         if (!$this->execute && empty($assoc_val)) {
                             if ($this->debug) {
                                 echo '<pre>';
@@ -150,7 +150,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                         }
 
                         $new_val = $this->storage[$fix_relation_table][$fix_relation_primary_key][$assoc_val];
-                        
+
                         if ($skip_dupes && $assoc_val == $new_val) {
                             $insert = false;
                         }
@@ -158,7 +158,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                         if (!empty($new_val)) {
                             $row[$primary_key] = $new_val;
                         }
-                        
+
                         if (!$this->execute && $this->debug) {
                             echo "<span>Fix relation from $fix_relation_table.$fix_relation_primary_key={$primary_vals[$fix_relation_primary_key]} to {$row[$primary_key]} (assoc_val: $assoc_val)</span>";
                         }
@@ -190,11 +190,11 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                         $this->storage[$table][$primary_key][$primary_val] = $this->counter;
                     }
                 }
-                
+
                 foreach($this->storage[$table] AS $primary_key => $primary_data) {
-                	foreach($primary_data AS $primary_val => $replace_val) {
-                		serendipity_set_config_var('import_s9y_' . $table . '_' . $primary_key . '_' . $primary_val, $replace_val, 99);
-                	}
+                    foreach($primary_data AS $primary_val => $replace_val) {
+                        serendipity_set_config_var('import_s9y_' . $table . '_' . $primary_key . '_' . $primary_val, $replace_val, 99);
+                    }
                 }
             } else {
                 if ($this->debug && !$this->execute) {
@@ -202,7 +202,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                 }
             }
         }
-        
+
         if (!$this->execute) {
             echo 'Storage on '. $table . ':<pre>' . print_r($this->storage[$table], true) . '</pre>';
         } else {
@@ -458,7 +458,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         if (!is_array($this->data['targets'])) {
             return "No targets selected";
         }
-        
+
         $this->storage = array();
         foreach($this->data['targets'] AS $target) {
             $this->{'import_' . $target}($s9ydb);

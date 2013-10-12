@@ -30,7 +30,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
                                              'dateformat',
                                              'box_cols',
                                              'box_rows'));
-                                             
+ 
         $propbag->add('groups', array('FRONTEND_FEATURES'));
     }
 

@@ -175,7 +175,7 @@ class serendipity_event_trackexits extends serendipity_event
     function _encodeExitsCallback($buffer, $url_only = false) {
         global $serendipity;
         static $redir = null;
-        
+
         if ($redir === null) {
             $redir    = $this->get_config('commentredirection');
         }
@@ -205,7 +205,7 @@ class serendipity_event_trackexits extends serendipity_event
         if ($redir == 'bmi') {
             return sprintf(
                 '<a%shref="%s" ' . (!$is_title ? 'title="%s" ' : '%s') . (!$is_over ? ' onmouseover="window.status=\'%s\';return true;" ' : '%s') . (!$is_out ? 'onmouseout="window.status=\'\';return true;"' : '') . '%s>',
-                
+
                 $buffer[1],
                 'http://bmi.pifo.biz/?' . $url,
                 (!$is_title ? htmlspecialchars($url) : ''),

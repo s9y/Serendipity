@@ -35,6 +35,6 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1', '你可以在你的博客模版中使用额外附加的自定义字段，从而将相关字段内容显示在页面上。你需要编辑entries.tpl这个模版文件，将Smarty标记( 例如{$entry.properties.ep_MyCustomField} )放在该模版文件中你想放置的合适位置，不过需要主意的是，要在每一个自定义字段前面添加前缀(prefix) ep_ 。');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', '此处你可以输入一些自定义字段的名称，用逗号分割开来。这些自定义字段可以在任何一篇文章中被使用。不要在自定义字段的名称中使用特殊字符或空格。自定义字段的名称可以是 Customfield1, Customfield2 等等。 ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', '可在“<a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">配置插件</a>”中修改自定义字段。');
-		
-@define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', '禁止在此文章中使用标记语言方面的插件。');		
+
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', '禁止在此文章中使用标记语言方面的插件。');
 

@@ -40,7 +40,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
     if (is_array($entries)) {
         foreach ($entries as $key => $_entry) {
             $entry = &$entries[$key];
-            
+
             if (isset($entry['entrytimestamp'])) {
                 $e_ts = $entry['entrytimestamp'];
             } else {
@@ -60,7 +60,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                     $entry['author'] .= ' - ' . $entry['ctitle'];
                 }
                 $entry['title'] = (!empty($entry['author']) ? $entry['author'] : ANONYMOUS) . ': ' . $entry['title'];
-                
+
                 // No HTML allowed here:
                 $entry['body'] = strip_tags($entry['body']);
             }
@@ -155,5 +155,5 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             $entry['per_entry_display_dat'] = $entry['display_dat'];
         }
     }
-    
+
 }

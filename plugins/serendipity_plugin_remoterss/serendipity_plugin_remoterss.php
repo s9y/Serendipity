@@ -385,7 +385,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
 
             case 'template':
                 $select = array('plugin_remoterss.tpl' => 'Default (plugin_remoterss.tpl)', 'plugin_remoterss_nasaiotd.tpl' => 'NASA Image of the day');
-                
+
                 $add_files = glob(dirname(__FILE__) . '/*.tpl');
                 foreach($add_files AS $add_file) {
                     $bn = basename($add_file);
@@ -470,7 +470,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
         if (!$cachetime || !is_numeric($cachetime)) {
             $cachetime = 10800; // 3 hours in seconds
         }
-        
+
         $smarty = serendipity_db_bool($this->get_config('smarty'));
         if ($this->get_config('template') != 'plugin_remoterss.tpl') {
             $smarty = true;
@@ -517,7 +517,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         $is_first = true;
                         foreach($rss_elements AS $rss_element) {
                             $rss_element = trim($rss_element);
-                            
+
                             if (!$is_first) {
                                 $content .= '<span class="rss_' . preg_replace('@[^a-z0-9]@imsU', '', $rss_element) . '">';
                             }
@@ -527,11 +527,11 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             } else {
                                 $content .= htmlspecialchars($this->decode($item[$rss_element]));
                             }
-                            
+
                             if ($smarty) {
                                 $item['display_elements'][preg_replace('@[^a-z0-9]@imsU', '', $rss_element)] = $this->decode($item[$rss_element]);
                             }
-                            
+
                             if (!$is_first) {
                                 $content .= '</span>';
                             }
@@ -555,7 +555,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                                       . '</div>';
 
                         }
-                        
+
                         if ($smarty) {
                             $smarty_items['items'][$i] = $item;
                             $smarty_items['items'][$i]['css_class'] = preg_replace('@[^a-z0-9]@imsU', '', $rss_element);
@@ -580,7 +580,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         if (empty($tpl)) {
                             $tpl = 'plugin_remoterss.tpl';
                         }
-                        
+
                         // Template specifics go here
                         switch($tpl) {
                             case 'plugin_remoterss_nasaiotd.tpl':
@@ -660,7 +660,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         $is_first = true;
                         foreach($rss_elements AS $rss_element) {
                             $rss_element = trim($rss_element);
-                            
+
                             if (!$is_first) {
                                 $content .= '<span class="rss_' . preg_replace('@[^a-z0-9]@imsU', '', $rss_element) . '">';
                             }
@@ -670,11 +670,11 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                             } else {
                                 $content .= htmlspecialchars($this->decode($item[$rss_element]));
                             }
-                            
+
                             if ($smarty) {
                                 $item['display_elements'][preg_replace('@[^a-z0-9]@imsU', '', $rss_element)] = $this->decode($item[$rss_element]);
                             }
-                            
+
                             if (!$is_first) {
                                 $content .= '</span>';
                             }
@@ -698,7 +698,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                                       . '</div>';
 
                         }
-                        
+
                         if ($smarty) {
                             $smarty_items['items'][$i] = $item;
                             $smarty_items['items'][$i]['css_class'] = preg_replace('@[^a-z0-9]@imsU', '', $rss_element);
@@ -709,7 +709,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         $content .= '</div>'; // end of rss_item
                         ++$i;
                     }
-                    
+
                     if ($smarty) {
                         $smarty_items['use_rss_link'] = $use_rss_link;
                         $smarty_items['bulletimg']    = $bulletimg;
@@ -723,7 +723,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin {
                         if (empty($tpl)) {
                             $tpl = 'plugin_remoterss.tpl';
                         }
-                        
+
                         // Template specifics go here
                         switch($tpl) {
                             case 'plugin_remoterss_nasaiotd.tpl':

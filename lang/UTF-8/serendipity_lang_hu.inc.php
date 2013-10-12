@@ -671,7 +671,7 @@
 @define('CONVERT_HTMLENTITIES', 'A HTML bejegyzések automatikus konvertálása?');
 @define('EMPTY_SETTING', 'Nem adtál meg értéket ehhez: "%s"!');
 @define('USERCONF_REALNAME', 'Valódi név');
-@define('USERCONF_REALNAME_DESC', 'A szerző teljes neve. Ezt látják az olvasók.'); 
+@define('USERCONF_REALNAME_DESC', 'A szerző teljes neve. Ezt látják az olvasók.');
 @define('HOTLINK_DONE', 'Fájl közvetlen hivatkozás létrehozva.<br />Kész.');
 @define('ENTER_MEDIA_URL_METHOD', 'Letöltési mód:');
 @define('ADD_MEDIA_BLAHBLAH_NOTE', 'Megjegyzés: ha a közvetlen hivatkozást választod, bizonyosodj meg arról, hogy van-e jogod ehhez, vagy a szerver ahova mutatsz a tiéd. Ezzel a módszerrel úgy jeleníthetsz meg képeket, hogy azok nem kerülnek hozzád lementésre.');
@@ -919,7 +919,7 @@
 @define('COMMENT_TOKENS_DESC', 'Amennyiben tokeneket használunk, a hozzászólásokat elfogadhatjuk vagy törölhetjük az emailben kapott linkre kattintva a blogba való bejelentkezés nélkül. Ez egy kényelmi funkció, de amennyiben egy ilyen email illetéktelenek kezébe kerül, ők is manipulálhatnak a kérdéses hozzászólásokkal további azonosítás nélkül.');
 @define('COMMENT_NOTOKENMATCH', 'A moderációs link lejárt, vagy a #%s számú hozzászólás már elfogadott/törölt');
 @define('TRACKBACK_NOTOKENMATCH', 'A moderációs link lejárt, vagy a #%s számú visszahivatkozás már elfogadott/törölt');
-@define('BADTOKEN', 'Érvénytelen moderációs link'); 
+@define('BADTOKEN', 'Érvénytelen moderációs link');
 
 @define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nÚj hozzászólást küldtél ehhez: \"%s\". A hozzászólásod ez volt:\n\n%s\n\nA blog tulajdonosa engedélyezte az email-es ellenőrzést, így a következő linkre kell kattintanod hogy azonosítsd a hozzászólásodat:\n<%s>\n");
 @define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nÚj hozzászólást küldtél ehhez: \"%s\". A hozzászólásod ez volt:\n\n%s\n\nA blog tulajdonosa engedélyezte az egyszeri email-es ellenőrzést, így a következő linkre kell kattintanod hogy azonosítsd a hozzászólásodat:\n<%s>\n\nMiután megtetted ezt, küldhetsz hozzászólásokat a felhasználóneveddel és email címeddel anélkül hogy újabb azonosító emailt kapnál.");

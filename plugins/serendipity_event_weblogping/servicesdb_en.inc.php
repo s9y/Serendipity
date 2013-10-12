@@ -64,6 +64,6 @@
               'host' => 'blogsearch.google.com',
               'path' => '/ping/RPC2'
             ),
-                                                                  
+  
         );
 ?>

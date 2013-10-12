@@ -32,7 +32,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     // Only execute if current template does not have its own jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
     // $serendipity['capabilities']['jquery'] = false
-    
+
     $check = serendipity_getTemplateFile('jquery.js');
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
@@ -141,7 +141,7 @@ class serendipity_plugin_api
         // Secure Plugin path. No leading slashes, no backslashes, no "up" directories
         $pluginPath = preg_replace('@^(/)@', '', $pluginPath);
         $pluginPath = str_replace(array('..', "\\"), array('', '/'), serendipity_db_escape_string($pluginPath));
-        
+
         if ($pluginPath == 'online_repository') {
             $pluginPath = $key;
         }
@@ -596,7 +596,7 @@ class serendipity_plugin_api
                 $p->serendipity_owner = $owner[0];
             }
         }
-        
+
         $p->pluginPath = $p->act_pluginPath = $pluginPath;
         if (empty($p->act_pluginPath)) {
             $p->act_pluginPath = $class_name;
@@ -862,7 +862,7 @@ class serendipity_plugin_api
         if (count($plugins) == 0) {
             $serendipity['prevent_sidebar_plugins_' . $side] = true;
         }
-        
+
         $loggedin = false;
         if (serendipity_userLoggedIn() && serendipity_checkPermission('adminPlugins')) {
             $loggedin = true;
@@ -879,7 +879,7 @@ class serendipity_plugin_api
                 $show_plugin = $plugin->generate_content($title);
                 $content = ob_get_contents();
                 ob_end_clean();
-                
+
                 if ($loggedin) {
                     $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($plugin->instance) . '">' . EDIT . '</a></div>';
                 }
@@ -1045,12 +1045,12 @@ class serendipity_plugin_api
                 $apifunc($event_name, $bag, $eventData, $addData);
             }
         }
-        
+
         if (function_exists('serendipity_plugin_api_pre_event_hook')) {
             $apifunc = 'serendipity_plugin_api_pre_event_hook';
             $apifunc($event_name, $bag, $eventData, $addData);
         }
-        
+
         if (is_array($plugins)) {
             // foreach() operates on copies of values, but we want to operate on references, so we use while()
             @reset($plugins);
@@ -1149,7 +1149,7 @@ class serendipity_plugin_api
         if (file_exists($probelang)) {
             include $probelang;
         }
-        
+
         include $path . '/lang_en.inc.php';
     }
 }

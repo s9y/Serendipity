@@ -240,7 +240,7 @@ class serendipity_smarty_emulator_xml extends serendipity_smarty_emulator {
         echo "<serendipity>\n";
         ob_end_flush(); // This ends the started ob from index.php!
     }
-    
+
     function serendipity_smarty_emulator_xml() {
         $this->__construct();
     }
@@ -265,7 +265,7 @@ class serendipity_smarty_emulator_xml extends serendipity_smarty_emulator {
 
         return true;
     }
-    
+
 /**
  * Assign one or multiple template variable by reference - Smarty API Change > 3.0
  *

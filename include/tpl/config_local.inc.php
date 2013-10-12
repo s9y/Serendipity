@@ -504,11 +504,10 @@
                                        'default'       =>   true,
                                        'permission'    =>   'blogConfiguration'
                                        );
-                                       
-        
-        
+
+
     }
-    
+
     array_push( $res['display']['items'],
                                     array('var'         => 'serverOffsetHours',
                                           'title'       => INSTALL_OFFSET,

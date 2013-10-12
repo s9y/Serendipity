@@ -27,8 +27,8 @@ class Serendipity_Import {
  * @access public
  * @return string  HTML-code of a interface/user hint
  */
-    function getImportNotes() { 
-        return ""; 
+    function getImportNotes() {
+        return "";
     }
 
 /**
@@ -40,7 +40,7 @@ class Serendipity_Import {
  */
     function getCharsets($utf8_default = true) {
         $charsets = array();
-        
+
         if (!$utf8_default) {
             $charsets['native'] = LANG_CHARSET;
         }
@@ -52,11 +52,11 @@ class Serendipity_Import {
         if (LANG_CHARSET != 'ISO-8859-1') {
             $charsets['ISO-8859-1'] = 'ISO-8859-1';
         }
-        
+
         if ($utf8_default) {
             $charsets['native'] = LANG_CHARSET;
         }
-        
+
         return $charsets;
     }
 
@@ -90,7 +90,7 @@ class Serendipity_Import {
                     return $string;
                 }
                 return $out;
-            
+
             case 'UTF-8':
             default:
                 $out = utf8_decode($string);
@@ -130,7 +130,7 @@ class Serendipity_Import {
 
         return $data;
     }
-    
+
 /**
  * Get the transcoding table, depending on whether it was enabled for the instance of the importer plugin
  *
@@ -179,16 +179,16 @@ class Serendipity_Import {
             case 'ISO-8859-1':
                 $dbn = 'latin1';
                 break;
-            
+
             case 'UTF-8':
                 $dbn = 'utf8';
                 break;
         }
-        
+
         if ($dbn && $serendipity['dbNames']) {
             mysql_query("SET NAMES " . $dbn, $db);
         }
-       
+
         $return = &mysql_query($query, $db);
         mysql_select_db($serendipity['dbName'], $serendipity['dbConn']);
         serendipity_db_reconnect();

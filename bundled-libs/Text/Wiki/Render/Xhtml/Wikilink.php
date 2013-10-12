@@ -39,9 +39,9 @@ class Text_Wiki_Render_Xhtml_Wikilink extends Text_Wiki_Render {
         if (isset($this->conf['exists_callback'])) {
             $callback =& $this->conf['exists_callback'];
         } else {
-        	$callback = false;
+            $callback = false;
         }
-		
+
         if ($callback) {
             // use the callback function
             $exists = call_user_func($callback, $page);

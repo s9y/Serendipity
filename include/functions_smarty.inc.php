@@ -187,7 +187,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
     if (empty($params['fetchDrafts'])) {
         $params['fetchDrafts'] = false;
     }
-    
+
     if (!empty($params['entryprops'])) {
         if (preg_match_all('@(.*)(!)?=[\'"]*([^\'"]+)[\'"]*(,|$)@imsU', $params['entryprops'], $m)) {
             foreach($m[0] AS $idx => $p) {
@@ -337,7 +337,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
                 break;
         }
     }
-    
+
     if ($params['returncode'] == 'query') {
         return print_r($entry, true);
     }
@@ -746,7 +746,7 @@ function &serendipity_smarty_printComments($params, &$smarty) {
     if (empty($params['depth'])) {
         $params['depth'] = 0;
     }
-    
+
     if (empty($params['trace'])) {
         $params['trace'] = null;
     }
@@ -754,11 +754,11 @@ function &serendipity_smarty_printComments($params, &$smarty) {
     if (empty($params['block'])) {
         $params['block'] = 'COMMENTS';
     }
-    
+
     if (empty($params['template'])) {
         $params['template'] = 'comments.tpl';
     }
-    
+
     $out = serendipity_printComments($comments, $params['mode'], $params['depth'], $params['trace'], $params['block'], $params['template']);
     return $out;
 }
@@ -816,7 +816,7 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
     if (!isset($params['file'])) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
-    } 
+    }
     if (!isset($params['assign'])) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'assign' parameter", E_USER_WARNING);
         return;
@@ -876,10 +876,10 @@ function serendipity_smarty_init($vars = array()) {
             if (LANG_CHARSET != 'UTF-8') {
                 @define('SMARTY_RESOURCE_CHAR_SET', LANG_CHARSET);
             }
-            
+
             // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
-            
+
             if (!class_exists('Smarty')) {
                 include SMARTY_DIR . 'Smarty.class.php';
             }
@@ -892,7 +892,7 @@ function serendipity_smarty_init($vars = array()) {
             if (!class_exists('Serendipity_Smarty')) {
                 include 'serendipity_smarty_class.inc.php';
             }
-            
+
             if (!class_exists('Serendipity_Smarty')) {
                 return false;
             }
@@ -907,14 +907,14 @@ function serendipity_smarty_init($vars = array()) {
             $_SESSION['no_smarty'] = $prev_smarty;
 
             // enable security policy by instance of the Smarty_Security class
-            $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy'); 
+            $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy');
 
             // debugging...
             #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
             #$serendipity['smarty']->testInstall();exit;
 
             /** 
-             * prüfe auf eventuelle API Änderungen in 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (siehe class) ] 
+             * check for upcoming API changes in 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (see class) ]
              * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
              **/
             $serendipity['smarty']->registerPlugin('modifier', 'makeFilename', 'serendipity_makeFilename');
@@ -938,9 +938,9 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('function', 'pickKey', 'serendipity_smarty_pickKey');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getImageSize', 'serendipity_smarty_getImageSize');
-            
+
             $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
-            
+
         }
 
         if (!isset($serendipity['smarty_raw_mode'])) {

@@ -28,16 +28,16 @@ switch ($serendipity['GET']['adminAction']) {
             if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
                 return;
             }
-    
+
             $fullfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
             $httpfile = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] . '.' . $file['extension'];
 
             $img = new imgedit($fullfile, $httpfile);
-            
+
             // Set the filenames used for the cropping areas. Width/Height are automagically detected. Orientation is either horizontal or vertical.
             $img->setArea('imgedit_area.gif',  'h');
             $img->setArea('imgedit_varea.gif', 'v');
-            
+
             // Let the IMGEditor do its magic. It will parse its results straightly into a template variable array.
             $img->main();
             $serendipity['smarty']->assign('imgedit', $img->imgedit_smarty);
@@ -54,7 +54,7 @@ switch ($serendipity['GET']['adminAction']) {
         // Make the form to actually do sync with deleting or not
         $n = "\n";
         $warning = preg_replace('#\\\n#', '<br />', WARNING_THIS_BLAHBLAH);
-        echo '<div class="serendipityAdminMsgNote">' . $warning . '</div>'; 
+        echo '<div class="serendipityAdminMsgNote">' . $warning . '</div>';
         echo '  <form method="POST" action="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=doSync">' . $n;
         echo '  <p>' . $n . '  <fieldset>' . $n;
         echo '  <legend>' . SYNC_OPTION_LEGEND . '</legend>' . $n;
@@ -204,7 +204,7 @@ switch ($serendipity['GET']['adminAction']) {
 
     $new_media = array();
     $serendipity['POST']['imageurl'] = htmlspecialchars($serendipity['POST']['imageurl']);
-    
+
     // First find out whether to fetch a file or accept an upload
     if ($serendipity['POST']['imageurl'] != '' && $serendipity['POST']['imageurl'] != 'http://') {
         if (!empty($serendipity['POST']['target_filename'][2])) {
@@ -315,7 +315,7 @@ switch ($serendipity['GET']['adminAction']) {
 
             $tfile = serendipity_uploadSecure(basename($tfile));
 
-	        if (serendipity_isActiveFile($tfile)) {
+            if (serendipity_isActiveFile($tfile)) {
                 $messages[] = ERROR_FILE_FORBIDDEN .' '. $tfile;
                 continue;
             }
@@ -550,7 +550,7 @@ switch ($serendipity['GET']['adminAction']) {
             printf(DIRECTORY_CREATED, $serendipity['POST']['name']);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
-            
+
             // Apply parent ACL to new child.
             $array_parent_read  = serendipity_ACLGet(0, 'directory', 'read',  $serendipity['POST']['parent']);
             $array_parent_write = serendipity_ACLGet(0, 'directory', 'write', $serendipity['POST']['parent']);
@@ -707,7 +707,7 @@ switch ($serendipity['GET']['adminAction']) {
         <script language="javascript" type="text/javascript">
             location.href="<?php echo $serendipity['adminFile_redirect'] ?>";
         </script>
-	<noscript><a href="<?php echo $serendipity['adminFile_redirect'] ?>"><?php echo DONE ?></a></noscript>
+        <noscript><a href="<?php echo $serendipity['adminFile_redirect'] ?>"><?php echo DONE ?></a></noscript>
 <?php
         }
     break;
@@ -727,7 +727,7 @@ switch ($serendipity['GET']['adminAction']) {
         <script language="javascript" type="text/javascript">
             location.href="<?php echo $serendipity['adminFile_redirect'] ?>";
         </script>
-	<noscript><a href="<?php echo $serendipity['adminFile_redirect'] ?>"><?php echo DONE ?></a></noscript>
+        <noscript><a href="<?php echo $serendipity['adminFile_redirect'] ?>"><?php echo DONE ?></a></noscript>
 <?php
         }
     break;
@@ -827,7 +827,7 @@ switch ($serendipity['GET']['adminAction']) {
 
 function showMediaLibrary($messages=false, $addvar_check = false) {
     global $serendipity;
-    
+
     if (!serendipity_checkPermission('adminImagesView')) {
             return;
     }

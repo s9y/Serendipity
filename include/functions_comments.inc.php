@@ -41,7 +41,7 @@ function serendipity_checkCommentToken($token, $cid) {
             }
         }
     }
-    
+
     return $goodtoken;
 }
 
@@ -406,7 +406,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
             if (isset($comment['title'])) {
                 $comment['title']   = htmlspecialchars($comment['title']);
             }
-            
+
             if (serendipity_userLoggedIn()) {
                 if ($comment['subscribed'] == 'true') {
                     if ($comment['status'] == 'approved') {
@@ -539,7 +539,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
     $goodtoken = serendipity_checkCommentToken($token, $id);
 
     if ($_SESSION['serendipityAuthedUser'] === true || $goodtoken) {
-        
+
         $admin = '';
         if (!$goodtoken && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
             $admin = " AND authorid = " . (int)$_SESSION['serendipityAuthorid'];
@@ -547,7 +547,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
             // Load articles author id and check it
             $sql = serendipity_db_query("SELECT authorid FROM {$serendipity['dbPrefix']}entries
                                                 WHERE entry_id = ". $entry_id, true);
-            if ($sql['authorid'] != $serendipity['authorid']) { 
+            if ($sql['authorid'] != $serendipity['authorid']) {
                 return false; // wrong user having no adminEntriesMaintainOthers right
             }
 
@@ -657,7 +657,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                     ". ((!serendipity_checkPermission('adminEntriesMaintainOthers') && $force !== true && !$goodtoken) ? "AND e.authorid = '". (int)$serendipity['authorid'] ."'" : '') ."
                     ". (($force === true) ? "" : "AND status = 'pending'");
     $rs  = serendipity_db_query($sql, true);
-    
+
     // Check for adminEntriesMaintainOthers
     if (!$force && !$goodtoken && $rs['entry_authorid'] != $serendipity['authorid'] && !serendipity_checkPermission('adminEntriesMaintainOthers')) {
         return false; // wrong user having no adminEntriesMaintainOthers right
@@ -697,7 +697,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
                                                  AND type   = 'NORMAL'
                                                  AND entry_id = " . (int)$entry_id . "
                                             GROUP BY entry_id", true);
-    
+
     $counter_tb = serendipity_db_query("SELECT count(id) AS counter 
                                           FROM {$serendipity['dbPrefix']}comments 
                                          WHERE status = 'approved' 
@@ -745,7 +745,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
  */
 function serendipity_confirmMail($cid, $hash) {
     global $serendipity;
-    
+
     $q = "SELECT c.entry_id, e.title, e.timestamp, e.id
             FROM {$serendipity['dbPrefix']}comments AS c
             JOIN {$serendipity['dbPrefix']}entries AS e
@@ -769,7 +769,7 @@ function serendipity_confirmMail($cid, $hash) {
             serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']));
         }
         */
-        
+
         serendipity_approveComment($cid, $confirm['entry_id'], true);
         return $confirm;
     } else {
@@ -840,7 +840,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     } else {
         $subscribe = 'false';
     }
-    
+
     $dbhash   = md5(uniqid(rand(), true));
 
     if ($status == 'confirm') {
@@ -941,7 +941,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($GLOBALS['tb_logging']) {
         fclose($fp);
     }
-    
+
     return $cid;
 }
 
@@ -1007,7 +1007,7 @@ function serendipity_saveComment($id, $commentInfo, $type = 'NORMAL', $source = 
             fwrite($fp, '[' . date('d.m.Y H:i') . '] insert comment into DB' . "\n");
             fclose($fp);
         }
-                        
+
         $commentInfo['comment_cid'] = serendipity_insertComment($id, $commentInfo, $type, $source, $ca);
         $commentInfo['comment_id'] = $id;
         serendipity_plugin_api::hook_event('frontend_saveComment_finish', $ca, $commentInfo);
@@ -1166,7 +1166,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     $action_more = '';
     foreach($eventData['action_more'] as $action) {
         $action_more .= "\n" . str_repeat(' ', 3) . $action;
-    } 
+    }
 
     if ($type == 'TRACKBACK' || $type == 'PINGBACK') {
 

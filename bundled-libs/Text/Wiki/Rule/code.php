@@ -35,8 +35,8 @@
 */
 
 class Text_Wiki_Rule_code extends Text_Wiki_Rule {
-    
-    
+
+
     /**
     * 
     * The regular expression used to find source text matching this
@@ -47,10 +47,10 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
     * @var string
     * 
     */
-    
+
     var $regex = '/^(\<code( .+)?\>)\n(.+)\n(\<\/code\>)(\s|$)/Umsi';
-    
-    
+
+
     /**
     * 
     * Generates a token entry for the matched text.  Token options are:
@@ -65,12 +65,12 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
     * the source text.
     *
     */
-    
+
     function process(&$matches)
     {
         // are there additional arguments?
         $args = trim($matches[2]);
-        
+
         if ($args == '') {
             $options = array(
                 'text' => $matches[3],
@@ -82,11 +82,11 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
                 'args' => $this->getMacroArgs($args)
             );
         }
-        
+
         return $this->addToken($options) . $matches[5];
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -99,36 +99,36 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
     * @return string The text rendered from the token options.
     * 
     */
-    
+
     function renderXhtml($options)
     {
         // trim opening and closing whitespace
         $text = trim($options['text']);
         $args = $options['args'];
-        
+
         if (strtolower($args['type']) == 'php') {
-        	
-        	// PHP code example
-        	
+
+            // PHP code example
+
             // add the PHP tags
             $text = "<?php\n" . $options['text'] . "\n?>"; // <?php
-            
+
             // convert tabs to four spaces
             $text = str_replace("\t", "    ", $text);
-            
+
             // colorize the code block (also converts HTML entities and adds
             // <code>...</code> tags)
             ob_start();
             highlight_string($text);
             $text = ob_get_contents();
             ob_end_clean();
-            
+
             // replace <br /> tags with simple newlines
             //$text = str_replace("<br />", "\n", $text);
-            
+
             // replace non-breaking space with simple spaces
             //$text = str_replace("&nbsp;", " ", $text);
-            
+
             // replace <br /> tags with simple newlines
             // replace non-breaking space with simple spaces
             // translate old HTML to new XHTML
@@ -141,18 +141,18 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
                 'color="' => 'style="color:'
             );
             $text = strtr($text, $map);
-           
+
             // get rid of the last newline inside the code block
             // (becuase higlight_string puts one there)
             if (substr($text, -8) == "\n</code>") {
                 $text = substr($text, 0, -8) . "</code>";
             }
-            
+
             // done
             $text = "<pre>$text</pre>";
-        
+
         } elseif (strtolower($args['type']) == 'html') {
-        
+
             // HTML code example:
             // add <html> opening and closing tags,
             // convert tabs to four spaces,
@@ -161,7 +161,7 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
             $text = "<html>\n$text\n</html>";
             $text = htmlentities($text);
             $text = "<pre><code>$text</code></pre>";
-            
+
         } else {
             // generic code example:
             // convert tabs to four spaces,
@@ -170,7 +170,7 @@ class Text_Wiki_Rule_code extends Text_Wiki_Rule {
             $text = htmlentities($text);
             $text = "<pre><code>$text</code></pre>";
         }
-        
+
         return "\n$text\n";
     }
 }

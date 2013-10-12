@@ -218,7 +218,7 @@ class Textile
     var $pnct;
     var $rel;
     var $fn;
-    
+
     var $shelf = array();
     var $restricted = false;
     var $noimage = false;
@@ -226,7 +226,7 @@ class Textile
     var $url_schemes = array();
     var $glyph = array();
     var $hu = '';
-    
+
     var $ver = '2.0.0';
     var $rev = '$Rev: 216 $';
 
@@ -472,7 +472,7 @@ class Textile
                 list(, $tl, $atts, $content) = $m;
                 $nl = '';
                 if (preg_match("/^([#*]+)\s.*/", $nextline, $nm))
-                	$nl = $nm[1];
+                    $nl = $nm[1];
                 if (!isset($lists[$tl])) {
                     $lists[$tl] = true;
                     $atts = $this->pba($atts);

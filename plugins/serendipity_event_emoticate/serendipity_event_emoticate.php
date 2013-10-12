@@ -151,7 +151,7 @@ class serendipity_event_emoticate extends serendipity_event
     }
 
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) { 
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
         $hooks = &$bag->get('event_hooks');
 

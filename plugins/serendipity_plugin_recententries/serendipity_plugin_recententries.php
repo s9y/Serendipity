@@ -52,7 +52,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                     ));
                 $propbag->add('default', 'all');
             break;
-                
+
             case 'randomize':
                 $propbag->add('type', 'radio');
                 $propbag->add('name', PLUGIN_RECENTENTRIES_RANDOMIZE);
@@ -110,7 +110,7 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                 $propbag->add('description', '');
                 $propbag->add('default',     'both');
             break;
-                
+
             default:
                 return false;
         }
@@ -147,14 +147,14 @@ class serendipity_plugin_recententries extends serendipity_plugin {
         $sql_condition['and']   = '';
 
         if ($category != 'none' && !empty($category)) {
-                         
+ 
             $sql_categories = array();
             if (is_numeric($category)) {
                 $sql_categories[] = $category;
             } else {
                 $sql_categories = explode('^', $category);
             }
-            
+
             $category_parts = array();
             foreach($sql_categories AS $sql_category) {
                 $category_parts[] = "\n" . implode(' AND ', serendipity_fetchCategoryRange($sql_category));
@@ -215,9 +215,9 @@ class serendipity_plugin_recententries extends serendipity_plugin {
                           WHERE isdraft = 'false' {$sql_condition['and']}
                                 $sql_order
                                 $sql_number";
-        
+
         $entries = serendipity_db_query($entries_query);
-        
+
         if (is_string($entries)) {
             echo $entries . "<br />\n";
             echo $entries_query . "<br />\n";

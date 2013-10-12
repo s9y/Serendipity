@@ -428,7 +428,7 @@ if ($use_installer) {
                         <li class="serendipitySideBarMenuFoot serendipitySideBarMenuEntryLinks" style="display:none"></li>
                     </ul>
 <?php } ?>
-                    
+
 <?php if (serendipity_checkPermission('adminImages')) { ?>
                     <ul class="serendipitySideBarMenu serendipitySideBarMenuMedia">
                         <li class="serendipitySideBarMenuHead serendipitySideBarMenuMediaLinks"><?php echo MEDIA; ?></li>

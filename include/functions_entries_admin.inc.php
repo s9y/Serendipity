@@ -173,7 +173,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                                                         'body'      => 'serendipity[body]',
                                                         'extended'  => 'serendipity[extended]'
                                                       );
-        
+
         $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
 
         $serendipity['smarty']->registerPlugin('modifier', 'emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
@@ -571,7 +571,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         if (empty($xinha_custom)) {
             $xinha_custom = 'htmlarea/my_custom.js';
         }
-        
+
         if (!$init) {
 ?>
     <script type="text/javascript">
@@ -672,7 +672,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             return editorextended;
         } else if (typeof(htmlarea_editors) != 'undefined') {
             return htmlarea_editors[editor_id];
-        } 
+        }
         return 'undefined';
     }
     <?php } ?>
@@ -752,9 +752,9 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
                       }
                       echo '"separator" ]' . "\n";
                   } ?>
-              
+
         ];
-        
+
         if (typeof('s9y_xinha') != 'undefined') {
             s9y_xinha(editor<?php echo $jsname; ?>);
         }

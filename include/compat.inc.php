@@ -80,10 +80,10 @@ function memSnap($tshow = '') {
 if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
-        
+
         $rep  = ini_get('error_reporting');
         $args = func_get_args();
-        
+
         // respect user has set php error_reporting to not display any errors at all
         if (!($rep & $errStr)) { return false; }
         // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
@@ -96,14 +96,14 @@ if (!function_exists('errorToExceptionHandler')) {
             return false;
         }
         // any other errors go here - throw errors as exception
-        if ($serendipity['production'] === 'debug') { 
-        
+        if ($serendipity['production'] === 'debug') {
+
             // We don't want the notices - but everything else !
             echo '<p> == FULL DEBUG ERROR MODE == </p>';
             echo '<pre>';
             // trying to be as detailled as possible - but beware using args containing sensibel data like passwords
             if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
-                if ( version_compare(PHP_VERSION, '5.4') >= 0 ) { 
+                if ( version_compare(PHP_VERSION, '5.4') >= 0 ) {
                     $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8);
                 } else {
                     $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -121,7 +121,7 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
         }
-        if ($serendipity['production'] === false) { 
+        if ($serendipity['production'] === false) {
             echo '<p> == TESTING ERROR MODE == </p>';
             echo '<pre>';
             // see notes above
@@ -132,8 +132,8 @@ if (!function_exists('errorToExceptionHandler')) {
             }
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
-        } 
-        if ($serendipity['production'] === true) { 
+        }
+        if ($serendipity['production'] === true) {
             if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
                 // ToDo: enhance for more special serendipity error needs
                 $str  = '<p> == SERENDIPITY ERROR == </p>';

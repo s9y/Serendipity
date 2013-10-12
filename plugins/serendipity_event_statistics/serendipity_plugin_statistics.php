@@ -186,7 +186,7 @@ class serendipity_plugin_statistics extends serendipity_plugin
                 $lastmonday = date('Ynj', strtotime('today'));
             } else if (date('w', strtotime('today') ) == "0" ) { // now it is sunday
                 $nextsunday = date('Ynj', strtotime('today'));
-            }             
+            } 
 
             $content = '';
             if (serendipity_db_bool($this->get_config('show_lastentry'))) {

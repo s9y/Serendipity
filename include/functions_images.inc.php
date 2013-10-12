@@ -28,7 +28,7 @@ function serendipity_isActiveFile($file) {
     if ($core) {
         return true;
     }
-    
+
     $eventData = false;
     serendipity_plugin_api::hook_event('backend_media_check', $eventData, $file);
     return $eventData;
@@ -573,7 +573,7 @@ function serendipity_insertImageInDatabase($filename, $directory, $authorid = 0,
       serendipity_db_escape_string($directory),
       serendipity_db_escape_string($realname)
     );
-    
+
     $sql = serendipity_db_query($query);
     if (is_string($sql)) {
         echo $query . '<br />';
@@ -609,7 +609,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
     if ($size === false) {
         $size = $serendipity['thumbSize'];
     }
-    
+
     if ($size < 1) {
        return array(0,0);
     }
@@ -1142,7 +1142,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                         if (@unlink($fthumb)) {
                             printf(DELETE_THUMBNAIL . "<br />\n", $sThumb);
                             $i++;
-                        } 
+                        }
                     }
                 }
             }
@@ -1156,7 +1156,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                             AND extension = '" . serendipity_db_escape_string($f[1]) . "'"
         );
         serendipity_ACL_SQL($cond, false, 'directory');
-        
+
         $rs = serendipity_db_query("SELECT *
                                       FROM {$serendipity['dbPrefix']}images AS i
                                            {$cond['joins']}
@@ -1406,8 +1406,8 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
             $ratio = $height / $width;
             $newheight = round($size * $ratio);
             // Limit calculated dimension to at least 1px
-            if ($newheight <= 0) { 
-                $newheight = 1; 
+            if ($newheight <= 0) {
+                $newheight = 1;
             }
             $newsize = array($size, $newheight);
         } else {
@@ -1469,7 +1469,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         $perPage++;
     }
     $start   = ($page-1) * $perPage;
-    
+
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
         $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // _vti_cnf to exclude frontpage extensions on windows servers
@@ -2375,7 +2375,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
             'val'   => $val,
             'title' => htmlspecialchars($parts[0])
         );
-        
+
         if (!is_array($GLOBALS['IPTC'])) {
             // Your templates config.inc.php or any of the language files can declare this variable,
             // if you want to use other default settings for this. No interface ability to declare this
@@ -2723,10 +2723,10 @@ function serendipity_prepareMedia(&$file, $url = '') {
     if (file_exists($file['full_thumb'] . '.png')) {
         $file['full_thumb']     .= '.png';
         $file['full_thumbHTTP'] .= '.png';
-        $file['show_thumb']     .= '.png'; 
+        $file['show_thumb']     .= '.png';
         $sThumbSource           .= '.png';
     }
-    
+
     if (empty($file['realname'])) {
         $file['realname'] = $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
     }
@@ -3128,7 +3128,7 @@ function &serendipity_getMetaData($file, &$info) {
     if (!file_exists($file)) {
         return $ret;
     }
-    
+
     if (function_exists('iptcparse') && is_array($info) && isset($info['APP13'])) {
         $iptc = iptcparse($info['APP13']);
         foreach($IPTC_Fields AS $field => $desc) {
@@ -3138,7 +3138,7 @@ function &serendipity_getMetaData($file, &$info) {
                 } else {
                     $ret['IPTC'][$desc] = trim($iptc[$field]);
                 }
-                
+
                 switch ($desc) {
                     case 'IPTCDateCreated':
                         $ret['IPTC'][$desc] = serendipity_metaFieldConvert($ret['IPTC'][$desc],'IPTCdate');
@@ -3146,7 +3146,7 @@ function &serendipity_getMetaData($file, &$info) {
                     case 'IPTCTimeCreated':
                         $ret['IPTC'][$desc] = serendipity_metaFieldConvert($ret['IPTC'][$desc],'IPTCtime');
                         break;
-                }                
+                }
             }
         }
     }

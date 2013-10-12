@@ -42,7 +42,7 @@ class serendipity_event_spartacus extends serendipity_event
 
             'backend_pluginlisting_header'         => true,
             'backend_pluginlisting_header_upgrade' => true,
-            
+
             'external_plugin'                      => true,
 
             'backend_directory_create'             => true
@@ -217,7 +217,7 @@ class serendipity_event_spartacus extends serendipity_event
                     }
                 }
                 break;
-                
+
             case 'ftp_server':
                 if (function_exists('ftp_connect')) {
                     $propbag->add('type',        'string');
@@ -226,7 +226,7 @@ class serendipity_event_spartacus extends serendipity_event
                     $propbag->add('default',     '');
                 }
                 break;
-            
+
             case 'ftp_username':
                 if (function_exists('ftp_connect')) {
                     $propbag->add('type',        'string');
@@ -235,7 +235,7 @@ class serendipity_event_spartacus extends serendipity_event
                     $propbag->add('default',     '');
                 }
                 break;
-            
+
             case 'ftp_password':
                 if (function_exists('ftp_connect')) {
                     $propbag->add('type',        'string');
@@ -244,7 +244,7 @@ class serendipity_event_spartacus extends serendipity_event
                     $propbag->add('default',     '');
                 }
                 break;
-            
+
             case 'ftp_basedir':
                 if (function_exists('ftp_connect')) {
                     $propbag->add('type',        'string');
@@ -305,7 +305,7 @@ class serendipity_event_spartacus extends serendipity_event
         if (serendipity_db_bool($this->get_config('use_ftp')) && $this->get_config('ftp_password') != '') {
             return $this->make_dir_via_ftp($dir);
         }
-        
+
         $spaths = explode('/', $serendipity['serendipityPath'] . $sub . '/');
         $paths  = explode('/', $dir);
 
@@ -375,7 +375,7 @@ class serendipity_event_spartacus extends serendipity_event
 
         // Fix double URL strings.
         $url = preg_replace('@http(s)?:/@i', 'http\1://', str_replace('//', '/', $url));
-        
+
         // --JAM: Get the URL's IP in the most error-free way possible
         $url_parts = @parse_url($url);
         $url_hostname = 'localhost';
@@ -568,7 +568,7 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $url    = $server . '/package_' . $url_type .  $lang . '.xml';
                 $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
-        
+
                 $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
                 if (strlen($xml) > 0) {
                     $valid = true;
@@ -582,7 +582,7 @@ class serendipity_event_spartacus extends serendipity_event
             $url    = $mirror . '/package_' . $url_type .  $lang . '.xml';
             $cacheTimeout = 60*60*12; // XML file is cached for half a day
             $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
-    
+
             $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
             echo '<br /><br />';
         }
@@ -969,7 +969,7 @@ class serendipity_event_spartacus extends serendipity_event
             $servers = explode('|', $custom);
             $mirror = $servers[0];
         }
-        
+
         if (stristr($mirror, 'github.com')) {
             $gitloc = 'master/';
         }
@@ -994,11 +994,11 @@ class serendipity_event_spartacus extends serendipity_event
 
     function make_dir_via_ftp($dir) {
         global $serendipity;
-        
+
         if (!serendipity_db_bool($this->get_config('use_ftp'))) {
             return false;
         }
-        
+
         $ftp_server    = $this->get_config('ftp_server');
         $ftp_user_name = $this->get_config('ftp_username');
         $ftp_user_pass = $this->get_config('ftp_password');
@@ -1010,11 +1010,11 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         $dir = str_replace($serendipity['serendipityPath'],"",$dir);
-    
+
         // set up basic connection and log in with username and password
         $conn_id       = ftp_connect($ftp_server);
         $login_result  = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
-    
+
         // check connection
         if ((!$conn_id) || (!$login_result)) {
             $this->outputMSG('error',PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT);
@@ -1065,34 +1065,34 @@ class serendipity_event_spartacus extends serendipity_event
 
                         $avail['event']   = $this->buildList($this->fetchOnline('event'), 'event');
                         $avail['sidebar'] = $this->buildList($this->fetchOnline('sidebar'), 'sidebar');
-                        
+
                         $install['event']   = serendipity_plugin_api::enum_plugin_classes(true);
                         $install['sidebar'] = serendipity_plugin_api::enum_plugin_classes(false);
-                        
+
                         foreach($meth AS $method) {
                             echo "LISTING: $method\n-------------------\n";
                             foreach ($install[$method] as $class_data) {
                                 $pluginFile = serendipity_plugin_api::probePlugin($class_data['name'], $class_data['classname'], $class_data['pluginPath']);
                                 $plugin     = serendipity_plugin_api::getPluginInfo($pluginFile, $class_data, $method);
-                        
+
                                 if (is_object($plugin)) {
                                     // Object is returned when a plugin could not be cached.
                                     $bag = new serendipity_property_bag;
                                     $plugin->introspect($bag);
-                        
+
                                     // If a foreign plugin is upgradable, keep the new version number.
                                     if (isset($avail[$method][$class_data['name']]) && $avail[$method][$class_data['name']]['upgradable']) {
                                         $class_data['upgrade_version'] = $avail[$method][$class_data['name']]['upgrade_version'];
                                     }
                                     $props = serendipity_plugin_api::setPluginInfo($plugin, $pluginFile, $bag, $class_data, 'local', $avail[$method]);
-                                    
+
                                 } elseif (is_array($plugin)) {
                                     // Array is returned if a plugin could be fetched from info cache
                                     $props = $plugin;
                                 } else {
                                     $props = false;
                                 }
-                        
+
                                 if (is_array($props)) {
                                     #print_r($props);
                                     if (version_compare($props['version'], $props['upgrade_version'], '<')) {
@@ -1190,7 +1190,7 @@ class serendipity_event_spartacus extends serendipity_event
                     if (serendipity_db_bool($this->get_config('use_ftp')) && (!is_dir($eventData))) {
                         return $this->make_dir_via_ftp($eventData);
                     }
-                
+
                     return true;
                     break;
 

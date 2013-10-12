@@ -74,7 +74,7 @@ function serendipity_getMultiCategoriesSQL($cats, $invert = false) {
             $cat_sql_array[] = " (c.category_left " . ($invert ? " NOT " : "") . " BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange($categoryid)) . ')';
         }
     }
-    
+
     if (count($cat_sql_array) < 1) {
         return '';
     }
@@ -386,7 +386,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                     LEFT JOIN {$serendipity['dbPrefix']}category c
                         ON ec.categoryid = c.categoryid";
     }
-    
+
     if ($joinown) {
         $cond['joins'] .= $joinown;
     }
@@ -399,7 +399,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         if (isset($serendipity['GET']['page']) && ($serendipity['GET']['page'] > 1 || serendipity_db_bool($serendipity['archiveSortStable'])) && !strstr($limit, ',')) {
             if (serendipity_db_bool($serendipity['archiveSortStable'])) {
                 $totalEntries = serendipity_getTotalEntries();
-                
+
                 $totalPages = ceil($totalEntries / $limit);
                 if ($totalPages <= 0 ) {
                     $totalPages = 1;
@@ -745,7 +745,7 @@ function serendipity_rebuildCategoryTree($parent = 0, $left = 0) {
 function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     global $serendipity;
     static $log_queries = false;
-    
+
     if ($log_queries) {
         $fp = fopen($serendipity['serendipityPath'] . '/archives/queries.csv', 'a');
         fwrite($fp, date('Y-m-d H:i') . ';'
@@ -772,7 +772,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']     = '';
         $cond['distinct']  = 'DISTINCT';
-            
+
         $r = serendipity_db_query("SELECT count(routine_name) AS counter
                                      FROM information_schema.routines
                                     WHERE routine_name LIKE 'to_tsvector'
@@ -898,11 +898,11 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
             }
         }
     }
-    
+
     if (is_array($search)){
         serendipity_fetchEntryData($search);
     }
-    
+
     return $search;
 }
 
@@ -923,7 +923,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     if ($totalEntries === null) {
         $totalEntries = serendipity_getTotalEntries();
     }
-    
+
     $limits = explode(',', $serendipity['fetchLimit']);
     if (!empty($limits[1])) {
         $limit = (int)$limits[1];
@@ -1049,7 +1049,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             return; // no display of this item
         }
     }
-    
+
     // We shouldn't return here, because we want Smarty to handle the output
     if (!is_array($entries) || $entries[0] == false || !isset($entries[0]['timestamp'])) {
         $entries = array();
@@ -1234,9 +1234,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     if ($smarty_fetch === 'return') {
-        return $dategroup;    
-    }    
-    
+        return $dategroup;
+    }
+
     $serendipity['smarty']->assignByRef('entries', $dategroup);
     unset($entries, $dategroup);
 

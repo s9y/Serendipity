@@ -32,7 +32,7 @@
 */
 
 class Text_Wiki_Rule_paragraph extends Text_Wiki_Rule {
-    
+
     /**
     * 
     * The regular expression used to find source text matching this
@@ -43,10 +43,10 @@ class Text_Wiki_Rule_paragraph extends Text_Wiki_Rule {
     * @var string
     * 
     */
-    
+
     var $regex = "/^.*?\n\n/m";
-    
-    
+
+
     /**
     * 
     * Generates a token entry for the matched text.  Token options are:
@@ -63,55 +63,55 @@ class Text_Wiki_Rule_paragraph extends Text_Wiki_Rule {
     * the source text.
     *
     */
-    
+
     function process(&$matches)
     {
-    	$delim = $this->_wiki->delim;
-    	
-    	// was anything there?
-    	if (trim($matches[0]) == '') {
-    		return '';
-    	}
-    	
-    	// does the match start with a delimiter?
-    	if (substr($matches[0], 0, 1) != $delim) { 
-    		// no.
+        $delim = $this->_wiki->delim;
+
+        // was anything there?
+        if (trim($matches[0]) == '') {
+            return '';
+        }
+
+        // does the match start with a delimiter?
+        if (substr($matches[0], 0, 1) != $delim) {
+            // no.
             $start = $this->addToken(array('type' => 'start'));
             $end = $this->addToken(array('type' => 'end'));
             return $start . trim($matches[0]) . $end;
         }
-        
+
         // the line starts with a delimiter.  read in the delimited
         // token number, check the token, and see if we should
         // skip it.
-        
+
         // loop starting at the second character (we already know
         // the first is a delimiter) until we find another
         // delimiter; the text between them is a token key number.
         $key = '';
-		$len = strlen($matches[0]);
-		for ($i = 1; $i < $len; $i++) {
-        	$char = $matches[0]{$i};
-        	if ($char == $delim) {
-        		break;
-        	} else {
-        		$key .= $char;
-        	}
+        $len = strlen($matches[0]);
+        for ($i = 1; $i < $len; $i++) {
+            $char = $matches[0]{$i};
+            if ($char == $delim) {
+                break;
+            } else {
+                $key .= $char;
+            }
         }
-        
+
         // look at the token and see if it's skippable (if we skip,
         // it will not be marked as a paragraph)
         $token_type = $this->_wiki->_tokens[$key][0];
         if (in_array($token_type, $this->_conf['skip'])) {
-        	return $matches[0];
+            return $matches[0];
         } else {
             $start = $this->addToken(array('type' => 'start'));
             $end = $this->addToken(array('type' => 'end'));
             return $start . trim($matches[0]) . $end;
         }
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -124,15 +124,15 @@ class Text_Wiki_Rule_paragraph extends Text_Wiki_Rule {
     * @return string The text rendered from the token options.
     * 
     */
-    
+
     function renderXhtml($options)
     {
         extract($options); //type
-        
+
         if ($type == 'start') {
             return '<p>';
         }
-        
+
         if ($type == 'end') {
             return "</p>\n\n";
         }

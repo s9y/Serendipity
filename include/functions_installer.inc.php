@@ -288,7 +288,7 @@ function serendipity_parseTemplate($filename, $areas = null, $onlyFlags=null) {
 
     $config = @include($filename);
     if (! is_array($config)) {
-    	printf(INCLUDE_ERROR,$filename);
+        printf(INCLUDE_ERROR,$filename);
     }
 
     foreach ( $config as $n => $category ) {
@@ -397,7 +397,7 @@ function serendipity_guessInput($type, $name, $value='', $default='') {
             if ($value === null) {
                 $value = $default;
             }
-            
+
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_yes" type="radio" name="' . $name . '" value="true" ';
             echo (($value == true) ? 'checked="checked"' : ''). ' /><label for="radio_cfg_' . $name . '_yes"> ' . YES . '</label>&nbsp;';
             echo '<input class="input_radio" id="radio_cfg_' . $name . '_no" type="radio" name="' . $name . '" value="false" ';
@@ -578,7 +578,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
             if (in_array('hideValue', $item['flags'])) {
                 $value = '';
             }
-            
+
             if (!$showDangerous && $item['view'] == 'dangerous') {
                 continue;
             }
@@ -826,7 +826,7 @@ function serendipity_installFiles($serendipity_core = '') {
         if ($fp) {
             fwrite($fp, 'php_value register_globals off'. "\n" .'php_value session.use_trans_sid 0');
             fclose($fp);
-            
+
             $safeFP = @fopen($serendipity_core . '.installer_detection_failsafe', 'w');
             fclose($safeFP);
             $sock = fsockopen($serendipity_host, $_SERVER['SERVER_PORT'], $errorno, $errorstring, 10);
@@ -1060,7 +1060,7 @@ function serendipity_httpCoreDir() {
     if (!empty($_SERVER['ORIG_PATH_TRANSLATED'])) {
         return dirname(realpath($_SERVER['ORIG_PATH_TRANSLATED'])) . '/';
     }
-    
+
     return $_SERVER['DOCUMENT_ROOT'] . dirname($_SERVER['PHP_SELF']) . '/';
 }
 
@@ -1297,7 +1297,7 @@ function serendipity_verifyFTPChecksums() {
 
     // Load the checksums
     $f = S9Y_INCLUDE_PATH . 'checksums.inc.php';
-    
+
     if (!file_exists($f) || filesize($f) < 1) {
         return $badsums;
     }

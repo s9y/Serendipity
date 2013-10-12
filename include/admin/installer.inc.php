@@ -385,7 +385,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
                         break;
                     }
                 }
-                
+
                 if (!$showWritableNote) {
                     echo serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
                 }

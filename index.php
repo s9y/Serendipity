@@ -158,7 +158,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     if (isset($day) && !is_numeric($day)) {
         $day = date('d');
-    }                
+    }
 
     switch($serendipity['calendar']) {
         case 'gregorian':
@@ -497,7 +497,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $uInfo = serendipity_fetchUsers($serendipity['GET']['viewAuthor']);
-    
+
     if (!is_array($uInfo)) {
         $serendipity['view'] = '404';
         $serendipity['viewtype'] = '404_3';

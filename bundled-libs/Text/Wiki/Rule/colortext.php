@@ -88,17 +88,17 @@ class Text_Wiki_Rule_colortext extends Text_Wiki_Rule {
     function process(&$matches)
     {
         $start = $this->addToken(
-        	array(
-        		'type' => 'start',
-        		'color' => $matches[1]
-        	)
+            array(
+                'type' => 'start',
+                'color' => $matches[1]
+            )
         );
         
         $end = $this->addToken(
-        	array(
-        		'type' => 'end',
-        		'color' => $matches[1]
-        	)
+            array(
+                'type' => 'end',
+                'color' => $matches[1]
+            )
         );
         
         return $start . $matches[2] . $end;

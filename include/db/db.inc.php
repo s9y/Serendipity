@@ -85,7 +85,7 @@ function serendipity_db_insert($table, $values, $action = 'execute')
     }
 
     $q = "INSERT INTO {$serendipity['dbPrefix']}$table ($names) values ($vals)";
-    
+
     if ($action == 'execute') {
         return serendipity_db_query($q);
     } else {
@@ -147,11 +147,11 @@ function serendipity_db_get_interval($val, $ival = 900) {
             $ts       = 'NOW()';
             break;
     }
-    
+
     switch($val) {
         case 'interval':
             return $interval;
-        
+
         default:
         case 'ts':
             return $ts;
@@ -172,7 +172,7 @@ function serendipity_db_implode($string, &$array, $type = 'int') {
     if (!is_array($array)) {
         return '';
     }
-    
+
     foreach($array AS $idx => $key) {
         if ($type == 'int') {
             $new_array[$idx] = (int)$key;

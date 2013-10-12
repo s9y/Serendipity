@@ -8,7 +8,7 @@
 
 //Sticky post
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_TITLE', 'Propiedades extendidas de las entradas');
-@define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(caché, artículos privados, sticky posts)'); 
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_DESC', '(caché, artículos privados, sticky posts)');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS', 'Marcar esta entrada como Sticky Post');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS', 'Las entradas pueden ser leidas por');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS_PRIVATE', 'Solamente el autor');

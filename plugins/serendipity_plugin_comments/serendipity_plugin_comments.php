@@ -154,14 +154,14 @@ class serendipity_plugin_comments extends serendipity_plugin
         } elseif ($this->get_config('viewmode') == 'trackbacks') {
             $viewtype .= ' AND (co.type = \'TRACKBACK\' OR co.type = \'PINGBACK\')';
         }
-        
+
         $cond = array();
         $cond['and'] = ' AND e.isdraft = \'false\' ';
         if ($this->get_config('authorid') == 'login') {
             serendipity_ACL_SQL($cond, true);
             serendipity_plugin_api::hook_event('frontend_fetchentries', $cond, array('source' => 'entries'));
         }
-        
+
 
         $q = 'SELECT    co.body              AS comment,
                         co.timestamp         AS stamp,
@@ -186,7 +186,7 @@ class serendipity_plugin_comments extends serendipity_plugin
             LIMIT ' . $max_entries;
         $sql = serendipity_db_query($q);
         // echo $q;
-        
+
         if ($sql && is_array($sql)) {
             foreach($sql AS $key => $row) {
                 if (function_exists('mb_strimwidth')) {
@@ -199,20 +199,20 @@ class serendipity_plugin_comments extends serendipity_plugin
                         $comment .= ' [...]';
                     }
                 }
-                
+
                 $showurls = $this->get_config('showurls','trackbacks');
                 $isTrackBack = $row['comment_type'] == 'TRACKBACK' || $row['comment_type'] == 'PINGBACK';
-                
+
                 if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
-                    
+
                     /* Fix invalid cases in protocoll part */
                     $row['comment_url'] = preg_replace('@^http://@i','http://', $row['comment_url']);
                     $row['comment_url'] = preg_replace('@^https://@i','https://', $row['comment_url']);
-                    
+
                     if (substr($row['comment_url'], 0, 7) != 'http://' && 
                         substr($row['comment_url'], 0, 8) != 'https://') {
-                        $row['comment_url'] = 'http://' . $row['comment_url']; 
-                    }    
+                        $row['comment_url'] = 'http://' . $row['comment_url'];
+                    }
                     $user = '<a class="highlight" href="' . htmlspecialchars(strip_tags($row['comment_url'])) . '" title="' . htmlspecialchars(strip_tags($row['comment_title'])) . '">' . htmlspecialchars(strip_tags($row['user'])) . '</a>';
                 } else {
                     $user = htmlspecialchars(strip_tags($row['user']));

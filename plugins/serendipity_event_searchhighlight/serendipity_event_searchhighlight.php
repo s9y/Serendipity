@@ -113,7 +113,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         if ( preg_match('@^(www\.)?bing\.@i', $url['host']) ) {
             return PLUGIN_EVENT_SEARCHHIGHLIGHT_BING;
         }
-        
+
         if (!empty($_SESSION['search_referer']) && $this->uri != $_SESSION['search_referer']) {
             $this->uri = $_SESSION['search_referer'];
             return $this->getSearchEngine();
@@ -135,29 +135,29 @@ class serendipity_event_searchhighlight extends serendipity_event
         $this->loadConstants();
         $url = parse_url($this->uri);
         parse_str($url['query'], $pStr);
-        
+
         $s = $this->getSearchEngine();
-        
+
         switch ( $s ) {
             case PLUGIN_EVENT_SEARCHHIGHLIGHT_S9Y:
                 $query = $pStr['serendipity']['searchTerm'];
-                
+
                 if (!empty($_REQUEST['serendipity']['searchTerm'])) {
                     $query = $_REQUEST['serendipity']['searchTerm'];
                 }
 
                 if (!empty($serendipity['GET']['searchTerm'])) {
                     $query = $serendipity['GET']['searchTerm'];
-                } 
+                }
                 /* highlight selected static page, if not having a ['GET']['searchTerm'] REQUEST, but coming from a /search/ referrer */
-                if(empty($query)) { 
+                if(empty($query)) {
                     // look out for path or query depending mod_rewrite setting
                     $urlpath = (($serendipity['rewrite'] == 'rewrite')  ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH)
                                                                         : parse_url($_SERVER['HTTP_REFERER'], PHP_URL_QUERY)
                                 );
-                    if ( strpos($urlpath, 'search/') ) { 
+                    if ( strpos($urlpath, 'search/') ) {
                         $urlpath = htmlspecialchars(strip_tags($urlpath)); // avoid spoofing
-						$path = explode('/', urldecode($urlpath)); // split and decode non ASCII
+                        $path = explode('/', urldecode($urlpath)); // split and decode non ASCII
                         $query = $path[(array_search('search', $path)+1)];
                     }
                 }
@@ -187,7 +187,7 @@ class serendipity_event_searchhighlight extends serendipity_event
                     return false;
                 }
         }
-        
+
         /* Clean the query */
         $query = trim($query);
         if (empty($query)) return false;
@@ -212,7 +212,7 @@ class serendipity_event_searchhighlight extends serendipity_event
         if (!isset($hooks[$event])) {
             return false;
         }
-		
+
         if ( $event == 'frontend_display' ) {
             if ( ($queries = $this->getQuery()) === false ) {
                 return;
@@ -236,8 +236,8 @@ class serendipity_event_searchhighlight extends serendipity_event
 
                 //Iterate over search terms and do the highlighting.
                 foreach ( $queries as $word ) {
-                    if ( strpos($word, '*') ) { 
-                        // fuzzy search (case insensitive) all words containing term; 
+                    if ( strpos($word, '*') ) {
+                        // fuzzy search (case insensitive) all words containing term;
                         $word = str_replace('*', '', $word);
                         /* If the data contains HTML tags, we have to be careful not to break URIs and use a more complex preg */
                         if ( preg_match('/\<.+\>/', $element) ) {
@@ -245,14 +245,14 @@ class serendipity_event_searchhighlight extends serendipity_event
                         } else {
                             $_pattern = '/('.preg_quote($word, '/').')/im';
                         }
-                    } else { 
+                    } else {
                         /* If the data contains HTML tags, we have to be careful not to break URIs and use a more complex preg */
                         if ( preg_match('/\<.+\>/', $element) ) {
                             $_pattern =  '/(?!<.*?)(\b'. preg_quote($word, '/') .'\b)(?![^<>]*?>)/im';
                         } else {
                             $_pattern = '/(\b'. preg_quote($word, '/') .'\b)/im';
                         }
-                    } 
+                    }
                     $element = preg_replace($_pattern, '<span class="serendipity_searchQuery">$1</span>', $element);
                 } // end foreach
             } // end foreach

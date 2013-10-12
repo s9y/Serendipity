@@ -49,7 +49,7 @@ function serendipity_db_connect()
         return $serendipity['dbConn'];
     }
 
-	// SQLite3 doesn't support persistent connections
+    // SQLite3 doesn't support persistent connections
     $serendipity['dbConn'] = sqlite3_open($serendipity['serendipityPath'] . $serendipity['dbName'] . '.db');
 
     return $serendipity['dbConn'];

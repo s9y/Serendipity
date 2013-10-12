@@ -22,7 +22,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<P>SPARTACUS mo¿e po³±czyæ siê z Google ale nie mo¿e po³±czyæ siê z repozytorium. Jest mo¿liwe, ¿e Twój serwer blokuje pewne po³±czenia wychodz±ce albo ¿e strona z repozytorium SPARTACUSa aktualnie nie dzia³a. Skontaktuj siê z firm± hostuj±c± Twoj± stronê i upewnij siê, ¿e po³±czenia wychodz±ce s± dozwolone. <b>Nie bêdziesz móg³ u¿ywaæ SPARTACUSa dopóki Twój serwer nie bêdzie móg³ kontaktowaæ siê z repozytorium SPARTACUSa.</b></P>');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_XML', 'Lokalizacja pliku/mirrora (metadane XML)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_FILES', 'Lokalizacja pliku/mirrora (pliki)');
-@define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC', 'Wybierz lokalizacjê, z której bêd± pobierane dane. NIE zmieniaj tej warto¶ci o ile dobrze nie wiesz, co robisz i o ile serwer jest dostêpny.	Opcja istnieje g³ównie dla kompatybilno¶ci z przysz³ymi wersjami wtyczki.');
+@define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC', 'Wybierz lokalizacjê, z której bêd± pobierane dane. NIE zmieniaj tej warto¶ci o ile dobrze nie wiesz, co robisz i o ile serwer jest dostêpny. Opcja istnieje g³ównie dla kompatybilno¶ci z przysz³ymi wersjami wtyczki.');
 @define('PLUGIN_EVENT_SPARTACUS_CHOWN', 'W³a¶ciciel pobranych plików');
 @define('PLUGIN_EVENT_SPARTACUS_CHOWN_DESC', 'Tu mo¿esz podaæ w³a¶ciciela (jak np. "nobody") plików pobieranych i zapisywanych przez Spartacusa. Pozostawienie pustego pola nie spowoduje zmian uprawnieñ do plików.');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD', 'Upraweniania pobieranych plików');

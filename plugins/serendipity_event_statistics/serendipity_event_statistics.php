@@ -1,7 +1,7 @@
 <?php #
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
-   
+
 class serendipity_event_statistics extends serendipity_event
 {
     var $title = PLUGIN_EVENT_STATISTICS_NAME;
@@ -39,8 +39,8 @@ class serendipity_event_statistics extends serendipity_event
                 $propbag->add('description', PLUGIN_EVENT_STATISTICS_MAX_ITEMS_DESC);
                 $propbag->add('default',     20);
                 break;
-                
-             
+
+
             case 'ext_vis_stat':
                 $select = array('no'     => PLUGIN_EVENT_STATISTICS_EXT_OPT1, 
                                 'yesBot' => PLUGIN_EVENT_STATISTICS_EXT_OPT2, 
@@ -53,7 +53,7 @@ class serendipity_event_statistics extends serendipity_event
                 $propbag->add('default',       'no');
 
                 break;
-                
+
             case 'stat_all':
                 $select = array('no' => PLUGIN_EVENT_STATISTICS_EXT_ALL1, 
                                 'yes' => PLUGIN_EVENT_STATISTICS_EXT_ALL2);
@@ -65,8 +65,8 @@ class serendipity_event_statistics extends serendipity_event
                 $propbag->add('default',       'yes');
 
                 break;
-                
-           case 'banned_bots':             
+
+           case 'banned_bots':
                 $select = array('yes' => PLUGIN_EVENT_STATISTICS_BANNED_HOSTS1, 
                                 'no' => PLUGIN_EVENT_STATISTICS_BANNED_HOSTS2);
 
@@ -93,7 +93,7 @@ class serendipity_event_statistics extends serendipity_event
 
         if (isset($hooks[$event])) {
             switch($event) {
-            
+
                 case 'frontend_configure':
                     if ($this->get_config('ext_vis_stat') == 'no') {
                         return;
@@ -108,13 +108,13 @@ class serendipity_event_statistics extends serendipity_event
                     if ((int)$this->get_config('db_indices_created', '0') == 0) {
                         $this->updateTables();
                     }
-                    
+
                     //Unique visitors are beeing registered and counted here. Calling function below.
                     $sessionChecker = serendipity_db_query("SELECT count(sessID) FROM {$serendipity['dbPrefix']}visitors WHERE '".serendipity_db_escape_string(session_id())."' = sessID GROUP BY sessID", true);
                     if (!is_array($sessionChecker) || (is_array($sessionChecker)) && ($sessionChecker[0] == 0)) {
-                        
+
                         $referer = $useragent = $remoteaddr = 'unknown';
-                        
+
                         // gathering intel
                         if ($_SERVER['REMOTE_ADDR']) {
                             $remoteaddr = $_SERVER['REMOTE_ADDR'];
@@ -125,9 +125,9 @@ class serendipity_event_statistics extends serendipity_event
                         if ($_SERVER['HTTP_REFERER']) {
                             $referer = substr($_SERVER['HTTP_REFERER'], 0, 255);
                         }
-                            
+
                         $found = 0;
-                        
+
                         // avoiding banned browsers
                         if ($this->get_config('banned_bots') == 'yes') {
                             // excludelist botagents
@@ -181,23 +181,23 @@ class serendipity_event_statistics extends serendipity_event
                                     '48'    =>     "Blogdimension",
                                     '49'    =>     "Yahoo"
                                     );
-                                    
+
                             foreach($banned_array AS $ban) {
                                 if (stristr($useragent, $ban) !== false) {
                                     $found = 1;
                                     break;
                                 }
                             }
-                        } 
+                        }
 
-                        if ($found == 0){ 
+                        if ($found == 0){
                             $this->countVisitor($useragent, $remoteaddr, $referer);
                         }
                     } else {
                         // Update visitor timestamp
                         $this->updateVisitor();
                     }
-                    
+
                 break;
                 case 'backend_sidebar_entries':
 ?>
@@ -213,12 +213,12 @@ class serendipity_event_statistics extends serendipity_event
                     if (!$max_items || !is_numeric($max_items) || $max_items < 1) {
                         $max_items = 20;
                     }
-                    
+
                     if ($ext_vis_stat == 'yesTop') {
                         $this->extendedVisitorStatistics($max_items);
                     }
 
-                    
+
                     if ($this->get_config('stat_all') == 'yes') {
                         $first_entry    = serendipity_db_query("SELECT timestamp FROM {$serendipity['dbPrefix']}entries ORDER BY timestamp ASC limit 1", true);
                         $last_entry     = serendipity_db_query("SELECT timestamp FROM {$serendipity['dbPrefix']}entries ORDER BY timestamp DESC limit 1", true);
@@ -235,10 +235,10 @@ class serendipity_event_statistics extends serendipity_event
                                                         GROUP BY ec.categoryid, c.category_name
                                                         ORDER BY postings DESC";
                         $category_rows  = serendipity_db_query($cat_sql);
-    
+
                         $image_count = serendipity_db_query("SELECT count(id) FROM {$serendipity['dbPrefix']}images", true);
                         $image_rows = serendipity_db_query("SELECT extension, count(id) AS images FROM {$serendipity['dbPrefix']}images GROUP BY extension ORDER BY images DESC");
-    
+
                         $subscriber_count = count(serendipity_db_query("SELECT count(id) FROM {$serendipity['dbPrefix']}comments WHERE type = 'NORMAL' AND subscribed = 'true' GROUP BY email"));
                         $subscriber_rows = serendipity_db_query("SELECT e.timestamp, e.id, e.title, count(c.id) as postings
                                                         FROM {$serendipity['dbPrefix']}comments c,
@@ -247,7 +247,7 @@ class serendipity_event_statistics extends serendipity_event
                                                         GROUP BY e.id, c.email, e.title, e.timestamp
                                                         ORDER BY postings DESC
                                                         LIMIT $max_items");
-    
+
                         $comment_count = serendipity_db_query("SELECT count(id) FROM {$serendipity['dbPrefix']}comments WHERE type = 'NORMAL'", true);
                         $comment_rows = serendipity_db_query("SELECT e.timestamp, e.id, e.title, count(c.id) as postings
                                                         FROM {$serendipity['dbPrefix']}comments c,
@@ -256,14 +256,14 @@ class serendipity_event_statistics extends serendipity_event
                                                         GROUP BY e.id, e.title, e.timestamp
                                                         ORDER BY postings DESC
                                                         LIMIT $max_items");
-    
+
                         $commentor_rows = serendipity_db_query("SELECT author, max(email) as email, max(url) as url, count(id) as postings
                                                         FROM {$serendipity['dbPrefix']}comments c
                                                         WHERE type = 'NORMAL'
                                                         GROUP BY author
                                                         ORDER BY postings DESC
                                                         LIMIT $max_items");
-    
+
                         $tb_count = serendipity_db_query("SELECT count(id) FROM {$serendipity['dbPrefix']}comments WHERE type = 'TRACKBACK'", true);
                         $tb_rows = serendipity_db_query("SELECT e.timestamp, e.id, e.title, count(c.id) as postings
                                                         FROM {$serendipity['dbPrefix']}comments c,
@@ -272,14 +272,14 @@ class serendipity_event_statistics extends serendipity_event
                                                         GROUP BY e.timestamp, e.id, e.title
                                                         ORDER BY postings DESC
                                                         LIMIT $max_items");
-    
+
                         $tbr_rows = serendipity_db_query("SELECT author, max(email) as email, max(url) as url, count(id) as postings
                                                         FROM {$serendipity['dbPrefix']}comments c
                                                         WHERE type = 'TRACKBACK'
                                                         GROUP BY author
                                                         ORDER BY postings DESC
                                                         LIMIT $max_items");
-    
+
                         $length = serendipity_db_query("SELECT SUM(LENGTH(body) + LENGTH(extended)) FROM {$serendipity['dbPrefix']}entries", true);
                         $length_rows = serendipity_db_query("SELECT id, title, (LENGTH(body) + LENGTH(extended)) as full_length FROM {$serendipity['dbPrefix']}entries ORDER BY full_length DESC LIMIT $max_items");
 ?>
@@ -406,7 +406,7 @@ class serendipity_event_statistics extends serendipity_event
                                 if (substr($com_stat['url'], 0, 7) != 'http://' && substr($com_stat['url'], 0, 8) != 'https://') {
                                     $com_stat['url'] = 'http://' . $com_stat['url'];
                                 }
-                                        
+
                                 $link_url = ' (<a href="' . htmlspecialchars($com_stat['url']) . '">' . PLUGIN_EVENT_STATISTICS_OUT_LINK . '</a>)';
                             }
 
@@ -541,7 +541,7 @@ class serendipity_event_statistics extends serendipity_event
     <hr />
     <?php serendipity_plugin_api::hook_event('event_additional_statistics', $eventData, array('maxitems' => $max_items)); ?>
     </div>
-    
+
     <?php
                     }
 
@@ -560,14 +560,14 @@ class serendipity_event_statistics extends serendipity_event
             return false;
         }
     }
-    
+
     //Statistics
     function updatestats($action) {
         global $serendipity;
-        
-           list($year, $month, $day) = explode('-', date('Y-m-d'));    
+
+           list($year, $month, $day) = explode('-', date('Y-m-d'));
         $sql = serendipity_db_query("SELECT COUNT(year) AS result FROM {$serendipity['dbPrefix']}visitors_count WHERE year='$year' AND month='$month' AND day='$day'", true);
-        
+
         $sql_hit_update = "UPDATE {$serendipity['dbPrefix']}visitors_count SET hits = hits+1 WHERE year='$year' AND month='$month' AND day='$day'";
         $sql_day_new = "INSERT INTO {$serendipity['dbPrefix']}visitors_count (year, month, day, visits, hits) VALUES ('$year','$month','$day',1,1)";
         $sql_day_update = "UPDATE {$serendipity['dbPrefix']}visitors_count SET visits = visits+1, hits = hits+1 WHERE year='$year' AND month='$month' AND day='$day'";
@@ -588,12 +588,12 @@ class serendipity_event_statistics extends serendipity_event
             break;
         }
     }
-    
+
     function updateVisitor() {
         global $serendipity;
 
         $this->updatestats('update');
-        
+
         $time = date('H:i');
         $day  = date('Y-m-d');
         return serendipity_db_query("UPDATE {$serendipity['dbPrefix']}visitors SET time = '$time', day  = '$day' WHERE sessID = '" . serendipity_db_escape_string(strip_tags(session_id())) . "'");
@@ -602,10 +602,10 @@ class serendipity_event_statistics extends serendipity_event
     function countVisitor($useragent, $remoteaddr, $referer){
         global $serendipity;
         $thedate = date('Y-m-d');
-        $ip=strip_tags($remoteaddr); 
+        $ip=strip_tags($remoteaddr);
         $ip_how_often = serendipity_db_query("SELECT COUNT(ip) AS result FROM {$serendipity['dbPrefix']}visitors WHERE ip ='$ip' and day='$thedate'", true);
-        
-        if($ip_how_often['result'] >=1){ 
+
+        if($ip_how_often['result'] >=1){
             $this->updatestats('update');
        } else {
             $this->updatestats('new');
@@ -618,29 +618,29 @@ class serendipity_event_statistics extends serendipity_event
             'browser'=> strip_tags($useragent),
             'ip'     => strip_tags($remoteaddr)
         );
-                
-        serendipity_db_insert('visitors', $values);   
-                  
+
+        serendipity_db_insert('visitors', $values);
+
         // updating the referrer-table
         if (strlen($referer) >= 1) {
 
             //retrieving the referrer base URL
-            $temp_array = explode('?', $referer); 
-            $urlA = $temp_array[0]; 
-    
+            $temp_array = explode('?', $referer);
+            $urlA = $temp_array[0];
+
             //removing "http://" & trailing subdirectories
             $temp_array3 = explode('//', $urlA);
             $urlB = $temp_array3[1];
             $temp_array4 = explode('/', $urlB);
             $urlB = $temp_array4[0];
-    
+
             //removing www
             $urlC = serendipity_db_escape_string(str_replace('www.', '', $urlB));
-            
+
             if(strlen($urlC) < 1) {
                 $urlC = 'unknown';
             }
-            
+
             //updating db
             $q = serendipity_db_query("SELECT count(refs) AS referrer FROM {$serendipity['dbPrefix']}refs WHERE refs = '$urlC' GROUP BY refs", true);
             if ($q['referrer'] >= 1){
@@ -649,13 +649,13 @@ class serendipity_event_statistics extends serendipity_event
                 serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}refs (refs, count) VALUES ('$urlC', 1)");
             }
         }
-            
+
     } //end of function countVisitor
-    
+
     // Calculate daily stats
     function statistics_getdailystats() {
         global $serendipity;
-        
+
         list($year, $month) = explode('-', date("Y-m"));
         $sql = "SELECT SUM(visits) AS dailyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE day";
         for ($i=1; $i<32; $i++)    {
@@ -666,12 +666,12 @@ class serendipity_event_statistics extends serendipity_event
         }
         return $container;
     }
-    
+
     // Calculate monthly stats
-    function statistics_getmonthlystats() {    
+    function statistics_getmonthlystats() {
         global $serendipity;
 
-        $year = date("Y");    
+        $year = date("Y");
         $sql = "SELECT SUM(visits) AS monthlyvisit FROM {$serendipity['dbPrefix']}visitors_count WHERE month";
         for ($i=1; $i<13; $i++)    {
             $myMonth = ($i < 10) ? "0" . $i : $i;
@@ -680,16 +680,16 @@ class serendipity_event_statistics extends serendipity_event
             $container[$i] = $res['monthlyvisit'];
         }
         return $container;
-    }   
-    
+    }
+
     function extendedVisitorStatistics($max_items){
-        
+
         global $serendipity;
-        
+
         // ---------------QUERIES for Viewing statistics ----------------------------------------------
         $day = date('Y-m-d');
-              list($year, $month, $day) = explode('-', $day);    
-              
+        list($year, $month, $day) = explode('-', $day);
+
         $visitors_count_firstday = serendipity_db_query("SELECT day FROM {$serendipity['dbPrefix']}visitors ORDER BY counter_id ASC LIMIT 1", true);
         $visitors_count_today = serendipity_db_query("SELECT visits FROM {$serendipity['dbPrefix']}visitors_count WHERE year = '".$year."' AND month = '".$month."' AND day = '".$day."'", true);
         $visitors_count = serendipity_db_query("SELECT SUM(visits) FROM {$serendipity['dbPrefix']}visitors_count", true);
@@ -697,7 +697,7 @@ class serendipity_event_statistics extends serendipity_event
         $hits_count = serendipity_db_query("SELECT SUM(hits) FROM {$serendipity['dbPrefix']}visitors_count", true);
         $visitors_latest = serendipity_db_query("SELECT counter_id, day, time, ref, browser, ip FROM {$serendipity['dbPrefix']}visitors ORDER BY counter_id DESC LIMIT ".$max_items."");
         $top_refs = serendipity_db_query("SELECT refs, count FROM {$serendipity['dbPrefix']}refs ORDER BY count DESC LIMIT 20");
-                            
+
         // ---------------STYLES for Viewing statistics ----------------------------------------------
         echo "<style type='text/css'>";
         echo ".colVis {text-align: center; width:600px; font-size: 10px; background-color:#dddddd;} ";
@@ -741,10 +741,10 @@ class serendipity_event_statistics extends serendipity_event
                     </div>
                 </dd>
         </dl>
-        
-         <!-- Visitor graphs -->    
+
+         <!-- Visitor graphs -->
         <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_MONTHGRAPH;?></strong></dt>
-        <?php if ($visitors_count[0] > 0) { ?>            
+        <?php if ($visitors_count[0] > 0) { ?>
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <?php
                 $color = "col2";
@@ -760,7 +760,7 @@ class serendipity_event_statistics extends serendipity_event
                     }
 
                     echo '<td class="'.$color.'" width="8%" align="center" valign="bottom"><small>' . $num[$i];
-                    echo '<br /><img src="plugins/serendipity_event_statistics/'; 
+                    echo '<br /><img src="plugins/serendipity_event_statistics/';
                     if ($num[$i]*$maxVisHeigh/2 <= 33) {
                         echo 'red.png';
                     } else if ($num[$i]*$maxVisHeigh/2 > 33 && $num[$i]*$maxVisHeigh/2 < 66) {
@@ -783,13 +783,13 @@ class serendipity_event_statistics extends serendipity_event
                     $color ="col1";
                 }
                 echo '<td class="'.$color.'" width="8%" align="center"><small><b>'. serendipity_strftime('%b', mktime(0, 0, 0, $i, 1, 2000)) .'</b></small></td>';
-            } 
-            ?>    
+            }
+            ?>
         </tr></table>
         <?php } ?>
 
         <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_DAYGRAPH;?></strong></dt>
-        <?php if ($visitors_count[0] > 0) { ?>            
+        <?php if ($visitors_count[0] > 0) { ?>
         <table width="100%" cellpadding="0" cellspacing="0"><tr>
             <?php
                 $color = "col2";
@@ -804,7 +804,7 @@ class serendipity_event_statistics extends serendipity_event
                     }
 
                     $maxVisHeigh = 100/$rep[0]*2;
-                    echo '<td class="'.$color.'" width="3%" align="center" valign="bottom"><small>' . $num[$i];        
+                    echo '<td class="'.$color.'" width="3%" align="center" valign="bottom"><small>' . $num[$i];
                     echo '<br /><img src="plugins/serendipity_event_statistics/';
                     if ($num[$i]*$maxVisHeigh/2 <= 33) {
                         echo 'red.png';
@@ -827,15 +827,15 @@ class serendipity_event_statistics extends serendipity_event
                         $color ="col1";
                     }
                     echo '<td class="'.$color.'" width="3%" align="center"><small><b>'. $i .'</b></small></td>';
-                } ?>    
+                } ?>
         </tr></table>
         <?php } ?>
-         <!-- End visitor graphs -->    
-                
+         <!-- End visitor graphs -->
+
         <br /><br />
-        
+
         <dl>
-        
+
         <dt><strong><?php echo PLUGIN_EVENT_STATISTICS_EXT_VISLATEST;?></strong></dt>
             <dd>
                 <table width="100%" cellpadding="0" cellspacing="0">
@@ -899,13 +899,13 @@ class serendipity_event_statistics extends serendipity_event
                 </table>
             </dd>
         </dl>
-                        
+
     <?php
     } //end of function extendedVisitorStatistics()
-      
+
     function createTables() {
         global $serendipity;
-        
+
         //create table xxxx_visitors
         $q   = "CREATE TABLE {$serendipity['dbPrefix']}visitors (
             counter_id {AUTOINCREMENT} {PRIMARY},
@@ -937,7 +937,7 @@ class serendipity_event_statistics extends serendipity_event
             count int(11) not null default '0'
         )";
         serendipity_db_schema_import($q);
-        
+
         $this->updateTables();
     } //end of function createTables()
 
@@ -963,9 +963,9 @@ class serendipity_event_statistics extends serendipity_event
 
 
     function dropTables() {
-        
+
         global $serendipity;
-        
+
         // Drop tables
         $q   = "DROP TABLE ".$serendipity['dbPrefix']."visitors";
         $sql = serendipity_db_schema_import($q);
@@ -973,21 +973,21 @@ class serendipity_event_statistics extends serendipity_event
         $sql = serendipity_db_schema_import($q);
         $q   = "DROP TABLE ".$serendipity['dbPrefix']."refs";
         $sql = serendipity_db_schema_import($q);
-        
+
     } //end of function dropTables
-    
+
     function install(){
-        
+
         $this->createTables();
-        
+
     }
-    
+
     function uninstall(&$propbag){
-        
+
         $this->dropTables();
-        
+
     }
-    
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

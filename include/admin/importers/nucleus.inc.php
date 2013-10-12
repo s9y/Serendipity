@@ -70,7 +70,7 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         if ($this->data['autodiscovery'] == 'false') {
             $serendipity['noautodiscovery'] = 1;
         }
-        
+
         $this->getTransTable();
 
         $this->data['prefix'] = serendipity_db_escape_string($this->data['prefix']);

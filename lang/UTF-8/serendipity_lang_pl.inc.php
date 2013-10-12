@@ -518,7 +518,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('VIEW_COMMENT', 'Zobacz komentarz');
 @define('VIEW_ENTRY', 'Zobacz wpis');
 @define('DELETE_FILE_FAIL' , 'Usuwanie pliku <b>%s</b> nie powiodło się');
-@define('DELETE_THUMBNAIL', 'Usunięto minturkę o nazwie	<b>%s</b>');
+@define('DELETE_THUMBNAIL', 'Usunięto minturkę o nazwie <b>%s</b>');
 @define('DELETE_FILE', 'Usunięto plik o nazwie <b>%s</b>');
 @define('ABOUT_TO_DELETE_FILE', 'Masz zamiar usunąc plik <b>%s</b><br />Jeśli w którymś z wpisów zostało zdefiniowane odwołanie do pliku, plik ten nie będzie więcej dla tego odwałania dostępny (link nie będzie działał prawidłowo).<br />Czy chcesz kontynuować?<br /><br />');
 @define('TRACKBACK_SENDING', 'Wysyłanie śladu do URI %s...');

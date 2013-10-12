@@ -86,7 +86,7 @@ class Text_Wiki_Rule_phplookup extends Text_Wiki_Rule {
     
     function renderXhtml($options)
     {
-    	$text = trim($options['text']);
+        $text = trim($options['text']);
         return "<a href=\"http://php.net/$text\">$text</a>";
     }
 }

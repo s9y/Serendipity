@@ -33,8 +33,8 @@
 */
 
 class Text_Wiki_Rule_italic extends Text_Wiki_Rule {
-    
-    
+
+
     /**
     * 
     * The regular expression used to parse the source text and find
@@ -47,10 +47,10 @@ class Text_Wiki_Rule_italic extends Text_Wiki_Rule {
     * @see parse()
     * 
     */
-    
+
     var $regex = "/''(()|[^'].*)''/U";
-    
-    
+
+
     /**
     * 
     * Generates a replacement for the matched text.  Token options are:
@@ -67,15 +67,15 @@ class Text_Wiki_Rule_italic extends Text_Wiki_Rule {
     * emphasized.
     *
     */
-    
+
     function process(&$matches)
     {
         $start = $this->addToken(array('type' => 'start'));
         $end = $this->addToken(array('type' => 'end'));
         return $start . $matches[1] . $end;
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -88,16 +88,16 @@ class Text_Wiki_Rule_italic extends Text_Wiki_Rule {
     * @return string The text rendered from the token options.
     * 
     */
-    
+
     function renderXhtml($options)
     {
-		if ($options['type'] == 'start') {
-			return '<i>';
-		}
-		
-		if ($options['type'] == 'end') {
-			return '</i>';
-		}
+        if ($options['type'] == 'start') {
+            return '<i>';
+        }
+
+        if ($options['type'] == 'end') {
+            return '</i>';
+        }
     }
 }
 ?>

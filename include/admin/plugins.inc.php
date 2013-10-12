@@ -105,7 +105,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                             if (!isset($_POST['serendipity']['plugin']['activate'][$config_item][$out_value])) {
                                 continue;
                             }
-                            
+
                             $out_values[] = $out_value;
                         }
                         $value = implode(',', $out_values);
@@ -250,7 +250,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
                 }
             }
-            
+
             $pluginstack[$class_data['true_name']] = $props;
         } else {
             // False is returned if a plugin could not be instantiated

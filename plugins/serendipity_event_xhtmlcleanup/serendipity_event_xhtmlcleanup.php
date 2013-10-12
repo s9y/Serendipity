@@ -190,7 +190,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
     function youtubify(&$text) {
         $text = preg_replace_callback('@<object(.*)>(.*)</object>@imsU', array($this, 'youtubify_regex'), $text);
     }
-    
+
     function youtubify_regex($matches) {
         if (!preg_match('@<embed@i', $matches[2])) return $matches[0];
 
@@ -202,7 +202,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
 
         preg_match('@<param name="movie" value="(.+)"[\s/]*?>@imsU', $matches[2], $m);
         $movie = $m[1];
-        
+
         if (empty($movie)) {
             preg_match('@<param value="(.+)" name="movie"[\s/]*?>@imsU', $matches[2], $m);
             $movie = $m[1];
@@ -232,7 +232,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
             case 'utf-8':
                 $p = xml_parser_create(LANG_CHARSET);
                 break;
-            
+
             default:
                 $p = xml_parser_create('');
         }

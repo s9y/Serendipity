@@ -137,7 +137,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
 
         // Nuke chars not allowed in our URI
         $str = preg_replace('#[^' . PAT_FILENAME . ']#i', '', $str);
-    }    
+    }
 
     // Check if dots are allowed
     if ($stripDots) {
@@ -564,7 +564,7 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
                         $parent_path[] = serendipity_makeFilename($parent['category_name'], true);
                     }
                 }
-            }            
+            }
 
             $replacements =
                 array(

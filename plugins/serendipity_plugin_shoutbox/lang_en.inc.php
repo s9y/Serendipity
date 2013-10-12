@@ -17,8 +17,8 @@
 @define('PLUGIN_SHOUTBOX_MAXENTRIES', 'Maximum number of comments');
 @define('PLUGIN_SHOUTBOX_MAXENTRIES_BLAHBLAH', 'How many comments will be shown? (Default: 15)');
 
-@define('GENERAL_PLUGIN_BOX_COLS', 	'Shoutbox columns');
-@define('GENERAL_PLUGIN_BOX_COLS_BLAHBLAH', 	'Column count of the shoutbox input element.');
-@define('GENERAL_PLUGIN_BOX_ROWS', 	'Shoutbox rows');
-@define('GENERAL_PLUGIN_BOX_ROWS_BLAHBLAH', 	'Row count of thesShoutbox input element.');
+@define('GENERAL_PLUGIN_BOX_COLS', 'Shoutbox columns');
+@define('GENERAL_PLUGIN_BOX_COLS_BLAHBLAH', 'Column count of the shoutbox input element.');
+@define('GENERAL_PLUGIN_BOX_ROWS', 'Shoutbox rows');
+@define('GENERAL_PLUGIN_BOX_ROWS_BLAHBLAH', 'Row count of thesShoutbox input element.');
 

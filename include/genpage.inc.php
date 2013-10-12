@@ -49,13 +49,13 @@ if ($serendipity['smarty_raw_mode']) {
                 if (!is_array($entry) || count($entry) < 1 || !is_array($entry[0])) {
                     unset($serendipity['GET']['id']);
                     $entry = array(array());
-                    $serendipity['head_title'] = htmlspecialchars($serendipity['blogTitle']); 
-                    $serendipity['head_subtitle'] = ''; 
-                    $serendipity['smarty']->assign('head_title', $serendipity['head_title']); 
-                    $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']); 
+                    $serendipity['head_title'] = htmlspecialchars($serendipity['blogTitle']);
+                    $serendipity['head_subtitle'] = '';
+                    $serendipity['smarty']->assign('head_title', $serendipity['head_title']);
+                    $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
                     $serendipity['view'] = '404';
-                    serendipity_header('HTTP/1.0 404 Not found');                    
-                    serendipity_header('Status: 404 Not found');                    
+                    serendipity_header('HTTP/1.0 404 Not found');
+                    serendipity_header('Status: 404 Not found');
                 }
 
                 serendipity_printEntries($entry, 1);

@@ -14,7 +14,7 @@ if (!headers_sent()) {
         session_name('s9y_' . md5(dirname(__FILE__)));
         session_start();
     }
-    
+
     // Prevent session fixation by only allowing sessions that have been sent by the server.
     // Any session that does not contain our unique token will be regarded as foreign/fixated
     // and be regenerated with a system-generated SID.

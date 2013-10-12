@@ -23,8 +23,8 @@ class serendipity_event_nl2br extends serendipity_event
             'php'         => '4.1.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
-            
-        $propbag->add('event_hooks',     array('frontend_display'  => true, 
+
+        $propbag->add('event_hooks',     array('frontend_display'  => true,
                                                'backend_configure' => true,
                                                'css'               => true
                      ));
@@ -59,16 +59,16 @@ class serendipity_event_nl2br extends serendipity_event
 
     function cleanup() {
         global $serendipity;
-    
+
         /* check possible config mismatch setting in combination with ISOBR */
-        if ( serendipity_db_bool($this->get_config('isobr')) === true ) { 
-            if( serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
+        if ( serendipity_db_bool($this->get_config('isobr')) === true ) {
+            if( serendipity_db_bool($this->get_config('clean_tags')) === true ) {
                 $this->set_config('clean_tags', false);
                 echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
                 echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'ISOBR') . '</div>';
                 return false;
             }
-            if ( serendipity_db_bool($this->get_config('p_tags')) === true ) { 
+            if ( serendipity_db_bool($this->get_config('p_tags')) === true ) {
                 $this->set_config('p_tags', false);
                 echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
                 echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'p_tags', 'ISOBR') . '</div>';
@@ -76,7 +76,7 @@ class serendipity_event_nl2br extends serendipity_event
             }
         }
         /* check possible config mismatch setting in combination with P_TAGS */
-        if ( serendipity_db_bool($this->get_config('p_tags')) === true && serendipity_db_bool($this->get_config('clean_tags')) === true ) { 
+        if ( serendipity_db_bool($this->get_config('p_tags')) === true && serendipity_db_bool($this->get_config('clean_tags')) === true ) {
             $this->set_config('clean_tags', false);
             echo '<div class="serendipityAdminMsgError"><img class="backend_attention" src="' . $serendipity['serendipityHTTPPath'] . 'templates/default/admin/img/admin_msg_note.png" alt="" />';
             echo sprintf(PLUGIN_EVENT_NL2BR_CONFIG_ERROR, 'clean_tags', 'P_TAGS') . '</div>';
@@ -187,7 +187,7 @@ class serendipity_event_nl2br extends serendipity_event
         if ($clean_tags === null) {
             $clean_tags = serendipity_db_bool($this->get_config('clean_tags'));
         }
-        
+
         if (isset($hooks[$event])) {
             switch($event) {
                 case 'frontend_display':
@@ -226,14 +226,14 @@ class serendipity_event_nl2br extends serendipity_event
                             $isolate = false;
                         }
                     }
-                    
+
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
                                 !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
                                 !in_array($this->instance, (array)$serendipity['POST']['properties']['disable_markups']) &&
                                 !$eventData['properties']['ep_no_nl2br'] &&
                                 !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
-                            
+
                             $element = $temp['element'];
                             if ($p_tags) {
                                 $eventData[$element] = $this->nl2p($eventData[$element]);
@@ -248,12 +248,12 @@ class serendipity_event_nl2br extends serendipity_event
                                     $eventData[$element] = $this->restore($eventData[$element]);
                                     // unset nl tagline, if is
                                     $eventData[$element] = str_replace(array("<nl>", "</nl><br />", "</nl><br/>", "</nl>"), "", $eventData[$element]);
-                                } else { 
+                                } else {
                                     $eventData[$element] = nl2br($eventData[$element]);
                                 }
                             }
                             /* this is an option if not using new isobr default config setting */
-                            if (!$p_tags && $isobr === false && $clean_tags === true) { 
+                            if (!$p_tags && $isobr === false && $clean_tags === true) {
                                 // convert line endings to Unix style, if not already done
                                 $eventData[$element] = str_replace(array("\r\n", "\r"), "\n", $eventData[$element]);
                                 // clean special tags from nl2br
@@ -267,18 +267,18 @@ class serendipity_event_nl2br extends serendipity_event
                 case 'backend_configure':
 
                     // check single entry for temporary disabled markups
-                    if( $isobr ) { 
+                    if( $isobr ) {
                         $serendipity['nl2br']['iso2br'] = true; // include to global as also used by staticpages now
 
-                        if (!is_object($serendipity['smarty'])) { 
+                        if (!is_object($serendipity['smarty'])) {
                             serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
                         }
-                        
+
                         // hook into default/admin/entries.tpl somehow via the Heart Of Gold = serendipity_printEntryForm() before! it is loaded
                         $serendipity['smarty']->assign('iso2br', true);
                     }
-                
-                
+
+
                 return true;
                 break;
 
@@ -298,7 +298,7 @@ p.break {
 <?php
                 return true;
                 break;
-                
+
                 default:
                 return false;
             }
@@ -312,11 +312,11 @@ p.break {
      * @param  string entrytext
      * @return string
      * */
-    function clean_nl2brtags(&$entry) { 
+    function clean_nl2brtags(&$entry) {
         $allTags = explode('|', 'table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd');
-        
+
         $br2nl = array();
-        
+
         foreach($allTags as $tag){
             /* for \\1 ( start with : < followed by any number of white spaces : \s* optionally a slash : /? and the tag itself )
              * for \\2 ( anything with spaces and characters following until )
@@ -326,7 +326,7 @@ p.break {
              * regex modifier : s - using the dot metacharacter in the pattern to match all characters, including newlines */
             $br2nl[] = "%(<\s*/?$tag)(.*?)([^>]*>)(<br\s*/?>)%is";
         }
-        
+
         if(sizeof($br2nl)) $entry = preg_replace($br2nl, '\\1\\2\\3', $entry);
 
         return $entry;
@@ -348,7 +348,7 @@ p.break {
         //DOS to Unix and Mac to Unix
         $text = str_replace(array("\r\n", "\r"), "\n", $text);
         $text = str_split($text);
-        
+
         $big_p = '<p class="whiteline">';
         $small_p = '<p class="break">';
 
@@ -360,14 +360,14 @@ p.break {
             unset($text[$i-1]);
         }
 
-        //main operation: convert \n to big_p and small_p 
+        //main operation: convert \n to big_p and small_p
         while ($i > 0) {
             if ($insert) {
                 $i = $this->next_nl_block($i, $text);
                 if ($i == 0) {
                     //prevent replacing of first character
                     break;
-                }                
+                }
                 if ($whiteline == true) {
                     $text[$i] = '</p>' . $big_p;
                 } else {
@@ -377,7 +377,7 @@ p.break {
                 $insert = false;
             } else {
                 if ($text[$i-1] === "\n") {
-                    //newline is follower of a newline 
+                    //newline is follower of a newline
                     $whiteline = true;
                 }
                 $insert = true;
@@ -453,9 +453,9 @@ p.break {
                                 '<h1', '<h2', '<h3', '<h4', '<h5', '<h6',
                                 '<menu', '<blockquote');
         $block_elements_amount = count($block_elements);
-        
+
         for($i=0;$i<$block_elements_amount;$i++) {
-            $start_tag = $block_elements[$i]; 
+            $start_tag = $block_elements[$i];
             //first see if block-element really exists
             $tag_position = strpos($textstring, $start_tag);
             if ($tag_position === false) {
@@ -468,7 +468,7 @@ p.break {
          }
          return $textstring;
     }
-    
+
     /**
      * Remove all <p>-tags from block-elements
      * Note: Walking from left to right
@@ -506,7 +506,7 @@ p.break {
         }
         $len = strpos($text, $end_tag, $offset) - $offset;
         return substr($text, $offset, $len);
-    } 
+    }
 
     /*
      * Return corresponding end-tag: <p -> </p>

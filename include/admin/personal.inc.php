@@ -35,7 +35,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
                         if (!is_array($_POST[$item['var']])) {
                             continue;
                         }
-                                                                           
+
                         // Check that no user may assign groups he's not allowed to.
                         foreach($_POST[$item['var']] AS $groupkey => $groupval) {
                             if (in_array($groupval, $valid_groups)) {

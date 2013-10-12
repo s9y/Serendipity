@@ -502,7 +502,7 @@ var $filter_defaults;
             case 'tpas':
                 $server = 'api.antispam.typepad.com';
                 break;
-    
+
             case 'anon-akismet':
                 $anon = true;
             case 'akismet':
@@ -699,7 +699,7 @@ var $filter_defaults;
         global $serendipity;
 
         $dbversion = $this->get_config('dbversion', '1');
-        
+
         if ($dbversion == '1') {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}spamblocklog (
                         timestamp int(10) {UNSIGNED} default null,
@@ -830,7 +830,7 @@ var $filter_defaults;
             // Check if the entry is older than the allowed amount of time. Enforce kaptchas if that is true
             // of if kaptchas are activated for every entry
             $show_captcha = ($captchas && isset($eventData['timestamp']) && ($captchas_ttl < 1 || ($eventData['timestamp'] < (time() - ($captchas_ttl*60*60*24)))) ? true : false);
-            
+
             // Plugins can override with custom captchas
             if (isset($serendipity['plugins']['disable_internal_captcha'])) {
                 $show_captcha = false;
@@ -869,7 +869,7 @@ var $filter_defaults;
                     $fp = fopen('/tmp/spamblock2.log', 'a');
                     fwrite($fp, date('Y-m-d H:i') . "\n" . print_r($eventData, true) . "\n" . print_r($addData, true) . "\n");
                     fclose($fp);
-                */    
+                */
 
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
@@ -925,7 +925,7 @@ var $filter_defaults;
                             if (!is_array($auth)) {
                                 // Filter authors names, Filter URL, Filter Content, Filter Emails, Check for maximum number of links before rejecting
                                 // moderate false
-                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData, true)) { 
+                                if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData, true)) {
                                     // already there #$this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_FILTER_WORDS, $addData);
                                     // already there #$eventData = array('allow_comments' => false);
                                     // already there #$serendipity['messagestack']['emails'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
@@ -935,7 +935,7 @@ var $filter_defaults;
                                     $eventData = array('allow_comments' => false);
                                     $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_KILLSWITCH;
                                     return false;
-                                } else { 
+                                } else {
                                     $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_MAIL, $addData);
                                     $eventData['moderate_comments'] = true;
                                     $eventData['status']            = 'confirm1';
@@ -989,7 +989,7 @@ var $filter_defaults;
                             $found_exclude_url = false;
                             foreach ($exclude_urls as $exclude_url) {
                                 $exclude_url = trim($exclude_url);
-                                if (empty($exclude_url)) continue; 
+                                if (empty($exclude_url)) continue;
                                 $found_exclude_url = preg_match('@' . $exclude_url . '@',$addData['url']);
                                 if ($found_exclude_url) {
                                     break;
@@ -1080,7 +1080,7 @@ var $filter_defaults;
                             }
                         }
 
-                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) { 
+                        if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
                             return false;
                         }
 
@@ -1230,7 +1230,7 @@ var $filter_defaults;
                     if (serendipity_db_bool($this->get_config('hide_email', false))) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_spamblock">' . PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL_NOTICE . '</div>';
                     }
-                    
+
                     if ((string)$this->get_config('checkmail') === 'verify_always' || (string)$this->get_config('checkmail') === 'verify_once') {
                         echo '<div class="serendipity_commentDirection serendipity_comment_spamblock">' . PLUGIN_EVENT_SPAMBLOCK_CHECKMAIL_VERIFICATION_INFO . '</div>';
                     }
@@ -1436,7 +1436,7 @@ var $filter_defaults;
     /**
      * wordfilter, email and additional link check moved to this function, to allow comment user to opt-in (verify_once), but reject all truly spam comments before.
      **/
-    function wordfilter($logfile, &$eventData, $wordmatch, $addData, $ftc = false) { 
+    function wordfilter($logfile, &$eventData, $wordmatch, $addData, $ftc = false) {
         global $serendipity;
 
         // Check for word filtering
@@ -1542,7 +1542,7 @@ var $filter_defaults;
             }
         } // Content filtering end
 
-        if($ftc) { 
+        if($ftc) {
             // Check for maximum number of links before rejecting
             $link_count = substr_count(strtolower($addData['comment']), 'http://');
             $links_reject = $this->get_config('links_reject', 20);

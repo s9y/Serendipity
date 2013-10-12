@@ -2,8 +2,8 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translated by
-# (c) 2006 Aphonex Li <aphonex.li@gmail.com> 
-#          http://www.cexten.com  
+# (c) 2006 Aphonex Li <aphonex.li@gmail.com>
+#          http://www.cexten.com
 /* vim: set sts=4 ts=4 expandtab : */
 
 @define('LANG_CHARSET', 'UTF-8');
@@ -630,8 +630,8 @@
 @define('ENTRY_PUBLISHED_FUTURE', '这篇文章未公开'); // Translate
 @define('ENTRIES_BY', '作者 %s'); // Translate
 @define('PREVIOUS', '上一页'); // Translate
-@define('NEXT', '下一页'); 
-@define('APPROVE', '审核'); 
+@define('NEXT', '下一页');
+@define('APPROVE', '审核');
 
 @define('DO_MARKUP_DESCRIPTION', '套用自动化格式到文章内 (表情, 符号 *, /, _, ...)。关闭这项功能将会保存任何文章内出现的 HTML 语法。');
 @define('CATEGORY_ALREADY_EXIST', '类别 "%s" 已经存在');
@@ -815,7 +815,7 @@
 @define('AUTHORS_SHOW_ARTICLE_COUNT_DESC', '如果开启这个设定，作者的文章会显示在名称旁。');
 @define('CUSTOM_ADMIN_INTERFACE', '可用自订的管理界面');
 
-@define('COMMENT_NOT_ADDED', '你的回复不能加入因为这篇文章不允许回复，输入了错误信息，或不通过垃圾管理。'); 
+@define('COMMENT_NOT_ADDED', '你的回复不能加入因为这篇文章不允许回复，输入了错误信息，或不通过垃圾管理。');
 @define('INSTALL_TRACKREF', '记录来源');
 @define('INSTALL_TRACKREF_DESC', '开启记录来源会显示那个网站引用了你的文章。你可以关闭这个功能如果你收到太多垃圾广告。');
 @define('CATEGORIES_HIDE_PARENT', '隐藏选择的类别');
@@ -922,7 +922,7 @@
 @define('COMMENT_TOKENS_DESC', 'If tokens are used, comments can be approved and deleted by clicking the email links without requiring login access to the blog. Note that this is a convenience feature, and if your mails get hijacked, those people can approve/delete the referenced comment without further authentication.');
 @define('COMMENT_NOTOKENMATCH', 'Moderation link has expired or comment #%s has already been approved or deleted');
 @define('TRACKBACK_NOTOKENMATCH', 'Moderation link has expired or trackback #%s has already been approved or deleted');
-@define('BADTOKEN', 'Invalid Moderation Link'); 
+@define('BADTOKEN', 'Invalid Moderation Link');
 
 @define('CONFIRMATION_MAIL_ALWAYS', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n");
 @define('CONFIRMATION_MAIL_ONCE', "Hello %s,\n\nYou have sent a new comment to \"%s\". Your comment was:\n\n%s\n\nThe owner of the blog has enabled one-time mail verification, so you need to click on the following link to authenticate your comment:\n<%s>\n\nAfter you have done that, you can always post comments on that blog with your username and e-mail address without receiving such notifications.");
