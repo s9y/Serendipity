@@ -21,7 +21,7 @@
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_TABLE', 'Allows you to create tables. Only used for complete lines. Syntax: "|| Cell 1 || Cell 2 || Cell 3 ||". Default is on.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_EMBED', 'Allows you to include and run PHP code with the syntax [[embed /path/to/script.php]]. Resulting output is not parsed by markup rules. Beware, security risk! If you use this, switch off markup for comments! Default is off. Not recommended to switch on.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_EMBED_DESC_BASE', 'The base directory to your scripts. Default for this is set to "/path/to/scripts/". If you leave this blank and switch embed on you can only use absolute paths.');
-@define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_IMAGE', 'Enables the inclusion of images. ([[image  /path/to/image.ext [HTML attributes] ]] or [[image  path/to/image.ext [link="PageName"] [HTML attributes] ]] for linked images). Por omissão ligado.');
+@define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_IMAGE', 'Enables the inclusion of images. ([[image  /path/to/image.ext [HTML attributes] ]] or [[image  path/to/image.ext [link="PageName"] [HTML attributes] ]] for linked images). Por omissï¿½o ligado.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_IMAGE_DESC_BASE', 'Base directory to your images. Default for this is set to "/path/to/images". If you leave this blank you can only use absolute paths or URLs.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_PHPLOOKUP', 'Creates lookup links to the PHP manual with [[php function-name]]. Default is on.');
 @define('PLUGIN_EVENT_TEXTWIKI_RULE_DESC_TOC', 'Generates a table of contents over all used headlines with [[toc]]. Default is on.');
@@ -618,8 +618,8 @@ class serendipity_event_textwiki extends serendipity_event
             if (serendipity_db_bool($this->get_config($name, $rule['flag']))) {
                 $this->_add_wiki_rule($bag, $name, $rule);
             } else {
-        $this->_remove_wiki_rule($bag, $name);
-        }
+                $this->_remove_wiki_rule($bag, $name);
+            }
         }
         return true;
     }
@@ -641,7 +641,7 @@ class serendipity_event_textwiki extends serendipity_event
             }
         }
         $this->wiki->enableRule($name);
-    $this->wiki->setRenderConf("Xhtml", $name, $rule_info);
+        $this->wiki->setRenderConf("Xhtml", $name, $rule_info);
         return true;
     }
 
