@@ -30,7 +30,7 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
             $upper_string = mb_convert_case( $string, MB_CASE_TITLE, Smarty::$_CHARSET );
         } else {
             // uppercase word breaks
-          $upper_string = preg_replace_callback("!(^|[^\p{L}'])([\p{Ll}])!S" . Smarty::$_UTF8_MODIFIER, 'smarty_mod_cap_mbconvert_cb', $string);
+            $upper_string = preg_replace_callback("!(^|[^\p{L}'])([\p{Ll}])!S" . Smarty::$_UTF8_MODIFIER, 'smarty_mod_cap_mbconvert_cb', $string);
         }
         // check uc_digits case
         if (!$uc_digits) {
