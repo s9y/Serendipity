@@ -16,7 +16,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
         $propbag->add('description',   PLUGIN_SHOUTBOX_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Matthias Lange');
-        $propbag->add('version',       '1.01');
+        $propbag->add('version',       '1.02');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -98,7 +98,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
         $box_rows    = $this->get_config('box_rows');
 
         // Create table, if not yet existant
-        if ($this->get_config('version') != '1.0') {
+        if (!$this->get_config('version')) {
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}shoutbox (
                         id {AUTOINCREMENT} {PRIMARY},
                         timestamp int(10) {UNSIGNED} NULL,
@@ -107,6 +107,11 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
                     )";
             $sql = serendipity_db_schema_import($q);
             $this->set_config('version', '1.0');
+        }
+        if ($this->get_config('version') == '1.0') {
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}shoutbox CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            $sql = serendipity_db_schema_import($q);
+            $this->set_config('version', '2');
         }
 
         //Put new shout into the database if necessary

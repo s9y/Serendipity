@@ -1,3 +1,8 @@
+1.53:
+-----
+- fixed db table vistors, ip column to IPv6 length
+
+
 1.52:
 -----
 - fixed some missing ending strong tags

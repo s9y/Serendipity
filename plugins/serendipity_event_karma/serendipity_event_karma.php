@@ -1,9 +1,9 @@
-<?php # $Id:$
+<?php #
 // serendipity_event_karma.php 2778 2011-09-23 12:32:28Z garvinhicking $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-@define('PLUGIN_KARMA_DB_VERSION', '2.0');
+@define('PLUGIN_KARMA_DB_VERSION', '2.1');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -44,7 +44,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz');
-        $propbag->add('version',       '2.8');
+        $propbag->add('version',       '2.9');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -387,7 +387,11 @@ class serendipity_event_karma extends serendipity_event
 
         $version = $this->get_config('dbversion', '0');
 
-        if ($version == '1.1') {
+        if ($version == '2.0') {
+            $q   = "ALTER TABLE {$serendipity['dbPrefix']}karmalog CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            $sql = serendipity_db_schema_import($q);
+            $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
+        } elseif ($version == '1.1') {
             $q   = "ALTER TABLE {$serendipity['dbPrefix']}karma ADD visits INT(11) default 0";
             $sql = serendipity_db_schema_import($q);
             $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);

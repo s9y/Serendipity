@@ -28,7 +28,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.80');
+        $propbag->add('version',       '1.81');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -733,6 +733,16 @@ var $filter_defaults;
             $sql = serendipity_db_schema_import($q);
 
             $this->set_config('dbversion', '2');
+        }
+
+        if ($dbversion == '2') {
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            $sql = serendipity_db_schema_import($q);
+
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            $sql = serendipity_db_schema_import($q);
+
+            $this->set_config('dbversion', '3');
         }
 
         return true;

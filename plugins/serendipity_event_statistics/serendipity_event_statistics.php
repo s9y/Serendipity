@@ -14,7 +14,7 @@ class serendipity_event_statistics extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_STATISTICS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Arnan de Gans, Garvin Hicking, Fredrik Sandberg, kalkin');
-        $propbag->add('version',       '1.52');
+        $propbag->add('version',       '1.53');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -107,6 +107,9 @@ class serendipity_event_statistics extends serendipity_event
 
                     if ((int)$this->get_config('db_indices_created', '0') == 0) {
                         $this->updateTables();
+                    }
+                    if ((int)$this->get_config('db_indices_created', '1') == 1) {
+                        $this->updateTables(1);
                     }
 
                     //Unique visitors are beeing registered and counted here. Calling function below.
@@ -941,24 +944,33 @@ class serendipity_event_statistics extends serendipity_event
         $this->updateTables();
     } //end of function createTables()
 
-    function updateTables() {
+    function updateTables($dbic=0) {
         global $serendipity;
 
-        //create indices
-        $q   = "CREATE INDEX visitorses ON {$serendipity['dbPrefix']}visitors (sessID);";
-        serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitorday ON {$serendipity['dbPrefix']}visitors (day);";
-        serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitortime ON {$serendipity['dbPrefix']}visitors (time);";
-        serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX visitortimeb ON {$serendipity['dbPrefix']}visitors_count (year, month, day);";
-        serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX refsrefs ON {$serendipity['dbPrefix']}refs (refs);";
-        serendipity_db_schema_import($q);
-        $q   = "CREATE INDEX refscount ON {$serendipity['dbPrefix']}refs (count);";
-        serendipity_db_schema_import($q);
+        if ($dbic == 0) {
+            //create indices
+            $q   = "CREATE INDEX visitorses ON {$serendipity['dbPrefix']}visitors (sessID);";
+            serendipity_db_schema_import($q);
+            $q   = "CREATE INDEX visitorday ON {$serendipity['dbPrefix']}visitors (day);";
+            serendipity_db_schema_import($q);
+            $q   = "CREATE INDEX visitortime ON {$serendipity['dbPrefix']}visitors (time);";
+            serendipity_db_schema_import($q);
+            $q   = "CREATE INDEX visitortimeb ON {$serendipity['dbPrefix']}visitors_count (year, month, day);";
+            serendipity_db_schema_import($q);
+            $q   = "CREATE INDEX refsrefs ON {$serendipity['dbPrefix']}refs (refs);";
+            serendipity_db_schema_import($q);
+            $q   = "CREATE INDEX refscount ON {$serendipity['dbPrefix']}refs (count);";
+            serendipity_db_schema_import($q);
 
-        $this->set_config('db_indices_created', '1');
+            $this->set_config('db_indices_created', '1');
+        }
+
+        if ($dbic == 1) {
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            serendipity_db_schema_import($q);
+
+            $this->set_config('db_indices_created', '2');
+        }
     }
 
 
