@@ -3,9 +3,13 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors 
+      and shoutbox to varchar(39) for IPv6
+
     * Fixed possible double includement of plugin_internal.inc.php
 
     * Smarty 3.1.15 release - please read  bundled-libs/Smarty/change_log.txt
+      (including fix for modifier capitalize from 3.1.16 trunk)
 
     * Fix possible temporary caching errors failing $eventData[0]['properties']
 
