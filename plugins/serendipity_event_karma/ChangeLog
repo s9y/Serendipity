@@ -1,6 +1,5 @@
-
 ------------------------------------------------------------------------
-Version 2.1:
+Version 2.9:
 
     * fixed db table karmalog, ip column to IPv6 length
 
