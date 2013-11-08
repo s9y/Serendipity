@@ -4,8 +4,6 @@ Version 2.0 ()
 ------------------------------------------------------------------------
 
 
-    * Fix possible temporary caching errors failing $eventData[0]['properties']
-
     * Automatic upgrade removal of old Smarty2 files (2.0-alpha2)
       function uses SPL
 
@@ -25,8 +23,26 @@ Version 2.0 ()
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
-    * Added event hook 'backend_footer'
-    
+Version 1.7.4 ()
+------------------------------------------------------------------------
+
+    * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors 
+      and shoutbox to varchar(45) for IPv6 - including tunneled IPv4 (39+6)
+
+    * Fixed possible double includement of plugin_internal.inc.php
+
+    * Smarty 3.1.15 release - please read  bundled-libs/Smarty/change_log.txt
+      (including fix for modifier capitalize from 3.1.16 trunk)
+
+    * Fix possible temporary caching errors failing $eventData[0]['properties']
+
+    * Basic support for static blocks (includeentry plugin) in 2k11.
+
+    * Added "backend_footer" event hook
+
+    * Exclude "frontpage extensions" directories "_vti_cnf" on windows servers
+      in Media Library
+
     * Fixed pagination when searching terms with fetchlimit < 4
 
     * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
