@@ -966,7 +966,7 @@ class serendipity_event_statistics extends serendipity_event
         }
 
         if ($dbic == 1) {
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors CHANGE COLUMN `ip` `ip` VARCHAR(39)";
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors CHANGE COLUMN `ip` `ip` VARCHAR(45)";
             serendipity_db_schema_import($q);
 
             $this->set_config('db_indices_created', '2');

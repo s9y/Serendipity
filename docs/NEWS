@@ -4,7 +4,7 @@ Version 1.7.4 ()
 ------------------------------------------------------------------------
 
     * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors 
-      and shoutbox to varchar(39) for IPv6
+      and shoutbox to varchar(45) for IPv6 - including tunneled IPv4 (39+6)
 
     * Fixed possible double includement of plugin_internal.inc.php
 
