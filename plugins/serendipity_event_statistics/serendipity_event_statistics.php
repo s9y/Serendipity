@@ -917,7 +917,7 @@ class serendipity_event_statistics extends serendipity_event
             time varchar(5) not null default '',
             ref varchar(255) default null,
             browser varchar(255) default null,
-            ip varchar(15) default null
+            ip varchar(45) default null
         )";
 
        serendipity_db_schema_import($q);
@@ -962,7 +962,7 @@ class serendipity_event_statistics extends serendipity_event
             $q   = "CREATE INDEX refscount ON {$serendipity['dbPrefix']}refs (count);";
             serendipity_db_schema_import($q);
 
-            $this->set_config('db_indices_created', '1');
+            $this->set_config('db_indices_created', '2');
         }
 
         if ($dbic == 1) {

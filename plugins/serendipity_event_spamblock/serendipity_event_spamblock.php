@@ -710,7 +710,7 @@ var $filter_defaults;
                         email varchar(200),
                         url varchar(200),
                         useragent varchar(255),
-                        ip varchar(15),
+                        ip varchar(45),
                         referer varchar(255),
                         body text)";
             $sql = serendipity_db_schema_import($q);
@@ -732,7 +732,7 @@ var $filter_defaults;
             $q   = "CREATE INDEX kshtaidx ON {$serendipity['dbPrefix']}spamblock_htaccess (timestamp);";
             $sql = serendipity_db_schema_import($q);
 
-            $this->set_config('dbversion', '2');
+            $this->set_config('dbversion', '3');
         }
 
         if ($dbversion == '2') {

@@ -102,11 +102,11 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}shoutbox (
                         id {AUTOINCREMENT} {PRIMARY},
                         timestamp int(10) {UNSIGNED} NULL,
-                        ip varchar(15) default NULL,
+                        ip varchar(45) default NULL,
                         body text
                     )";
             $sql = serendipity_db_schema_import($q);
-            $this->set_config('version', '1.0');
+            $this->set_config('version', '2');
         }
         if ($this->get_config('version') == '1.0') {
             $q = "ALTER TABLE {$serendipity['dbPrefix']}shoutbox CHANGE COLUMN ip ip VARCHAR(45)";

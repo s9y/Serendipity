@@ -402,7 +402,7 @@ class serendipity_event_karma extends serendipity_event
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}karmalog (
                         entryid int(11) default null,
                         points int(4) default null,
-                        ip varchar(15),
+                        ip varchar(45),
                         user_agent varchar(255),
                         votetime int(11) default null
                     )";
@@ -421,7 +421,7 @@ class serendipity_event_karma extends serendipity_event
             $q   = "CREATE TABLE {$serendipity['dbPrefix']}karmalog (
                         entryid int(11) default null,
                         points int(4) default null,
-                        ip varchar(15),
+                        ip varchar(45),
                         user_agent varchar(255),
                         votetime int(11) default null
                     )";
