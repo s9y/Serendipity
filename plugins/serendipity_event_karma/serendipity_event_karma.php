@@ -388,7 +388,7 @@ class serendipity_event_karma extends serendipity_event
         $version = $this->get_config('dbversion', '0');
 
         if ($version == '2.0') {
-            $q   = "ALTER TABLE {$serendipity['dbPrefix']}karmalog CHANGE COLUMN `ip` `ip` VARCHAR(45)";
+            $q   = "ALTER TABLE {$serendipity['dbPrefix']}karmalog CHANGE COLUMN ip ip VARCHAR(45)";
             $sql = serendipity_db_schema_import($q);
             $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
         } elseif ($version == '1.1') {

@@ -109,7 +109,7 @@ class serendipity_plugin_shoutbox extends serendipity_plugin
             $this->set_config('version', '1.0');
         }
         if ($this->get_config('version') == '1.0') {
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}shoutbox CHANGE COLUMN `ip` `ip` VARCHAR(45)";
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}shoutbox CHANGE COLUMN ip ip VARCHAR(45)";
             $sql = serendipity_db_schema_import($q);
             $this->set_config('version', '2');
         }

@@ -736,10 +736,10 @@ var $filter_defaults;
         }
 
         if ($dbversion == '2') {
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog CHANGE COLUMN `ip` `ip` VARCHAR(45)";
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog CHANGE COLUMN ip ip VARCHAR(45)";
             $sql = serendipity_db_schema_import($q);
 
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess CHANGE COLUMN `ip` `ip` VARCHAR(45)";
+            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess CHANGE COLUMN ip ip VARCHAR(45)";
             $sql = serendipity_db_schema_import($q);
 
             $this->set_config('dbversion', '3');
