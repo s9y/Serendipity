@@ -88,8 +88,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Deblokkeer deze URL via deSpamblock plugin');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Deblokkeer deze E-mail via deSpamblock plugin');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activeer url filtering door blogg.de Blacklist');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Gefilterd door blogg.de Blacklist');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Titel is dezelfde als het commentaar');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', 'Weiger commentaar waarbij de titel dezelfde is als de inhoud.');

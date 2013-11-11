@@ -2,13 +2,6 @@
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-/* BC - TODO: Remove for 0.8 final */
-if (!function_exists('serendipity_serverOffsetHour')) {
-    function serendipity_serverOffsetHour() {
-        return time();
-    }
-}
-
 class serendipity_event_spamblock extends serendipity_event
 {
 var $filter_defaults;
@@ -62,7 +55,6 @@ var $filter_defaults;
             'contentfilter_authors',
             'contentfilter_words',
             'contentfilter_emails',
-            'bloggdeblacklist',
             'akismet',
             'akismet_server',
             'akismet_filter',
@@ -80,7 +72,6 @@ var $filter_defaults;
                     'contentfilter_authors',
                     'contentfilter_words',
                     'contentfilter_emails',
-                    'bloggdeblacklist',
                     'akismet',
                     'akismet_server',
                     'akismet_filter',
@@ -244,19 +235,6 @@ var $filter_defaults;
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_FILTER_ACTIVATE_DESC);
                 $propbag->add('default', 'moderate');
-                $propbag->add('radio', array(
-                    'value' => array('moderate', 'reject', 'none'),
-                    'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT, NONE)
-                ));
-                $propbag->add('radio_per_row', '1');
-
-                break;
-
-            case 'bloggdeblacklist':
-                $propbag->add('type', 'radio');
-                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST);
-                $propbag->add('description', '');
-                $propbag->add('default', 'none');
                 $propbag->add('radio', array(
                     'value' => array('moderate', 'reject', 'none'),
                     'desc'  => array(PLUGIN_EVENT_SPAMBLOCK_API_MODERATE, PLUGIN_EVENT_SPAMBLOCK_API_REJECT, NONE)
@@ -448,8 +426,9 @@ var $filter_defaults;
 
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}spamblock_htaccess (ip, timestamp) VALUES ('" . serendipity_db_escape_string($new_ip) . "', '" . time() . "')");
 
-        // Temporarily hardcoded fix by DLange to prevent .htaccess growing too large.
-        $q = "SELECT ip FROM {$serendipity['dbPrefix']}spamblock_htaccess WHERE timestamp > " . (time() - 86400*2) . " GROUP BY ip ORDER BY timestamp DESC LIMIT 177";
+        // Limit number of banned IPs to prevent .htaccess growing too large. The query selects at max 20*$blocklist_chunksize entries from the last two days.
+        $blocklist_chunksize = 177;
+        $q = "SELECT ip FROM {$serendipity['dbPrefix']}spamblock_htaccess WHERE timestamp > " . (time() - 86400*2) . " GROUP BY ip ORDER BY timestamp DESC LIMIT " . 20*$blocklist_chunksize;
         $rows = serendipity_db_query($q, false, 'assoc');
 
         $deny = array();
@@ -458,24 +437,39 @@ var $filter_defaults;
         }
 
         $hta = $serendipity['serendipityPath'] . '.htaccess';
-        if (count($deny) > 0 && file_exists($hta) && is_writable($hta)) {
-            $htaccess = file_get_contents($hta);
-            $fp = @fopen($hta, 'w');
+        $blocklist_size = count($deny);
+        if ($blocklist_size > 0 && file_exists($hta) && is_writable($hta)) {
+            $blocklist = "#IP count: " . $blocklist_size . ", last update: " . date('Y-m-d H:i:s') . "\n";
+            for ($i = 0; $i < ((int) (($blocklist_size-1) / $blocklist_chunksize))+1; $i++) {
+                $blocklist = $blocklist . "Deny From " . implode(" ", array_slice($deny, $i*$blocklist_chunksize, $blocklist_chunksize)) . "\n";
+            }
+            $fp = @fopen($hta, 'r+');
             if (!$fp) {
                 return false;
-            } else {
+            }
+            if (flock($fp, LOCK_EX|LOCK_NB)) {
+                $htaccess = file_get_contents($hta);
+                if (!$htaccess) {
+                    fclose($fp);  // also releases the lock
+                    return false;
+                }
                 // Check if an old htaccess file existed and try to preserve its contents. Otherwise completely wipe the file.
                 if ($htaccess != '' && preg_match('@^(.*)#SPAMDENY.*Deny From.+#/SPAMDENY(.*)$@imsU', $htaccess, $match)) {
                     // Code outside from s9y-code was found.
-                    $content = trim($match[1]) . "\n#SPAMDENY\nDeny From " . implode(' ', $deny) . "\n#/SPAMDENY\n" . trim($match[2]);
+                    $content = trim($match[1]) . "\n#SPAMDENY\n" . $blocklist . "#/SPAMDENY\n" . trim($match[2]);
                 } else {
-                    $content = trim($htaccess) . "\n#SPAMDENY\nDeny From " . implode(' ', $deny) . "\n#/SPAMDENY\n";
+                    $content = trim($htaccess) . "\n#SPAMDENY\n" . $blocklist . "#/SPAMDENY\n";
                 }
+                ftruncate($fp, 0);
                 fwrite($fp, $content);
                 fclose($fp);
                 return true;
+            } else {
+                fclose($fp);
+                return false;
             }
         }
+        return false;
     }
 
     function akismetRequest($api_key, $data, &$ret, $action = 'comment-check', $eventData = null, $addData = null) {
@@ -636,6 +630,7 @@ var $filter_defaults;
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         if (function_exists('serendipity_request_start')) serendipity_request_start();
 
+        // this switch statement is a leftover from blogg.de support (i.e. there were more options than just one). Leaving it in place in case we get more options again in the future.
         switch($where) {
             case 'akismet.com':
                 // DEBUG
@@ -656,36 +651,6 @@ var $filter_defaults;
 
                 $this->akismetRequest($api_key, $data, $ret);
                 break;
-
-            case 'blogg.de':
-                $target  = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/blogg.de.blacklist.txt';
-                $timeout = 3600; // One hour
-
-                if (file_exists($target) && filemtime($target) > time()-$timeout) {
-                    $data = file_get_contents($target);
-                } else {
-                    $data = '';
-
-                    $req    = new HTTP_Request('http://spam.blogg.de/blacklist.txt');
-
-                    if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                        if (file_exists($target) && filesize($target) > 0) {
-                            $data = file_get_contents($target);
-                        }
-                    } else {
-                        // Fetch file
-                        $data = $req->getResponseBody();
-                        $fp = @fopen($target, 'w');
-
-                        if ($fp) {
-                            fwrite($fp, $data);
-                            fclose($fp);
-                        }
-                    }
-                }
-
-                $blacklist = explode("\n", $data);
-                $ret =& $blacklist;
 
             default:
                 break;
@@ -1090,35 +1055,6 @@ var $filter_defaults;
 
                         if(false === $this->wordfilter($logfile, $eventData, $wordmatch, $addData)) {
                             return false;
-                        }
-
-                        // Filter Blogg.de Blacklist?
-                        $bloggdeblacklist = $this->get_config('bloggdeblacklist');
-                        if ($bloggdeblacklist == 'moderate' || $bloggdeblacklist == 'reject') {
-                            $domains = $this->getBlacklist('blogg.de', '', $eventData, $addData);
-                            if (is_array($domains)) {
-                                foreach($domains AS $domain) {
-                                    $domain = trim($domain);
-                                    if (empty($domain)) {
-                                        continue;
-                                    }
-
-                                    if (preg_match('@' . preg_quote($domain) . '@i', $addData['url'])) {
-                                        $this->IsHardcoreSpammer();
-                                        if ($bloggdeblacklist == 'moderate') {
-                                            $this->log($logfile, $eventData['id'], 'MODERATE', PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ': ' . $domain, $addData);
-                                            $eventData['moderate_comments'] = true;
-                                            $serendipity['csuccess']        = 'moderate';
-                                            $serendipity['moderate_reason'] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY . ' (' . PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ')';
-                                        } else {
-                                            $this->log($logfile, $eventData['id'], 'REJECTED', PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST . ': ' . $domain, $addData);
-                                            $eventData = array('allow_comments' => false);
-                                            $serendipity['messagestack']['comments'][] = PLUGIN_EVENT_SPAMBLOCK_ERROR_BODY;
-                                            return false;
-                                        }
-                                    }
-                                }
-                            }
                         }
 
                         // Check for maximum number of links before rejecting

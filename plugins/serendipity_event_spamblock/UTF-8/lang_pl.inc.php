@@ -86,8 +86,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Odblokuj tego autora we wtyczce Obrona przed spamem');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Odblokuj ten URL we wtyczce Obrona przed spamem');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Filtruj URLe za pomocą Blacklisty serwisu blogg.de');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Zidentyfikowane jako spam na podstawie Blacklisty serwisu blogg.de');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Tytuł wpisu jest taki sam jak treść komentarza');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', 'Odrzucaj komentarze, które zawierają tylko tytuł');
