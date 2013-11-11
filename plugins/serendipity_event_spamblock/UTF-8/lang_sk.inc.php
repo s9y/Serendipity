@@ -88,8 +88,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Zrušiť blokovánie tejto adresy URL');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Zrušiť blokovánie tejto e-mailovej adresy');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Aktivovať filtrovanie adries URL z balcklistu blogg.de');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Zamietnuté blacklistom blogg.de');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Nadpis komentára je rovnaký ako jeho telo');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', 'Odmietnuté budú komentáre, ktoré v tele obsahujú iba nadpis.');

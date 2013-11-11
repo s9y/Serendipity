@@ -87,8 +87,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Desbloquear estea URL a través de la extensión Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', 'Desbloquear este correo electrónico a través de la extensión Spamblock');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activar el filtrado de URL através de la lista negra blogg.de');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Filtrado a través de la lista negra blogg.de');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Titulo de la entrada igual al comentario');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', 'Rechaza comentarios que sólo contengan título');

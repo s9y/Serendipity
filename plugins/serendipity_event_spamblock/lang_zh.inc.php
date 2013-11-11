@@ -92,8 +92,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', '使用Spamblock插件解除对该网址的屏蔽');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_EMAIL', '使用Spamblock插件解除对该电子邮件地址的屏蔽');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', '使用blogg.de黑名单对网址进行过滤');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', '已被blogg.de黑名单过滤掉');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', '回复内容和文章标题相同');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', '自动拒绝那些回复内容和文章标题完全相同的回复');

@@ -88,6 +88,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Desbloquear este autor via plugin Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Desbloquear esta URL via plugin Spamblock');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activar filtragem de URL via a lista negra de blogg.de');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Filtrado pela lista negra de blogg.deq');
 

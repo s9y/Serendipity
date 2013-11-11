@@ -85,8 +85,6 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Bloquer cette adresse à l\'aide du plugin Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Débloquer cet auteur dans le plugin Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Débloquer cette adresse dans le plugin Spamblock');
-@define('PLUGIN_EVENT_SPAMBLOCK_BLOGG_SPAMLIST', 'Activer le filtrage d\'adresse par la blacklist de blogg.de');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_BLOGG_SPAMLIST', 'Adresse filtrée par la blacklist de blogg.de');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TITLE', 'Titre du billet égal commentaire');
 @define('PLUGIN_EVENT_SPAMBLOCK_FILTER_TITLE', 'Rejeter les commentaires qui ne contiennent que le titre du billet');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL', 'Vérifier les adresses des rétroliens');
