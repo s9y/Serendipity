@@ -4,7 +4,8 @@ Version 1.7.4 ()
 ------------------------------------------------------------------------
 
     * Removed blogg.de filter from spamblock plugin, adapted htaccess
-      IP block algorithm for race conditions (DLange)
+      IP block algorithm for race conditions. .htaccess can now contain
+      multiple Deny From ranges to prevent parsing problems (DLange)
           
     * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors 
       and shoutbox to varchar(45) for IPv6 - including tunneled IPv4 (39+6)
