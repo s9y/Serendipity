@@ -27,7 +27,7 @@
 
                 <ul>
                     <li class="logged_in"><span>{$admin_vars.self_info}</span></li>
-                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.ADMIN_FRONTPAGE}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.ADMIN_FRONTPAGE}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php" title="Dashboard"><span class="icon-home"></span><span class="visuallyhidden"> Dashboard</span></a></li>{* i18n *}
                 {if 'personalConfiguration'|checkPermission}
                     <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
