@@ -11,12 +11,12 @@
             <span class="msg_notice"><span class="icon-info-circled"></span> New stable Serendipity version available: {$curVersion}</span> {* i18n *}
         </section>
     {/if}
-    {if is_array($comments)}
         <section id="dashboard_comments" class="equal_heights quick_list">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
-            {foreach $comments as $comment}
+            {if is_array($comments)}
+                {foreach $comments as $comment}
                 <li><div class="comment_summary">
                         <b><a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b> - {$comment.body|truncate:100:"&hellip;"}
                     </div>
@@ -38,16 +38,19 @@
                     {/if}
                     </ul>
                 </li>
-            {/foreach}
+                {/foreach}
+            {else}
+                <li><span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_COMMENTS}</span></li>
+            {/if}
             </ol>
         </section>
-    {/if}
-    {if is_array($entries)}
+
         <section id="dashboard_entries" class="equal_heights quick_list">
             <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.ADMIN_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3> {* i18n *}
 
             <ol class="plainList">
-            {foreach $entries as $entry}
+            {if is_array($entries)}
+                {foreach $entries as $entry}
                 <li class="clearfix">
                     <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title}</a>
                     <ul class="plainList actions">
@@ -64,10 +67,13 @@
                     <span class="entry_status status_draft">{$CONST.DRAFT}</span>
                 {/if}
                 </li>
-            {/foreach}
+                {/foreach}
+            {else}
+                <li><span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span></li>
+            {/if}
             </ol>
         </section>
-    {/if}
+
         <section id="s9y_links" class="clearfix mfp-hide">
             <h3>{$CONST.FURTHER_LINKS}</h3>
 
