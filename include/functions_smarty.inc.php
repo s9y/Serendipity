@@ -884,7 +884,7 @@ function serendipity_smarty_init($vars = array()) {
 
             // Load serendipity smarty class loading class
             if (!class_exists('Serendipity_Smarty')) {
-                include_once 'serendipity_smarty_class.inc.php';
+                include_once S9Y_INCLUDE_PATH . '/include/serendipity_smarty_class.inc.php';
             }
             
             if (!class_exists('Serendipity_Smarty')) {
