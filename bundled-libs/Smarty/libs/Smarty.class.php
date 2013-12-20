@@ -2,7 +2,7 @@
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        Smarty.class.php
- * SVN:         $Id: Smarty.class.php 4778 2013-09-17 20:44:41Z Uwe.Tews@googlemail.com $
+ * SVN:         $Id: Smarty.class.php 4800 2013-12-15 15:19:01Z Uwe.Tews@googlemail.com $
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
  * @author Uwe Tews
  * @author Rodney Rehm
  * @package Smarty
- * @version 3.1.15
+ * @version 3.1-DEV
  */
 
 /**
@@ -113,7 +113,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     /**
      * smarty version
      */
-    const SMARTY_VERSION = 'Smarty-3.1.15';
+    const SMARTY_VERSION = 'Smarty-3.1.16';
 
     /**
      * define variable scopes
@@ -299,6 +299,11 @@ class Smarty extends Smarty_Internal_TemplateBase
      * @var boolean
      */
     public $merge_compiled_includes = false;
+    /**
+     * template inheritance merge compiled includes
+     * @var boolean
+     */
+    public $inheritance_merge_compiled_includes = true;
     /**
      * cache lifetime in seconds
      * @var integer
