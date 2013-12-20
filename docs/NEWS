@@ -4,7 +4,7 @@ Version 1.7.4 ()
 ------------------------------------------------------------------------
 
     * Smarty 3.1.16 bugfix release - please read bundled-libs/Smarty/change_log.txt
-      about changes to to versions 3.1.16 and 3.1.15.
+      about changes to versions 3.1.16 and 3.1.15.
       Please also see special bundled-libs/Smarty/3.1.16_RELEASE_NOTES.txt
 
     * Removed blogg.de filter from spamblock plugin, adapted htaccess
