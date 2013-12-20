@@ -23,6 +23,10 @@ Version 2.0 ()
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Smarty 3.1.16 bugfix release - please read bundled-libs/Smarty/change_log.txt
+      about changes to versions 3.1.16 and 3.1.15.
+      Please also see special bundled-libs/Smarty/3.1.16_RELEASE_NOTES.txt
+
     * Removed blogg.de filter from spamblock plugin, adapted htaccess
       IP block algorithm for race conditions. .htaccess can now contain
       multiple Deny From ranges to prevent parsing problems (DLange)
@@ -31,9 +35,6 @@ Version 1.7.4 ()
       and shoutbox to varchar(45) for IPv6 - including tunneled IPv4 (39+6)
 
     * Fixed possible double includement of plugin_internal.inc.php
-
-    * Smarty 3.1.15 release - please read  bundled-libs/Smarty/change_log.txt
-      (including fix for modifier capitalize from 3.1.16 trunk)
 
     * Fix possible temporary caching errors failing $eventData[0]['properties']
 
