@@ -393,8 +393,8 @@ function serendipity_fetchImages($group = false, $start = 0, $end = 20, $images 
     if ($dir = @opendir($basedir . $odir)) {
         $aTempArray = array();
         while (($file = @readdir($dir)) !== false) {
-            if ($file == '.svn' || $file == 'CVS' || $file == '.htaccess' || $file == '.' || $file == '..') {
-                continue; // 2013/06/05 added exclude .htaccess for ckeditor/kcfinder usage
+            if ($file == '.svn' || $file == 'CVS' || $file == '.htaccess' || strtolower($file) == 'thumbs.db' || $file == '.' || $file == '..') {
+                continue; // 2013/06/05 added exclude .htaccess for ckeditor/kcfinder usage and 2013/12/25 added thumbs.db
             }
             array_push($aTempArray, $file);
         }
@@ -1477,7 +1477,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
-        $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // _vti_cnf to exclude frontpage extensions on windows servers
+        $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // _vti_cnf to exclude possible added servers frontpage extensions
         serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
         $paths        = array();
         $aFilesOnDisk = array();
@@ -1796,7 +1796,7 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
 function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern = NULL, $depth = 1, $max_depth = NULL, $apply_ACL = false, $aExcludeDirs = NULL) {
 
     if ($aExcludeDirs === null) {
-        // add _vti_cnf to exclude frontpage extensions on windows servers
+        // add _vti_cnf to exclude possible added servers frontpage extensions
         // add ckeditor/kcfinders .thumb dir to exclude, since no hook
         $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true, "_vti_cnf" => true);
     }
@@ -3502,7 +3502,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 function &serendipity_getMediaPaths() {
     global $serendipity;
 
-    $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // add _vti_cnf to exclude frontpage extensions on windows servers
+    $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // add _vti_cnf to exclude possible added servers frontpage extensions
     serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
     $paths        = array();
 
