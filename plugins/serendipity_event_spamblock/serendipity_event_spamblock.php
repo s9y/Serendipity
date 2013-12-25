@@ -21,7 +21,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.81');
+        $propbag->add('version',       '1.82');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -1246,7 +1246,7 @@ var $filter_defaults;
                         }
 
                         header('Content-Type: image/jpeg');
-                        $image  = imagecreate($width, $height);
+                        $image  = imagecreate($width, $height); // recommended use of imagecreatetruecolor() returns a black backgroundcolor
                         $bgcol  = imagecolorallocate($image, trim($bgcolors[0]), trim($bgcolors[1]), trim($bgcolors[2]));
                         // imagettftext($image, 10, 1, 1, 15, imagecolorallocate($image, 255, 255, 255), $font, 'String: ' . $string);
 
@@ -1282,7 +1282,7 @@ var $filter_defaults;
                                 }
                             }
                         }
-                        imagejpeg($image, '', 90);
+                        imagejpeg($image, NULL, 90); // NULL fixes https://bugs.php.net/bug.php?id=63920
                         imagedestroy($image);
                     } else {
                         header('Content-Type: image/png');
