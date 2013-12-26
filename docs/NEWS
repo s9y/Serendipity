@@ -3,6 +3,8 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Fixed spamblocks Captcha imagecreate() with PHP > 5.3 versions
+
     * Smarty 3.1.16 bugfix release - please read bundled-libs/Smarty/change_log.txt
       about changes to versions 3.1.16 and 3.1.15.
       Please also see special bundled-libs/Smarty/3.1.16_RELEASE_NOTES.txt
