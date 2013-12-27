@@ -1,7 +1,6 @@
-<?php #
+/<?php
 
 /**
- *  @version  1716
  *  @file lang_cz.inc.php 1716 2007-12-20 00:35:00 VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php

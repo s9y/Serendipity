@@ -1,7 +1,6 @@
-<?php # lang_cs.inc.php 1.12 2013-04-13 11:48:44 VladaAjgl $
+/<?php
 
 /**
- * @version 1.12
  * Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
  * All rights reserved. See LICENSE file for licensing details
  * Translation (c) 2004 Josef Klimosz <ok2wo@centrum.cz>
