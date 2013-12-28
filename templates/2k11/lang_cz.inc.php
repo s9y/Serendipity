@@ -1,4 +1,4 @@
-/<?php
+<?php
 
 /**
  *  @author Vladimír Ajgl <vlada@ajgl.cz>

@@ -1,4 +1,4 @@
-/<?php
+<?php
 
 /**
  *  @file lang_cz.inc.php 1658.2 2011-04-17 14:17:14 VladaAjgl
