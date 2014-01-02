@@ -3,6 +3,8 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Upgrade textile plugin libs - extends to PHP >= 5.3
+
     * Fixed spamblocks Captcha imagecreate() with PHP > 5.3 versions
 
     * Smarty 3.1.16 bugfix release - please read bundled-libs/Smarty/change_log.txt
