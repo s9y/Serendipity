@@ -76,6 +76,10 @@ class serendipity_event_textile extends serendipity_event
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
+    function example() {
+        echo '<p>'.PLUGIN_EVENT_TEXTILE_EXAMPLE_NOTE.'</p>';
+    }
+
     function introspect_config_item($name, &$propbag)
     {
         if ($name === 'textile_version') {
