@@ -20,16 +20,16 @@ Version 1.7.4 ()
 
     * Fixed possible double includement of plugin_internal.inc.php
 
-    * Fix possible temporary caching errors failing $eventData[0]['properties']
+    * Fixed possible temporary caching errors, failing $eventData[0]['properties']
 
     * Basic support for static blocks (includeentry plugin) in 2k11.
 
     * Added "backend_footer" event hook
 
-    * Exclude "frontpage extensions" directories "_vti_cnf" on windows servers
-      in Media Library
+    * Exclude "_vti_cnf" dirs and "thumbs.db" files in MediaLibrary, to exclude 
+      possible added servers frontpage extensions and win dirs
 
-    * Fixed pagination when searching terms with fetchlimit < 4
+    * Fixed pagination when searching terms with fetchlimit lower 4
 
     * Fixed deprecated /e modifier with PHP >= 5.5 in nl2br plugin restore method
 
