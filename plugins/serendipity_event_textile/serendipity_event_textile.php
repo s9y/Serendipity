@@ -1,5 +1,7 @@
 <?php #
 
+use Netcarver\Textile\Parser as Textilev3;
+
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 class serendipity_event_textile extends serendipity_event
@@ -14,11 +16,11 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
-        $propbag->add('version',       '1.6');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
+            'php'         => '5.3.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
         $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true));
@@ -81,10 +83,10 @@ class serendipity_event_textile extends serendipity_event
             $propbag->add('name',        PLUGIN_EVENT_TEXTILE_VERSION);
             $propbag->add('description', PLUGIN_EVENT_TEXTILE_VERSION_DESCRIPTION);
             $propbag->add('radio',       array(
-                                            'value' => array(1, 2),
-                                            'desc'  => array('1.0', '2.0'),
+                                            'value' => array(1, 2, 3),
+                                            'desc'  => array('1.0', '2.0', '3.0'),
             ));
-            $propbag->add('default',     2);
+            $propbag->add('default',     3);
             return true;
         } elseif ($name === 'unescape') {
             $propbag->add('type',        'boolean');
@@ -178,7 +180,7 @@ class serendipity_event_textile extends serendipity_event
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
                         $url = $this->get_config('textile_version') == 1
                                    ? 'http://www.textism.com/tools/textile/'
-                                   : 'http://thresholdstate.com/articles/4312/the-textile-reference-manual';
+                                   : 'http://txstyle.org/article/43/a-short-introduction';
                         echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . sprintf(PLUGIN_EVENT_TEXTILE_TRANSFORM, $url) . '</div>';
                     }
                     return true;
@@ -244,13 +246,23 @@ class serendipity_event_textile extends serendipity_event
     }
 
     function textile($string) {
-        if ($this->get_config('textile_version') == 2) {
-            require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/classTextile.php';
-            $textile = new Textile();
-            return $textile->textileThis($string);
-        } else {
-            require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/textile.php';
-            return textile($string);
+        switch($this->get_config('textile_version')) {
+            case 3:
+                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Parser.php';
+                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/DataBag.php';
+                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Tag.php';
+                $textile = new Textilev3();
+                return $textile->textileThis($string);
+                break;
+            case 2:
+                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib2/classTextile.php';
+                $textile = new Textile();
+                return $textile->textileThis($string);
+                break;
+            case 1:
+                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib1/textile.php';
+                return textile($string);
+                break;
         }
     }
 }
