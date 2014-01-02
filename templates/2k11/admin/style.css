@@ -885,6 +885,7 @@ input[type=checkbox],
 #entry_skip,
 #filter_entries,
 #sort_entries,
+#filter_comments,
 #s9y_links > ul,
 #serendipity_category .inputs,
 #serendipity_customfields textarea {
@@ -1492,6 +1493,19 @@ form > .button_link:first-of-type,
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0 0 1em;
+}
+
+.filter_pane {
+    background: #eee;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #aaa;
+    padding: 0 .4em;
+}
+
+.filter_pane .form_buttons {
+    margin-bottom: 0;
 }
 
 #template_select article,

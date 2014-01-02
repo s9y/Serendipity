@@ -28,7 +28,7 @@
             </li>
         </ul>
 
-        <fieldset id="media_pane_filter" class="additional_info">
+        <fieldset id="media_pane_filter" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
             <div id="media_filter" class="clearfix">
@@ -69,7 +69,7 @@
                             </select>
                     {else}
                         {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
-                            {* TODO: needs a label … but what IS this? *}
+                            {* TODO: needs a label, but what IS this? *}
                             <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|@escape}">
                     {/if}
                     {if $so_val.type == 'date' || $so_val.type == 'intrange'}
@@ -98,7 +98,7 @@
             </div>
         </fieldset>
 
-        <fieldset id="media_pane_sort" class="additional_info">
+        <fieldset id="media_pane_sort" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
             <div class="clearfix grouped">
                 <div class="form_select">

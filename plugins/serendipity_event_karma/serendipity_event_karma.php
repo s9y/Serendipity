@@ -1526,7 +1526,7 @@ END_IMG_CSS;
         <li><a class='button_link' href='#serendipity_admin_sort' title='".SORT_ORDER."'><span class='icon-sort'></span><span class='visuallyhidden'> ".SORT_ORDER."</span></a></li>
     </ul>
 
-    <fieldset id='serendipity_admin_filters' class='additional_info'>
+    <fieldset id='serendipity_admin_filters' class='additional_info filter_pane'>
         <legend><span class='visuallyhidden'>".FILTERS."</span></legend>
 
         <div class='clearfix'>
@@ -1596,7 +1596,7 @@ END_IMG_CSS;
                         $orderby = 'votetime ' . serendipity_db_escape_string($serendipity['GET']['sort']['ordermode']);
                     }
                     print("
-    <fieldset id='serendipity_admin_sort' class='additional_info'>
+    <fieldset id='serendipity_admin_sort' class='additional_info filter_pane'>
         <legend><span class='visuallyhidden'>".SORT_ORDER."</span></legend>
 
         <div class='clearfix'>

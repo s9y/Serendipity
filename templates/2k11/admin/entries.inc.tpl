@@ -13,7 +13,7 @@
             <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
         </ul>
 
-        <div id="entry_skip" class="clearfix additional_info">
+        <div id="entry_skip" class="clearfix additional_info filter_pane">
             <div class="form_field">
                 <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
                 <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <fieldset id="filter_entries" class="additional_info">
+        <fieldset id="filter_entries" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
             <div class="clearfix">
@@ -64,7 +64,7 @@
             </div>
         </fieldset>
 
-        <fieldset id="sort_entries" class="additional_info">
+        <fieldset id="sort_entries" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.SORT_ORDER}</legend>
 
             <div class="clearfix">

@@ -20,7 +20,7 @@
             <li><div class="backend_comments">{$backend_comments_top}</div></li>
         </ul>
 
-        <fieldset id="filter_comments" class="additional_info">
+        <fieldset id="filter_comments" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS} ({$CONST.FIND_COMMENTS})</legend>
 
             <div class="clearfix inputs">
