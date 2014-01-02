@@ -104,7 +104,7 @@
             </div>
 
             <fieldset class="clearfix inputs">
-                <legend><span>{$CONST.CATEGORY_HIDE_SUB} <a class="toggle_info" href="#hide_subcats_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></span></legend>
+                <legend><span>{$CONST.CATEGORY_HIDE_SUB} <a class="toggle_info button_link" href="#hide_subcats_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></span></legend>
 
                 <div class="clearfix grouped">
                     <div class="form_radio">
