@@ -502,7 +502,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         }
     }
 
-    // Used by media_upload.tpl to …?
+    // Used by media_upload.tpl to ..?
     serendipity.getfilename = function(value) { 
         re = /^.+[\/\\]+?(.+)$/;
         return value.replace(re, "$1"); 
@@ -531,7 +531,7 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         }
     }
 
-    // …?
+    // ..?
     serendipity.checkSave = function() { 
         {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
         return true;
@@ -576,9 +576,15 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
 
     // Inverts a selection of checkboxes
     serendipity.invertSelection = function() {
-        var $chkboxes = $('#formMultiDelete .multidelete');
-        $chkboxes.prop('checked', !$chkboxes.attr('checked'))
-            .trigger('click');
+        $('#formMultiDelete .multidelete').each(function() {
+            var $box = $(this);
+            if($box.is(':checked')) {
+                $box.prop('checked', false);
+            } else {
+                $box.prop('checked', true);
+            }
+            $box.trigger('click');
+        });
     }
 
     // Highlight/dehighlight elements in lists
