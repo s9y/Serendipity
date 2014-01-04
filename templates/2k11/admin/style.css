@@ -1659,7 +1659,7 @@ form > .button_link:first-of-type,
 .pluginmanager_container .multidel_selected,
 .zebra_list .multidel_selected,
 .multidel_selected {
-    border: 1px solid #b94a48;
+    border: 2px solid #b94a48;
 }
 
 #entries_list h3,
