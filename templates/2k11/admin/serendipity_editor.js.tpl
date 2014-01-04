@@ -98,11 +98,12 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     serendipity.wrapSelectionWithLink = function(txtarea) {
         var my_link = prompt("Enter URL:","http://");
 
-        if (getSelection($(txtarea) ) == "") {
-            var my_desc = prompt("Enter Description", '');
+        if (my_link) {
+            if (getSelection($(txtarea) ) == "") {
+                var my_desc = prompt("Enter Description", '');
+            }
+            var my_title = prompt("Enter title/tooltip:", "");
         }
-
-        var my_title = prompt("Enter title/tooltip:", "");
 
         html_title = "";
 
