@@ -173,6 +173,7 @@
     {if $print_DIRECTORY_WRITE_ERROR}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>
     {/if}
+    <a class="button_link state_submit" href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
 {/if}
 {if $case_directoryCreate}
     <h2>{$CONST.CREATE_DIRECTORY}</h2>
