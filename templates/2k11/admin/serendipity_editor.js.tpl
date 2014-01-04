@@ -578,10 +578,11 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
     serendipity.invertSelection = function() {
         $('#formMultiDelete .multidelete').each(function() {
             var $box = $(this);
+            var boxId = $box.attr('id');
             if($box.is(':checked')) {
-                $box.prop('checked', false);
+                $(boxId).prop('checked', false);
             } else {
-                $box.prop('checked', true);
+                $(boxId).prop('checked', true);
             }
             $box.trigger('click');
         });
