@@ -99,7 +99,7 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === 'debug') {
 
             // We don't want the notices - but everything else !
-            echo '<p> == FULL DEBUG ERROR MODE == </p>';
+            echo ' == FULL DEBUG ERROR MODE == ';
             echo '<pre>';
             // trying to be as detailled as possible - but beware using args containing sensibel data like passwords
             if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
@@ -122,7 +122,7 @@ if (!function_exists('errorToExceptionHandler')) {
             exit; // make sure to exit in case of database connection errors.
         }
         if ($serendipity['production'] === false) {
-            echo '<p> == TESTING ERROR MODE == </p>';
+            echo ' == TESTING ERROR MODE == ';
             echo '<pre>';
             // see notes above
             if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
@@ -136,29 +136,20 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === true) {
             if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
                 // ToDo: enhance for more special serendipity error needs
-                $str  = '<p> == SERENDIPITY ERROR == </p>';
-                $str .= '<p>Please correct:</p>';
+                $str  = " == SERENDIPITY ERROR == ";
                 $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
                 #var_dump(headers_list());
                 if (headers_sent()) {
                     serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
                 } else {
-                    // this also reacts on non eye-displayed errors with following small javascript, while being in tags like <select> to push on top of page, else return non javascript use $str just there
-                    echo '<noscript>' . $str . '</noscript>' . "\n<script>" . '
-function create(htmlStr) {
-    var frag = document.createDocumentFragment(),
-        temp = document.createElement("div");
-    temp.innerHTML = htmlStr;
-    while (temp.firstChild) {
-        frag.appendChild(temp.firstChild);
-    }
-    return frag;
-}
-var fragment = create("Error redirect: '.addslashes($str).'");
-// You can use native DOM methods to insert the fragment:
+                    // see global include of function in plugin_api.inc.php
+                    // this also reacts on non eye-displayed errors with following small javascript, 
+                    // while being in tags like <select> to push on top of page, else return non javascript use $str just there
+                    // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
+                    echo "\n".'<script>
+var fragment = window.top.create("Error redirect: '.addslashes($str).'");
 document.body.insertBefore(fragment, document.body.childNodes[0]);
-' . "\n</script>\n";
-                    // sadly we can't use HEREDOC notation here as this does not execute the javascript after finished writing
+' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
                 }
             }
         }
