@@ -42,7 +42,9 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     </script>
 <?php
     }
-    // add a global available (index.tpl; admin/index.tpl; preview_iframe.tpl) redirect error string function used by errorToExceptionHandler()
+    // add a global available (index.tpl; admin/index.tpl; preview_iframe.tpl) redirect error string function used by errorToExceptionHandler() - hardened by admin only
+    if ($serendipity['production'] === true) {
+        if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
 ?>
     <script type="text/javascript">
     function create(htmlStr) { 
@@ -56,6 +58,8 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     }
     </script>
 <?php
+        }
+    }
 }
 
 
