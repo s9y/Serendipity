@@ -30,7 +30,7 @@ Version 1.7.4 ()
     * Added "backend_footer" event hook
 
     * Exclude "_vti_cnf" dirs and "thumbs.db" files in MediaLibrary, to exclude 
-      possible added servers frontpage extensions and win dirs
+      possible added servers frontpage extensions and MS-OS preview cache files
 
     * Fixed pagination when searching terms with fetchlimit lower 4
 
