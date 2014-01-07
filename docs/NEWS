@@ -3,6 +3,8 @@
 Version 1.7.4 ()
 ------------------------------------------------------------------------
 
+    * Fixed emoticate plugin icon link to check for textile class
+
     * Upgrade textile plugin libs - extends to PHP >= 5.3.
       Please check for new options!
 
