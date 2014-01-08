@@ -18,7 +18,7 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
-            'php'         => '5.3.0'
+            'php'         => '5.2.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
         $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true));
@@ -272,13 +272,17 @@ class serendipity_event_textile extends serendipity_event
     function textile($string) {
         switch($this->get_config('textile_version')) {
             case 3:
-                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Parser.php';
-                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/DataBag.php';
-                require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Tag.php';
-                $textile = $this->get_config('textile_doctype') ? new \Netcarver\Textile\Parser('html5') : new \Netcarver\Textile\Parser();
-                // todo check for user-supplied output to restrict
-                #    return $textile->textileRestricted($string);
-                return $textile->textileThis($string);
+                if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Parser.php';
+                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/DataBag.php';
+                    require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib3/src/Netcarver/Textile/Tag.php';
+                    $textile = $this->get_config('textile_doctype') ? new \Netcarver\Textile\Parser('html5') : new \Netcarver\Textile\Parser();
+                    // todo check for user-supplied output to restrict
+                    #    return $textile->textileRestricted($string);
+                    return $textile->textileThis($string);
+                } else {
+                    trigger_error(' Textile lib3 needs at least PHP 5.3.0 running. Update your PHP version or use lib2 instead.', E_USER_WARNING);
+                }
                 break;
             case 2:
                 require_once S9Y_INCLUDE_PATH . 'plugins/serendipity_event_textile/lib2/classTextile.php';
