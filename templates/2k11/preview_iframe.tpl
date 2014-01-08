@@ -25,7 +25,7 @@
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script src="{serendipity_getFile file="js/modernizr-2.6.2.min.js"}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.7.1.min.js"}"></script>
     {serendipity_hookPlugin hook="backend_header" hookAll="true"}
 <script>
     window.onload = function() {ldelim}
