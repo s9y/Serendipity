@@ -29,6 +29,11 @@
    border-bottom: 1px dotted #FAFAFA;
 }
 
+/* overwrite serendipityAdminContent span for non-optionized plugins */
+.serendipityAdminContent span.pluginmanager_title {
+    color: grey !important;
+}
+
 .pluginmanager_item_even,  .pluginmanager_item_uneven {
     background-color: #FAFAFA;
     border: 1px solid #DADADA;
