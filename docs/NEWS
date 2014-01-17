@@ -4,7 +4,8 @@
 Version 1.7.5 ()
 ------------------------------------------------------------------------
 
-    * Fixed textile PHP 5.2 compat issue
+    * Fixed textile PHP 5.2 (namespace) compat issue
+
     * Added default value to spamblocks required_fields option [name,comment]
 
 
