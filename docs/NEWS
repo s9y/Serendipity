@@ -5,6 +5,7 @@ Version 1.7.5 ()
 ------------------------------------------------------------------------
 
     * Fixed textile PHP 5.2 compat issue
+    * Added default value to spamblocks required_fields option [name,comment]
 
 
 Version 1.7.4 (January 11th, 2014)
@@ -12,7 +13,7 @@ Version 1.7.4 (January 11th, 2014)
 
     * Fixed emoticate plugin icon link to check for textile class
 
-    * Upgrade textile plugin libs - extends to PHP >= 5.3.
+    * Upgrade textile plugin libs - lib3 extends to PHP >= 5.3.
       Please check for new options!
 
     * Fixed spamblocks Captcha imagecreate() with PHP > 5.3 versions
