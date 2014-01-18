@@ -118,12 +118,12 @@
             <p class="serendipity_msg_notice">{$CONST.COMMENT_ADDED}: {$CONST.THIS_COMMENT_NEEDS_REVIEW}</p>
         {elseif not $entry.allow_comments}
             <p class="serendipity_msg_important">{$CONST.COMMENTS_CLOSED}</p>
-        {else}
-            <section id="respond" class="serendipity_section_commentform">
-                <h3>{$CONST.ADD_COMMENT}</h3>
-                {$COMMENTFORM}
-			</section>
         {/if}
+        <section id="respond" class="serendipity_section_commentform">
+            <h3>{$CONST.ADD_COMMENT}</h3>
+            {$COMMENTFORM}
+        </section>
+
     {/if}
     {$entry.backend_preview}
     </article>
