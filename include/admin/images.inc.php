@@ -170,6 +170,7 @@ switch ($serendipity['GET']['adminAction']) {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
             $created_thumbnail = true;
+            $data['showML_add'] = showMediaLibrary($messages, true);
             break;
         }
 
