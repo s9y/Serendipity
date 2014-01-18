@@ -79,7 +79,7 @@ if ($entriesAmount < 5) {
 
 $data['entries'] = $entries;
 
-$data['token'] = serendipity_setFormToken('url');
+$data['urltoken'] = serendipity_setFormToken('url');
 
 echo serendipity_smarty_show('admin/overview.inc.tpl', $data);
 
