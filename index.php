@@ -564,6 +564,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     header('Content-type: application/javascript; charset=' . LANG_CHARSET);
 
     $out = "";
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
     serendipity_plugin_api::hook_event('js', $out);
     echo $out;
     exit;
