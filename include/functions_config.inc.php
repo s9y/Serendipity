@@ -781,8 +781,8 @@ function serendipity_iframe(&$entry, $mode = null) {
             }
             if (!empty($serendipity['lastSavedEntry'])) {
                 $data['lastSavedEntry'] = $serendipity['lastSavedEntry'];
-                $data['entrylink'] = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
             }
+            $data['entrylink'] = serendipity_archiveURL($res, $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
             break;
 
         case 'preview':
