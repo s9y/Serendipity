@@ -1,7 +1,7 @@
 #
 
 
-Version 1.7.5 ()
+Version 1.7.5 (January 18th, 2014)
 ------------------------------------------------------------------------
 
     * Fixed textile PHP 5.2 (namespace) compat issue
