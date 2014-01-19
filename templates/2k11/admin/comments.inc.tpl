@@ -79,7 +79,7 @@
                         <option value="">{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="NORMAL"{if $c_type == 'NORMAL'} selected{/if}>{$CONST.COMMENTS}</option>
                         <option value="TRACKBACK"{if $c_type == 'TRACKBACK'} selected{/if}>{$CONST.TRACKBACKS}</option>
-                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected{/if}>{$CONST.PINGBACKS}</option>
+                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected{/if}>{$CONST.PINGBACKS}</option>    {* l18n *}
                     </select>
                 </div>
             </div>
@@ -90,7 +90,16 @@
         </fieldset>
     </form>
     {if !is_array($sql)}
-        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_COMMENTS}</span>
+        
+        <span class="msg_notice"><span class="icon-info-circled"></span>
+            {if $c_type == 'TRACKBACK'}
+                {$CONST.NO_TRACKBACKS}
+            {else if $c_type == 'PINGBACK'}
+                {$CONST.NO_PINGBACKS}   {* l18n *}
+            {else}
+                {$CONST.NO_COMMENTS}
+            {/if}
+        </span>
 
         <a class="block_level" href="serendipity_admin.php?serendipity[adminModule]=comments">Return to default comment list</a> {* l18n *}
     {else}
