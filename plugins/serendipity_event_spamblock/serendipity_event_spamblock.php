@@ -28,7 +28,8 @@ var $filter_defaults;
             'frontend_comment'     => true,
             'fetchcomments'        => true,
             'backend_comments_top' => true,
-            'backend_view_comment' => true
+            'backend_view_comment' => true,
+            'backend_sidebar_admin_appearance' => true,
         ));
         $propbag->add('configuration', array(
             'killswitch',
@@ -1368,6 +1369,12 @@ var $filter_defaults;
 
                     return true;
                     break;
+
+                case 'backend_sidebar_admin_appearance':
+                        echo '<li><a href="serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance . '">' . PLUGIN_EVENT_SPAMBLOCK_TITLE . '</a></li>';
+                    return true;
+                    break;
+            
 
                 default:
                     return false;
