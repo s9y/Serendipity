@@ -824,7 +824,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Collapsible configuration elements
-    if($('body').has('#serendipity_config_options').size() > 0) {
+    if($('body').has('#serendipity_config_options, #serendipity_category').size() > 0) {
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {

@@ -60,7 +60,11 @@
                 </div>
             </div>
 
-            <div id="category_subcats" class="clearfix">
+            <h3 class="toggle_headline">
+                <button class="show_config_option icon_link" type="button" data-href="#category_subcats" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PARENT_CATEGORY}</button>
+            </h3>
+
+            <div id="category_subcats" class="clearfix additional_info">
                 <div class="form_select">
                     <label for="parent_cat">{$CONST.PARENT_CATEGORY}</label>
                     <select id="parent_cat" name="serendipity[cat][parent_cat]">
@@ -91,7 +95,11 @@
                 </fieldset>
             </div>
 
-            <div id="category_permissions" class="clearfix">
+            <h3 class="toggle_headline">
+                <button class="show_config_option icon_link" type="button" data-href="#category_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PERMISSIONS}</button>
+            </h3>
+
+            <div id="category_permissions" class="clearfix additional_info">
                 <div class="form_multiselect">
                     <label for="read_authors">{$CONST.PERM_READ}</label>
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
@@ -113,7 +121,11 @@
                 </div>
             </div>
 
-            <div id="category_preview" class="clearfix">
+            <h3 class="toggle_headline">
+                <button class="show_config_option icon_link" type="button" data-href="#category_preview" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PREVIEW}</button>
+            </h3>
+
+            <div id="category_preview" class="clearfix additional_info">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
                     <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
