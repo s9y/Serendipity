@@ -618,6 +618,10 @@ window.log = function f(){ log.history = log.history || []; log.history.push(arg
         
     };
 
+    serendipity.reloadImage = function(img) {
+        $(img).attr('src', $(img).attr('src')+'?'+Math.random());
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -1116,6 +1120,15 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     if ($('body').has('#serendipity_comments_list').size() > 0 && window.location.hash && $('body').has('#' + window.location.hash.replace('#', '')).size() > 0) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
     }
+
+    // ajaxify image rotate, solving cache issue
+    $('.media_rotate_right,.media_rotate_left').click(function(e) {
+        e.preventDefault();
+        var $rotateButton = $(this)
+        $.get($rotateButton.attr('href'), function() {
+            serendipity.reloadImage($rotateButton.closest('.media_file').find('img'));
+        });
+    })
 
     // Tabs
     if($('body').has('.tabs').size() > 0) {
