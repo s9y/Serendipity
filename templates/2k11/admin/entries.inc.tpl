@@ -114,19 +114,11 @@
     
 </div>
     {if $is_entries}
-    <form id="formMultiDelete" action="?" method="post" name="formMultiDelete">
-        {$formtoken}
-        <input name="serendipity[action]" type="hidden" value="admin">
-        <input name="serendipity[adminModule]" type="hidden" value="entries">
-        <input name="serendipity[adminAction]" type="hidden" value="multidelete">
-
         <div class="entries_pane">
             <ul id="entries_list" class="plainList zebra_list">
             {foreach $entries as $entry}
                 {if ($entry@index > $perPage)}{continue}{/if}
-                <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}"><div class="form_check">
-                        <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
-                    </div>
+                <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}">
 
                     <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
 
@@ -178,17 +170,7 @@
             {/if}
         </div>
     {/if}
-        <div id="multidelete_tools" class="form_buttons">
-            <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
-            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
-        </div>
-    </form>
 
-    <form action="?" method="get">
-        <input name="serendipity[action]" type="hidden" value="admin">
-        <input name="serendipity[adminModule]" type="hidden" value="entries">
-        <input name="serendipity[adminAction]" type="hidden" value="editSelect">
-    </form>
 {/if}
 {if $no_entries}
     <h2>{$CONST.FIND_ENTRIES}</h2>
