@@ -1959,47 +1959,61 @@ function serendipity_getimagesize($file, $ft_mime = '', $suf = '') {
 function serendipity_getImageFields() {
     global $serendipity;
 
-    $x = array(
-        'i.date'              => array('desc' => SORT_ORDER_DATE,
-                                     'type' => 'date'
-                               ),
+    if ($serendipity['simpleImageFilters'] !== false) {
+        $x = array(
+            'i.date'              => array('desc' => SORT_ORDER_DATE,
+                                         'type' => 'date'
+                                   ),
 
-        'i.name'              => array('desc' => SORT_ORDER_NAME
-                               ),
+            'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
+                                   ),
 
-        'i.authorid'          => array('desc' => AUTHOR,
-                                     'type' => 'authors'
-                               ),
+        );
 
-        'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
-                               ),
+    } else {
+    
+        $x = array(
+            'i.date'              => array('desc' => SORT_ORDER_DATE,
+                                         'type' => 'date'
+                                   ),
 
-        'i.size'              => array('desc' => SORT_ORDER_SIZE,
-                                     'type' => 'intrange'
-                               ),
+            'i.name'              => array('desc' => SORT_ORDER_NAME
+                                   ),
 
-        'i.dimensions_width'  => array('desc' => SORT_ORDER_WIDTH,
-                                     'type' => 'intrange'
-                               ),
+            'i.authorid'          => array('desc' => AUTHOR,
+                                         'type' => 'authors'
+                                   ),
 
-        'i.dimensions_height' => array('desc' => SORT_ORDER_HEIGHT,
-                                     'type' => 'intrange'
-                               )
-    );
+            'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
+                                   ),
 
-    $addProp = explode(';', $serendipity['mediaProperties']);
-    foreach($addProp AS $prop) {
-        $parts = explode(':', $prop);
-        $name  = $parts[0];
-        $x['bp.' . $name] = array('desc' => (defined('MEDIA_PROPERTY_' . $name) ? constant('MEDIA_PROPERTY_' . $name) : htmlspecialchars($name)));
-        if (preg_match('@date@i', $name)) {
-            $x['bp.' . $name]['type'] = 'date';
-        }
-        if (preg_match('@length@i', $name)) {
-            $x['bp.' . $name]['type'] = 'intrange';
-        }
-        if (preg_match('@dpi@i', $name)) {
-            $x['bp.' . $name]['type'] = 'int';
+            'i.size'              => array('desc' => SORT_ORDER_SIZE,
+                                         'type' => 'intrange'
+                                   ),
+
+            'i.dimensions_width'  => array('desc' => SORT_ORDER_WIDTH,
+                                         'type' => 'intrange'
+                                   ),
+
+            'i.dimensions_height' => array('desc' => SORT_ORDER_HEIGHT,
+                                         'type' => 'intrange'
+                                   )
+        );
+
+        $addProp = explode(';', $serendipity['mediaProperties']);
+        foreach($addProp AS $prop) {
+            $parts = explode(':', $prop);
+            $name  = $parts[0];
+            $x['bp.' . $name] = array('desc' => (defined('MEDIA_PROPERTY_' . $name) ? constant('MEDIA_PROPERTY_' . $name) : htmlspecialchars($name)));
+            if (preg_match('@date@i', $name)) {
+                $x['bp.' . $name]['type'] = 'date';
+            }
+            if (preg_match('@length@i', $name)) {
+                $x['bp.' . $name]['type'] = 'intrange';
+            }
+            if (preg_match('@dpi@i', $name)) {
+                $x['bp.' . $name]['type'] = 'int';
+            }
         }
     }
 

@@ -630,6 +630,12 @@
                                           'type'        => 'textarea',
                                           'permission'  => 'blogConfiguration',
                                           'default'     => ''),
+                                    array('var'         => 'simpleImageFilters',
+                                          'title'       => SIMPLE_IMAGE_FILTERS,    // i18n
+                                          'description' => SIMPLE_IMAGE_FILTERS_DESC,   // i18n
+                                          'type'        => 'bool',
+                                          'permission'  => 'blogConfiguration',
+                                          'default'     => true),
                             ));
 
     return $res;
