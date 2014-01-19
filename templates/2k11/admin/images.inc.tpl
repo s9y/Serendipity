@@ -149,7 +149,7 @@
         {$formtoken}
         <div class="form_field">
             <label for="dircreate_name">{$CONST.NAME}</label>
-            <input id="dircreate_name" name="serendipity[name]" type="text" value="">
+            <input id="dircreate_name" name="serendipity[name]" type="text" value="" required>
         </div>
 
         <div class="form_select">
@@ -157,12 +157,13 @@
             <select id="dircreate_parent" name="serendipity[parent]">
                 <option value="">{$CONST.BASE_DIRECTORY}</option>
             {foreach $folders as $folder}
-                <option{if $folder.relpath == $get.only_path} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)} {$folder.name}</option>
+                <option{if $folder.relpath == $get.only_path || $folder.relpath == $dir} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)} {$folder.name}</option>
             {/foreach}
             </select>
         </div>
         {serendipity_hookPlugin hookAll=true hook="backend_directory_createoptions" addData=$folders}
         <div class="form_buttons">
+            <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
             <input name="SAVE" type="submit" value="{$CONST.CREATE_DIRECTORY}">
         </div>
     </form>
@@ -199,7 +200,7 @@
 
                 <ul class="plainList clearfix edit_actions">
                     <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT} {$folder.name}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreateSub&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="Create Subfolder"><span class="icon-folder-open"></span><span class="visuallyhidden"> Create Subfolder</span></a></li> {* i18n *}
                     <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.DELETE} {$folder.name}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
             </div>

@@ -482,6 +482,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'directoryCreate':
+    case 'directoryCreateSub':
         if (!serendipity_checkPermission('adminImagesDirectories')) {
             return;
         }
@@ -499,6 +500,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_directoryCreate'] = true;
         $data['formtoken'] = serendipity_setFormToken();
         $data['folders']   = $folders;
+        $data['dir']  = $serendipity['GET']['dir'];
         break;
 
     case 'directorySelect':
