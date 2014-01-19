@@ -136,7 +136,7 @@ if ( $serendipity['GET']['adminAction'] == 'delete' ) {
 
 
 
-if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminAction'] == 'new' ) {
+if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminAction'] == 'new' || $serendipity['GET']['adminAction'] == 'newSub') {
     if ( $serendipity['GET']['adminAction'] == 'edit' ) {
         $data['edit'] = true;
         $cid = (int)$serendipity['GET']['cid'];
@@ -153,6 +153,12 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
         $save = CREATE;
         $read_groups  = array(0 => 0);
         $write_groups = array(0 => 0);
+    }
+
+    if ($serendipity['GET']['adminAction'] == 'newSub') {
+        $data['new'] = true;
+        $data['newSub'] = true;
+        $this_cat['parentid'] = (int)$serendipity['GET']['cid'];
     }
     $data['cid'] = $cid;
     $data['this_cat'] = $this_cat;
