@@ -2295,13 +2295,13 @@ function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_ed
 
         serendipity_parseMediaProperties($dprops, $keywords, $show[$idx], $props, $keywordsPerBlock, $is_edit);
     }
-
     $smarty_vars = array(
         'is_edit'           => $is_edit,
         'editform_hidden'   => $editform_hidden,
         'keywordsPerBlock'  => $keywordsPerBlock,
         'keywords'          => $keywords,
-        'dprops'            => $dprops
+        'dprops'            => $dprops,
+        'case_add'          => is_array($new_media[0]['created_thumbnail'])     // created_thumbnail is only set when viewing properties after adding an image
     );
 
     return serendipity_showMedia(
