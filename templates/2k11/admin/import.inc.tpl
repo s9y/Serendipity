@@ -36,15 +36,13 @@
         {$formToken}
 
         <div class="form_select">
-            <label for="import_from">{$CONST.IMPORT_WEBLOG_APP}:</label>
+            <label for="import_from">{$CONST.IMPORT_WEBLOG_APP}</label>
             <select id="import_from" name="serendipity[importFrom]">
             {foreach $list as $v => $k}
                 <option value="{$v}">{$k}</option>
             {/foreach}
             </select>
-        </div>
-        
-        <div class="form_buttons">
+
             <input type="submit" value="{$CONST.GO}">
         </div>
     </form>

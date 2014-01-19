@@ -1,36 +1,41 @@
-<h2>Maintenance</h2>  {* i18n *}
+<div id="maintenance" class="clearfix">
+    <h2>Maintenance</h2>  {* i18n *}
 
 {if $action == "integrity"}
-    <h2>{$CONST.INTEGRITY}</h2>
+    <div class="clearfix">
+        <h3 class="visuallyhidden">{$CONST.INTEGRITY}</h3>
     {if $noChecksum == true}
         <span class="msg_notice"><span class="icon-info-circled"></span>{$CONST.CHECKSUMS_NOT_FOUND}</span>
     {else}
         {if $badsums|count == 0}
-            <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.CHECKSUMS_PASS}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.CHECKSUMS_PASS}</span>
         {else}
-            <ul class="plainList">
-                {foreach $badsums as $rpath => $calcsum}
-                    <li class="msg_error"><span class="icon-attention-circled"></span>{$CONST.CHECKSUM_FAILED|sprintf:$rpath}</li>
-                {/foreach}
-            </ul>
+        <ul class="plainList">
+            {foreach $badsums as $rpath => $calcsum}
+            <li class="msg_error"><span class="icon-attention-circled"></span>{$CONST.CHECKSUM_FAILED|sprintf:$rpath}</li>
+            {/foreach}
+        </ul>
         {/if}
     {/if}
+    </div>
 {/if}
 
 {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
-    <section>
+    <section id="maintenance_integrity" class="equal_heights quick_list">
         <h3>{$CONST.INTEGRITY}</h3>
-        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=integrity" title="{$CONST.INTEGRITY}"><span>{$CONST.INTEGRITY}</span></a>
+
+        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=integrity" title="{$CONST.INTEGRITY}"><span>{$CONST.INTEGRITY}</span></a> {* i18n *}
     </section>
 {/if}
+{serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
 {if 'adminImport'|checkPermission}
-    <section>
+    <section id="maintenance_export" class="equal_heights quick_list">
         <h3>{$CONST.EXPORT_ENTRIES}</h3>
 
         <a class="button_link" href="{$serendipityBaseURL}rss.php?version=2.0&all=1"><span class="icon-rss"></span> {$CONST.EXPORT_FEED}</a>
     </section>
 
-    <section>
+    <section id="maintenance_import" class="equal_heights quick_list">
         <h3>{$CONST.IMPORT_ENTRIES}</h3>
     
         {$importMenu}
@@ -38,7 +43,7 @@
 {/if}
 
 {if 'adminImagesSync'|checkPermission}
-    <section>
+    <section id="maintenance_thumbs" class="quick_list">
         <h3>{$CONST.CREATE_THUMBS}</h3>
 
         <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.WARNING_THIS_BLAHBLAH|replace:'\\n':'<br>'}</span>
@@ -71,5 +76,5 @@
         </form>
     </section>
 {/if}
-
-{serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
+</div>
+<script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
