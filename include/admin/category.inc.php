@@ -30,7 +30,8 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
         $icon     = $serendipity['POST']['cat']['icon'];
         $parentid = (isset($serendipity['POST']['cat']['parent_cat']) && is_numeric($serendipity['POST']['cat']['parent_cat'])) ? $serendipity['POST']['cat']['parent_cat'] : 0;
 
-        if ($serendipity['GET']['adminAction'] == 'new') {
+
+        if ($serendipity['GET']['adminAction'] == 'new' || $serendipity['GET']['adminAction'] == 'newSub') {
             $data['new'] = true;
             if ($parentid != 0) {
                 // TODO: This doesn't seem to work as expected, serendipity_rebuildCategoryTree(); is still needed! Only activate this optimization function when it's really working :)
