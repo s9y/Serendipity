@@ -1959,7 +1959,7 @@ function serendipity_getimagesize($file, $ft_mime = '', $suf = '') {
 function serendipity_getImageFields() {
     global $serendipity;
 
-    if ($serendipity['simpleImageFilters'] !== false) {
+    if ($serendipity['simpleFilters'] !== false) {
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'

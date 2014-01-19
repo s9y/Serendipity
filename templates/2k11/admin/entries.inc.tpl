@@ -10,16 +10,20 @@
         <ul class="filters_toolbar plainList">
             <li><a class="button_link" href="#filter_entries" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
             <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
-            <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
+            {if NOT $simpleFilters}
+                <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
+            {/if}
         </ul>
 
-        <div id="entry_skip" class="clearfix additional_info filter_pane">
-            <div class="form_field">
-                <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
-                <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-                <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+        {if NOT $simpleFilters}
+            <div id="entry_skip" class="clearfix additional_info filter_pane">
+                <div class="form_field">
+                    <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
+                    <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
+                    <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+                </div>
             </div>
-        </div>
+        {/if}
 
         <fieldset id="filter_entries" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
@@ -114,11 +118,24 @@
     
 </div>
     {if $is_entries}
+    {if NOT $simpleFilters}
+        <form id="formMultiDelete" action="?" method="post" name="formMultiDelete">
+            {$formtoken}
+            <input name="serendipity[action]" type="hidden" value="admin">
+            <input name="serendipity[adminModule]" type="hidden" value="entries">
+            <input name="serendipity[adminAction]" type="hidden" value="multidelete">
+    {/if}
+
         <div class="entries_pane">
             <ul id="entries_list" class="plainList zebra_list">
             {foreach $entries as $entry}
                 {if ($entry@index > $perPage)}{continue}{/if}
                 <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}">
+                    {if NOT $simpleFilters}
+                        <div class="form_check">
+                            <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
+                        </div>
+                    {/if}
 
                     <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape|truncate:50:"&hellip;"}</a></h3>
 
@@ -170,7 +187,13 @@
             {/if}
         </div>
     {/if}
-
+    {if NOT $simpleFilters}
+        <div id="multidelete_tools" class="form_buttons">
+            <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
+            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
+        </div>
+        </form>
+    {/if}
 {/if}
 {if $no_entries}
     <h2>{$CONST.FIND_ENTRIES}</h2>

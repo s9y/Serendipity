@@ -293,6 +293,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['use_iframe'] = $serendipity['use_iframe'];
         $data['page'] = $page;
         $data['totalEntries'] = serendipity_getTotalEntries();
+        $data['simpleFilters'] = $serendipity['simpleFilters'];
 
         if (is_array($entries)) {
             $data['is_entries'] = true;

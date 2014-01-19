@@ -106,7 +106,15 @@
                                           'type'        => 'bool',
                                           'default'     => true,
                                           'permission'  => 'personalConfigurationRightPublish',
-                                          'view'        => 'dangerous')
+                                          'view'        => 'dangerous'),
+                                          
+                                    array('var'         => 'simpleFilters',
+                                          'title'       => SIMPLE_FILTERS,    // i18n
+                                          'description' => SIMPLE_FILTERS_DESC,   // i18n
+                                          'type'        => 'bool',
+                                          'permission'  => 'personalConfiguration',
+                                          'default'     => true,
+                                          'flags'       => array('config'))
                             ));
 
     $res['defaults'] =
