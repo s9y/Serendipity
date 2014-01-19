@@ -15,16 +15,7 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 switch ($serendipity['GET']['adminAction']) {
-    case 'sync':
-        $data['case_sync']            = true;
-        $data['perm_adminImagesSync'] = true;
-
-        if (!serendipity_checkPermission('adminImagesSync')) {
-            $data['perm_adminImagesSync'] = false;
-            break;
-        }
-        break;
-
+    
     case 'doSync':
         $data['case_doSync'] = true;
         $data['perm_adminImagesSync'] = true;

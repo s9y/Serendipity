@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.33.1');
+        $propbag->add('version',       '1.32');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -32,7 +32,7 @@ class serendipity_event_entryproperties extends serendipity_event
             'entries_header'                                    => true,
             'frontend_entryproperties'                          => true,
             'backend_sidebar_entries_event_display_buildcache'  => true,
-            'backend_sidebar_entries'                           => true,
+            'backend_maintenance'                               => true,
             'backend_cache_entries'                             => true,
             'backend_cache_purge'                               => true,
             'backend_plugins_new_instance'                      => true,
@@ -567,11 +567,10 @@ class serendipity_event_entryproperties extends serendipity_event
                     return true;
                     break;
 
-                case 'backend_sidebar_entries':
+                case 'backend_maintenance':
                     if ($is_cache && $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
-?>
-                        <li><a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache"><?php echo PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE; ?></a></li>
-<?php
+                        echo '<section><h3>'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</h3></section>';
+                        echo '<a class="button_link" href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache">'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</a>';
                     }
                     return true;
                     break;

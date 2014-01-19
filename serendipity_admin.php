@@ -20,6 +20,7 @@ if (IS_installed === false) {
 
 if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModule'] == 'logout') {
     serendipity_logout();
+    header("Location: ".$serendipity['baseURL']);
 } else {
     if (IS_installed === true) {
         /* Check author token to insure session not hijacked */
@@ -171,15 +172,6 @@ if (!$use_installer && $is_logged_in) {
             $admin_section = PERSONAL_SETTINGS;
             break;
 
-        case 'export':
-            if (!serendipity_checkPermission('adminImport')) {
-                break;
-            }
-
-            include S9Y_INCLUDE_PATH . 'include/admin/export.inc.php';
-            $admin_section = EXPORT_ENTRIES;
-            break;
-
         case 'import':
             if (!serendipity_checkPermission('adminImport')) {
                 break;
@@ -227,28 +219,9 @@ if (!$use_installer && $is_logged_in) {
             }
             break;
 
-        case 'logout':
-            echo LOGGEDOUT;
-            break;
-
-        case 'integrity':
-            echo '<h2>' . INTEGRITY . '</h2>';
-            $badsums = array();
-            if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php') || 0 == filesize(S9Y_INCLUDE_PATH . 'checksums.inc.php') ) {
-                echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . CHECKSUMS_NOT_FOUND . '</span>';
-                break;
-            }
-            $badsums = serendipity_verifyFTPChecksums();
-            if (count($badsums) == 0) {
-                echo '<span class="msg_success"><span class="icon-ok-circled"></span> ' . CHECKSUMS_PASS . '</span>';
-            } else {
-                echo '<ul class="plainList">';
-                foreach ($badsums as $rpath => $calcsum) {
-                    echo '<li class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(CHECKSUM_FAILED, $rpath) . '</li>';
-                }
-                echo '</ul>';
-            }
-            $admin_section = INTEGRITY;
+        case 'maintenance':
+            include S9Y_INCLUDE_PATH . 'include/admin/maintenance.inc.php';
+            $admin_section = MAINTENANCE;
             break;
 
         default:

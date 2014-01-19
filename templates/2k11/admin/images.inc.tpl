@@ -1,39 +1,3 @@
-{if $case_sync}
-    <h2>{$CONST.CREATE_THUMBS}</h2>
-    {if !$perm_adminImagesSync}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
-    {else}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.WARNING_THIS_BLAHBLAH|replace:'\\n':'<br>'}</span>
-
-    <form method="POST" action="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=doSync">
-        <fieldset>
-            <legend><span>{$CONST.SYNC_OPTION_LEGEND}</span></legend>
-
-            <div class="clearfix">
-                <div class="form_radio">
-                    <input id="keepthumbs" name="serendipity[deleteThumbs]" type="radio" value="no" checked="checked">
-                    <label for="keepthumbs">{$CONST.SYNC_OPTION_KEEPTHUMBS}</label>
-                </div>
-
-                <div class="form_radio">
-                    <input id="sizecheckthumbs" name="serendipity[deleteThumbs]" type="radio" value="check">
-                    <label for="sizecheckthumbs">{$CONST.SYNC_OPTION_SIZECHECKTHUMBS}</label>
-                </div>
-                
-                <div class="form_radio">
-                    <input id="deletethumbs" name="serendipity[deleteThumbs]" type="radio" value="yes">
-                    <label for="deletethumbs">{$CONST.SYNC_OPTION_DELETETHUMBS}</label>
-                </div>
-            </div>
-        </fieldset>
-
-        <div class="form_buttons">
-            <a href="serendipity_admin.php" class="button_link state_cancel">{$CONST.ABORT_NOW}</a>
-            <input name="doSync" type="submit" value="{$CONST.CREATE_THUMBS}">
-        </div>
-    </form>
-    {/if}
-{/if}
 {if $case_doSync}
     {if !$perm_adminImagesSync}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>

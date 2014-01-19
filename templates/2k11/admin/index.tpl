@@ -112,9 +112,6 @@
                         {if 'adminImagesDirectories'|checkPermission}
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a></li>
                         {/if}
-                        {if 'adminImagesSync'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=sync">{$CONST.CREATE_THUMBS}</a></li>
-                        {/if}
                         {if $admin_vars.no_create !== true}
                             {serendipity_hookPlugin hook="backend_sidebar_entries_images" hookAll="true"}
                         {/if}
@@ -151,13 +148,7 @@
                         {if 'adminUsersGroups'|checkPermission}
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=groups">{$CONST.MANAGE_GROUPS}</a></li>
                         {/if}
-                        {if 'adminImport'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=import">{$CONST.IMPORT_ENTRIES}</a></li>
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=export">{$CONST.EXPORT_ENTRIES}</a></li>
-                        {/if}
-                        {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=integrity">{$CONST.INTEGRITY}</a></li>
-                        {/if}
+                        <li><a href="serendipity_admin.php?serendipity[adminModule]=maintenance">Maintenance</a></li>  {* i18n *}
                         {if $admin_vars.no_create !== true}
                             {serendipity_hookPlugin hook="backend_sidebar_admin" hookAll="true"}
                         {/if}
