@@ -48,7 +48,7 @@
         <form id="serendipity_category" method="POST" name="serendipityCategory">
             {$formToken}
 
-            <div class="clearfix odd">
+            <div id="category_basics" class="clearfix">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
                     <input id="category_name" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}">
@@ -58,7 +58,9 @@
                     <label for="category_description">{$CONST.DESCRIPTION}</label>
                     <input id="category_description" name="serendipity[cat][description]" type="text" value="{$this_cat.category_description|default:""|escape:"html"}">
                 </div>
+            </div>
 
+            <div id="category_subcats" class="clearfix">
                 <div class="form_select">
                     <label for="parent_cat">{$CONST.PARENT_CATEGORY}</label>
                     <select id="parent_cat" name="serendipity[cat][parent_cat]">
@@ -69,7 +71,27 @@
                     {/foreach}
                     </select>
                 </div>
-            
+
+                <fieldset class="clearfix inputs">
+                    <legend><span>{$CONST.CATEGORY_HIDE_SUB} <a class="toggle_info button_link" href="#hide_subcats_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></span></legend>
+
+                    <div class="clearfix grouped">
+                        <div class="form_radio">
+                            <input id="hide_sub_yes" name="serendipity[cat][hide_sub]" type="radio" value="1"{if $this_cat.hide_sub== 1} checked="checked"{/if}>
+                            <label for="hide_sub_yes">{$CONST.YES}</label>
+                        </div>
+
+                        <div class="form_radio">
+                            <input id="hide_sub_no" name="serendipity[cat][hide_sub]" type="radio" value="0"{if $this_cat.hide_sub == 0} checked="checked"{/if}>
+                            <label for="hide_sub_no">{$CONST.NO}</label>
+                        </div>
+                    </div>
+
+                    <span id="hide_subcats_info" class="field_info additional_info">{$CONST.CATEGORY_HIDE_SUB_DESC}</span>
+                </fieldset>
+            </div>
+
+            <div id="category_permissions" class="clearfix">
                 <div class="form_multiselect">
                     <label for="read_authors">{$CONST.PERM_READ}</label>
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
@@ -91,7 +113,7 @@
                 </div>
             </div>
 
-            <div class="clearfix even">
+            <div id="category_preview" class="clearfix">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
                     <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
@@ -102,24 +124,6 @@
                     <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape:"html"}" alt="">
                 </figure>
             </div>
-
-            <fieldset class="clearfix inputs">
-                <legend><span>{$CONST.CATEGORY_HIDE_SUB} <a class="toggle_info button_link" href="#hide_subcats_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></a></span></legend>
-
-                <div class="clearfix grouped">
-                    <div class="form_radio">
-                        <input id="hide_sub_yes" name="serendipity[cat][hide_sub]" type="radio" value="1"{if $this_cat.hide_sub== 1} checked="checked"{/if}>
-                        <label for="hide_sub_yes">{$CONST.YES}</label>
-                    </div>
-
-                    <div class="form_radio">
-                        <input id="hide_sub_no" name="serendipity[cat][hide_sub]" type="radio" value="0"{if $this_cat.hide_sub == 0} checked="checked"{/if}>
-                        <label for="hide_sub_no">{$CONST.NO}</label>
-                    </div>
-                </div>
-
-                <span id="hide_subcats_info" class="field_info additional_info">{$CONST.CATEGORY_HIDE_SUB_DESC}</span>
-            </fieldset>
 
             <a class="button_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=view">{$CONST.BACK}</a>
             <input class="standalone" name="SAVE" type="submit" value="{$save}">

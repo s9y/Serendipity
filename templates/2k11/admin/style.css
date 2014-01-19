@@ -2596,7 +2596,9 @@ img.mfp-img {
     #dashboard > .quick_list,
     #maintenance > .quick_list,
     .serendipity_statistics > section,
-    #serendipity_category > div {
+    #serendipity_category > div > div,
+    #serendipity_category #preview,
+    #serendipity_category > div > fieldset {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
@@ -2637,12 +2639,16 @@ img.mfp-img {
     #uploadform .form_field label,
     #uploadform .form_select select,
     #uploadform .form_field input,
-    #serendipity_category fieldset legend,
-    #serendipity_category fieldset > .grouped,
     .field_info {
         float: left;
         margin-right: 2%;
         width: 48%;
+    }
+
+    #hide_subcats_info {
+        float: none;
+        margin: .85715em 0 0;
+        width: 100%;
     }
 
     #edit_entry_status_comments {
@@ -2707,7 +2713,6 @@ img.mfp-img {
     .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
     #dashboard > section:last-child,
-    #serendipity_category > fieldset,
     .serendipity_statistics > section:nth-child(odd) {
         clear: left;
     }
