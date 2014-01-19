@@ -54,7 +54,7 @@
             <div id="category_basics" class="clearfix">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
-                    <input id="category_name" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}">
+                    <input id="category_name" pattern="^(?!({foreach $categories as $cat}{$cat.category_name}|{/foreach})$).*" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}" title="Categoryname already exists">
                 </div>
 
                 <div class="form_field">
