@@ -56,8 +56,7 @@
                                 {/if}
 
                             </li>
-                        <noscript>
-                            <li class="pluginmanager_place">
+                            <li class="pluginmanager_place nojs-controls">
                                 <select name="serendipity[placement][{$plugin_data['name']}]">
                                     {foreach $plugin_data.gopts as $k => $v}
                                         {if {$plugin_data.is_plugin_editable} && $k == 'hide'}
@@ -67,7 +66,7 @@
                                     {/foreach}
                                 </select>
                             </li>
-                            <li class="pluginmanager_move">
+                            <li class="pluginmanager_move nojs-controls">
                                 {if $plugin_data.sort_idx == 0}
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
@@ -82,7 +81,6 @@
                                     </a> {* i18n *}
                                 {/if}
                             </li>
-                        </noscript>
                         </ul>
                     </li>
                 {/foreach}

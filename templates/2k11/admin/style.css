@@ -1933,6 +1933,19 @@ form > .button_link:first-of-type,
     z-index: 2000;
 }
 
+/* Touch/no-js fallback */
+.nojs-controls,
+.touch .pluginmanager_grablet {
+    display: none;
+    visibility: hidden;
+}
+
+.no-js .nojs-controls,
+.touch .nojs-controls {
+    display: block;
+    visibility: visible;
+}
+
 
 /* MEDIA DB
    ----------------------------------------------------------------- */
