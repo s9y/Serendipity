@@ -16,7 +16,6 @@
                     <li id="{$plugin_data['css_key']}" class="pluginmanager_plugin pluginmanager_item_{cycle values="odd,even"}">
                         <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][id]" value="{$plugin_data['name']}" />
                         <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][position]" value="{$plugin_data@index}" />
-                        <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][placement]" value="{$plugin_placement['pid']}" />
                     {if $plugin_data['is_plugin_editable']}
                         <div class="form_check">
                             <input id="remove_{$plugin_data['name']}" class="multidelete" name="serendipity[plugin_to_remove][]" type="checkbox" value="{$plugin_data['name']}" data-multidelid="{$plugin_data['css_key']}">
@@ -57,11 +56,8 @@
 
                             </li>
                             <li class="pluginmanager_place nojs-controls">
-                                <select name="serendipity[placement][{$plugin_data['name']}]">
+                                <select name="serendipity[plugin][{$plugin_data['name']}][placement]">
                                     {foreach $plugin_data.gopts as $k => $v}
-                                        {if {$plugin_data.is_plugin_editable} && $k == 'hide'}
-                                            {continue}
-                                        {/if}
                                         <option value="{$k}" {if $k == $plugin_data['placement']}selected="selected"{/if}>{$v}</option>
                                     {/foreach}
                                 </select>

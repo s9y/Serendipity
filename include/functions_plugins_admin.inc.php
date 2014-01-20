@@ -54,11 +54,6 @@ function serendipity_pluginListSort($x, $y) {
  */
 function show_plugins($event_only = false, $sidebars = null)
 {
-    static $opts = array(
-                    'event'  => PLUGIN_ACTIVE,
-                    'eventh' => PLUGIN_INACTIVE
-    );
-
     global $serendipity;
 
     $sql_filter = '';
@@ -93,7 +88,6 @@ function show_plugins($event_only = false, $sidebars = null)
 
     $data['event_only'] = $event_only;
     if (!$event_only) {
-        $data['event_only'] = false;
         $data['is_first'] = true;
     }
 
@@ -174,15 +168,15 @@ function show_plugins($event_only = false, $sidebars = null)
                 );
             }
 
-            static $event_opts = array(
-                            'event'     => PLUGIN_ACTIVE,
+            $event_opts = array(
+                            'event'  => PLUGIN_ACTIVE,
                             'eventh' => PLUGIN_INACTIVE,
-            );
+                        );
 
-            if ($is_event) {
-                $gopts =& $event_opts;
+            if ($event_only) {
+                $gopts = $event_opts;
             } else {
-                $gopts =& $opts;
+                $gopts = $opts;
             }
 
             $data['placement'][$plugin_placement]['plugin_data'][$i]['sort_idx'] = $sort_idx;

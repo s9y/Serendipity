@@ -12,7 +12,7 @@ $("document").ready(function() {
 
                 onDrop: function ($item, container, _super) {
                     var placement = $item.parents('.pluginmanager_container').data("placement");
-                    $item.find('input[name$="placement]"]').val(placement);
+                    $item.find('select[name$="placement]"]').val(placement);
                     $item.removeClass("dragged").removeAttr("style")
                     $("body").removeClass("dragging")
                     $.autoscroll.stop();
