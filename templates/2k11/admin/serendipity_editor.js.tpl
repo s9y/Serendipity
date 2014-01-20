@@ -872,6 +872,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             $(this).toggleClass('active');
             e.preventDefault();
         });
+
+        $('.show_config_option_now').click();
     }
 
     // Config option add media
