@@ -1143,7 +1143,6 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             fx: 'fadeIn',
             currentInfoText: 'Current tab: ', // i18n
             currentInfoClass: 'visuallyhidden',
-            tabsListClass: 'plainList',
             syncheights: false
         });
     }

@@ -330,6 +330,7 @@ nav ol {
     clear: both;
 }
 
+.tabs-list,
 .plainList {
     list-style: none;
     margin-left: 0;
