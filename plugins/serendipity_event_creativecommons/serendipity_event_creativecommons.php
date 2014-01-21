@@ -44,7 +44,8 @@ class serendipity_event_creativecommons extends serendipity_event {
                 $cc_versions = array(
                     '1.0'   => '1.0',
                     '2.5'   => '2.5',
-                    '3.0'   => '3.0'
+                    '3.0'   => '3.0',
+                    '4.0'   => '4.0',
                 );
                 $propbag->add('type',           'select');
                 $propbag->add('name',           PLUGIN_CREATIVECOMMONS_VERSION);
