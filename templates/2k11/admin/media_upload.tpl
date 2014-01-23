@@ -70,7 +70,7 @@
         <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
 
         <input class="check_inputs" type="submit" value="{$CONST.GO}">
-        {if NOT $smarty.get.serendipity.showUpload}
+        {if $media.manage}
             <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
         {/if}
     </div>

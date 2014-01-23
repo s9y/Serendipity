@@ -1,5 +1,5 @@
 {foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
-    {if $smarty.get.serendipity.showUpload}
+    {if NOT $media.manage}
         {* ML got called for inserting media *}
         <article class="media_wrap_thumb {cycle values="odd,even"}">
             <div class="media_file_thumb{if $media.enclose} equal_heights{/if}">

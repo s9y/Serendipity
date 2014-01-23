@@ -1432,7 +1432,7 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
  * @access public
  * @param   int     The current page number
  * @param   string  The HTML linebreak to use after a row of images
- * @param   boolean Should the toolbar for editing media files be shown?
+ * @param   boolean Is this the ML-Version for managing everything (true), or is it about selecting one image for the editor? (false)
  * @param   string  The URL to use for pagination
  * @param   boolean Show the "upload media item" feature?
  * @param   boolean Restrict viewing images to a specific directory
@@ -1658,7 +1658,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 function serendipity_generateImageSelectorParems() {
     global $serendipity;
     $sortParams        = array('perpage', 'order', 'ordermode');
-    $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload');
+    $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
     $extraParems       = '';
     $filterParams      = array('only_path', 'only_filename');
 

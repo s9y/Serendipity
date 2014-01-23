@@ -153,7 +153,8 @@
 {else}
     {if $smarty.get.serendipity.showUpload}
         <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
-    {else}
+    {/if}
+    {if $media.manage}
         <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
             {$media.token}
             <input name="serendipity[action]" type="hidden" value="admin">
@@ -174,13 +175,11 @@
         </nav>
         {/if}
     </div>
-    {if NOT $smarty.get.serendipity.showUpload}
-        {if $media.manage}
+    {if $media.manage}
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
             <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
         </div>
-        {/if}
     </form>
     {/if}
 {/if}

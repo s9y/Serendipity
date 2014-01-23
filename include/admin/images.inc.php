@@ -556,7 +556,8 @@ switch ($serendipity['GET']['adminAction']) {
             'max_file_size'     => $serendipity['maxFileSize'],
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
-            'extraParems'       => serendipity_generateImageSelectorParems()
+            'extraParems'       => serendipity_generateImageSelectorParems(),
+            'manage'            => isset($serendipity['GET']['showMediaToolbar'])   ? serendipity_db_bool($serendipity['GET']['showMediaToolbar'])  : true
         );
         // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);
