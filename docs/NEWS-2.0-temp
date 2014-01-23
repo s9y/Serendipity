@@ -10,7 +10,7 @@
 
 * The advanced js option (eyecandy) got removed, as such a thing like advanced js doesn't exist anymore
 
-* dashboard_plugin has an equivalent in the core
+* dashboard_plugin has an equivalent in the core, replacing the frontpage
 
 * Constants like S9Y_FRAMEWORK_COMPAT are no longer set (include_once is used instead)
 
@@ -35,6 +35,9 @@ trackback-functions still use echo for messages"):
 * Functions removed from the core:
     serendipity_printConfigJS
 
+* Functions added to the core:
+    serendipity_generateImageSelectorParams
+
 * All internal plugins got extracted from plugin_internal.inc.php and moved to plugins/.
   They are renamed to work there (TODO: Fix that and rename back or add upgrader task):
     serendipity_calendar_plugin    became serendipity_plugin_calendar
@@ -57,7 +60,7 @@ trackback-functions still use echo for messages"):
 
 * The whole PHP-Code now almost never echoes integrated HTML, but uses smarty template (TODO: Remove the almost)
   The necessary smarty-templates reside in 2k11/admin/
-  Every design can generate its own backend if it integrates those templates udner admin/ itself
+  Every design can generate its own backend if it integrates those templates under admin/ itself
 
 * 2k11 is set as the new default backend, replacing bulletproof. default remains the fallback so far.
 
@@ -87,3 +90,8 @@ trackback-functions still use echo for messages"):
 * The entryproperty-plugin will now always delete its cache on uninstall, not only if the cache is activated then
 
 * serendipity_is_iframe now really only checks for iframe and doesn't also echo it
+
+* Added option simpleFilters (meant to indicate to show less filters and poweruser-options)
+
+* serendipity_admin_image_selector.php no longer used by 2k11, instead the media library (with admin/media_choose.tpl, admin/media_upload.tpl, media_pane.tpl, media_items.tpl)
+  can generat the imageselector on its own. The editor calls serendipity_admin.php?serendipity[adminModule]=media isntead, with serendipity[textarea] indicating the target
