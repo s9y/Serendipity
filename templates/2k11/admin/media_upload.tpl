@@ -1,12 +1,12 @@
 <h2>{$CONST.ADD_MEDIA}</h2>
 
-<form id="uploadform" action="?" method="POST" enctype="multipart/form-data">
+<form id="uploadform" action="?{$media.extraParems}" method="POST" enctype="multipart/form-data">
 {if $media.max_file_size}
     <input name="MAX_FILE_SIZE" type="hidden" value="{$max_file_size}">
 {/if}
     {$media.token}
     <input name="serendipity[action]" type="hidden" value="admin">
-    <input name="serendipity[adminModule]" type="hidden" value="images">
+    <input name="serendipity[adminModule]" type="hidden" value="media">
     <input name="serendipity[adminAction]" type="hidden" value="add">
     {$media.form_hidden}
 
@@ -70,7 +70,9 @@
         <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
 
         <input class="check_inputs" type="submit" value="{$CONST.GO}">
-        <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
+        {if NOT $smarty.get.serendipity.showUpload}
+            <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
+        {/if}
     </div>
 </form>
 <script src="{serendipity_getFile file='admin/js/jquery.tabs.js'}"></script>

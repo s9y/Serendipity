@@ -1443,28 +1443,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     global $serendipity;
     static $debug = false;
 
-    $sortParams        = array('perpage', 'order', 'ordermode');
-    $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords');
-    $extraParems       = '';
-    $filterParams      = array('only_path', 'only_filename');
-
-    foreach($importParams AS $importParam) {
-        if (isset($serendipity['GET'][$importParam])) {
-            $extraParems .= 'serendipity[' . $importParam . ']='. htmlspecialchars($serendipity['GET'][$importParam]) .'&amp;';
-        }
-    }
-
-    foreach($sortParams AS $sortParam) {
-        serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
-        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
-    }
-
-    foreach($filterParams AS $filterParam) {
-        serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
-        if (!empty($serendipity['GET'][$filterParam])) {
-            $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
-        }
-    }
+    $extraParems = serendipity_generateImageSelectorParems();
 
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
     $serendipity['GET']['only_filename'] = htmlspecialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
@@ -1658,7 +1637,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         'linkNext'      => $linkNext,
         'linkPrevious'  => $linkPrevious,
         'extraParems'   => $extraParems,
-        'totalImages'   => $totalImages,
+        'totalImages'   => $totalImages
     ));
     return serendipity_showMedia(
         $serendipity['imageList'],
@@ -1670,6 +1649,39 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         $smarty_vars
     );
 } // End serendipity_displayImageList()
+
+
+/**
+ * Generate the url-parameters needed when generating the ML to select an image to add to the editor, to store the relevant options (like which textare to add it to)
+ *
+ * */
+function serendipity_generateImageSelectorParems() {
+    global $serendipity;
+    $sortParams        = array('perpage', 'order', 'ordermode');
+    $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload');
+    $extraParems       = '';
+    $filterParams      = array('only_path', 'only_filename');
+
+    foreach($importParams AS $importParam) {
+        if (isset($serendipity['GET'][$importParam])) {
+            $extraParems .= 'serendipity[' . $importParam . ']='. htmlspecialchars($serendipity['GET'][$importParam]) .'&amp;';
+        }
+    }
+
+    foreach($sortParams AS $sortParam) {
+        serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
+        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
+    }
+
+    foreach($filterParams AS $filterParam) {
+        serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
+        if (!empty($serendipity['GET'][$filterParam]) && $serendipity['GET'][$filterParam] != "undefined") {
+            $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
+        }
+    }
+    return $extraParems;
+}
+
 
 /**
  * Check if a media item is an image

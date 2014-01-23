@@ -347,8 +347,9 @@ switch ($serendipity['GET']['adminAction']) {
             foreach($new_media AS $nm) {
                 serendipity_insertMediaProperty('base_hidden', '', $nm['image_id'], $hidden);
             }
-            $data['showML_add'] = showMediaLibrary($messages, true);   
+            $data['showML_add'] = showMediaLibrary(null, true);
         }
+        $data['messages'] = $messages;
         break;
 
 
@@ -538,7 +539,6 @@ switch ($serendipity['GET']['adminAction']) {
             'write'
         );
         usort($folders, 'serendipity_sortPath');
-        $data['case_addSelect'] = true;
 
         $form_hidden = '';
         if (isset($image_selector_addvars) && is_array($image_selector_addvars)) {
@@ -556,11 +556,12 @@ switch ($serendipity['GET']['adminAction']) {
             'max_file_size'     => $serendipity['maxFileSize'],
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
+            'extraParems'       => serendipity_generateImageSelectorParems()
         );
         // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);
         $serendipity['smarty']->display(serendipity_getTemplateFile('admin/media_upload.tpl', 'serendipityPath'));
-        break;
+        return;
 
     case 'rotateCW':
         $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
@@ -672,13 +673,6 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
             return;
     }
     $output = "";
-    if(!empty($messages)) {
-        $output = '<div class="imageMessage"><ul>';
-        foreach($messages as $message) {
-             $output .= '<li>'. $message .'</li>';
-        }
-        $output .= '</ul></div>';
-    }
 
     // After upload, do not show the list to be able to proceed to
     // media selection.
@@ -694,13 +688,15 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
         'htmltarget' =>  isset($serendipity['GET']['htmltarget'])   ? $serendipity['GET']['htmltarget']  : '',
         'filename_only' =>  isset($serendipity['GET']['filename_only'])   ? $serendipity['GET']['filename_only']  : false,
     );
-    
+
+    $show_upload  =  isset($serendipity['GET']['showUpload'])   ? $serendipity['GET']['showUpload']  : false;
+
     $output .= serendipity_displayImageList(
         isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
         $serendipity['thumbPerPage'],
         isset($serendipity['GET']['showMediaToolbar'])   ? serendipity_db_bool($serendipity['GET']['showMediaToolbar'])  : true,
         NULL,
-        false,
+        $show_upload,
         NULL,
         $smarty_vars
     );

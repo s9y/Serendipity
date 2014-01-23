@@ -7,7 +7,7 @@
             init: function( editor ) {
                 editor.addCommand( 'openML', {
                     exec : function( editor ) {
-                        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[textarea]={$item}');
+                        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[textarea]={$item}');
                     }
                 });
                 editor.ui.addButton('s9y_medialibrary{$item}', {

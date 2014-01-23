@@ -151,13 +151,16 @@
 {if $media.nr_files < 1}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
-    {if $smarty.get.serendipity.adminModule == 'media'}
-    <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
-        {$media.token}
-        <input name="serendipity[action]" type="hidden" value="admin">
-        <input name="serendipity[adminModule]" type="hidden" value="media">
-        <input name="serendipity[adminAction]" type="hidden" value="multidelete">
+    {if $smarty.get.serendipity.showUpload}
+        <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
+    {else}
+        <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
+            {$media.token}
+            <input name="serendipity[action]" type="hidden" value="admin">
+            <input name="serendipity[adminModule]" type="hidden" value="media">
+            <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
+    
     <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
         {$MEDIA_ITEMS}
         {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
@@ -171,7 +174,7 @@
         </nav>
         {/if}
     </div>
-    {if $smarty.get.serendipity.adminModule == 'media'}
+    {if NOT $smarty.get.serendipity.showUpload}
         {if $media.manage}
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">

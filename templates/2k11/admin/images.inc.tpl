@@ -1,3 +1,7 @@
+{foreach $messages as $message}
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$message}</span>
+{/foreach}
+
 {if $case_doSync}
     {if !$perm_adminImagesSync}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
