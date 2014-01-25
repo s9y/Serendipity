@@ -61,7 +61,7 @@
     </div>
 
     <fieldset id="edit_entry_metadata" class="clearfix">
-        <legend><button id="toggle_metadata" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button><span>Entry metadata</span></legend> {* i18n *}
+        <span class="wrap_legend"><legend><button id="toggle_metadata" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> Entry metadata</legend></span> {* i18n *}
 
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
@@ -84,7 +84,7 @@
 
             <div id="edit_entry_status_comments">
                 <fieldset>
-                    <legend><span>{$CONST.COMMENTS}</span></legend>
+                    <span class="wrap_legend"><legend>{$CONST.COMMENTS}</legend></span>
 
                     <div class="form_check">
                         <input id="checkbox_allow_comments" name="serendipity[allow_comments]" type="checkbox" value="true"{if $entry_vars.allow_comments} checked="checked"{/if}><label for="checkbox_allow_comments">{$CONST.COMMENTS_ENABLE}</label>
@@ -98,7 +98,7 @@
 
             <div id="edit_entry_category" class="clearfix mfp-hide">
                 <fieldset>
-                    <legend><span>{$CONST.CATEGORY}</span></legend>
+                    <span class="wrap_legend"><legend>{$CONST.CATEGORY}</legend></span>
                 {foreach from=$entry_vars.category_options item="entry_cat"}
                     <div class="form_check">
                         {$entry_cat.depth_pad}
@@ -115,7 +115,7 @@
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
         <fieldset id="advanced_options">
-            <legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button><span>{$CONST.ADVANCED_OPTIONS}</span></legend>
+            <span class="wrap_legend"><legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> {$CONST.ADVANCED_OPTIONS}</legend></span>
             <div id="adv_opts" class="additional_info">
             {$smarty.capture.advanced_options}
             </div>

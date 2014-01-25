@@ -36,7 +36,7 @@
                     <div class="{cycle values="left,center,right"}">
                     {if $so_val.type == 'date' || $so_val.type == 'intrange'}
                         <fieldset>
-                            <legend><span>{$CONST.SORT_BY} ({$so_key})</span></legend>
+                            <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$so_key})</legend></span>
                     {else}
                         <div class="form_{if $so_val.type == 'authors'}select{else}field{/if}">
                             <label for="serendipity_filter_{$so_key}">{$so_val.desc}</label>

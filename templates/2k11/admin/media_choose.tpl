@@ -93,7 +93,7 @@ if (parent.frames && parent.frames['tree']) {
             </script>
         {else}
             <fieldset id="image_size">
-                <legend><span>{$CONST.IMAGE_SIZE}</span></legend>
+                <span class="wrap_legend"><legend>{$CONST.IMAGE_SIZE}</legend></span>
 
                 <div class="clearfix">
                     <div class="form_radio">
@@ -110,7 +110,7 @@ if (parent.frames && parent.frames['tree']) {
             </fieldset>
             {if NOT $media.filename_only}
             <fieldset id="image_alignment">
-                <legend><span>{$CONST.IMAGE_ALIGNMENT}</span></legend>
+                <span class="wrap_legend"><legend>{$CONST.IMAGE_ALIGNMENT}</legend></span>
 
                 <div class="clearfix">
                     <div class="form_radio">
@@ -132,7 +132,7 @@ if (parent.frames && parent.frames['tree']) {
             </fieldset>
 
             <fieldset id="image_as_link">
-                <legend><span>{$CONST.IMAGE_AS_A_LINK}</span></legend>
+                <span class="wrap_legend"><legend>{$CONST.IMAGE_AS_A_LINK}</legend></span>
 
                 <div class="clearfix">
                     <div class="form_radio">

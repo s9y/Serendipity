@@ -49,7 +49,7 @@
             <form id="login" class="clearfix" action="serendipity_admin.php" method="post">
                 <input type="hidden" name="serendipity[action]" value="admin">
                 <fieldset>
-                    <span><legend>{$CONST.PLEASE_ENTER_CREDENTIALS}</legend></span>
+                    <span class="wrap_legend"><legend>{$CONST.PLEASE_ENTER_CREDENTIALS}</legend></span>
 
                     <div class="form_field">
                         <label for="login_uid">{$CONST.USERNAME}</label>

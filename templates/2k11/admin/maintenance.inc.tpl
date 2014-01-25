@@ -50,7 +50,7 @@
 
         <form method="POST" action="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=doSync">
             <fieldset>
-                <legend><span>{$CONST.SYNC_OPTION_LEGEND}</span></legend>
+                <span class="wrap_legend"><legend>{$CONST.SYNC_OPTION_LEGEND}</legend></span>
 
                 <div class="clearfix">
                     <div class="form_radio">

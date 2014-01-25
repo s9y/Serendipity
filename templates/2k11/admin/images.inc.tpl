@@ -257,7 +257,7 @@
             <input name="serendipity[fid]" type="hidden" value="{$get.fid}">
 
             <fieldset>
-                <legend><span>{$CONST.NEWSIZE}</span></legend>
+                <span class="wrap_legend"><legend>{$CONST.NEWSIZE}</legend></span>
 
                 <div class="form_field">
                     <label for="resize_width">{$CONST.INSTALL_THUMBDIM_WIDTH}</label>

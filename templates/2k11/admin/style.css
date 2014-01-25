@@ -444,7 +444,7 @@ form > button,
 .block_level,
 .form_multiselect label,
 label > span,
-legend > span > span,
+.wrap_legend > legend > span,
 .msg_error,
 .msg_success,
 .msg_notice,
@@ -847,13 +847,13 @@ optgroup {
 /* BACKEND FORM STYLES
    ----------------------------------------------------------------- */
 label,
-legend > span,
+.wrap_legend,
 figcaption {
     font-weight: bold;
 }
 
 label > span,
-legend > span > span,
+.wrap_legend > legend > span,
 input[type=checkbox] + label,
 input[type=radio] + label,
 .form_check label {
@@ -861,11 +861,14 @@ input[type=radio] + label,
 }
 
 input[type=checkbox],
-#toggle_extended,
 #toggle_metadata,
 #toggle_advanced,
 #category_icon {
     margin-right: .4em;
+}
+
+#toggle_extended {
+    margin-right: .65em;
 }
 
 .form_radio {
