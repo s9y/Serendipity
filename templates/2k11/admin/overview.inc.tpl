@@ -18,7 +18,7 @@
             {if is_array($comments)}
                 {foreach $comments as $comment}
                 <li><div class="comment_summary">
-                        <b><a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b> - {$comment.body|truncate:100:"&hellip;"}
+                        <b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b> - {$comment.body|truncate:100:"&hellip;"}
                     </div>
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
                     
