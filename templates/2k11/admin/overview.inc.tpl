@@ -58,7 +58,7 @@
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                     </ul>
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
-                    <span class="entry_status status_future">{$CONST.ENTRY_PUBLISHED_FUTURE}</span>
+                    <span class="entry_status status_future">Scheduled{* $CONST.ENTRY_PUBLISHED_FUTURE *}</span>{* i18n *} 
                 {/if}
                 {if $entry.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
