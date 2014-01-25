@@ -96,14 +96,18 @@
                 </fieldset>
             </div>
 
-            <div id="edit_entry_category" class="form_select">
-                <label for="categoryselector">{$CONST.CATEGORY}</label>
-                <select id="categoryselector" name="serendipity[categories][]" multiple>
-                    <option value="0">{$CONST.NO_CATEGORY}</option>
+            <div id="edit_entry_category" class="clearfix mfp-hide">
+                <fieldset>
+                    <legend><span>{$CONST.CATEGORY}</span></legend>
                 {foreach from=$entry_vars.category_options item="entry_cat"}
-                    <option value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} selected{/if}>{$entry_cat.depth_pad}{$entry_cat.category_name}</option>
+                    <div class="form_check">
+                        {$entry_cat.depth_pad}
+                        <input id="serendipity_category_{$entry_cat.categoryid}" name="serendipity[categories][]" type="checkbox" value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} checked="checked"{/if}>
+
+                        <label for="serendipity_category_{$entry_cat.categoryid}">{$entry_cat.category_name}</label>
+                    </div>
                 {/foreach}
-                </select>
+                </fieldset>
             </div>
         </div>
     </fieldset>

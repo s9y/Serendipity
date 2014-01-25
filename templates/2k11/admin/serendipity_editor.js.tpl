@@ -805,7 +805,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Entry metadata
     // NOTE: This probably should be rewritten as a general function which
     //       also works for advanced options (see below); also not sure if
-    //       the localStorage stuff works here
+    //       the localStorage stuff works here (seems to)
     if($('body').has('#edit_entry_metadata').size() > 0) {
         $('#edit_entry_metadata > legend > button').click(function() {
             var $el = $(this);
@@ -825,12 +825,19 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         }
     }
 
-    // TEMP: expand entry metadata if #select_category is clicked
-    //       (will be replaced by a better solution soonish)
-    $('#select_category').click(function(e) {
-        e.preventDefault();
-        $('#edit_entry_metadata > legend > button').click();
-    });
+    // Show category selector
+    {if $use_popups}
+        if($('body').has('#serendipityEntry').size() > 0) {
+            $('#select_category').click(function(e) {
+                $('#edit_entry_metadata > legend > button').click();
+                $('#edit_entry_category').toggleClass('mfp-hide');
+            });
+        }
+    {else}
+        if($('body').has('#serendipityEntry').size() > 0) {
+            $('#select_category').magnificPopup({ type: "inline" });
+        }
+    {/if}
 
     // Advanced options
     if($('body').has('#advanced_options').size() > 0) {

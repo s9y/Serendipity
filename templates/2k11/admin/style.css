@@ -1543,7 +1543,8 @@ form > .button_link:first-of-type,
     border: 1px solid #aaa;
 }
 
-.mfp-content #s9y_links {
+.mfp-content #s9y_links,
+.mfp-content #edit_entry_category {
     background: #fcfcfc;
     margin: 0 auto;
     max-width: 480px;
@@ -2016,7 +2017,8 @@ form > .button_link:first-of-type,
     visibility: hidden;
 }
 
-.js .installer .additional_info {
+.js .installer .additional_info,
+.no-js .mfp-hide {
     display: block !important;
     visibility: visible;
 }
