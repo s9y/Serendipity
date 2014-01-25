@@ -416,9 +416,6 @@ form > button,
 .edit_actions li,
 .actions li,
 #login .form_field label,
-#edit_entry_title label,
-#edit_entry_metadata label,
-#edit_entry_status label,
 #filter_comments label,
 #serendipity_comment label,
 #sort_entries .form_select label,
@@ -452,6 +449,9 @@ legend > span > span,
 .msg_success,
 .msg_notice,
 .msg_hint,
+#edit_entry_title label,
+#edit_entry_metadata .form_field label,
+#edit_entry_metadata .form_select label,
 #serendipity_category label,
 #image_directory_edit_form .form_select label,
 #uploadform label,
@@ -861,6 +861,9 @@ input[type=radio] + label,
 }
 
 input[type=checkbox],
+#toggle_extended,
+#toggle_metadata,
+#toggle_advanced,
 #category_icon {
     margin-right: .4em;
 }
@@ -885,6 +888,8 @@ input[type=checkbox],
 .form_radio,
 .form_select,
 .form_multiselect,
+#edit_entry_metadata,
+#advanced_options,
 #entry_skip,
 #filter_entries,
 #sort_entries,
@@ -1131,8 +1136,6 @@ summary {
     margin: 1.25em 2% .75em 0
 }
 
-#edit_entry_title label,
-#edit_entry_metadata label,
 #filter_comments label,
 #serendipity_comment label {
     width: 15%;
@@ -1160,9 +1163,6 @@ summary {
     width: 80%;
 }
 
-#edit_entry_title input,
-#edit_entry_metadata input,
-#edit_entry_metadata select,
 #filter_comments .form_field > input,
 #filter_comments select,
 #serendipity_comment .form_field input,
@@ -1173,6 +1173,10 @@ summary {
     width: 85%;
 }
 
+#edit_entry_title input,
+#edit_entry_metadata .form_field input,
+#edit_entry_metadata select,
+#categoryselector,
 .configuration_group .form_select select,
 .configuration_group .form_multiselect select,
 .configuration_group .form_field input,
@@ -1227,6 +1231,16 @@ summary {
 
 #mediaPropertyForm textarea {
     max-width: 40em;
+}
+
+#serendipityEntry {
+    position: relative;
+}
+
+#edit_entry_submit {
+    position: absolute;
+    top: -3.25em;
+    right: 0;
 }
 
 
@@ -1327,13 +1341,6 @@ summary {
     position: relative;
 }
 
-#reset_timestamp,
-#toggle_categoryselector {
-    position: absolute;
-    top: 1.55em;
-    right: 0;
-}
-
 #media_pane_filter #toggle_filters {
     position: absolute;
     top: 0;
@@ -1345,10 +1352,6 @@ summary {
     font-size: 1em;
     font-weight: normal;
     text-align: center;
-}
-
-#reset_timestamp {
-    right: 0;
 }
 
 #edit_entry_category label {
@@ -1395,8 +1398,7 @@ fieldset p,
 #login .form_buttons,
 .media_file .actions,
 #entries_list .actions,
-.msg_hint > p:last-of-type,
-#edit_entry_submit .form_buttons {
+.msg_hint > p:last-of-type {
     margin-bottom: 0;
 }
 
@@ -1409,11 +1411,6 @@ fieldset p,
 .media_file .actions,
 .js #add_upload {
     margin-top: 1em;
-}
-
-#advanced_options > legend > span {
-    display: inline-block;
-    margin: 1.16667em 0 1.16667em .2em;
 }
 
 .category_data {
@@ -2589,10 +2586,6 @@ img.mfp-img {
         margin: 1.71429em 0;
     }
 
-    #edit_entry_submit .form_buttons {
-        text-align: right;
-    }
-
     #main_menu li > ul > li {
         width: 33%;
     }
@@ -2635,6 +2628,7 @@ img.mfp-img {
         width: auto;
     }
 
+    #meta_data > div,
     #template_options fieldset legend,
     #template_options fieldset > .grouped,
     .configure_plugin fieldset legend,
@@ -2670,12 +2664,6 @@ img.mfp-img {
         width: 70%;
     }
 
-    #edit_entry_submit {
-        float: right;
-        width: 30%;
-    }
-
-    #edit_entry_submit label,
     #maintenance_import label {
         display: block;
     }
@@ -2773,30 +2761,6 @@ img.mfp-img {
 /* LARGE SCREEN (e.g. netbooks)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 900px) {
-    #edit_entry_timestamp,
-    #reset_timestamp {
-        max-height: auto;
-        position: static;
-    }
-
-    #toggle_categoryselector {
-        left: 0;
-        right: auto;
-    }
-
-    .js #categoryselector {
-        margin-left: 2.5em;
-    }
-
-    .js #edit_entry_metadata select {
-        width: 89%;
-    }
-
-    #edit_entry_title input,
-    .no-js #edit_entry_metadata select {
-        width: 100%;
-    }
-
     #edit_entry_status_comments .form_check {
         margin-bottom: 0;
     }
@@ -2808,8 +2772,6 @@ img.mfp-img {
         margin-bottom: .75em;
     }
 
-    #edit_entry_metadata label,
-    #edit_entry_status label,
     #sort_entries .form_select label,
     #filter_entries .form_select label,
     #filter_entries .form_field label,
@@ -2852,7 +2814,6 @@ img.mfp-img {
         width: 25%;
     }
 
-    #edit_entry_metadata > div,
     #karmafilters .form_field,
     #karmafilters .form_select {
         float: left;
@@ -2991,10 +2952,6 @@ img.mfp-img {
 @media only screen and (min-width: 1280px) {
     .js .configuration_group .media_choose input {
         max-width: 42.5%;
-    }
-
-    .js #edit_entry_metadata select {
-        width: 91%;
     }
 }
 

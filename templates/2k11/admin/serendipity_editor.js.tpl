@@ -802,6 +802,36 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[showUpload]=true&serendipity[textarea]=' + $(this).attr('data-tarea'));
     });
 
+    // Entry metadata
+    // NOTE: This probably should be rewritten as a general function which
+    //       also works for advanced options (see below); also not sure if
+    //       the localStorage stuff works here
+    if($('body').has('#edit_entry_metadata').size() > 0) {
+        $('#edit_entry_metadata > legend > button').click(function() {
+            var $el = $(this);
+            var $toggleIcon = $el.find('> span');
+            var $toggleState = $toggleIcon.attr('class');
+            if($toggleState == 'icon-minus') {
+                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+                localStorage.show_advanced_options = "false";
+            } else {
+                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                localStorage.show_advanced_options = "true";
+            }
+            $('#meta_data').toggleClass('additional_info');
+        });
+        if (localStorage.show_advanced_options == "true") {
+            $('#edit_entry_metadata > legend > button').click();
+        }
+    }
+
+    // TEMP: expand entry metadata if #select_category is clicked
+    //       (will be replaced by a better solution soonish)
+    $('#select_category').click(function(e) {
+        e.preventDefault();
+        $('#edit_entry_metadata > legend > button').click();
+    });
+
     // Advanced options
     if($('body').has('#advanced_options').size() > 0) {
         $('#advanced_options > legend > button').click(function() {
