@@ -807,7 +807,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     //       also works for advanced options (see below); also not sure if
     //       the localStorage stuff works here (seems to)
     if($('body').has('#edit_entry_metadata').size() > 0) {
-        $('#edit_entry_metadata > legend > button').click(function() {
+        $('#edit_entry_metadata legend > button').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
@@ -829,7 +829,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     {if $use_popups}
         if($('body').has('#serendipityEntry').size() > 0) {
             $('#select_category').click(function(e) {
-                $('#edit_entry_metadata > legend > button').click();
+                $('#edit_entry_metadata legend > button').click();
                 $('#edit_entry_category').toggleClass('mfp-hide');
             });
         }
@@ -841,7 +841,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Advanced options
     if($('body').has('#advanced_options').size() > 0) {
-        $('#advanced_options > legend > button').click(function() {
+        $('#advanced_options legend > button').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
@@ -855,7 +855,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             $('#adv_opts').toggleClass('additional_info');
         });
         if (localStorage.show_advanced_options == "true") {
-            $('#advanced_options > legend > button').click();
+            $('#advanced_options legend > button').click();
         }
     }
 
