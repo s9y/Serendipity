@@ -1,6 +1,6 @@
 <?php #
 
-# serendipity_event_nl2br.php 2013-10-08 Ian $
+# serendipity_event_nl2br.php 2014-02-01 Ian $
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -16,7 +16,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.18');
+        $propbag->add('version',       '2.19');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -83,6 +83,23 @@ class serendipity_event_nl2br extends serendipity_event
             return false;
         }
         return true;
+    }
+
+    function example() {
+        echo '<h3>PLEASE NOTE the implications of this markup plugin:</h3>
+        <p>This plugin transfers linebreaks to HTML-linebreaks, so that they show up in your blog entry.</p>
+        <p>In two cases this can raise problematic issues for you:</p>
+        <ul>
+            <li>if you use a <strong>WYSIWYG editor</strong> to write your entries. In that case, the WYSIWYG editor already inserts proper HTML linebreaks, so the nl2br plugin would actually double those linebreaks.</li>
+            <li>if you use any other markup plugins in conjunction with this plugin that already translate linebreaks. The <strong>TEXTILE and MARKDOWN plugins</strong> are examples for plugins like these.</li>
+        </ul>
+        <p>To prevent problems, you should disable the nl2br plugin on entries globally or per entry within the "Extended properties" section of an entry, if you have the entryproperties plugin installed.</p>
+        <p>Generally advice: The nl2br plugin only makes sense if you</p>
+        <ul>
+            <li>A) do not use other markup plugins or</li>
+            <li>B) you do not use the WYSIWYG editor or</li>
+            <li>C) you only want to apply linebreak transformations on comments to your blog entries, and do not allow any possible markup of other plugins that you only use for blog entries.</li>
+        </ul>'."\n";
     }
 
     function install() {
@@ -204,13 +221,12 @@ class serendipity_event_nl2br extends serendipity_event
                         $serendipity['nl2br']['entry_disabled_markup'] = true;
                     }
 
-                    // don't add additional br or p tags, if the wysiwyg-editor, the textile, or markdown plugin already took care about markup
-                    if($markup) {
-                        if ( ($serendipity['wysiwyg'] && serendipity_userLoggedIn()) || 
-                             ($serendipity['nl2br']['entry_disabled_markup'] === false && (class_exists('serendipity_event_textile') || class_exists('serendipity_event_markdown'))) ) {
-                            return true;
-                        }
+                    // don't run, if the textile, or markdown plugin already took care about markup
+                    if ($markup && $serendipity['nl2br']['entry_disabled_markup'] === false && (class_exists('serendipity_event_textile') || class_exists('serendipity_event_markdown'))) {
+                        return true;
                     }
+                    // NOTE: the wysiwyg-editor needs to send its own ['properties']['ep_no_nl2br'] to disable the nl2br() parser!
+
                     // check for users isolation tags
                     if ($isolate === null) {
                         $isolate = $this->get_config('isolate');

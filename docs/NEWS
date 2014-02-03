@@ -3,6 +3,8 @@
 Version 1.7.6 ()
 ------------------------------------------------------------------------
 
+    * Fixed nl2br non-working WYSIWYG treatment and added general markup behaviour notes
+
     * Fixed textile compat fix
 
 
