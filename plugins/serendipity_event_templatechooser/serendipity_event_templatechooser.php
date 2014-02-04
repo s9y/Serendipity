@@ -54,7 +54,8 @@ class serendipity_event_templatechooser extends serendipity_event
                 if (isset($_SESSION['serendipityUseTemplate']) ) {
                     $templateInfo = serendipity_fetchTemplateInfo($_SESSION['serendipityUseTemplate']);
                     $eventData['template'] = $_SESSION['serendipityUseTemplate'];
-                    $eventData['template_engine'] = isset($templateInfo['engine']) ? $templateInfo['engine'] : $serendipity['defaultTemplate'];
+                    // NOTE: Bulletproof uses diverse options, but since they are not configured by default, we cannot output fallback templates using bulletproof. So we need to use "default" for now.
+                    $eventData['template_engine'] = isset($templateInfo['engine']) ? $templateInfo['engine'] : 'default';
                     $serendipity['smarty_vars']['head_link_stylesheet'] = $serendipity['baseURL'] . 'serendipity.css.php?switch=' . $_REQUEST['user_template'];
                 }
 
