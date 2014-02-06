@@ -57,7 +57,7 @@ class serendipity_event_templatechooser extends serendipity_event
                 // template configuration options do not exist. Guess nobody understands
                 // this explanation anyways, and who reads this stuff, heh?
                 if ($_SESSION['serendipityUseTemplate'] == $eventData['template']) {
-                    unset($_SESSION['serendipityUseTemplate'];
+                    unset($_SESSION['serendipityUseTemplate']);
                 }
 
                 if (isset($_SESSION['serendipityUseTemplate']) ) {
