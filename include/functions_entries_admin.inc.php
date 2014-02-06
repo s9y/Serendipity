@@ -135,8 +135,8 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     foreach($hiddens as $key => $value) {
         $hidden .= '        <input type="hidden" name="' . $key . '" value="' . $value . '" />' . $n;
     }
-    $hidden .= '        <input type="hidden" id="entryid" name="serendipity[id]" value="' . (isset($entry['id']) ? $entry['id'] : '') . '" />' . $n;
-    $hidden .= '        <input type="hidden" name="serendipity[timestamp]" value="' . (isset($entry['timestamp']) ? serendipity_serverOffsetHour($entry['timestamp']) : serendipity_serverOffsetHour(time())) . '" />' . $n;
+    $hidden .= '        <input type="hidden" id="entryid" name="serendipity[id]" value="' . (isset($entry['id']) ? (int)$entry['id'] : '') . '" />' . $n;
+    $hidden .= '        <input type="hidden" name="serendipity[timestamp]" value="' . (isset($entry['timestamp']) ? htmlspecialchars(serendipity_serverOffsetHour($entry['timestamp'])) : serendipity_serverOffsetHour(time())) . '" />' . $n;
     $hidden .= '        <input type="hidden" name="serendipity[preview]" value="false" />';
     $hidden .= '        ' . serendipity_setFormToken();
 
@@ -219,9 +219,9 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
                     <b><?php echo DATE; ?>:</b>
                 </td>
                 <td>
-                    <input type="hidden" name="serendipity[chk_timestamp]" value="<?php echo serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time()); ?>" />
-                    <input class="input_textbox" type="text" name="serendipity[new_timestamp]" id="serendipityNewTimestamp" value="<?php echo date(DATE_FORMAT_2, serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time())); ?>" />
-                    <a href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '<?php echo date(DATE_FORMAT_2, serendipity_serverOffsetHour(time())) ?>'; return false;" title="<?php echo RESET_DATE_DESC ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/clock.png') ?>" border="0"  style="vertical-align: text-top;" alt="<?php echo RESET_DATE ?>" /></a>
+                    <input type="hidden" name="serendipity[chk_timestamp]" value="<?php echo htmlspecialchars(serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time())); ?>" />
+                    <input class="input_textbox" type="text" name="serendipity[new_timestamp]" id="serendipityNewTimestamp" value="<?php echo htmlspecialchars(date(DATE_FORMAT_2, serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time()))); ?>" />
+                    <a href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '<?php echo htmlspecialchars(date(DATE_FORMAT_2, serendipity_serverOffsetHour(time()))) ?>'; return false;" title="<?php echo RESET_DATE_DESC ?>"><img src="<?php echo serendipity_getTemplateFile('admin/img/clock.png') ?>" border="0"  style="vertical-align: text-top;" alt="<?php echo RESET_DATE ?>" /></a>
                 </td>
                 <td align="right">
 <?php

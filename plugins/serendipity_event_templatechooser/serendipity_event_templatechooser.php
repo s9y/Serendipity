@@ -50,6 +50,15 @@ class serendipity_event_templatechooser extends serendipity_event
                     $_SESSION['serendipityUseTemplate'] = $_REQUEST['user_template'];
                     serendipity_setCookie('user_template', $_REQUEST['user_template'], false);
                 }
+                
+                // If the requested template is the same as the current default template,
+                // we will not set this variable. This is important so that templates/plugins
+                // which detect serendipityUseTemplate can use reasonable defaults in case
+                // template configuration options do not exist. Guess nobody understands
+                // this explanation anyways, and who reads this stuff, heh?
+                if ($_SESSION['serendipityUseTemplate'] == $eventData['template']) {
+                    unset($_SESSION['serendipityUseTemplate'];
+                }
 
                 if (isset($_SESSION['serendipityUseTemplate']) ) {
                     $templateInfo = serendipity_fetchTemplateInfo($_SESSION['serendipityUseTemplate']);

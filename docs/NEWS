@@ -3,11 +3,22 @@
 Version 1.7.6 ()
 ------------------------------------------------------------------------
 
-    * Fixed nl2br non-working WYSIWYG treatment and added general markup behaviour notes
+    * Fixed backend security issues, thanks to Stefan Schurtz:
+
+        - XSS of users realname in "Manage users" section
+          (Backend, requires login)
+        - XSS when creating an entry with bad id/timestamp values
+          (Backend, requires login)
+        - SQL-Injection for plugin installation parameter
+          (Backend, requires admin login)
+
+    * Templatechooser plugin uses "default" template as fallback,
+      not "bulletproof".
+
+    * Fixed nl2br non-working WYSIWYG treatment and added general markup 
+      behaviour notes
 
     * Fixed textile compat fix
-
-
 
 Version 1.7.5 (January 18th, 2014)
 ------------------------------------------------------------------------

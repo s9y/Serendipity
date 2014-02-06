@@ -41,7 +41,7 @@
             <b>{$CONST.DATE}:</b>
         </td>
         <td>
-            <input type="hidden" name="serendipity[chk_timestamp]" value="{$entry_vars.timestamp}" />
+            <input type="hidden" name="serendipity[chk_timestamp]" value="{$entry_vars.timestamp|@escape}" />
             <input class="input_textbox" type="text" name="serendipity[new_timestamp]" id="serendipityNewTimestamp" value="{$entry_vars.timestamp|@formatTime:DATE_FORMAT_2:true:false:true}" />
             <a href="#" onclick="document.getElementById('serendipityNewTimestamp').value = '{$entry_vars.reset_timestamp|@formatTime:DATE_FORMAT_2:true:false:true}'; return false;" title="{$CONST.RESET_DATE_DESC}"><img src="{serendipity_getFile file='admin/img/clock.png'}" border="0"  style="vertical-align: text-top;" alt="{$CONST.RESET_DATE}" /></a>
         </td>

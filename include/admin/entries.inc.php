@@ -502,7 +502,7 @@ switch($serendipity['GET']['adminAction']) {
                   'serendipity[action]'      => 'admin',
                   'serendipity[adminModule]' => 'entries',
                   'serendipity[adminAction]' => 'save',
-                  'serendipity[timestamp]'   => $entry['timestamp']
+                  'serendipity[timestamp]'   => htmlspecialchars($entry['timestamp'])
                 ),
 
                 $entry

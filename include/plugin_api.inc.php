@@ -155,6 +155,7 @@ class serendipity_plugin_api
         $id = md5(uniqid(''));
 
         $key = $plugin_class_id . ':' . $id;
+        $key = serendipity_db_escape_string($key);
 
         // Secure Plugin path. No leading slashes, no backslashes, no "up" directories
         $pluginPath = preg_replace('@^(/)@', '', $pluginPath);
@@ -174,7 +175,7 @@ class serendipity_plugin_api
 
         $serendipity['debug']['pluginload'][] = "Installing plugin: " . print_r(func_get_args(), true);
 
-        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('$key', $nextidx, '$default_placement', '$authorid', '$pluginPath')";
+        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . htmlspecialchars($key) . "', $nextidx, '$default_placement', '$authorid', '" . htmlspecialchars($pluginPath) . "')";
         $serendipity['debug']['pluginload'][] = $iq;
         serendipity_db_query($iq);
         serendipity_plugin_api::hook_event('backend_plugins_new_instance', $key, array('default_placement' => $default_placement));
@@ -189,7 +190,7 @@ class serendipity_plugin_api
             $plugin->install();
         } else {
             $serendipity['debug']['pluginload'][] = "Loading plugin failed painfully. File not found?";
-            echo ERROR . ': ' . $key . ' (' . $pluginPath . ')<br />';
+            echo ERROR . ': ' . htmlspecialchars($key) . ' (' . htmlspecialchars($pluginPath) . ')<br />';
         }
 
         return $key;
