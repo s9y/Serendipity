@@ -19,7 +19,12 @@ Version 2.0 ()
     * Use Smarty for backend display output
 
 
-Version 1.7.6 ()
+Version 1.7.7 (February 6th, 2014)
+------------------------------------------------------------------------
+
+    * Fixed PHP parse error in templatechooser plugin. Blame garvin. :(
+    
+Version 1.7.6 (February 6th, 2014)
 ------------------------------------------------------------------------
 
     * Fixed backend security issues, thanks to Stefan Schurtz:
