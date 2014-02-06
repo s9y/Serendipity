@@ -22,6 +22,7 @@ if (class_exists('serendipity_event_spamblock')) {
 } elseif (class_exists('serendipity_event_commentspice')) {
     $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%commentspice%required_fields'", true, 'assoc');
 }
+
 if (is_array($required_fieldlist)) {
     $required_fields = explode(',', $required_fieldlist['value']);
     $smarty_required_fields = array();
@@ -35,6 +36,8 @@ if (is_array($required_fieldlist)) {
 
     $serendipity['smarty']->assign('required_fields', $smarty_required_fields);
 }
+
+$serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate']);
 
 $template_config = array(
     array(
@@ -106,3 +109,7 @@ $template_config_groups = NULL;
 $template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
+
+if ($_SESSION['serendipityUseTemplate']) {
+    $template_loaded_config['use_corenav'] = false;
+}
