@@ -6,8 +6,8 @@
     {foreach $entry_vars.hiddens as $key => $value}
     <input type="hidden" name="{$key}" value="{$value}">
     {/foreach}
-    <input type="hidden" id="entryid" name="serendipity[id]" value="{$entry_vars.entry.id}">
-    <input type="hidden" name="serendipity[timestamp]" value="{$entry_vars.timestamp}">
+    <input type="hidden" id="entryid" name="serendipity[id]" value="{$entry_vars.entry.id|escape:'html'}">
+    <input type="hidden" name="serendipity[timestamp]" value="{$entry_vars.timestamp|escape:'html'}">
     <input type="hidden" name="serendipity[preview]" value="false">
     {$entry_vars.formToken}
     <div id="edit_entry_title" class="form_field">
@@ -66,7 +66,7 @@
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
             <div id="edit_entry_timestamp" class="form_field">
-                <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp}">
+                <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp|escape:'html'}">
 
                 <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
                 <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|@formatTime:'o-m-d\TH:i':true:false:true}">

@@ -44,10 +44,10 @@
     {foreach $users as $user}
         {if $user.isEditable}
         <li class="clearfix {cycle values="odd,even"}">
-            <span class="user_name"><span class="icon-user"></span> {$user.realname|escape:"html"} <span class="user_level">({$user.userlevel_name})</span></span>
+            <span class="user_name"><span class="icon-user"></span> {$user.realname|escape:"html"} <span class="user_level">({$user.userlevel_name|escape:'html'})</span></span>
             
             <ul class="plainList clearfix edit_actions">
-                <li><a class="button_link" href="{$user.authorUrl}" title="{$CONST.ENTRIES_FOR|sprintf:{$user.realname}}"><span class="icon-zoom-in"></span><span class="visuallyhidden"> {$CONST.ENTRIES_FOR|sprintf:{$user.realname}}</span></a></li>
+                <li><a class="button_link" href="{$user.authorUrl}" title="{$CONST.ENTRIES_FOR|sprintf:{$user.realname|escape:'html'}}"><span class="icon-zoom-in"></span><span class="visuallyhidden"> {$CONST.ENTRIES_FOR|sprintf:{$user.realname}|escape:'html'}</span></a></li>
                 <li><a class="button_link" href="?serendipity[adminModule]=users&amp;serendipity[adminAction]=edit&amp;serendipity[userid]={$user.authorid}#editform" title="{$CONST.EDIT} {$user.realname|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                 <li><a class="button_link" href="?{$urlFormToken}&amp;serendipity[adminModule]=users&amp;serendipity[adminAction]=delete&amp;serendipity[userid]=$user.authorid" title="{$CONST.DELETE} {$user.realname|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>

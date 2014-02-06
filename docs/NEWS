@@ -19,9 +19,38 @@ Version 2.0 ()
     * Use Smarty for backend display output
 
 
-
-Version 1.7.4 ()
+Version 1.7.6 ()
 ------------------------------------------------------------------------
+
+    * Fixed backend security issues, thanks to Stefan Schurtz:
+
+        - XSS of users realname in "Manage users" section
+          (Backend, requires login)
+        - XSS when creating an entry with bad id/timestamp values
+          (Backend, requires login)
+        - SQL-Injection for plugin installation parameter
+          (Backend, requires admin login)
+
+    * Templatechooser plugin uses "default" template as fallback,
+      not "bulletproof".
+          
+Version 1.7.5 (January 18th, 2014)
+------------------------------------------------------------------------
+
+    * Fixed textile PHP 5.2 (namespace) compat issue
+
+    * Added default value to spamblocks required_fields option [name,comment]
+
+
+Version 1.7.4 (January 11th, 2014)
+------------------------------------------------------------------------
+
+    * Fixed emoticate plugin icon link to check for textile class
+
+    * Upgrade textile plugin libs - lib3 extends to PHP >= 5.3.
+      Please check for new options!
+
+    * Fixed spamblocks Captcha imagecreate() with PHP > 5.3 versions
 
     * Smarty 3.1.16 bugfix release - please read bundled-libs/Smarty/change_log.txt
       about changes to versions 3.1.16 and 3.1.15.
