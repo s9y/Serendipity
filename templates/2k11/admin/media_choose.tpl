@@ -206,10 +206,15 @@ if (parent.frames && parent.frames['tree']) {
         <script>
             block = '<a class="block_level opens_window" href="{$media.file.full_file}" title="{$media.file.realname|@escape}">{$media.file.realname|@escape}</a>';
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
+            if (parent.self.opener == undefined) {
+                // in iframes, there is no opener, and the magnific popup is wrapped
+                parent.self = window.parent.parent.$.magnificPopup;
+                parent.self.opener = window.parent.parent;
+            }
             if (parent.self.opener.editorref) { 
                 parent.self.opener.editorref.surroundHTML(block, '');
             }  else { 
-                parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
+                parent.self.opener.serendipity.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
             } 
             parent.self.close();
         </script>
