@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -21,7 +21,7 @@ var $filter_defaults;
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.83');
+        $propbag->add('version',       '1.84');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -184,7 +184,7 @@ var $filter_defaults;
                 $propbag->add('type', 'string');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_REQUIRED_FIELDS);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_REQUIRED_FIELDS_DESC);
-                $propbag->add('default', '');
+                $propbag->add('default', 'name,comment');
                 break;
 
             case 'bodyclone':
