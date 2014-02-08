@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 1658
  */
@@ -123,3 +123,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Enabling this will add IPs that have sent spam to your blog to your .htaccess file. The .htaccess file will be regenerated regularly with the forbidden IPs of the last month.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'This is how your captcha images currently look like. If you changed and saved settings above and want to refresh the look of your captcha, simply click on it to reload.');
+

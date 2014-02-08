@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php #
 
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Kostas CoSTa Brzezinski <costa@kofeina.net>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -112,3 +112,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF', 'U¿yæ ochrony CSRF dla komentarzy?');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_DESC', 'Po w³±czeniu tej opcji ka¿demu komentarzowi bêdzie przyporz±dkowywana warto¶æ hash, dziêki której bêdzie mo¿na sprawdziæ, czy komentarz zosta³ pozostawiony przez u¿ytkownika z prawid³owym ID sesji. To ustawienie zmniejszy ilosæ spamu i ograniczy mo¿liwo¶æ komentowania przez CSRF ale jednocze¶nie uniemo¿liwi komentowanie u¿ytkownikom nie korzystaj±cym z ciastek (cookies) w ich przegl±darkach.');
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Twój komentarz nie posiada³ numeru hash sesji. Komentarze mog± byæ pozostawiane na tym blogu tylko gdy Twoja przegl±darka ma w³±czon± obs³ugê ciasteczek (cookies)!');
+

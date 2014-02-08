@@ -1,17 +1,11 @@
-<?php # 
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Joao P Matos <jmatos@math.ist.utl.pt>                                  #
-#                                                                        #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Joao P Matos <jmatos@math.ist.utl.pt>
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'Protecção anti Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_DESC', 'Oferece uma imensidade de possibilidades para proteger o seu blogue contra Spam nos comentários.');
@@ -95,5 +89,3 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Desbloquear esta URL via plugin Spamblock');
 
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

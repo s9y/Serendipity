@@ -1,17 +1,11 @@
-<?php # $Id$
+<?php #
 
-##########################################################################
-# serendipity - another blogger...                                       #
-##########################################################################
-#                                                                        #
-# (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
-# http://www.jannis.to/programming/serendipity.html                      #
-#                                                                        #
-# Translated by                                                          #
-# Sebastian Mordziol <argh@php-tools.net>                                #
-# http://sebastian.mordziol.de                                           #
-#                                                                        #
-##########################################################################
+/**
+ *  @version  
+ *  @file 
+ *  @author Sebastian Mordziol <argh@php-tools.net> http://sebastian.mordziol.de
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_SPAMBLOCK_TITLE', 'Protection contre le Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_DESC', 'Offre une multitude de possibilités pour protéger votre blog contre le Spam dans les commentaires.');
@@ -97,5 +91,3 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC', 'N\'autoriser les rétroliens que si l\'adresse contient un lien vers votre blog');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL', 'Adresse de rétrolien invalide.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

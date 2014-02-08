@@ -1,6 +1,7 @@
-<?php # $Id$
+<?php #
+
 /**
- *  @version $Revision$
+ *  @version 
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
  *  EN-Revision: 690
  */
@@ -92,4 +93,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL', 'Revisar Trackback URLs');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKURL_DESC', 'Sólo permitir trackbacks, cuando el URL contiene un enlace a tu blog');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_TRACKBACKURL', 'Trackback URL inválida.');
-?>
+

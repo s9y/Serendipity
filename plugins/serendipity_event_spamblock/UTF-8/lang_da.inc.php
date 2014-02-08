@@ -1,7 +1,8 @@
-<?php # $Id: lang_en.inc.php 1381 2006-08-15 10:14:56Z elf2000 $
+<?php #
 
 /**
- *  @version $Revision: 1381 $
+ *  @version  1381
+ *  @file lang_en.inc.php 1381 2006-08-15 10:14:56Z elf2000
  *  @author Henrik Schack <henrik@schack.dk>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -109,3 +110,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_TREAT', 'Hvad skal der ske med trackbacks som auto-modereres?');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT', 'Trackback moderering efter givent antal dage');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATIONT_DESC', 'Du kan vælge moderering af alle trackbacks til artikler. Indtast hvor gammel en artikel skal være før trackbacks automatisk modereres. 0 betyder ingen automatisk moderering.');
+
