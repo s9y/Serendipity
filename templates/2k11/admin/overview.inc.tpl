@@ -4,6 +4,13 @@
     </div>
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
+    {if $published}
+        <span class="msg_success"><span class="icon-ok-circled"></span> Entry #{$published} published</span> {* i18n *}
+    {/if}
+    {if $error_publish}
+        <span class="msg_error"><span class="icon-attention-circled"></span> Error publishing entry: {$error_publish}</span> {* i18n *}
+    {/if}
+
     {if $update}
         <section id="dashboard_update">
             <h3>Update notification</h3> {* i18n *}
@@ -56,6 +63,17 @@
                     <ul class="plainList actions">
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$urltoken}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-zoom-in"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        {if $entry.isdraft == "true"}
+                            <li>
+                                <form method="POST" class="overviewListForm">
+                                    <input type="hidden" name="serendipity[adminAction]" value="publish" />
+                                    <input type="hidden" name="serendipity[id]" value="{$entry.id}" />
+                                    {$token}
+                                    <button type="submit">{$CONST.PUBLISH}</button>
+                                </form>
+                            </li>
+                        {/if}
+                        
                     </ul>
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
                     <span class="entry_status status_future">Scheduled{* $CONST.ENTRY_PUBLISHED_FUTURE *}</span>{* i18n *} 

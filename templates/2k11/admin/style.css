@@ -437,7 +437,8 @@ form > button,
 #dashboard_entries .entry_status,
 .comment_status,
 .tabs > ul > li,
-#maintenance > section > .button_link {
+#maintenance > section > .button_link,
+.overviewListForm {
     display: inline-block;
 }
 
@@ -489,6 +490,11 @@ form > a,
 form > button {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+}
+
+.overviewListForm > button {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 #categories,
