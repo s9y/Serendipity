@@ -135,7 +135,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     foreach($hiddens as $key => $value) {
         $hidden .= '        <input type="hidden" name="' . $key . '" value="' . $value . '" />' . $n;
     }
-    $hidden .= '        <input type="hidden" id="entryid" name="serendipity[id]" value="' . (isset($entry['id']) ? (int)$entry['id'] : '') . '" />' . $n;
+    $hidden .= '        <input type="hidden" id="entryid" name="serendipity[id]" value="' . ((isset($entry['id']) && (int)$entry['id'] > 0) ? (int)$entry['id'] : '') . '" />' . $n;
     $hidden .= '        <input type="hidden" name="serendipity[timestamp]" value="' . (isset($entry['timestamp']) ? htmlspecialchars(serendipity_serverOffsetHour($entry['timestamp'])) : serendipity_serverOffsetHour(time())) . '" />' . $n;
     $hidden .= '        <input type="hidden" name="serendipity[preview]" value="false" />';
     $hidden .= '        ' . serendipity_setFormToken();
