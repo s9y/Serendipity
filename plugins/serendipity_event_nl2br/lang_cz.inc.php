@@ -1,7 +1,7 @@
-<?php # lang_cz.inc.php 1501.2 2012-01-08 19:58:45 VladaAjgl $
+<?php
 
 /**
- *  @version 1501.2
+ *  @file lang_cz.inc.php 1501.2 2012-01-08 19:58:45 VladaAjgl
  *  @author Vladimír Ajgl <vlada@ajgl.cz>
  *  EN-Revision: Revision of lang_en.inc.php
  *  Translated on 2007/11/30
@@ -13,18 +13,19 @@
  *  @revisionDate 2012/01/08
  */
 
-@define('PLUGIN_EVENT_NL2BR_NAME',              'Markup: NL2BR');
-@define('PLUGIN_EVENT_NL2BR_DESC',              'Mìní znaky konce øádku na tagy <br />');
-@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS',      'Seznam html tagù, uvnitø kterých nemají být konce øádkù nahrazovány.');
+@define('PLUGIN_EVENT_NL2BR_NAME', 'Markup: NL2BR');
+@define('PLUGIN_EVENT_NL2BR_DESC', 'Mìní znaky konce øádku na tagy <br />');
+@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS', 'Seznam html tagù, uvnitø kterých nemají být konce øádkù nahrazovány.');
 @define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS_DESC', 'Návrhy: "code,pre,geshi,textarea". Názvy tagù oddìlujte èárkou. Tip: Zadávané tagy jsou vyhodnocovány jako regulární výraz.');
-@define('PLUGIN_EVENT_NL2BR_PTAGS',              'Pou¾ít tagy &lt;p&gt;');
-@define('PLUGIN_EVENT_NL2BR_PTAGS_DESC',              'Vkládat tagy &lt;p&gt; místo tagù &lt;br /&gt;');
+@define('PLUGIN_EVENT_NL2BR_PTAGS', 'Pou¾ít tagy &lt;p&gt;');
+@define('PLUGIN_EVENT_NL2BR_PTAGS_DESC', 'Vkládat tagy &lt;p&gt; místo tagù &lt;br /&gt;');
 
 // Next lines were translated on 2012/01/08
-@define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP',              'Kontrolovat dal¹í znaèkovací pluginy?');
-@define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP_DESC',              'Automaticky zkontroluje, jestli jsou nainstalovány jiné znaèkovací pluginy. To je pravda, pokud je pou¾it WYSIWYG editor nebo specifické znaèkovací pluginy. Pak je plugin NL2BR vypnut.');
-@define('PLUGIN_EVENT_NL2BR_ISOBR_TAG',              'IOSBR izolace - výchozí nastavení BR');
-@define('PLUGIN_EVENT_NL2BR_ISOBR_TAG_DESC',              'Tento nový NE-HTML tag <nl> </nl> umo¾òuje vypnout pøevod nových øádkù na tag BR v kusu textu uzavøeném uvnitø tagù. Mù¾ete ho pou¾ít vícekrát v jednom pøíspìvku, ale nemù¾ete ho vnoøovat! Pøíklad: <nl>v tomto textu nebudou pøevádìny znaky nového øádku na tag BR</nl>');
-@define('PLUGIN_EVENT_NL2BR_CLEANTAGS',              'Pou¾ít BR-èisté-tagy jak návratovou hodnotu, pokud je ISOBR zakázáno');
-@define('PLUGIN_EVENT_NL2BR_CLEANTAGS_DESC',              'Pokud pou¾íváte v pøíspìvku <html-tagy>, které nelze úspì¹nì pou¾ít spoleènì s nastavením ISOBR, pak tato volba zapnutá bude mít za následek ignorování znakù nových øádkù bezprostøednì za <html-tagy>. Výchozí: (table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd)');
-@define('PLUGIN_EVENT_NL2BR_CONFIG_ERROR',              'Varování: Nepoøádek v nastavení! Nastavení "%s" bylo nastaveno zpìt na "NE", pokud je aktivní \'%s\'! Je pøípustné pou¾ít pouze jednu z tìchto voleb.');
+@define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP', 'Kontrolovat dal¹í znaèkovací pluginy?');
+@define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP_DESC', 'Automaticky zkontroluje, jestli jsou nainstalovány jiné znaèkovací pluginy. To je pravda, pokud je pou¾it WYSIWYG editor nebo specifické znaèkovací pluginy. Pak je plugin NL2BR vypnut.');
+@define('PLUGIN_EVENT_NL2BR_ISOBR_TAG', 'IOSBR izolace - výchozí nastavení BR');
+@define('PLUGIN_EVENT_NL2BR_ISOBR_TAG_DESC', 'Tento nový NE-HTML tag <nl> </nl> umo¾òuje vypnout pøevod nových øádkù na tag BR v kusu textu uzavøeném uvnitø tagù. Mù¾ete ho pou¾ít vícekrát v jednom pøíspìvku, ale nemù¾ete ho vnoøovat! Pøíklad: <nl>v tomto textu nebudou pøevádìny znaky nového øádku na tag BR</nl>');
+@define('PLUGIN_EVENT_NL2BR_CLEANTAGS', 'Pou¾ít BR-èisté-tagy jak návratovou hodnotu, pokud je ISOBR zakázáno');
+@define('PLUGIN_EVENT_NL2BR_CLEANTAGS_DESC', 'Pokud pou¾íváte v pøíspìvku <html-tagy>, které nelze úspì¹nì pou¾ít spoleènì s nastavením ISOBR, pak tato volba zapnutá bude mít za následek ignorování znakù nových øádkù bezprostøednì za <html-tagy>. Výchozí: (table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd)');
+@define('PLUGIN_EVENT_NL2BR_CONFIG_ERROR', 'Varování: Nepoøádek v nastavení! Nastavení "èisté tagy" bylo nastaveno zpìt na "NE", pokud je aktivní \'ISOBR\'! Je pøípustné pou¾ít pouze jednu z tìchto voleb.');
+

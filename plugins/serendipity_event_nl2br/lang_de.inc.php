@@ -1,4 +1,11 @@
-<?php # $Id: lang_de.inc.php 2492 2011-03-23 17:57:00Z ian $
+<?php #
+
+/**
+ *  @version  
+ *  @file 
+ *  @author 
+ *  EN-Revision: Revision of lang_en.inc.php
+ */
 
 @define('PLUGIN_EVENT_NL2BR_NAME',     'Textformatierung: NL2BR');
 @define('PLUGIN_EVENT_NL2BR_DESC',     'Konvertiert Zeilenumbrüche zu HTML');
@@ -13,3 +20,4 @@
 @define('PLUGIN_EVENT_NL2BR_CLEANTAGS', 'Nutze BR-Clean-Tags fallback, wenn ISOBR false');
 @define('PLUGIN_EVENT_NL2BR_CLEANTAGS_DESC', 'Bei Benutzung von <HTML-Tags> in den Einträgen, die nicht zufriedenstellend mit der ISOBR Config-Option gelöst werden können, lösche nl2br Umbruch nach <tag>. Dies gilt für alle <tags>, die mit > oder >\n enden! Default (table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd)');
 @define('PLUGIN_EVENT_NL2BR_CONFIG_ERROR', 'Konfigurations Fehler! Die Option: "%s" wurde zurückgesetzt, weil die Option \'%s\' aktiv geschaltet war! Benutzen sie bitte nur eine dieser Optionen.');
+
