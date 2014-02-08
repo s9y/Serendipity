@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 @define('PLUGIN_EVENT_EMOTICATE_NAME', 'Textformatierung: Smilies');
 @define('PLUGIN_EVENT_EMOTICATE_DESC', 'Standard Text-Smilies in Grafiken konvertieren');

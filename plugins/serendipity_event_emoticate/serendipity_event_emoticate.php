@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,15 +14,15 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.6');
+        $propbag->add('version',       '1.7');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
+            'php'         => '5.2.0'
         ));
         $propbag->add('groups', array('MARKUP'));
         $propbag->add('cachable_events', array('frontend_display' => true));
-        $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true));
+        $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true, 'css_backend' => true, 'css' => true));
 
         $this->markup_elements = array(
             array(
@@ -91,19 +91,19 @@ class serendipity_event_emoticate extends serendipity_event
 
                 '\:\-?\)'  => serendipity_getTemplateFile('img/emoticons/smile.'.$ext),
 
-                '\:\-?\|'     => serendipity_getTemplateFile('img/emoticons/normal.'.$ext),
+                '\:\-?\|'  => serendipity_getTemplateFile('img/emoticons/normal.'.$ext),
 
-                '\:\-?O'  => serendipity_getTemplateFile('img/emoticons/eek.'.$ext),
+                '\:\-?O'   => serendipity_getTemplateFile('img/emoticons/eek.'.$ext),
 
                 '\:\-?\('  => serendipity_getTemplateFile('img/emoticons/sad.'.$ext),
 
-                '8\-?\)'  => serendipity_getTemplateFile('img/emoticons/cool.'.$ext),
+                '8\-?\)'   => serendipity_getTemplateFile('img/emoticons/cool.'.$ext),
 
-                '\:\-?D'  => serendipity_getTemplateFile('img/emoticons/laugh.'.$ext),
+                '\:\-?D'   => serendipity_getTemplateFile('img/emoticons/laugh.'.$ext),
 
-                '\:\-?P'  => serendipity_getTemplateFile('img/emoticons/tongue.'.$ext),
+                '\:\-?P'   => serendipity_getTemplateFile('img/emoticons/tongue.'.$ext),
 
-                ';\-?\)'  => serendipity_getTemplateFile('img/emoticons/wink.'.$ext),
+                ';\-?\)'   => serendipity_getTemplateFile('img/emoticons/wink.'.$ext),
             );
         }
 
@@ -119,11 +119,11 @@ class serendipity_event_emoticate extends serendipity_event
     }
 
     function example() {
-        $s  = '<table cellspacing="5" style="margin-left: auto; margin-right: auto">';
+        $s  = '<table cellspacing="5" class="example_emos">';
         $s .= '<tr>';
         $i = 1;
         foreach($this->getEmoticons() as $key => $value) {
-            $s .= '<td style="text-align: center">' . $this->humanReadableEmoticon($key) . '</td><td><img src="'. $value .'"></td>' . "\n";
+            $s .= '<td>' . $this->humanReadableEmoticon($key) . '</td><td><img src="'. $value .'"></td>' . "\n";
             if ($i++ % 7 == 0) $s .= '</tr><tr>';
         }
         $s .= '</tr>';
@@ -151,7 +151,7 @@ class serendipity_event_emoticate extends serendipity_event
     }
 
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) { 
+    function event_hook($event, &$bag, &$eventData, $addData = null) {
         global $serendipity;
         $hooks = &$bag->get('event_hooks');
 
@@ -166,12 +166,34 @@ class serendipity_event_emoticate extends serendipity_event
                             $element = &$eventData[$temp['element']];
 
                             foreach ($this->getEmoticons() as $key => $value) {
+                                $path_parts = pathinfo($value); // part of serendipity_event_textile (lib3) workaround, which caused to throw weird list-place and preg_* errors
                                 $element = preg_replace("/([\t\s\.\!>]+|^)" . $key . "([\t\s\!\.\)<]+|\$)/U",
-                                    "$1<img src=\"$value\" alt=\"" . $this->humanReadableEmoticon($key) . "\" style=\"display: inline; vertical-align: bottom;\" class=\"emoticon\" />$2",
+                                    "$1<img src=\"$value\" alt=\"" . (class_exists('serendipity_event_textile') ? str_replace('.'.$this->get_config('extension', 'png'), '', $path_parts['filename']) : $this->humanReadableEmoticon($key)) . "\" class=\"emoticon\" />$2",
                                     $element);
                             }
                         }
                     }
+                    return true;
+                    break;
+
+                case 'css_backend':
+?>
+.example_emos {
+    margin-left: auto;
+    margin-right: auto;
+}
+.example_emos td {
+    text-align: center;
+}
+<?php
+                case 'css':
+?>
+.emoticon {
+    display: inline;
+    vertical-align: bottom;
+    border: 0 none;
+}
+<?php
                     return true;
                     break;
 
