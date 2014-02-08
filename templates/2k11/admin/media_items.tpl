@@ -38,13 +38,10 @@
                         <a href="{$file.$url}&amp;serendipity[image]={$file.id}">
                     {/if}
                 {/if}
-
                     <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
                     <span class="block_level">{if $file.hotlink}{$CONST.MEDIA_HOTLINKED}{else}{$file.mime}{/if}</span>
-                    
-                {if $media.textarea || $file.url}
-                    </a>
-                {/if}
+                    {$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}
+                </a>
             {/if}
             {if $file.orderkey != ''}
                 <span>{$file.orderkey|@escape}</span>
