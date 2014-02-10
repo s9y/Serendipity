@@ -19,6 +19,11 @@ Version 2.0 ()
     * Use Smarty for backend display output
 
 
+Version 1.7.8 (February 9th, 2014)
+------------------------------------------------------------------------
+
+    * Fixed POST for db entry insert, caused by 1.7.6 security feature
+
 Version 1.7.7 (February 6th, 2014)
 ------------------------------------------------------------------------
 

@@ -204,6 +204,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'arguments' => array($serendipity['serendipityPath'] . 'bundled-libs/Smarty', $dead_smarty_files, array('internals'), true),
                      'desc'      => 'Smarty 3.x brought a new file structure. The following dead files will be removed from "bundled-libs/Smarty/libs".<br /><div style="font-size: x-small; margin: 15px">' . implode(', ', $dead_smarty_files) . '</div>'),
 
+               array('version'   => '2.0-alpha3',
+                     'function'  => 'serendipity_upgrader_rename_plugins',
+                     'title'     => 'Move internal plugins to "normal" plugin directory structure.',
+                     'desc'      => 'A list of internal plugins that previously lived in include/plugin_internal.inc.php were moved into the proper plugins/ subdirectory structure. This task will migrate any possible references to such plugins to the new format.'),
+
 );
 
 /* Fetch SQL files which needs to be run */

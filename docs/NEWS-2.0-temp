@@ -39,7 +39,7 @@ trackback-functions still use echo for messages"):
     serendipity_generateImageSelectorParams
 
 * All internal plugins got extracted from plugin_internal.inc.php and moved to plugins/.
-  They are renamed to work there (TODO: Fix that and rename back or add upgrader task):
+  They are renamed to work there (upgrader task provides migration):
     serendipity_calendar_plugin    became serendipity_plugin_calendar
     serendipity_quicksearch_plugin became serendipity_plugin_quicksearch
     serendipity_archives_plugin    became serendipity_plugin_archives

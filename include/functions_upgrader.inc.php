@@ -282,3 +282,21 @@ function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=n
         }
     }
 }
+
+function serendipity_upgrader_rename_plugins() {
+    global $serendipity;
+ 
+    $plugs = serendipity_db_query("SELECT name FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '@%'");
+
+    if (is_array($plugs)) {
+        foreach($plugs AS $plugin) {
+            $origname = $plugin['name'];
+            $plugin['name'] = str_replace('@', '', $plugin['name']);
+            $plugin['name'] = preg_replace('@serendipity_([^_]+)_plugin@i', 'serendipity_plugin_\1', $plugin['name']);
+            $pluginparts = explode(':', $plugin['name']);
+
+            echo htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($plugin['name']) . "<br />\n";
+            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins SET name = '" . serendipity_db_escape_string($plugin['name']) . "', path = '" . serendipity_db_escape_string($pluginparts[0]) . "' WHERE name = '" . serendipity_db_escape_string($origname) . "'");
+        }
+    }
+}
