@@ -867,14 +867,11 @@ input[type=radio] + label,
 }
 
 input[type=checkbox],
+#toggle_extended,
 #toggle_metadata,
 #toggle_advanced,
 #category_icon {
     margin-right: .4em;
-}
-
-#toggle_extended {
-    margin-right: .65em;
 }
 
 .form_radio {
