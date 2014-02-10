@@ -1012,7 +1012,7 @@ h2 {
 }
 
 h3,
-#edit_entry_category .wrap_legend {
+.js #edit_entry_category .wrap_legend {
     font-size: 1.28571em;
     line-height: 1.16667em;
     margin: 1.16667em 0;
@@ -1559,7 +1559,7 @@ form > .button_link:first-of-type,
 }
 
 .mfp-content #s9y_links h3,
-#edit_entry_category .wrap_legend {
+.js #edit_entry_category .wrap_legend {
     border-bottom: 1px solid #aaa;
     display: block;
     margin-bottom: .583335em;
@@ -1865,6 +1865,10 @@ form > .button_link:first-of-type,
     text-align: right;
 }
 
+.no-js .pluginmanager_place {
+    margin-top: .5em;
+}
+
 .config_optiongroup_last {
     border-bottom: 1px solid #aaa;
 }
@@ -2010,6 +2014,7 @@ form > .button_link:first-of-type,
 .no-js #serendipityScaleForm > .form_check,
 .no-js .customfieldMedia,
 .no-js .toggle_links,
+.no-js .toggle_info,
 .js .additional_info,
 .installer .toggle_info,
 .hidden,
