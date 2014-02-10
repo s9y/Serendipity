@@ -172,7 +172,7 @@
             <li>
                 <div class="clearfix {cycle values="odd,even"}">
                     <details class="category_data">
-                        <summary><span class="icon-folder-open"></span> {$category.category_name|escape:"html"}</summary>
+                        <summary><span class="icon-list-bullet"></span> {$category.category_name|escape:"html"}</summary>
 
                         <div class="category_info clearfix">
                         {if $category.category_description != ''}
@@ -184,7 +184,7 @@
 
                     <ul class="plainList clearfix edit_actions">
                         <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT} {$category.category_name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=newSub&amp;serendipity[cid]={$category.categoryid}" title="Create Subcategory"><span class="icon-folder-open"></span><span class="visuallyhidden"> Create Subcategory</span></a></li> {* i18n *}
+                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=newSub&amp;serendipity[cid]={$category.categoryid}" title="Create Subcategory"><span class="icon-list-bullet"></span><span class="visuallyhidden"> Create Subcategory</span></a></li> {* i18n *}
                         <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE} {$category.category_name|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                     </ul>
                 </div>
