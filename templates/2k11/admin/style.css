@@ -900,6 +900,8 @@ input[type=checkbox],
 #filter_entries,
 #sort_entries,
 #filter_comments,
+#media_pane_filter,
+#media_pane_sort,
 #s9y_links > ul,
 #serendipity_category .inputs,
 #serendipity_customfields textarea {
@@ -1957,10 +1959,7 @@ form > .button_link:first-of-type,
 
 /* MEDIA DB
    ----------------------------------------------------------------- */
-.media_pane .pagination {
-    margin: 0 2% 1em 0;
-}
-
+.media_pane .pagination,
 .no-js .media_file_preview img,
 .js .template_wrap,
 .media_file .form_check {
@@ -2060,7 +2059,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
 #media_selector_bar {
     float: right;
-    margin: 0 2% 1em 0;
+    margin: 0 0 1em;
 }
 
 /* TEMP fixes for tree view */
@@ -2623,6 +2622,10 @@ img.mfp-img {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    .media_pane .even {
+        margin: 0 0 1em 2%;
     }
 
     #dashboard > section,
