@@ -1478,6 +1478,10 @@ form > .button_link:first-of-type,
     margin: .75em 0;
 }
 
+.remove_msg {
+    margin-left: .4em;
+}
+
 .sub_perm {
     margin-left: 1em;
 }
