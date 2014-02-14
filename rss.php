@@ -146,7 +146,7 @@ $plugins = serendipity_plugin_api::enum_plugins();
 if (is_array($plugins)) {
     // load each plugin to make some introspection
     foreach ($plugins as $plugin_data) {
-        if (preg_match('|@serendipity_syndication_plugin|', $plugin_data['name'])) {
+        if (preg_match('@(serendipity_syndication_plugin|serendipity_plugin_syndication)@', $plugin_data['name'])) {
             $plugin =& serendipity_plugin_api::load_plugin($plugin_data['name'], $plugin_data['authorid']);
 
             $metadata['additional_fields'] = $plugin->generate_rss_fields($metadata['title'], $metadata['description'], $entries);
