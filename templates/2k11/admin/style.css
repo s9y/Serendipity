@@ -1245,7 +1245,7 @@ summary {
 
 #edit_entry_submit {
     position: absolute;
-    top: -3.25em;
+    top: -.75em;
     right: 0;
 }
 
@@ -2500,6 +2500,10 @@ img.mfp-img {
         display: inline;
         float: left;
         margin: 0 1em 0 0;
+    }
+
+    #edit_entry_submit {
+        top: -3.25em;
     }
 }
 
