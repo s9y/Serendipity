@@ -1053,7 +1053,7 @@ summary {
 .installer .msg_notice,
 .installer .msg_hint {
     display: inline-block;
-    margin: 0;
+    margin: 0 0 .5em;
     padding: 0 .5em;
 }
 
@@ -1748,6 +1748,17 @@ form > .button_link:first-of-type,
     clear: both;
     display: block;
     margin: .75em 0 0;
+}
+
+.installer .field_info a,
+.installer .field_info a:visited {
+    color: #444;
+    text-shadow: none;
+}
+
+.installer .field_info a:hover,
+.installer .field_info a:focus {
+    color: #fcfcfc;
 }
 
 #entries_list .entry_info .entry_status,
