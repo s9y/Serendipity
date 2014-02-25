@@ -294,7 +294,7 @@ class serendipity_event_entryproperties extends serendipity_event
         case 'access':
 ?>
             <fieldset class="entryproperties_access_list">
-                <legend><span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS; ?>:</span></legend>
+                <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS; ?>:</legend></span>
 
                 <div class="clearfix">
 <?php
@@ -439,7 +439,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 }
                 if (is_array($fields) && count($fields) > 0) { ?>
 
-                <legend><span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS; ?>: <span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1 . sprintf(PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3, 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance); ?></span></span></legend>
+                <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS; ?>: <span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1 . sprintf(PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3, 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance); ?></span></legend></span>
 
                 <div id="serendipity_customfields" class="clearfix">
             <?php
@@ -553,7 +553,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
 ?>
                     <fieldset class="entryproperties">
-                        <legend><span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_TITLE; ?></span></legend>
+                        <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_TITLE; ?></legend></span>
 <?php
 
                     $elements = explode(',', $this->get_config('sequence'));
