@@ -92,7 +92,7 @@
         {if is_array($tasks) && !empty($tasks)}
             <dl>
             {foreach $tasks as $task}
-                <dt>{$task.version} - {$task.title}</dl>
+                <dt>{$task.version} - {$task.title}</dt>
                 <dd>{$task.desc|nl2br}</dd>
             {/foreach}
             </dl>
