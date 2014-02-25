@@ -39,7 +39,8 @@
         </div>
     </header>
 {/if}
-    <main class="clearfix">
+    <main class="clearfix serendipityAdminContent installer">
+        <div id="content" class="clearfix">
     {* include of previous plain upgrader here *}
     {if ($get.action == 'ignore')}
         {* TODO: don't know what to put here? *}
@@ -62,9 +63,9 @@
 
     {if (($showAbort && $get.action == 'ignore') || $get.action == 'upgrade')}
         {if $get.action == 'ignore'}
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
+            <span class="msg_notice upgrade_done"><span class="icon-info-circled"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
         {elseif $get.action == 'upgrade'}
-            <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
+            <span class="msg_success upgrade_done"><span class="icon-ok-circled"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
         {/if}
         {if $return_here}
             {$print_UPGRADER_RETURN_HERE}
@@ -80,12 +81,12 @@
         <h3>{$CONST.FIRST_WE_TAKE_A_LOOK}</h3>
 
         <div class="diagnose">
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$result_diagnose}.</span>
+            {$result_diagnose}
 
         {if $checksums}
             <h4>{$CONST.INTEGRITY}</h4>
 
-            <ul>
+            <ul class="plainList">
             {foreach $upgraderResultDiagnose1 AS $urd1}
                 <li>{$urd1}</li>
             {/foreach}
@@ -146,20 +147,23 @@
             {if (($taskCount > 0) || (sizeof($sqlfiles) > 0))}
                 <h3>{$CONST.SERENDIPITY_UPGRADER_PROCEED_QUESTION}</h3>
 
-                <a class="block_level" href="{$upgradeLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_DOIT}</a>{if $showAbort} <a href="{$abortLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_ABORT}</a>{/if}
+                <a class="button_link state_submit" href="{$upgradeLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_DOIT}</a>{if $showAbort} <a class="button_link state_cancel" href="{$abortLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_ABORT}</a>{/if}
             {else}
                 <h3>{$CONST.SERENDIPITY_UPGRADER_NO_UPGRADES}</h3>
 
-                <a class="block_level" href="{$upgradeLoc}">{$CONST.SERENDIPITY_UPGRADER_CONSIDER_DONE}</a>
+                <a class="button_link state_submit" href="{$upgradeLoc}">{$CONST.SERENDIPITY_UPGRADER_CONSIDER_DONE}</a>
             {/if}
         {/if}
     {/if}
     {* end include upgrader *}
+        </div>
     </main>
 {if NOT $admin_vars.no_footer}
+    {if $admin_vars.version_info}
     <footer id="meta">
         <p>{$admin_vars.version_info}</p>
     </footer>
+    {/if}
 {/if}
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </body>

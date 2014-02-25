@@ -467,7 +467,8 @@ label > span,
 #dashboard_entries li > a,
 #mediaPropertyForm .media_file_props label,
 #mediaPropertyForm header b,
-#mediaPropertyForm footer b {
+#mediaPropertyForm footer b,
+#content .upgrade_done {
     display: block;
 }
 
@@ -2974,7 +2975,7 @@ img.mfp-img {
 
     .installer #content {
         float: none;
-        margin: 0 auto;
+        margin: 0 auto 2em;
         max-width: 60em;
         width: 100%;
     }
