@@ -80,20 +80,20 @@
                     </div>
                 {/foreach}
 
-                <div id="media_filter_file" class="form_field">
+                <div id="media_filter_file" class="form_field left">
                     <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
                     <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|@escape}">
                 </div>
 
-                <div class="form_field">
+                <div id="media_filter_keywords" class="form_field center">
                     <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
                     <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|@escape}">
+                </div>
 
-                    <div id="keyword_list" class="clearfix">
-                    {foreach from=$media.keywords item="keyword"}
-                        <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|@escape}">{$keyword|@escape}</a>
-                    {/foreach}
-                    </div>
+                <div id="keyword_list" class="clearfix right">
+                {foreach from=$media.keywords item="keyword"}
+                    <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|@escape}" title="{$keyword|@escape}">{$keyword|@escape|truncate:20:"&hellip;"}</a>
+                {/foreach}
                 </div>
             </div>
         </fieldset>

@@ -2861,7 +2861,7 @@ img.mfp-img {
     #media_filter > div,
     #media_pane_sort > .left,
     #media_pane_sort > .center,
-    #media_pane_sort > .right,
+    #media_pane_sort > .right,    
     #media_pane_sort > .grouped > div {
         float: left;
         width: 33% ;
@@ -2879,9 +2879,14 @@ img.mfp-img {
         width: 50%;
     }
 
+    #media_filter_file,
     #media_pane_sort .left,
     #serendipity_comment .form_area {
         clear: both;
+    }
+
+    #keyword_list {
+        padding-top: 2em;
     }
 }
 
