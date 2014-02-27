@@ -22,7 +22,7 @@
 
     <form id="delete_image" method="get">
         <div class="form_buttons">
-            <a class="button_link state_cancel icon_link" href="{$abortLoc}">{$CONST.ABORT_NOW}</a>
+            <a class="button_link state_cancel icon_link" href="{$abortLoc}">{$CONST.BACK}</a>
             <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
         </div>
     </form>
