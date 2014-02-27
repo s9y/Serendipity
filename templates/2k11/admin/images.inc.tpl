@@ -85,8 +85,12 @@
             <input id="diredit_new" name="serendipity[newDir]" type="text" value="{$use_dir}">
         </div>
 
-        <div class="clearfix">
-            <div class="form_select">
+        <h3 class="toggle_headline">
+            <button class="show_config_option icon_link" type="button" data-href="#directory_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PERMISSIONS}</button>
+        </h3>
+
+        <div id="directory_permissions" class="clearfix additional_info">
+            <div class="form_multiselect">
                 <label for="read_authors">{$CONST.PERM_READ}</label>
                 <select id="read_authors" name="serendipity[read_authors][]" multiple size="6">
                     <option value="0"{if $rgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
@@ -96,7 +100,7 @@
                 </select>
             </div>
 
-            <div class="form_select">
+            <div class="form_multiselect">
                 <label for="write_authors">{$CONST.PERM_WRITE}</label>
                 <select id="write_authors" name="serendipity[write_authors][]" multiple size="6">
                     <option value="0"{if $wgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
@@ -105,10 +109,10 @@
                 {/foreach}
                 </select>
             </div>
-        </div>
 
-        <div class="form_check">
-            <input id="setchild" name="serendipity[update_children]" type="checkbox" value="true"{if !empty($smarty.post.update_children) == 'on'} checked="checked"{/if}><label for="setchild">{$CONST.PERM_SET_CHILD}</label>
+            <div class="form_check">
+                <input id="setchild" name="serendipity[update_children]" type="checkbox" value="true"{if !empty($smarty.post.update_children) == 'on'} checked="checked"{/if}><label for="setchild">{$CONST.PERM_SET_CHILD}</label>
+            </div>
         </div>
 
         <div class="form_buttons">
