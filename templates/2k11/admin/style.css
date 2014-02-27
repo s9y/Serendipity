@@ -1159,6 +1159,12 @@ summary {
     width: 20%;
 }
 
+.media_file_keywords li {
+    float: left;
+    margin: 0 2% .5em 0;
+    width: 48%;
+}
+
 .pagination .prev,
 .pagination .next {
     min-height: 1px;
@@ -2604,6 +2610,10 @@ img.mfp-img {
 
     .entryproperties_customfields {
         clear: both;
+    }
+
+    .media_file_keywords li {
+        width: 23%;
     }
 }
 

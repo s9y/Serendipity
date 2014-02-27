@@ -170,12 +170,12 @@
             <section class="media_file_keywords">
                 <h4>{$CONST.MEDIA_KEYWORDS}</h4>
 
-                <ul class="plainList">
+                <ul class="clearfix plainList">
                 {foreach from=$file.base_keywords key="keyword_row" item="keyword_cells"}
                     {foreach from=$keyword_cells key="keyword_cell" item="keyword"}
                     {if $keyword.name}
                     <li><input id="mediaKeyword{$keyword.name}{$mediakey}" name="serendipity[mediaKeywords][{$mediakey}][{$keyword.name}]" type="checkbox" value="true"{if $keyword.selected} checked="checked"{/if}>
-                        <label for="mediaKeyword{$keyword.name}{$mediakey}">{$keyword.name}</label></li>
+                        <label for="mediaKeyword{$keyword.name}{$mediakey}">{$keyword.name|truncate:20:"&hellip;"}</label></li>
                     {/if}
                     {/foreach}
                 {/foreach}
