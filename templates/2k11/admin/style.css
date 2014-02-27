@@ -1792,6 +1792,13 @@ form > .button_link:first-of-type,
     text-decoration: none;
 }
 
+.perm_name {
+    color: #888;
+    font-family: monospace, serif;
+    font-size: .875em;
+    font-style: normal;
+}
+
 
 /* FOOTER
    ----------------------------------------------------------------- */

@@ -76,12 +76,11 @@
             {/if}
             <li>
             {if !$perm.permission}
-                <div><span class="perm_name hilite_b">
-                {$perm.permission_name|escape:"html"}:</span> <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
+                <div><var class="perm_name">[{$perm.permission_name|escape:"html"}]</var>: <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
                     <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
-                    <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}: {$perm.permission_note|escape:"html"}</label>
+                    <label for="{{$perm@key}|escape:"html"}">{$perm.permission_note|escape:"html"} <var class="perm_name">[{$perm.permission_name|escape:"html"}]</var></label>
                 </div>
             {/if}
         {/foreach}
