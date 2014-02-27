@@ -489,7 +489,8 @@ details,
 .form_buttons,
 #maintenance > section > .button_link,
 form > a,
-form > button {
+form > button,
+#content .upgrade_done {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -1792,8 +1793,12 @@ form > .button_link:first-of-type,
     text-decoration: none;
 }
 
-.perm_name {
+.perm_name,
+.installer pre {
     color: #888;
+}
+
+.perm_name {
     font-family: monospace, serif;
     font-size: .875em;
     font-style: normal;
