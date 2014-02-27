@@ -120,6 +120,7 @@
     {/foreach}
     <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 {else}
+    <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
