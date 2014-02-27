@@ -125,7 +125,7 @@
             </div>
 
             <h3 class="toggle_headline">
-                <button class="show_config_option icon_link" type="button" data-href="#category_preview" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PREVIEW}</button>
+                <button class="show_config_option icon_link" type="button" data-href="#category_preview" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.CATEGORY} {$CONST.IMAGE}</button>
             </h3>
 
             <div id="category_preview" class="clearfix additional_info">
