@@ -81,7 +81,7 @@
             {else}
                 <div class="form_check">
                     <input id="{{$perm@key}|escape:"html"}" name="serendipity[{{$perm@key}|escape:"html"}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
-                    <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}</label>
+                    <label for="{{$perm@key}|escape:"html"}">{$perm.permission_name|escape:"html"}: {$perm.permission_note|escape:"html"}</label>
                 </div>
             {/if}
         {/foreach}

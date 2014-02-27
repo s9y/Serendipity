@@ -1,4 +1,4 @@
-<?php # $Id:$
+<?php #
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -28,7 +28,6 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     $data['group'] = $group;
 }
 
-
 /* Edit a group */
 if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     $perms = serendipity_getAllPermissionNames();
@@ -53,9 +52,6 @@ if ( $serendipity['GET']['adminAction'] != 'delete' ) {
     }
     $data['deleteFormToken'] = serendipity_setFormToken('url'); 
 }
-
-
-
 
 if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $serendipity['GET']['adminAction'] == 'new') {
     if (isset($_POST['NEW']) || $serendipity['GET']['adminAction'] == 'new') {
@@ -88,7 +84,9 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
     $data['perms'] = $perms;
     foreach($perms AS $perm => $userlevels) {
         if (defined('PERMISSION_' . strtoupper($perm))) {
-            $data['perms'][$perm]['permission_name'] = constant('PERMISSION_' . strtoupper($perm));
+            list($name, $note) = explode(":", constant('PERMISSION_' . strtoupper($perm)));
+            $data['perms'][$perm]['permission_name'] = $name;
+            $data['perms'][$perm]['permission_note'] = $note;
         } else {
             $data['perms'][$perm]['permission_name'] = $perm;
         }
