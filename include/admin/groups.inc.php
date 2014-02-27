@@ -33,6 +33,11 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
     printf('<div class="serendipityAdminMsgSuccess"><img style="height: 22px; width: 22px; border: 0px; padding-right: 4px; vertical-align: middle" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . MODIFIED_GROUP . '</div>', htmlspecialchars($serendipity['POST']['name']));
 }
 
+function splitEntryMark($data) {
+    list($name, $note) = explode(":", $data);
+    return "<em>$name</em>: <span class=\"\" style=\"font: 16px Mono;\">$note</span>";
+}
+
 if ( $serendipity['GET']['adminAction'] != 'delete' ) {
 ?>
     <table width="100%">
@@ -170,7 +175,7 @@ foreach($allusers AS $user) {
             echo "</tr>\n";
         } else {
             echo "<tr>\n";
-            echo "<td>$indent<label for=\"" . htmlspecialchars($perm) . "\">" . htmlspecialchars($permname) . "</label></td>\n";
+            echo "<td>$indent<label for=\"" . htmlspecialchars($perm) . "\">" . splitEntryMark(htmlspecialchars($permname)) . "</label></td>\n";
             echo '<td>' . $indentB . '<input class="input_checkbox" id="' . htmlspecialchars($perm) . '" type="checkbox" name="serendipity[' . htmlspecialchars($perm) . ']" value="true" ' . $selected . ' /></td>' . "\n";
             echo "</tr>\n";
         }
