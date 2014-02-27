@@ -36,8 +36,9 @@
         <input name="serendipity[group]" type="hidden" value="{$from.id}">
     {/if}
         <div class="clearfix odd form_field">
-            <label for="group_name">{$CONST.NAME}</label>
+            <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button></label>
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:"html"}">
+            <span id="groupName_info" class="field_info additional_info">Use as uppercased eg. USERLEVEL_EXAMPLE_DESC (change 'EXAMPLE' name)</span>
         </div>
 
         <div class="clearfix even form_select">
