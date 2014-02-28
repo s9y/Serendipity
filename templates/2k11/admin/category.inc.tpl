@@ -24,7 +24,7 @@
 {/if}
 {if $delete}
     {if $deletePermission == true}
-        <h2>{$categoryName|escape:"html"}</h2>
+        <h2>{$categoryName|escape}</h2>
 
         <form method="POST" name="serendipityCategory" action="?serendipity[adminModule]=category&amp;serendipity[adminAction]=doDelete&amp;serendipity[cid]={$cid}">
             {$formToken}
@@ -34,7 +34,7 @@
                 <select id="remaining_cat" name="serendipity[cat][remaining_catid]">
                     <option value="0">{$CONST.NO_CATEGORY}</option>
                 {foreach $cats as $cat_data}
-                    <option value="{$cat_data.categoryid}">{$cat_data.category_name|escape:"html"}</option>
+                    <option value="{$cat_data.categoryid}">{$cat_data.category_name|escape}</option>
                 {/foreach}
                 </select>
             </div>
@@ -46,7 +46,7 @@
 
 {if (! $post_save) && ($edit || $new)}
     {if $edit}
-        <h2>{$category_name|escape:"html"|string_format:"{$CONST.EDIT_THIS_CAT}"}</h2>
+        <h2>{$category_name|escape|string_format:"{$CONST.EDIT_THIS_CAT}"}</h2>
     {/if}
         <form id="serendipity_category" method="POST" name="serendipityCategory">
             {$formToken}
@@ -54,12 +54,12 @@
             <div id="category_basics" class="clearfix">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
-                    <input id="category_name" pattern="^(?!({foreach $categories as $cat}{$cat.category_name}|{/foreach})$).*" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape:"html"}" title="Categoryname already exists">
+                    <input id="category_name" pattern="^(?!({foreach $categories as $cat}{$cat.category_name}|{/foreach})$).*" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape}" title="Categoryname already exists">
                 </div>
 
                 <div class="form_field">
                     <label for="category_description">{$CONST.DESCRIPTION}</label>
-                    <input id="category_description" name="serendipity[cat][description]" type="text" value="{$this_cat.category_description|default:""|escape:"html"}">
+                    <input id="category_description" name="serendipity[cat][description]" type="text" value="{$this_cat.category_description|default:""|escape}">
                 </div>
             </div>
 
@@ -108,7 +108,7 @@
                     <select id="read_authors" size="6" multiple name="serendipity[cat][read_authors][]">
                         <option value="0"{if $selectAllReadAuthors} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                     {foreach $groups as $group}
-                        <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if} >{$group.confvalue|escape:"html"}</option>
+                        <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if} >{$group.confvalue|escape}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -118,7 +118,7 @@
                     <select id="write_authors"size="6" multiple name="serendipity[cat][write_authors][]">
                         <option value="0"{if $selectAllReadAuthors} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                     {foreach $groups as $group}
-                        <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:"html"}</option>
+                        <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -131,12 +131,12 @@
             <div id="category_preview" class="clearfix additional_info">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
-                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape:"html"}">
+                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape}">
                 </div>
 
                 <figure id="preview">
                     <figcaption>{$CONST.PREVIEW}</figcaption>
-                    <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape:"html"}" alt="">
+                    <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape}" alt="">
                 </figure>
             </div>
 
@@ -172,20 +172,20 @@
             <li>
                 <div class="clearfix {cycle values="odd,even"}">
                     <details class="category_data">
-                        <summary>{$category.category_name|escape:"html"}</summary>
+                        <summary>{$category.category_name|escape}</summary>
 
                         <div class="category_info clearfix">
                         {if $category.category_description != ''}
-                            <span class="category_desc">{$category.category_description|escape:"html"}</span>
+                            <span class="category_desc">{$category.category_description|escape}</span>
                         {/if}
-                            (<span>{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape:"html"}{/if}</span>)
+                            (<span>{if $category.authorid == 0}{$CONST.ALL_AUTHORS}{else}{$category.realname|escape}{/if}</span>)
                         </div>
                     </details>
 
                     <ul class="plainList clearfix edit_actions">
-                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT} {$category.category_name|escape:"html"}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT} {$category.category_name|escape}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                         <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=newSub&amp;serendipity[cid]={$category.categoryid}" title="Create Subcategory"><span class="icon-plus"></span><span class="visuallyhidden"> Create Subcategory</span></a></li> {* i18n *}
-                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE} {$category.category_name|escape:"html"}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE} {$category.category_name|escape}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                     </ul>
                 </div>
         {/foreach}

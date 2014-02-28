@@ -76,7 +76,7 @@
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
-    <form id="image_directory_edit_form" method="POST" action="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$dir|escape:'html'}">
+    <form id="image_directory_edit_form" method="POST" action="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$dir|escape}">
         {$formtoken}
         <input name="serendipity[oldDir]" type="hidden" value="{$use_dir}">
 
@@ -95,7 +95,7 @@
                 <select id="read_authors" name="serendipity[read_authors][]" multiple size="6">
                     <option value="0"{if $rgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                 {foreach $groups AS $group}
-                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
+                    <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape}</option>
                 {/foreach}
                 </select>
             </div>
@@ -105,7 +105,7 @@
                 <select id="write_authors" name="serendipity[write_authors][]" multiple size="6">
                     <option value="0"{if $wgroups} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                 {foreach $groups AS $group}
-                    <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape:'html'}</option>
+                    <option value="{$group.confkey}"{if isset($write_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape}</option>
                 {/foreach}
                 </select>
             </div>
@@ -126,14 +126,14 @@
 
     <p>{$CONST.DELETE_DIRECTORY_DESC}</p>
 
-    <form id="image_directory_delete_form" method="POST" action="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDoDelete&amp;serendipity[dir]={$dir|escape:'html'}">
+    <form id="image_directory_delete_form" method="POST" action="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDoDelete&amp;serendipity[dir]={$dir|escape}">
         {$formtoken}
         <div class="form_check">
             <input id="diredit_delete" name="serendipity[nuke]" type="checkbox" value="true">
             <label for="diredit_delete"><b>{$basename_dir}</b> - {$CONST.FORCE_DELETE}</label>
         </div>
 
-        {* I think this is redudant: <p>{$CONST.CONFIRM_DELETE_DIRECTORY|sprintf:$dir|escape:'html'}</p> *}
+        {* I think this is redudant: <p>{$CONST.CONFIRM_DELETE_DIRECTORY|sprintf:$dir|escape}</p> *}
         <div class="form_buttons">
             <input class="state_cancel" name="SAVE" type="submit" value="{$CONST.DELETE_DIRECTORY}">
         </div>
@@ -207,9 +207,9 @@
                 <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
 
                 <ul class="plainList clearfix edit_actions">
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.EDIT} {$folder.name}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreateSub&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="Create Subfolder"><span class="icon-plus"></span><span class="visuallyhidden"> Create Subfolder</span></a></li> {* i18n *}
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape:'html'}" title="{$CONST.DELETE} {$folder.name}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.EDIT} {$folder.name}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreateSub&amp;serendipity[dir]={$folder.relpath|escape}" title="Create Subfolder"><span class="icon-plus"></span><span class="visuallyhidden"> Create Subfolder</span></a></li> {* i18n *}
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.DELETE} {$folder.name}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
             </div>
     {/foreach}

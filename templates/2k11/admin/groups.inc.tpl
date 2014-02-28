@@ -1,11 +1,11 @@
 {if $delete_yes}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape:'html'}":"{$group.name|escape:'html'}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
 {/if}
 {if $save_new}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape:'html'}":"{$group.name|escape:'html'}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
 {/if}
 {if $save_edit}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape:'html'}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape}"}</span>
 {/if}
 
 {if !$delete}
@@ -14,10 +14,10 @@
     <ul id="serendipity_groups" class="plainList zebra_list">
     {foreach $groups as $group}
         <li class="clearfix {cycle values="odd,even"}">
-            <span class="group_name"><span class="icon-users"></span> {$group.name|escape:'html'}</span>
+            <span class="group_name"><span class="icon-users"></span> {$group.name|escape}</span>
             <ul class="plainList clearfix edit_actions">
-                <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape:'html'}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                <li><a class="button_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape:'html'}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                <li><a class="button_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>
         </li>
     {/foreach}
@@ -37,7 +37,7 @@
     {/if}
         <div class="clearfix odd form_field">
             <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button></label>
-            <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape:'html'}">
+            <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
             <span id="groupName_info" class="field_info additional_info">Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.</span>
         </div>
 
@@ -45,7 +45,7 @@
             <label for="group_members">{$CONST.USERCONF_GROUPS}</label>
             <select id="group_members" name="serendipity[members][]" multiple size="5">
                 {foreach $allusers as $user}
-                <option{if isset($selected.{$user.authorid})} selected{/if} value="{$user.authorid}">{$user.realname|escape:'html'}</option>
+                <option{if isset($selected.{$user.authorid})} selected{/if} value="{$user.authorid}">{$user.realname|escape}</option>
                 {/foreach}
             </select>
         </div>
@@ -77,11 +77,11 @@
             {/if}
             <li>
             {if !$perm.permission}
-                <div><var class="perm_name">[{$perm.permission_name|escape:'html'}]</var>: <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
+                <div><var class="perm_name">[{$perm.permission_name|escape}]</var>: <span class="perm_status">{(isset($from.{$perm@key}) && $from.{$perm@key} == "true") ? $CONST.YES : $CONST.NO}</span></div>
             {else}
                 <div class="form_check">
-                    <input id="{{$perm@key}|escape:'html'}" name="serendipity[{{$perm@key}|escape:'html'}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
-                    <label for="{{$perm@key}|escape:'html'}">{$perm.permission_note|escape:'html'} <var class="perm_name">[{$perm.permission_name|escape:'html'}]</var></label>
+                    <input id="{{$perm@key}|escape}" name="serendipity[{{$perm@key}|escape}]" type="checkbox" value="true"{if isset({$from.{$perm@key}}) && {$from.{$perm@key}} == "true"} checked="checked"{/if}>
+                    <label for="{{$perm@key}|escape}">{$perm.permission_note|escape} <var class="perm_name">[{$perm.permission_name|escape}]</var></label>
                 </div>
             {/if}
         {/foreach}
@@ -92,7 +92,7 @@
                 <label for="forbidden_plugins">{$CONST.PERMISSION_FORBIDDEN_PLUGINS}</label>
                 <select id="forbidden_plugins" name="serendipity[forbidden_plugins][]" multiple size="5">
                 {foreach $allplugins as $plugin}
-                    <option{if $plugin.has_permission === false} selected{/if} value="{{$plugin@key}|escape:'url'}">{$plugin.b->properties.name|escape:'html'}</option>
+                    <option{if $plugin.has_permission === false} selected{/if} value="{{$plugin@key}|escape:'url'}">{$plugin.b->properties.name|escape}</option>
                 {/foreach}
                 </select>
             </div>
@@ -101,7 +101,7 @@
                 <label for="forbidden_hooks">{$CONST.PERMISSION_FORBIDDEN_HOOKS}</label>
                 <select name="serendipity[forbidden_hooks][]" multiple size="5">
                 {foreach $allhooks as $hook}
-                    <option{if $hook.has_permission === false} selected{/if} value="{{$hook@key}|escape:'url'}">{{$hook@key}|escape:'html'}</option>
+                    <option{if $hook.has_permission === false} selected{/if} value="{{$hook@key}|escape:'url'}">{{$hook@key}|escape}</option>
                 {/foreach}
                 </select>
             </div>
@@ -119,11 +119,11 @@
     {if $delete}
     <form action="?serendipity[adminModule]=groups" method="post">
         {$formToken}
-        <input name="serendipity[group]" type="hidden" value="{$group_id|escape:'html'}">
+        <input name="serendipity[group]" type="hidden" value="{$group_id|escape}">
 
         <h2>{$CONST.MANAGE_GROUPS}</h2>
 
-        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape:'html'}"}</span>
+        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape}"}</span>
         
         <div id="groups_delete_action" class="form_buttons">
             <input class="state_cancel" name="NO" type="submit" value="{$CONST.NOT_REALLY}">

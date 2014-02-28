@@ -22,7 +22,7 @@
     {if ! empty($documentation) || $changelog || $documentation_local}
         <ul class="plainList">
         {if !empty($documentation)}
-            <li><a href="{$documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
+            <li><a href="{$documentation|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
         {/if}
         {if $changelog}
             <li><a href="plugins/{$plugin->act_pluginPath}/ChangeLog">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
@@ -50,7 +50,7 @@
         {$formToken}
         <input name="serendipity[adminModule]" type="hidden" value="plugins">
         <input name="serendipity[adminAction]" type="hidden" value="addnew">
-        <input name="serendipity[type]" type="hidden" value="{$type|escape:"html"}">
+        <input name="serendipity[type]" type="hidden" value="{$type|escape}">
 
         <div class="form_select">
             <label for="only_group">{$CONST.FILTERS}</label>
@@ -89,16 +89,16 @@
                         <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
                     {/if}
                     {if ! empty($plug.website)}
-                        <li class="plugin_web"><a href="{$plug.website|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
+                        <li class="plugin_web"><a href="{$plug.website|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
                     {/if}
                     {if ! empty($plug.local_documentation)}
-                        <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
+                        <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
                     {/if}
                     {if ! empty($plug.changelog)}
-                        <li class="plugin_changelog"><a href="{$plug.changelog|escape:"html"}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
+                        <li class="plugin_changelog"><a href="{$plug.changelog|escape}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
                     {/if}
                     {if ! empty({$plug.upgrade_version}) && $plug.upgrade_version != $plug.version}
-                        <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape:"html"}){/if}</li>
+                        <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape}){/if}</li>
                     {/if}
                     </ul>
                 </div>
