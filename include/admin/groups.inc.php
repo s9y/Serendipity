@@ -104,11 +104,12 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
         $data['allplugins'] = $allplugins;
         foreach($allplugins AS $plugid => $currentplugin) {
             foreach($currentplugin['b']->properties['event_hooks'] AS $hook => $set) {
-                $allhooks[$hook] = true;
+                $allhooks[$hook] = array();
             }
             $data['allplugins'][$plugid]['has_permission'] = serendipity_hasPluginPermissions($plugid, $from['id']);
         }
         ksort($allhooks);
+        
         $data['allhooks'] = $allhooks;
         foreach($allhooks AS $hook => $set) {
             $data['allhooks'][$hook]['has_permission'] = serendipity_hasPluginPermissions($hook, $from['id']);
