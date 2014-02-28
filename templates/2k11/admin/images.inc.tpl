@@ -116,7 +116,7 @@
         </div>
 
         <div class="form_buttons">
-            <a class="button_link state_submit" href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
+            <a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
             <input name="serendipity[save]" type="submit" value="{$CONST.SAVE}">
         </div>
     </form>
