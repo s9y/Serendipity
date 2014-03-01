@@ -66,14 +66,14 @@
                                 {if $plugin_data.sort_idx == 0}
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+up&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
-                                        <span class="icon-up-open"></span><span class="visuallyhidden"> UP</span>
+                                        <span class="icon-up-dir"></span><span class="visuallyhidden"> UP</span>
                                     </a> {* i18n *}
                                 {/if}
 
                                 {if $sort_idx == $total - 1}
                                 {else}
                                     <a href="?{$serendipity_setFormTokenUrl}&amp;serendipity[adminModule]=plugins&amp;submit=move+down&amp;serendipity[plugin_to_move]={$plugin_data.key}{if $event_only}&amp;serendipity[event_plugin]=true{/if}">
-                                        <span class="icon-down-open"></span><span class="visuallyhidden"> DOWN</span>
+                                        <span class="icon-down-dir"></span><span class="visuallyhidden"> DOWN</span>
                                     </a> {* i18n *}
                                 {/if}
                             </li>
