@@ -64,7 +64,7 @@
             </div>
 
             <h3 class="toggle_headline">
-                <button class="show_config_option icon_link {if $newSub}show_config_option_now{/if}" type="button" data-href="#category_subcats" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PARENT_CATEGORY}</button>
+                <button class="show_config_option icon_link {if $newSub}show_config_option_now{/if}" type="button" data-href="#category_subcats" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$CONST.PARENT_CATEGORY}</button>
             </h3>
 
             <div id="category_subcats" class="clearfix additional_info">
@@ -99,7 +99,7 @@
             </div>
 
             <h3 class="toggle_headline">
-                <button class="show_config_option icon_link" type="button" data-href="#category_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.PERMISSIONS}</button>
+                <button class="show_config_option icon_link" type="button" data-href="#category_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$CONST.PERMISSIONS}</button>
             </h3>
 
             <div id="category_permissions" class="clearfix additional_info">
@@ -125,7 +125,7 @@
             </div>
 
             <h3 class="toggle_headline">
-                <button class="show_config_option icon_link" type="button" data-href="#category_preview" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$CONST.CATEGORY} {$CONST.IMAGE}</button>
+                <button class="show_config_option icon_link" type="button" data-href="#category_preview" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$CONST.CATEGORY} {$CONST.IMAGE}</button>
             </h3>
 
             <div id="category_preview" class="clearfix additional_info">

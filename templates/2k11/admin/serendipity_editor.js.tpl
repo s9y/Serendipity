@@ -362,7 +362,7 @@
         if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
-            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-minus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-down-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
                 serendipity.toggle_extended(true);
@@ -376,12 +376,12 @@
         if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
             $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
-            $('#toggle_extended').find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+            $('#toggle_extended').find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
             localStorage.show_extended_editor = "true";
         } else {
             $('textarea[name="serendipity[extended]"]').hide();
             $('#tools_extended').hide();
-            $('#toggle_extended').find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
+            $('#toggle_extended').find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
             localStorage.show_extended_editor = "false";
         }
         if (setCookie) {
@@ -396,7 +396,7 @@
             // this function got called on load of the editor
             var toggleButton = '#toggle_' + id;
 
-            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
+            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -411,7 +411,7 @@
                 // when loading the page new for the preview and more than one category was
                 // selected, collapsing the category-selector would lose those categories
                 $('#'+id).attr("size", $('#'+id).children().size);
-                $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+                $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
                 return
             }
             
@@ -428,12 +428,12 @@
             }
             $('#'+id).removeAttr("multiple");
             $('#'+id).removeAttr("size");
-            $('#toggle_' + id).find('> .icon-minus').removeClass('icon-minus').addClass('icon-plus');
+            $('#toggle_' + id).find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
             
         } else {
             $('#'+id).attr("multiple", "");
             $('#'+id).attr("size", $('#'+id).children().size);
-            $('#toggle_' + id).find('> .icon-plus').removeClass('icon-plus').addClass('icon-minus');
+            $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
 
             var selected_categories = categoryselector_stored_categories;
             if (selected_categories != null) {
@@ -810,11 +810,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-minus') {
-                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+            if($toggleState == 'icon-down-dir') {
+                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
                 localStorage.show_advanced_options = "false";
             } else {
-                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
                 localStorage.show_advanced_options = "true";
             }
             $('#meta_data').toggleClass('additional_info');
@@ -844,11 +844,11 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-minus') {
-                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+            if($toggleState == 'icon-down-dir') {
+                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
                 localStorage.show_advanced_options = "false";
             } else {
-                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
                 localStorage.show_advanced_options = "true";
             }
             $('#adv_opts').toggleClass('additional_info');
@@ -876,10 +876,10 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             }
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-minus') {
-                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+            if($toggleState == 'icon-down-dir') {
+                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
             } else {
-                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
             }
             $($toggled).toggleClass('additional_info');
             e.preventDefault();
@@ -895,14 +895,14 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             var $toggleIcons = $($container).find('.show_config_option > span');
             var $toggleOption = $($container).find('.config_optiongroup');
             if(optsCollapsed) {
-                $toggleIcons.removeClass('icon-plus').addClass('icon-minus');
+                $toggleIcons.removeClass('icon-right-dir').addClass('icon-down-dir');
                 $toggleOption.removeClass('additional_info');
-                $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
                 optsCollapsed = false;
             } else {
-                $toggleIcons.removeClass('icon-minus').addClass('icon-plus');
+                $toggleIcons.removeClass('icon-down-dir').addClass('icon-right-dir');
                 $toggleOption.addClass('additional_info');
-                $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
                 optsCollapsed = true;
             }
             $(this).toggleClass('active');
@@ -1124,10 +1124,10 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         $toggles.prev().toggleClass('additional_info');
         var $toggleIcon = $el.find('> span');
         var $toggleState = $toggleIcon.attr('class');
-        if($toggleState == 'icon-minus') {
-            $toggleIcon.removeClass('icon-minus').addClass('icon-plus');
+        if($toggleState == 'icon-down-dir') {
+            $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
         } else {
-            $toggleIcon.removeClass('icon-plus').addClass('icon-minus');
+            $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
         }
         e.preventDefault();
     });

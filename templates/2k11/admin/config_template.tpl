@@ -5,7 +5,7 @@
         {$formToken}
 {/if}
 {if $config|@sizeof > 1 AND $allowToggle}
-    <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
+    <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
 {/if}
     <div id="serendipity_config_options">
     {foreach $config as $category}
@@ -13,7 +13,7 @@
         {if $config|@sizeof > 1}
             {if $allowToggle}
                 <h3 class="toggle_headline">
-                    <button id="optionel{$category@iteration}" class="show_config_option icon_link" type="button" data-href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-plus"></span> {$category.title}</button>
+                    <button id="optionel{$category@iteration}" class="show_config_option icon_link" type="button" data-href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$category.title}</button>
                 </h3>
             {else}
                 <h3>{$category.title}</h3>

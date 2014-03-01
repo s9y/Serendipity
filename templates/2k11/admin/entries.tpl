@@ -61,7 +61,7 @@
     </div>
 
     <fieldset id="edit_entry_metadata" class="clearfix">
-        <span class="wrap_legend"><legend><button id="toggle_metadata" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> Entry metadata</legend></span> {* i18n *}
+        <span class="wrap_legend"><legend><button id="toggle_metadata" class="button_link" type="button"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> Entry metadata</legend></span> {* i18n *}
 
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
@@ -115,7 +115,7 @@
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
         <fieldset id="advanced_options">
-            <span class="wrap_legend"><legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> {$CONST.ADVANCED_OPTIONS}</legend></span>
+            <span class="wrap_legend"><legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> {$CONST.ADVANCED_OPTIONS}</legend></span>
             <div id="adv_opts" class="additional_info">
             {$smarty.capture.advanced_options}
             </div>
