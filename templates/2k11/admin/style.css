@@ -1665,6 +1665,22 @@ form > .button_link:first-of-type,
     border-bottom: 1px solid #aaa;
 }
 
+.zebra_list > li,
+.option_list .odd,
+.option_list .even,
+.theme_options .odd,
+.theme_options .even,
+#uploads,
+.configure_plugin .odd,
+.configure_plugin .even,
+#categories .odd,
+#categories .even,
+#serendipity_image_folders .odd,
+#serendipity_image_folders .even {
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+}
+
 .theme_options > div:first-of-type {
     border-bottom: 1px solid #aaa;
     margin-bottom: 0;
