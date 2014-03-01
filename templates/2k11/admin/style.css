@@ -1500,7 +1500,7 @@ form > .button_link:first-of-type,
 }
 
 .category_info {
-    margin-left: 2.5em;
+    margin-left: 1em;
 }
 
 #template_select article,
@@ -1641,55 +1641,28 @@ form > .button_link:first-of-type,
 }
 
 .zebra_list,
-.option_list,
-#uploads,
-.configure_plugin .odd:first-of-type {
-    border-top: 1px solid #aaa;
+.option_list .odd,
+.option_list .even {
+    border: 1px solid #aaa;
 }
 
-.zebra_list > li,
-.option_list .odd,
-.option_list .even,
-.theme_options .odd,
-.theme_options .even,
-.configure_plugin .odd,
-.configure_plugin .even,
+.zebra_list .odd,
+.zebra_list .even,
 .upload_form {
     border-bottom: 1px solid #aaa;
 }
 
-.zebra_list > li,
-.option_list .odd,
-.option_list .even,
-.theme_options .odd,
-.theme_options .even,
-#uploads,
-.configure_plugin .odd,
-.configure_plugin .even {
-    border-left: 1px solid #aaa;
-    border-right: 1px solid #aaa;
+.zebra_list {
+    border-bottom: 0 none;
 }
 
-#categories .odd,
-#categories .even,
-#serendipity_image_folders .odd,
-#serendipity_image_folders .even {
-    border: 1px solid #aaa;
+.option_list .odd,
+.option_list .even {
     margin-top: -1px;
 }
 
-.theme_options > div:first-of-type {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: 0;
-    padding-bottom: 1.5em;
-}
-
-.zebra_list > .odd,
-.option_list > .odd,
-.theme_options .odd,
-.configure_plugin .odd,
-#categories .odd,
-#serendipity_image_folders .odd,
+.zebra_list .odd,
+.option_list .odd,
 .upload_form:nth-child(odd),
 .upload_form:nth-child(odd) input[type="file"] {
     background: #eee;
@@ -1729,9 +1702,7 @@ form > .button_link:first-of-type,
 .option_list .odd,
 .option_list .even,
 .configure_plugin .config_optiongroup .odd,
-.configure_plugin .config_optiongroup .even, 
-.configure_plugin .odd,
-.configure_plugin .even {
+.configure_plugin .config_optiongroup .even {
     padding-left: .4em;
 }
 
@@ -1920,10 +1891,6 @@ form > .button_link:first-of-type,
 
 .no-js .pluginmanager_place {
     margin-top: .5em;
-}
-
-.config_optiongroup_last {
-    border-bottom: 1px solid #aaa;
 }
 
 .plugin_count {

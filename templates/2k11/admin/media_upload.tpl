@@ -14,7 +14,7 @@
         <h3>Upload</h3> {* i18n *}
 
         <div class="panel">
-            <div id="uploads">
+            <div id="uploads" class="zebra_list">
                 <div id="upload_form_1" class="upload_form">
                     <div class="form_field clearfix">
                         <label for="userfile_1" class="uploadform_userfile_label">{$CONST.ENTER_MEDIA_UPLOAD}</label>

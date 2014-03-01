@@ -34,7 +34,7 @@
     {/if}
     </div>
 
-    <form class="configure_plugin" method="post" name="serendipityPluginConfigure">
+    <form class="configure_plugin option_list" method="post" name="serendipityPluginConfigure">
         {$formToken}
         {$config}
     </form>

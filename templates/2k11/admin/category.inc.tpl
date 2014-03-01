@@ -148,7 +148,7 @@
 {if $view}
     <h2>{$CONST.CATEGORIES}</h2>
     {if is_array($viewCats)}
-        <ul id="categories">
+        <ul id="categories" class="option_list">
         {foreach $viewCategories as $category}
             {if ! $category@first}
                 {if $category.depth > $priorDepth}

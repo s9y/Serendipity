@@ -181,7 +181,7 @@
 
     <h3>{$CONST.BASE_DIRECTORY}</h3>
 
-    <ul id="serendipity_image_folders">
+    <ul id="serendipity_image_folders" class="option_list">
     {foreach $folders as $folder}
         {if ! $folder@first}
             {if $folder.depth > $priorDepth}
