@@ -362,7 +362,8 @@
         if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
-            $('textarea[name="serendipity[extended]"]').parent().prepend('<a id="toggle_extended" class="button_link" href="#serendipity[extended]"><span class="icon-down-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>');
+            $('textarea[name="serendipity[extended]"]').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
+            $(toggleButton).prepend('<span class="icon-down-dir"></span> ');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
                 serendipity.toggle_extended(true);
@@ -806,7 +807,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     //       also works for advanced options (see below); also not sure if
     //       the localStorage stuff works here (seems to)
     if($('body').has('#edit_entry_metadata').size() > 0) {
-        $('#edit_entry_metadata legend > button').click(function() {
+        $('#toggle_metadata').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
@@ -820,7 +821,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             $('#meta_data').toggleClass('additional_info');
         });
         if (localStorage.show_advanced_options == "true") {
-            $('#edit_entry_metadata > legend > button').click();
+            $('#toggle_metadata').click();
         }
     }
 
@@ -840,7 +841,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Advanced options
     if($('body').has('#advanced_options').size() > 0) {
-        $('#advanced_options legend > button').click(function() {
+        $('#toggle_advanced').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
             var $toggleState = $toggleIcon.attr('class');
@@ -854,7 +855,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             $('#adv_opts').toggleClass('additional_info');
         });
         if (localStorage.show_advanced_options == "true") {
-            $('#advanced_options legend > button').click();
+            $('#toggle_advanced').click();
         }
     }
 

@@ -60,8 +60,8 @@
         <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
     </div>
 
-    <fieldset id="edit_entry_metadata" class="clearfix">
-        <span class="wrap_legend"><legend><button id="toggle_metadata" class="button_link" type="button"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> Entry metadata</legend></span> {* i18n *}
+    <div id="edit_entry_metadata" class="clearfix">
+        <button id="toggle_metadata" class="icon_link" type="button"><span class="icon-right-dir"></span> Entry metadata</button> {* i18n *}
 
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
@@ -110,16 +110,16 @@
                 </fieldset>
             </div>
         </div>
-    </fieldset>
+    </div>
     
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
-        <fieldset id="advanced_options">
-            <span class="wrap_legend"><legend><button id="toggle_advanced" class="button_link" type="button"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button> {$CONST.ADVANCED_OPTIONS}</legend></span>
+        <div id="advanced_options">
+            <button id="toggle_advanced" class="icon_link" type="button"><span class="icon-right-dir"></span> {$CONST.ADVANCED_OPTIONS}</button>
             <div id="adv_opts" class="additional_info">
             {$smarty.capture.advanced_options}
             </div>
-        </fieldset>
+        </div>
     {/if}
    
 </form>

@@ -865,7 +865,8 @@ label > span,
 .wrap_legend > legend > span,
 input[type=checkbox] + label,
 input[type=radio] + label,
-.form_check label {
+.form_check label,
+.js #toggle_extended label {
     font-weight: normal;
 }
 
@@ -903,7 +904,8 @@ input[type=checkbox],
 .filter_pane,
 #s9y_links > ul,
 #serendipity_category .inputs,
-#serendipity_customfields textarea {
+#serendipity_customfields textarea,
+#adv_opts {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -1419,7 +1421,8 @@ fieldset p,
 
 #entries_list .actions,
 .serendipityCommentForm,
-#captchabox .captcha {
+#captchabox .captcha,
+.editor_toolbar {
     margin-top: .75em;
 }
 
@@ -1478,10 +1481,6 @@ form > .button_link:first-of-type,
 #template_options,
 #pluginlist_sidebar {
     margin-bottom: 3em;
-}
-
-.editor_toolbar {
-    margin-top: .5em;
 }
 
 #serendipity_comments_list .actions {
@@ -1709,7 +1708,10 @@ form > .button_link:first-of-type,
     max-width: 85%;
 }
 
-.toggle_headline > button {
+.toggle_headline > button,
+#toggle_extended,
+#toggle_metadata,
+#toggle_advanced {
     text-align: left;
     width: 100%;
 }
