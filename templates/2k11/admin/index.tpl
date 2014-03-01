@@ -137,16 +137,16 @@
                             <li><a href="serendipity_admin.php?serendipity[adminModule]=configuration">{$CONST.CONFIGURATION}</a></li>
                         {/if}
                         {if 'adminTemplates'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">Configure Designs</a></li> {* i18n *}
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=templates">Designs</a></li> {* i18n *}
                         {/if}
                         {if 'adminPlugins'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins">{$CONST.CONFIGURE_PLUGINS}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=plugins">Plugins</a></li> {* i18n *}
                         {/if}
                         {if 'adminUsers'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=users">{$CONST.MANAGE_USERS}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=users">Users</a></li> {* i18n *}
                         {/if}
                         {if 'adminUsersGroups'|checkPermission}
-                            <li><a href="serendipity_admin.php?serendipity[adminModule]=groups">{$CONST.MANAGE_GROUPS}</a></li>
+                            <li><a href="serendipity_admin.php?serendipity[adminModule]=groups">Groups</a></li> {* i18n *}
                         {/if}
                         <li><a href="serendipity_admin.php?serendipity[adminModule]=maintenance">Maintenance</a></li>  {* i18n *}
                         {if $admin_vars.no_create !== true}
