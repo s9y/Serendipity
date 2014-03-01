@@ -24,9 +24,9 @@
             <ol class="plainList">
             {if is_array($comments)}
                 {foreach $comments as $comment}
-                <li><div class="comment_summary">
-                        <b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b> - {$comment.body|truncate:100:"&hellip;"}
-                    </div>
+                <li><b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b>
+                    <div class="comment_summary">{$comment.body|truncate:100:"&hellip;"}</div>
+
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
                     
                     <ul class="plainList actions">
