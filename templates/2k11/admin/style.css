@@ -1644,11 +1644,7 @@ form > .button_link:first-of-type,
 .zebra_list,
 .option_list,
 #uploads,
-.configure_plugin .odd:first-of-type,
-#categories .odd,
-#categories .even,
-#serendipity_image_folders .odd,
-#serendipity_image_folders .even {
+.configure_plugin .odd:first-of-type {
     border-top: 1px solid #aaa;
 }
 
@@ -1659,8 +1655,6 @@ form > .button_link:first-of-type,
 .theme_options .even,
 .configure_plugin .odd,
 .configure_plugin .even,
-#categories,
-#serendipity_image_folders,
 .upload_form {
     border-bottom: 1px solid #aaa;
 }
@@ -1672,13 +1666,17 @@ form > .button_link:first-of-type,
 .theme_options .even,
 #uploads,
 .configure_plugin .odd,
-.configure_plugin .even,
+.configure_plugin .even {
+    border-left: 1px solid #aaa;
+    border-right: 1px solid #aaa;
+}
+
 #categories .odd,
 #categories .even,
 #serendipity_image_folders .odd,
 #serendipity_image_folders .even {
-    border-left: 1px solid #aaa;
-    border-right: 1px solid #aaa;
+    border: 1px solid #aaa;
+    margin-top: -1px;
 }
 
 .theme_options > div:first-of-type {
