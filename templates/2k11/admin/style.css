@@ -1640,10 +1640,27 @@ form > .button_link:first-of-type,
     max-width: 99%;
 }
 
-.zebra_list,
+.zebra_list {
+    border: 1px solid #aaa;
+}
+
+.option_list {
+    border: solid #aaa;
+    border-width: 0px 1px 1px 1px;
+    background-color: #ddd;
+    margin-top: -1px;
+}
+
 .option_list .odd,
 .option_list .even {
-    border: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    background-color: white;
+}
+
+li > ul > li > .odd,
+li > ul > li > .even {
+    border-left: 1px solid #aaa;
 }
 
 .zebra_list .odd,
@@ -1658,7 +1675,7 @@ form > .button_link:first-of-type,
 
 .option_list .odd,
 .option_list .even {
-    margin-top: -1px;
+    margin-bottom: -1px;
 }
 
 .zebra_list .odd,
