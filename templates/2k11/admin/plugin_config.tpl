@@ -19,7 +19,7 @@
             <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
             {foreach $config_groupkeys AS $config_groupkey}
                 <div class="{cycle values='odd,even'}">
-                {$OUT_STACK[$config_groupkey]}
+                {$plugin_options[$config_groupkey]}
                 </div>
             {/foreach}
             </fieldset>
@@ -32,9 +32,9 @@
 <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
 <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
 <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
-{foreach $OUT_STACK_REST as $out_stack_config_item}
+{foreach $plugin_options_ungrouped as $plugin_option}
     <div class="configuration_group {cycle values='odd,even'}">
-    {$out_stack_config_item}
+    {$plugin_option}
     </div>
 {/foreach}
 {if $showSubmit_foot}

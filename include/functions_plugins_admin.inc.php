@@ -240,7 +240,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     $elcount = 0;
     $htmlnugget = array();
     
-    $out_stack = array();
+    $plugin_options = array();
     $data['config_names'] = $config_names;
 
     foreach ($config_names as $config_item) {
@@ -297,7 +297,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         switch ($ctype) {
             case 'seperator': 
                 $data['ctype'] = 'seperator';
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -320,7 +320,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['select_size']      = $select_size  = $cbag->get('select_size');
                 $data['select']           = $select = $cbag->get('select_values');
 
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -372,7 +372,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     $data['radio_button'][$radio_index]['index'] = htmlspecialchars($radio['desc'][$radio_index]);
                 }
 
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -385,7 +385,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                 }
                 $data['input_type'] = $input_type;
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -405,28 +405,28 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
                     serendipity_emit_htmlarea_code("nuggets{$elcount}", 'nuggets', true);
                 }
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                break;
 
             case 'content': 
                 $data['ctype'] = 'content';
                 $data['cbag_default'] = $cbag->get('default');
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'custom': 
                 $data['ctype'] = 'custom';
                 $data['cbag_custom'] = $cbag->get('custom');
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
             case 'hidden': 
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -445,7 +445,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['preview_height'] = $preview_height;
                 $data['value'] = $value;
 
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -572,7 +572,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 }
                 // Print the Javascript to drag-n-drop the list
                 // Finish the row
-                $out_stack[$config_item] = serendipity_smarty_show($tfile, $data);
+                $plugin_options[$config_item] = serendipity_smarty_show($tfile, $data);
 
                 break;
 
@@ -590,7 +590,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 );
                 ob_start();
                 serendipity_plugin_api::hook_event('backend_pluginconfig_' . $ctype, $eventData, $addData);
-                $out_stack[$config_item] = ob_get_contents();
+                $plugin_options[$config_item] = ob_get_contents();
                 ob_end_clean();
                 break;
         }
@@ -598,17 +598,17 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         
     }
     $data['config_groups'] = $config_groups;
-    $data['OUT_STACK']     = $out_stack;
+    $data['plugin_options'] = $plugin_options;
 
     if (is_array($config_groups)) {
         foreach($config_groups AS $config_header => $config_groupkeys) {
             foreach($config_groupkeys AS $config_groupkey) {
-                unset($out_stack[$config_groupkey]);
+                unset($plugin_options[$config_groupkey]);
             }
         }
     }
 
-    $data['OUT_STACK_REST'] = $out_stack;
+    $data['plugin_options_ungrouped'] = $plugin_options;
 
     // this is new - allowing easier access to script handling like toogle 
     $data['allow_admin_scripts'] = true;
