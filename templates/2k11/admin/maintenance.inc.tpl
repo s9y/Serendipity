@@ -51,7 +51,7 @@
     <section id="maintenance_export" class="equal_heights quick_list">
         <h3>{$CONST.EXPORT_ENTRIES}</h3>
 
-        <a class="button_link" href="{$serendipityBaseURL}rss.php?version=2.0&all=1"><span class="icon-rss"></span> {$CONST.EXPORT_FEED}</a>
+        <a class="button_link" href="{$serendipityBaseURL}rss.php?version=2.0&amp;all=1"><span class="icon-rss"></span> {$CONST.EXPORT_FEED}</a>
     </section>
 
     <section id="maintenance_import" class="equal_heights quick_list">
