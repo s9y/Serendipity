@@ -1796,7 +1796,7 @@ form > .button_link:first-of-type,
 
 #maintenance_cleanup .comment_status {
     float: none;
-    margin: 0;
+    margin: 0 0 .5em;
 }
 
 .pending {
