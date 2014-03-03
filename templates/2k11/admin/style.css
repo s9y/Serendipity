@@ -734,19 +734,8 @@ button[type="submit"]:focus {
 .toggle_info:hover,
 .toggle_info:focus,
 .toggle_info:active {
-    background: transparent;
-    border: 0 none;
     margin: 0 0 0 .4em;
-    padding: 0;
-}
-
-.toggle_info > .icon-info-circled:before {
-    color: #888;
-}
-
-.toggle_info:hover > span:before,
-.toggle_info:focus > span:before {
-    color: #222;
+    padding: 1px 3px;
 }
 
 input[type="date"],
