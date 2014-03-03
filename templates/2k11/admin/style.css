@@ -1107,13 +1107,6 @@ summary {
 
 /* LAYOUT
    ----------------------------------------------------------------- */
-/*#top > div,
-#main_menu > ul > li,
-#content {
-    margin-left: .75em;
-    margin-right: .75em;
-}*/
-
 #serendipity_customfields label {
     margin-right: 1em;
 }
@@ -1312,8 +1305,6 @@ summary {
    ----------------------------------------------------------------- */
 #main_menu {
     background: #ccdde7;
-    /*box-shadow: 0 1px 4px rgba(0,0,0,.5);
-    overflow: hidden;*/
 }
 
 #top > div,
@@ -1336,9 +1327,6 @@ summary {
 .js #main_menu,
 .js #content {
     float: left;
-    /*-webkit-transition: .2s all ease;
-    -moz-transition: .2s all ease;
-    transition: .2s all ease;*/
 }
 
 .active_nav #main_menu {
@@ -1355,37 +1343,20 @@ summary {
     overflow: hidden;
 }
 
-/*#main_menu h3 {
-    display: none;
-    visibility: hidden;
-}*/
-
-/*#main_menu > ul {
+#main_menu > ul {
     margin-bottom: .75em;
 }
 
-#main_menu li > ul > li {
-    float: left;
-    width: 50%;
-}
-
-#main_menu a {
-    display: inline-block;
-    padding: .2125em 0;
-}
-
 #main_menu a,
-#main_menu a:visited,*/
+#main_menu a:visited,
 .quick_list h3 a,
 .quick_list h3 a:visited {
     text-decoration: none;
 }
 
 #nav-toggle {
-    /*display: inline-block;*/
     float: left;
     font-size: 1.25em;
-    /*margin: .25em .5em;*/
     margin: .35em .8em 0 0;
 }
 
