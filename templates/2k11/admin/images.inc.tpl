@@ -45,7 +45,7 @@
     {if $go_back}
     <input class="go_back" type="button" value="{$CONST.BACK}">
     {else}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
+    <script>location.href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default";</script>
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {/if}
 {/if}
@@ -58,7 +58,7 @@
 
 {if $case_add}
     {if $smarty.post.adminSubAction == 'properties'}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
+    <script>location.href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default";</script>
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {else}
     {$showML_add}
@@ -171,7 +171,7 @@
         </div>
         {serendipity_hookPlugin hookAll=true hook="backend_directory_createoptions" addData=$folders}
         <div class="form_buttons">
-            <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
+            <a class="button_link" href="?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
             <input name="SAVE" type="submit" value="{$CONST.CREATE_DIRECTORY}">
         </div>
     </form>
@@ -244,7 +244,7 @@
     {if $print_SCALING_IMAGE}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_SCALING_IMAGE}</span>{/if}
     {if $print_serendipity_scaleImg}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_serendipity_scaleImg}</span>{/if}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DONE}</span>
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
+    <script>location.href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default";</script>
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
 {/if}
 {if $case_scaleSelect}
