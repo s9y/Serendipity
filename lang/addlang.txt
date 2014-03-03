@@ -1,1 +1,5 @@
-@define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+@define('MAINTAIN_TITLE', 'Maintenance');
+@define('MAINTAIN_CCT_PASS', '<span class="perm_name">[smarty clearCompiledTemplate()]</span>');
+@define('MAINTAIN_CCT_FAIL', 'Error: %s not allowed / not available!');
+@define('MAINTAIN_CCT_TITLE', 'Clear compiled Template');
+@define('MAINTAIN_CCT_INFO', 'This will purge compiled files of this template only, but will leave the used runtime files by this current template file.');
