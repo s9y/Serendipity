@@ -1,5 +1,5 @@
 <div id="maintenance" class="clearfix">
-    <h2>Maintenance</h2>  {* i18n *}
+    <h2>{$CONST.MAINTAIN_TITLE}</h2>
 
 {if $action == "integrity"}
     <div class="clearfix">
@@ -20,14 +20,33 @@
     </div>
 {/if}
 
+{if $cct_finish === true}
+        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CCT_PASS}</span>
+{/if}
+{if $cct_finish === false}
+        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CCT_FAIL|sprintf:$CONST.MAINTAIN_CCT_PASS}</span>
+{/if}
+
 {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
     <section id="maintenance_integrity" class="equal_heights quick_list">
         <h3>{$CONST.INTEGRITY}</h3>
 
-        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=integrity" title="{$CONST.INTEGRITY}"><span>{$CONST.INTEGRITY}</span></a> {* i18n *}
+        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=integrity" title="{$CONST.INTEGRITY}"><span>{$CONST.INTEGRITY}</span></a>
     </section>
 {/if}
+
+{if 'adminTemplates'|checkPermission}
+    <section id="maintenance_cleanup" class="equal_heights quick_list">
+        <h3>{$CONST.MAINTAIN_CCT_TITLE}</h3>
+
+        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=cct" title="{$CONST.MAINTAIN_CCT_TITLE}"><span>{$CONST.MAINTAIN_CCT_TITLE}</span></a>
+        <button class="toggle_info button_link" type="button" data-href="#cct_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
+        <span id="cct_info" class="comment_status additional_info">{$CONST.MAINTAIN_CCT_INFO}</span>
+    </section>
+{/if}
+
 {serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
+
 {if 'adminImport'|checkPermission}
     <section id="maintenance_export" class="equal_heights quick_list">
         <h3>{$CONST.EXPORT_ENTRIES}</h3>
@@ -76,5 +95,6 @@
         </form>
     </section>
 {/if}
+
 </div>
 <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
