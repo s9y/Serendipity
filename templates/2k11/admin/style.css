@@ -1794,6 +1794,11 @@ form > .button_link:first-of-type,
     margin: .5em;
 }
 
+#maintenance_cleanup .comment_status {
+    float: none;
+    margin: 0;
+}
+
 .pending {
     color: #666;
 }
