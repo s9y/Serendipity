@@ -715,13 +715,13 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     if($('body').has('#main_menu').size() > 0) {
         $('#nav-toggle').click(function(e) {
             var $el = $(this);
-            var $target = $el.attr('href');
+            var $target = $('body');
             var $icon = $el.find('span:first-child');
-            $($target).toggleClass('additional_info');
-            if($($target).hasClass('additional_info')) {
-                $icon.removeClass('icon-cancel').addClass('icon-menu');
-            } else {
+            $($target).toggleClass('active_nav');
+            if($($target).hasClass('active_nav')) {
                 $icon.removeClass('icon-menu').addClass('icon-cancel');
+            } else {
+                $icon.removeClass('icon-cancel').addClass('icon-menu');
             }
             e.preventDefault();
         });
