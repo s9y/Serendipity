@@ -66,13 +66,13 @@
 
             <ul class="clearfix">
                 <li id="user_menu"><h3>{$admin_vars.self_info}</h3>
-                    <ul>
-                        <li><a href="serendipity_admin.php">Dashboard</a></li> {* i18n *}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=logout">{$CONST.LOGOUT}</a></li>
+                    <ul class="clearfix">
+                        <li><a class="button_link" href="serendipity_admin.php" title="Dashboard"><span class="icon-home"></span><span class="visuallyhidden"> Dashboard</span></a></li> {* i18n *}
                     {if 'personalConfiguration'|checkPermission}
-                        <li><a href="serendipity_admin.php?serendipity[adminModule]=personal">{$CONST.PERSONAL_SETTINGS}</a></li>
+                        <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                     {/if}
-                        <li><a href="{$serendipityBaseURL}">{$CONST.BACK_TO_BLOG}</a></li>
+                        <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-globe"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                        <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-logout"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                     </ul>
                 </li>
                 {if 'adminEntries'|checkPermission OR 'adminEntriesPlugins'|checkPermission}
