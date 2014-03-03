@@ -1376,7 +1376,6 @@ summary {
 
 #main_menu #user_menu li {
     display: inline-block;
-    font-size: 1.25em;
     margin-right: .5em;
     width: auto;
 }
@@ -2904,6 +2903,28 @@ img.mfp-img {
 
     #main_menu {
         background: transparent;
+    }
+
+    #user_menu {
+        position: absolute;
+        top: 0;
+        right: 2.5%;
+        text-align: right;
+        width: auto;
+    }
+
+    #main_menu #user_menu h3 {
+        border: 0 none;
+        color: #ccdee7;
+        float: left;
+        font-weight: normal;
+        margin: 1em 1em 0 0;
+        padding: 0;
+    }
+
+    #user_menu > ul {
+        float: right;
+        margin-top: .6em;
     }
 
     #main_menu,
