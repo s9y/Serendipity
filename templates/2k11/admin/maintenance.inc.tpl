@@ -20,11 +20,11 @@
     </div>
 {/if}
 
-{if $cct_finish === true}
-        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CCT_PASS}</span>
+{if $cleanup_finish === true}
+        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CLEANCOMPILE_PASS}</span>
 {/if}
-{if $cct_finish === false}
-        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CCT_FAIL|sprintf:$CONST.MAINTAIN_CCT_PASS}</span>
+{if $cleanup_finish === false}
+        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CLEANCOMPILE_FAIL|sprintf:$CONST.MAINTAIN_CLEANCOMPILE_PASS}</span>
 {/if}
 
 {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
@@ -37,11 +37,11 @@
 
 {if 'adminTemplates'|checkPermission}
     <section id="maintenance_cleanup" class="equal_heights quick_list">
-        <h3>{$CONST.MAINTAIN_CCT_TITLE}</h3>
+        <h3>{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}</h3>
 
-        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=cct" title="{$CONST.MAINTAIN_CCT_TITLE}"><span>{$CONST.MAINTAIN_CCT_TITLE}</span></a>
-        <button class="toggle_info button_link" type="button" data-href="#cct_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
-        <span id="cct_info" class="comment_status additional_info">{$CONST.MAINTAIN_CCT_INFO}</span>
+        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=runcleanup" title="{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}"><span>{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}</span></a>
+        <button class="toggle_info button_link" type="button" data-href="#cleanup_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
+        <span id="cleanup_info" class="comment_status additional_info">{$CONST.MAINTAIN_CLEANCOMPILE_INFO}</span>
     </section>
 {/if}
 
