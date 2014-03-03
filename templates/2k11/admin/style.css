@@ -413,7 +413,6 @@ nav ol {
 #insert_image,
 form > a,
 form > button,
-#user_menu li,
 .edit_actions li,
 .actions li,
 #login .form_field label,
@@ -1098,10 +1097,16 @@ summary {
 /* LAYOUT
    ----------------------------------------------------------------- */
 #top > div,
-#main_menu > ul > li,
+#main_menu,
 #content {
-    margin-left: .75em;
-    margin-right: .75em;
+    margin: 0;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    width: 95%;
+}
+
+#workspace {
+    overflow: hidden;
 }
 
 #serendipity_customfields label {
@@ -1297,45 +1302,52 @@ summary {
     color: #fcfcfc;
 }
 
-#user_menu ul {
-    margin: 0 0 1em;
-}
-
-#user_menu li {
-    margin: 0 1em 0 0;
-}
-
-#user_menu .logged_in {
-    display: block;
-    margin: 0 0 1em;
-}
-
 
 /* NAVIGATION
    ----------------------------------------------------------------- */
-.smallscreen {
+.js #main_menu {
+    margin-left: -100%;
+}
+
+.js #content {
+    margin-right: 0;
+}
+
+.js #main_menu,
+.js #content {
+    float: left;
+}
+
+.active_nav #main_menu {
+    box-shadow: 1px 1px 4px rgba(0,0,0,.5);
+    margin-left: 0;
+    width: 80%;
+}
+
+.active_nav #content {
+    margin-right: -100%;
+}
+
+#main_menu {
     background: #ccdde7;
-    box-shadow: 0 1px 4px rgba(0,0,0,.5);
-    overflow: hidden;
 }
 
 #main_menu h3 {
-    display: none;
-    visibility: hidden;
+    border-bottom: 1px solid #aaa;
+    color: #666;
+    font-size: 1em;
+    margin-bottom: .5em;
+    padding-bottom: .25em;
 }
 
 #main_menu > ul {
     margin-bottom: .75em;
 }
 
-#main_menu li > ul > li {
-    float: left;
-    width: 50%;
-}
-
 #main_menu a {
-    display: inline-block;
-    padding: .2125em 0;
+    display: block;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 #main_menu a,
@@ -1346,9 +1358,15 @@ summary {
 }
 
 #nav-toggle {
+    float: left;
+    font-size: 1.25em;
+    margin: .35em .8em 0 0;
+}
+
+#main_menu #user_menu li {
     display: inline-block;
-    font-size: 1.5em;
-    margin: .25em .5em;
+    margin-right: .5em;
+    width: auto;
 }
 
 
@@ -2512,20 +2530,6 @@ img.mfp-img {
 /* SMALL SCREEN (e.g. smartphones)
    ----------------------------------------------------------------- */
 @media only screen and (min-width: 480px) {
-    #user_menu ul {
-        text-align: right;
-    }
-
-    #user_menu li {
-        margin: 0 0 0 1em;
-    }
-
-    #user_menu .logged_in {
-        display: inline;
-        float: left;
-        margin: 0 1em 0 0;
-    }
-
     #edit_entry_submit {
         top: -3.25em;
     }
@@ -2552,21 +2556,9 @@ img.mfp-img {
     .configuration_group .form_area textarea {
         max-width: 320px;
     }
-
-    #user_menu .logged_in {
-        display: block;
-        float: none;
-        margin: 0 0 .75em;
-    }
 }
 
 @media only screen and (min-width: 640px) {
-    #banner,
-    #user_menu {
-        float: left;
-        width: 50%;
-    }
-
     #entries_list h3,
     #serendipity_comments_list h4 {
         max-width: none;
@@ -2617,17 +2609,15 @@ img.mfp-img {
         font-size: 1em;
     }
 
-    h1,
+    h1 {
+        font-size: 1.25em;
+        line-height: 1.125em;
+        margin: .6em 0;
+    }
+
     h2 {
         font-size: 1.5em;
         line-height: 1em;
-    }
-
-    h1 {
-        margin: .5em 0 1.5em;
-    }
-
-    h2 {
         margin: 1em 0;
     }
 
@@ -2893,10 +2883,6 @@ img.mfp-img {
         margin: .6667em 0;
     }
 
-    #user_menu ul {
-        margin: .75em 0;
-    }
-
     #top > div,
     main {
         margin: 0 auto;
@@ -2904,15 +2890,40 @@ img.mfp-img {
         width: 96%;
     }
 
-    .smallscreen {
+    #main_menu {
         background: transparent;
-        box-shadow: none;
-        overflow: visible;
     }
 
-    #main_menu a {
-        display: block;
-        padding: .125em 0;
+    #user_menu {
+        position: absolute;
+        top: 0;
+        right: 2.5%;
+        text-align: right;
+        width: auto;
+    }
+
+    #main_menu #user_menu h3 {
+        border: 0 none;
+        color: #ccdee7;
+        float: left;
+        font-weight: normal;
+        margin: 1em 1em 0 0;
+        padding: 0;
+    }
+
+    #user_menu > ul {
+        float: right;
+        margin-top: .6em;
+    }
+
+    #main_menu,
+    #content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .js #main_menu {
+        margin-left: 0;
     }
 
     #nav-toggle {
@@ -2961,14 +2972,20 @@ img.mfp-img {
         width: 100%;
     }
 
-    #user_menu .logged_in {
-        display: inline-block;
-        margin: 0;
-    }
-
     #main_menu {
         float: left;
         margin: 0 2% 0 0;
+    }
+
+    #main_menu #user_menu {
+        border: 0 none;
+        padding: 0;
+    }
+
+    #main_menu #user_menu h3 {
+        background: transparent;
+        border: 0 none;
+        padding-top: 0;
     }
 
     #content {
