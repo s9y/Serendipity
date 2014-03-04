@@ -1,5 +1,4 @@
-/* NORMALIZE.CSS v2.1.2
-   ----------------------------------------------------------------- */
+/* NORMALIZE.CSS v2.1.2 */
 article,
 aside,
 details,
@@ -199,8 +198,7 @@ table {
 }
 
 
-/* BASE STYLES
-   ----------------------------------------------------------------- */
+/* BASE STYLES */
 html {
     font-size: .875em;
 }
@@ -246,8 +244,6 @@ img {
     vertical-align: middle;
 }
 
-/* Responsive media objects
-   http://unstoppablerobotninja.com/entry/fluid-images */
 embed,
 object,
 audio,
@@ -305,9 +301,8 @@ nav ol {
 }
 
 
-/* GENERIC CSS HELPER CLASSES
-   ----------------------------------------------------------------- */
-/* Hide only visually, but have it available for screenreaders */
+/* HELPER CLASSES */
+/* Hide visually, available for screenreaders */
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -338,8 +333,7 @@ nav ol {
 }
 
 
-/* ICON FONT:; http://fortawesome.github.com/Font-Awesome/
-   ----------------------------------------------------------------- */
+/* ICON FONT: http://fortawesome.github.com/Font-Awesome/ */
 @font-face {
     font-family: 'fontello';
     src: url('{TEMPLATE_PATH}font/fontello.eot?61076562');
@@ -407,8 +401,7 @@ nav ol {
 .icon-rss:before { content: '\e812'; }
 
 
-/* BACKEND HELPER CLASSES
-   ----------------------------------------------------------------- */
+/* BACKEND HELPER CLASSES */
 .icon_link,
 #insert_image,
 form > a,
@@ -524,8 +517,7 @@ form > button,
 }
 
 
-/* BASIC FORM STYLES (forked from formalize.me)
-   ----------------------------------------------------------------- */
+/* FORM STYLES */
 input[type="radio"],
 input[type="checkbox"] {
     position: relative;
@@ -776,9 +768,7 @@ textarea[disabled] {
     cursor: default;
 }
 
-/* Separate rule for Firefox.
-   Separate rule for IE, too.
-   Cannot stack with WebKit's. */
+/* Separate rule for FF + IE. Cannot stack with WebKit. */
 ::-webkit-input-placeholder {
     color: #888;
 }
@@ -832,8 +822,7 @@ optgroup {
 }
 
 
-/* BACKEND FORM STYLES
-   ----------------------------------------------------------------- */
+/* BACKEND FORM STYLES */
 label,
 .wrap_legend,
 figcaption {
@@ -950,14 +939,7 @@ input[type=checkbox],
 }
 
 
-/* COMMON STYLES (all resolutions)
-
-   Color scheme:
-   -------------
-   Dark blue:   #3e5f81     Lite blue:   #ccdee7
-   Orange:      #d06604     
-   Off black:   #222        Off white:   #fcfcfc
-   ----------------------------------------------------------------- */
+/* COMMON STYLES  */
 a,
 a:visited {
     color: #3e5f81;
@@ -1021,8 +1003,7 @@ summary {
 }
 
 
-/* BACKEND MESSAGES
-   ----------------------------------------------------------------- */
+/* MESSAGES */
 .msg_error,
 .msg_success,
 .msg_notice,
@@ -1065,8 +1046,7 @@ summary {
 }
 
 
-/* LAYOUT
-   ----------------------------------------------------------------- */
+/* LAYOUT */
 #top > div,
 #main_menu,
 #content {
@@ -1076,7 +1056,8 @@ summary {
     width: 95%;
 }
 
-#workspace {
+#workspace,
+.serendipity_statistics > .wide_box {
     overflow: hidden;
 }
 
@@ -1195,10 +1176,6 @@ summary {
     width: 100%;
 }
 
-.serendipity_statistics > .wide_box {
-    overflow: hidden; /* TEMP */
-}
-
 .media_choose .preview {
     background-repeat: no-repeat;
     height: auto;
@@ -1246,8 +1223,7 @@ summary {
 }
 
 
-/* HEADER
-   ----------------------------------------------------------------- */
+/* HEADER */
 #top {
     background: #3e5f81;
     background-image: -webkit-linear-gradient(#3e5f81, #294564);
@@ -1271,8 +1247,7 @@ summary {
 }
 
 
-/* NAVIGATION
-   ----------------------------------------------------------------- */
+/* NAVIGATION */
 .js #main_menu {
     margin-left: -100%;
 }
@@ -1338,8 +1313,7 @@ summary {
 }
 
 
-/* CONTENT
-   ----------------------------------------------------------------- */
+/* CONTENT */
 #content {
     padding-bottom: 1.5em;
 }
@@ -1797,9 +1771,7 @@ label .perm_name,
 }
 
 
-/* FOOTER
-   ----------------------------------------------------------------- */
-
+/* FOOTER */
 #meta {
     border-top: 1px solid #aaa;
     color: #3e5f81;
@@ -1813,8 +1785,7 @@ label .perm_name,
 }
 
 
-/* LOGIN FORM
-   ----------------------------------------------------------------- */
+/* LOGIN FORM */
 #login {
     margin: 2em auto 4em;
     max-width: 22em;
@@ -1825,8 +1796,7 @@ label .perm_name,
 }
 
 
-/* PLUGIN MANAGER
-   ----------------------------------------------------------------- */
+/* PLUGIN MANAGER */
 .pluginmanager_container {
     background: transparent;
     border: 1px solid #ddd;
@@ -1960,7 +1930,6 @@ label .perm_name,
     z-index: 2000;
 }
 
-/* Touch/no-js fallback */
 .nojs-controls,
 .touch .pluginmanager_grablet {
     display: none;
@@ -1974,8 +1943,7 @@ label .perm_name,
 }
 
 
-/* MEDIA DB
-   ----------------------------------------------------------------- */
+/* MEDIA DB */
 .media_pane .pagination,
 .no-js .media_file_preview img,
 .js .template_wrap,
@@ -2063,7 +2031,7 @@ input[name="serendipity[filter][fileCategory]"] {
     border-right: 0 none;
 }
 
-/* These need an IE8 fallback */
+/* Needs IE8 fallback */
 .media_selector:first-of-type,
 .tabs > ul .first > a {
     border-radius: 4px 0 0 4px;
@@ -2100,8 +2068,7 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 /* end TEMP fixes */
 
-/* MAGNIFIC POPUP https://github.com/dimsemenov/Magnific-Popup
-   ----------------------------------------------------------------- */
+/* MAGNIFIC POPUP  */
 .mfp-bg {
   top: 0;
   left: 0;
@@ -2497,8 +2464,7 @@ img.mfp-img {
   padding-top: 0; }
 
 
-/* SMALL SCREEN (e.g. smartphones)
-   ----------------------------------------------------------------- */
+/* SMALL SCREEN */
 @media only screen and (min-width: 480px) {
     #edit_entry_submit {
         top: -3.25em;
@@ -2572,8 +2538,7 @@ img.mfp-img {
 }
 
 
-/* MEDIUM SCREEN (e.g. tablets)
-   ----------------------------------------------------------------- */
+/* MEDIUM SCREEN */
 @media only screen and (min-width: 768px) {
     html {
         font-size: 1em;
@@ -2745,7 +2710,6 @@ img.mfp-img {
         margin-top: 0;
     }
 
-    /* Plugin manager */
     .pluginmanager_side {
         float: left;
         margin: 0 0 1.5em;
@@ -2769,8 +2733,7 @@ img.mfp-img {
 }
 
 
-/* LARGE SCREEN (e.g. netbooks)
-   ----------------------------------------------------------------- */
+/* LARGE SCREEN */
 @media only screen and (min-width: 900px) {
     #edit_entry_status_comments .form_check {
         margin-bottom: 0;
@@ -2987,17 +2950,13 @@ img.mfp-img {
 }
 
 
-/* LARGER SCREEN (e.g. laptops)
-   ----------------------------------------------------------------- */
+/* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
     .js .configuration_group .media_choose input {
         max-width: 42.5%;
     }
 }
 
-
-/* HUGE SCREEN (e.g. desktops)
-   ----------------------------------------------------------------- */
 @media only screen and (min-width: 1600px) {
     html {
         font-size: 1.125em;
