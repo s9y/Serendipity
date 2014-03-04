@@ -1820,7 +1820,7 @@ form > .button_link:first-of-type,
     text-decoration: none;
 }
 
-.perm_name,
+label .perm_name,
 .installer pre {
     color: #888;
 }
