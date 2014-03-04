@@ -21,10 +21,10 @@
 {/if}
 
 {if $cleanup_finish === true}
-        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CLEANCOMPILE_PASS}</span>
+        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CLEANCOMPILE_PASS|sprintf:$cleanup_template}</span>
 {/if}
 {if $cleanup_finish === false}
-        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CLEANCOMPILE_FAIL|sprintf:$CONST.MAINTAIN_CLEANCOMPILE_PASS}</span>
+        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CLEANCOMPILE_FAIL|sprintf:($CONST.MAINTAIN_CLEANCOMPILE_PASS|sprintf:$cleanup_template)}</span>
 {/if}
 
 {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
