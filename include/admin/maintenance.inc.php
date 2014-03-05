@@ -1,10 +1,10 @@
 <?php
 
-@define('MAINTAIN_TITLE', 'Maintenance');
-@define('MAINTAIN_CLEANCOMPILE_PASS', '<span class="perm_name">[smarty clearCompiledTemplate(%s)]</span>');
-@define('MAINTAIN_CLEANCOMPILE_FAIL', 'Error: %s not allowed / not available!');
-@define('MAINTAIN_CLEANCOMPILE_TITLE', 'Clear compiled Template');
-@define('MAINTAIN_CLEANCOMPILE_INFO', 'This will purge compiled files of this template only, but will leave the used runtime files by this current template file.');
+@define('MENU_MAINTENANCE', 'Maintenance');
+@define('MENU_MAINTENANCE_CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
+@define('MENU_MAINTENANCE_CLEANCOMPILE_FAIL', 'No clearance or compiled template files available!');
+@define('MENU_MAINTENANCE_CLEANCOMPILE_TITLE', 'Clear compiled Template');
+@define('MENU_MAINTENANCE_CLEANCOMPILE_INFO', 'This will purge compiled files of this template only, but will leave the used runtime files by this current template file.');
 
 $data = array();
 
@@ -31,14 +31,10 @@ switch($serendipity['GET']['adminAction']) {
         // to not have the following automated recompile, force the servers memory to get exhausted,
         // when using plugins like serendipity_event_gravatar plugin, which can eat up some MB...
         // Restriction to template means: leave the page we are on: ../admin/index.tpl and all others, which are set, included and compiled by runtime. (plugins, etc. this can be quite some..!)
-        $finish = null;
         if(method_exists($serendipity['smarty'], 'clearCompiledTemplate')) {
-            if( $serendipity['smarty']->clearCompiledTemplate(null, $serendipity['template']) ) {
-                $finish = true;
-            } else { $finish = false; }
+            $data['cleanup_finish']   = (int)$serendipity['smarty']->clearCompiledTemplate(null, $serendipity['template']);
+            $data['cleanup_template'] = $serendipity['template'];
         }
-        $data['cleanup_template'] = $serendipity['template'];
-        $data['cleanup_finish'] = $finish;
         break;
 }
 

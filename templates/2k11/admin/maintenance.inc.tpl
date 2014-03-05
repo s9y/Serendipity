@@ -20,11 +20,11 @@
     </div>
 {/if}
 
-{if $cleanup_finish === true}
-        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! {$CONST.MAINTAIN_CLEANCOMPILE_PASS|sprintf:$cleanup_template}</span>
+{if $cleanup_finish > 0}
+        <span class="msg_success"><span class="icon-ok-circled"></span>{$CONST.DONE}! <span class="perm_name">{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_PASS|sprintf:$cleanup_template}</span></span>
 {/if}
-{if $cleanup_finish === false}
-        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MAINTAIN_CLEANCOMPILE_FAIL|sprintf:($CONST.MAINTAIN_CLEANCOMPILE_PASS|sprintf:$cleanup_template)}</span>
+{if $cleanup_finish === 0}
+        <span class="msg_error"><span class="icon-attention-circled"></span>{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_FAIL}</span>
 {/if}
 
 {if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
@@ -37,11 +37,11 @@
 
 {if 'adminTemplates'|checkPermission}
     <section id="maintenance_cleanup" class="equal_heights quick_list">
-        <h3>{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}</h3>
+        <h3>{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_TITLE}</h3>
 
-        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=runcleanup" title="{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}"><span>{$CONST.MAINTAIN_CLEANCOMPILE_TITLE}</span></a>
+        <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=maintenance&amp;serendipity[adminAction]=runcleanup" title="{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_TITLE}"><span>{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_TITLE}</span></a>
         <button class="toggle_info button_link" type="button" data-href="#cleanup_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>
-        <span id="cleanup_info" class="comment_status additional_info">{$CONST.MAINTAIN_CLEANCOMPILE_INFO}</span>
+        <span id="cleanup_info" class="comment_status additional_info">{$CONST.MENU_MAINTENANCE_CLEANCOMPILE_INFO}</span>
     </section>
 {/if}
 
