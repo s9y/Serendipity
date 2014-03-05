@@ -51,6 +51,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
         }
     </script>
 <?php
+        }
     }
 }
 
