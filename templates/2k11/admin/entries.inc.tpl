@@ -133,7 +133,7 @@
                 <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}">
                     {if NOT $simpleFilters}
                         <div class="form_check">
-                            <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">{CONST.TOGGLE_SELECT} (#{$entry_id})</label>
+                            <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT} (#{$entry_id})</label>
                         </div>
                     {/if}
 

@@ -3,7 +3,7 @@
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-@define('PLUGIN_KARMA_DB_VERSION', '2.1');
+@define('PLUGIN_KARMA_DB_VERSION', '2.2');
 
 class serendipity_event_karma extends serendipity_event
 {
@@ -44,7 +44,7 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz');
-        $propbag->add('version',       '2.9');
+        $propbag->add('version',       '2.10');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -385,7 +385,11 @@ class serendipity_event_karma extends serendipity_event
 
         $version = $this->get_config('dbversion', '0');
 
-        if ($version == '2.0') {
+        if ($version == "2.1") {
+            $q   = "ALTER TABLE {$serendipity['dbPrefix']}karmalog ADD votetime INT(11) default null";
+            $sql = serendipity_db_schema_import($q);
+            $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
+        } elseif ($version == '2.0') {
             $q   = "ALTER TABLE {$serendipity['dbPrefix']}karmalog CHANGE COLUMN ip ip VARCHAR(45)";
             $sql = serendipity_db_schema_import($q);
             $this->set_config('dbversion', PLUGIN_KARMA_DB_VERSION);
@@ -1760,7 +1764,7 @@ function invertSelection() {
 ");
                     } else {
                         print("
-<span class='msg_notice'><span class='icon-info-circled'></span> No entries to display.</span>
+<span class='msg_notice'><span class='icon-info-circled'></span> No logs to display. You need to enable karma logging, if you want to see single votes displayed here.</span>
 ");
                     }
 
