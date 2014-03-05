@@ -368,7 +368,10 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     exit;
 } else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
     $serendipity['view'] = 'plugin';
-    #include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+    
+    if (strpos($matches[2], 'admin/')  !== false) {
+        include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+    }    
 
     #echo $serendipity["handler"]["test.js"];
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
