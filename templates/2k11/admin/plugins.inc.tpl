@@ -127,8 +127,9 @@
     <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
     <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
     <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
-    <script src="{serendipity_getFile file='admin/js/jquery.tabs.js'}"></script>
-    <div class="tabs">
+    <script src="{serendipity_getFile file="admin/js/jquery.cookie.js"}"></script>
+    <script src="{serendipity_getFile file="admin/js/jquery.tabs.js"}"></script>
+    <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel"> 
             <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>Install a new sidebar plugin</a> {* i18n *}

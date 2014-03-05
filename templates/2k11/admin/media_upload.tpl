@@ -10,7 +10,7 @@
     <input name="serendipity[adminAction]" type="hidden" value="add">
     {$media.form_hidden}
 
-    <div class="clearfix tabs">
+    <div class="clearfix tabs" id="mediaupload_tabs">
         <h3>Upload</h3> {* i18n *}
 
         <div class="panel">
@@ -75,4 +75,5 @@
         {/if}
     </div>
 </form>
+<script src="{serendipity_getFile file='admin/js/jquery.cookie.js'}"></script>
 <script src="{serendipity_getFile file='admin/js/jquery.tabs.js'}"></script>
