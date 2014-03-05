@@ -36,7 +36,7 @@
 
     <div id="edit_entry_submit">
         <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:'o-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
-        <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="Select category"><span class="icon-list-bullet"></span><span class="visuallyhidden">Select category</span></a> {* i18n *}
+        <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="Select category"><span class="icon-list-bullet"></span><span class="visuallyhidden">{$CONST.CATEGORIES}</span></a>
         <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
         <input type="submit" value="{$CONST.SAVE}">
     </div>
@@ -61,7 +61,7 @@
     </div>
 
     <div id="edit_entry_metadata" class="clearfix">
-        <button id="toggle_metadata" class="icon_link" type="button"><span class="icon-right-dir"></span> Entry metadata</button> {* i18n *}
+        <button id="toggle_metadata" class="icon_link" type="button"><span class="icon-right-dir"></span> {$CONST.ENTRY_METADATA}</button>
 
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
@@ -73,7 +73,7 @@
             </div>
         {/if}
             <div id="edit_entry_status" class="form_select">
-                <label for="entry_status">Entry status</label> {* i18n *}
+                <label for="entry_status">{$CONST.ENTRY_STATUS}</label>
                 <select id="entry_status" name="serendipity[isdraft]">
                 {if $entry_vars.serendipityRightPublish}
                     <option value="false"{if $entry_vars.draft_mode == 'publish'} selected{/if}>{$CONST.PUBLISH}</option>

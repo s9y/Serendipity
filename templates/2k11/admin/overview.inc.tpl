@@ -5,17 +5,17 @@
 {$backend_frontpage_display}
     <div id="dashboard" class="clearfix">
     {if $published}
-        <span class="msg_success"><span class="icon-ok-circled"></span> Entry #{$published} published</span> {* i18n *}
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_PUBLISHED|sprintf:$published|escape}</span>
     {/if}
     {if $error_publish}
-        <span class="msg_error"><span class="icon-attention-circled"></span> Error publishing entry: {$error_publish}</span> {* i18n *}
+        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
     {/if}
 
     {if $update}
         <section id="dashboard_update">
-            <h3>Update notification</h3> {* i18n *}
+            <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-            <span class="msg_notice"><span class="icon-info-circled"></span> New stable Serendipity version available: {$curVersion}</span> {* i18n *}
+            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
         </section>
     {/if}
         <section id="dashboard_comments" class="equal_heights quick_list">
@@ -76,7 +76,7 @@
                         
                     </ul>
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
-                    <span class="entry_status status_future">Scheduled{* $CONST.ENTRY_PUBLISHED_FUTURE *}</span>{* i18n *} 
+                    <span class="entry_status status_future">{$CONST.SCHEDULED}</span>
                 {/if}
                 {if $entry.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>

@@ -19,7 +19,7 @@
 @define('HAVE_TO_BE_LOGGED_ON', 'Sie müssen angemeldet sein, um diese Seite zu sehen');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Das Passwort oder der Username war falsch. Bitte wiederholen Sie die Eingabe.');
 @define('APPEARANCE', 'Aussehen');
-@define('MANAGE_STYLES', 'Styles verwalten');
+@define('MANAGE_STYLES', 'Templates verwalten');
 @define('CONFIGURE_PLUGINS', 'Plugins verwalten');
 @define('CONFIGURATION', 'Konfiguration');
 @define('BACK_TO_BLOG', 'Zurück zum Blog');
@@ -960,7 +960,7 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
-@define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Styles verwalten-Seite muss danach neu geladen werden)');
+@define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Templates verwalten-Seite muss danach neu geladen werden)');
 @define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
 @define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
 @define('MODERATE_SELECTED_COMMENTS', 'Markierte Kommentare freischalten');
@@ -977,3 +977,46 @@
 
 // added 2012-11-29
 @define('PLAIN_ASCII_NAMES', '(keine Sonderzeichen, Umlaute)');
+// New 2.0 constants
+@define('SIMPLE_FILTERS', 'Vereinfachte Filter');
+@define('SIMPLE_FILTERS', 'Wenn aktiviert, werden Suchformulare und Filteroptionen auf die notwendigen Optionen reduziert. Ist diese Option deaktiviert, werden alle erweiterten Filteroptionen, z.b. beim Eintrags-Editor oder der Mediendatenbank, angezeigt.');
+@define('TOGGLE_SELECT', 'Zu Auswahl hinzufügen');
+@define('MORE', 'Mehr');
+@define('ENTRY_STATUS', 'Eintragsstatus');
+@define('SCHEDULED', 'Vorgemerkt');
+@define('PUBLISHED', 'Veröffentlicht');
+@define('ENTRY_METADATA', 'Eintrags-Metadaten');
+@define('NAVIGATION', 'Navigation');
+@define('MAIN_MENU', 'Hauptmenü');
+@define('MENU_PERSONAL', 'Persönliches Menü');
+@define('MENU_DASHBOARD', 'Dashboard');
+@define('MENU_ACTIVITY', 'Aktivität');
+@define('MENU_SETTINGS', 'Einstellungen');
+@define('MENU_TEMPLATES', 'Templates');
+@define('MENU_PLUGINS', 'Plugins');
+@define('MENU_USERS', 'Benutzer');
+@define('MENU_GROUPS', 'Gruppen');
+@define('MENU_MAINTENANCE', 'Wartung');
+@define('ALIGN_TOP', 'Oben');
+@define('ALIGN_LEFT', 'Links');
+@define('ALIGN_RIGHT', 'Rechts');
+@define('SHOW_METADATA', 'Metadaten zeigen');
+@define('RANGE_FROM', 'Von');
+@define('RANGE_TO', 'Bis');
+@define('UPLOAD', 'Upload');
+@define('DOWNLOAD', 'Download');
+@define('ENTRY_PUBLISHED', 'Eintrag #%s veröffentlicht');
+@define('PUBLISH_ERROR', 'Fehler bei der Veröffentlichung:');
+@define('UPDATE_NOTIFICATION', 'Update-Hinweis');
+@define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfpgbar: ');
+@define('MOVE', 'Bewegen');
+@define('MOVE_UP', 'Nach oben');
+@define('MOVE_DOWN', 'Nach unten');
+@define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Seitenleisten-Plugin installieren');
+@define('INSTALL_NEW_EVENT_PLUGIN', 'Ereignis-Plugin installieren');
+@define('TEMPLATE_OPTIONS', 'Template-Optionen');
+@define('CURRENT_TEMPLATE', 'Aktuelles Template');
+@define('TEMPLATE_INFO', 'Template-Informationen');
+@define('AVAILABLE_TEMPLATES', 'Verfügbare Templates');
+@define('TIMESTAMP_RESET', 'Das Datum wurde auf die aktuelle Systemzeit gesetzt.');
+

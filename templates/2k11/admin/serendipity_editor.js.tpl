@@ -780,7 +780,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         }
         e.preventDefault();
         // Inline notification, we might want to make this reuseable
-        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled"></span>Timestamp has been reset <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel"></span><span class="visuallyhidden">Remove message</span></a></span>').insertBefore('#edit_entry_title'); // i18n
+        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
         // Remove timestamp msg
         $('.remove_msg').click(function(e) {
             e.preventDefault();

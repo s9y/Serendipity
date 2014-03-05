@@ -12,7 +12,7 @@
         {/if}
     {/if}
     {if $error_name}
-         <span class="msg_error"><span class="icon-attention-circled"></span> Could not create category: Name already in use</span> {* i18n *}
+         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CATEGORY_ALREADY_EXIST|sprintf:$cat_data.category_name|escape}</span>
     {/if}
 {/if}
 {if $doDelete}
@@ -184,7 +184,7 @@
 
                     <ul class="plainList clearfix edit_actions">
                         <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=edit&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.EDIT} {$category.category_name|escape}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=newSub&amp;serendipity[cid]={$category.categoryid}" title="Create Subcategory"><span class="icon-plus"></span><span class="visuallyhidden"> Create Subcategory</span></a></li> {* i18n *}
+                        <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=newSub&amp;serendipity[cid]={$category.categoryid}" title="Create Subcategory"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.CREATE_NEW_CAT}</span></a></li>
                         <li><a class="button_link" href="?serendipity[adminModule]=category&amp;serendipity[adminAction]=delete&amp;serendipity[cid]={$category.categoryid}" title="{$CONST.DELETE} {$category.category_name|escape}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                     </ul>
                 </div>

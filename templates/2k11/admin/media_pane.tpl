@@ -8,7 +8,7 @@
         {$media.token}
         {$media.form_hidden}
         <ul class="filters_toolbar clearfix plainList">
-            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
             <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             <li id="media_filter_path">
                 <div class="form_select">
@@ -44,19 +44,19 @@
                     {if $so_val.type == 'date'}
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
-                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
+                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
                                 <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
                                  - 
-                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
+                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
                                 <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|@escape}">
                             </div>
                     {elseif $so_val.type == 'intrange'}
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
-                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">From</label> {* i18n *}
+                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
                                 <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|@escape}">
                                  - 
-                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">To</label> {* i18n *}
+                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
                                 <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|@escape}">
                             </div>
                     {elseif $so_val.type == 'authors'}
@@ -166,7 +166,7 @@
         {$MEDIA_ITEMS}
         {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
         <nav class="pagination">
-            <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3> {* i18n *}
+            <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
 
             <ul class="clearfix">
                 <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>

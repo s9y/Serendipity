@@ -132,7 +132,7 @@
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel"> 
             <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
-            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>Install a new sidebar plugin</a> {* i18n *}
+            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
 
             {$backend_plugins_sidebar_header}
             {$sidebar_plugins}
@@ -140,7 +140,7 @@
         
         <section id="pluginlist_event" class="panel">
             <h3>{$CONST.EVENT_PLUGINS}</h3>
-            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>Install a new event plugin</a> {* i18n *}
+            <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>
 
             {$backend_plugins_event_header}
             {$event_plugins}
@@ -148,7 +148,7 @@
     </div>
     {if $memsnaps}
     <section>
-        <h3>Memory Usage</h3> {* i18n *}
+        <h3>RAM</h3>
 
         <pre>{$memSnaps|print_r}</pre>
     </section>

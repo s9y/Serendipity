@@ -16,7 +16,7 @@
         <input name="serendipity[page]" type="hidden" value="{$page}">
 
         <ul class="filters_toolbar plainList">
-            <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
             <li><div class="backend_comments">{$backend_comments_top}</div></li>
         </ul>
 
@@ -113,7 +113,7 @@
                 {foreach $comments AS $comment}
                     <li id="comment_{$comment.id}" class="clearfix {cycle values="odd,even"} {if ($comment.status == 'pending') || ($comment.status == 'confirm')}pending{/if}"><div class="form_check">
                             <input id="multidelete_comment{$comment.id}" class="multidelete" type="checkbox" name="serendipity[delete][{$comment.id}]" value="{$comment.entry_id}" data-multidelid="comment_{$comment.id}">
-                            <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">Multiselect this comment</label> {* i18n *}
+                            <label for="serendipity_multidelete_comment_{$comment.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                         </div>
 
                         <h4 id="c{$comment.id}">{$comment.author|escape|truncate:40:"&hellip;"} {$CONST.IN} {($comment.type == 'NORMAL') ? $CONST.COMMENT : (($comment.type == 'TRACKBACK') ? $CONST.TRACKBACK : $CONST.PINGBACK )} #{$comment.id} - {$CONST.IN_REPLY_TO}

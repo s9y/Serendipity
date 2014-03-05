@@ -11,7 +11,7 @@
     {$media.form_hidden}
 
     <div class="clearfix tabs" id="mediaupload_tabs">
-        <h3>Upload</h3> {* i18n *}
+        <h3>{$CONST.UPLOAD}</h3>
 
         <div class="panel">
             <div id="uploads" class="zebra_list">
@@ -43,7 +43,7 @@
             <button id="add_upload" class="button_link" type="button" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></button>
         </div>
 
-        <h3>Download</h3> {* i18n *}
+        <h3>{$CONST.DOWNLOAD}</h3>
 
         <div class="panel">
             <div id="downloads">

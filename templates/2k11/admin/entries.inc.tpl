@@ -8,7 +8,7 @@
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
 
         <ul class="filters_toolbar plainList">
-            <li><a class="button_link" href="#filter_entries" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> Show filters</span></a></li> {* i18n *}
+            <li><a class="button_link" href="#filter_entries" title="{$CONST.FILTERS}"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
             <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             {if NOT $simpleFilters}
                 <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="form_select">
-                    <label for="filter_draft">Entry status</label> {* i18n *}
+                    <label for="filter_draft">{$CONST.ENTRY_STATUS}</label>
                     <select id="filter_draft" name="serendipity[filter][isdraft]">
                         <option value="all">{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="draft" {(isset($get.filter.isdraft) && ($get.filter.isdraft == 'draft') ? 'selected' : '')}>{$CONST.DRAFT}</option>
@@ -133,7 +133,7 @@
                 <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}">
                     {if NOT $simpleFilters}
                         <div class="form_check">
-                            <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">Select #{$entry_id} for multidelete</label> {* i18n *}
+                            <input id="multidelete_entry{$entry.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$entry.id}" data-multidelid="entry_{$entry.id}"><label for="multidelete_entry{$entry.id}" class="visuallyhidden">{CONST.TOGGLE_SELECT} (#{$entry_id})</label>
                         </div>
                     {/if}
 
@@ -162,10 +162,10 @@
                         {/if}
                         </span>
                     {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
-                        <span class="entry_status status_future">Scheduled{* $CONST.ENTRY_PUBLISHED_FUTURE *}</span>{* i18n *}
+                        <span class="entry_status status_future">{$CONST.SCHEDULED}</span>
                     {/if}
                     {if ($entry.timestamp < $serverOffsetHour) && !$entry.isdraft}
-                        <span class="entry_status status_published">Published</span> {* i18n *}
+                        <span class="entry_status status_published">{$CONST.PUBLISHED}</span>
                     {/if}
                     {if $entry.ep_is_sticky}
                         <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>

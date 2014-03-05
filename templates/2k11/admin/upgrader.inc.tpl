@@ -23,11 +23,11 @@
             </div>
         {if $admin_vars.is_logged_in}
             <nav id="user_menu">
-                <h2 class="visuallyhidden">User menu</h2> {* i18n *}
+                <h2 class="visuallyhidden">{$CONST.MENU_PERSONAL}</h2>
 
                 <ul>
                     <li class="logged_in"><span>{$admin_vars.self_info}</span></li>
-                    <li><a class="button_link" href="serendipity_admin.php" title="Dashboard"><span class="icon-home"></span><span class="visuallyhidden"> Dashboard</span></a></li>{* i18n *}
+                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.MENU_DASHBOARD}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.MENU_DASHBOARD}</span></a></li>
                 {if 'personalConfiguration'|checkPermission}
                     <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}

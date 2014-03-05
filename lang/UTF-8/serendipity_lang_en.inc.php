@@ -18,7 +18,7 @@
 @define('HAVE_TO_BE_LOGGED_ON', 'You have to be logged in to view this page');
 @define('WRONG_USERNAME_OR_PASSWORD', 'You appear to have entered an invalid username or password');
 @define('APPEARANCE', 'Appearance');
-@define('MANAGE_STYLES', 'Manage Styles');
+@define('MANAGE_STYLES', 'Manage Templates');
 @define('CONFIGURE_PLUGINS', 'Configure Plugins');
 @define('CONFIGURATION', 'Configuration');
 @define('BACK_TO_BLOG', 'Back to Weblog');
@@ -855,8 +855,8 @@
 @define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
 @define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
 
-@define('STYLE_OPTIONS_NONE', 'This theme/style has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Theme/Style options');
+@define('STYLE_OPTIONS_NONE', 'This template has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
+@define('STYLE_OPTIONS', 'Template options');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
@@ -959,7 +959,7 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
-@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Styles page)');
+@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Templates page)');
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Approve selected comments');
@@ -976,3 +976,46 @@
 
 // added 2012-11-29
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
+// New 2.0 constants
+@define('SIMPLE_FILTERS', 'Simplified filters');
+@define('SIMPLE_FILTERS', 'When enabled, search forms and filter functions are reduced to essential options. When disabled, you will see every possible filter option, i.e. in the media library or the entry editor.');
+@define('TOGGLE_SELECT', 'Mark for selection');
+@define('MORE', 'More');
+@define('ENTRY_STATUS', 'Entry status');
+@define('SCHEDULED', 'Scheduled');
+@define('PUBLISHED', 'Published');
+@define('ENTRY_METADATA', 'Entry metadata');
+@define('NAVIGATION', 'Navigation');
+@define('MAIN_MENU', 'Main menu');
+@define('MENU_PERSONAL', 'Personal menu');
+@define('MENU_DASHBOARD', 'Dashboard');
+@define('MENU_ACTIVITY', 'Activity');
+@define('MENU_SETTINGS', 'Settings');
+@define('MENU_TEMPLATES', 'Templates');
+@define('MENU_PLUGINS', 'Plugins');
+@define('MENU_USERS', 'Users');
+@define('MENU_GROUPS', 'Groups');
+@define('MENU_MAINTENANCE', 'Maintenance');
+@define('ALIGN_TOP', 'Top');
+@define('ALIGN_LEFT', 'Left');
+@define('ALIGN_RIGHT', 'Right');
+@define('SHOW_METADATA', 'Show metadata');
+@define('RANGE_FROM', 'From');
+@define('RANGE_TO', 'To');
+@define('UPLOAD', 'Upload');
+@define('DOWNLOAD', 'Download');
+@define('ENTRY_PUBLISHED', 'Entry #%s published');
+@define('PUBLISH_ERROR', 'Error publishing entry:');
+@define('UPDATE_NOTIFICATION', 'Update notification');
+@define('NEW_VERSION_AVAILABLE', 'New stable Serendipity version available: ');
+@define('MOVE', 'Move');
+@define('MOVE_UP', 'Move up');
+@define('MOVE_DOWN', 'Move down');
+@define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Install a new sidebar plugin');
+@define('INSTALL_NEW_EVENT_PLUGIN', 'Install a new event plugin');
+@define('TEMPLATE_OPTIONS', 'Template options');
+@define('CURRENT_TEMPLATE', 'Current Template');
+@define('TEMPLATE_INFO', 'Show template info');
+@define('AVAILABLE_TEMPLATES', 'Available Templates');
+@define('TIMESTAMP_RESET', 'The timestamp has been reset to the current time.');
+

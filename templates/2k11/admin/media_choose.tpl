@@ -115,17 +115,17 @@ if (parent.frames && parent.frames['tree']) {
                 <div class="clearfix">
                     <div class="form_radio">
                         <input id="image_align_top" name="serendipity[align]" {'align'|@ifRemember:''} type="radio" value="">
-                        <label for="image_align_top"><img src="{serendipity_getFile file='img/img_align_top.png'}" alt="Top"></label> {* i18n *}
+                        <label for="image_align_top"><img src="{serendipity_getFile file='img/img_align_top.png'}" alt="{$CONST.ALIGN_TOP}"></label>
                     </div>
 
                     <div class="form_radio">
                         <input id="image_align_left" name="serendipity[align]" {'align'|@ifRemember:'left':true} type="radio" value="left">
-                        <label for="image_align_left"><img src="{serendipity_getFile file='img/img_align_left.png'}" alt="Left"></label> {* i18n *}
+                        <label for="image_align_left"><img src="{serendipity_getFile file='img/img_align_left.png'}" alt="{$CONST.ALIGN_LEFT}"></label>
                     </div>
 
                     <div class="form_radio">
                         <input id="image_align_right" name="serendipity[align]" {'align'|@ifRemember:'right'} type="radio" value="right">
-                        <label for="image_align_right"><img src="{serendipity_getFile file='img/img_align_right.png'}" alt="Right"></label> {* i18n *}
+                        <label for="image_align_right"><img src="{serendipity_getFile file='img/img_align_right.png'}" alt="{$CONST.ALIGN_RIGHT}"></label>
                     </div>
                 </div>
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagealign' eventData=$media.file}
@@ -146,7 +146,7 @@ if (parent.frames && parent.frames['tree']) {
 
                         <div class="form_field">
                         {* Could use input[type=url], but does that handle local URLs as well? Hm. *}
-                            <label for="media_file_path" class="visuallyhidden">Media file path</label> {* i18n *}
+                            <label for="media_file_path" class="visuallyhidden">{$CONST.FILTER_DIRECTORY}</label>
                         {if $media.file.hotlink}
                             <input id="media_file_path" name="serendipity[url]" type="text" value="{$media.file.path}">
                         {else}

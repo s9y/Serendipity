@@ -52,7 +52,7 @@
         <article id="media_{$file.id}" class="media_file {cycle values="odd,even"}">
             <header class="clearfix">
                 <div class="form_check">
-                    <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">Select for multidelete</label> {* i18n *}
+                    <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                 </div>
 
                 <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
@@ -98,7 +98,7 @@
             </div>
 
             <ul class="media_file_actions actions plainList clearfix">
-                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> Show media info</span></a></li> {* i18n *}
+                <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="Show media info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.SHOW_METADATA}</span></a></li>
             {if $file.is_editable}
                 <li><button class="media_rename button_link" type="button" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></button></li>
                 {if $file.is_image AND NOT $file.hotlink}

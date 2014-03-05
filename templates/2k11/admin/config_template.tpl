@@ -27,7 +27,7 @@
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
                 <fieldset class="clearfix {$zebra_class}">
-                    <span class="wrap_legend"><legend>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</legend></span> {* i18n *}
+                    <span class="wrap_legend"><legend>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
                     <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>
@@ -37,7 +37,7 @@
                 </fieldset>
                 {else}
                 <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
-                    <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> More</span></button>{/if}</label>{* i18n *}
+                    <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
                     {$item.guessedInput}
                     {if $item.description != ''}
                     <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
