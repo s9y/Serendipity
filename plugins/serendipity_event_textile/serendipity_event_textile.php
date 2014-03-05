@@ -77,7 +77,7 @@ class serendipity_event_textile extends serendipity_event
     }
 
     function example() {
-        echo '<p>'.PLUGIN_EVENT_TEXTILE_EXAMPLE_NOTE.'</p>';
+        return '<p>'.PLUGIN_EVENT_TEXTILE_EXAMPLE_NOTE.'</p>';
     }
 
     function introspect_config_item($name, &$propbag)

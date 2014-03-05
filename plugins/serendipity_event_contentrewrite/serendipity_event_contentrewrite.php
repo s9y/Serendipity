@@ -126,7 +126,7 @@ class serendipity_event_contentrewrite extends serendipity_event
     }
 
     function example() {
-        printf(PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING, $this->fromstring, $this->tostring);
+        return sprintf(PLUGIN_EVENT_CONTENTREWRITE_REWRITESTRING, $this->fromstring, $this->tostring);
     }
 
     function install() {

@@ -86,7 +86,7 @@ class serendipity_event_nl2br extends serendipity_event
     }
 
     function example() {
-        echo '<h3>PLEASE NOTE the implications of this markup plugin:</h3>
+        return '<h3>PLEASE NOTE the implications of this markup plugin:</h3>
         <p>This plugin transfers linebreaks to HTML-linebreaks, so that they show up in your blog entry.</p>
         <p>In two cases this can raise problematic issues for you:</p>
         <ul>
