@@ -1367,6 +1367,8 @@ function serendipity_updertEntry($entry) {
                 foreach ($categories as $cat) {
                     if (is_numeric($cat)) {
                         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, {$cat})");
+                    } elseif (is_array($cat) && !empty($cat['categoryid'])) {
+                        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, {$cat['categoryid']})");
                     }
                 }
             }
