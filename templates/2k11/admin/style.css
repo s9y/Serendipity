@@ -977,8 +977,8 @@ h2 {
     margin: 1.05em 0;
 }
 
-h3,
-.js #edit_entry_category .wrap_legend {
+.js .mfp-wrap #edit_entry_category .wrap_legend,
+h3 {
     font-size: 1.28571em;
     line-height: 1.16667em;
     margin: 1.16667em 0;
@@ -1541,8 +1541,8 @@ form > .button_link:first-of-type,
     width: auto;
 }
 
-.mfp-content #s9y_links h3,
-.js #edit_entry_category .wrap_legend {
+.js .mfp-wrap #edit_entry_category .wrap_legend,
+.mfp-content #s9y_links h3 {
     border-bottom: 1px solid #aaa;
     display: block;
     margin-bottom: .583335em;

@@ -840,8 +840,8 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     {if $use_popups}
         if($('body').has('#serendipityEntry').size() > 0) {
             $('#select_category').click(function(e) {
-                $('#edit_entry_metadata legend > button').click();
                 $('#edit_entry_category').toggleClass('mfp-hide');
+                $('#toggle_metadata').click();
             });
         }
     {else}
