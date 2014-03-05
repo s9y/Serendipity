@@ -1,11 +1,5 @@
 <?php
 
-@define('MENU_MAINTENANCE', 'Maintenance');
-@define('MENU_MAINTENANCE_CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
-@define('MENU_MAINTENANCE_CLEANCOMPILE_FAIL', 'No clearance or compiled template files available!');
-@define('MENU_MAINTENANCE_CLEANCOMPILE_TITLE', 'Clear compiled Template');
-@define('MENU_MAINTENANCE_CLEANCOMPILE_INFO', 'This will purge compiled files of this template only, but will leave the used runtime files by this current template file.');
-
 $data = array();
 
 // do not move to end of switch, since this will change smarty assignment scope

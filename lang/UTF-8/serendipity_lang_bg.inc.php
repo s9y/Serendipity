@@ -1009,3 +1009,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('AVAILABLE_TEMPLATES', 'Available Templates');
 @define('TIMESTAMP_RESET', 'The timestamp has been reset to the current time.');
 
+@define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
+@define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
+@define('CLEANCOMPILE_TITLE', 'Clear template cache');
+@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
