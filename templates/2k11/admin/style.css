@@ -695,7 +695,12 @@ button[type="submit"]:focus {
 .toggle_info:visited,
 .toggle_info:hover,
 .toggle_info:focus,
-.toggle_info:active {
+.toggle_info:active,
+.filter_karma,
+.filter_karma:visited,
+.filter_karma:hover,
+.filter_karma:focus,
+.filter_karma:active {
     margin: 0 0 0 .4em;
     padding: 1px 3px;
 }
@@ -1070,6 +1075,8 @@ summary {
 .group_name,
 #serendipity_comments_list .form_check,
 #serendipity_comments_list h4,
+.karmalog .form_check,
+.karmalog h4,
 .comment_data dt,
 .comment_data dd,
 .template_info dt,
@@ -1108,6 +1115,12 @@ summary {
     float: right;
 }
 
+#karmalog .serendipity_karmaVoting_links {
+    float: right;
+    font-size: 1em;
+    margin: .75em;
+}
+
 .toggle_links {
     margin: 1.25em 2% .75em 0
 }
@@ -1137,6 +1150,10 @@ summary {
 .pagination .next {
     min-height: 1px;
     width: 50%;
+}
+
+.pagination > ul {
+    min-height: 1em;
 }
 
 #sort_entries .form_select select,
@@ -1174,6 +1191,10 @@ summary {
 #advanced_options .form_multiselect select,
 .serendipity_statistics table {
     width: 100%;
+}
+
+.comment_data dd {
+    max-width: 75%;
 }
 
 .media_choose .preview {
@@ -1323,7 +1344,8 @@ summary {
 #media_pane_filter,
 .comments_pane .pagination,
 .media_pane .pagination,
-.entries_pane .pagination {
+.entries_pane .pagination,
+.karma_pane .pagination {
     position: relative;
 }
 
@@ -1334,7 +1356,8 @@ summary {
 
 .comments_pane .pagination h3,
 .media_pane .pagination h3,
-.entries_pane .pagination h3 {
+.entries_pane .pagination h3,
+.karma_pane .pagination h3 {
     font-size: 1em;
     font-weight: normal;
     text-align: center;
@@ -1409,7 +1432,9 @@ fieldset p,
 }
 
 #serendipity_comments_list .form_check,
-#serendipity_comments_list h4 {
+#serendipity_comments_list h4,
+.karmalog .form_check,
+.karmalog h4 {
     margin: .75em 0;
 }
 
@@ -1641,7 +1666,8 @@ form > .button_link:first-of-type,
 }
 
 #entries_list h3,
-#serendipity_comments_list h4 {
+#serendipity_comments_list h4,
+.karmalog h4 {
     font-size: 1em;
     line-height: 1.5;
     max-width: 85%;
@@ -1657,6 +1683,7 @@ form > .button_link:first-of-type,
 
 #entries_list > li,
 #serendipity_comments_list > li,
+.karmalog > li,
 #categories li > div,
 #serendipity_image_folders li > div,
 .upload_form {
@@ -2496,13 +2523,15 @@ img.mfp-img {
 
 @media only screen and (min-width: 640px) {
     #entries_list h3,
-    #serendipity_comments_list h4 {
+    #serendipity_comments_list h4,
+    .karmalog h4 {
         max-width: none;
     }
 
     .comments_pane .pagination h3,
     .media_pane .pagination h3,
-    .entries_pane .pagination h3 {
+    .entries_pane .pagination h3,
+    .karma_pane .pagination h3 {
         position: absolute;
         top: -60%;
         left: 37%;

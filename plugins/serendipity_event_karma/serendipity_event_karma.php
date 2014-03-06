@@ -1001,7 +1001,7 @@ EOS;
     overflow: hidden;
     list-style: none;
     margin: $margin;
-    padding: 0px;
+    padding: 0;
     background-position: left top;
     text-align: center;
 }
@@ -1011,8 +1011,8 @@ EOS;
 .serendipity_karmaVoting_links a ,
 .serendipity_karmaVoting_current-rating {
     position:absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     text-indent: -9000em;
     height: {$h}px;
     line-height: {$h}px;
@@ -1657,14 +1657,14 @@ END_IMG_CSS;
 
                     // Variables for display
                     if ($linkPrevious) {
-                        $linkPrevious = '<a href="' . $linkPrevious . '" class="serendipityIconLink"><img src="'.serendipity_getTemplateFile('admin/img/previous.png').'" /></a>';
+                        $linkPrevious = '<a class="button_link" href="' . $linkPrevious . '" title="'. PREVIOUS .'"><span class="icon-left-dir"></span><span class="visuallyhidden"> '. PREVIOUS .'</span></a>';
                     } else {
-                        $linkPrevious = '&nbsp;';
+                        $linkPrevious = '<span class="visuallyhidden">'. NO_ENTRIES_TO_PRINT .'</span>';
                     }
                     if ($linkNext) {
-                        $linkNext = '<a href="' . $linkNext . '" class="serendipityIconLinkRight"><img src="'.serendipity_getTemplateFile('admin/img/next.png').'" /></a>';
+                        $linkNext = '<a class="button_link" href="' . $linkNext . '" title="'. NEXT .'"><span class="visuallyhidden">'. NEXT .' </span><span class="icon-right-dir"></span></a>';
                     } else {
-                        $linkNext = '&nbsp;';
+                        $linkNext = '<span class="visuallyhidden">'. NO_ENTRIES_TO_PRINT .'</span>';
                     }
                     $paging = sprintf(PAGE_BROWSE_COMMENTS, $page, $pages, $totalVotes);
 
@@ -1677,91 +1677,91 @@ END_IMG_CSS;
 
                     // Start the form for display and deleting
                     if (is_array($sql)) {
-                        print("<form action='' method='post' name='formMultiDelete' id='formMultiDelete'>\n".serendipity_setFormToken()."
-<script type='text/javascript'>
-function invertSelection() {
-    var f = document.formMultiDelete;
-    for (var i = 0; i < f.elements.length; i++) {
-        if( f.elements[i].type == 'checkbox' ) {
-            f.elements[i].checked = !(f.elements[i].checked);
-        }
-    }
-}
-</script>
-");
+                        print("<form action='' method='post' name='formMultiDelete' id='formMultiDelete'>\n".serendipity_setFormToken());
 
-                        // Print the header paging table
-                        print("
-<table width='100%' style='border-collapse: collapse;'>
-  <tr>
-  <td align='left'>$linkPrevious</td>
-  <td align='center'>$paging</td>
-  <td align='right'>$linkNext</td>
-  </tr>
-</table>
-");
                         // Start the vote table
                         print("
-<table class='karmalog' width='100%'>
+<div class='clearfix karma_pane'>
+<ul id='karmalog' class='clearfix karmalog plainList zebra_list'>
 ");
                         // Print each vote
                         $i = 0;
                         foreach ($sql as $vote) {
                             $i++;
                             // entryid, title, points, ip, user_agent, votetime
+                            if (strlen($vote['title']) > 40) {
+                                $votetitle = substr($vote['title'], 0, 40) . '&hellip;';
+                            } else {
+                                $votetitle = $vote['title'];
+                            }
                             $entrylink = serendipity_archiveURL($vote['entryid'], $vote['title'], 'serendipityHTTPPath', true);
-                            $entryFilterHtml = "<a class='serendipityIconLink' href='$url&serendipity[filter][entryid]={$vote['entryid']}'><img src='".serendipity_getTemplateFile('admin/img/zoom.png')."' /></a>";
-                            $ipFilterHtml = "<a class='serendipityIconLink' href='$url&serendipity[filter][ip]={$vote['ip']}'><img src='".serendipity_getTemplateFile('admin/img/zoom.png')."' /></a>";
-                            $timestr = strftime('%H:%M:%S<br />%n%a %b %d %Y', $vote['votetime']);
-                            $cssClass = 'serendipity_admin_list_item serendipity_admin_list_item_';
-                            $cssClass .= (($i % 2 ==0)?'even':'uneven');
+                            $entryFilterHtml = "<a class='button_link filter_karma' href='$url&serendipity[filter][entryid]={$vote['entryid']}' title='". FILTERS ."'><span class='icon-filter'></span><span class='visuallyhidden'>". FILTERS ."</span></a>";
+                            $ipFilterHtml = "<a class='button_link filter_karma' href='$url&serendipity[filter][ip]={$vote['ip']}' title='". FILTERS ."'><span class='icon-filter'></span><span class='visuallyhidden'>". FILTERS ."</span></a>";
+                            $timestr = strftime('%a %b %d %Y, %H:%M:%S', $vote['votetime']);
+                            $cssClass = (($i % 2 ==0)?'even':'odd');
                             $barClass = str_replace(array('.',' '), array('_','_'), $this->image_name);
                             $barHtml = $this->createRatingBar(null, $vote['points'], 1, $barClass);
                             $barHtml = sprintf($barHtml, 'what', $vote['points'], '1');
                             print("
-  <tr class='$cssClass'>
-    <td rowspan='2' width='20' align='center'>
-      <input class='input_checkbox' type='checkbox' name='serendipity[delete][$i]' value='$i' tabindex='$i' />
-      <input type='hidden' name='serendipity[karmalog$i][points]' value='{$vote['points']}' />
-      <input type='hidden' name='serendipity[karmalog$i][entryid]' value='{$vote['entryid']}' />
-      <input type='hidden' name='serendipity[karmalog$i][votetime]' value='{$vote['votetime']}' />
-      <input type='hidden' name='serendipity[karmalog$i][ip]' value='{$vote['ip']}' />
-      <input type='hidden' name='serendipity[karmalog$i][user_agent]' value='{$vote['user_agent']}' />
-    </td>
-    <td>$barHtml</td>
-    <td colspan='2'><a href='$entrylink' title='{$vote['entryid']}' alt='{$vote['title']}'>{$vote['title']}</a> $entryFilterHtml</td>
-  </tr>
-  <tr class='$cssClass'>
-    <td>$timestr</td>
-    <td>{$vote['ip']} $ipFilterHtml</td>
-    <td>{$vote['user_agent']}</td>
-  </tr>
+    <li id='karma_$i' class='$cssClass clearfix'>
+        <input type='hidden' name='serendipity[karmalog$i][points]' value='{$vote['points']}'>
+        <input type='hidden' name='serendipity[karmalog$i][entryid]' value='{$vote['entryid']}'>
+        <input type='hidden' name='serendipity[karmalog$i][votetime]' value='{$vote['votetime']}'>
+        <input type='hidden' name='serendipity[karmalog$i][ip]' value='{$vote['ip']}'>
+        <input type='hidden' name='serendipity[karmalog$i][user_agent]' value='{$vote['user_agent']}'>
+
+        <div class='form_check'>
+            <input id='multidelete_karma_$i' class='multidelete' type='checkbox' name='serendipity[delete][$i]' value='$i' data-multidelid='karma_$i'>
+            <label for='multidelete_karma_$i' class='visuallyhidden'>". TOGGLE_SELECT ."</label>
+        </div>
+
+        <h4><a href='$entrylink' title='ID: {$vote['entryid']}'>{$votetitle}</a>
+            <button class='toggle_info button_link' type='button' data-href='#karma_data_$i'><span class='icon-info-circled'></span><span class='visuallyhidden'> ". MORE ."</span></button>
+            $entryFilterHtml
+        </h4>
+
+        $barHtml
+
+        <div id='karma_data_$i' class='additional_info'>
+            <dl class='clearfix comment_data'>
+                <dt>". ON ."</dt>
+                <dd>$timestr</dd>
+                <dt>IP</dt>
+                <dd>{$vote['ip']} $ipFilterHtml</dd>
+                <dt><abbr title='User-Agent' lang='en'>UA</abbr></dt>
+                <dd>{$vote['user_agent']}</dd>
+            </dl>
+        </div>
+    </li>
 ");
                         }
 
                         // End the vote table
                         print("
-                            </table>
+                            </ul>
                             ");
+                        // Print the footer paging table
+                        print("
+<nav class='pagination'>
+    <h3>$paging</h3>
+    <ul class='clearfix'>
+        <li class='prev'>$linkPrevious</li>
+        <li class='next'>$linkNext</li>
+    </ul>
+<nav>
+</div>
+");
                         if (is_array($sql)) {
                             print("
-<input type='button' name='toggle' value='".INVERT_SELECTIONS."' onclick='invertSelection()' class='serendipityPrettyButton input_button' /> 
-<input class='serendipityPrettyButton input_button' type='submit' value='" . PLUGIN_KARMA_DELETE_VOTES . "' name='serendipity[delete_button]' />
-<input class='serendipityPrettyButton input_button' type='submit' value='" . PLUGIN_KARMA_APPROVE_VOTES . "' name='serendipity[approve_button]' />
+<div class='form_buttons'>
+<input class='invert_selection' name='toggle' type='button' value='".INVERT_SELECTIONS."'> 
+<input class='state_cancel' name='serendipity[delete_button]' type='submit' title='" . PLUGIN_KARMA_DELETE_VOTES . "' value='" . DELETE . "'>
+<input name='serendipity[approve_button]' type='submit' title='" . PLUGIN_KARMA_APPROVE_VOTES . "' value='" . APPROVE . "'>
+</div>
 </form>
 ");
                         }
 
-                        // Print the footer paging table
-                        print("
-<table width='100%' style='border-collapse: collapse;'>
-  <tr>
-  <td align='left'>$linkPrevious</td>
-  <td align='center'>$paging</td>
-  <td align='right'>$linkNext</td>
-  </tr>
-</table>
-");
                     } else {
                         print("
 <span class='msg_notice'><span class='icon-info-circled'></span> No logs to display. You need to enable karma logging, if you want to see single votes displayed here.</span>

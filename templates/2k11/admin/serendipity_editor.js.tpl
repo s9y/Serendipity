@@ -1154,6 +1154,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     $('.media_pane .pagination').clone().prependTo('.media_pane');
     $('.comments_pane .pagination').clone().prependTo('.comments_pane');
     $('.entries_pane .pagination').clone().prependTo('.entries_pane');
+    $('.karma_pane .pagination').clone().prependTo('.karma_pane');
 
     // close comment reply on button click
     if ($('body').has('#comment_replied').size() > 0) {
