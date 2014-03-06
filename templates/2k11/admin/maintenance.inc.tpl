@@ -2,8 +2,7 @@
     <h2>{$CONST.MENU_MAINTENANCE}</h2>
 
 {if $action == "integrity"}
-    <div class="clearfix">
-        <h3 class="visuallyhidden">{$CONST.INTEGRITY}</h3>
+    <h3 class="visuallyhidden">{$CONST.INTEGRITY}</h3>
     {if $noChecksum == true}
         <span class="msg_notice"><span class="icon-info-circled"></span>{$CONST.CHECKSUMS_NOT_FOUND}</span>
     {else}
@@ -17,7 +16,6 @@
         </ul>
         {/if}
     {/if}
-    </div>
 {/if}
 
 {if $cleanup_finish > 0}
