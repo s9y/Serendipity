@@ -571,7 +571,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     if ($is_cache && $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
                         echo '<section id="maintenance_buildcache" class="equal_heights quick_list">';
                         echo '<h3>'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</h3>';
-                        echo '<a class="button_link" href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache">'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</a></section>';
+                        echo '<a class="button_link build_cache" href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache" data-delmsg="'. PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNEXT .'">'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</a></section>';
                     }
                     return true;
                     break;

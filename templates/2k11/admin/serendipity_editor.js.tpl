@@ -965,7 +965,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Comments
-    $('.comments_delete, .comments_multidelete').click(function() {
+    $('.comments_delete, .comments_multidelete, .build_cache').click(function() {
         var $msg = $(this).attr('data-delmsg');
         return confirm($msg);
     });
