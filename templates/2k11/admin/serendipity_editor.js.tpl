@@ -41,19 +41,6 @@
         return null;
     }
 
-    // Some sort of onload wrapper? @onli says jQuery can help with this
-    serendipity.addLoadEvent = function(func) {
-        var oldonload = window.onload;
-        if (typeof window.onload != 'function') {
-            window.onload = func;
-        } else {
-            window.onload = function() {
-                oldonload();
-                func();
-            }
-        }
-    }
-
     /**
      * Based upon code written by chris wetherell
      * http://www.massless.org
@@ -1204,4 +1191,17 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 })(jQuery);
 
+// This is kept for older plugins. Use of $(document).ready() is encouraged.
+// At some point, this will be removed.
+    addLoadEvent = function(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function() {
+                oldonload();
+                func();
+            }
+        }
+    }
 
