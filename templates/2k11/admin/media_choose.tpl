@@ -279,7 +279,7 @@ if (parent.frames && parent.frames['tree']) {
         tree.draw();
     } 
 
-    serendipity.addLoadEvent(treeInit);
+    addLoadEvent(treeInit);
 </script>
 {/if}
 </body>
