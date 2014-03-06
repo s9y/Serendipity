@@ -178,7 +178,7 @@
 
             <div class="form_buttons">
                 <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
-                <input class="state_cancel comments_multidelete" name="toggle" type="submit" value="{$CONST.DELETE}">
+                <input class="state_cancel comments_multidelete" name="toggle" type="submit" value="{$CONST.DELETE}" data-delmsg="{$CONST.COMMENTS_DELETE_CONFIRM}">
                 <input name="serendipity[togglemoderate]" type="submit" value="{$CONST.APPROVE}">
             </div>
         </form>

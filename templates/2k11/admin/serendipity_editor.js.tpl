@@ -965,7 +965,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     });
 
     // Comments
-    $('.comments_delete').click(function() {
+    $('.comments_delete, .comments_multidelete').click(function() {
         var $msg = $(this).attr('data-delmsg');
         return confirm($msg);
     });
@@ -977,10 +977,6 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         {else}
            $(this).magnificPopup({ type:'iframe' });
         {/if}
-    });
-
-    $('.comments_multidelete').click(function() {
-        return confirm('{$CONST.COMMENTS_DELETE_CONFIRM}');
     });
 
     // Category icon preview
