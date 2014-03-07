@@ -1491,7 +1491,9 @@ form > .button_link:first-of-type,
     margin: .75em 0;
 }
 
-.remove_msg {
+.remove_msg,
+.remove_msg:visited {
+    color: inherit;
     margin-left: .4em;
 }
 
@@ -1518,13 +1520,23 @@ form > .button_link:first-of-type,
     margin: 0 0 1em;
 }
 
-.filter_pane {
+.filter_pane,
+#meta_data > div,
+#adv_opts > fieldset > div,
+#adv_opts > fieldset > fieldset {
     background: #eee;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     border: 1px solid #aaa;
     padding: 0 .4em;
+}
+
+#meta_data > div,
+#adv_opts > fieldset > div,
+#adv_opts > fieldset > fieldset {
+    margin-bottom: 1em;
+    padding: .4em;
 }
 
 .filter_pane .form_buttons {
