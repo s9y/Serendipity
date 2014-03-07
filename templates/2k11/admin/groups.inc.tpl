@@ -38,7 +38,7 @@
         <div class="clearfix odd form_field">
             <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button></label>
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
-            <span id="groupName_info" class="field_info additional_info">Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.</span> {* i18n *}
+            <span id="groupName_info" class="field_info additional_info">{$CONST.GROUP_NAME_DESC}</span>
         </div>
 
         <div class="clearfix even form_select">
