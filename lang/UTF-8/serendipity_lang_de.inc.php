@@ -1008,7 +1008,7 @@
 @define('ENTRY_PUBLISHED', 'Eintrag #%s veröffentlicht');
 @define('PUBLISH_ERROR', 'Fehler bei der Veröffentlichung:');
 @define('UPDATE_NOTIFICATION', 'Update-Hinweis');
-@define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfpgbar: ');
+@define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfügbar: ');
 @define('MOVE', 'Bewegen');
 @define('MOVE_UP', 'Nach oben');
 @define('MOVE_DOWN', 'Nach unten');
@@ -1024,9 +1024,9 @@
 @define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
 @define('CLEANCOMPILE_TITLE', 'Clear template cache');
 @define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
-@define('INSTALLER_KEY', 'Key');
-@define('INSTALLER_VALUE', 'Value');
-@define('CURRENT_TAB', 'Current tab: ');
+@define('INSTALLER_KEY', 'Schlüssel');
+@define('INSTALLER_VALUE', 'Wert');
+@define('CURRENT_TAB', 'Aktives Tab: ');
 @define('PINGBACKS', 'Pingbacks');
-@define('NO_PINGBACKS', 'No Pingbacks');
+@define('NO_PINGBACKS', 'Keine Pingbacks');
 @define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
