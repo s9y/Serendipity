@@ -1523,7 +1523,8 @@ form > .button_link:first-of-type,
 .filter_pane,
 #meta_data > div,
 #adv_opts > fieldset > div,
-#adv_opts > fieldset > fieldset {
+#adv_opts > fieldset > fieldset,
+#downloads {
     background: #eee;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -1540,7 +1541,7 @@ form > .button_link:first-of-type,
 }
 
 .filter_pane .form_buttons {
-    margin-bottom: 0;
+    margin: 0;
 }
 
 #template_select article,
@@ -2896,7 +2897,7 @@ img.mfp-img {
     #user_menu {
         position: absolute;
         top: 0;
-        right: 2.5%;
+        right: 1.5%;
         text-align: right;
         width: auto;
     }

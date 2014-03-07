@@ -46,9 +46,9 @@
         <h3>{$CONST.DOWNLOAD}</h3>
 
         <div class="panel">
-            <div id="downloads">
-                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
+            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
 
+            <div id="downloads">
                 <div class="clearfix form_field">
                     <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
                     <input id="imageurl" class="check_input" name="serendipity[imageurl]" type="text" value="">
