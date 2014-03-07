@@ -84,7 +84,7 @@
                             <li title="{$file.diskname}">{$file.diskname|truncate:30:"&hellip;"}</li>
                             {/if}
                             {if $file.mime}
-                            <li><b>Mime-Type:</b> {$file.mime}</li> {* i18n *}
+                            <li><b>MIME-Type:</b> {$file.mime}</li>
                             {/if}
                             {if $file.is_image}
                             <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>

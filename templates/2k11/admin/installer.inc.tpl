@@ -45,8 +45,8 @@
                     <caption>{$CONST.PHP_INSTALLATION}</caption>
                     <thead>
                         <tr>
-                            <th>Key</th> {* i18n *}
-                            <th>Value</th> {* i18n *}
+                            <th>{$CONST.INSTALLER_KEY}</th>
+                            <th>{$CONST.INSTALLER_VALUE}</th>
                         </tr>
                     </thead>
                     <tbody>

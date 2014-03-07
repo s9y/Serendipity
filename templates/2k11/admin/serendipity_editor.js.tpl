@@ -1166,6 +1166,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Tabs
     if($('body').has('.tabs').size() > 0) {
+        var currTabText = '{$CONST.CURRENT_TAB}';
 
         $('.tabs').accessibleTabs({
             wrapperClass: 'tabcontent',
@@ -1174,7 +1175,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             tabheadClass: 'visuallyhidden',
             tabbody: '.panel',
             fx: 'fadeIn',
-            currentInfoText: 'Current tab: ', // i18n
+            currentInfoText: currTabText,
             currentInfoClass: 'visuallyhidden',
             syncheights: false,
             saveState: true
