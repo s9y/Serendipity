@@ -1013,3 +1013,9 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
 @define('CLEANCOMPILE_TITLE', 'Clear template cache');
 @define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
+@define('INSTALLER_KEY', 'Key');
+@define('INSTALLER_VALUE', 'Value');
+@define('CURRENT_TAB', 'Current tab: ');
+@define('PINGBACKS', 'Pingbacks');
+@define('NO_PINGBACKS', 'No Pingbacks');
+@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
