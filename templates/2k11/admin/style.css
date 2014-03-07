@@ -300,6 +300,24 @@ nav ol {
     padding: 0;
 }
 
+/* details polyfill */
+.no-details details > * {
+    display: none;
+}
+
+.no-details details > summary:before {
+    content: '\25BA ';
+    float: left;
+    width: 20px;
+}
+
+.no-details details.open > summary:before {
+    content: '\25BC ';
+}
+
+.no-details details summary {
+    display: block;
+}
 
 /* HELPER CLASSES */
 /* Hide visually, available for screenreaders */
