@@ -79,7 +79,7 @@
                         <option value="">{$CONST.COMMENTS_FILTER_ALL}</option>
                         <option value="NORMAL"{if $c_type == 'NORMAL'} selected{/if}>{$CONST.COMMENTS}</option>
                         <option value="TRACKBACK"{if $c_type == 'TRACKBACK'} selected{/if}>{$CONST.TRACKBACKS}</option>
-                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected{/if}>{$CONST.PINGBACKS}</option>    {* l18n *}
+                        <option value="PINGBACK"{if $c_type == 'PINGBACK'} selected{/if}>{$CONST.PINGBACKS}</option> {* i18n *}
                     </select>
                 </div>
             </div>
@@ -95,13 +95,13 @@
             {if $c_type == 'TRACKBACK'}
                 {$CONST.NO_TRACKBACKS}
             {else if $c_type == 'PINGBACK'}
-                {$CONST.NO_PINGBACKS}   {* l18n *}
+                {$CONST.NO_PINGBACKS} {* i18n *}
             {else}
                 {$CONST.NO_COMMENTS}
             {/if}
         </span>
 
-        <a class="block_level" href="serendipity_admin.php?serendipity[adminModule]=comments">Return to default comment list</a> {* l18n *}
+        <a class="block_level" href="serendipity_admin.php?serendipity[adminModule]=comments">Return to default comment list</a> {* i18n *}
     {else}
         <form id="formMultiDelete" action="" method="POST" name="formMultiDelete">
             {$formtoken}
