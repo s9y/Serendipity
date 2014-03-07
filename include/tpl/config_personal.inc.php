@@ -109,8 +109,8 @@
                                           'view'        => 'dangerous'),
                                           
                                     array('var'         => 'simpleFilters',
-                                          'title'       => SIMPLE_FILTERS,    // i18n
-                                          'description' => SIMPLE_FILTERS_DESC,   // i18n
+                                          'title'       => SIMPLE_FILTERS,
+                                          'description' => SIMPLE_FILTERS_DESC,
                                           'type'        => 'bool',
                                           'permission'  => 'personalConfiguration',
                                           'default'     => true,
