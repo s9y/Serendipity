@@ -528,6 +528,7 @@ input[type="checkbox"] {
 .button_link:focus,
 .tabs > ul a:focus,
 button:focus,
+#edit_entry_category button.mfp-close:focus,
 input:focus,
 select:focus,
 textarea:focus {
@@ -547,6 +548,7 @@ input[type="checkbox"]:active {
 .button_link,
 .tabs > ul a,
 button,
+#edit_entry_category button.mfp-close,
 input[type="button"],
 input[type="reset"],
 input[type="submit"] {
@@ -574,6 +576,8 @@ input[type="button"] {
 
 .state_submit,
 .state_submit:visited,
+#edit_entry_category button.mfp-close,
+#edit_entry_category button.mfp-close:visited,
 input[type="submit"],
 button[type="submit"] {
     background: #468847;
@@ -604,6 +608,8 @@ input[type="button"]:hover {
 
 .state_submit:hover,
 .state_submit:focus,
+#edit_entry_category button.mfp-close:hover,
+#edit_entry_category button.mfp-close:focus,
 input[type="submit"]:hover,
 button[type="submit"]:hover {
     background: #63af64;
@@ -635,6 +641,7 @@ input[type="button"]:active {
 }
 
 .state_submit:active,
+#edit_entry_category button.mfp-close:active,
 input[type="submit"]:active
 button[type="submit"]:active {
     background-image: -webkit-linear-gradient(#63af64, #468847 1px, #519e52);
@@ -1564,6 +1571,21 @@ form > .button_link:first-of-type,
     padding: 0 2em;
     position: relative;
     width: auto;
+}
+
+.mfp-content #edit_entry_category {
+    padding-bottom: 2em;
+}
+
+#edit_entry_category button.mfp-close {
+    color: #fafafa;
+    font-size: 1em;
+    height: auto;
+    opacity: 1;
+    text-shadow: #050505 0 1px 1px;
+    top: auto;
+    right: 1.5em;
+    bottom: 1em;
 }
 
 .js .mfp-wrap #edit_entry_category .wrap_legend,

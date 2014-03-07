@@ -833,7 +833,12 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
         }
     {else}
         if($('body').has('#serendipityEntry').size() > 0) {
-            $('#select_category').magnificPopup({ type: "inline" });
+            var btnText = '{$CONST.DONE}';
+
+            $('#select_category').magnificPopup({
+                type: "inline",
+                closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>'
+            });
         }
     {/if}
 
