@@ -897,6 +897,10 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             var $target = $(this).parent();
             $target.fadeOut(250, function() { $target.remove(); });
         });
+        // Automagic removal after 5 secs
+        setTimeout(function() {
+            $('#msg_timestamp').fadeOut(250).remove();
+        }, 5000);
     });
 
     // Editor tools
