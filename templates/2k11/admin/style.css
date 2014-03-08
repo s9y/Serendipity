@@ -2573,6 +2573,17 @@ img.mfp-img {
     #edit_entry_submit {
         top: -3.25em;
     }
+
+    #pluginlist_tabs {
+        position: relative;
+    }
+
+    .tabcontent #pluginlist_event > a,
+    .tabcontent #pluginlist_sidebar > a {
+        position: absolute;
+        top: -1px;
+        right: 0;
+    }
 }
 
 @media only screen and (min-width: 481px) {
