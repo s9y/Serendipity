@@ -5,7 +5,8 @@
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{serendipity_getFile file='admin/style.css'}">
+    <link rel="stylesheet" href="{$serendipityHTTPPath}{serendipity_getFile file='admin/style.css'}">
+    <script src="{$serendipityHTTPPath}{$templatePath}jquery.js"></script>
 </head>
 <body id="serendipity_admin_page">
     <header id="top">
@@ -287,5 +288,8 @@
     <footer id="meta">
         <p>{$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
     </footer>
+
+    {* <script src="{$serendipityHTTPPath}{serendipity_getFile file='admin/js/installer_editor.js'}"></script> *}
+
 </body>
 </html>
