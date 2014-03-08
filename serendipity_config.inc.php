@@ -404,7 +404,9 @@ if (IS_up2date === false && !defined('IN_upgrader')) {
         $css_mode = 'serendipity_admin.css';
         return 1;
     }
-
+    if ( preg_match('@/(serendipity_editor\.js|serendipity\.js)@', $_SERVER['REQUEST_URI'], $matches)) {
+        return 1;
+    }
     serendipity_die(sprintf(SERENDIPITY_NEEDS_UPGRADE, $serendipity['versionInstalled'], $serendipity['version'], $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php'));
 }
 
