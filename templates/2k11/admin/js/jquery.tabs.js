@@ -17,7 +17,7 @@
  */
 
 (function($) {
-    var debugMode = true;
+    var debugMode = false;
     $.fn.extend({
         // We assume there could be multiple sets of tabs on a page, so,
         // the unique id for each invididual tab's heading is identified with params q and r (e.g., id="accessibletabscontent0-2")
