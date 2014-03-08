@@ -34,6 +34,12 @@
         <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|@escape}</textarea>
     </div>
 
+    <div id="category_list" class="clearfix">
+        <h3>{$CONST.CATEGORIES}</h3>
+
+        <ul class="plainList"></ul>
+    </div>
+
     <div id="edit_entry_submit">
         <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:'o-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
         <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="Select category"><span class="icon-list-bullet"></span><span class="visuallyhidden">{$CONST.CATEGORIES}</span></a>

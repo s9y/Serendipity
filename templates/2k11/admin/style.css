@@ -1022,6 +1022,7 @@ h4,
 }
 
 .toggle_headline,
+#category_list h3,
 h5,
 h6 {
     font-size: 1em;
@@ -1630,6 +1631,22 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+#category_list h3 {
+    float: left;
+    line-height: 1.5em;
+    margin: 0 2em .75em 0;
+}
+
+#category_list ul {
+    margin: 0 0 .75em;
+    line-height: 1.5em;
+}
+
+#category_list li {
+    display: inline-block;
+    margin: 0 1em 0 0;
+}
+
 #template_select article,
 .plugins_installable > li,
 .media_file {
@@ -2083,6 +2100,7 @@ label .perm_name,
 .no-js .customfieldMedia,
 .no-js .toggle_links,
 .no-js .toggle_info,
+.no-js #category_list,
 .js .additional_info,
 .installer .toggle_info,
 .hidden,

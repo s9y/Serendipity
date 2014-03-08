@@ -612,6 +612,23 @@
         $(img).attr('src', $(img).attr('src')+'?'+Math.random());
     }
 
+    serendipity.categoryList = function() {
+        var $source = $('#edit_entry_category');
+        var $target = $('#category_list > ul');
+        var $selected = $source.find('input:checkbox:checked');
+
+        $target.empty();
+
+        if ($selected.length > 0) {
+            $selected.each(function() {
+                var catText = $(this).next('label').text();
+                $('<li class="category_selected">'+ catText +'</li>').appendTo($target);
+            });
+        } else {
+            $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
+        }
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -841,6 +858,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Editor-area
     if($('body').has('#serendipityEntry').size() > 0) {
+        serendipity.categoryList();
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
     }
@@ -942,7 +960,12 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
             $('#select_category').magnificPopup({
                 type: "inline",
-                closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>'
+                closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>',
+                callbacks: {
+                    afterClose: function() {
+                        serendipity.categoryList();
+                    }
+                }
             });
         }
     {/if}
