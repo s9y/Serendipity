@@ -29,6 +29,8 @@ if (defined('S9Y_DATA_PATH')) {
 $data['basedir'] = $basedir;
 $data['phpversion'] = phpversion();
 $data['versionInstalled'] = $serendipity['versionInstalled'];
+$data['templatePath']  = $serendipity['templatePath'];
+$data['serendipityHTTPPath'] = dirname($_SERVER['PHP_SELF']) . '/';
 
 /**
  * Checks a return code constant if it's successfull or an error and return HTML code
