@@ -18,7 +18,7 @@
             <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
         </section>
     {/if}
-        <section id="dashboard_comments" class="equal_heights quick_list">
+        <section id="dashboard_comments" class="odd equal_heights quick_list">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
@@ -52,7 +52,7 @@
             </ol>
         </section>
 
-        <section id="dashboard_entries" class="equal_heights quick_list">
+        <section id="dashboard_entries" class="even equal_heights quick_list">
             <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.ADMIN_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">

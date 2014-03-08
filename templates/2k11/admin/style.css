@@ -1081,13 +1081,16 @@ summary {
 #top > div,
 #main_menu,
 #content {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
     margin: 0;
     padding-left: 2.5%;
     padding-right: 2.5%;
     width: 95%;
+}
+
+#top > div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 #workspace,
@@ -1151,7 +1154,7 @@ summary {
 }
 
 .toggle_links {
-    margin: 1.25em 2% .75em 0
+    margin: 1.25em 0 .75em;
 }
 
 #filter_comments label,
@@ -2686,11 +2689,14 @@ img.mfp-img {
         width: 48%;
     }
 
-    .media_pane .even {
+    #template_select .even,
+    .media_pane .even,
+    #dashboard > .even,
+    #maintenance > section:nth-child(odd) {
         margin: 0 0 1em 2%;
     }
 
-    #dashboard > section,
+    #dashboard > .odd,
     #maintenance > section {
         margin: 0 2% 1em 0;
     }
@@ -2827,6 +2833,11 @@ img.mfp-img {
     #pluginlist_event .pluginmanager_side  {
         margin-right: 1%;
         width: 49%;
+    }
+
+    #pluginlist_event .pluginmanager_side:nth-child(even) {
+        margin-right: 0;
+        margin-left: 1%;
     }
 
     #meta p {
