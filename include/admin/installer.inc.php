@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -30,7 +30,7 @@ $data['basedir'] = $basedir;
 $data['phpversion'] = phpversion();
 $data['versionInstalled'] = $serendipity['versionInstalled'];
 $data['templatePath']  = $serendipity['templatePath'];
-$data['serendipityHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/');
+$data['installerHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/');
 
 /**
  * Checks a return code constant if it's successfull or an error and return HTML code
@@ -369,10 +369,6 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     if ( serendipity_updateConfiguration() ) {
         $data['s9y_installed'] = true;
     }
-
-    $data['templatePath']  = $serendipity['templatePath'];
-    $data['serendipityHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/');
-
     echo serendipity_smarty_show("admin/installer.inc.tpl", $data);
     return;
 }

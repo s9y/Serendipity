@@ -5,8 +5,8 @@
     <meta charset="{$CONST.LANG_CHARSET}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{$serendipityHTTPPath}{serendipity_getFile file='admin/style.css'}">
-    <script src="{$serendipityHTTPPath}{$templatePath}jquery.js"></script>
+    <link rel="stylesheet" href="{$installerHTTPPath}{serendipity_getFile file='admin/style.css'}">
+    <script src="{$installerHTTPPath}{$templatePath}jquery.js"></script>
 </head>
 <body id="serendipity_admin_page">
     <header id="top">
