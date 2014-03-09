@@ -240,28 +240,8 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
 
     $basewritable = False;
     if ( is_writable($basedir) ) {
-        $data['installerResultDiagnose_WRITABLE'][] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
+        $data['installerResultDiagnose_BASE_WRITABLE'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
         $basewritable = True;
-    } else {
-        #Figure out if we already have all we need
-        #PATH_SMARTY_COMPILE/
-        #uploads/
-        #archives/
-        #.htaccess
-        #serendipity_config_local.inc.php
-        # For completeness we could test to make sure the directories
-        # really are directories, but that's probably overkill
-        foreach (array('archives/', PATH_SMARTY_COMPILE . '/', 'uploads/', '.htaccess', 'serendipity_config_local.inc.php') as $path) {
-            if (!is_writeable($basedir . $path)) {
-                $data['installerResultDiagnose_WRITABLE'][] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NOT_WRITABLE);
-                $showWritableNote = true;
-                break;
-            }
-        }
-        
-        if (!$showWritableNote) {
-            $data['installerResultDiagnose_WRITABLE'][] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
-        }
     }
 
     if ( is_writable($basedir . PATH_SMARTY_COMPILE) ) {

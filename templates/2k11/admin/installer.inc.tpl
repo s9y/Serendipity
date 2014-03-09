@@ -165,64 +165,66 @@
                     </tbody>
                 </table>
 
-                <h4>{$CONST.PERMISSIONS}</h4>
+                <table>
+                    <caption>{$CONST.PERMISSIONS}</caption>
+                    <thead>
+                        <tr>
+                            <th>Directory</th>  {* i18n *}
+                            <th>{$CONST.PERMISSIONS}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>{$basedir}</h5></td>
+                            <td>{$installerResultDiagnose_BASE_WRITABLE}</td>
+                        </tr>
+                        <tr>
+                            <td><h5>{$basedir}{$CONST.PATH_SMARTY_COMPILE}</h5></td>
+                            <td>{$installerResultDiagnose_COMPILE}</td>
+                        </tr>
+                        <tr>
+                            <td><h5>{$basedir}archives/</h5></td>
+                            <td>{$installerResultDiagnose_ARCHIVES}</td>
+                        </tr>
+                        <tr>
+                            <td><h5>{$basedir}plugins</h5></td>
+                            <td>{$installerResultDiagnose_PLUGINS}</td>
+                        </tr>
+                        {if $is_dir_uploads}
+                            <tr>
+                                <td><h5>{$basedir}uploads/</h5></td>
+                                <td>{$installerResultDiagnose_UPLOADS}</td>
+                            </tr>
+                        {/if}
+                    </tbody>
+                </table>
+                {if $showWritableNote}
+                    <span class="msg_notice">{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
+                {/if}
 
-                <h5>{$basedir}</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_WRITABLE AS $fwrite}
-                    <li>{$fwrite}</li>
-                {/foreach}
-                </ul>
-
-                <h5>{$basedir} {$CONST.PATH_SMARTY_COMPILE}</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_COMPILE AS $compile}
-                    <li>{$compile}</li>
-                {/foreach}
-                </ul>
-
-                <h5>{$basedir}archives/</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_ARCHIVES AS $archives}
-                    <li>{$archives}</li>
-                {/foreach}
-                </ul>
-
-                <h5>{$basedir}plugins/</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_PLUGINS AS $plugins}
-                    <li>{$plugins}</li>
-                {/foreach}
-                </ul>
-            {if $is_dir_uploads}
-                <h5>{$basedir}uploads/</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_UPLOADS AS $uploads}
-                    <li>{$uploads}</li>
-                {/foreach}
-                </ul>
-            {/if}
-            {if $is_imb_executable}
-                <h5>Execute Imagemagick binary</h5>
-
-                <ul class="plainList">
-                {foreach $installerResultDiagnose_IMB AS $im_binary}
-                    <li>{$im_binary}</li>
-                {/foreach}
-                </ul>
-            {/if}
-            {if $showWritableNote}
-                <span class="msg_notice">{$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
-            {/if}
+                <table>
+                    <caption>Executables</caption> {* i18n *}
+                    <thead>
+                        <tr>
+                            <th>Program</th>  {* i18n *}
+                            <th>Executable?</th> {* i18n *}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h5>Execute Imagemagick binary</h5></td>
+                            <td>{$installerResultDiagnose_IMB}</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            
             {if $errorCount > 0}
+                <hr /> 
                 <span class="msg_error">{$CONST.PROBLEM_DIAGNOSTIC}</span>
-
-                <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
+                <div class="form_buttons">
+                    <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
+                </div>
             {else}
                 <p><strong>{$CONST.SELECT_INSTALLATION_TYPE}:</strong></p>
 
