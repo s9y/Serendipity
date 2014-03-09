@@ -6,7 +6,7 @@
     <title>{if $admin_vars.title}{$admin_vars.title} | {/if}{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{$head_link_stylesheet}">
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.6.2.min.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
     <script src="{$serendipityHTTPPath}{$templatePath}jquery.js"></script>
 </head>
