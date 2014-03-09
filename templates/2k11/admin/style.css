@@ -2062,7 +2062,8 @@ label .perm_name,
 }
 
 .nojs-controls,
-.touch .pluginmanager_grablet {
+.touch .pluginmanager_grablet,
+.toggle_info b {
     display: none;
     visibility: hidden;
 }
@@ -2133,6 +2134,7 @@ label .perm_name,
 .no-js .toggle_info,
 .no-js #category_list,
 .js .additional_info,
+.js .installer .icon-info-circled,
 .hidden,
 .msg_error > br,
 .msg_success > br,
@@ -2142,7 +2144,9 @@ label .perm_name,
     visibility: hidden;
 }
 
-.no-js .mfp-hide {
+.no-js .mfp-hide,
+.js .installer .toggle_info b,
+.installer .configuration_group > .additional_info {
     display: block !important;
     visibility: visible;
 }
