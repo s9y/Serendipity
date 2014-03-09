@@ -395,16 +395,14 @@ $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DE
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
 
-/*
- *  Check if the installed version is higher than the version of the config
- */
 
+// Redirect to the upgrader 
 if (IS_up2date === false && !defined('IN_upgrader')) {
     if (preg_match(PAT_CSS, $_SERVER['REQUEST_URI'], $matches)) {
         $css_mode = 'serendipity_admin.css';
         return 1;
     }
-    if ( preg_match('@/(serendipity_editor\.js|serendipity\.js)@', $_SERVER['REQUEST_URI'], $matches)) {
+    if (preg_match('@/(serendipity_editor\.js$)@', $_SERVER['REQUEST_URI'], $matches)) {
         return 1;
     }
     serendipity_die(sprintf(SERENDIPITY_NEEDS_UPGRADE, $serendipity['versionInstalled'], $serendipity['version'], $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php'));

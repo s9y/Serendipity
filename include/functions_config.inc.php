@@ -279,8 +279,9 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
             return $serendipity[$key] . $templateFile;
         }
 
-        if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl")) {
+        if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl") && IS_installed) {
             # catch .js.tpl files served via the template-plugin-api
+            # this won't work in the installer
             return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
         }
     }

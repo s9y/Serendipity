@@ -6,7 +6,8 @@
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{serendipity_getFile file='admin/style.css'}">
-    <script src="{$installerHTTPPath}{$templatePath}jquery.js"></script>
+    <script src="{serendipity_getFile file='jquery.js'}"></script>
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
 <body id="serendipity_admin_page">
     <header id="top">
@@ -286,12 +287,8 @@
         {/if}
         </div>
     </main>
-
     <footer id="meta">
         <p>{$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
     </footer>
-
-    {* <script src="{$serendipityHTTPPath}{serendipity_getFile file='admin/js/installer_editor.js'}"></script> *}
-
 </body>
 </html>
