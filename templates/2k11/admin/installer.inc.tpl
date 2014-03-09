@@ -256,7 +256,7 @@
             {if is_array($authors_query)}
             <span class="msg_success"><strong>{$CONST.THEY_DO}</strong>, {$CONST.WONT_INSTALL_DB_AGAIN}</span>
             {else}
-            <span class="msg_error"><strong>{$CONST.THEY_DONT}</strong></span>
+            <span class="msg_success"><strong>{$CONST.THEY_DONT}</strong></span>
 
             <ol>
                 <li>{$CONST.CREATE_DATABASE}{if $install_DB} <strong>{$CONST.DONE}</strong>{/if}</li>
