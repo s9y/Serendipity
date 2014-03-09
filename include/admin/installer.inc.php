@@ -369,6 +369,10 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     if ( serendipity_updateConfiguration() ) {
         $data['s9y_installed'] = true;
     }
+
+    $data['templatePath']  = $serendipity['templatePath'];
+    $data['serendipityHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/');
+
     echo serendipity_smarty_show("admin/installer.inc.tpl", $data);
     return;
 }
