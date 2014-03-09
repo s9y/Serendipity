@@ -1052,6 +1052,13 @@ summary {
     padding: 0 .5em;
 }
 
+.installer dd .msg_error,
+.installer dd .msg_success,
+.installer dd .msg_notice,
+.installer dd .msg_hint {
+    margin: .5em 0;
+}
+
 .msg_error {
     background: #f2dede;
     border: 1px solid #e4b9b9;
