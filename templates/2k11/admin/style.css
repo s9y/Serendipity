@@ -1021,6 +1021,18 @@ h4,
     margin: 1.3125em 0;
 }
 
+#diagnose caption {
+    margin-top: 0;
+}
+
+#diagnose tr {
+    border-bottom: 1px solid #aaa;
+}
+
+#diagnose td h5 {
+    margin: .5em 0;
+}
+
 .toggle_headline,
 #category_list h3,
 h5,
@@ -1048,15 +1060,8 @@ summary {
 .installer .msg_notice,
 .installer .msg_hint {
     display: inline-block;
-    margin: 0 0 .5em;
-    padding: 0 .5em;
-}
-
-.installer dd .msg_error,
-.installer dd .msg_success,
-.installer dd .msg_notice,
-.installer dd .msg_hint {
     margin: .5em 0;
+    padding: 0 .5em;
 }
 
 .msg_error {
@@ -1823,6 +1828,22 @@ form > .button_link:first-of-type,
     margin: .75em 0 0;
 }
 
+.installer .toggle_info {
+    padding: 1px 2px;
+    position: relative;
+    top: -1px;
+}
+
+.installer .toggle_info b {
+    display: inline-block;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: .875em;
+    line-height: 1;
+    width: 1em;
+    speak: none;
+    text-align: center;
+}
+
 .installer .field_info a,
 .installer .field_info a:visited {
     color: #444;
@@ -2112,7 +2133,6 @@ label .perm_name,
 .no-js .toggle_info,
 .no-js #category_list,
 .js .additional_info,
-.installer .toggle_info,
 .hidden,
 .msg_error > br,
 .msg_success > br,
@@ -2122,7 +2142,6 @@ label .perm_name,
     visibility: hidden;
 }
 
-.js .installer .additional_info,
 .no-js .mfp-hide {
     display: block !important;
     visibility: visible;
