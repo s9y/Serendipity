@@ -6,6 +6,9 @@
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{serendipity_getFile file='admin/style.css'}">
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="{serendipity_getFile file='admin/oldie.css'}">
+<![endif]-->
     <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
     <script src="{serendipity_getFile file='jquery.js'}"></script>
 </head>

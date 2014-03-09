@@ -1,0 +1,490 @@
+/* SMALL SCREEN */
+#edit_entry_submit {
+    top: -3.25em;
+}
+
+#pluginlist_tabs {
+    position: relative;
+}
+
+.tabcontent #pluginlist_event > a,
+.tabcontent #pluginlist_sidebar > a {
+    position: absolute;
+    top: -1px;
+    right: 0;
+}
+
+#login {
+    max-width: 25em;
+}
+
+#uploadform label {
+    display: inline-block;
+    min-width: 40%;
+}
+
+#uploadform .form_field input,
+#uploadform .form_select select {
+    min-width: 16em;
+}
+
+.configuration_group .form_select select,
+.configuration_group .form_multiselect select,
+.configuration_group .form_field input,
+.configuration_group .form_area textarea {
+    max-width: 320px;
+}
+
+#entries_list h3,
+#serendipity_comments_list h4,
+.karmalog h4 {
+    max-width: none;
+}
+
+.comments_pane .pagination h3,
+.media_pane .pagination h3,
+.entries_pane .pagination h3,
+.karma_pane .pagination h3 {
+    position: absolute;
+    top: -60%;
+    left: 37%;
+}
+
+#mediaPropertyForm .media_file_props label,
+#mediaPropertyForm header b,
+#mediaPropertyForm footer b {
+    display: inline-block;
+    width: 20%;
+}
+
+.user_level {
+    display: inline;
+}
+
+.entryproperties_access_groups,
+.entryproperties_access_users,
+.entryproperties_access_author,
+.entryproperties_markup {
+    float: left;
+    margin-right: 2%;
+    width: 48%;
+}
+
+.entryproperties_customfields {
+    clear: both;
+}
+
+.media_file_keywords li {
+    width: 23%;
+}
+
+html {
+    font-size: 1em;
+}
+
+h1 {
+    font-size: 1.25em;
+    line-height: 1.125em;
+    margin: .6em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    line-height: 1em;
+    margin: 1em 0;
+}
+
+pre {
+    font-size: .875em;
+    line-height: 1.71429em;
+    margin: 1.71429em 0;
+}
+
+#main_menu li > ul > li {
+    width: 33%;
+}
+
+#template_select article,
+.plugins_installable > li,
+#serendipityScaleForm,
+#serendipityScaleImg,
+.media_file,
+#dashboard > .quick_list,
+#maintenance > .quick_list,
+.serendipity_statistics > section,
+#serendipity_category > div > div,
+#serendipity_category #preview,
+#serendipity_category > div > fieldset,
+#directory_permissions .form_multiselect {
+    float: left;
+    margin: 0 2% 1em 0;
+    width: 48%;
+}
+
+#template_select .even,
+.media_pane .even,
+#dashboard > .even,
+#maintenance > section:nth-child(odd) {
+    margin: 0 0 1em 2%;
+}
+
+#dashboard > .odd,
+#maintenance > section {
+    margin: 0 2% 1em 0;
+}
+
+#template_select .current_template {
+    float: none;
+    margin: 0 0 2em;
+    width: 48%;
+}
+
+#mediaPropertyForm .media_file {
+    float: none;
+    margin: 1.5em 0;
+    width: auto;
+}
+
+#meta_data > div,
+#template_options fieldset legend,
+#template_options fieldset > .grouped,
+.configure_plugin fieldset legend,
+.configure_plugin fieldset > .grouped,
+.configure_plugin .sequence_container,
+.configuration_group .form_select label,
+.configuration_group .form_multiselect label,
+.configuration_group .form_field label,
+.configuration_group .form_area label,
+.configuration_group .form_select select,
+.configuration_group .form_multiselect select,
+.configuration_group .form_field input,
+.configuration_group .form_area textarea,
+.configuration_group fieldset > fieldset legend,
+#uploadform .form_select label,
+#uploadform .form_field label,
+#uploadform .form_select select,
+#uploadform .form_field input,
+.field_info {
+    float: left;
+    margin-right: 2%;
+    width: 48%;
+}
+
+#hide_subcats_info {
+    float: none;
+    margin: .85715em 0 0;
+    width: 100%;
+}
+
+#edit_entry_status_comments {
+    float: left;
+    width: 70%;
+}
+
+#maintenance_import label {
+    display: block;
+}
+
+.js #serendipity_category .form_field #category_icon {
+    width: 85%;
+}
+
+#entry_status {
+    width: 100%;
+}
+
+.serendipity_statistics > .wide_box {
+    clear: left;
+    float: none;
+    margin: 0 0 1em;
+    width: 100%;
+}
+
+.field_info {
+    margin: .85715em 2% 0 0;
+}
+
+.configuration_group .form_select select,
+.configuration_group .form_multiselect select,
+.configuration_group .form_field input,
+.configuration_group .form_area textarea,
+#uploadform .form_select select,
+#uploadform .form_field input {
+    max-width: 48%;
+}
+
+.js .configuration_group .media_choose input {
+    margin-right: 1%;
+    max-width: 41.5%;
+}
+
+.media_choose .button_link {
+    position: relative;
+    top: 2px;
+}
+
+.configuration_group .form_select,
+.configuration_group .form_multiselect,
+.configuration_group .form_field,
+.configuration_group .form_area,
+.configuration_group fieldset > fieldset,
+#template_select .odd,
+.plugins_installable > li:nth-child(odd),
+.media_pane .odd,
+#dashboard > section:last-child,
+.serendipity_statistics > section:nth-child(odd) {
+    clear: left;
+}
+
+#serendipityScaleImg {
+    overflow: hidden;
+}
+
+#serendipityScaleImg {
+    margin-top: 2.25em;
+}
+
+.configure_plugin fieldset .form_radio,
+.configuration_group fieldset > fieldset .form_radio,
+#serendipity_plugin_config > fieldset .form_radio,
+#template_options fieldset .form_radio {
+    margin-top: 0;
+}
+
+.pluginmanager_side {
+    float: left;
+    margin: 0 0 1.5em;
+    vertical-align: top;
+}
+
+#pluginlist_sidebar .pluginmanager_side  {
+    margin-right: 1%;
+    width: 32%;
+}
+
+#pluginlist_event .pluginmanager_side  {
+    margin-right: 1%;
+    width: 49%;
+}
+
+#pluginlist_event .pluginmanager_side:nth-child(even) {
+    margin-right: 0;
+    margin-left: 1%;
+}
+
+#meta p {
+    font-size: .875em;
+    padding: .85715em;
+}
+
+#edit_entry_status_comments .form_check {
+    margin-bottom: 0;
+}
+
+#media_pane_sort div fieldset input,
+#media_pane_sort div fieldset select,
+#media_pane_filter div fieldset input,
+#media_pane_filter div fieldset select {
+    margin-bottom: .75em;
+}
+
+#sort_entries .form_select label,
+#filter_entries .form_select label,
+#filter_entries .form_field label,
+#filter_comments label,
+#serendipity_comment label,
+#media_pane_filter label,
+#media_pane_sort label,
+#karmafilters label {
+    display: block;
+    width: auto;
+}
+
+#edit_entry_status select[multiple],
+#sort_entries .form_select select,
+#filter_entries .form_select select,
+#filter_entries .form_field input,
+#media_filter input,
+#media_filter select,
+#media_pane_sort select,
+#karmafilters .form_field input,
+#karmafilters .form_select select {
+    width: 85%;
+}
+
+#sort_entries .form_select,
+#filter_comments .inputs > div,
+#serendipity_comment .form_field,
+#media_filter > div,
+#media_pane_sort > .left,
+#media_pane_sort > .center,
+#media_pane_sort > .right,    
+#media_pane_sort > .grouped > div {
+    float: left;
+    width: 33% ;
+}
+
+#filter_entries .form_select,
+#filter_entries .form_field {
+    float: left;
+    width: 25%;
+}
+
+#karmafilters .form_field,
+#karmafilters .form_select {
+    float: left;
+    width: 50%;
+}
+
+#media_filter_file,
+#media_pane_sort .left,
+#serendipity_comment .form_area {
+    clear: both;
+}
+
+#keyword_list {
+    padding-top: 2em;
+}
+
+#login .form_field input {
+    width: auto;
+}
+
+h1 {
+    font-size: 1.125em;
+    line-height: 1.3333em;
+    margin: .6667em 0;
+}
+
+#top > div,
+main {
+    margin: 0 auto;
+    max-width: 80em;
+    width: 96%;
+}
+
+#main_menu {
+    background: transparent;
+}
+
+#user_menu {
+    position: absolute;
+    top: 0;
+    right: 1.5%;
+    text-align: right;
+    width: auto;
+}
+
+#main_menu #user_menu h3 {
+    border: 0 none;
+    color: #ccdee7;
+    float: left;
+    font-weight: normal;
+    margin: 1em 1em 0 0;
+    padding: 0;
+}
+
+#user_menu > ul {
+    float: right;
+    margin-top: .6em;
+}
+
+#top > div,
+#main_menu,
+#content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.js #main_menu {
+    margin-left: 0;
+}
+
+#nav-toggle {
+    display: none !important;
+    visibility: hidden;
+}
+
+#main_menu {
+    display: block !important;
+    visibility: visible;
+}
+
+#main_menu h3 {
+    background: #ddd;
+    background-image: -webkit-linear-gradient(#fff, #ddd);
+    background-image: linear-gradient(#fff, #ddd);
+    border-bottom: 1px solid #aaa;
+    display: block;
+    color: #666;
+    font-size: 1em;
+    margin: 0 -1em;
+    padding: .5em 1em;
+    visibility: visible;
+}
+
+#main_menu > ul {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+#main_menu > ul > li {
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 0 1em;
+    padding: 0 1em;
+}
+
+#main_menu li > ul > li {
+    float: none;
+    width: 100%;
+}
+
+#main_menu {
+    float: left;
+    margin: 0 2% 0 0;
+}
+
+#main_menu #user_menu {
+    border: 0 none;
+    padding: 0;
+}
+
+#main_menu #user_menu h3 {
+    background: transparent;
+    border: 0 none;
+    padding-top: 0;
+}
+
+#content {
+    float: right;
+    margin: 0 0 0 2%;
+}
+
+#preview {
+    float: left;
+    margin-bottom: 2.25em;
+    width: 66%;
+}
+
+#main_menu {
+    width: 23%;
+}
+
+#content {
+    width: 73%;
+}
+
+.installer #content {
+    float: none;
+    margin: 0 auto 2em;
+    max-width: 60em;
+    width: 100%;
+}
+
+#login {
+    margin: 4em auto 8em;
+}
