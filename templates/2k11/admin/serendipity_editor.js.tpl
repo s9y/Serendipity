@@ -852,7 +852,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
     // Fire a11y helper script
     AccessifyHTML5({
-        header: '#top>div>div',
+        header: '#top',
         footer: '#meta'
     });
 
