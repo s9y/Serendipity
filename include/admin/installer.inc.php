@@ -30,7 +30,7 @@ $data['basedir'] = $basedir;
 $data['phpversion'] = phpversion();
 $data['versionInstalled'] = $serendipity['versionInstalled'];
 $data['templatePath']  = $serendipity['templatePath'];
-$data['installerHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/');
+$data['installerHTTPPath'] = str_replace('//', '/', dirname($_SERVER['PHP_SELF']) . '/'); // since different OS handlers for enddir
 
 /**
  * Checks a return code constant if it's successfull or an error and return HTML code
@@ -373,16 +373,11 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     return;
 }
 
-
-
 include_once  dirname(dirname(__FILE__)) . "/functions.inc.php";
-
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
-
-
 
 $serendipity['smarty']->assign($data);
 $tfile = serendipity_getTemplateFile("admin/installer.inc.tpl");
