@@ -718,6 +718,7 @@ button[type="submit"]:focus {
     text-shadow: #050505 0 1px 1px;
 }
 
+.comment_data dd .button_link,
 .toggle_info,
 .toggle_info:visited,
 .toggle_info:hover,
