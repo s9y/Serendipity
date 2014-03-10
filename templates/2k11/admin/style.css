@@ -1744,7 +1744,10 @@ form > .button_link:first-of-type,
 }
 
 .zebra_list .odd,
-.option_list .odd,
+.option_list .odd {
+    background: #eee;
+}
+
 .upload_form:nth-child(odd),
 .upload_form:nth-child(odd) input[type="file"] {
     background: #eee;
@@ -2744,7 +2747,10 @@ img.mfp-img {
 
     #template_select .even,
     .media_pane .even,
-    #dashboard > .even,
+    #dashboard > .even {
+        margin: 0 0 1em 2%;
+    }
+
     #maintenance > section:nth-child(odd) {
         margin: 0 0 1em 2%;
     }
@@ -2850,9 +2856,12 @@ img.mfp-img {
     .configuration_group .form_area,
     .configuration_group fieldset > fieldset,
     #template_select .odd,
-    .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
-    #dashboard > section:last-child,
+    #dashboard > section:last-child {
+        clear: left;
+    }
+
+    .plugins_installable > li:nth-child(odd),
     .serendipity_statistics > section:nth-child(odd) {
         clear: left;
     }

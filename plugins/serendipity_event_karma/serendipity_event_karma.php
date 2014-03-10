@@ -1748,7 +1748,7 @@ END_IMG_CSS;
         <li class='prev'>$linkPrevious</li>
         <li class='next'>$linkNext</li>
     </ul>
-<nav>
+</nav>
 </div>
 ");
                         if (is_array($sql)) {
