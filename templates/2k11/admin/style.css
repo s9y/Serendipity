@@ -429,17 +429,10 @@ form > button,
 #login .form_field label,
 #filter_comments label,
 #serendipity_comment label,
-#sort_entries .form_select label,
-#filter_entries .form_select label,
-#filter_entries .form_field label,
 .pluginmanager_plugin .form_check,
 .pluginmanager_plugin h5,
 .media_file .form_check,
 .media_file h3,
-#media_pane_filter label,
-#media_pane_sort label,
-#karmafilters label,
-#image_directory_create_form label,
 #entries_list .entry_info span,
 .folder_name,
 .toggle_info,
@@ -461,6 +454,13 @@ label > span,
 .msg_success,
 .msg_notice,
 .msg_hint,
+#sort_entries .form_select label,
+#filter_entries .form_select label,
+#filter_entries .form_field label,
+#media_pane_filter label,
+#media_pane_sort label,
+#karmafilters label,
+#image_directory_create_form label,
 #edit_entry_title label,
 #edit_entry_metadata .form_field label,
 #edit_entry_metadata .form_select label,
@@ -1178,16 +1178,6 @@ summary {
     width: 15%;
 }
 
-#sort_entries .form_select label,
-#filter_entries .form_select label,
-#filter_entries .form_field label,
-#media_pane_filter label,
-#media_pane_sort label,
-#karmafilters label,
-#image_directory_create_form label {
-    width: 20%;
-}
-
 .media_file_keywords li {
     float: left;
     margin: 0 2% .5em 0;
@@ -1202,12 +1192,6 @@ summary {
 
 .pagination > ul {
     min-height: 1em;
-}
-
-#sort_entries .form_select select,
-#filter_entries .form_select select,
-#filter_entries .form_field input {
-    width: 80%;
 }
 
 #filter_comments .form_field > input,
@@ -1232,6 +1216,9 @@ summary {
 #serendipity_category .form_select select,
 #serendipity_category .form_multiselect select,
 #directory_permissions .form_multiselect select,
+#sort_entries .form_select select,
+#filter_entries .form_select select,
+#filter_entries .form_field input,
 #uploadform .form_select select,
 #uploadform .form_field input,
 #login .form_field input,
@@ -2643,6 +2630,23 @@ img.mfp-img {
 @media only screen and (min-width: 481px) {
     #login {
         max-width: 25em;
+    }
+
+    #sort_entries .form_select label,
+    #filter_entries .form_select label,
+    #filter_entries .form_field label,
+    #media_pane_filter label,
+    #media_pane_sort label,
+    #karmafilters label,
+    #image_directory_create_form label {
+        display: inline-block;
+        width: 20%;
+    }
+
+    #sort_entries .form_select select,
+    #filter_entries .form_select select,
+    #filter_entries .form_field input {
+        width: 80%;
     }
 
     #uploadform label {
