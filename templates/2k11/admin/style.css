@@ -506,7 +506,8 @@ form > button,
     margin-bottom: 1.5em;
 }
 
-.overviewListForm > button {
+.overviewListForm > button,
+.ping_services .form_check {
     margin-top: 0;
     margin-bottom: 0;
 }
