@@ -129,7 +129,7 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
                                 this.value = 'http://' + this.value;
                             }
                         });
-                })";
+                })\n\n";
             break;
             
         return true;
