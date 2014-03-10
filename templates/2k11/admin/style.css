@@ -996,14 +996,14 @@ a.button_link:focus,
     width: auto;
 }
 
-h1,
+h1 {
+    font-size: 1.125em;
+    margin: .55em 0;
+}
+
 h2 {
     font-size: 1.42857em;
     line-height: 1.05em;
-}
-
-h1 {
-    margin: 0.55em 0;
 }
 
 h2 {
@@ -1371,7 +1371,7 @@ summary {
 #nav-toggle {
     float: left;
     font-size: 1.25em;
-    margin: .35em .8em 0 0;
+    margin: .35em .75em 0 0;
 }
 
 #main_menu #user_menu li {
