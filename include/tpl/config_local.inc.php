@@ -445,15 +445,7 @@
                                           'type'        => 'bool',
                                           'permission'  => 'siteConfiguration',
                                           'default'     => false),
-/*
-                                    array('var'         => 'wysiwyg',
-                                          'title'       => INSTALL_WYSIWYG,
-                                          'description' => INSTALL_WYSIWYG_DESC,
-                                          'type'        => 'bool',
-                                          'default'     => false,
-                                          'permission'  => 'blogConfiguration',
-                                          'flags'       => array('simpleInstall', 'installOnly')),
-*/
+
                                     array('var'         => 'enablePopup',
                                           'title'       => INSTALL_POPUP,
                                           'description' => INSTALL_POPUP_DESC,
