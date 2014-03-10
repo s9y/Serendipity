@@ -357,16 +357,16 @@ class serendipity_event_spartacus extends serendipity_event
     function outputMSG($status, $msg) {
         switch($status) {
             case 'notice':
-                echo '<div class="serendipityAdminMsgNote msg_notice"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_note.png') . '" alt="" />' . $msg . '</div>' . "\n";
+                echo '<span class="msg_notice"><span class="icon-info-circled"></span> '. $msg .'</span>' . "\n";
                 break;
 
             case 'error':
-                echo '<div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . $msg . '</div>' . "\n";
+                echo '<span class="msg_error"><span class="icon-attention-circled"></span> '. $msg .'</span>' . "\n";
                 break;
 
             default:
             case 'success':
-                echo '<div class="serendipityAdminMsgSuccess msg_success"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_success.png') . '" alt="" />' . $msg . '</div>' . "\n";
+                echo '<span class="msg_success"><span class="icon-ok-circled"></span> '. $msg .'</span>' . "\n";
                 break;
         }
     }
@@ -462,7 +462,6 @@ class serendipity_event_spartacus extends serendipity_event
                 if (file_exists($target) && filesize($target) > 0) {
                     $data = file_get_contents($target);
                     $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
-                    echo "<br />\n";
                 }
             } else {
                 // Fetch file
@@ -574,7 +573,6 @@ class serendipity_event_spartacus extends serendipity_event
                 if (strlen($xml) > 0) {
                     $valid = true;
                 }
-                echo '<br /><br />';
             }
 
         } else {
@@ -585,7 +583,6 @@ class serendipity_event_spartacus extends serendipity_event
             $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
     
             $xml = $this->fetchfile($url, $target, $cacheTimeout, true);
-            echo '<br /><br />';
         }
 
         $new_crc  = md5($xml);
@@ -1135,9 +1132,9 @@ class serendipity_event_spartacus extends serendipity_event
 
                 case 'backend_pluginlisting_header':
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
-                        echo '<div id="upgrade_notice" class="serendipityAdminMsgSuccess msg_success">';
-                        echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE" class="serendipityIconLink upgrade_sidebar"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR . '</a> &nbsp; ';
-                        echo '<a href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event" class="serendipityIconLink upgrade_event"><img src="' . serendipity_getTemplateFile('admin/img/upgrade_now.png') . '" style="border: 0px none ; vertical-align: middle; display: inline;" alt="" />' . PLUGIN_EVENT_SPARTACUS_CHECK_EVENT . '</a> ';
+                        echo '<div id="upgrade_notice" class="clearfix">';
+                        echo '<a id="upgrade_sidebar" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR .'</a>';
+                        echo '<a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
                         echo '</div>';
                     }
 
@@ -1145,7 +1142,7 @@ class serendipity_event_spartacus extends serendipity_event
                     break;
 
                 case 'backend_pluginlisting_header_upgrade':
-                    echo '<em>' . PLUGIN_EVENT_SPARTACUS_CHECK_HINT . '</em><br />';
+                    echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . PLUGIN_EVENT_SPARTACUS_CHECK_HINT . '</span>';
 
                     return true;
                     break;

@@ -500,12 +500,14 @@ details,
 #maintenance > section > .button_link,
 form > a,
 form > button,
-#content .upgrade_done {
+#content .upgrade_done,
+#upgrade_notice {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
 
-.overviewListForm > button {
+.overviewListForm > button,
+.ping_services .form_check {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -872,7 +874,8 @@ input[type=checkbox],
 #toggle_extended,
 #toggle_metadata,
 #toggle_advanced,
-#category_icon {
+#category_icon,
+#upgrade_notice a {
     margin-right: .4em;
 }
 
@@ -1741,7 +1744,10 @@ form > .button_link:first-of-type,
 }
 
 .zebra_list .odd,
-.option_list .odd,
+.option_list .odd {
+    background: #eee;
+}
+
 .upload_form:nth-child(odd),
 .upload_form:nth-child(odd) input[type="file"] {
     background: #eee;
@@ -2682,6 +2688,15 @@ img.mfp-img {
     .media_file_keywords li {
         width: 23%;
     }
+
+    #upgrade_notice {
+        float: right;
+    }
+
+    #upgrade_notice a {
+        margin-right: 0;
+        margin-left: .4em;
+    }
 }
 
 
@@ -2732,7 +2747,10 @@ img.mfp-img {
 
     #template_select .even,
     .media_pane .even,
-    #dashboard > .even,
+    #dashboard > .even {
+        margin: 0 0 1em 2%;
+    }
+
     #maintenance > section:nth-child(odd) {
         margin: 0 0 1em 2%;
     }
@@ -2838,9 +2856,12 @@ img.mfp-img {
     .configuration_group .form_area,
     .configuration_group fieldset > fieldset,
     #template_select .odd,
-    .plugins_installable > li:nth-child(odd),
     .media_pane .odd,
-    #dashboard > section:last-child,
+    #dashboard > section:last-child {
+        clear: left;
+    }
+
+    .plugins_installable > li:nth-child(odd),
     .serendipity_statistics > section:nth-child(odd) {
         clear: left;
     }
