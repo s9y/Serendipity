@@ -2646,7 +2646,7 @@ img.mfp-img {
     #sort_entries .form_select select,
     #filter_entries .form_select select,
     #filter_entries .form_field input {
-        width: 80%;
+        width: 79%;
     }
 
     #uploadform label {
