@@ -2186,7 +2186,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
 #media_selector_bar {
     float: right;
-    margin: 0 0 1em;
+    margin: 1em 0 0;
 }
 
 /* TEMP fixes for tree view */
@@ -2664,6 +2664,10 @@ img.mfp-img {
         position: absolute;
         top: -60%;
         left: 37%;
+    }
+
+    #media_selector_bar {
+        margin: 0 0 1em;
     }
 
     #mediaPropertyForm .media_file_props label,
