@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -445,7 +445,7 @@
                                           'type'        => 'bool',
                                           'permission'  => 'siteConfiguration',
                                           'default'     => false),
-
+/*
                                     array('var'         => 'wysiwyg',
                                           'title'       => INSTALL_WYSIWYG,
                                           'description' => INSTALL_WYSIWYG_DESC,
@@ -453,7 +453,7 @@
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration',
                                           'flags'       => array('simpleInstall', 'installOnly')),
-
+*/
                                     array('var'         => 'enablePopup',
                                           'title'       => INSTALL_POPUP,
                                           'description' => INSTALL_POPUP_DESC,
