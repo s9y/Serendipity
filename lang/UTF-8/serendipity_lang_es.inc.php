@@ -994,7 +994,7 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
 // New 2.0 constants
 @define('SIMPLE_FILTERS', 'Simplified filters');
-@define('SIMPLE_FILTERS', 'When enabled, search forms and filter functions are reduced to essential options. When disabled, you will see every possible filter option, i.e. in the media library or the entry editor.');
+@define('SIMPLE_FILTERS_DESC', 'When enabled, search forms and filter functions are reduced to essential options. When disabled, you will see every possible filter option, i.e. in the media library or the entry editor.');
 @define('TOGGLE_SELECT', 'Mark for selection');
 @define('MORE', 'More');
 @define('ENTRY_STATUS', 'Entry status');
