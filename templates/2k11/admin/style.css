@@ -1493,7 +1493,7 @@ fieldset p,
 }
 
 .actions li {
-    margin: 0 .4em .5em 0;
+    margin: 0 0 .5em;
 }
 
 .no-js .media_file .actions li {
@@ -2609,6 +2609,10 @@ img.mfp-img {
 @media only screen and (min-width: 480px) {
     #serendipityEntry {
         padding-top: 0;
+    }
+
+    .actions li {
+        margin: 0 .4em .5em 0;
     }
 
     #edit_entry_submit {
