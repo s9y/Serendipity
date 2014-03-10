@@ -103,8 +103,8 @@ class serendipity_event_weblogping extends serendipity_event
             switch($event) {
                 case 'backend_display':
 ?>
-                    <fieldset style="margin: 5px">
-                        <legend><?php echo PLUGIN_EVENT_WEBLOGPING_PING; ?></legend>
+                    <fieldset class="entryproperties">
+                        <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_WEBLOGPING_PING; ?></legend></span>
 <?php
                     $noneclick = '';
                     foreach($this->services AS $index => $service) {
@@ -126,13 +126,17 @@ class serendipity_event_weblogping extends serendipity_event
                         $title    = sprintf(PLUGIN_EVENT_WEBLOGPING_SENDINGPING, $service['name'])
                                   . (!empty($service['supersedes']) ?  ' ' . sprintf(PLUGIN_EVENT_WEBLOGPING_SUPERSEDES, implode(',', $service['supersedes'])) : '');
 ?>
-                            <input <?php echo $onclick; ?> class="input_checkbox" style="margin: 0px; padding: 0px; vertical-align: bottom;" type="checkbox" name="serendipity[announce_entries_<?php echo $service['name']; ?>]" id="serendipity[announce_entries_<?php echo $service['name']; ?>]" value="true" <?php echo $selected; ?> />
-                                <label title="<?php echo $title; ?>" style="vertical-align: bottom; margin: 0px; padding: 0px;" for="serendipity[announce_entries_<?php echo $service['name']; ?>]">&nbsp;<?php echo $service['name']; ?>&nbsp;&nbsp;</label><br />
+                        <div class="form_check">
+                            <input <?php echo $onclick; ?> type="checkbox" name="serendipity[announce_entries_<?php echo $service['name']; ?>]" id="serendipity[announce_entries_<?php echo $service['name']; ?>]" value="true" <?php echo $selected; ?>>
+                            <label title="<?php echo $title; ?>" for="serendipity[announce_entries_<?php echo $service['name']; ?>]"><?php echo $service['name']; ?></label>
+                        </div>
 <?php
     }
 ?>
-                            <input onclick="<?php echo $noneclick; ?>" class="input_checkbox" style="margin: 0px; padding: 0px; vertical-align: bottom;" type="checkbox" value="none" id="serendipity[announce_entries_none]" />
-                                <label title="<?php echo NONE; ?>" style="vertical-align: bottom; margin: 0px; padding: 0px;" for="serendipity[announce_entries_none]">&nbsp;<?php echo NONE; ?>&nbsp;&nbsp;</label><br />
+                        <div class="form_check">
+                            <input onclick="<?php echo $noneclick; ?>" type="checkbox" value="none" id="serendipity[announce_entries_none]">
+                            <label title="<?php echo NONE; ?>" for="serendipity[announce_entries_none]"><?php echo NONE; ?></label>
+                        </div>
                     </fieldset>
 <?php
                     return true;
