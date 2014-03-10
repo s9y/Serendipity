@@ -1766,7 +1766,15 @@ form > .button_link:first-of-type,
 .karmalog h4 {
     font-size: 1em;
     line-height: 1.5;
-    max-width: 85%;
+}
+
+#entries_list h3,
+.karmalog h4 {
+    max-width: 50%;
+}
+
+#serendipity_comments_list h4 {
+    max-width: 90%;
 }
 
 .toggle_headline > button,
