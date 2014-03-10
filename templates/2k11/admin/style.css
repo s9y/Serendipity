@@ -500,7 +500,8 @@ details,
 #maintenance > section > .button_link,
 form > a,
 form > button,
-#content .upgrade_done {
+#content .upgrade_done,
+#upgrade_notice {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -872,7 +873,8 @@ input[type=checkbox],
 #toggle_extended,
 #toggle_metadata,
 #toggle_advanced,
-#category_icon {
+#category_icon,
+#upgrade_notice a {
     margin-right: .4em;
 }
 
