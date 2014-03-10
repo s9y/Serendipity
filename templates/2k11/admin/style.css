@@ -2684,6 +2684,15 @@ img.mfp-img {
     .media_file_keywords li {
         width: 23%;
     }
+
+    #upgrade_notice {
+        float: right;
+    }
+
+    #upgrade_notice a {
+        margin-right: 0;
+        margin-left: .4em;
+    }
 }
 
 
