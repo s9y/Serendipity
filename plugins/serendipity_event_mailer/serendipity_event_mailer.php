@@ -155,14 +155,21 @@ class serendipity_event_mailer extends serendipity_event
                     }
 
 ?>
-                    <fieldset style="margin: 5px">
-                        <legend><?php echo PLUGIN_EVENT_MAILER_NAME; ?></legend>
-                            <input class="input_checkbox" type="checkbox" name="serendipity[properties][sendentry]" id="properties_sendentry" value="true" checked="checked" />
-                            <label title="<?php echo PLUGIN_EVENT_MAILER_SENDING; ?>" for="properties_sendentry">&nbsp;<?php echo PLUGIN_EVENT_MAILER_ISTOSENDIT; ?></label><br />
-                            <label title="<?php echo PLUGIN_EVENT_MAILER_RECIPIENT; ?>" for="properties_mailto">&nbsp;<?php echo PLUGIN_EVENT_MAILER_RECIPIENTS; ?>&nbsp;&nbsp;</label>&nbsp;
-                            <input class="input_textbox" type="text" name="serendipity[properties][mailto]" id="properties_mailto" value="<?php echo htmlspecialchars($mailto); ?>" /><br />
-                            <input type="checkbox" value="true" id="sendall" name="serendipity[properties][sendentry_all]" <?php echo ($sendtoall ? 'checked="checked"': ''); ?> />
-                            <label title="<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?>" for="sendall">&nbsp;<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?></label>
+                    <fieldset class="entryproperties">
+                        <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_MAILER_NAME; ?></legend></span>
+
+                        <div class="form_check">
+                            <input id="properties_sendentry" type="checkbox" name="serendipity[properties][sendentry]" value="true" checked="checked">
+                            <label title="<?php echo PLUGIN_EVENT_MAILER_SENDING; ?>" for="properties_sendentry"><?php echo PLUGIN_EVENT_MAILER_ISTOSENDIT; ?></label>
+                        </div>
+                        <div class="form_field">
+                            <label title="<?php echo PLUGIN_EVENT_MAILER_RECIPIENT; ?>" for="properties_mailto"><?php echo PLUGIN_EVENT_MAILER_RECIPIENTS; ?></label>
+                            <input id="properties_mailto" type="text" name="serendipity[properties][mailto]" value="<?php echo htmlspecialchars($mailto); ?>">
+                        </div>
+                        <div class="form_check">
+                            <input id="sendall" type="checkbox" value="true" name="serendipity[properties][sendentry_all]" <?php echo ($sendtoall ? 'checked="checked"': ''); ?>>
+                            <label title="<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?>" for="sendall"><?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?></label>
+                        </div>
                     </fieldset>
 <?php
                     break;
