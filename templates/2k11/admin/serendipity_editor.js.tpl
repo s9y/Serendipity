@@ -1322,9 +1322,15 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Equal Heights
     $(window).load(function() {
         if($('body').has('.equal_heights').size() > 0) {
-            $('.equal_heights').syncHeight({
-                updateOnResize: true
-            });
+            if($('html').hasClass('lt-ie9')) {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: false
+                });
+            } else {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: true
+                });
+            }
         }
     });
 })(jQuery);
