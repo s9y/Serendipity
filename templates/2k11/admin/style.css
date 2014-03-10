@@ -1281,6 +1281,7 @@ summary {
 }
 
 #serendipityEntry {
+    padding-top: .5em;
     position: relative;
 }
 
@@ -2606,6 +2607,10 @@ img.mfp-img {
 
 /* SMALL SCREEN */
 @media only screen and (min-width: 480px) {
+    #serendipityEntry {
+        padding-top: 0;
+    }
+
     #edit_entry_submit {
         top: -3.25em;
     }
