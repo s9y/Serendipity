@@ -1030,4 +1030,7 @@ $i18n_unknown = 'tw';
 @define('CURRENT_TAB', 'Current tab: ');
 @define('PINGBACKS', 'Pingbacks');
 @define('NO_PINGBACKS', 'No Pingbacks');
-@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
+@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
+@define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
+@define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
+@define('VIDEO', 'Video');
