@@ -478,7 +478,8 @@ label > span,
 #mediaPropertyForm .media_file_props label,
 #mediaPropertyForm header b,
 #mediaPropertyForm footer b,
-#content .upgrade_done {
+#content .upgrade_done,
+.pluginmanager_description .perm_name {
     display: block;
 }
 
@@ -510,6 +511,10 @@ form > button,
 .ping_services .form_check {
     margin-top: 0;
     margin-bottom: 0;
+}
+
+.pluginmanager_description .perm_name {
+    margin-bottom: .25em;
 }
 
 #categories,
