@@ -176,7 +176,7 @@
                     <caption>{$CONST.PERMISSIONS}</caption>
                     <thead>
                         <tr>
-                            <th>Directory</th>  {* i18n *}
+                            <th>{$CONST.FILTER_DIRECTORY}</th>
                             <th>{$CONST.PERMISSIONS}</th>
                         </tr>
                     </thead>
