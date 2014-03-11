@@ -290,7 +290,7 @@ class serendipity_event_statistics extends serendipity_event
 
     <div class="serendipity_statistics clearfix">
         <section>
-            <h3>(Needs a heading)</h3>
+            <h3><?php echo ENTRIES; ?></h3>
 
             <dl>
                 <dt><?php echo PLUGIN_EVENT_STATISTICS_OUT_FIRST_ENTRY; ?></dt>
