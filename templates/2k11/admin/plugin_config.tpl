@@ -50,13 +50,18 @@
 {/if}
 {if $spawnNuggets}
     {serendipity_hookPlugin hook="backend_wysiwyg_nuggets" eventData=$ev hookAll=true}
-    {if ($ev['skip_nuggets'] === false)}
+    {if $ev['skip_nuggets'] === false}
+
     <script>
-    function Spawnnugget() { 
-        {foreach $htmlnugget AS $htmlnuggetid}
-        Spawnnuggets('{$htmlnuggetid}');
+        function Spawnnugget() { 
+        {foreach $ev['nuggets'] AS $nuggetid}
+
+            if (window.Spawnnuggets) Spawnnuggets('{$nuggetid}');
+
         {/foreach}
-    } 
+
+        }
     </script>
+
     {/if}
 {/if}
