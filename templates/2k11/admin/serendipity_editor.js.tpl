@@ -232,7 +232,7 @@
             tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
             return;
         } else if (typeof(CKEDITOR) != 'undefined') {
-            oEditor = CKEDITOR.instances[textarea];
+            oEditor = (isinstance) ?  isinstance : CKEDITOR.instances[textarea];
             if (oEditor.mode == "wysiwyg") { 
                 oEditor.insertHtml(str);
                 return;
