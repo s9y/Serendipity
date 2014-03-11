@@ -18,7 +18,7 @@
 @define('HAVE_TO_BE_LOGGED_ON', 'You have to be logged in to view this page');
 @define('WRONG_USERNAME_OR_PASSWORD', 'You appear to have entered an invalid username or password');
 @define('APPEARANCE', 'Appearance');
-@define('MANAGE_STYLES', 'Manage Templates');
+@define('MANAGE_STYLES', 'Manage Themes');
 @define('CONFIGURE_PLUGINS', 'Configure Plugins');
 @define('CONFIGURATION', 'Configuration');
 @define('BACK_TO_BLOG', 'Back to Weblog');
@@ -121,7 +121,7 @@
 @define('VIEW_FULL', 'view full');
 @define('VIEW_TOPICS', 'view topics');
 @define('AT', 'at');
-@define('SET_AS_TEMPLATE', 'Set as template');
+@define('SET_AS_TEMPLATE', 'Set as theme');
 @define('IN', 'in');
 @define('EXCERPT', 'Excerpt');
 @define('TRACKED', 'Tracked');
@@ -164,7 +164,7 @@
 @define('CATEGORY_DELETED', 'Category #%s deleted.');
 @define('INVALID_CATEGORY', 'No category was provided for deletion');
 @define('CATEGORY_SAVED', 'Category saved');
-@define('SELECT_TEMPLATE', 'Select the template you wish to use for your blog');
+@define('SELECT_TEMPLATE', 'Select the theme you wish to use for your blog');
 @define('ENTRIES_NOT_SUCCESSFULLY_INSERTED', 'Entries were not successfully inserted!');
 @define('MT_DATA_FILE', 'Movable Type data file');
 @define('FORCE', 'Force');
@@ -610,7 +610,7 @@
 @define('WONT_INSTALL_DB_AGAIN', 'will not install the database again');
 @define('CHECK_DATABASE_EXISTS', 'Checking to see if the database and tables already exist');
 @define('CREATING_PRIMARY_AUTHOR', 'Creating primary author \'%s\'');
-@define('SETTING_DEFAULT_TEMPLATE', 'Setting default template');
+@define('SETTING_DEFAULT_TEMPLATE', 'Setting default theme');
 @define('INSTALLING_DEFAULT_PLUGINS', 'Installing default plugins');
 @define('SERENDIPITY_INSTALLED', 'Serendipity has been successfully installed');
 @define('VISIT_BLOG_HERE', 'Visit your new blog here');
@@ -618,7 +618,7 @@
 @define('ERROR_DETECTED_IN_INSTALL', 'An error was detected in the installation');
 @define('OPERATING_SYSTEM', 'Operating system');
 @define('WEBSERVER_SAPI', 'Webserver SAPI');
-@define('TEMPLATE_SET', '\'%s\' has been set as your active template');
+@define('TEMPLATE_SET', '\'%s\' has been set as your active theme');
 @define('SEARCH_ERROR', 'The search function did not work as expected. Notice for the administrator of this blog: This may happen because of missing index keys in your database. On MySQL systems your database user account needs to be privileged to execute this query: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> The specific error returned by the database was: <pre>%s</pre>');
 @define('EDIT_THIS_CAT', 'Editing "%s"');
 @define('CATEGORY_REMAINING', 'Delete this category and move its entries to this category');
@@ -627,7 +627,7 @@
 @define('RESET_DATE', 'Reset date');
 @define('RESET_DATE_DESC', 'Click here to reset the date to the current time');
 @define('PROBLEM_PERMISSIONS_HOWTO', 'Permissions can be set by running shell command: `<em>%s</em>` on the failed directory, or by setting this using an FTP program');
-@define('WARNING_TEMPLATE_DEPRECATED', 'Warning: Your current template is using a deprecated template method, you are advised to update if possible');
+@define('WARNING_TEMPLATE_DEPRECATED', 'Warning: Your current theme is using a deprecated theme method, you are advised to update if possible');
 @define('ENTRY_PUBLISHED_FUTURE', 'This entry is not yet published.');
 @define('ENTRIES_BY', 'Entries by %s');
 @define('PREVIOUS', 'Previous');
@@ -742,7 +742,7 @@
 @define('PLUGIN_GROUP_BACKEND_EDITOR', 'Backend: Editor');
 @define('PLUGIN_GROUP_BACKEND_USERMANAGEMENT', 'Backend: Usermanagement');
 @define('PLUGIN_GROUP_BACKEND_METAINFORMATION', 'Backend: Meta information');
-@define('PLUGIN_GROUP_BACKEND_TEMPLATES', 'Backend: Templates');
+@define('PLUGIN_GROUP_BACKEND_TEMPLATES', 'Backend: Themes');
 @define('PLUGIN_GROUP_BACKEND_FEATURES', 'Backend: Features');
 @define('PLUGIN_GROUP_IMAGES', 'Images');
 @define('PLUGIN_GROUP_ANTISPAM', 'Antispam');
@@ -854,8 +854,8 @@
 @define('MEDIA_PROP_DESC', 'Enter a list of ";" separated property fields you want to define for each media file');
 @define('MEDIA_PROP_MULTIDESC', '(You can append ":MULTI" after any item to indicate that this item will contain long text instead of just some characters)');
 
-@define('STYLE_OPTIONS_NONE', 'This template has no specific options. To see how your template can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
-@define('STYLE_OPTIONS', 'Template options');
+@define('STYLE_OPTIONS_NONE', 'This theme has no specific options. To see how your theme can specify options, read the Technical Documentation on www.s9y.org about "Configuration of Theme options".');
+@define('STYLE_OPTIONS', 'Theme options');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Total: %d plugins.');
 
@@ -958,7 +958,7 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
-@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Templates page)');
+@define('NAVLINK_AMOUNT', 'Enter number of links in the navbar (needs reload of the Manage Themes page)');
 @define('NAV_LINK_TEXT', 'Enter the navbar link text');
 @define('NAV_LINK_URL', 'Enter the full URL of your link');
 @define('MODERATE_SELECTED_COMMENTS', 'Approve selected comments');
@@ -990,7 +990,7 @@
 @define('MENU_DASHBOARD', 'Dashboard');
 @define('MENU_ACTIVITY', 'Activity');
 @define('MENU_SETTINGS', 'Settings');
-@define('MENU_TEMPLATES', 'Templates');
+@define('MENU_TEMPLATES', 'Themes');
 @define('MENU_PLUGINS', 'Plugins');
 @define('MENU_USERS', 'Users');
 @define('MENU_GROUPS', 'Groups');
@@ -1012,10 +1012,10 @@
 @define('MOVE_DOWN', 'Move down');
 @define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Install a new sidebar plugin');
 @define('INSTALL_NEW_EVENT_PLUGIN', 'Install a new event plugin');
-@define('TEMPLATE_OPTIONS', 'Template options');
-@define('CURRENT_TEMPLATE', 'Current Template');
-@define('TEMPLATE_INFO', 'Show template info');
-@define('AVAILABLE_TEMPLATES', 'Available Templates');
+@define('TEMPLATE_OPTIONS', 'Theme options');
+@define('CURRENT_TEMPLATE', 'Current Theme');
+@define('TEMPLATE_INFO', 'Show theme info');
+@define('AVAILABLE_TEMPLATES', 'Available Themes');
 @define('TIMESTAMP_RESET', 'The timestamp has been reset to the current time.');
 
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');

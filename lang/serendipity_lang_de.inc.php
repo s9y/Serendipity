@@ -19,7 +19,7 @@
 @define('HAVE_TO_BE_LOGGED_ON', 'Sie müssen angemeldet sein, um diese Seite zu sehen');
 @define('WRONG_USERNAME_OR_PASSWORD', 'Das Passwort oder der Username war falsch. Bitte wiederholen Sie die Eingabe.');
 @define('APPEARANCE', 'Aussehen');
-@define('MANAGE_STYLES', 'Templates verwalten');
+@define('MANAGE_STYLES', 'Themes verwalten');
 @define('CONFIGURE_PLUGINS', 'Plugins verwalten');
 @define('CONFIGURATION', 'Konfiguration');
 @define('BACK_TO_BLOG', 'Zurück zum Blog');
@@ -120,7 +120,7 @@
 @define('VIEW_FULL', 'ganz anzeigen');
 @define('VIEW_TOPICS', 'Überschriften anzeigen');
 @define('AT', 'um');
-@define('SET_AS_TEMPLATE', 'Als Template wählen');
+@define('SET_AS_TEMPLATE', 'Als Theme wählen');
 @define('IN', 'in');
 @define('EXCERPT', 'Auszug');
 @define('TRACKED', 'Aufgenommen');
@@ -163,7 +163,7 @@
 @define('CATEGORY_DELETED', 'Kategorie #%s wurde gelöscht.');
 @define('INVALID_CATEGORY', 'Es wurde keine Kategorie zum Löschen gewählt.');
 @define('CATEGORY_SAVED', 'Kategorie gespeichert');
-@define('SELECT_TEMPLATE', 'Wählen Sie das Template für das Blog');
+@define('SELECT_TEMPLATE', 'Wählen Sie das Theme für das Blog');
 @define('ENTRIES_NOT_SUCCESSFULLY_INSERTED', 'Einträge konnten nicht importiert werden!');
 @define('YES', 'Ja');
 @define('NO', 'Nein');
@@ -609,7 +609,7 @@
 @define('WONT_INSTALL_DB_AGAIN', 'werde Datenbank nicht erneut erzeugen');
 @define('CHECK_DATABASE_EXISTS', 'Prüfe, ob Datenbank und Tabellen bereits bestehen ...');
 @define('CREATING_PRIMARY_AUTHOR', 'Erstelle Hauptbenutzer \'%s\' ...');
-@define('SETTING_DEFAULT_TEMPLATE', 'Setze Standard-Template ...');
+@define('SETTING_DEFAULT_TEMPLATE', 'Setze Standard-Theme ...');
 @define('INSTALLING_DEFAULT_PLUGINS', 'Installiere Standard-Plugins ...');
 @define('SERENDIPITY_INSTALLED', 'Serendipity wurde erfolgreich installiert!');
 @define('VISIT_BLOG_HERE', 'Besuchen Sie Ihr neues Blog hier');
@@ -617,7 +617,7 @@
 @define('ERROR_DETECTED_IN_INSTALL', 'Bei der Installation trat ein Fehler auf');
 @define('OPERATING_SYSTEM', 'Betriebssystem');
 @define('WEBSERVER_SAPI', 'Webserver SAPI');
-@define('TEMPLATE_SET', '\'%s\' wurde als Template gewählt.');
+@define('TEMPLATE_SET', '\'%s\' wurde als Theme gewählt.');
 @define('SEARCH_ERROR', 'Die Suche konnte nicht wie gewünscht ausgeführt werden. Hinweis für den Administrator dieses Blogs: Dieser Fehler kann durch fehlende Index-Schlüssel der Datenbank verursacht werden. Auf MySQL-Systemen muss der Datenbankbenutzer-Account in der Lage sein, Index-Schlüssel zu erstellen und folgende Abfrage auszuführen: <pre>CREATE FULLTEXT INDEX entry_idx on %sentries (title,body,extended)</pre> Die genaue Fehlermeldung der Datenbank bei der Suche lautete: <pre>%s</pre>');
 @define('EDIT_THIS_CAT', 'Bearbeite "%s"');
 @define('CATEGORY_REMAINING', 'Diese Kategorie löschen und Einträge darin in folgende Kategorie verschieben');
@@ -626,7 +626,7 @@
 @define('RESET_DATE', 'Datum zurücksetzen');
 @define('RESET_DATE_DESC', 'Hier klicken, um das Datum auf die aktuelle Systemzeit zu setzen');
 @define('PROBLEM_PERMISSIONS_HOWTO', 'Zugriffsrechte können durch folgenden Shell-Befehl (oder auch mittels FTP-Client) geändert werden: `<em>%s</em>` mit dem Namen des nicht beschreibbaren Verzeichnisses.');
-@define('WARNING_TEMPLATE_DEPRECATED', 'Hinweis: Das aktuelle Template verwendet eine ältere Methode der HTML-Erzeugung. Falls möglich, bitte das Template auf die Nutzung von Smarty optimieren.');
+@define('WARNING_TEMPLATE_DEPRECATED', 'Hinweis: Das aktuelle Theme verwendet eine ältere Methode der HTML-Erzeugung. Falls möglich, bitte das Theme auf die Nutzung von Smarty optimieren.');
 @define('ENTRY_PUBLISHED_FUTURE', 'Dieser Artikel wurde noch nicht veröffentlicht.');
 @define('ENTRIES_BY', 'Einträge von %s');
 @define('PREVIOUS', 'Zurück');
@@ -740,7 +740,7 @@
 @define('PLUGIN_GROUP_BACKEND_EDITOR', 'Backend: Editor');
 @define('PLUGIN_GROUP_BACKEND_USERMANAGEMENT', 'Backend: Benutzerverwaltung');
 @define('PLUGIN_GROUP_BACKEND_METAINFORMATION', 'Backend: Meta-Informationen');
-@define('PLUGIN_GROUP_BACKEND_TEMPLATES', 'Backend: Templates');
+@define('PLUGIN_GROUP_BACKEND_TEMPLATES', 'Backend: Themes');
 @define('PLUGIN_GROUP_BACKEND_FEATURES', 'Backend: Features');
 @define('PLUGIN_GROUP_IMAGES', 'Bilder / Medien');
 @define('PLUGIN_GROUP_ANTISPAM', 'Antispam');
@@ -853,8 +853,8 @@
 @define('MEDIA_PROP_DESC', 'Tragen Sie eine Liste von ";" separierten Eigenschaftsfeldern ein, die für Mediendatenbankeinträge ausgefüllt werden können.');
 @define('MEDIA_PROP_MULTIDESC', '(Sie können ":MULTI" nach jedem Element eintragen, um anzugeben dass für dieses Feld eine lange Beschreibung erwartet wird)');
 
-@define('STYLE_OPTIONS_NONE', 'Dieses Template hat keine speziellen Optionen. Wie Ihr Template solche Optionen anlegen kann, ist in der technischen Dokumentation auf www.s9y.org im Bereich "Configuration of Theme options" beschrieben.');
-@define('STYLE_OPTIONS', 'Template-Optionen');
+@define('STYLE_OPTIONS_NONE', 'Dieses Theme hat keine speziellen Optionen. Wie Ihr Theme solche Optionen anlegen kann, ist in der technischen Dokumentation auf www.s9y.org im Bereich "Configuration of Theme options" beschrieben.');
+@define('STYLE_OPTIONS', 'Theme-Optionen');
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Gesamt: %d Plugins.');
 
@@ -960,7 +960,7 @@
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
 @define('SEARCH_FULLENTRY', 'Show full entry');
-@define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Templates verwalten-Seite muss danach neu geladen werden)');
+@define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Themes verwalten-Seite muss danach neu geladen werden)');
 @define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
 @define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
 @define('MODERATE_SELECTED_COMMENTS', 'Markierte Kommentare freischalten');
@@ -992,7 +992,7 @@
 @define('MENU_DASHBOARD', 'Dashboard');
 @define('MENU_ACTIVITY', 'Aktivität');
 @define('MENU_SETTINGS', 'Einstellungen');
-@define('MENU_TEMPLATES', 'Templates');
+@define('MENU_TEMPLATES', 'Themes');
 @define('MENU_PLUGINS', 'Plugins');
 @define('MENU_USERS', 'Benutzer');
 @define('MENU_GROUPS', 'Gruppen');
@@ -1014,10 +1014,10 @@
 @define('MOVE_DOWN', 'Nach unten');
 @define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Seitenleisten-Plugin installieren');
 @define('INSTALL_NEW_EVENT_PLUGIN', 'Ereignis-Plugin installieren');
-@define('TEMPLATE_OPTIONS', 'Template-Optionen');
-@define('CURRENT_TEMPLATE', 'Aktuelles Template');
-@define('TEMPLATE_INFO', 'Template-Informationen');
-@define('AVAILABLE_TEMPLATES', 'Verfügbare Templates');
+@define('TEMPLATE_OPTIONS', 'Theme-Optionen');
+@define('CURRENT_TEMPLATE', 'Aktuelles Theme');
+@define('TEMPLATE_INFO', 'Theme-Informationen');
+@define('AVAILABLE_TEMPLATES', 'Verfügbare Themes');
 @define('TIMESTAMP_RESET', 'Das Datum wurde auf die aktuelle Systemzeit gesetzt.');
 
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
