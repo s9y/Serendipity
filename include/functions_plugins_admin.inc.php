@@ -139,6 +139,7 @@ function show_plugins($event_only = false, $sidebars = null)
             $css_key = 's9ycid' . str_replace('%', '-', $key);
             $is_plugin_owner    = ($plugin_data['authorid'] == $serendipity['authorid'] || serendipity_checkPermission('adminPluginsMaintainOthers'));
             $is_plugin_editable = ($is_plugin_owner || $plugin_data['authorid'] == '0');
+            $cname = explode(':', $plugin_data['name']);
 
             if (!is_object($plugin)) {
                 $name = $title = ERROR . '!';
@@ -152,7 +153,7 @@ function show_plugins($event_only = false, $sidebars = null)
 
                 $name  = htmlspecialchars($bag->get('name'));
                 $desc  = htmlspecialchars($bag->get('description'));
-                $desc .= '<span class="block_level">' . VERSION  . ': <em>' . $bag->get('version') . '</em></span>';
+                $desc .= '<span class="block_level">' . VERSION  . ': <em>' . $bag->get('version') . '</em> <var class="perm_name">['.$cname[0].']</var></span>';
 
                 $title = serendipity_plugin_api::get_plugin_title($plugin, '[' . $name . ']');
 
