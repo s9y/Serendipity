@@ -1,7 +1,7 @@
 <?php
 // Colorsets
 @define('THEME_COLORSET', 'Choix de couleur');
-@define('USER_STYLESHEET','Utilise un css additionnel. L\'utilisateur doit creer une feuille de style dans le dossier template.Ce fichier a le nom user.css, il peut etre utilise pour ecraser les styles selectionnes.');
+@define('USER_STYLESHEET','Utilise un css additionnel. L\'utilisateur doit creer une feuille de style dans le dossier theme. Ce fichier a le nom user.css, il peut etre utilise pour ecraser les styles selectionnes.');
 // Layout
 @define('LAYOUT_TYPE','Organisation du site (T = texte, B = barre de navigation, CF = Contenu en premier)');
 @define('LAYOUT_SBS','Trois colonnes T-B-B');
