@@ -880,9 +880,13 @@ input[type=checkbox],
 #toggle_extended,
 #toggle_metadata,
 #toggle_advanced,
-#category_icon,
-#upgrade_notice a {
+#category_icon {
     margin-right: .4em;
+}
+
+#upgrade_notice a {
+    display: block;
+    margin: 0 0 .5em;
 }
 
 .form_radio {
@@ -2621,6 +2625,7 @@ img.mfp-img {
     }
 
     #pluginlist_tabs {
+        clear: both;
         position: relative;
     }
 
@@ -2719,15 +2724,6 @@ img.mfp-img {
     .media_file_keywords li {
         width: 23%;
     }
-
-    #upgrade_notice {
-        float: right;
-    }
-
-    #upgrade_notice a {
-        margin-right: 0;
-        margin-left: .4em;
-    }
 }
 
 
@@ -2801,6 +2797,15 @@ img.mfp-img {
         float: none;
         margin: 1.5em 0;
         width: auto;
+    }
+
+    #upgrade_notice {
+        float: right;
+    }
+
+    #upgrade_notice a {
+        display: inline-block;
+        margin: 0 0 0 .4em;
     }
 
     #meta_data > div,
