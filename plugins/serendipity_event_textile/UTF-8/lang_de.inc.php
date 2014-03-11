@@ -18,7 +18,7 @@
 
 // Next lines were translated on 2014/01/06
 @define('PLUGIN_EVENT_TEXTILE_EXAMPLE_NOTE', 'Achtung: Die besten Resulte werden erzielt, wenn dieses Plugin an der Spitze aller Markup Plugins, aber <u>nach</u> Smilies "serendipity_event_emoticate" und Smarty Parsing "serendipity_event_smartymarkup" in der Pluginliste steht! Insbesondere Letzteres kann ansonsten zu potentielle Fehlermeldungen führen.');
-@define('PLUGIN_EVENT_TEXTILE_DOCTYPE', 'Textile: Konvertiere nach HTML5 (nur mit lib3 - benötigt ein HTML5 Template, wie 2k11)');
+@define('PLUGIN_EVENT_TEXTILE_DOCTYPE', 'Textile: Konvertiere nach HTML5 (nur mit lib3 - benötigt ein HTML5 Theme wie 2k11)');
 @define('PLUGIN_EVENT_TEXTILE_DOCTYPE_DESC', 'Momentan kann PHP-Textile entweder XHTML (default) oder HTML5 Quellcode produzieren. Im HTML5 Modus werden, außer den single-tag Endungen, nur kleinere Änderungen, wie acronym zu abbr und align Attribute in Images zu Klassen vorgenommen.');
 // todo: future 
 #@define('PLUGIN_EVENT_TEXTILE_RESTRICTCOMMENTS', 'Textile: Restrict user comments (lib3 only)');
