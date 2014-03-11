@@ -826,7 +826,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 }(document, jQuery));
 
-(function($) {
+$(function() {
     // Fire responsive nav
     if($('body').has('#main_menu').size() > 0) {
         $('#nav-toggle').click(function(e) {
@@ -1333,7 +1333,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
             }
         }
     });
-})(jQuery);
+});
 
 // This is kept for older plugins. Use of $(document).ready() is encouraged.
 // At some point, this will be removed.

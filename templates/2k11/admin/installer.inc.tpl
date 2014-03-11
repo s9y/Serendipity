@@ -11,6 +11,7 @@
 <![endif]-->
     <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
     <script src="{serendipity_getFile file='jquery.js'}"></script>
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
 <body id="serendipity_admin_page">
     <header id="top">
@@ -295,7 +296,5 @@
     <footer id="meta">
         <p>{$ADMIN_FOOTER_POWERED_BY|sprintf:$versionInstalled:$phpversion}</p>
     </footer>
-
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </body>
 </html>

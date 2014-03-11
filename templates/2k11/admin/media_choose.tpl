@@ -11,6 +11,7 @@
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script>
 var media_token_url = '{$media.token_url}';
 var media_rename = '{$CONST.ENTER_NEW_NAME}';
@@ -241,7 +242,7 @@ if (parent.frames && parent.frames['tree']) {
     </footer>
 {/if}{* if $media.case switch end *}
 </div> <!-- //.serendipityAdminContent end -->
-<script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
+
 {if $media.case == 'tree'}
 <script>
     var tree;

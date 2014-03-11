@@ -12,6 +12,7 @@
     <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
     <script src="{$serendipityHTTPPath}{$templatePath}jquery.js"></script>
+    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
 <body id="serendipity_admin_page">
 {if NOT $admin_vars.no_banner}
@@ -168,6 +169,5 @@
     </footer>
     {/if}
 {/if}
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </body>
 </html>
