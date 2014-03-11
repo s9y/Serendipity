@@ -210,11 +210,11 @@
                 {/if}
 
                 <table>
-                    <caption>Executables</caption> {* i18n *}
+                    <caption>{$CONST.INSTALLER_CLI_TOOLS}</caption>
                     <thead>
                         <tr>
-                            <th>Program</th>  {* i18n *}
-                            <th>Executable?</th> {* i18n *}
+                            <th>{$CONST.INSTALLER_CLI_TOOLNAME}</th>
+                            <th>{$CONST.INSTALLER_CLI_TOOLSTATUS}</th>
                         </tr>
                     </thead>
                     <tbody>
