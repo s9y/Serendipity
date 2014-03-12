@@ -1027,7 +1027,8 @@
 @define('CURRENT_TAB', 'Current tab: ');
 @define('PINGBACKS', 'Pingbacks');
 @define('NO_PINGBACKS', 'No Pingbacks');
-@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
+@define('GROUP_NAME_DESC', "If you enter a string that is defined as a constant in any language file (e.g. 'USERLEVEL_EDITOR_DESC'), then the translated representation of this groupname will show up. You can also define your own constants and then enter their name here. If you do not want to have translatable group names, you can enter any other string you like.");
+@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
