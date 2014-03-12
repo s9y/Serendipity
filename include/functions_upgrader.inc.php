@@ -123,6 +123,50 @@ $dead_smarty_files = array(
     'TODO'
 );
 
+/* A list of old WYSIWYG-Editor lib files which got obsoleted in 2.0 */
+$dead_htmlarea_files = array(
+    'htmlarea.css',
+    'htmlarea.js',
+    'index.html',
+    'license.txt',
+    'my_custom.js',
+    'popupdiv.js',
+    'popupwin.js',
+    'reference.html',
+    'release-notes.txt',
+    'Xinha.css',
+    'XinhaCore.js',
+    'XinhaLoader.js',
+    'XinhaLoader_readme.txt',
+    'ckeditor/build-config.js',
+    'ckeditor/skins/moono/images/mini.png'
+);
+
+/* A list of old WYSIWYG-Editor lib directories which got obsoleted in 2.0 */
+$dead_htmlarea_dirs = array(
+    $serendipity['serendipityPath'] . 'htmlarea/contrib',
+    $serendipity['serendipityPath'] . 'htmlarea/examples',
+    $serendipity['serendipityPath'] . 'htmlarea/images',
+    $serendipity['serendipityPath'] . 'htmlarea/lang',
+    $serendipity['serendipityPath'] . 'htmlarea/modules',
+    $serendipity['serendipityPath'] . 'htmlarea/plugins',
+    $serendipity['serendipityPath'] . 'htmlarea/popups',
+    $serendipity['serendipityPath'] . 'htmlarea/skins',
+    $serendipity['serendipityPath'] . 'htmlarea/ckeditor/samples'
+);
+
+/**
+ * @param string $directory
+ * @param array $files
+ * @return array
+ */
+function recursive_directory_iterator($dir = array()) {
+    foreach ($dir AS $path) {
+        serendipity_removeDeadFiles_SPL($path);
+        @rmdir($path);
+    }
+}
+
 /**
  * Fix inpropper plugin constant names
  *
@@ -268,7 +312,7 @@ function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=n
             if (is_array($purgedir) && !empty($purgedir) ) {
                 foreach ($purgedir AS $pdir) {
                     if (basename($thisfile) == $pdir) {
-                        //echo '<b><u>LIST & REMOVE EMPTY DIRECTORY</u></b>: '.$thisfile."<br><br>\n";
+                        #echo '<b><u>LIST & REMOVE EMPTY DIRECTORY</u></b>: '.$thisfile."<br><br>\n";
                         @rmdir($thisfile);
                         continue;
                     }
