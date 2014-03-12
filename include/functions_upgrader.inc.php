@@ -156,9 +156,10 @@ $dead_htmlarea_dirs = array(
 );
 
 /**
- * @param string $directory
- * @param array $files
- * @return array
+ * recursive directory call to purge files and directories
+ *
+ * @param array $directories
+ * @return 
  */
 function recursive_directory_iterator($dir = array()) {
     foreach ($dir AS $path) {
