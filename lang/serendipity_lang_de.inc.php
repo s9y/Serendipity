@@ -1029,7 +1029,7 @@
 @define('CURRENT_TAB', 'Aktives Tab: ');
 @define('PINGBACKS', 'Pingbacks');
 @define('NO_PINGBACKS', 'Keine Pingbacks');
-@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
+@define('GROUP_NAME_DESC', "Hier darf Großschreibung in Namen wie z.B. 'EXAMPLE_GROUP' verwendet werden, nicht aber als Konstanten festgelegte Gruppennamen wie 'USERLEVEL_XYZ'.");
 @define('INSTALLER_CLI_TOOLS', 'Serverseitige Kommandozeilen-Tools');
 @define('INSTALLER_CLI_TOOLNAME', 'CLI-Tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Ausführbar?');
