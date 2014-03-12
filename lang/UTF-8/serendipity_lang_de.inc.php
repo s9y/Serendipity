@@ -626,7 +626,7 @@
 @define('RESET_DATE', 'Datum zurücksetzen');
 @define('RESET_DATE_DESC', 'Hier klicken, um das Datum auf die aktuelle Systemzeit zu setzen');
 @define('PROBLEM_PERMISSIONS_HOWTO', 'Zugriffsrechte können durch folgenden Shell-Befehl (oder auch mittels FTP-Client) geändert werden: `<em>%s</em>` mit dem Namen des nicht beschreibbaren Verzeichnisses.');
-@define('WARNING_TEMPLATE_DEPRECATED', 'Hinweis: Das aktuelle Themme verwendet eine ältere Methode der HTML-Erzeugung. Falls möglich, bitte das Theme auf die Nutzung von Smarty optimieren.');
+@define('WARNING_TEMPLATE_DEPRECATED', 'Hinweis: Das aktuelle Theme verwendet eine ältere Methode der HTML-Erzeugung. Falls möglich, bitte das Theme auf die Nutzung von Smarty optimieren.');
 @define('ENTRY_PUBLISHED_FUTURE', 'Dieser Artikel wurde noch nicht veröffentlicht.');
 @define('ENTRIES_BY', 'Einträge von %s');
 @define('PREVIOUS', 'Zurück');
