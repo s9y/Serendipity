@@ -1021,15 +1021,16 @@
 @define('TIMESTAMP_RESET', 'Das Datum wurde auf die aktuelle Systemzeit gesetzt.');
 
 @define('CLEANCOMPILE_PASS', '[smarty clearCompiledTemplate(%s)]');
-@define('CLEANCOMPILE_FAIL', 'No files available for clearing.');
-@define('CLEANCOMPILE_TITLE', 'Clear template cache');
-@define('CLEANCOMPILE_INFO', 'This will purge all compiled template files of the currently active template. Compiled templates will be automatically re-created on demand by the Smarty framework.');
+@define('CLEANCOMPILE_FAIL', 'Es sind derzeit keine Dateien zu löschen.');
+@define('CLEANCOMPILE_TITLE', 'Template-Cache leeren');
+@define('CLEANCOMPILE_INFO', 'Löscht alle kompilierten Template-Dateien des derzeit aktiven Themes. Die kompilierten Template-Dateien werden bei Bedarf vom Smarty-Framework automatisch neu erzeugt.');
 @define('INSTALLER_KEY', 'Schlüssel');
 @define('INSTALLER_VALUE', 'Wert');
 @define('CURRENT_TAB', 'Aktives Tab: ');
 @define('PINGBACKS', 'Pingbacks');
 @define('NO_PINGBACKS', 'Keine Pingbacks');
-@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
-@define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
-@define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
+@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
+@define('INSTALLER_CLI_TOOLS', 'Serverseitige Kommandozeilen-Tools');
+@define('INSTALLER_CLI_TOOLNAME', 'CLI-Tool');
+@define('INSTALLER_CLI_TOOLSTATUS', 'Ausführbar?');
 @define('VIDEO', 'Video');
