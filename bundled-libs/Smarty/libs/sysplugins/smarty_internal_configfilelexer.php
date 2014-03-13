@@ -2,10 +2,10 @@
 /**
 * Smarty Internal Plugin Configfilelexer
 *
-* This is the lexer to break the config file source into tokens
+* This is the lexer to break the config file source into tokens 
 * @package Smarty
 * @subpackage Config
-* @author Uwe Tews
+* @author Uwe Tews 
 */
 /**
 * Smarty Internal Plugin Configfilelexer
@@ -24,7 +24,8 @@ class Smarty_Internal_Configfilelexer
     public $yyTracePrompt;
     public $state_name = array (1 => 'START', 2 => 'VALUE', 3 => 'NAKED_STRING_VALUE', 4 => 'COMMENT', 5 => 'SECTION', 6 => 'TRIPPLE');
     public $smarty_token_names = array (        // Text for parser error messages
-                   );
+    );
+
 
     function __construct($data, $smarty)
     {
