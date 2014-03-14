@@ -882,7 +882,7 @@ function serendipity_smarty_init($vars = array()) {
                 return false;
             }
 
-            // Load serendipity smarty class loading class
+            // include the serendipity smarty constructor
             if (!class_exists('Serendipity_Smarty')) {
                 include_once S9Y_INCLUDE_PATH . '/include/serendipity_smarty_class.inc.php';
             }
@@ -908,7 +908,7 @@ function serendipity_smarty_init($vars = array()) {
             #$serendipity['smarty']->testInstall();exit;
 
             /** 
-             * prüfe auf eventuelle API Änderungen in 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (siehe class) ] 
+             * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
              * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
              **/
             $serendipity['smarty']->registerPlugin('modifier', 'makeFilename', 'serendipity_makeFilename');
