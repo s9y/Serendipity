@@ -212,7 +212,7 @@
         {/if}
 
         {if $admin_vars.admin_installed}
-            {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+            {serendipity_hookPlugin hook="backend_footer" hookAll="true"}
         {/if}
        
     </body>
