@@ -382,7 +382,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         $data['timestamp'] = serendipity_strftime('%H:%M:%S');
     }   
     
-    serendipity_plugin_api::hook_event("backend_pluginlisting_header", $null);
+    serendipity_plugin_api::hook_event('backend_pluginlisting_header', $null);
 
     ob_start();
     serendipity_plugin_api::hook_event('backend_plugins_sidebar_header', $serendipity);
