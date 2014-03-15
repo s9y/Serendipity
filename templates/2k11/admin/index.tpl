@@ -166,8 +166,17 @@
     </footer>
 {/if}
 
-{if $admin_vars.admin_installed}
-    {serendipity_hookPlugin hook="backend_footer" hookAll="true"}
+{if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_footer" hookAll="true"}{/if}
+{if $init === false}
+    {* CKEDITOR_CCPATHFILE could also be a custom path to a templates ckekeditor_custom_config.js file *}
+    <script type="text/javascript">
+        CKEDITOR_CCPATHFILE  = '{$serendipityHTTPPath}htmlarea/';
+        CKEDITOR_CCIMGPATH   = '{$serendipityHTTPPath}templates/2k11/admin/img/thumbnail.png';
+        CKEDITOR_S9YPLUGPATH = '{$serendipityHTTPPath}plugins/';
+        CKEDITOR_S9Y_BASEURL = '{$serendipityHTTPPath}';
+    </script>
+    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
+    <script src="{$serendipityHTTPPath}htmlarea/ckeditor_custom_plugin.js"></script>
 {/if}
 
 </body>

@@ -9,12 +9,7 @@ $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOS
 if (!function_exists('serendipity_smarty_html5time')) {
     function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
 
-    if( defined('Smarty::SMARTY_VERSION') ) {
-        $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
-    } else {
-        // old Smarty 2 syntax
-        $serendipity['smarty']->register_modifier('serendipity_html5time', 'serendipity_smarty_html5time');
-    }
+    $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
 }
 
 if (class_exists('serendipity_event_spamblock')) {
@@ -110,6 +105,20 @@ $template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
+/**
+ * This adds the possibility for templates to register a central function
+ * serendipity_plugin_api_event_hook() and
+ * serendipity_plugin_api_pre_event_hook() that can be used to
+ * use plugin API interaction WITHOUT actual plugins. So special
+ * plugins can be bundled within a template, without the need to
+ * seperately install them. The "pre" function is called BEFORE
+ * all normal plugins are executed, the normal function is called
+ * AFTER plugin execution.
+ *
+ * In here we use it to parse and compile serendipity_editor.js.tpl
+ * and to populate serendipity.js via the new 'js' plugin hook for the frontend.
+ * The bundled core JS editor - CKEDITOR - will read pre set plugin evenData in some backend hooks
+ */
 function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$addData) {
     global $serendipity;
     // Check what Event is coming in, only react to those we want.
@@ -125,6 +134,7 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
             break;
 
         case 'js':
+            // This is frontend and backend!
             // alway add \n\n for the next and start at line Col 1, to populate the (virtual) serendipity.js file
             echo "
 jQuery(function() { 
@@ -136,6 +146,50 @@ jQuery(function() {
 })\n\n";
             break;
             
+        case 'backend_wysiwyg':
+            if (preg_match('@^nugget@i', $eventData['item'])) {
+                // switch to wysiwyg finisher directly, in case of nuggets
+                serendipity_plugin_api::hook_event('backend_wysiwyg_finish', $bag, $eventData);
+            } else {
+                // this only builds textareas of normal entry forms, the possible button data will be passed to 'backend_footer' via serendipity_emit_htmlarea_code() function
+                if (isset($eventData['item']) && !empty($eventData['item'])) {
+?>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        if (window.Spawnnuggets) Spawnnuggets('<?php echo $eventData['item']; ?>', 'entryforms<?php echo $eventData['jsname']; ?>', null);//case1;{* normal entryform textareas *}
+    });
+</script>
+
+<?php
+                }
+            }
+            break;
+
+        case 'backend_wysiwyg_finish':
+            // pass nugget $eventData['item'] and $eventData['buttons'] into the 'backend_footer' hook
+            serendipity_plugin_api::hook_event('backend_footer', $bag, $eventData);
+            break;
+
+        case 'backend_footer':
+            if ($serendipity['wysiwyg']) {
+                if (isset($eventData['item']) && !empty($eventData['item'])) {
+                    if (isset($eventData['buttons']) && (is_array($eventData['buttons']) && !empty($eventData['buttons']))) {
+?>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            // send eventData as json encoded array into the javascript stream, which can be pulled by 'backend_header' hooks global Spawnnuggets() nugget function
+            jsEventData = <?php echo json_encode($eventData['buttons']); ?>;//case2;{* staticpage nuggets *}
+        });
+    </script>
+
+<?php
+                    }
+                }
+            }
+            break;
+
         return true;
         break;
     }

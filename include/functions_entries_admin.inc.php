@@ -168,32 +168,23 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             'init'   => &$init,
             'item'   => &$item,
             'jsname' => &$jsname,
-            'skip'   => false
+            'skip'   => false,
+            'buttons'=> array()
         );
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
 
-        if ($eventData['skip']) {
+        if ($eventData['skip'] || $init) {
             return;
         }
 
+        //actually we don't even need this any more...
         if (is_array($eventData['buttons'])) {
             foreach($eventData['buttons'] as $button) {
-                // Sort buttons into toolbar lists for later additions
-                switch($button['toolbar']) {
-                case S9Y_WYSIWYG_TOOLBAR_FORMATTING:
-                    $toolbar[S9Y_WYSIWYG_TOOLBAR_FORMATTING][] = $button;
-                    break;
-                case S9Y_WYSIWYG_TOOLBAR_MEDIA:
-                case S9Y_WYSIWYG_TOOLBAR_WEB:
-                    $toolbar[S9Y_WYSIWYG_TOOLBAR_WEB][] = $button;
-                    break;
-                default:
-                    $toolbar['other'][] = $button;
-                    break;
-                }
+                $toolbar['other'][] = $button;
+                break;
             }
         }
-        
+
         $data = array();
         $data['init'] = $init;
         $data['spawnMulti'] = $spawnMulti;
@@ -201,6 +192,8 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         $data['eventData'] = $eventData;
         $data['item'] = $item;
         $data['toolbar'] = $toolbar;
+        $data['jsEventData'] = 'jsEventData = '.json_encode($eventData['buttons']);
+
         echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);
     }
     $init = true;
