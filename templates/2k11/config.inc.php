@@ -157,7 +157,7 @@ jQuery(function() {
 
 <script type="text/javascript">
     $( document ).ready(function() {
-        if (window.Spawnnuggets) Spawnnuggets('<?php echo $eventData['item']; ?>', 'entryforms<?php echo $eventData['jsname']; ?>', null);//case1;{* normal entryform textareas *}
+        if (window.Spawnnuggets) Spawnnuggets('<?php echo $eventData['item']; ?>', 'entryforms<?php echo $eventData['jsname']; ?>', null);//case1
     });
 </script>
 
