@@ -175,12 +175,13 @@ jQuery(function() {
             if ($serendipity['wysiwyg']) {
                 if (isset($eventData['item']) && !empty($eventData['item'])) {
                     if (isset($eventData['buttons']) && (is_array($eventData['buttons']) && !empty($eventData['buttons']))) {
+                    // case staticpage nuggets
 ?>
 
     <script type="text/javascript">
         $( document ).ready(function() {
             // send eventData as json encoded array into the javascript stream, which can be pulled by 'backend_header' hooks global Spawnnuggets() nugget function
-            jsEventData = <?php echo json_encode($eventData['buttons']); ?>;//case2;{* staticpage nuggets *}
+            jsEventData = <?php echo json_encode($eventData['buttons']); ?>;//case2
         });
     </script>
 
