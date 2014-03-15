@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -31,7 +31,6 @@ $rightSidebarElements = serendipity_plugin_api::count_plugins('right');
 $serendipity['smarty']->assignByRef('leftSidebarElements', $leftSidebarElements);
 $serendipity['smarty']->assignByRef('rightSidebarElements', $rightSidebarElements);
 
-
 switch ($serendipity['GET']['action']) {
     // User wants to read the diary
     case 'read':
@@ -40,13 +39,13 @@ switch ($serendipity['GET']['action']) {
             if (!is_array($entry) || count($entry) < 1 || !is_array($entry[0])) {
                 unset($serendipity['GET']['id']);
                 $entry = array(array());
-                $serendipity['head_title'] = htmlspecialchars($serendipity['blogTitle']); 
-                $serendipity['head_subtitle'] = ''; 
-                $serendipity['smarty']->assign('head_title', $serendipity['head_title']); 
-                $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']); 
+                $serendipity['head_title'] = htmlspecialchars($serendipity['blogTitle']);
+                $serendipity['head_subtitle'] = '';
+                $serendipity['smarty']->assign('head_title', $serendipity['head_title']);
+                $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
                 $serendipity['view'] = '404';
-                serendipity_header('HTTP/1.0 404 Not found');                    
-                serendipity_header('Status: 404 Not found');                    
+                serendipity_header('HTTP/1.0 404 Not found');
+                serendipity_header('Status: 404 Not found');
             }
 
             serendipity_printEntries($entry, 1);
@@ -106,8 +105,8 @@ switch ($serendipity['GET']['action']) {
 
     // Show the archive
     case 'archives':
-        $serendipity['head_subtitle'] = ARCHIVES; 
-        $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']); 
+        $serendipity['head_subtitle'] = ARCHIVES;
+        $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
         serendipity_printArchives();
         break;
 
