@@ -122,14 +122,18 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
                     echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', $data);
                 break;
             }
+            break;
+
         case 'js':
-            echo "jQuery(function() {
-                        jQuery('input[type=\"url\"]').change(function() {
-                            if (this.value != '' && ! (this.value.substr(0,7) == 'http://' || this.value.substr(0,8) == 'https://')) {
-                                this.value = 'http://' + this.value;
-                            }
-                        });
-                })\n\n";
+            // alway add \n\n for the next and start at line Col 1, to populate the (virtual) serendipity.js file
+            echo "
+jQuery(function() { 
+    jQuery('input[type=\"url\"]').change(function() {
+        if (this.value != '' && ! (this.value.substr(0,7) == 'http://' || this.value.substr(0,8) == 'https://')) {
+            this.value = 'http://' + this.value;
+        }
+    });
+})\n\n";
             break;
             
         return true;
