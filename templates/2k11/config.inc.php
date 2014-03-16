@@ -147,8 +147,7 @@ function create(htmlStr) {
         frag.appendChild(temp.firstChild);
     }
     return frag;
-} 
-\n";
+} \n";
             }
             // always add \n\n to the end of last element, in case of plugins using this hook and
             // always start at line Col 1, to populate the (virtual) serendipity.js file
