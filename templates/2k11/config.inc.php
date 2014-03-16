@@ -150,7 +150,8 @@ function create(htmlStr) {
 } 
 \n";
             }
-            // alway add \n\n for the last element dor plugins using this hook and start at line Col 1, to populate the (virtual) serendipity.js file
+            // always add \n\n to the end of last element, in case of plugins using this hook and
+            // always start at line Col 1, to populate the (virtual) serendipity.js file
             echo "
 jQuery(function() { 
     jQuery('input[type=\"url\"]').change(function() {
