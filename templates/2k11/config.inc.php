@@ -135,7 +135,22 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
 
         case 'js':
             // This is frontend and backend!
-            // alway add \n\n for the next and start at line Col 1, to populate the (virtual) serendipity.js file
+            // add a global available (index.tpl; admin/index.tpl; preview_iframe.tpl) redirect error string function used by errorToExceptionHandler()
+            // hardened by admin only - better have that here, to be reachable everywhere
+            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
+                echo "
+function create(htmlStr) { 
+    var frag = document.createDocumentFragment(),
+        temp = document.createElement('div');
+        temp.innerHTML = htmlStr;
+    while (temp.firstChild) { 
+        frag.appendChild(temp.firstChild);
+    }
+    return frag;
+} 
+\n";
+            }
+            // alway add \n\n for the last element dor plugins using this hook and start at line Col 1, to populate the (virtual) serendipity.js file
             echo "
 jQuery(function() { 
     jQuery('input[type=\"url\"]').change(function() {
