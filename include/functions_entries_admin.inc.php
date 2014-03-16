@@ -173,8 +173,14 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         );
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
 
-        if ($eventData['skip'] || $init) {
+        if ($eventData['skip']) {
             return;
+        }
+
+        // entryform, staticpages, html nuggets
+        if (isset($serendipity['GET']['adminModule']) && ($serendipity['GET']['adminModule'] == 'entries' || $serendipity['GET']['adminModule'] == 'event_display' || $serendipity['GET']['adminModule'] == 'plugins') ) 
+        {
+            $backend_wysiwyg = true;
         }
 
         //actually we don't even need this any more...
@@ -192,6 +198,7 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         $data['eventData'] = $eventData;
         $data['item'] = $item;
         $data['toolbar'] = $toolbar;
+        $data['backend_wysiwyg'] = $backend_wysiwyg ? $backend_wysiwyg : false;
         $data['jsEventData'] = 'jsEventData = '.json_encode($eventData['buttons']);
 
         echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);

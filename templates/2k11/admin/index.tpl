@@ -167,7 +167,7 @@
 {/if}
 
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_footer" hookAll="true"}{/if}
-{if $init === false}
+{if $backend_wysiwyg}
     {* CKEDITOR_CCPATHFILE could also be a custom path to a templates ckekeditor_custom_config.js file *}
     <script type="text/javascript">
         CKEDITOR_CCPATHFILE  = '{$serendipityHTTPPath}htmlarea/';
