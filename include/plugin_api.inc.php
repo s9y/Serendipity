@@ -52,6 +52,89 @@ function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, 
     }
 }
 
+// Add backend core (pre) hooks
+function serendipity_plugin_api_core_event_hook($event, &$bag, &$eventData, &$addData) {
+    global $serendipity;
+
+    switch($event) {
+        case 'external_plugin':
+            switch ($eventData) {
+                case 'admin/serendipity_editor.js':
+                    header('Content-Type: application/javascript');
+                    $data = array('token_url' => serendipity_setFormToken("url"));
+                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', $data);
+                break;
+            }
+            break;
+
+        case 'js':
+            // This is frontend and backend!
+            // Add a global available (index.tpl; admin/index.tpl; preview_iframe.tpl) redirect error string function used by errorToExceptionHandler()
+            // hardened by admin only - better have that here, to be reachable everywhere
+            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
+                echo "
+function create(htmlStr) { 
+    var frag = document.createDocumentFragment(),
+        temp = document.createElement('div');
+        temp.innerHTML = htmlStr;
+    while (temp.firstChild) { 
+        frag.appendChild(temp.firstChild);
+    }
+    return frag;
+} \n";
+            }
+            break;
+
+        case 'backend_wysiwyg':
+            if (preg_match('@^nugget@i', $eventData['item'])) {
+                // switch to wysiwyg finisher directly, in case of nuggets
+                serendipity_plugin_api::hook_event('backend_wysiwyg_finish', $bag, $eventData);
+            } else {
+                // this only builds textareas of normal entry forms, the possible button data will be passed to 'backend_footer' via serendipity_emit_htmlarea_code() function
+                if (isset($eventData['item']) && !empty($eventData['item'])) {
+?>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        if (window.Spawnnuggets) Spawnnuggets('<?php echo $eventData['item']; ?>', 'entryforms<?php echo $eventData['jsname']; ?>', null);//case1
+    });
+</script>
+
+<?php 
+                }
+            }
+            break;
+
+        case 'backend_wysiwyg_finish':
+            // pass nugget $eventData['item'] and $eventData['buttons'] into the 'backend_footer' hook
+            serendipity_plugin_api::hook_event('backend_footer', $bag, $eventData);
+            break;
+
+        case 'backend_footer':
+            if ($serendipity['wysiwyg']) {
+                if (isset($eventData['item']) && !empty($eventData['item'])) {
+                    if (isset($eventData['buttons']) && (is_array($eventData['buttons']) && !empty($eventData['buttons']))) {
+                    // case staticpage nuggets
+?>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            // send eventData as json encoded array into the javascript stream, which can be pulled by 'backend_header' hooks global Spawnnuggets() nugget function
+            jsEventData = <?php echo json_encode($eventData['buttons']); ?>;//case2
+        });
+    </script>
+
+<?php 
+                    }
+                }
+            }
+            break;
+
+        return true;
+        break;
+    }
+}
+
 
 /* This file defines the plugin API for serendipity.
  * By extending these classes, you can add your own code
@@ -1048,6 +1131,9 @@ class serendipity_plugin_api
             }
         }
         
+        // execute backend needed core hooks
+        serendipity_plugin_api_core_event_hook($event_name, $bag, $eventData, $addData);
+
         if (function_exists('serendipity_plugin_api_pre_event_hook')) {
             $apifunc = 'serendipity_plugin_api_pre_event_hook';
             $apifunc($event_name, $bag, $eventData, $addData);
