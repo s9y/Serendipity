@@ -1034,7 +1034,8 @@ h4,
     margin: 1.3125em 0;
 }
 
-#diagnose caption {
+#diagnose caption,
+.no-js #mediaupload_tabs h3:first-child {
     margin-top: 0;
 }
 
