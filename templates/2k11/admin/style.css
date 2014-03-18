@@ -1469,6 +1469,11 @@ fieldset p,
     margin-top: 1em;
 }
 
+#extended_entry_editor > div {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 .category_data {
     margin: 0 1em 0 0;
 }

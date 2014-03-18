@@ -357,10 +357,10 @@
 
     // Toggle extended entry editor
     serendipity.toggle_extended = function(setCookie) {
-        if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
+        if ($('#toggle_extended').length == 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
-            $('textarea[name="serendipity[extended]"]').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
+            $('#extended_entry_editor').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
             $(toggleButton).prepend('<span class="icon-down-dir"></span> ');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -372,19 +372,19 @@
             }
         }
         
-        if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-            $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
+        if ($('#extended_entry_editor:hidden').length > 0) {
+            $('#extended_entry_editor').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
             $('#toggle_extended').find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
             localStorage.show_extended_editor = "true";
         } else {
-            $('textarea[name="serendipity[extended]"]').hide();
+            $('#extended_entry_editor').hide();
             $('#tools_extended').hide();
             $('#toggle_extended').find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
             localStorage.show_extended_editor = "false";
         }
         if (setCookie) {
-            document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
+            document.cookie = 'serendipity[toggle_extended]=' + (($('#extended_entry_editor:hidden').length == 0) ? "true" : "") + ';';
         }
     }
 
