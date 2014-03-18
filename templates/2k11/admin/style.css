@@ -1857,14 +1857,13 @@ form > .button_link:first-of-type,
     text-align: center;
 }
 
-.installer .field_info a,
-.installer .field_info a:visited {
-    color: #444;
-    text-shadow: none;
+.field_info a,
+.field_info a:visited {
+    color: #ddd;
 }
 
-.installer .field_info a:hover,
-.installer .field_info a:focus {
+.field_info a:hover,
+.field_info a:focus {
     color: #fcfcfc;
 }
 
