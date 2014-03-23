@@ -57,15 +57,6 @@ function serendipity_plugin_api_core_event_hook($event, &$bag, &$eventData, &$ad
     global $serendipity;
 
     switch($event) {
-        case 'external_plugin':
-            switch ($eventData) {
-                case 'admin/serendipity_editor.js':
-                    header('Content-Type: application/javascript');
-                    $data = array('token_url' => serendipity_setFormToken("url"));
-                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', $data);
-                break;
-            }
-            break;
 
         case 'js':
             // This is frontend and backend!

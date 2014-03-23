@@ -278,9 +278,9 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
         if (file_exists($serendipity['serendipityPath'] . $templateFile)) {
             return $serendipity[$key] . $templateFile;
         }
-
-        if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl") && IS_installed) {
-            # catch .js.tpl files served via the template-plugin-api
+        
+        if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl") && $serendipity['template'] . '/' == $directory && IS_installed) {
+            # catch .js.tpl files served via the template-plugin-api, but only if that template is active as well, so config.inc.php is laoded
             # this won't work in the installer
             return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
         }
