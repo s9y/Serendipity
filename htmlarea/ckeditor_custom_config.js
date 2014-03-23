@@ -8,16 +8,16 @@
 CKEDITOR.editorConfig = function( config ) {
 
     // Advanced Content Filter ACF works in two modes:
-    //   automatic – the filter is configured by editor features (like plugins, buttons, and commands) that are enabled with configuration options
+    //   automatic  the filter is configured by editor features (like plugins, buttons, and commands) that are enabled with configuration options
     //               such as CKEDITOR.config.plugins, CKEDITOR.config.extraPlugins, and CKEDITOR.config.toolbar,
-    //   custom    – the filter is configured by the CKEDITOR.config.allowedContent option and only features that match this setting are activated.
+    //   custom     the filter is configured by the CKEDITOR.config.allowedContent option and only features that match this setting are activated.
     // In both modes it is possible to extend the filter configuration by using the CKEDITOR.config.extraAllowedContent setting.
     // If you want to disable Advanced Content Filter, set CKEDITOR.config.allowedContent to true. All available editor features will be activated and input data will not be filtered.
     // Allowed content rules. This setting is used when instantiating CKEDITOR.editor.filter.
     // The following values are accepted:
-    //     CKEDITOR.filter.allowedContentRules – defined rules will be added to the CKEDITOR.editor.filter.
-    //     true – will disable the filter (data will not be filtered, all features will be activated).
-    //     default – the filter will be configured by loaded features (toolbar items, commands, etc.).
+    //     CKEDITOR.filter.allowedContentRules  defined rules will be added to the CKEDITOR.editor.filter.
+    //     true  will disable the filter (data will not be filtered, all features will be activated).
+    //     default  the filter will be configured by loaded features (toolbar items, commands, etc.).
     // In all cases filter configuration may be extended by extraAllowedContent. This option may be especially useful when you want to use the default allowedContent value along with some additional rules.
     //
     //    config.allowedContent = CONFIG_ACF_OFF;
@@ -81,26 +81,4 @@ CKEDITOR.editorConfig = function( config ) {
     //config.uiColor = '#14B8C4'; // light turquoise
     config['skin'] = 'moono';
     config['height'] = 400;
-
-    // remove custom toolbar buttons and plugins
-    //config.removePlugins = 'flash,iframe';
-    config.removeButtons = 'Styles';
-
-    // set the custom toolbar group
-    // Note: indent is disabled, mediaembed plugin is set here and procurator placeholders for "protected Source" is buttonless
-    config.toolbarGroups = [
-        { name: 'styles' },
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        { name: 'paragraph', groups: [ 'list', /*'indent', */'blocks', 'align', 'bidi' ] },
-        { name: 'links' },
-        { name: 'insert' },
-        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
-        { name: 'others' },
-        { name: 'mediaembed' },
-        { name: 'tools' },
-        { name: 'about' }
-    ];
-
 };

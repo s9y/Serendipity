@@ -183,23 +183,13 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             $backend_wysiwyg = true;
         }
 
-        //actually we don't even need this any more...
-        if (is_array($eventData['buttons'])) {
-            foreach($eventData['buttons'] as $button) {
-                $toolbar['other'][] = $button;
-                break;
-            }
-        }
-
         $data = array();
         $data['init'] = $init;
         $data['spawnMulti'] = $spawnMulti;
         $data['jsname'] = $jsname;
         $data['eventData'] = $eventData;
         $data['item'] = $item;
-        $data['toolbar'] = $toolbar;
         $data['backend_wysiwyg'] = $backend_wysiwyg ? $backend_wysiwyg : false;
-        $data['jsEventData'] = 'jsEventData = '.json_encode($eventData['buttons']);
 
         echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);
     }

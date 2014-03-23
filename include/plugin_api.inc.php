@@ -85,50 +85,6 @@ function create(htmlStr) {
             }
             break;
 
-        case 'backend_wysiwyg':
-            if (preg_match('@^nugget@i', $eventData['item'])) {
-                // switch to wysiwyg finisher directly, in case of nuggets
-                serendipity_plugin_api::hook_event('backend_wysiwyg_finish', $bag, $eventData);
-            } else {
-                // this only builds textareas of normal entry forms, the possible button data will be passed to 'backend_footer' via serendipity_emit_htmlarea_code() function
-                if (isset($eventData['item']) && !empty($eventData['item'])) {
-?>
-
-<script type="text/javascript">
-    $( document ).ready(function() {
-        if (window.Spawnnuggets) Spawnnuggets('<?php echo $eventData['item']; ?>', 'entryforms<?php echo $eventData['jsname']; ?>', null);//case1
-    });
-</script>
-
-<?php 
-                }
-            }
-            break;
-
-        case 'backend_wysiwyg_finish':
-            // pass nugget $eventData['item'] and $eventData['buttons'] into the 'backend_footer' hook
-            serendipity_plugin_api::hook_event('backend_footer', $bag, $eventData);
-            break;
-
-        case 'backend_footer':
-            if ($serendipity['wysiwyg']) {
-                if (isset($eventData['item']) && !empty($eventData['item'])) {
-                    if (isset($eventData['buttons']) && (is_array($eventData['buttons']) && !empty($eventData['buttons']))) {
-                    // case staticpage nuggets - pulled by if (window.Spawnnuggets) Spawnnuggets(n);
-?>
-
-    <script type="text/javascript">
-        $( document ).ready(function() {
-            jsEventData = <?php echo json_encode($eventData['buttons']); ?>;//case2
-        });
-    </script>
-
-<?php 
-                    }
-                }
-            }
-            break;
-
         return true;
         break;
     }
