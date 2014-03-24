@@ -75,10 +75,10 @@ function memSnap($tshow = '') {
 if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
-        
+
         $rep  = ini_get('error_reporting');
         $args = func_get_args();
-        
+
         // respect user has set php error_reporting to not display any errors at all
         if (!($rep & $errStr)) { return false; }
         // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
@@ -91,14 +91,14 @@ if (!function_exists('errorToExceptionHandler')) {
             return false;
         }
         // any other errors go here - throw errors as exception
-        if ($serendipity['production'] === 'debug') { 
-        
+        if ($serendipity['production'] === 'debug') {
+
             // We don't want the notices - but everything else !
-            echo '<p> == FULL DEBUG ERROR MODE == </p>';
+            echo ' == FULL DEBUG ERROR MODE == ';
             echo '<pre>';
             // trying to be as detailled as possible - but beware using args containing sensibel data like passwords
             if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
-                if ( version_compare(PHP_VERSION, '5.4') >= 0 ) { 
+                if ( version_compare(PHP_VERSION, '5.4') >= 0 ) {
                     $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8);
                 } else {
                     $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
@@ -107,7 +107,8 @@ if (!function_exists('errorToExceptionHandler')) {
             }
             //print_r($args); // debugging
             // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-            if (!$serendipity['dbConn']) {
+            // compare version to not get strange T_NEW parse errors (http://board.s9y.org/viewtopic.php?f=10&t=19436)
+            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
             } else {
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
@@ -115,28 +116,41 @@ if (!function_exists('errorToExceptionHandler')) {
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
         }
-        if ($serendipity['production'] === false) { 
-            echo '<p> == TESTING ERROR MODE == </p>';
+        if ($serendipity['production'] === false) {
+            echo ' == TESTING ERROR MODE == ';
             echo '<pre>';
-            // it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-            if (!$serendipity['dbConn']) {
+            // see notes above
+            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
                 echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
             } else {
                 throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
             }
             echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
             exit; // make sure to exit in case of database connection errors.
-        } 
-
-        if ($serendipity['production'] === true) { 
-            // ToDo: enhance for more special serendipity error needs
-            $str  = '<p> == SERENDIPITY ERROR == </p>';
-            $str .= '<p>Please correct:</p>';
-            $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            serendipity_die($str); // needs to halt with die() here, else it will path through and gets written underneath blog content.
+        }
+        if ($serendipity['production'] === true) {
+            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
+                // ToDo: enhance for more special serendipity error needs
+                $str  = " == SERENDIPITY ERROR == ";
+                $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+                #var_dump(headers_list());
+                if (headers_sent()) {
+                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
+                } else {
+                    // see global include of function in plugin_api.inc.php
+                    // this also reacts on non eye-displayed errors with following small javascript,
+                    // while being in tags like <select> to push on top of page, else return non javascript use $str just there
+                    // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
+                    echo "\n".'<script>
+var fragment = window.top.create("Error redirect: '.addslashes($str).'");
+document.body.insertBefore(fragment, document.body.childNodes[0]);
+' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
+                }
+            }
         }
     }
 }
+
 
 if (!function_exists('file_get_contents')) {
     function file_get_contents($filename, $use_include_path = 0) {
