@@ -64,7 +64,7 @@ function serendipity_plugin_api_core_event_hook($event, &$bag, &$eventData, &$ad
             // hardened by admin only - better have that here, to be reachable everywhere
             if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
                 echo "
-function create(htmlStr) { 
+function errorHandlerCreateDOM(htmlStr) {
     var frag = document.createDocumentFragment(),
         temp = document.createElement('div');
         temp.innerHTML = htmlStr;
