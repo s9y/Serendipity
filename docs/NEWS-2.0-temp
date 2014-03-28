@@ -96,3 +96,5 @@ trackback-functions still use echo for messages"):
 * serendipity_admin_image_selector.php no longer used by 2k11, instead the media library (with admin/media_choose.tpl, admin/media_upload.tpl, media_pane.tpl, media_items.tpl)
   can generat the imageselector on its own. The editor calls serendipity_admin.php?serendipity[adminModule]=media instead, with serendipity[textarea] indicating the target, and
   serendipity[showMediaToolbar] activating the imageSelector modus
+  
+* New required PHP-Version: 5.3 or higher (checked in the installer)
