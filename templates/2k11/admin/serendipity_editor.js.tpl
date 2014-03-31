@@ -246,7 +246,7 @@
     // which works fine in NO WYSIWYG mode
     // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
     serendipity.noWysiwygAdd = function(str, textarea) {
-        serendipity.wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
+        serendipity.wrapSelection($('#'+serendipity.escapeBrackets(textarea)), str, '');
     }
 
     // Inserting media db img markup including s9y-specific container markup
@@ -907,19 +907,20 @@ $(function() {
     $('.wrap_selection').click(function() {
         var $el = $(this);
         var $tag = $el.attr('data-tag');
-        var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        //var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($el.attr('data-tarea')));
         var open = '<' + $tag + '>';
         var close = '</' + $tag + '>';
         serendipity.wrapSelection(target, open, close);
     });
 
     $('.wrap_insimg').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapInsImage(target);
     });
 
     $('.wrap_insurl').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapSelectionWithLink(target);
     });
 
@@ -1348,4 +1349,3 @@ $(function() {
             }
         }
     }
-

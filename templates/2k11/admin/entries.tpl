@@ -22,12 +22,12 @@
         {if $iso2br}
             <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="body">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="body">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="body">B</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="body">{$CONST.QUOTE}</button>
-            <button class="wrap_insimg" type="button" name="insJ" data-tarea="body">img</button>
-            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="body">{$CONST.MEDIA}</button>
-            <button class="wrap_insurl" type="button" name="insURL" data-tarea="body">URL</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[body]">I</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[body]">B</button>
+            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[body]">{$CONST.QUOTE}</button>
+            <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
+            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
+            <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[body]">URL</button>
             {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
         </div>
     {/if}
@@ -52,14 +52,14 @@
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_extended" class="editor_toolbar">
         {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="extended">NoBR</button>
+            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[extended]">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="extended">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="extended">B</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="extended">{$CONST.QUOTE}</button>
-            <button class="wrap_insimg" type="button" name="insJ" data-tarea="extended">img</button>
-            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="extended">{$CONST.MEDIA}</button>
-            <button class="wrap_insurl" type="button" name="insURL" data-tarea="extended">URL</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[extended]">I</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[extended]">B</button>
+            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[extended]">{$CONST.QUOTE}</button>
+            <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[extended]">img</button>
+            <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[extended]">{$CONST.MEDIA}</button>
+            <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[extended]">URL</button>
             {serendipity_hookPlugin hook="backend_entry_toolbar_extended" data=$entry_data.entry hookAll="true"}
         </div>
     {/if}
