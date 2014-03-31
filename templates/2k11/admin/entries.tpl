@@ -20,7 +20,7 @@
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_entry" class="editor_toolbar">
         {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="body">NoBR</button>
+            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[body]">NoBR</button>
         {/if}
             <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[body]">I</button>
             <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[body]">B</button>
