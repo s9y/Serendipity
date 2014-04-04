@@ -469,13 +469,12 @@
     }
 
     // Rename file in media db
-    var media_rename = 'Enter the new name for: ';
-    var media_token_url = 'serendipity[token]=f269826ef0ccf3c5f76ba0674f7deca6';
-
     serendipity.rename = function(id, fname) {
         var newname;
+        var media_rename = 'Enter the new name for: ';
+        var media_token_url = $('input[name*="serendipity[token]"]').val();
         if (newname = prompt(media_rename + fname, fname)) {
-            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
+            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url;
         }
     }
 
@@ -1304,4 +1303,3 @@ $(function() {
             }
         }
     }
-    

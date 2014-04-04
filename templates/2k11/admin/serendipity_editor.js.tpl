@@ -469,13 +469,12 @@
     }
 
     // Rename file in media db
-    var media_rename = '{$CONST.ENTER_NEW_NAME}';
-    var media_token_url = '{$token_url}';
-
     serendipity.rename = function(id, fname) {
         var newname;
+        var media_rename = '{$CONST.ENTER_NEW_NAME}';
+        var media_token_url = $('input[name*="serendipity[token]"]').val();
         if (newname = prompt(media_rename + fname, fname)) {
-            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
+            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url;
         }
     }
 
