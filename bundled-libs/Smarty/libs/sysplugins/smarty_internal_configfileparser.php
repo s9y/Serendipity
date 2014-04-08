@@ -102,6 +102,7 @@ class Smarty_Internal_Configfileparser#line 80 "smarty_internal_configfileparser
         $this->smarty = $compiler->smarty;
         $this->compiler = $compiler;
     }
+
     public static function &instance($new_instance = null)
     {
         static $instance = null;

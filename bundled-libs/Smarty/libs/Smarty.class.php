@@ -2,7 +2,7 @@
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        Smarty.class.php
- * SVN:         $Id: Smarty.class.php 4814 2014-02-16 18:34:08Z Uwe.Tews@googlemail.com $
+ * SVN:         $Id: Smarty.class.php 4828 2014-04-04 23:38:36Z Uwe.Tews@googlemail.com $
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -28,7 +28,7 @@
  * @author Uwe Tews
  * @author Rodney Rehm
  * @package Smarty
- * @version 3.1.17
+ * @version 3.1-18
  */
 
 /**
@@ -70,7 +70,7 @@ if (!defined('SMARTY_RESOURCE_DATE_FORMAT')) {
     /**
      * @deprecated in favor of Smarty::$_DATE_FORMAT
      */
-    define('SMARTY_RESOURCE_DATE_FORMAT', '%b %e, %Y');
+    define('SMARTY_RESOURCE_DATE_FORMAT', '%b %-e, %Y');
 }
 
 /**
@@ -113,7 +113,7 @@ class Smarty extends Smarty_Internal_TemplateBase
     /**
      * smarty version
      */
-    const SMARTY_VERSION = 'Smarty-3.1.17';
+    const SMARTY_VERSION = 'Smarty-3.1.18';
 
     /**
      * define variable scopes

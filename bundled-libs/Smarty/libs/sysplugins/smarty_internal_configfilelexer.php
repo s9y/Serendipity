@@ -23,9 +23,8 @@ class Smarty_Internal_Configfilelexer
     public $yyTraceFILE;
     public $yyTracePrompt;
     public $state_name = array (1 => 'START', 2 => 'VALUE', 3 => 'NAKED_STRING_VALUE', 4 => 'COMMENT', 5 => 'SECTION', 6 => 'TRIPPLE');
-    public $smarty_token_names = array (        // Text for parser error messages
+    public $smarty_token_names = array (// Text for parser error messages
     );
-
 
     function __construct($data, $smarty)
     {
