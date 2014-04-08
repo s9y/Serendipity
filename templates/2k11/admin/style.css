@@ -1316,11 +1316,12 @@ summary {
 
 /* NAVIGATION */
 .js #main_menu {
-    margin-left: -100%;
-}
-
-.js #content {
-    margin-right: 0;
+    position: absolute;
+    left: -22em;
+    width: 22em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .js #main_menu,
@@ -1330,12 +1331,8 @@ summary {
 
 .active_nav #main_menu {
     box-shadow: 1px 1px 4px rgba(0,0,0,.5);
-    margin-left: 0;
-    width: 80%;
-}
-
-.active_nav #content {
-    margin-right: -100%;
+    left: 0;
+    z-index: 10;
 }
 
 #main_menu {
@@ -2759,10 +2756,6 @@ img.mfp-img {
         margin: 1.71429em 0;
     }
 
-    #main_menu li > ul > li {
-        width: 33%;
-    }
-
     #template_select article,
     .plugins_installable > li,
     #serendipityScaleForm,
@@ -3077,7 +3070,9 @@ img.mfp-img {
     }
 
     .js #main_menu {
-        margin-left: 0;
+        position: static;
+        left: 0;
+        width: 23%;
     }
 
     #nav-toggle {
@@ -3116,11 +3111,6 @@ img.mfp-img {
         box-sizing: border-box;
         margin: 0 0 1em;
         padding: 0 1em;
-    }
-
-    #main_menu li > ul > li {
-        float: none;
-        width: 100%;
     }
 
     #main_menu {

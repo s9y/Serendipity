@@ -118,7 +118,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $data['php_uname']     = php_uname('s') .' '. php_uname('r') .', '. php_uname('m');
     $data['php_sapi_name'] = php_sapi_name();
 
-    if ( version_compare(phpversion(), '5.2.6', '>=') ) {
+    if ( version_compare(phpversion(), '5.3', '>=') ) {
         $data['installerResultDiagnose_VERSION'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, YES .', '. phpversion());
     } else {
         $data['installerResultDiagnose_VERSION'] =  serendipity_installerResultDiagnose(S9Y_I_ERROR, NO);

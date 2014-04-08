@@ -232,7 +232,7 @@
             tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
             return;
         } else if (typeof(CKEDITOR) != 'undefined') {
-            oEditor = CKEDITOR.instances[textarea];
+            oEditor = (typeof(isinstance) == 'undefined') ? CKEDITOR.instances[textarea] : isinstance;
             if (oEditor.mode == "wysiwyg") { 
                 oEditor.insertHtml(str);
                 return;
@@ -246,7 +246,7 @@
     // which works fine in NO WYSIWYG mode
     // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
     serendipity.noWysiwygAdd = function(str, textarea) {
-        serendipity.wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
+        serendipity.wrapSelection($('#'+serendipity.escapeBrackets(textarea)), str, '');
     }
 
     // Inserting media db img markup including s9y-specific container markup
@@ -357,10 +357,10 @@
 
     // Toggle extended entry editor
     serendipity.toggle_extended = function(setCookie) {
-        if ($('#toggle_extended').length == 0 && $('#tools_extended').length != 0) {
+        if ($('#toggle_extended').length == 0) {
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
-            $('textarea[name="serendipity[extended]"]').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
+            $('#extended_entry_editor').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
             $(toggleButton).prepend('<span class="icon-down-dir"></span> ');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -372,19 +372,19 @@
             }
         }
         
-        if ($('textarea[name="serendipity[extended]"]:hidden').length > 0) {
-            $('textarea[name="serendipity[extended]"]').show(); // use name selector instead of id here; id does not work
+        if ($('#extended_entry_editor:hidden').length > 0) {
+            $('#extended_entry_editor').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
             $('#toggle_extended').find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
             localStorage.show_extended_editor = "true";
         } else {
-            $('textarea[name="serendipity[extended]"]').hide();
+            $('#extended_entry_editor').hide();
             $('#tools_extended').hide();
             $('#toggle_extended').find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
             localStorage.show_extended_editor = "false";
         }
         if (setCookie) {
-            document.cookie = 'serendipity[toggle_extended]=' + (($('textarea[name="serendipity[extended]"]:hidden').length == 0) ? "true" : "") + ';';
+            document.cookie = 'serendipity[toggle_extended]=' + (($('#extended_entry_editor:hidden').length == 0) ? "true" : "") + ';';
         }
     }
 
@@ -469,13 +469,12 @@
     }
 
     // Rename file in media db
-    var media_rename = 'Enter the new name for: ';
-    var media_token_url = 'serendipity[token]=f4ec59eb1d5aeab5bc62667586b8667b';
-
     serendipity.rename = function(id, fname) {
         var newname;
+        var media_rename = 'Enter the new name for: ';
+        var media_token_url = $('input[name*="serendipity[token]"]').val();
         if (newname = prompt(media_rename + fname, fname)) {
-            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
+            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url;
         }
     }
 
@@ -816,7 +815,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     }
 }(document, jQuery));
 
-(function($) {
+$(function() {
     // Fire responsive nav
     if($('body').has('#main_menu').size() > 0) {
         $('#nav-toggle').click(function(e) {
@@ -897,19 +896,20 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     $('.wrap_selection').click(function() {
         var $el = $(this);
         var $tag = $el.attr('data-tag');
-        var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        //var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($el.attr('data-tarea')));
         var open = '<' + $tag + '>';
         var close = '</' + $tag + '>';
         serendipity.wrapSelection(target, open, close);
     });
 
     $('.wrap_insimg').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapInsImage(target);
     });
 
     $('.wrap_insurl').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapSelectionWithLink(target);
     });
 
@@ -1277,23 +1277,29 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
     // Equal Heights
     $(window).load(function() {
         if($('body').has('.equal_heights').size() > 0) {
-            $('.equal_heights').syncHeight({
-                updateOnResize: true
-            });
+            if($('html').hasClass('lt-ie9')) {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: false
+                });
+            } else {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: true
+                });
+            }
         }
     });
-})(jQuery);
+});
 
 // This is kept for older plugins. Use of $(document).ready() is encouraged.
 // At some point, this will be removed.
-addLoadEvent = function(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    } else {
-        window.onload = function() {
-            oldonload();
-            func();
+    addLoadEvent = function(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function() {
+                oldonload();
+                func();
+            }
         }
     }
-}

@@ -289,6 +289,7 @@ function serendipity_killPlugin($name) {
  * @return 
  */
 function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=null, $list_only=false) {
+    if (!is_dir($dir)) return;
     $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::CHILD_FIRST);
     $search   = array("\\", '//');
     $replace  = array('/');

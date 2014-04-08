@@ -246,7 +246,7 @@
     // which works fine in NO WYSIWYG mode
     // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
     serendipity.noWysiwygAdd = function(str, textarea) {
-        serendipity.wrapSelection($('textarea[name="serendipity['+textarea+']"]'), str, '');
+        serendipity.wrapSelection($('#'+serendipity.escapeBrackets(textarea)), str, '');
     }
 
     // Inserting media db img markup including s9y-specific container markup
@@ -469,13 +469,12 @@
     }
 
     // Rename file in media db
-    var media_rename = '{$CONST.ENTER_NEW_NAME}';
-    var media_token_url = '{$token_url}';
-
     serendipity.rename = function(id, fname) {
         var newname;
+        var media_rename = '{$CONST.ENTER_NEW_NAME}';
+        var media_token_url = $('input[name*="serendipity[token]"]').val();
         if (newname = prompt(media_rename + fname, fname)) {
-            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&'+ media_token_url;
+            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url;
         }
     }
 
@@ -907,19 +906,20 @@ $(function() {
     $('.wrap_selection').click(function() {
         var $el = $(this);
         var $tag = $el.attr('data-tag');
-        var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        //var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($el.attr('data-tarea')));
         var open = '<' + $tag + '>';
         var close = '</' + $tag + '>';
         serendipity.wrapSelection(target, open, close);
     });
 
     $('.wrap_insimg').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapInsImage(target);
     });
 
     $('.wrap_insurl').click(function() {
-        var target = document.forms['serendipityEntry']['serendipity[' + $(this).attr('data-tarea') + ']'];
+        var target =  $('#'+serendipity.escapeBrackets($(this).attr('data-tarea')));
         serendipity.wrapSelectionWithLink(target);
     });
 
@@ -1348,4 +1348,3 @@ $(function() {
             }
         }
     }
-
