@@ -9,18 +9,18 @@ Version 2.0-beta1 (April 8th, 2014)
 
     * Implemented patch https://github.com/s9y/Serendipity/pull/15
 
-    * When switching templates, both the backend and the frontend
-      will remember the timestamp of the last template change,
+    * When switching Themes, both the backend and the frontend
+      will remember the timestamp of the last theme change,
       to make sure that the browser will not cache a mismatching CSS.
 
-    * Fix template change issues with global template vars in core 
+    * Fix theme change issues with global template vars in core 
       (1559472ca3) see 'temporary added empty $template_config_groups' 
       in 1.7-rc2 (eb77dc369a)
 
     * Use Smarty for backend display output
 
-    * Templates are now called Templates. The term "Design", "Theme",
-      "Layouts" has been removed.
+    * "Themes" are now what has previously been mixed as "Design", 
+      "Theme", "Template" or "Layouts".
 
     * WYSIWYG-Spawn-API reworked (2k11/admin/wysiwyg_init.tpl)
 
@@ -82,7 +82,7 @@ Version 2.0-beta1 (April 8th, 2014)
     * Add plugin hook "js", generating a virtual serendipity.js
 
     * Admin JS is now bundled in serendipity_editor.js.tpl and 
-      rendered using smarty in the template config
+      rendered using smarty in the theme config
 
     * Admin JS got rewritten using jQuery where applicable
 
@@ -93,7 +93,7 @@ Version 2.0-beta1 (April 8th, 2014)
     * The whole PHP-Code now almost never echoes integrated HTML, but 
       uses smarty template (TODO: Remove the almost)
       The necessary smarty-templates reside in 2k11/admin/
-      Every template can generate its own backend if it integrates those 
+      Every theme can generate its own backend if it integrates those 
       templates under admin/ itself
 
     * 2k11 is set as the new default backend, replacing bulletproof. 
@@ -119,7 +119,7 @@ Version 2.0-beta1 (April 8th, 2014)
     * serendipity_showMedia now no longer returns the used template and 
       echoes the generated HTML, but only returns the generated HTML
 
-    * Templates now have their own configuration page, 
+    * Themes now have their own configuration page, 
       ?serendipity[adminModule]=templates&serendipity[adminAction]=editConfiguration
 
     * jQuery in the backend no longer runs in noConflict-mode. Use 
