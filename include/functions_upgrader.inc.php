@@ -332,17 +332,34 @@ function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=n
 function serendipity_upgrader_rename_plugins() {
     global $serendipity;
  
-    $plugs = serendipity_db_query("SELECT name FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '@%'");
+    $plugs = serendipity_db_query("SELECT name FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '@%' OR name LIKE 'serendipity_html_nugget_plugin%'");
 
     if (is_array($plugs)) {
         foreach($plugs AS $plugin) {
             $origname = $plugin['name'];
             $plugin['name'] = str_replace('@', '', $plugin['name']);
             $plugin['name'] = preg_replace('@serendipity_([^_]+)_plugin@i', 'serendipity_plugin_\1', $plugin['name']);
+            $plugin['name'] = str_replace('serendipity_html_nugget_plugin', 'serendipity_plugin_html_nugget', $plugin['name']);
             $pluginparts = explode(':', $plugin['name']);
 
-            echo htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($plugin['name']) . "<br />\n";
+            echo "<!-- " . htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($plugin['name']) . "-->\n";
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins SET name = '" . serendipity_db_escape_string($plugin['name']) . "', path = '" . serendipity_db_escape_string($pluginparts[0]) . "' WHERE name = '" . serendipity_db_escape_string($origname) . "'");
         }
     }
+    
+    $configs = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}config WHERE name LIKE '@%' OR name LIKE 'serendipity_html_nugget_plugin%'");
+
+    if (is_array($configs)) {
+        foreach($configs AS $config) {
+            $origname = $config['name'];
+            $config['name'] = str_replace('@', '', $config['name']);
+            $config['name'] = preg_replace('@serendipity_([^_]+)_plugin@i', 'serendipity_plugin_\1', $config['name']);
+            $config['name'] = str_replace('serendipity_html_nugget_plugin', 'serendipity_plugin_html_nugget', $config['name']);
+            $configparts = explode(':', $config['name']);
+
+            echo "<!--[C] " . htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($config['name']) . "-->\n";
+            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}config SET name = '" . serendipity_db_escape_string($config['name']) . "' WHERE name = '" . serendipity_db_escape_string($origname) . "'");
+        }
+    }
+
 }
