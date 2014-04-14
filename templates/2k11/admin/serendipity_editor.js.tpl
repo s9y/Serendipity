@@ -75,7 +75,7 @@
 
         $txtarea[0].selectionStart = start + replacement.length
         $txtarea[0].selectionEnd = start + replacement.length
-        
+
         if (scrollPos) {
             txtarea.focus();
             txtarea.scrollTop = scrollPos;
@@ -154,7 +154,7 @@
     // container's background image
     serendipity.change_preview = function(id) {
         var text_box = document.getElementById('serendipity[template][' + id + ']');
-        var image_box = document.getElementById(id + '_preview'); 
+        var image_box = document.getElementById(id + '_preview');
         var filename = text_box.value;
 
         image_box.style.backgroundImage = 'url(' + filename + ')';
@@ -170,7 +170,7 @@
         id = serendipity.escapeBrackets(id);
         var $input = $('#' + id);
         $input.val(str);
-        
+
         if ($input.attr('type') != 'hidden') {
             $input.focus();    // IE would generate an error when focusing an hidden element
         }
@@ -182,7 +182,7 @@
     // Escape [ and ] to be able to use the string as selector
     // jQuery fails to select the input when the selector contains unescaped [ or ]
     serendipity.escapeBrackets = function(str) {
-        str = str.replace(/\[/g, "\\[");  
+        str = str.replace(/\[/g, "\\[");
         str = str.replace(/\]/g, "\\]");
         return str;
     }
@@ -226,17 +226,17 @@
             if (oEditor._editMode != 'textmode') {
                 oEditor.insertHTML(str);
                 return;
-            } 
+            }
         } else if(typeof(TinyMCE) != 'undefined') {
             // for the TinyMCE editor we do not have a text mode insert
             tinyMCE.execInstanceCommand('serendipity[' + textarea + ']', 'mceInsertContent', false, str);
             return;
         } else if (typeof(CKEDITOR) != 'undefined') {
             oEditor = (typeof(isinstance) == 'undefined') ? CKEDITOR.instances[textarea] : isinstance;
-            if (oEditor.mode == "wysiwyg") { 
+            if (oEditor.mode == "wysiwyg") {
                 oEditor.insertHtml(str);
                 return;
-            } 
+            }
         }
 
         serendipity.noWysiwygAdd(str, textarea);
@@ -277,7 +277,7 @@
         if (f['serendipity[filename_only]']) {
             // this part is used when selecting only the image without further markup (-> category-icon)
             var starget = f['serendipity[htmltarget]'] ? f['serendipity[htmltarget]'].value : 'serendipity[' + textarea + ']';
-            
+
             switch(f['serendipity[filename_only]'].value) {
             case 'true':
                 parent.self.opener.serendipity.serendipity_imageSelector_addToElement(img, f['serendipity[htmltarget]'].value);
@@ -340,7 +340,7 @@
             }
 
             var img = prepend + "<a class=\"serendipity_image_link\" " + (title != '' ? 'title="' + title + '"' : '') + " href='" + ilink + "'" + itarget + ">" + img + "</a>";
-        } 
+        }
 
         if ($('#serendipity_imagecomment').val() != '') {
             var comment = f['serendipity[imagecomment]'].value;
@@ -371,7 +371,7 @@
                 return;
             }
         }
-        
+
         if ($('#extended_entry_editor:hidden').length > 0) {
             $('#extended_entry_editor').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
@@ -405,7 +405,7 @@
             $('#'+id).change(function(e) {
                 categoryselector_stored_categories = null;
             });
-            
+
             if ($('#'+id).children('*[selected="selected"]').length > 1) {
                 // when loading the page new for the preview and more than one category was
                 // selected, collapsing the category-selector would lose those categories
@@ -413,7 +413,7 @@
                 $('#toggle_' + id).find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
                 return
             }
-            
+
         }
 
         if ($('#'+id).attr("multiple")) {
@@ -428,7 +428,7 @@
             $('#'+id).removeAttr("multiple");
             $('#'+id).removeAttr("size");
             $('#toggle_' + id).find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
-            
+
         } else {
             $('#'+id).attr("multiple", "");
             $('#'+id).attr("size", $('#'+id).children().size);
@@ -443,7 +443,7 @@
                     }
                 });
             }
-            
+
         }
     }
 
@@ -457,13 +457,13 @@
     }
 
     // Rescale image
-    serendipity.rescale = function(dim, newval) { 
+    serendipity.rescale = function(dim, newval) {
         var ratio          = $('#serendipityScaleImg').attr('data-imgheight')/$('#serendipityScaleImg').attr('data-imgwidth');
         var trans          = new Array();
         trans['width']     = new Array('serendipity[height]', ratio);
         trans['height']    = new Array('serendipity[width]', 1/ratio);
 
-        if ($('#resize_keepprops').is(':checked')) { 
+        if ($('#resize_keepprops').is(':checked')) {
             document.serendipityScaleForm.elements[trans[dim][0]].value=Math.round(trans[dim][1]*newval);
         }
     }
@@ -493,39 +493,39 @@
     }
 
     // Used by media_upload.tpl to ..?
-    serendipity.getfilename = function(value) { 
+    serendipity.getfilename = function(value) {
         re = /^.+[\/\\]+?(.+)$/;
-        return value.replace(re, "$1"); 
+        return value.replace(re, "$1");
     }
 
     var inputStorage = new Array();
 
-    serendipity.checkInputs = function() { 
+    serendipity.checkInputs = function() {
         upload_fieldcount = $('.uploadform_userfile').length;
 
-        for (i = 1; i <= upload_fieldcount; i++) { 
-            if (!inputStorage[i]) { 
+        for (i = 1; i <= upload_fieldcount; i++) {
+            if (!inputStorage[i]) {
                 serendipity.fillInput(i, i);
-            } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) { 
+            } else if (inputStorage[i] == document.getElementById('target_filename_' + i).value) {
                 serendipity.fillInput(i, i);
             }
-        } 
+        }
     }
 
-    serendipity.fillInput = function(source, target) { 
+    serendipity.fillInput = function(source, target) {
         sourceval = serendipity.getfilename(document.getElementById('userfile_' + source).value);
 
-        if (sourceval.length > 0) { 
+        if (sourceval.length > 0) {
             document.getElementById('target_filename_' + target).value = sourceval;
             inputStorage[target] = sourceval;
         }
     }
 
     // ..?
-    serendipity.checkSave = function() { 
+    serendipity.checkSave = function() {
         {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
         return true;
-    } 
+    }
 
     // save in which directory the first uploaded files is stored (the default when only inserting one file)
     serendipity.rememberUploadOptions = function() {
@@ -604,7 +604,7 @@
               type: 'iframe'
             });
         {/if}
-        
+
     };
 
     serendipity.reloadImage = function(img) {
@@ -827,7 +827,7 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 
 $(function() {
     // Fire responsive nav
-    if($('body').has('#main_menu').size() > 0) {
+    if($('#main_menu').length > 0) {
         $('#nav-toggle').click(function(e) {
             var $el = $(this);
             var $target = $('body');
@@ -856,7 +856,7 @@ $(function() {
     });
 
     // Editor-area
-    if($('body').has('#serendipityEntry').size() > 0) {
+    if($('#serendipityEntry').length > 0) {
         serendipity.categoryList();
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
@@ -875,12 +875,12 @@ $(function() {
     //
     // Make the timestamp readable in browser not supporting datetime-local.
     // Has no effect in those supporting it, as the timestamp is invalid in HTML5
-    if($('body').has('#serendipityEntry').size() > 0) {
+    if($('#serendipityEntry').length > 0) {
         if(!Modernizr.inputtypes.date) {
             $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
         }
     }
-    
+
     // Set entry timestamp
     $('#reset_timestamp').click(function(e) {
         $('#serendipityNewTimestamp').val($(this).attr('data-currtime'));
@@ -931,7 +931,7 @@ $(function() {
     // NOTE: This probably should be rewritten as a general function which
     //       also works for advanced options (see below); also not sure if
     //       the localStorage stuff works here (seems to)
-    if($('body').has('#edit_entry_metadata').size() > 0) {
+    if($('#edit_entry_metadata').length > 0) {
         $('#toggle_metadata').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
@@ -952,14 +952,14 @@ $(function() {
 
     // Show category selector
     {if $use_popups}
-        if($('body').has('#serendipityEntry').size() > 0) {
+        if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
                 $('#edit_entry_category').toggleClass('mfp-hide');
                 $('#toggle_metadata').click();
             });
         }
     {else}
-        if($('body').has('#serendipityEntry').size() > 0) {
+        if($('#serendipityEntry').length > 0) {
             var btnText = '{$CONST.DONE}';
 
             $('#select_category').magnificPopup({
@@ -975,7 +975,7 @@ $(function() {
     {/if}
 
     // Advanced options
-    if($('body').has('#advanced_options').size() > 0) {
+    if($('#advanced_options').length > 0) {
         $('#toggle_advanced').click(function() {
             var $el = $(this);
             var $toggleIcon = $el.find('> span');
@@ -1000,7 +1000,7 @@ $(function() {
     });
 
     // Collapsible configuration elements
-    if($('body').has('#serendipity_config_options, #serendipity_category, #image_directory_edit_form').size() > 0) {
+    if($('#serendipity_config_options, #serendipity_category, #image_directory_edit_form').length > 0) {
         var optsCollapsed = true;
 
         $('.show_config_option').click(function(e) {
@@ -1049,7 +1049,7 @@ $(function() {
     }
 
     // Config option add media
-    if($('body').has('.media_choose').size() > 0) {
+    if($('.media_choose').length > 0) {
         var $el = $('.media_choose');
         var $item = $el.find('> input');
         var configItem = $item.attr('data-configitem');
@@ -1106,7 +1106,7 @@ $(function() {
     // Category icon preview
     // NOTE: This is just to replace the old functionality; ideally, this should
     //       have a working no-js fallback
-    if($('body').has('#category_icon').size() > 0) {
+    if($('#category_icon').length > 0) {
         $('<button id="insert_image" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
     }
 
@@ -1156,7 +1156,7 @@ $(function() {
     });
 
     // Limit width of media file info
-    if($('body').has('.media_pane').size() > 0) {
+    if($('.media_pane').length > 0) {
         var thumbsWidth = $('.media_pane').attr('data-thumbmaxwidth')  + 'px';
         $('.media_file_meta').css('maxWidth', thumbsWidth);
     }
@@ -1184,14 +1184,14 @@ $(function() {
 
     // Show further links
     {if $use_popups}
-        if($('body').has('#dashboard').size() > 0) {
+        if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
                 e.preventDefault();
                 $('#s9y_links').toggleClass('mfp-hide');
             });
         }
     {else}
-        if($('body').has('#dashboard').size() > 0) {
+        if($('#dashboard').length > 0) {
             $('.toggle_links').magnificPopup({ type: "inline" });
         }
     {/if}
@@ -1209,7 +1209,7 @@ $(function() {
         window.open(filepath, 'Zoom', 'height='+pheight+',width='+pwidth+',top='+ptop+',left='+pleft+',toolbar=no,menubar=no,location=no,resize=1,resizable=1,scrollbars=yes');
     });
     {else}
-    if ($('body').has('.media_fullsize').size() > 0) {
+    if ($('.media_fullsize').length > 0) {
         $('.media_fullsize').magnificPopup({ type:'image' });
     }
     {/if}
@@ -1281,14 +1281,14 @@ $(function() {
     $('.karma_pane .pagination').clone().prependTo('.karma_pane');
 
     // close comment reply on button click
-    if ($('body').has('#comment_replied').size() > 0) {
+    if ($('#comment_replied').length > 0) {
         $('#comment_replied').click(function() {
             serendipity.closeCommentPopup();
         });
     }
 
     // reopen detail element after spamblock action
-    if ($('body').has('#serendipity_comments_list').size() > 0 && window.location.hash && $('body').has('#' + window.location.hash.replace('#', '')).size() > 0) {
+    if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
     }
 
@@ -1302,7 +1302,7 @@ $(function() {
     })
 
     // Tabs
-    if($('body').has('.tabs').size() > 0) {
+    if($('.tabs').length > 0) {
         var currTabText = '{$CONST.CURRENT_TAB}';
 
         $('.tabs').accessibleTabs({
@@ -1321,7 +1321,7 @@ $(function() {
 
     // Equal Heights
     $(window).load(function() {
-        if($('body').has('.equal_heights').size() > 0) {
+        if($('.equal_heights').length > 0) {
             if($('html').hasClass('lt-ie9')) {
                 $('.equal_heights').syncHeight({
                     updateOnResize: false
