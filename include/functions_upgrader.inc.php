@@ -158,13 +158,17 @@ $dead_htmlarea_dirs = array(
 /**
  * recursive directory call to purge files and directories
  *
- * @param array $directories
- * @return 
+ * @param array $dir directories
+ * @return void
  */
 function recursive_directory_iterator($dir = array()) {
     foreach ($dir AS $path) {
-        serendipity_removeDeadFiles_SPL($path);
-        @rmdir($path);
+        try {
+            serendipity_removeDeadFiles_SPL($path);
+            @rmdir($path);
+        } catch (Exception $e) {
+            echo htmlspecialchars($path) . " &gt;&gt; File or directory probably does not exist.<br/>";
+        }
     }
 }
 
@@ -273,20 +277,19 @@ function serendipity_killPlugin($name) {
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}plugins WHERE name LIKE '" . serendipity_db_escape_string($name) . "%'");
 }
-
 /**
  * Empty a given directory recursively using the Standard PHP Library (SPL) iterator
  * Use as full purge by serendipity_removeDeadFiles_SPL(/path/to/dir)
  * Or strict by serendipity_removeDeadFiles_SPL('/path/to/dir', $filelist, $directorylist, true)
- * 
+ *
  * @access private
- * 
- * @param   string directory
- * @param   array  dead files list
- * @param   array  dead directories list
- * @param   boolean run list only else recursive default
- * 
- * @return 
+ *
+ * @param   string $dir directory
+ * @param   array $deadfiles dead files list
+ * @param   array $purgedir dead directories list
+ * @param   boolean $list_only run list only else recursive default
+ *
+ * @return void
  */
 function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=null, $list_only=false) {
     if (!is_dir($dir)) return;
@@ -296,7 +299,7 @@ function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=n
     foreach ($iterator as $file) {
         $thisfile = str_replace($search, $replace, $file->__toString());
         if ($file->isFile()) {
-            if (is_array($deadfiles) && !empty($deadfiles)) { 
+            if (is_array($deadfiles) && !empty($deadfiles)) {
                 foreach ($deadfiles AS $deadfile) {
                     #if( basename($deadfile) == basename($thisfile) ) echo 'LIST FILE: '.$dir . '/' . $deadfile . ' == ' . $thisfile . ' && basename(file) == ' . basename($thisfile) . "<br>\n";
                     if ($dir . '/' . $deadfile === $thisfile) {
