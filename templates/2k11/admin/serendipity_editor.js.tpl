@@ -826,6 +826,9 @@ var AccessifyHTML5 = function (defaults, more_fixes) {
 }(document, jQuery));
 
 $(function() {
+    // Breakpoints for responsive JS
+    var mq_small = matchMedia("(min-width:640px)");
+
     // Fire responsive nav
     if($('#main_menu').length > 0) {
         $('#nav-toggle').click(function(e) {
@@ -1327,15 +1330,17 @@ $(function() {
 
     // Equal Heights
     $(window).load(function() {
-        if($('.equal_heights').length > 0) {
-            if($('html').hasClass('lt-ie9')) {
-                $('.equal_heights').syncHeight({
-                    updateOnResize: false
-                });
-            } else {
-                $('.equal_heights').syncHeight({
-                    updateOnResize: true
-                });
+        if (mq_small.matches) {
+            if($('.equal_heights').length > 0) {
+                if($('html').hasClass('lt-ie9')) {
+                    $('.equal_heights').syncHeight({
+                        updateOnResize: false
+                    });
+                } else {
+                    $('.equal_heights').syncHeight({
+                        updateOnResize: true
+                    });
+                }
             }
         }
     });
