@@ -22,8 +22,8 @@
         {if $iso2br}
             <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[body]">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[body]">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[body]">B</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[body]">i</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[body]">b</button>
             <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[body]">{$CONST.QUOTE}</button>
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
@@ -54,8 +54,8 @@
         {if $iso2br}
             <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[extended]">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[extended]">I</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[extended]">B</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[extended]">i</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[extended]">b</button>
             <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[extended]">{$CONST.QUOTE}</button>
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[extended]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[extended]">{$CONST.MEDIA}</button>

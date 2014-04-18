@@ -537,10 +537,6 @@ form > button,
     font-style: italic;
 }
 
-.hilite_u {
-    text-decoration: underline;
-}
-
 
 /* FORM STYLES */
 input[type="radio"],
