@@ -2682,7 +2682,7 @@ img.mfp-img {
     #entries_list h3,
     #serendipity_comments_list h4,
     .karmalog h4 {
-        max-width: none;
+        max-width: 75%;
     }
 
     .comments_pane .pagination h3,
