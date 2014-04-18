@@ -20,11 +20,11 @@
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_entry" class="editor_toolbar">
         {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[body]">NoBR</button>
+            <button class="wrap_selection lang-html" type="button" name="insX" data-tag-open="nl" data-tag-close="nl" data-tarea="serendipity[body]">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[body]">i</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[body]">b</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[body]">{$CONST.QUOTE}</button>
+            <button class="hilite_i wrap_selection lang-html" type="button" name="insI" data-tag-open="em" data-tag-close="em" data-tarea="serendipity[body]">i</button>
+            <button class="hilite_b wrap_selection lang-html" type="button" name="insB" data-tag-open="strong" data-tag-close="strong" data-tarea="serendipity[body]">b</button>
+            <button class="wrap_selection lang-html" type="button" name="insQ" data-tag-open="blockquote" data-tag-close="blockquote" data-tarea="serendipity[body]">{$CONST.QUOTE}</button>
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[body]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[body]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[body]">URL</button>
@@ -52,11 +52,11 @@
     {if NOT $entry_vars.wysiwyg}
         <div id="tools_extended" class="editor_toolbar">
         {if $iso2br}
-            <button class="wrap_selection" type="button" name="insX" data-tag="nl" data-tarea="serendipity[extended]">NoBR</button>
+            <button class="wrap_selection" type="button" name="insX" data-tag-open="nl" data-tag-close="nl" data-tarea="serendipity[extended]">NoBR</button>
         {/if}
-            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag="em" data-tarea="serendipity[extended]">i</button>
-            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag="strong" data-tarea="serendipity[extended]">b</button>
-            <button class="wrap_selection" type="button" name="insQ" data-tag="blockquote" data-tarea="serendipity[extended]">{$CONST.QUOTE}</button>
+            <button class="hilite_i wrap_selection" type="button" name="insI" data-tag-open="em" data-tag-close="em" data-tarea="serendipity[extended]">i</button>
+            <button class="hilite_b wrap_selection" type="button" name="insB" data-tag-open="strong" data-tag-close="strong" data-tarea="serendipity[extended]">b</button>
+            <button class="wrap_selection" type="button" name="insQ" data-tag-open="blockquote" data-tag-close="blockquote" data-tarea="serendipity[extended]">{$CONST.QUOTE}</button>
             <button class="wrap_insimg" type="button" name="insJ" data-tarea="serendipity[extended]">img</button>
             <button class="wrap_insmedia" type="button" name="insImage" data-tarea="serendipity[extended]">{$CONST.MEDIA}</button>
             <button class="wrap_insurl" type="button" name="insURL" data-tarea="serendipity[extended]">URL</button>

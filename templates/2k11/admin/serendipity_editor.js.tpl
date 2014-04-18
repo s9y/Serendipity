@@ -905,11 +905,17 @@ $(function() {
     // Editor tools
     $('.wrap_selection').click(function() {
         var $el = $(this);
-        var $tag = $el.attr('data-tag');
+        var $tagOpen = $el.attr('data-tag-open');
+        var $tagClose = $el.attr('data-tag-close');
         //var target = document.forms['serendipityEntry']['serendipity[' + $el.attr('data-tarea') + ']'];
         var target =  $('#'+serendipity.escapeBrackets($el.attr('data-tarea')));
-        var open = '<' + $tag + '>';
-        var close = '</' + $tag + '>';
+        if ($el.hasClass('lang-html')) {
+            var open = '<' + $tagOpen + '>';
+            var close = '</' + $tagClose + '>';
+        } else {
+            var open = $tagOpen;
+            var close = $tagClose;
+        }
         serendipity.wrapSelection(target, open, close);
     });
 
