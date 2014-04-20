@@ -9,7 +9,7 @@
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="{serendipity_getFile file='admin/oldie.css'}">
 <![endif]-->
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.2.min.js'}"></script>
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
     <script src="{$serendipityHTTPPath}{$templatePath}jquery.js"></script>
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>

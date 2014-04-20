@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {if $media.css}<link rel="stylesheet" href="{$media.css}">{/if}
     {if $media.css_tree}<link rel="stylesheet" href="{$media.css_tree}">{/if}
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.1.min.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.2.min.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
     <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
