@@ -2178,7 +2178,6 @@ input[name="serendipity[filter][fileCategory]"] {
     border-right: 0 none;
 }
 
-/* Needs IE8 fallback */
 .media_selector:first-of-type,
 .tabs > ul .first > a {
     border-radius: 4px 0 0 4px;
