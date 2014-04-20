@@ -421,6 +421,7 @@ nav ol {
 
 /* BACKEND HELPER CLASSES */
 .icon_link,
+.button_link,
 #insert_image,
 form > a,
 form > button,
@@ -441,7 +442,6 @@ form > button,
 #dashboard_entries .entry_status,
 .comment_status,
 .tabs > ul > li,
-#maintenance > section > .button_link,
 .overviewListForm {
     display: inline-block;
 }
