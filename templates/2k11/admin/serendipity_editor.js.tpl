@@ -1296,6 +1296,19 @@ $(function() {
         });
     }
 
+    if ($('.uploadform_userfile').length > 0) {
+        $('.uploadform_userfile').change(function() {
+            if ($(this).get(0).files.length > 1) {
+                $(this).parent().siblings(':first').fadeOut();
+                $(this).parent().siblings(':first').find('input').val('');
+                $(this).attr('name', $(this).attr('name') + '[]');
+            }
+            if ($(this).get(0).files.length == 1) {
+                $(this).parent().siblings(':first').fadeIn();
+            }
+        });
+    }
+
     // reopen detail element after spamblock action
     if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();
