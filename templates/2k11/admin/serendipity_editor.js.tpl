@@ -88,7 +88,7 @@
         var my_link = prompt("Enter URL:","http://");
 
         if (my_link) {
-            if (getSelection($(txtarea) ) == "") {
+            if (serendipity.getSelection($(txtarea) ) == "") {
                 var my_desc = prompt("Enter Description", '');
             }
             var my_title = prompt("Enter title/tooltip:", "");
