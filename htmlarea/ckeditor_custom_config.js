@@ -1,5 +1,5 @@
 /**
- * @fileOverview A Serendipity CKEDITOR custom config file: ckeditor_custom_config.js, v. 1.0, 2014-03-14, Ian
+ * @fileOverview A Serendipity CKEDITOR custom config file: ckeditor_custom_config.js, v. 1.1, 2014-04-24, Ian
  */
 
 /**
@@ -53,6 +53,9 @@ CKEDITOR.editorConfig = function( config ) {
     //config.ignoreEmptyParagraph = false; // default(true) - Whether the editor must output an empty value ('') if it's contents is made by an empty paragraph only. (extends to config.fillEmptyBlocks)
     // It will still generate an empty <p></p> though.
     config.autoParagraph = false; // but this one definitely prevents adding multiple empty paragraphs when switching source mode!!!
+
+    // add custom Serendipity styles to ckeditor wysiwyg-mode, to repect css image floats
+    config.contentsCss = 'htmlarea/wysiwyg-style.css';
 
     // The configuration setting that controls the ENTER mode is "config.enterMode" and it offers three options:
     // (1) The default creates a paragraph element each time the "enter" key is pressed:
