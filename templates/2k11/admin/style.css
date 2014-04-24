@@ -1259,6 +1259,10 @@ summary {
     padding: .4em 0;
 }
 
+#categoryfilter {
+    min-width: 20em;
+}
+
 .user_level {
     display: block;
 }
@@ -2146,6 +2150,7 @@ label .perm_name,
 .no-js .comment_summary,
 .no-js .show_config_option .icon-right-dir,
 .no-js #keyword_list,
+.no-js #category_filter,
 .js .additional_info,
 .js .installer .icon-info-circled,
 .hidden,

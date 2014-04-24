@@ -108,9 +108,10 @@
                 <fieldset>
                     <span class="wrap_legend"><legend>{$CONST.CATEGORY}</legend></span>
 
-                    <div class="category_filter">
-                        <label for="categoryfilter">{$CONST.FILTERS}</label>
-                        <input type="text" id="categoryfilter">
+                    <div id="category_filter" class="form_field">
+                        <label for="categoryfilter" class="visuallyhidden">{$CONST.FILTERS}</label>
+                        <input id="categoryfilter" type="text" placeholder="{$CONST.FILTERS}: {$CONST.CATEGORIES}">
+                        <button id="reset_categoryfilter" class="icon_link" type="button" title="Reset filters"><span class="icon-cancel"></span><span class="visuallyhidden">Reset filters</span></button> {* i18n *}
                     </div>
 
                 {foreach from=$entry_vars.category_options item="entry_cat"}

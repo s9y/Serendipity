@@ -983,6 +983,7 @@ $(function() {
         }
     {/if}
 
+    // Category filter
     $('#categoryfilter').keyup(function() {
         var current_categoryfilter = $(this).val().toLowerCase();
 
@@ -990,13 +991,19 @@ $(function() {
             $('#edit_entry_category .form_check').toggle(true);
         } else {
             $('#edit_entry_category .form_check').each(function() {
-                if ($(this).find('label').html().toLowerCase().indexOf(current_categoryfilter) > -1) {
-                    $(this).toggle(true);
+                var $el = $(this);
+                if ($el.find('label').html().toLowerCase().indexOf(current_categoryfilter) > -1) {
+                    $el.toggle(true);
                 } else {
-                    $(this).toggle(false);
+                    $el.toggle(false);
                 }
             });
         }
+    });
+
+    // Reset button for category filter
+    $('#reset_categoryfilter').click(function() {
+        $('#categoryfilter').val("").keyup();
     });
 
     // Advanced options
