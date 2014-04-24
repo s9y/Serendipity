@@ -107,6 +107,12 @@
             <div id="edit_entry_category" class="clearfix mfp-hide">
                 <fieldset>
                     <span class="wrap_legend"><legend>{$CONST.CATEGORY}</legend></span>
+
+                    <div class="category_filter">
+                        <label for="categoryfilter">{$CONST.FILTERS}</label>
+                        <input type="text" id="categoryfilter">
+                    </div>
+
                 {foreach from=$entry_vars.category_options item="entry_cat"}
                     <div class="form_check">
                         {$entry_cat.depth_pad}

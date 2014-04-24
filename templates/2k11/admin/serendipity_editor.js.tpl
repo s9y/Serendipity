@@ -983,6 +983,22 @@ $(function() {
         }
     {/if}
 
+    $('#categoryfilter').keyup(function() {
+        var current_categoryfilter = $(this).val().toLowerCase();
+
+        if (current_categoryfilter == '') {
+            $('#edit_entry_category .form_check').toggle(true);
+        } else {
+            $('#edit_entry_category .form_check').each(function() {
+                if ($(this).find('label').html().toLowerCase().indexOf(current_categoryfilter) > -1) {
+                    $(this).toggle(true);
+                } else {
+                    $(this).toggle(false);
+                }
+            });
+        }
+    });
+
     // Advanced options
     if($('#advanced_options').length > 0) {
         $('#toggle_advanced').click(function() {
