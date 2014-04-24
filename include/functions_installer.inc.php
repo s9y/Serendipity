@@ -1196,21 +1196,44 @@ function serendipity_verifyFTPChecksums() {
     return $badsums;
 }
 
+
+/**
+ * Check https://raw.github.com/s9y/Serendipity/master/docs/RELEASE for the newest available version
+ *
+ * If the file is not fetch- or parseable (behind a proxy, malformed by Garvin), this will return -1
+ * */
 function serendipity_getCurrentVersion() {
-    $updateURL = 'https://raw.github.com/s9y/Serendipity/master/docs/RELEASE';
-
-    $file = fopen($updateURL, 'r');
-    if (!$file) {
-        return;
+    global $serendipity;
+    if ($serendipity['updateCheck'] != "stable" && $serendipity['updateCheck'] != "beta") {
+        return -1;
     }
+    $updateURL = 'https://raw.github.com/s9y/Serendipity/master/docs/RELEASE';
+    $context = stream_context_create( array('http'=>array('timeout' => 5.0)) );
 
-    while (!feof($file)) {
-        $line = fgets($file);
+    $file = @file_get_contents($updateURL, false, $context);
 
-        if (preg_match('/stable:(.+$)/', $line, $match)) {
-            return $match[1];
+    if ( ! $file) {
+        if (function_exists('curl_init')) {
+            $ch = curl_init($updateURL);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_TIMEOUT, "5");
+            $file = curl_exec($ch);
+            curl_close($ch);
         }
     }
+
+    if ($file) {
+        if ($serendipity['updateCheck'] == "stable") {
+            if (preg_match('/^stable:(.+)\b/', $file, $match)) {
+                return $match[1];
+            }
+        } else {
+            if (preg_match('/^beta:(.+)\b/', $file, $match)) {
+                return $match[1];
+            }
+        }
+    }
+    return -1;
 }
 
 /* vim: set sts=4 ts=4 sw=4 expandtab : */

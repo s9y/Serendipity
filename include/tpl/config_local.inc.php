@@ -398,6 +398,12 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
+                                    array('var'         => 'updateCheck',
+                                          'title'       => UPDATE_NOTIFICATION,  
+                                          'description' => "Show the update notification in the Dashboard, and for which channel?",  # i18n
+                                          'type'        => 'list',
+                                          'default'     => array('stable' => 'stable', 'beta' => 'beta', 'false' => NO ), # i18n
+                                          'permission'  => 'blogConfiguration'),
                             ));
 
     $res['display'] =
