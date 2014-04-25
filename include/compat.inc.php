@@ -105,7 +105,7 @@ if (!function_exists('errorToExceptionHandler')) {
                 }
                 print_r($debugbacktrace);
             }
-            //print_r($args); // debugging
+            //print_r($args); // debugging [Use with care! Not to public, since holding password and credentials!!!]
             // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
             // compare version to not get strange T_NEW parse errors (http://board.s9y.org/viewtopic.php?f=10&t=19436)
             if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
