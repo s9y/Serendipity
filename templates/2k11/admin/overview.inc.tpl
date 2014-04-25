@@ -16,11 +16,11 @@
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-                <span class="msg_notice"><span class="icon-info-circled"></span> Check for new Serendipity version failed</span> {* i18n *}
+                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.UPDATE_FAILMSG}</span>
                 <form id="updateCheckDisable" method="POST">
                     <input type="hidden" name="serendipity[adminAction]" value="updateCheckDisable" />
                     {$token}
-                    <button type="submit">Disable update check</button> {* i18n *}
+                    <button type="submit">{$CONST.UPDATE_FAILACTION}</button>
                 </form>
             </section>
         {else if $update}

@@ -4,6 +4,28 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
 
+    * Upgrader in Dashboard can be disabled, returns error message when
+      URL not accessible
+      
+    * Added a category filtering ability for the entry editor
+    
+    * Better check when removing old/dead files to prevent error
+      messages
+      
+    * WYSIWYG editor respects image floats
+    
+    * Support html5 multiple file upload
+    
+    * Modernizr, magnificPopup updates
+    
+    * Improvements to equal heights js, button labels
+    
+    * No longer truncate long entry titles
+    
+    * Improve non-WYSIWYG editor tag insertion, url insertion
+    
+    * Improve less DOM firing on certain javascript tasks
+    
 Version 2.0-beta1 (April 14th, 2014)
 ------------------------------------------------------------------------
 
