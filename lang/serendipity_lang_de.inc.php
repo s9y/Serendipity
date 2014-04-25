@@ -1034,3 +1034,4 @@
 @define('INSTALLER_CLI_TOOLNAME', 'CLI-Tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Ausführbar?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Filter entfernen');

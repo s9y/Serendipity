@@ -1048,3 +1048,4 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Reset filters');

@@ -80,3 +80,4 @@ foreach($const['missing'] AS $file => $constants) {
     }
     echo "---------------------------\n";
 }
+@define('RESET_FILTERS', 'Reset filters');

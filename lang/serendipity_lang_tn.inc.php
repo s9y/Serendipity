@@ -1034,3 +1034,4 @@ $i18n_unknown = 'tw';
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Reset filters');

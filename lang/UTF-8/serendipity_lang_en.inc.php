@@ -627,7 +627,7 @@
 @define('RESET_DATE', 'Reset date');
 @define('RESET_DATE_DESC', 'Click here to reset the date to the current time');
 @define('PROBLEM_PERMISSIONS_HOWTO', 'Permissions can be set by running shell command: `<em>%s</em>` on the failed directory, or by setting this using an FTP program');
-@define('WARNING_TEMPLATE_DEPRECATED', 'Warning: Your current theme is using a deprecated template method, you are advised to update if possible');
+@define('WARNING_TEMPLATE_DEPRECATED', 'Warning: Your current theme is using a deprecated theme method, you are advised to update if possible');
 @define('ENTRY_PUBLISHED_FUTURE', 'This entry is not yet published.');
 @define('ENTRIES_BY', 'Entries by %s');
 @define('PREVIOUS', 'Previous');
@@ -1032,3 +1032,4 @@
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Reset filters');

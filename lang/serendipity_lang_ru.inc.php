@@ -1033,3 +1033,4 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Reset filters');
