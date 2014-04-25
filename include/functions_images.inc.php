@@ -1828,9 +1828,6 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
             if ($onlyDirs === false || $bIsDir) {
                 if ($bPatternMatch &&
                     (!$bIsDir || $aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
-                    if ($file == '.git') {
-                        echo $file;
-                    }
                     $files[] = array(
                         'name'      => $file,
                         'depth'     => $depth,
