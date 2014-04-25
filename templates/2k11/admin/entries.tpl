@@ -111,7 +111,7 @@
                     <div id="category_filter" class="form_field">
                         <label for="categoryfilter" class="visuallyhidden">{$CONST.FILTERS}</label>
                         <input id="categoryfilter" type="text" placeholder="{$CONST.FILTERS}: {$CONST.CATEGORIES}">
-                        <button id="reset_categoryfilter" class="icon_link" type="button" title="Reset filters"><span class="icon-cancel"></span><span class="visuallyhidden">Reset filters</span></button> {* i18n *}
+                        <button id="reset_categoryfilter" class="icon_link" type="button" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
                     </div>
 
                 {foreach from=$entry_vars.category_options item="entry_cat"}

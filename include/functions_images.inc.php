@@ -1810,7 +1810,7 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
     if ($aExcludeDirs === null) {
         // add _vti_cnf to exclude possible added servers frontpage extensions
         // add ckeditor/kcfinders .thumb dir to exclude, since no hook
-        $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true, "_vti_cnf" => true);
+        $aExcludeDirs = array("CVS" => true, ".svn" => true, ".thumbs" => true, "_vti_cnf" => true, ".git" => true);
     }
 
     $odir = serendipity_dirSlash('end', $basedir) . serendipity_dirSlash('end', $dir);

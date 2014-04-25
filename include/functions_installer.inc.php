@@ -1204,15 +1204,24 @@ function serendipity_verifyFTPChecksums() {
  * */
 function serendipity_getCurrentVersion() {
     global $serendipity;
+
     if ($serendipity['updateCheck'] != "stable" && $serendipity['updateCheck'] != "beta") {
         return -1;
     }
+
+    // Perform update check once a day. We use a suffix of the configured channel, so when
+    // the user switches channels, it has its own timer.
+    if ($serendipity['last_update_check_' . $serendipity['updateCheck']] >= (time()-86400)) {
+        // Last update was performed less than a day ago. Return last result.
+        return $serendipity['last_update_version_' . $serendipity['updateCheck']];
+    }
+
+    serendipity_set_config_var('last_update_check_' . $serendipity['updateCheck'], time());
     $updateURL = 'https://raw.github.com/s9y/Serendipity/master/docs/RELEASE';
-    $context = stream_context_create( array('http'=>array('timeout' => 5.0)) );
+    $context   = stream_context_create(array('http' => array('timeout' => 5.0)));
+    $file      = @file_get_contents($updateURL, false, $context);
 
-    $file = @file_get_contents($updateURL, false, $context);
-
-    if ( ! $file) {
+    if (!$file) {
         if (function_exists('curl_init')) {
             $ch = curl_init($updateURL);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1225,14 +1234,17 @@ function serendipity_getCurrentVersion() {
     if ($file) {
         if ($serendipity['updateCheck'] == "stable") {
             if (preg_match('/^stable:(.+)\b/', $file, $match)) {
+                serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
         } else {
             if (preg_match('/^beta:(.+)\b/', $file, $match)) {
+                serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
         }
     }
+
     return -1;
 }
 

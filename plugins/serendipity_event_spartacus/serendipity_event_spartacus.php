@@ -385,7 +385,7 @@ class serendipity_event_spartacus extends serendipity_event
         }
         $url_ip = gethostbyname($url_hostname);
 
-        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHING, '<a href="' . $url . '">' . basename($url) . '</a>'));
+        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHING, '<a target="_blank" href="' . $url . '">' . basename($url) . '</a>'));
 
         if (file_exists($target) && filesize($target) > 0 && filemtime($target) >= (time()-$cacheTimeout)) {
             $data = file_get_contents($target);
