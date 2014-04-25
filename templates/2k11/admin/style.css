@@ -479,7 +479,8 @@ label > span,
 #mediaPropertyForm header b,
 #mediaPropertyForm footer b,
 #content .upgrade_done,
-.pluginmanager_description .perm_name {
+.pluginmanager_description .perm_name,
+.plugin_data > .perm_name {
     display: block;
 }
 
@@ -502,7 +503,8 @@ details,
 form > a,
 form > button,
 #content .upgrade_done,
-#upgrade_notice {
+#upgrade_notice,
+.plugin_data > .perm_name {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -515,6 +517,10 @@ form > button,
 
 .pluginmanager_description .perm_name {
     margin-bottom: .25em;
+}
+
+.plugin_desc {
+    margin-top: .25em;
 }
 
 #categories,

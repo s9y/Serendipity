@@ -77,9 +77,21 @@
         {foreach $groupstack as $plug}
             <li class="clearfix">
                 <div class="equal_heights">
-                    <h4>{$plug.name} ({$plug.class_name})</h4>
+                    <h4>{$plug.name}</h4>
 
-                    <p class="plugin_desc">{$plug.description}</p>
+                {if $plug.description}
+                    <details class="plugin_data">
+                        <summary><var class="perm_name">[{$plug.class_name}]</var></summary>
+
+                        <div class="plugin_desc clearfix">
+                        {$plug.description}
+                        </div>
+                    </details>
+                {else}
+                    <div class="plugin_data">
+                        <var class="perm_name">[{$plug.class_name}]</var>
+                    </div>
+                {/if}
 
                     <ul class="plugin_info plainList">
                     {if ! empty($plug.author)}
