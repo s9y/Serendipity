@@ -265,73 +265,83 @@ switch ($serendipity['GET']['adminAction']) {
                 serendipity_request_end();
             }
         } else {
-            if (!is_array($serendipity['POST']['target_filename'])) {
+            if (!is_array($_FILES['serendipity']['name']['userfile'])) {
                 break;
             }
 
-            foreach($serendipity['POST']['target_filename'] AS $idx => $target_filename) {
-                $uploadfile = &$_FILES['serendipity']['name']['userfile'][$idx];
-                $uploadtmp  = &$_FILES['serendipity']['tmp_name']['userfile'][$idx];
-                if (!empty($target_filename)) {
-                    $tfile   = $target_filename;
-                } elseif (!empty($uploadfile)) {
-                    $tfile   = $uploadfile;
-                } else {
-                    // skip empty array
-                    continue;
+            foreach($_FILES['serendipity']['name']['userfile'] AS $idx => $uploadfiles) {
+                if (! is_array($uploadfiles)) {
+                    $uploadfiles = array($uploadfiles);
                 }
-
-                $tfile = serendipity_uploadSecure(basename($tfile));
-
-                if (serendipity_isActiveFile($tfile)) {
-                    $messages[] = ERROR_FILE_FORBIDDEN .' '. $tfile;
-                    continue;
-                }
-
-                $serendipity['POST']['target_directory'][$idx] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$idx], true, true);
-
-                if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$idx])) {
-                    $messages[] = PERM_DENIED;
-                    continue;
-                }
-
-                $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx] . $tfile;
-
-                $realname = $tfile;
-                if (file_exists($target)) {
-                    $messages[] = '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY;
-                    $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
-                }
-
-                // Accept file
-                if (is_uploaded_file($uploadtmp) && serendipity_checkMediaSize($uploadtmp) && move_uploaded_file($uploadtmp, $target)) {
-                    $messages[] = sprintf( FILE_UPLOADED , $uploadfile , $target);
-                    @umask(0000);
-                    @chmod($target, 0664);
-
-                    $thumbs = array(array(
-                        'thumbSize' => $serendipity['thumbSize'],
-                        'thumb'     => $serendipity['thumbSuffix']
-                    ));
-                    serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
-
-                    foreach($thumbs as $thumb) {
-                        // Create thumbnail
-                        if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$idx], $thumb['thumbSize'], $thumb['thumb']) ) {
-                            $messages[] = THUMB_CREATED_DONE;
-                        }
+                $uploadFileCounter=-1;
+                foreach($uploadfiles AS $uploadfile) {
+                    $uploadFileCounter++;
+                    $target_filename = $serendipity['POST']['target_filename'][$idx];
+                    $uploadtmp  = $_FILES['serendipity']['tmp_name']['userfile'][$idx];
+                    if (is_array($uploadtmp)) {
+                        $uploadtmp = $uploadtmp[$uploadFileCounter];
+                    }
+                    if (!empty($target_filename)) {
+                        $tfile   = $target_filename;
+                    } elseif (!empty($uploadfile)) {
+                        $tfile   = $uploadfile;
+                    } else {
+                        // skip empty array
+                        continue;
                     }
 
-                    // Insert into database
-                    $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
-                    serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
-                    $new_media[] = array(
-                        'image_id'          => $image_id,
-                        'target'            => $target,
-                        'created_thumbnail' => $created_thumbnail
-                    );
-                } else {
-                    $messages[] = ERROR_UNKNOWN_NOUPLOAD;
+                    $tfile = serendipity_uploadSecure(basename($tfile));
+
+                    if (serendipity_isActiveFile($tfile)) {
+                        $messages[] = ERROR_FILE_FORBIDDEN .' '. $tfile;
+                        continue;
+                    }
+
+                    $serendipity['POST']['target_directory'][$idx] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$idx], true, true);
+
+                    if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$idx])) {
+                        $messages[] = PERM_DENIED;
+                        continue;
+                    }
+
+                    $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx] . $tfile;
+
+                    $realname = $tfile;
+                    if (file_exists($target)) {
+                        $messages[] = '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY;
+                        $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
+                    }
+
+                    // Accept file
+                    if (is_uploaded_file($uploadtmp) && serendipity_checkMediaSize($uploadtmp) && move_uploaded_file($uploadtmp, $target)) {
+                        $messages[] = sprintf( FILE_UPLOADED , $uploadfile , $target);
+                        @umask(0000);
+                        @chmod($target, 0664);
+
+                        $thumbs = array(array(
+                            'thumbSize' => $serendipity['thumbSize'],
+                            'thumb'     => $serendipity['thumbSuffix']
+                        ));
+                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+
+                        foreach($thumbs as $thumb) {
+                            // Create thumbnail
+                            if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$idx], $thumb['thumbSize'], $thumb['thumb']) ) {
+                                $messages[] = THUMB_CREATED_DONE;
+                            }
+                        }
+
+                        // Insert into database
+                        $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$idx], $authorid, null, $realname);
+                        serendipity_plugin_api::hook_event('backend_image_add', $target, $created_thumbnail);
+                        $new_media[] = array(
+                            'image_id'          => $image_id,
+                            'target'            => $target,
+                            'created_thumbnail' => $created_thumbnail
+                        );
+                    } else {
+                        $messages[] = ERROR_UNKNOWN_NOUPLOAD;
+                    }
                 }
             }
         }

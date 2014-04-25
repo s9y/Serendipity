@@ -398,6 +398,12 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
+                                    array('var'         => 'updateCheck',
+                                          'title'       => UPDATE_NOTIFICATION,  
+                                          'description' => UPDATE_NOTIFICATION_DESC,
+                                          'type'        => 'list',
+                                          'default'     => array('stable' => 'stable', 'beta' => 'beta', 'false' => NO ), # i18n
+                                          'permission'  => 'blogConfiguration'),
                             ));
 
     $res['display'] =

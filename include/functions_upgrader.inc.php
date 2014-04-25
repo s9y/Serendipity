@@ -163,12 +163,8 @@ $dead_htmlarea_dirs = array(
  */
 function recursive_directory_iterator($dir = array()) {
     foreach ($dir AS $path) {
-        try {
-            serendipity_removeDeadFiles_SPL($path);
-            @rmdir($path);
-        } catch (Exception $e) {
-            echo htmlspecialchars($path) . " &gt;&gt; File or directory probably does not exist.<br/>";
-        }
+        serendipity_removeDeadFiles_SPL($path);
+        @rmdir($path);
     }
 }
 
@@ -293,7 +289,13 @@ function serendipity_killPlugin($name) {
  */
 function serendipity_removeDeadFiles_SPL($dir=null, $deadfiles=null, $purgedir=null, $list_only=false) {
     if (!is_dir($dir)) return;
-    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir), RecursiveIteratorIterator::CHILD_FIRST);
+    try {
+        $_dir = new RecursiveDirectoryIterator($dir);
+    // NOTE: UnexpectedValueException thrown for PHP >= 5.3
+    } catch (Exception $e) {
+        return;
+    }
+    $iterator = new RecursiveIteratorIterator($_dir, RecursiveIteratorIterator::CHILD_FIRST);
     $search   = array("\\", '//');
     $replace  = array('/');
     foreach ($iterator as $file) {

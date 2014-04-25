@@ -11,12 +11,25 @@
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
     {/if}
 
-    {if $update}
-        <section id="dashboard_update">
-            <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
+    {if $updateCheck == "stable" || $updateCheck == "beta" }
+        {if $curVersion == -1}
+            <section id="dashboard_update">
+                <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
-        </section>
+                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.UPDATE_FAILMSG}</span>
+                <form id="updateCheckDisable" method="POST">
+                    <input type="hidden" name="serendipity[adminAction]" value="updateCheckDisable" />
+                    {$token}
+                    <button type="submit">{$CONST.UPDATE_FAILACTION}</button>
+                </form>
+            </section>
+        {else if $update}
+            <section id="dashboard_update">
+                <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
+
+                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
+            </section>
+        {/if}
     {/if}
         <section id="dashboard_comments" class="odd equal_heights quick_list">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>

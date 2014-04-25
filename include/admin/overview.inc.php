@@ -23,6 +23,12 @@ switch($serendipity['POST']['adminAction']) {
             $data['error_publish'] = $success;
         }
         break;
+    case 'updateCheckDisable':
+        if ( !serendipity_checkFormToken() || !serendipity_checkPermission('blogConfiguration') ) {
+            break;
+        }
+        serendipity_set_config_var('updateCheck', false);
+        break;
 }
     
 
@@ -38,10 +44,10 @@ $output = array();
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
 $data['backend_frontpage_display'] = $output['more'];
 
-$data['curVersion'] = serendipity_getCurrentVersion();
 $data['usedVersion'] = $serendipity['version'];
+$data['updateCheck'] = $serendipity['updateCheck'];
+$data['curVersion'] = serendipity_getCurrentVersion();
 $data['update'] = version_compare($data['usedVersion'], $data['curVersion'], '<');
-
 
 $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)

@@ -1034,3 +1034,7 @@
 @define('INSTALLER_CLI_TOOLNAME', 'CLI-Tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Ausführbar?');
 @define('VIDEO', 'Video');
+@define('RESET_FILTERS', 'Filter entfernen');
+@define('UPDATE_FAILMSG', 'Update-Check für neue Serendipity-Version fehlgeschlagen. Das kann passieren wenn die URL https://raw.github.com/s9y/Serendipity/master/docs/RELEASE nicht erreichbar ist, der Server ausgehende Verbindungen verhindert oder es andere Verbindungsprobleme gibt.');
+@define('UPDATE_FAILACTION', 'Automatischen Update-Check deaktivieren');
+@define('UPDATE_NOTIFICATION_DESC', 'Sollen Update-Checks im Dashboard angezeigt werden, und wenn ja für welche Versionen?');

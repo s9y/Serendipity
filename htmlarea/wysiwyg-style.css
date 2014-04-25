@@ -1,0 +1,86 @@
+/**
+ * Adds custom Serendipity image float styles to CKEDITOR wysiwyg-mode
+ */
+
+.serendipity_image_left,
+.serendipity_image_right,
+.serendipity_image_center,
+.serendipity_imageComment_center,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    background: transparent;
+    border: 0 none;
+    padding: 0!important;
+}
+
+.serendipity_image_left,
+.serendipity_image_right,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    display: block;
+    float: none;
+    margin: 0 0 1em;
+}
+
+.serendipity_image_center {
+    display: block;
+    margin: 0 auto 1em auto;
+}
+
+.plain-images .serendipity_image_left,
+.plain-images .serendipity_image_right,
+.plain-images .serendipity_image_center,
+.plain-images .serendipity_imageComment_center,
+.plain-images .serendipity_imageComment_left,
+.plain-images .serendipity_imageComment_right {
+    border: 1px solid #aaa;
+}
+
+.plain-images .serendipity_imageComment_txt {
+    background: #ddd;
+}
+
+.fancy-images .serendipity_image_left,
+.fancy-images .serendipity_image_right,
+.fancy-images .serendipity_image_center,
+.fancy-images .serendipity_imageComment_img {
+    -webkit-box-shadow: 0 0 2px 1px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 0 2px 1px rgba(0,0,0,.5);
+    box-shadow: 0 0 2px 1px rgba(0,0,0,.5);
+}
+
+.no-boxshadow .fancy-images .serendipity_image_left,
+.no-boxshadow .fancy-images .serendipity_image_right,
+.no-boxshadow .fancy-images .serendipity_image_center,
+.no-boxshadow .fancy-images .serendipity_imageComment_img {
+    border: 1px solid #aaa;
+}
+
+.serendipity_imageComment_center,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    height: auto;
+    max-width: 100%;
+}
+
+.serendipity_image_left {
+    float: left;
+    margin: 0 2em 1em 0;
+}
+
+.serendipity_image_right {
+    float: right;
+    margin: 0 0 1em 2em;
+}
+
+.serendipity_imageComment_left {
+    display: inline;
+    float: left;
+    margin: 0 2em 1em 0;
+}
+
+.serendipity_imageComment_right {
+    display: inline;
+    float: right;
+    margin: 0 0 1em 2em;
+}
