@@ -4,6 +4,8 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
 
+    * RSS importer accepts pubDate in addition to pubdate element.
+    
     * Upgrader in Dashboard can be disabled, returns error message when
       URL not accessible
       
