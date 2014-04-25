@@ -3,7 +3,7 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 // Call this file from the base directory with 
-// echo "true" | 'php -B "define('IN_serendipity', true);" -F bundled-libs/serendipity_generateFTPChecksums.php'
+// echo "true" | php -B "define('IN_serendipity', true);" -F bundled-libs/serendipity_generateFTPChecksums.php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!\n");
