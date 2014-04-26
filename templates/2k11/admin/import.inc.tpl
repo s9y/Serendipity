@@ -1,8 +1,12 @@
 {if $importForm}
     {if $die}
+        <h2>{$CONST.IMPORT_ENTRIES}</h2>
+
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.INCLUDE_ERRORFAILURE|sprintf:'importer'}</span>
     {else}
         {if $validateData}
+        <h2>{$CONST.IMPORT_ENTRIES}</h2>
+
         <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.IMPORT_STARTING}</span>
             {if $result != true}
             <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.IMPORT_FAILED}: {$result}</span>
