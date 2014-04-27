@@ -71,7 +71,12 @@ if ($serendipity['GET']['adminAction'] == 'install' ) {
     serendipity_plugin_api::hook_event('backend_templates_install', $serendipity['GET']['theme'], $themeInfo);
 
     serendipity_set_config_var('template', htmlspecialchars($serendipity['GET']['theme']));
-    serendipity_set_config_var('template_engine', isset($themeInfo['engine']) ? $themeInfo['engine'] : 'default');
+
+    // template_engine was set by default to default, which screws up the fallback chain (to the default-template first)
+    serendipity_set_config_var('template_engine', null);   
+    if ($themeInfo['engine']) {
+        serendipity_set_config_var('template_engine', $themeInfo['engine']);
+    }
     serendipity_set_config_var('last_template_change', time());
 
     $data["adminAction"] = "install";

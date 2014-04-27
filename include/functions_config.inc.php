@@ -88,7 +88,6 @@ function serendipity_remove_config_var($name, $authorid = 0) {
  * @param   string      The name of the configuration value
  * @param   string      The value of the configuration item
  * @param   int         The ID of the owner of the config value (0: global)
- * @return  null
  */
 function serendipity_set_config_var($name, $val, $authorid = 0) {
     global $serendipity;
@@ -263,11 +262,11 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
     $directories = array();
 
     $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
-    if (isset($serendipity['template_engine']) && (stristr($file, 'admin/') === false || $serendipity['template_engine'] != 'default')) {
-         $p = explode(',', $serendipity['template_engine']);
-         foreach($p AS $te) {
-             $directories[] = trim($te) . '/';
-         }
+    if (isset($serendipity['template_engine'])) {
+        $p = explode(',', $serendipity['template_engine']);
+        foreach($p AS $te) {
+            $directories[] = trim($te) . '/';
+        }
     }
 
     $directories[] = $serendipity['defaultTemplate'] .'/';

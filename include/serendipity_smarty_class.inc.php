@@ -117,33 +117,24 @@ class Serendipity_Smarty extends Smarty
            Set all directory setters
            Smarty will always use the first template found in order of the given array. Move the least significant directory to the end.
         */
-
-         // initiate templateDir setter
-        $this->setTemplateDir(array(S9Y_TEMPLATE_USERDEFAULT));
         
-        // set addTemplate array with the blogs used template anyway
-        $serendipity['addTemplateDir'] = array($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate']);
-        /*
-            Note: Ian
-            BEWARE: Bulletproof and default template do not have any engine settings, so the next will be empty. This is why adding defaultTemplate was necessary.
-        */
-        // merge engine only templates to addTemplate array
-        $p = explode(',', $serendipity['template_engine']);
-        foreach($p AS $te) {
-            $serendipity['addTemplateDir'][] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $te; 
-        }
+        $template_engine = serendipity_get_config_var('template_engine');
+        $template_dirs = array();
+        if ($template_engine) {
+            $template_dirs[] =  $serendipity['serendipityPath'] . $serendipity['templatePath'] . $template_engine;
+        } 
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'];
         // add secure dir to template path, in case engine did have entries
-        $serendipity['addTemplateDir'][] = S9Y_TEMPLATE_SECUREDIR;
-        // disable plugin dir as added template dir is not adviced, if set security is enabled (backend & frontend need access to fetch plugin templates)
-        $serendipity['addTemplateDir'][] = $serendipity['serendipityPath'] . 'plugins';
-        // add default template to addTemplate array, if not already set in engine
-        $serendipity['addTemplateDir'][] = S9Y_TEMPLATE_FALLBACK;
+        if (S9Y_TEMPLATE_SECUREDIR != $serendipity['serendipityPath'] . $serendipity['templatePath']) {
+            $template_dirs[] = S9Y_TEMPLATE_SECUREDIR;
+        }
         
-        // expand smarty objects (add)TemplateDir setter with $serendipity['addTemplateDir'] as is
-         $this->addTemplateDir($serendipity['addTemplateDir']); 
-         
-        // setTemplateDir again to unified getTemplateDir() to avoid doubles for (engine, default and main templates)
-        $this->setTemplateDir(array_values(array_unique($this->getTemplateDir()))); // reset keys to be unique
+        // disable plugin dir as added template dir is not adviced, if set security is enabled (backend & frontend need access to fetch plugin templates)
+        $template_dirs[] = $serendipity['serendipityPath'] . 'plugins';
+        // add default template to addTemplate array, if not already set in engine
+        $template_dirs[] = S9Y_TEMPLATE_FALLBACK;
+
+        $this->setTemplateDir($template_dirs);
 
         $this->setCompileDir($serendipity['serendipityPath'] . PATH_SMARTY_COMPILE);
         
