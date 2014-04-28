@@ -132,6 +132,7 @@
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
                     <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape}">
+                    <button id="insert_image" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>
                 </div>
 
                 <figure id="preview">

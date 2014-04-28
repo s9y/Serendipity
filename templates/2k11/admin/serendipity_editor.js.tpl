@@ -1135,14 +1135,8 @@ $(function() {
     });
 
     // Category icon preview
-    // NOTE: This is just to replace the old functionality; ideally, this should
-    //       have a working no-js fallback
-    if($('#category_icon').length > 0) {
-        $('<button id="insert_image" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>').insertAfter('#category_icon');
-    }
-
     $('#insert_image').click(function(e) {
-        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[htmltarget]=category_icon&serendipity[filename_only]=true');
+        serendipity.choose_media('category_icon');
     });
 
     $('#category_icon').change(function() {
