@@ -1,9 +1,17 @@
-/* SMALL SCREEN */
+#serendipityEntry {
+    padding-top: 0;
+}
+
+.actions li {
+    margin: 0 .4em .5em 0;
+}
+
 #edit_entry_submit {
     top: -3.25em;
 }
 
 #pluginlist_tabs {
+    clear: both;
     position: relative;
 }
 
@@ -16,6 +24,23 @@
 
 #login {
     max-width: 25em;
+}
+
+#sort_entries .form_select label,
+#filter_entries .form_select label,
+#filter_entries .form_field label,
+#media_pane_filter label,
+#media_pane_sort label,
+#karmafilters label,
+#image_directory_create_form label {
+    display: inline-block;
+    width: 20%;
+}
+
+#sort_entries .form_select select,
+#filter_entries .form_select select,
+#filter_entries .form_field input {
+    width: 79%;
 }
 
 #uploadform label {
@@ -38,7 +63,7 @@
 #entries_list h3,
 #serendipity_comments_list h4,
 .karmalog h4 {
-    max-width: none;
+    max-width: 75%;
 }
 
 .comments_pane .pagination h3,
@@ -48,6 +73,10 @@
     position: absolute;
     top: -60%;
     left: 37%;
+}
+
+#media_selector_bar {
+    margin: 0 0 1em;
 }
 
 #mediaPropertyForm .media_file_props label,
@@ -100,10 +129,6 @@ pre {
     margin: 1.71429em 0;
 }
 
-#main_menu li > ul > li {
-    width: 33%;
-}
-
 #template_select article,
 .plugins_installable > li,
 #serendipityScaleForm,
@@ -123,7 +148,10 @@ pre {
 
 #template_select .even,
 .media_pane .even,
-#dashboard > .even,
+#dashboard > .even {
+    margin: 0 0 1em 2%;
+}
+
 #maintenance > section:nth-child(odd) {
     margin: 0 0 1em 2%;
 }
@@ -143,6 +171,15 @@ pre {
     float: none;
     margin: 1.5em 0;
     width: auto;
+}
+
+#upgrade_notice {
+    float: right;
+}
+
+#upgrade_notice a {
+    display: inline-block;
+    margin: 0 0 0 .4em;
 }
 
 #meta_data > div,
@@ -229,9 +266,12 @@ pre {
 .configuration_group .form_area,
 .configuration_group fieldset > fieldset,
 #template_select .odd,
-.plugins_installable > li:nth-child(odd),
 .media_pane .odd,
-#dashboard > section:last-child,
+#dashboard > section:last-child {
+    clear: left;
+}
+
+.plugins_installable > li:nth-child(odd),
 .serendipity_statistics > section:nth-child(odd) {
     clear: left;
 }
@@ -397,7 +437,9 @@ main {
 }
 
 .js #main_menu {
-    margin-left: 0;
+    position: static;
+    left: 0;
+    width: 23%;
 }
 
 #nav-toggle {
@@ -436,11 +478,6 @@ main {
     box-sizing: border-box;
     margin: 0 0 1em;
     padding: 0 1em;
-}
-
-#main_menu li > ul > li {
-    float: none;
-    width: 100%;
 }
 
 #main_menu {
