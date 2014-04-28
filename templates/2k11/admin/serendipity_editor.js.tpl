@@ -162,7 +162,7 @@
 
     // Opens media db image selection in new window
     serendipity.choose_media = function(id) {
-        serendipity.openPopup('serendipity_admin_image_selector.php?serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
+        serendipity.openPopup('serendipity_admin.php?serendipity[adminModule]=media&serendipity[noBanner]=true&serendipity[noSidebar]=true&serendipity[noFooter]=true&serendipity[showMediaToolbar]=false&serendipity[htmltarget]=' + id + '&serendipity[filename_only]=true');
     }
 
     // "Transfer" value from media db popup to form element, used for example for selecting a category-icon

@@ -459,7 +459,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
                         <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo htmlspecialchars($value); ?></textarea>
-                        <input class="customfieldMedia" type="button" name="insImage" value="<?php echo MEDIA ; ?>" data-tarea="prop<?php echo $fieldname; ?>">
+                        <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                     </div>
             <?php
                     }
