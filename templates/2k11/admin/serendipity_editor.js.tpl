@@ -1104,10 +1104,9 @@ $(function() {
         serendipity.change_preview($(this).attr('data-configitem'));
     });
 
-    $('.choose_media').click(function(e) {
+    $('.choose_media').click(function() {
         var configitem = $(this).parent().find('.change_preview').attr('id');
         serendipity.choose_media(configitem);
-        e.preventDefault();
     });
 
     $('.customfieldMedia').click(function() {
