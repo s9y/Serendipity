@@ -262,7 +262,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
     $directories = array();
 
     $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
-    if (isset($serendipity['template_engine'])) {
+    if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
         $p = explode(',', $serendipity['template_engine']);
         foreach($p AS $te) {
             $directories[] = trim($te) . '/';
