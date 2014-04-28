@@ -97,7 +97,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
             return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
+        if (!@mysql_select_db($this->data['name'], $wpdb)) {
             return sprintf(COULDNT_SELECT_DB, mysql_error($wpdb));
         }
         
