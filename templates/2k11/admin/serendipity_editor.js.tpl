@@ -150,14 +150,11 @@
     }
     /* end Better-Editor functions */
 
-    // Switches preview of image selected from media db by changing the
-    // container's background image
-    serendipity.change_preview = function(id) {
-        var text_box = document.getElementById('serendipity[template][' + id + ']');
-        var image_box = document.getElementById(id + '_preview');
-        var filename = text_box.value;
-
-        image_box.style.backgroundImage = 'url(' + filename + ')';
+    // Switches preview of image selected from media db
+    serendipity.change_preview = function(input, output) {
+        var filename = document.getElementById(input).value;
+        var $target = $('#' + output + '_preview > img');
+        $target.attr('src', filename);
     }
 
     // Opens media db image selection in new window
@@ -1080,28 +1077,10 @@ $(function() {
         $('.show_config_option_now').click();
     }
 
-    // Config option add media
-    if($('.media_choose').length > 0) {
-        var $el = $('.media_choose');
-        var $item = $el.find('> input');
-        var configItem = $item.attr('data-configitem');
-        var mWidth = $item.attr('data-pmwidth');
-        var mHeight = $item.attr('data-pmheight');
-        if($item.val() != '') {
-            var bgImg = 'url(' + $item.val() + ')';
-        } else {
-            var bgImg = 'none';
-        }
-        $('<div id="'+configItem+'_preview" class="preview"/>').appendTo($el)
-            .css({
-                backgroundImage: bgImg,
-                // minWidth: mWidth,
-                minHeight: mHeight
-            });
-    }
-
     $('.change_preview').change(function() {
-        serendipity.change_preview($(this).attr('data-configitem'));
+        console.log('ID: ' + $(this).attr('id'));
+        console.log('CI: ' + $(this).attr('data-configitem'));
+        serendipity.change_preview($(this).attr('id'), $(this).attr('data-configitem'));
     });
 
     $('.choose_media').click(function() {
@@ -1132,15 +1111,6 @@ $(function() {
         {else}
            $(this).magnificPopup({ type:'iframe' });
         {/if}
-    });
-
-    // Category icon preview
-    $('#insert_image').click(function(e) {
-        serendipity.choose_media('category_icon');
-    });
-
-    $('#category_icon').change(function() {
-        $('#imagepreview').attr('src', $('#category_icon').val());
     });
 
     // Selection for multidelete

@@ -131,13 +131,15 @@
             <div id="category_preview" class="clearfix additional_info">
                 <div class="form_field">
                     <label for="category_icon">{$CONST.CATEGORY} {$CONST.IMAGE}</label>
-                    <input id="category_icon" name="serendipity[cat][icon]" type="text" value="{$this_cat.category_icon|default:""|escape}">
-                    <button id="insert_image" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>
+
+                    <input id="category_icon" class="change_preview" name="serendipity[cat][icon]" type="text" data-configitem="category_icon" value="{$this_cat.category_icon|default:""|escape}">
+
+                    <button class="choose_media" type="button" name="insImage" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_LIBRARY}</span></button>
                 </div>
 
-                <figure id="preview">
+                <figure id="category_icon_preview">
                     <figcaption>{$CONST.PREVIEW}</figcaption>
-                    <img id="imagepreview" src="{$this_cat.category_icon|default:""|escape}" alt="">
+                    <img src="{$this_cat.category_icon|default:""|escape}" alt="">
                 </figure>
             </div>
 

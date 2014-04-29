@@ -964,6 +964,7 @@ input[type=checkbox],
 
 .importer_data dd,
 .form_buttons > input,
+.js .media_choose label,
 .quick_list ol > li {
     margin-bottom: .75em;
 }
@@ -976,7 +977,7 @@ input[type=checkbox],
 .serendipity_commentDirection,
 .entry_info,
 .pagination,
-.media_choose .preview,
+.media_choose figure,
 .media_file_metadata dt,
 #serendipity_comments_list details,
 .configure_plugin .cke {
@@ -1242,13 +1243,6 @@ summary {
 
 .comment_data dd {
     max-width: 75%;
-}
-
-.media_choose .preview {
-    background-repeat: no-repeat;
-    height: auto;
-    margin: .75em 0;
-    max-width: 100%;
 }
 
 .editor_toolbar button,
@@ -2140,8 +2134,8 @@ label .perm_name,
 .no-js .toggle_comment_full,
 .no-js #add_upload,
 .no-js .choose_media,
-.no-js #insert_image,
-.no-js #category_preview #preview,
+.no-js .media_choose figure,
+.no-js #category_preview figure,
 .no-js .media_show_info,
 .no-js .media_rename,
 .no-js .template_show_info,
