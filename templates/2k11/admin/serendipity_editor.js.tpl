@@ -1078,8 +1078,6 @@ $(function() {
     }
 
     $('.change_preview').change(function() {
-        console.log('ID: ' + $(this).attr('id'));
-        console.log('CI: ' + $(this).attr('data-configitem'));
         serendipity.change_preview($(this).attr('id'), $(this).attr('data-configitem'));
     });
 
