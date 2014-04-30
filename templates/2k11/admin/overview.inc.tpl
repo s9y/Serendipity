@@ -37,7 +37,7 @@
             <ol class="plainList">
             {if is_array($comments)}
                 {foreach $comments as $comment}
-                <li><b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b>
+                <li class="clearfix"><b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b>
                     <div class="comment_summary">{$comment.body|truncate:100:"&hellip;"}</div>
 
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
@@ -57,6 +57,9 @@
                         <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
                     {/if}
                     </ul>
+                {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
+                    <span class="comment_status">{$CONST.COMMENTS_FILTER_NEED_APPROVAL}</span>
+                {/if}
                 </li>
                 {/foreach}
             {else}

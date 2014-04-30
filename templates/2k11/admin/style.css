@@ -1442,7 +1442,8 @@ fieldset p,
 
 .actions,
 .edit_actions,
-#dashboard_entries .entry_status {
+#dashboard > section .entry_status,
+#dashboard > section .comment_status {
     margin-top: .35em;
     margin-bottom: .35em;
 }
@@ -1703,11 +1704,12 @@ form > .button_link:first-of-type,
     padding: 0 1em;
 }
 
-#dashboard_entries .actions {
+#dashboard > section .actions {
     float: left;
 }
 
-#dashboard_entries .entry_status {
+#dashboard > section .entry_status,
+#dashboard > section .comment_status {
     float: right;
 }
 
@@ -1874,7 +1876,7 @@ form > .button_link:first-of-type,
     float: right;
 }
 
-.comment_status {
+#serendipity_comments_list .comment_status {
     margin: .5em;
 }
 
