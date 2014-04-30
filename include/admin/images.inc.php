@@ -165,7 +165,7 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
 
-        $messages[] = '<div class="image_add"><b>' . ADDING_IMAGE . '</b></div>';
+        $messages[] = '<span class="image_add">' . ADDING_IMAGE . '</span>';
 
         $authorid = (isset($serendipity['POST']['all_authors']) && $serendipity['POST']['all_authors'] == 'true') ? '0' : $serendipity['authorid'];
 
