@@ -1295,66 +1295,66 @@ $(function() {
     }
 
     // minify images before upload, approach taken from https://github.com/joelvardy/javascript-image-upload/
-    if ($('#uploadform').length > 0) {
-        $('#uploadform').submit(function(event) {
-            event.preventDefault();
-            $('.uploadform_userfile').each(function() {
-                var files = this.files;
-                for (var i = 0; i < files.length; i++) {
-                    var reader = new FileReader();
-                    var file = files[i];
-                    reader.onload = function(readerEvent) {
-                        var image = new Image();
-                        image.onload = function (imageEvent) {
-                            // Resize image
-                            var canvas = document.createElement('canvas'),
-                                max_size = 1200,
-                                width = image.width,
-                                height = image.height;
-                            if (width > height) {
-                                if (width > max_size) {
-                                    height *= max_size / width;
-                                    width = max_size;
-                                }
-                            } else {
-                                if (height > max_size) {
-                                    width *= max_size / height;
-                                    height = max_size;
-                                }
-                            }
-                            canvas.width = width;
-                            canvas.height = height;
-                            canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                            var data = new FormData();
-                            data.append('serendipity[action]', 'admin');
-                            data.append('serendipity[adminModule]', 'media');
-                            data.append('serendipity[adminAction]', 'add');
-                            data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
-                            data.append('serendipity[target_filename][1]', file.name);
-                            canvas.toBlob(function(blob) {
-                                data.append('serendipity[userfile][1]', blob, file.name);
-                                var jqxhr = $.ajax({
-                                            type: 'post',
-                                            url: $('#uploadform').attr('action'),
-                                            data: data,
-                                            cache: false,
-                                            processData: false,
-                                            contentType: false
-                                          }).done(function(data) {
-                                               alert('success');
-                                          }).fail(function(data) {
-                                                alert("fail:" + data.statusText);
-                                          });
+    // if ($('#uploadform').length > 0) {
+    //     $('#uploadform').submit(function(event) {
+    //         event.preventDefault();
+    //         $('.uploadform_userfile').each(function() {
+    //             var files = this.files;
+    //             for (var i = 0; i < files.length; i++) {
+    //                 var reader = new FileReader();
+    //                 var file = files[i];
+    //                 reader.onload = function(readerEvent) {
+    //                     var image = new Image();
+    //                     image.onload = function (imageEvent) {
+    //                         // Resize image
+    //                         var canvas = document.createElement('canvas'),
+    //                             max_size = 1200,
+    //                             width = image.width,
+    //                             height = image.height;
+    //                         if (width > height) {
+    //                             if (width > max_size) {
+    //                                 height *= max_size / width;
+    //                                 width = max_size;
+    //                             }
+    //                         } else {
+    //                             if (height > max_size) {
+    //                                 width *= max_size / height;
+    //                                 height = max_size;
+    //                             }
+    //                         }
+    //                         canvas.width = width;
+    //                         canvas.height = height;
+    //                         canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+    //                         var data = new FormData();
+    //                         data.append('serendipity[action]', 'admin');
+    //                         data.append('serendipity[adminModule]', 'media');
+    //                         data.append('serendipity[adminAction]', 'add');
+    //                         data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
+    //                         data.append('serendipity[target_filename][1]', file.name);
+    //                         canvas.toBlob(function(blob) {
+    //                             data.append('serendipity[userfile][1]', blob, file.name);
+    //                             var jqxhr = $.ajax({
+    //                                         type: 'post',
+    //                                         url: $('#uploadform').attr('action'),
+    //                                         data: data,
+    //                                         cache: false,
+    //                                         processData: false,
+    //                                         contentType: false
+    //                                       }).done(function(data) {
+    //                                            alert('success');
+    //                                       }).fail(function(data) {
+    //                                             alert("fail:" + data.statusText);
+    //                                       });
 
-                            }, file.type);
-                        }
-                        image.src = readerEvent.target.result;
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-        });
-    }
+    //                         }, file.type);
+    //                     }
+    //                     image.src = readerEvent.target.result;
+    //                 }
+    //                 reader.readAsDataURL(file);
+    //             }
+    //         });
+    //     });
+    // }
 
     // reopen detail element after spamblock action
     if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {
