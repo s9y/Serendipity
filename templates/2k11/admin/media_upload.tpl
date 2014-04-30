@@ -51,7 +51,7 @@
             <div id="downloads">
                 <div class="clearfix form_field">
                     <label for="imageurl">{$CONST.ENTER_MEDIA_URL}</label>
-                    <input id="imageurl" class="check_input" name="serendipity[imageurl]" type="text" value="">
+                    <input id="imageurl" name="serendipity[imageurl]" type="text" value="">
                 </div>
 
                 <div class="clearfix form_select">
@@ -59,6 +59,21 @@
                     <select id="imageimporttype" name="serendipity[imageimporttype]">
                         <option value="image">{$CONST.FETCH_METHOD_IMAGE}</option>
                         <option value="hotlink">{$CONST.FETCH_METHOD_HOTLINK}</option>
+                    </select>
+                </div>
+
+                <div class="form_field clearfix">
+                    <label for="imagefilename" class="uploadform_target_filename_label">{$CONST.SAVE_FILE_AS} <span>{$CONST.PLAIN_ASCII_NAMES}</span></label>
+                    <input id="imagefilename" class="uploadform_target_filename" name="serendipity[target_filename][]" type="text" value="">
+                </div>
+
+                <div class="form_select clearfix">
+                    <label for="imagetargetdirectory" class="uploadform_target_directory_label">{$CONST.STORE_IN_DIRECTORY}</label>
+                    <select id="imagetargetdirectory" class="uploadform_target_directory" name="serendipity[target_directory][]">
+                        <option value="">{$CONST.BASE_DIRECTORY}</option>
+                        {foreach from=$media.folders item="folder"}
+                        <option{if $media.only_path == $folder.relpath} selected{/if} value="{$folder.relpath}">{'&nbsp;'|@str_repeat:($folder.depth*2)} {$folder.name}</option>
+                        {/foreach}
                     </select>
                 </div>
             </div>

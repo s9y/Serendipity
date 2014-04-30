@@ -1142,6 +1142,15 @@ $(function() {
         serendipity.checkInputs();
     });
 
+    // Extra function for media db download
+    $('#imageurl').change(function() {
+        sourceval = serendipity.getfilename(document.getElementById('imageurl').value);
+
+        if (sourceval.length > 0) {
+            document.getElementById('imagefilename').value = sourceval;
+        }
+    });
+
     // Dashboard bookmarklet hint
     $('.s9y_bookmarklet').click(function(e) {
         e.preventDefault();
