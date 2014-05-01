@@ -2052,19 +2052,19 @@ label .perm_name,
 }
 
 .configuration_group .sequence_item {
-    padding: .25em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: block;
     margin: 0 0 .25em;
+    padding: .25em;
+    width: 100%;
 }
-.configure_plugin .configuration_group .sequence_item {
-    width: 96%;
-    margin: auto;
-}
-@media screen and (min-width: 768px) {
-    .configure_plugin .configuration_group .sequence_item  span {
-        display: inline-block;
-        width: 70%;
-        vertical-align: top;
-    }
+
+.configure_plugin .configuration_group .sequence_item > span {
+    display: inline-block;
+    width: 70%;
+    vertical-align: top;
 }
 
 #template_select h3,
