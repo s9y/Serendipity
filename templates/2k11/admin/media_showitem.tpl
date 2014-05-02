@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{$media.css}">
     <link rel="stylesheet" href="{$media.css_front}">
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.7.2.min.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/modernizr-2.8.1.min.js'}"></script>
 </head>
 <body id="{$media.body_id}">
 {if $perm_denied}
