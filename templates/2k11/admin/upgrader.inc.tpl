@@ -98,7 +98,7 @@
         {/if}
             <h4>{$CONST.PERMISSIONS}</h4>
 
-            <dl>
+            <dl class="upgrader_perms">
                 <dt>{$basedir}</dt>
                 {foreach $upgraderResultDiagnose2 AS $urd2}
                 <dd>{$urd2}</dd>
@@ -138,7 +138,7 @@
             {/if}
                 <h3>{$CONST.SERENDIPITY_UPGRADER_VERSION_SPECIFIC}:</h3>
             {if is_array($tasks) && !empty($tasks)}
-                <dl>
+                <dl class="upgrader_tasks">
                 {foreach $tasks as $task}
                     <dt>{$task.version} - {$task.title}</dt>
                     <dd>{$task.desc|nl2br}</dd>

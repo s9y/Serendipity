@@ -1472,6 +1472,16 @@ fieldset p,
     margin-bottom: 1em;
 }
 
+.upgrader_perms dd,
+.upgrader_tasks dd {
+    margin-bottom: 1em;
+}
+
+.upgrader_perms dd pre,
+.upgrader_tasks dd pre {
+    margin: 1em 0;
+}
+
 .category_data {
     margin: 0 1em 0 0;
 }
