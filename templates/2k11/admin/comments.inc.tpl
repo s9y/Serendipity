@@ -16,7 +16,7 @@
         <input name="serendipity[page]" type="hidden" value="{$page}">
 
         <ul class="filters_toolbar plainList">
-            <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
+            <li><a class="button_link" href="#filter_comments" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li> {* i18n title *}
             <li><div class="backend_comments">{$backend_comments_top}</div></li>
         </ul>
 
