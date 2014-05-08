@@ -594,6 +594,13 @@
                                           'permission'  => 'blogConfiguration',
                                           'default'     => ''),
 
+                                    array('var'         => 'uploadResize',
+                                          'title'       => MEDIA_UPLOAD_RESIZE, 
+                                          'description' => MEDIA_UPLOAD_RESIZE_DESC,
+                                          'type'        => 'bool',
+                                          'permission'  => 'siteConfiguration',
+                                          'default'     => false),
+
                                     array('var'         => 'onTheFlySynch',
                                           'title'       => ONTHEFLYSYNCH,
                                           'description' => ONTHEFLYSYNCH_DESC,

@@ -112,7 +112,12 @@ function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$add
             switch ($eventData) {
                 case 'admin/serendipity_editor.js':
                     header('Content-Type: application/javascript');
-                    $data = array('token_url' => serendipity_setFormToken("url"));
+                    global $serendipity;
+                    $data = array(  'token_url' => serendipity_setFormToken("url"),
+                                    'uploadResize' => $serendipity['uploadResize'],
+                                    'maxImgWidth' => $serendipity['maxImgWidth'],
+                                    'maxImgHeight' => $serendipity['maxImgHeight']
+                                    );
                     echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', $data);
                 break;
             }

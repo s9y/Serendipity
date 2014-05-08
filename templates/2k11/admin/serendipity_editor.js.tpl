@@ -1304,66 +1304,92 @@ $(function() {
     }
 
     // minify images before upload, approach taken from https://github.com/joelvardy/javascript-image-upload/
-    // if ($('#uploadform').length > 0) {
-    //     $('#uploadform').submit(function(event) {
-    //         event.preventDefault();
-    //         $('.uploadform_userfile').each(function() {
-    //             var files = this.files;
-    //             for (var i = 0; i < files.length; i++) {
-    //                 var reader = new FileReader();
-    //                 var file = files[i];
-    //                 reader.onload = function(readerEvent) {
-    //                     var image = new Image();
-    //                     image.onload = function (imageEvent) {
-    //                         // Resize image
-    //                         var canvas = document.createElement('canvas'),
-    //                             max_size = 1200,
-    //                             width = image.width,
-    //                             height = image.height;
-    //                         if (width > height) {
-    //                             if (width > max_size) {
-    //                                 height *= max_size / width;
-    //                                 width = max_size;
-    //                             }
-    //                         } else {
-    //                             if (height > max_size) {
-    //                                 width *= max_size / height;
-    //                                 height = max_size;
-    //                             }
-    //                         }
-    //                         canvas.width = width;
-    //                         canvas.height = height;
-    //                         canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-    //                         var data = new FormData();
-    //                         data.append('serendipity[action]', 'admin');
-    //                         data.append('serendipity[adminModule]', 'media');
-    //                         data.append('serendipity[adminAction]', 'add');
-    //                         data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
-    //                         data.append('serendipity[target_filename][1]', file.name);
-    //                         canvas.toBlob(function(blob) {
-    //                             data.append('serendipity[userfile][1]', blob, file.name);
-    //                             var jqxhr = $.ajax({
-    //                                         type: 'post',
-    //                                         url: $('#uploadform').attr('action'),
-    //                                         data: data,
-    //                                         cache: false,
-    //                                         processData: false,
-    //                                         contentType: false
-    //                                       }).done(function(data) {
-    //                                            alert('success');
-    //                                       }).fail(function(data) {
-    //                                             alert("fail:" + data.statusText);
-    //                                       });
-
-    //                         }, file.type);
-    //                     }
-    //                     image.src = readerEvent.target.result;
-    //                 }
-    //                 reader.readAsDataURL(file);
-    //             }
-    //         });
-    //     });
-    // }
+    {if $uploadResize && ($maxImgWidth > 0 || $maxImgHeight > 0)}
+        if ($('#uploadform').length > 0) {
+            $('input[name="go_properties"]').hide();
+            var progressIcon = document.createElement('span');
+            progressIcon.className = 'icon-info-circled'
+            $('#uploadform').submit(function(event) {
+                event.preventDefault();
+                $('.uploadform_userfile').each(function() {
+                    var files = this.files;
+                    for (var i = 0; i < files.length; i++) {
+                        var reader = new FileReader();
+                        reader.file = files[i];
+                        reader.onload = function(readerEvent) {
+                            var image = new Image();
+                            var file = this.file;
+                            image.onload = function (imageEvent) {
+                                var canvas = document.createElement('canvas'),
+                                    max_width = {if $maxImgWidth}{$maxImgWidth}{else}0{/if},
+                                    max_height = {if $maxImgHeight}{$maxImgHeight}{else}0{/if},
+                                    width = image.width,
+                                    height = image.height;
+                                    
+                                if (max_width > 0 && width > max_width) {
+                                    height *= max_width / width;
+                                    width = max_width;
+                                }
+                                if (max_height > 0 && height > max_height) {
+                                    width  *= max_height / height;
+                                    height = max_height;
+                                }
+                                
+                                canvas.width = width;
+                                canvas.height = height;
+                                canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                                var data = new FormData();
+                                data.append('serendipity[action]', 'admin');
+                                data.append('serendipity[adminModule]', 'media');
+                                data.append('serendipity[adminAction]', 'add');
+                                data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
+                                data.append('serendipity[target_filename][1]', file.name);
+                                var type = file.type;
+                                if (type == "image/bmp") {
+                                    {* bmp is not supported *}
+                                    type = "image/png";
+                                    data.append('serendipity[target_filename][1]', file.name.replace('.bmp', '.png'));
+                                }
+                                canvas.toBlob(function(blob) {
+                                    data.append('serendipity[userfile][1]', blob, file.name);
+                                    var progress = document.createElement('progress');
+                                    var progressContainer = document.createElement('span');
+                                    progressContainer.className = 'msg_notice';
+                                    progress.max = 100;
+                                    progress.value = 0;
+                                    $(progressContainer).append(progressIcon);
+                                    progressContainer.innerHTML += file.name + ": "
+                                    $(progressContainer).append(progress);
+                                    $('.form_buttons').append(progressContainer);
+                                    $.ajax({
+                                        type: 'post',
+                                        url: $('#uploadform').attr('action'),
+                                        data: data,
+                                        cache: false,
+                                        processData: false,
+                                        contentType: false,
+                                        xhrFields: {
+                                            onprogress: function (e) {
+                                                if (e.lengthComputable) {
+                                                    progress.value = e.loaded / e.total * 100;
+                                                }
+                                            }
+                                        }
+                                        }).done(function(data) {
+                                            progress.value = 100;
+                                        }).fail(function(data) {
+                                            alert("fail:" + data.statusText);
+                                        })
+                                }, type);
+                            }
+                            image.src = readerEvent.target.result;
+                        }
+                        reader.readAsDataURL(reader.file);
+                    }
+                });
+            });
+        }
+    {/if}
 
     // reopen detail element after spamblock action
     if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {
