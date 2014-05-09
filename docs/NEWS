@@ -4,6 +4,9 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
 
+    * Implemented AJAX uploadResize option to allow resizing an image
+      before upload (onli)
+      
     * Improved file/directory removal code to (hopefully) fail more
       gracefully
       
