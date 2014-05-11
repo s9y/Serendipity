@@ -568,7 +568,11 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     $out = "";
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-    serendipity_plugin_api::hook_event('js', $out);
+    if ($matches[1] == "serendipity_admin.js") {
+        serendipity_plugin_api::hook_event('js_backend', $out);
+    } else {
+        serendipity_plugin_api::hook_event('js', $out);
+    }
     echo $out;
     exit;
 } else if (preg_match(PAT_COMMENTS, $uri, $matches)) {

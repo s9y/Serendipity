@@ -50,6 +50,8 @@ Version 2.0-beta2 ()
     * Improve non-WYSIWYG editor tag insertion, url insertion
     
     * Improve less DOM firing on certain javascript tasks
+
+    * Introduce js_backend event hook
     
 Version 2.0-beta1 (April 14th, 2014)
 ------------------------------------------------------------------------
