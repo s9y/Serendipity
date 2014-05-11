@@ -81,7 +81,7 @@
 
                 {if $plug.description}
                     <details class="plugin_data">
-                        <summary><var class="perm_name">[{$plug.class_name}]</var></summary>
+                        <summary><var class="perm_name">{$plug.class_name}</var></summary>
 
                         <div class="plugin_desc clearfix">
                         {$plug.description}
@@ -89,7 +89,7 @@
                     </details>
                 {else}
                     <div class="plugin_data">
-                        <var class="perm_name">[{$plug.class_name}]</var>
+                        <var class="perm_name">{$plug.class_name}</var>
                     </div>
                 {/if}
 

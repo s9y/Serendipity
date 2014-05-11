@@ -164,9 +164,6 @@
                     {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
                         <span class="entry_status status_future">{$CONST.SCHEDULED}</span>
                     {/if}
-                    {if ($entry.timestamp < $serverOffsetHour) && !$entry.isdraft}
-                        <span class="entry_status status_published">{$CONST.PUBLISHED}</span>
-                    {/if}
                     {if $entry.ep_is_sticky}
                         <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
                     {/if}

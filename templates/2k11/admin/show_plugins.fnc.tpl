@@ -34,8 +34,9 @@
                         <a class="pluginmanager_configure button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]={$plugin_data['key']}" title="{$CONST.CONFIGURATION}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.CONFIGURATION}</span></a>
                     {/if}
 
+                        {$plugin_data['desc']}
+
                         <ul class="pluginmanager_plugininfo plainList">
-                            <li class="pluginmanager_description">{$plugin_data['desc']}</li>
                             <li class="pluginmanager_ownership">
                                 {if $plugin_data.is_plugin_owner}
                                     <select name="serendipity[ownership][{$plugin_data.name}]">

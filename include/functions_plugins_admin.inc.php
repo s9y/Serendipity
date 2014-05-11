@@ -152,9 +152,12 @@ function show_plugins($event_only = false, $sidebars = null)
                 $plugin->introspect($bag);
 
                 $name  = htmlspecialchars($bag->get('name'));
-                $desc  = '<var class="perm_name">['.$cname[0].']</var>';
-                $desc .= htmlspecialchars($bag->get('description'));
+
+                $desc  = '<details class="plugin_data">';
+                $desc .= '<summary><var class="perm_name">'.$cname[0].'</var></summary>';
+                $desc .= '<div class="plugin_desc clearfix">' . htmlspecialchars($bag->get('description')) . '</div>';
                 $desc .= '<span class="block_level">' . VERSION  . ': ' . $bag->get('version') . '</span>';
+                $desc .= '</details>';
 
                 $title = serendipity_plugin_api::get_plugin_title($plugin, '[' . $name . ']');
 
