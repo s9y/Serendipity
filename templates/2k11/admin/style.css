@@ -478,9 +478,7 @@ label > span,
 #mediaPropertyForm .media_file_props label,
 #mediaPropertyForm header b,
 #mediaPropertyForm footer b,
-#content .upgrade_done,
-.pluginmanager_description .perm_name,
-.plugin_data > .perm_name {
+#content .upgrade_done {
     display: block;
 }
 
@@ -503,8 +501,7 @@ details,
 form > a,
 form > button,
 #content .upgrade_done,
-#upgrade_notice,
-.plugin_data > .perm_name {
+#upgrade_notice {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -513,10 +510,6 @@ form > button,
 .ping_services .form_check {
     margin-top: 0;
     margin-bottom: 0;
-}
-
-.pluginmanager_description .perm_name {
-    margin-bottom: .25em;
 }
 
 .plugin_desc {
@@ -1038,7 +1031,8 @@ h4,
 }
 
 #diagnose caption,
-.no-js #mediaupload_tabs h3:first-child {
+.no-js #mediaupload_tabs h3:first-child,
+.plugin_data {
     margin-top: 0;
 }
 
@@ -2046,13 +2040,12 @@ label .perm_name,
     right: 5px;
 }
 
-.pluginmanager_plugin .form_check,
-.pluginmanager_plugin h5 {
+.pluginmanager_plugin .form_check {
     margin: .75em 0;
 }
 
-.pluginmanager_description {
-    margin: 0 0 .5em;
+.pluginmanager_plugin h5 {
+    margin: .75em 0 0;
 }
 
 .configuration_group .sequence_grablet,
