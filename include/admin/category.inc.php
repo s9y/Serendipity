@@ -14,58 +14,52 @@ $admin_category = (!serendipity_checkPermission('adminCategoriesMaintainOthers')
 $data = array();
 /* Add a new category */
 if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
-    $name     = $serendipity['POST']['cat']['name'];
+    $name = $serendipity['POST']['cat']['name'];
     $data['post_save'] = true;
-    $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category WHERE category_name = '". serendipity_db_escape_string($name)."'");
-    if (is_array($r) && is_array($r[0])) {
-        $data['error_name'] = true;
+    $desc = $serendipity['POST']['cat']['description'];
+    if (is_array($serendipity['POST']['cat']['write_authors']) && in_array(0, $serendipity['POST']['cat']['write_authors'])) {
+        $authorid = 0;
     } else {
-        $desc     = $serendipity['POST']['cat']['description'];
-        if (is_array($serendipity['POST']['cat']['write_authors']) && in_array(0, $serendipity['POST']['cat']['write_authors'])) {
-            $authorid = 0;
+        $authorid = $serendipity['authorid'];
+    }
+
+    $icon     = $serendipity['POST']['cat']['icon'];
+    $parentid = (isset($serendipity['POST']['cat']['parent_cat']) && is_numeric($serendipity['POST']['cat']['parent_cat'])) ? $serendipity['POST']['cat']['parent_cat'] : 0;
+
+
+    if ($serendipity['GET']['adminAction'] == 'new' || $serendipity['GET']['adminAction'] == 'newSub') {
+        # only continue if category-name doesn't already exists, as user have no means to distinguish between them
+        $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category WHERE category_name = '". serendipity_db_escape_string($name)."'");
+        if (is_array($r) && is_array($r[0])) {
+            $data['error_name'] = true;
+            $data['category_name'] = $name;
         } else {
-            $authorid = $serendipity['authorid'];
-        }
-
-        $icon     = $serendipity['POST']['cat']['icon'];
-        $parentid = (isset($serendipity['POST']['cat']['parent_cat']) && is_numeric($serendipity['POST']['cat']['parent_cat'])) ? $serendipity['POST']['cat']['parent_cat'] : 0;
-
-
-        if ($serendipity['GET']['adminAction'] == 'new' || $serendipity['GET']['adminAction'] == 'newSub') {
             $data['new'] = true;
-            if ($parentid != 0) {
-                // TODO: This doesn't seem to work as expected, serendipity_rebuildCategoryTree(); is still needed! Only activate this optimization function when it's really working :)
-                // TODO: This works if only one subcategory exists.  Otherwise, the first query will return an array.
-                /*
-                $res = serendipity_db_query("SELECT category_right FROM {$serendipity['dbPrefix']}category WHERE parentid={$parentid}");
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}category SET category_left=category_left+2, category_right=category_right+2 WHERE category_right>{$res}");
-                */
-            }
-
             $catid = serendipity_addCategory($name, $desc, $authorid, $icon, $parentid);
             serendipity_ACLGrant($catid, 'category', 'read', $serendipity['POST']['cat']['read_authors']);
             serendipity_ACLGrant($catid, 'category', 'write', $serendipity['POST']['cat']['write_authors']);
-        } elseif ($serendipity['GET']['adminAction'] == 'edit') {
-                $data['edit'] = true;
-                if (!serendipity_checkPermission('adminCategoriesMaintainOthers') && !serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write')) {
-                    $data['editPermission'] = false;
-                } else {
-                    /* Check to make sure parent is not a child of self */
-                    $r = serendipity_db_query("SELECT categoryid FROM {$serendipity['dbPrefix']}category c
-                                                    WHERE c.categoryid = ". (int)$parentid ."
-                                                        AND c.category_left BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange((int)$serendipity['GET']['cid'])));
-                    if (is_array($r)) {
-                        $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category
-                                                            WHERE categoryid = ". (int)$parentid);
-                       $data['subcat'] = sprintf(ALREADY_SUBCATEGORY, htmlspecialchars($r[0]['category_name']), htmlspecialchars($name));
-                    } else {
-                        serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid, $serendipity['POST']['cat']['sort_order'], $serendipity['POST']['cat']['hide_sub'], $admin_category);
-                        serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'read', $serendipity['POST']['cat']['read_authors']);
-                        serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'write', $serendipity['POST']['cat']['write_authors']);
-                    }
-                }
         }
+    } elseif ($serendipity['GET']['adminAction'] == 'edit') {
+            $data['edit'] = true;
+            if (!serendipity_checkPermission('adminCategoriesMaintainOthers') && !serendipity_ACLCheck($serendipity['authorid'], $serendipity['GET']['cid'], 'category', 'write')) {
+                $data['editPermission'] = false;
+            } else {
+                /* Check to make sure parent is not a child of self */
+                $r = serendipity_db_query("SELECT categoryid FROM {$serendipity['dbPrefix']}category c
+                                                WHERE c.categoryid = ". (int)$parentid ."
+                                                    AND c.category_left BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange((int)$serendipity['GET']['cid'])));
+                if (is_array($r)) {
+                    $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category
+                                                        WHERE categoryid = ". (int)$parentid);
+                   $data['subcat'] = sprintf(ALREADY_SUBCATEGORY, htmlspecialchars($r[0]['category_name']), htmlspecialchars($name));
+                } else {
+                    serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid, $serendipity['POST']['cat']['sort_order'], $serendipity['POST']['cat']['hide_sub'], $admin_category);
+                    serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'read', $serendipity['POST']['cat']['read_authors']);
+                    serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'write', $serendipity['POST']['cat']['write_authors']);
+                }
+            }
     }
+    
 
     serendipity_rebuildCategoryTree();
     $serendipity['GET']['adminAction'] = 'view';
@@ -205,10 +199,6 @@ if ( $serendipity['GET']['adminAction'] == 'view' ) {
         $categories = serendipity_walkRecursive($cats, 'categoryid', 'parentid', VIEWMODE_THREADED);
         $data['viewCategories'] = $categories;
     }
-}
-
-if (!is_object($serendipity['smarty'])) {
-    serendipity_smarty_init();
 }
 
 echo serendipity_smarty_show('admin/category.inc.tpl', $data);

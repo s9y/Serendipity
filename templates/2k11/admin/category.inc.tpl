@@ -12,7 +12,7 @@
         {/if}
     {/if}
     {if $error_name}
-         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CATEGORY_ALREADY_EXIST|sprintf:$cat_data.category_name|escape}</span>
+         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.CATEGORY_ALREADY_EXIST|sprintf:$category_name|escape}</span>
     {/if}
 {/if}
 {if $doDelete}
@@ -54,7 +54,7 @@
             <div id="category_basics" class="clearfix">
                 <div class="form_field">
                     <label for="category_name">{$CONST.NAME}</label>
-                    <input id="category_name" pattern="^(?!({foreach $categories as $cat}{$cat.category_name}|{/foreach})$).*" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape}" title="Categoryname already exists">
+                    <input id="category_name" pattern="{if $new}^(?!({foreach $categories as $cat}{$cat.category_name}|{/foreach})$).*{else}^(?!({foreach $categories as $cat}{if $this_cat.category_name != $cat.category_name}{$cat.category_name}{/if}|{/foreach})$).*{/if}" name="serendipity[cat][name]" type="text" value="{$this_cat.category_name|default:""|escape}" title="Categoryname already exists">
                 </div>
 
                 <div class="form_field">
