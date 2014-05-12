@@ -19,9 +19,29 @@
                 
             }
         });
+        {foreach $buttons as $button}
+            CKEDITOR.plugins.add('{$button.id}', {
+                init: function( editor ) {
+                    editor.addCommand( '{$button.name}', {
+                        exec : function( editor ) {
+                            {$button.javascript}
+                        }
+                    });
+                    editor.ui.addButton('{$button.id}', {
+                        label: '{$button.name}',
+                        command: '{$button.name}',
+                        icon: '{$button.img_url}'
+                    });
+                    
+                }
+            });
+        {/foreach}
+            
+        
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
             customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor_custom_config.js',
-            extraPlugins : 's9y_medialibrary{$item}',
+            extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
+            
             toolbar: [
                 { name: 'tools', items: [ 'Maximize' ] },
                 { name: 'styles', items: [ 'Format' ] },
@@ -31,7 +51,7 @@
                 { name: 'insert', items: [ 'Image', 's9y_medialibrary{$item}', 'Table', 'HorizontalRule', 'SpecialChar' ] },
                 { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
                 { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-                { name: 'others', items: [ '-' ] },
+                { name: 'others', items: [ '-' {foreach $buttons as $button}, '{$button.id}'{/foreach} ] },
                 { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
                 { name: 'about', items: [ 'About' ] }
             ]

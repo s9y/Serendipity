@@ -161,7 +161,6 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     if ($init && $spawnMulti) {
         return;
     }
-
     if (isset($serendipity['wysiwyg']) && $serendipity['wysiwyg']) {
 
         $eventData = array(
@@ -171,25 +170,14 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
             'skip'   => false,
             'buttons'=> array()
         );
+
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
 
         if ($eventData['skip']) {
             return;
         }
 
-        // entryform, staticpages, html nuggets
-        if (isset($serendipity['GET']['adminModule']) && ($serendipity['GET']['adminModule'] == 'entries' || $serendipity['GET']['adminModule'] == 'event_display' || $serendipity['GET']['adminModule'] == 'plugins') ) 
-        {
-            $backend_wysiwyg = true;
-        }
-
-        $data = array();
-        $data['init'] = $init;
-        $data['spawnMulti'] = $spawnMulti;
-        $data['jsname'] = $jsname;
-        $data['eventData'] = $eventData;
-        $data['item'] = $item;
-        $data['backend_wysiwyg'] = $backend_wysiwyg ? $backend_wysiwyg : false;
+        $data = array('init' => $init, 'spawnMulti' => $spawnMulti, 'jsname' => $jsname, 'item' => $item, 'buttons' => $eventData['buttons']);
 
         echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);
     }
