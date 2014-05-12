@@ -14,10 +14,10 @@ Version 2.0-beta2 ()
       gracefully
       
     * Change "default" admin backend template fallback chain so that
-      old admin templates can theoretically be shown with the "old"
+      old admin themes can theoretically be shown with the "old"
       admin interface. This however in many themes breaks the 
       Serendipity workflow. In other words, currently old custom backend
-      templates are deprecated. We are still working on how to deal
+      themes are deprecated. We are still working on how to deal
       with this and if we can add some sort of compatibility or port.
     
     * Fix bundled jquery's source mapping, upgraded to 1.11.1
