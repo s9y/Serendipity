@@ -75,7 +75,7 @@ if (parent.frames && parent.frames['tree']) {
             <input name="imgThumbHeight" type="hidden" value="{$media.file.thumbHeight}">
             <input name="imgWidth" type="hidden" value="{$media.file.dimensions_width}">
             <input name="imgHeight" type="hidden" value="{$media.file.dimensions_height}">
-            <input name="imgID" type="hidden" value="{$media.imgID}">
+            <input name="imgID" type="hidden" value="{$media.file.id}">
             <input name="baseURL" type="hidden" value="{$serendipityBaseURL}">
             <input name="indexFile" type="hidden" value="{$serendipityIndexFile}">
             <input name="imgName" type="hidden" value="{$media.file.full_file}">
