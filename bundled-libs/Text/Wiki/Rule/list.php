@@ -253,11 +253,11 @@ class Text_Wiki_Rule_list extends Text_Wiki_Rule {
         // attempt XHTML compliance so that sub-lists are part
         // of a list item, not between list items
         if ($level > 0) {
-        	$pre = '<li style="list-style: none;">';
-        	$post = '</li>';
+            $pre = '<li style="list-style: none;">';
+            $post = '</li>';
         } else {
-        	$pre = '';
-        	$post = '';
+            $pre = '';
+            $post = '';
         }
         
         switch ($type) {

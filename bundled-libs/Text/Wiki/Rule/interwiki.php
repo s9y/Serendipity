@@ -50,36 +50,36 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
     
     function parse()
     {
-    	// described interwiki links
-    	$tmp_regex = '/\[' . $this->regex . ' (.+?)\]/';
+        // described interwiki links
+        $tmp_regex = '/\[' . $this->regex . ' (.+?)\]/';
         $this->_wiki->_source = preg_replace_callback(
             $tmp_regex,
             array(&$this, 'processDescr'),
             $this->_wiki->_source
         );
-        
-    	// standalone interwiki links
+
+        // standalone interwiki links
         $tmp_regex = '/' . $this->regex . '/';
         $this->_wiki->_source = preg_replace_callback(
             $tmp_regex,
             array(&$this, 'process'),
             $this->_wiki->_source
         );
-   	
+
     }
-    
-    
+
+
     /**
     * 
-	* Generates a replacement for the matched standalone interwiki text.
-	* Token options are:
-	* 
-	* 'site' => The key name for the Text_Wiki interwiki array map,
-	* usually the name of the interwiki site.
-	* 
-	* 'page' => The page on the target interwiki to link to.
-	* 
-	* 'text' => The text to display as the link.
+    * Generates a replacement for the matched standalone interwiki text.
+    * Token options are:
+    * 
+    * 'site' => The key name for the Text_Wiki interwiki array map,
+    * usually the name of the interwiki site.
+    * 
+    * 'page' => The page on the target interwiki to link to.
+    * 
+    * 'text' => The text to display as the link.
     * 
     * @access public
     *
@@ -89,7 +89,7 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
     * the source text, plus any text priot to the match.
     *
     */
-    
+
     function process(&$matches)
     {
         $options = array(
@@ -97,27 +97,27 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
             'page' => $matches[2],
             'text' => $matches[0]
         );
-        
+
         // if not in the interwiki map, don't make it an interwiki link
         if (isset($this->_conf['sites'][$options['site']])) {
-	        return $this->addToken($options);
-	    } else {
-	        return $matches[0];
-	    }
+            return $this->addToken($options);
+        } else {
+            return $matches[0];
+        }
     }
-    
-    
+
+
     /**
     * 
-	* Generates a replacement for described interwiki links. Token
-	* options are:
-	* 
-	* 'site' => The key name for the Text_Wiki interwiki array map,
-	* usually the name of the interwiki site.
-	* 
-	* 'page' => The page on the target interwiki to link to.
-	* 
-	* 'text' => The text to display as the link.
+    * Generates a replacement for described interwiki links. Token
+    * options are:
+    * 
+    * 'site' => The key name for the Text_Wiki interwiki array map,
+    * usually the name of the interwiki site.
+    * 
+    * 'page' => The page on the target interwiki to link to.
+    * 
+    * 'text' => The text to display as the link.
     * 
     * @access public
     *
@@ -127,7 +127,7 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
     * the source text, plus any text priot to the match.
     *
     */
-    
+
     function processDescr(&$matches)
     {
         $options = array(
@@ -135,16 +135,16 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
             'page' => $matches[2],
             'text' => $matches[3]
         );
-        
+
         // if not in the interwiki map, don't make it an interwiki link
         if (isset($this->_conf['sites'][$options['site']])) {
-	        return $this->addToken($options);
-	    } else {
-	        return $matches[0];
-	    }
+            return $this->addToken($options);
+        } else {
+            return $matches[0];
+        }
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -157,38 +157,37 @@ class Text_Wiki_Rule_interwiki extends Text_Wiki_Rule {
     * @return string The text rendered from the token options.
     * 
     */
-    
+
     function renderXhtml($options)
     {
         $site = $options['site'];
         $page = $options['page'];
         $text = $options['text'];
-        
+
         if (isset($this->_conf['sites'][$site])) {
             $href = $this->_conf['sites'][$site];
         } else {
             return $text;
         }
+
+        // old form where page is at end,
+        // or new form with %s placeholder for sprintf()?
+        if (strpos($href, '%s') === false) {
+            // use the old form
+            $href = $href . $page;
+        } else {
+            // use the new form
+            $href = sprintf($href, $page);
+        }
+
+        // allow for alternative targets
+        if (isset($this->_conf['target']) &&
+            trim($this->_conf['target']) != '') {
+            $target = 'target="' . $this->_conf['target'] . '"';
+        } else {
+            $target = '';
+        }
         
-		// old form where page is at end,
-		// or new form with %s placeholder for sprintf()?
-		if (strpos($href, '%s') === false) {
-			// use the old form
-			$href = $href . $page;
-		} else {
-			// use the new form
-			$href = sprintf($href, $page);
-		}
-		
-		// allow for alternative targets
-		if (isset($this->_conf['target']) &&
-			trim($this->_conf['target']) != '') {
-			$target = 'target="' . $this->_conf['target'] . '"';
-		} else {
-			$target = '';
-		}
-		
-		
         return "<a $target href=\"$href\">$text</a>";
     }
 }

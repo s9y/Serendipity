@@ -122,12 +122,12 @@ class ONYX_RSS
            ($file && file_exists($file) && $time <= $this->rss['cache_age'] && $mod >= (time() - ($this->rss['cache_age'] * 60))))
       {
          clearstatcache();
-         
+
          require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
          serendipity_request_start();
          $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
          $res = $req->sendRequest();
-        
+
          if (PEAR::isError($res) || $req->getResponseCode() != '200')
          {
             serendipity_request_end();

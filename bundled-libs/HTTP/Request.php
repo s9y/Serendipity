@@ -89,7 +89,7 @@ class HTTP_Request {
     * @var string
     */
     var $_user;
-    
+
     /**
     * Basic Auth Password
     * @var string
@@ -101,25 +101,25 @@ class HTTP_Request {
     * @var object Net_Socket
     */
     var $_sock;
-    
+
     /**
     * Proxy server
     * @var string
     */
     var $_proxy_host;
-    
+
     /**
     * Proxy port
     * @var integer
     */
     var $_proxy_port;
-    
+
     /**
     * Proxy username
     * @var string
     */
     var $_proxy_user;
-    
+
     /**
     * Proxy password
     * @var string
@@ -133,7 +133,7 @@ class HTTP_Request {
     var $_postData;
 
    /**
-    * Request body  
+    * Request body
     * @var string
     */
     var $_body;
@@ -145,7 +145,7 @@ class HTTP_Request {
     var $_bodyDisallowed = array('TRACE');
 
    /**
-    * Files to post 
+    * Files to post
     * @var array
     */
     var $_postFiles = array();
@@ -155,25 +155,25 @@ class HTTP_Request {
     * @var float
     */
     var $_timeout;
-    
+
     /**
     * HTTP_Response object
     * @var object HTTP_Response
     */
     var $_response;
-    
+
     /**
     * Whether to allow redirects
     * @var boolean
     */
     var $_allowRedirects;
-    
+
     /**
     * Maximum redirects allowed
     * @var integer
     */
     var $_maxRedirects;
-    
+
     /**
     * Current number of redirects
     * @var integer
@@ -193,7 +193,7 @@ class HTTP_Request {
     var $_listeners = array();
 
    /**
-    * Whether to save response body in response object property  
+    * Whether to save response body in response object property
     * @var bool
     */
     var $_saveBody = true;
@@ -286,7 +286,7 @@ class HTTP_Request {
             $this->addHeader('Accept-Encoding', 'gzip');
         }
     }
-    
+
     /**
     * Generates a Host header for HTTP/1.1 requests
     *
@@ -303,14 +303,14 @@ class HTTP_Request {
 
         } elseif ($this->_url->port == 443 AND strcasecmp($this->_url->protocol, 'https') == 0 AND strpos($this->_url->url, ':443') !== false) {
             $host = $this->_url->host . ':' . $this->_url->port;
-        
+
         } else {
             $host = $this->_url->host;
         }
 
         return $host;
     }
-    
+
     /**
     * Resets the object to its initial state (DEPRECATED).
     * Takes the same parameters as the constructor.
@@ -344,7 +344,7 @@ class HTTP_Request {
             $this->addHeader('Host', $this->_generateHostHeader());
         }
     }
-    
+
     /**
     * Sets a proxy to be used
     *
@@ -438,8 +438,8 @@ class HTTP_Request {
     function addQueryString($name, $value, $preencoded = false)
     {
         $this->_url->addQueryString($name, $value, $preencoded);
-    }    
-    
+    }
+
     /**
     * Sets the querystring to literally what you supply
     *
@@ -546,7 +546,7 @@ class HTTP_Request {
     }
 
     /**
-    * Clears any postdata that has been added (DEPRECATED). 
+    * Clears any postdata that has been added (DEPRECATED).
     * 
     * Useful for multiple request scenarios.
     *
@@ -570,9 +570,9 @@ class HTTP_Request {
         $cookies = isset($this->_requestHeaders['cookie']) ? $this->_requestHeaders['cookie']. '; ' : '';
         $this->addHeader('Cookie', $cookies . $name . '=' . $value);
     }
-    
+
     /**
-    * Clears any cookies that have been added (DEPRECATED). 
+    * Clears any cookies that have been added (DEPRECATED).
     * 
     * Useful for multiple request scenarios
     *
@@ -645,7 +645,7 @@ class HTTP_Request {
             AND $this->getResponseCode() < 399
             AND !empty($this->_response->_headers['location'])) {
 
-            
+
             $redirect = $this->_response->_headers['location'];
 
             // Absolute URL
@@ -655,7 +655,7 @@ class HTTP_Request {
             // Absolute path
             } elseif ($redirect[0] == '/') {
                 $this->_url->path = $redirect;
-            
+
             // Relative path
             } elseif (substr($redirect, 0, 3) == '../' OR substr($redirect, 0, 2) == './') {
                 if (substr($this->_url->path, -1) == '/') {
@@ -665,7 +665,7 @@ class HTTP_Request {
                 }
                 $redirect = Net_URL::resolvePath($redirect);
                 $this->_url->path = $redirect;
-                
+
             // Filename, no path
             } else {
                 if (substr($this->_url->path, -1) == '/') {
@@ -842,7 +842,7 @@ class HTTP_Request {
             $request .= 'Content-Length: ' . strlen($this->_body) . "\r\n\r\n";
             $request .= $this->_body;
         }
-        
+
         return $request;
     }
 
@@ -894,7 +894,7 @@ class HTTP_Request {
 
 
    /**
-    * Removes a Listener from the list of listeners 
+    * Removes a Listener from the list of listeners
     * 
     * @param    object   HTTP_Request_Listener instance to detach
     * @return   boolean  whether the listener was successfully detached
@@ -951,13 +951,13 @@ class HTTP_Response
     * @var string
     */
     var $_protocol;
-    
+
     /**
     * Return code
     * @var string
     */
     var $_code;
-    
+
     /**
     * Response headers
     * @var array
@@ -965,7 +965,7 @@ class HTTP_Response
     var $_headers;
 
     /**
-    * Cookies set in response  
+    * Cookies set in response
     * @var array
     */
     var $_cookies;
@@ -1078,7 +1078,7 @@ class HTTP_Response
         list($headername, $headervalue) = explode(':', $header, 2);
         $headername  = strtolower($headername);
         $headervalue = ltrim($headervalue);
-        
+
         if ('set-cookie' != $headername) {
             if (isset($this->_headers[$headername])) {
                 $this->_headers[$headername] .= ',' . $headervalue;
@@ -1154,7 +1154,7 @@ class HTTP_Response
         if (0 == $this->_chunkLength) {
             $line = $this->_sock->readLine();
             if (preg_match('/^([0-9a-f]+)/i', $line, $matches)) {
-                $this->_chunkLength = hexdec($matches[1]); 
+                $this->_chunkLength = hexdec($matches[1]);
                 // Chunk with zero length indicates the end
                 if (0 == $this->_chunkLength) {
                     $this->_sock->readLine(); // make this an eof()

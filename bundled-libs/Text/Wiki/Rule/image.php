@@ -73,20 +73,20 @@ class Text_Wiki_Rule_image extends Text_Wiki_Rule {
     
     function process(&$matches)
     {
-    	$pos = strpos($matches[2], ' ');
-    	
-    	if ($pos === false) {
-	        $options = array(
-	        	'src' => $matches[2],
-	        	'args' => array());
-    	} else {
-    		// everything after the space is macro options
-    		$options = array(
-    			'src' => substr($matches[2], 0, $pos),
-    			'args' => $this->getMacroArgs(substr($matches[2], $pos+1))
-    		);
-    	}
-    	
+        $pos = strpos($matches[2], ' ');
+
+        if ($pos === false) {
+            $options = array(
+                'src' => $matches[2],
+                'args' => array());
+        } else {
+            // everything after the space is macro options
+            $options = array(
+                'src' => substr($matches[2], 0, $pos),
+                'args' => $this->getMacroArgs(substr($matches[2], $pos+1))
+            );
+        }
+
         return $this->addToken($options);
     }
     
@@ -106,31 +106,31 @@ class Text_Wiki_Rule_image extends Text_Wiki_Rule {
     
     function renderXhtml($options)
     {
-    	$src = '"' . $this->_conf['base'] . $options['src'] . '"';
-    	
-    	if (isset($options['args']['link'])) {
-			// this image has a wikilink
-    		$href = $this->_wiki->getRuleConf('wikilink', 'view_url') .
-    			$options['args']['link'];
-    	} else {
-    		// image is not linked
-    		$href = null;
-    	}
-    	
-    	// unset these so they don't show up as attributes
-    	unset($options['args']['src']);
-    	unset($options['args']['link']);
-    	
-    	$attr = '';
-    	foreach ($options['args'] as $key => $val) {
-    		$attr .= "$key=\"$val\" ";
-    	}
-    	
-    	if ($href) {
-    		return "<a href=\"$href\"><img src=$src $attr/></a>";
-    	} else {
-	    	return "<img src=$src $attr/>";
-	    }
-	}
+        $src = '"' . $this->_conf['base'] . $options['src'] . '"';
+
+        if (isset($options['args']['link'])) {
+            // this image has a wikilink
+            $href = $this->_wiki->getRuleConf('wikilink', 'view_url') .
+                $options['args']['link'];
+        } else {
+            // image is not linked
+            $href = null;
+        }
+
+        // unset these so they don't show up as attributes
+        unset($options['args']['src']);
+        unset($options['args']['link']);
+
+        $attr = '';
+        foreach ($options['args'] as $key => $val) {
+            $attr .= "$key=\"$val\" ";
+        }
+
+        if ($href) {
+            return "<a href=\"$href\"><img src=$src $attr/></a>";
+        } else {
+            return "<img src=$src $attr/>";
+        }
+    }
 }
 ?>

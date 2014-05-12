@@ -376,8 +376,8 @@ class Cache_Lite
                 }
             }
             if ($this->_automaticCleaningFactor>0 && ($this->_automaticCleaningFactor==1 || mt_rand(1, $this->_automaticCleaningFactor)==1)) {
-				$this->clean(false, 'old');			
-			}
+                $this->clean(false, 'old');
+            }
             if ($this->_writeControl) {
                 $res = $this->_writeAndControl($data);
                 if (is_bool($res)) {
@@ -599,7 +599,7 @@ class Cache_Lite
             $motif = ($group) ? 'cache_'.$group.'_' : 'cache_';
         }
         if ($this->_memoryCaching) {
-	    foreach($this->_memoryCachingArray as $key => $v) {
+            foreach($this->_memoryCachingArray as $key => $v) {
                 if (strpos($key, $motif) !== false) {
                     unset($this->_memoryCachingArray[$key]);
                     $this->_memoryCachingCounter = $this->_memoryCachingCounter - 1;

@@ -32,10 +32,10 @@ will be printed.)
 || {{```''italic text''```}}                      || ''italic text'' ||
 || {{```'''bold text'''```}}                      || '''bold text''' ||
 || {{```'''''italic and bold'''''```}}            || '''''italic and bold''''' ||
-|| {{```//emphasis//```}} || //emphasis// ||
-|| {{```**strong**```}} || **strong** ||
-|| {{```//**emphasis and strong**//```}} || //**emphasis and strong**// ||
-|| {{```**//strong and emphasis//**```}} || **//strong and emphasis//** ||
+|| {{```//emphasis//```}}                         || //emphasis// ||
+|| {{```**strong**```}}                           || **strong** ||
+|| {{```//**emphasis and strong**//```}}          || //**emphasis and strong**// ||
+|| {{```**//strong and emphasis//**```}}          || **//strong and emphasis//** ||
 || {{```{{teletype text}}```}}                    || {{teletype text}} ||
 || {{<```php:function()```>}}                     || <php:function()> ||
 || {{```@@--- delete text +++ insert text @@```}} || @@--- delete text +++ insert text @@ ||

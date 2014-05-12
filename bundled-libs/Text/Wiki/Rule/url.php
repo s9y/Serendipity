@@ -41,8 +41,8 @@
 */
 
 class Text_Wiki_Rule_url extends Text_Wiki_Rule {
-    
-    
+
+
     /**
     * 
     * When doing numbered references (footnote-style references), we
@@ -53,10 +53,10 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @var int
     * 
     */
-    
+
     var $footnoteCount = 0;
-    
-    
+
+
     /**
     * 
     * An array of filename extensions that indicate a file is an image.
@@ -66,25 +66,25 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @var array
     * 
     */
-    
+
     var $img_ext = array('.jpg', '.png', '.gif');
-    
-    
+
+
     function Text_Wiki_Rule_url(&$obj, $name)
     {
-    	parent::Text_Wiki_Rule($obj, $name);
-    	
+        parent::Text_Wiki_Rule($obj, $name);
+
         $this->regex = 
-        	"(http:\/\/|https:\/\/|ftp:\/\/|gopher:\/\/|news:\/\/|mailto:)" . // protocols
-	        "(" . 
-	        "[^ \\/\"\'{$this->_wiki->delim}]*\\/" . // no spaces, \, /, ", or single quotes;
-	        ")*" . 
-	        "[^ \\t\\n\\/\"\'{$this->_wiki->delim}]*" .
-	        "[A-Za-z0-9\\/?=&~_]";
-		
+            "(http:\/\/|https:\/\/|ftp:\/\/|gopher:\/\/|news:\/\/|mailto:)" . // protocols
+            "(" . 
+            "[^ \\/\"\'{$this->_wiki->delim}]*\\/" . // no spaces, \, /, ", or single quotes;
+            ")*" . 
+            "[^ \\t\\n\\/\"\'{$this->_wiki->delim}]*" .
+            "[A-Za-z0-9\\/?=&~_]";
+
     }
-    
-    
+
+
     /**
     * 
     * A somewhat complex parsing method to find three different kinds
@@ -93,17 +93,17 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @access public
     * 
     */
-    
+
     function parse()
     {
         // -------------------------------------------------------------
         // 
         // Described-reference (named) URLs.
         // 
-        
+
         // the regular expression for this kind of URL
         $tmp_regex = '/\[(' . $this->regex . ') ([^\]]+)\]/';
-        
+
         // use a custom callback processing method to generate
         // the replacement text for matches.
         $this->_wiki->_source = preg_replace_callback(
@@ -111,16 +111,16 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
             array(&$this, 'processDescr'),
             $this->_wiki->_source
         );
-        
-        
+
+
         // -------------------------------------------------------------
         // 
         // Numbered-reference (footnote-style) URLs.
         // 
-        
+
         // the regular expression for this kind of URL
         $tmp_regex = '/\[(' . $this->regex . ')\]/U';
-        
+
         // use a custom callback processing method to generate
         // the replacement text for matches.
         $this->_wiki->_source = preg_replace_callback(
@@ -128,17 +128,17 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
             array(&$this, 'processFootnote'),
             $this->_wiki->_source
         );
-        
-        
+
+
         // -------------------------------------------------------------
         // 
         // Normal inline URLs.
         // 
-        
+
         // the regular expression for this kind of URL
-		
-		$tmp_regex = '/(^|[^A-Za-z])(' . $this->regex . ')(.*?)/';
-		
+
+        $tmp_regex = '/(^|[^A-Za-z])(' . $this->regex . ')(.*?)/';
+
         // use the standard callback for inline URLs
         $this->_wiki->_source = preg_replace_callback(
             $tmp_regex,
@@ -146,8 +146,8 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
             $this->_wiki->_source
         );
     }
-    
-    
+
+
     /**
     * 
     * Process inline URLs and return replacement text with a delimited
@@ -168,7 +168,7 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @return string The processed text replacement.
     * 
     */ 
-    
+
     function process(&$matches)
     {
         // set options
@@ -177,12 +177,12 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
             'href' => $matches[2],
             'text' => $matches[2]
         );
-        
+
         // tokenize
         return $matches[1] . $this->addToken($options) . $matches[5];
     }
-    
-    
+
+
     /**
     * 
     * Process numbered (footnote) URLs and return replacement text with
@@ -203,24 +203,24 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @return string The processed text replacement.
     * 
     */ 
-    
+
     function processFootnote(&$matches)
     {
         // keep a running count for footnotes 
         $this->footnoteCount++;
-        
+
         // set options
         $options = array(
             'type' => 'footnote',
             'href' => $matches[1],
             'text' => $this->footnoteCount
         );
-        
+
         // tokenize
         return $this->addToken($options);
     }
-    
-    
+
+
     /**
     * 
     * Process described-reference (named-reference) URLs and return
@@ -241,7 +241,7 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @return string The processed text replacement.
     * 
     */ 
-    
+
     function processDescr(&$matches)
     {
         // set options
@@ -250,12 +250,12 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
             'href' => $matches[1],
             'text' => $matches[4]
         );
-        
+
         // tokenize
         return $this->addToken($options);
     }
-    
-    
+
+
     /**
     * 
     * Renders a token into text matching the requested format.
@@ -268,48 +268,48 @@ class Text_Wiki_Rule_url extends Text_Wiki_Rule {
     * @return string The text rendered from the token options.
     * 
     */
-    
+
     function renderXhtml($options)
     {
         // create local variables from the options array (text,
         // href, type)
         extract($options);
-        
+
         // find the rightmost dot and determine the filename
         // extension.
         $pos = strrpos($href, '.');
         $ext = strtolower(substr($href, $pos));
-        
+
         // does the filename extension indicate an image file?
         if (in_array($ext, $this->img_ext)) {
-            
+
             // create alt text for the image
             if (! isset($text) || $text == '') {
                 $text = basename($href);
             }
-            
+
             // generate an image tag
             $output = "<img src=\"$href\" alt=\"$text\" />";
-            
+
         } else {
-        	
-        	// allow for alternative targets
-        	if (isset($this->_conf['target']) &&
-        		trim($this->_conf['target']) != '') {
-        		$target = 'target="' . $this->_conf['target'] . '"';
-        	} else {
-        		$target = '';
-        	}
-        	
+
+            // allow for alternative targets
+            if (isset($this->_conf['target']) &&
+                trim($this->_conf['target']) != '') {
+                $target = 'target="' . $this->_conf['target'] . '"';
+            } else {
+                $target = '';
+            }
+
             // generate a regular link (not an image)
             $output = "<a $target href=\"$href\">$text</a>";
-            
+
             // make numbered references look like footnotes
             if ($type == 'footnote') {
                 $output = '<sup>' . $output . '</sup>';
             }
         }
-        
+
         return $output;
     }
 }

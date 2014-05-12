@@ -84,15 +84,15 @@ class Text_Wiki_Rule_center extends Text_Wiki_Rule {
     
     function renderXhtml($options)
     {
-    	if ($options['type'] == 'start') {
-    		//return "\n<center>\n";
-    		return '<div style="text-align: center;">';
-    	}
-    	
-    	if ($options['type'] == 'end') {
-    		//return "</center>\n";
-    		return '</div>';
-    	}
+        if ($options['type'] == 'start') {
+            //return "\n<center>\n";
+            return '<div style="text-align: center;">';
+        }
+
+        if ($options['type'] == 'end') {
+            //return "</center>\n";
+            return '</div>';
+        }
     }
 }
 ?>

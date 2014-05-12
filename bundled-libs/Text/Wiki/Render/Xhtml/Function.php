@@ -5,7 +5,7 @@
 class Text_Wiki_Render_Xhtml_Function extends Text_Wiki_Render {
     
     var $conf = array(
-    	// list separator for params and throws
+        // list separator for params and throws
         'list_sep' => ', ',
         
         // the "main" format string

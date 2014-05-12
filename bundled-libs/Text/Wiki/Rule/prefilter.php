@@ -67,10 +67,10 @@ class Text_Wiki_Rule_prefilter extends Text_Wiki_Rule {
         
         // finally, compress all instances of 3 or more newlines
         // down to two newlines.
-    	$find = "/\n{3,}/m";
-    	$replace = "\n\n";
-    	$this->_wiki->_source = preg_replace($find, $replace,
-    		$this->_wiki->_source);
+        $find = "/\n{3,}/m";
+        $replace = "\n\n";
+        $this->_wiki->_source = preg_replace($find, $replace,
+            $this->_wiki->_source);
     }
 
 }

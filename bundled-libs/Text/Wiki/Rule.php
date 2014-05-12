@@ -292,54 +292,54 @@ class Text_Wiki_Rule {
     
     /**
     * 
-	* Simple method to extract 'option="value"' portions of wiki markup,
-	* typically used only in macros.
-	* 
-	* The syntax is pretty strict; there can be no spaces between the
-	* option name, the equals, and the first double-quote; the value
-	* must be surrounded by double-quotes.  You can escape characters in
-	* the value with a backslash, and the backslash will be stripped for
-	* you.
-	* 
-	* @access public
-	* 
-	* @param string $text The "macro options" portion of macro markup.
-	* 
-	* @return array An associative array of key-value pairs where the
-	* key is the option name and the value is the option value.
+    * Simple method to extract 'option="value"' portions of wiki markup,
+    * typically used only in macros.
+    * 
+    * The syntax is pretty strict; there can be no spaces between the
+    * option name, the equals, and the first double-quote; the value
+    * must be surrounded by double-quotes.  You can escape characters in
+    * the value with a backslash, and the backslash will be stripped for
+    * you.
+    * 
+    * @access public
+    * 
+    * @param string $text The "macro options" portion of macro markup.
+    * 
+    * @return array An associative array of key-value pairs where the
+    * key is the option name and the value is the option value.
     * 
     */
     
     function getMacroArgs($text)
     {
-    	// find the =" sections;
-		$tmp = explode('="', trim($text));
-		
-		// basic setup
-		$k = count($tmp) - 1;
-		$arg = array();
-		$key = null;
-		
-		// loop through the sections
-		foreach ($tmp as $i => $val) {
-			
-			// first element is always the first key
-			if ($i == 0) {
-				$key = trim($val);
-				continue;
-			}
-			
-			// find the last double-quote in the value.
-			// the part to the left is the value for the last key,
-			// the part to the right is the next key name
-			$pos = strrpos($val, '"');
-			$arg[$key] = stripslashes(substr($val, 0, $pos));
-			$key = trim(substr($val, $pos+1));
-			
-		}
-		
-		return $arg;
-		
+        // find the =" sections;
+        $tmp = explode('="', trim($text));
+
+        // basic setup
+        $k = count($tmp) - 1;
+        $arg = array();
+        $key = null;
+        
+        // loop through the sections
+        foreach ($tmp as $i => $val) {
+
+            // first element is always the first key
+            if ($i == 0) {
+                $key = trim($val);
+                continue;
+            }
+
+            // find the last double-quote in the value.
+            // the part to the left is the value for the last key,
+            // the part to the right is the next key name
+            $pos = strrpos($val, '"');
+            $arg[$key] = stripslashes(substr($val, 0, $pos));
+            $key = trim(substr($val, $pos+1));
+
+        }
+
+        return $arg;
+
     }
 }
 ?>

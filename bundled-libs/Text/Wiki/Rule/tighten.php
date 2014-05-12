@@ -43,8 +43,8 @@ class Text_Wiki_Rule_tighten extends Text_Wiki_Rule {
     
     function parse()
     {
-    	$this->_wiki->_source = str_replace("\n", '',
-    		$this->_wiki->_source);
+        $this->_wiki->_source = str_replace("\n", '',
+            $this->_wiki->_source);
     }
 }
 ?>

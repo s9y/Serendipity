@@ -91,12 +91,12 @@ class Text_Wiki_Rule_embed extends Text_Wiki_Rule {
     
     function renderXhtml($options)
     {
-    	$file = $this->_conf['base'] . $options['path'];
-    	ob_start();
-    	include($file);
-    	$output = ob_get_contents();
-    	ob_end_clean();
-		return $output;
-	}
+        $file = $this->_conf['base'] . $options['path'];
+        ob_start();
+        include($file);
+        $output = ob_get_contents();
+        ob_end_clean();
+        return $output;
+    }
 }
 ?>

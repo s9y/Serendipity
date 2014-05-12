@@ -189,21 +189,21 @@ class Text_Wiki_Rule_blockquote extends Text_Wiki_Rule {
     {
         $type = $options['type'];
         $level = $options['level'];
-	
-		// set up indenting so that the results look nice; we do this
-		// in two steps to avoid str_pad mathematics.  ;-)
-		$pad = str_pad('', $level, "\t");
-		$pad = str_replace("\t", '    ', $pad);
-		
-		// starting
-		if ($type == 'start') {
-			return "$pad<blockquote>";
-		}
-		
-		// ending
-		if ($type == 'end') {
-			return $pad . "</blockquote>\n";
-		}
+
+        // set up indenting so that the results look nice; we do this
+        // in two steps to avoid str_pad mathematics.  ;-)
+        $pad = str_pad('', $level, "\t");
+        $pad = str_replace("\t", '    ', $pad);
+
+        // starting
+        if ($type == 'start') {
+            return "$pad<blockquote>";
+        }
+
+        // ending
+        if ($type == 'end') {
+            return $pad . "</blockquote>\n";
+        }
     }
 }
 ?>
