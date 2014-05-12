@@ -7,8 +7,9 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zend-db": "2.*"
-    }
+        "zendframework/zend-db": "2.*",
+        "katzgrau/klogger": "1.0.*"
+    },
     "config": {
         "vendor-dir": "bundled-libs"
     }

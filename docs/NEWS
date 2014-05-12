@@ -3,7 +3,9 @@
 
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
-
+    
+    * Include klogger, call it as $serendipity['logger']->debug/error
+    
     * Add HTTP_Request2 and dependencies as bundled libraries and
       update PEAR library to version 1.9.4
 

@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Zend\\Db\\' => array($vendorDir . '/zendframework/zend-db'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
 );

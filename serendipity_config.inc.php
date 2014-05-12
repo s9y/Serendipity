@@ -257,7 +257,12 @@ include($local_config);
 
 if ($serendipity['production'] === 'debug') {
     error_reporting(E_ALL &~E_NOTICE | E_STRICT);
+    $serendipity['log_level'] = Psr\Log\LogLevel::DEBUG;
+} else {
+    $serendipity['log_level'] = Psr\Log\LogLevel::ERROR;
 }
+
+$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $serendipity['log_level']);
 
 //[internal callback function]: errorToExceptionHandler()
 if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
@@ -281,6 +286,7 @@ include(S9Y_INCLUDE_PATH . 'include/functions.inc.php');
 if (serendipity_FUNCTIONS_LOADED !== true) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
+    $serendipity['logger']->critical(sprintf(INCLUDE_ERROR . '<br />' . FILE_CREATE_YOURSELF, 'include/functions.inc.php'));
     serendipity_die(sprintf(INCLUDE_ERROR . '<br />' . FILE_CREATE_YOURSELF, 'include/functions.inc.php'));
 }
 
@@ -290,6 +296,7 @@ if (serendipity_FUNCTIONS_LOADED !== true) {
 if (!serendipity_db_connect()) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
+    $serendipity['logger']->critical(DATABASE_ERROR);
     serendipity_die(DATABASE_ERROR);
 }
 
@@ -429,5 +436,6 @@ if (isset($_SESSION['serendipityUser'])) {
 if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
+
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
 /* vim: set sts=4 ts=4 expandtab : */
