@@ -1,0 +1,14 @@
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.zendframework.com/"
+        }
+    ],
+    "require": {
+        "ckeditor": "dev-full/latest"
+    },
+    "config": {
+        "vendor-dir": "."
+    }
+}
