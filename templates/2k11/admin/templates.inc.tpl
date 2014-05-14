@@ -24,12 +24,12 @@
     </section>
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {else}
-    <section id="template_select">
+    <section id="template_select" class="clearfix">
         {assign var="cur_tpl" value=$templates[$cur_template]}
         <h2>{$CONST.CURRENT_TEMPLATE}</h2>
 
         <article class="clearfix current_template">
-            <h3>{$cur_tpl.info.name}</h3>
+            <h3>{$CONST.FRONTEND}: {$cur_tpl.info.name}</h3>
 
             <div class="clearfix equal_heights template_wrap">
                 <div class="template_preview">
@@ -62,10 +62,8 @@
 
         {if $cur_template_backend}
             {assign var="cur_tpl_backend" value=$templates[$cur_template_backend]}
-            <h2>{$CONST.CURRENT_TEMPLATE} - {$CONST.BACKEND}</h2>
-
-            <article class="clearfix current_template">
-                <h3>{$cur_tpl_backend.info.name}</h3>
+            <article class="clearfix current_template even">
+                <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name}</h3>
 
                 <div class="clearfix equal_heights template_wrap">
                     <div class="template_preview">
@@ -84,8 +82,6 @@
                                 <dd>{$cur_tpl_backend.info.author}</dd>
                                 <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                                 <dd>{$cur_tpl_backend.info.date}</dd>
-                                <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
-                                <dd>{$cur_tpl_backend.info.custom_admin_interface}</dd>
                             </dl>
                         </footer>
                     </div>

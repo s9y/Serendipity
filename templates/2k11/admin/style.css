@@ -2781,9 +2781,7 @@ img.mfp-img {
     }
 
     #template_select .current_template {
-        float: none;
-        margin: 0 0 2em;
-        width: 48%;
+        margin-bottom: 2em;
     }
 
     #mediaPropertyForm .media_file {
