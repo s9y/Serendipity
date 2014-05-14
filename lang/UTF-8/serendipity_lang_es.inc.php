@@ -1052,3 +1052,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('UPDATE_FAILMSG', 'Check for new Serendipity version failed. This can happen because either the URL https://raw.github.com/s9y/Serendipity/master/docs/RELEASE is down, your server blocks outgoing connections or there are other connection issues.');
 @define('UPDATE_FAILACTION', 'Disable automatic update check');
 @define('UPDATE_NOTIFICATION_DESC', 'Show the update notification in the Dashboard, and for which channel?');
+@define('FRONTEND', 'Frontend');
+@define('BACKEND', 'Backend');
