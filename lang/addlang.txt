@@ -1,2 +1,5 @@
 @define('FRONTEND', 'Frontend');
 @define('BACKEND', 'Backend');
+
+@define('MEDIA_UPLOAD_RESIZE', 'Resize before Upload');
+@define('MEDIA_UPLOAD_RESIZE_DESC', 'Resize images to the given max-values before the upload using Javascript. This will also change the uploader to use Ajax and thus remove the Property-Button');
