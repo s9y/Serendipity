@@ -1,6 +1,6 @@
 {if $init == false}
-    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor.js"></script>
-    <script src="{$serendipityHTTPPath}htmlarea/ckeditor_custom_plugin.js"></script>
+    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor/ckeditor.js"></script>
+    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_plugin.js"></script>
 {/if}
 <script>
     $('document').ready(function() {
@@ -23,9 +23,7 @@
             CKEDITOR.plugins.add('{$button.id}', {
                 init: function( editor ) {
                     editor.addCommand( '{$button.name}', {
-                        exec : function( editor ) {
-                            {$button.javascript}
-                        }
+                        exec : {$button.javascript}
                     });
                     editor.ui.addButton('{$button.id}', {
                         label: '{$button.name}',
@@ -39,7 +37,7 @@
             
         
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
-            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor_custom_config.js',
+            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_config.js',
             extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
             
             toolbar: [
