@@ -451,7 +451,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
+        if (!@mysql_select_db($this->data['name'], $s9ydb)) {
             return sprintf(COULDNT_SELECT_DB, mysql_error($s9ydb));
         }
 
