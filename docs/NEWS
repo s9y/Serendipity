@@ -4,6 +4,18 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
     
+    * Backend and Frontend themes can now be set independently from
+      each other. New backend themes now need to set:
+      
+        Backend: Yes
+        
+      in their info.txt file. If you adapt a custom admin theme,
+      ensure that it is compatible to the new "2k11" backend to
+      ensure proper future usage within Serendipity. The bulletproof
+      backend will now no longer be recognized as a backend theme
+      option, but can be selected as a new frontend theme, while
+      using 2k11 (=default) in the backend.
+      
     * Include klogger, call it as $serendipity['logger']->debug/error
     
     * Add HTTP_Request2 and dependencies as bundled libraries and

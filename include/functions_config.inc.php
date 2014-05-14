@@ -261,16 +261,26 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
 
     $directories = array();
 
-    $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
-    if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
-        $p = explode(',', $serendipity['template_engine']);
-        foreach($p AS $te) {
-            $directories[] = trim($te) . '/';
+    if (defined('IN_serendipity_admin')) {
+        // Backend will always use our default backend (=defaultTemplate) as fallback.
+        $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
+        $directories[] = $serendipity['defaultTemplate'] .'/';
+        $directories[] = 'default/';
+    } else {
+        $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
+        if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
+            $p = explode(',', $serendipity['template_engine']);
+            foreach($p AS $te) {
+                $directories[] = trim($te) . '/';
+            }
         }
-    }
 
-    $directories[] = $serendipity['defaultTemplate'] .'/';
-    $directories[] = 'default/';
+        // Frontend templates currently need to fall back to "default" (see "idea"), so that they get the
+        // output they desire. If templates are based on 2k11, the need to set "Engine: 2k11" in their info.txt
+        // file.
+        $directories[] = 'default/';
+        $directories[] = $serendipity['defaultTemplate'] .'/';
+    }
 
     foreach ($directories as $directory) {
         $templateFile = $serendipity['templatePath'] . $directory . $file;
@@ -279,7 +289,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
         }
         
         if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl") && $serendipity['template'] . '/' == $directory && IS_installed) {
-            # catch .js.tpl files served via the template-plugin-api, but only if that template is active as well, so config.inc.php is laoded
+            # catch .js.tpl files served via the template-plugin-api, but only if that template is active as well, so config.inc.php is loaded
             # this won't work in the installer
             return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
         }

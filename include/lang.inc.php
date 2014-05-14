@@ -18,9 +18,15 @@ if (!defined('serendipity_LANG_LOADED') || serendipity_LANG_LOADED !== true) {
         if (defined('S9Y_DATA_PATH')) {
             @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template'] . '/' . $charset .  'lang_' . $serendipity['lang'] . '.inc.php');
             @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template'] . '/lang_en.inc.php');
+
+            @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template_backend'] . '/' . $charset .  'lang_' . $serendipity['lang'] . '.inc.php');
+            @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template_backend'] . '/lang_en.inc.php');
         } else {
             @include_once (S9Y_INCLUDE_PATH . 'templates/' . $serendipity['template'] . '/' . $charset .  'lang_' . $serendipity['lang'] . '.inc.php');
             @include_once (S9Y_INCLUDE_PATH . 'templates/' . $serendipity['template'] . '/lang_en.inc.php');
+
+            @include_once (S9Y_INCLUDE_PATH . 'templates/' . $serendipity['template_backend'] . '/' . $charset .  'lang_' . $serendipity['lang'] . '.inc.php');
+            @include_once (S9Y_INCLUDE_PATH . 'templates/' . $serendipity['template_backend'] . '/lang_en.inc.php');
         }
     }
 

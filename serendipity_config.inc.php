@@ -123,6 +123,11 @@ $serendipity['autolang'] = 'en';
 /* Name of folder for the default theme */
 $serendipity['defaultTemplate'] = '2k11';
 
+/* Default backend theme */
+if (!isset($serendipity['template_backend'])) {
+    $serendipity['template_backend'] = '2k11';
+}
+
 /* Availiable languages */
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',

@@ -260,7 +260,7 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
 
     if ( $theme != 'default' && $theme != 'default-rtl'
       && @is_dir($serendipity['templatePath'] . $theme . '/admin')
-      && @is_readable($serendipity['templatePath'] . $theme . '/admin/style.css') ) {
+      && strtolower($data['backend']) == 'yes' ) {
 
         $data['custom_admin_interface'] = YES;
     } else {

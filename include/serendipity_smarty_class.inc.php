@@ -4,6 +4,7 @@
 // define secure_dir and trusted_dirs for Serendipity_Smarty_Security_Policy class.
 @define('S9Y_TEMPLATE_FALLBACK',    $serendipity['serendipityPath'] . $serendipity['templatePath'] . 'default');
 @define('S9Y_TEMPLATE_USERDEFAULT', $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template']);
+@define('S9Y_TEMPLATE_USERDEFAULT_BACKEND', $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend']);
 @define('S9Y_TEMPLATE_SECUREDIR',   $serendipity['serendipityPath'] . $serendipity['templatePath']);
             
 
@@ -29,7 +30,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     public $secure_dir = array(S9Y_TEMPLATE_SECUREDIR); // do we need this then?
     
     // actually no need, as template dirs are explicit defined as trusted_dirs. (unproofed)
-    public $trusted_dir = array(S9Y_TEMPLATE_USERDEFAULT, S9Y_TEMPLATE_FALLBACK); // do we need this then?
+    public $trusted_dir = array(S9Y_TEMPLATE_USERDEFAULT, S9Y_TEMPLATE_USERDEFAULT_BACKEND, S9Y_TEMPLATE_FALLBACK); // do we need this then?
     
     #public $modifiers = array(); // can be omitted, when all allowed
     
@@ -121,9 +122,15 @@ class Serendipity_Smarty extends Smarty
         $template_engine = serendipity_get_config_var('template_engine');
         $template_dirs = array();
         if ($template_engine) {
-            $template_dirs[] =  $serendipity['serendipityPath'] . $serendipity['templatePath'] . $template_engine;
-        } 
+            $p = explode(',', $template_engine);
+            foreach($p AS $te) {
+                $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . trim($te) . '/';
+            }
+        }
+
         $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'];
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
+
         // add secure dir to template path, in case engine did have entries
         if (S9Y_TEMPLATE_SECUREDIR != $serendipity['serendipityPath'] . $serendipity['templatePath']) {
             $template_dirs[] = S9Y_TEMPLATE_SECUREDIR;

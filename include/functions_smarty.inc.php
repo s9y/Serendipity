@@ -864,6 +864,12 @@ function serendipity_smarty_init($vars = array()) {
             // Beware: Smarty is used in the Admin backend, despite of this.
             include_once $template_dir . '/template.inc.php';
         } else {
+
+            // Backend template overwritten here (NOT earlier due to frontend specific check
+            if (defined('IN_serendipity_admin')) {
+                $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
+            }
+
             // Set a session variable if Smarty fails:
             $prev_smarty = $_SESSION['no_smarty'];
             $_SESSION['no_smarty'] = true;
@@ -1014,6 +1020,7 @@ function serendipity_smarty_init($vars = array()) {
                 'category'                  => $category,
                 'category_info'             => $category_info,
                 'template'                  => $serendipity['template'],
+                'template_backend'          => $serendipity['template_backend'],
 
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
             )
@@ -1025,11 +1032,26 @@ function serendipity_smarty_init($vars = array()) {
 
         // For advanced usage, we allow template authors to create a file 'config.inc.php' where they can
         // setup custom smarty variables, modifiers etc. to use in their templates.
+
+        // If a template engine is defined we need that config.inc.php file as well. The template's actual file is loaded after that to be able to overwrite config.
+        if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
+            $p = explode(',', $serendipity['template_engine']);
+            foreach($p AS $te) {
+                $config = $serendipity['serendipityPath'] . $serendipity['templatePath'] . trim($te) . '/config.inc.php';
+
+                if (file_exists($config)) {
+                    include_once $config;
+                }
+
+            }
+        }
+
         $config = $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
         if (file_exists($config)) {
             include_once $config;
         }
-        
+
+
         if (is_array($template_loaded_config)) {
             $template_vars =& $template_loaded_config;
             $serendipity['smarty']->assignByRef('template_option', $template_vars);

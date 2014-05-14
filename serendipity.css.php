@@ -28,6 +28,8 @@ switch($css_mode) {
         break;
 
     case 'serendipity_admin.css':
+        // This constant is needed to properly set the template context for the backend.
+        @define('IN_serendipity_admin', true);
         $css_hook = 'css_backend';
         $css_file = 'admin/style.css';
         break;
