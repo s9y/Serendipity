@@ -4,6 +4,8 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
     
+    * Fixed wrong local documentation URL in plugin configuration
+    
     * Added new "backend_dashboard" event-hook for plugins to use
       within dashboard.
       
