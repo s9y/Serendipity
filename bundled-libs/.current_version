@@ -1,14 +1,15 @@
-Cache_Lite              1.54
-HTTP_Request            1.43
-HTTP_Request2           2.2.1
-Net_CheckIP             1.5
-Net_DNSBL               1.4
-Net_Socket              1.24
-Net_URL                 1.36
+Cache_Lite              1.5.1 (CVS 1.54)
+HTTP_Request            1.2.4 (CVS 1.43)
+HTTP_Request2           2.2.1 (CVS 2.2.1)
+Net_CheckIP             1.1   (CVS 1.5)
+Net_DNSBL               1.0.0 (CVS 1.4)
+Net_Socket              1.0.6 (CVS 1.24)
+Net_URL                 1.0.4 (CVS 1.36)
 Net_SURBL               1.4
 Onyx (customized)       1.0
-PEAR                    1.83
+PEAR                    1.9.4 (CVS 1.83)
 SimplePie               1.2.1
 Smarty                  3.1.18
-Text_Wiki               1.27
-XML_RPC                 1.5.5
+Text_Wiki               0.25.0 (CVS 1.27)
+XML_RPC                 1.4.0 (1.5.5)
+

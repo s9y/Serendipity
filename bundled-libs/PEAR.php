@@ -19,6 +19,12 @@
  * @since      File available since Release 0.1
  */
 
+// Serendipity-Patch
+if (defined('PEAR_ERROR_RETURN')) {
+   return false;
+}
+// Serendipity-Patch end
+    
 /**#@+
  * ERROR constants
  */
