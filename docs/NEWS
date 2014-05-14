@@ -1,86 +1,92 @@
 #
 
 
-Version 2.0-beta2 ()
+Version 2.0-beta3 ()
 ------------------------------------------------------------------------
-    
+
     * Fixed wrong local documentation URL in plugin configuration
-    
+
     * Added new "backend_dashboard" event-hook for plugins to use
       within dashboard.
-      
+
     * Backend and Frontend themes can now be set independently from
       each other. New backend themes now need to set:
-      
+
         Backend: Yes
-        
+
       in their info.txt file. If you adapt a custom admin theme,
       ensure that it is compatible to the new "2k11" backend to
       ensure proper future usage within Serendipity. The bulletproof
       backend will now no longer be recognized as a backend theme
       option, but can be selected as a new frontend theme, while
       using 2k11 (=default) in the backend.
-      
+
     * Include klogger, call it as $serendipity['logger']->debug/error
-    
+
+    * Fixed missing s9ymdb ID
+
     * Add HTTP_Request2 and dependencies as bundled libraries and
       update PEAR library to version 1.9.4
 
     * Implemented AJAX uploadResize option to allow resizing an image
       before upload (onli)
-      
+
     * Improved file/directory removal code to (hopefully) fail more
       gracefully
-      
+
     * Change "default" admin backend template fallback chain so that
       old admin themes can theoretically be shown with the "old"
       admin interface. This however in many themes breaks the 
       Serendipity workflow. In other words, currently old custom backend
       themes are deprecated. We are still working on how to deal
       with this and if we can add some sort of compatibility or port.
-    
+
     * Fix bundled jquery's source mapping, upgraded to 1.11.1
-    
+
+    * Fixed missing media name in resize GET URL
+
     * Fix MediaDB overlay display
-    
+
     * Re-Added possibility to change filename/target directory for
       media uploads
-      
+
     * Update CKEditor to 4.4     
 
     * Fixed some missing internationalization instances
 
     * Minor CSS improvements for upgrader, plugin sequencing widget
-    
+
     * RSS importer accepts pubDate in addition to pubdate element.
-    
+
     * Upgrader in Dashboard can be disabled, returns error message when
       URL not accessible
-      
+
     * Added a category filtering ability for the entry editor
-    
+
     * Better check when removing old/dead files to prevent error
       messages
-      
+
     * WYSIWYG editor respects image floats
-    
+
     * Support html5 multiple file upload
-    
+
     * Modernizr, magnificPopup updates
-    
+
     * Improvements to equal heights js, button labels
-    
+
     * No longer truncate long entry titles
-    
+
     * Improve non-WYSIWYG editor tag insertion, url insertion
-    
+
     * Improve less DOM firing on certain javascript tasks
 
     * Introduce js_backend event hook
-    
-Version 2.0-beta1 (April 14th, 2014)
+
+Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
 ------------------------------------------------------------------------
 
+
+    * Upgrade Smarty libs to 3.1.18
 
     * Automatic upgrade removal of old Smarty2 files (2.0-alpha2)
       function uses SPL
