@@ -4,6 +4,9 @@
 Version 2.0-beta2 ()
 ------------------------------------------------------------------------
     
+    * Added new "backend_dashboard" event-hook for plugins to use
+      within dashboard.
+      
     * Backend and Frontend themes can now be set independently from
       each other. New backend themes now need to set:
       

@@ -120,6 +120,9 @@
                 <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
             </ul>
         </section>
+
+        {serendipity_hookPlugin hook="backend_dashboard" hookAll="true"}
+
     </div>
     <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
