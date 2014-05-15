@@ -6,7 +6,7 @@
         }
     ],
     "require": {
-        "ckeditor": "dev-full/latest"
+        "ckeditor/ckeditor": "dev-full/stable"
     },
     "config": {
         "vendor-dir": "."

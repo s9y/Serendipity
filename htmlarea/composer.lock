@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "a52359b4196b7fcf0071bef5cafda970",
+    "hash": "713b60a61fe658d81cfa9e657cfbebd9",
     "packages": [
         {
             "name": "ckeditor/ckeditor",
-            "version": "dev-full/latest",
+            "version": "dev-full/stable",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ckeditor/ckeditor-releases.git",
