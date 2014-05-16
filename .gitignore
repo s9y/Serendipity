@@ -14,3 +14,4 @@ plugins/additional_plugins*
 /.project
 .DS_Store
 .editorconfig
+*.git
