@@ -67,13 +67,13 @@
 
                 <div class="clearfix equal_heights template_wrap">
                     <div class="template_preview">
-                    {if $cur_tpl_backend.fullsize_preview || $cur_tpl_backend.preview}
-                        {if $cur_tpl_backend.fullsize_preview}
-                            <a class="media_fullsize" href="{$cur_tpl_backend.fullsize_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$cur_tpl_backend.info.name}">
-                                <img src="{$cur_tpl_backend.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
+                    {if $cur_tpl_backend.fullsize_backend_preview || $cur_tpl_backend.preview_backend}
+                        {if $cur_tpl_backend.fullsize_backend_preview}
+                            <a class="media_fullsize" href="{$cur_tpl_backend.fullsize_backend_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$cur_tpl_backend.info.name}">
+                                <img src="{$cur_tpl_backend.fullsize_backend_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
                             </a>
                         {else}
-                            <img src="{$cur_tpl_backend.preview}" alt="{$CONST.PREVIEW}" >
+                            <img src="{$cur_tpl_backend.preview_backend}" alt="{$CONST.PREVIEW}" >
                         {/if}
                     {/if}
                         <footer id="template_info_cur_backend" class="template_info additional_info">
