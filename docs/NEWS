@@ -21,7 +21,9 @@ Version 2.0-beta3 ()
       option, but can be selected as a new frontend theme, while
       using 2k11 (=default) in the backend.
 
-    * Include klogger, call it as $serendipity['logger']->debug/error
+    * Include klogger, call it as $serendipity['logger']->debug/error.
+      The log-level is by default determined automatically, but can also
+      be set in the general configuration.
 
     * Fixed missing s9ymdb ID
 

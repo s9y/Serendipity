@@ -2,4 +2,9 @@
 @define('BACKEND', 'Backend');
 
 @define('MEDIA_UPLOAD_RESIZE', 'Resize before Upload');
-@define('MEDIA_UPLOAD_RESIZE_DESC', 'Resize images to the given max-values before the upload using Javascript. This will also change the uploader to use Ajax and thus remove the Property-Button');
+@define('MEDIA_UPLOAD_RESIZE_DESC', 'Resize images before the upload using Javascript. This will also change the uploader to use Ajax and thus remove the Property-Button');
+
+@define('LOG_LEVEL', 'Log Level');
+@define('LOG_LEVEL_DESC', 'The logger can react to the s9y status and debug in RC-version and smaller, but only log errors in produciton. Or the level can be set manually.');
+@define('DEBUG', 'Debug');
+@define('AUTOMATIC', 'Automatisch');

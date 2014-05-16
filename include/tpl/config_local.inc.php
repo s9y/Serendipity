@@ -404,6 +404,12 @@
                                           'type'        => 'list',
                                           'default'     => array('stable' => 'stable', 'beta' => 'beta', 'false' => NO ), # i18n
                                           'permission'  => 'blogConfiguration'),
+                                    array('var'         => 'logLevel',
+                                          'title'       => LOG_LEVEL,  
+                                          'description' => LOG_LEVEL_DESC,
+                                          'type'        => 'list',
+                                          'default'     => array('Automatic' => AUTOMATIC, 'error' => ERROR, 'debug' => DEBUG), # i18n
+                                          'permission'  => 'blogConfiguration'),
                             ));
 
     $res['display'] =

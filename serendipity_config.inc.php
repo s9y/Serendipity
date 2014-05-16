@@ -7,7 +7,6 @@ if (defined('S9Y_FRAMEWORK')) {
 }
 
 @define('S9Y_FRAMEWORK', true);
-
 if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
@@ -47,9 +46,10 @@ if (defined('USE_MEMSNAP')) {
 // The version string
 $serendipity['version']         = '2.0-beta2';
 
+
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 if (!isset($serendipity['production'])) {
-    $serendipity['production']      = (preg_match('@\-(alpha|beta|cvs|rc)@', $serendipity['version']) ? false : true);
+    $serendipity['production']      = ! preg_match('@\-(alpha|beta|cvs|rc).*@', $serendipity['version']);
 }
 
 // Set error reporting
@@ -262,12 +262,7 @@ include($local_config);
 
 if ($serendipity['production'] === 'debug') {
     error_reporting(E_ALL &~E_NOTICE | E_STRICT);
-    $serendipity['log_level'] = Psr\Log\LogLevel::DEBUG;
-} else {
-    $serendipity['log_level'] = Psr\Log\LogLevel::ERROR;
 }
-
-$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $serendipity['log_level']);
 
 //[internal callback function]: errorToExceptionHandler()
 if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
@@ -291,7 +286,6 @@ include(S9Y_INCLUDE_PATH . 'include/functions.inc.php');
 if (serendipity_FUNCTIONS_LOADED !== true) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
-    $serendipity['logger']->critical(sprintf(INCLUDE_ERROR . '<br />' . FILE_CREATE_YOURSELF, 'include/functions.inc.php'));
     serendipity_die(sprintf(INCLUDE_ERROR . '<br />' . FILE_CREATE_YOURSELF, 'include/functions.inc.php'));
 }
 
@@ -315,6 +309,23 @@ if (defined('USE_MEMSNAP')) {
 
 serendipity_load_configuration();
 $serendipity['lang'] = serendipity_getSessionLanguage();
+
+if (! isset($serendipity['logLevel']) || $serendipity['logLevel'] === 'Automatic') {
+    if ($serendipity['production'] != true) {
+        $log_level = Psr\Log\LogLevel::DEBUG;
+    } else {
+        $log_level = Psr\Log\LogLevel::ERROR;
+    }
+}
+
+if ($serendipity['logLevel'] == 'error') {
+    $log_level = Psr\Log\LogLevel::ERROR;
+}
+if ($serendipity['logLevel'] == 'debug') {
+    $log_level = Psr\Log\LogLevel::DEBUG;
+}
+
+$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
