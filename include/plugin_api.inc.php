@@ -75,6 +75,17 @@ function errorHandlerCreateDOM(htmlStr) {
 } \n";
             }
             break;
+            
+        case 'external_plugin':
+            switch ($eventData) {
+                case 'admin/serendipity_editor.js':
+                    header('Content-Type: application/javascript');
+                    global $serendipity;
+
+                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl');
+                break;
+            }
+            break;
 
         return true;
         break;

@@ -108,21 +108,6 @@ serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $t
 function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$addData) {
     // Check what Event is coming in, only react to those we want.
     switch($event) {
-        case 'external_plugin':
-            switch ($eventData) {
-                case 'admin/serendipity_editor.js':
-                    header('Content-Type: application/javascript');
-                    global $serendipity;
-                    $data = array(  'token_url' => serendipity_setFormToken("url"),
-                                    'uploadResize' => $serendipity['uploadResize'],
-                                    'maxImgWidth' => $serendipity['maxImgWidth'],
-                                    'maxImgHeight' => $serendipity['maxImgHeight']
-                                    );
-                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', $data);
-                break;
-            }
-            break;
-            
         case 'js':
             // always add newlines to the end of last element, in case of other plugins using this hook and
             // always start at line Col 1, to populate the (virtual) serendipity.js file

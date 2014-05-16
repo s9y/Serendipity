@@ -625,6 +625,21 @@ function serendipity_smarty_getFile($params, &$smarty) {
     return serendipity_getTemplateFile($params['file']);
 }
 
+function serendipity_smarty_getConfigVar($params, &$smarty) {
+    if ( !isset($params['key']) ) {
+        trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'key' parameter", E_USER_WARNING);
+        return;
+    }
+    return serendipity_get_config_var($params['key']);
+}
+
+function serendipity_smarty_setFormToken($params, &$smarty) {
+    if ( isset($params['type']) ) {
+        return serendipity_setFormToken($params['type']);
+    }
+    return serendipity_setFormToken();
+}
+
 
 /**
  * Smarty Function: Picks a specified key from an array and returns it
@@ -938,6 +953,8 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('function', 'pickKey', 'serendipity_smarty_pickKey');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_showCommentForm', 'serendipity_smarty_showCommentForm');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getImageSize', 'serendipity_smarty_getImageSize');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_getConfigVar', 'serendipity_smarty_getConfigVar');
+            $serendipity['smarty']->registerPlugin('function', 'serendipity_setFormToken', 'serendipity_smarty_setFormToken');
             
             $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
             
