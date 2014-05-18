@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Changed JS for category filtering and its reset button to be a
+      reusable function, which is now also used in the list of
+      installable plugins.
+
     * Fixed wrong local documentation URL in plugin configuration
 
     * Added new "backend_dashboard" event-hook for plugins to use

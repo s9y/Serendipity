@@ -52,19 +52,27 @@
         <input name="serendipity[adminAction]" type="hidden" value="addnew">
         <input name="serendipity[type]" type="hidden" value="{$type|escape}">
 
-        <div class="form_select">
-            <label for="only_group">{$CONST.FILTERS}</label>
-            <select id="only_group" name="serendipity[only_group]">
-            {foreach $groupnames as $available_group => $available_name}
-                <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name}</option>
-            {/foreach}
-                <option value="ALL"{if $only_group == ALL} selected{/if}>{$CONST.ALL_CATEGORIES}</option>
-                <option value="UPGRADE"{if $only_group == UPGRADE} selected{/if}>{$CONST.WORD_NEW}</option>
-            </select>
-        </div>
+        <div class="clearfix">
+            <div id="plugin_groups" class="form_select">
+                <label for="only_group">{$CONST.FILTERS}</label>
+                <select id="only_group" name="serendipity[only_group]">
+                {foreach $groupnames as $available_group => $available_name}
+                    <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name}</option>
+                {/foreach}
+                    <option value="ALL"{if $only_group == ALL} selected{/if}>{$CONST.ALL_CATEGORIES}</option>
+                    <option value="UPGRADE"{if $only_group == UPGRADE} selected{/if}>{$CONST.WORD_NEW}</option>
+                </select>
 
-        <div class="form_buttons">
-            <input type="submit" value="{$CONST.GO}">
+                <div class="form_buttons">
+                    <input type="submit" value="{$CONST.GO}">
+                </div>
+            </div>
+
+            <div id="plugin_filter" class="form_field">
+                <label for="pluginfilter" class="visuallyhidden">{$CONST.FILTERS}</label>
+                <input id="pluginfilter" type="text" placeholder="{$CONST.FILTERS}: {$CONST.MENU_PLUGINS}">
+                <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
+            </div>
         </div>
     </form>
     {foreach $pluggroups AS $pluggroup => $groupstack}
@@ -77,21 +85,23 @@
         {foreach $groupstack as $plug}
             <li class="clearfix">
                 <div class="equal_heights">
-                    <h4>{$plug.name}</h4>
+                    <div class="plugin_features">
+                        <h4>{$plug.name}</h4>
 
-                {if $plug.description}
-                    <details class="plugin_data">
-                        <summary><var class="perm_name">{$plug.class_name}</var></summary>
+                    {if $plug.description}
+                        <details class="plugin_data">
+                            <summary><var class="perm_name">{$plug.class_name}</var></summary>
 
-                        <div class="plugin_desc clearfix">
-                        {$plug.description}
+                            <div class="plugin_desc clearfix">
+                            {$plug.description}
+                            </div>
+                        </details>
+                    {else}
+                        <div class="plugin_data">
+                            <var class="perm_name">{$plug.class_name}</var>
                         </div>
-                    </details>
-                {else}
-                    <div class="plugin_data">
-                        <var class="perm_name">{$plug.class_name}</var>
+                    {/if}
                     </div>
-                {/if}
 
                     <ul class="plugin_info plainList">
                     {if ! empty($plug.author)}

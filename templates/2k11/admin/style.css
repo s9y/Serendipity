@@ -507,7 +507,8 @@ form > button,
 }
 
 .overviewListForm > button,
-.ping_services .form_check {
+.ping_services .form_check,
+.plugins_installable {
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -2708,10 +2709,16 @@ img.mfp-img {
     .entryproperties_access_groups,
     .entryproperties_access_users,
     .entryproperties_access_author,
-    .entryproperties_markup {
+    .entryproperties_markup,
+    #plugin_groups,
+    #plugin_filter {
         float: left;
         margin-right: 2%;
         width: 48%;
+    }
+
+    #plugin_groups .form_buttons {
+        margin-bottom: 0;
     }
 
     .entryproperties_customfields {

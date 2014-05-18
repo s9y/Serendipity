@@ -625,6 +625,24 @@
         }
     }
 
+    serendipity.liveFilters = function(input, target, elem) {
+        var currentInput = $(input).val().toLowerCase();
+
+        if (currentInput == '') {
+            $(target).toggle(true);
+        } else {
+            $(target).each(function() {
+                var $el = $(this);
+
+                if ($el.find(elem).html().toLowerCase().indexOf(currentInput) > -1) {
+                    $el.toggle(true);
+                } else {
+                    $el.toggle(false);
+                }
+            });
+        }
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -980,27 +998,20 @@ $(function() {
         }
     {/if}
 
-    // Category filter
+    // Category live filter
     $('#categoryfilter').keyup(function() {
-        var current_categoryfilter = $(this).val().toLowerCase();
-
-        if (current_categoryfilter == '') {
-            $('#edit_entry_category .form_check').toggle(true);
-        } else {
-            $('#edit_entry_category .form_check').each(function() {
-                var $el = $(this);
-                if ($el.find('label').html().toLowerCase().indexOf(current_categoryfilter) > -1) {
-                    $el.toggle(true);
-                } else {
-                    $el.toggle(false);
-                }
-            });
-        }
+        serendipity.liveFilters($(this), '#edit_entry_category .form_check', 'label');
     });
 
-    // Reset button for category filter
-    $('#reset_categoryfilter').click(function() {
-        $('#categoryfilter').val("").keyup();
+    // Plugins live filter
+    $('#pluginfilter').keyup(function() {
+        serendipity.liveFilters($(this), '.plugins_installable > li', '.plugin_features');
+    });
+
+    // Reset button for live filters
+    $('.reset_livefilter').click(function() {
+        var target = '#' + $(this).attr('data-target');
+        $(target).val('').keyup();
     });
 
     // Advanced options
