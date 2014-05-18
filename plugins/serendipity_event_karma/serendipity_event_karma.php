@@ -57,7 +57,7 @@ class serendipity_event_karma extends serendipity_event
             'entry_display'               => true,
             'css'                         => true,
             'backend_header'              => true,
-            'backend_sidebar_entries'     => true,
+            'backend_sidebar_admin_appearance' => true,
             'backend_sidebar_entries_event_display_karmalog' => true,
             'event_additional_statistics' => true
             ));
@@ -1407,7 +1407,7 @@ END_IMG_CSS;
                     break;
 
                 // Display the Karma Log link on the sidebar
-                case 'backend_sidebar_entries':
+                case 'backend_sidebar_admin_appearance':
 ?>
 <li><a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=karmalog"><?php echo PLUGIN_KARMA_DISPLAY_LOG; ?></a></li>
 <?php

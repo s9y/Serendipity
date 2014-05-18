@@ -22,7 +22,7 @@ class serendipity_event_statistics extends serendipity_event
         ));
         $propbag->add('groups', array('STATISTICS'));
         $propbag->add('event_hooks',    array(
-            'backend_sidebar_entries' => true,
+            'backend_sidebar_admin_appearance' => true,
             'backend_sidebar_entries_event_display_statistics' => true,
             'frontend_configure' => true
         ));
@@ -202,7 +202,7 @@ class serendipity_event_statistics extends serendipity_event
                     }
 
                 break;
-                case 'backend_sidebar_entries':
+                case 'backend_sidebar_admin_appearance':
 ?>
                         <li><a href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=statistics"><?php echo PLUGIN_EVENT_STATISTICS_NAME; ?></a></li>
 <?php
