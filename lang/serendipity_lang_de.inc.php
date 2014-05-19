@@ -1040,3 +1040,8 @@
 @define('UPDATE_NOTIFICATION_DESC', 'Sollen Update-Checks im Dashboard angezeigt werden, und wenn ja für welche Versionen?');
 @define('FRONTEND', 'Frontend');
 @define('BACKEND', 'Backend');
+@define('MEDIA_UPLOAD_RESIZE', 'Resize before Upload');
+@define('MEDIA_UPLOAD_RESIZE_DESC', 'Resize images before the upload using Javascript. This will also change the uploader to use Ajax and thus remove the Property-Button');
+@define('LOG_LEVEL', 'Log Level');
+@define('LOG_LEVEL_DESC', 'At certain places in the Serendipity code we have placed debugging breakpoints. If this option is set to "Debug", it will write this debug output to templates_c/logs/. You should only enable this option if you are experiencing bugs in those areas, or if you are a developer. Setting this option to "Error" will enable logging PHP errors, overwriting the PHP error_log setting.');
+@define('DEBUG', 'Debug');
