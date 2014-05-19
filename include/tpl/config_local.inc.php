@@ -408,7 +408,7 @@
                                           'title'       => LOG_LEVEL,  
                                           'description' => LOG_LEVEL_DESC,
                                           'type'        => 'list',
-                                          'default'     => array('Automatic' => AUTOMATIC, 'error' => ERROR, 'debug' => DEBUG), # i18n
+                                          'default'     => array('Off' => NO, 'error' => ERROR, 'debug' => DEBUG), # i18n
                                           'permission'  => 'blogConfiguration'),
                             ));
 

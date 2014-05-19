@@ -668,14 +668,14 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     static $old_references = array();
     static $saved_references = array();
     static $saved_urls = array();
-    $serendipity['logger']->debug("serendipity_handle_references");
+    if (is_object($serendipity['logger'])) $serendipity['logger']->debug("serendipity_handle_references");
 
     if ($dry_run) {
         // Store the current list of references. We might need to restore them for later user.
         $old_references = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id, false, 'assoc');
 
         if (is_string($old_references)) {
-            $serendipity['logger']->debug($old_references);
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug($old_references);
         }
 
         if (is_array($old_references) && count($old_references) > 0) {
@@ -686,14 +686,14 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                 $saved_urls[$old_reference['link']] = true;
             }
         }
-        $serendipity['logger']->debug("Got references in dry run: " . print_r($current_references, true));
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Got references in dry run: " . print_r($current_references, true));
     } else {
         // A dry-run was called previously and restorable references are found. Restore them now.
         $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE (type = '' OR type IS NULL) AND entry_id = " . (int)$id);
         if (is_string($del)) {
-            $serendipity['logger']->debug($del);
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug($del);
         }
-        $serendipity['logger']->debug("Deleted references");
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Deleted references");
 
         if (is_array($old_references) && count($old_references) > 0) {
             $current_references = array();
@@ -703,12 +703,12 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
                 $q = serendipity_db_insert('references', $old_reference, 'show');
                 $cr = serendipity_db_query($q);
                 if (is_string($cr)) {
-                    $serendipity['logger']->debug($cr);
+                    if (is_object($serendipity['logger'])) $serendipity['logger']->debug($cr);
                 }
             }
         }
 
-        $serendipity['logger']->debug("Got references in final run:" . print_r($current_references, true));
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Got references in final run:" . print_r($current_references, true));
     }
 
     if (!preg_match_all('@<a[^>]+?href\s*=\s*["\']?([^\'" >]+?)[ \'"][^>]*>(.+?)</a>@i', $text, $matches)) {
@@ -730,13 +730,13 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
     $checked_locations = array();
     serendipity_plugin_api::hook_event('backend_trackbacks', $locations);
     for ($i = 0, $j = count($locations); $i < $j; ++$i) {
-        $serendipity['logger']->debug("Checking {$locations[$i]}...");
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Checking {$locations[$i]}...");
         if ($locations[$i][0] == '/') {
             $locations[$i] = 'http' . (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) != 'off' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . $locations[$i];
         }
 
         if (isset($checked_locations[$locations[$i]])) {
-            $serendipity['logger']->debug("Already checked");
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Already checked");
             continue;
         }
 
@@ -757,41 +757,41 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
         $row = serendipity_db_query($query, true, 'num');
         if (is_string($row)) {
-            $serendipity['logger']->debug($row);
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug($row);
         }
         
         $names[$i] = strip_tags($names[$i]);
         if (empty($names[$i])) {
-            $serendipity['logger']->debug("Found reference $locations[$i] w/o name. Adding location as name");
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Found reference $locations[$i] w/o name. Adding location as name");
             $names[$i] = $locations[$i];
         }
 
         if ($row[0] > 0 && isset($saved_references[$locations[$i] . $names[$i]])) {
-            $serendipity['logger']->debug("Found references for $id, skipping rest");
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Found references for $id, skipping rest");
             continue;
         }
 
         if (!isset($serendipity['noautodiscovery']) || !$serendipity['noautodiscovery']) {
             if (!$dry_run) {
                 if (!isset($saved_urls[$locations[$i]])){
-                    $serendipity['logger']->debug("Enabling autodiscovery");
+                    if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Enabling autodiscovery");
                     serendipity_reference_autodiscover($locations[$i], $url, $author, $title, serendipity_trackback_excerpt($text));
                 } else {
-                    $serendipity['logger']->debug("This reference was already used before in $id and therefore will not be trackbacked again");
+                    if (is_object($serendipity['logger'])) $serendipity['logger']->debug("This reference was already used before in $id and therefore will not be trackbacked again");
                 }
             } else {
-                $serendipity['logger']->debug("Dry run: Skipping autodiscovery");
+                if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Dry run: Skipping autodiscovery");
             }
             $checked_locations[$locations[$i]] = true; // Store trackbacked link so that no further trackbacks will be sent to the same link
         } else {
-            $serendipity['logger']->debug("Skipping full autodiscovery");
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Skipping full autodiscovery");
         }
     }
     $del = serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id=" . (int)$id . " AND (type = '' OR type IS NULL)");
     if (is_string($del)) {
-        $serendipity['logger']->debug($del);
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug($del);
     }
-    $serendipity['logger']->debug("Deleted references again");
+    if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Deleted references again");
 
     if (!is_array($old_references)) {
         $old_references = array();
@@ -812,7 +812,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $query .= (int)$current_references[$locations[$i] . $names[$i]]['id'] . ", " . (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if (is_string($ins)) {
-                $serendipity['logger']->debug($ins);
+                if (is_object($serendipity['logger'])) $serendipity['logger']->debug($ins);
             }
             $duplicate_check[$locations[$i] . $names[$i]] = true;
         } else {
@@ -832,11 +832,11 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $duplicate_check[$i_location . $i_link] = true;
         }
 
-        $serendipity['logger']->debug("Current lookup for {$locations[$i]}{$names[$i]} is" . print_r($current_references[$locations[$i] . $names[$i]], true));
-        $serendipity['logger']->debug($query);
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Current lookup for {$locations[$i]}{$names[$i]} is" . print_r($current_references[$locations[$i] . $names[$i]], true));
+        if (is_object($serendipity['logger'])) $serendipity['logger']->debug($query);
     }
 
-        $serendipity['logger']->debug(print_r($old_references, true));
+    if (is_object($serendipity['logger'])) $serendipity['logger']->debug(print_r($old_references, true));
 
     // Add citations
     preg_match_all('@<cite[^>]*>([^<]+)</cite>@i', $text, $matches);
@@ -847,7 +847,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
 
         $cite = serendipity_db_query($query);
         if (is_string($cite)) {
-            $serendipity['logger']->debug($cite);
+            if (is_object($serendipity['logger'])) $serendipity['logger']->debug($cite);
         }
     }
 }

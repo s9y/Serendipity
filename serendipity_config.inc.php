@@ -310,22 +310,15 @@ if (defined('USE_MEMSNAP')) {
 serendipity_load_configuration();
 $serendipity['lang'] = serendipity_getSessionLanguage();
 
-if (! isset($serendipity['logLevel']) || $serendipity['logLevel'] === 'Automatic') {
-    if ($serendipity['production'] != true) {
+if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
+    if ($serendipity['logLevel'] == 'debug') {
         $log_level = Psr\Log\LogLevel::DEBUG;
     } else {
         $log_level = Psr\Log\LogLevel::ERROR;
     }
+    
+    $serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
 }
-
-if ($serendipity['logLevel'] == 'error') {
-    $log_level = Psr\Log\LogLevel::ERROR;
-}
-if ($serendipity['logLevel'] == 'debug') {
-    $log_level = Psr\Log\LogLevel::DEBUG;
-}
-
-$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {

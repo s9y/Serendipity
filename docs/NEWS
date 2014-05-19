@@ -26,8 +26,8 @@ Version 2.0-beta3 ()
       using 2k11 (=default) in the backend.
 
     * Include klogger, call it as $serendipity['logger']->debug/error.
-      The log-level is by default determined automatically, but can also
-      be set in the general configuration.
+      The log-level can be set in the general configuration and is
+      disabled by default.
 
     * Fixed missing s9ymdb ID
 

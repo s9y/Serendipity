@@ -672,6 +672,6 @@ if (!defined('NO_EXIT')) {
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
 }
 
-$serendipity['logger']->debug('Page delivered in '. round(microtime_float()-$time_start,6) .' seconds, '. sizeof(get_included_files()) .' files included');
+if (is_object($serendipity['logger'])) $serendipity['logger']->debug('Page delivered in '. round(microtime_float()-$time_start,6) .' seconds, '. sizeof(get_included_files()) .' files included');
 
 /* vim: set sts=4 ts=4 expandtab : */
