@@ -25,7 +25,6 @@
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {else}
     <section id="template_select" class="clearfix">
-        {assign var="cur_tpl" value=$templates[$cur_template]}
         <h2>{$CONST.CURRENT_TEMPLATE}</h2>
 
         <article class="clearfix current_template">
@@ -61,7 +60,6 @@
         </article>
 
         {if $cur_template_backend}
-            {assign var="cur_tpl_backend" value=$templates[$cur_template_backend]}
             <article class="clearfix current_template even">
                 <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name}</h3>
 
@@ -95,7 +93,6 @@
 
         <ul class="plainList clearfix">
         {foreach $templates as $template=>$info}
-            {if !empty($template) && $info.info.engine != 'yes'}
             <li><article class="clearfix {cycle values="odd,even"}">
                     <h3>{$info.info.name}</h3>
                     <div class="clearfix equal_heights template_wrap">
@@ -136,7 +133,6 @@
                 {/if}
                 </article>
             </li>
-            {/if}
         {/foreach}
         </ul>
     </section>
