@@ -28,7 +28,7 @@
         <h2>{$CONST.CURRENT_TEMPLATE}</h2>
 
         <article class="clearfix current_template">
-            <h3>{$CONST.FRONTEND}: {$cur_tpl.info.name}</h3>
+            <h3>{$CONST.FRONTEND}: {$cur_tpl.info.name|truncate:30}</h3>
 
             <div class="clearfix equal_heights template_wrap">
                 <div class="template_preview">
