@@ -61,7 +61,7 @@
 
         {if $cur_template_backend}
             <article class="clearfix current_template even">
-                <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name}</h3>
+                <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name|truncate:30}</h3>
 
                 <div class="clearfix equal_heights template_wrap">
                     <div class="template_preview">
