@@ -258,6 +258,10 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
         $data[$k] = implode("\n", $v);
     }
 
+    if (@is_file($serendipity['templatePath'] . $theme . '/config.inc.php')) {
+        $data['custom_config'] = YES;
+    }
+
     if ( $theme != 'default' && $theme != 'default-rtl'
       && @is_dir($serendipity['templatePath'] . $theme . '/admin')
       && strtolower($data['backend']) == 'yes' ) {

@@ -35,7 +35,7 @@
                 {if $cur_tpl.fullsize_preview || $cur_tpl.preview}
                     {if $cur_tpl.fullsize_preview}
                         <a class="media_fullsize" href="{$cur_tpl.fullsize_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$cur_tpl.info.name}">
-                            <img src="{$cur_tpl.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
+                            <img src="{$cur_tpl.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}">
                         </a>
                     {else}
                         <img src="{$cur_tpl.preview}" alt="{$CONST.PREVIEW}" >
@@ -47,6 +47,8 @@
                             <dd>{$cur_tpl.info.author}</dd>
                             <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                             <dd>{$cur_tpl.info.date}</dd>
+                            <dt class="template_config">{$CONST.CUSTOM_CONFIG}:</dt>{* # i18n *}
+                            <dd>{$cur_tpl.info.custom_config|default:$CONST.NO}</dd>
                             <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
                             <dd>{$cur_tpl.info.custom_admin_interface}</dd>
                         </dl>
@@ -56,11 +58,11 @@
 
             <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
 
-            <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>
+            {if $cur_tpl.info.custom_config}<a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>{/if}
         </article>
 
         {if $cur_template_backend}
-            <article class="clearfix current_template even">
+            <article class="clearfix current_template">
                 <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name|truncate:30}</h3>
 
                 <div class="clearfix equal_heights template_wrap">
@@ -68,7 +70,7 @@
                     {if $cur_tpl_backend.fullsize_backend_preview || $cur_tpl_backend.preview_backend}
                         {if $cur_tpl_backend.fullsize_backend_preview}
                             <a class="media_fullsize" href="{$cur_tpl_backend.fullsize_backend_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$cur_tpl_backend.info.name}">
-                                <img src="{$cur_tpl_backend.fullsize_backend_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
+                                <img src="{$cur_tpl_backend.fullsize_backend_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}">
                             </a>
                         {else}
                             <img src="{$cur_tpl_backend.preview_backend}" alt="{$CONST.PREVIEW}" >
@@ -100,7 +102,7 @@
                         {if $info.fullsize_preview || $info.preview}
                             {if $info.fullsize_preview}
                                 <a class="media_fullsize" href="{$info.fullsize_preview}" title="{$CONST.MEDIA_FULLSIZE}: {$info.info.name}">
-                                    <img src="{$info.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}" >
+                                    <img src="{$info.fullsize_preview}" class="template_preview_img" alt="{$CONST.PREVIEW}">
                                 </a>
                             {else}
                                 <img src="{$info.preview}" alt="{$CONST.PREVIEW}" >
@@ -112,6 +114,8 @@
                                     <dd>{$info.info.author}</dd>
                                     <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                                     <dd>{$info.info.date}</dd>
+                                    <dt class="template_config">{$CONST.CUSTOM_CONFIG}:</dt>{* # i18n *}
+                                    <dd>{$info.info.custom_config|default:$CONST.NO}</dd>
                                     <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
                                     <dd>{if $info.info.custom_admin_interface} {$info.info.custom_admin_interface} {else} {$CONST.NO} {/if}</dd>
                                 </dl>
