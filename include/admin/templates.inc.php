@@ -167,7 +167,7 @@ $stack = array();
 serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
 $themes = serendipity_fetchTemplates();
 $data['templates'] = array();
-$data['templates'][$theme] = array();
+
 foreach($themes AS $theme) {
     $stack[$theme] = serendipity_fetchTemplateInfo($theme);
 }
