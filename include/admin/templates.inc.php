@@ -175,6 +175,10 @@ ksort($stack);
 
 
 foreach ($stack as $theme => $info) {
+    /* Sorry, but we don't display engines */
+    if ( strtolower($info['engine']) == 'yes') {
+        continue;
+    }
     $data['templates'][$theme]['info'] = $info;
 
     foreach(array('', '_backend') as $backendId) {
