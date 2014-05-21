@@ -28,7 +28,7 @@
         <h2>{$CONST.CURRENT_TEMPLATE}</h2>
 
         <article class="clearfix current_template">
-            <h3>{$CONST.FRONTEND}: {$cur_tpl.info.name|truncate:25:"&hellip;"}</h3>
+            <h3 title="{$cur_tpl.info.name}">{$CONST.FRONTEND}: {$cur_tpl.info.name|truncate:25:"&hellip;"}</h3>
 
             <div class="clearfix equal_heights template_wrap">
                 <div class="template_preview">
@@ -63,7 +63,7 @@
 
         {if $cur_template_backend}
             <article class="clearfix current_backend_template">
-                <h3>{$CONST.BACKEND}: {$cur_tpl_backend.info.name|truncate:25:"&hellip;"}</h3>
+                <h3 title="{$cur_tpl_backend.info.name}">{$CONST.BACKEND}: {$cur_tpl_backend.info.name|truncate:25:"&hellip;"}</h3>
 
                 <div class="clearfix equal_heights template_wrap">
                     <div class="template_preview">
@@ -96,7 +96,7 @@
         <ul class="plainList clearfix">
         {foreach $templates as $template=>$info}
             <li><article class="clearfix">
-                    <h3>{$info.info.name|truncate:25:"&hellip;"}</h3>
+                    <h3 title="{$info.info.name}">{$info.info.name|truncate:25:"&hellip;"}</h3>
                     <div class="clearfix equal_heights template_wrap">
                         <div class="template_preview">
                         {if $info.fullsize_preview || $info.preview}
