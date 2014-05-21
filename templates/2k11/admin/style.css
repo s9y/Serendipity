@@ -2772,7 +2772,8 @@ img.mfp-img {
         width: 48%;
     }
 
-    #template_select .even,
+    #template_select .current_backend_template,
+    #template_select li:nth-child(even) article,
     .media_pane .even,
     #dashboard > .even {
         margin: 0 0 1em 2%;
@@ -2789,10 +2790,6 @@ img.mfp-img {
 
     #template_select .current_template {
         margin-bottom: 2em;
-    }
-
-    #template_select .current_backend_template {
-        margin: 0px 0px 2em 0px;
     }
 
     #mediaPropertyForm .media_file {
@@ -2893,7 +2890,8 @@ img.mfp-img {
     .configuration_group .form_field,
     .configuration_group .form_area,
     .configuration_group fieldset > fieldset,
-    #template_select .odd,
+    #template_select li:nth-child(odd),
+    #template_select h2,
     .media_pane .odd,
     #dashboard > section:last-child {
         clear: left;
