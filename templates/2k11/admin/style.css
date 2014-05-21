@@ -2791,6 +2791,10 @@ img.mfp-img {
         margin-bottom: 2em;
     }
 
+    #template_select .current_backend_template {
+        margin: 0px 0px 2em 0px;
+    }
+
     #mediaPropertyForm .media_file {
         float: none;
         margin: 1.5em 0;
