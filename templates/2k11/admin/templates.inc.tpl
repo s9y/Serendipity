@@ -18,8 +18,6 @@
             {$form_token}
             {$configuration}
         </form>
-    {else}
-        <p>{$CONST.STYLE_OPTIONS_NONE}</p>
     {/if}
     </section>
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
@@ -52,6 +50,7 @@
                             <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
                             <dd>{$cur_tpl.info.custom_admin_interface}</dd>
                         </dl>
+                        {if !$cur_tpl.info.custom_config}<p>{$CONST.STYLE_OPTIONS_NONE}</p>{/if}
                     </footer>
                 </div>
             </div>
