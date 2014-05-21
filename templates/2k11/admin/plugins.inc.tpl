@@ -54,7 +54,7 @@
 
         <div class="clearfix">
             <div id="plugin_groups" class="form_select">
-                <label for="only_group">{$CONST.FILTERS}</label>
+                <label for="only_group">{$CONST.GROUP}</label>
                 <select id="only_group" name="serendipity[only_group]">
                 {foreach $groupnames as $available_group => $available_name}
                     <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name}</option>
@@ -69,8 +69,8 @@
             </div>
 
             <div id="plugin_filter" class="form_field">
-                <label for="pluginfilter" class="visuallyhidden">{$CONST.FILTERS}</label>
-                <input id="pluginfilter" type="text" placeholder="{$CONST.FILTERS}: {$CONST.MENU_PLUGINS}">
+                <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
+                <input id="pluginfilter" type="text">
                 <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
             </div>
         </div>
