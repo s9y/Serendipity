@@ -45,7 +45,7 @@
                             <dd>{$cur_tpl.info.author}</dd>
                             <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                             <dd>{$cur_tpl.info.date}</dd>
-                            <dt class="template_config">{$CONST.CUSTOM_CONFIG}:</dt>{* # i18n *}
+                            <dt class="template_config">{$CONST.CUSTOM_CONFIG|default:'Custom configuration file'}:</dt>{* # i18n *}
                             <dd>{$cur_tpl.info.custom_config|default:$CONST.NO}</dd>
                             <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
                             <dd>{$cur_tpl.info.custom_admin_interface}</dd>
@@ -113,7 +113,7 @@
                                     <dd>{$info.info.author}</dd>
                                     <dt class="template_date">{$CONST.LAST_UPDATED}:</dt>
                                     <dd>{$info.info.date}</dd>
-                                    <dt class="template_config">{$CONST.CUSTOM_CONFIG}:</dt>{* # i18n *}
+                                    <dt class="template_config">{$CONST.CUSTOM_CONFIG|default:'Custom configuration file'}:</dt>{* # i18n *}
                                     <dd>{$info.info.custom_config|default:$CONST.NO}</dd>
                                     <dt class="template_admin">{$CONST.CUSTOM_ADMIN_INTERFACE}:</dt>
                                     <dd>{if $info.info.custom_admin_interface} {$info.info.custom_admin_interface} {else} {$CONST.NO} {/if}</dd>
