@@ -214,11 +214,10 @@ foreach ($stack as $theme => $info) {
     /* TODO: Smarty versioncheck */
 }
 
-$data['cur_tpl'] = $data['templates'][$data['cur_template']];
+$data['cur_tpl']         = $data['templates'][$data['cur_template']];
+$data['cur_tpl_backend'] = $data['templates'][$data['cur_template_backend']];
 
 unset($data['templates'][$data['cur_template']]);
-
-$data['cur_tpl_backend'] = $data['templates'][$data['cur_template_backend']];
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 
