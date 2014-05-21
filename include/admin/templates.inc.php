@@ -176,10 +176,6 @@ ksort($stack);
 
 foreach ($stack as $theme => $info) {
     $data['templates'][$theme]['info'] = $info;
-    /* Sorry, but we don't display engines */
-    if ( strtolower($info['engine']) == 'yes' ) {
-        continue;
-    }
 
     foreach(array('', '_backend') as $backendId) {
 
@@ -210,8 +206,6 @@ foreach ($stack as $theme => $info) {
         $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
         $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
     }
-
-    /* TODO: Smarty versioncheck */
 }
 
 $data['cur_tpl']         = $data['templates'][$data['cur_template']];
