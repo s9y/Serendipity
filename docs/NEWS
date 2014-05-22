@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Changed 2k11's config.inc.php file to provide a more stable
+      call of event hooks so that other templates can also hook
+      their own events.
+      
     * Changed JS for category filtering and its reset button to be a
       reusable function, which is now also used in the list of
       installable plugins.

@@ -105,13 +105,15 @@ $template_global_config = array('navigation' => true);
 $template_loaded_config = serendipity_loadThemeOptions($template_config, $serendipity['smarty_vars']['template_option'], true);
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
-function serendipity_plugin_api_pre_event_hook($event, &$bag, &$eventData, &$addData) {
-    // Check what Event is coming in, only react to those we want.
-    switch($event) {
-        case 'js':
-            // always add newlines to the end of last element, in case of other plugins using this hook and
-            // always start at line Col 1, to populate the (virtual) serendipity.js file
-            echo "
+// 2k11 shall be a re-usable frontend theme that other templates can inherit (through "Engine: 2k11" in their info.txt)
+// If those themes use a custom config.inc.php file, they may need to declare their own pre-event-hooks. 
+// Since serendipity_plugin_api_pre_event_hook() is the advertised method for template authors to hook into
+// 2k11 cannot declare this on its own. We rather use per-event hook functions now, which templates other than 2k11
+// (or other custom engines) should not use.
+function serendipity_plugin_api_pre_event_hook_js($event, &$bag, &$eventData, &$addData) {
+    // always add newlines to the end of last element, in case of other plugins using this hook and
+    // always start at line Col 1, to populate the (virtual) serendipity.js file
+    echo "
 jQuery(function() { 
     jQuery('input[type=\"url\"]').change(function() {
         if (this.value != '' && ! (this.value.substr(0,7) == 'http://' || this.value.substr(0,8) == 'https://')) {
@@ -119,11 +121,6 @@ jQuery(function() {
         }
     });
 })\n\n";
-            break;
-            
-        return true;
-        break;
-    }
 }
 
 if ($_SESSION['serendipityUseTemplate']) {

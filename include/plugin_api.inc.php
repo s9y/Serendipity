@@ -1096,6 +1096,16 @@ class serendipity_plugin_api
             $apifunc($event_name, $bag, $eventData, $addData);
         }
         
+        // Function names cannot contain ":" etc, so if we ever have event looks like "backend:js" this
+        // needs to be replaced to "backend_js". The real event name is passed as a function argument
+        // These specific per-hook functions are utilized for theme's config.inc.php files
+        // that act as an engine for other themes.
+        $safe_event_name = preg_replace('@[^a-z0-9_]+@i', '_', $event_name);
+        if (function_exists('serendipity_plugin_api_pre_event_hook_' . $safe_event_name)) {
+            $apifunc = 'serendipity_plugin_api_pre_event_hook_' . $safe_event_name;
+            $apifunc($event_name, $bag, $eventData, $addData);
+        }
+
         if (is_array($plugins)) {
             // foreach() operates on copies of values, but we want to operate on references, so we use while()
             @reset($plugins);
@@ -1121,6 +1131,11 @@ class serendipity_plugin_api
 
             if (function_exists('serendipity_plugin_api_event_hook')) {
                 $apifunc = 'serendipity_plugin_api_event_hook';
+                $apifunc($event_name, $bag, $eventData, $addData);
+            }
+
+            if (function_exists('serendipity_plugin_api_event_hook_' . $safe_event_name)) {
+                $apifunc = 'serendipity_plugin_api_event_hook_' . $safe_event_name;
                 $apifunc($event_name, $bag, $eventData, $addData);
             }
 
