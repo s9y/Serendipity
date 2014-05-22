@@ -16,6 +16,7 @@ include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
  * or during runtime,
  */
 $serendipity['capabilities']['jquery']         = true;
+$serendipity['capabilities']['jquery_backend'] = true;
 $serendipity['core_events']['frontend_header']['jquery'] = 'serendipity_plugin_api_frontend_header';
 $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_backend_header';
 
@@ -44,8 +45,8 @@ function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, 
     // jquery can be disabled if a template's config.inc.php or a plugin sets
     // $serendipity['capabilities']['jquery'] = false
 
-    $check = serendipity_getTemplateFile('jquery.js');
-    if (!$check && $serendipity['capabilities']['jquery']) {
+    $check = serendipity_getTemplateFile('jquery_backend.js');
+    if (!$check && $serendipity['capabilities']['jquery_backend']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
 <?php
