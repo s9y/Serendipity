@@ -15,16 +15,6 @@
             {/if}
         </ul>
 
-        {if NOT $simpleFilters}
-            <div id="entry_skip" class="clearfix additional_info filter_pane">
-                <div class="form_field">
-                    <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
-                    <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
-                    <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
-                </div>
-            </div>
-        {/if}
-
         <fieldset id="filter_entries" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 
@@ -104,6 +94,21 @@
             </div>
         </fieldset>
     </form>
+{if NOT $simpleFilters}
+    <form action="?" method="get">
+        <input name="serendipity[action]" type="hidden" value="admin">
+        <input name="serendipity[adminModule]" type="hidden" value="entries">
+        <input name="serendipity[adminAction]" type="hidden" value="editSelect">
+
+        <div id="entry_skip" class="clearfix additional_info filter_pane">
+            <div class="form_field">
+                <label for="skipto_entry">{$CONST.EDIT_ENTRY} #</label>
+                <input id="skipto_entry" name="serendipity[id]" type="text" size="3">
+                <input name="serendipity[editSubmit]" type="submit" value="{$CONST.GO}">
+            </div>
+        </div>
+    </form>
+{/if}
 
     <script>
         $(document).ready(function() {
