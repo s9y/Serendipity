@@ -18,6 +18,8 @@
             {$form_token}
             {$configuration}
         </form>
+    {else}
+        <p>{$CONST.STYLE_OPTIONS_NONE}</p>
     {/if}
     </section>
     <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
