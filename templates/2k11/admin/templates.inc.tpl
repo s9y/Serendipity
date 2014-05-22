@@ -127,7 +127,7 @@
                     <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
 
                 {if !$info.unmetRequirements}
-                    {if $info.info.custom_admin_interface == $CONST.YES}
+                    {if $info.info.custom_admin_interface == $CONST.YES && $cur_tpl_backend.info.name != $info.info.name}
                     <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-frontend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
                     <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-backend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.BACKEND}</a>
                     {else}
