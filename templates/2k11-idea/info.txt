@@ -1,0 +1,4 @@
+Name: Idea @ 2k11 [DEV-TEST for 2k11-based engines NO config.inc.php]
+Author: Evan Nemerson
+Date: 2014-05-22
+Engine: 2k11
