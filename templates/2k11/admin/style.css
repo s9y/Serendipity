@@ -1511,7 +1511,7 @@ fieldset p,
 }
 
 .comment_data,
-.configuration_group h3,
+.configuration_group .toggle_headline,
 form > .button_link:first-of-type,
 .upload_form > .form_field:first-child,
 #uploadform .tabs ul {
@@ -1522,8 +1522,12 @@ form > .button_link:first-of-type,
     padding-top: .75em;
 }
 
+.configuration_group h3 {
+    margin: .58334em 0;
+}
+
 .installer .configuration_group h3 {
-    margin-top: 1.16667em;
+    margin: 1.16667em 0;
 }
 
 #template_options,
