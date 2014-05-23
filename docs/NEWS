@@ -4,19 +4,31 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Alle frontend themes that use the pre set jquery library
+      will have the jquery.noConflict-mode activated for compat reasons.
+      This mode is now set deprecated and will be removed in future.
+      If you (have already) set
+        $serendipity['capabilities']['jquery'] = false;
+      there is no need to do anything further. For the ones wanting to
+      use the core set jquery lib, but do not want to rely on the
+      noConflict-mode, please use (the now recommended)
+        $serendipity['capabilities']['jquery-noconflict'] = false;
+      in your serendipity_config_local.inc.php or your templates
+      config.inc.php file.
+
     * Due to distinction of backend and frontend themes, each theme
       that provides a custom jquery.js now only does so for the
       frontend. The backend now listens to a:
-      
+
         $serendipity['capabilities']['jquery_backend'] = false;
-        
+
       variable, and the file needs to be jquery_backend.js that
       a backend theme would reference to.
-      
+
     * Changed 2k11's config.inc.php file to provide a more stable
       call of event hooks so that other templates can also hook
       their own events.
-      
+
     * Changed JS for category filtering and its reset button to be a
       reusable function, which is now also used in the list of
       installable plugins.

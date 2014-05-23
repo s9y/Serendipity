@@ -15,8 +15,9 @@ include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
  * Future use: Global variable can be customized/overriden by your own plugin on the frontend_configure event
  * or during runtime,
  */
-$serendipity['capabilities']['jquery']         = true;
-$serendipity['capabilities']['jquery_backend'] = true;
+$serendipity['capabilities']['jquery']            = true;
+$serendipity['capabilities']['jquery_backend']    = true;
+$serendipity['capabilities']['jquery-noconflict'] = true; //set as being deprecated
 $serendipity['core_events']['frontend_header']['jquery'] = 'serendipity_plugin_api_frontend_header';
 $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_backend_header';
 
@@ -32,8 +33,12 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
+<?php
+        if ($serendipity['capabilities']['jquery-noconflict']) {
+?>
     <script>jQuery.noConflict();</script>
 <?php
+        }
     }
 }
 
