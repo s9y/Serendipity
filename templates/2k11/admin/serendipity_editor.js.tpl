@@ -643,6 +643,29 @@
         }
     }
 
+    serendipity.toggle_collapsible = function(toggler, target, stateClass, stateIcon, stateOpen, stateClosed) {
+        // argument defaults
+        stateClass == stateClass || 'additional_info';
+        stateIcon = stateIcon || '> span';
+        stateOpen = stateOpen || 'icon-down-dir';
+        stateClosed = stateClosed || 'icon-right-dir';
+
+        var $toggleIcon = $(toggler).find(stateIcon);
+        var toggleState = $toggleIcon.attr('class');
+        // This should get a fallback for if toggler does not have an id
+        var storageKey = 'show_' + $(toggler).attr('id');
+
+        if(toggleState == stateOpen) {
+            $toggleIcon.removeClass(stateOpen).addClass(stateClosed);
+            localStorage.setItem(storageKey, "false");
+        } else {
+            $toggleIcon.removeClass(stateClosed).addClass(stateOpen);
+            localStorage.setItem(storageKey, "true");
+        }
+
+        $(target).toggleClass(stateClass);
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ));
 
 // Source: https://github.com/yatil/accessifyhtml5.js
@@ -952,24 +975,11 @@ $(function() {
     });
 
     // Entry metadata
-    // NOTE: This probably should be rewritten as a general function which
-    //       also works for advanced options (see below); also not sure if
-    //       the localStorage stuff works here (seems to)
     if($('#edit_entry_metadata').length > 0) {
         $('#toggle_metadata').click(function() {
-            var $el = $(this);
-            var $toggleIcon = $el.find('> span');
-            var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-down-dir') {
-                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
-                localStorage.show_advanced_options = "false";
-            } else {
-                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
-                localStorage.show_advanced_options = "true";
-            }
-            $('#meta_data').toggleClass('additional_info');
+            serendipity.toggle_collapsible($(this), '#meta_data');
         });
-        if (localStorage.show_advanced_options == "true") {
+        if (localStorage.getItem("show_toggle_metadata") == "true") {
             $('#toggle_metadata').click();
         }
     }
@@ -1017,19 +1027,9 @@ $(function() {
     // Advanced options
     if($('#advanced_options').length > 0) {
         $('#toggle_advanced').click(function() {
-            var $el = $(this);
-            var $toggleIcon = $el.find('> span');
-            var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-down-dir') {
-                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
-                localStorage.show_advanced_options = "false";
-            } else {
-                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
-                localStorage.show_advanced_options = "true";
-            }
-            $('#adv_opts').toggleClass('additional_info');
+            serendipity.toggle_collapsible($(this), '#adv_opts');
         });
-        if (localStorage.show_advanced_options == "true") {
+        if (localStorage.getItem("show_toggle_advanced") == "true") {
             $('#toggle_advanced').click();
         }
     }
@@ -1050,14 +1050,8 @@ $(function() {
             } else {
                 var $toggled = $el.data('href');
             }
-            var $toggleIcon = $el.find('> span');
-            var $toggleState = $toggleIcon.attr('class');
-            if($toggleState == 'icon-down-dir') {
-                $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
-            } else {
-                $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
-            }
-            $($toggled).toggleClass('additional_info');
+
+            serendipity.toggle_collapsible($el, $toggled);
             e.preventDefault();
         });
 
@@ -1261,19 +1255,14 @@ $(function() {
     $('.toggle_comment_full').click(function(e) {
         var $el = $(this);
         if ($el.attr('href')) {
-            var $toggles = $($el.attr('href'));
+            var $toggled = $($el.attr('href'));
         } else {
-            var $toggles = $($el.data('href'));
+            var $toggled = $($el.data('href'));
         }
-        $toggles.toggleClass('additional_info');
-        $toggles.prev().toggleClass('additional_info');
-        var $toggleIcon = $el.find('> span');
-        var $toggleState = $toggleIcon.attr('class');
-        if($toggleState == 'icon-down-dir') {
-            $toggleIcon.removeClass('icon-down-dir').addClass('icon-right-dir');
-        } else {
-            $toggleIcon.removeClass('icon-right-dir').addClass('icon-down-dir');
-        }
+
+        serendipity.toggle_collapsible($el, $toggled);
+
+        $toggled.prev().toggleClass('additional_info');
         e.preventDefault();
     });
 
