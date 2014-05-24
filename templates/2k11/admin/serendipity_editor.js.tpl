@@ -1177,7 +1177,7 @@ $(function() {
     }
 
     // Show media file info, template info, label info or filters
-    $('.media_show_info, .template_show_info, .filters_toolbar li > a').click(function(e) {
+    $('.media_show_info, .template_show_info, .filters_toolbar li > a, .toggle_info').click(function(e) {
         var $el = $(this);
         if ($el.attr('href')) {
             $($el.attr('href')).toggleClass('additional_info');
@@ -1185,15 +1185,6 @@ $(function() {
             $($el.data('href')).toggleClass('additional_info');
         }
         $el.toggleClass('active');
-        e.preventDefault();
-    });
-
-    $('.toggle_info').click(function(e) {
-        if ($(this).attr('href')) {
-            $($(this).attr('href')).toggleClass('additional_info');
-        } else {
-            $($(this).data('href')).toggleClass('additional_info');
-        }
         e.preventDefault();
     });
 
