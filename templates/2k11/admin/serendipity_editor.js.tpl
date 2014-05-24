@@ -645,7 +645,7 @@
 
     serendipity.toggle_collapsible = function(toggler, target, stateClass, stateIcon, stateOpen, stateClosed) {
         // argument defaults
-        stateClass == stateClass || 'additional_info';
+        stateClass = stateClass || 'additional_info';
         stateIcon = stateIcon || '> span';
         stateOpen = stateOpen || 'icon-down-dir';
         stateClosed = stateClosed || 'icon-right-dir';
