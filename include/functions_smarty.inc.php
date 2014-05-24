@@ -928,6 +928,11 @@ function serendipity_smarty_init($vars = array()) {
             #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
             #$serendipity['smarty']->testInstall();exit;
 
+            // since 2k11/admin/entries.tpl is the default fallback for preview cases, we need to register that missing modifier for templates without tpls.
+            if (!function_exists('serendipity_smarty_html5time')) {
+                function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
+                $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
+            }
             /** 
              * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
              * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
@@ -1132,10 +1137,11 @@ function serendipity_smarty_shutdown($serendipity_directory = '') {
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
 }
 
-/* Render a smarty-template
+/**
+ * Render a smarty-template
  * $template: path to the template-file
  * $data: map with the variables to assign
- * */
+ */
 function serendipity_smarty_show($template, $data = null) {
     global $serendipity;
     

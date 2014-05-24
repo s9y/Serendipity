@@ -1,5 +1,5 @@
 {if $drawList}
-<div  class="has_toolbar">
+<div class="has_toolbar">
     <h2>{$CONST.EDIT_ENTRIES}</h2>
 
     <form action="?" method="get">
