@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Fix preview entry exception (issue #119)
+
     * Add serendipity.toggle_collapsible as a reusable JS function
       for the core backend and backend sections emitted by plugins as
       an easy way to provide show/hide functionality. (yellowled)
