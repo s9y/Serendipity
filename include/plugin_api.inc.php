@@ -64,6 +64,7 @@ function serendipity_plugin_api_core_event_hook($event, &$bag, &$eventData, &$ad
 
     switch($event) {
 
+        case 'js_backend':
         case 'js':
             // This is frontend and backend!
             // Add a global available (index.tpl; admin/index.tpl; preview_iframe.tpl) redirect error string function used by errorToExceptionHandler()
