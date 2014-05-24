@@ -90,7 +90,7 @@ if (parent.frames && parent.frames['tree']) {
         {if $media.file.fast_select}
             <script>
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media.file}
-                serendipity_imageSelector_done('{$media.textarea|@escape}');
+                serendipity.serendipity_imageSelector_done('{$media.textarea|@escape}');
             </script>
         {else}
             <fieldset id="image_size">
@@ -137,13 +137,13 @@ if (parent.frames && parent.frames['tree']) {
 
                 <div class="clearfix">
                     <div class="form_radio">
-                        <input id="radio_islink_yes" name="serendipity[isLink]" type="radio" value="yes" {'isLink'|@ifRemember:'yes':true}>
-                        <label for="radio_islink_yes">{$CONST.I_WANT_NO_LINK}</label>
+                        <input id="radio_islink_no" name="serendipity[isLink]" type="radio" value="no" {'isLink'|@ifRemember:'no':true}>
+                        <label for="radio_islink_no">{$CONST.I_WANT_NO_LINK}</label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="radio_islink_no" name="serendipity[isLink]" type="radio" value="no" {'isLink'|@ifRemember:'no'}>
-                        <label for="radio_islink_no">{$CONST.I_WANT_IT_TO_LINK}</label>
+                        <input id="radio_islink_yes" name="serendipity[isLink]" type="radio" value="yes" {'isLink'|@ifRemember:'yes'}>
+                        <label for="radio_islink_yes">{$CONST.I_WANT_IT_TO_LINK}</label>
 
                         <div class="form_field">
                         {* Could use input[type=url], but does that handle local URLs as well? Hm. *}
@@ -159,7 +159,6 @@ if (parent.frames && parent.frames['tree']) {
                 </div>
 
                 <div class="form_select">
-                    <label id="select_image_target">{$CONST.MEDIA_TARGET}</label>
                     <select id="select_image_target" name="serendipity[target]">
                         <option value="none"   {'target'|@ifRemember:'none':false:'selected'}>{$CONST.NONE}</option>
                         <option value="js"     {'target'|@ifRemember:'js':false:'selected'}>{$CONST.MEDIA_TARGET_JS}</option>
@@ -167,6 +166,7 @@ if (parent.frames && parent.frames['tree']) {
                         <option value="_blank" {'target'|@ifRemember:'_blank':false:'selected'}>{$CONST.MEDIA_TARGET_BLANK}</option>
                     </select>
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagelink2' eventData=$media.file}
+                    <label for="select_image_target">{$CONST.MEDIA_TARGET}</label>
                 </div>
             </fieldset>
 
@@ -200,7 +200,7 @@ if (parent.frames && parent.frames['tree']) {
         {if $media.filename_only}
         <script>
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
-            parent.self.opener.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|@escape}');
+            parent.self.opener.serendipity.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|@escape}');
             parent.self.close();
         </script>
         {else}

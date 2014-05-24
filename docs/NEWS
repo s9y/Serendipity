@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Fixed media insert target bug (issued by #143, #145, #121)
+
     * All frontend themes that rely on the bundled Core jQuery library
       are currently using the jquery.noConflict-mode for compatibility
       to older plugins.
