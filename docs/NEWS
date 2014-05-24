@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Add serendipity.toggle_collapsible as a reusable JS function
+      for the core backend and backend sections emitted by plugins as
+      an easy way to provide show/hide functionality. (yellowled)
+
     * Fixed media insert target bug (issued by #143, #145, #121)
 
     * All frontend themes that rely on the bundled Core jQuery library
