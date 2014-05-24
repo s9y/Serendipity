@@ -652,15 +652,23 @@
 
         var $toggleIcon = $(toggler).find(stateIcon);
         var toggleState = $toggleIcon.attr('class');
-        // This should get a fallback for if toggler does not have an id
-        var storageKey = 'show_' + $(toggler).attr('id');
+
+        // if toggler does not have an id, don't store state
+        var togglerId = $(toggler).attr('id');
+        if (togglerId !== undefined) {
+            var storageKey = 'show_' + $(toggler).attr('id');
+        }
 
         if(toggleState == stateOpen) {
             $toggleIcon.removeClass(stateOpen).addClass(stateClosed);
-            localStorage.setItem(storageKey, "false");
+            if (togglerId !== undefined) {
+                localStorage.setItem(storageKey, "false");
+            }
         } else {
             $toggleIcon.removeClass(stateClosed).addClass(stateOpen);
-            localStorage.setItem(storageKey, "true");
+            if (togglerId !== undefined) {
+                localStorage.setItem(storageKey, "true");
+            }
         }
 
         $(target).toggleClass(stateClass);
