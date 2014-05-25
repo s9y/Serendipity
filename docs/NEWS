@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Move sort by name to simple filter in ML, replace file extension
+
     * Remember selected media library folder
 
     * Show upload-success or error with the ajax image uploader

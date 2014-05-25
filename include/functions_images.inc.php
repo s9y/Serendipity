@@ -1977,9 +1977,8 @@ function serendipity_getImageFields() {
                                          'type' => 'date'
                                    ),
 
-            'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
+            'i.name'              => array('desc' => SORT_ORDER_NAME
                                    ),
-
         );
 
     } else {
@@ -1989,7 +1988,7 @@ function serendipity_getImageFields() {
                                          'type' => 'date'
                                    ),
 
-            'i.name'              => array('desc' => SORT_ORDER_NAME
+            'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
                                    ),
 
             'i.authorid'          => array('desc' => AUTHOR,
