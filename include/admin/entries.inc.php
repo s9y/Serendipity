@@ -85,7 +85,10 @@ switch($serendipity['GET']['adminAction']) {
                 /* We don't need an iframe to save a draft */
                 if ( $serendipity['POST']['isdraft'] == 'true' ) {
                     $data['is_draft'] = true;
-                    serendipity_updertEntry($entry);
+                    $errors = serendipity_updertEntry($entry);
+                    if (is_numeric($errors)) {
+                        $errors = "";
+                    }
                 } else {
                     if ($serendipity['use_iframe']) {
                         $data['is_iframe'] = true;
@@ -170,7 +173,8 @@ switch($serendipity['GET']['adminAction']) {
                   'serendipity[adminAction]' => 'save',
                   'serendipity[timestamp]'   => htmlspecialchars($entry['timestamp'])
                 ),
-                $entry
+                $entry,
+                $errors
             );
         }
 
@@ -398,6 +402,7 @@ switch($serendipity['GET']['adminAction']) {
 }
 
 $data['entryForm'] = $entryForm;
+$data['errors'] = $errors;
 $data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
 if(!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');

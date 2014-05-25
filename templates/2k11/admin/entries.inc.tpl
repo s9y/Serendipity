@@ -211,7 +211,7 @@
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.DATE_INVALID}</span>
     {/if}
     {if ($get.adminAction && $use_legacy)}
-        {if $is_draft}
+        {if $is_draft && ! $errors}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
