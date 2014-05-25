@@ -1399,6 +1399,16 @@ $(function() {
         }
     {/if}
 
+    if ($('#serendipity_only_path').length > 0) {
+        if ($('#serendipity_only_path').val() != localStorage.getItem('serendipity_only_path')) {
+            $('#serendipity_only_path').val(localStorage.getItem('serendipity_only_path'));
+            $('#media_library_control').submit();
+        }
+        $('#serendipity_only_path').change(function() {
+            localStorage.setItem('serendipity_only_path', $('#serendipity_only_path').val());
+        });
+    }
+
     // reopen detail element after spamblock action
     if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {
         $('#' + window.location.hash.replace('#', '')).find(".toggle_info").click();

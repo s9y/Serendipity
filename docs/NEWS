@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Remember selected media library folder
+
     * Show upload-success or error with the ajax image uploader
 
     * Fix preview entry exception (issue #119)
