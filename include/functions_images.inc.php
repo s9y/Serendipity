@@ -3513,7 +3513,8 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             serendipity_db_query($uq);
         }
 
-        printf(MEDIA_DIRECTORY_MOVE_ENTRIES . '<br />', count($dirs));
+        $imgmovedtodir = sprintf(MEDIA_DIRECTORY_MOVE_ENTRIES, count($dirs));
+        printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $imgmovedtodir . '</span>');
     }
 
     return true;
