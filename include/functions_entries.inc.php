@@ -1402,7 +1402,9 @@ function serendipity_updertEntry($entry) {
             }
         }
 
-        if (!$entry['isdraft'] || $entry['isdraft'] == 0) $entry['isdraft'] = 'false';
+        if ($entry['isdraft'] === 0) {
+            $entry['isdraft'] = 'false'; // make sure to commit a string value with dashboards entry publish (only!)
+        }
 
         //if (!serendipity_db_bool($entry['isdraft']) && !serendipity_db_bool($_entry['isdraft'])) {
             $entry['last_modified'] = time();
