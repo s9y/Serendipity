@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Show upload-success or error with the ajax image uploader
+
     * Fix preview entry exception (issue #119)
 
     * Add serendipity.toggle_collapsible as a reusable JS function

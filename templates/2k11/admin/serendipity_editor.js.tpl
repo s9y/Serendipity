@@ -1307,7 +1307,11 @@ $(function() {
         if ($('#uploadform').length > 0) {
             $('input[name="go_properties"]').hide();
             var progressIcon = document.createElement('span');
-            progressIcon.className = 'icon-info-circled'
+            progressIcon.className = 'uploadIcon icon-info-circled';
+            errorIcon = document.createElement('span');
+            errorIcon.className = 'uploadIcon icon-attention-circled';
+            successIcon = document.createElement('span');
+            successIcon.className = 'uploadIcon icon-ok-circled';
             $('#uploadform').submit(function(event) {
                 event.preventDefault();
                 $('.uploadform_userfile').each(function() {
@@ -1376,8 +1380,13 @@ $(function() {
                                         }
                                         }).done(function(data) {
                                             progress.value = 100;
+                                            progressContainer.className = "msg_success";
+                                            $(progressContainer).find('.uploadIcon').replaceWith(successIcon.cloneNode(true));
                                         }).fail(function(data) {
-                                            alert("fail:" + data.statusText);
+                                            progressContainer.className = "msg_error";
+                                            progress.disabled = true;
+                                            progressContainer.innerHTML += "{$CONST.ERROR_UNKNOWN_NOUPLOAD}";
+                                            $(progressContainer).find('.uploadIcon').replaceWith(errorIcon.cloneNode(true));
                                         })
                                 }, type);
                             }

@@ -340,6 +340,8 @@ switch ($serendipity['GET']['adminAction']) {
                             'created_thumbnail' => $created_thumbnail
                         );
                     } else {
+                        // necessary for the ajax-uplaoder to show upload errors
+                        header("Internal Server Error", true, 500);
                         $messages[] = ERROR_UNKNOWN_NOUPLOAD;
                     }
                 }
