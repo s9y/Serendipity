@@ -282,6 +282,12 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     /* get sidebar locations */
     serendipity_smarty_init();
 
+    if (isset($template_config['sidebars'])) {
+        // we save the sidebars set by the template here, because serendipity_loadThemeOption
+        // will otherwise overwrite it, since the move to a separate backend
+        $sidebars = $template_config['sidebars'][0];
+    }
+
     if (is_array($template_config)) {
         $template_vars =& serendipity_loadThemeOptions($template_config);
     }
@@ -290,6 +296,11 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         'event_col'  => 'event',
         'eventh_col' => 'eventh'
     );
+
+    if ((! isset($template_vars['sidebars'])) && isset($sidebars)) {
+        $template_vars['sidebars'] = $sidebars;
+    }
+
     if (isset($template_vars['sidebars'])) {
         $sidebars = explode(',', $template_vars['sidebars']);
     } elseif (isset($serendipity['sidebars'])) {
