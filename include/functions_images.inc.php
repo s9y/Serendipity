@@ -1988,7 +1988,7 @@ function serendipity_getImageFields() {
                                          'type' => 'date'
                                    ),
 
-            'i.extension'         => array('desc' => SORT_ORDER_EXTENSION
+            'i.name'              => array('desc' => SORT_ORDER_NAME
                                    ),
 
             'i.authorid'          => array('desc' => AUTHOR,
