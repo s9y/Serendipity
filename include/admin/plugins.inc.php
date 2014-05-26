@@ -345,7 +345,19 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                                   'install' => true);
         serendipity_plugin_api::hook_event('backend_plugins_fetchplugin', $fetchplugin_data);
 
-        if ($fetchplugin_data['install']) {
+        // we now have to check that the plugin is not already installed or stackable to prevent invalid double instances
+        $existingPlugin =& serendipity_plugin_api::load_plugin($serendipity['GET']['install_plugin']);
+        $new_plugin = true;
+        if (is_object($existingPlugin)) {
+            $bag = new serendipity_property_bag();
+            $existingPlugin->introspect($bag);
+            if ($bag->get('stackable') != true) {
+                $new_plugin = false;
+            }
+        }
+        $data['new_plugin_failed'] = ! $new_plugin;
+
+        if ($fetchplugin_data['install'] && $new_plugin) {
             $serendipity['debug']['pluginload'] = array();
             $inst = serendipity_plugin_api::create_plugin_instance($serendipity['GET']['install_plugin'], null, (serendipity_plugin_api::is_event_plugin($serendipity['GET']['install_plugin']) ? 'event': 'right'), $authorid, serendipity_db_escape_string($serendipity['GET']['pluginPath']));
 

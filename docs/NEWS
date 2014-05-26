@@ -4,6 +4,9 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Prevent "new" plugin api to install double instances of plugins
+      that are not stackable (issue #45)
+
     * Back button in plugin-config
 
     * Adapted serendipity_editor.js to provide more global (though
