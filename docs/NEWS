@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Back button in plugin-config
+
     * Adapted serendipity_editor.js to provide more global (though
       deprecated) API access methods for plugins like amazonchooser
       and linktrimmer, to perform insertion. Also fixed the
