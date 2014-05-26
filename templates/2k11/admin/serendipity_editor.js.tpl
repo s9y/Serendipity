@@ -1404,7 +1404,18 @@ $(function() {
                                             progress.disabled = true;
                                             progressContainer.innerHTML += "{$CONST.ERROR_UNKNOWN_NOUPLOAD}";
                                             $(progressContainer).find('.uploadIcon').replaceWith(errorIcon.cloneNode(true));
-                                        })
+                                        }).always(function() {
+                                            if ($('#ml_link').length == 0) {
+                                                var mlLink = document.createElement('a');
+                                                mlLink.id = "ml_link";
+                                                mlLink.className = "button_link";
+                                                mlLink.href = $('#uploadform').attr('action');
+                                                mlLink.innerHTML = "{$CONST.MEDIA_LIBRARY}";
+                                                $(mlLink).hide();
+                                                $('.form_buttons').prepend(mlLink);
+                                                $(mlLink).fadeIn();
+                                            }
+                                        });
                                 }, type);
                             }
                             image.src = readerEvent.target.result;
