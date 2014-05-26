@@ -4,6 +4,11 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Adapted serendipity_editor.js to provide more global (though
+      deprecated) API access methods for plugins like amazonchooser
+      and linktrimmer, to perform insertion. Also fixed the
+      insertion of text when the ID of the element is not prefixed
+      
     * Move sort by name to simple filter in ML, replace file extension
 
     * Remember selected media library folder

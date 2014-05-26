@@ -66,6 +66,11 @@
 
         // http://stackoverflow.com/questions/1712417/jquery-wrap-selected-text-in-a-textarea
         var $txtarea = $(txtarea);
+
+        if (!$txtarea.length) {
+            return;
+        }
+
         var len = $txtarea.val().length;
         var start = $txtarea[0].selectionStart;
         var end = $txtarea[0].selectionEnd;
@@ -73,8 +78,8 @@
         var replacement = openTag + selectedText + closeTag;
         $txtarea.val($txtarea.val().substring(0, start) + replacement + $txtarea.val().substring(end, len));
 
-        $txtarea[0].selectionStart = start + replacement.length
-        $txtarea[0].selectionEnd = start + replacement.length
+        $txtarea[0].selectionStart = start + replacement.length;
+        $txtarea[0].selectionEnd = start + replacement.length;
 
         if (scrollPos) {
             txtarea.focus();
@@ -243,7 +248,19 @@
     // which works fine in NO WYSIWYG mode
     // NOTE: the serendipity_imageSelector_addToBody could add any valid HTML string to the textarea
     serendipity.noWysiwygAdd = function(str, textarea) {
-        serendipity.wrapSelection($('#'+serendipity.escapeBrackets(textarea)), str, '');
+        escapedElement = serendipity.escapeBrackets(textarea);
+        if ($('#' + escapedElement).length) {
+            // Proper ID was specified (hopefully by plugins)
+        } else {
+            // Let's try the serendipity[] prefix
+            escapedElement = serendipity.escapeBrackets('serendipity[' + textarea + ']');
+
+            if (!$('#' + escapedElement).length) {
+                console.log("Serendipity plugin error: " + escapedElement + " not found.");
+            }
+        }
+
+        serendipity.wrapSelection($('#'+escapedElement), str, '');
     }
 
     // Inserting media db img markup including s9y-specific container markup
@@ -1463,7 +1480,7 @@ $(function() {
 });
 
 // This is kept for older plugins. Use of $(document).ready() is encouraged.
-// At some point, this will be removed.
+// At some point, these will be removed.
     addLoadEvent = function(func) {
         var oldonload = window.onload;
         if (typeof window.onload != 'function') {
@@ -1474,4 +1491,19 @@ $(function() {
                 func();
             }
         }
+    }
+
+    // Several plugins use this in the global scope. Those API functions are
+    // vital, so they reference to our new serendipity scope. This global
+    // scope is deprecated and subject to removal in the future.
+    serendipity_imageSelector_addToBody = function(block, textarea) {
+        return serendipity.serendipity_imageSelector_addToBody(block, textarea);
+    }
+
+    serendipity_imageSelector_done = function(textarea) {
+        return serendipity.serendipity_imageSelector_done(textarea);
+    }
+
+    serendipity_imageSelector_addToElement = function(str, id) {
+        return serendipity.serendipity_imageSelector_addToElement(str, id);
     }
