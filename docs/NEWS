@@ -13,7 +13,7 @@ Version 2.0-beta3 ()
       deprecated) API access methods for plugins like amazonchooser
       and linktrimmer, to perform insertion. Also fixed the
       insertion of text when the ID of the element is not prefixed
-      
+
     * Move sort by name to simple filter in ML, replace file extension
 
     * Remember selected media library folder
@@ -27,6 +27,8 @@ Version 2.0-beta3 ()
       an easy way to provide show/hide functionality. (yellowled)
 
     * Fixed media insert target bug (issued by #143, #145, #121)
+
+    * Fixed publish drafted-entries via dashboard (issue #160)
 
     * All frontend themes that rely on the bundled Core jQuery library
       are currently using the jquery.noConflict-mode for compatibility
