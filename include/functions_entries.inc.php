@@ -1403,12 +1403,11 @@ function serendipity_updertEntry($entry) {
         }
 
         if ($entry['isdraft'] === 0) {
-            $entry['isdraft'] = 'false'; // make sure to commit a string value with dashboards entry publish (only!)
+            $entry['isdraft']   = 'false'; // make sure to commit a string value with dashboards entry publish (only!)
+            $entry['timestamp'] = $_entry['timestamp']; // dashboard publishing a draft shall not set a new entry timestamp
         }
 
-        //if (!serendipity_db_bool($entry['isdraft']) && !serendipity_db_bool($_entry['isdraft'])) {
-            $entry['last_modified'] = time();
-        //}
+        $entry['last_modified'] = time();
 
         $res = serendipity_db_update('entries', array('id' => $entry['id']), $entry);
         $newEntry = 0;
