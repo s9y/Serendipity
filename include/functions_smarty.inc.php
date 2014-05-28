@@ -54,6 +54,18 @@ function &serendipity_printTrackbacks(&$trackbacks) {
 }
 
 /**
+ * Formats a HTML5 timestamp; our serendipity_formatTime handler uses strftime() which does not have this shortcut
+ *
+ * @access public
+ * @param  int  The unix timestamp to format
+ * @return timestamp in ISO-format
+ */
+function serendipity_smarty_html5time($timestamp) { 
+    return date("c", $timestamp); 
+}
+
+
+/**
  * Smarty: Fetch a smarty block and pass it on to Serendipity Templates - use with Smarty > 3.0 only
  *
  * @access public
@@ -928,11 +940,6 @@ function serendipity_smarty_init($vars = array()) {
             #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
             #$serendipity['smarty']->testInstall();exit;
 
-            // since 2k11/admin/entries.tpl is the default fallback for preview cases, we need to register that missing modifier for templates without tpls.
-            if (!function_exists('serendipity_smarty_html5time')) {
-                function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
-                $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
-            }
             /** 
              * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
              * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
@@ -945,6 +952,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('modifier', 'ifRemember', 'serendipity_ifRemember');
             $serendipity['smarty']->registerPlugin('modifier', 'checkPermission', 'serendipity_checkPermission');
             $serendipity['smarty']->registerPlugin('modifier', 'serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
+            $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
 
             $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
