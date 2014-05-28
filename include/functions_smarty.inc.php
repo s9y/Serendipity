@@ -880,7 +880,7 @@ function serendipity_smarty_init($vars = array()) {
             include_once $template_dir . '/template.inc.php';
         } else {
 
-            // Backend template overwritten here (NOT earlier due to frontend specific check
+            // Backend template overwritten here (NOT earlier due to frontend specific check)
             if (defined('IN_serendipity_admin')) {
                 $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
             }
@@ -1066,6 +1066,13 @@ function serendipity_smarty_init($vars = array()) {
                 }
 
             }
+        }
+
+        // FIRST: Load config of the currently configured FRONTEND template. We might actually need this in the backend (sidebar configuration, IPTC options, some others).
+        // SECOND: Load config of the currently set template, which can also be the BACKEND template, or be the same as before. include_once takes care of only including the file once.
+        $config =  $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/config.inc.php';
+        if (file_exists($config)) {
+            include_once $config;
         }
 
         $config = $serendipity['smarty']->getConfigDir(0) . '/config.inc.php';
