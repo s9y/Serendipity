@@ -43,7 +43,7 @@
 
                     <div class="form_field">
                         <label for="login_uid">{$CONST.USERNAME}</label>
-                        <input id="login_uid" name="serendipity[user]" type="text">
+                        <input id="login_uid" name="serendipity[user]" type="text" autofocus>
                     </div>
 
                     <div class="form_field">
