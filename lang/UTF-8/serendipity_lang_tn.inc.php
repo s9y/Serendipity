@@ -1046,3 +1046,4 @@ $i18n_unknown = 'tw';
 @define('LOG_LEVEL_DESC', 'At certain places in the Serendipity code we have placed debugging breakpoints. If this option is set to "Debug", it will write this debug output to templates_c/logs/. You should only enable this option if you are experiencing bugs in those areas, or if you are a developer. Setting this option to "Error" will enable logging PHP errors, overwriting the PHP error_log setting.');
 @define('DEBUG', 'Debug');
 @define('CUSTOM_CONFIG', 'Custom configuration file');
+@define('PLUGIN_ALREADY_INSTALLED', 'Plugin already installed, and does not support multiple installation ("stackable").');

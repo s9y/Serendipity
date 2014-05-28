@@ -147,7 +147,7 @@
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     {if $new_plugin_failed}
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: Plugin not stackable and already installed</span>  {* i18n *}
+        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
     <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
     <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
