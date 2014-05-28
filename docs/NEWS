@@ -4,6 +4,9 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Improved installer to forbid using database table prefixes with
+      special characters
+      
     * Themes using Engines are now able to use the parent's
       configuration
       

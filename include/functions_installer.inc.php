@@ -620,6 +620,8 @@ function serendipity_checkInstallation() {
 
     if (empty($_POST['dbPrefix']) && empty($serendipity['dbPrefix'])) {
         $errs[] = sprintf(EMPTY_SETTING, INSTALL_DBPREFIX);
+    } elseif (!preg_match('@^[a-z0-9_]+$@i', $_POST['dbPrefix'])) {
+        $errs[] = INSTALL_DBPREFIX_INVALID;
     }
 
     $serendipity['dbType'] = $_POST['dbType'];
