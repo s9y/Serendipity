@@ -62,6 +62,9 @@
                 </fieldset>
                 {$admin_vars.out.table}
             </form>
+            <script type="text/javascript">
+                document.forms.login.login_uid.focus()
+            </script>
             {$admin_vars.out.footer}
     {else}
         {if NOT $admin_vars.no_sidebar}
