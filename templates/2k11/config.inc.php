@@ -6,12 +6,6 @@ if (IN_serendipity !== true) { die ("Don't hack!"); }
 $serendipity['smarty']->assign(array('currpage'  => "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],
                                      'currpage2' => $_SERVER['REQUEST_URI']));
 
-if (!function_exists('serendipity_smarty_html5time')) {
-    function serendipity_smarty_html5time($timestamp) { return date("c", $timestamp); }
-
-    $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
-}
-
 if (class_exists('serendipity_event_spamblock')) {
     $required_fieldlist = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%spamblock%required_fields'", true, 'assoc');
 } elseif (class_exists('serendipity_event_commentspice')) {

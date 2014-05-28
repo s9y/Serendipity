@@ -282,6 +282,12 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     /* get sidebar locations */
     serendipity_smarty_init();
 
+    if (isset($template_config['sidebars'])) {
+        // we save the sidebars set by the template here, because serendipity_loadThemeOption
+        // will otherwise overwrite it, since the move to a separate backend
+        $sidebars = $template_config['sidebars'][0];
+    }
+
     if (is_array($template_config)) {
         $template_vars =& serendipity_loadThemeOptions($template_config);
     }
@@ -290,6 +296,11 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         'event_col'  => 'event',
         'eventh_col' => 'eventh'
     );
+
+    if ((! isset($template_vars['sidebars'])) && isset($sidebars)) {
+        $template_vars['sidebars'] = $sidebars;
+    }
+
     if (isset($template_vars['sidebars'])) {
         $sidebars = explode(',', $template_vars['sidebars']);
     } elseif (isset($serendipity['sidebars'])) {
@@ -334,7 +345,25 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                                   'install' => true);
         serendipity_plugin_api::hook_event('backend_plugins_fetchplugin', $fetchplugin_data);
 
-        if ($fetchplugin_data['install']) {
+        // we now have to check that the plugin is not already installed, or stackable, to prevent invalid double instances
+        $new_plugin = true;
+        foreach (serendipity_plugin_api::get_installed_plugins() as $pluginName) {
+            if ($serendipity['GET']['install_plugin'] === $pluginName) {
+                $existingPlugin =& serendipity_plugin_api::load_plugin($serendipity['GET']['install_plugin']);
+                if (is_object($existingPlugin)) {
+                    $bag = new serendipity_property_bag();
+                    $existingPlugin->introspect($bag);
+                    if ($bag->get('stackable') != true) {
+                        $new_plugin = false;
+                    }
+                }
+                break;
+            }
+        }
+        
+        $data['new_plugin_failed'] = ! $new_plugin;
+
+        if ($fetchplugin_data['install'] && $new_plugin) {
             $serendipity['debug']['pluginload'] = array();
             $inst = serendipity_plugin_api::create_plugin_instance($serendipity['GET']['install_plugin'], null, (serendipity_plugin_api::is_event_plugin($serendipity['GET']['install_plugin']) ? 'event': 'right'), $authorid, serendipity_db_escape_string($serendipity['GET']['pluginPath']));
 

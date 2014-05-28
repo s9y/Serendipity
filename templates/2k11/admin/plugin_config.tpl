@@ -42,6 +42,9 @@
         {if $postKey == "template"}
         <a class="button_link" href="?serendipity[adminModule]=templates">{$CONST.BACK}</a>
         {/if}
+        {if $postKey == "plugin"}
+         <a class="button_link" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
+        {/if}
         <input name="SAVECONF" type="submit" value="{$CONST.SAVE}">
     </div>
 {/if}
