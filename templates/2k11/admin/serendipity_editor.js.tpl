@@ -1305,7 +1305,7 @@ $(function() {
         });
     }
 
-    // UI-flow whe nselecting multiple images in ML upload
+    // UI-flow when selecting multiple images in ML upload
     if ($('.uploadform_userfile').length > 0) {
         $('.uploadform_userfile').change(function() {
             if ($(this).get(0).files.length > 1) {
