@@ -260,6 +260,22 @@ function serendipity_fetchTemplateInfo($theme, $abspath = null) {
 
     if (@is_file($serendipity['templatePath'] . $theme . '/config.inc.php')) {
         $data['custom_config'] = YES;
+        $data['custom_config_engine'] = $theme;
+    }
+
+    // Templates can depend on a possible "Engine" (i.e. "Engine: 2k11").
+    // We support the fallback chain also of a template's configuration, so let's check each engine for a config file.
+    if (!empty($data['engine'])) {
+        $engines = explode(',', $data['engine']);
+        foreach($engines AS $engine) {
+            $engine = trim($engine);
+            if (empty($engine)) continue;
+
+            if (@is_file($serendipity['templatePath'] . $engine . '/config.inc.php')) {
+                $data['custom_config'] = YES;
+                $data['custom_config_engine'] = $engine;
+            }
+        }
     }
 
     if ( $theme != 'default' && $theme != 'default-rtl'

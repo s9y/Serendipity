@@ -4,6 +4,9 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Themes using Engines are now able to use the parent's
+      configuration
+      
     * Prevent "new" plugin api to install double instances of plugins
       that are not stackable (issue #45)
 
@@ -49,7 +52,7 @@ Version 2.0-beta3 ()
       a backend theme would reference to.
 
     * Changed 2k11's config.inc.php file to provide a more stable
-      call of event hooks so that other templates can also hook
+      call of event hooks so that other themes can also hook
       their own events.
 
     * Changed JS for category filtering and its reset button to be a
