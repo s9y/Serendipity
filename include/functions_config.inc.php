@@ -261,7 +261,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
 
     $directories = array();
 
-    if (defined('IN_serendipity_admin')) {
+    if (defined('IN_serendipity_admin') && $serendipity['smarty_preview'] == false) {
         // Backend will always use our default backend (=defaultTemplate) as fallback.
         $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
         $directories[] = $serendipity['defaultTemplate'] .'/';
