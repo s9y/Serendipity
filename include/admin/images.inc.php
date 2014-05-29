@@ -719,7 +719,7 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
 }
 
 if (! isset($data['showML'])) {
-    // alaways having the ML available is useful when switchting the filter after adding an image, thus being i nthe add-case
+    // always having the ML available is useful when switching the filter after adding an image, thus being in the add-case
     $data['showML'] = showMediaLibrary();
 }
 
