@@ -1489,15 +1489,8 @@ $(function() {
     {/if}
 
     if ($('#serendipity_only_path').length > 0) {
-        if ($('#serendipity_only_path').val() != localStorage.getItem('serendipity_only_path')) {
-            var only_path = localStorage.getItem('serendipity_only_path');
-            if(only_path != null) {
-                $('#serendipity_only_path').val(only_path);
-                $('#media_library_control').submit();
-            }
-        }
         $('#serendipity_only_path').change(function() {
-            localStorage.setItem('serendipity_only_path', $('#serendipity_only_path').val());
+            serendipity.SetCookie('serendipity_only_path', $('#serendipity_only_path').val());
         });
     }
 

@@ -675,6 +675,7 @@ switch ($serendipity['GET']['adminAction']) {
         return;
 
     default:
+        serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']);
         $data['case_default'] = true;
         $data['showML'] = showMediaLibrary();
         break;
