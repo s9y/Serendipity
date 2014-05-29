@@ -27,19 +27,20 @@
         </div>
     </form>
 {/if}
-{if $switched_output}
+{if $case_multidelete}
     <form id="delete_image" method="get">
-    {if ( $is_delete || $is_multidelete )}
-        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
-        {foreach $rip_image AS $ripimg}
-        <span class="msg_hint"><span class="icon-help-circled"></span> {$ripimg}</span>
-        {/foreach}
-        <div class="form_buttons">
-            <a class="button_link icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
-            <a class="button_link icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>
-        </div>
-    {/if}
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
+    {foreach $rip_image AS $ripimg}
+    <span class="msg_hint"><span class="icon-help-circled"></span> {$ripimg}</span>
+    {/foreach}
+    <div class="form_buttons">
+        <a class="button_link state_cancel icon_link" href="{$abortLoc}">{$CONST.BACK}</a>
+        <a class="button_link state_submit icon_link" href="{$newLoc}">{$CONST.DUMP_IT}</a>
+    </div>
     </form>
+{/if}
+{if $case_do_multidelete || $case_do_delete}
+    {if $showML}{$showML}{/if}
 {/if}
 {if $case_rename}
     {if $go_back}

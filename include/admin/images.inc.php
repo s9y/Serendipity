@@ -58,13 +58,15 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         $messages = array();
-        $data['switched_output'] = true;
-        $data['is_doDelete']     = true;
+        $data['case_do_delete'] = true;
         $messages[] = serendipity_deleteImage($serendipity['GET']['fid']);
         $messages[] = sprintf(RIP_ENTRY, $serendipity['GET']['fid']);
 
-        showMediaLibrary($messages);
+        $data['showML'] = showMediaLibrary();
+        $data['messages'] = $messages;
         unset($messages);
+        break;
+ 
 
     case 'doMultiDelete':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
@@ -73,8 +75,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $messages = array();
         $parts = explode(',', $serendipity['GET']['id']);
-        $data['switched_output']  = true;
-        $data['is_doMultiDelete'] = true;
+        $data['case_do_multidelete'] = true;
         foreach($parts AS $id) {
             $id = (int)$id;
             if ($id > 0) {
@@ -83,8 +84,10 @@ switch ($serendipity['GET']['adminAction']) {
                 $messages[] = sprintf(RIP_ENTRY, $image['id'] . ' - ' . htmlspecialchars($image['realname']));
             }
         }
-        showMediaLibrary($messages);
+        $data['showML'] = showMediaLibrary();
+        $data['messages'] = $messages;
         unset($messages);
+        break;
 
     case 'delete':
         $file     = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
@@ -94,7 +97,6 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         $data['case_delete'] = true;
-        $data['is_delete']   = true;
         if (!isset($serendipity['adminFile'])) {
             $serendipity['adminFile'] = 'serendipity_admin.php';
         }
@@ -113,7 +115,6 @@ switch ($serendipity['GET']['adminAction']) {
         $ids = '';
         $data['rip_image']        = array();
         $data['case_multidelete'] = true;
-        $data['is_multidelete']   = true;
         foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
             $ids .= (int)$id . ',';
             $image = serendipity_fetchImageFromDatabase($id);
@@ -124,7 +125,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
         $abortLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?serendipity[adminModule]=images';
         $newLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
-        $data['switched_output'] = true;
+        $data['case_confirm_deletion'] = true;
         $data['abortLoc']        = $abortLoc;
         $data['newLoc']          = $newLoc;
         break;
@@ -683,7 +684,7 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
     global $serendipity;
     
     if (!serendipity_checkPermission('adminImagesView')) {
-            return;
+        return;
     }
     $output = "";
 
