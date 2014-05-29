@@ -1313,7 +1313,13 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
         return false;
     }
 
-    $in = $func['load']($infilename);
+    try {
+        // if an image exist that can not be loaded (invalid gif for example), the page shall still be rendered
+        $in = $func['load']($infilename);
+    } catch (Exception $e) {
+        echo 'Could not create thumbnail: ',  $e->getMessage(), "\n";
+        return false;
+    }
     $width = imagesx($in);
     $height = imagesy($in);
 
