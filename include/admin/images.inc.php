@@ -161,7 +161,7 @@ switch ($serendipity['GET']['adminAction']) {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
             $created_thumbnail = true;
-            $data['showML_add'] = showMediaLibrary($messages, true);
+            $data['showML'] = showMediaLibrary($messages, true);
             break;
         }
 
@@ -359,7 +359,7 @@ switch ($serendipity['GET']['adminAction']) {
             foreach($new_media AS $nm) {
                 serendipity_insertMediaProperty('base_hidden', '', $nm['image_id'], $hidden);
             }
-            $data['showML_add'] = showMediaLibrary(null, true);
+            $data['showML'] = showMediaLibrary(null, true);
         }
         $data['messages'] = $messages;
         break;
@@ -675,7 +675,7 @@ switch ($serendipity['GET']['adminAction']) {
 
     default:
         $data['case_default'] = true;
-        $data['showML_def'] = showMediaLibrary();
+        $data['showML'] = showMediaLibrary();
         break;
 }
 
@@ -714,6 +714,11 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
         $smarty_vars
     );
     return $output;
+}
+
+if (! isset($data['showML'])) {
+    // alaways having the ML available is useful when switchting the filter after adding an image, thus being i nthe add-case
+    $data['showML'] = showMediaLibrary();
 }
 
 $data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime

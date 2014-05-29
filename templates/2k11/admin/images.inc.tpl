@@ -61,7 +61,7 @@
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {else}
-    {$showML_add}
+    {$showML}
     {/if}
 {/if}
 {if $case_directoryDoDelete}
@@ -290,5 +290,5 @@
     </div>
 {/if}
 {if $case_default}
-    {if $showML_def}{$showML_def}{/if}
+    {if $showML}{$showML}{/if}
 {/if}
