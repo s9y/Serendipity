@@ -323,7 +323,7 @@ function serendipity_deleteImage($id) {
     $file   = serendipity_fetchImageFromDatabase($id);
 
     if (!is_array($file)) {
-        $messages .= sprintf(FILE_NOT_FOUND . '<br />', $id);
+        $messages .= sprintf(FILE_NOT_FOUND . ' ', $id);
         //return false;
     } else { 
 
@@ -345,9 +345,9 @@ function serendipity_deleteImage($id) {
         if (!$file['hotlink']) {
             if (file_exists($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
                 if (@unlink($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
-                    $messages .= sprintf(DELETE_FILE . '<br />', $dFile);
+                    $messages .= sprintf(DELETE_FILE . ' ', $dFile);
                 } else {
-                    $messages .= sprintf(DELETE_FILE_FAIL . '<br />', $dFile);
+                    $messages .= sprintf(DELETE_FILE_FAIL . ' ', $dFile);
                 }
 
                 serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
@@ -356,14 +356,14 @@ function serendipity_deleteImage($id) {
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
                     if (@unlink($dfThumb)) {
-                        $messages .= sprintf(DELETE_THUMBNAIL . '<br />', $dfnThumb);
+                        $messages .= sprintf(DELETE_THUMBNAIL . ' ', $dfnThumb);
                     }
                 }
             } else {
-                $messages .= sprintf(FILE_NOT_FOUND . '<br />', $dFile);
+                $messages .= sprintf(FILE_NOT_FOUND . ' ', $dFile);
             }
         } else {
-            $messages .= sprintf(DELETE_HOTLINK_FILE . '<br />', $file['name']);
+            $messages .= sprintf(DELETE_HOTLINK_FILE . ' ', $file['name']);
         }
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
