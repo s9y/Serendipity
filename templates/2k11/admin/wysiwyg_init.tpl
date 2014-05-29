@@ -40,6 +40,17 @@
             customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_config.js',
             extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
             
+             on: {
+                instanceReady: function( evt ) {
+                    CKEDITOR.instances["{$item}"].document.once('keyup', function() {
+                        setInterval(function() {
+                            console.log("save");
+                            serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
+                        }, 5000)
+                    });
+                }
+            },
+            
             toolbar: [
                 { name: 'tools', items: [ 'Maximize' ] },
                 { name: 'styles', items: [ 'Format' ] },

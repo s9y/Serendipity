@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Use Browsercache to save cache and restore entries
+    
     * Improved installer to forbid using database table prefixes with
       special characters
       

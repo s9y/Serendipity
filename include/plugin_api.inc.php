@@ -94,6 +94,10 @@ function errorHandlerCreateDOM(htmlStr) {
             }
             break;
 
+            case 'backend_save':
+            case 'backend_publish':
+                echo '<script>$(document).ready(function() { serendipity.eraseEntryEditorCache(); });</script>';
+
         return true;
         break;
     }

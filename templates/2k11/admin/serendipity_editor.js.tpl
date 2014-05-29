@@ -660,6 +660,66 @@
         }
     }
 
+    serendipity.startEntryEditorCache = function() {
+        if ($('textarea[name="serendipity[body]"]').val() == "") {
+            serendipity.getCached("serendipity[body]",  function(res) {
+                if (res && res != null && res != "null") {
+                    $('textarea[name="serendipity[body]"]').text(res);
+                }
+            });
+            serendipity.getCached("serendipity[extended]",  function(res) {
+                if (res && res != null && res != "null") {
+                    if ($('textarea[name="serendipity[extended]"]').val() == "") {
+                        $('textarea[name="serendipity[extended]"]').text(res);
+                        if (! $('textarea[name="serendipity[extended]"]').is(':visible')) {
+                            serendipity.toggle_extended();
+                        }
+                    }
+                }
+            });
+        }
+
+        $('textarea[name="serendipity[body]"]').one('keyup', function() {
+            setInterval(function() {
+                serendipity.cache("serendipity[body]", $('textarea[name="serendipity[body]"]').val())
+            }, 5000);
+        });
+        $('textarea[name="serendipity[extended]"]').one('keyup', function() {
+            setInterval(function() {
+                serendipity.cache("serendipity[extended]", $('textarea[name="serendipity[extended]"]').val());
+            }, 5000);
+        });
+    }
+
+    serendipity.eraseEntryEditorCache = function() {
+        serendipity.cache("serendipity[body]", null);
+        serendipity.cache("serendipity[extended]", null);;
+    }
+
+    var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+    serendipity.cache = function (id, data) {
+        var request = indexedDB.open("cache", 1);
+        request.onupgradeneeded = function (event) {
+            event.target.result.createObjectStore("cache");
+        };
+        request.onsuccess = function(event) {
+            event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").put(data, id);
+        };
+    }
+
+    serendipity.getCached = function(id, success) {
+        var request = indexedDB.open("cache", 1);
+        request.onupgradeneeded = function (event) {
+            event.target.result.createObjectStore("cache");
+        };
+        request.onsuccess = function(event) {
+            event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").get(id).onsuccess = function (event) {
+                success(event.target.result);
+            };
+        };
+    }
+
     serendipity.toggle_collapsible = function(toggler, target, stateClass, stateIcon, stateOpen, stateClosed) {
         // argument defaults
         stateClass = stateClass || 'additional_info';
@@ -945,6 +1005,7 @@ $(function() {
         if(!Modernizr.inputtypes.date) {
             $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
         }
+        serendipity.startEntryEditorCache();
     }
 
     // Set entry timestamp
