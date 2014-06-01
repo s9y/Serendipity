@@ -3,6 +3,7 @@
 
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
+    * Add otpional subToMe-button to syndication plugin
 
     * Use Browsercache to save cache and restore entries
     

@@ -9,7 +9,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.4');
+        $propbag->add('version',       '1.5');
         $propbag->add('configuration', array(
                                         'title',
                                         'fullfeed',
@@ -41,6 +41,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                         'big_img',
                                         'feed_name',
                                         'comment_name',
+                                        'subToMe'
                                        )
         );
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
@@ -275,6 +276,14 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     '');
                 break;
 
+            case 'subToMe':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        SYNDICATION_PLUGIN_SUBTOME);
+                $propbag->add('description', SYNDICATION_PLUGIN_SUBTOME_DESC);
+                $propbag->add('default',     false);
+                break;
+
+
             default:
                 return false;
         }
@@ -308,6 +317,18 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 ?>
         <div style="padding-bottom: 2px;">
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" /></a>
+        </div>
+<?php
+        }
+
+        if (serendipity_db_bool($this->get_config('subToMe', true))) {
+?>
+        <div>
+            <a  href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
+                onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;">
+                <img id="serendipity_syndication_subToMe" class="serendipity_xml_icon" src="<?php echo serendipity_getTemplateFile('img/subtome.png'); ?>"
+                alt="subToMe" />
+            </a>
         </div>
 <?php
         }
@@ -410,6 +431,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
     </li>
 <?php
         }
+
         echo '</ul>';
     }
 
