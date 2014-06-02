@@ -642,6 +642,8 @@ pre .geshi {
     color: #468847;
 }
 
+/* If the basic styles for aligning images are changed, the changes
+   must be ported to htmlarea/ckeditor/wysiwyg-style.css as well. */
 .serendipity_image_left,
 .serendipity_image_right,
 .serendipity_image_center,
