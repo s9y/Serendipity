@@ -79,27 +79,9 @@ function errorHandlerCreateDOM(htmlStr) {
     }
     return frag;
 } \n";
-			$eHCD = true;
             }
             break;
             
-        case 'frontend_header':
-            // This is frontend fallback for themes without $head_link_script, desc see above
-            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN && !$eHCD ) {
-                echo "<script>
-function errorHandlerCreateDOM(htmlStr) {
-    var frag = document.createDocumentFragment(),
-        temp = document.createElement('div');
-        temp.innerHTML = htmlStr;
-    while (temp.firstChild) {
-        frag.appendChild(temp.firstChild);
-    }
-    return frag;
-}
-</script> \n";
-            }
-            break;
-
         case 'external_plugin':
             switch ($eventData) {
                 case 'admin/serendipity_editor.js':
