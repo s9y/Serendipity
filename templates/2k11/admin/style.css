@@ -1536,6 +1536,7 @@ form > .button_link:first-of-type,
 }
 
 #serendipity_comments_list .actions {
+    float: left;
     margin: .75em 0;
 }
 
