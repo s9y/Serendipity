@@ -1756,7 +1756,6 @@ END_IMG_CSS;
 <div class='form_buttons'>
 <input class='invert_selection' name='toggle' type='button' value='".INVERT_SELECTIONS."'> 
 <input class='state_cancel' name='serendipity[delete_button]' type='submit' title='" . PLUGIN_KARMA_DELETE_VOTES . "' value='" . DELETE . "'>
-<input name='serendipity[approve_button]' type='submit' title='" . PLUGIN_KARMA_APPROVE_VOTES . "' value='" . APPROVE . "'>
 </div>
 </form>
 ");
@@ -2054,6 +2053,11 @@ END_IMG_CSS;
 ";
             }
         }
+        
+        if (empty($karma_display)) {
+            $karma_display = "[" . $karma . "]";
+        }
+        
         return $karma_display;
     }
 
