@@ -15,6 +15,12 @@
         <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|@escape}">
     </div>
 
+    <div id="category_list" class="clearfix">
+        <h3>{$CONST.CATEGORIES}</h3>
+
+        <ul class="plainList"></ul>
+    </div>
+
     <div class="form_area">
         <label for="serendipity[body]">{$CONST.ENTRY_BODY}</label>
     {if NOT $entry_vars.wysiwyg}
@@ -32,12 +38,6 @@
         </div>
     {/if}
         <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|@escape}</textarea>
-    </div>
-
-    <div id="category_list" class="clearfix">
-        <h3>{$CONST.CATEGORIES}</h3>
-
-        <ul class="plainList"></ul>
     </div>
 
     <div id="edit_entry_submit">

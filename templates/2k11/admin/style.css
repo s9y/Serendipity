@@ -1660,14 +1660,18 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+#category_list:hover {
+    cursor: pointer;
+}
+
 #category_list h3 {
     float: left;
     line-height: 1.5em;
-    margin: 0 2em .75em 0;
+    margin: .375em 2em .375em 0;
 }
 
 #category_list ul {
-    margin: 0 0 .75em;
+    margin: .375em 0;
     line-height: 1.5em;
 }
 
