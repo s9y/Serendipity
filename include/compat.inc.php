@@ -142,9 +142,10 @@ if (!function_exists('errorToExceptionHandler')) {
                     // while being in tags like <select> to push on top of page, else return non javascript use $str just there
                     // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
                     echo "\n".'<script>
+if(typeof errorHandlerCreateDOM == "function") {
 var fragment = window.top.errorHandlerCreateDOM("Error redirect: '.addslashes($str).'");
 document.body.insertBefore(fragment, document.body.childNodes[0]);
-' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
+}' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
                 }
             }
         }
