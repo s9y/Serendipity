@@ -792,7 +792,6 @@ function serendipity_iframe(&$entry, $mode = null) {
         return false;
     }
 
-    $serendipity['smarty_preview']  = true;
 
     $data = array();
     $data['is_preview'] =  true;
@@ -814,6 +813,7 @@ function serendipity_iframe(&$entry, $mode = null) {
             break;
 
         case 'preview':
+            $serendipity['smarty_preview']  = true;
             $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
             break;
     }
