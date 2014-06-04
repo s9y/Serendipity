@@ -1661,7 +1661,8 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
-#category_list:hover {
+#category_list h3:hover,
+#category_list li:hover {
     cursor: pointer;
 }
 

@@ -1073,7 +1073,7 @@ $(function() {
     // Show category selector
     {if $use_popups}
         if($('#serendipityEntry').length > 0) {
-            $('#select_category, #category_list').click(function(e) {
+            $('#select_category, #category_list h3, #category_list li').click(function(e) {
                 $('#edit_entry_category').toggleClass('mfp-hide');
                 $('#toggle_metadata').click();
             });
