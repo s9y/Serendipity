@@ -62,7 +62,7 @@ function serendipity_gzCompression() {
 function serendipity_serverOffsetHour($timestamp = null, $negative = false) {
     global $serendipity;
 
-    if ($timestamp == null) {
+    if ($timestamp === null) {
         $timestamp = time();
     }
 
