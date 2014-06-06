@@ -15,6 +15,7 @@ include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 
 if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && serendipity_checkFormToken()) {
+
     if (isset($_GET['serendipity']['event_plugin'])) {
         $plugins = serendipity_plugin_api::enum_plugins('event', false);
     } else {
@@ -56,6 +57,7 @@ if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && s
 }
 
 if (isset($_GET['serendipity']['plugin_to_conf'])) {
+
     /* configure a specific instance */
     $plugin =& serendipity_plugin_api::load_plugin($_GET['serendipity']['plugin_to_conf']);
 
@@ -145,6 +147,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
 } elseif ( $serendipity['GET']['adminAction'] == 'addnew' ) {
+
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
     
@@ -265,7 +268,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 }
             }
 
-            if ( !empty($plug['requirements']['smarty']) && version_compare($plug['requirements']['smarty'], '2.6.7', '>') ) {
+            if ( !empty($plug['requirements']['smarty']) && version_compare($plug['requirements']['smarty'], str_replace('Smarty-', '', Smarty::SMARTY_VERSION), '>') ) {
                 if (isset($requirement_failures[$plug['class_name']])) {
                      $requirement_failures[$plug['class_name']] = array_merge($requirement_failures[$plug['class_name']] , array("smarty" => true));
                 } else {
@@ -275,7 +278,9 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             
         }
     }
+
     $data['requirements_failues'] = $requirement_failures;
+
 } else {
     /* show general plugin list */
 
@@ -307,10 +312,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         $pos=0;
         foreach($_POST['serendipity']['plugin'] as $plugin) {
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins
-                                        SET
-                                    sort_order = ".  $pos . "
-                                WHERE
-                                    name='" . serendipity_db_escape_string($plugin['id']) . "'");
+                                     SET sort_order = ".  $pos . "
+                                   WHERE name='" . serendipity_db_escape_string($plugin['id']) . "'");
         
             serendipity_plugin_api::update_plugin_placement(
                 addslashes($plugin['id']),
