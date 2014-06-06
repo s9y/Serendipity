@@ -254,6 +254,13 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['only_group'] = $serendipity['GET']['only_group'];
     $requirement_failures = array();
     
+    //debug
+    echo SMARTY_DIR;
+    if (!class_exists('Smarty')) {
+        @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+        include_once SMARTY_DIR . 'Smarty.class.php';
+    }
+
     foreach($pluggroups AS $pluggroup => $groupstack) {
         foreach ($groupstack as $plug) {
             if ( !empty($plug['requirements']['serendipity']) && version_compare($plug['requirements']['serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
