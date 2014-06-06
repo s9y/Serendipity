@@ -13,6 +13,10 @@ $data = array();
 include_once S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
+if (!class_exists('Smarty')) {
+    @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
+    include_once SMARTY_DIR . 'Smarty.class.php';
+}
 
 if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && serendipity_checkFormToken()) {
 
@@ -254,13 +258,6 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['only_group'] = $serendipity['GET']['only_group'];
     $requirement_failures = array();
     
-    //debug
-    echo SMARTY_DIR;
-    if (!class_exists('Smarty')) {
-        @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
-        include_once SMARTY_DIR . 'Smarty.class.php';
-    }
-
     foreach($pluggroups AS $pluggroup => $groupstack) {
         foreach ($groupstack as $plug) {
             if ( !empty($plug['requirements']['serendipity']) && version_compare($plug['requirements']['serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
