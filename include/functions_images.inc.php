@@ -1901,15 +1901,17 @@ function serendipity_deletePath($dir) {
 }
 
 /**
- * Check if a entered HTTP upload path is valid
+ * Transform a filename into a valid  upload path
  *
  * @access public
  * @param   string      The input filename
  * @param   boolean     Shall all paths be stripped?
  * @param   boolean     Shall a trailing slash be appended?
- * @return  string      The condom-wrapped path/file info
+ * @return  string      The valid filename
  */
 function serendipity_uploadSecure($var, $strip_paths = true, $append_slash = false) {
+
+    $var = str_replace(' ', '_', $var); 
     $var = preg_replace('@[^0-9a-z\._/-]@i', '', $var);
     if ($strip_paths) {
         $var = preg_replace('@(\.+[/\\\\]+)@', '/', $var);
