@@ -343,13 +343,14 @@ function serendipity_db_probe($hash, &$errs)
 function serendipity_db_schema_import($query)
 {
     static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
-    static $replace = array('INTEGER', 'PRIMARY KEY', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');
+    static $replace = array('INTEGER AUTOINCREMENT', 'PRIMARY KEY', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');
 
     if (stristr($query, '{FULLTEXT_MYSQL}')) {
         return true;
     }
 
     $query = trim(str_replace($search, $replace, $query));
+    $query = str_replace('INTEGER AUTOINCREMENT PRIMARY KEY', 'INTEGER PRIMARY KEY AUTOINCREMENT', $query);
     if ($query[0] == '@') {
         // Errors are expected to happen (like duplicate index creation)
         return serendipity_db_query(substr($query, 1), false, 'both', false, false, false, true);

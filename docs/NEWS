@@ -3,6 +3,9 @@
 
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
+    * Support added in serendipity_db_schema_import for sqlite 
+      autoincrement
+
     * Remove Google Reader button from syndication plugin options
     
     * Add subToMe-button to syndication plugin and change its defaults
