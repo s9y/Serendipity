@@ -9,10 +9,12 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '2.0');
         $propbag->add('configuration', array(
                                         'title',
                                         'fullfeed',
+                                        'big_img',
+                                        'subToMe',
                                         'show_0.91',
                                         'show_1.0',
                                         'show_2.0',
@@ -38,10 +40,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                         'fb_title',
                                         'fb_alt',
                                         'fb_img',
-                                        'big_img',
                                         'feed_name',
-                                        'comment_name',
-                                        'subToMe'
+                                        'comment_name'
                                        )
         );
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
@@ -79,28 +79,28 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_091);
                 $propbag->add('description', '');
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'show_1.0':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_10);
                 $propbag->add('description', '');
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'show_2.0':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_20);
                 $propbag->add('description', '');
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'show_2.0c':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_20c);
                 $propbag->add('description', '');
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'show_atom0.3':
@@ -110,28 +110,11 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     'false');
                 break;
 
-            case 'show_googlereader':
-                $radio = array();
-                
-                $radio['value'][] = 'true';
-                $radio['desc'][]  = YES;
-                
-                $radio['value'][] = 'false';
-                $radio['desc'][]  = NO;
-
-                $propbag->add('type',        'radio');
-                $propbag->add('radio_per_row', '2');
-                $propbag->add('radio',       $radio);
-                $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Google Reader'));
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-
             case 'show_atom1.0':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'));
                 $propbag->add('description', '');
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'show_opml1.0':
@@ -259,7 +242,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'string');
                 $propbag->add('name',        SYNDICATION_PLUGIN_BIGIMG);
                 $propbag->add('description', SYNDICATION_PLUGIN_BIGIMG_DESC);
-                $propbag->add('default',     '');
+                $propbag->add('default',     'templates/2k11/img/subtome.png');
                 break;
 
             case 'feed_name':
@@ -280,7 +263,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_SUBTOME);
                 $propbag->add('description', SYNDICATION_PLUGIN_SUBTOME_DESC);
-                $propbag->add('default',     false);
+                $propbag->add('default',     true);
                 break;
 
 
@@ -300,9 +283,10 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $custom_feed = trim($this->get_config('feed_name'));
         $custom_comm = trim($this->get_config('comment_name'));
         $custom_img  = trim($this->get_config('big_img'));
+        $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
 
         if (empty($custom_feed) || $custom_feed == 'default' || $custom_feed == 'none' || $custom_feed == 'empty') {
-            $FEED = 'feed';
+            $FEED = 'Feed';
         } else {
             $FEED = $custom_feed;
         }
@@ -313,27 +297,52 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $COMMENTS = $custom_comm;
         }
 
-        if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
 ?>
-        <div style="padding-bottom: 2px;">
+<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">
+<?php
+        if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty' && ! $subtome) {
+?>
+        <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" /></a>
-        </div>
+        </li>
 <?php
         }
 
-        if (serendipity_db_bool($this->get_config('subToMe', true))) {
+        if ($subtome) {
+            if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
 ?>
-        <div>
-            <a  href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
-                onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;">
-                <img id="serendipity_syndication_subToMe" class="serendipity_xml_icon" src="<?php echo serendipity_getTemplateFile('img/subtome.png'); ?>"
-                alt="subToMe" />
-            </a>
-        </div>
+                <li>
+                    <a class="serendipity_xml_icon"
+                        href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
+                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
+                    >
+                        <img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" />
+                    </a>
+                </li>
 <?php
+            } else {
+?>
+                <li>
+                    <a class="serendipity_xml_icon"
+                        href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
+                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
+                    >
+                        <img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" />
+                    </a>
+                    <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
+                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
+                    >
+                        <?php echo $FEED; ?><!-- i18n -->
+                    </a>
+                </li>
+<?php
+            }
         }
 
-?><ul class="plainList"><?php
+?>
+
+
+<?php
 
         if (serendipity_db_bool($this->get_config('show_0.91', true))) {
 ?>
@@ -394,14 +403,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         <li>
             <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
             <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_googlereader', false))) {
-?>
-        <li class="serendipity_googlereader">
-            <a href="http://fusion.google.com/add?source=atgs&amp;feedurl=<?php echo urlencode(rtrim($serendipity['baseURL'], '/') . serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath')); ?>"><img src="http://buttons.googlesyndication.com/fusion/add.gif" border="0" alt="Add to Google"></a>
         </li>
 <?php
         }
