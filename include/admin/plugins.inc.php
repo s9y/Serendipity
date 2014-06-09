@@ -344,17 +344,20 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
         // we now have to check that the plugin is not already installed, or stackable, to prevent invalid double instances
         $new_plugin = true;
-        foreach (serendipity_plugin_api::get_installed_plugins() as $pluginName) {
-            if ($serendipity['GET']['install_plugin'] === $pluginName) {
-                $existingPlugin =& serendipity_plugin_api::load_plugin($serendipity['GET']['install_plugin']);
-                if (is_object($existingPlugin)) {
-                    $bag = new serendipity_property_bag();
-                    $existingPlugin->introspect($bag);
-                    if ($bag->get('stackable') != true) {
-                        $new_plugin = false;
+        if ($fetchplugin_data['install']) {
+            // spartacus will set this to false on upgrade, and we want to check this only on install
+            foreach (serendipity_plugin_api::get_installed_plugins() as $pluginName) {
+                if ($serendipity['GET']['install_plugin'] === $pluginName) {
+                    $existingPlugin =& serendipity_plugin_api::load_plugin($serendipity['GET']['install_plugin']);
+                    if (is_object($existingPlugin)) {
+                        $bag = new serendipity_property_bag();
+                        $existingPlugin->introspect($bag);
+                        if ($bag->get('stackable') != true) {
+                            $new_plugin = false;
+                        }
                     }
+                    break;
                 }
-                break;
             }
         }
         
