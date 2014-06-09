@@ -83,7 +83,7 @@
                         {/foreach}
                     </table>
                 </div>
-                <script type="text/javascript" language="javascript">
+                <script type="text/javascript">
                 {if $media.keywords_selected != '' OR $show_filter}showFilters();{/if}
                 </script>
             </td>
