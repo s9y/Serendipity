@@ -560,7 +560,8 @@ class serendipity_event_karma extends serendipity_event
             || stristr($agent, 'LinkWalker')
             || stristr($agent, 'zermelo')
             || stristr($agent, 'NimbleCrawler')
-            || stristr($agent, 'archive.org_bot')) {
+            || stristr($agent, 'archive.org_bot')
+            || stristr($agent, 'waybackarchive.org')) {
             $this->karmaVote = 'invalid1';
             return ;
         }
