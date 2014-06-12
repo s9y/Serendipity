@@ -235,6 +235,7 @@
             return;
         } else if (typeof(CKEDITOR) != 'undefined') {
             oEditor = (typeof(isinstance) == 'undefined') ? CKEDITOR.instances[textarea] : isinstance;
+            if (typeof(oEditor) == 'undefined') oEditor = popupEditorInstance;
             if (oEditor.mode == "wysiwyg") {
                 oEditor.insertHtml(str);
                 return;

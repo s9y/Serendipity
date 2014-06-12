@@ -23,7 +23,8 @@
             CKEDITOR.plugins.add('{$button.id}', {
                 init: function( editor ) {
                     editor.addCommand( '{$button.name}', {
-                        exec : {$button.javascript}
+                        popupEditorInstance = editor;
+                        ( {$button.javascript} () )
                     });
                     editor.ui.addButton('{$button.id}', {
                         label: '{$button.name}',
@@ -36,16 +37,17 @@
         {/foreach}
             
         
-        CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
-            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_config.js',
-            extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
+        ckeitem = '{$item}';
+        CKEDITOR.replace($('#'+serendipity.escapeBrackets(ckeitem)).get(0), {
+            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor_custom_config.js',
+            extraPlugins : 'mediaembed,procurator,cheatsheet,s9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
             
-             on: {
+            on: {
                 instanceReady: function( evt ) {
-                    CKEDITOR.instances["{$item}"].document.once('keyup', function() {
+                    CKEDITOR.instances[ckeitem].document.once('keyup', function() {
                         setInterval(function() {
                             console.log("save");
-                            serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
+                            serendipity.cache(ckeitem, CKEDITOR.instances[ckeitem].getData());
                         }, 5000)
                     });
                 }
