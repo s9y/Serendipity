@@ -43,8 +43,8 @@
         
         ckeitem = '{$item}';
         CKEDITOR.replace($('#'+serendipity.escapeBrackets(ckeitem)).get(0), {
-            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor_custom_config.js',
-            extraPlugins : 'mediaembed,procurator,cheatsheet,s9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
+            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_config.js',
+            extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
             
             on: {
                 instanceReady: function( evt ) {
