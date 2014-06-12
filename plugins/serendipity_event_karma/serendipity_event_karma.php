@@ -1994,11 +1994,11 @@ END_IMG_CSS;
                 $enough_votes = true;
             } else {
                 // Create ordinary links
-                $link_1 = "<a class='serendipity_karmaVoting_link1' rel='nofollow' href='%5\$sserendipity[karmaVote]=-2&amp;serendipity[karmaId]=$id#karma_vote$id' title='$vile'>$vilestr</a>";
-                $link_2 = "<a class='serendipity_karmaVoting_link2' rel='nofollow' href='%5\$sserendipity[karmaVote]=-1&amp;serendipity[karmaId]=$id#karma_vote$id' title='$poor'>$poorstr</a>";
-                $link_3 = "<a class='serendipity_karmaVoting_link3' rel='nofollow' href='%5\$sserendipity[karmaVote]=0&amp;serendipity[karmaId]=$id#karma_vote$id' title='$okay'> $okaystr</a>";
-                $link_4 = "<a class='serendipity_karmaVoting_link4' rel='nofollow' href='%5\$sserendipity[karmaVote]=1&amp;serendipity[karmaId]=$id#karma_vote$id' title='$good'>$goodstr</a>";
-                $link_5 = "<a class='serendipity_karmaVoting_link5' rel='nofollow' href='%5\$sserendipity[karmaVote]=2&amp;serendipity[karmaId]=$id#karma_vote$id' title='$best'>$beststr</a>";
+                $link_1 = "<a class='serendipity_karmaVoting_link1' rel='nofollow' href='%5\$sserendipity%%5BkarmaVote%%5D=-2&amp;serendipity%%5BkarmaId%%5D=$id#karma_vote$id' title='$vile'>$vilestr</a>";
+                $link_2 = "<a class='serendipity_karmaVoting_link2' rel='nofollow' href='%5\$sserendipity%%5BkarmaVote%%5D=-1&amp;serendipity%%5BkarmaId%%5D=$id#karma_vote$id' title='$poor'>$poorstr</a>";
+                $link_3 = "<a class='serendipity_karmaVoting_link3' rel='nofollow' href='%5\$sserendipity%%5BkarmaVote%%5D=0&amp;serendipity%%5BkarmaId%%5D=$id#karma_vote$id' title='$okay'> $okaystr</a>";
+                $link_4 = "<a class='serendipity_karmaVoting_link4' rel='nofollow' href='%5\$sserendipity%%5BkarmaVote%%5D=1&amp;serendipity%%5BkarmaId%%5D=$id#karma_vote$id' title='$good'>$goodstr</a>";
+                $link_5 = "<a class='serendipity_karmaVoting_link5' rel='nofollow' href='%5\$sserendipity%%5BkarmaVote%%5D=2&amp;serendipity%%5BkarmaId%%5D=$id#karma_vote$id' title='$best'>$beststr</a>";
             }
         }
 
