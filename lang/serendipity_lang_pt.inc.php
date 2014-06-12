@@ -1048,3 +1048,6 @@
 @define('CUSTOM_CONFIG', 'Custom configuration file');
 @define('PLUGIN_ALREADY_INSTALLED', 'Plugin already installed, and does not support multiple installation ("stackable").');
 @define('INSTALL_DBPREFIX_INVALID', 'The database table name prefix must not be empty and may only contain letters, numbers and the underscore character.');
+@define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
+@define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Show the subToMe button, a layer to make feed subscription easier');
+@define('SYNDICATE_THIS_BLOG', 'Subscribe');

@@ -107,7 +107,6 @@
 @define('HOLDS_A_BLAHBLAH', 'Holds a nugget of HTML in your sidebar');
 @define('TITLE_FOR_NUGGET', 'Title for the nugget');
 @define('THE_NUGGET', 'The Nugget of HTML!');
-@define('SYNDICATE_THIS_BLOG', 'Syndicate This Blog');
 @define('YOU_CHOSE', 'You chose %s');
 @define('IMAGE_ROTATE_LEFT', 'Rotate image 90 degrees counter-clockwise');
 @define('IMAGE_ROTATE_RIGHT', 'Rotate image 90 degrees clockwise');
@@ -400,7 +399,7 @@
 @define('INSTALL_XHTML11', 'Force XHTML 1.1 compliance');
 @define('INSTALL_XHTML11_DESC', 'Do you want to force XHTML 1.1 compliance (may cause problems for back-/frontend on older 4th generation browsers)');
 @define('INSTALL_POPUP', 'Enable use of popup windows');
-@define('INSTALL_POPUP_DESC', 'Do you want to use popup windows for comments, trackbacks et al?');
+@define('INSTALL_POPUP_DESC', 'Do you want to use popup windows for comments, trackbacks et al? (Not supported by all themes)');
 @define('INSTALL_EMBED', 'Is serendipity embedded?');
 @define('INSTALL_EMBED_DESC', 'If you want to embed serendipity within a regular page, set to true to discard any headers and just print the contents. You can make use of the indexFile option to use a wrapper class where you put your normal webpage headers. See the README file for more information!');
 @define('INSTALL_TOP_AS_LINKS', 'Show Top Exits/Referrers as links?');
@@ -1046,3 +1045,6 @@
 @define('CUSTOM_CONFIG', 'Custom configuration file');
 @define('PLUGIN_ALREADY_INSTALLED', 'Plugin already installed, and does not support multiple installation ("stackable").');
 @define('INSTALL_DBPREFIX_INVALID', 'The database table name prefix must not be empty and may only contain letters, numbers and the underscore character.');
+@define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
+@define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Show the subToMe button, a layer to make feed subscription easier');
+@define('SYNDICATE_THIS_BLOG', 'Subscribe');
