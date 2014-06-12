@@ -2903,10 +2903,7 @@ img.mfp-img {
     #template_select li:nth-child(odd),
     #template_select h2,
     .media_pane .odd,
-    #dashboard > section:last-child {
-        clear: left;
-    }
-
+    #dashboard > .odd,
     .plugins_installable > li:nth-child(odd),
     .serendipity_statistics > section:nth-child(odd) {
         clear: left;
