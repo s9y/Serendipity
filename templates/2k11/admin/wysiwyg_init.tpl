@@ -12,7 +12,7 @@
                     }
                 });
                 editor.ui.addButton('s9y_medialibrary{$item}', {
-                    label: 'Media',
+                    label: '{$CONST.MEDIA_LIBRARY}',
                     command: 'openML',
                     icon: '{serendipity_getFile file="admin/img/thumbnail.png"}'
                 });
@@ -23,13 +23,17 @@
             CKEDITOR.plugins.add('{$button.id}', {
                 init: function( editor ) {
                     editor.addCommand( '{$button.name}', {
-                        popupEditorInstance = editor;
-                        ( {$button.javascript} () )
+                        exec : function( editor ) {
+                            popupEditorInstance = editor;
+                            ( {$button.javascript} () )
+                        }
                     });
                     editor.ui.addButton('{$button.id}', {
                         label: '{$button.name}',
+                        title: '{$button.name} Plugin',
                         command: '{$button.name}',
-                        icon: '{$button.img_url}'
+                        icon: '{$button.img_url}',
+                        iconName: '{$button.id}_icon'
                     });
                     
                 }
