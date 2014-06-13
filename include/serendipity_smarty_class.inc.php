@@ -168,8 +168,15 @@ class Serendipity_Smarty extends Smarty
         */
          
         // enable for APC in-memory (RAM) storage caching - must be enabled in PHP
-        #apc-cache# $this->addPluginsDir ( SMARTY_DIR . 'plugins/' );
-        #apc-cache# $this->caching_type = 'apc'; //$this->setCachingType ( 'apc' );
+        if(APC_EXTENSION_LOADED && !$serendipity['disable_apc']) {
+            $this->addPluginsDir ( SMARTY_DIR . 'plugins/' );
+            $this->caching_type = 'apc'; //$this->setCachingType ( 'apc' );
+        }
+        // enable for MEMCACHE storage caching - must be enabled in PHP
+        if(MEMCACHE_EXTENSION_LOADED && !$serendipity['disable_memcache']) {
+            $this->addPluginsDir ( SMARTY_DIR . 'plugins/' );
+            $this->caching_type = 'memcache'; //$this->setCachingType ( 'memcache' );
+        }
 
         /*
             Caching is disabled, as long as we haven't figured out on how to use it best here....

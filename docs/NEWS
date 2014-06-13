@@ -3,6 +3,14 @@
 
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
+
+    * added experimental support for PHP/SMARTY IN MEMORY caching
+      Enabled by default, if classes found loaded.
+      Disable with 
+        $serendipity['disable_apc'] = true;
+      and
+        $serendipity['disable_memcache'] = true;
+
     * Support added in serendipity_db_schema_import for sqlite 
       autoincrement
 

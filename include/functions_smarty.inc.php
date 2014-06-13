@@ -905,6 +905,10 @@ function serendipity_smarty_init($vars = array()) {
                 @define('SMARTY_RESOURCE_CHAR_SET', LANG_CHARSET);
             }
 
+            // define cache resources to load with smarty - see smarty class
+            @define('APC_EXTENSION_LOADED', extension_loaded('apc') && ini_get('apc.enabled'));
+            @define('MEMCACHE_EXTENSION_LOADED', class_exists('Memcache',false) && extension_loaded("memcached"));
+
             // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
             if (!class_exists('Smarty')) {
