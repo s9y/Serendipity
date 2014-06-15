@@ -48,10 +48,9 @@
             
             on: {
                 instanceReady: function( evt ) {
-                    CKEDITOR.instances[ckeitem].document.once('keyup', function() {
+                    CKEDITOR.instances["{$item}"].document.once('keyup', function() {
                         setInterval(function() {
-                            console.log("save");
-                            serendipity.cache(ckeitem, CKEDITOR.instances[ckeitem].getData());
+                            serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
                         }, 5000)
                     });
                 }
