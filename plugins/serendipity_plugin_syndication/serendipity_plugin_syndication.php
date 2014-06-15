@@ -1,7 +1,7 @@
 <?php
 
 class serendipity_plugin_syndication extends serendipity_plugin {
-    var $title = SYNDICATE_THIS_BLOG;
+    var $title = SYNDICATION;
 
     function introspect(&$propbag)
     {
@@ -15,15 +15,10 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                         'fullfeed',
                                         'big_img',
                                         'subToMe',
-                                        'show_0.91',
-                                        'show_1.0',
                                         'show_2.0',
-                                        'show_2.0c',
-                                        'show_atom0.3',
                                         'show_atom1.0',
-                                        'show_opml1.0',
+                                        'show_2.0c',
                                         'show_feedburner',
-                                        'show_googlereader',
                                         'seperator',
                                         'show_mail',
                                         'field_managingEditor',
@@ -75,25 +70,11 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('radio',        $radio);
                 break;
 
-            case 'show_0.91':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_091);
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-
-            case 'show_1.0':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_10);
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-
             case 'show_2.0':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_20);
                 $propbag->add('description', '');
-                $propbag->add('default',     'false');
+                $propbag->add('default',     'yes');
                 break;
 
             case 'show_2.0c':
@@ -102,24 +83,9 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('description', '');
                 $propbag->add('default',     'false');
                 break;
-
-            case 'show_atom0.3':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_ATOM03);
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-
             case 'show_atom1.0':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'));
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-
-            case 'show_opml1.0':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'OPML 1.0'));
                 $propbag->add('description', '');
                 $propbag->add('default',     'false');
                 break;
@@ -278,12 +244,19 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         global $serendipity;
 
         $title = $this->get_config('title');
-        $icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
+        $small_icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
 
         $custom_feed = trim($this->get_config('feed_name'));
         $custom_comm = trim($this->get_config('comment_name'));
         $custom_img  = trim($this->get_config('big_img'));
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
+        $useRss = serendipity_db_bool($this->get_config('show_2.0', true));
+        $useAtom = serendipity_db_bool($this->get_config('show_atom1.0', false));
+
+        $icon = $small_icon;
+        if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
+            $icon = $custom_img;
+        }
 
         if (empty($custom_feed) || $custom_feed == 'default' || $custom_feed == 'none' || $custom_feed == 'empty') {
             $FEED = 'Feed';
@@ -297,114 +270,56 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $COMMENTS = $custom_comm;
         }
 
-?>
-<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">
-<?php
-        if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty' && ! $subtome) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" /></a>
-        </li>
-<?php
+        $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath');
+        if ($useAtom && (! $useRss)) {
+            $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath');
         }
 
+        $onclick = "";
         if ($subtome) {
-            if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
-?>
-                <li>
-                    <a class="serendipity_xml_icon"
-                        href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
-                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
+            $onclick=$this->getOnclick($mainFeed);
+        }
+
+        echo '<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">';
+        echo "<li>
+                    <a id='serendipity_subtome'
+                        class='serendipity_xml_icon'
+                        href='$mainFeed'
+                        $onclick
                     >
-                        <img src="<?php echo $custom_img; ?>" alt="XML" style="border: 0px" />
+                        <img src='$icon' alt='XML' style='border: 0px' />
+                        " . ($icon == $small_icon ?  ($useRss ? "RSS $FEED " : "Atom $FEED") : "") . " 
                     </a>
-                </li>
-<?php
-            } else {
-?>
-                <li>
-                    <a class="serendipity_xml_icon"
-                        href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
-                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
-                    >
-                        <img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" />
-                    </a>
-                    <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"
-                        onclick="var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;"
-                    >
-                        <?php echo $FEED; ?><!-- i18n -->
-                    </a>
-                </li>
-<?php
+                </li>";
+
+        if ($useAtom && $useRss) {
+            if ($subtome) {
+                $onclick=$this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath'));
             }
+            echo "<li>
+                <a class='serendipity_xml_icon'
+                    href='". serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ."'
+                    $onclick
+                >
+                    <img src='$small_icon' alt='ATOM/XML' style='border: 0px' />
+                    Atom $FEED
+                    </a>
+            </li>";
         }
 
-?>
-
-
-<?php
-
-        if (serendipity_db_bool($this->get_config('show_0.91', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss', 'serendipityHTTPPath') ?>">RSS 0.91 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_1.0', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss1', 'serendipityHTTPPath') ?>">RSS 1.0 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_2.0', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath') ?>">RSS 2.0 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_atom0.3', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="ATOM/XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom03.xml', 'serendipityHTTPPath') ?>">ATOM 0.3 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_atom1.0', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="ATOM/XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ?>">ATOM 1.0 <?php echo $FEED; ?></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_2.0c', true))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ?>"><span style="white-space: nowrap">RSS 2.0 <?php echo $COMMENTS; ?></span></a>
-        </li>
-<?php
-        }
-
-        if (serendipity_db_bool($this->get_config('show_opml1.0', false))) {
-?>
-        <li>
-            <a class="serendipity_xml_icon" href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>"><img src="<?php echo $icon; ?>" alt="XML" style="border: 0px" /></a>
-            <a href="<?php echo serendipity_rewriteURL(PATH_FEEDS .'/opml.xml', 'serendipityHTTPPath') ?>">OPML 1.0 <?php echo $FEED; ?></a>
-        </li>
-<?php
+        if (serendipity_db_bool($this->get_config('show_2.0c', false))) {
+            if ($subtome) {
+                $onclick=$this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath'));
+            }
+            echo "<li>
+                <a class='serendipity_xml_icon'
+                    href='" . serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ."'
+                    $onclick
+                >
+                    <img src='$small_icon' alt='XML' style='border: 0px' />
+                    RSS $COMMENTS
+                </a>
+            </li>";
         }
 
         if (serendipity_db_bool($this->get_config('show_feedburner', false)) || $this->get_config('show_feedburner', false) === 'force') {
@@ -434,6 +349,10 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         }
 
         echo '</ul>';
+    }
+
+    function getOnclick($url) {
+        return "onclick=\"document.subtomeBtn=document.querySelector('#serendipity_subtome');document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
     }
 
     function generate_rss_fields(&$title, &$description, &$entries) {
