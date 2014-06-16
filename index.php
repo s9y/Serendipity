@@ -565,7 +565,18 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     header('Content-type: application/javascript; charset=' . LANG_CHARSET);
 
     $out = "";
+    
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+    
+    // HOTFIX: The staticpage plugin spews out a 404 error in the genpage hook,
+    // because it assumes that all "normal" content pages could belong to it.
+    // We need to override the header at this point (again), so that the files
+    // will be properly parsed. Another (maybe better) idea would be to actually
+    // not include genpage.inc.php at this point and init smarty differently,
+    // or to make sure the "genpage" event hook is not called at this point.
+    header('HTTP/1.0 200 OK');
+    header('Status: 200 OK');
+    
     if ($matches[1] == "serendipity_admin.js") {
         serendipity_plugin_api::hook_event('js_backend', $out);
     } else {
