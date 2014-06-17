@@ -91,7 +91,7 @@ if ($entriesAmount < 5) {
                      true,
                      false,
                      'timestamp DESC',
-                     'isdraft = "true" AND e.timestamp <=  ' . serendipity_serverOffsetHour() 
+                     "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour() 
                    );
     if (is_array($entries) && is_array($drafts)) {
         $entries = array_merge($entries, $drafts);
