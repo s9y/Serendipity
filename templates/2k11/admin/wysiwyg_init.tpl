@@ -48,11 +48,13 @@
             
             on: {
                 instanceReady: function( evt ) {
-                    CKEDITOR.instances["{$item}"].document.once('keyup', function() {
-                        setInterval(function() {
-                            serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
-                        }, 5000)
-                    });
+                    if(Modernizr.indexeddb) {
+                        CKEDITOR.instances["{$item}"].document.once('keyup', function() {
+                            setInterval(function() {
+                                serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
+                            }, 5000)
+                        });
+                    }
                 }
             },
             

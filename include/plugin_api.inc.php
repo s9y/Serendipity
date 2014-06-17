@@ -95,7 +95,7 @@ function errorHandlerCreateDOM(htmlStr) {
 
             case 'backend_save':
             case 'backend_publish':
-                echo '<script>$(document).ready(function() { serendipity.eraseEntryEditorCache(); });</script>';
+                echo '<script>$(document).ready(function() { if(Modernizr.indexeddb) { serendipity.eraseEntryEditorCache(); } });</script>';
 
         return true;
         break;
