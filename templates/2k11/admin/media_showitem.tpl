@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{$media.css_front}">
     <script src="{serendipity_getFile file='admin/js/modernizr-2.8.1.min.js'}"></script>
 </head>
-<body id="{$media.body_id}">
+<body id="serendipity_admin_page">
 {if $perm_denied}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
 {else}

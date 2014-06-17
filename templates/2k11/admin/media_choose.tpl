@@ -31,7 +31,7 @@ if (parent.frames && parent.frames['tree']) {
 </frameset>
 </html>
 {else}
-<body id="{$media.body_id}">
+<body id="serendipity_admin_page">
 
 <div id="main" class="clearfix serendipityAdminContent">
 {if $media.case == 'external'}
