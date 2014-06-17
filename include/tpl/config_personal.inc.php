@@ -114,7 +114,16 @@
                                           'type'        => 'bool',
                                           'permission'  => 'personalConfiguration',
                                           'default'     => true,
-                                          'flags'       => array('config'))
+                                          'flags'       => array('config')),
+
+
+                                    array('var'         => 'enableBackendPopup',
+                                          'title'       => INSTALL_BACKENDPOPUP,
+                                          'description' => INSTALL_BACKENDPOPUP_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'flags'       => array('config'),
+                                          'permission'  => 'personalConfiguration')
                             ));
 
     $res['defaults'] =

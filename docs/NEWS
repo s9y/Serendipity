@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Added new option "enabledBackendPopups" that allow to specify
+      if inline modal dialogs or popups are used in the backend for
+      e.g. the category selectory and media library
+      
     * added experimental support for PHP/SMARTY IN MEMORY caching
       Enabled by default, if classes found loaded.
       Disable with 

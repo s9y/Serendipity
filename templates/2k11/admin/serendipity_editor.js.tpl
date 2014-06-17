@@ -599,7 +599,7 @@
     }
 
     serendipity.closeCommentPopup = function() {
-        {if $use_popups}
+        {if $use_backendpopups}
             parent.self.close();
         {else}
             window.parent.parent.$.magnificPopup.close();
@@ -607,7 +607,7 @@
     }
 
     serendipity.openPopup = function(url) {
-        {if $use_popups}
+        {if $use_backendpopups}
             window.open(url,
                         'ImageSel',
                         'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
@@ -1072,7 +1072,7 @@ $(function() {
     }
 
     // Show category selector
-    {if $use_popups}
+    {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
                 $('#edit_entry_category').toggleClass('mfp-hide');
@@ -1200,7 +1200,7 @@ $(function() {
 
     $('.comments_reply').click(function(e) {
         e.preventDefault();
-        {if $use_popups}
+        {if $use_backendpopups}
             window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
         {else}
            $(this).magnificPopup({ type:'iframe' });
@@ -1272,7 +1272,7 @@ $(function() {
     });
 
     // Show further links
-    {if $use_popups}
+    {if $use_backendpopups}
         if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
                 e.preventDefault();
@@ -1286,7 +1286,7 @@ $(function() {
     {/if}
 
     // Media file actions
-    {if $use_popups}
+    {if $use_backendpopups}
     $('.media_fullsize').click(function(e) {
         e.preventDefault();
         var $el = $(this);

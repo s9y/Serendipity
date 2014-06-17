@@ -1032,6 +1032,7 @@ function serendipity_smarty_init($vars = array()) {
 
                 'is_xhtml'                  => true,
                 'use_popups'                => $serendipity['enablePopup'],
+                'use_backendpopups'         => $serendipity['enableBackendPopup'],
                 'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
                 'is_raw_mode'               => $serendipity['smarty_raw_mode'],
                 'is_logged_in'              => serendipity_userLoggedIn(),

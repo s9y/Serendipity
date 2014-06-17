@@ -1050,4 +1050,6 @@ $i18n_unknown = 'tw';
 @define('INSTALL_DBPREFIX_INVALID', 'The database table name prefix must not be empty and may only contain letters, numbers and the underscore character.');
 @define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
 @define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Show the subToMe button, a layer to make feed subscription easier');
-@define('SYNDICATE_THIS_BLOG', 'Subscribe');
+@define('SYNDICATE_THIS_BLOG', 'Subscribe');@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
+@define('INSTALL_BACKENDPOPUP', 'Enable use of popup windows for the backend');
+@define('INSTALL_BACKENDPOPUP_DESC', 'Do you want to use popup windows for some backend functionality? When disabled (default), inline modal dialogs will be used for e.g. the category selector and media library.');
