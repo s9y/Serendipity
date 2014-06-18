@@ -1122,6 +1122,10 @@ $(function() {
                     afterClose: function() {}
                 }
             });
+
+            $('#backend_freetag_list > a').click(function(e) {
+                e.preventDefault();
+            });
         }
     {/if}
 
