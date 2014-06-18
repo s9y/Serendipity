@@ -93,10 +93,16 @@
 .entryproperties_access_groups,
 .entryproperties_access_users,
 .entryproperties_access_author,
-.entryproperties_markup {
+.entryproperties_markup,
+#plugin_groups,
+#plugin_filter {
     float: left;
     margin-right: 2%;
     width: 48%;
+}
+
+#plugin_groups .form_buttons {
+    margin-bottom: 0;
 }
 
 .entryproperties_customfields {
@@ -146,7 +152,8 @@ pre {
     width: 48%;
 }
 
-#template_select .even,
+#template_select .current_backend_template,
+#template_select li:nth-child(even) article,
 .media_pane .even,
 #dashboard > .even {
     margin: 0 0 1em 2%;
@@ -162,9 +169,7 @@ pre {
 }
 
 #template_select .current_template {
-    float: none;
-    margin: 0 0 2em;
-    width: 48%;
+    margin-bottom: 2em;
 }
 
 #mediaPropertyForm .media_file {
@@ -265,12 +270,10 @@ pre {
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group fieldset > fieldset,
-#template_select .odd,
+#template_select li:nth-child(odd),
+#template_select h2,
 .media_pane .odd,
-#dashboard > section:last-child {
-    clear: left;
-}
-
+#dashboard > .odd,
 .plugins_installable > li:nth-child(odd),
 .serendipity_statistics > section:nth-child(odd) {
     clear: left;
