@@ -28,6 +28,8 @@ if (is_array($required_fieldlist)) {
 
 $serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTemplate']);
 
+$serendipity['smarty']->assign('has_freetag', class_exists('serendipity_event_freetag'));
+
 $template_config = array(
     array(
         'var' => 'date_format',
