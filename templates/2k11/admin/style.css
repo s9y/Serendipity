@@ -967,7 +967,8 @@ input[type=checkbox],
 .importer_data dd,
 .form_buttons > input,
 .js .media_choose label,
-.quick_list ol > li {
+.quick_list ol > li,
+.serendipity_emoticon_bar {
     margin-bottom: .75em;
 }
 
