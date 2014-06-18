@@ -1103,6 +1103,28 @@ $(function() {
         }
     {/if}
 
+    // Show tag selector
+    {if $use_backendpopups}
+        if($('#serendipityEntry').length > 0) {
+            $('#select_tags').click(function(e) {
+                $('#edit_entry_freetags').toggleClass('mfp-hide');
+                $('#toggle_advanced').click();
+            });
+        }
+    {else}
+        if($('#serendipityEntry').length > 0) {
+            var btnText = '{$CONST.DONE}';
+
+            $('#select_tags').magnificPopup({
+                type: "inline",
+                closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>',
+                callbacks: {
+                    afterClose: function() {}
+                }
+            });
+        }
+    {/if}
+
     // Category live filter
     $('#categoryfilter').keyup(function() {
         serendipity.liveFilters($(this), '#edit_entry_category .form_check', 'label');
