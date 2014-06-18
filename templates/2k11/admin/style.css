@@ -354,11 +354,11 @@ nav ol {
 /* ICON FONT: http://fortawesome.github.com/Font-Awesome/ */
 @font-face {
     font-family: 'fontello';
-    src: url('{TEMPLATE_PATH}font/fontello.eot?61076562');
-    src: url('{TEMPLATE_PATH}font/fontello.eot?61076562#iefix') format('embedded-opentype'),
-         url('{TEMPLATE_PATH}font/fontello.woff?61076562') format('woff'),
-         url('{TEMPLATE_PATH}font/fontello.ttf?61076562') format('truetype'),
-         url('{TEMPLATE_PATH}font/fontello.svg?61076562#fontello') format('svg');
+    src: url('{TEMPLATE_PATH}font/fontello.eot?42047096');
+    src: url('{TEMPLATE_PATH}font/fontello.eot?42047096#iefix') format('embedded-opentype'),
+         url('{TEMPLATE_PATH}font/fontello.woff?42047096') format('woff'),
+         url('{TEMPLATE_PATH}font/fontello.ttf?42047096') format('truetype'),
+         url('{TEMPLATE_PATH}font/fontello.svg?42047096#fontello') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -380,43 +380,44 @@ nav ol {
     line-height: 1em;
 }
 
-.icon-search:before { content: '\e81f'; }
-.icon-medkit:before { content: '\e823'; }
-.icon-users:before { content: '\e81d'; }
-.icon-picture:before { content: '\e81b'; }
+.icon-home:before { content: '\e800'; }
+.icon-cog-alt:before { content: '\e801'; }
+.icon-tag:before { content: '\e802'; }
+.icon-edit:before { content: '\e803'; }
 .icon-ok-circled:before { content: '\e804'; }
-.icon-cancel:before { content: '\e811'; }
 .icon-plus:before { content: '\e805'; }
 .icon-minus:before { content: '\e806'; }
-.icon-help-circled:before { content: '\e809'; }
-.icon-info-circled:before { content: '\e80a'; }
-.icon-home:before { content: '\e800'; }
-.icon-thumbs-up-alt:before { content: '\e825'; }
-.icon-thumbs-down-alt:before { content: '\e826'; }
-.icon-edit:before { content: '\e803'; }
-.icon-chat:before { content: '\e80c'; }
-.icon-attention-circled:before { content: '\e813'; }
-.icon-trash:before { content: '\e80d'; }
-.icon-folder-open:before { content: '\e81e'; }
-.icon-user:before { content: '\e81c'; }
-.icon-menu:before { content: '\e819'; }
-.icon-cog-alt:before { content: '\e801'; }
-.icon-logout:before { content: '\e80f'; }
-.icon-clock:before { content: '\e822'; }
-.icon-resize-full:before { content: '\e818'; }
-.icon-resize-full-alt:before { content: '\e80e'; }
-.icon-move:before { content: '\e810'; }
-.icon-down-dir:before { content: '\e80b'; }
-.icon-up-dir:before { content: '\e820'; }
-.icon-left-dir:before { content: '\e827'; }
-.icon-right-dir:before { content: '\e828'; }
 .icon-cw:before { content: '\e807'; }
 .icon-ccw:before { content: '\e808'; }
-.icon-globe:before { content: '\e821'; }
-.icon-list-bullet:before { content: '\e824'; }
-.icon-filter:before { content: '\e817'; }
-.icon-sort:before { content: '\e81a'; }
+.icon-help-circled:before { content: '\e809'; }
+.icon-info-circled:before { content: '\e80a'; }
+.icon-down-dir:before { content: '\e80b'; }
+.icon-chat:before { content: '\e80c'; }
+.icon-trash:before { content: '\e80d'; }
+.icon-resize-full-alt:before { content: '\e80e'; }
+.icon-logout:before { content: '\e80f'; }
+.icon-move:before { content: '\e810'; }
+.icon-cancel:before { content: '\e811'; }
 .icon-rss:before { content: '\e812'; }
+.icon-attention-circled:before { content: '\e813'; }
+.icon-filter:before { content: '\e817'; }
+.icon-resize-full:before { content: '\e818'; }
+.icon-menu:before { content: '\e819'; }
+.icon-sort:before { content: '\e81a'; }
+.icon-picture:before { content: '\e81b'; }
+.icon-user:before { content: '\e81c'; }
+.icon-users:before { content: '\e81d'; }
+.icon-folder-open:before { content: '\e81e'; }
+.icon-search:before { content: '\e81f'; }
+.icon-up-dir:before { content: '\e820'; }
+.icon-globe:before { content: '\e821'; }
+.icon-clock:before { content: '\e822'; }
+.icon-medkit:before { content: '\e823'; }
+.icon-list-bullet:before { content: '\e824'; }
+.icon-thumbs-up-alt:before { content: '\e825'; }
+.icon-thumbs-down-alt:before { content: '\e826'; }
+.icon-left-dir:before { content: '\e827'; }
+.icon-right-dir:before { content: '\e828'; }
 
 
 /* BACKEND HELPER CLASSES */
