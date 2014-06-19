@@ -1402,6 +1402,10 @@ summary {
     top: 0;
 }
 
+.ac_results {
+    z-index: 2000;
+}
+
 .comments_pane .pagination h3,
 .media_pane .pagination h3,
 .entries_pane .pagination h3,
