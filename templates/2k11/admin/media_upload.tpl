@@ -86,7 +86,7 @@
 
         <input class="check_inputs" type="submit" value="{$CONST.GO}">
         {if $media.manage}
-            <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|@escape}">
+            <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|escape}">
         {/if}
     </div>
 </form>

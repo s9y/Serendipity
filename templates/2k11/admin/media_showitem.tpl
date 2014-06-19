@@ -24,7 +24,7 @@
         {else}
             <a href="{$media.file.full_file}">{$media.file.realname} ({$media.file.displaymime})</a>
         {/if}
-            <a href="{$media.from|@escape}">{$CONST.BACK_TO_BLOG}</a>
+            <a href="{$media.from|escape}">{$CONST.BACK_TO_BLOG}</a>
         </div>
     {if $media.file.base_property}
         <div class="media_props_base">
@@ -34,7 +34,7 @@
             {foreach from=$media.file.base_property key="prop_fieldname" item="prop_content"}
                 {if $prop_content.val}
                 <dt>{$prop_content.label}</dt>
-                <dd>{$prop_content.val|@escape}</dd>
+                <dd>{$prop_content.val|escape}</dd>
                 {/if}
             {/foreach}
             </dl>
@@ -46,7 +46,7 @@
 
             <div class="media_keywords">                
             {foreach from=$media.file.props.base_keyword key="prop_fieldname" item="prop_content"}
-                <span>{$prop_fieldname|@escape}</span>
+                <span>{$prop_fieldname|escape}</span>
             {/foreach}
             <div>
         </div>
@@ -81,7 +81,7 @@
             
             <ul>
             {foreach from=$media.file.references item="ref"}
-                <li>({$ref.name|@escape}) <a rel="nofollow" href="{$ref.link|@escape}">{$ref.link|@default:$CONST.NONE|@escape}</a></li>
+                <li>({$ref.name|escape}) <a rel="nofollow" href="{$ref.link|escape}">{$ref.link|@default:$CONST.NONE|escape}</a></li>
             {/foreach}
             </ul>
         </div>

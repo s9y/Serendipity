@@ -12,7 +12,7 @@
     {$entry_vars.formToken}
     <div id="edit_entry_title" class="form_field">
         <label for="entryTitle">{$CONST.TITLE}</label>
-        <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|@escape}">
+        <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|escape}">
     </div>
 
     <div id="category_list" class="clearfix">
@@ -41,7 +41,7 @@
             {serendipity_hookPlugin hook="backend_entry_toolbar_body" data=$entry_data.entry hookAll="true"}
         </div>
     {/if}
-        <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|@escape}</textarea>
+        <textarea id="serendipity[body]" name="serendipity[body]" rows="15">{$entry_vars.entry.body|escape}</textarea>
     </div>
 
      <div class="form_area">
@@ -65,7 +65,7 @@
         </div>
     {/if}
         <div id="extended_entry_editor">
-            <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|@escape}</textarea>
+            <textarea id="serendipity[extended]" name="serendipity[extended]" rows="15">{$entry_vars.entry.extended|escape}</textarea>
         </div>
     </div>
 

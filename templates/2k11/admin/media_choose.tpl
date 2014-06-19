@@ -18,7 +18,7 @@ var media_rename = '{$CONST.ENTER_NEW_NAME}';
 
 {if $media.only_path}
 if (parent.frames && parent.frames['tree']) { 
-    parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|@escape}";
+    parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|escape}";
 } 
 
 {/if}
@@ -82,15 +82,15 @@ if (parent.frames && parent.frames['tree']) {
             <input name="thumbName" type="hidden" value="{$media.file.show_thumb}">
             <input name="hotlink" type="hidden" value="{$media.file.hotlink}">
         {if $media.htmltarget}
-            <input name="serendipity[htmltarget]" type="hidden" value="{$media.htmltarget|@escape}">
+            <input name="serendipity[htmltarget]" type="hidden" value="{$media.htmltarget|escape}">
         {/if}
         {if $media.filename_only}
-            <input name="serendipity[filename_only]" type="hidden" value="{$media.filename_only|@escape}">
+            <input name="serendipity[filename_only]" type="hidden" value="{$media.filename_only|escape}">
         {/if}
         {if $media.file.fast_select}
             <script>
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media.file}
-                serendipity.serendipity_imageSelector_done('{$media.textarea|@escape}');
+                serendipity.serendipity_imageSelector_done('{$media.textarea|escape}');
             </script>
         {else}
             <fieldset id="image_size">
@@ -172,19 +172,19 @@ if (parent.frames && parent.frames['tree']) {
 
             <div id="image_comment" class="form_area">
                 <label for="serendipity_imagecomment">{$CONST.COMMENT}</label>
-                <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5">{$media.file.props.base_property.COMMENT1|@escape}</textarea>
+                <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5">{$media.file.props.base_property.COMMENT1|escape}</textarea>
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagecomment' eventData=$media.file}
             </div>
 
             <div id="image_alttext" class="form_field">
                 <label for="serendipity_alt">{$CONST.MEDIA_ALT}</label>
-                <input id="serendipity_alt" name="serendipity[alt]" type="text" value="{$media.file.props.base_property.ALT|@escape}">
+                <input id="serendipity_alt" name="serendipity[alt]" type="text" value="{$media.file.props.base_property.ALT|escape}">
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_alt' eventData=$media.file}
             </div>
 
             <div id="image_title" class="form_field">
                 <label for="serendipity_title">{$CONST.MEDIA_TITLE}</label>
-                <input id="serendipity_title" name="serendipity[title]" type="text" value="{$media.file.props.base_property.TITLE|@escape}">
+                <input id="serendipity_title" name="serendipity[title]" type="text" value="{$media.file.props.base_property.TITLE|escape}">
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_title' eventData=$media.file}
             </div>
             {/if}
@@ -200,12 +200,12 @@ if (parent.frames && parent.frames['tree']) {
         {if $media.filename_only}
         <script>
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
-            parent.self.opener.serendipity.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|@escape}');
+            parent.self.opener.serendipity.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|escape}');
             parent.self.close();
         </script>
         {else}
         <script>
-            block = '<a class="block_level opens_window" href="{$media.file.full_file}" title="{$media.file.realname|@escape}">{$media.file.realname|@escape}</a>';
+            block = '<a class="block_level opens_window" href="{$media.file.full_file}" title="{$media.file.realname|escape}">{$media.file.realname|escape}</a>';
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
             if (parent.self.opener == undefined) {
                 // in iframes, there is no opener, and the magnific popup is wrapped

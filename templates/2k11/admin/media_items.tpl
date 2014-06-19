@@ -40,11 +40,11 @@
                 {/if}
                     <img src="{$file.mimeicon}" title="{$file.path}{$file.name}({$file.mime})" alt="{$file.mime}">
                     <span class="block_level">{if $file.hotlink}{$CONST.MEDIA_HOTLINKED}{else}{$file.mime}{/if}</span>
-                    {$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}
+                    {$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}
                 </a>
             {/if}
             {if $file.orderkey != ''}
-                <span>{$file.orderkey|@escape}</span>
+                <span>{$file.orderkey|escape}</span>
             {/if}
             </div>
         </article>
@@ -55,7 +55,7 @@
                     <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}"><label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                 </div>
 
-                <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|@escape}{/if}</h3>
+                <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>
                 {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
             </header>
 
@@ -145,22 +145,22 @@
                 <div class="form_{if $prop_content.type == 'textarea'}area{else}field{/if}">
                     <label for="mediaProperty{$prop_fieldname}">{$prop_content.label}</label>
                 {if $prop_content.type == 'textarea'}
-                    <textarea id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" rows="5">{$prop_content.val|@escape}</textarea>
+                    <textarea id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" rows="5">{$prop_content.val|escape}</textarea>
                 {elseif $prop_content.type == 'readonly'}
-                    {$prop_content.val|@escape}
+                    {$prop_content.val|escape}
                 {elseif $prop_content.type == 'input'}
-                    <input id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" type="text" value="{$prop_content.val|@escape}">
+                    <input id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" type="text" value="{$prop_content.val|escape}">
                 {/if}
                 </div>
             {/foreach}
-            {if  NOT $file.hotlink}
+            {if NOT $file.hotlink}
                 <div class="form_select">
                     <label for="newDir{$mediakey}">{$CONST.FILTER_DIRECTORY}</label>
-                    <input type="hidden" name="serendipity[oldDir][{$mediakey}]" value="{$file.path|@escape}">
+                    <input type="hidden" name="serendipity[oldDir][{$mediakey}]" value="{$file.path|escape}">
                     <select id="newDir{$mediakey}" name="serendipity[newDir][{$mediakey}]">
                         <option value=""></option>
                     {foreach from=$media.paths item="folder"}
-                        <option {if ($file.path == $folder.relpath)}selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                        <option{if ($file.path == $folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
                     {/foreach}
                     </select>
                 </div>
@@ -204,7 +204,7 @@
 
                 <ul>
                 {foreach from=$file.references item="ref"}
-                    <li>({$ref.name|@escape}) <a rel="nofollow" href="{$ref.link|@escape}">{$ref.link|@default:$CONST.NONE|@escape}</a></li>
+                    <li>({$ref.name|escape}) <a rel="nofollow" href="{$ref.link|escape}">{$ref.link|@default:$CONST.NONE|escape}</a></li>
                 {/foreach}
                 </ul>
             </section>

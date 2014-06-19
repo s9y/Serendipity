@@ -45,32 +45,32 @@
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
-                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|@escape}">
+                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|escape}">
                                  - 
                                 <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
-                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|@escape}">
+                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|escape}">
                             </div>
                     {elseif $so_val.type == 'intrange'}
                         {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <div class="form_field">
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
-                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|@escape}">
+                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|escape}">
                                  - 
                                 <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
-                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|@escape}">
+                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|escape}">
                             </div>
                     {elseif $so_val.type == 'authors'}
                         {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
                                 <option value="">{$CONST.ALL_AUTHORS}</option>
                             {foreach from=$media.authors item="media_author"}
-                                <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|@escape}</option>
+                                <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|escape}</option>
                             {/foreach}
                             </select>
                     {else}
                         {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             {* TODO: needs a label, but what IS this? *}
-                            <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|@escape}">
+                            <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|escape}">
                     {/if}
                     {if $so_val.type == 'date' || $so_val.type == 'intrange'}
                         </fieldset>
@@ -82,17 +82,17 @@
 
                 <div id="media_filter_file" class="form_field left">
                     <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
-                    <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|@escape}">
+                    <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|escape}">
                 </div>
 
                 <div id="media_filter_keywords" class="form_field center">
                     <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
-                    <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|@escape}">
+                    <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|escape}">
                 </div>
 
                 <div id="keyword_list" class="clearfix right">
                 {foreach from=$media.keywords item="keyword"}
-                    <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|@escape}" title="{$keyword|@escape}">{$keyword|@escape|truncate:20:"&hellip;"}</a>
+                    <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|escape}" title="{$keyword|escape}">{$keyword|escape|truncate:20:"&hellip;"}</a>
                 {/foreach}
                 </div>
             </div>
