@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php #
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Improved by Vladimir Ajgl (vlada@ajgl.cz) 2008-01-26
@@ -828,20 +828,21 @@ function serendipity_generateThumbs() {
                 if ($returnsize !== false ) {
                     // Only print the resize message the first time
                     if (!$msg_printed) {
-                      printf(RESIZE_BLAHBLAH, THUMBNAIL_SHORT);
-                      echo "\n" . '<ul class="serendipityFileList">' . "\n";
-                      $msg_printed = true;
+                        printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . RESIZE_BLAHBLAH, THUMBNAIL_SHORT . '</span>');
+                        echo "\n" . '<ul class="serendipityFileList">' . "\n";
+                        $msg_printed = true;
                     }
                     echo '<li>' . $sThumb . ': ' . $returnsize[0] . 'x' . $returnsize[1] . "</li>\n";
                     if (!file_exists($newThumb)) {
-                        printf('<li><div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div></li>' . "\n", $sThumb);
+                        printf('<li><span class="msg_error"><span class="icon-attention"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                     } else {
                         $update = true;
                     }
                 }
             } elseif (!file_exists($oldThumb) && !file_exists($newThumb) && $fdim[0] <= $serendipity['thumbSize'] && $fdim[1] <= $serendipity['thumbSize']) {
                 if (!$msg_printed) {
-                    printf(RESIZE_BLAHBLAH, THUMB);
+                    $resizethumb = sprintf(RESIZE_BLAHBLAH, THUMB);
+                    printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $resizethumb . '</span>');
                     echo "\n" . '<ul class="serendipityFileList">' . "\n";
                     $msg_printed = true;
                 }
@@ -850,7 +851,7 @@ function serendipity_generateThumbs() {
                     printf('<li>' . THUMBNAIL_USING_OWN . '</li>' . "\n", $sThumb);
                     $update = true;
                 } else {
-                    printf('<li><div class="serendipityAdminMsgError msg_error"><img class="img_error" src="' . serendipity_getTemplateFile('admin/img/admin_msg_error.png') . '" alt="" />' . THUMBNAIL_FAILED_COPY . '</div></li>' . "\n", $sThumb);
+                    printf('<li><span class="msg_error"><span class="icon-attention"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                 }
             }
 
@@ -1987,6 +1988,7 @@ function serendipity_getImageFields() {
 
             'i.name'              => array('desc' => SORT_ORDER_NAME
                                    ),
+
         );
 
     } else {
@@ -2916,11 +2918,9 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
 
     if ($enclose) {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
-        $block = 'admin/media_pane.tpl';
         return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
     } else {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
-        $block = 'admin/media_properties.tpl';
         return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
     }
 }
@@ -3330,27 +3330,27 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     if ($type == 'dir') {
         if (!is_dir($real_oldDir)) {
-            echo '<span class="msg_error">';
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(ERROR_FILE_NOT_EXISTS, '<span class="block_level">' . $oldDir . '</span>');
             echo '</span>';
             return false;
         }
 
         if (is_dir($real_newDir)) {
-            echo '<span class="msg_error">';
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(ERROR_FILE_EXISTS, '<span class="block_level">' . $newDir . '</span>');
             echo '</span>';
             return false;
         }
 
         if (!rename($real_oldDir, $real_newDir)) {
-            echo '<span class="msg_error">';
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(MEDIA_DIRECTORY_MOVE_ERROR, '<span class="block_level">' . $newDir . '</span>');
             echo '</span>';
             return false;
         }
 
-        echo '<span class="msg_success">';
+        echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
         printf(MEDIA_DIRECTORY_MOVED, '<span class="block_level">' . $newDir . '</span>');
         echo '</span>';
 
