@@ -2690,7 +2690,6 @@ img.mfp-img {
 
     #uploadform label {
         display: inline-block;
-        min-width: 40%;
     }
 
     #uploadform .form_field input,
