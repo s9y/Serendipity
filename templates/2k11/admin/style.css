@@ -2851,6 +2851,7 @@ img.mfp-img {
     .configure_plugin fieldset legend,
     .configure_plugin fieldset > .grouped,
     .configure_plugin .sequence_container,
+    .configuration_group fieldset > .grouped,
     .configuration_group .form_select label,
     .configuration_group .form_multiselect label,
     .configuration_group .form_field label,
