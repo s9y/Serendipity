@@ -1297,6 +1297,9 @@ $(function() {
         } else {
             $($el.data('href')).toggleClass('additional_info');
         }
+        if (mq_small.matches) {
+            $el.closest('.has_info').toggleClass('info_expanded');
+        }
         $el.toggleClass('active');
         e.preventDefault();
     });

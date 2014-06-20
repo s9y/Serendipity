@@ -26,22 +26,22 @@
             {cycle assign='zebra_class' values='odd,even'}
             {if $item.guessedInput}
                 {if $item.type == 'bool'}
-                <fieldset class="clearfix {$zebra_class}">
+                <fieldset class="clearfix {$zebra_class}{if $item.description != ''} has_info{/if}">
                     <span class="wrap_legend"><legend>{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><b>i</b><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
+                    {if $item.description != ''}
+                    <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
+                    {/if}
                     <div class="clearfix grouped">
                     {$item.guessedInput}
                     </div>
-                    {if $item.description != ''}
-                    <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
-                    {/if}
                 </fieldset>
                 {else}
-                <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}">
+                <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}{if $item.description != ''} has_info{/if}">
                     <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><b>i</b><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
-                    {$item.guessedInput}
                     {if $item.description != ''}
                     <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
                     {/if}
+                    {$item.guessedInput}
                 </div>
                 {/if}
             {/if}

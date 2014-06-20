@@ -1,8 +1,9 @@
 {if $ctype == 'seperator'}
     <hr>
 {elseif $ctype == 'select'}
-    <div class="clearfix form_select">
+    <div class="clearfix form_select{if $cdesc != ''} has_info{/if}">
         <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         {* Make sure id creation actually produces unique identifiers *}
         <select id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]{($is_multi_select) ? '[]' : ''}" {($is_multi_select) ? 'multiple' : ''} {($is_multi_select && ($select_size > 0)) ? "size='{$select_size}'" : ''}>
         {foreach $select AS $select_value => $select_desc}
@@ -11,11 +12,11 @@
             <option value="{$select_value}" {(in_array($select_value, $selected_options) || in_array($select_value, $pre_selected)) ? 'selected' : ''} title="{$select_desc|escape}">{$select_desc|escape}</option>
         {/foreach}
         </select>
-        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </div>
 {elseif $ctype == 'radio'}
-    <fieldset>
+    <fieldset{if $cdesc != ''} class="has_info"{/if}>
         <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
+        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <div class="clearfix grouped">
         {foreach $radio_button AS $r}
             <div class="form_radio">
@@ -25,20 +26,18 @@
             </div>
         {/foreach}
         </div>
-        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </fieldset>
 {elseif $ctype == 'string'}
-    <div class="clearfix form_field">
+    <div class="clearfix form_field{if $cdesc != ''} has_info{/if}">
         <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
-        <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
+        <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
     </div>
 {elseif (($ctype == 'html') || ($ctype == 'text'))}
-    <div class="clearfix form_area">
+    <div class="clearfix form_area{if $cdesc != ''} has_info{/if}">
         <label for="nuggets{$elcount}">{$cname}{if $cdesc != '' && !$backend_wysiwyg} <button class="toggle_info button_link" type="button" data-href="#nuggets{$elcount}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
-
-        <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
         {if $cdesc != ''}<span id="nuggets{$elcount}_info" class="field_info additional_info">{$cdesc}</span>{/if}
+        <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
     </div>
 {elseif $ctype == 'content'}
     <div class="clearfix">
@@ -54,14 +53,13 @@
         <input name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$cbag_value}">
     </div>
 {elseif $ctype == 'media'}
-    <div class="clearfix form_field media_choose">
+    <div class="clearfix form_field media_choose{if $cdesc != ''} has_info{/if}">
         <label for="serendipity[{$postKey}][{$config_item}]">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$postKey}_{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        {if $cdesc != ''}<span id="{$postKey}_{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
 
         <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" value="{$value}">{* This should maybe be input[type=file] *}
 
         <button class="choose_media" type="button" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden">{$CONST.MEDIA_LIBRARY}</span></button>
-
-        {if $cdesc != ''}<span id="{$postKey}_{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
 
         <figure id="{$config_item}_preview">
             <figcaption>{$CONST.PREVIEW}</figcaption>
@@ -69,8 +67,9 @@
         </figure>
     </div>
 {elseif $ctype == 'sequence'}
-    <fieldset>
+    <fieldset{if $cdesc != ''} class="has_info"{/if}>
         <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
+        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <input id="{$config_item}_value" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$value}">
 
         <noscript>
@@ -114,6 +113,5 @@
     {if isset($no_sequence)}
         {$no_sequence}
     {/if}
-        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
     </fieldset>
 {/if}

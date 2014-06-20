@@ -35,10 +35,10 @@
     {if $edit}
         <input name="serendipity[group]" type="hidden" value="{$from.id}">
     {/if}
-        <div class="clearfix odd form_field">
+        <div class="clearfix odd form_field has_info">
             <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button></label>
-            <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
             <span id="groupName_info" class="field_info additional_info">{$CONST.GROUP_NAME_DESC}</span>
+            <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
         </div>
 
         <div class="clearfix even form_select">

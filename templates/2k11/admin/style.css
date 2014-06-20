@@ -1840,7 +1840,11 @@ form > .button_link:first-of-type,
 .option_list .even,
 .configure_plugin .config_optiongroup .odd,
 .configure_plugin .config_optiongroup .even {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     padding-left: .4em;
+    padding-right: .4em;
 }
 
 .theme_options .odd,
@@ -1881,7 +1885,7 @@ form > .button_link:first-of-type,
 .field_info {
     clear: both;
     display: block;
-    margin: .75em 0 0;
+    margin: .75em 0;
 }
 
 .installer .toggle_info {
@@ -2868,7 +2872,6 @@ img.mfp-img {
 
     #hide_subcats_info {
         float: none;
-        margin: .85715em 0 0;
         width: 100%;
     }
 
@@ -2897,7 +2900,7 @@ img.mfp-img {
     }
 
     .field_info {
-        margin: .85715em 2% 0 0;
+        margin: .75em 2% .75em 0;
     }
 
     .configuration_group .form_select select,
@@ -2912,6 +2915,15 @@ img.mfp-img {
     .js .configuration_group .media_choose input {
         margin-right: 1%;
         max-width: 41.5%;
+    }
+
+    .info_expanded select,
+    .info_expanded > input,
+    .info_expanded textarea,
+    .info_expanded .grouped,
+    .info_expanded .sequence_container {
+        position: relative;
+        top: -1.5em;
     }
 
     .media_choose .button_link {
