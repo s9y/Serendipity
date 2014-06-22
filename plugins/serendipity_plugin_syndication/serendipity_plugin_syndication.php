@@ -14,29 +14,25 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                         'title',
                                         'fullfeed',
                                         'big_img',
+                                        'feed_format',
                                         'subToMe',
-                                        'show_2.0',
-                                        'show_atom1.0',
-                                        'show_2.0c',
-                                        'show_feedburner',
+                                        'show_comment_feed',
                                         'seperator',
                                         'show_mail',
                                         'field_managingEditor',
                                         'field_webMaster',
                                         'field_ttl',
                                         'field_pubDate',
-                                        'seperator',
-                                        'iconURL',
                                         'bannerURL',
                                         'bannerWidth',
                                         'bannerHeight',
-                                        'seperator',
-                                        'fb_id',
-                                        'fb_title',
-                                        'fb_alt',
-                                        'fb_img',
+                                        'seperator2',
+                                        'iconURL',
                                         'feed_name',
-                                        'comment_name'
+                                        'comment_name',
+                                        'seperator3',
+                                        'fb_id',
+                                        'custom_url'
                                        )
         );
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
@@ -70,46 +66,35 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('radio',        $radio);
                 break;
 
-            case 'show_2.0':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_20);
-                $propbag->add('description', '');
-                $propbag->add('default',     'yes');
+            case 'feed_format':
+                $propbag->add('type', 'radio');
+                $propbag->add('name', 'Feed Format'); // i18n
+                $propbag->add('description', 'Which format shall be used for all feeds. Both are supported in all common readers'); // i18n
+                $propbag->add('default', 'rss');
+                $propbag->add('radio', array(
+                    'value' => array('rss', 'atom'),
+                    'desc'  => array(SYNDICATION_PLUGIN_20, sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'))
+                ));
+                $propbag->add('radio_per_row', '1');
                 break;
 
-            case 'show_2.0c':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_20c);
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
-                break;
-            case 'show_atom1.0':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'));
-                $propbag->add('description', '');
-                $propbag->add('default',     'false');
+            case 'fb_id':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERID);
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_DESC);
+                $propbag->add('default',     '');
                 break;
 
-            case 'show_feedburner':
-                $radio = array();
-                $radio['value'][] = 'false';
-                $radio['desc'][]  = NO;
-
-                $radio['value'][] = 'true';
-                $radio['desc'][]  = YES;
-
-                $radio['value'][] = 'force';
-                $radio['desc'][]  = FORCE;
-
-                $propbag->add('type',        'radio');
-                $propbag->add('radio_per_row', '3');
-                $propbag->add('radio',       $radio);
-                $propbag->add('name',        sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'FeedBurner'));
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD2);
+            case 'show_comment_feed':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        'Comment Feed');
+                $propbag->add('description', 'Show an additional link to a comment feed. This should be interesting only to the blogauthor itself'); // i18n
                 $propbag->add('default',     'false');
                 break;
 
             case 'seperator':
+            case 'seperator2':
+            case 'seperator3':
                 $propbag->add('type',        'seperator');
                 break;
 
@@ -176,38 +161,10 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     '');
                 break;
 
-            case 'fb_id':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERID);
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERID_DESC . ' ' . SYNDICATION_PLUGIN_FEEDBURNERID_FORWARD);
-                $propbag->add('default',     '');
-                break;
-
-            case 'fb_img':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERIMG);
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERIMG_DESC);
-                $propbag->add('default',     'fbapix.gif');
-                break;
-
-            case 'fb_title':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERTITLE);
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERTITLE_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'fb_alt':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDBURNERALT);
-                $propbag->add('description', SYNDICATION_PLUGIN_FEEDBURNERALT_DESC);
-                $propbag->add('default',     '');
-                break;
-
             case 'big_img':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_BIGIMG);
-                $propbag->add('description', SYNDICATION_PLUGIN_BIGIMG_DESC);
+                $propbag->add('type',        'string');                         
+                $propbag->add('name',        'Feed Icon');            // i18n
+                $propbag->add('description', 'Show a (big) icon insteaf of a textlink to the feed. Set to "none" to deactivate, or to "feedburner" to show a feedburner counter if an id is given below');       // i18n
                 $propbag->add('default',     'templates/2k11/img/subtome.png');
                 break;
 
@@ -232,6 +189,13 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     true);
                 break;
 
+            case 'custom_url':
+                $propbag->add('type',        'string');
+                $propbag->add('name',        'Custom URL'); // i18n
+                $propbag->add('description', 'If you want to link to a separate feed, enter its URL here. This will override all other settings.'); // i18n
+                $propbag->add('default',     '');
+                break;
+
 
             default:
                 return false;
@@ -245,17 +209,30 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
         $title = $this->get_config('title');
         $small_icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
-
         $custom_feed = trim($this->get_config('feed_name'));
         $custom_comm = trim($this->get_config('comment_name'));
-        $custom_img  = trim($this->get_config('big_img'));
+        $custom_img  = trim($this->get_config('big_img', 'templates/2k11/img/subtome.png'));
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
-        $useRss = serendipity_db_bool($this->get_config('show_2.0', true));
-        $useAtom = serendipity_db_bool($this->get_config('show_atom1.0', false));
+        $fbid        = $this->get_config('fb_id');
+        $custom_url  = $this->get_config('custom_url', '');
+
+        $useRss = true;
+        if ($this->get_config('feed_format', 'rss') == 'atom') {
+            $useRss = false;
+            $useAtom = true;
+        }
+
+        $img = 'http://feeds.feedburner.com/~fc/'.$this->get_config('fb_id').'?bg=99CCFF&amp;fg=444444&amp;anim=0';
 
         $icon = $small_icon;
         if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
             $icon = $custom_img;
+            if ($fbid != "" && $custom_img == 'feedburner') {
+                $icon = "http://feeds.feedburner.com/~fc/$fbid?bg=99CCFF&amp;fg=444444&amp;anim=0";
+            }
+            if ($fbid == "" && $custom_img == 'feedburner') {
+                $icon = 'templates/2k11/img/subtome.png';
+            }
         }
 
         if (empty($custom_feed) || $custom_feed == 'default' || $custom_feed == 'none' || $custom_feed == 'empty') {
@@ -270,9 +247,17 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $COMMENTS = $custom_comm;
         }
 
-        $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath');
-        if ($useAtom && (! $useRss)) {
-            $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath');
+        if ($custom_url != "") {
+            $mainFeed = $custom_url;
+        } else {
+            $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath');
+            if ($fbid != "") {
+                $mainFeed ='http://feeds.feedburner.com/' . $fbid;
+            } else {
+                if ($useAtom) {
+                    $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath');
+                }
+            }
         }
 
         $onclick = "";
@@ -292,63 +277,25 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                     </a>
                 </li>";
 
-        if ($useAtom && $useRss) {
-            if ($subtome) {
-                $onclick=$this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath'));
-            }
-            echo "<li>
-                <a class='serendipity_xml_icon'
-                    href='". serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath') ."'
-                    $onclick
-                >
-                    <img src='$small_icon' alt='ATOM/XML' style='border: 0px' />
-                    Atom $FEED
-                    </a>
-            </li>";
-        }
-
-        if (serendipity_db_bool($this->get_config('show_2.0c', false))) {
+        if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
             if ($subtome) {
                 $onclick=$this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath'));
             }
+            $href = serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath');
+            if ($useAtom) {
+                $href = serendipity_rewriteURL(PATH_FEEDS .'/comments.atom', 'serendipityHTTPPath');
+            }
+        
             echo "<li>
                 <a class='serendipity_xml_icon'
-                    href='" . serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath') ."'
+                    href='$href'
                     $onclick
                 >
                     <img src='$small_icon' alt='XML' style='border: 0px' />
-                    RSS $COMMENTS
+                    $COMMENTS $FEED
                 </a>
             </li>";
         }
-
-        if (serendipity_db_bool($this->get_config('show_feedburner', false)) || $this->get_config('show_feedburner', false) === 'force') {
-            $alt = $this->get_config('fb_alt');
-
-            $fbid = $this->get_config('fb_id');
-            if (stristr($fbid, 'http://')) {
-                $url = $fbid;
-            } else {
-                $url = 'http://feeds.feedburner.com/' . $fbid;
-            }
-
-            $img = $this->get_config('fb_img');
-            if (strlen($img) == 0) {
-                $img = 'http://feeds.feedburner.com/~fc/'.$this->get_config('fb_id').'?bg=99CCFF&amp;fg=444444&amp;anim=0';
-            }
-?>
-        <li>
-            <a href="<?php echo $url; ?>"<?php if (strlen($alt) > 0) echo " title=\"$alt\""; ?>><img src="<?php echo $img; ?>" alt="" style="border:0"/></a>
-            <?php
-            $mytitle = $this->get_config('fb_title');
-            if (strlen($mytitle) > 0) { ?>
-            <a href="<?php echo $url; ?>"><?php echo $mytitle; ?></a>
-            <?php } ?>
-    </li>
-<?php
-        }
-
-        echo '</ul>';
     }
 
     function getOnclick($url) {
