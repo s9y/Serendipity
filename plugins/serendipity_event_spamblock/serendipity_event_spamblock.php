@@ -702,11 +702,19 @@ var $filter_defaults;
         }
 
         if ($dbversion == '2') {
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog CHANGE COLUMN ip ip VARCHAR(45)";
-            $sql = serendipity_db_schema_import($q);
+            if (preg_match('@(postgres|pgsql)@i', $serendipity['dbType'])) {
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog ALTER COLUMN ip TYPE VARCHAR(45)";
+                $sql = serendipity_db_schema_import($q);
 
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess CHANGE COLUMN ip ip VARCHAR(45)";
-            $sql = serendipity_db_schema_import($q);
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess ALTER COLUMN ip TYPE VARCHAR(45)";
+                $sql = serendipity_db_schema_import($q);
+            } else {
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblocklog CHANGE COLUMN ip ip VARCHAR(45)";
+                $sql = serendipity_db_schema_import($q);
+
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}spamblock_htaccess CHANGE COLUMN ip ip VARCHAR(45)";
+                $sql = serendipity_db_schema_import($q);
+            }
 
             $this->set_config('dbversion', '3');
         }

@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Adapted database table structure change for statistics, shoutbox,
+      karma and spamblock plugin (for new field definition of "ip" field)
+      Thanks to rohdef!
+      
     * Added new option "enabledBackendPopups" that allow to specify
       if inline modal dialogs or popups are used in the backend for
       e.g. the category selectory and media library

@@ -942,7 +942,11 @@ class serendipity_event_statistics extends serendipity_event
         }
 
         if ($dbic == 1) {
-            $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors CHANGE COLUMN ip ip VARCHAR(45)";
+            if (preg_match('@(postgres|pgsql)@i', $serendipity['dbType'])) {
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors ALTER COLUMN ip TYPE VARCHAR(45)";
+            } else {
+                $q = "ALTER TABLE {$serendipity['dbPrefix']}visitors CHANGE COLUMN ip ip VARCHAR(45)";
+            }
             serendipity_db_schema_import($q);
 
             $this->set_config('db_indices_created', '2');
