@@ -42,7 +42,7 @@
         <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
     {/if}
 {elseif $adminAction == 'addnew'}
-    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span></h2>
+    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if}{if $only_group != UPGRADE} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span>{/if}</h2>
     {foreach $errorstack as $e_idx => $e_name}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
@@ -75,8 +75,10 @@
             </div>
         </div>
     </form>
+    
     {foreach $pluggroups AS $pluggroup => $groupstack}
     {if empty($pluggroup)}
+        {if $only_group == UPGRADE}<span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>{/if}
         {if !empty($only_group)}{continue}{/if}
     {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
         <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>

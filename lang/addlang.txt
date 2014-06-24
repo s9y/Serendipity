@@ -1,3 +1,4 @@
 @define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
 @define('INSTALL_BACKENDPOPUP', 'Enable use of popup windows for the backend');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Do you want to use popup windows for some backend functionality? When disabled (default), inline modal dialogs will be used for e.g. the category selector and media library.');
+@define('NO_UPDATES', 'No updates available'}
