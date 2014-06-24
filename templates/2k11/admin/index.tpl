@@ -11,13 +11,6 @@
 <![endif]-->
     <script src="{serendipity_getFile file='admin/js/modernizr-2.8.2.min.js'}"></script>
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
-    <script>Modernizr.load([
-        {
-            test : Modernizr.indexeddb
-            nope : ['{serendipity_getFile file='admin/js/IndexedDBShim.min.js'}']
-          },
-        ]);</script>
-    
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     <script src="{$head_link_script}"></script>
 </head>
