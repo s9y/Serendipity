@@ -18,9 +18,13 @@
         
             <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
             {foreach $config_groupkeys AS $config_groupkey}
-                <div class="{cycle values='odd,even'}">
-                {$plugin_options[$config_groupkey]}
-                </div>
+                {if $plugin_option[$config_groupkey]['ctype'] == 'seperator'}
+                    {$plugin_options[$config_groupkey]['config']}
+                {else}
+                    <div class="{cycle values='odd,even'}">
+                        {$plugin_options[$config_groupkey]['config']}
+                    </div>
+                {/if}
             {/foreach}
             </fieldset>
         </div>
@@ -33,9 +37,13 @@
 <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
 <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
 {foreach $plugin_options_ungrouped as $plugin_option}
-    <div class="configuration_group {cycle values='odd,even'}">
-    {$plugin_option}
-    </div>
+    {if $plugin_option['ctype'] == 'seperator'}
+        {$plugin_option['config']}
+    {else}
+        <div class="configuration_group {cycle values='odd,even'}">
+            {$plugin_option['config']}
+        </div>
+    {/if}
 {/foreach}
 {if $showSubmit_foot}
     <div class="form_buttons">
