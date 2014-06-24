@@ -648,8 +648,6 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        $media['case'] = 'choose';
-
         $file           = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
         $media['file'] = &$file;
         if (!is_array($file)) {
@@ -672,7 +670,7 @@ switch ($serendipity['GET']['adminAction']) {
         $media = array_merge($serendipity['GET'], $media);
         $serendipity['smarty']->assignByRef('media', $media);
         echo serendipity_smarty_show('admin/media_choose.tpl', $data);
-        return;
+        break;
 
     default:
         serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']);

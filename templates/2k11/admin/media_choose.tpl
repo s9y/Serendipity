@@ -1,64 +1,7 @@
-<!doctype html>
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="{$lang}"> <!--<![endif]-->
-<head>
-    <meta charset="{$CONST.LANG_CHARSET}">
-    <title>{$CONST.SERENDIPITY_ADMIN_SUITE}: {$CONST.SELECT_FILE}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {if $media.css}<link rel="stylesheet" href="{$media.css}">{/if}
-    {if $media.css_tree}<link rel="stylesheet" href="{$media.css_tree}">{/if}
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.8.2.min.js'}"></script>
-    <script src="{serendipity_getFile file='YahooUI/treeview/YAHOO.js'}"></script>
-    <script src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
-{serendipity_hookPlugin hook="backend_header" hookAll="true"}
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
-<script>
-var media_token_url = '{$media.token_url}';
-var media_rename = '{$CONST.ENTER_NEW_NAME}';
 
-{if $media.only_path}
-if (parent.frames && parent.frames['tree']) { 
-    parent.frames['tree'].document.getElementById('newdirlink').href = parent.frames['tree'].basenewdirurl + "{$media.only_path|escape}";
-} 
-
-{/if}
-</script>
-</head>
-{if $media.frameset}
-<frameset id="media_frame" cols="20%,*">
-    <frame id="media_frame_tree" frameborder="0" name="tree" scrolling="auto" src="{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=tree">
-    <frame id="media_frame_main" frameborder="0" name="media" src="{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default">
-</frameset>
-</html>
-{else}
-<body id="serendipity_admin_page">
-
-<div id="main" class="clearfix serendipityAdminContent">
-{if $media.case == 'external'}
-    <!-- EXTERNAL MEDIA START -->
-    {if $media.is_created OR $media.is_deleted}
-    <script>
-    if (parent.frames['tree']) { 
-        parent.frames['tree'].location.href  = parent.frames['tree'].location.href;
-        parent.frames['media'].location.href = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&serendipity[only_path]={$media.new_dir}';
-    } 
-    </script>
-    {/if}
-    {$media.external}
-    <!-- EXTERNAL MEDIA END -->
-{elseif $media.case == 'default'}
-    <!-- MEDIA MANAGER START -->
-    <h1>{$CONST.SELECT_FILE}</h1>
-
-    <p>{$CONST.CLICK_FILE_TO_INSERT}</p>
-    
-    {$media.external}
-    {$MEDIA_LIST}
-    <!-- MEDIA MANAGER END -->
-{elseif $media.case == 'choose'}
-    {if $perm_denied}
+{if $perm_denied}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
-    {else}
+{else}
     <!-- MEDIA SELECTION START -->
     {$media.external}
 
@@ -221,68 +164,6 @@ if (parent.frames && parent.frames['tree']) {
         </script>
         {/if}
     {/if}{* if $media.file.is_image is something else end *}
-    {/if}{* if $perm_denied else end *}
-{elseif $media.case == 'tree'}
-    <div id="content" class="clearfix">
-        <form id="mainForm" name="mainForm" action="javscript:;">
-            <div class="newsItem">
-                <div id="expandcontractdiv">
-                    <a id="tree_toggle_all" class="button_link" href="#treeDiv1">{$CONST.TOGGLE_ALL}</a>
-                </div>
-                <div id="treeDiv1"></div>
-            </div>
-        </form>
     </div>
+{/if}{* if $perm_denied else end *}
 
-    <footer id="footerContainer" class="clearfix">
-        <div id="footer">
-            <a id="newdirlink" class="button_link" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=directoryCreate">{$CONST.WORD_NEW}</a>
-            <a id="managedirlink" class="button_link" target="media" href="{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=directorySelect">{$CONST.MANAGE_DIRECTORIES}</a>
-        </div>
-    </footer>
-{/if}{* if $media.case switch end *}
-</div> <!-- //.serendipityAdminContent end -->
-
-{if $media.case == 'tree'}
-<script>
-    var tree;
-    var nodes = new Array();
-    var nodeIndex;
-    var coreNode      = '';
-    var last_path     = '';
-    var last_node     = new Array();
-    var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
-    var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
-
-    function treeInit() { 
-        tree = new YAHOO.widget.TreeView("treeDiv1");
-        tree.onExpand = function(node) { 
-            document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
-        }; 
-
-        coreNode          = new YAHOO.widget.TextNode("{$CONST.MEDIA}", tree.getRoot(), false);
-        coreNode.href     = baseurl;
-        coreNode.target   = 'media';
-        coreNode.expanded = true;
-        {foreach from=$media.paths item="item" key="id"}
-            mydir = { id: "{$id}", label: "{$item.name}", target : "media", href: baseurl + "{$item.relpath}", relpath: "{$item.relpath}" };
-            {if $item.depth == 1}
-                tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-            {else}
-            if (last_node[{$item.depth}-1]) { 
-                tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-            } else { 
-                tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-            } 
-            {/if}
-            last_node[{$item.depth}] = tmpNode;
-        {/foreach}
-        tree.draw();
-    } 
-
-    addLoadEvent(treeInit);
-</script>
-{/if}
-</body>
-</html>
-{/if}{* $media.frameset else end *}
