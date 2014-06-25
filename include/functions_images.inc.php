@@ -832,7 +832,7 @@ function serendipity_generateThumbs() {
                         echo "\n" . '<ul class="serendipityFileList">' . "\n";
                         $msg_printed = true;
                     }
-                    echo '<li>' . $sThumb . ': ' . $returnsize[0] . 'x' . $returnsize[1] . "</li>\n";
+                    echo '<li>' . $sThumb . ': ' . $returnsize['width'] . 'x' . $returnsize['height'] . "</li>\n";
                     if (!file_exists($newThumb)) {
                         printf('<li><span class="msg_error"><span class="icon-attention"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                     } else {
@@ -1097,6 +1097,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
     $files = serendipity_fetchImages();
 
     $fcount = count($files);
+
     for ($x = 0; $x < $fcount; $x++) {
         $update = array();
         $f      = serendipity_parseFileName($files[$x]);

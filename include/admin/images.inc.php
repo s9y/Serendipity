@@ -30,10 +30,6 @@ switch ($serendipity['GET']['adminAction']) {
         }
         @ignore_user_abort();
 
-        $i = serendipity_syncThumbs($deleteThumbs);
-        $data['print_SYNC_DONE'] = sprintf(SYNC_DONE, $i);
-        flush();
-
         $deleteThumbs = false;
         if (isset($serendipity['POST']['deleteThumbs'])) {
             switch ($serendipity['POST']['deleteThumbs'])
@@ -46,6 +42,10 @@ switch ($serendipity['GET']['adminAction']) {
                 break;
             }
         }
+
+        $i = serendipity_syncThumbs($deleteThumbs);
+        $data['print_SYNC_DONE'] = sprintf(SYNC_DONE, $i);
+        flush();
 
         $i = serendipity_generateThumbs();
         $data['print_RESIZE_DONE'] = sprintf(RESIZE_DONE, $i);

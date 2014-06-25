@@ -4,6 +4,8 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Fixed thumbnail recreation, Issue #134
+    
     * Merged external JS libraries into a central "plugins.js" of the 2k11
       backend template, can be updated through 
       templates/2k11/admin/js/gruntipity.php helper script.
