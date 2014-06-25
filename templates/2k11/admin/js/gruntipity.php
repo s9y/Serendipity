@@ -13,19 +13,19 @@
 ##
 ## If a new release of a plugin is to be incorporated (say a new release of jquery-autoscroll) you:
 ##
-## 1. Download the minified version jquery-autoscroll.js and put it into this directory
+## 1. Download the minified version jquery.autoscroll.js and put it into this directory
 ## 2. Execute "php gruntipity.php"
 ## 3. The "plugins.js" file will get updated
-## 4. Commit both plugins.js and jquery-autoscroll.js to the GIT repository
+## 4. Commit both plugins.js and jquery.autoscroll.js to the GIT repository
 ##
 ##
 ## If you want to add a new js plugin to the "plugins.js" you:
-## 1. Download the minified version jquery-XXX.js and put it into this directory
-## 2. Edit gruntipity.php, change the $files array and place the new jquery-XXX.js file at the place
-##    where it belongs, if order matters. If no order matters, put it at the end.
+## 1. Download the minified version jqueryXXX.js and put it into this directory
+## 2. Edit gruntipity.php, change the $files array and place the new jqueryXXX.js file at the place
+##    where it belongs, if order matters. If order does not matter, put it at the end.
 ## 3. Execute "php gruntipity.php"
 ## 4. The "plugins.js" file will get updated
-## 5. Add jquery-XXX.js to the GIT repository.
+## 5. Add jqueryXXX.js to the GIT repository.
 ## 6. Commit changes of plugins.js, gruntipity.php and jqueryXXX.js to the GIT repository
 ##
 
