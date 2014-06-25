@@ -182,6 +182,5 @@
                 <input name="serendipity[togglemoderate]" type="submit" value="{$CONST.APPROVE}">
             </div>
         </form>
-        <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
     {/if}
 {/if}

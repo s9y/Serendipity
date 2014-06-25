@@ -11,6 +11,7 @@
 <![endif]-->
     <script src="{serendipity_getFile file='admin/js/modernizr-2.8.2.min.js'}"></script>
     <script src="{serendipity_getFile file='jquery.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 </head>
 <body id="serendipity_admin_page">

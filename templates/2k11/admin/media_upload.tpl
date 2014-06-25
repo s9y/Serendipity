@@ -90,6 +90,3 @@
         {/if}
     </div>
 </form>
-<script src="{serendipity_getFile file='admin/js/jquery.cookie.js'}"></script>
-<script src="{serendipity_getFile file='admin/js/jquery.tabs.js'}"></script>
-<script src="{serendipity_getFile file='admin/js/canvas-toBlob.js'}"></script>

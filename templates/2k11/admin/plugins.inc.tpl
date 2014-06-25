@@ -38,9 +38,6 @@
         {$formToken}
         {$config}
     </form>
-    {if ! $use_popup}
-        <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
-    {/if}
 {elseif $adminAction == 'addnew'}
     <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if}{if $only_group != UPGRADE} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span>{/if}</h2>
     {foreach $errorstack as $e_idx => $e_name}
@@ -142,7 +139,6 @@
         {/foreach}
         </ul>
     {/foreach}
-    <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
 {else}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
@@ -151,11 +147,6 @@
     {if $new_plugin_failed}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
-    <script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
-    <script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
-    <script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
-    <script src="{serendipity_getFile file="admin/js/jquery.cookie.js"}"></script>
-    <script src="{serendipity_getFile file="admin/js/jquery.tabs.js"}"></script>
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel"> 
             <h3>{$CONST.SIDEBAR_PLUGINS}</h3>

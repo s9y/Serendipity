@@ -1616,3 +1616,37 @@ $(function() {
     serendipity_imageSelector_addToElement = function(str, id) {
         return serendipity.serendipity_imageSelector_addToElement(str, id);
     }
+
+// former "dragdrop.js" file
+$("document").ready(function() {
+    if (! Modernizr.touch){
+        function getDragdropConfiguration(group) {
+            return {
+                containerSelector: '.pluginmanager_container',
+                group: group,
+                handle: '.pluginmanager_grablet',
+
+                onDrop: function ($item, container, _super) {
+                    var placement = $item.parents('.pluginmanager_container').data("placement");
+                    $item.find('select[name$="placement]"]').val(placement);
+                    $item.removeClass("dragged").removeAttr("style")
+                    $("body").removeClass("dragging")
+                    $.autoscroll.stop();
+                },
+                onDragStart: function ($item, container, _super) {
+                    $.autoscroll.init();
+                    $item.css({
+                        height: $item.height(),
+                        width: $item.width()
+                    })
+                    $item.addClass("dragged")
+                    $("body").addClass("dragging")
+                }
+            }
+        }
+
+        $('.pluginmanager_sidebar .pluginmanager_container').sortable(getDragdropConfiguration('plugins_sidebar'));
+        $('.pluginmanager_event .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
+        $('.configuration_group .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
+    }
+});

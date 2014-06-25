@@ -33,9 +33,6 @@
 {/if}
 
 {* Those are only needed if the plugin contains a config item of type sequence, liek the entryproperty-plugin *}
-<script src="{serendipity_getFile file="admin/js/jquery.autoscroll.js"}"></script>
-<script src="{serendipity_getFile file="admin/js/jquery.sortable.js"}"></script>
-<script src="{serendipity_getFile file="admin/js/dragdrop.js"}"></script>
 {foreach $plugin_options_ungrouped as $plugin_option}
     {if $plugin_option['ctype'] == 'seperator'}
         {$plugin_option['config']}

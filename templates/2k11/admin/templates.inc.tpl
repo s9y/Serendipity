@@ -22,7 +22,6 @@
         <p>{$CONST.STYLE_OPTIONS_NONE}</p>
     {/if}
     </section>
-    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {else}
     <section id="template_select" class="clearfix">
         <h2>{$CONST.CURRENT_TEMPLATE}</h2>
@@ -141,7 +140,4 @@
         {/foreach}
         </ul>
     </section>
-
-    <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
-    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {/if}

@@ -4,6 +4,10 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Merged external JS libraries into a central "plugins.js" of the 2k11
+      backend template, can be updated through 
+      templates/2k11/admin/js/gruntipity.php helper script.
+      
     * Adapted database table structure change for statistics, shoutbox,
       karma and spamblock plugin (for new field definition of "ip" field)
       Thanks to rohdef!

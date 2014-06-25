@@ -146,7 +146,6 @@
             <a class="button_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=view">{$CONST.BACK}</a>
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
         </form>
-    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
 {/if}
 {if $view}
     <h2>{$CONST.CATEGORIES}</h2>

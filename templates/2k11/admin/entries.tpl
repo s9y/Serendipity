@@ -149,9 +149,6 @@
     {/if}
    
 </form>
-{if ! $use_popup}
-    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
-{/if}
 {if $entry_vars.wysiwyg}
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
         {$wysiwyg_block_item|emit_htmlarea_code:$wysiwyg_block_jsname}

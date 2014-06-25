@@ -124,5 +124,3 @@
         {serendipity_hookPlugin hook="backend_dashboard" hookAll="true"}
 
     </div>
-    <script src="{serendipity_getFile file='admin/js/jquery.syncheight.js'}"></script>
-    <script src="{serendipity_getFile file='admin/js/jquery.magnific-popup.js'}"></script>
