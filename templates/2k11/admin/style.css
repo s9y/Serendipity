@@ -2817,7 +2817,7 @@ img.mfp-img {
         margin: 0 0 1em 2%;
     }
 
-    #maintenance > section:nth-child(odd) {
+    #maintenance > section:nth-of-type(even) {
         margin: 0 0 1em 2%;
     }
 
