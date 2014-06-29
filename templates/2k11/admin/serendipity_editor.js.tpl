@@ -1374,55 +1374,7 @@ $(function() {
         });
     }
 
-    // Equal Heights
-    $(window).load(function() {
-        if (mq_small.matches) {
-            if($('.equal_heights').length > 0) {
-                if($('html').hasClass('lt-ie9')) {
-                    $('.equal_heights').syncHeight({
-                        updateOnResize: false
-                    });
-                } else {
-                    $('.equal_heights').syncHeight({
-                        updateOnResize: true
-                    });
-                }
-            }
-        }
-    });
-});
-
-// This is kept for older plugins. Use of $(document).ready() is encouraged.
-// At some point, these will be removed.
-    addLoadEvent = function(func) {
-        var oldonload = window.onload;
-        if (typeof window.onload != 'function') {
-            window.onload = func;
-        } else {
-            window.onload = function() {
-                oldonload();
-                func();
-            }
-        }
-    }
-
-    // Several plugins use this in the global scope. Those API functions are
-    // vital, so they reference to our new serendipity scope. This global
-    // scope is deprecated and subject to removal in the future.
-    serendipity_imageSelector_addToBody = function(block, textarea) {
-        return serendipity.serendipity_imageSelector_addToBody(block, textarea);
-    }
-
-    serendipity_imageSelector_done = function(textarea) {
-        return serendipity.serendipity_imageSelector_done(textarea);
-    }
-
-    serendipity_imageSelector_addToElement = function(str, id) {
-        return serendipity.serendipity_imageSelector_addToElement(str, id);
-    }
-
-// former "dragdrop.js" file
-$("document").ready(function() {
+    // Drag 'n' drop
     if (! Modernizr.touch){
         function getDragdropConfiguration(group) {
             return {
@@ -1453,4 +1405,50 @@ $("document").ready(function() {
         $('.pluginmanager_event .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
         $('.configuration_group .pluginmanager_container').sortable(getDragdropConfiguration('plugins_event'));
     }
+
+    // Equal Heights
+    $(window).load(function() {
+        if (mq_small.matches) {
+            if($('.equal_heights').length > 0) {
+                if($('html').hasClass('lt-ie9')) {
+                    $('.equal_heights').syncHeight({
+                        updateOnResize: false
+                    });
+                } else {
+                    $('.equal_heights').syncHeight({
+                        updateOnResize: true
+                    });
+                }
+            }
+        }
+    });
 });
+
+// This is kept for older plugins. Use of $(document).ready() is encouraged.
+// At some point, these will be removed.
+addLoadEvent = function(func) {
+    var oldonload = window.onload;
+    if (typeof window.onload != 'function') {
+        window.onload = func;
+    } else {
+        window.onload = function() {
+            oldonload();
+            func();
+        }
+    }
+}
+
+// Several plugins use this in the global scope. Those API functions are
+// vital, so they reference to our new serendipity scope. This global
+// scope is deprecated and subject to removal in the future.
+serendipity_imageSelector_addToBody = function(block, textarea) {
+    return serendipity.serendipity_imageSelector_addToBody(block, textarea);
+}
+
+serendipity_imageSelector_done = function(textarea) {
+    return serendipity.serendipity_imageSelector_done(textarea);
+}
+
+serendipity_imageSelector_addToElement = function(str, id) {
+    return serendipity.serendipity_imageSelector_addToElement(str, id);
+}
