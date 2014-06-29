@@ -538,6 +538,74 @@
                                           'permission'  => 'blogConfiguration')
                             );
 
+     $res['feeds'] =
+             array('title'          => INSTALL_CAT_FEEDS,
+                   'description'    => INSTALL_CAT_FEEDS_DESC,
+                   'items' => array(
+                                    array('var'         => 'fullfeed',
+                                          'title'       => SYNDICATION_PLUGIN_FULLFEED,
+                                          'description' => '',
+                                          'type'        => 'list',
+                                          'default'     => array('false' => NO, 'true' => YES, 'client' => 'Client'),
+                                          'permission'  => 'siteConfiguration'),
+                                        
+                                    array('var'         => 'feedBannerURL',
+                                          'title'       => SYNDICATION_PLUGIN_BANNERURL,
+                                          'description' => SYNDICATION_PLUGIN_BANNERURL_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+
+                                    array('var'         => 'feedBannerWidth',
+                                          'title'       => SYNDICATION_PLUGIN_BANNERWIDTH,
+                                          'description' => SYNDICATION_PLUGIN_BANNERWIDTH_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+                                          
+                                    array('var'         => 'feedBannerHeight',
+                                          'title'       => SYNDICATION_PLUGIN_BANNERHEIGHT,
+                                          'description' => SYNDICATION_PLUGIN_BANNERHEIGHT_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+
+                                    array('var'         => 'feedShowMail',
+                                          'title'       => SYNDICATION_PLUGIN_SHOW_MAIL,
+                                          'description' => '',
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'blogConfiguration'),
+                                          
+                                    array ('var'        => 'feedManagingEditor',
+                                          'title'       => SYNDICATION_PLUGIN_MANAGINGEDITOR,
+                                          'description' => SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+
+                                    array ('var'        => 'feedWebmaster',
+                                          'title'       => SYNDICATION_PLUGIN_WEBMASTER,
+                                          'description' => SYNDICATION_PLUGIN_WEBMASTER_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+
+                                    array ('var'        => 'feedTtl',
+                                          'title'       => SYNDICATION_PLUGIN_TTL,
+                                          'description' => SYNDICATION_PLUGIN_TTL_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+
+                                    array ('var'        => 'feedPubDate',
+                                          'title'       => SYNDICATION_PLUGIN_PUBDATE,
+                                          'description' => SYNDICATION_PLUGIN_PUBDATE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => true,
+                                          'permission'  => 'blogConfiguration')
+                            ));
+
     $res['imagehandling'] =
              array('title' => INSTALL_CAT_IMAGECONV,
                    'description' => INSTALL_CAT_IMAGECONV_DESC,

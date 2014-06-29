@@ -12,25 +12,15 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('version',       '2.0');
         $propbag->add('configuration', array(
                                         'title',
-                                        'fullfeed',
                                         'big_img',
                                         'feed_format',
                                         'subToMe',
                                         'show_comment_feed',
                                         'seperator',
-                                        'show_mail',
-                                        'field_managingEditor',
-                                        'field_webMaster',
-                                        'field_ttl',
-                                        'field_pubDate',
-                                        'bannerURL',
-                                        'bannerWidth',
-                                        'bannerHeight',
-                                        'seperator2',
                                         'iconURL',
                                         'feed_name',
                                         'comment_name',
-                                        'seperator3',
+                                        'seperator2',
                                         'fb_id',
                                         'custom_url'
                                        )
@@ -48,34 +38,16 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     SYNDICATE_THIS_BLOG);
                 break;
 
-            case 'fullfeed':
-                $radio['value'][] = 'false';
-                $radio['desc'][]  = NO;
-
-                $radio['value'][] = 'true';
-                $radio['desc'][]  = YES;
-
-                $radio['value'][] = 'client';
-                $radio['desc'][]  = 'Client';
-
-                $propbag->add('type',        'radio');
-                $propbag->add('name',        SYNDICATION_PLUGIN_FULLFEED);
-                $propbag->add('description', '');
-                $propbag->add('default',     false);
-                $propbag->add('radio_per_row', '3');
-                $propbag->add('radio',        $radio);
-                break;
-
             case 'feed_format':
                 $propbag->add('type', 'radio');
                 $propbag->add('name', 'Feed Format'); // i18n
                 $propbag->add('description', 'Which format shall be used for all feeds. Both are supported in all common readers'); // i18n
                 $propbag->add('default', 'rss');
                 $propbag->add('radio', array(
-                    'value' => array('rss', 'atom'),
-                    'desc'  => array(SYNDICATION_PLUGIN_20, sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'))
+                    'value' => array('rss', 'atom', 'rssatom'),
+                    'desc'  => array(SYNDICATION_PLUGIN_20, sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'), SYNDICATION_PLUGIN_20 .' + '. sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'))
                 ));
-                $propbag->add('radio_per_row', '1');
+                $propbag->add('radio_per_row', '3');
                 break;
 
             case 'fb_id':
@@ -94,43 +66,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'seperator':
             case 'seperator2':
-            case 'seperator3':
                 $propbag->add('type',        'seperator');
-                break;
-
-            case 'show_mail':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_SHOW_MAIL);
-                $propbag->add('description', '');
-                $propbag->add('default',     false);
-                break;
-
-            case 'field_managingEditor':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_MANAGINGEDITOR);
-                $propbag->add('description', SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'field_webMaster':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_WEBMASTER);
-                $propbag->add('description', SYNDICATION_PLUGIN_WEBMASTER_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'field_ttl':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_TTL);
-                $propbag->add('description', SYNDICATION_PLUGIN_TTL_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'field_pubDate':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        SYNDICATION_PLUGIN_PUBDATE);
-                $propbag->add('description', SYNDICATION_PLUGIN_PUBDATE_DESC);
-                $propbag->add('default',     true);
                 break;
 
             case 'iconURL':
@@ -138,27 +74,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('name',        XML_IMAGE_TO_DISPLAY);
                 $propbag->add('description', '');
                 $propbag->add('default',     'img/xml.gif');
-                break;
-
-            case 'bannerURL':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_BANNERURL);
-                $propbag->add('description', SYNDICATION_PLUGIN_BANNERURL_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'bannerWidth':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_BANNERWIDTH);
-                $propbag->add('description', SYNDICATION_PLUGIN_BANNERWIDTH_DESC);
-                $propbag->add('default',     '');
-                break;
-
-            case 'bannerHeight':
-                $propbag->add('type',        'string');
-                $propbag->add('name',        SYNDICATION_PLUGIN_BANNERHEIGHT);
-                $propbag->add('description', SYNDICATION_PLUGIN_BANNERHEIGHT_DESC);
-                $propbag->add('default',     '');
                 break;
 
             case 'big_img':
@@ -215,10 +130,13 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
         $fbid        = $this->get_config('fb_id');
         $custom_url  = $this->get_config('custom_url', '');
+        $feed_format = $this->get_config('feed_format', 'rss');
 
         $useRss = true;
-        if ($this->get_config('feed_format', 'rss') == 'atom') {
+        if ($feed_format  == 'atom') {
             $useRss = false;
+            $useAtom = true;
+        } else if ($feed_format == 'rssatom') {
             $useAtom = true;
         }
 
@@ -254,7 +172,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             if ($fbid != "") {
                 $mainFeed ='http://feeds.feedburner.com/' . $fbid;
             } else {
-                if ($useAtom) {
+                if ($useAtom && ! $useRss) {
                     $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath');
                 }
             }
@@ -266,123 +184,35 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         }
 
         echo '<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">';
-        echo "<li>
-                    <a id='serendipity_subtome'
-                        class='serendipity_xml_icon'
-                        href='$mainFeed'
-                        $onclick
-                    >
-                        <img src='$icon' alt='XML' style='border: 0px' />
-                        " . ($icon == $small_icon ?  ($useRss ? "RSS $FEED " : "Atom $FEED") : "") . " 
-                    </a>
-                </li>";
+        echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon);
+                
+        if ($useRss && $useAtom) {
+            echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath'), "Atom $FEED", $onclick, $small_icon);
+        }
 
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
-            if ($subtome) {
-                $onclick=$this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath'));
-            }
-            $href = serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath');
-            if ($useAtom) {
-                $href = serendipity_rewriteURL(PATH_FEEDS .'/comments.atom', 'serendipityHTTPPath');
-            }
-        
-            echo "<li>
-                <a class='serendipity_xml_icon'
-                    href='$href'
-                    $onclick
-                >
-                    <img src='$small_icon' alt='XML' style='border: 0px' />
-                    $COMMENTS $FEED
-                </a>
-            </li>";
+            echo $this->generateFeedButton(($useAtom && ! $useRss ? serendipity_rewriteURL(PATH_FEEDS .'/comments.atom', 'serendipityHTTPPath') : serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath')),
+                                            $COMMENTS,
+                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath')) : ""),
+                                            $small_icon);
         }
+        echo "</ul>";
+    }
+
+    function generateFeedButton($feed, $label, $onlick, $icon) {
+        $link = "class='serendipity_xml_icon' href='$feed' $onclick";
+        $output = "<li>
+            <a id='serendipity_subtome' $link><img src='$icon' alt='XML' style='border: 0px' /></a>";
+        if (! empty($label)) {
+            $output .= " <a $link>$label</a>";
+        }
+        return $output .= "</li>";
     }
 
     function getOnclick($url) {
         return "onclick=\"document.subtomeBtn=document.querySelector('#serendipity_subtome');document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
     }
 
-    function generate_rss_fields(&$title, &$description, &$entries) {
-        global $serendipity;
-        // Check for a logo to use for an RSS feed. Can either be set by configuring the
-        // syndication plugin OR by just placing a rss_banner.png file in the template directory.
-        // If both is not set, we will display our happy own branding. :-)
-
-        $bag    = new serendipity_property_bag;
-        $this->introspect($bag);
-        $additional_fields = array();
-
-        if ($this->get_config('bannerURL') != '') {
-            $img   = $this->get_config('bannerURL');
-            $w     = $this->get_config('bannerWidth');
-            $h     = $this->get_config('bannerHeight');
-        } elseif (($banner = serendipity_getTemplateFile('img/rss_banner.png', 'serendipityPath'))) {
-            $img = serendipity_getTemplateFile('img/rss_banner.png', 'baseURL');
-            $i = getimagesize($banner);
-            $w = $i[0];
-            $h = $i[1];
-        } else {
-            $img = serendipity_getTemplateFile('img/s9y_banner_small.png', 'baseURL');
-            $w = 100;
-            $h = 21;
-        }
-
-        $additional_fields['image'] = <<<IMAGE
-<image>
-        <url>$img</url>
-        <title>RSS: $title - $description</title>
-        <link>{$serendipity['baseURL']}</link>
-        <width>$w</width>
-        <height>$h</height>
-    </image>
-IMAGE;
-
-        $additional_fields['image_atom1.0'] = <<<IMAGE
-<icon>$img</icon>
-IMAGE;
-
-        $additional_fields['image_rss1.0_channel'] = '<image rdf:resource="' . $img . '" />';
-        $additional_fields['image_rss1.0_rdf'] = <<<IMAGE
-<image rdf:about="$img">
-        <url>$img</url>
-        <title>RSS: $title - $description</title>
-        <link>{$serendipity['baseURL']}</link>
-        <width>$w</width>
-        <height>$h</height>
-    </image>
-IMAGE;
-
-        // Now, if set, stitch together any fields that have been configured in the syndication plugin.
-        // First, do some sanity checks
-        $additional_fields['channel'] = '';
-        foreach($bag->get('configuration') AS $bag_index => $bag_value) {
-            if (preg_match('|^field_(.*)$|', $bag_value, $match)) {
-                $bag_content = $this->get_config($bag_value);
-
-                switch($match[1]) {
-                    case 'pubDate':
-                        if (serendipity_db_bool($bag_content)) {
-                            $bag_content = gmdate('D, d M Y H:i:s \G\M\T', $entries[0]['last_modified']);
-                        } else {
-                            $bag_content = '';
-                        }
-                        break;
-
-                    // Each new RSS-field which needs rewrite of its content should get its own case here.
-
-                    default:
-                        break;
-                }
-
-                if ($bag_content != '') {
-                    $additional_fields['channel'] .= '<' . $match[1] . '>' . $bag_content . '</' . $match[1] . '>' . "\n";
-                }
-
-            }
-        }
-
-        return $additional_fields;
-    }
 }
 
 ?>

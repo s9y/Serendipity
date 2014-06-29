@@ -138,56 +138,108 @@ $metadata = array(
     'version'           => $version
 );
 
+if (serendipity_get_config_var('feedBannerURL') != '') {
+    $img   = serendipity_get_config_var('feedBannerURL');
+    $w     = serendipity_get_config_var('feedBannerWidth');
+    $h     = serendipity_get_config_var('feedBannerHeight');
+} elseif (($banner = serendipity_getTemplateFile('img/rss_banner.png', 'serendipityPath'))) {
+    $img = serendipity_getTemplateFile('img/rss_banner.png', 'baseURL');
+    $i = getimagesize($banner);
+    $w = $i[0];
+    $h = $i[1];
+} else {
+    $img = serendipity_getTemplateFile('img/s9y_banner_small.png', 'baseURL');
+    $w = 100;
+    $h = 21;
+}
 
-include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
+    $metadata['additional_fields']['image'] = <<<IMAGE
+<image>
+    <url>$img</url>
+    <title>RSS: $title - $description</title>
+    <link>{$serendipity['baseURL']}</link>
+    <width>$w</width>
+    <height>$h</height>
+</image>
+IMAGE;
 
-$plugins = serendipity_plugin_api::enum_plugins();
+    $metadata['additional_fields']['image_atom1.0'] = <<<IMAGE
+<icon>$img</icon>
+IMAGE;
 
-if (is_array($plugins)) {
-    // load each plugin to make some introspection
-    foreach ($plugins as $plugin_data) {
-        if (preg_match('@(serendipity_syndication_plugin|serendipity_plugin_syndication)@', $plugin_data['name'])) {
-            $plugin =& serendipity_plugin_api::load_plugin($plugin_data['name'], $plugin_data['authorid']);
+    $metadata['additional_fields']['image_rss1.0_channel'] = '<image rdf:resource="' . $img . '" />';
+    $metadata['additional_fields']['image_rss1.0_rdf'] = <<<IMAGE
+<image rdf:about="$img">
+    <url>$img</url>
+    <title>RSS: $title - $description</title>
+    <link>{$serendipity['baseURL']}</link>
+    <width>$w</width>
+    <height>$h</height>
+</image>
+IMAGE;
 
-            $metadata['additional_fields'] = $plugin->generate_rss_fields($metadata['title'], $metadata['description'], $entries);
-            if (is_array($metadata['additional_fields'])) {
-                // Fix up array keys, because "." are not allowed when wanting to output using Smarty
-                foreach($metadata['additional_fields'] AS $_aid => $af) {
-                    $aid = str_replace('.', '', $_aid);
-                    $metadata['additional_fields'][$aid] = $af;
-                }
+// Now, if set, stitch together any fields that have been configured in the syndication plugin.
+// First, do some sanity checks
+$metadata['additional_fields']['channel'] = '';
+$rssFields = array('feedManagingEditor' => 'managingEditor', 'feedWebmaster' => 'webMaster', 'feedTtl' => 'ttl', 'feedPubDate' => 'pubDate');
+foreach( $rssFields as $configName => $field) {
+    $fieldValue = serendipity_get_config_var($configName);
+
+    switch($field) {
+        case 'pubDate':
+            if (serendipity_db_bool($fieldValue)) {
+                $fieldValue  = gmdate('D, d M Y H:i:s \G\M\T', $entries[0]['last_modified']);
+            } else {
+                $fieldValue  = '';
             }
-            $metadata['fullFeed']          = $plugin->get_config('fullfeed', false);
-            if ($metadata['fullFeed'] === 'client') {
-                if ($_GET['fullFeed'] || $serendipity['GET']['fullFeed']) {
-                    $metadata['fullFeed'] = true;
-                } else {
-                    $metadata['fullFeed'] = false;
-                }
-            }
-
-            if ($_GET['type']  == 'content' &&
-                !isset($_GET['category']) &&
-                !isset($serendipity['GET']['tag']) &&
-                $plugin->get_config('show_feedburner') === 'force' &&
-                !preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&
-                !(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
-               ) {
-                $fbid = $plugin->get_config('fb_id');
-                if (stristr($fbid, 'http://')) {
-                    $url = $fbid;
-                } else {
-                    $url = 'http://feeds.feedburner.com/' . $fbid;
-                }
-                header('Status: 302 Found');
-                header('Location: ' . $url);
-                exit;
-            }
-            $metadata['showMail']          = serendipity_db_bool($plugin->get_config('show_mail', $metadata['showMail']));
             break;
-        }
+
+        // Each new RSS-field which needs rewrite of its content should get its own case here.
+
+        default:
+            break;
+    }
+
+    if ($fieldValue != '') {
+        $metadata['additional_fields']['channel'] .= '<' . $field . '>' . $fieldValue . '</' . $field . '>' . "\n";
     }
 }
+
+if (is_array($metadata['additional_fields'])) {
+    // Fix up array keys, because "." are not allowed when wanting to output using Smarty
+    foreach($metadata['additional_fields'] AS $_aid => $af) {
+        $aid = str_replace('.', '', $_aid);
+        $metadata['additional_fields'][$aid] = $af;
+    }
+}
+$metadata['fullFeed']          = serendipity_get_config_var('fullfeed', false);
+if ($metadata['fullFeed'] === 'client') {
+    if ($_GET['fullFeed'] || $serendipity['GET']['fullFeed']) {
+        $metadata['fullFeed'] = true;
+    } else {
+        $metadata['fullFeed'] = false;
+    }
+}
+
+// TODO: Recode option to force a specific feed instead of showing the main feed
+//if ($_GET['type']  == 'content' &&
+    //!isset($_GET['category']) &&
+    //!isset($serendipity['GET']['tag']) &&
+    //$plugin->get_config('show_feedburner') === 'force' &&
+    //!preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&
+    //!(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
+   //) {
+    //$fbid = $plugin->get_config('fb_id');
+    //if (stristr($fbid, 'http://')) {
+        //$url = $fbid;
+    //} else {
+        //$url = 'http://feeds.feedburner.com/' . $fbid;
+    //}
+    //header('Status: 302 Found');
+    //header('Location: ' . $url);
+    //exit;
+//}
+$metadata['showMail']          = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
 $metadata['template_file'] = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');
