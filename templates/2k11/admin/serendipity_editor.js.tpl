@@ -1385,8 +1385,8 @@ $(function() {
                 onDrop: function ($item, container, _super) {
                     var placement = $item.parents('.pluginmanager_container').data("placement");
                     $item.find('select[name$="placement]"]').val(placement);
-                    $item.removeClass("dragged").removeAttr("style")
-                    $("body").removeClass("dragging")
+                    $item.removeClass('dragged').removeAttr('style');
+                    $('body').removeClass('dragging');
                     $.autoscroll.stop();
                 },
                 onDragStart: function ($item, container, _super) {
@@ -1394,9 +1394,9 @@ $(function() {
                     $item.css({
                         height: $item.height(),
                         width: $item.width()
-                    })
-                    $item.addClass("dragged")
-                    $("body").addClass("dragging")
+                    });
+                    $item.addClass('dragged');
+                    $('body').addClass('dragging');
                 }
             }
         }
