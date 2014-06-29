@@ -54,4 +54,4 @@ $fp = fopen('plugins.js', 'w');
 fwrite($fp, $plugins);
 fclose($fp);
 
-echo strlen($plugins) . " Bytes writte to plugins.js. Please commit changes.\n";
+echo strlen($plugins) . " bytes written to plugins.js. Please commit changes.\n";
