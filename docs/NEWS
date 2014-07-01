@@ -4,20 +4,22 @@
 Version 2.0-beta3 ()
 ------------------------------------------------------------------------
 
+    * Smarty 3.1.19 upgrade (see changelog)
+
     * Fixed thumbnail recreation, Issue #134
-    
+
     * Merged external JS libraries into a central "plugins.js" of the 2k11
       backend template, can be updated through 
       templates/2k11/admin/js/gruntipity.php helper script.
-      
+
     * Adapted database table structure change for statistics, shoutbox,
       karma and spamblock plugin (for new field definition of "ip" field)
       Thanks to rohdef!
-      
+
     * Added new option "enabledBackendPopups" that allow to specify
       if inline modal dialogs or popups are used in the backend for
       e.g. the category selectory and media library
-      
+
     * added experimental support for PHP/SMARTY IN MEMORY caching
       Enabled by default, if classes found loaded.
       Disable with 
@@ -29,17 +31,17 @@ Version 2.0-beta3 ()
       autoincrement
 
     * Remove Google Reader button from syndication plugin options
-    
+
     * Add subToMe-button to syndication plugin and change its defaults
 
     * Use Browsercache to save cache and restore entries
-    
+
     * Improved installer to forbid using database table prefixes with
       special characters
-      
+
     * Themes using Engines are now able to use the parent's
       configuration
-      
+
     * Prevent "new" plugin api to install double instances of plugins
       that are not stackable (issue #45)
 
