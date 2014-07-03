@@ -63,6 +63,10 @@
     max-width: 100%;
 }
 
+.serendipity_imageComment_center {
+    margin: auto !important;
+}
+
 .serendipity_image_left {
     float: left;
     margin: 0 2em 1em 0;
