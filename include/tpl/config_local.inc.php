@@ -546,7 +546,7 @@
                                           'title'       => SYNDICATION_PLUGIN_FULLFEED,
                                           'description' => '',
                                           'type'        => 'list',
-                                          'default'     => array('false' => NO, 'true' => YES, 'client' => 'Client'),
+                                          'default'     => array(false => NO, true => YES, 'client' => 'Client'),
                                           'permission'  => 'siteConfiguration'),
                                         
                                     array('var'         => 'feedBannerURL',
