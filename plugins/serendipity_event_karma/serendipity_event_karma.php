@@ -861,6 +861,11 @@ function vote(karmaVote,karmaId) {
     margin: 5px;
 }
 ");
+                    if ($serendipity['version'][0] > 1) {
+                        print("\n</style>\n");
+                        break;
+                    }
+
                 case 'css':
                     // Some CSS notes:
                     //
@@ -938,6 +943,8 @@ function vote(karmaVote,karmaId) {
                         $align = 'right';
                     }
                     --JAM: END COMMENT BLOCK */
+
+                    ob_start();
 
                     // Since errors might be printed at any time, always
                     // output the text-mode CSS
@@ -1061,7 +1068,18 @@ END_IMG_CSS;
                         }
                     } // End if image bar defined
 
-                    if ($event == 'backend_header') {
+                    $karmacss = ob_get_contents();
+                    ob_end_clean();
+
+                    if ($serendipity['version'][0] > 1) {
+                        // add replaced css content to the end of serendipity_admin.css, since with 2.0 the cached issue should be removed
+                        $this->cssEventData($eventData, $karmacss);
+                    } else {
+                        echo $karmacss;
+                    }
+
+
+                    if ($event == 'backend_header' && $serendipity['version'][0] < 2) {
                         print("\n</style>\n");
                     }
                     return true;
@@ -1783,6 +1801,18 @@ END_IMG_CSS;
             return false;
         }
     }
+
+    /**
+     * Add front- and backend css to serendipity(_admin).css
+     *
+     * @param  array   $eventData
+     * @param  array   $addData
+     *
+     */
+    function cssEventData(&$eventData, &$becss) {
+        $eventData .= $becss;
+    }
+
 
     /**
      * Check, if visit counting for the actual visitor should be done.
