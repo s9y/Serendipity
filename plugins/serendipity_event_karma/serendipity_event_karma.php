@@ -827,6 +827,7 @@ function vote(karmaVote,karmaId) {
 
                 // CSS generation hooks
                 case 'backend_header':
+                if ($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') {
                     // Generate the CSS for the graphical rating bar selector
                     //
                     // The CSS appears to be generated in a completely
@@ -863,8 +864,9 @@ function vote(karmaVote,karmaId) {
 ");
                     if ($serendipity['version'][0] > 1) {
                         print("\n</style>\n");
-                        break;
                     }
+                }
+                    if ($serendipity['version'][0] > 1) break;
 
                 case 'css':
                     // Some CSS notes:
@@ -1071,13 +1073,12 @@ END_IMG_CSS;
                     $karmacss = ob_get_contents();
                     ob_end_clean();
 
-                    if ($serendipity['version'][0] > 1) {
+                    if ($serendipity['version'][0] > 1 && $event == 'backend_header' && $serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') {
                         // add replaced css content to the end of serendipity_admin.css, since with 2.0 the cached issue should be removed
                         $this->cssEventData($eventData, $karmacss);
                     } else {
                         echo $karmacss;
                     }
-
 
                     if ($event == 'backend_header' && $serendipity['version'][0] < 2) {
                         print("\n</style>\n");
