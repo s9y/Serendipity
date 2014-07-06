@@ -1382,7 +1382,6 @@ $(function() {
                     $item.find('select[name$="placement]"]').val(placement);
                     $item.removeClass('dragged').removeAttr('style');
                     $('body').removeClass('dragging');
-                    $.autoscroll.stop();
                 },
                 onDragStart: function ($item, container, _super) {
                     $.autoscroll.init();
