@@ -221,24 +221,17 @@ if ($metadata['fullFeed'] === 'client') {
     }
 }
 
-// TODO: Recode option to force a specific feed instead of showing the main feed
-//if ($_GET['type']  == 'content' &&
-    //!isset($_GET['category']) &&
-    //!isset($serendipity['GET']['tag']) &&
-    //$plugin->get_config('show_feedburner') === 'force' &&
-    //!preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&
-    //!(serendipity_userLoggedIn() && isset($_GET['forceLocal']))
-   //) {
-    //$fbid = $plugin->get_config('fb_id');
-    //if (stristr($fbid, 'http://')) {
-        //$url = $fbid;
-    //} else {
-        //$url = 'http://feeds.feedburner.com/' . $fbid;
-    //}
-    //header('Status: 302 Found');
-    //header('Location: ' . $url);
-    //exit;
-//}
+if ($_GET['type']  == 'content' &&
+    !isset($_GET['category']) &&
+    !isset($serendipity['GET']['tag']) &&
+    serendipity_db_bool(serendipity_get_config_var('feedForceCustom', false)) &&
+    !preg_match('@FeedBurn@i', $_SERVER['HTTP_USER_AGENT']) &&  // the hardcoded pass for feedburner is for BC. New services should just use the forceLocal-param
+    !isset($_GET['forceLocal'])
+   ) {
+    header('Status: 302 Found');
+    header('Location: ' . serendipity_get_config_var('feedCustom'));
+    exit;
+}
 $metadata['showMail']          = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);

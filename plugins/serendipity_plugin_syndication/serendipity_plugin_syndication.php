@@ -105,9 +105,9 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 break;
 
             case 'custom_url':
-                $propbag->add('type',        'string');
+                $propbag->add('type',        'boolean');
                 $propbag->add('name',        'Custom URL'); // i18n
-                $propbag->add('description', 'If you want to link to a separate feed, enter its URL here. This will override all other settings.'); // i18n
+                $propbag->add('description', 'If you want to link to the custom feed specified in the blog configuration, enable this option.'); // i18n
                 $propbag->add('default',     '');
                 break;
 
@@ -129,7 +129,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $custom_img  = trim($this->get_config('big_img', 'templates/2k11/img/subtome.png'));
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
         $fbid        = $this->get_config('fb_id');
-        $custom_url  = $this->get_config('custom_url', '');
+        $custom_url  = serendipity_db_bool($this->get_config('custom_url', false));
         $feed_format = $this->get_config('feed_format', 'rss');
 
         $useRss = true;
@@ -165,8 +165,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $COMMENTS = $custom_comm;
         }
 
-        if ($custom_url != "") {
-            $mainFeed = $custom_url;
+        if ($custom_url) {
+            $mainFeed = serendipity_get_config_var('feedCustom');
         } else {
             $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath');
             if ($fbid != "") {

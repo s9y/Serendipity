@@ -603,6 +603,18 @@
                                           'description' => SYNDICATION_PLUGIN_PUBDATE_DESC,
                                           'type'        => 'bool',
                                           'default'     => true,
+                                          'permission'  => 'blogConfiguration'),
+                                    array ('var'        => 'feedCustom',
+                                          'title'       => FEED_CUSTOM,
+                                          'description' => FEED_CUSTOM_DESC,
+                                          'type'        => 'string',
+                                          'default'     => '',
+                                          'permission'  => 'blogConfiguration'),
+                                    array ('var'        => 'feedForceCustom',
+                                          'title'       => FEED_FORCE,
+                                          'description' => FEED_FORCE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
                                           'permission'  => 'blogConfiguration')
                             ));
 
