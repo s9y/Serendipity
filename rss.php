@@ -212,7 +212,7 @@ if (is_array($metadata['additional_fields'])) {
         $metadata['additional_fields'][$aid] = $af;
     }
 }
-$metadata['fullFeed']          = serendipity_get_config_var('fullfeed', false);
+$metadata['fullFeed']          = serendipity_get_config_var('feedFull', false);
 if ($metadata['fullFeed'] === 'client') {
     if ($_GET['fullFeed'] || $serendipity['GET']['fullFeed']) {
         $metadata['fullFeed'] = true;

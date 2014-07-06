@@ -220,6 +220,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Removal of obsolete and dead htmlarea directories',
                      'arguments' => array($dead_htmlarea_dirs),
                      'desc'      => 'Serendipity 2.0 replaces old WYSIWYG-Editors in htmlarea directory with CKEDITOR. The following dead directories will be completely removed from "/htmlarea".<br /><pre>' . implode(', ', $dead_htmlarea_dirs) . '</pre>'),
+                     
+               array('version'   => '2.0-beta3',
+                     'function'  => 'serendipity_upgrader_move_syndication_config',
+                     'title'     => 'Export syndication plugin options',
+                     'desc'      => 'Serendipity 2.0 moved the more generic feed option from the syndication plugin into the core. They will be set equivalent to their old configuration.'),
 
 );
 

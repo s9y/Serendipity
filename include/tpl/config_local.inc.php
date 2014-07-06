@@ -542,7 +542,7 @@
              array('title'          => INSTALL_CAT_FEEDS,
                    'description'    => INSTALL_CAT_FEEDS_DESC,
                    'items' => array(
-                                    array('var'         => 'fullfeed',
+                                    array('var'         => 'feedFull',
                                           'title'       => SYNDICATION_PLUGIN_FULLFEED,
                                           'description' => '',
                                           'type'        => 'list',
