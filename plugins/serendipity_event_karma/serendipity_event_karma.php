@@ -56,6 +56,7 @@ class serendipity_event_karma extends serendipity_event
             'frontend_configure'          => true,
             'entry_display'               => true,
             'css'                         => true,
+            'css_backend'                 => true,
             'backend_header'              => true,
             'backend_sidebar_admin_appearance' => true,
             'backend_sidebar_entries_event_display_karmalog' => true,
@@ -837,7 +838,7 @@ function vote(karmaVote,karmaId) {
                     // Note that the css_backend hook adds properties to the
                     // serendipity_admin.css, but that file is *always*
                     // cached.  We use backend_header and add the CSS to the
-                    // HEAD styles to make it dynamic.
+                    // HEAD styles to make it dynamic. (Edit: with 2.0 this has changed)
 
                     // Get the CSS, set $this->image_name so we'll output the
                     // standard graphical CSS prologue if any images are found.
@@ -868,6 +869,8 @@ function vote(karmaVote,karmaId) {
                 }
                     if ($serendipity['version'][0] > 1) break;
 
+                case 'css_backend':
+                    if ($serendipity['version'][0] < 2) break;
                 case 'css':
                     // Some CSS notes:
                     //
