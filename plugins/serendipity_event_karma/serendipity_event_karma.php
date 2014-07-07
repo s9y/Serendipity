@@ -828,7 +828,7 @@ function vote(karmaVote,karmaId) {
 
                 // CSS generation hooks
                 case 'backend_header':
-                if ($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') {
+                if (($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') || $serendipity['GET']['adminModule'] == 'plugins') {
                     // Generate the CSS for the graphical rating bar selector
                     //
                     // The CSS appears to be generated in a completely
@@ -870,7 +870,6 @@ function vote(karmaVote,karmaId) {
                     if ($serendipity['version'][0] > 1) break;
 
                 case 'css_backend':
-                    if ($serendipity['version'][0] < 2) break;
                 case 'css':
                     // Some CSS notes:
                     //
@@ -1076,20 +1075,22 @@ END_IMG_CSS;
                     $karmacss = ob_get_contents();
                     ob_end_clean();
 
-                    if ($serendipity['version'][0] > 1 && $event == 'backend_header' && $serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') {
-                        // add replaced css content to the end of serendipity_admin.css, since with 2.0 the cached issue should be removed
-                        $this->cssEventData($eventData, $karmacss);
-                    } else {
-                        echo $karmacss;
+                    if ($event == 'backend_header' && ($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') || $serendipity['GET']['adminModule'] == 'plugins') {
+                        if ($serendipity['version'][0] > 1) {
+                            // add replaced css content to the end of serendipity_admin.css, since with 2.0 the cached issue should be removed
+                            $this->cssEventData($eventData, $karmacss);
+                        } else {
+                            echo $karmacss;
+                            print("\n</style>\n");
+                        }
                     }
 
-                    if ($event == 'backend_header' && $serendipity['version'][0] < 2) {
-                        print("\n</style>\n");
-                    }
                     return true;
                     break;
 
-                //--TODO: Comment the functionality of this event hook.
+#                    if ($serendipity['version'][0] < 2) break;
+
+                    //--TODO: Comment the functionality of this event hook.
                 case 'event_additional_statistics':
                     $sql = array();
                     $sql['visits_top']    = array('visits', 'DESC');
@@ -1663,7 +1664,8 @@ END_IMG_CSS;
                     // Paging (partly ripped from include/admin/comments.inc.php)
                     $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 25);
                     $sql = serendipity_db_query("SELECT COUNT(*) AS total FROM {$serendipity['dbPrefix']}karmalog l WHERE 1 = 1 " . $and, true);
-                    $totalVotes = $sql['total'];
+                    if (is_string($sql)) print("<span class='msg_error'><span class='icon-attention-circled'></span> ".$sql."</span>\n");
+                    $totalVotes = (is_array($sql) &&  is_int($sql['total'])) ? $sql['total'] : 0;
                     $pages = ($commentsPerPage == COMMENTS_FILTER_ALL ? 1 : ceil($totalVotes/(int)$commentsPerPage));
                     $page = (int)$serendipity['GET']['page'];
                     if ($page == 0 || ($page > $pages)) {
@@ -1679,7 +1681,7 @@ END_IMG_CSS;
 
                     if ($commentsPerPage == COMMENTS_FILTER_ALL) {
                         $limit = '';
-                    }else {
+                    } else {
                         $limit = serendipity_db_limit_sql(serendipity_db_limit(($page-1)*(int)$commentsPerPage, (int)$commentsPerPage));
                     }
 
