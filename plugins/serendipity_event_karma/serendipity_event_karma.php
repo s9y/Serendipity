@@ -43,8 +43,8 @@ class serendipity_event_karma extends serendipity_event
         $propbag->add('name',          PLUGIN_KARMA_NAME);
         $propbag->add('description',   PLUGIN_KARMA_BLAHBLAH);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz');
-        $propbag->add('version',       '2.10');
+        $propbag->add('author',        'Garvin Hicking, Grischa Brockhaus, Judebert, Gregor Voeltz, Ian');
+        $propbag->add('version',       '2.11');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -828,46 +828,49 @@ function vote(karmaVote,karmaId) {
 
                 // CSS generation hooks
                 case 'backend_header':
-                if (($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') || $serendipity['GET']['adminModule'] == 'plugins') {
-                    // Generate the CSS for the graphical rating bar selector
-                    //
-                    // The CSS appears to be generated in a completely
-                    // different instance of Serendipity, as if index.php gets
-                    // called separately for the CSS.
-                    //
-                    // Note that the css_backend hook adds properties to the
-                    // serendipity_admin.css, but that file is *always*
-                    // cached.  We use backend_header and add the CSS to the
-                    // HEAD styles to make it dynamic. (Edit: with 2.0 this has changed)
+                    if (($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') || $serendipity['GET']['adminModule'] == 'plugins') {
+                        // Generate the CSS for the graphical rating bar selector
+                        //
+                        // The CSS appears to be generated in a completely
+                        // different instance of Serendipity, as if index.php gets
+                        // called separately for the CSS.
+                        //
+                        // Note that the css_backend hook adds properties to the
+                        // serendipity_admin.css, but that file is *always*
+                        // cached.  We use backend_header and add the CSS to the
+                        // HEAD styles to make it dynamic. (Edit: with 2.0 this has changed)
 
-                    // Get the CSS, set $this->image_name so we'll output the
-                    // standard graphical CSS prologue if any images are found.
-                    $this->createRatingSelector();
+                        // Get the CSS, set $this->image_name so we'll output the
+                        // standard graphical CSS prologue if any images are found.
+                        $this->createRatingSelector();
 
-                    print ("<style type='text/css'>\n");
+                        print ("<style type='text/css'>\n");
 
-                    $align = 'center';
-                    $bg = $this->get_config('preview_bg', false);
-                    if (!empty($bg)) {
-                        if ((strpos($bg, ';') !== false) || (strpos($bg, ',') !== false)) {
-                            $bg = 'red';
-                        }
-                        print("
+                        $align = 'center';
+                        $bg = $this->get_config('preview_bg', false);
+                        if (!empty($bg)) {
+                            if ((strpos($bg, ';') !== false) || (strpos($bg, ',') !== false)) {
+                                $bg = 'red';
+                            }
+                            print("
 .serendipity_karmaVote_selectorTable {
     background: $bg;
 }
 ");
-                    }
-                    print("
+                        }
+                        print("
 .serendipityAdminContent .serendipity_karmaVoting_links {
     margin: 5px;
 }
 ");
-                    if ($serendipity['version'][0] > 1) {
-                        print("\n</style>\n");
+                        if ($serendipity['version'][0] > 1) {
+                            print("\n</style>\n");
+                        }
                     }
-                }
-                    if ($serendipity['version'][0] > 1) break;
+                    if ($serendipity['version'][0] > 1) {
+                        break;
+                        return true;
+                    }
 
                 case 'css_backend':
                 case 'css':
@@ -948,8 +951,9 @@ function vote(karmaVote,karmaId) {
                     }
                     --JAM: END COMMENT BLOCK */
 
-                    ob_start();
-
+                    if ($serendipity['version'][0] < 2) {
+                        print ("<style type='text/css'>\n");
+                    }
                     // Since errors might be printed at any time, always
                     // output the text-mode CSS
                     print <<<EOS
@@ -1072,23 +1076,12 @@ END_IMG_CSS;
                         }
                     } // End if image bar defined
 
-                    $karmacss = ob_get_contents();
-                    ob_end_clean();
-
-                    if ($event == 'backend_header' && ($serendipity['GET']['adminModule'] == 'event_display' && $serendipity['GET']['adminAction'] == 'karmalog') || $serendipity['GET']['adminModule'] == 'plugins') {
-                        if ($serendipity['version'][0] > 1) {
-                            // add replaced css content to the end of serendipity_admin.css, since with 2.0 the cached issue should be removed
-                            $this->cssEventData($eventData, $karmacss);
-                        } else {
-                            echo $karmacss;
-                            print("\n</style>\n");
-                        }
+                    if ($serendipity['version'][0] < 2) {
+                        print("\n</style>\n");
                     }
 
                     return true;
                     break;
-
-#                    if ($serendipity['version'][0] < 2) break;
 
                     //--TODO: Comment the functionality of this event hook.
                 case 'event_additional_statistics':

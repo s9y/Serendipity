@@ -1,3 +1,9 @@
+Version 2.11:
+
+    * CSS placement changes for S9y 2.0
+
+------------------------------------------------------------------------
+
 Version 2.9:
 
     * fixed db table karmalog, ip column to IPv6 length
