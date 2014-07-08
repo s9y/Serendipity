@@ -1641,8 +1641,8 @@ END_IMG_CSS;
             <div class='form_select'>
                 <label for='serendipity_sort_ordermode'>".SORT_ORDER."</label>
                 <select id='serendipity_sort_ordermode' name='serendipity[sort][ordermode]'>
-                    <option value='DESC'".($desc?"selected='selected'":'').">".SORT_ORDER_DESC."</option>
-                    <option value='ASC'".($desc?'':"selected='selected'").">".SORT_ORDER_ASC."</option>
+                    <option value='DESC'".($desc?" selected='selected'":'').">".SORT_ORDER_DESC."</option>
+                    <option value='ASC'".($desc?'':" selected='selected'").">".SORT_ORDER_ASC."</option>
                 </select>
             </div>
         </div>
@@ -1843,12 +1843,16 @@ END_IMG_CSS;
         // We will be wrapped in a <tr><td colspan="2">
         $this->select_html .= "
 <strong>" . PLUGIN_KARMA_IMAGE . "</strong><br />
-<span style='color: rgb(94, 122, 148); font-size: 8pt;'>&nbsp;".PLUGIN_KARMA_IMAGE_DESC."</span>
+<span style='color: rgb(94, 122, 148); font-size: 8pt;'>&nbsp;".PLUGIN_KARMA_IMAGE_DESC."</span>";
+        if ($serendipity['version'][0] < 2) {
+            $this->select_html .= "
 </td>
 <td></td>
 </tr>
 <tr>
-<td colspan='2'>
+<td colspan='2'>\n";
+        }
+        $this->select_html .= "
 <table border='1' class='serendipity_karmaVote_selectorTable'>";
         // Add the 'text-only' selection and its CSS
         if ($cursel == '0') {
@@ -1949,8 +1953,11 @@ END_IMG_CSS;
 
         // End the table, with a config-item bottom-border separator
         $this->select_html .= 
-"</tr>\n</table>
-<tr><td colspan='2' style='border-bottom: 1px solid #000000; vertical-align: top'>&nbsp;<td></tr>\n";
+"</tr>\n</table>\n";
+        if ($serendipity['version'][0] < 2) {
+            $this->select_html .= 
+"<tr><td colspan='2' style='border-bottom: 1px solid #000000; vertical-align: top'>&nbsp;<td></tr>\n";
+        }
         // The config item and row are closed by the core code
 
         return $this->select_html;
