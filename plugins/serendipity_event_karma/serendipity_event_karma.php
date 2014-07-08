@@ -1802,18 +1802,6 @@ END_IMG_CSS;
     }
 
     /**
-     * Add front- and backend css to serendipity(_admin).css
-     *
-     * @param  array   $eventData
-     * @param  array   $addData
-     *
-     */
-    function cssEventData(&$eventData, &$becss) {
-        $eventData .= $becss;
-    }
-
-
-    /**
      * Check, if visit counting for the actual visitor should be done.
      */
     function track_clicks_allowed_by_user(){
