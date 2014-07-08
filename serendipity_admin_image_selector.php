@@ -254,7 +254,7 @@ switch ($serendipity['GET']['step']) {
             unset($media['file']);
             unset($file);
         }
-        $showFile = 'admin/media_showitem.tpl';
+        $showFile = 'media_showitem.tpl';
         break;
 
     case 'start':
