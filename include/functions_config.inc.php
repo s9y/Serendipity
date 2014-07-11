@@ -969,7 +969,7 @@ function serendipity_getSessionLanguage() {
     if (isset($serendipity['COOKIE']['serendipityLanguage'])) {
         if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Cookie');
         $lang = $serendipity['COOKIE']['serendipityLanguage'];
-    } elseif (!empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
+    } elseif (isset($serendipity['GET']['lang_selected']) && !empty($serendipity['languages'][$serendipity['GET']['lang_selected']])) {
         if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: GET');
         $lang = $serendipity['GET']['lang_selected'];
     } elseif (serendipity_db_bool($serendipity['lang_content_negotiation'])) {
