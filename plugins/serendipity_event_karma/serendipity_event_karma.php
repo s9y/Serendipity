@@ -951,7 +951,7 @@ function vote(karmaVote,karmaId) {
                     }
                     --JAM: END COMMENT BLOCK */
 
-                    if ($serendipity['version'][0] < 2) {
+                    if ($serendipity['version'][0] < 2 && $event == 'backend_header') {
                         print ("<style type='text/css'>\n");
                     }
                     // Since errors might be printed at any time, always
@@ -1076,7 +1076,7 @@ END_IMG_CSS;
                         }
                     } // End if image bar defined
 
-                    if ($serendipity['version'][0] < 2) {
+                    if ($serendipity['version'][0] < 2 && $event == 'backend_header') {
                         print("\n</style>\n");
                     }
 
