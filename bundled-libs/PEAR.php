@@ -39,7 +39,8 @@ define('PEAR_ERROR_CALLBACK',  16);
  */
 define('PEAR_ERROR_EXCEPTION', 32);
 /**#@-*/
-define('PEAR_ZE2', (function_exists('version_compare') &&
+// s9y-todo: Check out PEAR5.php, we need this?
+define('PEAR_ZE2', (false && function_exists('version_compare') &&
                     version_compare(zend_version(), "2-dev", "ge")));
 
 if (substr(PHP_OS, 0, 3) == 'WIN') {
