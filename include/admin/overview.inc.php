@@ -48,6 +48,8 @@ $data['usedVersion'] = $serendipity['version'];
 $data['updateCheck'] = $serendipity['updateCheck'];
 $data['curVersion'] = serendipity_getCurrentVersion();
 $data['update'] = version_compare($data['usedVersion'], $data['curVersion'], '<');
+serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output);
+$data['updateButton'] = $output;
 
 $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
