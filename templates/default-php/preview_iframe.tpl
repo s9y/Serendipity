@@ -1,7 +1,7 @@
     <head>
         <title><?= SERENDIPITY_ADMIN_SUITE ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=<?= $GLOBALS['tpl']['head_charset'] ?>" />
-        <meta name="Powered-By" content="Serendipity v.<?= $GLOBALS['tpl']['head_version'] ?>" />
+        <meta name="generator" content="Serendipity v.<?= $GLOBALS['tpl']['serendipityVersion'] ?>" />
         <link rel="stylesheet" type="text/css" href="<?= $GLOBALS['tpl']['head_link_stylesheet'] ?>" />
         <script type="text/javascript">
            window.onload = function() {ldelim}
