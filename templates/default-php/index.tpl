@@ -3,7 +3,7 @@
 <head>
     <title><?= $GLOBALS['template']->getdefault('head_title', 'blogTitle'); ?> - <?= $GLOBALS['template']->getdefault('head_subtitle', 'blogDescription'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=<?= $GLOBALS['tpl']['head_charset']; ?>" />
-    <meta name="Powered-By" content="Serendipity v.<?= $GLOBALS['tpl']['head_version']; ?>" />
+    <meta name="generator" content="Serendipity v.<?= $GLOBALS['tpl']['serendipityVersion']; ?>" />
     <link rel="stylesheet" type="text/css" href="<?= $GLOBALS['tpl']['head_link_stylesheet']; ?>" />
     <link rel="alternate"  type="application/rss+xml" title="<?= $GLOBALS['tpl']['blogTitle']; ?> RSS feed" href="<?= $GLOBALS['tpl']['serendipityBaseURL']; ?><?= $GLOBALS['tpl']['serendipityRewritePrefix']; ?>feeds/index.rss2" />
     <link rel="alternate"  type="application/x.atom+xml"  title="<?= $GLOBALS['tpl']['blogTitle']; ?> Atom feed"  href="<?= $GLOBALS['tpl']['serendipityBaseURL']; ?><?= $GLOBALS['tpl']['serendipityRewritePrefix']; ?>feeds/atom.xml" />

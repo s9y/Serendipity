@@ -6,7 +6,7 @@
 	<title>{$head_title|@default:$blogTitle} {if $head_subtitle} - {$head_subtitle}{/if}</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<meta name="generator" content="Serendipity v.{$head_version}" />
+	<meta name="generator" content="Serendipity v.{$serendipityVersion}" />
 
 	<style type="text/css" media="screen">
 		@import url( {serendipity_getFile file="wp-layout.css"} );
