@@ -134,7 +134,7 @@
         <div class="entries_pane">
             <ul id="entries_list" class="plainList zebra_list">
             {foreach $entries as $entry}
-                {if ($entry@index > $perPage)}{continue}{/if}
+                {if ($entry@index >= $perPage)}{continue}{/if}
                 <li id="entry_{$entry.id}" class="clearfix {cycle values="odd,even"}">
                     {if NOT $simpleFilters}
                         <div class="form_check">
