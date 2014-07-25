@@ -40,8 +40,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'feed_format':
                 $propbag->add('type', 'radio');
-                $propbag->add('name', 'Feed Format'); // i18n
-                $propbag->add('description', 'Which format shall be used for all feeds. Both are supported in all common readers'); // i18n
+                $propbag->add('name', SYNDICATION_PLUGIN_FEEDFORMAT);
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDFORMAT_DESC);
                 $propbag->add('default', 'rss');
                 $propbag->add('radio', array(
                     'value' => array('rss', 'atom', 'rssatom'),
@@ -59,8 +59,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'show_comment_feed':
                 $propbag->add('type',        'boolean');
-                $propbag->add('name',        'Comment Feed');
-                $propbag->add('description', 'Show an additional link to a comment feed. This should be interesting only to the blogauthor itself'); // i18n
+                $propbag->add('name',        SYNDICATION_PLUGIN_COMMENTFEED);
+                $propbag->add('description', SYNDICATION_PLUGIN_COMMENTFEED_DESC);
                 $propbag->add('default',     'false');
                 break;
 
@@ -78,8 +78,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'big_img':
                 $propbag->add('type',        'string');                         
-                $propbag->add('name',        'Feed Icon');            // i18n
-                $propbag->add('description', 'Show a (big) icon insteaf of a textlink to the feed. Set to "none" to deactivate, or to "feedburner" to show a feedburner counter if an id is given below');       // i18n
+                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDICON);
+                $propbag->add('description', SYNDICATION_PLUGIN_FEEDICON_DESC);
                 $propbag->add('default',     'templates/2k11/img/subtome.png');
                 break;
 
@@ -106,8 +106,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'custom_url':
                 $propbag->add('type',        'boolean');
-                $propbag->add('name',        'Custom URL'); // i18n
-                $propbag->add('description', 'If you want to link to the custom feed specified in the blog configuration, enable this option.'); // i18n
+                $propbag->add('name',        SYNDICATION_PLUGIN_CUSTOMURL);
+                $propbag->add('description', SYNDICATION_PLUGIN_CUSTOMURL_DESC);
                 $propbag->add('default',     '');
                 break;
 

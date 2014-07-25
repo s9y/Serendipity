@@ -1053,3 +1053,17 @@
 @define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeigt ein (großes) Bild oberhalb der Seitenleiste. Hier kann eine volle (oder absolut referenzierte) URL eingetragen werden oder "none" für einen Textlink (bisheriger Standard)');
 @define('INSTALL_BACKENDPOPUP', 'Popups für das Backend verwenden?');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Sollen im Backend Popup-Fenster eingesetzt werden? Wenn deaktiviert (standard), werden eingebettete modale Dialoge z.b. für die Mediendatenbank und die Kategorieauswahl verwendet.');
+@define('UPDATE_STABLE', 'stabil');
+@define('UPDATE_BETA', 'beta');
+@define('SYNDICATION_PLUGIN_FEEDFORMAT', 'Feed-Format');
+@define('SYNDICATION_PLUGIN_FEEDFORMAT_DESC', 'Hier kann das Standard-Format der Feeds gewählt werden. Beide Formate werden heutzutage von den meisten Feedreader unterstützt.');
+@define('SYNDICATION_PLUGIN_COMMENTFEED', 'Kommentar-Feed');
+@define('SYNDICATION_PLUGIN_COMMENTFEED_DESC', 'Bindet einen zusätzlichen Link zum Kommentar-Feed ein. Dies ist meist eher für die Blog-Autoren interessant.');
+@define('SYNDICATION_PLUGIN_FEEDICON', 'Feed-Icon');
+@define('SYNDICATION_PLUGIN_FEEDICON_DESC', 'Zeigt ein (großes) Bild anstelle eines Textlinks an. Auf "none" stellen um dies zu deaktivieren oder auf "feedburner" stellen, wenn bei der Verwendung von FeedBurner dessen Symbol genutzt werden soll.');
+@define('SYNDICATION_PLUGIN_CUSTOMURL', 'Individuelle Feed-URL aktivieren?');
+@define('SYNDICATION_PLUGIN_CUSTOMURL_DESC', 'Falls der Link zu der individuellen Feed-URL der globalen Konfiguration führen soll, muss diese Option aktiviert werden.');
+@define('FEED_CUSTOM', 'Individuelle Feed-URL');
+@define('FEED_CUSTOM_DESC', 'Wenn gesetzt, wird die eingetragene URL verwendet um Feedreader dorthin weiterzuleiten. Dies ist hilfreich für Statistikdienste wie z.B. Feedburner, so dass hier die Feedburner-URL des eigenen Feeds hinterlegt werden kann.');
+@define('FEED_FORCE', 'Erzwingen der individuellen Feed-URL?');
+@define('FEED_FORCE_DESC', 'Wenn aktiviert, werden alle Feedreader automatisch zu der eingetragenen individuellen Feed-URL weitergeleitet.');

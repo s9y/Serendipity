@@ -402,13 +402,13 @@
                                           'title'       => UPDATE_NOTIFICATION,  
                                           'description' => UPDATE_NOTIFICATION_DESC,
                                           'type'        => 'list',
-                                          'default'     => array('stable' => 'stable', 'beta' => 'beta', 'false' => NO ), # i18n
+                                          'default'     => array('stable' => UPDATE_STABLE, 'beta' => UPDATE_BETA, 'false' => NO),
                                           'permission'  => 'blogConfiguration'),
                                     array('var'         => 'logLevel',
                                           'title'       => LOG_LEVEL,  
                                           'description' => LOG_LEVEL_DESC,
                                           'type'        => 'list',
-                                          'default'     => array('Off' => NO, 'error' => ERROR, 'debug' => DEBUG), # i18n
+                                          'default'     => array('Off' => NO, 'error' => ERROR, 'debug' => DEBUG),
                                           'permission'  => 'blogConfiguration'),
                             ));
 
