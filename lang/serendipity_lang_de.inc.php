@@ -1067,3 +1067,6 @@
 @define('FEED_CUSTOM_DESC', 'Wenn gesetzt, wird die eingetragene URL verwendet um Feedreader dorthin weiterzuleiten. Dies ist hilfreich für Statistikdienste wie z.B. Feedburner, so dass hier die Feedburner-URL des eigenen Feeds hinterlegt werden kann.');
 @define('FEED_FORCE', 'Erzwingen der individuellen Feed-URL?');
 @define('FEED_FORCE_DESC', 'Wenn aktiviert, werden alle Feedreader automatisch zu der eingetragenen individuellen Feed-URL weitergeleitet.');
+@define('NO_UPDATES', 'No plugin updates are available');
+@define('PLUGIN_GROUP_ALL', 'All categories');
+
