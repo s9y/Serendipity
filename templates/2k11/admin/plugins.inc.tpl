@@ -75,7 +75,7 @@
     
     {foreach $pluggroups AS $pluggroup => $groupstack}
     {if empty($pluggroup)}
-        {if $only_group == UPGRADE}<span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>{/if}
+        {if $only_group == UPGRADE && empty($groupstack)}<span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>{/if}
         {if !empty($only_group)}{continue}{/if}
     {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
         <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
