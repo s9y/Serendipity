@@ -334,7 +334,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     if (is_array($matches)) {
-        if (preg_match('@(/?' . preg_quote(PATH_FEEDS, '@') . '/)(.+)\.rss@i', $uri, $uriparts)) {
+        if (preg_match('@(/?' . preg_quote(PATH_FEEDS, '@') . '/)(.+?)(?:\.rss)?$@i', $uri, $uriparts)) {
             if (strpos($uriparts[2], $serendipity['permalinkCategoriesPath']) === 0) {
                 $catid = serendipity_searchPermalink($serendipity['permalinkFeedCategoryStructure'], $uriparts[2], $matches[1], 'category');
                 if (is_numeric($catid) && $catid > 0) {
