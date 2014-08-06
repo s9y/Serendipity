@@ -447,4 +447,11 @@ if (isset($_SESSION['serendipityEmail'])) {
 }
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
+
+// here you can set some parameters, which ImageMagick should use to generate the thumbnails
+// by default, thumbs will get a little more brightness and saturation (modulate)
+// an unsharp-mask (unsharp)
+// and quality-compression of 75% (default would be to use quality of original image)
+$serendipity['imagemagick_thumb_parameters'] = '-modulate 105,140 -unsharp 0.5x0.5+1.0 -quality 75';
+
 /* vim: set sts=4 ts=4 expandtab : */
