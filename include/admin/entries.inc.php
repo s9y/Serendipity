@@ -315,6 +315,7 @@ switch($serendipity['GET']['adminAction']) {
 
             $smartentries = array();
             foreach ($entries as $ey) {
+                $entry_cats = '';
                 if (count($ey['categories'])) {
                     $cats = array();
                     foreach ($ey['categories'] as $cat) {
