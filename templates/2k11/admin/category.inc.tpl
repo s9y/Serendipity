@@ -143,6 +143,8 @@
                 </figure>
             </div>
 
+            {serendipity_hookPlugin hook="backend_category_showForm" data=$cid hookAll="true"}
+
             <a class="button_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=view">{$CONST.BACK}</a>
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
         </form>

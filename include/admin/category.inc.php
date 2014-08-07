@@ -181,7 +181,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
     $categories = serendipity_fetchCategories('all');
     $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
     $data['categories'] = $categories;
-    serendipity_plugin_api::hook_event('backend_category_showForm', $cid, $this_cat);
+    // hook 'backend_category_showForm' moved to category.inc.tpl, to place inside the form
 }
 
     
