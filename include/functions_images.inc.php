@@ -671,7 +671,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 if (!$force_resize && serendipity_ini_bool(ini_get('safe_mode')) === false) {
                     $newSize .= '>'; // Tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
                 }
-                $cmd = escapeshellcmd($serendipity['convert']) . ' -antialias -resize '. serendipity_escapeshellarg($newSize) .'\! ' .$serendipity['imagemagick_thumb_parameters'].' '.  serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
+                $cmd = escapeshellcmd($serendipity['convert']) . ' -antialias -resize '. serendipity_escapeshellarg($newSize) .'\! '. serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
             }
             exec($cmd, $output, $result);
             if ($result != 0) {

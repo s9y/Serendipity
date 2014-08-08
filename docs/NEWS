@@ -4,9 +4,6 @@ Version 2.0-beta4 / RC? ()
 ------------------------------------------------------------------------
 
     * Improve RegExp for Feed-URL matching, thanks to fugue88
-    * ImageMagick now can get parameters to generate thumbnails,
-      see serendipity_config.inc.php for an example/default values
-      
     
 Version 2.0-beta3 (July 25th, 2014)
 ------------------------------------------------------------------------
