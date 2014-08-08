@@ -9,7 +9,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.0');
+        $propbag->add('version',       '2.1');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
@@ -30,6 +30,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
     function introspect_config_item($name, &$propbag)
     {
+        global $serendipity;
+
         switch($name) {
             case 'title':
                 $propbag->add('type',        'string');
@@ -80,7 +82,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'string');                         
                 $propbag->add('name',        SYNDICATION_PLUGIN_FEEDICON);
                 $propbag->add('description', SYNDICATION_PLUGIN_FEEDICON_DESC);
-                $propbag->add('default',     'templates/2k11/img/subtome.png');
+                $propbag->add('default',     $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png');
                 break;
 
             case 'feed_name':
@@ -126,7 +128,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $small_icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
         $custom_feed = trim($this->get_config('feed_name'));
         $custom_comm = trim($this->get_config('comment_name'));
-        $custom_img  = trim($this->get_config('big_img', 'templates/2k11/img/subtome.png'));
+        $custom_img  = trim($this->get_config('big_img', $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png'));
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
         $fbid        = $this->get_config('fb_id');
         $custom_url  = serendipity_db_bool($this->get_config('custom_url', false));
@@ -149,7 +151,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $icon = "http://feeds.feedburner.com/~fc/$fbid?bg=99CCFF&amp;fg=444444&amp;anim=0";
             }
             if ($fbid == "" && $custom_img == 'feedburner') {
-                $icon = 'templates/2k11/img/subtome.png';
+                $icon = $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png';
             }
         }
 

@@ -115,7 +115,7 @@
 
                 <div class="form_multiselect">
                     <label for="write_authors">{$CONST.PERM_WRITE}</label>
-                    <select id="write_authors"size="6" multiple name="serendipity[cat][write_authors][]">
+                    <select id="write_authors" size="6" multiple name="serendipity[cat][write_authors][]">
                         <option value="0"{if $selectAllReadAuthors} selected{/if}>{$CONST.ALL_AUTHORS}</option>
                     {foreach $groups as $group}
                         <option value="{$group.confkey}"{if isset($read_groups.{$group.confkey})} selected{/if}>{$group.confvalue|escape}</option>
@@ -142,6 +142,8 @@
                     <img src="{$this_cat.category_icon|default:""|escape}" alt="">
                 </figure>
             </div>
+
+            {$category_showForm|default:''}
 
             <a class="button_link" href="?serendipity[adminModule]=category&serendipity[adminAction]=view">{$CONST.BACK}</a>
             <input class="standalone" name="SAVE" type="submit" value="{$save}">
