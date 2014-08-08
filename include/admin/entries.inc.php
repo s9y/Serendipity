@@ -44,7 +44,9 @@ switch($serendipity['GET']['adminAction']) {
                        'allow_comments'     => $serendipity['POST']['allow_comments'],
                        'moderate_comments'  => $serendipity['POST']['moderate_comments'],
                        'exflag'             => (!empty($serendipity['POST']['extended']) ? true : false),
+                       'had_categories'     => $serendipity['POST']['had_categories']
                        // Messing with other attributes causes problems when entry is saved
+                       // Attributes need to explicitly matched/addressed in serendipity_updertEntry!
 
             );
         }
