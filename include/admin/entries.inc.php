@@ -315,13 +315,12 @@ switch($serendipity['GET']['adminAction']) {
 
             $smartentries = array();
             foreach ($entries as $ey) {
-                $entry_cats = '';
+                $entry_cats = array();
                 if (count($ey['categories'])) {
-                    $cats = array();
                     foreach ($ey['categories'] as $cat) {
-                        $cats[] = '<a href="' . serendipity_categoryURL($cat) . '">' . htmlspecialchars($cat['category_name']) . '</a>';
+                        $cat['link'] = serendipity_categoryURL($cat);
+                        $entry_cats[] = $cat;
                     }
-                    $entry_cats = implode(', ', $cats);
                 }
 
                 $smartentries[] = array(

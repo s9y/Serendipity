@@ -162,7 +162,7 @@
                         <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
                         {if count($entry.cats)} {$CONST.IN}
                           {foreach $entry.cats AS $cat}
-                            {$cat}{if (count($entry.cats) > 1) && !$cat@last}, {/if}
+                            <a href="{$cat.link}">{$cat.category_name|escape}</a>{if (count($entry.cats) > 1) && !$cat@last}, {/if}
                           {/foreach}
                         {/if}
                         </span>
