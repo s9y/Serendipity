@@ -1309,6 +1309,9 @@ function serendipity_updertEntry($entry) {
 
     $categories = $entry['categories'];
     unset($entry['categories']);
+    
+    $had_categories = $entry['had_categories'];
+    unset($entry['had_categories']);
 
     $newEntry = 0;
     $exflag = 0;
@@ -1400,6 +1403,13 @@ function serendipity_updertEntry($entry) {
             foreach ($categories as $cat) {
                 serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, {$cat})");
             }
+        } elseif ($had_categories) {
+            // This case actually only happens if an existing entry is edited, and its category assignments are all removed.
+            // This field is set as a HIDDEN input field in the admin/entries.tpl template.
+            // This is more of a hotfix. In the future it should be thoroughly checked whether calls to serendipity_updertEntry()
+            // really always carry through existing categories. We do not want to accidentally remove category assignments,
+            // just because a plugin or so passes an incomplete $entry structure to this function.
+            serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entrycat WHERE entryid={$entry['id']}");
         }
 
         if ($entry['isdraft'] === 0) {

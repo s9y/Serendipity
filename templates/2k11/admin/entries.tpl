@@ -127,6 +127,7 @@
 
                 {foreach from=$entry_vars.category_options item="entry_cat"}
                     <div class="form_check">
+                        <input type="hidden" name="serendipity[had_categories]" value="1">
                         {$entry_cat.depth_pad}
                         <input id="serendipity_category_{$entry_cat.categoryid}" name="serendipity[categories][]" type="checkbox" value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} checked="checked"{/if}>
 
