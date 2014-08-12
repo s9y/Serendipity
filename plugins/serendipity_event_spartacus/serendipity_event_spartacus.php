@@ -384,12 +384,8 @@ class serendipity_event_spartacus extends serendipity_event
             $url_hostname = $url_parts['host'];
         }
         $url_ip = gethostbyname($url_hostname);
-
-        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHING, '<a target="_blank" href="' . $url . '">' . basename($url) . '</a>'));
-
         if (file_exists($target) && filesize($target) > 0 && filemtime($target) >= (time()-$cacheTimeout)) {
             $data = file_get_contents($target);
-            $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
         } else {
             require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
             $options = array('allowRedirects' => true, 'maxRedirects' => 5);
@@ -468,8 +464,7 @@ class serendipity_event_spartacus extends serendipity_event
                 if (!$data) {
                     $data = $req->getResponseBody();
                 }
-                $this->outputMSG('success', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target));
-
+                
                 $tdir = dirname($target);
                 if (!is_dir($tdir) && !$this->rmkdir($tdir, $sub)) {
                     $this->outputMSG('error', sprintf(FILE_WRITE_ERROR, $tdir));
