@@ -1,3 +1,4 @@
+<h2>{$CONST.CONFIGURATION}</h2>
 {if $installAction == 'check'}
     {if $diagnosticError}
             <h2>{$CONST.DIAGNOSTIC_ERROR}</h2>
@@ -17,7 +18,5 @@
         {/if}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.WRITTEN_N_SAVED}</span>
     {/if}
-{else}
-    <h2>{$CONST.CONFIGURATION}</h2>
-    {$config}
 {/if}
+{$config}

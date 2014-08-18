@@ -20,57 +20,50 @@ if (!serendipity_checkPermission('siteConfiguration') && !serendipity_checkPermi
 
 $data = array();
 
-switch ($_POST['installAction'] && serendipity_checkFormToken()) {
-    case 'check':
-        $data['installAction'] = 'check';
-        $oldConfig = $serendipity;
-        $res = serendipity_updateConfiguration();
-        $data['res'] = $res;
-        if (is_array($res)) {
-            $data['diagnosticError'] = true;
-        } else {
-            /* If we have new rewrite rules, then install them */
-            $permalinkOld = array(
-                $oldConfig['serendipityHTTPPath'],
-                $oldConfig['serendipityPath'],
-                $oldConfig['defaultBaseURL'],
-                $oldConfig['indexFile'],
-                $oldConfig['rewrite']);
+if ($_POST['installAction'] == 'check' && serendipity_checkFormToken()) {
+    $data['installAction'] = 'check';
+    $oldConfig = $serendipity;
+    $res = serendipity_updateConfiguration();
+    $data['res'] = $res;
+    if (is_array($res)) {
+        $data['diagnosticError'] = true;
+    } else {
+        /* If we have new rewrite rules, then install them */
+        $permalinkOld = array(
+            $oldConfig['serendipityHTTPPath'],
+            $oldConfig['serendipityPath'],
+            $oldConfig['defaultBaseURL'],
+            $oldConfig['indexFile'],
+            $oldConfig['rewrite']);
 
-            $permalinkNew = array(
-                $serendipity['serendipityHTTPPath'],
-                $serendipity['serendipityPath'],
-                $serendipity['defaultBaseURL'],
-                $serendipity['indexFile'],
-                $serendipity['rewrite']);
+        $permalinkNew = array(
+            $serendipity['serendipityHTTPPath'],
+            $serendipity['serendipityPath'],
+            $serendipity['defaultBaseURL'],
+            $serendipity['indexFile'],
+            $serendipity['rewrite']);
 
-            // Compare all old permalink section values against new one. A change in any of those
-            // will force to update the .htaccess for rewrite rules.
-                $permconf = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-                if (is_array($permconf) && is_array($permconf['permalinks']['items'])) {
-                    foreach($permconf['permalinks']['items'] AS $permitem) {
-                        $permalinkOld[] = $oldConfig[$permitem['var']];
-                        $permalinkNew[] = $serendipity[$permitem['var']];
-                    }
+        // Compare all old permalink section values against new one. A change in any of those
+        // will force to update the .htaccess for rewrite rules.
+            $permconf = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
+            if (is_array($permconf) && is_array($permconf['permalinks']['items'])) {
+                foreach($permconf['permalinks']['items'] AS $permitem) {
+                    $permalinkOld[] = $oldConfig[$permitem['var']];
+                    $permalinkNew[] = $serendipity[$permitem['var']];
                 }
-
-            if (serendipity_checkPermission('siteConfiguration') && serialize($permalinkOld) != serialize($permalinkNew)) {
-                $data['htaccessRewrite'] = true;
-                $data['serendipityPath'] = $serendipity['serendipityPath'];
-                $res = serendipity_installFiles($serendipity['serendipityPath']);
-                $data['res'] = $res;
-                serendipity_buildPermalinks();
             }
+
+        if (serendipity_checkPermission('siteConfiguration') && serialize($permalinkOld) != serialize($permalinkNew)) {
+            $data['htaccessRewrite'] = true;
+            $data['serendipityPath'] = $serendipity['serendipityPath'];
+            $res = serendipity_installFiles($serendipity['serendipityPath']);
+            $data['res'] = $res;
+            serendipity_buildPermalinks();
         }
-
-        break;
-
-    default:
-        $from = &$serendipity;
-        $t = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-        $data['config'] = serendipity_printConfigTemplate($t, $from, false, true);
-        break;
+    }
 }
+
+$data['config'] = serendipity_printConfigTemplate(serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE), $serendipity, false, true);
 
 if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
