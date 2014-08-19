@@ -1415,6 +1415,10 @@ function serendipity_updertEntry($entry) {
         if ($entry['isdraft'] === 0) {
             $entry['isdraft']   = 'false'; // make sure to commit a string value with dashboards entry publish (only!)
             $entry['timestamp'] = $_entry['timestamp']; // dashboard publishing a draft shall not set a new entry timestamp
+            $entry['title'] = $_entry['title']; // dashboard publishing a draft does not pass title, body, extended, and author, so we need to set it here
+            $entry['body'] = $_entry['body'];
+            $entry['extended'] = $_entry['extended'];
+            $entry['author'] = $_entry['author'];
         }
 
         $entry['last_modified'] = time();
