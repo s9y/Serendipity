@@ -548,6 +548,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     $serendipity['GET']['searchTerm'] = urldecode(htmlspecialchars(strip_tags(implode(' ', $search))));
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } elseif (preg_match(PAT_CSS, $uri, $matches)) {
+    serendipity_smarty_init();
     $serendipity['view'] = 'css';
     $css_mode = $matches[1];
     include(S9Y_INCLUDE_PATH . 'serendipity.css.php');
