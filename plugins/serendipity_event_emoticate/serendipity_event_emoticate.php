@@ -47,6 +47,7 @@ class serendipity_event_emoticate extends serendipity_event
             $conf_array[] = $element['name'];
         }
         $conf_array[] = 'extension';
+        $conf_array[] = 'display_helper';
         $propbag->add('configuration', $conf_array);
 
     }
@@ -141,6 +142,12 @@ class serendipity_event_emoticate extends serendipity_event
             $propbag->add('description', PLUGIN_EVENT_EMOTICATE_EXTENSION_BLAHBLAH);
             $propbag->add('default', 'png');
             break;
+        case 'display_helper':
+            $propbag->add('name',           PLUGIN_EVENT_EMOTICATE_HELPER);
+            $propbag->add('description',    PLUGIN_EVENT_EMOTICATE_HELPER_BLAHBLAH);
+            $propbag->add('default',        'true');
+            $propbag->add('type',           'boolean');
+            break;
         default:
             $propbag->add('type',        'boolean');
             $propbag->add('name',        constant($name));
@@ -199,7 +206,9 @@ class serendipity_event_emoticate extends serendipity_event
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
+                      if ($this->get_config('display_helper')) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_emoticate">' . PLUGIN_EVENT_EMOTICATE_TRANSFORM . '</div>';
+                      }
                     }
                     return true;
                     break;
