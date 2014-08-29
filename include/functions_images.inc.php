@@ -1668,7 +1668,8 @@ function serendipity_generateImageSelectorParems() {
     $sortParams        = array('perpage', 'order', 'ordermode');
     $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
     $extraParems       = '';
-    $filterParams      = array('only_path', 'only_filename');
+    $standaloneFilterParams      = array('only_path', 'only_filename');
+    $filterParams      =  $serendipity['GET']['filter'];
 
     foreach($importParams AS $importParam) {
         if (isset($serendipity['GET'][$importParam])) {
@@ -1681,12 +1682,27 @@ function serendipity_generateImageSelectorParems() {
         $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
     }
 
-    foreach($filterParams AS $filterParam) {
+    foreach($standaloneFilterParams AS $filterParam) {
         serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
         if (!empty($serendipity['GET'][$filterParam]) && $serendipity['GET'][$filterParam] != "undefined") {
             $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
         }
     }
+    
+    foreach($filterParams AS $filterParam => $filterValue) {
+        serendipity_restoreVar($serendipity['COOKIE']['filter'][$filterParam], $serendipity['GET']['filter'][$filterParam]);
+        if (!empty($serendipity['GET']['filter'][$filterParam]) && $serendipity['GET']['filter'][$filterParam] != "undefined") {
+            if (is_array($filterValue)) {
+                foreach($filterValue as $key => $value) {
+                     $extraParems .= 'serendipity[filter][' . $filterParam . '][' . $key . ']='. htmlspecialchars($value) .'&amp;';
+                }
+            } else {
+                $extraParems .= 'serendipity[filter][' . $filterParam . ']='. htmlspecialchars($filterValue) .'&amp;';
+            }
+        }
+        
+    }
+    
     return $extraParems;
 }
 
@@ -1993,7 +2009,6 @@ function serendipity_getImageFields() {
         );
 
     } else {
-    
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'
