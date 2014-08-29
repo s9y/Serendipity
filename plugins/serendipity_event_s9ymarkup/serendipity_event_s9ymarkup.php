@@ -47,6 +47,7 @@ class serendipity_event_s9ymarkup extends serendipity_event
         foreach($this->markup_elements as $element) {
             $conf_array[] = $element['name'];
         }
+        $conf_array[] = 'display_helper';
         $propbag->add('configuration', $conf_array);
     }
 
@@ -66,10 +67,19 @@ class serendipity_event_s9ymarkup extends serendipity_event
 
     function introspect_config_item($name, &$propbag)
     {
-        $propbag->add('type',        'boolean');
-        $propbag->add('name',        constant($name));
-        $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-        $propbag->add('default', 'true');
+        switch($name) {
+            case 'display_helper':
+                $propbag->add('name',           PLUGIN_EVENT_EMOTICATE_HELPER);
+                $propbag->add('description',    PLUGIN_EVENT_EMOTICATE_HELPER_DESC);
+                $propbag->add('default',        'true');
+                $propbag->add('type',           'boolean');
+                break;
+            default:
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        constant($name));
+                $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
+                $propbag->add('default', 'true');
+          }
         return true;
     }
 
@@ -96,7 +106,9 @@ class serendipity_event_s9ymarkup extends serendipity_event
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
-                        echo '<div class="serendipity_commentDirection serendipity_comment_s9ymarkup">' . PLUGIN_EVENT_S9YMARKUP_TRANSFORM . '</div>';
+                        if ($this->get_config('display_helper')) {
+                            echo '<div class="serendipity_commentDirection serendipity_comment_s9ymarkup">' . PLUGIN_EVENT_S9YMARKUP_TRANSFORM . '</div>';
+                        }
                     }
                     return true;
                     break;
