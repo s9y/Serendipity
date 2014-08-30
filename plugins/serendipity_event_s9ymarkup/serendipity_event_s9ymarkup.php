@@ -106,7 +106,7 @@ class serendipity_event_s9ymarkup extends serendipity_event
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
-                        if ($this->get_config('display_helper')) {
+                        if ($this->get_config('display_helper', true)) {
                             echo '<div class="serendipity_commentDirection serendipity_comment_s9ymarkup">' . PLUGIN_EVENT_S9YMARKUP_TRANSFORM . '</div>';
                         }
                     }
