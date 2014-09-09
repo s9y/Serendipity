@@ -7,6 +7,9 @@ Version 2.0-beta4 / RC? ()
       entries (Issue #201)
       
     * Improve RegExp for Feed-URL matching, thanks to fugue88
+
+    * ImageMagick now can get parameters to generate thumbnails,
+      see serendipity_config.inc.php for an example/default values
     
     * Proper SQLite PDO filenames in shared installations (Issue #214)
 
