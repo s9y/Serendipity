@@ -578,11 +578,8 @@ function serendipity_checkInstallation() {
     if (!is_dir($_POST['serendipityPath'])) {
         $errs[] = sprintf(DIRECTORY_NON_EXISTANT, htmlspecialchars($_POST['serendipityPath']));
     }
-    /* This test has already been passed on the diagnosis page.  Besides
-       it's a partially bogus test.
     elseif (!is_writable($_POST['serendipityPath']) ) {
         $errs[] = sprintf(DIRECTORY_WRITE_ERROR, htmlspecialchars($_POST['serendipityPath']));
-    }*/
     elseif (!is_dir($_POST['serendipityPath'] . $_POST['uploadPath'] ) && @mkdir($_POST['serendipityPath'] . $_POST['uploadPath'], $umask) !== true) {
         $errs[] = sprintf(DIRECTORY_CREATE_ERROR, htmlspecialchars($_POST['serendipityPath']) . htmlspecialchars($_POST['uploadPath']));
     }

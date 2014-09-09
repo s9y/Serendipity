@@ -15,7 +15,9 @@ Version 2.0-beta4 / RC? ()
 
     * Allow to enable/disable the new autosave feature in personal
       preferences (Issue #213)
-    
+
+    * Re-added installer test for writable serendipity base directory
+        
 Version 2.0-beta3 (July 25th, 2014)
 ------------------------------------------------------------------------
 
