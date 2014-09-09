@@ -8,6 +8,9 @@ Version 2.0-beta4 / RC? ()
       
     * Improve RegExp for Feed-URL matching, thanks to fugue88
     
+    * Proper SQLite PDO filenames in shared installations (Issue #214)
+
+    
 Version 2.0-beta3 (July 25th, 2014)
 ------------------------------------------------------------------------
 

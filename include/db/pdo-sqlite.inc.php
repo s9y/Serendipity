@@ -101,7 +101,7 @@ function serendipity_db_connect() {
     global $serendipity;
 
     $serendipity['dbConn'] = new PDO(
-                                 'sqlite:' . $serendipity['serendipityPath'] . $serendipity['dbName'] . '.db'
+                                 'sqlite:' . (defined('S9Y_DATA_PATH') ? S9Y_DATA_PATH : $serendipity['serendipityPath']) . $serendipity['dbName'] . '.db'
                              );
 
     return $serendipity['dbConn'];
