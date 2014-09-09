@@ -446,5 +446,15 @@ if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
 
+// You can set parameters which ImageMagick should use to generate the thumbnails
+// by default, thumbs will get a little more brightness and saturation (modulate)
+// an unsharp-mask (unsharp)
+// and quality-compression of 75% (default would be to use quality of original image)
+if (!isset($serendipity['imagemagick_thumb_parameters'])) {
+    $serendipity['imagemagick_thumb_parameters'] = '';
+    // Set a variable like below in your serendpity_config_local.inc.php
+    //$serendipity['imagemagick_thumb_parameters'] = '-modulate 105,140 -unsharp 0.5x0.5+1.0 -quality 75';
+}    
+
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
 /* vim: set sts=4 ts=4 expandtab : */
