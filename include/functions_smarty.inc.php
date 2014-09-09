@@ -1056,6 +1056,7 @@ function serendipity_smarty_init($vars = array()) {
                 'category_info'             => $category_info,
                 'template'                  => $serendipity['template'],
                 'template_backend'          => $serendipity['template_backend'],
+                'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave']) ? 'true' : 'false'),
 
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
             )

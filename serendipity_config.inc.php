@@ -446,6 +446,10 @@ if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
 
+if (!isset($serendipity['use_autosave'])) {
+    $serendipity['use_autosave'] = true;
+}
+
 // You can set parameters which ImageMagick should use to generate the thumbnails
 // by default, thumbs will get a little more brightness and saturation (modulate)
 // an unsharp-mask (unsharp)

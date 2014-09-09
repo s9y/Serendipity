@@ -13,6 +13,8 @@ Version 2.0-beta4 / RC? ()
     * ImageMagick now can get parameters to generate thumbnails,
       see serendipity_config.inc.php for example values
 
+    * Allow to enable/disable the new autosave feature in personal
+      preferences (Issue #213)
     
 Version 2.0-beta3 (July 25th, 2014)
 ------------------------------------------------------------------------

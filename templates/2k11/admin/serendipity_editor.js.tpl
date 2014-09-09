@@ -661,7 +661,7 @@
         }
     }
 
-    if(Modernizr.indexeddb) {
+    if(Modernizr.indexeddb && {$use_autosave}) {
         serendipity.startEntryEditorCache = function() {
             if ($('textarea[name="serendipity[body]"]').val() == "") {
                 serendipity.getCached("serendipity[body]",  function(res) {
@@ -813,7 +813,7 @@ $(function() {
         if(!Modernizr.inputtypes.date) {
             $('#serendipityNewTimestamp').val($('#serendipityNewTimestamp').val().replace("T", " "));
         }
-        if(Modernizr.indexeddb) {
+        if(Modernizr.indexeddb && {$use_autosave}) {
             serendipity.startEntryEditorCache();
         }
     }

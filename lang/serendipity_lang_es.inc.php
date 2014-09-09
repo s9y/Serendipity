@@ -1084,3 +1084,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('NO_UPDATES', 'No plugin updates are available');
 @define('PLUGIN_GROUP_ALL', 'All categories');
 
+@define('CONF_USE_AUTOSAVE', 'Enable autosave-feature');
+@define('CONF_USE_AUTOSAVE_DESC', 'When enabled, the text you enter into blog entries will be periodically saved in your browser\'s session storage. If your browser crashes during writing, the next time you create a new entry, the text will be restored from this autosave.');

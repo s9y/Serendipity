@@ -161,6 +161,14 @@
                                           'default'     => false,
                                           'permission'  => 'personalConfiguration',
                                           'flags'       => array('config')),
+
+                                    array('var'         => 'use_autosave',
+                                          'title'       => CONF_USE_AUTOSAVE,
+                                          'description' => CONF_USE_AUTOSAVE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => true,
+                                          'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
                             ));
 
     return $res;
