@@ -48,7 +48,7 @@
             
             on: {
                 instanceReady: function( evt ) {
-                    if(Modernizr.indexeddb) {
+                    if(Modernizr.indexeddb && {$use_autosave}) {
                         CKEDITOR.instances["{$item}"].document.once('keyup', function() {
                             setInterval(function() {
                                 serendipity.cache("{$item}", CKEDITOR.instances["{$item}"].getData());
