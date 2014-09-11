@@ -513,6 +513,9 @@ form > button,
     margin-top: 0;
     margin-bottom: 0;
 }
+.plugins_available {
+    font-size: .75em;
+}
 
 .plugin_desc {
     margin-top: .25em;

@@ -39,10 +39,11 @@
         {$config}
     </form>
 {elseif $adminAction == 'addnew'}
-    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if}{if $only_group != UPGRADE} <span class="plugins_available">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack}</span>{/if}</h2>
+    <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{else}{$CONST.SIDEBAR_PLUGINS}{/if}{if $only_group != UPGRADE} <span class="plugins_available">({$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack})</span>{/if}</h2>
     {foreach $errorstack as $e_idx => $e_name}
     <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
+
     <form action="serendipity_admin.php" method="get">
         {$formToken}
         <input name="serendipity[adminModule]" type="hidden" value="plugins">
@@ -54,10 +55,10 @@
                 <label for="only_group">{$CONST.GROUP}</label>
                 <select id="only_group" name="serendipity[only_group]">
                 {foreach $groupnames as $available_group => $available_name}
-                    <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name}</option>
+                    <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name|default:$CONST.ALL_CATEGORIES}</option>
                 {/foreach}
-                    <option value="ALL"{if $only_group == ALL} selected{/if}>{$CONST.ALL_CATEGORIES}</option>
-                    <option value="UPGRADE"{if $only_group == UPGRADE} selected{/if}>{$CONST.WORD_NEW}</option>
+                    {if $only_group != UPGRADE}<option value="UPGRADE"{if $only_group == 'UPGRADE'} selected{/if}>{$CONST.WORD_NEW}</option>{/if}
+
                 </select>
 
                 <div class="form_buttons">
