@@ -491,7 +491,6 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $this->fileperm($target, false);
 
-                $this->outputMSG('success', PLUGIN_EVENT_SPARTACUS_FETCHED_DONE);
                 $this->purgeCache = true;
             }
             serendipity_request_end();
@@ -1006,6 +1005,7 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         if (isset($baseDir)) {
+            $this->outputMSG('success', PLUGIN_EVENT_SPARTACUS_FETCHED_DONE);
             return $baseDir;
         }
     }
