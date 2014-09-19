@@ -1,9 +1,6 @@
 /**
- * @fileOverview A Serendipity CKEDITOR custom config file: ckeditor_custom_config.js, v. 1.1, 2014-04-24, Ian
- */
-
-/**
- * Substitute every config option to CKEDITOR in here
+ * This is the configuration of ckeditor provided by the s9y-team. Make your
+ * custom changes in htmlarea/ckeditor/userconf.js so they won't get overwritten
  */
 CKEDITOR.editorConfig = function( config ) {
 
@@ -82,6 +79,28 @@ CKEDITOR.editorConfig = function( config ) {
     //config.uiColor = '#FF8040'; // mango
     //config.uiColor = '#FF2400'; // scarlet red
     //config.uiColor = '#14B8C4'; // light turquoise
-    config['skin'] = 'moono';
-    config['height'] = 400;
+    config.skin = 'moono';
+    config.height = 400;
+
+    config.removePlugins = 'showblocks, font, div, liststyle, flash,  iframe, pagebreak, smiley, specialchar, horizontalrule, indentblock, justify, pastefromword, save, newpage, preview, print, stylescombo';
+
+    config.removeButtons = 'Underline,Subscript,Superscript';
+    
+    config.toolbarGroups = [
+        { name: 'tools' },
+        { name: 'styles' },
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph',  groups: [ 'list', 'indent', 'blocks', 'align' ] },
+        { name: 'links' },
+        { name: 'insert' },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        { name: 'editing', groups: [ 'spellchecker' ]},
+        { name: 'others' },
+        { name: 'document', groups: [ 'mode' ] },
+        { name: 'about' }
+    ];
+
+    
+
+    config['customConfig'] = '../userconf.js';
 };

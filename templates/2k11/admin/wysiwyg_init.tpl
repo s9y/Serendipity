@@ -1,7 +1,7 @@
 {if $init == false}
     <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor/ckeditor.js"></script>
-    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_plugin.js"></script>
 {/if}
+
 <script>
     $('document').ready(function() {
         CKEDITOR.plugins.add('s9y_medialibrary{$item}', {
@@ -14,7 +14,8 @@
                 editor.ui.addButton('s9y_medialibrary{$item}', {
                     label: '{$CONST.MEDIA_LIBRARY}',
                     command: 'openML',
-                    icon: '{serendipity_getFile file="admin/img/thumbnail.png"}'
+                    icon: '{serendipity_getFile file="admin/img/thumbnail.png"}',
+                    toolbar: 'insert'
                 });
                 
             }
@@ -43,7 +44,7 @@
         
         ckeitem = '{$item}';
         CKEDITOR.replace($('#'+serendipity.escapeBrackets(ckeitem)).get(0), {
-            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor_custom_config.js',
+            customConfig : '{$serendipityHTTPPath}htmlarea/ckeditor/serendipity_config.js',
             extraPlugins : 's9y_medialibrary{$item}{foreach $buttons as $button},{$button.id}{/foreach}',
             
             on: {
@@ -56,21 +57,7 @@
                         });
                     }
                 }
-            },
-            
-            toolbar: [
-                { name: 'tools', items: [ 'Maximize' ] },
-                { name: 'styles', items: [ 'Format' ] },
-                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'RemoveFormat' ] },
-                { name: 'paragraph',  groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
-                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-                { name: 'insert', items: [ 'Image', 's9y_medialibrary{$item}', 'Table', 'HorizontalRule', 'SpecialChar' ] },
-                { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
-                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-                { name: 'others', items: [ '-' {foreach $buttons as $button}, '{$button.id}'{/foreach} ] },
-                { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-                { name: 'about', items: [ 'About' ] }
-            ]
+            }
         });
     });
 </script>
