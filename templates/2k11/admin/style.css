@@ -2751,9 +2751,14 @@ img.mfp-img {
     .entryproperties_access_users,
     .entryproperties_access_author,
     .entryproperties_markup,
-    #plugin_groups,
-    #plugin_filter {
+    #plugin_groups {
         float: left;
+        margin-right: 2%;
+        width: 48%;
+    }
+
+    #plugin_filter {
+        display: inline-block;
         margin-right: 2%;
         width: 48%;
     }
