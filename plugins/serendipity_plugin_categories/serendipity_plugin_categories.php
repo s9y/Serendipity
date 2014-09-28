@@ -10,8 +10,8 @@ class serendipity_plugin_categories extends serendipity_plugin {
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.03');
-        $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'smarty'));
+        $propbag->add('version',       '2.04');
+        $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
@@ -78,7 +78,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
                 $propbag->add('type',         'boolean');
                 $propbag->add('name',         CATEGORIES_ALLOW_SELECT);
                 $propbag->add('description',  CATEGORIES_ALLOW_SELECT_DESC);
-                $propbag->add('default',      true);
+                $propbag->add('default',      false);
                 break;
 
             case 'sort_order':
@@ -88,7 +88,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
                 $select['categoryid']           = 'ID';
                 $select['none']                 = NONE;
                 $propbag->add('type',         'select');
-                $propbag->add('name',         SORT_ORDER);
+                $propbag->add('name',         SORT_CRITERIA); # i18n
                 $propbag->add('description',  '');
                 $propbag->add('select_values', $select);
                 $propbag->add('default',     'category_name');
@@ -125,6 +125,13 @@ class serendipity_plugin_categories extends serendipity_plugin {
                 $propbag->add('description', '');
                 $propbag->add('default',     false);
                 break;
+                
+            case 'show_all':
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        CATEGORY_PLUGIN_SHOWALL);  # i18n
+                $propbag->add('description', CATEGORY_PLUGIN_SHOWALL_DESC); # i18n
+                $propbag->add('default',     false);
+                break;
 
             default:
                 return false;
@@ -145,7 +152,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
         } else {
             $sort .= ' ' . $this->get_config('sort_method');
         }
-        $is_form = serendipity_db_bool($this->get_config('allow_select'));
+        $is_form = serendipity_db_bool($this->get_config('allow_select', false));
         if ($which_category === "login") {
             $which_category = (int)$serendipity['authorid'];
             if ($which_category === 0) {
@@ -275,7 +282,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
             $html .= '<div class="category_submit"><input type="submit" name="serendipity[isMultiCat]" value="' . GO . '" /></div>';
         }
 
-        if (!$smarty) {
+        if (!$smarty && serendipity_db_bool($this->get_config('show_all', false))) {
             $html .= sprintf(
                 '<div class="category_link_all"><a href="%s" title="%s">%s</a></div>',
 
