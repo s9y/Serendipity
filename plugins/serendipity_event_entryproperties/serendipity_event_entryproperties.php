@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.32');
+        $propbag->add('version',       '1.33');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -115,7 +115,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     'customfields'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS),
                 );
                 $propbag->add('values',      $values);
-                $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,markup,customfields');
+                $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,markup');
                 break;
 
         }
@@ -424,6 +424,7 @@ class serendipity_event_entryproperties extends serendipity_event
             return true;
 
         case 'customfields':
+            
 ?>
             <fieldset class="entryproperties_customfields">
             <?php
