@@ -134,8 +134,6 @@ class serendipity_plugin_api
     static function register_default_plugins()
     {
         /* Register default sidebar plugins, order matters */
-        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_calendar');
-        serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_quicksearch');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_archives');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_categories');
         serendipity_plugin_api::create_plugin_instance('@serendipity_plugin_syndication');
@@ -147,6 +145,8 @@ class serendipity_plugin_api
         serendipity_plugin_api::create_plugin_instance('serendipity_event_emoticate', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_nl2br', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_spamblock', null, 'event');
+        serendipity_plugin_api::create_plugin_instance('serendipity_event_spartacus', null, 'event');
+        serendipity_plugin_api::create_plugin_instance('serendipity_event_entryproperties', null, 'event');
 
         /* Register additional plugins? */
         if (file_exists(S9Y_INCLUDE_PATH . 'plugins/preload.txt')) {
