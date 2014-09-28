@@ -225,6 +225,16 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_upgrader_move_syndication_config',
                      'title'     => 'Export syndication plugin options',
                      'desc'      => 'Serendipity 2.0 moved the more generic feed option from the syndication plugin into the core. They will be set equivalent to their old configuration.'),
+               array('version'   => '2.0-beta5',
+                     'function'  => 'serendipity_killPlugin',
+                     'arguments' => array('serendipity_event_autosave'),
+                     'title'     => 'Remove autosave plugin',
+                     'desc'      => 'Serendipity 2.0 includes autosave functionality, and the autosave plugin collides with new functionality. It has to be removed.'),
+                array('version'   => '2.0-beta5',
+                     'function'  => 'serendipity_killPlugin',
+                     'arguments' => array('serendipity_event_dashboard'),
+                     'title'     => 'Remove dashboard plugin',
+                     'desc'      => 'Serendipity 2.0 includes a dashboard in the admin theme. The separate plugin for 1.x has to be removed.'),
 
 );
 
