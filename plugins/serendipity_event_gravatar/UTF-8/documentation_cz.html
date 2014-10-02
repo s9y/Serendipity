@@ -1,0 +1,433 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Dokumentace: Avatar Plugin</title>
+    <link rel="stylesheet" type="text/css" href="../documentation/documentation.css"/>
+</head>
+<body>
+
+<h1>Dokumentace k pluginu 'Gravatar'</h1>
+
+<p>Dokumentaci k tomuto pluginu přeložil do češtiny Vladimír Ajgl (vlada [zavinac] ajgl [tecka] cz) dne 26.6.2011. Od té doby mohl být plugin pozměněn nebo mohly být rozšířené jeho funkce. Zkontrolujte pro jistotu i <a href="../documentation_de.html">aktuální německou dokumentaci</a>, <a href="../documentation_en.html">anglickou dokumentaci</a> a <a href="../ChangeLog">ChangeLog</a>.
+
+<div id="title">
+<a name="top"/>
+<h1>Dokumentace k pluginu: Avatar Plugin (Gravatar)</h1>
+</div>
+<div id="content">
+<h2>Obsah</h2>
+<ol>
+    <li><a href="#overview">Přehled</a></li>
+
+    <ol>
+    <li><a href="#avt_gravatar">Gravatar</a></li>
+    <li><a href="#avt_pavatar">Pavatar</a></li>
+    <li><a href="#avt_favatar">Favatar</a></li>
+    <li><a href="#avt_twitter">Twitter</a></li>
+    <li><a href="#avt_identica">Identica</a></li>
+    <li><a href="#avt_mybloglog">MyBlogLog</a></li>
+    <li><a href="#avt_wavatar">Wavatar</a></li>
+    <li><a href="#avt_monsterid">MonsterID</a></li>
+    <li><a href="#avt_identicon">Identicon/YCon</a></li>
+    <li><a href="#avt_standard">Standardavatar</a></li>
+    </ol>
+
+    <li><a href="#config">Nastavení</a></li>
+
+    <ol>
+    <li><a href="#cnf_method">Pořadí vložení Avatarů</a></li>
+    <li><a href="#cnf_standard">Standard-Avatar</a></li>
+    <li><a href="#cnf_sidbar">Zobrazovat v postranním panelu</a></li>
+    <li><a href="#cnf_showtype">Zobrazovat podporované typy avatarů</a></li>
+    <li><a href="#cnf_autoralt">Jméno autora v atributu ALT</a></li>
+    <li><a href="#cnf_smartify">Generovat Smarty Tag</a></li>
+    <li><a href="#cnf_alignment">Zarovnání</a></li>
+    <li><a href="#cnf_size">Velikost obrázku</a></li>
+    <li><a href="#cnf_cache">Doba cachování</a></li>
+    <li><a href="#cnf_gravatar_rating">Indikace Gravataru</a></li>
+    <li><a href="#cnf_gravatar_fallback">Gravatar Fallback (zpracování chyby)</a></li>
+    <li><a href="#cnf_gravatar_fallback_always">Vždy vyžadovat Gravatar Fallback</a></li>
+    </ol>
+
+	<li><a href="#changelog">ChangeLog (historie verzí)</a></li>
+</ol>
+</div>
+
+<a name="overview"></a>
+<h2>Přehled</h2>
+<p>Pomocí pluginu Avatar lze přiřadit komentujícím v blogu přiřadit "obličej". Každému samostatnému komentátorovi lze přiřadit takzvaný Avatar, který ho reprezentuje. K tomu lze použít několik různých mechanizmů, jak umožnit komentujícím použití avatara, které budou v následujícím textu probrány.
+</p>
+<p>Vždy je použit první mechanizmus, který nalezne avatara. Další způsoby pak nejsou ani zkoušeny. To znamená, že je třeba seřadit metody v tom pořadí, aby byly co nejdříve použity nejčastěji používané mechanizmy. Způsoby, které poskytnou avatara v každém případě, by měly být umístěny až na konci, protože po nich zařazené metody nebudou přirozeně nikdy uplatněny. 
+</p>
+<p><strong>Důležité:</strong> Tento plugin musí být umístěn v seznamu pluginů před všemi pluginy, které mění odkazy, jako například "Markup: Sledování odchodů" (Exit Tracking Plugin). Jinak nemusejí fungovat například avatary, které jsou generovány na základě odkazů na stránky komentátorů.
+</p>
+<p>Následuje popis aktuálně dostupných mechanizmů, jak přiřadit avatara komentátorům:</p>
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_gravatar"></a>
+<h3>Gravatar</h3>
+<p><a href="http://www.gravatar.com" target="_blank">Gravatar</a> je jedna z nejznámějších služeb pro uživatele avatarů. Uživatele se mohou u této služby registrovat pomocí emailu, na který je vázán obrázek avatara.</p>
+<p>Gravatary jsou tedy spřažené s emailem komentátora. Pouze pokud komentátor zadá svůj mail, je možné dotázat se Gravataru, jestli je pro daný mail registrován obrázek avatara.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_pavatar"></a>
+<h3>Pavatar</h3>
+<p><a href="http://www.pavatar.com" target="_blank">Pavatary</a> jsou avatary (obrázky), které pro tento účel nahrál uživatel na svoji domovskou stránku.</p> 
+<p>Oproti velmi podobným <a href="#avt_favatar">Favatarům</a> sem může uživatel nahrát obrázek avatara v libovolném rozlišení.</p>
+<p>V tomto případě se zjišťuje avatar na základě domovské stránky, kterou zadal komentátor, konkrétně jestli tato domovská stránka obsahuje Pavatara. Tento způsob zjišťování avatara je použit přirozeně pouze v případě, že komentátor zadal domovksou webovou stránku.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_favatar"></a>
+<h3>Favatar</h3>
+<p>Toto je koncept, pomocí kterého má spousta vlastníků webových stránek Avatara, aniž pro to musejí cokoliv udělat:</p>
+<p>Blog použije jednoduše favicon (ikonku webu) ze stránky, kterou komentátor zadal jako svoji domovskou.
+Favicon je obvykle jenom obyčejná ikona, která bývá docela malá a často nevypadá jako avatar.
+</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_twitter"></a>
+<h3>Twitter</h3>
+<p>V případě, že komentátor zadá adresu domovské stránky jako URL <a href="http://twitter.com" target="_blank">profilu na Twitteru</a>, pak bude tento profil prohledán, jestli obsahuje profilovou fotku, která bude následně použita jako avatar.</p>
+<p><i>Poznámka</i>: Pokud je zároveň použito hledání metodou "Favatar", pak musí stát tato metoda Twitter před Favatarem, protože jinak bude místo obrázku z profilu použita favicona Twitteru. Což může být na druhou stranu použito úmyslně, například k jasnému a jednoznačnému označení "tweetbacků" z Twitteru.
+</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_identica"></a>
+<h3>Identica</h3>
+<p>Toto je zvláštní avatar pro pingbacky <a href="http://identi.ca" target="_blank">Identica</a>. V tomto případě je hledán profilový obrázek uživatele, který poslal pingback.</p>
+<p><i>Poznámka</i>: Pokud je zároveň použito hledání metodou "Favatar", pak musí stát tato metoda Identica před Favatarem, protože jinak bude místo obrázku z profilu použita favicona Identicy. Což může být na druhou stranu použito úmyslně, například k jasnému a jednoznačnému označení "tweetbacků" z Identicy.
+</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_mybloglog"></a>
+<h3>MyBlogLog</h3>
+<p>Toto je opět centrální služba (podobně jako Gravatar). MyBlogLog je služba poskytující blogy, ale zároveň z ní lze získat avatary.</p>
+<p>Přítomnost MyBlogLog avatarů je zjištěna z domovské adresy komentátorů.
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_wavatar"></a>
+<h3>Wavatar</h3>
+<p>Wavatar je dynamicky vyroben z domovské stránky a emailové adresy komentátorů. Poskytuje pro každého uživatele jiný, ale vždy stejný obrázek. Tímto způsobem je <strong>vždycky</strong> vložen avatar, tedy všechny metody zařazené po této budou ignorovány. Wavatary vypadají asi následovně:</p>
+<p align="center"><img src="documentation/wavatars.jpg"/></p>
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_monsterid"></a>
+<h3>MonsterID</h3>
+<p>MonsterID avatary jsou generovány stejným mechanizmem jako Wavatary nebo Idnetikony. V tomto případě jsou vygenerovány takovéto roztomilé "příšerky" (monstra).</p>
+<p>Podobně jako u Wavataru a Identikon je tímto způsobem <strong>vždycky</strong> vložen avatar, tedy všechny metody zařazené po této budou ignorovány.
+<p align="center"><img src="documentation/monsterid.png"/></p>
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_identicon"></a>
+<h3>Identicon/YCon</h3>
+<p>
+Avatary Identicon (identikony) jsou generovány stejným mechanizmem jako Wavatary nebo MonsterID. V tomto případě jsou vygenerovány abstraktní obrazce.</p>
+<p>Podobně jako u Wavataru a MonsterID je tímto způsobem <strong>vždycky</strong> vložen avatar, tedy všechny metody zařazené po této budou ignorovány.</p>
+<p align="center"><img src="documentation/identicons.jpg"/></p>
+<p><a href="#top">nahoru</a></p>
+
+<a name="avt_standard"></a>
+<h3>Standardavatar</h3>
+<p>Metoda "Standardavatar" poskytuje vždycky stejný obrázek pro všechny uživatele. Obrázek, který bude použit, lze zadat v sekci "Nastavení".</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="config"></a>
+<h2>Nastavení</h2>
+
+<a name="cnf_method"></a>
+<h3>Pořadí vložení Avatarů</h3>
+<p>Zde je zadáno pořadí zkoušení jednotlivých metod pro zjištšění avatarů ke komentátorům.</p>
+<p>V současnosti existuje 6 metod, ze kterých je možné pořadí sestavit. Je třeba dát pozor na to, že metody, které generují avatara pokaždé, jsou poslední, které jsou vyzkoušeny, všechny následující metody jsou ignorovány.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_standard"></a>
+<h3>Standard-Avatar</h3>
+<p>URL adresa ke standardnímu avataru. Tady musíte zadat relativní nebo absolutní URL adresu k obrázku standardního avataru.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_sidbar"></a>
+<h3>Zobrazovat v postranním panelu</h3>
+<p>Mají se obrázky avatarů zobrazovat i v postranním panelu (poslední komentáře)?</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_showtype"></a>
+<h3>Zobrazovat podporované typy avatarů</h3>
+<p>Pokud je zaškrtnuto, pak se pod políčkem k vložení komentáře objeví řádek s výčtem podporovaných avatarů.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_autoralt"></a>
+<h3>Jméno autora v atributu ALT</h3>
+<p>Normálně je umístěho jméno autora v atributu TITLE u obrázku, atribut ALT je pak vyplněn hvězdičkou "*", aby se v rozvržení stránky nic nerozházelo, pokud nejsou nataženy obrázky. Nicméně z hlediska přístupnosti stránky i pro slepé čtenáře je důležité, aby v atributu ALT něco bylo, protože je to právě tento atribut, který jim je předčítán a podle kterého poznají, co je na obrázku. Pokud tedy chcete podporovat i tyto postižené čtenáře, měli byste tuto volbu povolit.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_smartify"></a>
+<h3>Generovat Smarty Tag</h3>
+<p>Pokud je zaškrtnuta tato volby, není obrázek avatara vložen přímo do komentáře, ale místo toho je generován Smarty Tag {$comment.avatar}, který při generování stránky obsahuje HTML kód pro zobrazení obrázku. Tuto volbu byste měli zapnout pouze pokud víte, že šablona vzhledu, kterou požíváte, podporuje tento tag. Jestli tomu tak opravdu je, můžete jednoduše vyzkoušet.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_alignment"></a>
+<h3>Zarovnání</h3>
+<p>Pomocí této volby můžete zadat zarovnání avatara vzhledem ke komentáři, tedy pokud nepoužítáve volbu Smarty Tag. V případě, že Smarty Tag používáte, pak musíte k zarovnání obrázku použít odpovídající CSS třídu ve stylopisu.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_size"></a>
+<h3>Velikost obrázku</h3>
+<p>Maximální zobrazená velikost avataru v pixelech.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_cache"></a>
+<h3>Doba cachování</h3>
+<p>Když mají být avatary dočasně ukládány (doporučeno!), musí být zde uveden počet hodin, během kterých se mají obrázky natahovat z blogového serveru, namísto serveru vzdáleneé avatarové služby. Sice to způsobí lehké zvýšení provozu na vašem blogovém serveru, na druhou stranu se stanou obrázky víceméně nezávislé na přístupnosti serveru externích služeb. "0" znamená vypnutí cachování.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_gravatar_rating"></a>
+<h3>Indikace Gravataru</h3>
+<p>Dětská pojistka :)</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_gravatar_fallback"></a>
+<h3>Gravatar Fallback (zpracování chyby)</h3>
+<p>Metoda Gravatar umožňuje chybovou metodu pro případ, kdy pro uživatele není nalezen žádný avatar. Tou může být jedna z Monster ID, Identicon nebo Wavatar. Pokud nastavíte tuto chybovou metodu pro Gravatara, nebudou zkoušeny žádné další metody pro zjištění avatara, pokud uživatel zadal emailovou adresu.</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="cnf_gravatar_fallback_always"></a>
+<h3>Vždy vyžadovat Gravatar Fallback</h3>
+<p>Vyžadovat zpracování chyby Gravatar (Gravatar Fallback) také pokud uživatel nezadal žádný email (ale pokud zadal URL adresu domovské stránky nebo jméno).</p> 
+<p><a href="#top">nahoru</a></p>
+
+<a name="changelog"></a>
+<h2>Historie verzí (ChangeLog)</h2>
+
+<ul>
+<li>verze 1.54</li>
+	<ul>
+	<li>Do jazykové konstanty PLUGIN_EVENT_GRAVATAR_SUPPORTED byl přidán parametr %s pro zobrazení podporovaných avatarových služeb.</li>
+	</ul>
+<li>verze 1.52</li>
+	<ul>
+	<li>Změněno zobrazení podporovaných avatarů pod polem pro komentář, aby podporovalo hezké zalamování řádků.</li>
+	</ul>
+<li>verze 1.51</li>
+	<ul>
+	<li>Použití funkce strtolower() pro mailové adresy.</li>
+	</ul>
+<li>verze 1.49 [brockhaus]</li>
+	<ul>
+	<li>Pavatar v blozích s přesměrováním nefungoval, pokud byl odkaz na Pavatar přístupný pouze v informacích tagu "rel link"</li>
+	</ul>
+<li>verze 1.48 [brockhaus]</li>
+	<ul>
+	<li>Oprava: Kompatibilita PHP byla porušena při opravě 1.46 :-/</li>
+	<li>Přidán avatar Identica. Použito hlavně pro pingbacky Indetica a mělo by být použito před Favatarem, jinak se bude zobrazovat značka Identica místo obrázku uživatele.</li>
+	<li>Vyčištění kódu</li>
+	</ul>
+<li>verze 1.47 [brockhaus]</li>
+	<ul>
+	<li>Vypnutí ladicích výpisů v template_c</li>
+	</ul>
+<li>verze 1.46 [brockhaus]</li>
+	<ul>
+	<li>Přidán Twitter Avatar (pokud URL odkazuje na profil na Twitteru). To je většinou použito pro Tweetbacky a mělo by být použito před Favatarem, jinak se bude zobrazovat logo Twitteru.</li>
+	<li>Vyčištění kódu</li>
+	</ul>
+<li>verze 1.45 [brockhaus]</li>
+	<ul>
+	<li>Nápověda</li>
+	<li>Vyčištění</li>
+	</ul>
+<li>verze 1.44 [brockhaus]</li>
+	<ul>
+	<li>Přidána podpora Wavatarů</li>
+	<li>Podpora pro ošetření chyb (fallback) Gravataru pomocí indetyicon, MonsterID a Wavataru.</li>
+	<li>Optimalizace zpětných volání (trackback) avatarů: Querypars budou odstřiženy z URL. Nyní v ukázkovém Serendipity blogu dostanete vždycky stejného cachovaného Avatara, ne samostatného pro jiné stránky.</li>
+	</ul>
+<li>verze 1.43 [brockhaus]</li>
+	<ul>
+	<li>Volba nastavení pro přidání jména autora do attributu ALT u obrázku avatara. Normálně je to vyplněno hvězdičkou "*", ale slepci jsou při prohlížení stránek závislí na tagu ALT, který jim čtečky předčítají, aby se dozvěděli, co je obsahem obrázku.</li>
+	</ul>
+<li>verze 1.42 [brockhaus]</li>
+	<ul>
+	<li>Kódování podtržítka "_" v URL adresách uživatelů, aby se odlišily od oddělovačů. Funkce "urlencode" je nekóduje. Díky uživateli [Tino Schwarze] za objevení a opravu.</li>
+	</ul>
+<li>verze 1.41 [garvinhicking]</li>
+	<ul>
+	<li>Opravena hlavička "Last-Modified" u obrázků avatarů.</li>
+	</ul>
+<li>verze 1.40</li>
+	<ul>
+	<li>Přidána podpora Ycon (<a href="http://moblog.wiredwings.com">http://moblog.wiredwings.com<a/>)(</li>
+	</ul>
+<li>verze 1.39 [brockhaus]</li>
+	<ul>
+	<li>Avatary Monster ID je nyní také cachován, protože jejich vytváření trvá dlouho.</li>
+	</ul>
+<li>verze 1.38 [brockhaus]</li>
+	<ul>
+	<li>Podpora Monster ID avatarů (podrobnosti naleznete na <a href="http://www.splitbrain.org/go/monsterid">http://www.splitbrain.org/go/monsterid</a>)</li>
+	<li>Selhání při čerstvé instalaci a času cache nastaveném na 0.</li>
+	<li>Podpora nastavení absolutní cesty k standardnímu avataru.</li>
+	<li>Po uložení nastavení je nyní cache <b>vždy</b> vyčištěna, aby byly změny viditelné ihned, dokonce i když je cachování zapnuto.</li>
+	<li>Pokud plugin nemůže zapisovat do cache, pak to v ladicím módu zapíše do logu a zobrazí výchozí obrázek, pokud není nalezen cachovaný soubor.</li>
+	</ul>
+<li>verze 1.37 [brockhaus]</li>
+	<ul>
+	<li>Řádka pod oknem komentáře informující o podporovaných typech avatarů lze skrýt pomocí nastavení.</li>
+	</ul>
+<li>verze 1.36 [brockhaus]</li>
+	<ul>
+	<li>Přidána nová volba: Můžete nastavit, že plugin nebude vytvářet avatary přímo, ale místo toho pouze tag pro smarty. Pokud je tato volba zapnutá, můžete si definovat v šabloně pro komentáře, kde se mají avatary zobrazovat, a to pomocí tagu $comment.comment_avatar.</li>
+	<li>CSS třída avataru se bude měnit podle toho, kde je zobrazen. Pro normální komentáře bude mít třídu "comment_avatar", pro plugin "nejnovější příspěvky" to bude třída "serendipity_plugin_comments_avatar", aby byla možnost jednoduše je označit, ostylovat.</li>
+	<li>Nastavení zarovnání avatarů: Nastavení zarovnání bude použito, pokud je avatar vykreslen přímo (ne pomocí smarty).</li>
+	<li>Nová volba pro vypínání/zapínání obrázků avatarů v postranním sloupci (nejnovější komentáře).</li>
+	<li>Podporovaní metody avatarů se zobrazovaly i pod kontaktním formulářem, což ale nemělo logický smysl. V tomto fromuláři byly tedy avatary vypnuty.</li>
+	<li>Další změny v jazykových souborech.</li>
+	</ul>
+<li>verze 1.35 [brockhaus]</li>
+	<ul>
+	<li>Opraveny chyby v anglickém jazykovém souboru. (Díky Donovi!)</li>
+	</ul>
+<li>verze 1.34 [brockhaus]</li>
+	<ul>
+	<li>Hodnocení Gravatarů nepracuje spolehlivě. Můj Gravatar hodnocený jako G je zobrazen pouze při použití hodnocení gravatarů X. :-/<br />
+	Přidána volba pro vypnutí parametru hodnocení Gravatarů, což by mělo mít stejný efekt jako nastavení hodnocení X.</li>
+	</ul>
+<li>verze 1.33 [brockhaus]</li>
+	<ul>
+	<li>Pavatar: X-Pavatar Header je nyní znovu podporován a je první použitou metodou automatické detekce Pavatara.</li>
+	</ul>
+<li>verze 1.32 [brockhaus]</li>
+	<ul>
+	<li>Výchozí avatar MyBlogLog nebyl správně detekování. :-/</li>
+	<li>Pokud není zadán email ani url adresa, ale je definován výchozí avatar, je nyní zobrazen právě výchozí avatar.</li>
+	</ul>
+<li>verze 1.31 [brockhaus]</li>
+	<ul>
+	<li>Změna času volání (call-time) chyby (pass-by-reference) (fetchAvatar).</li>
+	</ul>
+<li>verze 1.30 [brockhaus]</li>
+	<ul>
+	<li>Standradní Avatar se nezobrazoval, pokud byl blog nainstalován v podadresáři webu a ne přímo v kořenové složce.</li>
+	<li>Odkaz na Gravatara byl trochu špatně (přesto fungoval).</li>
+	</ul>
+<li>verze 1.29 [brockhaus]</li>
+	<ul>
+	<li>Oprava chyby 1.27 přidávala k URL "http://", i když nebyla zadána vůbec žádná URL adresa.</li>
+	</ul>
+<li>verze 1.28 [brockhaus]</li>
+	<ul>
+	<li>V Serendipity 1.1 nebylo možné natavit výchozího avatara. Nastavení nebylo kompatibilní s verzí Serendipity 1.1.</li>
+	</ul>
+<li>verze 1.27 [brockhaus]</li>
+	<ul>
+	<li>Pokud pisatel zadal svoji adresu jako "www.domena.cz" místo "http://www.domena.cz", Avatar nebyl načten správně.</li>
+	</ul>
+<li>verze 1.26 [brockhaus]</li>
+	<ul>
+	<li>MyBlogLog trochu pozměnil způsob volání avatara, což mělo za následek, že ošetření chybových výstupů (fallback) pro MyBlogLog přestal fungovat.</li>
+	</ul>
+<li>verze 1.25 [garvinhicking]</li>
+	<ul>
+	<li>Zarovnání (algin) nahraceno definicí pomocí CSS stylů, takže XHTML už neobsahuje žádné definice zarovnání.</li>
+	</ul>
+<li>verze 1.24 [brockhaus]</li>
+	<ul>
+	<li>Kontrola odpovědi MyBlogLog, jestli obsahuje opravdu obrázek.</li>
+	<li>Vyčištění paměti cache při nastavení hodnoty cachování na 0.</li>
+	<li>Vypnutí ladicích výpisů.</li>
+	</ul>
+<li>verze 1.23 [brockhaus]</li>
+	<ul>
+	<li>Při vkládání čerstvých P/favatarů, plugin přijme pouze odpovědi označené vzdáleným serverem jako obrázky. To zamezí přijetí potenciálních html stránek jako obrázku avatara.</li>
+	</ul>
+<li>verze 1.22 [brockhaus]</li>
+	<ul>
+	<li>Vkládání i přesměrovaných P/Favatarů.</li>
+	</ul>
+<li>verze 1.21 [brockhaus]</li>
+	<ul>
+	<li>Vkládání avatarů se rozbilo při vypnutí cache.</li>
+	<li>Prohlížeč nebyl schopen cachovat výchozí avatary kvůli špatně nastavenému času cache.</li>
+	<li>Kontrola, jestli cachovaný soubor vypadá jako obrázek, předtím, než je odeslán na klienta.</li>
+	</ul>
+<li>verze 1.20 [brockhaus]</li>
+	<ul>
+	<li>Titulek obrázku avatara nyní zobrazuje jméno autora místo "Avatar" (V.)</li>
+	</ul>
+<li>verze 1.19 [brockhaus]</li>
+	<ul>
+	<li>Využití cache prohlížeče má za následek dobré vylepšení výkonu!</li>
+	</ul>
+<li>verze 1.18 [brockhaus]</li>
+	<ul>
+	<li>Vypnutí ladicích výpisů</li>
+	</ul>
+<li>verze 1.17 [brockhaus]</li>
+	<ul>
+	<li>Pokud je zapnuto cachování, je nyní cachováno <b>všechno</b>. Známí přispěvatelé a komentátoři nyní nezpůsobí <b>žádné</b> volání cizích serverů, pokud už jsou jejich obrázky cachovány. Velmi pěkné posílení výkonu. Díky Garvinovi za nápad.</li>
+	<li>Záplata proti hackování od uživatele [garvinhickins]</li>
+	</ul>
+<li>verze 1.16 [garvinhicking]</li>
+	<ul>
+	<li>uhlazení kódu</li>
+	</ul>
+<li>verze 1.14 [brockhaus]</li>
+	<ul>
+	<li>Implementováno zpracování chyb pro MyBlogLog! :-) Ale je pomalé, dokonce i s optimalizací pomocí cachování. MyBlogLog by neměl být první v pořadí avatarů.</li>
+	<li>Přidána pátá kolonka pro výběr metody avatarů, protože MyBlogLog nyní také podporuje zpracování chyb (fallback).</li>
+	</ul>
+<li>verze 1.13 [brockhaus]</li>
+	<ul>
+	<li>Doporučení změněno: Není to plugin "statistika", který znefunkční Pavatary/Favatary, ale plugin "sledování odchodů" (exit tracking plugin)</li>
+	</ul>
+<li>verze 1.12 [brockhaus]</li>
+	<ul>
+	<li>MyBlogLog avatary jsou nyní také cachovány.</li>
+	<li>Stránky s přesměrováním na výchozí stránku, pokud nebyla nalazena výchozí položka, jsou nyní podporovány. Dřívější plugin avatar předpokládal, že výchozí stránka ja P/Favatar.</li>
+	<li>Výchozí nastavení pořadí avatarů je nyní: Gravatar -> Pavatar 
+      -> Favatar -> výchozí Avatar</li>
+	<li>Přidáno doporučení, že plugin by měl být zařazen před pluginy, které mění odkazy.</li>
+	<li>Načítání nastavené cesty pluginu. Dříve to byl vždy adresář 'plugin'.</li>
+	<li>Vyřazeno nastavení okraje gravatara, protože už nefunguje (napořád?).</li>
+	</ul>
+<li>verze 1.11 [brockhaus], testovací verze nebyla releasována do CVS/Spartacus</li>
+	<ul>
+	<li>Fallback (zpracování chyby) pro Gravatar funguje! Ale zobrazuje výchozího avatara nezávisle na nastavení. Takže toto nastavení bylo smazáno.</li>
+	</ul>
+<li>verze 1.10 [brockhaus]</li>
+	<ul>
+	<li>Informace o Pavatar / Avatar nebyly nikdy načtené z cache</li>
+	<li>...ale po načtení z cache způsobily nekonečnou smyčku pro obrázky načtené z lokálního blogu (pokud byl povolen postranní blugin s komentáři - comment sidebar)</li>
+	<li>Nastavení výšky obrázku bylo pojmenováno "height" ... :-/</li>
+	<li>Cachování Gravataru nefungovalo spolehlivě, pokud byl nastaven výchozí avatar.</li>
+	</ul>
+<li>verze 1.9 [brockhaus]</li>
+	<ul>
+	<li>Při hledání Pavatara byl natažen Favatar jako Pavatar, pokud nebyl nalezen Pavatar, ale favicon. Díky uživateli [El Burro]</li>
+	</ul>
+<li>verze 1.8 [brockhaus]</li>
+	<ul>
+	<li>Plugin nebych schopen načíst Favatary/Pavatary, pokud bylo přesměrování nasměrováno na URL stránky nastavené jako domovská stránka komentujícího. Třeba Garvin má takový blog...</li>
+	</ul>
+<li>verze 1.7 [brockhaus]</li>
+	<ul>
+	<li>Přidána podpora Pavatarů (<a href="www.pavatar.com">www.pavatar.com</a>)</li>
+	<li>Přidána podpora MyBlogLog avatarů (<a href="www.pavatar.com">www.mybloglog.com</a>)</li>
+	<li>Pořadí pro výběr avatarů a jaké typy avatarů jsou podporovány, vše je nyní nastavitelné.</li>
+	<li>Standardní avatar může být jeden z nich (měl by být poslední).</li>
+	<li>Volba pro nenastavení Gravatara jako výchozího avatara, i když je definovaný. (Chceme méně datových profilů...)</li>
+	<li>Vložení výchozího avatara pomocí mediatéky v nastavení pluginu.</li>
+	<li>Velikost obrázku je nyní zajištěna pomocí HTML kódu.</li>
+	<li>Pod polem pro komentář jsou zobrazovány pouze aktuálně nastavené metody avatara jako podporované.</li>	
+	</ul>
+<li>verze 1.6 [garvinhickins]</li>
+<li>verze 1.5 [garvinhickins]</li>
+<li>verze 1.4 [garvinhickins]</li>
+<li>verze 1.3 [garvinhickins]</li>
+	<ul>
+	<li>Opraveny chyby neplatnosti domény</li>
+	</ul>
+</ul>
+<p><a href="#top">nahoru</a></p>
+
+</body>
+</html>
