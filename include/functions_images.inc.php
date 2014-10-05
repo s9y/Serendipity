@@ -3438,8 +3438,8 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
                 foreach($renameValues AS $renameData) {
                     // Rename thumbnail
-                    rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']),
-                           $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $newDir . '.' . $renameData['thumb'] . (empty($file['extension']) ? '' : '.' . $file['extension']));
+                    @rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']),
+                           $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $newDir . (!empty($file['thumbnail_name']) ? '.' . $renameData['thumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']));
                 }
 
                 serendipity_updateImageInDatabase(array('thumbnail_name' => $renameValues[0]['thumb'], 'realname' => $newDir, 'name' => $newDir), $item_id);
