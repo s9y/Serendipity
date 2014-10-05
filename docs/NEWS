@@ -3,13 +3,15 @@
 Version 2.0-beta4 / RC? ()
 ------------------------------------------------------------------------
 
+    * Fix issue #220 with pdf directory moving rename() error
+
     * Change name and fix $serendipity['capabilities']['jquery_noConflictMode']
 
     * Fix bug in entry listing, which showed wrong categories for
       entries (Issue #201)
-      
+
     * Improve RegExp for Feed-URL matching, thanks to fugue88
-    
+
     * Proper SQLite PDO filenames in shared installations (Issue #214)
 
     * ImageMagick now can get parameters to generate thumbnails,
@@ -19,7 +21,7 @@ Version 2.0-beta4 / RC? ()
       preferences (Issue #213)
 
     * Re-added installer test for writable serendipity base directory
-        
+
 Version 2.0-beta3 (July 25th, 2014)
 ------------------------------------------------------------------------
 
