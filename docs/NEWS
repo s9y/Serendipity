@@ -5,8 +5,6 @@ Version 2.0-beta4 / RC? ()
 
     * Fix issue #220 with pdf directory moving rename() error
 
-    * Change name and fix $serendipity['capabilities']['jquery_noConflictMode']
-
     * Fix bug in entry listing, which showed wrong categories for
       entries (Issue #201)
 
@@ -101,7 +99,7 @@ Version 2.0-beta3 (July 25th, 2014)
       to older plugins.
       This mode is now considered deprecated and will be removed in 
       future releases. A new variable:
-        $serendipity['capabilities']['jquery_noConflictMode'] = false;
+        $serendipity['capabilities']['jquery-noconflict'] = false;
       in your theme's config.inc.php file can now turn of that
       noConflict-mode.
 

@@ -12,14 +12,11 @@ include_once S9Y_INCLUDE_PATH . 'include/functions.inc.php';
 /* Core API function mappings
  * This allows the s9y Core to also execute internal core actions on plugin API hooks
  * Future use: Global variable can be customized/overriden by your own plugin on the frontend_configure event
- * or during runtime, or the serendipity_config_local.inc.php file.
+ * or during runtime. The capabilities are theme or plugin based only.
  */
-if ( false !== $serendipity['capabilities']['jquery'])
-    $serendipity['capabilities']['jquery'] = true;
-if ( false !== $serendipity['capabilities']['jquery_backend'])
-    $serendipity['capabilities']['jquery_backend'] = true;
-if ( false !== $serendipity['capabilities']['jquery_noConflictMode'])
-    $serendipity['capabilities']['jquery_noConflictMode'] = true; //set as being deprecated, while we should not need it anymore
+$serendipity['capabilities']['jquery'] = true;
+$serendipity['capabilities']['jquery_backend'] = true;
+$serendipity['capabilities']['jquery-noconflict'] = true; //set as being deprecated, while we should not need it anymore
 
 $serendipity['core_events']['frontend_header']['jquery'] = 'serendipity_plugin_api_frontend_header';
 $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_api_backend_header';
@@ -37,7 +34,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
 <?php
-        if ($serendipity['capabilities']['jquery_noConflictMode']) {
+        if ($serendipity['capabilities']['jquery-noconflict']) {
 ?>
     <script>jQuery.noConflict();</script>
 <?php
