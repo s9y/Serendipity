@@ -660,7 +660,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 if ($fdim[0] > $size['width'] && $fdim[1] > $size['height']) {
                     $r = $size;
                 } else {
-                    return array(0,0);
+                    return array(0,0); // Do not create any thumb, if image is smaller than defined sizes
                 }
             } else {
                 $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
@@ -673,7 +673,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 if (!$force_resize && serendipity_ini_bool(ini_get('safe_mode')) === false) {
                     $newSize .= '>'; // Tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
                 }
-                $newSize .= '!'; // force the image geometry exactly to given sizes (see https://github.com/s9y/Serendipity/commit/94881ba4c0e3bdd4b5fac510e93977e239171c1c and comments)
+                if (!$serendipity['imagemagick_nobang']) $newSize .= '!'; // Force the first run image geometry exactly to given sizes, if there were rounding differences (see https://github.com/s9y/Serendipity/commit/94881ba4c0e3bdd4b5fac510e93977e239171c1c and comments)
                 $cmd = escapeshellcmd($serendipity['convert'] . ' ' . $serendipity['imagemagick_thumb_parameters']) . ' -antialias -resize ' . serendipity_escapeshellarg($newSize) . ' ' . serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
             }
             exec($cmd, $output, $result);
