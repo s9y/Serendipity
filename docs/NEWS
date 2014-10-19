@@ -1,9 +1,9 @@
 #
 
-Version 2.0-beta4 / RC? ()
+Version 2.0-beta4/5 / RC? ()
 ------------------------------------------------------------------------
 
-    * Smarty 3.1.20 upgrade (see changelog)
+    * Smarty 3.1.21 upgrade (see changelog)
 
     * Fix issue #220 with pdf directory moving rename() error
 
