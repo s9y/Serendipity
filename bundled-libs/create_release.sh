@@ -70,6 +70,7 @@ else
             chmod 777 "$2/templates_c"
             chmod 777 "$2/plugins"
             chmod 777 "$2/uploads"
+            chmod 777 "$2/archives"
             echo "    [DONE]"
             echo ""
 
