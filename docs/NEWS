@@ -1,8 +1,10 @@
 #
 
-Version 2.0-beta4/5 / RC? ()
+Version 2.0-beta4/5/6 / RC? ()
 ------------------------------------------------------------------------
 
+    * Added new PAT_JS mod_rewrite rule to .htaccess files
+    
     * Smarty 3.1.21 upgrade (see changelog)
 
     * Fix issue #220 with pdf directory moving rename() error

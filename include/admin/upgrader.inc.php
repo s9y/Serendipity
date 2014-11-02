@@ -235,6 +235,10 @@ $tasks = array(array('version'   => '0.5.1',
                      'arguments' => array('serendipity_event_dashboard'),
                      'title'     => 'Remove dashboard plugin',
                      'desc'      => 'Serendipity 2.0 includes a dashboard in the admin theme. The separate plugin for 1.x has to be removed.'),
+               array('version'   => '2.0-beta6',
+                     'function'  => 'serendipity_installFiles',
+                     'title'     => 'Update of .htaccess file',
+                     'desc'      => 'Changes were made to the .htaccess file to allow for new patterns, it will be recreated. If you manually modified the file, make sure your modification are in place afterwards.'),
 
 );
 
