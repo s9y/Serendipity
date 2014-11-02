@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.30');
+        $propbag->add('version',       '2.31');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -42,7 +42,6 @@ class serendipity_event_spartacus extends serendipity_event
             'backend_templates_fetchtemplate'    => true,
 
             'backend_pluginlisting_header'         => true,
-            'backend_pluginlisting_header_upgrade' => true,
             
             'external_plugin'                      => true,
 
@@ -1135,12 +1134,6 @@ class serendipity_event_spartacus extends serendipity_event
                         echo '<a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
                         echo '</div>';
                     }
-
-                    return true;
-                    break;
-
-                case 'backend_pluginlisting_header_upgrade':
-                    echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . PLUGIN_EVENT_SPARTACUS_CHECK_HINT . '</span>';
 
                     return true;
                     break;
