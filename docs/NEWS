@@ -3,6 +3,9 @@
 Version 2.0-beta4/5 / RC? ()
 ------------------------------------------------------------------------
 
+    * Removed experimental support for PHP/SMARTY IN-MEMORY caching
+      added in 2.0-beta3, since this could not work.
+
     * Smarty 3.1.21 upgrade (see changelog)
 
     * Fix issue #220 with pdf directory moving rename() error
