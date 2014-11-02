@@ -53,25 +53,26 @@
         <div class="clearfix">
             {if $only_group != UPGRADE}
                 <div id="plugin_groups" class="form_select">
-                <label for="only_group">{$CONST.GROUP}</label>
-                <select id="only_group" name="serendipity[only_group]">
-                {foreach $groupnames as $available_group => $available_name}
-                    <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name|default:$CONST.ALL_CATEGORIES}</option>
-                {/foreach}
-               
+                    <label for="only_group">{$CONST.GROUP}</label>
+                    <select id="only_group" name="serendipity[only_group]">
+                    {foreach $groupnames as $available_group => $available_name}
+                        <option value="{$available_group}"{if $only_group == $available_group} selected{/if}>{$available_name|default:$CONST.ALL_CATEGORIES}</option>
+                    {/foreach}
+                    </select>
+                </div>
+                
 
-                </select>
-            </div>
+                <div id="plugin_filter" class="form_field">
+                    <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
+                    <input id="pluginfilter" type="text">
+                    <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
+                </div>
+                <div class="form_buttons">
+                    <input type="submit" value="{$CONST.GO}">
+                </div>
+            {else}
+                <a class="button_link" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
             {/if}
-
-            <div id="plugin_filter" class="form_field">
-                <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
-                <input id="pluginfilter" type="text">
-                <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
-            </div>
-            <div class="form_buttons">
-                <input type="submit" value="{$CONST.GO}">
-            </div>
         </div>
     </form>
     
