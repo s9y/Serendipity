@@ -11,7 +11,7 @@
             <div class="pluginmanager_side pluginmanager_{($event_only) ? 'event' : 'sidebar'}">
                 <h4>{$plugin_placement['ptitle']}</h4>
 
-                <ol id="{$plugin_placement['pid']}_col" data-placement="{$plugin_placement['pid']}" class="pluginmanager_container plainList">
+                <ol id="{$plugin_placement['pid']}_col" data-placement="{$plugin_placement['pid']}" class="pluginmanager_container plainList equal_heights">
                 {foreach $plugin_placement['plugin_data'] as $plugin_data}
                     <li id="{$plugin_data['css_key']}" class="pluginmanager_plugin pluginmanager_item_{cycle values="odd,even"}">
                         <input type="hidden" name="serendipity[plugin][{$plugin_data['name']}][id]" value="{$plugin_data['name']}" />

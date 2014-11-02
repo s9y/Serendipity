@@ -754,6 +754,20 @@
         $(target).toggleClass(stateClass);
     }
 
+    serendipity.sync_heights = function() {
+        if($('.equal_heights').length > 0) {
+            if($('html').hasClass('lt-ie9')) {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: false
+                });
+            } else {
+                $('.equal_heights').syncHeight({
+                    updateOnResize: true
+                });
+            }
+        }
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ))
 
 $(function() {
@@ -1404,17 +1418,14 @@ $(function() {
     // Equal Heights
     $(window).load(function() {
         if (mq_small.matches) {
-            if($('.equal_heights').length > 0) {
-                if($('html').hasClass('lt-ie9')) {
-                    $('.equal_heights').syncHeight({
-                        updateOnResize: false
-                    });
-                } else {
-                    $('.equal_heights').syncHeight({
-                        updateOnResize: true
-                    });
-                }
-            }
+            serendipity.sync_heights();
+        }
+    });
+
+    // Make sure plugin list heights are recalculated when switching tabs
+    $('#pluginlist_tabs a').click(function() {
+        if (mq_small.matches) {
+            serendipity.sync_heights();
         }
     });
 });
