@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -885,7 +885,9 @@ function serendipity_smarty_init($vars = array()) {
     global $serendipity, $template_config, $template_global_config, $template_config_groups;
 
     if (!isset($serendipity['smarty'])) {
+
         $template_dir = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+
         if (!defined('IN_serendipity_admin') && file_exists($template_dir . '/template.inc.php')) {
             // If this file exists, a custom template engine will be loaded.
             // Beware: Smarty is used in the Admin backend, despite of this.
@@ -905,9 +907,9 @@ function serendipity_smarty_init($vars = array()) {
                 @define('SMARTY_RESOURCE_CHAR_SET', LANG_CHARSET);
             }
 
-            // define cache resources to load with smarty - see smarty class
-            @define('APC_EXTENSION_LOADED', extension_loaded('apc') && ini_get('apc.enabled'));
-            @define('MEMCACHE_EXTENSION_LOADED', (class_exists('Memcached',false) || class_exists('Memcache',false)) && (extension_loaded("memcached") || extension_loaded("memcache")));
+            // define cache resources to load with smarty - see smarty cache readme - needs enabled cache!
+            #@define('APC_EXTENSION_LOADED', extension_loaded('apc') && ini_get('apc.enabled'));
+            #@define('MEMCACHE_EXTENSION_LOADED', (class_exists('Memcached',false) || class_exists('Memcache',false)) && (extension_loaded("memcached") || extension_loaded("memcache")));
 
             // Default Smarty Engine will be used
             @define('SMARTY_DIR', S9Y_PEAR_PATH . 'Smarty/libs/');
@@ -943,10 +945,12 @@ function serendipity_smarty_init($vars = array()) {
             // debugging...
             #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
             #$serendipity['smarty']->testInstall();exit;
+            // extreme debugging with undocumented internal flag which enables a trace output from the parser during debugging
+            #$serendipity['smarty']->_parserdebug = true; // be careful!
 
             /** 
              * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
-             * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
+             * smarty_modifier_foobar(Smarty $smarty, $string, ...) vs. smarty_modifier_foobar($string, ...)
              **/
             $serendipity['smarty']->registerPlugin('modifier', 'makeFilename', 'serendipity_makeFilename');
             $serendipity['smarty']->registerPlugin('modifier', 'xhtml_target', 'serendipity_xhtml_target');
