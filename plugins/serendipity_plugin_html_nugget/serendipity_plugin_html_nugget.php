@@ -10,7 +10,7 @@ class serendipity_plugin_html_nugget extends serendipity_plugin {
         if (!empty($subtitle)) {
             $desc    = '(' . $subtitle . ') ' . HOLDS_A_BLAHBLAH;
         } else {
-            $desc        = HOLDS_A_BLAHBLAH;
+            $desc    = HOLDS_A_BLAHBLAH;
         }
 
         $propbag->add('name',          HTML_NUGGET);

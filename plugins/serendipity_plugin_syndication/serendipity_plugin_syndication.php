@@ -185,7 +185,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $onclick=$this->getOnclick($mainFeed);
         }
 
-        echo '<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">';
+        echo "\n".'<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">';
         echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon);
                 
         if ($useRss && $useAtom) {
@@ -198,17 +198,19 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                             ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath')) : ""),
                                             $small_icon);
         }
-        echo "</ul>";
+        echo "</ul>\n";
     }
 
     function generateFeedButton($feed, $label, $onlick, $icon) {
-        $link = "class='serendipity_xml_icon' href='$feed' $onclick";
-        $output = "<li>
-            <a id='serendipity_subtome' $link><img src='$icon' alt='XML' style='border: 0px' /></a>";
+        // sadly sidebar only plugins can't use event hooks
+        $link = 'class="serendipity_xml_icon" href="'.$feed. $onclick.'"';
+        $output = '
+<li>
+    <a id="serendipity_subtome" ' . $link . '><img src="' . $icon . '" alt="XML" style="border: 0px" /></a>'."\n";
         if (! empty($label)) {
-            $output .= " <a $link>$label</a>";
+            $output .= " <a $link>$label</a>\n";
         }
-        return $output .= "</li>";
+        return $output .= "</li>\n";
     }
 
     function getOnclick($url) {
