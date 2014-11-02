@@ -9,7 +9,7 @@ class serendipity_plugin_plug extends serendipity_plugin {
         $propbag->add('description',   ADVERTISES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array(
                                         'image',
                                         'text'));
@@ -23,14 +23,14 @@ class serendipity_plugin_plug extends serendipity_plugin {
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        POWERED_BY_SHOW_IMAGE);
                 $propbag->add('description', POWERED_BY_SHOW_IMAGE_DESC);
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'text':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        POWERED_BY_SHOW_TEXT);
                 $propbag->add('description', POWERED_BY_SHOW_TEXT_DESC);
-                $propbag->add('default',     'false');
+                $propbag->add('default',     'true');
                 break;
             default:
                 return false;
