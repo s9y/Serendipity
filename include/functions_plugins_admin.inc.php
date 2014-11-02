@@ -1,4 +1,4 @@
-<?php # $Id:$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -231,23 +231,22 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
     if (empty($config_names)) {
         return false;
     }
-    
+
     $tfile = "/admin/plugin_config_item.tpl";
-    
 
     $data = array();
 
-    if ($showSubmit && $postKey != 'plugin') { 
+    if ($showSubmit && $postKey != 'plugin') {
         $data['showSubmit_head'] = true;
     }
 
-    if ($showTable) { 
+    if ($showTable) {
         $data['showTable'] = true;
     }
 
     $elcount = 0;
     $htmlnugget = array();
-    
+
     $plugin_options = array();
     $data['config_names'] = $config_names;
 
@@ -256,9 +255,9 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $cbag = new serendipity_property_bag;
         $plugin->introspect_config_item($config_item, $cbag);
 
-        $data['cname'] = $cname      = htmlspecialchars($cbag->get('name'));
-        $data['cdesc'] = $cdesc      = htmlspecialchars($cbag->get('description'));
-        $value      = $plugin->get_config($config_item, 'unset');
+        $data['cname']  = $cname = htmlspecialchars($cbag->get('name'));
+        $data['cdesc']  = $cdesc = htmlspecialchars($cbag->get('description'));
+        $value          = $plugin->get_config($config_item, 'unset');
         $lang_direction = htmlspecialchars($cbag->get('lang_direction'));
 
         if (empty($lang_direction)) {
@@ -311,15 +310,15 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
 
         switch ($ctype) {
-            case 'seperator': 
+            case 'seperator':
                 $assign_plugin_config($data);
 
                 break;
 
-            case 'multiselect': 
+            case 'multiselect':
                 $data['is_multi_select'] = $is_multi_select = true;
 
-            case 'select': 
+            case 'select':
                 $data['ctype'] = 'select';
                 if (is_array($hvalue)) {
                     $selected_options = $hvalue;
@@ -332,19 +331,19 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['selected_options'] = $selected_options;
                 $data['pre_selected']     = $pre_selected = (array)$cbag->get('select_preselected');
                 $data['select_size']      = $select_size  = $cbag->get('select_size');
-                $data['select']           = $select = $cbag->get('select_values');
+                $data['select']           = $select       = $cbag->get('select_values');
 
                 $assign_plugin_config($data);
 
                 break;
 
-            case 'tristate': 
+            case 'tristate':
                 $data['ctype'] = 'tristate';
                 $per_row = 3;
                 $radio['value'][] = 'default';
                 $radio['desc'][]  = USE_DEFAULT;
 
-            case 'boolean': 
+            case 'boolean':
                 $data['ctype'] = 'boolean';
                 $radio['value'][] = 'true';
                 $radio['desc'][]  = YES;
@@ -352,7 +351,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $radio['value'][] = 'false';
                 $radio['desc'][]  = NO;
 
-            case 'radio': 
+            case 'radio':
                 $data['ctype'] = 'radio';
                 if (!count($radio) > 0) {
                     $radio = $cbag->get('radio');
@@ -390,7 +389,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                 break;
 
-            case 'string': 
+            case 'string':
                 $data['ctype'] = 'string';
                 if (empty($input_type)) {
                     $input_type = $cbag->get('input_type');
@@ -423,28 +422,28 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                break;
 
-            case 'content': 
+            case 'content':
                 $data['ctype'] = 'content';
                 $data['cbag_default'] = $cbag->get('default');
                 $assign_plugin_config($data);
 
                 break;
 
-            case 'custom': 
+            case 'custom':
                 $data['ctype'] = 'custom';
                 $data['cbag_custom'] = $cbag->get('custom');
                 $assign_plugin_config($data);
 
                 break;
 
-            case 'hidden': 
+            case 'hidden':
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');
                 $assign_plugin_config($data);
 
                 break;
 
-            case 'media': 
+            case 'media':
                 $data['ctype'] = 'media';
                 // Print the HTML to display the popup media selector
                 $preview_width = $cbag->get('preview_width');
@@ -463,7 +462,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                 break;
 
-            case 'sequence': 
+            case 'sequence':
                 $data['ctype'] = 'sequence';
                 // For the drag-n-drop to work, the list must be included in
                 // a container (probably an <ol>) that JavaScript can access
@@ -516,7 +515,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     }
 
                     // Make sure all the items are in the order list; new items
-                    // go on the end (new items could have been added without 
+                    // go on the end (new items could have been added without
                     // this config item being updated)
                     // Also fill out thumbnails and display names
                     foreach ($items as $id => $junk) {
@@ -590,7 +589,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                 break;
 
-            default: 
+            default:
                 $data['ctype'] = 'default';
                 // Unknown configuration key. Let the plugin handle it.
                 $addData = func_get_args();
@@ -610,7 +609,6 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 break;
         }
 
-        
     }
     $data['config_groups'] = $config_groups;
     $data['plugin_options'] = $plugin_options;
@@ -625,16 +623,16 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
     $data['plugin_options_ungrouped'] = $plugin_options;
 
-    if ($showSubmit) { 
+    if ($showSubmit) {
         $data['showSubmit_foot'] = true;
     }
 
-    if ($showExample && method_exists($plugin, 'example') ) { 
+    if ($showExample && method_exists($plugin, 'example') ) {
         $data['showExample'] = true;
         $data['plugin_example'] = $plugin->example();
     }
 
-    if ($spawnNuggets && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && count($htmlnugget) > 0) { 
+    if ($spawnNuggets && isset($serendipity['wysiwyg']) && $serendipity['wysiwyg'] && count($htmlnugget) > 0) {
         $data['spawnNuggets'] = true;
         $ev = array('nuggets' => $htmlnugget, 'skip_nuggets' => false);
         serendipity_plugin_api::hook_event('backend_wysiwyg_nuggets', $ev);

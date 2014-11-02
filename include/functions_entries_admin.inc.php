@@ -1,4 +1,4 @@
-<?php # $Id: functions_entries.inc.php 435 2005-08-25 12:36:39Z garvinhicking $
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -52,7 +52,6 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         $moderate_comments = '';
         $template_vars['moderate_comments'] = false;
     }
-
 
     if (isset($entry['allow_comments']) && (serendipity_db_bool($entry['allow_comments']))) {
         $template_vars['allow_comments'] = true;
@@ -129,20 +128,20 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 
     $template_vars['wysiwyg_advanced'] = true;
 
-    $template_vars['timestamp']                 = serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time());
-    $template_vars['reset_timestamp']           = serendipity_serverOffsetHour(time());
-    $template_vars['hiddens']                    = $hiddens;
-    $template_vars['errMsg']                    = $errMsg;
-    $template_vars['entry']                     =& $entry;
-    $template_vars['targetURL']                 = $targetURL;
-    $template_vars['cat_count']                 = count($cats)+1;
-    $template_vars['wysiwyg']                   = $serendipity['wysiwyg'];
-    $template_vars['serendipityRightPublish']   = $_SESSION['serendipityRightPublish'];
-    $template_vars['wysiwyg_blocks']            = array(
+    $template_vars['timestamp']               =  serendipity_serverOffsetHour(isset($entry['timestamp']) && $entry['timestamp'] > 0 ? $entry['timestamp'] : time());
+    $template_vars['reset_timestamp']         =  serendipity_serverOffsetHour(time());
+    $template_vars['hiddens']                 =  $hiddens;
+    $template_vars['errMsg']                  =  $errMsg;
+    $template_vars['entry']                   =& $entry;
+    $template_vars['targetURL']               =  $targetURL;
+    $template_vars['cat_count']               =  count($cats)+1;
+    $template_vars['wysiwyg']                 =  $serendipity['wysiwyg'];
+    $template_vars['serendipityRightPublish'] =  $_SESSION['serendipityRightPublish'];
+    $template_vars['wysiwyg_blocks']          =  array(
                                                     'body'      => 'serendipity[body]',
                                                     'extended'  => 'serendipity[extended]'
                                                   );
-    
+
     $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
 
     serendipity_smarty_init();
@@ -161,14 +160,15 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
     if ($init && $spawnMulti) {
         return;
     }
+
     if (isset($serendipity['wysiwyg']) && $serendipity['wysiwyg']) {
 
         $eventData = array(
-            'init'   => &$init,
-            'item'   => &$item,
-            'jsname' => &$jsname,
-            'skip'   => false,
-            'buttons'=> array()
+            'init'    => &$init,
+            'item'    => &$item,
+            'jsname'  => &$jsname,
+            'skip'    => false,
+            'buttons' => array(),
         );
 
         serendipity_plugin_api::hook_event('backend_wysiwyg', $eventData);
@@ -178,7 +178,6 @@ function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
         }
 
         $data = array('init' => $init, 'spawnMulti' => $spawnMulti, 'jsname' => $jsname, 'item' => $item, 'buttons' => $eventData['buttons']);
-
         echo serendipity_smarty_show('admin/wysiwyg_init.tpl', $data);
     }
     $init = true;
