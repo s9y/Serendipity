@@ -660,7 +660,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 if ($fdim[0] > $size['width'] && $fdim[1] > $size['height']) {
                     $r = $size;
                 } else {
-                    return array(0,0); // Do not create any thumb, if image is smaller than defined sizes
+                    return array(0,0); // do not create any thumb, if image is smaller than defined sizes
                 }
             } else {
                 $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
@@ -671,9 +671,9 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 $cmd = escapeshellcmd($serendipity['convert']) . ' -antialias -flatten -scale '. serendipity_escapeshellarg($newSize) .' '. serendipity_escapeshellarg($infile . '[0]') . ' ' . serendipity_escapeshellarg($outfile . '.png');
             } else {
                 if (!$force_resize && serendipity_ini_bool(ini_get('safe_mode')) === false) {
-                    $newSize .= '>'; // Tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
+                    $newSize .= '>'; // tell imagemagick to not enlarge small images, only works if safe_mode is off (safe_mode turns > in to \>)
                 }
-                if (!$serendipity['imagemagick_nobang']) $newSize .= '!'; // Force the first run image geometry exactly to given sizes, if there were rounding differences (see https://github.com/s9y/Serendipity/commit/94881ba4c0e3bdd4b5fac510e93977e239171c1c and comments)
+                if (!$serendipity['imagemagick_nobang']) $newSize .= '!'; // force the first run image geometry exactly to given sizes, if there were rounding differences (see https://github.com/s9y/Serendipity/commit/94881ba4c0e3bdd4b5fac510e93977e239171c1c and comments)
                 $cmd = escapeshellcmd($serendipity['convert'] . ' ' . $serendipity['imagemagick_thumb_parameters']) . ' -antialias -resize ' . serendipity_escapeshellarg($newSize) . ' ' . serendipity_escapeshellarg($infile) .' '. serendipity_escapeshellarg($outfile);
             }
             exec($cmd, $output, $result);
@@ -1803,13 +1803,15 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
             }
         }
 
-        echo '<strong>';
         if ($serious && !empty($directory) && !preg_match('@^.?/?$@', $directory) && @rmdir($basedir . $directory)) {
+            echo '<span class="msg_success"><span class="icon-ok-circled"></span> <strong>';
             printf(DIRECTORY_DELETE_SUCCESS . $n, $directory);
+            echo "</strong></span>\n";
         } else {
+            echo '<span class="msg_error"><span class="icon-attention"></span> <strong>';
             printf(DIRECTORY_DELETE_FAILED . $n, $directory);
+            echo "</strong></span>\n";
         }
-        echo '</strong>';
     }
 
     return true;
@@ -2675,7 +2677,7 @@ function serendipity_parsePropertyForm() {
     }
 
     $array = array(
-        'image_id'          => $serendipity['POST']['mediaProperties'][0]['image_id'],
+        'image_id' => $serendipity['POST']['mediaProperties'][0]['image_id'],
     );
 
     return $array;
@@ -2763,12 +2765,11 @@ function serendipity_prepareMedia(&$file, $url = '') {
         $full_perm = serendipity_checkPermission('adminImagesMaintainOthers');
     }
 
-    $sThumbSource           = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
+    $sThumbSource = serendipity_getThumbNailPath($file['path'], $file['name'], $file['extension'], $file['thumbnail_name']);
     if (! $file['hotlink']) {
         $file['full_thumb']     = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $sThumbSource;
         $file['full_thumbHTTP'] = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $sThumbSource;
     }
-
 
     $file['url'] = $url;
 
@@ -3149,33 +3150,33 @@ function &serendipity_getMetaData($file, &$info) {
     );
 
     static $xmpPatterns = array(
-    'tiff:Orientation'           => array('type' => 'or',   'name' => 'Orientation'),
-    'tiff:XResolution'           => array('type' => 'math', 'name' => 'XResolution'),
-    'tiff:YResolution'           => array('type' => 'math', 'name' => 'YResolution'),
-    'tiff:Make'                  => array('type' => 'text', 'name' => 'CameraMaker'),
-    'tiff:Model'                 => array('type' => 'text', 'name' => 'CameraModel'),
-    'xap:ModifyDate'             => array('type' => 'date', 'name' => 'DateModified'),
-    'xap:CreatorTool'            => array('type' => 'text', 'name' => 'Software'),
-    'xap:CreateDate'             => array('type' => 'date', 'name' => 'DateCreated'),
-    'xap:MetadataDate'           => array('type' => 'date', 'name' => 'DateMetadata'),
+        'tiff:Orientation'           => array('type' => 'or',   'name' => 'Orientation'),
+        'tiff:XResolution'           => array('type' => 'math', 'name' => 'XResolution'),
+        'tiff:YResolution'           => array('type' => 'math', 'name' => 'YResolution'),
+        'tiff:Make'                  => array('type' => 'text', 'name' => 'CameraMaker'),
+        'tiff:Model'                 => array('type' => 'text', 'name' => 'CameraModel'),
+        'xap:ModifyDate'             => array('type' => 'date', 'name' => 'DateModified'),
+        'xap:CreatorTool'            => array('type' => 'text', 'name' => 'Software'),
+        'xap:CreateDate'             => array('type' => 'date', 'name' => 'DateCreated'),
+        'xap:MetadataDate'           => array('type' => 'date', 'name' => 'DateMetadata'),
 
-    'exif:ExposureTime'          => array('type' => 'math',  'name' => 'ExposureTime'),
-    'exif:ApertureValue'         => array('type' => 'math',  'name' => 'ApertureValue'),
-    'exif:MaxApertureValue'      => array('type' => 'math',  'name' => 'MaxApertureValue'),
-    'exif:ISOSpeedRatings'       => array('type' => 'text',  'name' => 'ISOSpeedRatings'),
-    'exif:DateTimeOriginal'      => array('type' => 'date',  'name' => 'DateCreated'),
-    'exif:MeteringMode'          => array('type' => 'text',  'name' => 'MeteringMode'),
-    'exif:FNumber'               => array('type' => 'math',  'name' => 'FNumber'),
-    'exif:ExposureProgram'       => array('type' => 'text',  'name' => 'ExposureProgram'),
-    'exif:FocalLength'           => array('type' => 'math',  'name' => 'FocalLength'),
-    'exif:WhiteBalance'          => array('type' => 'text',  'name' => 'WhiteBalance'),
-    'exif:DigitalZoomRatio'      => array('type' => 'math',  'name' => 'DigitalZoomRatio'),
-    'exif:FocalLengthIn35mmFilm' => array('type' => 'text',  'name' => 'FocalLengthIn35mmFilm'),
-    'exif:Fired'                 => array('type' => 'text',  'name' => 'FlashFired'),
-    'exif:RedEyeMode'            => array('type' => 'text',  'name' => 'RedEyeMode'),
+        'exif:ExposureTime'          => array('type' => 'math',  'name' => 'ExposureTime'),
+        'exif:ApertureValue'         => array('type' => 'math',  'name' => 'ApertureValue'),
+        'exif:MaxApertureValue'      => array('type' => 'math',  'name' => 'MaxApertureValue'),
+        'exif:ISOSpeedRatings'       => array('type' => 'text',  'name' => 'ISOSpeedRatings'),
+        'exif:DateTimeOriginal'      => array('type' => 'date',  'name' => 'DateCreated'),
+        'exif:MeteringMode'          => array('type' => 'text',  'name' => 'MeteringMode'),
+        'exif:FNumber'               => array('type' => 'math',  'name' => 'FNumber'),
+        'exif:ExposureProgram'       => array('type' => 'text',  'name' => 'ExposureProgram'),
+        'exif:FocalLength'           => array('type' => 'math',  'name' => 'FocalLength'),
+        'exif:WhiteBalance'          => array('type' => 'text',  'name' => 'WhiteBalance'),
+        'exif:DigitalZoomRatio'      => array('type' => 'math',  'name' => 'DigitalZoomRatio'),
+        'exif:FocalLengthIn35mmFilm' => array('type' => 'text',  'name' => 'FocalLengthIn35mmFilm'),
+        'exif:Fired'                 => array('type' => 'text',  'name' => 'FlashFired'),
+        'exif:RedEyeMode'            => array('type' => 'text',  'name' => 'RedEyeMode'),
 
-    'dc:title'                   => array('type' => 'rdf',   'name' => 'Title'),
-    'dc:creator'                 => array('type' => 'rdf',   'name' => 'Creator'),
+        'dc:title'                   => array('type' => 'rdf',   'name' => 'Title'),
+        'dc:creator'                 => array('type' => 'rdf',   'name' => 'Creator'),
     );
 
     $ret = array();
@@ -3301,7 +3302,9 @@ function serendipity_checkMediaSize($file) {
 
     if (!empty($serendipity['maxFileSize'])) {
         if (filesize($file) > $serendipity['maxFileSize']) {
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(MEDIA_UPLOAD_SIZEERROR . '<br />', (int)$serendipity['maxFileSize']);
+            echo "</span>\n";
             return false;
         }
     }
@@ -3314,14 +3317,18 @@ function serendipity_checkMediaSize($file) {
 
         if (!empty($serendipity['maxImgWidth'])) {
             if ($dim[0] > $serendipity['maxImgWidth']) {
+                echo '<span class="msg_error"><span class="icon-attention"></span> ';
                 printf(MEDIA_UPLOAD_DIMERROR . '<br />', (int)$serendipity['maxImgWidth'], (int)$serendipity['maxImgHeight']);
+                echo "</span>\n";
                 return false;
             }
         }
 
         if (!empty($serendipity['maxImgHeight'])) {
             if ($dim[1] > $serendipity['maxImgHeight']) {
+                echo '<span class="msg_error"><span class="icon-attention"></span> ';
                 printf(MEDIA_UPLOAD_DIMERROR . '<br />', (int)$serendipity['maxImgWidth'], (int)$serendipity['maxImgHeight']);
+                echo "</span>\n";
                 return false;
             }
         }
@@ -3350,27 +3357,27 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         if (!is_dir($real_oldDir)) {
             echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(ERROR_FILE_NOT_EXISTS, '<span class="block_level">' . $oldDir . '</span>');
-            echo '</span>';
+            echo "</span>\n";
             return false;
         }
 
         if (is_dir($real_newDir)) {
             echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(ERROR_FILE_EXISTS, '<span class="block_level">' . $newDir . '</span>');
-            echo '</span>';
+            echo "</span>\n";
             return false;
         }
 
         if (!rename($real_oldDir, $real_newDir)) {
             echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(MEDIA_DIRECTORY_MOVE_ERROR, '<span class="block_level">' . $newDir . '</span>');
-            echo '</span>';
+            echo "</span>\n";
             return false;
         }
 
         echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
         printf(MEDIA_DIRECTORY_MOVED, '<span class="block_level">' . $newDir . '</span>');
-        echo '</span>';
+        echo "</span>\n";
 
         $dirs = serendipity_db_query("SELECT id, path
                                         FROM {$serendipity['dbPrefix']}images
@@ -3406,7 +3413,9 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     if ($type == 'file') {
         if (serendipity_isActiveFile(basename($newDir))) {
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(ERROR_FILE_FORBIDDEN, htmlspecialchars($newDir));
+            echo "</span>\n";
             return false;
         }
 

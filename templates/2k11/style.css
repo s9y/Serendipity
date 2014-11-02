@@ -81,6 +81,12 @@ input[type="checkbox"] {
 
 .no-js #searchsend { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
 
+/* details polyfill */
+.no-details details > * { display: none; }
+.no-details details > summary:before { content: '\25BA '; float: left; width: 20px; }
+.no-details details.open > summary:before { content: '\25BC '; }
+.no-details details summary { display: block; }
+
 input[type=text],
 input[type=search],
 input[type=email],

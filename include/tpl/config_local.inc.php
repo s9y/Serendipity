@@ -398,12 +398,14 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
+
                                     array('var'         => 'updateCheck',
                                           'title'       => UPDATE_NOTIFICATION,  
                                           'description' => UPDATE_NOTIFICATION_DESC,
                                           'type'        => 'list',
                                           'default'     => array('stable' => UPDATE_STABLE, 'beta' => UPDATE_BETA, 'false' => NO),
                                           'permission'  => 'blogConfiguration'),
+
                                     array('var'         => 'logLevel',
                                           'title'       => LOG_LEVEL,  
                                           'description' => LOG_LEVEL_DESC,
@@ -435,7 +437,6 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
-
 
                                     array('var'         => 'searchsort',
                                           'title'       => QUICKSEARCH_SORT,
@@ -501,6 +502,7 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('probeDefault'))
                             ));
+
     if(function_exists('date_default_timezone_set')) {
         $res['display']['items'][] = array('var'           =>   'useServerOffset',
                                        'title'         =>   INSTALL_OFFSET_ON_SERVER_TIME,
@@ -509,9 +511,6 @@
                                        'default'       =>   true,
                                        'permission'    =>   'blogConfiguration'
                                        );
-                                       
-        
-        
     }
     
     array_push( $res['display']['items'],
@@ -604,12 +603,14 @@
                                           'type'        => 'bool',
                                           'default'     => true,
                                           'permission'  => 'blogConfiguration'),
+
                                     array ('var'        => 'feedCustom',
                                           'title'       => FEED_CUSTOM,
                                           'description' => FEED_CUSTOM_DESC,
                                           'type'        => 'string',
                                           'default'     => '',
                                           'permission'  => 'blogConfiguration'),
+
                                     array ('var'        => 'feedForceCustom',
                                           'title'       => FEED_FORCE,
                                           'description' => FEED_FORCE_DESC,
