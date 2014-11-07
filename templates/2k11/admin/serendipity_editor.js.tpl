@@ -772,7 +772,7 @@
 
 $(function() {
     // Breakpoints for responsive JS
-    var mq_small = matchMedia("(min-width:640px)");
+    var mq_small = Modernizr.mq('(min-width:640px)');
 
     // Fire responsive nav
     if($('#main_menu').length > 0) {
@@ -1116,7 +1116,7 @@ $(function() {
         } else {
             $($el.data('href')).toggleClass('additional_info');
         }
-        if (mq_small.matches) {
+        if (mq_small) {
             $el.closest('.has_info').toggleClass('info_expanded');
         }
         $el.toggleClass('active');
@@ -1417,14 +1417,14 @@ $(function() {
 
     // Equal Heights
     $(window).load(function() {
-        if (mq_small.matches) {
+        if (mq_small) {
             serendipity.sync_heights();
         }
     });
 
     // Make sure plugin list heights are recalculated when switching tabs
     $('#pluginlist_tabs a').click(function() {
-        if (mq_small.matches) {
+        if (mq_small) {
             serendipity.sync_heights();
         }
     });
