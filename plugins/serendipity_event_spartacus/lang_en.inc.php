@@ -32,7 +32,7 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Update sidebar plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Update event plugins');
-@define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Hint: You can upgrade multiple plugins at once by clicking the update-link with your middle mouse button, so that it opens in a new window/tab of your browser. Note that upgrading all plugins automatically could lead to network timeouts and garbaged files, thus this functionality does not exist intentionally.');
+@define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'You can upgrade multiple plugins at once by opening the update-link in a new tab (middle mouse button)');
 
 @define('PLUGIN_EVENT_SPARTACUS_TRYCURL', 'Trying to use cURL library as fallback...');
 @define('PLUGIN_EVENT_SPARTACUS_CURLFAIL', 'cURL library returned a failure, too.');
