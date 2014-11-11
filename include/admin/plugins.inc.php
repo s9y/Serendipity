@@ -237,6 +237,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $pluggroups[''][] = $plugdata;
         }
     }
+    
     ksort($pluggroups);
 
     $data['count_pluginstack'] = count($pluginstack);
@@ -256,6 +257,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['pluggroups'] = $pluggroups;
     $data['formToken'] = serendipity_setFormToken();
     $data['only_group'] = $serendipity['GET']['only_group'];
+    $data['available_upgrades'] = isset($pluggroups['UPGRADE']);
     $requirement_failures = array();
     
     foreach($pluggroups AS $pluggroup => $groupstack) {

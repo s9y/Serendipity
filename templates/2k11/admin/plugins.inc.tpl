@@ -75,73 +75,73 @@
             {/if}
         </div>
     </form>
-    
-    {foreach $pluggroups AS $pluggroup => $groupstack}
-    {if empty($pluggroup)}
-        {if $only_group == UPGRADE && empty($groupstack)}<span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>{/if}
-        {if !empty($only_group)}{continue}{/if}
-    {elseif !empty($only_group) && $pluggroup != $only_group}{continue}{else}
-        <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
-    {/if}
-        <ul class="plugins_installable plainList clearfix">
-        {foreach $groupstack as $plug}
-            <li class="clearfix">
-                <div class="equal_heights">
-                    <div class="plugin_features">
-                        <h4>{$plug.name}</h4>
 
-                    {if $plug.description}
-                        <details class="plugin_data">
-                            <summary><var class="perm_name">{$plug.class_name}</var></summary>
+    {if $only_group == 'UPGRADE' && ! $available_upgrades}
+        <span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>
+    {else}
+        {foreach $pluggroups AS $pluggroup => $groupstack}
+            {if $only_group && $pluggroup != $only_group}{continue}{/if}
+            <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
+            <ul class="plugins_installable plainList clearfix">
+            {foreach $groupstack as $plug}
+                <li class="clearfix">
+                    <div class="equal_heights">
+                        <div class="plugin_features">
+                            <h4>{$plug.name}</h4>
 
-                            <div class="plugin_desc clearfix">
-                            {$plug.description}
+                        {if $plug.description}
+                            <details class="plugin_data">
+                                <summary><var class="perm_name">{$plug.class_name}</var></summary>
+
+                                <div class="plugin_desc clearfix">
+                                {$plug.description}
+                                </div>
+                            </details>
+                        {else}
+                            <div class="plugin_data">
+                                <var class="perm_name">{$plug.class_name}</var>
                             </div>
-                        </details>
-                    {else}
-                        <div class="plugin_data">
-                            <var class="perm_name">{$plug.class_name}</var>
+                        {/if}
                         </div>
-                    {/if}
+
+                        <ul class="plugin_info plainList">
+                        {if ! empty($plug.author)}
+                            <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
+                        {/if}
+                        {if ! empty($plug.version)}
+                            <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
+                        {/if}
+                        {if ! empty($plug.website)}
+                            <li class="plugin_web"><a href="{$plug.website|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
+                        {/if}
+                        {if ! empty($plug.local_documentation)}
+                            <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
+                        {/if}
+                        {if ! empty($plug.changelog)}
+                            <li class="plugin_changelog"><a href="{$plug.changelog|escape}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
+                        {/if}
+                        {if ! empty({$plug.upgrade_version}) && $plug.upgrade_version != $plug.version}
+                            <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape}){/if}</li>
+                        {/if}
+                        </ul>
                     </div>
 
-                    <ul class="plugin_info plainList">
-                    {if ! empty($plug.author)}
-                        <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
+                    <div class="plugin_status">
+                    {if isset($requirements_failures.{$plug.class_name})}
+                        <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
+                    {elseif $plug['upgradable'] == true}
+                        <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}" title="{$CONST.PLUGIN_EVENT_SPARTACUS_CHECK_HINT}">{$CONST.UPGRADE}</a>
+                    {elseif $plug.installable == true}
+                        <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
+                    {else}
+                        <span class="block_level"><span class="icon-ok-circled"></span> {$CONST.ALREADY_INSTALLED}</span>
                     {/if}
-                    {if ! empty($plug.version)}
-                        <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
-                    {/if}
-                    {if ! empty($plug.website)}
-                        <li class="plugin_web"><a href="{$plug.website|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>
-                    {/if}
-                    {if ! empty($plug.local_documentation)}
-                        <li class="plugin_localdoc"><a href="{$plug.local_documentation|escape}">{$CONST.PLUGIN_DOCUMENTATION_LOCAL}</a></li>
-                    {/if}
-                    {if ! empty($plug.changelog)}
-                        <li class="plugin_changelog"><a href="{$plug.changelog|escape}">{$CONST.PLUGIN_DOCUMENTATION_CHANGELOG}</a></li>
-                    {/if}
-                    {if ! empty({$plug.upgrade_version}) && $plug.upgrade_version != $plug.version}
-                        <li class="plugin_toversion">{$CONST.UPGRADE_TO_VERSION|sprintf:"{$plug.upgrade_version}"}{if ! empty($plug.pluginlocation) && $plug.pluginlocation != 'local'} ({$plug.pluginlocation|escape}){/if}</li>
-                    {/if}
-                    </ul>
-                </div>
-
-                <div class="plugin_status">
-                {if isset($requirements_failures.{$plug.class_name})}
-                    <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
-                {elseif $plug['upgradable'] == true}
-                    <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}" title="{$CONST.PLUGIN_EVENT_SPARTACUS_CHECK_HINT}">{$CONST.UPGRADE}</a>
-                {elseif $plug.installable == true}
-                    <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
-                {else}
-                    <span class="block_level"><span class="icon-ok-circled"></span> {$CONST.ALREADY_INSTALLED}</span>
-                {/if}
-                </div>
-            </li>
+                    </div>
+                </li>
+            {/foreach}
+            </ul>
         {/foreach}
-        </ul>
-    {/foreach}
+    {/if}
 {else}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
