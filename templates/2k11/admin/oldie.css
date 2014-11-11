@@ -45,7 +45,6 @@
 
 #uploadform label {
     display: inline-block;
-    min-width: 40%;
 }
 
 #uploadform .form_field input,
@@ -94,9 +93,14 @@
 .entryproperties_access_users,
 .entryproperties_access_author,
 .entryproperties_markup,
-#plugin_groups,
-#plugin_filter {
+#plugin_groups {
     float: left;
+    margin-right: 2%;
+    width: 48%;
+}
+
+#plugin_filter {
+    display: inline-block;
     margin-right: 2%;
     width: 48%;
 }
@@ -159,7 +163,7 @@ pre {
     margin: 0 0 1em 2%;
 }
 
-#maintenance > section:nth-child(odd) {
+#maintenance > section:nth-of-type(even) {
     margin: 0 0 1em 2%;
 }
 
@@ -193,6 +197,7 @@ pre {
 .configure_plugin fieldset legend,
 .configure_plugin fieldset > .grouped,
 .configure_plugin .sequence_container,
+.configuration_group fieldset > .grouped,
 .configuration_group .form_select label,
 .configuration_group .form_multiselect label,
 .configuration_group .form_field label,
@@ -214,7 +219,6 @@ pre {
 
 #hide_subcats_info {
     float: none;
-    margin: .85715em 0 0;
     width: 100%;
 }
 
@@ -243,7 +247,7 @@ pre {
 }
 
 .field_info {
-    margin: .85715em 2% 0 0;
+    margin: .75em 2% .75em 0;
 }
 
 .configuration_group .form_select select,
@@ -258,6 +262,15 @@ pre {
 .js .configuration_group .media_choose input {
     margin-right: 1%;
     max-width: 41.5%;
+}
+
+.info_expanded select,
+.info_expanded > input,
+.info_expanded textarea,
+.info_expanded .grouped,
+.info_expanded .sequence_container {
+    position: relative;
+    top: -1.5em;
 }
 
 .media_choose .button_link {
@@ -527,4 +540,8 @@ main {
 
 #login {
     margin: 4em auto 8em;
+}
+
+.js .configuration_group .media_choose input {
+    max-width: 42.5%;
 }
