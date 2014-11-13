@@ -354,11 +354,11 @@ nav ol {
 /* ICON FONT: http://fortawesome.github.com/Font-Awesome/ */
 @font-face {
     font-family: 'fontello';
-    src: url('{TEMPLATE_PATH}font/fontello.eot?42047096');
-    src: url('{TEMPLATE_PATH}font/fontello.eot?42047096#iefix') format('embedded-opentype'),
-         url('{TEMPLATE_PATH}font/fontello.woff?42047096') format('woff'),
-         url('{TEMPLATE_PATH}font/fontello.ttf?42047096') format('truetype'),
-         url('{TEMPLATE_PATH}font/fontello.svg?42047096#fontello') format('svg');
+    src: url('{TEMPLATE_PATH}font/fontello.eot?75326932');
+    src: url('{TEMPLATE_PATH}font/fontello.eot?75326932#iefix') format('embedded-opentype'),
+         url('{TEMPLATE_PATH}font/fontello.woff?75326932') format('woff'),
+         url('{TEMPLATE_PATH}font/fontello.ttf?75326932') format('truetype'),
+         url('{TEMPLATE_PATH}font/fontello.svg?75326932#fontello') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -400,6 +400,8 @@ nav ol {
 .icon-cancel:before { content: '\e811'; }
 .icon-rss:before { content: '\e812'; }
 .icon-attention-circled:before { content: '\e813'; }
+.icon-toggle-off:before { content: '\e814'; }
+.icon-toggle-on:before { content: '\e815'; }
 .icon-filter:before { content: '\e817'; }
 .icon-resize-full:before { content: '\e818'; }
 .icon-menu:before { content: '\e819'; }

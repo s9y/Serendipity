@@ -853,6 +853,54 @@ $(function() {
         }, 5000);
     });
 
+    // Switch entry status
+    $('#switch_entry_status').click(function(e) {
+        var $el = $(this);
+        var oldState = $el.attr('title');
+        var newState = $el.attr('data-title-alt');
+        var entryState = $('#entry_status option');
+        var stateIcon = $el.find("[class^='icon']");
+
+        $(entryState).filter(function() {
+            return $(this).html() == oldState;
+        }).prop('selected', false);
+
+        $(entryState).filter(function() {
+            return $(this).html() == newState;
+        }).prop('selected', true);
+
+        $el.attr({
+            'title': newState,
+            'data-title-alt': oldState
+        }).find('> .visuallyhidden').text(newState);
+
+        if(stateIcon.hasClass('icon-toggle-on')) {
+            stateIcon.removeClass('icon-toggle-on').addClass('icon-toggle-off');
+        } else {
+            stateIcon.removeClass('icon-toggle-off').addClass('icon-toggle-on');
+        }
+
+        // Inline notification, we might want to make this reuseable
+        $('<span id="msg_entrystatus" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.ENTRY_STATUS}: ' + newState + ' <a class="remove_msg" href="#msg_entrystatus"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
+        // Remove entrystatus msg
+        $('.remove_msg').click(function(e) {
+            e.preventDefault();
+            var $target = $(this).parent();
+            $target.fadeOut(250, function() { $target.remove(); });
+        });
+        // Automagic removal after 5 secs
+        setTimeout(function() {
+            $('#msg_entrystatus').fadeOut(250).remove();
+        }, 5000);
+
+        e.preventDefault();
+    });
+
+    // Matching change event
+    $('#entry_status').change(function() {
+        $('#switch_entry_status').trigger('click');
+    });
+
     // Editor tools
     $('.wrap_selection').click(function() {
         var $el = $(this);
