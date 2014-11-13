@@ -1272,6 +1272,11 @@ summary {
     min-width: 20em;
 }
 
+#edit_entry_metadata #categoryfilter {
+    max-width: 16em;
+    min-width: 0;
+}
+
 .user_level {
     display: block;
 }
@@ -3223,6 +3228,11 @@ img.mfp-img {
 @media only screen and (min-width: 1280px) {
     .js .configuration_group .media_choose input {
         max-width: 42.5%;
+    }
+
+    #edit_entry_metadata #categoryfilter {
+        max-width: 22em;
+        min-width: 0;
     }
 }
 
