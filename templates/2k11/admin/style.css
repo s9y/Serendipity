@@ -1678,8 +1678,13 @@ form > .button_link:first-of-type,
     opacity: 1;
     text-shadow: #050505 0 1px 1px;
     top: auto;
-    right: 1.5em;
+    right: 2em;
     bottom: 1em;
+}
+
+#edit_entry_category button.mfp-close {
+    top: 1em;
+    bottom: auto;
 }
 
 .js .mfp-wrap #edit_entry_category .wrap_legend,
