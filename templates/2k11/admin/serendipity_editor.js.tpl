@@ -946,7 +946,7 @@ $(function() {
     {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
-                $('#edit_entry_category').toggleClass('mfp-hide');
+                e.preventDefault();
                 $('#toggle_metadata').click();
             });
         }
@@ -974,7 +974,7 @@ $(function() {
     {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
-                $('#edit_entry_freetags').toggleClass('mfp-hide');
+                e.preventDefault();
                 $('#toggle_advanced').click();
             });
         }

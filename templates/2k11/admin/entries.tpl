@@ -116,7 +116,7 @@
                 </fieldset>
             </div>
 
-            <div id="edit_entry_category" class="clearfix mfp-hide">
+            <div id="edit_entry_category" class="clearfix">
                 <fieldset>
                     <span class="wrap_legend"><legend>{$CONST.CATEGORY}</legend></span>
 
