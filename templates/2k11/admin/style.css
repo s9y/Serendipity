@@ -1832,6 +1832,7 @@ form > .button_link:first-of-type,
     max-width: 90%;
 }
 
+#properties_freetag_tagList,
 .toggle_headline > button,
 #toggle_extended,
 #toggle_metadata,
