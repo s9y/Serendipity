@@ -946,8 +946,13 @@ $(function() {
     {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
-                e.preventDefault();
                 $('#toggle_metadata').click();
+
+                // We might want to make this reuseable
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 1000);
             });
         }
     {else}
@@ -974,8 +979,13 @@ $(function() {
     {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
-                e.preventDefault();
                 $('#toggle_advanced').click();
+
+                // We might want to make this reuseable
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 1000);
             });
         }
     {else}
