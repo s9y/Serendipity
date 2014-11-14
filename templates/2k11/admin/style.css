@@ -1682,13 +1682,8 @@ form > .button_link:first-of-type,
     height: auto;
     opacity: 1;
     text-shadow: #050505 0 1px 1px;
-    top: auto;
-    right: 2em;
-    bottom: 1em;
-}
-
-#edit_entry_category button.mfp-close {
     top: 1em;
+    right: 2em;
     bottom: auto;
 }
 
