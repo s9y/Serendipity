@@ -963,7 +963,13 @@ $(function() {
                 type: "inline",
                 closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>',
                 callbacks: {
+                    open: function() {
+                        // Accessibility helper
+                        $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'true');
+                    },
                     afterClose: function() {
+                        // Accessibility helper
+                        $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'false');
                         serendipity.categoryList();
                     }
                 }
@@ -1009,6 +1015,17 @@ $(function() {
     // Category live filter
     $('#categoryfilter').keyup(function() {
         serendipity.liveFilters($(this), '#edit_entry_category .form_check', 'label');
+    });
+
+    // Oldie helper for selecting categories
+    $('#edit_entry_category .form_check input').change(function(e) {
+        var $el = $(this);
+
+        if($el.is(":checked")) {
+            $el.siblings('label').addClass('selected');
+        } else {
+            $el.siblings('label').removeClass('selected');
+        }
     });
 
     // Plugins live filter

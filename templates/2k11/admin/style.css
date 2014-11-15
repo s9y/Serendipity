@@ -1652,19 +1652,59 @@ form > .button_link:first-of-type,
     border: 1px solid #aaa;
 }
 
-.mfp-content #s9y_links,
 .mfp-content #edit_entry_category,
 .mfp-content #edit_entry_freetags {
     background: #fcfcfc;
     margin: 0 auto;
-    max-width: 600px;
     padding: 0 2em;
     position: relative;
     width: auto;
 }
 
+.mfp-content #s9y_links {
+    max-width: 34em;
+}
+
+.mfp-content #edit_entry_category,
+.mfp-content #edit_entry_freetags {
+    max-width: 60em;
+}
+
 .mfp-content #edit_entry_category {
     padding-bottom: 2em;
+}
+
+.mfp-content #edit_entry_category .form_check {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    margin: 0 0 .5em;
+    width: 50%;
+}
+
+.mfp-content #edit_entry_category .form_check label {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #fcfcfc;
+    border-radius: 2px;
+    cursor: pointer;
+    display: block !important;
+    overflow: hidden;
+    padding: .25em;
+    width: 95%;
+}
+
+.mfp-content #edit_entry_category .form_check input[type="checkbox"] {
+    display: none !important;
+    visibility: hidden;
+}
+
+.mfp-content #edit_entry_category .form_check input[type="checkbox"]:checked + label,
+.lt-ie9 .mfp-content #edit_entry_category .form_check .selected {
+    background-color: #eee;
+    border-color: #aaa;
 }
 
 .mfp-content #edit_entry_freetags {
@@ -2861,6 +2901,10 @@ img.mfp-img {
         margin: 0 0 0 .4em;
     }
 
+    .mfp-content #edit_entry_category .form_check {
+        width: 25%;
+    }
+
     #meta_data > div,
     #template_options fieldset legend,
     #template_options fieldset > .grouped,
@@ -3205,6 +3249,10 @@ img.mfp-img {
 
     #content {
         width: 73%;
+    }
+
+    .mfp-content #edit_entry_category .form_check {
+        width: 20%;
     }
 
     .installer #content {
