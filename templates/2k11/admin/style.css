@@ -1708,11 +1708,25 @@ form > .button_link:first-of-type,
 }
 
 .mfp-content #edit_entry_freetags {
-    padding: 2em 2em 3em;
+    padding: 2em 2em 1em;
 }
 
 .mfp-content #backend_freetag_list {
-    margin-bottom: 1em;
+    margin: 1em 0;
+    text-align: justify;
+}
+
+.mfp-content #backend_freetag_list b {
+    background-color: #eee;
+    border: 1px solid #aaa;
+    line-height: 1.25;
+    padding: 0 .25em;
+}
+
+.mfp-content #backend_freetag_list a,
+.mfp-content #backend_freetag_list b {
+    display: inline-block;
+    margin-right: .25em;
 }
 
 #edit_entry_category button.mfp-close,
