@@ -1,1 +1,4 @@
 @define('INSTALL_CAT_FEEDS', 'Feed Settings');
+
+@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR', 'Toolbar for graphical Editor');
+@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR_DESC', 'Set your personal toolbar for the core used WYSIWYG-Editor. These are defined in htmlarea/ckeditor_s9y_config.js and htmlarea/ckeditor_s9y_plugin.js. To use a real custom config or custom plugin file, copy either one or both files to the /templates/2k11/admin directory, replace the *_s9y_* with *_custom_* and modify them to your personal needs. Please read the related inside notes!');
