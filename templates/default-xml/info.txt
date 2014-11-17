@@ -1,4 +1,0 @@
-Name: XML Engine (Dev)
-Author: Garvin Hicking
-Date: 06.06.2006
-Require Serendipity: 1.1
