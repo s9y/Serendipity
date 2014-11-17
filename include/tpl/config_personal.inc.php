@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -75,6 +75,19 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
+
+                                    array('var'         => 'wysiwygToolbar',
+                                          'title'       => USERCONF_USE_CORE_WYSIWYG_TOOLBAR,
+                                          'description' => USERCONF_USE_CORE_WYSIWYG_TOOLBAR_DESC,
+                                          'type'        => 'list',
+                                          'permission'  => 'personalConfiguration',
+                                          'default'     => array(
+                                              'Default'  => S9Y,
+                                              'Basic'    => BASIC,
+                                              'Standard' => STANDARD,
+                                              'Full'     => FULL,
+                                              'CKE'      => CKEPRESET),
                                           'flags'       => array('config')),
 
                                     array('var'         => 'mail_comments',

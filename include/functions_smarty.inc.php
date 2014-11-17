@@ -1025,6 +1025,18 @@ function serendipity_smarty_init($vars = array()) {
             }
         }
 
+        if (defined('IN_serendipity_admin') && $serendipity['wysiwyg']) {
+            $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
+            $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
+
+            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_plugin.js') ) {
+                $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_plugin.js';
+            }
+            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_config.js') ) {
+                $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_config.js';
+            }
+        }
+
         $serendipity['smarty']->assign(
             array(
                 'head_charset'              => LANG_CHARSET,
@@ -1060,6 +1072,9 @@ function serendipity_smarty_init($vars = array()) {
                 'category_info'             => $category_info,
                 'template'                  => $serendipity['template'],
                 'template_backend'          => $serendipity['template_backend'],
+                'wysiwygToolbar'            => $serendipity['wysiwygToolbar'],
+                'wysiwyg_customPlugin'      => $wysiwyg_customPlugin,
+                'wysiwyg_customConfig'      => $wysiwyg_customConfig,
                 'use_autosave'              => (serendipity_db_bool($serendipity['use_autosave']) ? 'true' : 'false'),
 
                 'dateRange'                 => (!empty($serendipity['range']) ? $serendipity['range'] : array())
