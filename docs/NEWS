@@ -8,9 +8,9 @@ Version 2.0-beta4/5/6 / RC? ()
       Serendipity 2.0 (simple methods like getConfigDir() et al),
       but since those Template APIs have virtually zero usage scenario,
       they remain experimental.
-      
+
     * Added new PAT_JS mod_rewrite rule to .htaccess files
-    
+
     * Removed experimental support for PHP/SMARTY IN-MEMORY caching
       added in 2.0-beta3, since this could not work.
 
