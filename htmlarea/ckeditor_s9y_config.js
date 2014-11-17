@@ -7,23 +7,24 @@
  * Substitute every config option to CKEDITOR in here,
  * rename the file to ckeditor_custom_config.js and
  * copy it to /templates/2k11/admin.
- * In there change anything to be upgrade independent
+ * Leave this file here unchanged!
+ * In your custom copy change anything needed to be upgrade independent
  * NOTE: Use at own risk! Be careful!
  */
 CKEDITOR.editorConfig = function( config ) {
 
     // ACF - Advanced Content Filter works in two modes:
-    //      automatic – the filter is configured by editor features (like plugins, buttons, and commands) that are enabled with configuration options
+    //      automatic - the filter is configured by editor features (like plugins, buttons, and commands) that are enabled with configuration options
     //                  such as CKEDITOR.config.plugins, CKEDITOR.config.extraPlugins, and CKEDITOR.config.toolbar,
-    //      custom    – the filter is configured by the CKEDITOR.config.allowedContent option and only features that match this setting are activated.
+    //      custom    - the filter is configured by the CKEDITOR.config.allowedContent option and only features that match this setting are activated.
     // In both modes it is possible to extend the filter configuration by using the CKEDITOR.config.extraAllowedContent setting.
     // If you want to disable Advanced Content Filter, set CKEDITOR.config.allowedContent to true.
     // All available editor features will be activated and input data will not be filtered.
     // Allowed content rules. This setting is used when instantiating CKEDITOR.editor.filter.
     // The following values are accepted:
-    //      CKEDITOR.filter.allowedContentRules – defined rules will be added to the CKEDITOR.editor.filter.
-    //      true – will disable the filter (data will not be filtered, all features will be activated).
-    //      default – the filter will be configured by loaded features (toolbar items, commands, etc.).
+    //      CKEDITOR.filter.allowedContentRules - defined rules will be added to the CKEDITOR.editor.filter.
+    //      true - will disable the filter (data will not be filtered, all features will be activated).
+    //      default - the filter will be configured by loaded features (toolbar items, commands, etc.).
     // In all cases filter configuration may be extended by extraAllowedContent. This option may be especially useful,
     // when you want to use the default allowedContent value along with some additional rules.
     //
@@ -261,7 +262,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     // Adding additional CKEDITOR Plugins to the config
     // Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/chkeditor/plugins, copy the directories plugin name, eg 'mediaembed'.
-    // Open your personal /templates/2k11/admin/custom/ckeditor_custom_plugin.js or the default /htmlarea/ckeditor_s9y_plugin.js file
+    // Open your personal /templates/2k11/admin/ckeditor_custom_plugin.js or the default /htmlarea/ckeditor_s9y_plugin.js file
     // and add the plugin name to the "extraPlugins" string.
     // Now add this name to upper config.toolbarGroup also, wherever you like it to have, eg. "{ name: 'mediaembed' }," if that plugin emits a button to be placed into the toolbar.
     // Or as { name: 'pluginname', items: 'PluginName' } eg { name: 'mediaembed', items: 'MediaEmbed' } in one of the upper toolbars, if that plugin emits a button to be placed into the toolbar.
