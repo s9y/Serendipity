@@ -1202,8 +1202,13 @@ $(function() {
     {if $use_backendpopups}
         if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
-                e.preventDefault();
                 $('#s9y_links').toggleClass('mfp-hide');
+
+                // We might want to make this reuseable
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top
+                }, 1000);
             });
         }
     {else}
