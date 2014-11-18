@@ -1,4 +1,4 @@
-<?php
+<?php # $Id$
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.34');
+        $propbag->add('version',       '1.33');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -27,7 +27,6 @@ class serendipity_event_entryproperties extends serendipity_event
             'backend_publish'                                   => true,
             'backend_save'                                      => true,
             'backend_display'                                   => true,
-            'css_backend'                                       => true,
             'backend_import_entry'                              => true,
             'entry_display'                                     => true,
             'entries_header'                                    => true,
@@ -109,9 +108,9 @@ class serendipity_event_entryproperties extends serendipity_event
                     'hiderss'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_HIDERSS),
                     'access'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS),
                     'password'    => array('display' => PASSWORD),
-                    'author'    => array('display' => AUTHOR),
                     'groups'    => array('display' => PERM_READ . ': ' . GROUP),
                     'authors'    => array('display' => PERM_READ . ': ' . AUTHOR),
+                    'author'    => array('display' => AUTHOR),
                     'markup'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP),
                     'customfields'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS),
                 );
@@ -267,7 +266,7 @@ class serendipity_event_entryproperties extends serendipity_event
         switch($element) {
         case 'sticky':
 ?>
-            <div id="ep_sticky" class="entryproperties_sticky form_check">
+            <div class="entryproperties_sticky form_check">
                 <input id="properties_is_sticky" name="serendipity[properties][is_sticky]" type="checkbox" value="true" <?php echo $is_sticky; ?>>
                 <label for="properties_is_sticky"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS; ?></label>
             </div>
@@ -276,7 +275,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'frontpage':
 ?>
-            <div id="ep_frontpage" class="entryproperties_frontpage form_check">
+            <div class="entryproperties_frontpage form_check">
                 <input id="properties_no_frontpage" name="serendipity[properties][no_frontpage]" type="checkbox" value="true" <?php echo $no_frontpage; ?>>
                 <label for="properties_no_frontpage"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_NO_FRONTPAGE; ?></label>
             </div>
@@ -285,7 +284,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'hiderss':
 ?>
-            <div id="ep_hiderss" class="entryproperties_hiderss form_check">
+            <div class="entryproperties_hiderss form_check">
                 <input id="properties_hiderss" name="serendipity[properties][hiderss]" type="checkbox" value="true" <?php echo $hiderss; ?>>
                 <label for="properties_hiderss"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_HIDERSS; ?></label>
             </div>
@@ -294,7 +293,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'access':
 ?>
-            <fieldset id="ep_access_list" class="entryproperties_access_list">
+            <fieldset class="entryproperties_access_list">
                 <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS; ?>:</legend></span>
 
                 <div class="clearfix">
@@ -315,7 +314,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'password':
 ?>
-            <div id="ep_access_pw" class="entryproperties_access_pw form_field">
+            <div class="entryproperties_access_pw form_field">
                 <label for="properties_access_pw"><?php echo PASSWORD; ?>:</label>
                 <input id="properties_access_pw" name="serendipity[properties][entrypassword]" type="password" autocomplete="off" value="<?php echo htmlspecialchars($password); ?>">
             </div>
@@ -326,7 +325,7 @@ class serendipity_event_entryproperties extends serendipity_event
             if ($use_groups) {
                 $my_groups = serendipity_getGroups($serendipity['authorid']);
 ?>
-            <div id="ep_access_groups" class="entryproperties_access_groups form_multiselect">
+            <div class="entryproperties_access_groups form_multiselect">
                 <label for="properties_access_groups"><?php echo PERM_READ . ': ' . GROUP; ?></label>
 
                 <select id="properties_access_groups" name="serendipity[properties][access_groups][]" multiple="multiple" size="4" onchange="document.getElementById('properties_access_member').checked = true;">
@@ -348,7 +347,7 @@ class serendipity_event_entryproperties extends serendipity_event
         case 'authors':
             if ($use_users) {
 ?>
-            <div id="ep_access_users" class="entryproperties_access_users form_multiselect">
+            <div class="entryproperties_access_users form_multiselect">
                 <label for="properties_access_users"><?php echo PERM_READ . ': '. AUTHOR; ?></label>
 
                 <select id="properties_access_users" name="serendipity[properties][access_users][]" multiple="multiple" size="4" onchange="document.getElementById('properties_access_member').checked = true;">
@@ -367,7 +366,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'author':
 ?>
-            <div id="ep_access_author" class="entryproperties_access_author form_select">
+            <div class="entryproperties_access_author form_select">
                 <label for="properties_access_author"><?php echo AUTHOR; ?>:</label>
 
                 <select id="properties_access_author" name="serendipity[change_author]">
@@ -392,7 +391,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
         case 'markup':
 ?>
-            <div id="ep_markup" class="entryproperties_markup form_multiselect">
+            <div class="entryproperties_markup form_multiselect">
                 <label for="properties_markup"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP; ?></label>
 
                 <select id="properties_markup" name="serendipity[properties][disable_markups][]" multiple="multiple" size="4">
@@ -425,8 +424,9 @@ class serendipity_event_entryproperties extends serendipity_event
             return true;
 
         case 'customfields':
+            
 ?>
-            <fieldset id="ep_customfields" class="entryproperties_customfields">
+            <fieldset class="entryproperties_customfields">
             <?php
                 $fields = trim($this->get_config('customfields'));
                   // Capture special characters for "," and ":"
@@ -565,43 +565,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     </fieldset>
 <?php
 
-                    return true;
-                    break;
-
-                case 'css_backend':
-                    if ($serendipity['version'][0] > 1) {
-?>
-
-#edit_entry_freetags div,
-.entryproperties_customfields {
-    margin-right: 2%;
-}
-
-@media only screen and (min-width: 768px) {
-    #ep_sticky,
-    #ep_gather,
-    #ep_frontpage,
-    #ep_hiderss,
-    #ep_access_list,
-    #ep_access_pw,
-    #ep_access_groups,
-    #ep_access_users,
-    #ep_access_author,
-    #ep_markup {
-        float: left;
-        margin-right: 2%;
-        width: 48%;
-    }
-    #ep_access_list {
-        margin-top: 0.75em;
-    }
-    #ep_access_pw input {
-        width: 70%;
-    }
-}
-
-<?php
-                    }
                     return true;
                     break;
 
