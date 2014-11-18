@@ -3,6 +3,11 @@
 Version 2.0-beta4/5/6 / RC? ()
 ------------------------------------------------------------------------
 
+    * New personal preference to choose CKEditor toolbar presets. 
+      Presets can be overwritte through a 
+      templates/xxx/admin/ckeditor_custom_config.js if needed.
+      See htmlarea/ckeditor_s9y_config.js for details.
+
     * Proof of concept templates "default-php" and "default-xml" have
       been moved to Siber...Spartacus. They would need adapting to
       Serendipity 2.0 (simple methods like getConfigDir() et al),
