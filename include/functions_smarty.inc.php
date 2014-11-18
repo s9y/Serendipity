@@ -1025,15 +1025,16 @@ function serendipity_smarty_init($vars = array()) {
             }
         }
 
+        $wysiwyg_customPlugin = $wysiwyg_customConfig = null;
         if (defined('IN_serendipity_admin') && $serendipity['wysiwyg']) {
             $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
             $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
 
-            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_plugin.js') ) {
-                $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_plugin.js';
+            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_plugin.js') ) {
+                $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_plugin.js';
             }
-            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_config.js') ) {
-                $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'] . '/admin/ckeditor_custom_config.js';
+            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_config.js') ) {
+                $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_config.js';
             }
         }
 
