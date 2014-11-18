@@ -988,6 +988,7 @@ input[type=checkbox],
 .media_choose figure,
 .media_file_metadata dt,
 #serendipity_comments_list details,
+#dashboard > #s9y_links,
 .configure_plugin .cke {
     clear: both;
 }
@@ -1653,7 +1654,8 @@ form > .button_link:first-of-type,
 }
 
 .mfp-content #edit_entry_category,
-.mfp-content #edit_entry_freetags {
+.mfp-content #edit_entry_freetags,
+.mfp-content #s9y_links {
     background: #fcfcfc;
     margin: 0 auto;
     padding: 0 2em;
