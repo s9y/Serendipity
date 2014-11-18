@@ -1,12 +1,12 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.7, last modified 2014-11-17 by Ian
+ *               ckeditor_s9y_config.js, v. 1.7, last modified 2014-11-18 by Ian
  */
 
 /**
- * Substitute every config option to CKEDITOR in here,
- * rename the file to ckeditor_custom_config.js and
- * copy it to /templates/2k11/admin.
+ * Substitute every config option to CKEDITOR in here.
+ * Before you do, copy and rename the file to ckeditor_custom_config.js and
+ * place it to /templates/2k11/admin, or - in case you really have your own template backend - to /templates/YOURTEMPLATE/admin.
  * Leave this file here unchanged!
  * In your custom copy change anything needed to be upgrade independent
  * NOTE: Use at own risk! Be careful!
@@ -261,10 +261,11 @@ CKEDITOR.editorConfig = function( config ) {
     ];
 
     // Adding additional CKEDITOR Plugins to the config
-    // Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/chkeditor/plugins, copy the directories plugin name, eg 'mediaembed'.
-    // Open your personal /templates/2k11/admin/ckeditor_custom_plugin.js or the default /htmlarea/ckeditor_s9y_plugin.js file
-    // and add the plugin name to the "extraPlugins" string.
-    // Now add this name to upper config.toolbarGroup also, wherever you like it to have, eg. "{ name: 'mediaembed' }," if that plugin emits a button to be placed into the toolbar.
+    // Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/chkeditor/plugins.
+    // Copy the directories plugin name, eg 'mediaembed'.
+    // Copy the file htmlarea/ckeditor_s9y_plugin.js to either /templates/2k11/admin, or - in case you have your own backend - to /templates/YOURTEMPLATE/admin and rename it to ckeditor_custom_plugin.js.
+    // Add the plugin name to the "extraPlugins" string.
+    // Now add this name also to this files custom copy upper config.toolbarGroup, wherever you like it to have, eg. "{ name: 'mediaembed' }," if that plugin emits a button to be placed into the toolbar.
     // Or as { name: 'pluginname', items: 'PluginName' } eg { name: 'mediaembed', items: 'MediaEmbed' } in one of the upper toolbars, if that plugin emits a button to be placed into the toolbar.
     // After a browser reload, the newly added plugin should load into your textareas toolbars.
     // PLEASE NOTE:
