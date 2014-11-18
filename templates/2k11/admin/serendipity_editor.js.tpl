@@ -768,6 +768,14 @@
         }
     }
 
+    serendipity.skipScroll = function(target, time) {
+        time = typeof time !== 'undefined' ? time : 250;
+
+        $('html, body').animate({
+            scrollTop: $(target).offset().top
+        }, time);
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ))
 
 $(function() {
@@ -948,11 +956,8 @@ $(function() {
             $('#select_category').click(function(e) {
                 $('#toggle_metadata').click();
 
-                // We might want to make this reuseable
                 e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000);
+                serendipity.skipScroll($(this).attr('href'));
             });
         }
     {else}
@@ -987,11 +992,8 @@ $(function() {
             $('#select_tags').click(function(e) {
                 $('#toggle_advanced').click();
 
-                // We might want to make this reuseable
                 e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000);
+                serendipity.skipScroll($(this).attr('href'));
             });
         }
     {else}
@@ -1204,11 +1206,8 @@ $(function() {
             $('.toggle_links').click(function(e) {
                 $('#s9y_links').toggleClass('mfp-hide');
 
-                // We might want to make this reuseable
                 e.preventDefault();
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000);
+                serendipity.skipScroll($(this).attr('href'));
             });
         }
     {else}
