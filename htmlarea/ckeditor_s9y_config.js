@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.7, last modified 2014-11-18 by Ian
+ *               ckeditor_s9y_config.js, v. 1.7, last modified 2014-11-19 by Ian
  */
 
 /**
@@ -54,7 +54,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Allowed <mediainsert>, <gallery>, <media> tags (imageselectorplus galleries) - which tells ACF to not touch the code!
     // Allowed <div> is a need for Media Library inserts - which tells ACF to not touch the code!
     // <img[height,width]> This Media Library image is even needed to avoid ACF OFF removement of height attributes.
-    // <pre[*attributes](*classes)> for previous used prettyprints by ckeditor plugin pbckcode
+    // <pre[*attributes](*classes)> for previous used prettyprints by ckeditor code plugins
     config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);img[height,width];pre[*](*);';
 
     // Prevent filler nodes in all empty blocks. - case switching source and wysiwyg mode multiple times
@@ -115,26 +115,27 @@ CKEDITOR.editorConfig = function( config ) {
     // Remove custom toolbar buttons and plugins from all toolbars
     // A list of plugins that must not be loaded. This setting makes it possible to avoid loading some plugins defined in the CKEDITOR.config.plugins setting, without having to touch it and potentially break it.
     config.removePlugins = 'flash,iframe,forms'; // possible strict suggestions: 'flash,iframe,elementspath,save,font,showblocks,div,liststyle,pagebreak,smiley,specialchar,horizontalrule,indentblock,justify,pastefromword,newpage,preview,print,stylescombo'
-    config.removeButtons = 'Preview,Styles'; // these buttons are useless in Serendipity and therefore not set. Without even the toolbar Groups break better on screens.
+    config.removeButtons = 'Preview,Styles'; // these buttons are useless in Serendipity and therefore not set. Without, even the toolbar Groups break better on screens.
 
     // We cheat ckeditor instances by adding all available button names (in s9ypluginbuttons) to "both" toolbar instances, in case of having two textareas.
     // The instanciation will only take the ones being currently initiated in wysiwyg_init.tpl output, in the source code.
     // The hooked and added extraPlugins in wysiwyg_init become not automatically true for preset toolbars (Basic, Standard, Full) like this, but do for the fallback toolbarGroups later on.
     var s9ypluginbuttonsAll = s9ymediabuttons.concat(s9ypluginbuttons);
+
+    // In order to work properly within all toolbars, please do not remove the { name: 'insert', items: [ 'Image' ] }, group and Image button, since then the s9ymediabutton does not insert!
     //console.log('is ckeditor_s9y_config.js');
 
-    // in case of toolbar : Basic (keep inser:image, else s9ymediabutton does not work!)
+    // in case of toolbar : Basic
     config.toolbar_Basic = [
+        { name: 'styles',      items : [ 'Format', ] },
         { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Superscript' ] },
         { name: 'paragraph',   items : [ 'NumberedList', 'BulletedList', 'Blockquote' ] },
-        { name: 'styles',      items : [ 'Format', ] },
         { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image' ] },
         { name: 'links',       items : [ 'Link','Unlink' ] },
-        { name: 'document',    items : [ 'Source' ] },
-        { name: 'codesnippet', items : [ 'CodeSnippet' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
-        { name: 'others',      items : s9ypluginbuttons }
+        { name: 'others',      items : s9ypluginbuttons },
+        { name: 'document',    items : [ 'Source' ] }
     ];
 //    console.log(JSON.stringify(config.toolbar_Basic));
 
@@ -146,7 +147,6 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'paragraph', groups : [ 'list', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-        { name: 'codesnippet', items : [ 'CodeSnippet' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
         { name: 'others',      items : s9ypluginbuttonsAll },
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
@@ -155,19 +155,18 @@ CKEDITOR.editorConfig = function( config ) {
     ];
 //    console.log(JSON.stringify(config.toolbar_Standard));
 
-    // in case of toolbar : Full (moved 'Source' and removed 'Font','Preview' buttons)
+    // in case of toolbar : Full (moved 'Source' and removed 'Font' buttons. 'Styles' and 'Preview' disabled overall. )
     config.toolbar_Full = [
         { name: 'styles',      items : [ 'Styles','Format',/*'Font',*/'FontSize' ] },
         { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
         { name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
-        { name: 'document',    items : [ /*'Source','-',*/'Save','NewPage','DocProps',/*'Preview',*/'Print','-','Templates' ] },
+        { name: 'document',    items : [ /*'Source','-',*/'Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
         { name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
         { name: 'forms',       items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
         { name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
         { name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
         { name: 'colors',      items : [ 'TextColor','BGColor' ] },
-        { name: 'codesnippet', items : [ 'CodeSnippet' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
         { name: 'others',      items : s9ypluginbuttonsAll },
         { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] },
@@ -184,10 +183,9 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'paragraph',  groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
         { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
         { name: 's9yml', items : s9ymediabuttons },
-        { name: 'insert', items: [ 'insert', 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+        { name: 'insert', items: [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-        { name: 'codesnippet', items : [ 'CodeSnippet' ] },
         { name: 'others', items: s9ypluginbuttons },
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
         { name: 'about', items: [ 'About' ] }
@@ -198,8 +196,9 @@ CKEDITOR.editorConfig = function( config ) {
     // Note: There is another (internal) fallback toolbar in case of errors, which appearance looks like a re-arranged 4-liner toolbar,
     //       which will provide the 'others' group, but no additionally added plugins (like mediaembed and cheatsheet).
     // This is the official Toolbar configuration generated automatically by the editor, based on config.toolbarGroups.
+    // It is more or like an untouched example for the full toolbar but zunderlies the same rstrictions of disabled plugins or buttons.
     config.toolbar_CKE = [
-        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', /*'Preview', */'Print', '-', 'Templates' ] },
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
         { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
@@ -216,7 +215,7 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'about', items: [ 'About' ] }
     ];
 
-    // This is the official Toolbar groups and order configuration.
+    // This is the official Toolbar groups and order configuration. Added here for comparing with ours.
     /*config.toolbarGroups = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
@@ -251,7 +250,6 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
 
-        { name: 'snippet', groups: [ 'codesnippet', 'snippet' ] },
         { name: 'mediaembed' },
         { name: 'others' },
         { name: 'tools' },
