@@ -196,7 +196,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Note: There is another (internal) fallback toolbar in case of errors, which appearance looks like a re-arranged 4-liner toolbar,
     //       which will provide the 'others' group, but no additionally added plugins (like mediaembed and cheatsheet).
     // This is the official Toolbar configuration generated automatically by the editor, based on config.toolbarGroups.
-    // It is more or like an untouched example for the full toolbar but zunderlies the same rstrictions of disabled plugins or buttons.
+    // It is more or like an untouched example for the full toolbar but underlies the same restrictions of disabled plugins or buttons.
     config.toolbar_CKE = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
@@ -215,7 +215,7 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'about', items: [ 'About' ] }
     ];
 
-    // This is the official Toolbar groups and order configuration. Added here for comparing with ours.
+    // This is the official Toolbar groups and order configuration. Added here for comparison with ours.
     /*config.toolbarGroups = [
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
