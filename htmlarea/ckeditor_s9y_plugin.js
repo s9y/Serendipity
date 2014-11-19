@@ -3,7 +3,7 @@
  *               ckeditor_s9y_plugin.js, v. 1.4, last modified 2014-11-19, by Ian
  *
  * Please Note:  To use a custom plugin.js file, copy this file to templates/2k11/admin,
- *               or - in case you really have your own backend - to /templates/xxx/admin
+ *               or to your template in /templates/xxx/admin
  *               and rename it to ckeditor_custom_plugin.js.
  */
 

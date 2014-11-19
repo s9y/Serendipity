@@ -6,7 +6,7 @@
 /**
  * Substitute every config option to CKEDITOR in here.
  * Before you do, copy and rename the file to ckeditor_custom_config.js and
- * place it to /templates/2k11/admin, or - in case you really have your own template backend - to /templates/YOURTEMPLATE/admin.
+ * place it to /templates/2k11/admin, or to your template in /templates/xxx/admin.
  * Leave this file here unchanged!
  * In your custom copy change anything needed to be upgrade independent
  * NOTE: Use at own risk! Be careful!
@@ -106,7 +106,7 @@ CKEDITOR.editorConfig = function( config ) {
     //    'Verdana';
 
     // Add custom Serendipity styles to ckeditor wysiwyg-mode, to repect css image floats
-    // we can not use templates/yourTemplate/admin/ as a path here, since we would need template and userTemplate path parts as dynamic vars
+    // we can not use templates/xxx/admin/ as a path here, since we would need template and userTemplate path parts as dynamic vars
     config.contentsCss = 'htmlarea/wysiwyg-style.css';
 
     // Native spell check functionality is by default disabled in the editor, use disableNativeSpellChecker to enable it:
@@ -261,7 +261,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Adding additional CKEDITOR Plugins to the config
     // Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/chkeditor/plugins.
     // Copy the directories plugin name, eg 'mediaembed'.
-    // Copy the file htmlarea/ckeditor_s9y_plugin.js to either /templates/2k11/admin, or - in case you have your own backend - to /templates/YOURTEMPLATE/admin and rename it to ckeditor_custom_plugin.js.
+    // Copy the file htmlarea/ckeditor_s9y_plugin.js to either /templates/2k11/admin, or to your template in /templates/xxx/admin and rename it to ckeditor_custom_plugin.js.
     // Add the plugin name to the "extraPlugins" string.
     // Now add this name also to this files custom copy upper config.toolbarGroup, wherever you like it to have, eg. "{ name: 'mediaembed' }," if that plugin emits a button to be placed into the toolbar.
     // Or as { name: 'pluginname', items: 'PluginName' } eg { name: 'mediaembed', items: 'MediaEmbed' } in one of the upper toolbars, if that plugin emits a button to be placed into the toolbar.
