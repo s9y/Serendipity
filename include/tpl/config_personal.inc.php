@@ -87,7 +87,14 @@
                                               'Basic'    => BASIC,
                                               'Standard' => STANDARD,
                                               'Full'     => FULL,
-                                              'CKE'      => CKEPRESET),
+                                              'CKE'      => CKEPRESET,
+                                              '---- in case you need to ----',
+                                              'NOCC-Default'  => 'Force internal preset: S9Y',
+                                              'NOCC-Basic'    => 'Force internal preset: BASIC',
+                                              'NOCC-Standard' => 'Force internal preset: STANDARD',
+                                              'NOCC-Full'     => 'Force internal preset: FULL',
+                                              'NOCC-CKE'      => 'Force internal preset: CKEPRESET'
+                                              ),
                                           'flags'       => array('config')),
 
                                     array('var'         => 'mail_comments',

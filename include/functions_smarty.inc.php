@@ -1026,16 +1026,22 @@ function serendipity_smarty_init($vars = array()) {
         }
 
         $wysiwyg_customPlugin = $wysiwyg_customConfig = null;
-        if (defined('IN_serendipity_admin') && $serendipity['wysiwyg']) {
-            $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
-            $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
 
-            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_plugin.js') ) {
-                $wysiwyg_customPlugin = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_plugin.js';
+        if (defined('IN_serendipity_admin') && $serendipity['wysiwyg']) {
+
+            // check force internal toolbar config file
+            if (strpos($serendipity['wysiwygToolbar'], 'NOCC-') !== false) {
+                $serendipity['wysiwygToolbar'] = substr($serendipity['wysiwygToolbar'], 5);
+                $force_internal_toolbar = true;
             }
-            if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_config.js') ) {
-                $wysiwyg_customConfig = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['template_backend'] . '/admin/ckeditor_custom_config.js';
-            }
+            // check ckeditor custom plugin file
+            $ccp = serendipity_getTemplateFile('admin/ckeditor_custom_plugin.js');
+            $wysiwyg_customPlugin = (!empty($ccp) && !$force_internal_toolbar) ? $ccp : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
+
+            // check ckeditor custom config file
+            $ccc = serendipity_getTemplateFile('admin/ckeditor_custom_config.js');
+            $wysiwyg_customConfig = (!empty($ccc) && !$force_internal_toolbar) ? $ccc : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
+
         }
 
         $serendipity['smarty']->assign(
