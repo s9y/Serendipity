@@ -1035,11 +1035,11 @@ function serendipity_smarty_init($vars = array()) {
                 $force_internal_toolbar = true;
             }
             // check ckeditor custom plugin file
-            $ccp = serendipity_getTemplateFile('admin/ckeditor_custom_plugin.js');
+            $ccp = serendipity_getTemplateFile('admin/ckeditor_custom_plugin.js', 'serendipityHTTPPath', true);
             $wysiwyg_customPlugin = (!empty($ccp) && !$force_internal_toolbar) ? $ccp : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_plugin.js';
 
             // check ckeditor custom config file
-            $ccc = serendipity_getTemplateFile('admin/ckeditor_custom_config.js');
+            $ccc = serendipity_getTemplateFile('admin/ckeditor_custom_config.js', 'serendipityHTTPPath', true);
             $wysiwyg_customConfig = (!empty($ccc) && !$force_internal_toolbar) ? $ccc : $serendipity['serendipityHTTPPath'] . 'htmlarea/ckeditor_s9y_config.js';
 
         }

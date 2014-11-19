@@ -254,9 +254,10 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
  * @access public
  * @param   string      The filename to search for in the selected template
  * @param   string      The path selector that tells whether to return a HTTP or realpath
+ * @param   bool        Enable to include frontend template fallback chaining (used for wysiwyg Editor custom config files)
  * @return  string      The full path+filename to the requested file
  */
-function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
+function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false) {
     global $serendipity;
 
     $directories = array();
@@ -264,6 +265,19 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath') {
     if (defined('IN_serendipity_admin') && $serendipity['smarty_preview'] == false) {
         // Backend will always use our default backend (=defaultTemplate) as fallback.
         $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
+
+        if ($force_frontend_fallback) {
+            // If enabled, even when within the admin suite it will be possible to reference files that
+            // reside within a template directory.
+            $directories[] = $serendipity['template'] . '/';
+            if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
+                $p = explode(',', $serendipity['template_engine']);
+                foreach($p AS $te) {
+                    $directories[] = trim($te) . '/';
+                }
+            }
+        }
+
         $directories[] = $serendipity['defaultTemplate'] .'/';
         $directories[] = 'default/';
     } else {
