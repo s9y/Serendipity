@@ -1,8 +1,8 @@
 <?php # $Id$
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
-# Translation (c) by Christiaan Heerze <webmaster@heimp.nl>
-# http://www.heimp.nl
+# Translation (2004) by Christiaan Heerze <christiaan@247chon.com>
+# http://www.247chon.com
 # (c) 2007 Sam Geeraerts <samgee@elmundolibre.be>
 /* vim: set sts=4 ts=4 expandtab : */
 
