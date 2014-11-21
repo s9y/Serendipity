@@ -51,6 +51,7 @@
         CKEDITOR.replace($('#'+serendipity.escapeBrackets('{$item}')).get(0), {
             extraPlugins : s9yplugins,
             toolbar      : '{$wysiwygToolbar|default:"Default"}',
+            language     : '{$CONST.WYSIWYG_LANG}',
             customConfig : '{$wysiwyg_customConfig}',
             {if $use_autosave == 'true'}
 
