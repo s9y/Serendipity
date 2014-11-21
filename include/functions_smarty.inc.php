@@ -60,8 +60,8 @@ function &serendipity_printTrackbacks(&$trackbacks) {
  * @param  int  The unix timestamp to format
  * @return timestamp in ISO-format
  */
-function serendipity_smarty_html5time($timestamp) { 
-    return date("c", $timestamp); 
+function serendipity_smarty_html5time($timestamp) {
+    return date("c", $timestamp);
 }
 
 
@@ -194,7 +194,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
     if (empty($params['fetchDrafts'])) {
         $params['fetchDrafts'] = false;
     }
-    
+
     if (!empty($params['entryprops'])) {
         if (preg_match_all('@(.*)(!)?=[\'"]*([^\'"]+)[\'"]*(,|$)@imsU', $params['entryprops'], $m)) {
             foreach($m[0] AS $idx => $p) {
@@ -344,7 +344,7 @@ function serendipity_smarty_fetchPrintEntries($params, &$smarty) {
                 break;
         }
     }
-    
+
     if ($params['returncode'] == 'query') {
         return print_r($entry, true);
     }
@@ -768,7 +768,7 @@ function &serendipity_smarty_printComments($params, &$smarty) {
     if (empty($params['depth'])) {
         $params['depth'] = 0;
     }
-    
+
     if (empty($params['trace'])) {
         $params['trace'] = null;
     }
@@ -776,11 +776,11 @@ function &serendipity_smarty_printComments($params, &$smarty) {
     if (empty($params['block'])) {
         $params['block'] = 'COMMENTS';
     }
-    
+
     if (empty($params['template'])) {
         $params['template'] = 'comments.tpl';
     }
-    
+
     $out = serendipity_printComments($comments, $params['mode'], $params['depth'], $params['trace'], $params['block'], $params['template']);
     return $out;
 }
@@ -838,7 +838,7 @@ function serendipity_smarty_getImageSize($params, &$smarty) {
     if (!isset($params['file'])) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
-    } 
+    }
     if (!isset($params['assign'])) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'assign' parameter", E_USER_WARNING);
         return;
@@ -902,8 +902,9 @@ function serendipity_smarty_init($vars = array()) {
             // Set a session variable if Smarty fails:
             $prev_smarty = $_SESSION['no_smarty'];
             $_SESSION['no_smarty'] = true;
-            
+
             if (LANG_CHARSET != 'UTF-8') {
+                @define('SMARTY_MBSTRING', false);
                 @define('SMARTY_RESOURCE_CHAR_SET', LANG_CHARSET);
             }
 
@@ -925,7 +926,7 @@ function serendipity_smarty_init($vars = array()) {
             if (!class_exists('Serendipity_Smarty')) {
                 include_once S9Y_INCLUDE_PATH . '/include/serendipity_smarty_class.inc.php';
             }
-            
+
             if (!class_exists('Serendipity_Smarty')) {
                 return false;
             }
@@ -940,7 +941,7 @@ function serendipity_smarty_init($vars = array()) {
             $_SESSION['no_smarty'] = $prev_smarty;
 
             // enable security policy by instance of the Smarty_Security class
-            $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy'); 
+            $serendipity['smarty']->enableSecurity('Serendipity_Smarty_Security_Policy');
 
             // debugging...
             #echo '<pre>';print_r($serendipity['smarty']);echo '</pre>';#exit;
@@ -948,7 +949,7 @@ function serendipity_smarty_init($vars = array()) {
             // extreme debugging with undocumented internal flag which enables a trace output from the parser during debugging
             #$serendipity['smarty']->_parserdebug = true; // be careful!
 
-            /** 
+            /**
              * ToDo: Check for possible API changes in Smarty 3.2 [smarty_modifier_foobar, --> [smarty_modifier_foobar, smarty_function_foobar, smarty_block_foobar] (in class)]
              * smarty_modifier_foobar(Smarty $smarty, $string, ...) vs. smarty_modifier_foobar($string, ...)
              **/
@@ -976,9 +977,9 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getImageSize', 'serendipity_smarty_getImageSize');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_getConfigVar', 'serendipity_smarty_getConfigVar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_setFormToken', 'serendipity_smarty_setFormToken');
-            
+
             $serendipity['smarty']->registerFilter('pre', 'serendipity_replaceSmartyVars');
-            
+
         }
 
         if (!isset($serendipity['smarty_file'])) {
@@ -1017,7 +1018,7 @@ function serendipity_smarty_init($vars = array()) {
             } else {
                 $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity.js');
             }
-            
+
             if (strstr($serendipity['smarty_vars']['head_link_script'], '?')) {
                 $serendipity['smarty_vars']['head_link_script'] .= '&amp;v=' . $serendipity['last_template_change'];
             } else {
@@ -1191,11 +1192,11 @@ function serendipity_smarty_shutdown($serendipity_directory = '') {
  */
 function serendipity_smarty_show($template, $data = null) {
     global $serendipity;
-    
+
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
-    
+
     $serendipity['smarty']->assign($data);
 
     return $serendipity['smarty']->fetch(serendipity_getTemplateFile($template, 'serendipityPath'));

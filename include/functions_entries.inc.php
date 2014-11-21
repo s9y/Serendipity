@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -69,7 +69,7 @@ function serendipity_getMultiCategoriesSQL($cats, $invert = false) {
             $cat_sql_array[] = " (c.category_left " . ($invert ? " NOT " : "") . " BETWEEN " . implode(' AND ', serendipity_fetchCategoryRange($categoryid)) . ')';
         }
     }
-    
+
     if (count($cat_sql_array) < 1) {
         return '';
     }
@@ -381,7 +381,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                     LEFT JOIN {$serendipity['dbPrefix']}category c
                         ON ec.categoryid = c.categoryid";
     }
-    
+
     if ($joinown) {
         $cond['joins'] .= $joinown;
     }
@@ -394,7 +394,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         if (isset($serendipity['GET']['page']) && ($serendipity['GET']['page'] > 1 || serendipity_db_bool($serendipity['archiveSortStable'])) && !strstr($limit, ',')) {
             if (serendipity_db_bool($serendipity['archiveSortStable'])) {
                 $totalEntries = serendipity_getTotalEntries();
-                
+
                 $totalPages = ceil($totalEntries / $limit);
                 if ($totalPages <= 0 ) {
                     $totalPages = 1;
@@ -740,7 +740,7 @@ function serendipity_rebuildCategoryTree($parent = 0, $left = 0) {
 function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     global $serendipity;
     static $log_queries = false;
-    
+
     if ($log_queries) {
         $fp = fopen($serendipity['serendipityPath'] . '/archives/queries.csv', 'a');
         fwrite($fp, date('Y-m-d H:i') . ';'
@@ -767,7 +767,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         $serendipity['dbType'] == 'pdo-postgres') {
         $cond['group']     = '';
         $cond['distinct']  = 'DISTINCT';
-            
+
         $r = serendipity_db_query("SELECT count(routine_name) AS counter
                                      FROM information_schema.routines
                                     WHERE routine_name LIKE 'to_tsvector'
@@ -778,7 +778,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
             to_tsvector('english', title)    @@to_tsquery('$term') OR
             to_tsvector('english', body)     @@to_tsquery('$term') OR
             to_tsvector('english', extended) @@to_tsquery('$term')
-            )"; 
+            )";
         } else {
             $cond['find_part'] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
         }
@@ -865,7 +865,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
         foreach($searchresults AS $idx => $data) {
             $ids_current[$data['id']] = true;
         }
-   
+
         foreach($search AS $idx => $data) {
             if (isset($ids_current[$data['id']])) {
                 unset($search[$idx]);
@@ -878,7 +878,7 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
     if ($p == 0) $p = 1;
 
     //if * wasn't already appended and if there are none or not enough
-    //results, search again for entries containing the searchterm as a part  
+    //results, search again for entries containing the searchterm as a part
     if ($p == 1 && strpos($term, '*') === false && $serendipity['dbType'] != 'sqlite' && $serendipity['dbType'] != 'sqlite3' && $serendipity['dbType'] != 'pdo-sqlite') {
         if (! is_array($search)) {
             return serendipity_searchEntries($term.'*', $orig_limit);
@@ -893,11 +893,11 @@ function &serendipity_searchEntries($term, $limit = '', $searchresults = '') {
             }
         }
     }
-    
+
     if (is_array($search)){
         serendipity_fetchEntryData($search);
     }
-    
+
     return $search;
 }
 
@@ -918,7 +918,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     if ($totalEntries === null) {
         $totalEntries = serendipity_getTotalEntries();
     }
-    
+
     $limits = explode(',', $serendipity['fetchLimit']);
     if (!empty($limits[1])) {
         $limit = (int)$limits[1];
@@ -1048,7 +1048,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             return; // no display of this item
         }
     }
-    
+
     // We shouldn't return here, because we want Smarty to handle the output
     if (!is_array($entries) || $entries[0] == false || !isset($entries[0]['timestamp'])) {
         $entries = array();
@@ -1139,15 +1139,15 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                             'realname' => $entry['author']
             );
 
-            $entry['link']      = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
-            $entry['commURL']   = serendipity_archiveURL($entry['id'], $entry['title'], 'baseURL', false, array('timestamp' => $entry['timestamp']));
-            $entry['html_title']= $entry['title'];
-            $entry['title']     = htmlspecialchars($entry['title']);
+            $entry['link']       = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
+            $entry['commURL']    = serendipity_archiveURL($entry['id'], $entry['title'], 'baseURL', false, array('timestamp' => $entry['timestamp']));
+            $entry['html_title'] = $entry['title'];
+            $entry['title']      = LANG_CHARSET != 'UTF-8' ? $entry['title'] : htmlspecialchars($entry['title']);
 
-            $entry['title_rdf']          = preg_replace('@-{2,}@', '-', $entry['html_title']);
-            $entry['rdf_ident']          = serendipity_archiveURL($entry['id'], $entry['title_rdf'], 'baseURL', true, array('timestamp' => $entry['timestamp']));
-            $entry['link_rdf']           = serendipity_rewriteURL(PATH_FEEDS . '/ei_'. $entry['id'] .'.rdf');
-            $entry['title_rdf']          = htmlspecialchars($entry['title_rdf']);
+            $entry['title_rdf']  = preg_replace('@-{2,}@', '-', $entry['html_title']);
+            $entry['rdf_ident']  = serendipity_archiveURL($entry['id'], $entry['title_rdf'], 'baseURL', true, array('timestamp' => $entry['timestamp']));
+            $entry['link_rdf']   = serendipity_rewriteURL(PATH_FEEDS . '/ei_'. $entry['id'] .'.rdf');
+            $entry['title_rdf']  = htmlspecialchars($entry['title_rdf']);
 
             $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'];
             $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'];
@@ -1233,9 +1233,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     if ($smarty_fetch === 'return') {
-        return $dategroup;    
-    }    
-    
+        return $dategroup;
+    }
+
     $serendipity['smarty']->assignByRef('entries', $dategroup);
     unset($entries, $dategroup);
 
@@ -1309,7 +1309,7 @@ function serendipity_updertEntry($entry) {
 
     $categories = $entry['categories'];
     unset($entry['categories']);
-    
+
     $had_categories = $entry['had_categories'];
     unset($entry['had_categories']);
 
@@ -1662,7 +1662,7 @@ function serendipity_printArchives() {
            WHERE isdraft = 'false'"
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
                 . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
-                . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '') 
+                . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '')
                 . (!empty($cat_sql) ? " GROUP BY e.id, e.timestamp" : '');
     $entries =& serendipity_db_query($q, false, 'assoc');
 
