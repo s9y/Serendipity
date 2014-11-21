@@ -961,6 +961,8 @@ $(function() {
             });
         }
     {else}
+        $('#meta_data #edit_entry_category').addClass('mfp-hide');
+
         if($('#serendipityEntry').length > 0) {
             var btnText = '{$CONST.DONE}';
 
@@ -997,6 +999,8 @@ $(function() {
             });
         }
     {else}
+        $('#adv_opts #edit_entry_freetags').addClass('mfp-hide');
+
         if($('#serendipityEntry').length > 0) {
             var btnText = '{$CONST.DONE}';
 
