@@ -121,3 +121,14 @@ foreach($const['missing'] AS $file => $constants) {
 @define('INSTALL_CAT_FEEDS', 'Feed Settings');
 @define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR', 'Toolbar for WYSIWYG editor');
 @define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR_DESC', 'Sets the list of available toolbar buttons for the WYSIWYG-Editor. If you need to further change those presets, you can create a file templates/XXX/admin/ckeditor_custom_config.js. For further details please check out the files htmlarea/ckeditor_s9y_config.js and htmlarea/ckeditor_s9y_plugin.js.');
+@define('USERCONF_WYSIWYG_PRESET_S9Y', 'Serendipity (default)');
+@define('USERCONF_WYSIWYG_PRESET_BASIC', 'Reduced');
+@define('USERCONF_WYSIWYG_PRESET_FULL', 'Full');
+@define('USERCONF_WYSIWYG_PRESET_STANDARD', 'Alternate');
+@define('USERCONF_WYSIWYG_PRESET_CKE', 'CKEditor Full');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_S9Y', 'Force: Serendipity');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_BASIC', 'Force: Reduced');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_FULL', 'Force: Full');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Force: Alternate');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Force: CKEditor Full');
+

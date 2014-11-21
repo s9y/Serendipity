@@ -29,7 +29,8 @@ $ext = array(
     'bg'    => 'windows-1251',
     'zh'    => 'gb2312',
     'sa'    => 'cp1256',
-    'pl'    => 'ISO-8859-2'
+    'pl'    => 'ISO-8859-2',
+    'sk'    => 'ISO-8859-2'
 );
 
 $htmlarea_iso = array(

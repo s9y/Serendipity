@@ -1067,11 +1067,20 @@
 @define('FEED_CUSTOM_DESC', 'Wenn gesetzt, wird die eingetragene URL verwendet um Feedreader dorthin weiterzuleiten. Dies ist hilfreich für Statistikdienste wie z.B. Feedburner, so dass hier die Feedburner-URL des eigenen Feeds hinterlegt werden kann.');
 @define('FEED_FORCE', 'Erzwingen der individuellen Feed-URL?');
 @define('FEED_FORCE_DESC', 'Wenn aktiviert, werden alle Feedreader automatisch zu der eingetragenen individuellen Feed-URL weitergeleitet.');
-@define('NO_UPDATES', 'No plugin updates are available');
-@define('PLUGIN_GROUP_ALL', 'All categories');
-
-@define('CONF_USE_AUTOSAVE', 'Enable autosave-feature');
-@define('CONF_USE_AUTOSAVE_DESC', 'When enabled, the text you enter into blog entries will be periodically saved in your browser\'s session storage. If your browser crashes during writing, the next time you create a new entry, the text will be restored from this autosave.');
-@define('INSTALL_CAT_FEEDS', 'Feed Settings');
-@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR', 'Toolbar for WYSIWYG editor');
-@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR_DESC', 'Sets the list of available toolbar buttons for the WYSIWYG-Editor. If you need to further change those presets, you can create a file templates/XXX/admin/ckeditor_custom_config.js. For further details please check out the files htmlarea/ckeditor_s9y_config.js and htmlarea/ckeditor_s9y_plugin.js.');
+@define('NO_UPDATES', 'Keine Plugin-Updates verfügbar.');
+@define('PLUGIN_GROUP_ALL', 'Alle Kategorien');
+@define('CONF_USE_AUTOSAVE', 'Automatische Speicherung aktivieren');
+@define('CONF_USE_AUTOSAVE_DESC', 'Wenn aktiviert, wird der Text von Blog-Einträgen regelmäßig automatisch im Session-Speicher des Browsers gesichert. Falls der Browser während des Schreibens abstürzt wird beim nächsten Erzeugen eines Eintrags der verlorene Text wiederhergestellt.');
+@define('INSTALL_CAT_FEEDS', 'Feed-Einstellungen');
+@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR', 'WYSIWYG-Buttonleiste');
+@define('USERCONF_USE_CORE_WYSIWYG_TOOLBAR_DESC', 'Hier kann die Menge der verfügbaren Buttons im WYSIWYG-Editor mittels einer Voreinstellung gewählt werden. Falls darüber hinaus eigene Anpassungen (mittels einer individuellen JavaScript-Konfigurationsdatei in templates/XXX/admin/ckeditor_custom_config.js) benötigt werden befinden sich Hinweise hierzu in den Dateien htmlarea/ckeditor_s9y_config.js und htmlarea/ckeditor_s9y_plugin.js.');
+@define('USERCONF_WYSIWYG_PRESET_S9Y', 'Serendipity (Standard)');
+@define('USERCONF_WYSIWYG_PRESET_BASIC', 'Reduziert');
+@define('USERCONF_WYSIWYG_PRESET_FULL', 'Vollständig');
+@define('USERCONF_WYSIWYG_PRESET_STANDARD', 'Alternative');
+@define('USERCONF_WYSIWYG_PRESET_CKE', 'CKEditor Vollständig');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_S9Y', 'Erzwingen: Serendipity');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_BASIC', 'Erzwingen: Reduziert');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_FULL', 'Erzwingen: Vollständig');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Erzwingen: Alternative');
+@define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
