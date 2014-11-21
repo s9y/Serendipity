@@ -21,6 +21,9 @@ Version 2.0-beta4/5/6 / RC? ()
 
     * Smarty 3.1.21 upgrade (see changelog)
 
+    * Fix ImageMagick new sizing issues while forcing image geometry
+      exactly to given sizes with imageselectorplus
+
     * Fix issue #220 with pdf directory moving rename() error
 
     * Fix bug in entry listing, which showed wrong categories for
