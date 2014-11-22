@@ -1142,7 +1142,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             $entry['link']       = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
             $entry['commURL']    = serendipity_archiveURL($entry['id'], $entry['title'], 'baseURL', false, array('timestamp' => $entry['timestamp']));
             $entry['html_title'] = $entry['title'];
-            $entry['title']      = LANG_CHARSET != 'UTF-8' ? $entry['title'] : htmlspecialchars($entry['title']);
+            $entry['title']      = htmlspecialchars($entry['title'], ENT_QUOTES, LANG_CHARSET); // PHP 5.4 changed default charset in htmlspecialchars
 
             $entry['title_rdf']  = preg_replace('@-{2,}@', '-', $entry['html_title']);
             $entry['rdf_ident']  = serendipity_archiveURL($entry['id'], $entry['title_rdf'], 'baseURL', true, array('timestamp' => $entry['timestamp']));
