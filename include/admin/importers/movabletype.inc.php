@@ -138,7 +138,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                     if ( !isset($authors[$data]) ) {
                         $au_inf = serendipity_fetchAuthor($data);
                         if ( !is_array($au_inf) ) {
-                            $tasks[] = sprintf(CREATE_AUTHOR, htmlspecialchars($data));
+                            $tasks[] = sprintf(CREATE_AUTHOR, serendipity_specialchars($data));
                             $tasks[] = '<ul class="plainList"><li>Input array is: ' . print_r($data, true) . '</li><<li>Return is: ' . print_r($au_inf, true) . '</li></ul>';
                             $au_inf = serendipity_fetchAuthor($serendipity['authorid']);
                         }
@@ -197,7 +197,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
                                     $entry['categories'][] = $this->categories[$y]['categoryid'];
                                 }
                             } else {
-                                $tasks[] = sprintf(CREATE_CATEGORY, htmlspecialchars($data));
+                                $tasks[] = sprintf(CREATE_CATEGORY, serendipity_specialchars($data));
                             }
                         }
                     }

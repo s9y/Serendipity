@@ -576,33 +576,33 @@ function serendipity_checkInstallation() {
 
     // Check dirs
     if (!is_dir($_POST['serendipityPath'])) {
-        $errs[] = sprintf(DIRECTORY_NON_EXISTANT, htmlspecialchars($_POST['serendipityPath']));
+        $errs[] = sprintf(DIRECTORY_NON_EXISTANT, serendipity_specialchars($_POST['serendipityPath']));
     }
     elseif (!is_writable($_POST['serendipityPath']) ) {
-        $errs[] = sprintf(DIRECTORY_WRITE_ERROR, htmlspecialchars($_POST['serendipityPath']));
+        $errs[] = sprintf(DIRECTORY_WRITE_ERROR, serendipity_specialchars($_POST['serendipityPath']));
     }
     elseif (!is_dir($_POST['serendipityPath'] . $_POST['uploadPath'] ) && @mkdir($_POST['serendipityPath'] . $_POST['uploadPath'], $umask) !== true) {
-        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, htmlspecialchars($_POST['serendipityPath']) . htmlspecialchars($_POST['uploadPath']));
+        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, serendipity_specialchars($_POST['serendipityPath']) . serendipity_specialchars($_POST['uploadPath']));
     }
     elseif (!is_writable($_POST['serendipityPath'] . $_POST['uploadPath'])) {
-        $errs[] = sprintf(DIRECTORY_WRITE_ERROR, htmlspecialchars($_POST['serendipityPath']) . htmlspecialchars($_POST['uploadPath']));
-        $errs[] = sprintf(DIRECTORY_RUN_CMD    , 'chmod go+rws', htmlspecialchars($_POST['serendipityPath']) . htmlspecialchars($_POST['uploadPath']));
+        $errs[] = sprintf(DIRECTORY_WRITE_ERROR, serendipity_specialchars($_POST['serendipityPath']) . serendipity_specialchars($_POST['uploadPath']));
+        $errs[] = sprintf(DIRECTORY_RUN_CMD    , 'chmod go+rws', serendipity_specialchars($_POST['serendipityPath']) . serendipity_specialchars($_POST['uploadPath']));
     }
 
     // Attempt to create the template compile directory, it might already be there, but we just want to be sure
     if (!is_dir($_POST['serendipityPath'] . PATH_SMARTY_COMPILE) && @mkdir($_POST['serendipityPath'] . PATH_SMARTY_COMPILE, $umask) !== true) {
-        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, htmlspecialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
-        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'mkdir'      , htmlspecialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
-        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', htmlspecialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
+        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, serendipity_specialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
+        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'mkdir'      , serendipity_specialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
+        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', serendipity_specialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
     } elseif (is_dir($_POST['serendipityPath'] . PATH_SMARTY_COMPILE) && !is_writeable($_POST['serendipityPath'] . PATH_SMARTY_COMPILE) && @chmod($_POST['serendipityPath'] . PATH_SMARTY_COMPILE, $umask) !== true) {
-        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', htmlspecialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
+        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', serendipity_specialchars($_POST['serendipityPath']) . PATH_SMARTY_COMPILE);
     }
 
     // Attempt to create the archives directory
     if (!is_dir($_POST['serendipityPath'] . PATH_ARCHIVES) && @mkdir($_POST['serendipityPath'] . PATH_ARCHIVES, $umask) !== true) {
-        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, htmlspecialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
-        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'mkdir'      , htmlspecialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
-        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', htmlspecialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
+        $errs[] = sprintf(DIRECTORY_CREATE_ERROR, serendipity_specialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
+        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'mkdir'      , serendipity_specialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
+        $errs[] = sprintf(DIRECTORY_RUN_CMD     , 'chmod go+rwx', serendipity_specialchars($_POST['serendipityPath']) . PATH_ARCHIVES);
     }
 
     // Check imagick
@@ -795,7 +795,7 @@ function serendipity_installFiles($serendipity_core = '') {
     $fp = @fopen($serendipity_core . '.htaccess', 'w');
     if (!$fp) {
         $errs[] = sprintf(FILE_WRITE_ERROR, $serendipity_core . '.htaccess') . ' ' . FILE_CREATE_YOURSELF;
-        $errs[] = sprintf(COPY_CODE_BELOW , $serendipity_core . '.htaccess', 'serendipity', htmlspecialchars($content));
+        $errs[] = sprintf(COPY_CODE_BELOW , $serendipity_core . '.htaccess', 'serendipity', serendipity_specialchars($content));
         return $errs;
     } else {
         // Check if an old htaccess file existed and try to preserve its contents. Otherwise completely wipe the file.

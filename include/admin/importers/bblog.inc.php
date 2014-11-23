@@ -83,7 +83,7 @@ class Serendipity_Import_bblog extends Serendipity_Import {
 
         $bblogdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$bblogdb) {
-            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
+            return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

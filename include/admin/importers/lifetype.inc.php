@@ -81,7 +81,7 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
 
         $ltdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$ltdb) {
-            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
+            return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

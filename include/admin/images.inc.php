@@ -81,7 +81,7 @@ switch ($serendipity['GET']['adminAction']) {
             if ($id > 0) {
                 $image = serendipity_fetchImageFromDatabase($id);
                 $messages[] = serendipity_deleteImage((int)$id);
-                $messages[] = sprintf(RIP_ENTRY, $image['id'] . ' - ' . htmlspecialchars($image['realname']));
+                $messages[] = sprintf(RIP_ENTRY, $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
             }
         }
         $data['showML'] = showMediaLibrary();
@@ -118,7 +118,7 @@ switch ($serendipity['GET']['adminAction']) {
         foreach($serendipity['POST']['multiDelete'] AS $idx => $id) {
             $ids .= (int)$id . ',';
             $image = serendipity_fetchImageFromDatabase($id);
-            $data['rip_image'][] = sprintf(DELETE_SURE, $image['id'] . ' - ' . htmlspecialchars($image['realname']));
+            $data['rip_image'][] = sprintf(DELETE_SURE, $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
         }
         if (!isset($serendipity['adminFile'])) {
             $serendipity['adminFile'] = 'serendipity_admin.php';
@@ -172,7 +172,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $new_media = array();
     
-        $serendipity['POST']['imageurl'] = htmlspecialchars($serendipity['POST']['imageurl']);
+        $serendipity['POST']['imageurl'] = serendipity_specialchars($serendipity['POST']['imageurl']);
 
         // First find out whether to fetch a file or accept an upload
         if ($serendipity['POST']['imageurl'] != '' && $serendipity['POST']['imageurl'] != 'http://') {
@@ -439,7 +439,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['groups']       = $groups;
         $data['use_dir']      = $use_dir;
         $data['formtoken']    = serendipity_setFormToken();
-        $data['dir']          = htmlspecialchars($serendipity['GET']['dir']);
+        $data['dir']          = serendipity_specialchars($serendipity['GET']['dir']);
         $data['rgroups']      = (isset($read_groups[0]) ? true : false);
         $data['wgroups']      = (isset($write_groups[0]) ? true : false);
         $data['read_groups']  = $read_groups;
@@ -451,9 +451,9 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
         $data['case_directoryDelete'] = true;
-        $data['dir']          = htmlspecialchars($serendipity['GET']['dir']);
+        $data['dir']          = serendipity_specialchars($serendipity['GET']['dir']);
         $data['formtoken']    = serendipity_setFormToken();
-        $data['basename_dir'] = basename(htmlspecialchars($serendipity['GET']['dir']));
+        $data['basename_dir'] = basename(serendipity_specialchars($serendipity['GET']['dir']));
         break;
 
     case 'directoryDoCreate':
@@ -557,7 +557,7 @@ switch ($serendipity['GET']['adminAction']) {
         if (isset($image_selector_addvars) && is_array($image_selector_addvars)) {
             // These variables may come from serendipity_admin_image_selector.php to show embedded upload form
             foreach($image_selector_addvars AS $imgsel_key => $imgsel_val) {
-                $form_hidden .= '          <input type="hidden" name="serendipity[' . htmlspecialchars($imgsel_key) . ']" value="' . htmlspecialchars($imgsel_val) . '" />' . "\n";
+                $form_hidden .= '          <input type="hidden" name="serendipity[' . serendipity_specialchars($imgsel_key) . ']" value="' . serendipity_specialchars($imgsel_val) . '" />' . "\n";
             }
         }
 
@@ -584,7 +584,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         if (empty($serendipity['adminFile_redirect'])) {
-            $serendipity['adminFile_redirect'] = htmlspecialchars($_SERVER['HTTP_REFERER']);
+            $serendipity['adminFile_redirect'] = serendipity_specialchars($_SERVER['HTTP_REFERER']);
         }
 
         $data['case_rotateCW'] = true;
@@ -601,7 +601,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         if (empty($serendipity['adminFile_redirect'])) {
-            $serendipity['adminFile_redirect'] = htmlspecialchars($_SERVER['HTTP_REFERER']);
+            $serendipity['adminFile_redirect'] = serendipity_specialchars($_SERVER['HTTP_REFERER']);
         }
 
         $data['case_rotateCCW'] = true;
@@ -641,7 +641,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['img_width']  = $s[0];
         $data['img_height'] = $s[1];
 
-        $data['print_RESIZE_BLAHBLAH'] = sprintf(RESIZE_BLAHBLAH, htmlspecialchars($serendipity['GET']['fname']));
+        $data['print_RESIZE_BLAHBLAH'] = sprintf(RESIZE_BLAHBLAH, serendipity_specialchars($serendipity['GET']['fname']));
         $data['print_ORIGINAL_SIZE']   = sprintf(ORIGINAL_SIZE, $s[0],$s[1]);
         $data['formtoken']             = serendipity_setFormToken();
         $data['file']                  = $serendipity['uploadHTTPPath'] . $file['path'] . $file['name'] .($file['extension'] ? '.'. $file['extension'] : "");
@@ -661,7 +661,7 @@ switch ($serendipity['GET']['adminAction']) {
         serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
 
         if ($file['is_image']) {
-            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . htmlspecialchars($serendipity['GET']['textarea']) . '\')';
+            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
 
             if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
                 $file['fast_select'] = true;

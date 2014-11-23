@@ -347,7 +347,7 @@ function serendipity_upgrader_rename_plugins() {
             $plugin['name'] = str_replace('serendipity_html_nugget_plugin', 'serendipity_plugin_html_nugget', $plugin['name']);
             $pluginparts = explode(':', $plugin['name']);
 
-            echo "<!-- " . htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($plugin['name']) . "-->\n";
+            echo "<!-- " . serendipity_specialchars($origname) . " &gt;&gt; " . serendipity_specialchars($plugin['name']) . "-->\n";
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins SET name = '" . serendipity_db_escape_string($plugin['name']) . "', path = '" . serendipity_db_escape_string($pluginparts[0]) . "' WHERE name = '" . serendipity_db_escape_string($origname) . "'");
         }
     }
@@ -362,7 +362,7 @@ function serendipity_upgrader_rename_plugins() {
             $config['name'] = str_replace('serendipity_html_nugget_plugin', 'serendipity_plugin_html_nugget', $config['name']);
             $configparts = explode(':', $config['name']);
 
-            echo "<!--[C] " . htmlspecialchars($origname) . " &gt;&gt; " . htmlspecialchars($config['name']) . "-->\n";
+            echo "<!--[C] " . serendipity_specialchars($origname) . " &gt;&gt; " . serendipity_specialchars($config['name']) . "-->\n";
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}config SET name = '" . serendipity_db_escape_string($config['name']) . "' WHERE name = '" . serendipity_db_escape_string($origname) . "'");
         }
     }

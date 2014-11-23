@@ -93,7 +93,7 @@ function &serendipity_smarty_fetch($block, $file, $echo = false) {
  * @return  string  The return string
  */
 function serendipity_emptyPrefix($string, $prefix = ': ') {
-    return (!empty($string) ? $prefix . htmlspecialchars($string) : '');
+    return (!empty($string) ? $prefix . serendipity_specialchars($string) : '');
 }
 
 /**

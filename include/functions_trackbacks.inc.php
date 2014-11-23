@@ -90,7 +90,7 @@ global $serendipity;
   </params>
 </methodCall>";
 
-    echo '<div>&#8226; ' . sprintf(PINGBACK_SENDING, htmlspecialchars($pingback)) . '</div>';
+    echo '<div>&#8226; ' . sprintf(PINGBACK_SENDING, serendipity_specialchars($pingback)) . '</div>';
     flush();
 
     $response =  _serendipity_send($pingback, $query, 'text/html');
@@ -210,7 +210,7 @@ function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $
           . '&blog_name=' . rawurlencode($author)
           . '&excerpt='   . rawurlencode(strip_tags($text));
 
-    printf(TRACKBACK_SENDING, htmlspecialchars($trackURI));
+    printf(TRACKBACK_SENDING, serendipity_specialchars($trackURI));
     flush();
 
     $response = serendipity_trackback_is_success(_serendipity_send($trackURI, $data));
@@ -533,7 +533,7 @@ function fetchPingbackData( &$comment) {
 
         // Get a title
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
-            $comment['title'] = html_entity_decode(strip_tags($matches[1]), ENT_COMPAT, LANG_CHARSET);
+            $comment['title'] = serendipity_entity_decode(strip_tags($matches[1]), ENT_COMPAT, LANG_CHARSET);
         }
         
         // Try to get content from first <p> tag on:
@@ -567,7 +567,7 @@ function trackback_body_strip( $body ){
     $body = str_replace('&nbsp;', ' ', $body);
 
     // strip html entities and tags.
-    $body = html_entity_decode(strip_tags($body), ENT_COMPAT, LANG_CHARSET);
+    $body = serendipity_entity_decode(strip_tags($body), ENT_COMPAT, LANG_CHARSET);
 
     // replace whitespace with single space            
     $body = preg_replace('@\s+@s', ' ', $body);

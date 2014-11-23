@@ -215,7 +215,7 @@ class serendipity_plugin_api
 
         $serendipity['debug']['pluginload'][] = "Installing plugin: " . print_r(func_get_args(), true);
 
-        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . htmlspecialchars($key) . "', $nextidx, '$default_placement', '$authorid', '" . htmlspecialchars($pluginPath) . "')";
+        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . serendipity_specialchars($key) . "', $nextidx, '$default_placement', '$authorid', '" . serendipity_specialchars($pluginPath) . "')";
         $serendipity['debug']['pluginload'][] = $iq;
         serendipity_db_query($iq);
         serendipity_plugin_api::hook_event('backend_plugins_new_instance', $key, array('default_placement' => $default_placement));
@@ -230,7 +230,7 @@ class serendipity_plugin_api
             $plugin->install();
         } else {
             $serendipity['debug']['pluginload'][] = "Loading plugin failed painfully. File not found?";
-            echo '<span class="msg_error">' . ERROR . ': ' . htmlspecialchars($key) . ' (' . htmlspecialchars($pluginPath) . ')</span>';
+            echo '<span class="msg_error">' . ERROR . ': ' . serendipity_specialchars($key) . ' (' . serendipity_specialchars($pluginPath) . ')</span>';
         }
 
         return $key;
@@ -933,7 +933,7 @@ class serendipity_plugin_api
                 ob_end_clean();
 
                 if ($loggedin) {
-                    $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . htmlentities($plugin->instance) . '">' . EDIT . '</a></div>';
+                    $content .= '<div class="serendipity_edit_nugget"><a href="' . $serendipity['serendipityHTTPPath'] . 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . serendipity_entities($plugin->instance) . '">' . EDIT . '</a></div>';
                 }
 
                 if ($show_plugin !== false) {

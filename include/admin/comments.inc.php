@@ -206,7 +206,7 @@ $filters = array('author', 'email', 'ip', 'url', 'body', 'referer');
 /* Compress the filters into an "AND" SQL query, and a querystring */
 foreach ($filters as $filter) {
     $and          .= (!empty($serendipity['GET']['filter'][$filter]) ? "AND c.". $filter ." LIKE '%". serendipity_db_escape_string($serendipity['GET']['filter'][$filter]) ."%'" : "");
-    $searchString .= (!empty($serendipity['GET']['filter'][$filter]) ? "&amp;serendipity[filter][". $filter ."]=". htmlspecialchars($serendipity['GET']['filter'][$filter]) : "");
+    $searchString .= (!empty($serendipity['GET']['filter'][$filter]) ? "&amp;serendipity[filter][". $filter ."]=". serendipity_specialchars($serendipity['GET']['filter'][$filter]) : "");
 }
 
 if ($serendipity['GET']['filter']['show'] == 'approved') {
@@ -330,11 +330,11 @@ if(is_array($sql)) {
             $comment['excerpt'] = true;
 
             // When summary is not the full body, strip HTML tags from summary, as it might break and leave unclosed HTML.
-            $comment['fullBody'] = nl2br(htmlspecialchars($comment['fullBody']));
+            $comment['fullBody'] = nl2br(serendipity_specialchars($comment['fullBody']));
             $comment['summary']  = nl2br(strip_tags($comment['summary']));
         } else {
             $comment['excerpt']  = false;
-            $comment['fullBody'] = $comment['summary'] = nl2br(htmlspecialchars($comment['fullBody']));
+            $comment['fullBody'] = $comment['summary'] = nl2br(serendipity_specialchars($comment['fullBody']));
         }
 
         serendipity_plugin_api::hook_event('backend_view_comment', $comment, '&amp;serendipity[page]='. $page . $searchString);

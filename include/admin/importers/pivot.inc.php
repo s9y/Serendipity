@@ -69,7 +69,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
         if (!is_dir($this->data['pivot_path']) || !is_readable($this->data['pivot_path'])) {
             $check_dir = $serendipity['serendipityPath'] . $this->data['pivot_path'];
             if (!is_dir($check_dir) || !is_readable($check_dir)) {
-                return sprintf(ERROR_NO_DIRECTORY, htmlspecialchars($this->data['pivot_path']));
+                return sprintf(ERROR_NO_DIRECTORY, serendipity_specialchars($this->data['pivot_path']));
             }
             $this->data['pivot_path'] = $check_dir;
         }
@@ -95,10 +95,10 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
                 }
 
                 if ($found) {
-                    echo '<li>Pivot Category "' . htmlspecialchars($pivot_category) . '" mapped to Serendipity ID ' . $found . '</li>';
+                    echo '<li>Pivot Category "' . serendipity_specialchars($pivot_category) . '" mapped to Serendipity ID ' . $found . '</li>';
                     $pivot_to_s9y['categories'][$pivot_category] = $found;
                 } else {
-                    echo '<li>Created Pivot Category "' . htmlspecialchars($pivot_category) . '".</li>';
+                    echo '<li>Created Pivot Category "' . serendipity_specialchars($pivot_category) . '".</li>';
                     $cat = array('category_name'        => $pivot_category,
                                  'category_description' => '',
                                  'parentid'             => 0,
@@ -191,7 +191,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
             }
             echo '</ul>';
         } else {
-            return sprintf(ERROR_NO_DIRECTORY, htmlspecialchars($this->data['pivot_path']));
+            return sprintf(ERROR_NO_DIRECTORY, serendipity_specialchars($this->data['pivot_path']));
         }
 
         return true;

@@ -173,7 +173,7 @@ switch($serendipity['GET']['adminAction']) {
                   'serendipity[action]'      => 'admin',
                   'serendipity[adminModule]' => 'entries',
                   'serendipity[adminAction]' => 'save',
-                  'serendipity[timestamp]'   => htmlspecialchars($entry['timestamp'])
+                  'serendipity[timestamp]'   => serendipity_specialchars($entry['timestamp'])
                 ),
                 $entry,
                 $errors
@@ -191,7 +191,7 @@ switch($serendipity['GET']['adminAction']) {
         serendipity_deleteEntry((int)$serendipity['GET']['id']);
         $data['switched_output'] = true;
         $data['is_doDelete']     = true;
-        $data['del_entry']       = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+        $data['del_entry']       = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . serendipity_specialchars($entry['title']));
 
     case 'doMultiDelete':
         if ($serendipity['GET']['adminAction'] != 'doDelete') {
@@ -208,7 +208,7 @@ switch($serendipity['GET']['adminAction']) {
                     $entry = serendipity_fetchEntry('id', $id, 1, 1);
                     serendipity_deleteEntry((int)$id);
                     $data['is_doMultiDelete'] = true;
-                    $data['del_entry'][]      = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+                    $data['del_entry'][]      = sprintf(RIP_ENTRY, $entry['id'] . ' - ' . serendipity_specialchars($entry['title']));
                 }
             }
         }
@@ -327,13 +327,13 @@ switch($serendipity['GET']['adminAction']) {
 
                 $smartentries[] = array(
                     'id'            => $ey['id'],
-                    'title'         => htmlspecialchars($ey['title']),
+                    'title'         => serendipity_specialchars($ey['title']),
                     'timestamp'     => (int)$ey['timestamp'],
                     'last_modified' => (int)$ey['last_modified'],
                     'isdraft'       => serendipity_db_bool($ey['isdraft']),
                     'ep_is_sticky'  => (serendipity_db_bool($ey['properties']['ep_is_sticky']) ? true : false),
                     'pubdate'       => date("c", (int)$ey['timestamp']),
-                    'author'        => htmlspecialchars($ey['author']),
+                    'author'        => serendipity_specialchars($ey['author']),
                     'cats'          => $entry_cats,
                     'preview'       => ((serendipity_db_bool($ey['isdraft']) || (!$serendipity['showFutureEntries'] && $ey['timestamp'] >= serendipity_serverOffsetHour())) ? true : false),
                     'archive_link'  => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
@@ -365,7 +365,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['is_delete']       = true;
         $data['newLoc']          = $newLoc;
         // for smartification printf had to turn into sprintf!!
-        $data['rip_entry']       = sprintf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+        $data['rip_entry']       = sprintf(DELETE_SURE, $entry['id'] . ' - ' . serendipity_specialchars($entry['title']));
         break;
 
     case 'multidelete':
@@ -379,7 +379,7 @@ switch($serendipity['GET']['adminAction']) {
             $ids .= (int)$id . ',';
             $entry = serendipity_fetchEntry('id', $id, 1, 1);
             $data['is_multidelete'] = true;
-            $data['rip_entry'][]    = sprintf(DELETE_SURE, $entry['id'] . ' - ' . htmlspecialchars($entry['title']));
+            $data['rip_entry'][]    = sprintf(DELETE_SURE, $entry['id'] . ' - ' . serendipity_specialchars($entry['title']));
         }
         $newLoc = '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
         $data['switched_output'] = true;

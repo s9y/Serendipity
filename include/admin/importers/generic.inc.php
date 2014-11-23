@@ -146,7 +146,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         
         if (PEAR::isError($res) || $req->getResponseCode() != '200') {
             serendipity_request_end();
-            echo '<span class="block_level">' . IMPORT_FAILED . ': ' . htmlspecialchars($this->data['url']) . '</span>';
+            echo '<span class="block_level">' . IMPORT_FAILED . ': ' . serendipity_specialchars($this->data['url']) . '</span>';
             return false;
         }
         
@@ -198,7 +198,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                              'category_left'        => 0,
                              'category_right'       => 0);
                 echo '<span class="block_level">';
-                printf(CREATE_CATEGORY, htmlspecialchars($cat_name));
+                printf(CREATE_CATEGORY, serendipity_specialchars($cat_name));
                 echo "</span>";
                 if ($dry_run) {
                     $s9y_cat[$cat_name] = time();
@@ -256,7 +256,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                     $s9y_users[$wp_user]['authorid'] = serendipity_addAuthor($wp_user, md5(time()), $wp_user, '', USERLEVEL_EDITOR);
                 }
                 echo '<span class="block_level">';
-                printf(CREATE_AUTHOR, htmlspecialchars($wp_user));
+                printf(CREATE_AUTHOR, serendipity_specialchars($wp_user));
                 echo "</span>";
             }
 
@@ -312,7 +312,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 $s9y_cid[$c_id] = $cid;
             }
             
-            echo "<span class='msg_notice'>Entry '" . htmlspecialchars($entry['title']) . "' ($c_i comments) imported.</span>";
+            echo "<span class='msg_notice'>Entry '" . serendipity_specialchars($entry['title']) . "' ($c_i comments) imported.</span>";
         }
         return true;
     }

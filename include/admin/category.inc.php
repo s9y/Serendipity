@@ -51,7 +51,7 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
                 if (is_array($r)) {
                     $r = serendipity_db_query("SELECT category_name FROM {$serendipity['dbPrefix']}category
                                                         WHERE categoryid = ". (int)$parentid);
-                   $data['subcat'] = sprintf(ALREADY_SUBCATEGORY, htmlspecialchars($r[0]['category_name']), htmlspecialchars($name));
+                   $data['subcat'] = sprintf(ALREADY_SUBCATEGORY, serendipity_specialchars($r[0]['category_name']), serendipity_specialchars($name));
                 } else {
                     serendipity_updateCategory($serendipity['GET']['cid'], $name, $desc, $authorid, $icon, $parentid, $serendipity['POST']['cat']['sort_order'], $serendipity['POST']['cat']['hide_sub'], $admin_category);
                     serendipity_ACLGrant($serendipity['GET']['cid'], 'category', 'read', $serendipity['POST']['cat']['read_authors']);

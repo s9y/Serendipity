@@ -84,7 +84,7 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
 
         $pmdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$pmdb) {
-            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
+            return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {

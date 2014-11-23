@@ -87,7 +87,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
 
         $gdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$gdb) {
-            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
+            return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'])) {
@@ -296,7 +296,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
                         break;
                     }
                 }
-                $a['post_text'] = html_entity_decode($a['post_text']);
+                $a['post_text'] = serendipity_entity_decode($a['post_text']);
 
                 $comment = array('entry_id ' => $entries[$x]['entryid'],
                                  'parent_id' => 0,

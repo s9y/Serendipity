@@ -1456,7 +1456,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     $extraParems = serendipity_generateImageSelectorParems();
 
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
-    $serendipity['GET']['only_filename'] = htmlspecialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
+    $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
 
     $perPage = (!empty($serendipity['GET']['sortorder']['perpage']) ? (int)$serendipity['GET']['sortorder']['perpage'] : 8);
     while ($perPage % $lineBreak !== 0) {
@@ -1675,19 +1675,19 @@ function serendipity_generateImageSelectorParems() {
 
     foreach($importParams AS $importParam) {
         if (isset($serendipity['GET'][$importParam])) {
-            $extraParems .= 'serendipity[' . $importParam . ']='. htmlspecialchars($serendipity['GET'][$importParam]) .'&amp;';
+            $extraParems .= 'serendipity[' . $importParam . ']='. serendipity_specialchars($serendipity['GET'][$importParam]) .'&amp;';
         }
     }
 
     foreach($sortParams AS $sortParam) {
         serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
-        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. htmlspecialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
+        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. serendipity_specialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
     }
 
     foreach($standaloneFilterParams AS $filterParam) {
         serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
         if (!empty($serendipity['GET'][$filterParam]) && $serendipity['GET'][$filterParam] != "undefined") {
-            $extraParems .= 'serendipity[' . $filterParam . ']='. htmlspecialchars($serendipity['GET'][$filterParam]) .'&amp;';
+            $extraParems .= 'serendipity[' . $filterParam . ']='. serendipity_specialchars($serendipity['GET'][$filterParam]) .'&amp;';
         }
     }
 
@@ -1696,10 +1696,10 @@ function serendipity_generateImageSelectorParems() {
         if (!empty($serendipity['GET']['filter'][$filterParam]) && $serendipity['GET']['filter'][$filterParam] != "undefined") {
             if (is_array($filterValue)) {
                 foreach($filterValue as $key => $value) {
-                     $extraParems .= 'serendipity[filter][' . $filterParam . '][' . $key . ']='. htmlspecialchars($value) .'&amp;';
+                     $extraParems .= 'serendipity[filter][' . $filterParam . '][' . $key . ']='. serendipity_specialchars($value) .'&amp;';
                 }
             } else {
-                $extraParems .= 'serendipity[filter][' . $filterParam . ']='. htmlspecialchars($filterValue) .'&amp;';
+                $extraParems .= 'serendipity[filter][' . $filterParam . ']='. serendipity_specialchars($filterValue) .'&amp;';
             }
         }
 
@@ -2045,7 +2045,7 @@ function serendipity_getImageFields() {
         foreach($addProp AS $prop) {
             $parts = explode(':', $prop);
             $name  = $parts[0];
-            $x['bp.' . $name] = array('desc' => (defined('MEDIA_PROPERTY_' . $name) ? constant('MEDIA_PROPERTY_' . $name) : htmlspecialchars($name)));
+            $x['bp.' . $name] = array('desc' => (defined('MEDIA_PROPERTY_' . $name) ? constant('MEDIA_PROPERTY_' . $name) : serendipity_specialchars($name)));
             if (preg_match('@date@i', $name)) {
                 $x['bp.' . $name]['type'] = 'date';
             }
@@ -2312,7 +2312,7 @@ function serendipity_showPropertyForm(&$new_media, $keywordsPerBlock = 3, $is_ed
     if (isset($GLOBALS['image_selector_addvars']) && is_array($GLOBALS['image_selector_addvars'])) {
         // These variables may come from serendipity_admin_image_selector.php to show embedded upload form
         foreach($GLOBALS['image_selector_addvars'] AS $imgsel_key => $imgsel_val) {
-            $editform_hidden .= '          <input type="hidden" name="serendipity[' . htmlspecialchars($imgsel_key) . ']" value="' . htmlspecialchars($imgsel_val) . '" />' . "\n";
+            $editform_hidden .= '          <input type="hidden" name="serendipity[' . serendipity_specialchars($imgsel_key) . ']" value="' . serendipity_specialchars($imgsel_val) . '" />' . "\n";
         }
     }
 
@@ -2431,13 +2431,13 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
         }
         $val = serendipity_mediaTypeCast($parts[0], $props['base_property'][$parts[0]], true);
 
-        $propkey = htmlspecialchars($parts[0]) . $idx;
+        $propkey = serendipity_specialchars($parts[0]) . $idx;
 
         $media['base_property'][$propkey] = array(
-            'label' => htmlspecialchars(defined('MEDIA_PROPERTY_' . strtoupper($parts[0])) ? constant('MEDIA_PROPERTY_' . strtoupper($parts[0])) : $parts[0]),
+            'label' => serendipity_specialchars(defined('MEDIA_PROPERTY_' . strtoupper($parts[0])) ? constant('MEDIA_PROPERTY_' . strtoupper($parts[0])) : $parts[0]),
             'type'  => $type,
             'val'   => $val,
-            'title' => htmlspecialchars($parts[0])
+            'title' => serendipity_specialchars($parts[0])
         );
 
         if (!is_array($GLOBALS['IPTC'])) {
@@ -2532,7 +2532,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
                 $kidx = ($i*$keywordsPerBlock) + $j;
                 if (isset($keywords[$kidx])) {
                     $media['base_keywords'][$i][$j] = array(
-                        'name'      => htmlspecialchars($keywords[$kidx]),
+                        'name'      => serendipity_specialchars($keywords[$kidx]),
                         'selected'  => isset($props['base_keyword'][$keywords[$kidx]]) ? true : false
                     );
                 } else {
@@ -2875,7 +2875,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     $form_hidden = '';
     foreach($serendipity['GET'] AS $g_key => $g_val) {
         if (!is_array($g_val) && $g_key != 'page') {
-            $form_hidden .= '<input type="hidden" name="serendipity[' . $g_key . ']" value="' . htmlspecialchars($g_val) . '" />';
+            $form_hidden .= '<input type="hidden" name="serendipity[' . $g_key . ']" value="' . serendipity_specialchars($g_val) . '" />';
         }
     }
 
@@ -3285,7 +3285,7 @@ function serendipity_imageAppend(&$tfile, &$target, $dir, $echo = true) {
     $target = $dir . $tfile;
 
     if ($echo) {
-        printf(FILENAME_REASSIGNED . '<br />', htmlspecialchars($tfile));
+        printf(FILENAME_REASSIGNED . '<br />', serendipity_specialchars($tfile));
     }
     return $realname;
 }
@@ -3414,7 +3414,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     if ($type == 'file') {
         if (serendipity_isActiveFile(basename($newDir))) {
             echo '<span class="msg_error"><span class="icon-attention"></span> ';
-            printf(ERROR_FILE_FORBIDDEN, htmlspecialchars($newDir));
+            printf(ERROR_FILE_FORBIDDEN, serendipity_specialchars($newDir));
             echo "</span>\n";
             return false;
         }

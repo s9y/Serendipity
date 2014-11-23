@@ -13,7 +13,7 @@ switch($serendipity['POST']['adminAction']) {
             break;
         }
         $success = serendipity_updertEntry(array(
-            'id' => htmlspecialchars($serendipity['POST']['id']),
+            'id' => serendipity_specialchars($serendipity['POST']['id']),
             'timestamp' => time(),
             'isdraft' => 0
         ));
@@ -65,7 +65,7 @@ if (count($comments) > 1) {
             $comment['excerpt'] = true;
 
             // When summary is not the full body, strip HTML tags from summary, as it might break and leave unclosed HTML.
-            $comment['fullBody'] = nl2br(htmlspecialchars($comment['fullBody']));
+            $comment['fullBody'] = nl2br(serendipity_specialchars($comment['fullBody']));
             $comment['summary']  = nl2br(strip_tags($comment['summary']));
         }
     }

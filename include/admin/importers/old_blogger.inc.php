@@ -125,7 +125,7 @@ ENDPOST
             # locate the post title
             if (preg_match("/TITLE:(.*)/", $post, $title)) {
                 $title = trim($title[1]);
-                echo "<b class='block_level'>" . htmlspecialchars($title) . "</b>";
+                echo "<b class='block_level'>" . serendipity_specialchars($title) . "</b>";
             } else {
                 $title = "";
                 echo "<b class='block_level'>Empty title</b>";
@@ -134,7 +134,7 @@ ENDPOST
             # locate the post author
             if (preg_match("/AUTHOR:(.*)/", $post, $author)) {
                 $author = trim($author[1]);
-                echo "<em class='block_level'>" . htmlspecialchars($author[1]) . "</em>";
+                echo "<em class='block_level'>" . serendipity_specialchars($author[1]) . "</em>";
             } else {
                 $author = "";
                 echo "<em class='block_level'>Unknown author</em>";
@@ -143,7 +143,7 @@ ENDPOST
             # locate the post date
             if (preg_match("/DATE:(.*)/", $post, $date)) {
                 $date = strtotime(trim($date[1]));
-                echo "<span class='block_level'>Posted on " . htmlspecialchars($date[1]) . ".</span>";
+                echo "<span class='block_level'>Posted on " . serendipity_specialchars($date[1]) . ".</span>";
             } else {
                 $date = time();
                 echo "<span class='block_level'>Unknown posting time.</span>";

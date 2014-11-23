@@ -305,8 +305,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : ''), true);
     if (is_array($title)) {
-        $serendipity['head_title']    = htmlspecialchars($title[0]);
-        $serendipity['head_subtitle'] = htmlspecialchars($serendipity['blogTitle']);
+        $serendipity['head_title']    = serendipity_specialchars($title[0]);
+        $serendipity['head_subtitle'] = serendipity_specialchars($serendipity['blogTitle']);
     } else {
         $serendipity['view'] = '404';
         $serendipity['viewtype'] = '404_1';
@@ -464,7 +464,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     } else {
         $serendipity['head_title']    = $cInfo['category_name'];
         if (isset($serendipity['GET']['page'])) {
-            $serendipity['head_title'] .= " - " . htmlspecialchars($serendipity['GET']['page']);
+            $serendipity['head_title'] .= " - " . serendipity_specialchars($serendipity['GET']['page']);
         }
         $serendipity['head_subtitle'] = $serendipity['blogTitle'];
     }
@@ -545,7 +545,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $serendipity['GET']['action']     = 'search';
-    $serendipity['GET']['searchTerm'] = urldecode(htmlspecialchars(strip_tags(implode(' ', $search))));
+    $serendipity['GET']['searchTerm'] = urldecode(serendipity_specialchars(strip_tags(implode(' ', $search))));
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 } elseif (preg_match(PAT_CSS, $uri, $matches)) {
     serendipity_smarty_init();
@@ -631,7 +631,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         }
     }
 
-    $serendipity['head_title']    = COMMENTS_FROM . ' ' . htmlspecialchars($serendipity['GET']['viewCommentAuthor']);
+    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor']);
     if (isset($timedesc['start']) && isset($timedesc['end'])) {
         $serendipity['head_title'] .= ' (' . $timedesc['start'] . ' - ' . $timedesc['end'] . ')';
     } elseif (isset($timedesc['start'])) {

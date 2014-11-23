@@ -151,11 +151,11 @@ function show_plugins($event_only = false, $sidebars = null)
                 $bag = new serendipity_property_bag;
                 $plugin->introspect($bag);
 
-                $name  = htmlspecialchars($bag->get('name'));
+                $name  = serendipity_specialchars($bag->get('name'));
 
                 $desc  = '<details class="plugin_data">';
                 $desc .= '<summary><var class="perm_name">'.$cname[0].'</var></summary>';
-                $desc .= '<div class="plugin_desc clearfix">' . htmlspecialchars($bag->get('description')) . '</div>';
+                $desc .= '<div class="plugin_desc clearfix">' . serendipity_specialchars($bag->get('description')) . '</div>';
                 $desc .= '<span class="block_level">' . VERSION  . ': ' . $bag->get('version') . '</span>';
                 $desc .= '</details>';
 
@@ -255,10 +255,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         $cbag = new serendipity_property_bag;
         $plugin->introspect_config_item($config_item, $cbag);
 
-        $data['cname']  = $cname = htmlspecialchars($cbag->get('name'));
-        $data['cdesc']  = $cdesc = htmlspecialchars($cbag->get('description'));
+        $data['cname']  = $cname = serendipity_specialchars($cbag->get('name'));
+        $data['cdesc']  = $cdesc = serendipity_specialchars($cbag->get('description'));
         $value          = $plugin->get_config($config_item, 'unset');
-        $lang_direction = htmlspecialchars($cbag->get('lang_direction'));
+        $lang_direction = serendipity_specialchars($cbag->get('lang_direction'));
 
         if (empty($lang_direction)) {
             $lang_direction = LANG_DIRECTION;
@@ -279,12 +279,12 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
         if (isset($_POST['serendipity'][$postkey][$config_item])) {
             if (is_array($_POST['serendipity'][$postkey][$config_item])) {
                 $hvalue = $_POST['serendipity'][$postkey][$config_item];
-                array_walk($hvalue, 'htmlspecialchars');
+                array_walk($hvalue, 'serendipity_specialchars');
             } else {
-                $hvalue = htmlspecialchars($_POST['serendipity'][$postkey][$config_item]);
+                $hvalue = serendipity_specialchars($_POST['serendipity'][$postkey][$config_item]);
             }
         } else {
-            $hvalue = htmlspecialchars($value);
+            $hvalue = serendipity_specialchars($value);
         }
 
         $radio    = array();
@@ -367,7 +367,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $data['radio_button'] = array();
                 $counter = 0;
                 foreach($radio['value'] AS $radio_index => $radio_value) {
-                    $id = htmlspecialchars($config_item . $radio_value);
+                    $id = serendipity_specialchars($config_item . $radio_value);
                     $counter++;
                     $checked = "";
 
@@ -382,7 +382,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     $data['radio_button'][$radio_index]['checked'] = $checked;
                     $data['radio_button'][$radio_index]['counter'] = $counter;
                     $data['radio_button'][$radio_index]['value'] = $radio_value;
-                    $data['radio_button'][$radio_index]['index'] = htmlspecialchars($radio['desc'][$radio_index]);
+                    $data['radio_button'][$radio_index]['index'] = serendipity_specialchars($radio['desc'][$radio_index]);
                 }
 
                 $assign_plugin_config($data);

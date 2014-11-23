@@ -191,13 +191,13 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
     $commentform_data = array(
         'commentform_action'         => $url,
         'commentform_id'             => $id,
-        'commentform_name'           => isset($data['name'])      ? htmlspecialchars($data['name'])       : (isset($serendipity['COOKIE']['name'])     ? htmlspecialchars($serendipity['COOKIE']['name'])     : ''),
-        'commentform_email'          => isset($data['email'])     ? htmlspecialchars($data['email'])      : (isset($serendipity['COOKIE']['email'])    ? htmlspecialchars($serendipity['COOKIE']['email'])    : ''),
-        'commentform_url'            => isset($data['url'])       ? htmlspecialchars($data['url'])        : (isset($serendipity['COOKIE']['url'])      ? htmlspecialchars($serendipity['COOKIE']['url'])      : ''),
+        'commentform_name'           => isset($data['name'])      ? serendipity_specialchars($data['name'])       : (isset($serendipity['COOKIE']['name'])     ? serendipity_specialchars($serendipity['COOKIE']['name'])     : ''),
+        'commentform_email'          => isset($data['email'])     ? serendipity_specialchars($data['email'])      : (isset($serendipity['COOKIE']['email'])    ? serendipity_specialchars($serendipity['COOKIE']['email'])    : ''),
+        'commentform_url'            => isset($data['url'])       ? serendipity_specialchars($data['url'])        : (isset($serendipity['COOKIE']['url'])      ? serendipity_specialchars($serendipity['COOKIE']['url'])      : ''),
         'commentform_remember'       => isset($data['remember'])  ? 'checked="checked"'                   : (isset($serendipity['COOKIE']['remember']) ? 'checked="checked"' : ''),
         'commentform_replyTo'        => serendipity_generateCommentList($id, $comments, ((isset($data['replyTo']) && ($data['replyTo'])) ? $data['replyTo'] : 0)),
         'commentform_subscribe'      => isset($data['subscribe']) ? 'checked="checked"' : '',
-        'commentform_data'           => isset($data['comment'])   ? htmlspecialchars($data['comment']) : '',
+        'commentform_data'           => isset($data['comment'])   ? serendipity_specialchars($data['comment']) : '',
         'is_commentform_showToolbar' => $showToolbar,
         'is_allowSubscriptions'      => (serendipity_db_bool($serendipity['allowSubscriptions']) || $serendipity['allowSubscriptions'] === 'fulltext' ? true : false),
         'is_moderate_comments'       => $moderate_comments,
@@ -320,7 +320,7 @@ function serendipity_generateCommentList($id, $comments = NULL, $selected = 0, $
     foreach ($comments as $comment) {
         if ($comment['parent_id'] == $parent) {
             $i++;
-            $retval .= '<option value="' . $comment['id'] . '"'. ($selected == $comment['id'] || (isset($serendipity['POST']['replyTo']) && $comment['id'] == $serendipity['POST']['replyTo']) ? ' selected="selected"' : '') .'>' . str_repeat('&#160;', $level * 2) . '#' . $indent . $i . ': ' . (empty($comment['author']) ? ANONYMOUS : htmlspecialchars($comment['author'])) . ' ' . ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime(DATE_FORMAT_SHORT, $comment['timestamp'])) . "</option>\n";
+            $retval .= '<option value="' . $comment['id'] . '"'. ($selected == $comment['id'] || (isset($serendipity['POST']['replyTo']) && $comment['id'] == $serendipity['POST']['replyTo']) ? ' selected="selected"' : '') .'>' . str_repeat('&#160;', $level * 2) . '#' . $indent . $i . ': ' . (empty($comment['author']) ? ANONYMOUS : serendipity_specialchars($comment['author'])) . ' ' . ON . ' ' . serendipity_mb('ucfirst', serendipity_strftime(DATE_FORMAT_SHORT, $comment['timestamp'])) . "</option>\n";
             $retval .= serendipity_generateCommentList($id, $comments, $selected, $comment['id'], $level + 1, $indent . $i . '.');
         }
     }
@@ -362,7 +362,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
         if ($parentid === VIEWMODE_LINEAR || !isset($comment['parent_id']) || $comment['parent_id'] == $parentid) {
             $i++;
 
-            $comment['comment'] = htmlspecialchars(strip_tags($comment['body']));
+            $comment['comment'] = serendipity_specialchars(strip_tags($comment['body']));
             $comment['url']     = strip_tags($comment['url']);
             $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments';
 
@@ -380,7 +380,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
                 if (!@parse_url($comment['url'])) {
                     $comment['url'] = '';
                 }
-                $comment['url'] = htmlspecialchars($comment['url'], ENT_QUOTES);
+                $comment['url'] = serendipity_specialchars($comment['url'], ENT_QUOTES);
             }
 
             $addData = array('from' => 'functions_entries:printComments');
@@ -390,16 +390,16 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
                 $comment['email'] = false;
             } elseif (!empty($comment['email'])) {
                 $comment['clear_email'] = $comment['email'];
-                $comment['email']       = htmlspecialchars(str_replace('@', '[at]', $comment['email']));
+                $comment['email']       = serendipity_specialchars(str_replace('@', '[at]', $comment['email']));
             }
 
             $comment['body']    = $comment['comment'];
             $comment['pos']     = $i;
             $comment['trace']   = $trace . $i;
             $comment['depth']   = $depth;
-            $comment['author']  = htmlspecialchars($comment['author']);
+            $comment['author']  = serendipity_specialchars($comment['author']);
             if (isset($comment['title'])) {
-                $comment['title']   = htmlspecialchars($comment['title']);
+                $comment['title']   = serendipity_specialchars($comment['title']);
             }
             
             if (serendipity_userLoggedIn()) {

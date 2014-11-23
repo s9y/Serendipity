@@ -70,7 +70,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                 $entry['body'] .= ' ' . $entry['extended'];
                 $ext = '';
             } elseif ($entry['exflag']) {
-                $ext = '<a class="block_level" href="' . $entry['feed_entryLink'] . '#extended">' . sprintf(VIEW_EXTENDED_ENTRY, htmlspecialchars($entry['title'])) . '</a>';
+                $ext = '<a class="block_level" href="' . $entry['feed_entryLink'] . '#extended">' . sprintf(VIEW_EXTENDED_ENTRY, serendipity_specialchars($entry['title'])) . '</a>';
             } else {
                 $ext = '';
             }
@@ -103,24 +103,24 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             if (!is_array($entry['categories'])) {
                 $entry['categories'] = array(0 => array(
                     'category_name'      => $entry['category_name'],
-                    'feed_category_name' => serendipity_utf8_encode(htmlspecialchars($entry['category_name'])),
+                    'feed_category_name' => serendipity_utf8_encode(serendipity_specialchars($entry['category_name'])),
                     'categoryURL'        => serendipity_categoryURL($entry, 'baseURL')
                 ));
             } else {
                 foreach($entry['categories'] AS $cid => $_cat) {
                     $cat = &$entry['categories'][$cid];
                     $cat['categoryURL']        = serendipity_categoryURL($cat, 'baseURL');
-                    $cat['feed_category_name'] = serendipity_utf8_encode(htmlspecialchars($cat['category_name']));
+                    $cat['feed_category_name'] = serendipity_utf8_encode(serendipity_specialchars($cat['category_name']));
                 }
             }
 
             // Prepare variables
-            // 1. UTF8 encoding + htmlspecialchars.
-            $entry['feed_title']     = serendipity_utf8_encode(htmlspecialchars($entry['title']));
-            $entry['feed_blogTitle'] = serendipity_utf8_encode(htmlspecialchars($serendipity['blogTitle']));
-            $entry['feed_title']     = serendipity_utf8_encode(htmlspecialchars($entry['title']));
-            $entry['feed_author']    = serendipity_utf8_encode(htmlspecialchars($entry['author']));
-            $entry['feed_email']     = serendipity_utf8_encode(htmlspecialchars($entry['email']));
+            // 1. UTF8 encoding + serendipity_specialchars.
+            $entry['feed_title']     = serendipity_utf8_encode(serendipity_specialchars($entry['title']));
+            $entry['feed_blogTitle'] = serendipity_utf8_encode(serendipity_specialchars($serendipity['blogTitle']));
+            $entry['feed_title']     = serendipity_utf8_encode(serendipity_specialchars($entry['title']));
+            $entry['feed_author']    = serendipity_utf8_encode(serendipity_specialchars($entry['author']));
+            $entry['feed_email']     = serendipity_utf8_encode(serendipity_specialchars($entry['email']));
 
             // 2. gmdate
             $entry['feed_timestamp']     = gmdate('Y-m-d\TH:i:s\Z', serendipity_serverOffsetHour($entry['timestamp']));

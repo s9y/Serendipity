@@ -408,4 +408,37 @@ if (function_exists('date_default_timezone_get')) {
     @date_default_timezone_set(@date_default_timezone_get());
 }
 
+/**
+ * In PHP 5.4, the default encoding of htmlspecialchar changed to UTF-8 and it will emit empty strings when given
+ * native encoded strings containing umlauts. This wrapper should to be used in the core until PHP 5.6 fixes the bug.
+ */ 
+function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
+    if ($flags == null) {
+        $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+    }
+    return htmlspecialchars($string, $flags, $encoding, $double_encode);
+}
+
+/**
+ * see serendipity_specialchars
+ */ 
+function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
+    if ($flags == null) {
+        $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+    }
+    return htmlentities($string, $flags, $encoding, $double_encode);
+}
+
+/**
+ * serendipity_specialchars
+ */ 
+function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
+    if ($flags == null) {
+        # NOTE: ENT_SUBSTITUTE does not exist for this function, and the documentation does not specify that it will
+        # ever echo empty strings on charset errors
+        $flags = ENT_COMPAT | ENT_HTML401;
+    }
+    return html_entity_decode($string, $flags, $encoding, $double_encode);
+}
+
 /* vim: set sts=4 ts=4 expandtab : */

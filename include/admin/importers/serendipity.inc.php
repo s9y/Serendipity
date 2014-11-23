@@ -448,7 +448,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
 
         $s9ydb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$s9ydb) {
-            return sprintf(COULDNT_CONNECT, htmlspecialchars($this->data['host']));
+            return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
         if (!@mysql_select_db($this->data['name'], $s9ydb)) {

@@ -321,7 +321,7 @@ function serendipity_db_probe($hash, &$errs) {
 
     if (!$c) {
         $errs[] = 'Could not connect to database; check your settings.';
-        $errs[] = 'The mySQL error was: ' . htmlspecialchars(mysqli_connect_error());
+        $errs[] = 'The mySQL error was: ' . serendipity_specialchars(mysqli_connect_error());
         return false;
     }
 
@@ -329,7 +329,7 @@ function serendipity_db_probe($hash, &$errs) {
 
     if ( !@mysqli_select_db($c, $hash['dbName']) ) {
         $errs[] = 'The database you specified does not exist.';
-        $errs[] = 'The mySQL error was: ' . htmlspecialchars(mysqli_error($c));
+        $errs[] = 'The mySQL error was: ' . serendipity_specialchars(mysqli_error($c));
         return false;
     }
 

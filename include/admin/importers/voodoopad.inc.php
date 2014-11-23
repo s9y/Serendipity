@@ -96,11 +96,11 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
 
         // Feed the contents of the file into the parser
         if (!file_exists($file)) {
-            die(sprintf(DOCUMENT_NOT_FOUND, htmlspecialchars($file)));
+            die(sprintf(DOCUMENT_NOT_FOUND, serendipity_specialchars($file)));
         }
                        
         if(!($handle = fopen($file, "r"))) {
-            die(sprintf(SKIPPING_FILE_UNREADABLE, htmlspecialchars($file)));
+            die(sprintf(SKIPPING_FILE_UNREADABLE, serendipity_specialchars($file)));
         }
 
         while($contents = fread($handle, 4096)) {

@@ -1130,7 +1130,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 $entry['authorid'] = $serendipity['authorid'];
             }
 
-            $entry['author'] = htmlspecialchars($entry['author']);
+            $entry['author'] = serendipity_specialchars($entry['author']);
 
             $authorData = array(
                             'authorid' => $entry['authorid'],
@@ -1142,12 +1142,12 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             $entry['link']       = serendipity_archiveURL($entry['id'], $entry['title'], 'serendipityHTTPPath', true, array('timestamp' => $entry['timestamp']));
             $entry['commURL']    = serendipity_archiveURL($entry['id'], $entry['title'], 'baseURL', false, array('timestamp' => $entry['timestamp']));
             $entry['html_title'] = $entry['title'];
-            $entry['title']      = htmlspecialchars($entry['title'], ENT_QUOTES, LANG_CHARSET); // PHP 5.4 changed default charset in htmlspecialchars
+            $entry['title']      = serendipity_specialchars($entry['title']);
 
             $entry['title_rdf']  = preg_replace('@-{2,}@', '-', $entry['html_title']);
             $entry['rdf_ident']  = serendipity_archiveURL($entry['id'], $entry['title_rdf'], 'baseURL', true, array('timestamp' => $entry['timestamp']));
             $entry['link_rdf']   = serendipity_rewriteURL(PATH_FEEDS . '/ei_'. $entry['id'] .'.rdf');
-            $entry['title_rdf']  = htmlspecialchars($entry['title_rdf']);
+            $entry['title_rdf']  = serendipity_specialchars($entry['title_rdf']);
 
             $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'];
             $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'];
@@ -1529,12 +1529,12 @@ function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, 
         if ($cat['parentid'] == $id) {
             switch ($type) {
                 case 0:
-                    $ret .= str_repeat('&nbsp;', $level * 2).'&bull;&nbsp;<span class="block_level" id="catItem_' . $cat['categoryid'] . '"' . (($cat['categoryid'] && in_array($cat['categoryid'], $select)) ? ' selected="selected"' : '') . '><a href="?serendipity[adminModule]=category&amp;serendipity[cat][catid]=' . $cat['categoryid'] . '">' . (!empty($cat['category_icon']) ? '<img style="vertical-align: middle;" src="' . $cat['category_icon'] . '" border="0" alt="' . $cat['category_name'] . '"/> ' : '') . htmlspecialchars($cat['category_name']) . (!empty($cat['category_description']) ? ' - ' . htmlspecialchars($cat['category_description']) : '') . '</a></span>';
+                    $ret .= str_repeat('&nbsp;', $level * 2).'&bull;&nbsp;<span class="block_level" id="catItem_' . $cat['categoryid'] . '"' . (($cat['categoryid'] && in_array($cat['categoryid'], $select)) ? ' selected="selected"' : '') . '><a href="?serendipity[adminModule]=category&amp;serendipity[cat][catid]=' . $cat['categoryid'] . '">' . (!empty($cat['category_icon']) ? '<img style="vertical-align: middle;" src="' . $cat['category_icon'] . '" border="0" alt="' . $cat['category_name'] . '"/> ' : '') . serendipity_specialchars($cat['category_name']) . (!empty($cat['category_description']) ? ' - ' . serendipity_specialchars($cat['category_description']) : '') . '</a></span>';
                     break;
                 case 1:
                 case 2:
                    $ret .= '<option value="' . $cat['categoryid'] . '"' . (($cat['categoryid'] && in_array($cat['categoryid'], $select)) ? ' selected="selected"' : '') . '>';
-                   $ret .= str_repeat('&nbsp;', $level * 2) . htmlspecialchars($cat['category_name']) . ($type == 1 && !empty($cat['category_description']) ? (' - ' . htmlspecialchars($cat['category_description'])) : '');
+                   $ret .= str_repeat('&nbsp;', $level * 2) . serendipity_specialchars($cat['category_name']) . ($type == 1 && !empty($cat['category_description']) ? (' - ' . serendipity_specialchars($cat['category_description'])) : '');
                    $ret .= '</option>';
                    break;
                 case 3:
@@ -1546,19 +1546,19 @@ function serendipity_generateCategoryList($cats, $select = array(0), $type = 0, 
                           '<a href="%s" title="%s">%s</a>' .
                           '</div>',
                           $serendipity['serendipityHTTPPath'] . 'rss.php?category=' . $cat['categoryid'] . '_' . $category_id,
-                          htmlspecialchars($cat['category_description']),
+                          serendipity_specialchars($cat['category_description']),
                           $xmlImg,
                           str_repeat('&#160;', $level * 3),
                           serendipity_categoryURL($cat, 'serendipityHTTPPath'),
-                          htmlspecialchars($cat['category_description']),
-                          htmlspecialchars($cat['category_name']));
+                          serendipity_specialchars($cat['category_description']),
+                          serendipity_specialchars($cat['category_name']));
                     } else {
                         $ret .= sprintf(
                           '<span class="block_level">%s<a href="%s" title="%s">%s</a></span>',
                           str_repeat('&#160;', $level * 3),
                           serendipity_categoryURL($cat, 'serendipityHTTPPath'),
-                          htmlspecialchars($cat['category_description']),
-                          htmlspecialchars($cat['category_name']));
+                          serendipity_specialchars($cat['category_description']),
+                          serendipity_specialchars($cat['category_name']));
                     }
                     break;
                 case 4:

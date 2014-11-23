@@ -161,13 +161,13 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     }
 
     if (!$expectError && sqlrcur_errorMessage($cur) != '') {
-        $msg = '<pre>' . htmlspecialchars($sql) . '</pre> / ' . htmlspecialchars(sqlrcur_errorMessage($cur));
+        $msg = '<pre>' . serendipity_specialchars($sql) . '</pre> / ' . serendipity_specialchars(sqlrcur_errorMessage($cur));
         return $msg;
     }
 
     if (!$c) {
         if (!$expectError && !$serendipity['production']) {
-            print '<pre>' . htmlspecialchars($sql) . '</pre> / ' . htmlspecialchars(sqlrcur_errorMessage($cur));
+            print '<pre>' . serendipity_specialchars($sql) . '</pre> / ' . serendipity_specialchars(sqlrcur_errorMessage($cur));
             if (function_exists('debug_backtrace') && $reportErr == true) {
                 highlight_string(var_export(debug_backtrace(), 1));
             }
