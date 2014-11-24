@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -238,7 +238,7 @@ class Serendipity_Import_phpbb extends Serendipity_Import {
                     break;
                 }
             }
-            
+
             /* Comments */
             $topic_id = $entries[$x]['topic_id'];
             $c_res = @$this->nativeQuery("SELECT t.topic_title, 
@@ -259,7 +259,7 @@ class Serendipity_Import_phpbb extends Serendipity_Import {
             if (!$c_res) {
                 return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($gdb));
             }
-    
+
             while ($a = mysql_fetch_assoc($c_res)) {
                 if ($a['post_id'] == $entries[$x]['post_id']) {
                     continue;

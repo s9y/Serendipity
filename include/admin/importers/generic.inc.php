@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -136,35 +136,35 @@ class Serendipity_Import_Generic extends Serendipity_Import {
     function import_wpxrss() {
         // TODO: Backtranscoding to NATIVE charset. Currently only works with UTF-8.
         $dry_run = false;
-        
+
         $serendipity['noautodiscovery'] = 1;
         $uri = $this->data['url'];
         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
         serendipity_request_start();
         $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
         $res = $req->sendRequest();
-        
+
         if (PEAR::isError($res) || $req->getResponseCode() != '200') {
             serendipity_request_end();
             echo '<span class="block_level">' . IMPORT_FAILED . ': ' . serendipity_specialchars($this->data['url']) . '</span>';
             return false;
         }
-        
+
         $fContent = $req->getResponseBody();
         serendipity_request_end();
         echo '<span class="block_level">' . strlen($fContent) . " Bytes</span>";
-        
+
         if (version_compare(PHP_VERSION, '5.0') === -1) {
             echo '<span class="block_level">';
             printf(UNMET_REQUIREMENTS, 'PHP >= 5.0');
             echo "</span>";
             return false;
         }
-        
+
         $xml = simplexml_load_string($fContent);
         unset($fContent);
-        
-        
+
+
         /* ************* USERS **********************/
         $_s9y_users = serendipity_fetchUsers();
         $s9y_users = array();
@@ -214,12 +214,12 @@ class Serendipity_Import_Generic extends Serendipity_Import {
             $wp_items = $item->children($wp_ns);
             $dc_items = $item->children($dc_ns);
             $content_items = $item->children($content_ns);
-            
+
             // TODO: Attachments not handled
             if ((string)$wp_items->post_type == 'attachment' OR (string)$wp_items->post_type == 'page') {
                 continue;
             }
-            
+
             $entry = array(
                 'title'          => (string)$item->title,
                 'isdraft'        => ((string)$wp_items->status == 'publish' ? 'false' : 'true'),
@@ -227,7 +227,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 'categories'     => array(),
                 'body'           => (string)$content_items->encoded
             );
-            
+
             if (preg_match('@^([0-9]{4})\-([0-9]{2})\-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})$@', (string)$wp_items->post_date, $timematch)) {
                 $entry['timestamp'] = mktime($timematch[4], $timematch[5], $timematch[6], $timematch[2], $timematch[3], $timematch[1]);
             } else {
@@ -247,7 +247,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 $cstring = (string)$item->category;
                 $entry['categories'][] = $s9y_cat[$cstring];
             }
-            
+
             $wp_user = (string)$dc_items->creator;
             if (!isset($s9y_users[$wp_user])) {
                 if ($dry_run) {
@@ -261,13 +261,13 @@ class Serendipity_Import_Generic extends Serendipity_Import {
             }
 
             $entry['authorid'] = $s9y_users[$wp_user]['authorid'];
-            
+
             if ($dry_run) {
                 $id = time();
             } else {
                 $id = serendipity_updertEntry($entry);
             }
-            
+
             $s9y_cid = array(); // Holds comment ids to s9y ids association.
             $c_i = 0;
             foreach($wp_items->comment AS $comment) {
@@ -299,7 +299,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 } else {
                     $s9y_comment['timestamp'] = time();
                 }
-                
+
                 if ($dry_run) {
                     $cid = time();
                 } else {
@@ -311,7 +311,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
                 }
                 $s9y_cid[$c_id] = $cid;
             }
-            
+
             echo "<span class='msg_notice'>Entry '" . serendipity_specialchars($entry['title']) . "' ($c_i comments) imported.</span>";
         }
         return true;

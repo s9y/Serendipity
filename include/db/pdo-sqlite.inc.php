@@ -255,7 +255,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     $rows = array();
 
     foreach($serendipity['dbSth']->fetchAll($result_type) AS $row) {
-	$row = serendipity_db_sqlite_fetch_array($row, $result_type);
+    $row = serendipity_db_sqlite_fetch_array($row, $result_type);
         if (!empty($assocKey)) {
             // You can fetch a key-associated array via the two function parameters assocKey and assocVal
             if (empty($assocVal)) {

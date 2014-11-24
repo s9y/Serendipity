@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -59,7 +59,7 @@ if (isset($_POST['SAVE']) && serendipity_checkFormToken()) {
                 }
             }
     }
-    
+
 
     serendipity_rebuildCategoryTree();
     $serendipity['GET']['adminAction'] = 'view';
@@ -128,7 +128,6 @@ if ( $serendipity['GET']['adminAction'] == 'delete' ) {
         foreach ($cats as $cat_data) {
             if ($cat_data['categoryid'] != $serendipity['GET']['cid'] && (serendipity_checkPermission('adminCategoriesMaintainOthers') || $cat_data['authorid'] == '0' || $cat_data['authorid'] == $serendipity['authorid'])) {
                 $data['cats'][] = $cat_data;
-               
             }
         }
     }
@@ -163,7 +162,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
     $data['cid'] = $cid;
     $data['this_cat'] = $this_cat;
     $data['save'] = $save;
-    
+
     $groups = serendipity_getAllGroups();
     $data['groups'] = $groups;
     $data['read_groups'] = $read_groups;
@@ -188,7 +187,7 @@ if ( $serendipity['GET']['adminAction'] == 'edit' || $serendipity['GET']['adminA
     ob_end_clean();
 }
 
-    
+
 
 if ( $serendipity['GET']['adminAction'] == 'view' ) {
     if (empty($admin_category)) {

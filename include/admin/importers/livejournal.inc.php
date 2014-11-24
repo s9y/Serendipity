@@ -1,4 +1,5 @@
-<?php # $Id: generic.inc.php 717 2005-11-21 09:56:25Z garvinhicking $
+<?php
+# $Id: generic.inc.php 717 2005-11-21 09:56:25Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # Copyright (c) 2009, Matthew Weigel
 # All rights reserved.  See LICENSE file for licensing details
@@ -135,7 +136,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
             );
             unset($vals);
         }
-        
+
         return $tree;
     }
 
@@ -204,17 +205,17 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
             printf(FILE_NOT_FOUND, serendipity_specialchars($this->data['url']));
             return false;
         }
-        
+
         $file = file_get_contents($this->data['url']);
         $tree =& $this->parseXML($file);
         $serendipity['noautodiscovery'] = 1;
-        
+
         foreach($tree[0]['children'] AS $idx => $entry) {
             if (!is_array($entry)) continue;
             if ($entry['tag'] != 'entry') {
                 continue;
             }
-            
+
             $new_entry = array(
                 'allow_comments' => true,
                 'extended'       => '',
@@ -222,7 +223,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                 'isdraft'        => ($this->data['type'] == 'draft' ? 'true' : 'false'),
                 'categories'     => array($this->data['category'] => $this->data['category'])
             );
-            
+
             if (!is_array($entry['children'])) continue;
 
             foreach($entry['children'] AS $idx2 => $entrydata) {
@@ -238,11 +239,11 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                     case 'date':
                         $new_entry['timestamp'] = $this->getTimestamp($entrydata['value']);
                         break;
-                    
+
                     case 'subject':
                         $new_entry['title']     = $entrydata['value'];
                         break;
-                    
+
                     case 'event':
                         $new_entry['body']      = $entrydata['value'];
                         break;
@@ -266,7 +267,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
                 }
                 echo '<span class="msg_notice">Inserted comments for entry #' . $id . '</span>';
             }
-            
+
             if (function_exists('ob_flush')) {
                 @ob_flush();
             }

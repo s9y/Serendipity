@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -70,7 +70,7 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         if ($this->data['autodiscovery'] == 'false') {
             $serendipity['noautodiscovery'] = 1;
         }
-        
+
         $this->getTransTable();
 
         $this->data['prefix'] = serendipity_db_escape_string($this->data['prefix']);

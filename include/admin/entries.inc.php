@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -217,7 +217,7 @@ switch($serendipity['GET']['adminAction']) {
         $data['switched_output'] = false;
         $filter_import = array('author', 'category', 'isdraft');
         $sort_import   = array('perPage', 'ordermode', 'order');
-        
+
         foreach($filter_import AS $f_import) {
             serendipity_restoreVar($serendipity['COOKIE']['entrylist_filter_' . $f_import], $serendipity['GET']['filter'][$f_import]);
             $data["get_filter_$f_import"] = $serendipity['GET']['filter'][$f_import];
@@ -341,7 +341,7 @@ switch($serendipity['GET']['adminAction']) {
                 );
 
             }
-            
+
             $data['entries']           = $smartentries;
             $data['urltoken']          = serendipity_setFormToken('url');
             $data['formtoken']         = serendipity_setFormToken();

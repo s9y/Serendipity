@@ -1,4 +1,5 @@
-<?php # $entry['feed_id']: functions_entries.inc.php 435 2005-08-25 12:36:39Z garvinhicking $
+<?php
+# $entry['feed_id']: functions_entries.inc.php 435 2005-08-25 12:36:39Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -40,7 +41,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
     if (is_array($entries)) {
         foreach ($entries as $key => $_entry) {
             $entry = &$entries[$key];
-            
+
             if (isset($entry['entrytimestamp'])) {
                 $e_ts = $entry['entrytimestamp'];
             } else {
@@ -60,7 +61,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                     $entry['author'] .= ' - ' . $entry['ctitle'];
                 }
                 $entry['title'] = (!empty($entry['author']) ? $entry['author'] : ANONYMOUS) . ': ' . $entry['title'];
-                
+
                 // No HTML allowed here:
                 $entry['body'] = strip_tags($entry['body']);
             }
@@ -162,5 +163,5 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
             $entry['per_entry_display_dat'] = $entry['display_dat'];
         }
     }
-    
+
 }

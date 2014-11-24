@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -220,7 +220,7 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Removal of obsolete and dead htmlarea directories',
                      'arguments' => array($dead_htmlarea_dirs),
                      'desc'      => 'Serendipity 2.0 replaces old WYSIWYG-Editors in htmlarea directory with CKEDITOR. The following dead directories will be completely removed from "/htmlarea".<br /><pre>' . implode(', ', $dead_htmlarea_dirs) . '</pre>'),
-                     
+
                array('version'   => '2.0-beta3',
                      'function'  => 'serendipity_upgrader_move_syndication_config',
                      'title'     => 'Export syndication plugin options',
@@ -352,7 +352,7 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
     $showWritableNote = false;
     $basedir = $serendipity['serendipityPath'];
     $data['basedir'] = $basedir;
-    
+
     $data['upgraderResultDiagnose1'] = array();
     if (is_readable($basedir . 'checksums.inc.php')) {
         $data['checksums'] = true;
@@ -400,9 +400,9 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
          $data['upgraderResultDiagnose3'][] = serendipity_upgraderResultDiagnose(S9Y_U_ERROR, NOT_WRITABLE);
          $showWritableNote = true;
     }
-            
+
     $data['upgraderResultDiagnose4'] = array();
-    if (is_dir($basedir . $serendipity['uploadHTTPPath'])) { 
+    if (is_dir($basedir . $serendipity['uploadHTTPPath'])) {
         $data['isdir_uploadpath'] = is_dir($basedir . $serendipity['uploadHTTPPath']);
         if (is_writable($basedir . $serendipity['uploadHTTPPath'])) {
             $data['upgraderResultDiagnose4'][] = serendipity_upgraderResultDiagnose(S9Y_U_SUCCESS, WRITABLE);
@@ -416,7 +416,7 @@ if (($showAbort && $serendipity['GET']['action'] == 'ignore') || $serendipity['G
 
     $data['errorCount'] = $errorCount;
     if ($errorCount < 1) {
-        if (sizeof($sqlfiles) > 0) { 
+        if (sizeof($sqlfiles) > 0) {
             $data['database_update_types'] = sprintf(SERENDIPITY_UPGRADER_DATABASE_UPDATES, $serendipity['dbType']);
             $data['sqlfiles'] = $sqlfiles;
         }

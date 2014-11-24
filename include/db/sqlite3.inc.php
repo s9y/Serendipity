@@ -1,4 +1,5 @@
-<?php # $Id: sqlite.inc.php 1670 2007-04-10 13:23:34Z garvinhicking $
+<?php
+# $Id: sqlite.inc.php 1670 2007-04-10 13:23:34Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -49,7 +50,7 @@ function serendipity_db_connect()
         return $serendipity['dbConn'];
     }
 
-	// SQLite3 doesn't support persistent connections
+    // SQLite3 doesn't support persistent connections
     $serendipity['dbConn'] = sqlite3_open((defined('S9Y_DATA_PATH') ? S9Y_DATA_PATH : $serendipity['serendipityPath']) . $serendipity['dbName'] . '.db');
 
     return $serendipity['dbConn'];

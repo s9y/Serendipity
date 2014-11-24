@@ -1,4 +1,5 @@
-<?php # $Id: functions.inc.php 114 2005-05-22 15:37:11Z garvinhicking $
+<?php
+# $Id: functions.inc.php 114 2005-05-22 15:37:11Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -126,8 +127,8 @@ function p2g($j_y, $j_m, $j_d){
  */
 function persian_strftime_utf($format, $timestamp='') {
 
-	if($timestamp==''){
-    	$timestamp = mktime();
+    if($timestamp==''){
+        $timestamp = mktime();
     }
 
     $g_d=date('j', $timestamp);
@@ -276,10 +277,10 @@ function persian_strftime_utf($format, $timestamp='') {
 function persian_date_utf($format, $timestamp='') {
 
     if($timestamp==''){
-    	$timestamp = mktime();
+        $timestamp = mktime();
     }
 
-	$g_d=date('j', $timestamp);
+    $g_d=date('j', $timestamp);
     $g_m=date('n', $timestamp);
     $g_y=date('Y', $timestamp);
 
@@ -288,8 +289,8 @@ function persian_date_utf($format, $timestamp='') {
     $j_days_in_month = array(0, 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
     $leap = 0;
     if ($g_m>1 && (($g_y%4==0 && $g_y%100!=0) || ($g_y%400==0))){
-    	$j_days_in_month[12]++;
-    	$leap = 1;
+        $j_days_in_month[12]++;
+        $leap = 1;
     }
 
     $j_month_name = array('', 'فروردین', 'اردیبهشت', 'خرداد', 'تیر',
@@ -360,7 +361,7 @@ function persian_date_utf($format, $timestamp='') {
                     $output_str.=$j_days_in_month[$jm];
                     break;
                 case 'L':
-                	$output_str.=$leap;
+                    $output_str.=$leap;
                     break;
                 case 'o':
                 case 'Y':
@@ -444,71 +445,71 @@ function persian_date_utf($format, $timestamp='') {
  * @return  int returned timestamp
  */
 function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', $is_dst=-1){
-	$j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
+    $j_days_in_month = array(31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29);
 
-	if ( (string) $hour == '') { $hour = persian_date_utf('H'); }
-	if ( (string) $min  == '') { $min  = persian_date_utf('i'); }
-	if ( (string) $sec  == '') { $sec  = persian_date_utf('s'); }
-	if ( (string) $day  == '') { $day  = persian_date_utf('j'); }
-	if ( (string) $mon  == '') { $mon  = persian_date_utf('n'); }
-	if ( (string) $year == '') { $year = persian_date_utf('Y'); }
+    if ( (string) $hour == '') { $hour = persian_date_utf('H'); }
+    if ( (string) $min  == '') { $min  = persian_date_utf('i'); }
+    if ( (string) $sec  == '') { $sec  = persian_date_utf('s'); }
+    if ( (string) $day  == '') { $day  = persian_date_utf('j'); }
+    if ( (string) $mon  == '') { $mon  = persian_date_utf('n'); }
+    if ( (string) $year == '') { $year = persian_date_utf('Y'); }
 
-	/*
-	   an ugly, beta code snippet to support days <= zero!
-	   it should work, but days in one or more months should calculate!
-	*/
+    /*
+       an ugly, beta code snippet to support days <= zero!
+       it should work, but days in one or more months should calculate!
+    */
 
-	/*
-	if($day <= 0){
-		// change sign
-		$day = abs($day);
+    /*
+    if($day <= 0){
+        // change sign
+        $day = abs($day);
 
-		// calculate months and days that shall decrease
-		// this do-while has a lot of errors!!!
-		do{
-			// $month_days = $j_days_in_month[$mon]
-			$months  = floor($day/30);
-			$days = $day % 30;
-		}while();
+        // calculate months and days that shall decrease
+        // this do-while has a lot of errors!!!
+        do{
+            // $month_days = $j_days_in_month[$mon]
+            $months  = floor($day/30);
+            $days = $day % 30;
+        }while();
 
-		$mon -= $months;
-		$day -= $days;
-		if ($day < 1) {
-			$mon--;
-		}
-	}
-	*/
+        $mon -= $months;
+        $day -= $days;
+        if ($day < 1) {
+            $mon--;
+        }
+    }
+    */
 
-	if($mon <= 0){
-		// change sign
-		$mon = abs($mon);
+    if($mon <= 0){
+        // change sign
+        $mon = abs($mon);
 
-		// calculate years and months that shall decrease
-		$years  = floor($mon/12);
-		$months = $mon % 12;
+        // calculate years and months that shall decrease
+        $years  = floor($mon/12);
+        $months = $mon % 12;
 
-		$year -= $years;
-		$mon  -= $months;
-		if ($mon < 1) {
-			$year--;
-			$mon += 12;
-		}
-	}
+        $year -= $years;
+        $mon  -= $months;
+        if ($mon < 1) {
+            $year--;
+            $mon += 12;
+        }
+    }
 
-	if ($day < 1) {
-		$temp_month = $mon-1;
-		$temp_year  = $year;
-		if($temp_month <= 0){
-			$temp_month = 12;
-			$temp_year--;
-		}
-		if ($temp_month>1 && (($temp_year%4==0 && $temp_year%100!=0) || ($temp_year%400==0))){
-        	$j_days_in_month[12] = 30;
-    	}else{
-    		$j_days_in_month[12] = 29;
-    	}
-		$day += $j_days_in_month[$temp_month];
-	}
+    if ($day < 1) {
+        $temp_month = $mon-1;
+        $temp_year  = $year;
+        if($temp_month <= 0){
+            $temp_month = 12;
+            $temp_year--;
+        }
+        if ($temp_month>1 && (($temp_year%4==0 && $temp_year%100!=0) || ($temp_year%400==0))){
+            $j_days_in_month[12] = 30;
+        }else{
+            $j_days_in_month[12] = 29;
+        }
+        $day += $j_days_in_month[$temp_month];
+    }
 
     list($year, $mon, $day)=p2g($year, $mon, $day);
     return mktime($hour, $min, $sec, $mon, $day, $year, $is_dst);

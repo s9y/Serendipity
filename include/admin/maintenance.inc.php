@@ -11,7 +11,7 @@ ob_end_clean();
 switch($serendipity['GET']['adminAction']) {
     case 'integrity':
         $data['action'] = "integrity";
-        
+
         if (!is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php') || 0 == filesize(S9Y_INCLUDE_PATH . 'checksums.inc.php') ) {
             $data['noChecksum'] = true;
             break;

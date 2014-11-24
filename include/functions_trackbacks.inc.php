@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -323,7 +323,7 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
 
     // Decode HTML Entities
     $excerpt = trackback_body_strip($excerpt);
-    
+
     $comment = array(
         'title'   => $title,
         'url'     => $url,
@@ -390,7 +390,7 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
 function add_pingback ($id, $postdata) {
     global $serendipity;
     log_pingback("Reached add_pingback. ID:[$id]");
-    
+
     // XML-RPC Method call without named parameter. This seems to be the default way using XML-RPC
     if(preg_match('@<methodCall>\s*<methodName>\s*pingback.ping\s*</methodName>\s*<params>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*<param>\s*<value>\s*<string>([^<]*)</string>\s*</value>\s*</param>\s*</params>\s*</methodCall>@is', $postdata, $matches)) {
         log_pingback("Pingback wp structure.");
@@ -410,7 +410,7 @@ function add_pingback ($id, $postdata) {
             $id = evaluateIdByLocalUrl($local);
             log_pingback("ID set to $id");
         }
-        
+
         if ($id>0) {
             // first check, if we already have this pingback
             $comments = serendipity_fetchComments($id,1,'co.id',true,'PINGBACK'," AND co.url='" . serendipity_db_escape_string($remote) . "'");
@@ -458,7 +458,7 @@ function add_pingback ($id, $postdata) {
 
 function evaluateIdByLocalUrl($localUrl) {
     global $serendipity;
-    
+
     // Build an ID searchpattern in configured permaling structure:
     $permalink_article = $serendipity['permalinkStructure'];
     log_pingback("perma: $permalink_article");
@@ -467,7 +467,7 @@ function evaluateIdByLocalUrl($localUrl) {
     $permalink_article = str_replace('?','\?',$permalink_article);
     $permalink_article = str_replace('%id%','(\d+)',$permalink_article);
     $permalink_article = str_replace('%title%','[^/]*',$permalink_article);
-    $permalink_article_regex = '@' . $permalink_article . '$@'; 
+    $permalink_article_regex = '@' . $permalink_article . '$@';
     log_pingback("regex: $permalink_article_regex");
 
     if (preg_match($permalink_article_regex, $localUrl, $matches)) {
@@ -499,17 +499,17 @@ function getPingbackParam($paramName, $data) {
  */
 function fetchPingbackData( &$comment) {
     global $serendipity;
-    
+
     // Don't fetch remote page, if not explicitly allowed in serendipity_config_local.php:
     if (empty($serendipity['pingbackFetchPage'])) {
         return;
     }
-    
+
     // If we don't have a comment or a commentors url, stop it.
     if (!isset($comment) || !is_array($comment) || !isset($comment['url'])) {
         return;
     }
-    
+
     // Max amount of characters fetched from the page doing a pingback:
     $fetchPageMaxLength = 200;
     if (isset($serendipity['pingbackFetchPageMaxLength'])){
@@ -517,9 +517,9 @@ function fetchPingbackData( &$comment) {
     }
     require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
     $url = $comment['url'];
-    
+
     if (function_exists('serendipity_request_start')) serendipity_request_start();
-    
+
     // Request the page
     $req = new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
 
@@ -527,7 +527,7 @@ function fetchPingbackData( &$comment) {
     $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
     if ((PEAR::isError($req->sendRequest()) || preg_match($responses, $req->getResponseCode()))) {
         // nothing to do,
-    } 
+    }
     else {
         $fContent = $req->getResponseBody();
 
@@ -535,7 +535,7 @@ function fetchPingbackData( &$comment) {
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
             $comment['title'] = serendipity_entity_decode(strip_tags($matches[1]), ENT_COMPAT, LANG_CHARSET);
         }
-        
+
         // Try to get content from first <p> tag on:
         if (preg_match('@<p[^>]*>(.*?)</body>@is',$fContent,$matches)) {
             $body = $matches[1];
@@ -554,24 +554,24 @@ function fetchPingbackData( &$comment) {
             $comment['comment'] = $body . '[..]';
         }
     }
-    
+
     if (function_exists('serendipity_request_end')) serendipity_request_end();
-    
+
 }
 
 /**
  * Strips any unneeded code from trackback / pingback bodies returning pure (UTF8) text.
  */
 function trackback_body_strip( $body ){
-    // replace non brakeable space with normal space:            
+    // replace non brakeable space with normal space:
     $body = str_replace('&nbsp;', ' ', $body);
 
     // strip html entities and tags.
     $body = serendipity_entity_decode(strip_tags($body), ENT_COMPAT, LANG_CHARSET);
 
-    // replace whitespace with single space            
+    // replace whitespace with single space
     $body = preg_replace('@\s+@s', ' ', $body);
-    
+
     return $body;
 }
 
@@ -759,7 +759,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
         if (is_string($row)) {
             if (is_object($serendipity['logger'])) $serendipity['logger']->debug($row);
         }
-        
+
         $names[$i] = strip_tags($names[$i]);
         if (empty($names[$i])) {
             if (is_object($serendipity['logger'])) $serendipity['logger']->debug("Found reference $locations[$i] w/o name. Adding location as name");

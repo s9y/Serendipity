@@ -1,8 +1,9 @@
-<?php # $Id: voodoopad.inc.php 1 2005-04-16 06:39:31Z timputnam $
+<?php
+# $Id: voodoopad.inc.php 1 2005-04-16 06:39:31Z timputnam $
 # Copyright (c) 2003-2005, Tim Putnam
 
 /*****************************************************************
- *                VoodooPad Importer, by Tim Putnam 
+ *                VoodooPad Importer, by Tim Putnam
  *               http://deepbluesea.fracsoft.com  *
  *****************************************************************/
 
@@ -39,7 +40,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
     var $data        = array();
     var $inputFields = array();
     var $force_recode = false;
-    
+
     function Serendipity_Import_VoodooPad($data) {
         $this->data = $data;
         $this->inputFields = array(
@@ -89,7 +90,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         $file =  $_FILES['serendipity']['tmp_name']['import']['voodooPadXML'];
 
         // Create a parser and set it up with the callbacks
-        $xml_parser = xml_parser_create(''); 
+        $xml_parser = xml_parser_create('');
         xml_parser_set_option($xml_parser, XML_OPTION_CASE_FOLDING, 0);
         xml_set_element_handler($xml_parser, "start_element_handler", "end_element_handler");
         xml_set_character_data_handler($xml_parser, "character_data_handler");
@@ -98,7 +99,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         if (!file_exists($file)) {
             die(sprintf(DOCUMENT_NOT_FOUND, serendipity_specialchars($file)));
         }
-                       
+
         if(!($handle = fopen($file, "r"))) {
             die(sprintf(SKIPPING_FILE_UNREADABLE, serendipity_specialchars($file)));
         }
@@ -117,7 +118,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         // so loop through building and/or updating page objects
         while(list($key_a) = each($elements)) {
             $name = $elements[$key_a]->name;
-                         
+
             switch ($name) {
                 case 'data': // <data> indicates the start of the VoodooPad entry, so create page object
                     $thispage = array();
@@ -138,10 +139,10 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
                               $thispage['timestamp'] = time();
                         }
                     }
-    
+
                     $thispage['filename']  = $mykey.'.htm';
                     // Thanks for pointing this out to me and not just fixing it, I'm learning.
-		    $thispage['permalink'] = $serendipity['serendipityHTTPPath'] . 'index.php?serendipity[subpage]=' . $mykey;
+                    $thispage['permalink'] = $serendipity['serendipityHTTPPath'] . 'index.php?serendipity[subpage]=' . $mykey;
                     break;
 
                 case 'alias': // The title and the string used to match links
@@ -162,7 +163,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
                         if (!isset($thispage['id'])) {
                             echo '<span class="block_level">'.IMPORTER_VOODOO_CREATINGPAGE.': '. $mykey.'</span>';
                             serendipity_db_insert('staticpages', $thispage);
-                            $serendipity["POST"]["staticpage"] = serendipity_db_insert_id("staticpages", 'id'); 
+                            $serendipity["POST"]["staticpage"] = serendipity_db_insert_id("staticpages", 'id');
                         } elseif ($this->data['updateExisting'] == 'true') {
                             echo '<span class="block_level">'.IMPORTER_VOODOO_UPDATINGPAGE.': '. $mykey.'</span>';
                             serendipity_db_update("staticpages", array("id" => $thispage["id"]), $thispage);
@@ -174,7 +175,7 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
                         echo '<span class="block_level">'.IMPORTER_VOODOO_RECORDURL.': '.$thispage['headline'].'</span>';
                         $aliases[$thispage['headline']] = $thispage['content'];
                     }
-                    break;                      
+                    break;
             }
         }
 
@@ -192,9 +193,9 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
 
         // **TODO** Change this to pull out only entries for the current wiki
         echo '<p>'.IMPORTER_VOODOO_WRITEINTRALINKS.'</p>';
-                       
-        $pages= &serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}staticpages  ORDER BY pagetitle DESC"); 
-          
+
+        $pages= &serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}staticpages  ORDER BY pagetitle DESC");
+
         foreach ($pages as $thispage) {
             // Parse the content string
             foreach ($aliases as $alias => $permalink) {
@@ -204,13 +205,13 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
             for ($counter = 0; $counter <= 12; $counter+=1) {
                 unset ($thispage[$counter]);
             }
-       
+
             // Write back to the database
             serendipity_db_update("staticpages", array("id" => $thispage["id"]), $thispage);
         }
-        
+
         echo '<span class="msg_success">' . DONE . '</span>';
-    } 
+    }
 
     // Search and replace avoiding content of links
     // **TODO** Fix this to avoid short links screwing up longer links
@@ -219,16 +220,16 @@ class Serendipity_Import_VoodooPad extends Serendipity_Import {
         $ns = '';
         for ($i = 0; $i < count($r); $i++) {
             if ($r[$i] == "<") {
-                $i+=2; 
+                $i+=2;
                 continue;
             }
             $r[$i] = eregi_replace(sql_regcase($alias), '<a href="'.$link.'">'.$alias.'</a>', $r[$i]);
         }
 
         return join("", $r);
-    }  
+    }
 }
-            
+
 // XML Parser callbacks
 function start_element_handler($parser, $name, $attribs){
     global $elements, $stack, $count, $depth;
@@ -237,29 +238,29 @@ function start_element_handler($parser, $name, $attribs){
     $element = new element;
     $elements[$id] = $element;
     $elements[$id]->name = $name;
-   
+
     while(list($key, $value) = each($attribs)) {
         $elements[$id]->attributes[$key] = $value;
     }
-   
+
    $elements[$id]->depth = $depth;
    array_push($stack, $id);
-       
+
    $count++;
    $depth++;
 }
 
 function end_element_handler($parser, $name){
    global $stack, $depth;
-   
+
    array_pop($stack);
-   
+
    $depth--;
 }
 
 function character_data_handler($parser, $data){
    global $elements, $stack;
-   
+
    $elements[$stack[count($stack)-1]]->data .= $data;
 }
 

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -133,13 +133,13 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
                       'parent_id' => $serendipity['GET']['id']
             );
         }
-        
+
         $target_url = '?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=doReply&amp;serendipity[id]=' . (int)$serendipity['GET']['id'] . '&amp;serendipity[entry_id]=' . (int)$serendipity['GET']['entry_id'] . '&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;' . serendipity_setFormToken('url');
         $codata       = $serendipity['POST'];
         $codata['replyTo'] = (int)$serendipity['GET']['id'];
         $out        = serendipity_printComments($c);
         $serendipity['smarty']->display(serendipity_getTemplateFile('comments.tpl', 'serendipityPath'));
-        
+
         if (!isset($codata['name'])) {
             $codata['name']  = $serendipity['serendipityRealname'];
         }
@@ -158,7 +158,7 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
             $codata['url']        = $comment[0]['url'];
             $codata['replyTo']    = $comment[0]['parent_id'];
             $codata['comment']    = $comment[0]['body'];
-    
+
         /* If we are in preview, we get comment data from our form */
         } elseif (isset($serendipity['POST']['preview'])) {
             $codata['name']       = $serendipity['POST']['name'];
@@ -175,7 +175,7 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
                       'timestamp' => time()
                     )
                   );
-    
+
             serendipity_printComments($pc_data);
             $serendipity['smarty']->display(serendipity_getTemplateFile('comments.tpl', 'serendipityPath'));
         }
@@ -185,7 +185,7 @@ if (isset($serendipity['GET']['adminAction']) && ($serendipity['GET']['adminActi
          substr($codata['url'], 0, 8) != 'https://') {
          $codata['url'] = 'http://' . $codata['url'];
     }
-                                
+
     serendipity_displayCommentForm(
       $serendipity['GET']['entry_id'],
       $target_url,
@@ -279,10 +279,10 @@ $sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}
                                 WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and 
                                 . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . " 
                                 ORDER BY c.id DESC $limit");
-                                
+
 ob_start();
 # This event has to get send here so the spamblock-plugin can block an author now and the comment_page show that on this pageload
-serendipity_plugin_api::hook_event('backend_comments_top', $sql);   
+serendipity_plugin_api::hook_event('backend_comments_top', $sql);
 $data['backend_comments_top'] = ob_get_contents();
 ob_end_clean();
 
@@ -300,7 +300,7 @@ $data['c_type']          = $c_type;
 $i = 0;
 $comments = array();
 
-if(is_array($sql)) { 
+if(is_array($sql)) {
     foreach ($sql as $rs) {
         $i++;
         $comment = array(
@@ -342,10 +342,10 @@ if(is_array($sql)) {
         $class = 'serendipity_admin_list_item_' . (($i % 2 == 0 ) ? 'even' : 'uneven');
 
         if ($comment['status'] == 'pending') {
-            $class .= ' serendipity_admin_comment_pending'; 
+            $class .= ' serendipity_admin_comment_pending';
             $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header';
         } elseif (strstr($comment['status'], 'confirm')) {
-            $class .= ' serendipity_admin_comment_pending serendipity_admin_comment_confirm'; 
+            $class .= ' serendipity_admin_comment_pending serendipity_admin_comment_confirm';
             $header_class = 'serendipityAdminMsgNote serendipity_admin_comment_pending_header serendipity_admin_comment_confirm_header';
         } else {
             $header_class = '';

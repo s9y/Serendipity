@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -190,7 +190,7 @@ if ($serendipity['GET']['adminAction'] != 'delete') {
             $data['users'][$user]['userlevel_name'] = $serendipity['permissionLevels'][$userdata['userlevel']];
         }
     }
-       
+
     if ( ! (isset($_POST['NEW']) || $serendipity['GET']['adminAction'] == 'new') && serendipity_checkPermission('adminUsersCreateNew')) {
         $data['new'] = true;
     }
@@ -201,7 +201,7 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
     $data['adminAction'] = $serendipity['GET']['adminAction'];
     $data['show_form'] = true;
     $data['formToken'] = serendipity_setFormToken();
-    
+
     if ($serendipity['GET']['adminAction'] == 'edit') {
         $user = serendipity_fetchUsers($serendipity['GET']['userid']);
         $group_intersect = serendipity_intersectGroup($user[0]['authorid']);
@@ -214,7 +214,7 @@ if ( ($serendipity['GET']['adminAction'] == 'edit' && serendipity_checkPermissio
             $from = &$user[0];
             unset($from['password']);
         } else {
-            
+
             $from = array();
         }
     } else {

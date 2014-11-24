@@ -127,7 +127,7 @@
                                           'default'     => true,
                                           'permission'  => 'personalConfigurationRightPublish',
                                           'view'        => 'dangerous'),
-                                          
+
                                     array('var'         => 'simpleFilters',
                                           'title'       => SIMPLE_FILTERS,
                                           'description' => SIMPLE_FILTERS_DESC,

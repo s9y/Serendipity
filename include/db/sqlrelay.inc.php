@@ -1,5 +1,5 @@
 <?php
-# mysql_sqlrelay.inc.php modified from mysql.inc.php  2007-10-06 
+# mysql_sqlrelay.inc.php modified from mysql.inc.php  2007-10-06
 # dantemason@gmail.com
 
 /**
@@ -149,7 +149,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
         $cur = sqlrcur_alloc($serendipity['dbConn']);
         $sql_b="INSERT INTO BLOGLOG (request, timestamp, sql, exec_time, ip) VALUES ('" . serendipity_db_escape_string($_SERVER['REQUEST_URI']) . "', NOW(), '" . serendipity_db_escape_string($sql) . "', '" . (number_format($end-$start, 10)) . "', '" . serendipity_db_escape_string($_SERVER['REMOTE_ADDR']) . "')";
         $c = sqlrcur_sendQuery($cur, $sql_b);
-        
+
         $psql = $sql;
         $psql = preg_replace('@[0-9]{10}@', 'TIMESTAMP', $psql);
         $sql_U="UPDATE BLOGLOG_TOTAL SET counter = counter + 1 WHERE sql = '" . serendipity_db_escape_string($psql) . "'";
@@ -205,7 +205,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
 
             $row=generate_resultset($cur);
             $rows=array();
-            
+
             for($idx=0, $idxc = count($row); $idx < $idxc ; $idx++) {
                 if (!empty($assocKey)) {
                     // You can fetch a key-associated array via the two function parameters assocKey and assocVal
@@ -218,7 +218,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
                     $rows = $row;
                 }
             }
-             
+
             return $rows;
 
     }
@@ -230,7 +230,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
  * @access public
  * @return int      Value of the auto-increment column
  *
- * If you insert multiple rows using a single INSERT statement, 
+ * If you insert multiple rows using a single INSERT statement,
  * LAST_INSERT_ID() returns the value generated for the first inserted row only.
  */
 function serendipity_db_insert_id($table = '', $id = '') {
@@ -267,11 +267,11 @@ function serendipity_db_insert_id($table = '', $id = '') {
  */
 function serendipity_db_affected_rows() {
     global $serendipity;
-    
+
     /* int sqlrcur_affectedRows(int sqlrcurref)
-     * Returns the number of rows that were updated, inserted or deleted by the query. 
-     * Not all databases support this call. 
-     * Don't use it for applications which are designed to be portable across databases. 
+     * Returns the number of rows that were updated, inserted or deleted by the query.
+     * Not all databases support this call.
+     * Don't use it for applications which are designed to be portable across databases.
      * -1 is returned by databases which don't support this option.
      */
 
@@ -459,7 +459,7 @@ function serendipity_db_schema_import($query) {
             static $replace = array('int(11) not null auto_increment', 'primary key',
                 'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
             static $is_utf8 = null;
-    
+
             if ($is_utf8 === null) {
                 $search[] = '{UTF_8}';
                 if ((isset($_POST['charset']) && $_POST['charset'] == 'UTF-8/') ||
@@ -476,10 +476,10 @@ function serendipity_db_schema_import($query) {
         case "postgresql":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}',
                 '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', 'int(1)', 'int(10)', 'int(11)', 'int(4)', '{UTF_8}', '{TEXT}');
-            static $replace = array('SERIAL', 'primary key', '', 
+            static $replace = array('SERIAL', 'primary key', '',
                 '', '', 'BOOLEAN NOT NULL', 'int2', 'int4', 'int4', 'int4', '', 'text');
             break;
-    
+
         case "sqlite":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
             static $replace = array('INTEGER', 'PRIMARY KEY', '', '', '', 'BOOLEAN NOT NULL', '', 'LONGTEXT');

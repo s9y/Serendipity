@@ -1,4 +1,5 @@
-<?php # $Id: sqlite.inc.php 1670 2007-04-10 13:23:34Z garvinhicking $
+<?php
+# $Id: sqlite.inc.php 1670 2007-04-10 13:23:34Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -49,7 +50,7 @@ function serendipity_db_connect()
         return $serendipity['dbConn'];
     }
 
-	// SQLite3 doesn't support persistent connections
+    // SQLite3 doesn't support persistent connections
     $serendipity['dbConn'] = new SQLite3((defined('S9Y_DATA_PATH') ? S9Y_DATA_PATH : $serendipity['serendipityPath']) . $serendipity['dbName'] . '.db');
 
     return $serendipity['dbConn'];
@@ -148,7 +149,7 @@ function serendipity_db_sqlite_fetch_array($res, $type = SQLITE3_BOTH)
         $row = false;
         echo "SQLITE-EXCEPTION: " . $e->getMessage() . "\n";
     }
-        
+
     if (!is_array($row)) {
         return $row;
     }
@@ -307,7 +308,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
             return $type_map['false'];
         return $type_map['true'];
     }
-    
+
     return $rows;
 }
 
@@ -337,7 +338,7 @@ function serendipity_db_probe($hash, &$errs)
         $dbfile = $serendipity['serendipityPath'] . $dbName . '.db';
     }
 
-   
+
     $serendipity['dbConn'] = new SQLite3($dbfile);
 
     if ($serendipity['dbConn']) {

@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -50,7 +50,7 @@ if ( $serendipity['GET']['adminAction'] != 'delete' ) {
     if ( ! (isset($_POST['NEW']) || $serendipity['GET']['adminAction'] == 'new') ) {
         $data['start'] = true;
     }
-    $data['deleteFormToken'] = serendipity_setFormToken('url'); 
+    $data['deleteFormToken'] = serendipity_setFormToken('url');
 }
 
 if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $serendipity['GET']['adminAction'] == 'new') {
@@ -60,7 +60,7 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
         $data['edit'] = true;
     }
     $data['formToken'] = serendipity_setFormToken();
-    
+
     if ($serendipity['GET']['adminAction'] == 'edit') {
         $group = serendipity_fetchGroup($serendipity['GET']['group']);
         $from = &$group;
@@ -109,7 +109,7 @@ if ($serendipity['GET']['adminAction'] == 'edit' || isset($_POST['NEW']) || $ser
             $data['allplugins'][$plugid]['has_permission'] = serendipity_hasPluginPermissions($plugid, $from['id']);
         }
         ksort($allhooks);
-        
+
         $data['allhooks'] = $allhooks;
         foreach($allhooks AS $hook => $set) {
             $data['allhooks'][$hook]['has_permission'] = serendipity_hasPluginPermissions($hook, $from['id']);

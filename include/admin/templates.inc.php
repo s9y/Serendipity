@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -27,11 +27,11 @@ class template_option {
 
     function set_config($item, $value) {
         global $serendipity;
-        
+
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                                     WHERE okey = 't_" . serendipity_db_escape_string($serendipity['template']) . "'
                                       AND name = '" . serendipity_db_escape_string($item) . "'");
-                                                                                    
+
         if ($this->config[$item]['scope'] == 'global') {
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
                                    WHERE okey = 't_global'
@@ -79,7 +79,7 @@ if ($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['admi
     } else {
         // template_engine was set by default to default, which screws up the fallback chain (to the default-template first)
         // The "Engine" now only applies to FRONTEND themes. Backend themes will always fall back to our default backend theme only, to ensure proper backend operation.
-        serendipity_set_config_var('template_engine', null);   
+        serendipity_set_config_var('template_engine', null);
         if ($themeInfo['engine']) {
             serendipity_set_config_var('template_engine', $themeInfo['engine']);
         }
@@ -140,7 +140,7 @@ if (is_array($template_config)) {
     include_once S9Y_INCLUDE_PATH . 'include/functions_plugins_admin.inc.php';
 
     $template_vars =& serendipity_loadThemeOptions($template_config);
-    
+
     $template_options = new template_option();
     $template_options->import($template_config);
     $template_options->values =& $template_vars;
@@ -158,7 +158,7 @@ if (is_array($template_config)) {
         'template',
         $template_config_groups
     );
-    
+
     serendipity_plugin_api::hook_event('backend_templates_configuration_bottom', $template_config);
 } else {
     serendipity_plugin_api::hook_event('backend_templates_configuration_none', $template_config);

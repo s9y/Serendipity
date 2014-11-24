@@ -1,4 +1,4 @@
-<?php #
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -361,7 +361,7 @@
                                           'description' => COMMENT_TOKENS_DESC,
                                           'type'        => 'bool',
                                           'default'     => false,
-                                          'permission'  => 'blogConfiguration'), 
+                                          'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'lang',
                                           'title'       => INSTALL_LANG,
@@ -400,14 +400,14 @@
                                           'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'updateCheck',
-                                          'title'       => UPDATE_NOTIFICATION,  
+                                          'title'       => UPDATE_NOTIFICATION,
                                           'description' => UPDATE_NOTIFICATION_DESC,
                                           'type'        => 'list',
                                           'default'     => array('stable' => UPDATE_STABLE, 'beta' => UPDATE_BETA, 'false' => NO),
                                           'permission'  => 'blogConfiguration'),
 
                                     array('var'         => 'logLevel',
-                                          'title'       => LOG_LEVEL,  
+                                          'title'       => LOG_LEVEL,
                                           'description' => LOG_LEVEL_DESC,
                                           'type'        => 'list',
                                           'default'     => array('Off' => NO, 'error' => ERROR, 'debug' => DEBUG),
@@ -512,7 +512,7 @@
                                        'permission'    =>   'blogConfiguration'
                                        );
     }
-    
+
     array_push( $res['display']['items'],
                                     array('var'         => 'serverOffsetHours',
                                           'title'       => INSTALL_OFFSET,
@@ -547,7 +547,7 @@
                                           'type'        => 'list',
                                           'default'     => array(false => NO, true => YES, 'client' => 'Client'),
                                           'permission'  => 'siteConfiguration'),
-                                        
+
                                     array('var'         => 'feedBannerURL',
                                           'title'       => SYNDICATION_PLUGIN_BANNERURL,
                                           'description' => SYNDICATION_PLUGIN_BANNERURL_DESC,
@@ -561,7 +561,7 @@
                                           'type'        => 'string',
                                           'default'     => '',
                                           'permission'  => 'blogConfiguration'),
-                                          
+
                                     array('var'         => 'feedBannerHeight',
                                           'title'       => SYNDICATION_PLUGIN_BANNERHEIGHT,
                                           'description' => SYNDICATION_PLUGIN_BANNERHEIGHT_DESC,
@@ -575,7 +575,7 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'permission'  => 'blogConfiguration'),
-                                          
+
                                     array ('var'        => 'feedManagingEditor',
                                           'title'       => SYNDICATION_PLUGIN_MANAGINGEDITOR,
                                           'description' => SYNDICATION_PLUGIN_MANAGINGEDITOR_DESC,
@@ -682,7 +682,7 @@
                                           'default'     => ''),
 
                                     array('var'         => 'uploadResize',
-                                          'title'       => MEDIA_UPLOAD_RESIZE, 
+                                          'title'       => MEDIA_UPLOAD_RESIZE,
                                           'description' => MEDIA_UPLOAD_RESIZE_DESC,
                                           'type'        => 'bool',
                                           'permission'  => 'siteConfiguration',

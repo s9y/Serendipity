@@ -1,4 +1,5 @@
-<?php # $Id: functions.inc.php 85 2005-05-10 10:11:05Z garvinhicking $
+<?php
+# $Id: functions.inc.php 85 2005-05-10 10:11:05Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -132,7 +133,7 @@ function serendipity_makeFilename($str, $stripDots = false) {
 
         // Nuke chars not allowed in our URI
         $str = preg_replace('#[^' . PAT_FILENAME . ']#i', '', $str);
-    }    
+    }
 
     // Check if dots are allowed
     if ($stripDots) {
@@ -560,7 +561,7 @@ function serendipity_makePermalink($format, $data, $type = 'entry') {
                         $parent_path[] = serendipity_makeFilename($parent['category_name'], true);
                     }
                 }
-            }            
+            }
 
             $replacements =
                 array(

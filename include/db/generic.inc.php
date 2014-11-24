@@ -76,7 +76,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
         $resultArray = $result->toArray();
         $resultArray = $resultArray[0];
         if(is_array($resultArray) && $result_type != "assoc") {
-            $i=0;       # the underlying code expects additional numerical indices 
+            $i=0;       # the underlying code expects additional numerical indices
             foreach ($resultArray as $key=>$value) {
                 $resultArray[$i] = $value;
                 $i+=1;
@@ -89,7 +89,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
             if (count($resultArray) == 0) {
                 return 1;
             }
-        } 
+        }
     }
     return $resultArray;
 }
@@ -216,14 +216,14 @@ function serendipity_db_connect() {
     if ($serendipity['dbType'] == "pdo-sqlite" || $serendipity['dbType']  == "sqlite3" || $serendipity['dbType'] == 'sqlite3oo' || $serendipity['dbType'] == "sqlite") {
         $dbName .= ".db";   # the old sqlite-wrapper appended this .db to the dbName, keep this for bc
     }
-    
+
     $serendipity['dbConn'] = new Adapter(
         array(
             'driver' => $serendipity['dbType'],
             'database' => $dbName,
             'username' => $serendipity['dbUser'],
             'password' => $serendipity['dbPass'],
-            'hostname' => $hash['dbHost'] 
+            'hostname' => $hash['dbHost']
         )
     );
 
@@ -252,7 +252,7 @@ function serendipity_db_schema_import($query) {
             static $replace = array('int(11) not null auto_increment', 'primary key',
                 'unsigned'  , 'FULLTEXT', 'FULLTEXT', 'enum (\'true\', \'false\') NOT NULL default \'true\'', 'LONGTEXT');
             static $is_utf8 = null;
-    
+
             if ($is_utf8 === null) {
                 $search[] = '{UTF_8}';
                 if ((isset($_POST['charset']) && $_POST['charset'] == 'UTF-8/') ||
@@ -270,7 +270,7 @@ function serendipity_db_schema_import($query) {
         case "postgresql":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}',
                 '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', 'int(1)', 'int(10)', 'int(11)', 'int(4)', '{UTF_8}', '{TEXT}');
-            static $replace = array('SERIAL', 'primary key', '', 
+            static $replace = array('SERIAL', 'primary key', '',
                 '', '', 'BOOLEAN NOT NULL', 'int2', 'int4', 'int4', 'int4', '', 'text');
             break;
 
@@ -300,7 +300,7 @@ function serendipity_db_probe($hash, &$errs) {
     if ($hash['dbType'] == "pdo-sqlite" || $hash['dbType']  == "sqlite3" || $hash['dbType'] == "sqlite" || $hash['dbType'] == 'sqlite3oo') {
         $dbName .= ".db";   # the old sqlite-wrapper appended this .db to the dbName, keep this for bc
     }
-    
+
     $hash['dbConn'] = new Adapter(
         array(
             'driver' => $hash['dbType'],
@@ -313,7 +313,7 @@ function serendipity_db_probe($hash, &$errs) {
 
     try {
         $hash['dbConn']->getDriver()->getConnection();
-    }  catch( Exception $e ) { 
+    }  catch( Exception $e ) {
         $errs[] = ($e->getMessage());
     }
 }
@@ -336,7 +336,7 @@ function serendipity_db_concat($string) {
             return 'concat(' . $string . ')';
             break;
     }
-        
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

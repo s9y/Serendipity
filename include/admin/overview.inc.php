@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -30,7 +30,7 @@ switch($serendipity['POST']['adminAction']) {
         serendipity_set_config_var('updateCheck', false);
         break;
 }
-    
+
 
 $user = serendipity_fetchAuthor($serendipity['authorid']);
 // chrome-compatible, from Oliver Gassner, adapted from TextPattern. Hi guys, keep it up. :-)
@@ -57,10 +57,10 @@ $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPref
 if (count($comments) > 1) {
     foreach ($comments as &$comment) {
         $comment['entrylink'] = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
-        
+
         $comment['fullBody']  = $comment['body'];
         $comment['summary']   = serendipity_mb('substr', $comment['body'], 0, 100);
-        
+
         if (strlen($comment['fullBody']) > strlen($comment['summary']) ) {
             $comment['excerpt'] = true;
 
@@ -93,7 +93,7 @@ if ($entriesAmount < 5) {
                      true,
                      false,
                      'timestamp DESC',
-                     "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour() 
+                     "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour()
                    );
     if (is_array($entries) && is_array($drafts)) {
         $entries = array_merge($entries, $drafts);

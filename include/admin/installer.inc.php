@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -101,15 +101,15 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
     $data['s9yversion'] = $serendipity['version'];
 
     $errorCount = 0;
-    
+
     if (is_readable(S9Y_INCLUDE_PATH . 'checksums.inc.php')) {
         $badsums = serendipity_verifyFTPChecksums();
         if (empty($badsums)) {
             $data['installerResultDiagnose_CHECKSUMS'][] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, CHECKSUMS_PASS);
-        } else { 
+        } else {
             foreach ($badsums as $file => $sum) {
                 $data['installerResultDiagnose_CHECKSUMS'][] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, sprintf(CHECKSUM_FAILED, $file));
-            } 
+            }
         }
     } else {
         $data['installerResultDiagnose_CHECKSUMS'][] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, CHECKSUMS_NOT_FOUND);
@@ -274,7 +274,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         $data['installerResultDiagnose_PLUGINS'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NOT_WRITABLE . NOT_WRITABLE_SPARTACUS);
     }
 
-    if ( is_dir($basedir .'uploads/') ) { 
+    if ( is_dir($basedir .'uploads/') ) {
         $data['is_dir_uploads'] = true;
         if ( is_writable($basedir . 'uploads/') ) {
             $data['installerResultDiagnose_UPLOADS'] =  serendipity_installerResultDiagnose(S9Y_I_SUCCESS, WRITABLE);
@@ -289,7 +289,7 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         }
     }
 
-    if (function_exists('is_executable')) { 
+    if (function_exists('is_executable')) {
         $data['is_imb_executable'] = true;
         if ($binary = serendipity_query_default('convert', false)) {
             if (is_executable($binary)) {
@@ -300,29 +300,29 @@ if ( (int)$serendipity['GET']['step'] == 0 ) {
         } else {
             $data['installerResultDiagnose_IMB'] =  serendipity_installerResultDiagnose(S9Y_I_WARNING, NOT_FOUND);
         }
-    } 
+    }
 
     $data['showWritableNote'] = $showWritableNote;
     $data['errorCount'] = $errorCount;
 
-} elseif ( $serendipity['GET']['step'] == '2a' ) { 
+} elseif ( $serendipity['GET']['step'] == '2a' ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE, null, array('simpleInstall'));
-    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);     
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);
 
-} elseif ( $serendipity['GET']['step'] == '2b' ) { 
+} elseif ( $serendipity['GET']['step'] == '2b' ) {
     $config = serendipity_parseTemplate(S9Y_CONFIG_TEMPLATE);
-    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);   
+    $data['ob_serendipity_printConfigTemplate'] = serendipity_printConfigTemplate($config, $from, true, false, false);
 
 } elseif ( $serendipity['GET']['step'] == '3' ) {
     $serendipity['dbPrefix'] = $_POST['dbPrefix'];
 
     $t = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}authors", false, 'both', false, false, false, true);
     $data['authors_query'] = $t;
-    
+
     if ( is_array($t) ) {
         // void
     } else {
-        serendipity_installDatabase(); 
+        serendipity_installDatabase();
         $data['install_DB'] = true;
 
         $authorid = serendipity_addAuthor($_POST['user'], $_POST['pass'], $_POST['realname'], $_POST['email'], USERLEVEL_ADMIN, 1);

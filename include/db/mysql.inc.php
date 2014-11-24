@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -86,7 +86,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
     if ($benchmark) {
         $end = microtime_float();
         mysql_query("INSERT INTO BLOGLOG (request, timestamp, sql, exec_time, ip) VALUES ('" . serendipity_db_escape_string($_SERVER['REQUEST_URI']) . "', NOW(), '" . serendipity_db_escape_string($sql) . "', '" . (number_format($end-$start, 10)) . "', '" . serendipity_db_escape_string($_SERVER['REMOTE_ADDR']) . "')");
-        
+
         $psql = $sql;
         $psql = preg_replace('@[0-9]{10}@', 'TIMESTAMP', $psql);
         mysql_query("UPDATE BLOGLOG_TOTAL SET counter = counter + 1 WHERE sql = '" . serendipity_db_escape_string($psql) . "'");

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -25,9 +25,9 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
     } elseif (  (!empty($_POST['password'])
                     &&
                 !empty($_POST['check_password'])
-                    && 
+                    &&
                 $_POST['check_password'] != $_SESSION['serendipityPassword']
-                    && 
+                    &&
                 serendipity_passwordhash($_POST['check_password']) != $_SESSION['serendipityPassword'])
                 ||
                 (!empty($_POST['password'])
@@ -52,7 +52,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
                         if (!is_array($_POST[$item['var']])) {
                             continue;
                         }
-                                                                           
+
                         // Check that no user may assign groups he's not allowed to.
                         foreach($_POST[$item['var']] AS $groupkey => $groupval) {
                             if (in_array($groupval, $valid_groups)) {
@@ -111,7 +111,7 @@ if ($serendipity['GET']['adminAction'] == 'save' && serendipity_checkFormToken()
         }
         $from = $_POST;
     }
-} 
+}
 
 $data['formToken'] = serendipity_setFormToken();
 $template       = serendipity_parseTemplate(S9Y_CONFIG_USERTEMPLATE);
@@ -120,7 +120,7 @@ $from           = $user[0];
 $from['groups'] = serendipity_getGroups($serendipity['authorid']);
 unset($from['password']);
 $data['config'] = serendipity_printConfigTemplate($template, $from, true, false);
-   
+
 
 $add = array('internal' => true);
 serendipity_plugin_api::hook_event('backend_sidebar_entries_event_display_profiles', $from, $add);

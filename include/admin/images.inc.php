@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -15,7 +15,7 @@ if (!is_object($serendipity['smarty'])) {
 }
 
 switch ($serendipity['GET']['adminAction']) {
-    
+
     case 'doSync':
         $data['case_doSync'] = true;
         $data['perm_adminImagesSync'] = true;
@@ -66,7 +66,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['messages'] = $messages;
         unset($messages);
         break;
- 
+
 
     case 'doMultiDelete':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
@@ -171,7 +171,7 @@ switch ($serendipity['GET']['adminAction']) {
         $authorid = (isset($serendipity['POST']['all_authors']) && $serendipity['POST']['all_authors'] == 'true') ? '0' : $serendipity['authorid'];
 
         $new_media = array();
-    
+
         $serendipity['POST']['imageurl'] = serendipity_specialchars($serendipity['POST']['imageurl']);
 
         // First find out whether to fetch a file or accept an upload
@@ -381,7 +381,7 @@ switch ($serendipity['GET']['adminAction']) {
                 // Directory exists and is writable. Now dive within subdirectories and kill 'em all.
                 serendipity_killPath($serendipity['serendipityPath'] . $serendipity['uploadPath'], $new_dir, (isset($serendipity['POST']['nuke']) ? true : false));
                 $data['ob_serendipity_killPath'] = ob_get_contents();
-                ob_end_clean();        
+                ob_end_clean();
            }
         } else {
             $data['print_ERROR_NO_DIRECTORY'] = sprintf(ERROR_NO_DIRECTORY, $new_dir);
@@ -416,7 +416,7 @@ switch ($serendipity['GET']['adminAction']) {
                 ob_start();
                 serendipity_moveMediaDirectory($oldDir, $newDir);
                 $data['ob_serendipity_moveMediaDirectory'] = ob_get_contents();
-                ob_end_clean();        
+                ob_end_clean();
                 $use_dir = $newDir;
             }
             serendipity_ACLGrant(0, 'directory', 'read', $serendipity['POST']['read_authors'], $use_dir);
@@ -681,7 +681,7 @@ switch ($serendipity['GET']['adminAction']) {
 
 function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars = array()) {
     global $serendipity;
-    
+
     if (!serendipity_checkPermission('adminImagesView')) {
         return;
     }

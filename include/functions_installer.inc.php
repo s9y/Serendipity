@@ -196,7 +196,7 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
                 $test_path1 = $_SERVER['DOCUMENT_ROOT'] . rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/';
             }
             $test_path2 = serendipity_getRealDir(__FILE__);
-            
+
             if (!empty($_SERVER['ORIG_PATH_TRANSLATED']) && file_exists(dirname($_SERVER['ORIG_PATH_TRANSLATED']) . '/serendipity_admin.php')) {
                 return realpath(rtrim(dirname($_SERVER['ORIG_PATH_TRANSLATED']), '/')) . '/';
             }
@@ -394,7 +394,7 @@ function serendipity_replaceEmbeddedConfigVars ($s) {
 function serendipity_guessInput($type, $name, $value='', $default='') {
     $data = array();
     $curOptions = array();
-    
+
     switch ($type) {
         case 'bool':
             $value = serendipity_get_bool($value);
@@ -456,9 +456,9 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
     $data = array();
     $data['noForm'] = $noForm;
     $data['formToken'] = serendipity_setFormToken();
-    
+
     $data['allowToggle'] = $allowToggle;
-    
+
     foreach ($config as &$category) {
         foreach ($category['items'] as &$item) {
 
@@ -477,7 +477,7 @@ function serendipity_printConfigTemplate($config, $from = false, $noForm = false
             if (in_array('hideValue', $item['flags'])) {
                 $value = '';
             }
-            
+
             if (!$showDangerous && $item['view'] == 'dangerous') {
                 continue;
             }
@@ -694,7 +694,7 @@ function serendipity_installFiles($serendipity_core = '') {
         if ($fp) {
             fwrite($fp, 'php_value register_globals off'. "\n" .'php_value session.use_trans_sid 0');
             fclose($fp);
-            
+
             $safeFP = @fopen($serendipity_core . '.installer_detection_failsafe', 'w');
             fclose($safeFP);
             $sock = fsockopen($serendipity_host, $_SERVER['SERVER_PORT'], $errorno, $errorstring, 10);
@@ -1088,16 +1088,16 @@ global $serendipity;
  * @param string filename is the path to the file to checksum
  * @param string type forces a particular interpretation of newlines.  Mime
  *    types and strings starting with 'text' will cause newlines to be stripped
- *    before the checksum is calculated (default: null, determine from finfo 
+ *    before the checksum is calculated (default: null, determine from finfo
  *    and extension)
- * @return string An MD5 checksum of the file, with newlines removed if it's 
+ * @return string An MD5 checksum of the file, with newlines removed if it's
  *    an ASCII type; or false if the file cannot be read
  */
 function serendipity_FTPChecksum($filename, $type = null) {
     /** Only read the finfo database once */
     static $debug_exts = array();
 
-    // Must be able to read the file 
+    // Must be able to read the file
     if (!is_readable($filename)) {
         return false;
     }
@@ -1113,16 +1113,16 @@ function serendipity_FTPChecksum($filename, $type = null) {
         // If they're case-insensitive equal, strcasecmp() returns 0, or
         // 'false'.  So I use && to find if any of them are 0, in the
         // most likely fail-fast order.
-        if (strcasecmp($ext, 'php') && 
+        if (strcasecmp($ext, 'php') &&
             strcasecmp($ext, 'tpl') &&
             strcasecmp($ext, 'sql') &&
-            strcasecmp($ext, 'js') && 
-            strcasecmp($ext, 'txt') && 
-            strcasecmp($ext, 'htc') && 
-            strcasecmp($ext, 'css') && 
-            strcasecmp($ext, 'dist') && 
-            strcasecmp($ext, 'lib') && 
-            strcasecmp($ext, 'sh') && 
+            strcasecmp($ext, 'js') &&
+            strcasecmp($ext, 'txt') &&
+            strcasecmp($ext, 'htc') &&
+            strcasecmp($ext, 'css') &&
+            strcasecmp($ext, 'dist') &&
+            strcasecmp($ext, 'lib') &&
+            strcasecmp($ext, 'sh') &&
             strcasecmp($ext, 'html') &&
             strcasecmp($ext, 'htm') &&
             !empty($ext)) {
@@ -1138,7 +1138,7 @@ function serendipity_FTPChecksum($filename, $type = null) {
     // Calculate the checksum
     $md5 = false;
     if (stristr($type, 'text')) {
-        // This is a text-type file.  We need to remove linefeeds before 
+        // This is a text-type file.  We need to remove linefeeds before
         // calculating a checksum, to account for possible FTP conversions
         // that are inconvenient, but still valid.  But we don't want to
         // allow newlines anywhere; just different *kinds* of newlines.
@@ -1156,8 +1156,8 @@ function serendipity_FTPChecksum($filename, $type = null) {
 
 /**
  * Validate checksums for all required files.
- * 
- * @return A list of all files that failed checksum, where keys are the 
+ *
+ * @return A list of all files that failed checksum, where keys are the
  *    relative path of the file, and values are the bad checksum
  */
 function serendipity_verifyFTPChecksums() {
@@ -1167,7 +1167,7 @@ function serendipity_verifyFTPChecksums() {
 
     // Load the checksums
     $f = S9Y_INCLUDE_PATH . 'checksums.inc.php';
-    
+
     if (!file_exists($f) || filesize($f) < 1) {
         return $badsums;
     }
@@ -1184,7 +1184,7 @@ function serendipity_verifyFTPChecksums() {
         $path = $basedir . '/' . $prel;
         // Don't take checksums of directories
         if (is_dir($path)) {
-            // Weird that it's even here. 
+            // Weird that it's even here.
             continue;
         }
 

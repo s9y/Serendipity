@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 if (IN_serendipity !== true) {
     die ('Don\'t hack!');
@@ -69,7 +69,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         return;
     }
     $data['plugin_to_conf'] = true;
-    
+
     $bag  = new serendipity_property_bag;
     $plugin->introspect($bag);
 
@@ -132,7 +132,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['desc'] = $desc;
     $data['documentation'] = $documentation;
     $data['plugin'] = $plugin;
-           
+
     if (@file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
         $data['changelog'] = true;
     }
@@ -154,7 +154,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
-    
+
     $foreignPlugins = $pluginstack = $errorstack = array();
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
@@ -213,7 +213,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                     $props['local_documentation'] = 'plugins/' . $props['pluginPath'] . '/README';
                 }
             }
-            
+
             $pluginstack[$class_data['true_name']] = $props;
         } else {
             // False is returned if a plugin could not be instantiated
@@ -237,7 +237,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $pluggroups[''][] = $plugdata;
         }
     }
-    
+
     ksort($pluggroups);
 
     $data['count_pluginstack'] = count($pluginstack);
@@ -259,7 +259,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['only_group'] = $serendipity['GET']['only_group'];
     $data['available_upgrades'] = isset($pluggroups['UPGRADE']);
     $requirement_failures = array();
-    
+
     foreach($pluggroups AS $pluggroup => $groupstack) {
         foreach ($groupstack as $plug) {
             if ( !empty($plug['requirements']['serendipity']) && version_compare($plug['requirements']['serendipity'], serendipity_getCoreVersion($serendipity['version']), '>') ) {
@@ -281,7 +281,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                     $requirement_failures[$plug['class_name']] = array("smarty" => true);
                 }
             }
-            
+
         }
     }
 
@@ -320,7 +320,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             serendipity_db_query("UPDATE {$serendipity['dbPrefix']}plugins
                                      SET sort_order = ".  $pos . "
                                    WHERE name='" . serendipity_db_escape_string($plugin['id']) . "'");
-        
+
             serendipity_plugin_api::update_plugin_placement(
                 addslashes($plugin['id']),
                 addslashes($plugin['placement'])
@@ -362,7 +362,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
                 }
             }
         }
-        
+
         $data['new_plugin_failed'] = ! $new_plugin;
 
         if ($fetchplugin_data['install'] && $new_plugin) {
@@ -411,8 +411,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     if (isset($_POST['SAVE'])) {
         $data['save'] = true;
         $data['timestamp'] = serendipity_strftime('%H:%M:%S');
-    }   
-    
+    }
+
     serendipity_plugin_api::hook_event('backend_pluginlisting_header', $null);
 
     ob_start();
@@ -432,7 +432,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     if (count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
     }
-    
+
 }
 
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
