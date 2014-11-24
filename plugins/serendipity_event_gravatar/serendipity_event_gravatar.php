@@ -778,7 +778,7 @@ class serendipity_event_gravatar extends serendipity_event
                 {
                     
                     // Attempt to grab an avatar link from their webpage url
-                    $linkUrl = html_entity_decode($matches[1]);
+                    $linkUrl = serendipity_entity_decode($matches[1]);
                     if (substr($linkUrl, 0, 1) == '/') {
                         if ($urlParts = parse_url($url)) {
                             $faviconURL = $urlParts['scheme'] . '://' . $urlParts['host'] . $linkUrl;

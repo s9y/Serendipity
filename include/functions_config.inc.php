@@ -268,7 +268,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
 
         if ($force_frontend_fallback) {
             // If enabled, even when within the admin suite it will be possible to reference files that
-            // reside within a template directory.
+            // reside within a frontend-only template directory.
             $directories[] = $serendipity['template'] . '/';
             if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
                 $p = explode(',', $serendipity['template_engine']);

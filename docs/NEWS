@@ -3,6 +3,12 @@
 Version 2.0-beta4/5/6 / RC? ()
 ------------------------------------------------------------------------
 
+    * PHP 5.4+ fix to properly call htmlspecialchars() / htmlentities() /
+      html_entity_decode() with a charset option, that has been
+      set to to default to UTF-8 and will yield empty strings when
+      being used in NON-UTF-8 environments. Now we utilize a
+      serendipity_specialchars() wrapper call.
+      
     * New personal preference to choose CKEditor toolbar presets. 
       Presets can be overwritte through a 
       templates/xxx/admin/ckeditor_custom_config.js if needed.
