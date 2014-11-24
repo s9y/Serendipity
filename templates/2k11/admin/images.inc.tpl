@@ -84,7 +84,8 @@
         <div class="form_field">
             <label for="diredit_new">{$CONST.NAME}</label>
             <input id="diredit_new" name="serendipity[newDir]" type="text" value="{$use_dir}">
-        </div>
+            <span class="input-desc directory-create">{$CONST.PLAIN_ASCII_NAMES}</span>
+       </div>
 
         <h3 class="toggle_headline">
             <button class="show_config_option icon_link" type="button" data-href="#directory_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$CONST.PERMISSIONS}</button>
@@ -159,6 +160,7 @@
         <div class="form_field">
             <label for="dircreate_name">{$CONST.NAME}</label>
             <input id="dircreate_name" name="serendipity[name]" type="text" value="" required>
+            <span class="input-desc directory-create">{$CONST.PLAIN_ASCII_NAMES}</span>
         </div>
 
         <div class="form_select">
