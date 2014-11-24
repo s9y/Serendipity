@@ -233,8 +233,12 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
 
             if (isset($_SERVER['PATH'])) {
                 $path = array_merge($path, explode(PATH_SEPARATOR, $_SERVER['PATH']));
-                // remove unwanted empty or system32 path parts and wrong system32/convert.exe path on WIN, which is not ImageMagick!
-                foreach ($path as $pk => $pv) { if (stripos($pv, 'system32') !== false || empty($pv)) { unset($path[$pk]); } }
+                // remove unwanted empty or system32 path parts, so that wrong system32/convert.exe is prevented.
+                foreach ($path as $pk => $pv) { 
+                    if (strtolower($pv) == 'system32' || empty($pv)) { 
+                        unset($path[$pk]); 
+                    } 
+                }
                 $path = array_values($path); // 'reindex' array
             }
 
@@ -250,9 +254,7 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
                 }
 
                 if (!empty($dir) && (function_exists('is_executable') && @is_readable($dir . '/convert') && @is_executable($dir . '/convert.exe')) || @is_file($dir . '/convert.exe')) {
-                    if (!preg_match('@(/|\\\|^)system32(/|\\\|$)@imsu', $dir)) {
-                        return $dir . '/convert.exe';
-                    }    
+                    return $dir . '/convert.exe';
                 }
             }
             return $default;
