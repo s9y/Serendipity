@@ -107,7 +107,7 @@ class serendipity_plugin_authors extends serendipity_plugin {
                 if ( !empty($image) ) {
                     $html .= '<a class="serendipity_xml_icon" href="'. serendipity_feedAuthorURL($auth, 'serendipityHTTPPath') .'"><img src="'. $image .'" alt="XML" style="border: 0px" /></a> ';
                 }
-                $html .= '<a href="'. serendipity_authorURL($auth, 'serendipityHTTPPath') .'" title="'. htmlspecialchars($auth['realname']) .'">'. htmlspecialchars($auth['realname']) . $entrycount . '</a>';
+                $html .= '<a href="'. serendipity_authorURL($auth, 'serendipityHTTPPath') .'" title="'. serendipity_specialchars($auth['realname']) .'">'. serendipity_specialchars($auth['realname']) . $entrycount . '</a>';
                 $html .= '</li>' . "\n";
             }
         }

@@ -316,7 +316,7 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
             <div class="entryproperties_access_pw form_field">
                 <label for="properties_access_pw"><?php echo PASSWORD; ?>:</label>
-                <input id="properties_access_pw" name="serendipity[properties][entrypassword]" type="password" autocomplete="off" value="<?php echo htmlspecialchars($password); ?>">
+                <input id="properties_access_pw" name="serendipity[properties][entrypassword]" type="password" autocomplete="off" value="<?php echo serendipity_specialchars($password); ?>">
             </div>
 <?php
             return true;
@@ -335,7 +335,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         $group['name'] = constant($group['confvalue']);
                     }
 ?>
-                    <option value="<?php echo $group['id']; ?>" <?php echo (in_array($group['id'], $access_groups) ? 'selected="selected"' : ''); ?>><?php echo htmlspecialchars($group['name']); ?></option>
+                    <option value="<?php echo $group['id']; ?>" <?php echo (in_array($group['id'], $access_groups) ? 'selected="selected"' : ''); ?>><?php echo serendipity_specialchars($group['name']); ?></option>
 <?php
                 }
                 echo '</select>';
@@ -355,7 +355,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 $users = serendipity_fetchUsers('', 'hidden');
                 foreach($users AS $user) {
 ?>
-                    <option value="<?php echo $user['authorid']; ?>" <?php echo (in_array($user['authorid'], $access_users) ? 'selected="selected"' : ''); ?>><?php echo htmlspecialchars($user['realname']); ?></option>
+                    <option value="<?php echo $user['authorid']; ?>" <?php echo (in_array($user['authorid'], $access_users) ? 'selected="selected"' : ''); ?>><?php echo serendipity_specialchars($user['realname']); ?></option>
 <?php
                 }
                 echo '</select>';
@@ -380,7 +380,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 }
                 $avail_users =& $this->getValidAuthors();
                 foreach($avail_users AS $user) {
-                    echo '<option value="' . $user['authorid'] . '" ' . ($selected_user == $user['authorid'] ? ' selected="selected"' : '') . '>' . htmlspecialchars($user['realname']) . '</option>' . "\n";
+                    echo '<option value="' . $user['authorid'] . '" ' . ($selected_user == $user['authorid'] ? ' selected="selected"' : '') . '>' . serendipity_specialchars($user['realname']) . '</option>' . "\n";
                 }
                 ?>
                 </select>
@@ -414,7 +414,7 @@ class serendipity_event_entryproperties extends serendipity_event
                             $selected = false;
                         }
 
-                        echo '<option ' . ($selected ? 'selected="selected"' : '') . ' value="' . $plugin_data['p']->instance . '">' . htmlspecialchars($plugin_data['p']->title) . '</option>' . "\n";
+                        echo '<option ' . ($selected ? 'selected="selected"' : '') . ' value="' . $plugin_data['p']->instance . '">' . serendipity_specialchars($plugin_data['p']->title) . '</option>' . "\n";
                     }
                 }
                 ?>
@@ -447,7 +447,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 foreach($fields AS $fieldname) {
                     $fieldparts = explode(':', $fieldname);
                     $fieldname = $fieldparts[0];
-                    $fieldname = htmlspecialchars(trim($fieldname));
+                    $fieldname = serendipity_specialchars(trim($fieldname));
 
                     if (isset($serendipity['POST']['properties'][$fieldname])) {
                         $value = $serendipity['POST']['properties'][$fieldname];
@@ -459,7 +459,7 @@ class serendipity_event_entryproperties extends serendipity_event
             ?>
                     <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
-                        <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo htmlspecialchars($value); ?></textarea>
+                        <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                     </div>
             <?php
@@ -610,7 +610,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         if (is_array($entries)) {
                             echo '<ul class="plainList">';
                             foreach($entries AS $idx => $entry) {
-                                printf('<li>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_BUILDING, $entry['id'], htmlspecialchars($entry['title']));
+                                printf('<li>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_BUILDING, $entry['id'], serendipity_specialchars($entry['title']));
                                 $this->updateCache($entry);
                                 echo ' ' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHED . '</li>';
                             }
@@ -620,10 +620,10 @@ class serendipity_event_entryproperties extends serendipity_event
                         if ($to < $total) {
 ?>
                         <script>
-                            if (confirm("<?php echo htmlspecialchars(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNEXT); ?>")) {
+                            if (confirm("<?php echo serendipity_specialchars(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNEXT); ?>")) {
                                 location.href = "?serendipity[adminModule]=event_display&serendipity[adminAction]=buildcache&serendipity[page]=<?php echo ($page+1); ?>";
                             } else {
-                                alert("<?php echo htmlspecialchars(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_ABORTED); ?>");
+                                alert("<?php echo serendipity_specialchars(PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_ABORTED); ?>");
                             }
                         </script>
 <?php

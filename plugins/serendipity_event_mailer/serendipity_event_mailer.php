@@ -164,7 +164,7 @@ class serendipity_event_mailer extends serendipity_event
                         </div>
                         <div class="form_field">
                             <label title="<?php echo PLUGIN_EVENT_MAILER_RECIPIENT; ?>" for="properties_mailto"><?php echo PLUGIN_EVENT_MAILER_RECIPIENTS; ?></label>
-                            <input id="properties_mailto" type="text" name="serendipity[properties][mailto]" value="<?php echo htmlspecialchars($mailto); ?>">
+                            <input id="properties_mailto" type="text" name="serendipity[properties][mailto]" value="<?php echo serendipity_specialchars($mailto); ?>">
                         </div>
                         <div class="form_check">
                             <input id="sendall" type="checkbox" value="true" name="serendipity[properties][sendentry_all]" <?php echo ($sendtoall ? 'checked="checked"': ''); ?>>
@@ -268,7 +268,7 @@ class serendipity_event_mailer extends serendipity_event
 
                         foreach($to AS $mailto) {
                             if (!empty($mailto)) {
-                                echo htmlspecialchars($mailto) . '...<br />';
+                                echo serendipity_specialchars($mailto) . '...<br />';
                                 serendipity_sendMail($mailto, $mail['subject'], $mail['body'], $mail['from']);
                             }
                         }

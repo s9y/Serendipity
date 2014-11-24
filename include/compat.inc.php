@@ -282,7 +282,7 @@ if (empty($_SERVER['REQUEST_URI'])) {
 
 // Some security issues
 if (isset($serendipity['GET']['searchTerm'])) {
-    $serendipity['GET']['searchTerm'] = htmlspecialchars(strip_tags($serendipity['GET']['searchTerm']));
+    $serendipity['GET']['searchTerm'] = serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm']));
 }
 
 /**

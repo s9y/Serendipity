@@ -121,7 +121,7 @@ switch ($serendipity['GET']['step']) {
         serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
 
         if ($file['is_image']) {
-            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . htmlspecialchars($serendipity['GET']['textarea']) . '\')';
+            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
 
             if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
                 $file['fast_select'] = true;
@@ -277,11 +277,11 @@ switch ($serendipity['GET']['step']) {
         $media['case'] = 'default';
         $add_url = '';
         if (!empty($serendipity['GET']['htmltarget'])) {
-            $add_url .= '&amp;serendipity[htmltarget]=' . htmlspecialchars($serendipity['GET']['htmltarget']);
+            $add_url .= '&amp;serendipity[htmltarget]=' . serendipity_specialchars($serendipity['GET']['htmltarget']);
         }
 
         if (!empty($serendipity['GET']['filename_only'])) {
-            $add_url .= '&amp;serendipity[filename_only]=' . htmlspecialchars($serendipity['GET']['filename_only']);
+            $add_url .= '&amp;serendipity[filename_only]=' . serendipity_specialchars($serendipity['GET']['filename_only']);
         }
 
         if (!isset($serendipity['thumbPerPage2'])) {
@@ -293,7 +293,7 @@ switch ($serendipity['GET']['step']) {
           isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
           $serendipity['thumbPerPage2'],
           ($serendipity['showMediaToolbar'] ? true : false),
-          '?serendipity[step]=1' . $add_url . '&amp;serendipity[textarea]='. htmlspecialchars($serendipity['GET']['textarea']),
+          '?serendipity[step]=1' . $add_url . '&amp;serendipity[textarea]='. serendipity_specialchars($serendipity['GET']['textarea']),
           true,
           null
         );

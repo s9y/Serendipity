@@ -213,9 +213,9 @@ class serendipity_plugin_comments extends serendipity_plugin
                         substr($row['comment_url'], 0, 8) != 'https://') {
                         $row['comment_url'] = 'http://' . $row['comment_url']; 
                     }    
-                    $user = '<a class="highlight" href="' . htmlspecialchars(strip_tags($row['comment_url'])) . '" title="' . htmlspecialchars(strip_tags($row['comment_title'])) . '">' . htmlspecialchars(strip_tags($row['user'])) . '</a>';
+                    $user = '<a class="highlight" href="' . serendipity_specialchars(strip_tags($row['comment_url'])) . '" title="' . serendipity_specialchars(strip_tags($row['comment_title'])) . '">' . serendipity_specialchars(strip_tags($row['user'])) . '</a>';
                 } else {
-                    $user = htmlspecialchars(strip_tags($row['user']));
+                    $user = serendipity_specialchars(strip_tags($row['user']));
                 }
 
                 $user = trim($user);
@@ -256,10 +256,10 @@ class serendipity_plugin_comments extends serendipity_plugin
                   '<div class="plugin_comment_wrap">' . PLUGIN_COMMENTS_ABOUT . '</div>',
 
                   '<div class="plugin_comment_subject"><span class="plugin_comment_author">' . $user . '</span>',
-                  ' <a class="highlight" href="' . serendipity_archiveURL($row['entry_id'], $row['subject'], 'baseURL', true, array('timestamp' => $row['entrystamp'])) .'#c' . $row['comment_id'] . '" title="' . htmlspecialchars($row['subject']) . '">'
-                      . htmlspecialchars($row['subject'])
+                  ' <a class="highlight" href="' . serendipity_archiveURL($row['entry_id'], $row['subject'], 'baseURL', true, array('timestamp' => $row['entrystamp'])) .'#c' . $row['comment_id'] . '" title="' . serendipity_specialchars($row['subject']) . '">'
+                      . serendipity_specialchars($row['subject'])
                       . '</a></div>' . "\n"
-                      . '<div class="plugin_comment_date">' . htmlspecialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</div>' . "\n"
+                      . '<div class="plugin_comment_date">' . serendipity_specialchars(serendipity_strftime($dateformat, $row['stamp'])) . '</div>' . "\n"
                       . '<div class="plugin_comment_body">' . strip_tags($entry['comment'], '<br /><img><a>') . '</div>' . "\n\n"
                 );
             }

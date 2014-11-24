@@ -1057,7 +1057,7 @@ class XML_RPC_Response extends XML_RPC_Base
     {
         if ($fcode != 0) {
             $this->fn = $fcode;
-            $this->fs = htmlspecialchars($fstr);
+            $this->fs = serendipity_specialchars($fstr);
         } else {
             $this->xv = $val;
         }
@@ -1452,7 +1452,7 @@ class XML_RPC_Message extends XML_RPC_Base
         $hdrfnd = 0;
         if ($this->debug) {
             print "\n<pre>---GOT---\n";
-            print isset($_SERVER['SERVER_PROTOCOL']) ? htmlspecialchars($data) : $data;
+            print isset($_SERVER['SERVER_PROTOCOL']) ? serendipity_specialchars($data) : $data;
             print "\n---END---</pre>\n";
         }
 
@@ -1704,7 +1704,7 @@ class XML_RPC_Value extends XML_RPC_Base
             $rs .= "<struct>\n";
             reset($val);
             foreach ($val as $key2 => $val2) {
-                $rs .= "<member><name>" . htmlspecialchars($key2) . "</name>\n";
+                $rs .= "<member><name>" . serendipity_specialchars($key2) . "</name>\n";
                 $rs .= $this->serializeval($val2);
                 $rs .= "</member>\n";
             }
@@ -1729,7 +1729,7 @@ class XML_RPC_Value extends XML_RPC_Base
                 $rs .= "<${typ}>" . ($val ? '1' : '0') . "</${typ}>";
                 break;
             case $GLOBALS['XML_RPC_String']:
-                $rs .= "<${typ}>" . htmlspecialchars($val). "</${typ}>";
+                $rs .= "<${typ}>" . serendipity_specialchars($val). "</${typ}>";
                 break;
             default:
                 $rs .= "<${typ}>${val}</${typ}>";

@@ -438,7 +438,7 @@ class serendipity_event_gravatar extends serendipity_event
         $title = '';
         $author = 'unknown';
         if (isset($eventData['author'])) {
-            $author = htmlspecialchars($eventData['author']);
+            $author = serendipity_specialchars($eventData['author']);
             $title = $author;
         }
         
