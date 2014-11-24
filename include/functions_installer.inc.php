@@ -233,6 +233,9 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
 
             if (isset($_SERVER['PATH'])) {
                 $path = array_merge($path, explode(PATH_SEPARATOR, $_SERVER['PATH']));
+                // remove unwanted empty or system32 path parts and wrong system32/convert.exe path on WIN, which is not ImageMagick!
+                foreach ($path as $pk => $pv) { if (stripos($pv, 'system32') !== false || empty($pv)) { unset($path[$pk]); } }
+                $path = array_values($path); // 'reindex' array
             }
 
             /* add some other possible locations to the path while we are at it,
