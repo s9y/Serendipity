@@ -174,9 +174,6 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
             return $default;
 
         case 'dbType' :
-            if (extension_loaded('mysqli')) {
-                $type = 'mysqli';
-            }
             if (extension_loaded('PDO') &&
                 in_array('pgsql', PDO::getAvailableDrivers())) {
                 $type = 'pdo-postgres';
@@ -186,6 +183,9 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
             }
             if (extension_loaded('mysql')) {
                 $type = 'mysql';
+            }
+            if (extension_loaded('mysqli')) {
+                $type = 'mysqli';
             }
             return $type;
 
@@ -247,7 +247,9 @@ function serendipity_query_default($optname, $default, $usertemplate = false, $t
                 }
 
                 if (!empty($dir) && (function_exists('is_executable') && @is_readable($dir . '/convert') && @is_executable($dir . '/convert.exe')) || @is_file($dir . '/convert.exe')) {
-                    return $dir . '/convert.exe';
+                    if (!preg_match('@(/|\\\|^)system32(/|\\\|$)@imsu', $dir)) {
+                        return $dir . '/convert.exe';
+                    }    
                 }
             }
             return $default;
@@ -610,7 +612,7 @@ function serendipity_checkInstallation() {
         $errs[] = sprintf(CANT_EXECUTE_BINARY, 'convert imagemagick');
     }
 
-    if ($_POST['dbType'] == 'sqlite' || $_POST['dbType'] == 'sqlite3' || $_POST['dbType'] == 'pdo-sqlite') {
+    if ($_POST['dbType'] == 'sqlite' || $_POST['dbType'] == 'sqlite3' || $_POST['dbType'] == 'pdo-sqlite' || $_POST['dbType'] == 'sqlite3oo') {
         // We don't want that our SQLite db file can be guessed from other applications on a server
         // and have access to our's. So we randomize the SQLite dbname.
         $_POST['sqlitedbName'] = $_POST['dbName'] . '_' . md5(time());
