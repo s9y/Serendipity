@@ -414,7 +414,13 @@ if (function_exists('date_default_timezone_get')) {
  */ 
 function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
     if ($flags == null) {
-        $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+        if (defined('ENT_HTML401')) {
+            // Added with PHP 5.4.x
+            $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+        } else {
+            // For PHP < 5.4 compatibility
+            $flags = ENT_COMPAT;
+        }
     }
     return htmlspecialchars($string, $flags, $encoding, $double_encode);
 }
@@ -424,7 +430,13 @@ function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARS
  */ 
 function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
     if ($flags == null) {
-        $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+        if (defined('ENT_HTML401')) {
+            // Added with PHP 5.4.x
+            $flags = ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE;
+        } else {
+            // For PHP < 5.4 compatibility
+            $flags = ENT_COMPAT;
+        }
     }
     return htmlentities($string, $flags, $encoding, $double_encode);
 }
@@ -436,7 +448,13 @@ function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHAR
     if ($flags == null) {
         # NOTE: ENT_SUBSTITUTE does not exist for this function, and the documentation does not specify that it will
         # ever echo empty strings on charset errors
-        $flags = ENT_COMPAT | ENT_HTML401;
+        if (defined('ENT_HTML401')) {
+            // Added with PHP 5.4.x
+            $flags = ENT_COMPAT | ENT_HTML401;
+        } else {
+            // For PHP < 5.4 compatibility
+            $flags = ENT_COMPAT;
+        }
     }
     return html_entity_decode($string, $flags, $encoding, $double_encode);
 }
