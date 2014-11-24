@@ -12,8 +12,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
     var $info        = array('software' => 'Blogger.com [using API]');
     var $data        = array();
     var $inputFields = array();
-    
-    
+
     function Serendipity_Import_Blogger($data) {
         global $serendipity;
 
@@ -55,22 +54,22 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
     function getInputFields() {
         // Make sure Google login has been completed
         if (!empty($_REQUEST['token'])) {
-                
+
             // Prepare session token request
             $req = new HTTP_Request('https://www.google.com/accounts/AuthSubSessionToken');
             $req->addHeader('Authorization', 'AuthSub token="'. $_REQUEST['token'] .'"');
-                    
+
             // Request token
             $req->sendRequest();
-            
+
             // Handle token reponse
             if ($req->getResponseCode() != '200') return;
-            
+
             // Extract Auth token
             preg_match_all('/^(.+)=(.+)$/m', $req->getResponseBody(), $matches);
             $tokens = array_combine($matches[1], $matches[2]);
             unset($matches);
-                        
+
             // Add hidden auth token field to input field list
             array_unshift($this->inputFields, array( 'text'    => 'Google Auth Token (leave alone)',
                                                      'type'    => 'input',
@@ -81,35 +80,35 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
             $req = new HTTP_Request('http://www.blogger.com/feeds/default/blogs');
             $req->addHeader('GData-Version', 2);
             $req->addHeader('Authorization', 'AuthSub token="'. $tokens['Token'] .'"');
-            
+
             // Fetch blog list
             $req->sendRequest();
-            
+
             // Handle errors
             if ($req->getResponseCode() != '200') return false;
-            
+
             // Load list
             $bXml = simplexml_load_string($req->getResponseBody());
-            
+
             // Generate list of the blogs under the authenticated account
             $bList = array();
             foreach ($bXml->entry as $entry) {
                 $bList[substr($entry->id, strpos($entry->id, 'blog-') + 5)] = $entry->title;
             }
-            
+
             // Add blog list to input fields for selection
             array_unshift($this->inputFields, array('text'    => 'Blog to import',
                                                     'type'    => 'list',
                                                     'name'    => 'bId',
                                                     'value'   => 0,
                                                     'default' => $bList));
-            
+
             return $this->inputFields;
         } else {
             return array();
         }
     }
-    
+
     function _getCategoryList() {
         $res = serendipity_fetchCategories('all');
         $ret = array(0 => NO_CATEGORY);
@@ -120,16 +119,16 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         }
         return $ret;
     }
-    
+
     function import() {
         global $serendipity;
-        
+
         // Force user to select a blog to act on
         if (empty($this->data['bId']) || $this->data['bId'] == 0) {
             echo 'Please select a blog to import!';
             return false;
         }
-        
+
         // Save this so we can return it to its original value at the end of this method.
         $noautodiscovery = isset($serendipity['noautodiscovery']) ? $serendipity['noautodiscovery'] : false;
 
@@ -138,24 +137,24 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         }
 
         $this->getTransTable();
-                
+
         // Prepare export request
         $req = new HTTP_Request('http://www.blogger.com/feeds/'. $this->data['bId'] .'/archive');
         $req->addHeader('GData-Version', 2);
         $req->addHeader('Authorization', 'AuthSub token="'. $this->data['bAuthToken'] .'"');
-                
+
         // Attempt fetch blog export
         $req->sendRequest();
-        
+
         // Handle errors
         if ($req->getResponseCode() != '200') {
             echo "Error occured while trying to export the blog.";
             return false;
         }
-        
+
         // Export success
         echo '<span class="block_level">Successfully exported entries from Blogger</span>';
-        
+
         // Get Serendipity authors list
         $authorList = array();
         $s9y_users = serendipity_fetchUsers();
@@ -166,16 +165,16 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         
         // Load export
         $bXml = simplexml_load_string($req->getResponseBody());
-        
+
         // Process entries
         $entryList = $entryFailList = array();
         foreach ($bXml->entry as $bEntry) {
-            
+
             // Check entry type
             switch ($bEntry->category['term']) {
             case 'http://schemas.google.com/blogger/2008/kind#post':
                 // Process posts:
-                
+
                 // Create author if not in serendipity
                 $author = (string) $bEntry->author->name;
                 if (!array_search($author, $authorList)) {
@@ -189,7 +188,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                     $authorid = serendipity_db_insert_id('authors', 'authorid');
                     $authorList[$authorid] = $author;
                 }
-                
+
                 $sEntry = array('title'          => $this->decode((string) $bEntry->title),
                                 'isdraft'        => ($bEntry->children('http://purl.org/atom/app#')->control->draft == 'yes') ? 'true' : 'false',
                                 'allow_comments' => (count($bEntry->xpath("*[@rel='replies']")) > 0) ? 'true' : 'false',
@@ -200,7 +199,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                                 'author'         => $author,
                                 'authorid'       => $authorid
                                 );
-                
+
                 // Add entry to s9y
                 echo '..~.. ';
                 if (is_int($id = serendipity_updertEntry($sEntry))) {
@@ -210,16 +209,16 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                     // Add to fail list
                     $entryFailList[] = $sEntry['title'];
                 }
-                
+
                 break;
-                
+
             case 'http://schemas.google.com/blogger/2008/kind#comment':
                 // Process comments:
-                
+
                 // Extract entry id for comment
                 $cEntryId = $bEntry->xpath("thr:in-reply-to[@ref]");
                 $cEntryId = (string) $cEntryId[0]['ref'];
-                
+
                 // Check to make sure the related entry has been added to s9y
                 if (array_key_exists($cEntryId, $entryList)) {
                     // Add to s9y
@@ -236,19 +235,19 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                                         'type'      => 'NORMAL'
                                         );
                     serendipity_db_insert('comments', $sComment);
-                    
+
                     // Update entry list with comment count
                     $entryList[$cEntryId][2]++;
                 }
-                
+
                 break;
             }
-            
+
         }
-        
+
         // Report on resultant authors
         echo '<span class="block_level">Current list of authors: </span>'. join(', ', array_values($authorList));
-        
+
         // Do cleanup and report on entries
         echo '<span class="block_level">The following entries were successfully imported:</span>';
         echo '<ul>';
@@ -259,7 +258,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
             echo '<li>'. $eDetails[1] .' comments('. $eDetails[2] .')</li>';
         }
         echo '</ul>';
-        
+
         // Report fails
         echo '<span class="block_level">The following entries ran into trouble and was not imported:</span>';
         echo '<ul>';
@@ -267,10 +266,10 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
             echo '<li>'. $eDetails .'</li>';
         }
         echo '</ul>';
-                
+
         // Reset autodiscovery
         $serendipity['noautodiscovery'] = $noautodiscovery;
-        
+
         // All done!
         echo '<span class="msg_notice">Import finished.</span>';
         return true;
