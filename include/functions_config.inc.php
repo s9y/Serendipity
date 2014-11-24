@@ -898,6 +898,9 @@ function serendipity_probeInstallation($item) {
             if (extension_loaded('PDO') &&
                 in_array('sqlite', PDO::getAvailableDrivers())) {
                 $res['pdo-sqlite'] = 'PDO::SQLite';
+                $has_pdo = true;
+            } else {
+                $has_pdo = false;
             }
 
             if (extension_loaded('pgsql')) {
@@ -911,6 +914,13 @@ function serendipity_probeInstallation($item) {
             }
             if (extension_loaded('SQLITE3') && function_exists('sqlite3_open')) {
                 $res['sqlite3'] = 'SQLite3';
+            }
+            if (class_exists('SQLite3')) {
+                if ($has_pdo) {
+                    $res['sqlite3oo'] = 'SQLite3 (OO) (Preferrably use PDO-SQlite!)';
+                } else {
+                    $res['sqlite3oo'] = 'SQLite3 (OO)';
+                }    
             }
             if (function_exists('sqlrcon_alloc')) {
                 $res['sqlrelay'] = 'SQLRelay';

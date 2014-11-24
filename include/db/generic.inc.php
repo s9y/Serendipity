@@ -213,7 +213,7 @@ function serendipity_db_connect() {
     }
 
     $dbName = $serendipity['dbName'];
-    if ($serendipity['dbType'] == "pdo-sqlite" || $serendipity['dbType']  == "sqlite3" || $serendipity['dbType'] == "sqlite") {
+    if ($serendipity['dbType'] == "pdo-sqlite" || $serendipity['dbType']  == "sqlite3" || $serendipity['dbType'] == 'sqlite3oo' || $serendipity['dbType'] == "sqlite") {
         $dbName .= ".db";   # the old sqlite-wrapper appended this .db to the dbName, keep this for bc
     }
     
@@ -275,6 +275,7 @@ function serendipity_db_schema_import($query) {
             break;
 
         case 'sqlite3':
+        case 'sqlite3oo':
         case 'pdo-sqlite':
         case "sqlite":
             static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}', '{FULLTEXT}', '{FULLTEXT_MYSQL}', '{BOOLEAN}', '{UTF_8}', '{TEXT}');
@@ -296,7 +297,7 @@ function serendipity_db_schema_import($query) {
  */
 function serendipity_db_probe($hash, &$errs) {
     $dbName = $hash['dbName'];
-    if ($hash['dbType'] == "pdo-sqlite" || $hash['dbType']  == "sqlite3" || $hash['dbType'] == "sqlite") {
+    if ($hash['dbType'] == "pdo-sqlite" || $hash['dbType']  == "sqlite3" || $hash['dbType'] == "sqlite" || $hash['dbType'] == 'sqlite3oo') {
         $dbName .= ".db";   # the old sqlite-wrapper appended this .db to the dbName, keep this for bc
     }
     

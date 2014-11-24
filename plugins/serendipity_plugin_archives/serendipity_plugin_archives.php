@@ -82,7 +82,7 @@ class serendipity_plugin_archives extends serendipity_plugin {
 
         echo '<ul class="plainList">' . "\n";
         
-        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3') {
+        if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'sqlite3oo') {
             $dist_sql = 'count(e.id) AS orderkey';
         } else {
             $dist_sql = 'count(DISTINCT e.id) AS orderkey';
