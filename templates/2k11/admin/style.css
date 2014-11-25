@@ -2346,7 +2346,9 @@ input[name="serendipity[filter][fileCategory]"] {
 
 /* CKEDITOR Toolbar */
 /* hide cke-image button to support the internal functionality needed for MediaLibrary inserts, but disables the button to eyes, if not in CKE PRESET Toolbar (#65) */
-.cke_toolgroup a.cke_button__image:not(#cke_65) {
+/* Sadly firefox and chrome engines count differently in second textarea, DOM ID 65/146 in FF is 67/150 in Chrome. There is a need to put this into engines only media device */
+#cke_1_top .cke_toolgroup a.cke_button__image:not(#cke_65),
+#cke_2_top .cke_toolgroup a.cke_button__image:not(#cke_146):not(#cke_150) {
     display: none !important;
     visibility: hidden;
     height: 0 !important;
@@ -2354,7 +2356,8 @@ input[name="serendipity[filter][fileCategory]"] {
     border-radius: 0 !important;
 }
 /* hide next sibling separator */
-.cke_toolgroup a.cke_button__image:not(#cke_65)~.cke_toolbar_separator {
+#cke_1_top .cke_toolgroup a.cke_button__image:not(#cke_65)~.cke_toolbar_separator,
+#cke_2_top .cke_toolgroup a.cke_button__image:not(#cke_67)~.cke_toolbar_separator {
     display: none;
     visibility: hidden;
     margin: 0px;
@@ -2363,7 +2366,7 @@ input[name="serendipity[filter][fileCategory]"] {
     border-radius: 0 !important;
 }
 /* hide empty image toolgroup in toolbar BASIC (do not remove the span tag!) */
-span#cke_27 {
+#cke_1_top span#cke_27, #cke_2_top span#cke_63, #cke_2_top span#cke_67 {
     display: none;
     visibility: hidden;
     width: 0 !important;

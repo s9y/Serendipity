@@ -157,7 +157,7 @@ CKEDITOR.editorConfig = function( config ) {
 //    console.log(JSON.stringify(config.toolbar_Standard));
 
     // in case of toolbar : Full (moved 'Source' and removed 'Font' buttons. 'Styles' and 'Preview' disabled overall. )
-    // With the css hidden fix for cke image button, it is not possible to move the s9ymediabuttons in this toolbar up. Leave it in others!
+    // With the css hidden fix for cke image button, it is not possible to move the s9ymediabuttons in this toolbar up. Leave it in others! (fixed with break apart paragraph, which sets needed CSS IDs to CKE FULL Toolbar only! )
     config.toolbar_Full = [
         { name: 'styles',      items : [ 'Styles','Format',/*'Font',*/'FontSize' ] },
         { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
@@ -165,12 +165,14 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'document',    items : [ /*'Source','-',*/'Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
         { name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
         { name: 'forms',       items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
-        { name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+        { name: 'paragraph1',  items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv' ] },
+        { name: 'paragraph2',  items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
+        { name: 's9yml', items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
         { name: 'colors',      items : [ 'TextColor','BGColor' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
-        { name: 'others',      items : s9ypluginbuttonsAll },
+        { name: 'others',      items : s9ypluginbuttons },
         { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] },
         { name: 'document', groups : [ 'mode', 'document', 'doctools' ], items : [ 'Source' ] },
         { name: 'cheatsheet',  items : ['CheatSheet'] }
