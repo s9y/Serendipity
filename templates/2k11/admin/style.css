@@ -2346,7 +2346,7 @@ input[name="serendipity[filter][fileCategory]"] {
 
 /* CKEDITOR Toolbar */
 /* hide cke-image button to support the internal functionality needed for MediaLibrary inserts, but disables the button to eyes, if not in CKE PRESET Toolbar (#65) */
-/* Sadly firefox and chrome engines count differently in second textarea, DOM ID 65/146 in FF is 67/150 in Chrome. There is a need to put this into engines only media device */
+/* Sadly firefox and chrome engines count differently in textareas, DOM ID 65/146 in FF/IE is 67/150 in Chrome. */
 #cke_1_top .cke_toolgroup a.cke_button__image:not(#cke_65),
 #cke_2_top .cke_toolgroup a.cke_button__image:not(#cke_146):not(#cke_150) {
     display: none !important;
