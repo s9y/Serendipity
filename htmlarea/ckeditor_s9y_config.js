@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.7, last modified 2014-11-19 by Ian
+ *               ckeditor_s9y_config.js, v. 1.8, last modified 2014-11-25 by Ian
  */
 
 /**
@@ -143,12 +143,13 @@ CKEDITOR.editorConfig = function( config ) {
     config.toolbar_Standard = [
         { name: 'basicstyles', items : [ 'Format','-','Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
         { name: 'clipboard',   items : [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo'] },
+        { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar'] },
         { name: 'paragraph', groups : [ 'list', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
-        { name: 'others',      items : s9ypluginbuttonsAll },
+        { name: 'others',      items : s9ypluginbuttons },
         { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
         { name: 'about',       items : [ 'About', ] },
         { name: 'cheatsheet',  items : ['CheatSheet'] }
@@ -156,6 +157,7 @@ CKEDITOR.editorConfig = function( config ) {
 //    console.log(JSON.stringify(config.toolbar_Standard));
 
     // in case of toolbar : Full (moved 'Source' and removed 'Font' buttons. 'Styles' and 'Preview' disabled overall. )
+    // With the css hidden fix for cke image button, it is not possible to move the s9ymediabuttons in this toolbar up. Leave it in others!
     config.toolbar_Full = [
         { name: 'styles',      items : [ 'Styles','Format',/*'Font',*/'FontSize' ] },
         { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
@@ -202,12 +204,12 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
         { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
         { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
-        '/',
+//        '/',
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
         { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
         { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        '/',
+//        '/',
         { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },

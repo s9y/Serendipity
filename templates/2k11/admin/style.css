@@ -2344,6 +2344,32 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 /* end TEMP fixes */
 
+/* CKEDITOR Toolbar */
+/* hide cke-image button to support the internal functionality needed for MediaLibrary inserts, but disables the button to eyes, if not in CKE PRESET Toolbar (#65) */
+.cke_toolgroup a.cke_button__image:not(#cke_65) {
+    display: none !important;
+    visibility: hidden;
+    height: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+}
+/* hide next sibling separator */
+.cke_toolgroup a.cke_button__image:not(#cke_65)~.cke_toolbar_separator {
+    display: none;
+    visibility: hidden;
+    margin: 0px;
+    height: 0px;
+    width: 0px;
+    border-radius: 0 !important;
+}
+/* hide empty image toolgroup in toolbar BASIC (do not remove the span tag!) */
+span#cke_27 {
+    display: none;
+    visibility: hidden;
+    width: 0 !important;
+}
+/* end CKEDITOR fixes */
+
 /* MAGNIFIC POPUP  */
 .mfp-bg {
   top: 0;

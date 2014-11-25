@@ -21,7 +21,7 @@
             CKEDITOR.dialog.add( 'MediaEmbedDialog', function (instance)
             {
                 return {
-                    title : 'Embed Media',
+                    title : 'Embed Video Media',
                     minWidth : 550,
                     minHeight : 200,
                     contents :
@@ -53,7 +53,7 @@
 
             editor.ui.addButton( 'MediaEmbed',
             {
-                label: 'Embed Media',
+                label: 'Embed Video Media',
                 command: 'MediaEmbed',
                 toolbar: 'mediaembed'
             } );
