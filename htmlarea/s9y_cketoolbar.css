@@ -1,8 +1,13 @@
-/* CKEDITOR Toolbar tweaks */
-/* hide cke-image button to support the internal functionality needed for MediaLibrary inserts, but disables the button to eyes, if not in CKE PRESET Toolbar (#65) */
-/* Sadly firefox and chrome engines count differently in textareas, DOM ID 65/146 in FF/IE is 67/150 in Chrome. */
-#cke_1_top .cke_toolgroup a.cke_button__image:not(#cke_65),
-#cke_2_top .cke_toolgroup a.cke_button__image:not(#cke_146):not(#cke_150) {
+/*
+  CKEDITOR Toolbar tweak to hide the cke-image widget buttons.
+  Continues to support the internal image widget functionality needed for S9y-MediaLibrary inserts,
+  but disables these button to eyes, if USER is not using the CKE PRESET Toolbar!
+  Sadly firefox and chrome engines count node IDs differently in textareas,
+  which for the BASIC emptied image toolbar group is DOM ID 27/63 in FF/IE is 27/67 in Chrome.
+*/
+
+#cke_1_top .cke_toolgroup a.cke_button__image,
+#cke_2_top .cke_toolgroup a.cke_button__image {
     display: none !important;
     visibility: hidden;
     height: 0 !important;
@@ -10,14 +15,13 @@
     border-radius: 0 !important;
 }
 /* hide next sibling separator */
-#cke_1_top .cke_toolgroup a.cke_button__image:not(#cke_65)~.cke_toolbar_separator,
-#cke_2_top .cke_toolgroup a.cke_button__image:not(#cke_67)~.cke_toolbar_separator {
+#cke_1_top .cke_toolgroup a.cke_button__image~.cke_toolbar_separator,
+#cke_2_top .cke_toolgroup a.cke_button__image~.cke_toolbar_separator {
     display: none;
     visibility: hidden;
     margin: 0px;
     height: 0px;
     width: 0px;
-    border-radius: 0 !important;
 }
 /* hide empty image toolgroup in toolbar BASIC (do not remove the span tag!) */
 #cke_1_top span#cke_27, #cke_2_top span#cke_63, #cke_2_top span#cke_67 {
@@ -25,4 +29,3 @@
     visibility: hidden;
     width: 0 !important;
 }
-/* end CKEDITOR fixes */
