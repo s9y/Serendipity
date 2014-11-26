@@ -1,6 +1,9 @@
 {if $init == false}
-    <script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor/ckeditor.js"></script>
-    <script src="{$wysiwyg_customPlugin}"></script>
+
+<link rel="stylesheet" href="{$serendipityHTTPPath}htmlarea/s9y_cketoolbar.css">
+<script src="{$serendipityHTTPPath}htmlarea/ckeditor/ckeditor/ckeditor.js"></script>
+<script src="{$wysiwyg_customPlugin}"></script>
+
 {/if}
 <script>
     $('document').ready(function() {
