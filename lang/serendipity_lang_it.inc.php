@@ -1085,3 +1085,5 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Force: Alternate');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Force: CKEditor Full');
 
+@define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
+@define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');

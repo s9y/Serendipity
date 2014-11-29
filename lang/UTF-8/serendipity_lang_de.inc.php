@@ -1084,3 +1084,5 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_FULL', 'Erzwingen: Vollständig');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Erzwingen: Alternative');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
+@define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
+@define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');

@@ -88,7 +88,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
                 $select['categoryid']           = 'ID';
                 $select['none']                 = NONE;
                 $propbag->add('type',         'select');
-                $propbag->add('name',         SORT_CRITERIA); # i18n
+                $propbag->add('name',         SORT_ORDER);
                 $propbag->add('description',  '');
                 $propbag->add('select_values', $select);
                 $propbag->add('default',     'category_name');

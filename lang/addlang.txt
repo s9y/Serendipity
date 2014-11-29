@@ -1,11 +1,2 @@
-@define('USERCONF_WYSIWYG_PRESET_S9Y', 'Serendipity (default)');
-@define('USERCONF_WYSIWYG_PRESET_BASIC', 'Reduced');
-@define('USERCONF_WYSIWYG_PRESET_FULL', 'Full');
-@define('USERCONF_WYSIWYG_PRESET_STANDARD', 'Alternate');
-@define('USERCONF_WYSIWYG_PRESET_CKE', 'CKEditor Full');
-@define('USERCONF_WYSIWYG_PRESET_NOCC_S9Y', 'Force: Serendipity');
-@define('USERCONF_WYSIWYG_PRESET_NOCC_BASIC', 'Force: Reduced');
-@define('USERCONF_WYSIWYG_PRESET_NOCC_FULL', 'Force: Full');
-@define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Force: Alternate');
-@define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Force: CKEditor Full');
-
+@define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
+@define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
