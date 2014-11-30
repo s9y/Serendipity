@@ -1143,17 +1143,30 @@ function serendipity_smarty_init($vars = array()) {
 function serendipity_smarty_purge() {
     global $serendipity;
 
-    /* Attempt to init Smarty, brrr */
-    serendipity_smarty_init();
+    serendipity_smarty_init();  # need initiated smarty to get the compile/cache dir
+    $directory = new \RecursiveDirectoryIterator($serendipity['smarty']->getCompileDir());
+    $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
+        if ($current->getFilename()[0] === '.') {
+            return false;
+        }
+        if ($current->isDir()) {
+            return true;    # go deeper into all dirs
+        } else {
+            return strpos($current->getFilename(), '.tpl.php') !== false;
+        }
+    });
+    $iterator = new \RecursiveIteratorIterator($filter);
+    $files = array();
+    foreach ($iterator as $info) {
+        $files[] = $info->getPathname();
+    }
 
-    $files = serendipity_traversePath($serendipity['smarty']->getCompileDir() . DIRECTORY_SEPARATOR, '', false, '/.+\.tpl\.php$/');
-
-    if ( !is_array($files) ) {
+    if (!is_array($files) || empty($files)) {
         return false;
     }
 
-    foreach ( $files as $file ) {
-        @unlink($serendipity['smarty']->getCompileDir() . DIRECTORY_SEPARATOR . $file['name']);
+    foreach ($files as $file ) {
+        @unlink($file);
     }
 }
 
