@@ -1144,29 +1144,11 @@ function serendipity_smarty_purge() {
     global $serendipity;
 
     serendipity_smarty_init();  # need initiated smarty to get the compile/cache dir
-    $directory = new \RecursiveDirectoryIterator($serendipity['smarty']->getCompileDir());
-    $filter = new \RecursiveCallbackFilterIterator($directory, function ($current, $key, $iterator) {
-        if ($current->getFilename()[0] === '.') {
-            return false;
-        }
-        if ($current->isDir()) {
-            return true;    # go deeper into all dirs
-        } else {
-            return strpos($current->getFilename(), '.tpl.php') !== false;
-        }
-    });
-    $iterator = new \RecursiveIteratorIterator($filter);
-    $files = array();
-    foreach ($iterator as $info) {
-        $files[] = $info->getPathname();
-    }
-
-    if (!is_array($files) || empty($files)) {
-        return false;
-    }
-
-    foreach ($files as $file ) {
-        @unlink($file);
+    $dir = new RecursiveDirectoryIterator($serendipity['smarty']->getCompileDir());
+    $ite = new RecursiveIteratorIterator($dir);
+    $files = new RegexIterator($ite, '@.*\.tpl\.php$@', RegexIterator::GET_MATCH);
+    foreach($files as $file) {
+        unlink($file[0]);
     }
 }
 
