@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.9, last modified 2014-11-26 by Ian
+ *               ckeditor_s9y_config.js, v. 1.10, last modified 2014-12-02 by Ian
  */
 
 /**
@@ -117,7 +117,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Allow one(!) default font label, eg.
     //config.font_defaultLabel = 'Arial';
     // Add other font names to the list of fonts names to be displayed in the Font combo in the toolbar. - eg.
-    //config.font_names = config.font_names + 
+    //config.font_names = config.font_names +
     //    'Arial/Arial, Helvetica, sans-serif;' +
     //    'Times New Roman/Times New Roman, Times, serif;' +
     //    'Verdana';
@@ -147,7 +147,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Remove custom toolbar buttons and plugins from all toolbars
     // A list of plugins that must not be loaded. This setting makes it possible to avoid loading some plugins defined in the CKEDITOR.config.plugins setting, without having to touch it and potentially break it.
     config.removePlugins = 'flash,iframe,forms'; // possible strict suggestions: 'flash,iframe,elementspath,save,font,showblocks,div,liststyle,pagebreak,smiley,specialchar,horizontalrule,indentblock,justify,pastefromword,newpage,preview,print,stylescombo'
-    config.removeButtons = 'Preview,Styles'; // these buttons are useless in Serendipity and therefore not set. Without, even the toolbar Groups break better on screens.
+    config.removeButtons = 'Preview,Styles,JustifyLeft'; // these buttons are useless or preset in Serendipity and therefore not set. Without, even the toolbar Groups break better on screens.
 
 
     /** SECTION: Certain Plugin Buttons
@@ -196,6 +196,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.toolbar_Standard = [
         { name: 'basicstyles', items : [ 'Format','-','Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
         { name: 'clipboard',   items : [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo'] },
+        { name: 'blocks',      items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
         { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar'] },
         { name: 'paragraph', groups : [ 'list', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
@@ -326,12 +327,13 @@ CKEDITOR.editorConfig = function( config ) {
 
     /** SECTION: Howto add Custom Plugins into toolbars
         1. Adding additional CKEDITOR Plugins to the config
-           Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/chkeditor/plugins.
+           Download the Plugin, check version matching to this ckeditor version and drop the plugin to /htmlarea/ckeditor/ckeditor/plugins.
            Copy the directories plugin name, eg 'mediaembed'.
            Copy the file htmlarea/ckeditor_s9y_plugin.js to either /templates/2k11/admin, or to your template in /templates/xxx/admin and rename it to ckeditor_custom_plugin.js.
            Add the plugin name to the "extraPlugins" string.
            Now add this name also to this files custom copy upper config.toolbarGroup, wherever you like it to have, eg. "{ name: 'mediaembed' }," if that plugin emits a button to be placed into the toolbar.
            Or as { name: 'pluginname', items: 'PluginName' } eg { name: 'mediaembed', items: 'MediaEmbed' } in one of the upper toolbars, if that plugin emits a button to be placed into the toolbar.
+           The ckeditor plugin webpage download procedure will give information about dependency plugins and naming conventions.
            After a browser reload, the newly added plugin should load into your textareas toolbars.
         2. PLEASE NOTE:
            Do not use any customized CKEditor Downloads, since this will only work with the CKE PRESET toolbar!
