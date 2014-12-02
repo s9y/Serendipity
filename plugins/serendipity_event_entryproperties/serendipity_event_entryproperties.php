@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.33');
+        $propbag->add('version',       '1.34');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -101,18 +101,17 @@ class serendipity_event_entryproperties extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE);
                 $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC);
                 $propbag->add('checkable',   true);
-
                 $values = array(
-                    'sticky'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS),
+                    'sticky'       => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS),
                     'frontpage'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_NO_FRONTPAGE),
-                    'hiderss'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_HIDERSS),
-                    'access'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS),
-                    'password'    => array('display' => PASSWORD),
-                    'groups'    => array('display' => PERM_READ . ': ' . GROUP),
-                    'authors'    => array('display' => PERM_READ . ': ' . AUTHOR),
-                    'author'    => array('display' => AUTHOR),
-                    'markup'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP),
-                    'customfields'    => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS),
+                    'hiderss'      => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_HIDERSS),
+                    'access'       => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS),
+                    'password'     => array('display' => PASSWORD),
+                    'groups'       => array('display' => PERM_READ . ': ' . GROUP),
+                    'authors'      => array('display' => PERM_READ . ': ' . AUTHOR),
+                    'author'       => array('display' => AUTHOR),
+                    'markup'       => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP),
+                    'customfields' => array('display' => PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS),
                 );
                 $propbag->add('values',      $values);
                 $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,markup');
@@ -214,6 +213,12 @@ class serendipity_event_entryproperties extends serendipity_event
         // Get existing data
         $property = serendipity_fetchEntryProperties($eventData['id']);
         $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
+
+        // cleanup properies first, if none disable_markups plugins were set or a previous selected was reset
+        if (is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'])) {
+            $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
+            serendipity_db_query($q);
+        }
 
         // Special case for disable markups.
         if (is_array($properties['disable_markups'])) {
@@ -395,7 +400,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 <label for="properties_markup"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP; ?></label>
 
                 <select id="properties_markup" name="serendipity[properties][disable_markups][]" multiple="multiple" size="4">
-                <?php
+<?php
                 $plugins = serendipity_plugin_api::get_event_plugins();
 
                 if (is_array($plugins)) {
@@ -417,17 +422,16 @@ class serendipity_event_entryproperties extends serendipity_event
                         echo '<option ' . ($selected ? 'selected="selected"' : '') . ' value="' . $plugin_data['p']->instance . '">' . serendipity_specialchars($plugin_data['p']->title) . '</option>' . "\n";
                     }
                 }
-                ?>
+?>
                 </select>
             </div>
 <?php
             return true;
 
         case 'customfields':
-            
 ?>
             <fieldset class="entryproperties_customfields">
-            <?php
+<?php
                 $fields = trim($this->get_config('customfields'));
                   // Capture special characters for "," and ":"
                 $special_from = array('\\,', '\\:');
@@ -443,7 +447,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS; ?>: <span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1 . sprintf(PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3, 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance); ?></span></legend></span>
 
                 <div id="serendipity_customfields" class="clearfix">
-            <?php
+<?php
                 foreach($fields AS $fieldname) {
                     $fieldparts = explode(':', $fieldname);
                     $fieldname = $fieldparts[0];
@@ -456,19 +460,19 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $value = trim(str_replace($special_to, $special_read, $fieldparts[1]));
                     }
-            ?>
+?>
                     <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
                         <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                     </div>
-            <?php
+<?php
                     }
-            ?>
+?>
                 </div>
-            <?php
+<?php
                 }
-            ?>
+?>
             </fieldset>
 <?php
             return true;
