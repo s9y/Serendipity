@@ -1148,7 +1148,11 @@ function serendipity_smarty_purge() {
     $ite = new RecursiveIteratorIterator($dir);
     $files = new RegexIterator($ite, '@.*\.tpl\.php$@', RegexIterator::GET_MATCH);
     foreach($files as $file) {
-        unlink($file[0]);
+        if (is_writable($file[0])) {
+            unlink($file[0]);
+        } else {
+            if (is_object($serendipity['logger'])) $serendipity['logger']->warning("Could not delete " . $file[0]);
+        }
     }
 }
 
