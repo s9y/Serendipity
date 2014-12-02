@@ -214,7 +214,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $property = serendipity_fetchEntryProperties($eventData['id']);
         $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
 
-        // cleanup properies first, if none disable_markups plugins were set or a previous selected was reset
+        // cleanup properties first, if none disable_markups plugins were set or a previous selected was reset
         if (is_array($serendipity['POST']['properties']) && !is_array($serendipity['POST']['properties']['disable_markups'])) {
             $q = "DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$eventData['id'] . " AND property LIKE 'ep_disable_markup_%'";
             serendipity_db_query($q);
