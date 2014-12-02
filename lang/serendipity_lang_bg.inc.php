@@ -423,7 +423,7 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('INSTALL_CAT_DISPLAY', 'Изглед и настройки');
 @define('INSTALL_CAT_DISPLAY_DESC', 'Настройване как да изглежда Serendipity');
 @define('INSTALL_WYSIWYG', 'Използване на редактор WYSIWYG');
-@define('INSTALL_WYSIWYG_DESC', 'Искате ли да използвате редактора WYSIWYG? (Работи на IE5+, отчасти на Mozilla 1.3+)');
+@define('INSTALL_WYSIWYG_DESC', 'Искате ли да използвате редактора WYSIWYG?');
 @define('INSTALL_POPUP', 'Активиране на употребата на изскачащи прозорци');
 @define('INSTALL_POPUP_DESC', 'Искате ли да използвате изскачащи прозорци за коментари, проследявания и др.?');
 @define('INSTALL_EMBED', 'Вграден ли е Serendipity?');

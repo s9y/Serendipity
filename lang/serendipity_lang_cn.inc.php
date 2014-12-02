@@ -398,7 +398,7 @@
 @define('INSTALL_CAT_DISPLAY', '主题及选项设定');
 @define('INSTALL_CAT_DISPLAY_DESC', '设定系统的主题和其它设定');
 @define('INSTALL_WYSIWYG', '使用 WYSIWYG 编辑器');
-@define('INSTALL_WYSIWYG_DESC', '你要使用 WYSIWYG 编辑器吗？(可在 IE5+ 使用, 某些部分可使用于 Mozilla 1.3+)');
+@define('INSTALL_WYSIWYG_DESC', '你要使用 WYSIWYG 编辑器');
 @define('INSTALL_XHTML11', '强制符合 XHTML 1.1 要求');
 @define('INSTALL_XHTML11_DESC', '让你的系统强制符合 XHTML 1.1 要求 (对旧的浏览器可能有问题)');
 @define('INSTALL_POPUP', '使用弹出窗口');

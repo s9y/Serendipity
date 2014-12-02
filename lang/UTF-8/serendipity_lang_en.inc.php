@@ -395,7 +395,7 @@
 @define('INSTALL_CAT_DISPLAY', 'Appearance and Options');
 @define('INSTALL_CAT_DISPLAY_DESC', 'Customize how Serendipity looks and feels');
 @define('INSTALL_WYSIWYG', 'Use WYSIWYG editor');
-@define('INSTALL_WYSIWYG_DESC', 'Do you want to use the WYSIWYG editor? (Works on IE5+, partially in Mozilla 1.3+)');
+@define('INSTALL_WYSIWYG_DESC', 'Do you want to use the WYSIWYG editor?');
 @define('INSTALL_XHTML11', 'Force XHTML 1.1 compliance');
 @define('INSTALL_XHTML11_DESC', 'Do you want to force XHTML 1.1 compliance (may cause problems for back-/frontend on older 4th generation browsers)');
 @define('INSTALL_POPUP', 'Enable use of popup windows');
