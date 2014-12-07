@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.10, last modified 2014-12-02 by Ian
+ *               ckeditor_s9y_config.js, v. 1.10, last modified 2014-12-07 by Ian
  */
 
 /**
@@ -199,15 +199,15 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'blocks',      items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
         { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar'] },
-        { name: 'paragraph', groups : [ 'list', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
+        { name: 'paragraph',  groups : [ 'list', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
-        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+        { name: 'editing',    groups : [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
         { name: 'others',      items : s9ypluginbuttons },
-        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
+        { name: 'document',   groups : [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
         { name: 'about',       items : [ 'About', ] },
         { name: 'cheatsheet',  items : ['CheatSheet'] },
-        { name: 'tools', items: [ 'Maximize' ] }
+        { name: 'tools',       items : [ 'Maximize' ] }
     ];
 //    console.log(JSON.stringify(config.toolbar_Standard));
 
@@ -221,35 +221,36 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
         { name: 'forms',       items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
 //        { name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
-        { name: 'paragraph1',  items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv' ] },
-        { name: 'paragraph2',  items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+        { name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','-','CreateDiv' ] },
+        { name: 'blocks',      items : [ 'JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock' ] },
+        { name: 'bidi',        items : [ 'BidiLtr','BidiRtl' ] },
         { name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
-        { name: 's9yml', items : s9ymediabuttons },
+        { name: 's9yml',       items : s9ymediabuttons },
         { name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
         { name: 'colors',      items : [ 'TextColor','BGColor' ] },
         { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
         { name: 'others',      items : s9ypluginbuttons },
         { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] },
-        { name: 'document', groups : [ 'mode', 'document', 'doctools' ], items : [ 'Source' ] },
+        { name: 'document',   groups : [ 'mode', 'document', 'doctools' ], items : [ 'Source' ] },
         { name: 'cheatsheet',  items : ['CheatSheet'] }
     ];
 //    console.log(JSON.stringify(config.toolbar_Full));
 
     // in case of Serendipity toolbar : Default
     config.toolbar_Default = [
-        { name: 'tools', items: [ 'Maximize' ] },
-        { name: 'styles', items: [ 'Format' ] },
+        { name: 'tools',        items: [ 'Maximize' ] },
+        { name: 'styles',       items: [ 'Format' ] },
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'RemoveFormat' ] },
-        { name: 'paragraph',  groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
-        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-        { name: 's9yml', items : s9ymediabuttons },
-        { name: 'insert', items: [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
-        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
-        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
-        { name: 'mediaembed',  items : [ 'MediaEmbed' ] },
-        { name: 'others', items: s9ypluginbuttons },
-        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-        { name: 'about', items: [ 'About' ] }
+        { name: 'paragraph',   groups: [ 'list', 'indent', 'blocks', 'align' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+        { name: 'links',        items: [ 'Link', 'Unlink', 'Anchor' ] },
+        { name: 's9yml',        items: s9ymediabuttons },
+        { name: 'insert',       items: [ 'Image', '-', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+        { name: 'clipboard',   groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', '-', 'Undo', 'Redo' ] },
+        { name: 'editing',     groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Scayt' ] },
+        { name: 'mediaembed',   items: [ 'MediaEmbed' ] },
+        { name: 'others',       items: s9ypluginbuttons },
+        { name: 'document',    groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
+        { name: 'about',        items: [ 'About' ] }
     ];
 //    console.log(JSON.stringify(config.toolbar_s9y));
 
