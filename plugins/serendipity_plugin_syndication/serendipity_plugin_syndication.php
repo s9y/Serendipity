@@ -9,7 +9,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.1');
+        $propbag->add('version',       '2.1.1');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
@@ -201,9 +201,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         echo "</ul>\n";
     }
 
-    function generateFeedButton($feed, $label, $onlick, $icon) {
-        // sadly sidebar only plugins can't use event hooks
-        $link = 'class="serendipity_xml_icon" href="'.$feed. $onclick.'"';
+    function generateFeedButton($feed, $label, $onclick, $icon) {
+        $link = 'class="serendipity_xml_icon" href="'.$feed.'" '. $onclick;
         $output = '
 <li>
     <a id="serendipity_subtome" ' . $link . '><img src="' . $icon . '" alt="XML" style="border: 0px" /></a>'."\n";
