@@ -422,6 +422,13 @@ function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARS
             $flags = ENT_COMPAT;
         }
     }
+
+    if ($encoding == 'LANG_CHARSET') {
+        // if called before LANG_CHARSET is set, we need to set a fallback encoding to not throw a php warning that
+        // would kill s9y blogs sometimes (https://github.com/s9y/Serendipity/issues/236)
+        $encoding = 'UTF-8';
+    }
+    
     return htmlspecialchars($string, $flags, $encoding, $double_encode);
 }
 
@@ -437,6 +444,9 @@ function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, 
             // For PHP < 5.4 compatibility
             $flags = ENT_COMPAT;
         }
+    }
+    if ($encoding == 'LANG_CHARSET') {
+        $encoding = 'UTF-8';
     }
     return htmlentities($string, $flags, $encoding, $double_encode);
 }
@@ -455,6 +465,9 @@ function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHAR
             // For PHP < 5.4 compatibility
             $flags = ENT_COMPAT;
         }
+    }
+    if ($encoding == 'LANG_CHARSET') {
+        $encoding = 'UTF-8';
     }
     return html_entity_decode($string, $flags, $encoding, $double_encode);
 }
