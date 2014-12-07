@@ -382,10 +382,11 @@ function serendipity_getCoreVersion($version) {
  * @return null
  */
 function serendipity_die($html) {
+    $charset = (LANG_CHARSET == 'LANG_CHARSET') ? 'UTF-8' : LANG_CHARSET;
     die(
 '<html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=' . LANG_CHARSET . '">
+        <meta http-equiv="Content-Type" content="text/html; charset=' . $charset . '">
     </head>
     <body>' . $html . '</body>
 </html>');
