@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -9,10 +9,10 @@ session_cache_limiter('public');
 include('serendipity_config.inc.php');
 include(S9Y_INCLUDE_PATH . 'include/functions_rss.inc.php');
 
-$version         = $_GET['version'];
-$description     = $serendipity['blogDescription'];
-$title           = $serendipity['blogTitle'];
-$comments        = FALSE;
+$version     = $_GET['version'];
+$description = $serendipity['blogDescription'];
+$title       = $serendipity['blogTitle'];
+$comments    = FALSE;
 
 if (empty($version)) {
     list($version) = serendipity_discover_rss($_GET['file'], $_GET['ext']);
@@ -87,27 +87,28 @@ if (isset($modified_since) &&
 }
 
 switch ($_GET['type']) {
-case 'comments_and_trackbacks':
-case 'trackbacks':
-case 'comments':
-    $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, $serendipity['RSSfetchLimit'], 'co.id desc', false, $_GET['type']);
-    $description = $title . ' - ' . $description;
-    if (isset($_GET['cid'])) {
-        $title       = $title . ' - ' . COMMENTS_FROM . ' "' . $latest_entry[0]['title'] . '"';
-    } else {
-        $title       = $title . ' - ' . COMMENTS;
-    }
-    $comments    = TRUE;
-    break;
-case 'content':
-default:
-    if (isset($_GET['all']) && $_GET['all']) {
-        // Fetch all entries in reverse order for later importing. Fetch sticky entries as normal entries.
-        $entries = serendipity_fetchEntries(null, true, '', false, false, 'id ASC', '', false, true);
-    } else {
-        $entries = serendipity_fetchEntries(null, true, $serendipity['RSSfetchLimit'], false, (isset($modified_since) ? $modified_since : false), 'timestamp DESC', '', false, true);
-    }
-    break;
+    case 'comments_and_trackbacks':
+    case 'trackbacks':
+    case 'comments':
+        $entries     = serendipity_fetchComments(isset($_GET['cid']) ? $_GET['cid'] : null, $serendipity['RSSfetchLimit'], 'co.id desc', false, $_GET['type']);
+        $description = $title . ' - ' . $description;
+        if (isset($_GET['cid'])) {
+            $title   = $title . ' - ' . COMMENTS_FROM . ' "' . $latest_entry[0]['title'] . '"';
+        } else {
+            $title   = $title . ' - ' . COMMENTS;
+        }
+        $comments    = TRUE;
+        break;
+
+    case 'content':
+    default:
+        if (isset($_GET['all']) && $_GET['all']) {
+            // Fetch all entries in reverse order for later importing. Fetch sticky entries as normal entries.
+            $entries = serendipity_fetchEntries(null, true, '', false, false, 'id ASC', '', false, true);
+        } else {
+            $entries = serendipity_fetchEntries(null, true, $serendipity['RSSfetchLimit'], false, (isset($modified_since) ? $modified_since : false), 'timestamp DESC', '', false, true);
+        }
+        break;
 }
 
 if (isset($serendipity['serendipityRealname'])) {
@@ -139,21 +140,21 @@ $metadata = array(
 );
 
 if (serendipity_get_config_var('feedBannerURL') != '') {
-    $img   = serendipity_get_config_var('feedBannerURL');
-    $w     = serendipity_get_config_var('feedBannerWidth');
-    $h     = serendipity_get_config_var('feedBannerHeight');
+    $img = serendipity_get_config_var('feedBannerURL');
+    $w   = serendipity_get_config_var('feedBannerWidth');
+    $h   = serendipity_get_config_var('feedBannerHeight');
 } elseif (($banner = serendipity_getTemplateFile('img/rss_banner.png', 'serendipityPath'))) {
     $img = serendipity_getTemplateFile('img/rss_banner.png', 'baseURL');
-    $i = getimagesize($banner);
-    $w = $i[0];
-    $h = $i[1];
+    $i   = getimagesize($banner);
+    $w   = $i[0];
+    $h   = $i[1];
 } else {
     $img = serendipity_getTemplateFile('img/s9y_banner_small.png', 'baseURL');
-    $w = 100;
-    $h = 21;
+    $w   = 100;
+    $h   = 21;
 }
 
-    $metadata['additional_fields']['image'] = <<<IMAGE
+$metadata['additional_fields']['image'] = <<<IMAGE
 <image>
     <url>$img</url>
     <title>RSS: $title - $description</title>
@@ -163,12 +164,12 @@ if (serendipity_get_config_var('feedBannerURL') != '') {
 </image>
 IMAGE;
 
-    $metadata['additional_fields']['image_atom1.0'] = <<<IMAGE
+$metadata['additional_fields']['image_atom1.0'] = <<<IMAGE
 <icon>$img</icon>
 IMAGE;
 
-    $metadata['additional_fields']['image_rss1.0_channel'] = '<image rdf:resource="' . $img . '" />';
-    $metadata['additional_fields']['image_rss1.0_rdf'] = <<<IMAGE
+$metadata['additional_fields']['image_rss1.0_channel'] = '<image rdf:resource="' . $img . '" />';
+$metadata['additional_fields']['image_rss1.0_rdf'] = <<<IMAGE
 <image rdf:about="$img">
     <url>$img</url>
     <title>RSS: $title - $description</title>
@@ -212,7 +213,7 @@ if (is_array($metadata['additional_fields'])) {
         $metadata['additional_fields'][$aid] = $af;
     }
 }
-$metadata['fullFeed']          = serendipity_get_config_var('feedFull', false);
+$metadata['fullFeed'] = serendipity_get_config_var('feedFull', false);
 if ($metadata['fullFeed'] === 'client') {
     if ($_GET['fullFeed'] || $serendipity['GET']['fullFeed']) {
         $metadata['fullFeed'] = true;
@@ -221,7 +222,7 @@ if ($metadata['fullFeed'] === 'client') {
     }
 }
 
-if ($_GET['type']  == 'content' &&
+if ($_GET['type'] == 'content' &&
     !isset($_GET['category']) &&
     !isset($serendipity['GET']['tag']) &&
     serendipity_db_bool(serendipity_get_config_var('feedForceCustom', false)) &&
@@ -232,7 +233,7 @@ if ($_GET['type']  == 'content' &&
     header('Location: ' . serendipity_get_config_var('feedCustom'));
     exit;
 }
-$metadata['showMail']          = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
+$metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
 $metadata['template_file'] = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');

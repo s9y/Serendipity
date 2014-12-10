@@ -872,4 +872,3 @@ function is_utf8($string) {
          . '|\xF4[\x80-\x8F][\x80-\xBF]{2}'      # plane 16
          . ')*$%xs', $string);
 }
-

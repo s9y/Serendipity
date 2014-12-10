@@ -620,14 +620,14 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                         $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword'] = $password;
                     }
 
-                    $_SESSION['serendipityUser']        = $serendipity['serendipityUser']         = $username;
-                    $_SESSION['serendipityRealname']    = $serendipity['serendipityRealname']     = $row['realname'];
-                    $_SESSION['serendipityEmail']       = $serendipity['serendipityEmail']        = $row['email'];
-                    $_SESSION['serendipityAuthorid']    = $serendipity['authorid']                = $row['authorid'];
-                    $_SESSION['serendipityUserlevel']   = $serendipity['serendipityUserlevel']    = $row['userlevel'];
-                    $_SESSION['serendipityAuthedUser']  = $serendipity['serendipityAuthedUser']   = true;
-                    $_SESSION['serendipityRightPublish']= $serendipity['serendipityRightPublish'] = $row['right_publish'];
-                    $_SESSION['serendipityHashType']    = $serendipity['serendipityHashType']     = $row['hashtype'];
+                    $_SESSION['serendipityUser']         = $serendipity['serendipityUser']         = $username;
+                    $_SESSION['serendipityRealname']     = $serendipity['serendipityRealname']     = $row['realname'];
+                    $_SESSION['serendipityEmail']        = $serendipity['serendipityEmail']        = $row['email'];
+                    $_SESSION['serendipityAuthorid']     = $serendipity['authorid']                = $row['authorid'];
+                    $_SESSION['serendipityUserlevel']    = $serendipity['serendipityUserlevel']    = $row['userlevel'];
+                    $_SESSION['serendipityAuthedUser']   = $serendipity['serendipityAuthedUser']   = true;
+                    $_SESSION['serendipityRightPublish'] = $serendipity['serendipityRightPublish'] = $row['right_publish'];
+                    $_SESSION['serendipityHashType']     = $serendipity['serendipityHashType']     = $row['hashtype'];
 
                     serendipity_load_configuration($serendipity['authorid']);
                     serendipity_setCookie('userDefLang', $serendipity['lang'], false);
@@ -920,7 +920,7 @@ function serendipity_probeInstallation($item) {
                     $res['sqlite3oo'] = 'SQLite3 (OO) (Preferrably use PDO-SQlite!)';
                 } else {
                     $res['sqlite3oo'] = 'SQLite3 (OO)';
-                }    
+                }
             }
             if (function_exists('sqlrcon_alloc')) {
                 $res['sqlrelay'] = 'SQLRelay';
@@ -1378,7 +1378,7 @@ function &serendipity_fetchGroup($groupid) {
 function &serendipity_getGroups($authorid, $sequence = false) {
     global $serendipity;
 
-    $_groups =& serendipity_db_query("SELECT g.id   AS confkey,
+    $_groups =& serendipity_db_query("SELECT g.id  AS confkey,
                                             g.name AS confvalue,
                                             g.id   AS id,
                                             g.name AS name

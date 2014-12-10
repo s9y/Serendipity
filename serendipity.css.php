@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -50,7 +50,6 @@ function serendipity_printStylesheet($file, $dir = '') {
 
              @file_get_contents($file, 1));
 }
-
 
 if (strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false) {
     header('Cache-Control: no-cache');

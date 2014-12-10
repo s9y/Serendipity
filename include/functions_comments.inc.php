@@ -689,19 +689,19 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
     $counter_comments = serendipity_db_query("SELECT count(id) AS counter 
                                                 FROM {$serendipity['dbPrefix']}comments 
                                                WHERE status = 'approved' 
-                                                 AND type   = 'NORMAL'
-                                                 AND entry_id = " . (int)$entry_id . "
+                                                 AND type   = 'NORMAL' 
+                                                 AND entry_id = " . (int)$entry_id . " 
                                             GROUP BY entry_id", true);
 
     $counter_tb = serendipity_db_query("SELECT count(id) AS counter 
                                           FROM {$serendipity['dbPrefix']}comments 
                                          WHERE status = 'approved' 
-                                           AND (type = 'TRACKBACK' or type = 'PINGBACK')
-                                           AND entry_id = " . (int)$entry_id . "
+                                           AND (type = 'TRACKBACK' or type = 'PINGBACK') 
+                                           AND entry_id = " . (int)$entry_id . " 
                                       GROUP BY entry_id", true);
 
     $query = "UPDATE {$serendipity['dbPrefix']}entries 
-                 SET comments      = " . (int)$counter_comments['counter'] . ",
+                 SET comments      = " . (int)$counter_comments['counter'] . ", 
                      trackbacks    = " . (int)$counter_tb['counter'] . ", 
                      last_modified = ". $lm ." 
                WHERE id = ". (int)$entry_id;
@@ -726,7 +726,7 @@ function serendipity_approveComment($cid, $entry_id, $force = false, $moderate =
         if ($moderate) return -1; // comment set to pending
         if (!$moderate) return 1; // comment set to approved
     }
-    
+
     return true;
 }
 

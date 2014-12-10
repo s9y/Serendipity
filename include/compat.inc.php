@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -65,7 +65,7 @@ function memSnap($tshow = '') {
 /**
  * Set our own exeption handler to convert all errors into exeptions automatically
  * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
- * 
+ *
  * See Notes about returning false
  *
  * @access public
@@ -135,7 +135,7 @@ if (!function_exists('errorToExceptionHandler')) {
                 $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
                 #var_dump(headers_list());
                 if (headers_sent()) {
-                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, which hardly isn't seen by many users
+                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, or into streamed js files, which hardly isn't seen by many users
                 } else {
                     // see global include of function in plugin_api.inc.php
                     // this also reacts on non eye-displayed errors with following small javascript,
@@ -412,7 +412,7 @@ if (function_exists('date_default_timezone_get')) {
 /**
  * In PHP 5.4, the default encoding of htmlspecialchar changed to UTF-8 and it will emit empty strings when given
  * native encoded strings containing umlauts. This wrapper should to be used in the core until PHP 5.6 fixes the bug.
- */ 
+ */
 function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
     if ($flags == null) {
         if (defined('ENT_HTML401')) {
@@ -429,13 +429,13 @@ function serendipity_specialchars($string, $flags = null, $encoding = LANG_CHARS
         // would kill s9y blogs sometimes (https://github.com/s9y/Serendipity/issues/236)
         $encoding = 'UTF-8';
     }
-    
+
     return htmlspecialchars($string, $flags, $encoding, $double_encode);
 }
 
 /**
  * see serendipity_specialchars
- */ 
+ */
 function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
     if ($flags == null) {
         if (defined('ENT_HTML401')) {
@@ -454,7 +454,7 @@ function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, 
 
 /**
  * serendipity_specialchars
- */ 
+ */
 function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
     if ($flags == null) {
         # NOTE: ENT_SUBSTITUTE does not exist for this function, and the documentation does not specify that it will

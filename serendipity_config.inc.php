@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -13,7 +13,7 @@ if (!headers_sent() && php_sapi_name() !== 'cli') {
         session_name('s9y_' . md5(dirname(__FILE__)));
         session_start();
     }
-    
+
     // Prevent session fixation by only allowing sessions that have been sent by the server.
     // Any session that does not contain our unique token will be regarded as foreign/fixated
     // and be regenerated with a system-generated SID.
@@ -44,12 +44,12 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version']         = '2.0-rc1';
+$serendipity['version'] = '2.0-rc1';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
 if (!isset($serendipity['production'])) {
-    $serendipity['production']      = ! preg_match('@\-(alpha|beta|cvs|rc).*@', $serendipity['version']);
+    $serendipity['production'] = ! preg_match('@\-(alpha|beta|cvs|rc).*@', $serendipity['version']);
 }
 
 // Set error reporting
@@ -66,10 +66,10 @@ $serendipity['errorhandler'] = 'errorToExceptionHandler';
 
 
 // Default rewrite method
-$serendipity['rewrite']         = 'none';
+$serendipity['rewrite'] = 'none';
 
 // Message container
-$serendipity['messagestack']    = array();
+$serendipity['messagestack'] = array();
 
 // Can the user change the date of publishing for an entry?
 $serendipity['allowDateManipulation'] = true;
@@ -77,14 +77,14 @@ $serendipity['allowDateManipulation'] = true;
 // How much time is allowed to pass since the publising of an entry, so that a comment to that entry
 // will update it's LastModified stamp? If the time is passed, a comment to an old entry will no longer
 // push an article as being updated.
-$serendipity['max_last_modified']    = 60 * 60 * 24 * 7;
+$serendipity['max_last_modified'] = 60 * 60 * 24 * 7;
 
 // Clients can send a If-Modified Header to the RSS Feed (Conditional Get) and receive all articles beyond
 // that date. However it is still limited by the number below of maximum entries
-$serendipity['max_fetch_limit']      = 50;
+$serendipity['max_fetch_limit'] = 50;
 
 // How many bytes are allowed for fetching trackbacks, so that no binary files get accidently trackbacked?
-$serendipity['trackback_filelimit']  = 150 * 1024;
+$serendipity['trackback_filelimit'] = 150 * 1024;
 
 if (!isset($serendipity['fetchLimit'])) {
     $serendipity['fetchLimit'] = 15;
@@ -128,7 +128,7 @@ if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
 }
 
-/* Availiable languages */
+/* Available languages */
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
                                   'de' => 'German',
@@ -138,7 +138,7 @@ if (!isset($serendipity['languages'])) {
                                   'fi' => 'Finnish',
                                   'cs' => 'Czech (Win-1250)',
                                   'cz' => 'Czech (ISO-8859-2)',
-				  'sk' => 'Slovak',
+                                  'sk' => 'Slovak',
                                   'nl' => 'Dutch',
                                   'is' => 'Icelandic',
                                   'tr' => 'Turkish',
@@ -270,7 +270,7 @@ if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
     if ($serendipity['production'] === 'debug') {
         set_error_handler($serendipity['errorhandler'], error_reporting()); // Yes, DEBUG mode should actually report E_STRICT errors! In PHP 5.4s is contained in E_ALL already, but not in PHP 5.2.
     } else {
-    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode, 
+    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode,
     // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
         set_error_handler($serendipity['errorhandler'], E_ALL & ~(E_NOTICE|E_STRICT));
     }
@@ -316,7 +316,7 @@ if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
     } else {
         $log_level = Psr\Log\LogLevel::ERROR;
     }
-    
+
     $serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
 }
 
@@ -411,8 +411,7 @@ $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DE
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
 
-
-// Redirect to the upgrader 
+// Redirect to the upgrader
 if (IS_up2date === false && !defined('IN_upgrader')) {
     if (preg_match(PAT_CSS, $_SERVER['REQUEST_URI'], $matches)) {
         $css_mode = 'serendipity_admin.css';
@@ -458,7 +457,7 @@ if (!isset($serendipity['imagemagick_thumb_parameters'])) {
     $serendipity['imagemagick_thumb_parameters'] = '';
     // Set a variable like below in your serendpity_config_local.inc.php
     //$serendipity['imagemagick_thumb_parameters'] = '-modulate 105,140 -unsharp 0.5x0.5+1.0 -quality 75';
-}    
+}
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
 /* vim: set sts=4 ts=4 expandtab : */

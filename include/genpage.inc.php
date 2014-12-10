@@ -1,4 +1,4 @@
-<?php #
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -8,9 +8,7 @@ if (IN_serendipity !== true) {
 
 include_once('serendipity_config.inc.php');
 
-
 include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
-
 
 $uri_addData = array(
     'startpage' => false,
@@ -18,6 +16,7 @@ $uri_addData = array(
     'view'      => $serendipity['view'],
     'viewtype'  => $serendipity['viewtype']
 );
+
 if ((empty($uri_addData['uriargs']) || trim($uri_addData['uriargs']) == $serendipity['indexFile']) && empty($serendipity['GET']['subpage'])) {
     $uri_addData['startpage'] = true;
 }

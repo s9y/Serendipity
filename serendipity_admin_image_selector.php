@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -129,13 +129,13 @@ switch ($serendipity['GET']['step']) {
         }
         break;
 
-    case 'directoryDoCreate':    
-    case 'directoryDoDelete':        
-        $is_created = true;        
+    case 'directoryDoCreate':
+    case 'directoryDoDelete':
+        $is_created = true;
         if ($serendipity['GET']['step'] == 'directoryDoDelete') {
-            $is_deleted = true;        
+            $is_deleted = true;
         }
-    case 'directoryCreate':    
+    case 'directoryCreate':
         $serendipity['GET']['adminAction'] = $serendipity['GET']['step'];
         $media['case'] = 'external';
         ob_start();

@@ -420,7 +420,7 @@ function persian_date_utf($format, $timestamp='') {
                     $output_str.=$format[$i];
                     break;
             }
-        }else{
+        } else {
             $i++;
             $output_str.=$format[$i];
         }
@@ -480,7 +480,7 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
     }
     */
 
-    if($mon <= 0){
+    if ($mon <= 0){
         // change sign
         $mon = abs($mon);
 
@@ -511,6 +511,6 @@ function persian_mktime($hour='', $min='', $sec='', $mon='', $day='', $year='', 
         $day += $j_days_in_month[$temp_month];
     }
 
-    list($year, $mon, $day)=p2g($year, $mon, $day);
+    list($year, $mon, $day) = p2g($year, $mon, $day);
     return mktime($hour, $min, $sec, $mon, $day, $year, $is_dst);
 }

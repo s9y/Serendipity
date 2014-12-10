@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -159,7 +159,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 
     if (isset($day) && !is_numeric($day)) {
         $day = date('d');
-    }                
+    }
 
     switch($serendipity['calendar']) {
         case 'gregorian':
@@ -366,10 +366,10 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     exit;
 } else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
     $serendipity['view'] = 'plugin';
-    
+
     if (strpos($matches[2], 'admin/')  !== false) {
         include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-    }    
+    }
 
     #echo $serendipity["handler"]["test.js"];
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
@@ -507,7 +507,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     }
 
     $uInfo = serendipity_fetchUsers($serendipity['GET']['viewAuthor']);
-    
+
     if (!is_array($uInfo)) {
         $serendipity['view'] = '404';
         $serendipity['viewtype'] = '404_3';
@@ -566,9 +566,9 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     header('Content-type: application/javascript; charset=' . LANG_CHARSET);
 
     $out = "";
-    
+
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-    
+
     // HOTFIX: The staticpage plugin spews out a 404 error in the genpage hook,
     // because it assumes that all "normal" content pages could belong to it.
     // We need to override the header at this point (again), so that the files
@@ -577,7 +577,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     // or to make sure the "genpage" event hook is not called at this point.
     header('HTTP/1.0 200 OK');
     header('Status: 200 OK');
-    
+
     if ($matches[1] == "serendipity_admin.js") {
         serendipity_plugin_api::hook_event('js_backend', $out);
     } else {

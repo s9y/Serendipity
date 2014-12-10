@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -252,7 +252,7 @@ if (!$use_installer) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
     }
 
-    if (!$serendipity['smarty']) serendipity_smarty_init();
+    if (!is_object($serendipity['smarty'])) serendipity_smarty_init();
     $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
 } else {

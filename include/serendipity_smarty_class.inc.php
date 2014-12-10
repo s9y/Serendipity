@@ -8,9 +8,9 @@
 @define('S9Y_TEMPLATE_SECUREDIR',   $serendipity['serendipityPath'] . $serendipity['templatePath']);
 
 
-// Create a wrapper class extended from Smarty_Security - which allows access to S9Y-plugin and S9Y-template dirs 
-class Serendipity_Smarty_Security_Policy extends Smarty_Security 
-  { 
+// Create a wrapper class extended from Smarty_Security - which allows access to S9Y-plugin and S9Y-template dirs
+class Serendipity_Smarty_Security_Policy extends Smarty_Security
+  {
     // these are the allowed functions only. - default as is
     public $php_functions = array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array', 'time', 'nl2br', 'class_exists');
     // to disable all PHP functions
@@ -24,7 +24,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
 
     public $allow_constants = true;
 
-    public $allow_super_globals = true; 
+    public $allow_super_globals = true;
 
     // array of template directories that are considered secure. No need, as ...TemplateDir concidered secure implicitly.  (unproofed)
     public $secure_dir = array(S9Y_TEMPLATE_SECUREDIR); // do we need this then?
@@ -47,14 +47,14 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
         return true;
     }
 
-    public static function test() 
-      { 
+    public static function test()
+      {
         var_dump(get_called_class());
       }
   }
 
 // Create a wrapper class extended from Smarty
-class Serendipity_Smarty extends Smarty 
+class Serendipity_Smarty extends Smarty
   {
     // bc mode for plugins Smarty2 compat INCLUDE_ANY fetch() calls - to avoid an undefinied property error.
     public $security_settings = false;
@@ -89,9 +89,9 @@ class Serendipity_Smarty extends Smarty
             $instance = new Serendipity_Smarty();
         }
         return $instance;
-      } 
+      }
 
-    public function __construct() 
+    public function __construct()
       {
         // Class Constructor. These automatically get set with each new instance.
         parent::__construct();
@@ -101,9 +101,9 @@ class Serendipity_Smarty extends Smarty
     }
 
     // smarty (3.1.x) object main parameter setup
-    private function setParams() 
+    private function setParams()
       {
-        global $serendipity; 
+        global $serendipity;
 
         // some documentary from the smarty forum
         /*
