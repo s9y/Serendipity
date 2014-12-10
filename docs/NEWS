@@ -3,6 +3,15 @@
 Version 2.0-rc1 (includes beta4/5/6) (November 29th, 2014)
 ------------------------------------------------------------------------
 
+    * Fix for syndication subtome onclick handler
+    
+    * Fix problematic preview stylesheet reference
+    
+    * Optimized clearing smarty template files on upgrading
+    
+    * Properly reset the "disable markup" feature of entryproperties
+      plugin when none selected
+      
     * PHP 5.4+ fix to properly call htmlspecialchars() / htmlentities() /
       html_entity_decode() with a charset option, that has been
       set to to default to UTF-8 and will yield empty strings when
