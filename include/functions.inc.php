@@ -1205,5 +1205,23 @@ function serendipity_db_time() {
     return $ts;
 }
 
+/* Inits the logger.
+ * @return null
+ */
+function serendipity_initLog() {
+    global $serendipity;
+
+    if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
+	if ($serendipity['logLevel'] == 'debug') {
+	    $log_level = Psr\Log\LogLevel::DEBUG;
+	} else {
+	    $log_level = Psr\Log\LogLevel::ERROR;
+	}
+
+	$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
+    }
+}
+                                                                     
+
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */
