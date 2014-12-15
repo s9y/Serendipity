@@ -386,7 +386,7 @@
 @define('INSTALL_CAT_DISPLAY', 'Design und Optionen');
 @define('INSTALL_CAT_DISPLAY_DESC', 'Legt fest, wie Serendipity aussieht');
 @define('INSTALL_WYSIWYG', 'Grafischen WYSIWYG-Editor verwenden');
-@define('INSTALL_WYSIWYG_DESC', 'Soll der grafische WYSIWYG-Editor verwendet werden? (Funktioniert im  IE5+, größenteils Mozilla 1.3+)');
+@define('INSTALL_WYSIWYG_DESC', 'Soll der grafische WYSIWYG-Editor verwendet werden?');
 @define('INSTALL_XHTML11', 'XHTML 1.1 Standard verwenden');
 @define('INSTALL_XHTML11_DESC', 'Soll der XHTML 1.1 Standard verwendet werden? (Erzeugt gültigen Code, kann jedoch bei älteren Browsern Probleme hervorrufen)');
 @define('INSTALL_POPUP', 'Popups für Kommentare, Trackbacks usw. verwenden?');
@@ -1086,3 +1086,4 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
 @define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
 @define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
+@define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');

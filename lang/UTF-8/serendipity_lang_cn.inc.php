@@ -398,7 +398,7 @@
 @define('INSTALL_CAT_DISPLAY', '主题及选项设定');
 @define('INSTALL_CAT_DISPLAY_DESC', '设定系统的主题和其它设定');
 @define('INSTALL_WYSIWYG', '使用 WYSIWYG 编辑器');
-@define('INSTALL_WYSIWYG_DESC', '你要使用 WYSIWYG 编辑器吗？(可在 IE5+ 使用, 某些部分可使用于 Mozilla 1.3+)');
+@define('INSTALL_WYSIWYG_DESC', '你要使用 WYSIWYG 编辑器');
 @define('INSTALL_XHTML11', '强制符合 XHTML 1.1 要求');
 @define('INSTALL_XHTML11_DESC', '让你的系统强制符合 XHTML 1.1 要求 (对旧的浏览器可能有问题)');
 @define('INSTALL_POPUP', '使用弹出窗口');
@@ -1086,3 +1086,4 @@
 
 @define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
 @define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
+@define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');
