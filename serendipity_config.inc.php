@@ -184,6 +184,13 @@ $serendipity['charsets'] = array(
 @define('VIEWMODE_THREADED', 'threaded');
 @define('VIEWMODE_LINEAR', 'linear');
 
+if (!version_compare(phpversion(), '5.3', '>=')) {
+    $serendipity['lang'] = 'en';
+    include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
+    serendipity_die(sprintf(SERENDIPITY_PHPVERSION_FAIL, phpversion(), '5.3'));
+}
+
+
 /*
  *   Kill the script if we are not installed, and not inside the installer
  */
@@ -310,15 +317,7 @@ if (defined('USE_MEMSNAP')) {
 serendipity_load_configuration();
 $serendipity['lang'] = serendipity_getSessionLanguage();
 
-if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
-    if ($serendipity['logLevel'] == 'debug') {
-        $log_level = Psr\Log\LogLevel::DEBUG;
-    } else {
-        $log_level = Psr\Log\LogLevel::ERROR;
-    }
-
-    $serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
-}
+serendipity_initLog();
 
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
