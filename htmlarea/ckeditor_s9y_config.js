@@ -86,12 +86,11 @@ CKEDITOR.editorConfig = function( config ) {
     // You can always use SHIFT+ENTER to set a br in the P-mode default option or change the SHIFT-mode to something else
     //config.shiftEnterMode = CKEDITOR.ENTER_BR;
     // Better learn to do this via keyboard commands, see cheatsheet toolbar button.
-
-    // Whether to use HTML entities in the output.
-    //config.entities = false; // defaults(true)
-
-    //config.htmlEncodeOutput = false; // defaults(true)
     */
+
+    // Whether to use HTML entities in the output. Let strictly S9y handle this, since we need it for search terms! Storing html entities to db is not good here!
+    config.entities = false; // defaults(true)
+    config.htmlEncodeOutput = false; // defaults(true)
 
 
     /** SECTION: UI configurations
