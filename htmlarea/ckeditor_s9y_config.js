@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.10, last modified 2014-12-07 by Ian
+ *               ckeditor_s9y_config.js, v. 1.11, last modified 2014-12-19 by Ian
  */
 
 /**
