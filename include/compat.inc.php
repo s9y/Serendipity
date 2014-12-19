@@ -280,11 +280,6 @@ if (empty($_SERVER['REQUEST_URI'])) {
     $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'] . '?' . (!empty($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : '');
 }
 
-// Some security issues
-if (isset($serendipity['GET']['searchTerm'])) {
-    $serendipity['GET']['searchTerm'] = serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm']));
-}
-
 /**
  * Translate values coming from the Database into native PHP variables to detect boolean values.
  *
