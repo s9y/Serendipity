@@ -3,7 +3,7 @@
 Version 2.0-rc1 (includes beta4/5/6) (December 19th, 2014)
 ------------------------------------------------------------------------
 
-    * entryproperties plugin will not automatically disable nl2br
+    * entryproperties plugin will now automatically disable nl2br
       markup, when the WYSIWYG editor is used to create en entry
       
     * PHP Requirement now is at: PHP 5.3+
