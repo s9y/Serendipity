@@ -1,5 +1,11 @@
 #
 
+Version 2.0-rc2 (December 23rd, 2014)
+------------------------------------------------------------------------
+
+    * Fixes escaping of comments in the new backend pane to prevent
+      XSS. Thanks to Steffen Röemann for reporting!
+
 Version 2.0-rc1 (includes beta4/5/6) (December 19th, 2014)
 ------------------------------------------------------------------------
 

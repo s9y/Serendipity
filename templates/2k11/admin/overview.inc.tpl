@@ -39,9 +39,9 @@
             {if is_array($comments)}
                 {foreach $comments as $comment}
                 <li class="clearfix"><b>{$comment.author|escape|truncate:30:"&hellip;"} {$CONST.IN} <a href="{$comment.entrylink}" title="Comment to {$comment.title}">#{$comment.id}</a></b>
-                    <div class="comment_summary">{$comment.body|truncate:100:"&hellip;"}</div>
+                    <div class="comment_summary">{$comment.body|escape|truncate:100:"&hellip;"}</div>
 
-                    <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody}</div>
+                    <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody|escape}</div>
                     
                     <ul class="plainList actions">
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
