@@ -1226,7 +1226,7 @@ function serendipity_getCurrentVersion() {
     }
 
     serendipity_set_config_var('last_update_check_' . $serendipity['updateCheck'], time());
-    $updateURL = 'https://raw.github.com/s9y/Serendipity/master/docs/RELEASE';
+    $updateURL = 'https://raw.githubusercontent.com/s9y/Serendipity/master/docs/RELEASE';
     $context   = stream_context_create(array('http' => array('timeout' => 5.0)));
     $file      = @file_get_contents($updateURL, false, $context);
 
@@ -1241,13 +1241,14 @@ function serendipity_getCurrentVersion() {
     }
 
     if ($file) {
+        $rvlines = explode("\n", $file);
         if ($serendipity['updateCheck'] == "stable") {
-            if (preg_match('/^stable:(.+)\b/', $file, $match)) {
+            if (preg_match('/^stable:(.+)\b/', trim($rvlines[0]), $match)) {
                 serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
         } else {
-            if (preg_match('/^beta:(.+)\b/', $file, $match)) {
+            if (preg_match('/^beta:(.+)\b/', trim($rvlines[1]), $match)) {
                 serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
