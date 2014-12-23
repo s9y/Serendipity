@@ -450,7 +450,7 @@ function serendipity_entities($string, $flags = null, $encoding = LANG_CHARSET, 
 /**
  * serendipity_specialchars
  */
-function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHARSET, $double_encode = true) {
+function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHARSET) {
     if ($flags == null) {
         # NOTE: ENT_SUBSTITUTE does not exist for this function, and the documentation does not specify that it will
         # ever echo empty strings on charset errors
@@ -465,7 +465,7 @@ function serendipity_entity_decode($string, $flags = null, $encoding = LANG_CHAR
     if ($encoding == 'LANG_CHARSET') {
         $encoding = 'UTF-8';
     }
-    return html_entity_decode($string, $flags, $encoding, $double_encode);
+    return html_entity_decode($string, $flags, $encoding);
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
