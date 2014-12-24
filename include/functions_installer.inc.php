@@ -1241,14 +1241,13 @@ function serendipity_getCurrentVersion() {
     }
 
     if ($file) {
-        $rvlines = explode("\n", $file);
         if ($serendipity['updateCheck'] == "stable") {
-            if (preg_match('/^stable:(.+)\b/', trim($rvlines[0]), $match)) {
+            if (preg_match('/^stable:(.+)\b/m', $file, $match)) {
                 serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
         } else {
-            if (preg_match('/^beta:(.+)\b/', trim($rvlines[1]), $match)) {
+            if (preg_match('/^beta:(.+)\b/m', $file, $match)) {
                 serendipity_set_config_var('last_update_version_' . $serendipity['updateCheck'], $match[1]);
                 return $match[1];
             }
