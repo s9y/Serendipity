@@ -70,7 +70,7 @@
     </div>
 
     <div id="edit_entry_submit">
-        <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:'o-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
+        <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:'Y-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
         <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="{$CONST.CATEGORY}"><span class="icon-list-bullet"></span><span class="visuallyhidden">{$CONST.CATEGORIES}</span></a>
     {if class_exists('serendipity_event_freetag')}
         <a id="select_tags" class="button_link icon_link" href="#edit_entry_freetags" title="{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}"><span class="icon-tag"></span><span class="visuallyhidden">{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}</span></a>
@@ -89,7 +89,7 @@
                 <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp|escape}">
 
                 <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
-                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|@formatTime:'o-m-d\TH:i':true:false:true}">
+                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|@formatTime:'Y-m-d\TH:i':true:false:true}">
             </div>
         {/if}
             <div id="edit_entry_status" class="form_select">
@@ -139,7 +139,7 @@
             </div>
         </div>
     </div>
-    
+
     {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
     {if ! empty($smarty.capture.advanced_options) }
         <div id="advanced_options">
@@ -149,7 +149,7 @@
             </div>
         </div>
     {/if}
-   
+
 </form>
 {if $entry_vars.wysiwyg}
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
