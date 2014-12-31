@@ -1663,11 +1663,13 @@ form > .button_link:first-of-type,
     width: auto;
 }
 
-.mfp-content #s9y_links {
+.mfp-content #s9y_links,
+.mfp-content #edit_entry_category {
     max-width: 34em;
 }
 
-.mfp-content #edit_entry_category,
+/* category-option */
+/*.mfp-content #edit_entry_category,*/
 .mfp-content #edit_entry_freetags {
     max-width: 60em;
 }
@@ -1680,9 +1682,9 @@ form > .button_link:first-of-type,
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    float: left;
+    /*float: left;
     margin: 0 0 .5em;
-    width: 50%;
+    width: 50%;*/
 }
 
 .mfp-content #edit_entry_category .form_check label {
@@ -1692,7 +1694,7 @@ form > .button_link:first-of-type,
     border: 1px solid #fcfcfc;
     border-radius: 2px;
     cursor: pointer;
-    display: block !important;
+    /*display: block !important;*/
     overflow: hidden;
     padding: .25em;
     width: 95%;
@@ -2034,7 +2036,7 @@ label .perm_name,
     color: #3e5f81;
     text-align: center;
 }
- 
+
 #meta p {
     color: #666;
     margin: 0;
@@ -2917,9 +2919,9 @@ img.mfp-img {
         margin: 0 0 0 .4em;
     }
 
-    .mfp-content #edit_entry_category .form_check {
+    /*.mfp-content #edit_entry_category .form_check {
         width: 25%;
-    }
+    }*/
 
     #meta_data > div,
     #template_options fieldset legend,
@@ -3112,7 +3114,7 @@ img.mfp-img {
     #media_filter > div,
     #media_pane_sort > .left,
     #media_pane_sort > .center,
-    #media_pane_sort > .right,    
+    #media_pane_sort > .right,
     #media_pane_sort > .grouped > div {
         float: left;
         width: 33% ;
@@ -3271,9 +3273,9 @@ img.mfp-img {
         width: 73%;
     }
 
-    .mfp-content #edit_entry_category .form_check {
+    /*.mfp-content #edit_entry_category .form_check {
         width: 20%;
-    }
+    }*/
 
     .installer #content {
         float: none;
