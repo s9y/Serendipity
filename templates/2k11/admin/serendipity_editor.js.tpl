@@ -988,6 +988,22 @@ $(function() {
         }
     {/if}
 
+    // Switch category view
+    if($('#serendipityEntry').length > 0) {
+        $('#toggle_cat_view').click(function() {
+            var $el = $(this);
+            var $target = $('.mfp-content');
+
+            if($target.hasClass('compact_categories')) {
+                $target.removeClass('compact_categories');
+                $el.find('.icon-toggle-on').removeClass('icon-toggle-on').addClass('icon-toggle-off');
+            } else {
+                $target.addClass('compact_categories');
+                $el.find('.icon-toggle-off').removeClass('icon-toggle-off').addClass('icon-toggle-on');
+            }
+        });
+    };
+
     // Show tag selector
     {if $use_backendpopups}
         if($('#serendipityEntry').length > 0) {
@@ -1346,7 +1362,7 @@ $(function() {
                                     max_height = {if {serendipity_getConfigVar key='maxImgHeight'}}{serendipity_getConfigVar key='maxImgHeight'}{else}0{/if},
                                     width = image.width,
                                     height = image.height;
-                                    
+
                                 if (max_width > 0 && width > max_width) {
                                     height *= max_width / width;
                                     width = max_width;
@@ -1355,7 +1371,7 @@ $(function() {
                                     width  *= max_height / height;
                                     height = max_height;
                                 }
-                                
+
                                 canvas.width = width;
                                 canvas.height = height;
                                 canvas.getContext('2d').drawImage(image, 0, 0, width, height);
