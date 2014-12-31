@@ -1668,8 +1668,7 @@ form > .button_link:first-of-type,
     max-width: 34em;
 }
 
-/* category-option */
-/*.mfp-content #edit_entry_category,*/
+.compact_categories #edit_entry_category,
 .mfp-content #edit_entry_freetags {
     max-width: 60em;
 }
@@ -1682,9 +1681,19 @@ form > .button_link:first-of-type,
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    /*float: left;
+    float: none;
     margin: 0 0 .5em;
-    width: 50%;*/
+    width: 100%;
+}
+
+.compact_categories #edit_entry_category .form_check {
+    float: left;
+    width: 50%;
+}
+
+.compact_categories .cat_view_pad {
+    display: none !important;
+    visibility: hidden;
 }
 
 .mfp-content #edit_entry_category .form_check label {
@@ -1694,10 +1703,13 @@ form > .button_link:first-of-type,
     border: 1px solid #fcfcfc;
     border-radius: 2px;
     cursor: pointer;
-    /*display: block !important;*/
     overflow: hidden;
     padding: .25em;
     width: 95%;
+}
+
+.compact_categories #edit_entry_category .form_check label {
+    display: block !important;
 }
 
 .mfp-content #edit_entry_category .form_check input[type="checkbox"] {
@@ -2919,9 +2931,9 @@ img.mfp-img {
         margin: 0 0 0 .4em;
     }
 
-    /*.mfp-content #edit_entry_category .form_check {
+    .compact_categories #edit_entry_category .form_check {
         width: 25%;
-    }*/
+    }
 
     #meta_data > div,
     #template_options fieldset legend,
@@ -3273,9 +3285,9 @@ img.mfp-img {
         width: 73%;
     }
 
-    /*.mfp-content #edit_entry_category .form_check {
+    .compact_categories #edit_entry_category .form_check {
         width: 20%;
-    }*/
+    }
 
     .installer #content {
         float: none;
