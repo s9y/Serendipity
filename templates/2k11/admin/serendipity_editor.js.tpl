@@ -973,6 +973,10 @@ $(function() {
                     open: function() {
                         // Accessibility helper
                         $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'true');
+                        if(localStorage.cat_view_state == "compact") {
+                            $('.mfp-content').addClass('compact_categories');
+                            $('#toggle_cat_view').find('.icon-toggle-off').removeClass('icon-toggle-off').addClass('icon-toggle-on');
+                        }
                     },
                     afterClose: function() {
                         // Accessibility helper
@@ -997,9 +1001,11 @@ $(function() {
             if($target.hasClass('compact_categories')) {
                 $target.removeClass('compact_categories');
                 $el.find('.icon-toggle-on').removeClass('icon-toggle-on').addClass('icon-toggle-off');
+                localStorage.cat_view_state = "hierarchical";
             } else {
                 $target.addClass('compact_categories');
                 $el.find('.icon-toggle-off').removeClass('icon-toggle-off').addClass('icon-toggle-on');
+                localStorage.cat_view_state = "compact";
             }
         });
     };
