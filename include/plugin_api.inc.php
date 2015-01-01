@@ -1240,7 +1240,7 @@ class serendipity_property_bag
      * @access private
      * @var    string   Name of the property bag
      */
-    var $name       = null;
+    var $name = null;
 
     /**
      * Adds a property value to the bag
@@ -1286,15 +1286,15 @@ class serendipity_property_bag
  */
 class serendipity_plugin
 {
-    var $instance      = null;
-    var $protected     = false;
-    var $wrap_class    = 'serendipitySideBarItem';
-    var $title_class   = 'serendipitySideBarTitle';
-    var $content_class = 'serendipitySideBarContent';
-    var $title         = null;
-    var $pluginPath    = null;
-    var $act_pluginPath= null;
-    var $pluginFile    = null;
+    var $instance          = null;
+    var $protected         = false;
+    var $wrap_class        = 'serendipitySideBarItem';
+    var $title_class       = 'serendipitySideBarTitle';
+    var $content_class     = 'serendipitySideBarContent';
+    var $title             = null;
+    var $pluginPath        = null;
+    var $act_pluginPath    = null;
+    var $pluginFile        = null;
     var $serendipity_owner = null;
 
     /**
