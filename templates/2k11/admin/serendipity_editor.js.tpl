@@ -975,7 +975,7 @@ $(function() {
                         $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'true');
                         if(localStorage.cat_view_state == "compact") {
                             $('.mfp-content').addClass('compact_categories');
-                            $('#toggle_cat_view').find('.icon-toggle-off').removeClass('icon-toggle-off').addClass('icon-toggle-on');
+                            $('#toggle_cat_view').find('.icon-th').removeClass('icon-th').addClass('icon-th-list');
                         }
                     },
                     afterClose: function() {
@@ -1000,11 +1000,11 @@ $(function() {
 
             if($target.hasClass('compact_categories')) {
                 $target.removeClass('compact_categories');
-                $el.find('.icon-toggle-on').removeClass('icon-toggle-on').addClass('icon-toggle-off');
+                $el.find('.icon-th-list').removeClass('icon-th-list').addClass('icon-th');
                 localStorage.cat_view_state = "hierarchical";
             } else {
                 $target.addClass('compact_categories');
-                $el.find('.icon-toggle-off').removeClass('icon-toggle-off').addClass('icon-toggle-on');
+                $el.find('.icon-th').removeClass('icon-th').addClass('icon-th-list');
                 localStorage.cat_view_state = "compact";
             }
         });
