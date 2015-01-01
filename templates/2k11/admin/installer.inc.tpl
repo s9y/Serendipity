@@ -9,7 +9,7 @@
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="{serendipity_getFile file='admin/oldie.css'}">
 <![endif]-->
-    <script src="{serendipity_getFile file='admin/js/modernizr-2.8.2.min.js'}"></script>
+    <script src="{serendipity_getFile file='admin/js/modernizr-2.8.3.min.js'}"></script>
     <script src="templates/jquery.js"></script>
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
     <script src="templates/default/admin/serendipity_editor.js"></script>
@@ -223,12 +223,12 @@
                             <td><h5>Execute Imagemagick binary</h5></td>
                             <td>{$installerResultDiagnose_IMB}</td>
                         </tr>
-        
+
                     </tbody>
                 </table>
-            
+
             {if $errorCount > 0}
-                <hr /> 
+                <hr />
                 <span class="msg_error">{$CONST.PROBLEM_DIAGNOSTIC}</span>
                 <div class="form_buttons">
                     <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
