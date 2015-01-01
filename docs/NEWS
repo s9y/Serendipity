@@ -1,5 +1,14 @@
 #
 
+Version 2.0 ()
+------------------------------------------------------------------------
+
+    * Change entry editor's category assignment to toggle between
+      a hierarchical and a plain list (good for many categories)
+      
+    * Fix date formatting in entry editor to not use ISO year
+      but the calendar year
+      
     * Fix autoupdate version read and transmit
 
 Version 2.0-rc2 (December 23rd, 2014)
