@@ -415,9 +415,9 @@
 @define('INSTALL_THUMBDIM_LARGEST', 'Längste Seite');
 @define('INSTALL_THUMBDIM_WIDTH', 'Breite');
 @define('INSTALL_THUMBDIM_HEIGHT', 'Höhe');
-@define('INSTALL_THUMBDIM_DESC', 'Legt fest, wie die Größe der Thumbnails angepasst werden soll. Der Standard 
+@define('INSTALL_THUMBDIM_DESC', 'Legt fest, wie die Größe der Thumbnails angepasst werden soll. Der Standard
     "' . INSTALL_THUMBDIM_LARGEST .  '" nutzt die größte Seite als Beschränkung, so dass weder Breite noch Höhe die festgelegte Zahl überschreiten dürfen.
-    "' . INSTALL_THUMBDIM_WIDTH . '" und "' .  INSTALL_THUMBDIM_HEIGHT . '" 
+    "' . INSTALL_THUMBDIM_WIDTH . '" und "' .  INSTALL_THUMBDIM_HEIGHT . '"
     legen lediglich die Höhe bzw. Breite als größte Seite fest, so dass die jeweils andere Angabe auch größer als die festgelegte Zahl sein darf.');
 
 /* Personal details */
@@ -919,7 +919,7 @@
 @define('COMMENT_TOKENS_DESC', 'Diese Methode setzt Tokens ein, damit Kommentare direkt aus der Hinweis-E-Mail heraus gelöscht oder akzeptiert werden können. Diese Funktion ist für höheren Komfort gedacht, geht aber zu Lasten der Sicherheit: Wenn jemand die E-Mail abfängt, kann diese Person entsprechende Kommentare ohne weitere Authentifikation löschen oder freischalten.');
 @define('COMMENT_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Kommentar #%s wurde bereits akzeptiert oder gelöscht.');
 @define('TRACKBACK_NOTOKENMATCH', 'Der Kommentar-Link ist nicht mehr gültig, oder Trackback #%s wurde bereits akzeptiert oder gelöscht.');
-@define('BADTOKEN', 'Ungültiger Kommentar-Link'); 
+@define('BADTOKEN', 'Ungültiger Kommentar-Link');
 
 @define('CONFIRMATION_MAIL_ALWAYS', "Hallo %s,\n\nSie haben einen neuen Kommentar zu \"%s\" erstellt. Ihr Kommentar war:\n\n%s\n\nDer Betreiber dieses Blogs hat die Bestätigung per E-Mail gewünscht, daher müssen Sie folgenden Link anklicken:\n<%s>\n");
 @define('CONFIRMATION_MAIL_ONCE', "Hallo %s,\n\nSie haben einen neuen Kommentar zu \"%s\" erstellt. Ihr Kommentar war:\n\n%s\n\nDer Betreiber dieses Blogs hat die Bestätigung per E-Mail gewünscht, daher müssen Sie folgenden Link anklicken:\n<%s>\n\nNachdem Sie dies getan haben, können Sie auf dem Blog jederzeit mit ihrem Namen und E-Mail-Adresse ohne weitere Freischaltung kommentieren.");
@@ -1084,7 +1084,7 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_FULL', 'Erzwingen: Vollständig');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_STANDARD', 'Erzwingen: Alternative');
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
-@define('CATEGORY_PLUGIN_SHOWALL', 'Show a link to "All categories"?');
-@define('CATEGORY_PLUGIN_SHOWALL', 'If enabled, a link for the visitor to display the blog with no category restriction will be added.');
-@define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');
-@define('TOGGLE_VIEW', 'Switch category view mode');
+@define('CATEGORY_PLUGIN_SHOWALL', 'Zeige einen Link zu "Alle Kategorien"?');
+@define('CATEGORY_PLUGIN_SHOWALL', 'Falls aktiviert wird Besuchern ein Link angezeigt, das Blog ohne Einschränkung der Kategorien darzustellen.');
+@define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity benötigt eine PHP-Version >= %2$s - Sie benutzen eine ältere Version (%1$s) und müssen auf eine neuere upgraden. Die meisten Provider gestatten den Wechsel auf neuere PHP-Versionen über einen Schalter in der Admin-Oberfläche oder eine Anweisung in der .htaccess.');
+@define('TOGGLE_VIEW', 'Darstellung der Kategorien wechseln');
