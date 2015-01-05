@@ -3,6 +3,9 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Patch PEAR.php to use "static" isError declaration to prevent
+      PHP error messages
+
     * Change order of IF-statements in entries.tpl to check for
       comment_moderate/comment_added, to properly emit the message
       whether a comment is being moderated.
