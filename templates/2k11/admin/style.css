@@ -433,6 +433,7 @@ form > a,
 form > button,
 .edit_actions li,
 .actions li,
+.actions_extra,
 #login .form_field label,
 #filter_comments label,
 #serendipity_comment label,
@@ -1526,7 +1527,8 @@ fieldset p,
     margin: 0 .4em 0 0;
 }
 
-.actions li {
+.actions li,
+.actions_extra {
     margin: 0 0 .5em;
 }
 
@@ -1563,7 +1565,8 @@ form > .button_link:first-of-type,
     margin-bottom: 3em;
 }
 
-#serendipity_comments_list .actions {
+#serendipity_comments_list .actions,
+.actions_extra {
     float: left;
     margin: .75em 0;
 }
@@ -2737,8 +2740,13 @@ img.mfp-img {
         padding-top: 0;
     }
 
-    .actions li {
+    .actions li,
+    .actions_extra {
         margin: 0 .4em .5em 0;
+    }
+
+    .actions_extra {
+        margin-top: .75em;
     }
 
     #edit_entry_submit {
