@@ -3,6 +3,9 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Fix searching for entries in the admin panel with database
+      types other than "mysql"
+      
     * Change entry editor's category assignment to toggle between
       a hierarchical and a plain list (good for many categories)
       

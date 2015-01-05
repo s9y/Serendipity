@@ -261,8 +261,34 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         if (!empty($serendipity['GET']['filter']['body'])) {
-            if ($serendipity['dbType'] == 'mysql') {
-                $filter[] = "MATCH (title,body,extended) AGAINST ('" . serendipity_db_escape_string($serendipity['GET']['filter']['body']) . "')";
+            $term = serendipity_db_escape_string($serendipity['GET']['filter']['body']);
+            if ($serendipity['dbType'] == 'postgres' || $serendipity['dbType'] == 'pdo-postgres') {
+                $r = serendipity_db_query("SELECT count(routine_name) AS counter
+                                             FROM information_schema.routines
+                                            WHERE routine_name LIKE 'to_tsvector'
+                                              AND specific_catalog = '" . $serendipity['dbName'] . "'");
+                if (is_array($r) && $r[0]['counter'] > 0) {
+                    $term = str_replace('&amp;', '&', $term);
+                    $filter[] = "( 
+                    to_tsvector('english', title)    @@to_tsquery('$term') OR
+                    to_tsvector('english', body)     @@to_tsquery('$term') OR
+                    to_tsvector('english', extended) @@to_tsquery('$term')
+                    )";
+                } else {
+                    $filter[] = "(title ILIKE '%$term%' OR body ILIKE '%$term%' OR extended ILIKE '%$term%')";
+                }
+                $full     = true;
+            } elseif ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite' || $serendipity['dbType'] == 'sqlite3oo') {
+                $term = str_replace('*', '%', $term);
+                $term = serendipity_mb('strtolower', $term);
+                $filter[] = "(lower(title) LIKE '%$term%' OR lower(body) LIKE '%$term%' OR lower(extended) LIKE '%$term%')";
+                $full = true;
+            } else {
+                if (preg_match('@["\+\-\*~<>\(\)]+@', $term)) {
+                    $filter[] = "MATCH (title,body,extended) AGAINST ('" . $term . "' IN BOOLEAN MODE)";
+                } else {
+                    $filter[] = "MATCH (title,body,extended) AGAINST ('" . $term . "')";
+                }
                 $full     = true;
             }
         }
