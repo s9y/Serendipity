@@ -3,6 +3,10 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Change order of IF-statements in entries.tpl to check for
+      comment_moderate/comment_added, to properly emit the message
+      whether a comment is being moderated.
+      
     * Fix searching for entries in the admin panel with database
       types other than "mysql"
       
