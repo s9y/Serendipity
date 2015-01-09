@@ -25,21 +25,21 @@
 {if $template_option.userstyles == true}
     <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
 {/if}
-    <script src="{serendipity_getFile file="admin/js/modernizr-2.8.2.min.js"}"></script>
-    {serendipity_hookPlugin hook="backend_header" hookAll="true"}
+    <script src="{serendipity_getFile file="admin/js/modernizr-2.8.3.min.js"}"></script>
+{serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
-<script>
-    window.onload = function() {ldelim}
-        parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
-                                                                          + parseInt(document.getElementById('content').style.marginTop)
-                                                                          + parseInt(document.getElementById('content').style.marginBottom)
-                                                                          + 'px';
-        parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
-        parent.document.getElementById('serendipity_iframe').style.border = 0;
-    {rdelim}
-</script>
-<style type="text/css">#serendipity_preview_spacer {ldelim}float:none!important;height:0!important;{rdelim}</style>
+    <script>
+        window.onload = function() {ldelim}
+            parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
+                                                                              + parseInt(document.getElementById('content').style.marginTop)
+                                                                              + parseInt(document.getElementById('content').style.marginBottom)
+                                                                              + 'px';
+            parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
+            parent.document.getElementById('serendipity_iframe').style.border = 0;
+        {rdelim}
+    </script>
+    <style type="text/css">#serendipity_preview_spacer {ldelim}float:none!important;height:0!important;{rdelim}</style>
 </head>
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 <div id="page" class="clearfix container">
