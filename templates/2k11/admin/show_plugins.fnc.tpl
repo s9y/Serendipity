@@ -87,7 +87,7 @@
             <span class="plugin_count block_level">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$total}</span>
         </div>
         <div class="form_buttons">
-            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE}" value="{$CONST.DELETE}">
+            <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE_TICKED_PLUGINS}" value="{$CONST.DELETE}">
             <input name="SAVE" type="submit" title="{$CONST.SAVE_CHANGES_TO_LAYOUT}" value="{$CONST.SAVE}">
         </div>
     </form>
