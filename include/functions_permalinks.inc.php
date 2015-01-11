@@ -1,5 +1,4 @@
 <?php
-# $Id: functions.inc.php 85 2005-05-10 10:11:05Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -772,8 +771,8 @@ function serendipity_currentURL($strict = false) {
  * @return
  */
 function serendipity_getUriArguments($uri, $wildcard = false) {
-global $serendipity;
-static $indexFile = null;
+    global $serendipity;
+    static $indexFile = null;
 
     if ($indexFile === null) {
         $_indexFile = explode('.', $serendipity['indexFile']);
