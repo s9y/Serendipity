@@ -279,7 +279,7 @@ function serendipity_db_reconnect() {
 
     if (isset($serendipity['dbCharset'])) {
         mysql_query("SET NAMES " . $serendipity['dbCharset'], $serendipity['dbConn']);
-        define('SQL_CHARSET_INIT', true);
+        @define('SQL_CHARSET_INIT', true);
     } elseif (defined('SQL_CHARSET') && $serendipity['dbNames'] && !defined('SQL_CHARSET_INIT')) {
         mysql_query("SET NAMES " . SQL_CHARSET, $serendipity['dbConn']);
     }
