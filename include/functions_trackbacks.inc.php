@@ -309,9 +309,21 @@ global $serendipity;
 function add_trackback ($id, $title, $url, $name, $excerpt) {
     global $serendipity;
 
+    if ($GLOBALS['tb_logging']) {
+        $fp = fopen('trackback2.log', 'a');
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] add_trackback:' . print_r(func_get_args(), true) . "\n");
+        fclose($fp);
+    }
+
     // We can't accept a trackback if we don't get any URL
     // This is a protocol rule.
     if (empty($url)) {
+        if ($GLOBALS['tb_logging']) {
+            $fp = fopen('trackback2.log', 'a');
+            fwrite($fp, '[' . date('d.m.Y H:i') . '] Empty URL.' . "\n");
+            fclose($fp);
+        }
+
         return 0;
     }
 
@@ -323,6 +335,12 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
 
     // Decode HTML Entities
     $excerpt = trackback_body_strip($excerpt);
+
+    if ($tb_logging) {
+        $fp = fopen('trackback2.log', 'a');
+        fwrite($fp, '[' . date('d.m.Y H:i') . '] Trackback body:' . $excerpt . "\n");
+        fclose($fp);
+    }
 
     $comment = array(
         'title'   => $title,
