@@ -3,6 +3,9 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Fix deleting comments when user is not an admin, but the entry
+      belongs to him. Thanks to berberic.
+    
     * Patch PEAR.php to use "static" isError declaration to prevent
       PHP error messages
 
