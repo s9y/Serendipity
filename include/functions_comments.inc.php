@@ -541,7 +541,7 @@ function serendipity_deleteComment($id, $entry_id, $type='comments', $token=fals
 
             // Load articles author id and check it
             $sql = serendipity_db_query("SELECT authorid FROM {$serendipity['dbPrefix']}entries
-                                                WHERE entry_id = ". $entry_id, true);
+                                                WHERE id = ". $entry_id, true);
             if ($sql['authorid'] != $serendipity['authorid']) {
                 return false; // wrong user having no adminEntriesMaintainOthers right
             }
