@@ -1,7 +1,7 @@
 <h2 class="visuallyhidden">{$CONST.COMMENTS}</h2>
 {foreach from=$comments_by_authors item="entry_comments"}
 <article class="clearfix serendipity_entry{if $entry_comments.entryauthor == $entry_comments.author} serendipity_comment_author_self{/if}">
-    <h3><a href="{$entry_comments.link}">{$entry_comments.title|@default:$entry_comments.link}</a></h3>
+    <h3><a href="{$entry_comments.link}">{$entry_comments.title|default:$entry_comments.link}</a></h3>
     <div class="comments_for_entry">{$entry_comments.tpl_comments}</div>
 </article>
 {/foreach}
