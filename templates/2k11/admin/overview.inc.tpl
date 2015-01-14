@@ -42,7 +42,7 @@
                     <div class="comment_summary">{$comment.body|escape|truncate:100:"&hellip;"}</div>
 
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody|escape}</div>
-                    
+
                     <ul class="plainList actions">
                         <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                         <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
@@ -90,10 +90,10 @@
                                 </form>
                             </li>
                         {/if}
-                        
+
                     </ul>
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
-                    <span class="entry_status status_future">{$CONST.SCHEDULED}</span>
+                    <span class="entry_status status_future" title="{$CONST.SCHEDULED}: {$CONST.ENTRY_PUBLISHED_FUTURE}">{$entry.timestamp|@formatTime:$CONST.DATE_FORMAT_SHORT}</span>
                 {/if}
                 {if $entry.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
