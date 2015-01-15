@@ -838,7 +838,7 @@ function serendipity_handle_references($id, $author, $title, $text, $dry_run = f
             $query .= (int)$id . ", '" . $i_link . "', '" . $i_location . "')";
             $ins = serendipity_db_query($query);
             if (is_string($ins)) {
-                $serendipity['logger']->debug($ins);
+                if (is_object($serendipity['logger'])) $serendipity['logger']->debug($ins);
             }
 
             $old_references[] = array(
