@@ -24,7 +24,7 @@ if (isset($serendipity['GET']['adminModule']) && $serendipity['GET']['adminModul
 } else {
     if (IS_installed === true) {
         /* Check author token to insure session not hijacked */
-        if (!isset($_SESSION['author_token']) || !isset($serendipity['COOKIE']['author_token']) || 
+        if (!isset($_SESSION['author_token']) || !isset($serendipity['COOKIE']['author_token']) ||
             ($_SESSION['author_token'] !== $serendipity['COOKIE']['author_token'])) {
             $_SESSION['serendipityAuthedUser'] = false;
             serendipity_session_destroy();
@@ -221,7 +221,7 @@ if (!$use_installer && $is_logged_in) {
 
         case 'maintenance':
             include S9Y_INCLUDE_PATH . 'include/admin/maintenance.inc.php';
-            $admin_section = MAINTENANCE;
+            $admin_section = MENU_MAINTENANCE;
             break;
 
         default:

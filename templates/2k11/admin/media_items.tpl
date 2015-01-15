@@ -204,7 +204,7 @@
 
                 <ul>
                 {foreach from=$file.references item="ref"}
-                    <li>({$ref.name|escape}) <a rel="nofollow" href="{$ref.link|escape}">{$ref.link|@default:$CONST.NONE|escape}</a></li>
+                    <li>({$ref.name|escape}) <a rel="nofollow" href="{$ref.link|escape}">{$ref.link|default:$CONST.NONE|escape}</a></li>
                 {/foreach}
                 </ul>
             </section>
