@@ -3,6 +3,10 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Fix entryproperties being removed when publishing an article
+      from the dashboard and by specific plugins (freetag, trackback)
+      that modify entry data.
+      
     * Fix deleting comments when user is not an admin, but the entry
       belongs to him. Thanks to berberic.
     

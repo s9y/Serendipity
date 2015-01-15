@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.35');
+        $propbag->add('version',       '1.36');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -210,6 +210,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
     function addProperties(&$properties, &$eventData) {
         global $serendipity;
+
         // Get existing data
         $property = serendipity_fetchEntryProperties($eventData['id']);
         $supported_properties = serendipity_event_entryproperties::getSupportedProperties();
@@ -233,6 +234,15 @@ class serendipity_event_entryproperties extends serendipity_event
         serendipity_plugin_api::hook_event('backend_entryproperties', $supported_properties);
 
         foreach($supported_properties AS $prop_key) {
+            // Do not delete a property if it is not subbmitted to this function, because serendipity_updertEntry 
+            // possibly only wants to update entry metadata and left out any specific properties, which need to be kept.
+            // An empty string like "" will properly remove an entryproperty, and POST values will always set an array index to an empty string.
+            // $serendipipty['POST']['propertyform'] will be set whenever the entryeditor was properly displayed and unticked checkboxes shall remain.
+            // (Not for checkboxes, but checkboxes are not used for entryproperties)
+            if (!isset($properties[$prop_key]) && !isset($serendipity['POST']['propertyform'])) {
+                continue;
+            }
+
             $prop_val = (isset($properties[$prop_key]) ? $properties[$prop_key] : null);
             $prop_key = 'ep_' . $prop_key;
 
@@ -561,6 +571,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
 ?>
                     <fieldset class="entryproperties">
+                        <input type="hidden" name="serendipity[propertyform]" value="true" />
                         <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_TITLE; ?></legend></span>
 <?php
 
