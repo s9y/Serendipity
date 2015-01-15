@@ -331,6 +331,7 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
             <div class="entryproperties_access_pw form_field">
                 <label for="properties_access_pw"><?php echo PASSWORD; ?>:</label>
+                <input type="password" name="ignore_password" value="" style="display:none">
                 <input id="properties_access_pw" name="serendipity[properties][entrypassword]" type="password" autocomplete="off" value="<?php echo serendipity_specialchars($password); ?>">
             </div>
 <?php

@@ -3,6 +3,12 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Prevent entryproperties from saving/displaying a browser-side
+      stored password that was actually not set.
+      
+    * Stronger check for existing logger interface to prevent errors
+      when it is not actively used.
+    
     * Fix entryproperties being removed when publishing an article
       from the dashboard and by specific plugins (freetag, trackback)
       that modify entry data.
