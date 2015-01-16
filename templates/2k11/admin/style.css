@@ -1139,6 +1139,7 @@ summary {
 }
 
 #workspace,
+.plugin_data,
 .serendipity_statistics > .wide_box {
     overflow: hidden;
 }
