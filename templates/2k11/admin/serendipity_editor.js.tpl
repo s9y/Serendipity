@@ -765,12 +765,6 @@
                     updateOnResize: true
                 });
             }
-            // Also sync height of info overlays
-            $('.equal_heights').each(function() {
-                var $el = $(this);
-                var containerHeight = $el.css('min-height');
-                $el.children('.media_file_preview, .template_preview').css('minHeight', containerHeight);
-            });
         }
     }
 

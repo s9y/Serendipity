@@ -2259,7 +2259,8 @@ label .perm_name,
     box-sizing: border-box;
     color: #fcfcfc;
     height: 100%;
-    overflow: hidden;
+    min-height: 7em;
+    overflow: scroll;
     padding: .5em 1em;
     position: absolute;
     top: 0;
