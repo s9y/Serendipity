@@ -626,9 +626,9 @@
         $(img).attr('src', $(img).attr('src')+'?'+Math.random());
     }
 
-    serendipity.categoryList = function() {
+    serendipity.catsList = function() {
         var $source = $('#edit_entry_category');
-        var $target = $('#category_list > ul');
+        var $target = $('#cats_list > ul');
         var $selected = $source.find('input:checkbox:checked');
 
         $target.empty();
@@ -636,7 +636,23 @@
         if ($selected.length > 0) {
             $selected.each(function() {
                 var catText = $(this).next('label').text();
-                $('<li class="category_selected">'+ catText +'</li>').appendTo($target);
+                $('<li class="cats_selected"><span>'+ catText +'</span></li>').appendTo($target);
+            });
+        } else {
+            $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
+        }
+    }
+
+    serendipity.tagsList = function() {
+        var $source = $('#properties_freetag_tagList').val();
+        var $target = $('#tags_list > ul');
+        var tagged = $source.split(',');
+
+        $target.empty();
+
+        if (tagged.length > 0) {
+            $.each(tagged, function(key, tag) {
+                $('<li class="tags_selected"><span>'+ tag +'</span></li>').appendTo($target);
             });
         } else {
             $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
@@ -813,7 +829,8 @@ $(function() {
 
     // Editor-area
     if($('#serendipityEntry').length > 0) {
-        serendipity.categoryList();
+        serendipity.catsList();
+        serendipity.tagsList();
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
     }
@@ -981,7 +998,7 @@ $(function() {
                     afterClose: function() {
                         // Accessibility helper
                         $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'false');
-                        serendipity.categoryList();
+                        serendipity.catsList();
                     }
                 }
             });
@@ -1030,7 +1047,9 @@ $(function() {
                 type: "inline",
                 closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>',
                 callbacks: {
-                    afterClose: function() {}
+                    afterClose: function() {
+                        serendipity.tagsList();
+                    }
                 }
             });
 
