@@ -86,7 +86,7 @@
                                     <input type="hidden" name="serendipity[adminAction]" value="publish" />
                                     <input type="hidden" name="serendipity[id]" value="{$entry.id}" />
                                     {$token}
-                                    <button class="publish_now" type="submit"><span class="icon-share"></span><span class="visuallyhidden">{$CONST.PUBLISH}</span></button>
+                                    <button class="publish_now" type="submit" title="{$CONST.PUBLISH_NOW}"><span class="icon-share"></span><span class="visuallyhidden">{$CONST.PUBLISH_NOW}</span></button>
                                 </form>
                             </li>
                         {/if}
