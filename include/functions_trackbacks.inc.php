@@ -59,7 +59,7 @@ function serendipity_pingback_is_success($resp) {
  * @return
  */
 function serendipity_pingback_autodiscover($loc, $body, $url=null) {
-global $serendipity;
+    global $serendipity;
 
     // This is the old way, sending pingbacks, for downward compatibility.
     // But this is wrong, as it does link from the main blog URL instead of the article URL
@@ -236,7 +236,7 @@ function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $
  * @return null
  */
 function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) {
-global $serendipity;
+    global $serendipity;
     $timeout   = 30;
 
     $u = parse_url($loc);
@@ -306,7 +306,7 @@ global $serendipity;
  * @param   string  The excerpt text of the foreign blog
  * @return true
  */
-function add_trackback ($id, $title, $url, $name, $excerpt) {
+function add_trackback($id, $title, $url, $name, $excerpt) {
     global $serendipity;
 
     if ($GLOBALS['tb_logging']) {
@@ -405,7 +405,7 @@ function add_trackback ($id, $title, $url, $name, $excerpt) {
  * @param   string  The foreign postdata to add
  * @return boolean
  */
-function add_pingback ($id, $postdata) {
+function add_pingback($id, $postdata) {
     global $serendipity;
     log_pingback("Reached add_pingback. ID:[$id]");
 
@@ -515,7 +515,7 @@ function getPingbackParam($paramName, $data) {
  * @access private
  * @param array comment array to be filled
  */
-function fetchPingbackData( &$comment) {
+function fetchPingbackData(&$comment) {
     global $serendipity;
 
     // Don't fetch remote page, if not explicitly allowed in serendipity_config_local.php:
@@ -580,8 +580,8 @@ function fetchPingbackData( &$comment) {
 /**
  * Strips any unneeded code from trackback / pingback bodies returning pure (UTF8) text.
  */
-function trackback_body_strip( $body ){
-    // replace non brakeable space with normal space:
+function trackback_body_strip($body){
+    // replace non breakable space with normal space:
     $body = str_replace('&nbsp;', ' ', $body);
 
     // strip html entities and tags.

@@ -323,8 +323,9 @@ switch($serendipity['GET']['adminAction']) {
         $data['categories'] = $categories;
         $data['offSet']     = $offSet;
         $data['use_iframe'] = $serendipity['use_iframe'];
-        $data['page'] = $page;
-        $data['totalEntries'] = serendipity_getTotalEntries();
+        $data['page']       = $page;
+
+        $data['totalEntries']  = serendipity_getTotalEntries();
         $data['simpleFilters'] = $serendipity['simpleFilters'];
 
         if (is_array($entries)) {
@@ -373,8 +374,8 @@ switch($serendipity['GET']['adminAction']) {
             $data['formtoken']         = serendipity_setFormToken();
             $data['serverOffsetHour']  = serendipity_serverOffsetHour();
             $data['showFutureEntries'] = $serendipity['showFutureEntries'];
-            $data['filter_import'] = $filter_import;
-            $data['sort_import'] = $sort_import;
+            $data['filter_import']     = $filter_import;
+            $data['sort_import']       = $sort_import;
         } else {
             $data['no_entries'] = true;
         } // if entries end

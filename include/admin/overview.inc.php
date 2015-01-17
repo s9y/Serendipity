@@ -44,10 +44,10 @@ $output = array();
 serendipity_plugin_api::hook_event('backend_frontpage_display', $output);
 $data['backend_frontpage_display'] = $output['more'];
 
-$data['usedVersion'] = $serendipity['version'];
-$data['updateCheck'] = $serendipity['updateCheck'];
-$data['curVersion'] = serendipity_getCurrentVersion();
-$data['update'] = version_compare($data['usedVersion'], $data['curVersion'], '<');
+$data['usedVersion']  = $serendipity['version'];
+$data['updateCheck']  = $serendipity['updateCheck'];
+$data['curVersion']   = serendipity_getCurrentVersion();
+$data['update']       = version_compare($data['usedVersion'], $data['curVersion'], '<');
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
 $data['updateButton'] = $output;
 
