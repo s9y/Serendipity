@@ -2261,7 +2261,7 @@ label .perm_name,
     color: #fcfcfc;
     height: 100%;
     min-height: 7em;
-    overflow: scroll;
+    overflow: auto;
     padding: .5em 1em;
     position: absolute;
     top: 0;
