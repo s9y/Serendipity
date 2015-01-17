@@ -1088,3 +1088,4 @@
 @define('CATEGORY_PLUGIN_SHOWALL', 'Falls aktiviert wird Besuchern ein Link angezeigt, das Blog ohne Einschränkung der Kategorien darzustellen.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity benötigt eine PHP-Version >= %2$s - Sie benutzen eine ältere Version (%1$s) und müssen auf eine neuere upgraden. Die meisten Provider gestatten den Wechsel auf neuere PHP-Versionen über einen Schalter in der Admin-Oberfläche oder eine Anweisung in der .htaccess.');
 @define('TOGGLE_VIEW', 'Darstellung der Kategorien wechseln');
+@define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');

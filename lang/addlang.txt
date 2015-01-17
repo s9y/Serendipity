@@ -1,1 +1,2 @@
-@define('PUBLISH_NOW', 'Publish this entry now with the current time and date');
+
+@define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
