@@ -2738,6 +2738,10 @@ img.mfp-img {
   right: 0;
   padding-top: 0; }
 
+/* Additional styles for MagnificPopup, do not remove */
+.mfp-image-holder .mfp-content {
+    min-width: 240px;
+}
 
 /* SMALL SCREEN */
 @media only screen and (min-width: 480px) {
