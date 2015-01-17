@@ -1413,12 +1413,12 @@ function serendipity_updertEntry($entry) {
         }
 
         if ($entry['isdraft'] === 0) {
-            $entry['isdraft']   = 'false'; // make sure to commit a string value with dashboards entry publish (only!)
-            $entry['timestamp'] = $_entry['timestamp']; // dashboard publishing a draft shall not set a new entry timestamp
-            $entry['title'] = !isset($entry['title']) ? $_entry['title'] : $entry['title']; // dashboard publishing a draft does not pass title, body, extended, and author, so we need to set it here
-            $entry['body'] = !isset($entry['body']) ? $_entry['body'] : $entry['body'];
-            $entry['extended'] = !isset($entry['extended']) ? $_entry['extended'] : $entry['extended'];
-            $entry['author'] = !isset($entry['author']) ? $_entry['author'] : $entry['author'];
+            $entry['isdraft'] = 'false'; // this needs to be set as string, which might be missing when being published from the dashboard
+
+            foreach (array('title', 'body', 'extended', 'author') as $required_field) {
+                // dashboard publishing a draft does not pass title, body, extended, and author, so we need to set it here
+                if (! isset($entry[$required_field])) { $entry[$required_field] = $_entry[$required_field]; }
+            }
         }
 
         $entry['last_modified'] = time();
