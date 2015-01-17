@@ -15,8 +15,14 @@
         <input id="entryTitle" name="serendipity[title]" type="text" value="{$entry_vars.entry.title|escape}">
     </div>
 
-    <div id="category_list" class="clearfix">
+    <div id="cats_list" class="clearfix taxonomy">
         <h3>{$CONST.CATEGORIES}</h3>
+
+        <ul class="plainList"></ul>
+    </div>
+
+    <div id="tags_list" class="clearfix taxonomy">
+        <h3>Tags</h3>
 
         <ul class="plainList"></ul>
     </div>
