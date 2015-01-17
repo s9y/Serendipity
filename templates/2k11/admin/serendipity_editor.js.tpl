@@ -650,12 +650,12 @@
 
         $target.empty();
 
-        if (tagged.length > 0) {
+        if (tagged == '') {
+            $('<li>{$CONST.PLUGIN_EVENT_FREETAG_NO_RELATED}</li>').appendTo($target);
+        } else {
             $.each(tagged, function(key, tag) {
                 $('<li class="tags_selected"><span>'+ tag +'</span></li>').appendTo($target);
             });
-        } else {
-            $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
         }
     }
 
@@ -1003,7 +1003,7 @@ $(function() {
                 }
             });
 
-            $('#category_list').on('click', 'h3, li', function() {
+            $('#cats_list').on('click', 'h3, li', function() {
                 $('#select_category').trigger('click');
             });
         }
@@ -1055,6 +1055,10 @@ $(function() {
 
             $('#backend_freetag_list > a').click(function(e) {
                 e.preventDefault();
+            });
+
+            $('#tags_list').on('click', 'h3, li', function() {
+                $('#select_tags').trigger('click');
             });
         }
     {/if}

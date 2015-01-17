@@ -1783,6 +1783,11 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+.taxonomy h3,
+.taxonomy li {
+    cursor: pointer;
+}
+
 .taxonomy h3 {
     float: left;
     line-height: 1.5em;

@@ -22,7 +22,7 @@
     </div>
 
     <div id="tags_list" class="clearfix taxonomy">
-        <h3>Tags</h3>
+        <h3>{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}</h3>
 
         <ul class="plainList"></ul>
     </div>
