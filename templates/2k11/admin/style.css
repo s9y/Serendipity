@@ -353,14 +353,14 @@ nav ol {
 
 /* ICON FONT: http://fortawesome.github.com/Font-Awesome/ */
 @font-face {
-    font-family: 'fontello';
-    src: url('{TEMPLATE_PATH}font/fontello.eot?35316753');
-    src: url('{TEMPLATE_PATH}font/fontello.eot?35316753#iefix') format('embedded-opentype'),
-         url('{TEMPLATE_PATH}font/fontello.woff?35316753') format('woff'),
-         url('{TEMPLATE_PATH}font/fontello.ttf?35316753') format('truetype'),
-         url('{TEMPLATE_PATH}font/fontello.svg?35316753#fontello') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'fontello';
+  src: url('{TEMPLATE_PATH}font/fontello.eot?50916206');
+  src: url('{TEMPLATE_PATH}font/fontello.eot?50916206#iefix') format('embedded-opentype'),
+       url('{TEMPLATE_PATH}font/fontello.woff?50916206') format('woff'),
+       url('{TEMPLATE_PATH}font/fontello.ttf?50916206') format('truetype'),
+       url('{TEMPLATE_PATH}font/fontello.svg?50916206#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"]:before,
@@ -423,6 +423,7 @@ nav ol {
 .icon-right-dir:before { content: '\e828'; }
 .icon-th-list:before { content: '\e829'; }
 .icon-block:before { content: '\e82a'; }
+.icon-share:before { content: '\e82b'; }
 
 
 /* BACKEND HELPER CLASSES */
@@ -598,6 +599,7 @@ input[type="submit"] {
 .button_link,
 .tabs > ul a,
 button,
+button[type="submit"].publish_now,
 input[type="button"] {
     background: #ddd;
     background-image: -webkit-linear-gradient(#fff, #ddd);
@@ -635,6 +637,7 @@ input[type="submit"].state_cancel:visited {
 .button_link:hover,
 .tabs > ul a:hover,
 button:hover,
+button[type="submit"].publish_now:hover,
 input[type="button"]:hover {
     background: #ccc;
     background-image: -webkit-linear-gradient(#fff, #eee 1px, #ccc);
@@ -668,6 +671,7 @@ input[type="submit"].state_cancel:focus {
 input:checked + .media_selector,
 .tabs > ul .on a,
 .button_link:active,
+button[type="submit"].publish_now:active,
 .tabs > ul a:active,
 button:active,
 input[type="button"]:active {
