@@ -626,9 +626,9 @@
         $(img).attr('src', $(img).attr('src')+'?'+Math.random());
     }
 
-    serendipity.catsList = function() {
+    serendipity.categoryList = function() {
         var $source = $('#edit_entry_category');
-        var $target = $('#cats_list > ul');
+        var $target = $('#category_list > ul');
         var $selected = $source.find('input:checkbox:checked');
 
         $target.empty();
@@ -829,8 +829,7 @@ $(function() {
 
     // Editor-area
     if($('#serendipityEntry').length > 0) {
-        serendipity.catsList();
-        serendipity.tagsList();
+        serendipity.categoryList();
         serendipity.toggle_category_selector('categoryselector');
         serendipity.toggle_extended();
     }
@@ -998,7 +997,7 @@ $(function() {
                     afterClose: function() {
                         // Accessibility helper
                         $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'false');
-                        serendipity.catsList();
+                        serendipity.categoryList();
                     }
                 }
             });
@@ -1047,9 +1046,7 @@ $(function() {
                 type: "inline",
                 closeMarkup: '<button title="%title%" class="mfp-close" type="button">'+ btnText +'</button>',
                 callbacks: {
-                    afterClose: function() {
-                        serendipity.tagsList();
-                    }
+                    afterClose: function() {}
                 }
             });
 
