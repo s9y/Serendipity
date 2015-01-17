@@ -1076,7 +1076,7 @@ h4,
 }
 
 .toggle_headline,
-#category_list h3,
+.taxonomy h3,
 h5,
 h6 {
     font-size: 1em;
@@ -1794,12 +1794,16 @@ form > .button_link:first-of-type,
     margin: .375em 2em .375em 0;
 }
 
-#category_list ul {
+.taxonomy ul {
+    clear: left;
     margin: .375em 0;
     line-height: 1.5em;
+    padding: 0;
+    text-align: left;
+    width: 100%;
 }
 
-#category_list li {
+.taxonomy li {
     display: inline-block;
     margin: 0 1em 0 0;
 }
@@ -2305,7 +2309,7 @@ label .perm_name,
 .no-js .customfieldMedia,
 .no-js .toggle_links,
 .no-js .toggle_info,
-.no-js #category_list,
+.no-js .taxonomy,
 .no-js .comment_summary,
 .no-js .show_config_option .icon-right-dir,
 .no-js #keyword_list,
@@ -2923,6 +2927,12 @@ img.mfp-img {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    .taxonomy ul {
+        clear: none;
+        float: right;
+        width: 84%;
     }
 
     #template_select .current_backend_template,
