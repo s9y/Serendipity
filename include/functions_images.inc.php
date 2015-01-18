@@ -1,7 +1,6 @@
 <?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
-# Improved by Vladimir Ajgl (vlada@ajgl.cz) 2008-01-26
 
 if (IN_serendipity !== true) {
     die ("Don't hack!");
@@ -297,7 +296,7 @@ function serendipity_updateImageInDatabase($updates, $id) {
         $admin = ' AND (authorid = ' . $serendipity['authorid'] . ' OR authorid = 0)';
     }
 
-    $i=0;
+    $i = 0;
     if (sizeof($updates) > 0) {
         foreach ($updates AS $k => $v) {
             $q[] = $k ." = '" . serendipity_db_escape_string($v) . "'";
@@ -317,7 +316,7 @@ function serendipity_updateImageInDatabase($updates, $id) {
  */
 function serendipity_deleteImage($id) {
     global $serendipity;
-    $dThumb = array();
+    $dThumb   = array();
     $messages = '';
 
     $file   = serendipity_fetchImageFromDatabase($id);
@@ -536,10 +535,10 @@ function serendipity_insertImageInDatabase($filename, $directory, $authorid = 0,
     $thumbpath = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $directory . $filebase . '.'. $serendipity['thumbSuffix'] . (empty($extension) ? '' : '.' . $extension);
     $thumbnail = (file_exists($thumbpath) ? $serendipity['thumbSuffix'] : '');
 
-    $fdim = @serendipity_getimagesize($filepath, '', $extension);
-    $width = $fdim[0];
+    $fdim   = @serendipity_getimagesize($filepath, '', $extension);
+    $width  = $fdim[0];
     $height = $fdim[1];
-    $mime = $fdim['mime'];
+    $mime   = $fdim['mime'];
 
 
     $query = sprintf(
@@ -653,7 +652,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             } else {
                 // The caller wants a thumbnail constrained in the dimension set by config
                 $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
-                $r = serendipity_resize_image_gd($infile, $outfile, $calc[0], $calc[1]);
+                $r    = serendipity_resize_image_gd($infile, $outfile, $calc[0], $calc[1]);
             }
         } else {
             if (is_array($size)) {
@@ -664,7 +663,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
                 }
             } else {
                 $calc = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $size, $serendipity['thumbConstraint']);
-                $r = array('width' => $calc[0], 'height' => $calc[1]);
+                $r    = array('width' => $calc[0], 'height' => $calc[1]);
             }
             $newSize = $r['width'] . 'x' . $r['height'];
             if ($fdim['mime'] == 'application/pdf') {
@@ -799,7 +798,7 @@ function serendipity_rotateImg($id, $degrees) {
 function serendipity_generateThumbs() {
     global $serendipity;
 
-    $i=0;
+    $i = 0;
     $serendipity['imageList'] = serendipity_fetchImagesFromDatabase(0, 0, $total);
     $msg_printed = false;
 
@@ -822,8 +821,8 @@ function serendipity_generateThumbs() {
 
             $oldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $file['thumbnail_name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
             $newThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . '.' . $serendipity['thumbSuffix'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-            $sThumb = $file['path'] . $file['name'] . '.' . $serendipity['thumbSuffix'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-            $fdim = @getimagesize($ffull);
+            $sThumb   = $file['path'] . $file['name'] . '.' . $serendipity['thumbSuffix'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
+            $fdim     = @getimagesize($ffull);
 
             if (!file_exists($oldThumb) && !file_exists($newThumb) && ($fdim[0] > $serendipity['thumbSize'] || $fdim[1] > $serendipity['thumbSize'])) {
                 $returnsize = serendipity_makeThumbnail($file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']), $file['path']);
@@ -1095,9 +1094,9 @@ function serendipity_guessMime($extension) {
 function serendipity_syncThumbs($deleteThumbs = false) {
     global $serendipity;
 
-    $i=0;
-    $files = serendipity_fetchImages();
+    $i = 0;
 
+    $files  = serendipity_fetchImages();
     $fcount = count($files);
 
     for ($x = 0; $x < $fcount; $x++) {
@@ -1111,7 +1110,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
 
         $ffull   = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $files[$x];
         $fthumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $f[0] . '.' . $serendipity['thumbSuffix'] . '.' . $f[1];
-        $sThumb = $f[0] . '.' . $serendipity['thumbSuffix'] . '.' . $f[1];
+        $sThumb  = $f[0] . '.' . $serendipity['thumbSuffix'] . '.' . $f[1];
         $fbase   = basename($f[0]);
         $fdir    = dirname($f[0]) . '/';
         if ($fdir == './') {
@@ -1144,8 +1143,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                     }
                 } else {
                     // Calculate correct thumbnail size from original image
-                    $expect = serendipity_calculate_aspect_size(
-                        $fdim[0], $fdim[1], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
+                    $expect = serendipity_calculate_aspect_size($fdim[0], $fdim[1], $serendipity['thumbSize'], $serendipity['thumbConstraint']);
                     // Check actual thumbnail size
                     if ($tdim[0] != $expect[0] || $tdim[1] != $expect[1]) {
                         // This thumbnail is incorrect; delete it so
@@ -1176,7 +1174,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
 
         if (is_array($rs)) {
             // This image is in the database.  Check our calculated data against the database data.
-            $update    = array();
+            $update = array();
             // Is the width correct?
             if (isset($fdim[0]) && $rs['dimensions_width'] != $fdim[0]) {
                 $update['dimensions_width'] = $fdim[0];
@@ -1328,8 +1326,8 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
     $height = imagesy($in);
 
     if (is_null($newheight)) {
-        $newsizes = serendipity_calculate_aspect_size($width, $height, $newwidth, 'width');
-        $newwidth = $newsizes[0];
+        $newsizes  = serendipity_calculate_aspect_size($width, $height, $newwidth, 'width');
+        $newwidth  = $newsizes[0];
         $newheight = $newsizes[1];
     }
 
@@ -1376,7 +1374,7 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
 
     // Rearrange params for calls from old imageselectorplus plugin
     if ($size == null) {
-      $size = $constraint;
+      $size       = $constraint;
       $constraint = 'smallest';
     }
 
@@ -1405,7 +1403,7 @@ function serendipity_calculate_aspect_size($width, $height, $size, $constraint =
         // Is the image big enough to resize?
         if ($height > $size) {
             // Calculate new size
-            $ratio = $width / $height;
+            $ratio    = $width / $height;
             $newwidth = round($size * $ratio);
             // Limit calculated dimension to at least 1px
             if ($newwidth <= 0) {
@@ -1462,7 +1460,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     while ($perPage % $lineBreak !== 0) {
         $perPage++;
     }
-    $start   = ($page-1) * $perPage;
+    $start = ($page-1) * $perPage;
 
     if ($manage && $limit_path == NULL) {
         ## SYNCH START ##
@@ -1504,11 +1502,15 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         // in the database
 
         $nCount = 0;
+
         if ($debug) echo "<p>Image Sync Right: " . serendipity_checkPermission('adminImagesSync') . " Onthefly Sync: " . $serendipity['onTheFlySynch'] . " Hash: " . $serendipity['current_image_hash'] . "!=" . $serendipity['last_image_hash']. "</p>";
+
         if ($serendipity['onTheFlySynch'] && serendipity_checkPermission('adminImagesSync') && ($debug  || ($serendipity['current_image_hash'] != $serendipity['last_image_hash']))) {
             $aResultSet = serendipity_db_query("SELECT path, name, extension, thumbnail_name, id
                                                 FROM {$serendipity['dbPrefix']}images", false, 'assoc');
+
             if ($debug) echo "<p>Got images: <pre>" . print_r($aResultSet, true) . "</pre></p>";
+
             if (is_array($aResultSet)) {
                 foreach ($aResultSet AS $sKey => $sFile) {
                     serendipity_plugin_api::hook_event('backend_thumbnail_filename_select', $sFile);
@@ -1520,13 +1522,16 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
                     }
 
                     $sFileName = $sFile['path'] . $sFile['name'] . (empty($sFile['extension']) ? '' : '.' . $sFile['extension']);
+
                     if ($debug) echo "<p>File name is $sFileName, thumbnail is $sThumbNailFile</p>";
+
                     unset($aResultSet[$sKey]);
 
                     if (isset($aFilesOnDisk[$sFileName])) {
                         unset($aFilesOnDisk[$sFileName]);
                     } else {
                         if ($debug) echo "<span class='block_level'>Deleting Image {$sFile['id']}</span>";
+
                         serendipity_deleteImage($sFile['id']);
                         ++$nCount;
                     }
@@ -1540,7 +1545,9 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
             serendipity_set_config_var('last_image_hash', $serendipity['current_image_hash'], 0);
             $aUnmatchedOnDisk = array_keys($aFilesOnDisk);
+
             if ($debug) echo "<p>Got unmatched files: <pre>" . print_r($aUnmatchedOnDisk, true) . "</pre></p>";
+
             $nCount = 0;
             foreach ($aUnmatchedOnDisk AS $sFile) {
                 if (preg_match('@\.' . $serendipity['thumbSuffix'] . '\.@', $sFile)) {
@@ -1664,13 +1671,13 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 /**
  * Generate the url-parameters needed when generating the ML to select an image to add to the editor, to store the relevant options (like which textare to add it to)
  *
- * */
+ */
 function serendipity_generateImageSelectorParems() {
     global $serendipity;
     $sortParams        = array('perpage', 'order', 'ordermode');
     $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
     $extraParems       = '';
-    $standaloneFilterParams      = array('only_path', 'only_filename');
+    $standaloneFilterParams = array('only_path', 'only_filename');
     $filterParams      =  $serendipity['GET']['filter'] ?: array();
 
     foreach($importParams AS $importParam) {
@@ -1866,10 +1873,10 @@ function serendipity_traversePath($basedir, $dir='', $onlyDirs = true, $pattern 
             }
 
             if ($bIsDir &&
-                ($max_depth === null || $depth < $max_depth) &&
-                ($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
+                    ($max_depth === null || $depth < $max_depth) &&
+                    ($aExcludeDirs == null || !isset($aExcludeDirs[$file]))) {
                 $next_dir = serendipity_dirSlash('end', $dir) . basename($file);
-                $files = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
+                $files    = array_merge($files, serendipity_traversePath($basedir, $next_dir, $onlyDirs, $pattern, ($depth+1), $max_depth, $apply_ACL, $aExcludeDirs));
             }
         }
     }
@@ -2526,7 +2533,7 @@ function serendipity_parseMediaProperties(&$dprops, &$keywords, &$media, &$props
     }
 
     if ($keywordsPerBlock > 0) {
-        $rows = ceil(count($keywords) / $keywordsPerBlock);
+        $rows  = ceil(count($keywords) / $keywordsPerBlock);
         for($i = 0; $i < $rows; $i++) {
             for ($j = 0; $j < $keywordsPerBlock; $j++) {
                 $kidx = ($i*$keywordsPerBlock) + $j;
@@ -3565,8 +3572,8 @@ function &serendipity_getMediaPaths() {
 
     $aExclude = array("CVS" => true, ".svn" => true, "_vti_cnf" => true); // add _vti_cnf to exclude possible added servers frontpage extensions
     serendipity_plugin_api::hook_event('backend_media_path_exclude_directories', $aExclude);
-    $paths        = array();
 
+    $paths        = array();
     $aResultSet   = serendipity_traversePath(
         $serendipity['serendipityPath'] . $serendipity['uploadPath'],
         '',
