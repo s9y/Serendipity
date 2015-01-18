@@ -143,7 +143,7 @@
     }
 
     // Used by non-wysiwyg editor toolbar buttons to wrap selection
-    // in <img> element (only); doesn't really "wrap", merely inserts
+    // in <img> element (only); does not really "wrap", merely inserts
     // an <img> element before selected text
     serendipity.wrapInsImage = function(txtarea) {
         var loc = prompt('Enter the image location: ');
@@ -382,7 +382,7 @@
                 serendipity.toggle_extended(true);
             });
             if (localStorage.show_extended_editor == "true") {
-                // the editor is visible by default - note the string, as bool isn't supported yet in localStorage
+                // the editor is visible by default - note the string, as bool is not supported yet in localStorage
                 return;
             }
         }
@@ -765,7 +765,7 @@
         var $toggleIcon = $(toggler).find(stateIcon);
         var toggleState = $toggleIcon.attr('class');
 
-        // if toggler does not have an id, don't store state
+        // if toggler does not have an id, do not store state
         var togglerId = $(toggler).attr('id');
         if (togglerId !== undefined) {
             var storageKey = 'show_' + $(toggler).attr('id');

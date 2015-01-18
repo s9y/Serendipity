@@ -48,7 +48,7 @@
         <div id="content" class="clearfix">
     {* include of previous plain upgrader here *}
     {if ($get.action == 'ignore')}
-        {* TODO: don't know what to put here? *}
+        {* TODO: do not know what to put here? *}
     {elseif ($get.action == 'upgrade')}
         {foreach $call_tasks AS $ctask}
             {if $is_callable_task}
