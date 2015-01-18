@@ -293,3 +293,6 @@
 {if $case_default}
     {if $showML}{$showML}{/if}
 {/if}
+{if $showMLbutton}
+    <a id="ml_link" class="button_link" href="?serendipity[adminModule]=media">{$CONST.MEDIA_LIBRARY}</a>
+{/if}

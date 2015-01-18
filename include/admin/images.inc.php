@@ -717,8 +717,12 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
 }
 
 if (! isset($data['showML'])) {
-    // always having the ML available is useful when switching the filter after adding an image, thus being in the add-case
-    $data['showML'] = showMediaLibrary();
+    if (isset($_REQUEST['go_properties'])) {
+        $data['showMLbutton'] = true;
+    } else {
+        // always having the ML available is useful when switching the filter after adding an image, thus being in the add-case
+        $data['showML'] = showMediaLibrary();
+    }
 }
 
 $data['get']['fid']       = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
