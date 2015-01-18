@@ -253,7 +253,7 @@
         if ($('#' + escapedElement).length) {
             // Proper ID was specified (hopefully by plugins)
         } else {
-            // Let's try the serendipity[] prefix
+            // Let us try the serendipity[] prefix
             escapedElement = serendipity.escapeBrackets('serendipity[' + textarea + ']');
 
             if (!$('#' + escapedElement).length) {
