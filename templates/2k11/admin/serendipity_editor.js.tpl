@@ -1425,7 +1425,7 @@ $(function() {
                                 data.append('serendipity[adminModule]', 'media');
                                 data.append('serendipity[adminAction]', 'add');
                                 data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
-                                data.append('serendipity[target_filename][1]', file.name);
+                                data.append('serendipity[target_filename][1]', $('input[name*="serendipity[target_filename][1]"]').val());
                                 var type = file.type;
                                 if (type == "image/bmp") {
                                     {* bmp is not supported *}
