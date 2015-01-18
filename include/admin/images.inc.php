@@ -90,7 +90,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'delete':
-        $file     = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
+        $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
 
         if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
             return;
@@ -124,10 +124,10 @@ switch ($serendipity['GET']['adminAction']) {
             $serendipity['adminFile'] = 'serendipity_admin.php';
         }
         $abortLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?serendipity[adminModule]=images';
-        $newLoc = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
+        $newLoc   = $serendipity['serendipityHTTPPath'] . $serendipity['adminFile'] . '?' . serendipity_setFormToken('url') . '&amp;serendipity[action]=admin&amp;serendipity[adminModule]=images&amp;serendipity[adminAction]=doMultiDelete&amp;serendipity[id]=' . $ids;
         $data['case_confirm_deletion'] = true;
-        $data['abortLoc']        = $abortLoc;
-        $data['newLoc']          = $newLoc;
+        $data['abortLoc'] = $abortLoc;
+        $data['newLoc']   = $newLoc;
         break;
 
     case 'rename':
@@ -162,7 +162,7 @@ switch ($serendipity['GET']['adminAction']) {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
             $created_thumbnail = true;
-            $data['showML'] = showMediaLibrary($messages, true);
+            $data['showML']    = showMediaLibrary($messages, true);
             break;
         }
 
@@ -229,7 +229,7 @@ switch ($serendipity['GET']['adminAction']) {
                     fwrite($fp, $fContent);
                     fclose($fp);
 
-                    $image_id = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
+                    $image_id   = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
                     $messages[] = sprintf( HOTLINK_DONE , $serendipity['POST']['imageurl'] , $tfile .'');
                     serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
                 } else {
@@ -283,9 +283,9 @@ switch ($serendipity['GET']['adminAction']) {
                         $uploadtmp = $uploadtmp[$uploadFileCounter];
                     }
                     if (!empty($target_filename)) {
-                        $tfile   = $target_filename;
+                        $tfile = $target_filename;
                     } elseif (!empty($uploadfile)) {
-                        $tfile   = $uploadfile;
+                        $tfile = $uploadfile;
                     } else {
                         // skip empty array
                         continue;
@@ -310,7 +310,7 @@ switch ($serendipity['GET']['adminAction']) {
                     $realname = $tfile;
                     if (file_exists($target)) {
                         $messages[] = '(' . $target . ') ' . ERROR_FILE_EXISTS_ALREADY;
-                        $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
+                        $realname   = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
                     }
 
                     // Accept file
@@ -533,7 +533,7 @@ switch ($serendipity['GET']['adminAction']) {
         );
         usort($folders, 'serendipity_sortPath');
         $data['case_directorySelect'] = true;
-        $data['folders']   = $folders;
+        $data['folders'] = $folders;
         break;
 
     case 'addSelect':
@@ -570,7 +570,7 @@ switch ($serendipity['GET']['adminAction']) {
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
             'extraParems'       => serendipity_generateImageSelectorParems(),
-            'manage'            => isset($serendipity['GET']['showMediaToolbar'])   ? serendipity_db_bool($serendipity['GET']['showMediaToolbar'])  : true
+            'manage'            => isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true
         );
         // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);
@@ -589,7 +589,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $data['case_rotateCW'] = true;
         if (serendipity_rotateImg($serendipity['GET']['fid'], -90)) {
-            $data['rotate_img_done'] = true;
+            $data['rotate_img_done']    = true;
             $data['adminFile_redirect'] = $serendipity['adminFile_redirect'];
         }
         break;
@@ -606,7 +606,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $data['case_rotateCCW'] = true;
         if (serendipity_rotateImg($serendipity['GET']['fid'], 90)) {
-            $data['rotate_img_done'] = true;
+            $data['rotate_img_done']    = true;
             $data['adminFile_redirect'] = $serendipity['adminFile_redirect'];
         }
         break;
@@ -648,7 +648,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        $file           = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
+        $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
         $media['file'] = &$file;
         if (!is_array($file)) {
             $media['perm_denied'] = true;
@@ -697,17 +697,17 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
         $serendipity['thumbPerPage'] = 2;
     }
     $smarty_vars = array(
-        'textarea' =>  isset($serendipity['GET']['textarea'])   ? $serendipity['GET']['textarea']  : false,
-        'htmltarget' =>  isset($serendipity['GET']['htmltarget'])   ? $serendipity['GET']['htmltarget']  : '',
-        'filename_only' =>  isset($serendipity['GET']['filename_only'])   ? $serendipity['GET']['filename_only']  : false,
+        'textarea' => isset($serendipity['GET']['textarea']) ? $serendipity['GET']['textarea'] : false,
+        'htmltarget' => isset($serendipity['GET']['htmltarget']) ? $serendipity['GET']['htmltarget'] : '',
+        'filename_only' => isset($serendipity['GET']['filename_only']) ? $serendipity['GET']['filename_only'] : false,
     );
 
-    $show_upload  =  isset($serendipity['GET']['showUpload'])   ? $serendipity['GET']['showUpload']  : false;
+    $show_upload = isset($serendipity['GET']['showUpload']) ? $serendipity['GET']['showUpload'] : false;
 
     $output .= serendipity_displayImageList(
-        isset($serendipity['GET']['page'])   ? $serendipity['GET']['page']   : 1,
+        isset($serendipity['GET']['page']) ? $serendipity['GET']['page'] : 1,
         $serendipity['thumbPerPage'],
-        isset($serendipity['GET']['showMediaToolbar'])   ? serendipity_db_bool($serendipity['GET']['showMediaToolbar'])  : true,
+        isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true,
         NULL,
         $show_upload,
         NULL,
@@ -721,7 +721,7 @@ if (! isset($data['showML'])) {
     $data['showML'] = showMediaLibrary();
 }
 
-$data['get']['fid'] = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
+$data['get']['fid']       = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 $data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
 
 
