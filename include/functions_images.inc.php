@@ -1125,7 +1125,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         $ft_mime = serendipity_guessMime($f[1]);
         $fdim    = serendipity_getimagesize($ffull, $ft_mime);
 
-        // If we're supposed to delete thumbs, this is the easiest place.
+        // If we're supposed to delete thumbs, this is the easiest place. Leave messages plain unstiled.
         if (is_readable($fthumb)) {
             if ($deleteThumbs === true) {
                 if (@unlink($fthumb)) {
@@ -1171,7 +1171,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
                                            {$cond['joins']}
 
                                            {$cond['and']}", true, 'assoc');
-
+        // Leave messages plain unstiled
         if (is_array($rs)) {
             // This image is in the database.  Check our calculated data against the database data.
             $update = array();
@@ -1767,7 +1767,9 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         }
         @closedir($handle);
 
+        echo '<span class="msg_notice"><span class="icon-info-circled"></span> ';
         printf(CHECKING_DIRECTORY . "<br />\n", $directory);
+        echo "</span>\n";
 
         // No, we just don't kill files the easy way. We sort them out properly from the database
         // and preserve files not entered therein.
@@ -3292,7 +3294,9 @@ function serendipity_imageAppend(&$tfile, &$target, $dir, $echo = true) {
     $target = $dir . $tfile;
 
     if ($echo) {
+        echo '<span class="msg_success"><span class="icon-ok-circled"></span> <strong>';
         printf(FILENAME_REASSIGNED . '<br />', serendipity_specialchars($tfile));
+        echo "</strong></span>\n";
     }
     return $realname;
 }
