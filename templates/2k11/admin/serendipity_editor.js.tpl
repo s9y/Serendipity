@@ -650,24 +650,8 @@
 
         $target.empty();
 
-        if (tagged.length > 0) {
-            $.each(tagged, function(key, tag) {
-                $('<li class="tags_selected"><span>'+ tag +'</span></li>').appendTo($target);
-            });
-        } else {
-            $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
-        }
-    }
-
-    serendipity.tagsList = function() {
-        var $source = $('#properties_freetag_tagList').val();
-        var $target = $('#tags_list > ul');
-        var tagged = $source.split(',');
-
-        $target.empty();
-
         if (tagged == '') {
-            $('<li>{$CONST.PLUGIN_EVENT_FREETAG_NO_RELATED}</li>').appendTo($target);
+            $('<li>{$CONST.EDITOR_NO_TAGS}</li>').appendTo($target);
         } else {
             $.each(tagged, function(key, tag) {
                 $('<li class="tags_selected"><span>'+ tag +'</span></li>').appendTo($target);
