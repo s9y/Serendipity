@@ -1105,3 +1105,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity requires a PHP version >= %2$s - you are running a lower version (%1$s) and need to upgrade your PHP version. Most providers offer you to switch to newer PHP versions through their admin panels or .htaccess directives.');
 @define('TOGGLE_VIEW', 'Switch category view mode');
 @define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
+@define('EDITOR_TAGS', 'Tags');
+@define('EDITOR_NO_TAGS', 'No tags');
