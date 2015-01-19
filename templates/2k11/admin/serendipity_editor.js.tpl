@@ -636,7 +636,7 @@
         if ($selected.length > 0) {
             $selected.each(function() {
                 var catText = $(this).next('label').text();
-                $('<li class="cats_selected"><span>'+ catText +'</span></li>').appendTo($target);
+                $('<li class="selected">'+ catText +'</li>').appendTo($target);
             });
         } else {
             $('<li>{$CONST.NO_CATEGORIES}</li>').appendTo($target);
@@ -654,7 +654,7 @@
             $('<li>{$CONST.EDITOR_NO_TAGS}</li>').appendTo($target);
         } else {
             $.each(tagged, function(key, tag) {
-                $('<li class="tags_selected"><span>'+ tag +'</span></li>').appendTo($target);
+                $('<li class="selected">'+ tag +'</li>').appendTo($target);
             });
         }
     }

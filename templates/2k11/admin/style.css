@@ -1783,17 +1783,6 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
-.taxonomy {
-    background: #f6f6f6;
-    border: 1px solid #c1c1c1;
-    border-radius: 2px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    margin: 0 0 .375em;
-    padding: 0 .5em;
-}
-
 .taxonomy h3:hover,
 .taxonomy li:hover {
     cursor: pointer;
@@ -1807,7 +1796,7 @@ form > .button_link:first-of-type,
 
 .taxonomy ul {
     clear: left;
-    margin: .375em 0;
+    margin: .25em 0 0;
     line-height: 1.5em;
     padding: 0;
     text-align: left;
@@ -1816,7 +1805,19 @@ form > .button_link:first-of-type,
 
 .taxonomy li {
     display: inline-block;
-    margin: 0 1em 0 0;
+    font-size: .875em;
+    margin: 0 1.14285em .28571em 0;
+}
+
+.taxonomy .selected {
+    background: #f6f6f6;
+    border: 1px solid #c1c1c1;
+    border-radius: 2px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 .5em;
+    text-align: center;
 }
 
 #template_select article,
