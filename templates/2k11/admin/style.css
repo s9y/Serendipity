@@ -1791,13 +1791,14 @@ form > .button_link:first-of-type,
 .taxonomy h3 {
     float: left;
     line-height: 1.5em;
-    margin: .375em 2em .375em 0;
+    margin: .375em 2em 0 0;
 }
 
 .taxonomy ul {
     clear: left;
-    margin: .25em 0 0;
-    line-height: 1.5em;
+    font-size: .875em;
+    margin: .5em 0 0;
+    line-height: 1.4em;
     padding: 0;
     text-align: left;
     width: 100%;
@@ -1805,8 +1806,7 @@ form > .button_link:first-of-type,
 
 .taxonomy li {
     display: inline-block;
-    font-size: .875em;
-    margin: 0 1.14285em .28571em 0;
+    margin: 0 .5714em .3571em 0;
 }
 
 .taxonomy .selected {
