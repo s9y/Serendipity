@@ -1,6 +1,4 @@
-<?php #
-
-# serendipity_event_nl2br.php 2014-02-01 Ian $
+<?php
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -157,7 +155,7 @@ class serendipity_event_nl2br extends serendipity_event
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        constant($name));
                 $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-                $propbag->add('default', 'true');
+                $propbag->add('default',     'true');
         }
         return true;
     }
@@ -277,6 +275,7 @@ class serendipity_event_nl2br extends serendipity_event
                             }
                         }
                     }
+
                 return true;
                 break;
 
