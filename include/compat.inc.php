@@ -62,6 +62,53 @@ function memSnap($tshow = '') {
     return '[' . date('d.m.Y H:i') . '] ' . number_format($current - $memUsage, 2, ',', '.') . ' label "' . $tshow . '", totalling ' . number_format($current, 2, ',', '.') . '<br />' . "\n";
 }
 
+
+/**
+ * Make readable error types for debugging error_reporting levels
+ *
+ * @access public
+ * @param  int     error value
+ * @return string  constant error string
+ */
+function debug_ErrorLevelType($type)
+{
+    switch($type)
+    {
+        case E_ERROR: // 1 //
+            return 'E_ERROR';
+        case E_WARNING: // 2 //
+            return 'E_WARNING';
+        case E_PARSE: // 4 //
+            return 'E_PARSE';
+        case E_NOTICE: // 8 //
+            return 'E_NOTICE';
+        case E_CORE_ERROR: // 16 //
+            return 'E_CORE_ERROR';
+        case E_CORE_WARNING: // 32 //
+            return 'E_CORE_WARNING';
+        case E_COMPILE_ERROR: // 64 //
+            return 'E_COMPILE_ERROR';
+        case E_COMPILE_WARNING: // 128 //
+            return 'E_COMPILE_WARNING';
+        case E_USER_ERROR: // 256 //
+            return 'E_USER_ERROR';
+        case E_USER_WARNING: // 512 //
+            return 'E_USER_WARNING';
+        case E_USER_NOTICE: // 1024 //
+            return 'E_USER_NOTICE';
+        case E_STRICT: // 2048 //
+            return 'E_STRICT';
+        case E_RECOVERABLE_ERROR: // 4096 //
+            return 'E_RECOVERABLE_ERROR';
+        case E_DEPRECATED: // 8192 //
+            return 'E_DEPRECATED';
+        case E_USER_DEPRECATED: // 16384 //
+            return 'E_USER_DEPRECATED';
+    }
+    return "";
+}
+
+
 /**
  * Set our own exeption handler to convert all errors into exeptions automatically
  * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
@@ -75,7 +122,32 @@ function memSnap($tshow = '') {
 if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
-
+        $exit = false;
+        switch ( $errNo ) {
+            case E_ERROR:
+            case E_USER_ERROR:
+                $type = 'Fatal Error';
+                $exit = true;
+                break;
+            case E_USER_WARNING:
+            case E_WARNING:
+                $type = 'Warning';
+                break;
+            case E_USER_NOTICE:
+            case E_NOTICE:
+            case @E_STRICT:
+            case @E_DEPRECATED:
+            case @E_USER_DEPRECATED:
+                $type = 'Notice';
+                break;
+            case @E_RECOVERABLE_ERROR:
+                $type = 'Catchable';
+                break;
+            default:
+                $type = 'Unknown Error';
+                $exit = true;
+                break;
+        }
         $rep  = ini_get('error_reporting');
         $args = func_get_args();
 
@@ -94,9 +166,9 @@ if (!function_exists('errorToExceptionHandler')) {
         if ($serendipity['production'] === 'debug') {
 
             // We don't want the notices - but everything else !
-            echo ' == FULL DEBUG ERROR MODE == ';
+            echo " == FULL DEBUG ERROR MODE == \n";
             echo '<pre>';
-            // trying to be as detailled as possible - but beware using args containing sensibel data like passwords
+            // trying to be as detailled as possible - but avoid using args containing sensibel data like passwords
             if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
                 if ( version_compare(PHP_VERSION, '5.4') >= 0 ) {
                     $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8);
@@ -107,28 +179,20 @@ if (!function_exists('errorToExceptionHandler')) {
             }
             //print_r($args); // debugging [Use with care! Not to public, since holding password and credentials!!!]
             // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-            // compare version to not get strange T_NEW parse errors (http://board.s9y.org/viewtopic.php?f=10&t=19436)
-            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
-                echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            } else {
-                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            }
-            echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
-            exit; // make sure to exit in case of database connection errors.
         }
         if ($serendipity['production'] === false) {
-            echo ' == TESTING ERROR MODE == ';
-            echo '<pre>';
-            // see notes above
-            if (!$serendipity['dbConn'] || version_compare(PHP_VERSION, '5.3', '<')) {
-                echo '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            } else {
-                throw new ErrorException($errStr); // tracepath = all, if not ini_set('display_errors', 0);
-            }
-            echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
-            exit; // make sure to exit in case of database connection errors.
+            echo " == TESTING ERROR MODE == \n";
         }
-        if ($serendipity['production'] === true) {
+        if ($serendipity['production'] !== true) {
+            if (!$serendipity['dbConn'] || $exit) {
+                echo '<p><b>' . $type.':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
+            } else {
+                echo '<pre style="white-space: pre-line;">';
+                throw new \ErrorException($type.': '.$errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
+                echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
+            }
+            if (!$serendipity['dbConn'] || $exit) exit; // make sure to exit in case of database connection errors.
+        } else {
             if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
                 // ToDo: enhance for more special serendipity error needs
                 $str  = " == SERENDIPITY ERROR == ";

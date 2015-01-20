@@ -53,17 +53,14 @@ if (!isset($serendipity['production'])) {
 }
 
 // Set error reporting
-// TODO: E_STRICT throws problematic errors due to "hook_event" being a static function, but all of our plugins don't really define that...
-error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
+error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED)); // is 22519 with 5.4+
 
 if ($serendipity['production'] !== true) {
     @ini_set('display_errors', 'on');
 }
 
-
 // The serendipity errorhandler string
 $serendipity['errorhandler'] = 'errorToExceptionHandler';
-
 
 // Default rewrite method
 $serendipity['rewrite'] = 'none';
@@ -225,7 +222,7 @@ if (function_exists('set_include_path')) {
 }
 
 if ($use_include !== false && $use_include == $new_include) {
-    @define('S9Y_PEAR',      true);
+    @define('S9Y_PEAR', true);
     @define('S9Y_PEAR_PATH', '');
 } else {
     @define('S9Y_PEAR', false);
@@ -268,18 +265,30 @@ if (!is_readable($local_config)) {
 include($local_config);
 
 if ($serendipity['production'] === 'debug') {
-    error_reporting(E_ALL &~E_NOTICE | E_STRICT);
+    error_reporting(E_ALL ^ E_NOTICE); // is 32759 with 5.4+
+}
+if ($serendipity['production'] === false) {
+    error_reporting(E_ALL & ~(E_NOTICE|E_STRICT)); // is 30711 with 5.4+
 }
 
-//[internal callback function]: errorToExceptionHandler()
-if(is_callable($serendipity['errorhandler'], false, $callable_name)) {
+$errLevel = error_reporting();
+
+/* debug make correct error levels readable
+echo $errLevel."<br>\n";
+for ($i = 0; $i < 15;  $i++ ) {
+    print debug_ErrorLevelType($errLevel & pow(2, $i)) . "<br>\n";
+}
+*/
+
+// [internal callback function]: errorToExceptionHandler()
+if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
     // set serendipity global error to exeption handler
     if ($serendipity['production'] === 'debug') {
-        set_error_handler($serendipity['errorhandler'], error_reporting()); // Yes, DEBUG mode should actually report E_STRICT errors! In PHP 5.4s is contained in E_ALL already, but not in PHP 5.2.
+        set_error_handler($serendipity['errorhandler'], $errLevel); // Yes, DEBUG mode should actually report E_STRICT errors! In PHP 5.4+ contained in E_ALL already
+    } elseif ($serendipity['production'] === false) {
+        set_error_handler($serendipity['errorhandler'], $errLevel); // most E_STRICT errors are thrown during the page's compilation process and can not be suppressed here.
     } else {
-    // Caution! If we want to have the same noshow effect as upper set error_reporting(E_ALL) in 'debug' mode,
-    // do not clone it to set_error_handler(E_ALL), else everythimg is haltet to debug, which makes using debug obsolet.
-        set_error_handler($serendipity['errorhandler'], E_ALL & ~(E_NOTICE|E_STRICT));
+        set_error_handler($serendipity['errorhandler'], $errLevel); // different, see ln 56
     }
 }
 
@@ -326,7 +335,6 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
 /*
  * If a user is logged in, fetch his preferences. He possibly wants to have a different language
  */
-
 if (IS_installed === true && php_sapi_name() !== 'cli') {
     // Import HTTP auth (mostly used for RSS feeds)
     if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
