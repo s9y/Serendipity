@@ -1669,16 +1669,18 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
 
 
 /**
- * Generate the url-parameters needed when generating the ML to select an image to add to the editor, to store the relevant options (like which textare to add it to)
+ * Generate the url-parameters needed when generating the ML to select an image to add to the editor, to store the relevant options (like which textarea to add it to)
  *
  */
 function serendipity_generateImageSelectorParems() {
     global $serendipity;
-    $sortParams        = array('perpage', 'order', 'ordermode');
-    $importParams      = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
-    $extraParems       = '';
+
+    $sortParams   = array('perpage', 'order', 'ordermode');
+    $importParams = array('adminModule', 'htmltarget', 'filename_only', 'textarea', 'subpage',  'keywords', 'noBanner', 'noSidebar', 'noFooter', 'showUpload','showMediaToolbar');
+    $extraParems  = '';
+    $filterParams = $serendipity['GET']['filter'] ?: array(); // ?: elvis operator, see http://en.wikipedia.org/wiki/Elvis_operator and upcoming PHP 7 ?? (isset) operator
+
     $standaloneFilterParams = array('only_path', 'only_filename');
-    $filterParams      =  $serendipity['GET']['filter'] ?: array();
 
     foreach($importParams AS $importParam) {
         if (isset($serendipity['GET'][$importParam])) {
