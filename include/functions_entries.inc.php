@@ -206,7 +206,7 @@ function &serendipity_fetchEntryCategories($entryid) {
  */
 function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
-
+    
     $cond = array();
     $cond['orderby'] = $orderby;
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
@@ -931,7 +931,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $totalPages = 1;
     }
 
-    if (!isset($serendipity['GET']['page']) && serendipity_db_bool($serendipity['archiveSortStable'])) {
+    if (!isset($serendipity['GET']['page']) && serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['uriArguments'][0] != 'search') {
         $serendipity['GET']['page'] = $totalPages;
     } else if (!isset($serendipity['GET']['page'])) {
         $serendipity['GET']['page'] = 1;
@@ -947,7 +947,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     $uriArguments[] = 'P%s';
     $serendipity['smarty']->assign('footer_totalEntries', $totalEntries);
     $serendipity['smarty']->assign('footer_totalPages', $totalPages);
-    if (serendipity_db_bool($serendipity['archiveSortStable'])) {
+    if (serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['uriArguments'][0] != 'search') {
         $serendipity['smarty']->assign('footer_currentPage', $totalPages - $serendipity['GET']['page']);
     } else {
         $serendipity['smarty']->assign('footer_currentPage', $serendipity['GET']['page']);
@@ -961,7 +961,7 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
     }
 
-    if (serendipity_db_bool($serendipity['archiveSortStable'])) {
+    if (serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['uriArguments'][0] != 'search') {
         $temp = $serendipity['smarty']->getTemplateVars('footer_prev_page');
         $serendipity['smarty']->assign('footer_prev_page', $serendipity['smarty']->getTemplateVars('footer_next_page'));
         $serendipity['smarty']->assign('footer_next_page', $temp);
