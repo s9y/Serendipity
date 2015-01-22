@@ -3,6 +3,10 @@
 Version 2.0 ()
 ------------------------------------------------------------------------
 
+    * Smarty fix for purging compiled files
+    
+    * Fix wrong search page ordering when stable archive was active
+        
     * Prevent entryproperties from saving/displaying a browser-side
       stored password that was actually not set.
       
