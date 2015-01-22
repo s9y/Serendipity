@@ -9,6 +9,7 @@ Version 2.1 ()
 
 Version 2.0 ()
 ------------------------------------------------------------------------
+    * Fix wrong search page ordering when stable archive was active
 
     * Prevent entryproperties from saving/displaying a browser-side
       stored password that was actually not set.
