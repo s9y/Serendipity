@@ -1229,12 +1229,6 @@ $(function() {
         alert('{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}');
     });
 
-    // Limit width of media file info
-    if($('.media_pane').length > 0) {
-        var thumbsWidth = $('.media_pane').attr('data-thumbmaxwidth')  + 'px';
-        $('.media_file_meta').css('maxWidth', thumbsWidth);
-    }
-
     // Show media file info, template info, label info or filters
     $('.media_show_info, .template_show_info, .filters_toolbar li > a, .toggle_info').click(function(e) {
         var $el = $(this);
