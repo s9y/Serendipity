@@ -21,11 +21,13 @@
         <ul class="plainList"></ul>
     </div>
 
+    {if class_exists('serendipity_event_freetag')}
     <div id="tags_list" class="clearfix taxonomy">
         <h3>{$CONST.EDITOR_TAGS}</h3>
 
         <ul class="plainList"></ul>
     </div>
+    {/if}
 
     <div class="form_area">
         <label for="serendipity[body]">{$CONST.ENTRY_BODY}</label>
