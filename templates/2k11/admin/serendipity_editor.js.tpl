@@ -646,6 +646,7 @@
     serendipity.tagsList = function() {
         var $source = $('#properties_freetag_tagList').val();
         var $target = $('#tags_list > ul');
+        if (!$source) return;
         var tagged = $source.split(',');
 
         $target.empty();
