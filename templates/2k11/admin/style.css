@@ -1583,6 +1583,11 @@ form > .button_link:first-of-type,
     margin: .75em 0;
 }
 
+#serendipity_comments_list .actions + p {
+    float: left;
+    margin: .875em 0 .625em .4em;
+}
+
 .remove_msg,
 .remove_msg:visited {
     color: inherit;
