@@ -70,7 +70,7 @@
         </section>
 
         <section id="dashboard_entries" class="even equal_heights quick_list">
-            <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.ADMIN_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3>
+            <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.DASHBOARD_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
             {if is_array($entries)}

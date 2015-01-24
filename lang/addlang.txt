@@ -1,3 +1,1 @@
-
-@define('EDITOR_TAGS', 'Tags');
-@define('EDITOR_NO_TAGS', 'No tags');
+@define('DASHBOARD_ENTRIES', 'In Progress');
