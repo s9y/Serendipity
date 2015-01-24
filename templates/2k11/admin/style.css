@@ -1812,6 +1812,7 @@ form > .button_link:first-of-type,
 .taxonomy li {
     display: inline-block;
     margin: 0 .5714em .3571em 0;
+    padding: .1875em 0 0;
     position: relative;
     top: -2px;
 }
