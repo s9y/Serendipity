@@ -1583,7 +1583,7 @@ form > .button_link:first-of-type,
     margin: .75em 0;
 }
 
-#serendipity_comments_list .actions + p {
+.bayes_done {
     float: left;
     margin: .875em 0 .625em .4em;
 }
