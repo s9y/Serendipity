@@ -646,17 +646,18 @@
     serendipity.tagsList = function() {
         var $source = $('#properties_freetag_tagList').val();
         var $target = $('#tags_list > ul');
-        if (!$source) return;
-        var tagged = $source.split(',');
 
-        $target.empty();
+        if (typeof $source !== 'undefined') {
+            var tagged = $source.split(',');
+            $target.empty();
 
-        if (tagged == '') {
-            $('<li>{$CONST.EDITOR_NO_TAGS}</li>').appendTo($target);
-        } else {
-            $.each(tagged, function(key, tag) {
-                $('<li class="selected">'+ tag +'</li>').appendTo($target);
-            });
+            if (tagged == '') {
+                $('<li>{$CONST.EDITOR_NO_TAGS}</li>').appendTo($target);
+            } else {
+                $.each(tagged, function(key, tag) {
+                    $('<li class="selected">'+ tag +'</li>').appendTo($target);
+                });
+            }
         }
     }
 
