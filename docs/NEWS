@@ -1,12 +1,18 @@
 #
 
-
 Version 2.1 ()
 ------------------------------------------------------------------------
 
     * Some small enhancements to the error reporting
 
+Version 2.0.1 ()
+------------------------------------------------------------------------
 
+   * ??? (yellowled, please elaborate last commits)
+   
+   * Clearer language constants for entries in dashboard, labelled
+     "In progress" 
+   
 Version 2.0 (January 23rd, 2015)
 ------------------------------------------------------------------------
 

@@ -1119,3 +1119,4 @@ $i18n_filename_to = array (
 @define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'No tags');
+@define('DASHBAORD_ENTRIES', 'In Progress');
