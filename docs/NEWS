@@ -2,12 +2,16 @@
 
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+   * Fixed entry editor JS not emitting a 'No tags' msg in taxonomy
+     quick view. Improved serendipity.tagsList exit if freetag
+     plugin is not installed.
 
-   * ??? (yellowled, please elaborate last commits)
-   
+   * Minor backend UI fixes (taxonomy quick view in entry editor,
+     'Done' msg emitted by Bayes plugin)
+
    * Clearer language constants for entries in dashboard, labelled
-     "In progress" 
-   
+     "In progress"
+
 Version 2.0 (January 23rd, 2015)
 ------------------------------------------------------------------------
 
@@ -17,40 +21,40 @@ Version 2.0 (January 23rd, 2015)
         
     * Prevent entryproperties from saving/displaying a browser-side
       stored password that was actually not set.
-      
+
     * Stronger check for existing logger interface to prevent errors
       when it is not actively used.
-    
+
     * Fix entryproperties being removed when publishing an article
       from the dashboard and by specific plugins (freetag, trackback)
       that modify entry data.
-      
+
     * Fix deleting comments when user is not an admin, but the entry
       belongs to him. Thanks to berberic.
-    
+
     * Patch PEAR.php to use "static" isError declaration to prevent
       PHP error messages
 
     * Change order of IF-statements in entries.tpl to check for
       comment_moderate/comment_added, to properly emit the message
       whether a comment is being moderated.
-      
+
     * Fix searching for entries in the admin panel with database
       types other than "mysql"
-      
+
     * Change entry editor's category assignment to toggle between
       a hierarchical and a plain list (good for many categories)
-      
+
     * Fix date formatting in entry editor to not use ISO year
       but the calendar year
-      
+
     * Fix autoupdate version read and transmit
 
 Version 2.0-rc2 (December 23rd, 2014)
 ------------------------------------------------------------------------
 
     * Fixes escaping of comments in the new backend pane to prevent
-      XSS. Thanks to Steffen RÃ¶emann for reporting!
+      XSS. Thanks to Steffen Röemann for reporting!
 
     * Fix wrong parameter count in serendipity_entity_decode
 
@@ -59,28 +63,28 @@ Version 2.0-rc1 (includes beta4/5/6) (December 19th, 2014)
 
     * entryproperties plugin will now automatically disable nl2br
       markup, when the WYSIWYG editor is used to create en entry
-      
+
     * PHP Requirement now is at: PHP 5.3+
 
     * Fix for syndication subtome onclick handler
-    
+
     * Fix problematic preview stylesheet reference
-    
+
     * Optimized clearing smarty template files on upgrading
-    
+
     * Properly reset the "disable markup" feature of entryproperties
       plugin when none selected
-      
+
     * PHP 5.4+ fix to properly call htmlspecialchars() / htmlentities() /
       html_entity_decode() with a charset option, that has been
       set to to default to UTF-8 and will yield empty strings when
       being used in NON-UTF-8 environments. Now we utilize a
       serendipity_specialchars() wrapper call.
-      
+
     * Added SQLite3 OO database layer for PHP 5.4+
-    
-    * New personal preference to choose CKEditor toolbar presets. 
-      Presets can be overwritte through a 
+
+    * New personal preference to choose CKEditor toolbar presets.
+      Presets can be overwritte through a
       templates/xxx/admin/ckeditor_custom_config.js if needed.
       See htmlarea/ckeditor_s9y_config.js for details.
 
@@ -132,7 +136,7 @@ Version 2.0-beta3 (July 25th, 2014)
     * Fixed thumbnail recreation, Issue #134
 
     * Merged external JS libraries into a central "plugins.js" of the 2k11
-      backend template, can be updated through 
+      backend template, can be updated through
       templates/2k11/admin/js/gruntipity.php helper script.
 
     * Adapted database table structure change for statistics, shoutbox,
@@ -145,12 +149,12 @@ Version 2.0-beta3 (July 25th, 2014)
 
     * added experimental support for PHP/SMARTY IN MEMORY caching
       Enabled by default, if classes found loaded.
-      Disable with 
+      Disable with
         $serendipity['disable_apc'] = true;
       and
         $serendipity['disable_memcache'] = true;
 
-    * Support added in serendipity_db_schema_import for sqlite 
+    * Support added in serendipity_db_schema_import for sqlite
       autoincrement
 
     * Remove Google Reader button from syndication plugin options
@@ -194,7 +198,7 @@ Version 2.0-beta3 (July 25th, 2014)
     * All frontend themes that rely on the bundled Core jQuery library
       are currently using the jquery.noConflict-mode for compatibility
       to older plugins.
-      This mode is now considered deprecated and will be removed in 
+      This mode is now considered deprecated and will be removed in
       future releases. A new variable:
         $serendipity['capabilities']['jquery-noconflict'] = false;
       in your theme's config.inc.php file can now turn of that
@@ -251,7 +255,7 @@ Version 2.0-beta3 (July 25th, 2014)
 
     * Change "default" admin backend template fallback chain so that
       old admin themes can theoretically be shown with the "old"
-      admin interface. This however in many themes breaks the 
+      admin interface. This however in many themes breaks the
       Serendipity workflow. In other words, currently old custom backend
       themes are deprecated. We are still working on how to deal
       with this and if we can add some sort of compatibility or port.
@@ -265,7 +269,7 @@ Version 2.0-beta3 (July 25th, 2014)
     * Re-Added possibility to change filename/target directory for
       media uploads
 
-    * Update CKEditor to 4.4     
+    * Update CKEditor to 4.4
 
     * Fixed some missing internationalization instances
 
@@ -312,18 +316,18 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
       will remember the timestamp of the last theme change,
       to make sure that the browser will not cache a mismatching CSS.
 
-    * Fix theme change issues with global template vars in core 
-      (1559472ca3) see 'temporary added empty $template_config_groups' 
+    * Fix theme change issues with global template vars in core
+      (1559472ca3) see 'temporary added empty $template_config_groups'
       in 1.7-rc2 (eb77dc369a)
 
     * Use Smarty for backend display output
 
-    * "Themes" are now what has previously been mixed as "Design", 
+    * "Themes" are now what has previously been mixed as "Design",
       "Theme", "Template" or "Layouts".
 
     * WYSIWYG-Spawn-API reworked (2k11/admin/wysiwyg_init.tpl)
 
-    * All Javascript-functions like SetCookie now reside in a 
+    * All Javascript-functions like SetCookie now reside in a
       serendipity-object, simulating a namespace.
         SetCookie(...)
       became
@@ -332,19 +336,19 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
     * Renamed JS-Function:
         toggleCategorySelector became toggle_category_selector
 
-    * The advanced js option (eyecandy) got removed, as such a thing 
+    * The advanced js option (eyecandy) got removed, as such a thing
       like advanced js doesn't exist anymore
 
-    * dashboard_plugin has an equivalent in the core, replacing the 
+    * dashboard_plugin has an equivalent in the core, replacing the
       frontpage
 
-    * Constants like S9Y_FRAMEWORK_COMPAT are no longer set 
+    * Constants like S9Y_FRAMEWORK_COMPAT are no longer set
       (include_once is used instead)
 
-    * New additional option to render smarty-functions: 
+    * New additional option to render smarty-functions:
       serendipity_smarty_show($template, $data)
 
-    * A number of functions now returns their result instead of echoing 
+    * A number of functions now returns their result instead of echoing
       them (TODO: a bunch of image- and
       trackback-functions still use echo for messages"):
         serendipity_plugin_config
@@ -367,7 +371,7 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
     * Functions added to the core:
         serendipity_generateImageSelectorParams
 
-    * All internal plugins got extracted from plugin_internal.inc.php 
+    * All internal plugins got extracted from plugin_internal.inc.php
       and moved to plugins/.
       They are renamed to work there (upgrader task provides migration):
         serendipity_calendar_plugin    became serendipity_plugin_calendar
@@ -380,7 +384,7 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
 
     * Add plugin hook "js", generating a virtual serendipity.js
 
-    * Admin JS is now bundled in serendipity_editor.js.tpl and 
+    * Admin JS is now bundled in serendipity_editor.js.tpl and
       rendered using smarty in the theme config
 
     * Admin JS got rewritten using jQuery where applicable
@@ -389,13 +393,13 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
 
     * Removed support for layout.php
 
-    * The whole PHP-Code now almost never echoes integrated HTML, but 
+    * The whole PHP-Code now almost never echoes integrated HTML, but
       uses smarty template (TODO: Remove the almost)
       The necessary smarty-templates reside in 2k11/admin/
-      Every theme can generate its own backend if it integrates those 
+      Every theme can generate its own backend if it integrates those
       templates under admin/ itself
 
-    * 2k11 is set as the new default backend, replacing bulletproof. 
+    * 2k11 is set as the new default backend, replacing bulletproof.
       default remains the fallback so far.
 
     * A number of functions had some arguments removed:
@@ -415,32 +419,32 @@ Version 2.0-beta1 and followup -beta2 (April 14th, 2014)
             to
                 static function generate_plugins($side, $negate = false, $class = null, $id = null, $tpl = 'sidebar.tpl')
 
-    * serendipity_showMedia now no longer returns the used template and 
+    * serendipity_showMedia now no longer returns the used template and
       echoes the generated HTML, but only returns the generated HTML
 
-    * Themes now have their own configuration page, 
+    * Themes now have their own configuration page,
       ?serendipity[adminModule]=templates&serendipity[adminAction]=editConfiguration
 
-    * jQuery in the backend no longer runs in noConflict-mode. Use 
+    * jQuery in the backend no longer runs in noConflict-mode. Use
       $(...) instead of jQuery(...)
 
-    * The entryproperty-plugin will now always delete its cache on 
+    * The entryproperty-plugin will now always delete its cache on
       uninstall, not only if the cache is activated then
 
-    * serendipity_is_iframe now really only checks for iframe and 
+    * serendipity_is_iframe now really only checks for iframe and
       doesn't also echo it
 
-    * Added option simpleFilters (meant to indicate to show less 
+    * Added option simpleFilters (meant to indicate to show less
       filters and poweruser-options)
 
-    * serendipity_admin_image_selector.php no longer used by 2k11, 
-      instead the media library (with admin/media_choose.tpl, 
+    * serendipity_admin_image_selector.php no longer used by 2k11,
+      instead the media library (with admin/media_choose.tpl,
       admin/media_upload.tpl, media_pane.tpl, media_items.tpl)
-      can generat the imageselector on its own. The editor calls 
-      serendipity_admin.php?serendipity[adminModule]=media instead, 
+      can generat the imageselector on its own. The editor calls
+      serendipity_admin.php?serendipity[adminModule]=media instead,
       with serendipity[textarea] indicating the target, and
       serendipity[showMediaToolbar] activating the imageSelector modus
-      
+
     * New required PHP-Version: 5.3 or higher (checked in the installer)
 
 Version 1.7.8 (February 9th, 2014)
@@ -452,7 +456,7 @@ Version 1.7.7 (February 6th, 2014)
 ------------------------------------------------------------------------
 
     * Fixed PHP parse error in templatechooser plugin. Blame garvin. :(
-    
+
 Version 1.7.6 (February 6th, 2014)
 ------------------------------------------------------------------------
 
@@ -467,7 +471,7 @@ Version 1.7.6 (February 6th, 2014)
 
     * Templatechooser plugin uses "default" template as fallback,
       not "bulletproof".
-          
+
 Version 1.7.5 (January 18th, 2014)
 ------------------------------------------------------------------------
 
@@ -494,8 +498,8 @@ Version 1.7.4 (January 11th, 2014)
     * Removed blogg.de filter from spamblock plugin, adapted htaccess
       IP block algorithm for race conditions. .htaccess can now contain
       multiple Deny From ranges to prevent parsing problems (DLange)
-      
-    * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors 
+
+    * Fixed IP columns in spamblocklog, spamblock_htaccess, karmalog, visitors
       and shoutbox to varchar(45) for IPv6 - including tunneled IPv4 (39+6)
 
     * Fixed possible double includement of plugin_internal.inc.php
@@ -590,7 +594,7 @@ Version 1.7 ()
       to avoid display troubles for template changes, if previous template had these set.
       Please check your template.
 
-    * rc2: reflect POST submitted changes in Bulletproof template configs re-set situations 
+    * rc2: reflect POST submitted changes in Bulletproof template configs re-set situations
 
     * various PHP 5 compatibility fixes in core and plugins
 
@@ -599,7 +603,7 @@ Version 1.7 ()
     * Onyx, Net_URL classes: Remove PHP4 style constructor due to
       PHP5 error "Constructor already defined"
 
-    * Improved RSS sidebarplugin to support Atom 
+    * Improved RSS sidebarplugin to support Atom
 
     * Bundled simplepie
 
@@ -627,28 +631,28 @@ Version 1.7 ()
       add that to .tpl files.
       (garvinhicking)
 
-    * Patch by Markus BrÃ¼kner: Properly handle files that have no
+    * Patch by Markus Brükner: Properly handle files that have no
       extension in media database
 
     * Made Spartacus recognize github.com mirror (garvinhicking)
-    
+
     * Add "Summary" output to title of summary archive pages, patch by
       hboeck
- 
+
     * Set the smarty object by instance (ophian)
       It is often needed to access the Smarty object from anywhere in your code, e.g. in plugins
       We now ensure that there is only one instance of the object available.
       To obtain an instance of this class: $serendipity['smarty'] = Serendipity_Smarty::getInstance();
       The first time this is called a new instance will be created. Thereafter, the same instance is handed back.
       To overwrite use $serendipity['smarty'] = new Serendipity_Smarty; to create a new instance.
-    
+
     * Set a global Serendipity errorToExceptionHandler (ophian)
       changed some old smarty trigger_errors to PHPs native function
-    
+
     * Updated spamblock plugin (ophian)
-      changed wordfilter to function and Commenters moderation check verify_once 
+      changed wordfilter to function and Commenters moderation check verify_once
       to get checked via wordfilter to reject known spam comments before
-    
+
     * Changed backend comment (error) messages  (ophian)
       as now captured and styleable messages
       (newly added .serendipity_backend_msg_notice css class)
@@ -656,12 +660,12 @@ Version 1.7 ()
     * Updated nl2br plugin (ophian)
       added isolation tag using nl to br
       this also adds some NoBR buttons to backend entry forms
-    
+
     * Smarty3 support (ophian)
       with this upgrade Serendipity / Smarty will at least need a webserver running the PHP 5.2 series.
-      As of August 2011, all PHP users should note, that the PHP 5.2 series is NOT supported anymore by the PHP developers. 
+      As of August 2011, all PHP users should note, that the PHP 5.2 series is NOT supported anymore by the PHP developers.
       All users are strongly encouraged to upgrade to PHP 5.3.8 and up. Please refer to your ISP about this.
-    
+
     * Added new serendipity['defaultBaseURL'] variable that makes sure
       that the baseURL is not overriden when configuring serendipity
       with a possibly autodetected currentl URL. Patch by Manko10.
@@ -674,7 +678,7 @@ Version 1.6.2 (May 16th, 2012)
 
 Version 1.6.1 (May 8th, 2012)
 ------------------------------------------------------------------------
-    
+
     * Improved escaping of backend plugin management for DB query
       and media selector output (Stefan Schurtz)
 
@@ -694,7 +698,7 @@ Version 1.6.1 (May 8th, 2012)
 
     * Fixed serendipity_fetchComments producing wrong SQL code. Please
       check your code if you did workarounds already and remove them.
-      
+
 Version 1.6 (October 27th 2011)
 ------------------------------------------------------------------------
 
@@ -703,58 +707,58 @@ Version 1.6 (October 27th 2011)
 
     * Fix problem with autosave plugin used in conjunction with
       entryproperties (chrisbra)
-      
+
     * Removed browsercompatibilitty plugin because it's outdated and
       IE6 shall be dead.
-      
+
     * Fixed Spartauc SF.Net download location (Thanks to christian_boltz)
-    
+
     * Added new event hook 'backend_loginfail' to track failed logins
       (serendipity_event_externalauth can make use of it for fail2ban)
-      
+
     * Fixed a bug in synchronizing new files with the same basename
       but different extensions, where files with the same mimetype
       would not get added (garvinhicking)
 
     * Show subscription status of comments in frontend and backend
-    
+
     * Added ability to report spam/ham to akismet (Black Warthog)
-    
+
     * Added localization for {$WEBLOG} in trackbacks.tpl (LazyBadger)
-    
+
     * Added "Options -MultiViews" to .htaccess to prevent IE9 trouble
-    
+
     * Karma plugin: Added option to only track votings when users are
       logged in.
-      
+
     * Bugfix: Adjust /admin permalink detection so that it does not listen
       on /adminbook for example. Thanks to Lux!
-      
-    * serendipity_event_mailer now also allows to use commas instead of 
+
+    * serendipity_event_mailer now also allows to use commas instead of
       spaces to seperate multiple mails. Use distinct email adresses
       (Thanks to evanslee)
-      
-    * Added new rewrite option for 1&1 specific servers, because a 
+
+    * Added new rewrite option for 1&1 specific servers, because a
       combined htaccess for both variants could not be find. The reason
       is the MultiViews option in certain apache configs.
-      
+
     * Fix PDO::SQLite to properly fetch the requested row type
       (assoc/both/num), important for staticpage plugin
-      
+
     * TPL fixes for upcoming Smarty3, thanks to timbalu
-    
+
     * Experimental: Config-Groups for template and plugin options,
       currently mimics fold in/out of global configuration.
       Usage through "config_groups", examples are in config.inc.php of
       bulletproof and spamblock plugin. Needs documentation.
       (garvinhicking)
-      
+
     * Added new parameter "empty" to {serendipity_showPlugin}. When
       no callable plugins were found, the string in the "empty" parameter
       will be shown instead, allowing users to get notified of a missing
       plugin:
-      
-       {serendipity_showPlugin 
+
+       {serendipity_showPlugin
            class="serendipity_plugin_twitter"
            empty="Twitter plugin not found!"}
 
@@ -762,15 +766,15 @@ Version 1.6 (October 27th 2011)
       templates; overrides serendipity_event_jquery. If your template
       contains its own "jquery.js" file, the core will NOT use it.
       (garvinhicking)
-    
+
     * Include API logic to allow the core to utilize event hooks with
       internal function calls (used for jquery output, for example)
       (garvinhicking)
-        
+
     * Allow to moderate multiple selected comments (garvinhicking)
-    
+
     * Allow to pass 'template' variable to serendipity_showPlugin
-    
+
     * Make CSS permalink pattern compatible to 1&1 servers,
       thanks to lfrantzen
 
@@ -783,27 +787,27 @@ Version 1.6 (October 27th 2011)
       (onli, Timbalu)
 
     * RSS feed timestamp properly calculates offset (abdussamad)
-    
+
     * (experimental) global theme options (garvinhicking)
       Inside template's config.inc.php you can enable a global
       navigation configuration feature:
-      
+
       $template_global_config = array('navigation' => true);
       serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
-      
+
       More keys apart from "navigation" might get supported in the future.
-      
+
 
     * Implemented suggestion of removing boilerplate code in plugin API:
       Change hack protection, introduce unified language loading, see
       http://board.s9y.org/viewtopic.php?f=11&t=16921
       Thanks to mt2!
 
-    * Fix karma rating plugin missing the text translation for a 
+    * Fix karma rating plugin missing the text translation for a
       specific point area
-      
+
     * Recent entry properties now recognizes multilingual titles
-    
+
     * Include referrer in comment notification email (konus)
 
     * Added new 'fulltext' search option to sidebar plugin
@@ -823,11 +827,11 @@ Version 1.6 (October 27th 2011)
 
     * Stricter check for sqlite3 extension, only functional interface
       instead of OOP currently supported (garvinhicking)
-      
+
     * Experimental: When sending quoted-printable notification mails,
       auto-split after 75 characters.
       (Ref: http://board.s9y.org/viewtopic.php?f=3&t=16314)
-      
+
     * To support custom PHP sessions, s9y will only issue session_start,
       if no session exists yet (garvinhicking)
 
@@ -838,7 +842,7 @@ Version 1.6 (October 27th 2011)
       of such groups are excluded from common author listings.
       (Ref http://board.s9y.org/viewtopic.php?f=11&t=16237)
       (garvinhicking)
-      
+
     * Added option for SMF importer to also import tags
 
     * Added experimental global variable $i18n_filename_utf8 that can
@@ -856,7 +860,7 @@ Version 1.5.5 (December 21st, 2010)
       disabled the PHP-based plugins (which are not utilized by
       serendipity unless manually enabled), until a proper security
       fix is available
-      
+
 Version 1.5.4 (August 26th, 2010)
 ------------------------------------------------------------------------
 
@@ -872,8 +876,8 @@ Version 1.5.4 (August 26th, 2010)
 
     * Fix escaping when using ImageMagick to create PDF-thumbnail images
       (stm9x9)
-      
-    * Add new template variable to feed*.tpl files to support new 
+
+    * Add new template variable to feed*.tpl files to support new
       plugins like pubsubhubbub, so that plugins can embed data to the
       main XML element (onli)
 
@@ -884,7 +888,7 @@ Version 1.5.3 (May 10th, 2010)
       ExtendedFilemanager, ImageManager,
       InsertSnippet and Linker plugins to avoid remote code inclusion.
       (Stefan Esser)
-                      
+
 Version 1.5.2 (January 25th, 2010)
 ------------------------------------------------------------------------
 
@@ -894,12 +898,12 @@ Version 1.5.1 (December 21st, 2009)
 ------------------------------------------------------------------------
 
     * Fix bug with not showing "html" type configuration items.
-    
+
 Version 1.5 (December 21st, 2009)
 ------------------------------------------------------------------------
 
     * Show backend comment pagination in footer and header
-    
+
     * Don't toggle the border of marked comments in the admin section
       to 2px, to avoid padding. Thanks to hboeck!
 
@@ -911,13 +915,13 @@ Version 1.5 (December 21st, 2009)
     * Prevent password autocompletion for user passwords to prevent
       possible mismatch. In media manager popup, fix bug that did
       not properly forward to image selection after upload (onli)
-      
+
     * Fix a bug in statistics output, when statistics for single-number
       months is created. (Andreas Bilke)
 
     * Always increase last_modified when an entry is saved to prevent
       stale entries in RSS feeds. Thanks to Cenic
-      
+
     * Allow comment sidebar plugin to only show coments for entries
       that are allowed to be viewed by the current visitor.
 
@@ -937,7 +941,7 @@ Version 1.5 (December 21st, 2009)
     * More PHP 5.3.0 compat (split(), ereg(), ereg_replace()).
 
     * PostgreSQL compatibility for the printArchives() function to
-      gather only unique timestamps (cite)    
+      gather only unique timestamps (cite)
 
     -- beta1 release
 
@@ -962,7 +966,7 @@ Version 1.5 (December 21st, 2009)
     * Upgrade to Smarty 2.6.26
 
     * Removed inline styles of the s9y media insertion, they will now
-      properly utilize CSS classes (defined in the new file 
+      properly utilize CSS classes (defined in the new file
       style_fallback.css). Also added support for entering "ALT/TITLE"
       attributes to an <img> tag, can be used as a media property if
       you add "ALT" and "TITLE" to the list of "Media properties" in the
@@ -970,12 +974,12 @@ Version 1.5 (December 21st, 2009)
 
     * Filter entries only by authors that have written at least
       one article (garvinhicking)
-      
+
     * Fix PDF imagemagick thumbnail generation to be properly displayed
       (http://board.s9y.org/viewtopic.php?f=3&t=15446)
-      
+
     * Warn about non-writable "plugins" directory in installation
-    
+
     * Added new optional parameter for plugin config type "text": rows.
       Added new optional parameter "input_type"="password" for plugin
       string type configuration (brockhaus)
@@ -990,7 +994,7 @@ Version 1.5 (December 21st, 2009)
     * no longer use htmlspecialchars() on the blog's title and sub-
       title, to allow for custom HTML code to appear and unify
       only letting Smarty do the escaping (garvinhicking,falk)
-      
+
     * Plugin drag/drop now can scroll up/down/left/right when touching
       the borders. Thanks to onli!
 
@@ -1013,14 +1017,14 @@ Version 1.5 (December 21st, 2009)
 
     * Add new config option to base server time on UTC
       (http://board.s9y.org/viewtopic.php?f=2&t=15123) (Abdussamad)
-      
+
     * Use a unique session name for each blog instance, so that multiple
       s9y installations can live on the same domain and having their
       own sessions (kleinerChemiker, DrNI)
 
     * Livejournal importer update by Anson now supports importing
       comments, see http://board.s9y.org/viewtopic.php?f=11&t=15141
-      
+
     * Enhance xhtml cleanup plugin to also work on <param value="..." />
       tags and fix youtube html.  (garvinhicking)
 
@@ -1043,13 +1047,13 @@ Version 1.5 (December 21st, 2009)
       seperately install them. The "pre" function is called BEFORE
       all normal plugins are executed, the normal function is called
       AFTER plugin execution. (garvinhicking)
-      
+
     * Change javascript non-wysiwyg insertion methods to propery
       return to scrollposition, patch by onli
 
     * Enhance TrackExits plugin to also support link redirection for
       future german law/access blocking :) (garvinhicking)
-      
+
     * Enhance quicksearch by performing a wildcard-search for the
       searchterms, when less than 4 matches are found. (onli)
 
@@ -1062,7 +1066,7 @@ Version 1.5 (December 21st, 2009)
       filename. (kleinerchemiker)
 
     * Added improved Blogger.com importer using the API, thanks to jaa
-    
+
     * Change password hashing from plain md5 to salted SHA1. Logins
       should continue to work and are migrated to SHA1 keys upon
       first login. MD5-logins will only work successfully once. This
