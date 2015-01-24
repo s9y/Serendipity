@@ -8,7 +8,7 @@ if [ "x$1" = "x" ]
    echo "available language file."
    exit 1
  else
-   find -maxdepth 1 -name \*.php -exec ./append.sh $1 {} \;
+   find . -maxdepth 1 -name \*.php -exec ./append.sh $1 {} \;
    cd UTF-8
    ./recode.sh
 fi
