@@ -1091,4 +1091,4 @@
 @define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'Keine Tags');
-@define('DASHBAORD_ENTRIES', 'In Vorbereitung');
+@define('DASHBOARD_ENTRIES', 'In Vorbereitung');
