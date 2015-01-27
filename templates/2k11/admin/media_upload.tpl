@@ -82,8 +82,6 @@
 
     {serendipity_hookPlugin hook="backend_image_addform" hookAll=true}
     <div class="form_buttons">
-        <input id="all_authors" name="serendipity[all_authors]" type="hidden" value="true" checked="checked">
-
         <input class="check_inputs" type="submit" value="{$CONST.GO}">
         {if $media.manage}
             <input class="check_inputs" name="go_properties" type="submit" value="{$CONST.GO_ADD_PROPERTIES|escape}">

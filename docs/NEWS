@@ -3,8 +3,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Issue #264: Drop $authorid for permissions based on images
+      instead of directories, it was not used anymore
+      
     * Some small enhancements to the error reporting
-
+    
 Version 2.0.1 ()
 ------------------------------------------------------------------------
    * Fixed entry editor JS not emitting a 'No tags' msg in taxonomy

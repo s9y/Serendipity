@@ -168,7 +168,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $messages[] = '<span class="image_add">' . ADDING_IMAGE . '</span>';
 
-        $authorid = (isset($serendipity['POST']['all_authors']) && $serendipity['POST']['all_authors'] == 'true') ? '0' : $serendipity['authorid'];
+        $authorid = 0; // Only use access-control based on media directories, not images themselves
 
         $new_media = array();
 

@@ -83,7 +83,6 @@
 
         <div style="text-align: center; margin-top: 15px; margin-bottom: 15px">
             <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.IMAGE_MORE_INPUT}" onclick="hideForeign(); addUploadField()" /><br />
-            <input type="hidden" name="serendipity[all_authors]" value="true" checked="checked" id="all_authors" />
             <br />
             <input onclick="checkInputs();" type="submit" value="{$CONST.GO}" class="serendipityPrettyButton input_button" />
             - {$CONST.WORD_OR} -
