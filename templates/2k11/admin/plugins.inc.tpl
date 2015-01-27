@@ -71,7 +71,7 @@
                     <input type="submit" value="{$CONST.GO}">
                 </div>
             {else}
-                <a class="button_link" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
+                <a class="button_link" id="back" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
             {/if}
         </div>
     </form>
@@ -82,6 +82,7 @@
         {foreach $pluggroups AS $pluggroup => $groupstack}
             {if $only_group && $pluggroup != $only_group}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
+            {if $only_group == UPGRADE}<button id="updateAll">Update All</button>{/if}
             <ul class="plugins_installable plainList clearfix">
             {foreach $groupstack as $plug}
                 <li class="clearfix">

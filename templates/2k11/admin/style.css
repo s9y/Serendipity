@@ -2402,6 +2402,28 @@ input[name="serendipity[filter][fileCategory]"] {
 }
 /* end TEMP fixes */
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10000;
+}
+
+#updateProgress {
+    margin: auto;
+    display: block;
+    position: relative;
+    top: 48%;
+    margin: auto;
+}
+
+#updateAll {
+    margin-bottom: 1em;
+}
+
 /* MAGNIFIC POPUP  */
 .mfp-bg {
   top: 0;
