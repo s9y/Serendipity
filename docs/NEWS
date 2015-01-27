@@ -3,9 +3,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Issue #257: Make sure to check entered admin-user password
+    
     * Issue #264: Drop $authorid for permissions based on images
       instead of directories, it was not used anymore
-      
+          
     * Some small enhancements to the error reporting
     
 Version 2.0.1 ()

@@ -629,6 +629,10 @@ function serendipity_checkInstallation() {
         $errs[] = INSTALL_DBPREFIX_INVALID;
     }
 
+    if (empty($_POST['pass']) || $_POST['pass'] != $_POST['pass2']) {
+        $errs[] = INSTALL_PASSWORD_INVALID;
+    }
+
     $serendipity['dbType'] = $_POST['dbType'];
     // Probe database
     // (do it after the dir stuff, as we need to be able to create the sqlite database)

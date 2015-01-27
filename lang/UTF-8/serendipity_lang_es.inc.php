@@ -1108,3 +1108,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'No tags');
 @define('DASHBOARD_ENTRIES', 'In Progress');
+@define('INSTALL_PASSWORD2', 'Admin password (verify)');
+@define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');

@@ -1,1 +1,1 @@
-@define('DASHBOARD_ENTRIES', 'In Progress');
+@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');

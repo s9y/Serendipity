@@ -295,6 +295,14 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('installOnly', 'local', 'simpleInstall')),
 
+                                    array('var'         => 'pass2',
+                                          'title'       => INSTALL_PASSWORD2,
+                                          'description' => INSTALL_PASSWORD2_DESC,
+                                          'type'        => 'fullprotected',
+                                          'default'     => 'john',
+                                          'permission'  => 'siteConfiguration',
+                                          'flags'       => array('installOnly', 'local', 'simpleInstall')),
+
                                     array('var'         => 'realname',
                                           'title'       => USERCONF_REALNAME,
                                           'description' => USERCONF_REALNAME_DESC,
