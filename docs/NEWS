@@ -3,6 +3,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Issue #248: Add $serendipity['forceBase64']=true option (can be set
+      in serendipity_config_local.inc.php) to make Serendipity *not*
+      use 8bit Imap functions for sending mail, for MTAs that behave
+      erradically otherwise.
+      
     * Issue #257: Make sure to check entered admin-user password
     
     * Issue #264: Drop $authorid for permissions based on images

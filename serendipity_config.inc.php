@@ -111,21 +111,27 @@ if (!isset($serendipity['expose_s9y'])) {
     $serendipity['expose_s9y'] = true;
 }
 
+// If set to true (in serendipity_config_local.inc.php) this prevents using imap_8bit
+// functions to send a mail, and use base64 encoding instead
+if (!isset($serendipity['forceBase64'])) {
+    $serendipity['forceBase64'] = false; 
+}
+
 // Should IFRAMEs be used for previewing entries and sending trackbacks?
 $serendipity['use_iframe'] = true;
 
-/* Default language for autodetection */
+// Default language for autodetection
 $serendipity['autolang'] = 'en';
 
-/* Name of folder for the default theme */
+// Name of folder for the default theme
 $serendipity['defaultTemplate'] = '2k11';
 
-/* Default backend theme */
+// Default backend theme
 if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
 }
 
-/* Available languages */
+// Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
                                   'de' => 'German',
@@ -160,12 +166,10 @@ if (!isset($serendipity['languages'])) {
                                   'ta' => 'Tamil');
 }
 
-/* Available Calendars */
+// Available Calendars
 $serendipity['calendars'] = array('gregorian'   => 'Gregorian',
                                   'persian-utf8' => 'Persian (utf8)');
-/*
- *   Load main language file
- */
+// Load main language file
 include($serendipity['serendipityPath'] . 'include/lang.inc.php');
 
 $serendipity['charsets'] = array(
@@ -188,9 +192,7 @@ if (!version_compare(phpversion(), '5.3', '>=')) {
 }
 
 
-/*
- *   Kill the script if we are not installed, and not inside the installer
- */
+// Kill the script if we are not installed, and not inside the installer
 if ( !defined('IN_installer') && IS_installed === false ) {
     header('Status: 302 Found');
     header('X-RequireInstall: 1');
@@ -198,8 +200,8 @@ if ( !defined('IN_installer') && IS_installed === false ) {
     serendipity_die(sprintf(SERENDIPITY_NOT_INSTALLED, 'serendipity_admin.php'));
 }
 
-/* Do the PEAR dance. If $serendipity['use_PEAR'] is set to FALSE, Serendipity will first put its own PEAR include path.
-   By default, a local PEAR will be used. */
+// Do the PEAR dance. If $serendipity['use_PEAR'] is set to FALSE, Serendipity will first put its own PEAR include path.
+// By default, a local PEAR will be used.
 if (function_exists('get_include_path')) {
     $old_include = @get_include_path();
 } else {
@@ -228,7 +230,7 @@ if ($use_include !== false && $use_include == $new_include) {
     @define('S9Y_PEAR', false);
     @define('S9Y_PEAR_PATH', S9Y_INCLUDE_PATH . 'bundled-libs/');
 }
-/* PEAR path setup inclusion finished */
+// PEAR path setup inclusion finished
 
 if (defined('IN_installer') && IS_installed === false) {
     $serendipity['lang'] = $serendipity['autolang'];
@@ -294,9 +296,7 @@ if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
 
 define('IS_up2date', version_compare($serendipity['version'], $serendipity['versionInstalled'], '<='));
 
-/*
- *  Include main functions
- */
+// Include main functions
 include(S9Y_INCLUDE_PATH . 'include/functions.inc.php');
 
 if (serendipity_FUNCTIONS_LOADED !== true) {
@@ -305,9 +305,7 @@ if (serendipity_FUNCTIONS_LOADED !== true) {
     serendipity_die(sprintf(INCLUDE_ERROR . '<br />' . FILE_CREATE_YOURSELF, 'include/functions.inc.php'));
 }
 
-/*
- *   Attempt to connect to the database
- */
+// Attempt to connect to the database
 if (!serendipity_db_connect()) {
     $serendipity['lang'] = 'en';
     include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
@@ -315,9 +313,7 @@ if (!serendipity_db_connect()) {
     serendipity_die(DATABASE_ERROR);
 }
 
-/*
- *   Load Configuration options from the database
- */
+// Load Configuration options from the database
 
 if (defined('USE_MEMSNAP')) {
     echo memSnap('Framework init');
@@ -332,9 +328,8 @@ if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendip
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
     $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
 }
-/*
- * If a user is logged in, fetch his preferences. He possibly wants to have a different language
- */
+
+// If a user is logged in, fetch his preferences. He possibly wants to have a different language
 if (IS_installed === true && php_sapi_name() !== 'cli') {
     // Import HTTP auth (mostly used for RSS feeds)
     if ($serendipity['useHTTP-Auth'] && (isset($_REQUEST['http_auth']) || isset($_SERVER['PHP_AUTH_USER']))) {
@@ -370,28 +365,22 @@ if (empty($serendipity['serendipityHTTPPath'])) {
     $serendipity['serendipityHTTPPath'] = '/';
 }
 
-/* Changing this is NOT recommended, rewrite rules does not take them into account - yet */
+// Changing this is NOT recommended, rewrite rules does not take them into account - yet
 serendipity_initPermalinks();
 
 // Apply constants/definitions from custom permalinks
 serendipity_permalinkPatterns();
 
-/*
- *   Load main language file again, because now we have the preferred language
- */
+// Load main language file again, because now we have the preferred language
 include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
 
-/*
- * Reset charset definition now that final language is known
- */
+// Reset charset definition now that final language is known
 $serendipity['charsets'] = array(
     'UTF-8/' => 'UTF-8',
     ''        => CHARSET_NATIVE
 );
 
-/*
- *   Set current locale, if any has been defined
- */
+// Set current locale, if any has been defined
 if (defined('DATE_LOCALES')) {
     $locales = explode(',', DATE_LOCALES);
     foreach ($locales as $locale) {
@@ -406,14 +395,11 @@ if (function_exists('date_default_timezone_set')) {
         date_default_timezone_set('UTC');
     }
 }
-/*
- *   Fallback charset, if none is defined in the language files
- */
+
+// Fallback charset, if none is defined in the language files
 @define('LANG_CHARSET', 'ISO-8859-1');
 
-/*
- *  Create array of permission levels, with descriptions
- */
+// Create array of permission levels, with descriptions
 $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DESC,
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
@@ -472,4 +458,5 @@ if (!isset($serendipity['imagemagick_thumb_parameters'])) {
 }
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
+
 /* vim: set sts=4 ts=4 expandtab : */
