@@ -287,6 +287,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
     $data['requirements_failues'] = $requirement_failures;
 
+} elseif ( $serendipity['GET']['adminAction'] == 'renderOverlay' ) {
+    $data['adminAction'] = 'overlay';
 } else {
     /* show general plugin list */
 

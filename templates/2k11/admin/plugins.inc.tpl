@@ -75,14 +75,15 @@
             {/if}
         </div>
     </form>
-
     {if $only_group == 'UPGRADE' && ! $available_upgrades}
         <span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>
     {else}
         {foreach $pluggroups AS $pluggroup => $groupstack}
             {if $only_group && $pluggroup != $only_group}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
-            {if $only_group == UPGRADE}<button id="updateAll">Update All</button>{/if}
+            {if $only_group == UPGRADE && $pluggroups['UPGRADE']|@count > 1}
+                <button id="updateAll">Update All</button>
+            {/if}
             <ul class="plugins_installable plainList clearfix">
             {foreach $groupstack as $plug}
                 <li class="clearfix">
@@ -143,6 +144,12 @@
             </ul>
         {/foreach}
     {/if}
+{elseif $adminAction == 'overlay'}
+    <div id="progressWidget">
+        <span id="updateMessage">Starting Update…</span>
+        <img id="updateIndicator" src="{serendipity_getFile file='admin/img/activity.gif'}" />
+        <progress id="updateProgress" value="0" />
+    </div>
 {else}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}

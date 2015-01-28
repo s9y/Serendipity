@@ -795,23 +795,24 @@
     }
 
     serendipity.updateAll = function() {
-        var overlay = $('<div id="overlay"/>');
-        overlay.appendTo(document.body);
-        var progress = $('<progress id="updateProgress" />');
-        progress.attr('max', $('.plugin_status').length);
-        progress.appendTo(overlay);
-        $('#updateProgress').attr('value', 0);
-        serendipity.updateNext();
+        var $overlay = $('<div id="overlay"/>');
+        $.get('?serendipity[adminModule]=plugins&serendipity[adminAction]=renderOverlay')
+        .done(function(data) {
+            $overlay.append(data);
+            $overlay.appendTo(document.body);
+            $('#updateProgress').attr('max', $('.plugin_status').length);
+            serendipity.updateNext();
+        });
     }
     
     serendipity.updateNext = function() {
-        return $.get($('.plugin_status .button_link:visible').first().attr('href'))
+        $.get($('.plugin_status .button_link:visible').first().attr('href'))
         .done(function() {
+            $('#updateMessage').text("Updating " + $('.plugins_installable > li:visible h4').first().text());
             $('.plugins_installable > li:visible').first().fadeOut();
             $('#updateProgress').attr('value', parseInt($('#updateProgress').attr('value')) + 1);
-            console.log($('.plugins_installable > li:visible').length);
             if ($('.plugins_installable > li:visible').length > 0) {
-                return serendipity.updateNext();
+                serendipity.updateNext();
             } else {
                 $('#updateAll').hide();
                 $('#overlay').fadeOut();
