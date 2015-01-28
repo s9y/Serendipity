@@ -1,6 +1,5 @@
 ﻿/**
- * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or http://ckeditor.com/license
+ * @license Serendipity (s9y.org)
  */
 
 CKEDITOR.dialog.add( 'cheatsheet', function( editor ) {
@@ -17,7 +16,7 @@ CKEDITOR.dialog.add( 'cheatsheet', function( editor ) {
 			padding: 0,
 			elements: [{
 				type: 'html',
-				html: '<h1>Keyboard Shortcuts</h1>blahblah'
+				html: '<h1>Keyboard Shortcuts</h1>'
 			}]
 		}],
 		buttons: [ CKEDITOR.dialog.cancelButton ]
