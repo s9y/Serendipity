@@ -1,10 +1,9 @@
 ﻿/**
- * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or http://ckeditor.com/license
+ * @license Serendipity (s9y.org)
  */
 
 /**
- * @fileOverview A Serendipity CKE-Cheatsheet plugin: cheatsheet, v. 1.2 - 2014-09-02
+ * @fileOverview A Serendipity CKE-Cheatsheet plugin: cheatsheet, v. 1.2 - 2015-01-28
  */
 
 CKEDITOR.plugins.add( 'cheatsheet', {
