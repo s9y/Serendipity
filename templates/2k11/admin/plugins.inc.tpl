@@ -147,7 +147,7 @@
 {elseif $adminAction == 'overlay'}
     <div id="progressWidget">
         <span id="updateMessage">Starting Update…</span>
-        <img id="updateIndicator" src="{serendipity_getFile file='admin/img/activity.gif'}" />
+        <div id="updateIndicator" />
         <progress id="updateProgress" value="0" />
     </div>
 {else}
@@ -157,6 +157,9 @@
     {/if}
     {if $new_plugin_failed}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
+    {/if}
+    {if $updateAllMsg}
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
     {/if}
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel"> 

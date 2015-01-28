@@ -2416,7 +2416,7 @@ input[name="serendipity[filter][fileCategory]"] {
 #progressWidget {
     display: block;
     margin: auto;
-    position: fixed;
+    position: relative;
     top: 40%;
     text-align: center;
 }
@@ -2435,6 +2435,18 @@ input[name="serendipity[filter][fileCategory]"] {
     margin-bottom: 1em;
     margin: auto;
 }
+
+@-webkit-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@-moz-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+
+#updateIndicator {
+    width: 100px;
+    height: 100px;
+    background-image: url('{TEMPLATE_PATH}img/activity.png');
+    -webkit-animation: loaderSprite 1s steps(25, end) infinite;
+    animation: loaderSprite 1s steps(25, end) infinite;
+} 
 
 /* MAGNIFIC POPUP  */
 .mfp-bg {

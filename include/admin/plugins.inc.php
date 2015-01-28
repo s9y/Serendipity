@@ -434,7 +434,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     if (count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
     }
-
+    $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);

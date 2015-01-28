@@ -795,7 +795,7 @@
     }
 
     serendipity.updateAll = function() {
-        var $overlay = $('<div id="overlay"/>');
+        var $overlay = $('<div id="overlay" />');
         $.get('?serendipity[adminModule]=plugins&serendipity[adminAction]=renderOverlay')
         .done(function(data) {
             $overlay.append(data);
@@ -806,17 +806,17 @@
     }
     
     serendipity.updateNext = function() {
+        $('#updateMessage').text("Updating " + $('.plugins_installable > li:visible h4').first().text());
         $.get($('.plugin_status .button_link:visible').first().attr('href'))
         .done(function() {
-            $('#updateMessage').text("Updating " + $('.plugins_installable > li:visible h4').first().text());
             $('.plugins_installable > li:visible').first().fadeOut();
             $('#updateProgress').attr('value', parseInt($('#updateProgress').attr('value')) + 1);
             if ($('.plugins_installable > li:visible').length > 0) {
                 serendipity.updateNext();
             } else {
-                $('#updateAll').hide();
-                $('#overlay').fadeOut();
-                $('#content').append('<span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.SUCCESS} </span>');
+                $('#overlay').fadeOut("normal", function () {
+                    window.location = $('#back').attr('href') + '&serendipity[updateAllMsg]=true';
+                });
             }
         })
         .fail(function() {
