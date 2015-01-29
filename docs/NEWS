@@ -3,6 +3,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Issue #234: Granular options to force backend popups for certain
+      areas
+    
     * Issue #248: Add $serendipity['forceBase64']=true option (can be set
       in serendipity_config_local.inc.php) to make Serendipity *not*
       use 8bit Imap functions for sending mail, for MTAs that behave

@@ -1045,6 +1045,14 @@ function serendipity_smarty_init($vars = array()) {
 
         }
 
+        $_force_backendpopups = explode(',', $serendipity['enableBackendPopupGranular']);
+        $force_backendpopups  = array();
+        foreach($_force_backendpopups AS $fbp_key => $fbp_val) {
+            $fbp_val = trim($fbp_val);
+            if (empty($fbp_val)) continue;
+            $force_backendpopups[$fbp_val] = $fbp_val;
+        }
+
         $serendipity['smarty']->assign(
             array(
                 'head_charset'              => LANG_CHARSET,
@@ -1057,6 +1065,7 @@ function serendipity_smarty_init($vars = array()) {
                 'is_xhtml'                  => true,
                 'use_popups'                => $serendipity['enablePopup'],
                 'use_backendpopups'         => $serendipity['enableBackendPopup'],
+                'force_backendpopups'       => $force_backendpopups,
                 'is_embedded'               => (!$serendipity['embed'] || $serendipity['embed'] === 'false' || $serendipity['embed'] === false) ? false : true,
                 'is_raw_mode'               => $serendipity['smarty_raw_mode'],
                 'is_logged_in'              => serendipity_userLoggedIn(),

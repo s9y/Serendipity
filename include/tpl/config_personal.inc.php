@@ -143,7 +143,16 @@
                                           'type'        => 'bool',
                                           'default'     => false,
                                           'flags'       => array('config'),
-                                          'permission'  => 'personalConfiguration')
+                                          'permission'  => 'personalConfiguration'),
+
+                                    array('var'         => 'enableBackendPopupGranular',
+                                          'title'       => INSTALL_BACKENDPOPUP_GRANULAR,
+                                          'description' => INSTALL_BACKENDPOPUP_GRANULAR_DESC
+                                                            . 'images, comments, categories, tags, links.',
+                                          'type'        => 'string',
+                                          'permission'  => 'personalConfiguration',
+                                          'default'     => '',
+                                          'flags'       => array('config')),
                             ));
 
     $res['defaults'] =

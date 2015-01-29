@@ -1110,3 +1110,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('DASHBOARD_ENTRIES', 'In Progress');
 @define('INSTALL_PASSWORD2', 'Admin password (verify)');
 @define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');
+@define('INSTALL_BACKENDPOPUP_GRANULAR', 'Force specific backend popups');
+@define('INSTALL_BACKENDPOPUP_GRANULAR_DESC', 'If you generally disable backend popups, you can specifically force using popups for specific places by entering a comma seperated list of places here. Available places are: ');

@@ -599,7 +599,7 @@
     }
 
     serendipity.closeCommentPopup = function() {
-        {if $use_backendpopups}
+        {if $use_backendpopups || $force_backendpopups.comments}
             parent.self.close();
         {else}
             window.parent.parent.$.magnificPopup.close();
@@ -607,7 +607,7 @@
     }
 
     serendipity.openPopup = function(url) {
-        {if $use_backendpopups}
+        {if $use_backendpopups || $force_backendpopups.images}
             window.open(url,
                         'ImageSel',
                         'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1');
@@ -970,7 +970,7 @@ $(function() {
     }
 
     // Show category selector
-    {if $use_backendpopups}
+    {if $use_backendpopups || $force_backendpopups.categories}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
                 $('#toggle_metadata').click();
@@ -1030,7 +1030,7 @@ $(function() {
     };
 
     // Show tag selector
-    {if $use_backendpopups}
+    {if $use_backendpopups || $force_backendpopups.tags}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
                 $('#toggle_advanced').click();
@@ -1177,7 +1177,7 @@ $(function() {
 
     $('.comments_reply').click(function(e) {
         e.preventDefault();
-        {if $use_backendpopups}
+        {if $use_backendpopups || $force_backendpopups.comments}
             window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
         {else}
            $(this).magnificPopup({ type:'iframe' });
@@ -1246,7 +1246,7 @@ $(function() {
     });
 
     // Show further links
-    {if $use_backendpopups}
+    {if $use_backendpopups || $force_backendpopups.links}
         if($('#dashboard').length > 0) {
             $('.toggle_links').click(function(e) {
                 $('#s9y_links').toggleClass('mfp-hide');
@@ -1262,7 +1262,7 @@ $(function() {
     {/if}
 
     // Media file actions
-    {if $use_backendpopups}
+    {if $use_backendpopups || $force_backendpopups.images}
     $('.media_fullsize').click(function(e) {
         e.preventDefault();
         var $el = $(this);
