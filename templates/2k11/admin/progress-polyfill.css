@@ -1,0 +1,21 @@
+/*
+HTML5 Progress polyfill | Jonathan Stipe | https://github.com/jonstipe/progress-polyfill
+*/
+progress {
+    width: 10em; }
+progress div.progress-frame {
+  height: 1em;
+  width: 100%;
+  padding: 2px;
+  border: 1px solid black;
+  background-color: white; }
+progress div.progress-bar {
+  height: 1em;
+  border: none;
+  background-color: #1E90FF; }
+progress div.progress-undefined {
+  height: 1em;
+  width: 100%;
+  padding: 2px;
+  border: 1px solid black;
+  background-color: #FF9999; }

@@ -9,6 +9,9 @@
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="{serendipity_getFile file='admin/oldie.css'}">
 <![endif]-->
+<!--[if gte IE 8]>
+    <link rel="stylesheet" href="{serendipity_getFile file='admin/progress-polyfill.css'}">
+<![endif]-->
     <script src="{serendipity_getFile file='admin/js/modernizr-2.8.3.min.js'}"></script>
 {if $admin_vars.admin_installed}{serendipity_hookPlugin hook="backend_header" hookAll="true"}{/if}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>

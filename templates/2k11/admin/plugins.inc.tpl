@@ -150,6 +150,7 @@
         <div id="updateIndicator" />
         <progress id="updateProgress" value="0" />
     </div>
+    <script src="{serendipity_getFile file='admin/js/progress-polyfill.min.js'}"></script>
 {else}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
