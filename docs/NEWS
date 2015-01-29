@@ -3,6 +3,10 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Issue #238: When creating/renaming media directories, replace
+      special characters with the same i18n rules like Permalinks are
+      created, renaming umlauts etc.
+      
     * Issue #234: Granular options to force backend popups for certain
       areas
     

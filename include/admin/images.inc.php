@@ -408,7 +408,7 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         if (!empty($serendipity['POST']['save'])) {
-            $newDir   = serendipity_uploadSecure($serendipity['POST']['newDir']);
+            $newDir   = serendipity_uploadSecure(serendipity_makeFilename($serendipity['POST']['newDir']));
             $oldDir   = serendipity_uploadSecure($serendipity['POST']['oldDir']);
 
             if ($oldDir != $newDir) {
@@ -462,8 +462,9 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         $data['case_directoryDoCreate'] = true;
-        $new_dir = serendipity_uploadSecure($serendipity['POST']['parent'] . '/' . $serendipity['POST']['name'], true);
+        $new_dir = serendipity_uploadSecure($serendipity['POST']['parent'] . '/' . serendipity_makeFilename($serendipity['POST']['name']), true);
         $new_dir = str_replace(array('..', '//'), array('', '/'), $new_dir);
+
         $nd      = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir;
         serendipity_plugin_api::hook_event('backend_directory_create', $nd);
 
