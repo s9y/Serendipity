@@ -146,7 +146,7 @@
     {/if}
 {elseif $adminAction == 'overlay'}
     <div id="progressWidget">
-        <span id="updateMessage">Starting Update…</span>
+        <span id="updateMessage">Starting Update ...</span>
         <div id="updateIndicator" class="animated-css"></div>
         <progress id="updateProgress" value="0" />
     </div>

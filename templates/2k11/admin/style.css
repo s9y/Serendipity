@@ -319,6 +319,38 @@ nav ol {
     display: block;
 }
 
+/* HTML5 Progress polyfill */
+progress {
+    min-width: 10em;
+}
+
+#updateProgress {
+    width: 10em;
+}
+
+progress div.progress-frame {
+    background-color: #fff;
+    border: 1px solid #000;
+    height: 1em;
+    padding: 2px;
+    width: 100%;
+}
+
+progress div.progress-bar {
+    background-color: #1e90ff;
+    border: none;
+    height: 1em;
+}
+
+progress div.progress-undefined {
+    background-color: #f99;
+    border: 1px solid #000;
+    height: 1em;
+    padding: 2px;
+    width: 100%;
+}
+
+
 /* HELPER CLASSES */
 /* Hide visually, available for screenreaders */
 .visuallyhidden {
