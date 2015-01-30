@@ -71,7 +71,7 @@ if ($is_logged_in) {
     $self_info = '';
 }
 
-$ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+$serendipity['ajax'] = $ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 $no_banner = (isset($serendipity['GET']['noBanner']) || isset($serendipity['POST']['noBanner']));
 $no_sidebar = (isset($serendipity['GET']['noSidebar']) || isset($serendipity['POST']['noSidebar']));
 $no_footer = (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST']['noFooter']));

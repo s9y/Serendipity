@@ -151,7 +151,10 @@
         <progress id="updateProgress" value="0" />
     </div>
     <script src="{serendipity_getFile file='admin/js/progress-polyfill.min.js'}"></script>
+{elseif isset($ajax_output)}
+    {$ajax_output}
 {else}
+    {$backend_pluginlisting_header}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>

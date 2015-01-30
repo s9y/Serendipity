@@ -341,9 +341,14 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         if (serendipity_checkPermission('adminPluginsMaintainOthers')) {
             $authorid = '0';
         }
-
+        if ($serendipity['ajax']) {
+             // we need to catch the spartacus messages to return only them to the ajax call (used by the update all button)
+            ob_start();
+        }
         $fetchplugin_data = array('GET'     => &$serendipity['GET'],
                                   'install' => true);
+       
+           
         serendipity_plugin_api::hook_event('backend_plugins_fetchplugin', $fetchplugin_data);
 
         // we now have to check that the plugin is not already installed, or stackable, to prevent invalid double instances
@@ -397,6 +402,10 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         } else {
             serendipity_plugin_api::hook_event('backend_plugins_update', $serendipity['GET']['install_plugin'], $fetchplugin_data);
         }
+        if ($serendipity['ajax']) {
+            $data['ajax_output'] = ob_get_contents();
+            ob_end_clean();
+        }
     }
 
     if (isset($_POST['REMOVE']) && serendipity_checkFormToken()) {
@@ -415,7 +424,11 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         $data['timestamp'] = serendipity_strftime('%H:%M:%S');
     }
 
+    ob_start();
     serendipity_plugin_api::hook_event('backend_pluginlisting_header', $null);
+    $data['backend_pluginlisting_header'] = ob_get_contents();
+    ob_end_clean();
+
 
     ob_start();
     serendipity_plugin_api::hook_event('backend_plugins_sidebar_header', $serendipity);
@@ -438,5 +451,6 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 }
 
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
+
 
 /* vim: set sts=4 ts=4 expandtab : */
