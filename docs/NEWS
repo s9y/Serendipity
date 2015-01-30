@@ -3,6 +3,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Add "update all"-button to plugin update page
+
+    * Introduce serendipity['ajax'] to detect incoming ajax requests
+      and react accordingly in core and plugins
+
     * Some small enhancements to the error reporting
 
 Version 2.0.1 ()

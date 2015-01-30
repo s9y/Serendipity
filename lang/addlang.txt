@@ -1,1 +1,2 @@
-@define('DASHBOARD_ENTRIES', 'In Progress');
+@define('START_UPDATE', 'Starting Update ...');
+@define('UPDATE_ALL', 'Update All');
