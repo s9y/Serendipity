@@ -60,7 +60,7 @@
                     {/foreach}
                     </select>
                 </div>
-                
+
 
                 <div id="plugin_filter" class="form_field">
                     <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
@@ -147,7 +147,7 @@
 {elseif $adminAction == 'overlay'}
     <div id="progressWidget">
         <span id="updateMessage">Starting Update…</span>
-        <div id="updateIndicator" />
+        <div id="updateIndicator" class="animated-css"></div>
         <progress id="updateProgress" value="0" />
     </div>
     <script src="{serendipity_getFile file='admin/js/progress-polyfill.min.js'}"></script>
@@ -163,14 +163,14 @@
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
     {/if}
     <div class="tabs" id="pluginlist_tabs">
-        <section id="pluginlist_sidebar" class="panel"> 
+        <section id="pluginlist_sidebar" class="panel">
             <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
 
             {$backend_plugins_sidebar_header}
             {$sidebar_plugins}
         </section>
-        
+
         <section id="pluginlist_event" class="panel">
             <h3>{$CONST.EVENT_PLUGINS}</h3>
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>

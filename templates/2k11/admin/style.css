@@ -2341,7 +2341,8 @@ label .perm_name,
 .msg_error > br,
 .msg_success > br,
 .msg_notice > br,
-.msg_hint > br {
+.msg_hint > br,
+.no-cssanimations .animated-css {
     display: none !important;
     visibility: hidden;
 }
@@ -2446,7 +2447,7 @@ input[name="serendipity[filter][fileCategory]"] {
     background-image: url('{TEMPLATE_PATH}img/activity.png');
     -webkit-animation: loaderSprite 1s steps(25, end) infinite;
     animation: loaderSprite 1s steps(25, end) infinite;
-} 
+}
 
 /* MAGNIFIC POPUP  */
 .mfp-bg {
