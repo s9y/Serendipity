@@ -15,7 +15,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.36');
+        $propbag->add('version',       '1.37');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -477,8 +477,17 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
                     <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
-                        <textarea id="prop<?php echo $fieldname; ?>" name="serendipity[properties][<?php echo $fieldname; ?>]"><?php echo serendipity_specialchars($value); ?></textarea>
+                        <textarea id="prop<?php echo $fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $fieldname; ?>]" data-configitem="prop<?php echo $fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
+<?php
+                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {?>
+                            <figure id="prop<?php echo $fieldname; ?>_preview">
+                                <figcaption><?php echo PREVIEW ?></figcaption>
+                                <img alt="" src="<?php echo $value; ?>">
+                            </figure>
+<?php
+                        }                        
+?>                        
                     </div>
 <?php
                     }

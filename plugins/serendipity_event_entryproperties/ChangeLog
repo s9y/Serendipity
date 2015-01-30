@@ -1,0 +1,3 @@
+1.37:
+-----
+    * Added image preview to extended properties if value is image format (Don Chambers)
