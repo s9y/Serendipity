@@ -479,15 +479,10 @@ class serendipity_event_entryproperties extends serendipity_event
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
                         <textarea id="prop<?php echo $fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $fieldname; ?>]" data-configitem="prop<?php echo $fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
-<?php
-                        if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {?>
-                            <figure id="prop<?php echo $fieldname; ?>_preview">
-                                <figcaption><?php echo PREVIEW ?></figcaption>
-                                <img alt="" src="<?php echo $value; ?>">
-                            </figure>
-<?php
-                        }                        
-?>                        
+                        <figure id="prop<?php echo $fieldname; ?>_preview">
+                            <figcaption><?php echo PREVIEW ?></figcaption>
+                            <img alt="" src="<?php echo $value; ?>">
+                        </figure>
                     </div>
 <?php
                     }
