@@ -475,13 +475,13 @@ class serendipity_event_entryproperties extends serendipity_event
                         $value = trim(str_replace($special_to, $special_read, $fieldparts[1]));
                     }
 ?>
-                    <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area">
+                    <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area media_choose">
                         <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
                         <textarea id="prop<?php echo $fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $fieldname; ?>]" data-configitem="prop<?php echo $fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                         <figure id="prop<?php echo $fieldname; ?>_preview">
-                            <?php  if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) { echo '<figcaption>' . PREVIEW . '</figcaption>'; }?>
-                            <img alt="" src="<?php  if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {echo $value; }?>">
+                            <?php echo '<figcaption>' . PREVIEW . '</figcaption>'; ?>
+                            <img src="<?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {echo $value; }?>"  alt="">
                         </figure>
                     </div>
 <?php
