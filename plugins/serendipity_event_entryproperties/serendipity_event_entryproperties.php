@@ -482,7 +482,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         <textarea id="prop<?php echo $fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $fieldname; ?>]" data-configitem="prop<?php echo $fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                         <figure id="prop<?php echo $fieldname; ?>_preview">
-                            <?php echo '<figcaption>' . PREVIEW . '</figcaption>'; ?>
+                            <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) { echo '<figcaption>' . PREVIEW . '</figcaption>'; } ?>
                             <img src="<?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {echo $value; }?>"  alt="">
                         </figure>
                     </div>
