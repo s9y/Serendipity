@@ -937,7 +937,9 @@ input[type=checkbox],
 #s9y_links > ul,
 #serendipity_category .inputs,
 .serendipity_customfields textarea,
-#adv_opts {
+#adv_opts,
+.entryproperties > h3,
+.entryproperties_customfields > h4 {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -1077,6 +1079,8 @@ h4,
 
 .toggle_headline,
 .taxonomy h3,
+.entryproperties > h3,
+.entryproperties_customfields > h4,
 h5,
 h6 {
     font-size: 1em;
@@ -1619,8 +1623,7 @@ form > .button_link:first-of-type,
 
 .filter_pane,
 #meta_data > div,
-#adv_opts > fieldset > div,
-#adv_opts > fieldset > fieldset,
+.adv_opts_box,
 #downloads {
     background: #eee;
     -webkit-box-sizing: border-box;
@@ -1631,8 +1634,7 @@ form > .button_link:first-of-type,
 }
 
 #meta_data > div,
-#adv_opts > fieldset > div,
-#adv_opts > fieldset > fieldset {
+.adv_opts_box {
     margin-bottom: 1em;
     padding: .4em;
 }
