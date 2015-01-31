@@ -936,7 +936,7 @@ input[type=checkbox],
 .filter_pane,
 #s9y_links > ul,
 #serendipity_category .inputs,
-#serendipity_customfields textarea,
+.serendipity_customfields textarea,
 #adv_opts {
     margin-top: .75em;
     margin-bottom: .75em;
@@ -1153,7 +1153,7 @@ summary {
     overflow: hidden;
 }
 
-#serendipity_customfields label {
+.serendipity_customfields label {
     margin-right: 1em;
 }
 
@@ -1171,7 +1171,7 @@ summary {
 #entries_list .form_check,
 .pagination .prev,
 .pagination .next,
-#serendipity_customfields textarea,
+.serendipity_customfields textarea,
 #dashboard_header h2 {
     float: left;
 }

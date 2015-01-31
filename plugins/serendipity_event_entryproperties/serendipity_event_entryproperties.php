@@ -234,7 +234,7 @@ class serendipity_event_entryproperties extends serendipity_event
         serendipity_plugin_api::hook_event('backend_entryproperties', $supported_properties);
 
         foreach($supported_properties AS $prop_key) {
-            // Do not delete a property if it is not subbmitted to this function, because serendipity_updertEntry 
+            // Do not delete a property if it is not subbmitted to this function, because serendipity_updertEntry
             // possibly only wants to update entry metadata and left out any specific properties, which need to be kept.
             // An empty string like "" will properly remove an entryproperty, and POST values will always set an array index to an empty string.
             // $serendipipty['POST']['propertyform'] will be set whenever the entryeditor was properly displayed and unticked checkboxes shall remain.
@@ -460,7 +460,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
                 <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS; ?>: <span><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1 . sprintf(PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3, 'serendipity_admin.php?serendipity[adminModule]=plugins&amp;serendipity[plugin_to_conf]=' . $this->instance); ?></span></legend></span>
 
-                <div id="serendipity_customfields" class="clearfix">
+                <div class="serendipity_customfields clearfix">
 <?php
                 foreach($fields AS $fieldname) {
                     $fieldparts = explode(':', $fieldname);
