@@ -1149,6 +1149,7 @@ summary {
 
 #workspace,
 .plugin_data,
+.plugin_data summary,
 .serendipity_statistics > .wide_box {
     overflow: hidden;
 }
@@ -1420,13 +1421,19 @@ summary {
 .comments_pane .pagination,
 .media_pane .pagination,
 .entries_pane .pagination,
-.karma_pane .pagination {
+.karma_pane .pagination,
+.plugin_data {
     position: relative;
 }
 
-#media_pane_filter #toggle_filters {
+#media_pane_filter #toggle_filters,
+.plugin_data .perm_name {
     position: absolute;
     top: 0;
+}
+
+.plugin_data .perm_name {
+    left: 1.25em;
 }
 
 .ac_results {
