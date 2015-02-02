@@ -169,7 +169,7 @@
                     {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour)}
                         <span class="entry_status status_future">{$CONST.SCHEDULED}</span>
                     {/if}
-                    {if $entry.properties.ep_is_sticky}
+                    {if $entry.ep_is_sticky}
                         <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>
                     {/if}
                     {if $entry.isdraft}
