@@ -131,6 +131,14 @@ if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
 }
 
+// iframe preview
+if (!isset($serendipity['iframe_preview'])) {
+    // Can currently be set to TRUE in serendipity_config_local.inc.php to force iframe previews
+    // But with time, this iframe preview will be removed eventually.
+    $serendipity['iframe_preview'] = false;
+}
+
+
 // Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',

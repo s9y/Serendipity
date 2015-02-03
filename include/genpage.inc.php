@@ -31,6 +31,12 @@ $serendipity['smarty']->assignByRef('leftSidebarElements', $leftSidebarElements)
 $serendipity['smarty']->assignByRef('rightSidebarElements', $rightSidebarElements);
 
 switch ($serendipity['GET']['action']) {
+    case 'entrypreview':
+        if (isset($_SESSION['save_entry']) && serendipity_userLoggedIn()) {
+            serendipity_printEntries(array($_SESSION['save_entry']), 1);
+        }
+        break;
+
     // User wants to read the diary
     case 'read':
         if (isset($serendipity['GET']['id'])) {

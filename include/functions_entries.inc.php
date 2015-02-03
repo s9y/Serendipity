@@ -981,6 +981,10 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
 function serendipity_getTotalEntries() {
     global $serendipity;
 
+    if (empty($serendipity['fullCountQuery'])) {
+        return 0;
+    }
+
     // The unique query condition was built previously in serendipity_fetchEntries()
     if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'pdo-sqlite' || $serendipity['dbType'] == 'sqlite3oo') {
         $querystring  = "SELECT count(e.id) {$serendipity['fullCountQuery']} GROUP BY e.id";

@@ -826,7 +826,12 @@ function serendipity_iframe(&$entry, $mode = null) {
 
         case 'preview':
             $serendipity['smarty_preview']  = true;
-            $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
+
+            if ($serendipity['iframe_preview']) {
+                $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
+            } else {
+                return '<html><body><script type="text/javascript">preview_window = window.open("' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?serendipity[action]=entrypreview", "blogpreview' . md5($serendipity['baseURL']) . '"); preview_window.focus();</script></body></html>';
+            }
             break;
     }
     return serendipity_smarty_show('preview_iframe.tpl', $data);
@@ -864,7 +869,11 @@ function serendipity_iframe_create($mode, &$entry) {
             break;
 
         case 'preview':
-            $attr = ' height="300" ';
+            if ($serendipity['preview_iframe']) {
+                $attr = ' height="300" ';
+            } else {
+                $attr = ' height="0" ';
+            }
             break;
     }
 
