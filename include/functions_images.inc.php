@@ -322,7 +322,7 @@ function serendipity_deleteImage($id) {
     $file   = serendipity_fetchImageFromDatabase($id);
 
     if (!is_array($file)) {
-        $messages .= sprintf(FILE_NOT_FOUND . ' ', $id);
+        $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . FILE_NOT_FOUND . '</span>', $id);
         //return false;
     } else {
 
@@ -344,9 +344,9 @@ function serendipity_deleteImage($id) {
         if (!$file['hotlink']) {
             if (file_exists($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
                 if (@unlink($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
-                    $messages .= sprintf(DELETE_FILE . ' ', $dFile);
+                    $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETE_FILE . '</span>', $dFile);
                 } else {
-                    $messages .= sprintf(DELETE_FILE_FAIL . ' ', $dFile);
+                    $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . DELETE_FILE_FAIL . '</span>', $dFile);
                 }
 
                 serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
@@ -355,14 +355,14 @@ function serendipity_deleteImage($id) {
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
                     if (@unlink($dfThumb)) {
-                        $messages .= "<br />\n" . sprintf(DELETE_THUMBNAIL . ' ', $dfnThumb);
+                        $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETE_THUMBNAIL . '</span>', $dfnThumb);
                     }
                 }
             } else {
-                $messages .= sprintf(FILE_NOT_FOUND . ' ', $dFile);
+                $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . FILE_NOT_FOUND . '</span>', $dFile);
             }
         } else {
-            $messages .= sprintf(DELETE_HOTLINK_FILE . ' ', $file['name']);
+            $messages .= sprintf(DELETE_HOTLINK_FILE, $file['name']);
         }
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
@@ -1754,7 +1754,6 @@ function serendipity_isImage(&$file, $strict = false, $allowed = 'image/') {
  * @return true
  */
 function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
-    static $n = "<br />\n";
     static $serious = true;
 
     if ($handle = @opendir($basedir . $directory)) {
@@ -1770,14 +1769,14 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         @closedir($handle);
 
         echo '<span class="msg_notice"><span class="icon-info-circled"></span> ';
-        printf(CHECKING_DIRECTORY . "<br />\n", $directory);
-        echo "</span>\n";
+        printf(CHECKING_DIRECTORY, $directory);
+        echo "</span>";
 
         // No, we just don't kill files the easy way. We sort them out properly from the database
         // and preserve files not entered therein.
         $files = serendipity_fetchImagesFromDatabase(0, 0, $total, false, false, $directory);
         if (is_array($files)) {
-            echo "<ul>\n";
+            echo "<ul class='plainList'>\n";
             foreach($files AS $f => $file) {
                 echo "<li>\n";
                 if ($serious) {
@@ -1795,17 +1794,17 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
 
         if (count($filestack) > 0) {
             if ($forceDelete) {
-                echo "<ul>\n";
+                echo "<ul class='plainList'>\n";
                 foreach($filestack AS $f => $file) {
                     if ($serious && @unlink($basedir . $file)) {
-                        printf('<li>' . DELETING_FILE . $n . DONE . "</li>\n", $file);
+                        printf('<li><span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETING_FILE . ' ' . DONE . "</span></li>\n", $file);
                     } else {
-                        printf('<li>' . DELETING_FILE . $n . ERROR . "</li>\n", $file);
+                        printf('<li><span class="msg_error"><span class="icon-attention"></span> ' . DELETING_FILE . ' ' . ERROR . "</span></li>\n", $file);
                     }
                 }
                 echo "</ul>\n";
             } else {
-                echo ERROR_DIRECTORY_NOT_EMPTY . $n;
+                echo '<span class="msg_error"><span class="icon-attention"></span> ' . ERROR_DIRECTORY_NOT_EMPTY . '</span>';
                 echo "<ul>\n";
                 foreach($filestack AS $f => $file) {
                     echo '<li>' . $file . "</li>\n";
@@ -1816,11 +1815,11 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
 
         if ($serious && !empty($directory) && !preg_match('@^.?/?$@', $directory) && @rmdir($basedir . $directory)) {
             echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
-            printf(DIRECTORY_DELETE_SUCCESS . $n, $directory);
+            printf(DIRECTORY_DELETE_SUCCESS, $directory);
             echo "</span>\n";
         } else {
             echo '<span class="msg_error"><span class="icon-attention"></span> ';
-            printf(DIRECTORY_DELETE_FAILED . $n, $directory);
+            printf(DIRECTORY_DELETE_FAILED, $directory);
             echo "</span>\n";
         }
     }
