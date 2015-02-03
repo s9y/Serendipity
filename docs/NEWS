@@ -2,6 +2,9 @@
 
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+
+   * Fixed missing file message for deleted media items
+
    * Fixed entry editor JS not emitting a 'No tags' msg in taxonomy
      quick view. Improved serendipity.tagsList exit if freetag
      plugin is not installed.
