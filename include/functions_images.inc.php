@@ -1769,7 +1769,9 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         }
         @closedir($handle);
 
+        echo '<span class="msg_notice"><span class="icon-info-circled"></span> ';
         printf(CHECKING_DIRECTORY . "<br />\n", $directory);
+        echo "</span>\n";
 
         // No, we just don't kill files the easy way. We sort them out properly from the database
         // and preserve files not entered therein.
