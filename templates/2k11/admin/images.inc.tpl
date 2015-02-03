@@ -17,7 +17,7 @@
 {/if}
 {if $case_delete}
     <h2>{$CONST.MEDIA_DELETE}</h2>
-    
+
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
 
     <form id="delete_image" method="get">
@@ -67,7 +67,7 @@
 {/if}
 {if $case_directoryDoDelete}
     {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
-    {if $ob_serendipity_killPath}<span class="msg_notice"><span class="icon-info-circled"></span> {$ob_serendipity_killPath}</span>{/if}
+    {if $ob_serendipity_killPath}{$ob_serendipity_killPath}{/if}
     {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
@@ -219,7 +219,7 @@
         </ul></li>
     {/for}
     </ul>
-    
+
     <a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
 {/if}
 
@@ -251,7 +251,7 @@
 {if $case_scaleSelect}
     {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
     {if $print_ORIGINAL_SIZE}<span class="block_level standalone">{$print_ORIGINAL_SIZE}</span>{/if}
-    
+
     <span class="msg_notice image_resize_hint"><span class="icon-info-circled"></span> {$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</span>
 
     <div class="clearfix">
@@ -279,7 +279,7 @@
                 <input id="resize_keepprops" name="auto" type="checkbox" checked="checked">
                 <label for="resize_keepprops">{$CONST.KEEP_PROPORTIONS}</label>
             </div>
-            
+
             <div class="form_buttons">
                 <input class="image_scale" name="scale" type="button" value="{$CONST.IMAGE_RESIZE}">
             </div>
