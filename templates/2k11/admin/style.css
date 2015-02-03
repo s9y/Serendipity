@@ -2343,11 +2343,7 @@ label .perm_name,
 .no-js #category_filter,
 .js .additional_info,
 .js .installer .icon-info-circled,
-.hidden,
-.msg_error > br,
-.msg_success > br,
-.msg_notice > br,
-.msg_hint > br {
+.hidden {
     display: none !important;
     visibility: hidden;
 }
