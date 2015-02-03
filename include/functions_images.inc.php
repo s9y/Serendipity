@@ -355,7 +355,7 @@ function serendipity_deleteImage($id) {
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
                     if (@unlink($dfThumb)) {
-                        $messages .= sprintf(DELETE_THUMBNAIL . ' ', $dfnThumb);
+                        $messages .= "<br />\n" . sprintf(DELETE_THUMBNAIL . ' ', $dfnThumb);
                     }
                 }
             } else {
@@ -1779,7 +1779,7 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
             foreach($files AS $f => $file) {
                 echo "<li>\n";
                 if ($serious) {
-                    serendipity_deleteImage($file['id']);
+                    echo serendipity_deleteImage($file['id']);
                 } else {
                     echo $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
                 }
