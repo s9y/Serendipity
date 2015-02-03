@@ -1,5 +1,5 @@
 {foreach $messages as $message}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$message}</span>
+    {$message}
 {/foreach}
 
 {if $case_doSync}
