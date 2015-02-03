@@ -362,7 +362,7 @@ function serendipity_deleteImage($id) {
                 $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . FILE_NOT_FOUND . '</span>', $dFile);
             }
         } else {
-            $messages .= sprintf(DELETE_HOTLINK_FILE, $file['name']);
+            $messages .= sprintf('<span class="msg_hint"><span class="icon-help-circled"></span> ' . DELETE_HOTLINK_FILE . '</span>', $file['name']);
         }
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
