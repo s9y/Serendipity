@@ -1815,13 +1815,13 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         }
 
         if ($serious && !empty($directory) && !preg_match('@^.?/?$@', $directory) && @rmdir($basedir . $directory)) {
-            echo '<span class="msg_success"><span class="icon-ok-circled"></span> <strong>';
+            echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
             printf(DIRECTORY_DELETE_SUCCESS . $n, $directory);
-            echo "</strong></span>\n";
+            echo "</span>\n";
         } else {
-            echo '<span class="msg_error"><span class="icon-attention"></span> <strong>';
+            echo '<span class="msg_error"><span class="icon-attention"></span> ';
             printf(DIRECTORY_DELETE_FAILED . $n, $directory);
-            echo "</strong></span>\n";
+            echo "</span>\n";
         }
     }
 
