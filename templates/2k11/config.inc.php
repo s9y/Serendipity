@@ -50,7 +50,7 @@ $template_config = array(
         'var' => 'header_img',
         'name' => TWOK11_HEADER_IMG,
         'type' => 'media',
-        'default' => serendipity_getTemplateFile('header.jpg')
+        'default' => serendipity_getTemplateFile('header.jpg', 'serendipityHTTPPath', true)
     ),
     array(
         'var' => 'webfonts',
