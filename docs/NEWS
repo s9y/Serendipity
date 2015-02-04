@@ -25,6 +25,10 @@ Version 2.1 ()
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Change 2k11 config.inc.php to reflect proper
+     serendipity_getTemplateFile() when frontend files shall be
+     referenced within the backend.
+
    * Fixed missing file message for deleted media items
 
    * Fixed entry editor JS not emitting a 'No tags' msg in taxonomy
