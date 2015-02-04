@@ -40,6 +40,10 @@ Version 2.0.1 ()
 Version 2.0 (January 23rd, 2015)
 ------------------------------------------------------------------------
 
+    * Change 2k11 config.inc.php to reflect proper
+      serendipity_getTemplateFile() when frontend files shall be
+      referenced within the backend.
+
     * Smarty fix for purging compiled files
 
     * Fix wrong search page ordering when stable archive was active
