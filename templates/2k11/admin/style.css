@@ -984,6 +984,7 @@ input[type=checkbox],
 .importer_data dd,
 .form_buttons > input,
 .js .media_choose label,
+.js .media_choose input,
 .quick_list ol > li,
 .serendipity_emoticon_bar {
     margin-bottom: .75em;
@@ -2946,10 +2947,19 @@ img.mfp-img {
     #serendipity_category > div > div,
     #serendipity_category #preview,
     #serendipity_category > div > fieldset,
-    #directory_permissions .form_multiselect {
+    #directory_permissions .form_multiselect,
+    .media_chooser {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
+    }
+
+    .media_chooser {
+        margin-bottom: 0;
+    }
+
+    .media_chooser + .field_info {
+        margin-top: 0;
     }
 
     .taxonomy ul {
@@ -3067,7 +3077,7 @@ img.mfp-img {
 
     .js .configuration_group .media_choose input {
         margin-right: 1%;
-        max-width: 41.5%;
+        max-width: none;
     }
 
     .info_expanded select,
@@ -3366,10 +3376,6 @@ img.mfp-img {
 
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
-    .js .configuration_group .media_choose input {
-        max-width: 42.5%;
-    }
-
     #edit_entry_metadata #categoryfilter {
         max-width: 22em;
         min-width: 0;
