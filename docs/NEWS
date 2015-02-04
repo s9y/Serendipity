@@ -25,6 +25,12 @@ Version 2.1 ()
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Fixed 2k11/config.inc.php file to (examplewise) strictly follow
+     the changed serendipity_getTemplateFile() API method, in case
+     it is used in a custom theme/template, where this is necessary.
+     (PLEASE NOTE: This only applies to getTemplateFile() method calls,
+                   which need to be shown in the backend!)
+
    * Fixed missing file message for deleted media items
 
    * Fixed entry editor JS not emitting a 'No tags' msg in taxonomy
