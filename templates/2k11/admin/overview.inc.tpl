@@ -109,6 +109,8 @@
             </ol>
         </section>
 
+        {serendipity_hookPlugin hook="backend_dashboard" hookAll="true"}
+
         <section id="s9y_links" class="clearfix mfp-hide">
             <h3>{$CONST.FURTHER_LINKS}</h3>
 
@@ -121,7 +123,5 @@
                 <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
             </ul>
         </section>
-
-        {serendipity_hookPlugin hook="backend_dashboard" hookAll="true"}
 
     </div>
