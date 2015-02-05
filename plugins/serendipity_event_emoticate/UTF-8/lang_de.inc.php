@@ -6,5 +6,5 @@
 @define('PLUGIN_EVENT_EMOTICATE_EXTENSION', 'Dateinamenerweiterung');
 @define('PLUGIN_EVENT_EMOTICATE_EXTENSION_BLAHBLAH', 'Die Dateinamenerweiterung der Emoticons. Groß-/Kleinschreibung beachten.');
 
-@define('PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC', 'Dieses Plugin ist erweiterbar, in dem man dem eigenen Template eigene emoticon Vorlagen in "/templates/yourTemplate/img/emoticons/*" und eine Konfigurations Datei "emoticons.inc.php" dem eigenen Template Basisordner hinzufügt. Eine kopierbare Beispiel-Datei ist diesem Plugin Ordner zugefügt. Das zusätzliche serendipity_event_emoticonchooser Plugin erweitert die möglichen Stellen der Benutzung um die definierte Liste aller Emoticons als klickbare Emoticons.');
+@define('PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC', 'Dieses Plugin ist erweiterbar, in dem man dem eigenen Theme eigene emoticon Vorlagen in "/templates/yourTheme/img/emoticons/*" und zusätzlich sogar eine Konfigurations Datei "emoticons.inc.php" dem eigenen Theme Basisordner hinzufügt. Eine kopierbare <a href="%s" target="_blank">Beispiel-Datei</a> ist diesem Plugin Ordner zugefügt. Das zusätzliche serendipity_event_emoticonchooser Plugin erweitert die möglichen Stellen der Benutzung um die definierte Liste aller Emoticons als klickbare Emoticons.');
 

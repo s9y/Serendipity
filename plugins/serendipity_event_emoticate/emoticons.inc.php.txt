@@ -1,7 +1,7 @@
 <?php
-    /** Custom emoticons.inc.php file example.
+    /** Custom emoticons.inc.php file example. Remove this DEMO file ".txt" extension.
         Rewrite to your own needs and place this file in your own template directory base.
-        This needs to correspond with the emoticon images placed in "/templates/yourTemplate/img/emoticons/*.*".
+        This needs to correspond with the emoticon images placed in "/templates/yourTemplate/img/emoticons/*".
         Keep in mind that some smileys you can find in the internet are restricted in license!
 
         Add Notes of what is what for your own custom_emoticons_regexp ;-)
