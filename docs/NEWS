@@ -3,6 +3,11 @@
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Fix event emoticate plugin to reflect proper call usage of
+     serendipity_getTemplateFile(), if a theme uses custom emoticons.
+     UPDATE your themes emoticons.inc.php file, if have.
+            See example file in plugin dir.
+
    * Change 2k11 config.inc.php to reflect proper
      serendipity_getTemplateFile() when frontend files shall be
      referenced within the backend.
