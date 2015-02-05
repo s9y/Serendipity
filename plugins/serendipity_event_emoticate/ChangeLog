@@ -1,0 +1,24 @@
+1.8:
+-----
+
+ * Fix fetching custom theme based emoticons
+   for 2.0 backend views
+ * Extends the plugins example description
+ * Add custom copy emoticons.inc.php file example
+
+   UPGRADE NOTES:
+     Due to a changed fallback behaviour in Serendipity 2.0+
+     for frontend and backend templates you need to this:
+
+     If you already have you own emoticons.inc.php file, living
+     in /templates/yourTemplate/*, you need to change all occurrences
+     of
+       serendipity_getTemplateFile('img/emoticons/yoursmiley.png')
+     to 
+       serendipity_getTemplateFile('img/emoticons/yoursmiley.png', 'serendipityHTTPPath', true)
+
+     The distinction of Backend and Frontend themes in Serendipity 2.0 will try
+     to search for a file in the backend-directory of a theme,
+     or use the default template (which currently is 2k11),
+     because backend screens live normally in a themes /admin directory,
+     not in other frontends.
