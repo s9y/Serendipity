@@ -12,7 +12,7 @@
 
         :haha: = haha - :) = happy - :hero: = hero
 
-        :ko: = ko - :-D = laugh - :mo: = mo
+        :ko: = ko - :-D = laugh
 
         :-| = normal - :-( = sad - :safe: = safe
 
