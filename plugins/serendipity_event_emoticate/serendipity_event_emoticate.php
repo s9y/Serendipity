@@ -122,7 +122,7 @@ class serendipity_event_emoticate extends serendipity_event
     }
 
     function example() {
-        $s  = PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC;
+        $s  = sprintf(PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC, $serendipity['serendiptyHTTPPath'].'plugins/serendipity_event_emoticate/emoticons.inc.php.txt');
         $s .= '<table cellspacing="5" class="example_emos">';
         $s .= '<tr>';
         $i = 1;
