@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,15 +14,18 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.7');
+        $propbag->add('version',       '1.8');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
             'php'         => '5.2.0'
         ));
         $propbag->add('groups', array('MARKUP'));
-        $propbag->add('cachable_events', array('frontend_display' => true));
-        $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true, 'css_backend' => true, 'css' => true));
+        $propbag->add('cachable_events', array( 'frontend_display' => true) );
+        $propbag->add('event_hooks',     array( 'frontend_display' => true,
+                                                'frontend_comment' => true,
+                                                'css_backend' => true,
+                                                'css' => true));
 
         $this->markup_elements = array(
             array(
@@ -70,7 +73,7 @@ class serendipity_event_emoticate extends serendipity_event
         }
 
         /* Hijack global variable $serendipity['custom_emoticons'] if it exists */
-        $hijack_file = serendipity_getTemplateFile('emoticons.inc.php', 'serendipityPath');
+        $hijack_file = serendipity_getTemplateFile('emoticons.inc.php', 'serendipityPath', true);
         if (@file_exists($hijack_file)) {
             @include $hijack_file; // This file contains $serendipity['custom_emoticons'] and maybe $serendipity['custom_emoticons_regexp']
             if (isset($serendipity['custom_emoticons']) && is_array($serendipity['custom_emoticons'])) {
@@ -87,23 +90,23 @@ class serendipity_event_emoticate extends serendipity_event
         if (!isset($this->smilies)) {
             $ext = $this->get_config('extension', 'png');
             $this->smilies = array(
-                "\:'\("    => serendipity_getTemplateFile('img/emoticons/cry.'.$ext),
+                "\:'\("    => serendipity_getTemplateFile('img/emoticons/cry.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?\)'  => serendipity_getTemplateFile('img/emoticons/smile.'.$ext),
+                '\:\-?\)'  => serendipity_getTemplateFile('img/emoticons/smile.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?\|'  => serendipity_getTemplateFile('img/emoticons/normal.'.$ext),
+                '\:\-?\|'  => serendipity_getTemplateFile('img/emoticons/normal.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?O'   => serendipity_getTemplateFile('img/emoticons/eek.'.$ext),
+                '\:\-?O'   => serendipity_getTemplateFile('img/emoticons/eek.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?\('  => serendipity_getTemplateFile('img/emoticons/sad.'.$ext),
+                '\:\-?\('  => serendipity_getTemplateFile('img/emoticons/sad.'.$ext, 'serendipityHTTPPath', true),
 
-                '8\-?\)'   => serendipity_getTemplateFile('img/emoticons/cool.'.$ext),
+                '8\-?\)'   => serendipity_getTemplateFile('img/emoticons/cool.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?D'   => serendipity_getTemplateFile('img/emoticons/laugh.'.$ext),
+                '\:\-?D'   => serendipity_getTemplateFile('img/emoticons/laugh.'.$ext, 'serendipityHTTPPath', true),
 
-                '\:\-?P'   => serendipity_getTemplateFile('img/emoticons/tongue.'.$ext),
+                '\:\-?P'   => serendipity_getTemplateFile('img/emoticons/tongue.'.$ext, 'serendipityHTTPPath', true),
 
-                ';\-?\)'   => serendipity_getTemplateFile('img/emoticons/wink.'.$ext),
+                ';\-?\)'   => serendipity_getTemplateFile('img/emoticons/wink.'.$ext, 'serendipityHTTPPath', true),
             );
         }
 
@@ -119,7 +122,8 @@ class serendipity_event_emoticate extends serendipity_event
     }
 
     function example() {
-        $s  = '<table cellspacing="5" class="example_emos">';
+        $s  = PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC;
+        $s .= '<table cellspacing="5" class="example_emos">';
         $s .= '<tr>';
         $i = 1;
         foreach($this->getEmoticons() as $key => $value) {

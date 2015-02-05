@@ -1,0 +1,71 @@
+<?php
+    /** Custom emoticons.inc.php file example.
+        Rewrite to your own needs and place this file in your own template directory base.
+        This needs to correspond with the emoticon images placed in "/templates/yourTemplate/img/emoticons/*.*".
+        Keep in mind that some smileys you can find in the internet are restricted in license!
+
+        Add Notes of what is what for your own custom_emoticons_regexp ;-)
+
+        :anger: = anger - 8-) = cool - :'( = cry
+
+        :-O = eek - :grmpf: = grmpf - :grrr: = grrr
+
+        :haha: = haha - :) = happy - :hero: = hero
+
+        :ko: = ko - :-D = laugh - :mo: = mo
+
+        :-| = normal - :-( = sad - :safe: = safe
+
+        :$ = shame - :-) = smile - :still: = still
+
+        :-P = tongue - :( = unhappy - :o: = whistle - ;-) = wink
+
+        . . . etc
+
+    */
+    $serendipity['custom_emoticons_regexp'] = true;
+    $serendipity['custom_emoticons'] = array(
+                "\:'\("     => serendipity_getTemplateFile('img/emoticons/cry.png', 'serendipityHTTPPath', true),
+
+                '\:\-?\)'   => serendipity_getTemplateFile('img/emoticons/smile.png', 'serendipityHTTPPath', true),
+
+                '\:\-?\|'   => serendipity_getTemplateFile('img/emoticons/normal.png', 'serendipityHTTPPath', true),
+
+                '\:\-?O'    => serendipity_getTemplateFile('img/emoticons/eek.png', 'serendipityHTTPPath', true),
+
+                '\:\-?\('   => serendipity_getTemplateFile('img/emoticons/sad.png', 'serendipityHTTPPath', true),
+
+                '8\-?\)'    => serendipity_getTemplateFile('img/emoticons/cool.png', 'serendipityHTTPPath', true),
+
+                '\:\-?D'    => serendipity_getTemplateFile('img/emoticons/laugh.png', 'serendipityHTTPPath', true),
+
+                '\:\-?P'    => serendipity_getTemplateFile('img/emoticons/tongue.png', 'serendipityHTTPPath', true),
+
+                ';\-?\)'    => serendipity_getTemplateFile('img/emoticons/wink.png', 'serendipityHTTPPath', true),
+
+                '\:anger\:' => serendipity_getTemplateFile('img/emoticons/anger.png', 'serendipityHTTPPath', true),
+
+                '\:\$'      => serendipity_getTemplateFile('img/emoticons/shame.png', 'serendipityHTTPPath', true),
+
+                '\:grmpf\:' => serendipity_getTemplateFile('img/emoticons/grmpf.png', 'serendipityHTTPPath', true),
+
+                '\:grrr\:'  => serendipity_getTemplateFile('img/emoticons/grrr.png', 'serendipityHTTPPath', true),
+
+                '\:haha\:'  => serendipity_getTemplateFile('img/emoticons/haha.png', 'serendipityHTTPPath', true),
+
+                '\:\)'      => serendipity_getTemplateFile('img/emoticons/happy.png', 'serendipityHTTPPath', true),
+
+                '\:hero\:'  => serendipity_getTemplateFile('img/emoticons/hero.png', 'serendipityHTTPPath', true),
+
+                '\:ko\:'    => serendipity_getTemplateFile('img/emoticons/ko.png', 'serendipityHTTPPath', true),
+
+                '\:safe\:'  => serendipity_getTemplateFile('img/emoticons/safe.png', 'serendipityHTTPPath', true),
+
+                '\:still\:' => serendipity_getTemplateFile('img/emoticons/still.png', 'serendipityHTTPPath', true),
+
+                '\:\('      => serendipity_getTemplateFile('img/emoticons/unhappy.png', 'serendipityHTTPPath', true),
+
+                '\:o\:'     => serendipity_getTemplateFile('img/emoticons/whistle.png', 'serendipityHTTPPath', true),
+        );
+
+?>
