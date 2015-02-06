@@ -225,20 +225,30 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_upgrader_move_syndication_config',
                      'title'     => 'Export syndication plugin options',
                      'desc'      => 'Serendipity 2.0 moved the more generic feed option from the syndication plugin into the core. They will be set equivalent to their old configuration.'),
+
                array('version'   => '2.0-beta5',
                      'function'  => 'serendipity_killPlugin',
                      'arguments' => array('serendipity_event_autosave'),
                      'title'     => 'Remove autosave plugin',
                      'desc'      => 'Serendipity 2.0 includes autosave functionality, and the autosave plugin collides with new functionality. It has to be removed.'),
-                array('version'   => '2.0-beta5',
+
+               array('version'   => '2.0-beta5',
                      'function'  => 'serendipity_killPlugin',
                      'arguments' => array('serendipity_event_dashboard'),
                      'title'     => 'Remove dashboard plugin',
                      'desc'      => 'Serendipity 2.0 includes a dashboard in the admin theme. The separate plugin for 1.x has to be removed.'),
+
                array('version'   => '2.0-beta6',
                      'function'  => 'serendipity_installFiles',
                      'title'     => 'Update of .htaccess file',
                      'desc'      => 'Changes were made to the .htaccess file to allow for new patterns, it will be recreated. If you manually modified the file, make sure your modification are in place afterwards.'),
+
+               array('version'   => '2.0.1',
+                     'function'  => 'serendipity_removeDeadFiles_SPL',
+                     'title'     => 'Removal of obsolete and still resting files in 2.0.0',
+                     'arguments' => array($serendipity['serendipityPath'] . 'htmlarea', $dead_files_rest, array('internals'), true),
+                     'desc'      => 'The following dead files will additionally be removed from "/" and "htmlarea".<br /><pre>' . implode(', ', $dead_files_rest) . '</pre>'),
+
 
 );
 

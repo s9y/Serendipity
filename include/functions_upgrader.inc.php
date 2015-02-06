@@ -155,6 +155,14 @@ $dead_htmlarea_dirs = array(
     $serendipity['serendipityPath'] . 'htmlarea/ckeditor/samples'
 );
 
+/* A list of old Serendipity files which were not marked obsolet with 2.0.0 upgrade before - now 2.0.1 */
+$dead_files_rest = array(
+    'serendipity_editor.js',
+    'htmlarea/ChangeLog',
+    'htmlarea/dialog.js',
+    'htmlarea/release-notes.html'
+);
+
 /**
  * recursive directory call to purge files and directories
  *
