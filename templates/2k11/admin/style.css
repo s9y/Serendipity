@@ -788,6 +788,7 @@ input[type="url"] {
     padding: 2px 3px;
     text-align: left;
     height: 1.8em;
+    max-width: 100%;
 }
 
 input[type="datetime-local"]::-webkit-clear-button {
