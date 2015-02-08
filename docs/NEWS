@@ -3,6 +3,10 @@
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Add a generic odd/even for backend dashboard widgets to align
+     properly. Future dashboard widgets need to get the new extra
+     class dashboard widget on the section element they create.
+
    * Fix event emoticate plugin to reflect proper call usage of
      serendipity_getTemplateFile(), if a theme uses custom emoticons.
      UPDATE your themes emoticons.inc.php file, if have.
@@ -28,9 +32,9 @@ Version 2.0 (January 23rd, 2015)
 ------------------------------------------------------------------------
 
     * Smarty fix for purging compiled files
-    
+
     * Fix wrong search page ordering when stable archive was active
-        
+
     * Prevent entryproperties from saving/displaying a browser-side
       stored password that was actually not set.
 
