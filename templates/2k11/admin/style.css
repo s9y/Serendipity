@@ -2944,7 +2944,7 @@ img.mfp-img {
     #serendipityScaleForm,
     #serendipityScaleImg,
     .media_file,
-    #dashboard > .quick_list,
+    #dashboard > .dashboard_widget,
     #maintenance > .quick_list,
     .serendipity_statistics > section,
     #serendipity_category > div > div,
@@ -2974,15 +2974,11 @@ img.mfp-img {
     #template_select .current_backend_template,
     #template_select li:nth-child(even) article,
     .media_pane .even,
-    #dashboard > .even {
-        margin: 0 0 1em 2%;
-    }
-
+    #dashboard > .dashboard_widget:nth-child(even),
     #maintenance > section:nth-of-type(even) {
         margin: 0 0 1em 2%;
     }
 
-    #dashboard > .odd,
     #maintenance > section {
         margin: 0 2% 1em 0;
     }
@@ -3105,9 +3101,9 @@ img.mfp-img {
     #template_select li:nth-child(odd),
     #template_select h2,
     .media_pane .odd,
-    #dashboard > .odd,
     .plugins_installable > li:nth-child(odd),
-    .serendipity_statistics > section:nth-child(odd) {
+    .serendipity_statistics > section:nth-child(odd),
+    .dashboard_widget:nth-child(odd) {
         clear: left;
     }
 

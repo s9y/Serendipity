@@ -2,8 +2,13 @@
     padding-top: 0;
 }
 
-.actions li {
+.actions li,
+.actions_extra {
     margin: 0 .4em .5em 0;
+}
+
+.actions_extra {
+    margin-top: .75em;
 }
 
 #edit_entry_submit {
@@ -144,30 +149,41 @@ pre {
 #serendipityScaleForm,
 #serendipityScaleImg,
 .media_file,
-#dashboard > .quick_list,
+#dashboard > .dashboard_widget,
 #maintenance > .quick_list,
 .serendipity_statistics > section,
 #serendipity_category > div > div,
 #serendipity_category #preview,
 #serendipity_category > div > fieldset,
-#directory_permissions .form_multiselect {
+#directory_permissions .form_multiselect,
+.media_chooser {
     float: left;
     margin: 0 2% 1em 0;
     width: 48%;
 }
 
+.media_chooser {
+    margin-bottom: 0;
+}
+
+.media_chooser + .field_info {
+    margin-top: 0;
+}
+
+.taxonomy ul {
+    clear: none;
+    float: right;
+    width: 84%;
+}
+
 #template_select .current_backend_template,
 #template_select li:nth-child(even) article,
 .media_pane .even,
-#dashboard > .even {
-    margin: 0 0 1em 2%;
-}
-
+#dashboard > .dashboard_widget:nth-child(even),
 #maintenance > section:nth-of-type(even) {
     margin: 0 0 1em 2%;
 }
 
-#dashboard > .odd,
 #maintenance > section {
     margin: 0 2% 1em 0;
 }
@@ -189,6 +205,10 @@ pre {
 #upgrade_notice a {
     display: inline-block;
     margin: 0 0 0 .4em;
+}
+
+.compact_categories #edit_entry_category .form_check {
+    width: 25%;
 }
 
 #meta_data > div,
@@ -261,7 +281,7 @@ pre {
 
 .js .configuration_group .media_choose input {
     margin-right: 1%;
-    max-width: 41.5%;
+    max-width: none;
 }
 
 .info_expanded select,
@@ -288,7 +308,8 @@ pre {
 .media_pane .odd,
 #dashboard > .odd,
 .plugins_installable > li:nth-child(odd),
-.serendipity_statistics > section:nth-child(odd) {
+.serendipity_statistics > section:nth-child(odd),
+.dashboard_widget:nth-child(odd) {
     clear: left;
 }
 
@@ -326,6 +347,10 @@ pre {
 #pluginlist_event .pluginmanager_side:nth-child(even) {
     margin-right: 0;
     margin-left: 1%;
+}
+
+#pluginlist_sidebar .pluginmanager_side:nth-of-type(4) {
+    clear: left;
 }
 
 #meta p {
@@ -374,7 +399,7 @@ pre {
 #media_filter > div,
 #media_pane_sort > .left,
 #media_pane_sort > .center,
-#media_pane_sort > .right,    
+#media_pane_sort > .right,
 #media_pane_sort > .grouped > div {
     float: left;
     width: 33% ;
@@ -531,6 +556,10 @@ main {
     width: 73%;
 }
 
+.compact_categories #edit_entry_category .form_check {
+    width: 20%;
+}
+
 .installer #content {
     float: none;
     margin: 0 auto 2em;
@@ -540,8 +569,4 @@ main {
 
 #login {
     margin: 4em auto 8em;
-}
-
-.js .configuration_group .media_choose input {
-    max-width: 42.5%;
 }
