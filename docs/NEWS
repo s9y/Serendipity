@@ -3,27 +3,31 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
-    * Issue #238: When creating/renaming media directories, replace
-      special characters with the same i18n rules like Permalinks are
-      created, renaming umlauts etc.
-      
-    * Issue #234: Granular options to force backend popups for certain
-      areas
-    
-    * Issue #248: Add $serendipity['forceBase64']=true option (can be set
-      in serendipity_config_local.inc.php) to make Serendipity *not*
-      use 8bit Imap functions for sending mail, for MTAs that behave
-      erradically otherwise.
-      
-    * Issue #257: Make sure to check entered admin-user password
-    
-    * Issue #264: Drop $authorid for permissions based on images
-      instead of directories, it was not used anymore
-          
-    * Some small enhancements to the error reporting
-    
+   * Issue #238: When creating/renaming media directories, replace
+     special characters with the same i18n rules like Permalinks are
+     created, renaming umlauts etc.
+
+   * Issue #234: Granular options to force backend popups for certain
+     areas
+
+   * Issue #248: Add $serendipity['forceBase64']=true option (can be set
+     in serendipity_config_local.inc.php) to make Serendipity *not*
+     use 8bit Imap functions for sending mail, for MTAs that behave
+     erradically otherwise.
+
+   * Issue #257: Make sure to check entered admin-user password
+
+   * Issue #264: Drop $authorid for permissions based on images
+     instead of directories, it was not used anymore
+
+   * Some small enhancements to the error reporting
+
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+
+   * Add a generic odd/even for backend dashboard widgets to align
+     properly. Future dashboard widgets need to get the new extra
+     class dashboard widget on the section element they create.
 
    * Fix event emoticate plugin to reflect proper call usage of
      serendipity_getTemplateFile(), if a theme uses custom emoticons.
