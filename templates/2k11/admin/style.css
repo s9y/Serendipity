@@ -2264,7 +2264,8 @@ label .perm_name,
 
 .nojs-controls,
 .touch .pluginmanager_grablet,
-.toggle_info b {
+.toggle_info b,
+#edit_entry_metadata #toggle_cat_view {
     display: none;
     visibility: hidden;
 }
