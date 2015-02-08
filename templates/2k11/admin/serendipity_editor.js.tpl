@@ -799,6 +799,8 @@
 $(function() {
     // Breakpoints for responsive JS
     var mq_small = Modernizr.mq('(min-width:640px)');
+    // IE 8 should always be larger than mq_small
+    if($('html').hasClass('lt-ie9')) { mq_small = true; }
 
     // Fire responsive nav
     if($('#main_menu').length > 0) {
@@ -828,6 +830,15 @@ $(function() {
         header: '#top',
         footer: '#meta'
     });
+
+    // Layout helpers for IE < 9
+    if($('html').hasClass('lt-ie9')) {
+        if($('#dashboard').length > 0) {
+            // For some reason, .addClass() does not work here
+            $('.dashboard_widget:nth-child(odd)').css('clear', 'left');
+            $('.dashboard_widget:nth-child(even)').css('margin', '0 0 1em 2%');
+        }
+    }
 
     // Editor-area
     if($('#serendipityEntry').length > 0) {

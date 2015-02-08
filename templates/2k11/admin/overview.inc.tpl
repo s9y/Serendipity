@@ -32,7 +32,7 @@
             </section>
         {/if}
     {/if}
-        <section id="dashboard_comments" class="odd equal_heights quick_list">
+        <section id="dashboard_comments" class="equal_heights quick_list dashboard_widget">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
@@ -69,7 +69,7 @@
             </ol>
         </section>
 
-        <section id="dashboard_entries" class="even equal_heights quick_list">
+        <section id="dashboard_entries" class="equal_heights quick_list dashboard_widget">
             <h3>{if 'adminEntries'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=entries&amp;serendipity[adminAction]=editSelect">{/if}{$CONST.DASHBOARD_ENTRIES}{if 'adminEntries'|checkPermission}</a>{/if}</h3>
 
             <ol class="plainList">
@@ -123,5 +123,4 @@
                 <li><a class="s9y_bookmarklet" href="{$bookmarklet}" title="{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET_DESC}">{$CONST.FURTHER_LINKS_S9Y_BOOKMARKLET}</a></li>
             </ul>
         </section>
-
     </div>
