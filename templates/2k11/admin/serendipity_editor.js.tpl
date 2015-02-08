@@ -984,9 +984,12 @@ $(function() {
     {if $use_backendpopups || $force_backendpopups.categories}
         if($('#serendipityEntry').length > 0) {
             $('#select_category').click(function(e) {
-                $('#toggle_metadata').click();
-
                 e.preventDefault();
+
+                if ($('#meta_data').hasClass('additional_info')) {
+                    $('#toggle_metadata').click();
+                }
+
                 serendipity.skipScroll($(this).attr('href'));
             });
         }
@@ -1044,9 +1047,12 @@ $(function() {
     {if $use_backendpopups || $force_backendpopups.tags}
         if($('#serendipityEntry').length > 0) {
             $('#select_tags').click(function(e) {
-                $('#toggle_advanced').click();
-
                 e.preventDefault();
+
+                if ($('#adv_opts').hasClass('additional_info')) {
+                    $('#toggle_advanced').click();
+                }
+
                 serendipity.skipScroll($(this).attr('href'));
             });
         }
