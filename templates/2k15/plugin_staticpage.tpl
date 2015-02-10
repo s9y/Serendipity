@@ -1,9 +1,9 @@
-<article id="page-{$staticpage_pagetitle|@makeFilename}" class="post clearfix">
-    <h2 class="post-title">{if $staticpage_articleformat}{if $staticpage_articleformattitle}{$staticpage_articleformattitle|@escape}{else}{$staticpage_pagetitle}{/if}{else}{if $staticpage_headline}{$staticpage_headline|@escape}{else}{$staticpage_pagetitle}{/if}{/if}</h2>
+<article id="page-{$staticpage_pagetitle|makeFilename}" class="post clearfix">
+    <h2 class="post-title">{if $staticpage_articleformat}{if $staticpage_articleformattitle}{$staticpage_articleformattitle|escape}{else}{$staticpage_pagetitle}{/if}{else}{if $staticpage_headline}{$staticpage_headline|escape}{else}{$staticpage_pagetitle}{/if}{/if}</h2>
 {if is_array($staticpage_childpages)}
     <ul id="child-pages">
     {foreach from=$staticpage_childpages item="childpage"}
-        <li><a href="{$childpage.permalink|@escape}" title="{$childpage.pagetitle|@escape}">{$childpage.pagetitle|@escape}</a></li>
+        <li><a href="{$childpage.permalink|escape}" title="{$childpage.pagetitle|escape}">{$childpage.pagetitle|escape}</a></li>
     {/foreach}
     </ul>
 {/if}
@@ -27,10 +27,10 @@
     <footer class="page-info post-info">
         <ul class="meta">
         {if $staticpage_author}
-            <li>{$CONST.POSTED_BY} {$staticpage_author|@escape}</li>
+            <li>{$CONST.POSTED_BY} {$staticpage_author|escape}</li>
         {/if}
         {if $staticpage_lastchange}
-            <li>{$CONST.ON} <time datetime="{$staticpage_lastchange|@serendipity_html5time}">{$staticpage_lastchange|date_format:$template_option.date_format}</time></li>
+            <li>{$CONST.ON} <time datetime="{$staticpage_lastchange|serendipity_html5time}">{$staticpage_lastchange|date_format:$template_option.date_format}</time></li>
         {/if}
         </ul>
     </footer>
