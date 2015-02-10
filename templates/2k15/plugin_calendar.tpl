@@ -2,7 +2,7 @@
 <thead>
     <tr>
     {foreach from=$plugin_calendar_dow item="dow"}
-        <th scope="col"><abbr title="{$dow.date|@formatTime:"%A":false}">{$dow.date|@formatTime:"%a":false}</abbr></th>
+        <th scope="col"><abbr title="{$dow.date|formatTime:"%A":false}">{$dow.date|formatTime:"%a":false}</abbr></th>
     {/foreach}
     </tr>
 </thead>
@@ -27,7 +27,7 @@
 {foreach from=$plugin_calendar_weeks item="week"}
     <tr>
     {foreach from=$week.days item="day"}
-        <td class="{$day.classes}"{if isset($day.properties.Title)} title="{$day.properties.Title}"{/if}>{if isset($day.properties.Active) and $day.properties.Active}<a href="{$day.properties.Link}">{/if}{$day.name|@default:"&#160;"}{if isset($day.properties.Active) and $day.properties.Active}</a>{/if}</td>
+        <td class="{$day.classes}"{if isset($day.properties.Title)} title="{$day.properties.Title}"{/if}>{if isset($day.properties.Active) and $day.properties.Active}<a href="{$day.properties.Link}">{/if}{$day.name|default:"&#160;"}{if isset($day.properties.Active) and $day.properties.Active}</a>{/if}</td>
     {/foreach}
     </tr>
 {/foreach}

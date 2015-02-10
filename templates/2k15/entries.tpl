@@ -6,14 +6,14 @@
         <header>
             <h2 class="post-title"><a href="{$entry.link}">{$entry.title}</a></h2>
 
-            <span class="post-info">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|@serendipity_html5time}">{$entry.timestamp|@formatTime:$template_option.date_format}</time></span>
+            <span class="post-info">{$CONST.POSTED_BY} <a href="{$entry.link_author}">{$entry.author}</a> {$CONST.ON} <time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
         </header>
 
         <div class="clearfix">
         {$entry.body}
         </div>
         {if $entry.has_extended and not $is_single_entry and not $entry.is_extended}
-        <a class="read-more" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|@sprintf:$entry.title}</a>
+        <a class="read-more" href="{$entry.link}#extended">{$CONST.VIEW_EXTENDED_ENTRY|sprintf:$entry.title}</a>
         {/if}
         {if $entry.is_extended}
         <div id="extended" class="clearfix">
@@ -24,7 +24,7 @@
         <footer class="post-info">
             <ul class="meta">
             {if $entry.categories}
-                <li><span class="info-label">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|@escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}</li>
+                <li><span class="info-label">{$CONST.CATEGORIES}: </span>{foreach from=$entry.categories item="entry_category" name="categories"}<a href="{$entry_category.category_link}">{$entry_category.category_name|escape}</a>{if not $smarty.foreach.categories.last}, {/if}{/foreach}</li>
             {/if}
             {if $entry.has_comments}
                 <li><a href="{$entry.link}#comments" title="{$entry.comments} {$entry.label_comments}{if $entry.has_trackbacks}, {$entry.trackbacks} {$entry.label_trackbacks}{/if}">{$entry.comments} {$entry.label_comments}</a></li>
@@ -40,32 +40,32 @@
         <rdf:Description
                  rdf:about="{$entry.link_rdf}"
                  trackback:ping="{$entry.link_trackback}"
-                 dc:title="{$entry.title_rdf|@default:$entry.title}"
+                 dc:title="{$entry.title_rdf|default:$entry.title}"
                  dc:identifier="{$entry.rdf_ident}" />
         </rdf:RDF>
         -->
 {if $is_single_entry and not $use_popups and not $is_preview}
     {if $CONST.DATA_UNSUBSCRIBED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_UNSUBSCRIBED|@sprintf:$CONST.UNSUBSCRIBE_OK}</p>
+        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_UNSUBSCRIBED|sprintf:$CONST.UNSUBSCRIBE_OK}</p>
     {/if}
     {if $CONST.DATA_TRACKBACK_DELETED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_DELETED|@sprintf:$CONST.TRACKBACK_DELETED}</p>
+        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_DELETED|sprintf:$CONST.TRACKBACK_DELETED}</p>
     {/if}
     {if $CONST.DATA_TRACKBACK_APPROVED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_APPROVED|@sprintf:$CONST.TRACKBACK_APPROVED}</p>
+        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_TRACKBACK_APPROVED|sprintf:$CONST.TRACKBACK_APPROVED}</p>
     {/if}
     {if $CONST.DATA_COMMENT_DELETED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_DELETED|@sprintf:$CONST.COMMENT_DELETED}</p>
+        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_DELETED|sprintf:$CONST.COMMENT_DELETED}</p>
     {/if}
     {if $CONST.DATA_COMMENT_APPROVED}
-        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_APPROVED|@sprintf:$CONST.COMMENT_APPROVED}</p>
+        <p class="msg-success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DATA_COMMENT_APPROVED|sprintf:$CONST.COMMENT_APPROVED}</p>
     {/if}
     <section id="trackbacks" class="clearfix">
         <h3>{$CONST.TRACKBACKS}</h3>
 
-        <a class="trackback-url" rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape}">{$CONST.TRACKBACK_SPECIFIC}</a>
+        <a class="trackback-url" rel="nofollow" href="{$entry.link_trackback}" title="{$CONST.TRACKBACK_SPECIFIC_ON_CLICK|escape}">{$CONST.TRACKBACK_SPECIFIC}</a>
 
-        <p class="msg-notice trackback-hint"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.TRACKBACK_SPECIFIC_ON_CLICK|@escape:html}</p>
+        <p class="msg-notice trackback-hint"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.TRACKBACK_SPECIFIC_ON_CLICK|escape:html}</p>
 
         {serendipity_printTrackbacks entry=$entry.id}
     </section>
