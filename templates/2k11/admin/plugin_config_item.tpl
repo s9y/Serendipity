@@ -44,7 +44,7 @@
         {$cbag_default}
     </div>
 {elseif $ctype == 'custom'}
-    <div class="clearfix">
+    <div class="clearfix custom_item">
         <input id="config_{$postKey}_{$config_item}" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$hvalue}">
         {$cbag_custom}
     </div>

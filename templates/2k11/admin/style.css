@@ -976,7 +976,8 @@ input[type=checkbox],
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_select,
-.configuration_group .form_multiselect {
+.configuration_group .form_multiselect,
+.configuration_group .custom_item {
     padding: .75em 0;
 }
 
@@ -3098,6 +3099,7 @@ img.mfp-img {
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
+    .configuration_group .custom_item,
     .configuration_group fieldset > fieldset,
     #template_select li:nth-child(odd),
     #template_select h2,
