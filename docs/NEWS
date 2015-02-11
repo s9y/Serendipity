@@ -25,6 +25,9 @@ Version 2.1 ()
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Make "rewriteURL" smarty modifier available to do a
+     {$CONST.PATH_ARCHIVE|rewriteURL} within a smarty template file.
+        
    * Add a generic odd/even for backend dashboard widgets to align
      properly. Future dashboard widgets need to get the new extra
      class dashboard widget on the section element they create.
