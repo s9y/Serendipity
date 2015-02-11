@@ -3,6 +3,9 @@
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Issue 299: Do not display dashboard for users with no permission
+     to perform actions in the backend (frontend-users)
+     
    * Make "rewriteURL" smarty modifier available to do a
      {$CONST.PATH_ARCHIVE|rewriteURL} within a smarty template file.
         

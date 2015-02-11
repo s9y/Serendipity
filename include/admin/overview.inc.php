@@ -110,6 +110,8 @@ $data['entries'] = $entries;
 $data['urltoken'] = serendipity_setFormToken('url');
 $data['token'] = serendipity_setFormToken();
 
+$data['no_create'] = $serendipity['no_create'];
+
 echo serendipity_smarty_show('admin/overview.inc.tpl', $data);
 
 /* vim: set sts=4 ts=4 expandtab : */
