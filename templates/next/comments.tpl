@@ -24,13 +24,13 @@
         {/if}
             <ul class="meta">
                 <li><time>{$comment.timestamp|formatTime:'%H:%M'}</time></li>
-                <li><a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.TWOK15_PLINK_TITLE}">{$CONST.TWOK15_PLINK_TEXT}</a></li>
+                <li><a class="comment_source_trace" href="#c{$comment.id}" title="{$CONST.NEXT_PLINK_TITLE}">{$CONST.NEXT_PLINK_TEXT}</a></li>
             {if $entry.is_entry_owner}
                 <li><a class="comment_source_ownerlink" href="{$comment.link_delete}" title="{$CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author}">{$CONST.DELETE}</a></li>
             {/if}
         {if $template_option.refcomments == true}
             {if $comment.parent_id != '0'}
-                <li><a class="reply_origin" href="#c{$comment.parent_id}" title="{$CONST.TWOK15_REPLYORIGIN}: {$CONST.COMMENT} #c{$comment.parent_id}">{$CONST.TWOK15_REPLYORIGIN}</a></li>
+                <li><a class="reply_origin" href="#c{$comment.parent_id}" title="{$CONST.NEXT_REPLYORIGIN}: {$CONST.COMMENT} #c{$comment.parent_id}">{$CONST.NEXT_REPLYORIGIN}</a></li>
             {/if}
         {/if}
             {if $entry.allow_comments AND $comment.body != 'COMMENT_DELETED'}
