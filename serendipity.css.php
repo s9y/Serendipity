@@ -20,11 +20,13 @@ if (!isset($css_mode)) {
     }
 }
 
+$usercss_file = 'style_user.css';
 switch($css_mode) {
     case 'serendipity.css':
     default:
         $css_hook = 'css';
         $css_file = 'style.css';
+        $css_userfile = 'style_user.css';
         break;
 
     case 'serendipity_admin.css':
@@ -32,6 +34,7 @@ switch($css_mode) {
         @define('IN_serendipity_admin', true);
         $css_hook = 'css_backend';
         $css_file = 'admin/style.css';
+        $css_userfile = 'admin/style_user.css';
         break;
 }
 
@@ -81,6 +84,11 @@ $out = serendipity_printStylesheet(
 $out .= serendipity_printStylesheet(
          serendipity_getTemplateFile($css_file, 'serendipityPath'),
          serendipity_getTemplateFile($css_file, '')
+);
+
+$out .= serendipity_printStylesheet(
+         serendipity_getTemplateFile($css_userfile, 'serendipityPath'),
+         serendipity_getTemplateFile($css_userfile, '')
 );
 
 serendipity_plugin_api::hook_event($css_hook, $out);
