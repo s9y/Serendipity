@@ -41,10 +41,10 @@ if (is_array($required_fieldlist)) {
 
 $template_config = array(
     array(
-      'var'           => 'info2k15',
-      'name'          => 'info2k15',
+      'var'           => 'infonext',
+      'name'          => 'infonext',
       'type'          => 'custom',
-      'custom'        => TWOK15_INSTR,
+      'custom'        => NEXT_INSTR,
     ),
     array(
         'var' => 'date_format',
@@ -65,16 +65,16 @@ $template_config = array(
     ),
     array(
         'var' => 'header_img',
-        'name' => TWOK15_HEADER_IMG,
+        'name' => NEXT_HEADER_IMG,
         'type' => 'media',
         'default' => serendipity_getTemplateFile('header.jpg', 'serendipityHTTPPath', true)
     ),
     array(
         'var' => 'webfonts',
-        'name' => TWOK15_WEBFONTS,
+        'name' => NEXT_WEBFONTS,
         'type' => 'select',
         'default' => 'none',
-        'select_values' => array('none' => TWOK15_NOWEBFONT,
+        'select_values' => array('none' => NEXT_NOWEBFONT,
                                 'osans' => 'Open Sans',
                                 'ssans' => 'Source Sans Pro',
                                 'rsans' => 'Roboto',
@@ -84,19 +84,19 @@ $template_config = array(
     ),
     array(
         'var' => 'userstyles',
-        'name' => TWOK15_USERSTYLES,
+        'name' => NEXT_USERSTYLES,
         'type' => 'boolean',
         'default' => false
     ),
     array(
         'var' => 'refcomments',
-        'name' => TWOK15_REFCOMMENTS,
+        'name' => NEXT_REFCOMMENTS,
         'type' => 'boolean',
         'default' => false
     ),
     array(
         'var' => 'use_corenav',
-        'name' => TWOK15_USE_CORENAV,
+        'name' => NEXT_USE_CORENAV,
         'type' => 'boolean',
         'default' => true
     )
