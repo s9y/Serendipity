@@ -25,7 +25,7 @@ Version 2.1 ()
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
-   * Issue 280: Allow every theme to utilize a "style_user.css" file
+   * Issue 280: Allow every theme to utilize a "user.css" file
      that gets loaded on top of the frontend (or backend, if in admin/
      subdirectory) theme. This file can be used for customized CSS
      of a blog-admin which carries over to future Serendipity updates
