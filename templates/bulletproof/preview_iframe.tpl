@@ -18,9 +18,7 @@
         <![endif]-->
         <!-- additional colorset stylesheet -->
         <link rel="stylesheet" type="text/css" href="{$serendipityHTTPPath}templates/{$template}/{$template_option.colorset}_style.css" />
-        <!-- additional user stylesheet: this can be used to override selected styles -->
-        {if $template_option.userstylesheet == 'true'}<link rel="stylesheet" type="text/css" href="{serendipity_getFile file="user.css"}" media="screen" />{/if}
-        
+
         <script type="text/javascript">
            window.onload = function() {ldelim}
              parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight

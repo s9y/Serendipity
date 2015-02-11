@@ -1,6 +1,6 @@
 <?php
 // Theme options
-@define('NEXT_INSTR', '<b>Hinweis:</b> While Next may <em>look</em> as if it were basically the same as 2k11, it is a completely different theme from a technical point of view. Because of that, it is <strong>not</strong> compatible with the user.css generator for 2k11.');
+@define('NEXT_INSTR', '<b>Hinweis:</b> While Next may <em>look</em> as if it were basically the same as 2k11, it is a completely different theme from a technical point of view. Because of that, it is <strong>not</strong> compatible with the user.css generator for 2k11.<br>To extend Next with your own styles in an update-safe way, you can add a file <code>/templates/next/user.css</code>; it will be included automagically by s9y.');
 @define('NEXT_HEADER_IMG','Use a banner image in the header? (1296 pixels wide; leave box empty to not use a banner)');
 @define('NEXT_USE_CORENAV', 'Use global navigation?');
 @define('NEXT_WEBFONTS', 'Use a webfont, hosted by Google?');

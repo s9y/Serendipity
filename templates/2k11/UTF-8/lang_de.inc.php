@@ -1,5 +1,6 @@
 <?php
 // Theme-Optionen
+@define('TWOK11_INSTR', 'Um 2k11 updatesicher um eigene Styles zu erweitern kann eine Datei <code>/templates/2k11/user.css</code> angelegt werden; diese wird automagisch von s9y eingebunden.');
 @define('TWOK11_HEADER_IMG','Bannergrafik im Kopfbereich einbinden? (1120 Pixel breit; Feld leeren um Ausgabe zu unterdrücken)');
 @define('TWOK11_USE_CORENAV', 'Globale Navigation einbinden?');
 @define('TWOK11_WEBFONTS', 'Einen von Google gehosteten Webfont nutzen?');

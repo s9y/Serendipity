@@ -30,6 +30,12 @@ $serendipity['smarty']->assign('is_templatechooser', $_SESSION['serendipityUseTe
 
 $template_config = array(
     array(
+      'var'           => 'infotwok',
+      'name'          => 'infotwok',
+      'type'          => 'custom',
+      'custom'        => TWOK11_INSTR,
+    ),
+    array(
         'var' => 'date_format',
         'name' => GENERAL_PLUGIN_DATEFORMAT . " (http://php.net/strftime)",
         'type' => 'select',
@@ -66,12 +72,6 @@ $template_config = array(
                                 'dserif' => 'Droid Serif')
     ),
     array(
-        'var' => 'userstyles',
-        'name' => TWOK11_USERSTYLES,
-        'type' => 'boolean',
-        'default' => false
-    ),
-    array(
         'var' => 'imgstyle',
         'name' => TWOK11_IMGSTYLE,
         'type' => 'select',
@@ -100,7 +100,7 @@ $template_loaded_config = serendipity_loadThemeOptions($template_config, $serend
 serendipity_loadGlobalThemeOptions($template_config, $template_loaded_config, $template_global_config);
 
 // 2k11 shall be a re-usable frontend theme that other templates can inherit (through "Engine: 2k11" in their info.txt)
-// If those themes use a custom config.inc.php file, they may need to declare their own pre-event-hooks. 
+// If those themes use a custom config.inc.php file, they may need to declare their own pre-event-hooks.
 // Since serendipity_plugin_api_pre_event_hook() is the advertised method for template authors to hook into
 // 2k11 cannot declare this on its own. We rather use per-event hook functions now, which templates other than 2k11
 // (or other custom engines) should not use.
@@ -108,7 +108,7 @@ function serendipity_plugin_api_pre_event_hook_js($event, &$bag, &$eventData, &$
     // always add newlines to the end of last element, in case of other plugins using this hook and
     // always start at line Col 1, to populate the (virtual) serendipity.js file
     echo "
-jQuery(function() { 
+jQuery(function() {
     jQuery('input[type=\"url\"]').change(function() {
         if (this.value != '' && ! (this.value.substr(0,7) == 'http://' || this.value.substr(0,8) == 'https://')) {
             this.value = 'http://' + this.value;

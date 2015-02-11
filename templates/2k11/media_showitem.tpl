@@ -23,9 +23,6 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
     <link rel="stylesheet" href="{$head_link_stylesheet}">
-{if $template_option.userstyles == true}
-    <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
-{/if}
     <script src="{serendipity_getFile file="js/modernizr-2.7.1.min.js"}"></script>
 {serendipity_hookPlugin hook="frontend_header"}
     <script src="{$head_link_script}"></script>

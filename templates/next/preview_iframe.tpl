@@ -23,9 +23,6 @@
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="{serendipity_getFile file="oldie.css"}">
 <![endif]-->
-{if $template_option.userstyles == true}
-    <link rel="stylesheet" href="{serendipity_getFile file="user.css"}">
-{/if}
     <script src="{serendipity_getFile file="scripts/modernizr/modernizr.js"}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>

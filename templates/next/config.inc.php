@@ -83,12 +83,6 @@ $template_config = array(
                                 'dserif' => 'Droid Serif')
     ),
     array(
-        'var' => 'userstyles',
-        'name' => NEXT_USERSTYLES,
-        'type' => 'boolean',
-        'default' => false
-    ),
-    array(
         'var' => 'refcomments',
         'name' => NEXT_REFCOMMENTS,
         'type' => 'boolean',
