@@ -962,6 +962,7 @@ function serendipity_smarty_init($vars = array()) {
             $serendipity['smarty']->registerPlugin('modifier', 'checkPermission', 'serendipity_checkPermission');
             $serendipity['smarty']->registerPlugin('modifier', 'serendipity_refhookPlugin', 'serendipity_smarty_refhookPlugin');
             $serendipity['smarty']->registerPlugin('modifier', 'serendipity_html5time', 'serendipity_smarty_html5time');
+            $serendipity['smarty']->registerPlugin('modifier', 'rewriteURL', 'serendipity_rewriteURL');
 
             $serendipity['smarty']->registerPlugin('function', 'serendipity_printSidebar', 'serendipity_smarty_printSidebar');
             $serendipity['smarty']->registerPlugin('function', 'serendipity_hookPlugin', 'serendipity_smarty_hookPlugin');
