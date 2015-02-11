@@ -3,7 +3,7 @@
 @define('THEME_COLORSET', 'Colorset');
 @define('THEME_HEADER', 'Header');
 
-@define('USER_STYLESHEET','Use additional user stylesheet. Users have to create this stylesheet in the theme directory. It has to be named user.css and can be used to override selected styles.');
+@define('USER_STYLESHEET','To extend Bulletproof with your own styles in an update-safe way, you can add a file <code>/templates/bulletproof/user.css</code>; it will be included automagically by s9y.');
 // Layout
 @define('LAYOUT_TYPE','Blog layout (B = Blog entriee, S = Sidebar, CF = Content first)');
 @define('LAYOUT_SBS','Three columns S-B-S');
