@@ -49,7 +49,7 @@
 
         <form id="searchform" action="{$serendipityHTTPPath}{$serendipityIndexFile}" method="get" role="search">
             <input type="hidden" name="serendipity[action]" value="search">
-            <input id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.TWOK15_PLACE_SEARCH}" value="">
+            <input id="serendipityQuickSearchTermField" name="serendipity[searchTerm]" type="search" placeholder="{$CONST.NEXT_PLACE_SEARCH}" value="">
             <label for="serendipityQuickSearchTermField"><span class="icon-search" aria-hidden="true"></span><span class="fallback-text">{$CONST.QUICKSEARCH}</span></label>
             <input id="searchsend" name="serendipity[searchButton]" type="submit" value="{$CONST.GO}">
         </form>
@@ -61,7 +61,7 @@
     </div>
     {/if}
     <div id="navbar">
-        <a id="open-nav" class="nav-toggle" href="#site-nav"><span class="icon-menu" aria-hidden="true"></span><span class="fallback-text">Navigation</span></a>
+        <a id="open-nav" class="nav-toggle" href="#site-nav"><span class="icon-menu" aria-hidden="true"></span><span class="fallback-text">{$CONST.NEXT_NAVTEXT}</span></a>
 
         <nav id="site-nav" class="nav-collapse">
             <ul>{foreach from=$navlinks item="navlink" name="sbnav"}{if $navlink.title!=""&&$navlink.href!=""}<li>{if $currpage==$navlink.href or $currpage2==$navlink.href}<span>{else}<a href="{$navlink.href}">{/if}{$navlink.title}{if $currpage==$navlink.href or $currpage2==$navlink.href}</span>{else}</a>{/if}</li>{/if}{/foreach}</ul>
@@ -83,7 +83,7 @@
 {/if}
 
     <footer id="colophon" class="clearfix">
-        <p lang="en">Powered by <a href="http://s9y.org">Serendipity</a> <abbr title="and">&amp;</abbr> the <i>2k15</i> theme.</p>
+        <p lang="en">Powered by <a href="http://s9y.org">Serendipity</a> <abbr title="and">&amp;</abbr> the <i>Next</i> theme.</p>
     </footer>
 
     <script src="{serendipity_getFile file="scripts/master.js"}"></script>

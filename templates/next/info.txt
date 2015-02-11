@@ -1,4 +1,4 @@
-Name: 2k15
+Name: Next
 Author: Matthias Mees, mm@yellowled.de
 Date: 2015-02-10
 Require Serendipity: 2.0
