@@ -20,13 +20,12 @@ if (!isset($css_mode)) {
     }
 }
 
-$usercss_file = 'style_user.css';
 switch($css_mode) {
     case 'serendipity.css':
     default:
         $css_hook = 'css';
         $css_file = 'style.css';
-        $css_userfile = 'style_user.css';
+        $css_userfile = 'user.css';
         break;
 
     case 'serendipity_admin.css':
@@ -34,7 +33,7 @@ switch($css_mode) {
         @define('IN_serendipity_admin', true);
         $css_hook = 'css_backend';
         $css_file = 'admin/style.css';
-        $css_userfile = 'admin/style_user.css';
+        $css_userfile = 'admin/user.css';
         break;
 }
 
