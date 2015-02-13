@@ -18,9 +18,9 @@
             {else}
                 <h3>{$category.title}</h3>
             {/if}
-            
+
         {/if}
-            <fieldset id="el{$category@index}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info option_list">
+            <div id="el{$category@index}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info option_list">
                 <legend class="visuallyhidden">{$category.description}</legend>
         {foreach $category.items as $item}
             {cycle assign='zebra_class' values='odd,even'}
@@ -46,7 +46,7 @@
                 {/if}
             {/if}
         {/foreach}
-            </fieldset>
+            </div>
         </div>
     {/foreach}
     </div>
