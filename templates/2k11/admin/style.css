@@ -949,6 +949,7 @@ input[type=checkbox],
 
 #serendipity_category .inputs .form_radio,
 .configuration_group fieldset > fieldset,
+.configuration_group div > fieldset,
 .theme_options .configuration_group > fieldset,
 .theme_options .configuration_group > div,
 .configuration_group .form_field,
@@ -968,6 +969,7 @@ input[type=checkbox],
 }
 
 .configuration_group fieldset > fieldset,
+.configuration_group div > fieldset,
 .theme_options .configuration_group > fieldset,
 .theme_options .configuration_group > div,
 .configure_plugin .configuration_group > fieldset,
@@ -3024,6 +3026,7 @@ img.mfp-img {
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
     .configuration_group fieldset > fieldset legend,
+    .configuration_group div > fieldset legend,
     #uploadform .form_select label,
     #uploadform .form_field label,
     #uploadform .form_select select,
@@ -3101,6 +3104,7 @@ img.mfp-img {
     .configuration_group .form_area,
     .configuration_group .custom_item,
     .configuration_group fieldset > fieldset,
+    .configuration_group div > fieldset,
     #template_select li:nth-child(odd),
     #template_select h2,
     .media_pane .odd,
@@ -3120,6 +3124,7 @@ img.mfp-img {
 
     .configure_plugin fieldset .form_radio,
     .configuration_group fieldset > fieldset .form_radio,
+    .configuration_group div > fieldset .form_radio,
     #serendipity_plugin_config > fieldset .form_radio,
     #template_options fieldset .form_radio {
         margin-top: 0;
