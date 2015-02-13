@@ -15,8 +15,8 @@
     {foreach $config_groups AS $config_header => $config_groupkeys}
         <div class="configuration_group">
             <h3 class="toggle_headline"><button id="optionel{$config_groupkeys@iteration}" class="show_config_option" type="button" data-href="#el{$config_groupkeys@iteration}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$config_header}</button></h3>
-        
-            <fieldset id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
+
+            <div id="el{$config_groupkeys@iteration}" class="config_optiongroup{if $config_groupkeys@last} config_optiongroup_last{/if} additional_info">
             {foreach $config_groupkeys AS $config_groupkey}
                 {if $plugin_option[$config_groupkey]['ctype'] == 'seperator'}
                     {$plugin_options[$config_groupkey]['config']}
@@ -26,7 +26,7 @@
                     </div>
                 {/if}
             {/foreach}
-            </fieldset>
+            </div>
         </div>
     {/foreach}
     </div>
