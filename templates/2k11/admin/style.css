@@ -319,6 +319,38 @@ nav ol {
     display: block;
 }
 
+/* HTML5 Progress polyfill */
+progress {
+    min-width: 10em;
+}
+
+#updateProgress {
+    width: 10em;
+}
+
+progress div.progress-frame {
+    background-color: #fff;
+    border: 1px solid #000;
+    height: 1em;
+    padding: 2px;
+    width: 100%;
+}
+
+progress div.progress-bar {
+    background-color: #1e90ff;
+    border: none;
+    height: 1em;
+}
+
+progress div.progress-undefined {
+    background-color: #f99;
+    border: 1px solid #000;
+    height: 1em;
+    padding: 2px;
+    width: 100%;
+}
+
+
 /* HELPER CLASSES */
 /* Hide visually, available for screenreaders */
 .visuallyhidden {
@@ -788,7 +820,6 @@ input[type="url"] {
     padding: 2px 3px;
     text-align: left;
     height: 1.8em;
-    max-width: 100%;
 }
 
 input[type="datetime-local"]::-webkit-clear-button {
@@ -937,10 +968,8 @@ input[type=checkbox],
 .filter_pane,
 #s9y_links > ul,
 #serendipity_category .inputs,
-.serendipity_customfields textarea,
-#adv_opts,
-.entryproperties > h3,
-.entryproperties_customfields > h4 {
+#serendipity_customfields textarea,
+#adv_opts {
     margin-top: .75em;
     margin-bottom: .75em;
 }
@@ -951,9 +980,7 @@ input[type=checkbox],
 
 #serendipity_category .inputs .form_radio,
 .configuration_group fieldset > fieldset,
-.configuration_group div > fieldset,
 .theme_options .configuration_group > fieldset,
-.theme_options .configuration_group > div,
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_check,
@@ -971,17 +998,14 @@ input[type=checkbox],
 }
 
 .configuration_group fieldset > fieldset,
-.configuration_group div > fieldset,
 .theme_options .configuration_group > fieldset,
-.theme_options .configuration_group > div,
 .configure_plugin .configuration_group > fieldset,
 .configure_plugin .config_optiongroup .odd,
 .configure_plugin .config_optiongroup .even,
 .configuration_group .form_field,
 .configuration_group .form_area,
 .configuration_group .form_select,
-.configuration_group .form_multiselect,
-.configuration_group .custom_item {
+.configuration_group .form_multiselect {
     padding: .75em 0;
 }
 
@@ -992,7 +1016,6 @@ input[type=checkbox],
 .importer_data dd,
 .form_buttons > input,
 .js .media_choose label,
-.js .media_choose input,
 .quick_list ol > li,
 .serendipity_emoticon_bar {
     margin-bottom: .75em;
@@ -1086,8 +1109,6 @@ h4,
 
 .toggle_headline,
 .taxonomy h3,
-.entryproperties > h3,
-.entryproperties_customfields > h4,
 h5,
 h6 {
     font-size: 1em;
@@ -1160,12 +1181,11 @@ summary {
 
 #workspace,
 .plugin_data,
-.plugin_data summary,
 .serendipity_statistics > .wide_box {
     overflow: hidden;
 }
 
-.serendipity_customfields label {
+#serendipity_customfields label {
     margin-right: 1em;
 }
 
@@ -1183,7 +1203,7 @@ summary {
 #entries_list .form_check,
 .pagination .prev,
 .pagination .next,
-.serendipity_customfields textarea,
+#serendipity_customfields textarea,
 #dashboard_header h2 {
     float: left;
 }
@@ -1432,19 +1452,13 @@ summary {
 .comments_pane .pagination,
 .media_pane .pagination,
 .entries_pane .pagination,
-.karma_pane .pagination,
-.plugin_data {
+.karma_pane .pagination {
     position: relative;
 }
 
-#media_pane_filter #toggle_filters,
-.plugin_data .perm_name {
+#media_pane_filter #toggle_filters {
     position: absolute;
     top: 0;
-}
-
-.plugin_data .perm_name {
-    left: 1.25em;
 }
 
 .ac_results {
@@ -1637,7 +1651,8 @@ form > .button_link:first-of-type,
 
 .filter_pane,
 #meta_data > div,
-.adv_opts_box,
+#adv_opts > fieldset > div,
+#adv_opts > fieldset > fieldset,
 #downloads {
     background: #eee;
     -webkit-box-sizing: border-box;
@@ -1648,7 +1663,8 @@ form > .button_link:first-of-type,
 }
 
 #meta_data > div,
-.adv_opts_box {
+#adv_opts > fieldset > div,
+#adv_opts > fieldset > fieldset {
     margin-bottom: 1em;
     padding: .4em;
 }
@@ -2271,8 +2287,7 @@ label .perm_name,
 
 .nojs-controls,
 .touch .pluginmanager_grablet,
-.toggle_info b,
-#edit_entry_metadata #toggle_cat_view {
+.toggle_info b {
     display: none;
     visibility: hidden;
 }
@@ -2351,6 +2366,7 @@ label .perm_name,
 .no-js .show_config_option .icon-right-dir,
 .no-js #keyword_list,
 .no-js #category_filter,
+.no-js #updateAll,
 .js .additional_info,
 .js .installer .icon-info-circled,
 .hidden {
@@ -2414,6 +2430,51 @@ input[name="serendipity[filter][fileCategory]"] {
     margin: 0;
 }
 /* end TEMP fixes */
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 10000;
+}
+
+#progressWidget {
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 40%;
+    text-align: center;
+}
+
+#updateAll {
+    margin-bottom: 1em;
+}
+
+#updateMessage {
+    color: white;
+    width: 20em;
+}
+
+#updateProgress, #updateIndicator, #updateMessage {
+    display: block;
+    margin-bottom: 1em;
+    margin: auto;
+}
+
+@-webkit-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@-moz-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+
+#updateIndicator {
+    width: 100px;
+    height: 100px;
+    background-image: url('{TEMPLATE_PATH}img/activity.png');
+    -webkit-animation: loaderSprite 1s steps(25, end) infinite;
+    animation: loaderSprite 1s steps(25, end) infinite;
+}
 
 /* MAGNIFIC POPUP  */
 .mfp-bg {
@@ -2950,25 +3011,16 @@ img.mfp-img {
     #serendipityScaleForm,
     #serendipityScaleImg,
     .media_file,
-    #dashboard > .dashboard_widget,
+    #dashboard > .quick_list,
     #maintenance > .quick_list,
     .serendipity_statistics > section,
     #serendipity_category > div > div,
     #serendipity_category #preview,
     #serendipity_category > div > fieldset,
-    #directory_permissions .form_multiselect,
-    .media_chooser {
+    #directory_permissions .form_multiselect {
         float: left;
         margin: 0 2% 1em 0;
         width: 48%;
-    }
-
-    .media_chooser {
-        margin-bottom: 0;
-    }
-
-    .media_chooser + .field_info {
-        margin-top: 0;
     }
 
     .taxonomy ul {
@@ -2980,11 +3032,15 @@ img.mfp-img {
     #template_select .current_backend_template,
     #template_select li:nth-child(even) article,
     .media_pane .even,
-    #dashboard > .dashboard_widget:nth-child(even),
+    #dashboard > .even {
+        margin: 0 0 1em 2%;
+    }
+
     #maintenance > section:nth-of-type(even) {
         margin: 0 0 1em 2%;
     }
 
+    #dashboard > .odd,
     #maintenance > section {
         margin: 0 2% 1em 0;
     }
@@ -3028,7 +3084,6 @@ img.mfp-img {
     .configuration_group .form_field input,
     .configuration_group .form_area textarea,
     .configuration_group fieldset > fieldset legend,
-    .configuration_group div > fieldset legend,
     #uploadform .form_select label,
     #uploadform .form_field label,
     #uploadform .form_select select,
@@ -3083,7 +3138,7 @@ img.mfp-img {
 
     .js .configuration_group .media_choose input {
         margin-right: 1%;
-        max-width: none;
+        max-width: 41.5%;
     }
 
     .info_expanded select,
@@ -3104,15 +3159,13 @@ img.mfp-img {
     .configuration_group .form_multiselect,
     .configuration_group .form_field,
     .configuration_group .form_area,
-    .configuration_group .custom_item,
     .configuration_group fieldset > fieldset,
-    .configuration_group div > fieldset,
     #template_select li:nth-child(odd),
     #template_select h2,
     .media_pane .odd,
+    #dashboard > .odd,
     .plugins_installable > li:nth-child(odd),
-    .serendipity_statistics > section:nth-child(odd),
-    .dashboard_widget:nth-child(odd) {
+    .serendipity_statistics > section:nth-child(odd) {
         clear: left;
     }
 
@@ -3126,7 +3179,6 @@ img.mfp-img {
 
     .configure_plugin fieldset .form_radio,
     .configuration_group fieldset > fieldset .form_radio,
-    .configuration_group div > fieldset .form_radio,
     #serendipity_plugin_config > fieldset .form_radio,
     #template_options fieldset .form_radio {
         margin-top: 0;
@@ -3385,6 +3437,10 @@ img.mfp-img {
 
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
+    .js .configuration_group .media_choose input {
+        max-width: 42.5%;
+    }
+
     #edit_entry_metadata #categoryfilter {
         max-width: 22em;
         min-width: 0;

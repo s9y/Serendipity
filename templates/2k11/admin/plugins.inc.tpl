@@ -60,7 +60,7 @@
                     {/foreach}
                     </select>
                 </div>
-                
+
 
                 <div id="plugin_filter" class="form_field">
                     <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
@@ -71,17 +71,19 @@
                     <input type="submit" value="{$CONST.GO}">
                 </div>
             {else}
-                <a class="button_link" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
+                <a class="button_link" id="back" href="?serendipity[adminModule]=plugins">{$CONST.BACK}</a>
             {/if}
         </div>
     </form>
-
     {if $only_group == 'UPGRADE' && ! $available_upgrades}
         <span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>
     {else}
         {foreach $pluggroups AS $pluggroup => $groupstack}
             {if $only_group && $pluggroup != $only_group}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
+            {if $only_group == UPGRADE && $pluggroups['UPGRADE']|@count > 1}
+                <button id="updateAll">Update All</button>
+            {/if}
             <ul class="plugins_installable plainList clearfix">
             {foreach $groupstack as $plug}
                 <li class="clearfix">
@@ -142,7 +144,17 @@
             </ul>
         {/foreach}
     {/if}
+{elseif $adminAction == 'overlay'}
+    <div id="progressWidget">
+        <span id="updateMessage">Starting Update ...</span>
+        <div id="updateIndicator" class="animated-css"></div>
+        <progress id="updateProgress" value="0" />
+    </div>
+    <script src="{serendipity_getFile file='admin/js/progress-polyfill.min.js'}"></script>
+{elseif isset($ajax_output)}
+    {$ajax_output}
 {else}
+    {$backend_pluginlisting_header}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
     <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
@@ -150,15 +162,18 @@
     {if $new_plugin_failed}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
+    {if $updateAllMsg}
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
+    {/if}
     <div class="tabs" id="pluginlist_tabs">
-        <section id="pluginlist_sidebar" class="panel"> 
+        <section id="pluginlist_sidebar" class="panel">
             <h3>{$CONST.SIDEBAR_PLUGINS}</h3>
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.SIDEBAR_PLUGIN}"}'>{$CONST.INSTALL_NEW_SIDEBAR_PLUGIN}</a>
 
             {$backend_plugins_sidebar_header}
             {$sidebar_plugins}
         </section>
-        
+
         <section id="pluginlist_event" class="panel">
             <h3>{$CONST.EVENT_PLUGINS}</h3>
             <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[type]=event" title='{$CONST.CLICK_HERE_TO_INSTALL_PLUGIN|sprintf:"{$CONST.EVENT_PLUGIN}"}'>{$CONST.INSTALL_NEW_EVENT_PLUGIN}</a>

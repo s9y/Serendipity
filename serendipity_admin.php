@@ -71,29 +71,12 @@ if ($is_logged_in) {
     $self_info = '';
 }
 
-if (isset($serendipity['GET']['noBanner']) || isset($serendipity['POST']['noBanner'])) {
-    $no_banner = true;
-} else {
-    $no_banner = false;
-}
+$serendipity['ajax'] = $ajax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+$no_banner = (isset($serendipity['GET']['noBanner']) || isset($serendipity['POST']['noBanner']));
+$no_sidebar = (isset($serendipity['GET']['noSidebar']) || isset($serendipity['POST']['noSidebar']));
+$no_footer = (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST']['noFooter']));
 
-if (isset($serendipity['GET']['noSidebar']) || isset($serendipity['POST']['noSidebar'])) {
-    $no_sidebar = true;
-} else {
-    $no_sidebar = false;
-}
-
-if (isset($serendipity['GET']['noFooter']) || isset($serendipity['POST']['noFooter'])) {
-    $no_footer = true;
-} else {
-    $no_footer = false;
-}
-
-if (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false ) {
-    $use_installer = true;
-} else {
-    $use_installer = false;
-}
+$use_installer = (!isset($serendipity['serendipityPath']) || IS_installed === false || IS_up2date === false );
 
 $post_action = $serendipity['POST']['action'];
 
@@ -234,7 +217,10 @@ if (!$use_installer && $is_logged_in) {
     ob_end_clean();
 }
 
-if (!$use_installer) {
+if ($ajax) {
+    // if that is an ajax request we can stop here, since we by convention don't want to wrap the content in the usual backend code
+    echo $main_content;
+} elseif (!$use_installer) {
     $poll_admin_vars = array('main_content', 'no_banner', 'no_sidebar', 'no_footer', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
     $admin_vars = array();
     foreach($poll_admin_vars AS $poll_admin_var) {

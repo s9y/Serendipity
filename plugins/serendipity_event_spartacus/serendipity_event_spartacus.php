@@ -354,6 +354,7 @@ class serendipity_event_spartacus extends serendipity_event
     }
 
     function outputMSG($status, $msg) {
+        global $serendipity;
         switch($status) {
             case 'notice':
                 echo '<span class="msg_notice"><span class="icon-info-circled"></span> '. $msg .'</span>' . "\n";
@@ -361,6 +362,10 @@ class serendipity_event_spartacus extends serendipity_event
 
             case 'error':
                 echo '<span class="msg_error"><span class="icon-attention-circled"></span> '. $msg .'</span>' . "\n";
+                if ($serendipity['ajax']) {
+                    // we need to set an actual error header so the ajax request can react to the error state
+                    header('HTTP/1.1 400');
+                }
                 break;
 
             default:
@@ -573,7 +578,6 @@ class serendipity_event_spartacus extends serendipity_event
 
         } else {
             $mirror  = $mirrors[$this->get_config('mirror_xml', 0)];
-
             $url    = $mirror . '/package_' . $url_type .  $lang . '.xml';
             $cacheTimeout = 60*60*12; // XML file is cached for half a day
             $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';

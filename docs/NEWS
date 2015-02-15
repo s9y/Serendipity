@@ -7,8 +7,13 @@ Version 2.1 ()
      special characters with the same i18n rules like Permalinks are
      created, renaming umlauts etc.
 
+    * Add "update all"-button to plugin update page
+
    * Issue #234: Granular options to force backend popups for certain
      areas
+
+    * Introduce serendipity['ajax'] to detect incoming ajax requests
+      and react accordingly in core and plugins
 
    * Issue #248: Add $serendipity['forceBase64']=true option (can be set
      in serendipity_config_local.inc.php) to make Serendipity *not*

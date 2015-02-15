@@ -1097,3 +1097,5 @@
 @define('INSTALL_PASSWORD_INVALID', 'Die eingebenen Administrator-Passwörter stimmen nicht überein.');
 @define('INSTALL_BACKENDPOPUP_GRANULAR', 'Popups in speziellen Bereichen erzwingen');
 @define('INSTALL_BACKENDPOPUP_GRANULAR_DESC', 'Wenn Popups generell deaktiviert wurden, kann an speziellen Stellen dennoch der Einsatz von Popups forciert werden, indem die Liste jener Stellen hier aufgeführt wird (kommasepariert). Die vollständige Liste ist: ');
+@define('START_UPDATE', 'Starting Update ...');
+@define('UPDATE_ALL', 'Update All');

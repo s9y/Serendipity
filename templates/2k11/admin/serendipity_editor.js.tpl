@@ -794,6 +794,38 @@
         }, time);
     }
 
+    serendipity.updateAll = function() {
+        var $overlay = $('<div id="overlay" />');
+        $.get('?serendipity[adminModule]=plugins&serendipity[adminAction]=renderOverlay')
+        .done(function(data) {
+            $overlay.append(data);
+            $overlay.appendTo(document.body);
+            $('#updateProgress').attr('max', $('.plugin_status').length);
+            serendipity.updateNext();
+        });
+    }
+    
+    serendipity.updateNext = function() {
+        $('#updateMessage').text("Updating " + $('.plugins_installable > li:visible h4').first().text());
+        $.get($('.plugin_status .button_link:visible').first().attr('href'))
+        .done(function(messages) {
+            $('.plugins_installable > li:visible').first().fadeOut();
+            $('#updateProgress').attr('value', parseInt($('#updateProgress').attr('value')) + 1);
+            if ($('.plugins_installable > li:visible').length > 0) {
+                serendipity.updateNext();
+            } else {
+                $('#overlay').fadeOut("normal", function () {
+                    window.location = $('#back').attr('href') + '&serendipity[updateAllMsg]=true';
+                });
+            }
+        })
+        .fail(function(data) {
+            $('#content').prepend(data.responseText);
+            $('#updateAll').hide();
+            $('#overlay').fadeOut();
+        });
+    }
+
 }( window.serendipity = window.serendipity || {}, jQuery ))
 
 $(function() {
@@ -1375,6 +1407,13 @@ $(function() {
             if ($(this).get(0).files.length == 1) {
                 $(this).parent().siblings(':first').fadeIn();
             }
+        });
+    }
+
+    // update all button in plugin upgrade menu
+    if ($('#updateAll').length > 0) {
+        $('#updateAll').click(function() {
+            serendipity.updateAll();
         });
     }
 
