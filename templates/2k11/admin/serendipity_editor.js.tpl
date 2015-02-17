@@ -381,7 +381,7 @@
                 e.preventDefault();
                 serendipity.toggle_extended(true);
             });
-            if (localStorage.show_extended_editor == "true") {
+            if (localStorage !== null && localStorage.show_extended_editor == "true") {
                 // the editor is visible by default - note the string, as bool is not supported yet in localStorage
                 return;
             }
@@ -391,12 +391,16 @@
             $('#extended_entry_editor').show(); // use name selector instead of id here; id does not work
             $('#tools_extended').show();
             $('#toggle_extended').find('> .icon-right-dir').removeClass('icon-right-dir').addClass('icon-down-dir');
-            localStorage.show_extended_editor = "true";
+            if (localStorage !== null) {
+                localStorage.show_extended_editor = "true";
+            }
         } else {
             $('#extended_entry_editor').hide();
             $('#tools_extended').hide();
             $('#toggle_extended').find('> .icon-down-dir').removeClass('icon-down-dir').addClass('icon-right-dir');
-            localStorage.show_extended_editor = "false";
+            if (localStorage !== null) {
+                localStorage.show_extended_editor = "false";
+            }
         }
         if (setCookie) {
             document.cookie = 'serendipity[toggle_extended]=' + (($('#extended_entry_editor:hidden').length == 0) ? "true" : "") + ';';
@@ -759,12 +763,12 @@
 
         if(toggleState == stateOpen) {
             $toggleIcon.removeClass(stateOpen).addClass(stateClosed);
-            if (togglerId !== undefined) {
+            if (togglerId !== undefined && localStorage !== null) {
                 localStorage.setItem(storageKey, "false");
             }
         } else {
             $toggleIcon.removeClass(stateClosed).addClass(stateOpen);
-            if (togglerId !== undefined) {
+            if (togglerId !== undefined && localStorage !== null) {
                 localStorage.setItem(storageKey, "true");
             }
         }
@@ -792,6 +796,38 @@
         $('html, body').animate({
             scrollTop: $(target).offset().top
         }, time);
+    }
+
+    serendipity.updateAll = function() {
+        var $overlay = $('<div id="overlay" />');
+        $.get('?serendipity[adminModule]=plugins&serendipity[adminAction]=renderOverlay')
+        .done(function(data) {
+            $overlay.append(data);
+            $overlay.appendTo(document.body);
+            $('#updateProgress').attr('max', $('.plugin_status').length);
+            serendipity.updateNext();
+        });
+    }
+
+    serendipity.updateNext = function() {
+        $('#updateMessage').text("Updating " + $('.plugins_installable > li:visible h4').first().text());
+        $.get($('.plugin_status .button_link:visible').first().attr('href'))
+        .done(function(messages) {
+            $('.plugins_installable > li:visible').first().fadeOut();
+            $('#updateProgress').attr('value', parseInt($('#updateProgress').attr('value')) + 1);
+            if ($('.plugins_installable > li:visible').length > 0) {
+                serendipity.updateNext();
+            } else {
+                $('#overlay').fadeOut("normal", function () {
+                    window.location = $('#back').attr('href') + '&serendipity[updateAllMsg]=true';
+                });
+            }
+        })
+        .fail(function(data) {
+            $('#content').prepend(data.responseText);
+            $('#updateAll').hide();
+            $('#overlay').fadeOut();
+        });
     }
 
 }( window.serendipity = window.serendipity || {}, jQuery ))
@@ -975,7 +1011,7 @@ $(function() {
         $('#toggle_metadata').click(function() {
             serendipity.toggle_collapsible($(this), '#meta_data');
         });
-        if (localStorage.getItem("show_toggle_metadata") == "true") {
+        if (localStorage !== null && localStorage.getItem("show_toggle_metadata") == "true") {
             $('#toggle_metadata').click();
         }
     }
@@ -1006,7 +1042,7 @@ $(function() {
                     open: function() {
                         // Accessibility helper
                         $('#edit_entry_category .form_check input[type="checkbox"]').attr('aria-hidden', 'true');
-                        if(localStorage.cat_view_state == "compact") {
+                        if(localStorage !== null && localStorage.cat_view_state == "compact") {
                             $('.mfp-content').addClass('compact_categories');
                             $('#toggle_cat_view').find('.icon-th').removeClass('icon-th').addClass('icon-th-list');
                         }
@@ -1034,11 +1070,15 @@ $(function() {
             if($target.hasClass('compact_categories')) {
                 $target.removeClass('compact_categories');
                 $el.find('.icon-th-list').removeClass('icon-th-list').addClass('icon-th');
-                localStorage.cat_view_state = "hierarchical";
+                if (localStorage !== null) {
+                    localStorage.cat_view_state = "hierarchical";
+                }
             } else {
                 $target.addClass('compact_categories');
                 $el.find('.icon-th').removeClass('icon-th').addClass('icon-th-list');
-                localStorage.cat_view_state = "compact";
+                if (localStorage !== null) {
+                    localStorage.cat_view_state = "compact";
+                }
             }
         });
     };
@@ -1114,7 +1154,7 @@ $(function() {
         $('#toggle_advanced').click(function() {
             serendipity.toggle_collapsible($(this), '#adv_opts');
         });
-        if (localStorage.getItem("show_toggle_advanced") == "true") {
+        if (localStorage !== null && localStorage.getItem("show_toggle_advanced") == "true") {
             $('#toggle_advanced').click();
         }
     }
