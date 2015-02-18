@@ -29,18 +29,25 @@ Version 2.1 ()
 
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+   * Issue 306: localStorage may be deactivated by setting a config
+     option or using security-related extensions at least in some
+     browsers, which might (at least in FF) break backend JS
+     functionality. Added extra tests to 2k11 backend JS.
+
+     If you use localStorage, please test if it is actually available
+     by testing if localStorage !== null in JS.
 
    * Issue 280: Allow every theme to utilize a "user.css" file
      that gets loaded on top of the frontend (or backend, if in admin/
      subdirectory) theme. This file can be used for customized CSS
      of a blog-admin which carries over to future Serendipity updates
-     
+
    * Issue 299: Do not display dashboard for users with no permission
      to perform actions in the backend (frontend-users)
-     
+
    * Make "rewriteURL" smarty modifier available to do a
      {$CONST.PATH_ARCHIVE|rewriteURL} within a smarty template file.
-        
+
    * Add a generic odd/even for backend dashboard widgets to align
      properly. Future dashboard widgets need to get the new extra
      class dashboard widget on the section element they create.
