@@ -36,7 +36,6 @@
             parent.document.getElementById('serendipity_iframe').style.border = 0;
         {rdelim}
     </script>
-    <style type="text/css">#serendipity_preview_spacer {ldelim}float:none!important;height:0!important;{rdelim}</style>
 </head>
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 <div id="page" class="clearfix container">
@@ -44,7 +43,6 @@
         <main id="content" style="padding: 1em 0; margin: 0;">
         {if $mode == 'preview'}
             <div class="clearfix">
-            <div id="serendipity_preview_spacer" style="float: left; height: 225px"></div>
         {elseif $mode == 'save'}
             <div class="clearfix">
             <div style="float: left; height: 75px"></div>
