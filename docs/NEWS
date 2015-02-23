@@ -3,6 +3,15 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix: the syndication plugin now always uses absolute links for
+           the subtome-button
+
+    * Fix: the syndication plugin links subtome correctly to the atom
+           feed when he is activated with the rss feed
+
+    * Issue #285: Add "none" as possible value for the xml-icon in
+                  the syndication plugin, to enable plain links 
+
    * Issue #238: When creating/renaming media directories, replace
      special characters with the same i18n rules like Permalinks are
      created, renaming umlauts etc.
