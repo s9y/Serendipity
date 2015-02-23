@@ -2,6 +2,8 @@
 
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+   * syndication fix: use absolute urls for subtome
+   
    * Issue 306: localStorage may be deactivated by setting a config
      option or using security-related extensions at least in some
      browsers, which might (at least in FF) break backend JS

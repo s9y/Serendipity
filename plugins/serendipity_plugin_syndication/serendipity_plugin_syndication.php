@@ -9,7 +9,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.1.1');
+        $propbag->add('version',       '2.1.2');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
@@ -170,12 +170,12 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         if ($custom_url) {
             $mainFeed = serendipity_get_config_var('feedCustom');
         } else {
-            $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2', 'serendipityHTTPPath');
+            $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/index.rss2');
             if ($fbid != "") {
                 $mainFeed ='http://feeds.feedburner.com/' . $fbid;
             } else {
                 if ($useAtom && ! $useRss) {
-                    $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath');
+                    $mainFeed = serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml');
                 }
             }
         }
@@ -189,13 +189,13 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon);
                 
         if ($useRss && $useAtom) {
-            echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml', 'serendipityHTTPPath'), "Atom $FEED", $onclick, $small_icon);
+            echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED", $onclick, $small_icon);
         }
 
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
-            echo $this->generateFeedButton(($useAtom && ! $useRss ? serendipity_rewriteURL(PATH_FEEDS .'/comments.atom', 'serendipityHTTPPath') : serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath')),
+            echo $this->generateFeedButton(($useAtom && ! $useRss ? serendipity_rewriteURL(PATH_FEEDS .'/comments.atom') : serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')),
                                             $COMMENTS,
-                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2', 'serendipityHTTPPath')) : ""),
+                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')) : ""),
                                             $small_icon);
         }
         echo "</ul>\n";
