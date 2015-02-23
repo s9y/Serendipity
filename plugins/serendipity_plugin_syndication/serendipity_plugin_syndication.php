@@ -9,7 +9,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.1.2');
+        $propbag->add('version',       '2.1.3');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
@@ -79,7 +79,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 break;
 
             case 'big_img':
-                $propbag->add('type',        'string');                         
+                $propbag->add('type',        'string');
                 $propbag->add('name',        SYNDICATION_PLUGIN_FEEDICON);
                 $propbag->add('description', SYNDICATION_PLUGIN_FEEDICON_DESC);
                 $propbag->add('default',     $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png');
@@ -185,9 +185,9 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             $onclick=$this->getOnclick($mainFeed);
         }
 
-        echo "\n".'<ul id="serendipity_syndication_list" style="list-style: none; margin: 0px; padding: 0px">';
+        echo "\n".'<ul id="serendipity_syndication_list" class="plainList">';
         echo $this->generateFeedButton($mainFeed, ($icon == $small_icon ?  ($useRss ? "RSS $FEED" : "Atom $FEED") : ""), $onclick, $icon);
-                
+
         if ($useRss && $useAtom) {
             echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED", $onclick, $small_icon);
         }
