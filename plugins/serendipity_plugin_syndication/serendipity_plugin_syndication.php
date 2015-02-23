@@ -193,7 +193,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 
         if ($useRss && $useAtom) {
             echo $this->generateFeedButton(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml'), "Atom $FEED",
-                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml') : "")), $small_icon);
+                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/atom10.xml')) : ""), $small_icon);
         }
 
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
