@@ -2,6 +2,11 @@
 
 Version 2.0.1 ()
 ------------------------------------------------------------------------
+
+   * Improved detection for possible upgrade/plugin/PHP errors. A
+     warning will be emitted on the dashboard, when the Serendipity
+     JavaScript-library could not be loaded.
+     
    * syndication fix: use absolute urls for subtome
    
    * Issue 306: localStorage may be deactivated by setting a config

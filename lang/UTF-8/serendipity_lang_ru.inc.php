@@ -1093,3 +1093,5 @@ $i18n_filename_to   = array('_', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'No tags');
 @define('DASHBOARD_ENTRIES', 'In Progress');
+@define('JS_FAILURE', 'The Serendipity JavaScript-library could not be loaded. This can happen due to PHP or Plugin errors, or even a malformed browser cache. To check the exact error please open <a href="%1$s">%1$s</a> manually in your browser and check for error messages.');
+

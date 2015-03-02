@@ -127,3 +127,11 @@
             </ul>
         </section>
     </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    if (typeof(serendipity) != 'object' || typeof(serendipity.spawn) != 'function') {
+        $('#dashboard_header').after("<span class=\"msg_error\"><span class=\"icon-attention-circled\"></span> {$CONST.JS_FAILURE|sprintf:$js_failure_file|escape:javascript}</span>");
+    }
+});
+</script>
