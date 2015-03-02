@@ -1198,8 +1198,10 @@ function serendipity_smarty_shutdown($serendipity_directory = '') {
  * Render a smarty-template
  * $template: path to the template-file
  * $data: map with the variables to assign
+ * $debugtype: If set, debug string is prepended. Can be set to HTML or JS.
+ * $debug: Possible debug string that is prepended to output
  */
-function serendipity_smarty_show($template, $data = null) {
+function serendipity_smarty_show($template, $data = null, $debugtype = null, $debug = null) {
     global $serendipity;
 
     if (!is_object($serendipity['smarty'])) {
@@ -1208,5 +1210,14 @@ function serendipity_smarty_show($template, $data = null) {
 
     $serendipity['smarty']->assign($data);
 
-    return $serendipity['smarty']->fetch(serendipity_getTemplateFile($template, 'serendipityPath'));
+    $tplfile = serendipity_getTemplateFile($template, 'serendipityPath');
+    if ($debug !== null) {
+        if ($debugtype == "HTML") {
+            $debug = "<!-- Dynamically fetched " . htmlspecialchars($tplfile) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
+        } else {
+            $debug = "/* Dynamically fetched " . htmlspecialchars($tplfile) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " */\n";
+        }
+    }
+
+    return $debug . $serendipity['smarty']->fetch($tplfile);
 }
