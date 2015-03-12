@@ -640,6 +640,7 @@
         if ($selected.length > 0) {
             $selected.each(function() {
                 var catText = $(this).next('label').text();
+                catText = $('<span>').text(catText).html();
                 $('<li class="selected">'+ catText +'</li>').appendTo($target);
             });
         } else {
