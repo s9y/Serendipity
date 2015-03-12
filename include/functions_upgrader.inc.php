@@ -158,6 +158,14 @@ $dead_htmlarea_dirs = array(
 /* A list of old Serendipity files which were not marked obsolet with 2.0.0 upgrade before - now 2.0.1 */
 $dead_files_rest = array(
     'serendipity_editor.js',
+    'serendipity_define.js.php',
+    'deployment/serendipity_editor.js',
+    'deployment/serendipity_define.js.php',
+    'docs/CHANGED_FILES',
+    'docs/INSTALL_EMBEDED',
+    'docs/INSTALL_SHARED',
+    'docs/UPGRADE',
+    'docs/upgrade.sh',
     'htmlarea/ChangeLog',
     'htmlarea/dialog.js',
     'htmlarea/release-notes.html'
