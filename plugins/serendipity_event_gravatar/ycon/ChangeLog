@@ -1,0 +1,366 @@
+# 
+    * Allows other plugins to fetch user metadata via 
+      avatar_fetch_userinfos hook.
+    * supports !# twitter links now, too.
+    
+Version 1.57: (brockhaus)
+    * Better Gravatar handling, as the call changed a little
+    * Doesn't accept existing but empty images anymore.
+
+Version 1.56: (brockhaus)
+------------------------------------------------------------------------
+    * Removed inline styles, added class avatar_right and avatar_left.
+      If not found set in css, the plugin will emit a default style for
+      those two.
+      
+Version 1.55: (brockhaus)
+------------------------------------------------------------------------
+    * Twitter and identica where not fetched correctly if fetched first.
+
+Version 1.54:
+------------------------------------------------------------------------
+    * Made PLUGIN_GRAVATAR_SUPPORTED recognize %s as variable for
+      list of supported services
+      
+Version 1.52:
+------------------------------------------------------------------------
+    * Changed display of supported avatars in the comment area in order
+      to allow nice linebreaks.
+
+Version 1.51:
+------------------------------------------------------------------------
+    * Use strtolower() for mail names
+
+Version 1.49 (brockhaus)
+------------------------------------------------------------------------
+    * Pavatar in blogs having redirection didn't work, if Pavatar link
+      was only available in rel link info.
+
+Version 1.48 (brockhaus)
+------------------------------------------------------------------------
+    * FIX: PHP compatibility was broken since 1.46 :-/
+    * Added Identica Avatar.
+      This is mainly used for Identica Pingbacks and should be used in 
+      front of Favatar, else the Identica sign will show up.
+    * Code cleanup.
+
+Version 1.47 (brockhaus)
+------------------------------------------------------------------------
+    * Disabled debug logging into template_c
+
+Version 1.46 (brockhaus)
+------------------------------------------------------------------------
+
+    * Added Twitter Avatar (if URL points to a twitter profile)
+      This is mainly used for Tweetbacks and should be used in front of
+      Favatar, else the twitter sign will show up.
+    * Code cleanup.
+
+Version 1.45 (brockhaus)
+------------------------------------------------------------------------
+
+    * Helpfiles
+    * Cleanup.
+
+Version 1.44 (brockhaus)
+------------------------------------------------------------------------
+
+    * Added buildin wavatar suport.
+    * Support for Gravatar fallbacks identyicon, monsterid and wavatar.
+    * Optimized trackback avatars: Querypars will be stripped from URL.
+      Now in example S8Y blogs always get the same Avatar cached, not 
+      one per trackback.
+
+Version 1.43 (brockhaus)
+------------------------------------------------------------------------
+
+    * Option for adding the authors name to the ALT attribute of the
+      avatar image. Normaly this is filled with a *, but blind people
+      depend on the ALT tag.
+
+Version 1.42 (brockhaus)
+------------------------------------------------------------------------
+
+    * Encoded _ in user urls in order to differ them from the 
+      seperators. urlencode doesn't encode _. Thanks to Tino Schwarze
+      finding and fixing this.
+
+Version 1.41 (garvinhicking)
+------------------------------------------------------------------------
+
+    * Fixed Last-Modified Header of avatar images.
+    
+Version 1.40 ()
+------------------------------------------------------------------------
+
+    * Added ycon support (mo, http://moblog.wiredwings.com)
+    
+------------------------------------------------------------------------
+Version 1.39 (brockhaus):
+
+    * Monster Avatars are cached now, too, as creating them costs time.
+
+------------------------------------------------------------------------
+Version 1.38 (brockhaus):
+
+    * Support for Monster ID avatars (details found on
+      http://www.splitbrain.org/go/monsterid)
+    * Crashed while fresh installing and cache time set to 0
+    * Allows configuring absolute path to standard avatar now.
+    * After saving the configuration now the cache is *always* cleared,
+      in order to make the changes visible immidiately even if caching
+      is enabled.
+    * If the plugin is unable to write into the cache, it will log it
+      in debug mode and show the default image, if no cached file found.
+
+------------------------------------------------------------------------
+Version 1.37 (brockhaus):
+
+    * The avatar type infoline below the comments editor is optional now
+
+------------------------------------------------------------------------
+Version 1.36 (brockhaus):
+
+    * Added new option: You can define, that the plugin should not
+      produce avatar image directly but a smarty tag only. If this 
+      option is switched on, you can define in your comments template,
+      where the avatar should be displayed using the smarty tag
+      $comment.comment_avatar
+    * Css class of avatar will change depending on where it is
+      displayed. For normal comments it will be "comment_avatar", for the
+      recent entries plugin it will be "serendipity_plugin_comments_avatar"
+      in order to have the possibility to easily style it.
+    * Avatar alignment configuration: The configured alignment will be
+      used, if the avatar is written directliy (no smarty tag).
+    * New option for switching on/off the avatar images in the sidebar
+      plugin (recent comments).
+    * Supported avatar methods where displayed in the contact form
+      plugin too, but this made no sense. Disabled it there.
+    * Some more changes in the language files.
+
+------------------------------------------------------------------------
+Version 1.35 (brockhaus):
+
+    * Corrected errors in English language file. (Thanks to Don!)
+
+------------------------------------------------------------------------
+Version 1.34 (brockhaus):
+
+    * Gravatars rating doesn't work reliable. My G rated Gravatar is only
+      shown, if I use Gravatar X rating. :-/
+      Added an option to switch off Gravatars rating parameter (what 
+      should be the same as using X rating)
+
+------------------------------------------------------------------------
+Version 1.33 (brockhaus):
+
+    * Pavatar: X-Pavatar Header is supported now again and is the first
+      pavatar autodetect method used.
+
+------------------------------------------------------------------------
+Version 1.32 (brockhaus):
+
+    * MyBlogLog default avatar was not detected correctly anmore. :-/
+    * If no email nor url is given, but default avatar is defined, now
+      the default avatar is displayed.
+
+------------------------------------------------------------------------
+Version 1.31 (brockhaus):
+
+    * Changed call-time pass-by-reference bug (fetchAvatar)
+
+------------------------------------------------------------------------
+Version 1.30 (brockhaus):
+
+    * Standard Avatar was not displayed in subdirectory blog 
+      installtions.
+    * Gravatar link was slightly wrong (but working)
+
+------------------------------------------------------------------------
+Version 1.29 (brockhaus):
+
+    * Bugfix 1.27 added http:// even if no URL was given at all.
+
+------------------------------------------------------------------------
+Version 1.28 (brockhaus):
+
+    * With Serendipity 1.1 it was not possible to configure a default
+      avatar. The configuration was not 1.1 compatible.
+
+------------------------------------------------------------------------
+Version 1.27 (brockhaus):
+
+    * If the writer entered his url as www.domain.de instead of 
+      http://www.domain.de, the Avatar was not always loaded correctly
+
+------------------------------------------------------------------------
+Version 1.26 (brockhaus):
+
+    * MyBlogLog changed avatar calling slightly resuling MyBlogLog Avatar
+      fallback not working anymore.
+
+------------------------------------------------------------------------
+Version 1.25 (garvinhicking):
+
+    * Replaced align with style attributes, as there is no align in
+      XHTML
+
+------------------------------------------------------------------------
+Version 1.24 (brockhaus):
+
+    * Check MyBlogLog result if it really is an image.
+    * Cleaning up cache directory when setting cache to 0.
+    * Debug logging disabled.
+
+------------------------------------------------------------------------
+Version 1.23 (brockhaus):
+
+    * While fresh fetching P/Favatars, the Plugin will only accept 
+      responses declared as image by the remote server. This will
+      prevent accepting potential error html pages as Avatar images.
+
+------------------------------------------------------------------------
+Version 1.22 (brockhaus):
+
+    * Fetch redirected P/Favatars, too.
+
+------------------------------------------------------------------------
+Version 1.21 (brockhaus):
+
+    * Avatar fetching was broken when cache was disabled.
+    * Browser was not able to cache default avatars, because a wrong
+      cache time (in the past) was sent.
+    * Checks, if cached file looks like an image, before sending it
+      to the client.
+
+------------------------------------------------------------------------
+Version 1.20 (brockhaus):
+
+    * Avatar image title is the author's name now instead of Avatar (V.)
+
+------------------------------------------------------------------------
+Version 1.19 (brockhaus):
+
+    * Made the browser cache avatars resulting in a very good
+      performance boost!
+
+------------------------------------------------------------------------
+Version 1.18 (brockhaus):
+
+    * Debugging loging disabled.
+
+------------------------------------------------------------------------
+Version 1.17 (brockhaus):
+
+    * If cache is enabled, *everything* is cached now. Known writers
+      won't produce *any* external server call, if allready cached.
+      This is a very nice performance boost! Thanks to garvin for hinting
+      me.
+    * Anti hacking patches by garvinhickins
+
+------------------------------------------------------------------------
+Version 1.16 (garvinhicking):
+
+    * Coding style
+
+------------------------------------------------------------------------
+Version 1.14 (brockhaus):
+
+    * Fallback possibility for MyBlogLog implemented! :-) But it is
+      slow even with caching optimazation. MBL shouldn't be the first
+      option.
+    * Fifth method slot in configuration, as MBL now supports fallback, too.
+
+------------------------------------------------------------------------
+Version 1.13 (brockhaus):
+
+    * Advice changed: It is not the statistic plugin producing not 
+      working Pavatars/Favatars but the exit tracking plugin.
+
+------------------------------------------------------------------------
+Version 1.12 (brockhaus):
+
+    * MyBlogLog avatars are cached now, too.
+
+    * Pages redirecting to a default page, if the requested item was not
+      found, are supported now, too. Former the Avatar Plugin assumed,
+      that the default page is the P/Favatar.
+
+    * Default configuration now ordered like this: Gravatar -> Pavatar 
+      -> Favatar -> Default Avatar.
+
+    * Added advice, that this plugin has to be executed before any link
+      changing plugin.
+
+    * Reading configured plugin path. Former it was 'plugin' always.
+
+    * Dropped gravatar border setting, as it is not working (anymore?)
+
+------------------------------------------------------------------------
+Version 1.11, testing version not released to CVS/Spartacus (brockhaus):
+
+    * Fallback for Gravatar working! But this shows an default avatar
+      to Gravatar, not mattering the settings. So revoked this setting.
+
+------------------------------------------------------------------------
+Version 1.10 (brockhaus):
+
+    * Pavatar / Avatar information where never loaded from cache
+    
+    * .. but after beeing loaded from cache it produced an endless
+      request loop for images loaded from the local blog (if comment
+      sidebar plugin was enabled)
+
+    * Height setting for image was called "heigth".. :-/
+    
+    * Gravarar caching didn't work reliable, if a default avatar was
+      given.
+
+------------------------------------------------------------------------
+Version 1.9 (brockhaus):
+
+    * While searching for Pavatar, the Favatar was loaded as Pavatar,
+      if no Pavatar image but a favicon was found. (Thanks to El Burro)
+
+------------------------------------------------------------------------
+Version 1.8 (brockhaus):
+
+    * Plugin was unable to load Favatars/Pavatars, if a redirection was
+      signaled at the url given by the commentor as homepage. Garvin's
+      blog is such a page..
+
+------------------------------------------------------------------------
+Version 1.7 (brockhaus):
+
+    * Added support for Pavatars (www.pavatar.com)
+    
+    * Added support for MyBlogLog Avatars (www.mybloglog.com)
+
+    * The order for trying avatar methods and what kind of avatars are
+      supported is now configurable.
+
+    * Standard avatar may be one of them (should be last)
+
+    * Option for not giving the default avatar to gravatar  even if one
+      is defined. (We want less dataprofiles..)
+
+    * Fetch default avatar via mediadatabase in the configuration.
+	
+    * Image size is assured now in HTML code.
+	
+    * Below the comment only actual configured avatar methods are shown
+      as supported.
+
+------------------------------------------------------------------------
+Version 1.6 (garvinhickins): 
+
+------------------------------------------------------------------------
+Version 1.5 (garvinhickins): 
+
+------------------------------------------------------------------------
+Version 1.4 (garvinhickins): 
+
+------------------------------------------------------------------------
+Version 1.3 (garvinhickins): 
+
+    * Fix errors on invalid domains
