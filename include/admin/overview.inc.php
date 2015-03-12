@@ -55,7 +55,7 @@ $data['updateButton'] = $output;
 $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
                                     ORDER BY c.id DESC LIMIT 5");
-if (count($comments) > 1) {
+if (is_array($comments) && count($comments) > 0) {
     foreach ($comments as &$comment) {
         $comment['entrylink'] = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
 
