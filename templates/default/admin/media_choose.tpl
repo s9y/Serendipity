@@ -52,8 +52,6 @@
         <script type="text/javascript" src="{serendipity_getFile file='YahooUI/treeview/treeview.js'}"></script>
 
         <script src="{serendipity_getFile file='admin/header_spawn.js'}"></script>
-        <script type="text/javascript" language="JavaScript" src="{$serendipityHTTPPath}serendipity_define.js.php"></script>
-        <script type="text/javascript" language="Javascript" src="{$serendipityHTTPPath}serendipity_editor.js"></script>
 
         {serendipity_hookPlugin hook="backend_header" hookAll="true"}
 

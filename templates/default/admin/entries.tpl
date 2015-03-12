@@ -1,5 +1,3 @@
-<script type="text/javascript" language="JavaScript" src="serendipity_define.js.php"></script>
-<script type="text/javascript" language="JavaScript" src="serendipity_editor.js"></script>
 
 <!-- ADMIN-ENTRY TEMPLATE: entries.tpl START -->
 {*** POSSIBLE ERROR MESSAGES START ***}
