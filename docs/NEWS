@@ -3,6 +3,12 @@
 Version 2.0.1 ()
 ------------------------------------------------------------------------
 
+   * Fix missing escaping (possible XSS) of category names in the Backend 
+     Entry Admin, which would allow editors that create a forged
+     category name to attack other editors in the backend (privileged
+     access to the backend required).
+     Thanks a lot to Edric Teo for reporting this issue.
+     
    * Improved detection for possible upgrade/plugin/PHP errors. A
      warning will be emitted on the dashboard, when the Serendipity
      JavaScript-library could not be loaded.
