@@ -141,7 +141,7 @@
                         <span class="cat_view_pad">{$entry_cat.depth_pad}</span>
                         <input id="serendipity_category_{$entry_cat.categoryid}" name="serendipity[categories][]" type="checkbox" value="{$entry_cat.categoryid}"{if $entry_cat.is_selected} checked="checked"{/if}>
 
-                        <label for="serendipity_category_{$entry_cat.categoryid}">{$entry_cat.category_name}</label>
+                        <label for="serendipity_category_{$entry_cat.categoryid}">{$entry_cat.category_name|escape}</label>
                     </div>
                 {/foreach}
                 </fieldset>
