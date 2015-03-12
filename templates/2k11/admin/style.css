@@ -1665,10 +1665,6 @@ form > .button_link:first-of-type,
     padding: 0 .5em .5em;
 }
 
-.template_preview {
-    max-width: 400px;
-}
-
 .media_wrap_thumb {
     padding: .5em;
 }
@@ -2391,6 +2387,51 @@ input[name="serendipity[filter][fileCategory]"] {
 #media_selector_bar {
     float: right;
     margin: 1em 0 0;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    z-index: 10000;
+}
+
+#progressWidget {
+    display: block;
+    margin: auto;
+    position: relative;
+    top: 40%;
+    text-align: center;
+}
+
+#updateAll {
+    margin-bottom: 1em;
+}
+
+#updateMessage {
+    color: white;
+    width: 20em;
+}
+
+#updateProgress, #updateIndicator, #updateMessage {
+    display: block;
+    margin-bottom: 1em;
+    margin: auto;
+}
+
+@-webkit-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@-moz-keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+@keyframes loaderSprite { from { background-position: 0px; } to { background-position: -2500px; } }
+
+#updateIndicator {
+    width: 100px;
+    height: 100px;
+    background-image: url('{TEMPLATE_PATH}img/activity.png');
+    -webkit-animation: loaderSprite 1s steps(25, end) infinite;
+    animation: loaderSprite 1s steps(25, end) infinite;
 }
 
 /* TEMP fixes for tree view */
