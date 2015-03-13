@@ -3,6 +3,8 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Show debugging .tpl file information with relative directory only
+   
    * fix wrong upgrade removal of dead files with 2.0.1 update
 
 
