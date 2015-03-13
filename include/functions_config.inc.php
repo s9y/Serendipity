@@ -778,6 +778,10 @@ function serendipity_is_iframe() {
     global $serendipity;
 
     if ($serendipity['GET']['is_iframe'] && is_array($_SESSION['save_entry'])) {
+        if (!is_object($serendipity['smarty'])) {
+            // We need smarty also in the iframe to load a template's config.inc.php and register possible event hooks.
+            serendipity_smarty_init();
+        }
         return true;
     }
     return false;

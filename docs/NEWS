@@ -3,6 +3,9 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Fix initializing smarty framework in the preview/saving iframe,
+     so that a template's config.inc.php is always loaded.
+     
    * Show debugging .tpl file information with relative directory only
    
    * fix wrong upgrade removal of dead files with 2.0.1 update
