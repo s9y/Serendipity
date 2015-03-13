@@ -243,10 +243,10 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Update of .htaccess file',
                      'desc'      => 'Changes were made to the .htaccess file to allow for new patterns, it will be recreated. If you manually modified the file, make sure your modification are in place afterwards.'),
 
-               array('version'   => '2.0.1',
+               array('version'   => '2.0.2',
                      'function'  => 'serendipity_removeDeadFiles_SPL',
-                     'title'     => 'Removal of obsolete and still resting files in 2.0.0',
-                     'arguments' => array($serendipity['serendipityPath'] . 'htmlarea', $dead_files_rest, array('internals'), true),
+                     'title'     => 'Removal of obsolete and still resting files in 2.0',
+                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_rest, null, true),
                      'desc'      => 'The following dead files will additionally be removed from "/" and "htmlarea".<br /><pre>' . implode(', ', $dead_files_rest) . '</pre>'),
 
 
