@@ -3,25 +3,25 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
-    * Fix: the syndication plugin now always uses absolute links for
-           the subtome-button
+   * Fix: the syndication plugin now always uses absolute links for
+          the subtome-button
 
-    * Fix: the syndication plugin links subtome correctly to the atom
-           feed when he is activated with the rss feed
+   * Fix: the syndication plugin links subtome correctly to the atom
+          feed when he is activated with the rss feed
 
-    * Issue #285: Add "none" as possible value for the xml-icon in
-                  the syndication plugin, to enable plain links 
+   * Issue #285: Add "none" as possible value for the xml-icon in
+                 the syndication plugin, to enable plain links
 
    * Issue #238: When creating/renaming media directories, replace
      special characters with the same i18n rules like Permalinks are
      created, renaming umlauts etc.
 
-    * Add "update all"-button to plugin update page
+   * Add "update all"-button to plugin update page
 
    * Issue #234: Granular options to force backend popups for certain
      areas
 
-    * Introduce serendipity['ajax'] to detect incoming ajax requests
+   * Introduce serendipity['ajax'] to detect incoming ajax requests
       and react accordingly in core and plugins
 
    * Issue #248: Add $serendipity['forceBase64']=true option (can be set
@@ -38,6 +38,10 @@ Version 2.1 ()
 
 Version 2.0.2 ()
 ------------------------------------------------------------------------
+
+   * fix wrong upgrade removal of dead files with 2.0.1 update
+
+
 
 Version 2.0.1 (March 12th, 2015)
 ------------------------------------------------------------------------
