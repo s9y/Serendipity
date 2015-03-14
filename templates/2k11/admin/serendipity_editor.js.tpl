@@ -491,9 +491,18 @@
     serendipity.rename = function(id, fname) {
         var newname;
         var media_rename = '{$CONST.ENTER_NEW_NAME}';
-        var media_token_url = $('input[name*="serendipity[token]"]').val();
         if (newname = prompt(media_rename + fname, fname)) {
-            location.href='?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url;
+            var media_token_url = $('input[name*="serendipity[token]"]').val();
+            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url);
+        }
+    }
+
+    // Delete file from ML
+    serendipity.deleteFromML = function(id, fname) {
+        if (confirm('{$CONST.DELETE}')) {
+            var media_token_url = $('input[name*="serendipity[token]"]').val();
+            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]=' + escape(id) +  '&serendipity[token]='+ media_token_url);
+            window.location.reload(false);
         }
     }
 
@@ -1342,6 +1351,13 @@ $(function() {
         var $el = $(this);
         serendipity.rename($el.attr('data-fileid'), $el.attr('data-filename'));
     });
+
+    $('.media_delete').click(function(e) {
+        e.preventDefault();
+        var $el = $(this);
+        serendipity.deleteFromML($el.attr('data-fileid'), $el.attr('data-filename'));
+    });
+
 
     $('#media_crop').click(function(e) {
         window.open($(this).attr('href'), 'ImageCrop', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
