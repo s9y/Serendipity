@@ -9,6 +9,17 @@
     <title>{$head_title|default:$blogTitle}{if $head_subtitle} | {$head_subtitle}{/if}</title>
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+    <meta name="robots" content="index,follow">
+{else}
+    <meta name="robots" content="noindex,follow">
+{/if}
+{if ($view == "entry")}
+    <link rel="canonical" href="{$entry.rdf_ident}">
+{/if}
+{if ($view == "start")}
+    <link rel="canonical" href="{$serendipityBaseURL}">
+{/if}
 {if $template_option.webfonts == 'droid'}
     <link  rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Sans:400,700">
 {elseif $template_option.webfonts == 'ptsans'}

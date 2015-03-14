@@ -11,6 +11,17 @@
         {serendipity_hookPlugin hook="frontend_header"}
         <meta http-equiv="Content-Type" content="text/html; charset={$head_charset}" />
         <meta name="generator" content="Serendipity v.{$serendipityVersion}" />
+    {if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+        <meta name="robots" content="index,follow" />
+    {else}
+        <meta name="robots" content="noindex,follow" />
+    {/if}
+    {if ($view == "entry")}
+        <link rel="canonical" href="{$entry.rdf_ident}" />
+    {/if}
+    {if ($view == "start")}
+        <link rel="canonical" href="{$serendipityBaseURL}" />
+    {/if}
         <link rel="alternate"  type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2" />
         <link rel="alternate"  type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml" />
         {if $entry_id}<link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}" />{/if}
