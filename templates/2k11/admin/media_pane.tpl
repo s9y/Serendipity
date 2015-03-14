@@ -145,12 +145,14 @@
         </script>
     </form>
 </div>
+
+{if $smarty.get.serendipity.showUpload}
+    <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
+{/if}
+
 {if $media.nr_files < 1}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
-    {if $smarty.get.serendipity.showUpload}
-        <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
-    {/if}
     {if $media.manage}
         <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
             {$media.token}
