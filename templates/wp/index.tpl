@@ -4,8 +4,19 @@
 
 <head xmlns="http://www.w3.org/1999/xhtml" xml:lang="{$lang}" lang="{$lang}">
 	<title>{$head_title|@default:$blogTitle} {if $head_subtitle} - {$head_subtitle}{/if}</title>
-	
+
 	<meta name="generator" content="Serendipity v.{$serendipityVersion}" />
+{if ($view == "entry" || $view == "start" || $view == "feed" || $view == "plugin" || $staticpage_pagetitle != "" || $robots_index == 'index')}
+    <meta name="robots" content="index,follow" />
+{else}
+    <meta name="robots" content="noindex,follow" />
+{/if}
+{if ($view == "entry")}
+    <link rel="canonical" href="{$entry.rdf_ident}" />
+{/if}
+{if ($view == "start")}
+    <link rel="canonical" href="{$serendipityBaseURL}" />
+{/if}
 
 	<style type="text/css" media="screen">
 		@import url( {serendipity_getFile file="wp-layout.css"} );
