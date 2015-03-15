@@ -3,7 +3,7 @@
  */
 
 /**
- * @fileOverview A Serendipity wysiwyg-mode-placeholder plugin: procurator, v. 1.5, 2015-03-15
+ * @fileOverview A Serendipity wysiwyg-mode-placeholder plugin: procurator, v. 1.4
  */
 
 (function (pluginName) {
@@ -126,7 +126,7 @@
                         // this is case {cke_protected} data
                         if ( elString.substr( 0, protectedSourceMarker.length ) == protectedSourceMarker ) {
                             var realData         = elString.replace(/\{cke_protected\}([\s\S]+?)/g, "$1"); // cuts the snippet from {cke_protected}(.*) to preserve
-                            //  tagStart  +  shortPHPStart  +  !--  +  openCurlyBracket (named here, while giving a PHP PARSE ERROR ON Subdomain usage here, if using the chars, even enclosed in /**/
+                            //                                           <     <?     !--    {
                             var tagName          = realData.replace( /([%3C|%3C%3F|\!%2D%2D|%7B]?([a-z]+))%+(.*)$/, "$1"); // get the real tag name to set as real tag name title to object fakeElement.attributes
                                 tagName          = tagName.replace( '%3C', '' ).replace( '%3F', '' ); // tweak a little more, since this upper regex drives me crazy
                             if ( tagName.substr( 0, 3) == '%7B' ) tagName = 'smarty'; // []{
