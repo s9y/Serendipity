@@ -58,6 +58,9 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Implement patch to properly initiate templates_c on installation
+     for shared installs (thanks to fugue88)
+     
    * Allow templatechooser plugin to read a custom "blacklist.txt"
      within its directory, that can blacklist certain themes from
      being selected.

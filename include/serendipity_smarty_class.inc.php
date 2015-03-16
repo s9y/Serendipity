@@ -146,7 +146,11 @@ class Serendipity_Smarty extends Smarty
 
         $this->setTemplateDir($template_dirs);
 
-        $this->setCompileDir($serendipity['serendipityPath'] . PATH_SMARTY_COMPILE);
+        if (defined('S9Y_DATA_PATH')) {
+            $this->setCompileDir(S9Y_DATA_PATH . PATH_SMARTY_COMPILE);
+        } else {
+            $this->setCompileDir($serendipity['serendipityPath'] . PATH_SMARTY_COMPILE);
+        }    
 
         $this->setConfigDir(array(S9Y_TEMPLATE_USERDEFAULT));
 
