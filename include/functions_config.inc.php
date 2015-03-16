@@ -692,9 +692,10 @@ function serendipity_restoreVar(&$source, &$target) {
  * @access public
  * @param   string      The name of the cookie variable
  * @param   string      The contents of the cookie variable
+ * @param   int         Cookie validity (unix timestamp)
  * @return null
  */
-function serendipity_setCookie($name, $value, $securebyprot = true) {
+function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false) {
     global $serendipity;
 
     $host = $_SERVER['HTTP_HOST'];
@@ -713,7 +714,11 @@ function serendipity_setCookie($name, $value, $securebyprot = true) {
         $host = '';
     }
 
-    setcookie("serendipity[$name]", $value, time()+60*60*24*30, $serendipity['serendipityHTTPPath'], $host, $secure);
+    if ($custom_timeout === false) {
+        $custom_timeout = time() + 60*60*24*30;
+    }
+
+    setcookie("serendipity[$name]", $value, $serendipity['serendipityHTTPPath'], $host, $secure);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
