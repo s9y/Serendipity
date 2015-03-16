@@ -790,6 +790,9 @@ input[type="url"] {
     height: 1.8em;
     max-width: 100%;
 }
+@-moz-document url-prefix() {
+    textarea.cke_source { white-space: pre-wrap; }
+}
 
 input[type="datetime-local"]::-webkit-clear-button {
   -webkit-appearance: none;
