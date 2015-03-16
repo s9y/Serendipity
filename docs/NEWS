@@ -53,6 +53,10 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Allow templatechooser plugin to read a custom "blacklist.txt"
+     within its directory, that can blacklist certain themes from
+     being selected.
+
    * Allow serendipity_setCookie() function to set custom expiry.
    
    * Adapt .htaccess profile of "mod_rewrite for 1&1 and problematic
