@@ -3,6 +3,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+   * Added link to preview spartacus themes on blog.s9y.org
+   
    * Added two configuration variables that can be set in
      serendipity_config_local.inc.php to influence the dashboard
      entry limit:

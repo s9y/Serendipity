@@ -878,6 +878,7 @@ class serendipity_event_spartacus extends serendipity_event
                 }
 
                 $plugname = $pluginstack[$i]['template'];
+                $pluginstack[$i]['demoURL'] = 'http://blog.s9y.org?user_template=additional_themes/' . $plugname;
                 $pluginstack[$i]['previewURL'] = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview.png?revision=1.9999');
                 $preview_fullsizeURL = $this->fixUrl($mirror . '/additional_themes/' . $gitloc . $plugname . '/preview_fullsize.jpg?revision=1.9999');
                 if (file_exists($serendipity['serendipityPath'] . '/templates_c/template_cache/'. $plugname .'.jpg')) {

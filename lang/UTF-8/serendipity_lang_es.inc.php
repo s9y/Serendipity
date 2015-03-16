@@ -1108,10 +1108,11 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'No tags');
 @define('DASHBOARD_ENTRIES', 'In Progress');
+@define('START_UPDATE', 'Starting Update ...');
+@define('UPDATE_ALL', 'Update All');
 @define('INSTALL_PASSWORD2', 'Admin password (verify)');
 @define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');
 @define('INSTALL_BACKENDPOPUP_GRANULAR', 'Force specific backend popups');
 @define('INSTALL_BACKENDPOPUP_GRANULAR_DESC', 'If you generally disable backend popups, you can specifically force using popups for specific places by entering a comma seperated list of places here. Available places are: ');
-@define('START_UPDATE', 'Starting Update ...');
-@define('UPDATE_ALL', 'Update All');
 @define('JS_FAILURE', 'The Serendipity JavaScript-library could not be loaded. This can happen due to PHP or Plugin errors, or even a malformed browser cache. To check the exact error please open <a href="%1$s">%1$s</a> manually in your browser and check for error messages.');
+@define('THEMES_PREVIEW_BLOG', 'See demo on blog.s9y.org');

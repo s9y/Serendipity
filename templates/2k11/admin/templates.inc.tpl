@@ -108,6 +108,11 @@
                                 <img src="{$info.preview}" alt="{$CONST.PREVIEW}" >
                             {/if}
                         {/if}
+
+                        {if $info.demoURL}
+                            <a class="demoURL" href="{$info.demoURL}" target="_blank">{$CONST.THEMES_PREVIEW_BLOG}</a>
+                        {/if}
+
                             <footer id="template_info_{$info@key}" class="template_info additional_info">
                                 <dl class="clearfix">
                                     <dt class="template_author">{$CONST.AUTHOR}:</dt>

@@ -205,6 +205,10 @@ foreach ($stack as $theme => $info) {
         } elseif (!empty($info["previewURL"])) {
             $data["templates"][$theme]["preview${backendId}"] = $info["previewURL${backendId}"] ;
         }
+
+        if ($info['demoURL']) {
+            $data['templates'][$theme]['demoURL'] = $info['demoURL'];
+        }
     }
 
     $unmetRequirements = array();
