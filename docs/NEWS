@@ -3,6 +3,8 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Allow serendipity_setCookie() function to set custom expiry.
+   
    * Adapt .htaccess profile of "mod_rewrite for 1&1 and problematic
      servers" to not include the "Options -MultiViews" option, since
      this is often blocked
