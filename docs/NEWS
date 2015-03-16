@@ -9,8 +9,10 @@ Version 2.1 ()
      
       - $serendipity['dashboardLimit']: How many future entries to
         fetch (default: 5)
-     - $serendipity['dashboardDraftLimit']: How many entries in total
+      - $serendipity['dashboardDraftLimit']: How many entries in total
         shall be displayed in the dashboard section (default: 5)
+      - $serendipity['dashboardCommentsLimit']: How many comments
+        (default: 5)
         
     (Draft entries will only be fetched if there are less future entries
      than the total entry limit)

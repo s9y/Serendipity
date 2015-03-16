@@ -52,9 +52,20 @@ $data['update']       = version_compare($data['usedVersion'], $data['curVersion'
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
 $data['updateButton'] = $output;
 
+// Can be set through serendipity_config_local.inc.php
+if (!isset($serendipity['dashboardCommentsLimit'])) {
+    $serendipity['dashboardCommentsLimit'] = 5;
+}
+if (!isset($serendipity['dashboardLimit'])) {
+    $serendipity['dashboardLimit'] = 5;
+}
+if (!isset($serendipity['dashboardDraftLimit'])) {
+    $serendipity['dashboardDraftLimit'] = 5;
+}
+
 $comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
                                     LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
-                                    ORDER BY c.id DESC LIMIT 5");
+                                    ORDER BY c.id DESC LIMIT " . (int)$serendipity['dashboardCommentsLimit']);
 if (is_array($comments) && count($comments) > 0) {
     foreach ($comments as &$comment) {
         $comment['entrylink'] = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];
@@ -74,12 +85,6 @@ if (is_array($comments) && count($comments) > 0) {
 
 $data['comments'] = $comments;
 
-if (!isset($serendipity['dashboardLimit'])) {
-    $serendipity['dashboardLimit'] = 5;
-}
-if (!isset($serendipity['dashboardDraftLimit'])) {
-    $serendipity['dashboardDraftLimit'] = 5;
-}
 
 $entries = serendipity_fetchEntries(
                      false,
