@@ -3,6 +3,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+   * Add support for cronjob plugin to spartacus, to notify
+     blog owner about possible updates (via e-mail)
+     
    * Added link to preview spartacus themes on blog.s9y.org
    
    * Added two configuration variables that can be set in

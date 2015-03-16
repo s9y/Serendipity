@@ -61,3 +61,6 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR', 'Custom location for mirror');
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR_DESC', 'This option is for advanced users only. When the preconfigurable mirrors are down or malfunctioning, you can enter your own server name (like http://mirror.org/serendipity/). The server needs to maintain the XML files at URL level, and have subdirectories like additional_plugins and additional_themes. Only enter mirrors that you trust to be safe and which are a full duplicate of the files hosted in the CVS repository of Serendipity. You can enter multiple mirrors, separated by "|".');
+
+@define('PLUGIN_EVENT_SPARTACUS_CRONJOB', 'This plugin supports the Serendipity Cronjob plugin. Go and install it if you want scheduled execution.');
+@define('PLUGIN_EVENT_SPARTACUS_CRONJOB_WHEN', 'Execute regular cronjob to check for plugin updates, and mail those to the configured blog\'s mail address (%s)?');

@@ -28,7 +28,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.31');
+        $propbag->add('version',       '2.32');
         $propbag->add('requirements',  array(
             'serendipity' => '0.9',
             'smarty'      => '2.6.7',
@@ -45,10 +45,11 @@ class serendipity_event_spartacus extends serendipity_event
             
             'external_plugin'                      => true,
 
-            'backend_directory_create'             => true
+            'backend_directory_create'             => true,
+            'cronjob'                              => true,
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
-        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'mirror_xml', 'mirror_files', 'custommirror', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
+        $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'cronjob', 'mirror_xml', 'mirror_files', 'custommirror', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
 
     }
 
@@ -133,6 +134,19 @@ class serendipity_event_spartacus extends serendipity_event
         global $serendipity;
 
         switch($name) {
+            case 'cronjob':
+                if (class_exists('serendipity_event_cronjob')) {
+                    $propbag->add('type',        'select');
+                    $propbag->add('name',        sprintf(PLUGIN_EVENT_SPARTACUS_CRONJOB_WHEN, $serendipity['blogMail']));
+                    $propbag->add('description', '');
+                    $propbag->add('default',     'none');
+                    $propbag->add('select_values', serendipity_event_cronjob::getValues());
+                } else {
+                    $propbag->add('type', 'content');
+                    $propbag->add('default', PLUGIN_EVENT_SPARTACUS_CRONJOB);
+                }
+                break;
+
             case 'enable_plugins':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS);
@@ -1073,6 +1087,71 @@ class serendipity_event_spartacus extends serendipity_event
 
         if (isset($hooks[$event])) {
             switch($event) {
+                case 'cronjob':
+                    if ($this->get_config('cronjob') == $eventData) {
+                        serendipity_event_cronjob::log('Spartacus', 'plugin');
+
+                        $avail   = array();
+                        $install = array();
+                        $meth    = array('event', 'sidebar');
+                        $active  = serendipity_plugin_api::get_installed_plugins();
+
+                        $avail['event']   = $this->buildList($this->fetchOnline('event'), 'event');
+                        $avail['sidebar'] = $this->buildList($this->fetchOnline('sidebar'), 'sidebar');
+                        #echo "XAVAIL:<pre>" . print_r($avail, true) . "</pre>";
+                        
+                        $install['event']   = serendipity_plugin_api::enum_plugin_classes(true);
+                        $install['sidebar'] = serendipity_plugin_api::enum_plugin_classes(false);
+                        #echo "XINSTALL:<pre>" . print_r($install, true) . "</pre>";
+
+                        $mailtext = '';                        
+                        foreach($meth AS $method) {
+                            foreach ($install[$method] as $class_data) {
+                                #echo "Probe " . $class_data['name']. "<br />\n"; // DEBUG
+                                $pluginFile = serendipity_plugin_api::probePlugin($class_data['name'], $class_data['classname'], $class_data['pluginPath']);
+                                $plugin     = serendipity_plugin_api::getPluginInfo($pluginFile, $class_data, $method);
+                        
+                                if (is_object($plugin)) {
+                                    #echo "Non cached<br />\n";
+                                    #echo "<pre>" . print_r($avail[$method][$class_data['name']], true) . "</pre>";
+                                    // Object is returned when a plugin could not be cached.
+                                    $bag = new serendipity_property_bag;
+                                    $plugin->introspect($bag);
+                        
+                                    // If a foreign plugin is upgradable, keep the new version number.
+                                    if (isset($avail[$method][$class_data['name']])) {
+                                        $class_data['upgrade_version'] = $avail[$method][$class_data['name']]['upgrade_version'];
+                                    }
+                                    $props = serendipity_plugin_api::setPluginInfo($plugin, $pluginFile, $bag, $class_data, 'local', $avail[$method]);
+                                    #echo "<pre>" . print_r($props, true) . "</pre>";
+                                } elseif (is_array($plugin)) {
+                                    // Array is returned if a plugin could be fetched from info cache
+                                    $props = $plugin;
+                                    #echo "Cached<br />\n";
+                                } else {
+                                    $props = false;
+                                    #echo "Error<br />\n";
+                                }
+                        
+                                if (is_array($props)) {
+                                    #echo "<pre>" . print_r($props, true) . "</pre>\n";
+                                    if (version_compare($props['version'], $props['upgrade_version'], '<')) {
+                                        $mailtext .= ' * ' . $class_data['name'] . " NEW VERSION: " . $props['upgrade_version'] . " - CURRENT VERSION: " . $props['version'] . "\n";
+                                    }
+                                } else {
+                                    $mailtext .= " X ERROR: " . $class_data['true_name'] . "\n";
+                                }
+                            }
+                        }
+
+                        if (!empty($mailtext)) {
+                            serendipity_sendMail($serendipity['blogMail'], 'Spartacus update report ' . $serendipity['baseURL'], $mailtext, $serendipity['blogMail']);
+                            echo nl2br($mailtext);
+                        }
+                    }
+                    return true;
+                    break;
+
                 case 'external_plugin':
                     if (!serendipity_db_bool($this->get_config('enable_remote'))) {
                         return false;
@@ -1103,7 +1182,7 @@ class serendipity_event_spartacus extends serendipity_event
                                     $plugin->introspect($bag);
                         
                                     // If a foreign plugin is upgradable, keep the new version number.
-                                    if (isset($avail[$method][$class_data['name']]) && $avail[$method][$class_data['name']]['upgradable']) {
+                                    if (isset($avail[$method][$class_data['name']])) {
                                         $class_data['upgrade_version'] = $avail[$method][$class_data['name']]['upgrade_version'];
                                     }
                                     $props = serendipity_plugin_api::setPluginInfo($plugin, $pluginFile, $bag, $class_data, 'local', $avail[$method]);
