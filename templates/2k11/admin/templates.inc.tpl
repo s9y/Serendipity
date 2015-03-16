@@ -109,10 +109,6 @@
                             {/if}
                         {/if}
 
-                        {if $info.demoURL}
-                            <a class="demoURL" href="{$info.demoURL}" target="_blank">{$CONST.THEMES_PREVIEW_BLOG}</a>
-                        {/if}
-
                             <footer id="template_info_{$info@key}" class="template_info additional_info">
                                 <dl class="clearfix">
                                     <dt class="template_author">{$CONST.AUTHOR}:</dt>
@@ -129,7 +125,9 @@
                     </div>
 
                     <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
-
+                {if $info.demoURL}
+                    <a class="demo_link button_link" href="{$info.demoURL}" title="{$CONST.THEMES_PREVIEW_BLOG}" target="_blank"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.THEMES_PREVIEW_BLOG}</span></a>
+                {/if}
                 {if !$info.unmetRequirements}
                     {if $info.info.custom_admin_interface == $CONST.YES && $cur_tpl_backend.info.name != $info.info.name}
                     <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-frontend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
