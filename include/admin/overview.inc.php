@@ -74,10 +74,17 @@ if (is_array($comments) && count($comments) > 0) {
 
 $data['comments'] = $comments;
 
+if (!isset($serendipity['dashboardLimit'])) {
+    $serendipity['dashboardLimit'] = 5;
+}
+if (!isset($serendipity['dashboardDraftLimit'])) {
+    $serendipity['dashboardDraftLimit'] = 5;
+}
+
 $entries = serendipity_fetchEntries(
                      false,
                      false,
-                     5,
+                     (int)$serendipity['dashboardLimit'],
                      true,
                      false,
                      'timestamp DESC',
@@ -85,12 +92,12 @@ $entries = serendipity_fetchEntries(
                    );
 
 $entriesAmount = count($entries);
-if ($entriesAmount < 5) {
+if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
                      false,
                      false,
-                     5- $entriesAmount,
+                     (int)$serendipity['dashboardDraftLimit'] - $entriesAmount,
                      true,
                      false,
                      'timestamp DESC',

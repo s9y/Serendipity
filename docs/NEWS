@@ -3,6 +3,18 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+   * Added two configuration variables that can be set in
+     serendipity_config_local.inc.php to influence the dashboard
+     entry limit:
+     
+      - $serendipity['dashboardLimit']: How many future entries to
+        fetch (default: 5)
+     - $serendipity['dashboardDraftLimit']: How many entries in total
+        shall be displayed in the dashboard section (default: 5)
+        
+    (Draft entries will only be fetched if there are less future entries
+     than the total entry limit)
+             
    * Fix: the syndication plugin now always uses absolute links for
           the subtome-button
 
