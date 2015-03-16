@@ -183,9 +183,9 @@ class serendipity_plugin_history extends serendipity_plugin
             $author = ($displayauthor) ? $e[$x]['author'] . ': ' : '';
             echo '<div class="serendipity_history_info">';
             if ($displayauthor)
-                { echo '<span class="serendipity_history_author">' . $author . '</span>'; }
+                { echo '<span class="serendipity_history_author">' . $author . ' </span>'; }
             if ($displaydate)
-                { echo '<span class="serendipity_history_date">' . $date . '</span>'; } 
+                { echo '<span class="serendipity_history_date">' . $date . ' </span>'; } 
             $t = ($maxlength==0 || strlen($e[$x]['title'])<=$maxlength) ?
                     $e[$x]['title'] :
                     (trim(serendipity_mb('substr', $e[$x]['title'], 0, $maxlength-3)).' [...]');
