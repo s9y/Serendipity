@@ -159,6 +159,11 @@ $dead_htmlarea_dirs = array(
 $dead_files_rest = array(
     'serendipity_editor.js',
     'serendipity_define.js.php',
+    'bundled-libs/dragdrop.js',
+    'bundled-libs/imgedit.js',
+    'bundled-libs/YahooUI/treeview/license.txt',
+    'bundled-libs/YahooUI/treeview/treeview.js',
+    'bundled-libs/YahooUI/treeview/YAHOO.js',
     'deployment/serendipity_editor.js',
     'deployment/serendipity_define.js.php',
     'docs/CHANGED_FILES',
