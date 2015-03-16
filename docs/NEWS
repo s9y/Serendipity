@@ -3,6 +3,10 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Adapt .htaccess profile of "mod_rewrite for 1&1 and problematic
+     servers" to not include the "Options -MultiViews" option, since
+     this is often blocked
+     
    * Fix initializing smarty framework in the preview/saving iframe,
      so that a template's config.inc.php is always loaded.
      
