@@ -155,7 +155,7 @@ $dead_htmlarea_dirs = array(
     $serendipity['serendipityPath'] . 'htmlarea/ckeditor/samples'
 );
 
-/* A list of old Serendipity files which were not marked obsolet with 2.0.0 upgrade before - now 2.0.1 */
+/* A list of old Serendipity files which were not marked obsolet with 2.0.0 upgrade before - now 2.0.2 */
 $dead_files_rest = array(
     'serendipity_editor.js',
     'serendipity_define.js.php',
@@ -174,6 +174,14 @@ $dead_files_rest = array(
     'htmlarea/ChangeLog',
     'htmlarea/dialog.js',
     'htmlarea/release-notes.html'
+);
+
+/* A list of old lib directories which were not marked obsolet with 2.0.0 upgrade before - now 2.0.2 */
+$dead_dirs_rest = array(
+    $serendipity['serendipityPath'] . 'htmlarea/plugins/ImageManage',
+    $serendipity['serendipityPath'] . 'htmlarea/plugins',
+    $serendipity['serendipityPath'] . 'bundled-libs/YahooUI/treeview',
+    $serendipity['serendipityPath'] . 'bundled-libs/YahooUI'
 );
 
 /**
