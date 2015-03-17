@@ -246,8 +246,14 @@ $tasks = array(array('version'   => '0.5.1',
                array('version'   => '2.0.2',
                      'function'  => 'serendipity_removeDeadFiles_SPL',
                      'title'     => 'Removal of obsolete and still resting files in 2.0',
-                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_rest, array('htmlarea/plugins/ImageManager','htmlarea/plugins', 'bundled-libs/YahooUI/treeview', 'bundled-libs/YahooUI'), true),
-                     'desc'      => 'The following dead files will additionally be removed from "/" and "htmlarea".<br><pre>' . implode(', ', $dead_files_rest) . '</pre>'),
+                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_rest, array('internals'), true),
+                     'desc'      => 'The following old dead files will additionally be removed from your system.<br><pre>' . implode(', ', $dead_files_rest) . '</pre>'),
+
+               array('version'   => '2.0.2',
+                     'function'  => 'recursive_directory_iterator',
+                     'title'     => 'Removal of obsolete and dead directories',
+                     'arguments' => array($dead_dirs_rest),
+                     'desc'      => 'The following old dead directories will additionally be removed from your system.<br><pre>' . implode(', ', $dead_dirs_rest) . '</pre>'),
 
 
 );
