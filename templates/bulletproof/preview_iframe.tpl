@@ -10,6 +10,12 @@
         <meta name="generator" content="Serendipity v.{$serendipityVersion}" />
         <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="base.css"}" />
         <link rel="stylesheet" type="text/css" href="{$head_link_stylesheet}" />
+        {if $head_link_stylesheet_frontend}
+        <link rel="stylesheet" href="{$head_link_stylesheet_frontend}">                                
+        {else}
+        <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
+        {/if}
+
         <!--[if IE 6]>
         <link rel="stylesheet" type="text/css" href="{serendipity_getFile file="ie6.css"}" />
         <![endif]-->

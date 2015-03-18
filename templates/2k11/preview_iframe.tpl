@@ -21,7 +21,11 @@
 {elseif $template_option.webfonts == 'dserif'}
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
+{if $head_link_stylesheet_frontend}
+    <link rel="stylesheet" href="{$head_link_stylesheet_frontend}">
+{else}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
+{/if}
     <script src="{serendipity_getFile file="admin/js/modernizr-2.8.3.min.js"}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
