@@ -822,7 +822,7 @@ input[type="url"] {
     max-width: 100%;
 }
 @-moz-document url-prefix() {
-    textarea.cke_source { white-space: pre-wrap; }
+    .configuration_group .form_area textarea.cke_source { white-space: pre-wrap; max-width: 100%; }
 }
 
 input[type="datetime-local"]::-webkit-clear-button {
