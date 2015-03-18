@@ -58,6 +58,10 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Make preview_iframe.tpl template files load the proper frontend
+     CSS file, including cache-busting version string when changing
+     themes
+
    * Implement patch to properly initiate templates_c on installation
      for shared installs (thanks to fugue88)
      
