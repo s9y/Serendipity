@@ -100,6 +100,7 @@
         <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <a href="http://github.com/yellowled/s9y-2k11">2k11</a> theme.</span></p>
     </footer>
 </div>
+
 <script src="{serendipity_getFile file="js/2k11.min.js"}"></script>
 {/if}
 {$raw_data}

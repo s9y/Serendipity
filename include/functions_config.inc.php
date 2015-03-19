@@ -2234,6 +2234,12 @@ function serendipity_hasPluginPermissions($plugin, $groupid = null) {
     }
 }
 
+/**
+ * Return the SHA1 (with pre-hash) of a value
+ *
+ * @param string    The string to hash
+ * @return string   The hashed string
+ */
 function serendipity_hash($string) {
     global $serendipity;
 
@@ -2244,6 +2250,12 @@ function serendipity_hash($string) {
     return sha1($serendipity['hashkey'] . $string);
 }
 
+/**
+ * Backwards-compatibility to recognize old-style md5 passwords to allow migration
+ *
+ * @param string The string to hash
+ * @param string  Either SHA1 or MD5 hash, depending on value
+ */
 function serendipity_passwordhash($cleartext_password) {
     global $serendipity;
 
