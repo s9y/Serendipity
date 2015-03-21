@@ -58,6 +58,9 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Use "secure" flag for (session) cookies sent over SSL, thanks to
+     dayton967
+     
    * Make preview_iframe.tpl template files load the proper frontend
      CSS file, including cache-busting version string when changing
      themes

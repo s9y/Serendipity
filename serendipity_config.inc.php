@@ -10,6 +10,9 @@ if (defined('S9Y_FRAMEWORK')) {
 if (!headers_sent() && php_sapi_name() !== 'cli') {
     // Only set the session name, if no session has yet been issued.
     if (session_id() == '') {
+        $cookieParams = session_get_cookie_params();
+        $cookieParams['secure'] = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? true : false);
+        session_set_cookie_params($cookieParams['lifetime'], $cookieParams['path'], $cookieParams['domain'], $cookieParams['secure'], $cookieParams['httponly']);
         session_name('s9y_' . md5(dirname(__FILE__)));
         session_start();
     }
