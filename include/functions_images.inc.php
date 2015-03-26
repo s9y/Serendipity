@@ -1672,7 +1672,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
  * Generate the url-parameters needed when generating the ML to select an image to add to the editor, to store the relevant options (like which textarea to add it to)
  *
  */
-function serendipity_generateImageSelectorParems() {
+function serendipity_generateImageSelectorParems($format="url") {
     global $serendipity;
 
     $sortParams   = array('perpage', 'order', 'ordermode');
@@ -1681,22 +1681,23 @@ function serendipity_generateImageSelectorParems() {
     $filterParams = $serendipity['GET']['filter'] ?: array(); // ?: elvis operator, see http://en.wikipedia.org/wiki/Elvis_operator and upcoming PHP 7 ?? (isset) operator
 
     $standaloneFilterParams = array('only_path', 'only_filename');
+    $parems = array();
 
     foreach($importParams AS $importParam) {
         if (isset($serendipity['GET'][$importParam])) {
-            $extraParems .= 'serendipity[' . $importParam . ']='. serendipity_specialchars($serendipity['GET'][$importParam]) .'&amp;';
+            $parems['serendipity[' . $importParam . ']'] = $serendipity['GET'][$importParam];
         }
     }
 
     foreach($sortParams AS $sortParam) {
         serendipity_restoreVar($serendipity['COOKIE']['sortorder_' . $sortParam], $serendipity['GET']['sortorder'][$sortParam]);
-        $extraParems .= 'serendipity[sortorder]['. $sortParam .']='. serendipity_specialchars($serendipity['GET']['sortorder'][$sortParam]) .'&amp;';
+        $parems['serendipity[sortorder]['. $sortParam .']'] = $serendipity['GET']['sortorder'][$sortParam];
     }
 
     foreach($standaloneFilterParams AS $filterParam) {
         serendipity_restoreVar($serendipity['COOKIE'][$filterParam], $serendipity['GET'][$filterParam]);
         if (!empty($serendipity['GET'][$filterParam]) && $serendipity['GET'][$filterParam] != "undefined") {
-            $extraParems .= 'serendipity[' . $filterParam . ']='. serendipity_specialchars($serendipity['GET'][$filterParam]) .'&amp;';
+            $parems['serendipity[' . $filterParam . ']'] = $serendipity['GET'][$filterParam];
         }
     }
 
@@ -1705,13 +1706,20 @@ function serendipity_generateImageSelectorParems() {
         if (!empty($serendipity['GET']['filter'][$filterParam]) && $serendipity['GET']['filter'][$filterParam] != "undefined") {
             if (is_array($filterValue)) {
                 foreach($filterValue as $key => $value) {
-                     $extraParems .= 'serendipity[filter][' . $filterParam . '][' . $key . ']='. serendipity_specialchars($value) .'&amp;';
+                    $parems['serendipity[filter][' . $filterParam . '][' . $key . ']'] = $value;
                 }
             } else {
-                $extraParems .= 'serendipity[filter][' . $filterParam . ']='. serendipity_specialchars($filterValue) .'&amp;';
+                $parems['serendipity[filter][' . $filterParam . ']'] = $filterValue;
             }
         }
-
+    }
+   
+    foreach ($parems as $param => $value) {
+        if ($format == "form") {
+            $extraParems .= '<input type="hidden" name="'. $param .'" value="'. serendipity_specialchars($value) .'" />';
+        } else {
+            $extraParems .= $param.'='. serendipity_specialchars($value) .'&amp;';
+        }
     }
 
     return $extraParems;

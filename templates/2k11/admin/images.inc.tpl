@@ -245,8 +245,7 @@
     {if $print_SCALING_IMAGE}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_SCALING_IMAGE}</span>{/if}
     {if $print_serendipity_scaleImg}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_serendipity_scaleImg}</span>{/if}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DONE}</span>
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
+    {if $showML}{$showML}{/if}
 {/if}
 {if $case_scaleSelect}
     {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
@@ -260,6 +259,7 @@
             <input name="serendipity[adminModule]" type="hidden" value="images">
             <input name="serendipity[adminAction]" type="hidden" value="scale">
             <input name="serendipity[fid]" type="hidden" value="{$get.fid}">
+            {$extraParems}
 
             <fieldset>
                 <span class="wrap_legend"><legend>{$CONST.NEWSIZE}</legend></span>

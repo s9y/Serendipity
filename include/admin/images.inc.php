@@ -626,7 +626,7 @@ switch ($serendipity['GET']['adminAction']) {
           (int)$serendipity['GET']['width'],
           (int)$serendipity['GET']['height']
         );
-
+        $data['extraParems'] = serendipity_generateImageSelectorParems();
         $data['print_serendipity_scaleImg'] = serendipity_scaleImg($serendipity['GET']['fid'], $serendipity['GET']['width'], $serendipity['GET']['height']);
         break;
 
@@ -636,7 +636,8 @@ switch ($serendipity['GET']['adminAction']) {
         if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
             return;
         }
-
+        
+        $data['extraParems'] = serendipity_generateImageSelectorParems("form");
         $data['case_scaleSelect'] = true;
         $s = getimagesize($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . ($file['extension'] ? '.'. $file['extension'] : ""));
         $data['img_width']  = $s[0];
@@ -727,8 +728,7 @@ if (! isset($data['showML'])) {
 }
 
 $data['get']['fid']       = $serendipity['GET']['fid']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
-$data['get']['only_path'] = $serendipity['GET']['only_path']; // we dont need other GET vars in images.inc.tpl
-
+$data['get']['only_path'] = $serendipity['GET']['only_path'];
 
 echo serendipity_smarty_show('admin/images.inc.tpl', $data);
 
