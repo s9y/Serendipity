@@ -2,13 +2,22 @@
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
+function microtime_float() {
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
+$time_start = microtime_float();
+
 define('IN_installer', true);
 define('IN_upgrader', true);
 define('IN_serendipity', true);
 define('IN_serendipity_admin', true);
 include('serendipity_config.inc.php');
+if (is_object($serendipity['logger'])) serendipity_logTimer('serendipity_config.inc.php done (backend)');
 
 header('Content-Type: text/html; charset=' . LANG_CHARSET);
+
 
 if (IS_installed === false) {
     require_once(S9Y_INCLUDE_PATH . 'include/functions.inc.php');
@@ -105,6 +114,8 @@ if (!$use_installer && $is_logged_in) {
 
     ob_start();
     serendipity_checkXSRF();
+
+    if (is_object($serendipity['logger'])) serendipity_logTimer('Backend check for module');
 
     switch($serendipity['GET']['adminModule']) {
         case 'installer':
@@ -232,6 +243,8 @@ if (!$use_installer && $is_logged_in) {
 
     $main_content = ob_get_contents();
     ob_end_clean();
+
+    if (is_object($serendipity['logger'])) serendipity_logTimer('Backend module done');
 }
 
 if (!$use_installer) {
@@ -263,3 +276,5 @@ if (!$use_installer) {
     }
     require(S9Y_INCLUDE_PATH . $file);
 }
+
+if (is_object($serendipity['logger'])) serendipity_logTimer('serendipity_admin.php done', true);

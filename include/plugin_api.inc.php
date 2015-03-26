@@ -1077,6 +1077,8 @@ class serendipity_plugin_api
     {
         global $serendipity;
 
+        if (is_object($serendipity['logger'])) serendipity_logTimer('hook_event: ' . $event_name . ' start');
+
         // Can be bypassed globally by setting $serendipity['no_events'] = TRUE;
         if (isset($serendipity['no_events']) && $serendipity['no_events'] == true) {
             return false;
@@ -1150,6 +1152,8 @@ class serendipity_plugin_api
             }
 
         }
+
+        if (is_object($serendipity['logger'])) serendipity_logTimer('hook_event: ' . $event_name . ' end');
 
         return true;
     }

@@ -322,6 +322,8 @@ $serendipity['lang'] = serendipity_getSessionLanguage();
 
 serendipity_initLog();
 
+if (is_object($serendipity['logger'])) serendipity_logTimer('Logger Framework init');
+
 if ( (isset($serendipity['autodetect_baseURL']) && serendipity_db_bool($serendipity['autodetect_baseURL'])) ||
      (isset($serendipity['embed']) && serendipity_db_bool($serendipity['embed'])) ) {
     $serendipity['baseURL'] = 'http' . (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ? 's' : '') . '://' . $_SERVER['HTTP_HOST'] . (!strstr($_SERVER['HTTP_HOST'], ':') && !empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '') . $serendipity['serendipityHTTPPath'];
@@ -371,11 +373,14 @@ serendipity_initPermalinks();
 // Apply constants/definitions from custom permalinks
 serendipity_permalinkPatterns();
 
+if (is_object($serendipity['logger'])) serendipity_logTimer('Permalinks init');
+
 /*
  *   Load main language file again, because now we have the preferred language
  */
 include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
 
+if (is_object($serendipity['logger'])) serendipity_logTimer('Language init');
 /*
  * Reset charset definition now that final language is known
  */
@@ -465,6 +470,8 @@ if (!isset($serendipity['imagemagick_thumb_parameters'])) {
     // Set a variable like below in your serendpity_config_local.inc.php
     //$serendipity['imagemagick_thumb_parameters'] = '-modulate 105,140 -unsharp 0.5x0.5+1.0 -quality 75';
 }
+
+if (is_object($serendipity['logger'])) serendipity_logTimer('Core Framework finish');
 
 serendipity_plugin_api::hook_event('frontend_configure', $serendipity);
 /* vim: set sts=4 ts=4 expandtab : */

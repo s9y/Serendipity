@@ -21,6 +21,9 @@ header('Status: 200 OK');
 // Session are needed to also remember an autologin user on the frontend
 ob_start();
 include('serendipity_config.inc.php');
+
+if (is_object($serendipity['logger'])) serendipity_logTimer('serendipity_config.inc.php done');
+
 header('Content-Type: text/html; charset='. LANG_CHARSET);
 if ($serendipity['expose_s9y']) {
     header('X-Blog: Serendipity'); // Used for installer detection
@@ -371,6 +374,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
         include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
     }
 
+    if (is_object($serendipity['logger'])) serendipity_logTimer('external_plugin hook starting');
+
     #echo $serendipity["handler"]["test.js"];
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
     if (!defined('NO_EXIT')) {
@@ -684,6 +689,6 @@ if (!defined('NO_EXIT')) {
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
 }
 
-if (is_object($serendipity['logger'])) $serendipity['logger']->debug('Page delivered in '. round(microtime_float()-$time_start,6) .' seconds, '. sizeof(get_included_files()) .' files included');
+if (is_object($serendipity['logger'])) serendipity_logTimer('Page delivered in '. round(microtime_float()-$time_start,6) .' seconds, '. sizeof(get_included_files()) .' files included');
 
 /* vim: set sts=4 ts=4 expandtab : */

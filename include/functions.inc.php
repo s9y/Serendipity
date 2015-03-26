@@ -1221,6 +1221,24 @@ function serendipity_initLog() {
 	$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
     }
 }
+
+/* 
+ * Calculates the timinig since last call, write to debugger
+ * @param string $message The output message
+ * @param bool $final Whether to calculate total time spent
+ */
+function serendipity_logTimer($message, $final = false) {
+    global $serendipity;
+    
+    if (is_object($serendipity['logger']) && function_exists('microtime_float')) {
+        $now = microtime_float();
+        if (!isset($GLOBALS['time_start_last']) || $final) {
+            $GLOBALS['time_start_last'] = $GLOBALS['time_start'];
+        }    
+        $serendipity['logger']->debug('[TIMER] [' . $_SERVER['REQUEST_URI'] . '] ' . round($now - $GLOBALS['time_start_last'], 6) . "s passed: " . $message . "\n");
+        $GLOBALS['time_start_last'] = $now;
+    }
+}
                                                                      
 
 define("serendipity_FUNCTIONS_LOADED", true);
