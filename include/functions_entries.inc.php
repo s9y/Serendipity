@@ -405,7 +405,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
                 } else if ($serendipity['GET']['page'] == $totalPages - 1) {
                     $limit = serendipity_db_limit($limit, ($totalEntries - (($totalPages -2) * $limit)) - $limit);
                 } else {
-                    $limit = serendipity_db_limit(($totalEntries - ($limit * $serendipity['GET']['page'])), $limit);
+                    $limit = serendipity_db_limit(max(0, ($totalEntries - ($limit * $serendipity['GET']['page']))), $limit);
                 }
             } else {
                 $limit = serendipity_db_limit(($serendipity['GET']['page']-1) * $limit, $limit);
