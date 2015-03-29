@@ -68,7 +68,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
 
             // Embed a link to extended entry, if existing
             if ($options['fullFeed']) {
-                $entry['body'] .= '\n' . $entry['extended'];
+                $entry['body'] .= "\n" . $entry['extended'];
                 $ext = '';
             } elseif ($entry['exflag']) {
                 $ext = '<a class="block_level" href="' . $entry['feed_entryLink'] . '#extended">' . sprintf(VIEW_EXTENDED_ENTRY, serendipity_specialchars($entry['title'])) . '</a>';
