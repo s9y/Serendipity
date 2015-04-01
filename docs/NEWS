@@ -3,6 +3,8 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Templatechooser will not apply theme in backend admin.
+   
    * Use "secure" flag for (session) cookies sent over SSL, thanks to
      dayton967
      
