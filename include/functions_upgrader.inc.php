@@ -173,7 +173,8 @@ $dead_files_rest = array(
     'docs/upgrade.sh',
     'htmlarea/ChangeLog',
     'htmlarea/dialog.js',
-    'htmlarea/release-notes.html'
+    'htmlarea/release-notes.html',
+    'templates/HOWTO'
 );
 
 /* A list of old lib directories which were not marked obsolet with 2.0.0 upgrade before - now 2.0.2 */
