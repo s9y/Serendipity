@@ -14,7 +14,7 @@ class serendipity_event_templatechooser extends serendipity_event
         $propbag->add('description', PLUGIN_EVENT_TEMPLATECHOOSER_DESC);
         $propbag->add('stackable',   false);
         $propbag->add('author',      'Evan Nemerson');
-        $propbag->add('version',     '1.5');
+        $propbag->add('version',     '1.6');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -41,7 +41,11 @@ class serendipity_event_templatechooser extends serendipity_event
         if (isset($hooks[$event])) {
             switch($event) {
               case 'frontend_configure':
-
+                if (defined('IN_serendipity_admin') && IN_serendipity_admin) {
+                    // Admin shall not have switchable themes.
+                    return true;
+                }
+                
                 if (isset($serendipity['COOKIE']['user_template']) && !isset($_REQUEST['user_template'])) {
                     $_REQUEST['user_template'] = $serendipity['COOKIE']['user_template'];
                 }
