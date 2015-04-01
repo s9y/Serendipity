@@ -791,7 +791,8 @@ input[type="url"] {
     max-width: 100%;
 }
 @-moz-document url-prefix() {
-    .configuration_group .form_area textarea.cke_source { white-space: pre-wrap; max-width: 100%; }
+  textarea.cke_source,
+  .configuration_group .form_area textarea.cke_source { white-space: pre-wrap; max-width: 100%; }
 }
 
 input[type="datetime-local"]::-webkit-clear-button {
