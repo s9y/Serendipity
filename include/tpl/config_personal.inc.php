@@ -153,6 +153,14 @@
                                           'permission'  => 'personalConfiguration',
                                           'default'     => '',
                                           'flags'       => array('config')),
+
+                                    array('var'         => 'showMediaToolbar',
+                                          'title'       => SHOW_MEDIA_TOOLBAR,
+                                          'description' => '',
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
                             ));
 
     $res['defaults'] =
@@ -180,14 +188,6 @@
                                           'description' => '',
                                           'type'        => 'list',
                                           'default'     => array('publish' => PUBLISH, 'draft' => DRAFT),
-                                          'permission'  => 'personalConfiguration',
-                                          'flags'       => array('config')),
-
-                                    array('var'         => 'showMediaToolbar',
-                                          'title'       => SHOW_MEDIA_TOOLBAR,
-                                          'description' => '',
-                                          'type'        => 'bool',
-                                          'default'     => false,
                                           'permission'  => 'personalConfiguration',
                                           'flags'       => array('config')),
 
