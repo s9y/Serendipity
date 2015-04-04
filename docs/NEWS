@@ -1,13 +1,15 @@
-#
 
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
-   * Templatechooser will not apply theme in backend admin.
-   
+   * Restore the "Show toolbar within media selector popup?" option,
+     it was ignored before.
+
    * Fix Issue #321, negative offset for LIMIT SQL statements when
      using stable archive sorting and plugins like history.
      
+   * Templatechooser will not apply theme in backend admin.
+   
    * Use "secure" flag for (session) cookies sent over SSL, thanks to
      dayton967
      
