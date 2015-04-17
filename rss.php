@@ -245,7 +245,7 @@ if (!$metadata['template_file'] || $metadata['template_file'] == 'feed_' . $file
     die("Invalid RSS version specified or RSS-template file not found\n");
 }
 
-$self_url = 'http://' . $_SERVER['HTTP_HOST'] . serendipity_specialchars($_SERVER['REQUEST_URI']);
+$self_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . serendipity_specialchars($_SERVER['REQUEST_URI']);
 if (!is_array($entries)) {
     $entries = array();
 }
