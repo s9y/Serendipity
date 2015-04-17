@@ -58,6 +58,8 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Use https URLs for Atom feed, if called through HTTPS (hboeck)
+   
    * Restore the "Show toolbar within media selector popup?" option,
      it was ignored before.
 
