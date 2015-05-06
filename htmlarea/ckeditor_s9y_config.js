@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.11, last modified 2014-12-19 by Ian
+ *               ckeditor_s9y_config.js, v. 1.12, last modified 2015-05-06 by Ian
  */
 
 /**
@@ -60,11 +60,12 @@ CKEDITOR.editorConfig = function( config ) {
         Set placeholder tag cases - elements [attributes]{styles}(classes) to protect ACF removements.
           - Allowed <mediainsert>, <gallery>, <media> tags (imageselectorplus galleries) - which tells ACF to not touch the code!
           - Allowed <div> is a need for Media Library inserts - which tells ACF to not touch the code!
+          - Allowed <span> to make life a bit easier!
           - Reset <img[height,width]> Media Library image inserts to avoid ACF OFF removement of height attributes. (Dependency in ckeditor_s9y_plugin.js)
           - Allow <pre[*attributes](*classes)> for custom attributes/classes in code blocks
     */
     // protect
-    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);img[height,width];pre[*](*);';
+    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);';
 
 
     /** SECTION: Other behaviour config rules
