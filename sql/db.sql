@@ -32,7 +32,8 @@ create table {PREFIX}groups (
 create table {PREFIX}groupconfig (
   id int(10) {UNSIGNED} not null default '0',
   property varchar(128) default null,
-  value varchar(32) default null
+  value varchar(32) default null,
+  {PRIMARY} (id, property)
 ) {UTF_8};
 
 CREATE INDEX groupid_idx ON {PREFIX}groupconfig (id);
@@ -171,7 +172,8 @@ CREATE INDEX referrers_idx ON {PREFIX}referrers (entry_id,day);
 create table {PREFIX}config (
   name varchar(255) not null,
   value text not null,
-  authorid int(11) default '0'
+  authorid int(11) default '0',
+  {PRIMARY} (name, authorid)
 ) {UTF_8};
 
 CREATE INDEX configauthorid_idx ON {PREFIX}config (authorid);
@@ -179,7 +181,8 @@ CREATE INDEX configauthorid_idx ON {PREFIX}config (authorid);
 create table {PREFIX}options (
   name varchar(255) not null,
   value text not null,
-  okey varchar(64) not null default ''
+  okey varchar(64) not null default '',
+  {PRIMARY} (name, okey)
 ) {UTF_8};
 
 CREATE INDEX options_idx ON {PREFIX}options (okey);
