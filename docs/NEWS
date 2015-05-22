@@ -3,6 +3,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+   * Added <IfModule mod_rewrite.c> checks to .htaccess for URL rewriting
+   
    * Add support for cronjob plugin to spartacus, to notify
      blog owner about possible updates (via e-mail)
      
