@@ -450,6 +450,10 @@ if (!isset($serendipity['use_autosave'])) {
     $serendipity['use_autosave'] = true;
 }
 
+if (!isset($serendipity['use_internal_cache'])) {
+    $serendipity['use_internal_cache'] = false;
+}
+
 // You can set parameters which ImageMagick should use to generate the thumbnails
 // by default, thumbs will get a little more brightness and saturation (modulate)
 // an unsharp-mask (unsharp)

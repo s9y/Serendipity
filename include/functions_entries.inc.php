@@ -206,6 +206,18 @@ function &serendipity_fetchEntryCategories($entryid) {
  */
 function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
+
+    if ($serendipity['use_internal_cache']) {
+        $cache = serendipity_setupCache();
+
+        $args = func_get_args();
+        $args = array_values($args);
+        $key = md5(serialize($args));
+
+        if (($entries = $cache->get($key, "fetchEntries")) !== false) {
+            return unserialize($entries);
+        }
+    }
     
     $cond = array();
     $cond['orderby'] = $orderby;
@@ -446,6 +458,13 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         // this is now limited to just one query per fetched articles group
 
         serendipity_fetchEntryData($ret);
+    }
+
+    if ($serendipity['use_internal_cache']) {
+        $args = func_get_args();
+        $args = array_values($args);
+        $key = md5(serialize($args));
+        $cache->save(serialize($ret), $key, "fetchEntries");
     }
 
     return $ret;
@@ -1234,6 +1253,16 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $serendipity['smarty']->assignByRef('entries', $dategroup);
+
+    if ($serendipity['use_internal_cache']) {
+        $cache = serendipity_setupCache();
+
+        $args = func_get_args();
+        $args = array_values($args);
+        $key = md5(serialize($args));
+        $cache->save(serialize($dategroup), $key, "printEntries");
+    }
+    
     unset($entries, $dategroup);
 
     $serendipity['smarty']->assign(array(
@@ -1247,6 +1276,82 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
 } // end function serendipity_printEntries
+
+function serendipity_printEntriesCached($entries, $extended = 0, $preview = false, $smarty_block = 'ENTRIES', $smarty_fetch = true, $use_hooks = true, $use_footer = true, $use_grouped_array = false) {
+    global $serendipity;
+
+    $cache = serendipity_setupCache();
+
+    $args = func_get_args();
+    $args = array_values($args);
+    $key = md5(serialize($args));
+
+    if (($dategroup = $cache->get($key, "printEntries")) !== false) {
+        $dategroup = unserialize($dategroup);
+        $serendipity['smarty']->assign('entries', $dategroup);
+
+        # now let plugins do their magic and hope they don't do it twice
+        foreach($dategroup as $dategroup_idx => $properties) {
+            foreach($properties['entries'] as $x => $_entry) {
+                $addData = array('from' => 'functions_entries:printEntries');
+                if ($entry['is_cached']) {
+                    $addData['no_scramble'] = true;
+                }
+                serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
+
+                $entry['display_dat'] = '';
+                serendipity_plugin_api::hook_event('frontend_display:html:per_entry', $entry);
+                $entry['plugin_display_dat'] =& $entry['display_dat'];
+            }
+        }
+
+       
+        if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
+            serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
+        } elseif ($smarty_fetch == true) {
+            serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
+        }
+        return true;
+    } else {
+        return false;
+    }   
+}
+
+function serendipity_cleanCache() {
+    include_once 'Cache/Lite.php';
+
+    if (!class_exists('Cache_Lite')) {
+        return false;
+    }
+
+    $options = array(
+        'cacheDir' => $serendipity['serendipityPath'] . 'templates_c/',
+        'lifeTime' => 3600,
+        'hashedDirectoryLevel' => 2
+    );
+    $cache = new Cache_Lite($options);
+    $successFetch = $cache->clean("fetchEntries");
+    $successPrint = $cache->clean("printEntries");
+    return $successFetch && $successPrint;
+    
+}
+
+function serendipity_setupCache() {
+    include_once 'Cache/Lite.php';
+
+    if (!class_exists('Cache_Lite')) {
+        return false;
+    }
+
+    $options = array(
+        'cacheDir' => $serendipity['serendipityPath'] . 'templates_c/',
+        'lifeTime' => 3600,
+        'hashedDirectoryLevel' => 2
+    );
+
+    return new Cache_Lite($options);
+}
+
 
 /**
  * Deprecated: Delete some garbage when an entry was deleted, especially static pages
@@ -1462,6 +1567,7 @@ function serendipity_updertEntry($entry) {
         serendipity_handle_references($entry['id'], $serendipity['blogTitle'], $drafted_entry['title'], $drafted_entry['body'] . $drafted_entry['extended'], false);
     }
 
+    serendipity_cleanCache();
     return (int)$entry['id'];
 }
 
@@ -1496,6 +1602,7 @@ function serendipity_deleteEntry($id) {
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}comments WHERE entry_id=$id");
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}references WHERE entry_id='$id' AND type = ''");
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}permalinks WHERE entry_id='$id'");
+    serendipity_cleanCache();
 }
 
 /**
@@ -1594,6 +1701,7 @@ function serendipity_updateEntryCategories($postid, $categories) {
         $query = "INSERT INTO $serendipity[dbPrefix]entrycat (categoryid, entryid) VALUES (" . (int)$cat . ", " . (int)$postid . ")";
         serendipity_db_query($query);
     }
+    serendipity_cleanCache();
 }
 
 /**
