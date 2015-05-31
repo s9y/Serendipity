@@ -3,6 +3,10 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+   * WIP: Added an internal cache to speedup s9y's site generation. Can
+          be activated by setting use_internal_cache to true in
+          serendipity_config.inc.php. Test feedback needed.
+
    * Added <IfModule mod_rewrite.c> checks to .htaccess for URL rewriting
    
    * Add support for cronjob plugin to spartacus, to notify
