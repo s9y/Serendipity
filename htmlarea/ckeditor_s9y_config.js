@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.12, last modified 2015-05-06 by Ian
+ *               ckeditor_s9y_config.js, v. 1.13, last modified 2015-06-01 by Ian
  */
 
 /**
@@ -41,7 +41,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.protectedSource.push( /<(mediainsert)[^>]*>[\s\S]*?<\/mediainsert>/img );
     // allow a Smarty like {} tag syntax without inner whitespace, which would be some other code part.
     config.protectedSource.push( /\{[a-zA-Z\$].*?\}/gi );
-    // allow WP like [[mytag]] [[{$mytag}]] widget tags for an imaginable markup replacements S9y plugin
+    // allow [[mytag]] [[{$mytag}]] [s9y-include-entry:XXX:YYY] widget tags for a markup replacement by S9y plugins (eg by third example with the staticblock serendipity_event_includeentry plugin)
     config.protectedSource.push(/\[\[([^\[\]])+\]\]/g);
     /**
      CKEDITOR.protectedSource patterns used regex Escape sequences
