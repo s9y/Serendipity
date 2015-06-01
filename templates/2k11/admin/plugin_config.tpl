@@ -60,12 +60,15 @@
     {serendipity_hookPlugin hook="backend_wysiwyg_nuggets" eventData=$ev hookAll=true}
 
     {if $ev['skip_nuggets'] === false && $init !== false}
+
     <script>
     function Spawnnugget() {
         /* init plugin nuggets when not using the default wysiwyg-editor */
         {foreach $ev['nuggets'] AS $htmlnuggetid}
+
         if (window.Spawnnuggets) Spawnnuggets('{$htmlnuggetid}');
         {/foreach}
+
     }
     </script>
     {/if}
