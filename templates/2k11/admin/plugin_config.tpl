@@ -62,11 +62,12 @@
     {if $ev['skip_nuggets'] === false && $init !== false}
     <script>
     function Spawnnugget() {
-    /* init plugin nuggets when not using the default wysiwyg-editor */
+        /* init plugin nuggets when not using the default wysiwyg-editor */
         {foreach $ev['nuggets'] AS $htmlnuggetid}
-        Spawnnuggets('{$htmlnuggetid}');
+        if (window.Spawnnuggets) Spawnnuggets('{$htmlnuggetid}');
         {/foreach}
     }
     </script>
     {/if}
+
 {/if}
