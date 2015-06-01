@@ -416,7 +416,8 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                     if (!function_exists('serendipity_emit_htmlarea_code')) {
                         @include_once dirname(__FILE__) . '/functions_entries_admin.inc.php';
                     }
-                    serendipity_emit_htmlarea_code("nuggets{$elcount}", 'nuggets', true);
+                    // use SpawnMulti false per default (for multi nugget textareas, eg contactform plugin < v.1.17) - but where do we use jsname though?
+                    serendipity_emit_htmlarea_code("nuggets{$elcount}","nuggets{$elcount}");
                 }
                 $assign_plugin_config($data);
 
