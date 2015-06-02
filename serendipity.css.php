@@ -39,7 +39,7 @@ switch($css_mode) {
 
 function serendipity_printStylesheet($file, $dir = '') {
     global $serendipity;
-    return "/* $dir  */\n" . str_replace(
+    return "\n\n/* auto include $dir */\n\n" . str_replace(
              array(
                '{TEMPLATE_PATH}',
                '{LANG_DIRECTION}'
@@ -86,8 +86,8 @@ $out .= serendipity_printStylesheet(
 );
 
 $out .= serendipity_printStylesheet(
-         serendipity_getTemplateFile($css_userfile, 'serendipityPath'),
-         serendipity_getTemplateFile($css_userfile, '')
+         serendipity_getTemplateFile($css_userfile, 'serendipityPath', true),
+         serendipity_getTemplateFile($css_userfile, '', true)
 );
 
 serendipity_plugin_api::hook_event($css_hook, $out);
