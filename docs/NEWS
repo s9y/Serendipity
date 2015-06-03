@@ -2,6 +2,19 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * Fix auto include of a User theme /admin/user.css backend file.
+     PLEASE NOTE:
+     2.0.1 brought in an automatted include of a themes "user.css" file.
+     If you don't want to use such file any more (and you have one), you
+     will have to delete or rename it by hand!
+     Also please note, that user stylesheet selectors like
+        .selector { background-image: url(img/example.jpg); }
+     now need to use the {TEMPLATE_PATH} like
+        .selector { background-image: url({TEMPLATE_PATH}img/example.jpg); }
+     since the content will be appended (sig!) to the streamed serendipity
+     dynamic stylesheet. (Issue #280, down below, talks about the user
+     styles "being prepended on top").
+
    * Use https URLs for Atom feed, if called through HTTPS (hboeck)
    
    * Restore the "Show toolbar within media selector popup?" option,
