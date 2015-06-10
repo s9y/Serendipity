@@ -230,7 +230,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
     }
 
     function getOnclick($url) {
-        return "onclick=\"document.subtomeBtn=document.querySelector('.serendipity_subtome');document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
+        return "onclick=\"document.subtomeBtn=this;document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
     }
 
 }
