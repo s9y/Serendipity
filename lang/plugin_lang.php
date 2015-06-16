@@ -81,3 +81,4 @@ foreach($const['missing'] AS $file => $constants) {
     echo "---------------------------\n";
 }
 
+@define('SYNDICATION_PLUGIN_XML_DESC', 'Set to "none" if you only want to show a text link.');
