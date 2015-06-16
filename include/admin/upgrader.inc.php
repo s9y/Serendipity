@@ -254,6 +254,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'title'     => 'Removal of obsolete and dead directories',
                      'arguments' => array($dead_dirs_rest),
                      'desc'      => 'The following old dead directories will additionally be removed from your system.<br><pre>' . implode(', ', $dead_dirs_rest) . '</pre>'),
+                     
+               array('version'   => '2.0.2',
+                     'function'  => 'serendipity_upgrader_rewriteFeedIcon',
+                     'title'     => 'Rewrite path of big feedicon',
+                     'desc'      => 'Rewrite path of the big feedicon to not include the template path, since that path is not automatically detected'),
 
 
 );

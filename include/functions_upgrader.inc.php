@@ -402,6 +402,17 @@ function serendipity_upgrader_rename_plugins() {
 
 }
 
+function serendipity_upgrader_rewriteFeedIcon() {
+    global $serendipity;
+
+    $path = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%serendipity_plugin_syndication%big_img'", true);
+    if (is_array($path)) {
+        $path = $path[0];
+    }
+    $path = preg_replace('#' . $serendipity['serendipityHTTPPath'] . 'templates/[^/]*/#', '', $path);
+    serendipity_db_query("UPDATE {$serendipity['dbPrefix']}config SET value = '" . serendipity_db_escape_string($path) . "' WHERE name LIKE '%serendipity_plugin_syndication%big_img'");
+}
+
 function serendipity_upgrader_move_syndication_config() {
     global $serendipity;
     $optionsToPort = array( 'bannerURL'             => 'feedBannerURL',
