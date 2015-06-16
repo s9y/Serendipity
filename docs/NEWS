@@ -2,6 +2,9 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+   * It is now possible to switch to a theme's admin theme if it has
+     been selected as a frontend theme first
+
    * Fix auto include of a User theme /admin/user.css backend file.
      PLEASE NOTE:
      2.0.1 brought in an automatted include of a themes "user.css" file.
