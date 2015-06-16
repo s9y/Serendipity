@@ -142,3 +142,4 @@ foreach($const['missing'] AS $file => $constants) {
 @define('DASHBOARD_ENTRIES', 'In Progress');
 @define('JS_FAILURE', 'The Serendipity JavaScript-library could not be loaded. This can happen due to PHP or Plugin errors, or even a malformed browser cache. To check the exact error please open <a href="%1$s">%1$s</a> manually in your browser and check for error messages.');
 
+@define('SYNDICATION_PLUGIN_XML_DESC', 'Set to "none" if you only want to show a text link.');

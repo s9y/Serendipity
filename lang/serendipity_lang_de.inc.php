@@ -1088,9 +1088,17 @@
 @define('CATEGORY_PLUGIN_SHOWALL', 'Falls aktiviert wird Besuchern ein Link angezeigt, das Blog ohne Einschränkung der Kategorien darzustellen.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity benötigt eine PHP-Version >= %2$s - Sie benutzen eine ältere Version (%1$s) und müssen auf eine neuere upgraden. Die meisten Provider gestatten den Wechsel auf neuere PHP-Versionen über einen Schalter in der Admin-Oberfläche oder eine Anweisung in der .htaccess.');
 @define('TOGGLE_VIEW', 'Darstellung der Kategorien wechseln');
-@define('PUBLISH_NOW', 'Publish this entry now (sets current time and date)');
+@define('PUBLISH_NOW', 'Diesen Eintrag jetzt veröffentlichen (setzt aktuelle Zeit)');
 @define('EDITOR_TAGS', 'Tags');
 @define('EDITOR_NO_TAGS', 'Keine Tags');
 @define('DASHBOARD_ENTRIES', 'In Vorbereitung');
+@define('INSTALL_PASSWORD2', 'Admin-Passwort (erneut)');
+@define('INSTALL_PASSWORD2_DESC', 'Passwort für den Administrator-Zugang, nochmal zur Bestätigung eingeben.');
+@define('INSTALL_PASSWORD_INVALID', 'Die eingebenen Administrator-Passwörter stimmen nicht überein.');
+@define('INSTALL_BACKENDPOPUP_GRANULAR', 'Popups in speziellen Bereichen erzwingen');
+@define('INSTALL_BACKENDPOPUP_GRANULAR_DESC', 'Wenn Popups generell deaktiviert wurden, kann an speziellen Stellen dennoch der Einsatz von Popups forciert werden, indem die Liste jener Stellen hier aufgeführt wird (kommasepariert). Die vollständige Liste ist: ');
+@define('START_UPDATE', 'Starting Update ...');
+@define('UPDATE_ALL', 'Update All');
 @define('JS_FAILURE', 'The Serendipity JavaScript-library could not be loaded. This can happen due to PHP or Plugin errors, or even a malformed browser cache. To check the exact error please open <a href="%1$s">%1$s</a> manually in your browser and check for error messages.');
-
+@define('THEMES_PREVIEW_BLOG', 'See demo on blog.s9y.org');
+@define('SYNDICATION_PLUGIN_XML_DESC', 'Set to "none" if you only want to show a text link.');
