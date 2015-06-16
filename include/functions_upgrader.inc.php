@@ -182,6 +182,8 @@ $dead_files_rest = array(
 $dead_dirs_rest = array(
     $serendipity['serendipityPath'] . 'htmlarea/plugins/ImageManage',
     $serendipity['serendipityPath'] . 'htmlarea/plugins',
+    $serendipity['serendipityPath'] . 'bundled-libs/Smarty/libs/sysplugins/smarty_config_source.php',
+    $serendipity['serendipityPath'] . 'bundled-libs/Smarty/libs/sysplugins/smarty_internal_config.php',
     $serendipity['serendipityPath'] . 'bundled-libs/YahooUI/treeview',
     $serendipity['serendipityPath'] . 'bundled-libs/YahooUI'
 );
