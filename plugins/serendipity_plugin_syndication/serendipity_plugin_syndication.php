@@ -9,17 +9,17 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.2.1');
+        $propbag->add('version',       '2.2.2');
         $propbag->add('configuration', array(
                                         'title',
-                                        'big_img',
                                         'feed_format',
-                                        'subToMe',
                                         'show_comment_feed',
-                                        'seperator',
                                         'iconURL',
                                         'feed_name',
                                         'comment_name',
+                                        'seperator',
+                                        'subToMe',
+                                        'big_img',
                                         'seperator2',
                                         'fb_id',
                                         'custom_url'
@@ -41,11 +41,11 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 break;
 
             case 'feed_format':
-                $propbag->add('type', 'radio');
-                $propbag->add('name', SYNDICATION_PLUGIN_FEEDFORMAT);
+                $propbag->add('type',        'radio');
+                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDFORMAT);
                 $propbag->add('description', SYNDICATION_PLUGIN_FEEDFORMAT_DESC);
-                $propbag->add('default', 'rss');
-                $propbag->add('radio', array(
+                $propbag->add('default',     'rss');
+                $propbag->add('radio',       array(
                     'value' => array('rss', 'atom', 'rssatom'),
                     'desc'  => array(SYNDICATION_PLUGIN_20, sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'), SYNDICATION_PLUGIN_20 .' + '. sprintf(SYNDICATION_PLUGIN_GENERIC_FEED, 'Atom 1.0'))
                 ));
@@ -74,7 +74,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
             case 'iconURL':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        XML_IMAGE_TO_DISPLAY);
-                $propbag->add('description', '');
+                $propbag->add('description', SYNDICATION_PLUGIN_XML_DESC);
                 $propbag->add('default',     'img/xml.gif');
                 break;
 
@@ -82,7 +82,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'string');
                 $propbag->add('name',        SYNDICATION_PLUGIN_FEEDICON);
                 $propbag->add('description', SYNDICATION_PLUGIN_FEEDICON_DESC);
-                $propbag->add('default',     $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png');
+                $propbag->add('default',     'img/subtome.png');
                 break;
 
             case 'feed_name':
@@ -124,14 +124,15 @@ class serendipity_plugin_syndication extends serendipity_plugin {
     {
         global $serendipity;
 
-        $title = $this->get_config('title');
-        $iconURL = $this->get_config('iconURL', 'img/xml.gif');
-        if ($iconURL != 'none') {
-            $small_icon  = serendipity_getTemplateFile($iconURL);
-        }
+        // temporary fix for serendipity_getTemplateFile() path reset between S9y v.2.0 and 2.0.2 - remove later
+        $subimg = str_replace($serendipity['serendipityHTTPPath'].'templates/2k11/', '', $this->get_config('big_img', 'empty'), $count); // check and fix correct path
+        if ($count > 0) $this->set_config('big_img', $subimg); // fix in config
+
+        $title       = $this->get_config('title');
+        $small_icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
         $custom_feed = trim($this->get_config('feed_name'));
         $custom_comm = trim($this->get_config('comment_name'));
-        $custom_img  = trim($this->get_config('big_img', $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png'));
+        $custom_img  = serendipity_getTemplateFile(trim($this->get_config('big_img', 'empty')));
         $subtome     = serendipity_db_bool($this->get_config('subToMe', true));
         $fbid        = $this->get_config('fb_id');
         $custom_url  = serendipity_db_bool($this->get_config('custom_url', false));
@@ -149,12 +150,12 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
         $icon = $small_icon;
         if (!empty($custom_img) && $custom_img != 'default' && $custom_img != 'none' && $custom_img != 'empty') {
-            $icon = $custom_img;
+            if ($subtome) $icon = $custom_img;
             if ($fbid != "" && $custom_img == 'feedburner') {
                 $icon = "http://feeds.feedburner.com/~fc/$fbid?bg=99CCFF&amp;fg=444444&amp;anim=0";
             }
             if ($fbid == "" && $custom_img == 'feedburner') {
-                $icon = $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png';
+                $icon = serendipity_getTemplateFile('img/subtome.png');
             }
         }
 
@@ -185,7 +186,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
         $onclick = "";
         if ($subtome) {
-            $onclick=$this->getOnclick($mainFeed);
+            $onclick = $this->getOnclick($mainFeed);
         }
 
         echo "\n".'<ul id="serendipity_syndication_list" class="plainList">';
@@ -206,13 +207,24 @@ class serendipity_plugin_syndication extends serendipity_plugin {
     }
 
     function generateFeedButton($feed, $label, $onclick, $icon) {
-        $link = 'href="'.$feed.'" '. $onclick;
-        $output = '<li>';
-        if ($icon) {
-            $output .= '<a class="serendipity_subtome serendipity_xml_icon" ' . $link . '><img src="' . $icon . '" alt="XML" style="border: 0px" /></a>'."\n";
+        $link   = 'href="'.$feed.'" '. $onclick;
+        $path    = $icon ? $icon : serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
+        $output = "<li>\n";
+        if (serendipity_db_bool($this->get_config('subToMe', true))) {
+            if ($path != 'none' && !empty($path)) {
+                $output .= '<a class="serendipity_subtome" ' . $link . '><img src="' . $path . '" alt="XML" style="border: 0px" /></a>'."\n";
+            }
+        } else {
+            if ($path != 'none' && !empty($path)) {
+                $output .= '<a class="serendipity_xml_icon" ' . $link . '><img src="' . $path . '" alt="XML" style="border: 0px" /></a>'."\n";
+            }
         }
-        if (! empty($label)) {
-            $output .= " <a $link>$label</a>\n";
+        if (!empty($label)) {
+             if ($path == 'none') {
+                 $output .= '<a class="serendipity_subtome" ' . $link . '>' . $label . '</a>'."\n";
+             } else {
+                 $output .= '<a class="serendipity_subtome serendipity_xml_plain" ' . $link . '>' . $label . '</a>'."\n";
+             }
         }
         return $output .= "</li>\n";
     }
