@@ -1,21 +1,23 @@
 (The latest changes are documented in the NEWS-file)
 
 Version 1.6.2 (May 16th, 2012)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix SQL injection for comment.php used in read-context.
-      (Thanks to High-Tech Bridge SA Security Release Lab, Advisory HTB23092)
+      (Thanks to High-Tech Bridge SA Security Release Lab, Advisory
+      HTB23092)
+
 
 Version 1.6.1 (May 8th, 2012)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Improved escaping of backend plugin management for DB query
       and media selector output (Stefan Schurtz)
 
-    * Updated spamblock plugin to 1.78 & 1.79 (backport)
-      changed wordfilter to function to check with 'verify_once'
-      to reject wordfilter signed spam comments before -
-          added in 1.79 killswitch check and serendipity_db_bool()
+    * Updated spamblock plugin to 1.78 & 1.79 (backport) changed
+      wordfilter to function to check with 'verify_once' to reject
+      wordfilter signed spam comments before - added in 1.79 killswitch
+      check and serendipity_db_bool()
 
     * fixed draft & future entries preview link in backend (backport)
 
@@ -29,11 +31,12 @@ Version 1.6.1 (May 8th, 2012)
     * Fixed serendipity_fetchComments producing wrong SQL code. Please
       check your code if you did workarounds already and remove them.
 
-Version 1.6 (October 27th 2011)
-------------------------------------------------------------------------
 
-    * Fix XSS issue in mediadatabase and karma
-      filtering, thanks to Stefan Schurtz
+Version 1.6 (October 27th 2011)
+-----------------------------------------------------------------------
+
+    * Fix XSS issue in mediadatabase and karma filtering, thanks to
+      Stefan Schurtz
 
     * Fix problem with autosave plugin used in conjunction with
       entryproperties (chrisbra)
@@ -41,7 +44,8 @@ Version 1.6 (October 27th 2011)
     * Removed browsercompatibilitty plugin because it's outdated and
       IE6 shall be dead.
 
-    * Fixed Spartauc SF.Net download location (Thanks to christian_boltz)
+    * Fixed Spartauc SF.Net download location (Thanks to
+      christian_boltz)
 
     * Added new event hook 'backend_loginfail' to track failed logins
       (serendipity_event_externalauth can make use of it for fail2ban)
@@ -61,8 +65,8 @@ Version 1.6 (October 27th 2011)
     * Karma plugin: Added option to only track votings when users are
       logged in.
 
-    * Bugfix: Adjust /admin permalink detection so that it does not listen
-      on /adminbook for example. Thanks to Lux!
+    * Bugfix: Adjust /admin permalink detection so that it does not
+      listen on /adminbook for example. Thanks to Lux!
 
     * serendipity_event_mailer now also allows to use commas instead of
       spaces to seperate multiple mails. Use distinct email adresses
@@ -84,9 +88,9 @@ Version 1.6 (October 27th 2011)
       (garvinhicking)
 
     * Added new parameter "empty" to {serendipity_showPlugin}. When
-      no callable plugins were found, the string in the "empty" parameter
-      will be shown instead, allowing users to get notified of a missing
-      plugin:
+      no callable plugins were found, the string in the "empty"
+      parameter will be shown instead, allowing users to get notified
+      of a missing plugin:
 
        {serendipity_showPlugin
            class="serendipity_plugin_twitter"
@@ -127,7 +131,6 @@ Version 1.6 (October 27th 2011)
 
       More keys apart from "navigation" might get supported in the future.
 
-
     * Implemented suggestion of removing boilerplate code in plugin API:
       Change hack protection, introduce unified language loading, see
       http://board.s9y.org/viewtopic.php?f=11&t=16921
@@ -162,11 +165,12 @@ Version 1.6 (October 27th 2011)
       auto-split after 75 characters.
       (Ref: http://board.s9y.org/viewtopic.php?f=3&t=16314)
 
-    * To support custom PHP sessions, s9y will only issue session_start,
-      if no session exists yet (garvinhicking)
+    * To support custom PHP sessions, s9y will only issue
+      session_start, if no session exists yet (garvinhicking)
 
-    * Use "Longtext" instead of "text" for new installations on blog entry
-      body and extended body inside database tables. (garvinhicking)
+    * Use "Longtext" instead of "text" for new installations on blog
+      entry body and extended body inside database tables.
+      (garvinhicking)
 
     * Added ability to mark authorgroups as "hidden", so that members
       of such groups are excluded from common author listings.
@@ -183,16 +187,18 @@ Version 1.6 (October 27th 2011)
     * Added event hook backend_sendcomment for sending comments and
       being able to chang via plugin API (onli)
 
+
 Version 1.5.5 (December 21st, 2010)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Due to security issues in the bundled Xinha WYSIWYG,
       disabled the PHP-based plugins (which are not utilized by
       serendipity unless manually enabled), until a proper security
       fix is available
 
+
 Version 1.5.4 (August 26th, 2010)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix XSS in backend, thanks to High-Tech Bridge SA #HTB22595
 
@@ -211,26 +217,30 @@ Version 1.5.4 (August 26th, 2010)
       plugins like pubsubhubbub, so that plugins can embed data to the
       main XML element (onli)
 
+
 Version 1.5.3 (May 10th, 2010)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Added workaround for dynamic configuration of Xinha plugins
       ExtendedFilemanager, ImageManager,
       InsertSnippet and Linker plugins to avoid remote code inclusion.
       (Stefan Esser)
 
+
 Version 1.5.2 (January 25th, 2010)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed SQL upgrade path for SQLite.
 
+
 Version 1.5.1 (December 21st, 2009)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix bug with not showing "html" type configuration items.
 
+
 Version 1.5 (December 21st, 2009)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Show backend comment pagination in footer and header
 
@@ -419,8 +429,9 @@ Version 1.5 (December 21st, 2009)
     * Change antispam plugin to also support Typepad as an alternative
       to Akismet. (judebert)
 
-Version 1.4.2 ()
-------------------------------------------------------------------------
+
+Version 1.4.2 (June?, 2009)
+-----------------------------------------------------------------------
 
     * Changed spamblock plugin for text filtering to ignore trailing
       or prepending spaces in blacklists (garvinhicking)
@@ -431,8 +442,9 @@ Version 1.4.2 ()
     * Fix bad link in Remote RSS sidebar plugin (#2521122)
       (garvinhicking)
 
+
 Version 1.4.1 (January 16th, 2009)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix missing index key creation for statistics tables in the
       statistics plugin (isotopp)
@@ -445,8 +457,9 @@ Version 1.4.1 (January 16th, 2009)
     * Remove warning message when checking for plugin documentation files
       on open_basedir servers (garvinhicking)
 
-Version 1.4 (December 29th 2008)
-------------------------------------------------------------------------
+
+Version 1.4 (December 29th, 2008)
+-----------------------------------------------------------------------
 
     * Added new event hooks for future support of WYSIWYG button
       modifications (judebert) [1.4-beta2]
@@ -640,25 +653,27 @@ Version 1.4 (December 29th 2008)
       extensive joins to save performance in cases where no ACLs
       need to be evaluated. (garvinhicking)
 
-Version 1.3.1 ()
-------------------------------------------------------------------------
+
+Version 1.3.1 (April 22nd, 2008)
+-----------------------------------------------------------------------
 
     * Add XSS security checks for installer, even though very
-      hypothetical application :) (Hanno Bï¿½ck)
+      hypothetical application :) (Hanno Boeck)
 
     * Add {serendipity_getImageSize} smarty function (judebert)
 
     * Add escaping to "Top Referrers" plugin and honor local configuration
-      of "Show links" option, thanks to Hanno Bï¿½ck
+      of "Show links" option, thanks to Hanno Boeck
 
     * Fix some PostgreSQL implicit casts for SQL queries (changed
-      LIKE to =). (Devrim Gï¿½ndï¿½z)
+      LIKE to =). (Devrim Gündüz)
+
 
 Version 1.3 (March 18th, 2008)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix possible XSS injection for published trackbacks, thanks to
-      Peter Hï¿½we!
+      Peter Höwe!
 
     * Added "Google Reader" option to syndication plugin, by Adam
       Charnock
@@ -674,8 +689,9 @@ Version 1.3 (March 18th, 2008)
     * Allow to submit comments to future entries, when showing
       future entries is enabled (garvinhicking)
 
+
 Version 1.3-beta1 (February 25th, 2008)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix sidebar plugin for the author's list to not include counting
       drafted articles (garvinhicking)
@@ -799,8 +815,9 @@ Version 1.3-beta1 (February 25th, 2008)
     * Full pingback support, fallback trackback method for WordPress
       blogs. (brockhaus)
 
+
 Version 1.2.1 (December 8th, 2007)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Updated Textile library to 2.0, by Lars Strojny
 
@@ -833,8 +850,9 @@ Version 1.2.1 (December 8th, 2007)
     * Bulletproof template can now include custom user stylesheets
       (*_style.css) in the dropdown of a colorset. (garvinhicking)
 
+
 Version 1.2 (August 26th, 2007)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Added bulletproof template by http://s9y-bulletproof.com
 
@@ -1021,21 +1039,24 @@ Version 1.2 (August 26th, 2007)
     * Allow to call permalinks that end with a "/" the same as if not
       ending with a "/" (garvinhicking)
 
+
 Version 1.1.4 (August 8th, 2007)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix being able to set entryproperties values via POST-Request (and
       being able to bypass password-protection of an entry, when the
       Entryproperties plugin is installed). Thanks to Erich Schubert
 
+
 Version 1.1.3 (June 17th, 2007)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix SQL injection through 'commentMode' variable. Thanks to
       Dr. Neal Krawetz
 
     * Fix missing %username% permalink pattern in single entry view.
       Patch by cress_cc
+
 
 Version 1.1.2 (March 1st, 2007)
 -----------------------------------------------------------------------
@@ -1048,8 +1069,9 @@ Version 1.1.2 (March 1st, 2007)
     * Better checks to see if the local PEAR inclusion is required
       (garvinhicking)
 
+
 Version 1.1.1 (February 22nd, 2007)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Patch plugin permissionship management to properly indicate
       forbidden plugins/hooks, even if the admin user is not contained
@@ -1074,8 +1096,9 @@ Version 1.1.1 (February 22nd, 2007)
     * Fix a bug in sending the right login session cookies on Windows IIS
       servers. Major thanks to Shadowin from the forums!
 
+
 Version 1.1 (December 28th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix better installer warning messages when directories have no
       write privileges and already exist. Thanks to wagwag!
@@ -1115,8 +1138,9 @@ Version 1.1 (December 28th, 2006)
       entry admin panel, fix admin entry pagination to not show
       next pages, if that next page were empty. (garvinhicking)
 
+
 Version 1.1-beta5 (October 18th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Added new plugin hooks:
         backend_templates_configuration_top
@@ -1158,8 +1182,9 @@ Version 1.1-beta5 (October 18th, 2006)
     * Group management now allows to disallow certain plugins or even
       specific plugin hooks per usergroup (garvinhicking)
 
+
 Version 1.1-beta3 ()
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Change permalinks to allow "%" in URLS. Fix templatedropdown
       plugin to remove double "//". Fix bad htmlspecialchars of the
@@ -1183,8 +1208,9 @@ Version 1.1-beta3 ()
       This feature is most importantly meant for RSS-feeds, to make
       RSS readers able to submit login credentials. (garvinhicking)
 
+
 Version 1.1-beta1 (August 14th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix multiple loading of $serendipity['smarty'] theme options when
       calling serendipity_smarty_init() more than once. Many thanks to
@@ -1240,7 +1266,7 @@ Version 1.1-beta1 (August 14th, 2006)
     * Added arabic (sa) language by Way
 
     * Add patch to allow entryproperties plugin to define passwords for
-      specific entries (Falk Dï¿½ring)
+      specific entries (Falk Döring)
 
     * Made smarty function "serendipity_printComments" accept to new
       parameters: "order" (ASC/DESC) and "limit" (garvinhicking)
@@ -1253,7 +1279,7 @@ Version 1.1-beta1 (August 14th, 2006)
       (thanks to deminy!)
 
     * Replaced core smarty assign() calls to assign_by_ref() where
-      appropriate. (Falk Dï¿½ring, garvinhicking)
+      appropriate. (Falk Döring, garvinhicking)
       TODO: This might introduce oddities! Check thoroughly.
 
     * Fixed not showing entries in the quicksearch that have the
@@ -1288,8 +1314,9 @@ Version 1.1-beta1 (August 14th, 2006)
     * Move the DB charset option to serendipity_config_local.inc.php to
       issue propper DB connections instantly. (garvinhicking)
 
+
 Version 1.1-alpha6()
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Use possibly existing local PEAR by default. Patch by Davey
       (garvinhicking)
@@ -1306,8 +1333,9 @@ Version 1.1-alpha6()
     * Fix bug #1494653: Non-Unique index constraint for 'exits' table.
       Thanks to Markus Brueckner! (garvinhicking)
 
+
 Version 1.1-alpha5()
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Implemented Drag and Drop based plugin configuration panel for
      re-ordering plugin layout. Uses JavaScript - works like old
@@ -1323,7 +1351,7 @@ Version 1.1-alpha5()
 
    * Added "plugin_api_extension" class, which contains some helper
      methods for future use, like re-ordering DB items or checking
-     valid emails. (Falk Dï¿½ring)
+     valid emails. (Falk Döring)
 
    * Fix multiple occurences of the string "--" in the entry title to
      not mess up HTML display because of weird Firefox interpretation
@@ -1427,8 +1455,9 @@ Version 1.1-alpha5()
    * Removed config option "XHTML11 compliance" and enabled by default
      now (garvinhicking)
 
+
 Version 1.0.4 (December 1st, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fix local file inclusion bug on systems with two conditions:
      register_globals=on AND missing .htaccess for restricting access to
@@ -1437,8 +1466,9 @@ Version 1.0.4 (December 1st, 2006)
    * Fixed problem in trackbacks using a formatted link (like through
      trackexits plugin) to trackback to instead of the real one
 
+
 Version 1.0.3 (November 7th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fix PHP 5.2.0 compatibility issue. (garvinhicking)
 
@@ -1474,14 +1504,16 @@ Version 1.0.3 (November 7th, 2006)
      - Added $serendipity['expose_s9y'] variable to optionall prevent s9y
        from emitting any s9y-specific HTTP headers (garvinhicking)
 
+
 Version 1.0.2 (October 18th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fix a security issue with XSS on the admin backend for registered
      authors. Many thanks to Stefan Esser! (garvinhicking)
 
+
 Version 1.0.1 (August 14th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fix problem on newer Firefox versions, where insertion of images
      in the WYSIWYG editor did not work. It might be necessary to
@@ -1497,8 +1529,9 @@ Version 1.0.1 (August 14th, 2006)
 
    * Fixed icelandic language bug preventing upgrade (garvinhicking)
 
+
 Version 1.0 (June 15th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Insert logic for saving an entry that prevents the iframe for
      trackbacks/xml-rpc pings to save an entry multiple times upon
@@ -1553,7 +1586,7 @@ Version 1.0 (June 15th, 2006)
 
 
 Version 1.0-beta2 (March 13th, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fixed chief-editor not being able to create editors (garvinhicking)
 
@@ -1649,12 +1682,13 @@ Version 1.0-beta2 (March 13th, 2006)
 
    * Updated french translation by Sebastian Mordziol
 
-   * Updated icelandic translation by ï¿½rn Arnarson
+   * Updated icelandic translation by Örn Arnarson
 
    * Updated chinese plugin translation, by Demin Yin
 
+
 Version 1.0-beta1 (January 23rd, 2006)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Apply changes to shared installation directory detection so that
      it also works with Apache's mod_userdir (elf2000)
@@ -1761,8 +1795,9 @@ Version 1.0-beta1 (January 23rd, 2006)
      template author also made a stylesheet for the admin interface
      when selecting a theme (flotsam)
 
+
 Version 0.9.2 ()
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Fix server locale order to always first use the charset locale
      instead of a generic locale. Fixes bug #1384978 (garvinhicking)
@@ -1800,8 +1835,9 @@ Version 0.9.2 ()
     * Fix bug #1371630: Write permissions to category are stored with
       input data of the 'Read permissions' author listing.
 
+
 Version 0.9.1 (November 23rd, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix renaming authors and categories to also properly update permalinks
       that have no %id% column (garvinhicking)
@@ -1841,7 +1877,7 @@ Version 0.9.1 (November 23rd, 2005)
     * Fix showing preview image of hotlinked images. Thanks to Thomas
       and RobA from the forums! (garvinhicking)
 
-    * Make Onyx RSS parser interpret HTTP redirecty. (Kristian Kï¿½hntopp)
+    * Make Onyx RSS parser interpret HTTP redirecty. (Kristian Köhntopp)
 
     * Added blogger.com importer by Jawish Hameed
 
@@ -1853,8 +1889,9 @@ Version 0.9.1 (November 23rd, 2005)
     * Set the correct reply-to name when sending comment mails, thanks
       to RobA from the forums (garvinhicking)
 
+
 Version 0.9 (October 28th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Spamblock plugin can now check domains against the blogg.de
       blacklist (http://spam.blogg.de/blacklist.txt). Deactivated by
@@ -1877,8 +1914,9 @@ Version 0.9 (October 28th, 2005)
 
     * Show installed plugin versions in plugin overview (garvinhicking)
 
+
 Version 0.9-beta3 (October 21st, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Syndication plugin: Do not show E-Mail adress in RSS feed by default
       (garvinhicking)
@@ -1901,8 +1939,9 @@ Version 0.9-beta3 (October 21st, 2005)
     * Fix problem with b2evo importer when db was not in the same db
       as serendipity. Thanks to Judebert from the forums! (garvinhicking)
 
+
 Version 0.9-beta2 (October 13th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix "easy installation" leading to an error with language charsets.
       Thanks to Heddesheimer from the forums for spotting this!
@@ -1944,8 +1983,9 @@ Version 0.9-beta2 (October 13th, 2005)
       username. Also fix printing category info when no category was
       assigned. Thanks to Manuel Charisius! (garvinhicking)
 
+
 Version 0.9-beta1 (September 29th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Change Onyx RSS parser and xml_parser_* functions to already specify
       the source charset, so that PHP functions can do the recoding on
@@ -2115,7 +2155,7 @@ Version 0.9-beta1 (September 29th, 2005)
     * Localized the string "Reply" which occured inside some templates.
       (s/Reply/{$CONST.REPLY}/) (garvinhicking)
 
-    * Added swedish translation by Torbjï¿½rn Hedberg, Added european
+    * Added swedish translation by Torbjörn Hedberg, Added european
       portugues translation by Joao Palhoto Matos, Added hungarian
       translation by Posz Marton
 
@@ -2172,8 +2212,9 @@ Version 0.9-beta1 (September 29th, 2005)
     * "Comments" Sidebar plugin can now have a custom title
       (garvinhicking)
 
+
 Version 0.8.5 (September 29th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * More Security: When changing the password in your personal preferences,
       you need to insert the old password. Secure backend forms with extra
@@ -2207,8 +2248,9 @@ Version 0.8.5 (September 29th, 2005)
     * Fix cosmetic warning message about missing S9Y_PEAR_PATH when
       installing. (garvinhicking)
 
+
 Version 0.8.4 (August 19th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Add HTML information about calendar arrows image size to bypass
       large sizing in Internet Explorer. Thanks to frodeste from the
@@ -2235,8 +2277,9 @@ Version 0.8.4 (August 19th, 2005)
      an entry, so that they can jump to the submitted comment immediately.
      (garvinhicking)
 
+
 Version 0.8.3 (August 4th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
    * Upgraded bundled libs:
      Cache_Lite   to 1.5.1
@@ -2289,8 +2332,9 @@ Version 0.8.3 (August 4th, 2004)
       </div>
      (wesley)
 
+
 Version 0.8.2 (June 29th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * fixed remote code execution vulnerability. Thanks to Gulftech
       Research for pointing out that bug and Stefan Esser for helping
@@ -2323,8 +2367,9 @@ Version 0.8.2 (June 29th, 2005)
     * Fix missing authorname when previewing entry. Thanks to winkiller,
       aquatic, thomas, wurstprinz and hansi for fixing this!
 
+
 Version 0.8.1 (May 17th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix missing PDF thumbnail creation (imagemagick only)
       (garvinhicking)
@@ -2374,10 +2419,11 @@ Version 0.8.1 (May 17th, 2005)
       redirecting to a wrong URL for installation with '\' instead of
       '/' path indicators. Thanks to Hendy Irawan! (garvinhicking)
 
-Version 0.8 (April, 15th 2005)
-------------------------------------------------------------------------
 
-    * Added icelandic translation by ï¿½rn Arnarson
+Version 0.8 (April, 15th 2005)
+-----------------------------------------------------------------------
+
+    * Added icelandic translation by Örn Arnarson
 
     * Fixed a possible SQL injection issue in Tracking methods. Also
       fixed possible XSS exploit in BBCode markup, if enabled for
@@ -2392,8 +2438,9 @@ Version 0.8 (April, 15th 2005)
     * Fix SQLite bug when fetching authorname in quicksearch. Thanks to
       Sven Oliver Moll!
 
+
 Version 0.8-beta6 (April 8th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Remove unique constraint for url_idx on the referrer suppress table
       and replaced it by a simple index. Fixes fatal errors on postgresql
@@ -2409,8 +2456,9 @@ Version 0.8-beta6 (April 8th, 2005)
       IE6 again show the category and extended entry toggle buttons
       (garvinhicking)
 
+
 Version 0.8-beta5 (April 1st, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fix XMLRPC problems for getting existing posts. Thanks a lot to
       TimothyP from the forums! (garvinhicking)
@@ -2444,8 +2492,9 @@ Version 0.8-beta5 (April 1st, 2005)
 
     * Updated chinese language files, thanks to Andrew Huang
 
+
 Version 0.8-beta3/4 (March 15th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Drop SQL index on comment's body. This was not used in our code,
       and caused trouble with large comments on pgsql and MySQL.
@@ -2517,8 +2566,9 @@ Version 0.8-beta3/4 (March 15th, 2005)
       '2004-11-24T22:43:08-05:00'), as PHPs strtotime() does not parse
       that. (garvinhicking)
 
+
 Version 0.8-beta2 (March 5th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Show "create entry" toolbar for plugins like the Emoticon Chooser
       also when WYSIWYG editor is enabled (garvinhicking)
@@ -2535,8 +2585,9 @@ Version 0.8-beta2 (March 5th, 2005)
       like serendipity_event_entrypaging [this is the only bundled or
       internal plugin affected by the issue] (garvinhicking)
 
+
 Version 0.8-beta1 (March 4th, 2005)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Added Persian language and template for RTL-Languages by Omid
       Mottaghi
@@ -2862,8 +2913,9 @@ Version 0.8-beta1 (March 4th, 2005)
 
     * Added support for Smarty Templating. (garvinhicking, tomsommer)
 
+
 Version 0.7.1 (December 2nd, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed captcha string variation on some setups by explicitly seeding
       the randomness (garvinhicking)
@@ -2874,8 +2926,9 @@ Version 0.7.1 (December 2nd, 2004)
     * Do not show entries of the future when entering their direct URL
       (garvinhicking)
 
+
 Version 0.7 (November 8th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed concatenation syntax on PostgreSQL, only used by plugin
       "Entrylinks". (garvinhicking)
@@ -2901,14 +2954,16 @@ Version 0.7 (November 8th, 2004)
     * Fixed comment counter for deleting non-approved comments
       (tomsommer, griffinn)
 
+
 Version 0.7-rc1 (October 20th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed possible HTTP Response Splitting security issue. Thanks to
       ChaoticEvil for reporting! (jannis, garvinhicking)
 
+
 Version 0.7-beta4 (October 14th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Bug #1016342 - Fixed RSS UTF8 decoding for remote RSS plugin.
       (garvinhicking)
@@ -2965,8 +3020,9 @@ Version 0.7-beta4 (October 14th, 2004)
     * Fixed windows detection for stripping backslashes out of
       uploaded files. Thanks to Thomas! (garvinhicking)
 
+
 Version 0.7-beta3 (September 21st, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Bug #1031444 - Fixed postgreSQL error (for older versions of
       pgsql) when creating categories (garvinhicking)
@@ -2996,8 +3052,9 @@ Version 0.7-beta3 (September 21st, 2004)
     * Fixed entries pagination for special cases where quickump calendar
       was displayed on the left sidebar (garvinhicking)
 
+
 Version 0.7-beta2 (September 15th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed entries pagination for special cases where quickump calendar
       was displayed on the left sidebar (garvinhicking)
@@ -3025,8 +3082,9 @@ Version 0.7-beta2 (September 15th, 2004)
     * Fix several postgreSQL update errors. Thanks to daFool from the
       forums! (garvinhicking)
 
+
 Version 0.7-beta1 (September 6th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Disable the use of popups by default (tomsommer)
 
@@ -3449,8 +3507,9 @@ Version 0.7-beta1 (September 6th, 2004)
 
     * Configuration is now language-dependant. (garvinhicking)
 
+
 Version 0.6-pl3 (June 20th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * WYSIWYG-Editor: Links were prefixed with '/' wrongly (IE only).
       Now all entered links will be put to an absolute URL consistently.
@@ -3464,21 +3523,24 @@ Version 0.6-pl3 (June 20th, 2004)
 
     * Allow pinging of blogbot.dk (tomsommer)
 
+
 Version 0.6-pl2 (May 24th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed security vulnerability on servers with Register_Globals On.
       (garvinhicking, gschlossnagle, tomsommer)
 
+
 Version 0.6-pl1 (May 15th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed trackbacks not associated to the right entry id (garvinhicking)
 
     * Fixed typo in Creative Common Plugin (Jonathan Arkell)
 
+
 Version 0.6 (May 12th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     [changes since 0.6-rc2]
     * Creative Commons plugin bugfix (wrong 'non-commercial' case)
@@ -3691,7 +3753,7 @@ Version 0.6 (May 12th, 2004)
 
 
 Version 0.5-pl1 (February, 14th 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed XHTML-invalid anchor name (garvinhicking)
 
@@ -3709,8 +3771,9 @@ Version 0.5-pl1 (February, 14th 2004)
 
     * Fixed RSS 0.91 feed (was not printing any entries) (garvinhicking)
 
+
 Version 0.5 (February 6th, 2004)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed bug not showing comment or entry admin-tools on apparently
       static pages (garvinhicking, tomsommer)
@@ -3782,8 +3845,9 @@ Version 0.5 (February 6th, 2004)
       Default is 'apply textformatting' to stay backwards-compatible.
       (garvinhicking)
 
+
 Version 0.4 (December 12th, 2003)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed bug #841972 - Remove reference to leer.png (tomsommer)
 
@@ -3820,8 +3884,9 @@ Version 0.4 (December 12th, 2003)
     * Corrected path to entries printed in the comment plugin
       (tomsommer)
 
+
 Version 0.3 (October 7th, 2003)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
     * Fixed evaluation of the 'embed' variable and added a small 'HowTo'
       to the INSTALL file (garvinhicking)
@@ -4207,5 +4272,6 @@ Version 0.3 (October 7th, 2003)
     * Regenerate the .htaccess file, if installation fails (sterling &
       muesli)
 
+
 Version 0.2 (April 4th, 2003)
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
