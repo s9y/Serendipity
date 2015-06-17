@@ -11,17 +11,17 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.1.4');
+        $propbag->add('version',       '2.1.5');
         $propbag->add('configuration', array(
                                         'title',
-                                        'big_img',
                                         'feed_format',
-                                        'subToMe',
                                         'show_comment_feed',
-                                        'seperator',
                                         'iconURL',
                                         'feed_name',
                                         'comment_name',
+                                        'seperator',
+                                        'subToMe',
+                                        'big_img',
                                         'seperator2',
                                         'fb_id',
                                         'custom_url'
@@ -82,7 +82,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
             case 'big_img':
                 $propbag->add('type',        'string');
-                $propbag->add('name',        'Subtome '.SYNDICATION_PLUGIN_FEEDICON);
+                $propbag->add('name',        SYNDICATION_PLUGIN_FEEDICON);
                 $propbag->add('description', SYNDICATION_PLUGIN_FEEDICON_DESC);
                 $propbag->add('default',     'img/subtome.png');
                 break;
@@ -126,8 +126,9 @@ class serendipity_plugin_syndication extends serendipity_plugin {
     {
         global $serendipity;
 
-        $subimg = str_replace($serendipity['serendipityHTTPPath'].'templates/2k11/', '', $this->get_config('big_img', 'empty'), $count); // check and set correct path for serendipity_getTemplateFile()
-        if ($count > 0) $this->set_config('big_img', $subimg); // fixes $serendipity['serendipityHTTPPath'] . 'templates/2k11/img/subtome.png' confguration to use 'img/subtome.png'
+        // temporary fix for serendipity_getTemplateFile() path reset between S9y v.2.0 and 2.0.2 - remove later
+        $subimg = str_replace($serendipity['serendipityHTTPPath'].'templates/2k11/', '', $this->get_config('big_img', 'empty'), $count); // check and fix correct path
+        if ($count > 0) $this->set_config('big_img', $subimg); // fix in config
 
         $title       = $this->get_config('title');
         $small_icon  = serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
@@ -208,7 +209,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
 
     function generateFeedButton($feed, $label, $onclick, $icon) {
         $link   = 'href="'.$feed.'" '. $onclick;
-        $path    = $icon ? $icon : serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
+        $path   = $icon ? $icon : serendipity_getTemplateFile($this->get_config('iconURL', 'img/xml.gif'));
         $output = "<li>\n";
         if (serendipity_db_bool($this->get_config('subToMe', true))) {
             if ($path != 'none' && !empty($path)) {
