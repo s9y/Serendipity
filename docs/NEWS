@@ -2,9 +2,9 @@
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
-    * Smarty bugfix upgrades to 3.1.25 - please read the changelog.
-      Compilation time was vastly improved. New Features in
-      NEW_FEATURES.txt.
+    * Smarty bugfix upgrades to 3.1.27 - please read the changelog.
+      Compilation time was vastly improved.
+      New Features in NEW_FEATURES.txt.
 
     * It is now possible to switch to a theme's admin theme if it has
       been selected as a frontend theme first
