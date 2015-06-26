@@ -92,9 +92,11 @@ Version 2.0.2 ()
                 background-image: url({TEMPLATE_PATH}img/example.jpg);
             }
 
-        since the content will be appended (sig!) to the streamed
-        serendipity dynamic stylesheet. (Issue #280, down below, talks
-        about the user styles "being prepended on top").
+        Content of a user.css will always be put LAST into the combined
+        CSS, this means it will override any possible plugin output.
+        If a user.css file does not exist in your own template directory,
+        but inside the default 2k11 template directory, this will always
+        be used (this behaviour is called "default fallback chain").
 
     * Use https URLs for Atom feed, if called through HTTPS (hboeck)
 
