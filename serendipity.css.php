@@ -85,12 +85,13 @@ $out .= serendipity_printStylesheet(
          serendipity_getTemplateFile($css_file, '')
 );
 
+serendipity_plugin_api::hook_event($css_hook, $out);
+
 $out .= serendipity_printStylesheet(
          serendipity_getTemplateFile($css_userfile, 'serendipityPath', true),
          serendipity_getTemplateFile($css_userfile, '', true)
 );
 
-serendipity_plugin_api::hook_event($css_hook, $out);
 
 echo $out;
 
