@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -15,4 +15,3 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL', 'Poka¿ wszystkie');
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'Pomiñ wpisy strony g³ównej');
 
-?>

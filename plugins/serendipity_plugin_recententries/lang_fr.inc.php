@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -22,5 +22,3 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL', 'Non, afficher tous les billets');
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'Oui');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

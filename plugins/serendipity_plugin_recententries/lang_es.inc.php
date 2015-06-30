@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -15,4 +15,3 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_ALL', 'Mostrar todas');
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'Evitar los elementos de la página principal');
 
-?>
