@@ -684,7 +684,7 @@
 @define('IMAGE_MORE_INPUT', 'Mehr Bilder hinzufügen');
 
 @define('BACKEND_TITLE', 'Zusätzlicher Informationstext, der auf der Plugin-Oberfläche dargestellt wird');
-@define('BACKEND_TITLE_FOR_NUGGET', 'An dieser Stelle können Sie einen eigenen Text angeben, der auf der Plugin-Konfigurationsoberfläche zusätzlich angezeigt wird. Denn falls Sie mehrere HTML-Klötze mit leerem Titel angelegt haben, ist es andernfalls schwierig, diese auseinanderzuhalten.');
+@define('BACKEND_TITLE_FOR_NUGGET', 'An dieser Stelle können Sie einen eigenen Text angeben, der auf der Plugin-Konfigurationsoberfläche zusätzlich angezeigt wird. Denn falls Sie mehrere HTML-Klötze mit leerem Titel angelegt haben, ist es gegebenenfalls schwierig, diese auseinanderzuhalten.');
 @define('CATEGORIES_ALLOW_SELECT', 'Besuchern erlauben, mehrere Kategorien gleichzeit darzustellen?');
 @define('CATEGORIES_ALLOW_SELECT_DESC', 'Falls diese Option aktiviert ist, wird eine Auswahlbox neben jeder Kategorie angezeigt, damit Besucher mehrere Kategorien gleichzeitig auswählen können.');
 @define('PAGE_BROWSE_PLUGINS', 'Seite %s von %s, insgesamt %s Plugins.');
