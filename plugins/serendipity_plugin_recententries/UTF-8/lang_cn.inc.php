@@ -10,3 +10,4 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', '略过头版文章');
 @define('PLUGIN_RECENTENTRIES_RANDOMIZE', '随机显示文章');
 @define('PLUGIN_RECENTENTRIES_RANDOMIZE_DESC', '如果启用此设置的话，将随机选择文章并显示出来');
+

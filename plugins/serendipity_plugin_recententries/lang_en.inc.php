@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -16,4 +16,6 @@
 @define('PLUGIN_RECENTENTRIES_NUMBER_FROM_RADIO_RECENT', 'Skip front page items');
 @define('PLUGIN_RECENTENTRIES_RANDOMIZE', 'Show Random Articles');
 @define('PLUGIN_RECENTENTRIES_RANDOMIZE_DESC', 'If set, random articles will be selected.');
+
+@define('PLUGIN_RECENTENTRIES_DATEFORMAT_WIN', 'On Win OS you may need to use %d instead of %e to get a result!');
 
