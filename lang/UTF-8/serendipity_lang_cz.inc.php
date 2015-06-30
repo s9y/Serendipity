@@ -1,4 +1,5 @@
-<?php # lang_cz.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
+<?php
+# lang_cz.inc.php 1.10 2012-01-08 18:34:17 VladaAjgl $
 
 /**
  *  @version 1.10
@@ -1001,7 +1002,8 @@ $i18n_filename_to = array (
 // Next lines were added on 2012/05/29
 @define('ABOUT_TO_DELETE_FILES', 'You are about to delete a bunch of files at once.<br />If you are using these in some of your entries, it will cause dead links or images<br />Are you sure you wish to proceed?<br /><br />');
 
-@define('SUMMARY', 'Souhrn');@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
+@define('SUMMARY', 'Souhrn');
+@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
 @define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
 @define('PLAIN_ASCII_NAMES', '(no special characters, umlauts)');
 // New 2.0 constants
@@ -1056,7 +1058,8 @@ $i18n_filename_to = array (
 @define('CURRENT_TAB', 'Current tab: ');
 @define('PINGBACKS', 'Pingbacks');
 @define('NO_PINGBACKS', 'No Pingbacks');
-@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
+@define('GROUP_NAME_DESC', "Use as uppercased eg. 'EXAMPLE_GROUP' name, but not as a constant 'USERLEVEL_XYZ' group name.");
+@define('INSTALLER_CLI_TOOLS', 'Server-side command line tools');
 @define('INSTALLER_CLI_TOOLNAME', 'CLI tool');
 @define('INSTALLER_CLI_TOOLSTATUS', 'Executable?');
 @define('VIDEO', 'Video');
@@ -1076,7 +1079,8 @@ $i18n_filename_to = array (
 @define('INSTALL_DBPREFIX_INVALID', 'The database table name prefix must not be empty and may only contain letters, numbers and the underscore character.');
 @define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
 @define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Show the subToMe button, a layer to make feed subscription easier');
-@define('SYNDICATE_THIS_BLOG', 'Subscribe');@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
+@define('SYNDICATE_THIS_BLOG', 'Subscribe');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Display a (big) image at the top of the feeds in sidebar, enter full or absolute URL to image file. Set to "none" to show a textlink (the old default)');
 @define('INSTALL_BACKENDPOPUP', 'Enable use of popup windows for the backend');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Do you want to use popup windows for some backend functionality? When disabled (default), inline modal dialogs will be used for e.g. the category selector and media library.');
 @define('UPDATE_STABLE', 'stable');
@@ -1121,7 +1125,8 @@ $i18n_filename_to = array (
 @define('EDITOR_NO_TAGS', 'No tags');
 @define('DASHBOARD_ENTRIES', 'In Progress');
 @define('INSTALL_PASSWORD2', 'Admin password (verify)');
-@define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');
+@define('INSTALL_PASSWORD2_DESC', 'Password for admin login, enter again to verify.');
+@define('INSTALL_PASSWORD_INVALID', 'Your entered passwords for the administrator user do not match.');
 @define('INSTALL_BACKENDPOPUP_GRANULAR', 'Force specific backend popups');
 @define('INSTALL_BACKENDPOPUP_GRANULAR_DESC', 'If you generally disable backend popups, you can specifically force using popups for specific places by entering a comma seperated list of places here. Available places are: ');
 @define('START_UPDATE', 'Starting Update ...');
