@@ -58,6 +58,8 @@ Version 2.1 ()
 Version 2.0.2 ()
 ------------------------------------------------------------------------
 
+    * Fix importers to use the new mysqli API extension with PHP 5+
+
     * Smarty bugfix upgrades to 3.1.27 - please read the changelog.
       Compilation time was vastly improved.
       New Features in NEW_FEATURES.txt.
