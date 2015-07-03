@@ -1,4 +1,4 @@
-<?php # $Id: phpbb.inc.php 50 2005-04-25 16:50:43Z garvinhicking $
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -81,17 +81,17 @@ class Serendipity_Import_smf extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $gdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $gdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$gdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($gdb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($gdb));
         }
         
         /* Users */
@@ -103,11 +103,11 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                FROM {$this->data['prefix']}members
                               WHERE is_activated = 1", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($gdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => 1,
                           'realname'      => $users[$x]['user_login'],
@@ -121,7 +121,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
             }
 
             serendipity_db_insert('authors', $this->strtrRecursive($data));
-            echo mysql_error();
+            echo mysqli_error();
             $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
         }
 
@@ -130,12 +130,12 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                     name AS cat_name
                                FROM {$this->data['prefix']}categories", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($gdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $parent_categories[] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $parent_categories[] = mysqli_fetch_assoc($res);
         }
 
         for ($x=0, $max_x = sizeof($parent_categories) ; $x < $max_x ; $x++ ) {
@@ -156,12 +156,12 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                     description AS category_description
                                FROM {$this->data['prefix']}boards ORDER BY boardOrder;", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($gdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $categories[] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $categories[] = mysqli_fetch_assoc($res);
         }
 
         // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -204,11 +204,11 @@ class Serendipity_Import_smf extends Serendipity_Import {
 
         GROUP BY t.ID_TOPIC", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($gdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['post_subject']),
                            'isdraft'        => 'false',
@@ -254,8 +254,8 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                               ON tl.ID_TAG = t.ID_TAG
                                            WHERE tl.ID_TOPIC = {$topic_id}
                                              AND t.approved = 1");
-            if (mysql_num_rows($t_res) > 0) {
-                while ($a = mysql_fetch_assoc($t_res)) {
+            if (mysqli_num_rows($t_res) > 0) {
+                while ($a = mysqli_fetch_assoc($t_res)) {
                     serendipity_db_insert('entrytags', array('entryid' => $entries[$x]['entryid'], 'tag' => $t_res['tag']));
                 }
             }
@@ -277,10 +277,10 @@ class Serendipity_Import_smf extends Serendipity_Import {
             ", $gdb);
 
             if (!$c_res) {
-                return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($gdb));
+                return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($gdb));
             }
 
-            while ($a = mysql_fetch_assoc($c_res)) {
+            while ($a = mysqli_fetch_assoc($c_res)) {
                 if ($a['post_id'] == $entries[$x]['post_id']) {
                     continue;
                 }

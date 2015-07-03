@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -82,17 +82,17 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $sunlogdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $sunlogdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$sunlogdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($sunlogdb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($sunlogdb));
         }
 
         /* Users */
@@ -102,11 +102,11 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
                                     homepage   AS user_url
                                FROM {$this->data['prefix']}users", $sunlogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($sunlogdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($sunlogdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => 1,
                           'realname'      => $users[$x]['user_login'],
@@ -120,24 +120,24 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
             }
 
             serendipity_db_insert('authors', $this->strtrRecursive($data));
-            echo mysql_error();
+            echo mysqli_error();
             $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
         }
 
         /* Categories */
         if (!$this->importCategories(null, 0, $sunlogdb)) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($sunlogdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($sunlogdb));
         }
         serendipity_rebuildCategoryTree();
 
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}articles ORDER BY id;", $sunlogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($sunlogdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($sunlogdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['title']),
                            'isdraft'        => ($entries[$x]['draft'] == '0') ? 'false' : 'true',
@@ -165,11 +165,11 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
         /* Even more category stuff */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}transfer_c;", $sunlogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($sunlogdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($sunlogdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entrycat = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entrycat = mysqli_fetch_assoc($res);
 
             $entryid = 0;
             $categoryid = 0;
@@ -196,10 +196,10 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}c_comments;", $sunlogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($sunlogdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($sunlogdb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['id'] == $a['for_entry'] ) {
                     $author   = '';
@@ -241,18 +241,18 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
     }
 
     function importCategories($parentid = 0, $new_parentid = 0, $sunlogdb) {
-        $where = "WHERE parent = '" . mysql_escape_string($parentid) . "'";
+        $where = "WHERE parent = '" . mysqli_escape_string($parentid) . "'";
 
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}categories
                                      " . $where, $sunlogdb);
         if (!$res) {
-            echo mysql_error();
+            echo mysqli_error();
             return false;
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $row = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $row = mysqli_fetch_assoc($res);
             $cat = array('category_name'        => $row['title'],
                          'category_description' => $row['optional_1'] . ' ' . $row['optional_2'] . ' ' . $row['optional_3'],
                          'parentid'             => (int)$new_parentid,

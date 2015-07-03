@@ -78,27 +78,27 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         $categories = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;;
         }
 
-        $nucdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $nucdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$nucdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($nucdb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($nucdb));
         }
 
         /* Users */
         $res = @$this->nativeQuery("SELECT mnumber AS ID, mname AS user_login, mpassword AS user_pass, memail AS user_email, madmin AS user_level FROM {$this->data['prefix']}member;", $nucdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($nucdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($nucdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => ($users[$x]['user_level'] >= 1) ? 1 : 0,
                           'realname'      => $users[$x]['user_login'],
@@ -123,12 +123,12 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         /* Categories */
         $res = @$this->nativeQuery("SELECT catid AS cat_ID, cname AS cat_name, cdesc AS category_description FROM {$this->data['prefix']}category ORDER BY catid;", $nucdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($nucdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($nucdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $categories[] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $categories[] = mysqli_fetch_assoc($res);
         }
 
         // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -148,11 +148,11 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}item ORDER BY itime;", $nucdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($nucdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($nucdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['ititle']),
                            'isdraft'        => ($entries[$x]['idraft'] != '1') ? 'false' : 'true',
@@ -189,10 +189,10 @@ class Serendipity_Import_Nucleus extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comment;", $nucdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($nucdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($nucdb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['inumber'] == $a['citem'] ) {
                     $author   = '';
