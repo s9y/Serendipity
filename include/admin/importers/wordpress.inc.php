@@ -84,7 +84,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         $categories = array();
         $entries = array();
 
-        if ( !extension_loaded('mysqli') ) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
