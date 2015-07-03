@@ -1,4 +1,4 @@
-<?php # $Id: b2evolution.inc.php 1093 2006-04-13 10:49:52Z garvinhicking $
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -75,17 +75,17 @@ class Serendipity_Import_nuke extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $nukedb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $nukedb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$nukedb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($nukedb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($nukedb));
         }
 
         /* Users: Authors */
@@ -98,11 +98,11 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                             aid         AS ID
                                        FROM nuke_authors", $nukedb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($nukedb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => true,
                           'realname'      => $users[$x]['user_name'],
@@ -132,11 +132,11 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                          ON u.uid = s.user_id
                                        ", $nukedb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($nukedb));
         }
 
-        for ($x=$x, $max_x = $x + mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=$x, $max_x = $x + mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
             if (empty($users[$x]['user_name'])) {
                 $users[$x]['user_name'] = $users[$x]['user_login'];
             }
@@ -158,7 +158,7 @@ class Serendipity_Import_nuke extends Serendipity_Import {
 
         /* Categories */
         if (!$this->importCategories($nukedb)) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($nukedb));
         }
         serendipity_rebuildCategoryTree();
 
@@ -174,11 +174,11 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                            bodytext               AS extended
                                       FROM nuke_stories", $nukedb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($nukedb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
             
             if (!empty($entries[$x]['informant'])) {
                 $entries[$x]['post_author'] = $entries[$x]['informant'];
@@ -212,11 +212,11 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                            topic AS postcat_cat_ID
                                       FROM nuke_stories", $nukedb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($nukedb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entrycat = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entrycat = mysqli_fetch_assoc($res);
 
             $entryid = 0;
             $categoryid = 0;
@@ -250,10 +250,10 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                            UNIX_TIMESTAMP(`date`) AS tstamp
                                       FROM nuke_comments", $nukedb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($nukedb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($nukedb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['ID'] == $a['comment_post_ID'] ) {
                     $author = $a['comment_author'];
@@ -292,13 +292,13 @@ class Serendipity_Import_nuke extends Serendipity_Import {
                                           topicid     AS cat_ID
                                      FROM nuke_topics", $nukedb);
         if (!$res) {
-            echo mysql_error();
+            echo mysqli_error();
             return false;
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $row = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $row = mysqli_fetch_assoc($res);
             $cat = array('category_name'        => $row['cat_name'],
                          'category_description' => $row['cat_description'],
                          'parentid'             => 0,

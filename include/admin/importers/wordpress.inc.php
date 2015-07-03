@@ -84,7 +84,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         $categories = array();
         $entries = array();
 
-        if ( !extension_loaded('mysql') ) {
+        if ( !extension_loaded('mysqli') ) {
             return MYSQL_REQUIRED;
         }
 
@@ -92,13 +92,13 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
             @set_time_limit(300);
         }
 
-        $wpdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $wpdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$wpdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'], $wpdb)) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($wpdb));
+        if (!@mysqli_select_db($this->data['name'], $wpdb)) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($wpdb));
         }
 
         // This will hold the s9y <-> WP ID associations.
@@ -108,11 +108,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         // Fields: ID, user_login, user_pass, user_email, user_level
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}users;", $wpdb);
         if (!$res) {
-            printf(COULDNT_SELECT_USER_INFO, mysql_error($wpdb));
+            printf(COULDNT_SELECT_USER_INFO, mysqli_error($wpdb));
         } else {
             if ($debug) echo "<span class='block_level'>Importing users...</span>";
-            for ($x=0, $c = mysql_num_rows($res) ; $x < $c ; $x++) {
-                $users[$x] = mysql_fetch_assoc($res);
+            for ($x=0, $c = mysqli_num_rows($res) ; $x < $c ; $x++) {
+                $users[$x] = mysqli_fetch_assoc($res);
 
                 $data = array('right_publish' => (!isset($users[$x]['user_level']) || $users[$x]['user_level'] >= 1) ? 1 : 0,
                               'realname'      => $users[$x]['user_login'],
@@ -150,13 +150,13 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                       FROM {$this->data['prefix']}categories 
                                   ORDER BY category_parent, cat_ID;", $wpdb);
         if (!$res) {
-            $no_cat = mysql_error($wpdb);
+            $no_cat = mysqli_error($wpdb);
         } else {
             if ($debug) echo "<span class='block_level'>Importing categories (WP 2.2 style)...</span>";
 
             // Get all the info we need
-            for ($x=0 ; $x<mysql_num_rows($res) ; $x++) {
-                $categories[] = mysql_fetch_assoc($res);
+            for ($x=0 ; $x<mysqli_num_rows($res) ; $x++) {
+                $categories[] = mysqli_fetch_assoc($res);
             }
 
             // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -216,14 +216,14 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                      WHERE taxonomy.taxonomy = 'category' 
                                   ORDER BY taxonomy.parent, taxonomy.term_taxonomy_id", $wpdb);
         if (!$res && !$no_cat) {
-            $no_cat = mysql_error($wpdb);
+            $no_cat = mysqli_error($wpdb);
         } elseif ($res) {
             $no_cat = false;
             if ($debug) echo "<span class='block_level'>Importing categories (WP 2.3 style)...</span>";
 
             // Get all the info we need
-            for ($x=0 ; $x<mysql_num_rows($res) ; $x++) {
-                $categories[] = mysql_fetch_assoc($res);
+            for ($x=0 ; $x<mysqli_num_rows($res) ; $x++) {
+                $categories[] = mysqli_fetch_assoc($res);
             }
 
             // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -280,11 +280,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         }
 
         if (!$res) {
-            printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+            printf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($wpdb));
         } else {
             if ($debug) echo "<span class='block_level'>Importing entries...</span>";
-            for ($x=0, $c = mysql_num_rows($res) ; $x < $c ; $x++ ) {
-                $entries[$x] = mysql_fetch_assoc($res);
+            for ($x=0, $c = mysqli_num_rows($res) ; $x < $c ; $x++ ) {
+                $entries[$x] = mysqli_fetch_assoc($res);
 
                 $content  = explode('<!--more-->', $entries[$x]['post_content'], 2);
                 $body     = $content[0];
@@ -299,7 +299,7 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                'authorid'       => $assoc['users'][$entries[$x]['post_author']]);
 
                 if (!is_int($entries[$x]['entryid'] = serendipity_updertEntry($entry))) {
-                    printf(COULDNT_SELECT_ENTRY_INFO, mysql_error($wpdb));
+                    printf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($wpdb));
                     echo "<span class='block_level'>ID: {$entries[$x]['ID']} - {$entry['title']}</span>";
                     return $entries[$x]['entryid'];
                 }
@@ -316,10 +316,10 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         $no_entrycat = false;
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}post2cat;", $wpdb);
         if (!$res) {
-            $no_entrycat = mysql_error($wpdb);
+            $no_entrycat = mysqli_error($wpdb);
         } else {
             if ($debug) echo "<span class='block_level'>Importing category associations (WP 2.2 style)...</span>";
-            while ($a = mysql_fetch_assoc($res)) {
+            while ($a = mysqli_fetch_assoc($res)) {
                 $data = array('entryid'    => $assoc['entries'][$a['post_id']],
                               'categoryid' => $assoc['categories'][$a['category_id']]);
                 serendipity_db_insert('entrycat', $this->strtrRecursive($data));
@@ -332,11 +332,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
                                            rel.term_taxonomy_id AS category_id 
                                       FROM {$this->data['prefix']}term_relationships AS rel;", $wpdb);
         if (!$res && !$no_entrycat) {
-            $no_entrycat = mysql_error($wpdb);
+            $no_entrycat = mysqli_error($wpdb);
         } elseif ($res) {
             $no_entrycat = false;
             if ($debug) echo "<span class='block_level'>Importing category associations (WP 2.3 style)...</span>";
-            while ($a = mysql_fetch_assoc($res)) {
+            while ($a = mysqli_fetch_assoc($res)) {
                 $data = array('entryid'    => $assoc['entries'][$a['post_id']],
                               'categoryid' => $assoc['categories'][$a['category_id']]);
                 serendipity_db_insert('entrycat', $this->strtrRecursive($data));
@@ -351,11 +351,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments;", $wpdb);
         if (!$res) {
-            printf(COULDNT_SELECT_COMMENT_INFO, mysql_error($wpdb));
+            printf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($wpdb));
         } else {
             $serendipity['allowSubscriptions'] = false;
             if ($debug) echo "<span class='block_level'>Importing comments...</span>";
-            while ($a = mysql_fetch_assoc($res)) {
+            while ($a = mysqli_fetch_assoc($res)) {
                 $comment = array('entry_id ' => $assoc['entries'][$a['comment_post_ID']],
                                  'parent_id' => 0,
                                  'timestamp' => strtotime($a['comment_date']),

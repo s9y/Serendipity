@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -81,17 +81,17 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $gdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $gdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$gdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($gdb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($gdb));
         }
 
         /* Users */
@@ -102,11 +102,11 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
                                     homepage   AS user_url
                                FROM {$this->data['prefix']}users", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($gdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => 1,
                           'realname'      => $users[$x]['user_login'],
@@ -120,19 +120,19 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
             }
 
             serendipity_db_insert('authors', $this->strtrRecursive($data));
-            echo mysql_error();
+            echo mysqli_error();
             $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
         }
 
         /* Categories */
         $res = @$this->nativeQuery("SELECT tid AS cat_ID, topic AS cat_name, topic AS category_description FROM {$this->data['prefix']}topics ORDER BY tid;", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($gdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $categories[] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $categories[] = mysqli_fetch_assoc($res);
         }
 
         // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -152,11 +152,11 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}stories ORDER BY sid;", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($gdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['title']),
                            'isdraft'        => ($entries[$x]['draft_flag'] == '0') ? 'false' : 'true',
@@ -194,10 +194,10 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments;", $gdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($gdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($gdb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['sid'] == $a['sid'] ) {
                     $author   = '';

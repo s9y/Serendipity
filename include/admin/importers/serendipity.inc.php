@@ -1,5 +1,4 @@
 <?php
-# $Id: b2evolution.inc.php 1093 2006-04-13 10:49:52Z garvinhicking $
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -107,14 +106,14 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         }
 
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}" . $table . " " . $where, $s9ydb);
-        echo mysql_error($s9ydb);
+        echo mysqli_error($s9ydb);
 
-        if (!$res || mysql_num_rows($res) < 1) {
+        if (!$res || mysqli_num_rows($res) < 1) {
             return false;
         }
         $this->counter = 100;
 
-        while ($row = mysql_fetch_array($res, MYSQL_ASSOC)) {
+        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
             $this->counter++;
             if (is_array($primary_keys)) {
                 foreach($primary_keys AS $primary_key) {
@@ -443,17 +442,17 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $s9ydb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $s9ydb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$s9ydb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'], $s9ydb)) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($s9ydb));
+        if (!@mysqli_select_db($this->data['name'], $s9ydb)) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($s9ydb));
         }
 
         if (!is_array($this->data['targets'])) {

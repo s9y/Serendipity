@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 
@@ -77,17 +77,17 @@ class Serendipity_Import_bblog extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysql')) {
+        if (!extension_loaded('mysqli')) {
             return MYSQL_REQUIRED;
         }
 
-        $bblogdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $bblogdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$bblogdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysql_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysql_error($bblogdb));
+        if (!@mysqli_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysqli_error($bblogdb));
         }
 
         /* Users */
@@ -98,11 +98,11 @@ class Serendipity_Import_bblog extends Serendipity_Import {
                                     url        AS user_url
                                FROM {$this->data['prefix']}authors", $bblogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($bblogdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($bblogdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysqli_fetch_assoc($res);
 
             $data = array('right_publish' => 1,
                           'username'      => $users[$x]['user_login'],
@@ -115,19 +115,19 @@ class Serendipity_Import_bblog extends Serendipity_Import {
             }
 
             serendipity_db_insert('authors', $this->strtrRecursive($data));
-            echo mysql_error();
+            echo mysqli_error();
             $users[$x]['authorid'] = serendipity_db_insert_id('authors', 'authorid');
         }
 
         /* Categories */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}sections", $bblogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($bblogdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($bblogdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
-            $row = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
+            $row = mysqli_fetch_assoc($res);
             $cat = array('category_name'        => $row['nicename'],
                          'category_description' => $row['nicename'],
                          'parentid'             => 0,
@@ -144,11 +144,11 @@ class Serendipity_Import_bblog extends Serendipity_Import {
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}posts ORDER BY postid;", $bblogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($bblogdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($bblogdb));
         }
 
-        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysql_fetch_assoc($res);
+        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysqli_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['title']),
                            'isdraft'        => ($entries[$x]['status'] == 'live') ? 'false' : 'true',
@@ -195,10 +195,10 @@ class Serendipity_Import_bblog extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments WHERE type = 'comment';", $bblogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($bblogdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($bblogdb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['postid'] == $a['postid'] ) {
                     $comment = array('entry_id ' => $entry['entryid'],
@@ -223,10 +223,10 @@ class Serendipity_Import_bblog extends Serendipity_Import {
         /* Trackbacks */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments WHERE type = 'trackback';", $bblogdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($bblogdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($bblogdb));
         }
 
-        while ($a = mysql_fetch_assoc($res)) {
+        while ($a = mysqli_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['postid'] == $a['postid'] ) {
                     $trackback = array('entry_id ' => $entry['entryid'],
