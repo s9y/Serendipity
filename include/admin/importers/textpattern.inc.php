@@ -86,11 +86,11 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
         }
 
         $txpdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$txpdb) {
+        if (!$txpdb || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
+        if (!@mysqli_select_db($txpdb, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($txpdb));
         }
 

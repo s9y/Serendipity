@@ -168,7 +168,7 @@ class Serendipity_Import {
     function &nativeQuery($query, $db = false) {
         global $serendipity;
 
-        mysqli_select_db($this->data['name'], $db);
+        mysqli_select_db($db, $this->data['name']);
         $dbn = false;
 
         $target = $this->data['charset'];
@@ -188,11 +188,11 @@ class Serendipity_Import {
         }
 
         if ($dbn && $serendipity['dbNames']) {
-            mysqli_query("SET NAMES " . $dbn, $db);
+            mysqli_query($db, "SET NAMES " . $dbn);
         }
 
-        $return = &mysqli_query($query, $db);
-        mysqli_select_db($serendipity['dbName'], $serendipity['dbConn']);
+        $return = &mysqli_query($db, $query);
+        mysqli_select_db($serendipity['dbConn'], $serendipity['dbName']);
         serendipity_db_reconnect();
         return $return;
     }

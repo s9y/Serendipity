@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix importers to use the new mysqli API extension with PHP 5+
+
     * WIP: Added an internal cache to speedup s9y's site generation. Can
       be activated by setting use_internal_cache to true in
       serendipity_config.inc.php. Test feedback needed.
@@ -57,8 +59,6 @@ Version 2.1 ()
 
 Version 2.0.2 ()
 ------------------------------------------------------------------------
-
-    * Fix importers to use the new mysqli API extension with PHP 5+
 
     * Smarty bugfix upgrades to 3.1.27 - please read the changelog.
       Compilation time was vastly improved.

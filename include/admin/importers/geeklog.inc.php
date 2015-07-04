@@ -86,11 +86,11 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
         }
 
         $gdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$gdb) {
+        if (!$gdb || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
+        if (!@mysqli_select_db($gdb, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($gdb));
         }
 

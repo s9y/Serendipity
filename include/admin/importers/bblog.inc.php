@@ -82,11 +82,11 @@ class Serendipity_Import_bblog extends Serendipity_Import {
         }
 
         $bblogdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$bblogdb) {
+        if (!$bblogdb || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
+        if (!@mysqli_select_db($bblogdb, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($bblogdb));
         }
 

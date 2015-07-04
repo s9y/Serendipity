@@ -93,11 +93,11 @@ class Serendipity_Import_WordPress extends Serendipity_Import {
         }
 
         $wpdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$wpdb) {
+        if (!$wpdb || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'], $wpdb)) {
+        if (!@mysqli_select_db($wpdb, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($wpdb));
         }
 

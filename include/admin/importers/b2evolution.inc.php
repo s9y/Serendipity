@@ -80,11 +80,11 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         }
 
         $b2db = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$b2db) {
+        if (!$b2db || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
+        if (!@mysqli_select_db($b2db, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($b2db));
         }
 

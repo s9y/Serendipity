@@ -87,11 +87,11 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
         }
 
         $sunlogdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
-        if (!$sunlogdb) {
+        if (!$sunlogdb || mysqli_connect_error()) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
+        if (!@mysqli_select_db($sunlogdb, $this->data['name'])) {
             return sprintf(COULDNT_SELECT_DB, mysqli_error($sunlogdb));
         }
 
