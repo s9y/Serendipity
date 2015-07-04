@@ -79,13 +79,13 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
             return MYSQL_REQUIRED;
         }
 
-        $ltdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $ltdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$ltdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysqli_error($ltdb));
+        if (!@mysql_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysql_error($ltdb));
         }
 
         /* Users */
@@ -98,11 +98,11 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                             id AS ID
                                        FROM lt_users", $ltdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($ltdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($ltdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysql_fetch_assoc($res);
 
             $data = array('right_publish' => true,
                           'realname'      => $users[$x]['user_name'],
@@ -121,7 +121,7 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
 
         /* Categories */
         if (!$this->importCategories(null, 0, $ltdb)) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($ltdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($ltdb));
         }
         serendipity_rebuildCategoryTree();
 
@@ -138,11 +138,11 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                         ON lt_articles_text.article_id = lt_articles.id
                                ORDER BY ID;", $ltdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($ltdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($ltdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysql_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['post_title']),
                            'isdraft'        => ($entries[$x]['post_status'] == '1') ? 'false' : 'true',
@@ -170,11 +170,11 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                            category_id AS postcat_cat_ID 
                                       FROM lt_article_categories_link", $ltdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($ltdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($ltdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entrycat = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entrycat = mysql_fetch_assoc($res);
 
             $entryid = 0;
             $categoryid = 0;
@@ -211,10 +211,10 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                            status AS comment_status
                                       FROM lt_articles_comments;", $ltdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($ltdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($ltdb));
         }
 
-        while ($a = mysqli_fetch_assoc($res)) {
+        while ($a = mysql_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['ID'] == $a['comment_post_ID'] ) {
                     $author = '';
@@ -269,7 +269,7 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
         if (is_null($parentid)) {
             $where = 'WHERE parent_id = 0';
         } else {
-            $where = "WHERE parent_id = '" . mysqli_escape_string($parentid) . "'";
+            $where = "WHERE parent_id = '" . mysql_escape_string($parentid) . "'";
         }
 
         $res = $this->nativeQuery("SELECT name AS cat_name,
@@ -278,13 +278,13 @@ class Serendipity_Import_lifetype extends Serendipity_Import {
                                      FROM lt_articles_categories
                                      " . $where, $ltdb);
         if (!$res) {
-            echo mysqli_error();
+            echo mysql_error();
             return false;
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
-            $row = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
+            $row = mysql_fetch_assoc($res);
             $cat = array('category_name'        => $row['cat_name'],
                          'category_description' => $row['cat_description'],
                          'parentid'             => (int)$new_parentid,

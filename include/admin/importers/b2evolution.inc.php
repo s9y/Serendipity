@@ -75,17 +75,17 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         $users = array();
         $entries = array();
 
-        if (!extension_loaded('mysqli')) {
+        if (!extension_loaded('mysql')) {
             return MYSQL_REQUIRED;
         }
 
-        $b2db = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $b2db = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$b2db) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysqli_error($b2db));
+        if (!@mysql_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysql_error($b2db));
         }
 
         /* Users */
@@ -97,11 +97,11 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
                                     user_url   AS user_url
                                FROM evo_users", $b2db);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($b2db));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($b2db));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysql_fetch_assoc($res);
 
             $data = array('right_publish' => ($users[$x]['user_level'] >= 2) ? 1 : 0,
                           'realname'      => $users[$x]['user_login'],
@@ -127,18 +127,18 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
 
         /* Categories */
         if (!$this->importCategories(null, 0, $b2db)) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($b2db));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($b2db));
         }
         serendipity_rebuildCategoryTree();
 
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM evo_posts ORDER BY ID;", $b2db);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($b2db));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($b2db));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysql_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['post_title']),
                            'isdraft'        => ($entries[$x]['post_status'] == 'published') ? 'false' : 'true',
@@ -174,11 +174,11 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         /* Even more category stuff */
         $res = @$this->nativeQuery("SELECT * FROM evo_postcats;", $b2db);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($b2db));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($b2db));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entrycat = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entrycat = mysql_fetch_assoc($res);
 
             $entryid = 0;
             $categoryid = 0;
@@ -205,10 +205,10 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM evo_comments;", $b2db);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($b2db));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($b2db));
         }
 
-        while ($a = mysqli_fetch_assoc($res)) {
+        while ($a = mysql_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['ID'] == $a['comment_post_ID'] ) {
                     $author = '';
@@ -262,19 +262,19 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         if (is_null($parentid)) {
             $where = 'WHERE ISNULL(cat_parent_ID)';
         } else {
-            $where = "WHERE cat_parent_ID = '" . mysqli_escape_string($parentid) . "'";
+            $where = "WHERE cat_parent_ID = '" . mysql_escape_string($parentid) . "'";
         }
 
         $res = $this->nativeQuery("SELECT * FROM evo_categories
                                      " . $where, $b2db);
         if (!$res) {
-            echo mysqli_error();
+            echo mysql_error();
             return false;
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
-            $row = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
+            $row = mysql_fetch_assoc($res);
             $cat = array('category_name'        => $row['cat_name'],
                          'category_description' => $row['cat_description'],
                          'parentid'             => (int)$new_parentid,

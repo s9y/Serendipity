@@ -82,13 +82,13 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
             return MYSQL_REQUIRED;
         }
 
-        $pmdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $pmdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$pmdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysqli_error($pmdb));
+        if (!@mysql_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysql_error($pmdb));
         }
 
         /* Users */
@@ -100,11 +100,11 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
                                     url        AS url
                                FROM {$this->data['prefix']}members", $pmdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($pmdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($pmdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysql_fetch_assoc($res);
 
             $data = array('right_publish' => ($users[$x]['user_level'] >= 3) ? 1 : 0,
                           'realname'      => $users[$x]['user_login'],
@@ -132,12 +132,12 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
                                     category AS category_description
                                FROM {$this->data['prefix']}categories ORDER BY id", $pmdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($pmdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($pmdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
-            $categories[] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
+            $categories[] = mysql_fetch_assoc($res);
         }
 
         // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -157,11 +157,11 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}weblog ORDER BY t_stamp;", $pmdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($pmdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($pmdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysql_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['title']),
                            'isdraft'        => ($entries[$x]['status'] == 'open') ? 'false' : 'true',
@@ -198,10 +198,10 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM {$this->data['prefix']}comments;", $pmdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($pmdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($pmdb));
         }
 
-        while ($a = mysqli_fetch_assoc($res)) {
+        while ($a = mysql_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['post_id'] == $a['post_id'] ) {
                     $author   = '';

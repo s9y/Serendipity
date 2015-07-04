@@ -106,14 +106,14 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         }
 
         $res = $this->nativeQuery("SELECT * FROM {$this->data['prefix']}" . $table . " " . $where, $s9ydb);
-        echo mysqli_error($s9ydb);
+        echo mysql_error($s9ydb);
 
-        if (!$res || mysqli_num_rows($res) < 1) {
+        if (!$res || mysql_num_rows($res) < 1) {
             return false;
         }
         $this->counter = 100;
 
-        while ($row = mysqli_fetch_array($res, MYSQLI_ASSOC)) {
+        while ($row = mysql_fetch_array($res, MYSQL_ASSOC)) {
             $this->counter++;
             if (is_array($primary_keys)) {
                 foreach($primary_keys AS $primary_key) {
@@ -446,13 +446,13 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
             return MYSQL_REQUIRED;
         }
 
-        $s9ydb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $s9ydb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$s9ydb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'], $s9ydb)) {
-            return sprintf(COULDNT_SELECT_DB, mysqli_error($s9ydb));
+        if (!@mysql_select_db($this->data['name'], $s9ydb)) {
+            return sprintf(COULDNT_SELECT_DB, mysql_error($s9ydb));
         }
 
         if (!is_array($this->data['targets'])) {

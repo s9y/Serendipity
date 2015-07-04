@@ -79,13 +79,13 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
             return MYSQL_REQUIRED;
         }
 
-        $txpdb = @mysqli_connect($this->data['host'], $this->data['user'], $this->data['pass']);
+        $txpdb = @mysql_connect($this->data['host'], $this->data['user'], $this->data['pass']);
         if (!$txpdb) {
             return sprintf(COULDNT_CONNECT, serendipity_specialchars($this->data['host']));
         }
 
-        if (!@mysqli_select_db($this->data['name'])) {
-            return sprintf(COULDNT_SELECT_DB, mysqli_error($txpdb));
+        if (!@mysql_select_db($this->data['name'])) {
+            return sprintf(COULDNT_SELECT_DB, mysql_error($txpdb));
         }
 
         /* Users */
@@ -97,11 +97,11 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
                                     user_url   AS user_url
                                FROM bmc_users", $txpdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_USER_INFO, mysqli_error($txpdb));
+            return sprintf(COULDNT_SELECT_USER_INFO, mysql_error($txpdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res); $x < $max_x ; $x++ ) {
-            $users[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res); $x < $max_x ; $x++ ) {
+            $users[$x] = mysql_fetch_assoc($res);
 
             $data = array('right_publish' => ($users[$x]['user_level'] >= 2) ? 1 : 0,
                           'realname'      => $users[$x]['user_login'],
@@ -131,12 +131,12 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
                                     cat_info AS category_description
                                FROM bmc_cats ORDER BY id;", $txpdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysqli_error($txpdb));
+            return sprintf(COULDNT_SELECT_CATEGORY_INFO, mysql_error($txpdb));
         }
 
         // Get all the info we need
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++) {
-            $categories[] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++) {
+            $categories[] = mysql_fetch_assoc($res);
         }
 
         // Insert all categories as top level (we need to know everyone's ID before we can represent the hierarchy).
@@ -156,11 +156,11 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
         /* Entries */
         $res = @$this->nativeQuery("SELECT * FROM bmc_posts ORDER BY id;", $txpdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysqli_error($txpdb));
+            return sprintf(COULDNT_SELECT_ENTRY_INFO, mysql_error($txpdb));
         }
 
-        for ($x=0, $max_x = mysqli_num_rows($res) ; $x < $max_x ; $x++ ) {
-            $entries[$x] = mysqli_fetch_assoc($res);
+        for ($x=0, $max_x = mysql_num_rows($res) ; $x < $max_x ; $x++ ) {
+            $entries[$x] = mysql_fetch_assoc($res);
 
             $entry = array('title'          => $this->decode($entries[$x]['title']),
                            'isdraft'        => ($entries[$x]['status'] == '1') ? 'false' : 'true',
@@ -197,10 +197,10 @@ class Serendipity_Import_bmachine extends Serendipity_Import {
         /* Comments */
         $res = @$this->nativeQuery("SELECT * FROM bmc_comments;", $txpdb);
         if (!$res) {
-            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysqli_error($txpdb));
+            return sprintf(COULDNT_SELECT_COMMENT_INFO, mysql_error($txpdb));
         }
 
-        while ($a = mysqli_fetch_assoc($res)) {
+        while ($a = mysql_fetch_assoc($res)) {
             foreach ($entries as $entry) {
                 if ($entry['id'] == $a['post'] ) {
                     $author   = '';
