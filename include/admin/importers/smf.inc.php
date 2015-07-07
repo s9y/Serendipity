@@ -253,7 +253,7 @@ class Serendipity_Import_smf extends Serendipity_Import {
                                             JOIN {$this->data['prefix']}tags AS t
                                               ON tl.ID_TAG = t.ID_TAG
                                            WHERE tl.ID_TOPIC = {$topic_id}
-                                             AND t.approved = 1");
+                                             AND t.approved = 1", $gdb);
             if (mysqli_num_rows($t_res) > 0) {
                 while ($a = mysqli_fetch_assoc($t_res)) {
                     serendipity_db_insert('entrytags', array('entryid' => $entries[$x]['entryid'], 'tag' => $t_res['tag']));
