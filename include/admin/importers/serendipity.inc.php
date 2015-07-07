@@ -191,9 +191,11 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
                     }
                 }
 
-                foreach($this->storage[$table] AS $primary_key => $primary_data) {
-                    foreach($primary_data AS $primary_val => $replace_val) {
-                        serendipity_set_config_var('import_s9y_' . $table . '_' . $primary_key . '_' . $primary_val, $replace_val, 99);
+                if (is_array($this->storage[$table]) && !empty($this->storage[$table])) {
+                    foreach($this->storage[$table] AS $primary_key => $primary_data) {
+                        foreach($primary_data AS $primary_val => $replace_val) {
+                            serendipity_set_config_var('import_s9y_' . $table . '_' . $primary_key . '_' . $primary_val, $replace_val, 99);
+                        }
                     }
                 }
             } else {
