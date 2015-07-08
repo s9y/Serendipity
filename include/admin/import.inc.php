@@ -188,7 +188,7 @@ class Serendipity_Import {
         }
 
         if ($dbn && $serendipity['dbNames']) {
-            mysqli_query($db, "SET NAMES " . $dbn);
+            mysqli_set_charset ( $db, $dbn );
         }
 
         $return = &mysqli_query($db, $query);
