@@ -248,10 +248,10 @@ function serendipity_db_reconnect() {
     global $serendipity;
 
     if (isset($serendipity['dbCharset'])) {
-        mysqli_query($serendipity['dbConn'], "SET NAMES " . $serendipity['dbCharset']);
+        mysqli_set_charset($serendipity['dbConn'], $serendipity['dbCharset']);
         @define('SQL_CHARSET_INIT', true);
     } elseif (defined('SQL_CHARSET') && $serendipity['dbNames'] && !defined('SQL_CHARSET_INIT')) {
-        mysqli_query($serendipity['dbConn'], "SET NAMES " . SQL_CHARSET, $serendipity['dbConn']);
+        mysqli_set_charset($serendipity['dbConn'], SQL_CHARSET);
     }
 }
 
