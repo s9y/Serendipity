@@ -3,9 +3,9 @@ Version 2.0.2 ()
 ------------------------------------------------------------------------
 
     * CKEDITOR bugfix releases to 4.4.8 - please read the changelog.
-      Including widget, lineutils, fakeobjects and S9y plugins
+      Including widget, lineutils, fakeobjects Plugins and S9y added
       cheatsheet and procurator Plugins.
-      Removed "samples" and plugins "dev" dirs in lineutils and widget
+      Removing "samples" and plugins "dev" dirs in lineutils and widget
 
     * Smarty bugfix upgrades to 3.1.27 - please read the changelog.
       Compilation time was vastly improved.
