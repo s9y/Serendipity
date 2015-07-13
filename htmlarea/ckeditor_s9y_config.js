@@ -1,6 +1,6 @@
 /**
  * @fileOverview The Serendipity CKEDITOR custom config file:
- *               ckeditor_s9y_config.js, v. 1.13, last modified 2015-06-01 by Ian
+ *               ckeditor_s9y_config.js, v. 1.14, last modified 2015-07-13 by Ian
  */
 
 /**
@@ -66,6 +66,8 @@ CKEDITOR.editorConfig = function( config ) {
     */
     // protect
     config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);';
+    // Do not use auto paragraphs, added to these allowed tags (only!). Please regard that this was marked deprecated by CKE 4.4.5, but is a need for (our use) of extraAllowedContent - check this again by future versions!
+    config.autoParagraph = false; // defaults(true)
 
 
     /** SECTION: Other behaviour config rules
@@ -73,7 +75,7 @@ CKEDITOR.editorConfig = function( config ) {
     // Prevent filler nodes in all empty blocks. - case switching source and wysiwyg mode multiple times
     //config.fillEmptyBlocks = false; // default (true) - switches <p>&nbsp;</p> to <p></p>
     //config.ignoreEmptyParagraph = false; // default(true) - Whether the editor must output an empty value ('') if it's contents is made by an empty paragraph only. (Extends to config.fillEmptyBlocks)
-    // It will still generate an empty <p></p> though.
+    // changed for extraAllowedContent, see above
     //config.autoParagraph = false; // defaults(true)
     // DEV NOTES: Please note that since CKEditor 4.4.5 the config.autoParagraph configuration option was marked deprecated, since changing the default value might introduce unpredictable usability issues and so it is highly unrecommended.
 
