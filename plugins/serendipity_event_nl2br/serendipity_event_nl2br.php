@@ -300,6 +300,7 @@ class serendipity_event_nl2br extends serendipity_event
                 case 'css':
 ?>
 
+/* nl2br plugin */
 p.whiteline {
     margin-top: 0em;
     margin-bottom: 1em;
