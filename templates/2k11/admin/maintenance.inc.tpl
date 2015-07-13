@@ -43,8 +43,6 @@
     </section>
 {/if}
 
-{serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
-
 {if 'adminImport'|checkPermission}
     <section id="maintenance_export" class="equal_heights quick_list">
         <h3>{$CONST.EXPORT_ENTRIES}</h3>
@@ -93,5 +91,7 @@
         </form>
     </section>
 {/if}
+
+{serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
 
 </div>
