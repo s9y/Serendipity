@@ -937,6 +937,7 @@ input[type=checkbox],
 #advanced_options,
 #entry_skip,
 .filter_pane,
+#media_filter > div > fieldset,
 #s9y_links > ul,
 #serendipity_category .inputs,
 .serendipity_customfields textarea,
@@ -1268,6 +1269,8 @@ summary {
 #sort_entries .form_select select,
 #filter_entries .form_select select,
 #filter_entries .form_field input,
+#media_pane_filter input,
+#media_pane_filter select,
 #uploadform .form_select select,
 #uploadform .form_field input,
 #login .form_field input,
@@ -3264,6 +3267,10 @@ img.mfp-img {
     #karmafilters .form_select {
         float: left;
         width: 50%;
+    }
+
+    #media_filter .left {
+        clear: left;
     }
 
     #media_filter_file,
