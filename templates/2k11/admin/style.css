@@ -995,9 +995,8 @@ input[type=checkbox],
 .js .media_choose label,
 .js .media_choose input,
 .quick_list ol > li,
-#media_pane_filter .form_field > label,
-#media_pane_filter .form_select > label,
-#media_pane_sort .form_select > label,
+.filter_pane .form_field > label,
+.filter_pane .form_select > label,
 .serendipity_emoticon_bar {
     margin-bottom: .75em;
 }
