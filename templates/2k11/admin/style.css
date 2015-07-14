@@ -1029,6 +1029,7 @@ input[type=checkbox],
 .js .media_choose input,
 .quick_list ol > li,
 #media_filter .form_field > label,
+#media_filter .form_select > label,
 .serendipity_emoticon_bar {
     margin-bottom: .75em;
 }
