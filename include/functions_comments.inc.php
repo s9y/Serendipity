@@ -24,14 +24,14 @@ function serendipity_checkCommentToken($token, $cid) {
                               WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
         // Get the token for this comment id
         $tokencheck = serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options
-                                             WHERE okey = 'comment_" . $cid . "' LIMIT 1", true, 'assoc');
+                                             WHERE okey = 'comment_" . (int)$cid . "' LIMIT 1", true, 'assoc');
         // Verify it against the passed key
         if (is_array($tokencheck)) {
             if ($tokencheck['value'] == $token) {
                 $goodtoken = true;  // use this to bypass security checks later
                 // if using tokens, delete this comment from that list no matter how we got here
                 serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                                            WHERE okey = 'comment_" . $cid . "'");
+                                            WHERE okey = 'comment_" . (int)$cid . "'");
 
             }
         }
