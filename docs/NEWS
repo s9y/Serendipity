@@ -1,5 +1,20 @@
 #
 
+Version 1.7.9 ()
+------------------------------------------------------------------------
+
+    * Fix security issues reported by Tim Coen of Curesec.com:
+
+      - Forbid uploading files with PHP contents and possible
+        PHP execution by authenticated users (critical if
+        you have possible untrustworthy authors)
+      - Add proper escaping for comment approval tokens to prevent
+        SQL injection (authenticated authors only)
+      - Add proper escaping of comment's author names in the       
+        comment reply form to prevent XSS (2k11 template, javascript
+        based)
+
+
 Version 1.7.8 (February 9th, 2014)
 ------------------------------------------------------------------------
 
