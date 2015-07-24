@@ -57,7 +57,7 @@ Version 2.1 ()
     * Some small enhancements to the error reporting
 
 
-Version 2.0.2 ()
+Version 2.0.2 (July 24st, 2015)
 ------------------------------------------------------------------------
 
     * Fix security issues reported by Tim Coen of Curesec.com:
@@ -71,10 +71,15 @@ Version 2.0.2 ()
         comment reply form to prevent XSS (2k11 template, javascript
         based)
 
+    * Minor layout fixes for media DB media filters
+
+    * Backported some Importer db bugfixes
+
     * CKEDITOR bugfix releases to 4.4.8 - please read the changelog.
-      Including widget, lineutils, fakeobjects Plugins and S9y added
+      Includes widget, lineutils, fakeobjects Plugins and S9y added
       cheatsheet and procurator Plugins.
-      Removing "samples" and plugins "dev" dirs in lineutils and widget
+      Changed config.autoParagraph set to false, to prevent wrapping
+      p tags around extraAllowedContent tags.
 
     * Smarty bugfix upgrades to 3.1.27 - please read the changelog.
       Compilation time was vastly improved.
@@ -83,7 +88,7 @@ Version 2.0.2 ()
     * It is now possible to switch to a theme's admin theme if it has
       been selected as a frontend theme first
 
-    * Issue #285:
+    * Syndication Plugin Issue #285:
         - Add "none" as possible value for the xml-icon in the
           syndication plugin, to enable plain links
         - Reset subtome full icon path to support
