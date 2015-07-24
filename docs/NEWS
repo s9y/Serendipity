@@ -1,6 +1,17 @@
 
-Version 2.0.2 ()
+Version 2.0.2 (Jul 24th, 2015)
 ------------------------------------------------------------------------
+
+    * Fix security issues reported by Tim Coen of Curesec.com:
+
+      - Forbid uploading files with PHP contents and possible
+        PHP execution by authenticated users (critical if
+        you have possible untrustworthy authors)
+      - Add proper escaping for comment approval tokens to prevent
+        SQL injection (authenticated authors only)
+      - Add proper escaping of comment's author names in the
+        comment reply form to prevent XSS (2k11 template, javascript
+        based)
 
     * CKEDITOR bugfix releases to 4.4.8 - please read the changelog.
       Including widget, lineutils, fakeobjects Plugins and S9y added

@@ -19,7 +19,7 @@ $msg = '';
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
     if ($serendipity['POST']['togglemoderate'] != '') {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
-            $ac = serendipity_approveComment($k, $v, false, 'flip');
+            $ac = serendipity_approveComment((int)$k, (int)$v, false, 'flip');
             if ($ac > 0) {
                 $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k);
             } else {
@@ -87,7 +87,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     if ($rs === false) {
         $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
-        serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id']);
+        serendipity_approveComment((int)$serendipity['GET']['id'], (int)$rs['entry_id']);
         $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
     }
 }
@@ -103,7 +103,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     if ($rs === false) {
         $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
-        serendipity_approveComment($serendipity['GET']['id'], $rs['entry_id'], true, true);
+        serendipity_approveComment((int)$serendipity['GET']['id'], (int)$rs['entry_id'], true, true);
         $msg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
     }
 }
