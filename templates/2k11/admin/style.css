@@ -1735,7 +1735,8 @@ form > .button_link:first-of-type,
     width: 50%;
 }
 
-.compact_categories .cat_view_pad {
+.compact_categories .cat_view_pad,
+.seperator {
     display: none !important;
     visibility: hidden;
 }
