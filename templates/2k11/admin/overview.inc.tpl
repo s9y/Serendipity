@@ -31,6 +31,7 @@
                 {$updateButton}
             </section>
         {/if}
+        <hr class="seperator">
     {/if}
 
     {if $no_create !== true}
