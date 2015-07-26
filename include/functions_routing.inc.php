@@ -49,11 +49,6 @@ function locateHiddenVariables($_args) {
                 $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
                 unset($_args[$k]);
             }
-        } elseif ($v[0] == 'W') { /* Week */
-            $week = substr($v, 1);
-            if (is_numeric($week)) {
-                unset($_args[$k]);
-            }
         } elseif ($v == 'summary') { /* Summary */
             $serendipity['short_archives'] = true;
             $serendipity['head_subtitle'] .= SUMMARY . ' - ';
@@ -144,29 +139,16 @@ function serveSearch() {
 function serveAuthorPage($matches) {
     global $serendipity;
     $serendipity['view'] = 'authors';
-
-    
-    $is_multiauth = (isset($serendipity['POST']['isMultiAuth']) && is_array($serendipity['POST']['multiAuth'])); 
-    if ($is_multiauth) {
-        $serendipity['GET']['viewAuthor'] = implode(';', $serendipity['POST']['multiAuth']);
-        $serendipity['uriArguments'][]    = PATH_AUTHORS;
-        $serendipity['uriArguments'][]    = serendipity_db_escape_string($serendipity['GET']['viewAuthor']) . '-multi';
-    } elseif (empty($matches[1]) && preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
-        $is_multiauth = true;
-        $serendipity['GET']['viewAuthor'] = $multimatch[1];
-    } else {
-        $serendipity['GET']['viewAuthor'] = $matches[1];
-    }
+    $serendipity['GET']['viewAuthor'] = $matches[1];
 
     $serendipity['GET']['action'] = 'read';
 
     locateHiddenVariables($serendipity['uriArguments']);
 
-    if (!$is_multiauth) {
-        $matches[1] = serendipity_searchPermalink($serendipity['permalinkAuthorStructure'], implode('/', $serendipity['uriArguments']), $matches[1], 'author');
-        $serendipity['GET']['viewAuthor'] = $matches[1];
-        $serendipity['GET']['action'] = 'read';
-    }
+
+    $matches[1] = serendipity_searchPermalink($serendipity['permalinkAuthorStructure'], implode('/', $serendipity['uriArguments']), $matches[1], 'author');
+    $serendipity['GET']['viewAuthor'] = $matches[1];
+    $serendipity['GET']['action'] = 'read';
 
     $uInfo = serendipity_fetchUsers($serendipity['GET']['viewAuthor']);
 

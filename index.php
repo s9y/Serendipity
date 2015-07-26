@@ -85,8 +85,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 } else if ((isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat'])) ||
             preg_match(PAT_PERMALINK_CATEGORIES, $uri, $matches)) {
     serveCategory($matches);
-} else if ((isset($serendipity['POST']['isMultiAuth']) && is_array($serendipity['POST']['multiAuth'])) ||
-            preg_match(PAT_PERMALINK_AUTHORS, $uri, $matches)) {
+} else if (preg_match(PAT_PERMALINK_AUTHORS, $uri, $matches)) {
     serveAuthorPage($matches);
 } else if (preg_match(PAT_SEARCH, $uri, $matches)) {
     serveSearch();
