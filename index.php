@@ -22,9 +22,6 @@ header('Status: 200 OK');
 include('serendipity_config.inc.php');
 include('include/functions_routing.inc.php');
 header('Content-Type: text/html; charset='. LANG_CHARSET);
-if ($serendipity['expose_s9y']) {
-    header('X-Blog: Serendipity'); // Used for installer detection
-}
 
 if ($serendipity['CacheControl']) {
     if (!empty($HTTP_SERVER_VARS['SERVER_SOFTWARE']) && strstr($HTTP_SERVER_VARS['SERVER_SOFTWARE'], 'Apache/2')) {
