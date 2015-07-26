@@ -68,11 +68,10 @@ if (preg_match(PAT_APPROVE, $uri, $res) && $serendipity['serendipityAuthedUser']
 
 if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range']) && is_numeric($serendipity['GET']['range'])) {
     serveArchives();
-} else if ((preg_match(PAT_PERMALINK, $uri, $matches) ||
-            preg_match(PAT_COMMENTSUB, $uri, $matches) ||
-            isset($serendipity['GET']['id']) ||
-            isset($_GET['p']))
-            && !preg_match('/autosave/', $serendipity['uriArguments'][1]) ) {
+} else if (preg_match(PAT_PERMALINK, $uri, $matches) ||
+           preg_match(PAT_COMMENTSUB, $uri, $matches) ||
+           isset($serendipity['GET']['id']) ||
+           isset($_GET['p'])) {
     serveEntry($matches);
 } elseif (preg_match(PAT_PERMALINK_FEEDCATEGORIES, $uri, $matches) || preg_match(PAT_PERMALINK_FEEDAUTHORS, $uri, $matches) || preg_match(PAT_FEEDS, $uri)) {
     serveFeed();
