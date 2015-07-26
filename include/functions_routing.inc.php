@@ -163,6 +163,8 @@ function serveAuthorPage($matches) {
     global $serendipity;
     $serendipity['view'] = 'authors';
 
+    
+    $is_multiauth = (isset($serendipity['POST']['isMultiAuth']) && is_array($serendipity['POST']['multiAuth'])); 
     if ($is_multiauth) {
         $serendipity['GET']['viewAuthor'] = implode(';', $serendipity['POST']['multiAuth']);
         $serendipity['uriArguments'][]    = PATH_AUTHORS;
@@ -215,6 +217,7 @@ function serveCategory($matches) {
     global $serendipity;
     $serendipity['view'] = 'categories';
 
+    $is_multicat = (isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat']));
     if ($is_multicat) {
         $serendipity['GET']['category'] = implode(';', $serendipity['POST']['multiCat']);
         $serendipity['uriArguments'][]  = PATH_CATEGORIES;
@@ -404,9 +407,6 @@ function serveEntry($matches) {
     if ($id === 0) {
         $id = false;
     }
-
-    serendipity_track_referrer($id);
-    $track_referer = false;
 
     $_GET['serendipity']['action'] = 'read';
     $_GET['serendipity']['id']     = $id;
