@@ -351,20 +351,7 @@ function serveFeed() {
         }
     }
 
-    ob_start();
     include(S9Y_INCLUDE_PATH . 'rss.php');
-    $data = ob_get_contents();
-    ob_end_clean();
-
-    if ($serendipity['pregenerate']) {    # This seems to be a relict of an old cache system? TODO: Remove or restore
-        $fp = fopen($serendipity['serendipityPath'] . PATH_FEEDS.'/index.' . $matches[1], 'w');
-        fwrite($fp, $data);
-        fclose($fp);
-    }
-
-    serendipity_gzCompression();
-
-    print $data;
 }
 
 function serveEntry($matches) {
@@ -422,17 +409,7 @@ function serveEntry($matches) {
         header('Status: 404 Not found');
     }
 
-    ob_start();
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-    $data = ob_get_contents();
-    ob_end_clean();
-
-    if (isset($serendipity['pregenerate']) && $serendipity['pregenerate']) {    # This seems to be a relict of an old cache system? TODO: Remove or restore
-        $fp = fopen($serendipity['serendipityPath'] . PATH_ARCHIVES.'/' . $id, 'w');
-        fwrite($fp, $data);
-        fclose($fp);
-    }
-    print $data;
 }
 
 function serveArchives() {
@@ -585,17 +562,7 @@ function serveArchives() {
         $serendipity['head_subtitle'] .= sprintf(ENTRIES_FOR, $date);
     }
 
-    ob_start();
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
-    $data = ob_get_contents();
-    ob_end_clean();
 
-    if (isset($serendipity['pregenerate']) && $serendipity['pregenerate']) {    # This seems to be a relict of an old cache system? TODO: Remove or restore
-        $fp = fopen('./'.PATH_ARCHIVES.'/' . $matches[1], 'w');
-        fwrite($fp, $data);
-        fclose($fp);
-    }
-
-    echo $data;
 }
     
