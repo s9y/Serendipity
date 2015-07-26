@@ -79,9 +79,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     exit;
 } else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
     servePlugin($matches);
-    if (!defined('NO_EXIT')) {
-        exit;
-    }
+    exit;
 } else if (preg_match(PAT_ADMIN, $uri)) {
     gotoAdmin();
     exit;
@@ -110,15 +108,14 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
     serve404();
 }
 
-if (!defined('NO_EXIT')) {
-    if (empty($serendipity['smarty_file'])) {
-        $serendipity['smarty_file'] = '404.tpl';
-        $serendipity['viewtype'] = '404_5';
-    }
-
-    serendipity_gzCompression();
-
-    $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
+if (empty($serendipity['smarty_file'])) {
+    $serendipity['smarty_file'] = '404.tpl';
+    $serendipity['viewtype'] = '404_5';
 }
+
+serendipity_gzCompression();
+
+$serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
+
 
 /* vim: set sts=4 ts=4 expandtab : */
