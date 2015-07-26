@@ -95,13 +95,6 @@ switch ($serendipity['GET']['action']) {
         serendipity_printEntries($r);
         break;
 
-    // Show the comments
-    case 'comments':
-        serendipity_printCommentsByAuthor();
-        // use 'content_message' for pagination?
-
-        break;
-
     // Show the archive
     case 'archives':
         $serendipity['head_subtitle'] = ARCHIVES;

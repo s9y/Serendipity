@@ -96,8 +96,6 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 } elseif (preg_match(PAT_JS, $uri, $matches)) {
     serveJS($matches[1]);
     exit;
-} else if (preg_match(PAT_COMMENTS, $uri, $matches)) {
-    serveComments();
 } else if (preg_match('@/(index(\.php|\.html)?)|'. preg_quote($serendipity['indexFile']) .'@', $uri) ||
            preg_match('@^/' . preg_quote(trim($serendipity['serendipityHTTPPath'], '/')) . '/?(\?.*)?$@', $uri)) {
     serveIndex();
