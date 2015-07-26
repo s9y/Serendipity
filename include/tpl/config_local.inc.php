@@ -185,14 +185,6 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('ifEmpty')),
 
-                                    array('var'         => 'permalinkArchivePath',
-                                          'title'       => INSTALL_PERMALINK_ARCHIVEPATH,
-                                          'description' => '',
-                                          'type'        => 'string',
-                                          'default'     => 'archive',
-                                          'permission'  => 'siteConfiguration',
-                                          'flags'       => array('ifEmpty')),
-
                                     array('var'         => 'permalinkCategoriesPath',
                                           'title'       => INSTALL_PERMALINK_CATEGORIESPATH,
                                           'description' => '',
