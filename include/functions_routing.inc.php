@@ -282,9 +282,8 @@ function serveArchive() {
     global $serendipity;
     $serendipity['view'] = 'archive';
     $serendipity['GET']['action'] = 'archives';
-    $_args = $serendipity['uriArguments'];
 
-    locateHiddenVariables();
+    locateHiddenVariables($serendipity['uriArguments']);
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 }
