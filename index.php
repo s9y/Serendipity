@@ -139,9 +139,6 @@ if ($track_referer) {
 }
 
 if (!defined('NO_EXIT')) {
-    $raw_data = ob_get_contents();
-    ob_end_clean();
-    $serendipity['smarty']->assignByRef('raw_data', $raw_data);
     if (empty($serendipity['smarty_file'])) {
         $serendipity['smarty_file'] = '404.tpl';
         $serendipity['viewtype'] = '404_5';
