@@ -3,16 +3,6 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 
-#apd_set_pprof_trace();
-
-function microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
-}
-
-$time_start = microtime_float();
-
-
 // We need to set this to return a 200 since we use .htaccess ErrorDocument
 // rules to handle archives.
 header('HTTP/1.0 200');
@@ -145,7 +135,5 @@ if (!defined('NO_EXIT')) {
 
     $serendipity['smarty']->display(serendipity_getTemplateFile($serendipity['smarty_file'], 'serendipityPath'));
 }
-
-if (is_object($serendipity['logger'])) $serendipity['logger']->debug('Page delivered in '. round(microtime_float()-$time_start,6) .' seconds, '. sizeof(get_included_files()) .' files included');
 
 /* vim: set sts=4 ts=4 expandtab : */
