@@ -57,6 +57,12 @@ Version 2.1 ()
     * Some small enhancements to the error reporting
 
 
+Version 2.0.3 ()
+------------------------------------------------------------------------
+
+    * Fix some backend entry form related event messages
+
+
 Version 2.0.2 (July 24th, 2015)
 ------------------------------------------------------------------------
 
