@@ -215,7 +215,11 @@
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
+        {if $iframe === true && isset($smarty.post.serendipity.properties.lang_selected)}
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.PLUGIN_EVENT_MULTILINGUAL_ENTRY_RELOADED|sprintf:{(''==$smarty.post.serendipity.properties.lang_selected)?$lang:$smarty.post.serendipity.properties.lang_selected}}</span>
+        {else}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE}</span>
+        {/if}
         {/if}
         {if $is_iframepreview}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_PREVIEW}</span>
@@ -236,5 +240,5 @@
         </div>
     {/if}
 {/if}
-{$iframe}
+{if $iframe !== true && !empty($iframe)}{$iframe}{/if}
 {$entryForm}
