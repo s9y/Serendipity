@@ -446,7 +446,7 @@ if (isset($_SESSION['serendipityEmail'])) {
     $serendipity['email'] = $_SESSION['serendipityEmail'];
 }
 
-if (!isset($serendipity['use_autosave'])) {
+if (defined('IN_serendipity_admin') && !isset($serendipity['use_autosave'])) {
     $serendipity['use_autosave'] = true;
 }
 
