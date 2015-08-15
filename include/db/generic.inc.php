@@ -239,7 +239,7 @@ function serendipity_db_reconnect() {
  * Prepares a Serendipty query input to fully valid SQL. Replaces certain "template" variables.
  *
  * @access public
- * @param  string   SQL query with template variables to convert
+ * @param  string       SQL query with template variables to convert
  * @return ressource    SQL ressource handle of the executed query
  */
 function serendipity_db_schema_import($query) {

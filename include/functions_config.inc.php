@@ -957,7 +957,7 @@ function serendipity_probeInstallation($item) {
  * Sets a HTTP header
  *
  * @access public
- * @param   string      The HTTP headre to set
+ * @param   string      The HTTP header to set
  * @return null
  */
 function serendipity_header($header) {
