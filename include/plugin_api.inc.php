@@ -25,11 +25,11 @@ $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_a
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
   global $serendipity;
 
-    // Only execute if current template does not have its own jquery.js file
+    // Only execute if current template (only) does not have its own jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
     // $serendipity['capabilities']['jquery'] = false
 
-    $check = serendipity_getTemplateFile('jquery.js');
+    $check = file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/jquery.js');
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
