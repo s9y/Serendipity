@@ -113,7 +113,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden, und Sie müssen bereits eine weitere URL des Blogs geöffnet haben, bevor Sie einen Kommentar absenden können!');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'SPAM IP Adressen via HTaccess blocken?');
-@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihref .htacces Datei hinzu gefügt. Die .htaccess Datei wird regelmässig mit den abgelehnten IPs des letzten Monats erneuert.');
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihrer .htaccess Datei hinzugefügt. Die .htaccess Datei wird regelmässig mit den abgelehnten IPs des letzten Monats erneuert.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'So sehen Ihre Captchas im Moment aus. Nachdem Sie die Einstellungen geändert und gespeichert haben können Sie durch einen Klick auf diese das Aussehen hier erneuern.');
 
