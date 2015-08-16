@@ -254,18 +254,16 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
  * @access public
  * @param   string      The filename to search for in the selected template
  * @param   string      The path selector that tells whether to return a HTTP or realpath
- * @param   bool        Enable to include frontend template fallback chaining (used for wysiwyg Editor custom config files)
+ * @param   bool        Enable to include frontend template fallback chaining (used for wysiwyg Editor custom config files, emoticons, etc)
+ * @param   bool        Enable to check into $serendipity['template'] or its engine, then fall back to $this->pluginFile dir (used by plugins via parseTemplate() method)
  * @return  string      The full path+filename to the requested file
  */
-function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false) {
+function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false, $simple_plugin_fallback = false) {
     global $serendipity;
 
     $directories = array();
 
     if (defined('IN_serendipity_admin') && $serendipity['smarty_preview'] == false) {
-        // Backend will always use our default backend (=defaultTemplate) as fallback.
-        $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
-
         if ($force_frontend_fallback) {
             // If enabled, even when within the admin suite it will be possible to reference files that
             // reside within a frontend-only template directory.
@@ -278,8 +276,12 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
             }
         }
 
-        $directories[] = $serendipity['defaultTemplate'] .'/';
-        $directories[] = 'default/';
+        if (!$simple_plugin_fallback) {
+            // Backend will always use our default backend (=defaultTemplate) as fallback.
+            $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
+            $directories[] = $serendipity['defaultTemplate'] .'/';
+            $directories[] = 'default/';
+        }
     } else {
         $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
         if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
@@ -289,11 +291,13 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
             }
         }
 
-        // Frontend templates currently need to fall back to "default" (see "idea"), so that they get the
-        // output they desire. If templates are based on 2k11, the need to set "Engine: 2k11" in their info.txt
-        // file.
-        $directories[] = 'default/';
-        $directories[] = $serendipity['defaultTemplate'] .'/';
+        if (!$simple_plugin_fallback) {
+            // Frontend templates currently need to fall back to "default" (see "idea"), so that they get the
+            // output they desire. If templates are based on 2k11, they need to set "Engine: 2k11" in their info.txt
+            // file.
+            $directories[] = 'default/';
+            $directories[] = $serendipity['defaultTemplate'] .'/';
+        }
     }
 
     foreach ($directories as $directory) {

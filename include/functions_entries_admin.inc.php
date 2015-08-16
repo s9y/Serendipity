@@ -144,7 +144,9 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 
     $template_vars['entry_template'] = serendipity_getTemplateFile('admin/entries.tpl', 'serendipityPath');
 
-    serendipity_smarty_init();
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init();
+    }
     $serendipity['smarty']->registerPlugin('modifier', 'emit_htmlarea_code', 'serendipity_emit_htmlarea_code');
     $serendipity['smarty']->assign('admin_view', 'entryform');
     serendipity_plugin_api::hook_event('backend_entryform_smarty', $template_vars);
@@ -153,7 +155,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
 }
 
 function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {
-    # init == true when already editor was already initialized
+    # init == true when editor was already initialized
     static $init = false;
     global $serendipity;
 
