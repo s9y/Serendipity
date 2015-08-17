@@ -14,7 +14,7 @@ if (!defined('serendipity_LANG_LOADED') || serendipity_LANG_LOADED !== true) {
     $charset = serendipity_getCharset();
 
     // The following variable can be set in serendipity_config_local.inc.php to force your templates being able to use language override includes
-    if (isset($serendipity['useTemplateLanguage'])) {
+    if (isset($serendipity['useTemplateLanguage']) && $serendipity['useTemplateLanguage'] === true) {
         if (defined('S9Y_DATA_PATH')) {
             @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template'] . '/' . $charset .  'lang_' . $serendipity['lang'] . '.inc.php');
             @include_once (S9Y_DATA_PATH . 'templates/' . $serendipity['template'] . '/lang_en.inc.php');
