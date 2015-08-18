@@ -727,7 +727,7 @@
 
         serendipity.eraseEntryEditorCache = function() {
             serendipity.cache("serendipity[body]", null);
-            serendipity.cache("serendipity[extended]", null);;
+            serendipity.cache("serendipity[extended]", null);
         }
 
         var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;

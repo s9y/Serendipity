@@ -95,7 +95,8 @@ function errorHandlerCreateDOM(htmlStr) {
 
             case 'backend_save':
             case 'backend_publish':
-                echo '<script>$(document).ready(function() { if(Modernizr.indexeddb) { serendipity.eraseEntryEditorCache(); } });</script>';
+                // this is preview_iframe.tpl updertHooks
+                echo '<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>';
 
         return true;
         break;
