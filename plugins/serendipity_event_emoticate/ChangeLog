@@ -1,3 +1,9 @@
+1.9:
+----
+ * changed fetching path in emoticons.inc.php file.
+   Theme emoticons do not need a fallback into another theme.
+
+
 1.8:
 -----
 
