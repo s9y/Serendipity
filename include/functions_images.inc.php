@@ -3438,7 +3438,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         if ($file['hotlink']) {
             serendipity_updateImageInDatabase(array('realname' => $newDir, 'name' => $newDir), $item_id);
         } else {
-            $file_new = $file['path'] . $newDir . $file['name'] . (empty($file['extension']) ? '' : '.');
+            $file_new = $newDir . $file['name'] . (empty($file['extension']) ? '' : '.');
             $file_old = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.');
 
             $newfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file_new . $file['extension'];
@@ -3456,7 +3456,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     'file'   => $file
                 ));
 
-                serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
+                serendipity_plugin_api::hook_event('backend_media_rename', $renameValues); // eg. for staticpage inner entries path renamings
 
                 // Rename file
                 rename($renameValues[0]['from'], $renameValues[0]['to']);
