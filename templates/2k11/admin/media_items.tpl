@@ -87,6 +87,7 @@
                         <li><b>{$CONST.THUMBNAIL_SHORT}:</b> {$file.dim.0}x{$file.dim.1}</li>
                         {/if}
                         <li><b>{$CONST.IMAGE_SIZE}:</b> {$file.nice_size} KB</li>
+                        <li><b>{$CONST.INSTALL_RELUPLOADPATH}:</b> "{$file.path}"</li>
                     {/if}
                     </ul>
                 </footer>

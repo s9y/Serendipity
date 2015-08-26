@@ -178,6 +178,17 @@
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
             <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
+            <div class="form_select">
+                <label for="newDir">{$CONST.FILTER_DIRECTORY}</label>
+                <input type="hidden" name="serendipity[oldDir]" value="">
+                <select id="newDir" name="serendipity[newDir]">
+                    <option value=""></option>
+                {foreach from=$media.paths item="folder"}
+                    <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                {/foreach}
+                </select>
+                <input class="state_submit" name="toggle" type="submit" value="{$CONST.MOVE}">
+            </div>
         </div>
     </form>
     {/if}

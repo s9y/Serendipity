@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Added new bulk image move ability to MediaLibrary
+
     * Fix importers to use the new mysqli API extension with PHP 5+
 
     * WIP: Added an internal cache to speedup s9y's site generation. Can

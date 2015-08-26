@@ -112,6 +112,32 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
 
+        // case bulk multimove (leave the fake oldDir being send as an empty dir)
+        if (isset($serendipity['POST']['oldDir']) && !empty($serendipity['POST']['newDir'])) {
+            $messages = array();
+            $multiMoveImages = $serendipity['POST']['multiDelete'];
+            unset($serendipity['POST']['multiDelete']);
+            $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move
+            $nDir = (string)serendipity_specialchars($serendipity['POST']['newDir']);
+            if ($oDir != $nDir) {
+                foreach($multiMoveImages AS $mkey => $move_id) {
+                    $file = serendipity_fetchImageFromDatabase((int)$move_id);
+                    $oDir = $file['path']; // this now is the exact oldDir path of this ID
+                    if (serendipity_moveMediaDirectory($oDir, $nDir, 'file', (int)$move_id, $file)) {
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . MEDIA_DIRECTORY_MOVED . '</span>', $nDir);
+                    } else {
+                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . '</span>', $nDir);
+                    }
+                }
+            }
+            $data['messages'] = $messages;
+            // fall back
+            $data['case_default'] = true;
+            $data['showML'] = showMediaLibrary();
+            unset($messages);
+            break;
+        }
+
         $ids = '';
         $data['rip_image']        = array();
         $data['case_multidelete'] = true;
