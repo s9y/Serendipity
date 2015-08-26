@@ -3370,29 +3370,30 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     $real_newDir = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir;
 
     if ($type == 'dir') {
+
         if (!is_dir($real_oldDir)) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
-            printf(ERROR_FILE_NOT_EXISTS, '<span class="block_level">' . $oldDir . '</span>');
+            printf(ERROR_FILE_NOT_EXISTS, $oldDir);
             echo "</span>\n";
             return false;
         }
 
         if (is_dir($real_newDir)) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
-            printf(ERROR_FILE_EXISTS, '<span class="block_level">' . $newDir . '</span>');
+            printf(ERROR_FILE_EXISTS, $newDir);
             echo "</span>\n";
             return false;
         }
 
         if (!rename($real_oldDir, $real_newDir)) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
-            printf(MEDIA_DIRECTORY_MOVE_ERROR, '<span class="block_level">' . $newDir . '</span>');
+            printf(MEDIA_DIRECTORY_MOVE_ERROR, $newDir);
             echo "</span>\n";
             return false;
         }
 
         echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
-        printf(MEDIA_DIRECTORY_MOVED, '<span class="block_level">' . $newDir . '</span>');
+        printf(MEDIA_DIRECTORY_MOVED, $newDir);
         echo "</span>\n";
 
         $dirs = serendipity_db_query("SELECT id, path
@@ -3428,6 +3429,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     }
 
     if ($type == 'file') {
+
         if (serendipity_isActiveFile(basename($newDir))) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
             printf(ERROR_FILE_FORBIDDEN, serendipity_specialchars($newDir));
@@ -3456,7 +3458,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     'file'   => $file
                 ));
 
-                serendipity_plugin_api::hook_event('backend_media_rename', $renameValues); // eg. for staticpage inner entries path renamings
+                serendipity_plugin_api::hook_event('backend_media_rename', $renameValues); // eg. for staticpage entries path regex replacements
 
                 // Rename file
                 rename($renameValues[0]['from'], $renameValues[0]['to']);
@@ -3464,7 +3466,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 foreach($renameValues AS $renameData) {
                     // Rename thumbnail
                     @rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']),
-                           $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $newDir . (!empty($file['thumbnail_name']) ? '.' . $renameData['thumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']));
+                           $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $renameData['thumb'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']));
                 }
 
                 serendipity_updateImageInDatabase(array('thumbnail_name' => $renameValues[0]['thumb'], 'realname' => $newDir, 'name' => $newDir), $item_id);
@@ -3485,7 +3487,9 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 return false;
             }
         }
+
     } elseif ($type == 'filedir') {
+
         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
                                  SET path = '" . serendipity_db_escape_string($newDir) . "'
                                WHERE id   = " . (int)$item_id);
@@ -3505,7 +3509,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             'newDir'  => $newDir,
             'type'    => $type,
             'item_id' => $item_id,
-            'file'    => $file,
+            'file'    => $pick,
             'name'    => $pick['name']
         ));
 
@@ -3522,7 +3526,16 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         $oldDir .= $pick['name'];
         $newDir .= $pick['name'];
+        $hasExt = isset($pick['extension']) ? '.'.$pick['extension'] : '';
+
+        if (file_exists($newfile)) {
+            echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
+            printf(MEDIA_DIRECTORY_MOVED, $newDir . $hasExt);
+            echo "</span>\n";
+        }
+
     } elseif ($type == 'dir') {
+
         $renameValues = array(array(
             'from'    => $oldfile,
             'to'      => $newfile,
@@ -3540,7 +3553,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     // Only MySQL supported, since I don't know how to use REGEXPs differently.
     if ($serendipity['dbType'] != 'mysql' && $serendipity['dbType'] != 'mysqli') {
-        echo '<span class="block_level">' . MEDIA_DIRECTORY_MOVE_ENTRY . '</span>';
+        echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . MEDIA_DIRECTORY_MOVE_ENTRY . "</span>\n";
         return true;
     }
 
