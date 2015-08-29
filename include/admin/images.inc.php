@@ -118,7 +118,7 @@ switch ($serendipity['GET']['adminAction']) {
             $multiMoveImages = $serendipity['POST']['multiDelete'];
             unset($serendipity['POST']['multiDelete']);
             $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move
-            $nDir = (string)serendipity_specialchars($serendipity['POST']['newDir']);
+            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir']);
             if ($oDir != $nDir) {
                 foreach($multiMoveImages AS $mkey => $move_id) {
                     $file = serendipity_fetchImageFromDatabase((int)$move_id);
@@ -241,8 +241,8 @@ switch ($serendipity['GET']['adminAction']) {
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'image');
             serendipity_request_start();
             $req = new HTTP_Request($serendipity['POST']['imageurl'], $options);
-            // Try to get the URL
 
+            // Try to get the URL
             if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . '</span>', $serendipity['POST']['imageurl']);
             } else {
