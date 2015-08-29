@@ -23,7 +23,7 @@ if (defined('S9Y_FRAMEWORK_RSS')) {
  * @param   array       A superarray of entries to output
  * @param   string      The version/type of a RSS/Atom feed to display (atom1_0, rss2_0 etc)
  * @param   boolean     If true, this is a comments feed. If false, it's an Entry feed.
- * @param   boolean     Indicates if this feed is a fulltext feed (true) or only excercpt (false)
+ * @param   boolean     Indicates if this feed is a fulltext feed (true) or only excerpt (false)
  * @param   boolean     Indicates if E-Mail addresses should be shown (true) or hidden (false)
  * @return
  */
