@@ -3557,23 +3557,31 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         return true;
     }
 
-    // prepare the SELECT query for filetypes
+    // Prepare the SELECT query for filetypes
     if ($type == 'filedir' || $type == 'file') {
         $_file = ($type == 'filedir') ? $pick : $file;
-        // Path patterns to SELECT en detail
-        $oldDirThumb = $oldDir . $_file['name'] . '.' . $_file['thumbnail_name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        $newDirThumb = $newDir . $_file['name'] . '.' . $_file['thumbnail_name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        $oldDirFile  = $oldDir . $_file['name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        $newDirFile  = $newDir . $_file['name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        // REPLACE BY Path and Name only to also match Thumbs
-        $oldDir .= $_file['name'];
-        $newDir .= $_file['name'];
+        $oldDir = ($type == 'file') ? str_replace($_file['name'].'.', '', $oldDir) : $oldDir;
 
+        // Path patterns to SELECT en detail to not pick path parts in a loop
+        $oldDirThumb = $oldDir . $_file['name'] . '.' . $_file['thumbnail_name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
+        $oldDirFile  = $oldDir . $_file['name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
+        $quickblogFilePath = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile;
+
+        // REPLACE BY Path and Name only to also match Thumbs
+        if (strpos($oldDir, $_file['name']) === FALSE) {
+            $oldDir .= $_file['name'];
+        }
+        if (strpos($newDir, $_file['name']) === FALSE) {
+            $newDir .= $_file['name'];
+        }
+        // imageselectorplus plugin quickblog is either quickblog:FullPath or quickblog:none|FullPath or quickblog:|(plugin|js|_blankl)|FullPath
+        // For a possible future isp regex change, we search for 'none' between pipes too
         $q = "SELECT id, body, extended
                 FROM {$serendipity['dbPrefix']}entries
-               WHERE body     REGEXP '(src=|href=|window.open.)(\'|\")(" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . ")'
+               WHERE body     REGEXP '(src=|href=|window.open.|<!--quickblog:)(\'|\"|none\\\||\\\|(plugin|none|js|_blank)\\\|)(" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($quickblogFilePath) . ")'
                   OR extended REGEXP '(src=|href=|window.open.)(\'|\")(" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . ")'
         ";
+
     } else {
         $q = "SELECT id, body, extended
                 FROM {$serendipity['dbPrefix']}entries
@@ -3582,16 +3590,22 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         ";
     }
 
+    // strip, if last char is a period ".", which may happen with quickblog image path strings
+    $newDir = rtrim($newDir, '.');
+
     $dirs = serendipity_db_query($q);
+
     if (is_array($dirs)) {
         foreach($dirs AS $dir) {
+
             $dir['body']     = preg_replace('@(src=|href=|window.open.)(\'|")(' . preg_quote($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDir) . '|' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . ')@', '\1\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDir, $dir['body']);
+            $dir['body']     = preg_replace('@(<!--quickblog:)(none\\||\\|(plugin|none|js|_blank)\\|)(' . preg_quote($serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . ')@', '\1\2' . $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $newDir, $dir['body']);
             $dir['extended'] = preg_replace('@(src=|href=|window.open.)(\'|")(' . preg_quote($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDir) . '|' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDir) . ')@', '\1\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDir, $dir['extended']);
 
             $uq = "UPDATE {$serendipity['dbPrefix']}entries
                                      SET body     = '" . serendipity_db_escape_string($dir['body']) . "' ,
                                          extended = '" . serendipity_db_escape_string($dir['extended']) . "'
-                                   WHERE id       = " . serendipity_db_escape_string($dir['id']);
+                                   WHERE id       =  " . serendipity_db_escape_string($dir['id']);
             serendipity_db_query($uq);
         }
 
