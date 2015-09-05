@@ -220,17 +220,19 @@ if (!$use_installer && $is_logged_in) {
 if ($ajax) {
     // if that is an ajax request we can stop here, since we by convention don't want to wrap the content in the usual backend code
     echo $main_content;
+
 } elseif (!$use_installer) {
+
     $poll_admin_vars = array('main_content', 'no_banner', 'no_sidebar', 'no_footer', 'post_action', 'is_logged_in', 'admin_installed', 'self_info', 'use_installer', 'title');
-    $admin_vars = array();
+    $admin_vars      = array();
+
     foreach($poll_admin_vars AS $poll_admin_var) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
     }
 
-    $admin_vars['out']              = array();
-    $admin_vars['no_create']        = $serendipity['no_create'];
-
-    $admin_vars['title'] = $admin_section;
+    $admin_vars['out']       = array();
+    $admin_vars['no_create'] = $serendipity['no_create'];
+    $admin_vars['title']     = $admin_section;
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
@@ -238,14 +240,19 @@ if ($ajax) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, '', '');
     }
 
-    if (!is_object($serendipity['smarty'])) serendipity_smarty_init();
+    if (!is_object($serendipity['smarty'])) {
+        serendipity_smarty_init();
+    }
     $serendipity['smarty']->assignByRef('admin_vars', $admin_vars);
     $serendipity['smarty']->display(serendipity_getTemplateFile('admin/index.tpl', 'serendipityPath'));
+
 } else {
+
     if (IS_installed === false) {
         $file = 'include/admin/installer.inc.php';
     } elseif ( IS_up2date === false ) {
         $file = 'include/admin/upgrader.inc.php';
     }
     require(S9Y_INCLUDE_PATH . $file);
+
 }
