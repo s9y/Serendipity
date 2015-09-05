@@ -246,20 +246,25 @@ $tasks = array(array('version'   => '0.5.1',
                array('version'   => '2.0.2',
                      'function'  => 'serendipity_removeDeadFiles_SPL',
                      'title'     => 'Removal of obsolete and still resting files in 2.0',
-                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_rest, array('internals'), true),
-                     'desc'      => 'The following old dead files will additionally be removed from your system.<br><pre>' . implode(', ', $dead_files_rest) . '</pre>'),
+                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_200, array('internals'), true),
+                     'desc'      => 'The following old dead files will be removed from your system.<br><pre>' . implode(', ', $dead_files_200) . '</pre>'),
 
                array('version'   => '2.0.2',
                      'function'  => 'recursive_directory_iterator',
                      'title'     => 'Removal of obsolete and dead directories',
-                     'arguments' => array($dead_dirs_rest),
-                     'desc'      => 'The following old dead directories will additionally be removed from your system.<br><pre>' . implode(', ', $dead_dirs_rest) . '</pre>'),
+                     'arguments' => array($dead_dirs_200),
+                     'desc'      => 'The following old dead directories will be removed from your system.<br><pre>' . implode(', ', $dead_dirs_200) . '</pre>'),
                      
                array('version'   => '2.0.2',
                      'function'  => 'serendipity_upgrader_rewriteFeedIcon',
                      'title'     => 'Rewrite path of big feedicon',
                      'desc'      => 'Rewrite path of the big feedicon to not include the template path, since that path is not automatically detected'),
 
+               array('version'   => '2.1.0',
+                     'function'  => 'serendipity_removeDeadFiles_SPL',
+                     'title'     => 'Removal of old dead files in v.2.0.2',
+                     'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_202, array('internals'), true),
+                     'desc'      => 'The following old dead files will be removed from your system.<br><pre>' . implode(', ', $dead_files_202) . '</pre>'),
 
 );
 
