@@ -18,7 +18,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('version',       '1.38');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
-            'smarty'      => '2.6.37',
+            'smarty'      => '2.6.27',
             'php'         => '5.1.0'
         ));
         $propbag->add('event_hooks',    array(
