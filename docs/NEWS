@@ -1,6 +1,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix MediaLibrary objects not pass through into entryproperties
+      CustomFields
+
     * Added new bulk image move ability to MediaLibrary
 
     * Fix importers to use the new mysqli API extension with PHP 5+

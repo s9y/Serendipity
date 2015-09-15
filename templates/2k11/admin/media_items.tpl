@@ -3,7 +3,7 @@
         {* ML got called for inserting media *}
             {if $file.is_image AND $file.full_thumb}
                 {if $media.textarea || $media.htmltarget}
-                {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"}
+                {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
                         {$link="{$file.url}&amp;serendipity[image]={$file.id}"}
@@ -16,7 +16,7 @@
                 
             {elseif $file.is_image AND $file.hotlink}
                 {if $media.textarea}
-                    {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"}
+                    {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
                         {$link="{$file.$url}&amp;serendipity[image]={$file.id}"}
@@ -27,7 +27,7 @@
                     {$img_alt="{$file.realname}"}
             {else}
                 {if $media.textarea}
-                    {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&serendipity[filename_only]={$media.filename_only}&serendipity[htmltarget]={$media.htmltarget}"}
+                    {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[fid]={$file.id}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[htmltarget]={$media.htmltarget}"}
                 {else}
                     {if $file.url}
                         {$link="{$file.$url}&amp;serendipity[image]={$file.id}"}
@@ -54,6 +54,10 @@
             {$img_title="{$file.path}{$file.name}({$file.mime})"}
             {$img_alt="{$file.mime}"}
         {/if}
+    {/if}
+    {* builds a ML objects link for step 1, to pass to media_choose.tpl file passthrough media.filename_only scripts - do not use "empty($link) AND" here, since that would require a reset before! *}
+    {if (!$file.is_image OR $file.is_image == 0) AND $file.mediatype != 'image' AND $file.realfile}
+        {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[fid]={$file.id}&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[htmltarget]={$media.htmltarget}"}
     {/if}
     <article id="media_{$file.id}" class="media_file {cycle values="odd,even"}">
         <header class="clearfix">
@@ -125,7 +129,7 @@
 
             <footer>
                 <ul class="media_file_meta plainList">
-                    <li><b>{$CONST.SORT_ORDER_DATE}:</b> {if $file.authorid != 0}{$CONST.POSTED_BY} {$file.authorname} {/if}{$CONST.ON} {$file.date|@formatTime:DATE_FORMAT_SHORT}</li>
+                    <li><b>{$CONST.SORT_ORDER_DATE}:</b> {if $file.authorid != 0}{$CONST.POSTED_BY} {$file.authorname} {/if}{$CONST.ON} {$file.date|formatTime:DATE_FORMAT_SHORT}</li>
                 {if $file.hotlink}
                     <li>{$file.nice_hotlink}</li>
                 {elseif $file.is_image}
@@ -189,11 +193,11 @@
                 <dl class="clearfix">
                     {foreach from=$meta_data key="meta_name" item="meta_value"}
                     <dt>{$meta_name}</dt>
-                    <dd>{if is_array($meta_value)}{$meta_value|@print_r}{else}{$meta_value|@formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</dd>
+                    <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</dd>
                     {/foreach}
                 </dl>
                 {else}
-                <p>{$meta_data|@formatTime:DATE_FORMAT_SHORT:false:$meta_type}</p>
+                <p>{$meta_data|formatTime:DATE_FORMAT_SHORT:false:$meta_type}</p>
                 {/if}
             {/foreach}
             </section>

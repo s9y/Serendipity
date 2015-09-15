@@ -466,7 +466,7 @@ class serendipity_event_entryproperties extends serendipity_event
 <?php
                 foreach($fields AS $fieldname) {
                     $fieldparts = explode(':', $fieldname);
-                    $fieldname = $fieldparts[0];
+                    $fieldname  = $fieldparts[0];
                     $_fieldname = serendipity_specialchars(trim($fieldname));
 
                     if (isset($serendipity['POST']['properties'][$_fieldname])) {
