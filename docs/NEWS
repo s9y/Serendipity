@@ -21,6 +21,15 @@ Version 2.1 ()
     * Fix the Serendipity template and file fallback chaining to work
       more precise
 
+    * Disable CKEDITOR Source protection for Smarty and WP-Smarty like
+      markup, since now being usable w/o setting ACF OFF
+
+    * Set Serendipity var use_autosave in backend only
+
+    * Fix entries.inc fetching iframe event returning 1, when true and
+      added a new language constant change message for multilanguage
+      entry changes, instead of the wrongly used save message
+
     * Fix importers to use the new mysqli API extension with PHP 5+
 
     * WIP: Added an internal cache to speedup s9y's site generation. Can
