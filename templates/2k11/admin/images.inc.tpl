@@ -185,19 +185,25 @@
     <ul id="serendipity_image_folders" class="option_list">
     {foreach $folders as $folder}
         {if ! $folder@first}
-            {if $folder.depth > $priorDepth}
-                <ul>
+            {if ($folder.depth > $priorDepth)}
+
+            <ul>
             {/if}
 
             {if $folder.depth < $priorDepth}
-                </li>
-                {for $i=$folder.depth+1 to $priorDepth}
-                    </ul></li>
-                {/for}
+
+        </li>
+
+            {for $i=($folder.depth+1) to $priorDepth}
+
+            </ul>
+         </li>
+            {/for}
             {/if}
 
-            {if $folder.depth == $priorDepth}
-                </li>
+            {if ($folder.depth == $priorDepth)}
+
+        </li>
             {/if}
         {/if}
 
@@ -214,10 +220,16 @@
                 </ul>
             </div>
     {/foreach}
+
     </li>
     {for $i=1 to $priorDepth}
-        </ul></li>
+        {if $i != $priorDepth}
+
+            </ul>
+        </li>
+        {/if}
     {/for}
+
     </ul>
 
     <a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
