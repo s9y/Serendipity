@@ -257,6 +257,14 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('ifEmpty')),
 
+                                    array('var'         => 'permalinkCommentsPath',
+                                          'title'       => INSTALL_PERMALINK_COMMENTSPATH,
+                                          'description' => '',
+                                          'type'        => 'string',
+                                          'default'     => 'comments',
+                                          'permission'  => 'siteConfiguration',
+                                          'flags'       => array('ifEmpty')),
+
                     )
             );
 

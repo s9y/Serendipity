@@ -64,6 +64,58 @@ function locateHiddenVariables($_args) {
     return $_args;
 }
 
+function serveComments() {
+    global $serendipity;
+    $serendipity['view'] = 'comments';
+    $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
+    $timedesc = array();
+
+    /* Attempt to locate hidden variables within the URI */
+    foreach ($_args AS $k => $v){
+        if ($v == PATH_COMMENTS) {
+            continue;
+        }
+
+        if (preg_match('@^(last|f|t|from|to)[\s_-]*([\d-/ ]+)$@', strtolower(urldecode($v)), $m)) {
+            if ($m[1] == 'last') {
+                $usetime = time() - ($m[2]*86400);
+                $serendipity['GET']['commentStartTime'] = $usetime;
+                $timedesc['start'] = serendipity_strftime(DATE_FORMAT_SHORT, $usetime);
+                continue;
+            }
+
+            $date = strtotime($m[2]);
+            if ($date < 1) {
+                continue;
+            }
+
+            if ($m[1] == 'f' || $m[1] == 'from') {
+                $serendipity['GET']['commentStartTime'] = $date;
+                $timedesc['start'] = serendipity_strftime(DATE_FORMAT_SHORT, $date);
+            } else {
+                $serendipity['GET']['commentEndTime'] = $date;
+                $timedesc['end'] = serendipity_strftime(DATE_FORMAT_SHORT, $date);
+            }
+        } elseif ($v == 'trackbacks' || $v == 'comments_and_trackbacks' || $v == 'comments') {
+            $serendipity['GET']['commentMode'] = $v;
+        } elseif (!empty($v)) {
+            $serendipity['GET']['viewCommentAuthor'] .= urldecode($v);
+        }
+    }
+
+    $serendipity['head_title']    = COMMENTS_FROM . ' ' . serendipity_specialchars($serendipity['GET']['viewCommentAuthor']);
+    if (isset($timedesc['start']) && isset($timedesc['end'])) {
+        $serendipity['head_title'] .= ' (' . $timedesc['start'] . ' - ' . $timedesc['end'] . ')';
+    } elseif (isset($timedesc['start'])) {
+        $serendipity['head_title'] .= ' (&gt; ' . $timedesc['start'] . ')';
+    } elseif (isset($timedesc['end'])) {
+        $serendipity['head_title'] .= ' (&lt; ' . $timedesc['end'] . ')';
+    }
+    $serendipity['head_subtitle'] = $serendipity['blogTitle'];
+    $serendipity['GET']['action']     = 'comments';
+    include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
+}
+
 function serveJS($js_mode) {
     global $serendipity;
     $serendipity['view'] = 'js';
