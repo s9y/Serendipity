@@ -82,6 +82,8 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
 } else if (preg_match(PAT_ADMIN, $uri)) {
     gotoAdmin();
     exit;
+} else if (preg_match(PAT_ARCHIVE, $uri)) {
+    serveArchive();
 } else if ((isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat'])) ||
             preg_match(PAT_PERMALINK_CATEGORIES, $uri, $matches)) {
     serveCategory($matches);
