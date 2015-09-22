@@ -67,12 +67,12 @@
 {/if}
 {if $case_directoryDoDelete}
     {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
-    {if $ob_serendipity_killPath}{$ob_serendipity_killPath}{/if}
+    {if isset($ob_serendipity_killPath)}{$ob_serendipity_killPath}{/if}
     {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
     {if !empty($smarty.post.save)}
-    {if $ob_serendipity_moveMediaDirectory}<span class="msg_notice"><span class="icon-info-circled"></span> {$ob_serendipity_moveMediaDirectory}</span>{/if}
+    {if isset($ob_serendipity_moveMediaDirectory)}<span class="msg_notice"><span class="icon-info-circled"></span> {$ob_serendipity_moveMediaDirectory}</span>{/if}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$print_CONST.SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
