@@ -3619,6 +3619,52 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 }
 
 /**
+ * Show the Media Library
+ *
+ * @access  public
+ * @param   bool    default false
+ * @param   array   $smarty_vars
+ * @return  string  Image list
+ */
+function showMediaLibrary($addvar_check = false, $smarty_vars = array()) {
+    global $serendipity;
+
+    if (!serendipity_checkPermission('adminImagesView')) {
+        return;
+    }
+    $output = '';
+
+    // After upload, do not show the list to be able to proceed to
+    // media selection.
+    if ($addvar_check && !empty($GLOBALS['image_selector_addvars'])) {
+        return true;
+    }
+
+    if (!isset($serendipity['thumbPerPage'])) {
+        $serendipity['thumbPerPage'] = 2;
+    }
+    $smarty_vars = array(
+        'textarea' => isset($serendipity['GET']['textarea']) ? $serendipity['GET']['textarea'] : false,
+        'htmltarget' => isset($serendipity['GET']['htmltarget']) ? $serendipity['GET']['htmltarget'] : '',
+        'filename_only' => isset($serendipity['GET']['filename_only']) ? $serendipity['GET']['filename_only'] : false,
+    );
+
+    $show_upload = isset($serendipity['GET']['showUpload']) ? $serendipity['GET']['showUpload'] : false;
+
+    $output .= serendipity_displayImageList(
+        isset($serendipity['GET']['page']) ? $serendipity['GET']['page'] : 1,
+        $serendipity['thumbPerPage'],
+        isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true,
+        NULL,
+        $show_upload,
+        NULL,
+        $smarty_vars
+    );
+
+    return $output;
+}
+
+/**
  * Gets all available media directories
  *
  * @return array
