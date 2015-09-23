@@ -50,7 +50,6 @@
                             <label for="serendipity_filter_{$so_key}">{$so_val.desc}</label>
                     {/if}
                     {if $so_val.type == 'date'}
-                        {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
 
                             <div class="form_field">
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
@@ -60,7 +59,6 @@
                                 <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|escape}">
                             </div>
                     {elseif $so_val.type == 'intrange'}
-                        {if $media.filter[$so_key].from != '' OR $media.filter[$so_key].to != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
 
                             <div class="form_field">
                                 <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
@@ -70,7 +68,6 @@
                                 <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|escape}">
                             </div>
                     {elseif $so_val.type == 'authors'}
-                        {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
 
                             <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
                                 <option value="">{$CONST.ALL_AUTHORS}</option>
@@ -81,7 +78,6 @@
 
                             </select>
                     {else}
-                        {if $media.filter[$so_key] != ''}{assign var="show_filter" value=$media.filter[$so_key]}{/if}
                             {* TODO: needs a label, but what IS this? *}
                             <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|escape}">
                     {/if}
