@@ -162,10 +162,10 @@ switch ($serendipity['GET']['adminAction']) {
         $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
         $serendipity['GET']['newname'] = serendipity_uploadSecure($serendipity['GET']['newname'], true);
 
-        if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
+        if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') ||
+           (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
             return;
         }
-
         if (!serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file)) {
             $data['go_back'] = true;
             break;
@@ -188,11 +188,11 @@ switch ($serendipity['GET']['adminAction']) {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
             $created_thumbnail = true;
-            $data['showML']    = showMediaLibrary($messages, true);
+            $data['showML']    = showMediaLibrary(true);
             break;
         }
 
-        $messages[] = '<span class="msg_notice"><span class="icon-info-circled"></span> ' . ADDING_IMAGE . '</span>';
+        $messages[] = '<span class="msg_notice"><span class="icon-info-circled"></span> ' . ADDING_IMAGE . "</span>\n";
 
         $authorid = 0; // Only use access-control based on media directories, not images themselves
 
@@ -386,11 +386,11 @@ switch ($serendipity['GET']['adminAction']) {
             foreach($new_media AS $nm) {
                 serendipity_insertMediaProperty('base_hidden', '', $nm['image_id'], $hidden);
             }
-            $data['showML'] = showMediaLibrary(null, true);
+            $data['showML'] = showMediaLibrary(true);
         }
         $data['messages'] = $messages;
+        unset($messages);
         break;
-
 
     case 'directoryDoDelete':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDirectories')) {
@@ -707,13 +707,21 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 }
 
-function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars = array()) {
+/**
+ * Show the Media Library
+ *
+ * @access  public
+ * @param   bool    default false
+ * @param   array   $smarty_vars
+ * @return  string  Image list
+ */
+function showMediaLibrary($addvar_check = false, $smarty_vars = array()) {
     global $serendipity;
 
     if (!serendipity_checkPermission('adminImagesView')) {
         return;
     }
-    $output = "";
+    $output = '';
 
     // After upload, do not show the list to be able to proceed to
     // media selection.
@@ -741,6 +749,7 @@ function showMediaLibrary($messages=false, $addvar_check = false, $smarty_vars =
         NULL,
         $smarty_vars
     );
+
     return $output;
 }
 
