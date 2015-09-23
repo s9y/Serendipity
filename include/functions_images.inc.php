@@ -1652,6 +1652,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         'extraParems'   => $extraParems,
         'totalImages'   => $totalImages
     ));
+
     return serendipity_showMedia(
         $serendipity['imageList'],
         $paths,
@@ -1719,7 +1720,7 @@ function serendipity_generateImageSelectorParems($format = 'url') {
         }
     }
 
-    return $extraParems;
+    return rtrim($extraParems, '&amp;');
 }
 
 /**
@@ -3430,6 +3431,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     if ($type == 'file') {
 
+        // active in mean of eval or executable
         if (serendipity_isActiveFile(basename($newDir))) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
             printf(ERROR_FILE_FORBIDDEN, serendipity_specialchars($newDir));
@@ -3521,7 +3523,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         foreach($renameValues AS $renameData) {
             // Rename thumbnail
             @rename($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']),
-                   $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . (!empty($pick['thumbnail_name']) ? '.' . $pick['thumbnail_name'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']));
+                    $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . (!empty($pick['thumbnail_name']) ? '.' . $pick['thumbnail_name'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']));
         }
 
         $oldDir .= $pick['name'];
@@ -3559,7 +3561,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     // Prepare the SELECT query for filetypes
     if ($type == 'filedir' || $type == 'file') {
-        $_file = ($type == 'filedir') ? $pick : $file;
+        $_file  = ($type == 'filedir') ? $pick : $file;
         $oldDir = ($type == 'file') ? str_replace($_file['name'].'.', '', $oldDir) : $oldDir;
 
         // Path patterns to SELECT en detail to not pick path parts in a loop
