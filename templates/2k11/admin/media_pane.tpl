@@ -12,9 +12,9 @@
                     <label for="serendipity_only_path" class="visuallyhidden">{$CONST.FILTER_DIRECTORY}</label>
                     <select id="serendipity_only_path" name="serendipity[only_path]">
                         <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
-                    {foreach from=$media.paths item="folder"}
+                    {foreach $media.paths AS $folderHead}
 
-                        <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                        <option{if ($media.only_path == $media.limit_path|cat:$folderHead.relpath)} selected{/if} value="{$folderHead.relpath}">{'&nbsp;'|str_repeat:($folderHead.depth*2)}{$folderHead.name}</option>
                     {/foreach}
 
                     </select>
@@ -35,62 +35,62 @@
 
         <fieldset id="media_pane_filter" class="additional_info filter_pane">
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
-
+{* Keep in mind that $media.sort_order is different than $media.sortorder! The first is for building the key names; the second is the value that was set by POST! *}
             <div id="media_filter" class="clearfix">
-                {foreach from=$media.sort_order item="so_val" key="so_key"}
+            {foreach $media.sort_order AS $filter}
 
-                    <div class="{cycle values="left,center,right"}">
-                    {if $so_val.type == 'date' || $so_val.type == 'intrange'}
+                <div class="{cycle values="left,center,right"}">
+                {if $filter.type == 'date' || $filter.type == 'intrange'}
 
-                        <fieldset>
-                            <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$so_key})</legend></span>
-                    {else}
+                    <fieldset>
+                        <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$filter@key})</legend></span>
+                {else}
 
-                        <div class="form_{if $so_val.type == 'authors'}select{else}field{/if}">
-                            <label for="serendipity_filter_{$so_key}">{$so_val.desc}</label>
-                    {/if}
-                    {if $so_val.type == 'date'}
+                    <div class="form_{if $filter.type == 'authors'}select{else}field{/if}">
+                        <label for="serendipity_filter_{$filter@key}">{$filter.desc}</label>
+                {/if}
+                {if $filter.type == 'date'}
 
-                            <div class="form_field">
-                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
-                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="date" value="{$media.filter[$so_key].from|escape}">
-                                 - 
-                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
-                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="date" value="{$media.filter[$so_key].to|escape}">
-                            </div>
-                    {elseif $so_val.type == 'intrange'}
+                        <div class="form_field">
+                            <label for="serendipity_filter_{$filter@key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
+                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="date" value="{$media.filter[$filter@key].from|escape}">
+                            - 
+                            <label for="serendipity_filter_{$filter@key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
+                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="date" value="{$media.filter[$filter@key].to|escape}">
+                        </div>
+                {elseif $filter.type == 'intrange'}
 
-                            <div class="form_field">
-                                <label for="serendipity_filter_{$so_key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
-                                <input id="serendipity_filter_{$so_key}_from" name="serendipity[filter][{$so_key}][from]" type="text" value="{$media.filter[$so_key].from|escape}">
-                                 - 
-                                <label for="serendipity_filter_{$so_key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
-                                <input id="serendipity_filter_{$so_key}_to" name="serendipity[filter][{$so_key}][to]" type="text" value="{$media.filter[$so_key].to|escape}">
-                            </div>
-                    {elseif $so_val.type == 'authors'}
+                        <div class="form_field">
+                            <label for="serendipity_filter_{$filter@key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
+                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="text" value="{$media.filter[$filter@key].from|escape}">
+                            - 
+                            <label for="serendipity_filter_{$filter@key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
+                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="text" value="{$media.filter[$filter@key].to|escape}">
+                        </div>
+                {elseif $filter.type == 'authors'}
 
-                            <select id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]">
-                                <option value="">{$CONST.ALL_AUTHORS}</option>
-                            {foreach from=$media.authors item="media_author"}
+                        <select id="serendipity_filter_{$filter@key}" name="serendipity[filter][{$filter@key}]">
+                            <option value="">{$CONST.ALL_AUTHORS}</option>
+                            {foreach $media.authors AS $media_author}
 
-                                <option value="{$media_author.authorid}"{if $media.filter[$so_key] == $media_author.authorid} selected{/if}>{$media_author.realname|escape}</option>
+                            <option value="{$media_author.authorid}"{if $media.filter[$filter@key] == $media_author.authorid} selected{/if}>{$media_author.realname|escape}</option>
                             {/foreach}
 
-                            </select>
-                    {else}
-                            {* TODO: needs a label, but what IS this? *}
-                            <input id="serendipity_filter_{$so_key}" name="serendipity[filter][{$so_key}]" type="text" value="{$media.filter[$so_key]|escape}">
-                    {/if}
-                    {if $so_val.type == 'date' || $so_val.type == 'intrange'}
+                        </select>
+                {else}{* this is type string w/o being named *}
+                        {* label is already set on loop start, when type is not date or intrange *}
+                        <input id="serendipity_filter_{$filter@key}" name="serendipity[filter][{$filter@key}]" type="text" value="{$media.filter[$filter@key]|escape}">
+                {/if}
+                {if $filter.type == 'date' || $filter.type == 'intrange'}
 
-                        </fieldset>
-                    {else}
-
-                        </div>
-                    {/if}
+                    </fieldset>
+                {else}
 
                     </div>
-                {/foreach}
+                {/if}
+
+                </div>{* media filter end *}
+            {/foreach}
 
                 <div id="media_filter_file" class="form_field left">
                     <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div id="keyword_list" class="clearfix right">
-                {foreach from=$media.keywords item="keyword"}
+                {foreach $media.keywords AS $keyword}
 
                     <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|escape}" title="{$keyword|escape}">{$keyword|escape|truncate:20:"&hellip;"}</a>
                 {/foreach}
@@ -117,11 +117,11 @@
             <div class="clearfix grouped">
                 <div class="form_select">
                     <label for="serendipity_sortorder_order">{$CONST.SORT_BY}</label>
-
+                    {* Keep in mind that $media.sort_order is different than $media.sortorder! *}
                     <select id="serendipity_sortorder_order" name="serendipity[sortorder][order]">
-                    {foreach from=$media.sort_order item="so_val" key="so_key"}
-
-                        <option value="{$so_key}"{if $media.sortorder.order == $so_key} selected{/if}>{$so_val.desc}</option>
+                    {foreach $media.sort_order AS $orderVal}
+                        {* The first is for building the key names *}
+                        <option value="{$orderVal@key}"{if $media.sortorder.order == $orderVal@key} selected{/if}>{$orderVal.desc}</option>
                     {/foreach}
 
                     </select>
@@ -129,7 +129,7 @@
 
                 <div class="form_select">
                     <label for="serendipity_sortorder_ordermode">{$CONST.SORT_ORDER}</label>
-
+                    {* The second is the value that was set by POST or COOKIE! *}
                     <select id="serendipity_sortorder_ordermode" name="serendipity[sortorder][ordermode]">
                         <option value="DESC"{if $media.sortorder.ordermode == 'DESC'} selected{/if}>{$CONST.SORT_ORDER_DESC}</option>
                         <option value="ASC"{if $media.sortorder.ordermode == 'ASC'} selected{/if}>{$CONST.SORT_ORDER_ASC}</option>
@@ -140,9 +140,9 @@
                     <label for="serendipity_sortorder_perpage">{$CONST.FILES_PER_PAGE}</label>
 
                     <select id="serendipity_sortorder_perpage" name="serendipity[sortorder][perpage]">
-                    {foreach from=$media.sort_row_interval item="so_val"}
+                    {foreach $media.sort_row_interval AS $perPageVal}
 
-                        <option value="{$so_val}"{if $media.perPage == $so_val} selected{/if}>{$so_val}</option>
+                        <option value="{$perPageVal}"{if $media.perPage == $perPageVal} selected{/if}>{$perPageVal}</option>
                     {/foreach}
 
                     </select>
@@ -167,41 +167,45 @@
             });
         </script>
     </form>
-</div>
+</div>{* has toolbar end *}
 
 {if $smarty.get.serendipity.showUpload}
-
+<div class="popuplayer_showUpload">
     <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
+</div>
 {/if}
 
+<div class="media_library_pane">
 {if $media.nr_files < 1}
 
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
     {if $media.manage}
 
-        <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
-            {$media.token}
-            <input name="serendipity[action]" type="hidden" value="admin">
-            <input name="serendipity[adminModule]" type="hidden" value="media">
-            <input name="serendipity[adminAction]" type="hidden" value="multidelete">
+    <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
+        {$media.token}
+        <input name="serendipity[action]" type="hidden" value="admin">
+        <input name="serendipity[adminModule]" type="hidden" value="media">
+        <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
 
-    <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
-        {$MEDIA_ITEMS}
+        <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
+            {$MEDIA_ITEMS}
+
         {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
 
-        <nav class="pagination">
-            <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
+            <nav class="pagination">
+                <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
 
-            <ul class="clearfix">
-                <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-                <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
-            </ul>
-        </nav>
+                <ul class="clearfix">
+                    <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                </ul>
+            </nav>
         {/if}
 
-    </div>
+        </div>{* media pane end *}
+
     {if $media.manage}
 
         <div class="form_buttons">
@@ -212,9 +216,9 @@
                 <input type="hidden" name="serendipity[oldDir]" value="">
                 <select id="newDir" name="serendipity[newDir]">
                     <option value=""></option>
-                {foreach from=$media.paths item="folder"}
+                {foreach $media.paths AS $folderFoot}
 
-                    <option{if ($media.only_path == $media.limit_path|cat:$folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
+                    <option{if ($media.only_path == $media.limit_path|cat:$folderFoot.relpath)} selected{/if} value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
                 {/foreach}
 
                 </select>
@@ -224,3 +228,5 @@
     </form>
     {/if}
 {/if}
+
+</div>{* media library pane end *}
