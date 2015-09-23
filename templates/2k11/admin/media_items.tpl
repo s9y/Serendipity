@@ -1,4 +1,4 @@
-{foreach from=$media.files item="file" name="mediafiles" key="mediakey"}
+{foreach $media.files AS $file}
     {if NOT $media.manage}
         {* ML got called for inserting media *}
             {if $file.is_image AND $file.full_thumb}
@@ -162,22 +162,22 @@
                     </ul>
                 </footer>
 
-                <input type="hidden" name="serendipity[mediaProperties][{$mediakey}][image_id]" value="{$file.image_id}">
+                <input type="hidden" name="serendipity[mediaProperties][{$file@key}][image_id]" value="{$file.image_id}">
 
                 <section class="media_file_props">
                     <h4>{$CONST.MEDIA_PROP}</h4>
-                {foreach from=$file.base_property key="prop_fieldname" item="prop_content"}
+                {foreach $file.base_property AS $prop_content}
 
                     <div class="form_{if $prop_content.type == 'textarea'}area{else}field{/if}">
-                        <label for="mediaProperty{$prop_fieldname}">{$prop_content.label}</label>
+                        <label for="mediaProperty{$prop_content@key}">{$prop_content.label}</label>
                     {if $prop_content.type == 'textarea'}
 
-                        <textarea id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" rows="5">{$prop_content.val|escape}</textarea>
+                        <textarea id="mediaProperty{$prop_content@key}" name="serendipity[mediaProperties][{$file@key}][{$prop_content.title}]" rows="5">{$prop_content.val|escape}</textarea>
                     {elseif $prop_content.type == 'readonly'}
                         {$prop_content.val|escape}
                     {elseif $prop_content.type == 'input'}
 
-                        <input id="mediaProperty{$prop_fieldname}" name="serendipity[mediaProperties][{$mediakey}][{$prop_content.title}]" type="text" value="{$prop_content.val|escape}">
+                        <input id="mediaProperty{$prop_content@key}" name="serendipity[mediaProperties][{$file@key}][{$prop_content.title}]" type="text" value="{$prop_content.val|escape}">
                     {/if}
 
                     </div>
@@ -185,11 +185,11 @@
                 {if NOT $file.hotlink}
 
                     <div class="form_select">
-                        <label for="newDir{$mediakey}">{$CONST.FILTER_DIRECTORY}</label>
-                        <input type="hidden" name="serendipity[oldDir][{$mediakey}]" value="{$file.path|escape}">
-                        <select id="newDir{$mediakey}" name="serendipity[newDir][{$mediakey}]">
+                        <label for="newDir{$file@key}">{$CONST.FILTER_DIRECTORY}</label>
+                        <input type="hidden" name="serendipity[oldDir][{$file@key}]" value="{$file.path|escape}">
+                        <select id="newDir{$file@key}" name="serendipity[newDir][{$file@key}]">
                             <option value=""></option>
-                        {foreach from=$media.paths item="folder"}
+                        {foreach $media.paths AS $folder}
 
                             <option{if ($file.path == $folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
                         {/foreach}
@@ -204,13 +204,13 @@
                     <h4>{$CONST.MEDIA_KEYWORDS}</h4>
 
                     <ul class="clearfix plainList">
-                    {foreach from=$file.base_keywords key="keyword_row" item="keyword_cells"}
-                        {foreach from=$keyword_cells key="keyword_cell" item="keyword"}
+                    {foreach $file.base_keywords AS $keyword_cells}
+                        {foreach $keyword_cells AS $keyword}
                         {if $keyword.name}
 
                         <li>
-                            <input id="mediaKeyword{$keyword.name}{$mediakey}" name="serendipity[mediaKeywords][{$mediakey}][{$keyword.name}]" type="checkbox" value="true"{if $keyword.selected} checked="checked"{/if}>
-                            <label for="mediaKeyword{$keyword.name}{$mediakey}">{$keyword.name|truncate:20:"&hellip;"}</label>
+                            <input id="mediaKeyword{$keyword.name}{$file@key}" name="serendipity[mediaKeywords][{$file@key}][{$keyword.name}]" type="checkbox" value="true"{if $keyword.selected} checked="checked"{/if}>
+                            <label for="mediaKeyword{$keyword.name}{$file@key}">{$keyword.name|truncate:20:"&hellip;"}</label>
                         </li>
                         {/if}
                         {/foreach}
@@ -221,22 +221,22 @@
 
                 <section class="media_file_metadata clearfix">
                     <h4>EXIF/IPTC/XMP</h4>
-                {foreach from=$file.metadata key="meta_type" item="meta_data"}
+                {foreach $file.metadata AS $meta_data}
 
-                    <h5>{$meta_type}</h5>
+                    <h5>{$meta_data@key}</h5>
                     {if is_array($meta_data)}
 
                     <dl class="clearfix">
-                        {foreach from=$meta_data key="meta_name" item="meta_value"}
+                        {foreach $meta_data AS $meta_value}
 
-                        <dt>{$meta_name}</dt>
-                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_name}{/if}</dd>
+                        <dt>{$meta_value@key}</dt>
+                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_value@key}{/if}</dd>
                         {/foreach}
 
                     </dl>
                     {else}
 
-                    <p>{$meta_data|formatTime:DATE_FORMAT_SHORT:false:$meta_type}</p>
+                    <p>{$meta_data|formatTime:DATE_FORMAT_SHORT:false:$meta_data@key}</p>
                     {/if}
                 {/foreach}
 
@@ -247,7 +247,7 @@
                     <h4>{$CONST.REFERER}</h4>
 
                     <ul>
-                    {foreach from=$file.references item="ref"}
+                    {foreach $file.references AS $ref}
 
                         <li>({$ref.name|escape}) <a rel="nofollow" href="{$ref.link|escape}">{$ref.link|default:$CONST.NONE|escape}</a></li>
                     {/foreach}
