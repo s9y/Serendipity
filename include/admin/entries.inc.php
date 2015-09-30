@@ -8,6 +8,7 @@ if (!serendipity_checkPermission('adminEntries')) {
     return;
 }
 
+$per_page   = array('12', '16', '50', '100');
 $sort_order = array('timestamp'     => DATE,
                     'isdraft'       => PUBLISH . '/' . DRAFT,
                     'a.realname'    => AUTHOR,
@@ -15,7 +16,6 @@ $sort_order = array('timestamp'     => DATE,
                     'last_modified' => LAST_UPDATED,
                     'title'         => TITLE,
                     'id'            => 'ID');
-$per_page = array('12', '16', '50', '100');
 
 $data = array();
 
@@ -434,8 +434,8 @@ $data['entryForm'] = $entryForm;
 $data['errors'] = $errors;
 $data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
-if(!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
-if(!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
+if (!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
+if (!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
 
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 

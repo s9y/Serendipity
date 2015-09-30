@@ -1360,7 +1360,7 @@ function serendipity_resize_image_gd($infilename, $outfilename, $newwidth, $newh
  * @param   int     Image height
  * @param   int     Target dimension size
  * @param   string  Dimension to constrain ('width', 'height', 'largest',
-                    'smallest'; defaults to original behavior, 'largest')
+ *                  'smallest'; defaults to original behavior, 'largest')
  * @return  array   An array with the scaled width and height
  */
 function serendipity_calculate_aspect_size($width, $height, $size, $constraint = null) {
@@ -1938,6 +1938,7 @@ function serendipity_deletePath($dir) {
 
 /**
  * Transform a filename into a valid  upload path
+ *     ToDO: Rewrite to use converted Umlauts, eg -> ae!
  *
  * @access public
  * @param   string      The input filename

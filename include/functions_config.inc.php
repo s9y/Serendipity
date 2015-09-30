@@ -1059,7 +1059,7 @@ function serendipity_getPostAuthSessionLanguage() {
         if ($serendipity['expose_s9y']) serendipity_header('X-Serendipity-InterfaceLangSource: Database');
         $lang = $serendipity['lang'];
     } else {
-        $lang = (isset($_SESSION['serendipityLanguage']))?$_SESSION['serendipityLanguage']:$serendipity['lang'];
+        $lang = (isset($_SESSION['serendipityLanguage'])) ? $_SESSION['serendipityLanguage'] : $serendipity['lang'];
     }
 
     if (!isset($serendipity['languages'][$lang])) {

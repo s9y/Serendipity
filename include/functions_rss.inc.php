@@ -155,7 +155,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                     break;
 
                 case 'atom1.0':
-                    $entry_hook     = 'frontend_display:atom-1.0:per_entry';
+                    $entry_hook = 'frontend_display:atom-1.0:per_entry';
                     break;
             }
 
