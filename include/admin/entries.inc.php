@@ -339,8 +339,10 @@ switch($serendipity['GET']['adminAction']) {
             foreach ((array)$serendipity['GET']['filter'] as $k => $v) {
                 $qString .= '&amp;serendipity[filter]['. $k .']='. $v;
             }
+            $data['linkFirst']    = $qString . '&amp;serendipity[page]=' . 0;
             $data['linkPrevious'] = $qString . '&amp;serendipity[page]=' . ($page-1);
             $data['linkNext']     = $qString . '&amp;serendipity[page]=' . ($page+1);
+            $data['linkLast']     = $qString . '&amp;serendipity[page]='; // is done in tpl per $totalPages
 
             $smartentries = array();
             foreach ($entries as $ey) {

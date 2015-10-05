@@ -1604,8 +1604,11 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     );
 
     $pages         = ceil($totalImages / $perPage);
-    $linkPrevious  = '?' . $extraParems . 'serendipity[page]=' . ($page-1);
-    $linkNext      = '?' . $extraParems . 'serendipity[page]=' . ($page+1);
+    $linkPrevious  = '?' . $extraParems . '&amp;serendipity[page]=' . ($page-1);
+    $linkNext      = '?' . $extraParems . '&amp;serendipity[page]=' . ($page+1);
+    // Keep the inner to be build first. Now add first and last. Has to do with adding $param to $extraParems.
+    $linkFirst     = '?' . $extraParems . '&amp;serendipity[page]=' . 1;
+    $linkLast      = '?' . $extraParems . '&amp;serendipity[page]=' . $pages;
     if (is_null($lineBreak)) {
         $lineBreak = floor(750 / ($serendipity['thumbSize'] + 20));
     }
@@ -1647,8 +1650,10 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
         'show_upload'   => $show_upload,
         'page'          => $page,
         'pages'         => $pages,
+        'linkFirst'     => $linkFirst,
         'linkNext'      => $linkNext,
         'linkPrevious'  => $linkPrevious,
+        'linkLast'      => $linkLast,
         'extraParems'   => $extraParems,
         'totalImages'   => $totalImages
     ));

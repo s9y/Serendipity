@@ -456,6 +456,13 @@ progress div.progress-undefined {
 .icon-block:before { content: '\e82a'; }
 .icon-rocket:before { content: '\e82c'; }
 
+/* svg based */
+.icon-pagination-first,
+.icon-pagination-last {
+    width: 0.75em;
+    height: 1em;
+    vertical-align: text-bottom;
+}
 
 /* BACKEND HELPER CLASSES */
 .icon_link,
@@ -1217,11 +1224,15 @@ summary {
 .template_info dt,
 .template_info dd,
 #entries_list .form_check,
+.pagination .first,
 .pagination .prev,
-.pagination .next,
 .serendipity_customfields textarea,
 #dashboard_header h2 {
     float: left;
+}
+.pagination .next,
+.pagination .last {
+    float: right;
 }
 
 #mediaPropertyForm .media_wrap_thumb {
@@ -1271,12 +1282,16 @@ summary {
     width: 48%;
 }
 
+.pagination .first,
+.pagination .last,
 .pagination .prev,
 .pagination .next {
     min-height: 1px;
-    width: 50%;
+    width: 2.2em;
 }
-
+.first .button_link, .last .button_link {
+    width: .5em;
+}
 .pagination > ul {
     min-height: 1em;
 }
@@ -2220,6 +2235,7 @@ label .perm_name,
 .pluginmanager_ownership,
 .pluginmanager_move,
 .pagination .next,
+.pagination .last,
 #login .form_buttons {
     text-align: right;
 }

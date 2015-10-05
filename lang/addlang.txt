@@ -1,3 +1,5 @@
 @define('MULTICHECK_NO_ITEM', 'Please checkmark an item before! Please return to the <a href="%s">referer</a> page.');
 @define('MULTICHECK_NO_DIR', 'Please select a directory before! Please return to the <a href="%s">referer</a> page.');
 @define('BULKMOVE_HELP_DESC', 'Checkmark the objects or images of choice and choose the place to remove to here. <b>Note:</b> This action will happen immediately and will not be asked back to proceed, likewise for the bulk delete action part. All selected items will move physically to the new location and all Blog entries are searched to replace the src and path links links to the new place too. With Staticpage versions from v.4.52(!) this also happens to staticpage entries.');
+@define('FIRST', 'First Page');
+@define('LAST', 'Last Page');
