@@ -396,7 +396,11 @@ switch($serendipity['GET']['adminAction']) {
         break;
 
     case 'multidelete':
-        if (!serendipity_checkFormToken() || !is_array($serendipity['POST']['multiDelete'])) {
+        if (!serendipity_checkFormToken()) {
+            return; // blank content page, but default token check parameter is presenting a XSRF message when false
+        }
+        if (!is_array($serendipity['POST']['multiDelete'])) {
+            echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
 

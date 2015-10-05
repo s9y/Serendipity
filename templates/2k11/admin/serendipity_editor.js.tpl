@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
@@ -366,6 +365,11 @@
                   + '</div>';
         }
 
+        if (parent.self.opener.serendipity == undefined) {
+            // in iframes, there is no opener, and the magnific popup is wrapped
+            parent.self = window.parent.parent.$.magnificPopup;
+            parent.self.opener = window.parent.parent;
+        }
         parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
         parent.self.close();
     }
@@ -493,7 +497,7 @@
         var media_rename = '{$CONST.ENTER_NEW_NAME}';
         if (newname = prompt(media_rename + fname, fname)) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
-            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url);
+            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) +'&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url);
         }
     }
 
@@ -501,7 +505,7 @@
     serendipity.deleteFromML = function(id, fname) {
         if (confirm('{$CONST.DELETE}')) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
-            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]=' + escape(id) +  '&serendipity[token]='+ media_token_url);
+            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]='+ escape(id) +'&serendipity[token]='+ media_token_url);
             window.location.reload(false);
         }
     }

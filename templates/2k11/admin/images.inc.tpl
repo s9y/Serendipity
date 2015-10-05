@@ -72,7 +72,6 @@
 {/if}
 {if $case_directoryEdit}
     {if !empty($smarty.post.save)}
-    {if isset($ob_serendipity_moveMediaDirectory)}<span class="msg_notice"><span class="icon-info-circled"></span> {$ob_serendipity_moveMediaDirectory}</span>{/if}
     <span class="msg_notice"><span class="icon-info-circled"></span> {$print_CONST.SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>

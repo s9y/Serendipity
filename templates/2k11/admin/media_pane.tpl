@@ -23,7 +23,7 @@
             </li>
             <li id="media_selector_bar">
                 <fieldset>
-                    <input type="radio" id="serendipity[filter][fileCategory][All]" name="serendipity[filter][fileCategory]"{if $media.filter.fileCategory == ""} checked{/if} value="">
+                    <input id="serendipity[filter][fileCategory][All]" type="radio" name="serendipity[filter][fileCategory]"{if $media.filter.fileCategory == ""} checked{/if} value="">
                     <label for="serendipity[filter][fileCategory][All]" class="media_selector button_link">{$CONST.COMMENTS_FILTER_ALL}</label>
                     <input id="serendipity[filter][fileCategory][Image]" type="radio" name="serendipity[filter][fileCategory]"{if $media.filter.fileCategory == "image"} checked{/if} value="image">
                     <label for="serendipity[filter][fileCategory][Image]" class="media_selector button_link">{$CONST.IMAGE}</label>
@@ -211,22 +211,32 @@
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
             <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
-            <div class="form_select">
+        </div>
+        <hr>
+        <div class="form_select">
                 <label for="newDir">{$CONST.FILTER_DIRECTORY}</label>
                 <input type="hidden" name="serendipity[oldDir]" value="">
                 <select id="newDir" name="serendipity[newDir]">
                     <option value=""></option>
+                    <option value="uploadRoot">{$CONST.BASE_DIRECTORY}</option>
                 {foreach $media.paths AS $folderFoot}
 
-                    <option{if ($media.only_path == $media.limit_path|cat:$folderFoot.relpath)} selected{/if} value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
+                    <option{if ($media.only_path == $media.limit_path|cat:$folderFoot.relpath)} selected{/if} value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>{***}
                 {/foreach}
 
                 </select>
-                <input class="state_submit" name="toggle" type="submit" value="{$CONST.MOVE}">
-            </div>
         </div>
-    </form>
+        <div class="form_buttons">
+            <input class="state_submit" name="toggle" type="submit" value="{$CONST.MOVE}">
+            <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE}</span></a></span>
+        </div>
+
+        <footer id="media_file_bulkmove" class="media_file_bulkmove additional_info">
+            <span class="msg_notice">{$CONST.BULKMOVE_HELP_DESC}</span>
+        </footer>
     {/if}
+
+    </form>
 {/if}
 
 </div>{* media library pane end *}

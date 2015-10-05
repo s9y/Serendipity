@@ -47,7 +47,7 @@
             {$link="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}"}
             {$img_src="{$file.path}"}
             {$img_title="{$file.path}"}
-            $img_alt="{$file.realname}"}
+            {$img_alt="{$file.realname}"}
         {else}
             {$link="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}"} 
             {$img_src="{$file.mimeicon}"}
@@ -67,7 +67,7 @@
                         <label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
 
-                    <h3 title="{$file.realname}">{$file.realname|truncate:30:"&hellip;"}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>
+                    <h3 title="{$file.realname}">{$file.realname|truncate:50:"&hellip;":true}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>
                     {if $file.authorid != 0}<span class="author block_level">{$file.authorname}</span>{/if}
 
                 </header>
@@ -81,8 +81,7 @@
                             <ul class="plainList">
                             {if $file.hotlink}
 
-                                <li>{$file.nice_hotlink}</li>
-                                <li>{$CONST.MEDIA_HOTLINKED}</li>
+                                <li><b>{$CONST.MEDIA_HOTLINKED}:</b> {$file.nice_hotlink}</li>
                             {else}
                                 {if $file.realname != $file.diskname}
 
@@ -151,7 +150,7 @@
                         <li><b>{$CONST.SORT_ORDER_DATE}:</b> {if $file.authorid != 0}{$CONST.POSTED_BY} {$file.authorname} {/if}{$CONST.ON} {$file.date|formatTime:DATE_FORMAT_SHORT}</li>
                     {if $file.hotlink}
 
-                        <li>{$file.nice_hotlink}</li>
+                        <li><b>{$CONST.MEDIA_HOTLINKED}:</b> {$file.nice_hotlink}</li>
                     {elseif $file.is_image}
 
                         <li><b>{$CONST.ORIGINAL_SHORT}:</b> {$file.dimensions_width}x{$file.dimensions_height}</li>
@@ -188,7 +187,7 @@
                         <label for="newDir{$file@key}">{$CONST.FILTER_DIRECTORY}</label>
                         <input type="hidden" name="serendipity[oldDir][{$file@key}]" value="{$file.path|escape}">
                         <select id="newDir{$file@key}" name="serendipity[newDir][{$file@key}]">
-                            <option value=""></option>
+                            <option{if ($file.path == $folder.relpath)} selected{/if} value="">{$CONST.BASE_DIRECTORY}</option>
                         {foreach $media.paths AS $folder}
 
                             <option{if ($file.path == $folder.relpath)} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>

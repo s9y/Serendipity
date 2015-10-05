@@ -1,6 +1,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Added new bulk image move ability to MediaLibrary. This fixes
+      several issues with rename AND remove and allows to automatically
+      check and set MediaLibrary item entry paths on MOVE.
+      Staticpages from v.4.52 are modified to support this too.
+
     * Fix MediaLibrary objects not pass through into entryproperties
       CustomFields
 

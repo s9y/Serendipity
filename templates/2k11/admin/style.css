@@ -2291,6 +2291,13 @@ label .perm_name,
 .media_file h3 {
     margin: .5em 0 1em;
 }
+.media_file h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 14em;
+    vertical-align: middle;
+}
 
 .media_file .form_check input {
     position: relative;
@@ -2874,6 +2881,12 @@ img.mfp-img {
 }
 
 /* SMALL SCREEN */
+@media only screen and (min-width: 360px) {
+    .media_file h3 {
+        width: 15em;
+    }
+}
+
 @media only screen and (min-width: 480px) {
     #serendipityEntry {
         padding-top: 0;
@@ -3249,6 +3262,12 @@ img.mfp-img {
 
 
 /* LARGE SCREEN */
+@media only screen and (min-width: 860px) {
+    .media_file h3 {
+        width: 17em;
+    }
+}
+
 @media only screen and (min-width: 900px) {
     #edit_entry_status_comments .form_check {
         margin-bottom: 0;
@@ -3321,6 +3340,12 @@ img.mfp-img {
 
     #keyword_list {
         padding-top: 2em;
+    }
+}
+
+@media only screen and (min-width: 950px) {
+    .media_file h3 {
+        width: 19em;
     }
 }
 
@@ -3465,6 +3490,10 @@ img.mfp-img {
         width: 100%;
     }
 
+    .media_file h3 {
+        width: 14em;
+    }
+
     #login {
         margin: 4em auto 8em;
     }
@@ -3473,6 +3502,12 @@ img.mfp-img {
 
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
+    .js .configuration_group .media_choose input {
+        max-width: 42.5%;
+    }
+    .media_file h3 {
+        width: 18em;
+    }
     #edit_entry_metadata #categoryfilter {
         max-width: 22em;
         min-width: 0;
@@ -3482,5 +3517,8 @@ img.mfp-img {
 @media only screen and (min-width: 1600px) {
     html {
         font-size: 1.125em;
+    }
+    .media_file h3 {
+        width: 19em;
     }
 }
