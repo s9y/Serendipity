@@ -1943,7 +1943,7 @@ function serendipity_deletePath($dir) {
 
 /**
  * Transform a filename into a valid  upload path
- *     ToDO: Rewrite to use converted Umlauts, eg -> ae!
+ *     ToDO: Rewrite to use converted Umlauts, eg -> ae! (use serendipity_makeFilename()?)
  *
  * @access public
  * @param   string      The input filename
@@ -1954,6 +1954,8 @@ function serendipity_deletePath($dir) {
 function serendipity_uploadSecure($var, $strip_paths = true, $append_slash = false) {
 
     $var = str_replace(' ', '_', $var);
+    #$var = serendipity_makeFilename($var); // shouldn't this do? We will need to include functions_permalinks.inc.php for this!
+    if (function_exists('iconv') && strtolower(LANG_CHARSET) == 'utf-8') $var = iconv("utf-8", "ascii//TRANSLIT", $var);
     $var = preg_replace('@[^0-9a-z\._/-]@i', '', $var);
     if ($strip_paths) {
         $var = preg_replace('@(\.+[/\\\\]+)@', '/', $var);
