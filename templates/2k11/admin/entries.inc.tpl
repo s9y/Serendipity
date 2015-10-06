@@ -1,15 +1,3 @@
-<svg display="none" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<defs>
-<symbol id="icon-pagination-first" viewBox="0 0 1024 1024">
-	<title>first</title>
-    <path d="M546.282 78.742q10.602 -10.602 17.856 -7.254t7.254 17.856v821.376q0 14.508 -7.254 17.856t-17.856 -7.254l-396.18 -396.18q-5.022 -5.022 -7.254 -10.602v378.324q0 14.508 -10.602 25.11t-25.11 10.602h-71.424q-14.508 0 -25.11 -10.602t-10.602 -25.11v-785.664q0 -14.508 10.602 -25.11t25.11 -10.602h71.424q14.508 0 25.11 10.602t10.602 25.11v378.324q2.232 -6.138 7.254 -10.602z" fill="#000000"/></path>
-</symbol>
-<symbol id="icon-pagination-last" viewBox="0 0 1024 1024">
-	<title>last</title>
-    <path d="M25.11 921.322q-10.602 10.602 -17.856 7.254t-7.254 -17.856v-821.376q0 -14.508 7.254 -17.856t17.856 7.254l396.18 396.18q4.464 4.464 7.254 10.602v-378.324q0 -14.508 10.602 -25.11t25.11 -10.602h71.424q14.508 0 25.11 10.602t10.602 25.11v785.664q0 14.508 -10.602 25.11t-25.11 10.602h-71.424q-14.508 0 -25.11 -10.602t-10.602 -25.11v-378.324q-2.79 5.58 -7.254 10.602z" fill="#000000"/></path>
-</symbol>
-</defs>
-</svg>
 {if $drawList}
 <div class="has_toolbar">
     <h2>{$CONST.EDIT_ENTRIES}</h2>
@@ -132,7 +120,7 @@
     {/foreach}
         });
     </script>
-    
+
 </div>
     {if $is_entries}
     {if NOT $simpleFilters}
@@ -192,15 +180,15 @@
             {/foreach}
             </ul>
             {if ($offSet > 0) || ($count > $perPage)}
-            {math equation="ceil(values/parts)" assign=totalPages values=$totalEntries parts=$perPage} 
+            {math equation="ceil(values/parts)" assign=totalPages values=$totalEntries parts=$perPage}
             <nav class="pagination">
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><svg class="icon icon-pagination-first"><use xlink:href="#icon-pagination-first"></use></svg></a>{/if}</li>
+                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start"></span></a>{/if}</li>
                     <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be placed to end by the CSS float:right *}
-                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><svg class="icon icon-pagination-last"><use xlink:href="#icon-pagination-last"></use></svg></a>{/if}</li>
+                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end"></span></a>{/if}</li>
                     <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>

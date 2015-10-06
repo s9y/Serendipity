@@ -458,14 +458,6 @@ progress div.progress-undefined {
 .icon-rocket:before { content: '\e82c'; }
 .icon-to-start:before { content: '\e82d'; }
 
-/* svg based */
-.icon-pagination-first,
-.icon-pagination-last {
-    width: 0.75em;
-    height: 1em;
-    vertical-align: text-bottom;
-}
-
 /* BACKEND HELPER CLASSES */
 .icon_link,
 .button_link,
