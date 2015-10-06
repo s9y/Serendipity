@@ -197,10 +197,10 @@
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST}"><span class="visuallyhidden">{$CONST.FIRST} </span><svg class="icon icon-pagination-first"><use xlink:href="#icon-pagination-first"></use></svg></a>{/if}</li>
+                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><svg class="icon icon-pagination-first"><use xlink:href="#icon-pagination-first"></use></svg></a>{/if}</li>
                     <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be placed to end by the CSS float:right *}
-                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST}"><span class="visuallyhidden">{$CONST.LAST} </span><svg class="icon icon-pagination-last"><use xlink:href="#icon-pagination-last"></use></svg></a>{/if}</li>
+                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><svg class="icon icon-pagination-last"><use xlink:href="#icon-pagination-last"></use></svg></a>{/if}</li>
                     <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>

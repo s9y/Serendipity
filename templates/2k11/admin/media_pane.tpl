@@ -212,10 +212,10 @@
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST}"><span class="visuallyhidden">{$CONST.FIRST} </span><svg class="icon icon-pagination-first"><use xlink:href="#icon-pagination-first"></use></svg></a>{/if}</li>
+                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><svg class="icon icon-pagination-first"><use xlink:href="#icon-pagination-first"></use></svg></a>{/if}</li>
                     <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be at end by the CSS float:right *}
-                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST}"><span class="visuallyhidden">{$CONST.LAST} </span><svg class="icon icon-pagination-last"><use xlink:href="#icon-pagination-last"></use></svg></a>{/if}</li>
+                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><svg class="icon icon-pagination-last"><use xlink:href="#icon-pagination-last"></use></svg></a>{/if}</li>
                     <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
