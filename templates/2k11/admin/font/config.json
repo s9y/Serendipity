@@ -223,6 +223,18 @@
       "src": "fontawesome"
     },
     {
+      "uid": "c47efa0e3e74f6ba4c2562c1258fff1f",
+      "css": "to-end",
+      "code": 59435,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "12052b30d23a1a70d6b32962d5464cae",
+      "css": "to-start",
+      "code": 59437,
+      "src": "fontawesome"
+    },
+    {
       "uid": "197375a3cea8cb90b02d06e4ddf1433d",
       "css": "globe",
       "code": 59425,
