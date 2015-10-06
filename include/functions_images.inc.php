@@ -3712,10 +3712,10 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         if ($type == 'filedir' && !isset($newDirFile)) {
             $newDirFile = (strpos($newDir, $_file['name']) === FALSE) ? $newDir . $_file['name'] : $newDir;
         }
-        if ($type == 'file') {
+        if ($type == 'file' && $oldDir === null) {
             $newDirFile = (empty($newDirFile)) ? $newDir : $newDirFile; // for file renamings $newDirFile has to be $newDir ( which is subdir and new NAME w/o ext)
         }
-        $ispOldFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile;// . (($_file['extension']) ? '.'.$_file['extension'] : '');
+        $ispOldFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile;
 
     } elseif($type == 'dir') {
         // since this is case 'dir', we do not have a filename and have to rename replacement File vars to oldDir and newDir values for the update preg_replace match
@@ -3741,6 +3741,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             $oldDirFile = $_file['path'] . $oldDirFile; // oldDirFile is missing a possible subdir path for the preg_replace
             $newDirFile = $_file['path'] . $newDirFile; // newDirFile - dito
         } else {
+            $_ispOldFile = $ispOldFile;
             $_ispNewFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $newDirFile . (($_file['extension']) ? '.'.$_file['extension'] : '');
         }
         // last paranoidal check
