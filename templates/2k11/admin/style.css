@@ -1290,6 +1290,13 @@ summary {
     min-height: 1em;
 }
 
+.pagination .icon-to-start,
+.pagination .icon-to-end {
+    font-size: .75em;
+    position: relative;
+    top: -1px;
+}
+
 #filter_comments .form_field > input,
 #filter_comments select,
 #serendipity_comment .form_field input,
