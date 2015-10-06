@@ -826,7 +826,8 @@ function serendipity_generateThumbs() {
                 if ($returnsize !== false ) {
                     // Only print the resize message the first time
                     if (!$msg_printed) {
-                        printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . RESIZE_BLAHBLAH, THUMBNAIL_SHORT . "</span>\n");
+                        $resizemedia = sprintf(RESIZE_BLAHBLAH, THUMBNAIL_SHORT);
+                        printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $resizemedia . "</span>\n");
                         echo "\n" . '<ul class="serendipityFileList">' . "\n";
                         $msg_printed = true;
                     }
