@@ -445,7 +445,7 @@ switch ($serendipity['GET']['adminAction']) {
             // preserve moving subdir directories to serendipity_makeFilename(), preserves dir/subdir/ for example
             $_newDir = $serendipity['POST']['newDir'];
             $newfile = serendipity_makeFilename(basename($_newDir));
-            $newDir  = !empty(dirname($_newDir)) ? dirname($_newDir) . '/' . $newfile : $newfile;
+            $newDir  = (dirname($_newDir) != '.') ? dirname($_newDir) . '/' . $newfile : $newfile;
             $oldDir  = serendipity_uploadSecure($serendipity['POST']['oldDir']);
 
             if ($oldDir != $newDir) {
