@@ -222,7 +222,7 @@ switch ($serendipity['GET']['adminAction']) {
                 $tindex  = 1;
             }
 
-            $tfile = serendipity_uploadSecure(basename($tfile));
+            $tfile = serendipity_uploadSecure(serendipity_makeFilename(basename($tfile)));
 
             if (serendipity_isActiveFile($tfile)) {
                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $tfile);
