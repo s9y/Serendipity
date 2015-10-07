@@ -442,13 +442,11 @@ switch ($serendipity['GET']['adminAction']) {
         }
 
         if (!empty($serendipity['POST']['save'])) {
-            // preserve directory slashes, eg for dir/subdir/
-            $_newDir = str_replace('/', '_DS_', $serendipity['POST']['newDir']);
-            $_oldDir = str_replace('/', '_DS_', $serendipity['POST']['oldDir']);
-            $_newDir = serendipity_uploadSecure(serendipity_makeFilename($_newDir));
-            $_oldDir = serendipity_uploadSecure($_oldDir);
-            $newDir  = str_replace('_DS_', '/', $_newDir);
-            $oldDir  = str_replace('_DS_', '/', $_oldDir);
+            // preserve moving subdir directories to serendipity_makeFilename(), preserves dir/subdir/ for example
+            $_newDir = $serendipity['POST']['newDir'];
+            $newfile = serendipity_makeFilename(basename($_newDir));
+            $newDir  = !empty(dirname($_newDir)) ? dirname($_newDir) . '/' . $newfile : $newfile;
+            $oldDir  = serendipity_uploadSecure($serendipity['POST']['oldDir']);
 
             if ($oldDir != $newDir) {
                 //is this possible? Ian: YES! Change an already set directory.
