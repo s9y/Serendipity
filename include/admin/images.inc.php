@@ -222,7 +222,8 @@ switch ($serendipity['GET']['adminAction']) {
                 $tindex  = 1;
             }
 
-            $tfile = serendipity_uploadSecure(serendipity_makeFilename(basename($tfile)));
+            $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour
+            $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
             if (serendipity_isActiveFile($tfile)) {
                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $tfile);
@@ -324,7 +325,8 @@ switch ($serendipity['GET']['adminAction']) {
                         continue;
                     }
 
-                    $tfile = serendipity_uploadSecure(serendipity_makeFilename(basename($tfile)));
+                    $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour
+                    $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
                     if (serendipity_isActiveFile($tfile)) {
                         $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_FORBIDDEN .' '. $tfile . "</span>\n";
