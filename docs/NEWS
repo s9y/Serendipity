@@ -1,24 +1,20 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Allow a better auto char conversion to media upload item names
+
+    * Added Start / End pagination to MediaLibrary and entries list
+
     * Added new bulk image move ability to MediaLibrary. This fixes
       several issues with rename AND remove and allows to automatically
       check and set MediaLibrary item entry paths on MOVE.
       Staticpages from v.4.52 are modified to support this too.
+      Now supports Quickblog (imageselectorplus) entry path repairs.
 
     * Fix MediaLibrary objects not pass through into entryproperties
       CustomFields
 
     * Fix fatal error atom 1.0 issue; References #362
-
-    * Added new bulk image move ability to MediaLibrary
-
-    * Fix moving MediaLibrary items database query regex for blog
-      entries path names to be more precise,
-      fix various filename and filepath and thumb issues on MOVE and,
-      added support moving ML items changing path in quickblog entries
-      (via imageselectorplus) too.
-      The Staticpages Plugin supports this with version from 4.51
 
     * Fix eraseEntryEditorCache script in preview_iframe updertHooks
       IFRAME
