@@ -71,8 +71,8 @@
     {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
-    {if !empty($smarty.post.save)}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$print_CONST.SETTINGS_SAVED_AT}</span>
+    {if !empty($smarty.post.serendipity.save)}
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$print_SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
@@ -165,7 +165,7 @@
             <select id="dircreate_parent" name="serendipity[parent]">
                 <option value="">{$CONST.BASE_DIRECTORY}</option>
             {foreach $folders as $folder}
-                <option{if $folder.relpath == $get.only_path || $folder.relpath == $dir} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)} {$folder.name}</option>
+                <option{if $folder.relpath == $get.only_path || $folder.relpath == $dir} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
             {/foreach}
             </select>
         </div>
