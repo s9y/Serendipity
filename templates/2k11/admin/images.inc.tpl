@@ -58,7 +58,7 @@
 {* END *}
 
 {if $case_add}
-    {if $smarty.post.adminSubAction == 'properties'}
+    {if $smarty.post.serendipity.adminSubAction == 'properties'}
     <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {else}
