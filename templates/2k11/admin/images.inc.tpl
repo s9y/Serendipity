@@ -58,12 +58,7 @@
 {* END *}
 
 {if $case_add}
-    {if $smarty.post.serendipity.adminSubAction == 'properties'}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
-    {else}
     {$showML}
-    {/if}
 {/if}
 {if $case_directoryDoDelete}
     {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
