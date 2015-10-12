@@ -3378,7 +3378,9 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     if (is_null($item_id) && isset($file['id']) && $file['id'] > 0) $item_id = $file['id'];
 
     if ($item_id < 1) {
-        echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . printf(ERROR_FILE_NOT_EXISTS, $item_id) . "</span>\n";
+        echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+        printf(ERROR_FILE_NOT_EXISTS, $item_id);
+        echo "</span>\n";
         return false;
     }
 
@@ -3760,7 +3762,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         if ($oldDir !== null){
             $imgmovedtodir = sprintf(MEDIA_DIRECTORY_MOVE_ENTRIES, count($entries));
-            printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $imgmovedtodir . "</span>\n");
+            echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . $imgmovedtodir . "</span>\n";
         }
 
     }
