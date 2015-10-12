@@ -50,13 +50,6 @@
     <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
     {/if}
 {/if}
-
-{* TODO: obsolete? *}
-{if $case_properties}
-    {** serendipity_showPropertyForm($new_media) **}
-{/if}
-{* END *}
-
 {if $case_add}
     {$showML}
 {/if}
