@@ -3,3 +3,4 @@
 @define('BULKMOVE_HELP_DESC', 'You can select multiple files to bulk-move them to a new location. <strong>Note:</strong> This action cannot be undone, just like bulk-deletion of multiple files. All checked files will be physically moved, and referring blog entries be rewritten to point to the new location.');
 @define('FIRST_PAGE', 'First Page');
 @define('LAST_PAGE', 'Last Page');
+@define('MEDIA_PROPERTIES_DONE', 'Properties of #%d changed.');

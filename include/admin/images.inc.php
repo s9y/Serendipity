@@ -194,8 +194,10 @@ switch ($serendipity['GET']['adminAction']) {
         if ($serendipity['POST']['adminSubAction'] == 'properties') {
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
-            $created_thumbnail = true;
-            $data['showML']    = showMediaLibrary(true);
+            $created_thumbnail = true; //??
+            $data['showML']    = showMediaLibrary(true); // in this case we do not need the location.href (removed)
+            $propdone = sprintf(MEDIA_PROPERTIES_DONE, $image_id);
+            $data['messages'] = '<span class="msg_success"><span class="icon-ok-circled"></span> '.DONE.'! ' . $propdone . "</span>\n";
             break;
         }
 
@@ -726,8 +728,10 @@ if (! isset($data['showML'])) {
     if (isset($_REQUEST['go_properties'])) {
         $data['showMLbutton'] = true;
     } else {
-        // always having the ML available is useful when switching the filter after adding an image, thus being in the add-case
-        $data['showML'] = showMediaLibrary();
+        // always having the ML available is useful when switching the filter after adding an image, thus being in the add-case (hotlink/upload)
+        if (isset($serendipity['POST']['imageurl'])) {
+            $data['showML'] = showMediaLibrary();
+        }
     }
 }
 
