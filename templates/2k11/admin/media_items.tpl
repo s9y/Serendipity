@@ -60,7 +60,7 @@
         {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[fid]={$file.id}&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[htmltarget]={$media.htmltarget}"}
     {/if}
 
-            <article id="media_{$file.id}" class="media_file {cycle values="odd,even"}">
+            <article id="media_{$file.id}" class="media_file {if $media.manage}manage {/if}{cycle values="odd,even"}">
                 <header class="clearfix">
                     {if $media.manage}
 

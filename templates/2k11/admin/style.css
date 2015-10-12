@@ -2308,7 +2308,7 @@ label .perm_name,
 .media_file h3 {
     margin: .5em 0 1em;
 }
-.media_file h3 {
+.manage h3 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2899,7 +2899,7 @@ img.mfp-img {
 
 /* SMALL SCREEN */
 @media only screen and (min-width: 360px) {
-    .media_file h3 {
+    .manage h3 {
         width: 15em;
     }
 }
@@ -3280,7 +3280,7 @@ img.mfp-img {
 
 /* LARGE SCREEN */
 @media only screen and (min-width: 860px) {
-    .media_file h3 {
+    .manage h3 {
         width: 17em;
     }
 }
@@ -3361,7 +3361,7 @@ img.mfp-img {
 }
 
 @media only screen and (min-width: 950px) {
-    .media_file h3 {
+    .manage h3 {
         width: 19em;
     }
 }
@@ -3507,7 +3507,7 @@ img.mfp-img {
         width: 100%;
     }
 
-    .media_file h3 {
+    .manage h3 {
         width: 14em;
     }
 
@@ -3522,7 +3522,7 @@ img.mfp-img {
     .js .configuration_group .media_choose input {
         max-width: 42.5%;
     }
-    .media_file h3 {
+    .manage h3 {
         width: 18em;
     }
     #edit_entry_metadata #categoryfilter {
@@ -3535,7 +3535,7 @@ img.mfp-img {
     html {
         font-size: 1.125em;
     }
-    .media_file h3 {
+    .manage h3 {
         width: 19em;
     }
 }
