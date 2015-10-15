@@ -140,9 +140,11 @@ switch ($serendipity['GET']['adminAction']) {
             }
             $data['messages'] = $messages;
             unset($messages);
+            // return to last selected media library directory
+            serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']);
             // fall back
             $data['case_default'] = true;
-            $data['showML'] = showMediaLibrary();
+            $data['showML'] = showMediaLibrary(true); // the true drives us back to selected directory :)
             break;
         }
 
@@ -197,7 +199,7 @@ switch ($serendipity['GET']['adminAction']) {
             $created_thumbnail = true; //??
             $data['showML']    = showMediaLibrary(true); // in this case we do not need the location.href (removed)
             $propdone = sprintf(MEDIA_PROPERTIES_DONE, $image_id);
-            $data['messages'] = '<span class="msg_success"><span class="icon-ok-circled"></span> '.DONE.'! ' . $propdone . "</span>\n";
+            $data['messages']  = '<span class="msg_success"><span class="icon-ok-circled"></span> '.DONE.'! ' . $propdone . "</span>\n";
             break;
         }
 
