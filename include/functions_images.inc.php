@@ -1451,13 +1451,14 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     $extraParems = serendipity_generateImageSelectorParems();
 
     $rootDirStrict = false; // default
-    if (!isset($serendipity['COOKIE']['serendipity_toggle_dir'])) {
-        $serendipity['COOKIE']['serendipity_toggle_dir'] = 'no';
+    if (empty($serendipity['GET']['toggle_dir'])) {
+        $serendipity['GET']['toggle_dir'] = $serendipity['COOKIE']['serendipity_toggle_dir'] = 'yes';
     }
     serendipity_restoreVar($serendipity['GET']['toggle_dir'], $serendipity['COOKIE']['serendipity_toggle_dir']);
     if ($serendipity['GET']['toggle_dir'] == 'yes') {
         $rootDirStrict = true;
     }
+
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
     $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
 
