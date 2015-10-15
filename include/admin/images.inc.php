@@ -14,6 +14,11 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
+// unset adminAction type to default, if an image was bulkmoved and the origin page reloaded
+if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multidelete') {
+    unset($serendipity['GET']['adminAction']);
+}
+
 switch ($serendipity['GET']['adminAction']) {
 
     case 'doSync':
