@@ -2458,6 +2458,12 @@ input[name="serendipity[filter][fileCategory]"] {
     margin: 1em 0 0;
 }
 
+.media_select_strict {
+    clear: right;
+    float: left;
+    margin: -0.75em 0px;
+}
+
 #overlay {
     position: fixed;
     top: 0;
@@ -2992,6 +2998,10 @@ img.mfp-img {
 
     #media_selector_bar {
         margin: 0 0 1em;
+    }
+
+    .media_select_strict {
+        margin: -1em 0;
     }
 
     #mediaPropertyForm .media_file_props label,

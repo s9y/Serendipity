@@ -1,3 +1,4 @@
+
 <div class="has_toolbar">
     <h2>{$CONST.MEDIA_LIBRARY}</h2>
 
@@ -30,6 +31,19 @@
                     <input id="serendipity[filter][fileCategory][Video]" type="radio" name="serendipity[filter][fileCategory]"{if $media.filter.fileCategory == "video"} checked{/if} value="video">
                     <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
                 </fieldset>
+            </li>
+            <li id="media_dir_radio" class="media_select_strict">
+                <div class="clearfix">
+                    <div class="form_radio">
+                        <input id="radio_link_no" name="serendipity[toggle_dir]" type="radio" value="no" {'toggle_dir'|ifRemember:'no'}>
+                        <label for="radio_link_no">Strict {$CONST.NO}</label>
+                    </div>
+
+                    <div class="form_radio">
+                        <input id="radio_link_yes" name="serendipity[toggle_dir]" type="radio" value="yes" {'toggle_dir'|ifRemember:'yes':true}>
+                        <label for="radio_link_yes">Strict {$CONST.YES}</label>
+                    </div>
+                </div>
             </li>
         </ul>
 

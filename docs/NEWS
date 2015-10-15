@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Allow strict media directory selection by toggle filter
+
     * Allow a better auto char conversion to media upload item names
 
     * Added Start / End pagination to MediaLibrary and entries list
