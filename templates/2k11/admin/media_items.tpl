@@ -102,6 +102,7 @@
 
                                 <li><b>{$CONST.IMAGE_SIZE}:</b> {$file.nice_size} KB</li>
                                 <li><b>{$CONST.INSTALL_RELUPLOADPATH}:</b> "{$file.path}"</li>
+                                <li><b>{$CONST.DATE}:</b> {$file.date|formatTime:DATE_FORMAT_SHORT}</li>
                             {/if}
 
                             </ul>
