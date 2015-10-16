@@ -116,11 +116,11 @@ switch ($serendipity['GET']['adminAction']) {
         if (!serendipity_checkFormToken()) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
-        if (!is_array($serendipity['POST']['multiDelete'])) {
+        if (!is_array($serendipity['POST']['multiDelete']) && isset($_POST['toggle_move'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && empty($serendipity['POST']['newDir'])) {
+        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && empty($serendipity['POST']['newDir']) && isset($_POST['toggle_move'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
@@ -153,6 +153,7 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
 
+        // case bulk multidelete
         $ids = '';
         $data['rip_image']        = array();
         $data['case_multidelete'] = true;

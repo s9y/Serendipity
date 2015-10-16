@@ -227,7 +227,7 @@
 
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
-            <input class="state_cancel" name="toggle" type="submit" value="{$CONST.DELETE}">
+            <input class="state_cancel" name="toggle_delete" type="submit" value="{$CONST.DELETE}">
         </div>
         <hr>
         <div class="form_select">
@@ -244,7 +244,7 @@
                 </select>
         </div>
         <div class="form_buttons">
-            <input class="state_submit" name="toggle" type="submit" value="{$CONST.MOVE}">
+            <input class="state_submit" name="toggle_move" type="submit" value="{$CONST.MOVE}">
             <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE}</span></a></span>
         </div>
 
