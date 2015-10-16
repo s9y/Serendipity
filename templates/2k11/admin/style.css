@@ -3004,6 +3004,11 @@ img.mfp-img {
         margin: -1em 0;
     }
 
+    .popuplayer_showUpload {
+        float: right;
+        margin-top: -2.375em;
+    }
+
     #mediaPropertyForm .media_file_props label,
     #mediaPropertyForm header b,
     #mediaPropertyForm footer b {
