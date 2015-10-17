@@ -245,11 +245,11 @@
         </div>
         <div class="form_buttons">
             <input class="state_submit" name="toggle_move" type="submit" value="{$CONST.MOVE}">
-            <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE}</span></a></span>
+            <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE_INFO}</span></a></span>
         </div>
 
         <footer id="media_file_bulkmove" class="media_file_bulkmove additional_info">
-            <span class="msg_notice">{$CONST.BULKMOVE_HELP_DESC}</span>
+            <span class="msg_notice">{$CONST.BULKMOVE_INFO_DESC}</span>
         </footer>
     {/if}
 

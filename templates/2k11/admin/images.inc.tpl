@@ -160,7 +160,10 @@
 {if $case_directorySelect}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
-    <h3>{$CONST.BASE_DIRECTORY}</h3>
+    <h3>{$CONST.BASE_DIRECTORY} <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_directory_info" title="{$CONST.DIRECTORY_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.DIRECTORY_INFO}</span></a></span></h3>
+    <header id="media_directory_info" class="media_directory_info additional_info">
+        <span class="msg_notice">{$CONST.DIRECTORY_INFO_DESC}</span>
+    </header>
 
     <ul id="serendipity_image_folders" class="option_list">
     {foreach $folders as $folder}
