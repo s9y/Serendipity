@@ -200,11 +200,12 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_add'] = true;
         $messages = array();
         if ($serendipity['POST']['adminSubAction'] == 'properties') {
+            serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']); // restore last set directory path, see true parameter
             $properties        = serendipity_parsePropertyForm();
             $image_id          = $properties['image_id'];
             $created_thumbnail = true; //??
             $data['showML']    = showMediaLibrary(true); // in this case we do not need the location.href (removed)
-            $propdone = sprintf(MEDIA_PROPERTIES_DONE, $image_id);
+            $propdone          = sprintf(MEDIA_PROPERTIES_DONE, $image_id);
             $data['messages']  = '<span class="msg_success"><span class="icon-ok-circled"></span> '.DONE.'! ' . $propdone . "</span>\n";
             break;
         }
