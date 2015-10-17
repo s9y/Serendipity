@@ -173,18 +173,22 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'rename':
-        $data['case_rename'] = true;
         $serendipity['GET']['fid'] = (int)$serendipity['GET']['fid'];
         $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-        $serendipity['GET']['newname'] = serendipity_uploadSecure($serendipity['GET']['newname'], true);
+
+        if (LANG_CHARSET == 'UTF-8') {
+             // yeah, turn on content to be a real utf-8 string, which it isn't at this point! Else serendipity_makeFilename() can not work!
+             $serendipity['GET']['newname'] = utf8_encode($serendipity['GET']['newname']);
+        }
+        $serendipity['GET']['newname'] = str_replace(' ', '_', $serendipity['GET']['newname']); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
+        $serendipity['GET']['newname'] = serendipity_uploadSecure(serendipity_makeFilename($serendipity['GET']['newname']), true);
 
         if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') ||
            (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
             return;
         }
-        if (!serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file)) {
-            $data['go_back'] = true;
-        }
+        // since this is a javascript action only, all event success/error action messages have moved into js
+        serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file);
         break;
 
     case 'properties':
@@ -218,7 +222,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $serendipity['POST']['imageurl'] = serendipity_specialchars($serendipity['POST']['imageurl']);
 
-        // First find out whether to fetch a file or accept an upload
+        // First find out whether to fetch a hotlink file or accept an upload
         if ($serendipity['POST']['imageurl'] != '' && $serendipity['POST']['imageurl'] != 'http://') {
             if (!empty($serendipity['POST']['target_filename'][2])) {
                 // Faked hidden form 2 when submitting with JavaScript
@@ -233,7 +237,7 @@ switch ($serendipity['GET']['adminAction']) {
                 $tindex  = 1;
             }
 
-            $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour
+            $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
             $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
             if (serendipity_isActiveFile($tfile)) {
@@ -336,7 +340,7 @@ switch ($serendipity['GET']['adminAction']) {
                         continue;
                     }
 
-                    $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour
+                    $tfile = str_replace(' ', '_', basename($tfile)); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
                     $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
                     if (serendipity_isActiveFile($tfile)) {
@@ -689,7 +693,7 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
         
-        $data['extraParems'] = serendipity_generateImageSelectorParems("form");
+        $data['extraParems'] = serendipity_generateImageSelectorParems('form');
         $data['case_scaleSelect'] = true;
         $s = getimagesize($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . ($file['extension'] ? '.'. $file['extension'] : ""));
         $data['img_width']  = $s[0];
@@ -731,6 +735,7 @@ switch ($serendipity['GET']['adminAction']) {
         $data['case_default'] = true;
         $data['showML'] = showMediaLibrary();
         break;
+
 }
 
 if (! isset($data['showML'])) {

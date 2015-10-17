@@ -1,6 +1,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fixed media item rename handler (#370)
+
+    * Fixed and enhanced multiple media redirects and path / name
+      related issues, as well as some better umlaut conversions
+
     * Allow strict media directory selection by toggle filter
 
     * Allow a better auto char conversion to media upload item names

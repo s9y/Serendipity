@@ -1859,6 +1859,25 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+.mfp-content #rename_msg {
+    width: 40em;
+    background-color: #FFF;
+    text-align: center;
+    margin: auto;
+    border: 2px double #00FFDB;
+    padding: 0.5em;
+}
+.mfp-content #rename_ok {
+    margin-bottom: 1em;
+    color: #FFF;
+    text-shadow: inherit;
+}
+.mfp-content #rename_msg button.mfp-close {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+}
+
 .taxonomy h3:hover,
 .taxonomy li:hover {
     cursor: pointer;

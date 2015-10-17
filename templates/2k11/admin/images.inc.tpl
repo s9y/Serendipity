@@ -40,18 +40,11 @@
     </form>
 {/if}
 {if $case_do_multidelete || $case_do_delete}
-    {if $showML}{$showML}{/if}
+    {if isset($showML)}{$showML}{/if}
 {/if}
-{if $case_rename}
-    {if $go_back}
-    <input class="go_back" type="button" value="{$CONST.BACK}">
-    {else}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
-    {/if}
-{/if}
+{* A $case_rename can not respond to reload page while in JS - serendipity.rename() ajax will reload and set message events by script *}
 {if $case_add}
-    {$showML}
+    {if isset($showML)}{$showML}{/if}
 {/if}
 {if $case_directoryDoDelete}
     {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
