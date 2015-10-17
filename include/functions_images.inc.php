@@ -3387,14 +3387,14 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     // paranoid case for updating an old image id entry - else we have a new entry incrementary
     if (is_null($item_id) && isset($file['id']) && $file['id'] > 0) $item_id = $file['id'];
 
-    if ($item_id < 1) {
+    if (!$item_id || $item_id < 1) {
         // only print message if not posting a case_directoryEdit submit
         if (empty($serendipity['POST']['save'])) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
             printf(ERROR_FILE_NOT_EXISTS, $item_id);
             echo "</span>\n";
+            return false;
         }
-        return false;
     }
 
     // Prepare data for the database, any hooks and the real file move, by case AREA:
