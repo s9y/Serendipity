@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,7 +14,7 @@ class serendipity_event_s9ymarkup extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_S9YMARKUP_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.3');
+        $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
             'serendipity' => '0.8',
             'smarty'      => '2.6.7',
@@ -112,21 +112,21 @@ class serendipity_event_s9ymarkup extends serendipity_event
 
     function _s9y_markup($text) {
         $text = str_replace('\_', chr(1), $text);
-        $text = preg_replace('/#([[:alnum:]]+?)#/','&\1;',$text);
-        $text = preg_replace('/\b_([\S ]+?)_\b/','<u>\1</u>',$text);
+        $text = preg_replace('/#([[:alnum:]]+?)#/','&\1;', $text);
+        $text = preg_replace('/\b\s_([\S ]+?)_\s\b/',' <u>\1</u> ', $text);
         $text = str_replace(chr(1), '\_', $text);
 
         // bold
-        $text = str_replace('\*',chr(1),$text);
-        $text = str_replace('**',chr(2),$text);
-        $text = preg_replace('/(\S)\*(\S)/','\1' . chr(1) . '\2',$text);
-        $text = preg_replace('/\B\*([^*]+)\*\B/','<strong>\1</strong>',$text);
-        $text = str_replace(chr(2),'**',$text);
-        $text = str_replace(chr(1),'\*',$text);
+        $text = str_replace('\*',chr(1), $text);
+        $text = str_replace('**',chr(2), $text);
+        $text = preg_replace('/(\S)\*(\S)/','\1' . chr(1) . '\2', $text);
+        $text = preg_replace('/\B\*([^*]+)\*\B/','<strong>\1</strong>', $text);
+        $text = str_replace(chr(2),'**', $text);
+        $text = str_replace(chr(1),'\*', $text);
 
-        // $text = preg_replace('/\|([0-9a-fA-F]+?)\|([\S ]+?)\|/','<font color="\1">\2</font>',$text);
-        $text = preg_replace('/\^([[:alnum:]]+?)\^/','<sup>\1</sup>',$text);
-        $text = preg_replace('/\@([[:alnum:]]+?)\@/','<sub>\1</sub>',$text);
+        // $text = preg_replace('/\|([0-9a-fA-F]+?)\|([\S ]+?)\|/', '<font color="\1">\2</font>',$text);
+        $text = preg_replace('/\^([[:alnum:]]+?)\^/','<sup>\1</sup>', $text);
+        $text = preg_replace('/\@([[:alnum:]]+?)\@/','<sub>\1</sub>', $text);
         $text = preg_replace('/([\\\])([*#_|^@%])/', '\2', $text);
 
         return $text;
