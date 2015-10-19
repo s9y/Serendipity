@@ -7,3 +7,4 @@
 @define('MEDIA_PROPERTIES_DONE', 'Properties of #%d changed.');
 @define('DIRECTORY_INFO', 'Directory info helper');
 @define('DIRECTORY_INFO_DESC', 'Directories are based to their physical folder directory name. If you want to change or move directories with items, you have two choices. Either create the directory or subdirectory you want, then move the items to the new directory via the MediaLibrary and after all, delete the now emptied old directory here. Or edit the old directory via the edit directory button below and rename it to whatever you like (existing subdir/ +) newname. This will move all directories and items and rename entry path too.');
+@define('MEDIA_RESIZE_EXISTS', 'File dimensions already exist!');

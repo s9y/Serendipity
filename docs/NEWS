@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Optimize scaleImage returns
+
     * Fixed media item rename handler (#370)
 
     * Fixed and enhanced multiple media redirects and path / name

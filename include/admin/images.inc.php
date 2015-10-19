@@ -675,15 +675,25 @@ switch ($serendipity['GET']['adminAction']) {
             return;
         }
 
-        $data['case_scale'] = true;
-        $data['print_SCALING_IMAGE'] = sprintf(
-          SCALING_IMAGE,
-          $file['path'] . $file['name'] .'.'. $file['extension'],
-          (int)$serendipity['GET']['width'],
-          (int)$serendipity['GET']['height']
-        );
-        $data['extraParems'] = serendipity_generateImageSelectorParems();
-        $data['print_serendipity_scaleImg'] = serendipity_scaleImg($serendipity['GET']['fid'], $serendipity['GET']['width'], $serendipity['GET']['height']);
+        $data['case_scale'] = true; // this allows to use the showML fallback too
+        if ($serendipity['GET']['width'] == $file['dimensions_width'] && $serendipity['GET']['height'] == $file['dimensions_height']) {
+            $data['messages'] = '<span class="msg_notice"><span class="icon-info-circled"></span> ' . MEDIA_RESIZE_EXISTS . '</span>';
+        } else {
+            $data['print_SCALING_IMAGE'] = sprintf(
+                SCALING_IMAGE,
+                $file['path'] . $file['name'] .'.'. $file['extension'],
+                (int)$serendipity['GET']['width'],
+                (int)$serendipity['GET']['height']
+            );
+            $data['extraParems'] = serendipity_generateImageSelectorParems();
+            $scaleImg = serendipity_scaleImg($serendipity['GET']['fid'], $serendipity['GET']['width'], $serendipity['GET']['height']);
+            if (!empty($scaleImg) && is_string($scaleImg)) {
+                $data['scaleImgError'] = $scaleImg;
+            }
+            $data['is_done'] = true;
+        }
+        // fall back
+        $data['showML'] = showMediaLibrary();
         break;
 
     case 'scaleSelect':
