@@ -27,7 +27,7 @@ if ($serendipity['expose_s9y']) {
 }
 
 if ($serendipity['CacheControl']) {
-    if (!empty($HTTP_SERVER_VARS['SERVER_SOFTWARE']) && strstr($HTTP_SERVER_VARS['SERVER_SOFTWARE'], 'Apache/2')) {
+    if (!empty($_SERVER['SERVER_SOFTWARE']) && strstr($_SERVER['SERVER_SOFTWARE'], 'Apache/2')) {
         header('Cache-Control: no-cache, pre-check=0, post-check=0');
     } else {
         header('Cache-Control: private, pre-check=0, post-check=0, max-age=0');
@@ -35,6 +35,7 @@ if ($serendipity['CacheControl']) {
     header('Expires: 0');
     header('Pragma: no-cache');
 }
+
 $track_referer = true;
 $uri = $_SERVER['REQUEST_URI'];
 
