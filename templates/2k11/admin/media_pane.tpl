@@ -238,7 +238,7 @@
                     <option value="uploadRoot">{$CONST.BASE_DIRECTORY}</option>
                 {foreach $media.paths AS $folderFoot}
 
-                    <option{if ($media.only_path == $media.limit_path|cat:$folderFoot.relpath)} selected{/if} value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>{***}
+                    <option value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
                 {/foreach}
 
                 </select>
