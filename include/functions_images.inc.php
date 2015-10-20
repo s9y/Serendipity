@@ -719,12 +719,16 @@ function serendipity_scaleImg($id, $width, $height) {
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+            return false;
         }
         unset($output, $result);
     }
 
-    serendipity_updateImageInDatabase(array('dimensions_width' => $width, 'dimensions_height' => $height, 'size' => @filesize($outfile)), $id);
-    return true;
+    if ($result == 0) {
+        serendipity_updateImageInDatabase(array('dimensions_width' => $width, 'dimensions_height' => $height, 'size' => @filesize($outfile)), $id);
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -3402,7 +3406,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     //   FILE    = File rename or File bulk move,
     //   FILEDIR = Media properties form edit
 
-    // images.inc case 'directoryEdit' via ML case 'directorySelect', which is ML Directories form
+    // images.inc case 'directoryEdit', which is ML Directories form, via ML case 'directorySelect'
     if ($type == 'dir') {
 
         $real_oldDir = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir;

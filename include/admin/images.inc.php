@@ -124,14 +124,15 @@ switch ($serendipity['GET']['adminAction']) {
             echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
         if (isset($serendipity['POST']['oldDir']) && !empty($serendipity['POST']['newDir'])) {
             $messages = array();
             $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
             unset($serendipity['POST']['multiDelete']);
+
             $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move directly
             $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir']); // relative to Uploads/
+
             if ($oDir != $nDir) {
                 foreach($multiMoveImages AS $mkey => $move_id) {
                     $file = serendipity_fetchImageFromDatabase((int)$move_id);
@@ -145,7 +146,7 @@ switch ($serendipity['GET']['adminAction']) {
             }
             $data['messages'] = $messages;
             unset($messages);
-            // return to last selected media library directory
+            // remember to return to last selected media library directory
             serendipity_restoreVar($serendipity['COOKIE']['serendipity_only_path'], $serendipity['GET']['only_path']);
             // fall back
             $data['case_default'] = true;
