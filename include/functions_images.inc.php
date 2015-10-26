@@ -2927,7 +2927,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'lineBreakP'        => round(1/$lineBreak*100),
         'url'               => $url,
         'enclose'           => $enclose,
-        'zoomIMG'           => serendipity_getTemplateFile('admin/img/big_zoom.png'),
+/*        'zoomIMG'           => serendipity_getTemplateFile('admin/img/big_zoom.png'),
         'renameIMG'         => serendipity_getTemplateFile('admin/img/big_rename.png'),
         'resizeIMG'         => serendipity_getTemplateFile('admin/img/big_resize.png'),
         'rotatecwIMG'       => serendipity_getTemplateFile('admin/img/big_rotate_cw.png'),
@@ -2935,7 +2935,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'configureIMG'      => serendipity_getTemplateFile('admin/img/configure.png'),
         'deleteIMG'         => serendipity_getTemplateFile('admin/img/big_delete.png'),
         'prevIMG'           => serendipity_getTemplateFile('admin/img/previous.png'),
-        'nextIMG'           => serendipity_getTemplateFile('admin/img/next.png'),
+        'nextIMG'           => serendipity_getTemplateFile('admin/img/next.png'),*/
         'token'             => serendipity_setFormToken(),
         'form_hidden'       => $form_hidden,
         'blimit_path'       => empty($smarty_vars['limit_path']) ? '' : basename($smarty_vars['limit_path']),
