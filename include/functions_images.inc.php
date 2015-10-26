@@ -2907,9 +2907,13 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     global $serendipity;
 
     $form_hidden = '';
-    foreach($serendipity['GET'] AS $g_key => $g_val) {
-        if (!is_array($g_val) && $g_key != 'page') {
-            $form_hidden .= '        <input type="hidden" name="serendipity[' . $g_key . ']" value="' . serendipity_specialchars($g_val) . '">'."\n";
+    // do not add, if not for the default media list form
+    if (($serendipity['GET']['adminAction'] == 'default' || empty($serendipity['GET']['adminAction'])) && !$serendipity['GET']['fid']) {
+        foreach($serendipity['GET'] AS $g_key => $g_val) {
+            // do not add token, since this is assigned separately to properties and list forms
+            if (!is_array($g_val) && $g_key != 'page' && $g_key != 'token') {
+                $form_hidden .= '        <input type="hidden" name="serendipity[' . $g_key . ']" value="' . serendipity_specialchars($g_val) . '">'."\n";
+            }
         }
     }
 
