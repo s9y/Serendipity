@@ -12,7 +12,7 @@
                 <div class="form_select">
                     <label for="serendipity_only_path" class="visuallyhidden">{$CONST.FILTER_DIRECTORY}</label>
                     <select id="serendipity_only_path" name="serendipity[only_path]">
-                        <option value="">{if NOT $media.limit_path}{$CONST.ALL_DIRECTORIES}{else}{$media.blimit_path}{/if}</option>
+                        <option value="">{if NOT $media.limit_path}{if $media.toggle_dir == 'yes'}{$CONST.BASE_DIRECTORY}{else}{$CONST.ALL_DIRECTORIES}{/if}{else}{$media.blimit_path}{/if}</option>
                     {foreach $media.paths AS $folderHead}
 
                         <option{if ($media.only_path == $media.limit_path|cat:$folderHead.relpath)} selected{/if} value="{$folderHead.relpath}">{'&nbsp;'|str_repeat:($folderHead.depth*2)}{$folderHead.name}</option>
@@ -35,12 +35,12 @@
             <li id="media_dir_radio" class="media_select_strict">
                 <div class="clearfix">
                     <div class="form_radio">
-                        <input id="radio_link_no" name="serendipity[toggle_dir]" type="radio" value="no" {'toggle_dir'|ifRemember:'no'}>
+                        <input id="radio_link_no" name="serendipity[toggle_dir]" type="radio" value="no" {if $media.toggle_dir == 'no'}checked="checked"{/if}>
                         <label for="radio_link_no">Strict {$CONST.NO}</label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="radio_link_yes" name="serendipity[toggle_dir]" type="radio" value="yes" {'toggle_dir'|ifRemember:'yes':true}>
+                        <input id="radio_link_yes" name="serendipity[toggle_dir]" type="radio" value="yes" {if $media.toggle_dir == 'yes'}checked="checked"{/if}>
                         <label for="radio_link_yes">Strict {$CONST.YES}</label>
                     </div>
                 </div>
@@ -169,6 +169,8 @@
         </fieldset>
         <script>
             $(document).ready(function() {
+                // alert(serendipity.GetCookie('serendipity[only_path]'));
+                // write: is plain "foo", read: is "serendipity[foo]"!
             {foreach $media.sortParams AS $sortParam}
 
                 serendipity.SetCookie("sortorder_{$sortParam}","{$get_sortorder_{$sortParam}}");
@@ -178,6 +180,7 @@
                 serendipity.SetCookie("{$filterParam}", "{$get_{$filterParam}}");
             {/foreach}
 
+                serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");
             });
         </script>
     </form>

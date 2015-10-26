@@ -1452,16 +1452,8 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     global $serendipity;
     static $debug = false;
 
-    $extraParems = serendipity_generateImageSelectorParems();
-
-    $rootDirStrict = false; // default
-    if (empty($serendipity['GET']['toggle_dir'])) {
-        $serendipity['GET']['toggle_dir'] = $serendipity['COOKIE']['serendipity_toggle_dir'] = 'yes';
-    }
-    serendipity_restoreVar($serendipity['GET']['toggle_dir'], $serendipity['COOKIE']['serendipity_toggle_dir']);
-    if ($serendipity['GET']['toggle_dir'] == 'yes') {
-        $rootDirStrict = true;
-    }
+    $extraParems   = serendipity_generateImageSelectorParems();
+    $rootDirStrict = ($serendipity['GET']['toggle_dir'] == 'yes') ? true : false; // default
 
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
     $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
@@ -2945,6 +2937,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'keywords_selected' => $serendipity['GET']['keywords'],
         'filter'            => $serendipity['GET']['filter'],
         'sort_order'        => serendipity_getImageFields(),
+        'toggle_dir'        => empty($serendipity['GET']['toggle_dir']) ? 'no' : $serendipity['GET']['toggle_dir'],
         'authors'           => serendipity_fetchUsers(),
         'sort_row_interval' => array(8, 16, 50, 100),
         'nr_files'          => count($file),
@@ -2965,6 +2958,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
 
     $media = array_merge($media, $smarty_vars);
     $media['files'] =& $file;
+
     if (count($paths) > 0) {
         $media['paths'] =& $paths;
     } else {

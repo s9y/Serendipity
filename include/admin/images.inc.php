@@ -14,9 +14,18 @@ if (!is_object($serendipity['smarty'])) {
     serendipity_smarty_init();
 }
 
+// No echo output here, before the switch, since that matters renaming alerts!
+
 // unset adminAction type to default, if an image was bulkmoved and the origin page reloaded
 if (!is_array($serendipity['POST']) && $serendipity['GET']['adminAction'] == 'multidelete') {
     unset($serendipity['GET']['adminAction']);
+}
+// Listens on toggle_dir STRICT to list items per directory, or include all sub directory items
+if (empty($serendipity['GET']['toggle_dir']) && empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
+    $serendipity['GET']['toggle_dir'] = 'no'; // default
+}
+if (!empty($serendipity['COOKIE']['serendipity_toggle_dir'])) {
+    serendipity_restoreVar($serendipity['COOKIE']['serendipity_toggle_dir'], $serendipity['GET']['toggle_dir']);
 }
 
 switch ($serendipity['GET']['adminAction']) {
@@ -71,7 +80,6 @@ switch ($serendipity['GET']['adminAction']) {
         $data['messages'] = $messages;
         unset($messages);
         break;
-
 
     case 'doMultiDelete':
         if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
