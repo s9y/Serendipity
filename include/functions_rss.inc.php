@@ -23,7 +23,7 @@ if (defined('S9Y_FRAMEWORK_RSS')) {
  * @param   array       A superarray of entries to output
  * @param   string      The version/type of a RSS/Atom feed to display (atom1_0, rss2_0 etc)
  * @param   boolean     If true, this is a comments feed. If false, it's an Entry feed.
- * @param   boolean     Indicates if this feed is a fulltext feed (true) or only excercpt (false)
+ * @param   boolean     Indicates if this feed is a fulltext feed (true) or only excerpt (false)
  * @param   boolean     Indicates if E-Mail addresses should be shown (true) or hidden (false)
  * @return
  */
@@ -155,7 +155,7 @@ function serendipity_printEntries_rss(&$entries, $version, $comments = false, $f
                     break;
 
                 case 'atom1.0':
-                    $entry_hook     = 'frontend_display:atom-1.0:per_entry';
+                    $entry_hook = 'frontend_display:atom-1.0:per_entry';
                     break;
             }
 

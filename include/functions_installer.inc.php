@@ -84,7 +84,7 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
                    . "\t  Serendipity configuration file\n";
     $file_mark     = "\n\t// End of Serendipity configuration file"
                    . "\n\t// You can place your own special variables after here:\n";
-    $file_end      = "\n?>\n";
+    $file_end      = "\n?>";
     $file_personal = '';
 
     preg_match('@' . preg_quote($file_start) . '.*' . preg_quote($file_mark) . '(.+)' . preg_quote($file_end) . '@imsU', $oldconfig, $match);

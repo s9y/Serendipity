@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 /**
  *  @version 1.0
@@ -27,7 +27,7 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL', 'Captchas nach wie vielen Tagen erzwingen');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL_DESC', 'Captchas können abhängig vom Alter des Artikels eingeblendet werden. Tragen Sie das Minimalalter eines Artikels in Tagen ein, ab dem Captchas erforderlich werden sollen. Falls auf 0 gesetzt, sind Captchas immer erforderlich.');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION', 'Kommentarmoderation nach wievielen Tagen erzwingen');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION', 'Kommentarmoderation nach X Tagen erzwingen');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC', 'Alle Kommentare zu einem Artikel können abhängig vom Alter des Artikels automatisch moderiert werden. Tragen Sie hier das Minimalalter eines Artikels in Tagen ein, ab dem jeder Kommentar erst nach Ihrer Moderation dargestellt wird. 0 bedeutet, dass keine automatische Moderation erzeugt wird.');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE', 'Erforderliche Anzahl an Links für Moderation');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE_DESC', 'Wenn in einem Kommentar eine bestimmte Anzahl an Links vorhanden ist, kann der Kommentar automatisch moderiert werden. Falls auf 0 gesetzt, wird diese Linkprüfung nicht vorgenommen.');
@@ -113,7 +113,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_CSRF_REASON', 'Ihr Kommentar enthielt keinen gültigen Session-Hash. Kommentare auf diesem Blog können nur mit aktivierten Cookies hinterlassen werden, und Sie müssen bereits eine weitere URL des Blogs geöffnet haben, bevor Sie einen Kommentar absenden können!');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS', 'SPAM IP Adressen via HTaccess blocken?');
-@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihref .htacces Datei hinzu gefügt. Die .htaccess Datei wird regelmässig mit den abgelehnten IPs des letzten Monats erneuert.');
+@define('PLUGIN_EVENT_SPAMBLOCK_HTACCESS_DESC', 'Wenn Sie diese Option einschalten, dann werden IPs von denen SPAM gesendet wurde zu Ihrer .htaccess Datei hinzugefügt. Die .htaccess Datei wird regelmäßig mit den abgelehnten IPs des letzten Monats erneuert.');
 
 @define('PLUGIN_EVENT_SPAMBLOCK_LOOK', 'So sehen Ihre Captchas im Moment aus. Nachdem Sie die Einstellungen geändert und gespeichert haben können Sie durch einen Klick auf diese das Aussehen hier erneuern.');
 

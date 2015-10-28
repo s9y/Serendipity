@@ -1,4 +1,3 @@
-/* $Id$ */
 /*
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
@@ -366,6 +365,11 @@
                   + '</div>';
         }
 
+        if (parent.self.opener.serendipity == undefined) {
+            // in iframes, there is no opener, and the magnific popup is wrapped
+            parent.self = window.parent.parent.$.magnificPopup;
+            parent.self.opener = window.parent.parent;
+        }
         parent.self.opener.serendipity.serendipity_imageSelector_addToBody(img, textarea);
         parent.self.close();
     }
@@ -493,7 +497,61 @@
         var media_rename = '{$CONST.ENTER_NEW_NAME}';
         if (newname = prompt(media_rename + fname, fname)) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
-            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) + '&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url);
+            $.ajax({
+                type: 'POST',
+                url: '?serendipity[adminModule]=images&serendipity[adminAction]=rename&serendipity[fid]='+ escape(id) +'&serendipity[newname]='+ escape(newname) +'&serendipity[token]='+ media_token_url,
+                async: true,
+                cache: false,
+                success: function(response) {
+                    $response = (response.trim() == '')
+                        ? '<p>{$CONST.DONE}!</p>\
+                           <button id="rename_ok" class="button_link state_submit" type="button" >{$CONST.GO}</button>\
+                          '
+                        : response + '\
+                           <input class="go_back" type="button" onClick="$.magnificPopup.close();" value="{$CONST.BACK}">\
+                          ';
+                    $.magnificPopup.open({
+                        items: {
+                            type: 'inline',
+                                src: $('<div id="rename_msg">\
+                                        <h4>{$CONST.MEDIA_RENAME}</h4>\
+                                        '+ $response +'\
+                                        </div>')
+                        },
+                        type: 'inline',
+                        midClick: true,
+                        callbacks: {
+                            open: function() {
+                                this.content.on('click', '#rename_ok', function() {
+                                    window.parent.parent.location.href= '?serendipity[adminModule]=images&serendipity[adminAction]=default';
+                                });
+                            },
+                        }
+                    });
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    $.magnificPopup.open({
+                        items: {
+                            type: 'inline',
+                                src: $('<div id="rename_msg">\
+                                        <h4>{$CONST.MEDIA_RENAME}</h4>\
+                                        <p>"Status: " + textStatus</p>\
+                                        '+ errorThrown +'\
+                                        <button id="rename_error" class="button_link state_submit" type="button" >{$CONST.GO}</button>\
+                                        </div>')
+                        },
+                        type: 'inline',
+                        midClick: true,
+                        callbacks: {
+                            open: function() {
+                                this.content.on('click', '#rename_error', function() {
+                                    window.parent.parent.location.href= '?serendipity[adminModule]=images&serendipity[adminAction]=default';
+                                });
+                            },
+                        }
+                    });
+                }
+            });
         }
     }
 
@@ -501,7 +559,7 @@
     serendipity.deleteFromML = function(id, fname) {
         if (confirm('{$CONST.DELETE}')) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
-            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]=' + escape(id) +  '&serendipity[token]='+ media_token_url);
+            $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]='+ escape(id) +'&serendipity[token]='+ media_token_url);
             window.location.reload(false);
         }
     }
@@ -727,7 +785,7 @@
 
         serendipity.eraseEntryEditorCache = function() {
             serendipity.cache("serendipity[body]", null);
-            serendipity.cache("serendipity[extended]", null);;
+            serendipity.cache("serendipity[extended]", null);
         }
 
         var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;

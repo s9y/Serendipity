@@ -1,6 +1,45 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Optimize scaleImage returns
+
+    * Fixed media item rename handler (#370)
+
+    * Fixed and enhanced multiple media redirects and path / name
+      related issues, as well as some better umlaut conversions
+
+    * Allow strict media directory selection by toggle filter
+
+    * Allow a better auto char conversion to media upload item names
+
+    * Added Start / End pagination to MediaLibrary and entries list
+
+    * Added new bulk image move ability to MediaLibrary. This fixes
+      several issues with rename AND remove and allows to automatically
+      check and set MediaLibrary item entry paths on MOVE.
+      Staticpages from v.4.52 are modified to support this too.
+      Now supports Quickblog (imageselectorplus) entry path repairs.
+
+    * Fix MediaLibrary objects not pass through into entryproperties
+      CustomFields
+
+    * Fix fatal error atom 1.0 issue; References #362
+
+    * Fix eraseEntryEditorCache script in preview_iframe updertHooks
+      IFRAME
+
+    * Fix the Serendipity template and file fallback chaining to work
+      more precise
+
+    * Disable CKEDITOR Source protection for Smarty and WP-Smarty like
+      markup, since now being usable w/o setting ACF OFF
+
+    * Set Serendipity var use_autosave in backend only
+
+    * Fix entries.inc fetching iframe event returning 1, when true and
+      added a new language constant change message for multilanguage
+      entry changes, instead of the wrongly used save message
+
     * Fix importers to use the new mysqli API extension with PHP 5+
 
     * WIP: Added an internal cache to speedup s9y's site generation. Can
@@ -55,6 +94,12 @@ Version 2.1 ()
       instead of directories, it was not used anymore
 
     * Some small enhancements to the error reporting
+
+
+Version 2.0.3 ()
+------------------------------------------------------------------------
+
+    * Fix some backend entry form related event messages
 
 
 Version 2.0.2 (July 24th, 2015)

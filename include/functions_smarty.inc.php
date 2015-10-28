@@ -1215,7 +1215,7 @@ function serendipity_smarty_show($template, $data = null, $debugtype = null, $de
 
     $serendipity['smarty']->assign($data);
 
-    $tplfile = serendipity_getTemplateFile($template, 'serendipityPath');
+    $tplfile = ($template == 'preview_iframe.tpl') ? serendipity_getTemplateFile($template, 'serendipityPath', true) : serendipity_getTemplateFile($template, 'serendipityPath');
     if ($debug !== null) {
         if ($debugtype == "HTML") {
             $debug = "<!-- Dynamically fetched " . htmlspecialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
@@ -1224,5 +1224,5 @@ function serendipity_smarty_show($template, $data = null, $debugtype = null, $de
         }
     }
 
-    return $debug . $serendipity['smarty']->fetch($tplfile);
+    return $debug . $serendipity['smarty']->fetch('file:'. $tplfile);
 }

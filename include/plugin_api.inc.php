@@ -25,11 +25,11 @@ $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_a
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
   global $serendipity;
 
-    // Only execute if current template does not have its own jquery.js file
+    // Only execute if current template (only) does not have its own jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
     // $serendipity['capabilities']['jquery'] = false
 
-    $check = serendipity_getTemplateFile('jquery.js');
+    $check = file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'] . '/jquery.js');
     if (!$check && $serendipity['capabilities']['jquery']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
@@ -46,11 +46,11 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
 function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, $addData) {
   global $serendipity;
 
-    // Only execute if current template does not have its own jquery.js file
+    // Only execute if current template does not have its own backend_jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
     // $serendipity['capabilities']['jquery'] = false
 
-    $check = serendipity_getTemplateFile('jquery_backend.js');
+    $check = serendipity_getTemplateFile('jquery_backend.js', 'serendipityPath', true);
     if (!$check && $serendipity['capabilities']['jquery_backend']) {
 ?>
     <script src="<?php echo $serendipity['serendipityHTTPPath']; ?>templates/jquery.js"></script>
@@ -95,7 +95,8 @@ function errorHandlerCreateDOM(htmlStr) {
 
             case 'backend_save':
             case 'backend_publish':
-                echo '<script>$(document).ready(function() { if(Modernizr.indexeddb) { serendipity.eraseEntryEditorCache(); } });</script>';
+                // this is preview_iframe.tpl updertHooks
+                echo '<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>';
 
         return true;
         break;
@@ -1636,13 +1637,14 @@ class serendipity_plugin
      *
      * @access public
      * @param  string   template filename (no directory!)
+     * @param  bool     Called by a plugin (defaults true), since we do not have a theme using it yet
      * @return string   Parsed Smarty return
      */
-    function &parseTemplate($filename) {
+    function &parseTemplate($filename, $plugin = true) {
         global $serendipity;
 
         $filename = basename($filename);
-        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath');
+        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath', true, $plugin); // use the simple plugin fallback stairway
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }

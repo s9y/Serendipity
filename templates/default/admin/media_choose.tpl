@@ -222,18 +222,28 @@
         {if $media.filename_only}
         <script type="text/javascript">
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
-            parent.self.opener.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|@escape}');
+            if (parent.self.opener == undefined) {
+                // in iframes, there is no opener, and the magnific popup is wrapped
+                parent.self = window.parent.parent.$.magnificPopup;
+                parent.self.opener = window.parent.parent;
+            }
+            parent.self.opener.serendipity.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|escape}');
             parent.self.close();
         </script>
         {else}
         <script type="text/javascript">
             block = '<a href="{$media.file.full_file}" title="{$media.file.realname|@escape}" target="_blank">{$media.file.realname|@escape}</a>';
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
-            if (parent.self.opener.editorref) { 
+            if (parent.self.opener == undefined) {
+                // in iframes, there is no opener, and the magnific popup is wrapped
+                parent.self = window.parent.parent.$.magnificPopup;
+                parent.self.opener = window.parent.parent;
+            }
+            if (parent.self.opener.editorref) {
                 parent.self.opener.editorref.surroundHTML(block, '');
-            } else { 
-                parent.self.opener.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
-            } 
+            } else {
+                parent.self.opener.serendipity.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
+            }
             parent.self.close();
         </script>
         {/if}

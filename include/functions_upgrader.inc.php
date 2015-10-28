@@ -156,7 +156,7 @@ $dead_htmlarea_dirs = array(
 );
 
 /* A list of old Serendipity files which were not marked obsolet with 2.0.0 upgrade - now 2.0.2 */
-$dead_files_rest = array(
+$dead_files_200 = array(
     'serendipity_editor.js',
     'serendipity_define.js.php',
     'bundled-libs/dragdrop.js',
@@ -181,11 +181,17 @@ $dead_files_rest = array(
 );
 
 /* A list of old lib directories which were not marked obsolet with 2.0.0 upgrade - now 2.0.2 */
-$dead_dirs_rest = array(
+$dead_dirs_200 = array(
     $serendipity['serendipityPath'] . 'htmlarea/plugins/ImageManage',
     $serendipity['serendipityPath'] . 'htmlarea/plugins',
     $serendipity['serendipityPath'] . 'bundled-libs/YahooUI/treeview',
     $serendipity['serendipityPath'] . 'bundled-libs/YahooUI'
+);
+
+/* A list of old or beta Serendipity files which were not marked obsolet with the 2.0.2 upgrade */
+$dead_files_202 = array(
+    'templates/default/admin/media_showitem.tpl',
+    'templates/2k11/admin/media_showitem.tpl'
 );
 
 /**

@@ -15,11 +15,11 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.37');
+        $propbag->add('version',       '1.38');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
-            'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
+            'serendipity' => '1.6',
+            'smarty'      => '2.6.27',
+            'php'         => '5.1.0'
         ));
         $propbag->add('event_hooks',    array(
             'frontend_fetchentries'                             => true,
@@ -466,25 +466,27 @@ class serendipity_event_entryproperties extends serendipity_event
 <?php
                 foreach($fields AS $fieldname) {
                     $fieldparts = explode(':', $fieldname);
-                    $fieldname = $fieldparts[0];
-                    $fieldname = serendipity_specialchars(trim($fieldname));
+                    $fieldname  = $fieldparts[0];
+                    $_fieldname = serendipity_specialchars(trim($fieldname));
 
-                    if (isset($serendipity['POST']['properties'][$fieldname])) {
-                        $value = $serendipity['POST']['properties'][$fieldname];
-                    } elseif (!empty($eventData['properties']['ep_' . $fieldname])) {
-                        $value = $eventData['properties']['ep_' . $fieldname];
+                    if (isset($serendipity['POST']['properties'][$_fieldname])) {
+                        $value = $serendipity['POST']['properties'][$_fieldname];
+                    } elseif (!empty($eventData['properties']['ep_' . $_fieldname])) {
+                        $value = $eventData['properties']['ep_' . $_fieldname];
                     } else {
                         $value = trim(str_replace($special_to, $special_read, $fieldparts[1]));
                     }
 ?>
-                    <div id="ep_column_<?php echo $fieldname; ?>" class="clearfix form_area media_choose">
-                        <label for="prop<?php echo $fieldname; ?>"><?php echo $fieldname; ?></label>
-                        <textarea id="prop<?php echo $fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $fieldname; ?>]" data-configitem="prop<?php echo $fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
+                    <div id="ep_column_<?php echo $_fieldname; ?>" class="clearfix form_area media_choose">
+                        <label for="prop<?php echo $_fieldname; ?>"><?php echo $_fieldname; ?></label>
+                        <textarea id="prop<?php echo $_fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $_fieldname; ?>]" data-configitem="prop<?php echo $_fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
                         <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
-                        <figure id="prop<?php echo $fieldname; ?>_preview">
-                            <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) { echo '<figcaption>' . PREVIEW . '</figcaption>'; } ?>
-                            <img src="<?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) {echo $value; }?>"  alt="">
+                        <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) { ?>
+                        <figure id="prop<?php echo $_fieldname; ?>_preview">
+                            <figcaption><?php echo PREVIEW; ?></figcaption>
+                            <img src="<?php echo $value; ?>"  alt=""/>
                         </figure>
+                        <?php } ?>
                     </div>
 <?php
                     }

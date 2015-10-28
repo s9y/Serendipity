@@ -23,49 +23,50 @@
         . . . etc
 
     */
+    $myThemePath = $serendipity['serendipityHTTPPath'] . $serendipity['templatePath'] . $serendipity['template'];
     $serendipity['custom_emoticons_regexp'] = true;
-    $serendipity['custom_emoticons'] = array(
-                "\:'\("     => serendipity_getTemplateFile('img/emoticons/cry.png', 'serendipityHTTPPath', true),
+        $serendipity['custom_emoticons'] = array(
+                "\:'\("     => $myThemePath . '/img/emoticons/cry.png',
 
-                '\:\-?\)'   => serendipity_getTemplateFile('img/emoticons/smile.png', 'serendipityHTTPPath', true),
+                '\:\-?\)'   => $myThemePath . '/img/emoticons/smile.png',
 
-                '\:\-?\|'   => serendipity_getTemplateFile('img/emoticons/normal.png', 'serendipityHTTPPath', true),
+                '\:\-?\|'   => $myThemePath . '/img/emoticons/normal.png',
 
-                '\:\-?O'    => serendipity_getTemplateFile('img/emoticons/eek.png', 'serendipityHTTPPath', true),
+                '\:\-?O'    => $myThemePath . '/img/emoticons/eek.png',
 
-                '\:\-?\('   => serendipity_getTemplateFile('img/emoticons/sad.png', 'serendipityHTTPPath', true),
+                '\:\-?\('   => $myThemePath . '/img/emoticons/sad.png',
 
-                '8\-?\)'    => serendipity_getTemplateFile('img/emoticons/cool.png', 'serendipityHTTPPath', true),
+                '8\-?\)'    => $myThemePath . '/img/emoticons/cool.png',
 
-                '\:\-?D'    => serendipity_getTemplateFile('img/emoticons/laugh.png', 'serendipityHTTPPath', true),
+                '\:\-?D'    => $myThemePath . '/img/emoticons/laugh.png',
 
-                '\:\-?P'    => serendipity_getTemplateFile('img/emoticons/tongue.png', 'serendipityHTTPPath', true),
+                '\:\-?P'    => $myThemePath . '/img/emoticons/tongue.png',
 
-                ';\-?\)'    => serendipity_getTemplateFile('img/emoticons/wink.png', 'serendipityHTTPPath', true),
+                ';\-?\)'    => $myThemePath . '/img/emoticons/wink.png',
 
-                '\:anger\:' => serendipity_getTemplateFile('img/emoticons/anger.png', 'serendipityHTTPPath', true),
+                '\:anger\:' => $myThemePath . '/img/emoticons/anger.png',
 
-                '\:\$'      => serendipity_getTemplateFile('img/emoticons/shame.png', 'serendipityHTTPPath', true),
+                '\:\$'      => $myThemePath . '/img/emoticons/shame.png',
 
-                '\:grmpf\:' => serendipity_getTemplateFile('img/emoticons/grmpf.png', 'serendipityHTTPPath', true),
+                '\:grmpf\:' => $myThemePath . '/img/emoticons/grmpf.png',
 
-                '\:grrr\:'  => serendipity_getTemplateFile('img/emoticons/grrr.png', 'serendipityHTTPPath', true),
+                '\:grrr\:'  => $myThemePath . '/img/emoticons/grrr.png',
 
-                '\:haha\:'  => serendipity_getTemplateFile('img/emoticons/haha.png', 'serendipityHTTPPath', true),
+                '\:haha\:'  => $myThemePath . '/img/emoticons/haha.png',
 
-                '\:\)'      => serendipity_getTemplateFile('img/emoticons/happy.png', 'serendipityHTTPPath', true),
+                '\:\)'      => $myThemePath . '/img/emoticons/happy.png',
 
-                '\:hero\:'  => serendipity_getTemplateFile('img/emoticons/hero.png', 'serendipityHTTPPath', true),
+                '\:hero\:'  => $myThemePath . '/img/emoticons/hero.png',
 
-                '\:ko\:'    => serendipity_getTemplateFile('img/emoticons/ko.png', 'serendipityHTTPPath', true),
+                '\:ko\:'    => $myThemePath . '/img/emoticons/ko.png',
 
-                '\:safe\:'  => serendipity_getTemplateFile('img/emoticons/safe.png', 'serendipityHTTPPath', true),
+                '\:safe\:'  => $myThemePath . '/img/emoticons/safe.png',
 
-                '\:still\:' => serendipity_getTemplateFile('img/emoticons/still.png', 'serendipityHTTPPath', true),
+                '\:still\:' => $myThemePath . '/img/emoticons/still.png',
 
-                '\:\('      => serendipity_getTemplateFile('img/emoticons/unhappy.png', 'serendipityHTTPPath', true),
+                '\:\('      => $myThemePath . '/img/emoticons/unhappy.png',
 
-                '\:o\:'     => serendipity_getTemplateFile('img/emoticons/whistle.png', 'serendipityHTTPPath', true),
+                '\:o\:'     => $myThemePath . '/img/emoticons/whistle.png',
         );
 
 ?>

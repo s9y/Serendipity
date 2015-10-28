@@ -40,40 +40,20 @@
     </form>
 {/if}
 {if $case_do_multidelete || $case_do_delete}
-    {if $showML}{$showML}{/if}
+    {if isset($showML)}{$showML}{/if}
 {/if}
-{if $case_rename}
-    {if $go_back}
-    <input class="go_back" type="button" value="{$CONST.BACK}">
-    {else}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
-    {/if}
-{/if}
-
-{* TODO: obsolete? *}
-{if $case_properties}
-    {** serendipity_showPropertyForm($new_media) **}
-{/if}
-{* END *}
-
+{* A $case_rename can not respond to reload page while in JS - serendipity.rename() ajax will reload and set message events by script *}
 {if $case_add}
-    {if $smarty.post.adminSubAction == 'properties'}
-    <script>location.href="?serendipity[adminModule]=images&serendipity[adminAction]=default";</script>
-    <noscript><a class="button_link icon_link standalone" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=default">{$CONST.DONE}</a></noscript>
-    {else}
-    {$showML}
-    {/if}
+    {if isset($showML)}{$showML}{/if}
 {/if}
 {if $case_directoryDoDelete}
     {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
-    {if $ob_serendipity_killPath}{$ob_serendipity_killPath}{/if}
+    {if isset($ob_serendipity_killPath)}{$ob_serendipity_killPath}{/if}
     {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
-    {if !empty($smarty.post.save)}
-    {if $ob_serendipity_moveMediaDirectory}<span class="msg_notice"><span class="icon-info-circled"></span> {$ob_serendipity_moveMediaDirectory}</span>{/if}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$print_CONST.SETTINGS_SAVED_AT}</span>
+    {if !empty($smarty.post.serendipity.save)}
+    <span class="msg_notice"><span class="icon-info-circled"></span> {$print_SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
@@ -166,7 +146,7 @@
             <select id="dircreate_parent" name="serendipity[parent]">
                 <option value="">{$CONST.BASE_DIRECTORY}</option>
             {foreach $folders as $folder}
-                <option{if $folder.relpath == $get.only_path || $folder.relpath == $dir} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)} {$folder.name}</option>
+                <option{if $folder.relpath == $get.only_path || $folder.relpath == $dir} selected{/if} value="{$folder.relpath}">{'&nbsp;'|str_repeat:($folder.depth*2)}{$folder.name}</option>
             {/foreach}
             </select>
         </div>
@@ -180,24 +160,33 @@
 {if $case_directorySelect}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
-    <h3>{$CONST.BASE_DIRECTORY}</h3>
+    <h3>{$CONST.BASE_DIRECTORY} <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_directory_info" title="{$CONST.DIRECTORY_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.DIRECTORY_INFO}</span></a></span></h3>
+    <header id="media_directory_info" class="media_directory_info additional_info">
+        <span class="msg_notice">{$CONST.DIRECTORY_INFO_DESC}</span>
+    </header>
 
     <ul id="serendipity_image_folders" class="option_list">
     {foreach $folders as $folder}
         {if ! $folder@first}
-            {if $folder.depth > $priorDepth}
-                <ul>
+            {if ($folder.depth > $priorDepth)}
+
+            <ul>
             {/if}
 
             {if $folder.depth < $priorDepth}
-                </li>
-                {for $i=$folder.depth+1 to $priorDepth}
-                    </ul></li>
-                {/for}
+
+        </li>
+
+            {for $i=($folder.depth+1) to $priorDepth}
+
+            </ul>
+         </li>
+            {/for}
             {/if}
 
-            {if $folder.depth == $priorDepth}
-                </li>
+            {if ($folder.depth == $priorDepth)}
+
+        </li>
             {/if}
         {/if}
 
@@ -214,10 +203,16 @@
                 </ul>
             </div>
     {/foreach}
+
     </li>
     {for $i=1 to $priorDepth}
-        </ul></li>
+        {if $i != $priorDepth}
+
+            </ul>
+        </li>
+        {/if}
     {/for}
+
     </ul>
 
     <a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreate">{$CONST.CREATE_NEW_DIRECTORY}</a>
@@ -242,9 +237,9 @@
     {/if}
 {/if}
 {if $case_scale}
-    {if $print_SCALING_IMAGE}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_SCALING_IMAGE}</span>{/if}
-    {if $print_serendipity_scaleImg}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_serendipity_scaleImg}</span>{/if}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DONE}</span>
+    {if isset($print_SCALING_IMAGE)}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_SCALING_IMAGE}</span>{/if}
+    {if isset($scaleImgError)}<span class="msg_error"><span class="icon-attention-circled"></span> {$scaleImgError}</span>{/if}
+    {if isset($is_done)}<span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}</span>{/if}
     {if $showML}{$showML}{/if}
 {/if}
 {if $case_scaleSelect}

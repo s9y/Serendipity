@@ -120,7 +120,7 @@
     {/foreach}
         });
     </script>
-    
+
 </div>
     {if $is_entries}
     {if NOT $simpleFilters}
@@ -180,12 +180,15 @@
             {/foreach}
             </ul>
             {if ($offSet > 0) || ($count > $perPage)}
-            {math equation="ceil(values/parts)" assign=totalPages values=$totalEntries parts=$perPage} 
+            {math equation="ceil(values/parts)" assign=totalPages values=$totalEntries parts=$perPage}
             <nav class="pagination">
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
+                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start"></span></a>{/if}</li>
                     <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    {* Looks weird, but last will be placed to end by the CSS float:right *}
+                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end"></span></a>{/if}</li>
                     <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
@@ -215,7 +218,11 @@
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
+        {if $iframe === true && isset($smarty.post.serendipity.properties.lang_selected)}
+        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.PLUGIN_EVENT_MULTILINGUAL_ENTRY_RELOADED|sprintf:{(''==$smarty.post.serendipity.properties.lang_selected)?$lang:$smarty.post.serendipity.properties.lang_selected}}</span>
+        {else}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE}</span>
+        {/if}
         {/if}
         {if $is_iframepreview}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_PREVIEW}</span>
@@ -236,5 +243,5 @@
         </div>
     {/if}
 {/if}
-{$iframe}
+{if $iframe !== true && !empty($iframe)}{$iframe}{/if}
 {$entryForm}

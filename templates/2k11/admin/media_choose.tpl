@@ -8,7 +8,7 @@
     <div class="clearfix">
     {if $media.file.is_image}
         {serendipity_hookPlugin hook="frontend_image_selector" eventData=$media.file hookAll=true}
-        <h1>{$CONST.YOU_CHOSE|@sprintf:$media.file.realname}</h1>
+        <h1>{$CONST.YOU_CHOSE|sprintf:$media.file.realname}</h1>
 
         <img src="{$media.file.imgsrc}" alt="">
         
@@ -41,12 +41,12 @@
 
                 <div class="clearfix">
                     <div class="form_radio">
-                        <input id="radio_link_no" name="serendipity[linkThumbnail]" type="radio" value="no" {'linkThumbnail'|@ifRemember:'no':true}>
+                        <input id="radio_link_no" name="serendipity[linkThumbnail]" type="radio" value="no" {'linkThumbnail'|ifRemember:'no':true}>
                         <label for="radio_link_no">{$CONST.I_WANT_THUMB}</label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="radio_link_yes" name="serendipity[linkThumbnail]" type="radio" value="yes" {'linkThumbnail'|@ifRemember:'yes'}>
+                        <input id="radio_link_yes" name="serendipity[linkThumbnail]" type="radio" value="yes" {'linkThumbnail'|ifRemember:'yes'}>
                         <label for="radio_link_yes">{$CONST.I_WANT_BIG_IMAGE}</label>
                     </div>
                 </div>
@@ -58,17 +58,17 @@
 
                 <div class="clearfix">
                     <div class="form_radio">
-                        <input id="image_align_top" name="serendipity[align]" {'align'|@ifRemember:''} type="radio" value="">
+                        <input id="image_align_top" name="serendipity[align]" {'align'|ifRemember:''} type="radio" value="">
                         <label for="image_align_top"><img src="{serendipity_getFile file='img/img_align_top.png'}" alt="{$CONST.ALIGN_TOP}"></label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="image_align_left" name="serendipity[align]" {'align'|@ifRemember:'left':true} type="radio" value="left">
+                        <input id="image_align_left" name="serendipity[align]" {'align'|ifRemember:'left':true} type="radio" value="left">
                         <label for="image_align_left"><img src="{serendipity_getFile file='img/img_align_left.png'}" alt="{$CONST.ALIGN_LEFT}"></label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="image_align_right" name="serendipity[align]" {'align'|@ifRemember:'right'} type="radio" value="right">
+                        <input id="image_align_right" name="serendipity[align]" {'align'|ifRemember:'right'} type="radio" value="right">
                         <label for="image_align_right"><img src="{serendipity_getFile file='img/img_align_right.png'}" alt="{$CONST.ALIGN_RIGHT}"></label>
                     </div>
                 </div>
@@ -80,12 +80,12 @@
 
                 <div class="clearfix">
                     <div class="form_radio">
-                        <input id="radio_islink_no" name="serendipity[isLink]" type="radio" value="no" {'isLink'|@ifRemember:'no':true}>
+                        <input id="radio_islink_no" name="serendipity[isLink]" type="radio" value="no" {'isLink'|ifRemember:'no':true}>
                         <label for="radio_islink_no">{$CONST.I_WANT_NO_LINK}</label>
                     </div>
 
                     <div class="form_radio">
-                        <input id="radio_islink_yes" name="serendipity[isLink]" type="radio" value="yes" {'isLink'|@ifRemember:'yes'}>
+                        <input id="radio_islink_yes" name="serendipity[isLink]" type="radio" value="yes" {'isLink'|ifRemember:'yes'}>
                         <label for="radio_islink_yes">{$CONST.I_WANT_IT_TO_LINK}</label>
 
                         <div class="form_field">
@@ -103,10 +103,10 @@
 
                 <div class="form_select">
                     <select id="select_image_target" name="serendipity[target]">
-                        <option value="none"   {'target'|@ifRemember:'none':false:'selected'}>{$CONST.NONE}</option>
-                        <option value="js"     {'target'|@ifRemember:'js':false:'selected'}>{$CONST.MEDIA_TARGET_JS}</option>
-                        <option value="plugin" {'target'|@ifRemember:'plugin':false:'selected'}>{$CONST.MEDIA_ENTRY}</option>
-                        <option value="_blank" {'target'|@ifRemember:'_blank':false:'selected'}>{$CONST.MEDIA_TARGET_BLANK}</option>
+                        <option value="none"   {'target'|ifRemember:'none':false:'selected'}>{$CONST.NONE}</option>
+                        <option value="js"     {'target'|ifRemember:'js':false:'selected'}>{$CONST.MEDIA_TARGET_JS}</option>
+                        <option value="plugin" {'target'|ifRemember:'plugin':false:'selected'}>{$CONST.MEDIA_ENTRY}</option>
+                        <option value="_blank" {'target'|ifRemember:'_blank':false:'selected'}>{$CONST.MEDIA_TARGET_BLANK}</option>
                     </select>
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagelink2' eventData=$media.file}
                     <label for="select_image_target">{$CONST.MEDIA_TARGET}</label>
@@ -143,6 +143,11 @@
         {if $media.filename_only}
         <script>
             {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
+            if (parent.self.opener == undefined) {
+                // in iframes, there is no opener, and the magnific popup is wrapped
+                parent.self = window.parent.parent.$.magnificPopup;
+                parent.self.opener = window.parent.parent;
+            }
             parent.self.opener.serendipity.serendipity_imageSelector_addToElement('{$media.file.full_file|escape}', '{$media.htmltarget|escape}');
             parent.self.close();
         </script>
@@ -155,11 +160,11 @@
                 parent.self = window.parent.parent.$.magnificPopup;
                 parent.self.opener = window.parent.parent;
             }
-            if (parent.self.opener.editorref) { 
+            if (parent.self.opener.editorref) {
                 parent.self.opener.editorref.surroundHTML(block, '');
-            }  else { 
+            } else {
                 parent.self.opener.serendipity.serendipity_imageSelector_addToBody(block, '{$media.textarea}');
-            } 
+            }
             parent.self.close();
         </script>
         {/if}

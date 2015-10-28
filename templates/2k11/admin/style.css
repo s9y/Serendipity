@@ -385,11 +385,11 @@ progress div.progress-undefined {
 /* ICON FONT: http://fortawesome.github.com/Font-Awesome/ */
 @font-face {
   font-family: 'fontello';
-  src: url('{TEMPLATE_PATH}font/fontello.eot?70036835');
-  src: url('{TEMPLATE_PATH}font/fontello.eot?70036835#iefix') format('embedded-opentype'),
-       url('{TEMPLATE_PATH}font/fontello.woff?70036835') format('woff'),
-       url('{TEMPLATE_PATH}font/fontello.ttf?70036835') format('truetype'),
-       url('{TEMPLATE_PATH}font/fontello.svg?70036835#fontello') format('svg');
+  src: url('{TEMPLATE_PATH}font/fontello.eot?70021285');
+  src: url('{TEMPLATE_PATH}font/fontello.eot?70021285#iefix') format('embedded-opentype'),
+       url('{TEMPLATE_PATH}font/fontello.woff?70021285') format('woff'),
+       url('{TEMPLATE_PATH}font/fontello.ttf?70021285') format('truetype'),
+       url('{TEMPLATE_PATH}font/fontello.svg?70021285#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -454,8 +454,9 @@ progress div.progress-undefined {
 .icon-right-dir:before { content: '\e828'; }
 .icon-th-list:before { content: '\e829'; }
 .icon-block:before { content: '\e82a'; }
+.icon-to-end:before { content: '\e82b'; }
 .icon-rocket:before { content: '\e82c'; }
-
+.icon-to-start:before { content: '\e82d'; }
 
 /* BACKEND HELPER CLASSES */
 .icon_link,
@@ -979,6 +980,10 @@ input[type=checkbox],
     margin-bottom: .75em;
 }
 
+#media_filter > .keywords {
+    margin-bottom: 0.75em;
+}
+
 #media_filter_path .form_select {
     margin: 0 0 0 .125em;
 }
@@ -1217,11 +1222,15 @@ summary {
 .template_info dt,
 .template_info dd,
 #entries_list .form_check,
+.pagination .first,
 .pagination .prev,
-.pagination .next,
 .serendipity_customfields textarea,
 #dashboard_header h2 {
     float: left;
+}
+.pagination .next,
+.pagination .last {
+    float: right;
 }
 
 #mediaPropertyForm .media_wrap_thumb {
@@ -1271,14 +1280,25 @@ summary {
     width: 48%;
 }
 
+.pagination .first,
+.pagination .last,
 .pagination .prev,
 .pagination .next {
     min-height: 1px;
-    width: 50%;
+    width: 2.2em;
 }
-
+.first .button_link, .last .button_link {
+    width: .5em;
+}
 .pagination > ul {
     min-height: 1em;
+}
+
+.pagination .icon-to-start,
+.pagination .icon-to-end {
+    font-size: .75em;
+    position: relative;
+    top: -1px;
 }
 
 #filter_comments .form_field > input,
@@ -1843,6 +1863,25 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+.mfp-content #rename_msg {
+    width: 40em;
+    background-color: #FFF;
+    text-align: center;
+    margin: auto;
+    border: 2px double #00FFDB;
+    padding: 0.5em;
+}
+.mfp-content #rename_ok {
+    margin-bottom: 1em;
+    color: #FFF;
+    text-shadow: inherit;
+}
+.mfp-content #rename_msg button.mfp-close {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+}
+
 .taxonomy h3:hover,
 .taxonomy li:hover {
     cursor: pointer;
@@ -2220,6 +2259,7 @@ label .perm_name,
 .pluginmanager_ownership,
 .pluginmanager_move,
 .pagination .next,
+.pagination .last,
 #login .form_buttons {
     text-align: right;
 }
@@ -2290,6 +2330,13 @@ label .perm_name,
 #template_select h3,
 .media_file h3 {
     margin: .5em 0 1em;
+}
+.manage h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 14em;
+    vertical-align: middle;
 }
 
 .media_file .form_check input {
@@ -2432,6 +2479,12 @@ input[name="serendipity[filter][fileCategory]"] {
 #media_selector_bar {
     float: right;
     margin: 1em 0 0;
+}
+
+.media_select_strict {
+    clear: right;
+    float: left;
+    margin: -0.75em 0px;
 }
 
 #overlay {
@@ -2874,6 +2927,12 @@ img.mfp-img {
 }
 
 /* SMALL SCREEN */
+@media only screen and (min-width: 360px) {
+    .manage h3 {
+        width: 15em;
+    }
+}
+
 @media only screen and (min-width: 480px) {
     #serendipityEntry {
         padding-top: 0;
@@ -2964,11 +3023,25 @@ img.mfp-img {
         margin: 0 0 1em;
     }
 
+    .media_select_strict {
+        margin: -1em 0;
+    }
+
+    .popuplayer_showUpload {
+        float: right;
+        margin-top: -2.375em;
+    }
+
     #mediaPropertyForm .media_file_props label,
     #mediaPropertyForm header b,
     #mediaPropertyForm footer b {
         display: inline-block;
         width: 20%;
+    }
+
+    #media_filter > .left,
+    #media_filter > .center {/*mediafilter*/
+        margin-right: .2em;
     }
 
     .user_level {
@@ -3249,6 +3322,12 @@ img.mfp-img {
 
 
 /* LARGE SCREEN */
+@media only screen and (min-width: 860px) {
+    .manage h3 {
+        width: 17em;
+    }
+}
+
 @media only screen and (min-width: 900px) {
     #edit_entry_status_comments .form_check {
         margin-bottom: 0;
@@ -3297,6 +3376,12 @@ img.mfp-img {
         width: 33% ;
     }
 
+    #media_filter > div.keywords {/*simple filter*/
+        float: right;
+        margin-top: -2.5em;
+        margin-bottom: 0;
+    }
+
     #filter_entries .form_select,
     #filter_entries .form_field {
         float: left;
@@ -3313,14 +3398,18 @@ img.mfp-img {
         clear: left;
     }
 
-    #media_filter_file,
-    #media_pane_sort .left,
     #serendipity_comment .form_area {
         clear: both;
     }
 
     #keyword_list {
         padding-top: 2em;
+    }
+}
+
+@media only screen and (min-width: 950px) {
+    .manage h3 {
+        width: 19em;
     }
 }
 
@@ -3465,14 +3554,23 @@ img.mfp-img {
         width: 100%;
     }
 
+    .manage h3 {
+        width: 14em;
+    }
+
     #login {
         margin: 4em auto 8em;
     }
 }
 
-
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
+    .js .configuration_group .media_choose input {
+        max-width: 42.5%;
+    }
+    .manage h3 {
+        width: 18em;
+    }
     #edit_entry_metadata #categoryfilter {
         max-width: 22em;
         min-width: 0;
@@ -3482,5 +3580,8 @@ img.mfp-img {
 @media only screen and (min-width: 1600px) {
     html {
         font-size: 1.125em;
+    }
+    .manage h3 {
+        width: 19em;
     }
 }

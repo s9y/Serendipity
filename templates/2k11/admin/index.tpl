@@ -30,6 +30,7 @@
         </div>
     </header>
 {/if}
+
     <main id="workspace" class="clearfix">
     {if NOT $admin_vars.is_logged_in}
         {$admin_vars.out|@serendipity_refhookPlugin:'backend_login_page'}
@@ -160,8 +161,10 @@
         {$admin_vars.main_content}
         </div>
     {/if}
+
     </main>
 {if NOT $admin_vars.no_footer}
+
     <footer id="meta">
         <p>{$admin_vars.version_info}</p>
     </footer>

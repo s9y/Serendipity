@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<?xml-stylesheet href="{serendipity_getFile file='atom.css'}" type="text/css" ?>
 
 <feed {$namespace_display_dat}
    xmlns="http://www.w3.org/2005/Atom"
@@ -12,6 +11,7 @@
     <link href="{$self_url}" rel="self" title="{$metadata.title}" type="application/atom+xml" />
     <link href="{$serendipityBaseURL}"                        rel="alternate"    title="{$metadata.title}" type="text/html" />
     <link href="{$serendipityBaseURL}rss.php?version=2.0"     rel="alternate"    title="{$metadata.title}" type="application/rss+xml" />
+    <link rel="stylesheet" href="{serendipity_getFile file='atom.css'}" type="text/css" />
     <title type="html">{$metadata.title}</title>
     <subtitle type="html">{$metadata.description}</subtitle>
     {$metadata.additional_fields.image_atom10}

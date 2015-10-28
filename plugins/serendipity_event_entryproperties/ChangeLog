@@ -1,3 +1,8 @@
+1.38:
+-----
+    * Fixed preview of extended properties by 1.37
+    * Added some parameters for requirement
+
 1.37:
 -----
     * Added image preview to extended properties if value is image format (Don Chambers)

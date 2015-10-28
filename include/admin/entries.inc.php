@@ -8,6 +8,7 @@ if (!serendipity_checkPermission('adminEntries')) {
     return;
 }
 
+$per_page   = array('12', '16', '50', '100');
 $sort_order = array('timestamp'     => DATE,
                     'isdraft'       => PUBLISH . '/' . DRAFT,
                     'a.realname'    => AUTHOR,
@@ -15,7 +16,6 @@ $sort_order = array('timestamp'     => DATE,
                     'last_modified' => LAST_UPDATED,
                     'title'         => TITLE,
                     'id'            => 'ID');
-$per_page = array('12', '16', '50', '100');
 
 $data = array();
 
@@ -339,8 +339,10 @@ switch($serendipity['GET']['adminAction']) {
             foreach ((array)$serendipity['GET']['filter'] as $k => $v) {
                 $qString .= '&amp;serendipity[filter]['. $k .']='. $v;
             }
+            $data['linkFirst']    = $qString . '&amp;serendipity[page]=' . 0;
             $data['linkPrevious'] = $qString . '&amp;serendipity[page]=' . ($page-1);
             $data['linkNext']     = $qString . '&amp;serendipity[page]=' . ($page+1);
+            $data['linkLast']     = $qString . '&amp;serendipity[page]='; // is done in tpl per $totalPages
 
             $smartentries = array();
             foreach ($entries as $ey) {
@@ -396,7 +398,11 @@ switch($serendipity['GET']['adminAction']) {
         break;
 
     case 'multidelete':
-        if (!serendipity_checkFormToken() || !is_array($serendipity['POST']['multiDelete'])) {
+        if (!serendipity_checkFormToken()) {
+            return; // blank content page, but default token check parameter is presenting a XSRF message when false
+        }
+        if (!is_array($serendipity['POST']['multiDelete'])) {
+            echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
 
@@ -434,8 +440,8 @@ $data['entryForm'] = $entryForm;
 $data['errors'] = $errors;
 $data['get'] = $serendipity['GET']; // don't trust {$smarty.get.vars} if not proofed, as we often change GET vars via serendipty['GET'] by runtime
 // make sure we've got these
-if(!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
-if(!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
+if (!isset($data['urltoken']))  $data['urltoken']  = serendipity_setFormToken('url');
+if (!isset($data['formtoken'])) $data['formtoken'] = serendipity_setFormToken();
 
 echo serendipity_smarty_show('admin/entries.inc.tpl', $data);
 

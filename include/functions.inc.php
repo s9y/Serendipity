@@ -13,16 +13,16 @@ if (defined('S9Y_FRAMEWORK_FUNCTIONS')) {
 
 $serendipity['imageList'] = array();
 
-include_once(S9Y_INCLUDE_PATH . "include/db/db.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/compat.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_config.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/plugin_api.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_images.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_installer.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_entries.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_comments.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_permalinks.inc.php");
-include_once(S9Y_INCLUDE_PATH . "include/functions_smarty.inc.php");
+include_once(S9Y_INCLUDE_PATH . 'include/db/db.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/compat.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_config.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_images.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_installer.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_entries.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_comments.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_permalinks.inc.php');
+include_once(S9Y_INCLUDE_PATH . 'include/functions_smarty.inc.php');
 
 /**
  * Truncate a string to a specific length, multibyte aware. Appends '...' if successfully truncated
