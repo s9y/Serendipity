@@ -1,6 +1,12 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Rewrote Routing code for index.php to be outsourced into
+      include/functions_routing
+
+    * Removed broken feature for viewing blog entries by multiple
+      authors, dropped code from core and plugin_authors.
+
     * Optimize scaleImage returns
 
     * Fixed media item rename handler (#370)
