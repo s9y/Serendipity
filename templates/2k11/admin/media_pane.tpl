@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="form_buttons">
-                <input name="go" type="submit" value="{$CONST.GO}">
+                <input name="go" type="submit" value="{$CONST.GO}"> <input class="reset_media_filters" name="media_filters_reset" type="reset" value="Reset">
             </div>
         </fieldset>
         <script>
@@ -179,6 +179,21 @@
             {/foreach}
 
                 serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");
+
+                $('#media_pane_filter').find('.reset_media_filters').addClass('reset_filter');
+                $('#media_pane_sort').find('.reset_media_filters').addClass('reset_sort');
+
+                $('.reset_filter').click(function() {
+                    $('#media_filter').find('input[type=text], input[type=date]').each(function() {
+                        $(this).attr('value', '');
+                    });
+                });
+                $('.reset_sort').click(function() {
+                    $("#serendipity_sortorder_order option:selected").removeAttr("selected");
+                    $("#serendipity_sortorder_order option[value='i.date']").attr('selected', 'selected');
+                    $("#serendipity_sortorder_perpage option:selected").removeAttr("selected");
+                    $("#serendipity_sortorder_perpage option[value='8']").attr('selected', 'selected');
+                });
             });
         </script>
     </form>

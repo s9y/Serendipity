@@ -1337,6 +1337,7 @@ summary {
     width: 100%;
 }
 
+#media_pane_filter input.reset_media_filters[type="reset"],
 #media_pane_filter input[type="submit"] {
     width: auto;
 }
