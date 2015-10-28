@@ -2458,6 +2458,10 @@ input[name="serendipity[filter][fileCategory]"] {
 
 .media_selector {
     cursor: pointer;
+    margin-right: -5px;
+}
+.media_selector:nth-of-type(3) {
+    margin-right: 0px;
 }
 
 .media_selector,
