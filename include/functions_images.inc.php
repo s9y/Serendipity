@@ -2019,8 +2019,7 @@ function serendipity_getimagesize($file, $ft_mime = '', $suf = '') {
 }
 
 /**
- * Get the available fields of the media database, except name,
- * since this is handled extra and hardcoded as 'only_filename'
+ * Get the available fields of the media database
  *
  * @access public
  * @return array    Array with available, sortable fields
@@ -2032,10 +2031,10 @@ function serendipity_getImageFields() {
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'
-                                   )/*,
+                                   ),
 
             'i.name'              => array('desc' => SORT_ORDER_NAME
-                                   ),*/
+                                   ),
 
         );
 
@@ -2043,10 +2042,10 @@ function serendipity_getImageFields() {
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'
-                                   ),/*,
+                                   ),
 
             'i.name'              => array('desc' => SORT_ORDER_NAME
-                                   ),*/
+                                   ),
 
             'i.authorid'          => array('desc' => AUTHOR,
                                          'type' => 'authors'
@@ -2913,6 +2912,9 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     if (!is_object($serendipity['smarty'])) {
         serendipity_smarty_init();
     }
+    $order_fields = serendipity_getImageFields();
+    // reset filename for building template filters, since this is hardcoded as 'only_filename'
+    unset($order_fields['i.name']);
 
     $media = array(
         'manage'            => $manage,
@@ -2937,7 +2939,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'sortorder'         => $serendipity['GET']['sortorder'],
         'keywords_selected' => $serendipity['GET']['keywords'],
         'filter'            => $serendipity['GET']['filter'],
-        'sort_order'        => serendipity_getImageFields(),
+        'sort_order'        => $order_fields,
         'simpleFilters'     => $serendipity['simpleFilters'],
         'toggle_dir'        => empty($serendipity['GET']['toggle_dir']) ? 'no' : $serendipity['GET']['toggle_dir'],
         'authors'           => serendipity_fetchUsers(),
