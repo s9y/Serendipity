@@ -106,17 +106,17 @@
                 </div>{* media filter end *}
             {/foreach}
 
-                <div id="media_filter_file" class="form_field left">
+                <div id="media_filter_file" class="form_field {if $media.simpleFilters}center{else}left{/if}">
                     <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
                     <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|escape}">
                 </div>
 
-                <div id="media_filter_keywords" class="form_field center">
+                <div id="media_filter_keywords" class="form_field {if $media.simpleFilters}right{else}center{/if}">
                     <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
                     <input id="keyword_input" name="serendipity[keywords]" type="text" value="{$media.keywords_selected|escape}">
                 </div>
 
-                <div id="keyword_list" class="clearfix right">
+                <div id="keyword_list" class="clearfix {if $media.simpleFilters}keywords {/if}right">
                 {foreach $media.keywords AS $keyword}
 
                     <a class="add_keyword" href="#keyword-input" data-keyword="{$keyword|escape}" title="{$keyword|escape}">{$keyword|escape|truncate:20:"&hellip;"}</a>

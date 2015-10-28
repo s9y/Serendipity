@@ -36,11 +36,11 @@ function serendipity_isActiveFile($file) {
  * @access public
  * @param   int     The offset to start fetching media files
  * @param   int     How many items to fetch
- * @param   int     The number (referenced varaible) of fetched items
+ * @param   int     The number (referenced variable) of fetched items
  * @param   string  The "ORDER BY" sql part when fetching items
  * @param   string  Order by DESC or ASC
  * @param   string  Only fetch files from a specific directory
- * @param   string  Only fetch specific filenames
+ * @param   string  Only fetch specific filenames (including check for realname match)
  * @param   string  Only fetch media with specific keyword
  * @param   array   An array of restricting filter sets
  * @param   boolean Apply strict directory checks, or include subdirectories?
@@ -2019,7 +2019,8 @@ function serendipity_getimagesize($file, $ft_mime = '', $suf = '') {
 }
 
 /**
- * Get the available fields of the media database
+ * Get the available fields of the media database, except name,
+ * since this is handled extra and hardcoded as 'only_filename'
  *
  * @access public
  * @return array    Array with available, sortable fields
@@ -2031,10 +2032,10 @@ function serendipity_getImageFields() {
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'
-                                   ),
+                                   )/*,
 
             'i.name'              => array('desc' => SORT_ORDER_NAME
-                                   ),
+                                   ),*/
 
         );
 
@@ -2042,10 +2043,10 @@ function serendipity_getImageFields() {
         $x = array(
             'i.date'              => array('desc' => SORT_ORDER_DATE,
                                          'type' => 'date'
-                                   ),
+                                   ),/*,
 
             'i.name'              => array('desc' => SORT_ORDER_NAME
-                                   ),
+                                   ),*/
 
             'i.authorid'          => array('desc' => AUTHOR,
                                          'type' => 'authors'
@@ -2937,6 +2938,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'keywords_selected' => $serendipity['GET']['keywords'],
         'filter'            => $serendipity['GET']['filter'],
         'sort_order'        => serendipity_getImageFields(),
+        'simpleFilters'     => $serendipity['simpleFilters'],
         'toggle_dir'        => empty($serendipity['GET']['toggle_dir']) ? 'no' : $serendipity['GET']['toggle_dir'],
         'authors'           => serendipity_fetchUsers(),
         'sort_row_interval' => array(8, 16, 50, 100),

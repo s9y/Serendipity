@@ -980,6 +980,10 @@ input[type=checkbox],
     margin-bottom: .75em;
 }
 
+#media_filter > .keywords {
+    margin-bottom: 0.75em;
+}
+
 #media_filter_path .form_select {
     margin: 0 0 0 .125em;
 }
@@ -3035,6 +3039,11 @@ img.mfp-img {
         width: 20%;
     }
 
+    #media_filter > .left,
+    #media_filter > .center {/*mediafilter*/
+        margin-right: .2em;
+    }
+
     .user_level {
         display: inline;
     }
@@ -3367,6 +3376,12 @@ img.mfp-img {
         width: 33% ;
     }
 
+    #media_filter > div.keywords {/*simple filter*/
+        float: right;
+        margin-top: -2.5em;
+        margin-bottom: 0;
+    }
+
     #filter_entries .form_select,
     #filter_entries .form_field {
         float: left;
@@ -3383,8 +3398,6 @@ img.mfp-img {
         clear: left;
     }
 
-    #media_filter_file,
-    #media_pane_sort .left,
     #serendipity_comment .form_area {
         clear: both;
     }
@@ -3549,7 +3562,6 @@ img.mfp-img {
         margin: 4em auto 8em;
     }
 }
-
 
 /* LARGER SCREENS */
 @media only screen and (min-width: 1280px) {
