@@ -162,22 +162,20 @@
                     </select>
                 </div>
             </div>
-
             <div class="form_buttons">
                 <input name="go" type="submit" value="{$CONST.GO}">
             </div>
         </fieldset>
         <script>
             $(document).ready(function() {
-                // alert(serendipity.GetCookie('serendipity[only_path]'));
                 // write: is plain "foo", read: is "serendipity[foo]"!
             {foreach $media.sortParams AS $sortParam}
 
-                serendipity.SetCookie("sortorder_{$sortParam}","{$get_sortorder_{$sortParam}}");
+                serendipity.SetCookie("sortorder_{$sortParam}","{$media.sortorder.{$sortParam}}");
             {/foreach}
             {foreach $media.filterParams AS $filterParam}
 
-                serendipity.SetCookie("{$filterParam}", "{$get_{$filterParam}}");
+                serendipity.SetCookie("{$filterParam}", "{$media.{$filterParam}}");
             {/foreach}
 
                 serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");

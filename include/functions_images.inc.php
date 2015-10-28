@@ -2945,18 +2945,8 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
         'nr_files'          => count($file),
         'keywords'          => explode(';', $serendipity['mediaKeywords']),
         'thumbSize'         => $serendipity['thumbSize'],
-        'sortParams'        => array('perpage', 'order', 'ordermode'),
-        'filterParams'      => array('only_path', 'only_filename')
+        'sortParams'        => array('perpage', 'order', 'ordermode')
     );
-
-
-    foreach($media['sortParams'] AS $sortParam) {
-        $serendipity['smarty']->assign(array("get_sortorder_$sortParam" => $serendipity['GET']['sortorder'][$sortParam]));
-    }
-
-    foreach($media['filterParams'] AS $filterParam) {
-        $serendipity['smarty']->assign(array("$filterParam" => $serendipity['GET'][$filterParam]));
-    }
 
     $media = array_merge($media, $smarty_vars);
     $media['files'] =& $file;
