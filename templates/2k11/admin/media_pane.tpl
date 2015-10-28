@@ -67,10 +67,10 @@
 
                         <div class="form_field">
                             <label for="serendipity_filter_{$filter@key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
-                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="date" value="{$media.filter[$filter@key].from|escape}">
+                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="date" placeholder="2001-01-31" value="{$media.filter[$filter@key].from|escape}">
                             -
                             <label for="serendipity_filter_{$filter@key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
-                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="date" value="{$media.filter[$filter@key].to|escape}">
+                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="date" placeholder="2005-12-31" value="{$media.filter[$filter@key].to|escape}">
                         </div>
                 {elseif $filter.type == 'intrange'}
 
