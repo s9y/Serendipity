@@ -2936,6 +2936,14 @@ img.mfp-img {
     .manage h3 {
         width: 15em;
     }
+
+    #media_pane_filter div fieldset input {/*mediafilter*/
+        width: 6em;
+    }
+    #media_filter .inlined {/*mediafilter*/
+        display: inline-block;
+        width: auto;
+    }
 }
 
 @media only screen and (min-width: 480px) {
@@ -2983,6 +2991,7 @@ img.mfp-img {
     #image_directory_create_form label {
         display: inline-block;
         width: 20%;
+        white-space: nowrap;/*mediafilter*/
     }
 
     #sort_entries .form_select select,
