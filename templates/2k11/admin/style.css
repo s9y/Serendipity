@@ -2940,7 +2940,7 @@ img.mfp-img {
     #media_pane_filter div fieldset input {/*mediafilter*/
         width: 6em;
     }
-    #media_filter .inlined {/*mediafilter*/
+    #media_filter .range-label {/*mediafilter*/
         display: inline-block;
         width: auto;
     }
