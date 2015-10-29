@@ -102,7 +102,7 @@
                     </div>
                 {/if}
 
-                </div>{* media filter end *}
+                </div>
             {/foreach}
 
                 <div id="media_filter_file" class="form_field {if $media.simpleFilters}center{else}left{/if}">
@@ -122,7 +122,7 @@
                 {/foreach}
 
                 </div>
-            </div>
+            </div>{* media filter end *}
         </fieldset>
 
         <fieldset id="media_pane_sort" class="additional_info filter_pane">
@@ -178,6 +178,17 @@
             {/foreach}
 
                 serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");
+            {foreach $media.filter AS $k => $v}
+                {if !is_array($media.filter[{$k}])}
+
+                serendipity.SetCookie("[filter][{$k}]", "{$media.filter[{$k}]}");
+                {else}
+                    {foreach $media.filter[{$k}] AS $key => $val}
+
+                serendipity.SetCookie("[filter][{$k}][{$key}]", "{$media.filter[{$k}][{$key}]}");
+                    {/foreach}
+                {/if}
+            {/foreach}
 
                 $('#media_pane_filter').find('.reset_media_filters').addClass('reset_filter');
                 $('#media_pane_sort').find('.reset_media_filters').addClass('reset_sort');

@@ -26,7 +26,12 @@
         var today  = new Date();
         var expire = new Date();
         expire.setTime(today.getTime() + (60*60*24*30*1000));
-        document.cookie = 'serendipity[' + name + ']='+escape(value) + ';expires=' + expire.toGMTString();
+        // get array like or simple string argument items
+        if (name.indexOf("[") != -1) {
+            document.cookie = 'serendipity' + name + '=' + escape(value) + ';expires=' + expire.toGMTString();
+        } else {
+            document.cookie = 'serendipity[' + name + ']=' + escape(value) + ';expires=' + expire.toGMTString();
+        }
     }
 
     serendipity.GetCookie = function(name) {

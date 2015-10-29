@@ -1597,6 +1597,10 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     ## Aply ACL afterwards:
     serendipity_directoryACL($paths, 'read');
 
+    // set remember filter settings for SetCookie
+    if (!isset($serendipity['GET']['filter'])) {
+        serendipity_restoreVar($serendipity['COOKIE']['filter'], $serendipity['GET']['filter']);
+    }
     $serendipity['imageList'] = serendipity_fetchImagesFromDatabase(
                                   $start,
                                   $perPage,
