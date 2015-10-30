@@ -64,7 +64,7 @@
                 {if $filter.type == 'date' || $filter.type == 'intrange'}
 
                     <fieldset>
-                        <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$filter@key})</legend></span>
+                        <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$filter.desc})</legend></span>
                 {else}
 
                     <div class="form_{if $filter.type == 'authors'}select{else}field{/if}">
@@ -81,10 +81,9 @@
                 {elseif $filter.type == 'intrange'}
 
                         <div class="form_field">
-                            <label for="serendipity_filter_{$filter@key}_from" class="visuallyhidden">{$CONST.RANGE_FROM}</label>
+                            <label for="serendipity_filter_{$filter@key}_from" class="range-label">{$CONST.RANGE_FROM|lower}</label>
                             <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="text" value="{$media.filter[$filter@key].from|escape}">
-                            -
-                            <label for="serendipity_filter_{$filter@key}_to" class="visuallyhidden">{$CONST.RANGE_TO}</label>
+                            <label for="serendipity_filter_{$filter@key}_to" class="range-label">{$CONST.RANGE_TO|lower}</label>
                             <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="text" value="{$media.filter[$filter@key].to|escape}">
                         </div>
                 {elseif $filter.type == 'authors'}
