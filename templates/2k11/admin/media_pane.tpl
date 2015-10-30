@@ -4,7 +4,14 @@
 
     <form id="media_library_control" method="get" action="?">
         {$media.token}
-        {$media.form_hidden}
+        {if empty($media.form_hidden)}
+
+        <input type="hidden" name="serendipity[adminModule]" value="media">
+        <input type="hidden" name="serendipity[action]" value="">
+        <input type="hidden" name="serendipity[adminAction]" value="">
+        <input type="hidden" name="serendipity[only_path]" value="{$media.only_path}">
+        {else}{$media.form_hidden}{/if}
+
         <ul class="filters_toolbar clearfix plainList">
             <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
             <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
