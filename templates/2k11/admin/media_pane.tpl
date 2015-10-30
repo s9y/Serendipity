@@ -177,6 +177,10 @@
                 serendipity.SetCookie("{$filterParam}", "{$media.{$filterParam}}");
             {/foreach}
 
+                serendipity.SetCookie("only_path", "{$media.only_path}");
+
+                serendipity.SetCookie("only_filename", "{$media.only_filename}");
+
                 serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");
             {foreach $media.filter AS $k => $v}
                 {if !is_array($media.filter[{$k}])}
