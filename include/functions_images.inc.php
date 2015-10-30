@@ -3614,14 +3614,14 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
 
                     // do still need this? YES, it is definitely false, so we would not need the ternary
-                    // Rename newDir + file name in case it is called by the Bulk Move and not by rename, then  move the thumb file and catch any wrong renaming
+                    // Rename newDir + file name in case it is called by the Bulk Move and not by rename
                     $newDirFile = (false === strpos($newDir, $file['name'])) ? $newDir . $file['name'] : $newDir;
 
                     foreach($renameValues AS $renameData) {
                         // build full thumb file names
                         $thisOldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $renameData['oldDir'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '.' . $serendipity['thumbSuffix']) . (empty($file['extension']) ? '' : '.' . $file['extension']);
                         $thisNewThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDirFile . (!empty($file['thumbnail_name']) ? '.' . $renameData['thumb'] : '.' . $serendipity['thumbSuffix']) . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                        // Check for existent old thumb files first, to not need to disable rename by @rename()
+                        // Check for existent old thumb files first, to not need to disable rename by @rename(), then  move the thumb file and catch any wrong renaming
                         if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
                             // the thumb file and catch any wrong renaming
                             try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
