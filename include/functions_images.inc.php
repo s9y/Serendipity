@@ -3614,7 +3614,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
 
                     // do still need this? YES, it is definitely false, so we would not need the ternary
-                    // Rename newDir + file name in case it is called by the Bulk Move and not by rename
+                    // Rename newDir + file name in case it is called by the Bulk Move and not by rename, then  move the thumb file and catch any wrong renaming
                     $newDirFile = (false === strpos($newDir, $file['name'])) ? $newDir . $file['name'] : $newDir;
 
                     foreach($renameValues AS $renameData) {
@@ -3680,8 +3680,11 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         foreach($renameValues AS $renameData) {
             $thisOldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
             $thisNewThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . (!empty($pick['thumbnail_name']) ? '.' . $pick['thumbnail_name'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
-            // Move the thumb file and catch any wrong renaming
-            try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+            // Check for existent old thumb files first, to not need to disable rename by @rename(),then  move the thumb file and catch any wrong renaming
+            if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
+                // the thumb file and catch any wrong renaming
+                try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+            }
         }
         // no need to use serendipity_updateImageInDatabase() here since already done in this case start
         // ???? Forward user to overview (we don't want the user's back button to rename things again)
