@@ -1864,6 +1864,7 @@ form > .button_link:first-of-type,
     padding-bottom: .583335em;
 }
 
+.mfp-content #delete_msg,
 .mfp-content #rename_msg {
     width: 40em;
     background-color: #FFF;
@@ -1872,11 +1873,13 @@ form > .button_link:first-of-type,
     border: 2px double #00FFDB;
     padding: 0.5em;
 }
+.mfp-content #delete_ok,
 .mfp-content #rename_ok {
     margin-bottom: 1em;
     color: #FFF;
     text-shadow: inherit;
 }
+.mfp-content #delete_msg button.mfp-close,
 .mfp-content #rename_msg button.mfp-close {
     display: none;
     visibility: hidden;

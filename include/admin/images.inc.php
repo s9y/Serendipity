@@ -76,7 +76,6 @@ switch ($serendipity['GET']['adminAction']) {
         $messages[] = serendipity_deleteImage($serendipity['GET']['fid']);
         $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . RIP_ENTRY . "</span>\n", $serendipity['GET']['fid']);
 
-        $data['showML'] = showMediaLibrary();
         $data['messages'] = $messages;
         unset($messages);
         break;
