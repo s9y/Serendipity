@@ -1161,9 +1161,22 @@ summary {
 
 #workspace,
 .plugin_data,
-.plugin_data summary,
-.serendipity_statistics > .wide_box {
+.plugin_data summary {
     overflow: hidden;
+}
+
+.serendipity_statistics > .wide_box {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+.serendipity_statistics > .wide_box table {
+    max-width: 100%;
+}
+
+.serendipity_statistics > .wide_box tr {
+    font-size: .8125em;
+    text-align: center;
 }
 
 .serendipity_customfields label {
