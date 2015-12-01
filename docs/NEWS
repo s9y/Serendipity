@@ -897,7 +897,7 @@ Version 1.7 (May 11th, 2013)
       The Smarty security policy to us only serves as a restriction
       within .tpl files to not allow arbitrary PHP modifier/function calls.
       If in the future Smarty supports enforcing trustedDir checks on
-      {include} calls seperately to smarty->fetch() calls, we'll also
+      {include} calls separately to smarty->fetch() calls, we'll also
       add that to .tpl files.
       (garvinhicking)
 
