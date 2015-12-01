@@ -58,13 +58,13 @@
             <legend class="visuallyhidden">{$CONST.FILTERS}</legend>
 {* Keep in mind that $media.sort_order is different than $media.sortorder! The first is for building the key names; the second is the value that was set by POST! *}
             <div id="media_filter" class="clearfix">
-            {foreach $media.sort_order AS $filter}
+            {foreach $media.sort_order AS $filtername => $filter}
 
-                <div class="{cycle values="left,center,right"}">
+                <div class="{cycle values="left,center,right"}{if $filter@iteration > 6} bp_filters{/if}">
                 {if $filter.type == 'date' || $filter.type == 'intrange'}
 
                     <fieldset>
-                        <span class="wrap_legend"><legend>{$CONST.SORT_BY} ({$filter.desc})</legend></span>
+                        <span class="wrap_legend"><legend>{$filter.desc}</legend></span>
                 {else}
 
                     <div class="form_{if $filter.type == 'authors'}select{else}field{/if}">
@@ -82,9 +82,9 @@
 
                         <div class="form_field">
                             <label for="serendipity_filter_{$filter@key}_from" class="range-label">{$CONST.RANGE_FROM|lower}</label>
-                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="text" value="{$media.filter[$filter@key].from|escape}">
+                            <input id="serendipity_filter_{$filter@key}_from" name="serendipity[filter][{$filter@key}][from]" type="text" placeholder="{if $filtername == 'bp.RUN_LENGTH'}in{/if}" value="{$media.filter[$filter@key].from|escape}">
                             <label for="serendipity_filter_{$filter@key}_to" class="range-label">{$CONST.RANGE_TO|lower}</label>
-                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="text" value="{$media.filter[$filter@key].to|escape}">
+                            <input id="serendipity_filter_{$filter@key}_to" name="serendipity[filter][{$filter@key}][to]" type="text" placeholder="{if $filtername == 'bp.RUN_LENGTH'}seconds{/if}" value="{$media.filter[$filter@key].to|escape}">
                         </div>
                 {elseif $filter.type == 'authors'}
 
@@ -96,7 +96,7 @@
                             {/foreach}
 
                         </select>
-                {else}{* this is type string w/o being named *}
+                {else}{* this is of type string w/o being named *}
                         {* label is already set on loop start, when type is not date or intrange *}
                         <input id="serendipity_filter_{$filter@key}" name="serendipity[filter][{$filter@key}]" type="text" value="{$media.filter[$filter@key]|escape}">
                 {/if}
@@ -109,6 +109,17 @@
                 {/if}
 
                 </div>
+                {if $filter@last AND !$media.simpleFilters}
+
+                <div class="right bp_filters">
+                    <div class="form_field">
+                        <label class="visuallyhidden">NOTE</label>
+                        <div class="bp_note">
+                            <span class="icon-info-circled"></span> mediaproperties metadata&nbsp;
+                        </div>
+                    </div>
+                </div>
+                {/if}
             {/foreach}
 
                 <div id="media_filter_file" class="form_field {if $media.simpleFilters}center{else}left{/if}">
