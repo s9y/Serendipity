@@ -300,7 +300,7 @@ $data['c_type']          = $c_type;
 $i = 0;
 $comments = array();
 
-if(is_array($sql)) {
+if (is_array($sql)) {
     foreach ($sql as $rs) {
         $i++;
         $comment = array(

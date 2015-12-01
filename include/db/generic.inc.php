@@ -66,7 +66,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
  * @param   boolean     If true, errors will be reported. If false, errors will be ignored.
  * @param   string      A possible array key name, so that you can control the multi-dimensional mapping of an array by the key column
  * @param   string      A possible array field name, so that you can control the multi-dimensional mapping of an array by the key column and the field value.
- * @param   boolean     If true, the executed SQL error is known to fail, and should be disregarded (errors can be ignroed on DUPLICATE INDEX queries and the likes)
+ * @param   boolean     If true, the executed SQL error is known to fail, and should be disregarded (errors can be ignored on DUPLICATE INDEX queries and the likes)
  * @return  mixed       Returns the result of the SQL query, depending on the input parameters
  */
 function &serendipity_db_query($sql, $single = false, $result_type = "both", $reportErr = false, $assocKey = false, $assocVal = false, $expectError = false) {
@@ -75,7 +75,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
         $result = $serendipity['dbConn']->query($sql, Adapter::QUERY_MODE_EXECUTE);
         $resultArray = $result->toArray();
         $resultArray = $resultArray[0];
-        if(is_array($resultArray) && $result_type != "assoc") {
+        if (is_array($resultArray) && $result_type != "assoc") {
             $i=0;       # the underlying code expects additional numerical indices
             foreach ($resultArray as $key=>$value) {
                 $resultArray[$i] = $value;
