@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fixed checkbox entryproperties re-sets (#376)
+
     * Fixed media item delete handler (#371)
 
     * Rewrote Routing code for index.php to be outsourced into
