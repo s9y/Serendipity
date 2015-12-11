@@ -1498,7 +1498,7 @@ class serendipity_plugin
      * You need to override this method in your child class.
      *
      * @access public
-     * @param   string       The referenced varaiable that holds the sidebar title of your plugin.
+     * @param   string       The referenced variable that holds the sidebar title of your plugin.
      * @return null
      */
     function generate_content(&$title)
