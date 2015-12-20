@@ -167,8 +167,8 @@ function &serendipity_fetchEntryCategories($entryid) {
  * Other "external" variables that affect this function are:
  *  $serendipity['short_archives']      - Indicates if the short archive listing is wanted, without the full entry text
  *  $serendipity['range']               - If $range is not used, the time restriction is fetched from this array, which holds a start timestamp and end timestamp.
- *  $serendipity['GET']['category']     - The category ID to restrict fetching entries from (can be seperated by ";")
- *  $serendipity['GET']['hide_category']- The category ID to NOT fetch entries from (can be seperated by ";")
+ *  $serendipity['GET']['category']     - The category ID to restrict fetching entries from (can be separated by ";")
+ *  $serendipity['GET']['hide_category']- The category ID to NOT fetch entries from (can be separated by ";")
  *  $serendipity['GET']['viewAuthor']   - Only fetch entries by this author
  *  $serendipity['GET']['page']         - The page number to show entries, for pagination
  *
@@ -1087,7 +1087,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             }
 
             $dategroup[$key]['date']        = $entries[$x]['timestamp'];
-            $dategroup[$key]['is_sticky']   = (isset($entries[$x]['is_sticky']) && serendipity_db_bool($entries[$x]['is_sticky']) ? true : false);
+            $dategroup[$key]['is_sticky']   = (isset($entries[$x]['is_sticky']) && (serendipity_db_bool($entries[$x]['is_sticky']) ? true : false));
             $dategroup[$key]['entries'][]   = &$entries[$x];
         }
     } elseif ($use_grouped_array === 'plugin') {
@@ -1448,7 +1448,7 @@ function serendipity_updertEntry($entry) {
         }
 
         // New entries need an author
-        $entry['author']   = $serendipity['user'];
+        $entry['author'] = $serendipity['user'];
         if (!isset($entry['authorid']) || empty($entry['authorid'])) {
             $entry['authorid'] = $serendipity['authorid'];
         }
@@ -1457,11 +1457,11 @@ function serendipity_updertEntry($entry) {
             $entry['isdraft'] = 'true';
         }
 
-        if(!isset($entry['allow_comments'])){
-            $entry['allow_comments']='false';
+        if (!isset($entry['allow_comments'])) {
+            $entry['allow_comments'] = 'false';
         }
-        if(!isset($entry['moderate_comments'])){
-            $entry['moderate_comments']='false';
+        if (!isset($entry['moderate_comments'])) {
+            $entry['moderate_comments'] = 'false';
         }
 
         $res = serendipity_db_insert('entries', $entry);
@@ -1483,7 +1483,8 @@ function serendipity_updertEntry($entry) {
             //Some error message here
             return ENTRIES_NOT_SUCCESSFULLY_INSERTED;
         }
-        $newEntry    = 1;
+        $newEntry = 1;
+
     } else {
         /* we need to update */
 
@@ -1519,7 +1520,9 @@ function serendipity_updertEntry($entry) {
 
             foreach (array('title', 'body', 'extended', 'author') as $required_field) {
                 // dashboard publishing a draft does not pass title, body, extended, and author, so we need to set it here
-                if (! isset($entry[$required_field])) { $entry[$required_field] = $_entry[$required_field]; }
+                if (!isset($entry[$required_field])) {
+                    $entry[$required_field] = $_entry[$required_field];
+                }
             }
         }
 
