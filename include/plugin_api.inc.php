@@ -83,23 +83,19 @@ function errorHandlerCreateDOM(htmlStr) {
             break;
 
         case 'external_plugin':
-            switch ($eventData) {
-                case 'admin/serendipity_editor.js':
-                    header('Content-Type: application/javascript');
-                    global $serendipity;
+            if ($eventData == 'admin/serendipity_editor.js') {
+                header('Content-Type: application/javascript');
+                global $serendipity;
 
-                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', null, 'JS', 'include/plugin_api.inc.php:external_plugin');
-                break;
+                echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', null, 'JS', 'include/plugin_api.inc.php:external_plugin');
             }
             break;
 
-            case 'backend_save':
-            case 'backend_publish':
-                // this is preview_iframe.tpl updertHooks
-                echo '<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>';
+        case 'backend_save':
+        case 'backend_publish':
+            echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>'."\n";
+            break;
 
-        return true;
-        break;
     }
 }
 
