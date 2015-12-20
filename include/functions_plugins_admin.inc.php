@@ -287,10 +287,10 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             $hvalue = serendipity_specialchars($value);
         }
 
-        $radio    = array();
-        $select   = array();
-        $per_row  = null;
-        $text_rows = null;
+        $radio      = array();
+        $select     = array();
+        $per_row    = null;
+        $text_rows  = null;
         $input_type = null;
 
         $data['is_multi_select'] = $is_multi_select = false;
@@ -310,7 +310,9 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
 
         switch ($ctype) {
-            case 'seperator':
+            case 'seperator':// compat, due being misspelled
+            case 'separator':
+            case 'suboption':
                 $assign_plugin_config($data);
 
                 break;

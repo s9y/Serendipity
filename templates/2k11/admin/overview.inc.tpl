@@ -23,7 +23,7 @@
                     <button type="submit">{$CONST.UPDATE_FAILACTION}</button>
                 </form>
             </section>
-            <hr class="seperator">
+            <hr class="separator">
         {else if $update}
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
@@ -31,7 +31,7 @@
                 <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
                 {$updateButton}
             </section>
-            <hr class="seperator">
+            <hr class="separator">
         {/if}
     {/if}
 

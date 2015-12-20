@@ -1812,10 +1812,10 @@ form > .button_link:first-of-type,
 }
 
 .compact_categories .cat_view_pad,
-.seperator {
+.separator, .seperator {
     display: none !important;
     visibility: hidden;
-}
+}/* compat - due to misspelled word 'seper...' */
 
 .mfp-content #edit_entry_category .form_check label {
     -webkit-box-sizing: border-box;
