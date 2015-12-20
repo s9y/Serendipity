@@ -85,7 +85,6 @@ function errorHandlerCreateDOM(htmlStr) {
         case 'external_plugin':
             if ($eventData == 'admin/serendipity_editor.js') {
                 header('Content-Type: application/javascript');
-                global $serendipity;
 
                 echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', null, 'JS', 'include/plugin_api.inc.php:external_plugin');
             }
