@@ -106,7 +106,7 @@ Version 2.1 ()
     * Some small enhancements to the error reporting
 
 
-Version 2.0.3 (December 17th, 2015)
+Version 2.0.3 (January 4th, 2016)
 ------------------------------------------------------------------------
 
     * Fix XSS in backend comment editing form for logged-in authors,
