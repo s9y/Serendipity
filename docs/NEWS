@@ -106,11 +106,14 @@ Version 2.1 ()
     * Some small enhancements to the error reporting
 
 
-Version 2.0.3 ()
+Version 2.0.3 (December 17th, 2015)
 ------------------------------------------------------------------------
 
+    * Fix XSS in backend comment editing form for logged-in authors,
+      thanks to Onur Yilmaz and Robert Abela from Netsparker.com
+          
     * Fix some backend entry form related event messages
-
+              
 
 Version 2.0.2 (July 24th, 2015)
 ------------------------------------------------------------------------
