@@ -209,7 +209,7 @@ class serendipity_event_nl2br extends serendipity_event
 
                     // check single entry for temporary disabled markups
                     if ( !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                         (isset($serendipity['POST']['properties']['disable_markups']) && !in_array($this->instance, $serendipity['POST']['properties']['disable_markups'])) &&
+                         @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
                          !$eventData['properties']['ep_no_textile'] && !isset($serendipity['POST']['properties']['ep_no_textile']) &&
                          !$eventData['properties']['ep_no_markdown'] && !isset($serendipity['POST']['properties']['ep_no_markdown'])) {
                         // yes, this markup shall be applied
@@ -247,7 +247,7 @@ class serendipity_event_nl2br extends serendipity_event
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
                                 !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
-                                (isset($serendipity['POST']['properties']['disable_markups']) && !in_array($this->instance, $serendipity['POST']['properties']['disable_markups'])) &&
+                                @!in_array($this->instance, $serendipity['POST']['properties']['disable_markups']) &&
                                 !$eventData['properties']['ep_no_nl2br'] &&
                                 !isset($serendipity['POST']['properties']['ep_no_nl2br'])) {
 
