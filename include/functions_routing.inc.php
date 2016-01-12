@@ -67,6 +67,7 @@ function locateHiddenVariables($_args) {
 function serveComments() {
     global $serendipity;
     $serendipity['view'] = 'comments';
+    $uri = $_SERVER['REQUEST_URI'];
     $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
     $timedesc = array();
 
@@ -294,6 +295,7 @@ function serveFeed() {
     global $serendipity;
     $serendipity['view'] = 'feed';
     header('Content-Type: text/html; charset=utf-8');
+    $uri = $_SERVER['REQUEST_URI']; 
 
     if (preg_match('@/(index|atom[0-9]*|rss|comments|trackbacks|comments_and_trackbacks|opml)\.(rss[0-9]?|rdf|rss|xml|atom)@', $uri, $vmatches)) {
         list($_GET['version'], $_GET['type']) = serendipity_discover_rss($vmatches[1], $vmatches[2]);
@@ -322,6 +324,7 @@ function serveEntry($matches) {
     global $serendipity;
 
     $serendipity['view'] = 'entry';
+    $uri = $_SERVER['REQUEST_URI'];
 
     if (isset($serendipity['GET']['id'])) {
         $matches[1] = (int)$serendipity['GET']['id'];
