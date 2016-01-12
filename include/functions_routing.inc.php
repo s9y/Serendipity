@@ -221,6 +221,7 @@ function serveAuthorPage($matches) {
 function serveCategory($matches) {
     global $serendipity;
     $serendipity['view'] = 'categories';
+    $uri = $_SERVER['REQUEST_URI'];
 
     $is_multicat = (isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat']));
     if ($is_multicat) {
