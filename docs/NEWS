@@ -1,7 +1,7 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
     * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
-      mobile first HTML5/CSS3 theme built on the Twitter Bootstrap
+      mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
 
     * Fixed checkbox entryproperties re-sets (#376)
