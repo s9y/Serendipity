@@ -1565,6 +1565,43 @@ $(function() {
             $('#uploadform').submit(function(event) {
                 if (! $('#imageurl').val()) {
                     event.preventDefault();
+                    var sendDataToML = function(data, progressContainer, progress) {
+                        $.ajax({
+                            type: 'post',
+                            url: $('#uploadform').attr('action'),
+                            data: data,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            xhrFields: {
+                                onprogress: function (e) {
+                                    if (e.lengthComputable) {
+                                        progress.value = e.loaded / e.total * 100;
+                                    }
+                                }
+                            }
+                        }).done(function(data) {
+                            progress.value = 100;
+                            progressContainer.className = "msg_success";
+                            $(progressContainer).find('.uploadIcon').replaceWith(successIcon.cloneNode(true));
+                        }).fail(function(data) {
+                            progressContainer.className = "msg_error";
+                            progress.disabled = true;
+                            progressContainer.innerHTML += "{$CONST.ERROR_UNKNOWN_NOUPLOAD}";
+                            $(progressContainer).find('.uploadIcon').replaceWith(errorIcon.cloneNode(true));
+                        }).always(function() {
+                            if ($('#ml_link').length == 0) {
+                                var mlLink = document.createElement('a');
+                                mlLink.id = "ml_link";
+                                mlLink.className = "button_link";
+                                mlLink.href = $('#uploadform').attr('action');
+                                mlLink.innerHTML = "{$CONST.MEDIA_LIBRARY}";
+                                $(mlLink).hide();
+                                $('.form_buttons').prepend(mlLink);
+                                $(mlLink).fadeIn();
+                            }
+                        });
+                    };
                     $('.uploadform_userfile').each(function() {
                         var files = this.files;
                         for (var i = 0; i < files.length; i++) {
@@ -1573,86 +1610,58 @@ $(function() {
                             reader.onload = function(readerEvent) {
                                 var image = new Image();
                                 var file = this.file;
-                                image.onload = function (imageEvent) {
-                                    var canvas = document.createElement('canvas'),
-                                        max_width = {if {serendipity_getConfigVar key='maxImgWidth'}}{serendipity_getConfigVar key='maxImgWidth'}{else}0{/if},
-                                        max_height = {if {serendipity_getConfigVar key='maxImgHeight'}}{serendipity_getConfigVar key='maxImgHeight'}{else}0{/if},
-                                        width = image.width,
-                                        height = image.height;
+                                var type = file.type;
+                                var data = new FormData();
+                                data.append('serendipity[action]', 'admin');
+                                data.append('serendipity[adminModule]', 'media');
+                                data.append('serendipity[adminAction]', 'add');
+                                data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
+                                data.append('serendipity[target_filename][1]', $('input[name*="serendipity[target_filename][1]"]').val());
+                                var progress = document.createElement('progress');
+                                var progressContainer = document.createElement('span');
+                                progressContainer.className = 'msg_notice';
+                                progress.max = 100;
+                                progress.value = 0;
+                                $(progressContainer).append(progressIcon);
+                                progressContainer.innerHTML += file.name + ": "
+                                $(progressContainer).append(progress);
+                                $('.form_buttons').append(progressContainer);
+                                if (type.substring(0, 6) == "image/") {
+                                    image.onload = function (imageEvent) {
+                                        var canvas = document.createElement('canvas'),
+                                            max_width = {if {serendipity_getConfigVar key='maxImgWidth'}}{serendipity_getConfigVar key='maxImgWidth'}{else}0{/if},
+                                            max_height = {if {serendipity_getConfigVar key='maxImgHeight'}}{serendipity_getConfigVar key='maxImgHeight'}{else}0{/if},
+                                            width = image.width,
+                                            height = image.height;
 
-                                    if (max_width > 0 && width > max_width) {
-                                        height *= max_width / width;
-                                        width = max_width;
-                                    }
-                                    if (max_height > 0 && height > max_height) {
-                                        width  *= max_height / height;
-                                        height = max_height;
-                                    }
+                                        if (max_width > 0 && width > max_width) {
+                                            height *= max_width / width;
+                                            width = max_width;
+                                        }
+                                        if (max_height > 0 && height > max_height) {
+                                            width  *= max_height / height;
+                                            height = max_height;
+                                        }
 
-                                    canvas.width = width;
-                                    canvas.height = height;
-                                    canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                                    var data = new FormData();
-                                    data.append('serendipity[action]', 'admin');
-                                    data.append('serendipity[adminModule]', 'media');
-                                    data.append('serendipity[adminAction]', 'add');
-                                    data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
-                                    data.append('serendipity[target_filename][1]', $('input[name*="serendipity[target_filename][1]"]').val());
-                                    var type = file.type;
-                                    if (type == "image/bmp") {
-                                        {* bmp is not supported *}
-                                        type = "image/png";
-                                        data.append('serendipity[target_filename][1]', file.name.replace('.bmp', '.png'));
+                                        canvas.width = width;
+                                        canvas.height = height;
+                                        canvas.getContext('2d').drawImage(image, 0, 0, width, height);
+                                        
+                                        if (type == "image/bmp") {
+                                            {* bmp is not supported *}
+                                            type = "image/png";
+                                            data.append('serendipity[target_filename][1]', file.name.replace('.bmp', '.png'));
+                                        }
+                                        canvas.toBlob(function(blob) {
+                                            data.append('serendipity[userfile][1]', blob, file.name);
+                                            sendDataToML(data, progressContainer, progress);
+                                        }, type);
                                     }
-                                    canvas.toBlob(function(blob) {
-                                        data.append('serendipity[userfile][1]', blob, file.name);
-                                        var progress = document.createElement('progress');
-                                        var progressContainer = document.createElement('span');
-                                        progressContainer.className = 'msg_notice';
-                                        progress.max = 100;
-                                        progress.value = 0;
-                                        $(progressContainer).append(progressIcon);
-                                        progressContainer.innerHTML += file.name + ": "
-                                        $(progressContainer).append(progress);
-                                        $('.form_buttons').append(progressContainer);
-                                        $.ajax({
-                                            type: 'post',
-                                            url: $('#uploadform').attr('action'),
-                                            data: data,
-                                            cache: false,
-                                            processData: false,
-                                            contentType: false,
-                                            xhrFields: {
-                                                onprogress: function (e) {
-                                                    if (e.lengthComputable) {
-                                                        progress.value = e.loaded / e.total * 100;
-                                                    }
-                                                }
-                                            }
-                                            }).done(function(data) {
-                                                progress.value = 100;
-                                                progressContainer.className = "msg_success";
-                                                $(progressContainer).find('.uploadIcon').replaceWith(successIcon.cloneNode(true));
-                                            }).fail(function(data) {
-                                                progressContainer.className = "msg_error";
-                                                progress.disabled = true;
-                                                progressContainer.innerHTML += "{$CONST.ERROR_UNKNOWN_NOUPLOAD}";
-                                                $(progressContainer).find('.uploadIcon').replaceWith(errorIcon.cloneNode(true));
-                                            }).always(function() {
-                                                if ($('#ml_link').length == 0) {
-                                                    var mlLink = document.createElement('a');
-                                                    mlLink.id = "ml_link";
-                                                    mlLink.className = "button_link";
-                                                    mlLink.href = $('#uploadform').attr('action');
-                                                    mlLink.innerHTML = "{$CONST.MEDIA_LIBRARY}";
-                                                    $(mlLink).hide();
-                                                    $('.form_buttons').prepend(mlLink);
-                                                    $(mlLink).fadeIn();
-                                                }
-                                            });
-                                    }, type);
+                                    image.src = readerEvent.target.result;
+                                } else {
+                                    data.append('serendipity[userfile][1]', file, file.name);
+                                    sendDataToML(data, progressContainer, progress);
                                 }
-                                image.src = readerEvent.target.result;
                             }
                             reader.readAsDataURL(reader.file);
                         }

@@ -1,5 +1,7 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+    * Fix: Ajax upload to ML now also works for non-images
+
     * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
       mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
