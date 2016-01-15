@@ -39,19 +39,6 @@
                     <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
                 </fieldset>
             </li>
-            <li id="media_dir_radio" class="media_select_strict">
-                <div class="clearfix">
-                    <div class="form_radio">
-                        <input id="radio_link_no" name="serendipity[toggle_dir]" type="radio" value="no" {if $media.toggle_dir == 'no'}checked="checked"{/if}>
-                        <label for="radio_link_no">Strict {$CONST.NO}</label>
-                    </div>
-
-                    <div class="form_radio">
-                        <input id="radio_link_yes" name="serendipity[toggle_dir]" type="radio" value="yes" {if $media.toggle_dir == 'yes'}checked="checked"{/if}>
-                        <label for="radio_link_yes">Strict {$CONST.YES}</label>
-                    </div>
-                </div>
-            </li>
         </ul>
 
         <fieldset id="media_pane_filter" class="additional_info filter_pane">
@@ -177,6 +164,15 @@
 
                     </select>
                 </div>
+                {if !$media.simpleFilters}
+                    <div class="form_field">
+                        <div class="form_radio">
+                            <input type="checkbox" id="hide_subdir_files" name="serendipity[hideSubdirFiles]" {if $media.hideSubdirFiles}checked{/if} value="on">
+                            <label for="hide_subdir_files">{$CONST.HIDE_SUBDIR_FILES}</label>
+                        </div>
+                    </div>
+                {/if}
+            </li>
             </div>
             <div class="form_buttons">
                 <input name="go" type="submit" value="{$CONST.GO}"> <input class="reset_media_filters" name="media_filters_reset" type="reset" value="Reset">
@@ -198,7 +194,7 @@
 
                 serendipity.SetCookie("only_filename", "{$media.only_filename}");
 
-                serendipity.SetCookie("serendipity_toggle_dir", "{$media.toggle_dir}");
+                serendipity.SetCookie("hideSubdirFiles", "{$media.hideSubdirFiles}");
             {foreach $media.filter AS $k => $v}
                 {if !is_array($media.filter[{$k}])}
 
