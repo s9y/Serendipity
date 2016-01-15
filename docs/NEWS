@@ -1,5 +1,7 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+    * Use CDATA encoded body for ATOM feed
+
     * Fix: Ajax upload to ML now also works for non-images
 
     * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
