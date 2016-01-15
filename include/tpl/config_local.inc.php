@@ -412,6 +412,13 @@
                                           'type'        => 'list',
                                           'default'     => array('Off' => NO, 'error' => ERROR, 'debug' => DEBUG),
                                           'permission'  => 'blogConfiguration'),
+
+                                    array('var'         => 'useInternalCache',
+                                          'title'       => USE_CACHE,
+                                          'description' => USE_CACHE_DESC,
+                                          'type'        => 'bool',
+                                          'default'     => false,
+                                          'permission'  => 'siteConfiguration'),
                             ));
 
     $res['display'] =

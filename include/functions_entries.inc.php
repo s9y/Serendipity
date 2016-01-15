@@ -207,7 +207,7 @@ function &serendipity_fetchEntryCategories($entryid) {
 function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
 
-    if ($serendipity['use_internal_cache']) {
+    if ($serendipity['useInternalCache']) {
         $cache = serendipity_setupCache();
 
         $args = func_get_args();
@@ -460,7 +460,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         serendipity_fetchEntryData($ret);
     }
 
-    if ($serendipity['use_internal_cache']) {
+    if ($serendipity['useInternalCache']) {
         $args = func_get_args();
         $args = array_values($args);
         $key = md5(serialize($args));
@@ -1254,7 +1254,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
     $serendipity['smarty']->assignByRef('entries', $dategroup);
 
-    if ($serendipity['use_internal_cache']) {
+    if ($serendipity['useInternalCache']) {
         $cache = serendipity_setupCache();
 
         $args = func_get_args();
