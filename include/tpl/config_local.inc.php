@@ -32,6 +32,14 @@
                                           'permission'  => 'siteConfiguration',
                                           'flags'       => array('nosave', 'simpleInstall')),
 
+                                    array('var'         => 'ignore_password',
+                                          'title'       => 'Ignore',
+                                          'description' => 'Ignore, just to catch the browser filling in the wrong password',
+                                          'type'        => 'fullprotected',
+                                          'default'     => '',
+                                          'permission'  => 'siteConfiguration',
+                                          'flags'       => array('nosave', 'hideValue', 'simpleInstall', 'ignore')),
+
                                     array('var'         => 'dbPass',
                                           'title'       => INSTALL_DBPASS,
                                           'description' => INSTALL_DBPASS_DESC,
