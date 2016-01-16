@@ -127,8 +127,8 @@ function serendipity_ifRemember($name, $value, $isDefault = false, $att = 'check
  * @access public
  * @param   array       Smarty parameter input array:
  *                      [FETCHING]
- *                          category:        (int)     The category ID (seperate multiple with ";") to fetch entries from
- *                          viewAuthor:      (int)     The author ID (seperate multiple with ";") to fetch entries from
+ *                          category:        (int)     The category ID (separate multiple with ";") to fetch entries from
+ *                          viewAuthor:      (int)     The author ID (separate multiple with ";") to fetch entries from
  *                          page:            (int)     The number of the page for paginating entries
  *                          id:              (int)     The ID of an entry. If given, only a single entry will be fetched. If left empty, multiple entries are fetched.
  *                          range:           (mixed)   Restricts fetching entries to a specific timespan. Behaves differently depending on the type:

@@ -10,6 +10,7 @@ include_once('serendipity_config.inc.php');
 
 include_once(S9Y_INCLUDE_PATH . 'include/plugin_api.inc.php');
 
+$uri = $_SERVER['REQUEST_URI'];  // need to define this again here, as index.php (2.1) no longer includes this file
 $uri_addData = array(
     'startpage' => false,
     'uriargs'   => implode('/', serendipity_getUriArguments($uri, true)),
@@ -121,7 +122,7 @@ switch ($serendipity['GET']['action']) {
 
     // Welcome screen or whatever
     default:
-        if ($serendipity['use_internal_cache']) {
+        if ($serendipity['useInternalCache']) {
             $entries = serendipity_fetchEntries(null, true, $serendipity['fetchLimit']);
             if (! serendipity_printEntriesCached($entries)) {
                 serendipity_printEntries($entries);

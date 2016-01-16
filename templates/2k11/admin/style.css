@@ -983,7 +983,16 @@ input[type=checkbox],
 #media_filter > .keywords {
     margin-bottom: 0.75em;
 }
-
+#media_filter .bp_note,
+#media_filter .bp_filters input {
+    background-color: rgba(0, 87, 128, 0.08);
+}
+#media_filter .bp_note {
+    margin-top: 2.25em;
+    display: inline-block;
+    padding: 1px;
+    border: 1px solid #CCC;
+}
 #media_filter_path .form_select {
     margin: 0 0 0 .125em;
 }
@@ -1201,9 +1210,22 @@ summary {
 
 #workspace,
 .plugin_data,
-.plugin_data summary,
-.serendipity_statistics > .wide_box {
+.plugin_data summary {
     overflow: hidden;
+}
+
+.serendipity_statistics > .wide_box {
+    min-height: .01%;
+    overflow-x: auto;
+}
+
+.serendipity_statistics > .wide_box table {
+    max-width: 100%;
+}
+
+.serendipity_statistics > .wide_box tr {
+    font-size: .8125em;
+    text-align: center;
 }
 
 .serendipity_customfields label {
@@ -1790,8 +1812,12 @@ form > .button_link:first-of-type,
 }
 
 .compact_categories .cat_view_pad,
-.seperator {
+.separator, .seperator {
     display: none !important;
+    visibility: hidden;
+}/* compat - due to misspelled word 'seper...' */
+
+.config_separator {
     visibility: hidden;
 }
 

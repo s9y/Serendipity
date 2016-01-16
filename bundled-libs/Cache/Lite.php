@@ -329,7 +329,7 @@ class Cache_Lite
                 }
                 if ($this->_onlyMemoryCaching) {
                     return false;
-                }                
+                }
             }
             if (($doNotTestCacheValidity) || (is_null($this->_refreshTime))) {
                 if (file_exists($this->_file)) {
@@ -387,7 +387,7 @@ class Cache_Lite
                     // if $res if false, we need to invalidate the cache
                     @touch($this->_file, time() - 2*abs($this->_lifeTime));
                     return false;
-                }            
+                }
             } else {
                 $res = $this->_write($data);
             }
@@ -781,7 +781,7 @@ class Cache_Lite
             if ($this->_fileLocking) @flock($fp, LOCK_UN);
             @fclose($fp);
             return true;
-        }      
+        }
         return $this->raiseError('Cache_Lite : Unable to write cache file : '.$this->_file, -1);
     }
        

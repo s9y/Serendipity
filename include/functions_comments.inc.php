@@ -190,7 +190,7 @@ function serendipity_displayCommentForm($id, $url = '', $comments = NULL, $data 
 
     $commentform_data = array(
         'commentform_action'         => $url,
-        'commentform_id'             => $id,
+        'commentform_id'             => (int)$id,
         'commentform_name'           => isset($data['name'])      ? serendipity_specialchars($data['name'])       : (isset($serendipity['COOKIE']['name'])     ? serendipity_specialchars($serendipity['COOKIE']['name'])     : ''),
         'commentform_email'          => isset($data['email'])     ? serendipity_specialchars($data['email'])      : (isset($serendipity['COOKIE']['email'])    ? serendipity_specialchars($serendipity['COOKIE']['email'])    : ''),
         'commentform_url'            => isset($data['url'])       ? serendipity_specialchars($data['url'])        : (isset($serendipity['COOKIE']['url'])      ? serendipity_specialchars($serendipity['COOKIE']['url'])      : ''),

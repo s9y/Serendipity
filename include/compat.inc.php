@@ -447,7 +447,14 @@ function serendipity_die($html) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=' . $charset . '">
     </head>
-    <body>' . $html . '</body>
+    <body><div class="msg_notice">' . $html . '</div><style>.msg_notice {
+    display: block;
+    margin: 1.5em 0;
+    padding: .5em;
+    background: #f2dede;
+    border: 1px solid #e4b9b9;
+    color: #b94a48;
+}</style></body>
 </html>');
 }
 

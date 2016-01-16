@@ -67,6 +67,7 @@ function locateHiddenVariables($_args) {
 function serveComments() {
     global $serendipity;
     $serendipity['view'] = 'comments';
+    $uri = $_SERVER['REQUEST_URI'];
     $_args = serendipity_getUriArguments($uri, true); // Need to also match "." character
     $timedesc = array();
 
@@ -220,6 +221,7 @@ function serveAuthorPage($matches) {
 function serveCategory($matches) {
     global $serendipity;
     $serendipity['view'] = 'categories';
+    $uri = $_SERVER['REQUEST_URI'];
 
     $is_multicat = (isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat']));
     if ($is_multicat) {
@@ -235,7 +237,6 @@ function serveCategory($matches) {
 
     $serendipity['GET']['action'] = 'read';
 
-    
     $_args = locateHiddenVariables($serendipity['uriArguments']);
 
     if (!$is_multicat) {
@@ -250,7 +251,7 @@ function serveCategory($matches) {
         header('HTTP/1.0 404 Not found');
         header('Status: 404 Not found');
     } else {
-        $serendipity['head_title']    = $cInfo['category_name'];
+        $serendipity['head_title'] = $cInfo['category_name'];
         if (isset($serendipity['GET']['page'])) {
             $serendipity['head_title'] .= " - " . serendipity_specialchars($serendipity['GET']['page']);
         }
@@ -295,6 +296,7 @@ function serveFeed() {
     global $serendipity;
     $serendipity['view'] = 'feed';
     header('Content-Type: text/html; charset=utf-8');
+    $uri = $_SERVER['REQUEST_URI']; 
 
     if (preg_match('@/(index|atom[0-9]*|rss|comments|trackbacks|comments_and_trackbacks|opml)\.(rss[0-9]?|rdf|rss|xml|atom)@', $uri, $vmatches)) {
         list($_GET['version'], $_GET['type']) = serendipity_discover_rss($vmatches[1], $vmatches[2]);
@@ -321,7 +323,9 @@ function serveFeed() {
 
 function serveEntry($matches) {
     global $serendipity;
+
     $serendipity['view'] = 'entry';
+    $uri = $_SERVER['REQUEST_URI'];
 
     if (isset($serendipity['GET']['id'])) {
         $matches[1] = (int)$serendipity['GET']['id'];
@@ -333,12 +337,14 @@ function serveEntry($matches) {
     serendipity_rememberComment();
 
     if (!empty($serendipity['POST']['submit']) && !isset($_REQUEST['serendipity']['csuccess'])) {
+
         $comment['url']       = $serendipity['POST']['url'];
         $comment['comment']   = trim($serendipity['POST']['comment']);
         $comment['name']      = $serendipity['POST']['name'];
         $comment['email']     = $serendipity['POST']['email'];
         $comment['subscribe'] = $serendipity['POST']['subscribe'];
         $comment['parent_id'] = $serendipity['POST']['replyTo'];
+
         if (!empty($comment['comment'])) {
             if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
                 $sc_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . (strstr($_SERVER['REQUEST_URI'], '?') ? '&' : '?') . 'serendipity[csuccess]=' . (isset($serendipity['csuccess']) ? $serendipity['csuccess'] : 'true');
@@ -351,7 +357,7 @@ function serveEntry($matches) {
                 $serendipity['messagestack']['comments'][] = COMMENT_NOT_ADDED;
             }
         } else {
-                $serendipity['messagestack']['comments'][] = sprintf(EMPTY_COMMENT, '', '');
+            $serendipity['messagestack']['comments'][] = sprintf(EMPTY_COMMENT, '', '');
         }
     }
 
@@ -487,7 +493,7 @@ function serveArchives() {
     if ($serendipity['GET']['action'] == 'read') {
         if ($serendipity['GET']['category']) {
             $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
-            $serendipity['head_title']    = $cInfo['category_name'];
+            $serendipity['head_title'] = $cInfo['category_name'];
         }
         $serendipity['head_subtitle'] .= sprintf(ENTRIES_FOR, $date);
     }

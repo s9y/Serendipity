@@ -26,7 +26,7 @@
 {else}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
-    <script src="{serendipity_getFile file="admin/js/modernizr-2.8.3.min.js"}"></script>
+    <script src="{serendipity_getFile file="admin/js/modernizr.min.js"}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>

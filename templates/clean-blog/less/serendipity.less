@@ -1,0 +1,339 @@
+/**   Serendipity specific styles **/
+blockquote {padding: 0 20px;}
+
+.form-control {font-size: 18px;}
+
+ul.comment-list {
+    list-style: none;
+    margin: 0;
+    padding:0;
+}
+
+.comment-list .comment-children {
+    list-style: none;
+    margin-left: 58px;
+    padding:0;
+}
+
+.comment_any {
+    margin-bottom: 2.5em;
+}
+
+.comment-list-item, .comment-list-item-body {
+    overflow: hidden;
+}
+
+.comment-author-heading {
+    font-size: 0.9em;
+    margin: 0 0 5px;    
+    text-transform: uppercase;
+}
+
+img.comment_avatar {
+    clear: left;
+    float: left;
+    height: 48px;
+    margin-right: 10px;
+    width: 48px;
+}
+
+.avatar_right {
+    margin-left: 0;
+}
+
+.serendipity_comments .comment_ability {
+    margin: 15px 0;
+}
+
+.comment-date {
+    color: @gray;
+    font-weight: normal;
+}
+
+.comment-meta {
+    font-size: 0.8em;
+    margin: 0.5em 0 0 0;
+}
+
+.serendipity_section_commentform{
+    margin-top: 2em;
+}
+
+img{
+    display: block;
+    height: auto;
+    max-width: 100%;
+    }
+    
+#serendipity_replyTo {max-width: 100%}
+
+/* If the basic styles for aligning images are changed, the changes
+   must be ported to htmlarea/ckeditor/wysiwyg-style.css as well. */
+.serendipity_image_left,
+.serendipity_image_right,
+.serendipity_image_center,
+.serendipity_imageComment_center,
+.serendipity_imageComment_left,
+.serendipity_imageComment_right {
+    background: transparent;
+    border: 0 none;
+    padding: 0!important;
+    max-width: 100%;
+}
+
+.serendipity_image_left,
+.serendipity_imageComment_left {
+    display: block;
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+.serendipity_image_right,
+.serendipity_imageComment_right {
+    display: block;
+    float: right;
+    margin: 0 0 1em 1em;
+}
+
+.serendipity_image_center {
+    display: block;
+    margin: 0 auto 1em auto;
+}
+
+.serendipity_imageComment_center {
+    display: block;
+    margin: 0 auto 1em auto;
+}
+
+.serendipity_imageComment_img img {
+    border: none!important;
+    margin: 0!important;
+}
+
+.serendipity_imageComment_txt {
+    border: 0;
+    color: @gray;
+    display: block;    
+    font-size: .8125em;
+    font-style: italic;    
+    line-height: 1.5em;
+    margin: 0;    
+    padding: .5em;
+    text-align: center;    
+}
+
+.page-footer {
+    padding: 30px 0;
+}
+
+.entry-footer {
+    padding: 20px 0;
+}
+
+.btn-group-sm > .btn, .btn-sm {
+    border-radius: 3px!important;
+    font-size: 12px!important;
+    line-height: 1.5!important;
+    padding: 5px 10px!important;
+}
+
+.pager li > a, .pager li > span {
+    border-color: #ccc;
+}
+
+.category-list {
+    line-height: 1.6em;
+}
+
+.category-children {
+    list-style:none;
+    padding-left: 24px;
+}
+
+.serendipity_freeTag {
+    margin-left: auto;
+    margin-right: 0px;
+    text-align: left;
+    font-size: 80%;
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 0px;
+    color: @gray;
+}
+
+.serendipity_freeTag_related {
+    color: @gray;
+    display: block;
+    font-size: 80%;    
+    margin: 10px 0 0 0;
+    text-align: left;
+}
+
+.serendipity_freeTag a {
+    font-size: inherit;
+    text-decoration: none;
+}
+
+.serendipity_freeTag a:hover {
+    text-decoration: underline;
+}
+
+ul.staticpage_navigation{
+    display: block;
+    list-style-type: none;
+    margin: 10px 0;
+    padding:0
+}
+
+ul.staticpage_navigation li{
+    display: inline;
+    padding: 0 5px 0 0;
+}
+
+.staticpage_breadcrumbs {
+    color: @gray;
+    margin: 20px 0;
+}
+
+.staticpage_childpages {
+    margin: 1em 0;
+}
+
+.staticpage-footer {padding: 30px 0 0 0}
+
+.serendipity_commentDirection {margin: 1em 0}
+
+.staticpage_related_category_entry_list {margin-top: 1em}
+
+.clean-blog_freeTag {
+    line-height: 2em;
+    margin: 0.5em 0
+}
+
+.clean-blog_freeTag a{ /* mimic bootstrap button */
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid transparent;
+    border-color: #ccc;
+    border-radius: 3px !important;
+    color: #333;
+    cursor: pointer;
+    display: inline-block; 
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px !important;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1.5 !important;
+    margin-bottom: 0;
+    -moz-user-select: none;
+    padding: 5px 10px !important;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+
+}
+
+.clean-blog_freeTag a:hover, .clean-blog_freeTag a:focus{
+    background-color: @brand-primary;
+    border: 1px solid @brand-primary;
+    color: white;
+}
+
+.cleanblog_freeTag_related {
+    color: @gray;
+    display: block;
+    font-size: 80%;
+    margin: 30px 0 0;
+    text-align: left;
+}
+
+.archive-year {
+  margin-bottom: 1em;
+}
+
+.archive-year .btn {margin-bottom: 4px;}
+
+.archive-summary h2 {margin-bottom: 40px}
+
+.archive-button {
+  width: 100%;
+}
+
+.btn-default.disabled {background-color:#dddddd;}
+
+.btn-group .dropdown-menu li i{
+    display: inline-block;
+    left: -3px;
+    margin-right: 8px;
+    position: relative;
+    text-align: center;
+    width: 1.25em;
+}
+
+.btn-group .dropdown-menu > li > a:focus,
+.btn-group .dropdown-menu > li > a:hover {
+    background-color: @brand-primary;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.fa-comment-o {
+    vertical-align: 10%!important;
+}
+
+@media only screen and (max-width:767px){
+    .dropdown-menu {min-width:140px;}
+    .dropdown-menu > li > a {padding: 3px 14px}
+}
+
+.contactform_preface {
+    margin-bottom: 2em;
+}
+
+.modal-dialog {width: 450px}
+
+#serendipityQuickSearchTermField {width: 100%;}
+
+.searchterm {
+    font-style: italic;
+}
+
+table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    width: 100%;
+}
+table > tbody > tr > td,
+table > tbody > tr > th,
+table > tfoot > tr > td,
+table > tfoot > tr > th,
+table > thead > tr > td,
+table > thead > tr > th {
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    vertical-align: top;
+}
+
+table > thead > tr > th {
+    border-bottom: 2px solid #ddd;
+    vertical-align: bottom;
+}
+table > caption + thead > tr:first-child > td,
+table > caption + thead > tr:first-child > th,
+table > colgroup + thead > tr:first-child > td,
+table > colgroup + thead > tr:first-child > th,
+table > thead:first-child > tr:first-child > td,
+table > thead:first-child > tr:first-child > th {
+    border-top: 0 none;
+}
+
+table > tbody + tbody {
+    border-top: 2px solid #ddd;
+}
+
+table table {
+    background-color: #fff;
+}

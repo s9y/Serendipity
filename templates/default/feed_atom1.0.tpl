@@ -47,10 +47,8 @@
         <id>{$entry.feed_guid}</id>
         <title type="html">{$entry.feed_title}</title>
 {if !empty($entry.body)}
-        <content type="xhtml" xml:base="{$serendipityBaseURL}">
-            <div xmlns="http://www.w3.org/1999/xhtml">
-                {$entry.feed_body} {$entry.feed_ext}
-            </div>
+        <content type="html">
+            <![CDATA[{$entry.feed_body} {$entry.feed_ext}]]>
         </content>
 {/if}
         {$entry.per_entry_display_dat}

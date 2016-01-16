@@ -1,5 +1,14 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+    * Use CDATA encoded body for ATOM feed
+
+    * Fix: Ajax upload to ML now also works for non-images
+
+    * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
+      mobile first HTML5/CSS3 theme built on the Bootstrap
+      framework.
+
+    * Fixed checkbox entryproperties re-sets (#376)
 
     * Fixed media item delete handler (#371)
 
@@ -104,11 +113,14 @@ Version 2.1 ()
     * Some small enhancements to the error reporting
 
 
-Version 2.0.3 ()
+Version 2.0.3 (January 4th, 2016)
 ------------------------------------------------------------------------
 
+    * Fix XSS in backend comment editing form for logged-in authors,
+      thanks to Onur Yilmaz and Robert Abela from Netsparker.com
+          
     * Fix some backend entry form related event messages
-
+              
 
 Version 2.0.2 (July 24th, 2015)
 ------------------------------------------------------------------------
@@ -897,7 +909,7 @@ Version 1.7 (May 11th, 2013)
       The Smarty security policy to us only serves as a restriction
       within .tpl files to not allow arbitrary PHP modifier/function calls.
       If in the future Smarty supports enforcing trustedDir checks on
-      {include} calls seperately to smarty->fetch() calls, we'll also
+      {include} calls separately to smarty->fetch() calls, we'll also
       add that to .tpl files.
       (garvinhicking)
 

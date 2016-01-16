@@ -83,23 +83,21 @@ function errorHandlerCreateDOM(htmlStr) {
             break;
 
         case 'external_plugin':
-            switch ($eventData) {
-                case 'admin/serendipity_editor.js':
-                    header('Content-Type: application/javascript');
-                    global $serendipity;
+            if ($eventData == 'admin/serendipity_editor.js') {
+                header('Content-Type: application/javascript');
 
-                    echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', null, 'JS', 'include/plugin_api.inc.php:external_plugin');
-                break;
+                echo serendipity_smarty_show('admin/serendipity_editor.js.tpl', null, 'JS', 'include/plugin_api.inc.php:external_plugin');
             }
             break;
 
-            case 'backend_save':
-            case 'backend_publish':
-                // this is preview_iframe.tpl updertHooks
-                echo '<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>';
+        case 'backend_save':
+        case 'backend_publish':
+            // this is preview_iframe.tpl updertHooks [ NOT ONLY!! See freetags ]
+            if ($_GET['serendipity']['is_iframe'] == 'true' && $_GET['serendipity']['iframe_mode'] == 'save') {
+                echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>'."\n";
+            }
+            break;
 
-        return true;
-        break;
     }
 }
 
@@ -1498,7 +1496,7 @@ class serendipity_plugin
      * You need to override this method in your child class.
      *
      * @access public
-     * @param   string       The referenced varaiable that holds the sidebar title of your plugin.
+     * @param   string       The referenced variable that holds the sidebar title of your plugin.
      * @return null
      */
     function generate_content(&$title)
@@ -1523,7 +1521,7 @@ class serendipity_plugin
         if (is_null($_res)) {
             // A protected plugin by a specific owner may not have its values stored in $serendipity
             // because of the special authorid. To display such contents, we need to fetch it
-            // seperately from the DB.
+            // separately from the DB.
             $_res = serendipity_get_user_config_var($this->instance . '/' . $name, null, $defaultvalue);
         }
 

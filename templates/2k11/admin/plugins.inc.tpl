@@ -51,7 +51,7 @@
         <input name="serendipity[type]" type="hidden" value="{$type|escape}">
 
         <div class="clearfix">
-            {if $only_group != UPGRADE}
+            {if $only_group != 'UPGRADE'}
                 <div id="plugin_groups" class="form_select">
                     <label for="only_group">{$CONST.GROUP}</label>
                     <select id="only_group" name="serendipity[only_group]">
@@ -81,7 +81,7 @@
         {foreach $pluggroups AS $pluggroup => $groupstack}
             {if $only_group && $pluggroup != $only_group}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
-            {if $only_group == UPGRADE && $pluggroups['UPGRADE']|@count > 1}
+            {if $only_group == 'UPGRADE' && $pluggroups['UPGRADE']|@count > 1}
                 <button id="updateAll">Update All</button>
             {/if}
             <ul class="plugins_installable plainList clearfix">
