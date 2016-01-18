@@ -1116,3 +1116,5 @@
 @define('DIRECTORY_INFO', 'Directory info');
 @define('DIRECTORY_INFO_DESC', 'Directories reflect their physical folder directory name. If you want to change or move directories which contain items, you have two choices. Either create the directory or subdirectory you want, then move the items to the new directory via the media library and afterwards, delete the empty old directory there. Or completely change the whole old directory via the edit directory button below and rename it to whatever you like (existing subdir/ + newname). This will move all directories and items and change referring blog entries.');
 @define('MEDIA_RESIZE_EXISTS', 'File dimensions already exist!');
+@define('USE_CACHE', 'Enable caching');
+@define('USE_CACHE_DESC', 'Enables an internal cache to not repeat specific database queries. This reduces the load on servers with medium to high traffic and improves page load time.');
