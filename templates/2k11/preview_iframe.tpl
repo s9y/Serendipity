@@ -52,7 +52,7 @@
             <div style="float: left; height: 75px"></div>
             {$updertHooks}
             {if $res}
-                <div class="serendipity_msg_error">{$CONST.ERROR}: <b>{$res}</b></div>
+                <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
             {else}
                 {if $lastSavedEntry}
                     <script type="text/javascript">$(document).ready(function() {
