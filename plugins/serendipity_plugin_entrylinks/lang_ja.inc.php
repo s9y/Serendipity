@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -20,4 +20,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', '日付');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'リンクの数');
 
-?>

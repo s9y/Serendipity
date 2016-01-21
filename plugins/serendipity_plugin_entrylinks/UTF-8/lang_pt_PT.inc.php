@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -26,5 +26,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Por data');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Por número de ligações');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

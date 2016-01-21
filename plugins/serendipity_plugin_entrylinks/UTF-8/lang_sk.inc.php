@@ -20,4 +20,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY',        'Dátum');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT',  'Poradie v texte');
 
-?>

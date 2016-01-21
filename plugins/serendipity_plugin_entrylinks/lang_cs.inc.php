@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-11-23 15:30:00Z VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -21,4 +21,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY',        'Datum');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT',  'Poøadí v textu');
 
-?>
