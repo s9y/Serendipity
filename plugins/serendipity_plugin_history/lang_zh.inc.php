@@ -25,3 +25,4 @@
 @define('PLUGIN_HISTORY_OYA', '显示恰好发布已满一年的文章');
 @define('PLUGIN_HISTORY_MYSELF', '自己设定日期时间段');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR', '显示作者姓名');
+

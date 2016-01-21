@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-11-23 15:30:00Z VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -32,3 +32,4 @@
 @define('PLUGIN_HISTORY_OYA',               'Pøed rokem');
 @define('PLUGIN_HISTORY_MYSELF',            'Sám nastavím');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR',     'Zobraz jméno autora');
+

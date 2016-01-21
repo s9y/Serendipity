@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -31,3 +31,4 @@
 @define('PLUGIN_HISTORY_OYA', 'Sprzed roku');
 @define('PLUGIN_HISTORY_MYSELF', 'Zdefiniujê samodzielnie');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR', 'Poka¿ imiê/nazwê autora');
+

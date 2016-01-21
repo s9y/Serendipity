@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -31,4 +31,3 @@
 @define('PLUGIN_HISTORY_OYA', 'Hace un año');
 @define('PLUGIN_HISTORY_MYSELF', 'Yo definiré uno');
 
-?>

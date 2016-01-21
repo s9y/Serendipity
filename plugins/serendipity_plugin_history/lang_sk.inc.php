@@ -31,3 +31,4 @@
 @define('PLUGIN_HISTORY_OYA',               'Pred rokom');
 @define('PLUGIN_HISTORY_MYSELF',            'Nastavím sám');
 @define('PLUGIN_HISTORY_DISPLAYAUTHOR',     'Zobrazi» meno autora');
+

@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -37,5 +37,3 @@
 @define('PLUGIN_HISTORY_OYA', 'Há um ano');
 @define('PLUGIN_HISTORY_MYSELF', 'Defini-lo-ei eu próprio');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>
