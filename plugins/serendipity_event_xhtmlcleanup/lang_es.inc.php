@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -13,4 +13,3 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8', '¿Limpiar las entidades UTF-8?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Si lo activas, las entidades HTML derivadas de caracteres UTF-8 se convertirán correctamente y no habrá doble codificación en tu salida.');
 
-?>

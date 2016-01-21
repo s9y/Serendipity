@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -20,5 +20,3 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8', 'Nettoyer les entités UTF-8?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Si cette option est activée, les entités HTML dérivées des caractères UTF-8 seront correctement converties.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

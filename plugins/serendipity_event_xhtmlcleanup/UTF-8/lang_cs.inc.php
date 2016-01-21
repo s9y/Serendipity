@@ -1,4 +1,4 @@
-<?php # lang_cs.inc.php 1381.1 2009-08-15 10:30:13 VladaAjgl $
+<?php
 
 /**
  *  @version 1381.1
@@ -18,3 +18,4 @@
 @define('PLUGIN_EVENT_XHTMLCLEANUP_UTF8_DESC', 'Pokud je zapnuto, HTML entity způsobené převedením znaků v kódování Unicode UTF-8 budou správně převedeny nazpět na znaky UTF-8 a nebudou zakódovány do podivných znaků v zobrazení stránky.');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE', 'Vyčistit kód videí z youtube?');
 @define('PLUGIN_EVENT_XHTMLCLEANUP_YOUTUBE_DESC', 'Pokud je zapnuto, pak jsou invalidní XHTML tagy generované youtube vyřezány z embed části. Prohlíčeč přes toto vyřezání zobrazí video správně.');
+
