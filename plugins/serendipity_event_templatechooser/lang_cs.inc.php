@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-12-14 00:05:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -9,4 +9,3 @@
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME',     'Výbìr šablon');
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_DESC',     'Umožòuje návštìvníkùm Vašeho webu zmìnit šablonu (= vzhled) podle libosti');
 
-?>

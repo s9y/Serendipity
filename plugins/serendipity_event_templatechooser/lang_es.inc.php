@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 /**
  *  @version $Revision$
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
@@ -8,4 +8,3 @@
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME',     'Selector de plantillas');
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_DESC',     'Permite que tus visitantes cambien de plantilla al vuelo');
 
-?>

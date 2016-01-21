@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -9,4 +9,3 @@
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME',     'Wybór schematu');
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_DESC',     'Pozwala odwiedzającym na wybór schematu (template) strony');
 
-?>
