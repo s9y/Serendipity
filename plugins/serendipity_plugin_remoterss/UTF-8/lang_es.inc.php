@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -26,4 +26,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', '¿Mostrar fecha?');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', '¿Mostrar la fecha luego del titular?');
 
-?>

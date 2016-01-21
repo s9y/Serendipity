@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -26,4 +26,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', '日付の表示');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'ヘッドラインの下に日付を表示しますか?');
 
-?>
