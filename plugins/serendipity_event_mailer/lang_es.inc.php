@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 /**
  *  @version $Revision$
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
@@ -19,4 +19,4 @@
 @define('PLUGIN_EVENT_MAILER_NOTSENDDECISION', 'Esta entrada no fue enviada via E-Mail porque decidiste no hacerlo.');
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Enviando');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Enviar esta entrada via E-Mail');
-?>
+

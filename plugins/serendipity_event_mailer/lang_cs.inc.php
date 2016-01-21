@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2008-01-20 01:31:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -22,4 +22,3 @@
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT',       'Poslat tento pøíspìvek mailem');
 @define('PLUGIN_EVENT_MAILER_SENDTOALL',        'Poslat všem autorùm');
 
-?>

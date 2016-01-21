@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -21,5 +21,3 @@
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Wysyłanie.');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Wyślij ten wpis e-mailem');
 
-
-?>

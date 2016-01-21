@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -21,5 +21,3 @@
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Sending');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', '電子メールにてこのエントリを送信する');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>
