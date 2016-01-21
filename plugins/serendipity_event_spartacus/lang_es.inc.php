@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 /**
  *  @version $Revision$
  *  @author Rodrigo Lazo Paz <rlazo.paz@gmail.com>
@@ -23,4 +23,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permisos de los directorios descargados');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Aquí puedes ingresar los permisos de los directorios (FTP/Shell) descargados por Spartacus en modo octal (por ejemplo "0777"). Si lo dejas vacío,  los permisos por defecto del sistema serán utilizados. Nota que no todos los servidores permiten definir/cambiar permisos. Presta atención que los permisos aplicados permiten la lectura y escritura por parte del usuario del webserver. Fuera de eso spartacus/Serendipity no puede sobreescribir directorios existentes.');
 
-?>

@@ -1,4 +1,4 @@
-<?php # lang_cs.inc.php 2.1 2009-02-14 15:59:53 VladaAjgl $
+<?php
 
 /**
  *  @version 2.1
@@ -18,11 +18,11 @@
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE',		'Pøijato %s bytù z již existujícího souboru na Vašem serveru. Ukládání souboru jako %s...');
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_DONE',		'Data úspìšnì stažena.');
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR',		'<br />(On-line úložištì vrátilo chybu %s.)<br />');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK',		'<P>Nebylo možno získat data z on-line úložištì modulu Spartacus. Zkouška dostupnosti úložištì na adrese %s.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR',		'<P>Diagnstická stránka modulu Spartacus vrátilo chybu (HTTP kód %s). To mùže znamenat, že je dignostická stránka mimo provoz. Zkuste to prosím pozdìji.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK',		'<P><a target="_blank" href="%s">Kliknìte zde pro zobrazení diagnstické stránky modulu Spartacus</a> a zjistìte, zda odpovídá.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED',		'<P>SPARTACUS se pokusil pøipojit ke Googlu, ale neúspìšnì (chyba è.%d: %s).<br/>Váš server blokuje odchozí spojení. SPARTACUS nebude fungovat, protože se nemùže pøipojit do svého online úložištì. <b>Kontaktujte prosím svého poskytovatele webhostingu a požádejte ho o povolení odchozích pøipojení k jiným webovým stránkám.</b></P><P>Zásuvné moduly lze instalovat z lokálních adresáøù. Jednoduše stáhnìte nejnovìjší verzi pluginu z <a href="http://spartacus.s9y.org">SPARTACUS online úložištì</a>, rozbalte ho a napøíklad pomocí FTP nahrajte do adresáøe /plugins/ ve Vaší instalaci Serendipity.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN',		'<P>Modulu SPARTACUS se podaøilo spojit s Googlem, ale nemùže se spojit s on-line úložištìm modulu SPARTACUS. Je možné, že Váš server blokuje nìkterá odchozí spojení, nebo je on-line úložištì mimo provoz. Spojte se se svým poskytovatelem webového serveru, abyste se ujistili, že nemáte blokována odchozí spojení. <b>SPARTACUS nebude fungovat, protože nemùže kontaktovat on-line úložištì.</b></P>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK',		'<p>Nebylo možno získat data z on-line úložištì modulu Spartacus. Zkouška dostupnosti úložištì na adrese %s.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR',		'<p>Diagnstická stránka modulu Spartacus vrátilo chybu (HTTP kód %s). To mùže znamenat, že je dignostická stránka mimo provoz. Zkuste to prosím pozdìji.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK',		'<p><a target="_blank" href="%s">Kliknìte zde pro zobrazení diagnstické stránky modulu Spartacus</a> a zjistìte, zda odpovídá.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED',		'<p>SPARTACUS se pokusil pøipojit ke Googlu, ale neúspìšnì (chyba è.%d: %s).<br/>Váš server blokuje odchozí spojení. SPARTACUS nebude fungovat, protože se nemùže pøipojit do svého online úložištì. <b>Kontaktujte prosím svého poskytovatele webhostingu a požádejte ho o povolení odchozích pøipojení k jiným webovým stránkám.</b></p><p>Zásuvné moduly lze instalovat z lokálních adresáøù. Jednoduše stáhnìte nejnovìjší verzi pluginu z <a href="http://spartacus.s9y.org">SPARTACUS online úložištì</a>, rozbalte ho a napøíklad pomocí FTP nahrajte do adresáøe /plugins/ ve Vaší instalaci Serendipity.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN',		'<p>Modulu SPARTACUS se podaøilo spojit s Googlem, ale nemùže se spojit s on-line úložištìm modulu SPARTACUS. Je možné, že Váš server blokuje nìkterá odchozí spojení, nebo je on-line úložištì mimo provoz. Spojte se se svým poskytovatelem webového serveru, abyste se ujistili, že nemáte blokována odchozí spojení. <b>SPARTACUS nebude fungovat, protože nemùže kontaktovat on-line úložištì.</b></p>');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_XML',		'Umístìní souborù/(mirror server) (XML metadata)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_FILES',		'Umístìní souborù/(mirror server)  (soubory)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC',		'Vyberte, odkud stahovat. NEMÌÒTE tuto hodnotu, pokud opravdu dobøe nevíte, co dìláte a jestli server orpavdu funguje. Tato volba je pøístupná pro teprve plánované funkce.');
@@ -64,3 +64,4 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR',		'Umístìní zrcadel (mirrors)');
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR_DESC',		'Tuto volbu používejte jen pokud opravdu víte, co dìláte, jste-li zkušený uživatel. Pokud jsou pøednastavené mirror servery vypnuté nebo nepracují správnì, Serendipity se pokusí pøipojit k Vámi zadaným mirror serverùm (tøeba mùžete zadat http://mirror.org/serendipity/). Tyto servery musí umìt zpracovávat XML soubory na úrovni URL adresy a musí obsahovat podadresáøe "additional_plugins" a "additional_themes". Zadávejte pouze mirror servery, kterým vìøíte a které plnì zrcadlí všechny soubory CVS úložištì Serendipity. Lze zadat více zrcadel, oddìlených "|".');
+

@@ -10,10 +10,10 @@
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_DONE', '成功获取相关数据');
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR', '<br />(插件库返回如下错误代码 %s 。)<br />');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<p>无法从SPARTACUS插件库中获取到数据。正在在 %s 上面检查插件库状态信息。</p>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<P>SPARTACUS插件库运行状态网站返回了一个错误代码 (HTTP代码 %s)。这意味着SPARTACUS插件库运行状态网站目前处于瘫痪状态。请稍后重新尝试。</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<p>SPARTACUS插件库运行状态网站返回了一个错误代码 (HTTP代码 %s)。这意味着SPARTACUS插件库运行状态网站目前处于瘫痪状态。请稍后重新尝试。</p>');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<p><a target="_blank" href="%s">点击此处访问SPARTACUS插件库运行状态网站</a>， 并确认该网站是否在正常运行中。</p>');
 @define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<p>SPARTACUS尝试连接到Google，但是失败了(错误 %d: %s)。<br />你的服务器禁止外出连接(outgoing connections)。无法连接到SPARTACUS插件库，因此SPARTACUS无法正常工作以下载、更新插件。<b>请联系你的网站空间服务商，要求他们允许通过使用外出连接连接到其他网站。</b></p><p>你依然可以从本地目录安装插件。只要从<a href="http://spartacus.s9y.org">SPARTACUS网上插件库</a>下载相关插件，将它解压缩并上传到你的Serendipity的插件目录中</p>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<P>SPARTACUS可以连接到Google，但无法连接到SPARTACUS插件库。这可能是因为你的服务器禁止某些外出连接(outgoing connections)，或者SPARTACUS插件库运行状态网站目前处于瘫痪状态。请联系你的网站空间服务商，以确认此类外出连接是允许的。<b>你无法使用SPARTACUS来下载、更新插件，除非你的网站服务器能够连上SPARTACUS插件库。</b></p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<p>SPARTACUS可以连接到Google，但无法连接到SPARTACUS插件库。这可能是因为你的服务器禁止某些外出连接(outgoing connections)，或者SPARTACUS插件库运行状态网站目前处于瘫痪状态。请联系你的网站空间服务商，以确认此类外出连接是允许的。<b>你无法使用SPARTACUS来下载、更新插件，除非你的网站服务器能够连上SPARTACUS插件库。</b></p>');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_XML', '文件/镜像 地址 (XML元数据(metadata))');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_FILES', '文件/镜像 地址 (文件)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC', '选择一个下载点。不要修改这个设置，除非你知道你正在做什么，或者你目前使用的下载点已经失效了。这个设置存在的主要目的是为了向前兼容。');
@@ -34,3 +34,4 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_PLUGINS', '使用Spartacus来下载插件？');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES', '使用Spartacus来下载主题？');
+

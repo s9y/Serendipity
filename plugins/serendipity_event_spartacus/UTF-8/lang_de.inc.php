@@ -1,4 +1,4 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 09:57:42 VladaAjgl $
+<?php
 
 /**
  *  @version 1.0
@@ -28,11 +28,11 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Sie können mehrere Plugins auf einmal installieren indem sie diesen Link in einem neuen Tab öffnen (mittlerer Mausbutton)');
 
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR', '<br />(Der Mirror-Speicherort antwortet mit Fehler %s.)<br />');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<P>Die Daten des Spartacus-Speicherorts konnte nicht empfangen werden. Prüfe Verfügbarkeit der Quelle...</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<P>Die Prüfung der Verfügbarkeit einer Spartacus-Quelle konnte nicht durchgeführt werden (HTTP-Code %s). Bitte probieren Sie es später wieder.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<P><a target="_blank" href="%s">Klicken Sie hier um die Spartacus-Verfügbarkeitsprüfung  anzusehen</a> und dessen Erreichbarkeit zu überprüfen.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<P>SPARTACUS konnte keine Test-Verbindung zu Google herstellen (Fehler %d: %s).<br />Ihr Server blockiert vermutlich ausgehende Verbindungen. SPARTACUS kann so nicht ausgeführt werden, da so auf keine der SPARTACUS-Quellen zugegriffen werden kann. <b>Bitte kontaktieren Sie ihren Web-Provider und bitten ihn, ausgehende HTTP-Verbindungen zuzulassen.</b></P><P>Plugins können nach wie vor auch lokal installiert werden. Laden Sie dazu einfach ein Plugin von <a href="http://spartacus.s9y.org">der SPARTACUS Webseite</a> runter, entpacken es und laden es in ihr Serendipity "plugin"-Verzeichnis hoch.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<P>SPARTACUS konnte eine Teste-Verbindung zu Google herstellen, aber nicht zum Spartacus-Speicherort. Möglicherweise blockiert ihr Server ausgehende Verbindungen, oder die Spartacus-Quelle ist nicht erreichbar. Kontaktieren Sie bitte ihren Web-Provider um sicherzustellen, dass ausgehende HTTP-Verbindungen möglich sind. <b>Sie können SPARTACUS erst nutzen, wenn ihr Server auf die Spartacus-Speicherorte zugreifen kann.</b></P>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<p>Die Daten des Spartacus-Speicherorts konnte nicht empfangen werden. Prüfe Verfügbarkeit der Quelle...</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<p>Die Prüfung der Verfügbarkeit einer Spartacus-Quelle konnte nicht durchgeführt werden (HTTP-Code %s). Bitte probieren Sie es später wieder.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<p><a target="_blank" href="%s">Klicken Sie hier um die Spartacus-Verfügbarkeitsprüfung  anzusehen</a> und dessen Erreichbarkeit zu überprüfen.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<p>SPARTACUS konnte keine Test-Verbindung zu Google herstellen (Fehler %d: %s).<br />Ihr Server blockiert vermutlich ausgehende Verbindungen. SPARTACUS kann so nicht ausgeführt werden, da so auf keine der SPARTACUS-Quellen zugegriffen werden kann. <b>Bitte kontaktieren Sie ihren Web-Provider und bitten ihn, ausgehende HTTP-Verbindungen zuzulassen.</b></p><p>Plugins können nach wie vor auch lokal installiert werden. Laden Sie dazu einfach ein Plugin von <a href="http://spartacus.s9y.org">der SPARTACUS Webseite</a> herunter, entpacken es und laden es in ihr Serendipity "plugins"-Verzeichnis hoch.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<p>SPARTACUS konnte eine Teste-Verbindung zu Google herstellen, aber nicht zum Spartacus-Speicherort. Möglicherweise blockiert ihr Server ausgehende Verbindungen, oder die Spartacus-Quelle ist nicht erreichbar. Kontaktieren Sie bitte ihren Web-Provider um sicherzustellen, dass ausgehende HTTP-Verbindungen möglich sind. <b>Sie können SPARTACUS erst nutzen, wenn ihr Server auf die Spartacus-Speicherorte zugreifen kann.</b></p>');
 
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR', 'Eigene Mirror-Quelle');
 @define('PLUGIN_EVENT_SPARTACUS_CUSTOMMIRROR_DESC', 'Diese Option ist nur für Experten gedacht. Falls keiner der voreingestellten Mirror-Server aufgrund von Downtime oder Problemen verfügbar ist, kann hier ein eigener Server-Name wie http://mirror.org/serendipity/ eingetragen werden. Dort müssten die XML-Dateien für Spartacus im Verzeichnis liegen, und Unterverzeichnisse wie additional_plugins und additional_themes existieren. Geben Sie nur Mirrors hier ein, denen Sie vertrauen, auf denen eine Kopie unseres CVS-Repositories gespeichert ist. Mehrere Mirrors können mit "|" getrennt eingegeben werden.');
@@ -45,16 +45,17 @@
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_THEMES', 'Spartacus verwenden, um Themes zu laden?');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE', 'Fernabfrage für Versions-Informationen der Plugins zulassen?');
 @define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_DESC', 'Wenn aktiviert, können Besucher von %s Versions-Informationen über alle installierten Plugins abrufen. Es wird dringend empfohlen, diese URL mittels benutzerdefinierten .htaccess Regeln vor unauthorisiertem Zugriff zu schützen.');
-@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL', 'Pfad zum Fernabruf der Versions-Information der Plugins');
-@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL_DESC', 'gibt den letzten Teil der URI an, welche die Benutzer wissen müssen, um den Fernabruf der Versions-Informationen durchzuführen.');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL', 'Pfad zum Fernabruf der Versions-Information');
+@define('PLUGIN_EVENT_SPARTACUS_ENABLE_REMOTE_URL_DESC', 'Gibt den letzten ("geheimen") Teil der URI an, welche die Benutzer wissen müssen, um den Fernabruf der Versions-Informationen durchzuführen.');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CONNECT', 'FTP Fehler: Kann nicht per FTP verbinden.');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_MKDIR', 'FTP Fehler: Kann das Verzeichnis (%s) nicht anlegen.');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_ERROR_CHMOD', 'FTP Fehler: Kann die Verzeichnisrechte von (%s) nicht ändern.');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_SUCCESS', 'FTP: Verzeichnis (%s) erfolgreich angelegt.');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_USE', 'Lege Verzeichnis unter Verwendung von FTP an?');
-@define('PLUGIN_EVENT_SPARTACUS_FTP_USE_DESC', 'Wenn PHP im safe_mode läuft, gelten einige Einschränkungen. Das Ergebnis dieser Einschränkungen ist, das in ein Verzeichnis, welches auf normale Weise erstellt wurde, nicht hochgeladen werden kann. Wird das Verzeichnis aber per FTP angelegt wurde, funtkioniert es. Wenn also am Webserver safe_mode = on eingestellt ist, ist dies der einzige Weg um SPARTACUS zu nmutzen bzw. Mediendateien (Bilder usw.) hochzuladen. Die folgenden Zugangsdaten für Ihren Server müssen dazu ausgefüllt werden');
+@define('PLUGIN_EVENT_SPARTACUS_FTP_USE_DESC', 'Wenn PHP im safe_mode läuft, gelten einige Einschränkungen. Das Ergebnis dieser Einschränkungen ist, das in ein Verzeichnis, welches auf normale Weise erstellt wurde, nicht hochgeladen werden kann. Wird das Verzeichnis aber per FTP angelegt wurde, funtkioniert es. Wenn also am Webserver safe_mode = on eingestellt ist, ist dies der einzige Weg um SPARTACUS zu nutzen bzw. Mediendateien (Bilder usw.) hochzuladen. Die folgenden Zugangsdaten für Ihren Server müssen dazu ausgefüllt werden');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_SERVER', 'FTP Serveradresse');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_USERNAME', 'FTP Benutzername');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_PASS', 'FTP Passwort');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR', 'FTP Serendipity Verzeichnis');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC', 'Beim Login über FTP ist das Startverzeichnis nicht notwendigerweise das Serendipity-Verzeichnis. In diesem Fall ist es hier möglch, den Pfad vom FTP-Verzeichnis zum Serendipity-Verzeichnis anzugeben.');
+

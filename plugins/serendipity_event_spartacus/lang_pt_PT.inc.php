@@ -1,4 +1,4 @@
-<?php # $Id:$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -30,5 +30,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissões das directorias descarregadas');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Aqui pode introduzir o modo octal (por exemplo "0777") das permissões de directorias (FTP/Shell) downloaded by Spartacus. descarregados pelo Spartacus. Se vazio, a máscara de permissões por omissão do sistema é usada. Note que nem todos os servidores permitem definir ou alterar permissões. Note que as permissões aplicadas devem permitir leitura e escrita por parte do utilizador do servidor web. Além disso o spartacus/Serendipity não pode escrever sobre ficheiros existentes.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>
