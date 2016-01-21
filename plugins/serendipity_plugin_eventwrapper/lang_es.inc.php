@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Selecciona la extensión de evento cuya salida debe ser mostrada');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Ingresa el título para este elemento de la barra lateral (déjalo vacío para heredarlo de la extensión)');
 
-?>

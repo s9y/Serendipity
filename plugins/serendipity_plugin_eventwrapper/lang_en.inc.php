@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Select the event plugin for which the output should be displayed');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Enter the title for this sidebar item (leave empty for inheritance by event plugin)');
 
-?>
