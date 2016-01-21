@@ -2,7 +2,7 @@
 ##########################################################################
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity    #
 # Developer Team) All rights reserved.  See LICENSE file for licensing   #
-# details								                                 #
+# details                                                                #
 #                                                                        #
 # (c) 2003 Jannis Hermanns <J@hacked.it>                                 #
 # http://www.jannis.to/programming/serendipity.html                      #
@@ -13,7 +13,7 @@
 ##########################################################################
 
 @define('PLUGIN_CREATIVECOMMONS_NAME', 'CC 授權條款');
-		@define('PLUGIN_CREATIVECOMMONS_DESC', '請選擇適合您的網誌的授權條款');
+@define('PLUGIN_CREATIVECOMMONS_DESC', '請選擇適合您的網誌的授權條款');
 @define('PLUGIN_CREATIVECOMMONS_TXT', '顯示文字？');
 @define('PLUGIN_CREATIVECOMMONS_TXT_DESC', '為了能正確的傳達條款內容，請提供條款簡介。');
 @define('PLUGIN_CREATIVECOMMONS_CAP', '原著作內容的版權是 <a href="#license_uri#">CC 授權條款</a>');
