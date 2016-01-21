@@ -31,3 +31,4 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', '可在“<a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">配置插件</a>”中修改自定义字段。');
 		
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', '禁止在此文章中使用标记语言方面的插件。');		
+

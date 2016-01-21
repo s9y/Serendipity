@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -43,3 +43,4 @@
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE', 'Entry editing screen');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC', 'Here you can choose, which elements and in which order the plugin should show its input fields in the entry editing process.');
+
