@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -11,4 +11,3 @@
 @define('PLUGIN_EVENT_BBCODE_TRANSFORM', '<a href="http://www.phpbb.com/phpBB/faq.php?mode=bbcode">BBCode</a> format allowed');
 @define('PLUGIN_EVENT_BBCODE_TARGET',   'Use target="blank" for links?');
 
-?>

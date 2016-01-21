@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_BBCODE_TRANSFORM',    'Zapnú» (= preklada») oznaèovací formát <a href="http://www.phpbb.com/phpBB/faq.php?mode=bbcode">BBCode</a>');
 @define('PLUGIN_EVENT_BBCODE_TARGET',       'Pou¾i» pre odkazy target="_blank" (odkazy otvára» v novom okne)?');
 
-?>
