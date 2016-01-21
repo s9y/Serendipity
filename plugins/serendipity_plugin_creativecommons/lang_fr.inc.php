@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -16,5 +16,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'Creative Commons');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'Affiche un contrat Creative Commons dans la barre latérale.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

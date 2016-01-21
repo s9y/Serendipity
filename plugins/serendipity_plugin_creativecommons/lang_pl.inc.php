@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -9,4 +9,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'Creative Commons');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'Wy¶wietl informacjê o licencji Creative Commons w Panelu Bocznym.');
 
-?>

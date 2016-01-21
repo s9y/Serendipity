@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -9,4 +9,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'クリエイティブコモンズ');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'サイドバーにクリエイティブコモンズを告示します。');
 
-?>
