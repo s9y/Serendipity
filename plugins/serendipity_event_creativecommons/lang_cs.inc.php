@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-12-13 12:00:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -20,4 +20,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'Volba NE znamená, že: Vlastník licence povoluje ostatním kopírovat, distribuovat, zobrazovat a užívat dílo pouze v pùvodním znìní. Žádné jeho zmìny èi úpravy nejsou povoleny.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Ano, pokud ho budou ostatní šíøit pod stejnou licencí');
 
-?>

@@ -14,3 +14,4 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC', '作者只允许他人复制、分发、演示、使用未被修改的该作品。');
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC','作者只允许他人复制、分发、演示和使用未被修改的该作品，而不是在此作品基础上修改后的作品。');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC', '如果别人也遵守创作共用协议的话，允许。');
+
