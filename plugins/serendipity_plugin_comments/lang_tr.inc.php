@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -15,4 +15,3 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Kaç adet görüþ gösterilsin? (Öntanýmlý: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s hakkýnda%s');
 
-?>

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 /**
  *  @version $Revision$
@@ -15,4 +15,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', 'Jak wiele komentarzy bêdzie pokazywanych. (Standardowo: 15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s do wpisu%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anonim');
-?>
+
