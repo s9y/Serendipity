@@ -1,4 +1,4 @@
-<?php # 
+<?php
 
 /**
  *  @version 
@@ -62,3 +62,4 @@
         '<b><a href="://www.splitbrain.org/go/monsterid" target="_blank">Monster ID avatars</a></b> are localy created monster images unique for each writer.');
 @define('PLUGIN_EVENT_GRAVATAR_EXTLING_WARNING',    '<font color="red">CAUTION!</font> This plugin has to be executed before any plugin changing links (like i.e. the exit tracking plugin)! ' .
         '<font color="red">Else Pavatars, Favatars and MayBlogLog avatars won\'t work!</font>');
+

@@ -49,97 +49,72 @@
 
 <a name="overview"></a>
 <h2>Überblick</h2>
-<p>Mit dem Avatar Plugin kann man Kommentatoren in seinem Blog "ein Gesicht" geben. 
-Für jeden einzelnen Kommentator im Blog wird ein so genanntes Avatar zur Verfügung gestellt, das ihn repräsentiert.
-Dafür werden unterschiedliche Mechanismen angeboten, die nacheinander durchprobiert werden, ob sie ein Avatar für
-den Kommentator liefern.</p>
-<p>Der erste Mechanismus, der ein Avatar findet, wird benutzt, nachfolgende Mechanismen
-dann nicht mehr ausprobiert. Dies bedeutet, dass man die Methoden so sortieren sollte, dass die am meisten bevorzugte
-zuerst ausprobiert wird. Methoden, die auf jeden Fall immer ein Avatar liefern, sollten als letzte konfiguriert werden,
-da nach diesen natürlich keine weiteren Methoden ausprobiert werden.
-</p>
-<p><strong>Wichtig:</strong> Dieses Plugin muss vor allen Plugins in der Liste stehen, die Links verändern, wie
-z.B. das "Exit Tracking Plugin". Ansonsten können Avatare, die auf den Links der Kommentatoren beruhen, nicht 
-funktionieren.</p>
+<p>Mit dem Avatar Plugin kann man Kommentatoren in seinem Blog "ein Gesicht" geben. Für jeden einzelnen Kommentator im Blog wird ein so genanntes Avatar zur Verfügung gestellt, das ihn repräsentiert. Dafür werden unterschiedliche Mechanismen angeboten, die nacheinander durchprobiert werden, ob sie ein Avatar für den Kommentator liefern.</p>
+<p>Der erste Mechanismus, der ein Avatar findet, wird benutzt, nachfolgende Mechanismen dann nicht mehr ausprobiert. Dies bedeutet, dass man die Methoden so sortieren sollte, dass die am meisten bevorzugte zuerst ausprobiert wird. Methoden, die auf jeden Fall immer ein Avatar liefern, sollten als letzte konfiguriert werden, da nach diesen natürlich keine weiteren Methoden ausprobiert werden.</p>
+<p><strong>Wichtig:</strong> Dieses Plugin muss vor allen Plugins in der Liste stehen, die Links verändern, wie z.B. das "Exit Tracking Plugin". Ansonsten können Avatare, die auf den Links der Kommentatoren beruhen, nicht funktionieren.</p>
 <p>Hier folgt eine Beschreibung der aktuell verfügbaren Mechanismen, ein Avatar für einen Kommentator zu ermitteln:</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_gravatar"></a>
 <h3>Gravatar</h3>
-<p><a href="http://www.gravatar.com" target="_blank">Gravatar</a> ist einer der bekanntesten Services für Benutzer Avatare.
-Benutzer können sich bei diesem Service mit einer EMail registrieren und für sich ein Avatar Bild hinterlegen</p>
-<p>Gravatare sind also von der vom Kommentator eingegebenen EMail abhängig. Nur wenn eine solche angegeben wurde, kann
-ermittelt werden, ob für diese ein Avatar beim Gravatar Service hinterlegt wurde.</p> 
+<p><a href="http://www.gravatar.com" target="_blank">Gravatar</a> ist einer der bekanntesten Services für Benutzer Avatare. Benutzer können sich bei diesem Service mit einer EMail registrieren und für sich ein Avatar Bild hinterlegen</p>
+<p>Gravatare sind also von der vom Kommentator eingegebenen EMail abhängig. Nur wenn eine solche angegeben wurde, kann ermittelt werden, ob für diese ein Avatar beim Gravatar Service hinterlegt wurde.</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_pavatar"></a>
 <h3>Pavatar</h3>
-<p><a href="http://www.pavatar.com" target="_blank">Pavatare</a> sind Avatare (Bilddateien), die der Schreber genau
-für diesen Zweck auf seiner Homepage hinterlegt hat.</p> 
-<p>Im Gegensatz zu den recht ähnlichen <a href="#avt_favatar">Favataren</a> kann man hier also ein eigenes Avatar Bild
-mit einer beliebigen Auflösung hinterlegen.</p>
-<p>Hier wird anhand der vom Kommentator angegebenen Homepage ermittelt, ob diese ein Pavatar liefert. Pavatare sind
-also nur ladbar, wenn der Kommentator eine Homepage angegeben hat</p> 
+<p><a href="http://www.pavatar.com" target="_blank">Pavatare</a> sind Avatare (Bilddateien), die der Schreber genau für diesen Zweck auf seiner Homepage hinterlegt hat.</p>
+<p>Im Gegensatz zu den recht ähnlichen <a href="#avt_favatar">Favataren</a> kann man hier also ein eigenes Avatar Bild mit einer beliebigen Auflösung hinterlegen.</p>
+<p>Hier wird anhand der vom Kommentator angegebenen Homepage ermittelt, ob diese ein Pavatar liefert. Pavatare sind also nur ladbar, wenn der Kommentator eine Homepage angegeben hat</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_favatar"></a>
 <h3>Favatar</h3>
 <p>Dies ist ein Konzept mit dem viele Hompage Besitzer automatisch einen Avatar haben, ohne dass sie dafür irgendetwas tun müssen:</p>
-<p>Das Blog holt sich hier einfach das favicon der Homepage, die der Benutzer als seine URL angegeben hat.
-Dafür ist das favicon aber eben ein Icon und somit normaler Weise auch recht klein und nicht immer als Avatar geeignet.</p> 
+<p>Das Blog holt sich hier einfach das favicon der Homepage, die der Benutzer als seine URL angegeben hat. Dafür ist das favicon aber eben ein Icon und somit normaler Weise auch recht klein und nicht immer als Avatar geeignet.</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_twitter"></a>
 <h3>Twitter</h3>
-<p>Falls der Kommentator als URL ein <a href="http://twitter.com" target="_blank">Twitter Profil</a> angegeben hat, dann wird versucht, hier das Profilbild für diesen
-Benutzer zu laden.</p>
-<p><i>Anmerkung</i>: Falls auch Favatare geladen werden sollen, dann muss Twitter vor diesen versucht werden, sonst wird das
-Favicon von Twitter geladen. Dies kann allerdings auch gewollt sein, um z.B. "Tweetbacks" von Twitter klar zu markieren.</p> 
+<p>Falls der Kommentator als URL ein <a href="http://twitter.com" target="_blank">Twitter Profil</a> angegeben hat, dann wird versucht, hier das Profilbild für diesen Benutzer zu laden.</p>
+<p><i>Anmerkung</i>: Falls auch Favatare geladen werden sollen, dann muss Twitter vor diesen versucht werden, sonst wird das Favicon von Twitter geladen. Dies kann allerdings auch gewollt sein, um z.B. "Tweetbacks" von Twitter klar zu markieren.</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_identica"></a>
 <h3>Identica</h3>
-<p>Dies ist ein spezielles Avatar für <a href="http://identi.ca" target="_blank">Identica</a> Pingbacks. Es wird versucht, 
-das Profilbild des Benutzers zu laden, der den Pingback ausgelöst hat.</p>
-<p><i>Anmerkung</i>: Falls auch Favatare geladen werden sollen, dann muss Identica vor diesen versucht werden, sonst wird das
-Favicon von Identica geladen. Dies kann allerdings auch gewollt sein, um z.B. "Tweetbacks" von Identica klar zu markieren.</p> 
+<p>Dies ist ein spezielles Avatar für <a href="http://identi.ca" target="_blank">Identica</a> Pingbacks. Es wird versucht, das Profilbild des Benutzers zu laden, der den Pingback ausgelöst hat.</p>
+<p><i>Anmerkung</i>: Falls auch Favatare geladen werden sollen, dann muss Identica vor diesen versucht werden, sonst wird das Favicon von Identica geladen. Dies kann allerdings auch gewollt sein, um z.B. "Tweetbacks" von Identica klar zu markieren.</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_mybloglog"></a>
 <h3>MyBlogLog</h3>
-<p>Dies ist wieder ein (dem Gravatar Service sehr ähnlicher) zentraler Service. MyBlogLog ist eigentlich ein Blog Community Service,
-aber man kann aus diesem ebenfalls Avatare ermitteln</p>
-<p>Das Vorhandensein eines MyBlogLog Avatars wird über die Homepage Angabe des Kommentators ermittelt.  
+<p>Dies ist wieder ein (dem Gravatar Service sehr ähnlicher) zentraler Service. MyBlogLog ist eigentlich ein Blog Community Service, aber man kann aus diesem ebenfalls Avatare ermitteln</p>
+<p>Das Vorhandensein eines MyBlogLog Avatars wird über die Homepage Angabe des Kommentators ermittelt.</p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_wavatar"></a>
 <h3>Wavatar</h3>
-<p>Das Wavatar wird dynamisch erzeugt aus der Eingabe von Hompage und EMail des Kommentators. Es liefert für jeden Benutzer ein anderes
-aber immer selbes Avatar. Da es <strong>immer</strong> ein Avatar liefert, werden alle nachfolgenden Avatar Methoden ignoriert. 
-Wavatare sehen in etwa wie folgt aus:</p>
+<p>Das Wavatar wird dynamisch erzeugt aus der Eingabe von Hompage und EMail des Kommentators. Es liefert für jeden Benutzer ein anderes aber immer selbes Avatar. Da es <strong>immer</strong> ein Avatar liefert, werden alle nachfolgenden Avatar Methoden ignoriert. Wavatare sehen in etwa wie folgt aus:</p>
 <p align="center"><img src="documentation/wavatars.jpg"/></p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_monsterid"></a>
 <h3>MonsterID</h3>
-<p>MonsterID Avatare werden nach dem selben Mechanismus erzeugt, wie Wavatare und Indenticons, hier werden kleine niedliche "Monster"
-aus den Benutzer Angaben erzeugt.</p>
+<p>MonsterID Avatare werden nach dem selben Mechanismus erzeugt, wie Wavatare und Indenticons, hier werden kleine niedliche "Monster" aus den Benutzer Angaben erzeugt.</p>
 <p>Genau wie Wavatar und Identicon liefern sie <strong>immer</strong> einen Avatar für den Kommentator.</p>
 <p align="center"><img src="documentation/monsterid.png"/></p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_identicon"></a>
 <h3>Identicon/YCon</h3>
-<p>Identicon werden nach dem selben Mechanismus erzeugt, wie Wavatare und MonsterIDs, sie sehen nur anders aus. Hier werden
-abstrakte Gebilde erzeugt.</p>
+<p>Identicon werden nach dem selben Mechanismus erzeugt, wie Wavatare und MonsterIDs, sie sehen nur anders aus. Hier werden abstrakte Gebilde erzeugt.</p>
 <p>Genau wie Wavatar und MonsterID liefern sie <strong>immer</strong> einen Avatar für den Kommentator.</p>
 <p align="center"><img src="documentation/identicons.jpg"/></p>
 <p><a href="#top">top</a></p>
 
 <a name="avt_standard"></a>
 <h3>Standardavatar</h3>
-<p>Die Methode "Standardavatar" liefert immer das selbe Avatar für alle Benutzer. Das Bild, das hier benutzt werden soll, kann 
-weiter unten konfiguriert werden.</p> 
+<p>Die Methode "Standardavatar" liefert immer das selbe Avatar für alle Benutzer. Das Bild, das hier benutzt werden soll, kann weiter unten konfiguriert werden.</p>
 <p><a href="#top">top</a></p>
 
 <a name="config"></a>
@@ -148,63 +123,62 @@ weiter unten konfiguriert werden.</p>
 <a name="cnf_method"></a>
 <h3>Avatar laden über</h3>
 <p>Hiermit wird die Reihenfolge festgelegt, in der versucht wird, ein Avatar für den Kommentator zu erzeugen.</p>
-<p>Es gibt derzeit 6 Einschübe, mit denen die Reihenfolge festgelegt wird. Zu beachten ist, dass Methoden, 
-die auf jeden Fall ein Avatar liefern, alle nachfolgenden Methoden nicht zur Probe bringen.</p> 
+<p>Es gibt derzeit 6 Einschübe, mit denen die Reihenfolge festgelegt wird. Zu beachten ist, dass Methoden, die auf jeden Fall ein Avatar liefern, alle nachfolgenden Methoden nicht zur Probe bringen.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_standard"></a>
 <h3>Standard-Avatar</h3>
-<p>URL zu ihrem Standard-Avatar. Hier müssen Sie den relativen oder absoluten Pfad bezogen auf ihre Server URL zu ihrem Standard Avatar angeben.</p> 
+<p>URL zu ihrem Standard-Avatar. Hier müssen Sie den relativen oder absoluten Pfad bezogen auf ihre Server URL zu ihrem Standard Avatar angeben.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_sidbar"></a>
 <h3>In der Seitenleiste anzeigen</h3>
-<p>Sollen Avatar Bilder auch in der Seitenleiste (letze Kommentare) angezeigt werden?</p> 
+<p>Sollen Avatar Bilder auch in der Seitenleiste (letze Kommentare) angezeigt werden?</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_showtype"></a>
 <h3>Avatar Typ anzeigen</h3>
-<p>Wenn angeschaltet, wird eine Zeile unterhalb des Kommentar Editors ausgegeben, die angibt, welche Avatar Typen aktuell unterstützt werden.</p> 
+<p>Wenn angeschaltet, wird eine Zeile unterhalb des Kommentar Editors ausgegeben, die angibt, welche Avatar Typen aktuell unterstützt werden.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_autoralt"></a>
 <h3>Autorenname im ALT Attribut</h3>
-<p>Normaler Weise wird der Autorenname im TITLE Attribut des Avatar Bildes angegeben, das ALT Attribut wird mit einem * gefüllt, um das Seitenlayout nicht zu zerstören, wenn der Browser das Bild nicht laden kann. Allerdings wird blinden Lesern das ALT Attribut vorgelesen. Falls Sie diese Leser unterstützen wollen, sollten Sie diese Option einschalten.</p> 
+<p>Normaler Weise wird der Autorenname im TITLE Attribut des Avatar Bildes angegeben, das ALT Attribut wird mit einem * gefüllt, um das Seitenlayout nicht zu zerstören, wenn der Browser das Bild nicht laden kann. Allerdings wird blinden Lesern das ALT Attribut vorgelesen. Falls Sie diese Leser unterstützen wollen, sollten Sie diese Option einschalten.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_smartify"></a>
 <h3>Smarty Tag erzeugen</h3>
-<p>Wenn diese Option eingeschaltet ist, so wird das Avatar Bild nicht direkt in den Kommentar geschrieben, sondern es wird ein Smarty Tag {$comment.avatar} erzeugt, in dem der HTML Code des Images steht. Sie sollten diese Option nur einschalten, wenn sie wissen, dass ihr Template dieses Smarty Tag unterstützt. Ob das der Fall ist, sollten sie einfach ausprobieren.</p> 
+<p>Wenn diese Option eingeschaltet ist, so wird das Avatar Bild nicht direkt in den Kommentar geschrieben, sondern es wird ein Smarty Tag {$comment.avatar} erzeugt, in dem der HTML Code des Images steht. Sie sollten diese Option nur einschalten, wenn sie wissen, dass ihr Template dieses Smarty Tag unterstützt. Ob das der Fall ist, sollten sie einfach ausprobieren.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_alignment"></a>
 <h3>Ausrichtung</h3>
-<p>Mit dieser Option kann die Ausrichtung des Avatars im Kommentar konfiguriert werden, falls sie nicht die Smarty Tag Option verwenden. Bei der Smarty Tag Option muss die Ausrichtung über die entsprechende CSS Klasse im Stylesheet konfiguriert werden.</p> 
+<p>Mit dieser Option kann die Ausrichtung des Avatars im Kommentar konfiguriert werden, falls sie nicht die Smarty Tag Option verwenden. Bei der Smarty Tag Option muss die Ausrichtung über die entsprechende CSS Klasse im Stylesheet konfiguriert werden.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_size"></a>
 <h3>Bildgröße</h3>
-<p>Maximal dargestellte Größe des Avatar-Bildes in Pixeln</p> 
+<p>Maximal dargestellte Größe des Avatar-Bildes in Pixeln</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_cache"></a>
 <h3>Cache Zeit</h3>
-<p>Wenn Avatare zwischengespeichert werden sollen (empfohlen!), muss hier die Anzahl der Stunden eingetragen werden, die Bilder vom eigenen Server anstatt vom externen Service abgeholt werden sollen. Dies wird mehr Traffic auf diesem Blog Server verursachen, dafür macht es die Avatar Darstellung unabhängiger vom externen zentralen Server. "0" stellt das Zwischenspeichern ab.</p> 
+<p>Wenn Avatare zwischengespeichert werden sollen (empfohlen!), muss hier die Anzahl der Stunden eingetragen werden, die Bilder vom eigenen Server anstatt vom externen Service abgeholt werden sollen. Dies wird mehr Traffic auf diesem Blog Server verursachen, dafür macht es die Avatar Darstellung unabhängiger vom externen zentralen Server. "0" stellt das Zwischenspeichern ab.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_gravatar_rating"></a>
 <h3>Gravatar Indizierung</h3>
-<p>Kinderschutz :)</p> 
+<p>Kinderschutz :)</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_gravatar_fallback"></a>
 <h3>Gravatar Fallback</h3>
-<p>Gravatar implementiert einige eigene Fallback Methoden für den Fal, dass kein Gravatar für den Benutzer gefunden wurde. Es wurde ebenso Moster ID, Identicon und Wavatar. Wenn Du einen dieser Fallbacks einstellst, so wird keine weitere Methode nach Gravatar versucht, falls der Benutzer eine EMail angegeben hat.</p> 
+<p>Gravatar implementiert einige eigene Fallback Methoden für den Fal, dass kein Gravatar für den Benutzer gefunden wurde. Es wurde ebenso Moster ID, Identicon und Wavatar. Wenn Du einen dieser Fallbacks einstellst, so wird keine weitere Methode nach Gravatar versucht, falls der Benutzer eine EMail angegeben hat.</p>
 <p><a href="#top">top</a></p>
 
 <a name="cnf_gravatar_fallback_always"></a>
 <h3>Gravatar Fallback immer benutzen</h3>
-<p>Gravatar Fallbacks auch dann benutzen, wenn der Benutzer keine EMail (aber eine URL oder einen Namen) eingegeben hat.</p> 
+<p>Gravatar Fallbacks auch dann benutzen, wenn der Benutzer keine EMail (aber eine URL oder einen Namen) eingegeben hat.</p>
 <p><a href="#top">top</a></p>
 
 </body>

@@ -60,3 +60,4 @@
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_DESC',      'Gravatar má implementovaných nìkolik návratových metod pro pøípad, ¾e pro po¾adovaného u¾ivatele není znám ¾ádný avatar. Implementovány jsou té¾ Moster ID, Identicon a Wavatar. Pokud vyberete nìkterý z tìchto zínìných, nebudou uskuteèòovány ¾ádné dal¹í pokusy o naètení avataru, pokud u¾ivatel zadá email.');
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_ALLWAYS',   'V¾dy návratová hodnota pro Gravatar');
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_ALLWAYS_DESC', 'Pou¾ívat návratovou hodnotu Gravatar i v pøípadì, ¾e u¾ivatel nezadá email (zadá tedy url nebo jméno)');
+
