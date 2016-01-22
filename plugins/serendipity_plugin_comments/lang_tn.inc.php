@@ -20,3 +20,4 @@
 @define('PLUGIN_COMMENTS_MAXENTRIES', '迴響數量');
 @define('PLUGIN_COMMENTS_MAXENTRIES_BLAHBLAH', '要顯示多少個迴響？(預設：15)');
 @define('PLUGIN_COMMENTS_ABOUT', '%s 發佈於 %s');
+

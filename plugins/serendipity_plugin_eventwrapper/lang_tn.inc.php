@@ -17,3 +17,4 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGIN', '來源外掛');
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', '選擇要顯示輸出資料的事件外掛');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', '在側列顯示的標題 (輸入空白如果要用來源外掛的名稱)');
+
