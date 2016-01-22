@@ -63,9 +63,17 @@ if (!isset($serendipity['dashboardDraftLimit'])) {
     $serendipity['dashboardDraftLimit'] = 5;
 }
 
-$comments = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
-                                    LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
-                                    ORDER BY c.id DESC LIMIT " . (int)$serendipity['dashboardCommentsLimit']);
+$cjoin  = ($serendipity['authorid'] > 1) ? "
+        LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
+            WHERE e.authorid = {$serendipity['authorid']}
+        " : '';
+$cquery = "SELECT c.*, e.title
+             FROM {$serendipity['dbPrefix']}comments c
+        LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
+        " . $cjoin ."
+         ORDER BY c.id DESC LIMIT " . (int)$serendipity['dashboardCommentsLimit'];
+$comments = serendipity_db_query($cquery);
+
 if (is_array($comments) && count($comments) > 0) {
     foreach ($comments as &$comment) {
         $comment['entrylink'] = serendipity_archiveURL($comment['entry_id'], 'comments', 'serendipityHTTPPath', true) . '#c' . $comment['id'];

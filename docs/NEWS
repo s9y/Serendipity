@@ -1,5 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+
+    * Fix Dashboard comments by authors entries (#385)
+
     * Use CDATA encoded body for ATOM feed
 
     * Fix: Ajax upload to ML now also works for non-images
