@@ -65,8 +65,8 @@ if (!isset($serendipity['dashboardDraftLimit'])) {
 
 $cjoin  = ($serendipity['authorid'] > 1) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
-            WHERE e.authorid = {$serendipity['authorid']}
-        " : '';
+            WHERE e.authorid = " . (int)$serendipity['authorid']
+        : '';
 $cquery = "SELECT c.*, e.title
              FROM {$serendipity['dbPrefix']}comments c
         LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
@@ -93,7 +93,7 @@ if (is_array($comments) && count($comments) > 0) {
 
 $data['comments'] = $comments;
 
-
+$efilter = ($serendipity['authorid'] > 1) ? ' AND e.authorid = ' . (int)$serendipity['authorid'] : '';
 $entries = serendipity_fetchEntries(
                      false,
                      false,
@@ -101,7 +101,7 @@ $entries = serendipity_fetchEntries(
                      true,
                      false,
                      'timestamp DESC',
-                     'e.timestamp >= ' . serendipity_serverOffsetHour()
+                     'e.timestamp >= ' . serendipity_serverOffsetHour() . $efilter
                    );
 
 $entriesAmount = count($entries);
@@ -114,7 +114,7 @@ if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
                      true,
                      false,
                      'timestamp DESC',
-                     "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour()
+                     "isdraft = 'true' AND e.timestamp <= " . serendipity_serverOffsetHour() . $efilter
                    );
     if (is_array($entries) && is_array($drafts)) {
         $entries = array_merge($entries, $drafts);

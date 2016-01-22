@@ -1,7 +1,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
-    * Fix Dashboard comments by authors entries (#385)
+    * Fix show Dashboard entries by authors entries
+
+    * Fix show Dashboard comments by authors entries (#385)
 
     * Use CDATA encoded body for ATOM feed
 
