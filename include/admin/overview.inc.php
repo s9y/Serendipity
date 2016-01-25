@@ -63,7 +63,7 @@ if (!isset($serendipity['dashboardDraftLimit'])) {
     $serendipity['dashboardDraftLimit'] = 5;
 }
 
-$cjoin  = ($serendipity['serendipityUserlevel'] == 0) ? "
+$cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
             WHERE e.authorid = " . (int)$serendipity['authorid']
         : '';
@@ -93,7 +93,7 @@ if (is_array($comments) && count($comments) > 0) {
 
 $data['comments'] = $comments;
 
-$efilter = ($serendipity['serendipityUserlevel'] == 0) ? ' AND e.authorid = ' . (int)$serendipity['authorid'] : '';
+$efilter = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? ' AND e.authorid = ' . (int)$serendipity['authorid'] : '';
 $entries = serendipity_fetchEntries(
                      false,
                      false,
