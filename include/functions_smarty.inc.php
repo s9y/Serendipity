@@ -1218,9 +1218,9 @@ function serendipity_smarty_show($template, $data = null, $debugtype = null, $de
     $tplfile = ($template == 'preview_iframe.tpl') ? serendipity_getTemplateFile($template, 'serendipityPath', true) : serendipity_getTemplateFile($template, 'serendipityPath');
     if ($debug !== null) {
         if ($debugtype == "HTML") {
-            $debug = "<!-- Dynamically fetched " . htmlspecialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
+            $debug = "<!-- Dynamically fetched " . serendipity_specialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
         } else {
-            $debug = "/* Dynamically fetched " . htmlspecialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " */\n";
+            $debug = "/* Dynamically fetched " . serendipity_specialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " */\n";
         }
     }
 
