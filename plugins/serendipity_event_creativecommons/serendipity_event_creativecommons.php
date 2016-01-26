@@ -2,7 +2,8 @@
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-class serendipity_event_creativecommons extends serendipity_event {
+class serendipity_event_creativecommons extends serendipity_event
+{
     var $title = PLUGIN_CREATIVECOMMONS_NAME;
 
     function introspect(&$propbag)
@@ -12,9 +13,9 @@ class serendipity_event_creativecommons extends serendipity_event {
         $propbag->add('description',   PLUGIN_CREATIVECOMMONS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Evan Nemerson');
-        $propbag->add('version',       '1.5');
+        $propbag->add('version',       '1.6');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -71,8 +72,8 @@ class serendipity_event_creativecommons extends serendipity_event {
                 ));
                 $propbag->add('radio_per_row', '1');
                 $propbag->add('default', 'yes');
-
                 break;
+
             case 'image_type':
                 $image_types = array(
                     'generic'   => PLUGIN_CREATIVECOMMONS_IMAGETYPE_GENERIC,
@@ -95,17 +96,20 @@ class serendipity_event_creativecommons extends serendipity_event {
 
             default:
                 return false;
-                break;
         }
         return true;
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
+
+        $hooks = &$bag->get('event_hooks');
 
         $license_data    = $this->get_license_data();
         $license_version = $this->get_config('cc_version', '3.0');
@@ -129,81 +133,83 @@ class serendipity_event_creativecommons extends serendipity_event {
 
         $cc_visibility = 'invisible';
 
-        switch ($event) {
-            case 'frontend_display:html_layout':
-                $cc_visibility = 'visible';
-            case 'frontend_display:html:per_entry':
-                $eventData['display_dat'] .= '<div style="text-align: center;">';
-                if ($license_string == '') {
-                    if ($cc_visibility == 'visible') {
-                        $image_titel = 'No Rights Reserved';
-                        $eventData['display_dat'] .= '<a href="http://creativecommons.org/licenses/publicdomain">';
-                        $eventData['display_dat'] .= '<img style="border: 0px" alt="' . $image_titel. '" title="' . $image_titel. '" src="' . serendipity_getTemplateFile('img/norights.png') .'" />';
+        if (isset($hooks[$event])) {
+
+            switch($event) {
+
+                case 'frontend_display:html_layout':
+                    $cc_visibility = 'visible';
+                case 'frontend_display:html:per_entry':
+                    $eventData['display_dat'] .= '<div style="text-align: center;">';
+                    if ($license_string == '') {
+                        if ($cc_visibility == 'visible') {
+                            $image_titel = 'No Rights Reserved';
+                            $eventData['display_dat'] .= '<a href="http://creativecommons.org/licenses/publicdomain">';
+                            $eventData['display_dat'] .= '<img style="border: 0px" alt="' . $image_titel. '" title="' . $image_titel. '" src="' . serendipity_getTemplateFile('img/norights.png') .'" />';
+                            $eventData['display_dat'] .= '</a>';
+                            if (serendipity_db_bool($this->get_config('txt', true))) {
+                                $eventData['display_dat'] .= '<br />' . str_replace('#license_uri#', $license_uri, PLUGIN_CREATIVECOMMONS_CAP_PD);
+                            }
+                        }
+                    } elseif ($cc_visibility == 'visible') {
+                        $image_titel = 'Creative Commons License - Some Rights Reserved';
+                        $eventData['display_dat'] .= '<a href="'.$license_uri.'">';
+                        $eventData['display_dat'] .= '<img style="border: 0px" alt="' . $image_titel. '" title="' . $image_titel. '" src="' . serendipity_getTemplateFile('img/somerights20.gif') .'" />';
                         $eventData['display_dat'] .= '</a>';
                         if (serendipity_db_bool($this->get_config('txt', true))) {
-                            $eventData['display_dat'] .= '<br />' . str_replace('#license_uri#', $license_uri, PLUGIN_CREATIVECOMMONS_CAP_PD);
+                            $eventData['display_dat'] .= '<br />' . str_replace('#license_uri#', $license_uri, PLUGIN_CREATIVECOMMONS_CAP);
                         }
                     }
-                } elseif ($cc_visibility == 'visible') {
-                    $image_titel = 'Creative Commons License - Some Rights Reserved';
-                    $eventData['display_dat'] .= '<a href="'.$license_uri.'">';
-                    $eventData['display_dat'] .= '<img style="border: 0px" alt="' . $image_titel. '" title="' . $image_titel. '" src="' . serendipity_getTemplateFile('img/somerights20.gif') .'" />';
-                    $eventData['display_dat'] .= '</a>';
-                    if (serendipity_db_bool($this->get_config('txt', true))) {
-                        $eventData['display_dat'] .= '<br />' . str_replace('#license_uri#', $license_uri, PLUGIN_CREATIVECOMMONS_CAP);
+
+                    $eventData['display_dat'] .= '<!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><Work rdf:about=""><license rdf:resource="'.$license_uri.'"/></Work><License rdf:about="'.$license_uri.'">';
+                    if (is_array($rdf)) {
+                        foreach ($rdf as $rdf_t => $rdf_v) {
+                            $eventData['display_dat'] .= '  <'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
+                        }
                     }
-                }
 
-                $eventData['display_dat'] .= '<!-- <rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><Work rdf:about=""><license rdf:resource="'.$license_uri.'"/></Work><License rdf:about="'.$license_uri.'">';
-                if (is_array($rdf)) {
-                    foreach ($rdf as $rdf_t => $rdf_v) {
-                        $eventData['display_dat'] .= '  <'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
+                    $eventData['display_dat'] .= '</License></rdf:RDF> -->';
+                    $eventData['display_dat'] .= '</div>';
+                    break;
+
+                case 'frontend_display:rss-2.0:per_entry':
+                    $eventData['display_dat'] .= '<creativeCommons:license>'.$license_uri.'</creativeCommons:license>';
+                    break;
+
+                case 'frontend_display:rss-1.0:per_entry':
+                    $eventData['display_dat'] .= '<cc:license rdf:resource="'.$license_uri.'" />';
+                    break;
+
+                case 'frontend_display:rss-1.0:once':
+                    $eventData['display_dat'] .= '<cc:License rdf:about="'.$license_uri.'">';
+                    if (is_array($rdf)) {
+                        foreach ($rdf as $rdf_t => $rdf_v) {
+                            $eventData['display_dat'] .= '<cc:'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
+                        }
                     }
-                }
+                    $eventData['display_dat'] .= '</cc:License>';
+                    break;
 
-                $eventData['display_dat'] .= '</License></rdf:RDF> -->';
-                $eventData['display_dat'] .= '</div>';
-                return true;
-                break;
+                case 'frontend_display:rss-2.0:namespace':
+                    $eventData['display_dat'] .= ' xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" ';
+                    break;
 
-            case 'frontend_display:rss-2.0:per_entry':
-                $eventData['display_dat'] .= '<creativeCommons:license>'.$license_uri.'</creativeCommons:license>';
-                return true;
-                break;
+                case 'frontend_display:rss-1.0:namespace':
+                    $eventData['display_dat'] .= ' xmlns:cc="http://web.resource.org/cc/" ';
+                    break;
 
-            case 'frontend_display:rss-1.0:per_entry':
-                $eventData['display_dat'] .= '<cc:license rdf:resource="'.$license_uri.'" />';
-                return true;
-                break;
+                default:
+                    return false;
 
-            case 'frontend_display:rss-1.0:once':
-                $eventData['display_dat'] .= '<cc:License rdf:about="'.$license_uri.'">';
-                if (is_array($rdf)) {
-                    foreach ($rdf as $rdf_t => $rdf_v) {
-                        $eventData['display_dat'] .= '<cc:'.$rdf_v.' rdf:resource="http://web.resource.org/cc/'.$rdf_t.'" />';
-                    }
-                }
-                $eventData['display_dat'] .= '</cc:License>';
-                return true;
-                break;
-
-            case 'frontend_display:rss-2.0:namespace':
-                $eventData['display_dat'] .= ' xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" ';
-                return true;
-                break;
-
-            case 'frontend_display:rss-1.0:namespace':
-                $eventData['display_dat'] .= ' xmlns:cc="http://web.resource.org/cc/" ';
-                return true;
-                break;
-
-            default:
-                return true;
-                break;
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 
-    function get_license_data() {
+    function get_license_data()
+    {
         $license_type = array();
         $license_version = $this->get_config('cc_version', '3.0');
 
@@ -355,6 +361,7 @@ class serendipity_event_creativecommons extends serendipity_event {
           'rdf'    => $rdf
         );
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
