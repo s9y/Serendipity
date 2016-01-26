@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_categories extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_categories extends serendipity_plugin
+{
     var $title = CATEGORIES;
 
     function introspect(&$propbag) {
@@ -10,7 +15,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.04');
+        $propbag->add('version',       '2.05');
         $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -18,7 +23,9 @@ class serendipity_plugin_categories extends serendipity_plugin {
     function introspect_config_item($name, &$propbag)
     {
         global $serendipity;
+
         switch($name) {
+
             case 'title':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        TITLE);
@@ -128,8 +135,8 @@ class serendipity_plugin_categories extends serendipity_plugin {
                 
             case 'show_all':
                 $propbag->add('type',        'boolean');
-                $propbag->add('name',        CATEGORY_PLUGIN_SHOWALL);  # i18n
-                $propbag->add('description', CATEGORY_PLUGIN_SHOWALL_DESC); # i18n
+                $propbag->add('name',        CATEGORY_PLUGIN_SHOWALL);
+                $propbag->add('description', CATEGORY_PLUGIN_SHOWALL_DESC);
                 $propbag->add('default',     false);
                 break;
 
@@ -139,11 +146,12 @@ class serendipity_plugin_categories extends serendipity_plugin {
         return true;
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         global $serendipity;
 
         $title = $this->get_config('title');
-        $smarty = serendipity_db_bool($this->get_config('smarty', false));
+        $smarty = serendipity_db_bool($this->get_config('smarty', 'false'));
 
         $which_category = $this->get_config('authorid');
         $sort = $this->get_config('sort_order');
@@ -152,7 +160,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
         } else {
             $sort .= ' ' . $this->get_config('sort_method');
         }
-        $is_form = serendipity_db_bool($this->get_config('allow_select', false));
+        $is_form = serendipity_db_bool($this->get_config('allow_select', 'false'));
         if ($which_category === "login") {
             $which_category = (int)$serendipity['authorid'];
             if ($which_category === 0) {
@@ -164,17 +172,17 @@ class serendipity_plugin_categories extends serendipity_plugin {
 
         $cat_count = array();
         if (serendipity_db_bool($this->get_config('show_count'))) {
-            $cat_sql        = "SELECT c.categoryid, c.category_name, count(e.id) as postings
-                                            FROM {$serendipity['dbPrefix']}entrycat ec,
-                                                 {$serendipity['dbPrefix']}category c,
-                                                 {$serendipity['dbPrefix']}entries e
-                                            WHERE ec.categoryid = c.categoryid
-                                              AND ec.entryid = e.id
-                                              AND e.isdraft = 'false'
-                                                  " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . serendipity_db_time() : '') . "
-                                            GROUP BY c.categoryid, c.category_name
-                                            ORDER BY postings DESC";
-            $category_rows  = serendipity_db_query($cat_sql);
+            $cat_sql = "SELECT c.categoryid, c.category_name, count(e.id) as postings
+                          FROM {$serendipity['dbPrefix']}entrycat ec,
+                               {$serendipity['dbPrefix']}category c,
+                               {$serendipity['dbPrefix']}entries e
+                         WHERE ec.categoryid = c.categoryid
+                           AND ec.entryid = e.id
+                           AND e.isdraft = 'false'
+                               " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND e.timestamp  <= " . serendipity_db_time() : '') . "
+                      GROUP BY c.categoryid, c.category_name
+                      ORDER BY postings DESC";
+            $category_rows = serendipity_db_query($cat_sql);
             if (is_array($category_rows)) {
                 foreach($category_rows AS $cat) {
                     $cat_count[$cat['categoryid']] = $cat['postings'];
@@ -183,14 +191,14 @@ class serendipity_plugin_categories extends serendipity_plugin {
 
         }
 
-        $html       = '';
+        $html = '';
 
         if (!$smarty && $is_form) {
             $html .= '<form action="' . $serendipity['baseURL'] . $serendipity['indexFile'] . '?frontpage" method="post">
-              <div id="serendipity_category_form_content">';
+              <div id="serendipity_category_form_content">'."\n";
         }
         if (!$smarty) {
-            $html .= '<ul id="serendipity_categories_list" style="list-style: none; margin: 0px; padding: 0px">';
+            $html .= '<ul id="serendipity_categories_list" style="list-style: none; margin: 0px; padding: 0px">'."\n";
         }
 
         $image = $this->get_config('image', serendipity_getTemplateFile('img/xml.gif'));
@@ -275,16 +283,16 @@ class serendipity_plugin_categories extends serendipity_plugin {
         }
 
         if (!$smarty) {
-            $html .= '</ul>';
+            $html .= "</ul>\n";
         }
 
         if (!$smarty && $is_form) {
-            $html .= '<div class="category_submit"><input type="submit" name="serendipity[isMultiCat]" value="' . GO . '" /></div>';
+            $html .= '<div class="category_submit"><input type="submit" name="serendipity[isMultiCat]" value="' . GO . '" /></div>'."\n";
         }
 
-        if (!$smarty && serendipity_db_bool($this->get_config('show_all', false))) {
+        if (!$smarty && serendipity_db_bool($this->get_config('show_all', 'false'))) {
             $html .= sprintf(
-                '<div class="category_link_all"><a href="%s" title="%s">%s</a></div>',
+                '<div class="category_link_all"><a href="%s" title="%s">%s</a></div>'."\n",
 
                 $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage',
                 ALL_CATEGORIES,
@@ -293,7 +301,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
         }
 
         if (!$smarty && $is_form) {
-            $html .= '</div></form>';
+            $html .= "</div>\n</form>\n";
         }
 
         if (!$smarty) {
@@ -309,6 +317,7 @@ class serendipity_plugin_categories extends serendipity_plugin {
             echo serendipity_smarty_fetch('CATEGORIES', 'plugin_categories.tpl');
         }
     }
+
 }
 
 ?>
