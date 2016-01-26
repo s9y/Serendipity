@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -15,9 +15,9 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.53');
+        $propbag->add('version',       '1.54');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -66,6 +66,7 @@ class serendipity_event_mailer extends serendipity_event
         }
 
         switch($name) {
+
             case 'what':
                 $propbag->add('type',        'select');
                 $propbag->add('name',        CONTENT);
@@ -124,30 +125,33 @@ class serendipity_event_mailer extends serendipity_event
                 break;
 
             default:
-                break;
+                return false;
         }
-
         return true;
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
+
             switch($event) {
+
                 case 'backend_display':
                     if (isset($serendipity['POST']['properties']['mailto'])) {
                         $mailto = $serendipity['POST']['properties']['mailto'];
                     } else {
                         $mailto = $this->get_config('mailto');
                     }
-                    
+
                     if (isset($serendipity['POST']['properties']['sendentry_all'])) {
                         $sendtoall = $serendipity['POST']['properties']['sendentry_all'];
                     } else {
@@ -247,12 +251,12 @@ class serendipity_event_mailer extends serendipity_event
                             }
                         }
 
-                        if (serendipity_db_bool($this->get_config('convertp', false)) == true) {
+                        if (serendipity_db_bool($this->get_config('convertp', 'false'))) {
                             $mail['body'] = str_replace('</p>', "</p>\n", $mail['body']);
                         }
 
-                        if (serendipity_db_bool($this->get_config('striptags', false)) == true) {
-                            if (serendipity_db_bool($this->get_config('keepstriptags', true))) {
+                        if (serendipity_db_bool($this->get_config('striptags', 'false'))) {
+                            if (serendipity_db_bool($this->get_config('keepstriptags', 'true'))) {
                                 $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "$2 [$1]", $mail['body']);
                                 $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "[" . IMAGE . ": $1]", $mail['body']);
                             } else {
@@ -262,7 +266,7 @@ class serendipity_event_mailer extends serendipity_event
                             $mail['body'] = strip_tags($mail['body']);
                         }
 
-                        if (serendipity_db_bool($this->get_config('includelink', false)) == true) {
+                        if (serendipity_db_bool($this->get_config('includelink', 'false'))) {
                             $mail['body'] = serendipity_archiveURL($eventData['id'], $eventData['title'], 'baseURL', true, array('timestamp' => $eventData['timestamp'])) . "\n\n" . $mail['body'];
                         }
 
@@ -273,17 +277,18 @@ class serendipity_event_mailer extends serendipity_event
                             }
                         }
                     }
-                    return true;
                     break;
 
                 default:
                     return false;
-                    break;
             }
+            return true;
         } else {
             return false;
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
+?>
