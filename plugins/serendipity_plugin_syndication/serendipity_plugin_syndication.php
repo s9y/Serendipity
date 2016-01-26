@@ -1,5 +1,9 @@
 <?php
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 class serendipity_plugin_syndication extends serendipity_plugin {
     var $title = SYNDICATION;
 
@@ -9,18 +13,18 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         $propbag->add('description',   SHOWS_RSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.2.2');
+        $propbag->add('version',       '2.2.3');
         $propbag->add('configuration', array(
                                         'title',
                                         'big_img',
                                         'feed_format',
                                         'subToMe',
                                         'show_comment_feed',
-                                        'seperator',
+                                        'separator',
                                         'iconURL',
                                         'feed_name',
                                         'comment_name',
-                                        'seperator2',
+                                        'separator2',
                                         'fb_id',
                                         'custom_url'
                                        )
@@ -66,9 +70,9 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('default',     'false');
                 break;
 
-            case 'seperator':
-            case 'seperator2':
-                $propbag->add('type',        'seperator');
+            case 'separator':
+            case 'separator2':
+                $propbag->add('type',        'separator');
                 break;
 
             case 'iconURL':
@@ -112,7 +116,6 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('description', SYNDICATION_PLUGIN_CUSTOMURL_DESC);
                 $propbag->add('default',     '');
                 break;
-
 
             default:
                 return false;
@@ -208,7 +211,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         echo "</ul>\n";
     }
 
-    function generateFeedButton($feed, $label, $onclick, $icon, $small = false) {
+    function generateFeedButton($feed, $label, $onclick, $icon, $small = false)
+    {
         $link = 'href="'.$feed.'" '. $onclick;
         $output = '<li>';
         $class = "";
@@ -227,7 +231,8 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         return $output .= "</li>\n";
     }
 
-    function getOnclick($url) {
+    function getOnclick($url)
+    {
         return "onclick=\"document.subtomeBtn=this;document.subtomeBtn.dataset['subtomeFeeds']='". urlencode($url). "';var s=document.createElement('script');s.src='https://www.subtome.com/load.js';document.body.appendChild(s);return false;\"";
     }
 
