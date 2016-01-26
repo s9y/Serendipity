@@ -99,9 +99,9 @@ Builds the avatar.
 
 function wavatar_build ($filename, $seed, $size)
 {
-	if (!function_exists (imagecreatetruecolor)) {
-    	return false;
-	}
+    if (!function_exists (imagecreatetruecolor)) {
+        return false;
+    }
     $face =         1 + (hexdec (substr ($seed,  1, 2)) % (WAVATAR_FACES));
     $bg_color =         (hexdec (substr ($seed,  3, 2)) % 240);
     $fade =         1 + (hexdec (substr ($seed,  5, 2)) % (WAVATAR_BACKGROUNDS));
