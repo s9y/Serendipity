@@ -14,9 +14,9 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.9');
+        $propbag->add('version',       '1.10');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '5.2.0'
         ));
@@ -54,16 +54,19 @@ class serendipity_event_emoticate extends serendipity_event
 
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function getEmoticons() {
+    function getEmoticons()
+    {
         global $serendipity;
 
         /* Avoid multiple runs of serendipity_getTemplateFile(),
@@ -118,15 +121,18 @@ class serendipity_event_emoticate extends serendipity_event
         return $this->smilies;
     }
 
-    function humanReadableEmoticon($key) {
+    function humanReadableEmoticon($key)
+    {
         return str_replace(array('-?', '\\'), array('-', ''), $key);
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
-    function example() {
+    function example()
+    {
         $s  = sprintf(PLUGIN_EVENT_EMOTICATE_EXAMPLE_EXTEND_DESC, $serendipity['serendiptyHTTPPath'].'plugins/serendipity_event_emoticate/emoticons.inc.php.txt');
         $s .= '<table cellspacing="5" class="example_emos">';
         $s .= '<tr>';
@@ -144,30 +150,33 @@ class serendipity_event_emoticate extends serendipity_event
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
-        case 'extension':
-            $propbag->add('type', 'string');
-            $propbag->add('name',        PLUGIN_EVENT_EMOTICATE_EXTENSION);
-            $propbag->add('description', PLUGIN_EVENT_EMOTICATE_EXTENSION_BLAHBLAH);
-            $propbag->add('default', 'png');
-            break;
-        default:
-            $propbag->add('type',        'boolean');
-            $propbag->add('name',        constant($name));
-            $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-            $propbag->add('default', 'true');
+            case 'extension':
+                $propbag->add('type', 'string');
+                $propbag->add('name',        PLUGIN_EVENT_EMOTICATE_EXTENSION);
+                $propbag->add('description', PLUGIN_EVENT_EMOTICATE_EXTENSION_BLAHBLAH);
+                $propbag->add('default', 'png');
+                break;
+
+            default:
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        constant($name));
+                $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
+                $propbag->add('default', 'true');
+                break;
         }
         return true;
     }
 
-
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
-            switch($event) {
-                case 'frontend_display':
 
+            switch($event) {
+
+                case 'frontend_display':
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
                             !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
@@ -182,11 +191,13 @@ class serendipity_event_emoticate extends serendipity_event
                             }
                         }
                     }
-                    return true;
                     break;
 
                 case 'css_backend':
-?>
+                    $eventData .= '
+
+/* event emoticate plugin start */
+
 .example_emos {
     margin-left: auto;
     margin-right: auto;
@@ -194,28 +205,37 @@ class serendipity_event_emoticate extends serendipity_event
 .example_emos td {
     text-align: center;
 }
-<?php
+
+/* event emoticate plugin end */
+
+';
                 case 'css':
-?>
+                    $eventData .= '
+
+/* serendipity_event_emoticate start */
+
 .emoticon {
     display: inline;
     vertical-align: bottom;
     border: 0 none;
 }
-<?php
-                    return true;
+
+/* serendipity_event_emoticate end */
+
+';
                     break;
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_emoticate">' . PLUGIN_EVENT_EMOTICATE_TRANSFORM . '</div>';
                     }
-                    return true;
                     break;
 
-              default:
-                return false;
+                default:
+                    return false;
+
             }
+            return true;
         } else {
             return false;
         }
