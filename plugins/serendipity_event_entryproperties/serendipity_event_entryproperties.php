@@ -1,5 +1,9 @@
 <?php
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 class serendipity_event_entryproperties extends serendipity_event
@@ -15,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.39');
+        $propbag->add('version',       '1.40');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -58,7 +62,6 @@ class serendipity_event_entryproperties extends serendipity_event
                 ));
                 $propbag->add('default',     'public');
                 $propbag->add('radio_per_row', '1');
-
                 break;
 
             case 'customfields':
@@ -117,23 +120,29 @@ class serendipity_event_entryproperties extends serendipity_event
                 $propbag->add('default',     'sticky,frontpage,hiderss,access,password,groups,authors,author,markup');
                 break;
 
+            default:
+                return false;
         }
         return true;
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
     }
 
-    function &getValidAuthors() {
+    function &getValidAuthors()
+    {
         global $serendipity;
 
         if (serendipity_checkPermission('adminUsersMaintainOthers')) {
@@ -147,8 +156,8 @@ class serendipity_event_entryproperties extends serendipity_event
         return $users;
     }
 
-
-    function updateCache(&$entry) {
+    function updateCache(&$entry)
+    {
         global $serendipity;
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entryproperties WHERE entryid = " . (int)$entry['id'] . " AND property LIKE 'ep_cache_%'");
@@ -158,7 +167,8 @@ class serendipity_event_entryproperties extends serendipity_event
         serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entryproperties (entryid, property, value) VALUES (" . (int)$entry['id'] . ", 'ep_cache_extended', '" . serendipity_db_escape_string($entry['extended']) . "')");
     }
 
-    function getSupportedProperties() {
+    function getSupportedProperties()
+    {
         static $supported_properties = null;
 
         if ($supported_properties === null) {
@@ -185,7 +195,8 @@ class serendipity_event_entryproperties extends serendipity_event
         return $supported_properties;
     }
 
-    function returnQueryCondition($is_cache) {
+    function returnQueryCondition($is_cache)
+    {
         $and = '';
         if (!$is_cache) {
             $and = " AND property NOT LIKE 'ep_cache_%' ";
@@ -194,11 +205,12 @@ class serendipity_event_entryproperties extends serendipity_event
         return $and;
     }
 
-    /*
+    /**
      * This function converts specific property fields so that they are
      * available natively to other plugins/templates.
      */
-    function applyProperties(&$properties) {
+    function applyProperties(&$properties)
+    {
         global $serendipity;
 
         if (is_array($properties['disable_markups'])) {
@@ -208,7 +220,8 @@ class serendipity_event_entryproperties extends serendipity_event
         }
     }
 
-    function addProperties(&$properties, &$eventData) {
+    function addProperties(&$properties, &$eventData)
+    {
         global $serendipity;
 
         // Get existing data
@@ -243,7 +256,7 @@ class serendipity_event_entryproperties extends serendipity_event
         serendipity_plugin_api::hook_event('backend_entryproperties', $supported_properties);
 
         foreach($supported_properties AS $prop_key) {
-            // Do not delete a property if it is not subbmitted to this function, because serendipity_updertEntry
+            // Do not delete a property if it is not submitted to this function, because serendipity_updertEntry
             // possibly only wants to update entry metadata and left out any specific properties, which need to be kept.
             // An empty string like "" will properly remove an entryproperty, and POST values will always set an array index to an empty string.
             // $serendipipty['POST']['propertyform'] will be set whenever the entryeditor was properly displayed and unticked checkboxes shall remain.
@@ -269,7 +282,8 @@ class serendipity_event_entryproperties extends serendipity_event
         }
     }
 
-    function showPasswordform() {
+    function showPasswordform()
+    {
         global $serendipity;
         $url = serendipity_currentURL(true);
 
@@ -284,38 +298,40 @@ class serendipity_event_entryproperties extends serendipity_event
 
     }
 
-    function showBackend($element, $eventData, $is_sticky, $no_frontpage, $hiderss, $access_values, $access, $password, $use_groups, $access_groups, $use_users, $access_users, $more = array()) {
+    function showBackend($element, $eventData, $is_sticky, $no_frontpage, $hiderss, $access_values, $access, $password, $use_groups, $access_groups, $use_users, $access_users, $more = array())
+    {
         global $serendipity;
 
         switch($element) {
-        case 'sticky':
+
+            case 'sticky':
 ?>
             <div class="entryproperties_sticky adv_opts_box form_check">
                 <input id="properties_is_sticky" name="serendipity[properties][is_sticky]" type="checkbox" value="true" <?php echo $is_sticky; ?>>
                 <label for="properties_is_sticky"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_STICKYPOSTS; ?></label>
             </div>
 <?php
-            return true;
+                break;
 
-        case 'frontpage':
+            case 'frontpage':
 ?>
             <div class="entryproperties_frontpage adv_opts_box form_check">
                 <input id="properties_no_frontpage" name="serendipity[properties][no_frontpage]" type="checkbox" value="true" <?php echo $no_frontpage; ?>>
                 <label for="properties_no_frontpage"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_NO_FRONTPAGE; ?></label>
             </div>
 <?php
-            return true;
+                break;
 
-        case 'hiderss':
+            case 'hiderss':
 ?>
             <div class="entryproperties_hiderss adv_opts_box form_check">
                 <input id="properties_hiderss" name="serendipity[properties][hiderss]" type="checkbox" value="true" <?php echo $hiderss; ?>>
                 <label for="properties_hiderss"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_HIDERSS; ?></label>
             </div>
 <?php
-            return true;
+                break;
 
-        case 'access':
+            case 'access':
 ?>
             <fieldset class="entryproperties_access_list adv_opts_box">
                 <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_ACCESS; ?>:</legend></span>
@@ -334,9 +350,9 @@ class serendipity_event_entryproperties extends serendipity_event
                 </div>
             </fieldset>
 <?php
-            return true;
+                break;
 
-        case 'password':
+            case 'password':
 ?>
             <div class="entryproperties_access_pw adv_opts_box adv_opts_box form_field">
                 <label for="properties_access_pw"><?php echo PASSWORD; ?>:</label>
@@ -344,52 +360,50 @@ class serendipity_event_entryproperties extends serendipity_event
                 <input id="properties_access_pw" name="serendipity[properties][entrypassword]" type="password" autocomplete="off" value="<?php echo serendipity_specialchars($password); ?>">
             </div>
 <?php
-            return true;
+                break;
 
-        case 'groups':
-            if ($use_groups) {
-                $my_groups = serendipity_getGroups($serendipity['authorid']);
+            case 'groups':
+                if ($use_groups) {
+                    $my_groups = serendipity_getGroups($serendipity['authorid']);
 ?>
             <div class="entryproperties_access_groups adv_opts_box form_multiselect">
                 <label for="properties_access_groups"><?php echo PERM_READ . ': ' . GROUP; ?></label>
 
                 <select id="properties_access_groups" name="serendipity[properties][access_groups][]" multiple="multiple" size="4" onchange="document.getElementById('properties_access_member').checked = true;">
 <?php
-                foreach($my_groups AS $group) {
-                    if ('USERLEVEL_' == substr($group['confvalue'], 0, 10)) {
-                        $group['name'] = constant($group['confvalue']);
-                    }
+                    foreach($my_groups AS $group) {
+                        if ('USERLEVEL_' == substr($group['confvalue'], 0, 10)) {
+                            $group['name'] = constant($group['confvalue']);
+                        }
 ?>
                     <option value="<?php echo $group['id']; ?>" <?php echo (in_array($group['id'], $access_groups) ? 'selected="selected"' : ''); ?>><?php echo serendipity_specialchars($group['name']); ?></option>
 <?php
+                    }
+                    echo '</select>';
+                    echo '</div>';
                 }
-                echo '</select>';
-            echo '</div>';
-            }
+                break;
 
-            return true;
-
-        case 'authors':
-            if ($use_users) {
+            case 'authors':
+                if ($use_users) {
 ?>
             <div class="entryproperties_access_users adv_opts_box form_multiselect">
                 <label for="properties_access_users"><?php echo PERM_READ . ': '. AUTHOR; ?></label>
 
                 <select id="properties_access_users" name="serendipity[properties][access_users][]" multiple="multiple" size="4" onchange="document.getElementById('properties_access_member').checked = true;">
 <?php
-                $users = serendipity_fetchUsers('', 'hidden');
-                foreach($users AS $user) {
+                    $users = serendipity_fetchUsers('', 'hidden');
+                    foreach($users AS $user) {
 ?>
                     <option value="<?php echo $user['authorid']; ?>" <?php echo (in_array($user['authorid'], $access_users) ? 'selected="selected"' : ''); ?>><?php echo serendipity_specialchars($user['realname']); ?></option>
 <?php
+                    }
+                    echo '</select>';
+                    echo '</div>';
                 }
-                echo '</select>';
-            echo '</div>';
-            }
+                break;
 
-            return true;
-
-        case 'author':
+            case 'author':
 ?>
             <div class="entryproperties_access_author adv_opts_box form_select">
                 <label for="properties_access_author"><?php echo AUTHOR; ?>:</label>
@@ -411,10 +425,9 @@ class serendipity_event_entryproperties extends serendipity_event
                 </select>
             </div>
 <?php
-            return true;
+                break;
 
-
-        case 'markup':
+            case 'markup':
 ?>
             <div class="entryproperties_markup adv_opts_box form_multiselect">
                 <label for="properties_markup"><?php echo PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP; ?></label>
@@ -449,9 +462,9 @@ class serendipity_event_entryproperties extends serendipity_event
                 </select>
             </div>
 <?php
-            return true;
+                break;
 
-        case 'customfields':
+            case 'customfields':
 ?>
             <div class="entryproperties_customfields adv_opts_box">
 <?php
@@ -506,11 +519,12 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
             </div>
 <?php
-            return true;
+                break;
         }
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
         static $is_cache = null;
         static $use_groups = null;
@@ -527,10 +541,11 @@ class serendipity_event_entryproperties extends serendipity_event
         }
 
         if (isset($hooks[$event])) {
+
             switch($event) {
+
                 case 'frontend_entryproperties_query':
                     $eventData['and'] = $this->returnQueryCondition($is_cache);
-                    return true;
                     break;
 
                 case 'backend_display':
@@ -600,8 +615,6 @@ class serendipity_event_entryproperties extends serendipity_event
 ?>
                     </div>
 <?php
-
-                    return true;
                     break;
 
                 case 'backend_maintenance':
@@ -610,7 +623,6 @@ class serendipity_event_entryproperties extends serendipity_event
                         echo '<h3>'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</h3>';
                         echo '<a class="button_link build_cache" href="?serendipity[adminModule]=event_display&amp;serendipity[adminAction]=buildcache" data-delmsg="'. PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_FETCHNEXT .'">'. PLUGIN_EVENT_ENTRYPROPERTY_BUILDCACHE .'</a></section>';
                     }
-                    return true;
                     break;
 
                 case 'backend_import_entry':
@@ -620,7 +632,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         $props['no_nl2br'] = 'true';
                         $this->addProperties($props, $eventData);
                     }
-                break;
+                    break;
 
                 case 'backend_sidebar_entries_event_display_buildcache':
                     if ($is_cache) {
@@ -667,7 +679,6 @@ class serendipity_event_entryproperties extends serendipity_event
                             echo '<span class="msg_notice"><span class="icon-info-circled"></span>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
                         }
                     }
-                    return true;
                     break;
 
                 case 'backend_cache_entries':
@@ -691,7 +702,6 @@ class serendipity_event_entryproperties extends serendipity_event
                             $this->updateCache($entry);
                         }
                     }
-                    return true;
                     break;
 
                 case 'backend_cache_purge':
@@ -739,8 +749,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     }
 
                     $this->addProperties($serendipity['POST']['properties'], $eventData);
-
-                    return true;
                     break;
 
                 case 'frontend_configure':
@@ -762,7 +770,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     foreach($properties AS $idx => $row) {
                         $eventData[$addData[$row['entryid']]]['properties'][$row['property']] = $row['value'];
                     }
-                    return true;
                     break;
 
                 case 'entry_display':
@@ -793,7 +800,6 @@ class serendipity_event_entryproperties extends serendipity_event
                                 $eventData[0]['properties']['ep_' . $prop_key] = $serendipity['POST']['properties'][$prop_key];
                         }
                     }
-
                     break;
 
                 case 'entries_header':
@@ -909,8 +915,6 @@ class serendipity_event_entryproperties extends serendipity_event
                     } else {
                         $eventData['joins'] .= $cond;
                     }
-
-                    return true;
                     break;
 
                 case 'frontend_entries_rss':
@@ -923,7 +927,6 @@ class serendipity_event_entryproperties extends serendipity_event
                             }
                         }
                     }
-                    return true;
                     break;
 
                 case 'backend_plugins_new_instance':
@@ -946,18 +949,17 @@ class serendipity_event_entryproperties extends serendipity_event
                     // Set current plugin as last plugin in queue.
                     $q = "UPDATE {$serendipity['dbPrefix']}plugins SET sort_order = " . intval($rs[0]) . " WHERE name = '" . $this->instance . "'";
                     serendipity_db_query($q);
-
-                    return true;
                     break;
 
                 default:
                     return false;
-                    break;
             }
+            return true;
         } else {
             return false;
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
