@@ -1,8 +1,13 @@
-<?php # $Id$
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-class serendipity_plugin_templatedropdown extends serendipity_plugin {
+class serendipity_plugin_templatedropdown extends serendipity_plugin
+{
     var $title = PLUGIN_TEMPLATEDROPDOWN_NAME;
 
     function introspect(&$propbag)
@@ -13,9 +18,9 @@ class serendipity_plugin_templatedropdown extends serendipity_plugin {
         $propbag->add('description',   PLUGIN_TEMPLATEDROPDOWN_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Evan Nemerson');
-        $propbag->add('version',       '1.2');
+        $propbag->add('version',       '1.3');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -46,32 +51,34 @@ class serendipity_plugin_templatedropdown extends serendipity_plugin {
                 break;
 
             default:
-                    return false;
+                return false;
         }
         return true;
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         global $serendipity;
 
         $title = $this->get_config('title', $this->title);
 
         $url = serendipity_currentURL(true);
 
-        echo '<form id="theme_chooser" action="' . $url . '" method="post">';
-        echo '<select name="user_template" onchange="document.getElementById(\'theme_chooser\').submit();">';
+        echo '<form id="theme_chooser" action="' . $url . '" method="post">'."\n";
+        echo '<select name="user_template" onchange="document.getElementById(\'theme_chooser\').submit();">'."\n";
         foreach (serendipity_fetchTemplates() as $template) {
             if ($template == 'default-php' || $template == 'default-xml') continue;
             $templateInfo = serendipity_fetchTemplateInfo($template);
-            echo '<option value="' . $template . '" ' . (serendipity_get_config_var('template', 'default') == $template ? 'selected="selected"' : '') . '>' . substr($templateInfo['name'], 0, 25) . '</option>';
+            echo '    <option value="' . $template . '" ' . (serendipity_get_config_var('template', 'default') == $template ? 'selected="selected"' : '') . '>' . substr($templateInfo['name'], 0, 25) . "</option>\n";
         }
-        echo '</select>';
+        echo "</select>\n";
 
-        if ($this->get_config('show_submit', 'false') == 'true') {
-            echo '<input type="submit" name="submit" value="' . GO . '" size="4" />';
+        if (serendipity_db_bool($this->get_config('show_submit', 'false'))) {
+            echo '<input type="submit" name="submit" value="' . GO . '" size="4" />'."\n";
         }
-        echo '</form>';
+        echo "</form>\n";
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
