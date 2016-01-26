@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_plug extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_plug extends serendipity_plugin
+{
     var $title = POWERED_BY;
 
     function introspect(&$propbag)
@@ -9,7 +14,7 @@ class serendipity_plugin_plug extends serendipity_plugin {
         $propbag->add('description',   ADVERTISES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.1');
+        $propbag->add('version',       '1.2');
         $propbag->add('configuration', array(
                                         'image',
                                         'text'));
@@ -32,6 +37,7 @@ class serendipity_plugin_plug extends serendipity_plugin {
                 $propbag->add('description', POWERED_BY_SHOW_TEXT_DESC);
                 $propbag->add('default',     'true');
                 break;
+
             default:
                 return false;
         }
@@ -45,10 +51,10 @@ class serendipity_plugin_plug extends serendipity_plugin {
         $title = $this->title;
 ?>
 <div class="serendipityPlug">
-<?php if ( $this->get_config('image', 'true') == 'true' ) { ?>
+<?php if (serendipity_db_bool($this->get_config('image', 'true'))) { ?>
     <a title="<?php echo $title ?> Serendipity" href="http://www.s9y.org/"><img src="<?php echo serendipity_getTemplateFile('img/s9y_banner_small.png') ?>" alt="Serendipity PHP Weblog" style="border: 0px" /></a>
 <?php } ?>
-<?php if ( $this->get_config('text', 'false') == 'true' ) { ?>
+<?php if (serendipity_db_bool($this->get_config('text', 'false'))) { ?>
     <div>
         <a title="<?php echo $title ?> Serendipity" href="http://www.s9y.org/">Serendipity PHP Weblog</a>
     </div>
@@ -56,6 +62,7 @@ class serendipity_plugin_plug extends serendipity_plugin {
 </div>
 <?php
     }
+
 }
 
 ?>
