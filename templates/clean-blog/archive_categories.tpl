@@ -29,4 +29,6 @@
             {assign var="prevdepth" value=$plugin_category.catdepth}       
         {/foreach}
     </ul>
+{else}
+    <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$CONST.CATEGORIES_ON_ARCHIVE_DESC}</p>
 {/if}

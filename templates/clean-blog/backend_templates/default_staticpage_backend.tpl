@@ -129,24 +129,6 @@
                 </div>
             </div>
             <div class="clearfix">
-{* CUSTOM TO THIS THEME - OPTION TO SHOW/HIDE AUTHOR NAME *}            
-                <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{$CONST.STATIC_SHOW_AUTHOR_TITLE}">{$CONST.STATIC_SHOW_AUTHOR_TEXT}</label><br />
-                    <input id="author_yes" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author == 'true'}checked="checked"{/if}value="true" />
-                    <label for="author_yes">{$CONST.YES}</label>
-                    <input id="author_no" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author != 'true'}checked="checked"{/if} value="false" />
-                    <label for="author_no">{$CONST.NO}</label>
-                </div>
-{* CUSTOM TO THIS THEME - OPTION TO SHOW/HIDE DATE *}
-                <div class="entryproperties_access_groups adv_opts_box form_select">
-                    <label class="sp_label" title="{$CONST.STATIC_SHOW_DATE_TITLE}">{$CONST.STATIC_SHOW_DATE_TEXT}</label><br />
-                    <input id="date_yes" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date == 'true'}checked="checked"{/if}value="true" />
-                    <label for="date_yes">{$CONST.YES}</label>
-                    <input id="date_no" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date != 'true'}checked="checked"{/if}value="false" />
-                    <label for="date_no">{$CONST.NO}</label>
-                </div>
-            </div>        
-            <div class="clearfix">
                 <div class="entryoptions_customfields adv_opts_box">
                     <label class="sp_label" title="{staticpage_input item="pre_content" what="desc"|escape:js}">{staticpage_input item="pre_content" what="name"|escape:js}</label><br />
                     {staticpage_input item="pre_content"}
@@ -212,6 +194,24 @@
                 {staticpage_input item="articleformat"}
             </div>
         </div> 
+{* CUSTOM TO THIS THEME - OPTION TO SHOW/HIDE AUTHOR NAME *}              
+        <div class="clearfix">
+            <div class="entryproperties_access_groups adv_opts_box form_select">
+                <label class="sp_label" title="{$CONST.STATIC_SHOW_AUTHOR_TITLE}">{$CONST.STATIC_SHOW_AUTHOR_TEXT}</label><br />
+                <input id="author_yes" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author == 'true'}checked="checked"{/if}value="true" />
+                <label for="author_yes">{$CONST.YES}</label>
+                <input id="author_no" type="radio" name="serendipity[plugin][custom][show_author]" {if $form_values.custom.show_author != 'true'}checked="checked"{/if} value="false" />
+                <label for="author_no">{$CONST.NO}</label>
+            </div>
+{* CUSTOM TO THIS THEME - OPTION TO SHOW/HIDE DATE *}
+            <div class="entryproperties_access_groups adv_opts_box form_select">
+                <label class="sp_label" title="{$CONST.STATIC_SHOW_DATE_TITLE}">{$CONST.STATIC_SHOW_DATE_TEXT}</label><br />
+                <input id="date_yes" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date == 'true'}checked="checked"{/if}value="true" />
+                <label for="date_yes">{$CONST.YES}</label>
+                <input id="date_no" type="radio" name="serendipity[plugin][custom][show_date]" {if $form_values.custom.show_date != 'true'}checked="checked"{/if}value="false" />
+                <label for="date_no">{$CONST.NO}</label>
+            </div>
+        </div>        
     </section>
     
         

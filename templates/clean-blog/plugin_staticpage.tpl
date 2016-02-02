@@ -43,20 +43,12 @@
     {/if}
     {if $staticpage_navigation AND $staticpage_shownavi}
         <nav role="navigation">
-            <ul class="pager">
-                {if $footer_prev_page}<li class="previous"><a href="{$footer_prev_page}">&larr; {$CONST.PREVIOUS_PAGE}</a></li>{/if}
-                {if $footer_next_page}<li class="next"><a href="{$footer_next_page}">{$CONST.NEXT_PAGE} &rarr;</a></li>{/if}
+            <ul class="pager staticpage_navigation">
+              {if $staticpage_navigation.prev.link}<li class="previous"><a href="{$staticpage_navigation.prev.link}" title="prev"><i class="fa fa-arrow-left" aria-hidden="true"></i>  {$staticpage_navigation.prev.name|@escape}</a></li>{/if}
+              {if $staticpage_navigation.next.link}<li class="next"><a href="{$staticpage_navigation.next.link}" title="next">{$staticpage_navigation.next.name|@escape} <i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>{/if}
             </ul>
         </nav>
-    {/if} 
-        {if $staticpage_navigation AND $staticpage_shownavi}
-            <nav role="navigation">
-                <ul class="pager staticpage_navigation">
-                  {if $staticpage_navigation.prev.link}<li class="previous"><a href="{$staticpage_navigation.prev.link}" title="prev"><i class="fa fa-arrow-left" aria-hidden="true"></i>  {$staticpage_navigation.prev.name|@escape}</a></li>{/if}
-                  {if $staticpage_navigation.next.link}<li class="next"><a href="{$staticpage_navigation.next.link}" title="next">{$staticpage_navigation.next.name|@escape} <i class="fa fa-arrow-right" aria-hidden="true"></i></a></li>{/if}
-                </ul>
-            </nav>
-        {/if}    
+    {/if}    
     {if $staticpage_custom.show_author =='true' || $staticpage_custom.show_date =='true' || ($staticpage_adminlink && $staticpage_adminlink.page_user)}
         <footer class="staticpage-footer">
             <p class="post-meta">           
