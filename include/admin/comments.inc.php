@@ -4,17 +4,6 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-$trusted = false;
-
-if ($serendipity['serendipityUserlevel'] == 0 && $serendipity['GET']['authorid'] == $serendipity['authorid']) {
-    $serendipity['POST'] = $serendipity['GET'];
-    $trusted = true;
-}
-
-if (!serendipity_checkPermission('adminComments') && !$trusted) {
-    return;
-}
-
 $data = array();
 
 $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10);

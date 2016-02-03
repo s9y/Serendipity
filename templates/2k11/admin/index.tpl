@@ -126,20 +126,15 @@
                     </ul>
                 </li>
                 {/if}
-                {if 'adminComments'|checkPermission}
 
                 <li><h3>{$CONST.MENU_ACTIVITY}</h3>
                     <ul>
-                    {if 'adminComments'|checkPermission}
-
                         <li><a href="serendipity_admin.php?serendipity[adminModule]=comments">{$CONST.COMMENTS}</a></li>
-                    {/if}
-                    {if $admin_vars.no_create !== true}
+                    {if 'adminPlugins'|checkPermission AND $admin_vars.no_create !== true}
                         {serendipity_hookPlugin hook="backend_sidebar_admin_appearance" hookAll="true"}
                     {/if}
                     </ul>
                 </li>
-                {/if}
                 {if 'adminUsersGroups'|checkPermission OR 'adminImport'|checkPermission OR 'siteConfiguration'|checkPermission OR 'blogConfiguration'|checkPermission OR 'adminUsers'|checkPermission OR 'adminTemplates'|checkPermission OR 'adminPlugins'|checkPermission}
 
                 <li><h3>{$CONST.MENU_SETTINGS}</h3>
