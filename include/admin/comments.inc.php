@@ -4,7 +4,14 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (!serendipity_checkPermission('adminComments')) {
+$trusted = false;
+
+if ($serendipity['serendipityUserlevel'] == 0 && $serendipity['GET']['authorid'] == $serendipity['authorid']) {
+    $serendipity['POST'] = $serendipity['GET'];
+    $trusted = true;
+}
+
+if (!serendipity_checkPermission('adminComments') && !$trusted) {
     return;
 }
 

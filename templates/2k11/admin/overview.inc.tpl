@@ -48,15 +48,15 @@
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody|escape}</div>
 
                     <ul class="plainList actions">
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                     {/if}
                     {if ($comment.status == 'approved')}
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
                     {/if}
-                        <li><a class="button_link comments_delete" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;{$urltoken}" data-delmsg='{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}' title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
+                        <li><a class="button_link comments_delete" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" data-delmsg='{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}' title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
                         </li>
                     {if $comment.excerpt}
                         <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
@@ -97,7 +97,7 @@
 
                     </ul>
                 {if !$showFutureEntries && ($entry.timestamp >= $serverOffsetHour) && $entry.isdraft == "false"}
-                    <span class="entry_status status_future" title="{$CONST.SCHEDULED}: {$CONST.ENTRY_PUBLISHED_FUTURE}">{$entry.timestamp|@formatTime:$CONST.DATE_FORMAT_SHORT}</span>
+                    <span class="entry_status status_future" title="{$CONST.SCHEDULED}: {$CONST.ENTRY_PUBLISHED_FUTURE}">{$entry.timestamp|formatTime:$CONST.DATE_FORMAT_SHORT}</span>
                 {/if}
                 {if $entry.properties.ep_is_sticky}
                     <span class="entry_status status_sticky">{$CONST.STICKY_POSTINGS}</span>

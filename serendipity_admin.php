@@ -174,10 +174,7 @@ if (!$use_installer && $is_logged_in) {
             break;
 
         case 'comments':
-            if (!serendipity_checkPermission('adminComments')) {
-                break;
-            }
-
+            // perms are checked inside
             include S9Y_INCLUDE_PATH . 'include/admin/comments.inc.php';
             $admin_section = COMMENTS;
             break;
