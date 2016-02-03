@@ -4,13 +4,13 @@
         <input type="hidden" name="installAction" value="check">
         {$formToken}
 {/if}
-{if $config|@sizeof > 1 AND $allowToggle}
+{if $config|sizeof > 1 AND $allowToggle}
     <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
 {/if}
     <div id="serendipity_config_options">
     {foreach $config as $category}
         <div class="configuration_group">
-        {if $config|@sizeof > 1}
+        {if $config|sizeof > 1}
             {if $allowToggle}
                 <h3 class="toggle_headline">
                     <button id="optionel{$category@iteration}" class="show_config_option icon_link {if $category@first}show_config_option_now{/if}" type="button" data-href="#el{$category@index}" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$category.title}</button>
@@ -36,7 +36,7 @@
                     </div>
                 </fieldset>
                 {else}
-                <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}{if $item.description != ''} has_info{/if}" {if $item.ignore}style="display: none;"{/if}>
+                <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}{if $item.description != ''} has_info{/if}">
                     <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><b>i</b><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
                     {if $item.description != ''}
                     <span id="{$item.var}_info" class="field_info additional_info">{$item.description}</span>
