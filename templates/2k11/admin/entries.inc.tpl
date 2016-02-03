@@ -23,12 +23,12 @@
                     <label for="filter_author">{$CONST.AUTHOR}</label>
                     <select id="filter_author" name="serendipity[filter][author]">
                         <option value="">-</option>
-                    {if is_array($users)}
-                        {foreach $users AS $user}
+                {if is_array($users)}
+                    {foreach $users AS $user}
                         {if isset($user.artcount) && $user.artcount < 1}{continue}{/if}
                         <option value="{$user.authorid}" {(isset($get.filter.author) && ($get.filter.author == $user.authorid)) ? 'selected' : ''}>{$user.realname|escape}</option>
-                        {/foreach}
-                    {/if}
+                    {/foreach}
+                {/if}
                     </select>
                 </div>
 
@@ -156,7 +156,7 @@
 
                     <div class="entry_info clearfix">
                         <span class="status_timestamp">
-                            {$entry.timestamp|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <span class="icon-info-circled" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|@formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span>{/if}
+                            {$entry.timestamp|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <span class="icon-info-circled" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span>{/if}
                         </span>
 
                         <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
