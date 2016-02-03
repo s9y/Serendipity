@@ -120,7 +120,7 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'multidelete':
-        if (!serendipity_checkFormToken()) {
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDirectories')) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
         if (!is_array($serendipity['POST']['multiDelete']) && isset($_POST['toggle_move'])) {
@@ -635,7 +635,8 @@ switch ($serendipity['GET']['adminAction']) {
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
             'extraParems'       => serendipity_generateImageSelectorParems(),
-            'manage'            => isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true
+            'manage'            => isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true,
+            'multiperm'         => serendipity_checkPermission('adminImagesDirectories')
         );
         // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);

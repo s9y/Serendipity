@@ -1,6 +1,8 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Fix missing perm checks for "standard user" in MediaLibrary
+
     * Fix show Dashboard entries by authors entries
 
     * Fix show Dashboard comments by authors entries (#385)

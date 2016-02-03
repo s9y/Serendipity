@@ -237,7 +237,7 @@
 
     <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
-    {if $media.manage}
+    {if $media.manage AND $media.multiperm}
 
     <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
         {$media.token}
@@ -249,7 +249,7 @@
         <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
             {$MEDIA_ITEMS}
 
-        {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
+        {if ($media.page != 1 AND $media.page <= $media.pages) OR $media.page != $media.pages}
 
             <nav class="pagination">
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
@@ -266,7 +266,7 @@
 
         </div>{* media pane end *}
 
-    {if $media.manage}
+    {if $media.manage AND $media.multiperm}
 
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
