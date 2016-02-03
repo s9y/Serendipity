@@ -6,9 +6,11 @@
     <div id="dashboard" class="clearfix">
     {if $published}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_PUBLISHED|sprintf:$published|escape}</span>
+        <hr class="separator">
     {/if}
     {if $error_publish}
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
+        <hr class="separator">
     {/if}
 
     {if $updateCheck == "stable" || $updateCheck == "beta"}
