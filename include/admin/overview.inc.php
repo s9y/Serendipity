@@ -67,7 +67,7 @@ $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
             WHERE e.authorid = " . (int)$serendipity['authorid']
         : '';
-$cquery = "SELECT c.*, e.title
+$cquery = "SELECT c.*, e.title, e.authorid
              FROM {$serendipity['dbPrefix']}comments c
         LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
         " . $cjoin ."
