@@ -11,7 +11,7 @@
         <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
     {/if}
 
-    {if $updateCheck == "stable" || $updateCheck == "beta" }
+    {if $updateCheck == "stable" || $updateCheck == "beta"}
         {if $curVersion == -1}
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
