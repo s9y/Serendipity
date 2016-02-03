@@ -3,12 +3,12 @@
         <h2>{if $staticpage_articleformat}{if $staticpage_articleformattitle}{$staticpage_articleformattitle|@escape}{else}{$staticpage_pagetitle}{/if}{else}{if $staticpage_headline}{$staticpage_headline|@escape}{else}{$staticpage_pagetitle}{/if}{/if}</h2>
         {if $staticpage_show_breadcrumb}
             <div class="staticpage_breadcrumbs">
-                <a href="{$serendipityBaseURL}" title="{$CONST.HOMEPAGE}">{$template_option.home_link_text}</a>
+                <a href="{$serendipityBaseURL}" title="{$CONST.HOMEPAGE}">{$blogTitle}</a>
                 {foreach name="crumbs" from=$staticpage_navigation.crumbs item="crumb"}
-                    &raquo; {if !$smarty.foreach.crumbs.last}<a href="{$crumb.link}">{/if}{$crumb.name|@escape}</a>
+                    &nbsp;/&nbsp; {if !$smarty.foreach.crumbs.last}<a href="{$crumb.link}">{/if}{$crumb.name|@escape}</a>
                 {/foreach}
             </div>
-        {/if}        
+        {/if}      
     </header>
     {if $staticpage_pass AND $staticpage_form_pass != $staticpage_pass}
         <form class="staticpage_password_form" action="{$staticpage_form_url}" method="post">
