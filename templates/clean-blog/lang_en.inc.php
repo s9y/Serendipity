@@ -21,6 +21,8 @@
 @define('THEME_CUSTOM_FIELD_DEFINITION','These optional fields are only available when using this theme (clean blog).  The event plugin serendipity_event_entryproperties (extended properties for entries) must also be installed to use these fields.  The Entry Subtitle field is displayed below the entry title and should be a brief post summary.  The entry header image field will overide the default entry header image for this specific entry.');
 @define('THEME_ENTRY_SUBTITLE','Entry Subtitle');
 @define('THEME_ENTRY_HEADER_IMAGE','Entry Header Image');
+@define('THEME_DEMO_AVAILABLE', 'A complete English explanation of <a href="http://www.optional-necessity.com/demo/cleanblog/archives/8-Using-the-Clean-Blog-theme.html">configuring and using Clean Blog</a> can be found on the <a href="http://www.optional-necessity.com/demo/cleanblog/">Clean Blog demo</a>.');
+
 
 // Header Images
 @define('DEFAULT_HEADER_IMAGE', 'Default header image');
