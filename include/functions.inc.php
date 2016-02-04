@@ -46,7 +46,10 @@ function serendipity_truncateString($s, $len) {
  */
 function serendipity_gzCompression() {
     global $serendipity;
-    if (isset($serendipity['useGzip']) && serendipity_db_bool($serendipity['useGzip']) && function_exists('ob_gzhandler') && extension_loaded('zlib') && serendipity_ini_bool(ini_get('zlib.output_compression')) == false && serendipity_ini_bool(ini_get('session.use_trans_sid')) == false) {
+    if (isset($serendipity['useGzip']) && serendipity_db_bool($serendipity['useGzip'])
+        && function_exists('ob_gzhandler') && extension_loaded('zlib')
+        && serendipity_ini_bool(ini_get('zlib.output_compression')) == false
+        && serendipity_ini_bool(ini_get('session.use_trans_sid')) == false) {
         ob_start("ob_gzhandler");
     }
 }
@@ -1160,7 +1163,8 @@ function serendipity_build_query(&$array, $array_prefix = null, $comb_char = '&a
     return implode($comb_char, $ret);
 }
 
-/* Picks a specified key from an array and returns it
+/**
+ * Picks a specified key from an array and returns it
  *
  * @access public
  * @param   array   The input array
@@ -1188,7 +1192,8 @@ function &serendipity_pickKey(&$array, $key, $default) {
     return $default;
 }
 
-/* Retrieves the current timestamp but only deals with minutes to optimize Database caching
+/**
+ * Retrieves the current timestamp but only deals with minutes to optimize Database caching
  * @access public
  * @return timestamp
  * @author Matthew Groeninger
@@ -1205,23 +1210,23 @@ function serendipity_db_time() {
     return $ts;
 }
 
-/* Inits the logger.
+/**
+ * Inits the logger.
  * @return null
  */
 function serendipity_initLog() {
     global $serendipity;
 
     if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
-	if ($serendipity['logLevel'] == 'debug') {
-	    $log_level = Psr\Log\LogLevel::DEBUG;
-	} else {
-	    $log_level = Psr\Log\LogLevel::ERROR;
-	}
-
-	$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
+        if ($serendipity['logLevel'] == 'debug') {
+            $log_level = Psr\Log\LogLevel::DEBUG;
+        } else {
+            $log_level = Psr\Log\LogLevel::ERROR;
+        }
+        $serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
     }
 }
-                                                                     
+
 
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */

@@ -438,7 +438,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 function serendipity_printCommentsByAuthor() {
     global $serendipity;
 
-    $type      = serendipity_db_escape_string($serendipity['GET']['commentMode']);
+    $type = serendipity_db_escape_string($serendipity['GET']['commentMode']);
 
     if ($type == 'comments' || empty($type)) {
         $type = 'NORMAL';

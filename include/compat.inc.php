@@ -216,7 +216,6 @@ document.body.insertBefore(fragment, document.body.childNodes[0]);
     }
 }
 
-
 if (!function_exists('file_get_contents')) {
     function file_get_contents($filename, $use_include_path = 0) {
         $file = fopen($filename, 'rb', $use_include_path);
@@ -332,7 +331,6 @@ if (ini_get('magic_quotes_gpc')) {
         array_walk($_FILES,   'serendipity_strip_quotes');
     }
 }
-
 
 // Merge get and post into the serendipity array
 $serendipity['GET']    = &$_GET['serendipity'];
