@@ -1,55 +1,34 @@
-/* This is the templates/default/style_fallback.css file.
-   It emits CSS rules that all templates should have.
-   Classes are declared on top of the file, so if you
-   want to make changes in your own template, you
-   should override the rules on the bottom of your
-   style.css template.
+/* The templates/default/style_fallback.css emits CSS statements that all s9y
+   themes should have.
+
+   Statements declared in this file are emitted early in the dynamically
+   generated stylesheet serendipity.css, so you can override them by declaring
+   them again in your theme's style.css or user.css.
+
    IT IS NOT ADVISED TO CREATE YOUR OWN style_fallback.css FILE! */
 
-/* Default image classes for left/right/usual layout */
+/* Images positioned normal/left/right */
 .serendipity_image_center {
-  border: 0px;
+  border: 0;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .serendipity_image_left {
   float: left;
-  border: 0px;
+  border: 0;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .serendipity_image_right {
   float: right;
-  border: 0px;
+  border: 0;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-/* Default listing without spacers */
-.plainList {
-    list-style: none;
-    margin-left: 0;
-    padding-left: 0;
-}
-
-/* Messages: Centered, important, notice */
-.serendipity_center {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.serendipity_msg_important {
-    color: red;
-}
-
-.serendipity_msg_notice {
-    color: green;
-}
-
-/* Embedded images with comments inside the s9y image manager */
+/* Images with captions and positioning */
 .serendipity_imageComment_center,
 .serendipity_imageComment_left,
 .serendipity_imageComment_right {
@@ -74,18 +53,40 @@
 
 .serendipity_imageComment_img,
 .serendipity_imageComment_img img {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
 .serendipity_imageComment_txt {
     border-top: 1px solid #ddd;
-    margin: 0px;
+    margin: 0;
     padding: 3px;
     clear: both;
     font-size: 10px;
     text-align: center;
+}
+
+/* Lists without bullets or numbers */
+.plainList {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/* Messages: centered, important, notice */
+.serendipity_center {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.serendipity_msg_important {
+    color: red;
+}
+
+.serendipity_msg_notice {
+    color: green;
 }
 
 /* END OF style_fallback.css */
