@@ -2929,6 +2929,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
 
     $media = array(
         'manage'            => $manage,
+        'multiperm'         => serendipity_checkPermission('adminImagesDirectories'),
         'lineBreak'         => $lineBreak,
         'lineBreakP'        => round(1/$lineBreak*100),
         'url'               => $url,
