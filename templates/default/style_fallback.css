@@ -3,7 +3,7 @@
    Classes are declared on top of the file, so if you
    want to make changes in your own template, you
    should override the rules on the bottom of your
-   style.css template. 
+   style.css template.
    IT IS NOT ADVISED TO CREATE YOUR OWN style_fallback.css FILE! */
 
 /* Default image classes for left/right/usual layout */
@@ -86,6 +86,10 @@
     clear: both;
     font-size: 10px;
     text-align: center;
+}
+
+.serendipity_image_link {
+    display: block;
 }
 
 /* END OF style_fallback.css */
