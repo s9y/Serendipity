@@ -56,6 +56,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $comment['email']     = $serendipity['POST']['email'];
     $comment['subscribe'] = $serendipity['POST']['subscribe'];
     $comment['parent_id'] = $serendipity['POST']['replyTo'];
+    $comment['backend']   = true;
     if (!empty($comment['comment'])) {
         if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
             $data['commentReplied'] = true;
