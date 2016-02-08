@@ -1354,11 +1354,7 @@ $(function() {
 
     $('.comments_reply').click(function(e) {
         e.preventDefault();
-        {if $use_backendpopups || $force_backendpopups.comments}
-            window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
-        {else}
-           $(this).magnificPopup({ type:'iframe' });
-        {/if}
+        serendipity.openPopup($(this).attr('href'));
     });
 
     // Selection for multidelete
@@ -1646,7 +1642,7 @@ $(function() {
                                         canvas.width = width;
                                         canvas.height = height;
                                         canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                                        
+
                                         if (type == "image/bmp") {
                                             {* bmp is not supported *}
                                             type = "image/png";
