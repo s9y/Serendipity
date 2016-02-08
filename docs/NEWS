@@ -1,6 +1,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Comments made via the backend on own articles don't trigger
+      the comment notification (thanks to xoxys)
+
     * Fix missing perm checks for "standard user" in MediaLibrary
 
     * Fix show Dashboard entries by authors entries
