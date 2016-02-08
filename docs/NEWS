@@ -174,7 +174,7 @@ Version 2.0.2 (July 24th, 2015)
 
         PLEASE NOTE:
 
-        2.0.1 brought in an automatted include of a themes "user.css"
+        2.0.1 brought in an automated include of a themes "user.css"
         file. If you don't want to use such file any more (and you have
         one), you will have to delete or rename it by hand!
 
