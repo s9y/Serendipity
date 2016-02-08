@@ -522,7 +522,7 @@ function serendipity_fetchEntryData(&$ret) {
  * @access public
  * @param   string      The column to compare $val against (like 'id')
  * @param   string      The value of the colum $key to compare with (like '4711')
- * @param   boolean     Indicates if the full entry will be fetched (body+extended: TRUE), or only the body (FALSE).
+ * @param   boolean     Indicates if the full entry will be fetched (body+extended: TRUE), or only the body (FALSE). RQ: WHY Isn't $full parameter used at all???
  * @param   string      Indicates whether drafts should be fetched
  * @return
  */

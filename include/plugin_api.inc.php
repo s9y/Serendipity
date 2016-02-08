@@ -23,7 +23,7 @@ $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_a
 
 // Add jquery to all frontend templates (in noConflict mode)
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
-  global $serendipity;
+    global $serendipity;
 
     // Only execute if current template (only) does not have its own jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
@@ -44,7 +44,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
 
 // Add jquery to all backend templates
 function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, $addData) {
-  global $serendipity;
+    global $serendipity;
 
     // Only execute if current template does not have its own backend_jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
@@ -435,7 +435,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string  The filter for plugins (left|right|hide|event|eventh)
-     * @param   boolean If true, the filtering logic will be reversed an all plugins that are NOT part of the filter will be returned
+     * @param   boolean If true, the filtering logic will be reversed and all plugins that are NOT part of the filter will be returned
      * @param   string  Filter by a specific classname (like 'serendipity_plugin_archives'). Can take SQL wildcards.
      * @param   string  Filter by a specific plugin instance id
      * @return  array   Returns the associative array of found plugins in the database
@@ -477,7 +477,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string  The filter for plugins (left|right|hide|event|eventh)
-     * @param   boolean If true, the filtering logic will be reversed an all plugins that are NOT part of the filter will be evaluated
+     * @param   boolean If true, the filtering logic will be reversed and all plugins that are NOT part of the filter will be evaluated
      * @return  int     Number of plugins that were found.
      */
     static function count_plugins($filter = '*', $negate = false)
@@ -547,7 +547,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string      The ID of a plugin
-     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@')
+     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@') RQ: with 2.0+ obsolet?!
      * @return  string      The classname of the plugin
      */
     static function getClassByInstanceID($instance_id, &$is_internal)
@@ -1638,7 +1638,8 @@ class serendipity_plugin
      * @param  bool     Called by a plugin (defaults true), since we do not have a theme using it yet
      * @return string   Parsed Smarty return
      */
-    function &parseTemplate($filename, $plugin = true) {
+    function &parseTemplate($filename, $plugin = true)
+    {
         global $serendipity;
 
         $filename = basename($filename);
@@ -1649,6 +1650,7 @@ class serendipity_plugin
 
         return $serendipity['smarty']->fetch('file:'. $tfile);
     }
+
 }
 
 /**
@@ -1736,13 +1738,14 @@ class serendipity_event extends serendipity_plugin
      */
     function event_hook($event, &$bag, &$eventData, $addData = null)
     {
-        // Define event hooks here, if you want you plugin to execute those instead of being a sidebar item.
-        // Look at external plugins 'serendipity_event_mailer' or 'serendipity_event_weblogping' for usage.
+        // Define event hooks here, if you want your plugin to execute those instead of being a sidebar item.
+        // Look at external plugins 'serendipity_event_mailer' (?) or 'serendipity_event_weblogping' for usage.
         // Currently available events:
         //   backend_publish [after insertion of a new article in your s9y-backend]
         //   backend_display [after displaying an article in your s9y-backend]
         //   frontend_display [before displaying an article in your s9y-frontend]
         //   frontend_comment [after displaying the "enter comment" dialog]
+        //   ...and some more in the meanwhile...! :)
         return true;
     }
 
