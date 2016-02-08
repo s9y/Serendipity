@@ -1,2 +1,2 @@
-@define('USE_CACHE', 'Enable caching');
-@define('USE_CACHE_DESC', 'Enables an internal cache to not repeat specific database queries. This reduces the load on servers with medium to high traffic and improves page load time.');
+
+@define('CONFIG_PERMALINK_PATH_DESC', 'Please regard, you have to use a prefix. Without a prefix, Serendipity will think that the normal blog access page is requested, because of the regular expression matches. So you may change the prefix to some uniquely other name, but not remove it in total! This applies to all path prefix definitions here.');
