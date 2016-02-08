@@ -114,12 +114,12 @@ function show_plugins($event_only = false, $sidebars = null)
     $i = 0;
     foreach ($plugin_placements as $plugin_placement) {
         if (!$event_only && $plugin_placement == 'NONE') {
-            $is_invisible     = true;
+            $is_invisible = true;
         } else {
-            $is_invisible     = false;
+            $is_invisible = false;
         }
         $data['placement'][$plugin_placement]['ptitle'] = $ptitle = $opts[$plugin_placement];
-        $data['placement'][$plugin_placement]['pid'] = $pid    = $plugin_placement;
+        $data['placement'][$plugin_placement]['pid'] = $pid = $plugin_placement;
 
         if ($is_invisible) {
             $plugins = $invisible_plugins;
