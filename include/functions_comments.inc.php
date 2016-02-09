@@ -789,6 +789,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if (!empty($ca['status'])) {
         $commentInfo['status'] = $ca['status'];
     }
+    
+    if ($serendipity['serendipityAuthedUser']) {
+		$authorReply = true;
+		$authorEmail = $serendipity['serendipityEmail'];
+	}
 
     $title         = serendipity_db_escape_string(isset($commentInfo['title']) ? $commentInfo['title'] : '');
     $comments      = $commentInfo['comment'];
@@ -801,7 +806,6 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     $status        = serendipity_db_escape_string(isset($commentInfo['status']) ? $commentInfo['status'] : (serendipity_db_bool($ca['moderate_comments']) ? 'pending' : 'approved'));
     $t             = serendipity_db_escape_string(isset($commentInfo['time']) ? $commentInfo['time'] : time());
     $referer       = substr((isset($_SESSION['HTTP_REFERER']) ? serendipity_db_escape_string($_SESSION['HTTP_REFERER']) : ''), 0, 200);
-    $backend       = $commentInfo['backend'];
 
     $query = "SELECT a.email, e.title, a.mail_comments, a.mail_trackbacks
                 FROM {$serendipity['dbPrefix']}entries AS e
@@ -874,7 +878,7 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
         || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
         || (($type == 'TRACKBACK' || $type == 'PINGBACK') && serendipity_db_bool($row['mail_trackbacks'])))) {
-            if (! ($backend && $email == $row['email'])) {
+            if (! ($authorReply && $authorEmail == $row['email'])) {
                 serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
             }
     }
