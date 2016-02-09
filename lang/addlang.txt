@@ -1,2 +1,2 @@
 
-@define('CONFIG_PERMALINK_PATH_DESC', 'Please note taht you have to use a prefix. Without a prefix, Serendipity will think that the normal blog access page is requested because of the regular expression matches. So you may change the prefix to some other unique name, but not remove it altogether! This applies to all path prefix definitions here.');
+@define('CONFIG_PERMALINK_PATH_DESC', 'Please note that you have to use a prefix. Without a prefix, Serendipity will think that the normal blog access page is requested because of the regular expression matches. So you may change the prefix to some other unique name, but not remove it altogether! This applies to all path prefix definitions here.');
