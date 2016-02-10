@@ -1739,7 +1739,7 @@ class serendipity_event extends serendipity_plugin
     function event_hook($event, &$bag, &$eventData, $addData = null)
     {
         // Define event hooks here, if you want your plugin to execute those instead of being a sidebar item.
-        // Look at external plugins 'serendipity_event_mailer' (?) or 'serendipity_event_weblogping' for usage.
+        // Look at in/external plugins 'serendipity_event_mailer' or 'serendipity_event_weblogping' for usage.
         // Currently available events:
         //   backend_publish [after insertion of a new article in your s9y-backend]
         //   backend_display [after displaying an article in your s9y-backend]
