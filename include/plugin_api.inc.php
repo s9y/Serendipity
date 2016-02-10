@@ -547,7 +547,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string      The ID of a plugin
-     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@') RQ: with 2.0+ obsolet?!
+     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@'). (Unused, keep for compat.)
      * @return  string      The classname of the plugin
      */
     static function getClassByInstanceID($instance_id, &$is_internal)
