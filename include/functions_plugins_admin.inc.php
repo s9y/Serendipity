@@ -439,6 +439,14 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
 
                 break;
 
+            case 'color':
+                $data['ctype'] = 'color';
+                $data['input_type'] = 'color';
+                $data['cbag_value'] = $cbag->get('value');
+                $assign_plugin_config($data);
+
+                break;
+                
             case 'hidden':
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');

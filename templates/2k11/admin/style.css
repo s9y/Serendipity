@@ -152,6 +152,7 @@ select {
 
 button,
 html input[type="button"],
+html input[type="color"],
 input[type="reset"],
 input[type="submit"] {
     -webkit-appearance: button;
@@ -616,6 +617,7 @@ button,
 #edit_entry_category button.mfp-close,
 #edit_entry_freetags button.mfp-close,
 input[type="button"],
+input[type="color"],
 input[type="reset"],
 input[type="submit"] {
     border-radius: 4px;
@@ -632,7 +634,8 @@ input[type="submit"] {
 .tabs > ul a,
 button,
 button[type="submit"].publish_now,
-input[type="button"] {
+input[type="button"],
+input[type="color"] {
     background: #ddd;
     background-image: -webkit-linear-gradient(#fff, #ddd);
     background-image: linear-gradient(#fff, #ddd);
@@ -674,7 +677,8 @@ input[type="submit"].state_cancel:visited {
 .tabs > ul a:hover,
 button:hover,
 button[type="submit"].publish_now:hover,
-input[type="button"]:hover {
+input[type="button"]:hover,
+input[type="color"]:hover {
     background: #ccc;
     background-image: -webkit-linear-gradient(#fff, #eee 1px, #ccc);
     background-image: linear-gradient(#fff, #eee 1px, #ccc);
@@ -710,7 +714,8 @@ input:checked + .media_selector,
 button[type="submit"].publish_now:active,
 .tabs > ul a:active,
 button:active,
-input[type="button"]:active {
+input[type="button"]:active,
+input[type="color"]:active {
     background-image: -webkit-linear-gradient(#fff, #ddd 1px, #eee);
     background-image: linear-gradient(#fff, #ddd 1px, #eee);
     box-shadow: inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;

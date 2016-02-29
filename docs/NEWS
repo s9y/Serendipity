@@ -1,5 +1,7 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+    * Add colorpicker as possible plugin option item type, set
+      type to 'color' to use it
 
     * Comments made via the backend on own articles don't trigger
       the comment notification (thanks to xoxys)

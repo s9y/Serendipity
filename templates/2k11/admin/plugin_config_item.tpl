@@ -45,16 +45,19 @@
         {if $cdesc != ''}<span id="nuggets{$elcount}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
     </div>
-{elseif $ctype == 'content'}
 
-    <div class="clearfix">
-        {$cbag_default}
-    </div>
 {elseif $ctype == 'custom'}
 
     <div class="clearfix custom_item">
         <input id="config_{$postKey}_{$config_item}" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$hvalue}">
         {$cbag_custom}
+    </div>
+{elseif $ctype == 'color'}
+
+    <div class="clearfix form_field{if $cdesc != ''} has_info{/if}">
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
+        <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
     </div>
 {elseif $ctype == 'hidden'}
 
