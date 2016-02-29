@@ -45,7 +45,11 @@
         {if $cdesc != ''}<span id="nuggets{$elcount}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
     </div>
+{elseif $ctype == 'content'}
 
+    <div class="clearfix">
+        {$cbag_default}
+    </div>
 {elseif $ctype == 'custom'}
 
     <div class="clearfix custom_item">
