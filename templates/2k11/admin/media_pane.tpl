@@ -39,6 +39,9 @@
                     <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
                 </fieldset>
             </li>
+        {if $smarty.get.serendipity.showUpload}
+            <li class="popuplayer_showUpload"><a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a></li>
+        {/if}
         </ul>
 
         <fieldset id="media_pane_filter" class="additional_info filter_pane">
@@ -225,12 +228,6 @@
         </script>
     </form>
 </div>{* has toolbar end *}
-
-{if $smarty.get.serendipity.showUpload}
-<div class="popuplayer_showUpload">
-    <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
-</div>
-{/if}
 
 <div class="media_library_pane">
 {if $media.nr_files < 1}

@@ -2520,6 +2520,11 @@ input[name="serendipity[filter][fileCategory]"] {
     margin: 1em 0 0;
 }
 
+.popuplayer_showUpload {
+    float: right;
+    margin: 1em 0 0;
+}
+
 .media_select_strict {
     clear: right;
     float: left;
@@ -2978,6 +2983,10 @@ img.mfp-img {
         display: inline-block;
         width: auto;
     }
+
+    .popuplayer_showUpload {
+        margin: 1em .4rem 0 0;
+    }
 }
 
 @media only screen and (min-width: 480px) {
@@ -3001,6 +3010,14 @@ img.mfp-img {
     #pluginlist_tabs {
         clear: both;
         position: relative;
+    }
+
+    #media_selector_bar {
+        margin: 0;
+    }
+
+    .popuplayer_showUpload {
+        margin: 1em 0 0;
     }
 
     .tabcontent #pluginlist_event > a,
@@ -3071,13 +3088,12 @@ img.mfp-img {
         margin: 0 0 1em;
     }
 
-    .media_select_strict {
-        margin: -1em 0;
+    .popuplayer_showUpload {
+        margin: 0 .4em 1em 0;
     }
 
-    .popuplayer_showUpload {
-        float: right;
-        margin-top: -2.375em;
+    .media_select_strict {
+        margin: -1em 0;
     }
 
     #mediaPropertyForm .media_file_props label,
