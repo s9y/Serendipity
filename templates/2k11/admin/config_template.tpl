@@ -6,7 +6,7 @@
 {/if}
 {if $config|sizeof > 1 AND $allowToggle}
     <a id="show_config_all" class="button_link" href="#serendipity_config_options" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></a>
-{/if}
+{/if} 
     <div id="serendipity_config_options">
     {foreach $config as $category}
         <div class="configuration_group">
@@ -36,6 +36,9 @@
                     </div>
                 </fieldset>
                 {else}
+                {if $item.ignore}
+                    {cycle advance=true assign='temp'}
+                {/if}
                 <div class="clearfix {$zebra_class} form_{if $item.type == 'list'}select{elseif $item.type == 'multilist'}multiselect{elseif $item.type == 'textarea'}area{else}field{/if}{if $item.description != ''} has_info{/if}{if $item.ignore} hidden{/if}">
                     <label for="{$item.var}">{$item.title}{if $item.description != ''} <button class="toggle_info button_link" type="button" data-href="#{$item.var}_info"><span class="icon-info-circled"></span><b>i</b><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
                     {if $item.description != ''}
