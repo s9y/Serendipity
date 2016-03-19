@@ -1226,7 +1226,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                     'is_comment_added'      => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'true' ? true: false),
                     'is_comment_moderate'   => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'moderate' ? true: false)
                 );
-                
+
                 if ($serendipity['serendipityAuthedUser'] === true) {
                     $userData = array();
                     $userData['name'] = $serendipity['realname'];
@@ -1235,7 +1235,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 } else {
                     $userData = $serendipity['POST'];
                 }
-                
+
                 $serendipity['smarty']->assign($comment_add_data);
                 serendipity_displayCommentForm(
                     $entry['id'],

@@ -10,22 +10,26 @@ if (!serendipity_checkPermission('adminTemplates')) {
     return;
 }
 
-class template_option {
+class template_option
+{
     var $config = null;
     var $values = null;
     var $keys   = null;
 
-    function introspect_config_item($item, &$bag) {
+    function introspect_config_item($item, &$bag)
+    {
         foreach($this->config[$item] AS $key => $val) {
             $bag->add($key, $val);
         }
     }
 
-    function get_config($item) {
+    function get_config($item)
+    {
         return $this->values[$item];
     }
 
-    function set_config($item, $value) {
+    function set_config($item, $value)
+    {
         global $serendipity;
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
@@ -48,12 +52,14 @@ class template_option {
         return true;
     }
 
-    function import(&$config) {
+    function import(&$config)
+    {
         foreach($config AS $key => $item) {
             $this->config[$item['var']] = $item;
             $this->keys[$item['var']]   = $item['var'];
         }
     }
+
 }
 
 $data = array();
@@ -187,7 +193,7 @@ foreach ($stack as $theme => $info) {
 
         if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg")) {
             $data["templates"][$theme]["fullsize${backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg";
-        } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) {   // preview{$backendId}_fullsizeURL is not actually set yet in spartacus
+        } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) { // preview{$backendId}_fullsizeURL is not actually set in spartacus yet
             if (file_exists($serendipity["serendipityPath"] . "/templates_c/template_cache/". $theme ."{$backendId}.jpg")) {
                 $data["templates"][$theme]["fullsize${backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
             } else {

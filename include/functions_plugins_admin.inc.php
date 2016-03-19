@@ -446,7 +446,7 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
                 $assign_plugin_config($data);
 
                 break;
-                
+
             case 'hidden':
                 $data['ctype'] = 'hidden';
                 $data['cbag_value'] = $cbag->get('value');

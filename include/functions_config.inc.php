@@ -1202,7 +1202,7 @@ function serendipity_getPermissionNames() {
  *
  * This function caches all permission chacks in static function variables to not
  * fetch all permissions time and again.
- * The permission checks are performed agains the values of each group. If a privilege
+ * The permission checks are performed against the values of each group. If a privilege
  * is set in one of the groups the author is a user of, the function returns true.
  * If a privilege is not set, the userlevel of an author is checked to act for backwards-compatibility.
  *
@@ -2082,7 +2082,7 @@ function serendipity_setFormToken($type = 'form') {
     global $serendipity;
 
     if ($type == 'form') {
-        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />';
+        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />'."\n";
     } elseif ($type == 'url') {
         return 'serendipity[token]=' . md5(session_id());
     } else {

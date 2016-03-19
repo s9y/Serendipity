@@ -9,10 +9,12 @@ if (IN_serendipity !== true) {
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
-class serendipity_plugin_recententries extends serendipity_plugin {
+class serendipity_plugin_recententries extends serendipity_plugin
+{
     var $title = PLUGIN_RECENTENTRIES_TITLE;
 
-    function introspect(&$propbag) {
+    function introspect(&$propbag)
+    {
         $this->title = $this->get_config('title', $this->title);
 
         $propbag->add('name',          PLUGIN_RECENTENTRIES_TITLE);

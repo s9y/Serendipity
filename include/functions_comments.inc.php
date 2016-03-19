@@ -789,11 +789,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if (!empty($ca['status'])) {
         $commentInfo['status'] = $ca['status'];
     }
-    
+
     if ($serendipity['serendipityAuthedUser']) {
-		$authorReply = true;
-		$authorEmail = $serendipity['serendipityEmail'];
-	}
+        $authorReply = true;
+        $authorEmail = $serendipity['serendipityEmail'];
+    }
 
     $title         = serendipity_db_escape_string(isset($commentInfo['title']) ? $commentInfo['title'] : '');
     $comments      = $commentInfo['comment'];
