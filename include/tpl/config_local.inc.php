@@ -187,7 +187,7 @@
 
                                     array('var'         => 'permalinkArchivesPath',
                                           'title'       => INSTALL_PERMALINK_ARCHIVESPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'archives',
                                           'permission'  => 'siteConfiguration',
@@ -195,7 +195,7 @@
 
                                     array('var'         => 'permalinkCategoriesPath',
                                           'title'       => INSTALL_PERMALINK_CATEGORIESPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'categories',
                                           'permission'  => 'siteConfiguration',
@@ -203,7 +203,7 @@
 
                                     array('var'         => 'permalinkAuthorsPath',
                                           'title'       => INSTALL_PERMALINK_AUTHORSPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'authors',
                                           'permission'  => 'siteConfiguration',
@@ -211,7 +211,7 @@
 
                                     array('var'         => 'permalinkUnsubscribePath',
                                           'title'       => INSTALL_PERMALINK_UNSUBSCRIBEPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'unsubscribe',
                                           'permission'  => 'siteConfiguration',
@@ -219,7 +219,7 @@
 
                                     array('var'         => 'permalinkDeletePath',
                                           'title'       => INSTALL_PERMALINK_DELETEPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'delete',
                                           'permission'  => 'siteConfiguration',
@@ -227,7 +227,7 @@
 
                                     array('var'         => 'permalinkApprovePath',
                                           'title'       => INSTALL_PERMALINK_APPROVEPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'approve',
                                           'permission'  => 'siteConfiguration',
@@ -235,7 +235,7 @@
 
                                     array('var'         => 'permalinkFeedsPath',
                                           'title'       => INSTALL_PERMALINK_FEEDSPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'feeds',
                                           'permission'  => 'siteConfiguration',
@@ -243,7 +243,7 @@
 
                                     array('var'         => 'permalinkPluginPath',
                                           'title'       => INSTALL_PERMALINK_PLUGINPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'plugin',
                                           'permission'  => 'siteConfiguration',
@@ -251,7 +251,7 @@
 
                                     array('var'         => 'permalinkAdminPath',
                                           'title'       => INSTALL_PERMALINK_ADMINPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'admin',
                                           'permission'  => 'siteConfiguration',
@@ -259,7 +259,7 @@
 
                                     array('var'         => 'permalinkSearchPath',
                                           'title'       => INSTALL_PERMALINK_SEARCHPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'search',
                                           'permission'  => 'siteConfiguration',
@@ -267,7 +267,7 @@
 
                                     array('var'         => 'permalinkCommentsPath',
                                           'title'       => INSTALL_PERMALINK_COMMENTSPATH,
-                                          'description' => '',
+                                          'description' => CONFIG_PERMALINK_PATH_DESC,
                                           'type'        => 'string',
                                           'default'     => 'comments',
                                           'permission'  => 'siteConfiguration',
