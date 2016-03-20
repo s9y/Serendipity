@@ -65,6 +65,3 @@
 
 @define('PLUGIN_EVENT_SPARTACUS_CRONJOB', 'This plugin supports the Serendipity Cronjob plugin. Go and install it if you want scheduled execution.');
 @define('PLUGIN_EVENT_SPARTACUS_CRONJOB_WHEN', 'Execute regular cronjob to check for plugin updates, and mail those to the configured blog\'s mail address (%s)?');
-
-@define('PLUGIN_EVENT_SPARTACUS_CHECK', 'Update plugins');
-
