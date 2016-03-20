@@ -159,9 +159,27 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
+    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+        // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists
+    
+        if ($serendipity['GET']['type'] == 'event') {
+            $serendipity['GET']['type'] = 'sidebar';
+        } else {
+            $serendipity['GET']['type'] = 'event';
+        }
+        $foreignPluginsTemp = array();
+        serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPluginsTemp);
+        $pluginstack = array_merge((array)$foreignPluginsTemp['pluginstack'], $pluginstack);
+        $errorstack  = array_merge((array)$foreignPluginsTemp['errorstack'], $errorstack);
+        $foreignPlugins = array_merge($foreignPlugins, $foreignPluginsTemp);
+    }
 
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
+    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+        $classes = array_merge($classes, serendipity_plugin_api::enum_plugin_classes(!($serendipity['GET']['type'] === 'event')));
+        $data['type'] = 'both';
+    }
     usort($classes, 'serendipity_pluginListSort');
 
     $counter    = 0;

@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.33');
+        $propbag->add('version',       '2.34');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -1235,8 +1235,13 @@ class serendipity_event_spartacus extends serendipity_event
                 case 'backend_pluginlisting_header':
                     if (serendipity_db_bool($this->get_config('enable_plugins'))) {
                         echo '<div id="upgrade_notice" class="clearfix">';
-                        echo '    <a id="upgrade_sidebar" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR .'</a>';
-                        echo '    <a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
+                        if (version_compare($serendipity['version'], '2.1-alpha3', '<')) {    
+                            echo '    <a id="upgrade_sidebar" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR .'</a>';
+                            echo '    <a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
+                            
+                        } else {
+                            echo '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK .'</a>';
+                        }
                         echo '</div>';
                     }
                     break;

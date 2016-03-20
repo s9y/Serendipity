@@ -1,5 +1,9 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
+
+    * Merge sidebar and event upgrade pages in one single page
+      button
+
     * Add colorpicker as possible plugin option item type, set
       type to 'color' to use it
 
