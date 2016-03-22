@@ -105,7 +105,7 @@
                     <div class="form_field">
                         <label class="visuallyhidden">NOTE</label>
                         <div class="bp_note">
-                            <span class="icon-info-circled"></span> mediaproperties metadata&nbsp;
+                            <span class="icon-info-circled"></span> mediaproperties metadata fields
                         </div>
                     </div>
                 </div>
