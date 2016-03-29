@@ -151,7 +151,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
 } elseif ( $serendipity['GET']['adminAction'] == 'addnew' ) {
-
+    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?: 'sidebar';
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
@@ -160,8 +160,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
     if ($serendipity['GET']['only_group'] == 'UPGRADE') {
-        // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists
-    
+        // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists    
         if ($serendipity['GET']['type'] == 'event') {
             $serendipity['GET']['type'] = 'sidebar';
         } else {
@@ -210,7 +209,14 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         if (is_array($props)) {
             if (version_compare($props['version'], $props['upgrade_version'], '<')) {
                 $props['upgradable']      = true;
-                $props['customURI']      .= $foreignPlugins['baseURI'] . $foreignPlugins['upgradeURI'];
+                // since we merged sidebar and event plugins before, we can no longer rely on spartacus' $foreignPlugins['baseURI']
+                // NOTE: This is not nice and it would be better to move it into the plugins array instead, but that collides with the cache
+                if (strpos($class_data['name'], 'serendipity_plugin') !== false) {
+                    $baseURI = "&amp;serendipity[spartacus_fetch]=sidebar";
+                } else {
+                    $baseURI = "&amp;serendipity[spartacus_fetch]=event";
+                }
+                $props['customURI'] .= $baseURI . $foreignPlugins['upgradeURI'];
             }
 
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
@@ -302,9 +308,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
         }
     }
-
     $data['requirements_failues'] = $requirement_failures;
-
 } elseif ( $serendipity['GET']['adminAction'] == 'renderOverlay' ) {
     $data['adminAction'] = 'overlay';
 } else {
