@@ -1,6 +1,10 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Introduce a section with modern recommended themes in the
+      themes backend menu. Themes can be included there by setting
+      Recommended: Yes in their info.txt
+
     * Merge sidebar and event upgrade pages in one single page
       button
 
