@@ -91,10 +91,7 @@
             </article>
         {/if}
 
-        <h2>{$CONST.AVAILABLE_TEMPLATES}</h2>
-
-        <ul class="plainList clearfix">
-        {foreach $templates as $template=>$info}
+        {function name=templateBlock}
             <li><article class="clearfix">
                     <h3 title="{$info.info.name}">{$info.info.name|truncate:25:"&hellip;"}</h3>
                     <div class="clearfix equal_heights template_wrap">
@@ -140,6 +137,21 @@
                 {/if}
                 </article>
             </li>
+        {/function}
+
+        <h2>{$CONST.RECOMMENDED}</h2>
+        <ul class="plainList clearfix">
+        {foreach $recommended_templates as $template=>$info}
+            {templateBlock template=$template info=$info}
+        {/foreach}
+        </ul>
+        
+
+        <h2>{$CONST.AVAILABLE_TEMPLATES}</h2>
+
+        <ul class="plainList clearfix">
+        {foreach $templates as $template=>$info}
+            {templateBlock template=$template info=$info}
         {/foreach}
         </ul>
     </section>

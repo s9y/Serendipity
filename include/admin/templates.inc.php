@@ -175,12 +175,12 @@ $stack = array();
 serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
 $themes = serendipity_fetchTemplates();
 $data['templates'] = array();
+$data['recommended_templates'] = array();
 
 foreach($themes AS $theme) {
     $stack[$theme] = serendipity_fetchTemplateInfo($theme);
 }
 ksort($stack);
-
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
@@ -222,12 +222,20 @@ foreach ($stack as $theme => $info) {
         $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
         $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
     }
+
+    if ($info['recommended']) {
+        $data['recommended_templates'][$theme] = $data['templates'][$theme];
+        if ($serendipity['template'] != $theme) {
+            unset($data['templates'][$theme]);
+        }
+    }
 }
 
 $data['cur_tpl']         = $data['templates'][$data['cur_template']];
 $data['cur_tpl_backend'] = $data['templates'][$data['cur_template_backend']];
 
 unset($data['templates'][$data['cur_template']]);
+unset($data['recommended_templates'][$data['cur_template']]);
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 
