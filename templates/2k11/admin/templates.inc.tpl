@@ -106,7 +106,7 @@
                             {/if}
                         {/if}
 
-                            <footer id="template_info_{$info@key}" class="template_info additional_info">
+                            <footer id="template_info_{$key}" class="template_info additional_info">
                                 <dl class="clearfix">
                                     <dt class="template_author">{$CONST.AUTHOR}:</dt>
                                     <dd>{$info.info.author}</dd>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
 
-                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
+                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
                 {if $info.demoURL}
                     <a class="demo_link button_link" href="{$info.demoURL}" title="{$CONST.THEMES_PREVIEW_BLOG}" target="_blank"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.THEMES_PREVIEW_BLOG}</span></a>
                 {/if}
@@ -142,7 +142,7 @@
         <h2>{$CONST.RECOMMENDED}</h2>
         <ul class="plainList clearfix">
         {foreach $recommended_templates as $template=>$info}
-            {templateBlock template=$template info=$info}
+            {templateBlock template=$template info=$info key=$info@key}
         {/foreach}
         </ul>
         
@@ -151,7 +151,7 @@
 
         <ul class="plainList clearfix">
         {foreach $templates as $template=>$info}
-            {templateBlock template=$template info=$info}
+            {templateBlock template=$template info=$info key=$info@key}
         {/foreach}
         </ul>
     </section>
