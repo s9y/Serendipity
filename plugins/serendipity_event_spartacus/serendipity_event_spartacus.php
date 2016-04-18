@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.34');
+        $propbag->add('version',       '2.35');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -865,22 +865,6 @@ class serendipity_event_spartacus extends serendipity_event
                 foreach($subtree['children'] AS $child => $childtree) {
                     if (is_array($childtree) && isset($childtree['tag'])) {
                         switch($childtree['tag']) {
-                            case 'name':
-                                $pluginstack[$i]['name']         = $childtree['value'];
-                                break;
-
-                            case 'summary':
-                                $pluginstack[$i]['summary']      = $childtree['value'];
-                                break;
-
-                            case 'template':
-                                $pluginstack[$i]['template']     = $childtree['value'];
-                                break;
-
-                            case 'description':
-                                $pluginstack[$i]['description']  = $childtree['value'];
-                                break;
-
                             case 'release':
                                 $pluginstack[$i]['version']      = $childtree['children'][0]['value'];
 
@@ -904,7 +888,11 @@ class serendipity_event_spartacus extends serendipity_event
                                 break;
 
                             case 'maintainers':
-                                $pluginstack[$i]['author']       = $childtree['children'][0]['children'][0]['value']; // I dig my PHP arrays ;-)
+                                $pluginstack[$i]['author']       = $childtree['children'][0]['children'][0]['value'];
+                                break;
+                            default:
+                                # Catches name, summary, template, description and recommended. Also a way to extend this later on
+                                $pluginstack[$i][$childtree['tag']]  = $childtree['value'];
                                 break;
                         }
                     }
