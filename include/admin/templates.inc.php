@@ -225,17 +225,22 @@ foreach ($stack as $theme => $info) {
 
     if ($info['recommended']) {
         $data['recommended_templates'][$theme] = $data['templates'][$theme];
-        if ($serendipity['template'] != $theme) {
+        if ($theme != $serendipity['template'] && $theme != $serendipity['template_backend']) {
             unset($data['templates'][$theme]);
         }
     }
 }
 
-$data['cur_tpl']         = $data['templates'][$data['cur_template']];
-$data['cur_tpl_backend'] = $data['templates'][$data['cur_template_backend']];
+$data['cur_tpl']         = $data['templates'][$serendipity['template']];
+$data['cur_tpl_backend'] = $data['templates'][$serendipity['template_backend']];
 
-unset($data['templates'][$data['cur_template']]);
-unset($data['recommended_templates'][$data['cur_template']]);
+unset($data['templates'][$serendipity['template']]);
+if ($serendipity['template'] != $serendipity['template_backend'] && isset($data['recommended_templates'][$serendipity['template_backend']]) && isset($data['templates'][$serendipity['template_backend']])) {
+    // when we could not unset a template because it is a backend template, and when that template is also a recommended template, then it will now
+    // be in recommended and in the normal tmeplate list. We just detected that and have to remove it
+    unset($data['templates'][$serendipity['template_backend']]);
+}
+unset($data['recommended_templates'][$serendipity['template']]);
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 
