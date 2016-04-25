@@ -733,11 +733,11 @@
 @define('SYNDICATION_PLUGIN_FEEDBURNERALT_DESC', '그림 위에 커서를 댈 때 표시할 설명 (있을 경우)');
 @define('INSTALL_DBPORT', '데이터베이스 포트');
 @define('INSTALL_DBPORT_DESC', '데이터베이스 서버에 접속할 때 사용하는 포트 번호');
-@define('PLUGIN_GROUP_FRONTEND_EXTERNAL_SERVICES', '일반 페이지: 외부 서비스');
-@define('PLUGIN_GROUP_FRONTEND_FEATURES', '일반 페이지: 부가 기능');
-@define('PLUGIN_GROUP_FRONTEND_FULL_MODS', '일반 페이지: 개조 사항');
-@define('PLUGIN_GROUP_FRONTEND_VIEWS', '일반 페이지: 표시 상태');
-@define('PLUGIN_GROUP_FRONTEND_ENTRY_RELATED', '일반 페이지: 글 관련');
+@define('PLUGIN_GROUP_FRONTEND_EXTERNAL_SERVICES', '외부 페이지: 외부 서비스');
+@define('PLUGIN_GROUP_FRONTEND_FEATURES', '외부 페이지: 부가 기능');
+@define('PLUGIN_GROUP_FRONTEND_FULL_MODS', '외부 페이지: 개조 사항');
+@define('PLUGIN_GROUP_FRONTEND_VIEWS', '외부 페이지: 표시 상태');
+@define('PLUGIN_GROUP_FRONTEND_ENTRY_RELATED', '외부 페이지: 글 관련');
 @define('PLUGIN_GROUP_BACKEND_EDITOR', '관리 페이지: 편집기');
 @define('PLUGIN_GROUP_BACKEND_USERMANAGEMENT', '관리 페이지: 사용자 관리');
 @define('PLUGIN_GROUP_BACKEND_METAINFORMATION', '관리 페이지: 메타 정보');
@@ -849,7 +849,7 @@
 
 
 @define('GO_ADD_PROPERTIES', '등록정보 입력하러 가기');
-@define('MEDIA_PROPERTY_DPI', 'DPI');
+@define('MEDIA_PROPERTY_DPI', '밀도(DPI)');
 @define('MEDIA_PROPERTY_COPYRIGHT', '저작권');
 @define('MEDIA_PROPERTY_COMMENT1', '짧은 설명');
 @define('MEDIA_PROPERTY_COMMENT2', '긴 설명');
@@ -898,8 +898,8 @@
 
 @define('INSTALL_PERMALINK_COMMENTSPATH', '덧글로 가는 경로');
 @define('PERM_SET_CHILD', '하위 디렉토리에 모두 동일한 권한 설정을 합니다');
-@define('PERMISSION_FORBIDDEN_PLUGINS', '금지된 플러그인');
-@define('PERMISSION_FORBIDDEN_HOOKS', '금지된 이벤트');
+@define('PERMISSION_FORBIDDEN_PLUGINS', '사용 금지된 플러그인');
+@define('PERMISSION_FORBIDDEN_HOOKS', '사용 금지된 이벤트');
 @define('PERMISSION_FORBIDDEN_ENABLE', '사용자 그룹에 대한 플러그인 사용 권한 설정을 사용하기');
 @define('PERMISSION_FORBIDDEN_ENABLE_DESC', '"사용자 그룹에 대한 플러그인 사용 권한 설정"을 사용할 경우 어떤 사용자 그룹이 어떤 플러그인이나 이벤트를 사용할 수 있을지 지정할 수 있게 됩니다.');
 @define('DELETE_SELECTED_ENTRIES', '선택한 글 삭제하기');
@@ -1117,5 +1117,5 @@
 @define('DIRECTORY_INFO_DESC', '디렉토리는 물리적인 폴더/디렉토리 이름을 반영합니다. 아이템을 포함하고 있는 디렉토리를 변경하거나 이동할 경우 두 방법 중 하나를 선택해야 합니다. 원하는 디렉토리 또는 하위 디렉토리를 만든 다음 미디어 보관함을 통해 새 디렉토리로 아이템을 이동하고 나면 원래 디렉토리를 삭제하는 것이 한 방법입니다. 다른 방법은 아래의 디렉토리 편집 버튼을 사용하여 원래 디렉토리를 통째로 변경하고서 원하던 다른 이름 (기존 하위 디렉토리/ + 새 이름)으로 바꾸는 것입니다. 이렇게 하면 모든 디렉토리와 아이템을 이동시키고 참조하는 모든 블로그 글을 변경하게 됩니다.');
 @define('MEDIA_RESIZE_EXISTS', '동일한 폭과 높이를 가진 파일이 이미 존재합니다!');
 @define('USE_CACHE', '캐시 사용하기');
-@define('USE_CACHE_DESC', '특정 데이터베이스 질의를 반복하지 않도록 내무 캐시를 사용하도록 합니다. 중간에서 높은 접속량이 걸리는 서버의 부하를 줄이며 페이지를 불러오는 속도를 향상시킵니다.');
+@define('USE_CACHE_DESC', '특정 데이터베이스 질의를 반복하지 않도록 내부 캐시를 사용하도록 합니다. 중간에서 높은 접속량이 걸리는 서버의 부하를 줄이며 페이지를 불러오는 속도를 향상시킵니다.');
 @define('CONFIG_PERMALINK_PATH_DESC', '세렌디피티가 주소(URL)와 작업을 제대로 연동시킬 수 있도록 반드시 접두사를 지정해야 한다는 점에 유의하기 바랍니다. 접두사는 고유한 이름이면 아무렇게나 지정할 수 있지만 비워둘 수는 없습니다. 이는 모든 접두사 지정사항에 대해 동일하게 적용됩니다.');
