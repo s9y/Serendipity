@@ -1306,7 +1306,7 @@ class serendipity_plugin
      * @access public
      * @return true
      */
-    function serendipity_plugin($instance)
+    function __construct($instance)
     {
         $this->instance = $instance;
     }
@@ -1670,7 +1670,7 @@ class serendipity_event extends serendipity_plugin
      * @param   string      The instance name
      * @return
      */
-    function serendipity_event($instance)
+    function __construct($instance)
     {
         $this->instance = $instance;
     }
