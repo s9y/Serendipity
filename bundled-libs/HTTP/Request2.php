@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2014 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2016 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -21,7 +21,9 @@
 /**
  * A class representing an URL as per RFC 3986.
  */
-require_once 'Net/URL2.php';
+if (!class_exists('Net_URL2', true)) {
+    require_once 'Net/URL2.php';
+}
 
 /**
  * Exception class for HTTP_Request2 package
@@ -35,7 +37,7 @@ require_once 'HTTP/Request2/Exception.php';
  * @package  HTTP_Request2
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
- * @version  Release: 2.2.1
+ * @version  Release: 2.3.0
  * @link     http://pear.php.net/package/HTTP_Request2
  * @link     http://tools.ietf.org/html/rfc2616#section-5
  */
@@ -213,7 +215,7 @@ class HTTP_Request2 implements SplSubject
             $this->setMethod($method);
         }
         $this->setHeader(
-            'user-agent', 'HTTP_Request2/2.2.1 ' .
+            'user-agent', 'HTTP_Request2/2.3.0 ' .
             '(http://pear.php.net/package/http_request2) PHP/' . phpversion()
         );
     }
@@ -794,6 +796,11 @@ class HTTP_Request2 implements SplSubject
      *                                   encoded by Content-Encoding</li>
      *   <li>'receivedBody'            - after receiving the complete response
      *                                   body, data is HTTP_Request2_Response object</li>
+     *   <li>'warning'                 - a problem arose during the request
+     *                                   that is not severe enough to throw
+     *                                   an Exception, data is the warning
+     *                                   message (string). Currently dispatched if
+     *                                   response body was received incompletely.</li>
      * </ul>
      * Different adapters may not send all the event types. Mock adapter does
      * not send any events to the observers.
@@ -1022,7 +1029,7 @@ class HTTP_Request2 implements SplSubject
         }
         // (deprecated) mime_content_type function available
         if (empty($info) && function_exists('mime_content_type')) {
-            return mime_content_type($filename);
+            $info = mime_content_type($filename);
         }
         return empty($info)? 'application/octet-stream': $info;
     }

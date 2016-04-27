@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2014 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2016 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -30,7 +30,7 @@ require_once 'HTTP/Request2/Adapter.php';
  * @package  HTTP_Request2
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
- * @version  Release: 2.2.1
+ * @version  Release: 2.3.0
  * @link     http://pear.php.net/package/HTTP_Request2
  */
 class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
@@ -117,6 +117,12 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
     protected $eventReceivedHeaders = false;
 
     /**
+     * Whether 'sentBoody' event was sent to observers
+     * @var boolean
+     */
+    protected $eventSentBody = false;
+
+    /**
      * Position within request body
      * @var  integer
      * @see  callbackReadBody()
@@ -171,6 +177,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         $this->position             = 0;
         $this->eventSentHeaders     = false;
         $this->eventReceivedHeaders = false;
+        $this->eventSentBody        = false;
 
         try {
             if (false === curl_exec($ch = $this->createCurlHandle())) {
@@ -180,6 +187,9 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         }
         if (isset($ch)) {
             $this->lastInfo = curl_getinfo($ch);
+            if (CURLE_OK !== curl_errno($ch)) {
+                $this->request->setLastEvent('warning', curl_error($ch));
+            }
             curl_close($ch);
         }
 
@@ -191,7 +201,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
         }
 
         if ($jar = $request->getCookieJar()) {
-            $jar->addCookiesFromResponse($response, $request->getUrl());
+            $jar->addCookiesFromResponse($response);
         }
 
         if (0 < $this->lastInfo['size_download']) {
@@ -400,9 +410,12 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
     protected function workaroundPhpBug47204($ch, &$headers)
     {
         // no redirects, no digest auth -> probably no rewind needed
+        // also apply workaround only for POSTs, othrerwise we get
+        // https://pear.php.net/bugs/bug.php?id=20440 for PUTs
         if (!$this->request->getConfig('follow_redirects')
             && (!($auth = $this->request->getAuth())
                 || HTTP_Request2::AUTH_DIGEST != $auth['scheme'])
+            || HTTP_Request2::METHOD_POST !== $this->request->getMethod()
         ) {
             curl_setopt($ch, CURLOPT_READFUNCTION, array($this, 'callbackReadBody'));
 
@@ -469,40 +482,36 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
      */
     protected function callbackWriteHeader($ch, $string)
     {
-        // we may receive a second set of headers if doing e.g. digest auth
-        if ($this->eventReceivedHeaders || !$this->eventSentHeaders) {
-            // don't bother with 100-Continue responses (bug #15785)
-            if (!$this->eventSentHeaders
-                || $this->response->getStatus() >= 200
-            ) {
-                $this->request->setLastEvent(
-                    'sentHeaders', curl_getinfo($ch, CURLINFO_HEADER_OUT)
-                );
-            }
+        if (!$this->eventSentHeaders
+            // we may receive a second set of headers if doing e.g. digest auth
+            // but don't bother with 100-Continue responses (bug #15785)
+            || $this->eventReceivedHeaders && $this->response->getStatus() >= 200
+        ) {
+            $this->request->setLastEvent(
+                'sentHeaders', curl_getinfo($ch, CURLINFO_HEADER_OUT)
+            );
+        }
+        if (!$this->eventSentBody) {
             $upload = curl_getinfo($ch, CURLINFO_SIZE_UPLOAD);
-            // if body wasn't read by a callback, send event with total body size
+            // if body wasn't read by the callback, send event with total body size
             if ($upload > $this->position) {
                 $this->request->setLastEvent(
                     'sentBodyPart', $upload - $this->position
                 );
-                $this->position = $upload;
             }
-            if ($upload && (!$this->eventSentHeaders
-                            || $this->response->getStatus() >= 200)
-            ) {
+            if ($upload > 0) {
                 $this->request->setLastEvent('sentBody', $upload);
             }
-            $this->eventSentHeaders = true;
-            // we'll need a new response object
-            if ($this->eventReceivedHeaders) {
-                $this->eventReceivedHeaders = false;
-                $this->response             = null;
-            }
         }
-        if (empty($this->response)) {
-            $this->response = new HTTP_Request2_Response(
+        $this->eventSentHeaders = true;
+        $this->eventSentBody    = true;
+
+        if ($this->eventReceivedHeaders || empty($this->response)) {
+            $this->eventReceivedHeaders = false;
+            $this->response             = new HTTP_Request2_Response(
                 $string, false, curl_getinfo($ch, CURLINFO_EFFECTIVE_URL)
             );
+
         } else {
             $this->response->parseHeaderLine($string);
             if ('' == trim($string)) {
@@ -522,7 +531,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
                     }
 
                     if ($jar = $this->request->getCookieJar()) {
-                        $jar->addCookiesFromResponse($this->response, $this->request->getUrl());
+                        $jar->addCookiesFromResponse($this->response);
                         if (!$redirectUrl->isAbsolute()) {
                             $redirectUrl = $this->request->getUrl()->resolve($redirectUrl);
                         }
@@ -532,6 +541,7 @@ class HTTP_Request2_Adapter_Curl extends HTTP_Request2_Adapter
                     }
                 }
                 $this->eventReceivedHeaders = true;
+                $this->eventSentBody        = false;
             }
         }
         return strlen($string);
