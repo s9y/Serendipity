@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.35');
+        $propbag->add('version',       '2.36');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -417,19 +417,24 @@ class serendipity_event_spartacus extends serendipity_event
             $data = file_get_contents($target);
             if (is_object($serendipity['logger'])) $serendipity['logger']->debug(sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE, strlen($data), $target));
         } else {
-            require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-            $options = array('allowRedirects' => true, 'maxRedirects' => 5);
+            require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+            $options = array('follow_redirects' => true, 'max_redirects' => 5);
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'spartacus');
             serendipity_request_start();
 
-            $req = new HTTP_Request($url, $options);
+            $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, $options);
 
-            if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+            try {
+                $response = $req->send();
+                if ($response->getStatus() != '200') {
+                    throw new HTTP_Request2_Exception('Statuscode not 200, Akismet HTTP verification request failed.');
+                }
+            } catch (HTTP_Request2_Exception $e) {
                 $resolved_url = $url . ' (IP ' . $url_ip . ')';
                 $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHERROR, $resolved_url));
                 //--JAM: START FIREWALL DETECTION
-                if ($req->getResponseCode()) {
-                    $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR, $req->getResponseCode()));
+                if ($response->getStatus()) {
+                    $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR, $response->getStatus()));
                 }
                 $check_health = true;
                 if (function_exists('curl_init')) {
@@ -466,9 +471,16 @@ class serendipity_event_spartacus extends serendipity_event
 
                 $health_options = $options;
                 serendipity_plugin_api::hook_event('backend_http_request', $health_options, 'spartacus_health');
-                $health_req = new HTTP_Request($health_url, $health_options);
-                $health_result = $health_req->sendRequest();
-                if (PEAR::isError($health_result)) {
+                $health_req = new HTTP_Request2($health_url, HTTP_Request2::METHOD_GET, $health_options);
+                try {
+                    $health_result = $health_req->send();
+                    if ($health_result->getStatus() != '200') {
+                        $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHERROR, $health_req->getResponseCode()));
+                        $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url));
+                    } else {
+                        $this->outputMSG('error', PLUGIN_EVENT_SPARTACUS_HEALTFIREWALLED);
+                    }
+                } catch (HTTP_Request2_Exception $e) {
                     $fp = @fsockopen('www.google.com', 80, $errno, $errstr);
                     if (!$fp) {
                         $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED, $errno, $errstr));
@@ -477,12 +489,6 @@ class serendipity_event_spartacus extends serendipity_event
                         $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url));
                         fclose($fp);
                     }
-                } else if ($health_req->getResponseCode() != '200') {
-                    $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHERROR, $health_req->getResponseCode()));
-                    $this->outputMSG('notice', sprintf(PLUGIN_EVENT_SPARTACUS_HEALTHLINK, $health_url));
-                } else {
-                    $this->outputMSG('error', PLUGIN_EVENT_SPARTACUS_HEALTFIREWALLED);
-                    //--JAM: Parse response and display it.
                 }
                 //--JAM: END FIREWALL DETECTION
                 if (file_exists($target) && filesize($target) > 0) {
@@ -492,7 +498,7 @@ class serendipity_event_spartacus extends serendipity_event
             } else {
                 // Fetch file
                 if (!$data) {
-                    $data = $req->getResponseBody();
+                    $data = $response->getBody();
                 }
                 if (is_object($serendipity['logger'])) $serendipity['logger']->debug(sprintf(PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_URL, strlen($data), $target));
                 $tdir = dirname($target);
