@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.60'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.61'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -678,7 +678,7 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function fetchMyBlogLog(&$eventData)
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         global $serendipity;
 
         // Was lastrun successfull?
@@ -716,7 +716,7 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function fetchPFavatar(&$eventData, $mode="F")
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         global $serendipity;
 
         $default = $this->getDefaultImageConfiguration();
@@ -759,17 +759,14 @@ class serendipity_event_gravatar extends serendipity_event
             }
 
             // Evaluate URL of P/Favatar
-            $req = new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 3));
+            $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 3));
             $favicon = false;
             // code 200: OK, code 30x: REDIRECTION
             $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
-            if (!$islocalhost && (PEAR::isError($req->sendRequest()) || preg_match($responses, $req->getResponseCode()))) {
-                // nothing to do,
-                $favicon = false;
-                $this->log($mode . " - Error fetching $url: " . $req->getResponseCode());
-            } else {
-                $pavatarHeaderIcon = $req->getResponseHeader("X-Pavatar");
-                $fContent = $req->getResponseBody();
+            try {
+                $response = $req->send();
+                $pavatarHeaderIcon = $response->getHeader("X-Pavatar");
+                $fContent = $response->getBody();
                 if ($mode=='P' && !empty($pavatarHeaderIcon)){
                     $faviconURL = $pavatarHeaderIcon;
                     $this->log("Found x-pavatar in head: $faviconURL");
@@ -838,7 +835,13 @@ class serendipity_event_gravatar extends serendipity_event
 
                 // Remember the last result of the P/Favatar search
                 $this->avatarConfiguration['img_url_'.$mode] = $favicon;
+            } catch (HTTP_Request2_Exception $e) {
+                if (!$islocalhost && preg_match($responses, $response->getStatus())) {
+                    $favicon = false;
+                    $this->log($mode . " - Error fetching $url: " . $response->getStatus());
+                }
             }
+            
             if (function_exists('serendipity_request_end')) {
                 serendipity_request_end();
             }
@@ -855,7 +858,7 @@ class serendipity_event_gravatar extends serendipity_event
 
     function fetchTwitter(&$eventData)
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
 
         // Was lastrun successfull?
         if (isset($this->avatarConfiguration['twitter_found']) && !$this->avatarConfiguration['twitter_found']) {
@@ -885,22 +888,28 @@ class serendipity_event_gravatar extends serendipity_event
             $path =  trim($parts['path']);
             $dirs = explode('/',$path);
             $twittername = $dirs[1];
-            //if ($twittername=='#!') $twittername = $dirs[2];
 
             $this->log("Twitteruser found ($url): $twittername");
 
             $twitter_search = 'http://search.twitter.com/search.atom?q=from%3A' . $twittername . '&rpp=1';
             serendipity_request_start();
-            $req = new HTTP_Request($twitter_search);
-            $req->sendRequest();
-            $this->last_error = $req->getResponseCode();
-            if ($req->getResponseCode() != 200) {
-                $this->last_error = $req->getResponseCode();
+            $req = new HTTP_Request2($twitter_search);
+            try {
+                $response = $req->send();
+
+                $this->last_error = $response->getStatus();
+                if ($response->getStatus() != 200) {
+                    throw new HTTP_Request2_Exception("Could not search on twitter");
+                }
+                $response = trim($response->getBody());
+
+            } catch (HTTP_Request2_Exception $e) {
+                $this->last_error = $response->getStatus();
                 serendipity_request_end();
                 $this->log("Twitter Error: {$this->last_error}");
                 return false;
             }
-            $response = trim($req->getResponseBody());
+                
             serendipity_request_end();
             $parser = xml_parser_create();
             $vals=array(); $index=array();
@@ -927,7 +936,7 @@ class serendipity_event_gravatar extends serendipity_event
 
     function fetchIdentica(&$eventData)
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
 
         // Was lastrun successfull?
         if (isset($this->avatarConfiguration['identica_found']) && !$this->avatarConfiguration['identica_found']) {
@@ -942,16 +951,20 @@ class serendipity_event_gravatar extends serendipity_event
             $status_id = $matches[1];
             $search = "http://identi.ca/api/statuses/show/$status_id.xml";
             serendipity_request_start();
-            $req = new HTTP_Request($search);
-            $req->sendRequest();
-            $this->last_error = $req->getResponseCode();
-            if ($req->getResponseCode() != 200) {
-                $this->last_error = $req->getResponseCode();
+            $req = new HTTP_Request2($search);
+            try {
+                $response = $req->send();
+                $this->last_error = $response->getStatus();
+                if ($response->getStatus() != 200) {
+                    throw new HTTP_Request2_Exception("Could not search on identica");
+                }
+                $response = trim($response->getBody());
+            } catch (HTTP_Request2_Exception $e) {
+                $this->last_error = $response->getStatus();
                 serendipity_request_end();
                 $this->log("Identica Error: {$this->last_error}");
                 return false;
             }
-            $response = trim($req->getResponseBody());
             serendipity_request_end();
             $parser = xml_parser_create();
             $vals=array(); $index=array();
@@ -1099,7 +1112,7 @@ class serendipity_event_gravatar extends serendipity_event
      */
     function saveAndResponseAvatar($eventData, $url, $allow_redirection = 3)
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         global $serendipity;
         $fContent   = null;
 
@@ -1108,35 +1121,34 @@ class serendipity_event_gravatar extends serendipity_event
         }
 
         if ($allow_redirection) {
-            $request_pars['allowRedirects'] = true;
-            $request_pars['maxRedirects'] = $allow_redirection;
+            $request_pars['follow_redirects'] = true;
+            $request_pars['max_redirects'] = $allow_redirection;
         }
         else {
-            $request_pars['allowRedirects'] = false;
+            $request_pars['follow_redirects'] = false;
         }
 
-        $req = new HTTP_Request($url, $request_pars);
-
-        // if the request leads to an error we don't want to have it: return false
-        if (PEAR::isError($req->sendRequest()) || ($req->getResponseCode() != '200')) {
-            $fContent = null;
-            if ($req->getResponseCode() != '200') {
-                $this->log("Avatar fetch error: " . $req->getResponseCode() . " for url=" . $url);
+        $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, $request_pars);
+        try {
+            $response = $req->send();
+            if ($response->getStatus() != '200') {
+                throw new HTTP_Request2_Exception("Could not search on identica");
             }
-            else {
-                $this->log("Avatar fetch error: PEAR reported ERROR for url=" . $url);
-            }
-
-        }
-        else {
             // Allow only images as Avatar!
-            $mime = $req->getResponseHeader("content-type");
+            $mime = $response->getHeader("content-type");
             $this->log("Avatar fetch mimetype: $mime"  . " for url=" . $url);
             $mimeparts = explode('/',$mime);
             if (count($mimeparts)==2 && $mimeparts[0]=='image') {
-                $fContent = $req->getResponseBody();
+                $fContent = $response->getBody();
             }
-        }
+        } catch (HTTP_Request2_Exception $e) {
+            $fContent = null;
+            if ($response->getStatus() != '200') {
+                $this->log("Avatar fetch error: " . $response->getStatus() . " for url=" . $url);
+            } else {
+                $this->log("Avatar fetch error: PEAR reported ERROR for url=" . $url);
+            }
+        }        
 
         if (function_exists('serendipity_request_start')) {
             serendipity_request_end();
