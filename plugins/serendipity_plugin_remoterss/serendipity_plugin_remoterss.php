@@ -47,15 +47,19 @@ class s9y_remoterss_XMLTree
 
     function GetXMLTree($file)
     {
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         serendipity_request_start();
-        $req = new HTTP_Request($file);
+        $req = new HTTP_Request2($file);
 
-        if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+        try {
+            $response = $req->send();
+            if ($response->getStatus() != '200') {
+                throw new HTTP_Request2_Exception('Status code not 200, xml file not fetched');
+            }
+            $data = $response->getBody();
+
+        } catch (HTTP_Request2_Exception $e) {
             $data = file_get_contents($file);
-        } else {
-            // Fetch file
-            $data = $req->getResponseBody();
         }
         serendipity_request_end();
 
@@ -269,7 +273,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.21');
+        $propbag->add('version',       '1.22');
         $propbag->add('requirements',  array(
             'serendipity' => '1.7',
             'smarty'      => '3.1.0',
@@ -436,16 +440,20 @@ class serendipity_plugin_remoterss extends serendipity_plugin
 
         // Disabled by now. May get enabled in the future, but for now the extra HTTP call isn't worth trying.
         return true;
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         serendipity_request_start();
-        $req = new HTTP_Request($uri);
+        $req = new HTTP_Request2($uri);
 
-        if (PEAR::isError($req->sendRequest()) || !preg_match('@^[23]..@', $req->getResponseCode())) {
-            serendipity_request_end();
-            return false;
-        } else {
+        try {
+            $response = $req->send();
+            if (!preg_match('@^[23]..@', $req->getStatus)) {
+                throw new HTTP_Request2_Exception('Status code says url not reachable');
+            }
             serendipity_request_end();
             return true;
+        } catch (HTTP_Request2_Exception $e) {
+            serendipity_request_end();
+            return false;
         }
     }
 
