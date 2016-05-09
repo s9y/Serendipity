@@ -203,10 +203,18 @@ class serendipity_plugin_syndication extends serendipity_plugin {
         }
 
         if (serendipity_db_bool($this->get_config('show_2.0c', false)) || serendipity_db_bool($this->get_config('show_comment_feed', false))) {
-            echo $this->generateFeedButton(($useAtom && ! $useRss ? serendipity_rewriteURL(PATH_FEEDS .'/comments.atom') : serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')),
-                                            $COMMENTS,
-                                            ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')) : ""),
-                                            $small_icon);
+            if ($useRss) {
+                echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2'),
+                                                $COMMENTS . ($useAtom ? " (RSS)": ""),
+                                                ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.rss2')) : ""),
+                                                $small_icon);
+            }
+            if ($useAtom) {
+                echo $this->generateFeedButton( serendipity_rewriteURL(PATH_FEEDS .'/comments.atom10'),
+                                                $COMMENTS . ($useRss ? " (Atom)": ""),
+                                                ($subtome ? $this->getOnclick(serendipity_rewriteURL(PATH_FEEDS .'/comments.atom10')) : ""),
+                                                $small_icon);
+            }
         }
         echo "</ul>\n";
     }
