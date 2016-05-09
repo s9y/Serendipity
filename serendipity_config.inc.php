@@ -60,7 +60,10 @@ error_reporting(E_ALL & ~(E_NOTICE|E_STRICT|E_DEPRECATED)); // is 22519 with 5.4
 
 if ($serendipity['production'] !== true) {
     @ini_set('display_errors', 'on');
-};
+}
+
+// The serendipity errorhandler string
+$serendipity['errorhandler'] = 'errorToExceptionHandler';
 
 // Default rewrite method
 $serendipity['rewrite'] = 'none';
@@ -271,6 +274,21 @@ if ($serendipity['production'] === 'debug') {
 }
 if ($serendipity['production'] === false) {
     error_reporting(E_ALL & ~(E_NOTICE|E_STRICT)); // is 30711 with 5.4+
+}
+
+$errLevel = error_reporting();
+
+/* [DEBUG] Helper to display current error levels, meant for developers.
+echo $errLevel."<br>\n";
+for ($i = 0; $i < 15;  $i++ ) {
+    print debug_ErrorLevelType($errLevel & pow(2, $i)) . "<br>\n";
+}
+*/
+
+// [internal callback function]: errorToExceptionHandler()
+if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
+    // set serendipity global error to exeption handler
+    set_error_handler($serendipity['errorhandler'], $errLevel); // See error_reporting() earlier to see which errors are passed to the handler, deending on $serendipity['production'].
 }
 
 define('IS_up2date', version_compare($serendipity['version'], $serendipity['versionInstalled'], '<='));

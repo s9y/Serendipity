@@ -62,6 +62,179 @@ function memSnap($tshow = '') {
     return '[' . date('d.m.Y H:i') . '] ' . number_format($current - $memUsage, 2, ',', '.') . ' label "' . $tshow . '", totalling ' . number_format($current, 2, ',', '.') . '<br />' . "\n";
 }
 
+
+/**
+ * Make readable error types for debugging error_reporting levels
+ *
+ * @access public
+ * @param  int     error value
+ * @return string  constant error string
+ */
+function debug_ErrorLevelType($type)
+{
+    switch($type)
+    {
+        case E_ERROR: // 1 //
+            return 'E_ERROR';
+        case E_WARNING: // 2 //
+            return 'E_WARNING';
+        case E_PARSE: // 4 //
+            return 'E_PARSE';
+        case E_NOTICE: // 8 //
+            return 'E_NOTICE';
+        case E_CORE_ERROR: // 16 //
+            return 'E_CORE_ERROR';
+        case E_CORE_WARNING: // 32 //
+            return 'E_CORE_WARNING';
+        case E_COMPILE_ERROR: // 64 //
+            return 'E_COMPILE_ERROR';
+        case E_COMPILE_WARNING: // 128 //
+            return 'E_COMPILE_WARNING';
+        case E_USER_ERROR: // 256 //
+            return 'E_USER_ERROR';
+        case E_USER_WARNING: // 512 //
+            return 'E_USER_WARNING';
+        case E_USER_NOTICE: // 1024 //
+            return 'E_USER_NOTICE';
+        case E_STRICT: // 2048 //
+            return 'E_STRICT';
+        case E_RECOVERABLE_ERROR: // 4096 //
+            return 'E_RECOVERABLE_ERROR';
+        case E_DEPRECATED: // 8192 //
+            return 'E_DEPRECATED';
+        case E_USER_DEPRECATED: // 16384 //
+            return 'E_USER_DEPRECATED';
+    }
+    return "";
+}
+
+
+/**
+ * Set our own exeption handler to convert all errors into exeptions automatically
+ * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
+ *
+ * See Notes about returning false
+ *
+ * @access public
+ * @param  standard
+ * @return null
+ */
+if (!function_exists('errorToExceptionHandler')) {
+    function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
+        global $serendipity;
+
+        // By default, we will continue our process flow, unless:
+        $exit = false;
+
+        switch ($errNo) {
+            case E_ERROR:
+            case E_USER_ERROR:
+                $type = 'Fatal Error';
+                $exit = true;
+                break;
+
+            case E_USER_WARNING:
+            case E_WARNING:
+                $type = 'Warning';
+                break;
+
+            case E_USER_NOTICE:
+            case E_NOTICE:
+            case @E_STRICT:
+            case @E_DEPRECATED:
+            case @E_USER_DEPRECATED:
+                $type = 'Notice';
+                break;
+
+            case @E_RECOVERABLE_ERROR:
+                $type = 'Catchable';
+                break;
+
+            default:
+                $type = 'Unknown Error';
+                $exit = true;
+                break;
+        }
+
+        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting, 
+        // and not the one in our current content. @-silenced errors would otherwise never be caught on.
+        $rep  = error_reporting();
+
+        // Bypass error processing because it's @-silenced.
+        if ($rep == 0) { 
+            return false; 
+        }
+
+        // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect this:
+        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { 
+            return false; 
+        }
+
+        // Several plugins might not adapt to proper style. This should not completely kill our execution.
+        if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
+            #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
+            return false;
+        }
+
+        $args = func_get_args();
+
+        /* 
+         * $serendipity['production'] can be:
+         *
+         * (bool) TRUE:         Live-blog, conceal error messages
+         * (bool) FALSE         Beta/alpha builds
+         * (string) 'debug'     Developer build, specifically enabled.
+         */
+
+        $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
+
+        // Debug environments shall be verbose...
+        if ($serendipity['production'] === 'debug') {
+            echo " == ERROR-REPORT (DEBUGGING ENABLED) == <br />\n";
+            echo " == (When you copy this debug output to a forum or other places, make sure to remove your username/passwords, as they may be contained within function calls) == \n";
+            echo '<pre>';
+            debug_print_backtrace(); // Unlimited output, debugging shall show us everything.
+            echo "</pre>";
+            $debug_note = '';
+        } elseif ($serendipity['production'] === false) {
+            echo " == ERROR-REPORT (BETA/ALPHA-BUILDS) == \n";
+        }
+
+        if ($serendipity['production'] !== true) {
+            // Display error (production: FALSE and production: 'debug')
+            echo '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
+
+            echo '<pre style="white-space: pre-line;">';
+            throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
+
+            if (!$serendipity['dbConn'] || $exit) {
+                exit; // make sure to exit in case of database connection errors or fatal errors.
+            }
+        } else {
+            // Only display error (production blog) if an admin is logged in, else we discard the error.
+
+            if ($serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
+                $str  = " == SERENDIPITY ERROR == ";
+                $str .= '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
+
+                if (headers_sent()) {
+                    serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, or into streamed js files, which hardly isn't seen by many users
+                } else {
+                    // see global include of function in plugin_api.inc.php
+                    // this also reacts on non eye-displayed errors with following small javascript,
+                    // while being in tags like <select> to push on top of page, else return non javascript use $str just there
+                    // sadly we can not use HEREDOC notation here, since this does not execute the javascript after finished writing
+                    echo "\n".'<script>
+if (typeof errorHandlerCreateDOM == "function") {
+var fragment = window.top.errorHandlerCreateDOM("Error redirect: '.addslashes($str).'");
+document.body.insertBefore(fragment, document.body.childNodes[0]);
+}' . "\n</script>\n<noscript>" . $str . "</noscript>\n";
+                }
+            }
+        }
+    }
+}
+
 if (!function_exists('file_get_contents')) {
     function file_get_contents($filename, $use_include_path = 0) {
         $file = fopen($filename, 'rb', $use_include_path);
