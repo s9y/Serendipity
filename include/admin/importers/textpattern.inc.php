@@ -16,7 +16,7 @@ class Serendipity_Import_textpattern extends Serendipity_Import {
         return '<p>Textpattern uses MySQLs native PASSWORD() function to save passwords. Thus, those passwords are incompatible with the MD5 hashing of Serendipity. The passwords for all users have been set to "txp". <strong>You need to modify the passwords manually for each user</strong>, we are sorry for that inconvenience.</p>';
     }
 
-    function Serendipity_Import_textpattern($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

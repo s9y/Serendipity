@@ -12,7 +12,7 @@ class Serendipity_Import_WordPress_PG extends Serendipity_Import {
     var $inputFields = array();
 
 
-    function Serendipity_Import_WordPress_PG($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

@@ -10,7 +10,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
     var $inputFields = array();
     var $force_recode = false;
 
-    function Serendipity_Import_Generic($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text'    => RSS . ' ' . URL,
                                          'type'    => 'input',
@@ -139,18 +139,21 @@ class Serendipity_Import_Generic extends Serendipity_Import {
 
         $serendipity['noautodiscovery'] = 1;
         $uri = $this->data['url'];
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         serendipity_request_start();
-        $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
-        $res = $req->sendRequest();
-
-        if (PEAR::isError($res) || $req->getResponseCode() != '200') {
+        $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 5));
+        try {
+            $res = $req->send();
+            if ($res->getStatus() != '200') {
+                throw new HTTP_Request2_Exception('could not fetch url: status != 200');
+            }
+        } catch (HTTP_Request2_Exception $e) {
             serendipity_request_end();
             echo '<span class="block_level">' . IMPORT_FAILED . ': ' . serendipity_specialchars($this->data['url']) . '</span>';
             return false;
         }
 
-        $fContent = $req->getResponseBody();
+        $fContent = $res->getBody();
         serendipity_request_end();
         echo '<span class="block_level">' . strlen($fContent) . " Bytes</span>";
 

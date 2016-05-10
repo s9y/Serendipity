@@ -17,7 +17,7 @@ class Serendipity_Import_sunlog extends Serendipity_Import {
              . '<p>Sunlog has a granular control over access privileges which cannot be migrated to Serendipity. All Users will be migrated as Superusers, you may need to set them to editor or chief users manually after import.</p>';
     }
 
-    function Serendipity_Import_sunlog($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

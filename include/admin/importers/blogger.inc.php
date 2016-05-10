@@ -6,14 +6,14 @@
  *      Blogger Importer v0.2, by Jawish Hameed (jawish.org)    *
  ****************************************************************/
 
-require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
 
 class Serendipity_Import_Blogger extends Serendipity_Import {
     var $info        = array('software' => 'Blogger.com [using API]');
     var $data        = array();
     var $inputFields = array();
 
-    function Serendipity_Import_Blogger($data) {
+    function __construct($data) {
         global $serendipity;
 
         $this->data = $data;
@@ -56,17 +56,17 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         if (!empty($_REQUEST['token'])) {
 
             // Prepare session token request
-            $req = new HTTP_Request('https://www.google.com/accounts/AuthSubSessionToken');
-            $req->addHeader('Authorization', 'AuthSub token="'. $_REQUEST['token'] .'"');
+            $req = new HTTP_Request2('https://www.google.com/accounts/AuthSubSessionToken');
+            $req->setHeader('Authorization', 'AuthSub token="'. $_REQUEST['token'] .'"');
 
             // Request token
-            $req->sendRequest();
+            $response = $req->send();
 
             // Handle token reponse
-            if ($req->getResponseCode() != '200') return;
+            if ($response->getStatus() != '200') return;
 
             // Extract Auth token
-            preg_match_all('/^(.+)=(.+)$/m', $req->getResponseBody(), $matches);
+            preg_match_all('/^(.+)=(.+)$/m', $response->getBody(), $matches);
             $tokens = array_combine($matches[1], $matches[2]);
             unset($matches);
 
@@ -77,18 +77,18 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
                                                      'default'   => $tokens['Token']));
 
             // Prepare blog list request
-            $req = new HTTP_Request('http://www.blogger.com/feeds/default/blogs');
-            $req->addHeader('GData-Version', 2);
-            $req->addHeader('Authorization', 'AuthSub token="'. $tokens['Token'] .'"');
+            $req = new HTTP_Request2('http://www.blogger.com/feeds/default/blogs');
+            $req->setHeader('GData-Version', 2);
+            $req->setHeader('Authorization', 'AuthSub token="'. $tokens['Token'] .'"');
 
             // Fetch blog list
-            $req->sendRequest();
+            $response = $req->send();
 
             // Handle errors
-            if ($req->getResponseCode() != '200') return false;
+            if ($response->getStatus() != '200') return false;
 
             // Load list
-            $bXml = simplexml_load_string($req->getResponseBody());
+            $bXml = simplexml_load_string($response->getBody());
 
             // Generate list of the blogs under the authenticated account
             $bList = array();
@@ -139,15 +139,15 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         $this->getTransTable();
 
         // Prepare export request
-        $req = new HTTP_Request('http://www.blogger.com/feeds/'. $this->data['bId'] .'/archive');
-        $req->addHeader('GData-Version', 2);
-        $req->addHeader('Authorization', 'AuthSub token="'. $this->data['bAuthToken'] .'"');
+        $req = new HTTP_Request2('http://www.blogger.com/feeds/'. $this->data['bId'] .'/archive');
+        $req->setHeader('GData-Version', 2);
+        $req->setHeader('Authorization', 'AuthSub token="'. $this->data['bAuthToken'] .'"');
 
         // Attempt fetch blog export
-        $req->sendRequest();
+        $response = $req->send();
 
         // Handle errors
-        if ($req->getResponseCode() != '200') {
+        if ($response->getStatus() != '200') {
             echo "Error occured while trying to export the blog.";
             return false;
         }
@@ -164,7 +164,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         unset($s9y_users);
         
         // Load export
-        $bXml = simplexml_load_string($req->getResponseBody());
+        $bXml = simplexml_load_string($response->getBody());
 
         // Process entries
         $entryList = $entryFailList = array();

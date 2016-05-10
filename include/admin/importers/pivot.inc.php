@@ -10,7 +10,7 @@ class Serendipity_Import_Pivot extends Serendipity_Import {
     var $data        = array();
     var $inputFields = array();
 
-    function Serendipity_Import_Pivot($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text'    => PARENT_DIRECTORY,
                                          'type'    => 'input',

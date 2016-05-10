@@ -24,7 +24,7 @@ class Serendipity_Import_Serendipity extends Serendipity_Import {
         <p>After these precautions: The importer code generally works very well for me and my purposes. Your mileage may vary.</p>';
     }
 
-    function Serendipity_Import_Serendipity ($data) {
+    function __construct($data) {
         global $serendipity;
 
         $this->data = $data;
