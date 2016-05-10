@@ -126,25 +126,26 @@ function _serendipity_send($loc, $data, $contenttype = null) {
        $uri = $target['scheme'] . '://' . $target['host'] . ':' . $target['port'] . $target['path'] . $target['query'];
     }
 
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-    $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'POST');
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_send');
     serendipity_request_start();
 
-    $req = new HTTP_Request($uri, $options);
+    $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_POST, $options);
     if (isset($contenttype)){
-       $req->addHeader('Content-Type', $contenttype);
+       $req->setHeader('Content-Type', $contenttype);
     }
 
-    $req->addRawPostData($data, true);
-    $res = $req->sendRequest();
-
-    if (PEAR::isError($res)) {
+    $req->setBody($data);
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
         serendipity_request_end();
         return false;
     }
+    
 
-    $fContent = $req->getResponseBody();
+    $fContent = $res->getBody();
     serendipity_request_end();
     return $fContent;
 }
@@ -268,20 +269,21 @@ function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) 
     echo '<div>&#8226; '. sprintf(TRACKBACK_CHECKING, $loc) .'</div>';
     flush();
 
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-    $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'GET');
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_detect');
     serendipity_request_start();
-    $req = new HTTP_Request($parsed_loc, $options);
-    $res = $req->sendRequest();
+    $req = new HTTP_Request2($parsed_loc, HTTP_Request2::METHOD_GET, $options);
 
-    if (PEAR::isError($res)) {
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
         echo '<div>&#8226; ' . sprintf(TRACKBACK_COULD_NOT_CONNECT, $u['host'], $u['port']) .'</div>';
         serendipity_request_end();
         return;
     }
 
-    $fContent = $req->getResponseBody();
+    $fContent = $res->getBody();
     serendipity_request_end();
 
     if (strlen($fContent) != 0) {
@@ -533,21 +535,22 @@ function fetchPingbackData(&$comment) {
     if (isset($serendipity['pingbackFetchPageMaxLength'])){
         $fetchPageMaxLength = $serendipity['pingbackFetchPageMaxLength'];
     }
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
     $url = $comment['url'];
 
     if (function_exists('serendipity_request_start')) serendipity_request_start();
 
     // Request the page
-    $req = new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
+    $req = new HTTP_Request2($url, array('follow_redirects' => true, 'max_redirects' => 5, 'timeout' => 20));
 
     // code 200: OK, code 30x: REDIRECTION
-    $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
-    if ((PEAR::isError($req->sendRequest()) || preg_match($responses, $req->getResponseCode()))) {
-        // nothing to do,
-    }
-    else {
-        $fContent = $req->getResponseBody();
+    $responses = "/(200)|(30[0-9])/"; // |(30[0-9] Moved)
+    try {
+        $response = $req->send();
+        if (preg_match($responses, $response->getStatus())) {
+
+        }
+        $fContent = $response->getBody();
 
         // Get a title
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
@@ -571,6 +574,8 @@ function fetchPingbackData(&$comment) {
 
             $comment['comment'] = $body . '[..]';
         }
+    } catch (HTTP_Request2_Exception $e) {
+        
     }
 
     if (function_exists('serendipity_request_end')) serendipity_request_end();
