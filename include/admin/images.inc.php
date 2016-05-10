@@ -267,18 +267,20 @@ switch ($serendipity['GET']['adminAction']) {
                 $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex]);
             }
 
-            require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-            $options = array('allowRedirects' => true, 'maxRedirects' => 5);
+            require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+            $options = array('follow_redirects' => true, 'max_redirects' => 5);
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'image');
             serendipity_request_start();
-            $req = new HTTP_Request($serendipity['POST']['imageurl'], $options);
+            $req = new HTTP_Request2($serendipity['POST']['imageurl'], HTTP_Request2::METHOD_GET, $options);
 
             // Try to get the URL
-            if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
-            } else {
+            try {
+                $response = $req->send();
+                if ($response->getStatus() != '200') {
+                    throw new HTTP_Request2_Exception('could not fetch image: status != 200');
+                }
                 // Fetch file
-                $fContent = $req->getResponseBody();
+                $fContent = $response->getBody();
 
                 if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
                     $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
@@ -321,6 +323,8 @@ switch ($serendipity['GET']['adminAction']) {
                     }
                 }
                 serendipity_request_end();
+            } catch (HTTP_Request2_Exception $e) {
+                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
             }
         } else {
             if (!is_array($_FILES['serendipity']['name']['userfile'])) {
