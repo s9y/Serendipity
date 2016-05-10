@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.85');
+        $propbag->add('version',       '1.86');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -478,12 +478,9 @@ class serendipity_event_spamblock extends serendipity_event
         global $serendipity;
 
         $opt = array(
-            'method'            => 'POST',
-            'http'              => '1.1',
             'timeout'           => 20,
-            'allowRedirects'    => true,
-            'maxRedirects'      => 3,
-            'readTimeout'       => array(5,0),
+            'follow_redirects'    => true,
+            'max_redirects'      => 3,
         );
 
         // Default server type to akismet, in case user has an older version of the plugin
@@ -521,22 +518,26 @@ class serendipity_event_spamblock extends serendipity_event
             // DEBUG
             //$this->log($this->logfile, $eventData['id'], 'AKISMET_SERVER', 'Using Akismet server at ' . $server, $addData);
         }
-        $req    = new HTTP_Request(
-             'http://' . $server . '/1.1/verify-key',
-             $opt
+        $req    = new HTTP_Request2(
+            'http://' . $server . '/1.1/verify-key',
+            HTTP_Request2::METHOD_POST,
+            $opt
         );
 
-        $req->addPostData('key',  $api_key);
-        $req->addPostData('blog', $serendipity['baseURL']);
+        $req->addPostParameter('key',  $api_key);
+        $req->addPostParameter('blog', $serendipity['baseURL']);
 
-        if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+        try {
+            $response = $req->send();
+            if ($response->getStatus() != '200') {
+                throw new HTTP_Request2_Exception('Statuscode not 200, Akismet HTTP verification request failed.');
+            }
+            $reqdata = $response->getBody();
+        } catch (HTTP_Request2_Exception $e) {
             $ret['is_spam'] = false;
             $ret['message'] = 'API Verification Request failed';
             $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP verification request failed.', $addData);
             return;
-        } else {
-            // Fetch response
-            $reqdata = $req->getResponseBody();
         }
 
         if (!preg_match('@valid@i', $reqdata)) {
@@ -546,23 +547,26 @@ class serendipity_event_spamblock extends serendipity_event
             return;
         }
 
-        $req    = new HTTP_Request(
+        $req = new HTTP_Request2(
             'http://' . $api_key . '.' . $server . '/1.1/' . $action,
             $opt
         );
 
         foreach($data AS $key => $value) {
-            $req->addPostData($key, $value);
+            $req->addPostParameter($key, $value);
         }
 
-        if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+        try {
+            $response = $req->send();
+            if ($response->getStatus() != '200') {
+                throw new HTTP_Request2_Exception('Statuscode not 200, Akismet HTTP request failed.');
+            }
+            $reqdata = $response->getBody();
+        } catch (HTTP_Request2_Exception $e) {
             $ret['is_spam'] = false;
             $ret['message'] = 'Akismet Request failed';
             $this->log($this->logfile, $eventData['id'], 'API_ERROR', 'Akismet HTTP request failed.', $addData);
             return;
-        } else {
-            // Fetch response
-            $reqdata = $req->getResponseBody();
         }
 
         if ($action == 'comment-check' && preg_match('@true@i', $reqdata)) {
@@ -596,7 +600,7 @@ class serendipity_event_spamblock extends serendipity_event
                                       . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
         if (!is_array($comment)) return;
 
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         if (function_exists('serendipity_request_start')) serendipity_request_start();
 
         switch($where) {
@@ -630,7 +634,7 @@ class serendipity_event_spamblock extends serendipity_event
         global $serendipity;
 
         $ret = false;
-        require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         if (function_exists('serendipity_request_start')) serendipity_request_start();
 
         // this switch statement is a leftover from blogg.de support (i.e. there were more options than just one). Leaving it in place in case we get more options again in the future.
@@ -1046,15 +1050,17 @@ class serendipity_event_spamblock extends serendipity_event
 
                         // Check Trackback URLs?
                         if (($addData['type'] == 'TRACKBACK' || $addData['type'] == 'PINGBACK') && serendipity_db_bool($this->get_config('trackback_check_url'))) {
-                            require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+                            require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
 
                             if (function_exists('serendipity_request_start')) serendipity_request_start();
-                            $req     = new HTTP_Request($addData['url'], array('allowRedirects' => true, 'maxRedirects' => 5, 'readTimeout' => array(5,0)));
+                            $req     = new HTTP_Request2($addData['url'], HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 5, 'timeout' => 10));
                             $is_valid = false;
-                            if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                                $is_valid = false;
-                            } else {
-                                $fdata = $req->getResponseBody();
+                            try {
+                                $response = $req->send();
+                                if ($response->getStatus() != '200') {
+                                    throw new HTTP_Request2_Exception('could not get origin url: status != 200');
+                                }
+                                $fdata = $response->getBody();
 
                                 // Check if the target page contains a link to our blog
                                 if (preg_match('@' . preg_quote($serendipity['baseURL'], '@') . '@i', $fdata)) {
@@ -1062,7 +1068,10 @@ class serendipity_event_spamblock extends serendipity_event
                                 } else {
                                     $is_valid = false;
                                 }
+                            } catch (HTTP_Request2_Exception $e) {
+                                $is_valid = false;
                             }
+
                             if (function_exists('serendipity_request_end')) serendipity_request_end();
 
                             if ($is_valid === false) {
