@@ -110,7 +110,7 @@ class s9y_remoterss_OPML
     var $cacheOPMLBody;
     var $cacheOPMLOutline;
 
-    function s9y_remoterss_OPML()
+    function __construct()
     {
         $this->cacheOPMLHead    = array();
         $this->cacheOPMLBody    = array();
