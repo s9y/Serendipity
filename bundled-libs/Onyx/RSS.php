@@ -123,19 +123,23 @@ class ONYX_RSS
       {
          clearstatcache();
 
-         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
          serendipity_request_start();
-         $req = new HTTP_Request($uri, array('allowRedirects' => true, 'maxRedirects' => 5));
-         $res = $req->sendRequest();
+         $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 5));
+         try {
+            $res = $req->send();
 
-         if (PEAR::isError($res) || $req->getResponseCode() != '200')
-         {
+            if ($res->getStatus() != '200') {
+               throw new HTTP_Request2_Exception('unable to fetch feed: status code != 200');
+            }
+           
+         } catch (HTTP_Request2_Exception $e) {
             serendipity_request_end();
-            $this->raiseError((__LINE__-2), ONYX_ERR_INVALID_URI . ' (#' . $req->getResponseCode() . ')');
+            $this->raiseError((__LINE__-2), ONYX_ERR_INVALID_URI . ' (#' . $res->getStatus() . ')');
             return false;
          }
 
-         $fContent = $req->getResponseBody();
+         $fContent = $res->getBody();
          serendipity_request_end();
          if (@preg_match('@<?xml[^>]*encoding="([^"]+)"@i', $fContent, $xml_encoding)) {
             $this->rss['encoding'] = strtolower($xml_encoding[1]);
@@ -342,16 +346,21 @@ class ONYX_RSS
    {
       if (function_exists('version_compare') && version_compare(phpversion(), '4.3.0') >= 0)
       {
-         require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
          serendipity_request_start();
-         $req = new HTTP_Request($uri);
+         $req = new HTTP_Request2($uri);
 
-         if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
+         try {
+            $response = $req->send();
+            if ($response->getStatus() != '200') {
+               throw new HTTP_Request2_Exception('could not fetch url: status code != 200');
+            }
+         } catch (HTTP_Request2_Exception $e) {
             serendipity_request_end();
             return false;
          }
 
-         $fHeader = $req->getResponseHeader();
+         $fHeader = $response->getHeader();
          if (isset($fHeader['last-modified'])) {
             $modtime = $fHeader['last-modified'];
         }
