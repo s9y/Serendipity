@@ -1,22 +1,39 @@
 <?php
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
-// +----------------------------------------------------------------------+
-// | PEAR::Net_DNSBL_SURBL                                                |
-// +----------------------------------------------------------------------+
-// | Copyright (c) 2004 Sebastian Nohn <sebastian@nohn.net>               |
-// +----------------------------------------------------------------------+
-// | This source file is subject to version 3.0 of the PHP license,       |
-// | that is bundled with this package in the file LICENSE, and is        |
-// | available through the world-wide-web at the following url:           |
-// | http://www.php.net/license/3_0.txt.                                  |
-// | If you did not receive a copy of the PHP license and are unable to   |
-// | obtain it through the world-wide-web, please send a note to          |
-// | license@php.net so we can mail you a copy immediately.               |
-// +----------------------------------------------------------------------+
-// | Authors: Sebastian Nohn <sebastian@nohn.net>                         |
-// +----------------------------------------------------------------------+
-//
-// $Id: SURBL.php,v 1.4 2004/12/02 14:23:51 nohn Exp $
+
+/**
+ * PEAR::Net_DNSBL
+ *
+ * This class acts as interface to generic Realtime Blocking Lists
+ * (RBL)
+ *
+ * PHP versions 5
+ *
+ * LICENSE: This source file is subject to version 3.01 of the PHP license
+ * that is available through the world-wide-web at the following URI:
+ * http://www.php.net/license/3_01.txt.  If you did not receive a copy of
+ * the PHP License and are unable to obtain it through the web, please
+ * send a note to license@php.net so we can mail you a copy immediately.
+ *
+ * Net_DNSBL looks up an supplied host if it's listed in 1-n supplied
+ * Blacklists
+ *
+ * @category  Net
+ * @package   Net_DNSBL
+ * @author    Sebastian Nohn <sebastian@nohn.net>
+ * @author    Ammar Ibrahim <fixxme@fixme.com>
+ * @copyright 2004-2012 Sebastian Nohn <sebastian@nohn.net>
+ * @license   http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @version   CVS: $Id: SURBL.php 325344 2012-04-20 04:31:30Z nohn $
+ * @link      http://pear.php.net/package/Net_DNSBL
+ * @see       Net_DNS2
+ * @since     File available since Release 1.0.0
+ */
+
+require_once 'Cache/Lite.php';
+require_once 'HTTP/Request2.php';
+require_once 'Net/DNSBL.php';
+require_once 'PEAR.php';
 
 /**
  * PEAR::Net_DNSBL_SURBL
@@ -26,17 +43,16 @@
  * Services_SURBL looks up an supplied URI if it's listed in a
  * Spam URI Realtime Blocklists.
  *
- * @author  Sebastian Nohn <sebastian@nohn.net>
- * @package Net_DNSBL
- * @license http://www.php.net/license/3_0.txt
- * @version 0.5.4
+ * @category Net
+ * @package  Net_DNSBL
+ * @author   Sebastian Nohn <sebastian@nohn.net>
+ * @license  http://www.php.net/license/3_01.txt PHP License 3.01
+ * @version  Release: 1.3.7
+ * @link     http://pear.php.net/package/net_dnsbl Package Home
  */
-require_once dirname(__FILE__) . '/../../Cache/Lite.php';
-require_once dirname(__FILE__) . '/../../HTTP/Request.php';
-require_once dirname(__FILE__) . '/../CheckIP.php';
-require_once dirname(__FILE__) . '/../DNSBL.php';
 
-class Net_DNSBL_SURBL extends Net_DNSBL {
+class Net_DNSBL_SURBL extends Net_DNSBL
+{
 
     /**     
      * Array of blacklists.
@@ -46,7 +62,7 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * @var    string[]
      * @access protected
      */
-    var $blacklists = array('multi.surbl.org');
+     protected $blacklists = array('multi.surbl.org');
 
     /**
      * File containing whitelisted hosts.
@@ -59,41 +75,33 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * @see    $twoLevelCcTld
      * @access protected
      */
-    var $doubleCcTldFile = 'http://spamcheck.freeapp.net/two-level-tlds';
-
-    /**
-     * Array of whitelisted hosts.
-     *
-     * @var    array
-     * @see    $twoLevelCcTldFile
-     * @access private
-     */
-    var $twoLevelCcTld = array();
+    protected $doubleCcTldFile = 'http://george.surbl.org/two-level-tlds';
 
     /**
      * Check if the last two parts of the FQDN are whitelisted.
      *
-     * @param  string Host to check if it is whitelisted
+     * @param string $fqdn Host to check if it is whitelisted.
+     *
      * @access protected
      * @return boolean True if the host is whitelisted
      */
-    function isDoubleCcTld($fqdn)
+    protected function isDoubleCcTld($fqdn)
     {
         // 30 Days should be way enough
         $options = array(
                          'lifeTime' => '2592000',
                          'automaticSerialization' => true
                          );
-        $id = md5($this->doubleCcTldFile);
+        $id      = md5($this->doubleCcTldFile);
 
         $cache = new Cache_Lite($options);
         if ($data = $cache->get($id)) {
             // Cache hit
         } else {
             // Cache miss
-            $http = new HTTP_Request($this->doubleCcTldFile);
-            if (!PEAR::isError($http->sendRequest())) {
-                $data = $http->getResponseBody();
+            $http = new HTTP_Request2($this->doubleCcTldFile);
+            if (!PEAR::isError($http->send())) {
+                $data = $http->getBody();
             }
             $data = explode("\n", $data);
             $data = array_flip($data);
@@ -119,18 +127,25 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
      * (3b2) IS_NOT_2LEVEL: we want the last two names
      * (4) return the FQDN to query.
      *
-     * @param  string URL to check. 
+     * @param string $uri       URL to check. 
+     * @param string $blacklist Blacklist to check against. 
+     *
      * @access protected
      * @return string Host to lookup
      */
-    function getHostForLookup($uri, $blacklist) 
+    protected function getHostForLookup($uri, $blacklist) 
     {
-        $host       = '';
         // (1) Extract the hostname from the given URI
+        $host       = '';
         $parsed_uri = parse_url($uri);
-        $host       = $parsed_uri['host'];
+
+        if (empty($parsed_uri['host'])) {
+            return false;
+        }
+
+        $host       = urldecode($parsed_uri['host']);
         // (2) Check if the "hostname" is an ip
-        if (Net_CheckIP::check_ip($host)) {
+        if (filter_var($host, FILTER_VALIDATE_IP)) {
             // (3a) IS_IP Reverse the IP (1.2.3.4 -> 4.3.2.1)
             $host = $this->reverseIp($host);
         } else {
@@ -139,13 +154,13 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
                 array_shift($host_elements);
             } // while
             $host_3_elements = implode('.', $host_elements);
-
+            
             $host_elements = explode('.', $host);
             while (count($host_elements) > 2) {
                 array_shift($host_elements);
             } // while
             $host_2_elements = implode('.', $host_elements);
-
+            
             // (3b) IS_FQDN Check if is in "CC-2-level-TLD"
             if ($this->isDoubleCcTld($host_2_elements)) {
                 // (3b1) IS_IN_2LEVEL: we want the last three names
@@ -156,9 +171,9 @@ class Net_DNSBL_SURBL extends Net_DNSBL {
             } // if
         } // if
         // (4) return the FQDN to query
-        $host      .= '.'.$blacklist;
+        $host .= '.'.$blacklist;
         return $host;
     } // function
-
+    
 } // class
 ?>
