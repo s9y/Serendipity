@@ -1,6 +1,11 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Add new config variable $serendipity['cors'] to allow to set
+      Access-Control-Allow-Origin: * headers for sensible places
+      (RSS feeds), to i.e. allow JavaScript's XMLHTTPRequest to read
+      those feeds.
+
     * Introduce a section with modern recommended themes in the
       themes backend menu. Themes can be included there by setting
       Recommended: Yes in their info.txt

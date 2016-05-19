@@ -86,6 +86,9 @@ $serendipity['max_fetch_limit'] = 50;
 // How many bytes are allowed for fetching trackbacks, so that no binary files get accidently trackbacked?
 $serendipity['trackback_filelimit'] = 150 * 1024;
 
+// Allow "Access-Controll-Allow-Origin: *" to be used in sensible locations (RSS feed)
+$serendipity['cors'] = false;
+
 if (!isset($serendipity['fetchLimit'])) {
     $serendipity['fetchLimit'] = 15;
 }
