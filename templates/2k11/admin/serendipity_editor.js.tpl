@@ -1673,6 +1673,19 @@ $(function() {
             serendipity.SetCookie('serendipity_only_path', $('#serendipity_only_path').val());
         });
     }
+    
+    if ($('.image_move').length > 0) {
+        $('.image_move').removeClass('hidden');
+        $('.image_move').magnificPopup({
+            type: 'inline',
+        });
+        $('#move-popup form').submit(function(e) {
+            e.preventDefault();
+            $('#newDir').val($('#move-popup form select').val());
+            $.magnificPopup.close();
+            $('input[name="toggle_move"]').click();
+        });
+    }
 
     // reopen detail element after spamblock action
     if ($('#serendipity_comments_list').length > 0 && window.location.hash && $('#' + window.location.hash.replace('#', '')).length > 0) {

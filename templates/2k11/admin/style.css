@@ -2576,6 +2576,15 @@ input[name="serendipity[filter][fileCategory]"] {
     animation: loaderSprite 1s steps(25, end) infinite;
 }
 
+#move-popup {
+    position: relative;
+    background: #FFF;
+    padding: 20px;
+    width: auto;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
 /* TEMP fixes for tree view */
 #expandcontractdiv {
     font-size: 1em !important;

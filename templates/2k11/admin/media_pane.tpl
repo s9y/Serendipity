@@ -267,33 +267,30 @@
 
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
+            <a href="#move-popup" class="image_move button_link hidden">{$CONST.MOVE}</a>
             <input class="state_cancel" name="toggle_delete" type="submit" value="{$CONST.DELETE}">
         </div>
-        <hr>
-        <div class="form_select">
-                <label for="newDir">{$CONST.FILTER_DIRECTORY}</label>
-                <input type="hidden" name="serendipity[oldDir]" value="">
-                <select id="newDir" name="serendipity[newDir]">
-                    <option value=""></option>
+    {/if}
+    <input class="state_submit hidden" name="toggle_move" type="submit" value="{$CONST.MOVE}">
+    <input type="hidden" name="serendipity[oldDir]" value="">
+    <input type="hidden" id="newDir" name="serendipity[newDir]">
+    </form>
+    <div id="move-popup" class="mfp-hide">
+        <h3>Move images to directory</h3>
+        <form>
+            <div class="form_select">
+                <select >
                     <option value="uploadRoot">{$CONST.BASE_DIRECTORY}</option>
                 {foreach $media.paths AS $folderFoot}
-
                     <option value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
                 {/foreach}
-
                 </select>
-        </div>
-        <div class="form_buttons">
-            <input class="state_submit" name="toggle_move" type="submit" value="{$CONST.MOVE}">
-            <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE_INFO}</span></a></span>
-        </div>
-
-        <footer id="media_file_bulkmove" class="media_file_bulkmove additional_info">
-            <span class="msg_notice">{$CONST.BULKMOVE_INFO_DESC}</span>
-        </footer>
-    {/if}
-
-    </form>
+            </div>
+            <div class="form_buttons">
+                <input class="state_submit" type="submit" value="{$CONST.MOVE}">
+            </div>
+        </form>
+    </div>
 {/if}
 
 </div>{* media library pane end *}
