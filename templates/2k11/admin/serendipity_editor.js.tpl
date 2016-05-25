@@ -1613,6 +1613,7 @@ $(function() {
                                 data.append('serendipity[adminAction]', 'add');
                                 data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
                                 data.append('serendipity[target_filename][1]', $('input[name*="serendipity[target_filename][1]"]').val());
+                                data.append('serendipity[target_directory][1]', $('select[name*="serendipity[target_directory][1]"]').val());
                                 var progress = document.createElement('progress');
                                 var progressContainer = document.createElement('span');
                                 progressContainer.className = 'msg_notice';
