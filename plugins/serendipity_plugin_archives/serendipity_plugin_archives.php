@@ -124,7 +124,7 @@ class serendipity_plugin_archives extends serendipity_plugin
                         case 'persian-utf8':
                             require_once S9Y_INCLUDE_PATH . 'include/functions_calendars.inc.php';
                             $linkStamp = persian_date_utf('Y/\WW', $ts);
-                            $ts_title = WEEK . ' '. persian_date_utf('W? Y', $ts);
+                            $ts_title = WEEK . ' '. persian_date_utf('W، Y', $ts);
                             $ts = persian_mktime(0, 0, 0, persian_date_utf('m', $ts), persian_date_utf('d', $ts)-7, persian_date_utf('Y', $ts));
                             break;
                     }
