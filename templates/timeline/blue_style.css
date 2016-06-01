@@ -1,0 +1,124 @@
+/*
+Theme: Timeline                                                             
+Theme developed for Serendipity by Don Chambers (www.optional-necessity.com)
+blue colorset
+*/
+
+/* 
+* Blue Color: #3498db; 
+* Blue Hover Color: #2980b9; 
+* Darkest color: #1c6ca1;
+*/
+
+a {
+  color: #3498db;
+}
+
+a:hover,
+a:focus {
+  color: #2980b9;
+}
+
+a.subtome:link,
+a.subtome:visited { 
+    background: url('img/subtome-blue.png') left bottom no-repeat;
+}
+
+a.subtome:hover,
+a.subtome:focus { 
+    background: url('img/subtome-blue.png') -64px center no-repeat;
+}
+
+a.subtome img {
+    visibility: hidden;
+}
+
+.navbar-default .navbar-brand:hover h1,
+.navbar-default .navbar-brand:focus h1{
+    color: #2980b9;
+}
+
+.header .navbar-default .navbar-toggle {
+    border-color: #2980b9;
+}
+
+.header .navbar-toggle, .header .navbar-default .navbar-toggle:hover, .header .navbar-default .navbar-toggle:focus {
+    background-color: #3498db;
+}
+
+@media (max-width: 991px) {
+    .header .navbar-default .navbar-nav > li > a:hover {
+        color: #3498db;
+    }
+    .header .navbar-default .navbar-nav > .active > a, .header .navbar-default .navbar-nav > .active > a:hover, .header .navbar-default .navbar-nav > .active > a:focus {
+        background-color: #3498db;
+    }
+}
+
+@media (min-width: 992px) {
+    .header .navbar-default .navbar-nav a.navbar_current_page,
+    .header .navbar-default .navbar-nav > li > a:hover {
+        border-bottom: 2px solid #3498db;
+    }
+
+    .header .navbar-default .navbar-nav > li:hover > a {
+        color: #3498db;
+    }
+}
+
+.btn-theme {
+    background: none repeat scroll 0 0 #3498db;
+    border: 1px solid #3498db;
+}
+
+.btn-theme:hover {color: #3498db;}
+
+.pager li > a,
+.pager li > span {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+    color: #2980b9;
+}
+
+.sidebar_plugin h3{
+    border-bottom: 2px solid #3498db;
+}
+
+.btn-group.archive-button .dropdown-menu > li > a {color: #2980b9;}
+
+.btn-group.archive-button .dropdown-menu > li > a:hover,
+.btn-group.archive-button .dropdown-menu > li > a:focus {
+    background-color: #2980b9;
+}
+
+.archive-button-months-entries {border: 1px solid #3498db;}
+
+.archive-button-months-entries .badge {
+    background-color: #1c6ca1; /* much darker */
+}
+
+blockquote {
+    border-left: 5px solid #2980b9;
+}
+
+.timeline_freeTag a {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.timeline_freeTag a:hover,
+.timeline_freeTag a:focus {
+    color: #2980b9;
+}
+
+#scrollUp {
+    background-color: #3498db;
+    border: 1px solid #3498db;
+}
+#scrollUp:hover {
+    color: #2980b9;
+}

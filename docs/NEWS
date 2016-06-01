@@ -1,6 +1,10 @@
 Version 2.1 ()
 ------------------------------------------------------------------------
 
+    * Added new theme "Timeline".  Timeline is a fully responsive, 
+      mobile first HTML5/CSS3 theme built on the Bootstrap
+      framework.
+
     * Add new config variable $serendipity['cors'] to allow to set
       Access-Control-Allow-Origin: * headers for sensible places
       (RSS feeds), to i.e. allow JavaScript's XMLHTTPRequest to read
