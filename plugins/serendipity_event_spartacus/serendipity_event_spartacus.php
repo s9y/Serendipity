@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.36');
+        $propbag->add('version',       '2.37');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -1004,7 +1004,7 @@ class serendipity_event_spartacus extends serendipity_event
         }
 
         if (count($files) == 0) {
-            $msg = "DEBUG: ERROR: XML tree did not contain requested plugin:\n<div>" . print_r($tree) . "</div>\n";
+            $msg = "DEBUG: ERROR: XML tree did not contain requested plugin:\n<div>" . print_r($tree, true) . "</div>\n";
             echo '<span class="msg_error"><span class="icon-attention-circled"></span> '. $msg .'</span>' . "\n";
         }
 
@@ -1164,8 +1164,6 @@ class serendipity_event_spartacus extends serendipity_event
                             serendipity_sendMail($serendipity['blogMail'], 'Spartacus update report ' . $serendipity['baseURL'], $mailtext, $serendipity['blogMail']);
                             echo nl2br($mailtext);
                         }
-                    } else {
-                        $propbag->add('type', 'suboption');
                     }
                     break;
 
