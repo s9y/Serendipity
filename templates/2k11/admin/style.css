@@ -2333,11 +2333,19 @@ label .perm_name,
 }
 
 .pluginmanager_plugin .form_check {
+    float: left;
     margin: .75em 0;
+    width: 5%;
 }
 
 .pluginmanager_plugin h5 {
+    float: left;
     margin: .75em 0 0;
+    width: 95%;
+}
+
+.pluginmanager_plugin .plugin_data {
+    clear: left;
 }
 
 .configuration_group .sequence_grablet,
