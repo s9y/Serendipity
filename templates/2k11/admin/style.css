@@ -2344,6 +2344,14 @@ label .perm_name,
     width: 95%;
 }
 
+.pluginmanager_sidebar .pluginmanager_plugin .form_check {
+    width: 8%;
+}
+
+.pluginmanager_sidebar .pluginmanager_plugin h5 {
+    width: 92%;
+}
+
 .pluginmanager_plugin .plugin_data {
     clear: left;
 }
