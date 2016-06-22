@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.61'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.61.1'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -759,7 +759,12 @@ class serendipity_event_gravatar extends serendipity_event
             }
 
             // Evaluate URL of P/Favatar
-            $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 3));
+            $options = array('follow_redirects' => true, 'max_redirects' => 3);
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
+            $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, $options);
             $favicon = false;
             // code 200: OK, code 30x: REDIRECTION
             $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
@@ -893,7 +898,12 @@ class serendipity_event_gravatar extends serendipity_event
 
             $twitter_search = 'http://search.twitter.com/search.atom?q=from%3A' . $twittername . '&rpp=1';
             serendipity_request_start();
-            $req = new HTTP_Request2($twitter_search);
+            $options = array();
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
+            $req = new HTTP_Request2($twitter_search, HTTP_Request2::METHOD_GET, $options);
             try {
                 $response = $req->send();
 
@@ -951,7 +961,12 @@ class serendipity_event_gravatar extends serendipity_event
             $status_id = $matches[1];
             $search = "http://identi.ca/api/statuses/show/$status_id.xml";
             serendipity_request_start();
-            $req = new HTTP_Request2($search);
+            $options = array();
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
+            $req = new HTTP_Request2($search, HTTP_Request2::METHOD_GET, $options);
             try {
                 $response = $req->send();
                 $this->last_error = $response->getStatus();
@@ -1126,6 +1141,11 @@ class serendipity_event_gravatar extends serendipity_event
         }
         else {
             $request_pars['follow_redirects'] = false;
+        }
+
+        if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+            // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+            $request_pars['ssl_verify_peer'] = false;
         }
 
         $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, $request_pars);

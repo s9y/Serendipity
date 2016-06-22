@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.86');
+        $propbag->add('version',       '1.86.1');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -482,6 +482,10 @@ class serendipity_event_spamblock extends serendipity_event
             'follow_redirects'    => true,
             'max_redirects'      => 3,
         );
+        if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+            // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+            $options['ssl_verify_peer'] = false;
+        }
 
         // Default server type to akismet, in case user has an older version of the plugin
         // where no server was set
@@ -1053,7 +1057,12 @@ class serendipity_event_spamblock extends serendipity_event
                             require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
 
                             if (function_exists('serendipity_request_start')) serendipity_request_start();
-                            $req     = new HTTP_Request2($addData['url'], HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 5, 'timeout' => 10));
+                            $options = array('follow_redirects' => true, 'max_redirects' => 5, 'timeout' => 10);
+                            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the funcitonality we had with HTTP/Request1
+                                $options['ssl_verify_peer'] = false;
+                            }
+                            $req     = new HTTP_Request2($addData['url'], HTTP_Request2::METHOD_GET, $options);
                             $is_valid = false;
                             try {
                                 $response = $req->send();

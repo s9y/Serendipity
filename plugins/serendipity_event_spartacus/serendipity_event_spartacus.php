@@ -27,11 +27,9 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.37');
+        $propbag->add('version',       '2.37.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
-            'smarty'      => '2.6.7',
-            'php'         => '4.1.0'
         ));
         $propbag->add('event_hooks',    array(
             'backend_plugins_fetchlist'         => true,
@@ -419,6 +417,10 @@ class serendipity_event_spartacus extends serendipity_event
         } else {
             require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
             $options = array('follow_redirects' => true, 'max_redirects' => 5);
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'spartacus');
             serendipity_request_start();
 

@@ -56,7 +56,12 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
         if (!empty($_REQUEST['token'])) {
 
             // Prepare session token request
-            $req = new HTTP_Request2('https://www.google.com/accounts/AuthSubSessionToken');
+            $options = array();
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
+            $req = new HTTP_Request2('https://www.google.com/accounts/AuthSubSessionToken', HTTP_Request2::METHOD_GET, $options);
             $req->setHeader('Authorization', 'AuthSub token="'. $_REQUEST['token'] .'"');
 
             // Request token

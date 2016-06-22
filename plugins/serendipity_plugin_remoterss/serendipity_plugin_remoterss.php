@@ -49,7 +49,12 @@ class s9y_remoterss_XMLTree
     {
         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         serendipity_request_start();
-        $req = new HTTP_Request2($file);
+        $options = array();
+        if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+            // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+            $options['ssl_verify_peer'] = false;
+        }
+        $req = new HTTP_Request2($file, HTTP_Request2::METHOD_GET, $options);
 
         try {
             $response = $req->send();
@@ -273,7 +278,7 @@ class serendipity_plugin_remoterss extends serendipity_plugin
         $propbag->add('description',   PLUGIN_REMOTERSS_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Udo Gerhards, Richard Thomas Harrison');
-        $propbag->add('version',       '1.22');
+        $propbag->add('version',       '1.22.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.7',
             'smarty'      => '3.1.0',
@@ -440,21 +445,6 @@ class serendipity_plugin_remoterss extends serendipity_plugin
 
         // Disabled by now. May get enabled in the future, but for now the extra HTTP call isn't worth trying.
         return true;
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-        serendipity_request_start();
-        $req = new HTTP_Request2($uri);
-
-        try {
-            $response = $req->send();
-            if (!preg_match('@^[23]..@', $req->getStatus)) {
-                throw new HTTP_Request2_Exception('Status code says url not reachable');
-            }
-            serendipity_request_end();
-            return true;
-        } catch (HTTP_Request2_Exception $e) {
-            serendipity_request_end();
-            return false;
-        }
     }
 
     function debug($msg)

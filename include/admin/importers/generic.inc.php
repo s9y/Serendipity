@@ -141,7 +141,12 @@ class Serendipity_Import_Generic extends Serendipity_Import {
         $uri = $this->data['url'];
         require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
         serendipity_request_start();
-        $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_GET, array('follow_redirects' => true, 'max_redirects' => 5));
+        $options = array('follow_redirects' => true, 'max_redirects' => 5);
+        if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+            // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+            $options['ssl_verify_peer'] = false;
+        }
+        $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_GET, $options);
         try {
             $res = $req->send();
             if ($res->getStatus() != '200') {
