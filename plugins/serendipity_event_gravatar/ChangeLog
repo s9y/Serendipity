@@ -1,4 +1,10 @@
-#
+Version 1.62.1:
+------------------------------------------------------------------------
+    * Remove defunct mybloglog
+    * Switch plugin to http_request2
+
+
+------------------------------------------------------------------------
     * Allows other plugins to fetch user metadata via
       avatar_fetch_userinfos hook.
     * supports !# twitter links now, too.
