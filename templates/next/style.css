@@ -474,11 +474,10 @@ nav ul, nav ol {
     clip: auto;
     height: auto;
     margin: 0;
+    max-height: none;
     overflow: visible;
     position: relative;
     width: auto; }
-    .js .nav-collapse.closed {
-      max-height: none; }
 
   .nav-collapse li {
     width: auto; }
