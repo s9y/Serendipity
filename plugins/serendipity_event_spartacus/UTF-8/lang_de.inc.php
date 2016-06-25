@@ -23,6 +23,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DESC', 'Hier kann der Oktagonale Dateimodus (z.B: "0777") für von Spartacus heruntergeladene Dateien angegeben werden. Falls dieser Wert leergelassen wird, verwendet Serendipity die Standardmaske des Systems. Nicht alle Server unterstützen eine Änderung dieser Dateirechte. Stellen Sie unbedingt sicher, dass die von Ihnen gewählten Rechte das Lesen und Schreiben des Webserver-Benutzers weiterhin erlauben - sonst könnte Serendipity/Spartacus keine bestehenden Dateien überschreiben.');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Zugriffsrechte der heruntergeladenen Verzeichnisse');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Hier kann der Oktagonale Dateimodus (z.B: "0777") für von Spartacus heruntergeladene Verzeichnisse angegeben werden. Falls dieser Wert leergelassen wird, verwendet Serendipity die Standardmaske des Systems. Nicht alle Server unterstützen eine Änderung dieser Verzeichnisrechte. Stellen Sie unbedingt sicher, dass die von Ihnen gewählten Rechte das Lesen und Schreiben des Webserver-Benutzers weiterhin erlauben - sonst könnte Serendipity/Spartacus keine bestehenden Dateien überschreiben.');
+@define('PLUGIN_EVENT_SPARTACUS_CHECK', 'Plugins updaten');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Updates (Seitenleisten-Plugins)');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Updates (Ereignis-Plugins)');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'Sie können mehrere Plugins auf einmal installieren indem sie diesen Link in einem neuen Tab öffnen (mittlerer Mausbutton)');
@@ -58,4 +59,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_FTP_PASS', 'FTP Passwort');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR', 'FTP Serendipity Verzeichnis');
 @define('PLUGIN_EVENT_SPARTACUS_FTP_BASEDIR_DESC', 'Beim Login über FTP ist das Startverzeichnis nicht notwendigerweise das Serendipity-Verzeichnis. In diesem Fall ist es hier möglch, den Pfad vom FTP-Verzeichnis zum Serendipity-Verzeichnis anzugeben.');
-
