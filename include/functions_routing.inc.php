@@ -292,7 +292,7 @@ function servePlugin($matches) {
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
 }
 
-function serveFeed() {
+function serveFeed($matches) {
     global $serendipity;
     $serendipity['view'] = 'feed';
     header('Content-Type: text/html; charset=utf-8');
@@ -301,7 +301,6 @@ function serveFeed() {
     if (preg_match('@/(index|atom[0-9]*|rss|comments|trackbacks|comments_and_trackbacks|opml)\.(rss[0-9]?|rdf|rss|xml|atom)@', $uri, $vmatches)) {
         list($_GET['version'], $_GET['type']) = serendipity_discover_rss($vmatches[1], $vmatches[2]);
     }
-
     if (is_array($matches)) {
         if (preg_match('@(/?' . preg_quote(PATH_FEEDS, '@') . '/)(.+?)(?:\.rss)?$@i', $uri, $uriparts)) {
             if (strpos($uriparts[2], $serendipity['permalinkCategoriesPath']) === 0) {
