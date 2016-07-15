@@ -364,13 +364,13 @@ a, a:focus, a:hover, a:active, button, button:hover {
 
 .blogstyle-post-body {margin-top:20px;}
 
-.blogstyle-post-body h2{line-height: 1em; margin-top: 0;}
+.blogstyle-post-body h2{line-height: 1.2em; margin-top: 0; overflow: hidden;}
 
 /* archive summary - "view topics" */
 
 .archives_summary {margin-top:40px;}
 
-.archives_summary h4{line-height: 1em; margin: 0 0 4px 0;}
+.archives_summary h4{line-height: 1.2em; margin: 0 0 4px 0; overflow: hidden;}
 
 .archives_summary hr {margin: 10px 0}
 
@@ -573,6 +573,8 @@ a, a:focus, a:hover, a:active, button, button:hover {
 .timeline .timeline-body {
     padding: 12px;
 }
+
+.timeline .timeline-body h2 {overflow:hidden;}
 
 .archive-archive_history .timeline .timeline-body {
     padding: 12px 6px;

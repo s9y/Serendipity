@@ -193,6 +193,13 @@
                         </div>
                     </div>
                 {else}
+                    {if !class_exists('serendipity_event_entryproperties')}
+                        <div id="search-block" class="row">
+                            <div class="col-md-10 col-md-offset-1 alert alert-danger">
+                                {$CONST.THEME_EP_NO}
+                            </div>
+                        </div>
+                    {/if}                
                     {$CONTENT}
                 {/if}
             </main>
