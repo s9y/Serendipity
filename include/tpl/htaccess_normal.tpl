@@ -1,7 +1,5 @@
 # BEGIN s9y
 DirectoryIndex {PREFIX}{indexFile}
-php_value session.use_trans_sid 0
-php_value register_globals off
 
 <Files *.tpl.php>
     deny from all
