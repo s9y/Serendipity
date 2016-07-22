@@ -45,6 +45,22 @@ window.onload = function() {ldelim}
 <body style="padding: 0; margin: 0;"{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
     <div id="main" class="clearfix" style="padding: 0; margin: 5px auto; width: 98%;">
         <main id="primary">
+        {if $mode == 'save'}
+            <div style="float: left; height: 75px"></div>
+            {$updertHooks}
+            {if $res}
+                <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
+            {else}
+                {if $lastSavedEntry}
+                    <script type="text/javascript">$(document).ready(function() {
+                                                        parent.document.forms['serendipityEntry']['serendipity[id]'].value = "{$lastSavedEntry}";
+                    });
+                    </script>
+                {/if}
+                <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_SAVED}</span>
+                <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
+            {/if}
+        {/if}
         {$preview}
         </main>
     </div>
