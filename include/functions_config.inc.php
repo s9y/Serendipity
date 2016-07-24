@@ -268,6 +268,7 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
     }
     $directories[] = $serendipity['template_engine'] . '/'; # themes can set an engine, which will be used if they do not have the file
     $directories[] = $serendipity['defaultTemplate'] .'/';  # the default theme is the last place we will look in, serving as pure fallback
+    $directories = array_unique($directories); # save performance by not checking for file existence multiple times in the same directory
 
     foreach ($directories as $directory) {
         $templateFile = $serendipity['templatePath'] . $directory . $file;
