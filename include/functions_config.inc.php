@@ -255,50 +255,19 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
  * @param   string      The filename to search for in the selected template
  * @param   string      The path selector that tells whether to return a HTTP or realpath
  * @param   bool        Enable to include frontend template fallback chaining (used for wysiwyg Editor custom config files, emoticons, etc)
- * @param   bool        Enable to check into $serendipity['template'] or its engine, then fall back to $this->pluginFile dir (used by plugins via parseTemplate() method)
  * @return  string      The full path+filename to the requested file
  */
-function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false, $simple_plugin_fallback = false) {
+function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false) {
     global $serendipity;
 
     $directories = array();
-
-    if (defined('IN_serendipity_admin') && $serendipity['smarty_preview'] == false) {
-        if ($force_frontend_fallback) {
-            // If enabled, even when within the admin suite it will be possible to reference files that
-            // reside within a frontend-only template directory.
-            $directories[] = $serendipity['template'] . '/';
-            if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
-                $p = explode(',', $serendipity['template_engine']);
-                foreach($p AS $te) {
-                    $directories[] = trim($te) . '/';
-                }
-            }
-        }
-
-        if (!$simple_plugin_fallback) {
-            // Backend will always use our default backend (=defaultTemplate) as fallback.
-            $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
-            $directories[] = $serendipity['defaultTemplate'] .'/';
-            $directories[] = 'default/';
-        }
+    if ((! defined('IN_serendipity_admin')) || $force_frontend_fallback) {
+        $directories[] = $serendipity['template'] . '/';  # In the frontend or when forced (=preview_iframe.tpl), use the frontend theme
     } else {
-        $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
-        if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
-            $p = explode(',', $serendipity['template_engine']);
-            foreach($p AS $te) {
-                $directories[] = trim($te) . '/';
-            }
-        }
-
-        if (!$simple_plugin_fallback) {
-            // Frontend templates currently need to fall back to "default" (see "idea"), so that they get the
-            // output they desire. If templates are based on 2k11, they need to set "Engine: 2k11" in their info.txt
-            // file.
-            $directories[] = 'default/';
-            $directories[] = $serendipity['defaultTemplate'] .'/';
-        }
+        $directories[] = $serendipity['template_backend'] . '/';    # Since 2.0 s9y can have a independent backend theme
     }
+    $directories[] = $serendipity['template_engine'] . '/'; # themes can set an engine, which will be used if they do not have the file
+    $directories[] = $serendipity['defaultTemplate'] .'/';  # the default theme is the last place we will look in, serving as pure fallback
 
     foreach ($directories as $directory) {
         $templateFile = $serendipity['templatePath'] . $directory . $file;
@@ -307,13 +276,9 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
         }
 
         if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl")) {
-            # catch *.tpl files, used by the backend for serendipity_editor.js.tpl
+            # catch *.tpl files serving as template, used by the backend for serendipity_editor.js.tpl
             return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
         }
-    }
-
-    if (preg_match('@\.(tpl|css|php)@i', $file) && !stristr($file, 'plugin')) {
-        return $file;
     }
 
     return false;
@@ -838,7 +803,6 @@ function serendipity_iframe(&$entry, $mode = null) {
             break;
 
         case 'preview':
-            $serendipity['smarty_preview']  = true;
             $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
             break;
     }

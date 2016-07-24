@@ -1215,7 +1215,7 @@ function serendipity_smarty_show($template, $data = null, $debugtype = null, $de
 
     $serendipity['smarty']->assign($data);
 
-    $tplfile = ($template == 'preview_iframe.tpl') ? serendipity_getTemplateFile($template, 'serendipityPath', true) : serendipity_getTemplateFile($template, 'serendipityPath');
+    $tplfile = serendipity_getTemplateFile($template, 'serendipityPath', ($template == 'preview_iframe.tpl'));  # for the preview_iframe.tpl, we want to ignore the backend theme
     if ($debug !== null) {
         if ($debugtype == "HTML") {
             $debug = "<!-- Dynamically fetched " . serendipity_specialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";

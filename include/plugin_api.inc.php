@@ -1638,12 +1638,12 @@ class serendipity_plugin
      * @param  bool     Called by a plugin (defaults true), since we do not have a theme using it yet
      * @return string   Parsed Smarty return
      */
-    function &parseTemplate($filename, $plugin = true)
+    function &parseTemplate($filename)
     {
         global $serendipity;
 
         $filename = basename($filename);
-        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath', true, $plugin); // use the simple plugin fallback stairway
+        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath', true);
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
