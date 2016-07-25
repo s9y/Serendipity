@@ -1,3 +1,21 @@
+PHPUnit
+=======
+
+ 1. In tests/, download PHPUnit
+
+     $ wget https://phar.phpunit.de/phpunit.phar
+
+
+Running the Tests
+=================
+
+
+     $ php phpunit.phar --configuration config.xml.dist --coverage-html report include/*
+
+
+ ---- 
+
+
 PHPUnit and Selenium RC
 =======================
 
