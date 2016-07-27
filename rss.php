@@ -240,14 +240,10 @@ if ($_GET['type'] == 'content' &&
 $metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
-$metadata['template_file'] = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');
+$metadata['template_file'] = 'feed_' . $file_version . '.tpl';
 
 serendipity_smarty_init();
 serendipity_plugin_api::hook_event('frontend_rss', $metadata);
-
-if (!$metadata['template_file'] || $metadata['template_file'] == 'feed_' . $file_version . '.tpl') {
-    die("Invalid RSS version specified or RSS-template file not found\n");
-}
 
 $self_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . serendipity_specialchars($_SERVER['REQUEST_URI']);
 if (!is_array($entries)) {
