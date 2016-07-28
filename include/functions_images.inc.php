@@ -2975,10 +2975,10 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
 
     if ($enclose) {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
-        return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_pane.tpl', 'serendipityPath'));
+        return serendipity_smarty_show('admin/media_pane.tpl');
     } else {
         serendipity_smarty_fetch('MEDIA_ITEMS', 'admin/media_items.tpl');
-        return serendipity_smarty_show(serendipity_getTemplateFile('admin/media_properties.tpl', 'serendipityPath'));
+        return serendipity_smarty_show('admin/media_properties.tpl');
     }
 }
 
