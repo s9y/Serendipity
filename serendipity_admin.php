@@ -116,7 +116,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/templates.inc.php';
-            $admin_section = MANAGE_STYLES;
+            $admin_section = MENU_TEMPLATES;
             break;
 
         case 'plugins':
@@ -125,7 +125,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/plugins.inc.php';
-            $admin_section = CONFIGURE_PLUGINS;
+            $admin_section = MENU_PLUGINS;
             break;
 
         case 'users':

@@ -3,7 +3,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" dir="{$CONST.LANG_DIRECTION}" lang="{$lang}"> <!--<![endif]-->
 <head>
     <meta charset="{$CONST.LANG_CHARSET}">
-    <title>{if $admin_vars.title}{$admin_vars.title} | {/if}{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
+    <title>{if $admin_vars.title}{$admin_vars.title} | {/if}{$blogTitle} | {$CONST.SERENDIPITY_ADMIN_SUITE}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{$head_link_stylesheet}">
 <!--[if lte IE 8]>
