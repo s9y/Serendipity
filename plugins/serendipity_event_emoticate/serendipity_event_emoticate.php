@@ -80,12 +80,8 @@ class serendipity_event_emoticate extends serendipity_event
         }
 
         /* Hijack global variable $serendipity['custom_emoticons'] if it exists */
-        if ($serendipity['version'][0] > 1) {
-            // called in backend too, but uses frontend fallback. Advise to use the Plugin simple approach 4th parameter!
-            $hijack_file = serendipity_getTemplateFile('emoticons.inc.php', 'serendipityPath', true, true);
-        } else {
-            $hijack_file = serendipity_getTemplateFile('emoticons.inc.php', 'serendipityPath', true);
-        }
+        $hijack_file = serendipity_getTemplateFile('emoticons.inc.php', 'serendipityPath', true);
+
         if (@file_exists($hijack_file)) {
             @include $hijack_file; // This file contains $serendipity['custom_emoticons'] and maybe $serendipity['custom_emoticons_regexp']
             if (isset($serendipity['custom_emoticons']) && is_array($serendipity['custom_emoticons'])) {
@@ -102,23 +98,23 @@ class serendipity_event_emoticate extends serendipity_event
         if (!isset($this->smilies)) {
             $ext = $this->get_config('extension', 'png');
             $this->smilies = array(
-                "\:'\("    => serendipity_getTemplateFile('img/emoticons/cry.'.$ext, 'serendipityHTTPPath', true),
+                "\:'\("    => $this->getFile('img/emoticons/cry.'.$ext, 'serendipityHTTPPath'),
 
-                '\:\-?\)'  => serendipity_getTemplateFile('img/emoticons/smile.'.$ext, 'serendipityHTTPPath', true),
+                '\:\-?\)'  => $this->getFile('img/emoticons/smile.'.$ext, 'serendipityHTTPPath'),
 
-                '\:\-?\|'  => serendipity_getTemplateFile('img/emoticons/normal.'.$ext, 'serendipityHTTPPath', true),
+                '\:\-?\|'  => $this->getFile('img/emoticons/normal.'.$ext, 'serendipityHTTPPath'),
 
-                '\:\-?O'   => serendipity_getTemplateFile('img/emoticons/eek.'.$ext, 'serendipityHTTPPath', true),
+                '\:\-?O'   => $this->getFile('img/emoticons/eek.'.$ext, 'serendipityHTTPPath'),
 
-                '\:\-?\('  => serendipity_getTemplateFile('img/emoticons/sad.'.$ext, 'serendipityHTTPPath', true),
-
-                '8\-?\)'   => serendipity_getTemplateFile('img/emoticons/cool.'.$ext, 'serendipityHTTPPath', true),
-
-                '\:\-?D'   => serendipity_getTemplateFile('img/emoticons/laugh.'.$ext, 'serendipityHTTPPath', true),
-
-                '\:\-?P'   => serendipity_getTemplateFile('img/emoticons/tongue.'.$ext, 'serendipityHTTPPath', true),
-
-                ';\-?\)'   => serendipity_getTemplateFile('img/emoticons/wink.'.$ext, 'serendipityHTTPPath', true),
+                '\:\-?\('  => $this->getFile('img/emoticons/sad.'.$ext, 'serendipityHTTPPath'),
+                              
+                '8\-?\)'   => $this->getFile('img/emoticons/cool.'.$ext, 'serendipityHTTPPath'),
+                              
+                '\:\-?D'   => $this->getFile('img/emoticons/laugh.'.$ext, 'serendipityHTTPPath'),
+                              
+                '\:\-?P'   => $this->getFile('img/emoticons/tongue.'.$ext, 'serendipityHTTPPath'),
+                              
+                ';\-?\)'   => $this->getFile('img/emoticons/wink.'.$ext, 'serendipityHTTPPath'), 
             );
         }
 

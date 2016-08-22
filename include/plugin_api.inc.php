@@ -1635,7 +1635,6 @@ class serendipity_plugin
      *
      * @access public
      * @param  string   template filename (no directory!)
-     * @param  bool     Called by a plugin (defaults true), since we do not have a theme using it yet
      * @return string   Parsed Smarty return
      */
     function &parseTemplate($filename)
@@ -1649,6 +1648,26 @@ class serendipity_plugin
         }
 
         return $serendipity['smarty']->fetch('file:'. $tfile);
+    }
+
+    /**
+     * Get full path for a filename. Will first look into themes and then in the plugins directory
+     * @param   string  relative path to file
+     * @param   string  The path selector that tells whether to return a HTTP or realpath
+     * @return  string  The full path+filename to the requested file
+     * */
+    function &getFile($filename, $key = 'serendipityPath')
+    {
+        global $serendipity;
+        
+        $path = serendipity_getTemplateFile($filename, $key, true);
+        if (!$path) {
+            if (file_exists(dirname($this->pluginFile) . '/' . $filename)) {
+                return $serendipity[$key] . 'plugins/' . basename(dirname($this->pluginFile)) . '/' . $filename;
+            }
+        }
+
+        return $path;
     }
 
 }
