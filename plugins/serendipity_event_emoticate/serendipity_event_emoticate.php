@@ -18,7 +18,7 @@ class serendipity_event_emoticate extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_EMOTICATE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.10');
+        $propbag->add('version',       '1.11');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
