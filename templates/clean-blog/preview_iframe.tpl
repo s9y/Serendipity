@@ -57,11 +57,11 @@
                         <span class="alert alert-success"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-check fa-stack-1x"></i></span> {$CONST.ENTRY_SAVED}</span>
                         <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
                     {/if}
-                {/if}                
+                {/if}
             </div>
         </div>
     </main>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script src={serendipity_getFile file="js/clean-blog.js"}></script>
+    <script src={serendipity_getFile file="js/clean-blog.js" frontend=true}></script>
 </body>
 </html>

@@ -51,17 +51,17 @@
                         {/if}
                         <span class="alert alert-success"><span class="fa-stack text-success" aria-hidden="true"></i><i class="fa fa-smile-o fa-2x"></i></span> {$CONST.ENTRY_SAVED}. &nbsp;&nbsp; <a class="btn btn-md btn-default btn-theme" href="{$entrylink}" target="_blank">{$CONST.VIEW_ENTRY}</a></span>
                     {/if}
-                {/if}                
+                {/if}
             </div>
         </div>
     </main>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src={serendipity_getFile file="js/timeline.js"}></script>
+<script src={serendipity_getFile file="js/timeline.js" frontend=true}></script>
 
 <!--[if lt IE 9]>
-    <script src={serendipity_getFile file="js/respond.js"}></script>
-    <script src={serendipity_getFile file="js/html5shiv.js"}></script>
-    <script src={serendipity_getFile file="js/placeholder-IE-fixes.js"}></script>
+    <script src={serendipity_getFile file="js/respond.js" frontend=true}></script>
+    <script src={serendipity_getFile file="js/html5shiv.js" frontend=true}></script>
+    <script src={serendipity_getFile file="js/placeholder-IE-fixes.js" frontend=true}></script>
 <![endif]-->
 </body>
 </html>
