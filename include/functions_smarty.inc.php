@@ -634,7 +634,7 @@ function serendipity_smarty_getFile($params, &$smarty) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
     }
-    return serendipity_getTemplateFile($params['file']);
+    return serendipity_getTemplateFile($params['file'], 'serendipityHTTPPath', $params['frontend']);
 }
 
 function serendipity_smarty_getConfigVar($params, &$smarty) {

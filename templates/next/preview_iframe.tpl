@@ -25,9 +25,9 @@
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
 <!--[if lte IE 8]>
-    <link rel="stylesheet" href="{serendipity_getFile file="oldie.css"}">
+    <link rel="stylesheet" href="{serendipity_getFile file="oldie.css" frontend=true}">
 <![endif]-->
-    <script src="{serendipity_getFile file="scripts/modernizr/modernizr.js"}"></script>
+    <script src="{serendipity_getFile file="scripts/modernizr/modernizr.js" frontend=true}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
@@ -65,6 +65,6 @@ window.onload = function() {ldelim}
         </main>
     </div>
 
-    <script src="{serendipity_getFile file="scripts/master.js"}"></script>
+    <script src="{serendipity_getFile file="scripts/master.js" frontend=true}"></script>
 </body>
 </html>
