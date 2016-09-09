@@ -72,12 +72,13 @@ function serendipity_smarty_html5time($timestamp) {
  * @param   string      The name of the block to parse data into ("COMMENTS" - virtual variable like {$COMMENTS})
  * @param   string      The name of the template file to fetch. Only filename, the path is auto-detected
  * @param   boolean     If true, the output of the smarty parser will be echoed instead of invisibly treated
+ * @param   boolean     If true, always use a tpl file from the frontend fallback chain (used for the preview)
  * @return  string      The parsed HTML code
  */
-function &serendipity_smarty_fetch($block, $file, $echo = false, $preview = false) {
+function &serendipity_smarty_fetch($block, $file, $echo = false, $force_frontend = false) {
     global $serendipity;
 
-    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $preview), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
+    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $force_frontend), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
 
     $serendipity['smarty']->assignByRef($block, $output);
 

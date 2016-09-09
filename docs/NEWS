@@ -1,6 +1,24 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * Introduce new plugin api function
+      $plugin->getFile($filename, $key = 'serendipityPath'). Other
+      than parseTemplate($filename) it will not parse the found file
+      via smarty, and it allows directories inside $filename. Intended
+      use is finding files like images via the fallback chain, giving
+      themes the chance to serve custom versions instead.
+
+    * Give theme authors the option to force using a template file from
+      the frontend, {getFile file=... frontend=true}
+
+    * Fix entry preview by making sure it always uses the correct
+      template files to generate preview, replacing internal magic
+      with direct parameters
+
+    * Rewrite and simplification of the file fallback chain in
+      serendipity_getTemplateFile. Removes templates/default/ from
+      from the chain, as it was replaced by templates/2k11/
+
     * Added new theme "Timeline".  Timeline is a fully responsive, 
       mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
