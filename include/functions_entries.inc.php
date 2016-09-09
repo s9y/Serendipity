@@ -1281,7 +1281,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
         return serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
     } elseif ($smarty_fetch == true) {
-        return serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
+        return serendipity_smarty_fetch($smarty_block, 'entries.tpl', true, $preview);
     }
 
 } // end function serendipity_printEntries

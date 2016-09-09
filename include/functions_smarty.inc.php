@@ -74,10 +74,10 @@ function serendipity_smarty_html5time($timestamp) {
  * @param   boolean     If true, the output of the smarty parser will be echoed instead of invisibly treated
  * @return  string      The parsed HTML code
  */
-function &serendipity_smarty_fetch($block, $file, $echo = false) {
+function &serendipity_smarty_fetch($block, $file, $echo = false, $preview = false) {
     global $serendipity;
 
-    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
+    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $preview), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
 
     $serendipity['smarty']->assignByRef($block, $output);
 
