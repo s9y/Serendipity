@@ -1,6 +1,6 @@
 <!doctype html>
-<!--[if IE 8 ]>    <html id="preview" class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
-<!--[if gt IE 8]><!--> <html id="preview_iframe" class="no-js" lang="{$lang}"> <!--<![endif]-->
+<!--[if IE 8 ]>    <html class="no-js lt-ie9" lang="{$lang}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{$lang}"> <!--<![endif]-->
 <head>
     <meta charset="{$head_charset}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
@@ -33,7 +33,7 @@
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script type="text/javascript">
 window.onload = function() {ldelim}
-    parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('preview_iframe').offsetHeight + 'px';
+    parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
     parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
     parent.document.getElementById('serendipity_iframe').style.border = 0;
 {rdelim}

@@ -32,10 +32,7 @@
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     <script>
         window.onload = function() {ldelim}
-            parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
-                                                                              + parseInt(document.getElementById('content').style.marginTop)
-                                                                              + parseInt(document.getElementById('content').style.marginBottom)
-                                                                              + 'px';
+            parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
             parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
             parent.document.getElementById('serendipity_iframe').style.border = 0;
         {rdelim}
@@ -44,7 +41,7 @@
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 <div id="page" class="clearfix container">
     <div class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
-        <main id="content" style="padding: 1em 0; margin: 0;">
+        <main id="content"{if $template_option.imgstyle != 'none'} class="{$template_option.imgstyle}"{/if}>
         {if $mode == 'preview'}
             <div class="clearfix">
         {elseif $mode == 'save'}

@@ -23,17 +23,14 @@
     <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     <script>
         window.onload = function() {ldelim}
-            parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('maincontent').offsetHeight
-                                                                              + parseInt(document.getElementById('maincontent').style.marginTop)
-                                                                              + parseInt(document.getElementById('maincontent').style.marginBottom)
-                                                                              + 'px';
+            parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
             parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
             parent.document.getElementById('serendipity_iframe').style.border = 0;
         {rdelim}
     </script>
 </head>
 <body>
-    <main id="maincontent" class="container content" role="main" style="margin: 0 auto;">
+    <main id="maincontent" class="container content" role="main">
         <div class="row">
             <div class="col-md-9">
                 {if $mode == 'preview'}
