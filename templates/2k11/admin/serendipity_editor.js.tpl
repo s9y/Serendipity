@@ -1565,6 +1565,7 @@ $(function() {
             $('#uploadform').submit(function(event) {
                 if (! $('#imageurl').val()) {
                     event.preventDefault();
+                    $('#uploadform .check_inputs').attr('disabled', true);
                     var sendDataToML = function(data, progressContainer, progress) {
                         $.ajax({
                             type: 'post',
@@ -1573,12 +1574,14 @@ $(function() {
                             cache: false,
                             processData: false,
                             contentType: false,
-                            xhrFields: {
-                                onprogress: function (e) {
+                            xhr: function() {
+                                var xhr = $.ajaxSettings.xhr();
+                                xhr.upload.onprogress = function(e) {
                                     if (e.lengthComputable) {
                                         progress.value = e.loaded / e.total * 100;
                                     }
-                                }
+                                };
+                                return xhr;
                             }
                         }).done(function(data) {
                             progress.value = 100;
@@ -1600,6 +1603,7 @@ $(function() {
                                 $('.form_buttons').prepend(mlLink);
                                 $(mlLink).fadeIn();
                             }
+                            $('#uploadform .check_inputs').removeAttr('disabled');
                         });
                     };
                     $('.uploadform_userfile').each(function() {

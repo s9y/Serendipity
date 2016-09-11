@@ -351,6 +351,11 @@ progress div.progress-undefined {
     width: 100%;
 }
 
+progress {
+    /* Makes progress bar visible in FF */
+    background: white;
+}
+
 /* HELPER CLASSES */
 /* Hide visually, available for screenreaders */
 .visuallyhidden {
