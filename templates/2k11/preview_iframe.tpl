@@ -26,10 +26,8 @@
 {else}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
-    <script src="{serendipity_getFile file="admin/js/modernizr.min.js" frontend=true}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.7.1.min.js" frontend=true}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-    <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     <script>
         window.onload = function() {ldelim}
             parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
