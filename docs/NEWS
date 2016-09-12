@@ -1,6 +1,12 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * Fix comaptibility bug preventing Internet Explorer (+Edge) to
+      clear the entry editor cache when saving an entry
+
+    * Remove backend js from preview_iframe.tpls, makeing entry previews
+      faster, more accurate and more reliable
+
     * Introduce new plugin api function
       $plugin->getFile($filename, $key = 'serendipityPath'). Other
       than parseTemplate($filename) it will not parse the found file
