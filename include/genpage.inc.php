@@ -44,6 +44,7 @@ switch ($serendipity['GET']['action']) {
                 $serendipity['smarty']->assign('head_title', $serendipity['head_title']);
                 $serendipity['smarty']->assign('head_subtitle', $serendipity['head_subtitle']);
                 $serendipity['view'] = '404';
+                $serendipity['content_message'] = URL_NOT_FOUND;
                 serendipity_header('HTTP/1.0 404 Not found');
                 serendipity_header('Status: 404 Not found');
             }
@@ -131,6 +132,10 @@ switch ($serendipity['GET']['action']) {
             serendipity_printEntries(serendipity_fetchEntries(null, true, $serendipity['fetchLimit']));
         }
         break;
+}
+
+if ($serendipity['GET']['action'] != 'search' && !empty($serendipity['content_message'])) {
+    $serendipity['smarty']->assign('content_message', $serendipity['content_message']);
 }
 
 serendipity_smarty_fetch('CONTENT', 'content.tpl');

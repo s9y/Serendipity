@@ -22,6 +22,7 @@ function serve404() {
     global $serendipity;
     $serendipity['view'] = '404';
     $serendipity['viewtype'] = '404_4';
+    $serendipity['content_message'] = URL_NOT_FOUND;
     header('HTTP/1.0 404 Not found');
     header('Status: 404 Not found');
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
