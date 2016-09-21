@@ -1,6 +1,9 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * Added new theme "Skeleton".  Skeleton is a responsive, mobile first
+      HTML5/CSS3 theme built on the Skeleton framework.
+
     * Fix comaptibility bug preventing Internet Explorer (+Edge) to
       clear the entry editor cache when saving an entry
 
@@ -25,7 +28,7 @@ Version 2.1-beta1 (June 8th, 2016)
       serendipity_getTemplateFile. Removes templates/default/ from
       from the chain, as it was replaced by templates/2k11/
 
-    * Added new theme "Timeline".  Timeline is a fully responsive, 
+    * Added new theme "Timeline".  Timeline is a fully responsive,
       mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
 
@@ -57,7 +60,7 @@ Version 2.1-beta1 (June 8th, 2016)
 
     * Fix: Ajax upload to ML now also works for non-images
 
-    * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
+    * Added new theme "Clean-Blog".  Clean Blog is a fully responsive,
       mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
 
@@ -171,9 +174,9 @@ Version 2.0.3 (January 4th, 2016)
 
     * Fix XSS in backend comment editing form for logged-in authors,
       thanks to Onur Yilmaz and Robert Abela from Netsparker.com
-          
+
     * Fix some backend entry form related event messages
-              
+
 
 Version 2.0.2 (July 24th, 2015)
 ------------------------------------------------------------------------
@@ -185,7 +188,7 @@ Version 2.0.2 (July 24th, 2015)
         you have possible untrustworthy authors)
       - Add proper escaping for comment approval tokens to prevent
         SQL injection (authenticated authors only)
-      - Add proper escaping of comment's author names in the       
+      - Add proper escaping of comment's author names in the
         comment reply form to prevent XSS (2k11 template, javascript
         based)
 
@@ -380,7 +383,7 @@ Version 2.0-rc2 (December 23rd, 2014)
 ------------------------------------------------------------------------
 
     * Fixes escaping of comments in the new backend pane to prevent
-      XSS. Thanks to Steffen Röemann for reporting!
+      XSS. Thanks to Steffen Rï¿½emann for reporting!
 
     * Fix wrong parameter count in serendipity_entity_decode
 
@@ -966,7 +969,7 @@ Version 1.7 (May 11th, 2013)
       add that to .tpl files.
       (garvinhicking)
 
-    * Patch by Markus Brükner: Properly handle files that have no
+    * Patch by Markus Brï¿½kner: Properly handle files that have no
       extension in media database
 
     * Made Spartacus recognize github.com mirror (garvinhicking)
