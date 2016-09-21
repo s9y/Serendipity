@@ -1,6 +1,9 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * Removed outdated themes blue, carl_contest, kubrick and wp. They
+      live on Spartacus now.
+
     * Added new theme "Skeleton".  Skeleton is a responsive, mobile first
       HTML5/CSS3 theme built on the Skeleton framework.
 
