@@ -737,6 +737,13 @@
                                           'type'        => 'textarea',
                                           'permission'  => 'blogConfiguration',
                                           'default'     => ''),
+
+                                    array('var'         => 'allowLocalURL',
+                                          'title'       => CONFIG_ALLOW_LOCAL_URL,
+                                          'description' => CONFIG_ALLOW_LOCAL_URL_DESC,
+                                          'type'        => 'bool',
+                                          'permission'  => 'siteConfiguration',
+                                          'default'     => false),
                             ));
 
     return $res;

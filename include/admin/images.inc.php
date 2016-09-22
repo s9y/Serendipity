@@ -138,7 +138,7 @@ switch ($serendipity['GET']['adminAction']) {
             unset($serendipity['POST']['multiDelete']);
 
             $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move directly
-            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir']); // relative to Uploads/
+            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir'] . '/'); // relative to Uploads/
 
             if ($oDir != $nDir) {
                 foreach($multiMoveImages AS $mkey => $move_id) {
@@ -275,60 +275,65 @@ switch ($serendipity['GET']['adminAction']) {
                 // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
                 $options['ssl_verify_peer'] = false;
             }
-            $req = new HTTP_Request2($serendipity['POST']['imageurl'], HTTP_Request2::METHOD_GET, $options);
 
-            // Try to get the URL
-            try {
-                $response = $req->send();
-                if ($response->getStatus() != '200') {
-                    throw new HTTP_Request2_Exception('could not fetch image: status != 200');
-                }
-                // Fetch file
-                $fContent = $response->getBody();
+            if (!serendipity_url_allowed($serendipity['POST']['imageurl'])) {
+                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $serendipity['POST']['imageurl']);
+            } else {
+                $req = new HTTP_Request2($serendipity['POST']['imageurl'], HTTP_Request2::METHOD_GET, $options);
 
-                if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
-                    $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
-                    $fp = fopen($tempfile, 'w');
-                    fwrite($fp, $fContent);
-                    fclose($fp);
-
-                    $image_id   = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
-                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . HOTLINK_DONE . "</span>\n", $serendipity['POST']['imageurl'] , $tfile .'');
-                    serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
-                } else {
-                    $fp = fopen($target, 'w');
-                    fwrite($fp, $fContent);
-                    fclose($fp);
-
-                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . FILE_FETCHED . "</span>\n", $serendipity['POST']['imageurl'] , $tfile . '');
-
-                    if (serendipity_checkMediaSize($target)) {
-                        $thumbs = array(array(
-                            'thumbSize' => $serendipity['thumbSize'],
-                            'thumb'     => $serendipity['thumbSuffix']
-                        ));
-                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
-
-                        foreach($thumbs as $thumb) {
-                            // Create thumbnail
-                            if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$tindex], $thumb['thumbSize'], $thumb['thumb']) ) {
-                                $messages[] = '<span class="msg_success"><span class="icon-ok-circled"></span> ' . THUMB_CREATED_DONE . "</span>\n";
-                            }
-                        }
-
-                        // Insert into database
-                        $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
-                        serendipity_plugin_api::hook_event('backend_image_add', $target);
-                        $new_media[] = array(
-                            'image_id'          => $image_id,
-                            'target'            => $target,
-                            'created_thumbnail' => $created_thumbnail
-                        );
+                // Try to get the URL
+                try {
+                    $response = $req->send();
+                    if ($response->getStatus() != '200') {
+                        throw new HTTP_Request2_Exception('could not fetch image: status != 200');
                     }
+                    // Fetch file
+                    $fContent = $response->getBody();
+
+                    if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
+                        $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
+                        $fp = fopen($tempfile, 'w');
+                        fwrite($fp, $fContent);
+                        fclose($fp);
+
+                        $image_id   = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . HOTLINK_DONE . "</span>\n", $serendipity['POST']['imageurl'] , $tfile .'');
+                        serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
+                    } else {
+                        $fp = fopen($target, 'w');
+                        fwrite($fp, $fContent);
+                        fclose($fp);
+
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . FILE_FETCHED . "</span>\n", $serendipity['POST']['imageurl'] , $tfile . '');
+
+                        if (serendipity_checkMediaSize($target)) {
+                            $thumbs = array(array(
+                                'thumbSize' => $serendipity['thumbSize'],
+                                'thumb'     => $serendipity['thumbSuffix']
+                            ));
+                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+
+                            foreach($thumbs as $thumb) {
+                                // Create thumbnail
+                                if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$tindex], $thumb['thumbSize'], $thumb['thumb']) ) {
+                                    $messages[] = '<span class="msg_success"><span class="icon-ok-circled"></span> ' . THUMB_CREATED_DONE . "</span>\n";
+                                }
+                            }
+
+                            // Insert into database
+                            $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
+                            serendipity_plugin_api::hook_event('backend_image_add', $target);
+                            $new_media[] = array(
+                                'image_id'          => $image_id,
+                                'target'            => $target,
+                                'created_thumbnail' => $created_thumbnail
+                            );
+                        }
+                    }
+                    serendipity_request_end();
+                } catch (HTTP_Request2_Exception $e) {
+                     $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
                 }
-                serendipity_request_end();
-            } catch (HTTP_Request2_Exception $e) {
-                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
             }
         } else {
             if (!is_array($_FILES['serendipity']['name']['userfile'])) {

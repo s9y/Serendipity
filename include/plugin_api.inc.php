@@ -214,7 +214,7 @@ class serendipity_plugin_api
 
         $serendipity['debug']['pluginload'][] = "Installing plugin: " . print_r(func_get_args(), true);
 
-        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . serendipity_specialchars($key) . "', $nextidx, '$default_placement', '$authorid', '" . serendipity_specialchars($pluginPath) . "')";
+        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . serendipity_db_escape_string(serendipity_specialchars($key)) . "', $nextidx, '$default_placement', '$authorid', '" . serendipity_specialchars($pluginPath) . "')";
         $serendipity['debug']['pluginload'][] = $iq;
         serendipity_db_query($iq);
         serendipity_plugin_api::hook_event('backend_plugins_new_instance', $key, array('default_placement' => $default_placement));
@@ -245,6 +245,8 @@ class serendipity_plugin_api
     static function remove_plugin_instance($plugin_instance_id)
     {
         global $serendipity;
+
+        $plugin_instance_id = serendipity_db_escape_string($plugin_instance_id);
 
         $plugin =& serendipity_plugin_api::load_plugin($plugin_instance_id);
         if (is_object($plugin)) {

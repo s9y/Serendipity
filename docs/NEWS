@@ -1,6 +1,19 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * [Security] Prevent moving files by using their directory name.
+      [Security] Possible SQL injection for entry category assignment
+      [Security] Possible SQL injection for removing&adding a plugin
+      
+      All issues require a valid backend login.
+      Thanks to Hendrik Buchwald for finding this via their
+      RIPS source code analyzer (www.ripstech.com)
+      
+    * [Security] Add new configuration option to enable fetching 
+      local files for the media uploader. By default this is now
+      disabled to prevent Server Side Request Forgery (SSRF).
+      Thanks to Xu Yue for pointing this out!
+
     * Fix comaptibility bug preventing Internet Explorer (+Edge) to
       clear the entry editor cache when saving an entry
 
