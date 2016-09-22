@@ -1217,7 +1217,8 @@ function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $da
         'reasonPhrase' => $res->getReasonPhrase(),
         'isRedirect'   => $res->isRedirect(),
         'cookies'      => $res->getCookies(),
-        'version'      => $res->getVersion(),        
+        'version'      => $res->getVersion(),
+        'header'       => $res->getHeader(),
 
         'object'       => $res // forward compatibility for possible other checks
     );
