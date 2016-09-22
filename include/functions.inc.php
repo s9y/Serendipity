@@ -1124,7 +1124,7 @@ function serendipity_request_end() {
  * @param $uri string               The URL to fetch
  * @param $method string            HTTP method (GET/POST/PUT/OPTIONS...)
  * @param $contenttype string       optional HTTP content type
- * @param $contenttype string       optional extra data (i.e. POST body)
+ * @param $contenttype mixed        optional extra data (i.e. POST body), can be an array
  * @param $extra_options array      Extra options
  * @param $addData string           possible extra event addData declaration for 'backend_http_request' hook
  * @return $content string          The URL contents
@@ -1190,7 +1190,11 @@ function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $da
     }
 
     if ($data != null) {
-        $req->setBody($data);
+        if (is_array($data)) {
+            $req->addPostParameter($data);
+        } else {
+            $req->setBody($data);
+        }    
     }
 
     try {
