@@ -1,6 +1,10 @@
 Version 2.1-beta1 (June 8th, 2016)
 ------------------------------------------------------------------------
 
+    * Added new API wrapper serendipity_request_url() to request URLs.
+      Currently uses HTTP_Request2, might change to curl or others in
+      the future, but irrelevant to plugins using this function.
+
     * Removed outdated themes blue, carl_contest, kubrick and wp. They
       live on Spartacus now.
 

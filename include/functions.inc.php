@@ -1120,6 +1120,83 @@ function serendipity_request_end() {
     return true;
 }
 
+/* Request the contents of an URL, API wrapper
+ * @param $uri string               The URL to fetch
+ * @param $method string            HTTP method (GET/POST/PUT/OPTIONS...)
+ * @param $contenttype string       optional HTTP content type
+ * @param $contenttype string       optional extra data (i.e. POST body)
+ * @return $content string          The URL contents
+ */
+
+function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null) {
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
+    serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_send');
+    serendipity_request_start();
+    if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+        $options['ssl_verify_peer'] = false;
+    }
+
+    switch(strtoupper($method)) {
+        case 'GET':
+            $http_method = HTTP_Request2::METHOD_GET;
+            break;
+
+        case 'PUT':
+            $http_method = HTTP_Request2::METHOD_PUT;
+            break;
+
+        case 'OPTIONS':
+            $http_method = HTTP_Request2::METHOD_OPTIONS;
+            break;
+
+        case 'HEAD':
+            $http_method = HTTP_Request2::METHOD_HEAD;
+            break;
+
+        case 'DELETE':
+            $http_method = HTTP_Request2::METHOD_DELETE;
+            break;
+
+        case 'TRACE':
+            $http_method = HTTP_Request2::METHOD_TRACE;
+            break;
+
+        case 'CONNECT':
+            $http_method = HTTP_Request2::METHOD_CONNECT;
+            break;
+
+        default:
+        case 'POST':
+            $http_method = HTTP_Request2::METHOD_POST;
+            break;
+
+    }
+
+    $req = new HTTP_Request2($uri, $http_method, $options);
+    if (isset($contenttype)) {
+       $req->setHeader('Content-Type', $contenttype);
+    }
+
+    if ($data != null) {
+        $req->setBody($data);
+    }
+
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
+        serendipity_request_end();
+        return false;
+    }
+
+
+    $fContent = $res->getBody();
+    serendipity_request_end();
+    return $fContent;
+}
+
+
 if (!function_exists('microtime_float')) {
     /**
      * Get current timestamp as microseconds
