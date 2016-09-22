@@ -1125,12 +1125,13 @@ function serendipity_request_end() {
  * @param $method string            HTTP method (GET/POST/PUT/OPTIONS...)
  * @param $contenttype string       optional HTTP content type
  * @param $contenttype mixed        optional extra data (i.e. POST body), can be an array
- * @param $extra_options array      Extra options
+ * @param $extra_options array      Extra options for HTTP_Request $options array (can override defaults)
  * @param $addData string           possible extra event addData declaration for 'backend_http_request' hook
+ * @param $auth array               Array with 'user' and 'pass' for HTTP Auth
  * @return $content string          The URL contents
  */
 
-function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null, $extra_options = null, $addData = null) {
+function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null, $extra_options = null, $addData = null, $auth = null) {
     global $serendipity;
 
     require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
@@ -1185,8 +1186,12 @@ function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $da
     }
 
     $req = new HTTP_Request2($uri, $http_method, $options);
-    if (isset($contenttype)) {
+    if (isset($contenttype) && $contenttype !== null) {
        $req->setHeader('Content-Type', $contenttype);
+    }
+    
+    if (is_array($auth)) {
+        $req->setAuth($auth['user'], $auth['pass']);
     }
 
     if ($data != null) {
