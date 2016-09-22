@@ -91,7 +91,7 @@
 {/if}
 
     <footer id="colophon" class="clearfix">
-        <p lang="en">Powered by <a href="http://s9y.org">Serendipity</a> <abbr title="and">&amp;</abbr> the <i>Next</i> theme.</p>
+        <p lang="en">Powered by <a href="http://s9y.org">Serendipity</a> <abbr title="and">&amp;</abbr> the <i>{$template}</i> theme.</p>
     </footer>
 
     <script src="{serendipity_getFile file="scripts/master.js"}"></script>

@@ -97,7 +97,7 @@
     </div>
 
     <footer id="colophon">
-        <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <i>2k11</i> theme.</span></p>
+        <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <i>{$template}</i> theme.</span></p>
     </footer>
 </div>
 
