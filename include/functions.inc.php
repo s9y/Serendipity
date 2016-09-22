@@ -1125,13 +1125,23 @@ function serendipity_request_end() {
  * @param $method string            HTTP method (GET/POST/PUT/OPTIONS...)
  * @param $contenttype string       optional HTTP content type
  * @param $contenttype string       optional extra data (i.e. POST body)
+ * @param $extra_options array      Extra options
+ * @param $addData string           possible extra event addData declaration for 'backend_http_request' hook
  * @return $content string          The URL contents
  */
 
-function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null) {
+function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null, $extra_options = null, $addData = null) {
+    global $serendipity;
+
     require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
     $options = array('follow_redirects' => true, 'max_redirects' => 5);
-    serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_send');
+    
+    if (is_array($extra_options)) {
+        foreach($extra_options AS $okey => $oval) {
+            $options[$okey] = $oval;
+        }
+    }
+    serendipity_plugin_api::hook_event('backend_http_request', $options, $addData);
     serendipity_request_start();
     if (version_compare(PHP_VERSION, '5.6.0', '<')) {
         // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
@@ -1192,6 +1202,17 @@ function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $da
 
 
     $fContent = $res->getBody();
+    $serendipity['last_http_request'] = array(
+        'responseCode' => $res->getStatus(),
+        'effectiveUrl' => $res->getEffectiveUrl(),
+        'reasonPhrase' => $res->getReasonPhrase(),
+        'isRedirect'   => $res->isRedirect(),
+        'cookies'      => $res->getCookies(),
+        'version'      => $res->getVersion(),        
+
+        'object'       => $res // forward compatibility for possible other checks
+    );
+    
     serendipity_request_end();
     return $fContent;
 }
