@@ -1,4 +1,4 @@
-Version 2.1-beta1 (June 8th, 2016)
+Version 2.1-beta2 (September 26th, 2016)
 ------------------------------------------------------------------------
 
     * [Security] Prevent moving files by using their directory name.
@@ -47,6 +47,9 @@ Version 2.1-beta1 (June 8th, 2016)
     * Rewrite and simplification of the file fallback chain in
       serendipity_getTemplateFile. Removes templates/default/ from
       from the chain, as it was replaced by templates/2k11/
+
+Version 2.1-beta1 (June 8th, 2016)
+------------------------------------------------------------------------
 
     * Added new theme "Timeline".  Timeline is a fully responsive,
       mobile first HTML5/CSS3 theme built on the Bootstrap
