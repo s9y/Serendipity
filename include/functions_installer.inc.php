@@ -679,7 +679,7 @@ function serendipity_installFiles($serendipity_core = '') {
         }
     }
 
-    if (php_sapi_name() == 'cgi' || php_sapi_name() == 'cgi-fcgi') {
+    if (substr(php_sapi_name(), 0, 3) == 'cgi') {
         $htaccess_cgi = '_cgi';
     } else {
         $htaccess_cgi = '';
