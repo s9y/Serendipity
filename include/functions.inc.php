@@ -1239,7 +1239,43 @@ function serendipity_logTimer($message, $final = false) {
         $GLOBALS['time_start_last'] = $now;
     }
 }
-                                                                     
+
+/**
+  * Check whether a given URL is valid to be locally requested
+  * @return boolean
+  */
+function serendipity_url_allowed($url) {
+    global $serendipity;
+ 
+    if ($serendipity['allowLocalURL']) {
+        return true;
+    }
+    $parts = @parse_url($url);
+    if (!is_array($parts) || empty($parts['host'])) {
+        return false;
+    }
+     $host = trim($parts['host'], '.');
+    if (preg_match('@^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$@imsU', $host)) {
+        $ip = $host;
+    } else {
+        $ip = gethostbyname($host);
+        if ($ip === $host) {
+            $ip = false;
+        }
+    }
+ 
+    if ($ip) {
+        $ipparts = array_map('intval', explode('.', $ip));
+        if ( 127 === $ipparts[0] || 10 === $ipparts[0] || 0 === $ipparts[0]
+            || ( 172 === $ipparts[0] && 16 <= $ipparts[1] && 31 >= $ipparts[1] )
+            || ( 192 === $ipparts[0] && 168 === $ipparts[1])
+        ) {
+            return false;
+        }
+    }
+  
+    return true;
+ }                                                                     
 
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */

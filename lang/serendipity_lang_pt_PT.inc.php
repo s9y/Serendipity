@@ -1110,3 +1110,7 @@
 @define('JS_FAILURE', 'The Serendipity JavaScript-library could not be loaded. This can happen due to PHP or Plugin errors, or even a malformed browser cache. To check the exact error please open <a href="%1$s">%1$s</a> manually in your browser and check for error messages.');
 @define('THEMES_PREVIEW_BLOG', 'See demo on blog.s9y.org');
 @define('SYNDICATION_PLUGIN_XML_DESC', 'Set to "none" if you only want to show a text link.');
+@define('CONFIG_ALLOW_LOCAL_URL', 'Allow to fetch data from local URLs');
+@define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
+@define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
+ 
