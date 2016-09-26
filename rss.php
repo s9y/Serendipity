@@ -9,6 +9,10 @@ session_cache_limiter('public');
 include('serendipity_config.inc.php');
 include(S9Y_INCLUDE_PATH . 'include/functions_rss.inc.php');
 
+if ($serendipity['cors']) {
+    header('Access-Control-Allow-Origin: *'); // Allow RSS feeds to be read by javascript
+}
+
 $version     = $_GET['version'];
 $description = $serendipity['blogDescription'];
 $title       = $serendipity['blogTitle'];
