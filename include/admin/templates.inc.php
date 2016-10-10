@@ -180,7 +180,6 @@ $data['recommended_templates'] = array();
 foreach($themes AS $theme) {
     $stack[$theme] = serendipity_fetchTemplateInfo($theme);
 }
-ksort($stack);
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
@@ -230,6 +229,9 @@ foreach ($stack as $theme => $info) {
         }
     }
 }
+uasort($data['templates'], function($a, $b) {
+    return strnatcasecmp($a['info']['name'], $b['info']['name']);
+});
 
 $data['cur_tpl']         = $data['templates'][$serendipity['template']];
 $data['cur_tpl_backend'] = $data['templates'][$serendipity['template_backend']];
