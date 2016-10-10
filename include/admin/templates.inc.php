@@ -180,7 +180,6 @@ $data['recommended_templates'] = array();
 foreach($themes AS $theme) {
     $stack[$theme] = serendipity_fetchTemplateInfo($theme);
 }
-ksort($stack);
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
