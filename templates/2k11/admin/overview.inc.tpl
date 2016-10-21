@@ -3,7 +3,7 @@
         <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
     </div>
 {$backend_frontpage_display}
-    <div id="dashboard" class="clearfix">
+    <div id="dashboard">
     {if $published}
         <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_PUBLISHED|sprintf:$published|escape}</span>
         <hr class="separator">

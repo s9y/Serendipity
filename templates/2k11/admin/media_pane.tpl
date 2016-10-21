@@ -243,7 +243,7 @@
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
 
-        <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
+        <div class="media_pane" data-thumbmaxwidth="{$media.thumbSize}">
             {$MEDIA_ITEMS}
 
         {if ($media.page != 1 AND $media.page <= $media.pages) OR $media.page != $media.pages}

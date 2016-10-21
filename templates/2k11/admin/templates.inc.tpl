@@ -140,16 +140,16 @@
         {/function}
 
         <h2>{$CONST.RECOMMENDED}</h2>
-        <ul class="plainList clearfix">
+        <ul class="plainList">
         {foreach $recommended_templates as $template=>$info}
             {templateBlock template=$template info=$info key=$info@key}
         {/foreach}
         </ul>
-        
+
 
         <h2>{$CONST.AVAILABLE_TEMPLATES}</h2>
 
-        <ul class="plainList clearfix">
+        <ul class="plainList">
         {foreach $templates as $template=>$info}
             {templateBlock template=$template info=$info key=$info@key}
         {/foreach}

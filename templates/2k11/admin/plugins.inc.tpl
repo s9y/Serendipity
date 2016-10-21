@@ -84,7 +84,7 @@
             {if $only_group == 'UPGRADE' && $pluggroups['UPGRADE']|@count > 1}
                 <button id="updateAll">Update All</button>
             {/if}
-            <ul class="plugins_installable plainList clearfix">
+            <ul class="plugins_installable plainList">
             {foreach $groupstack as $plug}
                 <li class="clearfix">
                     <div class="equal_heights">

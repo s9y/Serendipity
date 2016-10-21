@@ -1681,7 +1681,7 @@ $(function() {
             serendipity.SetCookie('serendipity_only_path', $('#serendipity_only_path').val());
         });
     }
-    
+
     if ($('.image_move').length > 0) {
         $('.image_move').removeClass('hidden');
         $('.image_move').magnificPopup({
@@ -1761,15 +1761,19 @@ $(function() {
 
     // Equal Heights
     $(window).load(function() {
-        if (mq_small) {
-            serendipity.sync_heights();
+        if(!Modernizr.flexbox) {
+            if (mq_small) {
+                serendipity.sync_heights();
+            }
         }
     });
 
     // Make sure plugin list heights are recalculated when switching tabs
     $('#pluginlist_tabs a').click(function() {
-        if (mq_small) {
-            serendipity.sync_heights();
+        if(!Modernizr.flexbox) {
+            if (mq_small) {
+                serendipity.sync_heights();
+            }
         }
     });
 });

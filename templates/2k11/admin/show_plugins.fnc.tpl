@@ -6,7 +6,7 @@
         <input id="eventorder" name="serendipity[pluginorder]" type="hidden" value="">
     {/if}
         {$serendipity_setFormToken}
-        <div class="clearfix pluginmanager">
+        <div class="pluginmanager">
         {foreach $placement as $plugin_placement}
             <div class="pluginmanager_side pluginmanager_{($event_only) ? 'event' : 'sidebar'}">
                 <h4>{$plugin_placement['ptitle']}</h4>
@@ -84,8 +84,8 @@
                 </ol>
             </div>
         {/foreach}
-            <span class="plugin_count block_level">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$total}</span>
         </div>
+        <span class="plugin_count block_level">{$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$total}</span>
         <div class="form_buttons">
             <input class="state_cancel" name="REMOVE" type="submit" title="{$CONST.REMOVE_TICKED_PLUGINS}" value="{$CONST.DELETE}">
             <input name="SAVE" type="submit" title="{$CONST.SAVE_CHANGES_TO_LAYOUT}" value="{$CONST.SAVE}">
