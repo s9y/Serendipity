@@ -565,7 +565,8 @@ details,
 form > a,
 form > button,
 #content .upgrade_done,
-#upgrade_notice {
+#upgrade_notice,
+.template_editor_start {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
 }
@@ -1305,7 +1306,8 @@ summary {
 
 .edit_actions,
 #entries_list .actions,
-.toggle_links {
+.toggle_links,
+.template_editor_start {
     float: right;
 }
 
