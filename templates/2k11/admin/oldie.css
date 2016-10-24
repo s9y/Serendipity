@@ -234,7 +234,6 @@ pre {
 #dashboard > .dashboard_widget:nth-of-type(even),
 #maintenance > .quick_list:nth-of-type(even),
 .media_pane > .media_file:nth-of-type(even),
-.plugins_installable > li:nth-of-type(even),
 #template_select > .current_backend_template,
 #template_select > ul li:nth-of-type(even) {
     margin: 0 0 1em 2%;
