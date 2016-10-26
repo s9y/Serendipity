@@ -3273,6 +3273,7 @@ img.mfp-img {
 
     .no-js #dashboard #s9y_links,
     #maintenance > h2,
+    #maintenance > span,
     .media_pane .pagination,
     #template_select > h2 {
         flex: 0 0 auto;
