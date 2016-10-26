@@ -3296,6 +3296,7 @@ img.mfp-img {
         margin-bottom: 0;
     }
 
+    #maintenance > span,
     .media_chooser + .field_info {
         margin-top: 0;
     }
