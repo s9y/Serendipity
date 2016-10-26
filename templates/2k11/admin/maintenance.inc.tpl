@@ -1,4 +1,4 @@
- aria-hidden="true"<div id="maintenance">
+ <div id="maintenance">
     <h2>{$CONST.MENU_MAINTENANCE}</h2>
 
 {if $action == "integrity"}
