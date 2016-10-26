@@ -87,7 +87,7 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
             $cond['parts']['directory'] = " AND i.path = ''\n";
         }
     }
-    
+
     if (!empty($filename)) {
         $cond['parts']['filename'] = " AND (i.name     like '%" . serendipity_db_escape_string($filename) . "%' OR
                   i.realname like '%" . serendipity_db_escape_string($filename) . "%')\n";
@@ -329,7 +329,7 @@ function serendipity_deleteImage($id) {
     $file   = serendipity_fetchImageFromDatabase($id);
 
     if (!is_array($file)) {
-        $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . FILE_NOT_FOUND . "</span>\n", $id);
+        $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . FILE_NOT_FOUND . "</span>\n", $id);
         //return false;
     } else {
 
@@ -351,9 +351,9 @@ function serendipity_deleteImage($id) {
         if (!$file['hotlink']) {
             if (file_exists($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
                 if (@unlink($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dFile)) {
-                    $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETE_FILE . "</span>\n", $dFile);
+                    $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . DELETE_FILE . "</span>\n", $dFile);
                 } else {
-                    $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . DELETE_FILE_FAIL . "</span>\n", $dFile);
+                    $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . DELETE_FILE_FAIL . "</span>\n", $dFile);
                 }
 
                 serendipity_plugin_api::hook_event('backend_media_delete', $dThumb);
@@ -362,14 +362,14 @@ function serendipity_deleteImage($id) {
                     $dfThumb  = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $dfnThumb;
 
                     if (@unlink($dfThumb)) {
-                        $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETE_THUMBNAIL . "</span>\n", $dfnThumb);
+                        $messages .= sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . DELETE_THUMBNAIL . "</span>\n", $dfnThumb);
                     }
                 }
             } else {
-                $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . FILE_NOT_FOUND . "</span>\n", $dFile);
+                $messages .= sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . FILE_NOT_FOUND . "</span>\n", $dFile);
             }
         } else {
-            $messages .= sprintf('<span class="msg_hint"><span class="icon-help-circled"></span> ' . DELETE_HOTLINK_FILE . "</span>\n", $file['name']);
+            $messages .= sprintf('<span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> ' . DELETE_HOTLINK_FILE . "</span>\n", $file['name']);
         }
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}images WHERE id = ". (int)$id);
@@ -682,7 +682,7 @@ function serendipity_makeThumbnail($file, $directory = '', $size = false, $thumb
             }
             exec($cmd, $output, $result);
             if ($result != 0) {
-                echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
                 $r = false; // return failure
             } else {
                touch($outfile);
@@ -725,7 +725,7 @@ function serendipity_scaleImg($id, $width, $height) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -scale ' .  serendipity_escapeshellarg($width . 'x' . $height) . ' ' . serendipity_escapeshellarg($infile) . ' ' . serendipity_escapeshellarg($outfile);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
             return false;
         }
         unset($output, $result);
@@ -776,7 +776,7 @@ function serendipity_rotateImg($id, $degrees) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infile) . ' ' . serendipity_escapeshellarg($outfile);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
         }
         unset($output, $result);
 
@@ -784,7 +784,7 @@ function serendipity_rotateImg($id, $degrees) {
         $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infileThumb) . ' ' . serendipity_escapeshellarg($outfileThumb);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
         }
         unset($output, $result);
 
@@ -838,13 +838,13 @@ function serendipity_generateThumbs() {
                     // Only print the resize message the first time
                     if (!$msg_printed) {
                         $resizemedia = sprintf(RESIZE_BLAHBLAH, THUMBNAIL_SHORT);
-                        printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $resizemedia . "</span>\n");
+                        printf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . $resizemedia . "</span>\n");
                         echo "\n" . '<ul class="serendipityFileList">' . "\n";
                         $msg_printed = true;
                     }
                     echo '<li>' . $sThumb . ': ' . $returnsize['width'] . 'x' . $returnsize['height'] . "</li>\n";
                     if (!file_exists($newThumb)) {
-                        printf('<li><span class="msg_error"><span class="icon-attention-circled"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
+                        printf('<li><span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                     } else {
                         $update = true;
                     }
@@ -852,7 +852,7 @@ function serendipity_generateThumbs() {
             } elseif (!file_exists($oldThumb) && !file_exists($newThumb) && $fdim[0] <= $serendipity['thumbSize'] && $fdim[1] <= $serendipity['thumbSize']) {
                 if (!$msg_printed) {
                     $resizethumb = sprintf(RESIZE_BLAHBLAH, THUMB);
-                    printf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . $resizethumb . "</span>\n");
+                    printf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . $resizethumb . "</span>\n");
                     echo "\n" . '<ul class="serendipityFileList">' . "\n";
                     $msg_printed = true;
                 }
@@ -861,7 +861,7 @@ function serendipity_generateThumbs() {
                     printf('<li>' . THUMBNAIL_USING_OWN . '</li>' . "\n", $sThumb);
                     $update = true;
                 } else {
-                    printf('<li><span class="msg_error"><span class="icon-attention-circled"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
+                    printf('<li><span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . THUMBNAIL_FAILED_COPY . '</span></li>' . "\n", $sThumb);
                 }
             }
 
@@ -1113,7 +1113,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         $f      = serendipity_parseFileName($files[$x]);
         if (empty($f[1]) || $f[1] == $files[$x]) {
             // No extension means bad file most probably. Skip it.
-            printf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . SKIPPING_FILE_EXTENSION . "</span>\n", $files[$x]);
+            printf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . SKIPPING_FILE_EXTENSION . "</span>\n", $files[$x]);
             continue;
         }
 
@@ -1127,7 +1127,7 @@ function serendipity_syncThumbs($deleteThumbs = false) {
         }
 
         if (!is_readable($ffull) || filesize($ffull) == 0) {
-            printf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . SKIPPING_FILE_UNREADABLE . "</span>\n", $files[$x]);
+            printf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . SKIPPING_FILE_UNREADABLE . "</span>\n", $files[$x]);
             continue;
         }
 
@@ -1460,7 +1460,7 @@ function serendipity_displayImageList($page = 0, $lineBreak = NULL, $manage = fa
     static $debug = false;
 
     $extraParems = serendipity_generateImageSelectorParems();
-    
+
     $serendipity['GET']['only_path']     = serendipity_uploadSecure($limit_path . $serendipity['GET']['only_path'], true);
     $serendipity['GET']['only_filename'] = serendipity_specialchars(str_replace(array('*', '?'), array('%', '_'), $serendipity['GET']['only_filename']));
 
@@ -1796,7 +1796,7 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         }
         @closedir($handle);
 
-        echo '<span class="msg_notice"><span class="icon-info-circled"></span> ';
+        echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ';
         printf(CHECKING_DIRECTORY, $directory);
         echo "</span>";
 
@@ -1825,14 +1825,14 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
                 echo "<ul class='plainList'>\n";
                 foreach($filestack AS $f => $file) {
                     if ($serious && @unlink($basedir . $file)) {
-                        printf('<li><span class="msg_success"><span class="icon-ok-circled"></span> ' . DELETING_FILE . ' ' . DONE . "</span></li>\n", $file);
+                        printf('<li><span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . DELETING_FILE . ' ' . DONE . "</span></li>\n", $file);
                     } else {
-                        printf('<li><span class="msg_error"><span class="icon-attention-circled"></span> ' . DELETING_FILE . ' ' . ERROR . "</span></li>\n", $file);
+                        printf('<li><span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . DELETING_FILE . ' ' . ERROR . "</span></li>\n", $file);
                     }
                 }
                 echo "</ul>\n";
             } else {
-                echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_DIRECTORY_NOT_EMPTY . "</span>\n";
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_DIRECTORY_NOT_EMPTY . "</span>\n";
                 echo "<ul>\n";
                 foreach($filestack AS $f => $file) {
                     echo '<li>' . $file . "</li>\n";
@@ -1842,11 +1842,11 @@ function serendipity_killPath($basedir, $directory = '', $forceDelete = false) {
         }
 
         if ($serious && !empty($directory) && !preg_match('@^.?/?$@', $directory) && @rmdir($basedir . $directory)) {
-            echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
+            echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ';
             printf(DIRECTORY_DELETE_SUCCESS, $directory);
             echo "</span>\n";
         } else {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(DIRECTORY_DELETE_FAILED, $directory);
             echo "</span>\n";
         }
@@ -2225,19 +2225,19 @@ function serendipity_directoryACL(&$paths, $type = 'read') {
             if ($granted === false) {
                 // We are not allowed to access this element
                 if ($debug) {
-                    echo '<span class="msg_error"><span class="icon-attention-circled"></span> ACL for ' . $info['relpath'] . " DENIED.</span>";
+                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ACL for ' . $info['relpath'] . " DENIED.</span>";
                 }
                 unset($paths[$idx]);
             } else {
                 if ($debug) {
-                    echo '<span class="msg_success"><span class="icon-ok-circled"></span> ACL for ' . $info['relpath'] . " granted.</span>";
+                    echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ACL for ' . $info['relpath'] . " granted.</span>";
                 }
             }
         }
 
         if (count($paths) < $startCount) {
             if ($debug) {
-                echo '<span class="msg_error"><span class="icon-attention-circled"></span> ACL denied all.</span>';
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ACL denied all.</span>';
             }
             return false;
         }
@@ -3323,7 +3323,7 @@ function serendipity_imageAppend(&$tfile, &$target, $dir, $echo = true) {
     $target = $dir . $tfile;
 
     if ($echo) {
-        echo '<span class="msg_success"><span class="icon-ok-circled"></span> <strong>';
+        echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> <strong>';
         printf(FILENAME_REASSIGNED . '<br />', serendipity_specialchars($tfile));
         echo "</strong></span>\n";
     }
@@ -3342,7 +3342,7 @@ function serendipity_checkMediaSize($file) {
 
     if (!empty($serendipity['maxFileSize'])) {
         if (filesize($file) > $serendipity['maxFileSize']) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(MEDIA_UPLOAD_SIZEERROR . '<br />', (int)$serendipity['maxFileSize']);
             echo "</span>\n";
             return false;
@@ -3357,7 +3357,7 @@ function serendipity_checkMediaSize($file) {
 
         if (!empty($serendipity['maxImgWidth'])) {
             if ($dim[0] > $serendipity['maxImgWidth']) {
-                echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
                 printf(MEDIA_UPLOAD_DIMERROR . '<br />', (int)$serendipity['maxImgWidth'], (int)$serendipity['maxImgHeight']);
                 echo "</span>\n";
                 return false;
@@ -3366,7 +3366,7 @@ function serendipity_checkMediaSize($file) {
 
         if (!empty($serendipity['maxImgHeight'])) {
             if ($dim[1] > $serendipity['maxImgHeight']) {
-                echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
                 printf(MEDIA_UPLOAD_DIMERROR . '<br />', (int)$serendipity['maxImgWidth'], (int)$serendipity['maxImgHeight']);
                 echo "</span>\n";
                 return false;
@@ -3398,7 +3398,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
     if (!$item_id || $item_id < 1) {
         // only print message if not posting a case_directoryEdit submit
         if (empty($serendipity['POST']['save'])) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(ERROR_FILE_NOT_EXISTS, $item_id);
             echo "</span>\n";
             return false;
@@ -3417,27 +3417,27 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         $real_newDir = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir;
 
         if (!is_dir($real_oldDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(ERROR_FILE_NOT_EXISTS, $oldDir);
             echo "</span>\n";
             return false;
         }
 
         if (is_dir($real_newDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(ERROR_FILE_EXISTS, $newDir);
             echo "</span>\n";
             return false;
         }
 
         if (!rename($real_oldDir, $real_newDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(MEDIA_DIRECTORY_MOVE_ERROR, $newDir);
             echo "</span>\n";
             return false;
         }
 
-        echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
+        echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ';
         printf(MEDIA_DIRECTORY_MOVED, $newDir);
         echo "</span>\n";
 
@@ -3492,7 +3492,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         // active in mean of eval or executable
         if (serendipity_isActiveFile(basename($newDir))) {
-            echo '<span class="msg_error"><span class="icon-attention-circled"></span> ';
+            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
             printf(ERROR_FILE_FORBIDDEN, serendipity_specialchars($newDir));
             echo "</span>\n";
             return false;
@@ -3549,7 +3549,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 $newparts = pathinfo($newfile);
                 if ($newparts['dirname'] == '.' || (!empty($file['extension']) && empty($newparts['extension'])) || empty($newparts['filename'])) {
                     // error new file build mismatch
-                    echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . $newfile . ' ' . ERROR_SOMETHING . "</span>\n";
+                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . $newfile . ' ' . ERROR_SOMETHING . "</span>\n";
                     return false;
                 }
 
@@ -3619,7 +3619,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                     serendipity_plugin_api::hook_event('backend_media_rename', $renameValues); // eg. for staticpage entries path regex replacements
 
                     // Move the origin file
-                    try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+                    try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
 
                     // do still need this? YES, it is definitely false, so we would not need the ternary
                     // Rename newDir + file name in case it is called by the Bulk Move and not by rename
@@ -3632,7 +3632,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                         // Check for existent old thumb files first, to not need to disable rename by @rename(), then  move the thumb file and catch any wrong renaming
                         if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
                             // the thumb file and catch any wrong renaming
-                            try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+                            try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
                         }
                     }
 
@@ -3643,11 +3643,11 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
                 }
             } else {
                 if (!file_exists($oldfile)) {
-                    echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_NOT_EXISTS . "</span>\n";
+                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_NOT_EXISTS . "</span>\n";
                 } elseif (file_exists($newfile)) {
-                    echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_EXISTS . "</span>\n";
+                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n";
                 } else {
-                    echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . "</span>\n";
+                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . "</span>\n";
                 }
 
                 return false;
@@ -3683,7 +3683,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
 
         // Move the origin file
-        try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+        try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
 
         foreach($renameValues AS $renameData) {
             $thisOldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
@@ -3691,7 +3691,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
             // Check for existent old thumb files first, to not need to disable rename by @rename(),then  move the thumb file and catch any wrong renaming
             if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
                 // the thumb file and catch any wrong renaming
-                try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
+                try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
             }
         }
         // no need to use serendipity_updateImageInDatabase() here since already done in this case start
@@ -3702,7 +3702,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
         $thisExt = isset($pick['extension']) ? '.'.$pick['extension'] : '';
 
         if (file_exists($newfile)) {
-            echo '<span class="msg_success"><span class="icon-ok-circled"></span> ';
+            echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ';
             printf(MEDIA_DIRECTORY_MOVED, $thisnew . $thisExt);
             echo "</span>\n";
         }
@@ -3713,7 +3713,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
     // Only MySQL supported, since I don't know how to use REGEXPs differently. // Ian: we should improve this to all!
     if ($serendipity['dbType'] != 'mysql' && $serendipity['dbType'] != 'mysqli') {
-        echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . MEDIA_DIRECTORY_MOVE_ENTRY . "</span>\n";
+        echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ENTRY . "</span>\n";
         return true;
     }
 
@@ -3786,7 +3786,7 @@ function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_i
 
         if ($oldDir !== null){
             $imgmovedtodir = sprintf(MEDIA_DIRECTORY_MOVE_ENTRIES, count($entries));
-            echo '<span class="msg_notice"><span class="icon-info-circled"></span> ' . $imgmovedtodir . "</span>\n";
+            echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . $imgmovedtodir . "</span>\n";
         }
 
     }

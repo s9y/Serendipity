@@ -4,21 +4,21 @@
 
 {if $case_doSync}
     {if !$perm_adminImagesSync}
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.PERM_DENIED}</span>
     {else}
         <h2>{$CONST.SYNCING}</h2>
 
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$print_SYNC_DONE}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$print_SYNC_DONE}</span>
 
         <h2>{$CONST.RESIZING}</h2>
 
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$print_RESIZE_DONE}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$print_RESIZE_DONE}</span>
     {/if}
 {/if}
 {if $case_delete}
     <h2>{$CONST.MEDIA_DELETE}</h2>
 
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ABOUT_TO_DELETE_FILE|sprintf:"$file"}</span>
 
     <form id="delete_image" method="get">
         <div class="form_buttons">
@@ -29,9 +29,9 @@
 {/if}
 {if $case_multidelete}
     <form id="delete_image" method="get">
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ABOUT_TO_DELETE_FILES}</span>
     {foreach $rip_image AS $ripimg}
-    <span class="msg_hint"><span class="icon-help-circled"></span> {$ripimg}</span>
+    <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$ripimg}</span>
     {/foreach}
     <div class="form_buttons">
         <a class="button_link state_cancel icon_link" href="{$abortLoc}">{$CONST.BACK}</a>
@@ -47,13 +47,13 @@
     {if isset($showML)}{$showML}{/if}
 {/if}
 {if $case_directoryDoDelete}
-    {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
+    {if $print_DIRECTORY_WRITE_ERROR}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_DIRECTORY_WRITE_ERROR}</span>{/if}
     {if isset($ob_serendipity_killPath)}{$ob_serendipity_killPath}{/if}
-    {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
+    {if $print_ERROR_NO_DIRECTORY}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_ERROR_NO_DIRECTORY}</span>{/if}
 {/if}
 {if $case_directoryEdit}
     {if !empty($smarty.post.serendipity.save)}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$print_SETTINGS_SAVED_AT}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$print_SETTINGS_SAVED_AT}</span>
     {/if}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
@@ -67,7 +67,7 @@
         </div>
 
         <h3 class="toggle_headline">
-            <button class="show_config_option icon_link" type="button" data-href="#directory_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir"></span> {$CONST.PERMISSIONS}</button>
+            <button class="show_config_option icon_link" type="button" data-href="#directory_permissions" title="{$CONST.TOGGLE_OPTION}"><span class="icon-right-dir" aria-hidden="true"></span> {$CONST.PERMISSIONS}</button>
         </h3>
 
         <div id="directory_permissions" class="clearfix additional_info">
@@ -122,10 +122,10 @@
 {/if}
 {if $case_directoryDoCreate}
     {if $print_DIRECTORY_CREATED}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$print_DIRECTORY_CREATED}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$print_DIRECTORY_CREATED}</span>
     {/if}
     {if $print_DIRECTORY_WRITE_ERROR}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$print_DIRECTORY_WRITE_ERROR}</span>
+    <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$print_DIRECTORY_WRITE_ERROR}</span>
     {/if}
     <a class="button_link state_submit" href="serendipity_admin.php?serendipity[adminModule]=media&amp;serendipity[adminAction]=directorySelect">{$CONST.BACK}</a>
 {/if}
@@ -160,7 +160,7 @@
 {if $case_directorySelect}
     <h2>{$CONST.MANAGE_DIRECTORIES}</h2>
 
-    <h3>{$CONST.BASE_DIRECTORY} <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_directory_info" title="{$CONST.DIRECTORY_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.DIRECTORY_INFO}</span></a></span></h3>
+    <h3>{$CONST.BASE_DIRECTORY} <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_directory_info" title="{$CONST.DIRECTORY_INFO}"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DIRECTORY_INFO}</span></a></span></h3>
     <header id="media_directory_info" class="media_directory_info additional_info">
         <span class="msg_notice">{$CONST.DIRECTORY_INFO_DESC}</span>
     </header>
@@ -194,12 +194,12 @@
 
         <li>
             <div class="clearfix {cycle values="odd,even"}">
-                <span class="folder_name"><span class="icon-folder-open"></span> {$folder.name}</span>
+                <span class="folder_name"><span class="icon-folder-open" aria-hidden="true"></span> {$folder.name}</span>
 
                 <ul class="plainList clearfix edit_actions">
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.EDIT} {$folder.name}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreateSub&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.CREATE_DIRECTORY}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.CREATE_DIRECTORY}</span></a></li>
-                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.DELETE} {$folder.name}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryEdit&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.EDIT} {$folder.name}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryCreateSub&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.CREATE_DIRECTORY}"><span class="icon-plus" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.CREATE_DIRECTORY}</span></a></li>
+                    <li><a class="button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=directoryDelete&amp;serendipity[dir]={$folder.relpath|escape}" title="{$CONST.DELETE} {$folder.name}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                 </ul>
             </div>
     {/foreach}
@@ -237,16 +237,16 @@
     {/if}
 {/if}
 {if $case_scale}
-    {if isset($print_SCALING_IMAGE)}<span class="msg_notice"><span class="icon-info-circled"></span> {$print_SCALING_IMAGE}</span>{/if}
-    {if isset($scaleImgError)}<span class="msg_error"><span class="icon-attention-circled"></span> {$scaleImgError}</span>{/if}
-    {if isset($is_done)}<span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}</span>{/if}
+    {if isset($print_SCALING_IMAGE)}<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$print_SCALING_IMAGE}</span>{/if}
+    {if isset($scaleImgError)}<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$scaleImgError}</span>{/if}
+    {if isset($is_done)}<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}</span>{/if}
     {if $showML}{$showML}{/if}
 {/if}
 {if $case_scaleSelect}
     {if $print_RESIZE_BLAHBLAH}<h2>{$print_RESIZE_BLAHBLAH}</h2>{/if}
     {if $print_ORIGINAL_SIZE}<span class="block_level standalone">{$print_ORIGINAL_SIZE}</span>{/if}
 
-    <span class="msg_notice image_resize_hint"><span class="icon-info-circled"></span> {$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</span>
+    <span class="msg_notice image_resize_hint"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.HERE_YOU_CAN_ENTER_BLAHBLAH}</span>
 
     <div class="clearfix">
         <form id="serendipityScaleForm" name="serendipityScaleForm" action="?" method="GET">

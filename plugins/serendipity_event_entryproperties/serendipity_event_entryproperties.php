@@ -502,7 +502,7 @@ class serendipity_event_entryproperties extends serendipity_event
                     <div id="ep_column_<?php echo $_fieldname; ?>" class="clearfix form_area media_choose">
                         <label for="prop<?php echo $_fieldname; ?>"><?php echo $_fieldname; ?></label>
                         <textarea id="prop<?php echo $_fieldname; ?>" class="change_preview" name="serendipity[properties][<?php echo $_fieldname; ?>]" data-configitem="prop<?php echo $_fieldname; ?>"><?php echo serendipity_specialchars($value); ?></textarea>
-                        <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
+                        <button class="customfieldMedia" type="button" name="insImage" title="<?php echo MEDIA ; ?>"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden"><?php echo MEDIA ; ?></span></button>
                         <?php if (preg_match('/(\.jpg|\.png|\.bmp)$/', $value)) { ?>
                         <figure id="prop<?php echo $_fieldname; ?>_preview">
                             <figcaption><?php echo PREVIEW; ?></figcaption>
@@ -676,7 +676,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         </script>
 <?php
                         } else {
-                            echo '<span class="msg_notice"><span class="icon-info-circled"></span>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
+                            echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>' . PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE . '</span>';
                         }
                     }
                     break;

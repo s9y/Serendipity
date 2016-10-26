@@ -8,10 +8,10 @@
         <input name="serendipity[adminAction]" type="hidden" value="editSelect">
 
         <ul class="filters_toolbar plainList">
-            <li><a class="button_link" href="#filter_entries" title="{$CONST.FILTERS}"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
-            <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+            <li><a class="button_link" href="#filter_entries" title="{$CONST.FILTERS}"><span class="icon-filter" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
+            <li><a class="button_link" href="#sort_entries" title="{$CONST.SORT_ORDER}"><span class="icon-sort" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             {if NOT $simpleFilters}
-                <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
+                <li><a class="button_link" href="#entry_skip" title="{$CONST.EDIT_ENTRY} #"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT_ENTRY} #</span></a></li>
             {/if}
         </ul>
 
@@ -146,17 +146,17 @@
 
                     <ul class="plainList clearfix actions">
                     {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
-                        <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
+                        <li><a class="button_link" href="{$entry.preview_link}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-search" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
                     {else}
-                        <li><a class="button_link" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
+                        <li><a class="button_link" href="{$entry.archive_link}" title="{$CONST.VIEW} #{$entry.id}"><span class="icon-search" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.VIEW}</span></a></li>
                     {/if}
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry.id}&amp;{$urltoken}" title="{$CONST.DELETE} #{$entry.id}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
                     </ul>
 
                     <div class="entry_info clearfix">
                         <span class="status_timestamp">
-                            {$entry.timestamp|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <span class="icon-info-circled" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span>{/if}
+                            {$entry.timestamp|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}{if $entry.timestamp <= ($entry.last_modified - 1800)} <span class="icon-info-circled" aria-hidden="true" title="{$CONST.LAST_UPDATED}: {$entry.last_modified|formatTime:"{$CONST.DATE_FORMAT_SHORT}"}"></span><span class="visuallyhidden"> {$CONST.LAST_UPDATED}</span>{/if}
                         </span>
 
                         <span class="entry_meta">{$CONST.POSTED_BY} {$entry.author|escape}
@@ -185,11 +185,11 @@
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:($page+1):$totalPages:$totalEntries}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start"></span></a>{/if}</li>
-                    <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="first">{if ($page) > 0}<a class="button_link" href="{$linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="prev">{if ($offSet > 0)}<a class="button_link" href="{$linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be placed to end by the CSS float:right *}
-                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end"></span></a>{/if}</li>
-                    <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="last">{if ($page+1) < $totalPages}<a class="button_link" href="{$linkLast}{$totalPages-1}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="next">{if ($count > $perPage)}<a class="button_link" href="{$linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir" aria-hidden="true"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
             {/if}
@@ -206,36 +206,36 @@
 {if $no_entries}
     <h2>{$CONST.FIND_ENTRIES}</h2>
 
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span>
 {/if}
 
 {if $switched_output}
     {if ($get.adminAction && $dateval)}
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.DATE_INVALID}</span>
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.DATE_INVALID}</span>
     {/if}
     {if ($get.adminAction && $use_legacy)}
         {if $is_draft && ! $errors}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IFRAME_SAVE_DRAFT}</span>
         {/if}
         {if $is_iframe}
         {if $iframe === true && isset($smarty.post.serendipity.properties.lang_selected)}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.PLUGIN_EVENT_MULTILINGUAL_ENTRY_RELOADED|sprintf:{(''==$smarty.post.serendipity.properties.lang_selected)?$lang:$smarty.post.serendipity.properties.lang_selected}}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.PLUGIN_EVENT_MULTILINGUAL_ENTRY_RELOADED|sprintf:{(''==$smarty.post.serendipity.properties.lang_selected)?$lang:$smarty.post.serendipity.properties.lang_selected}}</span>
         {else}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_SAVE}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IFRAME_SAVE}</span>
         {/if}
         {/if}
         {if $is_iframepreview}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IFRAME_PREVIEW}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IFRAME_PREVIEW}</span>
         {/if}
     {/if}
     {if ($is_doDelete || $is_doMultiDelete )}
         {foreach $del_entry AS $delent}
-        <span class="msg_hint"><span class="icon-help-circled"></span> {$delent}</span>
+        <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$delent}</span>
         {/foreach}
     {/if}
     {if ( $is_delete || $is_multidelete )}
         {foreach $rip_entry AS $ripent}
-        <span class="msg_hint"><span class="icon-help-circled"></span> {$ripent}</span>
+        <span class="msg_hint"><span class="icon-help-circled" aria-hidden="true"></span> {$ripent}</span>
         {/foreach}
         <div class="form_buttons">
             <a class="button_link state_cancel icon_link" href="{$smarty.server.HTTP_REFERER|escape}">{$CONST.NOT_REALLY}</a>

@@ -13,8 +13,8 @@
         {else}{$media.form_hidden}{/if}
 
         <ul class="filters_toolbar clearfix plainList">
-            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
-            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
+            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             <li id="media_filter_path">
                 <div class="form_select">
                     <label for="serendipity_only_path" class="visuallyhidden">{$CONST.FILTER_DIRECTORY}</label>
@@ -105,7 +105,7 @@
                     <div class="form_field">
                         <label class="visuallyhidden">NOTE</label>
                         <div class="bp_note">
-                            <span class="icon-info-circled"></span> mediaproperties metadata fields
+                            <span class="icon-info-circled" aria-hidden="true"></span> mediaproperties metadata fields
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
 <div class="media_library_pane">
 {if $media.nr_files < 1}
 
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
     {if $media.manage AND $media.multiperm}
 
@@ -252,11 +252,11 @@
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start"></span></a>{/if}</li>
-                    <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be at end by the CSS float:right *}
-                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end"></span></a>{/if}</li>
-                    <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir" aria-hidden="true"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
         {/if}

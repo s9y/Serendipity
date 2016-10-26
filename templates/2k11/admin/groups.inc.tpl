@@ -1,11 +1,11 @@
 {if $delete_yes}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DELETED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
 {/if}
 {if $save_new}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.CREATED_GROUP|sprintf:"{$group_id|escape}":"{$group.name|escape}"}</span>
 {/if}
 {if $save_edit}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.MODIFIED_GROUP|sprintf:"{$name|escape}"}</span>
 {/if}
 
 {if !$delete}
@@ -14,10 +14,10 @@
     <ul id="serendipity_groups" class="plainList zebra_list">
     {foreach $groups as $group}
         <li class="clearfix {cycle values="odd,even"}">
-            <span class="group_name"><span class="icon-users"></span> {$group.name|escape}</span>
+            <span class="group_name"><span class="icon-users" aria-hidden="true"></span> {$group.name|escape}</span>
             <ul class="plainList clearfix edit_actions">
-                <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                <li><a class="button_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
+                <li><a class="button_link" href="?serendipity[adminModule]=groups&amp;serendipity[adminAction]=edit&amp;serendipity[group]={$group.id}" title="{$CONST.EDIT} {$group.name|escape}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                <li><a class="button_link" href="?{$deleteFormToken}&amp;serendipity[adminModule]=groups&amp;serendipity[adminAction]=delete&amp;serendipity[group]={$group.id}" title="{$CONST.DELETE} {$group.name|escape}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a></li>
             </ul>
         </li>
     {/foreach}
@@ -36,7 +36,7 @@
         <input name="serendipity[group]" type="hidden" value="{$from.id}">
     {/if}
         <div class="clearfix odd form_field has_info">
-            <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button></label>
+            <label for="group_name">{$CONST.NAME} <button class="toggle_info button_link" type="button" data-href="#groupName_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button></label>
             <span id="groupName_info" class="field_info additional_info">{$CONST.GROUP_NAME_DESC}</span>
             <input id="group_name" name="serendipity[name]" type="text" value="{$from.name|escape}">
         </div>
@@ -106,7 +106,7 @@
                 </select>
             </div>
         {else}
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.PERMISSION_FORBIDDEN_ENABLE_DESC}</span>
         {/if}
             <div class="form_buttons">
                 {if $edit}
@@ -123,8 +123,8 @@
 
         <h2>{$CONST.MANAGE_GROUPS}</h2>
 
-        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape}"}</span>
-        
+        <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.DELETE_GROUP|sprintf:"{$group_id}":"{$group.name|escape}"}</span>
+
         <div id="groups_delete_action" class="form_buttons">
             <input class="state_cancel" name="NO" type="submit" value="{$CONST.NOT_REALLY}">
             <input name="DELETE_YES" type="submit" value="{$CONST.DUMP_IT}">

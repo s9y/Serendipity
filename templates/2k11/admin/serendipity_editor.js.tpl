@@ -385,7 +385,7 @@
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
             $('#extended_entry_editor').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
-            $(toggleButton).prepend('<span class="icon-down-dir"></span> ');
+            $(toggleButton).prepend('<span class="icon-down-dir" aria-hidden="true"></span> ');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
                 serendipity.toggle_extended(true);
@@ -423,7 +423,7 @@
             // this function got called on load of the editor
             var toggleButton = '#toggle_' + id;
 
-            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
+            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-right-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -1038,7 +1038,7 @@ $(function() {
         }
         e.preventDefault();
         // Inline notification, we might want to make this reuseable
-        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
+        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
         // Remove timestamp msg
         $('.remove_msg').click(function(e) {
             e.preventDefault();
@@ -1079,7 +1079,7 @@ $(function() {
         }
 
         // Inline notification, we might want to make this reuseable
-        $('<span id="msg_entrystatus" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.ENTRY_STATUS}: ' + newState + ' <a class="remove_msg" href="#msg_entrystatus"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
+        $('<span id="msg_entrystatus" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.ENTRY_STATUS}: ' + newState + ' <a class="remove_msg" href="#msg_entrystatus"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
         // Remove entrystatus msg
         $('.remove_msg').click(function(e) {
             e.preventDefault();

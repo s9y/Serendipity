@@ -1,6 +1,6 @@
 
 {if $perm_denied}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PERM_DENIED}</span>
+    <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.PERM_DENIED}</span>
 {else}
     <!-- MEDIA SELECTION START -->
     {$media.external}
@@ -11,7 +11,7 @@
         <h1>{$CONST.YOU_CHOSE|sprintf:$media.file.realname}</h1>
 
         <img src="{$media.file.imgsrc}" alt="">
-        
+
         <form id="imageForm" name="serendipity[selForm]" action="#" method="GET">
             {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_hiddenfields' eventData=$media.file}
             <input name="imgThumbWidth" type="hidden" value="{$media.file.thumbWidth}">
@@ -171,4 +171,3 @@
     {/if}{* if $media.file.is_image is something else end *}
     </div>
 {/if}{* if $perm_denied else end *}
-
