@@ -290,7 +290,10 @@ switch ($serendipity['GET']['adminAction']) {
                     // Fetch file
                     $fContent = $response->getBody();
 
-                    if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
+                    $fUrl = $response->getEffectiveUrl();
+                    if (!serendipity_url_allowed($fUrl)) {
+                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $fUrl);
+                    } elseif ($serendipity['POST']['imageimporttype'] == 'hotlink') {
                         $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
                         $fp = fopen($tempfile, 'w');
                         fwrite($fp, $fContent);

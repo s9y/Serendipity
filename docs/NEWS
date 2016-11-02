@@ -1,3 +1,9 @@
+Version 2.1 ()
+------------------------------------------------------------------------
+
+    * [Security] Enhanced media upload check to also check redirects
+      for local files, thanks to Xu Yue (again!)
+
 Version 2.1-beta2 (September 26th, 2016)
 ------------------------------------------------------------------------
 
