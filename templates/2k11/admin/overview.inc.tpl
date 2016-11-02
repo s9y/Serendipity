@@ -1,15 +1,15 @@
     <div id="dashboard_header" class="clearfix">
         <h2>{$CONST.WELCOME_BACK} {$username|escape}</h2>
-        <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
+        <a href="#s9y_links" class="button_link toggle_links"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FURTHER_LINKS}</span></a>
     </div>
 {$backend_frontpage_display}
-    <div id="dashboard" class="clearfix">
+    <div id="dashboard">
     {if $published}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_PUBLISHED|sprintf:$published|escape}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.ENTRY_PUBLISHED|sprintf:$published|escape}</span>
         <hr class="separator">
     {/if}
     {if $error_publish}
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.PUBLISH_ERROR}: {$error_publish}</span>
         <hr class="separator">
     {/if}
 
@@ -18,7 +18,7 @@
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.UPDATE_FAILMSG}</span>
+                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.UPDATE_FAILMSG}</span>
                 <form id="updateCheckDisable" method="POST">
                     <input type="hidden" name="serendipity[adminAction]" value="updateCheckDisable" />
                     {$token}
@@ -30,7 +30,7 @@
             <section id="dashboard_update">
                 <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
 
-                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
+                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NEW_VERSION_AVAILABLE} {$curVersion}</span>
                 {$updateButton}
             </section>
             <hr class="separator">
@@ -50,18 +50,18 @@
                     <div id="c{$comment.id}_full" class="comment_full additional_info">{$comment.fullBody|escape}</div>
 
                     <ul class="plainList actions">
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
-                        <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.EDIT}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link comments_reply" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=reply&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.REPLY}"><span class="icon-chat" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.REPLY}</span></a></li>
                     {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=approve&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.APPROVE}"><span class="icon-thumbs-up-alt" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.APPROVE}</span></a></li>
                     {/if}
                     {if ($comment.status == 'approved')}
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=pending&amp;serendipity[id]={$comment.id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" title="{$CONST.SET_TO_MODERATED}"><span class="icon-thumbs-down-alt" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SET_TO_MODERATED}</span></a></li>
                     {/if}
-                        <li><a class="button_link comments_delete" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" data-delmsg='{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}' title="{$CONST.DELETE}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
+                        <li><a class="button_link comments_delete" href="?serendipity[action]=admin&amp;serendipity[adminModule]=comments&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$comment.id}&amp;serendipity[entry_id]={$comment.entry_id}&amp;serendipity[authorid]={$comment.authorid}&amp;{$urltoken}" data-delmsg='{($CONST.COMMENT_DELETE_CONFIRM|sprintf:$comment.id:$comment.author)|escape}' title="{$CONST.DELETE}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
                         </li>
                     {if $comment.excerpt}
-                        <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
+                        <li><button class="button_link toggle_comment_full" type="button" data-href="#c{$comment.id}_full" title="{$CONST.TOGGLE_ALL}"><span class="icon-right-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button></li>
                     {/if}
                     </ul>
                 {if ($comment.status == 'pending') || ($comment.status == 'confirm')}
@@ -70,7 +70,7 @@
                 </li>
                 {/foreach}
             {else}
-                <li><span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_COMMENTS}</span></li>
+                <li><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_COMMENTS}</span></li>
             {/if}
             </ol>
         </section>
@@ -84,15 +84,15 @@
                 <li class="clearfix">
                     <a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape}</a>
                     <ul class="plainList actions">
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$urltoken}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
-                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;{$urltoken}&amp;serendipity[id]={$entry.id}" title="{$CONST.PREVIEW} #{$entry.id}"><span class="icon-search" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIEW}</span></a></li>
+                        <li><a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="{$CONST.EDIT} #{$entry.id}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.EDIT}</span></a></li>
                         {if $entry.isdraft == "true"}
                             <li>
                                 <form method="POST" class="overviewListForm">
                                     <input type="hidden" name="serendipity[adminAction]" value="publish" />
                                     <input type="hidden" name="serendipity[id]" value="{$entry.id}" />
                                     {$token}
-                                    <button class="publish_now" type="submit" title="{$CONST.PUBLISH_NOW}"><span class="icon-rocket"></span><span class="visuallyhidden">{$CONST.PUBLISH_NOW}</span></button>
+                                    <button class="publish_now" type="submit" title="{$CONST.PUBLISH_NOW}"><span class="icon-rocket" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.PUBLISH_NOW}</span></button>
                                 </form>
                             </li>
                         {/if}
@@ -110,7 +110,7 @@
                 </li>
                 {/foreach}
             {else}
-                <li><span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span></li>
+                <li><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_ENTRIES_TO_PRINT}</span></li>
             {/if}
             </ol>
         </section>
@@ -135,7 +135,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     if (typeof(serendipity) != 'object' || typeof(serendipity.spawn) != 'function') {
-        $('#dashboard_header').after("<span class=\"msg_error\"><span class=\"icon-attention-circled\"></span> {$CONST.JS_FAILURE|sprintf:$js_failure_file|escape:javascript}</span>");
+        $('#dashboard_header').after("<span class=\"msg_error\"><span class=\"icon-attention-circled\" aria-hidden=\"true\"></span> {$CONST.JS_FAILURE|sprintf:$js_failure_file|escape:javascript}</span>");
     }
 });
 </script>

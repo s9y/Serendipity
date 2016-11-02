@@ -20,6 +20,14 @@
     position: relative;
 }
 
+#media_selector_bar {
+    margin: 0;
+}
+
+.popuplayer_showUpload {
+    margin: 1em 0 0;
+}
+
 .tabcontent #pluginlist_event > a,
 .tabcontent #pluginlist_sidebar > a {
     position: absolute;
@@ -40,6 +48,7 @@
 #image_directory_create_form label {
     display: inline-block;
     width: 20%;
+    white-space: nowrap;/*mediafilter*/
 }
 
 #sort_entries .form_select select,
@@ -83,11 +92,24 @@
     margin: 0 0 1em;
 }
 
+.popuplayer_showUpload {
+    margin: 0 .4em 1em 0;
+}
+
+.media_select_strict {
+    margin: -1em 0;
+}
+
 #mediaPropertyForm .media_file_props label,
 #mediaPropertyForm header b,
 #mediaPropertyForm footer b {
     display: inline-block;
     width: 20%;
+}
+
+#media_filter > .left,
+#media_filter > .center {/*mediafilter*/
+    margin-right: .2em;
 }
 
 .user_level {
@@ -144,13 +166,13 @@ pre {
     margin: 1.71429em 0;
 }
 
-#template_select article,
-.plugins_installable > li,
+.no-flexbox #template_select article,
+.no-flexbox .plugins_installable > li,
 #serendipityScaleForm,
 #serendipityScaleImg,
-.media_file,
-#dashboard > .dashboard_widget,
-#maintenance > .quick_list,
+.no-flexbox .media_file,
+.no-flexbox #dashboard > .dashboard_widget,
+.no-flexbox #maintenance > .quick_list,
 .serendipity_statistics > section,
 #serendipity_category > div > div,
 #serendipity_category #preview,
@@ -160,6 +182,65 @@ pre {
     float: left;
     margin: 0 2% 1em 0;
     width: 48%;
+}
+
+#dashboard,
+#maintenance,
+.media_pane,
+.pluginmanager,
+.plugins_installable,
+#template_select,
+#template_select > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.plugins_installable {
+    justify-content: flex-start;
+}
+
+#dashboard > .dashboard_widget,
+#maintenance > .quick_list,
+.media_pane > .media_file,
+.plugins_installable > li,
+#template_select > article,
+#template_select > ul li {
+    flex: 0 0 auto;
+    margin: 0 2% 1em 0;
+    width: 48%;
+}
+
+.pluginmanager .pluginmanager_event {
+    flex: 0 0 auto;
+    margin: 0 1% 0 0;
+    width: 49%;
+}
+
+.pluginmanager .pluginmanager_sidebar {
+    flex: 0 0 auto;
+    margin: 0 1% 0 0;
+    width: 32%;
+}
+
+.no-js #dashboard #s9y_links,
+#maintenance > h2,
+.media_pane .pagination,
+#template_select > h2 {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+#dashboard > .dashboard_widget:nth-of-type(even),
+#maintenance > .quick_list:nth-of-type(even),
+.media_pane > .media_file:nth-of-type(even),
+#template_select > .current_backend_template,
+#template_select > ul li:nth-of-type(even) {
+    margin: 0 0 1em 2%;
+}
+
+.no-js #dashboard #s9y_links {
+    margin: 0 0 1em;
 }
 
 .media_chooser {
@@ -176,20 +257,12 @@ pre {
     width: 84%;
 }
 
-#template_select .current_backend_template,
-#template_select li:nth-child(even) article,
-.media_pane .even,
-#dashboard > .dashboard_widget:nth-child(even),
-#maintenance > section:nth-of-type(even) {
+.no-flexbox #template_select .current_backend_template,
+.no-flexbox #template_select li:nth-child(even) article,
+.no-flexbox .media_pane .even,
+.no-flexbox #dashboard > .dashboard_widget:nth-child(even),
+.no-flexbox #maintenance > section:nth-of-type(even) {
     margin: 0 0 1em 2%;
-}
-
-#maintenance > section {
-    margin: 0 2% 1em 0;
-}
-
-#template_select .current_template {
-    margin-bottom: 2em;
 }
 
 #mediaPropertyForm .media_file {
@@ -227,6 +300,7 @@ pre {
 .configuration_group .form_field input,
 .configuration_group .form_area textarea,
 .configuration_group fieldset > fieldset legend,
+.configuration_group div > fieldset legend,
 #uploadform .form_select label,
 #uploadform .form_field label,
 #uploadform .form_select select,
@@ -302,14 +376,15 @@ pre {
 .configuration_group .form_multiselect,
 .configuration_group .form_field,
 .configuration_group .form_area,
+.configuration_group .custom_item,
 .configuration_group fieldset > fieldset,
-#template_select li:nth-child(odd),
+.configuration_group div > fieldset,
+.no-flexbox #template_select li:nth-child(odd),
 #template_select h2,
-.media_pane .odd,
-#dashboard > .odd,
-.plugins_installable > li:nth-child(odd),
+.no-flexbox .media_pane .odd,
+.no-flexbox .plugins_installable > li:nth-child(odd),
 .serendipity_statistics > section:nth-child(odd),
-.dashboard_widget:nth-child(odd) {
+.no-flexbox .dashboard_widget:nth-child(odd) {
     clear: left;
 }
 
@@ -323,39 +398,44 @@ pre {
 
 .configure_plugin fieldset .form_radio,
 .configuration_group fieldset > fieldset .form_radio,
+.configuration_group div > fieldset .form_radio,
 #serendipity_plugin_config > fieldset .form_radio,
 #template_options fieldset .form_radio {
     margin-top: 0;
 }
 
-.pluginmanager_side {
+.no-flexbox .pluginmanager_side {
     float: left;
     margin: 0 0 1.5em;
     vertical-align: top;
 }
 
-#pluginlist_sidebar .pluginmanager_side  {
+.no-flexbox #pluginlist_sidebar .pluginmanager_side  {
     margin-right: 1%;
     width: 32%;
 }
 
-#pluginlist_event .pluginmanager_side  {
+.no-flexbox #pluginlist_event .pluginmanager_side  {
     margin-right: 1%;
     width: 49%;
 }
 
-#pluginlist_event .pluginmanager_side:nth-child(even) {
+.no-flexbox #pluginlist_event .pluginmanager_side:nth-child(even) {
     margin-right: 0;
     margin-left: 1%;
 }
 
-#pluginlist_sidebar .pluginmanager_side:nth-of-type(4) {
+.no-flexbox #pluginlist_sidebar .pluginmanager_side:nth-of-type(4) {
     clear: left;
 }
 
 #meta p {
     font-size: .875em;
     padding: .85715em;
+}
+
+.manage h3 {
+    width: 17em;
 }
 
 #edit_entry_status_comments .form_check {
@@ -405,6 +485,12 @@ pre {
     width: 33% ;
 }
 
+#media_filter > div.keywords {/*simple filter*/
+    float: right;
+    margin-top: -2.5em;
+    margin-bottom: 0;
+}
+
 #filter_entries .form_select,
 #filter_entries .form_field {
     float: left;
@@ -417,14 +503,20 @@ pre {
     width: 50%;
 }
 
-#media_filter_file,
-#media_pane_sort .left,
+#media_filter .left {
+    clear: left;
+}
+
 #serendipity_comment .form_area {
     clear: both;
 }
 
 #keyword_list {
     padding-top: 2em;
+}
+
+.manage h3 {
+    width: 19em;
 }
 
 #login .form_field input {
@@ -565,6 +657,10 @@ main {
     margin: 0 auto 2em;
     max-width: 60em;
     width: 100%;
+}
+
+.manage h3 {
+    width: 14em;
 }
 
 #login {

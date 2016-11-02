@@ -1,7 +1,7 @@
 {if $plugin_to_conf}
     {if is_array($save_errors)}
     <div class="msg_error">
-        <h2><span class="icon-attention-circled"></span> {$CONST.ERROR}:</h2>
+        <h2><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.ERROR}:</h2>
 
         <ul class="plainList">
         {foreach $save_errors as $save_error}
@@ -10,7 +10,7 @@
         </ul>
     </div>
     {elseif $saveconf}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: {$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     <h2>{$name} ({$class})</h2>
 
@@ -41,7 +41,7 @@
 {elseif $adminAction == 'addnew'}
     <h2>{if $type == 'event'}{$CONST.EVENT_PLUGINS}{/if}{if $type == 'sidebar'}{$CONST.SIDEBAR_PLUGINS}{/if}{if $type == 'both'}{$CONST.MENU_PLUGINS}{/if}{if $only_group != UPGRADE} <span class="plugins_available">({$CONST.PLUGIN_AVAILABLE_COUNT|sprintf:$count_pluginstack})</span>{/if}</h2>
     {foreach $errorstack as $e_idx => $e_name}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$e_name}</span>
+    <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.ERROR}: {$e_name}</span>
     {/foreach}
 
     <form action="serendipity_admin.php" method="get">
@@ -65,7 +65,7 @@
                 <div id="plugin_filter" class="form_field">
                     <label for="pluginfilter">{$CONST.QUICKSEARCH}</label>
                     <input id="pluginfilter" type="text">
-                    <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
+                    <button class="reset_livefilter icon_link" type="button" data-target="pluginfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
                 </div>
                 <div class="form_buttons">
                     <input type="submit" value="{$CONST.GO}">
@@ -76,7 +76,7 @@
         </div>
     </form>
     {if $only_group == 'UPGRADE' && ! $available_upgrades}
-        <span class="msg_notice"><span class="icon-attention-circled"></span> {$CONST.NO_UPDATES}</span>
+        <span class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.NO_UPDATES}</span>
     {else}
         {foreach $pluggroups AS $pluggroup => $groupstack}
             {if $only_group && $pluggroup != $only_group}{continue}{/if}
@@ -84,7 +84,7 @@
             {if $only_group == 'UPGRADE' && $pluggroups['UPGRADE']|@count > 1}
                 <button id="updateAll">Update All</button>
             {/if}
-            <ul class="plugins_installable plainList clearfix">
+            <ul class="plugins_installable plainList">
             {foreach $groupstack as $plug}
                 <li class="clearfix">
                     <div class="equal_heights">
@@ -130,13 +130,13 @@
 
                     <div class="plugin_status">
                     {if isset($requirements_failures.{$plug.class_name})}
-                        <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
+                        <span class="unmet_requirements msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.UNMET_REQUIREMENTS|sprintf:"{if $requirements_failures.{$plug.class_name}.s9y}s9y $plug.requirements..serendipity,{/if} {if $requirements_failures.{$plug.class_name}.php}PHP $plug.requirements.php,{/if} {if $requirements_failures.{$plug.class_name}.smarty}Smarty $plug.requirements.smarty{/if}"}</span>
                     {elseif $plug['upgradable'] == true}
                         <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug['customURI'])}{$plug.customURI}{/if}" title="{$CONST.PLUGIN_EVENT_SPARTACUS_CHECK_HINT}">{$CONST.UPGRADE}</a>
                     {elseif $plug.installable == true}
                         <a class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[pluginPath]={$plug.pluginPath}&amp;serendipity[install_plugin]={$plug.plugin_class}{if isset($plug.customURI)}{$plug.customURI}{/if}">{$CONST.INSTALL}</a>
                     {else}
-                        <span class="block_level"><span class="icon-ok-circled"></span> {$CONST.ALREADY_INSTALLED}</span>
+                        <span class="block_level"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.ALREADY_INSTALLED}</span>
                     {/if}
                     </div>
                 </li>
@@ -157,13 +157,13 @@
     {$backend_pluginlisting_header}
     <h2>{$CONST.CONFIGURE_PLUGINS}</h2>
     {if $save}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}:{$CONST.SETTINGS_SAVED_AT|sprintf:"$timestamp"}</span>
     {/if}
     {if $new_plugin_failed}
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
     {if $updateAllMsg}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
     {/if}
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel">
