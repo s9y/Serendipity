@@ -1,3 +1,12 @@
+Version 2.0.5 (November 28th, 2016)
+------------------------------------------------------------------------
+
+    * [Security] Improve preventing fetching local files, thanks to
+      Xu Yue.
+      
+    * [Security] Prevent XSS in adding category and directory names, 
+      thanks to Edric Teo @smarterbitbybit.
+
 Version 2.0.4 (September 26th, 2016)
 ------------------------------------------------------------------------
 

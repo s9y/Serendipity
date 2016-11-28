@@ -225,8 +225,11 @@ switch ($serendipity['GET']['adminAction']) {
             } else {
                 // Fetch file
                 $fContent = $req->getResponseBody();
+                $fUrl = $req->getEffectiveUrl();
 
-                if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
+                if (!serendipity_url_allowed($fUrl)) {
+                    $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $fUrl);
+                } elseif ($serendipity['POST']['imageimporttype'] == 'hotlink') {
                     $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
                     $fp = fopen($tempfile, 'w');
                     fwrite($fp, $fContent);
@@ -473,7 +476,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         /* TODO: check if directory already exist */
         if (is_dir($nd) || @mkdir($nd)) {
-            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $serendipity['POST']['name']);
+            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $new_dir);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
 
