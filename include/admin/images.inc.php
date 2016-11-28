@@ -550,7 +550,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         /* TODO: check if directory already exist */
         if (is_dir($nd) || @mkdir($nd)) {
-            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $serendipity['POST']['name']);
+            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $new_dir);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
 
