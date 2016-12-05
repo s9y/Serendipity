@@ -225,7 +225,7 @@ switch ($serendipity['GET']['adminAction']) {
             } else {
                 // Fetch file
                 $fContent = $req->getResponseBody();
-                $fUrl = $req->getEffectiveUrl();
+                $fUrl = $req->_url->protocol . '://' . $req->_url->host . $req->_url->path;
 
                 if (!serendipity_url_allowed($fUrl)) {
                     $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $fUrl);

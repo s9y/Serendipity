@@ -1,3 +1,9 @@
+Version 2.0.6 ()
+------------------------------------------------------------------------
+
+    * Fix Bug #428, regression when fetching remote files, wrong call
+      to HTTP_Request::getEffectiveUrl()
+
 Version 2.0.5 (November 28th, 2016)
 ------------------------------------------------------------------------
 
