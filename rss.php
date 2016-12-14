@@ -20,6 +20,13 @@ $comments    = FALSE;
 
 if (empty($version)) {
     list($version) = serendipity_discover_rss($_GET['file'], $_GET['ext']);
+} else {
+    # be sure it is an allowed version, to prevent attackers sniffing for unrelated files on the file system
+    $allowed_versions = ['opml1.0', '0.91', '1.0',  '2.0', 'atom0.3', 'atom1.0'];
+    if (! in_array($version, $allowed_versions)) {
+        header('Status: 404 Not Found');
+        exit;
+    }
 }
 
 if (isset($_GET['category'])) {
