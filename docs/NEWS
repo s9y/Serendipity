@@ -4,6 +4,9 @@ Version 2.0.6 ()
     * Fix Bug #428, regression when fetching remote files, wrong call
       to HTTP_Request::getEffectiveUrl()
 
+    * Fix Bug #433, secure variable on first time installation to prevent
+      RCE, thanks to Shinkurt
+
 Version 2.0.5 (November 28th, 2016)
 ------------------------------------------------------------------------
 
