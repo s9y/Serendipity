@@ -1,6 +1,11 @@
 Version 2.1 (November 28th, 2016)
 ------------------------------------------------------------------------
 
+    * Allow to set a default category for authors (personal preferences)
+    
+    * Changed how the hidden password element is displayed to prevent
+      browsers from autofilling it into the entryproperties plugin
+
     * [Security] Enhanced media upload check to also check redirects
       for local files, thanks to Xu Yue (again!)
 
