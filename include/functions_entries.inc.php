@@ -627,7 +627,7 @@ function &serendipity_fetchEntryProperties($id) {
  * @param   string  The ACL artifact condition. If set to "write" only categories will be shown that the author can write to. If set to "read", only categories will be show that the author can read or write to.
  * @return  array   Returns the array of categories
  */
-function &serendipity_fetchCategories($authorid = null, $name = null, $order = null, $artifact_mode = 'write') {
+function &serendipity_fetchCategories($authorid = null, $name = null, $order = null, $artifact_mode = 'write', $flat = false) {
     global $serendipity;
 
     if ($name === null) {
@@ -716,6 +716,16 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
     $ret =& serendipity_db_query($querystring);
     if (is_string($ret)) {
         echo "Query failed: $ret";
+    } else {
+        if ($flat) {
+          $cats = serendipity_walkRecursive($ret, 'categoryid', 'parentid', VIEWMODE_THREADED);
+          $flat_cats = array();
+          $flat_cats[0] = NO_CATEGORY;
+          foreach($cats AS $catidx => $catdata) {
+              $flat_cats[$catdata['categoryid']] = str_repeat('&nbsp;', $catdata['depth']*2) . serendipity_specialchars($catdata['category_name']);
+          }
+          return $flat_cats;
+        }
     }
     return $ret;
 }

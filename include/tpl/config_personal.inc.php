@@ -191,6 +191,14 @@
                                           'permission'  => 'personalConfiguration',
                                           'flags'       => array('config')),
 
+                                    array('var'         => 'categoryDefault',
+                                          'title'       => CATEGORY,
+                                          'description' => '',
+                                          'type'        => 'list',
+                                          'default'     => serendipity_fetchCategories(null, null, null, 'write', true),
+                                          'permission'  => 'personalConfiguration',
+                                          'flags'       => array('config')),
+
                                     array('var'         => 'use_autosave',
                                           'title'       => CONF_USE_AUTOSAVE,
                                           'description' => CONF_USE_AUTOSAVE_DESC,

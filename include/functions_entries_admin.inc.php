@@ -83,6 +83,8 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         foreach ($entry['categories'] as $cat) {
             $selected[] = $cat['categoryid'];
         }
+    } elseif ($serendipity['categoryDefault'] > 0) {
+        $selected[] = $serendipity['categoryDefault'];
     }
 
     if (count($selected) > 1 ||
