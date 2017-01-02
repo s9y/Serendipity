@@ -1,4 +1,8 @@
 <?php
+if (!isset($GLOBALS['S9Y_SELENIUM_ENABLED'])) {
+  die('Selenium disabled.');
+}
+
 if ( isset($_COOKIE['PHPUNIT_SELENIUM_TEST_ID']) &&
     !isset($_GET['PHPUNIT_SELENIUM_TEST_ID']) &&
     extension_loaded('xdebug')) {

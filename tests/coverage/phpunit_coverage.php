@@ -1,4 +1,8 @@
 <?php
+if (!isset($GLOBALS['S9Y_SELENIUM_ENABLED'])) {
+  die('Selenium disabled.');
+}
+
 require_once 'PHPUnit/Util/FilterIterator.php';
 
 if (isset($_GET['PHPUNIT_SELENIUM_TEST_ID'])) {

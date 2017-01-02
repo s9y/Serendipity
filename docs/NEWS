@@ -1,4 +1,4 @@
-Version 2.1 (November 28th, 2016)
+Version 2.1 ()
 ------------------------------------------------------------------------
 
     * Allow to set a default category for authors (personal preferences)
@@ -14,6 +14,8 @@ Version 2.1 (November 28th, 2016)
       
     * [Security] For multi-deletion of entries, secure the HTTP referrer
       output to prevent XSS (Issue #435)
+
+    * Disabled Selenium test files unless enabled
 
 Version 2.1-beta2 (September 26th, 2016)
 ------------------------------------------------------------------------
