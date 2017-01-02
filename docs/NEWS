@@ -11,6 +11,9 @@ Version 2.1 (November 28th, 2016)
 
     * [Security] Prevent XSS in adding category and directory names, 
       thanks to Edric Teo @smarterbitbybit.
+      
+    * [Security] For multi-deletion of entries, secure the HTTP referrer
+      output to prevent XSS (Issue #435)
 
 Version 2.1-beta2 (September 26th, 2016)
 ------------------------------------------------------------------------
