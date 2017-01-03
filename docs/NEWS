@@ -14,6 +14,9 @@ Version 2.1 ()
       
     * [Security] For multi-deletion of entries, secure the HTTP referrer
       output to prevent XSS (Issue #435)
+      
+    * [Security] Reject %0D/%0A in exit tracking and other places
+      (Issue #434)
 
     * Disabled Selenium test files unless enabled
 
