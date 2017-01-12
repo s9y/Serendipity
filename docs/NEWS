@@ -17,6 +17,9 @@ Version 2.1 ()
       
     * [Security] Reject %0D/%0A in exit tracking and other places
       (Issue #434)
+      
+    * [Security] Redirection of comment.php now checks the referrer
+      and only allows the blog's host (thanks to Lee Sheldon Victor)
 
     * Disabled Selenium test files unless enabled
 

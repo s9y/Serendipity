@@ -11,7 +11,7 @@ header('Content-Type: text/html; charset=' . LANG_CHARSET);
 
 if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type'])) {
     serendipity_deleteComment($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']);
-    if (serendipity_isResponseClean($_SERVER['HTTP_REFERER'])) {
+    if (serendipity_isResponseClean($_SERVER['HTTP_REFERER']) && preg_match('@^https?://' . preg_quote($_SERVER['HTTP_HOST'], '@') . '@imsU')) {
         header('Status: 302 Found');
         header('Location: '. $_SERVER['HTTP_REFERER']);
         exit;
