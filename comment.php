@@ -9,7 +9,7 @@ include S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 
 header('Content-Type: text/html; charset=' . LANG_CHARSET);
 
-if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type'])) {
+if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']) && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']);
     if (serendipity_isResponseClean($_SERVER['HTTP_REFERER']) && preg_match('@^https?://' . preg_quote($_SERVER['HTTP_HOST'], '@') . '@imsU')) {
         header('Status: 302 Found');
@@ -18,7 +18,7 @@ if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendip
     }
 }
 
-if (isset($serendipity['GET']['switch'], $serendipity['GET']['entry'])) {
+if (isset($serendipity['GET']['switch'], $serendipity['GET']['entry'])  && serendipity_checkFormToken()) {
     serendipity_allowCommentsToggle($serendipity['GET']['entry'], $serendipity['GET']['switch']);
 }
 
