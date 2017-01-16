@@ -1523,7 +1523,7 @@ function serendipity_updertEntry($entry) {
         if (is_array($categories)) {
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entrycat WHERE entryid={$entry['id']}");
             foreach ($categories as $cat) {
-                serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, {$cat})");
+                serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, " . (int)$cat . ")");
             }
         } elseif ($had_categories) {
             // This case actually only happens if an existing entry is edited, and its category assignments are all removed.
