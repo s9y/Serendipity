@@ -150,7 +150,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['license'] = $license;
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
-} elseif ( $serendipity['GET']['adminAction'] == 'addnew' ) {
+} elseif ( $serendipity['GET']['adminAction'] == 'addnew' && serendipity_checkFormToken()) {
     $serendipity['GET']['type'] = $serendipity['GET']['type'] ?: 'sidebar';
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
@@ -358,7 +358,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         }
     }
 
-    if (isset($serendipity['GET']['install_plugin'])) {
+    if (isset($serendipity['GET']['install_plugin']) && serendipity_checkFormToken()) {
         $authorid = $serendipity['authorid'];
         if (serendipity_checkPermission('adminPluginsMaintainOthers')) {
             $authorid = '0';
@@ -472,6 +472,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
+$data['urltoken']      = serendipity_setFormToken('url');
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
 
 

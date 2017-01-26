@@ -22,6 +22,9 @@ Version 2.1-rc1 (January, 26th 2017)
       
     * [Security] Redirection of comment.php now checks the referrer
       and only allows the blog's host (thanks to Lee Sheldon Victor)
+      
+    * [Security] Fix missing integer casting for inserting new categories
+      (thanks to cdxy)
 
     * Disabled Selenium test files unless enabled
 

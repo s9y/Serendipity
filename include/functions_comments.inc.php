@@ -357,6 +357,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
         $_smartyComments = array();
     }
 
+    $formToken = serendipity_setFormToken('url');
     $i = 0;
     foreach ($comments as $comment) {
         if ($parentid === VIEWMODE_LINEAR || !isset($comment['parent_id']) || $comment['parent_id'] == $parentid) {
@@ -364,7 +365,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 
             $comment['comment'] = serendipity_specialchars(strip_tags($comment['body']));
             $comment['url']     = strip_tags($comment['url']);
-            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments';
+            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments&amp;' . $formToken;
 
             /* Fix invalid cases in protocoll part */
             if (!empty($comment['url'])) {

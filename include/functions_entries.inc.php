@@ -1175,8 +1175,9 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
             $entry['link_rdf']   = serendipity_rewriteURL(PATH_FEEDS . '/ei_'. $entry['id'] .'.rdf');
             $entry['title_rdf']  = serendipity_specialchars($entry['title_rdf']);
 
-            $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'];
-            $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'];
+            $formToken = serendipity_setFormToken('url');
+            $entry['link_allow_comments']    = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=enable&amp;serendipity[entry]=' . $entry['id'] . '&amp;' . $formToken;
+            $entry['link_deny_comments']     = $serendipity['baseURL'] . 'comment.php?serendipity[switch]=disable&amp;serendipity[entry]=' . $entry['id'] . '&amp;' . $formToken;
             $entry['allow_comments']         = serendipity_db_bool($entry['allow_comments']);
             $entry['moderate_comments']      = serendipity_db_bool($entry['moderate_comments']);
             $entry['viewmode']               = ($serendipity['GET']['cview'] == VIEWMODE_LINEAR ? VIEWMODE_LINEAR : VIEWMODE_THREADED);
@@ -1523,7 +1524,7 @@ function serendipity_updertEntry($entry) {
         if (is_array($categories)) {
             serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entrycat WHERE entryid={$entry['id']}");
             foreach ($categories as $cat) {
-                serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, {$cat})");
+                serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}entrycat (entryid, categoryid) VALUES ({$entry['id']}, " . (int)$cat . ")");
             }
         } elseif ($had_categories) {
             // This case actually only happens if an existing entry is edited, and its category assignments are all removed.
