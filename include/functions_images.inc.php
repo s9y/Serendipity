@@ -2925,7 +2925,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     }
     $order_fields = serendipity_getImageFields();
     // reset filename for building template filters, since this is hardcoded as 'only_filename'
-    unset($order_fields['i.name']);
+    #unset($order_fields['i.name']);
 
     $media = array(
         'manage'            => $manage,

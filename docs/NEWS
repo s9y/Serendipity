@@ -1,6 +1,9 @@
 Version 2.1-rc1 (January, 26th 2017)
 ------------------------------------------------------------------------
 
+    * Fix issue #437 - Remove the hardcoded media filter only_filename
+      input field and re-allow the $order_fields['i.name'].
+ 
     * Issue #430, fix proper name of new feedShowMail configuration var
       in rss.php for showing mail addresses
       
