@@ -1,5 +1,7 @@
-Version 2.1 ()
+Version 2.1-rc1 (January, 26th 2017)
 ------------------------------------------------------------------------
+
+    * [Security] Enhance CSRF-Tokens for toggling/moderating comments
 
     * Allow to set a default category for authors (personal preferences)
     
