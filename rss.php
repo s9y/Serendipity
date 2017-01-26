@@ -244,7 +244,7 @@ if ($_GET['type'] == 'content' &&
     header('Location: ' . serendipity_get_config_var('feedCustom'));
     exit;
 }
-$metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
+$metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('feedShowMail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
 $metadata['template_file'] = 'feed_' . $file_version . '.tpl';

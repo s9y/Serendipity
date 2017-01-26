@@ -1,6 +1,9 @@
 Version 2.1-rc1 (January, 26th 2017)
 ------------------------------------------------------------------------
 
+    * Issue #430, fix proper name of new feedShowMail configuration var
+      in rss.php for showing mail addresses
+      
     * [Security] Enhance CSRF-Tokens for toggling/moderating comments
 
     * Allow to set a default category for authors (personal preferences)
