@@ -1,3 +1,11 @@
+
+Version 2.1-rc2 | final ()
+------------------------------------------------------------------------
+
+    * Fix missing token when updating plugin
+    
+    * Fix missing variable name in regular expression match, Issue #442
+
 Version 2.1-rc1 (January, 26th 2017)
 ------------------------------------------------------------------------
 
