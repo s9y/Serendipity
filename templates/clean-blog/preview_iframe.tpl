@@ -7,7 +7,7 @@
     <meta name="generator" content="Serendipity v.{$serendipityVersion}">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
 {* BOOTSTRAP CORE CSS *}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 {* S9Y CSS *}
 {if $head_link_stylesheet_frontend}{* >= s9y 2.0.2 *}
     <link rel="stylesheet" href="{$head_link_stylesheet_frontend}">
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
 {* CUSTOM FONTS *}
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Lora:400,400italic|Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic|Open+Sans:300,600,800' rel='stylesheet' type='text/css'>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
