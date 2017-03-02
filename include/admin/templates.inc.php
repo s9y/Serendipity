@@ -68,7 +68,7 @@ if ($serendipity['GET']['adminAction'] == 'editConfiguration') {
     $data["adminAction"] = "editConfiguration";
 }
 
-if ($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['adminAction'] == 'install-frontend' || $serendipity['GET']['adminAction'] == 'install-backend') {
+if (($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['adminAction'] == 'install-frontend' || $serendipity['GET']['adminAction'] == 'install-backend') && serendipity_checkFormToken()) {
     serendipity_plugin_api::hook_event('backend_templates_fetchtemplate', $serendipity);
 
     $themeInfo = serendipity_fetchTemplateInfo(serendipity_specialchars($serendipity['GET']['theme']));
@@ -236,6 +236,7 @@ uasort($data['templates'], function($a, $b) {
 
 $data['cur_tpl']         = $data['templates'][$serendipity['template']];
 $data['cur_tpl_backend'] = $data['templates'][$serendipity['template_backend']];
+$data['urltoken']        = serendipity_setFormToken('url');
 
 unset($data['templates'][$serendipity['template']]);
 if ($serendipity['template'] != $serendipity['template_backend'] && isset($data['recommended_templates'][$serendipity['template_backend']]) && isset($data['templates'][$serendipity['template_backend']])) {
