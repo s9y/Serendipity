@@ -109,7 +109,7 @@
                 <dd>{$urd3}</dd>
                 {/foreach}
             {if $isdir_uploadpath}
-                <dt>{$basedir}{$uploadHTTPPath}</dt>
+                <dt>{$basedir}{serendipity_getConfigVar key='uploadHTTPPath'}</dt>
                 {foreach $upgraderResultDiagnose4 AS $urd4}
                 <dd>{$urd4}</dd>
                 {/foreach}
