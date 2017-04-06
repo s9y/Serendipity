@@ -353,7 +353,7 @@ class TextileBag
 
 
 /**
- * Class to allow contruction of HTML tags on conversion of an object to a string
+ * Class to allow construction of HTML tags on conversion of an object to a string
  *
  * Example usage...
  *
@@ -761,7 +761,7 @@ class Textile
      * Gets a symbol definitions.
      *
      * This method can be used to get a symbol definition, or an
-     * array containg the full symbol table.
+     * array containing the full symbol table.
      *
      * @param  string|null  $name The name of the symbol, or NULL if requesting the symbol table
      * @return array|string The symbol table or the requested symbol
@@ -871,7 +871,7 @@ class Textile
         $this->prepare($lite, $noimage, $rel);
         $this->url_schemes = $this->unrestricted_url_schemes;
 
-        // Use of the $encode flag is discouraged. Calling textileEncode() is prefered.
+        // Use of the $encode flag is discouraged. Calling textileEncode() is preferred.
         if ($encode) {
             return $this->textileEncode($text);
         }
@@ -2721,7 +2721,7 @@ class Textile
 
 
     /**
-     * Perfoms typographical glyph replacements within the input textile text.
+     * Performs typographical glyph replacements within the input textile text.
      * The source text is split across HTML-like tags in order to avoid attempting glyph
      * replacements within tags.
      *

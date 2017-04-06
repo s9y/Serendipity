@@ -110,7 +110,7 @@ function debug_ErrorLevelType($type)
 
 
 /**
- * Set our own exeption handler to convert all errors into exeptions automatically
+ * Set our own exception handler to convert all errors into exceptions automatically
  * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
  *
  * See Notes about returning false

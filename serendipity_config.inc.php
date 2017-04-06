@@ -83,10 +83,10 @@ $serendipity['max_last_modified'] = 60 * 60 * 24 * 7;
 // that date. However it is still limited by the number below of maximum entries
 $serendipity['max_fetch_limit'] = 50;
 
-// How many bytes are allowed for fetching trackbacks, so that no binary files get accidently trackbacked?
+// How many bytes are allowed for fetching trackbacks, so that no binary files get accidentally trackbacked?
 $serendipity['trackback_filelimit'] = 150 * 1024;
 
-// Allow "Access-Controll-Allow-Origin: *" to be used in sensible locations (RSS feed)
+// Allow "Access-Control-Allow-Origin: *" to be used in sensible locations (RSS feed)
 $serendipity['cors'] = false;
 
 if (!isset($serendipity['fetchLimit'])) {
@@ -290,7 +290,7 @@ for ($i = 0; $i < 15;  $i++ ) {
 
 // [internal callback function]: errorToExceptionHandler()
 if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
-    // set serendipity global error to exeption handler
+    // set serendipity global error to exception handler
     set_error_handler($serendipity['errorhandler'], $errLevel); // See error_reporting() earlier to see which errors are passed to the handler, deending on $serendipity['production'].
 }
 

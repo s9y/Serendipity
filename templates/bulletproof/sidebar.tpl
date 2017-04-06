@@ -3,7 +3,7 @@
 {/if}
 {foreach from=$plugindata item=item}
    {if $item.class == "serendipity_plugin_quicksearch" and $template_option.sitenav_quicksearch == 'true' and ($template_option.sitenavpos == 'above' or $template_option.sitenavpos == 'below')}
-<!-- do nothing thereby supressing quicksearch in the sidebar when enabled in  -->
+<!-- do nothing thereby suppressing quicksearch in the sidebar when enabled in  -->
 <!-- navigation menu bar and ONLY when navigation bar is above or below header -->
    {else}
       <div class="serendipitySideBarItem container_{$item.class}">

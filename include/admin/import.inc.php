@@ -162,8 +162,8 @@ class Serendipity_Import {
  *
  * @access public
  * @param  string       SQL Query
- * @param  ressource    DB connection resource
- * @return ressource    SQL response
+ * @param  resource    DB connection resource
+ * @return resource    SQL response
  */
     function &nativeQuery($query, $db = false) {
         global $serendipity;

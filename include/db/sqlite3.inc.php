@@ -40,7 +40,7 @@ function serendipity_db_end_transaction($commit){
  * Connect to the configured Database
  *
  * @access public
- * @return  ressource   connection handle
+ * @return  resource   connection handle
  */
 function serendipity_db_connect()
 {
@@ -134,9 +134,9 @@ function serendipity_db_insert_id()
  * Yeah. This sucks. Don't tell me!
  *
  * @access private
- * @param  ressource    The row ressource handle
+ * @param  resource    The row resource handle
  * @param  int          Bitmask to tell whether to fetch numerical/associative arrays
- * @return array        Propper array containing the ressource results
+ * @return array        Propper array containing the resource results
  */
 function serendipity_db_sqlite_fetch_array($res, $type = SQLITE3_BOTH)
 {
@@ -339,7 +339,7 @@ function serendipity_db_probe($hash, &$errs)
  *
  * @access public
  * @param  string   SQL query with template variables to convert
- * @return ressource    SQL ressource handle of the executed query
+ * @return resource    SQL resource handle of the executed query
  */
 function serendipity_db_schema_import($query)
 {
@@ -361,7 +361,7 @@ function serendipity_db_schema_import($query)
 }
 
 /**
- * Returns the option to a LIMIT SQL statement, because it varies accross DB systems
+ * Returns the option to a LIMIT SQL statement, because it varies across DB systems
  *
  * @access public
  * @param  int      Number of the first row to return data from

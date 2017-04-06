@@ -51,7 +51,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
                 if (in_array('groups', $item['flags'])) {
                     if (serendipity_checkPermission('adminUsersMaintainOthers')) {
 
-                        // Void, no fixing neccessarry
+                        // Void, no fixing necessarry
 
                     } elseif (serendipity_checkPermission('adminUsersMaintainSame')) {
                         // Check that no user may assign groups he's not allowed to.
@@ -115,7 +115,7 @@ if (isset($_POST['SAVE_EDIT']) && serendipity_checkFormToken()) {
                 if (in_array('groups', $item['flags'])) {
                     if (serendipity_checkPermission('adminUsersMaintainOthers')) {
 
-                        // Void, no fixing neccessarry
+                        // Void, no fixing necessarry
 
                     } elseif (serendipity_checkPermission('adminUsersMaintainSame')) {
 

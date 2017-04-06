@@ -1073,7 +1073,7 @@ class serendipity_event_spartacus extends serendipity_event
         } else {
             $paths  = preg_split('@/@', $basedir.$dir,-1,PREG_SPLIT_NO_EMPTY);
             foreach ($paths as $path) {
-                // trying to change directory, if not succesfull, it means
+                // trying to change directory, if not successful, it means
                 // the directory does not exist and we must create it
                 if (!ftp_chdir($conn_id,$path)) {
                     if (!ftp_mkdir($conn_id,$path)) {
