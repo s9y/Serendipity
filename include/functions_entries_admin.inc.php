@@ -18,7 +18,7 @@ include_once(S9Y_INCLUDE_PATH . "include/functions_trackbacks.inc.php");
  * @param   string      The URL where the entry form is submitted to
  * @param   array       An array of hidden input fields that should be passed on to the HTML FORM
  * @param   array       The entry superarray with your entry's contents
- * @param   string      Any error messages that might have occured on the last run
+ * @param   string      Any error messages that might have occurred on the last run
  * @return null
  */
 function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = array(), $errMsg = "") {

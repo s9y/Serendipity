@@ -13,7 +13,7 @@ if (defined('S9Y_FRAMEWORK_CALENDARS')) {
 @define('S9Y_FRAMEWORK_CALENDARS', true);
 
 /**
- * Gregorian to Persian Convertor
+ * Gregorian to Persian Converter
  *
  * @author farsiweb.info
  * @access public
@@ -65,7 +65,7 @@ function g2p($g_y, $g_m, $g_d){
 }
 
 /**
- * Persian to Gregorian Convertor
+ * Persian to Gregorian Converter
  *
  * @author farsiweb.info
  * @access public

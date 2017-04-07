@@ -327,7 +327,7 @@ YAHOO.widget.TreeView.getNode = function(treeId, nodeIndex) {
 /**
  * Adds an event.  Replace with event manager when available
  *
- * @param el the elment to bind the handler to
+ * @param el the element to bind the handler to
  * @param {string} sType the type of event handler
  * @param {function} fn the callback to invoke
  * @param {boolean} capture if true event is capture phase, bubble otherwise
@@ -1016,7 +1016,7 @@ YAHOO.widget.Node.prototype = {
     },
 
     /**
-     * Get the markup for the node.  This is designed to be overrided so that we can
+     * Get the markup for the node.  This is designed to be overridden so that we can
      * support different types of nodes.
      *
      * @return {string} the html for this node
@@ -1062,7 +1062,7 @@ YAHOO.widget.RootNode.prototype.getNodeHtml = function() {
 /**
  * @class The default node presentation.  The first parameter should be
  * either a string that will be used as the node's label, or an object
- * that has a string propery called label.  By default, the clicking the
+ * that has a string property called label.  By default, the clicking the
  * label will toggle the expanded/collapsed state of the node.  By
  * changing the href property of the instance, this behavior can be
  * changed so that the label will go to the specified href.

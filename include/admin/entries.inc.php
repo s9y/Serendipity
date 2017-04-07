@@ -159,7 +159,7 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         // serendipity_updertEntry sets this global variable to store the entry id. Couldn't pass this
-        // by reference or as return value because it affects too many places inside our API and dependant
+        // by reference or as return value because it affects too many places inside our API and dependent
         // function calls.
         if (!empty($serendipity['lastSavedEntry'])) {
             $entry['id'] = $serendipity['lastSavedEntry'];

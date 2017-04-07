@@ -38,7 +38,7 @@ if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && s
     }
 
     /* If idx_to_move is still -1 then we never found it (shouldn't happen under normal conditions)
-        Also make sure the swaping idx is around */
+        Also make sure the swapping idx is around */
     if ($idx_to_move >= 0 && (($_GET['submit'] == 'move down' && $idx_to_move < (count($plugins)-1)) || ($_GET['submit'] == 'move up' && $idx_to_move > 0))) {
 
         /* Swap the one were moving with the one that's in the spot we're moving to */

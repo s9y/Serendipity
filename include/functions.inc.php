@@ -793,7 +793,7 @@ function serendipity_track_referrer($entry = 0) {
 /**
  * Garbage Collection for suppressed referrers
  *
- * "Bad" referrers, that only occured once to your entry are put within a
+ * "Bad" referrers, that only occurred once to your entry are put within a
  * SUPPRESS database table. Entries contained there will be cleaned up eventually.
  *
  * @access public

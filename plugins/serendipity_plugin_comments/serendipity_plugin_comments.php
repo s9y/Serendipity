@@ -209,7 +209,7 @@ class serendipity_plugin_comments extends serendipity_plugin
 
                 if ($row['comment_url'] != '' && ( ($isTrackBack && ($showurls =='trackbacks' || $showurls =='all') || !$isTrackBack && ($showurls =='comments' || $showurls =='all')))) {
 
-                    /* Fix invalid cases in protocoll part */
+                    /* Fix invalid cases in protocol part */
                     $row['comment_url'] = preg_replace('@^http://@i','http://', $row['comment_url']);
                     $row['comment_url'] = preg_replace('@^https://@i','https://', $row['comment_url']);
 

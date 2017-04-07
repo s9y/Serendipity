@@ -109,7 +109,7 @@ function serendipity_pingback_autodiscover($loc, $body, $url=null) {
  * @access public
  * @param   string  The URL to send a trackback to
  * @param   string  The XML data with the trackback contents
- * @return  string  Reponse
+ * @return  string  Response
  */
 function _serendipity_send($loc, $data, $contenttype = null) {
     global $serendipity;
@@ -164,7 +164,7 @@ function _serendipity_send($loc, $data, $contenttype = null) {
  * @param   string  The author of our entry
  * @param   string  The title of our entry
  * @param   string  The text of our entry
- * @param   string  A comparsion URL
+ * @param   string  A comparison URL
 
  * @return string   Response
  */

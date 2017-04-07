@@ -104,7 +104,7 @@ $data["cur_template"]         = $serendipity['template'];
 $data["cur_template_backend"] = $serendipity['template_backend'];
 $data['cur_template_info']    = serendipity_fetchTemplateInfo($serendipity['template']);
 
-// NOTE: config.inc.php currently only applies to frontend configuration. Backend configuration is not planned yet, and would preferrably use a "config_backend.inc.php" file!
+// NOTE: config.inc.php currently only applies to frontend configuration. Backend configuration is not planned yet, and would preferably use a "config_backend.inc.php" file!
 if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $data['cur_template_info']['custom_config_engine'] . '/config.inc.php')) {
     serendipity_smarty_init();
     $old_template_config_groups = $template_config_groups;

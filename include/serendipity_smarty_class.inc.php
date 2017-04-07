@@ -39,7 +39,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
 
     // This allows the fetch() and include calls to pull .tpl files from any directory,
     // so that symlinked plugin directories outside the s9y path can be included properly.
-    // TODO / FUTURE: If Smarty will implement a seperation option to dissect fetch() from
+    // TODO / FUTURE: If Smarty will implement a separation option to dissect fetch() from
     // {include} calls, we should only apply this workaround to fetch() calls.
     // Redirecting fetch() as our custom function is too risky and has too high a performance
     // impact.
@@ -107,7 +107,7 @@ class Serendipity_Smarty extends Smarty
 
         // some documentary from the smarty forum
         /*
-           Adressing a specific $template_dir (see 3.1 release notes)
+           Addressing a specific $template_dir (see 3.1 release notes)
 
            Smarty 3.1 introduces the $template_dir index notation.
            $smarty->fetch('[foo]bar.tpl') and {include file="[foo]bar.tpl"} require the template bar.tpl to be loaded from $template_dir['foo'];
@@ -139,7 +139,7 @@ class Serendipity_Smarty extends Smarty
             $template_dirs[] = S9Y_TEMPLATE_SECUREDIR;
         }
 
-        // disable plugin dir as added template dir is not adviced, if set security is enabled (backend & frontend need access to fetch plugin templates)
+        // disable plugin dir as added template dir is not advised, if set security is enabled (backend & frontend need access to fetch plugin templates)
         $template_dirs[] = $serendipity['serendipityPath'] . 'plugins';
         // add default template to addTemplate array, if not already set in engine
         $template_dirs[] = S9Y_TEMPLATE_FALLBACK;
@@ -263,7 +263,7 @@ class Serendipity_Smarty extends Smarty
      }
 
     /**
-     * wrapper for assign_by_ref - BC mode Smarty 2 -> 3 (Serendipity core uses assignByRef already - and nearly no occurances in additional plugins)
+     * wrapper for assign_by_ref - BC mode Smarty 2 -> 3 (Serendipity core uses assignByRef already - and nearly no occurrences in additional plugins)
      *
      * @param string $tpl_var the template variable name
      * @param mixed  &$value  the referenced value to assign

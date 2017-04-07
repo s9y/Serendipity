@@ -45,7 +45,7 @@ function serendipity_db_in_sql($col, &$search_ids, $type = ' OR ') {
  * Connect to the configured Database
  *
  * @access public
- * @return  ressource   connection handle
+ * @return  resource   connection handle
  */
 function serendipity_db_connect() {
     global $serendipity;
@@ -90,7 +90,7 @@ function serendipity_db_escape_string($string) {
 }
 
 /**
- * Returns the option to a LIMIT SQL statement, because it varies accross DB systems
+ * Returns the option to a LIMIT SQL statement, because it varies across DB systems
  *
  * @access public
  * @param  int      Number of the first row to return data from
@@ -267,7 +267,7 @@ function &serendipity_db_query($sql, $single = false, $result_type = "both", $re
  *
  * @access public
  * @param  string   SQL query with template variables to convert
- * @return ressource    SQL ressource handle of the executed query
+ * @return resource    SQL resource handle of the executed query
  */
 function serendipity_db_schema_import($query) {
     static $search  = array('{AUTOINCREMENT}', '{PRIMARY}', '{UNSIGNED}',

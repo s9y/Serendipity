@@ -626,7 +626,7 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
  *
  * @access public
  * @param   array       Smarty parameter input array:
- *                          file: The filename you want to include (any file within your template directry or the 'default' template if not found)
+ *                          file: The filename you want to include (any file within your template directory or the 'default' template if not found)
  * @param   object  Smarty object
  * @return  string      The requested filename with full path
  */

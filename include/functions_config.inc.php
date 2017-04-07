@@ -480,7 +480,7 @@ function serendipity_checkAutologin($ident, $iv) {
 }
 
 /**
- * Set a session cookie which can identify a user accross http/https boundaries
+ * Set a session cookie which can identify a user across http/https boundaries
  */
 function serendipity_setAuthorToken() {
     $hash = sha1(uniqid(rand(), true));
@@ -895,7 +895,7 @@ function serendipity_probeInstallation($item) {
             }
             if (class_exists('SQLite3')) {
                 if ($has_pdo) {
-                    $res['sqlite3oo'] = 'SQLite3 (OO) (Preferrably use PDO-SQlite!)';
+                    $res['sqlite3oo'] = 'SQLite3 (OO) (Preferably use PDO-SQlite!)';
                 } else {
                     $res['sqlite3oo'] = 'SQLite3 (OO)';
                 }
@@ -1247,7 +1247,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
  * @access public
  * @param   array       The array of groups the author should be a member of. All memberships that were present before and not contained in this array will be removed.
  * @param   int         The ID of the author to update
- * @param   boolean     If set to true, the groups can only be updated if the user has the adminUsersMaintainOthers privilege. If set to false, group memberships will be changable for any user.
+ * @param   boolean     If set to true, the groups can only be updated if the user has the adminUsersMaintainOthers privilege. If set to false, group memberships will be changeable for any user.
  * @return
  */
 function serendipity_updateGroups($groups, $authorid, $apply_acl = true) {

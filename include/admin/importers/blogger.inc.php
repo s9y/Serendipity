@@ -67,7 +67,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
             // Request token
             $response = $req->send();
 
-            // Handle token reponse
+            // Handle token response
             if ($response->getStatus() != '200') return;
 
             // Extract Auth token
@@ -153,7 +153,7 @@ class Serendipity_Import_Blogger extends Serendipity_Import {
 
         // Handle errors
         if ($response->getStatus() != '200') {
-            echo "Error occured while trying to export the blog.";
+            echo "Error occurred while trying to export the blog.";
             return false;
         }
 
