@@ -2,6 +2,8 @@
 Version 2.1-rc2 | final ()
 ------------------------------------------------------------------------
 
+    * Some more PHP7 error catching
+    
     * Fix missing token when updating plugin
     
     * Fix missing variable name in regular expression match, Issue #442

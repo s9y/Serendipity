@@ -1161,7 +1161,7 @@ function serendipity_smarty_purge() {
 
     serendipity_smarty_init();  # need initiated smarty to get the compile/cache dir
     $dir = new RecursiveDirectoryIterator($serendipity['smarty']->getCompileDir());
-    $ite = new RecursiveIteratorIterator($dir);
+    $ite = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD);
     $files = new RegexIterator($ite, '@.*\.tpl\.php$@', RegexIterator::GET_MATCH);
     foreach($files as $file) {
         if (is_writable($file[0])) {
