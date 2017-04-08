@@ -104,7 +104,10 @@ $entries = serendipity_fetchEntries(
                      'e.timestamp >= ' . serendipity_serverOffsetHour() . $efilter
                    );
 
-$entriesAmount = count($entries);
+$entriesAmount = 0;
+if (is_array($entries)) {
+    $entriesAmount = count($entries);
+};
 if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
