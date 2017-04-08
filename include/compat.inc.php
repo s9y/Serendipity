@@ -186,7 +186,11 @@ if (!function_exists('errorToExceptionHandler')) {
          * (string) 'debug'     Developer build, specifically enabled.
          */
 
-        $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
+        if ($serendipity['production'] !== 'debug') {
+            $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
+        } else {
+            $debug_note = '';
+        }
 
         // Debug environments shall be verbose...
         if ($serendipity['production'] === 'debug') {
@@ -233,6 +237,23 @@ document.body.insertBefore(fragment, document.body.childNodes[0]);
             }
         }
     }
+}
+
+if (!function_exists('fatalErrorShutdownHandler')) {
+ /**
+  * Make fatal Errors readable
+  *
+  * @access public
+  *
+  * @return string  constant error string as Exception
+  */
+     function fatalErrorShutdownHandler() {
+         $last_error = error_get_last();
+         if ($last_error['type'] === E_ERROR) {
+             // fatal error send to
+             errorToExceptionHandler(E_ERROR, $last_error['message'], $last_error['file'], $last_error['line']);
+         }
+     }
 }
 
 if (!function_exists('file_get_contents')) {

@@ -292,6 +292,7 @@ for ($i = 0; $i < 15;  $i++ ) {
 if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
     // set serendipity global error to exception handler
     set_error_handler($serendipity['errorhandler'], $errLevel); // See error_reporting() earlier to see which errors are passed to the handler, deending on $serendipity['production'].
+    register_shutdown_function('fatalErrorShutdownHandler');
 }
 
 define('IS_up2date', version_compare($serendipity['version'], $serendipity['versionInstalled'], '<='));
