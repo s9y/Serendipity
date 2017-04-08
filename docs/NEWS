@@ -1,5 +1,5 @@
 
-Version 2.1-rc2 | final ()
+Version 2.1.0 (April 8th, 2017)
 ------------------------------------------------------------------------
 
     * Some more PHP7 error catching
@@ -8,7 +8,7 @@ Version 2.1-rc2 | final ()
     
     * Fix missing variable name in regular expression match, Issue #442
 
-Version 2.1-rc1 (January, 26th 2017)
+Version 2.1-rc1 (January 26th, 2017)
 ------------------------------------------------------------------------
 
     * Fix issue #437 - Remove the hardcoded media filter only_filename
