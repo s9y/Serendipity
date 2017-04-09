@@ -1,7 +1,9 @@
 
-Version 2.1.1-beta1 ()
+Version 2.1.1 (April 9th, 2017)
 ------------------------------------------------------------------------
 
+    * Fixed a regression issue where configuration variables could not
+      properly be stored when they were set to false.
 
 Version 2.1.0 (April 8th, 2017)
 ------------------------------------------------------------------------
