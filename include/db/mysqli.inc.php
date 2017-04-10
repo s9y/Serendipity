@@ -279,6 +279,14 @@ function serendipity_db_reconnect() {
 function serendipity_db_migrate_index($check = true, $prefix = null) {
     global $serendipity;
 
+    /*
+    TODO: 
+    - Create an example migrate.sql dump with actual content to test its conversion
+    - `PRIMARY` index key names are wrong
+    - Combined index sizes are not calculated
+
+    */
+
     if ($prefix === null) {
         $prefix = $serendipity['dbPrefix'];
     }
@@ -291,7 +299,7 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
                                          ON (C.TABLE_SCHEMA = S.TABLE_SCHEMA AND C.TABLE_NAME = S.TABLE_NAME AND C.COLUMN_NAME = S.COLUMN_NAME)
  
                                       WHERE S.TABLE_SCHEMA =  '" . $serendipity['dbName'] . "'
-                                        AND S.TABLE_NAME LIKE '" . $prefix . "%'");
+                                        AND S.TABLE_NAME LIKE '" . serendipity_db_escape_string($prefix) . "%'");
 
     if (!is_array($indexes)) {
         $return['warnings'][] = "Could not read MySQL INFORMATION_SCHEMA table, which is required for migration. Please adjust permissions: " . $indexes;
@@ -426,7 +434,7 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
         }
     }
 
-    $tables = serendipity_db_query("SHOW TABLES LIKE '" . $serendipity['dbPrefix'] . "%'");
+    $tables = serendipity_db_query("SHOW TABLES LIKE '" . serendipity_db_escape_string($prefix) . "%'");
     if (!is_array($tables)) {
         $return['warnings'] = 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
         return $return;
