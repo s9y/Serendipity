@@ -142,7 +142,7 @@ CREATE TABLE {PREFIX}exits (
   port varchar(5),
   path varchar(255),
   query varchar(255),
-  PRIMARY KEY  (host,path,day,entry_id)
+  PRIMARY KEY  (host(64),path(180),day,entry_id)
 ) {UTF_8};
 
 CREATE INDEX exits_idx ON {PREFIX}exits (entry_id,day,host);
@@ -173,7 +173,7 @@ create table {PREFIX}config (
   name varchar(255) not null,
   value text not null,
   authorid int(11) default '0',
-  {PRIMARY} (name, authorid)
+  {PRIMARY} (name(191), authorid)
 ) {UTF_8};
 
 CREATE INDEX configauthorid_idx ON {PREFIX}config (authorid);
@@ -182,7 +182,7 @@ create table {PREFIX}options (
   name varchar(255) not null,
   value text not null,
   okey varchar(64) not null default '',
-  {PRIMARY} (name, okey)
+  {PRIMARY} (name(186), okey(64))
 ) {UTF_8};
 
 CREATE INDEX options_idx ON {PREFIX}options (okey);
@@ -264,7 +264,7 @@ create table {PREFIX}entryproperties (
 ) {UTF_8};
 
 CREATE INDEX entrypropid_idx ON {PREFIX}entryproperties (entryid);
-CREATE UNIQUE INDEX prop_idx ON {PREFIX}entryproperties (entryid, property);
+CREATE UNIQUE INDEX prop_idx ON {PREFIX}entryproperties (entryid, property(191));
 
 create table {PREFIX}mediaproperties (
   mediaid int(11) not null,
@@ -284,17 +284,17 @@ CREATE TABLE {PREFIX}permalinks (
     data text
 ) {UTF_8};
 
-CREATE INDEX pl_idx ON {PREFIX}permalinks (permalink);
+CREATE INDEX pl_idx ON {PREFIX}permalinks (permalink(191));
 CREATE INDEX ple_idx ON {PREFIX}permalinks (entry_id);
-CREATE INDEX plt_idx ON {PREFIX}permalinks (type);
-CREATE INDEX plcomb_idx ON {PREFIX}permalinks (permalink, type);
+CREATE INDEX plt_idx ON {PREFIX}permalinks (type(191));
+CREATE INDEX plcomb_idx ON {PREFIX}permalinks (permalink(191), type(50));
 
 create table {PREFIX}plugincategories (
   class_name varchar(250) default null,
   category varchar(250) default null
 ) {UTF_8};
 
-CREATE INDEX plugincat_idx ON {PREFIX}plugincategories(class_name, category);
+CREATE INDEX plugincat_idx ON {PREFIX}plugincategories(class_name(120), category(120));
 
 create table {PREFIX}pluginlist (
   plugin_file varchar(255) NOT NULL default '',
@@ -314,7 +314,7 @@ create table {PREFIX}pluginlist (
   last_modified int(11) NOT NULL default '0'
 ) {UTF_8};
 
-CREATE INDEX pluginlist_f_idx ON {PREFIX}pluginlist(plugin_file);
-CREATE INDEX pluginlist_cn_idx ON {PREFIX}pluginlist(class_name);
-CREATE INDEX pluginlist_pt_idx ON {PREFIX}pluginlist(plugintype);
-CREATE INDEX pluginlist_pl_idx ON {PREFIX}pluginlist(pluginlocation);
+CREATE INDEX pluginlist_f_idx ON {PREFIX}pluginlist(plugin_file(191));
+CREATE INDEX pluginlist_cn_idx ON {PREFIX}pluginlist(class_name(191));
+CREATE INDEX pluginlist_pt_idx ON {PREFIX}pluginlist(plugintype(191));
+CREATE INDEX pluginlist_pl_idx ON {PREFIX}pluginlist(pluginlocation(191));

@@ -696,7 +696,7 @@ class serendipity_event_spamblock extends serendipity_event
             $q   = "CREATE INDEX kspamidx ON {$serendipity['dbPrefix']}spamblocklog (timestamp);";
             $sql = serendipity_db_schema_import($q);
 
-            $q   = "CREATE INDEX kspamtypeidx ON {$serendipity['dbPrefix']}spamblocklog (type);";
+            $q   = "CREATE INDEX kspamtypeidx ON {$serendipity['dbPrefix']}spamblocklog (type(191));";
             $sql = serendipity_db_schema_import($q);
 
             $q   = "CREATE INDEX kspamentryidx ON {$serendipity['dbPrefix']}spamblocklog (entry_id);";
