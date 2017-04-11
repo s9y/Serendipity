@@ -530,7 +530,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
     }
 
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login username check:' . $username . "\n");
-    if ($username != '') {
+    if (!empty($username) && is_string($username)) {
         if ($use_external) {
             serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
         }
