@@ -227,9 +227,10 @@ if ($ajax) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
     }
 
-    $admin_vars['out']       = array();
-    $admin_vars['no_create'] = $serendipity['no_create'];
-    $admin_vars['title']     = $admin_section;
+    $admin_vars['out']         = array();
+    $admin_vars['no_create']   = $serendipity['no_create'];
+    $admin_vars['title']       = $admin_section;
+    $admin_vars['title_first'] = $serendipity['title_first'];
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());
