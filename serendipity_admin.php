@@ -230,7 +230,7 @@ if ($ajax) {
     $admin_vars['out']         = array();
     $admin_vars['no_create']   = $serendipity['no_create'];
     $admin_vars['title']       = $admin_section;
-    $admin_vars['title_first'] = $serendipity['title_first'];
+    $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());

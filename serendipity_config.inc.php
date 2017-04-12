@@ -137,6 +137,13 @@ if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
 }
 
+// The default page title of backend pages is "section | blog title | SERENDIPITY_ADMIN_SUITE"
+// If set to true (in serendipity_config_local.inc.php), the page title will be
+// "blog title | section | SERENDIPITY_ADMIN_SUITE" instead
+if (!isset($serendipity['backendBlogtitleFirst'])) {
+    $serendipity['backendBlogtitleFirst'] = false;
+}
+
 // Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
