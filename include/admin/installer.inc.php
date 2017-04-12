@@ -12,6 +12,10 @@ define('S9Y_I_ERROR', -1);
 define('S9Y_I_WARNING', 0);
 define('S9Y_I_SUCCESS', 1);
 
+if (empty($_SESSION['install_token'])) {
+    $_SESSION['install_token'] = uniqid('', true);
+}
+
 // smartification needs to pull everything first for installation and db purposes
 //include(S9Y_INCLUDE_PATH . 'serendipity_config.inc.php');
 
@@ -95,7 +99,35 @@ if ( sizeof($_POST) > 1 && $serendipity['GET']['step'] == '3' ) {
 
 $data['s9yGETstep'] = $serendipity['GET']['step'];
 
+$install_token = '';
+$install_token_file = realpath(dirname(__FILE__) . '/../../') . '/install_token.php';
+if (file_exists($install_token_file) && is_readable($install_token_file)) {
+    if (preg_match('@install_token\s*=\s*[\'"]([a-z\.0-9]+)[\'"];@imsU', file_get_contents($install_token_file), $tokenmatch)) {
+        $install_token = $tokenmatch[1];
+    }
+}
+
+$lifetime = (int)ini_get('session.cookie_lifetime');
+if ($lifetime == 0 || ini_get('session.gc_maxlifetime') < $lifetime) {
+    $lifetime = (int)ini_get('session.gc_maxlifetime');
+}
+
+$data['install_token'] = $_SESSION['install_token'];
+$data['install_token_pass'] = (!empty($install_token) && !empty($_SESSION['install_token']) && $install_token == $_SESSION['install_token']);
+$data['install_token_fail'] = false;
+$data['install_token_file'] = $install_token_file;
+$data['install_lifetime'] = ceil($lifetime/60);
+
+if ( (int)$serendipity['GET']['step'] != 0 && !$data['install_token_pass']) {
+    // Do not allow user to proceed to any action step unless token matches
+    $data['s9yGETstep'] = $serendipity['GET']['step'] = 0;
+    $data['install_token_fail'] = true;
+}
+
 if ( (int)$serendipity['GET']['step'] == 0 ) {
+    if (!empty($install_token) && !$data['install_token_pass']) {
+        $data['install_token_fail'] = true;
+    }
     $data['getstepint0'] = true;
     $data['print_ERRORS_ARE_DISPLAYED_IN'] = sprintf(ERRORS_ARE_DISPLAYED_IN, serendipity_installerResultDiagnose(S9Y_I_ERROR, RED), serendipity_installerResultDiagnose(S9Y_I_WARNING, YELLOW), serendipity_installerResultDiagnose(S9Y_I_SUCCESS, GREEN));
     $data['s9yversion'] = $serendipity['version'];

@@ -228,18 +228,27 @@
                 </table>
 
             {if $errorCount > 0}
-                <hr />
                 <span class="msg_error">{$CONST.PROBLEM_DIAGNOSTIC}</span>
                 <div class="form_buttons">
                     <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
                 </div>
-            {else}
+            {elseif $install_token_fail}
+                <span class="msg_error">{$CONST.PROBLEM_DIAGNOSTIC}</span>
+                <p>{$CONST.INSTALLER_TOKEN_MISMATCH|sprintf:$install_token:$install_token_file}</p>
+                <div class="form_buttons">
+                    <a class="block_level" href="serendipity_admin.php">{$CONST.RECHECK_INSTALLATION}</a>
+                </div>
+
+            {elseif $install_token_pass}
+                <p>{$CONST.INSTALLER_TOKEN_MATCH}</p>
                 <p><strong>{$CONST.SELECT_INSTALLATION_TYPE}:</strong></p>
 
                 <div class="form_buttons">
                     <a class="button_link state_submit" href="?serendipity[step]=2a">{$CONST.SIMPLE_INSTALLATION}</a>
                     <a class="button_link state_submit" href="?serendipity[step]=2b">{$CONST.EXPERT_INSTALLATION}</a>
                 </div>
+            {else}
+                <p>{$CONST.INSTALLER_TOKEN_NOTE|sprintf:$install_token_file:$install_token:$install_lifetime}</p>
             {/if}
             </div>
         {elseif $s9yGETstep == '2a'}

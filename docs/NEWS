@@ -1,6 +1,11 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * (EXPERIMENTAL) Secure installer with a token that needs to be
+       manually created inside a file. This is to prevent the possibility
+       of an automated bot using the installer before authorized users.
+       Credits to Hanno Böck.
+
 Version 2.1.1 (April 9th, 2017)
 ------------------------------------------------------------------------
 
