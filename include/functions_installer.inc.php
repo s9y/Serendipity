@@ -83,7 +83,10 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
                    . "\t/*\n"
                    . "\t  Serendipity configuration file\n";
     $file_mark     = "\n\t// End of Serendipity configuration file"
-                   . "\n\t// You can place your own special variables after here:\n";
+                   . "\n\t// You can place your own special variables here; see\n";
+                   . "\n\t// <https://docs.s9y.org/docs/developers/code-primer.html#docs-initializing-the-framework-serendipity_configincphp-and-serendipity_config_localincphp>\n";
+                   . "\n\t// for a list. All defaults from serendipity_config.inc.php\n";
+                   . "\n\t// can be changed by re-setting the variables after here:\n";
     $file_end      = "\n?>";
     $file_personal = '';
 
