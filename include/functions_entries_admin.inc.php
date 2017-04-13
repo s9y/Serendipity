@@ -119,6 +119,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     }
 
     $template_vars['formToken'] = serendipity_setFormToken();
+    $template_vars['urlToken']  = serendipity_setFormToken('url');
 
     if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation']) {
         $template_vars['allowDateManipulation'] = true;
