@@ -31,7 +31,7 @@
  * @since     File available since Release 1.0.0
  */
 
-require_once 'Net/DNS.php';
+require_once 'Net/DNS2.php';
 
 /**
  * PEAR::Net_DNSBL
@@ -216,14 +216,19 @@ class Net_DNSBL
     public function isListed($host, $checkall = false)
     {
         $isListed = false;
-        $resolver = new Net_DNS_Resolver;
+        $resolver = new Net_DNS2_Resolver;
 
         if (!is_string($host)) {
             return false;
         }
 
         foreach ($this->blacklists as $blacklist) {
-            $response = $resolver->query($this->getHostForLookup($host, $blacklist));
+            $response = null;
+            try {
+                $response = $resolver->query($this->getHostForLookup($host, $blacklist));
+            } catch (Net_DNS2_Exception $e) {
+                $response = null;
+            }
             if ($response) {
                 $isListed = true;
                 if ($checkall) {
@@ -287,7 +292,7 @@ class Net_DNSBL
         if (filter_var($host, FILTER_VALIDATE_IP)) {
                                         $ip = $host;
         } else {
-            $resolver = new Net_DNS_Resolver;
+            $resolver = new Net_DNS2_Resolver;
             $response = $resolver->query($host);
             $ip       = isset($response->answer[0]->address) ? 
                         $response->answer[0]->address : null;
