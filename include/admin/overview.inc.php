@@ -52,14 +52,6 @@ $data['update']       = version_compare($data['usedVersion'], $data['curVersion'
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
 $data['updateButton'] = $output;
 
-// Can be set through serendipity_config_local.inc.php
-if (!isset($serendipity['dashboardCommentsLimit'])) {
-    $serendipity['dashboardCommentsLimit'] = 5;
-}
-if (!isset($serendipity['dashboardEntriesLimit'])) {
-    $serendipity['dashboardEntriesLimit'] = 5;
-}
-
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
             WHERE e.authorid = " . (int)$serendipity['authorid']
