@@ -1,6 +1,15 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * Fix a regression in Net/DNSBL regarding
+      serendipity_event_spamblock_rbl and
+      serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
+      bundled library to core and patching Net/DNSBL (#497)
+
+    * Add a "delete" button to the backend entry form (#491, #494)
+
+    * Change Spartacus default mirror to github (#489)
+
 Version 2.1.1 (April 9th, 2017)
 ------------------------------------------------------------------------
 
