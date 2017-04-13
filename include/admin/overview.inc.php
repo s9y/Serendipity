@@ -56,11 +56,8 @@ $data['updateButton'] = $output;
 if (!isset($serendipity['dashboardCommentsLimit'])) {
     $serendipity['dashboardCommentsLimit'] = 5;
 }
-if (!isset($serendipity['dashboardLimit'])) {
-    $serendipity['dashboardLimit'] = 5;
-}
-if (!isset($serendipity['dashboardDraftLimit'])) {
-    $serendipity['dashboardDraftLimit'] = 5;
+if (!isset($serendipity['dashboardEntriesLimit'])) {
+    $serendipity['dashboardEntriesLimit'] = 5;
 }
 
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
@@ -97,7 +94,7 @@ $efilter = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? ' AND e.
 $entries = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardLimit'],
+                     (int)$serendipity['dashboardEntriesLimit'],
                      true,
                      false,
                      'timestamp DESC',
@@ -108,12 +105,12 @@ $entriesAmount = 0;
 if (is_array($entries)) {
     $entriesAmount = count($entries);
 };
-if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
+if ($entriesAmount < (int)$serendipity['dashboardEntriesLimit']) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardDraftLimit'] - $entriesAmount,
+                     (int)$serendipity['dashboardEntriesLimit'] - $entriesAmount,
                      true,
                      false,
                      'timestamp DESC',
