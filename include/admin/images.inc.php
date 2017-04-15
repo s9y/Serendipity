@@ -314,7 +314,7 @@ switch ($serendipity['GET']['adminAction']) {
                                 'thumbSize' => $serendipity['thumbSize'],
                                 'thumb'     => $serendipity['thumbSuffix']
                             ));
-                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $tfile);
 
                             foreach($thumbs as $thumb) {
                                 // Create thumbnail
@@ -397,7 +397,7 @@ switch ($serendipity['GET']['adminAction']) {
                             'thumbSize' => $serendipity['thumbSize'],
                             'thumb'     => $serendipity['thumbSuffix']
                         ));
-                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $target);
 
                         foreach($thumbs as $thumb) {
                             // Create thumbnail
