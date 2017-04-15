@@ -52,17 +52,6 @@ $data['update']       = version_compare($data['usedVersion'], $data['curVersion'
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
 $data['updateButton'] = $output;
 
-// Can be set through serendipity_config_local.inc.php
-if (!isset($serendipity['dashboardCommentsLimit'])) {
-    $serendipity['dashboardCommentsLimit'] = 5;
-}
-if (!isset($serendipity['dashboardLimit'])) {
-    $serendipity['dashboardLimit'] = 5;
-}
-if (!isset($serendipity['dashboardDraftLimit'])) {
-    $serendipity['dashboardDraftLimit'] = 5;
-}
-
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
             WHERE e.authorid = " . (int)$serendipity['authorid']
@@ -97,7 +86,7 @@ $efilter = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? ' AND e.
 $entries = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardLimit'],
+                     (int)$serendipity['dashboardEntriesLimit'],
                      true,
                      false,
                      'timestamp DESC',
@@ -108,12 +97,12 @@ $entriesAmount = 0;
 if (is_array($entries)) {
     $entriesAmount = count($entries);
 };
-if ($entriesAmount < (int)$serendipity['dashboardDraftLimit']) {
+if ($entriesAmount < (int)$serendipity['dashboardEntriesLimit']) {
     // there is still space for drafts
     $drafts = serendipity_fetchEntries(
                      false,
                      false,
-                     (int)$serendipity['dashboardDraftLimit'] - $entriesAmount,
+                     (int)$serendipity['dashboardEntriesLimit'] - $entriesAmount,
                      true,
                      false,
                      'timestamp DESC',

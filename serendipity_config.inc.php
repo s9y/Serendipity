@@ -144,6 +144,15 @@ if (!isset($serendipity['backendBlogtitleFirst'])) {
     $serendipity['backendBlogtitleFirst'] = false;
 }
 
+// Dashboard: set number of comments and drafts / future entries to be shown
+if (!isset($serendipity['dashboardCommentsLimit'])) {
+    $serendipity['dashboardCommentsLimit'] = 5;
+}
+
+if (!isset($serendipity['dashboardEntriesLimit'])) {
+    $serendipity['dashboardEntriesLimit'] = 5;
+}
+
 // Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
