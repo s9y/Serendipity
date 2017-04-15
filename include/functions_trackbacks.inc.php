@@ -172,42 +172,47 @@ function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $
     $is_wp    = false;
     $wp_check = false;
 
-    if (preg_match('@((' . preg_quote($loc, '@') . '|' . preg_quote($loc2, '@') . ')/?trackback/)@i', $res, $wp_loc)) {
-        // We found a WP-blog that may not advertise RDF-Tags!
-        $is_wp = true;
-    }
+    // the new detection method via rel=trackback should have priority
+    if (preg_match('@link\s*rel=["\']trackback["\'].*href=["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
+        $trackURI = trim($matches[1]);
+    } else {
+        if (preg_match('@((' . preg_quote($loc, '@') . '|' . preg_quote($loc2, '@') . ')/?trackback/)@i', $res, $wp_loc)) {
+            // We found a WP-blog that may not advertise RDF-Tags!
+            $is_wp = true;
+        }
 
-    if (!preg_match('@trackback:ping(\s*rdf:resource)?\s*=\s*["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
-        $matches = array();
-        serendipity_plugin_api::hook_event('backend_trackback_check', $matches, $loc);
+        if (!preg_match('@trackback:ping(\s*rdf:resource)?\s*=\s*["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
+            $matches = array();
+            serendipity_plugin_api::hook_event('backend_trackback_check', $matches, $loc);
 
-        // Plugins may say that a URI is valid, in situations where a blog has no valid RDF metadata
-        if (empty($matches[2])) {
-            if ($is_wp) {
-                $wp_check = true;
-            } else {
-                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
-                return false;
+            // Plugins may say that a URI is valid, in situations where a blog has no valid RDF metadata
+            if (empty($matches[2])) {
+                if ($is_wp) {
+                    $wp_check = true;
+                } else {
+                    echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
+                    return false;
+                }
             }
         }
-    }
 
-    $trackURI = trim($matches[2]);
+        $trackURI = trim($matches[2]);
 
-    if (preg_match('@dc:identifier\s*=\s*["\'](https?:[^\'"]+)["\']@i', $res, $test)) {
-        if ($loc != $test[1] && $loc2 != $test[1]) {
-            if ($is_wp) {
-                $wp_check = true;
-            } else {
-                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
-                return false;
+        if (preg_match('@dc:identifier\s*=\s*["\'](https?:[^\'"]+)["\']@i', $res, $test)) {
+            if ($loc != $test[1] && $loc2 != $test[1]) {
+                if ($is_wp) {
+                    $wp_check = true;
+                } else {
+                    echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
+                    return false;
+                }
             }
         }
-    }
 
-    // If $wp_check is set it means no RDF metadata was found, and we simply try the /trackback/ url.
-    if ($wp_check) {
-        $trackURI = $wp_loc[0];
+        // If $wp_check is set it means no RDF metadata was found, and we simply try the /trackback/ url.
+        if ($wp_check) {
+            $trackURI = $wp_loc[0];
+        }
     }
 
     $data = 'url='        . rawurlencode($url)
