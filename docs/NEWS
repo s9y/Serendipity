@@ -1,6 +1,20 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * Merge and rename the two configuration variables to limit
+      displayed entries in the dashboard (#493):
+      
+      $serendipity['dashboardLimit'] and
+      $serendipity['dashboardDraftLimit'] are now merged into
+      $serendipity['dashboardEntriesLimit'] - please change your
+      serendipity_config_local.inc.php accordingly if you used
+      the former variables.
+
+      The dashboard will now show as many future entries as 
+      configured in "dashboardEntriesLimit"; if there are less
+      future entries, it will display drafts until 
+      "dashboardEntriesLimit" is reached.
+
     * Fix a regression in Net/DNSBL regarding
       serendipity_event_spamblock_rbl and
       serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
