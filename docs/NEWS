@@ -1,6 +1,9 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * Emit and detect rel=trackback element to find trackback
+      url, to have a reliable alternative to RDF used so far
+
     * Merge and rename the two configuration variables to limit
       displayed entries in the dashboard (#493):
       
