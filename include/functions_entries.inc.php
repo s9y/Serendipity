@@ -207,14 +207,15 @@ function &serendipity_fetchEntryCategories($entryid) {
 function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fetchDrafts = false, $modified_since = false, $orderby = 'timestamp DESC', $filter_sql = '', $noCache = false, $noSticky = false, $select_key = null, $group_by = null, $returncode = 'array', $joinauthors = true, $joincategories = true, $joinown = null) {
     global $serendipity;
 
+    $initial_args = array_values(func_get_args());
+
     if ($serendipity['useInternalCache']) {
         $cache = serendipity_setupCache();
-
-        $args = func_get_args();
-        $args = array_values($args);
-        $key = md5(serialize($args));
-
-        if (($entries = $cache->get($key, "fetchEntries")) !== false) {
+        $key = md5(serialize($initial_args) . $serendipity['GET']['page']);
+        
+        $entries = $cache->get($key, "fetchEntries");
+        if ($entries !== false) {
+            $serendipity['fullCountQuery'] = $cache->get($key . '_fullCountQuery', "fetchEntries");
             return unserialize($entries);
         }
     }
@@ -461,10 +462,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     }
 
     if ($serendipity['useInternalCache']) {
-        $args = func_get_args();
-        $args = array_values($args);
-        $key = md5(serialize($args));
+        $key = md5(serialize($initial_args) . $serendipity['GET']['page']);
         $cache->save(serialize($ret), $key, "fetchEntries");
+        $cache->save($serendipity['fullCountQuery'], $key . '_fullCountQuery', "fetchEntries");
     }
 
     return $ret;
