@@ -48,8 +48,10 @@ switch ($serendipity['GET']['action']) {
                 serendipity_header('HTTP/1.0 404 Not found');
                 serendipity_header('Status: 404 Not found');
             }
-
-            serendipity_printEntries($entry, 1);
+            
+            if (! serendipity_printEntriesCached($entry, 1)) {
+                serendipity_printEntries($entry, 1);
+            }
         } else {
             serendipity_printEntries(serendipity_fetchEntries($serendipity['range'], true, $serendipity['fetchLimit']));
         }
