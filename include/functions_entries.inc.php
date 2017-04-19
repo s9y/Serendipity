@@ -1058,8 +1058,6 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
         serendipity_smarty_init(); // if not set, start Smarty templating to avoid member function "method()" on a non-object errors (was draft preview error, now at line 1239)
     }
 
-    $initial_args = array_values(func_get_args());
-
     if ($use_hooks) {
         $addData = array('extended' => $extended, 'preview' => $preview);
         serendipity_plugin_api::hook_event('entry_display', $entries, $addData);
@@ -1276,14 +1274,6 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
     }
 
     $serendipity['smarty']->assignByRef('entries', $dategroup);
-
-    if ($serendipity['useInternalCache']) {
-        $cache = serendipity_setupCache();
-        $key = md5(serialize($initial_args));
-        
-        $cache->save(serialize($dategroup), $key, "printEntries");
-    }
-    
     unset($entries, $dategroup);
 
     $serendipity['smarty']->assign(array(
@@ -1298,66 +1288,6 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 
 } // end function serendipity_printEntries
 
-function serendipity_printEntriesCached($entries, $extended = 0, $preview = false, $smarty_block = 'ENTRIES', $smarty_fetch = true, $use_hooks = true, $use_footer = true, $use_grouped_array = false) {
-    global $serendipity;
-
-    $cache = serendipity_setupCache();
-
-    $args = func_get_args();
-    $args = array_values($args);
-    $key = md5(serialize($args));
-
-    if (($dategroup = $cache->get($key, "printEntries")) !== false) {
-
-        if ($use_hooks) {
-            $addData = array('extended' => $extended, 'preview' => $preview);
-            serendipity_plugin_api::hook_event('entry_display', $entries, $addData);
-
-            if (isset($entries['clean_page']) && $entries['clean_page'] === true) {
-                if ($serendipity['view'] == '404') {
-                    $serendipity['view'] = 'plugin';
-                }
-
-                $serendipity['smarty']->assign(array(
-                    'plugin_clean_page' => true,
-                    'view'              => $serendipity['view'])
-                );
-                serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
-                return; // no display of this item
-            }
-        }
-
-        
-        $dategroup = unserialize($dategroup);
-        $serendipity['smarty']->assign('entries', $dategroup);
-
-        # now let plugins do their magic and hope they don't do it twice
-        foreach($dategroup as $dategroup_idx => $properties) {
-            foreach($properties['entries'] as $x => $_entry) {
-                $addData = array('from' => 'functions_entries:printEntries');
-                if ($entry['is_cached']) {
-                    $addData['no_scramble'] = true;
-                }
-                serendipity_plugin_api::hook_event('frontend_display', $entry, $addData);
-
-                $entry['display_dat'] = '';
-                serendipity_plugin_api::hook_event('frontend_display:html:per_entry', $entry);
-                $entry['plugin_display_dat'] =& $entry['display_dat'];
-            }
-        }
-
-       
-        if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
-            serendipity_smarty_fetch($smarty_block, 'entries_summary.tpl', true);
-        } elseif ($smarty_fetch == true) {
-            serendipity_smarty_fetch($smarty_block, 'entries.tpl', true);
-        }
-        return true;
-    } else {
-        return false;
-    }   
-}
-
 function serendipity_cleanCache() {
     include_once 'Cache/Lite.php';
 
@@ -1371,10 +1301,7 @@ function serendipity_cleanCache() {
         'hashedDirectoryLevel' => 2
     );
     $cache = new Cache_Lite($options);
-    $successFetch = $cache->clean("fetchEntries");
-    $successPrint = $cache->clean("printEntries");
-    return $successFetch && $successPrint;
-    
+    return $cache->clean("fetchEntries");
 }
 
 function serendipity_setupCache() {
