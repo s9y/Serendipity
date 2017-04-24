@@ -256,13 +256,16 @@ function serendipity_db_reconnect() {
         $use_charset = 'utf8';
     }
 
-    $serendipity['dbUtf8mb4'] = false;
+    $serendipity['dbUtf8mb4'] = $serendipity['dbUtf8mb4_ready'] = false;
     if (strtolower($use_charset) == 'utf8') {
         /* Utilize utf8mb4, if the server supports that */
         $mysql_version = mysqli_get_server_info($serendipity['dbConn']);
         if (version_compare($mysql_version, '5.5.3', '>=')) {
-            $use_charset = 'utf8mb4';
-            $serendipity['dbUtf8mb4'] = true;
+            $serendipity['dbUtf8mb4_ready'] = true;
+            if (defined('IN_installer') || $serendipity['dbUtf8mb4_converted']) {
+                $use_charset = 'utf8mb4';
+                $serendipity['dbUtf8mb4'] = true;
+            }
         }
     }
 
@@ -279,19 +282,11 @@ function serendipity_db_reconnect() {
 function serendipity_db_migrate_index($check = true, $prefix = null) {
     global $serendipity;
 
-    /*
-    TODO: 
-    - Create an example migrate.sql dump with actual content to test its conversion
-    - `PRIMARY` index key names are wrong
-    - Combined index sizes are not calculated
-
-    */
-
     if ($prefix === null) {
         $prefix = $serendipity['dbPrefix'];
     }
 
-    $return = array('indexes' => array(), 'sql' => array(), 'warnings' => array());
+    $return = array('indexes' => array(), 'sql' => array(), 'warnings' => array(), 'errors' => array());
     $indexes = serendipity_db_query("SELECT S.INDEX_NAME, S.INDEX_TYPE, S.SEQ_IN_INDEX, S.COLUMN_NAME, S.SUB_PART, S.TABLE_NAME, C.DATA_TYPE, C.CHARACTER_MAXIMUM_LENGTH, C.NUMERIC_PRECISION, S.NON_UNIQUE
                                        FROM INFORMATION_SCHEMA.STATISTICS AS S
  
@@ -299,10 +294,12 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
                                          ON (C.TABLE_SCHEMA = S.TABLE_SCHEMA AND C.TABLE_NAME = S.TABLE_NAME AND C.COLUMN_NAME = S.COLUMN_NAME)
  
                                       WHERE S.TABLE_SCHEMA =  '" . $serendipity['dbName'] . "'
-                                        AND S.TABLE_NAME LIKE '" . serendipity_db_escape_string($prefix) . "%'");
+                                        AND S.TABLE_NAME LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'
+                                   ORDER BY S.TABLE_NAME, S.INDEX_NAME, S.INDEX_TYPE, S.SEQ_IN_INDEX
+                                    ");
 
     if (!is_array($indexes)) {
-        $return['warnings'][] = "Could not read MySQL INFORMATION_SCHEMA table, which is required for migration. Please adjust permissions: " . $indexes;
+        $return['errors'][] = "Could not read MySQL INFORMATION_SCHEMA table, which is required for migration. Please adjust permissions: " . $indexes;
         return $return;
     }
 
@@ -333,24 +330,24 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
         }
 
         if ($index['INDEX_TYPE'] !== 'FULLTEXT') {
-            if ($index['INDEX_TYPE'] == 'PRIMARY') {
+            if ($index['INDEX_NAME'] == 'PRIMARY') {
                 $indextypes[$index['TABLE_NAME'] . '.' . $index['INDEX_NAME']] = 'PRIMARY';
             } elseif ($index['NON_UNIQUE'] == 0) {
                 $indextypes[$index['TABLE_NAME'] . '.' . $index['INDEX_NAME']] = 'UNIQUE';
             } else {
                 $indextypes[$index['TABLE_NAME'] . '.' . $index['INDEX_NAME']] = 'INDEX';
             }
-            $checkindex[$index['TABLE_NAME']][$index['INDEX_NAME']][$index['SEQ_IN_INDEX']][$index['COLUMN_NAME']] = $length;
+            $checkindex[$index['TABLE_NAME']][$index['INDEX_NAME']][0][$index['COLUMN_NAME']] = $length;
         }
     }
 
-    echo '<pre>' . print_r($checkindex, true) . '</pre>';
     foreach($checkindex AS $tablename => $tables) {
         foreach($tables AS $indexname => $indexes) {
             foreach($indexes AS $indexcount => $indexdata) {
                 $indexlength = 0;
                 $newindexlength = 0;
                 $newindex = array();
+                $force_reindex = false;
 
                 foreach($indexdata AS $indexcol => $collength) {
                     $newcollength = $collength;
@@ -359,13 +356,15 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
                         $indextype = $indextypes[$tablename . '.' . $indexname];
                         if ($indextype == 'PRIMARY') {
                             $dropname = 'PRIMARY KEY';
+                            $addname = 'PRIMARY KEY';
                         } else {
                             $dropname = 'INDEX `' . $indexname . '`';
+                            $addname = $indextype . ' `' . $indexname . '`';
                         }
-                        $return['sql'][] = 'ALTER TABLE `' . $tablename . '` DROP ' . $dropname . ', ADD ' . $indextype . ' `' . $indexname . '` (`' . $indexcol . '` (' . $single_max . '))';
+                        $return['sql'][] = 'ALTER TABLE `' . $tablename . '` DROP ' . $dropname . ', ADD ' . $addname . ' (`' . $indexcol . '` (' . $single_max . '))';
                         $collength = $single_max;
                     } else {
-                        $checkprefix = $serendipity['dbPrefix'];
+                        // Hardcoded lists of known database tables for plugins and core tables that needs individual adjustments.
                         switch($tablename . '.' . $indexcol) {
                             case $prefix . 'options.name':
                                 $newcollength = 186;
@@ -403,47 +402,72 @@ function serendipity_db_migrate_index($check = true, $prefix = null) {
                             case $prefix . 'percentagedone.title':
                             case $prefix . 'comments.email':
                             case $prefix . 'config.name':
+                            case $prefix . 'entryproperties.property':
                                 $newcollength = 191;
                                 $newindex[] = '`' . $indexcol . '` (' . $newcollength . ')';
                                 break;
                             default:
-                                $newindex[] = '`' . $indexcol . '` (' . $collength . ')';
+                                if ($collength == 3) {
+                                    // Catch integers, full index
+                                    $newindex[] = '`' . $indexcol . '`';
+                                } else {
+                                    if (count($indexdata) > 1 && $collength > $single_max) {
+                                        $newcollength = 191;
+                                        $newindex[] = '`' . $indexcol . '` (' . $newcollength . ')';
+                                    } else {
+                                        $newindex[] = '`' . $indexcol . '` (' . $collength . ')';
+                                    }
+                                }
                                 break;
                         }
+                    }
+
+                    if ($newcollength != $collength && count($indexdata) > 1) {
+                        $force_reindex = true;
                     }
                 }
 
                 $indexlength += $collength;
                 $newindexlength += $newcollength;
 
-                if ($indexlength > $sum_max) {
-                    $return['warnings'][] = $tablename . '.' . $indexname . ': Total Index is too large (' . $indexlength . ' &gt; ' . $sum_max . ' Bytes)';
+                if ($indexlength > $sum_max || $force_reindex) {
+                    if ($force_reindex) {
+                        $return['warnings'][] = $tablename . '.' . $indexname . ': Multi-Column Index has at least one index too large (' . $indexlength . ' &gt; ' . $sum_max . '/' . $single_max . ' Bytes)';
+                    } else {
+                        $return['warnings'][] = $tablename . '.' . $indexname . ': Total Index is too large (' . $indexlength . ' &gt; ' . $sum_max . ' Bytes)';
+                    }
+
                     if ($newindexlength > $sum_max) {
-                        $return['warnings'][] = $tablename . '.' . $indexname . ': Even after automatic fixup, total Index would be too large (' . $indexlength . ' &gt; ' . $sum_max . ' Bytes, after fix: ' . $newindexlength . ') -- NOT FIXING!';
+                        $return['errors'][] = $tablename . '.' . $indexname . ': Even after automatic fixup, total Index would be too large (' . $indexlength . ' &gt; ' . $sum_max . ' Bytes, after fix: ' . $newindexlength . ') -- NOT FIXING!';
                     } else {
                         $indextype = $indextypes[$tablename . '.' . $indexname];
                         if ($indextype == 'PRIMARY') {
                             $dropname = 'PRIMARY KEY';
+                            $addname = 'PRIMARY KEY';
                         } else {
                             $dropname = 'INDEX `' . $indexname . '`';
+                            $addname = $indextype . ' `' . $indexname . '`';
                         }
-                        $return['sql'][] = 'ALTER TABLE `' . $tablename . '` DROP ' . $dropname . ', ADD ' . $indextype . ' `' . $indexname . '` (' . implode(', ', $newindex) . ')';
+                        $return['sql'][] = 'ALTER TABLE `' . $tablename . '` DROP ' . $dropname . ', ADD ' . $addname . ' (' . implode(', ', $newindex) . ')';
                     }
                 }
             }
         }
     }
 
-    $tables = serendipity_db_query("SHOW TABLES LIKE '" . serendipity_db_escape_string($prefix) . "%'");
+    $tables = serendipity_db_query("SHOW TABLES LIKE '" . str_replace('_', '\_', serendipity_db_escape_string($prefix)) . "%'");
     if (!is_array($tables)) {
-        $return['warnings'] = 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
+        $return['errors'] = 'Could not analyze existing tables via SHOW TABLES, please check permissions.' . $tables;
         return $return;
     }
 
     foreach($tables AS $table) {
         $return['sql'][] = 'ALTER TABLE `' . $table[0] . '` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci';
-    }    
+    }
 
+    if (!$check && count($return['errors']) == 0) {
+        // TODO: Execute SQL commands in $return['sql'].
+    }
     return $return;
 }
 

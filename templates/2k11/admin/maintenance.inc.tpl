@@ -94,4 +94,68 @@
 
 {serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
 
+{if 'siteConfiguration'|checkPermission}
+    <section id="maintenance_utf8mb4">
+        <h3>UTF-8 MB4 conversion</h3>
+
+        {if $dbUtf8mb4_error}
+        <p>An error occured with the UTF-8 migration: <span>{$dbUtf8mb4_error}</span></p>
+        {/if}
+
+        {if $dbUtf8mb4_migrate}
+            <p>The migration task returned:</p>
+            <ul>
+                {foreach from=$dbUtf8mb4_migrate.errors item="error"}
+                <li>{$error}</li>
+                {/foreach}
+            </ul>
+
+            <ul>
+                {foreach from=$dbUtf8mb4_migrate.warnings item="warning"}
+                <li>{$warning}</li>
+                {/foreach}
+            </ul>
+
+            {if $dbUtf8mb4_executed}
+            <p>The following SQL commands have been executed:</p>
+            {else}
+            <p>The following SQL commands can be executed:</p>
+            {/if}
+
+            <ul>
+                {foreach from=$dbUtf8mb4_migrate.sql item="query"}
+                <li>{$query};</li>
+                {/foreach}
+            </ul>
+
+        {/if}
+
+        {if $dbUtf8mb4_converted}
+        <p>Your blog is using the UTF-8 with Multibyte-Extension charset.</p>
+        {else}
+        <p>When using Serendipity 2.2+ with MySQLi and UTF-8 charsets (this is the default), the tables and indexes can be migrated from UTF-8 to UTF-8 with Multibyte-Extension, to support Emoji-Characters.</p>
+            {if $dbUtf8mb4_ready}
+            <p>This task will allow you to perform an upgrade from UTF-8 to UTF-8mb4. This will also automatically try to adjust index sizes and issue converting MySQL server commands.</p>
+            <p>This is a task that can probably fail to properly convert your data, so be sure to make a SQL backup before you perform the upgrade.</p>
+            <p>Please run the simulation first, to get a list of SQL statements, that will be issued on your installation, and make sure there are no errors in the simulation before continuing.</p>
+
+            <form method="POST" action="serendipity_admin.php">
+                <input type="hidden" name="serendipity[adminModule]" value="maintenance" />
+                <input type="hidden" name="serendipity[adminAction]" value="utf8mb4" />
+                {$formtoken}
+
+                <div class="form_buttons">
+                    <input name="serendipity[adminOption][check]" type="submit" value="Simulate / Check">
+                    {if $dbUtf8mb4_simulated}
+                    <input name="serendipity[adminOption][execute]" type="submit" value="Execute ">
+                    {/if}
+                </div>
+            </form>
+            {else}
+            <p>Your installation either does not use UTF-8 charset already, does not use the MySQLi driver or the server version is lower than 5.5.3, and does not support UTF8MB4. To be able to use UTF8MB4, make sure your blog is configured for UTF-8 charset, and make sure existing data is also converted to UTF-8 (by using a tool like mysqldump to export, convert to UTF-8 and import).</p>
+            {/if}
+        {/if}
+    </section>
+{/if}
+
 </div>

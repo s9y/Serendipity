@@ -8,6 +8,12 @@ include S9Y_INCLUDE_PATH . 'include/admin/import.inc.php';
 $data['importMenu'] = ob_get_contents();
 ob_end_clean();
 
+$data['dbUtf8mb4_ready']        = $serendipity['dbUtf8mb4_ready'];
+$data['dbUtf8mb4']              = $serendipity['dbUtf8mb4'];
+$data['dbUtf8mb4_converted']    = $serendipity['dbUtf8mb4_converted'];
+$data['urltoken']               = serendipity_setFormToken('url');
+$data['formtoken']              = serendipity_setFormToken();
+
 switch($serendipity['GET']['adminAction']) {
     case 'integrity':
         $data['action'] = "integrity";
@@ -30,6 +36,38 @@ switch($serendipity['GET']['adminAction']) {
             $data['cleanup_template'] = $serendipity['template'];
         }
         break;
+
+    case 'utf8mb4':
+        $data['dbUtf8mb4_simulated'] = true;
+        if (!serendipity_checkPermission('siteConfiguration') || !serendipity_checkFormToken()) {
+            $data['dbUtf8mb4_error'] = PERM_DENIED;
+            break;
+        }
+
+        if (!function_exists('serendipity_db_migrate_index') || !$serendipity['dbUtf8mb4_ready']) {
+            $data['dbUtf8mb4_error'] = 'Not UTF-8mb4 ready.';
+        }
+
+        if ($serendipity['dbUtf8mb4']) {
+
+            if (isset($serendipity['POST']['adminOption']['execute'])) {
+                $data['dbUtf8mb4_migrate'] = serendipity_db_migrate_index(false, $serendipity['dbPrefix']);
+                /* TODO: Enable
+                serendipity_set_config_var('dbUtf8mb4_converted', true);
+                */
+                $data['dbUtf8mb4_executed'] = true;
+            } else {
+                $data['dbUtf8mb4_migrate'] = serendipity_db_migrate_index(true, $serendipity['dbPrefix']);
+            }
+
+            if (count($data['dbUtf8mb4_migrate']['errors']) > 0) {
+                $data['dbUtf8mb4_simulated'] = false;
+            }
+        }
+
+        break;
+
+
 }
 
 echo serendipity_smarty_show('admin/maintenance.inc.tpl', $data);
