@@ -127,30 +127,26 @@ switch ($serendipity['GET']['adminAction']) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && empty($serendipity['POST']['newDir']) && isset($_POST['toggle_move'])) {
+        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && (! isset($serendipity['POST']['newDir'])) && isset($_POST['toggle_move'])) {
             echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
-        if (isset($serendipity['POST']['oldDir']) && !empty($serendipity['POST']['newDir'])) {
+        if (isset($serendipity['POST']['newDir'])) {
             $messages = array();
             $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
             unset($serendipity['POST']['multiDelete']);
 
-            $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move directly
-            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir'] . '/'); // relative to Uploads/
+            $nDir = serendipity_specialchars(serendipity_dirSlash('end', (string)$serendipity['POST']['newDir'])); // relative to Uploads/
 
-            if ($oDir != $nDir) {
-                foreach($multiMoveImages AS $mkey => $move_id) {
-                    $file = serendipity_fetchImageFromDatabase((int)$move_id);
-                    $oDir = $file['path']; // this now is the exact oldDir path of this ID
-                    if (serendipity_moveMediaDirectory($oDir, $nDir, 'file', (int)$move_id, $file)) {
-                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
-                    } else {
-                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
-                    }
+            foreach($multiMoveImages AS $mkey => $move_id) {
+                if (serendipity_moveMediaDirectory('', $nDir, 'file', (int)$move_id)) {
+                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
+                } else {
+                    $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
                 }
             }
+            
             $data['messages'] = $messages;
             unset($messages);
             // remember to return to last selected media library directory
@@ -182,21 +178,10 @@ switch ($serendipity['GET']['adminAction']) {
 
     case 'rename':
         $serendipity['GET']['fid'] = (int)$serendipity['GET']['fid'];
-        $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-
-        if (LANG_CHARSET == 'UTF-8') {
-             // yeah, turn on content to be a real utf-8 string, which it isn't at this point! Else serendipity_makeFilename() can not work!
-             $serendipity['GET']['newname'] = utf8_encode($serendipity['GET']['newname']);
-        }
-        $serendipity['GET']['newname'] = str_replace(' ', '_', $serendipity['GET']['newname']); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
-        $serendipity['GET']['newname'] = serendipity_uploadSecure(serendipity_makeFilename($serendipity['GET']['newname']), true);
-
-        if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') ||
-           (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             return;
         }
-        // since this is a javascript action only, all event success/error action messages have moved into js
-        serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file);
+        serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
         break;
 
     case 'properties':
@@ -492,7 +477,7 @@ switch ($serendipity['GET']['adminAction']) {
             if ($oldDir != $newDir) {
                 //is this possible? Ian: YES! Change an already set directory.
                 ob_start();
-                serendipity_moveMediaDirectory($oldDir, $newDir);
+                serendipity_renameDir($oldDir, $newDir);
                 $data['messages'] = ob_get_contents();
                 ob_end_clean();
                 $use_dir = $newDir;

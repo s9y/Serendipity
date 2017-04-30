@@ -267,7 +267,6 @@
         </div>
     {/if}
     <input class="state_submit hidden" name="toggle_move" type="submit" value="{$CONST.MOVE}">
-    <input type="hidden" name="serendipity[oldDir]" value="">
     <input type="hidden" id="newDir" name="serendipity[newDir]">
     </form>
     <div id="move-popup" class="mfp-hide">
@@ -275,7 +274,7 @@
         <form>
             <div class="form_select">
                 <select >
-                    <option value="uploadRoot">{$CONST.BASE_DIRECTORY}</option>
+                    <option value="">{$CONST.BASE_DIRECTORY}</option>
                 {foreach $media.paths AS $folderFoot}
                     <option value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
                 {/foreach}

@@ -2109,6 +2109,21 @@ function serendipity_escapeshellarg($string) {
     return escapeshellarg(str_replace('%', '', $string));
 }
 
+
+
+/**
+ * Move file with all thumbnails to given directory and update database and entries
+ * */
+function serendipity_moveFileTo($id, $dir) {
+    global $serendipity;
+    $file = serendipity_fetchImageFromDatabase($id);
+
+    serendipity_renameFile($id, $file['name'], $dir);
+    serendipity_updateImageInDatabase(array('path' => $dir), $id);
+    serendipity_updateImageInEntries($id);
+    return true;
+}
+
 /**
  * Rename a media directory
  *
@@ -2116,7 +2131,147 @@ function serendipity_escapeshellarg($string) {
  * @param   string  Old directory name
  * @param   string  New directory name
  */
-function serendipity_renameDir($old, $new) {
+function serendipity_renameDir($oldDir, $newDir) {
+    global $serendipity;
+    # Plan: 1. Get id of all images under $oldDir (including those in subdirs)
+    #       2. Move $oldDir to newDir
+    #       3. Update image (path) in database
+    #       3. Update image in entries via serendipity_updateImageInEntries
+    $imgBase = serendipity_dirSlash('end', $serendipity['serendipityPath'] . $serendipity['uploadPath']);
+
+    $total = null;
+    $images = serendipity_fetchImagesFromDatabase(0, 0, $total, false, false, $oldDir);
+
+    if (! file_exists("${imgBase}${newDir}")) {
+        rename("${imgBase}${oldDir}", "${imgBase}${newDir}");
+
+        foreach($images as $image) {
+            serendipity_updateImageInDatabase(
+                array('path' => preg_replace('@' . preg_quote(serendipity_dirSlash('end', $oldDir)) . '@', serendipity_dirSlash('end', $newDir), $image['path'], 1)), // we use preg_replace and not str_replace to be able to limit to exacty one replacement, preventing issues when a path has loops in it
+                $image['id']
+            );
+            serendipity_updateImageInEntries($image['id']);
+        }
+
+        return true;
+    }
+    return false;
+    
+}   
+
+/**
+ * Rename a file in the ML (upload folder and database). Also edit entries to use the new name, and move the thumbnails
+ *
+ * @param   Id of the image to be renamed
+ * @param   The new name (without extension)
+ * @path    The new path to be prepended to the new name, if the file is also to be moved 
+ * */
+function serendipity_renameFile($id, $newName, $path = null) {
+    global $serendipity;
+    $file = serendipity_fetchImageFromDatabase($id);
+
+    if (!is_array($file) || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
+        return;
+    }
+    $oldName = $file['name'];
+    
+    if (LANG_CHARSET == 'UTF-8') {
+        $newName = utf8_encode($newName);
+    }
+
+    if ($path === null) {
+        $path = $file['path'];
+    }
+    
+    $newName = serendipity_uploadSecure(serendipity_makeFilename($newName), true);
+    $imgBase = $serendipity['serendipityPath'] . $serendipity['uploadPath'];
+    
+    $newPath = "{$imgBase}{$path}{$newName}.{$file['extension']}";
+    
+    rename("{$imgBase}{$file['path']}{$file['realname']}", $newPath);
+    
+    serendipity_renameThumbnails($id, "{$path}$newName");
+    
+    serendipity_updateImageInDatabase(array('name' => $newName, 'realname' => basename($newPath)), $id);
+    serendipity_updateImageInEntries($id);
+}
+
+/**
+ * Rename thumbnails linked to $id
+ * 
+ * */
+function serendipity_renameThumbnails($id, $newName) {
+    global $serendipity;
+    
+    $file = serendipity_fetchImageFromDatabase($id);
+
+    $thumbnails = serendipity_getThumbnails($id);
+    foreach($thumbnails as $thumbnail) {
+        $newThumbnail = str_replace("{$file['path']}{$file['name']}", $newName, $thumbnail);
+        rename($thumbnail, $newThumbnail);
+    }
+    return true;
+}
+
+/**
+ * Get an array of existing thumbnails linked to the image with the given id
+ *
+ * */
+function serendipity_getThumbnails($id) {
+    global $serendipity;
+    
+    $file = serendipity_fetchImageFromDatabase($id);
+    $name = $file['name'];
+
+    $imagePath = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['realname'];
+    $thumbnailBase = str_replace($file['extension'], '', $imagePath);
+    $uploadDir = dirname($imagePath);
+
+    return glob("$thumbnailBase*{$file['thumbnail_name']}.{$file['extension']}");
+}
+
+/**
+ * Set image references to current path in all articles linking to them via the ML
+ * */
+function serendipity_updateImageInEntries($id) {
+    global $serendipity;
+    
+    $file = serendipity_fetchImageFromDatabase($id);
+    $imageHTTPPath = $serendipity['defaultBaseURL'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['realname'];
+    $thumbnailHTTPPath = str_replace(".{$file['extension']}", "{$file['thumbnail_name']}.{$file['extension']}", $imageHTTPPath);
+
+
+    $q = "SELECT id, body, extended FROM {$serendipity['dbPrefix']}entries
+          WHERE
+          body LIKE '%<!-- s9ymdb:$id -->%' OR extended LIKE '%<!-- s9ymdb:$id -->%'";
+
+    $entries = serendipity_db_query($q, false, 'assoc');
+
+    if (is_array($entries) && !empty($entries)) {
+        foreach($entries as $entry) {
+            $pattern = "@(<!-- s9ymdb:$id -->.*) src=[\"']([^'\"]+)[\"']@";
+
+            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath) {
+                if (strpos(matches[2],  "{$file['thumbnail_name']}.{$file['extension']}") === false) {
+                    // the image linked not to the thumbnail
+                    return "{$matches[1]} src='$imageHTTPPath'";
+                } else {
+                    return "{$matches[1]} src='$thumbnailHTTPPath'";
+                }
+            };
+            
+            $entry['body'] = preg_replace_callback($pattern, $callback, $entry['body']);
+            $entry['extended'] = preg_replace_callback($pattern, $callback, $entry['extended']);
+
+            $uq = "UPDATE {$serendipity['dbPrefix']}entries
+                                        SET
+                                        body = '" . serendipity_db_escape_string($entry['body']) . "' ,
+                                        extended = '" . serendipity_db_escape_string($entry['extended']) . "'
+                                        WHERE
+                                        id =  " . serendipity_db_escape_string($entry['id']);
+            serendipity_db_query($uq);
+        }
+    }
 }
 
 /**
@@ -3378,7 +3533,10 @@ function serendipity_checkMediaSize($file) {
 }
 
 /**
- * Moves a media directory
+ * DEPRECATED. Use the functions serendipity_renameDir and serendipity_moveFile instead. This is only
+ * a wrapper around those, for backwards compatibility
+ *
+ * Moves a media directory 
  *
  * @param  string   The old directory.
  *                  This can be NULL or (an empty / a) STRING for re-name/multiCheck move comparison events
@@ -3391,407 +3549,11 @@ function serendipity_checkMediaSize($file) {
  */
 function serendipity_moveMediaDirectory($oldDir, $newDir, $type = 'dir', $item_id = null, $file = null) {
     global $serendipity;
-
-    // paranoid case for updating an old image id entry - else we have a new entry incrementary
-    if (is_null($item_id) && isset($file['id']) && $file['id'] > 0) $item_id = $file['id'];
-
-    if (!$item_id || $item_id < 1) {
-        // only print message if not posting a case_directoryEdit submit
-        if (empty($serendipity['POST']['save'])) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
-            printf(ERROR_FILE_NOT_EXISTS, $item_id);
-            echo "</span>\n";
-            return false;
-        }
-    }
-
-    // Prepare data for the database, any hooks and the real file move, by case AREA:
-    //   DIR     = Media directory form edit,
-    //   FILE    = File rename or File bulk move,
-    //   FILEDIR = Media properties form edit
-
-    // images.inc case 'directoryEdit', which is ML Directories form, via ML case 'directorySelect'
     if ($type == 'dir') {
-
-        $real_oldDir = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir;
-        $real_newDir = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir;
-
-        if (!is_dir($real_oldDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
-            printf(ERROR_FILE_NOT_EXISTS, $oldDir);
-            echo "</span>\n";
-            return false;
-        }
-
-        if (is_dir($real_newDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
-            printf(ERROR_FILE_EXISTS, $newDir);
-            echo "</span>\n";
-            return false;
-        }
-
-        if (!rename($real_oldDir, $real_newDir)) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
-            printf(MEDIA_DIRECTORY_MOVE_ERROR, $newDir);
-            echo "</span>\n";
-            return false;
-        }
-
-        echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ';
-        printf(MEDIA_DIRECTORY_MOVED, $newDir);
-        echo "</span>\n";
-
-        $dirs = serendipity_db_query("SELECT id, path
-                                        FROM {$serendipity['dbPrefix']}images
-                                       WHERE path LIKE '" . serendipity_db_escape_string($oldDir) . "%'", false, 'assoc');
-        if (is_array($dirs)) {
-            foreach($dirs AS $dir) {
-                $old = $dir['path'];
-                $new = preg_replace('@^(' . preg_quote($oldDir) . ')@i', $newDir, $old);
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
-                                         SET path = '" . serendipity_db_escape_string($new) . "'
-                                       WHERE id = {$dir['id']}");
-            }
-        }
-
-        $dirs = serendipity_db_query("SELECT groupid, artifact_id, artifact_type, artifact_mode, artifact_index
-                                        FROM {$serendipity['dbPrefix']}access
-                                       WHERE artifact_type = 'directory'
-                                         AND artifact_index LIKE '" . serendipity_db_escape_string($oldDir) . "%'", false, 'assoc');
-        if (is_array($dirs)) {
-            foreach($dirs AS $dir) {
-                $old = $dir['artifact_index'];
-                $new = preg_replace('@^(' . preg_quote($oldDir) . ')@i', $newDir, $old);
-                serendipity_db_query("UPDATE {$serendipity['dbPrefix']}access
-                                         SET artifact_index = '" . serendipity_db_escape_string($new) . "'
-                                       WHERE groupid        = '" . serendipity_db_escape_string($dir['groupid']) . "'
-                                         AND artifact_id    = '" . serendipity_db_escape_string($dir['artifact_id']) . "'
-                                         AND artifact_type  = '" . serendipity_db_escape_string($dir['artifact_type']) . "'
-                                         AND artifact_mode  = '" . serendipity_db_escape_string($dir['artifact_mode']) . "'
-                                         AND artifact_index = '" . serendipity_db_escape_string($dir['artifact_index']) . "'");
-            }
-        }
-        // hook into staticpage for the renaming regex replacements
-        // first and last two are null - only differ by being set already by their default var for the last two
-        $renameValues = array(array(
-            'from'    => null,
-            'to'      => null,
-            'thumb'   => $serendipity['thumbSuffix'],
-            'fthumb'  => null,
-            'oldDir'  => $oldDir,
-            'newDir'  => $newDir,
-            'type'    => $type,
-            'item_id' => $item_id,
-            'file'    => $file
-        ));
-        // Changing a ML directory via directoryEdit needs to run through entries too!
-        serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
-
-    // case 'rename' OR 'multidelete' (bulk multimove)
-    } else if ($type == 'file') {
-
-        // active in mean of eval or executable
-        if (serendipity_isActiveFile(basename($newDir))) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ';
-            printf(ERROR_FILE_FORBIDDEN, serendipity_specialchars($newDir));
-            echo "</span>\n";
-            return false;
-        }
-        if (!empty($file['hotlink'])) {
-            $newHotlinkFile = (false === strpos($newDir, $file['extension'])) ? $newDir . (empty($file['extension']) ? '' : '.' . $file['extension']) : $newDir;
-            serendipity_updateImageInDatabase(array('realname' => $newHotlinkFile, 'name' => $newDir), $item_id);
-        } else {
-            $parts = pathinfo($newDir);
-
-            // build new, thumb and old file names relative to Serendipity root path
-            if ($oldDir === null && $newDir != 'uploadRoot') {
-
-                // case single file re-name event (newDir = newName is passed without path!)
-                $newName = $newDir; // for better readability
-                // do we really need this?
-                if ($parts['extension'] != $file['extension']) {
-                    $file_new = $file['path'] . $newName . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                    $file_old = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                } else {
-                    $file_new = $file['path'] . $newName;
-                    $file_old = $file['path'] . $file['name'];
-                }
-                // build full thumb file names
-                $file_newthumb = $file['path'] . $newName . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                $file_oldthumb = $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                $newThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file_newthumb;
-                $oldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file_oldthumb;
-
-            } else {
-
-                // case bulkmove event (newDir is passed inclusive path! and normally w/o the filename, but we better check this though)
-                $newDir = ($newDir == 'uploadRoot') ? '' : $newDir; // Take care: remove temporary 'uploadRoot' string, in case of moving a subdir file into upload root by bulkmove
-                $_newDir = str_replace($file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']), '', $newDir);
-                // do we really need this?
-                if ($parts['extension'] != $file['extension']) {
-                    $file_new = $_newDir . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                    $file_old = $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                } else {
-                    $file_new = $_newDir . $file['name'];
-                    $file_old = $file['path'] . $file['name'];
-                }
-
-            }
-
-            // build full origin and new file path names
-            $newfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file_new;
-            $oldfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file_old;
-
-            // check files existence
-            if (file_exists($oldfile) && !file_exists($newfile)) {
-
-                // for the paranoid, securely check these build filenames again, since we really need a real file set to continue!
-                $newparts = pathinfo($newfile);
-                if ($newparts['dirname'] == '.' || (!empty($file['extension']) && empty($newparts['extension'])) || empty($newparts['filename'])) {
-                    // error new file build mismatch
-                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . $newfile . ' ' . ERROR_SOMETHING . "</span>\n";
-                    return false;
-                }
-
-                // Case re-name event, keeping a possible moved directory name for a single file
-                if ($oldDir === null) {
-                    // Move the origin file
-                    @rename($oldfile, $newfile);
-                    // do not re-name again, if item has no thumb name (eg zip object file case) and old thumb actually exists (possible missing pdf preview image on WinOS with IM)
-                    if (($newThumb != $newfile) && file_exists($oldThumb)) {
-                        // the thumb file
-                        @rename($oldThumb, $newThumb); // Keep both rename() error disabled, since we have to avoid any output in renaiming cases
-                    }
-
-                    // hook into staticpage for the renaming regex replacements
-                    $renameValues = array(array(
-                        'from'    => $oldfile,
-                        'to'      => $newfile,
-                        'thumb'   => $serendipity['thumbSuffix'],
-                        'fthumb'  => $file['thumbnail_name'],
-                        'oldDir'  => $oldDir,
-                        'newDir'  => $newDir,
-                        'type'    => $type,
-                        'item_id' => $item_id,
-                        'file'    => $file
-                    ));
-                    serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
-
-                    // renaming filenames has to update mediaproperties if set
-                    $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
-                             SET value = '" . serendipity_db_escape_string($newName . (empty($file['extension']) ? '' : '.' . $file['extension'])) . "'
-                           WHERE mediaid = " . (int)$item_id . ' AND property = "realname" AND value = "' . $file['realname'] . '"';
-                    serendipity_db_query($q);
-                    $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
-                             SET value = '" . serendipity_db_escape_string($newName) . "'
-                           WHERE mediaid = " . (int)$item_id . ' AND property = "name" AND value = "' . $file['name'] .'"';
-                    serendipity_db_query($q);
-                    $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
-                             SET value = '" . serendipity_db_escape_string($newName . (empty($file['extension']) ? '' : '.' . $file['extension'])) . "'
-                           WHERE mediaid = " . (int)$item_id . ' AND property = "TITLE" AND value = "' . $file['realname'] .'"';
-                    serendipity_db_query($q);
-
-                    serendipity_updateImageInDatabase(array('thumbnail_name' => $renameValues[0]['thumb'], 'realname' => $newName . (empty($file['extension']) ? '' : '.' . $file['extension']), 'name' => $newName), $item_id);
-
-                    // Forward user to overview (we don't want the user's back button to rename things again) ?? What does this do? Check!!!
-                }
-
-                // Case Move or Bulkmove event
-                // newDir can now be used for the uploads directory root path too
-                // Do not allow an empty string or not set newDir for the build call so we do not conflict with rename calls, which are single files only and is done above
-                // BULKMOVE vars oldfile and newfile are fullpath based see above
-                elseif (!empty($newfile)) {
-
-                    if ($newDir == 'uploadRoot') $newDir = ''; // now move back into root of /uploads dir
-
-                    // hook into staticpage for the renaming regex replacements
-                    $renameValues = array(array(
-                        'from'    => $oldfile,
-                        'to'      => $newfile,
-                        'thumb'   => $serendipity['thumbSuffix'],
-                        'fthumb'  => $file['thumbnail_name'],
-                        'oldDir'  => $oldDir,
-                        'newDir'  => $newDir,
-                        'type'    => $type,
-                        'item_id' => $item_id,
-                        'file'    => $file
-                    ));
-                    serendipity_plugin_api::hook_event('backend_media_rename', $renameValues); // eg. for staticpage entries path regex replacements
-
-                    // Move the origin file
-                    try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
-
-                    // do still need this? YES, it is definitely false, so we would not need the ternary
-                    // Rename newDir + file name in case it is called by the Bulk Move and not by rename
-                    $newDirFile = (false === strpos($newDir, $file['name'])) ? $newDir . $file['name'] : $newDir;
-
-                    foreach($renameValues AS $renameData) {
-                        // build full thumb file names
-                        $thisOldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $renameData['oldDir'] . $file['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '.' . $serendipity['thumbSuffix']) . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                        $thisNewThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDirFile . (!empty($file['thumbnail_name']) ? '.' . $renameData['thumb'] : '.' . $serendipity['thumbSuffix']) . (empty($file['extension']) ? '' : '.' . $file['extension']);
-                        // Check for existent old thumb files first, to not need to disable rename by @rename(), then  move the thumb file and catch any wrong renaming
-                        if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
-                            // the thumb file and catch any wrong renaming
-                            try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
-                        }
-                    }
-
-                    serendipity_updateImageInDatabase(array('thumbnail_name' => $renameValues[0]['thumb'], 'path' => $newDir, 'realname' => $file['realname'], 'name' => $file['name']), $item_id);
-                    // Forward user to overview (we don't want the user's back button to rename things again)
-                } else {
-                    //void
-                }
-            } else {
-                if (!file_exists($oldfile)) {
-                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_NOT_EXISTS . "</span>\n";
-                } elseif (file_exists($newfile)) {
-                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_EXISTS . "</span>\n";
-                } else {
-                    echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . "</span>\n";
-                }
-
-                return false;
-            }
-        }
-
-    // used solely by serendipity_parsePropertyForm base_properties when changing the file selected path within mediaproperties form
-    } elseif ($type == 'filedir') {
-
-        serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images
-                                 SET path = '" . serendipity_db_escape_string($newDir) . "'
-                               WHERE id   = " . (int)$item_id);
-        $pick = serendipity_db_query("SELECT * FROM  {$serendipity['dbPrefix']}images
-                               WHERE id   = " . (int)$item_id, true, 'assoc');
-
-        // Move thumbs - Rebuild full origin and new file path names by the new picked file array
-        $oldfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
-        $newfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
-
-        // hook into staticpage for the renaming regex replacements
-        $renameValues = array(array(
-            'from'    => $oldfile,
-            'to'      => $newfile,
-            'thumb'   => $serendipity['thumbSuffix'],
-            'fthumb'  => $pick['thumbnail_name'],
-            'oldDir'  => $oldDir,
-            'newDir'  => $newDir,
-            'type'    => $type,
-            'item_id' => $item_id,
-            'file'    => $pick,
-            'name'    => $pick['name']
-        ));
-        serendipity_plugin_api::hook_event('backend_media_rename', $renameValues);
-
-        // Move the origin file
-        try { rename($oldfile, $newfile); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
-
-        foreach($renameValues AS $renameData) {
-            $thisOldThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $oldDir . $pick['name'] . (!empty($renameData['fthumb']) ? '.' . $renameData['fthumb'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
-            $thisNewThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $newDir . $pick['name'] . (!empty($pick['thumbnail_name']) ? '.' . $pick['thumbnail_name'] : '') . (empty($pick['extension']) ? '' : '.' . $pick['extension']);
-            // Check for existent old thumb files first, to not need to disable rename by @rename(),then  move the thumb file and catch any wrong renaming
-            if (($thisNewThumb != $newfile) && file_exists($thisOldThumb)) {
-                // the thumb file and catch any wrong renaming
-                try { rename($thisOldThumb, $thisNewThumb); } catch (Exception $e) { echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_SOMETHING . ': '.$e->getMessage() . "</span>\n"; }
-            }
-        }
-        // no need to use serendipity_updateImageInDatabase() here since already done in this case start
-        // ???? Forward user to overview (we don't want the user's back button to rename things again)
-
-        // prepare for message
-        $thisnew = (empty($newDir) ? $serendipity['uploadPath'] : '') . $newDir . $pick['name'];
-        $thisExt = isset($pick['extension']) ? '.'.$pick['extension'] : '';
-
-        if (file_exists($newfile)) {
-            echo '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ';
-            printf(MEDIA_DIRECTORY_MOVED, $thisnew . $thisExt);
-            echo "</span>\n";
-        }
-
-    } // case dir, file, filedir end
-
-    // Entry REPLACEMENT AREA
-
-    // Only MySQL supported, since I don't know how to use REGEXPs differently. // Ian: we should improve this to all!
-    if ($serendipity['dbType'] != 'mysql' && $serendipity['dbType'] != 'mysqli') {
-        echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ENTRY . "</span>\n";
-        return true;
+        serendipity_renameDir($oldDir, $newDir);
+    } else {
+        return serendipity_moveFileTo($item_id, $newDir);
     }
-
-    // Prepare the SELECT query for filetypes
-    if ($type == 'filedir' || $type == 'file') {
-
-        // get the right $file, which is array or null, by type
-        $_file  = ($type == 'filedir') ? $pick : $file;
-        // check oldDir in bulkmove case
-        $oldDir = ($type == 'file' && !is_null($oldDir)) ? str_replace($_file['name'].'.'.$_file['extension'], '', $oldDir) : $oldDir;
-
-        // Path patterns to SELECT en detail to not pick path parts in a loop
-        if ($oldDir === null) {// care for file renaming with oldpath
-            $oldDirFile  = $_file['path'] . $_file['name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-            $oldDirThumb = $_file['path'] . $_file['name'] . '.' . $_file['thumbnail_name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        } else {
-            $oldDirFile  = $oldDir . $_file['name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-            $oldDirThumb = $oldDir . $_file['name'] . '.' . $_file['thumbnail_name'] . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        }
-        if ($type == 'filedir' && !isset($newDirFile)) {
-            $newDirFile = (strpos($newDir, $_file['name']) === FALSE) ? $newDir . $_file['name'] : $newDir;
-        }
-        if ($type == 'file' && $oldDir === null) {
-            $newDirFile = (empty($newDirFile)) ? $newDir : $newDirFile; // for file renamings $newDirFile has to be $newDir ( which is subdir and new NAME w/o ext)
-        }
-        $ispOldFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile;
-
-    } elseif($type == 'dir') {
-        // since this is case 'dir', we do not have a filename and have to rename replacement File vars to oldDir and newDir values for the update preg_replace match
-        $oldDirFile = $oldDir;
-        $newDirFile = $newDir;
-        $ispOldFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile . (($_file['extension']) ? '.'.$_file['extension'] : '');
-    }
-
-    // Please note: imageselectorplus plugin quickblog is either quickblog:FullPath or quickblog:|?(none|plugin|js|_blank)|FullPath
-    // SELECTing the entries uses a more detailled approach to be as precise as possible, thus we need to reset these vars for the preg_replace later on in some cases
-    $q = "SELECT id, body, extended
-                FROM {$serendipity['dbPrefix']}entries
-               WHERE body     REGEXP '(src=|href=|window.open.|<!--quickblog:)(\'|\"|\\\|?(plugin|none|js|_blank)?\\\|?)(" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($ispOldFile) . ")'
-                  OR extended REGEXP '(src=|href=|window.open.)(\'|\")(" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirFile) . "|" . serendipity_db_escape_String($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . "|" . serendipity_db_escape_String($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $oldDirThumb) . ")'
-    ";
-    $entries = serendipity_db_query($q, false, 'assoc');
-
-    if (is_array($entries) && !empty($entries)) {
-        // here we need to match thumbs too, so we do not want the extension, see detailled SELECT regex note
-        if ($type == 'file' && $oldDir === null) {
-            $_ispOldFile = $oldfile; // these vars are more exact in every case
-            $_ispNewFile = $newfile; // dito
-            $oldDirFile = $_file['path'] . $oldDirFile; // oldDirFile is missing a possible subdir path for the preg_replace
-            $newDirFile = $_file['path'] . $newDirFile; // newDirFile - dito
-        } else {
-            $_ispOldFile = $ispOldFile;
-            $_ispNewFile = $serendipity['serendipityPath'] . $serendipity['uploadHTTPPath'] . $newDirFile . (($_file['extension']) ? '.'.$_file['extension'] : '');
-        }
-        // last paranoidal check
-        $_oldDirFile = (strpos($oldDirFile, $_file['extension']) === FALSE) ? $oldDirFile : $oldDir . $_file['name'];
-
-        // what we actually need here, is oldDirFile w/o EXT to newDirFile w/o EXT and full ispOldFile path to full ispNewFile path !!!
-        foreach($entries AS $entry) {
-            $entry['body']     = preg_replace('@(src=|href=|window.open.)(\'|")(' . preg_quote($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $_oldDirFile) . '|' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $_oldDirFile) . ')@', '\1\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDirFile, $entry['body']);
-            $entry['body']     = preg_replace('@(<!--quickblog:)(\\|?(plugin|none|js|_blank)?\\|?)(' . preg_quote($_ispOldFile) . ')@', '\1\2' . $_ispNewFile, $entry['body']);
-            $entry['extended'] = preg_replace('@(src=|href=|window.open.)(\'|")(' . preg_quote($serendipity['baseURL'] . $serendipity['uploadHTTPPath'] . $_oldDirFile) . '|' . preg_quote($serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $_oldDirFile) . ')@', '\1\2' . $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $newDirFile, $entry['extended']);
-
-            $uq = "UPDATE {$serendipity['dbPrefix']}entries
-                                     SET body     = '" . serendipity_db_escape_string($entry['body']) . "' ,
-                                         extended = '" . serendipity_db_escape_string($entry['extended']) . "'
-                                   WHERE id       =  " . serendipity_db_escape_string($entry['id']);
-            serendipity_db_query($uq);
-        }
-
-        if ($oldDir !== null){
-            $imgmovedtodir = sprintf(MEDIA_DIRECTORY_MOVE_ENTRIES, count($entries));
-            echo '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . $imgmovedtodir . "</span>\n";
-        }
-
-    }
-
-    return true;
 }
 
 /**
