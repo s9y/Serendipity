@@ -354,7 +354,8 @@ switch($serendipity['GET']['adminAction']) {
                     }
                 }
 
-                $smartentries[] = array(
+
+                $smartentry = array(
                     'id'            => $ey['id'],
                     'title'         => serendipity_specialchars($ey['title']),
                     'timestamp'     => (int)$ey['timestamp'],
@@ -368,6 +369,8 @@ switch($serendipity['GET']['adminAction']) {
                     'archive_link'  => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
                     'preview_link'  => '?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;' . serendipity_setFormToken('url') . '&amp;serendipity[id]=' . $ey['id']
                 );
+                serendipity_plugin_api::hook_event('backend_view_entry', $smartentry);
+                $smartentries[] = $smartentry;
 
             }
 
