@@ -1238,7 +1238,7 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                     'is_comment_moderate'   => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'moderate' ? true: false)
                 );
 
-                if ($serendipity['serendipityAuthedUser'] === true) {
+               if ($serendipity['serendipityAuthedUser'] === true && !isset($serendipity['POST']['preview'])) {
                     $userData = array();
                     $userData['name'] = $serendipity['realname'];
                     $userData['email'] = $serendipity['email'];

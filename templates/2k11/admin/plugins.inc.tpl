@@ -79,7 +79,7 @@
         <span class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.NO_UPDATES}</span>
     {else}
         {foreach $pluggroups AS $pluggroup => $groupstack}
-            {if $only_group && $pluggroup != $only_group}{continue}{/if}
+            {if $only_group && $pluggroup != $only_group || empty($pluggroup)}{continue}{/if}
             <h3>{foreach $groupnames as $available_group => $available_name}{if $pluggroup == $available_group}{$available_name}{/if}{/foreach}</h3>
             {if $only_group == 'UPGRADE' && $pluggroups['UPGRADE']|@count > 1}
                 <button id="updateAll">Update All</button>
