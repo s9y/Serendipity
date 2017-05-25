@@ -10,7 +10,7 @@ hgroup,
 main,
 nav,
 section,
-summary {
+.no-details summary {
     display: block;
 }
 
