@@ -44,3 +44,4 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE', 'Reihenfolge der Optionen');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC', 'Hier kann ausgewählt werden, welche Optionen in welcher Reihenfolge im Editiermodus des Artikels angezeigt werden.');
 
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_MULTI_AUTHORS', 'Mehrere Autoren');
