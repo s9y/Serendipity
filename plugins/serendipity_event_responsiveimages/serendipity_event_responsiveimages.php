@@ -18,7 +18,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.2');
+        $propbag->add('version',       '0.2.1');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -155,7 +155,17 @@ class serendipity_event_responsiveimages extends serendipity_event
             } else {
                 $srcset = $this->createSrcset($imgId);
             }
-            $text = preg_replace("@(<!-- s9ymdb:$imgId -->.*)src=@", "$1 $srcset src=", $text);
+
+            $callback = function($matches) use ($srcset) {
+                if (strpos($matches[1],  "srcset") === false) {
+                    // the image has not yet an srcset, at least at the position where we inset it normally
+                    return "{$matches[1]} $srcset src=";
+                } else {
+                    return "{$matches[1]} src=";
+                }
+            };
+            
+            $text = preg_replace_callback("@(<!-- s9ymdb:$imgId -->.*?)src=@", $callback, $text);
         }
 
         return $text;
