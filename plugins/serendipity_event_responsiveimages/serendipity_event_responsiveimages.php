@@ -18,7 +18,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.2.1');
+        $propbag->add('version',       '0.2.2');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -76,6 +76,8 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
+        $this->breakpoints = [1600, 1200, 600]; # This can later on be overwritten by the theme
+        $this->thumbWidths = [1200, 800, 400]; # This can later on be overwritten by the theme
 
         if (isset($hooks[$event])) {
 
@@ -102,33 +104,17 @@ class serendipity_event_responsiveimages extends serendipity_event
                     // We now just need to add the additional array elements, with the new sizes and suffix.
                     // We can use $addData, containing the path to the full size file, to get the starting width
                     $origSize = serendipity_getimagesize($addData);
-                    $eventData[] = array(
-                                        'thumbSize' => ['width' => $origSize[0] * 3 / 4, 'height' => $origSize[1] * 3 / 4],
-                                        'thumb' => '3X.' . $serendipity['thumbSuffix']
-                                    );
 
-                    $eventData[] = array(
-                                        'thumbSize' => ['width' => $origSize[0] / 2, 'height' => $origSize[1] / 2],
-                                        'thumb' => '2X.' . $serendipity['thumbSuffix']
+                    for ($i = 0; $i < count($this->thumbWidths); $i++) {
+                        $thumbWidth = $this->thumbWidths[$i];
+                        if ($thumbWidth < $origSize[0]) {
+                            $eventData[] = array(
+                                        'thumbSize' => ['width' => $thumbWidth, 'height' => $origSize[1] * ($thumbWidth / $origSize[0])],
+                                        'thumb' => $thumbWidth . 'W.' . $serendipity['thumbSuffix']
                                     );
-
-                    $eventData[] = array(
-                                        'thumbSize' => ['width' => $origSize[0] / 4, 'height' => $origSize[1] / 4],
-                                        'thumb' => '1X.' . $serendipity['thumbSuffix'] 
-                                    );
-                    if ($serendipity['thumbConstraint'] == 'width' || ($serendipity['thumbConstraint'] == 'largest' && $origSize[0] > $origSize[1]) ) {
-                        $ratio = $serendipity['thumbSize'] / $origSize[0];
-                        $thumbnailWidth = $serendipity['thumbSize'];
-                    } else {
-                        // the thumbnail will be scaled based on its height
-                        $ratio = $serendipity['thumbSize'] / $origSize[1];
-                        $thumbnailWidth = $origSize[0] * $ratio;
+                        }
                     }
-                        
-                    $eventData[] = array(
-                                        'thumbSize' => ['width' => $thumbnailWidth / 2, 'height' => ($origSize[1] * $ratio) / 2],
-                                        'thumb' => 'halfThumbnail.' . $serendipity['thumbSuffix'] 
-                                    );
+                    
                     break;
                 default:
                     return false;
@@ -141,8 +127,7 @@ class serendipity_event_responsiveimages extends serendipity_event
     }
 
     /* Given an entry text, replace each image linked to the ML with an img element containing
-     * an srcset. TODO: Which sizes to create depends on the theme settings, if none are set
-     * use a sound default (original=4x, 3x, 2x, 1x, default thumbnail, half thumbnail)
+     * an srcset.
      * */
     function _responsive_markup($text)
     {
@@ -158,7 +143,7 @@ class serendipity_event_responsiveimages extends serendipity_event
 
             $callback = function($matches) use ($srcset) {
                 if (strpos($matches[1],  "srcset") === false) {
-                    // the image has not yet an srcset, at least at the position where we inset it normally
+                    // the image has not yet an srcset, at least at the position where we insert it normally
                     return "{$matches[1]} $srcset src=";
                 } else {
                     return "{$matches[1]} src=";
@@ -177,46 +162,30 @@ class serendipity_event_responsiveimages extends serendipity_event
     function createSrcset($id, $maxWidth = 20000) {
         global $serendipity;
         
-        $imgBase = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'];
         $origImage = serendipity_fetchImageFromDatabase($id);
-        $extension = $origImage['extension'];
+        $imagePath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $origImage['path'] . $origImage['realname'];
         
-        $width4X = $origImage['dimensions_width'];
-        $path4X = $imgBase . $origImage['realname'];
-        
-        $width3X = $width4X * 3 / 4;
-        $path3X = $imgBase . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".3X.{$serendipity['thumbSuffix']}.$extension";
-        
-        $width2X = $width4X / 2;
-        $path2X = $imgBase . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".2X.{$serendipity['thumbSuffix']}.$extension";
-        
-        $width1X = $width4X / 4;
-        $path1X = $imgBase . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".1X.{$serendipity['thumbSuffix']}.$extension";
+        $thumbnails = serendipity_getThumbnails($id);
 
-        $thumbnailPath = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".{$serendipity['thumbSuffix']}.$extension";
-        $widthThumbnail = serendipity_getimagesize($thumbnailPath)[0];
-        $thumbnail = $imgBase . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".{$serendipity['thumbSuffix']}.$extension";
-
-        $widthHalfThumbnail = $widthThumbnail / 2;
-        $halfThumbnail = $imgBase . preg_replace("@.$extension\z@", '', $origImage['realname']) . ".halfThumbnail.{$serendipity['thumbSuffix']}.$extension";
+        $srcset = "srcset=\"$imagePath {$origImage['dimensions_width']}w,";
         
-        $srcset = "srcset='";
-        if ($width4X <= $maxWidth) {
-            $srcset .= "$path4X {$width4X}w,";
+        for ($i = 0; $i < count($this->thumbWidths); $i++) {
+            $thumbWidth = $this->thumbWidths[$i];
+            $matchedThumbnail = false;
+            foreach ($thumbnails as $thumbnail) {
+                if (strpos($thumbnail, $thumbWidth . 'W') !== false) {
+                    $matchedThumbnail = $thumbnail;
+                    break;
+                }
+            }
+            if ($matchedThumbnail) {
+                $thumbnailHttp = str_replace($serendipity['serendipityPath'], $serendipity['serendipityHTTPPath'], $matchedThumbnail);
+                $breakpoint = $this->breakpoints[$i];
+                $srcset .= "{$thumbnailHttp} {$breakpoint}w,";
+            }
         }
-
-        if ($width3X <= $maxWidth) {
-            $srcset .= "$path3X {$width3X}w,";
-        }
+        $srcset .= '"';
         
-        if ($width2X <= $maxWidth) {
-            $srcset .= "$path2X {$width2X}w,";
-        }
-        
-        if ($width1X <= $maxWidth) {
-            $srcset .= "$path1X {$width1X}w,";
-        }
-        $srcset .= "$thumbnail {$widthThumbnail}w, $halfThumbnail {$widthHalfThumbnail}w'";
         
         return  $srcset;
     }
