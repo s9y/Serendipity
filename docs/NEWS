@@ -1,5 +1,7 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
+    * Add backend_view_entry hook, that is executed for every entry
+      in the backend entry list
 
     * Updated entryproperties plugin to support a custom property for
       multiple ownership of an article
