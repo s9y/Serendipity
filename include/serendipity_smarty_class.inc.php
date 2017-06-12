@@ -121,15 +121,15 @@ class Serendipity_Smarty extends Smarty
 
         $template_engine = serendipity_get_config_var('template_engine');
         $template_dirs   = array();
-
+        
+        // first add template path
+        $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
+        // then fallback engines (which should never be a comma separated list)
         if ($template_engine) {
             $p = explode(',', $template_engine);
             foreach($p AS $te) {
                 $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . trim($te) . '/';
             }
-        } else {
-            // this is tested without need actually, but it makes the directory setter fallback chain a little more precise
-            $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template'];
         }
         $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['defaultTemplate'];
         $template_dirs[] = $serendipity['serendipityPath'] . $serendipity['templatePath'] . $serendipity['template_backend'];
