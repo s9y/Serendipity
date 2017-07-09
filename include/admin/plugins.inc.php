@@ -222,7 +222,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
             $props['requirements'] = unserialize($props['requirements']);
 
-            if (empty($props['changelog']) && @file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+            if (empty($props['changelog']) && @file_exists(dirname($props['plugin_file']) . '/ChangeLog')) {
                 $props['changelog'] = 'plugins/' . $props['pluginPath'] . '/ChangeLog';
             }
 
