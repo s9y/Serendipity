@@ -1,5 +1,9 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
+
+    * Adapt .htacess default rules to exclude rewriting documentation
+      (Issue #521)
+
     * Add backend_view_entry hook, that is executed for every entry
       in the backend entry list
 
