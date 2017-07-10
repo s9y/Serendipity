@@ -266,6 +266,10 @@ $tasks = array(array('version'   => '0.5.1',
                      'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_202, array('internals'), true),
                      'desc'      => 'The following old dead files will be removed from your system.<br><pre>' . implode(', ', $dead_files_202) . '</pre>'),
 
+               array('version'   => '2.2.0-beta2',
+                     'function'  => 'serendipity_upgrader_rewriteFeedIcon',
+                     'title'     => 'Update .htaccess file',
+                     'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.',
 );
 
 /* Fetch SQL files which needs to be run */
