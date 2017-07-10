@@ -269,7 +269,7 @@ $tasks = array(array('version'   => '0.5.1',
                array('version'   => '2.2.0-beta2',
                      'function'  => 'serendipity_upgrader_rewriteFeedIcon',
                      'title'     => 'Update .htaccess file',
-                     'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.',
+                     'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.'),
 );
 
 /* Fetch SQL files which needs to be run */
