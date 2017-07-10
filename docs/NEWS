@@ -1,6 +1,9 @@
 Version 2.1.2 ()
 ------------------------------------------------------------------------
 
+    * Adapt .htacess default rules to exclude rewriting documentation
+      (Issue #521)
+
     * Fix a regression in Net/DNSBL regarding
       serendipity_event_spamblock_rbl and
       serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
