@@ -2252,7 +2252,7 @@ function serendipity_updateImageInEntries($id) {
             $pattern = "@(<!-- s9ymdb:$id -->.*) src=[\"']([^'\"]+)[\"']@";
 
             $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath) {
-                if (strpos(matches[2],  "{$file['thumbnail_name']}.{$file['extension']}") === false) {
+                if (strpos($matches[2],  "{$file['thumbnail_name']}.{$file['extension']}") === false) {
                     // the image linked not to the thumbnail
                     return "{$matches[1]} src='$imageHTTPPath'";
                 } else {
