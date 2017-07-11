@@ -267,7 +267,7 @@ $tasks = array(array('version'   => '0.5.1',
                      'desc'      => 'The following old dead files will be removed from your system.<br><pre>' . implode(', ', $dead_files_202) . '</pre>'),
 
                array('version'   => '2.2.0-beta2',
-                     'function'  => 'serendipity_upgrader_rewriteFeedIcon',
+                     'function'  => 'serendipity_installFiles',
                      'title'     => 'Update .htaccess file',
                      'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.'),
 );
