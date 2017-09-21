@@ -110,7 +110,7 @@ function debug_ErrorLevelType($type)
 
 
 /**
- * Set our own exeption handler to convert all errors into exeptions automatically
+ * Set our own exception handler to convert all errors into exceptions automatically
  * function_exists() avoids 'cannot redeclare previously declared' fatal errors in XML feed context.
  *
  * See Notes about returning false
@@ -122,17 +122,22 @@ function debug_ErrorLevelType($type)
 if (!function_exists('errorToExceptionHandler')) {
     function errorToExceptionHandler($errNo, $errStr, $errFile = '', $errLine = NULL, $errContext = array()) {
         global $serendipity;
+
+        // By default, we will continue our process flow, unless:
         $exit = false;
-        switch ( $errNo ) {
+
+        switch ($errNo) {
             case E_ERROR:
             case E_USER_ERROR:
                 $type = 'Fatal Error';
                 $exit = true;
                 break;
+
             case E_USER_WARNING:
             case E_WARNING:
                 $type = 'Warning';
                 break;
+
             case E_USER_NOTICE:
             case E_NOTICE:
             case @E_STRICT:
@@ -140,64 +145,82 @@ if (!function_exists('errorToExceptionHandler')) {
             case @E_USER_DEPRECATED:
                 $type = 'Notice';
                 break;
+
             case @E_RECOVERABLE_ERROR:
                 $type = 'Catchable';
                 break;
+
             default:
                 $type = 'Unknown Error';
                 $exit = true;
                 break;
         }
-        $rep  = ini_get('error_reporting');
-        $args = func_get_args();
 
-        // respect user has set php error_reporting to not display any errors at all
-        if (!($rep & $errStr)) { return false; }
-        // user used @ to specify ignoring all errors or $php_errormsg messages returned with error_reporting = 0
-        if ($rep == 0) { return false; }
-        // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect
-        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { return false; }
+        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting, 
+        // and not the one in our current content. @-silenced errors would otherwise never be caught on.
+        $rep  = error_reporting();
+
+        // Bypass error processing because it's @-silenced.
+        if ($rep == 0) { 
+            return false; 
+        }
+
+        // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect this:
+        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { 
+            return false; 
+        }
+
         // Several plugins might not adapt to proper style. This should not completely kill our execution.
         if ($serendipity['production'] !== 'debug' && preg_match('@Declaration.*should be compatible with@i', $args[1])) {
             #if (!headers_sent()) echo "<strong>Compatibility warning:</strong> Please upgrade file old '{$args[2]}', it contains incompatible signatures.<br/>Details: {$args[1]}<br/>";
             return false;
         }
-        // any other errors go here - throw errors as exception
-        if ($serendipity['production'] === 'debug') {
 
-            // We don't want the notices - but everything else !
-            echo " == FULL DEBUG ERROR MODE == \n";
-            echo '<pre>';
-            // trying to be as detailled as possible - but avoid using args containing sensibel data like passwords
-            if (function_exists('debug_backtrace') && version_compare(PHP_VERSION, '5.3.6') >= 0) {
-                if ( version_compare(PHP_VERSION, '5.4') >= 0 ) {
-                    $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8);
-                } else {
-                    $debugbacktrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-                }
-                print_r($debugbacktrace);
-            }
-            //print_r($args); // debugging [Use with care! Not to public, since holding password and credentials!!!]
-            // debugbacktrace is nice, but additional it is good to have the verbosity of SPL EXCEPTIONS, except for db connect errors
-        }
-        if ($serendipity['production'] === false) {
-            echo " == TESTING ERROR MODE == \n";
-        }
-        if ($serendipity['production'] !== true) {
-            if (!$serendipity['dbConn'] || $exit) {
-                echo '<p><b>' . $type.':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-            } else {
-                echo '<pre style="white-space: pre-line;">';
-                throw new \ErrorException($type.': '.$errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
-                echo '</pre>'; // if using throw new ... this ending tag will not be send and displayed, but it still looks better and browsers don't really care
-            }
-            if (!$serendipity['dbConn'] || $exit) exit; // make sure to exit in case of database connection errors.
+        $args = func_get_args();
+
+        /* 
+         * $serendipity['production'] can be:
+         *
+         * (bool) TRUE:         Live-blog, conceal error messages
+         * (bool) FALSE         Beta/alpha builds
+         * (string) 'debug'     Developer build, specifically enabled.
+         */
+
+        if ($serendipity['production'] !== 'debug') {
+            $debug_note = '<br />For more details set $serendipity[\'production\'] = \'debug\' in serendipity_config_local.inc.php to receive a stack-trace.';
         } else {
-            if( $serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN ) {
-                // ToDo: enhance for more special serendipity error needs
+            $debug_note = '';
+        }
+
+        // Debug environments shall be verbose...
+        if ($serendipity['production'] === 'debug') {
+            echo " == ERROR-REPORT (DEBUGGING ENABLED) == <br />\n";
+            echo " == (When you copy this debug output to a forum or other places, make sure to remove your username/passwords, as they may be contained within function calls) == \n";
+            echo '<pre>';
+            debug_print_backtrace(); // Unlimited output, debugging shall show us everything.
+            echo "</pre>";
+            $debug_note = '';
+        } elseif ($serendipity['production'] === false) {
+            echo " == ERROR-REPORT (BETA/ALPHA-BUILDS) == \n";
+        }
+
+        if ($serendipity['production'] !== true) {
+            // Display error (production: FALSE and production: 'debug')
+            echo '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
+
+            echo '<pre style="white-space: pre-line;">';
+            throw new \ErrorException($type . ': ' . $errStr, 0, $errNo, $errFile, $errLine); // tracepath = all, if not ini_set('display_errors', 0);
+
+            if (!$serendipity['dbConn'] || $exit) {
+                exit; // make sure to exit in case of database connection errors or fatal errors.
+            }
+        } else {
+            // Only display error (production blog) if an admin is logged in, else we discard the error.
+
+            if ($serendipity['serendipityUserlevel'] >= USERLEVEL_ADMIN) {
                 $str  = " == SERENDIPITY ERROR == ";
-                $str .= '<p>' . $errStr . ' in ' . $errFile . ' on line ' . $errLine . '</p>';
-                #var_dump(headers_list());
+                $str .= '<p><b>' . $type . ':</b> '.$errStr . ' in ' . $errFile . ' on line ' . $errLine . '.' . $debug_note . '</p>';
+
                 if (headers_sent()) {
                     serendipity_die($str); // case HTTP headers: needs to halt with die() here, else it will path through and gets written underneath blog content, or into streamed js files, which hardly isn't seen by many users
                 } else {
@@ -216,6 +239,22 @@ document.body.insertBefore(fragment, document.body.childNodes[0]);
     }
 }
 
+if (!function_exists('fatalErrorShutdownHandler')) {
+ /**
+  * Make fatal Errors readable
+  *
+  * @access public
+  *
+  * @return string  constant error string as Exception
+  */
+     function fatalErrorShutdownHandler() {
+         $last_error = error_get_last();
+         if ($last_error['type'] === E_ERROR) {
+             // fatal error send to
+             errorToExceptionHandler(E_ERROR, $last_error['message'], $last_error['file'], $last_error['line']);
+         }
+     }
+}
 
 if (!function_exists('file_get_contents')) {
     function file_get_contents($filename, $use_include_path = 0) {
@@ -332,7 +371,6 @@ if (ini_get('magic_quotes_gpc')) {
         array_walk($_FILES,   'serendipity_strip_quotes');
     }
 }
-
 
 // Merge get and post into the serendipity array
 $serendipity['GET']    = &$_GET['serendipity'];

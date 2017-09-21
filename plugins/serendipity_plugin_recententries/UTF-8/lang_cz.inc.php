@@ -1,5 +1,4 @@
 <?php
-# $Id: lang_cz.inc.php 1716 2007-12-20 00:35:00 VladaAjgl $
 
 /**
  *  @version $Revision: 1716 $

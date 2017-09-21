@@ -1,3 +1,0 @@
-Name: Serendipity v3.0
-Author: Carl Galloway
-Date: 26-01-2006

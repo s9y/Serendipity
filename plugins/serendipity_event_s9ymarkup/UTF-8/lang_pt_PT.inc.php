@@ -1,4 +1,4 @@
-<?php # 
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -18,5 +18,3 @@
 @define('PLUGIN_EVENT_S9YMARKUP_DESC', 'Activar a formatação do Serendipity no texto das entradas');
 @define('PLUGIN_EVENT_S9YMARKUP_TRANSFORM', 'Asteriscos à volta duma palavra (*palavra*) marcam-na como negrito, sublinhados são feitos com _palavra_.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

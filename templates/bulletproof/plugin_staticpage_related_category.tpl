@@ -45,7 +45,7 @@
 {/if}
 
 <div class="staticpage_related_category_entry_list">
-{* standart - if you use it on a shared-s9y-installation you have to correct the path to staticpage-entries-listing.tpl *}
+{* standard - if you use it on a shared-s9y-installation you have to correct the path to staticpage-entries-listing.tpl *}
 {serendipity_fetchPrintEntries category=$staticpage_related_category_id template="../../plugins/serendipity_event_staticpage/staticpage-entries-listing.tpl" limit=5 noSticky="true"}
 
 {*  if you use your own static-entries.tpl in your template, take this:  *}

@@ -1,4 +1,4 @@
-<?php # lang_de.inc.php 1.17 2009-08-20 10:10:36 VladaAjgl $
+<?php
 
 /**
  *  @version 1.17
@@ -65,3 +65,4 @@
 
 // Next lines were translated on 2009/08/20
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_DESC',        'Wenn die vorherigen Methoden fehlschlagen, versuche diese. Der Typ "' . PLUGIN_EVENT_GRAVATAR_METHOD_DEFAULT . '", "Monster ID", "Wavatar", "Identicon" und  "---" wird niemals fehlschlagen. Alles unterhalb dieser Methoden wird nicht versucht.');
+

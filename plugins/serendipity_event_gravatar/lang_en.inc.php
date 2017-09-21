@@ -1,4 +1,4 @@
-<?php # 
+<?php
 
 /**
  *  @version 
@@ -62,3 +62,4 @@
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_DESC',      'Gravatar implements some fallback methods in case, no Gravatar is known for the user. It implements also Moster ID, Identicon and Wavatar. If you choose one of these, no further method after Gravatar is evaluated, if the user entered an email.');
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_ALLWAYS',   'Gravatar always fallback');
 @define('PLUGIN_EVENT_GRAVATAR_FALLBACK_ALLWAYS_DESC', 'Use Gravatar fallbacks even if the user didn\'t enter an email (but an url or a name)');
+

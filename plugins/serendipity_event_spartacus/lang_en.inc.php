@@ -1,7 +1,7 @@
 <?php
 
 /**
- *  @version $Revision$
+ *  @version
  *  @author Translator Name <yourmail@example.com>
  *  EN-Revision: Revision of lang_en.inc.php
  */
@@ -15,11 +15,11 @@
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_BYTES_CACHE', 'Fetched %s bytes from already existing file on your server. Saving file as %s...');
 @define('PLUGIN_EVENT_SPARTACUS_FETCHED_DONE', 'Data successfully fetched.');
 @define('PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR', '<br />(The repository returned error code %s.)<br />');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<P>Unable to retrieve data from SPARTACUS repository.  Checking for repository availability on %s.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<P>The SPARTACUS health site returned an error (HTTP code %s).  This indicates that the SPARTACUS health site is down.  Please try again later.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<P><a target="_blank" href="%s">Click here to view the SPARTACUS health site</a> and determine if it is responding.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<P>SPARTACUS attempted to connect to Google and failed (error %d: %s).<br />Your server is blocking outgoing connections.  SPARTACUS will not function because it cannot contact the SPARTACUS repository.  <b>Please contact your website provider and ask them to allow outgoing connections to web sites.</b></P><P>Plugins can still be installed from your local directories.  Simply download the plugin from <a href="http://spartacus.s9y.org">the SPARTACUS web repository</a>, unzip it, and upload the files to your Serendipity plugin directory.</P>');
-@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<P>SPARTACUS can contact Google, but cannot contact the SPARATACUS repository.  It is possible that your server is blocking some outgoing connections, or that the SPARTACUS health site is down.  Please contact your website provider to ensure that outgoing connections are allowed.  <b>You will not be able to use SPARTACUS unless your server can contact the SPARTACUS repository.</b></P>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHCHECK', '<p>Unable to retrieve data from SPARTACUS repository.  Checking for repository availability on %s.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHERROR', '<p>The SPARTACUS health site returned an error (HTTP code %s).  This indicates that the SPARTACUS health site is down.  Please try again later.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHLINK', '<p><a target="_blank" href="%s">Click here to view the SPARTACUS health site</a> and determine if it is responding.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHBLOCKED', '<p>SPARTACUS attempted to connect to Google and failed (error %d: %s).<br />Your server is blocking outgoing connections.  SPARTACUS will not function because it cannot contact the SPARTACUS repository.  <b>Please contact your website provider and ask them to allow outgoing connections to web sites.</b></p><p>Plugins can still be installed from your local directories.  Simply download the plugin from <a href="http://spartacus.s9y.org">the SPARTACUS web repository</a>, unzip it, and upload the files to your Serendipity plugin directory.</p>');
+@define('PLUGIN_EVENT_SPARTACUS_HEALTHDOWN', '<p>SPARTACUS can contact Google, but cannot contact the SPARATACUS repository.  It is possible that your server is blocking some outgoing connections, or that the SPARTACUS health site is down.  Please contact your website provider to ensure that outgoing connections are allowed.  <b>You will not be able to use SPARTACUS unless your server can contact the SPARTACUS repository.</b></p>');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_XML', 'File/Mirror location (XML metadata)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_FILES', 'File/Mirror location (files)');
 @define('PLUGIN_EVENT_SPARTACUS_MIRROR_DESC', 'Choose a download location. Do NOT change this value unless you know what you are doing and if servers get oudated. This option is available mainly for forward compatibility.');
@@ -30,6 +30,7 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissions downloaded directories');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Here you can enter the octal mode (like "0777") of the directory permissions for directories (FTP/Shell) downloaded by Spartacus. If empty, the default permission mask of the system are used. Note that not all servers allow changing/setting permissions. Pay attention that the applied permissions allow reading and writing for the webserver user. Else spartacus/Serendipity cannot overwrite existing directories.');
 
+@define('PLUGIN_EVENT_SPARTACUS_CHECK', 'Update plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR', 'Update sidebar plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_EVENT', 'Update event plugins');
 @define('PLUGIN_EVENT_SPARTACUS_CHECK_HINT', 'You can upgrade multiple plugins at once by opening the update-link in a new tab (middle mouse button)');

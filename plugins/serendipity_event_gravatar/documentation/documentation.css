@@ -1,11 +1,12 @@
 body {
-	font-family: Arial, sans-serif!important;
-	margin: 20;
+    font-family: Arial, sans-serif!important;
+    margin: 20;
 }
 #title {
-    background: #cfcfcf;    
+    background: #cfcfcf;
     margin: 0;
-}#content {
-    background: #efefef;	
+}
+#content {
+    background: #efefef;
     margin: 0;
 }

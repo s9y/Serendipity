@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -27,5 +27,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Par date');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Par nombre de liens');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

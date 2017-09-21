@@ -1,0 +1,124 @@
+/*
+Theme: Timeline                                                             
+Theme developed for Serendipity by Don Chambers (www.optional-necessity.com)
+teal colorset                                                          
+*/
+
+/* 
+* Teal Color: #18ba9b; 
+* Teal Hover Color: #2cd5b6;
+* Darkest color: #029377;
+*/
+
+a {
+  color: #18ba9b;
+}
+
+a:hover,
+a:focus {
+  color: #2cd5b6;
+}
+
+a.subtome:link,
+a.subtome:visited { 
+    background: url('img/subtome-teal.png') left bottom no-repeat;
+}
+
+a.subtome:hover,
+a.subtome:focus { 
+    background: url('img/subtome-teal.png') -64px center no-repeat;
+}
+
+a.subtome img {
+    visibility: hidden;
+}
+
+.navbar-default .navbar-brand:hover h1,
+.navbar-default .navbar-brand:focus h1{
+    color: #2cd5b6;
+}
+
+.header .navbar-default .navbar-toggle {
+    border-color: #2cd5b6;
+}
+
+.header .navbar-toggle, .header .navbar-default .navbar-toggle:hover, .header .navbar-default .navbar-toggle:focus {
+    background-color: #18ba9b;
+}
+
+@media (max-width: 991px) {
+    .header .navbar-default .navbar-nav > li > a:hover {
+        color: #18ba9b;
+    }
+    .header .navbar-default .navbar-nav > .active > a, .header .navbar-default .navbar-nav > .active > a:hover, .header .navbar-default .navbar-nav > .active > a:focus {
+        background-color: #18ba9b;
+    }
+}
+
+@media (min-width: 992px) {
+    .header .navbar-default .navbar-nav a.navbar_current_page,
+    .header .navbar-default .navbar-nav > li > a:hover {
+        border-bottom: 2px solid #18ba9b;
+    }
+
+    .header .navbar-default .navbar-nav > li:hover > a {
+        color: #18ba9b;
+    }
+}
+
+.btn-theme {
+    background: none repeat scroll 0 0 #18ba9b;
+    border: 1px solid #18ba9b;
+}
+
+.btn-theme:hover {color: #18ba9b;}
+
+.pager li > a,
+.pager li > span {
+    background-color: #18ba9b;
+    border: 1px solid #18ba9b;
+}
+
+.pager li > a:hover,
+.pager li > a:focus {
+    color: #2cd5b6;
+}
+
+.sidebar_plugin h3{
+    border-bottom: 2px solid #18ba9b;
+}
+
+.btn-group.archive-button .dropdown-menu > li > a {color: #2cd5b6;}
+
+.btn-group.archive-button .dropdown-menu > li > a:hover,
+.btn-group.archive-button .dropdown-menu > li > a:focus {
+    background-color: #2cd5b6;
+}
+
+.archive-button-months-entries {border: 1px solid #18ba9b;}
+
+.archive-button-months-entries .badge {
+    background-color: #029377; /* much darker */
+}
+
+blockquote {
+    border-left: 5px solid #2cd5b6;
+}
+
+.timeline_freeTag a {
+    background-color: #18ba9b;
+    border: 1px solid #18ba9b;
+}
+
+.timeline_freeTag a:hover,
+.timeline_freeTag a:focus {
+    color: #2cd5b6;
+}
+
+#scrollUp {
+    background-color: #18ba9b;
+    border: 1px solid #18ba9b;
+}
+#scrollUp:hover {
+    color: #2cd5b6;
+}

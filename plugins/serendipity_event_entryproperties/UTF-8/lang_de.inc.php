@@ -1,4 +1,4 @@
-<?php # lang_de.inc.php 1.0 2009-06-03 09:50:12 VladaAjgl $
+<?php
 
 /**
  *  @version 1.0
@@ -44,3 +44,5 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_EXTJOINS_DESC', 'Wenn aktiviert, werden zusätzliche Datenbankabfragen ausgeführt. Damit wird es möglich, dauerhafte , nicht in Artikelübersicht aufgeführte und im RSS-Feed versteckte Artikel zu verwenden . Wenn diese Funktionen nicht benötigt werden, kann das Abschalten der Abfragen die Geschwindigkeit verbessern.');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE', 'Reihenfolge der Optionen');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_SEQUENCE_DESC', 'Hier kann ausgewählt werden, welche Optionen in welcher Reihenfolge im Editiermodus des Artikels angezeigt werden.');
+
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_MULTI_AUTHORS', 'Mehrere Autoren');

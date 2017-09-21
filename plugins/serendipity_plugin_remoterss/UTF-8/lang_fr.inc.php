@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -33,5 +33,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Afficher la date');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Afficher la date du billet sous son titre?');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

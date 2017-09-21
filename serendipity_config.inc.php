@@ -47,7 +47,7 @@ if (defined('USE_MEMSNAP')) {
 }
 
 // The version string
-$serendipity['version'] = '2.1-alpha3';
+$serendipity['version'] = '2.2.0-beta2';
 
 
 // Setting this to 'false' will enable debugging output. All alpha/beta/cvs snapshot versions will emit debug information by default. To increase the debug level (to enable Smarty debugging), set this flag to 'debug'.
@@ -83,8 +83,11 @@ $serendipity['max_last_modified'] = 60 * 60 * 24 * 7;
 // that date. However it is still limited by the number below of maximum entries
 $serendipity['max_fetch_limit'] = 50;
 
-// How many bytes are allowed for fetching trackbacks, so that no binary files get accidently trackbacked?
+// How many bytes are allowed for fetching trackbacks, so that no binary files get accidentally trackbacked?
 $serendipity['trackback_filelimit'] = 150 * 1024;
+
+// Allow "Access-Control-Allow-Origin: *" to be used in sensible locations (RSS feed)
+$serendipity['cors'] = false;
 
 if (!isset($serendipity['fetchLimit'])) {
     $serendipity['fetchLimit'] = 15;
@@ -132,6 +135,22 @@ $serendipity['defaultTemplate'] = '2k11';
 // Default backend theme
 if (!isset($serendipity['template_backend'])) {
     $serendipity['template_backend'] = '2k11';
+}
+
+// The default page title of backend pages is "section | blog title | SERENDIPITY_ADMIN_SUITE"
+// If set to true (in serendipity_config_local.inc.php), the page title will be
+// "blog title | section | SERENDIPITY_ADMIN_SUITE" instead
+if (!isset($serendipity['backendBlogtitleFirst'])) {
+    $serendipity['backendBlogtitleFirst'] = false;
+}
+
+// Dashboard: set number of comments and drafts / future entries to be shown
+if (!isset($serendipity['dashboardCommentsLimit'])) {
+    $serendipity['dashboardCommentsLimit'] = 5;
+}
+
+if (!isset($serendipity['dashboardEntriesLimit'])) {
+    $serendipity['dashboardEntriesLimit'] = 5;
 }
 
 // Available languages
@@ -278,7 +297,7 @@ if ($serendipity['production'] === false) {
 
 $errLevel = error_reporting();
 
-/* debug make correct error levels readable
+/* [DEBUG] Helper to display current error levels, meant for developers.
 echo $errLevel."<br>\n";
 for ($i = 0; $i < 15;  $i++ ) {
     print debug_ErrorLevelType($errLevel & pow(2, $i)) . "<br>\n";
@@ -287,14 +306,9 @@ for ($i = 0; $i < 15;  $i++ ) {
 
 // [internal callback function]: errorToExceptionHandler()
 if (is_callable($serendipity['errorhandler'], false, $callable_name)) {
-    // set serendipity global error to exeption handler
-    if ($serendipity['production'] === 'debug') {
-        set_error_handler($serendipity['errorhandler'], $errLevel); // Yes, DEBUG mode should actually report E_STRICT errors! In PHP 5.4+ contained in E_ALL already
-    } elseif ($serendipity['production'] === false) {
-        set_error_handler($serendipity['errorhandler'], $errLevel); // most E_STRICT errors are thrown during the page's compilation process and can not be suppressed here.
-    } else {
-        set_error_handler($serendipity['errorhandler'], $errLevel); // different, see ln 56
-    }
+    // set serendipity global error to exception handler
+    set_error_handler($serendipity['errorhandler'], $errLevel); // See error_reporting() earlier to see which errors are passed to the handler, deending on $serendipity['production'].
+    register_shutdown_function('fatalErrorShutdownHandler');
 }
 
 define('IS_up2date', version_compare($serendipity['version'], $serendipity['versionInstalled'], '<='));
@@ -430,7 +444,7 @@ if (!isset($serendipity['GET']['adminAction'])) {
 
 // Make sure this variable is always properly sanitized. Previously in compat.inc.php, but there LANG_CHARSET was not defined.
 if (isset($serendipity['GET']['searchTerm'])) {
-    $serendipity['GET']['searchTerm'] = serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm']));
+    $serendipity['GET']['searchTerm'] = (is_string($serendipity['GET']['searchTerm']) ? serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm'])) : '');
 }
 
 // Some stuff...

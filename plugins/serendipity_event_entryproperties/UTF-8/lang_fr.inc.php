@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -45,5 +45,3 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'Ici vous pouvez définir une liste séprée par des virgules de noms de champs (variables) à remplir pour chaque billet. Attention, le nom de ces variables ne doit pas contenir de caractères spéciaux ni d\'espaces. Exemples: "Variable1, Variable2, ChouetteVariable". ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', 'La liste des variables sur mesure peut être modifiée dans la <a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">configuration du plugin</a>.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

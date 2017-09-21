@@ -7,7 +7,7 @@
 {elseif $ctype == 'select'}
 
     <div class="clearfix form_select{if $cdesc != ''} has_info{/if}">
-        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
 
         <select id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]{($is_multi_select) ? '[]' : ''}"{($is_multi_select) ? ' multiple' : ''}{($is_multi_select && ($select_size > 0)) ? " size='{$select_size}'" : ''}>
@@ -19,7 +19,7 @@
 {elseif $ctype == 'radio'}
 
     <fieldset{if $cdesc != ''} class="has_info"{/if}>
-        <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
+        <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <div class="clearfix grouped">
         {foreach $radio_button AS $r}
@@ -34,14 +34,14 @@
 {elseif $ctype == 'string'}
 
     <div class="clearfix form_field{if $cdesc != ''} has_info{/if}">
-        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
     </div>
 {elseif (($ctype == 'html') || ($ctype == 'text'))}
 
     <div class="clearfix form_area{if $cdesc != ''} has_info{/if}">
-        <label for="nuggets{$elcount}">{$cname}{if $cdesc != '' && !$backend_wysiwyg} <button class="toggle_info button_link" type="button" data-href="#nuggets{$elcount}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        <label for="nuggets{$elcount}">{$cname}{if $cdesc != '' && !$backend_wysiwyg} <button class="toggle_info button_link" type="button" data-href="#nuggets{$elcount}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
         {if $cdesc != ''}<span id="nuggets{$elcount}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <textarea id="nuggets{$elcount}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" rows="{$text_rows}">{$hvalue}</textarea>
     </div>
@@ -56,6 +56,13 @@
         <input id="config_{$postKey}_{$config_item}" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$hvalue}">
         {$cbag_custom}
     </div>
+{elseif $ctype == 'color'}
+
+    <div class="clearfix form_field{if $cdesc != ''} has_info{/if}">
+        <label for="serendipity_{$config_item}">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
+        <input id="serendipity_{$config_item}" class="direction_{$lang_direction}" name="serendipity[{$postKey}][{$config_item}]" type="{$input_type}" value="{$hvalue}">
+    </div>
 {elseif $ctype == 'hidden'}
 
     <div class="clearfix">
@@ -64,12 +71,12 @@
 {elseif $ctype == 'media'}
 
     <div class="clearfix form_field media_choose{if $cdesc != ''} has_info{/if}">
-        <label for="serendipity[{$postKey}][{$config_item}]">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$postKey}_{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
+        <label for="serendipity[{$postKey}][{$config_item}]">{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$postKey}_{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</label>
 
         <div class="media_chooser clearfix">
             <input id="serendipity[{$postKey}][{$config_item}]" class="change_preview" name="serendipity[{$postKey}][{$config_item}]" type="text" data-configitem="{$config_item}" value="{$value}">
 
-            <button class="choose_media" type="button" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture"></span><span class="visuallyhidden">{$CONST.MEDIA_LIBRARY}</span></button>
+            <button class="choose_media" type="button" title="{$CONST.MEDIA_LIBRARY}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.MEDIA_LIBRARY}</span></button>
         </div>
 
         {if $cdesc != ''}<span id="{$postKey}_{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
@@ -82,7 +89,7 @@
 {elseif $ctype == 'sequence'}
 
     <fieldset{if $cdesc != ''} class="has_info"{/if}>
-        <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
+        <span class="wrap_legend"><legend>{$cname}{if $cdesc != ''} <button class="toggle_info button_link" type="button" data-href="#{$config_item}_info"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MORE}</span></button>{/if}</legend></span>
         {if $cdesc != ''}<span id="{$config_item}_info" class="field_info additional_info">{$cdesc}</span>{/if}
         <input id="{$config_item}_value" name="serendipity[{$postKey}][{$config_item}]" type="hidden" value="{$value}">
 
@@ -95,7 +102,7 @@
         {foreach $order_id as $orid}
             <li id="{$orid['id']}" class="sequence_item pluginmanager_item_even">
                 <div id="g{$orid['id']}" class="pluginmanager_grablet sequence_grablet">
-                    <button class="icon_link" type="button" title="Move"><span class="icon-move"></span><span class="visuallyhidden"> {$CONST.MOVE}</span></button>
+                    <button class="icon_link" type="button" title="Move"><span class="icon-move" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MOVE}</span></button>
                 </div>
             {if $checkable}
                 <div class="form_check">
@@ -112,12 +119,12 @@
                 {if ($orid['sort_idx'] == 0)}
                     &nbsp;
                 {else}
-                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}"><span class="icon-up-dir"></span><span class="visuallyhidden"> {$CONST.MOVE_UP}</span></button>
+                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_up" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['oneup']}"><span class="icon-up-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MOVE_UP}</span></button>
                 {/if}
                 {if ($orid['sort_idx'] == $last)}
                     &nbsp;
                 {else}
-                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}"><span class="icon-down-dir"></span><span class="visuallyhidden"> {$CONST.MOVE_DOWN}</span></button>
+                    <button id="{$postKey}_{$config_item}_{$orid['sort_idx']}_down" class="icon_link" name="serendipity[{$postKey}][override][{$config_item}]" type="submit" value="{$orid['onedown']}"><span class="icon-down-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MOVE_DOWN}</span></button>
                 {/if}
                     </div>
                 </noscript>

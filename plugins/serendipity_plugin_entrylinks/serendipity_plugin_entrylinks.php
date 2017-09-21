@@ -1,4 +1,8 @@
-<?php # $Id$
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -16,9 +20,9 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
         $propbag->add('description',   PLUGIN_ENTRYLINKS_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.02');
+        $propbag->add('version',       '1.03');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -29,66 +33,67 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+
             case 'title':
-                $propbag->add('type', 'string');
-                $propbag->add('name', TITLE);
-                $propbag->add('description', TITLE);
-                $propbag->add('default', '');
+                $propbag->add('type',           'string');
+                $propbag->add('name',           TITLE);
+                $propbag->add('description',    TITLE);
+                $propbag->add('default',        '');
                 break;
 
             case 'newwin':
-                $propbag->add('type', 'boolean');
-                $propbag->add('name', PLUGIN_ENTRYLINKS_NEWWIN);
-                $propbag->add('description', PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH);
-                $propbag->add('default', 'false');
+                $propbag->add('type',           'boolean');
+                $propbag->add('name',           PLUGIN_ENTRYLINKS_NEWWIN);
+                $propbag->add('description',    PLUGIN_ENTRYLINKS_NEWWIN_BLAHBLAH);
+                $propbag->add('default',        'false');
                 break;
 
             case 'markup':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        DO_MARKUP);
-                $propbag->add('description', DO_MARKUP_DESCRIPTION);
-                $propbag->add('default', 'true');
+                $propbag->add('type',           'boolean');
+                $propbag->add('name',           DO_MARKUP);
+                $propbag->add('description',    DO_MARKUP_DESCRIPTION);
+                $propbag->add('default',        'true');
                 break;
 
             case 'show_exits':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        TOP_EXITS);
-                $propbag->add('description', SHOWS_TOP_EXIT);
-                $propbag->add('default', 'true');
+                $propbag->add('type',           'boolean');
+                $propbag->add('name',           TOP_EXITS);
+                $propbag->add('description',    SHOWS_TOP_EXIT);
+                $propbag->add('default',        'true');
                 break;
 
             case 'show_referers':
-                $propbag->add('type',        'boolean');
-                $propbag->add('name',        TOP_REFERRER);
-                $propbag->add('description', SHOWS_TOP_SITES);
-                $propbag->add('default', '');
+                $propbag->add('type',           'boolean');
+                $propbag->add('name',           TOP_REFERRER);
+                $propbag->add('description',    SHOWS_TOP_SITES);
+                $propbag->add('default',        'true');
                 break;
 
             case 'maxref':
-                $propbag->add('type', 'string');
-                $propbag->add('name', PLUGIN_ENTRYLINKS_MAXREF);
-                $propbag->add('description', PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH);
-                $propbag->add('default', 15);
+                $propbag->add('type',           'string');
+                $propbag->add('name',           PLUGIN_ENTRYLINKS_MAXREF);
+                $propbag->add('description',    PLUGIN_ENTRYLINKS_MAXREF_BLAHBLAH);
+                $propbag->add('default',        15);
                 break;
 
             case 'wordwrap':
-                $propbag->add('type', 'string');
-                $propbag->add('name', PLUGIN_ENTRYLINKS_WORDWRAP);
-                $propbag->add('description', PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH);
-                $propbag->add('default', 30);
+                $propbag->add('type',           'string');
+                $propbag->add('name',           PLUGIN_ENTRYLINKS_WORDWRAP);
+                $propbag->add('description',    PLUGIN_ENTRYLINKS_WORDWRAP_BLAHBLAH);
+                $propbag->add('default',        30);
                 break;
 
             case 'orderby':
                 $select = array('day' => PLUGIN_ENTRYLINKS_ORDERBY_DAY, 'fullcount' => PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT);
-                $propbag->add('type', 'select');
-                $propbag->add('name', PLUGIN_ENTRYLINKS_ORDERBY);
-                $propbag->add('description', PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH);
-                $propbag->add('select_values', $select);
-                $propbag->add('default', 'fullcount');
+                $propbag->add('type',           'select');
+                $propbag->add('name',           PLUGIN_ENTRYLINKS_ORDERBY);
+                $propbag->add('description',    PLUGIN_ENTRYLINKS_ORDERBY_BLAHBLAH);
+                $propbag->add('select_values',  $select);
+                $propbag->add('default',        'fullcount');
                 break;
 
             default:
-                    return false;
+                return false;
         }
         return true;
     }
@@ -105,20 +110,18 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
             $id = serendipity_db_escape_string($serendipity['GET']['id']);
         }
 
+        $counter  = array();
         $target   = '';
-        $newwin   = $this->get_config('newwin', 'false');
+        $newwin   = serendipity_db_bool($this->get_config('newwin', 'false'));
         $wordwrap = $this->get_config('wordwrap', 30);
         $maxref   = $this->get_config('maxref', 15);
         $orderby  = $this->get_config('orderby', 'fullcount');
 
-        if ($newwin == 'true') {
+        if ($newwin) {
             $target = ' target="_blank" ';
         }
 
-
-        $counter    = array();
-
-        if ($this->get_config('show_exits', 'true') == 'true') {
+        if (serendipity_db_bool($this->get_config('show_exits', 'true'))) {
             $exits      = serendipity_db_query("SELECT SUM(count) as fullcount, scheme, host, port, path, query, " . serendipity_db_concat("scheme, '://', host, ':', port, path, '?', query") . " AS fulllink FROM {$serendipity['dbPrefix']}exits WHERE entry_id = " . $id . " GROUP BY scheme,host,port,path,query");
             if (is_array($exits)) {
                 foreach($exits AS $key => $row) {
@@ -151,7 +154,7 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
             }
             $links .= '</ul>';
 
-            if ($this->get_config('markup', 'true') == 'true') {
+            if (serendipity_db_bool($this->get_config('markup', 'true'))) {
                 $entry = array('html_nugget' => $links, 'entry_id' => $id);
                 serendipity_plugin_api::hook_event('frontend_display', $entry);
                 echo $entry['html_nugget'];
@@ -160,10 +163,10 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
             }
         }
 
-        if ($this->get_config('show_referers', 'true') == 'true') {
-            $ref      = serendipity_db_query("SELECT SUM(count) as fullcount, scheme, host, port, path, query, " . serendipity_db_concat("scheme, '://', host, ':', port, path, '?', query") . " AS fulllink FROM {$serendipity['dbPrefix']}referrers WHERE entry_id = " . $id . " GROUP BY scheme,host,port,path,query ORDER BY $orderby DESC LIMIT $maxref");
+        if (serendipity_db_bool($this->get_config('show_referers', 'true'))) {
+            $ref = serendipity_db_query("SELECT SUM(count) as fullcount, scheme, host, port, path, query, " . serendipity_db_concat("scheme, '://', host, ':', port, path, '?', query") . " AS fulllink FROM {$serendipity['dbPrefix']}referrers WHERE entry_id = " . $id . " GROUP BY scheme,host,port,path,query ORDER BY $orderby DESC LIMIT $maxref");
             if (is_array($ref)) {
-                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul class="plainList">';
+                echo PLUGIN_ENTRYLINKS_REFERERS . '<ul class="plainList">'."\n";
                 foreach($ref AS $key => $row) {
                     $url = sprintf('%s://%s%s%s%s',
                       $row['scheme'],
@@ -173,12 +176,14 @@ class serendipity_plugin_entrylinks extends serendipity_plugin
                       (!empty($row['query']) ? '?' . $row['query'] : '')
                     );
 
-                    echo '<li><a href="' . $url . '" ' . $target . '>' . wordwrap($row['host'], $wordwrap, "<br />", 1) . '</a> <span class="serendipity_entrylinks_fullcount">[' . $row['fullcount'] . "]</span></li>";
+                    echo '    <li><a href="' . $url . '" ' . $target . '>' . wordwrap($row['host'], $wordwrap, "<br />", 1) . '</a> <span class="serendipity_entrylinks_fullcount">[' . $row['fullcount'] . "]</span></li>\n";
                 }
-                echo '</ul>';
+                echo "</ul>\n";
             }
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
+?>

@@ -2,7 +2,7 @@
 
 function build_monster($filename, $seed='',$size=''){
     // init random seed
-    if($seed) srand( hexdec(substr(md5($seed),0,6)) );
+    if ($seed) srand( hexdec(substr(md5($seed),0,6)) );
 
     // throw the dice for body parts
     $parts = array(
@@ -31,17 +31,17 @@ function build_monster($filename, $seed='',$size=''){
         imagedestroy($im);
 
         // color the body
-        if($part == 'body'){
+        if ($part == 'body') {
             $color = imagecolorallocate($monster, rand(20,235), rand(20,235), rand(20,235));
             imagefill($monster,60,60,$color);
         }
     }
 
     // restore random seed
-    if($seed) srand();
+    if ($seed) srand();
 
     // resize if needed, then output
-    if($size && $size < 400){
+    if ($size && $size < 400) {
         $out = @imagecreatetruecolor($size,$size);
         if (!$out) return false; // Problems creating image!
         imagecopyresampled($out,$monster,0,0,0,0,$size,$size,120,120);
@@ -49,10 +49,12 @@ function build_monster($filename, $seed='',$size=''){
         imagedestroy($out);
         imagedestroy($monster);
         return true;
-    }else{
+    } else {
         //header ("Content-type: image/png");
         imagepng($monster,$filename);
         imagedestroy($monster);
         return true;
     }
 }
+
+?>

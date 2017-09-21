@@ -16,7 +16,7 @@ class Serendipity_Import_geeklog extends Serendipity_Import {
         return 'GeekLog has a granular control over access privileges which cannot be migrated to Serendipity. All Users will be migrated as Superusers, you may need to set them to editor or chief users manually after import.';
     }
 
-    function Serendipity_Import_geeklog($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

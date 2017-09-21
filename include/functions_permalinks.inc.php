@@ -786,6 +786,7 @@ function serendipity_getUriArguments($uri, $wildcard = false) {
         if ($args[0] == $indexFile || $args[0] == $serendipity['indexFile']) {
             unset($args[0]);
         }
+        $args = array_unique($args);
         return $args;
     } else {
         return array();

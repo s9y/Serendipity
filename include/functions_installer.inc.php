@@ -83,7 +83,10 @@ function serendipity_updateLocalConfig($dbName, $dbPrefix, $dbHost, $dbUser, $db
                    . "\t/*\n"
                    . "\t  Serendipity configuration file\n";
     $file_mark     = "\n\t// End of Serendipity configuration file"
-                   . "\n\t// You can place your own special variables after here:\n";
+                   . "\n\t// You can place your own special variables here; see\n"
+                   . "\n\t// <https://docs.s9y.org/docs/developers/code-primer.html#docs-initializing-the-framework-serendipity_configincphp-and-serendipity_config_localincphp>\n"
+                   . "\n\t// for a list. All defaults from serendipity_config.inc.php\n"
+                   . "\n\t// can be changed by re-setting the variables after here:\n";
     $file_end      = "\n?>";
     $file_personal = '';
 
@@ -637,7 +640,7 @@ function serendipity_checkInstallation() {
         $errs[] = INSTALL_PASSWORD_INVALID;
     }
 
-    $serendipity['dbType'] = $_POST['dbType'];
+    $serendipity['dbType'] = preg_replace('@[^a-z0-9-]@imsU', '', $_POST['dbType']);
     // Probe database
     // (do it after the dir stuff, as we need to be able to create the sqlite database)
     include_once(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php");
@@ -679,7 +682,7 @@ function serendipity_installFiles($serendipity_core = '') {
         }
     }
 
-    if (php_sapi_name() == 'cgi' || php_sapi_name() == 'cgi-fcgi') {
+    if (substr(php_sapi_name(), 0, 3) == 'cgi') {
         $htaccess_cgi = '_cgi';
     } else {
         $htaccess_cgi = '';

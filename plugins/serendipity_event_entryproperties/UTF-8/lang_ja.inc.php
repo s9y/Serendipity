@@ -1,7 +1,7 @@
-<?php # $Id$
+<?php
 
 /**
- *  @version $Revision$
+ *  @version
  *  @author Tadashi Jokagi <elf2000@users.sourceforge.net>
  *  EN-Revision: 966
  */
@@ -34,8 +34,7 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS', 'カスタムフィールド');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1', 'Additional custom fields can be used in your template at places where you want them to show up. For that, edit your entries.tpl template file and place Smarty tags like {$entry.properties.ep_MyCustomField} in the HTML where you like. 各項目の接頭語 ep_ に注意してください。');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC2', 'ここで、各エントリへの入力に使用できる、コンマで分割された項目名の一覧を入力することができます - 特殊文字またはスペースをそれらのフィールド名に使用しません。 例: "Customfield1, Customfield2". ' . PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC1);
-@define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', '
-利用できるカスタム項目の一覧は、<a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">プラグイン設定</a> で変更することができます。');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_CUSTOMFIELDS_DESC3', '利用できるカスタム項目の一覧は、<a href="%s" target="_blank" title="' . PLUGIN_EVENT_ENTRYPROPERTIES_TITLE . '">プラグイン設定</a> で変更することができます。');
 
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_DISABLE_MARKUP', 'このエントリのマークアッププラグインを無効にする:');
-?>
+

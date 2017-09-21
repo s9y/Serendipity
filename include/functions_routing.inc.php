@@ -22,6 +22,7 @@ function serve404() {
     global $serendipity;
     $serendipity['view'] = '404';
     $serendipity['viewtype'] = '404_4';
+    $serendipity['content_message'] = URL_NOT_FOUND;
     header('HTTP/1.0 404 Not found');
     header('Status: 404 Not found');
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
@@ -292,7 +293,7 @@ function servePlugin($matches) {
     serendipity_plugin_api::hook_event('external_plugin', $matches[2]);
 }
 
-function serveFeed() {
+function serveFeed($matches) {
     global $serendipity;
     $serendipity['view'] = 'feed';
     header('Content-Type: text/html; charset=utf-8');
@@ -301,7 +302,6 @@ function serveFeed() {
     if (preg_match('@/(index|atom[0-9]*|rss|comments|trackbacks|comments_and_trackbacks|opml)\.(rss[0-9]?|rdf|rss|xml|atom)@', $uri, $vmatches)) {
         list($_GET['version'], $_GET['type']) = serendipity_discover_rss($vmatches[1], $vmatches[2]);
     }
-
     if (is_array($matches)) {
         if (preg_match('@(/?' . preg_quote(PATH_FEEDS, '@') . '/)(.+?)(?:\.rss)?$@i', $uri, $uriparts)) {
             if (strpos($uriparts[2], $serendipity['permalinkCategoriesPath']) === 0) {
@@ -339,7 +339,7 @@ function serveEntry($matches) {
     if (!empty($serendipity['POST']['submit']) && !isset($_REQUEST['serendipity']['csuccess'])) {
 
         $comment['url']       = $serendipity['POST']['url'];
-        $comment['comment']   = trim($serendipity['POST']['comment']);
+        $comment['comment']   = (is_string($serendipity['POST']['comment']) ? trim($serendipity['POST']['comment']) : '');
         $comment['name']      = $serendipity['POST']['name'];
         $comment['email']     = $serendipity['POST']['email'];
         $comment['subscribe'] = $serendipity['POST']['subscribe'];

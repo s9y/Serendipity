@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -38,5 +38,3 @@
 @define('PLUGIN_HISTORY_OYA', 'Il y a un an');
 @define('PLUGIN_HISTORY_MYSELF', 'Je veux le définir moi-même');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

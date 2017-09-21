@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2008-01-20 01:31:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -17,4 +17,4 @@
 @define('PLUGIN_COMMENTS_ANONYMOUS',            'anonym');
 
 @define('PLUGIN_COMMENTS_ADDURL',               'Přidat URL adresu autorů do');
-?>
+

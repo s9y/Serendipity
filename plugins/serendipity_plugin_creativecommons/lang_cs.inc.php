@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-12-14 00:12:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -9,4 +9,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'Creative Commons');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'V postranním panelu zobrazuje podrobnosti použité licence "Creative Commons" (Autorská práva)');
 
-?>

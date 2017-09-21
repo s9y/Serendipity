@@ -72,12 +72,13 @@ function serendipity_smarty_html5time($timestamp) {
  * @param   string      The name of the block to parse data into ("COMMENTS" - virtual variable like {$COMMENTS})
  * @param   string      The name of the template file to fetch. Only filename, the path is auto-detected
  * @param   boolean     If true, the output of the smarty parser will be echoed instead of invisibly treated
+ * @param   boolean     If true, always use a tpl file from the frontend fallback chain (used for the preview)
  * @return  string      The parsed HTML code
  */
-function &serendipity_smarty_fetch($block, $file, $echo = false) {
+function &serendipity_smarty_fetch($block, $file, $echo = false, $force_frontend = false) {
     global $serendipity;
 
-    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath'), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
+    $output = $serendipity['smarty']->fetch('file:'. serendipity_getTemplateFile($file, 'serendipityPath', $force_frontend), null, null, null, ($echo === true && $serendipity['smarty_raw_mode']));
 
     $serendipity['smarty']->assignByRef($block, $output);
 
@@ -625,7 +626,7 @@ function serendipity_smarty_printSidebar($params, &$smarty) {
  *
  * @access public
  * @param   array       Smarty parameter input array:
- *                          file: The filename you want to include (any file within your template directry or the 'default' template if not found)
+ *                          file: The filename you want to include (any file within your template directory or the 'default' template if not found)
  * @param   object  Smarty object
  * @return  string      The requested filename with full path
  */
@@ -634,7 +635,7 @@ function serendipity_smarty_getFile($params, &$smarty) {
         trigger_error("Smarty Error: " . __FUNCTION__ .": missing 'file' parameter", E_USER_WARNING);
         return;
     }
-    return serendipity_getTemplateFile($params['file']);
+    return serendipity_getTemplateFile($params['file'], 'serendipityHTTPPath', $params['frontend']);
 }
 
 function serendipity_smarty_getConfigVar($params, &$smarty) {
@@ -1160,7 +1161,7 @@ function serendipity_smarty_purge() {
 
     serendipity_smarty_init();  # need initiated smarty to get the compile/cache dir
     $dir = new RecursiveDirectoryIterator($serendipity['smarty']->getCompileDir());
-    $ite = new RecursiveIteratorIterator($dir);
+    $ite = new RecursiveIteratorIterator($dir, RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD);
     $files = new RegexIterator($ite, '@.*\.tpl\.php$@', RegexIterator::GET_MATCH);
     foreach($files as $file) {
         if (is_writable($file[0])) {
@@ -1215,12 +1216,12 @@ function serendipity_smarty_show($template, $data = null, $debugtype = null, $de
 
     $serendipity['smarty']->assign($data);
 
-    $tplfile = ($template == 'preview_iframe.tpl') ? serendipity_getTemplateFile($template, 'serendipityPath', true) : serendipity_getTemplateFile($template, 'serendipityPath');
+    $tplfile = serendipity_getTemplateFile($template, 'serendipityPath', ($template == 'preview_iframe.tpl'));  # for the preview_iframe.tpl, we want to ignore the backend theme
     if ($debug !== null) {
         if ($debugtype == "HTML") {
-            $debug = "<!-- Dynamically fetched " . htmlspecialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
+            $debug = "<!-- Dynamically fetched " . serendipity_specialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " -->\n";
         } else {
-            $debug = "/* Dynamically fetched " . htmlspecialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " */\n";
+            $debug = "/* Dynamically fetched " . serendipity_specialchars(str_replace($serendipity['serendipityPath'], '', $tplfile)) . " on " . date('Y-m-d H:i') . ", called from: " . $debug . " */\n";
         }
     }
 

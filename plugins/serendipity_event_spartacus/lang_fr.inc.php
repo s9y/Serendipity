@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -32,5 +32,3 @@
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR', 'Permissions des répertoires téléchargés');
 @define('PLUGIN_EVENT_SPARTACUS_CHMOD_DIR_DESC', 'Ici vous pouvez entrer le mode octal (comme "0777" par ex.) pour les répertoires téléchargés. Si vous laissez ce champs vide, les permissions par défaut de votre serveur seront utilisés. Notez que tous les serveurs ne permettent pas de changer les permissions de répertoire. Faites attention aussi que les permissions que vous définissez permettent encore à Serendipity d\'accéder aux répertoires.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

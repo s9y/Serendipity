@@ -16,7 +16,7 @@ class Serendipity_Import_nuke extends Serendipity_Import {
         return '';
     }
 
-    function Serendipity_Import_nuke($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

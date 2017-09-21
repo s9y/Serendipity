@@ -21,6 +21,7 @@
 @define('THEME_CUSTOM_FIELD_DEFINITION','Diese optionalen Felder sind nur verfügbar, wenn dieses Theme (clean blog) verwendet wird. Das Ereignis-Plugin serendipity_event_entryproperties (Erweiterte Eigenschaften für Einträge) muss installiert sein, um diese Felder zu verwenden. Der Eintrags-Untertitel wird unter dem Titel des Eintrags ausgegeben und sollte eine kurze Zusammenfassung des Eintrags enthalten. Das Header-Bild eines Eintrags überschreibt das Standard-Header-Bild für Einträge.');
 @define('THEME_ENTRY_SUBTITLE','Untertitel des Eintrags');
 @define('THEME_ENTRY_HEADER_IMAGE','Header-Bild der Eintrags');
+@define('THEME_DEMO_AVAILBLE', 'Eine komplette englische Anleitung zur <a href="http://www.optional-necessity.com/demo/cleanblog/archives/8-Using-the-Clean-Blog-theme.html">Konfiguration und Benutzung von Clean Blog</a> findet sich in der <a href="http://www.optional-necessity.com/demo/cleanblog/">Clean Blog-Demo</a>.');
 
 // Header Images
 @define('DEFAULT_HEADER_IMAGE', 'Standard-Header-Bild');

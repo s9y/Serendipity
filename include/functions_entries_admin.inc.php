@@ -18,7 +18,7 @@ include_once(S9Y_INCLUDE_PATH . "include/functions_trackbacks.inc.php");
  * @param   string      The URL where the entry form is submitted to
  * @param   array       An array of hidden input fields that should be passed on to the HTML FORM
  * @param   array       The entry superarray with your entry's contents
- * @param   string      Any error messages that might have occured on the last run
+ * @param   string      Any error messages that might have occurred on the last run
  * @return null
  */
 function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = array(), $errMsg = "") {
@@ -83,6 +83,8 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
         foreach ($entry['categories'] as $cat) {
             $selected[] = $cat['categoryid'];
         }
+    } elseif ($serendipity['categoryDefault'] > 0) {
+        $selected[] = $serendipity['categoryDefault'];
     }
 
     if (count($selected) > 1 ||
@@ -117,6 +119,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     }
 
     $template_vars['formToken'] = serendipity_setFormToken();
+    $template_vars['urlToken']  = serendipity_setFormToken('url');
 
     if (isset($serendipity['allowDateManipulation']) && $serendipity['allowDateManipulation']) {
         $template_vars['allowDateManipulation'] = true;
@@ -151,7 +154,7 @@ function serendipity_printEntryForm($targetURL, $hiddens = array(), $entry = arr
     $serendipity['smarty']->assign('admin_view', 'entryform');
     serendipity_plugin_api::hook_event('backend_entryform_smarty', $template_vars);
     $serendipity['smarty']->assignByRef('entry_vars', $template_vars);
-    return serendipity_smarty_show($template_vars['entry_template']);
+    return serendipity_smarty_show('admin/entries.tpl');
 }
 
 function serendipity_emit_htmlarea_code($item, $jsname, $spawnMulti = false) {

@@ -9,6 +9,10 @@ session_cache_limiter('public');
 include('serendipity_config.inc.php');
 include(S9Y_INCLUDE_PATH . 'include/functions_rss.inc.php');
 
+if ($serendipity['cors']) {
+    header('Access-Control-Allow-Origin: *'); // Allow RSS feeds to be read by javascript
+}
+
 $version     = $_GET['version'];
 $description = $serendipity['blogDescription'];
 $title       = $serendipity['blogTitle'];
@@ -16,6 +20,13 @@ $comments    = FALSE;
 
 if (empty($version)) {
     list($version) = serendipity_discover_rss($_GET['file'], $_GET['ext']);
+} else {
+    # be sure it is an allowed version, to prevent attackers sniffing for unrelated files on the file system
+    $allowed_versions = ['opml1.0', '0.91', '1.0',  '2.0', 'atom0.3', 'atom1.0'];
+    if (! in_array($version, $allowed_versions, true)) {
+        header('Status: 404 Not Found');
+        exit;
+    }
 }
 
 if (isset($_GET['category'])) {
@@ -233,17 +244,13 @@ if ($_GET['type'] == 'content' &&
     header('Location: ' . serendipity_get_config_var('feedCustom'));
     exit;
 }
-$metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('show_mail', $metadata['showMail']));
+$metadata['showMail'] = serendipity_db_bool(serendipity_get_config_var('feedShowMail', $metadata['showMail']));
 
 $file_version  = preg_replace('@[^0-9a-z\.-_]@i', '', $version);
-$metadata['template_file'] = serendipity_getTemplateFile('feed_' . $file_version . '.tpl', 'serendipityPath');
+$metadata['template_file'] = 'feed_' . $file_version . '.tpl';
 
 serendipity_smarty_init();
 serendipity_plugin_api::hook_event('frontend_rss', $metadata);
-
-if (!$metadata['template_file'] || $metadata['template_file'] == 'feed_' . $file_version . '.tpl') {
-    die("Invalid RSS version specified or RSS-template file not found\n");
-}
 
 $self_url = ($_SERVER['HTTPS'] == 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . serendipity_specialchars($_SERVER['REQUEST_URI']);
 if (!is_array($entries)) {

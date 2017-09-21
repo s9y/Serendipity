@@ -24,7 +24,7 @@ class Serendipity_Import_MovableType extends Serendipity_Import {
     var $data        = array();
     var $inputFields = array();
 
-    function Serendipity_Import_MovableType($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text'    => MT_DATA_FILE,
                                          'type'    => 'file',

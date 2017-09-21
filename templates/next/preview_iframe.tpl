@@ -20,35 +20,44 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Droid+Serif:400,400italic,700,700italic">
 {/if}
 {if $head_link_stylesheet_frontend}
-    <link rel="stylesheet" href="{$head_link_stylesheet_frontend}">                                
+    <link rel="stylesheet" href="{$head_link_stylesheet_frontend}">
 {else}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
 <!--[if lte IE 8]>
-    <link rel="stylesheet" href="{serendipity_getFile file="oldie.css"}">
+    <link rel="stylesheet" href="{serendipity_getFile file="oldie.css" frontend=true}">
 <![endif]-->
-    <script src="{serendipity_getFile file="scripts/modernizr/modernizr.js"}"></script>
+    <script src="{serendipity_getFile file="scripts/modernizr/modernizr.js" frontend=true}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-    <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
 <script type="text/javascript">
 window.onload = function() {ldelim}
-    parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('main').offsetHeight
-                                                                      + parseInt(document.getElementById('main').style.marginTop)
-                                                                      + parseInt(document.getElementById('main').style.marginBottom)
-                                                                      + 'px';
+    parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
     parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
     parent.document.getElementById('serendipity_iframe').style.border = 0;
 {rdelim}
 </script>
 </head>
-<body style="padding: 0; margin: 0;"{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
-    <div id="main" class="clearfix" style="padding: 0; margin: 5px auto; width: 98%;">
-        <main id="primary">
-        {$preview}
-        </main>
-    </div>
+<body {if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
+    <main id="primary">
+    {if $mode == 'save'}
+        <div style="float: left; height: 75px"></div>
+        {$updertHooks}
+        {if $res}
+            <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
+        {else}
+            {if $lastSavedEntry}
+                <script>$(document).ready(function() {
+                    parent.document.forms['serendipityEntry']['serendipity[id]'].value = "{$lastSavedEntry}";
+                });
+                </script>
+            {/if}
+            <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.ENTRY_SAVED}</span>
+            <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
+        {/if}
+    {/if}
+    {$preview}
+    </main>
 
-    <script src="{serendipity_getFile file="scripts/master.js"}"></script>
+    <script src="{serendipity_getFile file="scripts/master.js" frontend=true}"></script>
 </body>
 </html>

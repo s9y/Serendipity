@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 /**
  *  @version  
@@ -87,5 +87,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_ADD_URL', 'Bloquear esta URL via plugin Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_AUTHOR', 'Desbloquear este autor via plugin Spamblock');
 @define('PLUGIN_EVENT_SPAMBLOCK_REMOVE_URL', 'Desbloquear esta URL via plugin Spamblock');
-
 

@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -32,5 +32,3 @@
 @define('PLUGIN_REMOTERSS_DISPLAYDATE', 'Mostrar a data');
 @define('PLUGIN_REMOTERSS_DISPLAYDATE_BLAHBLAH', 'Mostrar a data da entrada sob o título?');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

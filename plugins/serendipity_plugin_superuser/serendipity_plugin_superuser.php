@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_superuser extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_superuser extends serendipity_plugin
+{
     var $title = SUPERUSER;
 
     function introspect(&$propbag)
@@ -9,25 +14,9 @@ class serendipity_plugin_superuser extends serendipity_plugin {
         $propbag->add('description',   ALLOWS_YOU_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array('https'));
         $propbag->add('groups',        array('FRONTEND_FEATURES'));
-    }
-
-    function generate_content(&$title)
-    {
-        global $serendipity;
-
-        $title = $this->title;
-        if ($this->get_config('https', 'false') == 'true') {
-            $base = str_replace('http://', 'https://', $serendipity['baseURL']);
-        } else {
-            $base = $serendipity['serendipityHTTPPath'];
-        }
-
-        $link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
-        $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
-        echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
     }
 
     function introspect_config_item($name, &$propbag)
@@ -45,6 +34,23 @@ class serendipity_plugin_superuser extends serendipity_plugin {
         }
         return true;
     }
+
+    function generate_content(&$title)
+    {
+        global $serendipity;
+
+        $title = $this->title;
+        if (serendipity_db_bool($this->get_config('https', 'false'))) {
+            $base = str_replace('http://', 'https://', $serendipity['baseURL']);
+        } else {
+            $base = $serendipity['serendipityHTTPPath'];
+        }
+
+        $link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
+        $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
+        echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
+    }
+
 }
 
 ?>

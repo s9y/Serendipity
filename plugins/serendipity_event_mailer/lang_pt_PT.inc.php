@@ -1,4 +1,4 @@
-<?php # $Id:$
+<?php
 # Copyright (c) 2003-2005, Jannis Hermanns (on behalf the Serendipity Developer Team)
 # All rights reserved.  See LICENSE file for licensing details
 # Translation (c) by  Rodrigo Lazo <rlazo.paz@gmail.com>
@@ -15,4 +15,3 @@
 @define('PLUGIN_EVENT_MAILER_CONVERTP', 'Converter parágrafos de HTML em mudanças de linha?');
 @define('PLUGIN_EVENT_MAILER_CONVERTPDESC', 'Junta mudanças de linha a seguir a cada parágrafo. Esta opção é muito útil se também escolher a eliminação de etiquetas HTML, pois assim manter-se-ão os parágrafos.');
 
-?>

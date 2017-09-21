@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -23,6 +23,3 @@
 @define('PLUGIN_COMMENTS_ABOUT', '%s à propos%s');
 @define('PLUGIN_COMMENTS_ANONYMOUS', 'anonyme');
 
-
-/* vim: set sts=4 ts=4 expandtab : */
-?>

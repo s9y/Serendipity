@@ -385,7 +385,7 @@
             // this function got called on load of the editor
             var toggleButton = '#toggle_extended';
             $('#extended_entry_editor').parent().find('label').first().wrap('<button id="toggle_extended" class="icon_link" type="button"></button>');
-            $(toggleButton).prepend('<span class="icon-down-dir"></span> ');
+            $(toggleButton).prepend('<span class="icon-down-dir" aria-hidden="true"></span> ');
             $(toggleButton).click(function(e) {
                 e.preventDefault();
                 serendipity.toggle_extended(true);
@@ -423,7 +423,7 @@
             // this function got called on load of the editor
             var toggleButton = '#toggle_' + id;
 
-            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-right-dir"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
+            $('#'+id).before('<button id="toggle_' + id + '" class="button_link" type="button" href="#' + id + '"><span class="icon-right-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TOGGLE_ALL}</span></button>');
 
             $(toggleButton).click(function(e) {
                 e.preventDefault();
@@ -836,32 +836,36 @@
         }
 
         serendipity.eraseEntryEditorCache = function() {
-            serendipity.cache("serendipity[body]", null);
-            serendipity.cache("serendipity[extended]", null);
+            serendipity.cache("serendipity[body]", "");
+            serendipity.cache("serendipity[extended]", "");
         }
 
         var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
         serendipity.cache = function (id, data) {
-            var request = indexedDB.open("cache", 1);
-            request.onupgradeneeded = function (event) {
-                event.target.result.createObjectStore("cache");
-            };
-            request.onsuccess = function(event) {
-                event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").put(data, id);
-            };
+            if (typeof indexedDB !== 'undefined') {
+                var request = indexedDB.open("cache", 1);
+                request.onupgradeneeded = function (event) {
+                    event.target.result.createObjectStore("cache");
+                };
+                request.onsuccess = function(event) {
+                    event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").put(data, id);
+                };
+            }
         }
 
         serendipity.getCached = function(id, success) {
-            var request = indexedDB.open("cache", 1);
-            request.onupgradeneeded = function (event) {
-                event.target.result.createObjectStore("cache");
-            };
-            request.onsuccess = function(event) {
-                event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").get(id).onsuccess = function (event) {
-                    success(event.target.result);
+            if (typeof indexedDB !== 'undefined') {
+                var request = indexedDB.open("cache", 1);
+                request.onupgradeneeded = function (event) {
+                    event.target.result.createObjectStore("cache");
                 };
-            };
+                request.onsuccess = function(event) {
+                    event.target.result.transaction(["cache"], 'readwrite').objectStore("cache").get(id).onsuccess = function (event) {
+                        success(event.target.result);
+                    };
+                };
+            }
         }
     }
 
@@ -1034,7 +1038,7 @@ $(function() {
         }
         e.preventDefault();
         // Inline notification, we might want to make this reuseable
-        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
+        $('<span id="msg_timestamp" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.TIMESTAMP_RESET} <a class="remove_msg" href="#msg_timestamp"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
         // Remove timestamp msg
         $('.remove_msg').click(function(e) {
             e.preventDefault();
@@ -1075,7 +1079,7 @@ $(function() {
         }
 
         // Inline notification, we might want to make this reuseable
-        $('<span id="msg_entrystatus" class="msg_notice"><span class="icon-info-circled"></span>{$CONST.ENTRY_STATUS}: ' + newState + ' <a class="remove_msg" href="#msg_entrystatus"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
+        $('<span id="msg_entrystatus" class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.ENTRY_STATUS}: ' + newState + ' <a class="remove_msg" href="#msg_entrystatus"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.HIDE}</span></a></span>').insertBefore('#edit_entry_title');
         // Remove entrystatus msg
         $('.remove_msg').click(function(e) {
             e.preventDefault();
@@ -1354,11 +1358,7 @@ $(function() {
 
     $('.comments_reply').click(function(e) {
         e.preventDefault();
-        {if $use_backendpopups || $force_backendpopups.comments}
-            window.open(this.href, 'CommentForm', 'width=800,height=600,toolbar=no,scrollbars=1,scrollbars,resize=1,resizable=1').focus();
-        {else}
-           $(this).magnificPopup({ type:'iframe' });
-        {/if}
+        serendipity.openPopup($(this).attr('href'));
     });
 
     // Selection for multidelete
@@ -1565,6 +1565,7 @@ $(function() {
             $('#uploadform').submit(function(event) {
                 if (! $('#imageurl').val()) {
                     event.preventDefault();
+                    $('#uploadform .check_inputs').attr('disabled', true);
                     var sendDataToML = function(data, progressContainer, progress) {
                         $.ajax({
                             type: 'post',
@@ -1573,12 +1574,14 @@ $(function() {
                             cache: false,
                             processData: false,
                             contentType: false,
-                            xhrFields: {
-                                onprogress: function (e) {
+                            xhr: function() {
+                                var xhr = $.ajaxSettings.xhr();
+                                xhr.upload.onprogress = function(e) {
                                     if (e.lengthComputable) {
                                         progress.value = e.loaded / e.total * 100;
                                     }
-                                }
+                                };
+                                return xhr;
                             }
                         }).done(function(data) {
                             progress.value = 100;
@@ -1600,6 +1603,7 @@ $(function() {
                                 $('.form_buttons').prepend(mlLink);
                                 $(mlLink).fadeIn();
                             }
+                            $('#uploadform .check_inputs').removeAttr('disabled');
                         });
                     };
                     $('.uploadform_userfile').each(function() {
@@ -1617,6 +1621,7 @@ $(function() {
                                 data.append('serendipity[adminAction]', 'add');
                                 data.append('serendipity[token]', $('input[name*="serendipity[token]"]').val());
                                 data.append('serendipity[target_filename][1]', $('input[name*="serendipity[target_filename][1]"]').val());
+                                data.append('serendipity[target_directory][1]', $('select[name*="serendipity[target_directory][1]"]').val());
                                 var progress = document.createElement('progress');
                                 var progressContainer = document.createElement('span');
                                 progressContainer.className = 'msg_notice';
@@ -1646,7 +1651,7 @@ $(function() {
                                         canvas.width = width;
                                         canvas.height = height;
                                         canvas.getContext('2d').drawImage(image, 0, 0, width, height);
-                                        
+
                                         if (type == "image/bmp") {
                                             {* bmp is not supported *}
                                             type = "image/png";
@@ -1674,6 +1679,19 @@ $(function() {
     if ($('#serendipity_only_path').length > 0) {
         $('#serendipity_only_path').change(function() {
             serendipity.SetCookie('serendipity_only_path', $('#serendipity_only_path').val());
+        });
+    }
+
+    if ($('.image_move').length > 0) {
+        $('.image_move').removeClass('hidden');
+        $('.image_move').magnificPopup({
+            type: 'inline',
+        });
+        $('#move-popup form').submit(function(e) {
+            e.preventDefault();
+            $('#newDir').val($('#move-popup form select').val());
+            $.magnificPopup.close();
+            $('input[name="toggle_move"]').click();
         });
     }
 
@@ -1743,15 +1761,19 @@ $(function() {
 
     // Equal Heights
     $(window).load(function() {
-        if (mq_small) {
-            serendipity.sync_heights();
+        if(!Modernizr.flexbox) {
+            if (mq_small) {
+                serendipity.sync_heights();
+            }
         }
     });
 
     // Make sure plugin list heights are recalculated when switching tabs
     $('#pluginlist_tabs a').click(function() {
-        if (mq_small) {
-            serendipity.sync_heights();
+        if(!Modernizr.flexbox) {
+            if (mq_small) {
+                serendipity.sync_heights();
+            }
         }
     });
 });

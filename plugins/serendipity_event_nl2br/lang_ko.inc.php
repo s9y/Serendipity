@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 /**
  *  @version  
@@ -7,6 +7,6 @@
  *  EN-Revision: Revision of lang_en.inc.php
  */
 
-@define('PLUGIN_EVENT_NL2BR_NAME',     '마크업: NL2BR');
-@define('PLUGIN_EVENT_NL2BR_DESC',     '새 줄을 BR 태그로 변환함');
+@define('PLUGIN_EVENT_NL2BR_NAME', '마크업: NL2BR');
+@define('PLUGIN_EVENT_NL2BR_DESC', '새 줄을 BR 태그로 변환함');
 

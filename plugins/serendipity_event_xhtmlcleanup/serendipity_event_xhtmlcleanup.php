@@ -1,4 +1,8 @@
-<?php # $Id$
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -15,9 +19,9 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_XHTMLCLEANUP_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.7');
+        $propbag->add('version',       '1.8');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -58,16 +62,19 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         $propbag->add('configuration', $conf_array);
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
@@ -98,12 +105,14 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         return true;
     }
 
-    function fixUTFEntity(&$string) {
+    function fixUTFEntity(&$string)
+    {
         $string = preg_replace('/&amp;#(x[a-f0-9]{1,4}|[0-9]{1,5});/', '&#$1;', $string);
         return true;
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
         static $convert_fields = array(
             'fullBody',
@@ -113,26 +122,27 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         );
         static $youtube = null;
         if ($youtube === null) {
-            $youtube = serendipity_db_bool($this->get_config('youtube'));
+            $youtube = serendipity_db_bool($this->get_config('youtube', 'false'));
         }
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
+
             switch($event) {
+
                 case 'backend_view_comment':
-                    if (serendipity_db_bool($this->get_config('utf8_parse'))) {
+                    if (serendipity_db_bool($this->get_config('utf8_parse', 'true'))) {
                         foreach($convert_fields AS $convert_field) {
                             $this->fixUTFEntity($eventData[$convert_field]);
                         }
                     }
-                    return true;
                     break;
 
                 case 'frontend_display':
-                    $this->cleanup_parse = serendipity_db_bool($this->get_config('xhtml_parse'));
+                    $this->cleanup_parse = serendipity_db_bool($this->get_config('xhtml_parse', 'true'));
                     foreach ($this->markup_elements as $temp) {
-                        if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
+                        if (serendipity_db_bool($this->get_config($temp['name'], 'true')) && isset($eventData[$temp['element']]) &&
                             !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = $temp['element'];
@@ -150,37 +160,36 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
                         }
                     }
 
-                    if (serendipity_db_bool($this->get_config('utf8_parse'))) {
+                    if (serendipity_db_bool($this->get_config('utf8_parse', 'true'))) {
                         $this->fixUTFEntity($eventData['author']);
                         $this->fixUTFEntity($eventData['comment']);
                     }
-
-                    return true;
                     break;
 
                 case 'frontend_display:html:per_entry':
-                    if (serendipity_db_bool($this->get_config('utf8_parse'))) {
+                    if (serendipity_db_bool($this->get_config('utf8_parse', 'true'))) {
                         $this->fixUTFEntity($eventData['author']);
                         $this->fixUTFEntity($eventData['title']);
                     }
-
-                    return true;
                     break;
 
                 default:
                     return false;
-            }
 
+            }
+            return true;
         } else {
             return false;
         }
     }
 
-    function youtubify(&$text) {
+    function youtubify(&$text)
+    {
         $text = preg_replace_callback('@<object(.*)>(.*)</object>@imsU', array($this, 'youtubify_regex'), $text);
     }
-    
-    function youtubify_regex($matches) {
+
+    function youtubify_regex($matches)
+    {
         if (!preg_match('@<embed@i', $matches[2])) return $matches[0];
 
         preg_match('@width=["\']?([0-9]+)@ims', $matches[1], $m);
@@ -191,7 +200,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
 
         preg_match('@<param name="movie" value="(.+)"[\s/]*?>@imsU', $matches[2], $m);
         $movie = $m[1];
-        
+
         if (empty($movie)) {
             preg_match('@<param value="(.+)" name="movie"[\s/]*?>@imsU', $matches[2], $m);
             $movie = $m[1];
@@ -201,7 +210,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         $appendix = str_replace('</embed>', '', $appendix);
 
         $out = '<!-- xhtml clean youtube --><object type="application/x-shockwave-flash" width="' . $width . '" height="' . $height . '" data="' . $movie . '">'
-             . '<param name="movie" value="' . $movie . '" />' 
+             . '<param name="movie" value="' . $movie . '" />'
              . $appendix . '</object><!-- /xhtml clean youtube -->';
         $out .= "\n\n<!-- {$matches[0]} -->\n\n";
 
@@ -209,7 +218,8 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
     }
 
     // Takes an input tag and search for ommitted attributes. Expects a single tag (array, index 0)
-    function clean_tag($data) {
+    function clean_tag($data)
+    {
         // Restore tags from preg_replace_callback buffer, as those can't be passed in the function header
         $tag      = &$this->cleanup_tag;
         $checkfor = &$this->cleanup_checkfor;
@@ -221,7 +231,7 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
             case 'utf-8':
                 $p = xml_parser_create(LANG_CHARSET);
                 break;
-            
+
             default:
                 $p = xml_parser_create('');
         }
@@ -252,9 +262,12 @@ class serendipity_event_xhtmlcleanup extends serendipity_event
         return $data[0];
     }
 
-    function clean_htmlspecialchars($given, $quote_style = ENT_QUOTES) {
+    function clean_htmlspecialchars($given, $quote_style = ENT_QUOTES)
+    {
         return '<' . $given[1] . $given[2] . $given[3] . '=' . $given[4] . serendipity_specialchars(serendipity_entity_decode($given[5], $quote_style), $quote_style) . $given[6];
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
+?>

@@ -1,6 +1,6 @@
 <h2>{if $entry_vars.entry.title}{$CONST.EDIT_ENTRY}{else}{$CONST.NEW_ENTRY}{/if}</h2>
 {if $entry_vars.errMsg}
-    <span class="msg_error"><span class="icon-attention-circled"></span> {$entry_vars.errMsg}</span>
+    <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$entry_vars.errMsg}</span>
 {/if}
 <form id="serendipityEntry" name="serendipityEntry" {$entry_vars.entry.entry_form} action="{$entry_vars.targetURL}" method="post">
     {foreach $entry_vars.hiddens as $key => $value}
@@ -78,18 +78,21 @@
     </div>
 
     <div id="edit_entry_submit">
-        <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|@formatTime:'Y-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
-        <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="{$CONST.CATEGORY}"><span class="icon-list-bullet"></span><span class="visuallyhidden">{$CONST.CATEGORIES}</span></a>
+        <button id="reset_timestamp" class="button_link" type="button" href="#serendipityNewTimestamp" data-currtime="{$entry_vars.reset_timestamp|formatTime:'Y-m-d\TH:i':true:false:true}" title="{$CONST.RESET_DATE_DESC}"><span class="icon-clock" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.RESET_DATE}</span></button>
+        <a id="select_category" class="button_link icon_link" href="#edit_entry_category" title="{$CONST.CATEGORY}"><span class="icon-list-bullet" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.CATEGORIES}</span></a>
     {if class_exists('serendipity_event_freetag')}
-        <a id="select_tags" class="button_link icon_link" href="#edit_entry_freetags" title="{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}"><span class="icon-tag"></span><span class="visuallyhidden">{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}</span></a>
+        <a id="select_tags" class="button_link icon_link" href="#edit_entry_freetags" title="{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}"><span class="icon-tag" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.PLUGIN_EVENT_FREETAG_MANAGETAGS}</span></a>
     {/if}
-        <button id="switch_entry_status" class="button_link" type="button" href="#edit_entry_status" title="{if $entry_vars.draft_mode == 'publish'}{$CONST.PUBLISH}{else}{$CONST.DRAFT}{/if}" data-title-alt="{if $entry_vars.draft_mode == 'publish'}{$CONST.DRAFT}{else}{$CONST.PUBLISH}{/if}">{if $entry_vars.draft_mode == 'publish'}<span class="icon-toggle-on"></span><span class="visuallyhidden"> {$CONST.PUBLISH}</span>{else}<span class="icon-toggle-off"></span><span class="visuallyhidden"> {$CONST.DRAFT}</span>{/if}</button>
+        <button id="switch_entry_status" class="button_link" type="button" href="#edit_entry_status" title="{if $entry_vars.draft_mode == 'publish'}{$CONST.PUBLISH}{else}{$CONST.DRAFT}{/if}" data-title-alt="{if $entry_vars.draft_mode == 'publish'}{$CONST.DRAFT}{else}{$CONST.PUBLISH}{/if}">{if $entry_vars.draft_mode == 'publish'}<span class="icon-toggle-on" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PUBLISH}</span>{else}<span class="icon-toggle-off" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DRAFT}</span>{/if}</button>
+        {if $entry_vars.entry.id}
+            <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry_vars.entry.id}&amp;{$entry_vars.urlToken}" title="{$CONST.DELETE}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
+        {/if}
         <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
         <input type="submit" value="{$CONST.SAVE}">
     </div>
 
     <div id="edit_entry_metadata" class="clearfix">
-        <button id="toggle_metadata" class="icon_link" type="button"><span class="icon-right-dir"></span> {$CONST.ENTRY_METADATA}</button>
+        <button id="toggle_metadata" class="icon_link" type="button"><span class="icon-right-dir" aria-hidden="true"></span> {$CONST.ENTRY_METADATA}</button>
 
         <div id="meta_data" class="additional_info">
         {if $entry_vars.allowDateManipulation}
@@ -97,7 +100,7 @@
                 <input name="serendipity[chk_timestamp]" type="hidden" value="{$entry_vars.timestamp|escape}">
 
                 <label for="serendipityNewTimestamp">{$CONST.DATE}</label>
-                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|@formatTime:'Y-m-d\TH:i':true:false:true}">
+                <input id="serendipityNewTimestamp" name="serendipity[new_timestamp]" type="datetime-local" value="{$entry_vars.timestamp|formatTime:'Y-m-d\TH:i':true:false:true}">
             </div>
         {/if}
             <div id="edit_entry_status" class="form_select">
@@ -131,8 +134,8 @@
                     <div id="category_filter" class="form_field">
                         <label for="categoryfilter" class="visuallyhidden">{$CONST.FILTERS}</label>
                         <input id="categoryfilter" type="text" placeholder="{$CONST.FILTERS}: {$CONST.CATEGORIES}">
-                        <button class="reset_livefilter icon_link" type="button" data-target="categoryfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
-                        <button id="toggle_cat_view" class="icon_link" type="button" title="{$CONST.TOGGLE_VIEW}"><span class="icon-th"></span><span class="visuallyhidden">{$CONST.TOGGLE_VIEW}</span></button>
+                        <button class="reset_livefilter icon_link" type="button" data-target="categoryfilter" title="{$CONST.RESET_FILTERS}"><span class="icon-cancel" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.RESET_FILTERS}</span></button>
+                        <button id="toggle_cat_view" class="icon_link" type="button" title="{$CONST.TOGGLE_VIEW}"><span class="icon-th" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.TOGGLE_VIEW}</span></button>
                     </div>
 
                 {foreach from=$entry_vars.category_options item="entry_cat"}
@@ -144,19 +147,21 @@
                         <label for="serendipity_category_{$entry_cat.categoryid}">{$entry_cat.category_name|escape}</label>
                     </div>
                 {/foreach}
+
                 </fieldset>
             </div>
         </div>
     </div>
 
-    {capture name='advanced_options'}{$entry_vars.entry|@serendipity_refhookPlugin:'backend_display'}{/capture}
-    {if ! empty($smarty.capture.advanced_options) }
-        <div id="advanced_options">
-            <button id="toggle_advanced" class="icon_link" type="button"><span class="icon-right-dir"></span> {$CONST.ADVANCED_OPTIONS}</button>
-            <div id="adv_opts" class="additional_info">
+    {capture name='advanced_options'}{$entry_vars.entry|serendipity_refhookPlugin:'backend_display'}{/capture}
+    {if !empty($smarty.capture.advanced_options)}
+
+    <div id="advanced_options">
+        <button id="toggle_advanced" class="icon_link" type="button"><span class="icon-right-dir" aria-hidden="true"></span> {$CONST.ADVANCED_OPTIONS}</button>
+        <div id="adv_opts" class="additional_info">
             {$smarty.capture.advanced_options}
-            </div>
         </div>
+    </div>
     {/if}
 
 </form>
@@ -164,5 +169,5 @@
     {foreach from=$entry_vars.wysiwyg_blocks item="wysiwyg_block_item" key="wysiwyg_block_jsname"}
         {$wysiwyg_block_item|emit_htmlarea_code:$wysiwyg_block_jsname}
     {/foreach}
-    {$entry_vars.wysiwyg_blocks|@serendipity_refhookPlugin:'backend_wysiwyg_finish'}
+    {$entry_vars.wysiwyg_blocks|serendipity_refhookPlugin:'backend_wysiwyg_finish'}
 {/if}

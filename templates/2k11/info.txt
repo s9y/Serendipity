@@ -3,3 +3,4 @@ Author: Matthias Mees, Veit Lehmann
 Date: 2015-05-19
 Require Serendipity: 2.0
 Backend: Yes
+Recommended: Yes

@@ -49,7 +49,7 @@
             {$img_title="{$file.path}"}
             {$img_alt="{$file.realname}"}
         {else}
-            {$link="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}"} 
+            {$link="{if $file.hotlink}{$file.path}{else}{$file.full_file}{/if}"}
             {$img_src="{$file.mimeicon}"}
             {$img_title="{$file.path}{$file.name}({$file.mime})"}
             {$img_alt="{$file.mime}"}
@@ -60,9 +60,9 @@
         {$link="?serendipity[adminModule]=images&amp;serendipity[adminAction]=choose&amp;serendipity[noBanner]=true&amp;serendipity[noSidebar]=true&amp;serendipity[noFooter]=true&amp;serendipity[fid]={$file.id}&amp;serendipity[filename_only]={$media.filename_only}&amp;serendipity[textarea]={$media.textarea}&amp;serendipity[htmltarget]={$media.htmltarget}"}
     {/if}
 
-            <article id="media_{$file.id}" class="media_file {if $media.manage}manage {/if}{cycle values="odd,even"}">
+            <article id="media_{$file.id}" class="media_file {if $media.manage AND $media.multiperm}manage {/if}{cycle values="odd,even"}">
                 <header class="clearfix">
-                    {if $media.manage}
+                    {if $media.manage AND $media.multiperm}
 
                     <div class="form_check">
                         <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
@@ -77,7 +77,7 @@
 
                 <div class="clearfix equal_heights media_file_wrap">
                     <div class="media_file_preview">
-                        <a {if $media.manage}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                        <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
                             <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
                         </a>
                         <footer id="media_file_meta_{$file.id}" class="media_file_meta additional_info">
@@ -112,28 +112,30 @@
             {if $media.manage || {serendipity_getConfigVar key='showMediaToolbar'}}
 
                 <ul class="media_file_actions actions plainList clearfix">
-                    <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="{$CONST.SHOW_METADATA}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.SHOW_METADATA}</span></a></li>
+                    <li><a class="media_show_info button_link" href="#media_file_meta_{$file.id}" title="{$CONST.SHOW_METADATA}"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SHOW_METADATA}</span></a></li>
                 {if $file.is_editable}
 
-                    <li><button class="media_rename button_link" type="button" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></button></li>
-                    {if $file.is_image AND NOT $file.hotlink}
+                    <li><button class="media_rename button_link" type="button" title="{$CONST.MEDIA_RENAME}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-edit" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MEDIA_RENAME}</span></button></li>
+                    {if $file.is_image AND NOT $file.hotlink AND $media.multiperm}
 
-                    <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fname]={$file.name|truncate:30:"&hellip;"}&amp;serendipity[fid]={$file.id}&amp;{$media.extraParems}" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
+                    <li><a class="media_resize button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=scaleSelect&amp;serendipity[fname]={$file.name|truncate:30:"&hellip;"}&amp;serendipity[fid]={$file.id}&amp;{$media.extraParems}" title="{$CONST.IMAGE_RESIZE}"><span class="icon-resize-full" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.IMAGE_RESIZE}</span></a></li>
                     {/if}
-                    {if $file.is_image AND NOT $file.hotlink}
+                    {if $file.is_image AND NOT $file.hotlink AND $media.multiperm}
 
-                    <li><a class="media_rotate_left button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
+                    <li><a class="media_rotate_left button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_LEFT}"><span class="icon-ccw" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.IMAGE_ROTATE_LEFT}</span></a></li>
                     {/if}
-                    {if $file.is_image AND NOT $file.hotlink}
+                    {if $file.is_image AND NOT $file.hotlink AND $media.multiperm}
 
-                    <li><a class="media_rotate_right button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}"><span class="icon-cw"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
+                    <li><a class="media_rotate_right button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=rotateCW&amp;serendipity[fid]={$file.id}" title="{$CONST.IMAGE_ROTATE_RIGHT}"><span class="icon-cw" aria-hidden="true"></span><span class="visuallyhidden">{$CONST.IMAGE_ROTATE_RIGHT}</span></a></li>
                     {/if}
-                    {if $media.manage}
+                    {if $media.manage AND $media.multiperm}
 
-                    <li><a class="media_prop button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
+                    <li><a class="media_prop button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=properties&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_PROP}"><span class="icon-picture" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MEDIA_PROP}</span></a></li>
                     {/if}
+                    {if $media.multiperm}
 
-                    <li><a class="media_delete button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-trash"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
+                    <li><a class="media_delete button_link" href="?serendipity[adminModule]=images&amp;serendipity[adminAction]=delete&amp;serendipity[fid]={$file.id}" title="{$CONST.MEDIA_DELETE}" data-fileid="{$file.id}" data-filename="{$file.name|escape:javascript}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MEDIA_DELETE}</span></a></li>
+                    {/if}
                 {/if}
 
                 </ul>

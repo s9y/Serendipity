@@ -1,10 +1,14 @@
-<?php # $Id$
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 class serendipity_plugin_eventwrapper extends serendipity_plugin
 {
-var $rewrite_from, $rewrite_to;
+    var $rewrite_from, $rewrite_to;
 
     function introspect(&$propbag)
     {
@@ -14,9 +18,9 @@ var $rewrite_from, $rewrite_to;
         $propbag->add('description',   PLUGIN_EVENT_WRAPPER_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -30,6 +34,7 @@ var $rewrite_from, $rewrite_to;
         global $serendipity;
 
         switch($name) {
+
             case 'event_plugin':
                 $plugins = serendipity_plugin_api::get_event_plugins();
                 $select = array();
@@ -55,14 +60,14 @@ var $rewrite_from, $rewrite_to;
                 break;
 
             default:
-                    return false;
+                return false;
         }
         return true;
     }
 
     function generate_content(&$title)
     {
-        $plug = $this->get_config('event_plugin', 'false');
+        $plug = $this->get_config('event_plugin', 'false');// mixed!
         if ($plug == 'false') {
             return;
         }
@@ -79,6 +84,7 @@ var $rewrite_from, $rewrite_to;
             $title = $faketitle;
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

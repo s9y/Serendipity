@@ -1,4 +1,4 @@
-<?php # $Id: lang_cz.inc.php 1410 2007-12-03 23:40:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1410 $
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_BBCODE_TRANSFORM',    'Povolit (= pøekládat) znaèkovací formát <a href="http://www.phpbb.com/phpBB/faq.php?mode=bbcode">BBCode</a>');
 @define('PLUGIN_EVENT_BBCODE_TARGET',       'Pou¾ít pro odkazy target="_blank" (odkazy otevírat v novém oknì)?');
 
-?>

@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_html_nugget extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_html_nugget extends serendipity_plugin
+{
     var $title = HTML_NUGGET;
 
     function introspect(&$propbag)
@@ -17,7 +22,7 @@ class serendipity_plugin_html_nugget extends serendipity_plugin {
         $propbag->add('description',   $desc);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array(
                                         'title',
                                         'backend_title',
@@ -90,7 +95,7 @@ class serendipity_plugin_html_nugget extends serendipity_plugin {
             return false;
         }
 
-        if ($this->get_config('markup', 'true') == 'true') {
+        if (serendipity_db_bool($this->get_config('markup', 'true'))) {
             $entry = array('html_nugget' => $this->get_config('content'));
             serendipity_plugin_api::hook_event('frontend_display', $entry);
             echo $entry['html_nugget'];
@@ -98,6 +103,7 @@ class serendipity_plugin_html_nugget extends serendipity_plugin {
             echo $this->get_config('content');
         }
     }
+
 }
 
 ?>

@@ -70,7 +70,7 @@ $template_config = array(
     array(
         'var'           => 'theme_instructions',
         'type'          => 'content',
-        'default'       => $ep_msg . THEME_INSTRUCTIONS . '<p>' . CATEGORIES_ON_ARCHIVE_DESC . '</p><p>' . TAGS_ON_ARCHIVE_DESC . '<p>',
+        'default'       => '<p>' . THEME_DEMO_AVAILABLE . '</p>' . $ep_msg . THEME_INSTRUCTIONS . '<p>' . CATEGORIES_ON_ARCHIVE_DESC . '</p><p>' . TAGS_ON_ARCHIVE_DESC . '</p>',
     ),
     array(
         'var'           => 'default_header_image',

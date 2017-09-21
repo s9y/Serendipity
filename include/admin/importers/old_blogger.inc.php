@@ -7,7 +7,7 @@ class Serendipity_Import_OldBlogger extends Serendipity_Import {
     var $data        = array();
     var $inputFields = array();
 
-    function Serendipity_Import_OldBlogger($data) {
+    function __construct($data) {
         global $serendipity;
 
         $this->data = $data;

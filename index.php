@@ -74,7 +74,7 @@ if (preg_match(PAT_ARCHIVES, $uri, $matches) || isset($serendipity['GET']['range
            isset($_GET['p'])) {
     serveEntry($matches);
 } elseif (preg_match(PAT_PERMALINK_FEEDCATEGORIES, $uri, $matches) || preg_match(PAT_PERMALINK_FEEDAUTHORS, $uri, $matches) || preg_match(PAT_FEEDS, $uri)) {
-    serveFeed();
+    serveFeed($matches);
     exit;
 } else if (preg_match(PAT_PLUGIN, $uri, $matches)) {
     servePlugin($matches);

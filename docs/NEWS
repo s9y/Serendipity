@@ -1,10 +1,186 @@
-Version 2.1 ()
+Version 2.x.x (major) ()
 ------------------------------------------------------------------------
+
+    * Adapt .htacess default rules to exclude rewriting documentation
+      (Issue #521)
+
+    * Add backend_view_entry hook, that is executed for every entry
+      in the backend entry list
+
+    * Updated entryproperties plugin to support a custom property for
+      multiple ownership of an article
+
+    * Emit and detect rel=trackback element to find trackback
+      url, to have a reliable alternative to RDF used so far
+
+    * Merge and rename the two configuration variables to limit
+      displayed entries in the dashboard (#493):
+      
+      $serendipity['dashboardLimit'] and
+      $serendipity['dashboardDraftLimit'] are now merged into
+      $serendipity['dashboardEntriesLimit'] - please change your
+      serendipity_config_local.inc.php accordingly if you used
+      the former variables.
+
+      The dashboard will now show as many future entries as 
+      configured in "dashboardEntriesLimit"; if there are less
+      future entries, it will display drafts until 
+      "dashboardEntriesLimit" is reached.
+
+    * Fix a regression in Net/DNSBL regarding
+      serendipity_event_spamblock_rbl and
+      serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
+      bundled library to core and patching Net/DNSBL (#497)
+
+    * Add a "delete" button to the backend entry form (#491, #494)
+
+    * Change Spartacus default mirror to github (#489)
+
+Version 2.1.1 (April 9th, 2017)
+------------------------------------------------------------------------
+
+    * Fixed a regression issue where configuration variables could not
+      properly be stored when they were set to false.
+
+Version 2.1.0 (April 8th, 2017)
+------------------------------------------------------------------------
+
+    * Some more PHP7 error catching
+    
+    * Fix missing token when updating plugin
+    
+    * Fix missing variable name in regular expression match, Issue #442
+
+Version 2.1-rc1 (January 26th, 2017)
+------------------------------------------------------------------------
+
+    * Fix issue #437 - Remove the hardcoded media filter only_filename
+      input field and re-allow the $order_fields['i.name'].
+ 
+    * Issue #430, fix proper name of new feedShowMail configuration var
+      in rss.php for showing mail addresses
+      
+    * [Security] Enhance CSRF-Tokens for toggling/moderating comments
+
+    * Allow to set a default category for authors (personal preferences)
+    
+    * Changed how the hidden password element is displayed to prevent
+      browsers from autofilling it into the entryproperties plugin
+
+    * [Security] Enhanced media upload check to also check redirects
+      for local files, thanks to Xu Yue (again!)
+
+    * [Security] Prevent XSS in adding category and directory names, 
+      thanks to Edric Teo @smarterbitbybit.
+      
+    * [Security] For multi-deletion of entries, secure the HTTP referrer
+      output to prevent XSS (Issue #435)
+      
+    * [Security] Reject %0D/%0A in exit tracking and other places
+      (Issue #434)
+      
+    * [Security] Redirection of comment.php now checks the referrer
+      and only allows the blog's host (thanks to Lee Sheldon Victor)
+      
+    * [Security] Fix missing integer casting for inserting new categories
+      (thanks to cdxy)
+
+    * Disabled Selenium test files unless enabled
+
+Version 2.1-beta2 (September 26th, 2016)
+------------------------------------------------------------------------
+    * Improved backend accessibility by hiding iconfont icons for
+      screenreaders (using aria-hidden).
+
+    * Replaced the JS-based equal height solution in the backend with
+      a modern CSS-only solution based on Flexbox for browsers that
+      support it. (Browsers that do not support Flexbox or that only
+      support outdated versions of Flexbox get the old JS solution as
+      a fallback.)
+
+    * [Security] Prevent moving files by using their directory name.
+      [Security] Possible SQL injection for entry category assignment
+      [Security] Possible SQL injection for removing&adding a plugin
+      
+      All issues require a valid backend login.
+      Thanks to Hendrik Buchwald for finding this via their
+      RIPS source code analyzer (www.ripstech.com)
+      
+    * [Security] Add new configuration option to enable fetching
+      local files for the media uploader. By default this is now
+      disabled to prevent Server Side Request Forgery (SSRF).
+      Thanks to Xu Yue for pointing this out!
+
+    * Added new API wrapper serendipity_request_url() to request URLs.
+      Currently uses HTTP_Request2, might change to curl or others in
+      the future, but irrelevant to plugins using this function.
+
+    * Removed outdated themes blue, carl_contest, kubrick and wp. They
+      live on Spartacus now.
+
+    * Added new theme "Skeleton".  Skeleton is a responsive, mobile first
+      HTML5/CSS3 theme built on the Skeleton framework.
+
+    * Fix comaptibility bug preventing Internet Explorer (+Edge) to
+      clear the entry editor cache when saving an entry
+
+    * Remove backend js from preview_iframe.tpls, makeing entry previews
+      faster, more accurate and more reliable
+
+    * Introduce new plugin api function
+      $plugin->getFile($filename, $key = 'serendipityPath'). Other
+      than parseTemplate($filename) it will not parse the found file
+      via smarty, and it allows directories inside $filename. Intended
+      use is finding files like images via the fallback chain, giving
+      themes the chance to serve custom versions instead.
+
+    * Give theme authors the option to force using a template file from
+      the frontend, {getFile file=... frontend=true}
+
+    * Fix entry preview by making sure it always uses the correct
+      template files to generate preview, replacing internal magic
+      with direct parameters
+
+    * Rewrite and simplification of the file fallback chain in
+      serendipity_getTemplateFile. Removes templates/default/ from
+      from the chain, as it was replaced by templates/2k11/
+
+Version 2.1-beta1 (June 8th, 2016)
+------------------------------------------------------------------------
+
+    * Added new theme "Timeline".  Timeline is a fully responsive,
+      mobile first HTML5/CSS3 theme built on the Bootstrap
+      framework.
+
+    * Add new config variable $serendipity['cors'] to allow to set
+      Access-Control-Allow-Origin: * headers for sensible places
+      (RSS feeds), to i.e. allow JavaScript's XMLHTTPRequest to read
+      those feeds.
+
+    * Introduce a section with modern recommended themes in the
+      themes backend menu. Themes can be included there by setting
+      Recommended: Yes in their info.txt
+
+    * Merge sidebar and event upgrade pages in one single page
+      button
+
+    * Add colorpicker as possible plugin option item type, set
+      type to 'color' to use it
+
+    * Comments made via the backend on own articles don't trigger
+      the comment notification (thanks to xoxys)
+
+    * Fix missing perm checks for "standard user" in MediaLibrary
+
+    * Fix show Dashboard entries by authors entries
+
+    * Fix show Dashboard comments by authors entries (#385)
+
     * Use CDATA encoded body for ATOM feed
 
     * Fix: Ajax upload to ML now also works for non-images
 
-    * Added new theme "Clean-Blog".  Clean Blog is a fully responsive, 
+    * Added new theme "Clean-Blog".  Clean Blog is a fully responsive,
       mobile first HTML5/CSS3 theme built on the Bootstrap
       framework.
 
@@ -118,9 +294,9 @@ Version 2.0.3 (January 4th, 2016)
 
     * Fix XSS in backend comment editing form for logged-in authors,
       thanks to Onur Yilmaz and Robert Abela from Netsparker.com
-          
+
     * Fix some backend entry form related event messages
-              
+
 
 Version 2.0.2 (July 24th, 2015)
 ------------------------------------------------------------------------
@@ -132,7 +308,7 @@ Version 2.0.2 (July 24th, 2015)
         you have possible untrustworthy authors)
       - Add proper escaping for comment approval tokens to prevent
         SQL injection (authenticated authors only)
-      - Add proper escaping of comment's author names in the       
+      - Add proper escaping of comment's author names in the
         comment reply form to prevent XSS (2k11 template, javascript
         based)
 
@@ -164,7 +340,7 @@ Version 2.0.2 (July 24th, 2015)
 
         PLEASE NOTE:
 
-        2.0.1 brought in an automatted include of a themes "user.css"
+        2.0.1 brought in an automated include of a themes "user.css"
         file. If you don't want to use such file any more (and you have
         one), you will have to delete or rename it by hand!
 
@@ -327,7 +503,7 @@ Version 2.0-rc2 (December 23rd, 2014)
 ------------------------------------------------------------------------
 
     * Fixes escaping of comments in the new backend pane to prevent
-      XSS. Thanks to Steffen Röemann for reporting!
+      XSS. Thanks to Steffen Rï¿½emann for reporting!
 
     * Fix wrong parameter count in serendipity_entity_decode
 
@@ -913,7 +1089,7 @@ Version 1.7 (May 11th, 2013)
       add that to .tpl files.
       (garvinhicking)
 
-    * Patch by Markus Brükner: Properly handle files that have no
+    * Patch by Markus Brï¿½kner: Properly handle files that have no
       extension in media database
 
     * Made Spartacus recognize github.com mirror (garvinhicking)

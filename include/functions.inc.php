@@ -46,7 +46,10 @@ function serendipity_truncateString($s, $len) {
  */
 function serendipity_gzCompression() {
     global $serendipity;
-    if (isset($serendipity['useGzip']) && serendipity_db_bool($serendipity['useGzip']) && function_exists('ob_gzhandler') && extension_loaded('zlib') && serendipity_ini_bool(ini_get('zlib.output_compression')) == false && serendipity_ini_bool(ini_get('session.use_trans_sid')) == false) {
+    if (isset($serendipity['useGzip']) && serendipity_db_bool($serendipity['useGzip'])
+        && function_exists('ob_gzhandler') && extension_loaded('zlib')
+        && serendipity_ini_bool(ini_get('zlib.output_compression')) == false
+        && serendipity_ini_bool(ini_get('session.use_trans_sid')) == false) {
         ob_start("ob_gzhandler");
     }
 }
@@ -790,7 +793,7 @@ function serendipity_track_referrer($entry = 0) {
 /**
  * Garbage Collection for suppressed referrers
  *
- * "Bad" referrers, that only occured once to your entry are put within a
+ * "Bad" referrers, that only occurred once to your entry are put within a
  * SUPPRESS database table. Entries contained there will be cleaned up eventually.
  *
  * @access public
@@ -1020,7 +1023,7 @@ function serendipity_discover_rss($name, $ext) {
  * @return  boolean     Return true on success, false on failure
  */
 function serendipity_isResponseClean($d) {
-    return (strpos($d, "\r") === false && strpos($d, "\n") === false);
+    return (strpos($d, "\r") === false && strpos($d, "\n") === false && stripos($d, "%0A") === false && stripos($d, "%0D") === false);
 }
 
 /**
@@ -1117,6 +1120,114 @@ function serendipity_request_end() {
     return true;
 }
 
+/* Request the contents of an URL, API wrapper
+ * @param $uri string               The URL to fetch
+ * @param $method string            HTTP method (GET/POST/PUT/OPTIONS...)
+ * @param $contenttype string       optional HTTP content type
+ * @param $contenttype mixed        optional extra data (i.e. POST body), can be an array
+ * @param $extra_options array      Extra options for HTTP_Request $options array (can override defaults)
+ * @param $addData string           possible extra event addData declaration for 'backend_http_request' hook
+ * @param $auth array               Array with 'user' and 'pass' for HTTP Auth
+ * @return $content string          The URL contents
+ */
+
+function serendipity_request_url($uri, $method = 'GET', $contenttype = null, $data = null, $extra_options = null, $addData = null, $auth = null) {
+    global $serendipity;
+
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
+    
+    if (is_array($extra_options)) {
+        foreach($extra_options AS $okey => $oval) {
+            $options[$okey] = $oval;
+        }
+    }
+    serendipity_plugin_api::hook_event('backend_http_request', $options, $addData);
+    serendipity_request_start();
+    if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+        $options['ssl_verify_peer'] = false;
+    }
+
+    switch(strtoupper($method)) {
+        case 'GET':
+            $http_method = HTTP_Request2::METHOD_GET;
+            break;
+
+        case 'PUT':
+            $http_method = HTTP_Request2::METHOD_PUT;
+            break;
+
+        case 'OPTIONS':
+            $http_method = HTTP_Request2::METHOD_OPTIONS;
+            break;
+
+        case 'HEAD':
+            $http_method = HTTP_Request2::METHOD_HEAD;
+            break;
+
+        case 'DELETE':
+            $http_method = HTTP_Request2::METHOD_DELETE;
+            break;
+
+        case 'TRACE':
+            $http_method = HTTP_Request2::METHOD_TRACE;
+            break;
+
+        case 'CONNECT':
+            $http_method = HTTP_Request2::METHOD_CONNECT;
+            break;
+
+        default:
+        case 'POST':
+            $http_method = HTTP_Request2::METHOD_POST;
+            break;
+
+    }
+
+    $req = new HTTP_Request2($uri, $http_method, $options);
+    if (isset($contenttype) && $contenttype !== null) {
+       $req->setHeader('Content-Type', $contenttype);
+    }
+    
+    if (is_array($auth)) {
+        $req->setAuth($auth['user'], $auth['pass']);
+    }
+
+    if ($data != null) {
+        if (is_array($data)) {
+            $req->addPostParameter($data);
+        } else {
+            $req->setBody($data);
+        }    
+    }
+
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
+        serendipity_request_end();
+        return false;
+    }
+
+
+    $fContent = $res->getBody();
+    $serendipity['last_http_request'] = array(
+        'responseCode' => $res->getStatus(),
+        'effectiveUrl' => $res->getEffectiveUrl(),
+        'reasonPhrase' => $res->getReasonPhrase(),
+        'isRedirect'   => $res->isRedirect(),
+        'cookies'      => $res->getCookies(),
+        'version'      => $res->getVersion(),
+        'header'       => $res->getHeader(),
+
+        'object'       => $res // forward compatibility for possible other checks
+    );
+    
+    serendipity_request_end();
+    return $fContent;
+}
+
+
 if (!function_exists('microtime_float')) {
     /**
      * Get current timestamp as microseconds
@@ -1160,7 +1271,8 @@ function serendipity_build_query(&$array, $array_prefix = null, $comb_char = '&a
     return implode($comb_char, $ret);
 }
 
-/* Picks a specified key from an array and returns it
+/**
+ * Picks a specified key from an array and returns it
  *
  * @access public
  * @param   array   The input array
@@ -1188,7 +1300,8 @@ function &serendipity_pickKey(&$array, $key, $default) {
     return $default;
 }
 
-/* Retrieves the current timestamp but only deals with minutes to optimize Database caching
+/**
+ * Retrieves the current timestamp but only deals with minutes to optimize Database caching
  * @access public
  * @return timestamp
  * @author Matthew Groeninger
@@ -1205,23 +1318,61 @@ function serendipity_db_time() {
     return $ts;
 }
 
-/* Inits the logger.
+/**
+ * Inits the logger.
  * @return null
  */
 function serendipity_initLog() {
     global $serendipity;
 
     if (isset($serendipity['logLevel']) && $serendipity['logLevel'] !== 'Off') {
-	if ($serendipity['logLevel'] == 'debug') {
-	    $log_level = Psr\Log\LogLevel::DEBUG;
-	} else {
-	    $log_level = Psr\Log\LogLevel::ERROR;
-	}
-
-	$serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
+        if ($serendipity['logLevel'] == 'debug') {
+            $log_level = Psr\Log\LogLevel::DEBUG;
+        } else {
+            $log_level = Psr\Log\LogLevel::ERROR;
+        }
+        $serendipity['logger'] = new Katzgrau\KLogger\Logger($serendipity['serendipityPath'] . '/templates_c/logs', $log_level);
     }
 }
-                                                                     
+
+/**
+ * Check whether a given URL is valid to be locally requested
+ * @return boolean
+ */
+function serendipity_url_allowed($url) {
+    global $serendipity;
+
+    if ($serendipity['allowLocalURL']) {
+        return true;
+    }
+
+    $parts = @parse_url($url);
+    if (!is_array($parts) || empty($parts['host'])) {
+        return false;
+    }
+ 
+    $host = trim($parts['host'], '.');
+    if (preg_match('@^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$@imsU', $host)) {
+        $ip = $host;
+    } else {
+        $ip = gethostbyname($host);
+        if ($ip === $host) {
+            $ip = false;
+        }
+    }
+
+    if ($ip) {
+        $ipparts = array_map('intval', explode('.', $ip));
+        if ( 127 === $ipparts[0] || 10 === $ipparts[0] || 0 === $ipparts[0]
+            || ( 172 === $ipparts[0] && 16 <= $ipparts[1] && 31 >= $ipparts[1] )
+            || ( 192 === $ipparts[0] && 168 === $ipparts[1])
+        ) {
+            return false;
+        }
+    }
+ 
+    return true;
+}
 
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */

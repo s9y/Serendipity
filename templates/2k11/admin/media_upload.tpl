@@ -40,13 +40,13 @@
                 </div>
             </div>
 
-            <button id="add_upload" class="button_link" type="button" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></button>
+            <button id="add_upload" class="button_link" type="button" title="{$CONST.IMAGE_MORE_INPUT}"><span class="icon-plus" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.IMAGE_MORE_INPUT}</span></button>
         </div>
 
         <h3>{$CONST.DOWNLOAD}</h3>
 
         <div class="panel">
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.ADD_MEDIA_BLAHBLAH_NOTE}</span>
 
             <div id="downloads">
                 <div class="clearfix form_field">

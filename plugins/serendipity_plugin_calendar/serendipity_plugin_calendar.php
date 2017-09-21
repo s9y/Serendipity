@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_calendar extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_calendar extends serendipity_plugin
+{
     var $title = CALENDAR;
 
     function introspect(&$propbag)
@@ -10,13 +15,14 @@ class serendipity_plugin_calendar extends serendipity_plugin {
         $propbag->add('configuration', array('beginningOfWeek', 'enableExtEvents', 'category'));
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.1');
+        $propbag->add('version',       '1.2');
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+
             case 'beginningOfWeek':
                 $options = array();
                 for ( $i = 1; $i <= 7; $i++ ) {
@@ -138,7 +144,7 @@ class serendipity_plugin_calendar extends serendipity_plugin {
 
                 // Calculate first timestamp of the month
                 list ($firstgy, $firstgm, $firstgd ) = p2g ( $year, $month, 1);
-                $firstts = mktime (0, 0, 0, $firstgm, $firstgd, $firstgy);
+                $firstts = mktime(0, 0, 0, $firstgm, $firstgd, $firstgy);
 
                 // Calculate first persian day, week day name
                 $firstDayWeekDay = date('w', $firstts);
@@ -207,7 +213,7 @@ class serendipity_plugin_calendar extends serendipity_plugin {
         } else {
             $catid = false;
         }
-        
+
         if ($catid) {
             $base_query   = 'C' . $catid;
             $add_query    = '/' . $base_query;
@@ -262,7 +268,7 @@ class serendipity_plugin_calendar extends serendipity_plugin {
         } // end switch
 
         $externalevents = array();
-        if (serendipity_db_bool($this->get_config('enableExtEvents', false))) {
+        if (serendipity_db_bool($this->get_config('enableExtEvents', 'false'))) {
             serendipity_plugin_api::hook_event('frontend_calendar', $externalevents, array('Month' => $month, 'Year' => $year,
                                                                                            'TS' => $ts, 'EndTS' => $endts));
         }
@@ -346,6 +352,7 @@ class serendipity_plugin_calendar extends serendipity_plugin {
         echo serendipity_smarty_fetch('CALENDAR', 'plugin_calendar.tpl');
 
     }
+
 }
 
 ?>

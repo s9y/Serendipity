@@ -26,16 +26,11 @@
 {else}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {/if}
-    <script src="{serendipity_getFile file="admin/js/modernizr.min.js"}"></script>
+    <script src="{serendipity_getFile file="js/modernizr-2.7.1.min.js" frontend=true}"></script>
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
-    <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
-    <script src="{serendipity_getFile file='admin/serendipity_editor.js'}"></script>
     <script>
         window.onload = function() {ldelim}
-            parent.document.getElementById('serendipity_iframe').style.height = document.getElementById('content').offsetHeight
-                                                                              + parseInt(document.getElementById('content').style.marginTop)
-                                                                              + parseInt(document.getElementById('content').style.marginBottom)
-                                                                              + 'px';
+            parent.document.getElementById('serendipity_iframe').style.height = document.querySelector('html').offsetHeight + 'px';
             parent.document.getElementById('serendipity_iframe').scrolling    = 'no';
             parent.document.getElementById('serendipity_iframe').style.border = 0;
         {rdelim}
@@ -44,7 +39,7 @@
 <body{if $template_option.webfonts != 'none'} class="{$template_option.webfonts}"{/if}>
 <div id="page" class="clearfix container">
     <div class="clearfix{if $leftSidebarElements > 0 && $rightSidebarElements > 0} col3{elseif $leftSidebarElements > 0 && $rightSidebarElements == 0} col2l{else} col2r{/if}">
-        <main id="content" style="padding: 1em 0; margin: 0;">
+        <main id="content"{if $template_option.imgstyle != 'none'} class="{$template_option.imgstyle}"{/if}>
         {if $mode == 'preview'}
             <div class="clearfix">
         {elseif $mode == 'save'}
@@ -52,7 +47,7 @@
             <div style="float: left; height: 75px"></div>
             {$updertHooks}
             {if $res}
-                <div class="serendipity_msg_error">{$CONST.ERROR}: <b>{$res}</b></div>
+                <div class="serendipity_msg_important">{$CONST.ERROR}: <b>{$res}</b></div>
             {else}
                 {if $lastSavedEntry}
                     <script type="text/javascript">$(document).ready(function() {
@@ -60,7 +55,7 @@
                     });
                     </script>
                 {/if}
-                <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.ENTRY_SAVED}</span>
+                <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.ENTRY_SAVED}</span>
                 <a href="{$entrylink}" target="_blank">{$CONST.VIEW}</a>
             {/if}
         {/if}

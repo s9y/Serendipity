@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -18,5 +18,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Seleccione o plugin cujos dados devem ser mostrados');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Introduza o título deste elemento de barra lateral (deixar vazio para herdar o título do plugin de acontecimento)');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

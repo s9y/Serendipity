@@ -10,22 +10,26 @@ if (!serendipity_checkPermission('adminTemplates')) {
     return;
 }
 
-class template_option {
+class template_option
+{
     var $config = null;
     var $values = null;
     var $keys   = null;
 
-    function introspect_config_item($item, &$bag) {
+    function introspect_config_item($item, &$bag)
+    {
         foreach($this->config[$item] AS $key => $val) {
             $bag->add($key, $val);
         }
     }
 
-    function get_config($item) {
+    function get_config($item)
+    {
         return $this->values[$item];
     }
 
-    function set_config($item, $value) {
+    function set_config($item, $value)
+    {
         global $serendipity;
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
@@ -48,12 +52,14 @@ class template_option {
         return true;
     }
 
-    function import(&$config) {
+    function import(&$config)
+    {
         foreach($config AS $key => $item) {
             $this->config[$item['var']] = $item;
             $this->keys[$item['var']]   = $item['var'];
         }
     }
+
 }
 
 $data = array();
@@ -62,7 +68,7 @@ if ($serendipity['GET']['adminAction'] == 'editConfiguration') {
     $data["adminAction"] = "editConfiguration";
 }
 
-if ($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['adminAction'] == 'install-frontend' || $serendipity['GET']['adminAction'] == 'install-backend') {
+if (($serendipity['GET']['adminAction'] == 'install' || $serendipity['GET']['adminAction'] == 'install-frontend' || $serendipity['GET']['adminAction'] == 'install-backend') && serendipity_checkFormToken()) {
     serendipity_plugin_api::hook_event('backend_templates_fetchtemplate', $serendipity);
 
     $themeInfo = serendipity_fetchTemplateInfo(serendipity_specialchars($serendipity['GET']['theme']));
@@ -98,7 +104,7 @@ $data["cur_template"]         = $serendipity['template'];
 $data["cur_template_backend"] = $serendipity['template_backend'];
 $data['cur_template_info']    = serendipity_fetchTemplateInfo($serendipity['template']);
 
-// NOTE: config.inc.php currently only applies to frontend configuration. Backend configuration is not planned yet, and would preferrably use a "config_backend.inc.php" file!
+// NOTE: config.inc.php currently only applies to frontend configuration. Backend configuration is not planned yet, and would preferably use a "config_backend.inc.php" file!
 if (file_exists($serendipity['serendipityPath'] . $serendipity['templatePath'] . $data['cur_template_info']['custom_config_engine'] . '/config.inc.php')) {
     serendipity_smarty_init();
     $old_template_config_groups = $template_config_groups;
@@ -169,12 +175,12 @@ $stack = array();
 serendipity_plugin_api::hook_event('backend_templates_fetchlist', $stack);
 $themes = serendipity_fetchTemplates();
 $data['templates'] = array();
+$data['recommended_templates'] = array();
 
 foreach($themes AS $theme) {
     $stack[$theme] = serendipity_fetchTemplateInfo($theme);
 }
 ksort($stack);
-
 
 foreach ($stack as $theme => $info) {
     /* Sorry, but we don't display engines */
@@ -187,7 +193,7 @@ foreach ($stack as $theme => $info) {
 
         if (file_exists($serendipity["serendipityPath"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg")) {
             $data["templates"][$theme]["fullsize${backendId}_preview"] = $serendipity["baseURL"] . $serendipity["templatePath"] . $theme . "/preview${backendId}_fullsize.jpg";
-        } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) {   // preview{$backendId}_fullsizeURL is not actually set yet in spartacus
+        } elseif (!empty($info["preview{$backendId}_fullsizeURL"])) { // preview{$backendId}_fullsizeURL is not actually set in spartacus yet
             if (file_exists($serendipity["serendipityPath"] . "/templates_c/template_cache/". $theme ."{$backendId}.jpg")) {
                 $data["templates"][$theme]["fullsize${backendId}_preview"]  = $serendipity["baseURL"] . "templates_c/template_cache/". $theme ."{$backendId}.jpg";
             } else {
@@ -216,12 +222,29 @@ foreach ($stack as $theme => $info) {
         $unmetRequirements[] = 'Serendipity '. $info['require serendipity'];
         $data['templates'][$theme]['unmetRequirements'] = sprintf(UNMET_REQUIREMENTS, implode(', ', $unmetRequirements));
     }
+
+    if ($info['recommended']) {
+        $data['recommended_templates'][$theme] = $data['templates'][$theme];
+        if ($theme != $serendipity['template'] && $theme != $serendipity['template_backend']) {
+            unset($data['templates'][$theme]);
+        }
+    }
 }
+uasort($data['templates'], function($a, $b) {
+    return strnatcasecmp($a['info']['name'], $b['info']['name']);
+});
 
-$data['cur_tpl']         = $data['templates'][$data['cur_template']];
-$data['cur_tpl_backend'] = $data['templates'][$data['cur_template_backend']];
+$data['cur_tpl']         = $data['templates'][$serendipity['template']];
+$data['cur_tpl_backend'] = $data['templates'][$serendipity['template_backend']];
+$data['urltoken']        = serendipity_setFormToken('url');
 
-unset($data['templates'][$data['cur_template']]);
+unset($data['templates'][$serendipity['template']]);
+if ($serendipity['template'] != $serendipity['template_backend'] && isset($data['recommended_templates'][$serendipity['template_backend']]) && isset($data['templates'][$serendipity['template_backend']])) {
+    // when we could not unset a template because it is a backend template, and when that template is also a recommended template, then it will now
+    // be in recommended and in the normal tmeplate list. We just detected that and have to remove it
+    unset($data['templates'][$serendipity['template_backend']]);
+}
+unset($data['recommended_templates'][$serendipity['template']]);
 
 echo serendipity_smarty_show('admin/templates.inc.tpl', $data);
 

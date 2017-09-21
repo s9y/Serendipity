@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -13,9 +13,7 @@
 #                                                                        #
 ##########################################################################
 
-@define('PLUGIN_EVENT_BBCODE_NAME',     'Balises: BBCode');
-@define('PLUGIN_EVENT_BBCODE_DESC',     'Permet l\'utilisation de balises BBCode dans le texte de vos billets');
+@define('PLUGIN_EVENT_BBCODE_NAME', 'Balises: BBCode');
+@define('PLUGIN_EVENT_BBCODE_DESC', 'Permet l\'utilisation de balises BBCode dans le texte de vos billets');
 @define('PLUGIN_EVENT_BBCODE_TRANSFORM', 'Syntaxe <a href="http://www.phpbb.com/phpBB/faq.php?mode=bbcode">BBCode</a> autorisée');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

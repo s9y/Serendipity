@@ -2,3 +2,4 @@ Name: Blue Streak
 Author: Garvin Hicking
 Date: 2005-02-15
 Require Serendipity: 0.8
+Engine: default

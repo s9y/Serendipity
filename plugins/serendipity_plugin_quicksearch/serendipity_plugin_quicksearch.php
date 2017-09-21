@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_quicksearch extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_quicksearch extends serendipity_plugin
+{
     var $title = QUICKSEARCH;
 
     function introspect(&$propbag)
@@ -9,7 +14,7 @@ class serendipity_plugin_quicksearch extends serendipity_plugin {
         $propbag->add('description',   SEARCH_FOR_ENTRY);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.1');
+        $propbag->add('version',       '1.2');
         $propbag->add('configuration', array('fullentry'));
         $propbag->add('groups',        array('FRONTEND_ENTRY_RELATED'));
     }
@@ -23,6 +28,7 @@ class serendipity_plugin_quicksearch extends serendipity_plugin {
                 $propbag->add('description', '');
                 $propbag->add('default',     true);
                 break;
+
             default:
                 return false;
         }
@@ -34,7 +40,7 @@ class serendipity_plugin_quicksearch extends serendipity_plugin {
         global $serendipity;
 
         $title = $this->title;
-        $fullentry = serendipity_db_bool($this->get_config('fullentry', true));
+        $fullentry = serendipity_db_bool($this->get_config('fullentry', 'true'));
 ?>
 <form id="searchform" action="<?php echo $serendipity['serendipityHTTPPath'] . $serendipity['indexFile']; ?>" method="get">
     <div>
@@ -48,6 +54,7 @@ class serendipity_plugin_quicksearch extends serendipity_plugin {
 <?php
         serendipity_plugin_api::hook_event('quicksearch_plugin', $serendipity);
     }
+
 }
 
 ?>

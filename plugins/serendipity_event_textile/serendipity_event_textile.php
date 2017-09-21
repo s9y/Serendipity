@@ -1,4 +1,8 @@
-<?php #
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -14,9 +18,9 @@ class serendipity_event_textile extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_TEXTILE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team', 'Lars Strojny');
-        $propbag->add('version',       '1.8.2');
+        $propbag->add('version',       '1.8.3');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '5.2.0'
         ));
@@ -63,26 +67,31 @@ class serendipity_event_textile extends serendipity_event
     }
 
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function example() {
+    function example()
+    {
         return '<p>'.PLUGIN_EVENT_TEXTILE_EXAMPLE_NOTE.'</p>';
     }
 
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+
             case 'textile_version':
                 $propbag->add('type',        'radio');
                 $propbag->add('name',        PLUGIN_EVENT_TEXTILE_VERSION);
@@ -92,7 +101,6 @@ class serendipity_event_textile extends serendipity_event
                                                 'desc'  => array('1.0', '2.0', '3.0'),
                 ));
                 $propbag->add('default',     3);
-                return true;
                 break;
 
             case 'textile_doctype':
@@ -100,7 +108,6 @@ class serendipity_event_textile extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_TEXTILE_DOCTYPE);
                 $propbag->add('description', PLUGIN_EVENT_TEXTILE_DOCTYPE_DESC);
                 $propbag->add('default',     'false');
-                return true;
                 break;
 
             case 'textile_restrict_comments':
@@ -108,7 +115,6 @@ class serendipity_event_textile extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_TEXTILE_RESTRICTCOMMENTS);
                 $propbag->add('description', PLUGIN_EVENT_TEXTILE_RESTRICTCOMMENTS_DESC);
                 $propbag->add('default',     'true');
-                return true;
                 break;
 
             case 'unescape':
@@ -116,113 +122,115 @@ class serendipity_event_textile extends serendipity_event
                 $propbag->add('name',        PLUGIN_EVENT_TEXTILE_UNESCAPE);
                 $propbag->add('description', PLUGIN_EVENT_TEXTILE_UNESCAPE_DESC);
                 $propbag->add('default',     'false');
-                return true;
+                break;
+
+            default:
+                $propbag->add('type',        'boolean');
+                $propbag->add('name',        constant($name));
+                $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
+                $propbag->add('default',     'true');
                 break;
         }
 
-        $propbag->add('type',        'boolean');
-        $propbag->add('name',        constant($name));
-        $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
-        $propbag->add('default', 'true');
         return true;
     }
 
-
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
+
             switch($event) {
-              case 'frontend_display':
 
-                $preserve_tags = &$bag->get('preserve_tags');
+                case 'frontend_display':
 
-                foreach ($this->markup_elements as $temp) {
-                    if (serendipity_db_bool($this->get_config($temp['name'], true))) {
-                        if ($eventData['properties']['ep_disable_markup_' . $this->instance] ||
-                            isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
-                            continue;
-                        }
-                        $element = $temp['element'];
+                    $preserve_tags = &$bag->get('preserve_tags');
 
-        /* find all the tags and store them in $blocks */
-
-                        $blocks = array();
-                        foreach($preserve_tags as $tag) {
-                            if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element], $matches )) {
-                                foreach($matches[1] as $match) {
-                                    $blocks[] = $match;
-                                }
+                    foreach ($this->markup_elements as $temp) {
+                        if (serendipity_db_bool($this->get_config($temp['name'], 'true'))) {
+                            if ($eventData['properties']['ep_disable_markup_' . $this->instance] ||
+                                    isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
+                                continue;
                             }
-                        }
+                            $element = $temp['element'];
 
-        /* replace all the blocks with some code */
+                            /* find all the tags and store them in $blocks */
 
-                        foreach($blocks as $id=>$block) {
-                            $eventData[$element] = str_replace($block, '@BLOCK::'.$id.'@', $eventData[$element]);
-                        }
-
-        /* textile it */
-
-                        if (serendipity_db_bool($this->get_config('unescape'))) {
-                            $eventData[$element] = str_replace('&quot;', '"', $eventData[$element]);
-                        }
-                        $eventData[$element] = $this->textile($eventData[$element]);
-
-        /* each block will now be "<code>BLOCK::2</code>"
-         * so look for those place holders and replace
-         * them with the original blocks */
-
-                        if (preg_match_all('/<code>BLOCK::(\d+)<\/code>/', $eventData[$element], $matches )) {
-                            foreach($matches[1] as $key=>$match) {
-                                $eventData[$element] = str_replace($matches[0][$key], $blocks[$match], $eventData[$element]);
-                            }
-                        }
-
-        /* post-process each block */
-
-                        foreach($preserve_tags as $tag) {
-                            $method = '_process_tag_' . $tag;
-                            if (method_exists($this,$method)) {
-                                if (preg_match_all('/<'.$tag.'[^>]?>(.*)<\/'.$tag.'>/msU', $eventData[$element], $matches )) {
-                                    foreach($matches[1] as $key=>$match) {
-                                        $eventData[$element] = str_replace($matches[0][$key], $this->$method($match), $eventData[$element]);
+                            $blocks = array();
+                            foreach($preserve_tags as $tag) {
+                                if (preg_match_all('/(<'.$tag.'[^>]?>.*<\/'.$tag.'>)/msU', $eventData[$element], $matches )) {
+                                    foreach($matches[1] as $match) {
+                                        $blocks[] = $match;
                                     }
                                 }
                             }
+
+                            /* replace all the blocks with some code */
+
+                            foreach($blocks as $id=>$block) {
+                                $eventData[$element] = str_replace($block, '@BLOCK::'.$id.'@', $eventData[$element]);
+                            }
+
+                            /* textile it */
+
+                            if (serendipity_db_bool($this->get_config('unescape'))) {
+                                $eventData[$element] = str_replace('&quot;', '"', $eventData[$element]);
+                            }
+                            $eventData[$element] = $this->textile($eventData[$element]);
+
+                            /* each block will now be "<code>BLOCK::2</code>"
+                             * so look for those place holders and replace
+                             * them with the original blocks */
+
+                            if (preg_match_all('/<code>BLOCK::(\d+)<\/code>/', $eventData[$element], $matches )) {
+                                foreach($matches[1] as $key=>$match) {
+                                    $eventData[$element] = str_replace($matches[0][$key], $blocks[$match], $eventData[$element]);
+                                }
+                            }
+
+                            /* post-process each block */
+
+                            foreach($preserve_tags as $tag) {
+                                $method = '_process_tag_' . $tag;
+                                if (method_exists($this,$method)) {
+                                    if (preg_match_all('/<'.$tag.'[^>]?>(.*)<\/'.$tag.'>/msU', $eventData[$element], $matches )) {
+                                        foreach($matches[1] as $key=>$match) {
+                                            $eventData[$element] = str_replace($matches[0][$key], $this->$method($match), $eventData[$element]);
+                                        }
+                                    }
+                                }
+                            }
+
+                            /* end textile processing */
+
                         }
-
-        /* end textile processing */
-
                     }
-                }
-                return true;
+                    break;
 
                 case 'frontend_comment':
-                    if (serendipity_db_bool($this->get_config('COMMENT', true))) {
+                    if (serendipity_db_bool($this->get_config('COMMENT', 'true'))) {
                         $url = $this->get_config('textile_version') == 1
                                    ? 'http://www.textism.com/tools/textile/'
                                    : 'http://txstyle.org/article/43/a-short-introduction';
                         echo '<div class="serendipity_commentDirection serendipity_comment_textile">' . sprintf(PLUGIN_EVENT_TEXTILE_TRANSFORM, $url) . '</div>';
                     }
-                    return true;
                     break;
 
                 default:
                   return false;
+
             }
-
+            return true;
         } else {
-
             return false;
-
         }
-
     }
 
-    function _process_tag_php($text) {
+    function _process_tag_php($text)
+    {
 
         $code = "<?php\n" . trim($text) . "\n?>";
 
@@ -261,15 +269,18 @@ class serendipity_event_textile extends serendipity_event
     }
 
 
-    function _process_tag_output($text) {
+    function _process_tag_output($text)
+    {
         return '<p><pre class="output">' . $text . '</pre></p>';
     }
 
-    function _process_tag_name($text) {
+    function _process_tag_name($text)
+    {
         return '<a name="'. $text . '"></a>';
     }
 
-    function textile($string) {
+    function textile($string)
+    {
         switch($this->get_config('textile_version')) {
             case 3:
                 if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
@@ -295,6 +306,8 @@ class serendipity_event_textile extends serendipity_event
                 break;
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
+?>

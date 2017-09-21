@@ -74,7 +74,7 @@ switch ($serendipity['GET']['adminAction']) {
         $messages = array();
         $data['case_do_delete'] = true;
         $messages[] = serendipity_deleteImage($serendipity['GET']['fid']);
-        $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . RIP_ENTRY . "</span>\n", $serendipity['GET']['fid']);
+        $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . RIP_ENTRY . "</span>\n", $serendipity['GET']['fid']);
 
         $data['messages'] = $messages;
         unset($messages);
@@ -93,7 +93,7 @@ switch ($serendipity['GET']['adminAction']) {
             if ($id > 0) {
                 $image = serendipity_fetchImageFromDatabase($id);
                 $messages[] = serendipity_deleteImage((int)$id);
-                $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled"></span> ' . RIP_ENTRY . "</span>\n", $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
+                $messages[] = sprintf('<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . RIP_ENTRY . "</span>\n", $image['id'] . ' - ' . serendipity_specialchars($image['realname']));
             }
         }
         $data['showML'] = showMediaLibrary();
@@ -120,37 +120,33 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'multidelete':
-        if (!serendipity_checkFormToken()) {
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDirectories')) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
         if (!is_array($serendipity['POST']['multiDelete']) && isset($_POST['toggle_move'])) {
-            echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
+            echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
-        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && empty($serendipity['POST']['newDir']) && isset($_POST['toggle_move'])) {
-            echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
+        if (is_array($serendipity['POST']['multiDelete']) && isset($serendipity['POST']['oldDir']) && (! isset($serendipity['POST']['newDir'])) && isset($_POST['toggle_move'])) {
+            echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_DIR, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
             break;
         }
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
-        if (isset($serendipity['POST']['oldDir']) && !empty($serendipity['POST']['newDir'])) {
+        if (isset($serendipity['POST']['newDir'])) {
             $messages = array();
             $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
             unset($serendipity['POST']['multiDelete']);
 
-            $oDir = ''; // oldDir is relative to Uploads/, since we can not specify a directory of a ML bulk move directly
-            $nDir = serendipity_specialchars((string)$serendipity['POST']['newDir']); // relative to Uploads/
+            $nDir = serendipity_specialchars(serendipity_dirSlash('end', (string)$serendipity['POST']['newDir'])); // relative to Uploads/
 
-            if ($oDir != $nDir) {
-                foreach($multiMoveImages AS $mkey => $move_id) {
-                    $file = serendipity_fetchImageFromDatabase((int)$move_id);
-                    $oDir = $file['path']; // this now is the exact oldDir path of this ID
-                    if (serendipity_moveMediaDirectory($oDir, $nDir, 'file', (int)$move_id, $file)) {
-                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
-                    } else {
-                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
-                    }
+            foreach($multiMoveImages AS $mkey => $move_id) {
+                if (serendipity_moveMediaDirectory('', $nDir, 'file', (int)$move_id)) {
+                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVED . "</span>\n", $nDir);
+                } else {
+                    $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . MEDIA_DIRECTORY_MOVE_ERROR . "</span>\n", $nDir);
                 }
             }
+            
             $data['messages'] = $messages;
             unset($messages);
             // remember to return to last selected media library directory
@@ -182,21 +178,10 @@ switch ($serendipity['GET']['adminAction']) {
 
     case 'rename':
         $serendipity['GET']['fid'] = (int)$serendipity['GET']['fid'];
-        $file = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-
-        if (LANG_CHARSET == 'UTF-8') {
-             // yeah, turn on content to be a real utf-8 string, which it isn't at this point! Else serendipity_makeFilename() can not work!
-             $serendipity['GET']['newname'] = utf8_encode($serendipity['GET']['newname']);
-        }
-        $serendipity['GET']['newname'] = str_replace(' ', '_', $serendipity['GET']['newname']); // keep serendipity_uploadSecure(URL) whitespace convert behaviour, when using serendipity_makeFilename()
-        $serendipity['GET']['newname'] = serendipity_uploadSecure(serendipity_makeFilename($serendipity['GET']['newname']), true);
-
-        if (!is_array($file) || !serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete') ||
-           (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
+        if (!serendipity_checkFormToken() || !serendipity_checkPermission('adminImagesDelete')) {
             return;
         }
-        // since this is a javascript action only, all event success/error action messages have moved into js
-        serendipity_moveMediaDirectory(null, $serendipity['GET']['newname'], 'file', $serendipity['GET']['fid'], $file);
+        serendipity_renameFile($serendipity['GET']['fid'], $serendipity['GET']['newname']);
         break;
 
     case 'properties':
@@ -218,11 +203,11 @@ switch ($serendipity['GET']['adminAction']) {
             $created_thumbnail = true; //??
             $data['showML']    = showMediaLibrary(true); // in this case we do not need the location.href (removed)
             $propdone          = sprintf(MEDIA_PROPERTIES_DONE, $image_id);
-            $data['messages']  = '<span class="msg_success"><span class="icon-ok-circled"></span> '.DONE.'! ' . $propdone . "</span>\n";
+            $data['messages']  = '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> '.DONE.'! ' . $propdone . "</span>\n";
             break;
         }
 
-        $messages[] = '<span class="msg_notice"><span class="icon-info-circled"></span> ' . ADDING_IMAGE . "</span>\n";
+        $messages[] = '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . ADDING_IMAGE . "</span>\n";
 
         $authorid = 0; // Only use access-control based on media directories, not images themselves
 
@@ -249,7 +234,7 @@ switch ($serendipity['GET']['adminAction']) {
             $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
             if (serendipity_isActiveFile($tfile)) {
-                $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $tfile);
+                $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN . "</span>\n", $tfile);
                 break;
             }
 
@@ -257,70 +242,86 @@ switch ($serendipity['GET']['adminAction']) {
             $target = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex] . $tfile;
 
             if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$tindex])) {
-                $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . PERM_DENIED . "</span>\n";
+                $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . PERM_DENIED . "</span>\n";
                 return;
             }
 
             $realname = $tfile;
             if (file_exists($target)) {
-                $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . $target . ' - ' . ERROR_FILE_EXISTS_ALREADY . "</span>\n";
+                $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . $target . ' - ' . ERROR_FILE_EXISTS_ALREADY . "</span>\n";
                 $realname = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$tindex]);
             }
 
-            require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-            $options = array('allowRedirects' => true, 'maxRedirects' => 5);
+            require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+            $options = array('follow_redirects' => true, 'max_redirects' => 5);
             serendipity_plugin_api::hook_event('backend_http_request', $options, 'image');
             serendipity_request_start();
-            $req = new HTTP_Request($serendipity['POST']['imageurl'], $options);
+            if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+                // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+                $options['ssl_verify_peer'] = false;
+            }
 
-            // Try to get the URL
-            if (PEAR::isError($req->sendRequest()) || $req->getResponseCode() != '200') {
-                $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
+            if (!serendipity_url_allowed($serendipity['POST']['imageurl'])) {
+                 $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $serendipity['POST']['imageurl']);
             } else {
-                // Fetch file
-                $fContent = $req->getResponseBody();
+                $req = new HTTP_Request2($serendipity['POST']['imageurl'], HTTP_Request2::METHOD_GET, $options);
 
-                if ($serendipity['POST']['imageimporttype'] == 'hotlink') {
-                    $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
-                    $fp = fopen($tempfile, 'w');
-                    fwrite($fp, $fContent);
-                    fclose($fp);
-
-                    $image_id   = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
-                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . HOTLINK_DONE . "</span>\n", $serendipity['POST']['imageurl'] , $tfile .'');
-                    serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
-                } else {
-                    $fp = fopen($target, 'w');
-                    fwrite($fp, $fContent);
-                    fclose($fp);
-
-                    $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . FILE_FETCHED . "</span>\n", $serendipity['POST']['imageurl'] , $tfile . '');
-
-                    if (serendipity_checkMediaSize($target)) {
-                        $thumbs = array(array(
-                            'thumbSize' => $serendipity['thumbSize'],
-                            'thumb'     => $serendipity['thumbSuffix']
-                        ));
-                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
-
-                        foreach($thumbs as $thumb) {
-                            // Create thumbnail
-                            if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$tindex], $thumb['thumbSize'], $thumb['thumb']) ) {
-                                $messages[] = '<span class="msg_success"><span class="icon-ok-circled"></span> ' . THUMB_CREATED_DONE . "</span>\n";
-                            }
-                        }
-
-                        // Insert into database
-                        $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
-                        serendipity_plugin_api::hook_event('backend_image_add', $target);
-                        $new_media[] = array(
-                            'image_id'          => $image_id,
-                            'target'            => $target,
-                            'created_thumbnail' => $created_thumbnail
-                        );
+                // Try to get the URL
+                try {
+                    $response = $req->send();
+                    if ($response->getStatus() != '200') {
+                        throw new HTTP_Request2_Exception('could not fetch image: status != 200');
                     }
+                    // Fetch file
+                    $fContent = $response->getBody();
+
+                    $fUrl = $response->getEffectiveUrl();
+                    if (!serendipity_url_allowed($fUrl)) {
+                        $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled"></span> ' . REMOTE_FILE_INVALID . "</span>\n", $fUrl);
+                    } elseif ($serendipity['POST']['imageimporttype'] == 'hotlink') {
+                        $tempfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '/hotlink_' . time();
+                        $fp = fopen($tempfile, 'w');
+                        fwrite($fp, $fContent);
+                        fclose($fp);
+
+                        $image_id   = @serendipity_insertHotlinkedImageInDatabase($tfile, $serendipity['POST']['imageurl'], $authorid, null, $tempfile);
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . HOTLINK_DONE . "</span>\n", $serendipity['POST']['imageurl'] , $tfile .'');
+                        serendipity_plugin_api::hook_event('backend_image_addHotlink', $tempfile);
+                    } else {
+                        $fp = fopen($target, 'w');
+                        fwrite($fp, $fContent);
+                        fclose($fp);
+
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . FILE_FETCHED . "</span>\n", $serendipity['POST']['imageurl'] , $tfile . '');
+
+                        if (serendipity_checkMediaSize($target)) {
+                            $thumbs = array(array(
+                                'thumbSize' => $serendipity['thumbSize'],
+                                'thumb'     => $serendipity['thumbSuffix']
+                            ));
+                            serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $tfile);
+
+                            foreach($thumbs as $thumb) {
+                                // Create thumbnail
+                                if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$tindex], $thumb['thumbSize'], $thumb['thumb']) ) {
+                                    $messages[] = '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . THUMB_CREATED_DONE . "</span>\n";
+                                }
+                            }
+
+                            // Insert into database
+                            $image_id = serendipity_insertImageInDatabase($tfile, $serendipity['POST']['target_directory'][$tindex], $authorid, null, $realname);
+                            serendipity_plugin_api::hook_event('backend_image_add', $target);
+                            $new_media[] = array(
+                                'image_id'          => $image_id,
+                                'target'            => $target,
+                                'created_thumbnail' => $created_thumbnail
+                            );
+                        }
+                    }
+                    serendipity_request_end();
+                } catch (HTTP_Request2_Exception $e) {
+                     $messages[] = sprintf('<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . REMOTE_FILE_NOT_FOUND . "</span>\n", $serendipity['POST']['imageurl']);
                 }
-                serendipity_request_end();
             }
         } else {
             if (!is_array($_FILES['serendipity']['name']['userfile'])) {
@@ -352,14 +353,14 @@ switch ($serendipity['GET']['adminAction']) {
                     $tfile = serendipity_uploadSecure(serendipity_makeFilename($tfile));
 
                     if (serendipity_isActiveFile($tfile)) {
-                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_FILE_FORBIDDEN .' '. $tfile . "</span>\n";
+                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_FILE_FORBIDDEN .' '. $tfile . "</span>\n";
                         continue;
                     }
 
                     $serendipity['POST']['target_directory'][$idx] = serendipity_uploadSecure($serendipity['POST']['target_directory'][$idx], true, true);
 
                     if (!serendipity_checkDirUpload($serendipity['POST']['target_directory'][$idx])) {
-                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . PERM_DENIED . "</span>\n";
+                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . PERM_DENIED . "</span>\n";
                         continue;
                     }
 
@@ -367,13 +368,13 @@ switch ($serendipity['GET']['adminAction']) {
 
                     $realname = $tfile;
                     if (file_exists($target)) {
-                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . $target . ' - ' . ERROR_FILE_EXISTS_ALREADY . "</span>\n";
+                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . $target . ' - ' . ERROR_FILE_EXISTS_ALREADY . "</span>\n";
                         $realname   = serendipity_imageAppend($tfile, $target, $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $serendipity['POST']['target_directory'][$idx]);
                     }
 
                     // Accept file
                     if (is_uploaded_file($uploadtmp) && serendipity_checkMediaSize($uploadtmp) && move_uploaded_file($uploadtmp, $target)) {
-                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled"></span> ' . FILE_UPLOADED . "</span>\n", $uploadfile , $target);
+                        $messages[] = sprintf('<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . FILE_UPLOADED . "</span>\n", $uploadfile , $target);
                         @umask(0000);
                         @chmod($target, 0664);
 
@@ -381,12 +382,12 @@ switch ($serendipity['GET']['adminAction']) {
                             'thumbSize' => $serendipity['thumbSize'],
                             'thumb'     => $serendipity['thumbSuffix']
                         ));
-                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs);
+                        serendipity_plugin_api::hook_event('backend_media_makethumb', $thumbs, $target);
 
                         foreach($thumbs as $thumb) {
                             // Create thumbnail
                             if ( $created_thumbnail = serendipity_makeThumbnail($tfile, $serendipity['POST']['target_directory'][$idx], $thumb['thumbSize'], $thumb['thumb']) ) {
-                                $messages[] = '<span class="msg_success"><span class="icon-ok-circled"></span> ' . THUMB_CREATED_DONE . "</span>\n";
+                                $messages[] = '<span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> ' . THUMB_CREATED_DONE . "</span>\n";
                             }
                         }
 
@@ -401,7 +402,7 @@ switch ($serendipity['GET']['adminAction']) {
                     } else {
                         // necessary for the ajax-uplaoder to show upload errors
                         header("Internal Server Error", true, 500);
-                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled"></span> ' . ERROR_UNKNOWN_NOUPLOAD . "</span>\n";
+                        $messages[] = '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . ERROR_UNKNOWN_NOUPLOAD . "</span>\n";
                     }
                 }
             }
@@ -476,7 +477,7 @@ switch ($serendipity['GET']['adminAction']) {
             if ($oldDir != $newDir) {
                 //is this possible? Ian: YES! Change an already set directory.
                 ob_start();
-                serendipity_moveMediaDirectory($oldDir, $newDir);
+                serendipity_renameDir($oldDir, $newDir);
                 $data['messages'] = ob_get_contents();
                 ob_end_clean();
                 $use_dir = $newDir;
@@ -534,7 +535,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         /* TODO: check if directory already exist */
         if (is_dir($nd) || @mkdir($nd)) {
-            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $serendipity['POST']['name']);
+            $data['print_DIRECTORY_CREATED'] = sprintf(DIRECTORY_CREATED, $new_dir);
             @umask(0000);
             @chmod($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $new_dir, 0777);
 
@@ -635,7 +636,8 @@ switch ($serendipity['GET']['adminAction']) {
             'maxImgHeight'      => $serendipity['maxImgHeight'],
             'maxImgWidth'       => $serendipity['maxImgWidth'],
             'extraParems'       => serendipity_generateImageSelectorParems(),
-            'manage'            => isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true
+            'manage'            => isset($serendipity['GET']['showMediaToolbar']) ? serendipity_db_bool($serendipity['GET']['showMediaToolbar']) : true,
+            'multiperm'         => serendipity_checkPermission('adminImagesDirectories')
         );
         // ToDo later: merge $data and $media
         $serendipity['smarty']->assign('media', $mediaFiles);
@@ -685,7 +687,7 @@ switch ($serendipity['GET']['adminAction']) {
 
         $data['case_scale'] = true; // this allows to use the showML fallback too
         if ($serendipity['GET']['width'] == $file['dimensions_width'] && $serendipity['GET']['height'] == $file['dimensions_height']) {
-            $data['messages'] = '<span class="msg_notice"><span class="icon-info-circled"></span> ' . MEDIA_RESIZE_EXISTS . '</span>';
+            $data['messages'] = '<span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> ' . MEDIA_RESIZE_EXISTS . '</span>';
         } else {
             $data['print_SCALING_IMAGE'] = sprintf(
                 SCALING_IMAGE,
@@ -710,7 +712,7 @@ switch ($serendipity['GET']['adminAction']) {
         if (!is_array($file) || !serendipity_checkPermission('adminImagesDelete') || (!serendipity_checkPermission('adminImagesMaintainOthers') && $file['authorid'] != '0' && $file['authorid'] != $serendipity['authorid'])) {
             return;
         }
-        
+
         $data['extraParems'] = serendipity_generateImageSelectorParems('form');
         $data['case_scaleSelect'] = true;
         $s = getimagesize($serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . ($file['extension'] ? '.'. $file['extension'] : ""));

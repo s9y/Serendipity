@@ -38,6 +38,7 @@
     <link rel="alternate" type="application/rss+xml" title="{$blogTitle} RSS feed" href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/index.rss2">
     <link rel="alternate" type="application/x.atom+xml"  title="{$blogTitle} Atom feed"  href="{$serendipityBaseURL}{$serendipityRewritePrefix}feeds/atom.xml">
 {if $entry_id}
+    <link rel="trackback" type="application/x-www-form-urlencoded" href="{$serendipityBaseURL}comment.php?type=trackback&amp;entry_id={$entry_id}">
     <link rel="pingback" href="{$serendipityBaseURL}comment.php?type=pingback&amp;entry_id={$entry_id}">
 {/if}
 {serendipity_hookPlugin hook="frontend_header"}
@@ -97,7 +98,7 @@
     </div>
 
     <footer id="colophon">
-        <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <i>2k11</i> theme.</span></p>
+        <p><span lang="en">Powered by <a href="http://s9y.org">Serendipity</a> &amp; the <i>{$template}</i> theme.</span></p>
     </footer>
 </div>
 

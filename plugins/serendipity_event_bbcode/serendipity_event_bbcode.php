@@ -1,4 +1,8 @@
-<?php # $Id$
+<?php
+
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
 
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
@@ -13,14 +17,14 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_BBCODE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Jez Hancock, Garvin Hicking');
-        $propbag->add('version',       '2.09');
+        $propbag->add('version',       '2.10');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
-        $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true, 'css' => true));
+        $propbag->add('event_hooks', array('frontend_display' => true, 'frontend_comment' => true, 'css' => true));
         $propbag->add('groups', array('MARKUP'));
 
         $this->markup_elements = array(
@@ -51,8 +55,8 @@ class serendipity_event_bbcode extends serendipity_event
         $propbag->add('configuration', $conf_array);
     }
 
-
-    function bbcode_callback($matches) {
+    function bbcode_callback($matches)
+    {
         $type  = $matches[1];
         $input = trim($matches[2], "\r\n");
 
@@ -102,10 +106,10 @@ class serendipity_event_bbcode extends serendipity_event
         return($input);
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
-
 
     function introspect_config_item($name, &$propbag)
     {
@@ -131,16 +135,19 @@ class serendipity_event_bbcode extends serendipity_event
         return true;
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function bbcode($input) {
+    function bbcode($input)
+    {
         static $bbcodes = null;
 
         // Only allow numbers and characters for CSS: "red", "#FF0000", ...
@@ -224,39 +231,42 @@ class serendipity_event_bbcode extends serendipity_event
 
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
+
             switch($event) {
+
                 case 'frontend_display':
 
                     foreach ($this->markup_elements as $temp) {
-                        if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
+                        if (serendipity_db_bool($this->get_config($temp['name'], 'true')) && isset($eventData[$temp['element']]) &&
                             !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
                             !isset($serendipity['POST']['properties']['disable_markup_' . $this->instance])) {
                             $element = $temp['element'];
                             $eventData[$element] = $this->bbcode($eventData[$element]);
                         }
                     }
-                    return true;
                     break;
 
                 case 'frontend_comment':
-                    if (serendipity_db_bool($this->get_config('COMMENT', true))) {
+                    if (serendipity_db_bool($this->get_config('COMMENT', 'true'))) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_bbcode">' . PLUGIN_EVENT_BBCODE_TRANSFORM . '</div>';
                     }
-                    return true;
                     break;
 
                 case 'css':
-                    if (strpos($eventData, '.bb-code') !== false) {
-                        // class exists in CSS, so a user has customized it and we don't need default
-                        return true;
-                    }
-?>
+                    // CSS class does NOT exist by user customized template styles, include default
+                    if (strpos($eventData, '.bb-code') === false) {
+                        $eventData .= '
+
+
+/* serendipity_event_bbcode start */
+
 .bb-quote, .bb-code, .bb-php, .bb-code-title, .bb-php-title {
     margin-left: 20px;
     margin-right: 20px;
@@ -294,17 +304,22 @@ class serendipity_event_bbcode extends serendipity_event
 .bb-list-ordered-ua {
     list-style-type: upper-alpha;
 }
-<?php
-                return true;
-                break;
+
+/* serendipity_event_bbcode end */
+
+';
+                    }
+                    break;
 
                 default:
                   return false;
             }
+            return true;
         } else {
             return false;
         }
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

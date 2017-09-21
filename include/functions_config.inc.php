@@ -255,50 +255,20 @@ function serendipity_set_user_var($name, $val, $authorid, $copy_to_s9y = true) {
  * @param   string      The filename to search for in the selected template
  * @param   string      The path selector that tells whether to return a HTTP or realpath
  * @param   bool        Enable to include frontend template fallback chaining (used for wysiwyg Editor custom config files, emoticons, etc)
- * @param   bool        Enable to check into $serendipity['template'] or its engine, then fall back to $this->pluginFile dir (used by plugins via parseTemplate() method)
  * @return  string      The full path+filename to the requested file
  */
-function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false, $simple_plugin_fallback = false) {
+function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force_frontend_fallback = false) {
     global $serendipity;
 
     $directories = array();
-
-    if (defined('IN_serendipity_admin') && $serendipity['smarty_preview'] == false) {
-        if ($force_frontend_fallback) {
-            // If enabled, even when within the admin suite it will be possible to reference files that
-            // reside within a frontend-only template directory.
-            $directories[] = $serendipity['template'] . '/';
-            if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
-                $p = explode(',', $serendipity['template_engine']);
-                foreach($p AS $te) {
-                    $directories[] = trim($te) . '/';
-                }
-            }
-        }
-
-        if (!$simple_plugin_fallback) {
-            // Backend will always use our default backend (=defaultTemplate) as fallback.
-            $directories[] = isset($serendipity['template_backend']) ? $serendipity['template_backend'] . '/' : '';
-            $directories[] = $serendipity['defaultTemplate'] .'/';
-            $directories[] = 'default/';
-        }
+    if ((! defined('IN_serendipity_admin')) || $force_frontend_fallback) {
+        $directories[] = $serendipity['template'] . '/';  # In the frontend or when forced (=preview_iframe.tpl), use the frontend theme
     } else {
-        $directories[] = isset($serendipity['template']) ? $serendipity['template'] . '/' : '';
-        if (isset($serendipity['template_engine']) && $serendipity['template_engine'] != null) {
-            $p = explode(',', $serendipity['template_engine']);
-            foreach($p AS $te) {
-                $directories[] = trim($te) . '/';
-            }
-        }
-
-        if (!$simple_plugin_fallback) {
-            // Frontend templates currently need to fall back to "default" (see "idea"), so that they get the
-            // output they desire. If templates are based on 2k11, they need to set "Engine: 2k11" in their info.txt
-            // file.
-            $directories[] = 'default/';
-            $directories[] = $serendipity['defaultTemplate'] .'/';
-        }
+        $directories[] = $serendipity['template_backend'] . '/';    # Since 2.0 s9y can have a independent backend theme
     }
+    $directories[] = $serendipity['template_engine'] . '/'; # themes can set an engine, which will be used if they do not have the file
+    $directories[] = $serendipity['defaultTemplate'] .'/';  # the default theme is the last place we will look in, serving as pure fallback
+    $directories = array_unique($directories); # save performance by not checking for file existence multiple times in the same directory
 
     foreach ($directories as $directory) {
         $templateFile = $serendipity['templatePath'] . $directory . $file;
@@ -307,13 +277,9 @@ function serendipity_getTemplateFile($file, $key = 'serendipityHTTPPath', $force
         }
 
         if (file_exists($serendipity['serendipityPath'] . $templateFile . ".tpl")) {
-            # catch *.tpl files, used by the backend for serendipity_editor.js.tpl
+            # catch *.tpl files serving as template, used by the backend for serendipity_editor.js.tpl
             return $serendipity['baseURL'] . 'index.php?/plugin/' . $file;
         }
-    }
-
-    if (preg_match('@\.(tpl|css|php)@i', $file) && !stristr($file, 'plugin')) {
-        return $file;
     }
 
     return false;
@@ -387,8 +353,8 @@ function serendipity_logout() {
 function serendipity_session_destroy() {
     $no_smarty = $_SESSION['no_smarty'];
     @session_destroy();
-    session_regenerate_id();
     session_start();
+    session_regenerate_id();
 
     $_SESSION['SERVER_GENERATED_SID'] = true;
     $_SESSION['no_smarty']            = $no_smarty;
@@ -514,7 +480,7 @@ function serendipity_checkAutologin($ident, $iv) {
 }
 
 /**
- * Set a session cookie which can identify a user accross http/https boundaries
+ * Set a session cookie which can identify a user across http/https boundaries
  */
 function serendipity_setAuthorToken() {
     $hash = sha1(uniqid(rand(), true));
@@ -564,7 +530,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
     }
 
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login username check:' . $username . "\n");
-    if ($username != '') {
+    if (!empty($username) && is_string($username)) {
         if ($use_external) {
             serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
         }
@@ -587,7 +553,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                 if (empty($row['hashtype']) || $row['hashtype'] == 0) {
 
                     if (isset($serendipity['hashkey']) && (time() - $serendipity['hashkey']) >= 15768000) {
-                        die('You can no longer login with an old-style MD5 hash to prevent MD5-Hostage abuse. 
+                        die('You can no longer login with an old-style MD5 hash to prevent MD5-Hostage abuse.
                              Please ask the Administrator to set you a new password.');
                     }
 
@@ -838,7 +804,6 @@ function serendipity_iframe(&$entry, $mode = null) {
             break;
 
         case 'preview':
-            $serendipity['smarty_preview']  = true;
             $data['preview'] = serendipity_printEntries(array($entry), ($entry['extended'] != '' ? 1 : 0), true);
             break;
     }
@@ -930,7 +895,7 @@ function serendipity_probeInstallation($item) {
             }
             if (class_exists('SQLite3')) {
                 if ($has_pdo) {
-                    $res['sqlite3oo'] = 'SQLite3 (OO) (Preferrably use PDO-SQlite!)';
+                    $res['sqlite3oo'] = 'SQLite3 (OO) (Preferably use PDO-SQlite!)';
                 } else {
                     $res['sqlite3oo'] = 'SQLite3 (OO)';
                 }
@@ -1202,7 +1167,7 @@ function serendipity_getPermissionNames() {
  *
  * This function caches all permission chacks in static function variables to not
  * fetch all permissions time and again.
- * The permission checks are performed agains the values of each group. If a privilege
+ * The permission checks are performed against the values of each group. If a privilege
  * is set in one of the groups the author is a user of, the function returns true.
  * If a privilege is not set, the userlevel of an author is checked to act for backwards-compatibility.
  *
@@ -1282,7 +1247,7 @@ function serendipity_checkPermission($permName, $authorid = null, $returnMyGroup
  * @access public
  * @param   array       The array of groups the author should be a member of. All memberships that were present before and not contained in this array will be removed.
  * @param   int         The ID of the author to update
- * @param   boolean     If set to true, the groups can only be updated if the user has the adminUsersMaintainOthers privilege. If set to false, group memberships will be changable for any user.
+ * @param   boolean     If set to true, the groups can only be updated if the user has the adminUsersMaintainOthers privilege. If set to false, group memberships will be changeable for any user.
  * @return
  */
 function serendipity_updateGroups($groups, $authorid, $apply_acl = true) {
@@ -2013,7 +1978,7 @@ function serendipity_reportXSRF($type = 0, $reset = true, $use_config = false) {
     // Set this in your serendipity_config_local.inc.php if you want HTTP Referrer blocking:
     // $serendipity['referrerXSRF'] = true;
 
-    $string = '<div class="msg_error XSRF_' . $type . '"><span class="icon-attention"></span> ' . ERROR_XSRF . '</div>';
+    $string = '<div class="msg_error XSRF_' . $type . '"><span class="icon-attention" aria-hidden="true"></span> ' . ERROR_XSRF . '</div>';
     if ($reset) {
         // Config key "referrerXSRF" can be set to enable blocking based on HTTP Referrer. Recommended for Paranoia.
         if (($use_config && isset($serendipity['referrerXSRF']) && $serendipity['referrerXSRF']) || $use_config === false) {
@@ -2082,7 +2047,7 @@ function serendipity_setFormToken($type = 'form') {
     global $serendipity;
 
     if ($type == 'form') {
-        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />';
+        return '<input type="hidden" name="serendipity[token]" value="' . md5(session_id()) . '" />'."\n";
     } elseif ($type == 'url') {
         return 'serendipity[token]=' . md5(session_id());
     } else {

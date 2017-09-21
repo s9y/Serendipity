@@ -159,7 +159,7 @@ switch($serendipity['GET']['adminAction']) {
         }
 
         // serendipity_updertEntry sets this global variable to store the entry id. Couldn't pass this
-        // by reference or as return value because it affects too many places inside our API and dependant
+        // by reference or as return value because it affects too many places inside our API and dependent
         // function calls.
         if (!empty($serendipity['lastSavedEntry'])) {
             $entry['id'] = $serendipity['lastSavedEntry'];
@@ -269,7 +269,7 @@ switch($serendipity['GET']['adminAction']) {
                                               AND specific_catalog = '" . $serendipity['dbName'] . "'");
                 if (is_array($r) && $r[0]['counter'] > 0) {
                     $term = str_replace('&amp;', '&', $term);
-                    $filter[] = "( 
+                    $filter[] = "(
                     to_tsvector('english', title)    @@to_tsquery('$term') OR
                     to_tsvector('english', body)     @@to_tsquery('$term') OR
                     to_tsvector('english', extended) @@to_tsquery('$term')
@@ -354,7 +354,8 @@ switch($serendipity['GET']['adminAction']) {
                     }
                 }
 
-                $smartentries[] = array(
+
+                $smartentry = array(
                     'id'            => $ey['id'],
                     'title'         => serendipity_specialchars($ey['title']),
                     'timestamp'     => (int)$ey['timestamp'],
@@ -368,6 +369,8 @@ switch($serendipity['GET']['adminAction']) {
                     'archive_link'  => serendipity_archiveURL($ey['id'], $ey['title'], 'serendipityHTTPPath', true, array('timestamp' => $ey['timestamp'])),
                     'preview_link'  => '?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=preview&amp;' . serendipity_setFormToken('url') . '&amp;serendipity[id]=' . $ey['id']
                 );
+                serendipity_plugin_api::hook_event('backend_view_entry', $smartentry);
+                $smartentries[] = $smartentry;
 
             }
 
@@ -402,7 +405,7 @@ switch($serendipity['GET']['adminAction']) {
             return; // blank content page, but default token check parameter is presenting a XSRF message when false
         }
         if (!is_array($serendipity['POST']['multiDelete'])) {
-            echo '<div class="msg_notice"><span class="icon-attention-circled"></span> ' . sprintf(MULTICHECK_NO_ITEM, $_SERVER['HTTP_REFERER']) . '</div>'."\n";
+            echo '<div class="msg_notice"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(MULTICHECK_NO_ITEM, serendipity_specialchars($_SERVER['HTTP_REFERER'])) . '</div>'."\n";
             break;
         }
 

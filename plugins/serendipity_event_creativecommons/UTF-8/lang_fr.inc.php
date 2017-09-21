@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -25,5 +25,3 @@
 @define('PLUGIN_CREATIVECOMMONS_ND_DESC',     'L\'auteur autorise de reproduire, distribuer et communiquer cette création au public, mais n\'autorise pas la modification de cette création.');
 @define('PLUGIN_CREATIVECOMMONS_SA_DESC',     'Oui, tant que les autres partagent aussi');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -38,7 +38,7 @@ if (isset($_GET['serendipity']['plugin_to_move']) && isset($_GET['submit']) && s
     }
 
     /* If idx_to_move is still -1 then we never found it (shouldn't happen under normal conditions)
-        Also make sure the swaping idx is around */
+        Also make sure the swapping idx is around */
     if ($idx_to_move >= 0 && (($_GET['submit'] == 'move down' && $idx_to_move < (count($plugins)-1)) || ($_GET['submit'] == 'move up' && $idx_to_move > 0))) {
 
         /* Swap the one were moving with the one that's in the spot we're moving to */
@@ -150,8 +150,8 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['license'] = $license;
     $data['config'] = serendipity_plugin_config($plugin, $bag, $name, $desc, $config_names, true, true, true, true, 'plugin', $config_groups);
 
-} elseif ( $serendipity['GET']['adminAction'] == 'addnew' ) {
-
+} elseif ( $serendipity['GET']['adminAction'] == 'addnew' && serendipity_checkFormToken()) {
+    $serendipity['GET']['type'] = $serendipity['GET']['type'] ?: 'sidebar';
     $data['adminAction'] = 'addnew';
     $data['type'] = $serendipity['GET']['type'];
 
@@ -159,9 +159,26 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPlugins);
     $pluginstack = array_merge((array)$foreignPlugins['pluginstack'], $pluginstack);
     $errorstack  = array_merge((array)$foreignPlugins['errorstack'], $errorstack);
+    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+        // for upgrades, the distinction in sidebar and event-plugins is not useful. We will fetch both and mix the lists    
+        if ($serendipity['GET']['type'] == 'event') {
+            $serendipity['GET']['type'] = 'sidebar';
+        } else {
+            $serendipity['GET']['type'] = 'event';
+        }
+        $foreignPluginsTemp = array();
+        serendipity_plugin_api::hook_event('backend_plugins_fetchlist', $foreignPluginsTemp);
+        $pluginstack = array_merge((array)$foreignPluginsTemp['pluginstack'], $pluginstack);
+        $errorstack  = array_merge((array)$foreignPluginsTemp['errorstack'], $errorstack);
+        $foreignPlugins = array_merge($foreignPlugins, $foreignPluginsTemp);
+    }
 
     $plugins = serendipity_plugin_api::get_installed_plugins();
     $classes = serendipity_plugin_api::enum_plugin_classes(($serendipity['GET']['type'] === 'event'));
+    if ($serendipity['GET']['only_group'] == 'UPGRADE') {
+        $classes = array_merge($classes, serendipity_plugin_api::enum_plugin_classes(!($serendipity['GET']['type'] === 'event')));
+        $data['type'] = 'both';
+    }
     usort($classes, 'serendipity_pluginListSort');
 
     $counter    = 0;
@@ -192,13 +209,20 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         if (is_array($props)) {
             if (version_compare($props['version'], $props['upgrade_version'], '<')) {
                 $props['upgradable']      = true;
-                $props['customURI']      .= $foreignPlugins['baseURI'] . $foreignPlugins['upgradeURI'];
+                // since we merged sidebar and event plugins before, we can no longer rely on spartacus' $foreignPlugins['baseURI']
+                // NOTE: This is not nice and it would be better to move it into the plugins array instead, but that collides with the cache
+                if (strpos($class_data['name'], 'serendipity_plugin') !== false) {
+                    $baseURI = "&amp;serendipity[spartacus_fetch]=sidebar";
+                } else {
+                    $baseURI = "&amp;serendipity[spartacus_fetch]=event";
+                }
+                $props['customURI'] .= $baseURI . $foreignPlugins['upgradeURI'];
             }
 
             $props['installable']  = !($props['stackable'] === false && in_array($class_data['true_name'], $plugins));
             $props['requirements'] = unserialize($props['requirements']);
 
-            if (empty($props['changelog']) && @file_exists(dirname($plugin->pluginFile) . '/ChangeLog')) {
+            if (empty($props['changelog']) && @file_exists(dirname($props['plugin_file']) . '/ChangeLog')) {
                 $props['changelog'] = 'plugins/' . $props['pluginPath'] . '/ChangeLog';
             }
 
@@ -284,9 +308,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
         }
     }
-
     $data['requirements_failues'] = $requirement_failures;
-
 } elseif ( $serendipity['GET']['adminAction'] == 'renderOverlay' ) {
     $data['adminAction'] = 'overlay';
 } else {
@@ -336,7 +358,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
         }
     }
 
-    if (isset($serendipity['GET']['install_plugin'])) {
+    if (isset($serendipity['GET']['install_plugin']) && serendipity_checkFormToken()) {
         $authorid = $serendipity['authorid'];
         if (serendipity_checkPermission('adminPluginsMaintainOthers')) {
             $authorid = '0';
@@ -450,6 +472,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
 }
 
+$data['urltoken']      = serendipity_setFormToken('url');
 echo serendipity_smarty_show('admin/plugins.inc.tpl', $data);
 
 

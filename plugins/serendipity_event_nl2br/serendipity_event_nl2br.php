@@ -1,5 +1,9 @@
 <?php
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 class serendipity_event_nl2br extends serendipity_event
@@ -14,9 +18,9 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.20');
+        $propbag->add('version',       '2.21');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
@@ -55,7 +59,8 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('configuration', $conf_array);
     }
 
-    function cleanup() {
+    function cleanup()
+    {
         global $serendipity;
 
         /* check possible config mismatch setting in combination with ISOBR */
@@ -83,7 +88,8 @@ class serendipity_event_nl2br extends serendipity_event
         return true;
     }
 
-    function example() {
+    function example()
+    {
         return '<h3>PLEASE NOTE the implications of this markup plugin:</h3>
         <p>This plugin transfers linebreaks to HTML-linebreaks, so that they show up in your blog entry.</p>
         <p>In two cases this can raise problematic issues for you:</p>
@@ -100,16 +106,19 @@ class serendipity_event_nl2br extends serendipity_event
         </ul>'."\n";
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
 
@@ -156,27 +165,32 @@ class serendipity_event_nl2br extends serendipity_event
                 $propbag->add('name',        constant($name));
                 $propbag->add('description', sprintf(APPLY_MARKUP_TO, constant($name)));
                 $propbag->add('default',     'true');
+                break;
         }
         return true;
     }
 
-    function isolate($src, $regexp = NULL) {
+    function isolate($src, $regexp = NULL)
+    {
         if($regexp) return preg_replace_callback($regexp, array($this, 'isolate'), $src);
         global $_buf;
         $_buf[] = $src[0];
         return "\001" . (count($_buf) - 1);
     }
 
-    function restore_callback($matches) {
+    function restore_callback($matches)
+    {
         global $_buf;
         return $_buf[$matches[1]];
     }
 
-    function restore($text) {
+    function restore($text)
+    {
         return preg_replace_callback('!\001(\d+)!', array($this, 'restore_callback'), $text); // works?!
     }
 
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
         static $markup  = null;
         static $isolate = null;
@@ -204,7 +218,9 @@ class serendipity_event_nl2br extends serendipity_event
         }
 
         if (isset($hooks[$event])) {
+
             switch($event) {
+
                 case 'frontend_display':
 
                     // check single entry for temporary disabled markups
@@ -224,7 +240,7 @@ class serendipity_event_nl2br extends serendipity_event
 */
                     // don't run, if the textile, or markdown plugin already took care about markup
                     if ($markup && $serendipity['nl2br']['entry_disabled_markup'] === false && (class_exists('serendipity_event_textile') || class_exists('serendipity_event_markdown'))) {
-                        return true;
+                        break;
                     }
                     // NOTE: the wysiwyg-editor needs to send its own ['properties']['ep_no_nl2br'] to disable the nl2br() parser!
 
@@ -278,9 +294,7 @@ class serendipity_event_nl2br extends serendipity_event
                             }
                         }
                     }
-
-                return true;
-                break;
+                    break;
 
                 case 'backend_configure':
 
@@ -295,15 +309,13 @@ class serendipity_event_nl2br extends serendipity_event
                         // hook into default/admin/entries.tpl somehow via the Heart Of Gold = serendipity_printEntryForm() before! it is loaded
                         $serendipity['smarty']->assign('iso2br', true);
                     }
-
-
-                return true;
-                break;
+                    break;
 
                 case 'css':
-?>
+                    $eventData .= '
 
-/* nl2br plugin */
+/* nl2br plugin start */
+
 p.whiteline {
     margin-top: 0em;
     margin-bottom: 1em;
@@ -314,24 +326,28 @@ p.break {
     margin-bottom: 0em;
 }
 
-<?php
-                return true;
-                break;
+/* nl2br plugin end */
+
+';
+                    break;
 
                 default:
-                return false;
-            }
+                    return false;
 
+            }
+            return true;
         } else {
             return false;
         }
     }
 
-    /* clean nl2br from markup where it is invalid and/or breaks html output
+    /**
+     * clean nl2br from markup where it is invalid and/or breaks html output
      * @param  string entrytext
      * @return string
-     * */
-    function clean_nl2brtags(&$entry) {
+     */
+    function clean_nl2brtags(&$entry)
+    {
         $allTags = explode('|', 'table|thead|tbody|tfoot|th|tr|td|caption|colgroup|col|ol|ul|li|dl|dt|dd');
 
         $br2nl = array();
@@ -353,13 +369,15 @@ p.break {
 
 
 
-    /* Insert <p class="whiteline" at paragraphs ending with two newlines
+    /**
+     * Insert <p class="whiteline" at paragraphs ending with two newlines
      * Insert <p class="break" at paragraphs ending with one nl
      * @param string text
      * @param boolean complex operations (not necessary when text is flat)
      * @return string
-     * */
-    function nl2p(&$text, $complex=true) {
+     */
+    function nl2p(&$text, $complex=true)
+    {
         if (empty($text)) {
             return $text;
         }
@@ -417,31 +435,34 @@ p.break {
         return $start_tag . implode($text) . '</p>';
     }
 
-    /*
+    /**
      * Remove unnecessary paragraphs
      * Unnecessary are those which start and end immediately.
      * They only get created by isolate_block_elements
      * @param mixed text
      * @return string
-     * */
-    function clean_code ($text) {
+     */
+    function clean_code ($text)
+    {
         if (is_array($text)) {
             $text = implode($text);
         }
         return str_replace(array('<p class="whiteline"></p>','<p class="break"></p>', '<p></p>'),"", $text);
     }
 
-    function purge_p($text) {
+    function purge_p($text)
+    {
         $text = str_replace('</p>', "", $text);
         return str_replace(array('<p class="whiteline">','<p class="break">', '<p>', '</p>'),"\n", $text);
     }
 
-    /*
+    /**
      * Use nl2p on text within blockelements, useful e.g. with blockquotes
      * @param array text
      * @return string
-     * */
-    function formate_block_elements($textstring) {
+     */
+    function formate_block_elements($textstring)
+    {
         $block_elements = array('<blockquote');
         foreach ($block_elements as $start_tag) {
             $end_tag = $this->end_tags($start_tag);
@@ -466,8 +487,9 @@ p.break {
      * Make sure none of these block_elements are within a <p>
      * @param string text
      * @return string
-     * */
-    function isolate_block_elements($textstring) {
+     */
+    function isolate_block_elements($textstring)
+    {
         $block_elements = array('<table','<ul','<ol','<pre', '<dir', '<dl',
                                 '<h1', '<h2', '<h3', '<h4', '<h5', '<h6',
                                 '<menu', '<blockquote');
@@ -493,8 +515,9 @@ p.break {
      * Note: Walking from left to right
      * @param array text
      * @return string
-     * */
-    function tidy_block_elements($text) {
+     */
+    function tidy_block_elements($text)
+    {
         $remove = false;
         $textstring = implode($text);
         $block_elements = array('<table','<ul','<ol','<pre', '<dir', '<dl',
@@ -519,7 +542,8 @@ p.break {
         return $textstring;
     }
 
-    function get_string_till($text, $end_tag, $offset=0){
+    function get_string_till($text, $end_tag, $offset=0)
+    {
         if (strpos($text, $end_tag, $offset) === false) {
             return "";
         }
@@ -527,10 +551,11 @@ p.break {
         return substr($text, $offset, $len);
     }
 
-    /*
+    /**
      * Return corresponding end-tag: <p -> </p>
      */
-    function end_tags($start_tag) {
+    function end_tags($start_tag)
+    {
         return str_replace("<", "</", $start_tag).">";
     }
 
@@ -539,7 +564,8 @@ p.break {
      * @param int start
      * $param array text
      */
-    function next_nl_block($i, $text) {
+    function next_nl_block($i, $text)
+    {
         $skipped = false;
         for ($i--; $i>0; $i-- ) {
             if (!$skipped){
@@ -547,12 +573,14 @@ p.break {
                 if (strpos($text[$i], "\n") === false) {
                     $skipped = true;
                 }
-            }else if (strpos($text[$i], "\n") !== false) {
+            } else if (strpos($text[$i], "\n") !== false) {
                 break;
             }
         }
         return $i;
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
+?>

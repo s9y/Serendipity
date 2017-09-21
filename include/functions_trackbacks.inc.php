@@ -109,7 +109,7 @@ function serendipity_pingback_autodiscover($loc, $body, $url=null) {
  * @access public
  * @param   string  The URL to send a trackback to
  * @param   string  The XML data with the trackback contents
- * @return  string  Reponse
+ * @return  string  Response
  */
 function _serendipity_send($loc, $data, $contenttype = null) {
     global $serendipity;
@@ -126,25 +126,30 @@ function _serendipity_send($loc, $data, $contenttype = null) {
        $uri = $target['scheme'] . '://' . $target['host'] . ':' . $target['port'] . $target['path'] . $target['query'];
     }
 
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-    $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'POST');
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_send');
     serendipity_request_start();
-
-    $req = new HTTP_Request($uri, $options);
-    if (isset($contenttype)){
-       $req->addHeader('Content-Type', $contenttype);
+    if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+        $options['ssl_verify_peer'] = false;
     }
 
-    $req->addRawPostData($data, true);
-    $res = $req->sendRequest();
+    $req = new HTTP_Request2($uri, HTTP_Request2::METHOD_POST, $options);
+    if (isset($contenttype)){
+       $req->setHeader('Content-Type', $contenttype);
+    }
 
-    if (PEAR::isError($res)) {
+    $req->setBody($data);
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
         serendipity_request_end();
         return false;
     }
+    
 
-    $fContent = $req->getResponseBody();
+    $fContent = $res->getBody();
     serendipity_request_end();
     return $fContent;
 }
@@ -159,7 +164,7 @@ function _serendipity_send($loc, $data, $contenttype = null) {
  * @param   string  The author of our entry
  * @param   string  The title of our entry
  * @param   string  The text of our entry
- * @param   string  A comparsion URL
+ * @param   string  A comparison URL
 
  * @return string   Response
  */
@@ -167,42 +172,47 @@ function serendipity_trackback_autodiscover($res, $loc, $url, $author, $title, $
     $is_wp    = false;
     $wp_check = false;
 
-    if (preg_match('@((' . preg_quote($loc, '@') . '|' . preg_quote($loc2, '@') . ')/?trackback/)@i', $res, $wp_loc)) {
-        // We found a WP-blog that may not advertise RDF-Tags!
-        $is_wp = true;
-    }
+    // the new detection method via rel=trackback should have priority
+    if (preg_match('@link\s*rel=["\']trackback["\'].*href=["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
+        $trackURI = trim($matches[1]);
+    } else {
+        if (preg_match('@((' . preg_quote($loc, '@') . '|' . preg_quote($loc2, '@') . ')/?trackback/)@i', $res, $wp_loc)) {
+            // We found a WP-blog that may not advertise RDF-Tags!
+            $is_wp = true;
+        }
 
-    if (!preg_match('@trackback:ping(\s*rdf:resource)?\s*=\s*["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
-        $matches = array();
-        serendipity_plugin_api::hook_event('backend_trackback_check', $matches, $loc);
+        if (!preg_match('@trackback:ping(\s*rdf:resource)?\s*=\s*["\'](https?:[^"\']+)["\']@i', $res, $matches)) {
+            $matches = array();
+            serendipity_plugin_api::hook_event('backend_trackback_check', $matches, $loc);
 
-        // Plugins may say that a URI is valid, in situations where a blog has no valid RDF metadata
-        if (empty($matches[2])) {
-            if ($is_wp) {
-                $wp_check = true;
-            } else {
-                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
-                return false;
+            // Plugins may say that a URI is valid, in situations where a blog has no valid RDF metadata
+            if (empty($matches[2])) {
+                if ($is_wp) {
+                    $wp_check = true;
+                } else {
+                    echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_NOT_FOUND) . '</div>';
+                    return false;
+                }
             }
         }
-    }
 
-    $trackURI = trim($matches[2]);
+        $trackURI = trim($matches[2]);
 
-    if (preg_match('@dc:identifier\s*=\s*["\'](https?:[^\'"]+)["\']@i', $res, $test)) {
-        if ($loc != $test[1] && $loc2 != $test[1]) {
-            if ($is_wp) {
-                $wp_check = true;
-            } else {
-                echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
-                return false;
+        if (preg_match('@dc:identifier\s*=\s*["\'](https?:[^\'"]+)["\']@i', $res, $test)) {
+            if ($loc != $test[1] && $loc2 != $test[1]) {
+                if ($is_wp) {
+                    $wp_check = true;
+                } else {
+                    echo '<div>&#8226; ' . sprintf(TRACKBACK_FAILED, TRACKBACK_URI_MISMATCH) . '</div>';
+                    return false;
+                }
             }
         }
-    }
 
-    // If $wp_check is set it means no RDF metadata was found, and we simply try the /trackback/ url.
-    if ($wp_check) {
-        $trackURI = $wp_loc[0];
+        // If $wp_check is set it means no RDF metadata was found, and we simply try the /trackback/ url.
+        if ($wp_check) {
+            $trackURI = $wp_loc[0];
+        }
     }
 
     $data = 'url='        . rawurlencode($url)
@@ -268,20 +278,25 @@ function serendipity_reference_autodiscover($loc, $url, $author, $title, $text) 
     echo '<div>&#8226; '. sprintf(TRACKBACK_CHECKING, $loc) .'</div>';
     flush();
 
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
-    $options = array('allowRedirects' => true, 'maxRedirects' => 5, 'method' => 'GET');
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
+    $options = array('follow_redirects' => true, 'max_redirects' => 5);
     serendipity_plugin_api::hook_event('backend_http_request', $options, 'trackback_detect');
     serendipity_request_start();
-    $req = new HTTP_Request($parsed_loc, $options);
-    $res = $req->sendRequest();
+    if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+        $options['ssl_verify_peer'] = false;
+    }
+    $req = new HTTP_Request2($parsed_loc, HTTP_Request2::METHOD_GET, $options);
 
-    if (PEAR::isError($res)) {
+    try {
+        $res = $req->send();
+    } catch (HTTP_Request2_Exception $e) {
         echo '<div>&#8226; ' . sprintf(TRACKBACK_COULD_NOT_CONNECT, $u['host'], $u['port']) .'</div>';
         serendipity_request_end();
         return;
     }
 
-    $fContent = $req->getResponseBody();
+    $fContent = $res->getBody();
     serendipity_request_end();
 
     if (strlen($fContent) != 0) {
@@ -533,21 +548,27 @@ function fetchPingbackData(&$comment) {
     if (isset($serendipity['pingbackFetchPageMaxLength'])){
         $fetchPageMaxLength = $serendipity['pingbackFetchPageMaxLength'];
     }
-    require_once S9Y_PEAR_PATH . 'HTTP/Request.php';
+    require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
     $url = $comment['url'];
 
     if (function_exists('serendipity_request_start')) serendipity_request_start();
 
     // Request the page
-    $req = new HTTP_Request($url, array('allowRedirects' => true, 'maxRedirects' => 5, 'timeout' => 20, 'readTimeout' => array(5,0)));
+    $options = array('follow_redirects' => true, 'max_redirects' => 5, 'timeout' => 20);
+    if (version_compare(PHP_VERSION, '5.6.0', '<')) {
+        // On earlier PHP versions, the certificate validation fails. We deactivate it on them to restore the functionality we had with HTTP/Request1
+        $options['ssl_verify_peer'] = false;
+    }
+    $req = new HTTP_Request2($url, HTTP_Request2::METHOD_GET, $options);
 
     // code 200: OK, code 30x: REDIRECTION
-    $responses = "/(200 OK)|(30[0-9] Found)/"; // |(30[0-9] Moved)
-    if ((PEAR::isError($req->sendRequest()) || preg_match($responses, $req->getResponseCode()))) {
-        // nothing to do,
-    }
-    else {
-        $fContent = $req->getResponseBody();
+    $responses = "/(200)|(30[0-9])/"; // |(30[0-9] Moved)
+    try {
+        $response = $req->send();
+        if (preg_match($responses, $response->getStatus())) {
+
+        }
+        $fContent = $response->getBody();
 
         // Get a title
         if (preg_match('@<head[^>]*>.*?<title[^>]*>(.*?)</title>.*?</head>@is',$fContent,$matches)) {
@@ -571,6 +592,8 @@ function fetchPingbackData(&$comment) {
 
             $comment['comment'] = $body . '[..]';
         }
+    } catch (HTTP_Request2_Exception $e) {
+        
     }
 
     if (function_exists('serendipity_request_end')) serendipity_request_end();

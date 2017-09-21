@@ -116,7 +116,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/templates.inc.php';
-            $admin_section = MANAGE_STYLES;
+            $admin_section = MENU_TEMPLATES;
             break;
 
         case 'plugins':
@@ -125,7 +125,7 @@ if (!$use_installer && $is_logged_in) {
             }
 
             include S9Y_INCLUDE_PATH . 'include/admin/plugins.inc.php';
-            $admin_section = CONFIGURE_PLUGINS;
+            $admin_section = MENU_PLUGINS;
             break;
 
         case 'users':
@@ -174,10 +174,7 @@ if (!$use_installer && $is_logged_in) {
             break;
 
         case 'comments':
-            if (!serendipity_checkPermission('adminComments')) {
-                break;
-            }
-
+            // perms are checked by author
             include S9Y_INCLUDE_PATH . 'include/admin/comments.inc.php';
             $admin_section = COMMENTS;
             break;
@@ -230,9 +227,10 @@ if ($ajax) {
         $admin_vars[$poll_admin_var] =& $$poll_admin_var;
     }
 
-    $admin_vars['out']       = array();
-    $admin_vars['no_create'] = $serendipity['no_create'];
-    $admin_vars['title']     = $admin_section;
+    $admin_vars['out']         = array();
+    $admin_vars['no_create']   = $serendipity['no_create'];
+    $admin_vars['title']       = $admin_section;
+    $admin_vars['backendBlogtitleFirst'] = $serendipity['backendBlogtitleFirst'];
 
     if ($serendipity['expose_s9y']) {
         $admin_vars['version_info'] = sprintf(ADMIN_FOOTER_POWERED_BY, $serendipity['versionInstalled'], phpversion());

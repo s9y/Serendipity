@@ -13,8 +13,8 @@
         {else}{$media.form_hidden}{/if}
 
         <ul class="filters_toolbar clearfix plainList">
-            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
-            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
+            <li><a class="button_link" href="#media_pane_filter" title="Show filters"><span class="icon-filter" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.FILTERS}</span></a></li>
+            <li><a class="button_link" href="#media_pane_sort" title="{$CONST.SORT_ORDER}"><span class="icon-sort" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.SORT_ORDER}</span></a></li>
             <li id="media_filter_path">
                 <div class="form_select">
                     <label for="serendipity_only_path" class="visuallyhidden">{$CONST.FILTER_DIRECTORY}</label>
@@ -39,6 +39,9 @@
                     <label for="serendipity[filter][fileCategory][Video]" class="media_selector button_link">{$CONST.VIDEO}</label>
                 </fieldset>
             </li>
+        {if $smarty.get.serendipity.showUpload}
+            <li class="popuplayer_showUpload"><a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a></li>
+        {/if}
         </ul>
 
         <fieldset id="media_pane_filter" class="additional_info filter_pane">
@@ -102,17 +105,12 @@
                     <div class="form_field">
                         <label class="visuallyhidden">NOTE</label>
                         <div class="bp_note">
-                            <span class="icon-info-circled"></span> mediaproperties metadata&nbsp;
+                            <span class="icon-info-circled" aria-hidden="true"></span> mediaproperties metadata fields
                         </div>
                     </div>
                 </div>
                 {/if}
             {/foreach}
-
-                <div id="media_filter_file" class="form_field {if $media.simpleFilters}center{else}left{/if}">
-                    <label for="serendipity_only_filename">{$CONST.SORT_ORDER_NAME}</label>
-                    <input id="serendipity_only_filename" name="serendipity[only_filename]" type="text" value="{$media.only_filename|escape}">
-                </div>
 
                 <div id="media_filter_keywords" class="form_field {if $media.simpleFilters}right{else}center{/if}">
                     <label for="keyword_input">{$CONST.MEDIA_KEYWORDS}</label>
@@ -226,18 +224,12 @@
     </form>
 </div>{* has toolbar end *}
 
-{if $smarty.get.serendipity.showUpload}
-<div class="popuplayer_showUpload">
-    <a class="button_link" href="?serendipity[adminModule]=media&serendipity[adminAction]=addSelect&{$media.extraParems}">{$CONST.ADD_MEDIA}</a>
-</div>
-{/if}
-
 <div class="media_library_pane">
 {if $media.nr_files < 1}
 
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.NO_IMAGES_FOUND}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.NO_IMAGES_FOUND}</span>
 {else}
-    {if $media.manage}
+    {if $media.manage AND $media.multiperm}
 
     <form id="formMultiDelete" name="formMultiDelete" action="?" method="post">
         {$media.token}
@@ -246,57 +238,53 @@
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
 
-        <div class="clearfix media_pane" data-thumbmaxwidth="{$media.thumbSize}">
+        <div class="media_pane" data-thumbmaxwidth="{$media.thumbSize}">
             {$MEDIA_ITEMS}
 
-        {if ($media.page != 1 && $media.page <= $media.pages)||$media.page != $media.pages}
+        {if ($media.page != 1 AND $media.page <= $media.pages) OR $media.page != $media.pages}
 
             <nav class="pagination">
                 <h3>{$CONST.PAGE_BROWSE_ENTRIES|sprintf:$media.page:$media.pages:$media.totalImages}</h3>
 
                 <ul class="clearfix">
-                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start"></span></a>{/if}</li>
-                    <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="first">{if $media.page > 1}<a class="button_link" href="{$media.linkFirst}" title="{$CONST.FIRST_PAGE}"><span class="visuallyhidden">{$CONST.FIRST_PAGE} </span><span class="icon-to-start" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="prev">{if $media.page != 1 AND $media.page <= $media.pages}<a class="button_link" href="{$media.linkPrevious}" title="{$CONST.PREVIOUS}"><span class="icon-left-dir" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PREVIOUS}</span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                     {* Looks weird, but last will be at end by the CSS float:right *}
-                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end"></span></a>{/if}</li>
-                    <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
+                    <li class="last">{if $media.page < $media.pages}<a class="button_link" href="{$media.linkLast}" title="{$CONST.LAST_PAGE}"><span class="visuallyhidden">{$CONST.LAST_PAGE} </span><span class="icon-to-end" aria-hidden="true"></span></a>{/if}</li>
+                    <li class="next">{if $media.page != $media.pages}<a class="button_link" href="{$media.linkNext}" title="{$CONST.NEXT}"><span class="visuallyhidden">{$CONST.NEXT} </span><span class="icon-right-dir" aria-hidden="true"></span></a>{else}<span class="visuallyhidden">{$CONST.NO_ENTRIES_TO_PRINT}</span>{/if}</li>
                 </ul>
             </nav>
         {/if}
 
         </div>{* media pane end *}
 
-    {if $media.manage}
+    {if $media.manage AND $media.multiperm}
 
         <div class="form_buttons">
             <input class="invert_selection" name="toggle" type="button" value="{$CONST.INVERT_SELECTIONS}">
+            <a href="#move-popup" class="image_move button_link hidden">{$CONST.MOVE}</a>
             <input class="state_cancel" name="toggle_delete" type="submit" value="{$CONST.DELETE}">
         </div>
-        <hr>
-        <div class="form_select">
-                <label for="newDir">{$CONST.FILTER_DIRECTORY}</label>
-                <input type="hidden" name="serendipity[oldDir]" value="">
-                <select id="newDir" name="serendipity[newDir]">
-                    <option value=""></option>
-                    <option value="uploadRoot">{$CONST.BASE_DIRECTORY}</option>
+    {/if}
+    <input class="state_submit hidden" name="toggle_move" type="submit" value="{$CONST.MOVE}">
+    <input type="hidden" id="newDir" name="serendipity[newDir]">
+    </form>
+    <div id="move-popup" class="mfp-hide">
+        <h3>Move images to directory</h3>
+        <form>
+            <div class="form_select">
+                <select >
+                    <option value="">{$CONST.BASE_DIRECTORY}</option>
                 {foreach $media.paths AS $folderFoot}
-
                     <option value="{$folderFoot.relpath}">{'&nbsp;'|str_repeat:($folderFoot.depth*2)}{$folderFoot.name}</option>
                 {/foreach}
-
                 </select>
-        </div>
-        <div class="form_buttons">
-            <input class="state_submit" name="toggle_move" type="submit" value="{$CONST.MOVE}">
-            <span class="media_file_actions actions"><a class="media_show_info button_link" href="#media_file_bulkmove" title="{$CONST.BULKMOVE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.BULKMOVE_INFO}</span></a></span>
-        </div>
-
-        <footer id="media_file_bulkmove" class="media_file_bulkmove additional_info">
-            <span class="msg_notice">{$CONST.BULKMOVE_INFO_DESC}</span>
-        </footer>
-    {/if}
-
-    </form>
+            </div>
+            <div class="form_buttons">
+                <input class="state_submit" type="submit" value="{$CONST.MOVE}">
+            </div>
+        </form>
+    </div>
 {/if}
 
 </div>{* media library pane end *}

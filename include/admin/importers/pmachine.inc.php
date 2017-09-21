@@ -12,7 +12,7 @@ class Serendipity_Import_pMachine extends Serendipity_Import {
     var $inputFields = array();
 
 
-    function Serendipity_Import_pMachine($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

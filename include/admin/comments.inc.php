@@ -4,32 +4,28 @@ if (IN_serendipity !== true) {
     die ("Don't hack!");
 }
 
-if (!serendipity_checkPermission('adminComments')) {
-    return;
-}
-
 $data = array();
 
 $commentsPerPage = (int)(!empty($serendipity['GET']['filter']['perpage']) ? $serendipity['GET']['filter']['perpage'] : 10);
 $summaryLength = 200;
 
-$errormsg = '';
-$msg = '';
+$errormsg = array();
+$msg = array();
 
 if ($serendipity['POST']['formAction'] == 'multiDelete' && sizeof($serendipity['POST']['delete']) != 0 && serendipity_checkFormToken()) {
     if ($serendipity['POST']['togglemoderate'] != '') {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
             $ac = serendipity_approveComment((int)$k, (int)$v, false, 'flip');
             if ($ac > 0) {
-                $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k);
+                $msg[] = DONE . ': '. sprintf(COMMENT_APPROVED, (int)$k);
             } else {
-                $msg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k);
+                $msg[] = DONE . ': '. sprintf(COMMENT_MODERATED, (int)$k);
             }
         }
     } else {
         foreach ( $serendipity['POST']['delete'] as $k => $v ) {
             serendipity_deleteComment($k, $v);
-            $msg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$k);
+            $msg[] = DONE . ': '. sprintf(COMMENT_DELETED, (int)$k);
         }
     }
 }
@@ -48,7 +44,7 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
                   entry_id = " . (int)$serendipity['POST']['entry_id'];
     serendipity_db_query($sql);
     serendipity_plugin_api::hook_event('backend_updatecomment', $serendipity['POST'], $serendipity['GET']['id']);
-    $msg .= COMMENT_EDITED;
+    $msg[] = COMMENT_EDITED;
 }
 
 /* Submit a new comment */
@@ -60,17 +56,18 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $comment['email']     = $serendipity['POST']['email'];
     $comment['subscribe'] = $serendipity['POST']['subscribe'];
     $comment['parent_id'] = $serendipity['POST']['replyTo'];
+
     if (!empty($comment['comment'])) {
         if (serendipity_saveComment($serendipity['POST']['entry_id'], $comment, 'NORMAL')) {
             $data['commentReplied'] = true;
             echo serendipity_smarty_show('admin/comments.inc.tpl', $data);
             return true;
         } else {
-            $errormsg .= COMMENT_NOT_ADDED;
+            $errormsg[] = COMMENT_NOT_ADDED;
             $serendipity['GET']['adminAction'] = 'reply';
         }
     } else {
-        $errormsg .= COMMENT_NOT_ADDED;
+        $errormsg[] = COMMENT_NOT_ADDED;
         $serendipity['GET']['adminAction'] = 'reply';
     }
 }
@@ -85,10 +82,10 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $rs  = serendipity_db_query($sql, true);
 
     if ($rs === false) {
-        $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
+        $errormsg[] = ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment((int)$serendipity['GET']['id'], (int)$rs['entry_id']);
-        $msg .= DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
+        $msg[] = DONE . ': '. sprintf(COMMENT_APPROVED, (int)$serendipity['GET']['id']);
     }
 }
 
@@ -101,17 +98,17 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
     $rs  = serendipity_db_query($sql, true);
 
     if ($rs === false) {
-        $errormsg .= ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
+        $errormsg[] = ERROR .': '. sprintf(COMMENT_ALREADY_APPROVED, (int)$serendipity['GET']['id']);
     } else {
         serendipity_approveComment((int)$serendipity['GET']['id'], (int)$rs['entry_id'], true, true);
-        $msg .= DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
+        $msg[] = DONE . ': '. sprintf(COMMENT_MODERATED, (int)$serendipity['GET']['id']);
     }
 }
 
 /* We are asked to delete a comment */
 if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'delete' && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
-    $msg .= DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
+    $msg[] = DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
 }
 
 /* We are either in edit mode, or preview mode */
@@ -274,17 +271,19 @@ if ($commentsPerPage == COMMENTS_FILTER_ALL) {
     $limit = serendipity_db_limit_sql(serendipity_db_limit(($page-1)*(int)$commentsPerPage, (int)$commentsPerPage));
 }
 
-$sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c 
-                                LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id) 
-                                WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and 
-                                . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . " 
+$sql = serendipity_db_query("SELECT c.*, e.title FROM {$serendipity['dbPrefix']}comments c
+                                LEFT JOIN {$serendipity['dbPrefix']}entries e ON (e.id = c.entry_id)
+                                WHERE 1 = 1 " . ($c_type !== null ? " AND c.type = '$c_type' " : '') . $and
+                                . (!serendipity_checkPermission('adminEntriesMaintainOthers') ? 'AND e.authorid = ' . (int)$serendipity['authorid'] : '') . "
                                 ORDER BY c.id DESC $limit");
 
-ob_start();
-# This event has to get send here so the spamblock-plugin can block an author now and the comment_page show that on this pageload
-serendipity_plugin_api::hook_event('backend_comments_top', $sql);
-$data['backend_comments_top'] = ob_get_contents();
-ob_end_clean();
+if (serendipity_checkPermission('adminComments')) {
+    ob_start();
+    # This event has to get send here so the spamblock-plugin can block an author now and the comment_page show that on this pageload
+    serendipity_plugin_api::hook_event('backend_comments_top', $sql);
+    $data['backend_comments_top'] = ob_get_contents();
+    ob_end_clean();
+}
 
 $data['commentsPerPage'] = $commentsPerPage;
 $data['totalComments']   = $totalComments;

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -28,5 +28,3 @@
 @define('PLUGIN_EVENT_MAILER_SENDING', 'Envoi...');
 @define('PLUGIN_EVENT_MAILER_ISTOSENDIT', 'Envoyer ce billet par email');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

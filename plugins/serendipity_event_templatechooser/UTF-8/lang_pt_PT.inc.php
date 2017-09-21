@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -15,5 +15,3 @@
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_NAME', 'Selector de tema');
 @define('PLUGIN_EVENT_TEMPLATECHOOSER_DESC', 'Permite aos utilizadores do seu blogue mudar o tema facilmente');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

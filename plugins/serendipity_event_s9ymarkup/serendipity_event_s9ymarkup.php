@@ -1,5 +1,9 @@
 <?php
 
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 class serendipity_event_s9ymarkup extends serendipity_event
@@ -16,12 +20,12 @@ class serendipity_event_s9ymarkup extends serendipity_event
         $propbag->add('author',        'Serendipity Team');
         $propbag->add('version',       '1.4');
         $propbag->add('requirements',  array(
-            'serendipity' => '0.8',
+            'serendipity' => '1.6',
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
-        $propbag->add('event_hooks',   array('frontend_display' => true, 'frontend_comment' => true));
+        $propbag->add('event_hooks',     array('frontend_display' => true, 'frontend_comment' => true));
         $propbag->add('groups', array('MARKUP'));
 
         $this->markup_elements = array(
@@ -50,19 +54,21 @@ class serendipity_event_s9ymarkup extends serendipity_event
         $propbag->add('configuration', $conf_array);
     }
 
-    function install() {
+    function install()
+    {
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function uninstall(&$propbag) {
+    function uninstall(&$propbag)
+    {
         serendipity_plugin_api::hook_event('backend_cache_purge', $this->title);
         serendipity_plugin_api::hook_event('backend_cache_entries', $this->title);
     }
 
-    function generate_content(&$title) {
+    function generate_content(&$title)
+    {
         $title = $this->title;
     }
-
 
     function introspect_config_item($name, &$propbag)
     {
@@ -73,16 +79,17 @@ class serendipity_event_s9ymarkup extends serendipity_event
         return true;
     }
 
-
-    function event_hook($event, &$bag, &$eventData, $addData = null) {
+    function event_hook($event, &$bag, &$eventData, $addData = null)
+    {
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
 
         if (isset($hooks[$event])) {
-            switch($event) {
-                case 'frontend_display':
 
+            switch($event) {
+
+                case 'frontend_display':
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
                             !$eventData['properties']['ep_disable_markup_' . $this->instance] &&
@@ -91,26 +98,26 @@ class serendipity_event_s9ymarkup extends serendipity_event
                             $eventData[$element] = $this->_s9y_markup($eventData[$element]);
                         }
                     }
-                    return true;
                     break;
 
                 case 'frontend_comment':
                     if (serendipity_db_bool($this->get_config('COMMENT', true))) {
                         echo '<div class="serendipity_commentDirection serendipity_comment_s9ymarkup">' . PLUGIN_EVENT_S9YMARKUP_TRANSFORM . '</div>';
                     }
-                    return true;
                     break;
 
                 default:
                     return false;
+
             }
+            return true;
         } else {
             return false;
         }
     }
 
-
-    function _s9y_markup($text) {
+    function _s9y_markup($text)
+    {
         $text = str_replace('\_', chr(1), $text);
         $text = preg_replace('/#([[:alnum:]]+?)#/','&\1;', $text);
         $text = preg_replace('/\b\s_([\S ]+?)_\s\b/',' <u>\1</u> ', $text);
@@ -130,8 +137,8 @@ class serendipity_event_s9ymarkup extends serendipity_event
         $text = preg_replace('/([\\\])([*#_|^@%])/', '\2', $text);
 
         return $text;
-
     }
+
 }
 
 /* vim: set sts=4 ts=4 expandtab : */

@@ -23,7 +23,7 @@ $serendipity['core_events']['backend_header']['jquery']  = 'serendipity_plugin_a
 
 // Add jquery to all frontend templates (in noConflict mode)
 function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData, $addData) {
-  global $serendipity;
+    global $serendipity;
 
     // Only execute if current template (only) does not have its own jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
@@ -44,7 +44,7 @@ function serendipity_plugin_api_frontend_header($event_name, &$bag, &$eventData,
 
 // Add jquery to all backend templates
 function serendipity_plugin_api_backend_header($event_name, &$bag, &$eventData, $addData) {
-  global $serendipity;
+    global $serendipity;
 
     // Only execute if current template does not have its own backend_jquery.js file
     // jquery can be disabled if a template's config.inc.php or a plugin sets
@@ -94,7 +94,7 @@ function errorHandlerCreateDOM(htmlStr) {
         case 'backend_publish':
             // this is preview_iframe.tpl updertHooks [ NOT ONLY!! See freetags ]
             if ($_GET['serendipity']['is_iframe'] == 'true' && $_GET['serendipity']['iframe_mode'] == 'save') {
-                echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { if (window.parent.Modernizr.indexedDB) { window.parent.serendipity.eraseEntryEditorCache(); } });</script>'."\n";
+                echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { window.parent.serendipity.eraseEntryEditorCache(); });</script>'."\n";
             }
             break;
 
@@ -206,7 +206,7 @@ class serendipity_plugin_api
 
         $rs = serendipity_db_query("SELECT MAX(sort_order) as sort_order_max FROM {$serendipity['dbPrefix']}plugins WHERE placement = '$default_placement'", true, 'num');
 
-        if (is_array($rs)) {
+        if (is_array($rs) && isset($rs[0]) && !empty($rs[0])) {
             $nextidx = intval($rs[0] + 1);
         } else {
             $nextidx = 0;
@@ -214,7 +214,7 @@ class serendipity_plugin_api
 
         $serendipity['debug']['pluginload'][] = "Installing plugin: " . print_r(func_get_args(), true);
 
-        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . serendipity_specialchars($key) . "', $nextidx, '$default_placement', '$authorid', '" . serendipity_specialchars($pluginPath) . "')";
+        $iq = "INSERT INTO {$serendipity['dbPrefix']}plugins (name, sort_order, placement, authorid, path) values ('" . serendipity_db_escape_string(serendipity_specialchars($key)) . "', $nextidx, '$default_placement', '$authorid', '" . serendipity_specialchars($pluginPath) . "')";
         $serendipity['debug']['pluginload'][] = $iq;
         serendipity_db_query($iq);
         serendipity_plugin_api::hook_event('backend_plugins_new_instance', $key, array('default_placement' => $default_placement));
@@ -245,6 +245,8 @@ class serendipity_plugin_api
     static function remove_plugin_instance($plugin_instance_id)
     {
         global $serendipity;
+
+        $plugin_instance_id = serendipity_db_escape_string($plugin_instance_id);
 
         $plugin =& serendipity_plugin_api::load_plugin($plugin_instance_id);
         if (is_object($plugin)) {
@@ -435,7 +437,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string  The filter for plugins (left|right|hide|event|eventh)
-     * @param   boolean If true, the filtering logic will be reversed an all plugins that are NOT part of the filter will be returned
+     * @param   boolean If true, the filtering logic will be reversed and all plugins that are NOT part of the filter will be returned
      * @param   string  Filter by a specific classname (like 'serendipity_plugin_archives'). Can take SQL wildcards.
      * @param   string  Filter by a specific plugin instance id
      * @return  array   Returns the associative array of found plugins in the database
@@ -477,7 +479,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string  The filter for plugins (left|right|hide|event|eventh)
-     * @param   boolean If true, the filtering logic will be reversed an all plugins that are NOT part of the filter will be evaluated
+     * @param   boolean If true, the filtering logic will be reversed and all plugins that are NOT part of the filter will be evaluated
      * @return  int     Number of plugins that were found.
      */
     static function count_plugins($filter = '*', $negate = false)
@@ -547,7 +549,7 @@ class serendipity_plugin_api
      *
      * @access public
      * @param   string      The ID of a plugin
-     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@')
+     * @param   boolean     If true, the plugin is a internal plugin (prefixed with '@'). (Unused, keep for compat.)
      * @return  string      The classname of the plugin
      */
     static function getClassByInstanceID($instance_id, &$is_internal)
@@ -1306,7 +1308,7 @@ class serendipity_plugin
      * @access public
      * @return true
      */
-    function serendipity_plugin($instance)
+    function __construct($instance)
     {
         $this->instance = $instance;
     }
@@ -1635,20 +1637,41 @@ class serendipity_plugin
      *
      * @access public
      * @param  string   template filename (no directory!)
-     * @param  bool     Called by a plugin (defaults true), since we do not have a theme using it yet
      * @return string   Parsed Smarty return
      */
-    function &parseTemplate($filename, $plugin = true) {
+    function &parseTemplate($filename)
+    {
         global $serendipity;
 
         $filename = basename($filename);
-        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath', true, $plugin); // use the simple plugin fallback stairway
+        $tfile    = serendipity_getTemplateFile($filename, 'serendipityPath', true);
         if (!$tfile || $tfile == $filename) {
             $tfile = dirname($this->pluginFile) . '/' . $filename;
         }
 
         return $serendipity['smarty']->fetch('file:'. $tfile);
     }
+
+    /**
+     * Get full path for a filename. Will first look into themes and then in the plugins directory
+     * @param   string  relative path to file
+     * @param   string  The path selector that tells whether to return a HTTP or realpath
+     * @return  string  The full path+filename to the requested file
+     * */
+    function &getFile($filename, $key = 'serendipityPath')
+    {
+        global $serendipity;
+        
+        $path = serendipity_getTemplateFile($filename, $key, true);
+        if (!$path) {
+            if (file_exists(dirname($this->pluginFile) . '/' . $filename)) {
+                return $serendipity[$key] . 'plugins/' . basename(dirname($this->pluginFile)) . '/' . $filename;
+            }
+        }
+
+        return $path;
+    }
+
 }
 
 /**
@@ -1668,7 +1691,7 @@ class serendipity_event extends serendipity_plugin
      * @param   string      The instance name
      * @return
      */
-    function serendipity_event($instance)
+    function __construct($instance)
     {
         $this->instance = $instance;
     }
@@ -1736,13 +1759,14 @@ class serendipity_event extends serendipity_plugin
      */
     function event_hook($event, &$bag, &$eventData, $addData = null)
     {
-        // Define event hooks here, if you want you plugin to execute those instead of being a sidebar item.
-        // Look at external plugins 'serendipity_event_mailer' or 'serendipity_event_weblogping' for usage.
+        // Define event hooks here, if you want your plugin to execute those instead of being a sidebar item.
+        // Look at in/external plugins 'serendipity_event_mailer' or 'serendipity_event_weblogping' for usage.
         // Currently available events:
         //   backend_publish [after insertion of a new article in your s9y-backend]
         //   backend_display [after displaying an article in your s9y-backend]
         //   frontend_display [before displaying an article in your s9y-frontend]
         //   frontend_comment [after displaying the "enter comment" dialog]
+        //   ...and some more in the meanwhile...! :)
         return true;
     }
 

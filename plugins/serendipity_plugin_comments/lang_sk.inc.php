@@ -16,4 +16,4 @@
 @define('PLUGIN_COMMENTS_ANONYMOUS',            'anonym');
 
 @define('PLUGIN_COMMENTS_ADDURL',               'Prida» URL adresu autorov do');
-?>
+

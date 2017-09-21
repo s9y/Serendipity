@@ -32,12 +32,12 @@
 
                 <ul>
                     <li class="logged_in"><span>{$admin_vars.self_info}</span></li>
-                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.MENU_DASHBOARD}"><span class="icon-home"></span><span class="visuallyhidden"> {$CONST.MENU_DASHBOARD}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php" title="{$CONST.MENU_DASHBOARD}"><span class="icon-home" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.MENU_DASHBOARD}</span></a></li>
                 {if 'personalConfiguration'|checkPermission}
-                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=personal" title="{$CONST.PERSONAL_SETTINGS}"><span class="icon-cog-alt" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.PERSONAL_SETTINGS}</span></a></li>
                 {/if}
-                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-globe"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
-                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-logout"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
+                    <li><a class="button_link" href="{$serendipityBaseURL}" title="{$CONST.BACK_TO_BLOG}"><span class="icon-globe" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.BACK_TO_BLOG}</span></a></li>
+                    <li><a class="button_link" href="serendipity_admin.php?serendipity[adminModule]=logout" title="{$CONST.LOGOUT}"><span class="icon-logout" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.LOGOUT}</span></a></li>
                 </ul>
             </nav>
         {/if}
@@ -60,7 +60,7 @@
 
             <div class="msg_error">
             {foreach $errors AS $implode_err}
-                <p><span class="icon-attention-circled"></span> {$implode_err}</p>
+                <p><span class="icon-attention-circled" aria-hidden="true"></span> {$implode_err}</p>
             {/foreach}
             </div>
         {/if}
@@ -68,9 +68,9 @@
 
     {if (($showAbort && $get.action == 'ignore') || $get.action == 'upgrade')}
         {if $get.action == 'ignore'}
-            <span class="msg_notice upgrade_done"><span class="icon-info-circled"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
+            <span class="msg_notice upgrade_done"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.SERENDIPITY_UPGRADER_YOU_HAVE_IGNORED}</span>
         {elseif $get.action == 'upgrade'}
-            <span class="msg_success upgrade_done"><span class="icon-ok-circled"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
+            <span class="msg_success upgrade_done"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.SERENDIPITY_UPGRADER_NOW_UPGRADED|sprintf:$s9y_version}</span>
         {/if}
         {if $return_here}
             {$print_UPGRADER_RETURN_HERE}
@@ -109,19 +109,19 @@
                 <dd>{$urd3}</dd>
                 {/foreach}
             {if $isdir_uploadpath}
-                <dt>{$basedir}{$uploadHTTPPath}</dt>
+                <dt>{$basedir}{serendipity_getConfigVar key='uploadHTTPPath'}</dt>
                 {foreach $upgraderResultDiagnose4 AS $urd4}
                 <dd>{$urd4}</dd>
                 {/foreach}
             {/if}
             </dl>
         {if $showWritableNote}
-            <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.PROBLEM_PERMISSIONS_HOWTO|sprintf:'chmod 1777'}</span>
         {/if}
         {if ($errorCount > 0)}
-            <span class="msg_error"><span class="icon-ok-circled"></span> {$CONST.PROBLEM_DIAGNOSTIC}</span>
+            <span class="msg_error"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.PROBLEM_DIAGNOSTIC}</span>
 
-            <a class="icon_link block_level" href="serendipity_admin.php"><span class="icon-help-circled"></span> {$CONST.RECHECK_INSTALLATION}</a>
+            <a class="icon_link block_level" href="serendipity_admin.php"><span class="icon-help-circled" aria-hidden="true"></span> {$CONST.RECHECK_INSTALLATION}</a>
         {/if}
         </div>
         {if ($errorCount < 1)}

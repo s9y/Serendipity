@@ -11,7 +11,7 @@ class Serendipity_Import_LiveJournalXML extends Serendipity_Import {
     var $inputFields = array();
     var $force_recode = false;
 
-    function Serendipity_Import_LiveJournalXML($data) {
+    function __construct($data) {
         global $serendipity;
         $this->data = $data;
         $this->inputFields = array(array('text'    => 'LiveJournal XML',

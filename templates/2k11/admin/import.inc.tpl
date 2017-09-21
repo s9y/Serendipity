@@ -2,16 +2,16 @@
     {if $die}
         <h2>{$CONST.IMPORT_ENTRIES}</h2>
 
-        <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.INCLUDE_ERRORFAILURE|sprintf:'importer'}</span>
+        <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.INCLUDE_ERRORFAILURE|sprintf:'importer'}</span>
     {else}
         {if $validateData}
         <h2>{$CONST.IMPORT_ENTRIES}</h2>
 
-        <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.IMPORT_STARTING}</span>
+        <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.IMPORT_STARTING}</span>
             {if $result != true}
-            <span class="msg_error"><span class="icon-attention-circled"></span> {$CONST.IMPORT_FAILED}: {$result}</span>
+            <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.IMPORT_FAILED}: {$result}</span>
             {else}
-            <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.IMPORT_DONE}</span>
+            <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.IMPORT_DONE}</span>
             {/if}
         {else}
             <h2>{$CONST.IMPORT_PLEASE_ENTER}</h2>
@@ -19,7 +19,7 @@
             <form action="" method="POST" enctype="multipart/form-data">
                 {$formToken}
                 {if $notes}
-                <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.IMPORT_NOTES}: {$notes}</span>
+                <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.IMPORT_NOTES}: {$notes}</span>
                 {/if}
                 <dl class="importer_data">
                 {foreach $fields as $field}

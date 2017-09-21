@@ -1,4 +1,4 @@
-<?php # $Id: lang_ja.inc.php,v 1.4 2005/05/17 11:37:42 garvinhicking Exp $
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -15,5 +15,3 @@
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_NAME', 'Creative Commons');
 @define('PLUGIN_SIDEBAR_CREATIVECOMMONS_DESC', 'Mostra uma notificação Creative Commons na barra lateral.');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -52,7 +52,7 @@ function ycon($hash, $size, $bg_red, $bg_green, $bg_blue)
   $red = hexdec(substr($hash, 0, 3)) % 12;       // 0-192 for color
   $green = hexdec(substr($hash, 3, 3)) % 12;     // (in increments of 16)
   $blue = hexdec(substr($hash, 6, 3)) % 12;
-  
+
   $corners = hexdec(substr($hash, 9, 1)) % 16;   // 14 gylphs
   $corners_i = hexdec(substr($hash, 10, 1)) % 2; // inverted?
   $corners_a = hexdec(substr($hash, 11, 1)) % 4; // 4 rotations
@@ -93,7 +93,7 @@ function ycon($hash, $size, $bg_red, $bg_green, $bg_blue)
 
   $shape = (int)($center / 2);
   $inverted = (($center % 2) == 0);
-  
+
   draw_glpyh($draw_icon, $square, $square, $square, $color, $background, $shape, 0, $inverted);
 
   imagecopyresampled($icon, $draw_icon, 0, 0, 0, 0, $size, $size, $draw_size, $draw_size);
@@ -230,7 +230,7 @@ function draw_glpyh(&$image, $x, $y, $full, $fg_color, $bg_color, $shape, $rotat
         0, $full,
         $full, 0);
       break;
-      
+
     case 13: // squat diamond
       $points = array(
         $quarter, 0,
@@ -238,7 +238,7 @@ function draw_glpyh(&$image, $x, $y, $full, $fg_color, $bg_color, $shape, $rotat
         $quarter, $full,
         0, $half);
       break;
-      
+
     case 14: // hourglass on its side (and kinda' squished...)
       $points = array(
         0, $half,
@@ -253,7 +253,7 @@ function draw_glpyh(&$image, $x, $y, $full, $fg_color, $bg_color, $shape, $rotat
         $half, $half,
         $half, $full);
       break;
-      
+
     default:
       die('$shape must be in range [0..13] (' . $shape . ' is out of range)');
   }
@@ -282,4 +282,5 @@ function draw_glpyh(&$image, $x, $y, $full, $fg_color, $bg_color, $shape, $rotat
   // draw the bastard
   imagefilledpolygon($image, $points, count($points) / 2, $drawing_color);
 }
+
 ?>

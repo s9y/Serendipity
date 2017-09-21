@@ -13,7 +13,7 @@
  * @category  HTTP
  * @package   HTTP_Request2
  * @author    Alexey Borzov <avb@php.net>
- * @copyright 2008-2014 Alexey Borzov <avb@php.net>
+ * @copyright 2008-2016 Alexey Borzov <avb@php.net>
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
  * @link      http://pear.php.net/package/HTTP_Request2
  */
@@ -34,7 +34,7 @@ require_once 'HTTP/Request2/SocketWrapper.php';
  * @package  HTTP_Request2
  * @author   Alexey Borzov <avb@php.net>
  * @license  http://opensource.org/licenses/BSD-3-Clause BSD 3-Clause License
- * @version  Release: 2.2.1
+ * @version  Release: 2.3.0
  * @link     http://pear.php.net/package/HTTP_Request2
  */
 class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
@@ -147,7 +147,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 
 
             if ($jar = $request->getCookieJar()) {
-                $jar->addCookiesFromResponse($response, $request->getUrl());
+                $jar->addCookiesFromResponse($response);
             }
 
             if (!$this->canKeepAlive($keepAlive, $response)) {
@@ -261,9 +261,16 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
             foreach ($this->request->getConfig() as $name => $value) {
                 if ('ssl_' == substr($name, 0, 4) && null !== $value) {
                     if ('ssl_verify_host' == $name) {
-                        if ($value) {
-                            $options['ssl']['CN_match'] = $reqHost;
+                        if (version_compare(phpversion(), '5.6', '<')) {
+                            if ($value) {
+                                $options['ssl']['CN_match'] = $reqHost;
+                            }
+
+                        } else {
+                            $options['ssl']['verify_peer_name'] = $value;
+                            $options['ssl']['peer_name']        = $reqHost;
                         }
+
                     } else {
                         $options['ssl'][substr($name, 4)] = $value;
                     }
@@ -281,7 +288,7 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
 
         // Changing SSL context options after connection is established does *not*
         // work, we need a new connection if options change
-        $remote    = ((!$secure || $httpProxy || $socksProxy)? 'tcp://': 'ssl://')
+        $remote    = ((!$secure || $httpProxy || $socksProxy)? 'tcp://': 'tls://')
                      . $host . ':' . $port;
         $socketKey = $remote . (
                         ($secure && $httpProxy || $socksProxy)
@@ -312,12 +319,12 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
                     $conninfo = "tcp://{$reqHost}:{$reqPort} via {$remote}";
                 } else {
                     $this->socket->enableCrypto();
-                    $conninfo = "ssl://{$reqHost}:{$reqPort} via {$remote}";
+                    $conninfo = "tls://{$reqHost}:{$reqPort} via {$remote}";
                 }
 
             } elseif ($secure && $httpProxy && !$tunnel) {
                 $this->establishTunnel();
-                $conninfo = "ssl://{$reqHost}:{$reqPort} via {$remote}";
+                $conninfo = "tls://{$reqHost}:{$reqPort} via {$remote}";
 
             } else {
                 $this->socket = new HTTP_Request2_SocketWrapper(
@@ -1043,14 +1050,14 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         $chunked = 'chunked' == $response->getHeader('transfer-encoding');
         $length  = $response->getHeader('content-length');
         $hasBody = false;
-        if ($chunked || null === $length || 0 < intval($length)) {
-            // RFC 2616, section 4.4:
-            // 3. ... If a message is received with both a
-            // Transfer-Encoding header field and a Content-Length header field,
-            // the latter MUST be ignored.
-            $toRead = ($chunked || null === $length)? null: $length;
-            $this->chunkLength = 0;
+        // RFC 2616, section 4.4:
+        // 3. ... If a message is received with both a
+        // Transfer-Encoding header field and a Content-Length header field,
+        // the latter MUST be ignored.
+        $toRead  = ($chunked || null === $length)? null: $length;
+        $this->chunkLength = 0;
 
+        if ($chunked || null === $length || 0 < intval($length)) {
             while (!$this->socket->eof() && (is_null($toRead) || 0 < $toRead)) {
                 if ($chunked) {
                     $data = $this->readChunked($bufferSize);
@@ -1075,6 +1082,11 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
                 }
             }
         }
+        if (0 !== $this->chunkLength || null !== $toRead && $toRead > 0) {
+            $this->request->setLastEvent(
+                'warning', 'transfer closed with outstanding read data remaining'
+            );
+        }
 
         if ($hasBody) {
             $this->request->setLastEvent('receivedBody', $response);
@@ -1095,11 +1107,16 @@ class HTTP_Request2_Adapter_Socket extends HTTP_Request2_Adapter
         // at start of the next chunk?
         if (0 == $this->chunkLength) {
             $line = $this->socket->readLine($bufferSize);
-            if (!preg_match('/^([0-9a-f]+)/i', $line, $matches)) {
+            if ('' === $line && $this->socket->eof()) {
+                $this->chunkLength = -1; // indicate missing chunk
+                return '';
+
+            } elseif (!preg_match('/^([0-9a-f]+)/i', $line, $matches)) {
                 throw new HTTP_Request2_MessageException(
                     "Cannot decode chunked response, invalid chunk length '{$line}'",
                     HTTP_Request2_Exception::DECODE_ERROR
                 );
+
             } else {
                 $this->chunkLength = hexdec($matches[1]);
                 // Chunk with zero length indicates the end

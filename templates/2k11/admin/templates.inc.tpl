@@ -1,8 +1,8 @@
 {if $adminAction == 'install'}
-    <span class="msg_success"><span class="icon-ok-circled"></span> {$install_template|string_format:"{$CONST.TEMPLATE_SET}"}</span>
+    <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$install_template|string_format:"{$CONST.TEMPLATE_SET}"}</span>
 {/if}
 {if $deprecated}
-    <span class="msg_notice"><span class="icon-info-circled"></span> {$CONST.WARNING_TEMPLATE_DEPRECATED}</span>
+    <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$CONST.WARNING_TEMPLATE_DEPRECATED}</span>
 {/if}
 
 {if $adminAction == 'editConfiguration'}
@@ -10,7 +10,7 @@
         <h2>{$CONST.STYLE_OPTIONS} ({$cur_template})</h2>
     {if $has_config}
         {if $adminAction == 'configure'}
-        <span class="msg_success"><span class="icon-ok-circled"></span> {$CONST.DONE}: {$save_time}</span>
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: {$save_time}</span>
         {/if}
         <form class="theme_options option_list" method="post" action="serendipity_admin.php">
             <input name="serendipity[adminModule]" type="hidden" value="templates">
@@ -56,9 +56,9 @@
                 </div>
             </div>
 
-            <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
-            {if $cur_tpl.info.custom_config}<a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>{/if}
-            {if $cur_tpl.info.custom_admin_interface == $CONST.YES and $cur_tpl.info.name != $cur_tpl_backend.info.name}<a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-backend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.BACKEND}</a>{/if}
+            <button class="template_show_info button_link" type="button" data-href="#template_info_cur" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
+            {if $cur_tpl.info.custom_config}<a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=editConfiguration&amp;{$urltoken}" title="{$CONST.CONFIGURATION}">{$CONST.CONFIGURATION}</a>{/if}
+            {if $cur_tpl.info.custom_admin_interface == $CONST.YES and $cur_tpl.info.name != $cur_tpl_backend.info.name}<a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-backend&amp;serendipity[theme]={$template}{$info.info.customURI}&amp;{$urltoken}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.BACKEND}</a>{/if}
         </article>
 
         {if $cur_template_backend}
@@ -87,14 +87,11 @@
                     </div>
                 </div>
 
-                <button class="template_show_info button_link" type="button" data-href="#template_info_cur_backend" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
+                <button class="template_show_info button_link" type="button" data-href="#template_info_cur_backend" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
             </article>
         {/if}
 
-        <h2>{$CONST.AVAILABLE_TEMPLATES}</h2>
-
-        <ul class="plainList clearfix">
-        {foreach $templates as $template=>$info}
+        {function name=templateBlock}
             <li><article class="clearfix">
                     <h3 title="{$info.info.name}">{$info.info.name|truncate:25:"&hellip;"}</h3>
                     <div class="clearfix equal_heights template_wrap">
@@ -109,7 +106,7 @@
                             {/if}
                         {/if}
 
-                            <footer id="template_info_{$info@key}" class="template_info additional_info">
+                            <footer id="template_info_{$key}" class="template_info additional_info">
                                 <dl class="clearfix">
                                     <dt class="template_author">{$CONST.AUTHOR}:</dt>
                                     <dd>{$info.info.author}</dd>
@@ -124,22 +121,37 @@
                         </div>
                     </div>
 
-                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$info@key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
+                    <button class="template_show_info button_link" type="button" data-href="#template_info_{$key}" title="{$CONST.TEMPLATE_INFO}"><span class="icon-info-circled" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.TEMPLATE_INFO}</span></button>
                 {if $info.demoURL}
-                    <a class="demo_link button_link" href="{$info.demoURL}" title="{$CONST.THEMES_PREVIEW_BLOG}" target="_blank"><span class="icon-search"></span><span class="visuallyhidden"> {$CONST.THEMES_PREVIEW_BLOG}</span></a>
+                    <a class="demo_link button_link" href="{$info.demoURL}" title="{$CONST.THEMES_PREVIEW_BLOG}" target="_blank"><span class="icon-search" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.THEMES_PREVIEW_BLOG}</span></a>
                 {/if}
                 {if !$info.unmetRequirements}
                     {if $info.info.custom_admin_interface == $CONST.YES && $cur_tpl_backend.info.name != $info.info.name}
-                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-frontend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
-                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-backend&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.BACKEND}</a>
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-frontend&amp;serendipity[theme]={$template}{$info.info.customURI}&amp;{$urltoken}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install-backend&amp;serendipity[theme]={$template}{$info.info.customURI}&amp;{$urltoken}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.BACKEND}</a>
                     {else}
-                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
+                    <a class="button_link" href="?serendipity[adminModule]=templates&amp;serendipity[adminAction]=install&amp;serendipity[theme]={$template}{$info.info.customURI}&amp;{$urltoken}" title="{$CONST.SET_AS_TEMPLATE}">{$CONST.INSTALL}: {$CONST.FRONTEND}</a>
                     {/if}
                 {else}
-                    <span class="unmet_requirements msg_error"><span class="icon-attention-circled"></span> {$info.unmetRequirements}></span>
+                    <span class="unmet_requirements msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$info.unmetRequirements}></span>
                 {/if}
                 </article>
             </li>
+        {/function}
+
+        <h2>{$CONST.RECOMMENDED}</h2>
+        <ul class="plainList">
+        {foreach $recommended_templates as $template=>$info}
+            {templateBlock template=$template info=$info key=$info@key}
+        {/foreach}
+        </ul>
+
+
+        <h2>{$CONST.AVAILABLE_TEMPLATES}</h2>
+
+        <ul class="plainList">
+        {foreach $templates as $template=>$info}
+            {templateBlock template=$template info=$info key=$info@key}
         {/foreach}
         </ul>
     </section>

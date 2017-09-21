@@ -1,4 +1,4 @@
-<?
+<?php
 
 @define('PLUGIN_ENTRYLINKS_NAME', '文章链接');
 @define('PLUGIN_ENTRYLINKS_BLAHBLAH', '显示涉及该文章的所有链接');

@@ -16,7 +16,7 @@ class Serendipity_Import_b2evolution extends Serendipity_Import {
         return '';
     }
 
-    function Serendipity_Import_b2evolution($data) {
+    function __construct($data) {
         $this->data = $data;
         $this->inputFields = array(array('text' => INSTALL_DBHOST,
                                          'type' => 'input',

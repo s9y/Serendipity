@@ -154,7 +154,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     /** SECTION: Certain Plugin Buttons
         We cheat ckeditor instances by adding all available button names (in s9ypluginbuttons) to "both" toolbar instances, in case of having two textareas.
-        The instanciation will only take the ones being currently initiated in wysiwyg_init.tpl output, in the source code.
+        The instantiation will only take the ones being currently initiated in wysiwyg_init.tpl output, in the source code.
         The hooked and added extraPlugins in wysiwyg_init become not automatically true for preset toolbars (Basic, Standard, Full) like this, but do for the fallback toolbarGroups later on.
     */
     // concat button arrays

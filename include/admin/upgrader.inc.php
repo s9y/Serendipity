@@ -12,7 +12,7 @@ define('S9Y_U_WARNING', 0);
 define('S9Y_U_SUCCESS', 1);
 
 /**
- * Checks a return code constant if it's successfull or an error and return HTML code
+ * Checks a return code constant if it's successful or an error and return HTML code
  *
  * The diagnosis checks return codes of several PHP checks. Depending
  * on the input, a specially formatted string is returned.
@@ -26,7 +26,7 @@ function serendipity_upgraderResultDiagnose($result, $s) {
     global $errorCount, $data;
 
     if ( $result === S9Y_U_SUCCESS ) {
-        $data['u_success'] = true; // we dont need data here explicitely, but we keep it for possible future purposes
+        $data['u_success'] = true; // we don't need data here explicitly, but we keep it for possible future purposes
         return '<span class="msg_success">'. $s .'</span>';
     }
 
@@ -266,6 +266,10 @@ $tasks = array(array('version'   => '0.5.1',
                      'arguments' => array(substr($serendipity['serendipityPath'], 0, -1), $dead_files_202, array('internals'), true),
                      'desc'      => 'The following old dead files will be removed from your system.<br><pre>' . implode(', ', $dead_files_202) . '</pre>'),
 
+               array('version'   => '2.2.0-beta2',
+                     'function'  => 'serendipity_installFiles',
+                     'title'     => 'Update .htaccess file',
+                     'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.'),
 );
 
 /* Fetch SQL files which needs to be run */

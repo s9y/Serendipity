@@ -1,4 +1,4 @@
-<?php # $Id: lang_cs.inc.php 1381 2007-12-20 00:29:00 VladaAjgl $
+<?php
 
 /**
  *  @version $Revision: 1381 $
@@ -12,4 +12,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC',  'Vyberte plugin událostí, jehož výstup má být zobrazen');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC',   'Vložte nadpis tohoto postranního panelu (pokud je ponecháno prázdné, bude jako nadpis použit název zobrazovaného pluginu)');
 
-?>

@@ -1,6 +1,11 @@
 <?php
 
-class serendipity_plugin_archives extends serendipity_plugin {
+if (IN_serendipity !== true) {
+    die ("Don't hack!");
+}
+
+class serendipity_plugin_archives extends serendipity_plugin
+{
     var $title = ARCHIVES;
 
     function introspect(&$propbag)
@@ -9,7 +14,7 @@ class serendipity_plugin_archives extends serendipity_plugin {
         $propbag->add('description',   BROWSE_ARCHIVES);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.0');
+        $propbag->add('version',       '1.1');
         $propbag->add('configuration', array('title', 'frequency', 'count', 'show_count', 'hide_zero_count'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -17,6 +22,7 @@ class serendipity_plugin_archives extends serendipity_plugin {
     function introspect_config_item($name, &$propbag)
     {
         switch($name) {
+
             case 'title':
                 $propbag->add('type',        'string');
                 $propbag->add('name',        TITLE);
@@ -68,7 +74,7 @@ class serendipity_plugin_archives extends serendipity_plugin {
         $ts = mktime(0, 0, 0, date('m'), 1);
 
         $add_query = '';
-        
+
         $category_set = isset($serendipity['GET']['category']);
         if ($category_set) {
             $base_query   = 'C' . (int)$serendipity['GET']['category'];
@@ -76,18 +82,18 @@ class serendipity_plugin_archives extends serendipity_plugin {
         }
 
         $max_x = $this->get_config('count', 3);
-        $show_count = serendipity_db_bool($this->get_config('show_count', false));
-        $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', false));
+        $show_count = serendipity_db_bool($this->get_config('show_count', 'false'));
+        $hide_zero_count = serendipity_db_bool($this->get_config('hide_zero_count', 'false'));
         $freq = $this->get_config('frequency', 'months');
 
         echo '<ul class="plainList">' . "\n";
-        
+
         if ($serendipity['dbType'] == 'sqlite' || $serendipity['dbType'] == 'sqlite3' || $serendipity['dbType'] == 'sqlite3oo') {
             $dist_sql = 'count(e.id) AS orderkey';
         } else {
             $dist_sql = 'count(DISTINCT e.id) AS orderkey';
         }
-        
+
         for($x = 0; $x < $max_x; $x++) {
             $current_ts = $ts;
             switch($freq) {
@@ -177,20 +183,21 @@ class serendipity_plugin_archives extends serendipity_plugin {
                     if (empty($ec['orderkey'])) {
                         $ec['orderkey'] = '0';
                     }
-                    $hidden_by_zero_count = $hide_zero_count && ( $ec['orderkey'] == '0'); 
+                    $hidden_by_zero_count = $hide_zero_count && ( $ec['orderkey'] == '0');
                     $html_count .= ' (' . $ec['orderkey'] . ')';
                 }
             }
 
             if (!$hidden_by_zero_count) {
-                echo '<li><a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a></li>' . "\n";
+                echo '    <li><a href="' . $link . '" title="' . $ts_title . '">' . $ts_title . $html_count . '</a></li>' . "\n";
             }
         }
 
-        echo '<li><a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a></li>' . "\n";
-        echo '<li><a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a></li>'. "\n";
+        echo '    <li><a href="'. $serendipity['serendipityHTTPPath'] . $serendipity['indexFile'] . '?frontpage">' . RECENT . '</a></li>' . "\n";
+        echo '    <li><a href="'. serendipity_rewriteURL(PATH_ARCHIVE . $add_query) .'">' . OLDER . '</a></li>'. "\n";
         echo '</ul>' . "\n";
     }
+
 }
 
 ?>

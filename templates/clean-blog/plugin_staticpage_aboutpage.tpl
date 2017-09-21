@@ -5,7 +5,7 @@
             <div class="staticpage_breadcrumbs">
                 <a href="{$serendipityBaseURL}" title="{$CONST.HOMEPAGE}">{$template_option.home_link_text}</a>
                 {foreach name="crumbs" from=$staticpage_navigation.crumbs item="crumb"}
-                    &raquo; {if !$smarty.foreach.crumbs.last}<a href="{$crumb.link}">{/if}{$crumb.name|@escape}</a>
+                    &nbsp;/&nbsp; {if !$smarty.foreach.crumbs.last}<a href="{$crumb.link}">{/if}{$crumb.name|@escape}</a>
                 {/foreach}
             </div>
         {/if}        

@@ -1,4 +1,4 @@
-<?php # $Id$
+<?php
 
 ##########################################################################
 # serendipity - another blogger...                                       #
@@ -19,5 +19,3 @@
 @define('PLUGIN_EVENT_WRAPPER_PLUGINDESC', 'Sélectionnez le plugin dont les données doivent être affichés');
 @define('PLUGIN_EVENT_WRAPPER_TITLEDESC', 'Entrez le titre de cet élément de barre latérale (laisser vide pour hériter le titre du plugin d\'évènement)');
 
-/* vim: set sts=4 ts=4 expandtab : */
-?>

@@ -11,12 +11,11 @@
 * Technical choices are described in the 'docs/technical' file
 *
 * @package Cache_Lite
-* @version $Id: Function.php,v 1.11 2006/12/14 12:59:43 cweiske Exp $
 * @author Sebastian BERGMANN <sb@sebastian-bergmann.de>
 * @author Fabien MARTY <fab@php.net>
 */
 
-require_once dirname(__FILE__) . '/../Lite.php';
+require_once('Cache/Lite.php');
 
 class Cache_Lite_Function extends Cache_Lite
 {
@@ -82,7 +81,7 @@ class Cache_Lite_Function extends Cache_Lite
     * @param array $options options
     * @access public
     */
-    function Cache_Lite_Function($options = array(NULL))
+    function __construct($options = array(NULL))
     {
         $availableOptions = array('debugCacheLiteFunction', 'defaultGroup', 'dontCacheWhenTheOutputContainsNOCACHE', 'dontCacheWhenTheResultIsFalse', 'dontCacheWhenTheResultIsNull');
         while (list($name, $value) = each($options)) {
@@ -92,7 +91,7 @@ class Cache_Lite_Function extends Cache_Lite
             }
         }
         reset($options);
-        $this->Cache_Lite($options);
+        parent::__construct($options);
     }
 
     /**
@@ -207,5 +206,3 @@ class Cache_Lite_Function extends Cache_Lite
     }
 
 }
-
-?>

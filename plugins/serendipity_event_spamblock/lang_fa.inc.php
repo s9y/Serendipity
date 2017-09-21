@@ -1,4 +1,4 @@
-<?php #
+<?php
 
 /**
  *  @version 
@@ -98,3 +98,4 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE', 'غیر فعال کردن ضد اسپم برای نویسندگان');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_DESC', 'شما می توانید به نویسندگان اجازه دهید که بدون برنامه ضد اسپم، نظر ارسال کنند.');
+

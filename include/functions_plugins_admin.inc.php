@@ -114,12 +114,12 @@ function show_plugins($event_only = false, $sidebars = null)
     $i = 0;
     foreach ($plugin_placements as $plugin_placement) {
         if (!$event_only && $plugin_placement == 'NONE') {
-            $is_invisible     = true;
+            $is_invisible = true;
         } else {
-            $is_invisible     = false;
+            $is_invisible = false;
         }
         $data['placement'][$plugin_placement]['ptitle'] = $ptitle = $opts[$plugin_placement];
-        $data['placement'][$plugin_placement]['pid'] = $pid    = $plugin_placement;
+        $data['placement'][$plugin_placement]['pid'] = $pid = $plugin_placement;
 
         if ($is_invisible) {
             $plugins = $invisible_plugins;
@@ -435,6 +435,14 @@ function serendipity_plugin_config(&$plugin, &$bag, &$name, &$desc, &$config_nam
             case 'custom':
                 $data['ctype'] = 'custom';
                 $data['cbag_custom'] = $cbag->get('custom');
+                $assign_plugin_config($data);
+
+                break;
+
+            case 'color':
+                $data['ctype'] = 'color';
+                $data['input_type'] = 'color';
+                $data['cbag_value'] = $cbag->get('value');
                 $assign_plugin_config($data);
 
                 break;

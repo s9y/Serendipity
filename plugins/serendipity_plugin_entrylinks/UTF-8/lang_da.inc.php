@@ -1,4 +1,4 @@
-<?php # $Id: lang_en.inc.php 690 2005-11-13 04:49:04Z elf2000 $
+<?php
 
 /**
  *  @version $Revision: 690 $
@@ -20,4 +20,3 @@
 @define('PLUGIN_ENTRYLINKS_ORDERBY_DAY', 'Dato');
 @define('PLUGIN_ENTRYLINKS_ORDERBY_FULLCOUNT', 'Antal links');
 
-?>

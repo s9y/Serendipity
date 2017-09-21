@@ -357,14 +357,15 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
         $_smartyComments = array();
     }
 
+    $formToken = serendipity_setFormToken('url');
     $i = 0;
     foreach ($comments as $comment) {
         if ($parentid === VIEWMODE_LINEAR || !isset($comment['parent_id']) || $comment['parent_id'] == $parentid) {
             $i++;
 
-            $comment['comment'] = serendipity_specialchars(strip_tags($comment['body']));
-            $comment['url']     = strip_tags($comment['url']);
-            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments';
+            $comment['comment'] = (is_string($comment['body']) ? serendipity_specialchars(strip_tags($comment['body'])) : '');
+            $comment['url']     = (is_string($comment['url']) ? strip_tags($comment['url']) : '');
+            $comment['link_delete'] = $serendipity['baseURL'] . 'comment.php?serendipity[delete]=' . $comment['id'] . '&amp;serendipity[entry]=' . $comment['entry_id'] . '&amp;serendipity[type]=comments&amp;' . $formToken;
 
             /* Fix invalid cases in protocoll part */
             if (!empty($comment['url'])) {
@@ -438,7 +439,7 @@ function serendipity_printComments($comments, $parentid = 0, $depth = 0, $trace 
 function serendipity_printCommentsByAuthor() {
     global $serendipity;
 
-    $type      = serendipity_db_escape_string($serendipity['GET']['commentMode']);
+    $type = serendipity_db_escape_string($serendipity['GET']['commentMode']);
 
     if ($type == 'comments' || empty($type)) {
         $type = 'NORMAL';
@@ -790,6 +791,11 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         $commentInfo['status'] = $ca['status'];
     }
 
+    if ($serendipity['serendipityAuthedUser']) {
+        $authorReply = true;
+        $authorEmail = $serendipity['serendipityEmail'];
+    }
+
     $title         = serendipity_db_escape_string(isset($commentInfo['title']) ? $commentInfo['title'] : '');
     $comments      = $commentInfo['comment'];
     $ip            = serendipity_db_escape_string(isset($commentInfo['ip']) ? $commentInfo['ip'] : $_SERVER['REMOTE_ADDR']);
@@ -873,7 +879,9 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
     if ($status != 'confirm' && (serendipity_db_bool($ca['moderate_comments'])
         || ($type == 'NORMAL' && serendipity_db_bool($row['mail_comments']))
         || (($type == 'TRACKBACK' || $type == 'PINGBACK') && serendipity_db_bool($row['mail_trackbacks'])))) {
-        serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
+            if (! ($authorReply && $authorEmail == $row['email'])) {
+                serendipity_sendComment($cid, $row['email'], $name, $email, $url, $id, $row['title'], $comments, $type, serendipity_db_bool($ca['moderate_comments']), $referer);
+            }
     }
 
     // Approve with force, if moderation is disabled
