@@ -1136,6 +1136,9 @@ function serendipity_FTPChecksum($filename, $type = null) {
             strcasecmp($ext, 'sh') &&
             strcasecmp($ext, 'html') &&
             strcasecmp($ext, 'htm') &&
+            strcasecmp($ext, 'xml') &&
+            strcasecmp($ext, 'inc') &&
+            strcasecmp($ext, 'svg') &&
             !empty($ext)) {
             if (!in_array($ext, array_keys($debug_exts))) {
                 $debug_exts[$ext] = $filename;
