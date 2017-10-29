@@ -95,7 +95,6 @@ class serendipity_event_responsiveimages extends serendipity_event
                     break;
 
                 case 'backend_media_makethumb':
-                    echo $addData;
                     // $eventData is usually defined as:
                     // array(array(
                     //        'thumbSize' => $serendipity['thumbSize'],
