@@ -269,7 +269,16 @@ class serendipity_event_nl2br extends serendipity_event
 
                             $element = $temp['element'];
                             if ($p_tags) {
-                                $eventData[$element] = $this->nl2p($eventData[$element]);
+                                $text = $eventData[$element];
+                                if (!empty($text)) {
+                                    //Standardize line endings to Unix
+                                    $text = str_replace(array("\r\n", "\r"), "\n", $text);
+                                    if ($element == 'body' && isset($eventData['extended'])) {  
+                                        //move newlines from body to extended
+                                        $eventData['extended'] = str_repeat("\n",strspn($text,"\n",-1)) . $eventData['extended'];
+                                    } 
+                                    $eventData[$element] = $this->nl2p($text, $element);
+                                }
                             } else if ($isolate) {
                                 $eventData[$element] = $this->isolate($eventData[$element], '~[<\[](' . implode('|', $isolate) . ').*?[>\]].*?[<\[]/\1[>\]]~si');
                                 $eventData[$element] = nl2br($eventData[$element]);
@@ -316,8 +325,18 @@ class serendipity_event_nl2br extends serendipity_event
 
 /* nl2br plugin start */
 
-p.whiteline {
+p.whitelinebottom {
     margin-top: 0em;
+    margin-bottom: 1em;
+}
+
+p.whitelinetop {
+    margin-top: 1em;
+    margin-bottom: 0em;
+}
+
+p.whitelinetopbottom {
+    margin-top: 1em;
     margin-bottom: 1em;
 }
 
@@ -371,56 +390,54 @@ p.break {
 
     /**
      * Insert <p class="whiteline" at paragraphs ending with two newlines
-     * Insert <p class="break" at paragraphs ending with one nl
+     * Insert <p class="break" at paragraphs ending with one or no nl
+     * Insert <p class="whitelinetop" at the first paragraph if starting with a nl
+     * Insert <p class="whitelinetopbottom" if the first paragraph is ending with two newlines
      * @param string text
      * @param boolean complex operations (not necessary when text is flat)
      * @return string
      */
-    function nl2p(&$text, $complex=true)
+    function nl2p(&$text, $element='any', $complex=true)
     {
-        if (empty($text)) {
-            return $text;
-        }
-        //Standardize line endings:
-        //DOS to Unix and Mac to Unix
-        $text = str_replace(array("\r\n", "\r"), "\n", $text);
+        //check if string starts with a newline (extended only)
+        $startnl = ($element =='extended' && strspn($text,"\n")) ? true : false; 
+        
+        //trim whitespaces and line breaks
+        $text = trim($text);        
+        
+        //split into array
         $text = str_split($text);
 
         $big_p = '<p class="whiteline">';
         $small_p = '<p class="break">';
 
-        $insert = true;
-        $i = count($text);
+        $i = count($text) - 1;
         $whiteline = false;
-        if ($text[$i-1] == "\n") {
-            //prevent unnexessary p-tag at the end
-            unset($text[$i-1]);
-        }
-
+                
         //main operation: convert \n to big_p and small_p
         while ($i > 0) {
-            if ($insert) {
-                $i = $this->next_nl_block($i, $text);
-                if ($i == 0) {
-                    //prevent replacing of first character
-                    break;
-                }
-                if ($whiteline == true) {
-                    $text[$i] = '</p>' . $big_p;
-                } else {
-                    $text[$i] = '</p>' . $small_p;
-                }
-                $whiteline = false;
-                $insert = false;
+            //search next /n enclosing text, starting at $i-1
+            $i = $this->next_nl_block($i, $text); 
+            if ($i == 0) {      //no newlines left
+                break;
+            } elseif ($whiteline == true) {
+                $text[$i] = '</p>' . $big_p;
             } else {
-                if ($text[$i-1] === "\n") {
-                    //newline is follower of a newline
-                    $whiteline = true;
-                }
-                $insert = true;
+                $text[$i] = '</p>' . $small_p;
+            }
+            //look ahead for next paragraph class
+            if ($text[$i-1] === "\n") {
+            $whiteline = true;  
+            $i--;
+            } else {
+            $whiteline = false;
             }
         }
-        if ($whiteline) {
+        if ($whiteline && $startnl) {
+            $start_tag = '<p class="whitelinetopbottom">';
+        } elseif ($startnl) {
+            $start_tag = '<p class="whitelinetop">';
+        } elseif ($whiteline) {
             $start_tag = $big_p;
         } else {
             $start_tag = $small_p;
@@ -447,7 +464,7 @@ p.break {
         if (is_array($text)) {
             $text = implode($text);
         }
-        return str_replace(array('<p class="whiteline"></p>','<p class="break"></p>', '<p></p>'),"", $text);
+        return str_replace(array('<p class="whiteline"></p>','<p class="break"></p>','<p class="whitelinetop"></p>','<p class="whitelinetopbottom"></p>','<p></p>'),"", $text);
     }
 
     function purge_p($text)
