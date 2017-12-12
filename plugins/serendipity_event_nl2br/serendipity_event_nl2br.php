@@ -619,7 +619,7 @@ p.break {
 				if ($isolation_flag)
 				{
 				//content, no nl2p
-				$content .= implode(array_slice($textarray,$start,$i-$start-1));
+				$content .= implode(array_slice($textarray,$start,$i-$start));
 				$isolation_flag = false;
 				$start = $i+1;
 				}
