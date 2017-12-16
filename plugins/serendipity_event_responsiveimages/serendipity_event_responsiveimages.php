@@ -18,7 +18,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.3');
+        $propbag->add('version',       '0.4');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -78,9 +78,9 @@ class serendipity_event_responsiveimages extends serendipity_event
         $hooks = &$bag->get('event_hooks');
         $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'];
         if (! $this->breakpoints) {
-            $this->breakpoints = [1600, 1200, 600]; # This can later on be overwritten by the theme
+            $this->breakpoints = [1600, 1200, 600]; # This can be overwritten by the theme
         }
-        $this->thumbWidths = [1200, 800, 400]; # This can later on be overwritten by the theme
+        $this->thumbWidths = [1200, 800, 400];
 
         if (isset($hooks[$event])) {
 
@@ -170,6 +170,10 @@ class serendipity_event_responsiveimages extends serendipity_event
         $thumbnails = serendipity_getThumbnails($id);
 
         $srcset = "srcset=\"$imagePath {$origImage['dimensions_width']}w,";
+        if ($origImage['dimensions_width'] <= $this->breakpoints[0]) {
+            // don't set the original image as srcset source if its breakpoint would be too small
+            $srcset = 'srcset="';
+        }
         
         for ($i = 0; $i < count($this->thumbWidths); $i++) {
             $thumbWidth = $this->thumbWidths[$i];
@@ -185,6 +189,10 @@ class serendipity_event_responsiveimages extends serendipity_event
                 $breakpoint = $this->breakpoints[$i];
                 $srcset .= "{$thumbnailHttp} {$breakpoint}w,";
             }
+        }
+        if (substr($srcset, -strlen(',')) === ',') {
+            // we don't want to have the trailing comma
+            $srcset = substr($srcset, 0, -1);
         }
         $srcset .= '"';
         
