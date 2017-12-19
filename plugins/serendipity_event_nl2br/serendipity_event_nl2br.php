@@ -411,7 +411,7 @@ p.break {
 	
 	var $singleton_elements = array('area', 'br', 'col', 'command', 'embed', 'hr', 
 								'img', 'input', 'keygen', 'link', 'param', 'source', 
-								'track', 'wbr', '!--' 
+								'track', 'wbr', '!--', 'iframe' 
 								);
 
 	var $allowed_p_parents = array('blockquote', 'td', 'div', 'article', 'aside', 'dd',
