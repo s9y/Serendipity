@@ -1,6 +1,8 @@
 Version 2.1.2 ()
 ------------------------------------------------------------------------
 
+    * Exclude defunct netmirror spartacus repository
+
     * Adapt .htacess default rules to exclude rewriting documentation
       (Issue #521)
 
