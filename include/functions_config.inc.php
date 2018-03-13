@@ -554,9 +554,8 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                 if ($is_valid_user) continue;
                 $is_valid_user = false;
 
-                // Old MD5 hashing routine. Will convert user.
                 if (empty($row['hashtype']) || $row['hashtype'] == 0) {
-
+                    // Old MD5 hashing routine. Will convert user.
                     if (isset($serendipity['hashkey']) && (time() - $serendipity['hashkey']) >= 15768000) {
                         die('You can no longer login with an old-style MD5 hash to prevent MD5-Hostage abuse.
                              Please ask the Administrator to set you a new password.');
@@ -575,14 +574,30 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                         continue;
                     }
                 } else {
-                    if ( ($is_hashed === false && (string)$row['password'] === (string)serendipity_hash($password)) ||
-                         ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+                    if ($row['hashtype'] == 1) {
+                        // Old sha1 hashing routine. Will convert user.
+                        if ( ($is_hashed === false && (string)$row['password'] === (string)serendipity_sha1_hash($password)) ||
+                             ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
 
-                        $is_valid_user = true;
-                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Validated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}authors
+                                                     SET password = '" . ($is_hashed === false ? serendipity_hash($password) : $password) . "',
+                                                         hashtype = 2
+                                                   WHERE authorid = '" . $row['authorid'] . "'");
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Migrated user:' . $row['username'] . "\n");
+                            $is_valid_user = true;
+                        } else {
+                            continue;
+                        }
                     } else {
-                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - INValidated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
-                        continue;
+                        if ( ($is_hashed === false && password_verify((string)$password, $row['password'])) ||
+                             ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+
+                            $is_valid_user = true;
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Validated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                        } else {
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - INValidated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                            continue;
+                        }
                     }
                 }
 
@@ -2227,12 +2242,22 @@ function serendipity_hasPluginPermissions($plugin, $groupid = null) {
 }
 
 /**
- * Return the SHA1 (with pre-hash) of a value
+ * Return the bcrypt hash of a value
  *
  * @param string    The string to hash
  * @return string   The hashed string
  */
 function serendipity_hash($string) {
+    return password_hash($string, PASSWORD_BCRYPT);
+}
+
+/**
+ * Return the SHA1 (with pre-hash) of a value
+ *
+ * @param string    The string to hash
+ * @return string   The hashed string
+ */
+function serendipity_sha1_hash($string) {
     global $serendipity;
 
     if (empty($serendipity['hashkey'])) {
