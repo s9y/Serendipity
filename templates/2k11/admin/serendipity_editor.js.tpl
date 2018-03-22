@@ -659,10 +659,28 @@
         }
     }
 
-    // ..?
+    // check that the entry is validated for saving, used mainly by serendipity_event_entrycheck
     serendipity.checkSave = function() {
         {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
         return true;
+    }
+    
+    // set a category to checked
+    serendipity.enableCategory = function(catNumber) {
+        $("#" + "serendipity_category_" + catNumber).prop("checked", true);
+    }
+
+    // is no category enabled?
+    serendipity.hasNoCategoryEnabled = function() {
+        var $source = $('#edit_entry_category');
+        var $selected = $source.find('input:checkbox:checked');
+
+        if ($selected.length > 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     // save in which directory the first uploaded files is stored (the default when only inserting one file)
