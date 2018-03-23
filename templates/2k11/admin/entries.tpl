@@ -88,7 +88,7 @@
             <a class="button_link" href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=delete&amp;serendipity[id]={$entry_vars.entry.id}&amp;{$entry_vars.urlToken}" title="{$CONST.DELETE}"><span class="icon-trash" aria-hidden="true"></span><span class="visuallyhidden"> {$CONST.DELETE}</span></a>
         {/if}
         <input class="entry_preview" type="submit" value="{$CONST.PREVIEW}">
-        <input type="submit" onclick="return serendipity.checkSave();" value="{$CONST.SAVE}">
+        <input type="submit" value="{$CONST.SAVE}">
     </div>
 
     <div id="edit_entry_metadata" class="clearfix">
