@@ -341,7 +341,8 @@ function serendipity_load_configuration($author = null) {
 function serendipity_logout() {
     $_SESSION['serendipityAuthedUser'] = false;
     serendipity_session_destroy();
-    serendipity_deleteCookie('author_information');
+    serendipity_deleteCookie('author_username');
+    serendipity_deleteCookie('author_autologintoken');
     serendipity_deleteCookie('author_token');
 }
 
@@ -382,28 +383,22 @@ function serendipity_login($use_external = true) {
     if (serendipity_authenticate_author($serendipity['POST']['user'], $serendipity['POST']['pass'], false, $use_external)) {
         if (empty($serendipity['POST']['auto'])) {
             serendipity_deleteCookie('author_information');
-            serendipity_deleteCookie('author_information_iv');
             return false;
         } else {
-            serendipity_issueAutologin(
-                array('username' => $serendipity['POST']['user'],
-                      'password' => $serendipity['POST']['pass']
-                )
-            );
+            serendipity_issueAutologin($serendipity['POST']['user']);
             return true;
         }
     // Now try login via COOKIE data
-    } elseif (isset($serendipity['COOKIE']['author_information'])) {
-        $cookie = serendipity_checkAutologin($serendipity['COOKIE']['author_information'], $serendipity['COOKIE']['author_information_iv']);
+    } elseif (isset($serendipity['COOKIE']['author_username'])) {
+        $user = $serendipity['COOKIE']['author_username'];
+        $valid_logintoken = serendipity_checkAutologin($user);
 
-        $data = array('ext' => $use_external, 'mode' => 1, 'user' => $cookie['username'], 'pass' => $cookie['password']);
-        serendipity_plugin_api::hook_event('backend_loginfail', $data);
-
-        if (is_array($cookie) && serendipity_authenticate_author($cookie['username'], $cookie['password'], false, $use_external)) {
+        if ($valid_logintoken === true) {
+            serendipity_load_userdata($user);
             return true;
         } else {
-            serendipity_deleteCookie('author_information');
-            serendipity_deleteCookie('author_information_iv');
+            serendipity_deleteCookie('author_username');
+            serendipity_deleteCookie('author_autologintoken');
             return false;
         }
     }
@@ -413,70 +408,80 @@ function serendipity_login($use_external = true) {
 }
 
 /**
- * Issue a new auto login cookie
- * @param array The input data
+ * Issue a new auto login cookie. For that we store in the options table (name, value, okey) the values (autologin_$username, a random token, the current time). 
+ * @param String The username 
  */
-function serendipity_issueAutologin($array) {
+function serendipity_issueAutologin($user) {
     global $serendipity;
 
-    $package = serialize($array);
-
-    if (function_exists('mcrypt_encrypt')) {
-        // Secure the package data when being stored inside the Database
-        $iv  = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_CBC), MCRYPT_RAND);
-        $key = base64_encode($iv);
-        $package = mcrypt_encrypt(MCRYPT_BLOWFISH, $key, $package, MCRYPT_MODE_CBC, $iv);
-        serendipity_setCookie('author_information_iv', $key);
+    try {
+        // TODO: Add https://github.com/paragonie/random_compat for PHP < 7.0
+        $random_string = random_bytes(32);
+    } catch (TypeError $e) {
+        // Well, it's an integer, so this IS unexpected.
+        die("An unexpected error has occurred"); 
+    } catch (Error $e) {
+        // This is also unexpected because 32 is a reasonable integer.
+        die("An unexpected error has occurred");
+    } catch (Exception $e) {
+        // If you get this message, the CSPRNG failed hard.
+        die("Could not generate a random string. Is our OS secure?");
     }
-    $package = base64_encode($package);
 
-    $rnd = md5(uniqid(time(), true) . $_SERVER['REMOTE_ADDR']);
+    $rnd = bin2hex($random_string);
+    
 
     // Delete possible current cookie. Also delete any autologin keys that smell like 3-week-old, dead fish.
     if (stristr($serendipity['dbType'], 'sqlite')) {
-        $cast = "name";
+        $cast = "okey";
     } else {
         // Adds explicits casting for mysql, postgresql and others.
-        $cast = "cast(name as integer)";
+        $cast = "cast(okey as integer)";
     }
 
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options 
-                                WHERE okey = 'l_" . serendipity_db_escape_string($serendipity['COOKIE']['author_information']) . "'
-                                   OR (okey LIKE 'l_%' AND $cast < " . (time() - 1814400) . ")");
+                                WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "'
+                                   OR (name LIKE 'autologin_%' AND $cast < " . (time() - 1814400) . ")");
 
     // Issue new autologin cookie
-    serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('" . time() . "', '" . serendipity_db_escape_string($package) . "', 'l_" . $rnd . "')");
-    serendipity_setCookie('author_information', $rnd);
+    serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('autologin_" . serendipity_db_escape_string($user) . "', '" . $rnd  . "', '" . time() . "')");
+    serendipity_setCookie('author_autologintoken', $rnd);
+    serendipity_setCookie('author_username', $user);
 }
 
 /**
- * Checks a new auto login cookie
- * @param array The input data
+ * Checks a new auto login cookie, by seeing whether the token stored in the cookie is the same as the one stored in the database
+ * @param String The username
+ * @returns bool true if valid, false if not
  */
-function serendipity_checkAutologin($ident, $iv) {
+function serendipity_checkAutologin($user) {
     global $serendipity;
 
-    // Fetch login data from DB
-    $autologin =& serendipity_db_query("SELECT * FROM {$serendipity['dbPrefix']}options WHERE okey = 'l_" . serendipity_db_escape_string($ident) . "' LIMIT 1", true, 'assoc');
-    if (!is_array($autologin)) {
+    if (stristr($serendipity['dbType'], 'sqlite')) {
+        $cast = "okey";
+    } else {
+        // Adds explicits casting for mysql, postgresql and others.
+        $cast = "cast(okey as integer)";
+    }
+
+    // Fetch autologin data from DB
+    $autologin_stored = serendipity_db_query("SELECT name, value, okey FROM {$serendipity['dbPrefix']}options WHERE name = 'autologin_" . serendipity_db_escape_string($user) . "' AND $cast > " . (time() - 1814400) . " LIMIT 1", true, 'assoc');
+    
+    if (!is_array($autologin_stored)) {
         return false;
     }
 
-    if (function_exists('mcrypt_decrypt') && !empty($iv)) {
-        $key    = $iv;
-        $iv     = base64_decode($iv);
-        $cookie = unserialize(mcrypt_decrypt(MCRYPT_BLOWFISH, $key, base64_decode($autologin['value']), MCRYPT_MODE_CBC, $iv));
-    } else {
-        $cookie = unserialize(base64_decode($autologin['value']));
+    if ($serendipity['COOKIE']['author_autologintoken'] !== $autologin_stored['value']) {
+        return false;
     }
 
-    if ($autologin['name'] < (time()-86400)) {
+    if ($autologin_stored['okey'] < (time()-86400)) {
         // Issued autologin cookie has been issued more than 1 day ago. Re-Issue new cookie, invalidate old one to prevent abuse
-        if ($serendipity['expose_s9y']) serendipity_header('X-ReIssue-Cookie: +' . (time() - $autologin['name']) . 's');
-        serendipity_issueAutologin($cookie);
+        if ($serendipity['expose_s9y']) serendipity_header('X-ReIssue-Cookie: +' . (time() - $autologin_stored['okey']) . 's');
+        serendipity_issueAutologin($user);
     }
 
-    return $cookie;
+    return true;
 }
 
 /**
@@ -549,9 +554,8 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                 if ($is_valid_user) continue;
                 $is_valid_user = false;
 
-                // Old MD5 hashing routine. Will convert user.
                 if (empty($row['hashtype']) || $row['hashtype'] == 0) {
-
+                    // Old MD5 hashing routine. Will convert user.
                     if (isset($serendipity['hashkey']) && (time() - $serendipity['hashkey']) >= 15768000) {
                         die('You can no longer login with an old-style MD5 hash to prevent MD5-Hostage abuse.
                              Please ask the Administrator to set you a new password.');
@@ -570,14 +574,30 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                         continue;
                     }
                 } else {
-                    if ( ($is_hashed === false && (string)$row['password'] === (string)serendipity_hash($password)) ||
-                         ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+                    if ($row['hashtype'] == 1) {
+                        // Old sha1 hashing routine. Will convert user.
+                        if ( ($is_hashed === false && (string)$row['password'] === (string)serendipity_sha1_hash($password)) ||
+                             ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
 
-                        $is_valid_user = true;
-                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Validated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}authors
+                                                     SET password = '" . ($is_hashed === false ? serendipity_hash($password) : $password) . "',
+                                                         hashtype = 2
+                                                   WHERE authorid = '" . $row['authorid'] . "'");
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Migrated user:' . $row['username'] . "\n");
+                            $is_valid_user = true;
+                        } else {
+                            continue;
+                        }
                     } else {
-                        if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - INValidated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
-                        continue;
+                        if ( ($is_hashed === false && password_verify((string)$password, $row['password'])) ||
+                             ($is_hashed !== false && (string)$row['password'] === (string)$password) ) {
+
+                            $is_valid_user = true;
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Validated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                        } else {
+                            if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - INValidated ' . $row['password'] . ' == ' . ($is_hashed === false ? 'unhash:' . serendipity_hash($password) : 'hash:' . $password) . "\n");
+                            continue;
+                        }
                     }
                 }
 
@@ -590,18 +610,9 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                         $_SESSION['serendipityPassword']    = $serendipity['serendipityPassword'] = $password;
                     }
 
-                    $_SESSION['serendipityUser']         = $serendipity['serendipityUser']         = $username;
-                    $_SESSION['serendipityRealname']     = $serendipity['serendipityRealname']     = $row['realname'];
-                    $_SESSION['serendipityEmail']        = $serendipity['serendipityEmail']        = $row['email'];
-                    $_SESSION['serendipityAuthorid']     = $serendipity['authorid']                = $row['authorid'];
-                    $_SESSION['serendipityUserlevel']    = $serendipity['serendipityUserlevel']    = $row['userlevel'];
-                    $_SESSION['serendipityAuthedUser']   = $serendipity['serendipityAuthedUser']   = true;
-                    $_SESSION['serendipityRightPublish'] = $serendipity['serendipityRightPublish'] = $row['right_publish'];
-                    $_SESSION['serendipityHashType']     = $serendipity['serendipityHashType']     = $row['hashtype'];
+                    return serendipity_load_userdata($username);
 
-                    serendipity_load_configuration($serendipity['authorid']);
-                    serendipity_setCookie('userDefLang', $serendipity['lang'], false);
-                    return true;
+                    
                 }
             }
         }
@@ -619,6 +630,33 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
     }
 
     return false;
+}
+
+function serendipity_load_userdata($username) {
+    global $serendipity;
+    
+    $query = "SELECT DISTINCT
+                    email, password, realname, authorid, userlevel, right_publish, hashtype
+                  FROM
+                    {$serendipity['dbPrefix']}authors
+                  WHERE
+                    username   = '" . serendipity_db_escape_string($username) . "'";
+                    
+    $rows = serendipity_db_query($query, false, 'assoc');
+    $row = $rows[0];
+    
+    $_SESSION['serendipityUser']         = $serendipity['serendipityUser']         = $username;
+    $_SESSION['serendipityRealname']     = $serendipity['serendipityRealname']     = $row['realname'];
+    $_SESSION['serendipityEmail']        = $serendipity['serendipityEmail']        = $row['email'];
+    $_SESSION['serendipityAuthorid']     = $serendipity['authorid']                = $row['authorid'];
+    $_SESSION['serendipityUserlevel']    = $serendipity['serendipityUserlevel']    = $row['userlevel'];
+    $_SESSION['serendipityAuthedUser']   = $serendipity['serendipityAuthedUser']   = true;
+    $_SESSION['serendipityRightPublish'] = $serendipity['serendipityRightPublish'] = $row['right_publish'];
+    $_SESSION['serendipityHashType']     = $serendipity['serendipityHashType']     = $row['hashtype'];
+
+    serendipity_load_configuration($serendipity['authorid']);
+    serendipity_setCookie('userDefLang', $serendipity['lang'], false);
+    return true;
 }
 
 /**
@@ -2204,12 +2242,22 @@ function serendipity_hasPluginPermissions($plugin, $groupid = null) {
 }
 
 /**
- * Return the SHA1 (with pre-hash) of a value
+ * Return the bcrypt hash of a value
  *
  * @param string    The string to hash
  * @return string   The hashed string
  */
 function serendipity_hash($string) {
+    return password_hash($string, PASSWORD_BCRYPT);
+}
+
+/**
+ * Return the SHA1 (with pre-hash) of a value
+ *
+ * @param string    The string to hash
+ * @return string   The hashed string
+ */
+function serendipity_sha1_hash($string) {
     global $serendipity;
 
     if (empty($serendipity['hashkey'])) {
