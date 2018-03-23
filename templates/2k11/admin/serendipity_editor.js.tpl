@@ -1034,6 +1034,10 @@ $(function() {
     $('#imageForm').submit(function() {
         serendipity.serendipity_imageSelector_done();
     });
+    
+    $('#serendipityEntry').submit(function() {
+        return serendipity.checkSave();
+    });
 
     // Click events
     //
