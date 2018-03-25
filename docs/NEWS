@@ -1,9 +1,6 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
-    * Adapt .htacess default rules to exclude rewriting documentation
-      (Issue #521)
-
     * Add backend_view_entry hook, that is executed for every entry
       in the backend entry list
 
@@ -27,14 +24,33 @@ Version 2.x.x (major) ()
       future entries, it will display drafts until 
       "dashboardEntriesLimit" is reached.
 
+    * Add a "delete" button to the backend entry form (#491, #494)
+
+    * Change Spartacus default mirror to github (#489)
+
+Version 2.1.2 (March 25, 2018)
+------------------------------------------------------------------------
+
+    * Exclude defunct netmirror spartacus repository
+
+    * Adapt .htacess default rules to exclude rewriting documentation
+      (Issue #521)
+
     * Fix a regression in Net/DNSBL regarding
       serendipity_event_spamblock_rbl and
       serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
       bundled library to core and patching Net/DNSBL (#497)
 
-    * Add a "delete" button to the backend entry form (#491, #494)
+    * Fixed broken Akismet API calls (#507)
 
-    * Change Spartacus default mirror to github (#489)
+    * Fixed comment preview for logged-in users (#503)
+
+    * Fixed message display after comment editing/deleting (#526)
+
+    * Don't show empty plugin groups in list (#496) and fix broken
+      plugin display in Firefox.
+
+    * Add template path as first entry to template_dirs (#524)
 
 Version 2.1.1 (April 9th, 2017)
 ------------------------------------------------------------------------
