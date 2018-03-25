@@ -1,4 +1,4 @@
-Version 2.1.2 ()
+Version 2.1.2 (March 25, 2018))
 ------------------------------------------------------------------------
 
     * Exclude defunct netmirror spartacus repository
@@ -10,6 +10,17 @@ Version 2.1.2 ()
       serendipity_event_spamblock_rbl and
       serendipity_event_spamblock_surbl by adding Net/DNS2 1.4.3 as a
       bundled library to core and patching Net/DNSBL (#497)
+
+    * Fixed broken Akismet API calls (#507)
+
+    * Fixed comment preview for logged-in users (#503)
+
+    * Fixed message display after comment editing/deleting (#526)
+
+    * Don't show empty plugin groups in list (#496) and fix broken
+      plugin display in Firefox.
+
+    * Add template path as first entry to template_dirs (#524)
 
 Version 2.1.1 (April 9th, 2017)
 ------------------------------------------------------------------------
