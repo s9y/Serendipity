@@ -1,3 +1,11 @@
+2.37.5:
+-------
+    * Fix missing reset to default after dropping netmirror.
+
+2.37.4:
+-------
+    * Drop netmirror, set mirror to default if it was set to netmirror.
+
 2.37.3:
 -------
     * Change mirror order (new default: github)
