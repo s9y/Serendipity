@@ -30,6 +30,32 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                                        )
         );
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
+
+        $propbag->add('legal',    array(
+            'services' => array(
+                'subtome' => array(
+                    'url'  => 'https://www.subtome.com',
+                    'desc' => 'Enables visitors to easily subscribe to RSS feeds. The visitor loads a JavaScript from their servers, thus the IP address will be known to the service.'
+                ),
+                'feedburner.com' => array(
+                    'url'  => 'https://www.feedburner.com',
+                    'desc' => 'Feedburner can be used to track your feed subscription statistics. If used, a tracking pixel is loaded from FeedBurner.com servers and the IP address of the visitor will be known to the service.'
+                ),
+            ),
+            'frontend' => array(
+                'To allow easy subscription to feeds and optional tracking statistics, the subtome or feedburner services can be used.',
+            ),
+            'backend' => array(
+            ),
+            'cookies' => array(
+            ),
+            'stores_user_input'     => false,
+            'stores_ip'             => false,
+            'uses_ip'               => true,
+            'transmits_user_input'  => true
+        ));
+
+
     }
 
     function introspect_config_item($name, &$propbag)
@@ -107,7 +133,7 @@ class serendipity_plugin_syndication extends serendipity_plugin {
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        SYNDICATION_PLUGIN_SUBTOME);
                 $propbag->add('description', SYNDICATION_PLUGIN_SUBTOME_DESC);
-                $propbag->add('default',     true);
+                $propbag->add('default',     false);
                 break;
 
             case 'custom_url':

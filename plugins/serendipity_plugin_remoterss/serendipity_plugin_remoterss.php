@@ -286,6 +286,28 @@ class serendipity_plugin_remoterss extends serendipity_plugin
         ));
         $propbag->add('configuration', array('sidebartitle', 'feedtype', 'template', 'rssuri', 'show_rss_element', 'smarty', 'number', 'use_rss_link', 'escape_rss', 'displaydate', 'dateformat', 'charset', 'target', 'cachetime', 'bulletimg', 'markup'));
         $propbag->add('groups', array('FRONTEND_EXTERNAL_SERVICES'));
+
+        $propbag->add('legal',    array(
+            'services' => array(
+                'any' => array(
+                    'url'  => '#',
+                    'desc' => 'Any configured URL will be called to fetch RSS/OPML data from'
+                ),
+            ),
+            'frontend' => array(
+                'To display RSS/OPML feeds, the server can connect to any other server. No specific user data is transmitted.',
+            ),
+            'backend' => array(
+            ),
+            'cookies' => array(
+            ),
+            'stores_user_input'     => false,
+            'stores_ip'             => false,
+            'uses_ip'               => false,
+            'transmits_user_input'  => false
+        ));
+
+
     }
 
     function introspect_config_item($name, &$propbag)

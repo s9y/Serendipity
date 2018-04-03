@@ -4,6 +4,12 @@ Version 2.1.3 ()
 
     * Fix SQL compatibility for creating of table "serendipity_groupconfig" 
 
+    * Added new "legal" plugin property bag attribute to indicate
+      impact for the GDPR / DSGVO, used in conjunction with the
+      serendipity_event_gdpr_dsgvo plugin
+
+    * Disabled subToMe service by default to prevent issues with GDPR
+
 Version 2.1.2 (March 25, 2018))
 ------------------------------------------------------------------------
 
