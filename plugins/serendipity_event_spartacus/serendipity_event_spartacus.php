@@ -48,6 +48,39 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('groups', array('BACKEND_FEATURES'));
         $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'cronjob', 'mirror_xml', 'mirror_files', 'custommirror', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
 
+        $propbag->add('legal',    array(
+            'services' => array(
+                'spartacus' => array(
+                    'url'  => 'http://spartacus.s9y.org',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'github.com' => array(
+                    'url'  => 'https://www.github.com',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                's9y.org' => array(
+                    'url'  => 'http://www.s9y.org',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'sourceforge.net' => array(
+                    'url'  => 'http://www.sourceforget.net',
+                    'desc' => 'Package server for plugin downloads'
+                )
+            ),
+            'frontend' => array(
+            ),
+            'backend' => array(
+                'Allows to download plugins from configured remote sources from the webserver, may also connect via FTP to a configured server.'
+            ),
+            'cookies' => array(
+            ),
+            'stores_user_input'     => false,
+            'stores_ip'             => false,
+            'uses_ip'               => false,
+            'transmits_user_input'  => false
+        ));
+
+
     }
 
     function generate_content(&$title)
