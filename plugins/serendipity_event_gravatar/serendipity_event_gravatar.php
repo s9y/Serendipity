@@ -49,6 +49,57 @@ class serendipity_event_gravatar extends serendipity_event
             'external_plugin'  => true,
             'css'              => true,
         ));
+
+        $propbag->add('legal',    array(
+            'services' => array(
+                'gravatar' => array(
+                    'url'  => 'https://developers.google.com/recaptcha/',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'favatar' => array(
+                    'url'  => 'http://www.peej.co.uk/projects/favatars.html',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'pavatar' => array(
+                    'url'  => 'http://www.pavatar.com',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'twitter' => array(
+                    'url'  => 'http://www.twitter.com',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'identica' => array(
+                    'url'  => 'http://identi.ca',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'monsterid' => array(
+                    'url'  => 'http://www.splitbrain.org/go/monsterid',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'identicon' => array(
+                    'url'  => 'http://scott.sherrillmix.com/blog/blogger/wp_identicon/',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+                'wavatars' => array(
+                    'url'  => 'http://www.shamusyoung.com/twentysidedtale/?p=1462',
+                    'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
+                ),
+
+            ),
+            'frontend' => array(
+                'To display unique avatar images for blog comments, data specific to the correspondig service is transmitted to retrieve the proper avatar.',
+            ),
+            'backend' => array(
+            ),
+            'cookies' => array(
+            ),
+            'stores_user_input'     => true,
+            'stores_ip'             => false,
+            'uses_ip'               => true,
+            'transmits_user_input'  => true
+        ));
+
+
         $configuration =               array('longdescription', 'separator');
         $config_methods =              array();
         for ($idx=1; $idx<=PLUGIN_EVENT_GRAVATAR_METHOD_MAX; $idx++) {
