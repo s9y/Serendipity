@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.62.1'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.62.2'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
