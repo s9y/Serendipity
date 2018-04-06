@@ -68,6 +68,11 @@
                         <input id="multidelete_image{$file.id}" class="multidelete" name="serendipity[multiDelete][]" type="checkbox" value="{$file.id}" data-multidelid="media_{$file.id}">
                         <label for="multidelete_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
                     </div>
+                    {else}
+                        {if NOT $media.manage}
+                            <input id="multiinsert_image{$file.id}" class="multiinsert" name="serendipity[fids][]" type="checkbox" value="{$file.id}" data-multiinsertid="media_{$file.id}">
+                            <label for="multiinsert_image{$file.id}" class="visuallyhidden">{$CONST.TOGGLE_SELECT}</label>
+                        {/if}
                     {/if}
 
                     <h3 title="{$file.realname}">{$file.realname|truncate:50:"&hellip;":true}{if $file.orderkey != ''}: {$file.orderkey|escape}{/if}</h3>

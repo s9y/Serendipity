@@ -726,29 +726,56 @@ switch ($serendipity['GET']['adminAction']) {
         break;
 
     case 'choose':
-        $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
-        $media['file'] = &$file;
-        if (!is_array($file)) {
-            $media['perm_denied'] = true;
+        if ($serendipity['GET']['fid']) {
+            $file          = serendipity_fetchImageFromDatabase($serendipity['GET']['fid']);
+            $media['file'] = &$file;
+            if (!is_array($file)) {
+                $media['perm_denied'] = true;
+                break;
+            }
+
+            serendipity_prepareMedia($file);
+
+            $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+            serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
+
+            if ($file['is_image']) {
+                $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
+
+                if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
+                    $file['fast_select'] = true;
+                }
+            }
+            $media = array_merge($serendipity['GET'], $media);
+            $serendipity['smarty']->assignByRef('media', $media);
+            echo serendipity_smarty_show('admin/media_choose.tpl', $data);
             break;
-        }
+        } else {
+            // TODO: Merge this with the codepath above?
+            if ($serendipity['GET']['fids']) {
+                $medias = [];
+                // that means the user wants to insert multiple images into the editor, which we will offer in media_choose.tpl, while preparing the urls here
+                $fids = $serendipity['GET']['fids'];
+                foreach($fids as $fid) {
+                    $media['file'] = serendipity_fetchImageFromDatabase($fid);;
+                    if (!is_array($media['file'])) {
+                        $media['perm_denied'] = true;
+                        $medias[] = $media;
+                        continue;
+                    }
 
-        serendipity_prepareMedia($file);
+                    serendipity_prepareMedia($media['file']);
 
-        $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
-        serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
-
-        if ($file['is_image']) {
-            $file['finishJSFunction'] = $file['origfinishJSFunction'] = 'serendipity.serendipity_imageSelector_done(\'' . serendipity_specialchars($serendipity['GET']['textarea']) . '\')';
-
-            if (!empty($serendipity['GET']['filename_only']) && $serendipity['GET']['filename_only'] !== 'true') {
-                $file['fast_select'] = true;
+                    $media['file']['props'] =& serendipity_fetchMediaProperties((int)$serendipity['GET']['fid']);
+                    serendipity_plugin_api::hook_event('media_getproperties_cached', $media['file']['props']['base_metadata'], $media['file']['realfile']);
+                    $medias[] = $media;
+                }
+                $serendipity['smarty']->assignByRef('medias', $medias);
+                $serendipity['smarty']->assign('textarea', $serendipity['GET']['textarea']);
+                echo serendipity_smarty_show('admin/media_choose.tpl', $data);
+                break;
             }
         }
-        $media = array_merge($serendipity['GET'], $media);
-        $serendipity['smarty']->assignByRef('media', $media);
-        echo serendipity_smarty_show('admin/media_choose.tpl', $data);
-        break;
 
     default:
         $data['case_default'] = true;

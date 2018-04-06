@@ -1,4 +1,3 @@
-
 <div class="has_toolbar">
     <h2>{$CONST.MEDIA_LIBRARY}</h2>
 
@@ -237,6 +236,19 @@
         <input name="serendipity[adminModule]" type="hidden" value="media">
         <input name="serendipity[adminAction]" type="hidden" value="multidelete">
     {/if}
+    {if NOT $media.manage}
+    <form id="formMultiInsert" name="formMultiInsert" action="?" method="GET">
+        {$media.token}
+        <input name="serendipity[action]" type="hidden" value="admin">
+        <input name="serendipity[adminModule]" type="hidden" value="images">
+        <input name="serendipity[adminAction]" type="hidden" value="choose">
+        <input name="serendipity[textarea]" type="hidden" value="{$media.textarea}">
+        <input name="serendipity[noBanner]" type="hidden" value="true">
+        <input name="serendipity[noSidebar]" type="hidden" value="true">
+        <input name="serendipity[noFooter]" type="hidden" value="true">
+        <input name="serendipity[filename_only]" type="hidden" value="{$media.filename_only}">
+        <input name="serendipity[htmltarget]" type="hidden" value="{$media.htmltarget}">
+    {/if}
 
         <div class="media_pane" data-thumbmaxwidth="{$media.thumbSize}">
             {$MEDIA_ITEMS}
@@ -255,7 +267,6 @@
                 </ul>
             </nav>
         {/if}
-
         </div>{* media pane end *}
 
     {if $media.manage AND $media.multiperm}
@@ -265,6 +276,15 @@
             <a href="#move-popup" class="image_move button_link hidden">{$CONST.MOVE}</a>
             <input class="state_cancel" name="toggle_delete" type="submit" value="{$CONST.DELETE}">
         </div>
+    {else}
+        {if NOT $media.manage}
+            <div class="form_buttons">                
+                {* javascript will add the chosen images as &amp;serendipity[fids]=x,y,z,... *}
+                {*<a href="{$link}" class="image_insert button_link">Insert All</a> *}
+                <button class="image_insert button_link" type="submit">Insert All</button>
+                </form>
+            </div>
+        {/if}
     {/if}
     <input class="state_submit hidden" name="toggle_move" type="submit" value="{$CONST.MOVE}">
     <input type="hidden" id="newDir" name="serendipity[newDir]">
