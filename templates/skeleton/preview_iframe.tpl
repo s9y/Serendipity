@@ -4,7 +4,9 @@
     <meta charset="{$head_charset}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{$CONST.SERENDIPITY_ADMIN_SUITE}</title>
+{if $template_option.use_googlefonts}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,300,600">
+{/if}
     <link rel="stylesheet" href="{$serendipityHTTPPath}{$serendipityRewritePrefix}serendipity.css">
 {serendipity_hookPlugin hook="backend_header" hookAll="true"}
     <script src="{serendipity_getFile file='admin/js/plugins.js'}"></script>
