@@ -146,6 +146,12 @@ $template_config = array(
         'default'       => serendipity_getTemplateFile('subheader.jpg', 'serendipityHTTPPath', true)
     ),
     array(
+        'var'           => 'use_googlefonts',
+        'name'          => USE_GOOGLEFONTS,
+        'type'          => 'boolean',
+        'default'       => true,
+    ),    
+    array(
         'var'           => 'date_format',
         'name'          => ENTRY_DATE_FORMAT . ' (http://php.net/strftime)',
         'type'          => 'string',
@@ -309,7 +315,7 @@ for ($i = 0; $i < $template_loaded_config['social_icons_amount']; $i++) {
 
 $template_config_groups = array(
     THEME_README        => array('theme_instructions'),
-    THEME_IDENTITY      => array('sidebars', 'header_img', 'subheader_img', 'colorset', 'skinset', 'copyright'),
+    THEME_IDENTITY      => array('sidebars', 'header_img', 'subheader_img', 'colorset', 'skinset', 'use_googlefonts', 'copyright'),
     THEME_PAGE_OPTIONS  => array('date_format', 'comment_time_format', 'display_as_timeline', 'months_on_timeline', 'months_on_timeline_format', 'categories_on_archive', 'category_rss_archive', 'tags_on_archive'),   
     THEME_NAVIGATION    => $navlinks_collapse,
     THEME_SOCIAL_LINKS  => $sociallinks_collapse
