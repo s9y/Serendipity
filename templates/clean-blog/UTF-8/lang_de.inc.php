@@ -35,6 +35,7 @@
 @define('ARCHIVE_HEADER_IMAGE', 'Header-Bild für die Archivseite');
 
 //Page Options
+@define('USE_GOOGLEFONTS', 'Google Webfonts einbinden?');
 @define('HOME_LINK_TEXT', 'Text des Home-Links');
 @define('ENTRY_DATE_FORMAT','Datumsformat für Einträge');
 @define('COMMENT_TIME_FORMAT','Zeitformat für Kommentare und Trackbacks');
