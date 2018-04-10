@@ -29,7 +29,9 @@
     {/if} 
 {* CUSTOM FONTS *}   
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    {if $template_option.use_googlefonts}
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    {/if}
     {serendipity_hookPlugin hook="frontend_header"}
     <script src="{$head_link_script}"></script>
 {* SUBHEADER IMAGE *}    
