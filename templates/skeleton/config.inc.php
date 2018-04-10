@@ -46,7 +46,7 @@ $template_config = array(
     ),
     array(
         'var' => 'use_googlefonts',
-        'name' => SKELETON_GOOGLEFONTS,
+        'name' => USE_GOOGLEFONTS,
         'type' => 'boolean',
         'default' => false
     ),
