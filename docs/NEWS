@@ -1,6 +1,9 @@
-
 Version 2.1.3 ()
 ------------------------------------------------------------------------
+
+    * Fixed bug in pull request #392 which overwrote user specified
+      input for logged in authors with an empty realname (wrong array
+      key name) and deleted all existing text input
 
     * Fix SQL compatibility for creating of table "serendipity_groupconfig" 
 

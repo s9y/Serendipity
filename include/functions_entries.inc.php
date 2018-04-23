@@ -1239,10 +1239,13 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                 );
 
                if ($serendipity['serendipityAuthedUser'] === true && !isset($serendipity['POST']['preview'])) {
-                    $userData = array();
-                    $userData['name'] = $serendipity['realname'];
-                    $userData['email'] = $serendipity['email'];
-                    $userData['url'] = '';
+                    $userData = $serendipity['POST'];
+                    if (empty($userData['name'])) {
+                        $userData['name'] = $serendipity['serendipityRealname'];
+                    }
+                    if (empty($userData['email'])) {
+                        $userData['email'] = $serendipity['email'];
+                    }
                 } else {
                     $userData = $serendipity['POST'];
                 }
