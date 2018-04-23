@@ -1,6 +1,10 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * Fixed bug in pull request #392 which overwrote user specified
+      input for logged in authors with an empty realname (wrong array
+      key name) and deleted all existing text input
+
     * Add backend_view_entry hook, that is executed for every entry
       in the backend entry list
 

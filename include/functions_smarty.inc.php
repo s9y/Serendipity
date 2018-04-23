@@ -425,7 +425,6 @@ function serendipity_smarty_showCommentForm($params, &$smarty) {
         $params['moderate_comments'] = serendipity_db_bool($params['entry']['moderate_comments']);
     }
 
-
     $comment_add_data = array(
         'comments_messagestack' => (isset($serendipity['messagestack']['comments']) ? (array)$serendipity['messagestack']['comments'] : array()),
         'is_comment_added'      => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'true' ? true: false),

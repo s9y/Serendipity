@@ -1,0 +1,4 @@
+TODO: (Provide information on used javascripts, possible cookie, where data is
+transferred to)
+
+
