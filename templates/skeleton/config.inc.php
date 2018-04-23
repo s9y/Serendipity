@@ -45,6 +45,12 @@ $template_config = array(
                                 '%Y-%m-%d' => '%Y-%m-%d')
     ),
     array(
+        'var' => 'use_googlefonts',
+        'name' => USE_GOOGLEFONTS,
+        'type' => 'boolean',
+        'default' => false
+    ),
+    array(
        'var' => 'use_corenav',
        'name' => USE_CORENAV,
        'type' => 'boolean',
