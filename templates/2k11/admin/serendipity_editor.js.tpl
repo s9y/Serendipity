@@ -1384,10 +1384,13 @@ $(function() {
     });
 
     // Selection for multidelete
-    $('.multidelete').click(function() {
+    $('.multidelete, .multiinsert').click(function() {
         var $el = $(this);
         serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
+        $('#media_galleryinsert').fadeIn();
     });
+    // hide gallery insert button until an image is selected
+    $('#media_galleryinsert').hide();
 
     // Invert checkboxes
     $('.invert_selection').click(function() {

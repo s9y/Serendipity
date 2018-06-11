@@ -278,11 +278,8 @@
         </div>
     {else}
         {if NOT $media.manage}
-            <div class="form_buttons">                
-                {* javascript will add the chosen images as &amp;serendipity[fids]=x,y,z,... *}
-                {*<a href="{$link}" class="image_insert button_link">Insert All</a> *}
-                <button class="image_insert button_link" type="submit">Insert All</button>
-                </form>
+            <div id="media_galleryinsert" class="form_buttons">                
+                <button class="image_insert button_link" type="submit">{$CONST.INSERT_ALL}</button>
             </div>
         {/if}
     {/if}

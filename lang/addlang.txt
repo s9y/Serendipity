@@ -1,1 +1,2 @@
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
