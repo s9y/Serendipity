@@ -354,7 +354,7 @@
                                           'title'       => INSTALL_SUBSCRIBE,
                                           'description' => INSTALL_SUBSCRIBE_DESC,
                                           'type'        => 'list',
-                                          'default'     => array('true' => YES, 'false' => NO, 'fulltext' => FULL_COMMENT_TEXT),
+                                          'default'     => array('fulltext' => FULL_COMMENT_TEXT, 'true' => YES, 'false' => NO),
                                           'permission'  => 'siteConfiguration'),
 
                                     array('var'         => 'allowSubscriptionsOptIn',
