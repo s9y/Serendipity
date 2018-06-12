@@ -41,7 +41,7 @@ if (isset($_POST['SAVE_NEW']) && serendipity_checkFormToken()) {
     if (($serendipity['serendipityUserlevel'] < USERLEVEL_ADMIN && $_POST['userlevel'] >= $serendipity['serendipityUserlevel']) || !serendipity_checkPermission('adminUsersCreateNew')) {
         $data['no_save_permission'] = true;
     } else {
-        $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['pass'], $_POST['realname'], $_POST['email'], $_POST['userlevel'], 1);
+        $serendipity['POST']['user'] = serendipity_addAuthor($_POST['username'], $_POST['pass'], $_POST['realname'], $_POST['email'], $_POST['userlevel'], 2);
 
         $valid_groups = serendipity_getGroups($serendipity['authorid'], true);
         /* Save all the properties */
