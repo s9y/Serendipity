@@ -107,8 +107,12 @@ if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminActio
 
 /* We are asked to delete a comment */
 if (isset($serendipity['GET']['adminAction']) && $serendipity['GET']['adminAction'] == 'delete' && serendipity_checkFormToken()) {
-    serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
-    $msg[] = DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
+    $success = serendipity_deleteComment($serendipity['GET']['id'], $serendipity['GET']['entry_id']);
+    if ($success === true) {
+        $msg[] = DONE . ': '. sprintf(COMMENT_DELETED, (int)$serendipity['GET']['id']);
+    } else {
+        $errormsg[] = ERROR . ': '. sprintf(COMMENT_NOT_DELETED, (int)$serendipity['GET']['id']);
+    }
 }
 
 /* We are either in edit mode, or preview mode */
