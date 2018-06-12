@@ -17,7 +17,7 @@ if (IN_serendipity !== true) {
  * @param   int     The userlevel of a user
  * @return  int     The new user ID of the added author
  */
-function serendipity_addAuthor($username, $password, $realname, $email, $userlevel=0, $hashtype=1) {
+function serendipity_addAuthor($username, $password, $realname, $email, $userlevel=0, $hashtype=2) {
     global $serendipity;
     $password = serendipity_hash($password);
     $query = "INSERT INTO {$serendipity['dbPrefix']}authors (username, password, realname, email, userlevel, hashtype)
