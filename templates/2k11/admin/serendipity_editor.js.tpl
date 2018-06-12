@@ -1328,7 +1328,7 @@ $(function() {
             e.preventDefault();
         });
 
-        $('.show_config_option_now').click();
+        $('.show_config_option:not(.show_config_option_now)').click();
     }
 
     $('.change_preview').change(function() {
