@@ -421,6 +421,22 @@ $serendipity['permissionLevels'] = array(USERLEVEL_EDITOR => USERLEVEL_EDITOR_DE
                                          USERLEVEL_CHIEF => USERLEVEL_CHIEF_DESC,
                                          USERLEVEL_ADMIN => USERLEVEL_ADMIN_DESC);
 
+// Some stuff...
+if (!isset($_SESSION['serendipityAuthedUser'])) {
+    $_SESSION['serendipityAuthedUser'] = false;
+}
+
+if (isset($_SESSION['serendipityUser'])) {
+    $serendipity['user']  = $_SESSION['serendipityUser'];
+}
+
+# && maintenanceMode is on
+//if ( {
+if (($_SESSION['serendipityAuthedUser'] === false) && (serendipity_db_bool(serendipity_get_config_var("maintenanceMode", false)) === true) && time() < serendipity_get_config_var("maintenanceModeEnd", 0)) {
+    header('HTTP/1.1 503 Service Unavailable');
+    serendipity_die("Maintenance mode is on, please check back later");
+}
+
 // Redirect to the upgrader
 if (IS_up2date === false && !defined('IN_upgrader')) {
     if (preg_match(PAT_CSS, $_SERVER['REQUEST_URI'], $matches)) {
@@ -445,15 +461,6 @@ if (!isset($serendipity['GET']['adminAction'])) {
 // Make sure this variable is always properly sanitized. Previously in compat.inc.php, but there LANG_CHARSET was not defined.
 if (isset($serendipity['GET']['searchTerm'])) {
     $serendipity['GET']['searchTerm'] = (is_string($serendipity['GET']['searchTerm']) ? serendipity_specialchars(strip_tags($serendipity['GET']['searchTerm'])) : '');
-}
-
-// Some stuff...
-if (!isset($_SESSION['serendipityAuthedUser'])) {
-    $_SESSION['serendipityAuthedUser'] = false;
-}
-
-if (isset($_SESSION['serendipityUser'])) {
-    $serendipity['user']  = $_SESSION['serendipityUser'];
 }
 
 if (isset($_SESSION['serendipityEmail'])) {

@@ -92,6 +92,26 @@
     </section>
 {/if}
 
+{if 'siteConfiguration'|checkPermission || 'blogConfiguration'|checkPermission}
+    <section id="maintenance_mode" class="equal_heights quick_list">
+        <h3>{$CONST.MAINTENANCE_MODE}</h3>
+
+        <form method="POST" target="?">
+            <input type="hidden" name="adminAction" value="maintenanceMode"/>
+            <p>Activate maintenance mode to prevent access from users that are not logged in.</p>
+            {if $maintenance_mode_active}
+                Will be active till: {$maintenance_mode_end}
+                <button type="submit">Deactivate</button>
+            {else}
+                <label>How many hours shall it be active?</label>
+                <input type="number" name="hours" value="1"/>
+                <button type="submit">Activate</button>
+            {/if}
+        </form>
+       
+    </section>
+{/if}
+
 {serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
 
 </div>
