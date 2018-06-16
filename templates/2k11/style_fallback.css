@@ -9,23 +9,23 @@
 
 /* Images positioned normal/left/right */
 .serendipity_image_center {
-  border: 0;
-  padding-left: 5px;
-  padding-right: 5px;
+    border: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .serendipity_image_left {
-  float: left;
-  border: 0;
-  padding-left: 5px;
-  padding-right: 5px;
+    float: left;
+    border: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .serendipity_image_right {
-  float: right;
-  border: 0;
-  padding-left: 5px;
-  padding-right: 5px;
+    float: right;
+    border: 0;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /* Images with captions and positioning */
@@ -67,6 +67,24 @@
     text-align: center;
 }
 
+/* Image gallery */
+.s9y_gallery {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.s9y_gallery_item {
+    box-sizing: border-box;
+    flex: 0 1 33.3333%;
+    padding: 0 5px 5px 0;
+}
+
+.s9y_gallery_image {
+    height: auto;
+    max-width: 100%;
+}
+
 /* Lists without bullets or numbers */
 .plainList {
     list-style: none;
@@ -88,5 +106,4 @@
 .serendipity_msg_notice {
     color: green;
 }
-
 /* END OF style_fallback.css */

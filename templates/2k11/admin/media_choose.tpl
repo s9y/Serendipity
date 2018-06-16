@@ -3,14 +3,14 @@
 {else}
     {if $medias}
         <script>
-            block = '<div class="s9y_gallery">';
+            block = '<ul class="s9y_gallery plainList">';
             {foreach $medias as $media}
-                {* here generate the images of the gallery, with their markup *}
+                {* generate the images of the gallery with their markup *}
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
-                block += '<img src="{$media.file.full_thumbHTTP|escape}" />';
+                block += '<li class="s9y_gallery_item"><img class="s9y_gallery_image" src="{$media.file.full_thumbHTTP|escape}" alt=""></li>';
             {/foreach}
-            block += '</div>';
-            
+            block += '</ul>';
+
             if (parent.self.opener == undefined) {
                 // in iframes, there is no opener, and the magnific popup is wrapped
                 parent.self = window.parent.parent.$.magnificPopup;
