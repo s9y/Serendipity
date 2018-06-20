@@ -7,7 +7,7 @@
             {foreach $medias as $media}
                 {* generate the images of the gallery with their markup *}
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
-                block += '<li class="s9y_gallery_item"><img class="s9y_gallery_image" src="{$media.file.full_thumbHTTP|escape}" alt=""></li>';
+                block += '<li class="s9y_gallery_item"><a class="serendipity_image_link" href="{$media.file.links.imagelinkurl}"><!-- s9ymdb:{$media.file.id} --><img class="s9y_gallery_image" src="{$media.file.full_thumbHTTP|escape}" alt=""></a></li>';
             {/foreach}
             block += '</ul>';
 
