@@ -97,6 +97,36 @@ class serendipity_event_spamblock extends serendipity_event
                                 'urls'    => '8gold\.com;911easymoney\.com;canadianlabels\.net;condodream\.com;crepesuzette\.com;debt-help-bill-consolidation-elimination\.com;fidelityfunding\.net;flafeber\.com;gb\.com;houseofsevengables\.com;instant-quick-money-cash-advance-personal-loans-until-pay-day\.com;mediavisor\.com;newtruths\.com;oiline\.com;onlinegamingassociation\.com;online\-+poker\.com;popwow\.com;royalmailhotel\.com;spoodles\.com;sportsparent\.com;stmaryonline\.org;thatwhichis\.com;tmsathai\.org;uaeecommerce\.com;learnhowtoplay\.com',
                                 'words'   => 'very good site!;Real good stuff!'
         );
+
+        $propbag->add('legal',    array(
+            'services' => array(
+                'akismet' => array(
+                    'url'  => 'https://www.akismet.com',
+                    'desc' => 'Transmits comment data (and metadata) to check whether it is spam: User-Agent, HTTP Referer, IP [can be anonymized], Author name [can be anonymized], Author mail [can be anonymized], Author URL [can be anonymized], comment body'
+                ),
+                'tpas' => array(
+                    'url'  => 'http://api.antispam.typepad.com/',
+                    'desc' => 'Transmits comment data (and metadata) to check whether it is spam: User-Agent, HTTP Referer, IP [can be anonymized], Author name [can be anonymized], Author mail [can be anonymized], Author URL [can be anonymized], comment body'
+                )
+            ),
+            'frontend' => array(
+                'To check a comment for spam, the Akismet/Typepad service can be enabled and receives comment data of the user and its metadata: User-Agent, HTTP Referer, IP [can be anonymized], Author name [can be anonymized], Author mail [can be anonymized], Author URL [can be anonymized], comment body.',
+                'Submitted and also rejected comments can be saved to a logfile.',
+                'When Captchas are enabled, the displayed graphic key is stored in the session data and uses a PHP session cookie.'
+            ),
+            'backend' => array(
+                'To report a comment for spam, the Akismet/Typepad service can be enabled and receives comment data of the user and its metadata: User-Agent, HTTP Referer, IP [can be anonymized], Author name [can be anonymized], Author mail [can be anonymized], Author URL [can be anonymized], comment body.',
+            ),
+            'cookies' => array(
+                'When Captchas are enabled, the displayed graphic key is stored in the session data and uses a PHP session cookie.'
+            ),
+            'stores_user_input'     => true,
+            'stores_ip'             => true,
+            'uses_ip'               => true,
+            'transmits_user_input'  => true
+        ));
+
+
     }
 
     function introspect_config_item($name, &$propbag)

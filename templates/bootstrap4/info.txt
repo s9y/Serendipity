@@ -1,0 +1,6 @@
+Name: Bootstrap 4
+Author: Matthias Mees
+Date: 2018-04-20
+Require Serendipity: 2.1
+Backend: No
+Recommended: Yes

@@ -1084,6 +1084,10 @@ function serendipity_guessMime($extension) {
             $mime = 'image/x-icon';
             break;
 
+        case 'svg':
+            $mime = 'image/svg';
+            break;
+
         default:
             $mime = 'application/octet-stream';
             break;

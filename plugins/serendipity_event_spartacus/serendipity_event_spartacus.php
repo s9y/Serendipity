@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.37.3');
+        $propbag->add('version',       '2.37.5');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -47,6 +47,39 @@ class serendipity_event_spartacus extends serendipity_event
         ));
         $propbag->add('groups', array('BACKEND_FEATURES'));
         $propbag->add('configuration', array('enable_plugins', 'enable_themes', 'enable_remote', 'remote_url', 'cronjob', 'mirror_xml', 'mirror_files', 'custommirror', 'chown', 'chmod_files', 'chmod_dir', 'use_ftp', 'ftp_server', 'ftp_username', 'ftp_password', 'ftp_basedir'));
+
+        $propbag->add('legal',    array(
+            'services' => array(
+                'spartacus' => array(
+                    'url'  => 'http://spartacus.s9y.org',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'github.com' => array(
+                    'url'  => 'https://www.github.com',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                's9y.org' => array(
+                    'url'  => 'http://www.s9y.org',
+                    'desc' => 'Package server for plugin downloads'
+                ),
+                'sourceforge.net' => array(
+                    'url'  => 'http://www.sourceforget.net',
+                    'desc' => 'Package server for plugin downloads'
+                )
+            ),
+            'frontend' => array(
+            ),
+            'backend' => array(
+                'Allows to download plugins from configured remote sources from the webserver, may also connect via FTP to a configured server.'
+            ),
+            'cookies' => array(
+            ),
+            'stores_user_input'     => false,
+            'stores_ip'             => false,
+            'uses_ip'               => false,
+            'transmits_user_input'  => false
+        ));
+
 
     }
 
@@ -81,45 +114,32 @@ class serendipity_event_spartacus extends serendipity_event
         static $mirror = array(
             'xml' => array(
                 'github.com',
-                'Netmirror.org',
-                's9y.org'
-//                'openmirror.org'
+                's9y.org',
             ),
 
             'files' => array(
                 'github.com',
-                'Netmirror.org',
                 'SourceForge.net',
                 's9y.org'
-//                'BerliOS.de (inactive)',
-//                'openmirror.org'
             )
         );
 
         static $http = array(
             'xml' => array(
                 'https://raw.github.com/s9y/additional_plugins/master/',
-                'http://netmirror.org/mirror/serendipity/',
-                'http://s9y.org/mirror/'
-//                'http://openmirror.org/pub/s9y/',
+                'http://s9y.org/mirror/',
             ),
 
             'files' => array(
                 'https://raw.github.com/s9y/',
-                'http://netmirror.org/mirror/serendipity/',
                 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/',
-                'http://s9y.org/mirror/'
-//                'http://svn.berlios.de/viewcvs/serendipity/',
-//                'http://openmirror.org/pub/s9y/',
+                'http://s9y.org/mirror/',
             ),
 
             'files_health' => array(
-                'https://raw.github.com/'               => 'https://raw.github.com/',
-                'http://netmirror.org/'                 => 'http://netmirror.org/mirror/serendipity/last.txt',
                 'http://php-blog.cvs.sourceforge.net/'  => 'http://php-blog.cvs.sourceforge.net/viewvc/php-blog/serendipity/docs/LICENSE',
-                'http://s9y.org/'                       => 'http://s9y.org/'
-//                'http://svn.berlios.de/'                => 'http://svn.berlios.de/viewcvs/serendipity/',
-//                'http://openmirror.org/'                => 'http://openmirror.org/pub/s9y/last.txt',
+                'http://s9y.org/'                       => 'http://s9y.org/',
+                'https://raw.github.com/'               => 'https://raw.github.com/',
             )
         );
 
@@ -611,6 +631,9 @@ class serendipity_event_spartacus extends serendipity_event
 
         } else {
             $mirror  = $mirrors[$this->get_config('mirror_xml', 0)];
+            if ($mirror == null) {
+                $mirror  = $mirrors[0];
+            }
             $url    = $mirror . '/package_' . $url_type .  $lang . '.xml';
             $cacheTimeout = 60*60*12; // XML file is cached for half a day
             $target = $serendipity['serendipityPath'] . PATH_SMARTY_COMPILE . '/package_' . $url_type . $lang . '.xml';
@@ -849,6 +872,9 @@ class serendipity_event_spartacus extends serendipity_event
 
         $mirrors = $this->getMirrors('files', true);
         $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
+        if ($mirror == null) {
+            $mirror = $mirrors[0];
+        }
 
         $custom  = $this->get_config('custommirror');
         if (strlen($custom) > 2) {
@@ -1012,7 +1038,9 @@ class serendipity_event_spartacus extends serendipity_event
 
         $mirrors = $this->getMirrors('files', true);
         $mirror  = $mirrors[$this->get_config('mirror_files', 0)];
-
+        if ($mirror == null) {
+            $mirror = $mirrors[0];
+        }
         $custom  = $this->get_config('custommirror');
         if (strlen($custom) > 2) {
             $servers = explode('|', $custom);

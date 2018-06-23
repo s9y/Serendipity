@@ -1,0 +1,2 @@
+If custom javascripts are inserted, make sure to mention them in your GDPR /
+DSGVO legal notice

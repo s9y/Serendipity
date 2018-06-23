@@ -2277,6 +2277,7 @@ label .perm_name,
     margin: 0;
     padding: .25em;
     position: relative;
+    height: 100%;
 }
 
 .flexbox .pluginmanager_side,

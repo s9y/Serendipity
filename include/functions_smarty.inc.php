@@ -425,7 +425,6 @@ function serendipity_smarty_showCommentForm($params, &$smarty) {
         $params['moderate_comments'] = serendipity_db_bool($params['entry']['moderate_comments']);
     }
 
-
     $comment_add_data = array(
         'comments_messagestack' => (isset($serendipity['messagestack']['comments']) ? (array)$serendipity['messagestack']['comments'] : array()),
         'is_comment_added'      => (isset($serendipity['GET']['csuccess']) && $serendipity['GET']['csuccess'] == 'true' ? true: false),
@@ -1002,7 +1001,7 @@ function serendipity_smarty_init($vars = array()) {
         if (!isset($serendipity['smarty_vars']['head_link_stylesheet'])) {
             $serendipity['smarty_vars']['head_link_stylesheet_frontend'] = serendipity_rewriteURL('serendipity.css');
 
-            if (IN_serendipity_admin === true) {
+            if (defined('IN_serendipity_admin') && IN_serendipity_admin === true) {
                 $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity_admin.css');
             } else {
                 $serendipity['smarty_vars']['head_link_stylesheet'] = serendipity_rewriteURL('serendipity.css');
@@ -1019,7 +1018,7 @@ function serendipity_smarty_init($vars = array()) {
         }
 
         if (!isset($serendipity['smarty_vars']['head_link_script'])) {
-            if (IN_serendipity_admin === true) {
+            if (defined('IN_serendipity_admin') && IN_serendipity_admin === true) {
                 $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity_admin.js');
             } else {
                 $serendipity['smarty_vars']['head_link_script'] = serendipity_rewriteURL('serendipity.js');

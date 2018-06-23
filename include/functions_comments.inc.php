@@ -1141,16 +1141,9 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
 
     // Check for using Tokens
     if ($serendipity['useCommentTokens']) {
-        $token = md5(uniqid(rand(),1));
+        $token = serendipity_generateCToken($comment_id);
         $path = $path . "_token_" . $token;
 
-        //Delete any comment tokens older than 1 week.
-        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
-                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
-
-        // Issue new comment moderation hash
-        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
-                              VALUES ('" . time() . "', '" . $token . "', 'comment_" . $comment_id ."')");
     }
 
     $deleteURI  = serendipity_rewriteURL(PATH_DELETE . '/'. $path .'/' . $comment_id . '/' . $id . '-' . serendipity_makeFilename($title)  . '.html', 'baseURL');
@@ -1159,7 +1152,7 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     $eventData = array( 'comment_id'       => $comment_id,
                         'entry_id'         => $id,
                         'entryURI'         => $entryURI,
-                        '$path'            => $path,
+                        'path'             => $path,
                         'deleteURI'        => $deleteURI,
                         'approveURI'       => $approveURI,
                         'moderate_comment' => $moderate_comment,
@@ -1220,4 +1213,29 @@ function serendipity_sendComment($comment_id, $to, $fromName, $fromEmail, $fromU
     }
 
     return serendipity_sendMail($to, $subject, $text, $fromEmail, null, $fromName);
+}
+
+/**
+ * Generates a token for E-Mail moderation of comments 
+ * and stores it in the database
+ *
+ * @access public
+ * @param  int      ID of the comment to generate the token for
+ * @return string   The generated token
+ */
+function serendipity_generateCToken($cid) {
+
+    global $serendipity;
+
+    $ctoken = md5(uniqid(rand(),1));
+    
+        //Delete any comment tokens older than 1 week.
+        serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}options
+                              WHERE okey LIKE 'comment_%' AND name < " . (time() - 604800) );
+
+        // Issue new comment moderation hash
+        serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey)
+                              VALUES ('" . time() . "', '" . $ctoken . "', 'comment_" . $cid ."')");
+    return $ctoken;
+                              
 }
