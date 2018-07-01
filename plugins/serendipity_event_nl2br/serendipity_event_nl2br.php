@@ -277,11 +277,25 @@ class serendipity_event_nl2br extends serendipity_event
                                     //Standardize line endings to Unix
                                     $text = str_replace(array("\r\n", "\r"), "\n", $text);
 
-                                    //move newlines from body to extended
-                                    if ($element == 'body' && isset($eventData['extended'])) 
-                                    {  
-                                        $eventData['extended'] = str_repeat("\n",strspn($text,"\n",-1)) . $eventData['extended'];
-                                        $text = rtrim($text,"\n");
+                                    //framing newlines: pre and after everything
+                                    //without newline margin = 0 between body and extended
+                                    //to make splitting inside a paragraph possible 
+                                    //but with obligatory break because of the independent div-elements
+                                    
+                                    // rules for body <-> extended:
+                                    // no margins only if body ends with \n or no \n and extended starts without \n
+                                    // means: concatenate body and extended and there is no whiteline between them                                
+                                    if ($element == 'body' && isset($eventData['extended']) && !(strspn($text,"\n",-1) > 1) && strspn($eventData['extended'],"\n") )
+                                    { 
+                                        $text = "\n" . $text;
+                                    }
+                                    elseif ($element == 'extended' && !strspn($text,"\n") && !(strspn($eventData['body'],"\n",-1) > 1))
+                                    {
+                                        $text = $text . "\n";
+                                    }
+                                    else
+                                    {
+                                        $text = "\n" . $text . "\n";
                                     } 
                                     $eventData[$element] = $this->nl2p($text);
                                 }
@@ -332,22 +346,15 @@ class serendipity_event_nl2br extends serendipity_event
 
 /* nl2br plugin start */
 
-p.wl_bottom {
-    margin-top: 0em;
-    margin-bottom: 1em;
-}
-
-p.wl_top {
-    margin-top: 1em;
+p.wl_nobottom {
     margin-bottom: 0em;
 }
 
-p.wl_top_bottom {
-    margin-top: 1em;
-    margin-bottom: 1em;
+p.wl_notop {
+    margin-top: 0em;
 }
 
-p.break {
+p.wl_notopbottom {
     margin-top: 0em;
     margin-bottom: 0em;
 }
@@ -413,7 +420,7 @@ p.break {
 
 	var $isolation_block_elements = array('pre','textarea');
 
-	var $isolation_inline_elements = array('svg');
+	var $isolation_inline_elements = array('svg','style');
 
 	var $ignored_elements = array('area', 'br', 'col', 'command', 'embed', 
 								'img', 'input', 'keygen', 'link', 'param', 'source', 
@@ -436,18 +443,17 @@ p.break {
 								'details', 'dl', 'dt', 'footer', 'header', 'summary'
 								);
 
-
-	const P_TOP = '<p class="wl_top">';
-	const P_BOTTOM = '<p class="wl_bottom">';
-	const P_TOP_BOTTOM = '<p class="wl_top_bottom">';
-	const P_BREAK = '<p class="break">';
 	const P_END = '</p>';
+	const P = '<p>';
+	const P_NOTOP = '<p class="wl_notop">';
+	const P_NOBOTTOM = '<p class="wl_nobottom">';
+	const P_NOTOPBOTTOM = '<p class="wl_notopbottom">';
 
 	function nl2p($text)
 	{
 		//homogenize tags
 		$text = $this->tag_clean($text);
-
+		
 		//delete isolation tags from other arrays
 		if ($this->isolationtags)
 		{
@@ -467,6 +473,12 @@ p.break {
 	/** Make sure that all the tags are in lowercase
 	 * purge all \n from inside tags
 	 * remove spaces in endtags
+	 * replace < > with &lt; $gt; for non-tags
+	 * tags are split in three parts: 
+	 * 		tagstart - '<' character
+	 * 		tagdef - type of tag like 'img'
+	 * 		style - following content after a space
+	 * 			isolation by quotes in the style part
 	 * @param string text
 	 * @return text
 	 */
@@ -478,25 +490,42 @@ p.break {
 		$tagdef = false;
 		$endtag = false;
 		$tagstyle = false;
+		$singlequote = false;
+		$doublequote = false;
 
 		for ($i = 0; $i < count($text); $i++)
 		{
+			// start tag without closing tag
 			if ($text[$i] == '<' && !strpos($textstring,'>',$i+1) )
 			{	$text[$i] = '&lt;'; }
+			// end tag without previous start, definition or style section
 			elseif ($text[$i] == '>' && !($tagstart !== false || $tagdef || $tagstyle) )
 			{	$text[$i] = '&gt;'; }
-			elseif ($text[$i] == '<')
+			// start tag inside quotes
+			elseif ( $text[$i] == '<' && ($singlequote || $doublequote) )
+			{	$text[$i] = '&lt;'; }
+			// end tag inside quotes
+			elseif ( $text[$i] == '>' && ($singlequote || $doublequote) )
+			{	$text[$i] = '&gt;'; }
+			// start tag inside tag
+			elseif ($text[$i] == '<' && $tagstart !== false )
+			{	$text[$i] = '&lt;'; }
+			// real start tag
+			elseif ($text[$i] == '<' )
 			{	$tagstart = $i; }
+			// space after the start - not allowed in html
 			elseif ($text[$i] == ' ' && $tagstart !== false )
 			{	
 				$text[$tagstart] = '&lt;';
 				$tagstart = false;
 			}
+			// < > without content
 			elseif ($text[$i] == '>' && $tagstart !== false )
 			{
 				$text[$tagstart] = '&lt;';
 				$text[$i] = '&gt;';
 			}
+			// first space or closing tag in definition part
 			elseif ( ($text[$i] == ' ' || $text[$i] == '>') && $tagdef)
 			{
 				//check if it is a real tag
@@ -511,51 +540,78 @@ p.break {
 					|| in_array($tag,$this->nested_block_elements)
 					|| in_array($tag,$this->ignored_elements) ))
 				{
+					// unknown tag definition
 					$text[$tagstart_b] = '&lt;';
 					$text[strpos($textstring,'>',$i)] = '&gt;';
 				} else
 				{ 
-				$tagstyle = true;
-				$tagdef = false;
-				}
-				if ($text[$i] == '>')
-				{
-					$tagstart = false;
 					$tagdef = false;
-					$tagstyle = false;
-					$endtag = false;
+					// closing >
+					if ($text[$i] == '>')
+					{
+						$tagstart = false;
+						$tagstyle = false;
+						$endtag = false;
+					}
+					// start of style part
+					else
+					{
+						$tagstyle = true;
+					}
 				}
 			}
+			// endtag starting with </
 			elseif ($text[$i] == '/' && $tagstart !== false)
 			{	$endtag = true; }
+			// space is allowed in endtag like </ i>
 			elseif ($text[$i] == ' ' && $endtag)
 			{	$text[$i] = ''; }
+			// remove newline in tags
 			elseif (($tagstart !== false || $tagdef || $tagstyle) && $text[$i] == "\n")
 			{	$text[$i] = ''; }
-			elseif ($text[$i] == '>' && ($tagdef || $tagstyle) )
+			// closing > after style part
+			elseif ($text[$i] == '>' && $tagstyle && !($singlequote || $doublequote) )
 			{
 				$tagstart = false;
 				$tagdef = false;
 				$tagstyle = false;
 				$endtag = false;
 			}
-			elseif ($tagstart !== false)
+			// first definition character after <
+			elseif ($tagstart !== false && !($tagdef || $tagstyle) )
 			{
 				$tagdef = $i;
 				$tagstart_b = $tagstart;
 				$tagstart = false;
 				$text[$i] = strtolower($text[$i]);
 			}
+			// definition characters
 			elseif ($tagdef)
 			{	$text[$i] = strtolower($text[$i]); }
+			// quotes in style - isolate
+			elseif ($tagstyle && $text[$i] == '\'' && !$doublequote )
+			{
+				if ($singlequote) 
+				{	$singlequote = false; }
+				else
+				{	$singlequote = true; }
+			}
+			elseif ($tagstyle && $text[$i] == '"' && !$singlequote )
+			{
+				if ($doublequote)
+				{	$doublequote = false; }
+				else
+				{	$doublequote = true; }
+			}
 		}
 		return implode($text);
 	}
 
+
 	/*
 	 * sophisticated nl to p - blocktag stage
 	 * handles content with blocktags, apply nl2p to the block elements if tag allows it
-	 * works also for ommitted closing tags and singleton tags
+	 * works also for ommitted closing tags
 	 * @param: text
 	 * return string
 	 */
@@ -581,7 +637,7 @@ p.break {
 				//merge previous content, apply nl2p if needed and concatenate
 				if (!$isolation_flag && ( empty($tagstack) || in_array($tagstack[0], $this->allowed_p_parents) ))
 				{
-					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start)));
+					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
 				} else
 				{
 					$content .= implode(array_slice($textarray,$start,$i-$start));
@@ -606,7 +662,7 @@ p.break {
 				//merge previous content, apply nl2p if needed and concatenate
 				if (!$isolation_flag && ( empty($tagstack) || in_array($tagstack[0], $this->allowed_p_parents) ))
 				{
-					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start)));
+					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
 				} else
 				{
 					$content .= implode(array_slice($textarray,$start,$i-$start));
@@ -622,11 +678,11 @@ p.break {
 				//merge previous content, apply nl2p if needed and concatenate
 				if (empty($tagstack) )
 				{
-					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start)));
+					$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
 				} elseif (in_array($tagstack[0], $this->allowed_p_parents) )
 				{
 					$content .= $textarray[$start]
-								. $this->nl2pblock(implode(array_slice($textarray,$start+1,$i-$start-1)));
+								. $this->nl2pblock(implode(array_slice($textarray,$start+1,$i-$start-1))) . "\n";
 				} else
 				{
 					$content .= implode(array_slice($textarray,$start,$i-$start));
@@ -650,7 +706,7 @@ p.break {
 				{
 					if (!$isolation_flag && in_array($tagstack[0], $this->allowed_p_parents) )
 					{
-						$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start)));
+						$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
 					} else
 					{
 						$content .= implode(array_slice($textarray,$start,$i-$start));
@@ -667,7 +723,7 @@ p.break {
 		//merge remainder
 		if (!$isolation_flag && ( empty($tagstack) || in_array($tagstack[0], $this->allowed_p_parents) ))
 		{
-			$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start)));
+			$content .= $this->nl2pblock(implode(array_slice($textarray,$start,$i-$start))) . "\n";
 		} else
 		{
 			$content .= implode(array_slice($textarray,$start,$i-$start));
@@ -678,15 +734,17 @@ p.break {
 	/*
 	 * sophisticated nl to p for content which is already
 	 * purged from block elements by blocktag_nl2p
-	 * explode content along \n
-	 * check for following \n
-	 * explode along (inline) tags, get active tags across newlines
+	 * explode content along tags
+	 * build stack of active tags
+	 * isolate content inside isolation tags or 
+	 * explode along newlines
+	 * single breaks converted to <br>
 	 * build every paragraph: p class | reopen active tags | content ... | new open tags | closing p tag
-	 * for content which is not isolated by inline isolation tags like svg
-	 * Insert P_BOTTOM class at paragraphs ending with two newlines
-	 * Insert P_BREAK class at paragraphs ending with one newline
-	 * Insert P_TOP class at the first paragraph if starting with a nl
-	 * Insert P_TOP_BOTTOM class if the first paragraph is ending with two newlines 
+	 * class depends on framing newlines:
+	 * Insert P_NOBOTTOM class at last paragraph if no newline is following 
+	 * Insert P_NOTOP class at the first paragraph if is not starting with a nl
+	 * Insert P_NOTOPBOTTOM class if it is just one paragraph
+	 * normal P for everything else (default CSS has margin top,bottom)
 	 * @param string text
 	 * @return string
 	*/
@@ -699,108 +757,114 @@ p.break {
 		//check for start/end newlines
 		$startnl = ( strspn($textstring,"\n") ) ? true : false;
 		$endnl = ( strspn($textstring,"\n",-1 ) ) ? true : false;
-		$whiteline = false;
+		$firstp = true;
 		$textstring = trim($textstring,"\n");
 		if (empty($textstring)) { return ''; }
 
-		//explode in paragraphs
-		$textline = explode("\n",$textstring);
-		$tagstack = array();
-		$tagstack_prev = array();
 		$tagexplode = array();
 
+		//explode in tags and content
+		$tagexplode = $this->explode_along_tags($textstring);
+		$tagstack = array();
+
+		$textline = array();
+		$buffer = '';
+		$bufferhastext = false;
 		$content = '';
+		$tag = false;
 		$isolation_tag = false;
 
-		for($i=0; $i<count($textline);$i++)
+		//first stage: explode in tags
+		for($i=0; $i<count($tagexplode);$i++)
 		{
-
-			//explode in tags and content
-			$tagexplode = $this->explode_along_tags($textline[$i]);
-			//save active tags
-			$tagstack_prev = $tagstack;
-
-			//iterate through the tags in the paragraph
-			for ($j=0; $j<count($tagexplode); $j++)
+			//get tag or false if none
+			$tag = $this->extract_tag($tagexplode[$i]);
+			// start isolation
+			if ($tag && $this->is_starttag($tagexplode[$i]) && in_array($tag,$this->isolation_inline_elements))
 			{
-				//get tag or false if none
-				$tag = $this->extract_tag($tagexplode[$j]);
+				$isolation_tag = $tag;
+			}
+			// end isolation
+			elseif ($tag && !$this->is_starttag($tagexplode[$i]) && $tag == $isolation_tag)
+			{
+				$isolation_tag = false;
+			}
+			// put inlinetag to stack
+			elseif ($tag && !$isolation_tag && $this->is_starttag($tagexplode[$i]) && in_array($tag,$this->inline_elements) )
+			{
+				array_unshift($tagstack, $tagexplode[$i]);
+			}
+			// remove inlinetag from stack
+			elseif ($tag && !$isolation_tag && !$this->is_starttag($tagexplode[$i]) && !empty($tagstack) && $tag == $this->extract_tag($tagstack[0]))
+			{
+				array_shift($tagstack);
+			}
 
-				// put or remove tag from stack
-				if ($tag && $this->is_starttag($tagexplode[$j]) && in_array($tag,$this->isolation_inline_elements))
+			// put isolated content into buffer
+			if ($isolation_tag || $tag)
+			{
+				$buffer .= $tagexplode[$i];
+			}
+			// explode content in textlines
+			else
+			{
+				$textline = explode("\n",$tagexplode[$i]);
+
+				//iterate through the paragraphs and build content
+				for ($j=0; $j<count($textline); $j++)
 				{
-					$isolation_tag = $tag;
+
+					// whiteline \n\n found: make paragraph with buffer and this line
+					if ( ($j < count($textline) - 1 && empty($textline[$j+1]) ) )
+					{
+						// p start tag, append buffer and empty buffer
+						if  ($firstp && !$startnl) { $content .= self::P_NOTOP . $buffer; }
+						else { $content .= self::P . $buffer; }
+						$firstp = false;
+						$buffer = '';
+						$bufferhastext = false;
+
+						//append textline
+						$content .= $textline[$j];
+
+						//close open tags
+						foreach($tagstack as $ins_tag) { $content .= $this->html_end_tag($this->extract_tag($ins_tag)); }
+
+						//paragraph closing tag
+						$content .= self::P_END . "\n";
+
+						//put closed tags into buffer
+						foreach($tagstack as $ins_tag) { $buffer .= $ins_tag; }
+
+						//skip newline
+						$j += 1;
+					}
+					elseif ($j < count($textline) - 1) // single break
+					{
+						$buffer .= $textline[$j] . "<br>\n";
+						$bufferhastext = true;
+					}
+					else // last line
+					{
+						// append textline
+						$buffer .= $textline[$j];
+						$bufferhastext = true;
+					}
 				}
-				elseif ($tag && !$this->is_starttag($tagexplode[$j]) && $tag == $isolation_tag)
-				{
-					$isolation_tag = false;
-				}
-				elseif ($tag && !$isolation_tag && $this->is_starttag($tagexplode[$j]) && in_array($tag,$this->inline_elements) )
-				{
-					array_unshift($tagstack, $tagexplode[$j]);
-				}
-				elseif($tag && !$isolation_tag && !$this->is_starttag($tagexplode[$j]) && !empty($tagstack) && $tag == $this->extract_tag($tagstack[0]))
-				{
-					array_shift($tagstack);
-				}
 			}
+		}
 
-			//concatenate if lines are isolated
-			if ($isolation_tag && $i < count($textline)-1)
-			{
-				$textline[$i+1] = $textline[$i] . "\n" . $textline[$i+1];
-				continue;
-			}
-			elseif ($isolation_tag && $i == count($textline)-1)
-			{
-				$textline[$i] .= $this->html_end_tag($this->extract_tag($isolation_tag));
-			}
-
-			//check for whiteline
-			if ($i < count($textline) - 1 && empty($textline[$i+1]) )
-			{
-				$whiteline = true;
-			}
-			elseif (empty($textline[$i]))
-			{
-				continue;
-			}
-
-			//build content
-			//paragraph class
-			if ($i == 0 && $startnl && ( $whiteline || ($i == count($textline)-1 && $endnl) ) )
-			{
-				$content .=  self::P_TOP_BOTTOM;
-			}
-			elseif ($i == 0 && $startnl)
-			{
-				$content .= self::P_TOP;
-			}
-			elseif ($whiteline || ($i == count($textline)-1 && $endnl))
-			{
-				$content .= self::P_BOTTOM;
-			} else
-			{
-				$content .= self::P_BREAK;
-			}
-
-			//reopen active tags
-			foreach($tagstack_prev as $ins_tag)
-			{
-			 $content .= $ins_tag;
-			}
-
-			//content paragraph
-			$content .= $textline[$i];
-
-			//close open tags
-			foreach($tagstack as $ins_tag)
-			{
-				$content .= $this->html_end_tag($this->extract_tag($ins_tag));
-			}
-			//paragraph closing tag
-			$content .= self::P_END . "\n";
-			$whiteline = false;
+		// handle last paragraph
+		if (!$bufferhastext) { $content .= $buffer; }
+		else
+		{
+			if ($firstp && !$startnl && !$endnl ) { $content .= self::P_NOTOPBOTTOM; }
+			elseif ($firstp && !$startnl) { $content .= self::P_NOTOP; }
+			elseif (!$endnl) { $content .= self::P_NOBOTTOM; }
+			else { $content .= self::P; }
+			$content .= $buffer;
+			foreach($tagstack as $ins_tag) { $content .= $this->html_end_tag($this->extract_tag($ins_tag)); }
+			$content .= self::P_END;
 		}
 
 		return $content;
@@ -858,7 +922,6 @@ p.break {
 	function html_end_tag($text) { return '</' . $text . '>'; }
 	function html_start_tag($text) { return '<' . $text . '>'; }
 	function is_starttag($text) { return ($text[1] == "/") ? false : true; }
-
 
 }
 
