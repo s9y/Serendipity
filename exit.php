@@ -4,7 +4,9 @@
 
 include 'serendipity_config.inc.php';
 
-$url      = $serendipity['baseURL'];
+$url        = $serendipity['baseURL'];
+$trust_url  = false;
+$open_redir = false;
 
 if (isset($_GET['url_id']) && !empty($_GET['url_id']) && isset($_GET['entry_id']) && !empty($_GET['entry_id'])) {
 
@@ -14,6 +16,7 @@ if (isset($_GET['url_id']) && !empty($_GET['url_id']) && isset($_GET['entry_id']
     if (is_array($links) && isset($links['link'])) {
         // URL is valid. Track it.
         $url = str_replace('&amp;', '&', $links['link']);
+        $trust_url = true;
         serendipity_track_url('exits', $url, $_GET['entry_id']);
     } elseif (isset($_GET['url']) && !empty($_GET['url'])) {
         // URL is invalid. But a URL-location was sent, so we want to redirect the user kindly.
@@ -26,9 +29,23 @@ if (isset($_GET['url_id']) && !empty($_GET['url_id']) && isset($_GET['entry_id']
 }
 
 if (serendipity_isResponseClean($url)) {
-    header('HTTP/1.0 301 Moved Permanently');
-    header('Status: 301 Moved Permanently');
-    header('Location: ' . $url);
+    if (serendipity_plugin_api::exists('serendipity_event_trackexits')) {
+        // Get configuration of plugin
+        $configValues = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE 'serendipity_event_trackexits:%/commentredirection'");
+        if (is_array($configValues)) {
+            foreach($configValues AS $configValue) {
+                if ($configValue['value'] == 's9y') {
+                    $open_redir = true;
+                }
+            }
+        }
+    }
+    
+    if ($trust_url || $open_redir) {
+        header('HTTP/1.0 301 Moved Permanently');
+        header('Status: 301 Moved Permanently');
+        header('Location: ' . $url);
+    }
 }
 exit;
 /* vim: set sts=4 ts=4 expandtab : */
