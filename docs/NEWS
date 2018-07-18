@@ -35,6 +35,18 @@ Version 2.x.x (major) ()
 Version 2.1.3 ()
 ------------------------------------------------------------------------
 
+    * Security: Prevent XSS possibility in "edit entries" panel.
+      Thanks to @oreamnos and Hanno Boeck for reporting!
+
+    * Security: Disallow sending comment notifications and mails to more than one
+      mail address. This could be used to approving opt-ins of requests
+      that did not belong to the same email that was approved.
+      Thanks to Hanno Boeck for reporting!
+
+    * Security: Remove exit.php open redirect, when not using the trackexits-
+      plugin configured with Serendipity exit tracking.
+      Thanks to Julio Cesar (from infosec.com.br) and Hanno Boeck for reporting!
+      
     * Fix SQL compatibility for creating of table "serendipity_groupconfig" 
 
     * Added new "legal" plugin property bag attribute to indicate
