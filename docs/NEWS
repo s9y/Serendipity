@@ -35,6 +35,10 @@ Version 2.x.x (major) ()
 Version 2.1.3 ()
 ------------------------------------------------------------------------
 
+    * Security: Make sure that the admins configuration for RSS
+      and blog entry limit is parsed as integer for SQL queries.
+      Thanks to @oreamnos and Hanno Boeck for reporting!
+
     * Security: Prevent XSS possibility in "edit entries" panel.
       Thanks to @oreamnos and Hanno Boeck for reporting!
 
