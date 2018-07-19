@@ -1,37 +1,6 @@
 Version 2.1.3 ()
 ------------------------------------------------------------------------
 
-    * Fixed bug in pull request #392 which overwrote user specified
-      input for logged in authors with an empty realname (wrong array
-      key name) and deleted all existing text input
-
-    * Add backend_view_entry hook, that is executed for every entry
-      in the backend entry list
-
-    * Updated entryproperties plugin to support a custom property for
-      multiple ownership of an article
-
-    * Emit and detect rel=trackback element to find trackback
-      url, to have a reliable alternative to RDF used so far
-
-    * Merge and rename the two configuration variables to limit
-      displayed entries in the dashboard (#493):
-      
-      $serendipity['dashboardLimit'] and
-      $serendipity['dashboardDraftLimit'] are now merged into
-      $serendipity['dashboardEntriesLimit'] - please change your
-      serendipity_config_local.inc.php accordingly if you used
-      the former variables.
-
-      The dashboard will now show as many future entries as 
-      configured in "dashboardEntriesLimit"; if there are less
-      future entries, it will display drafts until 
-      "dashboardEntriesLimit" is reached.
-
-    * Add a "delete" button to the backend entry form (#491, #494)
-
-    * Change Spartacus default mirror to github (#489)
-
     * Security: Make sure that the admins configuration for RSS
       and blog entry limit is parsed as integer for SQL queries.
       Thanks to @oreamnos and Hanno Boeck for reporting!
