@@ -468,7 +468,7 @@ function serendipity_printCommentsByAuthor() {
     if (empty($serendipity['GET']['page'])) {
         $serendipity['GET']['page'] = 1;
     }
-    $sql_limit = $serendipity['fetchLimit'] * ($serendipity['GET']['page']-1) . ',' . $serendipity['fetchLimit'];
+    $sql_limit = (int)$serendipity['fetchLimit'] * ((int)$serendipity['GET']['page']-1) . ',' . (int)$serendipity['fetchLimit'];
     $c = serendipity_fetchComments(null, $sql_limit, 'co.entry_id DESC, co.id ASC', false, $type, $sql_where);
 
     $entry_comments = array();
