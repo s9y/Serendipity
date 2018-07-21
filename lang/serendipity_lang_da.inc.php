@@ -209,7 +209,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Ny kommentar på abonnerede artikel "%s"');
 @define('SUBSCRIPTION_MAIL', "Hej %s,\n\nEn ny kommentar er blevet lavet til en artikel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finde artiklen her: %s\n\nDu kan stoppe dit abonnement ved at klikke på dette link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hej %s,\n\nEt nyt trackback er blevet lavet til en artikel du abonnerer på hos \"%s\", ved navn \"%s\"\nNavnet på skribenten er: %s\n\nDu kan finde artiklen her: %s\n\nDu kan stoppe dit abonnement ved at klikke på dette link: %s\n");
-@define('SIGNATURE', "\n-- \n%s bruger Serendipity.\nDen bedste blog på nettet, du kan også bruge den.\nKig nærmere på <http://s9y.org> for at finde mere information.");
+@define('SIGNATURE', "\n-- \n%s bruger Serendipity.\nDen bedste blog på nettet, du kan også bruge den.\nKig nærmere på <https://s9y.org> for at finde mere information.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -517,7 +517,7 @@
 @define('DISPLAY_COMMENTS_AS', 'Vis kommentarer som');
 @define('SIDEBAR_PLUGINS', 'Sidebarplugins');
 @define('EVENT_PLUGINS', 'Hændelseplugins');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Tilføj en fil til dit mediearkiv:</b><p>Her kan du uploade mediafiler, eller få dem hentet fra et sted på nettet. Hvis du ikke har et passende billeder, <a href="http://images.google.com" target="_blank">prøv at søg efter billeder på google</a> der passer til dine tanker, resultatet er ofte brugbart og sjovt :)</p><p><b>Vælg metode:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Tilføj en fil til dit mediearkiv:</b><p>Her kan du uploade mediafiler, eller få dem hentet fra et sted på nettet. Hvis du ikke har et passende billeder, <a href="https://images.google.com/" target="_blank">prøv at søg efter billeder på google</a> der passer til dine tanker, resultatet er ofte brugbart og sjovt :)</p><p><b>Vælg metode:</b></p><br/>');
 @define('COMMENTS_FILTER_SHOW', 'Vis');
 @define('COMMENTS_FILTER_ALL', 'Alle');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Kun godkendte');
@@ -578,7 +578,7 @@
 @define('INSTALL_SHOWFUTURE', 'Vis fremtidige artikler');
 @define('INSTALL_SHOWFUTURE_DESC', 'Hvis aktiveret, dette vil vise alle fremtidige artikler på din blog. Som standard skjules disse artikler og vises først når udgivelsesdatoen er nået.');
 @define('INSTALL_DBPERSISTENT', 'Brug vedvarende forbindelser');
-@define('INSTALL_DBPERSISTENT_DESC', 'Aktiver brug af vedvarende database forbindelser, læs mere <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">her</a>. Dette anbefales normalt ikke');
+@define('INSTALL_DBPERSISTENT_DESC', 'Aktiver brug af vedvarende database forbindelser, læs mere <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">her</a>. Dette anbefales normalt ikke');
 @define('NO_IMAGES_FOUND', 'Ingen billeder fundet');
 @define('PERSONAL_SETTINGS', 'Personlige indstillinger');
 @define('REFERER', 'Henvisende side');
@@ -784,7 +784,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Vis andre brugeres media filer');
 @define('CHARSET_NATIVE', 'Native');
 @define('INSTALL_CHARSET', 'Karaktersæt valg');
-@define('INSTALL_CHARSET_DESC', 'Her kan du vælge mellem UTF-8 eller \'native\' (lokalt,  f.eks. ISO-8859-1) karaktersæt. Nogle sprog har kun UTF-8 oversættelsen, så at sætte valget til \'native\' vil ikke have nogen effekt. UTF-8 anbefales til nyinstallationer. Lad være med at ændre denne indstilling hvis du allerede har lavet artikler med special karakterer - det kan medføre dine artikler vises forkert. Læs mere om alt dette på <a href="http://www.s9y.org/index.php?node=46">http://www.s9y.org/index.php?node=46</a>');
+@define('INSTALL_CHARSET_DESC', 'Her kan du vælge mellem UTF-8 eller \'native\' (lokalt,  f.eks. ISO-8859-1) karaktersæt. Nogle sprog har kun UTF-8 oversættelsen, så at sætte valget til \'native\' vil ikke have nogen effekt. UTF-8 anbefales til nyinstallationer. Lad være med at ændre denne indstilling hvis du allerede har lavet artikler med special karakterer - det kan medføre dine artikler vises forkert. Læs mere om alt dette på <a href="https://docs.s9y.org/docs/developers/internationalization.html">https://docs.s9y.org/docs/developers/internationalization.html</a>');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Aktiver Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'Hvis aktiveret kan plugins "hægte" sig på kalenderen og fremhæve deres egne events. Aktiver kun hvis du har installeret plugins der kræver dette, da det forringer performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Serendipity\'s XML-RPC API interface leveres ikke længere sammen med Serendipity på grund af gentagne sikkerhedsproblemer med dette API. Du er derfor nødt til at installere XML-RPC pluginet for at kunne bruge XML-RPC API. URL\'en i dine programmer ændres IKKE - så snart pluginet er installeret vil du igen være istand til at bruge dette API.');

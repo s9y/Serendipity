@@ -225,7 +225,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nowy komentarz do subskrybowanej wiadomo¶ci "%s"');
 @define('SUBSCRIPTION_MAIL', "Witam %s,\n\nNowy komentarz zosta³ dodany do wpisu, który monitorujesz na \"%s\", zatytu³owany \"%s\"\nImiê komentuj±cego to: %s\n\nSkomentowany wpis znajdziesz tutaj: %s\n\nMo¿esz wy³±czyæ powiadomienia o odpowiedziach do tego wpisu klikaj±c na link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Witam %s,\n\nNowy ¶lad zosta³ pozostawiony we wpisie, który monitorujesz na \"%s\", zatytu³owany \"%s\"\nImiê komentuj±cego to: %s\n\nSkomentowany wpis znajdziesz tutaj: %s\n\nMo¿esz wy³±czyæ powiadomienia o odpowiedziach do tego wpisu klikaj±c na link: %s\n");
-@define('SIGNATURE', "\n-- \n%s jest napêdzane przez Serendipity.\nNajlepszy engine blogowy pod tym s³oñcem. Ty tak¿e mo¿esz go u¿ywaæ.\nSprawd¼ <http://s9y.org> by siê dowiedzieæ jak!");
+@define('SIGNATURE', "\n-- \n%s jest napêdzane przez Serendipity.\nNajlepszy engine blogowy pod tym s³oñcem. Ty tak¿e mo¿esz go u¿ywaæ.\nSprawd¼ <https://s9y.org> by siê dowiedzieæ jak!");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -497,7 +497,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('ENTER_MEDIA_UPLOAD', 'Wybierz plik do uploadu:');
 @define('SAVE_FILE_AS', 'Zapisz plik jako:');
 @define('STORE_IN_DIRECTORY', 'Zapisz w nastêpuj±cym katalogu: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Dodaj plik do zbioru mediów:</b><p>Tu mo¿esz uploadowaæ pliki z mediami lub wskazaæ jakie¶ pliki dostêpne w sieci! Je¶li nie masz odpowiedniego obrazka, <a href="http://images.google.com" target="_blank">znajd¼ w serwisie Google</a> obrazki, które byæ mo¿e bêd± Ci odpowiada³y. Rezultaty wyszukiwania s± czêsto przydatne i zabawne :) Ale uwa¿aj! Wiêkszo¶æ obrazków ma zastrze¿one prawa autorskie i powiniene¶ (powinna¶) zapytaæ siê o pozwolenie przed ich u¿yciem!</p><p><b>Wybierz metodê:</b></p><br />');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Dodaj plik do zbioru mediów:</b><p>Tu mo¿esz uploadowaæ pliki z mediami lub wskazaæ jakie¶ pliki dostêpne w sieci! Je¶li nie masz odpowiedniego obrazka, <a href="https://images.google.com/" target="_blank">znajd¼ w serwisie Google</a> obrazki, które byæ mo¿e bêd± Ci odpowiada³y. Rezultaty wyszukiwania s± czêsto przydatne i zabawne :) Ale uwa¿aj! Wiêkszo¶æ obrazków ma zastrze¿one prawa autorskie i powiniene¶ (powinna¶) zapytaæ siê o pozwolenie przed ich u¿yciem!</p><p><b>Wybierz metodê:</b></p><br />');
 @define('MEDIA_RENAME', 'Zmien nazwê pliku');
 @define('IMAGE_RESIZE', 'Zmieñ rozmiar obrazka');
 @define('MEDIA_DELETE', 'Usuñ ten plik');
@@ -787,7 +787,7 @@ $i18n_filename_to   = array('_', 'a', 'A', 'a', 'A', 'b', 'B', 'c', 'C', 'c', 'C
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Ogl±danie plików z mediami innych u¿ytkowników');
 @define('CHARSET_NATIVE', 'Natywne');
 @define('INSTALL_CHARSET', 'Wybór kodowania znaków');
-@define('INSTALL_CHARSET_DESC', 'Tu mo¿esz ustawiæ kodowanie pomiêdzy UTF-8 a natywnym kodowaniem danego jêzyka (ISO, EUC, ...). Niektóre jêzyki oferuj± wsparcie tylko kodowania UTF-8 wiêc ich zmiana na "natywne" nie odniesie skutku. SUGERUJEMY wybór kodowania UTF-8 dla nowych instalacji. Nie zmieniaj tych ustawieñ je¶li ju¿ dokona³e¶(a¶) wpisów ze znakami specjalnymi (diakrytycznymi) - to mo¿e spowodowaæ problemy z wy¶wietlaniem znaków. Przeczytaj wiêcej o tym problemie na stronie http://www.s9y.org/index.php?node=46');
+@define('INSTALL_CHARSET_DESC', 'Tu mo¿esz ustawiæ kodowanie pomiêdzy UTF-8 a natywnym kodowaniem danego jêzyka (ISO, EUC, ...). Niektóre jêzyki oferuj± wsparcie tylko kodowania UTF-8 wiêc ich zmiana na "natywne" nie odniesie skutku. SUGERUJEMY wybór kodowania UTF-8 dla nowych instalacji. Nie zmieniaj tych ustawieñ je¶li ju¿ dokona³e¶(a¶) wpisów ze znakami specjalnymi (diakrytycznymi) - to mo¿e spowodowaæ problemy z wy¶wietlaniem znaków. Przeczytaj wiêcej o tym problemie na stronie https://docs.s9y.org/docs/developers/internationalization.html');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'W³±cz odwo³ania wtyczek (API hook)');
 @define('CALENDAR_EXTEVENT_DESC', 'Kiedy w³±czone, wtyczki mog± tworzyæ odwo³ania do kalendarza by pokazaæ (pod¶wietliæ) zdarzenia z nimi zwi±zane. W³±cz to tylko gdy masz zainstalowane wtyczki korzystaj±ce z opcji odwo³ania (hook), w przeciwnym wypadku tylko tracisz na wydajno¶ci wy¶wietlania strony.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Interfejs XML-RPC API nie jest ju¿ wbudowany w Serendipity z powodu problemów z bezpieczeñstwem tego protoko³u. Je¶li jednak chcesz obs³ugê tego protoko³u mieæ zaimplementowan± w swoim blogu, musisz zainstalowaæ wtyczkê XML-RPC by móc u¿ywaæ protoko³u XML-RPC API. URL, jaki nale¿y u¿ywaæ w swoich aplikacjach NIE ulegnie zmianie - kiedy tylko zainstalujesz wtyczkê, bêdziesz móg³ u¿ywaæ tego API.');

@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Ny kommentar till prenumererad artikel "%s"');
 @define('SUBSCRIPTION_MAIL', "Hej %s,\n\nEn ny kommentar är gjord till artikeln du följer hos \"%s\", vid namn \"%s\"\nKommentarens skapare är: %s\n\nDu kan hitta artikeln här: %s\n\nDu kan avsluta prenumerationen genom att klicka på denna länk: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hej %s,\n\nEn ny trackback är gjord till artikeln du följer hos \"%s\", vid namn \"%s\"\nSkapare är: %s\n\nDu kan hitta artikeln här: %s\n\nDu kan avsluta prenumerationen genom att klicka på denna länk: %s\n");
-@define('SIGNATURE', "\n-- \n%s bygger på Serendipty.\nDen bästa bloggen, och du kan också använda den.\nKolla <http://s9y.org> för att få veta hur.");
+@define('SIGNATURE', "\n-- \n%s bygger på Serendipty.\nDen bästa bloggen, och du kan också använda den.\nKolla <https://s9y.org> för att få veta hur.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 matning');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 matning');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 matning');
@@ -495,7 +495,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Välj en fil du vill ladda upp:');
 @define('SAVE_FILE_AS', 'Spara filen som:');
 @define('STORE_IN_DIRECTORY', 'Lagra i följande katalog: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Lägg till en fil till ditt mediebibliotek:</b><p>Här kan du ladda upp mediefiler, eller be mig att hämta dem från en plats på webben! Om du inte har någon lämplig bild, <a href="http://images.google.com" target="_blank">leta efter bilder på google</a> som passar dina tankar, resultaten är ofta användbara och roliga :) Men var försiktig, de flesta bilder är skyddade av upphovsrätten, så du måste fråga innan du använder dem.</p><p><b>Välj metod:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Lägg till en fil till ditt mediebibliotek:</b><p>Här kan du ladda upp mediefiler, eller be mig att hämta dem från en plats på webben! Om du inte har någon lämplig bild, <a href="https://images.google.com/" target="_blank">leta efter bilder på google</a> som passar dina tankar, resultaten är ofta användbara och roliga :) Men var försiktig, de flesta bilder är skyddade av upphovsrätten, så du måste fråga innan du använder dem.</p><p><b>Välj metod:</b></p><br/>');
 @define('MEDIA_RENAME', 'Döp om denna fil');
 @define('IMAGE_RESIZE', 'Ändra storlek denna bild');
 @define('MEDIA_DELETE', 'Ta bort denna fil');
@@ -783,7 +783,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Visa andra användares mediafiler');
 @define('CHARSET_NATIVE', 'Inneboende');
 @define('INSTALL_CHARSET', 'Tangentuppsättningsval');
-@define('INSTALL_CHARSET_DESC', 'Här kan du välja UTF-8 eller inneboende (ISO, EUC, ...) tangentuppsättning. Vissa språk har endast UTF-8-översättningar och att välja tangentuppsättningen "Inneboende" har då ingen effekt. UTF-8 rekommenderas vid nyinstallation. Ändra inte denna inställning om du redan har skrivit artiklar med specialtecken - detta kan leda till korrupta tecken. Läs vänligen mer om detta på http://www.s9y.org/index.php?node=46 .');
+@define('INSTALL_CHARSET_DESC', 'Här kan du välja UTF-8 eller inneboende (ISO, EUC, ...) tangentuppsättning. Vissa språk har endast UTF-8-översättningar och att välja tangentuppsättningen "Inneboende" har då ingen effekt. UTF-8 rekommenderas vid nyinstallation. Ändra inte denna inställning om du redan har skrivit artiklar med specialtecken - detta kan leda till korrupta tecken. Läs vänligen mer om detta på https://docs.s9y.org/docs/developers/internationalization.html .');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Aktivera insticksmodulers API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'Om detta akiveras kan insticksmoduler koppla in sig i kalendern för att visa sina egna händelser på ett framträdande sätt. Aktivera endast om du har installerat insticksmoduler som behöver detta, annars kommer det endast att medföra lägre prestanda.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'XML-RPC API gränssnittet till Serendipity inkluderas inte längre på grund av innevarande säkerhetsproblem med detta API samt att få använder det. Därför behöver du installera XML-RPC-insticksmoduken för att använda XML-RPC API:t. URL:en som används i din applikation kommer inte att ändras - så snart du har installerat insticksmodulen kommer du återigen att kunna använda API:t.');

@@ -224,7 +224,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -496,7 +496,7 @@
 @define('ENTER_MEDIA_UPLOAD', '«ќ — «бгбЁ «б–н  —нѕ —ЁЏ…:');
 @define('SAVE_FILE_AS', 'ЌЁў «бгбЁ »√”г:');
 @define('STORE_IN_DIRECTORY', ' ќ“нде Ён ѕ«ќб е–« «бгћбѕ: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>√÷«Ё… гбЁ «бм «бгнѕн«  Ќ  г”∆жбн я:</b><p> ед« нгяд бя —ЁЏ гбЁ«  «бгнѕн« ° √ж «ќ»—д« Џде« ян н г ћб»е« гд √н гя«д Ён «б«д —д ! √д бг няд бѕня «б’ж—… «бгд«”»… <a href="http://images.google.com" target="_blank"> «»ЌЋ Џд «б’ж—… «бгЎбж»… Ён ёжёб бб’ж— </a> «б н  д«”» Ёя—… гж÷жЏя ° ж«бд нћ… √Ќн«д«  яжд г÷Ќя… √ж Џ«ѕн… ° жбяд Џбня г—«Џ«… Ќёжё «бд‘— ° б–бя н жћ» Џбня «б”ƒ«б Џде« ё»б √д  √ќ–е« гд г’ѕ—е«<p><b> √ќ — «бЎ—нё… «б н  д«”»я:</b><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>√÷«Ё… гбЁ «бм «бгнѕн«  Ќ  г”∆жбн я:</b><p> ед« нгяд бя —ЁЏ гбЁ«  «бгнѕн« ° √ж «ќ»—д« Џде« ян н г ћб»е« гд √н гя«д Ён «б«д —д ! √д бг няд бѕня «б’ж—… «бгд«”»… <a href="https://images.google.com/" target="_blank"> «»ЌЋ Џд «б’ж—… «бгЎбж»… Ён ёжёб бб’ж— </a> «б н  д«”» Ёя—… гж÷жЏя ° ж«бд нћ… √Ќн«д«  яжд г÷Ќя… √ж Џ«ѕн… ° жбяд Џбня г—«Џ«… Ќёжё «бд‘— ° б–бя н жћ» Џбня «б”ƒ«б Џде« ё»б √д  √ќ–е« гд г’ѕ—е«<p><b> √ќ — «бЎ—нё… «б н  д«”»я:</b><br/>');
 @define('MEDIA_RENAME', '√Џ«ѕ…  ”гн… «бгбЁ');
 @define('IMAGE_RESIZE', ' џнн— ён«”«  е–е «б’ж—…');
 @define('MEDIA_DELETE', 'Ќ–Ё «бгбЁ');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', '√Џ—÷ «бгж«÷нЏ «бг” ё»бн…');
 @define('INSTALL_SHOWFUTURE_DESC', '«д  г  гянд е–« Ё≈де ”жЁ нЏ—÷ г” ё»б« ћгнЏ гж«÷нЏ «бгћб…. «бќн«— «б«Ё —«÷н еж ≈ќЁ«Ѕ «бгж«÷нЏ ж  Џ—÷ ЁёЎ Џдѕ  «—нќ «бд‘—');
 @define('INSTALL_DBPERSISTENT', '√” ќѕ«г «б« »«Ў «бЌ«бн');
-@define('INSTALL_DBPERSISTENT_DESC', ' гяд «” ќѕ«г «б« ’«б «бѕ«∆г бё«Џѕ… «б»н«д« . нгядя ё—«Ѕ… «бг“нѕ ед« <a href="http://php.net/manual/features.persistent-connections.php" target="_blank"> ед№№« </a> нд’Ќ »е–« «б«ћ—«Ѕ');
+@define('INSTALL_DBPERSISTENT_DESC', ' гяд «” ќѕ«г «б« ’«б «бѕ«∆г бё«Џѕ… «б»н«д« . нгядя ё—«Ѕ… «бг“нѕ ед« <a href="https://php.net/manual/features.persistent-connections.php" target="_blank"> ед№№« </a> нд’Ќ »е–« «б«ћ—«Ѕ');
 @define('NO_IMAGES_FOUND', 'бг н г «бЏЋж— Џбм «б’ж—…');
 @define('PERSONAL_SETTINGS', '«б«Џѕ«ѕ«  «б‘ќ’н…');
 @define('REFERER', 'н‘н— ≈бм');
@@ -786,7 +786,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', 'гЌбн');
 @define('INSTALL_CHARSET', ' —гн“ «б√Ќ—Ё');
-@define('INSTALL_CHARSET_DESC', ' ед« нгяд бя  √д  џн— »нд «б —гн“ «бЏ«бгн UTF-8 ж «б —гн“ «бгЌбн ббџ я гЋб  —гн“ (ISO, EUC, ...)  ° »Џ÷ «ббџ«  бѕне« ЁёЎ  —ћг…  —гн“ UTF-8  б–бя »«ќ н«—ня  —гн“ бџ я «бгЌбн… бд няжд бе √Ћ— Џбм √ѕ«Ѕ гѕжд я ° дё —Ќ «” ќѕ«г UTF-8 бб —ян» «бћѕнѕ. √Ќ–— . . .√Ќ–— . . . √Ќ–— . . .  б«  ёг » џнн— «б —гн“ ≈–« яд  я »  гж«÷нЏ гд ё»б. б√д г« я » е » —гн“ бџ… √ќ—м ”жЁ н’»Ќ Џбм ‘яб Ўб«”г. √ ће ≈бм е–« «бгжёЏ http://www.s9y.org/index.php?node=46   бб«Ўб«Џ Џбм «бг“нѕ гд «бгЏбжг« ');
+@define('INSTALL_CHARSET_DESC', ' ед« нгяд бя  √д  џн— »нд «б —гн“ «бЏ«бгн UTF-8 ж «б —гн“ «бгЌбн ббџ я гЋб  —гн“ (ISO, EUC, ...)  ° »Џ÷ «ббџ«  бѕне« ЁёЎ  —ћг…  —гн“ UTF-8  б–бя »«ќ н«—ня  —гн“ бџ я «бгЌбн… бд няжд бе √Ћ— Џбм √ѕ«Ѕ гѕжд я ° дё —Ќ «” ќѕ«г UTF-8 бб —ян» «бћѕнѕ. √Ќ–— . . .√Ќ–— . . . √Ќ–— . . .  б«  ёг » џнн— «б —гн“ ≈–« яд  я »  гж«÷нЏ гд ё»б. б√д г« я » е » —гн“ бџ… √ќ—м ”жЁ н’»Ќ Џбм ‘яб Ўб«”г. √ ће ≈бм е–« «бгжёЏ https://docs.s9y.org/docs/developers/internationalization.html   бб«Ўб«Џ Џбм «бг“нѕ гд «бгЏбжг« ');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
