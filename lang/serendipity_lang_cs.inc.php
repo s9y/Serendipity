@@ -255,7 +255,7 @@ $i18n_filename_to = array (
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY',		'Nový komentáø k pøihlášenému záznamu "%s"');
 @define('SUBSCRIPTION_MAIL',		"Pozor %s,\n\nA právì byl pøidán nový komentáø k záznamu, který sledujete na \"%s\", s názvem \"%s\"\nJméno odesílatele: %s\n\nZáznam najdete zde: %s\n\nMùžete se odhlásit zde: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL',		"Pozor %s,\n\nA právì byla pøidána nová odezva k záznamu, který sledujete na \"%s\", s názvem \"%s\"\nJméno odesílatele: %s\n\nZáznam najdete zde: %s\n\nMùžete se odhlásit zde: %s\n");
-@define('SIGNATURE',		"\n-- \n%s je vytvoøen pomocí Serendipity.\n Tento perfektní blogovací systém mùžete zdarma používat také.\nNavštivte <http://s9y.org>, kde se dozvíte vše potøebné.");
+@define('SIGNATURE',		"\n-- \n%s je vytvoøen pomocí Serendipity.\n Tento perfektní blogovací systém mùžete zdarma používat také.\nNavštivte <https://s9y.org>, kde se dozvíte vše potøebné.");
 @define('SYNDICATION_PLUGIN_091',		'Kanál RSS 0.91');
 @define('SYNDICATION_PLUGIN_10',		'Kanál RSS 1.0');
 @define('SYNDICATION_PLUGIN_20',		'Kanál RSS 2.0');
@@ -526,7 +526,7 @@ $i18n_filename_to = array (
 @define('ENTER_MEDIA_UPLOAD',		'Vyberte soubor pro nahrání:');
 @define('SAVE_FILE_AS',		'Uložit soubor jako:');
 @define('STORE_IN_DIRECTORY',		'Uložit do následujího adresáøe: ');
-@define('ADD_MEDIA_BLAHBLAH',		'<b>Pøidat soubor do schránky médií:</b><p>Zde mùžete ukládat mediální soubory, nebo urèit, kde je získat z WEBu! Pokud nemáte odpovídající obrázek, <a href="http://images.google.com" target="_blank">hledejte na Google</a> odpovìï na vaši potøebu, obvykle se zadaøí :).<p><b>Vyberte metodu:</b><br>');
+@define('ADD_MEDIA_BLAHBLAH',		'<b>Pøidat soubor do schránky médií:</b><p>Zde mùžete ukládat mediální soubory, nebo urèit, kde je získat z WEBu! Pokud nemáte odpovídající obrázek, <a href="https://images.google.com/" target="_blank">hledejte na Google</a> odpovìï na vaši potøebu, obvykle se zadaøí :).<p><b>Vyberte metodu:</b><br>');
 @define('MEDIA_RENAME',		'Pøejmenovat soubor');
 @define('IMAGE_RESIZE',		'Zmìnit rozmìr obrázku');
 @define('MEDIA_DELETE',		'Vymazat soubor');
@@ -611,7 +611,7 @@ $i18n_filename_to = array (
 @define('INSTALL_SHOWFUTURE',		'Zobrazit budoucí záznamy');
 @define('INSTALL_SHOWFUTURE_DESC',		'Tato volba umožní zobrazení budoucích záznamù blogu. Defaultnì jsou skryté a budou zobrazeny až v èase jejich vydání.');
 @define('INSTALL_DBPERSISTENT',		'Použít trvalé pøipojení');
-@define('INSTALL_DBPERSISTENT_DESC',		'Umožnit trvalé pøipojení k databázi, více <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">zde</a>. Bìžnì to není doporuèeno');
+@define('INSTALL_DBPERSISTENT_DESC',		'Umožnit trvalé pøipojení k databázi, více <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">zde</a>. Bìžnì to není doporuèeno');
 @define('NO_IMAGES_FOUND',		'Žádné obrázky');
 @define('PERSONAL_SETTINGS',		'Osobní nastavení');
 @define('REFERER',		'Odbìratel');
@@ -816,7 +816,7 @@ $i18n_filename_to = array (
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS',		'adminProhlíženíObrázkùOstatní: Prohlížení medií ostatních uživatelù');
 @define('CHARSET_NATIVE',		'Národní');
 @define('INSTALL_CHARSET',		'Volba znakové sady - Charset');
-@define('INSTALL_CHARSET_DESC',		'Zde mùžete volit mezi UTF-8 nebo národní (ISO, EUC, ...) znakovou sadou. Nìkteré jazyky mají jen pøeklady UTF-8, takže nastavení znakové sady na národní nemá žádný úèinek. UTF-8 se doporuèuje pro nové instalace. Nemìòte toto nastavení, jestliže jste již  napsali pøíspìvky se speciálními (národními) znaky - mohlo by zpùsobit porušení textu. Pøeètìte si o tomto problému více na  http://www.s9y.org/index.php?node=46 .');
+@define('INSTALL_CHARSET_DESC',		'Zde mùžete volit mezi UTF-8 nebo národní (ISO, EUC, ...) znakovou sadou. Nìkteré jazyky mají jen pøeklady UTF-8, takže nastavení znakové sady na národní nemá žádný úèinek. UTF-8 se doporuèuje pro nové instalace. Nemìòte toto nastavení, jestliže jste již  napsali pøíspìvky se speciálními (národními) znaky - mohlo by zpùsobit porušení textu. Pøeètìte si o tomto problému více na  https://www.s9y.org/index.php?node=46 .');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS',		'Povolit Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC',		'Jestliže je toto povoleno, mohou se pluginy napojovat na kalendáø a zvýrazòovat své vlastní události. Povolte jen když máte pluginy, které toto potøebují, jinak to jen snižuje výkon.');
 @define('XMLRPC_NO_LONGER_BUNDLED',		'XML-RPC API Interface na Serendipity již není pøibaleno  kvùli pokraèujícím bezpeènostním problémùm s tímhle API a protože ho moc lidí nepoužívá. Proto musíte nainstalovat plugin XML-RPC, když chcete  XML-RPC API používat. URL, které se použije ve vaší aplikaci, se nezmìní - hned po instalaci pluginu budete moci API používat.');

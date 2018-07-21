@@ -213,7 +213,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Novo comentário no artigo subscrito "%s"');
 @define('SUBSCRIPTION_MAIL', "Olá %s,\n\nUm novo comentário foi acrescentado a um artigo que você está seguindo em \"%s\", intitulado \"%s\"\nO comentário foi enviado por: %s\n\nO artigo a que nos referimos pode ser encontrado em: %s\n\nPode cancelar sua subscrição clicando esta ligação: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Olá %s,\n\nUm novo trackback foi adicionado num artigo que você está seguindo em \"%s\", intitulado \"%s\"\nO comentário foi enviado por: %s\n\nO artigo a que nos referimos pode ser encontrada em: %s\n\nPode cancelar a sua subscrição clicando nesta ligação: %s\n");
-@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blogue que existe, e você também pode usá-lo.\nConsulte <http://s9y.org> para descobrir como.");
+@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blogue que existe, e você também pode usá-lo.\nConsulte <https://s9y.org> para descobrir como.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -526,7 +526,7 @@
 @define('CATEGORY_DELETED_ARTICLES_MOVED', 'Categoria #%s excluída. Os artigos antigos foram movidos para a categoria #%s');
 @define('INSTALL_TOP_AS_LINKS', 'Exibir maiores saídas/referências como links?');
 @define('INSTALL_TOP_AS_LINKS_DESC', '"não": Saídas e Referências são exibidas como puro texto para prevenir spam do google. "sim": Saídas e Refrências são exibidas como links. "padrão": Usa o valor definido na configuração global (recomendado).');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Adicionar um ficheiro para o seu repositório de multimédia:</b><p>Aqui você pode transferir ficheiros de multimédia, ou oriente-me para obtê-lo noutro sítio da web! Se não possuir uma imagem apropriada, <a href="http://images.google.com" target="_blank">procure no google</a> alguma imagem que tenha relação com o assunto, os resultados são geralmente úteis e divertidos :)</p><p><b>Selecione o método:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Adicionar um ficheiro para o seu repositório de multimédia:</b><p>Aqui você pode transferir ficheiros de multimédia, ou oriente-me para obtê-lo noutro sítio da web! Se não possuir uma imagem apropriada, <a href="https://images.google.com/" target="_blank">procure no google</a> alguma imagem que tenha relação com o assunto, os resultados são geralmente úteis e divertidos :)</p><p><b>Selecione o método:</b></p><br/>');
 @define('COMMENTS_FILTER_SHOW', 'Mostrar');
 @define('COMMENTS_FILTER_ALL', 'Todos');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Só aprovados'); // Verify
@@ -587,7 +587,7 @@
 @define('INSTALL_SHOWFUTURE', 'Mostre entradas futuras'); // Verify
 @define('INSTALL_SHOWFUTURE_DESC', 'Se escolhido, isto mostrará todas as entradas futuras do seu blogue. Por omissão escondemos tais entradas e só são mostradas quando a data de publicação chega.');
 @define('INSTALL_DBPERSISTENT', 'Usar conexões persistentes');
-@define('INSTALL_DBPERSISTENT_DESC', 'Permitir a utilização de conexões permanentes à base de dados, ver leitura adicional em <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">aqui</a>. Isto normalmente não é recomendado.');
+@define('INSTALL_DBPERSISTENT_DESC', 'Permitir a utilização de conexões permanentes à base de dados, ver leitura adicional em <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">aqui</a>. Isto normalmente não é recomendado.');
 @define('NO_IMAGES_FOUND', 'Nenhuma das imagens foi encontrada');
 @define('PERSONAL_SETTINGS', 'Preferências pessoais');
 @define('REFERER', 'Referenciador');
@@ -793,7 +793,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Ver ficheiros de multimédia de outros utilizadores');
 @define('CHARSET_NATIVE', 'Nativo');
 @define('INSTALL_CHARSET', 'Escolha de codificação de caracteres');
-@define('INSTALL_CHARSET_DESC', 'Aqui pode optar entre codificações de caracteres UTF-8 ou nativas (ISO, EUC, ...). Algumas línguas só têm traduções UTF-8 de forma que mudar a codificação para "Nativo" não produzirá qualquer efeito. Sugere-se UTF-8 em instalações novas. Não altere esta definição se já criou entradas com caracteres especiais - isso pode causar corrupção de caracteres. Certifique-se que lê mais sobre este assunto em http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Aqui pode optar entre codificações de caracteres UTF-8 ou nativas (ISO, EUC, ...). Algumas línguas só têm traduções UTF-8 de forma que mudar a codificação para "Nativo" não produzirá qualquer efeito. Sugere-se UTF-8 em instalações novas. Não altere esta definição se já criou entradas com caracteres especiais - isso pode causar corrupção de caracteres. Certifique-se que lê mais sobre este assunto em https://www.s9y.org/index.php?node=46.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Accionar conexão ao Plugin API');
 @define('CALENDAR_EXTEVENT_DESC', 'Se accionado, os plugins podem conectar ao calendário para mostrar os seus eventos destacados. Só accione se instalou plugins que precisam disto, caso contrário o único efeito é diminuir a performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'A Interface da API de XML-RPC para Serendipity já não é incluída devido a questões de segurança correntes com esta API e ao facto de ser pouco usada. Assim precisa de instalar o Plugin de XML-RPC para usar a API de XML-RPC. A URL a usar nas suas aplicações NÃO mudará - assim que instalar o plugin, poderá de novo usar a API.');

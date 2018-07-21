@@ -207,7 +207,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Benachrichtigung zu neuem Kommentar des Eintrags "%s"');
 @define('SUBSCRIPTION_MAIL', "Hallo %s,\n\nEin neuer Kommentar wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hallo %s,\n\nEin neues Trackback wurde dem Eintrag hinzugefügt, den Sie auf \"%s\" namens \"%s\" finden.\nDer Name des Autors ist: %s\n\nSie können den Eintrag hier finden: %s\n\nSie können diese Benachrichtung mit folgender URL kündigen: %s\n");
-@define('SIGNATURE', "\n-- \n%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf <http://s9y.org>.");
+@define('SIGNATURE', "\n-- \n%s wird betrieben mit Serendipity.\nDas allerbeste Blog, Sie können es auch nutzen.\nWie das geht, sehen Sie auf <https://s9y.org>.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', 'Zukünftige Einträge zeigen');
 @define('INSTALL_SHOWFUTURE_DESC', 'Falls aktiviert, werden auch die Einträge angezeigt, deren Datum in der Zukunft liegt. Standardmäßig werden solche Einträge versteckt und erscheinen erst, wenn der entsprechende Zeitpunkt erreicht wird.');
 @define('INSTALL_DBPERSISTENT', 'Persistente Verbindungen nutzen');
-@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
+@define('INSTALL_DBPERSISTENT_DESC', 'Aktiviert die Nutzung einer persistenten Datenbankverbindung. Mehr dazu in der <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">PHP-Dokumentation</a>. Üblicherweise wird diese Einstellung nicht empfohlen.');
 @define('NO_IMAGES_FOUND', 'Keine Mediendaten gefunden');
 @define('PERSONAL_SETTINGS', 'Eigene Einstellungen');
 @define('REFERER', 'Referrer');
@@ -785,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Mediendaten anderer Benutzer ansehen');
 @define('CHARSET_NATIVE', 'Nationaler Zeichensatz');
 @define('INSTALL_CHARSET', 'Zeichensatz-Auswahl');
-@define('INSTALL_CHARSET_DESC', 'Hier können Sie zwischen UTF-8 oder dem nationalen Zeichensatz ("Native" - ISO, EUC, ...) wählen. Einige Sprachen sind sowieso nur in UTF-8 Zeichensätzen verfügbar, so dass die Option "Nationaler Zeichensatz" dort keine Auswirkungen hat. UTF-8 wird als Zeichensatz für Neuinstallation empfohlen. Ändern Sie diese Einstellung nicht, wenn Sie bereits Einträge erstellt haben - dies kann zu defekten Zeichen führen. Weitere Informationen finden Sie unter http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Hier können Sie zwischen UTF-8 oder dem nationalen Zeichensatz ("Native" - ISO, EUC, ...) wählen. Einige Sprachen sind sowieso nur in UTF-8 Zeichensätzen verfügbar, so dass die Option "Nationaler Zeichensatz" dort keine Auswirkungen hat. UTF-8 wird als Zeichensatz für Neuinstallation empfohlen. Ändern Sie diese Einstellung nicht, wenn Sie bereits Einträge erstellt haben - dies kann zu defekten Zeichen führen. Weitere Informationen finden Sie unter https://www.s9y.org/index.php?node=46.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Plugin-Schnittstelle aktivieren');
 @define('CALENDAR_EXTEVENT_DESC', 'Falls aktiviert, so können andere Plugins in die Darstellung des Kalenders eingreifen. Aktivieren Sie diese Option nur, wenn Sie ein solches Plugin installiert haben, andernfalls haben Sie nur unnötige Performance-Einschränkungen.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Das XML-RPC Interface zu Serendipity wird nicht länger standardmäßig aktiviert, da häufige Sicherheitsprobleme mit der dafür verwendeten Bibliothek auftraten und da es nur von wenigen Personen benutzt wurde. Daher müssen Sie das XML-RPC Plugin installieren, um die XML-RPC API weiterhin zu nutzen. Die URL in Ihren Anwendungen wird sich dadurch nicht ändern. Sobald das genannte Plugin installiert ist, kann die XML-RPC API wieder vollständig genutzt werden.');

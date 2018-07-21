@@ -497,7 +497,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Yüklemek istediğiniz dosyayı seçin:');
 @define('SAVE_FILE_AS', 'Bu dosyayı farklı kaydet:');
 @define('STORE_IN_DIRECTORY', 'Şu dizinin içine kaydedildi: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Medya deponuza bir dosya ekleyin:</b><p>Burada medya dosyalarınızı yükleyebilir, ya da webde herhangibir konumdan aktarabilirsiniz! İhtiyacınıza uygun resimlere sahip değilseniz, <a href="http://images.google.com" target="_blank">Google</a>da resim arayabilirsiniz, genelde sonuçlar eğlenceli ve kullanılabilirdir. :) Ama iyice emin olmalısınız, çoğu resim kopya korumalıdır,kullanmak için izin istemelisiniz.</p><p><b>Yöntem seçin:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Medya deponuza bir dosya ekleyin:</b><p>Burada medya dosyalarınızı yükleyebilir, ya da webde herhangibir konumdan aktarabilirsiniz! İhtiyacınıza uygun resimlere sahip değilseniz, <a href="https://images.google.com/" target="_blank">Google</a>da resim arayabilirsiniz, genelde sonuçlar eğlenceli ve kullanılabilirdir. :) Ama iyice emin olmalısınız, çoğu resim kopya korumalıdır,kullanmak için izin istemelisiniz.</p><p><b>Yöntem seçin:</b></p><br/>');
 @define('MEDIA_RENAME', 'Dosyayı yeniden adlandır');
 @define('IMAGE_RESIZE', 'Resmi yeniden boyutlandır');
 @define('MEDIA_DELETE', 'Dosyayı sil');
@@ -582,7 +582,7 @@
 @define('INSTALL_SHOWFUTURE', 'Sonraki kayıtları göster');
 @define('INSTALL_SHOWFUTURE_DESC', 'Eğer bu seçenek açıksa, sitenizdeki tüm kayıtlı yazılar bir anda gösterilecek. Öntanımlı olarak kapalı, yazılarınız tarih sırasına göre gösterimde.');
 @define('INSTALL_DBPERSISTENT', 'Kalıcı bağlantı kullan');
-@define('INSTALL_DBPERSISTENT_DESC', 'Kalıcı veritabanı bağlantısı kullanımını açar, daha fazla bilgi için <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">buraya</a> başvurun. Normalde önerilmeyen bir seçenektir');
+@define('INSTALL_DBPERSISTENT_DESC', 'Kalıcı veritabanı bağlantısı kullanımını açar, daha fazla bilgi için <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">buraya</a> başvurun. Normalde önerilmeyen bir seçenektir');
 @define('NO_IMAGES_FOUND', 'Hiç bir resim bulunamadı');
 @define('PERSONAL_SETTINGS', 'Kişisel Ayarlar');
 @define('REFERER', 'Ziyaretçi Gönderen');
@@ -787,7 +787,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'DiğerKullanıcılarınMedyalarınınYönetimi: Diğer Kullanıcıların medya dosyalarını izleyebil');
 @define('CHARSET_NATIVE', 'Doğal');
 @define('INSTALL_CHARSET', 'Karakter Seçimi');
-@define('INSTALL_CHARSET_DESC', 'Burada UTF-8 ya da doğal (ISO, EUC, ...) karakter seti seçimi yapabilirsiniz. Bazı diller sadece UTF-8 olarak çevrildiklerinden  "Doğal" karakterseti seçimi hiç bir etki yapmayabilir. UTF-8 yeni kurulumlar için önerilir".Bu seçeneğe eğer özel karakterleri çok kullanıyorsanız hiç dokunmayın.Daha fazla bilgi için http://www.s9y.org/index.php?node=46 bu adrese başvurun.');
+@define('INSTALL_CHARSET_DESC', 'Burada UTF-8 ya da doğal (ISO, EUC, ...) karakter seti seçimi yapabilirsiniz. Bazı diller sadece UTF-8 olarak çevrildiklerinden  "Doğal" karakterseti seçimi hiç bir etki yapmayabilir. UTF-8 yeni kurulumlar için önerilir".Bu seçeneğe eğer özel karakterleri çok kullanıyorsanız hiç dokunmayın.Daha fazla bilgi için https://www.s9y.org/index.php?node=46 bu adrese başvurun.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Eklenti APIsi açık olsun');
 @define('CALENDAR_EXTEVENT_DESC', 'Bu seçenek açık olursa eklentiler ajanda içinde mevcut kendi olayları işaretlenmiş şekilde gösterilebilecek. Sadece buna ihtiyaç duyan bir eklenti kurduysanız açık olmalı, diğer durumda sadece performansı düşürür.');
 @define('XMLRPC_NO_LONGER_BUNDLED', ' XML-RPC API Arayüzü  Serendipity ile beraber verilmedi. Çünkü bu API güvenlik sorunları süren bir durumda ve çok fazla insan kullanmıyor. Bu nedenle sadece ihtiyacınız varsa  XML-RPC Eklentisini kurarak XML-RPC API sini kullanabilirsiniz.Uygulamanızda kullanılan URL adresi değişmeyecektir- eklentiyi kurarsanız bu API yi kullanabilirsiniz.');
