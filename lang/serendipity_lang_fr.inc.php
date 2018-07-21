@@ -213,7 +213,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nouveau commentaire posté à votre souscription du billet "%s"');
 @define('SUBSCRIPTION_MAIL', "Bonjour %s,\n\nUn nouveau commentaire a été posté au billet que vous surveillez \"%s\", intitulé \"%s\"\nLe pseudo de l\'auteur est : %s\n\nVous pouvez trouver le billet ici : %s\n\nVous pouvez vous désinscrire en cliquant sur ce lien : %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Bonjour %s,\n\nUn nouveau rétrolien a été ajouté au billet que vous surveillez \"%s\", intitulé \"%s\"\nLe pseudo de l\'auteur est : %s\n\nVous pouvez trouver le billet ici : %s\n\nVous pouvez vous désinscrire en cliquant sur ce lien : %s\n");
-@define('SIGNATURE', "\n-- \n%s est propulsé par Serendipity.\nLe blog des blogs que vous aussi pouvez utiliser !\nAllez sur <http://s9y.org>, le site officiel.");
+@define('SIGNATURE', "\n-- \n%s est propulsé par Serendipity.\nLe blog des blogs que vous aussi pouvez utiliser !\nAllez sur <https://s9y.org>, le site officiel.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0');
@@ -521,7 +521,7 @@
 @define('COMMENTS_VIEWMODE_LINEAR', 'Vue non groupée');
 @define('DISPLAY_COMMENTS_AS', 'Afficher les commentaires en');
 @define('PAGE_BROWSE_ENTRIES', 'Page %s de %s sur %s billets au total');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Ajouter un fichier à votre médiathèquei :</b><p>Vous permet d\'uploader des fichiers, ou de me dire une adresse internet de laquelle je peux les télécharger. Si vous n\'avez pas d\'image appropriée, vous pouvez faire une <a href="http://images.google.com" target="_blank">recherche d\'images avec Google</a>, les résultats sont souvent intéressants et toujours très comiques :)</p><p><b>Choisissez une méthode :</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Ajouter un fichier à votre médiathèquei :</b><p>Vous permet d\'uploader des fichiers, ou de me dire une adresse internet de laquelle je peux les télécharger. Si vous n\'avez pas d\'image appropriée, vous pouvez faire une <a href="https://images.google.com/" target="_blank">recherche d\'images avec Google</a>, les résultats sont souvent intéressants et toujours très comiques :)</p><p><b>Choisissez une méthode :</b></p><br/>');
 @define('COMMENTS_FILTER_SHOW', 'Afficher');
 @define('COMMENTS_FILTER_ALL', 'Tous');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Approuvés');
@@ -582,7 +582,7 @@
 @define('INSTALL_SHOWFUTURE', 'Afficher les billets futurs');
 @define('INSTALL_SHOWFUTURE_DESC', 'Si cette option est activée, les billets à paraître seront affichés dans votre blog. Par défaut, ces billets ne seront affichés qu\'à la date de publication définie.');
 @define('INSTALL_DBPERSISTENT', 'Utiliser les connexions permanentes');
-@define('INSTALL_DBPERSISTENT_DESC', 'Active l\'utilisation de connexions permanentes à la base de données. Pour plus d\'informations, consultez le <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">manuel de PHP</a>. Non recommandé en règle générale.');
+@define('INSTALL_DBPERSISTENT_DESC', 'Active l\'utilisation de connexions permanentes à la base de données. Pour plus d\'informations, consultez le <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">manuel de PHP</a>. Non recommandé en règle générale.');
 @define('NO_IMAGES_FOUND', 'Pas d\'images trouvées');
 @define('PERSONAL_SETTINGS', 'Réglages personnels');
 @define('REFERER', 'Page référante');
@@ -789,7 +789,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers : Affichage de documents d\'autres utilisateurs');
 @define('CHARSET_NATIVE', 'Natif');
 @define('INSTALL_CHARSET', 'Sélection de la table de caractères');
-@define('INSTALL_CHARSET_DESC', 'Vous permet de définir la table de caractères à utiliser : UTF-8 ou Natif (ISO, EUC, ...). Quelques langues ne sont disponibles qu\'en UTF-8, dans ce cas cette option n\'aura pas d\'effet. UTF-8 est recommandé pour de nouvelles installations. Attention : ne changez pas cette option si vous avez déjà crée des billets avec des caractères spéciaux - cela pourrait entraîner un affichage corrompu de ces caractères. Vous trouverez plus d\'informations à ce sujet à l\'adresse suivamte : http://www.s9y.org/index.php?node=46 (en anglais)');
+@define('INSTALL_CHARSET_DESC', 'Vous permet de définir la table de caractères à utiliser : UTF-8 ou Natif (ISO, EUC, ...). Quelques langues ne sont disponibles qu\'en UTF-8, dans ce cas cette option n\'aura pas d\'effet. UTF-8 est recommandé pour de nouvelles installations. Attention : ne changez pas cette option si vous avez déjà crée des billets avec des caractères spéciaux - cela pourrait entraîner un affichage corrompu de ces caractères. Vous trouverez plus d\'informations à ce sujet à l\'adresse suivamte : https://www.s9y.org/index.php?node=46 (en anglais)');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Activer l\'interface de programmation');
 @define('CALENDAR_EXTEVENT_DESC', 'Si activée, cette option permet aux plugins d\'accéder au calendrier pour y afficher leurs propres évènements. Ne l\'activez que si vous avez des plugins utilisant cette fonctionnalité, autrement cela ne ferait que diminuer la performance de votre blog.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'L\'interface de programmation XML-RPC de Serendipity n\'est plus incluse automatiquement à cause de failles de sécurité dans celle-ci et parce que très peu de personnes l\'utilisent. Pour l\'activer, vous devez installer le plugin XML-RPC. L\'adresse que vous utilisez dans vos applications NE CHANGERA PAS - dès que vous aurez installé le plugin, vous pourrez à nouveau accéder à l\'interface.');

@@ -222,7 +222,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -494,7 +494,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Select a file you wish to upload:');
 @define('SAVE_FILE_AS', 'Save the file as:');
 @define('STORE_IN_DIRECTORY', 'Store inside the following directory: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Add a file to your media repository:</b><p>Here you can upload media files, or tell me to fetch them from somewhere in the web! If you do not have an appropriate image, <a href="http://images.google.com" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :) But be careful, most images are copyrighted, so you should ask before using them.</p><p><b>Select method:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Add a file to your media repository:</b><p>Here you can upload media files, or tell me to fetch them from somewhere in the web! If you do not have an appropriate image, <a href="https://images.google.com/" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :) But be careful, most images are copyrighted, so you should ask before using them.</p><p><b>Select method:</b></p><br/>');
 @define('MEDIA_RENAME', 'Rename this file');
 @define('IMAGE_RESIZE', 'Resize this image');
 @define('MEDIA_DELETE', 'Delete this file');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', 'Show future entries');
 @define('INSTALL_SHOWFUTURE_DESC', 'If enabled, this will show all entries in the future on your blog. Default is to hide those entries and only show them if the publish date has arrived.');
 @define('INSTALL_DBPERSISTENT', 'Use persistent connections');
-@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
+@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
 @define('NO_IMAGES_FOUND', 'No images found');
 @define('PERSONAL_SETTINGS', 'Personal Settings');
 @define('REFERER', 'Referer');
@@ -786,7 +786,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', 'Native');
 @define('INSTALL_CHARSET', 'Charset selection');
-@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on http://www.s9y.org/index.php?node=46 about this issue.');
+@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on https://www.s9y.org/index.php?node=46 about this issue.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
