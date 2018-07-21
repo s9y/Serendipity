@@ -787,7 +787,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'DiğerKullanıcılarınMedyalarınınYönetimi: Diğer Kullanıcıların medya dosyalarını izleyebil');
 @define('CHARSET_NATIVE', 'Doğal');
 @define('INSTALL_CHARSET', 'Karakter Seçimi');
-@define('INSTALL_CHARSET_DESC', 'Burada UTF-8 ya da doğal (ISO, EUC, ...) karakter seti seçimi yapabilirsiniz. Bazı diller sadece UTF-8 olarak çevrildiklerinden  "Doğal" karakterseti seçimi hiç bir etki yapmayabilir. UTF-8 yeni kurulumlar için önerilir".Bu seçeneğe eğer özel karakterleri çok kullanıyorsanız hiç dokunmayın.Daha fazla bilgi için https://www.s9y.org/index.php?node=46 bu adrese başvurun.');
+@define('INSTALL_CHARSET_DESC', 'Burada UTF-8 ya da doğal (ISO, EUC, ...) karakter seti seçimi yapabilirsiniz. Bazı diller sadece UTF-8 olarak çevrildiklerinden  "Doğal" karakterseti seçimi hiç bir etki yapmayabilir. UTF-8 yeni kurulumlar için önerilir".Bu seçeneğe eğer özel karakterleri çok kullanıyorsanız hiç dokunmayın.Daha fazla bilgi için https://docs.s9y.org/docs/developers/internationalization.html bu adrese başvurun.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Eklenti APIsi açık olsun');
 @define('CALENDAR_EXTEVENT_DESC', 'Bu seçenek açık olursa eklentiler ajanda içinde mevcut kendi olayları işaretlenmiş şekilde gösterilebilecek. Sadece buna ihtiyaç duyan bir eklenti kurduysanız açık olmalı, diğer durumda sadece performansı düşürür.');
 @define('XMLRPC_NO_LONGER_BUNDLED', ' XML-RPC API Arayüzü  Serendipity ile beraber verilmedi. Çünkü bu API güvenlik sorunları süren bir durumda ve çok fazla insan kullanmıyor. Bu nedenle sadece ihtiyacınız varsa  XML-RPC Eklentisini kurarak XML-RPC API sini kullanabilirsiniz.Uygulamanızda kullanılan URL adresi değişmeyecektir- eklentiyi kurarsanız bu API yi kullanabilirsiniz.');

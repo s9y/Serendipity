@@ -782,7 +782,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'ylläpitoKuvatKatsoToisten: Katsoo toisten kuvatiedostoja');
 @define('CHARSET_NATIVE', 'Kansallinen');
 @define('INSTALL_CHARSET', 'Merkistövalinta');
-@define('INSTALL_CHARSET_DESC', 'Voit valita UTF-8 tai kansallisen merkistön (ISO, EUC, ...). Joillekin kielille on olemassa vain UTF-8 käännös, jolloin "Kansallinen" valinta ei ole käytössä. UTF-8 merkistöä suositellaan uusille asennuksille. Älä vaihda merkistöä, jos olet jo tehnyt logimerkintöjä erityiskirjaimilla, vaihtaminen saattaa hajoittaa merkinnät. Lisätietoja https://www.s9y.org/index.php?node=46 aiheesta.');
+@define('INSTALL_CHARSET_DESC', 'Voit valita UTF-8 tai kansallisen merkistön (ISO, EUC, ...). Joillekin kielille on olemassa vain UTF-8 käännös, jolloin "Kansallinen" valinta ei ole käytössä. UTF-8 merkistöä suositellaan uusille asennuksille. Älä vaihda merkistöä, jos olet jo tehnyt logimerkintöjä erityiskirjaimilla, vaihtaminen saattaa hajoittaa merkinnät. Lisätietoja https://docs.s9y.org/docs/developers/internationalization.html aiheesta.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Ota käyttöön laajennoksen laajennos-API');
 @define('CALENDAR_EXTEVENT_DESC', 'Jos käytössä, voivat muut laajennokset korostaa omia merkintöjään kalenterissa. Ota käyttöön vain, jos olet asentanut laajennoksia, jotka tarvitsevat tätä, muutoin blogisi hidastuu tarpeettomasti.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Serendipityn XML-RPC API liittymä ei ole käytössä tietoturvaongelmien ja pienen käyttäjäkunnan takia. Joten käyttääksesi XML-RPC liittymää tarvitset XML-RPC-laajennoksen. URL, jota sovelluksesi käyttävät ei ole muuttunut. Saat liittymän takaisin käyttöösi, kun asennat laajennoksen.');
