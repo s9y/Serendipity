@@ -786,7 +786,7 @@ $i18n_unknown = 'tw';
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: 瀏覽會員的媒體檔案');
 @define('CHARSET_NATIVE', '預設');
 @define('INSTALL_CHARSET', '語系選項');
-@define('INSTALL_CHARSET_DESC', '這裡可以讓您轉換 UTF-8 或預設語系 (ISO, EUC, ...)。有些語言只有 UTF-8 語系檔，所以換成預設語系不會改變任何東西。新安裝的網誌建議使用 UTF-8 語系。記得不要改變這個設定如果您已經發佈了文章。詳情請看 https://www.s9y.org/index.php?node=46。');
+@define('INSTALL_CHARSET_DESC', '這裡可以讓您轉換 UTF-8 或預設語系 (ISO, EUC, ...)。有些語言只有 UTF-8 語系檔，所以換成預設語系不會改變任何東西。新安裝的網誌建議使用 UTF-8 語系。記得不要改變這個設定如果您已經發佈了文章。詳情請看 https://docs.s9y.org/docs/developers/internationalization.html。');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', '開啟外掛 API');
 @define('CALENDAR_EXTEVENT_DESC', '如果開啟，外掛可以在日曆內以顏色突顯它的事件。如果沒有使用這些特殊的外掛，建議不要使用。');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'XML-RPC API 功能已不加在 s9y 的安裝裡，因為漏洞和不多人使用的關係。所以您必須安裝 XML-RPC 的外掛如果要使用 XML-RPC API。所有的 URL 不會因此改變，安裝這個外掛後可以馬上使用。');

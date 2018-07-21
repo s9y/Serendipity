@@ -787,7 +787,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', '浏览会员的媒体文件');
 @define('CHARSET_NATIVE', '预设');
 @define('INSTALL_CHARSET', '语言选项');
-@define('INSTALL_CHARSET_DESC', '这里可以让你转换 UTF-8 或预设编码 (ISO, GB2312, ...)有些语言包只有 UTF-8 编码，所以换成预设语言有不会任何改变。新安装的日志建议使用 UTF-8 编码。记得不要改变这个设定如果你已经发布了文章。详情参阅 https://www.s9y.org/index.php?node=46');
+@define('INSTALL_CHARSET_DESC', '这里可以让你转换 UTF-8 或预设编码 (ISO, GB2312, ...)有些语言包只有 UTF-8 编码，所以换成预设语言有不会任何改变。新安装的日志建议使用 UTF-8 编码。记得不要改变这个设定如果你已经发布了文章。详情参阅 https://docs.s9y.org/docs/developers/internationalization.html');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', '开启外掛 API');
 @define('CALENDAR_EXTEVENT_DESC', '如果开启，外挂可以在日历内以颜色显示它的事件。如果没有使用这些特殊的外挂，建议不要使用。');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'XML-RPC API 功能不会添加在 s9y 的安装里，因为漏洞和不多人使用的关系。所以必须安装 XML-RPC 的外挂如果使用 XML-RPC API。所有的 URL 不会因此改变，安装这个外挂后马上使用。');

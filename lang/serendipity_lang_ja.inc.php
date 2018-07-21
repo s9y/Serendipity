@@ -785,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: 他ユーザーのメディア ファイルの閲覧');
 @define('CHARSET_NATIVE', 'ネイティブ');
 @define('INSTALL_CHARSET', '文字コード選択');
-@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリーを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては https://www.s9y.org/index.php?node=46 をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
+@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリーを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては https://docs.s9y.org/docs/developers/internationalization.html をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'プラグインの API フックを有効にする');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 's9y への XML-RPC API インタフェースは、もはやそれを使用して、この API を含めた進行中のセキュリティ問題および多くでない人々のためにバンドルされません。Serendipity の XML-RPC API インターフェースは、ずっと継続するセキュリティの問題と、この API を多くの人が使用していないため、もはやバンドルされていません。したがって、XML-RPC API を使用するために XML-RPC プラグインをインストールする必要があります。アプリケーション中で使用する URL は変わりません。プラグインをインストールしたらすぐに、再び API を使用することができるでしょう。');

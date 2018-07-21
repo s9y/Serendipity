@@ -783,7 +783,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'Más felhasználók média fájljainak megtekintése');
 @define('CHARSET_NATIVE', 'Natív (beépített)');
 @define('INSTALL_CHARSET', 'Karakterkódolás választása');
-@define('INSTALL_CHARSET_DESC', 'Itt beállíthatod az UTF-8, vagy a natív (ISO, EUC, ...) karakterkódolást. Néhány nyelvnek csak UTF-8 leképezése létezik, így itt a natívot nem érdemes választani. Az UTF-8 ajánlott új telepítéskor. Ne változtasd meg ezt akkor, ha már vannak bejegyzéseid speciális karakterekkel - mert így hibás karakterek jelenhetnek meg. Itt olvashatsz errõl többet: https://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Itt beállíthatod az UTF-8, vagy a natív (ISO, EUC, ...) karakterkódolást. Néhány nyelvnek csak UTF-8 leképezése létezik, így itt a natívot nem érdemes választani. Az UTF-8 ajánlott új telepítéskor. Ne változtasd meg ezt akkor, ha már vannak bejegyzéseid speciális karakterekkel - mert így hibás karakterek jelenhetnek meg. Itt olvashatsz errõl többet: https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Modul API hook (kampó) engedélyezése');
 @define('CALENDAR_EXTEVENT_DESC', 'Ha ezt engedélyezed, akkor a modulok megjeleníthetik a naptárban a saját eseményeiket. Akkor engedélyezd, ha van olyan modulod, amelyiknek szüksége van erre, különben csak rontja a teljesítményt.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'Az XML-RPC API Interfész a Serendipity-hez, többé nincs használatban, mivel vannak biztonsági problémái, és nem sokan használják. Így telepítened kell az XML-RPC modult ahhoz hogy használd az XML-RPC API-t. Az alkalmazásban használandó URL nem változik - telepítés után használható.');

@@ -803,7 +803,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Ver ficheros de medios de otros usuario');
 @define('CHARSET_NATIVE', 'Nativo');
 @define('INSTALL_CHARSET', 'Selección del juego de caracteres');
-@define('INSTALL_CHARSET_DESC', 'Aquí puedes activar la codificación de caracteres UTF-8 o nativo (ISO, EUC, ...). Algunos lenguajes sólo tienen traducciones UTF-8 así que colocar la codificación en "nativo" no tendrá efectos. Se sugiere UTF-8 en nuevas instalaciones. No alteres la configuración si ya has hecho entradas con caracteres especiales ya que podría conllevar una corrupción de caracteres. Asegúrate de leer más sobre este problema en  https://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Aquí puedes activar la codificación de caracteres UTF-8 o nativo (ISO, EUC, ...). Algunos lenguajes sólo tienen traducciones UTF-8 así que colocar la codificación en "nativo" no tendrá efectos. Se sugiere UTF-8 en nuevas instalaciones. No alteres la configuración si ya has hecho entradas con caracteres especiales ya que podría conllevar una corrupción de caracteres. Asegúrate de leer más sobre este problema en  https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Habilitar API de conexiones de las extensiones');
 @define('CALENDAR_EXTEVENT_DESC', 'Si está habilitada, esta opción permite que las extensiones se conecten con el calendario para mostrar sus eventos resaltados. Utilízalo sólo si has instalado extensiones que lo necesitan, de otra forma sólo disminuye el desempeño.');
 
