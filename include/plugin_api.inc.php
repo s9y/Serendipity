@@ -1118,9 +1118,7 @@ class serendipity_plugin_api
         }
 
         if (is_array($plugins)) {
-            // foreach() operates on copies of values, but we want to operate on references, so we use while()
-            @reset($plugins);
-            while(list($plugin, $plugin_data) = each($plugins)) {
+            foreach($plugins as $plugin => $plugin_data) {
                 $bag    = &$plugin_data['b'];
                 $phooks = &$bag->get('event_hooks');
                 if (isset($phooks[$event_name])) {
@@ -1136,7 +1134,7 @@ class serendipity_plugin_api
                     if ($serendipity['enablePluginACL'] && !serendipity_hasPluginPermissions($plugin)) {
                         continue;
                     }
-                    $plugin_data['p']->event_hook($event_name, $bag, $eventData, $addData);
+                    $plugins[$plugin]['p']->event_hook($event_name, $bag, $eventData, $addData);
                 }
             }
 
