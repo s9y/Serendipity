@@ -43,7 +43,7 @@ class Serendipity_Smarty_Security_Policy extends Smarty_Security
     // {include} calls, we should only apply this workaround to fetch() calls.
     // Redirecting fetch() as our custom function is too risky and has too high a performance
     // impact.
-    public function isTrustedResourceDir($path) {
+    public function isTrustedResourceDir($path, $isConfig = NULL) {
         return true;
     }
 
