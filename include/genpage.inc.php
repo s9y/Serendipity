@@ -24,7 +24,10 @@ if ((empty($uri_addData['uriargs']) || trim($uri_addData['uriargs']) == $serendi
 
 $serendipity['plugindata']['smartyvars'] = $uri_addData; // Plugins can change this global variable
 serendipity_plugin_api::hook_event('genpage', $uri, $uri_addData);
-serendipity_smarty_init($serendipity['plugindata']['smartyvars']);
+serendipity_smarty_init();
+if (count($serendipity['plugindata']['smartyvars']) > 0) {
+    $serendipity['smarty']->assign($serendipity['plugindata']['smartyvars']);
+}
 
 $leftSidebarElements  = serendipity_plugin_api::count_plugins('left');
 $rightSidebarElements = serendipity_plugin_api::count_plugins('right');
