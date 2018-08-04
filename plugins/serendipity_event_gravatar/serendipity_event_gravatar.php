@@ -8,7 +8,7 @@ if (IN_serendipity !== true) {
 @serendipity_plugin_api::load_language(dirname(__FILE__));
 
 // Actual version of this plugin
-@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.62.2'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
+@define('PLUGIN_EVENT_GRAVATAR_VERSION', '1.62.3'); // NOTE: This plugin is also in the central repository. Commit changes to the core, too :)
 
 // Defines the maximum available method  slots in the configuration.
 @define('PLUGIN_EVENT_GRAVATAR_METHOD_MAX', 6);
@@ -53,7 +53,7 @@ class serendipity_event_gravatar extends serendipity_event
         $propbag->add('legal',    array(
             'services' => array(
                 'gravatar' => array(
-                    'url'  => 'https://developers.google.com/recaptcha/',
+                    'url'  => 'https://gravatar.com',
                     'desc' => 'Transmits comment data to retrieve unique avatar for a user.'
                 ),
                 'favatar' => array(
