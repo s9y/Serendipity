@@ -842,6 +842,7 @@ class serendipity_event_spamblock extends serendipity_event
                 );
             }
             $output .= '</div>';
+            return $output;
         }
     }
 
