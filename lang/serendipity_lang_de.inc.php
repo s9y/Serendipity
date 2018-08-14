@@ -75,7 +75,7 @@
 @define('EXTENDED_BODY', 'Erweiterter Eintrag');
 @define('CATEGORY', 'Kategorie');
 @define('EDIT', 'Bearbeiten');
-@define('NO_ENTRIES_BLAHBLAH', 'Bei der Suche nach "%s" konnte kein Eintrag gefunden werden:' . "\n");
+@define('NO_ENTRIES_BLAHBLAH', 'Bei der Suche nach "%s" konnte kein Eintrag gefunden werden.' . "\n");
 @define('YOUR_SEARCH_RETURNED_BLAHBLAH', 'Die Suche nach "%s" ergab %s Treffer:');
 @define('IMAGE', 'Bild');
 @define('ERROR_FILE_NOT_EXISTS', ' Alte Datei existiert nicht!');
