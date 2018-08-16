@@ -1,4 +1,4 @@
-Version 2.1.3 ()
+Version 2.1.3 (August 16th, 2018)
 ------------------------------------------------------------------------
 
     * Security: Make sure that the admins configuration for RSS
@@ -25,7 +25,7 @@ Version 2.1.3 ()
 
     * Disabled subToMe service by default to prevent issues with GDPR
 
-Version 2.1.2 (March 25, 2018))
+Version 2.1.2 (March 25, 2018)
 ------------------------------------------------------------------------
 
     * Exclude defunct netmirror spartacus repository
