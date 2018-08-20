@@ -44,3 +44,4 @@
     <script src="{serendipity_getFile file="theme.js" frontend=true}"></script>
 </body>
 </html>
+{/if}
