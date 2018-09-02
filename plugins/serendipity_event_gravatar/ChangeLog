@@ -1,3 +1,7 @@
+Version 1.63:
+------------------------------------------------------------------------
+    * Sync core and Spartacus.
+
 Version 1.62.2:
 ------------------------------------------------------------------------
     * Add legal information to be used by serendipity_event_dsgvo_gpdr
@@ -5,9 +9,20 @@ Version 1.62.2:
 Version 1.62.1:
 ------------------------------------------------------------------------
     * Remove defunct mybloglog
+
+Version 1.61.1:
+------------------------------------------------------------------------
+    * Workaround PHP < 5.6 bug, not verifying certs, stopping Request2 
+
+Version 1.61:
+------------------------------------------------------------------------
     * Switch plugin to http_request2
 
+Version 1.60:
+------------------------------------------------------------------------
+    * Consistent plugin usage
 
+Version 1.59:
 ------------------------------------------------------------------------
     * Allows other plugins to fetch user metadata via
       avatar_fetch_userinfos hook.
