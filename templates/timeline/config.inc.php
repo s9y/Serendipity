@@ -78,7 +78,7 @@ function distanceOfTimeInWords($fromTime, $toTime = 0) {
 // call from tpl as {elapsed_time_words from_time=$comment.timestamp}
 $serendipity['smarty']->register_function('elapsed_time_words', 'timeAgoInWords');
 
-function timeAgoInWords($params, &$smarty) {
+function timeAgoInWords($params, $smarty) {
         return distanceOfTimeInWords($params['from_time'], time());
     }
 
