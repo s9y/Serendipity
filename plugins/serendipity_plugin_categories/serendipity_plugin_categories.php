@@ -15,7 +15,7 @@ class serendipity_plugin_categories extends serendipity_plugin
         $propbag->add('description', CATEGORY_PLUGIN_DESC);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.05');
+        $propbag->add('version',       '2.05.1');
         $propbag->add('configuration', array('title', 'authorid', 'parent_base', 'hide_parent', 'image', 'sort_order', 'sort_method', 'allow_select', 'hide_parallel', 'show_count', 'show_all', 'smarty'));
         $propbag->add('groups',        array('FRONTEND_VIEWS'));
     }
@@ -136,7 +136,7 @@ class serendipity_plugin_categories extends serendipity_plugin
             case 'show_all':
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        CATEGORY_PLUGIN_SHOWALL);
-                $propbag->add('description', CATEGORY_PLUGIN_SHOWALL_DESC);
+                $propbag->add('description', '');
                 $propbag->add('default',     false);
                 break;
 
