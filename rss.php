@@ -3,7 +3,6 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 header('Content-Type: text/xml; charset=utf-8');
-session_cache_limiter('public');
 
 @define('IN_RSS', true);
 include('serendipity_config.inc.php');
