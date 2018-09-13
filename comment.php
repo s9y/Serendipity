@@ -8,6 +8,7 @@ include('serendipity_config.inc.php');
 include S9Y_INCLUDE_PATH . 'include/functions_entries_admin.inc.php';
 
 header('Content-Type: text/html; charset=' . LANG_CHARSET);
+$raw_post_data = file_get_contents("php://input");
 
 if (isset($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']) && serendipity_checkFormToken()) {
     serendipity_deleteComment($serendipity['GET']['delete'], $serendipity['GET']['entry'], $serendipity['GET']['type']);
@@ -65,14 +66,14 @@ if ($pb_logging) {
 if (!($type = @$_REQUEST['type'])) {
     if ($pb_logging) {
         ob_start();
-        print_r($HTTP_RAW_POST_DATA);
+        print_r($raw_post_data);
         $tmp = ob_get_contents();
         ob_end_clean();
         log_pingback('NO TYPE HANDED!');
     }
     
     // WordPress pingbacks don't give any parameter. If it is a XML POST asume it's a pigback
-    if ($_SERVER['CONTENT_TYPE'] == 'text/xml' && isset($HTTP_RAW_POST_DATA)) {
+    if ($_SERVER['CONTENT_TYPE'] == 'text/xml' && isset($raw_post_data)) {
         $type = 'pingback'; 
     }
     else {
@@ -131,12 +132,12 @@ if ($type == 'trackback') {
         log_pingback('RECEIVED PINGBACK');
         # PHP 4.2.2 way of doing things
         ob_start();
-        print_r($HTTP_RAW_POST_DATA);
+        print_r($raw_post_data);
         $tmp = ob_get_contents();
         ob_end_clean();
         log_pingback('HTTP_RAW_POST_DATA: ' .$tmp);
     }
-    if (add_pingback($_REQUEST['entry_id'], $HTTP_RAW_POST_DATA)) {
+    if (add_pingback($_REQUEST['entry_id'], $raw_post_data)) {
         log_pingback('PINGBACK SUCCESS');;
         report_pingback_success();
     } else {

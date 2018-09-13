@@ -3,12 +3,13 @@
 # All rights reserved.  See LICENSE file for licensing details
 
 include('serendipity_config.inc.php');
+$raw_post_data = file_get_contents("php://input");
 
-if ($_REQUEST['cid'] != '' && $HTTP_RAW_POST_DATA != '') {
+if ($_REQUEST['cid'] != '' && $raw_post_data != '') {
     $comment = array();
 
-    if (!preg_match('@<author[^>]*>(.*)</author[^>]*>@i', $HTTP_RAW_POST_DATA, $name)) {
-        preg_match('@<dc:creator[^>]*>(.*)</dc:creator[^>]*>@i', $HTTP_RAW_POST_DATA, $name);
+    if (!preg_match('@<author[^>]*>(.*)</author[^>]*>@i', $raw_post_data, $name)) {
+        preg_match('@<dc:creator[^>]*>(.*)</dc:creator[^>]*>@i', $raw_post_data, $name);
     }
 
     if (isset($name[1]) && !empty($name[1])) {
@@ -20,11 +21,11 @@ if ($_REQUEST['cid'] != '' && $HTTP_RAW_POST_DATA != '') {
         }
     }
 
-    if (preg_match('@<link[^>]*>(.*)</link[^>]*>@i', $HTTP_RAW_POST_DATA, $link)) {
+    if (preg_match('@<link[^>]*>(.*)</link[^>]*>@i', $raw_post_data, $link)) {
         $comment['url'] = utf8_decode($link[1]);
     }
 
-    if (preg_match('@<description[^>]*>(.*)</description[^>]*>@ims', $HTTP_RAW_POST_DATA, $description)) {
+    if (preg_match('@<description[^>]*>(.*)</description[^>]*>@ims', $raw_post_data, $description)) {
         if (preg_match('@^<!\[CDATA\[(.*)\]\]>@ims', $description[1], $cdata)) {
             $comment['comment'] = utf8_decode($cdata[1]);
         } else {
