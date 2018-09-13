@@ -226,7 +226,7 @@ function serveCategory($matches) {
 
     $is_multicat = (isset($serendipity['POST']['isMultiCat']) && is_array($serendipity['POST']['multiCat']));
     if ($is_multicat) {
-        $serendipity['GET']['category'] = implode(';', $serendipity['POST']['multiCat']);
+        $serendipity['GET']['category'] = serendipity_specialchars(implode(';', $serendipity['POST']['multiCat']));
         $serendipity['uriArguments'][]  = PATH_CATEGORIES;
         $serendipity['uriArguments'][]  = serendipity_db_escape_string($serendipity['GET']['category']) . '-multi';
     } elseif (preg_match('@/([0-9;]+)@', $uri, $multimatch)) {
