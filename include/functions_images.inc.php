@@ -214,7 +214,7 @@ function serendipity_fetchImagesFromDatabase($start=0, $limit=0, &$total=null, $
 
                        {$cond['and']}";
 
-    $query = "SELECT {$cond['distinct']} i.id, {$cond[orderkey]} AS orderkey, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname,
+    $query = "SELECT {$cond['distinct']} i.id, {$cond['orderkey']} AS orderkey, i.name, i.extension, i.mime, i.size, i.dimensions_width, i.dimensions_height, i.date, i.thumbnail_name, i.authorid, i.path, i.hotlink, i.realname,
                      a.realname AS authorname
                      $basequery
                      {$cond['group']}
