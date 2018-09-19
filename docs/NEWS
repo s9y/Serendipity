@@ -1,6 +1,45 @@
 Version 2.x.x (major) ()
 ------------------------------------------------------------------------
 
+    * PHP 7.2 support: New autologin token approach, various code
+      changes
+
+    * Add function to add multiple images to an enty at once,
+      creating a gallery
+
+    * Add maintenance mode, allowing access to the blog only for
+      currently logged in user. This is meant to be activated when
+      upgrading the blog
+
+    * [Security] Improved password hashing by moving to bcrypt
+
+    * Fix links to the documentation
+
+    * Fix bug that could lead to noindex being activated by accident
+
+    * Update Smarty to 3.1.32
+
+    * [Security] Prevent XSS via multicategory pagination
+
+    * Update bootstrap 4 design to new bootstrap version
+
+    * Add option to disable google fonts in several designs
+
+    * Make it easier to drag plugins to other columns
+
+    * Improve and fix the p-mode of the nl2br plugin (Stephan Brunker)
+
+    * Support SVGs in Media Library
+
+    * Support automatic generation of responsive image thumbnails, and
+      using them when inserting images to entries
+
+    * Rework messy code updating the database and entries when
+      renaming or moving items in the media library
+
+    * Improve internal cache to work with more plugins, by reacting
+      to more variables changing the output
+
     * Fixed bug in pull request #392 which overwrote user specified
       input for logged in authors with an empty realname (wrong array
       key name) and deleted all existing text input
