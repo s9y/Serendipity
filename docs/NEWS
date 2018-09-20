@@ -1,4 +1,4 @@
-Version 2.x.x (major) ()
+Version 2.2.1-alpha1 (September 20th, 2018)
 ------------------------------------------------------------------------
 
     * PHP 7.2 support: New autologin token approach, various code
@@ -18,8 +18,6 @@ Version 2.x.x (major) ()
     * Fix bug that could lead to noindex being activated by accident
 
     * Update Smarty to 3.1.32
-
-    * [Security] Prevent XSS via multicategory pagination
 
     * Update bootstrap 4 design to new bootstrap version
 
@@ -71,7 +69,20 @@ Version 2.x.x (major) ()
 
     * Change Spartacus default mirror to github (#489)
 
-Version 2.1.3 ()
+Version 2.1.4 (September 20th, 2018)
+------------------------------------------------------------------------
+
+    * Security: Fix XSS for pagination, when multi-category selection
+      is used. Thanks to Brian Carpenter (geeknik) and Hanno Boeck!
+    
+    * Minor code fixes (proper PHP escaping for 'orderkey' SQL statement
+    
+    * Sekelton, Timeline and Clean Blog templates: Add theme option to 
+      disable google webfonts
+      
+    * Link to https s9y.org pages
+    
+Version 2.1.3 (August 16th, 2018)
 ------------------------------------------------------------------------
 
     * Security: Make sure that the admins configuration for RSS
