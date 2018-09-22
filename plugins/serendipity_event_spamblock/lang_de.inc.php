@@ -45,7 +45,7 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_BODYCLONE', 'Doppelter Kommentar');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_IPFLOOD', 'IP-Block');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_CAPTCHAS', 'Captcha ungültig (Eingegeben: %s, Erwartet: %s)');
-@define('PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION', 'Moderation nach X Tagen');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION', 'Moderation für alte Einträge');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_REJECT', 'Zu viele Links');
 @define('PLUGIN_EVENT_SPAMBLOCK_REASON_LINKS_MODERATE', 'Zu viele Links');
 @define('PLUGIN_EVENT_SPAMBLOCK_HIDE_EMAIL', 'E-Mail-Adressen bei Kommentatoren verstecken');
