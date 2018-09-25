@@ -45,6 +45,7 @@ class serendipity_event_spamblock extends serendipity_event
             'captchas',
             'captchas_ttl',
             'captcha_color',
+            'moderation_auto',
             'forcemoderation',
             'forcemoderation_treat',
             'trackback_ipvalidation' ,
@@ -386,6 +387,13 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_CAPTCHA_COLOR_DESC);
                 $propbag->add('default', '255,255,255');
                 $propbag->add('validate', '@^[0-9]{1,3},[0-9]{1,3},[0-9]{1,3}$@');
+                break;
+
+            case 'moderation_auto':
+                $propbag->add('type', 'boolean');
+                $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO);
+                $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO_DESC);
+                $propbag->add('default', false);
                 break;
 
             case 'forcemoderation':
@@ -829,6 +837,7 @@ class serendipity_event_spamblock extends serendipity_event
                 $show_captcha = false;
             }
 
+            $moderation_auto = $this->get_config('moderation_auto', false);
             $forcemoderation = $this->get_config('forcemoderation', 60);
             $forcemoderation_treat = $this->get_config('forcemoderation_treat', 'moderate');
             $forcemoderationt = $this->get_config('forcemoderationt', 60);
@@ -1113,9 +1122,9 @@ class serendipity_event_spamblock extends serendipity_event
                         }
 
                         // Check for forced comment moderation (X days)
-                        if ($addData['type'] == 'NORMAL' && ( 
-                               ( $forcemoderation > 0 && $eventData['timestamp'] < (time() - ($forcemoderation * 60 * 60 * 24)) )  
-                               || ( $forcemoderation == 0 ) ) ) {
+                        if ($addData['type'] == 'NORMAL' && $moderation_auto == true && ( 
+                               ( $forcemoderation == 0 ) || 
+                               ( $forcemoderation > 0 && $eventData['timestamp'] < (time() - ($forcemoderation * 60 * 60 * 24)) )  ) ) {
                             $this->log($logfile, $eventData['id'], $forcemoderation_treat, PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION, $addData);
                             if ($forcemoderation_treat == 'reject') {
                                 $eventData = array('allow_comments' => false);
