@@ -28,8 +28,10 @@
 
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL', 'Force captchas after how many days');
 @define('PLUGIN_EVENT_SPAMBLOCK_CAPTCHAS_TTL_DESC', 'Captchas can be enforced depending on the age of your articles. Enter the amount of days after which entering a correct captcha is necessary. If set to 0, captchas will always be used.');
+@define('PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO', 'Automatic moderation depending on age');
+@define('PLUGIN_EVENT_SPAMBLOCK_MODERATION_AUTO_DESC', 'All comments are moderated automatically, depending on the age of the entry');
 @define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION', 'Force comment moderation after how many days');
-@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC', 'You can automatically set all comments for entries to be moderated. Enter the age of an entry in days, after which it should be auto-moderated. 0 means no auto-moderation.');
+@define('PLUGIN_EVENT_SPAMBLOCK_FORCEMODERATION_DESC', 'Enter the age of an entry in days, after which it should be auto-moderated. 0 means all comments get moderated.');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE', 'How many links before a comment gets moderated');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_MODERATE_DESC', 'When a comment reaches a certain amount of links, that comment can be set to be moderated. 0 means that no link-checking is done.');
 @define('PLUGIN_EVENT_SPAMBLOCK_LINKS_REJECT', 'How many links before a comment gets rejected');
