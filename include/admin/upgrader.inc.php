@@ -270,6 +270,11 @@ $tasks = array(array('version'   => '0.5.1',
                      'function'  => 'serendipity_installFiles',
                      'title'     => 'Update .htaccess file',
                      'desc'      => 'Adds a new "documentation.*.html" rewrite rule exception to allow calling plugin documentation URLs.'),
+
+               array('version'   => '2.2.1-alpha2',
+                     'function'  => 'serendipity_upgrader_spamblock_moveForce',
+                     'title'     => 'Swap value forcemoderation',
+                     'desc'      => 'If force moderation of comments is activated, activate the new option moderation_auto'),
 );
 
 /* Fetch SQL files which needs to be run */
