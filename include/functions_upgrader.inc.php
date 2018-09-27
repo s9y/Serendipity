@@ -423,9 +423,10 @@ function serendipity_upgrader_spamblock_moveForce() {
     global $serendipity;
 
     $force = serendipity_db_query("SELECT value FROM {$serendipity['dbPrefix']}config WHERE name LIKE '%serendipity_event_spamblock%forcemoderation'", true);
+    if (is_array($force)) { $force = $force[0]; }
     if ($force > 0) {
          serendipity_db_query("UPDATE {$serendipity['dbPrefix']}config SET value = 'true' WHERE name LIKE '%serendipity_event_spamblock%moderation_auto'" );
-     }
+    }
 }
 
 function serendipity_upgrader_move_syndication_config() {
