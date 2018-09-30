@@ -625,45 +625,6 @@ class serendipity_event_spamblock extends serendipity_event
         }
     }
 
-    function tellAboutComment($where, $api_key, $comment_id, $is_spam)
-    {
-        global $serendipity;
-        $comment = serendipity_db_query(" SELECT C.*, L.useragent as log_useragent, E.title as entry_title "
-                                      . " FROM {$serendipity['dbPrefix']}comments C, {$serendipity['dbPrefix']}spamblocklog L , {$serendipity['dbPrefix']}entries E "
-                                      . " WHERE C.id = '" . (int)$comment_id . "' AND C.entry_id=L.entry_id AND C.entry_id=E.id "
-                                      . " AND C.author=L.author AND C.url=L.url AND C.referer=L.referer "
-                                      . " AND C.ip=L.ip AND C.body=L.body", true, 'assoc');
-        if (!is_array($comment)) return;
-
-        require_once S9Y_PEAR_PATH . 'HTTP/Request2.php';
-        if (function_exists('serendipity_request_start')) serendipity_request_start();
-
-        switch($where) {
-            case 'akismet.com':
-                // DEBUG
-                //$this->log($this->logfile, $eventData['id'], 'AKISMET_SAFETY', 'Akismet verification takes place', $addData);
-                $ret  = array();
-                $data = array(
-                  'blog'                    => $serendipity['baseURL'],
-                  'user_agent'              => $comment['log_useragent'],
-                  'referrer'                => $comment['referer'],
-                  'user_ip'                 => $comment['ip'],
-                  'permalink'               => serendipity_archiveURL($comment['entry_id'], $comment['entry_title'], 'serendipityHTTPPath', true, array('timestamp' => $comment['timestamp'])),
-                  'comment_type'            => ($comment['type'] == 'NORMAL' ? 'comment' : strtolower($comment['type'])), // second: pingback or trackback.
-                  'comment_author'          => $comment['author'],
-                  'comment_author_email'    => $comment['email'],
-                  'comment_author_url'      => $comment['url'],
-                  'comment_content'         => $comment['body']
-                );
-
-                $this->akismetRequest($api_key, $data, $ret, ($is_spam ? 'submit-spam' : 'submit-ham'));
-
-                break;
-        }
-
-        if (function_exists('serendipity_request_end')) serendipity_request_end();
-    }
-
     function &getBlacklist($where, $api_key, &$eventData, &$addData)
     {
         global $serendipity;
@@ -1361,23 +1322,6 @@ class serendipity_event_spamblock extends serendipity_event
                     break;
 
                 case 'backend_comments_top':
-
-                    // Tell Akismet about spam or not spam
-                    $tell_id = null;
-                    if (isset($serendipity['GET']['spamIsSpam'])) {
-                        $tell_spam = true;
-                        $tell_id = $serendipity['GET']['spamIsSpam'];
-                    }
-                    if (isset($serendipity['GET']['spamNotSpam'])) {
-                        $tell_spam = false;
-                        $tell_id = $serendipity['GET']['spamNotSpam'];
-                    }
-                    if ($tell_id !== null) {
-                        $akismet_apikey = $this->get_config('akismet');
-                        $akismet        = $this->get_config('akismet_filter');
-                        if (!empty($akismet_apikey))
-                            $this->tellAboutComment('akismet.com', $akismet_apikey, $tell_id, $tell_spam);
-                    }
 
                     // Add Author to blacklist. If already filtered, it will be removed from the filter. (AKA "Toggle")
                     if (isset($serendipity['GET']['spamBlockAuthor'])) {
