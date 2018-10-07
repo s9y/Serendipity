@@ -466,7 +466,7 @@ if (isset($_GET['serendipity']['plugin_to_conf'])) {
 
     $data['event_plugins'] = show_plugins(true);
 
-    if (count($serendipity['memSnaps']) > 0) {
+    if ($serendipity['memSnaps'] && count($serendipity['memSnaps']) > 0) {
         $data['$memsnaps'] = $serendipity['memSnaps'];
     }
     $data['updateAllMsg'] = isset($serendipity['GET']['updateAllMsg']);
