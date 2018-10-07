@@ -12,7 +12,7 @@ class Serendipity_Import_Generic extends Serendipity_Import {
 
     function __construct($data) {
         $this->data = $data;
-        $this->inputFields = array(array('text'    => RSS . ' ' . URL,
+        $this->inputFields = array(array('text'    => 'RSS URL',
                                          'type'    => 'input',
                                          'name'    => 'url'),
 
