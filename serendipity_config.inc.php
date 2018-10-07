@@ -398,7 +398,7 @@ include(S9Y_INCLUDE_PATH . 'include/lang.inc.php');
 // Reset charset definition now that final language is known
 $serendipity['charsets'] = array(
     'UTF-8/' => 'UTF-8',
-    ''        => CHARSET_NATIVE
+    ''        => (defined('CHARSET_NATIVE') ? CHARSET_NATIVE : 'CHARSET_NATIVE')
 );
 
 // Set current locale, if any has been defined
