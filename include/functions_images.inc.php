@@ -305,11 +305,36 @@ function serendipity_updateImageInDatabase($updates, $id) {
 
     $i = 0;
     if (sizeof($updates) > 0) {
+        $imageBeforeChange = serendipity_fetchImageFromDatabase($id);
         foreach ($updates AS $k => $v) {
             $q[] = $k ." = '" . serendipity_db_escape_string($v) . "'";
         }
         serendipity_db_query("UPDATE {$serendipity['dbPrefix']}images SET ". implode($q, ',') ." WHERE id = " . (int)$id . " $admin");
         $i++;
+
+        // Check if this update changes important directory or filename attributes.
+        // If yes, the plugin API will forward this change of files to plugins like
+        // staticpage, so that they can update their contents.
+        if (isset($updates['path']) || isset($updates['realname'])) {
+            if (! isset($updates['path'])) {
+                $updates['path'] = $imageBeforeChange['path'];
+            }
+            if (! isset($updates['realname'])) {
+                $updates['realname'] = $imageBeforeChange['realname'];
+            }
+
+            // NOTE: Previously, the API supported multiple rename tasks like dir, filedir and file
+            // Now the core will ALWAYS propagate each file change distinctly, never will a directory
+            // be submitted to the API.
+            $eventData = array( // array in array because the event api expects that
+                array(
+                    'type'      => 'file',
+                    'oldDir'    => $imageBeforeChange['path'] . $imageBeforeChange['realname'],
+                    'newDir'    => $updates['path'] . $updates['realname']
+                ) 
+            );
+            serendipity_plugin_api::hook_event('backend_media_rename', $eventData);
+        }
     }
     return $i;
 }
@@ -2213,6 +2238,16 @@ function serendipity_renameThumbnails($id, $newName) {
     foreach($thumbnails as $thumbnail) {
         $newThumbnail = str_replace("{$file['path']}{$file['name']}", $newName, $thumbnail);
         rename($thumbnail, $newThumbnail);
+
+        $eventData = array( // array in array because the event api expects that
+            array(
+                'type'      => 'file', // TODO: Use proper preg_quote
+                'oldDir'    => preg_replace('@' . $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '@', '', $thumbnail),
+                'newDir'    => preg_replace('@' . $serendipity['serendipityPath'] . $serendipity['uploadPath'] . '@', '', $newThumbnail)
+            )
+        );
+        serendipity_plugin_api::hook_event('backend_media_rename', $eventData);
+
     }
     return true;
 }
@@ -2241,8 +2276,8 @@ function serendipity_updateImageInEntries($id) {
     global $serendipity;
     
     $file = serendipity_fetchImageFromDatabase($id);
-    $imageHTTPPath = $serendipity['defaultBaseURL'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['realname'];
-    $thumbnailHTTPPath = str_replace(".{$file['extension']}", "{$file['thumbnail_name']}.{$file['extension']}", $imageHTTPPath);
+    $imageHTTPPath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['realname'];
+    $thumbnailHTTPPath = str_replace(".{$file['extension']}", ".{$file['thumbnail_name']}.{$file['extension']}", $imageHTTPPath);
 
 
     $q = "SELECT id, body, extended FROM {$serendipity['dbPrefix']}entries
@@ -3124,7 +3159,7 @@ function serendipity_showMedia(&$file, &$paths, $url = '', $manage = false, $lin
     $media = array_merge($media, $smarty_vars);
     $media['files'] =& $file;
 
-    if (count($paths) > 0) {
+    if (is_array($paths) && count($paths) > 0) {
         $media['paths'] =& $paths;
     } else {
         $media['paths'] =& serendipity_getMediaPaths();
