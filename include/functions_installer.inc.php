@@ -646,6 +646,9 @@ function serendipity_checkInstallation() {
     include_once(S9Y_INCLUDE_PATH . "include/db/{$serendipity['dbType']}.inc.php");
     // For shared installations, probe the file on include path
     //include_once(S9Y_INCLUDE_PATH . 'include/db/db.inc.php');
+    if (function_exists('serendipity_db_query')) {
+        serendipity_db_probe($_POST, $errs);
+    }
 
     return (count($errs) > 0 ? $errs : '');
 }
