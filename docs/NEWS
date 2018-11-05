@@ -2,6 +2,19 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Fix bug with not properly adding trailing "/" when managing
+      directories, so that saving different permissions would not
+      be properly applied
+
+    * Re-add missing plugin API event hook backend_media_rename
+      from prior pmigration in Serendipity 2.2 (#509)
+
+    * Re-add missing ACL adjustments after renaming a directory
+       (#509)
+
+    * Fix typo that switched read permissions with write permissions
+      when editing a category ACL
+
 Version 2.2.1-alpha1 (September 20th, 2018)
 ------------------------------------------------------------------------
 

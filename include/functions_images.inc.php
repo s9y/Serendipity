@@ -2171,6 +2171,25 @@ function serendipity_renameDir($oldDir, $newDir) {
     $total = null;
     $images = serendipity_fetchImagesFromDatabase(0, 0, $total, false, false, $oldDir);
 
+    // Perform ACL renames
+    $dirs = serendipity_db_query("SELECT groupid, artifact_id, artifact_type, artifact_mode, artifact_index
+                                        FROM {$serendipity['dbPrefix']}access
+                                       WHERE artifact_type = 'directory'
+                                         AND artifact_index LIKE '" . serendipity_db_escape_string($oldDir) . "%'", false, 'assoc');
+    if (is_array($dirs)) {
+        foreach($dirs AS $dir) {
+            $old = $dir['artifact_index'];
+            $new = preg_replace('@^(' . preg_quote($oldDir) . ')@i', $newDir, $old);
+            serendipity_db_query("UPDATE {$serendipity['dbPrefix']}access
+                                         SET artifact_index = '" . serendipity_db_escape_string($new) . "'
+                                       WHERE groupid        = '" . serendipity_db_escape_string($dir['groupid']) . "'
+                                         AND artifact_id    = '" . serendipity_db_escape_string($dir['artifact_id']) . "'
+                                         AND artifact_type  = '" . serendipity_db_escape_string($dir['artifact_type']) . "'
+                                         AND artifact_mode  = '" . serendipity_db_escape_string($dir['artifact_mode']) . "'
+                                         AND artifact_index = '" . serendipity_db_escape_string($dir['artifact_index']) . "'");
+        }
+    }
+
     if (! file_exists("${imgBase}${newDir}")) {
         rename("${imgBase}${oldDir}", "${imgBase}${newDir}");
 
