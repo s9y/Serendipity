@@ -335,6 +335,25 @@ function serendipity_updateImageInDatabase($updates, $id) {
             );
             serendipity_plugin_api::hook_event('backend_media_rename', $eventData);
         }
+
+        // If the user manually saved the image properties, some values might need updating now
+        // Name and realname are saved there as well, and the title is set to the name by default
+        if (isset($updates['realname'])) {
+            $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
+                    SET value = '" . serendipity_db_escape_string($updates['realname']) . "'
+                  WHERE mediaid = " . (int)$imageBeforeChange['id'] . ' AND property = "realname" AND value = "' . $imageBeforeChange['realname'] . '"';
+            serendipity_db_query($q);
+            $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
+                    SET value = '" . serendipity_db_escape_string($updates['realname']) . "'
+                  WHERE mediaid = " . (int)$imageBeforeChange['id'] . ' AND property = "TITLE" AND value = "' . $imageBeforeChange['realname'] .'"';
+            serendipity_db_query($q);
+        }
+        if (isset($updates['name'])) {
+            $q = "UPDATE {$serendipity['dbPrefix']}mediaproperties
+                    SET value = '" . $updates['name'] . "'
+                  WHERE mediaid = " . (int)$imageBeforeChange['id'] . ' AND property = "name" AND value = "' . $imageBeforeChange['name'] .'"';
+            serendipity_db_query($q);
+        }
     }
     return $i;
 }
