@@ -2297,6 +2297,7 @@ function serendipity_updateImageInEntries($id) {
     $file = serendipity_fetchImageFromDatabase($id);
     $imageHTTPPath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['realname'];
     $thumbnailHTTPPath = str_replace(".{$file['extension']}", ".{$file['thumbnail_name']}.{$file['extension']}", $imageHTTPPath);
+    $thumbSuffix = $serendipity['thumbSuffix'];
 
 
     $q = "SELECT id, body, extended FROM {$serendipity['dbPrefix']}entries
@@ -2307,19 +2308,32 @@ function serendipity_updateImageInEntries($id) {
 
     if (is_array($entries) && !empty($entries)) {
         foreach($entries as $entry) {
-            $pattern = "@(<!-- s9ymdb:$id -->.*) src=[\"']([^'\"]+)[\"']@";
+            # First change the img element, be it a thumbnail or an image
+            $pattern = "@(<!-- s9ymdb:$id -->[^>]*) src=[\"']([^'\"]+)[\"']@";
 
-            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath) {
-                if (strpos($matches[2],  "{$file['thumbnail_name']}.{$file['extension']}") === false) {
-                    // the image linked not to the thumbnail
-                    return "{$matches[1]} src='$imageHTTPPath'";
+            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath, $file, $thumbSuffix) {
+                if (strpos($matches[2],  "$thumbSuffix.{$file['extension']}") === false) {
+                    // the image showed the full size image
+                    return $matches[1] . ' src="' . $imageHTTPPath . '"';
                 } else {
-                    return "{$matches[1]} src='$thumbnailHTTPPath'";
+                    return $matches[1] . ' src="' . $thumbnailHTTPPath . '"';
                 }
             };
             
             $entry['body'] = preg_replace_callback($pattern, $callback, $entry['body']);
             $entry['extended'] = preg_replace_callback($pattern, $callback, $entry['extended']);
+
+            # But we should not forget to update the a element
+            # TODO: How to detect that the image link did point to something other than the old image?
+            $pattern = "@href=[\"']([^'\"]+)[\"']>(<!-- s9ymdb:$id -->)@";
+
+            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath) {
+                return 'href="' . $imageHTTPPath . '">' . $matches[2];
+            };
+            
+            $entry['body'] = preg_replace_callback($pattern, $callback, $entry['body']);
+            $entry['extended'] = preg_replace_callback($pattern, $callback, $entry['extended']);
+            
 
             $uq = "UPDATE {$serendipity['dbPrefix']}entries
                                         SET
