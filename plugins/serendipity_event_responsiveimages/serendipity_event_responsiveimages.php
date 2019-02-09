@@ -18,13 +18,20 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.4');
+        $propbag->add('version',       '0.5');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
         $propbag->add('cachable_events', array('frontend_display' => true));
         $propbag->add('event_hooks', array('frontend_display' => true,
-                                           'backend_media_makethumb' => true
+                                           'backend_media_makethumb' => true,
+                                           'frontend_display:unknown:per-entry' => true,
+                                           'frontend_display:opml-1.0:per_entry' => true,
+                                           'frontend_display:rss-0.91:per_entry' => true,
+                                           'frontend_display:rss-1.0:per_entry' => true,
+                                           'frontend_display:rss-2.0:per_entry' => true,
+                                           'frontend_display:atom-0.3:per_entry' => true,
+                                           'frontend_display:atom-1.0:per_entry' => true,
                                         ));
         $propbag->add('groups', array('MARKUP'));
 
@@ -117,6 +124,22 @@ class serendipity_event_responsiveimages extends serendipity_event
                         }
                     }
                     
+                    break;
+                case 'frontend_display:unknown:per-entry':
+                case 'frontend_display:opml-1.0:per_entry':
+                case 'frontend_display:rss-0.91:per_entry':
+                case 'frontend_display:rss-1.0:per_entry':
+                case 'frontend_display:rss-2.0:per_entry':
+                case 'frontend_display:atom-0.3:per_entry':
+                case 'frontend_display:atom-1.0:per_entry':
+                    // We need to rewrite relative srcsets to absolute urls in the RSS feed, otherwise images won't be shown
+                    $pattern = '@srcset=(["\'][^"\']+)@i';
+                    $eventData['feed_body'] = preg_replace_callback($pattern, function($matches) {
+                            global $serendipity;
+                            $matches[1] = str_ireplace('"' . $serendipity['serendipityHTTPPath'], '"' . $serendipity['baseURL'], $matches[1]);
+                            $matches[1] = str_ireplace(',' . $serendipity['serendipityHTTPPath'], ',' . $serendipity['baseURL'], $matches[1]);
+                            return 'srcset=' . $matches[1];
+                        },  $eventData['feed_body']);
                     break;
                 default:
                     return false;
