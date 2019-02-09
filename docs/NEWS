@@ -2,6 +2,11 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Set responsiveimages as default plugin
+
+    * Add rewrite to absolute url for srcsets to the feed 
+      generation
+
     * Fix bug with not properly adding trailing "/" when managing
       directories, so that saving different permissions would not
       be properly applied
