@@ -146,6 +146,7 @@ class serendipity_plugin_api
         serendipity_plugin_api::create_plugin_instance('serendipity_event_spamblock', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_spartacus', null, 'event');
         serendipity_plugin_api::create_plugin_instance('serendipity_event_entryproperties', null, 'event');
+        serendipity_plugin_api::create_plugin_instance('serendipity_event_responsiveimages', null, 'event');
 
         /* Register additional plugins? */
         if (file_exists(S9Y_INCLUDE_PATH . 'plugins/preload.txt')) {
