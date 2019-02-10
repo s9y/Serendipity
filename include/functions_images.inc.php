@@ -2165,10 +2165,9 @@ function serendipity_escapeshellarg($string) {
 function serendipity_moveFileTo($id, $dir) {
     global $serendipity;
     $file = serendipity_fetchImageFromDatabase($id);
-
     serendipity_renameFile($id, $file['name'], $dir);
     serendipity_updateImageInDatabase(array('path' => $dir), $id);
-    serendipity_updateImageInEntries($id);
+    serendipity_updateImageInEntries($id, $file);
     return true;
 }
 
@@ -2217,7 +2216,7 @@ function serendipity_renameDir($oldDir, $newDir) {
                 array('path' => preg_replace('@' . preg_quote(serendipity_dirSlash('end', $oldDir)) . '@', serendipity_dirSlash('end', $newDir), $image['path'], 1)), // we use preg_replace and not str_replace to be able to limit to exacty one replacement, preventing issues when a path has loops in it
                 $image['id']
             );
-            serendipity_updateImageInEntries($image['id']);
+            serendipity_updateImageInEntries($image['id'], $image);
         }
 
         return true;
@@ -2260,7 +2259,7 @@ function serendipity_renameFile($id, $newName, $path = null) {
     serendipity_renameThumbnails($id, "{$path}$newName");
     
     serendipity_updateImageInDatabase(array('name' => $newName, 'realname' => basename($newPath)), $id);
-    serendipity_updateImageInEntries($id);
+    serendipity_updateImageInEntries($id, $file);
 }
 
 /**
@@ -2309,12 +2308,16 @@ function serendipity_getThumbnails($id) {
 
 /**
  * Set image references to current path in all articles linking to them via the ML
+ *
+ * @id is the id of the image, used for identification
+ * @old is the old file property array of the image, used to keep a manual set link
  * */
-function serendipity_updateImageInEntries($id) {
+function serendipity_updateImageInEntries($id, $old) {
     global $serendipity;
     
     $file = serendipity_fetchImageFromDatabase($id);
     $imageHTTPPath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $file['path'] . $file['realname'];
+    $oldImageHTTPPath = $serendipity['serendipityHTTPPath'] . $serendipity['uploadHTTPPath'] . $old['path'] . $old['realname'];
     $thumbnailHTTPPath = str_replace(".{$file['extension']}", ".{$file['thumbnail_name']}.{$file['extension']}", $imageHTTPPath);
     $thumbSuffix = $serendipity['thumbSuffix'];
 
@@ -2343,11 +2346,15 @@ function serendipity_updateImageInEntries($id) {
             $entry['extended'] = preg_replace_callback($pattern, $callback, $entry['extended']);
 
             # But we should not forget to update the a element
-            # TODO: How to detect that the image link did point to something other than the old image?
-            $pattern = "@href=[\"']([^'\"]+)[\"']>(<!-- s9ymdb:$id -->)@";
+            $pattern = "@href=[\"']([^'\"]+)[\"']([^>]*)>(<!-- s9ymdb:$id -->)@";
 
-            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath) {
-                return 'href="' . $imageHTTPPath . '">' . $matches[2];
+            $callback = function($matches) use ($imageHTTPPath, $thumbnailHTTPPath, $oldImageHTTPPath) {
+                # We only update the link if it is not a manual link, if it pointed to the old image location
+                if ($matches[1] === $oldImageHTTPPath) {
+                    return 'href="' . $imageHTTPPath . '"' . $matches[2] . '>' . $matches[3];
+                } else {
+                    return 'href="' . $matches[1] . '"' . $matches[2] . '>' . $matches[3];
+                }
             };
             
             $entry['body'] = preg_replace_callback($pattern, $callback, $entry['body']);
