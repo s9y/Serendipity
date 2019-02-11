@@ -425,7 +425,7 @@
                                           'title'       => USE_CACHE,
                                           'description' => USE_CACHE_DESC,
                                           'type'        => 'bool',
-                                          'default'     => false,
+                                          'default'     => true,
                                           'permission'  => 'siteConfiguration'),
                             ));
 

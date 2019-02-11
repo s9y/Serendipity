@@ -476,7 +476,7 @@ if (defined('IN_serendipity_admin') && !isset($serendipity['use_autosave'])) {
 }
 
 if (!isset($serendipity['useInternalCache'])) {
-    $serendipity['useInternalCache'] = false;
+    $serendipity['useInternalCache'] = true;
 }
 
 // You can set parameters which ImageMagick should use to generate the thumbnails
