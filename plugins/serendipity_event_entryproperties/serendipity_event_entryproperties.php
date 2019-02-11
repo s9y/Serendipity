@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.41.1');
+        $propbag->add('version',       '1.41.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -111,7 +111,7 @@ class serendipity_event_entryproperties extends serendipity_event
                 $propbag->add('type',        'boolean');
                 $propbag->add('name',        PLUGIN_EVENT_ENTRYPROPERTIES_CACHE);
                 $propbag->add('description', PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DESC);
-                $propbag->add('default',     'true');
+                $propbag->add('default',     'false');
                 break;
 
             case 'sequence':
@@ -583,7 +583,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $hooks = &$bag->get('event_hooks');
 
         if ($is_cache === null) {
-            $is_cache   = serendipity_db_bool($this->get_config('cache', 'true'));
+            $is_cache   = serendipity_db_bool($this->get_config('cache', 'false'));
             $use_groups = serendipity_db_bool($this->get_config('use_groups'));
             $use_users  = serendipity_db_bool($this->get_config('use_users'));
             $ext_joins  = serendipity_db_bool($this->get_config('use_ext_joins'));
