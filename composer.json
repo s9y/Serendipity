@@ -8,7 +8,8 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zend-db": "2.*",
-        "katzgrau/klogger": "1.0.*"
+        "katzgrau/klogger": "1.0.*",
+        "voku/simple-cache": "^3.2"
     },
     "config": {
         "vendor-dir": "bundled-libs"

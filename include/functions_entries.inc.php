@@ -213,9 +213,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
         $cache = serendipity_setupCache();
         $key = md5(serialize($initial_args) . $serendipity['short_archives'] . '||' . $serendipity['range'] . '||' . $serendipity['GET']['category'] . '||' . $serendipity['GET']['hide_category'] . '||' . $serendipity['GET']['viewAuthor'] . '||' .  $serendipity['GET']['page'] . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable'] . '||' . $serendipity['plugindata']['smartyvars']['uriargs'] );
         
-        $entries = $cache->get($key, "fetchEntries");
-        if ($entries !== false) {
-            $serendipity['fullCountQuery'] = $cache->get($key . '_fullCountQuery', "fetchEntries");
+        $entries = $cache->getItem($key);
+        if ($entries && $entries !== false) {
+            $serendipity['fullCountQuery'] = $cache->getItem($key . '_fullCountQuery');
             return unserialize($entries);
         }
     }
@@ -463,9 +463,9 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
 
     if ($serendipity['useInternalCache']) {
         $key = md5(serialize($initial_args) . $serendipity['short_archives'] . '||' . $serendipity['range'] . '||' . $serendipity['GET']['category'] . '||' . $serendipity['GET']['hide_category'] . '||' . $serendipity['GET']['viewAuthor'] . '||' .  $serendipity['GET']['page'] . '||' .  $serendipity['fetchLimit'] . '||' .  $serendipity['max_fetch_limit'] . '||' . $serendipity['GET']['adminModule'] . '||' .  serendipity_checkPermission('adminEntriesMaintainOthers') . '||' .$serendipity['showFutureEntries'] . '||' . $serendipity['archiveSortStable']  . '||' . $serendipity['plugindata']['smartyvars']['uriargs']);
-        
-        $cache->save(serialize($ret), $key, "fetchEntries");
-        $cache->save($serendipity['fullCountQuery'], $key . '_fullCountQuery', "fetchEntries");
+
+        $cache->setItem($key, serialize($ret));
+        $cache->setItem($key . '_fullCountQuery', $serendipity['fullCountQuery']);
     }
 
     return $ret;
@@ -1292,35 +1292,32 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
 } // end function serendipity_printEntries
 
 function serendipity_cleanCache() {
-    include_once 'Cache/Lite.php';
-
-    if (!class_exists('Cache_Lite')) {
-        return false;
-    }
-
-    $options = array(
-        'cacheDir' => $serendipity['serendipityPath'] . 'templates_c/',
-        'lifeTime' => 3600,
-        'hashedDirectoryLevel' => 2
-    );
-    $cache = new Cache_Lite($options);
-    return $cache->clean("fetchEntries");
+    $cache = serendipity_setupCache();
+    return $cache->removeAll();
 }
 
+//function serendipity_setupCache() {
+    //include_once 'Cache/Lite.php';
+
+    //if (!class_exists('Cache_Lite')) {
+        //return false;
+    //}
+
+    //$options = array(
+        //'cacheDir' => $serendipity['serendipityPath'] . 'templates_c/',
+        //'lifeTime' => 3600,
+        //'hashedDirectoryLevel' => 2
+    //);
+
+    //return new Cache_Lite($options);
+//}
+
+use voku\cache\Cache;
 function serendipity_setupCache() {
-    include_once 'Cache/Lite.php';
 
-    if (!class_exists('Cache_Lite')) {
-        return false;
-    }
-
-    $options = array(
-        'cacheDir' => $serendipity['serendipityPath'] . 'templates_c/',
-        'lifeTime' => 3600,
-        'hashedDirectoryLevel' => 2
-    );
-
-    return new Cache_Lite($options);
+    $cache = new Cache();
+    $ttl = 3600; // 60s * 60 = 1h
+    return $cache;
 }
 
 
