@@ -2,6 +2,15 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Default settings: Disable entryproperties cache, enable internal
+                        cache
+
+    * Update Smarty to 3.1.33
+
+    * Use voku/simple-cache for internal cache as bundled lib, which
+      will allow to cache with memcached and redis instead of just
+      on the filesystem
+
     * Set responsiveimages as default plugin
 
     * Add rewrite to absolute url for srcsets to the feed 
