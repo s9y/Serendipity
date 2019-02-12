@@ -2,6 +2,8 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Drop deprecated serendipity_purgeEntry function
+
     * Default settings: Disable entryproperties cache, enable internal
                         cache
 

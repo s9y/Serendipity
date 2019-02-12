@@ -939,8 +939,6 @@ function serendipity_insertComment($id, $commentInfo, $type = 'NORMAL', $source 
         }
     }
 
-    serendipity_purgeEntry($id, $t);
-
     if ($GLOBALS['tb_logging']) {
         fclose($fp);
     }

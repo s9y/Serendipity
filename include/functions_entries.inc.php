@@ -1320,40 +1320,6 @@ function serendipity_setupCache() {
     return $cache;
 }
 
-
-/**
- * Deprecated: Delete some garbage when an entry was deleted, especially static pages
- *
- * @deprecated
- * @access public
- * @param   int     The deleted entry ID
- * @param   int     A timestamp for the entry archive page
- * @return null
- */
-function serendipity_purgeEntry($id, $timestamp = null) {
-    global $serendipity;
-
-    // If pregenerate is not set, short circuit all this logic
-    // and remove nothing.
-    if(!isset($serendipity['pregenerate'])) {
-        return;
-    }
-
-    if (isset($timestamp)) {
-        $dated = date('Ymd', serendipity_serverOffsetHour($timestamp));
-        $datem = date('Ym',  serendipity_serverOffsetHour($timestamp));
-
-        @unlink("{$serendipity['serendipityPath']}/".PATH_ARCHIVES."/{$dated}.html");
-        @unlink("{$serendipity['serendipityPath']}/".PATH_ARCHIVES."/{$datem}.html");
-    }
-
-    // Fixme (the _* part) !
-    @unlink("{$serendipity['serendipityPath']}/".PATH_ARCHIVES."/{$id}_*.html");
-    @unlink("{$serendipity['serendipityPath']}/".PATH_FEEDS."/index.rss");
-    @unlink("{$serendipity['serendipityPath']}/".PATH_FEEDS."/index.rss2");
-    @unlink("{$serendipity['serendipityPath']}/index.html");
-}
-
 /**
  * Inserts a new entry into the database or updates an existing entry
  *
@@ -1513,8 +1479,6 @@ function serendipity_updertEntry($entry) {
         $drafted_entry = $entry;
     }
 
-    serendipity_purgeEntry($entry['id'], $entry['timestamp']);
-
     if (!serendipity_db_bool($entry['isdraft']) && $entry['timestamp'] <= serendipity_serverOffsetHour()) {
         // When saving an entry, first all references need to be gathered. But trackbacks to them
         // shall only be send at the end of the execution flow. However, certain plugins depend on
@@ -1563,8 +1527,6 @@ function serendipity_deleteEntry($id) {
         // Only admins and chief users can delete entries which do not belong to the author
         return;
     }
-
-    serendipity_purgeEntry($id, $result[0]);
 
     serendipity_plugin_api::hook_event('backend_delete_entry', $id);
     serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}entries WHERE id=$id");
