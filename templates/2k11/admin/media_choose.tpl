@@ -175,7 +175,7 @@
             </script>
             {else}
             <script>
-                block = '<a class="block_level opens_window" href="{$media.file.full_file}" title="{$media.file.realname|escape}">{$media.file.realname|escape}</a>';
+                block = '<a class="block_level opens_window" href="{$media.file.full_file}" title="{$media.file.realname|escape}"><!-- s9ymdb:{$media.file.id} -->{$media.file.realname|escape}</a>';
                 {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
                 if (parent.self.opener == undefined) {
                     // in iframes, there is no opener, and the magnific popup is wrapped
