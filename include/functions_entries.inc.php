@@ -1014,6 +1014,9 @@ function serendipity_getTotalEntries() {
         $querystring  = "SELECT count(distinct e.id) {$serendipity['fullCountQuery']}";
     }
 
+    if ($serendipity['fullCountQuery'] == '') {
+        return 0;
+    }
     $query =& serendipity_db_query($querystring);
 
     if (is_array($query) && isset($query[0])) {
