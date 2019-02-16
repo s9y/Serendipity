@@ -2,6 +2,14 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Add internal cache invalidation when comment is added
+
+    * Move cache into functions.inc.php, resulting in this API:
+        * serendipity_setupCache() (used internally)
+        * serendipity_cleanCache()
+        * serendipity_cacheItem($key, $item, $ttl = 3600)
+        * serendipity_getCacheItem($key)
+
     * Drop deprecated serendipity_purgeEntry function
 
     * Default settings: Disable entryproperties cache, enable internal

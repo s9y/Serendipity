@@ -1374,5 +1374,26 @@ function serendipity_url_allowed($url) {
     return true;
 }
 
+use voku\cache\Cache;
+function serendipity_setupCache() {
+    $cache = new Cache();
+    return $cache;
+}
+
+function serendipity_cleanCache() {
+    $cache = serendipity_setupCache();
+    return $cache->removeAll();
+}
+
+function serendipity_cacheItem($key, $item, $ttl = 3600) {
+    $cache = serendipity_setupCache();
+    return $cache->setItem($key, $item, $ttl);
+}
+
+function serendipity_getCacheItem($key) {
+    $cache = serendipity_setupCache();
+    return $cache->getItem($key);
+}
+
 define("serendipity_FUNCTIONS_LOADED", true);
 /* vim: set sts=4 ts=4 expandtab : */
