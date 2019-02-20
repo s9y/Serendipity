@@ -445,7 +445,7 @@ function serendipity_issueAutologin($user) {
 
     // Issue new autologin cookie
     serendipity_db_query("INSERT INTO {$serendipity['dbPrefix']}options (name, value, okey) VALUES ('autologin_" . serendipity_db_escape_string($user) . "', '" . $rnd  . "', '" . time() . "')");
-    serendipity_setCookie('author_autologintoken', $rnd);
+    serendipity_setCookie('author_autologintoken', $rnd, true, false, true);
     serendipity_setCookie('author_username', $user);
 }
 
@@ -518,7 +518,6 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
         $debugc++;
         fwrite($fp, date('Y-m-d H:i') . ' - #' . $debugc . ' Login init [' . $username . ',' . $password . ',' . (int)$is_hashed . ',' . (int)$use_external . ']' . ' (' . $_SERVER['REMOTE_ADDR'] . ',' . $_SERVER['REQUEST_URI'] . ', ' . session_id() . ')' . "\n");
     }
-
     if (isset($_SESSION['serendipityUser']) && isset($_SESSION['serendipityPassword']) && isset($_SESSION['serendipityAuthedUser']) && $_SESSION['serendipityAuthedUser'] == true) {
         $username = $_SESSION['serendipityUser'];
         $password = $_SESSION['serendipityPassword'];
@@ -703,7 +702,7 @@ function serendipity_restoreVar(&$source, &$target) {
  * @param   int         Cookie validity (unix timestamp)
  * @return null
  */
-function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false) {
+function serendipity_setCookie($name, $value, $securebyprot = true, $custom_timeout = false, $httpOnly = false) {
     global $serendipity;
 
     $host = $_SERVER['HTTP_HOST'];
@@ -726,7 +725,7 @@ function serendipity_setCookie($name, $value, $securebyprot = true, $custom_time
         $custom_timeout = time() + 60*60*24*30;
     }
 
-    setcookie("serendipity[$name]", $value, $custom_timeout, $serendipity['serendipityHTTPPath'], $host, $secure);
+    setcookie("serendipity[$name]", $value, $custom_timeout, $serendipity['serendipityHTTPPath'], $host, $secure, $httpOnly);
     $_COOKIE[$name] = $value;
     $serendipity['COOKIE'][$name] = $value;
 }
@@ -1992,7 +1991,6 @@ function serendipity_checkXSRF() {
         echo serendipity_reportXSRF(3, true, true);
         return true;
     }
-
     return false;
 }
 
@@ -2042,7 +2040,6 @@ function serendipity_reportXSRF($type = 0, $reset = true, $use_config = false) {
  */
 function serendipity_checkFormToken($output = true) {
     global $serendipity;
-
     $token = '';
     if (!empty($serendipity['POST']['token'])) {
         $token = $serendipity['POST']['token'];
@@ -2054,13 +2051,11 @@ function serendipity_checkFormToken($output = true) {
         if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
-
     if ($token != md5(session_id()) &&
         $token != md5($serendipity['COOKIE']['old_session'])) {
         if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
-
     return true;
 }
 
