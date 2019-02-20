@@ -392,8 +392,9 @@ function serendipity_login($use_external = true) {
     } elseif (isset($serendipity['COOKIE']['author_username'])) {
         $user = $serendipity['COOKIE']['author_username'];
         $valid_logintoken = serendipity_checkAutologin($user);
-
         if ($valid_logintoken === true) {
+            // if we do not tie down the session gere it will be recreated on every page reload, which will fuck op the form token system. That's why we need to load all data that makes the session stick. That's why we call setAuthorToken here.
+            serendipity_setAuthorToken();
             serendipity_load_userdata($user);
             return true;
         } else {
@@ -600,7 +601,7 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
                     }
                 }
 
-                // This code is only reached, if the password before is valid.
+                // This code is only reached if the password before is valid.
                 if ($is_valid_user) {
                     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' [sid:' . session_id() . '] - Success.' . "\n");
                     serendipity_setCookie('old_session', session_id(), false);
@@ -2051,11 +2052,13 @@ function serendipity_checkFormToken($output = true) {
         if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
+
     if ($token != md5(session_id()) &&
         $token != md5($serendipity['COOKIE']['old_session'])) {
         if ($output) echo serendipity_reportXSRF('token', false);
         return false;
     }
+
     return true;
 }
 
