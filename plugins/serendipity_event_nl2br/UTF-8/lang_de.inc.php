@@ -8,11 +8,11 @@
  */
 
 @define('PLUGIN_EVENT_NL2BR_NAME', 'Textformatierung: NL2BR');
-@define('PLUGIN_EVENT_NL2BR_DESC', 'Konvertiert Zeilenumbrüche zu HTML');
+@define('PLUGIN_EVENT_NL2BR_DESC', 'Konvertiert Zeilenumbrüche zu HTML. Basis-Funktionalität: Konvertiere die Zeilenumbrüche zu <br> - Tags. Erweiterte Funktionalität: Parse den Text in <p>-Tags unter Berücksichtigung der html-Syntax wie p-Elemente nur dort wo sie erlaubt sind, automatische Ignorierung bei vorformatiertem Text mit pre oder innerhalb von style oder svg-Tags.');
 @define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP', 'Überprüfe Markup-Plugins?');
 @define('PLUGIN_EVENT_NL2BR_CHECK_MARKUP_DESC', 'Überprüft automatisch auf existierende Markup-Plugins, um die weitere Ausführung des NL2BR-Plugins zu untersagen. Dies gilt dann, wenn WYSIWYG oder spezifische Markup-Plugins entdeckt werden.');
-@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS', 'Eine Liste von HTML-Tags, innerhalb derer keine Umbrüche bei Benutzung von P-Tags konvertiert werden');
-@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS_DESC', 'Konfigurationsvorschlag: "code,pre,geshi,textarea". Trennen Sie mehrere HTML-Tags mit Komma. Hinweis: Die eingegebenen Tags sind reguläre Ausdrücke!');
+@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS', 'Eine Liste von benutzerdefinierten HTML-Tags, innerhalb derer keine Umbrüche bei Benutzung von P-Tags konvertiert werden');
+@define('PLUGIN_EVENT_NL2BR_ISOLATE_TAGS_DESC', 'Konfigurationsvorschlag: "nl". Trennen Sie mehrere HTML-Tags mit Komma. Hinweis: Die eingegebenen Tags sind reguläre Ausdrücke!');
 @define('PLUGIN_EVENT_NL2BR_PTAGS', 'Nutze P-Tags');
 @define('PLUGIN_EVENT_NL2BR_PTAGS_DESC', 'Setze statt br-Tags p-Tags ein.');
 @define('PLUGIN_EVENT_NL2BR_ISOBR_TAG', 'ISOBR Isolations-Default BR Einstellung');

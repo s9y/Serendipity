@@ -463,8 +463,7 @@ p.wl_notopbottom {
 			$this->inline_elements = array_diff($this->inline_elements,$this->isolationtags);
 			$this->singleton_block_elements = array_diff($this->singleton_block_elements,$this->isolationtags);
 			$this->ignored_elements = array_diff($this->ignored_elements,$this->isolationtags);
-			$this->isolation_block_elements = array_merge($this->isolationtags,$this->isolation_block_elements);
-			$this->isolationtags = array();
+			$this->isolation_block_elements = array_diff($this->isolation_block_elements,$this->isolationtags);
 		}
 		if (empty($text)) { return ''; }
 		return $this->blocktag_nl2p($text);
@@ -538,7 +537,8 @@ p.wl_notopbottom {
 					|| in_array($tag,$this->isolation_block_elements) 
 					|| in_array($tag,$this->isolation_inline_elements) 
 					|| in_array($tag,$this->nested_block_elements)
-					|| in_array($tag,$this->ignored_elements) ))
+					|| in_array($tag,$this->ignored_elements)
+					|| in_array($tag,$this->isolationtags) ) )
 				{
 					// unknown tag definition
 					$text[$tagstart_b] = '&lt;';
@@ -673,7 +673,8 @@ p.wl_notopbottom {
 				$start = $i+1;
 			}
 			//isolation tag
-			elseif($tag && !$isolation_flag && $this->is_starttag($textarray[$i]) && in_array($tag, $this->isolation_block_elements) )
+			elseif($tag && !$isolation_flag && $this->is_starttag($textarray[$i]) 
+				&& (in_array($tag, $this->isolation_block_elements) || in_array($tag, $this->isolationtags) ) )
 			{
 				//merge previous content, apply nl2p if needed and concatenate
 				if (empty($tagstack) )
@@ -687,6 +688,13 @@ p.wl_notopbottom {
 				{
 					$content .= implode(array_slice($textarray,$start,$i-$start));
 				}
+
+				// concatenate tag if it's standard html
+				if (in_array($tag, $this->isolation_block_elements) )
+				{
+					$content .= $textarray[$i];
+				}
+				
 				$isolation_flag = $tag;	//isolation has to be started and ended with the same tag
 				$start = $i+1;
 			}
@@ -697,6 +705,11 @@ p.wl_notopbottom {
 				$content .= implode(array_slice($textarray,$start,$i-$start));
 				$isolation_flag = false;
 				$start = $i+1;
+				// concatenate closing tag if it's standard html
+				if (in_array($tag, $this->isolation_block_elements) )
+				{
+					$content .= $textarray[$i];
+				}
 			}
 			//closing blocktag or p parent - e.g. </table> or </td>
 			elseif($tag && !$this->is_starttag($textarray[$i]) && !empty($tagstack) && $tag == $tagstack[0])
