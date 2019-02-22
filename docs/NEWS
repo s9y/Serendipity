@@ -2,6 +2,8 @@
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
 
+    * Fix bug in nl2br's p mode that ate pre elements
+
     * Add internal cache invalidation when comment is added
 
     * Move cache into functions.inc.php, resulting in this API:
