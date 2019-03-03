@@ -32,13 +32,13 @@ interface iCache
     /**
      * set item a special expire-date
      *
-     * @param string    $key
-     * @param mixed     $value
-     * @param \DateTime $date
+     * @param string             $key
+     * @param mixed              $value
+     * @param \DateTimeInterface $date
      *
      * @return bool
      */
-    public function setItemToDate(string $key, $value, \DateTime $date): bool;
+    public function setItemToDate(string $key, $value, \DateTimeInterface $date): bool;
 
     /**
      * remove item

@@ -40,7 +40,7 @@ class CachePsr16 extends Cache implements CacheInterface
     /**
      * Deletes multiple cache items in a single operation.
      *
-     * @param \iterable $keys a list of string-based keys to be deleted
+     * @param iterable $keys a list of string-based keys to be deleted
      *
      * @throws InvalidArgumentException
      *
@@ -48,16 +48,20 @@ class CachePsr16 extends Cache implements CacheInterface
      */
     public function deleteMultiple($keys): bool
     {
-        if (!\is_array($keys) && !($keys instanceof \Traversable)) {
+        if (
+            !\is_array($keys)
+            &&
+            !($keys instanceof \Traversable)
+        ) {
             throw new InvalidArgumentException('$keys is not iterable:' . \print_r($keys, true));
         }
 
         $results = [];
         foreach ((array) $keys as $key) {
-            $results = $this->delete($key);
+            $results[] = $this->delete($key);
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 
     /**
@@ -72,7 +76,7 @@ class CachePsr16 extends Cache implements CacheInterface
      */
     public function get($key, $default = null)
     {
-        if ($this->has($key) === true) {
+        if ($this->has($key)) {
             return $this->getItem($key);
         }
 
@@ -82,17 +86,21 @@ class CachePsr16 extends Cache implements CacheInterface
     /**
      * Obtains multiple cache items by their unique keys.
      *
-     * @param \iterable $keys    a list of keys that can obtained in a single operation
-     * @param mixed     $default default value to return for keys that do not exist
+     * @param iterable $keys    a list of keys that can obtained in a single operation
+     * @param mixed    $default default value to return for keys that do not exist
      *
      * @throws InvalidArgumentException
      *
-     * @return \iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as
-     *                   value.
+     * @return iterable A list of key => value pairs. Cache keys that do not exist or are stale will have $default as
+     *                  value.
      */
     public function getMultiple($keys, $default = null)
     {
-        if (!\is_array($keys) && !($keys instanceof \Traversable)) {
+        if (
+            !\is_array($keys)
+            &&
+            !($keys instanceof \Traversable)
+        ) {
             throw new InvalidArgumentException('$keys is not iterable:' . \print_r($keys, true));
         }
 
@@ -152,7 +160,7 @@ class CachePsr16 extends Cache implements CacheInterface
     /**
      * Persists a set of key => value pairs in the cache, with an optional TTL.
      *
-     * @param \iterable              $values a list of key => value pairs for a multiple-set operation
+     * @param iterable               $values a list of key => value pairs for a multiple-set operation
      * @param \DateInterval|int|null $ttl    Optional. The TTL value of this item. If no value is sent and
      *                                       the driver supports TTL then the library may set a default value
      *                                       for it or let the driver take care of that.
@@ -163,15 +171,19 @@ class CachePsr16 extends Cache implements CacheInterface
      */
     public function setMultiple($values, $ttl = null): bool
     {
-        if (!\is_array($values) && !($values instanceof \Traversable)) {
+        if (
+            !\is_array($values)
+            &&
+            !($values instanceof \Traversable)
+        ) {
             throw new InvalidArgumentException('$values is not iterable:' . \print_r($values, true));
         }
 
         $results = [];
         foreach ((array) $values as $key => $value) {
-            $results = $this->set($key, $value, $ttl);
+            $results[] = $this->set($key, $value, $ttl);
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 }

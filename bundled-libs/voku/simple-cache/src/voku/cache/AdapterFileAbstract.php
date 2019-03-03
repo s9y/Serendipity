@@ -34,7 +34,7 @@ abstract class AdapterFileAbstract implements iAdapter
     protected $fileMode = '0755';
 
     /**
-     * @param string|null $cacheDir
+     * @param \callable|string|null $cacheDir
      */
     public function __construct($cacheDir = null)
     {
@@ -44,9 +44,13 @@ abstract class AdapterFileAbstract implements iAdapter
             $cacheDir = \realpath(\sys_get_temp_dir()) . '/simple_php_cache';
         }
 
-        $this->cacheDir = (string) $cacheDir;
+        if (\is_callable($cacheDir)) {
+            $this->cacheDir = (string) \call_user_func($cacheDir);
+        } else {
+            $this->cacheDir = (string) $cacheDir;
+        }
 
-        if ($this->createCacheDirectory($cacheDir) === true) {
+        if ($this->createCacheDirectory($this->cacheDir) === true) {
             $this->installed = true;
         }
     }
@@ -106,14 +110,14 @@ abstract class AdapterFileAbstract implements iAdapter
     }
 
     /**
-     * @param $cacheFile
+     * @param string $cacheFileWithPath
      *
      * @return bool
      */
-    protected function deleteFile($cacheFile): bool
+    protected function deleteFile($cacheFileWithPath): bool
     {
-        if (\is_file($cacheFile)) {
-            return \unlink($cacheFile);
+        if (\is_file($cacheFileWithPath)) {
+            return \unlink($cacheFileWithPath);
         }
 
         return false;
@@ -199,7 +203,7 @@ abstract class AdapterFileAbstract implements iAdapter
      *
      * e.g. '0777', or '0755' ...
      *
-     * @param $fileMode
+     * @param string $fileMode
      */
     public function setFileMode($fileMode)
     {
@@ -207,7 +211,7 @@ abstract class AdapterFileAbstract implements iAdapter
     }
 
     /**
-     * @param $ttl
+     * @param int $ttl
      *
      * @return bool
      */

@@ -1,93 +1,5 @@
 [
     {
-        "name": "zendframework/zend-db",
-        "version": "2.2.2",
-        "version_normalized": "2.2.2.0",
-        "target-dir": "Zend/Db",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/zendframework/zend-db.git",
-            "reference": "release-2.2.2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://packages.zendframework.com/composer/zendframework-zend-db-2.2.2-release-2.2.2-6ab69c.zip",
-            "reference": "release-2.2.2",
-            "shasum": "8bc0c8d19bfd75f9a65a4b332f556c2571424c09"
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "suggest": {
-            "zendframework/zend-stdlib": "2.2.2"
-        },
-        "time": "2013-06-20 18:00:57",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.2-dev",
-                "dev-develop": "2.3-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Zend\\Db\\": ""
-            }
-        },
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": " ",
-        "keywords": [
-            "db",
-            "zf2"
-        ],
-        "support": {
-            "source": "https://github.com/zendframework/Component_ZendDb/tree/release-2.2.2"
-        }
-    },
-    {
-        "name": "psr/log",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/php-fig/log.git",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
-            "shasum": ""
-        },
-        "time": "2012-12-21 11:40:51",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Psr\\Log\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "PHP-FIG",
-                "homepage": "http://www.php-fig.org/"
-            }
-        ],
-        "description": "Common interface for logging libraries",
-        "keywords": [
-            "log",
-            "psr",
-            "psr-3"
-        ]
-    },
-    {
         "name": "katzgrau/klogger",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -109,7 +21,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.0.*"
         },
-        "time": "2014-03-20 02:36:36",
+        "time": "2014-03-20T02:36:36+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -142,6 +54,46 @@
         ]
     },
     {
+        "name": "psr/log",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+            "shasum": ""
+        },
+        "time": "2012-12-21T11:40:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Psr\\Log\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
         "name": "psr/simple-cache",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
@@ -159,7 +111,7 @@
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2017-10-23 01:57:42",
+        "time": "2017-10-23T01:57:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -193,17 +145,17 @@
     },
     {
         "name": "voku/simple-cache",
-        "version": "3.2.2",
-        "version_normalized": "3.2.2.0",
+        "version": "4.0.1",
+        "version_normalized": "4.0.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/voku/simple-cache.git",
-            "reference": "b08d16b4bd802f43f963c2209049f874df83ce56"
+            "reference": "dfda1d803fd79d9ee918e1bac700c94a6f30659c"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/voku/simple-cache/zipball/b08d16b4bd802f43f963c2209049f874df83ce56",
-            "reference": "b08d16b4bd802f43f963c2209049f874df83ce56",
+            "url": "https://api.github.com/repos/voku/simple-cache/zipball/dfda1d803fd79d9ee918e1bac700c94a6f30659c",
+            "reference": "dfda1d803fd79d9ee918e1bac700c94a6f30659c",
             "shasum": ""
         },
         "require": {
@@ -214,9 +166,9 @@
             "psr/simple-cache-implementation": "1.0"
         },
         "require-dev": {
-            "phpunit/phpunit": "~6.0"
+            "phpunit/phpunit": "~6.0 || ~7.0"
         },
-        "time": "2018-12-21 07:48:39",
+        "time": "2019-03-03T10:23:55+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -243,5 +195,184 @@
             "php",
             "simple cache"
         ]
+    },
+    {
+        "name": "zendframework/zend-db",
+        "version": "2.10.0",
+        "version_normalized": "2.10.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-db.git",
+            "reference": "320f5faaa0f98ebc93be5476ec4eda28255935c4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://packages.zendframework.com/composer/zendframework-zend-db-2.10.0-5a43dc.zip",
+            "reference": "320f5faaa0f98ebc93be5476ec4eda28255935c4",
+            "shasum": "3f285fe0d475cac25e350787779019caa6ddb188"
+        },
+        "require": {
+            "php": "^5.6 || ^7.0",
+            "zendframework/zend-stdlib": "^2.7 || ^3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^5.7.25 || ^6.4.4",
+            "zendframework/zend-coding-standard": "~1.0.0",
+            "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
+            "zendframework/zend-hydrator": "^1.1 || ^2.1 || ^3.0",
+            "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
+        },
+        "suggest": {
+            "zendframework/zend-eventmanager": "Zend\\EventManager component",
+            "zendframework/zend-hydrator": "Zend\\Hydrator component for using HydratingResultSets",
+            "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
+        },
+        "time": "2019-02-25T11:37:45+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.9-dev",
+                "dev-develop": "2.10-dev"
+            },
+            "zf": {
+                "component": "Zend\\Db",
+                "config-provider": "Zend\\Db\\ConfigProvider"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Db\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "files": [
+                "test/autoload.php"
+            ],
+            "psr-4": {
+                "ZendTest\\Db\\": "test/unit",
+                "ZendIntegrationTest\\Db\\": "test/integration"
+            }
+        },
+        "scripts": {
+            "check": [
+                "@cs-check",
+                "@test"
+            ],
+            "cs-check": [
+                "phpcs"
+            ],
+            "cs-fix": [
+                "phpcbf"
+            ],
+            "test": [
+                "phpunit --colors=always --testsuite \"unit test\""
+            ],
+            "test-coverage": [
+                "phpunit --colors=always --coverage-clover clover.xml"
+            ],
+            "test-integration": [
+                "phpunit --colors=always --testsuite \"integration test\""
+            ],
+            "upload-coverage": [
+                "coveralls -v"
+            ]
+        },
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "Database abstraction layer, SQL abstraction, result set abstraction, and RowDataGateway and TableDataGateway implementations",
+        "keywords": [
+            "db",
+            "zendframework",
+            "zf"
+        ],
+        "support": {
+            "docs": "https://docs.zendframework.com/zend-db/",
+            "issues": "https://github.com/zendframework/zend-db/issues",
+            "source": "https://github.com/zendframework/zend-db",
+            "rss": "https://github.com/zendframework/zend-db/releases.atom",
+            "slack": "https://zendframework-slack.herokuapp.com",
+            "forum": "https://discourse.zendframework.com/c/questions/components"
+        }
+    },
+    {
+        "name": "zendframework/zend-stdlib",
+        "version": "3.2.1",
+        "version_normalized": "3.2.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/zendframework/zend-stdlib.git",
+            "reference": "04e09d7f961b2271b0e1cbbb6f5f53ad23cf8562"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://packages.zendframework.com/composer/zendframework-zend-stdlib-3.2.1-90faf1.zip",
+            "reference": "04e09d7f961b2271b0e1cbbb6f5f53ad23cf8562",
+            "shasum": "36f654611fab0d6fe1ea1c72184a43f9810ce7c8"
+        },
+        "require": {
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "phpbench/phpbench": "^0.13",
+            "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
+            "zendframework/zend-coding-standard": "~1.0.0"
+        },
+        "time": "2018-08-28T21:34:05+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.2.x-dev",
+                "dev-develop": "3.3.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Zend\\Stdlib\\": "src/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "ZendTest\\Stdlib\\": "test/",
+                "ZendBench\\Stdlib\\": "benchmark/"
+            }
+        },
+        "scripts": {
+            "check": [
+                "@cs-check",
+                "@test"
+            ],
+            "cs-check": [
+                "phpcs"
+            ],
+            "cs-fix": [
+                "phpcbf"
+            ],
+            "test": [
+                "phpunit --colors=always"
+            ],
+            "test-coverage": [
+                "phpunit --colors=always --coverage-clover clover.xml"
+            ]
+        },
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "description": "SPL extensions, array utilities, error handlers, and more",
+        "keywords": [
+            "stdlib",
+            "zendframework",
+            "zf"
+        ],
+        "support": {
+            "docs": "https://docs.zendframework.com/zend-stdlib/",
+            "issues": "https://github.com/zendframework/zend-stdlib/issues",
+            "source": "https://github.com/zendframework/zend-stdlib",
+            "rss": "https://github.com/zendframework/zend-stdlib/releases.atom",
+            "slack": "https://zendframework-slack.herokuapp.com",
+            "forum": "https://discourse.zendframework.com/c/questions/components"
+        }
     }
 ]

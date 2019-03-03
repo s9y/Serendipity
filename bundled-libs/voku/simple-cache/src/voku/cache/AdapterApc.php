@@ -85,7 +85,8 @@ class AdapterApc implements iAdapter
      * @param bool   $limited  - If $limited is TRUE, the return value will exclude the individual list of cache
      *                         entries. This is useful when trying to optimize calls for statistics gathering
      *
-     * @return array|bool <p>Array of cached data (and meta-data) or FALSE on failure.</p>
+     * @return array|false
+     *                    <p>Array of cached data (and meta-data) or FALSE on failure.</p>
      */
     public function cacheInfo(string $type = '', bool $limited = false): array
     {

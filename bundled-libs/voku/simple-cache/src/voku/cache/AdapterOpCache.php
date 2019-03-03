@@ -29,7 +29,12 @@ class AdapterOpCache extends AdapterFileSimple
 
         if (self::$hasCompileFileFunction === null) {
             /** @noinspection PhpComposerExtensionStubsInspection */
-            self::$hasCompileFileFunction = \function_exists('opcache_compile_file') && !empty(\opcache_get_status());
+            /** @noinspection PhpUsageOfSilenceOperatorInspection */
+            self::$hasCompileFileFunction = (
+                \function_exists('opcache_compile_file')
+                &&
+                !empty(@\opcache_get_status())
+            );
         }
     }
 
