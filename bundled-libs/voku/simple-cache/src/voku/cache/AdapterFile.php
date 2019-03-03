@@ -86,7 +86,9 @@ class AdapterFile extends AdapterFileAbstract
             \fflush($fp);
             \flock($fp, \LOCK_UN);
         }
-        \fclose($fp);
+        if ($fp !== false) {
+            \fclose($fp);
+        }
 
         return $octetWritten !== false;
     }

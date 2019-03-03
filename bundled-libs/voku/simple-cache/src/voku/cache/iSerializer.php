@@ -12,18 +12,14 @@ interface iSerializer
     /**
      * serialize
      *
-     * @param $value
-     *
-     * @return mixed
+     * @param mixed $value
      */
     public function serialize($value);
 
     /**
      * unserialize
      *
-     * @param $value
-     *
-     * @return mixed
+     * @param string $value
      */
     public function unserialize($value);
 }

@@ -6,10 +6,10 @@
 [![Latest Stable Version](https://poser.pugx.org/voku/simple-cache/v/stable)](https://packagist.org/packages/voku/simple-cache) 
 [![Total Downloads](https://poser.pugx.org/voku/simple-cache/downloads)](https://packagist.org/packages/voku/simple-cache) 
 [![License](https://poser.pugx.org/voku/simple-cache/license)](https://packagist.org/packages/voku/simple-cache)
+[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.me/moelleken)
+[![Donate to this project using Patreon](https://img.shields.io/badge/patreon-donate-yellow.svg)](https://www.patreon.com/voku)
 
-
-:zap: Simple Cache Class
-===================
+# :zap: Simple Cache Class
 
 This is a simple Cache Abstraction Layer for PHP >= 7.0 that provides a simple interaction 
 with your cache-server. You can define the Adapter / Serializer in the "constructor" or the class will auto-detect you server-cache in this order:
@@ -21,27 +21,26 @@ with your cache-server. You can define the Adapter / Serializer in the "construc
 5. OpCache (via PHP-files)
 6. Static-PHP-Cache
 
-## Get "Simple Cache"
+### Get "Simple Cache"
 
 You can download it from here, or require it using [composer](https://packagist.org/packages/voku/simple-cache).
 ```json
 {
   "require": {
-    "voku/simple-cache": "3.*"
+    "voku/simple-cache": "4.*"
   }
 }
 ```
 
 
-## Install via "composer require"
+### Install via "composer require"
 
 ```shell
 composer require voku/simple-cache
-composer require predis/predis # if you will use redis as cache, then add predis
 ```
 
 
-## Quick Start
+### Quick Start
 
 ```php
 use voku\cache\Cache;
@@ -55,7 +54,7 @@ $bar = $cache->getItem('foo');
 ```
 
 
-## Usage 
+### Usage 
 
 ```php
 use voku\cache\Cache;
@@ -100,6 +99,84 @@ If you use the parameter "$checkForUser" (=== true) in the constructor, then the
 
 -> You can also overwrite the check for the user, if you add a global function named "checkForDev()".
 
+## Overwrite the auto-connection option
 
-## License
+You can overwrite the cache auto-detect via "CacheAdapterAutoManager" and the 
+"$cacheAdapterManagerForAutoConnect" option in the "Cache"-constructor. Additional you can also 
+activate the "$cacheAdapterManagerForAutoConnectOverwrite" option in the "Cache"-constructor, so that 
+you can implement your own cache auto-detect logic.
+
+```php
+
+$cacheManager = new \voku\cache\CacheAdapterAutoManager();
+
+// 1. check for "APCu" support first
+$cacheManager->addAdapter(
+    \voku\cache\AdapterApcu::class
+);
+
+// 2. check for "APC" support
+$cacheManager->addAdapter(
+    \voku\cache\AdapterApcu::class
+);
+
+// 3. try "OpCache"-Cache
+$cacheManager->addAdapter(
+    \voku\cache\AdapterOpCache::class,
+    static function () {
+        $cacheDir = \realpath(\sys_get_temp_dir()) . '/simple_php_cache_opcache';
+
+        return $cacheDir;
+    }
+);
+
+// 4. try "File"-Cache
+$cacheManager->addAdapter(
+    \voku\cache\AdapterFileSimple::class,
+    static function () {
+        $cacheDir = \realpath(\sys_get_temp_dir()) . '/simple_php_cache_file';
+
+        return $cacheDir;
+    }
+);
+
+
+// 5. use Memory Cache as final fallback
+$cacheManager->addAdapter(
+    \voku\cache\AdapterArray::class
+);
+
+$cache = new \voku\cache\CachePsr16(
+    null, // use auto-detection
+    null, // use auto-detection
+    false, // do not check for usage
+    true, // enable the cache
+    false, // do not check for admin session
+    false, // do not check for dev
+    false, // do not check for admin session
+    false, // do not check for server vs. client ip
+    '', // do not use "_GET"-parameter for disabling
+    $cacheManager, // new auto-detection logic
+    true // overwrite the auto-detection logic
+);
+```
+
+### Support
+
+For support and donations please visit [Github](https://github.com/voku/simple-cache/) | [Issues](https://github.com/voku/simple-cache/issues) | [PayPal](https://paypal.me/moelleken) | [Patreon](https://www.patreon.com/voku).
+
+For status updates and release announcements please visit [Releases](https://github.com/voku/simple-cache/releases) | [Twitter](https://twitter.com/suckup_de) | [Patreon](https://www.patreon.com/voku/posts).
+
+For professional support please contact [me](https://about.me/voku).
+
+### Thanks
+
+- Thanks to [GitHub](https://github.com) (Microsoft) for hosting the code and a good infrastructure including Issues-Managment, etc.
+- Thanks to [IntelliJ](https://www.jetbrains.com) as they make the best IDEs for PHP and they gave me an open source license for PhpStorm!
+- Thanks to [Travis CI](https://travis-ci.com/) for being the most awesome, easiest continous integration tool out there!
+- Thanks to [StyleCI](https://styleci.io/) for the simple but powerfull code style check.
+- Thanks to [PHPStan](https://github.com/phpstan/phpstan) && [Psalm](https://github.com/vimeo/psalm) for relly great Static analysis tools and for discover bugs in the code!
+
+
+### License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fvoku%2Fsimple-cache.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fvoku%2Fsimple-cache?ref=badge_large)

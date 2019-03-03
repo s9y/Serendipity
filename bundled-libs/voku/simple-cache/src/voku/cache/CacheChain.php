@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace voku\cache;
 
-/**
- * CacheChain: global-cache-chain class
- */
 class CacheChain implements iCache
 {
     /**
@@ -87,13 +84,13 @@ class CacheChain implements iCache
             $results[] = $cache->setItem($key, $value, $ttl);
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setItemToDate(string $key, $value, \DateTime $date): bool
+    public function setItemToDate(string $key, $value, \DateTimeInterface $date): bool
     {
         // init
         $results = [];
@@ -103,7 +100,7 @@ class CacheChain implements iCache
             $results[] = $cache->setItemToDate($key, $value, $date);
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 
     /**
@@ -118,7 +115,7 @@ class CacheChain implements iCache
             $results[] = $cache->removeItem($key);
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 
     /**
@@ -147,6 +144,6 @@ class CacheChain implements iCache
             $results[] = $cache->removeAll();
         }
 
-        return \in_array(false, $results, true) === false;
+        return !\in_array(false, $results, true);
     }
 }
