@@ -1,8 +1,13 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
+    * Minimal PHP version is now PHP 7.0
 
-    * Fix bug in nl2br's p mode that ate pre elements
+    * Update voku/simple-cache to 4.0.1, fixes opcache warning on
+      hosted environments (thanks @voku and @hannob)
+
+    * Fix bug in nl2br's p mode that ate pre elements (thanks
+      @stephanbrunker!)
 
     * Add internal cache invalidation when comment is added
 
