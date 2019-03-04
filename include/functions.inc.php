@@ -1375,8 +1375,39 @@ function serendipity_url_allowed($url) {
 }
 
 use voku\cache\Cache;
+// Configure voku/simple-cache to use templates_c as directory for the opcache files, the fallback
+// when Memcached and Redis are not used. Returns the configured cache object. Used internally by
+// the other cache functions, you most likely never need to call this.
 function serendipity_setupCache() {
-    $cache = new Cache();
+    $cacheManager = new \voku\cache\CacheAdapterAutoManager();
+
+    $cacheManager->addAdapter(
+        \voku\cache\AdapterOpCache::class,
+        static function () {
+            global $serendipity;
+            $cacheDir = $serendipity['serendipityPath'] . '/templates_c';
+
+            return $cacheDir;
+        }
+    );
+
+    $cacheManager->addAdapter(
+        \voku\cache\AdapterArray::class
+    );
+    
+    $cache = new Cache(
+        null,
+        null,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        '',
+        $cacheManager,
+        false
+    );
     return $cache;
 }
 
