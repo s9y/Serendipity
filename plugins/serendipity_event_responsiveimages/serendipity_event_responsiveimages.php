@@ -18,7 +18,7 @@ class serendipity_event_responsiveimages extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_RESPONSIVE_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '0.5');
+        $propbag->add('version',       '0.5.1');
         $propbag->add('requirements',  array(
             'serendipity' => '2.2',
         ));
@@ -83,6 +83,9 @@ class serendipity_event_responsiveimages extends serendipity_event
         global $serendipity;
 
         $hooks = &$bag->get('event_hooks');
+        if (!is_object($serendipity['smarty'])) {
+            serendipity_smarty_init(); // if not set to avoid member function assign() on a non-object error, start Smarty templating
+        }
         $this->breakpoints = $serendipity['smarty']->getTemplateVars('template_option')['breakpoints'];
         if (! $this->breakpoints) {
             $this->breakpoints = [1600, 1200, 600]; # This can be overwritten by the theme
