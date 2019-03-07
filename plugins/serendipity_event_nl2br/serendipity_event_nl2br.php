@@ -624,6 +624,10 @@ p.wl_notopbottom {
 		$tagstack = array();
 		$isolation_flag = false;
 
+        if (! is_array($textarray)) {
+            return $text;
+        }
+
 		for ($i=0; $i < count($textarray); $i++)
 		{
 
