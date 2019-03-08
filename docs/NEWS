@@ -1,6 +1,9 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
+    * Improbve nl2br p mode to works with tags like <strike>
+      (thanks @stephanbrunker)
+
     * Minimal PHP version is now PHP 7.0
 
     * Update voku/simple-cache to 4.0.1, fixes opcache warning on
