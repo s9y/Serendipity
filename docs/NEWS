@@ -1,7 +1,10 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
-    * Improbve nl2br p mode to works with tags like <strike>
+    * Fallback for $lang variable when configuration failed to load,
+      which evades some unuseful error messages (thanks @HQJaTu!)
+
+    * Improve nl2br p mode to works with tags like <strike>
       (thanks @stephanbrunker)
 
     * Minimal PHP version is now PHP 7.0
