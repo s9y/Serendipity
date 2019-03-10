@@ -1024,7 +1024,12 @@ function serendipity_getSessionLanguage() {
             if (isset($serendipity['COOKIE']['userDefLang']) && ! empty($serendipity['COOKIE']['userDefLang'])) {
                 $lang = $serendipity['COOKIE']['userDefLang'];
             } else {
-                $lang = $serendipity['lang'];
+                if ($serendipity['lang']) {
+                    $lang = $serendipity['lang'];
+                } else {
+                    // serendipity_load_configuration() failed to load language, go default
+                    $lang = $serendipity['autolang'];
+                }
             }
         }
         $serendipity['detected_lang'] = null;
