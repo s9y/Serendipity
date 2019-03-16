@@ -34,6 +34,15 @@
                     {$staticpage_precontent}
                 </div>
             {/if}
+{* CUSTOM TO THIS THEME - CUSTOM STATICPAGE IMAGE *}  
+            {if $staticpage_custom.staticpage_image}
+                {if $staticpage_custom.staticpage_image|is_in_string:'<iframe,<embed,<object'}{* we assume this is a video, just emit the contents of the var *}
+                    {$staticpage_custom.staticpage_image}
+                {else}
+                    {serendipity_getImageSize file=$staticpage_custom.staticpage_image assign="img_size"}
+                    <img class="{if $img_size[0]>=800}image-full-width{else}serendipity_image_left{/if}" src="{$staticpage_custom.staticpage_image}" width="{$img_size[0]}" height="{$img_size[1]}" alt=""/>
+                {/if}
+            {/if}                                                                 
         </section>
     {/if}
     {if $staticpage_navigation && $staticpage_shownavi && ($staticpage_navigation.prev.link || $staticpage_navigation.next.link)}
