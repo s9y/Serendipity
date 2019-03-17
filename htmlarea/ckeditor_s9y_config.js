@@ -65,7 +65,7 @@ CKEDITOR.editorConfig = function( config ) {
           - Allow <pre[*attributes](*classes)> for custom attributes/classes in code blocks
     */
     // protect
-    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);';
+    config.extraAllowedContent = 'mediainsert[*]{*}(*);gallery[*]{*}(*);media[*]{*}(*);script[*]{*}(*);audio[*]{*}(*);div[*]{*}(*);span[*]{*}(*);img[height,width];pre[*](*);code;tt;';
     // Do not use auto paragraphs, added to these allowed tags (only!). Please regard that this was marked deprecated by CKE 4.4.5, but is a need for (our use of) extraAllowedContent - check this again by future versions!
     config.autoParagraph = false; // defaults(true)
 
@@ -234,7 +234,8 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'others',      items : s9ypluginbuttons },
         { name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] },
         { name: 'document',   groups : [ 'mode', 'document', 'doctools' ], items : [ 'Source' ] },
-        { name: 'cheatsheet',  items : ['CheatSheet'] }
+        { name: 'cheatsheet',  items : ['CheatSheet'] },
+        { name: 'codetag',     items: [ 'Code' ] }
     ];
 //    console.log(JSON.stringify(config.toolbar_Full));
 
@@ -252,7 +253,8 @@ CKEDITOR.editorConfig = function( config ) {
         { name: 'mediaembed',   items: [ 'MediaEmbed' ] },
         { name: 'others',       items: s9ypluginbuttons },
         { name: 'document',    groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source' ] },
-        { name: 'about',        items: [ 'About' ] }
+        { name: 'about',        items: [ 'About' ] },
+        //{ name: 'codetag',     items: [ 'Code' ] }
     ];
 //    console.log(JSON.stringify(config.toolbar_s9y));
 
