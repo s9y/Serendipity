@@ -1,7 +1,11 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
+    * Security: Fix XSS in Media Library by interpreted EXIF tags
+                (thanks @hannob!)    
+
     * Allow to receive multiple trackbacks and pingbacks
+      (thanks @mitch!)
 
     * Fallback for $lang variable when configuration failed to load,
       which evades some unuseful error messages (thanks @HQJaTu!)
