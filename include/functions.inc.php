@@ -1385,7 +1385,7 @@ function serendipity_setupCache() {
         \voku\cache\AdapterOpCache::class,
         static function () {
             global $serendipity;
-            $cacheDir = $serendipity['serendipityPath'] . '/templates_c';
+            $cacheDir = $serendipity['serendipityPath'] . '/templates_c/simple_cache';
 
             return $cacheDir;
         }
