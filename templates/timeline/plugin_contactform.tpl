@@ -5,13 +5,13 @@
             {if $is_contactform_error}
                  <div id="search-block" class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$plugin_contactform_error}</p>
+                        <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$plugin_contactform_error}</p>
                     </div>
                 </div>
                 {foreach from=$comments_messagestack item="message"}
                     <div id="search-block" class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$message}</p>
+                            <p class="alert alert-danger alert-error"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fa fas-exclamation fa-stack-1x"></i></span> {$message}</p>
                         </div>
                     </div>
                 {/foreach}

@@ -21,7 +21,7 @@
                 <div class="col-md-10 archive-post-body">
                     <h4><a href="{$entry.link}">{$entry.title}</a></h4>
                     <p class="post-info"><span class="sr-only">{$CONST.POSTED_BY}</span>
-                        <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="fa fa-clock-o" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
+                        <span class="sr-only"> {$CONST.ON}</span><span class="entry-timestamp"><i class="far fa-clock" aria-hidden="true"></i><time datetime="{$entry.timestamp|serendipity_html5time}">{$entry.timestamp|formatTime:$template_option.date_format}</time></span>
                     </p>
                     {if $entry.body}
                         {$entry.body|strip_tags|truncate:180:" ..."}

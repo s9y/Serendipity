@@ -17,7 +17,7 @@
                 </div>
                 <div class="comment-meta">
                     {if $entry.is_entry_owner}
-                        <a class="comment-source-ownerlink btn btn-sm btn-default btn-theme"  href="{$serendipityBaseURL}comment.php?serendipity[delete]={$trackback.id}&amp;serendipity[entry]={$trackback.entry_id}&amp;serendipity[type]=trackbacks" title="{$CONST.DELETE}"><i class="fa fa-lg fa-trash-o"></i><span class="sr-only"> {$CONST.DELETE}</span></a>
+                        <a class="comment-source-ownerlink btn btn-sm btn-default btn-theme"  href="{$serendipityBaseURL}comment.php?serendipity[delete]={$trackback.id}&amp;serendipity[entry]={$trackback.entry_id}&amp;serendipity[type]=trackbacks" title="{$CONST.DELETE}"><i class="fas fa-lg fa-trash-alt"></i><span class="sr-only"> {$CONST.DELETE}</span></a>
                     {/if}                       
                 </div>
             </div>

@@ -15,7 +15,7 @@
                 <ul class="category-children">
             {/if}
             <li id="category_{$plugin_category.categoryid}" class="category_depth{$plugin_category.catdepth} archive-category-list-item">
-                {if $template_option.category_rss_archive == true}<a class="btn btn-sm btn-default btn-theme serendipity_xml_icon" href="{$plugin_category.feedCategoryURL}" title="{$plugin_category.category_name|escape} rss"><i class="fa fa-rss"></i></a>{/if}
+                {if $template_option.category_rss_archive == true}<a class="btn btn-sm btn-default btn-theme serendipity_xml_icon" href="{$plugin_category.feedCategoryURL}" title="{$plugin_category.category_name|escape} rss"><i class="fas fa-rss"></i></a>{/if}
                 <a class="btn btn-sm btn-default btn-theme" href="{$plugin_category.categoryURL}" title="{$plugin_category.category_description|escape}">{$plugin_category.category_name|escape}</a>
             {if $smarty.foreach.each_category.last}
                 {if $plugin_category.catdepth>0}    
@@ -30,5 +30,5 @@
         {/foreach}
     </ul>
 {else}
-    <p class="alert alert-warning"><span class="fa-stack" aria-hidden="true"><i class="fa fa-circle-thin fa-stack-2x"></i><i class="fa fa-exclamation fa-stack-1x"></i></span> {$CONST.CATEGORIES_ON_ARCHIVE_DESC}</p>
+    <p class="alert alert-warning"><span class="fa-stack" aria-hidden="true"><i class="far fa-circle fa-stack-2x"></i><i class="fas fa-exclamation fa-stack-1x"></i></span> {$CONST.CATEGORIES_ON_ARCHIVE_DESC}</p>
 {/if}
