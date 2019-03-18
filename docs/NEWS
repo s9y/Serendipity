@@ -1,5 +1,7 @@
 Version 2.1.5 ()
 ------------------------------------------------------------------------
+    * Security: Fix XSS in Media Library by interpreted EXIF tags
+                (thanks @hannob!)    
 
     * Change default for comment subscription to full text.
 
