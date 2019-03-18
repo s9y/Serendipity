@@ -1,6 +1,8 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
+    * Allow to receive multiple trackbacks and pingbacks
+
     * Fallback for $lang variable when configuration failed to load,
       which evades some unuseful error messages (thanks @HQJaTu!)
 

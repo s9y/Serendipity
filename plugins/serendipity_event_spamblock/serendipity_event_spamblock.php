@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.87');
+        $propbag->add('version',       '1.88');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -226,7 +226,7 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('type', 'boolean');
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_BODYCLONE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_BODYCLONE_DESC);
-                $propbag->add('default', true);
+                $propbag->add('default', false);
                 break;
 
             case 'captchas':
@@ -1160,7 +1160,7 @@ class serendipity_event_spamblock extends serendipity_event
                         }
 
                         // Check for identical comments. We allow to bypass trackbacks from our server to our own blog.
-                        if ( $this->get_config('bodyclone', true) === true && $_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR'] && $addData['type'] != 'PINGBACK') {
+                        if ( $this->get_config('bodyclone', false) === true && $_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR'] && $addData['type'] == 'NORMAL') {
                             $query = "SELECT count(id) AS counter FROM {$serendipity['dbPrefix']}comments WHERE type = '" . $addData['type'] . "' AND body = '" . serendipity_db_escape_string($addData['comment']) . "'";
                             $row   = serendipity_db_query($query, true);
                             if (is_array($row) && $row['counter'] > 0) {
