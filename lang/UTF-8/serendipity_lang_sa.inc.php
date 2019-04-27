@@ -224,7 +224,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'New comment to subscribed entry "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nA new comment was made to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nA new trackback was added to the entry you are monitoring on \"%s\", entitled \"%s\"\nThe name of the poster is: %s\n\nYou can find the entry here: %s\n\nYou can unsubscribe by clicking on this link: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -496,7 +496,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'اختر الملف الذي تريد رفعة:');
 @define('SAVE_FILE_AS', 'حفظ الملف بأسم:');
 @define('STORE_IN_DIRECTORY', 'تخزينه في داخل هذا المجلد: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>أضافة ملف الى الميديا تحت مسئوليتك:</b><p> هنا يمكن لك رفع ملفات الميديا ، أو اخبرنا عنها كي يتم جلبها من أي مكان في الانترنت! أن لم يكن لديك الصورة المناسبة <a href="http://images.google.com" target="_blank"> ابحث عن الصورة المطلوبة في قوقل للصور </a> التي تناسب فكرة موضوعك ، والنتيجة أحيانا تكون مضحكة أو عادية ، ولكن عليك مراعاة حقوق النشر ، لذلك يتوجب عليك السؤال عنها قبل أن تأخذها من مصدرها<p><b> أختر الطريقة التي تناسبك:</b><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>أضافة ملف الى الميديا تحت مسئوليتك:</b><p> هنا يمكن لك رفع ملفات الميديا ، أو اخبرنا عنها كي يتم جلبها من أي مكان في الانترنت! أن لم يكن لديك الصورة المناسبة <a href="https://images.google.com/" target="_blank"> ابحث عن الصورة المطلوبة في قوقل للصور </a> التي تناسب فكرة موضوعك ، والنتيجة أحيانا تكون مضحكة أو عادية ، ولكن عليك مراعاة حقوق النشر ، لذلك يتوجب عليك السؤال عنها قبل أن تأخذها من مصدرها<p><b> أختر الطريقة التي تناسبك:</b><br/>');
 @define('MEDIA_RENAME', 'أعادة تسمية الملف');
 @define('IMAGE_RESIZE', 'تغيير قياسات هذه الصورة');
 @define('MEDIA_DELETE', 'حذف الملف');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', 'أعرض المواضيع المستقبلية');
 @define('INSTALL_SHOWFUTURE_DESC', 'ان تم تمكين هذا فإنه سوف يعرض مستقبلا جميع مواضيع المجلة. الخيار الافتراضي هو إخفاء المواضيع و تعرض فقط عند تاريخ النشر');
 @define('INSTALL_DBPERSISTENT', 'أستخدام الاتباط الحالي');
-@define('INSTALL_DBPERSISTENT_DESC', 'تمكن استخدام الاتصال الدائم لقاعدة البيانات. يمكنك قراءة المزيد هنا <a href="http://php.net/manual/features.persistent-connections.php" target="_blank"> هنــا </a> ينصح بهذا الاجراء');
+@define('INSTALL_DBPERSISTENT_DESC', 'تمكن استخدام الاتصال الدائم لقاعدة البيانات. يمكنك قراءة المزيد هنا <a href="https://php.net/manual/features.persistent-connections.php" target="_blank"> هنــا </a> ينصح بهذا الاجراء');
 @define('NO_IMAGES_FOUND', 'لم يتم العثور على الصورة');
 @define('PERSONAL_SETTINGS', 'الاعدادات الشخصية');
 @define('REFERER', 'يشير إلى');
@@ -786,7 +786,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', 'محلي');
 @define('INSTALL_CHARSET', 'ترميز الأحرف');
-@define('INSTALL_CHARSET_DESC', ' هنا يمكن لك  أن تغير بين الترميز العالمي UTF-8 و الترميز المحلي للغتك مثل ترميز (ISO, EUC, ...)  ، بعض اللغات لديها فقط ترجمة ترميز UTF-8  لذلك باختياريك ترميز لغتك المحلية لن يكون له أثر على أداء مدونتك ، نقترح استخدام UTF-8 للتركيب الجديد. أحذر . . .أحذر . . . أحذر . . .  لا تقم بتغيير الترميز إذا كنت كتبت مواضيع من قبل. لأن ما كتبته بترميز لغة أخرى سوف يصبح على شكل طلاسم. أتجه إلى هذا الموقع http://www.s9y.org/index.php?node=46   للاطلاع على المزيد من المعلومات');
+@define('INSTALL_CHARSET_DESC', ' هنا يمكن لك  أن تغير بين الترميز العالمي UTF-8 و الترميز المحلي للغتك مثل ترميز (ISO, EUC, ...)  ، بعض اللغات لديها فقط ترجمة ترميز UTF-8  لذلك باختياريك ترميز لغتك المحلية لن يكون له أثر على أداء مدونتك ، نقترح استخدام UTF-8 للتركيب الجديد. أحذر . . .أحذر . . . أحذر . . .  لا تقم بتغيير الترميز إذا كنت كتبت مواضيع من قبل. لأن ما كتبته بترميز لغة أخرى سوف يصبح على شكل طلاسم. أتجه إلى هذا الموقع https://docs.s9y.org/docs/developers/internationalization.html   للاطلاع على المزيد من المعلومات');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
@@ -1038,3 +1038,5 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

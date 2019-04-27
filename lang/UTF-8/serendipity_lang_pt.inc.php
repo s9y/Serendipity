@@ -207,7 +207,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Novo comentário para o artigo inscrita"%s"');
 @define('SUBSCRIPTION_MAIL', "Oi %s,\n\nUm novo comentário foi feito num artigo que você está monitorando em \"%s\", intitulada \"%s\"\nQuem enviou o comentário foi: %s\n\nO artigo à qual nos referimos pode ser encontrada em: %s\n\nVocê pode cancelar sua inscrição clicando neste link: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Oi %s,\n\nUm novo trackback foi adicionado num artigo que você está monitorando em \"%s\", intitulada \"%s\"\nQuem enviou o comentário foi: %s\n\nO artigo à qual nos referimos pode ser encontrada em: %s\n\nVocê pode cancelar sua inscrição clicando neste link: %s\n");
-@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blog que tem por aí, e você também pode usá-lo.\nDê uma olhada em <http://s9y.org> para descobrir como.");
+@define('SIGNATURE', "\n-- \n%s faz uso do Serendipity.\nO melhor Blog que tem por aí, e você também pode usá-lo.\nDê uma olhada em <https://s9y.org> para descobrir como.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -519,7 +519,7 @@
 @define('CATEGORY_DELETED_ARTICLES_MOVED', 'Categoria #%s excluída. Os artigos antigos foram movidos para a categoria #%s');
 @define('INSTALL_TOP_AS_LINKS', 'Exibir maiores saídas/referências como links?');
 @define('INSTALL_TOP_AS_LINKS_DESC', '"não": Saídas e Referências são exibidas como puro texto para prevenir spam do google. "sim": Saídas e Referências são exibidas como links. "padrão": Usa o valor definido na configuração global (recomendado).');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Adiciona um arquivo para o seu repositório de mídia:</b><p>Aqui você pode transferir arquivos de mídia, ou oriente-me para pegá-lo em algum lugar na web! Se não possuir uma imagem apropriada, <a href="http://images.google.com" target="_blank">procure no google</a> alguma imagem que tenha relação com o assunto, os resultados são geralmente úteis e divertidos :)</p><p><b>Selecione o método:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Adiciona um arquivo para o seu repositório de mídia:</b><p>Aqui você pode transferir arquivos de mídia, ou oriente-me para pegá-lo em algum lugar na web! Se não possuir uma imagem apropriada, <a href="https://images.google.com/" target="_blank">procure no google</a> alguma imagem que tenha relação com o assunto, os resultados são geralmente úteis e divertidos :)</p><p><b>Selecione o método:</b></p><br/>');
 @define('COMMENTS_FILTER_SHOW', 'Mostrat');
 @define('COMMENTS_FILTER_ALL', 'Todos');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Apenas os aprovados');
@@ -580,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', 'Mostrar entradas futuras');
 @define('INSTALL_SHOWFUTURE_DESC', 'Habilitando esta escolha, todas as entradas no blog serão mostradas. O padrão é ocultar estas entradas e só mostra-las na data de publicação.');
 @define('INSTALL_DBPERSISTENT', 'Usar conexões persistentes');
-@define('INSTALL_DBPERSISTENT_DESC', 'Habilitar o uso de conexões persistentes na base de dados, leia mais em <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. Normalmente não recomendamos isso!');
+@define('INSTALL_DBPERSISTENT_DESC', 'Habilitar o uso de conexões persistentes na base de dados, leia mais em <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. Normalmente não recomendamos isso!');
 @define('NO_IMAGES_FOUND', 'Nenhuma imagem encontrada');
 @define('PERSONAL_SETTINGS', 'Preferências Pessoais');
 @define('REFERER', 'Referenciador');
@@ -787,7 +787,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Visualizar arquivos multimídia de outros usuários');
 @define('CHARSET_NATIVE', 'Código de página nativo');
 @define('INSTALL_CHARSET', 'Seleção do código de página');
-@define('INSTALL_CHARSET_DESC', 'Aqui você pode escolher os códigos de página entre o UTF-8 ou nativo (ISO, EUC, ...). Algumas linguagens apenas possuem traduções em UTF-8 então a escolha por nativo não terá efeito. o UTF-8 é sugerido para novas instalações. Não faça alterações se você já fez entradas com caracteres especiais - eles podem aparecer corrompidos. Para saber mais acesse http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Aqui você pode escolher os códigos de página entre o UTF-8 ou nativo (ISO, EUC, ...). Algumas linguagens apenas possuem traduções em UTF-8 então a escolha por nativo não terá efeito. o UTF-8 é sugerido para novas instalações. Não faça alterações se você já fez entradas com caracteres especiais - eles podem aparecer corrompidos. Para saber mais acesse https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
@@ -1123,3 +1123,5 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

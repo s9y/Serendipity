@@ -224,7 +224,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '新回复到订阅的文章 "%s"');
 @define('SUBSCRIPTION_MAIL', "你好 %s,\n\n你订阅的文章有了新的回复在 \"%s\", 标题是 \"%s\"\n回复的发表者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "你好 %s,\n\n你订阅的文章有了新的引用在 \"%s\", 标题是 \"%s\"\n引用的作者是: %s\n\n你可以在这找到此文章: %s\n\n你可以点这个连接取消订阅: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\n <http://www.s9y.org>");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\n <https://www.s9y.org>");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -495,7 +495,7 @@
 @define('ENTER_MEDIA_UPLOAD', '请选择要上传的文件:');
 @define('SAVE_FILE_AS', '保存文件:');
 @define('STORE_IN_DIRECTORY', '保存到以下目录: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>新增文件到媒体目录:</b><p>你可以上传媒体文件, 或告诉系统到哪寻找。如果你没有想要的图片, 你可以到 <a href="http://images.google.com" target="_blank">google搜索图片</a>.<p><b>选择方式:</b><br>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>新增文件到媒体目录:</b><p>你可以上传媒体文件, 或告诉系统到哪寻找。如果你没有想要的图片, 你可以到 <a href="https://images.google.com/" target="_blank">google搜索图片</a>.<p><b>选择方式:</b><br>');
 @define('MEDIA_RENAME', '更改文件名称');
 @define('IMAGE_RESIZE', '更改图片尺寸');
 @define('MEDIA_DELETE', '删除这个文件');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', '显示未来文章'); // Translate
 @define('INSTALL_SHOWFUTURE_DESC', '如果打开, 系统将会显示未来发表的文章，预设是设定未来文章隐藏，然后到发布日自动显示。'); // Translate
 @define('INSTALL_DBPERSISTENT', '使用持续连接'); // Translate
-@define('INSTALL_DBPERSISTENT_DESC', '对数据库使用持续连接, 详情参阅 <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">这里</a>，通常不建议使用。'); // Translate
+@define('INSTALL_DBPERSISTENT_DESC', '对数据库使用持续连接, 详情参阅 <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">这里</a>，通常不建议使用。'); // Translate
 @define('NO_IMAGES_FOUND', '找不到文件'); // Translate
 @define('PERSONAL_SETTINGS', '个人设置'); // Translate
 @define('REFERER', '来源'); // Translate
@@ -786,7 +786,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', '浏览会员的媒体文件');
 @define('CHARSET_NATIVE', '预设');
 @define('INSTALL_CHARSET', '语言选项');
-@define('INSTALL_CHARSET_DESC', '这里可以让你转换 UTF-8 或预设编码 (ISO, UTF-8, ...)有些语言包只有 UTF-8 编码，所以换成预设语言有不会任何改变。新安装的日志建议使用 UTF-8 编码。记得不要改变这个设定如果你已经发布了文章。详情参阅 http://www.s9y.org/index.php?node=46');
+@define('INSTALL_CHARSET_DESC', '这里可以让你转换 UTF-8 或预设编码 (ISO, UTF-8, ...)有些语言包只有 UTF-8 编码，所以换成预设语言有不会任何改变。新安装的日志建议使用 UTF-8 编码。记得不要改变这个设定如果你已经发布了文章。详情参阅 https://docs.s9y.org/docs/developers/internationalization.html');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'External Events');
 @define('CALENDAR_EXTEVENT_DESC', '如果开启，外挂可以在日历内以颜色显示它的事件。如果没有使用这些特殊的外挂，建议不要使用。');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'XML-RPC API 功能不会添加在 s9y 的安装里，因为漏洞和不多人使用的关系。所以必须安装 XML-RPC 的外挂如果使用 XML-RPC API。所有的 URL 不会因此改变，安装这个外挂后马上使用。');
@@ -1119,3 +1119,5 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

@@ -224,7 +224,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'توضیح جدیدی برای مطلب "%s" ارسال شد');
 @define('SUBSCRIPTION_MAIL', "سلام %s،\n\nA نظر جدیدی برای مطلب \"%s\"، با تیتر \"%s\" ارسال شده است\nنام ارسال کننده: %s\n\nمی توانید مطلب را در لینک روبرو مشاهده کنید: %s\n\nمی توانید با کلیک روی لینک روبرو این نظر را قبول نکنید: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "سلام %s،\n\nA دنبالک جدیدی برای مطلب \"%s\"، با تیتر \"%s\" ارسال شده است\nنام ارسال کننده: %s\n\nمی توانید مطلب را در لینک روبرو مشاهده کنید: %s\n\nمی توانید با کلیک روی لینک روبرو این دنبالک را قبول نکنید: %s\n");
-@define('SIGNATURE', "\n-- \n%s بر پایه سرندیپیتی بنا شده است.\nبهترین سیستم وبلاگ موجود، شما هم می توانید از این سیستم استفاده کنید.\nسایت <http://s9y.org> را بری روش نصب و استفاده مرور کنید.");
+@define('SIGNATURE', "\n-- \n%s بر پایه سرندیپیتی بنا شده است.\nبهترین سیستم وبلاگ موجود، شما هم می توانید از این سیستم استفاده کنید.\nسایت <https://s9y.org> را بری روش نصب و استفاده مرور کنید.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0');
@@ -496,7 +496,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'فایلی را برای بالاگذاری مشخص کنید:');
 @define('SAVE_FILE_AS', 'ذخیره فایل با نام:');
 @define('STORE_IN_DIRECTORY', 'ذخیره در شاخه: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>افزودن یک فایل به انبار:</b><p>در اینجا شما می توانید فایل های خود را بالاگذاری کنید، یا آدرس آنها را برای دریافت از اینترنت وارد کنید! اگر عکسی برای بالاگذاری ندارید جستجویی در <a href="http://images.google.com" target="_blank">اینجا</a> برای یافتن عکس مورد علاقه خود داشته باشید، نتیجه معمولا مفید و جالب خواهد بود :)</p><p><b>انتخاب روش:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>افزودن یک فایل به انبار:</b><p>در اینجا شما می توانید فایل های خود را بالاگذاری کنید، یا آدرس آنها را برای دریافت از اینترنت وارد کنید! اگر عکسی برای بالاگذاری ندارید جستجویی در <a href="https://images.google.com" target="_blank">اینجا</a> برای یافتن عکس مورد علاقه خود داشته باشید، نتیجه معمولا مفید و جالب خواهد بود :)</p><p><b>انتخاب روش:</b></p><br/>');
 @define('MEDIA_RENAME', 'تغییر نام فایل');
 @define('IMAGE_RESIZE', 'تغییر اندازه تصویر');
 @define('MEDIA_DELETE', 'حذف فایل');
@@ -581,7 +581,7 @@
 @define('INSTALL_SHOWFUTURE', 'نمایش پست های آینده');
 @define('INSTALL_SHOWFUTURE_DESC', 'در صورت فعال بودن، تمامی مقادیر آینده نیز در وبلاگ نمایش داده می شوند. پیش فرض، نمایش داده نشدن مقادیر آینده می باشد و مقادیری که تاریخ انتشارشان رسیده باشد نمایش داده خواهند شد.');
 @define('INSTALL_DBPERSISTENT', 'استفاده از اتصال های پایدار');
-@define('INSTALL_DBPERSISTENT_DESC', 'برای استفاده از اتصال پایدار این گزینه را فعال کنید، برای اطلاعات بیشتر <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">اینجا</a> را مطالعه کنید. این گزینه در حالت عادی توصیه نمی شود');
+@define('INSTALL_DBPERSISTENT_DESC', 'برای استفاده از اتصال پایدار این گزینه را فعال کنید، برای اطلاعات بیشتر <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">اینجا</a> را مطالعه کنید. این گزینه در حالت عادی توصیه نمی شود');
 @define('NO_IMAGES_FOUND', 'هیچ تصویری یافت نشد');
 @define('PERSONAL_SETTINGS', 'تنظیمات شخصی');
 @define('REFERER', 'بازدید کننده');
@@ -784,7 +784,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: مشاهده فایل های رسانه کاربران دیگر');
 @define('CHARSET_NATIVE', 'طبیعی');
 @define('INSTALL_CHARSET', 'انتخاب نوع حروف');
-@define('INSTALL_CHARSET_DESC', 'در اینجا می توانید نوع حروف را بین UTF-8 یا کاراکتر های طبیعی (ISO, EUC, ...) تغییر دهید. بسیاری از زبان ها، فقط به UTF-8 ترجمه شده اند که کاراکتر های "طبیعی" تاثیری روی آنها نمی گذارد. ما به شما UTF-8 را پیشنهاد می کنیم. در صورتی که قبلا ارسالی داشته اید، این گزینه را تغییر ندهید - احتمال مخدوش شدن حروف وجود دارد. در لینک زیر می توانید اطلاعات بیشتری کسب کنید http://www.s9y.org/index.php?node=46 .');
+@define('INSTALL_CHARSET_DESC', 'در اینجا می توانید نوع حروف را بین UTF-8 یا کاراکتر های طبیعی (ISO, EUC, ...) تغییر دهید. بسیاری از زبان ها، فقط به UTF-8 ترجمه شده اند که کاراکتر های "طبیعی" تاثیری روی آنها نمی گذارد. ما به شما UTF-8 را پیشنهاد می کنیم. در صورتی که قبلا ارسالی داشته اید، این گزینه را تغییر ندهید - احتمال مخدوش شدن حروف وجود دارد. در لینک زیر می توانید اطلاعات بیشتری کسب کنید https://docs.s9y.org/docs/developers/internationalization.html .');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'فعال کردن API افزونه چنگکی');
 @define('CALENDAR_EXTEVENT_DESC', 'در صورت فعال بودن، افزونه ها می توانند از تقویم برای نشان دادن وقایع استفاده کنند. این افزونه فقط در حالتی کار می کند که افزونه هایی که آن را لازم دارند، نصب شده باشند در غیر این صورت، فقط کمی قدرت سیستم پایین می آید.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'افزونه XML-RPC API برای سرندیپیتی به دلیل مشکلات امنیتی، پشتیبانی نمی شود، ضمن اینکه کاربران کمی نیز از آن استفاده می کردند. به هر حال، برای استفاده از XML-RPC API باید افزونه XML-RPC را نصب کنید. آدرس استفاده شده در برنامه تغییر نخواهد کرد - تا زمانی که شما افزونه را نصب دارید، می توانید از API استفاده کنید.');
@@ -1121,3 +1121,5 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

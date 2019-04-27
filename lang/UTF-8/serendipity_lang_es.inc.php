@@ -210,7 +210,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Nuevo comentario en la entrada suscrita "%s"');
 @define('SUBSCRIPTION_MAIL', "Hola %s,\n\nHay un nuevo comentario a la entrada \"%s\", titulada \"%s\"\nEl autor es: %s\n\nPuedes encontrar la entrada aquí: %s\n\nPuedes dejar de recibir información sobre esta entrada haciendo click aquí: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hola %s,\n\nHay una nueva referencia a la entrada \"%s\", titulada \"%s\"\nEl autor es: %s\n\nPuedes encontrar la entrada aquí: %s\n\nPuedes dejar de recibir información sobre esta entrada haciendo click aquí: %s\n");
-@define('SIGNATURE', "\n-- \n%s está basado en Serendipity.\nEl mejor programa para blog ;).\nVisita <http://s9y.org> y compruébalo.");
+@define('SIGNATURE', "\n-- \n%s está basado en Serendipity.\nEl mejor programa para blog ;).\nVisita <https://s9y.org> y compruébalo.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -533,7 +533,7 @@
 @define('ERROR_TEMPLATE_FILE', 'Incapaz de abrir el fichero plantilla, ¡por favor actualiza serendipity!');
 @define('ADVANCED_OPTIONS', 'Opciones avanzadas');
 @define('EDIT_ENTRY', 'Editar entrada');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Añade un fichero a tu colección de medios:</b><p>Desde aquí puedes transferir un fichero de medios o puedes decirme que los coja de algún ¡lugar de la web! Si no tienes una imagen apropiada, <a href="http://images.google.com" target="_blank">busca imágenes en google</a> que vaya con tu forma de pensar, los resultados son útiles y divertidos a veces :)</p><p><b>Selecciona el método:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Añade un fichero a tu colección de medios:</b><p>Desde aquí puedes transferir un fichero de medios o puedes decirme que los coja de algún ¡lugar de la web! Si no tienes una imagen apropiada, <a href="https://images.google.com/" target="_blank">busca imágenes en google</a> que vaya con tu forma de pensar, los resultados son útiles y divertidos a veces :)</p><p><b>Selecciona el método:</b></p><br/>');
 @define('COMMENTS_FILTER_SHOW', 'Mostrar');
 @define('COMMENTS_FILTER_ALL', 'Todo');
 @define('COMMENTS_FILTER_APPROVED_ONLY', 'Sólo lo aprobado');
@@ -594,7 +594,7 @@
 @define('INSTALL_SHOWFUTURE', 'Mostrar entradas futuras');
 @define('INSTALL_SHOWFUTURE_DESC', 'Si se activa, mostrará todas las entradas con fecha futura en tu blog. La acción predeterminada es no mostrar esas entradas y sólo hacerlo cuando llegue la fecha de publicación.');
 @define('INSTALL_DBPERSISTENT', 'Usar conexiones persistentes');
-@define('INSTALL_DBPERSISTENT_DESC', 'Activar el uso de conexiones persistentes a la base de datos, lee más en <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. Normalmente no se recomienda');
+@define('INSTALL_DBPERSISTENT_DESC', 'Activar el uso de conexiones persistentes a la base de datos, lee más en <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. Normalmente no se recomienda');
 @define('NO_IMAGES_FOUND', 'No se encontraron imágenes');
 @define('PERSONAL_SETTINGS', 'Configuración personal');
 @define('REFERER', 'Referer');
@@ -803,7 +803,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Ver ficheros de medios de otros usuario');
 @define('CHARSET_NATIVE', 'Nativo');
 @define('INSTALL_CHARSET', 'Selección del juego de caracteres');
-@define('INSTALL_CHARSET_DESC', 'Aquí puedes activar la codificación de caracteres UTF-8 o nativo (ISO, EUC, ...). Algunos lenguajes sólo tienen traducciones UTF-8 así que colocar la codificación en "nativo" no tendrá efectos. Se sugiere UTF-8 en nuevas instalaciones. No alteres la configuración si ya has hecho entradas con caracteres especiales ya que podría conllevar una corrupción de caracteres. Asegúrate de leer más sobre este problema en  http://www.s9y.org/index.php?node=46.');
+@define('INSTALL_CHARSET_DESC', 'Aquí puedes activar la codificación de caracteres UTF-8 o nativo (ISO, EUC, ...). Algunos lenguajes sólo tienen traducciones UTF-8 así que colocar la codificación en "nativo" no tendrá efectos. Se sugiere UTF-8 en nuevas instalaciones. No alteres la configuración si ya has hecho entradas con caracteres especiales ya que podría conllevar una corrupción de caracteres. Asegúrate de leer más sobre este problema en  https://docs.s9y.org/docs/developers/internationalization.html.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Habilitar API de conexiones de las extensiones');
 @define('CALENDAR_EXTEVENT_DESC', 'Si está habilitada, esta opción permite que las extensiones se conecten con el calendario para mostrar sus eventos resaltados. Utilízalo sólo si has instalado extensiones que lo necesitan, de otra forma sólo disminuye el desempeño.');
 
@@ -1137,3 +1137,5 @@ Melvin TODO [20060128]: What spanish word do we use for "referrers" ??
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('INSERT_ALL, 'Insert All');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
