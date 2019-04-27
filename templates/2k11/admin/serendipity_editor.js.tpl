@@ -364,10 +364,10 @@
         if ($('#serendipity_imagecomment').val() != '') {
             var comment = f['serendipity[imagecomment]'].value;
 
-            var img = '<div class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
+            var img = '<figure class="serendipity_imageComment_' + floating + '" style="width: ' + imgWidth + 'px">'
                   +     '<div class="serendipity_imageComment_img">' + img + '</div>'
-                  +     '<div class="serendipity_imageComment_txt">' + comment + '</div>'
-                  + '</div>';
+                  +     '<figcaption class="serendipity_imageComment_txt">' + comment + '</figcaption>'
+                  + '</figure>';
         }
 
         if (parent.self.opener.serendipity == undefined) {
@@ -664,7 +664,7 @@
         {serendipity_hookPlugin hook='backend_entry_checkSave' hookAll='true'}
         return true;
     }
-    
+
     // set a category to checked
     serendipity.enableCategory = function(catNumber) {
         $("#" + "serendipity_category_" + catNumber).prop("checked", true);
@@ -1034,7 +1034,7 @@ $(function() {
     $('#imageForm').submit(function() {
         serendipity.serendipity_imageSelector_done();
     });
-    
+
     $('#serendipityEntry').submit(function() {
         return serendipity.checkSave();
     });
