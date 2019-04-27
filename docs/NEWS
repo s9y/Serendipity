@@ -5,7 +5,7 @@ Version 2.2.1-alpha2 ()
                 (thanks @hannob!)
 
     * Security: Fix XSS in Media Library by interpreted EXIF tags
-                (thanks @hannob!)    
+                (thanks @hannob!)
 
     * Allow to receive multiple trackbacks and pingbacks
       (thanks @mitch!)
@@ -45,7 +45,7 @@ Version 2.2.1-alpha2 ()
 
     * Set responsiveimages as default plugin
 
-    * Add rewrite to absolute url for srcsets to the feed 
+    * Add rewrite to absolute url for srcsets to the feed
       generation
 
     * Fix bug with not properly adding trailing "/" when managing
@@ -60,6 +60,10 @@ Version 2.2.1-alpha2 ()
 
     * Fix typo that switched read permissions with write permissions
       when editing a category ACL
+
+    * Fix mispositioned button in media db directory list.
+
+    * Use figure/figcaption markup for media db images w/ captions.
 
 Version 2.2.1-alpha1 (September 20th, 2018)
 ------------------------------------------------------------------------
@@ -110,16 +114,16 @@ Version 2.2.1-alpha1 (September 20th, 2018)
 
     * Merge and rename the two configuration variables to limit
       displayed entries in the dashboard (#493):
-      
+
       $serendipity['dashboardLimit'] and
       $serendipity['dashboardDraftLimit'] are now merged into
       $serendipity['dashboardEntriesLimit'] - please change your
       serendipity_config_local.inc.php accordingly if you used
       the former variables.
 
-      The dashboard will now show as many future entries as 
+      The dashboard will now show as many future entries as
       configured in "dashboardEntriesLimit"; if there are less
-      future entries, it will display drafts until 
+      future entries, it will display drafts until
       "dashboardEntriesLimit" is reached.
 
     * Add a "delete" button to the backend entry form (#491, #494)
@@ -131,14 +135,14 @@ Version 2.1.4 (September 20th, 2018)
 
     * Security: Fix XSS for pagination, when multi-category selection
       is used. Thanks to Brian Carpenter (geeknik) and Hanno Boeck!
-    
+
     * Minor code fixes (proper PHP escaping for 'orderkey' SQL statement
-    
-    * Sekelton, Timeline and Clean Blog templates: Add theme option to 
+
+    * Sekelton, Timeline and Clean Blog templates: Add theme option to
       disable google webfonts
-      
+
     * Link to https s9y.org pages
-    
+
 Version 2.1.3 (August 16th, 2018)
 ------------------------------------------------------------------------
 
@@ -157,8 +161,8 @@ Version 2.1.3 (August 16th, 2018)
     * Security: Remove exit.php open redirect, when not using the trackexits-
       plugin configured with Serendipity exit tracking.
       Thanks to Julio Cesar (from infosec.com.br) and Hanno Boeck for reporting!
-      
-    * Fix SQL compatibility for creating of table "serendipity_groupconfig" 
+
+    * Fix SQL compatibility for creating of table "serendipity_groupconfig"
 
     * Added new "legal" plugin property bag attribute to indicate
       impact for the GDPR / DSGVO, used in conjunction with the
@@ -200,9 +204,9 @@ Version 2.1.0 (April 8th, 2017)
 ------------------------------------------------------------------------
 
     * Some more PHP7 error catching
-    
+
     * Fix missing token when updating plugin
-    
+
     * Fix missing variable name in regular expression match, Issue #442
 
 Version 2.1-rc1 (January 26th, 2017)
@@ -210,32 +214,32 @@ Version 2.1-rc1 (January 26th, 2017)
 
     * Fix issue #437 - Remove the hardcoded media filter only_filename
       input field and re-allow the $order_fields['i.name'].
- 
+
     * Issue #430, fix proper name of new feedShowMail configuration var
       in rss.php for showing mail addresses
-      
+
     * [Security] Enhance CSRF-Tokens for toggling/moderating comments
 
     * Allow to set a default category for authors (personal preferences)
-    
+
     * Changed how the hidden password element is displayed to prevent
       browsers from autofilling it into the entryproperties plugin
 
     * [Security] Enhanced media upload check to also check redirects
       for local files, thanks to Xu Yue (again!)
 
-    * [Security] Prevent XSS in adding category and directory names, 
+    * [Security] Prevent XSS in adding category and directory names,
       thanks to Edric Teo @smarterbitbybit.
-      
+
     * [Security] For multi-deletion of entries, secure the HTTP referrer
       output to prevent XSS (Issue #435)
-      
+
     * [Security] Reject %0D/%0A in exit tracking and other places
       (Issue #434)
-      
+
     * [Security] Redirection of comment.php now checks the referrer
       and only allows the blog's host (thanks to Lee Sheldon Victor)
-      
+
     * [Security] Fix missing integer casting for inserting new categories
       (thanks to cdxy)
 
@@ -255,11 +259,11 @@ Version 2.1-beta2 (September 26th, 2016)
     * [Security] Prevent moving files by using their directory name.
       [Security] Possible SQL injection for entry category assignment
       [Security] Possible SQL injection for removing&adding a plugin
-      
+
       All issues require a valid backend login.
       Thanks to Hendrik Buchwald for finding this via their
       RIPS source code analyzer (www.ripstech.com)
-      
+
     * [Security] Add new configuration option to enable fetching
       local files for the media uploader. By default this is now
       disabled to prevent Server Side Request Forgery (SSRF).
