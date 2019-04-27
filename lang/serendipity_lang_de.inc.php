@@ -1120,4 +1120,5 @@
 @define('CONFIG_ALLOW_LOCAL_URL', 'Erlaube, Daten über lokale URLs abzurufen');
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'Standardmäßig ist es aus Sicherheitsgründen verboten, Daten über lokale URLs abzurufen, um Server Side Request Forgers (SSRF) zu vermeiden. Wenn Sie ein lokales Intranet verwenden können sie die Datenabfrage über diese Option explizit erlauben.');
 @define('REMOTE_FILE_INVALID', 'Die angegebene URL scheint eine lokale zu sein und darf nicht abgerufen werden. Sie können dies explizit gestatten, indem Sie in der Konfiguration die Option "Erlaube, Daten über lokale URLs abzurufen" setzen.');
-@define('URL_NOT_FOUND', 'Die angeforderte Seite konnte nicht gefunden werden (404). Dies ist die Standardseite.');@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('URL_NOT_FOUND', 'Die angeforderte Seite konnte nicht gefunden werden (404). Dies ist die Standardseite.');
+@define('COMMENT_NOT_DELETED', 'Kommentar #%s konnte nicht gelöscht werden.');
