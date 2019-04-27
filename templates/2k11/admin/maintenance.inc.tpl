@@ -97,7 +97,7 @@
         <h3>{$CONST.MAINTENANCE_MODE}</h3>
 
         <p>{$CONST.MAINTENANCE_MODE_DESC}</p>
-        <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.MAINTENANCE_MODE_WARNING}</span>
+        <p><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.MAINTENANCE_MODE_WARNING}</span></p>
 
         <form method="POST" target="?">
             <input type="hidden" name="adminAction" value="maintenanceMode"/>
@@ -105,9 +105,11 @@
                 <p>{$CONST.MAINTENANCE_MODE_TIME}: {$maintenance_mode_end}
                 <button type="submit">{$CONST.MAINTENANCE_MODE_DEACTIVATE}</button></p>
             {else}
-                <label>{$CONST.MAINTENANCE_MODE_DURATION}</label>
-                <input type="number" name="hours" min="0" value="1" style="width: 3em;/>
-                <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
+                <div class="form_select">
+                    <label>{$CONST.MAINTENANCE_MODE_DURATION}</label>
+                    <input type="number" name="hours" min="0" value="1" style="width: 3em";/>
+                    <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
+                </div>
             {/if}
         </form>
        
