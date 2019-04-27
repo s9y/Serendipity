@@ -97,7 +97,7 @@
         <h3>{$CONST.MAINTENANCE_MODE}</h3>
 
         <p>{$CONST.MAINTENANCE_MODE_DESC}</p>
-        <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.MAINTENANCE_MODE_WARNING}</span>
+        <p><span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.MAINTENANCE_MODE_WARNING}</span></p>
 
         <form method="POST" target="?">
             <input type="hidden" name="adminAction" value="maintenanceMode"/>
