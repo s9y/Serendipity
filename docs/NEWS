@@ -65,6 +65,8 @@ Version 2.2.1-alpha2 ()
 
     * Use figure/figcaption markup for media db images w/ captions.
 
+    * Add localization to maintenance mode, add German translation.
+
 Version 2.2.1-alpha1 (September 20th, 2018)
 ------------------------------------------------------------------------
 
@@ -76,7 +78,7 @@ Version 2.2.1-alpha1 (September 20th, 2018)
 
     * Add maintenance mode, allowing access to the blog only for
       currently logged in user. This is meant to be activated when
-      upgrading the blog
+      upgrading the blog.
 
     * [Security] Improved password hashing by moving to bcrypt
 
@@ -138,7 +140,7 @@ Version 2.1.4 (September 20th, 2018)
 
     * Minor code fixes (proper PHP escaping for 'orderkey' SQL statement
 
-    * Sekelton, Timeline and Clean Blog templates: Add theme option to
+    * Skeleton, Timeline and Clean Blog templates: Add theme option to
       disable google webfonts
 
     * Link to https s9y.org pages
