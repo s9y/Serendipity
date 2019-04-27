@@ -105,9 +105,11 @@
                 <p>{$CONST.MAINTENANCE_MODE_TIME}: {$maintenance_mode_end}
                 <button type="submit">{$CONST.MAINTENANCE_MODE_DEACTIVATE}</button></p>
             {else}
-                <label>{$CONST.MAINTENANCE_MODE_DURATION}</label>
-                <input type="number" name="hours" min="0" value="1" style="width: 3em";/>
-                <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
+                <div class="form_select">
+                    <label>{$CONST.MAINTENANCE_MODE_DURATION}</label>
+                    <input type="number" name="hours" min="0" value="1" style="width: 3em";/>
+                    <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
+                </div>
             {/if}
         </form>
        
