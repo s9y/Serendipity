@@ -1122,3 +1122,10 @@
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
 @define('INSERT_ALL', 'Insert All');
 @define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
+@define('MAINTENANCE_MODE', 'Maintenance Mode');
+@define('MAINTENANCE_MODE_DESC', 'Activate maintenance mode to prevent access from users that are not logged in.');
+@define('MAINTENANCE_MODE_WARNING', "Do not log out, as you won't be able to log in again until maintenance mode expires!");
+@define('MAINTENANCE_MODE_DURATION', 'Duration (in hours):');
+@define('MAINTENANCE_MODE_TIME', 'Will be active until');
+@define('MAINTENANCE_MODE_ACTIVATE', 'Activate');
+@define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
