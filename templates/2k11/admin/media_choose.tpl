@@ -137,7 +137,7 @@
 
                 <div id="image_comment" class="form_area">
                     <label for="serendipity_imagecomment">{$CONST.COMMENT}</label>
-                    <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5">{$media.file.props.base_property.COMMENT1|escape}</textarea>
+                    <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5">{$media.file.props.base_property.COMMENT1|escape|escape}</textarea>
                     {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagecomment' eventData=$media.file}
                 </div>
 
