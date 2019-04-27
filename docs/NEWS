@@ -1,6 +1,8 @@
 
 Version 2.2.1-alpha2 ()
 ------------------------------------------------------------------------
+    * Activate stablearchive option by default for new blogs
+
     * Fix: Smarty reference and PHP7.2 compatibility issue in timeline theme.
     
     * Fix: PHP7.2 compatibility issue in clean-blog theme.
