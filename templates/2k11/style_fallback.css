@@ -40,6 +40,7 @@
 }
 
 .serendipity_imageComment_center {
+    clear: both;
     margin: auto;
 }
 
