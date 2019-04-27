@@ -1,5 +1,8 @@
 Version 2.1.5 ()
 ------------------------------------------------------------------------
+    * Security: Fix XSS in Editor Preview by interpreted EXIF tags
+                (thanks @hannob!)
+
     * Security: Fix XSS in Media Library by interpreted EXIF tags
                 (thanks @hannob!)    
 
