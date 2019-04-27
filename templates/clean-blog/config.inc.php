@@ -209,7 +209,7 @@ $template_config = array(
         'var'           => 'copyright',
         'name'          => COPYRIGHT,
         'type'          => 'string',
-        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date(Y) . ' | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Admin</a>',
+        'default'       => 'Copyright &copy; ' . $serendipity['blogTitle'] . ' ' . date('Y') . ' | <a href="' . $serendipity['baseURL'] . 'serendipity_admin.php">Admin</a>',
     ),  
 );
 
