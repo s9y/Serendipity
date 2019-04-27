@@ -96,16 +96,18 @@
     <section id="maintenance_mode" class="equal_heights quick_list">
         <h3>{$CONST.MAINTENANCE_MODE}</h3>
 
+        <p>{$CONST.MAINTENANCE_MODE_DESC}</p>
+        <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span>{$CONST.MAINTENANCE_MODE_WARNING}</span>
+
         <form method="POST" target="?">
             <input type="hidden" name="adminAction" value="maintenanceMode"/>
-            <p>Activate maintenance mode to prevent access from users that are not logged in.</p>
             {if $maintenance_mode_active}
-                Will be active till: {$maintenance_mode_end}
-                <button type="submit">Deactivate</button>
+                <p>{$CONST.MAINTENANCE_MODE_TIME}: {$maintenance_mode_end}
+                <button type="submit">{$CONST.MAINTENANCE_MODE_DEACTIVATE}</button></p>
             {else}
-                <label>How many hours shall it be active?</label>
-                <input type="number" name="hours" value="1"/>
-                <button type="submit">Activate</button>
+                <label>{$CONST.MAINTENANCE_MODE_DURATION}</label>
+                <input type="number" name="hours" min="0" value="1" style="width: 3em;/>
+                <button type="submit">{$CONST.MAINTENANCE_MODE_ACTIVATE}</button>
             {/if}
         </form>
        
@@ -115,3 +117,5 @@
 {serendipity_hookPlugin hook="backend_maintenance" hookAll="true"}
 
 </div>
+
+
