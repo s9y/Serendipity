@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'Ný athugasemd á færslu í áskrift "%s"');
 @define('SUBSCRIPTION_MAIL', "Halló %s,\n\nNý athugasemd hefur verið gerð á færslu sem þú ert að fylgjast með á \"%s\", kölluð \"%s\"\nNafn sendanda er: %s\n\nÞú getur fundið færsluna hér: %s\n\nÞú getur hætt við áskrift með því að smella á þennan hlekk: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Halló %s,\n\nNýrri tilvísun var bætt við færsluna sem þú ert að fylgjast með á \"%s\", kölluð \"%s\"\nNafn sendanda er: %s\n\nÞú getur fundið færsluna hér: %s\n\nÞú getur hætt við áskrift með því að smella á þennan hlekk: %s\n");
-@define('SIGNATURE', "\n-- \n%s er knúið af Serendipity.\nBesta bloggkerfi sem til er, og þú getur notað það líka.\nKíktu á <http://s9y.org> til að komast að því hvernig.");
+@define('SIGNATURE', "\n-- \n%s er knúið af Serendipity.\nBesta bloggkerfi sem til er, og þú getur notað það líka.\nKíktu á <https://s9y.org> til að komast að því hvernig.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 straumur');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 straumur');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 straumur');
@@ -495,7 +495,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'Veldu skrána sem þú vilt vista:');
 @define('SAVE_FILE_AS', 'Vista skrá sem:');
 @define('STORE_IN_DIRECTORY', 'Vista innan eftirfarandi möppu: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>Bæta við skrá í gagnageymsluna þína:</b><p>Hér geturðu vistað gagnaskrár, eða sagt mér að sækja þær einhversstaðar annarsstaðar frá af vefnum! Ef þú ert ekki með mynd við hæfi, <a href="http://images.google.com" target="_blank">leitaðu að myndum á google</a> sem á við það sem þú ert að hugsa. Niðurstöðurnar eru oft nytsamlegar og fyndnar :)</p><p><b>Veldu leið:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>Bæta við skrá í gagnageymsluna þína:</b><p>Hér geturðu vistað gagnaskrár, eða sagt mér að sækja þær einhversstaðar annarsstaðar frá af vefnum! Ef þú ert ekki með mynd við hæfi, <a href="https://images.google.com/" target="_blank">leitaðu að myndum á google</a> sem á við það sem þú ert að hugsa. Niðurstöðurnar eru oft nytsamlegar og fyndnar :)</p><p><b>Veldu leið:</b></p><br/>');
 @define('MEDIA_RENAME', 'Endurnefna skrána');
 @define('IMAGE_RESIZE', 'Breyta stærð myndarinnar');
 @define('MEDIA_DELETE', 'Eyða þessari skrá');
@@ -580,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', 'Sýna framtíðarfærslur');
 @define('INSTALL_SHOWFUTURE_DESC', 'Ef virkt, mun þetta sýna allar færslur sem þú sendir inn í framtíðinni á bloggið. Sjálfgefið er að fela þær þar til að birtingardagsetningin er komin.');
 @define('INSTALL_DBPERSISTENT', 'Viðhalda tengingum?');
-@define('INSTALL_DBPERSISTENT_DESC', 'Virkja notkun langlífra tenginga í gagnagrunn, lesa meira <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">hér</a>. Að jafnaði mælum við ekki með þessu');
+@define('INSTALL_DBPERSISTENT_DESC', 'Virkja notkun langlífra tenginga í gagnagrunn, lesa meira <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">hér</a>. Að jafnaði mælum við ekki með þessu');
 @define('NO_IMAGES_FOUND', 'Engar myndir fundust');
 @define('PERSONAL_SETTINGS', 'Persónulegar stillingar');
 @define('REFERER', 'Ávísari');
@@ -783,7 +783,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: Skoða gagnaskrár annarra notenda');
 @define('CHARSET_NATIVE', 'Innlent');
 @define('INSTALL_CHARSET', 'Val stafasetts (charset)');
-@define('INSTALL_CHARSET_DESC', 'Hér geturðu valið UTF-8 eða innlend (ISO, EUC, ...) stafasett. Sum tungumál hafa einungis UTF-8 þýðingar svo það að stilla stafasettið á "Innlent" mun ekki hafa nein áhrif. UTF-8 er ráðlagt fyrir nýjar uppsetningar. Ekki breyta þessari stillingu ef þú hefur þegar skráð færslur með sérstöfum - það gæti leitt til rangrar birtingar. Frekari upplýsingar um þetta eru á http://www.s9y.org/index.php?node=46');
+@define('INSTALL_CHARSET_DESC', 'Hér geturðu valið UTF-8 eða innlend (ISO, EUC, ...) stafasett. Sum tungumál hafa einungis UTF-8 þýðingar svo það að stilla stafasettið á "Innlent" mun ekki hafa nein áhrif. UTF-8 er ráðlagt fyrir nýjar uppsetningar. Ekki breyta þessari stillingu ef þú hefur þegar skráð færslur með sérstöfum - það gæti leitt til rangrar birtingar. Frekari upplýsingar um þetta eru á https://docs.s9y.org/docs/developers/internationalization.html');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Virkja viðbót API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'Ef virt geta viðbætur hengt sig á dagatalið til að beina athygli að eigin atburðum. Virkjaðu einungis ef þú hefur sett inn viðbætur sem þurfa á þessu að halda, annars minnkar þetta bara afköst.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'XML-RPC API viðmót Serendipity fylgir ekki lengur með vegna ítrekaðra öryggisvandamála með þetta API og það eru ekki margir sem nota það. Vegna þess þarftu að setja inn XML-RPC viðbótina til að nota XML-RPC API viðmótið. Slóðin sem nota ber í forritunum þínum mun ekki breytast - um leið og þú setur inn viðbótina muntu geta notað API viðmótið.');
@@ -1119,3 +1119,4 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

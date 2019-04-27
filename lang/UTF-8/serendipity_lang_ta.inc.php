@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', 'புதிய கருத்து! குறிப்பு: "%s"');
 @define('SUBSCRIPTION_MAIL', "Hello %s,\n\nபுதிய கருத்து! \"%s\", தலைப்பு \"%s\"\n அன்பர்: %s\n\nஅன்பரின் கருத்து இங்கே: %s\n\nஇம்மின்னஞ்சலை நிறுத்த இம்முகவரிக்குச் செல்லுங்கள்: %s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "Hello %s,\n\nபுதிய மேற்குறிப்பு!  \"%s\", தலைப்பு \"%s\"\n அன்பர்: %s\n\nஅன்பரின் கருத்து இங்கே: %s\n\nஇம்மின்னஞ்சலை நிறுத்த இம்முகவரிக்குச் செல்லுங்கள்: %s\n");
-@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <http://s9y.org> to find out how.");
+@define('SIGNATURE', "\n-- \n%s is powered by Serendipity.\nThe best blog around, you can use it too.\nCheck out <https://s9y.org> to find out how.");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 feed');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 feed');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 feed');
@@ -580,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', 'Show future entries');
 @define('INSTALL_SHOWFUTURE_DESC', 'If enabled, this will show all entries in the future on your blog. Default is to hide those entries and only show them if the publish date has arrived.');
 @define('INSTALL_DBPERSISTENT', 'Use persistent connections');
-@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
+@define('INSTALL_DBPERSISTENT_DESC', 'Enable the usage of persistent database connections, read more <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">here</a>. This is normally not recommended');
 @define('NO_IMAGES_FOUND', 'வலைபொருள் ஏதுமில்லை');
 @define('PERSONAL_SETTINGS', 'உங்கள் நிலைகள்');
 @define('REFERER', 'மேற்கோள்');
@@ -785,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: View other user\'s media files');
 @define('CHARSET_NATIVE', 'Native');
 @define('INSTALL_CHARSET', 'Charset selection');
-@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on http://www.s9y.org/index.php?node=46 about this issue.');
+@define('INSTALL_CHARSET_DESC', 'Here you can toggle UTF-8 or native (ISO, EUC, ...) charactersets. Some languages only have UTF-8 translations so that setting the charset to "Native" will have no effects. UTF-8 is suggested for new installations. Do not change this setting if you have already made entries with special characters - this may lead to corrupt characters. Be sure to read more on https://docs.s9y.org/docs/developers/internationalization.html about this issue.');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'Enable Plugin API hook');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 'The XML-RPC API Interface to Serendipity is no longer bundled because of ongoing security issues with this API and not many people using it. Thus you need to install the XML-RPC Plugin to use the XML-RPC API. The URL to use in your applications will NOT change - as soon as you have installed the plugin, you will again be able to use the API.');
@@ -1118,3 +1118,4 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');

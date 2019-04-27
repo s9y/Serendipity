@@ -223,7 +223,7 @@
 @define('NEW_COMMENT_TO_SUBSCRIBED_ENTRY', '購読済みエントリー "%s" に新規コメントです');
 @define('SUBSCRIPTION_MAIL', "こんにちは %s さん。\n監視中のエントリーに新しいコメントが作成されました。\n\nブログ名:\n%s\nエントリー名:\n%s\n\n下記でエントリーを見つけることができます:\n%s\n\n下記のリンクをクリックすると購読解除することができます:\n%s\n");
 @define('SUBSCRIPTION_TRACKBACK_MAIL', "こんにちは。\n\n監視中のエントリーに新しいトラックバックが追加されました。\nサイト名: %s\n題名: %s\n投稿者の名前: %s\n\nここでエントリーを見つけることができます:\n%s\n\nこのリンクをクリックすると購読をやめることができます:\n%s\n");
-@define('SIGNATURE', "\n-- \n%s は Serendipity を使っています。\n最良の blog を探しているなら <http://s9y.org> を見てください。");
+@define('SIGNATURE', "\n-- \n%s は Serendipity を使っています。\n最良の blog を探しているなら <https://s9y.org> を見てください。");
 @define('SYNDICATION_PLUGIN_091', 'RSS 0.91 フィード');
 @define('SYNDICATION_PLUGIN_10', 'RSS 1.0 フォード');
 @define('SYNDICATION_PLUGIN_20', 'RSS 2.0 フィード');
@@ -495,7 +495,7 @@
 @define('ENTER_MEDIA_UPLOAD', 'アップロードしたいファイルの選択:');
 @define('SAVE_FILE_AS', '保存するファイル名:');
 @define('STORE_IN_DIRECTORY', '次のディレクトリーの中に保存: ');
-@define('ADD_MEDIA_BLAHBLAH', '<b>メディアリポジトリにファイルを追加します:</b><p>ここでメディア ファイルをアップロードするか、ウェブ中のどこかからそれらを取得するように指示することができます! If you don\'t have an appropriate image, <a href="http://images.google.com" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :)</p><p><b>選択方法:</b></p><br/>');
+@define('ADD_MEDIA_BLAHBLAH', '<b>メディアリポジトリにファイルを追加します:</b><p>ここでメディア ファイルをアップロードするか、ウェブ中のどこかからそれらを取得するように指示することができます! If you don\'t have an appropriate image, <a href="https://images.google.com" target="_blank">search for images on google</a> matching your thoughts, the results are often useful and funny :)</p><p><b>選択方法:</b></p><br/>');
 @define('MEDIA_RENAME', 'このファイルの名称を変更する');
 @define('IMAGE_RESIZE', 'この画像の大きさを変更する');
 @define('MEDIA_DELETE', 'このファイルを削除する');
@@ -580,7 +580,7 @@
 @define('INSTALL_SHOWFUTURE', '未来のエントリーを表示する');
 @define('INSTALL_SHOWFUTURE_DESC', 'もし有効にしたならブログは未来を含むすべてのエントリーを表示するでしょう。デフォルトはそれらのエントリーを隠し、公開日が到来したらそれらを表示します。');
 @define('INSTALL_DBPERSISTENT', '持続的接続を使用する');
-@define('INSTALL_DBPERSISTENT_DESC', '持続的データベース接続の使用法を有効にします。詳しいことは <a href="http://php.net/manual/features.persistent-connections.php" target="_blank">ここ</a> を参照してください。これは通常使用することを推奨しません。');
+@define('INSTALL_DBPERSISTENT_DESC', '持続的データベース接続の使用法を有効にします。詳しいことは <a href="https://php.net/manual/features.persistent-connections.php" target="_blank">ここ</a> を参照してください。これは通常使用することを推奨しません。');
 @define('NO_IMAGES_FOUND', '画像が見つかりません。');
 @define('PERSONAL_SETTINGS', '個人設定');
 @define('REFERER', 'リファラー');
@@ -785,7 +785,7 @@
 @define('PERMISSION_ADMINIMAGESVIEWOTHERS', 'adminImagesViewOthers: 他ユーザーのメディア ファイルの閲覧');
 @define('CHARSET_NATIVE', 'ネイティブ');
 @define('INSTALL_CHARSET', '文字コード選択');
-@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリーを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては http://www.s9y.org/index.php?node=46 をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
+@define('INSTALL_CHARSET_DESC', 'ここは  UTF-8 かネイティブ(ISO・EUC など)の文字コードを切り替えることができます。「ネイティブ」に文字エンコード設定することに変化がないように、いくつかの言語は UTF-8 のみ翻訳を持っています。UTF-8 は新規インストールで提案されます。特殊文字で既にエントリーを作っている場合は、この設定を変更しないでください - これは不正な文字を導くかもしれません。必ずこの問題に関すしては https://docs.s9y.org/docs/developers/internationalization.html をさらに読んでください。 訳注: 日本語は文字エンコードは UTF-8 のみ用意されています。');
 @define('CALENDAR_ENABLE_EXTERNAL_EVENTS', 'プラグインの API フックを有効にする');
 @define('CALENDAR_EXTEVENT_DESC', 'If enabled, plugins can hook into the calendar to display their own events highlighted. Only enable if you have installed plugins that need this, otherwise it just decreases performance.');
 @define('XMLRPC_NO_LONGER_BUNDLED', 's9y への XML-RPC API インタフェースは、もはやそれを使用して、この API を含めた進行中のセキュリティ問題および多くでない人々のためにバンドルされません。Serendipity の XML-RPC API インターフェースは、ずっと継続するセキュリティの問題と、この API を多くの人が使用していないため、もはやバンドルされていません。したがって、XML-RPC API を使用するために XML-RPC プラグインをインストールする必要があります。アプリケーション中で使用する URL は変わりません。プラグインをインストールしたらすぐに、再び API を使用することができるでしょう。');
@@ -1123,3 +1123,4 @@
 @define('CONFIG_ALLOW_LOCAL_URL_DESC', 'By default, it is forbidden due to security constrains to fetch data from local URLs to prevent Server Side Request Forgers (SSRF). If you use a local intranet, you can enable this option to allow fetching data.');
 @define('REMOTE_FILE_INVALID', 'The given URL appears to be local and is not allowed to be fetched. You can allow this by setting the option "Allow to fetch data from local URLs" in your blog configuration.');
 @define('URL_NOT_FOUND', 'The requested page could not be found (404). This is the default page.');
+@define('COMMENT_NOT_DELETED', 'Could not delete comment #%s .');
