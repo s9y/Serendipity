@@ -125,7 +125,7 @@
         {/if}
         </div>
         {if ($errorCount < 1)}
-            {if (sizeof($sqlfiles) > 0)}
+            {if $sqlfiles && (sizeof($sqlfiles) > 0)}
                 <h3>{$database_update_types}:</h3>
 
                 <p>{$CONST.SERENDIPITY_UPGRADER_FOUND_SQL_FILES}:</p>
@@ -149,7 +149,7 @@
             {if ($taskCount == 0)}
                 <p>{$CONST.SERENDIPITY_UPGRADER_NO_VERSION_SPECIFIC}</p>
             {/if}
-            {if (($taskCount > 0) || (sizeof($sqlfiles) > 0))}
+            {if (($taskCount > 0) || ($sqlfiles && (sizeof($sqlfiles) > 0)))}
                 <h3>{$CONST.SERENDIPITY_UPGRADER_PROCEED_QUESTION}</h3>
 
                 <a class="button_link state_submit" href="{$upgradeLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_DOIT}</a>{if $showAbort} <a class="button_link state_cancel" href="{$abortLoc}">{$CONST.SERENDIPITY_UPGRADER_PROCEED_ABORT}</a>{/if}
