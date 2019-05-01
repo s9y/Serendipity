@@ -142,6 +142,24 @@ Version 2.2.1-alpha1 (September 20th, 2018)
 
     * Change Spartacus default mirror to github (#489)
 
+Version 2.1.5 (May 1st, 2019)
+------------------------------------------------------------------------
+    * Security: Fix XSS in Editor Preview by interpreted EXIF tags
+                (thanks to @hannob!)
+
+    * Security: Fix XSS in Media Library by interpreted EXIF tags
+                (thanks to @hannob!)
+
+    * Fix mispositioned button in media db directory list.
+
+    * Change default for comment subscription to full text.
+
+    * Display errors if comment coulnd't be deleted.
+
+    * Make it easier to drag plugins to other column.
+
+    * Add fallback for broken JS in configuration screens.
+
 Version 2.1.4 (September 20th, 2018)
 ------------------------------------------------------------------------
 
