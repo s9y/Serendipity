@@ -1,4 +1,4 @@
-Version 2.1.5 ()
+Version 2.1.5 (May 1st, 2019)
 ------------------------------------------------------------------------
     * Security: Fix XSS in Editor Preview by interpreted EXIF tags
                 (thanks to @hannob!)
