@@ -234,8 +234,8 @@
                     <dl class="clearfix">
                         {foreach $meta_data AS $meta_value}
 
-                        <dt>{$meta_value@key}</dt>
-                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_value@key}{/if}</dd>
+                        <dt>{$meta_value@key|escape}</dt>
+                        <dd>{if is_array($meta_value)}{$meta_value|print_r}{else}{$meta_value|formatTime:DATE_FORMAT_SHORT:false:$meta_value@key|escape}{/if}</dd>
                         {/foreach}
 
                     </dl>
