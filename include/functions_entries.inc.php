@@ -1263,6 +1263,10 @@ function serendipity_printEntries($entries, $extended = 0, $preview = false, $sm
                     serendipity_db_bool($entry['moderate_comments']),
                     $entry
                 );
+                // Make $entry available for the index.tpl, it uses it to generate the canonical meta tag
+                $serendipity['smarty']->assign(array(
+                    'entry' => $entry,
+                ));
             } // END FULL ENTRY LOGIC
         } // end foreach-loop (entries)
     } // end foreach-loop (dates)
