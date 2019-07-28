@@ -1320,7 +1320,7 @@ class serendipity_event_spamblock extends serendipity_event
                         imagedestroy($image);
                     } else {
                         header('Content-Type: image/png');
-                        $output_char = strtolower($_SESSION['spamblock']['captcha']{$parts[1] - 1});
+                        $output_char = strtolower($_SESSION['spamblock']['captcha'][$parts[1] - 1]);
                         $cap = $serendipity['serendipityPath'] . 'plugins/serendipity_event_spamblock/captcha_' . $output_char . '.png';
                         if (!file_exists($cap)) {
                             $cap = S9Y_INCLUDE_PATH . 'plugins/serendipity_event_spamblock/captcha_' . $output_char . '.png';
