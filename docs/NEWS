@@ -1,6 +1,8 @@
 Version 2.3-rc2
 ------------------------------------------------------------------------
 
+    * Fix: Don't show "Array" under Update notification if autoupdate
+           plugin is not installed
 
 Version 2.3-rc1 (03.08.2019)
 ------------------------------------------------------------------------

@@ -50,7 +50,12 @@ $data['updateCheck']  = $serendipity['updateCheck'];
 $data['curVersion']   = serendipity_getCurrentVersion();
 $data['update']       = version_compare($data['usedVersion'], $data['curVersion'], '<');
 serendipity_plugin_api::hook_event('plugin_dashboard_updater', $output, $data['curVersion']);
-$data['updateButton'] = $output;
+if (is_array($output)) {
+    // the autoupdate plugin is not installed and it (and no other plugin) did set $output to html code we could display
+    $data['updateButton'] = '';
+} else {
+    $data['updateButton'] = $output;
+}
 
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
