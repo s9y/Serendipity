@@ -153,6 +153,12 @@ Version 2.2.1-alpha1 (September 20th, 2018)
 
     * Change Spartacus default mirror to github (#489)
 
+Version 2.1.6 (August 9th, 2019)
+------------------------------------------------------------------------
+   * Prevent error in upgrader when $sqlfiles is NULL.
+
+   * Fix preview iframe in bulletproof, thx pixel32
+
 Version 2.1.5 (May 1st, 2019)
 ------------------------------------------------------------------------
     * Security: Fix XSS in Editor Preview by interpreted EXIF tags
