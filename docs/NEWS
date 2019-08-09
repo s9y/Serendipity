@@ -1,6 +1,8 @@
-Version 2.1.6 ()
+Version 2.1.6 (August 9th, 2019)
 ------------------------------------------------------------------------
    * Prevent error in upgrader when $sqlfiles is NULL.
+
+   * Fix preview iframe in bulletproof, thx pixel32
 
 Version 2.1.5 (May 1st, 2019)
 ------------------------------------------------------------------------
