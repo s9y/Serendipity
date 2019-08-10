@@ -37,6 +37,15 @@
         {/if}
     {/if}
 
+    {if $pluginUpdates}
+        <section id="dashboard_plugin_updates">
+            <h3>{$CONST.UPDATE_NOTIFICATION}</h3>
+
+            <span class="msg_notice"><span class="icon-info-circled" aria-hidden="true"></span> {$pluginUpdates}</span>
+        </section>
+        <hr class="separator">
+    {/if}
+
     {if $no_create !== true}
         <section id="dashboard_comments" class="equal_heights quick_list dashboard_widget">
             <h3>{if 'adminComments'|checkPermission}<a href="serendipity_admin.php?serendipity[adminModule]=comments">{/if}{$CONST.COMMENTS}{if 'adminComments'|checkPermission}</a>{/if}</h3>
