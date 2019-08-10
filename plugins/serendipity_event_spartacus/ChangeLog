@@ -1,3 +1,7 @@
+2.37.6:
+-------
+    * Fix wrong caching of plugin lists regardless of type.
+
 2.37.5:
 -------
     * Fix missing reset to default after dropping netmirror.
