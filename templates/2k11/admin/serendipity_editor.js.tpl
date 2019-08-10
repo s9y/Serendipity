@@ -562,7 +562,7 @@
 
     // Delete file from ML
     serendipity.deleteFromML = function(id, fname) {
-        if (confirm('{$CONST.DELETE}')) {
+        if (confirm('{$CONST.DELETE}?')) {
             var media_token_url = $('input[name*="serendipity[token]"]').val();
             $.post('?serendipity[adminModule]=images&serendipity[adminAction]=doDelete&serendipity[fid]='+ escape(id) +'&serendipity[token]='+ media_token_url)
             .done(function(jqXHR, textStatus) {
