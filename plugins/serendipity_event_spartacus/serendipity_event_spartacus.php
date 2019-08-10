@@ -1322,7 +1322,12 @@ class serendipity_event_spartacus extends serendipity_event
                             echo '    <a id="upgrade_sidebar" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR .'</a>';
                             echo '    <a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
                         } else {
-                            echo '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE' . '&amp;' . serendipity_setFormToken('url') . '">'. PLUGIN_EVENT_SPARTACUS_CHECK .'</a>';
+                            $upgradeCount = $this->count_plugin_upgrades();
+                            $upgradeBadge = '';
+                            if ($upgradeCount > 0) {
+                                $upgradeBadge = sprintf(' (%u)', $upgradeCount);
+                            }
+                            echo '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE' . '&amp;' . serendipity_setFormToken('url') . '">'. PLUGIN_EVENT_SPARTACUS_CHECK . $upgradeBadge .'</a>';
                         }
                         echo '</div>';
                     }
