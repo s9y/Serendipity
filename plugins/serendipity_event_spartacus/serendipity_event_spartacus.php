@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.37.6');
+        $propbag->add('version',       '2.38');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));

@@ -1,3 +1,11 @@
+2.38:
+-------
+    * Add function to count upgradeable plugins.
+    * Add upgrade notifier to plugin upgrade button.
+    * Add 'backend_plugins_upgradecount' hook and
+      language constants for a dashboard upgrade
+      notification.
+
 2.37.6:
 -------
     * Fix wrong caching of plugin lists regardless of type.
