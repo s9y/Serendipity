@@ -40,6 +40,8 @@ class serendipity_event_spartacus extends serendipity_event
 
             'backend_pluginlisting_header'      => true,
 
+            'backend_plugins_upgradecount'      => true,
+
             'external_plugin'                   => true,
 
             'backend_directory_create'          => true,
@@ -1331,6 +1333,22 @@ class serendipity_event_spartacus extends serendipity_event
                         }
                         echo '</div>';
                     }
+                    break;
+
+                case 'backend_plugins_upgradecount':
+                    if (serendipity_db_bool($this->get_config('enable_plugins'))) {
+                        $upgradeCount = $this->count_plugin_upgrades();
+                        if ($upgradeCount > 0) {
+                            if ($upgradeCount > 1) {
+                                $eventData = sprintf(PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATES, $upgradeCount);
+                            } else {
+                                $eventData = PLUGIN_EVENT_SPARTACUS_DASHBOARD_UPDATE;
+                            }
+                            $eventData .= '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE' . '&amp;' . serendipity_setFormToken('url') . '">'. PLUGIN_EVENT_SPARTACUS_CHECK .'</a>';
+                            return true;
+                        }
+                    }
+                    return false;
                     break;
 
                 case 'backend_templates_fetchlist':
