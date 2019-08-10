@@ -1132,6 +1132,58 @@ class serendipity_event_spartacus extends serendipity_event
         }
     }
 
+    function count_plugin_upgrades()
+    {
+        // get a list of all installable sidebar and event plugins
+        $foreignPlugins = $sidebarPlugins = $eventPlugins = array();
+        $sidebarPlugins = $this->buildList($this->fetchOnline('sidebar'), 'sidebar');
+        $eventPlugins   = $this->buildList($this->fetchOnline('event'), 'event');
+        $foreignPlugins = array_merge($sidebarPlugins, $eventPlugins);
+
+        // get currently installed plugin versions
+        $currentVersions = [];
+        $plugins = serendipity_plugin_api::get_installed_plugins();
+        $classes = serendipity_plugin_api::enum_plugins();
+        foreach ($classes as $class_data) {
+            $plugin    =& serendipity_plugin_api::load_plugin($class_data['name']);
+            if (is_object($plugin)) {
+                // Object is returned when a plugin could not be cached.
+                $bag = new serendipity_property_bag;
+                $plugin->introspect($bag);
+                $pluginname = get_object_vars($plugin)['act_pluginPath'];
+                $version    = $bag->get('version');
+            } elseif (is_array($plugin)) {
+                // Array is returned if a plugin could be fetched from info cache
+                $pluginname = $plugin['class_name'];
+                $version    = $plugin['version'];
+            } else {
+                #
+            }
+            $currentVersions[$pluginname] = $version;
+        }
+
+        // count upgradable plugins
+        $upgradeCount = 0;
+        foreach ($foreignPlugins as $foreignPlugin) {
+            // plugin installed?
+            if (isset($currentVersions[$foreignPlugin['class_name']])) {
+                $currentVersion = $currentVersions[$foreignPlugin['class_name']];
+                // get current version on Spartacus
+                if (isset($foreignPlugin['upgrade_version']) && $foreignPlugin['upgrade_version']) {
+                    $upgradeVersion = $foreignPlugin['upgrade_version'];
+                } else {
+                    $upgradeVersion = $foreignPlugin['version'];
+                }
+                // compare versions and increase counter
+                if (version_compare($currentVersion, $upgradeVersion, '<')) {
+                    $upgradeCount++;
+                }
+            }
+        }
+        return $upgradeCount++;
+    }
+
+
     function event_hook($event, &$bag, &$eventData, $addData = null)
     {
         global $serendipity;
@@ -1269,7 +1321,6 @@ class serendipity_event_spartacus extends serendipity_event
                         if (version_compare($serendipity['version'], '2.1-alpha3', '<')) {
                             echo '    <a id="upgrade_sidebar" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE">'. PLUGIN_EVENT_SPARTACUS_CHECK_SIDEBAR .'</a>';
                             echo '    <a id="upgrade_event" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE&amp;serendipity[type]=event">'. PLUGIN_EVENT_SPARTACUS_CHECK_EVENT .'</a> ';
-
                         } else {
                             echo '    <a id="upgrade_plugins" class="button_link" href="?serendipity[adminModule]=plugins&amp;serendipity[adminAction]=addnew&amp;serendipity[only_group]=UPGRADE' . '&amp;' . serendipity_setFormToken('url') . '">'. PLUGIN_EVENT_SPARTACUS_CHECK .'</a>';
                         }
