@@ -111,7 +111,7 @@
                             <li class="plugin_author"><b>{$CONST.AUTHOR}:</b> {$plug.author}</li>
                         {/if}
                         {if ! empty($plug.version)}
-                            <li class="plugin_version"><b>{$CONST.VERSION}:</b> {$plug.version}</li>
+                            <li class="plugin_version"><b>{$CONST.VERSION|capitalize}:</b> {$plug.version}</li>
                         {/if}
                         {if ! empty($plug.website)}
                             <li class="plugin_web"><a href="{$plug.website|escape}">{$CONST.PLUGIN_DOCUMENTATION}</a></li>

@@ -645,7 +645,7 @@
 @define('NONE', 'keine');
 @define('USERCONF_CAT_DEFAULT_NEW_ENTRY', 'Voreinstellungen für neue Einträge');
 @define('UPGRADE', 'Aktualisieren');
-@define('UPGRADE_TO_VERSION', 'Aktuelle version %s');
+@define('UPGRADE_TO_VERSION', 'Aktualisierbar auf Version %s.');
 @define('DELETE_DIRECTORY', 'Verzeichnis löschen');
 @define('DELETE_DIRECTORY_DESC', 'Sie sind dabei, den Inhalt eines Verzeichnisses zu löschen, in welchem Dateien enthalten sind, die möglicherweise in Blog-Einträgen verwendet werden!');
 @define('FORCE_DELETE', 'ALLE Dateien dieses Verzeichnisses löschen, inklusive der Dateien, die Serendipity nicht katalogisiert hat');
