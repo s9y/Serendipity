@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.37.5');
+        $propbag->add('version',       '2.37.6');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -711,6 +711,13 @@ class serendipity_event_spartacus extends serendipity_event
     {
         global $serendipity;
         static $pluginlist = null;
+        static $cachedtype = null;
+
+        if (isset($cachedtype) && $cachedtype != $type) {
+            // bust cache if called with other type
+            $pluginlist = null;
+            $cachedtype = $type;
+        }
 
         if ($pluginlist === null) {
             $pluginlist = array();
@@ -736,6 +743,8 @@ class serendipity_event_spartacus extends serendipity_event
                 }
             }
         }
+        // save type of cached pluginlist
+        $cachedtype = $type;
 
         return $pluginlist;
     }
