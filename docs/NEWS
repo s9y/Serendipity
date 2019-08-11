@@ -1,6 +1,12 @@
 Version 2.4-alpha1
 ------------------------------------------------------------------------
 
+   * Add Spartacus links ("more info") to plugin lists.
+
+   * Fix/Change: Wording of plugin display ("version") and PHP/smarty
+                 variable names.
+
+   * Spartacus: Fix caching of plugin lists in getCachedPlugins().
 
 Version 2.3.0 (10.08.2019)
 ------------------------------------------------------------------------

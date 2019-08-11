@@ -156,6 +156,15 @@ function show_plugins($event_only = false, $sidebars = null)
                 $desc  = '<details class="plugin_data">';
                 $desc .= '<summary><var class="perm_name">'.$cname[0].'</var></summary>';
                 $desc .= '<div class="plugin_desc clearfix">' . serendipity_specialchars($bag->get('description')) . '</div>';
+                if (!empty($plugin_data['path'])) {
+                    if ($event_only) {
+                        $spartacus_type = 'event';
+                    } else {
+                        $spartacus_type = 'sidebar';
+                    }
+                    $desc .= sprintf('<span class="block_level"><a href="http://spartacus.s9y.org/index.php?mode=bygroups_%s_%s#%s">%s</a></span>',
+                             $spartacus_type, $serendipity['lang'], $plugin_data['path'], PLUGIN_LINK_SPARTACUS);
+                }
                 $desc .= '<span class="block_level">' . ucfirst(VERSION)  . ': ' . $bag->get('version') . '</span>';
                 $desc .= '</details>';
 
