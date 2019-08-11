@@ -166,7 +166,7 @@
         <span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> {$CONST.ERROR}: {$CONST.PLUGIN_ALREADY_INSTALLED}</span>
     {/if}
     {if $updateAllMsg}
-        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: All Plugins updated</span> {* i18n *}
+        <span class="msg_success"><span class="icon-ok-circled" aria-hidden="true"></span> {$CONST.DONE}: {$CONST.PLUGIN_ALL_UPDATED}</span>
     {/if}
     <div class="tabs" id="pluginlist_tabs">
         <section id="pluginlist_sidebar" class="panel">

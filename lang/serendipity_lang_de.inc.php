@@ -32,7 +32,7 @@
 @define('CREATE_NEW_CAT', 'Neue Kategorie');
 @define('I_WANT_THUMB', 'Ich möchte die Vorschau im Eintrag haben.');
 @define('I_WANT_BIG_IMAGE', 'Ich möchte das große Bild im Eintrag haben.');
-@define('I_WANT_NO_LINK', 'Das Bild soll kein Link sein');
+@define('I_WANT_NO_LINK', 'Das Bild soll kein Link sein.');
 @define('I_WANT_IT_TO_LINK', 'Das Bild soll hierhin linken:');
 @define('BACK', 'Zurück');
 @define('FORWARD', 'Vorwärts');
@@ -858,8 +858,8 @@
 
 @define('PLUGIN_AVAILABLE_COUNT', 'Gesamt: %d Plugins.');
 
-@define('SYNDICATION_RFC2616', 'Strikte RFC2616 RSS-Feed Kompatibilität');
-@define('SYNDICATION_RFC2616_DESC', 'Falls RFC2616 NICHT strikt ausgelegt wird, können alle Conditional GET Anfragen zu Serendipity die letzten Einträge seit dem letzten Client-Abruf zurückliefern - für Benutzer, die auch nach ihrem Urlaub alle Artikel lesen wollen, ist dies eine tolle Sache. Jedoch können dadurch einige spezielle Clients wie z.B. Planet aus dem Tritt gebracht werden, und neue Artikel ihres RSS-Feeds falsch interpretieren. Wenn diese Option also auf JA gesetzt wird, wird zwar die RFC befolgt, aber ihre RSS-Leser könnten Einträge verpassen wenn Sie länger nicht auf ihrer Seite waren. Wie auch immer sie sich entscheiden, entweder ärgern Sie damit Clients wie Planet oder Ihre Benutzer. Referenz: <a href="https://sourceforge.net/tracker/index.php?func=detail&amp;aid=1461728&amp;group_id=75065&amp;atid=542822" target="_blank" rel="nofollow">SourceForge</a>');
+@define('SYNDICATION_RFC2616', 'Strikte RFC2616-RSS-Feed-Kompatibilität');
+@define('SYNDICATION_RFC2616_DESC', 'Falls RFC2616 NICHT strikt ausgelegt wird, können alle Conditional-GET-Anfragen zu Serendipity die letzten Einträge seit dem letzten Client-Abruf zurückliefern - für Benutzer, die auch nach ihrem Urlaub alle Artikel lesen wollen, ist dies eine tolle Sache. Jedoch können dadurch einige spezielle Clients, wie z.B. Planet, aus dem Tritt gebracht werden, und neue Artikel ihres RSS-Feeds falsch interpretieren. Wenn diese Option also auf JA gesetzt wird, wird zwar der RFC befolgt, aber ihre RSS-Leser könnten Einträge verpassen, wenn Sie länger nicht auf ihrer Seite waren. Wie auch immer sie sich entscheiden, entweder ärgern Sie damit Clients wie Planet oder Ihre Benutzer.');
 @define('MEDIA_PROPERTY_DATE', 'Verknüpftes Datum');
 @define('MEDIA_PROPERTY_RUN_LENGTH', 'Laufzeit');
 @define('FILENAME_REASSIGNED', 'Automagisch zugewiesener Dateiname: %s');
@@ -953,27 +953,27 @@
 @define('MEDIA_PROPERTY_ALT', 'Bildinhalt (im ALT-Attribut)');
 @define('MEDIA_TITLE', 'TITLE-Attribut (wird beim Überfahren mit der Maus angezeigt)');
 
-@define('QUICKSEARCH_SORT', 'How should search-results be sorted?');
+@define('QUICKSEARCH_SORT', 'Wie sollen Suchergebnisse sortiert werden?');
 
-@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevance');
+@define('QUICKSEARCH_SORT_RELEVANCE', 'Relevanz');
 
 @define('PERMISSION_HIDDENGROUP', 'Hidden group / Non-Author');
 
-@define('SEARCH_FULLENTRY', 'Show full entry');
+@define('SEARCH_FULLENTRY', 'Gesamten Eintrag anzeigen');
 @define('NAVLINK_AMOUNT', 'Anzahl der Links in der Navigationsleiste (Themes verwalten-Seite muss danach neu geladen werden)');
 @define('NAV_LINK_TEXT', 'Text des Navigationsleisten-Links');
 @define('NAV_LINK_URL', 'URL des Navigationsleisten-Links');
 @define('MODERATE_SELECTED_COMMENTS', 'Markierte Kommentare freischalten');
 @define('WEBLOG', 'Weblog');
-@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Subscribed');
-@define('PENDING_COMMENT_SUBSCRIPTION', 'Pending confirmation');
-@define('NO_COMMENT_SUBSCRIPTION', 'Not subscribed');
-@define('SUMMARY', 'Summary');
+@define('ACTIVE_COMMENT_SUBSCRIPTION', 'Abonniert');
+@define('PENDING_COMMENT_SUBSCRIPTION', 'Wartet auf Bestätigung');
+@define('NO_COMMENT_SUBSCRIPTION', 'Nicht abonniert');
+@define('SUMMARY', 'Übersicht');
 
 // Next lines were translated on 2012/05/29
 @define('ABOUT_TO_DELETE_FILES', 'Sie beabsichtigen mehrere Dateien auf einmal zu löschen.<br />Wenn Sie diese in ihren Einträgen verwenden, wird das Löschen Lücken erzeugen.<br />Soll trotzdem fortgefahren werden?<br /><br />');
-@define('ARCHIVE_SORT_STABLE', 'Stable Archives');
-@define('ARCHIVE_SORT_STABLE_DESC', 'Sort the archive-pages descending, so they are stable and search-crawler do not have to reindex them.');
+@define('ARCHIVE_SORT_STABLE', 'Unveränderliche Archiv-Seiten');
+@define('ARCHIVE_SORT_STABLE_DESC', 'Archiv-Seiten absteigend sortieren, so dass die ältesten Einträge sich auf Seite 1 finden, so dass sich die Inhalte nicht mehr ändern und Suchmaschinen die Seiten nicht ständig neu indizieren müssen.');
 
 // added 2012-11-29
 @define('PLAIN_ASCII_NAMES', '(keine Sonderzeichen, Umlaute)');
@@ -1132,3 +1132,4 @@
 @define('MAINTENANCE_MODE_DEACTIVATE', 'Deaktivieren');
 
 @define('PLUGIN_LINK_SPARTACUS', 'Weitere Informationen');
+@define('PLUGIN_ALL_UPDATED', 'Alle Plugins aktualisiert');
