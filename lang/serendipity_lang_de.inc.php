@@ -1130,3 +1130,5 @@
 @define('MAINTENANCE_MODE_TIME', 'Wartungsmodus aktiv bis');
 @define('MAINTENANCE_MODE_ACTIVATE', 'Aktivieren');
 @define('MAINTENANCE_MODE_DEACTIVATE', 'Deaktivieren');
+
+@define('PLUGIN_LINK_SPARTACUS', 'Weitere Informationen');
