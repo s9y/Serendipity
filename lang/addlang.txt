@@ -1,2 +1,0 @@
-@define('PLUGIN_LINK_SPARTACUS', 'More information');
-@define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
