@@ -56,6 +56,11 @@ if (is_array($output)) {
 } else {
     $data['updateButton'] = $output;
 }
+if (serendipity_plugin_api::hook_event('backend_plugins_upgradecount', $output)) {
+    $data['pluginUpdates'] = $output;
+} else {
+    $data['pluginUpdates'] = '';
+}
 
 $cjoin  = ($serendipity['serendipityUserlevel'] == USERLEVEL_EDITOR) ? "
         LEFT JOIN {$serendipity['dbPrefix']}authors a ON (e.authorid = a.authorid)
