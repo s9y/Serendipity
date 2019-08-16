@@ -1,6 +1,13 @@
 Version 2.3.1-beta1
 ------------------------------------------------------------------------
 
+   * Change footer_info and prev/next links for archive pages for
+     "stable archives" sort order.
+
+   * Fix pagination in core for "stable archives" sort order and fix
+     prev/next links for pagination in timeline and bulletproof themes
+     when "stable archives" are active.
+
    * Add Spartacus links ("more info") to plugin lists.
 
    * Fix/Change: Wording of plugin display ("version") and PHP/smarty

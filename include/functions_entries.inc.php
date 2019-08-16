@@ -973,13 +973,9 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
     $uriArguments[] = 'P%s';
     $serendipity['smarty']->assign('footer_totalEntries', $totalEntries);
     $serendipity['smarty']->assign('footer_totalPages', $totalPages);
-    if (serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['GET']['action'] != 'search') {
-        $serendipity['smarty']->assign('footer_currentPage', $totalPages - $serendipity['GET']['page']);
-    } else {
-        $serendipity['smarty']->assign('footer_currentPage', $serendipity['GET']['page']);
-    }
+    $serendipity['smarty']->assign('footer_currentPage', $serendipity['GET']['page']);
     $serendipity['smarty']->assign('footer_pageLink', str_replace('%2A', '*', serendipity_rewriteURL(implode('/', $uriArguments) . $suffix)));
-    $serendipity['smarty']->assign('footer_info', sprintf(PAGE_BROWSE_ENTRIES, serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['GET']['action'] != 'search' ?  $totalPages - (int)$serendipity['GET']['page'] +1 : (int)$serendipity['GET']['page'], $totalPages, $totalEntries));
+    $serendipity['smarty']->assign('footer_info', sprintf(PAGE_BROWSE_ENTRIES, (int)$serendipity['GET']['page'], $totalPages, $totalEntries));
 
     if ($serendipity['GET']['page'] < $totalPages) {
         $uriArguments = $serendipity['uriArguments'];
@@ -987,11 +983,6 @@ function serendipity_printEntryFooter($suffix = '.html', $totalEntries = null) {
         $serendipity['smarty']->assign('footer_next_page', serendipity_rewriteURL(str_replace('//', '/', implode('/', $uriArguments)) . $suffix));
     }
 
-    if (serendipity_db_bool($serendipity['archiveSortStable']) && $serendipity['GET']['action'] != 'search') {
-        $temp = $serendipity['smarty']->getTemplateVars('footer_prev_page');
-        $serendipity['smarty']->assign('footer_prev_page', $serendipity['smarty']->getTemplateVars('footer_next_page'));
-        $serendipity['smarty']->assign('footer_next_page', $temp);
-    }
 }
 
 /**
