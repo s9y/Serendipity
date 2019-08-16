@@ -285,6 +285,14 @@
             
         {if $footer_totalPages >1 }
             <nav class="pagination">
+                {assign var="archiveSortStable" value="`serendipity_getConfigVar key='archiveSortStable'`"}
+                {if $archiveSortStable}
+                    {assign var="linkPrevPage" value="`$footer_next_page`"}
+                    {assign var="linkNextPage" value="`$footer_prev_page`"}
+                {else}
+                    {assign var="linkPrevPage" value="`$footer_prev_page`"}
+                    {assign var="linkNextPage" value="`$footer_next_page`"}
+                {/if}
                 {assign var="paginationStartPage" value="`$footer_currentPage-3`"}
                 {if $footer_currentPage+3 > $footer_totalPages}
                     {assign var="paginationStartPage" value="`$footer_totalPages-4`"}
@@ -292,8 +300,8 @@
                 {if $paginationStartPage <= 0}
                     {assign var="paginationStartPage" value="1"}
                 {/if}
-                {if $footer_prev_page}
-                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><i class="fas fa-arrow-left" aria-hidden="true"></i><span class="sr-only">{$CONST.PREVIOUS_PAGE}</span></a>
+                {if $linkPrevPage}
+                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.PREVIOUS_PAGE}" href="{$linkPrevPage}"><i class="fas fa-arrow-left" aria-hidden="true"></i><span class="sr-only">{$CONST.PREVIOUS_PAGE}</span></a>
                 {/if}
                 {if $paginationStartPage > 1}
                     <a class="btn btn-md btn-default btn-theme" href="{'1'|string_format:$footer_pageLink}">1</a>
@@ -314,8 +322,8 @@
                 {if $smarty.section.i.index <= $footer_totalPages}
                     <a class="btn btn-md btn-default btn-theme" href="{$footer_totalPages|string_format:$footer_pageLink}">{$footer_totalPages}</a>
                 {/if}
-                {if $footer_next_page}
-                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><i class="fas fa-arrow-right" aria-hidden="true"></i><span class="sr-only">{$CONST.NEXT_PAGE}</span></a>
+                {if $linkNextPage}
+                    <a class="btn btn-md btn-default btn-theme" title="{$CONST.NEXT_PAGE}" href="{$linkNextPage}"><i class="fas fa-arrow-right" aria-hidden="true"></i><span class="sr-only">{$CONST.NEXT_PAGE}</span></a>
                 {/if}
             </nav>
         {/if}
