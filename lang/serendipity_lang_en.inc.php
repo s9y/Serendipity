@@ -1132,3 +1132,4 @@
 
 @define('PLUGIN_LINK_SPARTACUS', 'More information');
 @define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');

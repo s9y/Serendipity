@@ -287,7 +287,7 @@
     <input type="hidden" id="newDir" name="serendipity[newDir]">
     </form>
     <div id="move-popup" class="mfp-hide">
-        <h3>Move images to directory</h3>
+        <h3>{$CONST.MEDIA_DIRECTORY_MOVE}</h3>
         <form>
             <div class="form_select">
                 <select >
