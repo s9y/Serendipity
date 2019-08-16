@@ -1,6 +1,9 @@
 Version 2.4-alpha1
 ------------------------------------------------------------------------
 
+   * Change footer_info and prev/next links for archive pages for
+     "stable archives" sort order.
+
    * Fix pagination in core for "stable archives" sort order and fix
      prev/next links for pagination in timeline and bulletproof themes
      when "stable archives" are active.
