@@ -1,6 +1,10 @@
 Version 2.4-alpha1
 ------------------------------------------------------------------------
 
+   * Enhance i18n of ML multimove.
+
+   * Fix ML multidelete.
+
    * Change footer_info and prev/next links for archive pages for
      "stable archives" sort order.
 
