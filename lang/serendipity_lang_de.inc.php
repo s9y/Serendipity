@@ -879,6 +879,7 @@
 
 @define('MEDIA_DYN_RESIZE', 'Dynamische Bildgrößenanpassung erlauben?');
 @define('MEDIA_DYN_RESIZE_DESC', 'Falls aktiviert, kann die Medienauswahl ein Bild in beliebigen Größen zurückliefern, indem spezielle GET-Variablen übermittelt werden. Die Ergebnisse werden gecached und können daher möglicherweise viel Speicherplatz beanspruchen.');
+@define('MEDIA_DIRECTORY_MOVE', 'Dateien verschieben');
 @define('MEDIA_DIRECTORY_MOVED', 'Verzeichnis und Dateien wurden erfolgreich nach %s verschoben');
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'Verzeichnis und Dateien konnten nicht nach %s verschoben werden!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'Bei Nicht-MySQL Datenbanken ist es nicht möglich, jeden Blogeintrag durchzugehen und das alte Verzeichnis durch das neue zu ersetzen. Daher müssen Sie manuell bestehende Einträge überarbeiten und die neuen URLs eintragen. Sie können natürlich auch das Verzeichnis an seinen alten Platz zurückschieben, falls dies zu viel Aufwand bedeuten würde.');
@@ -1009,7 +1010,7 @@
 @define('PUBLISH_ERROR', 'Fehler bei der Veröffentlichung:');
 @define('UPDATE_NOTIFICATION', 'Update-Hinweis');
 @define('NEW_VERSION_AVAILABLE', 'Neue stabile Serendipity version verfügbar: ');
-@define('MOVE', 'Bewegen');
+@define('MOVE', 'Verschieben');
 @define('MOVE_UP', 'Nach oben');
 @define('MOVE_DOWN', 'Nach unten');
 @define('INSTALL_NEW_SIDEBAR_PLUGIN', 'Seitenleisten-Plugin installieren');
