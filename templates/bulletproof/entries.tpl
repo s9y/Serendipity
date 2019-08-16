@@ -418,6 +418,14 @@
 
     {if $template_option.show_pagination == 'true' && $footer_totalPages > 1}
         <div class="pagination">
+            {assign var="archiveSortStable" value="`serendipity_getConfigVar key='archiveSortStable'`"}
+            {if $archiveSortStable}
+                {assign var="linkPrevPage" value="`$footer_next_page`"}
+                {assign var="linkNextPage" value="`$footer_prev_page`"}
+            {else}
+                {assign var="linkPrevPage" value="`$footer_prev_page`"}
+                {assign var="linkNextPage" value="`$footer_next_page`"}
+            {/if}
             {assign var="paginationStartPage" value="`$footer_currentPage-3`"}
             {if $footer_currentPage+3 > $footer_totalPages}
                 {assign var="paginationStartPage" value="`$footer_totalPages-6`"}
@@ -425,8 +433,8 @@
             {if $paginationStartPage <= 0}
                 {assign var="paginationStartPage" value="1"}
             {/if}
-            {if $footer_prev_page}
-                <a title="{$CONST.PREVIOUS_PAGE}" href="{$footer_prev_page}"><span class="pagearrow">&#9668;</span></a>
+            {if $linkPrevPage}
+                <a title="{$CONST.PREVIOUS_PAGE}" href="{$linkPrevPage}"><span class="pagearrow">&#9668;</span></a>
             {/if}
             {if $paginationStartPage > 1}
                 <a href="{$footer_pageLink|replace:'%s':'1'}">1</a>
@@ -447,8 +455,8 @@
             {if $smarty.section.i.index <= $footer_totalPages}
                 <a href="{$footer_pageLink|replace:'%s':$footer_totalPages}">{$footer_totalPages}</a>
             {/if}
-            {if $footer_next_page}
-                <a title="{$CONST.NEXT_PAGE}" href="{$footer_next_page}"><span class="pagearrow">&#9658;</span></a>
+            {if $linkNextPage}
+                <a title="{$CONST.NEXT_PAGE}" href="{$linkNextPage}"><span class="pagearrow">&#9658;</span></a>
             {/if}
         </div>
     {/if}
