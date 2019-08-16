@@ -132,7 +132,7 @@ switch ($serendipity['GET']['adminAction']) {
             break;
         }
         // case bulk multimove (leave the fake oldDir being send as an empty dir)
-        if (isset($serendipity['POST']['newDir'])) {
+        if (!empty($serendipity['POST']['newDir'])) {
             $messages = array();
             $multiMoveImages = $serendipity['POST']['multiDelete']; // The 'multiDelete' key name should better be renamed to 'multiCheck', but this would need to change 2k11/admin/serendipity_editor.js, images.inc.tpl, media_items.tpl, media_pane.tpl and this file
             unset($serendipity['POST']['multiDelete']);
