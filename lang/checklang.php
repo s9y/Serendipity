@@ -11,7 +11,8 @@ function get_langs($lang_dir='.') {
             if(!preg_match('/^serendipity_lang_(.+)\.inc\.php$/', $file, $matches)) {
                 continue;
             } else {
-                $languages[] = strtolower($matches[1]);
+                # $languages[] = strtolower($matches[1]);
+                $languages[] = $matches[1];
             }
         }
     }
