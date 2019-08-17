@@ -62,7 +62,7 @@ foreach ($languages as $language) {
     // constants in this language not known in EN
     $added   = array_diff($constants[$language], $constants['en']);
     // report
-    if(!empty($missing) {
+    if(!empty($missing)) {
         printf("%s misses these constants:\n",strtoupper($language));
         foreach ($missing as $display) {
             printf("   - %s\n", $display);
