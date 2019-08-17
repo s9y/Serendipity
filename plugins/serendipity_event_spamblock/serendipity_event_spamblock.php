@@ -25,7 +25,7 @@ class serendipity_event_spamblock extends serendipity_event
             'smarty'      => '2.6.7',
             'php'         => '4.1.0'
         ));
-        $propbag->add('version',       '1.88.1');
+        $propbag->add('version',       '1.88.2');
         $propbag->add('event_hooks',    array(
             'frontend_saveComment' => true,
             'external_plugin'      => true,
@@ -876,7 +876,9 @@ class serendipity_event_spamblock extends serendipity_event
                     if (!is_array($eventData) || serendipity_db_bool($eventData['allow_comments'])) {
                         $this->checkScheme();
 
-                        $serendipity['csuccess'] = 'true';
+                        if (!isset($serendipity['csuccess'])) {
+                            $serendipity['csuccess'] = 'true';
+                        }
                         $logfile = $this->logfile = $this->get_config('logfile', $serendipity['serendipityPath'] . 'spamblock.log');
                         $required_fields = $this->get_config('required_fields', '');
                         $checkmail = $this->get_config('checkmail');
