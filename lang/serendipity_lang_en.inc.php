@@ -880,7 +880,6 @@
 @define('MEDIA_DYN_RESIZE', 'Allow dynamic image resizing?');
 @define('MEDIA_DYN_RESIZE_DESC', 'If enabled, the media selector can return images in any requested size via a GET variable. The results are cached, and thus can create a large filebase if you make intensive use of it.');
 
-@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');
 @define('MEDIA_DIRECTORY_MOVED', 'Directory and files were successfully moved to %s');
 @define('MEDIA_DIRECTORY_MOVE_ERROR', 'Directory and files could not be moved to %s!');
 @define('MEDIA_DIRECTORY_MOVE_ENTRY', 'On Non-MySQL databases, iterating through every article to replace the old directory URLs with new directory URLs is not possible. You will need to manually edit your entries to fix new URLs. You can still move your old directory back to where it was, if that is too cumbersome for you.');
@@ -1133,3 +1132,4 @@
 
 @define('PLUGIN_LINK_SPARTACUS', 'More information');
 @define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');
