@@ -27,8 +27,6 @@
 @define('LOGOUT', 'Abmelden');
 @define('LOGGEDOUT', 'Abgemeldet.');
 @define('CREATE', 'Erstellen');
-@define('SAVE', 'Speichern');
-@define('NAME', 'Name');
 @define('CREATE_NEW_CAT', 'Neue Kategorie');
 @define('I_WANT_THUMB', 'Ich möchte die Vorschau im Eintrag haben.');
 @define('I_WANT_BIG_IMAGE', 'Ich möchte das große Bild im Eintrag haben.');
@@ -89,7 +87,6 @@
 @define('RESIZE_BLAHBLAH', '<b>Größe von %s ändern</b>');
 @define('ORIGINAL_SIZE', 'Originalgröße: <i>%sx%s</i> Pixel');
 @define('HERE_YOU_CAN_ENTER_BLAHBLAH', '<p>Hier können Sie die Bildgröße ändern. Um die Proportionen beizubehalten, einfach einen der beiden Werte eingeben, und anschließend die TAB-Taste drücken, und Sie erhalten eine Vorschau mit korrekten Proportionen.');
-@define('DATE_FORMAT_1', 'd.m.Y');
 @define('QUICKJUMP_CALENDAR', 'QuickJump Kalender');
 @define('QUICKSEARCH', 'Suche');
 @define('SEARCH_FOR_ENTRY', 'Nach Einträgen suchen');
@@ -189,7 +186,6 @@
 @define('ENTER_NEW_NAME', 'Bitte einen neuen Namen eingeben für: ');
 @define('RESIZING', 'Anpassen der Bildgröße');
 @define('RESIZE_DONE', 'Fertig (%s Bildgrößen angepaßt).');
-@define('DELETE_IMAGE_FAIL' , 'Kann das Bild namens <b>%s</b> nicht löschen');
 @define('DELETE_THUMBNAIL', 'Vorschaubilder zu <b>%s</b> gelöscht');
 @define('FILE_NOT_FOUND', 'Die Datei namens <b>%s</b> kann nicht gefunden werden, vielleicht wurde diese schon gelöscht?');
 @define('ABORT_NOW', 'Abbrechen');
@@ -934,7 +930,7 @@
 @define('PLUGIN_DOCUMENTATION_LOCAL', 'Lokale Dokumentation');
 @define('PLUGIN_DOCUMENTATION_CHANGELOG', 'Versionsgeschichte');
 @define('SYNDICATION_PLUGIN_BIGIMG', 'Großes Bild');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeige ein (großes) Bild über den Feeds im Sidebar, volle oder absolute URL zur Bilddatei eingeben');
+@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeigt ein (großes) Bild oberhalb der Seitenleiste. Hier kann eine volle (oder absolut referenzierte) URL eingetragen werden oder "none" für einen Textlink (bisheriger Standard)');
 @define('SYNDICATION_PLUGIN_FEEDNAME', 'Angezeigter Name für "feed"');
 @define('SYNDICATION_PLUGIN_FEEDNAME_DESC', 'Optional benutzerdefinierten Namen für die Feeds eingeben (Vorgabe ist "feed" wenn leer)');
 @define('SYNDICATION_PLUGIN_COMMENTNAME', 'Anzeigename für "Kommentar" feed');
@@ -1050,7 +1046,6 @@
 @define('INSTALL_DBPREFIX_INVALID', 'Der Datenbank-Tabellenpräfix darf nicht leer sein und darf nur Zahlen, Nummern und den Unterstrich enthalten.');
 @define('SYNDICATION_PLUGIN_SUBTOME', 'subToMe');
 @define('SYNDICATION_PLUGIN_SUBTOME_DESC', 'Zeigt den subToMe button, mit dem Feed-Abonnements einfacher für Besucher verwaltet werden können.');
-@define('SYNDICATION_PLUGIN_BIGIMG_DESC', 'Zeigt ein (großes) Bild oberhalb der Seitenleiste. Hier kann eine volle (oder absolut referenzierte) URL eingetragen werden oder "none" für einen Textlink (bisheriger Standard)');
 @define('INSTALL_BACKENDPOPUP', 'Popups für das Backend verwenden?');
 @define('INSTALL_BACKENDPOPUP_DESC', 'Sollen im Backend Popup-Fenster eingesetzt werden? Wenn deaktiviert (standard), werden eingebettete modale Dialoge z.b. für die Mediendatenbank und die Kategorieauswahl verwendet.');
 @define('UPDATE_STABLE', 'stabil');
@@ -1086,7 +1081,7 @@
 @define('USERCONF_WYSIWYG_PRESET_NOCC_CKE', 'Erzwingen: CKEditor Vollständig');
 
 @define('CATEGORY_PLUGIN_SHOWALL', 'Zeige einen Link zu "Alle Kategorien"?');
-@define('CATEGORY_PLUGIN_SHOWALL', 'Falls aktiviert wird Besuchern ein Link angezeigt, das Blog ohne Einschränkung der Kategorien darzustellen.');
+@define('CATEGORY_PLUGIN_SHOWALL_DESC', 'Falls aktiviert wird Besuchern ein Link angezeigt, um das Blog ohne Einschränkung der Kategorien darzustellen.');
 @define('SERENDIPITY_PHPVERSION_FAIL', 'Serendipity benötigt eine PHP-Version >= %2$s - Sie benutzen eine ältere Version (%1$s) und müssen auf eine neuere upgraden. Die meisten Provider gestatten den Wechsel auf neuere PHP-Versionen über einen Schalter in der Admin-Oberfläche oder eine Anweisung in der .htaccess.');
 @define('TOGGLE_VIEW', 'Darstellung der Kategorien wechseln');
 @define('PUBLISH_NOW', 'Diesen Eintrag jetzt veröffentlichen (setzt aktuelle Zeit)');
