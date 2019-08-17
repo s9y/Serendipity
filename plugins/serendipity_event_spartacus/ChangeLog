@@ -1,5 +1,11 @@
-2.38:
+2.38.1:
 -------
+    * Fix count_plugin_upgrades():
+      Don't get plugin name from path, as event and sidebar plugins
+      may share their path; strip instance from name instead.
+
+2.38:
+-----
     * Add function to count upgradeable plugins.
     * Add upgrade notifier to plugin upgrade button.
     * Add 'backend_plugins_upgradecount' hook and

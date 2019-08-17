@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.38');
+        $propbag->add('version',       '2.38.1');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -1152,7 +1152,7 @@ class serendipity_event_spartacus extends serendipity_event
                 // Object is returned when a plugin could not be cached.
                 $bag = new serendipity_property_bag;
                 $plugin->introspect($bag);
-                $pluginname = get_object_vars($plugin)['act_pluginPath'];
+                $pluginname = explode(':', $class_data['name'])[0];
                 $version    = $bag->get('version');
             } elseif (is_array($plugin)) {
                 // Array is returned if a plugin could be fetched from info cache
