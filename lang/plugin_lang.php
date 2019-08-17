@@ -53,7 +53,7 @@ while(($file = readdir($d)) !== false) {
         $const['checked'] = array_merge($const['checked'], $current);
         echo count($const['native'][$file]) . " constants.\n";
     } else {
-        echo "NOTICE: English language of $file does not exist.\n";
+        echo "NOTICE: English language of $file does not exist.\n\n";
         continue;
     }
     
@@ -71,7 +71,8 @@ while(($file = readdir($d)) !== false) {
     echo "\n";
 }
 
-echo "Showing missing constants:\n\n";
+$const['missing'] = array_filter($const['missing']);
+echo "\n\nShowing missing constants:\n\n";
 foreach($const['missing'] AS $file => $constants) {
     echo strtoupper($file) . ":\n";
     foreach($constants AS $const => $val) {
