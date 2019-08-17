@@ -23,6 +23,7 @@
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_DONE', 'Entry caching completed.');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_ABORTED', 'Entry caching ABORTED.');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_CACHE_TOTAL', ' (totalling %d entries)...');
+@define('PLUGIN_EVENT_ENTRYPROPERTIES_NL2BR', 'Disable automatic word wrap');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_NO_FRONTPAGE', 'Hide from article overview / frontpage');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS', 'Use group-based restrictions');
 @define('PLUGIN_EVENT_ENTRYPROPERTIES_GROUPS_DESC', 'If enabled, you can define which users of a usergroup may be able to read entries. This option has a large impact on the performance of your article overview. Only enable this if you are really going to use this feature.');
