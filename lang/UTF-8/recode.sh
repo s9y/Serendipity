@@ -1,3 +1,3 @@
 #!/bin/bash
-cp ../*.php .
+cp ../*.inc.php .
 php recode.php
