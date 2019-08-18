@@ -12,6 +12,9 @@ Version 2.4-alpha1
      prev/next links for pagination in timeline and bulletproof themes
      when "stable archives" are active.
 
+   * Add plugin update notifications to the plugin update button and
+     tothe  dashboard.
+
    * Add Spartacus links ("more info") to plugin lists.
 
    * Fix/Change: Wording of plugin display ("version") and PHP/smarty
