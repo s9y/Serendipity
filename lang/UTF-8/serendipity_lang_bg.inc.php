@@ -1122,3 +1122,4 @@ $i18n_filename_to   = array('-', 'a', 'A', 'b', 'B', 'v', 'V', 'g', 'G', 'd', 'D
 @define('MAINTENANCE_MODE_DEACTIVATE', 'Deactivate');
 @define('PLUGIN_LINK_SPARTACUS', 'More information');
 @define('PLUGIN_ALL_UPDATED', 'All Plugins updated');
+@define('MEDIA_DIRECTORY_MOVE', 'Move files to another directory');
