@@ -1,6 +1,12 @@
 Version 2.4-alpha1
 ------------------------------------------------------------------------
 
+   * Add plugin update notifications to the plugin update button and
+     to the dashboard.
+
+Version 2.3.1 (21.08.2019)
+------------------------------------------------------------------------
+
    * Enhance i18n of ML multimove.
 
    * Fix ML multidelete.
@@ -11,9 +17,6 @@ Version 2.4-alpha1
    * Fix pagination in core for "stable archives" sort order and fix
      prev/next links for pagination in timeline and bulletproof themes
      when "stable archives" are active.
-
-   * Add plugin update notifications to the plugin update button and
-     tothe  dashboard.
 
    * Add Spartacus links ("more info") to plugin lists.
 
