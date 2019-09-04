@@ -1,6 +1,8 @@
 Version 2.3.2-beta1
 ------------------------------------------------------------------------
 
+   * Fix autologin when using MySQL (thanks @Eike Rathke, 
+     https://github.com/s9y/Serendipity/pull/632)
 
 Version 2.3.1 (21.08.2019)
 ------------------------------------------------------------------------
