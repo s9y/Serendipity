@@ -435,8 +435,11 @@ function serendipity_issueAutologin($user) {
     // Delete possible current cookie. Also delete any autologin keys that smell like 3-week-old, dead fish.
     if (stristr($serendipity['dbType'], 'sqlite')) {
         $cast = "okey";
+    } elseif (stristr($serendipity['dbType'], 'mysqli')) {
+        // Adds explicit casting for mysql.
+        $cast = "cast(okey as unsigned)";
     } else {
-        // Adds explicits casting for mysql, postgresql and others.
+        // Adds explicit casting for postgresql and others.
         $cast = "cast(okey as integer)";
     }
 
@@ -460,8 +463,11 @@ function serendipity_checkAutologin($user) {
 
     if (stristr($serendipity['dbType'], 'sqlite')) {
         $cast = "okey";
+    } elseif (stristr($serendipity['dbType'], 'mysqli')) {
+        // Adds explicit casting for mysql.
+        $cast = "cast(okey as unsigned)";
     } else {
-        // Adds explicits casting for mysql, postgresql and others.
+        // Adds explicit casting for postgresql and others.
         $cast = "cast(okey as integer)";
     }
 
