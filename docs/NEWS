@@ -1,6 +1,9 @@
 Version 2.4-alpha1
 ------------------------------------------------------------------------
 
+   * Fix autologin when using MySQL (thanks @Eike Rathke, 
+     https://github.com/s9y/Serendipity/pull/632)
+
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
 
