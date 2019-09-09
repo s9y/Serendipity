@@ -22,3 +22,4 @@ DEADJOE
 .editorconfig
 *.git
 tests/phpunit.xml
+vagrant/*
