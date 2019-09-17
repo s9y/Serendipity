@@ -1,10 +1,12 @@
 Version 2.3.2-beta1 ()
 ------------------------------------------------------------------------
 
-   * Fix autologin when using MySQL (thanks @Eike Rathke, 
+   * Only allows .txt and .log files for spamblock logging.
+     Thanks to Gary O'Leary-Steele (CVE TBD)
 
    * Fixes not properly displaying plugin save errors (validation)
 
+   * Fix autologin when using MySQL (thanks @Eike Rathke,
      https://github.com/s9y/Serendipity/pull/632)
 
 Version 2.3.1 (August 21st, 2019)
