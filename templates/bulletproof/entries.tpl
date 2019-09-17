@@ -126,7 +126,7 @@
                 <span class="serendipity_entryIcon">
                     {foreach from=$entry.categories item="entry_category"}
                         {if $entry_category.category_icon}
-                            <a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|@escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|@escape}" src="{$entry_category.category_icon}" /></a>
+                            <a href="{$entry_category.category_link}"><img class="serendipity_entryIcon" title="{$entry_category.category_name|@escape}{$entry_category.category_description|@emptyPrefix}" alt="{$entry_category.category_name|@escape}" src="{$entry_category.category_icon|escape}" /></a>
                         {/if}
                     {/foreach}
                </span>
