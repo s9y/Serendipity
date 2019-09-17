@@ -1,10 +1,12 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
-   * Fix autologin when using MySQL (thanks @Eike Rathke, 
+   * Only allows .txt and .log files for spamblock logging.
+     Thanks to Gary O'Leary-Steele (CVE TBD)
 
    * Fixes not properly displaying plugin save errors (validation)
 
+   * Fix autologin when using MySQL (thanks @Eike Rathke,
      https://github.com/s9y/Serendipity/pull/632)
 
    * Add plugin update notifications to the plugin update button and

@@ -147,3 +147,4 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SPAM', 'Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM', 'Not spam');
 
+@define('PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE', 'Only file extensions .log and .txt are allowed');

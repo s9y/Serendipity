@@ -353,6 +353,8 @@ class serendipity_event_spamblock extends serendipity_event
                 $propbag->add('name', PLUGIN_EVENT_SPAMBLOCK_LOGFILE);
                 $propbag->add('description', PLUGIN_EVENT_SPAMBLOCK_LOGFILE_DESC);
                 $propbag->add('default', $serendipity['serendipityPath'] . 'spamblock-%Y-%m-%d.log');
+                $propbag->add('validate', '@\.(log|txt)$@imsU');
+                $propbag->add('validate_error', PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE);
                 break;
 
             case 'logtype':
