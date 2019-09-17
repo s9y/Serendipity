@@ -5,7 +5,7 @@
 
         <ul class="plainList">
         {foreach $save_errors as $save_error}
-            <li>$save_error</li>
+            <li>{$save_error}</li>
         {/foreach}
         </ul>
     </div>
