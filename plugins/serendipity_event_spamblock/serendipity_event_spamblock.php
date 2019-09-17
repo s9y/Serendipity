@@ -1124,8 +1124,8 @@ class serendipity_event_spamblock extends serendipity_event
                         }
 
                         // Check for forced comment moderation (X days)
-                        if ($addData['type'] == 'NORMAL' && $moderation_auto == true && ( 
-                               ( $forcemoderation == 0 ) || 
+                        if ($addData['type'] == 'NORMAL' && $moderation_auto == true && (
+                               ( $forcemoderation == 0 ) ||
                                ( $forcemoderation > 0 && $eventData['timestamp'] < (time() - ($forcemoderation * 60 * 60 * 24)) )  ) ) {
                             $this->log($logfile, $eventData['id'], $forcemoderation_treat, PLUGIN_EVENT_SPAMBLOCK_REASON_FORCEMODERATION, $addData);
                             if ($forcemoderation_treat == 'reject') {
