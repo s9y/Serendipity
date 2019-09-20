@@ -94,7 +94,7 @@
             </main>
 
             <aside class="col-xs-12 col-lg-4">
-            {if $template_option.bs_rss}
+            {if $template_option.bs_feeds}
                 <section class="serendipity_plugin_rsslinks mb-3">
                     <h3>{$CONST.SYNDICATE_THIS_BLOG}</h3>
 
