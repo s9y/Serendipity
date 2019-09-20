@@ -89,7 +89,7 @@ $template_config = array(
                                 'primary' => BS_PRIMARY)
     ),
     array(
-       'var' => 'bs_rss',
+       'var' => 'bs_feeds',
        'name' => BS_RSS,
        'type' => 'boolean',
        'default' => true
