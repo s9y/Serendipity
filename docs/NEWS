@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Escape category images to avoid backend XSS.
+     Thanks to @hannob!
+
    * Only allows .txt and .log files for spamblock logging.
      Thanks to Gary O'Leary-Steele (CVE TBD)
 
