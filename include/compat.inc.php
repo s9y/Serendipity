@@ -156,18 +156,18 @@ if (!function_exists('errorToExceptionHandler')) {
                 break;
         }
 
-        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting, 
+        // NOTE: We do NOT use ini_get('error_reporting'), because that would return the global error reporting,
         // and not the one in our current content. @-silenced errors would otherwise never be caught on.
         $rep  = error_reporting();
 
         // Bypass error processing because it's @-silenced.
-        if ($rep == 0) { 
-            return false; 
+        if ($rep == 0) {
+            return false;
         }
 
         // if not using Serendipity testing and user or ISP has set PHPs display_errors to show no errors at all, respect this:
-        if ($serendipity['production'] === true && ini_get('display_errors') == 0) { 
-            return false; 
+        if ($serendipity['production'] === true && ini_get('display_errors') == 0) {
+            return false;
         }
 
         // Several plugins might not adapt to proper style. This should not completely kill our execution.
@@ -178,7 +178,7 @@ if (!function_exists('errorToExceptionHandler')) {
 
         $args = func_get_args();
 
-        /* 
+        /*
          * $serendipity['production'] can be:
          *
          * (bool) TRUE:         Live-blog, conceal error messages
@@ -373,9 +373,23 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 // Merge get and post into the serendipity array
-$serendipity['GET']    = &$_GET['serendipity'];
-$serendipity['POST']   = &$_POST['serendipity'];
-$serendipity['COOKIE'] = &$_COOKIE['serendipity'];
+if (is_array($_GET['serendipity'])) {
+    $serendipity['GET']    = &$_GET['serendipity'];
+} else {
+    $serendipity['GET']    = array();
+}
+
+if (is_array($_POST['serendipity'])) {
+    $serendipity['POST']   = &$_POST['serendipity'];
+} else {
+    $serendipity['POST']   = array();
+}
+
+if (is_array($_COOKIE['serendipity'])) {
+    $serendipity['COOKIE'] = &$_COOKIE['serendipity'];
+} else {
+    $serendipity['COOKIE'] = array();
+}
 
 // Attempt to fix IIS compatibility
 if (empty($_SERVER['REQUEST_URI'])) {

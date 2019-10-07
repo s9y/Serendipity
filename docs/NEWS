@@ -1,6 +1,12 @@
 Version 2.3.2-beta1 ()
 ------------------------------------------------------------------------
 
+   * Only populate $serendipity['GET'], $serendipity['POST'] and
+     $serendipity['COOKIE'] with references to $_GET['serendipity'],
+     $_POST['serendipity'], $_COOKIE['serendipity'] if they are
+     transmitted as an array. Else, an empty array is used.
+     Prevents PHP warnings (Issue 642) thanks to @hannob
+
    * Escape category images to avoid backend XSS.
      Thanks to @hannob!
 
