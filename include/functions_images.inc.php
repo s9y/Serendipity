@@ -807,16 +807,19 @@ function serendipity_rotateImg($id, $degrees) {
     }
 
     $infile = $outfile = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (empty($file['extension']) ? '' : '.' . $file['extension']);
-    $infileThumb = $outfileThumb = $serendipity['serendipityPath'] . $serendipity['uploadPath'] . $file['path'] . $file['name'] . (!empty($file['thumbnail_name']) ? '.' . $file['thumbnail_name'] : '') . (empty($file['extension']) ? '' : '.' . $file['extension']);
+    $thumbnails = serendipity_getThumbnails($id);
 
     if ($serendipity['magick'] !== true) {
         serendipity_rotate_image_gd($infile, $outfile, $degrees);
-        serendipity_rotate_image_gd($infileThumb, $outfileThumb, $degrees);
+        foreach($thumbnails as $thumbnail) {
+            $infileThumb = $outfileThumb = $thumbnail;
+            serendipity_rotate_image_gd($infileThumb, $outfileThumb, $degrees);
+        }
     } else {
         /* Why can't we just all agree on the rotation direction? */
         $degrees = (360 - $degrees);
 
-        /* Resize main image */
+        /* rotate main image */
         $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infile) . ' ' . serendipity_escapeshellarg($outfile);
         exec($cmd, $output, $result);
         if ( $result != 0 ) {
@@ -824,13 +827,16 @@ function serendipity_rotateImg($id, $degrees) {
         }
         unset($output, $result);
 
-        /* Resize thumbnail */
-        $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infileThumb) . ' ' . serendipity_escapeshellarg($outfileThumb);
-        exec($cmd, $output, $result);
-        if ( $result != 0 ) {
-            echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+        /* rotate thumbnail */
+        foreach($thumbnails as $thumbnail) {
+            $infileThumb = $outfileThumb = $thumbnail;
+            $cmd = escapeshellcmd($serendipity['convert']) . ' -rotate ' . serendipity_escapeshellarg($degrees) . ' ' . serendipity_escapeshellarg($infileThumb) . ' ' . serendipity_escapeshellarg($outfileThumb);
+            exec($cmd, $output, $result);
+            if ( $result != 0 ) {
+                echo '<span class="msg_error"><span class="icon-attention-circled" aria-hidden="true"></span> ' . sprintf(IMAGICK_EXEC_ERROR, $cmd, $output[0], $result) ."</span>\n";
+            }
+            unset($output, $result);
         }
-        unset($output, $result);
 
     }
 
