@@ -1,6 +1,11 @@
 Version 2.3.2-beta1 ()
 ------------------------------------------------------------------------
 
+   * fix: Rotating an image did not rotate all responsive thumbnails
+   
+   * fix: The wysiwyg editor stripped the figcaption element used
+          for image captions
+
    * Only populate $serendipity['GET'], $serendipity['POST'] and
      $serendipity['COOKIE'] with references to $_GET['serendipity'],
      $_POST['serendipity'], $_COOKIE['serendipity'] if they are
