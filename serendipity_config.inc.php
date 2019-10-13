@@ -376,9 +376,11 @@ if (isset($_SESSION['serendipityAuthorid'])) {
     $serendipity['lang'] = serendipity_getPostAuthSessionLanguage();
 }
 
-// Ensure that these limits do not contain strings
+// Ensure that these limits do not contain strings and have positive values
 $serendipity['fetchLimit'] = (int)$serendipity['fetchLimit'];
+if ($serendipity['fetchLimit'] < 1) $serendipity['fetchLimit'] = 1;
 $serendipity['RSSfetchLimit'] = (int)$serendipity['RSSfetchLimit'];
+if ($serendipity['RSSfetchLimit'] < 1) $serendipity['RSSfetchLimit'] = 1;
 
 // Try to fix some path settings. It seems common users have this setting wrong
 // when s9y is installed into the root directory, especially 0.7.1 upgrade users.
