@@ -222,7 +222,7 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
     $cond = array();
     $cond['orderby'] = $orderby;
     if (isset($serendipity['short_archives']) && $serendipity['short_archives']) {
-        // In the short listing of all titles for a month, we don't want to have a limit applied. And we don't need/want toe
+        // In the short listing of all titles for a month, we don't want to have a limit applied. And we don't need/want the
         // full article body (consumes memory)
         $limit   = '';
         $full    = false;
