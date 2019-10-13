@@ -19,7 +19,7 @@ class serendipity_event_entryproperties extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_ENTRYPROPERTIES_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '1.41.3');
+        $propbag->add('version',       '1.41.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.27',
@@ -915,9 +915,7 @@ class serendipity_event_entryproperties extends serendipity_event
 
                     if (count($conds) > 0) {
                         $cond = implode(' AND ', $conds);
-                        if (empty($eventData['and'])) {
-                            $eventData['and'] = " WHERE $cond ";
-                        } else {
+                        if (!empty($eventData['and'])) {
                             $eventData['and'] .= " AND $cond ";
                         }
                     }
@@ -934,7 +932,7 @@ class serendipity_event_entryproperties extends serendipity_event
                         $conds[] = 'ep_cache_body.value     AS ep_cache_body,';
                     }
 
-                    $cond = implode("\n", $conds);
+                    $cond = implode("\n", $conds) . "\n";
                     if (empty($eventData['addkey'])) {
                         $eventData['addkey'] = $cond;
                     } else {

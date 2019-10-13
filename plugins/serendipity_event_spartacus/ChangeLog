@@ -1,3 +1,8 @@
+2.38.2
+-------
+    * Fix a call to NULL if no connection to the repositiory could 
+      be archieved.
+
 2.38.1:
 -------
     * Fix count_plugin_upgrades():

@@ -15,13 +15,11 @@ class serendipity_plugin_recententries extends serendipity_plugin
 
     function introspect(&$propbag)
     {
-        $this->title = $this->get_config('title', $this->title);
-
         $propbag->add('name',          PLUGIN_RECENTENTRIES_TITLE);
         $propbag->add('description',   PLUGIN_RECENTENTRIES_BLAHBLAH);
         $propbag->add('stackable',     true);
         $propbag->add('author',        'Christian Machmeier, Christian Brabandt, Judebert, Don Chambers');
-        $propbag->add('version',       '2.6');
+        $propbag->add('version',       '2.7');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -212,16 +210,16 @@ class serendipity_plugin_recententries extends serendipity_plugin
             $sql_condition['joins'] = ' LEFT OUTER JOIN ' . $serendipity['dbPrefix'] . 'entrycat AS ec ON id = ec.entryid ' . $sql_condition['joins'];
         }
 
+        // get 'hide untranslated entries' option from multilingual plugin via SQL
+        serendipity_plugin_api::hook_event('frontend_fetchentries', $sql_condition, array('noSticky' => true));    
+        $sql_condition['addkey'] = rtrim($sql_condition['addkey'],",\n") . "\n"; 
+
         $entries_query = "SELECT DISTINCT id,
                                 title,
                                 timestamp,
-                                epm.value AS multilingual_title
+                                {$sql_condition['addkey']}
                            FROM {$serendipity['dbPrefix']}entries AS e
                                 {$sql_condition['joins']}
-
-                LEFT OUTER JOIN {$serendipity['dbPrefix']}entryproperties AS epm
-                             ON (epm.entryid = e.id AND epm.property = 'multilingual_title_" . $serendipity['lang'] . "')
-
                           WHERE isdraft = 'false' {$sql_condition['and']}
                                 $sql_order
                                 $sql_number";

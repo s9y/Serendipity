@@ -47,7 +47,7 @@ function locateHiddenVariables($_args) {
         } elseif ($v[0] == 'A') { /* Author */
             $url_author = substr($v, 1);
             if (is_numeric($url_author)) {
-                $serendipity['GET']['viewAuthor'] = $_GET['viewAuthor'] = (int)$url_author;
+                $serendipity['GET']['viewAuthor'] = (int)$url_author;
                 unset($_args[$k]);
             }
         } elseif ($v == 'summary') { /* Summary */
@@ -366,8 +366,8 @@ function serveEntry($matches) {
         $id = false;
     }
 
-    $_GET['serendipity']['action'] = 'read';
-    $_GET['serendipity']['id']     = $id;
+    $serendipity['GET']['action'] = 'read';
+    $serendipity['GET']['id']     = $id;
 
     $title = serendipity_db_query("SELECT title FROM {$serendipity['dbPrefix']}entries WHERE id=$id AND isdraft = 'false' " . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : ''), true);
     if (is_array($title)) {

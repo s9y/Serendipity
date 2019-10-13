@@ -464,14 +464,15 @@ function serendipity_detectLang($use_include = false) {
             if (in_array($preferred_language, $supported_languages)) {
                 if ($use_include) {
                     @include_once(S9Y_INCLUDE_PATH . 'lang/' . $charset . 'serendipity_lang_' . $preferred_language . '.inc.php');
-                    $serendipity['autolang'] = $preferred_language;
+                    //$serendipity['autolang'] = $preferred_language; -> according to the documentation, it should remain on 'en'
                 }
                 return $preferred_language;
             } // endif
         } // endforeach
     } // endif
 
-    return $serendipity['lang'];
+    // negotiation failed
+    return null;
 }
 
 /**
