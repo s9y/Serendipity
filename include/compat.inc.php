@@ -373,19 +373,19 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 // Merge get and post into the serendipity array
-if (is_array($_GET['serendipity'])) {
+if (array_key_exists('serendipity', $_GET) && is_array($_GET['serendipity'])) {
     $serendipity['GET']    = &$_GET['serendipity'];
 } else {
     $serendipity['GET']    = array();
 }
 
-if (is_array($_POST['serendipity'])) {
+if (array_key_exists('serendipity', $_POST) && is_array($_POST['serendipity'])) {
     $serendipity['POST']   = &$_POST['serendipity'];
 } else {
     $serendipity['POST']   = array();
 }
 
-if (is_array($_COOKIE['serendipity'])) {
+if (array_key_exists('serendipity', $_COOKIE) && is_array($_COOKIE['serendipity'])) {
     $serendipity['COOKIE'] = &$_COOKIE['serendipity'];
 } else {
     $serendipity['COOKIE'] = array();
