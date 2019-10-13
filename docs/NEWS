@@ -10,6 +10,9 @@ Version 2.3.3-beta1 ()
      published blog entries and ability to prepend a mail body. 
      Also fixes missing "keep strip tags" configuration option
 
+   * Fix: [bbcode] Get roman numerals working in bbcode plugin.
+          Thanks to Fabien Chabreuil!
+
    * Fix: Force positive limits for number of entries shown on
           title page and in RSS feed. s9y doesn't work with 0 or
           negative numbers, so force our default (15) in this case,
