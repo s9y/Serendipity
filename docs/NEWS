@@ -1,6 +1,11 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Auto-generated mails submitted to qmail as MTA will get
+          mangled if encoded to quoted-printable due to qmail
+          changing "\r\n" linebreaks to "\r\r\n". Submit just "\n"
+          as linebreaks; other MTAs should cope with that.
+
    * fix: Rotating an image did not rotate all responsive thumbnails
    
    * fix: The wysiwyg editor stripped the figcaption element used
