@@ -304,6 +304,12 @@ class serendipity_event_bbcode extends serendipity_event
 .bb-list-ordered-ua {
     list-style-type: upper-alpha;
 }
+.bb-list-ordered-lr {
+    list-style-type:lower-roman;
+}
+.bb-list-ordered-ur {
+    list-style-type:upper-roman;
+}
 
 /* serendipity_event_bbcode end */
 
