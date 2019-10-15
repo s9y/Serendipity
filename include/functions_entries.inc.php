@@ -145,16 +145,13 @@ function &serendipity_fetchEntryCategories($entryid) {
                    WHERE ec.entryid = {$entryid}
                 ORDER BY c.category_name ASC";
 
-        $cat =& serendipity_db_query($query);
+        $cat =& serendipity_db_query($query,false,'assoc');
         
         if (!is_array($cat)) {
             $arr = array();
             return $arr;
         } else {
-            foreach ($cat as $key => $catdata) {
-                serendipity_plugin_api::hook_event('multilingual_strip_langs',$cat[$key]['category_name']);
-                serendipity_plugin_api::hook_event('multilingual_strip_langs',$cat[$key]['category_description']);
-            }
+            serendipity_plugin_api::hook_event('multilingual_strip_langs',$cat, array('category_name','category_description'));
             return $cat;
         }
     }
@@ -515,9 +512,8 @@ function serendipity_fetchEntryData(&$ret) {
     $search_ret =& serendipity_db_query($query, false, 'assoc');
 
     if (is_array($search_ret)) {
+        serendipity_plugin_api::hook_event('multilingual_strip_langs', $search_ret, array('category_name','category_description'));
         foreach($search_ret AS $i => $entry) {
-            serendipity_plugin_api::hook_event('multilingual_strip_langs',$entry['category_name']);
-            serendipity_plugin_api::hook_event('multilingual_strip_langs',$entry['category_description']);
             $ret[$assoc_ids[$entry['entryid']]]['categories'][] = $entry;
         }
     }
@@ -728,16 +724,13 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
           $cats = serendipity_walkRecursive($ret, 'categoryid', 'parentid', VIEWMODE_THREADED);
           $flat_cats = array();
           $flat_cats[0] = NO_CATEGORY;
+          serendipity_plugin_api::hook_event('multilingual_strip_langs',$cats, array('category_name','category_description'));
           foreach($cats AS $catidx => $catdata) {
-              serendipity_plugin_api::hook_event('multilingual_strip_langs', $catdata['category_name']);
               $flat_cats[$catdata['categoryid']] = str_repeat('&nbsp;', $catdata['depth']*2) . serendipity_specialchars($catdata['category_name']);
           }
           return $flat_cats;
         } else {
-            foreach ($ret as $key => $catdata) {
-                serendipity_plugin_api::hook_event('multilingual_strip_langs',$ret[$key]['category_name']);
-                serendipity_plugin_api::hook_event('multilingual_strip_langs',$ret[$key]['category_description']);
-            }
+            serendipity_plugin_api::hook_event('multilingual_strip_langs',$ret, array('category_name','category_description'));
             return $ret;
         }
     }

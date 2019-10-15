@@ -213,6 +213,9 @@ class serendipity_plugin_categories extends serendipity_plugin
 
         if (is_array($categories) && count($categories)) {
             $categories = serendipity_walkRecursive($categories, 'categoryid', 'parentid', VIEWMODE_THREADED);
+            // strip language tags if multilingual plugin is active
+            serendipity_plugin_api::hook_event('multilingual_strip_langs', $categories, 'category_name');
+
             foreach ($categories as $cid => $cat) {
                 // Hide parents not wanted
                 if ($use_parent && $use_parent != 'all') {
@@ -254,9 +257,6 @@ class serendipity_plugin_categories extends serendipity_plugin
                         }
                     }
                 }
-
-                // strip language tags if multilingual plugin is active
-                serendipity_plugin_api::hook_event('multilingual_strip_langs',$cat['category_name']);
 
                 $categories[$cid]['feedCategoryURL'] = serendipity_feedCategoryURL($cat, 'serendipityHTTPPath');
                 $categories[$cid]['categoryURL']     = serendipity_categoryURL($cat, 'serendipityHTTPPath');

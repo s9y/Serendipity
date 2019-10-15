@@ -46,8 +46,7 @@ class serendipity_plugin_superuser extends serendipity_plugin
             $base = $serendipity['serendipityHTTPPath'];
         }
 
-        //$link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
-        $link = $base . 'serendipity_admin.php';
+        $link = $base . ($serendipity['rewrite'] == 'none' ? 'serendipity_admin.php' : PATH_ADMIN);
         $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
         echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
     }
