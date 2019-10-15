@@ -373,23 +373,27 @@ if (ini_get('magic_quotes_gpc')) {
 }
 
 // Merge get and post into the serendipity array
-if (array_key_exists('serendipity', $_GET) && is_array($_GET['serendipity'])) {
-    $serendipity['GET']    = &$_GET['serendipity'];
-} else {
-    $serendipity['GET']    = array();
+// It is vital that also an empty array is mapped as a reference
+// because the s9y core actually sets new array key values sometimes in $_GET and
+// sometimes in $serendipity['GET'] (and POST/COOKIE).
+// TODO: This is being worked on currently to be unified see #650
+if (!array_key_exists('serendipity', $_GET) || !is_array($_GET['serendipity'])) {
+    $_GET['serendipity'] = array();
 }
 
-if (array_key_exists('serendipity', $_POST) && is_array($_POST['serendipity'])) {
-    $serendipity['POST']   = &$_POST['serendipity'];
-} else {
-    $serendipity['POST']   = array();
+$serendipity['GET']    = &$_GET['serendipity'];
+
+if (!array_key_exists('serendipity', $_POST) || !is_array($_POST['serendipity'])) {
+    $_POST['serendipity'] = array();
 }
 
-if (array_key_exists('serendipity', $_COOKIE) && is_array($_COOKIE['serendipity'])) {
-    $serendipity['COOKIE'] = &$_COOKIE['serendipity'];
-} else {
-    $serendipity['COOKIE'] = array();
+$serendipity['POST']   = &$_POST['serendipity'];
+
+if (!array_key_exists('serendipity', $_COOKIE) || !is_array($_COOKIE['serendipity'])) {
+    $_COOKIE['serendipity'] = array();
 }
+
+$serendipity['COOKIE'] = &$_COOKIE['serendipity'];
 
 // Attempt to fix IIS compatibility
 if (empty($_SERVER['REQUEST_URI'])) {
