@@ -1,6 +1,12 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Add plugin update notifications to the plugin update button and
+     to the dashboard.
+
+Version 2.3.2 (October 16th, 2019)
+------------------------------------------------------------------------
+
    * Fix: Auto-generated mails submitted to qmail as MTA will get
           mangled if encoded to quoted-printable due to qmail
           changing "\r\n" linebreaks to "\r\r\n". Submit just "\n"
@@ -27,9 +33,6 @@ Version 2.4-alpha1 ()
 
    * Fix autologin when using MySQL (thanks @Eike Rathke,
      https://github.com/s9y/Serendipity/pull/632)
-
-   * Add plugin update notifications to the plugin update button and
-     to the dashboard.
 
 Version 2.3.1 (August 21st, 2019)
 ------------------------------------------------------------------------
