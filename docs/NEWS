@@ -1,6 +1,14 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: [bbcode] Get roman numerals working in bbcode plugin.
+          Thanks to Fabien Chabreuil!
+
+   * Fix: Force positive limits for number of entries shown on
+          title page and in RSS feed. s9y doesn't work with 0 or
+          negative numbers, so force our default (15) in this case,
+          (#646)
+
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
 
