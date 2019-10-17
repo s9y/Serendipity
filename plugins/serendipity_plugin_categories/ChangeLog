@@ -1,0 +1,2 @@
+2.05.2
+        * Strip the translation tags in the category links if multilingual plugin is active

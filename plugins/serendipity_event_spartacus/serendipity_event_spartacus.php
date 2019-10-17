@@ -27,7 +27,7 @@ class serendipity_event_spartacus extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_SPARTACUS_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Garvin Hicking');
-        $propbag->add('version',       '2.38.1');
+        $propbag->add('version',       '2.38.2');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
         ));
@@ -457,7 +457,7 @@ class serendipity_event_spartacus extends serendipity_event
                 $resolved_url = $url . ' (IP ' . $url_ip . ')';
                 $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_FETCHERROR, $resolved_url));
                 //--JAM: START FIREWALL DETECTION
-                if ($response->getStatus()) {
+                if ((isset($response) && $response->getStatus())) {
                     $this->outputMSG('error', sprintf(PLUGIN_EVENT_SPARTACUS_REPOSITORY_ERROR, $response->getStatus()));
                 }
                 $check_health = true;

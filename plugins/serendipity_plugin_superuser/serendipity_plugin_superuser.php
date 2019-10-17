@@ -14,7 +14,7 @@ class serendipity_plugin_superuser extends serendipity_plugin
         $propbag->add('description',   ALLOWS_YOU_BLAHBLAH);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '1.1');
+        $propbag->add('version',       '1.1.1');
         $propbag->add('configuration', array('https'));
         $propbag->add('groups',        array('FRONTEND_FEATURES'));
     }
@@ -46,7 +46,7 @@ class serendipity_plugin_superuser extends serendipity_plugin
             $base = $serendipity['serendipityHTTPPath'];
         }
 
-        $link = $base . ($serendipity['rewrite'] == 'none' ? $serendipity['indexFile'] .'?/' : '') . PATH_ADMIN;
+        $link = $base . ($serendipity['rewrite'] == 'none' ? 'serendipity_admin.php' : PATH_ADMIN);
         $text = (($_SESSION['serendipityAuthedUser'] === true) ? SUPERUSER_OPEN_ADMIN : SUPERUSER_OPEN_LOGIN);
         echo '<a href="' . $link . '" rel="nofollow" title="'. $text .'">'. $text .'</a>';
     }

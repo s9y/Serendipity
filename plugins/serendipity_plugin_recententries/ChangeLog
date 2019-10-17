@@ -1,0 +1,4 @@
+2.7
+    * using the sql condition set aquired by event_hook::'frontend_fetchentries'
+      to get the multilingual data set
+    * $this->title (= title in backend) set to plugin name

@@ -93,7 +93,7 @@ function errorHandlerCreateDOM(htmlStr) {
         case 'backend_save':
         case 'backend_publish':
             // this is preview_iframe.tpl updertHooks [ NOT ONLY!! See freetags ]
-            if ($_GET['serendipity']['is_iframe'] == 'true' && $_GET['serendipity']['iframe_mode'] == 'save') {
+            if ($serendipity['GET']['is_iframe'] == 'true' && $serendipity['GET']['iframe_mode'] == 'save') {
                 echo "\n".'<script>document.addEventListener("DOMContentLoaded", function() { window.parent.serendipity.eraseEntryEditorCache(); });</script>'."\n";
             }
             break;
@@ -263,6 +263,8 @@ class serendipity_plugin_api
         }
 
         serendipity_db_query("DELETE FROM {$serendipity['dbPrefix']}config  where name LIKE '$plugin_instance_id/%'");
+        return;
+    
     }
 
     /**
@@ -1204,6 +1206,46 @@ class serendipity_plugin_api
 
         return $instance;
     }
+    
+    /**
+     * Find the plugin instances for a given classname
+     * 
+     * @access public
+     * @param   string      The classname of the plugin
+     * @param   int         The owner author
+     * @param   boolean     ignore hidden (deactivated) plugins
+     * @return  object      Array with ids of the installed plugin
+     */
+    static function find_plugin_id($plugin_name,$authorid = 0, $ignore_hidden = true) {
+        global $serendipity;
+
+        $sql   = "SELECT * from {$serendipity['dbPrefix']}plugins ";
+        $where = array();
+
+        $where[] = "(name LIKE '@" . serendipity_db_escape_string($plugin_name) . "%' OR name LIKE '" . serendipity_db_escape_string($plugin_name) . "%') ";
+        $where[] = "authorid='" . serendipity_db_escape_string($authorid) . "' ";
+        
+        if ($ignore_hidden) $where[] = "NOT ( placement = 'hidden' OR placement = 'eventh') ";
+        
+        if (count($where) > 0) {
+            $sql .= ' WHERE ' . implode(' AND ', $where);
+        }
+        
+        $rs = serendipity_db_query($sql,false,'assoc');
+        $ids = array();
+        
+        if (!empty($rs) & is_Array($rs)) { 
+            foreach($rs as $line) {
+                $ex = explode(':',$line['name']);
+                $ids[] = $ex[1];
+            }
+            return $ids;
+        } else {
+            return null;
+        }
+
+    }
+
 
     /**
      * Probe for a language include with constants. Still include defines later on, if some constants were missing

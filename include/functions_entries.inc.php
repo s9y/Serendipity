@@ -145,11 +145,13 @@ function &serendipity_fetchEntryCategories($entryid) {
                    WHERE ec.entryid = {$entryid}
                 ORDER BY c.category_name ASC";
 
-        $cat =& serendipity_db_query($query);
+        $cat =& serendipity_db_query($query,false,'assoc');
+        
         if (!is_array($cat)) {
             $arr = array();
             return $arr;
         } else {
+            serendipity_plugin_api::hook_event('multilingual_strip_langs',$cat, array('category_name','category_description'));
             return $cat;
         }
     }
@@ -510,6 +512,7 @@ function serendipity_fetchEntryData(&$ret) {
     $search_ret =& serendipity_db_query($query, false, 'assoc');
 
     if (is_array($search_ret)) {
+        serendipity_plugin_api::hook_event('multilingual_strip_langs', $search_ret, array('category_name','category_description'));
         foreach($search_ret AS $i => $entry) {
             $ret[$assoc_ids[$entry['entryid']]]['categories'][] = $entry;
         }
@@ -721,10 +724,14 @@ function &serendipity_fetchCategories($authorid = null, $name = null, $order = n
           $cats = serendipity_walkRecursive($ret, 'categoryid', 'parentid', VIEWMODE_THREADED);
           $flat_cats = array();
           $flat_cats[0] = NO_CATEGORY;
+          serendipity_plugin_api::hook_event('multilingual_strip_langs',$cats, array('category_name','category_description'));
           foreach($cats AS $catidx => $catdata) {
               $flat_cats[$catdata['categoryid']] = str_repeat('&nbsp;', $catdata['depth']*2) . serendipity_specialchars($catdata['category_name']);
           }
           return $flat_cats;
+        } else {
+            serendipity_plugin_api::hook_event('multilingual_strip_langs',$ret, array('category_name','category_description'));
+            return $ret;
         }
     }
     return $ret;
@@ -1659,18 +1666,25 @@ function serendipity_printArchives() {
         $distinct = '';
     }
 
+    // if another language than default is selected and hide option is set, hide untranslated articles
+    $sql_condition = array();
+    serendipity_plugin_api::hook_event('frontend_fetchentries', $sql_condition);
+
     $q = "SELECT $distinct e.timestamp
             FROM {$serendipity['dbPrefix']}entries e
             " . (!empty($cat_sql) ? "
        LEFT JOIN {$serendipity['dbPrefix']}entrycat ec
               ON e.id = ec.entryid
        LEFT JOIN {$serendipity['dbPrefix']}category c
-              ON ec.categoryid = c.categoryid" : "") . "
-           WHERE isdraft = 'false'"
+              ON ec.categoryid = c.categoryid" : "") . 
+              $sql_condition['joins'] .
+        " WHERE isdraft = 'false'"
+                . $sql_condition['and']
                 . (!serendipity_db_bool($serendipity['showFutureEntries']) ? " AND timestamp <= " . serendipity_db_time() : '')
                 . (!empty($cat_sql) ? ' AND ' . $cat_sql : '')
                 . (!empty($serendipity['GET']['viewAuthor']) ? ' AND e.authorid = ' . (int)$serendipity['GET']['viewAuthor'] : '')
                 . (!empty($cat_sql) ? " GROUP BY e.id, e.timestamp" : '');
+    
     $entries =& serendipity_db_query($q, false, 'assoc');
 
     $group = array();
@@ -1682,7 +1696,7 @@ function serendipity_printArchives() {
 
     $output = array();
     for ($y = $thisYear; $y >= $lastYear; $y--) {
-        $output[$y]['year'] = $y;
+        
         for ($m = 12; $m >= 1; $m--) {
 
             /* If the month we are checking are in the future, we drop it */
@@ -1710,6 +1724,10 @@ function serendipity_printArchives() {
 
             $entry_count = (int)$group[$y . (strlen($m) == 1 ? '0' : '') . $m];
 
+            if ($entry_count > 0) {
+                
+                if (!array_key_exists($y,$output)) $output[$y]['year'] = $y;
+            
             /* A silly hack to get the maximum amount of entries per month */
             if ($entry_count > $max) {
                 $max = $entry_count;
@@ -1721,6 +1739,7 @@ function serendipity_printArchives() {
             $data['link_summary']   = serendipity_archiveDateUrl($y . '/'. sprintf('%02s', $m) . $cat_get . $author_get, true);
             $data['date']           = $s;
             $output[$y]['months'][] = $data;
+            }
         }
     }
 
