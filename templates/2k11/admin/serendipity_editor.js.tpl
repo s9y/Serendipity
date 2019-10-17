@@ -1387,8 +1387,39 @@ $(function() {
     $('.multidelete, .multiinsert').click(function() {
         var $el = $(this);
         serendipity.highlightComment($el.attr('data-multidelid'), $el.attr('checked'));
-        $('#media_galleryinsert').fadeIn();
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        if (selectionAmount > 0) {
+            $('#media_galleryinsert').fadeIn();
+        } else {
+            $('#media_galleryinsert').fadeOut();
+        }
     });
+
+    // Also marks checkbox when header is clicked
+    $('.media_file h3').on('click', function() {
+        $(this).parent().find('.multiinsert').click();
+    });
+
+    // When clicking the 'Insert all' button, check whether only one or multiple
+    // images are selected
+    $('#media_galleryinsert .image_insert').on('click', function(e) {
+        var selectionAmount = $('.multidelete:checked, .multiinsert:checked').length;
+        if (selectionAmount == 0) {
+            e.preventDefault();
+            return false;
+        }
+
+        // Actually do a single insert
+        if (selectionAmount == 1) {
+            e.preventDefault();
+            var actualTargetElement = $('.multidelete:checked, .multiinsert:checked').closest('.media_file').find('.media_file_preview a').first();
+            // This below is a hack. Triggering actualTargetElement.click() does not work. Probably because MFP overrides click events within a modal popup.
+            // So we need to do something dirty and directly access the location href. Don't tell my mom.
+            location.href = actualTargetElement.attr('href');
+            return false;
+        }
+    });
+
     // hide gallery insert button until an image is selected
     $('#media_galleryinsert').hide();
 
