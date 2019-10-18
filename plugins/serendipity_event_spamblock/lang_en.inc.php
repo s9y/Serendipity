@@ -147,4 +147,11 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SPAM', 'Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM', 'Not spam');
 
-@define('PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE', 'Only file extensions .log and .txt are allowed');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT', 'Timeout for commenting');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_DESC', 'Activate a timeout between displaying the article and accepting a comment');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE', 'Timeout type');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_FIX', 'fixed amout of time');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_ADAPTIVE', 'depending on the lengths of comment and article');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE', 'Value for timeout');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC', 'type fixed: timeout in seconds / type adaptive: reading in words per minute and typing in chars per minute, 500 is a good value even for fast readers');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_TIMEOUT','Sorry, but you are not a human or you should at least attempt to read the article before commenting');
