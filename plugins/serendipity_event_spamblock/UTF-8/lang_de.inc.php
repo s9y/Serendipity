@@ -141,3 +141,11 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE', 'URLs von IP Validatierung ausnehmen');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC', 'URLs, die von der IP Validatierung ausgeschlossen werden sollen. ' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT', 'Wartezeit zum Kommentieren');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_DESC', 'Festsetzen einer Wartezeit zwischen erstem Anzeigen des Artikels und abgesandtem Kommentar');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE', 'Art der Wartezeit');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_FIX', 'festgesetzte Zeit');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE_ADAPTIVE', 'abhängig von der Länge von Artikel und Kommentar');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE', 'Wert für Wartezeit');
+@define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_VALUE_DESC', 'festgesetzt: Wartezeit in Sekunden / abhängig: Lesen in Wörtern pro Minute und Schreiben in Zeichen pro Minute. 500 ist hier ein guter Wert selbst für schnelle Leser');
+@define('PLUGIN_EVENT_SPAMBLOCK_REASON_TIMEOUT','Entschuldigung, aber du bist kein Mensch und solltest wenigstens versuchen den Artikel zu lesen bevor ein Kommentar verfasst wird');
