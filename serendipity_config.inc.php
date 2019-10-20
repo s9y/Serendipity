@@ -156,42 +156,44 @@ if (!isset($serendipity['dashboardEntriesLimit'])) {
 // Available languages
 if (!isset($serendipity['languages'])) {
     $serendipity['languages'] = array('en' => 'English',
-                                  'de' => 'German',
-                                  'da' => 'Danish',
-                                  'es' => 'Spanish',
-                                  'fr' => 'French',
-                                  'fi' => 'Finnish',
-                                  'cs' => 'Czech (Win-1250)',
-                                  'cz' => 'Czech (ISO-8859-2)',
-                                  'sk' => 'Slovak',
-                                  'nl' => 'Dutch',
-                                  'is' => 'Icelandic',
-                                  'tr' => 'Turkish',
-                                  'se' => 'Swedish',
-                                  'pt' => 'Portuguese Brazilian',
-                                  'pt_PT' => 'Portuguese European',
-                                  'bg' => 'Bulgarian',
-                                  'hu' => 'Hungarian',
-                                  'no' => 'Norwegian',
-                                  'pl' => 'Polish',
-                                  'ro' => 'Romanian',
-                                  'it' => 'Italian',
-                                  'ru' => 'Russian',
-                                  'fa' => 'Persian',
-                                  'tw' => 'Traditional Chinese (Big5)',
-                                  'tn' => 'Traditional Chinese (UTF-8)',
-                                  'zh' => 'Simplified Chinese (GB2312)',
-                                  'cn' => 'Simplified Chinese (UTF-8)',
-                                  'ja' => 'Japanese',
-                                  'ko' => 'Korean',
-                                  'sa' => 'Arabic',
-                                  'ta' => 'Tamil');
+                                  'de' => 'Deutsch',
+                                  'da' => 'Dansk',
+                                  'es' => 'Español',
+                                  'fr' => 'Français',
+                                  'fi' => 'Suomalainen',
+                                  'cs' => 'čeština (Win-1250)',
+                                  'cz' => 'čeština (ISO-8859-2)',
+                                  'sk' => 'Slovenský',
+                                  'nl' => 'Nederlands',
+                                  'is' => 'Íslensku',
+                                  'tr' => 'Türk',
+                                  'se' => 'svenska',
+                                  'pt' => 'português brasileiro',
+                                  'pt_PT' => 'português europeu',
+                                  'bg' => 'Български',
+                                  'hu' => 'magyar',
+                                  'no' => 'norsk',
+                                  'pl' => 'polski',
+                                  'ro' => 'limba română',
+                                  'it' => 'italiano',
+                                  'ru' => 'Русский язык',
+                                  'fa' => 'Fārsī',
+                                  'tw' => '正體字/繁體字 (Big5)',
+                                  'tn' => '正體字/繁體字 (UTF-8)',
+                                  'zh' => '简化字 (GB2312)',
+                                  'cn' => '简化字 (UTF-8)',
+                                  'ja' => '日本語',
+                                  'ko' => '한국어, 조선말',
+                                  'sa' => 'العربية',
+                                  'ta' => 'தமிழ்');
 }
 
 // Available Calendars
 $serendipity['calendars'] = array('gregorian'   => 'Gregorian',
                                   'persian-utf8' => 'Persian (utf8)');
 // Load main language file
+// if installed === false language autodetect or 'en', else nothing happens
+// because serendipity['lang'] is not defined yet
 include($serendipity['serendipityPath'] . 'include/lang.inc.php');
 
 $serendipity['charsets'] = array(
@@ -373,6 +375,9 @@ if (IS_installed === true && php_sapi_name() !== 'cli') {
 
 if (isset($_SESSION['serendipityAuthorid'])) {
     serendipity_load_configuration($_SESSION['serendipityAuthorid']);
+    // load_configuration overwrites $serendipity['lang'], so roll back if another language was detected
+    // in the backend should always the user language be shown
+    // in the frontend logged in same as any other user, exept with fallback to user instead of default
     $serendipity['lang'] = serendipity_getPostAuthSessionLanguage();
 }
 
