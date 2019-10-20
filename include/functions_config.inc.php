@@ -400,7 +400,7 @@ function serendipity_login($use_external = true) {
         $user = $serendipity['COOKIE']['author_username'];
         $valid_logintoken = serendipity_checkAutologin($user);
         if ($valid_logintoken === true) {
-            // if we do not tie down the session gere it will be recreated on every page reload, which will fuck op the form token system. That's why we need to load all data that makes the session stick. That's why we call setAuthorToken here.
+            // if we do not tie down the session here it will be recreated on every page reload, which will fuck op the form token system. That's why we need to load all data that makes the session stick. That's why we call setAuthorToken here.
             serendipity_setAuthorToken();
             serendipity_load_userdata($user);
             return true;
@@ -412,7 +412,7 @@ function serendipity_login($use_external = true) {
     }
 
     $data = array('ext' => $use_external, 'mode' => 2, 'user' => $serendipity['POST']['user'], 'pass' => $serendipity['POST']['pass']);
-    serendipity_plugin_api::hook_event('backend_loginfail', $data);
+    if ($use_external) serendipity_plugin_api::hook_event('backend_loginfail', $data);
 }
 
 /**
@@ -542,16 +542,12 @@ function serendipity_authenticate_author($username = '', $password = '', $is_has
 
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login ext check' . "\n");
     $is_authenticated = false;
-    serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
-    if ($is_authenticated) {
-        return true;
-    }
+    if ($use_external) serendipity_plugin_api::hook_event('backend_login', $is_authenticated, NULL);
+    if ($is_authenticated) return true;
 
     if ($debug) fwrite($fp, date('Y-m-d H:i') . ' - Login username check:' . $username . "\n");
     if (!empty($username) && is_string($username)) {
-        if ($use_external) {
-            serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
-        }
+        if ($use_external) serendipity_plugin_api::hook_event('backend_auth', $is_hashed, array('username' => $username, 'password' => $password));
 
         $query = "SELECT DISTINCT
                     email, password, realname, authorid, userlevel, right_publish, hashtype
