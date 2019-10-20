@@ -141,6 +141,8 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE', 'URLs von IP Validatierung ausnehmen');
 @define('PLUGIN_EVENT_SPAMBLOCK_TRACKBACKIPVALIDATION_URL_EXCLUDE_DESC', 'URLs, die von der IP Validatierung ausgeschlossen werden sollen. ' . PLUGIN_EVENT_SPAMBLOCK_FILTER_URLS_DESC);
 
+@define('PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE', 'nur Dateiendungen .log and .txt sind erlaubt');
+
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT', 'Wartezeit zum Kommentieren');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_DESC', 'Festsetzen einer Wartezeit zwischen erstem Anzeigen des Artikels und abgesandtem Kommentar');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE', 'Art der Wartezeit');

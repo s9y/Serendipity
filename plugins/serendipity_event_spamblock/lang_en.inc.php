@@ -147,6 +147,8 @@
 @define('PLUGIN_EVENT_SPAMBLOCK_SPAM', 'Spam');
 @define('PLUGIN_EVENT_SPAMBLOCK_NOT_SPAM', 'Not spam');
 
+@define('PLUGIN_EVENT_SPAMBLOCK_LOGFILE_VALIDATE', 'Only file extensions .log and .txt are allowed');
+
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT', 'Timeout for commenting');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_DESC', 'Activate a timeout between displaying the article and accepting a comment');
 @define('PLUGIN_EVENT_SPAMBLOCK_TIMEOUT_TYPE', 'Timeout type');
