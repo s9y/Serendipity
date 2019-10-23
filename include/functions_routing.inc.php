@@ -245,6 +245,7 @@ function serveCategory($matches) {
         $serendipity['GET']['category'] = $matches[1];
     }
     $cInfo = serendipity_fetchCategoryInfo($serendipity['GET']['category']);
+    serendipity_plugin_api::hook_event('multilingual_strip_langs',$cInfo, array('category_name'));
 
     if (!is_array($cInfo)) {
         $serendipity['view'] = '404';
