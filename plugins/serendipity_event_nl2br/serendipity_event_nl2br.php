@@ -414,7 +414,7 @@ p.wl_notopbottom {
                                 'form', 'header', 'hgroup', 'hr', 'main', 'nav', 'p'
                                 );
 
-    var $nested_block_elements = array('div','table','blockquote','ul','ol','dl');
+    var $nested_block_elements = array('div','table','blockquote','ul','ol','dl','figure');
     
     var $singleton_block_elements = array('hr');
 
@@ -426,7 +426,7 @@ p.wl_notopbottom {
                                 'img', 'input', 'keygen', 'link', 'param', 'source', 
                                 'track', 'wbr', '!--', 'iframe',
                                 'li','tr','th','col','colgroup',
-                                'thead', 'tbody', 'tfoot', 'caption', 'ins','del',
+                                'thead', 'tbody', 'tfoot', 'caption', 'figcaption', 'ins','del',
                                 'video','audio','title','desc','path','circle',
                                 'ellipse', 'rect', 'line', 'polyline', 'polygon', 'text',
                                 'image', 'g', 'defs'); //includes svg tags
