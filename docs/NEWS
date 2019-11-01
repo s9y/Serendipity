@@ -16,6 +16,8 @@ Version 2.3.3-beta1 ()
      of an asset to select its checkbox, and hides the 'Insert all'
      button when no assets are selected. (garvinhicking)
 
+   * Fix: Remember where you stored images last (#652)
+
    * Fix: [bbcode] Get roman numerals working in bbcode plugin.
           Thanks to Fabien Chabreuil!
 
