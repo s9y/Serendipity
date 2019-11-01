@@ -17,8 +17,8 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('name',          PLUGIN_EVENT_NL2BR_NAME);
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
-        $propbag->add('author',        'Serendipity Team');
-        $propbag->add('version',       '2.21.2');
+        $propbag->add('author',        'Serendipity Team, Stephan Brunker');
+        $propbag->add('version',       '2.21.3');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
