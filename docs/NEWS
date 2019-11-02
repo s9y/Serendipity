@@ -10,6 +10,9 @@ Version 2.3.3-beta1 ()
      published blog entries and ability to prepend a mail body. 
      Also fixes missing "keep strip tags" configuration option
 
+   * Fix: Items in Medialibrary that are not images now get
+          the correct link
+
    * #651: When using checkboxes to insert multiple media files, if only
      one asset has been selected, do not use the gallery mode,
      but instead single-asset view. Also improves to click the title
