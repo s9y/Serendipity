@@ -2,6 +2,12 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Multi-language issues.
+     Thanks to @stephanbrunker!
+
+   * Change language names to native languages.
+     Thanks to @stephanbrunker!
+
    * #650: Multiple fixes and enhancements, mainly to language settings.
      Thanks to @stephanbrunker!
 
