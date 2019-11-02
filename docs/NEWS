@@ -1,38 +1,47 @@
-   * admin/personal.inc.php: removed setting of $_SESSION: serendipity_lang
-     (already set in serendipity_config.inc.php for all scenarios)
-   * compat.inc.php: function detectLanguage returns now NULL if
-     the detection failed, also doesn't change $serendipity['autolang']
-     anymore which remains 'en' as general fallback.
-   * functions.entries.php: 
-        * function serendipity_printArchives() hooks now
-          into hook_event::'frontend_fetchentries' to get multilingual data, 
-          also doesn't show months and years with zero entries.
-        * function fetchEntryCategories, fetchEntryData and fetchCategories 
-          strips now data of multilingual tags
-   * plugin_api.inc.php: added function find_plugin_id which returns an 
-     array of the ids of the installed instances of the given plugin
-     this is used for checking the configuration of that plugin in other
-     plugins
-   * functions.config.inc.php: function serendipity_load_configuration
-     sets the language back to 'autolang' (which is 'en') if the language
-     loaded does not exist. Also sets the value $serendipity['default_lang']
-     to the default language of the blog.
-   * functions.config.inc.php: removed the Cookie 'userDefLang' which is no
-     longer needed
-   * functions.config.inc.php: major rework of the functions 
-     serendipity_getSessionLanguage and serendipity_getPostAuthSessionLanguage.
-     Those two functions should now process the user input via GET and POST,
-     store it into SESSION and COOKIE, and if no such input is given, fallback
-     to browser language negotiation and default language. More details in the
-     comments to that functions. $serendipity['detected_lang'] is the language
-     found from user input or browser negotiation.
-   * functions.routing.inc.php: fix some lookups from $_GET to $serendipity['GET']
-   * admin/plugins.inc.php: fix some lookups from $_GET to $serendipity['GET']
-   * created a new event hook 'multilingual_strip_langs' to strip tagged translation of elements 
-     outside the sidebar (mostly categories in entry display).
 
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
+
+   * #650: Multiple fixes and enhancements, mainly to language settings.
+     Thanks to @stephanbrunker!
+
+     * admin/personal.inc.php: removed setting of $_SESSION:
+       serendipity_lang (already set in serendipity_config.inc.php
+       for all scenarios)
+     * admin/plugins.inc.php: fix some lookups from $_GET to
+       $serendipity['GET']
+     * compat.inc.php: function detectLanguage returns now NULL if
+       the detection failed, also doesn't change $serendipity['autolang']
+       anymore which remains 'en' as general fallback.
+     * functions.config.inc.php:
+       * major rework of the functions serendipity_getSessionLanguage
+         and serendipity_getPostAuthSessionLanguage. Those two functions
+         should now process the user input via GET and POST, store it
+         into SESSION and COOKIE, and if no such input is given,
+         fallback to browser language negotiation and default language.
+         More details in the comments to that functions.
+         $serendipity['detected_lang'] is the language found from user
+         input or browser negotiation.
+       * function serendipity_load_configuration sets the language
+         back to 'autolang' (which is 'en') if the language loaded does
+         not exist. Also sets the value $serendipity['default_lang']
+         to the default language of the blog.
+       * removed the Cookie 'userDefLang' which is no longer needed
+     * functions.entries.php: 
+       * function serendipity_printArchives() hooks now
+         into hook_event::'frontend_fetchentries' to get multilingual
+         data, also doesn't show months and years with zero entries.
+       * function fetchEntryCategories, fetchEntryData and
+         fetchCategories strips now data of multilingual tags
+     * functions.routing.inc.php: fix some lookups from $_GET to
+       $serendipity['GET']
+     * plugin_api.inc.php: added function find_plugin_id which returns
+       an array of the ids of the installed instances of the given plugin
+       this is used for checking the configuration of that plugin in other
+       plugins
+     * created a new event hook 'multilingual_strip_langs' to strip
+       tagged translation of elements outside the sidebar (mostly
+       categories in entry display).
 
    * #651: When using checkboxes to insert multiple media files, if only
      one asset has been selected, do not use the gallery mode,
