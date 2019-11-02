@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Items in Medialibrary that are not images now get
+          the correct link
+
    * Plugin nl2br: Include figure and figcaption tags (2.21.3)
      Thanks to @stephanbrunker!
    
