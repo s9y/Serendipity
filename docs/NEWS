@@ -7,7 +7,13 @@ Version 2.4-alpha1 ()
    * Plugin spamblock: Add timeout protection against spambots (1.89).
      Thanks to @stephanbrunker!
 
-   * Fix: Multi-language issues.
+   * #657: functions.config.inc.php: 
+     eventhooks backend_login and backend_fail in function
+     serendipity_login and serendipity_authenticate_author
+     now only called with external=true (secondary login)
+
+   * Fix: added eventhook multilingual_strip_langs in
+     categories and permalinks for tagged translation
      Thanks to @stephanbrunker!
 
    * Change language names to native languages.
