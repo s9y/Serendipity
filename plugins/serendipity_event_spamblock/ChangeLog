@@ -1,2 +1,5 @@
+1.89: Added timeout protection against spambots.
+      Thanks to @stephanbrunker!
+
 1.88.2: Don't overwrite "moderate" flags from other plugins.
         ($serendipity['csuccess'])
