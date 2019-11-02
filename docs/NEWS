@@ -1,6 +1,11 @@
-
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
+
+   * Plugin nl2br: Include figure and figcaption tags (2.21.3)
+     Thanks to @stephanbrunker!
+   
+   * Plugin spamblock: Add timeout protection against spambots (1.89).
+     Thanks to @stephanbrunker!
 
    * Fix: Multi-language issues.
      Thanks to @stephanbrunker!
