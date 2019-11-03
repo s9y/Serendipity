@@ -56,7 +56,6 @@
         {/if}
     {/if}
 
-
             <article id="media_{$file.id}" class="media_file {if $media.manage AND $media.multiperm}manage {/if}{cycle values="odd,even"}">
                 <header class="clearfix">
                     {if $media.manage AND $media.multiperm}
@@ -81,9 +80,23 @@
 
                 <div class="clearfix equal_heights media_file_wrap">
                     <div class="media_file_preview">
-                        <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
-                            <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
-                        </a>
+                        {if $file.mediatype == 'video'}
+                            <video src="{$file.imgsrc}" controls>
+                                <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
+                            </video>
+                            <br />
+                            {if NOT $media.manage}
+                                {* we need a link to go to the next step when inserting into an entry *}
+                                <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                                    {$CONST.VIDEO}
+                                </a>
+                            {/if}
+                        {else}
+                            <a {if $media.manage AND $media.multiperm}class="media_fullsize"{/if} href="{$link}" title="{$CONST.MEDIA_FULLSIZE}: {$file.realname}" data-pwidth="{$file.popupWidth}" data-pheight="{$file.popupHeight}">
+                                {* even files that are not images get aplaceholder image from the backend *}    
+                                <img src="{$img_src}" title="{$img_title}" alt="{$img_alt}">
+                            </a>
+                        {/if}
                         <footer id="media_file_meta_{$file.id}" class="media_file_meta additional_info">
                             <ul class="plainList">
                             {if $file.hotlink}
