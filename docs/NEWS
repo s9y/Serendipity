@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Use the video tag for videos in the Medialibrary, also when
+     inserting such a video into an entry
+
    * Fix: Items in Medialibrary that are not images now get
           the correct link
 
