@@ -132,6 +132,10 @@ function serveJS($js_mode) {
     header('Content-type: application/javascript; charset=' . LANG_CHARSET);
 
     $out = "";
+    // FIXFIX: including genpage without any given action will generate the
+    // default page which is unneccessary, set action to empty to only make
+    // the fix below
+    $serendipity['GET']['action'] = 'empty';
 
     include(S9Y_INCLUDE_PATH . 'include/genpage.inc.php');
 
