@@ -18,7 +18,7 @@ class serendipity_event_nl2br extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_NL2BR_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Serendipity Team, Stephan Brunker');
-        $propbag->add('version',       '2.21.3');
+        $propbag->add('version',       '2.21.4');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -259,6 +259,18 @@ class serendipity_event_nl2br extends serendipity_event
                             $isolate = false;
                         }
                     }
+                    $this->isolationtags = $isolate;
+                    //delete isolation tags from other arrays
+                    if ($this->isolationtags)
+                    {
+                        $this->block_elements = array_diff($this->block_elements,$this->isolationtags);
+                        $this->allowed_p_parents = array_diff($this->allowed_p_parents,$this->isolationtags);
+                        $this->nested_block_elements = array_diff($this->nested_block_elements,$this->isolationtags);
+                        $this->inline_elements = array_diff($this->inline_elements,$this->isolationtags);
+                        $this->singleton_block_elements = array_diff($this->singleton_block_elements,$this->isolationtags);
+                        $this->ignored_elements = array_diff($this->ignored_elements,$this->isolationtags);
+                        $this->isolation_block_elements = array_diff($this->isolation_block_elements,$this->isolationtags);
+                    }
 
                     foreach ($this->markup_elements as $temp) {
                         if (serendipity_db_bool($this->get_config($temp['name'], true)) && isset($eventData[$temp['element']]) &&
@@ -270,9 +282,8 @@ class serendipity_event_nl2br extends serendipity_event
                             $element = $temp['element'];
                             if ($p_tags) {
                                 // NL2P OPERATION
-                                $this->isolationtags = $isolate;
-                                
                                 $text = $eventData[$element];
+                                
                                 if (!empty($text)) {
                                     //Standardize line endings to Unix
                                     $text = str_replace(array("\r\n", "\r"), "\n", $text);
@@ -297,6 +308,7 @@ class serendipity_event_nl2br extends serendipity_event
                                     {
                                         $text = "\n" . $text . "\n";
                                     } 
+                                    
                                     $eventData[$element] = $this->nl2p($text);
                                 }
                                 // NL2BR OPERATION
@@ -422,9 +434,9 @@ p.wl_notopbottom {
 
     var $isolation_inline_elements = array('svg','style');
 
-    var $ignored_elements = array('area', 'br', 'col', 'command', 'embed', 
+    var $ignored_elements = array('a','area', 'br', 'col', 'command', 'embed', 
                                 'img', 'input', 'keygen', 'link', 'param', 'source', 
-                                'track', 'wbr', '!--', 'iframe',
+                                'track', 'wbr', 'iframe', 
                                 'li','tr','th','col','colgroup',
                                 'thead', 'tbody', 'tfoot', 'caption', 'figcaption', 'ins','del',
                                 'video','audio','title','desc','path','circle',
@@ -434,7 +446,7 @@ p.wl_notopbottom {
     //paragraphs aren't allowed in these inline elements -> p closes these elements:
     var $inline_elements = array('b', 'big', 'i', 'small', 'tt', 'abbr',
                                 'acronym', 'cite', 'code', 'dfn', 'em', 'kbd', 'strong',
-                                'samp', 'var', 'a', 'bdo', 'bdi', 'map', 'object',
+                                'samp', 'var', 'bdo', 'bdi', 'map', 'object',
                                 'q', 'script', 'span', 'sub', 'sup', 'button',
                                 'label', 'select', 'textarea', 's', 'strike' 
                                 );
@@ -449,24 +461,26 @@ p.wl_notopbottom {
     const P_NOBOTTOM = '<p class="wl_nobottom">';
     const P_NOTOPBOTTOM = '<p class="wl_notopbottom">';
 
-    function nl2p($text)
+    /** splits a string into three parts:
+     *  before, comment and after
+     *  after can contain more comments,
+     *  so use in a loop
+     */
+    function splitcomment($text,&$pre,&$comment,&$after)
     {
-        //homogenize tags
-        $text = $this->tag_clean($text);
-        
-        //delete isolation tags from other arrays
-        if ($this->isolationtags)
-        {
-            $this->block_elements = array_diff($this->block_elements,$this->isolationtags);
-            $this->allowed_p_parents = array_diff($this->allowed_p_parents,$this->isolationtags);
-            $this->nested_block_elements = array_diff($this->nested_block_elements,$this->isolationtags);
-            $this->inline_elements = array_diff($this->inline_elements,$this->isolationtags);
-            $this->singleton_block_elements = array_diff($this->singleton_block_elements,$this->isolationtags);
-            $this->ignored_elements = array_diff($this->ignored_elements,$this->isolationtags);
-            $this->isolation_block_elements = array_diff($this->isolation_block_elements,$this->isolationtags);
+        $commentstartpos = strpos($text,'<!--');
+        if ($commentstartpos !== false) {
+            $pre = substr($text, 0, $commentstartpos);
+            $commentendpos = strpos($text, '-->', $commentstartpos + 4);
+            $comment = substr($text, $commentstartpos, $commentendpos - $commentstartpos + 3);
+            $after = substr($text, $commentendpos + 3);
+            return true;
+        } else {
+            $pre = '';
+            $comment = '';
+            $after = '';
+            return false;
         }
-        if (empty($text)) { return ''; }
-        return $this->blocktag_nl2p($text);
     }
 
     /** Make sure that all the tags are in lowercase
@@ -491,120 +505,131 @@ p.wl_notopbottom {
         $tagstyle = false;
         $singlequote = false;
         $doublequote = false;
+        $comment = false;
 
         for ($i = 0; $i < count($text); $i++)
         {
-            // start tag without closing tag
-            if ($text[$i] == '<' && !strpos($textstring,'>',$i+1) )
-            {   $text[$i] = '&lt;'; }
-            // end tag without previous start, definition or style section
-            elseif ($text[$i] == '>' && !($tagstart !== false || $tagdef || $tagstyle) )
-            {   $text[$i] = '&gt;'; }
-            // start tag inside quotes
-            elseif ( $text[$i] == '<' && ($singlequote || $doublequote) )
-            {   $text[$i] = '&lt;'; }
-            // end tag inside quotes
-            elseif ( $text[$i] == '>' && ($singlequote || $doublequote) )
-            {   $text[$i] = '&gt;'; }
-            // start tag inside tag
-            elseif ($text[$i] == '<' && $tagstart !== false )
-            {   $text[$i] = '&lt;'; }
-            // real start tag
-            elseif ($text[$i] == '<' )
-            {   $tagstart = $i; }
-            // space after the start - not allowed in html
-            elseif ($text[$i] == ' ' && $tagstart !== false )
+            // start and end comment
+            if ( substr($textstring, $i, 4) == '<!--' && strpos($textstring, '-->', $i + 4) ) 
+            {   $comment = true; }
+            elseif ( $comment && substr($textstring, $i, 3) == '-->') 
             {   
-                $text[$tagstart] = '&lt;';
-                $tagstart = false;
+                $comment = false; 
+                $i += 3;
             }
-            // < > without content
-            elseif ($text[$i] == '>' && $tagstart !== false )
-            {
-                $text[$tagstart] = '&lt;';
-                $text[$i] = '&gt;';
-            }
-            // first space or closing tag in definition part
-            elseif ( ($text[$i] == ' ' || $text[$i] == '>') && $tagdef)
-            {
-                //check if it is a real tag
-                $tag = substr($textstring,$tagdef,$i-$tagdef);
-                
-                if ( !(in_array($tag,$this->block_elements) 
-                    || in_array($tag,$this->singleton_block_elements) 
-                    || in_array($tag,$this->inline_elements) 
-                    || in_array($tag,$this->allowed_p_parents)
-                    || in_array($tag,$this->isolation_block_elements) 
-                    || in_array($tag,$this->isolation_inline_elements) 
-                    || in_array($tag,$this->nested_block_elements)
-                    || in_array($tag,$this->ignored_elements)
-                    || in_array($tag,$this->isolationtags) ) )
-                {
-                    // unknown tag definition
-                    $text[$tagstart_b] = '&lt;';
+            if ( !$comment ) {
+                // start tag without closing tag
+                if ($text[$i] == '<' && !strpos($textstring,'>',$i+1) )
+                {   $text[$i] = '&lt;'; }
+                // end tag without previous start, definition or style section
+                elseif ($text[$i] == '>' && !($tagstart !== false || $tagdef || $tagstyle) )
+                {   $text[$i] = '&gt;'; }
+                // start tag inside quotes
+                elseif ( $text[$i] == '<' && ($singlequote || $doublequote) )
+                {   $text[$i] = '&lt;'; }
+                // end tag inside quotes
+                elseif ( $text[$i] == '>' && ($singlequote || $doublequote) )
+                {   $text[$i] = '&gt;'; }
+                // start tag inside tag
+                elseif ($text[$i] == '<' && $tagstart !== false )
+                {   $text[$i] = '&lt;'; }
+                // real start tag
+                elseif ($text[$i] == '<' )
+                {   $tagstart = $i; }
+                // space after the start - not allowed in html
+                elseif ($text[$i] == ' ' && $tagstart !== false )
+                {   
+                    $text[$tagstart] = '&lt;';
                     $tagstart = false;
-                    $tagdef = false;
-                    if ( $text[$i] == '>' ) {   $text[$i] = '&gt;'; }
-                } else
-                { 
-                    //convert to lowercase
-                    for ($j = $tagdef; $j <= $i; $j++)
+                }
+                // < > without content
+                elseif ($text[$i] == '>' && $tagstart !== false )
+                {
+                    $text[$tagstart] = '&lt;';
+                    $text[$i] = '&gt;';
+                }
+                // first space or closing tag in definition part
+                elseif ( ($text[$i] == ' ' || $text[$i] == '>') && $tagdef)
+                {
+                    //check if it is a real tag
+                    $tag = substr($textstring,$tagdef,$i-$tagdef);
+                    
+                    if ( !(in_array($tag,$this->block_elements) 
+                        || in_array($tag,$this->singleton_block_elements) 
+                        || in_array($tag,$this->inline_elements) 
+                        || in_array($tag,$this->allowed_p_parents)
+                        || in_array($tag,$this->isolation_block_elements) 
+                        || in_array($tag,$this->isolation_inline_elements) 
+                        || in_array($tag,$this->nested_block_elements)
+                        || in_array($tag,$this->ignored_elements)
+                        || in_array($tag,$this->isolationtags) ) )
                     {
-                        $text[$j] = strtolower($text[$j]);
-                    }
-                    $tagdef = false;
-                    // closing >
-                    if ($text[$i] == '>')
-                    {
+                        // unknown tag definition
+                        $text[$tagstart_b] = '&lt;';
                         $tagstart = false;
-                        $tagstyle = false;
-                        $endtag = false;
-                    }
-                    // start of style part
-                    else
-                    {
-                        $tagstyle = true;
+                        $tagdef = false;
+                        if ( $text[$i] == '>' ) {   $text[$i] = '&gt;'; }
+                    } else
+                    { 
+                        //convert to lowercase
+                        for ($j = $tagdef; $j <= $i; $j++)
+                        {
+                            $text[$j] = strtolower($text[$j]);
+                        }
+                        $tagdef = false;
+                        // closing >
+                        if ($text[$i] == '>')
+                        {
+                            $tagstart = false;
+                            $tagstyle = false;
+                            $endtag = false;
+                        }
+                        // start of style part
+                        else
+                        {
+                            $tagstyle = true;
+                        }
                     }
                 }
-            }
-            // endtag starting with </
-            elseif ($text[$i] == '/' && $tagstart !== false)
-            {   $endtag = true; }
-            // space is allowed in endtag like </ i>
-            elseif ($text[$i] == ' ' && $endtag)
-            {   $text[$i] = ''; }
-            // remove newline in tags
-            elseif (($tagstart !== false || $tagdef || $tagstyle) && $text[$i] == "\n")
-            {   $text[$i] = ''; }
-            // closing > after style part
-            elseif ($text[$i] == '>' && $tagstyle && !($singlequote || $doublequote) )
-            {
-                $tagstart = false;
-                $tagdef = false;
-                $tagstyle = false;
-                $endtag = false;
-            }
-            // first definition character after <
-            elseif ($tagstart !== false && !($tagdef || $tagstyle) )
-            {
-                $tagdef = $i;
-                $tagstart_b = $tagstart;
-                $tagstart = false;
-            }
-            // quotes in style - isolate
-            elseif ($tagstyle && $text[$i] == '\'' && !$doublequote )
-            {
-                if ($singlequote) 
-                {   $singlequote = false; }
-                else
-                {   $singlequote = true; }
-            }
-            elseif ($tagstyle && $text[$i] == '"' && !$singlequote )
-            {
-                if ($doublequote)
-                {   $doublequote = false; }
-                else
-                {   $doublequote = true; }
+                // endtag starting with </
+                elseif ($text[$i] == '/' && $tagstart !== false)
+                {   $endtag = true; }
+                // space is allowed in endtag like </ i>
+                elseif ($text[$i] == ' ' && $endtag)
+                {   $text[$i] = ''; }
+                // remove newline in tags
+                elseif (($tagstart !== false || $tagdef || $tagstyle) && $text[$i] == "\n")
+                {   $text[$i] = ''; }
+                // closing > after style part
+                elseif ($text[$i] == '>' && $tagstyle && !($singlequote || $doublequote) )
+                {
+                    $tagstart = false;
+                    $tagdef = false;
+                    $tagstyle = false;
+                    $endtag = false;
+                }
+                // first definition character after <
+                elseif ($tagstart !== false && !($tagdef || $tagstyle) )
+                {
+                    $tagdef = $i;
+                    $tagstart_b = $tagstart;
+                    $tagstart = false;
+                }
+                // quotes in style - isolate
+                elseif ($tagstyle && $text[$i] == '\'' && !$doublequote )
+                {
+                    if ($singlequote) 
+                    {   $singlequote = false; }
+                    else
+                    {   $singlequote = true; }
+                }
+                elseif ($tagstyle && $text[$i] == '"' && !$singlequote )
+                {
+                    if ($doublequote)
+                    {   $doublequote = false; }
+                    else
+                    {   $doublequote = true; }
+                }
             }
         }
         return implode($text);
@@ -618,21 +643,53 @@ p.wl_notopbottom {
      * @param: text
      * return string
      */
-    function blocktag_nl2p($text)
+    function nl2p($otext)
     {
-        //explode string into array of tags and contents
-        $textarray = $this->explode_along_tags($text);
+        // homogenize tags
+        $text = $this->tag_clean($otext);
+        if (empty($text)) { return ''; }
+
+        // explode in array of normal content and comments
+        $commentarray = array();
+        $pre = '';
+        $comment = '';
+        $after = '';
+
+        do {
+            if ($this->splitcomment($text,$pre,$comment,$after)) {
+                $commentarray[] = $pre;
+            } else { $commentarray[] = $text; }
+
+            if ($comment) { $commentarray[] = $comment; }
+            $text = $after;
+        } while ( !empty($after) );
+
+        $textarray = array();
+
+        //explode content elements into array of tags and contents
+        $errorflag = false;
+        foreach ($commentarray as $text) {
+            if (substr($text, 0, 4) == '<!--') {
+                $textarray[] = $text;
+            } else { 
+                $explodearray = $this->explode_along_tags($text);
+                if ( is_array($explodearray)) {
+                    $textarray = array_merge($textarray, $explodearray); 
+                } else { $errorflag = true; }
+            }
+        }
         $content = "";
         $start = 0;
         $tagstack = array();
         $isolation_flag = false;
 
-        if (! is_array($textarray)) {
-            return $text;
-        }
+        // on error, return original input string
+        if ($errorflag) { return $otext; }
 
         for ($i=0; $i < count($textarray); $i++)
         {
+            // skip comment elements
+            if (substr($textarray[$i], 0, 4) == '<!--') continue;
 
             //get tag or false if none
             $tag = $this->extract_tag($textarray[$i]);
@@ -894,6 +951,7 @@ p.wl_notopbottom {
      * array element can be tag or content
      * @param text
      * $return array of tags and contents
+     * or false in case of error
      */
     function explode_along_tags($text)
     {

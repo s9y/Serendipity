@@ -1,2 +1,5 @@
 2.21.3: Include figure and figcaption tags.
         Thanks to @stephanbrunker!
+2.21.4: * changed <a> tags to html5 - can now include every block element
+        * added a new function which processes html comments. Now everything
+          inside an html comment is ignored
