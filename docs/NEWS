@@ -1,6 +1,9 @@
 Version 2.3.3-beta1 ()
 ------------------------------------------------------------------------
 
+   * Don't allow requesting an archive page that doesn't exist.
+     Thanks to @lotharsm!
+
    * Fix: Set action to empty in functions_routing.php when serving JS;
      otherisw the default page has been generated at every call.
 

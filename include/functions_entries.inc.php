@@ -404,10 +404,18 @@ function &serendipity_fetchEntries($range = null, $full = true, $limit = '', $fe
 
     if (!empty($limit)) {
         if (isset($serendipity['GET']['page']) && ($serendipity['GET']['page'] > 1 || serendipity_db_bool($serendipity['archiveSortStable'])) && !strstr($limit, ',')) {
-            if (serendipity_db_bool($serendipity['archiveSortStable'])) {
-                $totalEntries = serendipity_getTotalEntries();
+            
+            $totalEntries = serendipity_getTotalEntries();
+            $totalPages = ceil($totalEntries / $limit);
 
-                $totalPages = ceil($totalEntries / $limit);
+            // Do not allow requesting a page that doesn't exist
+            // and do a fallback to the highest page number available
+            if ($serendipity['GET']['page'] > $totalPages) {
+                $serendipity['GET']['page'] = $totalPages;
+            }
+
+            if (serendipity_db_bool($serendipity['archiveSortStable'])) {
+
                 if ($totalPages <= 0 ) {
                     $totalPages = 1;
                 }
