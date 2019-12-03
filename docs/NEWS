@@ -9,11 +9,11 @@ Version 2.4-alpha1 ()
 
    * Plugin nl2br: Include figure and figcaption tags (2.21.3)
      Thanks to @stephanbrunker!
-   
+
    * Plugin spamblock: Add timeout protection against spambots (1.89).
      Thanks to @stephanbrunker!
 
-   * #657: functions.config.inc.php: 
+   * #657: functions.config.inc.php:
      eventhooks backend_login and backend_fail in function
      serendipity_login and serendipity_authenticate_author
      now only called with external=true (secondary login)
@@ -50,7 +50,7 @@ Version 2.4-alpha1 ()
          not exist. Also sets the value $serendipity['default_lang']
          to the default language of the blog.
        * removed the Cookie 'userDefLang' which is no longer needed
-     * functions.entries.php: 
+     * functions.entries.php:
        * function serendipity_printArchives() hooks now
          into hook_event::'frontend_fetchentries' to get multilingual
          data, also doesn't show months and years with zero entries.
@@ -86,8 +86,13 @@ Version 2.4-alpha1 ()
 Version 2.3.3 ()
 ------------------------------------------------------------------------
 
+   * media_choose.tpl: Fixes bad usage of
+     {serendipity_hookPlugin eventData=...} to {serendipity_hookPlugin eventData=}
+     and allow plugins to skip HTML block insertion to use their own
+     markup
+
    * Updates mailer event plugin to support force sending mails on
-     published blog entries and ability to prepend a mail body. 
+     published blog entries and ability to prepend a mail body.
      Also fixes missing "keep strip tags" configuration option
 
 Version 2.3.2 (October 16th, 2019)
@@ -99,7 +104,7 @@ Version 2.3.2 (October 16th, 2019)
           as linebreaks; other MTAs should cope with that.
 
    * fix: Rotating an image did not rotate all responsive thumbnails
-   
+
    * fix: The wysiwyg editor stripped the figcaption element used
           for image captions
 
