@@ -83,6 +83,13 @@ Version 2.4-alpha1 ()
    * Add plugin update notifications to the plugin update button and
      to the dashboard.
 
+Version 2.3.3 ()
+------------------------------------------------------------------------
+
+   * Updates mailer event plugin to support force sending mails on
+     published blog entries and ability to prepend a mail body. 
+     Also fixes missing "keep strip tags" configuration option
+
 Version 2.3.2 (October 16th, 2019)
 ------------------------------------------------------------------------
 
