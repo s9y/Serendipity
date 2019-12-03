@@ -1,6 +1,9 @@
 Version 2.3.3-beta1 ()
 ------------------------------------------------------------------------
 
+   * Updates mailer event plugin to support force sending mails on
+     published blog entries and ability to prepend a mail body. 
+     Also fixes missing "keep strip tags" configuration option
 
 Version 2.3.2 (October 16th, 2019)
 ------------------------------------------------------------------------
