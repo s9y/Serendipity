@@ -19,7 +19,7 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('description',   PLUGIN_EVENT_MAILER_DESC);
         $propbag->add('stackable',     false);
         $propbag->add('author',        'Sebastian Nohn, Kristian Koehntopp, Garvin Hicking');
-        $propbag->add('version',       '1.54');
+        $propbag->add('version',       '1.60');
         $propbag->add('requirements',  array(
             'serendipity' => '1.6',
             'smarty'      => '2.6.7',
@@ -28,10 +28,11 @@ class serendipity_event_mailer extends serendipity_event
         $propbag->add('event_hooks',    array(
             'backend_publish' => true,
             'backend_display' => true,
+            'backend_save'    => true,
         ));
         $propbag->add('groups', array('FRONTEND_ENTRY_RELATED'));
 
-        $config = array('what', 'mailto', 'sendtoall', 'includelink', 'striptags', 'convertp', 'keepstriptags');
+        $config = array('what', 'mailto', 'sendtoall', 'includelink', 'striptags', 'keepstriptags', 'convertp', 'mailerbody');
         $propbag->add('configuration', $config);
     }
 
@@ -128,6 +129,13 @@ class serendipity_event_mailer extends serendipity_event
                 $propbag->add('default',     'false');
                 break;
 
+            case 'mailerbody':
+                $propbag->add('type',        'text');
+                $propbag->add('name',        PLUGIN_EVENT_MAILER_MAILTEXT);
+                $propbag->add('description', '');
+                $propbag->add('default',     '');
+                break;
+
             default:
                 return false;
         }
@@ -137,6 +145,110 @@ class serendipity_event_mailer extends serendipity_event
     function generate_content(&$title)
     {
         $title = $this->title;
+    }
+
+    function sendMail($eventData)
+    {
+        global $serendipity;
+
+        $mails = explode(' ', str_replace(',', '', $this->get_config('mailto')));
+        $to = array();
+        foreach($mails AS $mailto) {
+            $mailto = trim($mailto);
+            if (!empty($mailto)) {
+                $to[] = $mailto;
+            }
+        }
+
+        $this->performConfig($to);
+        if (is_array($this->data['cat'])) {
+            $selected = array();
+            if (is_array($eventData['categories'])) {
+                foreach($eventData['categories'] AS $idx => $cid) {
+                    $selected[$cid] = true;
+                }
+            }
+
+            foreach($this->data['cat'] AS $cid => $cat) {
+                $mailto = trim($this->get_config('category_' . $cid));
+
+                if (!empty($mailto) && isset($selected[$cid])) {
+                    $tos = explode(' ', str_replace(',', '', $mailto));
+                    foreach($tos AS $mailtopart) {
+                        $to[] = trim($mailtopart);
+                    }
+                }
+            }
+        }
+
+        if ($serendipity['POST']['properties']['sendentry_all']) {
+            $mails = serendipity_db_query("SELECT DISTINCT email FROM {$serendipity['dbPrefix']}authors");
+            foreach($mails AS $mail) {
+                $to[] = trim($mail['email']);
+            }
+        }
+
+        $mail = array(
+            'subject' => $eventData['title'],
+            'body'    => $eventData['body'] . $eventData['extended'],
+            // 'from' => $serendipity['blogTitle'] . ' - ' . $eventData['author'] . ' <' . $serendipity['serendipityEmail'] . '>'
+            'from'    => $serendipity['serendipityEmail']
+        );
+
+        switch($this->get_config('what')) {
+            case 'all':
+                $mail['body']     = $eventData['body'] . $eventData['extended'];
+                break;
+            case 'body':
+                $mail['body']     = $eventData['body'];
+                break;
+            case 'extended':
+                $mail['body']     = $eventData['extended'];
+                break;
+            case 'none':
+                $mail['body']     = '';
+                break;
+        }
+
+        if (!empty($serendipity['POST']['properties']['mailerbody'])) {
+            $mail['body'] = $serendipity['POST']['properties']['mailerbody'] . "\n" . $mail['body'];
+        }
+
+        if (isset($serendipity['POST']['properties']['mailto'])) {
+            $mails = explode(' ', str_replace(',', '', $serendipity['POST']['properties']['mailto']));
+            foreach($mails as $mailto) {
+                $mailto = trim($mailto);
+                if (!in_array($mailto, $to)) {
+                    $to[] = $mailto;
+                }
+            }
+        }
+
+        if (serendipity_db_bool($this->get_config('convertp', 'false'))) {
+            $mail['body'] = str_replace('</p>', "</p>\n", $mail['body']);
+        }
+
+        if (serendipity_db_bool($this->get_config('striptags', 'false'))) {
+            if (serendipity_db_bool($this->get_config('keepstriptags', 'true'))) {
+                $mail['body'] = preg_replace('@<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>@i', "$2 [$1]", $mail['body']);
+                $mail['body'] = preg_replace('@<img[^>]+src=["\']([^"\']*)["\'][^>]*>@i', "[" . IMAGE . ": $1]", $mail['body']);
+            } else {
+                $mail['body'] = preg_replace('@<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>@i', "", $mail['body']);
+                $mail['body'] = preg_replace('@<img[^>]+src=["\']([^"\']*)["\'][^>]*>@i', "", $mail['body']);
+            }
+            $mail['body'] = strip_tags($mail['body']);
+        }
+
+        if (serendipity_db_bool($this->get_config('includelink', 'false'))) {
+            $mail['body'] = serendipity_archiveURL($eventData['id'], $eventData['title'], 'baseURL', true, array('timestamp' => $eventData['timestamp'])) . "\n\n" . $mail['body'];
+        }
+
+        foreach($to AS $mailto) {
+            if (!empty($mailto)) {
+                echo serendipity_specialchars($mailto) . '...<br />';
+                serendipity_sendMail($mailto, $mail['subject'], $mail['body'], $mail['from']);
+            }
+        }
     }
 
     function event_hook($event, &$bag, &$eventData, $addData = null)
@@ -162,7 +274,13 @@ class serendipity_event_mailer extends serendipity_event
                         $sendtoall = serendipity_db_bool($this->get_config('sendtoall'));
                     }
 
-?>
+                    if (isset($serendipity['POST']['properties']['mailerbody'])) {
+                        $mailerbody = $serendipity['POST']['properties']['mailerbody'];
+                    } else {
+                        $mailerbody = $this->get_config('mailerbody');
+                    }
+
+                    ?>
                     <fieldset class="entryproperties">
                         <span class="wrap_legend"><legend><?php echo PLUGIN_EVENT_MAILER_NAME; ?></legend></span>
 
@@ -178,108 +296,40 @@ class serendipity_event_mailer extends serendipity_event
                             <input id="sendall" type="checkbox" value="true" name="serendipity[properties][sendentry_all]" <?php echo ($sendtoall ? 'checked="checked"': ''); ?>>
                             <label title="<?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?>" for="sendall"><?php echo PLUGIN_EVENT_MAILER_SENDTOALL; ?></label>
                         </div>
+                        <?php if (!serendipity_db_bool($eventData['isdraft'])) { // Only show this for entries that are published ?>
+                        <div class="form_check">
+                            <input id="forcesend" type="checkbox" value="true" name="serendipity[properties][forcesend]">
+                            <label title="<?php echo PLUGIN_EVENT_MAILER_FORCESEND; ?>" for="forcesend"><?php echo PLUGIN_EVENT_MAILER_FORCESEND; ?></label>
+                            <br />
+                            <em><?php echo PLUGIN_EVENT_MAILER_FORCESEND_DESC; ?></em>
+                        </div>
+                        <?php } ?>
+                        <div class="form_check">
+                            <label for="mailerbody"><?= PLUGIN_EVENT_MAILER_MAILTEXT; ?></label>
+                            <textarea id="mailerbody" rows="5" name="serendipity[properties][mailerbody]" ><?php echo serendipity_specialchars($mailerbody); ?></textarea>
+                        </div>
                     </fieldset>
 <?php
+                    break;
+
+                case 'backend_save':
+                    if (serendipity_db_bool($eventData['isdraft'])) {
+                        // Never send e-mails for drafts.
+                        return true;
+                    }
+
+                    if (isset($serendipity['POST']['properties']['forcesend']) && $serendipity['POST']['properties']['forcesend']) {
+                        $this->sendMail($eventData);
+                    } else {
+                        echo PLUGIN_EVENT_MAILER_NOTSENDDECISION . '<br />';
+                    }
                     break;
 
                 case 'backend_publish':
                     if (isset($serendipity['POST']['properties']) && !isset($serendipity['POST']['properties']['sendentry'])) {
                         echo PLUGIN_EVENT_MAILER_NOTSENDDECISION . '<br />';
                     } else {
-                        $mails = explode(' ', str_replace(',', '', $this->get_config('mailto')));
-                        $to = array();
-                        foreach($mails AS $mailto) {
-                            $mailto = trim($mailto);
-                            if (!empty($mailto)) {
-                                $to[] = $mailto;
-                            }
-                        }
-
-                        $this->performConfig($to);
-                        if (is_array($this->data['cat'])) {
-                            $selected = array();
-                            if (is_array($eventData['categories'])) {
-                                foreach($eventData['categories'] AS $idx => $cid) {
-                                    $selected[$cid] = true;
-                                }
-                            }
-
-                            foreach($this->data['cat'] AS $cid => $cat) {
-                                $mailto = trim($this->get_config('category_' . $cid));
-
-                                if (!empty($mailto) && isset($selected[$cid])) {
-                                    $tos = explode(' ', str_replace(',', '', $mailto));
-                                    foreach($tos AS $mailtopart) {
-                                        $to[] = trim($mailtopart);
-                                    }
-                                }
-                            }
-                        }
-
-                        if ($serendipity['POST']['properties']['sendentry_all']) {
-                            $mails = serendipity_db_query("SELECT DISTINCT email FROM {$serendipity['dbPrefix']}authors");
-                            foreach($mails AS $mail) {
-                                $to[] = trim($mail['email']);
-                            }
-                        }
-
-                        $mail = array(
-                            'subject' => $eventData['title'],
-                            'body'    => $eventData['body'] . $eventData['extended'],
-    //                      'from'    => $serendipity['blogTitle'] . ' - ' . $eventData['author'] . ' <' . $serendipity['serendipityEmail'] . '>'
-                            'from'    => $serendipity['serendipityEmail']
-                        );
-
-                        switch($this->get_config('what')) {
-                            case 'all':
-                                $mail['body']     = $eventData['body'] . $eventData['extended'];
-                                break;
-                            case 'body':
-                                $mail['body']     = $eventData['body'];
-                                break;
-                            case 'extended':
-                                $mail['body']     = $eventData['extended'];
-                                break;
-                            case 'none':
-                                $mail['body']     = '';
-                                break;
-                        }
-
-                        if (isset($serendipity['POST']['properties']['mailto'])) {
-                            $mails = explode(' ', str_replace(',', '', $serendipity['POST']['properties']['mailto']));
-                            foreach($mails as $mailto) {
-                                $mailto = trim($mailto);
-                                if (!in_array($mailto, $to)) {
-                                    $to[] = $mailto;
-                                }
-                            }
-                        }
-
-                        if (serendipity_db_bool($this->get_config('convertp', 'false'))) {
-                            $mail['body'] = str_replace('</p>', "</p>\n", $mail['body']);
-                        }
-
-                        if (serendipity_db_bool($this->get_config('striptags', 'false'))) {
-                            if (serendipity_db_bool($this->get_config('keepstriptags', 'true'))) {
-                                $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "$2 [$1]", $mail['body']);
-                                $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "[" . IMAGE . ": $1]", $mail['body']);
-                            } else {
-                                $mail['body'] = preg_replace('§<a[^>]+href=["\']([^"\']*)["\'][^>]*>([^<]*)</a>§i', "", $mail['body']);
-                                $mail['body'] = preg_replace('§<img[^>]+src=["\']([^"\']*)["\'][^>]*>§i', "", $mail['body']);
-                            }
-                            $mail['body'] = strip_tags($mail['body']);
-                        }
-
-                        if (serendipity_db_bool($this->get_config('includelink', 'false'))) {
-                            $mail['body'] = serendipity_archiveURL($eventData['id'], $eventData['title'], 'baseURL', true, array('timestamp' => $eventData['timestamp'])) . "\n\n" . $mail['body'];
-                        }
-
-                        foreach($to AS $mailto) {
-                            if (!empty($mailto)) {
-                                echo serendipity_specialchars($mailto) . '...<br />';
-                                serendipity_sendMail($mailto, $mail['subject'], $mail['body'], $mail['from']);
-                            }
-                        }
+                        $this->sendMail($eventData);
                     }
                     break;
 
@@ -295,4 +345,3 @@ class serendipity_event_mailer extends serendipity_event
 }
 
 /* vim: set sts=4 ts=4 expandtab : */
-?>
