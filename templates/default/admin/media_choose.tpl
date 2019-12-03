@@ -8,41 +8,41 @@
 
         {if $media.is_imgedit}
         <style type="text/css">
-        #outer { 
+        #outer {
             left: {$imgedit.zoombox_padding}px;
-        } 
+        }
 
-        #overlay { 
+        #overlay {
             clip: rect({$imgedit.overlay_clip_top} {$imgedit.overlay_clip_right} {$imgedit.overlay_clip_bottom} {$imgedit.overlay_clip_left});
-        } 
+        }
 
-        #harea { 
+        #harea {
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.harea_visibility};
-        } 
+        }
 
-        #varea { 
+        #varea {
             left: {$imgedit.zoombox_x}px;
             top: {$imgedit.zoombox_y}px;
             visibility: {$imgedit.varea_visibility};
-        } 
+        }
 
-        #zoom { 
+        #zoom {
             width: {$imgedit.zoombox_width}px;
-        } 
+        }
 
-        #scaletext { 
+        #scaletext {
             visibility: {$imgedit.scale_visibility};
-        } 
+        }
 
-        #outer { 
+        #outer {
             width: {$imgedit.img_width}px;
             height: {$imgedit.img_height}px;
             border: 1px solid red;
             position: relative;
             display: block;
-        } 
+        }
         </style>
         <script type="text/javascript" src="{serendipity_getFile file='dragdrop.js'}" ></script>
         <script type="text/javascript" src="{serendipity_getFile file='imgedit.js'}" ></script>
@@ -61,11 +61,11 @@
             var media_rename = '{$CONST.ENTER_NEW_NAME}';
 
         {if $media.only_path}
-            if (parent.frames && parent.frames['tree']) { 
+            if (parent.frames && parent.frames['tree']) {
                 parent.frames['tree'].document.getElementById('newdirlink').href =
                     parent.frames['tree'].basenewdirurl +
                     "{$media.only_path|@escape}"
-            } 
+            }
         {/if}
     </script>
 
@@ -85,10 +85,10 @@
     <!-- EXTERNAL MEDIA START -->
     {if $media.is_created OR $media.is_deleted}
     <script type="text/javascript">
-    if (parent.frames['tree']) { 
+    if (parent.frames['tree']) {
         parent.frames['tree'].location.href  = parent.frames['tree'].location.href;
         parent.frames['media'].location.href = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?serendipity[step]=default&serendipity[only_path]={$media.new_dir}';
-    } 
+    }
     </script>
     {/if}
     {$media.external}
@@ -119,13 +119,13 @@
     {$media.external}
     <div>
     {if $media.file.is_image}
-        {serendipity_hookPlugin hook="frontend_image_selector" eventData=$media.file hookAll=true}
+        {serendipity_hookPlugin hook="frontend_image_selector" data=$media.file hookAll=true}
         <img align="right" src="{$media.file.imgsrc}" />
         <h1>{$CONST.YOU_CHOSE|@sprintf:$media.file.realname}</h1>
         <p>
             <form action="#" method="GET" id="imageForm" name="serendipity[selForm]" onsubmit="serendipity_imageSelector_done()">
                 <div>
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_hiddenfields' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_hiddenfields' data=$media.file}
                     <input type="hidden" name="imgThumbWidth"  value="{$media.file.thumbWidth}" />
                     <input type="hidden" name="imgThumbHeight" value="{$media.file.thumbHeight}" />
                     <input type="hidden" name="imgWidth"  value="{$media.file.dimensions_width}" />
@@ -145,7 +145,7 @@
 
                     {if $media.file.fast_select}
                     <script type="text/javascript">
-                        {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media.file}
+                        {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' data=$media.file}
                         serendipity_imageSelector_done('{$media.textarea|@escape}');
                     </script>
                     {else}
@@ -153,7 +153,7 @@
                     <br />
                     <input class="input_radio" id="radio_link_no" type="radio"  name="serendipity[linkThumbnail]" value="no" {'linkThumbnail'|@ifRemember:'no':true} /><label for="radio_link_no">{$CONST.I_WANT_THUMB}</label><br />
                     <input class="input_radio" id="radio_link_yes" type="radio" name="serendipity[linkThumbnail]" value="yes" {'linkThumbnail'|@ifRemember:'yes'} /><label for="radio_link_yes">{$CONST.I_WANT_BIG_IMAGE}</label><br />
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagesize' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagesize' data=$media.file}
                     <br />
 
                     {if NOT $media.filename_only}
@@ -163,7 +163,7 @@
                     <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:''}           value="" />     <img src="{serendipity_getFile file='img/img_align_top.png'}"   vspace="5" /><br />
                     <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:'left':true}  value="left" /> <img src="{serendipity_getFile file='img/img_align_left.png'}"  vspace="5" /><br />
                     <input class="input_radio" type="radio" name="serendipity[align]" {'align'|@ifRemember:'right'}      value="right" /><img src="{serendipity_getFile file='img/img_align_right.png'}" vspace="5" /><br />
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagealign' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagealign' data=$media.file}
                     <br />
 
                     <b>{$CONST.IMAGE_AS_A_LINK}:</b>
@@ -175,7 +175,7 @@
 
                     <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.path}" /><br />
                     {else}
-                        {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_link_url' eventData=$media.file.links}
+                        {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_link_url' data=$media.file.links}
                         <input class="input_textbox" type="text"  name="serendipity[url]" size="30" value="{$media.file.links.imagelinkurl}" /><br />
                     {/if}
 
@@ -188,32 +188,32 @@
                         </select>
                     <br />
 
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagelink2' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagelink2' data=$media.file}
                     <br />
 
                     <b>{$CONST.COMMENT}:</b>
                     <br />
                     <textarea id="serendipity_imagecomment" name="serendipity[imagecomment]" rows="5" cols="40">{$media.file.props.base_property.COMMENT1|@escape}</textarea>
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagecomment' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_imagecomment' data=$media.file}
                     <br />
 
                     <b>{$CONST.MEDIA_ALT}:</b>
                     <br />
                     <input size="30" class="input_textbox" type="text" id="serendipity_alt" name="serendipity[alt]" value="{$media.file.props.base_property.ALT|@escape}" /></textarea>
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_alt' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_alt' data=$media.file}
                     <br />
 
                     <b>{$CONST.MEDIA_TITLE}:</b>
                     <br />
                     <input size="30" class="input_textbox" type="text" id="serendipity_title" name="serendipity[title]" value="{$media.file.props.base_property.TITLE|@escape}" /></textarea>
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_title' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_title' data=$media.file}
                     <br />
                     {/if}
 
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_more' data=$media.file}
                     <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.BACK}" onclick="history.go(-1);" />
                     <input class="serendipityPrettyButton input_button" type="button" value="{$CONST.DONE}" onclick="rememberMediaOptions(); {$media.file.origfinishJSFunction}" />
-                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' eventData=$media.file}
+                    {serendipity_hookPlugin hookAll=true hook='frontend_image_selector_submit' data=$media.file}
                 {/if}
             </div>
         </form>
@@ -221,7 +221,7 @@
     {else}
         {if $media.filename_only}
         <script type="text/javascript">
-            {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' eventData=$media}
+            {serendipity_hookPlugin hookAll=true hook='frontend_image_add_filenameonly' data=$media}
             if (parent.self.opener == undefined) {
                 // in iframes, there is no opener, and the magnific popup is wrapped
                 parent.self = window.parent.parent.$.magnificPopup;
@@ -233,7 +233,7 @@
         {else}
         <script type="text/javascript">
             block = '<a href="{$media.file.full_file}" title="{$media.file.realname|@escape}" target="_blank">{$media.file.realname|@escape}</a>';
-            {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' eventData=$media}
+            {serendipity_hookPlugin hookAll=true hook='frontend_image_add_unknown' data=$media}
             if (parent.self.opener == undefined) {
                 // in iframes, there is no opener, and the magnific popup is wrapped
                 parent.self = window.parent.parent.$.magnificPopup;
@@ -278,9 +278,9 @@
         var baseurl       = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=default&amp;serendipity[only_path]=';
         var basenewdirurl = '{$serendipityHTTPPath}serendipity_admin_image_selector.php?{$media.GET_STRING}&amp;serendipity[step]=directoryCreate&amp;serendipity[only_path]=';
 
-        function treeInit() { 
+        function treeInit() {
             tree = new YAHOO.widget.TreeView("treeDiv1");
-            tree.onExpand = function(node) { 
+            tree.onExpand = function(node) {
                 document.getElementById('newdirlink').href = basenewdirurl + node.data.relpath;
             };
 
@@ -293,16 +293,16 @@
         {if $item.depth == 1}
             tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
         {else}
-            if (last_node[{$item.depth}-1]) { 
+            if (last_node[{$item.depth}-1]) {
                 tmpNode = new YAHOO.widget.TextNode(mydir, last_node[{$item.depth} - 1], false);
-            } else { 
+            } else {
                 tmpNode = new YAHOO.widget.TextNode(mydir, coreNode, false);
-            } 
+            }
         {/if}
             last_node[{$item.depth}] = tmpNode;
         {/foreach}
             tree.draw();
-        } 
+        }
 
         addLoadEvent(treeInit);
     </script>

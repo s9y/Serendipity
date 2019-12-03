@@ -551,7 +551,11 @@ function serendipity_smarty_hookPlugin($params, $smarty) {
     }
 
     if (!isset($params['data'])) {
-        $params['data'] = &$serendipity;
+        if (isset($params['eventData'])) {
+            $params['data'] = &$params['eventData'];
+        } else {
+            $params['data'] = &$serendipity;
+        }
     }
 
     if (!isset($params['addData'])) {
