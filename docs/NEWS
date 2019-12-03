@@ -1,6 +1,11 @@
 Version 2.3.3-beta1 ()
 ------------------------------------------------------------------------
 
+   * media_choose.tpl: Fixes bad usage of
+     {serendipity_hookPlugin eventData=...} to {serendipity_hookPlugin eventData=}
+     and allow plugins to skip HTML block insertion to use their own
+     markup
+
    * Updates mailer event plugin to support force sending mails on
      published blog entries and ability to prepend a mail body. 
      Also fixes missing "keep strip tags" configuration option
