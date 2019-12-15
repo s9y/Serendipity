@@ -1,6 +1,8 @@
 Version 2.3.5-beta1 ()
 ------------------------------------------------------------------------
 
+   * Fix: Entry title in backend list of entries was double escaped.
+
    * Fix: Don't drop upgraded_version from local plugin cache.
 
    * Fix: Regular expression in functions_routing.incx.php
