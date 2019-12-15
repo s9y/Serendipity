@@ -142,7 +142,7 @@
                         </div>
                     {/if}
 
-                    <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title|escape}">{$entry.title|escape}</a></h3>
+                    <h3><a href="?serendipity[action]=admin&amp;serendipity[adminModule]=entries&amp;serendipity[adminAction]=edit&amp;serendipity[id]={$entry.id}" title="#{$entry.id}: {$entry.title}">{$entry.title}</a></h3>
 
                     <ul class="plainList clearfix actions">
                     {if $entry.preview || (!$showFutureEntries && ($entry.timestamp >= $serverOffsetHour))}
