@@ -15,6 +15,10 @@ Version 2.3.3-beta1 ()
    * Updates mailer event plugin to support force sending mails on
      published blog entries and ability to prepend a mail body. 
      Also fixes missing "keep strip tags" configuration option
+
+   * Fix: Add valid HTTP referrer when trying to delete a
+     trackback from the frontend
+
    * Use the video tag for videos in the Medialibrary, also when
      inserting such a video into an entry
 
