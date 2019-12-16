@@ -1,6 +1,9 @@
 Version 2.4-alpha1 ()
 ------------------------------------------------------------------------
 
+   * Fix invalid HTTP referrer error when trying to delete a
+     trackback from the frontend
+
    * Use the video tag for videos in the Medialibrary, also when
      inserting such a video into an entry
 
