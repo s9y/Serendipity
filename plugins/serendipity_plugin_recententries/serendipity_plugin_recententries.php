@@ -212,11 +212,13 @@ class serendipity_plugin_recententries extends serendipity_plugin
 
         // get 'hide untranslated entries' option from multilingual plugin via SQL
         serendipity_plugin_api::hook_event('frontend_fetchentries', $sql_condition, array('noSticky' => true));    
-        $sql_condition['addkey'] = rtrim($sql_condition['addkey'],",\n") . "\n"; 
+
+        $sql_condition['addkey'] = rtrim($sql_condition['addkey'],",\n");
+        if ( !empty($sql_condition['addkey'])) $sql_condition['addkey'] = ',' . $sql_condition['addkey'] . "\n";
 
         $entries_query = "SELECT DISTINCT id,
                                 title,
-                                timestamp,
+                                timestamp
                                 {$sql_condition['addkey']}
                            FROM {$serendipity['dbPrefix']}entries AS e
                                 {$sql_condition['joins']}
